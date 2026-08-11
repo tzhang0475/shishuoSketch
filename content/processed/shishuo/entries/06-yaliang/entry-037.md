@@ -1,0 +1,59 @@
+---
+schema: 1
+stage: entry-segmentation
+segment_type: "shishuo-entry"
+entry_id: "06-yaliang-037"
+ordinal: 37
+chapter_id: "06-yaliang"
+chapter_heading: "雅量第六"
+opening_text: "符堅遊䰟近境"
+boundary_confidence: "high"
+source_chapter: "content/processed/shishuo/chapters/chapter-06.md"
+source_normalized_filename: "KR3l0002_002.md"
+source_path: "shishuoSources/shishuo/KR3l0002_002.txt"
+source_sha256: "6b8a3fcf4fb07152c567a25fe56e9511f45a9748b83c107e6a8956aa7e65367a"
+FILE: "SB03n0058-003世説新語-卷中之上."
+kanripo_title: "世説新語"
+kanripo_id: "KR3l0002"
+kanripo_baseedition: "SBCK"
+kanripo_witness: "SBCK"
+source_body_offset_start: 6955
+source_body_offset_end_exclusive: 6984
+  start:
+    normalized_line: 767
+    source_line: 711
+    page_marker: "<pb:KR3l0002_SBCK_002-34b>"
+  end:
+    normalized_line: 768
+    source_line: 712
+    page_marker: "<pb:KR3l0002_SBCK_002-34b>"
+annotation_block_count: 1
+page_marker_count: 0
+source_section_exact: true
+entry_boundary_source: "curated manifest exact anchor"
+---
+
+## Original source (exact)
+
+符堅遊䰟近境(見/堅别)謝太傅謂子敬曰可將當軸了
+其此處
+
+## Main text
+
+符堅遊䰟近境謝太傅謂子敬曰可將當軸了
+其此處
+
+## Top-level parenthetical annotation blocks
+
+### annotation-001
+entry_relative_start: 6
+entry_relative_end_exclusive: 12
+source_normalized_line: 767
+source_line: 711
+page_marker: "<pb:KR3l0002_SBCK_002-34b>"
+
+(見/堅别)
+
+## Kanripo page markers
+
+No Kanripo page marker occurs inside this entry span.
