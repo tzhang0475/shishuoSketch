@@ -1,0 +1,52 @@
+schema: 1
+work: "三國志"
+witnesses:
+  - id: sanguozhi-kanripo-wyg
+    work: "三國志"
+    role: primary
+    edition: "文淵閣四庫全書 / WYG"
+    source_provider: Kanripo
+    source_type: machine-text
+    script: "traditional Chinese"
+    annotations: ["裴松之注"]
+    local: true
+    local_path: "shishuoSources/sanguozhi"
+    remote_record: "https://github.com/kanripo/KR2a0012.git"
+    text_authority: "default diplomatic machine-text witness"
+    structure_authority: "Kanripo juan declarations, FILE directives, and page markers"
+    notes: "Immutable local upstream source."
+  - id: sanguozhi-wuyingdian
+    work: "三國志"
+    role: "secondary / visual-reference"
+    edition: "武英殿二十四史本"
+    source_provider: Chinese Text Project
+    source_type: page-image
+    script: "traditional Chinese"
+    annotations: ["裴松之注"]
+    local: false
+    local_path: null
+    remote_record: "https://ctext.org/library.pl?if=gb&remap=gb&res=77691"
+    text_authority: "visual witness only; externally hosted"
+    structure_authority: "page and volume comparison when inspected"
+    notes: "Registered but not bulk-scraped."
+  - id: sanguozhi-song-shoryobu
+    work: "三國志"
+    role: "secondary / early textual witness"
+    edition: "南宋刊本，有補抄"
+    authors: ["陳壽", "裴松之注"]
+    holding_institution: "日本宮內廳書陵部"
+    source_provider: Internet Archive
+    archive_item: songkeben
+    source_type: scanned-book
+    script: "traditional Chinese"
+    annotations: ["裴松之注"]
+    local: true
+    local_path: "sources/downloads/sanguozhi/song-edition/"
+    remote_record:
+      archive_item: songkeben
+      record_url: "https://archive.org/details/songkeben"
+      metadata_endpoint: "https://archive.org/metadata/songkeben"
+      target_title: "三国志.六十五卷.晋陈寿撰.刘宋.裴松之注.日本宫内厅书陵部藏.有补抄.南宋刊本"
+    text_authority: "page-image witness; selected searchable PDF and OCR are derivatives"
+    structure_authority: "scanned page sequence and bibliographic title"
+    notes: "The downloader resolves the actual filename from IA metadata; JP2 ZIP is excluded by default. OCR is for search/alignment only."

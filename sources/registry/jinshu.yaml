@@ -1,0 +1,50 @@
+schema: 1
+work: "晉書"
+witnesses:
+  - id: jinshu-kanripo-wyg
+    work: "晉書"
+    role: primary
+    edition: "文淵閣四庫全書 / WYG"
+    source_provider: Kanripo
+    source_type: machine-text
+    script: "traditional Chinese"
+    annotations: []
+    local: true
+    local_path: "shishuoSources/jinshu"
+    remote_record: "https://github.com/kanripo/KR2a0015.git"
+    text_authority: "default diplomatic machine-text witness"
+    structure_authority: "Kanripo juan declarations, FILE directives, and page markers"
+    notes: "Immutable local upstream source; juan boundaries are preserved before any later analysis."
+  - id: jinshu-wuyingdian
+    work: "晉書"
+    role: "secondary / visual-reference"
+    edition: "武英殿二十四史本"
+    source_provider: Chinese Text Project
+    source_type: page-image
+    script: "traditional Chinese"
+    annotations: []
+    local: false
+    local_path: null
+    remote_record: "https://ctext.org/library.pl?if=gb&remap=gb&res=77692"
+    text_authority: "visual witness only; externally hosted"
+    structure_authority: "page and volume comparison when inspected"
+    notes: "Registered but not bulk-scraped."
+  - id: jinshu-jiaozhu
+    work: "晉書"
+    role: critical
+    title: "晉書斠注"
+    authors: ["吳士鑑", "劉承幹"]
+    edition: "晉書斠注"
+    source_provider: "Internet Archive / 北京大學圖書館"
+    source_type: scanned-book-series
+    script: "traditional Chinese"
+    annotations: ["校注"]
+    local: true
+    local_path: "sources/downloads/jinshu/jinshu-jiaozhu/"
+    remote_record:
+      provider: Internet Archive
+      candidate_identifiers: ["02077718.cn", "02077775.cn"]
+      metadata_endpoint: "https://archive.org/metadata/<identifier>"
+    text_authority: "critical secondary witness; scanned pages are authoritative evidence"
+    structure_authority: "volume metadata and scanned page sequence"
+    notes: "The downloader verifies that each accepted IA title contains 晉書斠注; OCR is non-authoritative."

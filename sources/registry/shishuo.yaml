@@ -1,0 +1,89 @@
+schema: 1
+work: "世說新語"
+witnesses:
+  - id: shishuo-kanripo-wyg
+    work: "世說新語"
+    role: primary
+    edition: "文淵閣四庫全書 / WYG"
+    source_provider: Kanripo
+    source_type: machine-text
+    script: "traditional Chinese"
+    annotations: ["劉孝標注"]
+    local: true
+    local_path: "shishuoSources/shishuo"
+    remote_record: "https://github.com/kanripo/KR3l0002.git"
+    text_authority: "default diplomatic machine-text witness"
+    structure_authority: "Kanripo FILE directives, juan declarations, and page markers"
+    notes: "Immutable local upstream source; normalization preserves its characters and provenance."
+  - id: shishuo-local-reference-txt
+    previous_id: shishuo-structural-reference
+    work: "世说新语"
+    role: structural-reference
+    edition: unresolved
+    source_provider: local repository
+    source_type: local-machine-text
+    script: simplified-or-mixed
+    annotations: []
+    local: true
+    local_path: "sources/local/shishuo/reference-txt/shishuo.txt"
+    remote_record: null
+    text_authority: low
+    structure_authority: high
+    provenance_status: unresolved
+    notes: "Migrated byte-for-byte from content/shishuo.txt. Useful for entry-count comparison, entry-boundary comparison, missing-entry detection, and structural anomaly detection; it must not silently replace the primary Kanripo/SBCK witness."
+  - id: shishuo-wikisource-sbck
+    work: "世說新語"
+    role: same-edition-machine
+    edition: "四部叢刊本《世說新語》"
+    source_provider: Wikisource
+    source_type: MediaWiki-wikitext
+    script: "traditional Chinese"
+    annotations: ["劉孝標注", "校語一卷"]
+    local: true
+    local_path: "sources/downloads/shishuo/wikisource-sbck"
+    remote_record: "https://zh.wikisource.org/wiki/世説新語_(四部叢刊本)"
+    text_authority: "same-edition machine reference for alignment/search; not a replacement for Kanripo/SBCK"
+    structure_authority: "Wikisource page and revision structure"
+    notes: "Downloaded through the Wikisource MediaWiki API as-is for alignment and search. Revision IDs and SHA-256 values are recorded in the lock manifest. It must not overwrite the primary Kanripo/SBCK text."
+  - id: shishuo-ling-1615
+    work: "世說新語"
+    role: secondary-ocr-visual
+    edition: "1615 凌氏刻本"
+    source_provider: "Internet Archive"
+    source_type: "scanned-book plus OCR derivatives"
+    script: "traditional Chinese"
+    annotations: ["劉孝標注"]
+    local: true
+    local_path: "sources/downloads/shishuo/ling-1615"
+    remote_record: "https://archive.org/details/shishuoxinyu3jua03liuy"
+    text_authority: "OCR is non-authoritative alignment/search convenience; PDF/page image is verification authority"
+    structure_authority: "volume, page, and OCR page-index comparison"
+    notes: "All three requested volumes are discovered from the Internet Archive metadata/search APIs and locked with identifiers, file URLs, sizes, and SHA-256 values. JP2 archives are excluded by default."
+  - id: shishuo-siku
+    work: "世說新語"
+    role: secondary
+    edition: "欽定四庫全書本《世說新語》"
+    source_provider: "Chinese Text Project / Wikisource"
+    source_type: "page-image plus machine-transcription witness family"
+    script: "traditional Chinese"
+    annotations: ["劉孝標注"]
+    local: false
+    local_path: null
+    remote_record: "sources/external/shishuo/siku.yaml"
+    text_authority: "independent secondary witness; Wikisource is alignment convenience and CText images are visual evidence"
+    structure_authority: "volume, chapter, and page comparison"
+    notes: "CText page images and the corresponding Wikisource transcription belong to one 四庫全書本 witness family and must not be counted as two independent editions. CText is not bulk-scraped. Neither source may overwrite the primary Kanripo/SBCK text."
+  - id: shishuo-jianshu-yujiaxi
+    work: "世說新語"
+    role: scholarly-reference
+    edition: "世說新語箋疏"
+    source_provider: "Chinese Text Project"
+    source_type: scholarly-machine-reference
+    script: "traditional Chinese"
+    annotations: []
+    local: false
+    local_path: null
+    remote_record: "https://ctext.org/wiki.pl?if=gb&res=40889"
+    text_authority: "scholarly reference; not a textual witness and not a replacement for the primary text"
+    structure_authority: "none; reserved for later historical, person, and commentary analysis"
+    notes: "余嘉錫《世說新語箋疏》 is registered for later historical/person/textual analysis. It is not automatically downloaded or scraped. Chinese Text Project currently lists the electronic base edition as unspecified."

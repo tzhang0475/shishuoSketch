@@ -5,7 +5,7 @@ This is a proposal stage only.  It never edits a normalized chapter and it
 never writes entry Markdown.  The exact anchors in the generated manifests
 are sliced from the traditional normalized chapter body.
 
-The local ``content/shishuo.txt`` file is used only as a structural guide for
+The configured local structural-reference witness is used only as a guide for
 the order and approximate count of entries.  Its text is not copied to any
 output.  ICU's ``uconv`` command is used only to compare that guide with the
 traditional source; all emitted text and provenance come from
@@ -33,9 +33,24 @@ import shutil
 import subprocess
 from typing import Any, Iterable, Sequence
 
+try:
+    from .source_paths import (
+        DEFAULT_CONFIG_PATH,
+        DEFAULT_STRUCTURAL_REFERENCE,
+        resolve_structural_reference,
+    )
+except ImportError:  # pragma: no cover - exercised by direct script execution
+    from source_paths import (
+        DEFAULT_CONFIG_PATH,
+        DEFAULT_STRUCTURAL_REFERENCE,
+        resolve_structural_reference,
+    )
+
 
 DEFAULT_CHAPTER_DIR = Path("content/processed/shishuo/chapters")
-DEFAULT_REFERENCE = Path("content/shishuo.txt")
+# Compatibility export for callers that want the default relative witness
+# path.  Runtime defaults are resolved through config/sources.yaml.
+DEFAULT_REFERENCE = DEFAULT_STRUCTURAL_REFERENCE
 DEFAULT_OUTPUT_DIR = Path("content/curated/shishuo/boundaries")
 DEFAULT_REPORT = DEFAULT_OUTPUT_DIR / "boundary-review-report.md"
 
@@ -1052,7 +1067,7 @@ def render_manifest(proposal: ChapterProposal) -> str:
         'boundary_method: ' + _json(
             "Structural-reference alignment for proposals; exact anchors are sliced from normalized traditional source. Physical lines and page markers are not boundaries."
         ),
-        'reference_source: ' + _json("content/shishuo.txt (structural guide only; not emitted)"),
+        'reference_source: ' + _json("configured Shishuo structural-reference witness (structural guide only; not emitted)"),
         f"reference_entry_count: {proposal.reference_count}",
         f"proposed_entry_count: {len(proposal.boundaries)}",
         'alignment_ratio: ' + _json(f"{proposal.alignment_ratio:.6f}"),
@@ -1121,7 +1136,7 @@ def render_report(proposals: Sequence[ChapterProposal]) -> str:
         "# Shishuo Xinyu proposed entry-boundary review",
         "",
         "This is a Phase 1 proposal report.  No new entry Markdown was generated.",
-        "All emitted anchors are exact substrings of the normalized traditional chapter source.  The local `content/shishuo.txt` file was used only as a read-only structural guide; its simplified text is not emitted.",
+        "All emitted anchors are exact substrings of the normalized traditional chapter source.  The configured local structural-reference witness was used only as a read-only guide; its text is not emitted.",
         "",
         "## Summary by chapter",
         "",
@@ -1243,10 +1258,13 @@ def render_report(proposals: Sequence[ChapterProposal]) -> str:
 
 def generate_proposals(
     chapter_dir: Path = DEFAULT_CHAPTER_DIR,
-    reference_path: Path = DEFAULT_REFERENCE,
+    reference_path: Path | None = None,
     output_dir: Path = DEFAULT_OUTPUT_DIR,
     report_path: Path = DEFAULT_REPORT,
+    config_path: Path = DEFAULT_CONFIG_PATH,
 ) -> tuple[ChapterProposal, ...]:
+    if reference_path is None:
+        reference_path = resolve_structural_reference(config_path)
     output_dir.mkdir(parents=True, exist_ok=True)
     proposals: list[ChapterProposal] = []
     for chapter_number in range(1, 37):
@@ -1267,7 +1285,18 @@ def generate_proposals(
 def _main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--chapter-dir", type=Path, default=DEFAULT_CHAPTER_DIR)
-    parser.add_argument("--reference", type=Path, default=DEFAULT_REFERENCE)
+    parser.add_argument(
+        "--reference",
+        type=Path,
+        default=None,
+        help="explicit structural-reference witness override",
+    )
+    parser.add_argument(
+        "--config",
+        type=Path,
+        default=DEFAULT_CONFIG_PATH,
+        help="source configuration used to resolve the default witness",
+    )
     parser.add_argument("--output-dir", type=Path, default=DEFAULT_OUTPUT_DIR)
     parser.add_argument("--report", type=Path, default=DEFAULT_REPORT)
     args = parser.parse_args()
@@ -1276,6 +1305,7 @@ def _main() -> int:
         reference_path=args.reference,
         output_dir=args.output_dir,
         report_path=args.report,
+        config_path=args.config,
     )
     total = sum(len(proposal.boundaries) for proposal in proposals)
     counts = {"high": 0, "medium": 0, "low": 0}

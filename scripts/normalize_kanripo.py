@@ -29,6 +29,19 @@ import re
 import sys
 from typing import Iterable, Mapping, Sequence
 
+try:
+    from .source_paths import (
+        DEFAULT_CONFIG_PATH,
+        load_sources_config,
+        repository_root_for_config,
+    )
+except ImportError:  # pragma: no cover - exercised by direct script execution
+    from source_paths import (
+        DEFAULT_CONFIG_PATH,
+        load_sources_config,
+        repository_root_for_config,
+    )
+
 
 PILCROW = "¶"
 PAGE_MARKER_RE = re.compile(r"<pb:[^>]+>")
@@ -328,6 +341,38 @@ def discover_sources(source_root: Path | str, book: str = "all") -> list[Path]:
     return sorted(paths, key=lambda path: path.as_posix())
 
 
+def discover_configured_sources(
+    config_path: Path | str, book: str = "all"
+) -> list[Path]:
+    """Discover primary source files through ``config/sources.yaml``.
+
+    The default command still resolves to the historical ``shishuoSources``
+    layout.  This opt-in/configured path lets future processing use the
+    registry architecture without changing any existing provenance strings.
+    """
+
+    path = Path(config_path)
+    config = load_sources_config(path)
+    configured_sources = config["sources"]
+    books = BOOKS if book == "all" else (book,)
+    paths: list[Path] = []
+    config_root = repository_root_for_config(path)
+    for collection in books:
+        work_config = configured_sources.get(collection)
+        if not isinstance(work_config, Mapping):
+            raise ValueError(f"source configuration has no entry for {collection}")
+        primary = work_config.get("primary")
+        if not primary:
+            raise ValueError(f"source configuration has no primary path for {collection}")
+        primary_root = Path(str(primary))
+        if not primary_root.is_absolute():
+            primary_root = config_root / primary_root
+        paths.extend(
+            candidate for candidate in primary_root.glob("*.txt") if candidate.is_file()
+        )
+    return sorted(paths, key=lambda candidate: candidate.as_posix())
+
+
 def _expand_explicit_sources(sources: Iterable[Path | str]) -> list[Path]:
     paths: list[Path] = []
     for source in sources:
@@ -365,8 +410,14 @@ def build_argument_parser() -> argparse.ArgumentParser:
     parser.add_argument(
         "--source-root",
         type=Path,
-        default=DEFAULT_SOURCE_ROOT,
-        help="root containing shishuo/ and jinshu/ (default: shishuoSources)",
+        default=None,
+        help="root containing shishuo/ and jinshu/; overrides --config",
+    )
+    parser.add_argument(
+        "--config",
+        type=Path,
+        default=DEFAULT_CONFIG_PATH,
+        help="source registry configuration (default: config/sources.yaml)",
     )
     parser.add_argument(
         "--output-root",
@@ -386,16 +437,17 @@ def build_argument_parser() -> argparse.ArgumentParser:
 def main(argv: Sequence[str] | None = None) -> int:
     parser = build_argument_parser()
     args = parser.parse_args(argv)
-    source_root = args.source_root
+    source_root = args.source_root or DEFAULT_SOURCE_ROOT
     output_root = args.output_root
 
     try:
         _assert_output_is_not_source_tree(source_root, output_root)
-        sources = (
-            _expand_explicit_sources(args.sources)
-            if args.sources
-            else discover_sources(source_root, args.book)
-        )
+        if args.sources:
+            sources = _expand_explicit_sources(args.sources)
+        elif args.source_root is not None:
+            sources = discover_sources(source_root, args.book)
+        else:
+            sources = discover_configured_sources(args.config, args.book)
         if not sources:
             raise FileNotFoundError(
                 f"no TXT sources found below {source_root} for book={args.book}"

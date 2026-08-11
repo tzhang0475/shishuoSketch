@@ -1,0 +1,76 @@
+---
+schema: 1
+stage: entry-segmentation
+segment_type: "shishuo-entry"
+entry_id: "08-shangyu-011"
+ordinal: 11
+chapter_id: "08-shangyu"
+chapter_heading: "賞譽第八"
+opening_text: "羊長和父繇與太傅祜同堂相"
+boundary_confidence: "high"
+source_chapter: "content/processed/shishuo/chapters/chapter-08.md"
+source_normalized_filename: "KR3l0002_002.md"
+source_path: "shishuoSources/shishuo/KR3l0002_002.txt"
+source_sha256: "6b8a3fcf4fb07152c567a25fe56e9511f45a9748b83c107e6a8956aa7e65367a"
+FILE: "SB03n0058-003世説新語-卷中之上."
+kanripo_title: "世説新語"
+kanripo_id: "KR3l0002"
+kanripo_baseedition: "SBCK"
+kanripo_witness: "SBCK"
+source_body_offset_start: 1949
+source_body_offset_end_exclusive: 2052
+  start:
+    normalized_line: 1071
+    source_line: 1015
+    page_marker: "<pb:KR3l0002_SBCK_002-48b>"
+  end:
+    normalized_line: 1074
+    source_line: 1018
+    page_marker: "<pb:KR3l0002_SBCK_002-48b>"
+annotation_block_count: 2
+page_marker_count: 0
+source_section_exact: true
+entry_boundary_source: "curated manifest exact anchor"
+primary_witness_status: "present"
+repair_status: "targeted-repair"
+source_opening_status: "present"
+---
+
+
+## Original source (exact)
+
+羊長和父繇與太傅祜同堂相善仕至車騎掾蚤卒
+長和兄弟五人幼孤(續漢太尉不拜父祕京兆太守/羊氏譜曰繇字堪甫太山人祖)
+(生五子秉洽式亮恱也/繇歷車騎掾娶樂國禎女)祜來哭見長和哀容舉止
+宛若成人廼嘆曰從兄不亡矣
+
+## Main text
+
+羊長和父繇與太傅祜同堂相善仕至車騎掾蚤卒
+長和兄弟五人幼孤
+祜來哭見長和哀容舉止
+宛若成人廼嘆曰從兄不亡矣
+
+## Top-level parenthetical annotation blocks
+
+### annotation-001
+entry_relative_start: 29
+entry_relative_end_exclusive: 56
+source_normalized_line: 1072
+source_line: 1016
+page_marker: "<pb:KR3l0002_SBCK_002-48b>"
+
+(續漢太尉不拜父祕京兆太守/羊氏譜曰繇字堪甫太山人祖)
+
+### annotation-002
+entry_relative_start: 57
+entry_relative_end_exclusive: 79
+source_normalized_line: 1073
+source_line: 1017
+page_marker: "<pb:KR3l0002_SBCK_002-48b>"
+
+(生五子秉洽式亮恱也/繇歷車騎掾娶樂國禎女)
+
+## Kanripo page markers
+
+No Kanripo page marker occurs inside this entry span.

@@ -1,0 +1,73 @@
+---
+schema: 1
+stage: entry-segmentation
+segment_type: "shishuo-entry"
+entry_id: "08-shangyu-131"
+ordinal: 131
+chapter_id: "08-shangyu"
+chapter_heading: "賞譽第八"
+opening_text: "謝太傅語真長阿齡於此事故"
+boundary_confidence: "high"
+source_chapter: "content/processed/shishuo/chapters/chapter-08.md"
+source_normalized_filename: "KR3l0002_002.md"
+source_path: "shishuoSources/shishuo/KR3l0002_002.txt"
+source_sha256: "6b8a3fcf4fb07152c567a25fe56e9511f45a9748b83c107e6a8956aa7e65367a"
+FILE: "SB03n0058-003世説新語-卷中之上."
+kanripo_title: "世説新語"
+kanripo_id: "KR3l0002"
+kanripo_baseedition: "SBCK"
+kanripo_witness: "SBCK"
+source_body_offset_start: 16346
+source_body_offset_end_exclusive: 16402
+  start:
+    normalized_line: 1521
+    source_line: 337
+    page_marker: "<pb:KR3l0002_SBCK_003-15b>"
+  end:
+    normalized_line: 1522
+    source_line: 338
+    page_marker: "<pb:KR3l0002_SBCK_003-15b>"
+annotation_block_count: 2
+page_marker_count: 0
+source_section_exact: true
+entry_boundary_source: "curated manifest exact anchor"
+primary_witness_status: "present"
+repair_status: "targeted-repair"
+source_opening_status: "present"
+previous_proposed_id: "08-shangyu-129"
+---
+
+
+## Original source (exact)
+
+謝太傅語真長阿齡於此事故欲太厲(之小字也/修齡王胡)劉
+曰亦名士之高操者(身清約以風操自居/胡之别傳曰胡之治)
+
+## Main text
+
+謝太傅語真長阿齡於此事故欲太厲劉
+曰亦名士之高操者
+
+## Top-level parenthetical annotation blocks
+
+### annotation-001
+entry_relative_start: 15
+entry_relative_end_exclusive: 26
+source_normalized_line: 1521
+source_line: 337
+page_marker: "<pb:KR3l0002_SBCK_003-15b>"
+
+(之小字也/修齡王胡)
+
+### annotation-002
+entry_relative_start: 36
+entry_relative_end_exclusive: 55
+source_normalized_line: 1522
+source_line: 338
+page_marker: "<pb:KR3l0002_SBCK_003-15b>"
+
+(身清約以風操自居/胡之别傳曰胡之治)
+
+## Kanripo page markers
+
+No Kanripo page marker occurs inside this entry span.

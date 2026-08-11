@@ -205,10 +205,12 @@ generated entry Markdown.  Regenerate them with:
 python3 scripts/propose_shishuo_boundaries.py
 ```
 
-The script reads every normalized chapter and uses the checked-in
-`content/shishuo.txt` only as a read-only structural guide for entry order and
-approximate alignment.  ICU conversion is used only for that comparison; no
-converted text is emitted.  ICU's `uconv` command must be
+The script reads every normalized chapter and resolves the configured
+structural-reference witness from `config/sources.yaml`.  The migrated local
+witness is `sources/local/shishuo/reference-txt/shishuo.txt`; it is used only
+as a read-only structural guide for entry order and approximate alignment.
+ICU conversion is used only for that comparison; no converted text is
+emitted.  ICU's `uconv` command must be
 available on `PATH`, so a missing conversion tool cannot silently change the
 result.  Every `opening_text` is an exact
 substring of the traditional normalized chapter body, and every proposed
@@ -226,6 +228,29 @@ guide/source omissions are reported rather than silently converted into
 boundaries.  The command never writes normalized chapters or any entry
 Markdown, and it does not perform entity, relationship, summary,
 translation, or historical extraction.
+
+The local structural-reference witness has unresolved edition and
+transcription provenance.  Its migration metadata records its byte-level
+fingerprint and explicitly keeps its text authority low.  Reports generated
+before the migration may continue to refer to the former
+`content/shishuo.txt` path; those historical reports are not rewritten.
+
+## Human review queue
+
+Render the review queue without changing any manifest or source chapter:
+
+```sh
+python3 scripts/render_shishuo_manual_review.py
+```
+
+This writes `content/curated/shishuo/boundaries/manual-review.md`.  It
+includes every medium- and low-confidence proposal, followed by deterministic
+first/middle/last eligible high-confidence samples from structurally unusual
+chapters 05, 08, 18, 19, and 25.  The excerpts are contiguous slices of normalized
+chapter bodies and retain parenthetical annotation text, page-marker comments,
+traditional characters, punctuation, and whitespace exactly.  If a chapter
+does not contain the requested amount of surrounding source text, the
+available amount is shown and reported; no text is invented.
 
 ## Staged data flow
 

@@ -6,7 +6,7 @@ import re
 import tempfile
 import unittest
 
-from scripts.normalize_kanripo import normalize_file
+from scripts.normalize_kanripo import discover_configured_sources, normalize_file
 
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
@@ -39,6 +39,16 @@ def _normalized_body(markdown: str) -> str:
 
 
 class NormalizeKanripoTests(unittest.TestCase):
+    def test_configured_source_discovery_matches_existing_primary_trees(self) -> None:
+        config = REPO_ROOT / "config" / "sources.yaml"
+        configured = discover_configured_sources(config)
+        self.assertEqual(len(configured), 38)
+        self.assertEqual(
+            {path.parent.name for path in configured},
+            {"shishuo", "jinshu"},
+        )
+        self.assertEqual(configured, sorted(configured, key=lambda path: path.as_posix()))
+
     def test_shishuo_preserves_text_pages_and_repeated_properties(self) -> None:
         source = FIXTURES / "shishuo_sample.txt"
         raw_bytes = source.read_bytes()

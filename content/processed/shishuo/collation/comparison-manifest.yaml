@@ -1,0 +1,62 @@
+schema: 1
+stage: multi-witness-comparison-view
+policy: derived, reversible, read-only comparison copies; no source replacement
+character_policy: traditional characters and witness-specific variants are preserved;
+  only whitespace/layout and explicit glyph markers receive alignment treatment
+witnesses:
+  kanripo: shishuo-kanripo-wyg
+  wikisource: shishuo-wikisource-sbck
+  ling: shishuo-ling-1615
+  siku: shishuo-siku (external only)
+  structural_reference: shishuo-local-reference-txt
+  scholarly_reference: shishuo-jianshu-yujiaxi (not used as text)
+derived_files:
+  kanripo_chapters: 36
+  wikisource_chapters: 36
+  ling_ocr_volumes:
+  - volume: 1
+    source:
+      filename: shishuoxinyu3jua01liuy_djvu.txt
+      identifier: shishuoxinyu3jua01liuy
+      kind: ocr
+      path: sources/downloads/shishuo/ling-1615/ocr/shishuoxinyu3jua01liuy_djvu.txt
+      retrieval_url: https://dn720002.ca.archive.org/0/items/shishuoxinyu3jua01liuy/shishuoxinyu3jua01liuy_djvu.txt
+      retrieved_at: '2026-08-11T13:17:16+00:00'
+      sha256: 2a31bc22de408df8a39997dd98a5d9bf6428eb05b2281b67692f4721a579749a
+      size: 186391
+      source_url: https://archive.org/download/shishuoxinyu3jua01liuy/shishuoxinyu3jua01liuy_djvu.txt
+      status: downloaded
+      text_authority: non-authoritative OCR derivative
+    derived: content/processed/shishuo/collation/ling-1615/volume-01-ocr.txt
+  - volume: 2
+    source:
+      filename: shishuoxinyu3jua02liuy_djvu.txt
+      identifier: shishuoxinyu3jua02liuy
+      kind: ocr
+      path: sources/downloads/shishuo/ling-1615/ocr/shishuoxinyu3jua02liuy_djvu.txt
+      retrieval_url: https://dn760002.eu.archive.org/0/items/shishuoxinyu3jua02liuy/shishuoxinyu3jua02liuy_djvu.txt
+      retrieved_at: '2026-08-11T13:17:30+00:00'
+      sha256: 4c415d9650b77a578254495cb32d2bb13e16f3de84bbb73178985c36dff16345
+      size: 220347
+      source_url: https://archive.org/download/shishuoxinyu3jua02liuy/shishuoxinyu3jua02liuy_djvu.txt
+      status: downloaded
+      text_authority: non-authoritative OCR derivative
+    derived: content/processed/shishuo/collation/ling-1615/volume-02-ocr.txt
+  - volume: 3
+    source:
+      filename: shishuoxinyu3jua03liuy_djvu.txt
+      identifier: shishuoxinyu3jua03liuy
+      kind: ocr
+      path: sources/downloads/shishuo/ling-1615/ocr/shishuoxinyu3jua03liuy_djvu.txt
+      retrieval_url: https://dn760102.eu.archive.org/0/items/shishuoxinyu3jua03liuy/shishuoxinyu3jua03liuy_djvu.txt
+      retrieved_at: '2026-08-11T13:19:58+00:00'
+      sha256: 2d2705c8d732fbc6f42b5e9e99324fbd0b2d6e95cc61b0eaf1e217b0e4a5945a
+      size: 215678
+      source_url: https://archive.org/download/shishuoxinyu3jua03liuy/shishuoxinyu3jua03liuy_djvu.txt
+      status: downloaded
+      text_authority: non-authoritative OCR derivative
+    derived: content/processed/shishuo/collation/ling-1615/volume-03-ocr.txt
+  siku: siku/external-reference.yaml
+  structural_reference:
+  - structural-reference/shishuo.txt
+  - structural-reference/README.md
