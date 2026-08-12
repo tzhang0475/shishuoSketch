@@ -1,0 +1,80 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://shishuo-sketch/schema/evidence.schema.json",
+  "title": "Evidence",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "source_id",
+    "evidence_type",
+    "quote",
+    "locator",
+    "assertion_status",
+    "review_status"
+  ],
+  "properties": {
+    "id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._-]*$"},
+    "source_id": {"type": "string", "minLength": 1},
+    "evidence_type": {"type": "string", "enum": ["primary_text", "annotation", "secondary_reference", "editorial"]},
+    "quote": {"type": "string", "minLength": 1},
+    "locator": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["artifact_type", "artifact_path", "artifact_sha256", "source_provenance"],
+      "properties": {
+        "artifact_type": {"type": "string", "enum": ["shishuo_entry", "jinshu_unit"]},
+        "entry_id": {"type": "string", "minLength": 1},
+        "unit_id": {"type": "string", "minLength": 1},
+        "chapter_id": {"type": ["string", "null"]},
+        "artifact_path": {"type": "string", "minLength": 1},
+        "artifact_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "source_normalized_filename": {"type": ["string", "null"]},
+        "normalized_line_start": {"type": ["integer", "null"]},
+        "normalized_line_end": {"type": ["integer", "null"]},
+        "page_marker_start": {"type": ["string", "null"]},
+        "page_marker_end": {"type": ["string", "null"]},
+        "annotation_id": {"type": ["string", "null"]},
+        "source_provenance": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["witness_id", "source_path", "source_sha256"],
+          "properties": {
+            "witness_id": {"type": "string", "minLength": 1},
+            "source_path": {"type": "string", "minLength": 1},
+            "source_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+          }
+        }
+      },
+      "oneOf": [
+        {
+          "required": ["entry_id"],
+          "not": {"required": ["unit_id"]}
+        },
+        {
+          "required": ["unit_id"],
+          "not": {"required": ["entry_id"]}
+        }
+      ],
+      "allOf": [
+        {
+          "if": {"properties": {"artifact_type": {"const": "shishuo_entry"}}},
+          "then": {"required": ["entry_id"]}
+        },
+        {
+          "if": {"properties": {"artifact_type": {"const": "jinshu_unit"}}},
+          "then": {"required": ["unit_id"]}
+        }
+      ]
+    },
+    "assertion_status": {
+      "type": "string",
+      "enum": ["attested", "reported", "inferred", "unknown"]
+    },
+    "review_status": {
+      "type": "string",
+      "enum": ["candidate", "reviewed", "rejected", "todo"]
+    },
+    "notes": {"type": "string"}
+  }
+}

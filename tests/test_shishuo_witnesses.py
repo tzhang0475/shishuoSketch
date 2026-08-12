@@ -62,7 +62,7 @@ class ShishuoWitnessTests(unittest.TestCase):
         self.assertEqual(witnesses["shishuo-ling-1615"]["role"], "secondary-ocr-visual")
         self.assertEqual(witnesses["shishuo-siku"]["role"], "secondary")
         self.assertEqual(witnesses["shishuo-local-reference-txt"]["role"], "structural-reference")
-        self.assertEqual(witnesses["shishuo-jianshu-yujiaxi"]["role"], "scholarly-reference")
+        self.assertEqual(witnesses["shishuo-jianshu-yujiaxi"]["role"], "scholarly-reference-machine")
         self.assertNotIn("shishuo-jiaqu-tang-ncl", witnesses)
 
         external = yaml.safe_load(
@@ -71,6 +71,8 @@ class ShishuoWitnessTests(unittest.TestCase):
         self.assertEqual(external["author"], "余嘉錫")
         self.assertEqual(external["electronic_base_edition"], "unspecified")
         self.assertFalse(external["bulk_download"])
+        self.assertEqual(external["ctp_urn"], "ctp:wb40889")
+        self.assertEqual(external["local_retrieval_status"], "blocked_requires_authentication")
 
     def test_wikisource_revision_parser_preserves_raw_content(self) -> None:
         payload = json.loads(WIKISOURCE_FIXTURE.read_text(encoding="utf-8"))
@@ -209,6 +211,10 @@ class ShishuoWitnessTests(unittest.TestCase):
         self.assertEqual(config["downloads"]["shishuo_wikisource"], "sources/downloads/shishuo/wikisource-sbck")
         self.assertEqual(config["downloads"]["shishuo_ling"], "sources/downloads/shishuo/ling-1615")
         self.assertEqual(config["sources"]["shishuo"]["scholarly_reference"], config["external"]["shishuo_jianshu"])
+        self.assertEqual(
+            config["references"]["shishuo_jianshu"]["local"],
+            "sources/references/shishuo/yujiaxi-jianshu",
+        )
         self.assertNotIn("shishuo_jiaqu", config["downloads"])
         self.assertFalse((REPO_ROOT / "sources/downloads/shishuo/jiaqu-tang-ncl").exists())
 
@@ -231,6 +237,7 @@ class ShishuoWitnessTests(unittest.TestCase):
         self.assertTrue(parser.parse_args(["--shishuo-ling"]).shishuo_ling)
         self.assertEqual(parser.parse_args(["--shishuo-ling-volume", "3"]).shishuo_ling_volume, 3)
         self.assertTrue(parser.parse_args(["--shishuo"]).shishuo)
+        self.assertTrue(parser.parse_args(["--shishuo-jianshu"]).shishuo_jianshu)
         with self.assertRaises(SystemExit):
             parser.parse_args(["--shishuo-jiaqu"])
 

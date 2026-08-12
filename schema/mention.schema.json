@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://shishuo-sketch/schema/mention.schema.json",
+  "title": "Mention",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "story_id",
+    "surface",
+    "section",
+    "person_id",
+    "candidate_person_ids",
+    "alias_type",
+    "resolution_mode",
+    "confidence",
+    "anchor",
+    "evidence_ids",
+    "assertion_status",
+    "review_status"
+  ],
+  "properties": {
+    "id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._-]*$"},
+    "story_id": {"type": "string", "minLength": 1},
+    "surface": {"type": "string", "minLength": 1},
+    "section": {"type": "string", "enum": ["main_text", "liu_annotation"]},
+    "person_id": {"type": ["string", "null"]},
+    "candidate_person_ids": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+    "alias_type": {"type": "string", "minLength": 1},
+    "resolution_mode": {"type": "string", "enum": ["exact", "contextual", "ambiguous"]},
+    "confidence": {"type": "string", "enum": ["high", "medium", "low", "unresolved"]},
+    "anchor": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["text", "section", "offset"],
+      "properties": {
+        "text": {"type": "string", "minLength": 1},
+        "section": {"type": "string", "enum": ["main_text", "liu_annotation"]},
+        "offset": {"type": "integer", "minimum": 0}
+      }
+    },
+    "evidence_ids": {"type": "array", "items": {"type": "string"}, "minItems": 1, "uniqueItems": true},
+    "assertion_status": {
+      "type": "string",
+      "enum": ["attested", "reported", "inferred", "unknown"]
+    },
+    "review_status": {
+      "type": "string",
+      "enum": ["candidate", "reviewed", "rejected", "todo"]
+    },
+    "notes": {"type": "string"}
+  }
+}

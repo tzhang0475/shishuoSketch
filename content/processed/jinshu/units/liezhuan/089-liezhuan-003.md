@@ -1,0 +1,40 @@
+---
+schema: 1
+unit_id: "089-liezhuan-003"
+work: "晉書"
+volume: "卷89"
+volume_number: 89
+volume_occurrence: 1
+category: "liezhuan"
+category_heading: "列傳第五十九"
+title: "劉沉"
+heading_text: "　　劉沉"
+unit_kind: "biography"
+parent_unit: null
+source_witness: "jinshu-wikisource-siku"
+source_file: "content/processed/jinshu/volume-089.md"
+source_path: "sources/downloads/jinshu/wikisource-siku/text/volume-089.txt"
+source_sha256: "9c480520ce338b9a0a6bd5d67bc2db04a7a21094f65c716e6aa3b4fda443221f"
+normalized_file_sha256: "8537326ca6e54b0e31b7d9112de9b1d1e65e02e68045ac88daa45ce7c819abcc"
+source_span:
+  coordinate: "normalized_body"
+  start_char: 4532
+  end_char_exclusive: 5116
+  start_utf8_byte: 12064
+  end_utf8_byte_exclusive: 13812
+  source_line_start: 35
+  source_line_end: 36
+  start_anchor: "　　劉沉"
+  end_anchor: "　　劉沉字道眞燕國薊人也世為北州名族少仕州郡博學好古太保衛瓘辟為掾領本邑大中正敦儒道愛賢能進霍原為二品及申理張華皆辭㫖明峻為當時所稱齊王冏輔政引為左長史遷侍中于時李流亂蜀詔沉以侍中假節統益州刺史羅尚梁州刺史許雄等以討流行次長安河間王顒請留沉為軍司遣席薳代之後領雍州刺史及張昌作亂詔顒遣沉將州兵萬人征西府五千人自藍田闗以討之顒不奉詔沉自領州兵至藍田顒又逼奪其衆長沙王乂命沉將武吏四百人還州張方既逼京都王師屢敗王湖祖逖言於乂曰劉沉忠義果毅雍州兵力足制河間宜啟上詔與沉使發兵襲顒顒窘急必召張方以自救此計之良也乂從之沉奉詔馳檄四境合七郡之衆及守防諸軍塢壁甲士萬餘人以安定太守衞博新平太守張光安定功曹皇甫澹為先登襲長安顒時頓于鄭縣之高平亭為東軍聲援聞沉兵起還鎮渭城遣督䕶虞䕫率歩騎萬餘人逆沉於好畤接戰䕫衆敗顒大懼退入長安果急呼張方沉渡渭而壘顒每遣兵出鬭輙不利沉乗勝攻之使澹博以精甲五千從長安門而入力戰至顒帳下沉軍來遲顒軍見澹等無繼氣益倍馮翊太守張輔率衆救顒横擊之大戰於府門博父子皆死之澹又被擒顒竒澹壮勇將活之澹不為之屈於是見殺沉軍遂敗率餘卒屯于故營張方遣其將敦偉夜至沉軍大驚而潰與麾下百餘人南遁為陳倉令所執沉謂顒曰夫知己之顧輕在三之節重不可違君父之詔量强弱以茍全投袂之日期之必死葅醢之戮甘之如薺辭義慷慨見者哀之顒怒鞭之而後腰斬有識者以顒干上犯順虐害忠義知其滅亡不久也"
+page_marker_ids: []
+unit_text_sha256: "c5bff5a8f8e73e63df2c764aa97b7a77033bfd81759f5673030c6832234c89ae"
+character_count: 584
+boundary_confidence: "high"
+note: "The boundary is based on a short stand-alone heading followed by its biography text."
+text_policy: "verbatim substring of normalized primary-witness Markdown body; no reference-witness text inserted"
+---
+
+## Original source (exact)
+
+　　劉沉
+　　劉沉字道眞燕國薊人也世為北州名族少仕州郡博學好古太保衛瓘辟為掾領本邑大中正敦儒道愛賢能進霍原為二品及申理張華皆辭㫖明峻為當時所稱齊王冏輔政引為左長史遷侍中于時李流亂蜀詔沉以侍中假節統益州刺史羅尚梁州刺史許雄等以討流行次長安河間王顒請留沉為軍司遣席薳代之後領雍州刺史及張昌作亂詔顒遣沉將州兵萬人征西府五千人自藍田闗以討之顒不奉詔沉自領州兵至藍田顒又逼奪其衆長沙王乂命沉將武吏四百人還州張方既逼京都王師屢敗王湖祖逖言於乂曰劉沉忠義果毅雍州兵力足制河間宜啟上詔與沉使發兵襲顒顒窘急必召張方以自救此計之良也乂從之沉奉詔馳檄四境合七郡之衆及守防諸軍塢壁甲士萬餘人以安定太守衞博新平太守張光安定功曹皇甫澹為先登襲長安顒時頓于鄭縣之高平亭為東軍聲援聞沉兵起還鎮渭城遣督䕶虞䕫率歩騎萬餘人逆沉於好畤接戰䕫衆敗顒大懼退入長安果急呼張方沉渡渭而壘顒每遣兵出鬭輙不利沉乗勝攻之使澹博以精甲五千從長安門而入力戰至顒帳下沉軍來遲顒軍見澹等無繼氣益倍馮翊太守張輔率衆救顒横擊之大戰於府門博父子皆死之澹又被擒顒竒澹壮勇將活之澹不為之屈於是見殺沉軍遂敗率餘卒屯于故營張方遣其將敦偉夜至沉軍大驚而潰與麾下百餘人南遁為陳倉令所執沉謂顒曰夫知己之顧輕在三之節重不可違君父之詔量强弱以茍全投袂之日期之必死葅醢之戮甘之如薺辭義慷慨見者哀之顒怒鞭之而後腰斬有識者以顒干上犯順虐害忠義知其滅亡不久也

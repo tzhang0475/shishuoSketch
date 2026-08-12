@@ -42,13 +42,22 @@ class DownloadWitnessTests(unittest.TestCase):
             ctext["remote_record"],
             "https://ctext.org/library.pl?if=gb&remap=gb&res=77692",
         )
+        completion = next(
+            item for item in jinshu["witnesses"] if item["id"] == "jinshu-wikisource-siku"
+        )
+        self.assertEqual(completion["role"], "primary-machine")
+        self.assertEqual(completion["coverage"], "1-130")
 
     def test_config_paths_are_repository_relative_and_registered(self) -> None:
         config = yaml.safe_load(
             (REPO_ROOT / "config/sources.yaml").read_text(encoding="utf-8")
         )
         self.assertEqual(config["sources"]["shishuo"]["primary"], "shishuoSources/shishuo")
-        self.assertEqual(config["sources"]["jinshu"]["primary"], "shishuoSources/jinshu")
+        self.assertEqual(config["sources"]["jinshu"]["primary"], "sources/downloads/jinshu/wikisource-siku")
+        self.assertEqual(
+            config["sources"]["jinshu"]["same_edition_machine_completion"],
+            "sources/downloads/jinshu/wikisource-siku",
+        )
         self.assertEqual(config["sources"]["sanguozhi"]["primary"], "shishuoSources/sanguozhi")
         for relative in config["downloads"].values():
             self.assertFalse(Path(relative).is_absolute())
@@ -214,6 +223,9 @@ class DownloadWitnessTests(unittest.TestCase):
         self.assertFalse(ignored("sources/downloads/jinshu/jinshu-jiaozhu/README.md"))
         self.assertFalse(ignored("sources/downloads/jinshu/jinshu-jiaozhu/manifest.yaml"))
         self.assertFalse(ignored("sources/downloads/jinshu/jinshu-jiaozhu/manifest.lock.json"))
+        self.assertTrue(ignored("sources/downloads/jinshu/wikisource-siku/text/volume-001.txt"))
+        self.assertFalse(ignored("sources/downloads/jinshu/wikisource-siku/metadata.yaml"))
+        self.assertFalse(ignored("sources/downloads/jinshu/wikisource-siku/manifest.lock.json"))
 
 
 if __name__ == "__main__":

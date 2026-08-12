@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://shishuo-sketch/schema/person.schema.json",
+  "title": "Person",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "canonical_name", "aliases", "story_ids", "evidence_ids", "assertion_status", "review_status"],
+  "properties": {
+    "id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._-]*$"},
+    "canonical_name": {"type": "string", "minLength": 1},
+    "aliases": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["surface", "alias_type", "resolution_mode", "evidence_ids", "review_status"],
+        "properties": {
+          "surface": {"type": "string", "minLength": 1},
+          "alias_type": {"type": "string", "minLength": 1},
+          "resolution_mode": {"type": "string", "enum": ["exact", "contextual", "ambiguous"]},
+          "evidence_ids": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+          "review_status": {
+            "type": "string",
+            "enum": ["candidate", "reviewed", "rejected", "todo"]
+          }
+        }
+      }
+    },
+    "story_ids": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+    "evidence_ids": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+    "assertion_status": {
+      "type": "string",
+      "enum": ["attested", "reported", "inferred", "unknown"]
+    },
+    "review_status": {
+      "type": "string",
+      "enum": ["candidate", "reviewed", "rejected", "todo"]
+    },
+    "notes": {"type": "string"}
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"assertion_status": {"const": "attested"}}},
+      "then": {"properties": {"evidence_ids": {"minItems": 1}}}
+    }
+  ]
+}

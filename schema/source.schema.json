@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://shishuo-sketch/schema/source.schema.json",
+  "title": "Source",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "work",
+    "witness_id",
+    "edition",
+    "source_type",
+    "provenance_status",
+    "text_authority",
+    "structure_authority",
+    "review_status"
+  ],
+  "properties": {
+    "id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._-]*$"},
+    "work": {"type": "string", "minLength": 1},
+    "witness_id": {"type": "string", "minLength": 1},
+    "edition": {"type": "string", "minLength": 1},
+    "source_type": {"type": "string", "minLength": 1},
+    "local_path": {"type": ["string", "null"]},
+    "remote_record": {"type": ["string", "null"]},
+    "provenance_status": {
+      "type": "string",
+      "enum": ["resolved", "unresolved", "external", "unknown"]
+    },
+    "text_authority": {"type": "string", "minLength": 1},
+    "structure_authority": {"type": "string", "minLength": 1},
+    "review_status": {
+      "type": "string",
+      "enum": ["candidate", "reviewed", "rejected", "todo"]
+    },
+    "notes": {"type": "string"}
+  }
+}

@@ -1,0 +1,171 @@
+---
+schema: 1
+normalizer: "scripts/normalize_jinshu_wikisource.py"
+normalizer_version: 1
+source_witness: "jinshu-wikisource-siku"
+source_work: "晉書"
+source_page_title: "晉書 (四庫全書本)/卷015"
+source_url: "https://zh.wikisource.org/wiki/%E6%99%89%E6%9B%B8%20(%E5%9B%9B%E5%BA%AB%E5%85%A8%E6%9B%B8%E6%9C%AC)%2F%E5%8D%B7015"
+source_api_url: "https://zh.wikisource.org/w/api.php?action=query&format=json&formatversion=2&redirects=1&prop=revisions&rvprop=ids%7Ctimestamp%7Ccontent&rvslots=main&titles=%E6%99%89%E6%9B%B8+%28%E5%9B%9B%E5%BA%AB%E5%85%A8%E6%9B%B8%E6%9C%AC%29%2F%E5%8D%B7011%7C%E6%99%89%E6%9B%B8+%28%E5%9B%9B%E5%BA%AB%E5%85%A8%E6%9B%B8%E6%9C%AC%29%2F%E5%8D%B7012%7C%E6%99%89%E6%9B%B8+%28%E5%9B%9B%E5%BA%AB%E5%85%A8%E6%9B%B8%E6%9C%AC%29%2F%E5%8D%B7013%7C%E6%99%89%E6%9B%B8+%28%E5%9B%9B%E5%BA%AB%E5%85%A8%E6%9B%B8%E6%9C%AC%29%2F%E5%8D%B7014%7C%E6%99%89%E6%9B%B8+%28%E5%9B%9B%E5%BA%AB%E5%85%A8%E6%9B%B8%E6%9C%AC%29%2F%E5%8D%B7015%7C%E6%99%89%E6%9B%B8+%28%E5%9B%9B%E5%BA%AB%E5%85%A8%E6%9B%B8%E6%9C%AC%29%2F%E5%8D%B7016%7C%E6%99%89%E6%9B%B8+%28%E5%9B%9B%E5%BA%AB%E5%85%A8%E6%9B%B8%E6%9C%AC%29%2F%E5%8D%B7017%7C%E6%99%89%E6%9B%B8+%28%E5%9B%9B%E5%BA%AB%E5%85%A8%E6%9B%B8%E6%9C%AC%29%2F%E5%8D%B7018%7C%E6%99%89%E6%9B%B8+%28%E5%9B%9B%E5%BA%AB%E5%85%A8%E6%9B%B8%E6%9C%AC%29%2F%E5%8D%B7019%7C%E6%99%89%E6%9B%B8+%28%E5%9B%9B%E5%BA%AB%E5%85%A8%E6%9B%B8%E6%9C%AC%29%2F%E5%8D%B7020"
+source_page_id: 253633
+source_revision_id: 761757
+source_revision_timestamp: "2016-10-24T13:25:44Z"
+source_volume: 15
+source_text_path: "sources/downloads/jinshu/wikisource-siku/text/volume-015.txt"
+source_text_sha256: "cff8868f6a7149f9e706d927f16dc52935349ae3b1641a44906a4298b10208e2"
+source_text_bytes: 26371
+source_text_line_count: 167
+source_raw_api_path: "sources/downloads/jinshu/wikisource-siku/raw/batch-002.json"
+source_raw_api_sha256: "9dec0a157c249f28b2f2fab3a180a3d90c7648465c7c44283d6c679b4bf6dbe1"
+normalized_body_sha256: "57658d6af0567ee6dad6511c60824ee7cd5a18a87851b3deb6a8986be1abad82"
+normalized_output_hash_scope: "whole Markdown file; complete hash is in normalization-manifest.lock.json"
+markup_policy: "Remove Wikisource presentation wrappers; retain source text and structured metadata for notes, glyph placeholders, anchors, and section markers."
+---
+<!-- wikisource-skqs-header: {"wikitext": "SKQS header|title=晉書|section=卷十五|prev=卷十四|prev_link=卷014|next=卷十六|next_link=卷016|type=史"} -->　　欽定四庫全書
+　　晉書卷十五
+　　唐　太　宗　文　皇　帝　御　撰
+　　志第五
+　　地理下　<!-- wikisource-note: {"wikitext": "SK notes|青州　徐州　荆州揚州　交州　廣州"} -->
+　　○青州按禹貢為海岱之地舜置十二牧則其一也舜以青州越海又分為營州則遼東夲為青州矣周禮正東曰青州葢取土居少陽其色為青故以名也春秋元命包云虚危流為青州漢武帝置十三州因舊名厯後漢至晉不改州統郡國六縣三十七戶五萬三千齊國<!-- wikisource-note: {"wikitext": "SK notes|秦置郡漢以為國景帝以為北海郡統縣五戶一萬四千"} -->
+　　臨淄　西安<!-- wikisource-note: {"wikitext": "SK notes|有棘里亭"} -->東安平<!-- wikisource-note: {"wikitext": "SK notes|汝水出東北"} -->廣饒　昌國<!-- wikisource-note: {"wikitext": "SK notes|樂毅所封"} -->濟南郡<!-- wikisource-note: {"wikitext": "SK notes|漢置統縣五戶五千或云魏平蜀徙其豪將家於濟河北故改為濟岷郡而太康地理志無此郡名未之詳"} -->
+　　平夀<!-- wikisource-note: {"wikitext": "SK notes|古國寒浞封此"} -->下宻<!-- wikisource-note: {"wikitext": "SK notes|有三石祠"} -->膠東<!-- wikisource-note: {"wikitext": "SK notes|侯國"} -->即墨<!-- wikisource-note: {"wikitext": "SK notes|有天山祠"} -->祝阿
+　　樂安國<!-- wikisource-note: {"wikitext": "SK notes|漢置統縣八戶一萬一千"} -->
+　　髙苑　臨濟<!-- wikisource-note: {"wikitext": "SK notes|有蚩尤祠"} -->博昌<!-- wikisource-note: {"wikitext": "SK notes|有薄姑祠"} -->利益<!-- wikisource-note: {"wikitext": "SK notes|侯相"} -->蓼城<!-- wikisource-note: {"wikitext": "SK notes|侯國"} -->鄒　夀光<!-- wikisource-note: {"wikitext": "SK notes|古斟灌氏所封國"} -->東朝陽
+　　城陽郡<!-- wikisource-note: {"wikitext": "SK notes|漢置屬北海自魏至晉分北海而立焉郡統縣十戶一萬二千"} -->
+　　莒<!-- wikisource-note: {"wikitext": "SK notes|故莒子國"} -->姑幕<!-- wikisource-note: {"wikitext": "SK notes|古薄姑氏國"} -->諸　淳于<!-- wikisource-note: {"wikitext": "SK notes|故淳于公國"} -->東武　髙宻<!-- wikisource-note: {"wikitext": "SK notes|漢改為都"} -->壯武　黔陬　平昌　昌安
+　　東萊國<!-- wikisource-note: {"wikitext": "SK notes|漢置郡統縣六戶六千五百"} -->
+　　掖<!-- wikisource-note: {"wikitext": "SK notes|侯相"} -->當利<!-- wikisource-note: {"wikitext": "SK notes|侯相"} -->盧鄉　曲城　黄<!-- wikisource-note: {"wikitext": "SK notes|有萊山松林萊君祠"} -->惤<!-- wikisource-note: {"wikitext": "SK notes|侯國有百支萊王祠"} -->長廣郡<!-- wikisource-note: {"wikitext": "SK notes|咸寕三年置統縣三戶四千五百"} -->
+　　不其<!-- wikisource-note: {"wikitext": "SK notes|侯國"} -->長廣　挻
+　　惠帝元康十年又置平昌郡又分城陽之黔陬壯武淳于昌安髙宻平昌營陵安丘大劇臨朐十一縣為髙宻國自永嘉喪亂青州淪沒石氏東萊人曺嶷為刺史造廣固城後為石季龍所滅季龍末遼西段龕自號齊王據青州慕容恪滅趙尅青州苻氏平燕盡有其地及苻氏敗後刺史苻朗以州降朝廷置幽州以别駕辟閭渾為刺史鎮廣固隆安四年為慕容徳所滅遂都之是為南燕復改為青州徳以并州牧鎮隂平幽州刺史鎮發干徐州刺史鎮莒城青州刺史鎭東萊兖州刺史鎮梁父慕容超移青州於東萊郡後為劉<!-- wikisource-SKchar2: {"value": "334"} -->所滅留長史羊穆之為青州刺史築東陽城而居之自元帝渡江於廣陵僑置青州至是始置北青州鎮東陽城以僑立州為南青州而後省南青州而北青州直曰青州
+　　○徐州案禹貢海岱及淮之地舜十二牧則其一也於周入青州之域春秋元命包云天氐流為徐州葢取舒緩之義或云因徐丘以立名秦兼天下以置泗水薛琅邪三郡楚漢之際分置東陽郡漢又分置東海郡改泗水為沛改薛為魯分沛置楚國以東陽屬吴國景帝改吴為江都武帝分沛東陽置臨淮郡改江都為廣陵及置十三州以其地為徐州統楚國及東海琅邪臨淮廣陵四郡宣帝改楚為彭城郡後漢改為彭城國以沛郡之廣戚縣來屬改臨淮為下邳國及太康元年復分下邳屬縣在淮南者置臨淮郡分琅邪置東莞郡州凡領郡國七縣六十一戶八萬一千二十一
+　　彭城國<!-- wikisource-note: {"wikitext": "SK notes|漢以為郡統縣七戶四千一百二十一"} -->
+　　彭城<!-- wikisource-note: {"wikitext": "SK notes|故殷伯大彭國"} -->留<!-- wikisource-note: {"wikitext": "SK notes|張良所封"} -->廣戚　傅陽　武原　呂　梧下邳國<!-- wikisource-note: {"wikitext": "SK notes|漢置為臨淮郡統縣七戶七千五百"} -->
+　　下邳<!-- wikisource-note: {"wikitext": "SK notes|葛嶧山在西古嶧陽也韓信為楚王都之"} -->淩　良城<!-- wikisource-note: {"wikitext": "SK notes|侯相"} -->雎陵　夏丘取慮　僮
+　　東海郡<!-- wikisource-note: {"wikitext": "SK notes|漢置統縣十二戶一萬一千一百"} -->
+　　郯<!-- wikisource-note: {"wikitext": "SK notes|故郯子國"} -->祝其<!-- wikisource-note: {"wikitext": "SK notes|羽山在縣之西"} -->朐　襄賁　利城　贛榆　厚丘蘭陵　承　昌慮　合鄉　戚
+　　琅邪國<!-- wikisource-note: {"wikitext": "SK notes|秦置郡統縣九戶二萬九千五百"} -->
+　　開陽<!-- wikisource-note: {"wikitext": "SK notes|侯相"} -->臨沂　陽都　繒　即丘　華　費<!-- wikisource-note: {"wikitext": "SK notes|魯季氏邑"} -->東安　蒙隂<!-- wikisource-note: {"wikitext": "SK notes|山在西南"} -->
+　　東莞郡<!-- wikisource-note: {"wikitext": "SK notes|太康中置統縣八戶一萬"} -->
+　　東莞<!-- wikisource-note: {"wikitext": "SK notes|故魯鄆邑"} -->朱虛　營陵<!-- wikisource-note: {"wikitext": "SK notes|尚父呂望所封"} -->安丘<!-- wikisource-note: {"wikitext": "SK notes|故莒渠丘父封邑"} -->　葢臨朐<!-- wikisource-note: {"wikitext": "SK notes|有海水祠"} -->劇　廣
+　　廣陵郡<!-- wikisource-note: {"wikitext": "SK notes|漢置統縣八戶八千八百"} -->
+　　淮隂　射陽　輿　海陽<!-- wikisource-note: {"wikitext": "SK notes|有江海㑹祠"} -->廣陵　鹽瀆
+　　淮浦　江都<!-- wikisource-note: {"wikitext": "SK notes|有江水祠"} -->
+　　臨淮郡<!-- wikisource-note: {"wikitext": "SK notes|漢置章帝以合下邳{{YL|太康元年}}復立統縣十戶一萬"} -->
+　　盱眙　東陽　髙山　贅其　潘旌　髙郵　淮陵司吾　下相　徐
+　　太康十年以青州城陽郡之莒姑慕諸東武四縣屬東莞元康元年分東海置蘭陵郡七年又分東莞置東安郡分臨淮置淮陵郡以堂邑置堂邑郡永嘉之亂臨淮淮陵並淪沒石氏元帝渡江之後徐州所得惟半乃僑置淮陽陽平濟隂北濟隂四郡又琅邪國人隨帝過江者遂置懐徳縣及琅邪郡以統之是時幽冀青并兖五州及徐州之淮北流人相帥過江淮帝並僑立郡縣以司牧之割吳郡之海虞北境立郯朐利城祝其厚丘西隰㐮賁七縣寄居曲阿以江乘置南東海南琅邪南東平南蘭陵等郡分武進立臨淮淮陵南彭城等郡屬南徐州又置頓丘郡屬北徐州明帝又立南沛南清河南下邳南東莞南平昌南濟隂南濮陽南太平南泰山南濟陽南魯等郡以屬徐兖二州初或居江南㦯居江北或以兖州領州郄鑒都督青兖二州諸軍事兗州刺史加領徐州刺史鎭廣陵蘓峻平後自廣陵還鎮京口又於漢故九江郡界置鍾離郡屬南徐州江北又僑立幽冀青并四州穆帝時移南東海七縣出居京口義熙七年始分淮北為北徐州淮南但為徐州統彭城沛下邳蘭陵東莞東安琅邪淮陽陽平濟隂北濟隂十一郡以盱眙立盱眙郡統考城直瀆陽城三縣又分廣陵界置海陵山陽二郡後又以幽冀合徐州青州并合兖州○荆州按禹貢荆及衡陽之地舜置十二牧則其一也周禮正南曰荆州春秋元命包云軫星散為荆州荆强也言其氣躁强亦曰警也言南蠻數為寇逆其人有道後服無道先强當警備也又云取名於荆山六國時其地為楚及秦取楚鄢郢為南郡又取巫中地為黔中郡以楚之漢北立南陽郡滅楚之後分黔中為長沙郡漢髙祖分長沙為桂陽郡改黔中為武陵郡分南郡為江夏郡武帝又分長沙為零陵郡及置十三州因舊名為荆州統南郡南陽零陵桂陽武陵長沙江夏七郡後漢獻帝建安十三年魏武盡得荆州之地分南郡以北立㐮陽郡又分南陽西界立南鄊郡分枝江以西立臨江郡及敗於赤壁南郡以南屬吳吳後遂與蜀分荆州於是南郡零陵武陵以西為蜀江夏桂陽長沙三郡為吳南陽㐮陽南鄊三郡為魏而荆州之名南北雙立蜀分南郡立宜都郡劉備没後宜都武陵零陵南郡四郡之地悉復屬吳魏文帝以漢中遺黎立魏興新城二郡眀帝分新城立上庸郡孫權分江夏立武昌郡又分蒼梧立臨賀郡分長沙立衡陽湘東二郡孫休分武陵立天門郡分宜都立建平郡孫晧分零陵立始安郡分桂陽立始興郡又分零陵立卲陵郡分長沙立安成郡荆州統南郡武昌武陵宜都建平天門長沙零陵桂陽衡陽湘東卲陵臨賀始興始安十五郡其南陽江夏襄陽南鄉魏興新城上庸七郡屬魏之荆州及武帝平吳分南郡為南平郡分南陽立義陽郡改南鄊為順陽郡又以始興始安臨賀三郡屬廣州以揚州之安成郡來屬州統郡二十二縣一百六十九戶三十五萬七千五百四十八
+　　江夏郡<!-- wikisource-note: {"wikitext": "SK notes|漢置統縣七戶二萬四千"} -->
+　　安陸<!-- wikisource-note: {"wikitext": "SK notes|横尾山在東北古之陪尾山"} -->雲杜<!-- wikisource-note: {"wikitext": "SK notes|故雲子國"} -->曲陵　平春　鄳竟陵<!-- wikisource-note: {"wikitext": "SK notes|章山在東北古之内方山"} -->南新市
+　　南郡<!-- wikisource-note: {"wikitext": "SK notes|漢置統縣十一戶五萬五千"} -->
+　　江陵<!-- wikisource-note: {"wikitext": "SK notes|故楚都"} -->編<!-- wikisource-note: {"wikitext": "SK notes|有雲夢官"} -->當陽　華容　鄀<!-- wikisource-note: {"wikitext": "SK notes|故鄀子國"} -->枝江<!-- wikisource-note: {"wikitext": "SK notes|故羅國"} -->旌陽　州陵<!-- wikisource-note: {"wikitext": "SK notes|楚嬖人州侯所邑"} -->監利　松滋　石首
+　　襄陽郡<!-- wikisource-note: {"wikitext": "SK notes|魏置統縣八戶二萬二千七百"} -->
+　　宜城<!-- wikisource-note: {"wikitext": "SK notes|故鄢也"} -->中廬　臨沮<!-- wikisource-note: {"wikitext": "SK notes|荆山在東北"} -->邔　襄陽<!-- wikisource-note: {"wikitext": "SK notes|侯相"} -->山都鄧城　鄾
+　　南陽國<!-- wikisource-note: {"wikitext": "SK notes|秦置郡統縣十四戶二萬四千四百"} -->
+　　宛　西鄂<!-- wikisource-note: {"wikitext": "SK notes|侯相"} -->雉　魯陽<!-- wikisource-note: {"wikitext": "SK notes|公國相"} -->犨　淯陽<!-- wikisource-note: {"wikitext": "SK notes|公國相"} -->博望<!-- wikisource-note: {"wikitext": "SK notes|公國相"} -->堵陽　葉<!-- wikisource-note: {"wikitext": "SK notes|侯相有長城山號曰方城"} -->舞隂<!-- wikisource-note: {"wikitext": "SK notes|公國相"} -->比陽<!-- wikisource-note: {"wikitext": "SK notes|公國相"} -->湼陽冠軍　酈
+　　順陽郡<!-- wikisource-note: {"wikitext": "SK notes|太康中置統縣八戶二萬一百"} -->
+　　鄼　順陽　南鄊　丹水　武當<!-- wikisource-note: {"wikitext": "SK notes|侯相"} -->隂　筑陽　析義陽郡<!-- wikisource-note: {"wikitext": "SK notes|太康中置統縣十二戶一萬九千"} -->
+　　新野<!-- wikisource-note: {"wikitext": "SK notes|侯相"} -->穣　鄧<!-- wikisource-note: {"wikitext": "SK notes|故鄧侯國"} -->蔡陽　随<!-- wikisource-note: {"wikitext": "SK notes|故随國"} -->安昌　棘陽厥西　平氏<!-- wikisource-note: {"wikitext": "SK notes|桐栢山在南"} -->義陽　平林　朝陽
+　　新城郡<!-- wikisource-note: {"wikitext": "SK notes|魏置統縣四戶一萬五千二百"} -->
+　　房陵　綏陽　昌魏　沶鄉
+　　魏興郡<!-- wikisource-note: {"wikitext": "SK notes|魏置統縣六戶一萬二千"} -->
+　　晉興　安康　西城　錫　長利　洵陽
+　　上庸郡<!-- wikisource-note: {"wikitext": "SK notes|魏置統縣六戶一萬一千四百四十八"} -->
+　　上庸<!-- wikisource-note: {"wikitext": "SK notes|侯相"} -->安富　北巫　武陵　上㢘　微陽
+　　建平郡<!-- wikisource-note: {"wikitext": "SK notes|吳晉各有建平郡{{YL|太康元年}}合統縣八戶一萬三千二百"} -->
+　　巫　北井　秦昌　信陵　興山　建始　秭歸<!-- wikisource-note: {"wikitext": "SK notes|故楚子國"} -->沙渠
+　　宜都郡<!-- wikisource-note: {"wikitext": "SK notes|吳置統縣三戶八千七百"} -->
+　　夷陵　夷道　佷山
+　　南平郡<!-- wikisource-note: {"wikitext": "SK notes|吳置以為南郡{{YL|太康元年}}改曰南平統縣四戶七千"} -->
+　　作唐　孱陵　南安　江安
+　　武陵郡<!-- wikisource-note: {"wikitext": "SK notes|漢置統縣十戶一萬四千"} -->
+　　臨沅　龍陽　漢夀　沅陵　黚陽　酉陽　鐔城沅南　遷陵　舞陽
+　　天門郡<!-- wikisource-note: {"wikitext": "SK notes|吳置統縣五戶三千一百"} -->
+　　零陽　漊中　兖　臨澧　澧陽
+　　長沙郡<!-- wikisource-note: {"wikitext": "SK notes|漢置統縣十戶三萬三千"} -->
+　　臨湘　攸　下雋　醴陵　劉陽　建寕　吳昌羅　蒲沂　巴陵
+　　衡陽郡<!-- wikisource-note: {"wikitext": "SK notes|吳置故屬長沙統縣九戶二萬一千"} -->
+　　湘鄉　重安　湘南　湘西　烝陽　衡山　連道新康　益陽
+　　湘東郡<!-- wikisource-note: {"wikitext": "SK notes|吳置故屬長沙統縣七戶一萬九千五百"} -->
+　　酃　茶陵　臨烝　利陽　隂山　新平　新寕零陵郡<!-- wikisource-note: {"wikitext": "SK notes|吳置統縣十一戶二萬五千一百"} -->
+　　泉陵<!-- wikisource-note: {"wikitext": "SK notes|有香茅云古貢之以縮酒"} -->祁陽　零陵　營浦　洮陽　永昌觀陽　營道　舂陽　泠道　應陽<!-- wikisource-note: {"wikitext": "SK notes|東界有鼻墟云象所封"} -->
+　　卲陵郡<!-- wikisource-note: {"wikitext": "SK notes|吳置統縣六戶一萬二千"} -->
+　　卲陵　都梁　夫夷　建興　卲陽　髙平
+　　桂陽郡<!-- wikisource-note: {"wikitext": "SK notes|漢置統縣六戶一萬一千三百"} -->
+　　郴<!-- wikisource-note: {"wikitext": "SK notes|項羽封義帝之邑"} -->耒陽　便　臨武　晉寕　南平
+　　武昌郡<!-- wikisource-note: {"wikitext": "SK notes|吳置統縣七戶一萬四千八百"} -->
+　　武昌<!-- wikisource-note: {"wikitext": "SK notes|故東鄂也楚子熊渠封中子紅於此"} -->柴桑<!-- wikisource-note: {"wikitext": "SK notes|有湓口關"} -->陽新　沙羡<!-- wikisource-note: {"wikitext": "SK notes|有夏口對沔口有津"} -->沙陽　鄂<!-- wikisource-note: {"wikitext": "SK notes|有新興馬頭鐡官"} -->官陵
+　　安成郡<!-- wikisource-note: {"wikitext": "SK notes|吳置統縣七戶三千"} -->
+　　平都　宜春　新諭　永新　安復　萍鄉　廣興惠帝分桂陽武昌安成三郡立江州以新城魏興上庸三郡屬梁州又分義陽立隨郡分南陽立新野郡分江夏立竟陵郡懐帝又分長沙衡陽湘東零陵卲陵桂陽及廣州之始安始興臨賀九郡置湘州時蜀亂又割南郡之華容州陵監利三縣别立豐都合四縣置成都郡為成都王頴國居華容縣愍帝建興中併還南郡亦併豐都於監利元帝渡江又僑立新興南河東二郡穆帝時又分零陵立營陽郡以義陽流人在南郡者立為義陽郡又以廣州之臨賀始興始安三郡及江州之桂陽益州之巴東合五郡來屬以長沙衡陽湘東零陵卲陵營陽六郡屬湘州桓温又分南郡立武寕郡安帝又僑立南義陽東義陽長寕三郡義熙十三年省湘州置長沙衡陽湘東零陵卲陵營陽還入荆州
+　　○揚州按禹貢淮海之地舜置十二牧則其一也周禮東南曰揚州春秋元命包云牽牛流為揚州分為越國以為江南之氣躁勁厥性輕揚亦曰州界多水水波揚也於古則荒服之國戰國時其地為楚分秦始皇并天下以置鄣㑹稽九江三郡項羽封英布為九江王盡有其地漢改九江曰淮南即封布為淮南王六年分淮南置豫章郡十一年布誅立皇子長為淮南王封劉濞為吳王二國盡得揚州之地文帝十六年分淮南立廬江衡山二郡景帝四年封皇子非為江都王并得鄣㑹稽郡而不得豫章武帝改江都曰廣陵封皇子胥為王而以屬徐州元封二年改鄣曰丹陽改淮南復為九江後漢順帝分㑹稽立吳郡揚州統㑹稽丹陽吳豫章九江廬江六郡省六安并廬江郡獻帝興平中孫䇿分豫章立廬陵郡孫權又分豫章立鄱陽郡分丹陽立新都郡孫亮又分豫章立臨川郡分㑹稽立臨海郡孫休又分㑹稽立建安郡孫恪分㑹稽立東陽郡分吳立吳興郡分豫章廬陵長沙立安成郡分廬陵立廬陵南部都尉揚州統丹陽吳㑹稽吳興新都東陽臨海建安豫章鄱陽臨川安成廬陵南部十四郡江西廬江九江之地自合肥之北至夀春悉屬魏及晉平吳以安成屬荆州分丹陽之宣城宛陵陵陽安吳涇廣徳寕國懐安石城臨城春穀十一縣立宣城郡理宛陵改新都曰新安郡改廬陵南部為南康郡分建安立晉安郡又分丹陽立毗陵郡揚州合統郡十八縣一百七十三戶三十一萬一千四百
+　　丹陽郡<!-- wikisource-note: {"wikitext": "SK notes|漢置統縣十一戶五萬一千五百"} -->
+　　建鄴<!-- wikisource-note: {"wikitext": "SK notes|夲秣陵孫氏改為建業武帝平吳以為秣陵{{YL|太康二年}}分秣陵北為建鄴改業為鄴"} -->江寕<!-- wikisource-note: {"wikitext": "SK notes|{{YL|太康二年}}分建鄴置"} -->丹楊<!-- wikisource-note: {"wikitext": "SK notes|丹陽山多赤栁在西也"} -->于湖　蕪湖　永世溧陽<!-- wikisource-note: {"wikitext": "SK notes|溧水所出"} -->江乘　句容<!-- wikisource-note: {"wikitext": "SK notes|有茅山"} -->湖熟　秣陵
+　　宣城郡<!-- wikisource-note: {"wikitext": "SK notes|{{YL|太康二年}}置統縣十一戶二萬三千五百"} -->
+　　宛陵<!-- wikisource-note: {"wikitext": "SK notes|侯相彭澤聚在西南"} -->宣城　陵陽<!-- wikisource-note: {"wikitext": "SK notes|淮水出東北入江仙人陵陽子明所居"} -->安吳臨城　石城　涇　春榖<!-- wikisource-note: {"wikitext": "SK notes|孝武改春為陽"} -->廣徳　寕國　懐安淮南郡<!-- wikisource-note: {"wikitext": "SK notes|秦置九江郡漢以為淮南國漢武帝置為九江郡武帝改為淮南郡統縣十六戶三萬三千四百"} -->
+　　夀春　成徳　下蔡　義城　西曲陽　平阿<!-- wikisource-note: {"wikitext": "SK notes|有塗山"} -->厯陽　全椒　阜陵<!-- wikisource-note: {"wikitext": "SK notes|漢明帝時淪為麻湖"} -->鍾離<!-- wikisource-note: {"wikitext": "SK notes|故州來邑"} -->合肥　逡遒隂陵　當塗<!-- wikisource-note: {"wikitext": "SK notes|古塗山國"} -->東城　烏江
+　　廬江郡<!-- wikisource-note: {"wikitext": "SK notes|漢置統縣十戶四千二百"} -->
+　　陽泉　舒<!-- wikisource-note: {"wikitext": "SK notes|故國有桐鄊"} --><!-- wikisource-SKchar: {"value": "1358"} --><!-- wikisource-note: {"wikitext": "SK notes|天柱山在南有祠"} -->皖　尋陽　居巢<!-- wikisource-note: {"wikitext": "SK notes|桀死於此"} -->臨湖　襄安　龍舒　六<!-- wikisource-note: {"wikitext": "SK notes|故六國"} -->
+　　毗陵郡<!-- wikisource-note: {"wikitext": "SK notes|吳分㑹稽無錫已西為屯田置典農校尉{{YL|太康二年}}省校尉為毗陵郡統縣七戶一萬二千"} -->丹徒<!-- wikisource-note: {"wikitext": "SK notes|故朱方"} -->曲阿<!-- wikisource-note: {"wikitext": "SK notes|故雲陽"} -->武進　延陵　毗陵　既陽　無錫<!-- wikisource-note: {"wikitext": "SK notes|有磨山春申君祠"} -->
+　　吳郡<!-- wikisource-note: {"wikitext": "SK notes|漢置統縣十一戶二萬五千"} -->
+　　吳<!-- wikisource-note: {"wikitext": "SK notes|故國具區在西"} -->嘉興　海鹽　鹽官　錢唐<!-- wikisource-note: {"wikitext": "SK notes|武林山武林水所出"} -->富陽桐廬　建徳　夀昌　海虞　婁
+　　吳興郡<!-- wikisource-note: {"wikitext": "SK notes|吳置統縣十戶二萬四千"} -->
+　　烏程　臨安　餘杭　武康<!-- wikisource-note: {"wikitext": "SK notes|故防風氏國"} -->東遷　於潛<!-- wikisource-note: {"wikitext": "SK notes|有潛水"} -->故鄣　安吉　原鄉　長城
+　　㑹稽郡<!-- wikisource-note: {"wikitext": "SK notes|秦置統縣十戶三萬"} -->
+　　山隂<!-- wikisource-note: {"wikitext": "SK notes|會稽山在南上有禹冢"} -->上虞<!-- wikisource-note: {"wikitext": "SK notes|有仇亭舜避丹朱於此地"} -->餘姚<!-- wikisource-note: {"wikitext": "SK notes|有句餘山在南"} -->句章鄞<!-- wikisource-note: {"wikitext": "SK notes|有鮚{{SKchar|2025}}亭"} -->鄮　始寕　剡　永興　諸暨
+　　東陽郡<!-- wikisource-note: {"wikitext": "SK notes|吳置統縣九戶一萬二千"} -->
+　　長山<!-- wikisource-note: {"wikitext": "SK notes|有赤松子廟"} -->永康　烏傷　吳寕　太末　信安豐安　定陽　遂昌
+　　新安郡<!-- wikisource-note: {"wikitext": "SK notes|吳置統縣六戶五千"} -->
+　　始新　遂安　黝　歙　海寕　黎陽
+　　臨海郡<!-- wikisource-note: {"wikitext": "SK notes|吳置統縣八戶一萬八千"} -->
+　　章安　臨海　始豐　永寕　寕海　松陽　安固横陽
+　　建安郡<!-- wikisource-note: {"wikitext": "SK notes|故秦閩中郡漢髙帝五年以立閩越王及武帝滅之徙其人名為東冶又更名東城後漢改為侯官都尉及吳置建安郡統縣七戶四千三百"} -->
+　　建安　吳興　東平　建陽　將樂　卲武　延平晉安郡<!-- wikisource-note: {"wikitext": "SK notes|{{YL|太康三年}}置統縣八戶四千三百"} -->
+　　原豐　新羅　宛平　同安　侯官　羅江　晉安温麻
+　　豫章郡<!-- wikisource-note: {"wikitext": "SK notes|漢置統縣十六戶三萬五千"} -->
+　　南昌　海昏　新淦　建城　望蔡　永修　建昌吳平　豫章　彭澤　艾　康樂　豐城　新吳宜豐　鍾陵
+　　臨川郡<!-- wikisource-note: {"wikitext": "SK notes|吳置統縣十戶八千五百"} -->
+　　臨汝　西豐　南城　東興　南豐　永成　宜黄安浦　西寕　新建
+　　鄱陽郡<!-- wikisource-note: {"wikitext": "SK notes|吳置統縣八戶六千一百"} -->
+　　廣晉　鄱陽　樂安　餘汗　鄡陽　厯陵　葛陽晉興
+　　廬陵郡<!-- wikisource-note: {"wikitext": "SK notes|吳置統縣十戶一萬二千二百"} -->
+　　西昌　髙昌　石陽　巴丘　南野　東昌　遂興吉陽　興平　陽豐
+　　南康郡<!-- wikisource-note: {"wikitext": "SK notes|{{YL|太康三年}}置統縣五戶一千四百"} -->
+　　贛　雩都　平固　南康　揭陽
+　　惠帝元康元年有司奏荆揚二州疆土廣逺統理尤難於是割揚州之豫章鄱陽廬陵臨川南康建安晉安荆州之武昌桂陽安成合十郡因江水之名而置江州永興元年分廬江之尋陽武昌之柴桑二縣置尋陽郡屬江州分淮南之烏江厯陽二縣置厯陽郡又以周玘創義討石冰割吳興之陽羡并長城縣之北鄉置義鄊國山臨津并陽羡四縣又分丹陽之永世置平陵及永世凡六縣立義興郡以表玘之功並屬揚州又以毗陵郡封東海王世子毗避毗諱改為晉陵懐帝永嘉元年又以豫章之彭澤縣屬尋陽郡愍帝立避帝諱改建鄴為建康元帝渡江建都揚州改丹陽太守為尹江州又置新蔡郡尋陽郡又置九江上甲二縣尋又省九江縣入尋陽是時司冀雍涼青并兖豫幽平諸州皆淪沒江南所得但有揚荆湘江梁益交廣其徐州則有過半豫州惟得譙城而已明帝太寕元年分臨海立永嘉郡統永寕安固松陽横陽等四縣而揚州統丹陽吳郡吳興新安東陽臨海永嘉宣城義興晉陵十一郡自中原亂離遺黎南渡並僑置牧司在廣陵丹徒南城非舊土也及胡寇南侵淮南百姓皆渡江成帝初蘇峻祖約為亂於江淮胡寇又大至百姓南渡者轉多乃於江南僑立淮南郡及諸縣又於尋陽僑置松滋郡遥隸揚州咸康四年僑置魏郡廣川髙陽堂邑等諸郡并所統縣並寄居京邑改陵陽為廣陵孝武寕康二年又分永嘉郡之永寕縣置樂成縣是時上黨百姓南渡僑立上黨郡為四縣寄居蕪湖尋又省上黨郡為縣又罷㐮城郡為繁昌縣並以屬淮南安帝義熙八年省尋陽縣入柴桑縣柴桑仍為郡後又省上甲縣入彭澤縣舊江州督荆州之竟陵郡及何無忌為刺史表以竟陵去州遼逺去江陵三百里荆州所立綏安郡人戶入境欲資此郡助江濵戍防以竟陵郡還荆州又司州之<!-- wikisource-SKchar: {"value": "2592"} -->農揚州之松滋二郡寄在尋陽人戶雜居並宜建督安帝從之後又省松滋郡為松滋縣<!-- wikisource-SKchar: {"value": "2592"} -->農郡為<!-- wikisource-SKchar: {"value": "2592"} -->農縣並屬尋陽郡
+　　○交州按禹貢揚州之域是為南越之土秦始皇既畧定揚越以讁戍卒五十萬人守五嶺自北徂南入越之道必由嶺嶠時有五處故曰五嶺後使任囂趙他攻越畧取陸梁地遂定南越以為桂林南海象等三郡非三十六郡之限乃置南海尉以典之所謂東南一尉也漢初以嶺南三郡及長沙豫章封吳芮為長沙王十一年以南武侯織為南海王陸賈使還拜趙他為南越王割長沙之南三郡以封之武帝元鼎六年討平呂嘉以其地為南海蒼梧鬱林合浦日南九真交阯七郡葢秦時三郡之地元封中又置儋耳珠崖二郡置交阯刺史以督之昭帝元始五年罷儋耳并珠崖元帝元初三年又罷珠崖郡後漢馬援平定交部始調立城郭置井邑順帝永和九年交阯太守周敞求立為州朝議不許即拜敞為交阯刺史桓帝分立髙興郡靈帝改曰髙涼建安八年張津為刺史士燮為交阯太守共表立為州乃拜津為交州牧十五年移居番禺詔以邉州使持節郡給鼔吹以重城鎮加以九錫六佾之舞吳黄武五年割南海蒼梧鬱林三郡立廣州交阯日南九真合浦四郡為交州戴良為刺史值亂不得入呂岱擊平之復還并交部赤烏五年復置珠崖郡永安七年復以前三郡立廣州及孫晧又立新昌武平九徳三郡蜀以李恢為建寕太守遥領交州刺史晉平蜀以蜀建寕太守霍弋遥領交州得以便冝選用長吏平吳後省珠崖入合浦交州統郡七縣五十三戶二萬五千六百
+　　合浦郡<!-- wikisource-note: {"wikitext": "SK notes|漢置統縣六戶二千"} -->
+　　合浦　南平　蕩昌　徐聞　毒質　珠官
+　　交阯郡<!-- wikisource-note: {"wikitext": "SK notes|漢置統縣十四戶一萬二千"} -->
+　　龍編　茍漏　望海　□<!-- wikisource-SKchar: {"value": "2579"} -->　西于　武寕　朱鳶曲易　交興　北帶　稽徐　安定　南定　海平新昌郡<!-- wikisource-note: {"wikitext": "SK notes|吳置統縣六戶三千"} -->
+　　麋泠<!-- wikisource-note: {"wikitext": "SK notes|婦人徵側為主處馬援平之"} -->嘉寕　吳定　封山　臨西　西道
+　　武平郡<!-- wikisource-note: {"wikitext": "SK notes|吳置統縣七戶五千"} -->
+　　武寕　武興　進山　根寕　安武　扶安　封溪九真郡<!-- wikisource-note: {"wikitext": "SK notes|漢置統縣七戶三千"} -->
+　　胥浦　移風　湛梧　建初　常樂　扶樂　松原九徳郡<!-- wikisource-note: {"wikitext": "SK notes|吳置周時越裳氏地統縣八無戶"} -->
+　　九徳　咸驩　南陵　陽遂　扶苓　曲胥　浦陽都洨
+　　日南郡<!-- wikisource-note: {"wikitext": "SK notes|秦置象郡漢武帝改名焉統縣五戶六百"} -->
+　　象林<!-- wikisource-note: {"wikitext": "SK notes|自此南有四國其人皆云漢人子孫今有銅柱亦是漢置此為界貢金供税也"} -->盧容<!-- wikisource-note: {"wikitext": "SK notes|象郡所居"} -->朱吾　西卷　比景
+　　○廣州按禹貢揚州之域秦末趙他所據之地及漢武帝以其地為交阯郡至吳黄武五年分交州之南海蒼梧鬱林髙梁四郡立為廣州俄復舊永安六年復分交州置廣州分合浦立合浦北部以都尉領之孫晧分鬱林立桂林郡及太康中吴平遂以荆州始安始興臨賀三郡來屬合統郡十縣六十八戶四萬三千一百四十南海郡<!-- wikisource-note: {"wikitext": "SK notes|秦置統縣六戶九千五百"} -->
+　　番禺　四㑹　增城　博羅　龍川　平夷
+　　臨賀郡<!-- wikisource-note: {"wikitext": "SK notes|吳置統縣六戶二千五百"} -->
+　　臨賀　謝沐　馮乘　封陽　興安　富川
+　　始安郡<!-- wikisource-note: {"wikitext": "SK notes|吳置統縣七戶六千"} -->
+　　始安　始陽　平樂　荔浦　常安　熙平　永豐始興郡<!-- wikisource-note: {"wikitext": "SK notes|吳置統縣七戶五千"} -->
+　　曲江　桂陽　始興　含洭　湞陽　中宿　陽山蒼梧郡<!-- wikisource-note: {"wikitext": "SK notes|漢置統縣十二戶七千七百"} -->
+　　廣信　端溪　髙要　建陵　新寕　猛陵　鄣平農城　元谿　臨允　都羅　武城
+　　鬱林郡<!-- wikisource-note: {"wikitext": "SK notes|秦置桂郡漢武帝更名統縣九戶六千"} -->
+　　布山　柯林　新邑　晉平　始建　鬱平　領方武熙　安廣
+　　桂林郡<!-- wikisource-note: {"wikitext": "SK notes|吳置統縣八戶二千"} -->
+　　潭中　武豐　粟平　羊平　龍剛　夾陽　武城軍騰
+　　髙涼郡<!-- wikisource-note: {"wikitext": "SK notes|吳置統縣三戶二千"} -->
+　　安寕　髙涼　思平
+　　髙興郡<!-- wikisource-note: {"wikitext": "SK notes|吳置統縣五戶一千二百二十"} -->
+　　廣化　海安　化平　黄陽　西平
+　　寕浦郡<!-- wikisource-note: {"wikitext": "SK notes|吳置統縣五戶一千二百二十"} -->
+　　寕浦　連道　吳安　昌平　平山
+　　武帝後省髙興郡懐帝永嘉元年又以臨賀始興始安三郡凡二十縣為湘州元帝分鬱林立晉興郡成帝分南海立東官郡以始興始安臨賀三郡還屬荆州穆帝分蒼梧立晉康新寕永平三郡哀帝太和中置新安郡安帝分東官立義安郡恭帝分南海立新㑹郡
+　　晉書卷十五
+　　晉書卷十五考證
+　　地理志下零陵郡泠道○道監夲誤陽
+　　揚州分廬陵立廬陵南部都尉○監夲上陵字誤江部誤郡
+　　㑹稽郡剡○剡監夲作郯誤也剡縣屬㑹稽若郯縣則屬東海郡矣
+　　以始興始安臨賀三郡還屬荆州○各夲俱脫始安二字今從夲志荆州稱武帝平吳後又以始興始安臨賀屬廣州増正之
+　　晉書卷十五考證
+<!-- wikisource-skqs-footer: {"wikitext": "SKQS footer|title=晉書|section=卷十五|prev=卷十四|prev_link=卷014|next=卷十六|next_link=卷016|type=史"} --><!-- wikisource-license: {"template": "PD-old"} -->

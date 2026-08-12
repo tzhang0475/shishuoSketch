@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://shishuo-sketch/schema/relation.schema.json",
+  "title": "Relation",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "subject_id",
+    "object_id",
+    "relation_type",
+    "label",
+    "story_ids",
+    "evidence_ids",
+    "time",
+    "assertion_status",
+    "review_status"
+  ],
+  "properties": {
+    "id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._-]*$"},
+    "subject_id": {"type": "string", "minLength": 1},
+    "object_id": {"type": "string", "minLength": 1},
+    "relation_type": {"type": "string", "minLength": 1},
+    "label": {"type": "string", "minLength": 1},
+    "story_ids": {"type": "array", "items": {"type": "string"}, "minItems": 1, "uniqueItems": true},
+    "evidence_ids": {"type": "array", "items": {"type": "string"}, "minItems": 1, "uniqueItems": true},
+    "time": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "label", "start_year", "end_year"],
+      "properties": {
+        "status": {"type": "string", "enum": ["exact", "range", "approximate", "unknown"]},
+        "label": {"type": ["string", "null"]},
+        "start_year": {"type": ["integer", "null"]},
+        "end_year": {"type": ["integer", "null"]}
+      }
+    },
+    "assertion_status": {
+      "type": "string",
+      "enum": ["attested", "reported", "inferred", "unknown"]
+    },
+    "review_status": {
+      "type": "string",
+      "enum": ["candidate", "reviewed", "rejected", "todo"]
+    },
+    "notes": {"type": "string"}
+  }
+}

@@ -1,0 +1,93 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://shishuo-sketch/schema/story.schema.json",
+  "title": "Story",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "title",
+    "title_source",
+    "text",
+    "source_entry_id",
+    "source_ids",
+    "evidence_ids",
+    "person_ids",
+    "mention_ids",
+    "relation_ids",
+    "era_ids",
+    "annotations",
+    "time",
+    "places",
+    "summary",
+    "assertion_status",
+    "review_status"
+  ],
+  "properties": {
+    "id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._-]*$"},
+    "title": {"type": "string", "minLength": 1},
+    "title_source": {"type": "string", "enum": ["source_heading", "project_label", "candidate"]},
+    "text": {"type": "string", "minLength": 1},
+    "source_entry_id": {"type": "string", "minLength": 1},
+    "source_ids": {"type": "array", "items": {"type": "string"}, "minItems": 1, "uniqueItems": true},
+    "evidence_ids": {"type": "array", "items": {"type": "string"}, "minItems": 1, "uniqueItems": true},
+    "person_ids": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+    "mention_ids": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+    "relation_ids": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+    "era_ids": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+    "annotations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "text", "source_location"],
+        "properties": {
+          "id": {"type": "string", "minLength": 1},
+          "text": {"type": "string", "minLength": 1},
+          "source_location": {"type": "string", "minLength": 1}
+        }
+      }
+    },
+    "summary": {"type": ["string", "null"]},
+    "time": {"$ref": "#/$defs/time"},
+    "places": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/place"}
+    },
+    "assertion_status": {"$ref": "#/$defs/assertion_status"},
+    "review_status": {"$ref": "#/$defs/review_status"},
+    "notes": {"type": "string"}
+  },
+  "$defs": {
+    "assertion_status": {
+      "type": "string",
+      "enum": ["attested", "reported", "inferred", "unknown"]
+    },
+    "review_status": {
+      "type": "string",
+      "enum": ["candidate", "reviewed", "rejected", "todo"]
+    },
+    "time": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "label", "start_year", "end_year"],
+      "properties": {
+        "status": {"type": "string", "enum": ["exact", "range", "approximate", "unknown"]},
+        "label": {"type": ["string", "null"]},
+        "start_year": {"type": ["integer", "null"]},
+        "end_year": {"type": ["integer", "null"]}
+      }
+    },
+    "place": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "assertion_status", "review_status", "evidence_ids"],
+      "properties": {
+        "name": {"type": "string", "minLength": 1},
+        "assertion_status": {"$ref": "#/$defs/assertion_status"},
+        "review_status": {"$ref": "#/$defs/review_status"},
+        "evidence_ids": {"type": "array", "items": {"type": "string"}, "uniqueItems": true}
+      }
+    }
+  }
+}

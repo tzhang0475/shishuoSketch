@@ -75,7 +75,7 @@ witnesses:
     notes: "CText page images and the corresponding Wikisource transcription belong to one 四庫全書本 witness family and must not be counted as two independent editions. CText is not bulk-scraped. Neither source may overwrite the primary Kanripo/SBCK text."
   - id: shishuo-jianshu-yujiaxi
     work: "世說新語"
-    role: scholarly-reference
+    role: scholarly-reference-machine
     edition: "世說新語箋疏"
     source_provider: "Chinese Text Project"
     source_type: scholarly-machine-reference
@@ -84,6 +84,9 @@ witnesses:
     local: false
     local_path: null
     remote_record: "https://ctext.org/wiki.pl?if=gb&res=40889"
+    ctp_urn: "ctp:wb40889"
+    api_endpoint: "https://api.ctext.org/gettext"
     text_authority: "scholarly reference; not a textual witness and not a replacement for the primary text"
     structure_authority: "none; reserved for later historical, person, and commentary analysis"
-    notes: "余嘉錫《世說新語箋疏》 is registered for later historical/person/textual analysis. It is not automatically downloaded or scraped. Chinese Text Project currently lists the electronic base edition as unspecified."
+    retrieval_status: "blocked_requires_authentication"
+    notes: "余嘉錫《世說新語箋疏》 is registered for later historical/person/textual analysis. The official CText gettext API was queried, but complete recursive retrieval requires a registered IP or CTEXT_API_KEY; no local copy was created and no HTML fallback is permitted. Chinese Text Project currently lists the electronic base edition as unspecified."

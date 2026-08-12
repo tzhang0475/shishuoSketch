@@ -12,8 +12,10 @@ Examples::
     python scripts/download_witnesses.py --shishuo-wikisource
     python scripts/download_witnesses.py --shishuo-ling
     python scripts/download_witnesses.py --shishuo-ling-volume 3
+    python scripts/download_witnesses.py --shishuo-jianshu
     python scripts/download_witnesses.py --shishuo
     python scripts/download_witnesses.py --jinshu-jiaozhu
+    python scripts/download_witnesses.py --jinshu-wikisource-siku
     python scripts/download_witnesses.py --sanguozhi-song
     python scripts/download_witnesses.py --all
     python scripts/download_witnesses.py --verify
@@ -36,6 +38,7 @@ from pathlib import Path
 import re
 import subprocess
 import sys
+import tempfile
 import time
 from typing import Any, Callable, Iterable, Mapping, Sequence
 from unicodedata import normalize as unicode_normalize
@@ -49,6 +52,11 @@ DEFAULT_CONFIG = Path("config/sources.yaml")
 IA_METADATA_TEMPLATE = "https://archive.org/metadata/{identifier}"
 IA_DOWNLOAD_TEMPLATE = "https://archive.org/download/{identifier}/{filename}"
 IA_ADVANCEDSEARCH_ENDPOINT = "https://archive.org/advancedsearch.php"
+CTEXT_API_ENDPOINT = "https://api.ctext.org/gettext"
+CTEXT_JIANSHU_SOURCE_RECORD = "https://ctext.org/wiki.pl?if=gb&res=40889"
+CTEXT_JIANSHU_URN = "ctp:wb40889"
+CTEXT_JIANSHU_WITNESS_ID = "shishuo-jianshu-yujiaxi"
+CTEXT_JIANSHU_ROOT = "sources/references/shishuo/yujiaxi-jianshu"
 WIKISOURCE_API_ENDPOINT = "https://zh.wikisource.org/w/api.php"
 WIKISOURCE_SOURCE_RECORD = "https://zh.wikisource.org/wiki/世説新語_(四部叢刊本)"
 WIKISOURCE_BASE_TITLE = "世説新語 (四部叢刊本)"
@@ -70,6 +78,12 @@ SHISHUO_LING_VOLUMES = (1, 2, 3)
 WIKISOURCE_PAGE_BATCH_SIZE = 25
 WIKISOURCE_RETRY_LIMIT = 4
 WIKISOURCE_RETRY_DELAY = 10
+JINSHU_WIKISOURCE_SOURCE_RECORD = "https://zh.wikisource.org/wiki/晉書_(四庫全書本)"
+JINSHU_WIKISOURCE_BASE_TITLE = "晉書 (四庫全書本)"
+JINSHU_WIKISOURCE_WITNESS_ID = "jinshu-wikisource-siku"
+JINSHU_WIKISOURCE_ROOT = "sources/downloads/jinshu/wikisource-siku"
+JINSHU_WIKISOURCE_VOLUME_COUNT = 130
+JINSHU_WIKISOURCE_BATCH_SIZE = 10
 JINSHU_FIRST_IDENTIFIER = 18
 JINSHU_LAST_IDENTIFIER = 75
 JINSHU_WITNESS_ID = "jinshu-jiaozhu"
@@ -108,6 +122,15 @@ class AmbiguousFileError(WitnessDownloadError):
 
 class NonMatchingItemError(WitnessDownloadError):
     """Raised when an Internet Archive item is not the requested witness."""
+
+
+class CTextAPIError(WitnessDownloadError):
+    """Raised for a structured error returned by the official CText API."""
+
+    def __init__(self, code: str, description: str) -> None:
+        self.code = code
+        self.description = description
+        super().__init__(f"CText API {code}: {description}")
 
 
 @dataclass(frozen=True)
@@ -154,8 +177,474 @@ class WikisourcePageRange:
     index_title: str
 
 
+@dataclass(frozen=True)
+class CTextAPIResponse:
+    """One raw response from the CText ``gettext`` JSON API."""
+
+    urn: str
+    api_url: str
+    response_identifier: str
+    title: str
+    fulltext: tuple[str, ...]
+    subsections: tuple[str, ...]
+    raw_bytes: bytes
+    payload: Mapping[str, Any]
+
+
 def _timestamp() -> str:
     return datetime.now(timezone.utc).isoformat(timespec="seconds")
+
+
+def ctext_api_url(
+    urn: str,
+    *,
+    endpoint: str = CTEXT_API_ENDPOINT,
+    api_key: str | None = None,
+) -> str:
+    """Build a CText ``gettext`` URL without ever recording an API key."""
+
+    query: dict[str, str] = {"urn": urn}
+    if api_key:
+        query["apikey"] = api_key
+    return f"{endpoint}?{urlencode(query)}"
+
+
+def _ctext_list_of_strings(value: Any, field: str) -> tuple[str, ...]:
+    if not isinstance(value, list):
+        raise WitnessDownloadError(f"CText API {field} is not a list")
+    if not all(isinstance(item, str) for item in value):
+        raise WitnessDownloadError(f"CText API {field} contains a non-string item")
+    return tuple(value)
+
+
+def _ctext_subsection_urns(value: Any) -> tuple[str, ...]:
+    if not isinstance(value, list):
+        raise WitnessDownloadError("CText API subsections is not a list")
+    result: list[str] = []
+    for item in value:
+        if isinstance(item, str):
+            urn = item
+        elif isinstance(item, Mapping):
+            urn = item.get("urn") or item.get("textRef")
+        else:
+            urn = None
+        if not isinstance(urn, str) or not urn:
+            raise WitnessDownloadError("CText API subsection has no URN")
+        result.append(urn)
+    return tuple(result)
+
+
+def parse_ctext_gettext(
+    payload: Mapping[str, Any],
+    *,
+    urn: str,
+    raw_bytes: bytes = b"",
+    api_url: str | None = None,
+) -> CTextAPIResponse:
+    """Parse one official CText ``gettext`` response without text editing."""
+
+    if not isinstance(payload, Mapping):
+        raise WitnessDownloadError("CText API response is not an object")
+    error = payload.get("error")
+    if isinstance(error, Mapping):
+        code = str(error.get("code") or "ERR_GENERIC")
+        description = str(error.get("description") or error.get("html") or "")
+        raise CTextAPIError(code, description)
+    has_fulltext = "fulltext" in payload
+    has_subsections = "subsections" in payload
+    if not has_fulltext and not has_subsections:
+        raise WitnessDownloadError(
+            f"CText API response for {urn} has neither fulltext nor subsections"
+        )
+    fulltext = (
+        _ctext_list_of_strings(payload.get("fulltext"), "fulltext")
+        if has_fulltext
+        else ()
+    )
+    subsections = (
+        _ctext_subsection_urns(payload.get("subsections"))
+        if has_subsections
+        else ()
+    )
+    title = str(payload.get("title") or urn)
+    identifier = str(payload.get("id") or payload.get("urn") or urn)
+    return CTextAPIResponse(
+        urn=urn,
+        api_url=api_url or ctext_api_url(urn),
+        response_identifier=identifier,
+        title=title,
+        fulltext=fulltext,
+        subsections=subsections,
+        raw_bytes=raw_bytes,
+        payload=payload,
+    )
+
+
+def fetch_ctext_gettext(
+    urn: str,
+    *,
+    timeout: float = 120.0,
+    api_key: str | None = None,
+    opener: Callable[..., Any] = urlopen,
+) -> CTextAPIResponse:
+    """Fetch one CText response from the JSON API, never from HTML."""
+
+    resolved_key = api_key if api_key is not None else os.environ.get("CTEXT_API_KEY")
+    request_url = ctext_api_url(urn, api_key=resolved_key)
+    recorded_url = ctext_api_url(urn)
+    request = Request(
+        request_url,
+        headers={
+            "Accept": "application/json",
+            "User-Agent": "shishuoSketch-source-infrastructure/1.0",
+        },
+    )
+    try:
+        try:
+            response = opener(request, timeout=timeout)
+        except TypeError:
+            response = opener(request)
+        with response:
+            raw_bytes = response.read()
+    except HTTPError as error:
+        raise WitnessDownloadError(
+            f"CText API HTTP error {error.code} for {urn}"
+        ) from error
+    try:
+        payload = json.loads(raw_bytes.decode("utf-8"))
+    except (UnicodeDecodeError, json.JSONDecodeError) as error:
+        raise WitnessDownloadError(f"CText API returned invalid UTF-8 JSON for {urn}") from error
+    return parse_ctext_gettext(
+        payload,
+        urn=urn,
+        raw_bytes=raw_bytes,
+        api_url=recorded_url,
+    )
+
+
+def _ctext_response_filename(ordinal: int, urn: str, suffix: str) -> str:
+    digest = hashlib.sha256(urn.encode("utf-8")).hexdigest()[:16]
+    return f"{ordinal:04d}-{digest}.{suffix}"
+
+
+def _ctext_text_bytes(response: CTextAPIResponse) -> bytes:
+    # CText returns an ordered list of paragraphs.  The derived convenience
+    # file only joins those supplied paragraphs with the documented paragraph
+    # separator; no characters within a paragraph are changed.
+    return "\n\n".join(response.fulltext).encode("utf-8")
+
+
+def _walk_ctext_tree(
+    root_urn: str,
+    fetcher: Callable[[str], CTextAPIResponse],
+) -> tuple[list[CTextAPIResponse], dict[str, list[str]], dict[str, list[str]], dict[str, int]]:
+    responses: dict[str, CTextAPIResponse] = {}
+    order: list[str] = []
+    children: dict[str, list[str]] = {}
+    parents: dict[str, list[str]] = {}
+    depths: dict[str, int] = {}
+
+    def visit(urn: str, parent: str | None, depth: int, path: tuple[str, ...]) -> None:
+        if urn in path:
+            raise WitnessDownloadError(f"CText subsection cycle detected at {urn}")
+        if parent is not None:
+            children.setdefault(parent, []).append(urn)
+            parents.setdefault(urn, []).append(parent)
+        if urn in responses:
+            depths[urn] = min(depths[urn], depth)
+            return
+        response = fetcher(urn)
+        responses[urn] = response
+        order.append(urn)
+        depths[urn] = depth
+        children.setdefault(urn, [])
+        for child in response.subsections:
+            visit(child, urn, depth + 1, path + (urn,))
+
+    visit(root_urn, None, 0, ())
+    return [responses[urn] for urn in order], children, parents, depths
+
+
+def _write_ctext_metadata(path: Path, data: Mapping[str, Any]) -> None:
+    """Write the small successful-retrieval metadata file without text edits."""
+
+    lines: list[str] = []
+    scalar_order = (
+        "schema",
+        "id",
+        "work",
+        "role",
+        "edition",
+        "source_provider",
+        "source_type",
+        "local",
+        "local_path",
+        "ctp_urn",
+        "source_url",
+        "api_endpoint",
+        "retrieval_date",
+        "retrieved_response_count",
+        "total_characters",
+        "local_copy_status",
+        "text_authority",
+        "structure_authority",
+    )
+    for key in scalar_order:
+        if key not in data:
+            continue
+        value = data[key]
+        if isinstance(value, bool):
+            rendered = "true" if value else "false"
+        elif value is None:
+            rendered = "null"
+        elif isinstance(value, int):
+            rendered = str(value)
+        else:
+            rendered = json.dumps(str(value), ensure_ascii=False)
+        lines.append(f"{key}: {rendered}")
+    lines.append("section_titles:")
+    for title in data.get("section_titles", []):
+        lines.append(f"  - {json.dumps(str(title), ensure_ascii=False)}")
+    lines.append("notes:")
+    for note in data.get("notes", []):
+        lines.append(f"  - {json.dumps(str(note), ensure_ascii=False)}")
+    path.write_text("\n".join(lines) + "\n", encoding="utf-8", newline="\n")
+
+
+def _ctext_file_record(path: Path, *, kind: str) -> dict[str, Any]:
+    data = path.read_bytes()
+    return {
+        "kind": kind,
+        "path": path.name,
+        "size": len(data),
+        "sha256": hashlib.sha256(data).hexdigest(),
+    }
+
+
+def run_shishuo_jianshu(
+    root: Path,
+    *,
+    timeout: float = 120.0,
+    api_key: str | None = None,
+    fetcher: Callable[[str], CTextAPIResponse] | None = None,
+) -> tuple[Path | None, dict[str, Any]]:
+    """Retrieve the complete CText witness recursively through ``gettext``.
+
+    Retrieval is staged and committed only after every API subsection has
+    been fetched.  An authentication failure therefore leaves no partial
+    local scholarly-reference copy.
+    """
+
+    resolved_key = api_key if api_key is not None else os.environ.get("CTEXT_API_KEY")
+    if fetcher is None:
+        fetcher = lambda urn: fetch_ctext_gettext(
+            urn, timeout=timeout, api_key=resolved_key
+        )
+    try:
+        responses, children, parents, depths = _walk_ctext_tree(
+            CTEXT_JIANSHU_URN, fetcher
+        )
+    except CTextAPIError as error:
+        status = (
+            "blocked_requires_authentication"
+            if error.code in {"ERR_REQUIRES_AUTHENTICATION", "ERR_INVALID_APIKEY"}
+            else "api_error"
+        )
+        return None, {
+            "schema": 1,
+            "witness_id": CTEXT_JIANSHU_WITNESS_ID,
+            "ctp_urn": CTEXT_JIANSHU_URN,
+            "source_url": CTEXT_JIANSHU_SOURCE_RECORD,
+            "api_endpoint": CTEXT_API_ENDPOINT,
+            "status": status,
+            "errors": [{"code": error.code, "description": error.description}],
+            "local_copy_created": False,
+            "api_key_source": "CTEXT_API_KEY environment variable" if resolved_key else "not provided",
+        }
+    except WitnessDownloadError as error:
+        return None, {
+            "schema": 1,
+            "witness_id": CTEXT_JIANSHU_WITNESS_ID,
+            "ctp_urn": CTEXT_JIANSHU_URN,
+            "source_url": CTEXT_JIANSHU_SOURCE_RECORD,
+            "api_endpoint": CTEXT_API_ENDPOINT,
+            "status": "api_error",
+            "errors": [{"code": "LOCAL_RETRIEVAL_ERROR", "description": str(error)}],
+            "local_copy_created": False,
+            "api_key_source": "CTEXT_API_KEY environment variable" if resolved_key else "not provided",
+        }
+
+    if not responses:
+        raise WitnessDownloadError("CText API returned no responses")
+    retrieved_at = _timestamp()
+    section_titles = [response.title for response in responses]
+    total_characters = sum(
+        len(paragraph) for response in responses for paragraph in response.fulltext
+    )
+    destination_root = root / CTEXT_JIANSHU_ROOT
+    destination_parent = destination_root.parent
+    destination_parent.mkdir(parents=True, exist_ok=True)
+    with tempfile.TemporaryDirectory(
+        dir=destination_parent, prefix=".yujiaxi-jianshu-"
+    ) as temporary:
+        stage = Path(temporary) / destination_root.name
+        (stage / "raw").mkdir(parents=True)
+        (stage / "text/sections").mkdir(parents=True)
+        records: list[dict[str, Any]] = []
+        for ordinal, response in enumerate(responses):
+            raw_path = stage / "raw" / _ctext_response_filename(ordinal, response.urn, "json")
+            text_path = stage / "text/sections" / _ctext_response_filename(ordinal, response.urn, "txt")
+            raw_path.write_bytes(response.raw_bytes)
+            text_path.write_bytes(_ctext_text_bytes(response))
+            raw_record = _ctext_file_record(raw_path, kind="api-response")
+            text_record = _ctext_file_record(text_path, kind="derived-text")
+            # The paths above are staged; rewrite them to their eventual
+            # repository-relative names without exposing the temporary path.
+            raw_record["path"] = f"{CTEXT_JIANSHU_ROOT}/raw/{raw_path.name}"
+            text_record["path"] = f"{CTEXT_JIANSHU_ROOT}/text/sections/{text_path.name}"
+            records.append(
+                {
+                    "ordinal": ordinal,
+                    "urn": response.urn,
+                    "api_response_identifier": response.response_identifier,
+                    "title": response.title,
+                    "parent_urns": parents.get(response.urn, []),
+                    "depth": depths[response.urn],
+                    "subsections": list(response.subsections),
+                    "api_url": ctext_api_url(response.urn),
+                    "fulltext_paragraph_count": len(response.fulltext),
+                    "character_count": sum(len(paragraph) for paragraph in response.fulltext),
+                    "files": [raw_record, text_record],
+                }
+            )
+
+        hierarchy = {
+            "schema": 1,
+            "root_urn": CTEXT_JIANSHU_URN,
+            "nodes": [
+                {
+                    "ordinal": record["ordinal"],
+                    "urn": record["urn"],
+                    "title": record["title"],
+                    "parent_urns": record["parent_urns"],
+                    "depth": record["depth"],
+                    "children": children.get(record["urn"], []),
+                }
+                for record in records
+            ],
+        }
+        hierarchy_path = stage / "text/hierarchy.json"
+        hierarchy_path.write_text(
+            json.dumps(hierarchy, ensure_ascii=False, indent=2, sort_keys=True) + "\n",
+            encoding="utf-8",
+            newline="\n",
+        )
+        auxiliary_files = [
+            _ctext_file_record(hierarchy_path, kind="hierarchy")
+        ]
+        auxiliary_files[0]["path"] = f"{CTEXT_JIANSHU_ROOT}/text/hierarchy.json"
+        metadata = {
+            "schema": 1,
+            "id": CTEXT_JIANSHU_WITNESS_ID,
+            "work": "世說新語",
+            "role": "scholarly-reference-machine",
+            "edition": "世說新語箋疏",
+            "source_provider": "Chinese Text Project",
+            "source_type": "scholarly-machine-reference",
+            "local": True,
+            "local_path": CTEXT_JIANSHU_ROOT,
+            "ctp_urn": CTEXT_JIANSHU_URN,
+            "source_url": CTEXT_JIANSHU_SOURCE_RECORD,
+            "api_endpoint": CTEXT_API_ENDPOINT,
+            "retrieval_date": retrieved_at[:10],
+            "retrieved_response_count": len(responses),
+            "total_characters": total_characters,
+            "local_copy_status": "complete",
+            "section_titles": section_titles,
+            "text_authority": "scholarly reference; not a textual witness or replacement for the primary text",
+            "structure_authority": "CText gettext subsection hierarchy only",
+            "notes": [
+                "Raw API response bytes are preserved under raw/.",
+                "UTF-8 section files under text/ are convenience derivatives made from the ordered fulltext paragraphs.",
+                "The API key is read only from CTEXT_API_KEY and is never recorded.",
+            ],
+        }
+        lock = {
+            "schema": 1,
+            "witness_id": CTEXT_JIANSHU_WITNESS_ID,
+            "work": "世說新語",
+            "edition": "世說新語箋疏",
+            "ctp_urn": CTEXT_JIANSHU_URN,
+            "source_url": CTEXT_JIANSHU_SOURCE_RECORD,
+            "api_endpoint": CTEXT_API_ENDPOINT,
+            "status": "complete",
+            "retrieved_at": retrieved_at,
+            "retrieval_date": retrieved_at[:10],
+            "api_key_source": "CTEXT_API_KEY environment variable (not recorded)",
+            "response_count": len(responses),
+            "section_titles": section_titles,
+            "total_characters": total_characters,
+            "records": records,
+            "auxiliary_files": auxiliary_files,
+            "notes": [
+                "Every response was retrieved through the official CText gettext API recursively from the root URN.",
+                "Raw API responses are preserved byte-for-byte; derived text files do not replace them.",
+                "This scholarly reference is not a textual witness and must not overwrite the primary text.",
+            ],
+        }
+        _write_json(stage / "manifest.lock.json", lock)
+        _write_ctext_metadata(stage / "metadata.yaml", metadata)
+
+        if destination_root.exists():
+            stage_files = {path.relative_to(stage) for path in stage.rglob("*") if path.is_file()}
+            existing_files = {path.relative_to(destination_root) for path in destination_root.rglob("*") if path.is_file()}
+            if stage_files != existing_files:
+                raise FileExistsError(
+                    f"refusing to merge differing CText reference file set: {destination_root}"
+                )
+            for relative in sorted(stage_files):
+                if (stage / relative).read_bytes() != (destination_root / relative).read_bytes():
+                    raise FileExistsError(
+                        f"refusing to overwrite differing CText reference file: {destination_root / relative}"
+                    )
+            existing_lock = _read_json(destination_root / "manifest.lock.json") or lock
+            return destination_root / "manifest.lock.json", existing_lock
+        stage.replace(destination_root)
+    return destination_root / "manifest.lock.json", lock
+
+
+def verify_ctext_lock_manifest(root: Path, path: Path) -> list[str]:
+    """Verify raw/derived CText files against their lock manifest."""
+
+    if not path.exists():
+        return [f"missing CText lock manifest: {path}"]
+    try:
+        manifest = _read_json(path)
+    except Exception as error:
+        return [f"{path}: {type(error).__name__}: {error}"]
+    if not manifest or manifest.get("status") != "complete":
+        return [f"{path}: CText retrieval is not complete"]
+    errors: list[str] = []
+    file_records: list[Mapping[str, Any]] = []
+    for record in manifest.get("records", []):
+        if isinstance(record, Mapping):
+            file_records.extend(
+                item for item in record.get("files", []) if isinstance(item, Mapping)
+            )
+    file_records.extend(
+        item for item in manifest.get("auxiliary_files", []) if isinstance(item, Mapping)
+    )
+    for record in file_records:
+        file_path = root / str(record.get("path", ""))
+        if not file_path.is_file():
+            errors.append(f"{file_path}: file is missing")
+            continue
+        data = file_path.read_bytes()
+        if len(data) != record.get("size"):
+            errors.append(f"{file_path}: size differs from manifest")
+        if hashlib.sha256(data).hexdigest() != record.get("sha256"):
+            errors.append(f"{file_path}: SHA-256 differs from manifest")
+    return errors
 
 
 def _as_int(value: Any) -> int | None:
@@ -409,6 +898,146 @@ def fetch_wikisource_revisions(
     api_url = wikisource_api_url("|".join(titles))
     payload = _fetch_wikisource_json(api_url, timeout=timeout, opener=opener)
     return parse_wikisource_revisions(payload, titles=titles, api_url=api_url)
+
+
+def _fetch_wikisource_json_bytes(
+    api_url: str,
+    *,
+    timeout: float,
+    opener: Callable[..., Any],
+) -> tuple[bytes, Mapping[str, Any]]:
+    """Fetch one MediaWiki response while retaining its exact API bytes."""
+
+    for attempt in range(WIKISOURCE_RETRY_LIMIT + 1):
+        request = Request(
+            api_url,
+            headers={
+                "Accept": "application/json",
+                "User-Agent": "shishuoSketch-source-infrastructure/1.0",
+            },
+        )
+        try:
+            try:
+                response = opener(request, timeout=timeout)
+            except TypeError:
+                response = opener(request)
+            with response:
+                raw_bytes = response.read()
+            if not isinstance(raw_bytes, bytes):
+                raise WitnessDownloadError("Wikisource API response was not bytes")
+            payload = json.loads(raw_bytes.decode("utf-8"))
+            if not isinstance(payload, Mapping):
+                raise WitnessDownloadError("Wikisource API response is not an object")
+            return raw_bytes, payload
+        except HTTPError as error:
+            if error.code != 429 or attempt >= WIKISOURCE_RETRY_LIMIT:
+                raise
+            retry_after = error.headers.get("Retry-After") if error.headers else None
+            try:
+                delay = int(retry_after) if retry_after else WIKISOURCE_RETRY_DELAY * (attempt + 1)
+            except (TypeError, ValueError):
+                delay = WIKISOURCE_RETRY_DELAY * (attempt + 1)
+            time.sleep(min(max(delay, 1), 60))
+    raise WitnessDownloadError("unreachable Wikisource API retry state")
+
+
+def fetch_wikisource_revisions_with_raw(
+    titles: Sequence[str],
+    *,
+    timeout: float = 60.0,
+    opener: Callable[..., Any] = urlopen,
+) -> tuple[list[WikisourceRevision], bytes, str]:
+    """Fetch a batch of revisions and retain the exact JSON response bytes."""
+
+    if not titles:
+        return [], b"", wikisource_api_url("")
+    api_url = wikisource_api_url("|".join(titles))
+    raw_bytes, payload = _fetch_wikisource_json_bytes(
+        api_url, timeout=timeout, opener=opener
+    )
+    return parse_wikisource_revisions(payload, titles=titles, api_url=api_url), raw_bytes, api_url
+
+
+def jinshu_wikisource_discovery_url(
+    *, endpoint: str = WIKISOURCE_API_ENDPOINT
+) -> str:
+    """Build the API query used to discover the numbered volume subpages."""
+
+    query = urlencode(
+        {
+            "action": "query",
+            "format": "json",
+            "formatversion": "2",
+            "list": "allpages",
+            "apnamespace": "0",
+            "apprefix": f"{JINSHU_WIKISOURCE_BASE_TITLE}/卷",
+            "aplimit": "max",
+        }
+    )
+    return f"{endpoint}?{query}"
+
+
+def jinshu_wikisource_volume_titles(
+    volume_count: int = JINSHU_WIKISOURCE_VOLUME_COUNT,
+) -> dict[int, str]:
+    """Return the discovered source-page convention for the 130 volumes.
+
+    Wikisource stores volume one in the base page.  Volumes two onward use
+    zero-padded ``/卷NNN`` subpages; this mapping is later checked against the
+    API's prefix discovery response before any source text is accepted.
+    """
+
+    if volume_count < 1:
+        raise ValueError("volume_count must be positive")
+    return {
+        1: JINSHU_WIKISOURCE_BASE_TITLE,
+        **{
+            number: f"{JINSHU_WIKISOURCE_BASE_TITLE}/卷{number:03d}"
+            for number in range(2, volume_count + 1)
+        },
+    }
+
+
+def parse_jinshu_wikisource_discovery(
+    payload: Mapping[str, Any],
+) -> dict[str, Any]:
+    """Parse the API prefix listing without interpreting source text."""
+
+    query = payload.get("query")
+    if not isinstance(query, Mapping):
+        raise WitnessDownloadError("Jinshu Wikisource discovery has no query object")
+    pages = query.get("allpages")
+    if not isinstance(pages, list):
+        raise WitnessDownloadError("Jinshu Wikisource discovery has no allpages list")
+    page_titles = [
+        str(page["title"])
+        for page in pages
+        if isinstance(page, Mapping) and isinstance(page.get("title"), str)
+    ]
+    pattern = re.compile(
+        rf"^{re.escape(JINSHU_WIKISOURCE_BASE_TITLE)}/卷(?P<number>\d{{3}})$"
+    )
+    by_volume: dict[int, list[str]] = {}
+    unexpected: list[str] = []
+    for title in page_titles:
+        match = pattern.fullmatch(title)
+        if match is None:
+            unexpected.append(title)
+            continue
+        number = int(match.group("number"))
+        by_volume.setdefault(number, []).append(title)
+    duplicates = sorted(number for number, titles in by_volume.items() if len(titles) > 1)
+    return {
+        "page_titles": page_titles,
+        "volume_titles": {
+            number: titles[0]
+            for number, titles in sorted(by_volume.items())
+            if len(titles) == 1
+        },
+        "discovered_volumes": sorted(by_volume),
+        "duplicate_volumes": duplicates,
+        "unexpected_pages": sorted(unexpected),
+    }
 
 
 def parse_wikisource_page_ranges(
@@ -1481,6 +2110,305 @@ def run_shishuo_wikisource(
     return lock_path, manifest
 
 
+def _write_bytes_without_overwrite(path: Path, data: bytes) -> tuple[str, int, str]:
+    """Write a payload atomically, refusing a differing existing payload."""
+
+    digest = hashlib.sha256(data).hexdigest()
+    if path.exists():
+        existing_digest = sha256_file(path)
+        if existing_digest != digest:
+            raise FileExistsError(f"refusing to overwrite differing payload: {path}")
+        return "verified-existing", len(data), digest
+    path.parent.mkdir(parents=True, exist_ok=True)
+    partial = path.with_name(path.name + ".part")
+    partial.write_bytes(data)
+    partial.replace(path)
+    return "downloaded", len(data), digest
+
+
+def _write_jinshu_wikisource_metadata(path: Path, data: Mapping[str, Any]) -> None:
+    """Write compact, trackable metadata for the Wikisource completion witness."""
+
+    scalar_keys = (
+        "schema",
+        "id",
+        "work",
+        "role",
+        "edition",
+        "source_provider",
+        "source_type",
+        "local",
+        "local_path",
+        "source_record",
+        "api_endpoint",
+        "coverage",
+        "expected_volume_count",
+        "discovered_volume_page_count",
+        "retrieved_volume_count",
+        "retrieval_date",
+        "status",
+        "text_authority",
+        "structure_authority",
+    )
+    lines: list[str] = []
+    for key in scalar_keys:
+        if key not in data:
+            continue
+        value = data[key]
+        if isinstance(value, bool):
+            rendered = "true" if value else "false"
+        elif value is None:
+            rendered = "null"
+        elif isinstance(value, int):
+            rendered = str(value)
+        else:
+            rendered = json.dumps(str(value), ensure_ascii=False)
+        lines.append(f"{key}: {rendered}")
+    lines.append("volume_page_titles:")
+    for number, title in sorted(data.get("volume_page_titles", {}).items(), key=lambda item: int(item[0])):
+        lines.append(f"  - volume: {int(number)}")
+        lines.append(f"    page_title: {json.dumps(str(title), ensure_ascii=False)}")
+    lines.append("missing_volumes:")
+    for number in data.get("missing_volumes", []):
+        lines.append(f"  - {int(number)}")
+    lines.append("notes:")
+    for note in data.get("notes", []):
+        lines.append(f"  - {json.dumps(str(note), ensure_ascii=False)}")
+    path.parent.mkdir(parents=True, exist_ok=True)
+    temporary = path.with_name(path.name + ".tmp")
+    temporary.write_text("\n".join(lines) + "\n", encoding="utf-8", newline="\n")
+    temporary.replace(path)
+
+
+def run_jinshu_wikisource(
+    root: Path,
+    *,
+    timeout: float = 120.0,
+    discovery_fetcher: Callable[[], tuple[bytes, Mapping[str, Any]]] | None = None,
+    batch_fetcher: Callable[
+        [Sequence[str]], tuple[list[WikisourceRevision], bytes, str]
+    ] | None = None,
+) -> tuple[Path, dict[str, Any]]:
+    """Retrieve the 130 Wikisource 四庫全書本 volume pages through the API."""
+
+    destination_root = root / JINSHU_WIKISOURCE_ROOT
+    raw_root = destination_root / "raw"
+    text_root = destination_root / "text"
+    lock_path = destination_root / "manifest.lock.json"
+    volume_titles = jinshu_wikisource_volume_titles()
+    errors: list[dict[str, Any]] = []
+    records: list[dict[str, Any]] = []
+    auxiliary_files: list[dict[str, Any]] = []
+
+    discovery_url = jinshu_wikisource_discovery_url()
+    try:
+        if discovery_fetcher is None:
+            discovery_bytes, discovery_payload = _fetch_wikisource_json_bytes(
+                discovery_url, timeout=timeout, opener=urlopen
+            )
+        else:
+            discovery_bytes, discovery_payload = discovery_fetcher()
+        discovery = parse_jinshu_wikisource_discovery(discovery_payload)
+        discovery_path = raw_root / "discovery-allpages.json"
+        status, size, digest = _write_bytes_without_overwrite(discovery_path, discovery_bytes)
+        auxiliary_files.append(
+            {
+                "kind": "api-discovery",
+                "path": discovery_path.relative_to(root).as_posix(),
+                "size": size,
+                "sha256": digest,
+                "status": status,
+                "source_url": discovery_url,
+            }
+        )
+    except Exception as error:
+        discovery = {
+            "page_titles": [],
+            "volume_titles": {},
+            "discovered_volumes": [],
+            "duplicate_volumes": [],
+            "unexpected_pages": [],
+        }
+        errors.append(
+            {
+                "kind": "discovery",
+                "reason": f"{type(error).__name__}: {error}",
+            }
+        )
+
+    discovered_volumes = set(discovery["discovered_volumes"])
+    expected_subpages = set(range(2, JINSHU_WIKISOURCE_VOLUME_COUNT + 1))
+    missing_discovered = sorted(expected_subpages - discovered_volumes)
+    if discovery["duplicate_volumes"]:
+        errors.append(
+            {
+                "kind": "discovery",
+                "reason": f"duplicate volume page numbers: {discovery['duplicate_volumes']}",
+            }
+        )
+    if missing_discovered:
+        errors.append(
+            {
+                "kind": "discovery",
+                "reason": f"missing volume page numbers: {missing_discovered}",
+            }
+        )
+
+    all_titles = [volume_titles[number] for number in sorted(volume_titles)]
+    if batch_fetcher is None:
+        batch_fetcher = lambda titles: fetch_wikisource_revisions_with_raw(
+            titles, timeout=timeout
+        )
+    seen_volumes: set[int] = set()
+    for batch_number, offset in enumerate(
+        range(0, len(all_titles), JINSHU_WIKISOURCE_BATCH_SIZE), start=1
+    ):
+        titles = all_titles[offset : offset + JINSHU_WIKISOURCE_BATCH_SIZE]
+        raw_path = raw_root / f"batch-{batch_number:03d}.json"
+        try:
+            revisions, raw_bytes, api_url = batch_fetcher(titles)
+            raw_status, raw_size, raw_digest = _write_bytes_without_overwrite(
+                raw_path, raw_bytes
+            )
+            auxiliary_files.append(
+                {
+                    "kind": "api-revision-batch",
+                    "path": raw_path.relative_to(root).as_posix(),
+                    "size": raw_size,
+                    "sha256": raw_digest,
+                    "status": raw_status,
+                    "source_url": api_url,
+                    "page_titles": list(titles),
+                }
+            )
+            by_title = {revision.page_title: revision for revision in revisions}
+            for number, title in sorted(volume_titles.items()):
+                if title not in titles:
+                    continue
+                revision = by_title.get(title)
+                if revision is None:
+                    raise WitnessDownloadError(
+                        f"Wikisource batch response omitted page: {title}"
+                    )
+                if number in seen_volumes:
+                    raise WitnessDownloadError(f"duplicate fetched volume: {number}")
+                if not revision.content:
+                    raise WitnessDownloadError(f"empty Wikisource source page: {title}")
+                if number == 1 and not re.search(r"晉書[卷巻]一", revision.content):
+                    raise WitnessDownloadError(
+                        "the base Wikisource page does not contain the volume-one heading"
+                    )
+                text_path = text_root / f"volume-{number:03d}.txt"
+                text_status, text_size, text_digest = _write_bytes_without_overwrite(
+                    text_path, revision.content.encode("utf-8")
+                )
+                retrieved_at = _timestamp()
+                records.append(
+                    {
+                        "witness_id": JINSHU_WIKISOURCE_WITNESS_ID,
+                        "volume": number,
+                        "page_title": revision.page_title,
+                        "source_url": revision.source_url,
+                        "api_url": revision.api_url,
+                        "page_id": revision.page_id,
+                        "revision_id": revision.revision_id,
+                        "parent_revision_id": revision.parent_revision_id,
+                        "revision_timestamp": revision.timestamp,
+                        "raw_api_path": raw_path.relative_to(root).as_posix(),
+                        "raw_api_size": raw_size,
+                        "raw_api_sha256": raw_digest,
+                        "text_path": text_path.relative_to(root).as_posix(),
+                        "text_size": text_size,
+                        "text_sha256": text_digest,
+                        "retrieved_at": retrieved_at,
+                        "retrieval_date": retrieved_at[:10],
+                        "status": text_status,
+                        "files": [
+                            {
+                                "kind": "source-text",
+                                "path": text_path.relative_to(root).as_posix(),
+                                "size": text_size,
+                                "sha256": text_digest,
+                                "status": text_status,
+                            }
+                        ],
+                        "text_authority": "same-edition machine completion/reference; not a replacement for Kanripo",
+                    }
+                )
+                seen_volumes.add(number)
+        except Exception as error:
+            errors.append(
+                {
+                    "kind": "volume-batch",
+                    "page_titles": list(titles),
+                    "reason": f"{type(error).__name__}: {error}",
+                }
+            )
+
+    missing_fetched = sorted(set(volume_titles) - seen_volumes)
+    if missing_fetched:
+        errors.append(
+            {
+                "kind": "retrieval",
+                "reason": f"volume source pages not retrieved: {missing_fetched}",
+            }
+        )
+    records.sort(key=lambda record: int(record["volume"]))
+    status = "complete" if len(records) == JINSHU_WIKISOURCE_VOLUME_COUNT and not errors else "incomplete"
+    manifest: dict[str, Any] = {
+        "schema": 1,
+        "witness_id": JINSHU_WIKISOURCE_WITNESS_ID,
+        "source_record": JINSHU_WIKISOURCE_SOURCE_RECORD,
+        "api_endpoint": WIKISOURCE_API_ENDPOINT,
+        "base_title": JINSHU_WIKISOURCE_BASE_TITLE,
+        "coverage": "1-130",
+        "expected_volume_count": JINSHU_WIKISOURCE_VOLUME_COUNT,
+        "retrieved_volume_count": len(records),
+        "discovered_volume_page_count": len(discovered_volumes),
+        "discovery_page_titles": discovery["page_titles"],
+        "discovery_unexpected_pages": discovery["unexpected_pages"],
+        "missing_volumes": missing_fetched,
+        "duplicate_volumes": discovery["duplicate_volumes"],
+        "retrieved_at": _timestamp(),
+        "status": status,
+        "records": records,
+        "auxiliary_files": auxiliary_files,
+        "errors": errors,
+        "notes": [
+            "Volume one is the base page 晉書 (四庫全書本); volume pages two through 130 use zero-padded /卷NNN titles discovered through the MediaWiki API.",
+            "Raw API JSON responses and returned UTF-8 source text are retained without markup normalization or textual correction.",
+            "This witness completes source coverage for comparison and does not overwrite the partial Kanripo machine witness.",
+        ],
+    }
+    _write_json(lock_path, manifest)
+    metadata = {
+        "schema": 1,
+        "id": JINSHU_WIKISOURCE_WITNESS_ID,
+        "work": "晉書",
+        "role": "same-edition-machine-completion",
+        "edition": "欽定四庫全書本",
+        "source_provider": "Wikisource",
+        "source_type": "MediaWiki-wikitext",
+        "local": True,
+        "local_path": JINSHU_WIKISOURCE_ROOT,
+        "source_record": JINSHU_WIKISOURCE_SOURCE_RECORD,
+        "api_endpoint": WIKISOURCE_API_ENDPOINT,
+        "coverage": "1-130",
+        "expected_volume_count": JINSHU_WIKISOURCE_VOLUME_COUNT,
+        "discovered_volume_page_count": len(discovered_volumes),
+        "retrieved_volume_count": len(records),
+        "retrieval_date": manifest["retrieved_at"][:10],
+        "status": status,
+        "volume_page_titles": {str(number): title for number, title in volume_titles.items()},
+        "missing_volumes": missing_fetched,
+        "text_authority": "same-edition machine completion/reference; not a replacement for Kanripo",
+        "structure_authority": "MediaWiki page titles and explicit source volume headings",
+        "notes": manifest["notes"],
+    }
+    _write_jinshu_wikisource_metadata(destination_root / "metadata.yaml", metadata)
+    return lock_path, manifest
+
+
 def _read_json(path: Path) -> dict[str, Any] | None:
     if not path.exists():
         return None
@@ -1966,26 +2894,29 @@ def _load_yaml(path: Path) -> Mapping[str, Any]:
     return value
 
 
-def _resolve_download_roots(root: Path, config_path: Path) -> tuple[Path, Path, Path, Path]:
+def _resolve_download_roots(root: Path, config_path: Path) -> tuple[Path, Path, Path, Path, Path]:
     config = _load_yaml(config_path)
     shishuo_wikisource = root / _config_value(config, "shishuo_wikisource")
     shishuo_ling = root / _config_value(config, "shishuo_ling")
     jinshu = root / _config_value(config, "jinshu_jiaozhu")
     sanguozhi = root / _config_value(config, "sanguozhi_song")
+    jinshu_wikisource = root / _config_value(config, "jinshu_wikisource_siku")
     expected_shishuo_wikisource = root / "sources/downloads/shishuo/wikisource-sbck"
     expected_shishuo_ling = root / "sources/downloads/shishuo/ling-1615"
     expected_jinshu = root / "sources/downloads/jinshu/jinshu-jiaozhu"
     expected_sanguozhi = root / "sources/downloads/sanguozhi/song-edition"
+    expected_jinshu_wikisource = root / JINSHU_WIKISOURCE_ROOT
     if (
         shishuo_wikisource != expected_shishuo_wikisource
         or shishuo_ling != expected_shishuo_ling
         or jinshu != expected_jinshu
         or sanguozhi != expected_sanguozhi
+        or jinshu_wikisource != expected_jinshu_wikisource
     ):
         raise WitnessDownloadError(
             "download roots in config/sources.yaml do not match the registered witness layout"
         )
-    return jinshu, sanguozhi, shishuo_wikisource, shishuo_ling
+    return jinshu, sanguozhi, shishuo_wikisource, shishuo_ling, jinshu_wikisource
 
 
 def _verify_file_record(root: Path, record: Mapping[str, Any]) -> list[str]:
@@ -2023,6 +2954,9 @@ def verify_lock_manifest(root: Path, path: Path) -> list[str]:
         if isinstance(record, Mapping):
             for file_record in record.get("files", []):
                 errors.extend(_verify_file_record(root, file_record))
+    for file_record in manifest.get("auxiliary_files", []):
+        if isinstance(file_record, Mapping):
+            errors.extend(_verify_file_record(root, file_record))
     if manifest.get("errors"):
         errors.append(f"{path}: manifest records discovery/download errors")
     return errors
@@ -2099,8 +3033,10 @@ def build_argument_parser() -> argparse.ArgumentParser:
     modes.add_argument("--shishuo-wikisource", action="store_true", help="download the Shishuo Wikisource 四部叢刊 machine reference")
     modes.add_argument("--shishuo-ling", action="store_true", help="download the Shishuo 1615 凌氏刻本 PDF and OCR derivatives")
     modes.add_argument("--shishuo-ling-volume", type=int, choices=SHISHUO_LING_VOLUMES, help="refresh only one existing Shishuo 1615 Ling volume PDF")
+    modes.add_argument("--shishuo-jianshu", action="store_true", help="retrieve 余嘉錫《箋疏》 through the official CText gettext API")
     modes.add_argument("--shishuo", action="store_true", help="download registered downloadable Shishuo witnesses")
     modes.add_argument("--jinshu-jiaozhu", action="store_true", help="discover and download the Jinshu 斠注 series")
+    modes.add_argument("--jinshu-wikisource-siku", action="store_true", help="download the Jinshu 四庫全書本 completion from Wikisource's MediaWiki API")
     modes.add_argument("--sanguozhi-song", action="store_true", help="discover and download the selected Sanguozhi Song-edition derivatives")
     modes.add_argument("--all", action="store_true", help="download both witnesses; excludes archival JP2")
     modes.add_argument("--verify", action="store_true", help="verify existing lock manifests and downloaded hashes")
@@ -2121,7 +3057,13 @@ def main(argv: Sequence[str] | None = None) -> int:
     root = args.root.resolve()
     config = args.config if args.config.is_absolute() else root / args.config
     try:
-        jinshu_root, sanguozhi_root, shishuo_wikisource_root, shishuo_ling_root = _resolve_download_roots(root, config)
+        (
+            jinshu_root,
+            sanguozhi_root,
+            shishuo_wikisource_root,
+            shishuo_ling_root,
+            jinshu_wikisource_root,
+        ) = _resolve_download_roots(root, config)
         if args.list:
             _print_shishuo_list(discover_shishuo_ling())
             _print_jinshu_list(discover_jinshu())
@@ -2132,6 +3074,13 @@ def main(argv: Sequence[str] | None = None) -> int:
             errors.extend(verify_lock_manifest(root, shishuo_ling_root / "manifest.lock.json"))
             errors.extend(verify_lock_manifest(root, jinshu_root / "manifest.lock.json"))
             errors.extend(verify_lock_manifest(root, sanguozhi_root / "manifest.lock.json"))
+            if (jinshu_wikisource_root / "manifest.lock.json").exists():
+                errors.extend(
+                    verify_lock_manifest(root, jinshu_wikisource_root / "manifest.lock.json")
+                )
+            ctext_lock = root / CTEXT_JIANSHU_ROOT / "manifest.lock.json"
+            if ctext_lock.exists():
+                errors.extend(verify_ctext_lock_manifest(root, ctext_lock))
             if errors:
                 for error in errors:
                     print(f"ERROR: {error}", file=sys.stderr)
@@ -2155,8 +3104,23 @@ def main(argv: Sequence[str] | None = None) -> int:
                     {},
                 )
             )
+        if args.shishuo_jianshu:
+            ctext_lock, ctext_manifest = run_shishuo_jianshu(
+                root, timeout=args.timeout
+            )
+            if ctext_lock is None:
+                for error in ctext_manifest.get("errors", []):
+                    print(
+                        f"CText retrieval not completed: {error.get('code')}: "
+                        f"{error.get('description')}",
+                        file=sys.stderr,
+                    )
+                return 1
+            results.append((ctext_lock, {}))
         if args.jinshu_jiaozhu or args.all:
             results.append((run_jinshu(root, timeout=args.timeout)[0], {}))
+        if args.jinshu_wikisource_siku or args.all:
+            results.append((run_jinshu_wikisource(root, timeout=args.timeout)[0], {}))
         if args.sanguozhi_song or args.all:
             if args.include_archival and args.all:
                 parser.error("--include-archival is not enabled by --all; use --sanguozhi-song explicitly")

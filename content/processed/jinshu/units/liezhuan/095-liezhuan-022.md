@@ -1,0 +1,40 @@
+---
+schema: 1
+unit_id: "095-liezhuan-022"
+work: "晉書"
+volume: "卷95"
+volume_number: 95
+volume_occurrence: 1
+category: "liezhuan"
+category_heading: "列傳第六十五"
+title: "郭黁"
+heading_text: "　　郭黁"
+unit_kind: "biography"
+parent_unit: null
+source_witness: "jinshu-wikisource-siku"
+source_file: "content/processed/jinshu/volume-095.md"
+source_path: "sources/downloads/jinshu/wikisource-siku/text/volume-095.txt"
+source_sha256: "8408ce4c353f2015954336f7a06d17f22d6106528d3ff94d3684fd3564816a5f"
+normalized_file_sha256: "66c699598cee220e048a5b00d539eab7856c077771a2ddb5ffc8efb4dc5fc093"
+source_span:
+  coordinate: "normalized_body"
+  start_char: 14165
+  end_char_exclusive: 14747
+  start_utf8_byte: 39009
+  end_utf8_byte_exclusive: 40751
+  source_line_start: 70
+  source_line_end: 71
+  start_anchor: "　　郭黁"
+  end_anchor: "　　郭黁西平人也少明老易仕郡主簿張天錫末年苻氏每有西伐之問太守趙凝使黁筮之黁曰若郡内二月十五日失囚者東軍當至涼祚必終凝乃申約屬縣至十五日鮮卑折掘送馬於凝凝怒其非駿幽之内廐鮮卑懼而夜遁凝以告黁黁曰是也國家將亡不可復振苻堅末當陽門震刺史梁熙問黁曰其祥安在黁曰為四夷之事也當有外國二王來朝主上一當反國一死此城歲餘而鄯善及前部王朝于苻堅西歸鄯善王死於姑臧呂光之王河西也西海太守王楨叛黁勸光襲之光之左丞呂寳曰千里襲人自昔所難况王者之師天下所聞何可僥倖以邀成功黁不可從誤人大事黁曰若其不㨗黁自伏鈇鉞之誅如其剋也左丞為無謀矣光從而剋之光比之京管常叅幃幄密謀光將伐乞伏乾歸黁諌曰今太白未出不宜行師往必無功終當覆敗太史令賈曜以為必有秦隴之地及剋金城光使曜詰黁黁密謂光曰昨有流星東墜當有伏尸死將雖得此城憂在不守正月上旬河氷將解若不早渡恐有大變後二日而敗問至光引軍渡河訖氷泮時人服其神驗光以黁為散騎常侍太常黁後以光年老知其將敗遂與光僕射王祥起兵作亂百姓聞黁起兵咸以聖人起事事無不成故相率從之如不及黁以為代呂者王乃推王乞基為主後呂隆降姚興興以王尚為涼州刺史終如黁言黁之與光相持也逃人稱呂統病死黁曰未也光統之命盡在一時後統死三日而光死黁嘗曰涼州謙光殿後當有索頭鮮卑居之終於禿髪傉檀沮渠蒙遜迭據姑臧黁性褊酷不為士庶所附戰敗奔乞伏乾歸乾歸敗入姚興黁以滅姚者晉遂將妻子南奔為追兵所殺也"
+page_marker_ids: []
+unit_text_sha256: "059ae713468db62cff92b79d3cb748d0d84761662e17f4523101dc2c0a3640fd"
+character_count: 582
+boundary_confidence: "high"
+note: "The boundary is based on a short stand-alone heading followed by its biography text."
+text_policy: "verbatim substring of normalized primary-witness Markdown body; no reference-witness text inserted"
+---
+
+## Original source (exact)
+
+　　郭黁
+　　郭黁西平人也少明老易仕郡主簿張天錫末年苻氏每有西伐之問太守趙凝使黁筮之黁曰若郡内二月十五日失囚者東軍當至涼祚必終凝乃申約屬縣至十五日鮮卑折掘送馬於凝凝怒其非駿幽之内廐鮮卑懼而夜遁凝以告黁黁曰是也國家將亡不可復振苻堅末當陽門震刺史梁熙問黁曰其祥安在黁曰為四夷之事也當有外國二王來朝主上一當反國一死此城歲餘而鄯善及前部王朝于苻堅西歸鄯善王死於姑臧呂光之王河西也西海太守王楨叛黁勸光襲之光之左丞呂寳曰千里襲人自昔所難况王者之師天下所聞何可僥倖以邀成功黁不可從誤人大事黁曰若其不㨗黁自伏鈇鉞之誅如其剋也左丞為無謀矣光從而剋之光比之京管常叅幃幄密謀光將伐乞伏乾歸黁諌曰今太白未出不宜行師往必無功終當覆敗太史令賈曜以為必有秦隴之地及剋金城光使曜詰黁黁密謂光曰昨有流星東墜當有伏尸死將雖得此城憂在不守正月上旬河氷將解若不早渡恐有大變後二日而敗問至光引軍渡河訖氷泮時人服其神驗光以黁為散騎常侍太常黁後以光年老知其將敗遂與光僕射王祥起兵作亂百姓聞黁起兵咸以聖人起事事無不成故相率從之如不及黁以為代呂者王乃推王乞基為主後呂隆降姚興興以王尚為涼州刺史終如黁言黁之與光相持也逃人稱呂統病死黁曰未也光統之命盡在一時後統死三日而光死黁嘗曰涼州謙光殿後當有索頭鮮卑居之終於禿髪傉檀沮渠蒙遜迭據姑臧黁性褊酷不為士庶所附戰敗奔乞伏乾歸乾歸敗入姚興黁以滅姚者晉遂將妻子南奔為追兵所殺也

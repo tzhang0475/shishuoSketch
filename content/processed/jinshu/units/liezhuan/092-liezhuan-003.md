@@ -1,0 +1,40 @@
+---
+schema: 1
+unit_id: "092-liezhuan-003"
+work: "晉書"
+volume: "卷92"
+volume_number: 92
+volume_occurrence: 1
+category: "liezhuan"
+category_heading: "列傳第六十二"
+title: "左思"
+heading_text: "　　左思"
+unit_kind: "biography"
+parent_unit: null
+source_witness: "jinshu-wikisource-siku"
+source_file: "content/processed/jinshu/volume-092.md"
+source_path: "sources/downloads/jinshu/wikisource-siku/text/volume-092.txt"
+source_sha256: "d8193add0b9fbc5ff5c6e1591294c66f42b3c8c1e561c55e9075c722a313faa9"
+normalized_file_sha256: "e652bafacc280efe22caa0d7761ffefa6019b65e9a8d0436aaa55c37eb89f01c"
+source_span:
+  coordinate: "normalized_body"
+  start_char: 3452
+  end_char_exclusive: 4126
+  start_utf8_byte: 8742
+  end_utf8_byte_exclusive: 10760
+  source_line_start: 34
+  source_line_end: 35
+  start_anchor: "　　左思"
+  end_anchor: "　　左思字太沖齊國臨淄人也其先齊之公族有左右公子因為氏焉家世儒學父雍起小吏以能擢授殿中侍御史思少學鍾胡書及鼓琴並不成雍謂友人曰思所曉觧不及我少時思遂感激勤學兼善隂陽之術貌寢口訥而辭藻壯麗不好交遊惟以閑居為事造齊都賦一年乃成復欲賦三都㑹妺芬入宫移家京師乃詣著作郎張載訪岷卭之事遂構思十年門庭藩溷皆著筆紙遇得一句即便疏之自以所見不博求為秘書郎及賦成時人未之重思自以其作不謝班張恐以人廢言安定皇甫謐有髙譽思造而示之謐稱善為其賦序張載為注魏都劉逵注吳蜀而序之曰觀中古已來為賦者多矣相如子虛擅名於前班固兩都理勝其辭張衡二京文過其意至若此賦擬議數家傅辭㑹義抑多精致非夫研覈者不能練其㫖非夫博物者不能統其異世咸貴逺而賤近莫肯用心於明物斯文吾有異焉故聊以餘思為其引詁亦猶胡廣之於官箴蔡雍之於典引也陳留衞瓘又為思賦作略觧序曰余觀三都之賦言不茍華必經典要品物殊類稟之圖籍辭義瓌瑋良可貴也有晉徵士故太子中庶子安定皇甫謐西州之逸士躭籍樂道髙尚其事覽斯文而慷慨為之都序中書著作郎安平張載中書郎濟南劉逵並以經學洽博才章美茂咸皆悦玩為之訓詁其山川土域草木鳥獸竒怪珍異僉皆研精所由紛散其義矣余嘉其文不能黙已聊藉二子之遺忘又為之略解秪增煩重覽者闕焉自是之後盛重於時文多不載司空張華見而歎曰班張之流也使讀之者盡而有餘久而更新於是豪貴之家競相傳寫洛陽為之紙貴初陸機入洛欲為此賦聞思作之撫掌而笑與弟雲書曰此間有傖父欲作三都賦湏其成當以覆酒甕耳及思賦出機絶歎伏以為不能加也遂輟筆焉秘書監賈謐請講漢書謐誅退居宜春里專意典籍齊王冏命為記室督辭疾不就及張方縱暴都邑舉家適冀州數歲以疾終"
+page_marker_ids: []
+unit_text_sha256: "c9a21e74b0b7aec091c963803b51fd5f06d816452a2b4cc6c7b7947903267a28"
+character_count: 674
+boundary_confidence: "high"
+note: "The boundary is based on a short stand-alone heading followed by its biography text."
+text_policy: "verbatim substring of normalized primary-witness Markdown body; no reference-witness text inserted"
+---
+
+## Original source (exact)
+
+　　左思
+　　左思字太沖齊國臨淄人也其先齊之公族有左右公子因為氏焉家世儒學父雍起小吏以能擢授殿中侍御史思少學鍾胡書及鼓琴並不成雍謂友人曰思所曉觧不及我少時思遂感激勤學兼善隂陽之術貌寢口訥而辭藻壯麗不好交遊惟以閑居為事造齊都賦一年乃成復欲賦三都㑹妺芬入宫移家京師乃詣著作郎張載訪岷卭之事遂構思十年門庭藩溷皆著筆紙遇得一句即便疏之自以所見不博求為秘書郎及賦成時人未之重思自以其作不謝班張恐以人廢言安定皇甫謐有髙譽思造而示之謐稱善為其賦序張載為注魏都劉逵注吳蜀而序之曰觀中古已來為賦者多矣相如子虛擅名於前班固兩都理勝其辭張衡二京文過其意至若此賦擬議數家傅辭㑹義抑多精致非夫研覈者不能練其㫖非夫博物者不能統其異世咸貴逺而賤近莫肯用心於明物斯文吾有異焉故聊以餘思為其引詁亦猶胡廣之於官箴蔡雍之於典引也陳留衞瓘又為思賦作略觧序曰余觀三都之賦言不茍華必經典要品物殊類稟之圖籍辭義瓌瑋良可貴也有晉徵士故太子中庶子安定皇甫謐西州之逸士躭籍樂道髙尚其事覽斯文而慷慨為之都序中書著作郎安平張載中書郎濟南劉逵並以經學洽博才章美茂咸皆悦玩為之訓詁其山川土域草木鳥獸竒怪珍異僉皆研精所由紛散其義矣余嘉其文不能黙已聊藉二子之遺忘又為之略解秪增煩重覽者闕焉自是之後盛重於時文多不載司空張華見而歎曰班張之流也使讀之者盡而有餘久而更新於是豪貴之家競相傳寫洛陽為之紙貴初陸機入洛欲為此賦聞思作之撫掌而笑與弟雲書曰此間有傖父欲作三都賦湏其成當以覆酒甕耳及思賦出機絶歎伏以為不能加也遂輟筆焉秘書監賈謐請講漢書謐誅退居宜春里專意典籍齊王冏命為記室督辭疾不就及張方縱暴都邑舉家適冀州數歲以疾終

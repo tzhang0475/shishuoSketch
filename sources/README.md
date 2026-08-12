@@ -75,7 +75,8 @@ For Shishuo Xinyu, the active hierarchy is:
 3. 1615 凌氏刻本 — secondary OCR plus visual witness;
 4. 四庫全書本 — independent secondary witness;
 5. local `shishuo.txt` — structural reference; and
-6. 余嘉錫《世說新語箋疏》 — scholarly reference.
+6. 余嘉錫《世說新語箋疏》 — scholarly-reference-machine; the official CText
+   `gettext` API is the only permitted route for a local copy.
 
 The Wikisource 四部叢刊 section declarations and their referenced
 Page-namespace wikitext are retrieved through the MediaWiki API as-is for
@@ -86,8 +87,34 @@ authority, and JP2 archives are not downloaded by default. The 四庫本 remains
 a separate textual/version comparison. The local structural reference
 assists entry-count and boundary comparison. 余嘉錫《世說新語箋疏》 is kept
 separate for later historical, person, and commentary analysis; it is not a
-textual witness and must not replace the primary text. No secondary witness
+textual witness and must not replace the primary text. Its CTP URN is
+`ctp:wb40889`, and the API key, when required, is read only from
+`CTEXT_API_KEY` and is never recorded. The current unauthenticated API
+request returns `ERR_REQUIRES_AUTHENTICATION`, so the witness remains external
+until authorized recursive retrieval succeeds. No secondary witness
 authorizes overwriting the primary Kanripo/SBCK text.
+
+## Jinshu source coverage and migration
+
+The active Jinshu primary is `jinshu-wikisource-siku`, the complete
+`晉書 (四庫全書本)` machine witness retrieved through the Wikisource
+MediaWiki API. It covers 卷一至卷一百三十. Exact API JSON batches, returned
+UTF-8 source text, page IDs, revision IDs, retrieval dates, byte sizes, and
+SHA-256 values are recorded under
+`sources/downloads/jinshu/wikisource-siku/`. The normalization and structural
+unit stages use this witness only; no secondary reading is merged into it.
+
+The former local Kanripo `KR2a0015` witness is retained in the registry as an
+inactive historical primary with verified main-text coverage of 卷一至卷三十三.
+Its upstream repository has the same 34 text containers and does not contain
+卷三十四至卷一百三十; the catalogue's statement that the work has 130卷 is
+not treated as surviving machine-text coverage. Its previous repository
+identity, commit, byte size, and SHA-256 inventory are recorded in
+`content/curated/jinshu/source-migration-report.md`. Historical reports that
+mention `shishuoSources/jinshu` are left unchanged.
+
+The critical 《晉書斠注》 witness and the externally hosted 武英殿 witness
+remain reference material. They are not merged into the primary text.
 
 The next collation stage will use, without resolving them here, the known
 anomaly set:

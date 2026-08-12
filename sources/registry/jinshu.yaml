@@ -3,18 +3,36 @@ work: "晉書"
 witnesses:
   - id: jinshu-kanripo-wyg
     work: "晉書"
-    role: primary
+    role: historical-primary-machine-partial
     edition: "文淵閣四庫全書 / WYG"
     source_provider: Kanripo
     source_type: machine-text
     script: "traditional Chinese"
     annotations: []
-    local: true
-    local_path: "shishuoSources/jinshu"
+    local: false
+    local_path: null
+    active: false
+    former_local_path: "shishuoSources/jinshu"
     remote_record: "https://github.com/kanripo/KR2a0015.git"
-    text_authority: "default diplomatic machine-text witness"
+    text_authority: "historical primary machine-text witness; inactive after source migration"
     structure_authority: "Kanripo juan declarations, FILE directives, and page markers"
-    notes: "Immutable local upstream source; juan boundaries are preserved before any later analysis."
+    coverage: "1-33"
+    notes: "Former local upstream source. Upstream KR2a0015 commit 82291520954e5af1fdade894971a2f5810fd4e31 exposes only 卷一至卷三十三. Previous source identity and SHA-256 values are recorded in content/curated/jinshu/source-migration-report.md; this witness is retained for provenance and is not the active primary."
+  - id: jinshu-wikisource-siku
+    work: "晉書"
+    role: primary-machine
+    edition: "欽定四庫全書本"
+    source_provider: Wikisource
+    source_type: machine-text
+    script: "traditional Chinese"
+    annotations: []
+    local: true
+    local_path: "sources/downloads/jinshu/wikisource-siku"
+    remote_record: "https://zh.wikisource.org/wiki/晉書_(四庫全書本)"
+    text_authority: "default diplomatic machine-text witness for the complete local Jinshu corpus"
+    structure_authority: "MediaWiki volume page titles and explicit source volume headings"
+    coverage: "1-130"
+    notes: "Complete local primary for processing. Raw MediaWiki API responses and returned source text remain unchanged and are retained with page IDs, revision IDs, retrieval dates, byte sizes, and SHA-256 values in manifest.lock.json. No reference witness is merged into this text."
   - id: jinshu-wuyingdian
     work: "晉書"
     role: "secondary / visual-reference"

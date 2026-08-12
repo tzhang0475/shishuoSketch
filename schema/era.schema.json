@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://shishuo-sketch/schema/era.schema.json",
+  "title": "Era",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "title",
+    "theme",
+    "period",
+    "description",
+    "story_ids",
+    "person_ids",
+    "evidence_ids",
+    "assertion_status",
+    "review_status"
+  ],
+  "properties": {
+    "id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._-]*$"},
+    "title": {"type": "string", "minLength": 1},
+    "theme": {"type": "string", "minLength": 1},
+    "period": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "label", "start_year", "end_year"],
+      "properties": {
+        "status": {"type": "string", "enum": ["exact", "range", "approximate", "unknown"]},
+        "label": {"type": ["string", "null"]},
+        "start_year": {"type": ["integer", "null"]},
+        "end_year": {"type": ["integer", "null"]}
+      }
+    },
+    "description": {"type": ["string", "null"]},
+    "story_ids": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+    "person_ids": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+    "evidence_ids": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+    "assertion_status": {
+      "type": "string",
+      "enum": ["attested", "reported", "inferred", "unknown"]
+    },
+    "review_status": {
+      "type": "string",
+      "enum": ["candidate", "reviewed", "rejected", "todo"]
+    },
+    "notes": {"type": "string"}
+  }
+}

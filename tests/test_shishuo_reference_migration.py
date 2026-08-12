@@ -109,7 +109,11 @@ class ShishuoReferenceMigrationTests(unittest.TestCase):
         self.assertEqual(
             config["sources"]["jinshu"],
             {
-                "primary": "shishuoSources/jinshu",
+                "primary": "sources/downloads/jinshu/wikisource-siku",
+                "primary_witness": "jinshu-wikisource-siku",
+                "primary_coverage": "1-130",
+                "same_edition_machine_completion": "sources/downloads/jinshu/wikisource-siku",
+                "historical_partial": "shishuoSources/jinshu",
                 "critical": "sources/downloads/jinshu/jinshu-jiaozhu",
                 "visual_reference": "external:jinshu-wuyingdian",
             },

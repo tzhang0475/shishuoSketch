@@ -1,7 +1,11 @@
 # ShishuoSketch source-processing pipeline
 
 This repository treats `shishuoSources/shishuo` and
-`shishuoSources/jinshu` as immutable Kanripo source material.  The first
+the registered primary witness for each work as immutable source material. The
+current Jinshu primary is the complete local Wikisource 四庫本 under
+`sources/downloads/jinshu/wikisource-siku`; the former
+`shishuoSources/jinshu` Kanripo source is an inactive historical partial
+witness. The first
 processing step is deliberately conservative: it makes the files easier to
 consume as Markdown without interpreting their historical content.
 
@@ -77,28 +81,38 @@ provenance.
 
 ## Jinshu boundaries
 
-Jinshu has 34 numbered TXT containers (`KR2a0015_000.txt` through
-`KR2a0015_033.txt`).  The file preamble usually has a `JUAN` property, while
-the body has explicit headings such as `晉書卷六`.  The repository's
-`Readme.org` also provides page anchors, including boundaries such as
-`006-30a` for the next juan and anchors for `考證` sections.
+The active Jinshu primary is the complete Wikisource 四庫本 witness
+`jinshu-wikisource-siku` under `sources/downloads/jinshu/wikisource-siku/`.
+It supplies one locked source text for each of 卷一至卷一百三十.  The former
+Kanripo `KR2a0015` tree covered only 卷一至卷三十三 and is retained only as
+an inactive provenance record; its coverage audit is historical.
 
-A single container can cross a juan boundary.  For example,
-`KR2a0015_006.txt` contains the end of 卷六, a 卷六考證 section, and the
-beginning of 卷七.  The normalization output remains one Markdown file for
-that raw TXT file and retains the headings and page comments in order.  No
-relationship extraction, entity linking, or other knowledge inference is done
-at this stage.
+The Wikisource adapter preserves page/revision provenance and explicit source
+headings while removing only MediaWiki presentation wrappers:
 
-## Normalizer contract
+```sh
+python3 scripts/normalize_jinshu_wikisource.py
+```
+
+This writes `content/processed/jinshu/volume-001.md` through
+`volume-130.md`, with raw source hashes and normalized output hashes in the
+normalization lock manifest.  Structural units are then materialized without
+historical inference:
+
+```sh
+python3 scripts/materialize_jinshu_units.py
+```
+
+The materializer recognizes volume, 本紀, 志, 列傳, 載記, and supported explicit
+textual-unit headings.  It does not perform person, event, relationship, or
+reference-witness extraction.
+
+## Kanripo normalizer contract
 
 Run the normalizer from the repository root:
 
 ```sh
 python3 scripts/normalize_kanripo.py --book shishuo
-python3 scripts/normalize_kanripo.py --book jinshu
-# or both collections:
-python3 scripts/normalize_kanripo.py
 ```
 
 For every input `X.txt`, the script writes a corresponding

@@ -1,0 +1,40 @@
+---
+schema: 1
+unit_id: "090-liezhuan-006"
+work: "晉書"
+volume: "卷90"
+volume_number: 90
+volume_occurrence: 1
+category: "liezhuan"
+category_heading: "列傳第六十"
+title: "曹攄"
+heading_text: "　　曹攄"
+unit_kind: "biography"
+parent_unit: null
+source_witness: "jinshu-wikisource-siku"
+source_file: "content/processed/jinshu/volume-090.md"
+source_path: "sources/downloads/jinshu/wikisource-siku/text/volume-090.txt"
+source_sha256: "e5a35a68245d7f330648772b2810955bbd3e5340affe5c8413070c4c43685358"
+normalized_file_sha256: "9f92e9fcff62e6d4158333bab74d771b303ed097b2a6fc0d79c6064d06fc0bf4"
+source_span:
+  coordinate: "normalized_body"
+  start_char: 3228
+  end_char_exclusive: 3836
+  start_utf8_byte: 8512
+  end_utf8_byte_exclusive: 10332
+  source_line_start: 40
+  source_line_end: 41
+  start_anchor: "　　曹攄"
+  end_anchor: "　　曹攄字顔逺譙國譙人也祖肇魏衞將軍攄少有孝行好學善屬文太尉王衍見而器之調補臨淄令縣有寡婦養姑甚謹姑以其年少勸令改適婦守節不移姑愍之密自殺親黨告婦殺姑官為考鞫寡婦不勝苦楚乃自誣獄當決適值攄到攄知其有寃更加辯究具得情實時稱其明獄有死囚歲夕攄行獄愍之曰卿等不幸致此非所如何新歲人情所重豈不欲蹔見家邪衆囚皆涕泣曰若得蹔歸死無恨也攄悉開獄出之剋日令還掾吏固爭咸謂不可攄曰此雖小人義不見負自為諸君任之至日相率而還並無違者一縣歎服號曰聖君入為尚書郎轉洛陽令仁惠明斷百姓懷之時天大雨雪宫門夜失行馬羣官檢察莫知所在攄使收門士衆官咸謂不然攄曰宫掖禁嚴非外人所敢盗必是門士以燎寒耳詰之果服以病去官復為洛陽令及齊王冏輔政攄與左思俱為記室督冏嘗從容問攄曰天子為賊臣所逼莫有能奮吾率四海義兵興復王室今入輔朝廷匡振時艱或有勸吾還國於卿意如何攄曰蕩平國賊匡復帝祚古今人臣之功未有如大王之盛也然道罔隆而不殺物無盛而不衰非唯人事抑亦天理竊預下問敢不盡情願大王居高慮危在盈思冲精選百官存公屏欲舉賢進善務得其才然後脂車秣馬高揖歸藩則上下同慶攄等幸甚冏不納尋轉中書侍郎長沙王乂以為驃騎司馬乂敗免官因丁母憂惠帝末起為襄城太守時襄城屢經冦難攄綏懷振理旬月剋復永嘉二年高密王簡鎮襄陽以攄為征南司馬其年流人王逌等聚衆屯冠軍冦掠城邑簡遣參軍崔曠討之令攄督䕶曠曠奸凶人也譎攄前戰期為後繼既而不至攄獨與逌戰于酈縣軍敗死之故吏及百姓並奔䘮㑹葬號哭即路如赴父母焉"
+page_marker_ids: []
+unit_text_sha256: "933c018d60fd68c2f9337d3ccf578e83643103f038cb7842a561d855d2ceaff7"
+character_count: 608
+boundary_confidence: "high"
+note: "The boundary is based on a short stand-alone heading followed by its biography text."
+text_policy: "verbatim substring of normalized primary-witness Markdown body; no reference-witness text inserted"
+---
+
+## Original source (exact)
+
+　　曹攄
+　　曹攄字顔逺譙國譙人也祖肇魏衞將軍攄少有孝行好學善屬文太尉王衍見而器之調補臨淄令縣有寡婦養姑甚謹姑以其年少勸令改適婦守節不移姑愍之密自殺親黨告婦殺姑官為考鞫寡婦不勝苦楚乃自誣獄當決適值攄到攄知其有寃更加辯究具得情實時稱其明獄有死囚歲夕攄行獄愍之曰卿等不幸致此非所如何新歲人情所重豈不欲蹔見家邪衆囚皆涕泣曰若得蹔歸死無恨也攄悉開獄出之剋日令還掾吏固爭咸謂不可攄曰此雖小人義不見負自為諸君任之至日相率而還並無違者一縣歎服號曰聖君入為尚書郎轉洛陽令仁惠明斷百姓懷之時天大雨雪宫門夜失行馬羣官檢察莫知所在攄使收門士衆官咸謂不然攄曰宫掖禁嚴非外人所敢盗必是門士以燎寒耳詰之果服以病去官復為洛陽令及齊王冏輔政攄與左思俱為記室督冏嘗從容問攄曰天子為賊臣所逼莫有能奮吾率四海義兵興復王室今入輔朝廷匡振時艱或有勸吾還國於卿意如何攄曰蕩平國賊匡復帝祚古今人臣之功未有如大王之盛也然道罔隆而不殺物無盛而不衰非唯人事抑亦天理竊預下問敢不盡情願大王居高慮危在盈思冲精選百官存公屏欲舉賢進善務得其才然後脂車秣馬高揖歸藩則上下同慶攄等幸甚冏不納尋轉中書侍郎長沙王乂以為驃騎司馬乂敗免官因丁母憂惠帝末起為襄城太守時襄城屢經冦難攄綏懷振理旬月剋復永嘉二年高密王簡鎮襄陽以攄為征南司馬其年流人王逌等聚衆屯冠軍冦掠城邑簡遣參軍崔曠討之令攄督䕶曠曠奸凶人也譎攄前戰期為後繼既而不至攄獨與逌戰于酈縣軍敗死之故吏及百姓並奔䘮㑹葬號哭即路如赴父母焉

@@ -1,0 +1,40 @@
+---
+schema: 1
+unit_id: "093-liezhuan-012"
+work: "晉書"
+volume: "卷93"
+volume_number: 93
+volume_occurrence: 1
+category: "liezhuan"
+category_heading: "列傳第六十三"
+title: "王藴"
+heading_text: "　　王藴"
+unit_kind: "biography"
+parent_unit: null
+source_witness: "jinshu-wikisource-siku"
+source_file: "content/processed/jinshu/volume-093.md"
+source_path: "sources/downloads/jinshu/wikisource-siku/text/volume-093.txt"
+source_sha256: "497f5a63cc2fc353cca899ae6807792543cef3fd00f9f2234019fe546ac9f765"
+normalized_file_sha256: "9ea71e552b4020b3cbcfa5b96e0efd88f1408ea36fc5d61221e81aac21509e73"
+source_span:
+  coordinate: "normalized_body"
+  start_char: 5275
+  end_char_exclusive: 5935
+  start_utf8_byte: 13475
+  end_utf8_byte_exclusive: 15439
+  source_line_start: 54
+  source_line_end: 55
+  start_anchor: "　　王藴"
+  end_anchor: "　　王藴字叔仁孝武定皇后父司徒左長史濛之子也起家佐著作郎累遷尚書吏部郎性平和不抑寒素每一官缺求者十軰藴無所是非時簡文帝為㑹稽王輔政蘊輙連状白之曰某人有地某人有才務存進達各隨其方故不得者無怨焉補吳興太守甚有德政屬郡荒人飢輒開倉贍䘏主簿執諫請先列表上待報藴曰今百姓嗷然路有饑饉若表上須報何以救將死之命乎專輒之愆罪在太守且行仁義而敗無所恨也於是大振貸之頼藴全者十七八焉朝廷以違科免藴官士庶詣闕訟之詔特左降晉陵太守復有惠化百姓歌之定后立以后父遷光禄大夫領五兵尚書本州大中正封建昌縣侯藴以恩澤賜爵非三代令典固辭不受朝廷cq=112敦勸終不肯拜乃授都督京口諸軍事左將軍徐州刺史假節復固讓謝安謂藴曰卿居后父之重不應妄自菲薄以虧時遇宜依褚公故事但令在貴權於事不事耳可暫臨此任以紓國姻之重於是乃受命鎮于京口頃之徵拜尚書左僕射將軍如故遷丹陽尹即本軍號加散騎常侍藴以姻戚不欲在内苦求外出復以為都督浙江東五郡鎮軍將軍㑹稽内史常侍如故藴素嗜酒末年尤甚及在㑹稽略少醒日然猶以和簡為百姓所悦時王悦來拜墓藴子恭徃省之素相善遂留十餘日方還藴問其故恭曰與阿大語蟬連不得歸藴曰恐阿大非爾之友阿大悦小字也後竟乖初好時以為知人太元九年卒年五十五追贈左光禄大夫開府儀同三司長子華早卒次恭在列傳恭弟爽字季明彊正有志力歴給事黄門侍郎侍中孝武帝崩王國寳夜欲開門入為遺詔爽距之曰大行晏駕皇太子未至敢入者斬乃止爽嘗與㑹稽王道子飲道子醉呼爽為小子爽曰亡祖長史與簡文皇帝為布衣之交亡姑亡姊伉儷二宫何小子之有及國寳執權免爽官後兄恭再起事並以爽為寧朔將軍參預軍事恭敗被誅"
+page_marker_ids: []
+unit_text_sha256: "17909f7b9fa379a552615c62ccdf15bb83a3924f8b801dfe19173e2cb7de4714"
+character_count: 660
+boundary_confidence: "high"
+note: "The boundary is based on a short stand-alone heading followed by its biography text."
+text_policy: "verbatim substring of normalized primary-witness Markdown body; no reference-witness text inserted"
+---
+
+## Original source (exact)
+
+　　王藴
+　　王藴字叔仁孝武定皇后父司徒左長史濛之子也起家佐著作郎累遷尚書吏部郎性平和不抑寒素每一官缺求者十軰藴無所是非時簡文帝為㑹稽王輔政蘊輙連状白之曰某人有地某人有才務存進達各隨其方故不得者無怨焉補吳興太守甚有德政屬郡荒人飢輒開倉贍䘏主簿執諫請先列表上待報藴曰今百姓嗷然路有饑饉若表上須報何以救將死之命乎專輒之愆罪在太守且行仁義而敗無所恨也於是大振貸之頼藴全者十七八焉朝廷以違科免藴官士庶詣闕訟之詔特左降晉陵太守復有惠化百姓歌之定后立以后父遷光禄大夫領五兵尚書本州大中正封建昌縣侯藴以恩澤賜爵非三代令典固辭不受朝廷cq=112敦勸終不肯拜乃授都督京口諸軍事左將軍徐州刺史假節復固讓謝安謂藴曰卿居后父之重不應妄自菲薄以虧時遇宜依褚公故事但令在貴權於事不事耳可暫臨此任以紓國姻之重於是乃受命鎮于京口頃之徵拜尚書左僕射將軍如故遷丹陽尹即本軍號加散騎常侍藴以姻戚不欲在内苦求外出復以為都督浙江東五郡鎮軍將軍㑹稽内史常侍如故藴素嗜酒末年尤甚及在㑹稽略少醒日然猶以和簡為百姓所悦時王悦來拜墓藴子恭徃省之素相善遂留十餘日方還藴問其故恭曰與阿大語蟬連不得歸藴曰恐阿大非爾之友阿大悦小字也後竟乖初好時以為知人太元九年卒年五十五追贈左光禄大夫開府儀同三司長子華早卒次恭在列傳恭弟爽字季明彊正有志力歴給事黄門侍郎侍中孝武帝崩王國寳夜欲開門入為遺詔爽距之曰大行晏駕皇太子未至敢入者斬乃止爽嘗與㑹稽王道子飲道子醉呼爽為小子爽曰亡祖長史與簡文皇帝為布衣之交亡姑亡姊伉儷二宫何小子之有及國寳執權免爽官後兄恭再起事並以爽為寧朔將軍參預軍事恭敗被誅

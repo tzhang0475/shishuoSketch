@@ -42,10 +42,14 @@ class NormalizeKanripoTests(unittest.TestCase):
     def test_configured_source_discovery_matches_existing_primary_trees(self) -> None:
         config = REPO_ROOT / "config" / "sources.yaml"
         configured = discover_configured_sources(config)
-        self.assertEqual(len(configured), 38)
+        # The configured Kanripo TXT collections still cover Shishuo.  Jinshu
+        # now resolves to the Wikisource tree, whose source TXT files live
+        # below its ``text/`` directory and are handled by its dedicated
+        # normalizer.
+        self.assertEqual(len(configured), 4)
         self.assertEqual(
             {path.parent.name for path in configured},
-            {"shishuo", "jinshu"},
+            {"shishuo"},
         )
         self.assertEqual(configured, sorted(configured, key=lambda path: path.as_posix()))
 
