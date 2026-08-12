@@ -7,6 +7,9 @@ import shutil
 import tempfile
 import unittest
 from copy import deepcopy
+from unittest.mock import patch
+
+import scripts.validate_wp1 as validate_wp1_module
 
 from scripts.validate_wp1 import (
     OBJECTS,
@@ -15,6 +18,7 @@ from scripts.validate_wp1 import (
     validate_schema,
     validate_source_provenance,
     validate_punctuation,
+    validate_punctuation_reference,
 )
 from scripts.reading_layers import canonical_sections, validate_punctuation_round_trip
 
@@ -80,7 +84,82 @@ class WP1Tests(unittest.TestCase):
         return record, canonical
 
     def test_reviewed_punctuation_passes_canonical_round_trip(self) -> None:
-        self.assertEqual(validate_punctuation(ROOT, mode="full"), [])
+        mode = os.environ.get("WP1_PROVENANCE_MODE", "full")
+        self.assertEqual(validate_punctuation(ROOT, mode=mode), [])
+
+    def _punctuation_reference(self) -> dict[str, object]:
+        document = json.loads(
+            (ROOT / "data/annotation/wp1-punctuation.json").read_text(encoding="utf-8")
+        )
+        return deepcopy(
+            next(
+                reference
+                for reference in document["records"][0]["references"]
+                if reference["witness_id"] == "shishuo-wikisource-sbck"
+            )
+        )
+
+    def _punctuation_lock_root(self) -> tuple[tempfile.TemporaryDirectory, dict[str, object]]:
+        temporary = tempfile.TemporaryDirectory()
+        root = Path(temporary.name)
+        lock_path = root / "sources/downloads/shishuo/wikisource-sbck/manifest.lock.json"
+        lock_path.parent.mkdir(parents=True)
+        shutil.copy2(
+            ROOT / "sources/downloads/shishuo/wikisource-sbck/manifest.lock.json",
+            lock_path,
+        )
+        return temporary, self._punctuation_reference()
+
+    def test_full_punctuation_reference_mode_requires_physical_file(self) -> None:
+        temporary, reference = self._punctuation_lock_root()
+        try:
+            errors = validate_punctuation_reference(
+                Path(temporary.name),
+                reference,
+                label="test punctuation reference",
+                mode="full",
+                trusted_records=None,
+            )
+            self.assertTrue(any("file does not exist" in error for error in errors))
+        finally:
+            temporary.cleanup()
+
+    def test_portable_punctuation_reference_uses_committed_lock(self) -> None:
+        temporary, reference = self._punctuation_lock_root()
+        try:
+            self.assertEqual(
+                validate_punctuation_reference(
+                    Path(temporary.name),
+                    reference,
+                    label="test punctuation reference",
+                    mode="portable",
+                    trusted_records=None,
+                ),
+                [],
+            )
+        finally:
+            temporary.cleanup()
+
+    def test_portable_punctuation_reference_rejects_wrong_hash_path_and_witness(self) -> None:
+        temporary, reference = self._punctuation_lock_root()
+        try:
+            for field, value in (
+                ("sha256", "0" * 64),
+                ("path", "sources/downloads/shishuo/wikisource-sbck/pages/missing.wikitext"),
+                ("witness_id", "wrong-witness"),
+            ):
+                mutated = deepcopy(reference)
+                mutated[field] = value
+                errors = validate_punctuation_reference(
+                    Path(temporary.name),
+                    mutated,
+                    label=f"test punctuation reference {field}",
+                    mode="portable",
+                    trusted_records=None,
+                )
+                self.assertTrue(errors, field)
+        finally:
+            temporary.cleanup()
 
     def test_punctuation_inserting_character_is_rejected(self) -> None:
         record, canonical = self._punctuation_record()
@@ -101,6 +180,29 @@ class WP1Tests(unittest.TestCase):
         record["sections"]["main_text"]["punctuated_text"] = punctuated.replace("郗", "郄", 1)
         errors = validate_punctuation_round_trip(record, canonical)
         self.assertTrue(any("round-trip" in error for error in errors))
+
+    def test_punctuation_round_trip_failures_are_mode_independent(self) -> None:
+        document = json.loads(
+            (ROOT / "data/annotation/wp1-punctuation.json").read_text(encoding="utf-8")
+        )
+        document["records"][0]["sections"]["main_text"]["punctuated_text"] = (
+            document["records"][0]["sections"]["main_text"]["punctuated_text"].replace("郗", "郄", 1)
+        )
+        original_read_json = validate_wp1_module.read_json
+
+        def read_json_with_mutated_punctuation(path: Path):
+            if path == ROOT / "data/annotation/wp1-punctuation.json":
+                return document
+            return original_read_json(path)
+
+        with patch.object(
+            validate_wp1_module,
+            "read_json",
+            side_effect=read_json_with_mutated_punctuation,
+        ):
+            for mode in ("full", "portable"):
+                errors = validate_punctuation(ROOT, mode=mode)
+                self.assertTrue(any("round-trip" in error for error in errors), mode)
 
     def test_nonexistent_shishuo_entry_is_rejected(self) -> None:
         errors = self.provenance_errors(
