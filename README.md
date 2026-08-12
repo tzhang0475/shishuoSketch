@@ -975,7 +975,7 @@ Run the local development server:
 npm run dev
 ```
 
-The placeholder frontend exposes `/stories/:id`, `/people/:id`,
-`/relations/:id`, and `/eras/:id`. The remaining 15–30 story selection and
-the final Era Sketch are intentionally marked candidate/TODO in
-`data/manifest/milestone-1.json`.
+The current prototype is a single reading page under the Vite base path
+`/shishuoSketch/`; client-side routing and the remaining 15–30 story
+selection are intentionally deferred. The final Era Sketch remains marked
+candidate/TODO in `data/manifest/milestone-1.json`.

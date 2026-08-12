@@ -1,155 +1,185 @@
 import { useEffect, useMemo, useState } from "react";
 import { loadSiteBundle } from "./data";
-import type { Era, Person, Relation, SiteBundle, Story } from "./types";
+import type { Evidence, Mention, Person, SiteBundle, Story } from "./types";
 
-function link(path: string, label: string) {
-  return <a href={path}>{label}</a>;
+const STORY_ID = "06-yaliang-019";
+
+function storyReference(story: Story): string {
+  const parts = story.id.split("-");
+  const ordinal = parts[parts.length - 1] ?? "";
+  const chapter = parts[1] === "yaliang" ? "雅量" : parts[1] ?? "";
+  return `${chapter} · ${ordinal}`;
 }
 
-function Layout({ children, data }: { children: React.ReactNode; data: SiteBundle }) {
-  const story = data.stories[0];
+function resolvedMentions(story: Story, data: SiteBundle): Mention[] {
+  return story.mention_ids
+    .map((id) => data.mentions.find((mention) => mention.id === id))
+    .filter((mention): mention is Mention => Boolean(mention?.person_id));
+}
+
+function personMentions(story: Story, person: Person, data: SiteBundle): Mention[] {
+  return resolvedMentions(story, data).filter((mention) => mention.person_id === person.id);
+}
+
+function PersonCard({ person, mentions }: { person: Person; mentions: Mention[] }) {
+  const surfaces = Array.from(new Set(mentions.map((mention) => mention.surface)));
   return (
-    <main className="shell">
-      <header className="masthead">
+    <details className="person-card">
+      <summary>
+        <span className="person-name">{person.canonical_name}</span>
+        <span className="person-hint">查看称谓</span>
+      </summary>
+      <div className="person-card-body">
+        <p className="person-label">本则中已解析的称谓</p>
+        <p className="surface-list">{surfaces.join("、") || "—"}</p>
+        <p className="person-status">
+          {person.assertion_status} · {person.review_status}
+        </p>
+      </div>
+    </details>
+  );
+}
+
+function EvidenceDetails({ story, data }: { story: Story; data: SiteBundle }) {
+  const evidence = story.evidence_ids
+    .map((id) => data.evidence.find((item) => item.id === id))
+    .filter((item): item is Evidence => Boolean(item));
+
+  return (
+    <details className="evidence-details">
+      <summary>证据与出处</summary>
+      <p className="evidence-intro">
+        以下信息来自已验证的 WP1 静态数据；artifact 是页面所引用的派生文件，source provenance
+        保留其上游见证信息。
+      </p>
+      <div className="evidence-list">
+        {evidence.map((item) => (
+          <article className="evidence-item" key={item.id}>
+            <div className="evidence-heading">
+              <span>{item.evidence_type}</span>
+              <code>{item.id}</code>
+            </div>
+            <blockquote>{item.quote}</blockquote>
+            <dl className="provenance-grid">
+              <dt>artifact</dt>
+              <dd>
+                {item.locator.artifact_path} · {item.locator.artifact_sha256.slice(0, 12)}…
+              </dd>
+              <dt>witness</dt>
+              <dd>{item.locator.source_provenance.witness_id}</dd>
+              <dt>source</dt>
+              <dd>
+                {item.locator.source_provenance.source_path} · {item.locator.source_provenance.source_sha256.slice(0, 12)}…
+              </dd>
+            </dl>
+          </article>
+        ))}
+      </div>
+    </details>
+  );
+}
+
+function ReadingPage({ story, data }: { story: Story; data: SiteBundle }) {
+  const people = story.person_ids
+    .map((id) => data.people.find((person) => person.id === id))
+    .filter((person): person is Person => Boolean(person));
+  const mentions = resolvedMentions(story, data);
+
+  return (
+    <main className="page-shell">
+      <header className="site-header">
         <div>
-          <p className="eyebrow">世说Sketch · WP1</p>
-          <h1>{link(`/stories/${story.id}`, "从一则故事，走进魏晋")}</h1>
+          <p className="brand">世说Sketch</p>
+          <p className="tagline">从一则故事，走进魏晋</p>
         </div>
-        <nav>
-          {link(`/stories/${story.id}`, "故事")}
-          {link(`/eras/${data.eras[0].id}`, "候选母题")}
-        </nav>
+        <span className="prototype-badge">WP1 Prototype</span>
       </header>
-      {children}
-      <footer>static-first · {data.generated_from}</footer>
+
+      <article className="reading-column">
+        <p className="story-reference">{storyReference(story)}</p>
+        <h1>{story.title}</h1>
+        <p className="story-meta">{story.id}</p>
+
+        <section className="story-panel" aria-label="故事正文">
+          <p className="story-text">{story.text}</p>
+        </section>
+
+        {story.annotations.map((annotation) => (
+          <section className="annotation-panel" key={annotation.id}>
+            <p className="section-label">刘孝标注</p>
+            <p className="annotation-text">{annotation.text}</p>
+          </section>
+        ))}
+
+        <section className="people-section" aria-labelledby="people-heading">
+          <div className="section-heading">
+            <p className="section-label">人物</p>
+            <h2 id="people-heading">文中已解析的称谓</h2>
+          </div>
+          <div className="people-grid">
+            {people.map((person) => (
+              <PersonCard
+                key={person.id}
+                person={person}
+                mentions={personMentions(story, person, data)}
+              />
+            ))}
+          </div>
+          <div className="mention-strip" aria-label="已解析称谓列表">
+            {mentions.map((mention) => (
+              <span className="mention-chip" key={mention.id}>
+                {mention.surface} → {data.people.find((person) => person.id === mention.person_id)?.canonical_name}
+              </span>
+            ))}
+          </div>
+        </section>
+
+        <EvidenceDetails story={story} data={data} />
+      </article>
+
+      <footer className="site-footer">
+        <span>static-first · {data.generated_from}</span>
+        <span>{story.review_status}</span>
+      </footer>
     </main>
   );
 }
 
-function StoryPage({ story, data }: { story: Story; data: SiteBundle }) {
-  const people = story.person_ids
-    .map((id) => data.people.find((person) => person.id === id))
-    .filter((person): person is Person => Boolean(person));
-  const relations = story.relation_ids
-    .map((id) => data.relations.find((relation) => relation.id === id))
-    .filter((relation): relation is Relation => Boolean(relation));
-  const eras = story.era_ids
-    .map((id) => data.eras.find((era) => era.id === id))
-    .filter((era): era is Era => Boolean(era));
-  return (
-    <article>
-      <p className="crumb">Story / {story.id}</p>
-      <h2>{story.title}</h2>
-      <p className="meta">{story.source_entry_id} · {story.review_status} · {story.assertion_status}</p>
-      <section className="card story-text">
-        <h3>正文</h3>
-        <p>{story.text}</p>
-      </section>
-      {story.annotations.map((annotation) => (
-        <section className="card annotation" key={annotation.id}>
-          <h3>刘孝标注 · {annotation.id}</h3>
-          <p>{annotation.text}</p>
-        </section>
-      ))}
-      <section className="card">
-        <h3>这一幕中的人</h3>
-        <div className="links">{people.map((person) => link(`/people/${person.id}`, person.canonical_name))}</div>
-        <h3>关系入口</h3>
-        <div className="links">{relations.map((relation) => link(`/relations/${relation.id}`, relation.label))}</div>
-        <h3>候选 Era Sketch</h3>
-        <div className="links">{eras.map((era) => link(`/eras/${era.id}`, `${era.title}（${era.review_status}）`))}</div>
-      </section>
-    </article>
-  );
-}
-
-function PersonPage({ person, data }: { person: Person; data: SiteBundle }) {
-  const stories = data.stories.filter((story) => story.person_ids.includes(person.id));
-  return (
-    <article>
-      <p className="crumb">Person / {person.id}</p>
-      <h2>{person.canonical_name}</h2>
-      <p className="meta">{person.review_status} · {person.assertion_status}</p>
-      <section className="card">
-        <h3>已观察称谓</h3>
-        <p>{person.aliases.map((alias) => alias.surface).join("、") || "尚无本样本中的直接别名"}</p>
-      </section>
-      <section className="card">
-        <h3>故事</h3>
-        <div className="links">{stories.map((story) => link(`/stories/${story.id}`, story.title))}</div>
-      </section>
-    </article>
-  );
-}
-
-function RelationPage({ relation, data }: { relation: Relation; data: SiteBundle }) {
-  const subject = data.people.find((person) => person.id === relation.subject_id);
-  const object = data.people.find((person) => person.id === relation.object_id);
-  return (
-    <article>
-      <p className="crumb">Relation / {relation.id}</p>
-      <h2>{relation.label}</h2>
-      <p className="meta">{relation.assertion_status} · {relation.review_status}</p>
-      <section className="card">
-        <p>{subject ? link(`/people/${subject.id}`, subject.canonical_name) : relation.subject_id} → {object ? link(`/people/${object.id}`, object.canonical_name) : relation.object_id}</p>
-        <p>{relation.notes}</p>
-        <h3>相关故事</h3>
-        <div className="links">{relation.story_ids.map((id) => { const story = data.stories.find((item) => item.id === id); return story ? link(`/stories/${id}`, story.title) : id; })}</div>
-      </section>
-    </article>
-  );
-}
-
-function EraPage({ era, data }: { era: Era; data: SiteBundle }) {
-  return (
-    <article>
-      <p className="crumb">Era / {era.id}</p>
-      <h2>{era.title}</h2>
-      <p className="meta">{era.review_status} · {era.assertion_status}</p>
-      <section className="card">
-        <p>{era.description}</p>
-        <h3>关联故事</h3>
-        <div className="links">{era.story_ids.map((id) => { const story = data.stories.find((item) => item.id === id); return story ? link(`/stories/${id}`, story.title) : id; })}</div>
-        <h3>关联人物</h3>
-        <div className="links">{era.person_ids.map((id) => { const person = data.people.find((item) => item.id === id); return person ? link(`/people/${id}`, person.canonical_name) : id; })}</div>
-      </section>
-    </article>
-  );
-}
-
-function RoutedPage({ data }: { data: SiteBundle }) {
-  const parts = window.location.pathname.split("/").filter(Boolean).map(decodeURIComponent);
-  const [type, id] = parts;
-  if (!type) return <StoryPage story={data.stories[0]} data={data} />;
-  if (type === "stories") {
-    const story = data.stories.find((item) => item.id === id);
-    return story ? <StoryPage story={story} data={data} /> : <NotFound />;
-  }
-  if (type === "people") {
-    const person = data.people.find((item) => item.id === id);
-    return person ? <PersonPage person={person} data={data} /> : <NotFound />;
-  }
-  if (type === "relations") {
-    const relation = data.relations.find((item) => item.id === id);
-    return relation ? <RelationPage relation={relation} data={data} /> : <NotFound />;
-  }
-  if (type === "eras") {
-    const era = data.eras.find((item) => item.id === id);
-    return era ? <EraPage era={era} data={data} /> : <NotFound />;
-  }
-  return <NotFound />;
-}
-
-function NotFound() {
-  return <section className="card"><h2>没有找到这个 WP1 对象</h2><p>请从现有故事入口继续阅读。</p></section>;
-}
-
-export default function App() {
+function App() {
   const [data, setData] = useState<SiteBundle | null>(null);
   const [error, setError] = useState<string | null>(null);
-  useEffect(() => { loadSiteBundle().then(setData).catch((reason: unknown) => setError(reason instanceof Error ? reason.message : String(reason))); }, []);
-  const page = useMemo(() => data && <RoutedPage data={data} />, [data]);
-  if (error) return <main className="shell"><section className="card error"><h1>静态数据加载失败</h1><p>{error}</p></section></main>;
-  if (!data) return <main className="shell"><p>正在读取静态数据……</p></main>;
-  return <Layout data={data}>{page}</Layout>;
+
+  useEffect(() => {
+    loadSiteBundle()
+      .then(setData)
+      .catch((reason: unknown) => setError(reason instanceof Error ? reason.message : String(reason)));
+  }, []);
+
+  const story = useMemo(
+    () => data?.stories.find((item) => item.id === STORY_ID) ?? data?.stories[0],
+    [data],
+  );
+
+  if (error) {
+    return (
+      <main className="page-shell">
+        <section className="error-panel">
+          <p className="brand">世说Sketch</p>
+          <h1>静态数据加载失败</h1>
+          <p>{error}</p>
+        </section>
+      </main>
+    );
+  }
+  if (!data || !story) {
+    return (
+      <main className="page-shell loading-state">
+        <p className="brand">世说Sketch</p>
+        <p>正在读取故事……</p>
+      </main>
+    );
+  }
+  return <ReadingPage story={story} data={data} />;
 }
+
+export default App;

@@ -7,6 +7,7 @@ const siteRoot = fileURLToPath(new URL(".", import.meta.url));
 
 export default defineConfig({
   root: siteRoot,
+  base: "/shishuoSketch/",
   plugins: [react()],
   server: {
     fs: {

@@ -8,6 +8,7 @@
     "validate": "python3 scripts/validate_wp1.py",
     "typecheck": "tsc -p site/tsconfig.json --noEmit",
     "dev": "vite --config site/vite.config.ts",
+    "build:site": "vite build --config site/vite.config.ts",
     "build": "npm run build:sample && npm run validate && npm run typecheck && vite build --config site/vite.config.ts",
     "test": "python3 -m unittest discover -s tests -p 'test*.py'"
   },

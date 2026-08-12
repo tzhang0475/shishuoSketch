@@ -1,25 +1,70 @@
 :root {
-  color: #2f2a25;
-  background: #f5f1e8;
-  font-family: "Noto Serif CJK SC", "Songti SC", serif;
+  color: #302b27;
+  background: #f4f0e8;
+  font-family: "Noto Serif CJK SC", "Songti SC", "STSong", serif;
+  font-synthesis: none;
   line-height: 1.8;
+  text-rendering: optimizeLegibility;
 }
 
 * { box-sizing: border-box; }
-body { margin: 0; }
-a { color: #8a3f2f; text-decoration: none; border-bottom: 1px solid #d4a99c; }
-a:hover { color: #542217; }
-.shell { max-width: 880px; margin: 0 auto; padding: 2rem 1.2rem 4rem; }
-.masthead { display: flex; justify-content: space-between; gap: 1rem; align-items: end; border-bottom: 1px solid #c9bda9; margin-bottom: 3rem; }
-.masthead h1 { margin: 0 0 1rem; font-size: clamp(1.5rem, 4vw, 2.4rem); font-weight: 500; }
-.masthead nav, .links { display: flex; flex-wrap: wrap; gap: .8rem 1.2rem; }
-.masthead nav { padding-bottom: 1.2rem; }
-.eyebrow, .crumb, .meta { color: #756b5f; font-family: system-ui, sans-serif; font-size: .82rem; letter-spacing: .04em; }
-.crumb { margin-bottom: .3rem; }
-h2 { font-size: 2.2rem; font-weight: 500; margin: .2rem 0; }
-h3 { font-size: 1rem; font-weight: 600; margin-top: 0; }
-.card { background: #fffdf8; border: 1px solid #ded4c4; border-radius: 4px; padding: 1.2rem 1.35rem; margin: 1.2rem 0; box-shadow: 0 4px 16px rgba(65, 47, 29, .04); }
-.story-text p, .annotation p { white-space: pre-wrap; font-size: 1.12rem; }
-.annotation { background: #f0eadf; }
-.error { border-color: #a84b3f; }
-footer { margin-top: 3rem; color: #8a8176; font: .75rem system-ui, sans-serif; }
+body { margin: 0; min-width: 320px; }
+button, summary { font: inherit; }
+summary { cursor: pointer; }
+code, .story-meta, .prototype-badge, .person-hint, .person-status, .site-footer, .evidence-heading, .provenance-grid {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+.page-shell { max-width: 980px; margin: 0 auto; padding: 2.5rem 1.25rem 4rem; }
+.site-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 1.5rem; padding-bottom: 1.4rem; border-bottom: 1px solid #cfc4b4; }
+.brand { margin: 0; color: #7a3d2d; font-size: 1.05rem; letter-spacing: .14em; }
+.tagline { margin: .25rem 0 0; color: #8a8074; font-size: .9rem; }
+.prototype-badge { display: inline-flex; border: 1px solid #c6a493; border-radius: 999px; color: #7a3d2d; padding: .25rem .65rem; font-size: .68rem; letter-spacing: .05em; white-space: nowrap; }
+.reading-column { max-width: 700px; margin: 5rem auto 0; }
+.story-reference { margin: 0 0 .45rem; color: #8a3f2f; font-size: .92rem; letter-spacing: .12em; }
+h1 { margin: 0; color: #28221d; font-size: clamp(2.2rem, 6vw, 4rem); font-weight: 500; letter-spacing: .05em; line-height: 1.25; }
+.story-meta { margin: .7rem 0 3.5rem; color: #998e80; font-size: .72rem; }
+.story-panel { padding: 2.1rem 0 2.4rem; border-top: 2px solid #302b27; border-bottom: 1px solid #cfc4b4; }
+.story-text { margin: 0; color: #2c2722; font-size: clamp(1.25rem, 2.2vw, 1.55rem); letter-spacing: .055em; line-height: 2.25; white-space: pre-wrap; }
+.annotation-panel { margin: 1.5rem 0 0; padding: 1rem 1.15rem; background: #ebe5d9; border-left: 3px solid #b9957d; }
+.annotation-text { margin: .2rem 0 0; color: #514941; font-size: 1rem; line-height: 1.9; }
+.section-label { margin: 0; color: #9a6a56; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: .68rem; letter-spacing: .12em; text-transform: uppercase; }
+.people-section { margin-top: 4rem; }
+.section-heading h2 { margin: .25rem 0 1.1rem; font-size: 1.4rem; font-weight: 500; }
+.people-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .8rem; }
+.person-card { background: #fffdf9; border: 1px solid #d9cebf; border-radius: 3px; }
+.person-card summary { display: flex; align-items: center; justify-content: space-between; gap: .75rem; list-style: none; padding: .85rem 1rem; }
+.person-card summary::-webkit-details-marker { display: none; }
+.person-card summary::after { content: "+"; color: #b18168; font-size: 1.1rem; }
+.person-card[open] summary::after { content: "−"; }
+.person-name { color: #47352b; font-size: 1.15rem; }
+.person-hint { color: #9e9387; font-size: .65rem; }
+.person-card-body { border-top: 1px solid #e6ded2; padding: .8rem 1rem 1rem; }
+.person-label { margin: 0; color: #8e8274; font-size: .78rem; }
+.surface-list { margin: .2rem 0; color: #453a32; }
+.person-status { margin: .6rem 0 0; color: #a09385; font-size: .64rem; }
+.mention-strip { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: 1rem; }
+.mention-chip { border: 1px solid #dac8ba; border-radius: 999px; color: #765244; padding: .25rem .6rem; font-size: .78rem; }
+.evidence-details { margin-top: 4rem; border-top: 1px solid #cfc4b4; padding-top: 1rem; }
+.evidence-details > summary { color: #6f5b4c; font-size: .95rem; }
+.evidence-intro { color: #83786c; font-size: .82rem; }
+.evidence-list { display: grid; gap: 1rem; }
+.evidence-item { padding: 1rem; background: rgba(255, 253, 249, .7); border: 1px solid #ddd3c5; }
+.evidence-heading { display: flex; justify-content: space-between; gap: 1rem; color: #94735f; font-size: .68rem; letter-spacing: .04em; }
+.evidence-item blockquote { margin: .75rem 0; color: #4b4037; white-space: pre-wrap; font-size: .9rem; }
+.provenance-grid { display: grid; grid-template-columns: 5.5rem 1fr; gap: .25rem .6rem; margin: 0; color: #918578; font-size: .64rem; overflow-wrap: anywhere; }
+.provenance-grid dt { color: #a06f56; }
+.provenance-grid dd { margin: 0; }
+.site-footer { display: flex; justify-content: space-between; gap: 1rem; max-width: 700px; margin: 4rem auto 0; color: #998f82; font-size: .65rem; }
+.error-panel, .loading-state { max-width: 700px; margin: 8rem auto; padding: 2rem; background: #fffdf9; border: 1px solid #d9cebf; }
+.error-panel h1 { margin-top: 1rem; font-size: 2rem; }
+.error-panel p:last-child { color: #8d4036; overflow-wrap: anywhere; }
+
+@media (max-width: 640px) {
+  .page-shell { padding-top: 1.5rem; }
+  .site-header { align-items: flex-start; }
+  .reading-column { margin-top: 3.5rem; }
+  .people-grid { grid-template-columns: 1fr; }
+  .story-text { letter-spacing: .02em; }
+  .site-footer { flex-direction: column; }
+}

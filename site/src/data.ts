@@ -38,8 +38,15 @@ export function parseSiteBundle(value: unknown): SiteBundle {
   return value as unknown as SiteBundle;
 }
 
+export function staticAssetUrl(path: string): string {
+  const base = import.meta.env.BASE_URL.endsWith("/")
+    ? import.meta.env.BASE_URL
+    : `${import.meta.env.BASE_URL}/`;
+  return `${base}${path.replace(/^\/+/, "")}`;
+}
+
 export async function loadSiteBundle(): Promise<SiteBundle> {
-  const response = await fetch("/data/wp1-site.json");
+  const response = await fetch(staticAssetUrl("data/wp1-site.json"));
   if (!response.ok) {
     throw new Error(`无法读取静态数据 (${response.status})`);
   }

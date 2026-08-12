@@ -1,0 +1,85 @@
+name: Deploy static prototype to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install Python dependencies
+        run: python -m pip install -r requirements-dev.txt
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+
+      - name: Install Node dependencies
+        run: npm ci
+
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v5
+
+      - name: Rebuild WP1 static data
+        run: python3 scripts/build_wp1_sample.py
+
+      - name: Validate WP1 data
+        run: python3 scripts/validate_wp1.py
+
+      - name: Run Python tests
+        run: python3 -m unittest discover -s tests -p 'test*.py'
+
+      - name: Typecheck frontend
+        run: npm run typecheck
+
+      - name: Build frontend
+        run: npm run build:site
+
+      - name: Check published artifact scope
+        shell: bash
+        run: |
+          test -f dist/index.html
+          test -f dist/data/wp1-site.json
+          if find dist -type f \( -path '*content*' -o -path '*sources*' -o -path '*shishuoSources*' -o -path '*research*' \) -print -quit | grep -q .; then
+            echo "Research/source payload detected in Pages artifact"
+            exit 1
+          fi
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+      actions: read
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
