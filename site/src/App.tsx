@@ -592,9 +592,11 @@ function App() {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    loadSiteBundle()
-      .then(setData)
-      .catch((reason: unknown) => setError(reason instanceof Error ? reason.message : String(reason)));
+    try {
+      setData(loadSiteBundle());
+    } catch (reason: unknown) {
+      setError(reason instanceof Error ? reason.message : String(reason));
+    }
   }, []);
 
   const story = useMemo(

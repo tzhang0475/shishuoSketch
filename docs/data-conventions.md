@@ -121,6 +121,9 @@ string matching alone.
 ## Generated versus reviewed data
 
 Raw and canonical source files are immutable inputs. `data/annotation/` holds
-reviewable annotations and candidates. `data/derived/` and `site/public/`
-contain reproducible build outputs. The WP1 sample builder records its input
-entry path and source hashes; it does not edit the source entry.
+reviewable annotations and candidates. `data/derived/` is the reproducible
+research-side build output, while `site/src/generated/` is the Vite build
+input generated from that same bundle. They are synchronized by the builder
+and exact-identity validation; the frontend does not publish a separate
+runtime JSON copy. The WP1 sample builder records its input entry path and
+source hashes; it does not edit the source entry.

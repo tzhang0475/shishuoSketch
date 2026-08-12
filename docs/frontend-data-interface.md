@@ -1,11 +1,17 @@
 # Static frontend data interface
 
-The frontend is static-first. It fetches one generated JSON bundle from the
-Vite base-aware asset path:
+The frontend is static-first. The deterministic WP1 builder generates one
+frontend bundle at `site/src/generated/wp1-site.json`, and the Vite
+application imports it at build time. The browser does not fetch a separately
+cached `wp1-site.json` URL. Code and frontend data therefore enter the same
+hashed production assets and are deployed atomically; users do not need a
+hard refresh or cache-busting query parameter after deployment.
 
-```text
-${BASE_URL}data/wp1-site.json
-```
+`data/derived/wp1-site.json` is the research-side derived archive of the same
+builder output. It is not an independently maintained frontend source: the
+builder writes both files from one bundle and validation requires exact JSON
+identity. Canonical and research/source data remain outside the frontend
+artifact.
 
 The bundle contains these arrays:
 
@@ -45,9 +51,9 @@ with `relation_basis: "direct" | "derived"`. Derived records expose
 the current bundle contains only the reviewed R1 atomic edges plus the legacy
 `relation-001` derived path.
 
-The page loads the JSON, performs a small runtime shape/reference check, and
-renders the first validated Story. It does not call a backend, database,
-online LLM, or runtime API.
+The page receives the imported bundle, performs a small runtime shape/reference
+check, and renders the first validated Story. It does not call a backend,
+database, online LLM, or runtime API.
 
 Each Story in the generated bundle also carries a reviewed `reading` object:
 

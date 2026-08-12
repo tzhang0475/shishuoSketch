@@ -354,7 +354,7 @@ def load_index(
     path = root / relative_path
     try:
         document = read_json(path)
-    except ValueError as exc:
+    except (OSError, ValueError) as exc:
         errors.append(str(exc))
         return {}
     records = document.get(collection_key) if isinstance(document, dict) else None
@@ -411,7 +411,7 @@ def load_unified_person_registry(root: Path, errors: list[str]) -> dict[str, dic
     path = root / "data/people.json"
     try:
         document = read_json(path)
-    except ValueError as exc:
+    except (OSError, ValueError) as exc:
         errors.append(str(exc))
         return {}
     records = document.get("people") if isinstance(document, dict) else None
@@ -1287,13 +1287,21 @@ def validate_bundle(root: Path, records_by_kind: dict[str, list[dict[str, Any]]]
                     validate_display_pair(display.get(field), f"{label}.source_display.{source_id}.{field}")
                     if isinstance(display.get(field), dict) and display[field].get("original") != source.get(field):
                         errors.append(f"{label}.source_display.{source_id}.{field}.original changes canonical source title")
-    public_path = root / "site/public/data/wp1-site.json"
+    vite_path = root / "site/src/generated/wp1-site.json"
     try:
-        public_bundle = read_json(public_path)
-        if public_bundle != bundle:
-            errors.append("site/public/data/wp1-site.json differs from data/derived/wp1-site.json")
-    except ValueError as exc:
+        if (root / "data/derived/wp1-site.json").read_bytes() != vite_path.read_bytes():
+            errors.append("site/src/generated/wp1-site.json bytes differ from data/derived/wp1-site.json")
+    except OSError as exc:
+        errors.append(f"cannot compare generated bundle bytes: {exc}")
+    try:
+        vite_bundle = read_json(vite_path)
+        if vite_bundle != bundle:
+            errors.append("site/src/generated/wp1-site.json differs from data/derived/wp1-site.json")
+    except (OSError, ValueError) as exc:
         errors.append(str(exc))
+    obsolete_public_path = root / "site/public/data/wp1-site.json"
+    if obsolete_public_path.exists():
+        errors.append("obsolete runtime bundle exists: site/public/data/wp1-site.json")
     return errors
 
 

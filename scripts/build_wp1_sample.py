@@ -3,7 +3,8 @@
 
 The canonical Shishuo entry remains the source of truth.  This script reads
 it, reads the existing six-person pilot outputs, and writes only annotation
-and derived/static data files.
+and derived/static data files. The Vite input is generated from the same
+in-memory bundle as the derived archive and is not maintained independently.
 """
 
 from __future__ import annotations
@@ -38,6 +39,8 @@ ENTRY_PATH = ROOT / "content/processed/shishuo/entries/06-yaliang/entry-019.md"
 PEOPLE_PATH = ROOT / "data/people.json"
 ALIASES_PATH = ROOT / "data/aliases.json"
 MENTIONS_PATH = ROOT / "data/mentions/shishuo.json"
+DERIVED_BUNDLE_PATH = ROOT / "data/derived/wp1-site.json"
+VITE_BUNDLE_PATH = ROOT / "site/src/generated/wp1-site.json"
 
 TARGET_PERSON_IDS = (
     "wang-xizhi",
@@ -759,8 +762,8 @@ def main() -> int:
         "evidence": records["evidence"]["records"],
         "sources": records["sources"]["records"],
     }
-    write_json(ROOT / "data/derived/wp1-site.json", bundle)
-    write_json(ROOT / "site/public/data/wp1-site.json", bundle)
+    write_json(DERIVED_BUNDLE_PATH, bundle)
+    write_json(VITE_BUNDLE_PATH, bundle)
     print(f"built WP1 sample: {ENTRY_ID}; {len(sample_people)} people; {len(sample_mentions)} mentions")
     return 0
 

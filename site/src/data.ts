@@ -1,4 +1,5 @@
 import type { SiteBundle } from "./types";
+import generatedSiteBundle from "./generated/wp1-site.json";
 
 function isRecord(value: unknown): value is Record<string, unknown> {
   return typeof value === "object" && value !== null;
@@ -86,17 +87,6 @@ export function parseSiteBundle(value: unknown): SiteBundle {
   return value as unknown as SiteBundle;
 }
 
-export function staticAssetUrl(path: string): string {
-  const base = import.meta.env.BASE_URL.endsWith("/")
-    ? import.meta.env.BASE_URL
-    : `${import.meta.env.BASE_URL}/`;
-  return `${base}${path.replace(/^\/+/, "")}`;
-}
-
-export async function loadSiteBundle(): Promise<SiteBundle> {
-  const response = await fetch(staticAssetUrl("data/wp1-site.json"));
-  if (!response.ok) {
-    throw new Error(`无法读取静态数据 (${response.status})`);
-  }
-  return parseSiteBundle(await response.json());
+export function loadSiteBundle(): SiteBundle {
+  return parseSiteBundle(generatedSiteBundle);
 }

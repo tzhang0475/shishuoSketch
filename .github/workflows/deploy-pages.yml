@@ -57,11 +57,14 @@ jobs:
       - name: Build frontend
         run: npm run build:site
 
+      - name: Validate production frontend data
+        run: python3 scripts/validate_frontend_artifact.py --production
+
       - name: Check published artifact scope
         shell: bash
         run: |
           test -f dist/index.html
-          test -f dist/data/wp1-site.json
+          test ! -e dist/data/wp1-site.json
           if find dist -type f \( -path '*content*' -o -path '*sources*' -o -path '*shishuoSources*' -o -path '*research*' \) -print -quit | grep -q .; then
             echo "Research/source payload detected in Pages artifact"
             exit 1
