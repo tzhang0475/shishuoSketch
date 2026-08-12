@@ -5,6 +5,11 @@ from pathlib import Path
 import unittest
 
 
+def repository_validation_mode() -> str:
+    """Return the explicit repository validation mode for the test suite."""
+    return os.environ.get("WP1_PROVENANCE_MODE", "full")
+
+
 def skip_if_portable_payload_missing(
     testcase: unittest.TestCase,
     root: Path,

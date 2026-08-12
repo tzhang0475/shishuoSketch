@@ -6,6 +6,7 @@ from pathlib import Path
 import unittest
 
 from scripts.validate_wp1 import OBJECTS, validate_references, validate_repository
+from tests.support import repository_validation_mode
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -22,10 +23,10 @@ class RelationGoldPilotTests(unittest.TestCase):
     def errors_after(self, mutate) -> list[str]:
         records = deepcopy(self.records_by_kind())
         mutate(records)
-        return validate_references(records, root=ROOT, mode="full")
+        return validate_references(records, root=ROOT, mode=repository_validation_mode())
 
     def test_reviewed_r1_relations_validate(self) -> None:
-        self.assertEqual(validate_repository(ROOT, mode="full"), [])
+        self.assertEqual(validate_repository(ROOT, mode=repository_validation_mode()), [])
         relations = json.loads(
             (ROOT / "data/annotation/wp1-relations.json").read_text(encoding="utf-8")
         )["records"]

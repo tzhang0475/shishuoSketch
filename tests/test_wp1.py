@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 import json
-import os
 from pathlib import Path
 import shutil
 import tempfile
@@ -23,6 +22,7 @@ from scripts.validate_wp1 import (
     validate_punctuation_reference,
 )
 from scripts.reading_layers import canonical_sections, validate_punctuation_round_trip
+from tests.support import repository_validation_mode
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -39,12 +39,11 @@ class WP1Tests(unittest.TestCase):
     def provenance_errors(self, mutate, mode: str | None = None) -> list[str]:
         records = self.records_by_kind()
         mutate(records)
-        validation_mode = mode or os.environ.get("WP1_PROVENANCE_MODE", "full")
+        validation_mode = mode or repository_validation_mode()
         return validate_references(records, root=ROOT, mode=validation_mode)
 
     def test_all_wp1_object_records_validate(self) -> None:
-        mode = os.environ.get("WP1_PROVENANCE_MODE", "full")
-        self.assertEqual(validate_repository(ROOT, mode=mode), [])
+        self.assertEqual(validate_repository(ROOT, mode=repository_validation_mode()), [])
 
     def test_invalid_record_reports_field_and_constraint(self) -> None:
         errors = validate_schema(schema_path=ROOT / "schema/person.schema.json", records=[{"id": "bad"}], label="Person")
@@ -122,8 +121,7 @@ class WP1Tests(unittest.TestCase):
         return record, canonical
 
     def test_reviewed_punctuation_passes_canonical_round_trip(self) -> None:
-        mode = os.environ.get("WP1_PROVENANCE_MODE", "full")
-        self.assertEqual(validate_punctuation(ROOT, mode=mode), [])
+        self.assertEqual(validate_punctuation(ROOT, mode=repository_validation_mode()), [])
 
     def _punctuation_reference(self) -> dict[str, object]:
         document = json.loads(
