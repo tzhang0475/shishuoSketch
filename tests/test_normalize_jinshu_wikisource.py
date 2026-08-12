@@ -12,6 +12,7 @@ from scripts.normalize_jinshu_wikisource import (
     normalize_all,
     normalize_body,
 )
+from tests.support import skip_if_portable_payload_missing
 
 
 class JinshuWikisourceNormalizationTests(unittest.TestCase):
@@ -38,6 +39,11 @@ class JinshuWikisourceNormalizationTests(unittest.TestCase):
         self.assertEqual(notes, [])
 
     def test_complete_local_lock_normalizes_exactly_130_volumes(self) -> None:
+        skip_if_portable_payload_missing(
+            self,
+            REPOSITORY_ROOT,
+            "sources/downloads/jinshu/wikisource-siku/text/volume-001.txt",
+        )
         with tempfile.TemporaryDirectory() as temporary:
             output = Path(temporary) / "normalized"
             manifest_path = Path(temporary) / "normalization-manifest.lock.json"

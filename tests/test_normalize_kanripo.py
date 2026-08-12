@@ -7,6 +7,7 @@ import tempfile
 import unittest
 
 from scripts.normalize_kanripo import discover_configured_sources, normalize_file
+from tests.support import skip_if_portable_payload_missing
 
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
@@ -40,6 +41,7 @@ def _normalized_body(markdown: str) -> str:
 
 class NormalizeKanripoTests(unittest.TestCase):
     def test_configured_source_discovery_matches_existing_primary_trees(self) -> None:
+        skip_if_portable_payload_missing(self, REPO_ROOT, "shishuoSources/shishuo")
         config = REPO_ROOT / "config" / "sources.yaml"
         configured = discover_configured_sources(config)
         # The configured Kanripo TXT collections still cover Shishuo.  Jinshu

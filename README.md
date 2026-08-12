@@ -963,6 +963,19 @@ manifest, and generated static bundle:
 npm run validate
 ```
 
+Local research checkouts can require all ignored source payloads explicitly:
+
+```sh
+python3 scripts/validate_wp1.py --mode full
+```
+
+Clean CI/Pages checkouts use committed lock metadata for intentionally absent
+source payloads without weakening artifact hashing:
+
+```sh
+python3 scripts/validate_wp1.py --mode portable
+```
+
 Build the static React/Vite/TypeScript site:
 
 ```sh

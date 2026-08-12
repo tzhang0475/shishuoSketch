@@ -7,6 +7,7 @@ import tempfile
 import unittest
 
 from scripts.build_six_person_pilot import REPOSITORY_ROOT, build_outputs
+from tests.support import skip_if_portable_payload_missing
 
 
 class SixPersonPilotTests(unittest.TestCase):
@@ -86,6 +87,12 @@ class SixPersonPilotTests(unittest.TestCase):
                         self.assertTrue(mention["context_identity_hits"])
 
     def test_source_hashes_in_mention_provenance_match_files(self) -> None:
+        source_paths = {
+            mention["evidence"]["provenance"]["source_path"]
+            for document in (self.shishuo, self.jinshu)
+            for mention in document["mentions"]
+        }
+        skip_if_portable_payload_missing(self, self.root, *sorted(source_paths))
         checked: dict[Path, str] = {}
         for document in (self.shishuo, self.jinshu):
             for mention in document["mentions"]:

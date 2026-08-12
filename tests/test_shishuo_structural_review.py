@@ -7,6 +7,7 @@ import unittest
 import yaml
 
 from scripts import review_shishuo_structural as review
+from tests.support import skip_if_portable_payload_missing
 
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
@@ -77,6 +78,11 @@ class ShishuoStructuralReviewTests(unittest.TestCase):
             self.assertEqual(record["fallback_witnesses_used"], [])
 
     def test_report_rendering_and_review_are_deterministic(self) -> None:
+        skip_if_portable_payload_missing(
+            self,
+            REPO_ROOT,
+            "sources/downloads/shishuo/wikisource-sbck/pages",
+        )
         before = _tree_digest(
             REPO_ROOT / "content/processed/shishuo/chapters",
             REPO_ROOT / "content/processed/shishuo/entries",

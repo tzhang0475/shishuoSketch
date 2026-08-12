@@ -43,9 +43,12 @@ jobs:
         run: python3 scripts/build_wp1_sample.py
 
       - name: Validate WP1 data
-        run: python3 scripts/validate_wp1.py
+        run: python3 scripts/validate_wp1.py --mode portable
 
       - name: Run Python tests
+        env:
+          WP1_PROVENANCE_MODE: portable
+          SHISHUO_SKIP_SOURCE_PAYLOAD_TESTS: "1"
         run: python3 -m unittest discover -s tests -p 'test*.py'
 
       - name: Typecheck frontend

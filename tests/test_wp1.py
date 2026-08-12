@@ -1,10 +1,19 @@
 from __future__ import annotations
 
 import json
+import os
 from pathlib import Path
+import shutil
+import tempfile
 import unittest
 
-from scripts.validate_wp1 import OBJECTS, validate_references, validate_repository, validate_schema
+from scripts.validate_wp1 import (
+    OBJECTS,
+    validate_references,
+    validate_repository,
+    validate_schema,
+    validate_source_provenance,
+)
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -18,13 +27,15 @@ class WP1Tests(unittest.TestCase):
             records[kind] = document["records"]
         return records
 
-    def provenance_errors(self, mutate) -> list[str]:
+    def provenance_errors(self, mutate, mode: str | None = None) -> list[str]:
         records = self.records_by_kind()
         mutate(records)
-        return validate_references(records, root=ROOT)
+        validation_mode = mode or os.environ.get("WP1_PROVENANCE_MODE", "full")
+        return validate_references(records, root=ROOT, mode=validation_mode)
 
     def test_all_wp1_object_records_validate(self) -> None:
-        self.assertEqual(validate_repository(ROOT), [])
+        mode = os.environ.get("WP1_PROVENANCE_MODE", "full")
+        self.assertEqual(validate_repository(ROOT, mode=mode), [])
 
     def test_invalid_record_reports_field_and_constraint(self) -> None:
         errors = validate_schema(schema_path=ROOT / "schema/person.schema.json", records=[{"id": "bad"}], label="Person")
@@ -92,6 +103,92 @@ class WP1Tests(unittest.TestCase):
 
         errors = self.provenance_errors(mutate)
         self.assertTrue(any("source_sha256 does not match" in error for error in errors))
+
+    def test_full_mode_fails_when_required_source_is_absent(self) -> None:
+        def mutate(records):
+            evidence = next(item for item in records["evidence"] if item["id"] == "evidence-001")
+            evidence["locator"]["source_provenance"]["source_path"] = (
+                "shishuoSources/shishuo/does-not-exist.txt"
+            )
+
+        records = self.records_by_kind()
+        mutate(records)
+        errors = validate_references(records, root=ROOT, mode="full")
+        self.assertTrue(any("source_path: file does not exist" in error for error in errors))
+
+    def _portable_lock_root(self) -> tuple[tempfile.TemporaryDirectory, dict[str, str]]:
+        temporary = tempfile.TemporaryDirectory()
+        root = Path(temporary.name)
+        (root / "sources/registry").mkdir(parents=True)
+        shutil.copy2(
+            ROOT / "sources/registry/shishuo-provenance.lock.json",
+            root / "sources/registry/shishuo-provenance.lock.json",
+        )
+        (root / "sources/registry/shishuo.yaml").write_text("schema: 1\n", encoding="utf-8")
+        provenance = {
+            "witness_id": "shishuo-kanripo-wyg",
+            "source_path": "shishuoSources/shishuo/KR3l0002_002.txt",
+            "source_sha256": "6b8a3fcf4fb07152c567a25fe56e9511f45a9748b83c107e6a8956aa7e65367a",
+        }
+        return temporary, provenance
+
+    def test_portable_mode_accepts_missing_ignored_source_from_trusted_lock(self) -> None:
+        temporary, provenance = self._portable_lock_root()
+        try:
+            self.assertEqual(
+                validate_source_provenance(
+                    Path(temporary.name),
+                    provenance,
+                    label="test source",
+                    mode="portable",
+                ),
+                [],
+            )
+        finally:
+            temporary.cleanup()
+
+    def test_portable_mode_rejects_wrong_missing_source_hash(self) -> None:
+        temporary, provenance = self._portable_lock_root()
+        try:
+            provenance["source_sha256"] = "0" * 64
+            errors = validate_source_provenance(
+                Path(temporary.name), provenance, label="test source", mode="portable"
+            )
+            self.assertTrue(any("source_sha256 does not match committed trusted metadata" in error for error in errors))
+        finally:
+            temporary.cleanup()
+
+    def test_portable_mode_rejects_wrong_missing_source_witness(self) -> None:
+        temporary, provenance = self._portable_lock_root()
+        try:
+            provenance["witness_id"] = "wrong-witness"
+            errors = validate_source_provenance(
+                Path(temporary.name), provenance, label="test source", mode="portable"
+            )
+            self.assertTrue(any("witness_id does not match committed trusted metadata" in error for error in errors))
+        finally:
+            temporary.cleanup()
+
+    def test_portable_mode_rejects_unknown_missing_source_path(self) -> None:
+        temporary, provenance = self._portable_lock_root()
+        try:
+            provenance["source_path"] = "shishuoSources/shishuo/unknown.txt"
+            errors = validate_source_provenance(
+                Path(temporary.name), provenance, label="test source", mode="portable"
+            )
+            self.assertTrue(any("no committed trusted provenance record" in error for error in errors))
+        finally:
+            temporary.cleanup()
+
+    def test_portable_mode_never_allows_missing_artifact_payload(self) -> None:
+        def mutate(records):
+            evidence = next(item for item in records["evidence"] if item["id"] == "evidence-004")
+            evidence["locator"]["artifact_path"] = "content/processed/jinshu/units/missing.md"
+
+        records = self.records_by_kind()
+        mutate(records)
+        errors = validate_references(records, root=ROOT, mode="portable")
+        self.assertTrue(any("artifact_path: file does not exist" in error for error in errors))
 
     def test_mismatched_entry_id_and_path_is_rejected(self) -> None:
         def mutate(records):

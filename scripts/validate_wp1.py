@@ -25,6 +25,14 @@ OBJECTS = {
     "Evidence": ("schema/evidence.schema.json", "data/evidence/wp1-evidence.json", "evidence"),
 }
 
+PROVENANCE_MODES = ("full", "portable")
+SHISHUO_PROVENANCE_LOCK = "sources/registry/shishuo-provenance.lock.json"
+PORTABLE_SOURCE_AVAILABILITIES = {
+    "git-ignored-upstream-payload",
+    "ignored-upstream-payload",
+    "external-source-payload",
+}
+
 
 def read_json(path: Path) -> Any:
     try:
@@ -84,6 +92,237 @@ def resolve_relative_file(root: Path, value: Any, label: str, errors: list[str])
         errors.append(f"{label}: file does not exist: {value!r}")
         return None
     return path
+
+
+def resolve_relative_path(root: Path, value: Any, label: str, errors: list[str]) -> Path | None:
+    """Resolve a repository-relative path without requiring the file to exist."""
+    if not isinstance(value, str) or not value:
+        errors.append(f"{label}: path must be a non-empty relative string")
+        return None
+    relative = Path(value)
+    if relative.is_absolute() or ".." in relative.parts:
+        errors.append(f"{label}: path must remain inside the repository: {value!r}")
+        return None
+    path = (root / relative).resolve()
+    try:
+        path.relative_to(root.resolve())
+    except ValueError:
+        errors.append(f"{label}: path escapes the repository: {value!r}")
+        return None
+    return path
+
+
+def _trusted_source_records(root: Path, errors: list[str]) -> dict[str, list[dict[str, Any]]]:
+    """Load committed file identities used when ignored source payloads are absent.
+
+    The Jinshu/Wikisource lock already records source-text files inside each
+    volume record.  The small Shishuo lock supplies the equivalent record for
+    the Kanripo payload, without copying any source text into Git.
+    """
+    lock_paths: list[Path] = []
+    shishuo_lock = root / SHISHUO_PROVENANCE_LOCK
+    if shishuo_lock.is_file():
+        lock_paths.append(shishuo_lock)
+    downloads_root = root / "sources/downloads"
+    if downloads_root.is_dir():
+        lock_paths.extend(sorted(downloads_root.glob("**/manifest.lock.json")))
+
+    by_path: dict[str, list[dict[str, Any]]] = {}
+
+    def add_record(
+        descriptor: Any,
+        *,
+        witness_id: Any,
+        availability: Any,
+        lock_path: Path,
+        source_identity: Any,
+        registry_path: Any,
+    ) -> None:
+        if not isinstance(descriptor, dict):
+            return
+        source_path = descriptor.get("path")
+        source_sha256 = descriptor.get("sha256")
+        if not isinstance(source_path, str) or not isinstance(source_sha256, str):
+            return
+        if not isinstance(witness_id, str) or not witness_id:
+            errors.append(f"trusted provenance {lock_path}: file record has no witness_id: {source_path!r}")
+            return
+        record = {
+            "witness_id": witness_id,
+            "source_path": source_path,
+            "source_sha256": source_sha256,
+            "availability": availability,
+            "lock_path": lock_path.as_posix(),
+            "source_identity": source_identity,
+            "registry_path": registry_path,
+        }
+        by_path.setdefault(Path(source_path).as_posix(), []).append(record)
+
+    for lock_path in lock_paths:
+        try:
+            document = read_json(lock_path)
+        except ValueError as exc:
+            errors.append(str(exc))
+            continue
+        if not isinstance(document, dict):
+            errors.append(f"trusted provenance {lock_path} must contain a JSON object")
+            continue
+        top_witness = document.get("witness_id")
+        top_availability = document.get("availability")
+        top_identity = document.get("source_identity")
+        top_registry = document.get("registry_path")
+
+        for descriptor in document.get("files", []):
+            add_record(
+                descriptor,
+                witness_id=descriptor.get("witness_id", top_witness) if isinstance(descriptor, dict) else top_witness,
+                availability=descriptor.get("availability", top_availability) if isinstance(descriptor, dict) else top_availability,
+                lock_path=lock_path,
+                source_identity=descriptor.get("source_identity", top_identity) if isinstance(descriptor, dict) else top_identity,
+                registry_path=descriptor.get("registry_path", top_registry) if isinstance(descriptor, dict) else top_registry,
+            )
+
+        for record in document.get("records", []):
+            if not isinstance(record, dict):
+                continue
+            record_witness = record.get("witness_id", top_witness)
+            record_availability = record.get("availability", top_availability)
+            record_identity = record.get("source_identity")
+            if not isinstance(record_identity, dict):
+                record_identity = {
+                    key: record[key]
+                    for key in (
+                        "source_url",
+                        "retrieval_url",
+                        "api_url",
+                        "api_endpoint",
+                        "revision_id",
+                        "revision_timestamp",
+                        "page_id",
+                        "identifier",
+                    )
+                    if key in record
+                }
+            if not record_identity:
+                record_identity = top_identity
+            record_registry = record.get("registry_path", top_registry)
+            text_path = record.get("text_path")
+            text_sha256 = record.get("text_sha256")
+            if isinstance(text_path, str) and isinstance(text_sha256, str):
+                add_record(
+                    {"path": text_path, "sha256": text_sha256},
+                    witness_id=record_witness,
+                    availability=record_availability,
+                    lock_path=lock_path,
+                    source_identity=record_identity,
+                    registry_path=record_registry,
+                )
+            for descriptor in record.get("files", []):
+                add_record(
+                    descriptor,
+                    witness_id=descriptor.get("witness_id", record_witness) if isinstance(descriptor, dict) else record_witness,
+                    availability=descriptor.get("availability", record_availability) if isinstance(descriptor, dict) else record_availability,
+                    lock_path=lock_path,
+                    source_identity=descriptor.get("source_identity", record_identity) if isinstance(descriptor, dict) else record_identity,
+                    registry_path=descriptor.get("registry_path", record_registry) if isinstance(descriptor, dict) else record_registry,
+                )
+
+    return by_path
+
+
+def validate_source_provenance(
+    root: Path,
+    provenance: dict[str, Any],
+    *,
+    label: str,
+    mode: str = "full",
+    trusted_records: dict[str, list[dict[str, Any]]] | None = None,
+) -> list[str]:
+    """Validate an upstream source locator in strict or clean-checkout mode."""
+    errors: list[str] = []
+    if mode not in PROVENANCE_MODES:
+        return [f"{label}: unsupported provenance validation mode: {mode!r}"]
+    source_path_value = provenance.get("source_path")
+    source_path = resolve_relative_path(root, source_path_value, f"{label} source_path", errors)
+    source_sha256 = provenance.get("source_sha256")
+    if not isinstance(source_sha256, str) or not source_sha256:
+        errors.append(f"{label} source_sha256 must be a non-empty string")
+    witness_id = provenance.get("witness_id")
+    if not isinstance(witness_id, str) or not witness_id:
+        errors.append(f"{label} witness_id must be a non-empty string")
+    if source_path is None or not isinstance(source_path_value, str):
+        return errors
+
+    if source_path.is_file():
+        actual_source_hash = sha256_file(source_path)
+        if source_sha256 != actual_source_hash:
+            errors.append(
+                f"{label} source_sha256 does not match {source_path_value!r}: "
+                f"{source_sha256!r} != {actual_source_hash!r}"
+            )
+        return errors
+
+    if mode == "full":
+        errors.append(f"{label} source_path: file does not exist: {source_path_value!r}")
+        return errors
+
+    trusted_records = trusted_records if trusted_records is not None else _trusted_source_records(root, errors)
+    candidates = trusted_records.get(Path(source_path_value).as_posix(), [])
+    if not candidates:
+        errors.append(
+            f"{label} source_path is missing and has no committed trusted provenance record: "
+            f"{source_path_value!r}"
+        )
+        return errors
+
+    matching = [
+        record
+        for record in candidates
+        if record.get("witness_id") == witness_id and record.get("source_sha256") == source_sha256
+    ]
+    if not matching:
+        expected = "; ".join(
+            f"witness_id={record.get('witness_id')!r}, source_sha256={record.get('source_sha256')!r}"
+            for record in candidates
+        )
+        if not any(record.get("witness_id") == witness_id for record in candidates):
+            errors.append(
+                f"{label} missing source witness_id does not match committed trusted metadata: "
+                f"{witness_id!r} (trusted: {expected})"
+            )
+        elif not any(record.get("source_sha256") == source_sha256 for record in candidates):
+            errors.append(
+                f"{label} missing source_sha256 does not match committed trusted metadata: "
+                f"{source_sha256!r} (trusted: {expected})"
+            )
+        else:
+            errors.append(f"{label} missing source provenance does not match committed trusted metadata")
+        return errors
+
+    if not any(record.get("availability") in PORTABLE_SOURCE_AVAILABILITIES for record in matching):
+        locations = ", ".join(str(record.get("lock_path")) for record in matching)
+        errors.append(
+            f"{label} missing source is not explicitly registered as an ignored/external payload "
+            f"in committed metadata: {locations}"
+        )
+
+    if not any(
+        isinstance(record.get("source_identity"), dict) and record.get("source_identity")
+        for record in matching
+    ):
+        errors.append(
+            f"{label} committed trusted metadata has no source/revision identity for "
+            f"{source_path_value!r}"
+        )
+
+    for record in matching:
+        registry_path = record.get("registry_path")
+        if registry_path is not None:
+            registry_file = resolve_relative_path(root, registry_path, f"{label} registry_path", errors)
+            if registry_file is not None and not registry_file.is_file():
+                errors.append(f"{label} registry_path does not exist: {registry_path!r}")
+
+    return errors
 
 
 def load_index(
@@ -153,9 +392,11 @@ def validate_canonical_provenance(
     root: Path,
     records_by_kind: dict[str, list[dict[str, Any]]],
     sources: dict[str, dict[str, Any]],
+    mode: str = "full",
 ) -> list[str]:
     """Validate artifact/source provenance against the canonical indexes and files."""
     errors: list[str] = []
+    trusted_records = _trusted_source_records(root, errors) if mode == "portable" else None
     shishuo_entries = load_index(
         root,
         "data/shishuo-corpus-index.json",
@@ -284,20 +525,16 @@ def validate_canonical_provenance(
                 f"Evidence {evidence_id} source provenance witness does not match source record: "
                 f"{provenance.get('witness_id')!r} != {source.get('witness_id')!r}"
             )
-        source_path_value = provenance.get("source_path")
-        source_path = resolve_relative_file(
-            root,
-            source_path_value,
-            f"Evidence {evidence_id} source_provenance.source_path",
-            errors,
+        errors.extend(
+            validate_source_provenance(
+                root,
+                provenance,
+                label=f"Evidence {evidence_id} source_provenance",
+                mode=mode,
+                trusted_records=trusted_records,
+            )
         )
-        if source_path is not None:
-            actual_source_hash = sha256_file(source_path)
-            if provenance.get("source_sha256") != actual_source_hash:
-                errors.append(
-                    f"Evidence {evidence_id} source_sha256 does not match {source_path_value!r}: "
-                    f"{provenance.get('source_sha256')!r} != {actual_source_hash!r}"
-                )
+        source_path_value = provenance.get("source_path")
         if metadata.get("source_path") != source_path_value:
             errors.append(
                 f"Evidence {evidence_id} source provenance path disagrees with artifact metadata: "
@@ -314,6 +551,7 @@ def validate_canonical_provenance(
 def validate_references(
     records_by_kind: dict[str, list[dict[str, Any]]],
     root: Path | None = None,
+    mode: str = "full",
 ) -> list[str]:
     errors: list[str] = []
     by_kind = {
@@ -408,7 +646,7 @@ def validate_references(
         add_ref_error(errors, f"Evidence {item.get('id')} source_id", item.get("source_id"), sources)
 
     if root is not None:
-        errors.extend(validate_canonical_provenance(root, records_by_kind, sources))
+        errors.extend(validate_canonical_provenance(root, records_by_kind, sources, mode=mode))
 
     return errors
 
@@ -468,7 +706,7 @@ def validate_bundle(root: Path, records_by_kind: dict[str, list[dict[str, Any]]]
     return errors
 
 
-def validate_repository(root: Path) -> list[str]:
+def validate_repository(root: Path, mode: str = "full") -> list[str]:
     errors: list[str] = []
     records_by_kind: dict[str, list[dict[str, Any]]] = {}
     for label, (schema_rel, data_rel, kind) in OBJECTS.items():
@@ -485,7 +723,7 @@ def validate_repository(root: Path) -> list[str]:
         if len(ids) != len(set(ids)):
             errors.append(f"{label}: duplicate IDs within records")
     if len(records_by_kind) == len(OBJECTS):
-        errors.extend(validate_references(records_by_kind, root=root))
+        errors.extend(validate_references(records_by_kind, root=root, mode=mode))
         errors.extend(validate_manifest(root, records_by_kind))
         errors.extend(validate_bundle(root, records_by_kind))
     return errors
@@ -494,14 +732,23 @@ def validate_repository(root: Path) -> list[str]:
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--root", type=Path, default=Path(__file__).resolve().parents[1])
+    parser.add_argument(
+        "--mode",
+        choices=PROVENANCE_MODES,
+        default="full",
+        help="full requires source payloads locally; portable verifies missing ignored payloads against committed locks",
+    )
     args = parser.parse_args()
-    errors = validate_repository(args.root)
+    errors = validate_repository(args.root, mode=args.mode)
     if errors:
         print("WP1 validation failed:")
         for error in errors:
             print(f"- {error}")
         return 1
-    print("WP1 validation passed: schemas, IDs, references, evidence, manifest, and static bundle")
+    print(
+        "WP1 validation passed: schemas, IDs, references, evidence, manifest, and static bundle "
+        f"(provenance mode: {args.mode})"
+    )
     return 0
 
 

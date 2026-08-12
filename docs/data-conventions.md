@@ -47,6 +47,20 @@ the canonical indexes and files. Derived text may be copied into a static
 bundle only by a reproducible builder and must retain this full provenance
 chain.
 
+Provenance validation has two explicit modes:
+
+* `python3 scripts/validate_wp1.py --mode full` is the default local-research
+  mode. It requires every upstream source payload and recomputes its hash.
+* `python3 scripts/validate_wp1.py --mode portable` is for clean CI checkouts.
+  A missing upstream payload is accepted only when its exact path, witness, and
+  SHA-256 occur in committed trusted metadata (the relevant lock manifest or
+  source provenance lock) and that metadata explicitly identifies an ignored or
+  external payload. Canonical derived artifacts are still required physically
+  and are always hashed from disk in both modes.
+
+The portable mode verifies identity; it does not treat a missing payload as
+validated text and never copies or substitutes source content.
+
 ## Assertion status
 
 Every historical or interpretive assertion uses exactly one of:
