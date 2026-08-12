@@ -43,8 +43,26 @@ The page loads the JSON, performs a small runtime shape/reference check, and
 renders the first validated Story. It does not call a backend, database,
 online LLM, or runtime API.
 
-The reading page displays the generated exact main text and Liu Xiaobiao
-annotation text, resolved person cards, and collapsible evidence/provenance.
-The text is generated from
-`content/processed/shishuo/entries/06-yaliang/entry-019.md`; it is not
-manually retyped in the frontend.
+Each Story in the generated bundle also carries a reviewed `reading` object:
+
+```ts
+{
+  entry_id: string,
+  status: "reviewed",
+  punctuation_record_id: string,
+  base_canonical_entry_sha256: string,
+  conversion: { library: string, config: string },
+  main_text: { original: string, simplified: string },
+  annotations: Array<{ id: string, original: string, simplified: string }>,
+  display_overrides: string[]
+}
+```
+
+The build chain is canonical entry → curated punctuation record → derived
+reading object → static bundle. The current page defaults to `simplified`,
+offers `original`, and stores only that display preference in localStorage.
+The frontend never parses raw, normalized, research, or witness files. The
+reading strings are generated from
+`content/processed/shishuo/entries/06-yaliang/entry-019.md` and
+`data/annotation/wp1-punctuation.json`; they are not manually retyped in
+React.

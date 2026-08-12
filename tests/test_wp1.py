@@ -6,6 +6,7 @@ from pathlib import Path
 import shutil
 import tempfile
 import unittest
+from copy import deepcopy
 
 from scripts.validate_wp1 import (
     OBJECTS,
@@ -13,7 +14,9 @@ from scripts.validate_wp1 import (
     validate_repository,
     validate_schema,
     validate_source_provenance,
+    validate_punctuation,
 )
+from scripts.reading_layers import canonical_sections, validate_punctuation_round_trip
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -65,6 +68,39 @@ class WP1Tests(unittest.TestCase):
         self.assertTrue(bundle["relations"])
         self.assertTrue(bundle["eras"])
         self.assertTrue(bundle["evidence"])
+
+    def _punctuation_record(self) -> tuple[dict[str, object], dict[str, str]]:
+        document = json.loads(
+            (ROOT / "data/annotation/wp1-punctuation.json").read_text(encoding="utf-8")
+        )
+        record = deepcopy(document["records"][0])
+        canonical = canonical_sections(
+            ROOT / "content/processed/shishuo/entries/06-yaliang/entry-019.md"
+        )
+        return record, canonical
+
+    def test_reviewed_punctuation_passes_canonical_round_trip(self) -> None:
+        self.assertEqual(validate_punctuation(ROOT, mode="full"), [])
+
+    def test_punctuation_inserting_character_is_rejected(self) -> None:
+        record, canonical = self._punctuation_record()
+        record["sections"]["main_text"]["punctuated_text"] += "王"
+        errors = validate_punctuation_round_trip(record, canonical)
+        self.assertTrue(any("round-trip" in error for error in errors))
+
+    def test_punctuation_deleting_character_is_rejected(self) -> None:
+        record, canonical = self._punctuation_record()
+        punctuated = record["sections"]["main_text"]["punctuated_text"]
+        record["sections"]["main_text"]["punctuated_text"] = punctuated.replace("郗", "", 1)
+        errors = validate_punctuation_round_trip(record, canonical)
+        self.assertTrue(any("round-trip" in error for error in errors))
+
+    def test_punctuation_variant_substitution_is_rejected(self) -> None:
+        record, canonical = self._punctuation_record()
+        punctuated = record["sections"]["main_text"]["punctuated_text"]
+        record["sections"]["main_text"]["punctuated_text"] = punctuated.replace("郗", "郄", 1)
+        errors = validate_punctuation_round_trip(record, canonical)
+        self.assertTrue(any("round-trip" in error for error in errors))
 
     def test_nonexistent_shishuo_entry_is_rejected(self) -> None:
         errors = self.provenance_errors(

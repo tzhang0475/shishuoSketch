@@ -14,6 +14,11 @@ try:
 except ImportError as exc:  # pragma: no cover - exercised only in incomplete environments
     raise SystemExit("WP1 validation requires the Python 'jsonschema' package") from exc
 
+try:
+    from .reading_layers import canonical_sections, validate_punctuation_round_trip
+except ImportError:  # pragma: no cover - direct script execution
+    from reading_layers import canonical_sections, validate_punctuation_round_trip
+
 
 OBJECTS = {
     "Source": ("schema/source.schema.json", "data/sources/wp1-sources.json", "sources"),
@@ -24,6 +29,9 @@ OBJECTS = {
     "Era": ("schema/era.schema.json", "data/annotation/wp1-eras.json", "eras"),
     "Evidence": ("schema/evidence.schema.json", "data/evidence/wp1-evidence.json", "evidence"),
 }
+
+PUNCTUATION_SCHEMA = "schema/punctuation.schema.json"
+PUNCTUATION_DATA = "data/annotation/wp1-punctuation.json"
 
 PROVENANCE_MODES = ("full", "portable")
 SHISHUO_PROVENANCE_LOCK = "sources/registry/shishuo-provenance.lock.json"
@@ -206,6 +214,17 @@ def _trusted_source_records(root: Path, errors: list[str]) -> dict[str, list[dic
             if not record_identity:
                 record_identity = top_identity
             record_registry = record.get("registry_path", top_registry)
+            direct_path = record.get("path")
+            direct_sha256 = record.get("sha256")
+            if isinstance(direct_path, str) and isinstance(direct_sha256, str):
+                add_record(
+                    {"path": direct_path, "sha256": direct_sha256},
+                    witness_id=record_witness,
+                    availability=record_availability,
+                    lock_path=lock_path,
+                    source_identity=record_identity,
+                    registry_path=record_registry,
+                )
             text_path = record.get("text_path")
             text_sha256 = record.get("text_sha256")
             if isinstance(text_path, str) and isinstance(text_sha256, str):
@@ -548,6 +567,141 @@ def validate_canonical_provenance(
     return errors
 
 
+def validate_punctuation_reference(
+    root: Path,
+    reference: dict[str, Any],
+    *,
+    label: str,
+    mode: str,
+    trusted_records: dict[str, list[dict[str, Any]]] | None,
+) -> list[str]:
+    """Validate a punctuation reference, including ignored payloads in portable mode."""
+    errors: list[str] = []
+    path_value = reference.get("path")
+    path = resolve_relative_path(root, path_value, f"{label} path", errors)
+    witness_id = reference.get("witness_id")
+    sha256 = reference.get("sha256")
+    if not isinstance(witness_id, str) or not witness_id:
+        errors.append(f"{label} witness_id must be a non-empty string")
+    if not isinstance(sha256, str) or not sha256:
+        errors.append(f"{label} sha256 must be a non-empty string")
+    if path is None or not isinstance(path_value, str):
+        return errors
+
+    if path.is_file():
+        actual = sha256_file(path)
+        if sha256 != actual:
+            errors.append(
+                f"{label} sha256 does not match {path_value!r}: {sha256!r} != {actual!r}"
+            )
+        return errors
+
+    if mode == "full":
+        errors.append(f"{label} path: file does not exist: {path_value!r}")
+        return errors
+
+    trusted_records = trusted_records if trusted_records is not None else _trusted_source_records(root, errors)
+    candidates = trusted_records.get(Path(path_value).as_posix(), [])
+    matches = [
+        record
+        for record in candidates
+        if record.get("witness_id") == witness_id and record.get("source_sha256") == sha256
+    ]
+    if not matches:
+        errors.append(
+            f"{label} missing path has no matching committed witness/hash record: "
+            f"witness_id={witness_id!r}, sha256={sha256!r}"
+        )
+        return errors
+    if not any(
+        isinstance(record.get("source_identity"), dict) and record.get("source_identity")
+        for record in matches
+    ):
+        errors.append(f"{label} committed record has no source/revision identity")
+    return errors
+
+
+def validate_punctuation(root: Path, mode: str = "full") -> list[str]:
+    """Validate the reviewed reading layer without treating it as source text."""
+    errors: list[str] = []
+    path = root / PUNCTUATION_DATA
+    try:
+        document = read_json(path)
+        records = record_list(document, path)
+    except ValueError as exc:
+        return [str(exc)]
+
+    errors.extend(validate_schema(root / PUNCTUATION_SCHEMA, [document], "Punctuation document"))
+    ids = [record.get("id") for record in records]
+    if len(ids) != len(set(ids)):
+        errors.append("Punctuation: duplicate IDs within records")
+    entry_ids = [record.get("entry_id") for record in records]
+    if len(entry_ids) != len(set(entry_ids)):
+        errors.append("Punctuation: duplicate entry_id values within records")
+
+    shishuo_entries = load_index(root, "data/shishuo-corpus-index.json", "entries", "id", errors)
+    trusted_records = _trusted_source_records(root, errors) if mode == "portable" else None
+    for index, record in enumerate(records):
+        label = f"Punctuation record {index}"
+        entry_id = record.get("entry_id")
+        index_record = shishuo_entries.get(entry_id)
+        if index_record is None:
+            errors.append(f"{label} references a nonexistent Shishuo entry: {entry_id!r}")
+
+        base_path_value = record.get("base_canonical_entry_path")
+        base_path = resolve_relative_file(root, base_path_value, f"{label} base_canonical_entry_path", errors)
+        if base_path is None:
+            continue
+        actual_hash = sha256_file(base_path)
+        if record.get("base_canonical_entry_sha256") != actual_hash:
+            errors.append(
+                f"{label} base_canonical_entry_sha256 does not match {base_path_value!r}: "
+                f"{record.get('base_canonical_entry_sha256')!r} != {actual_hash!r}"
+            )
+        if index_record is not None:
+            expected_path = index_record.get("path")
+            if Path(base_path_value).as_posix() != Path(expected_path).as_posix():
+                errors.append(f"{label} canonical path does not match the Shishuo index")
+            if index_record.get("entry_sha256") != actual_hash:
+                errors.append(f"{label} canonical hash disagrees with the Shishuo index")
+        try:
+            metadata = frontmatter_fields(base_path)
+            canonical = canonical_sections(base_path)
+        except (OSError, UnicodeError, ValueError) as exc:
+            errors.append(f"{label} canonical entry cannot be parsed: {exc}")
+            continue
+        if metadata.get("entry_id") != entry_id:
+            errors.append(f"{label} entry_id disagrees with canonical entry metadata")
+        errors.extend(validate_punctuation_round_trip(record, canonical))
+
+        references = record.get("references", [])
+        if isinstance(references, list):
+            canonical_reference_count = 0
+            for reference_index, reference in enumerate(references):
+                if not isinstance(reference, dict):
+                    continue
+                reference_label = f"{label} reference {reference_index}"
+                errors.extend(
+                    validate_punctuation_reference(
+                        root,
+                        reference,
+                        label=reference_label,
+                        mode=mode,
+                        trusted_records=trusted_records,
+                    )
+                )
+                if reference.get("kind") == "canonical_entry":
+                    canonical_reference_count += 1
+                    if reference.get("path") != base_path_value:
+                        errors.append(f"{reference_label} path does not match the base canonical path")
+                    if reference.get("sha256") != record.get("base_canonical_entry_sha256"):
+                        errors.append(f"{reference_label} hash does not match the base canonical hash")
+            if canonical_reference_count == 0:
+                errors.append(f"{label} has no canonical_entry reference")
+
+    return errors
+
+
 def validate_references(
     records_by_kind: dict[str, list[dict[str, Any]]],
     root: Path | None = None,
@@ -696,6 +850,59 @@ def validate_bundle(root: Path, records_by_kind: dict[str, list[dict[str, Any]]]
         actual = {record.get("id") for record in records}
         if expected != actual:
             errors.append(f"derived bundle {kind} IDs do not match annotation records")
+
+    try:
+        punctuation_records = record_list(
+            read_json(root / PUNCTUATION_DATA), root / PUNCTUATION_DATA
+        )
+    except ValueError:
+        punctuation_records = []
+    punctuation_by_entry = {
+        record.get("entry_id"): record
+        for record in punctuation_records
+        if isinstance(record.get("entry_id"), str)
+    }
+    for story in bundle.get("stories", []):
+        if not isinstance(story, dict):
+            continue
+        punctuation = punctuation_by_entry.get(story.get("id"))
+        if punctuation is None:
+            continue
+        reading = story.get("reading")
+        label = f"derived bundle story {story.get('id')} reading"
+        if not isinstance(reading, dict):
+            errors.append(f"{label} is missing")
+            continue
+        if reading.get("entry_id") != story.get("id"):
+            errors.append(f"{label}.entry_id does not match the story")
+        if reading.get("punctuation_record_id") != punctuation.get("id"):
+            errors.append(f"{label}.punctuation_record_id does not match the punctuation record")
+        if reading.get("base_canonical_entry_sha256") != punctuation.get("base_canonical_entry_sha256"):
+            errors.append(f"{label}.base_canonical_entry_sha256 does not match the punctuation record")
+        conversion = reading.get("conversion")
+        if not isinstance(conversion, dict) or not conversion.get("library") or not conversion.get("config"):
+            errors.append(f"{label}.conversion is incomplete")
+        main_reading = reading.get("main_text")
+        punctuation_sections = punctuation.get("sections")
+        punctuation_sections = punctuation_sections if isinstance(punctuation_sections, dict) else {}
+        main_punctuation = punctuation_sections.get("main_text", {})
+        if not isinstance(main_reading, dict) or not isinstance(main_punctuation, dict):
+            errors.append(f"{label}.main_text is incomplete")
+        else:
+            if main_reading.get("original") != main_punctuation.get("punctuated_text"):
+                errors.append(f"{label}.main_text.original does not match reviewed punctuation")
+            if not isinstance(main_reading.get("simplified"), str) or not main_reading.get("simplified"):
+                errors.append(f"{label}.main_text.simplified is empty")
+        annotation_readings = reading.get("annotations")
+        annotation_punctuation = punctuation_sections.get("liu_annotation", {})
+        if not isinstance(annotation_readings, list) or len(annotation_readings) != 1:
+            errors.append(f"{label}.annotations must contain the reviewed Liu annotation")
+        elif isinstance(annotation_punctuation, dict):
+            annotation_reading = annotation_readings[0]
+            if annotation_reading.get("original") != annotation_punctuation.get("punctuated_text"):
+                errors.append(f"{label}.annotations[0].original does not match reviewed punctuation")
+            if not isinstance(annotation_reading.get("simplified"), str) or not annotation_reading.get("simplified"):
+                errors.append(f"{label}.annotations[0].simplified is empty")
     public_path = root / "site/public/data/wp1-site.json"
     try:
         public_bundle = read_json(public_path)
@@ -708,6 +915,7 @@ def validate_bundle(root: Path, records_by_kind: dict[str, list[dict[str, Any]]]
 
 def validate_repository(root: Path, mode: str = "full") -> list[str]:
     errors: list[str] = []
+    errors.extend(validate_punctuation(root, mode=mode))
     records_by_kind: dict[str, list[dict[str, Any]]] = {}
     for label, (schema_rel, data_rel, kind) in OBJECTS.items():
         schema_path = root / schema_rel

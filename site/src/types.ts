@@ -41,7 +41,29 @@ export interface Story {
   }>;
   assertion_status: AssertionStatus;
   review_status: ReviewStatus;
+  reading: StoryReading;
   notes?: string;
+}
+
+export interface StoryReading {
+  entry_id: string;
+  status: "reviewed";
+  punctuation_record_id: string;
+  base_canonical_entry_sha256: string;
+  conversion: {
+    library: string;
+    config: string;
+  };
+  main_text: {
+    original: string;
+    simplified: string;
+  };
+  annotations: Array<{
+    id: string;
+    original: string;
+    simplified: string;
+  }>;
+  display_overrides: string[];
 }
 
 export interface Mention {

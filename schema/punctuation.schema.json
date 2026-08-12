@@ -1,0 +1,81 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://shishuo-sketch/schema/punctuation.schema.json",
+  "title": "Curated punctuation reading",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "records"],
+  "properties": {
+    "schema": {"const": 1},
+    "records": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"$ref": "#/$defs/record"}
+    }
+  },
+  "$defs": {
+    "reference": {
+      "type": "object",
+      "additionalProperties": false,
+        "required": ["kind", "witness_id", "path", "sha256", "notes"],
+        "properties": {
+          "kind": {"type": "string", "minLength": 1},
+          "witness_id": {"type": "string", "minLength": 1},
+          "path": {"type": "string", "minLength": 1},
+        "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "notes": {"type": "string", "minLength": 1}
+      }
+    },
+    "section": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["canonical_text", "punctuated_text", "notes"],
+      "properties": {
+        "canonical_text": {"type": "string", "minLength": 1},
+        "punctuated_text": {"type": "string", "minLength": 1},
+        "notes": {"type": "string", "minLength": 1}
+      }
+    },
+    "record": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "entry_id",
+        "base_canonical_entry_path",
+        "base_canonical_entry_sha256",
+        "status",
+        "references",
+        "sections",
+        "display_overrides",
+        "notes"
+      ],
+      "properties": {
+        "id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._-]*$"},
+        "entry_id": {"type": "string", "minLength": 1},
+        "base_canonical_entry_path": {"type": "string", "minLength": 1},
+        "base_canonical_entry_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "status": {"const": "reviewed"},
+        "references": {
+          "type": "array",
+          "minItems": 1,
+          "items": {"$ref": "#/$defs/reference"}
+        },
+        "sections": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["main_text", "liu_annotation"],
+          "properties": {
+            "main_text": {"$ref": "#/$defs/section"},
+            "liu_annotation": {"$ref": "#/$defs/section"}
+          }
+        },
+        "display_overrides": {
+          "type": "array",
+          "items": {"type": "string"}
+        },
+        "notes": {"type": "string", "minLength": 1}
+      }
+    }
+  }
+}

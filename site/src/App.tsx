@@ -3,6 +3,14 @@ import { loadSiteBundle } from "./data";
 import type { Evidence, Mention, Person, SiteBundle, Story } from "./types";
 
 const STORY_ID = "06-yaliang-019";
+const READING_MODE_STORAGE_KEY = "shishuoSketch.reading-mode";
+type ReadingMode = "simplified" | "original";
+
+function initialReadingMode(): ReadingMode {
+  if (typeof window === "undefined") return "simplified";
+  const stored = window.localStorage.getItem(READING_MODE_STORAGE_KEY);
+  return stored === "original" ? "original" : "simplified";
+}
 
 function storyReference(story: Story): string {
   const parts = story.id.split("-");
@@ -80,10 +88,17 @@ function EvidenceDetails({ story, data }: { story: Story; data: SiteBundle }) {
 }
 
 function ReadingPage({ story, data }: { story: Story; data: SiteBundle }) {
+  const [readingMode, setReadingMode] = useState<ReadingMode>(initialReadingMode);
   const people = story.person_ids
     .map((id) => data.people.find((person) => person.id === id))
     .filter((person): person is Person => Boolean(person));
   const mentions = resolvedMentions(story, data);
+  const readingText = story.reading.main_text[readingMode];
+  const annotationReading = story.reading.annotations[0];
+
+  useEffect(() => {
+    window.localStorage.setItem(READING_MODE_STORAGE_KEY, readingMode);
+  }, [readingMode]);
 
   return (
     <main className="page-shell">
@@ -100,16 +115,36 @@ function ReadingPage({ story, data }: { story: Story; data: SiteBundle }) {
         <h1>{story.title}</h1>
         <p className="story-meta">{story.id}</p>
 
+        <div className="reading-controls" role="group" aria-label="阅读模式">
+          <button
+            type="button"
+            className={readingMode === "simplified" ? "reading-mode-button active" : "reading-mode-button"}
+            aria-pressed={readingMode === "simplified"}
+            onClick={() => setReadingMode("simplified")}
+          >
+            简体阅读
+          </button>
+          <span className="reading-mode-separator" aria-hidden="true">|</span>
+          <button
+            type="button"
+            className={readingMode === "original" ? "reading-mode-button active" : "reading-mode-button"}
+            aria-pressed={readingMode === "original"}
+            onClick={() => setReadingMode("original")}
+          >
+            原文
+          </button>
+        </div>
+
         <section className="story-panel" aria-label="故事正文">
-          <p className="story-text">{story.text}</p>
+          <p className="story-text">{readingText}</p>
         </section>
 
-        {story.annotations.map((annotation) => (
-          <section className="annotation-panel" key={annotation.id}>
+        {annotationReading && (
+          <section className="annotation-panel" key={annotationReading.id}>
             <p className="section-label">刘孝标注</p>
-            <p className="annotation-text">{annotation.text}</p>
+            <p className="annotation-text">{annotationReading[readingMode]}</p>
           </section>
-        ))}
+        )}
 
         <section className="people-section" aria-labelledby="people-heading">
           <div className="section-heading">

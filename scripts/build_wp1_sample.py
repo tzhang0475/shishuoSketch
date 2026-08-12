@@ -14,7 +14,22 @@ from pathlib import Path
 import re
 from typing import Any
 
-from build_six_person_pilot import markdown_body, parse_frontmatter
+from opencc import OpenCC
+
+try:
+    from .build_six_person_pilot import markdown_body, parse_frontmatter
+    from .reading_layers import (
+        PUNCTUATION_RELATIVE_PATH,
+        build_display_reading,
+        validate_punctuation_round_trip,
+    )
+except ImportError:  # direct execution: python scripts/build_wp1_sample.py
+    from build_six_person_pilot import markdown_body, parse_frontmatter
+    from reading_layers import (
+        PUNCTUATION_RELATIVE_PATH,
+        build_display_reading,
+        validate_punctuation_round_trip,
+    )
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -116,6 +131,31 @@ def main() -> int:
     entry_text = ENTRY_PATH.read_text(encoding="utf-8")
     metadata = parse_frontmatter(entry_text)
     main_text, annotations = parse_entry_sections(entry_text)
+    punctuation_document = read_json(ROOT / PUNCTUATION_RELATIVE_PATH)
+    punctuation_records = punctuation_document.get("records", [])
+    punctuation_record = next(
+        (record for record in punctuation_records if record.get("entry_id") == ENTRY_ID),
+        None,
+    )
+    if punctuation_record is None:
+        raise ValueError(f"missing reviewed punctuation record for {ENTRY_ID}")
+    canonical_entry_path = ENTRY_PATH.relative_to(ROOT).as_posix()
+    if punctuation_record.get("base_canonical_entry_path") != canonical_entry_path:
+        raise ValueError("punctuation record points to a different canonical entry path")
+    if punctuation_record.get("base_canonical_entry_sha256") != sha256_file(ENTRY_PATH):
+        raise ValueError("punctuation record base hash does not match the canonical entry")
+    annotation_by_id = {annotation["metadata"]["id"]: annotation for annotation in annotations}
+    canonical_reading_sections = {
+        "main_text": main_text,
+        "liu_annotation": annotation_by_id["annotation-001"]["text"],
+    }
+    punctuation_errors = validate_punctuation_round_trip(
+        punctuation_record,
+        canonical_reading_sections,
+    )
+    if punctuation_errors:
+        raise ValueError("invalid reviewed punctuation record: " + "; ".join(punctuation_errors))
+    reading = build_display_reading(punctuation_record, OpenCC("t2s"))
     existing_people = read_json(PEOPLE_PATH)["people"]
     existing_aliases = read_json(ALIASES_PATH)["aliases"]
     existing_mentions = [
@@ -201,7 +241,6 @@ def main() -> int:
             },
         }
 
-    annotation_by_id = {annotation["metadata"]["id"]: annotation for annotation in annotations}
     annotation_metadata = annotation_by_id.get("annotation-001", {}).get("metadata", {})
     evidence = [
         {
@@ -471,10 +510,12 @@ def main() -> int:
         write_json(path, records[key])
     write_json(ROOT / "data/manifest/milestone-1.json", manifest)
 
+    bundle_story = dict(story)
+    bundle_story["reading"] = reading
     bundle = {
         "schema": 1,
         "generated_from": "scripts/build_wp1_sample.py",
-        "stories": records["stories"]["records"],
+        "stories": [bundle_story],
         "people": records["people"]["records"],
         "mentions": records["mentions"]["records"],
         "relations": records["relations"]["records"],
