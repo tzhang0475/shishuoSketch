@@ -46,6 +46,9 @@ export function parseSiteBundle(value: unknown): SiteBundle {
     })) {
       throw new Error(`Story ${String(story.id)} 的 reading.annotations 不完整`);
     }
+    if (!isRecord(reading.labels) || !isRecord(reading.person_display) || !isRecord(reading.mention_display) || !isRecord(reading.source_display)) {
+      throw new Error(`Story ${String(story.id)} 的 reading display layer 不完整`);
+    }
   }
   for (const mention of arrays.mentions) {
     if (!isRecord(mention) || typeof mention.story_id !== "string" || !storyIds.has(mention.story_id)) {

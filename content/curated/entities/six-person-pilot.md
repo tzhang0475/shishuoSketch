@@ -76,7 +76,7 @@ No online scholarly lookup was required for this local-evidence pilot.
 
 ## Scope and non-actions
 
-- Exactly six person IDs are present in `data/people.json`.
+- Six primary person IDs and the explicitly registered R1 supporting bridge `person-007` are present in `data/people.json`.
 - Source texts under `content/processed/` were read only; no source text was modified.
 - Generic title-only forms are not treated as resolved identities without same-section evidence.
-- No people outside this six-person scope are emitted, and no relationships are extracted.
+- No people outside the six-person pilot plus this one R1 bridge are emitted, and no relationships are extracted by this pilot builder.

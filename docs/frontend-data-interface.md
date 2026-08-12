@@ -23,9 +23,9 @@ The bundle contains these arrays:
 }
 ```
 
-The bundle is generated from the canonical Shishuo entry and the existing
-six-person pilot by `scripts/build_wp1_sample.py`. It is not a second source
-text authority.
+The bundle is generated from the canonical Shishuo entry, the six primary
+people, and any explicitly marked supporting R1 bridge records by
+`scripts/build_wp1_sample.py`. It is not a second source text authority.
 
 Evidence records expose an exact derived-artifact locator (`artifact_path`,
 `artifact_sha256`, and either `entry_id` or `unit_id`) plus separate
@@ -38,6 +38,12 @@ The current WP1 prototype is a single reading page served under the configured
 intentionally does not introduce client-side routing yet. The object IDs and
 cross-object references remain available in the bundle for later reading
 surfaces.
+
+Relation records distinguish directly attested edges from deterministic paths
+with `relation_basis: "direct" | "derived"`. Derived records expose
+`derived_from_relation_ids` and do not carry an additional direct quotation;
+the current bundle contains only the reviewed R1 atomic edges plus the legacy
+`relation-001` derived path.
 
 The page loads the JSON, performs a small runtime shape/reference check, and
 renders the first validated Story. It does not call a backend, database,
@@ -54,13 +60,27 @@ Each Story in the generated bundle also carries a reviewed `reading` object:
   conversion: { library: string, config: string },
   main_text: { original: string, simplified: string },
   annotations: Array<{ id: string, original: string, simplified: string }>,
+  labels: Record<string, { original: string, simplified: string }>,
+  person_display: Record<string, {
+    name: { original: string, simplified: string },
+    aliases: Array<{ surface: { original: string, simplified: string }, alias_type: string }>
+  }>,
+  mention_display: Record<string, { surface: { original: string, simplified: string } }>,
+  source_display: Record<string, {
+    work: { original: string, simplified: string },
+    edition: { original: string, simplified: string }
+  }>,
   display_overrides: string[]
 }
 ```
 
 The build chain is canonical entry → curated punctuation record → derived
-reading object → static bundle. The current page defaults to `simplified`,
-offers `original`, and stores only that display preference in localStorage.
+reading object → static bundle. The same OpenCC conversion creates both story
+text and ID-keyed person, mention, label, and source-title display maps. The
+current page defaults to `simplified`, offers `original`, and stores only that
+display preference in localStorage. The original fields in these maps are
+copied from canonical WP1 records; they do not normalize orthographic variants
+or change IDs and provenance.
 The frontend never parses raw, normalized, research, or witness files. The
 reading strings are generated from
 `content/processed/shishuo/entries/06-yaliang/entry-019.md` and

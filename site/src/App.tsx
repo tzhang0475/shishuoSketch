@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { loadSiteBundle } from "./data";
-import type { Evidence, Mention, Person, SiteBundle, Story } from "./types";
+import type { Evidence, Mention, Person, ReadingPair, SiteBundle, Story } from "./types";
 
 const STORY_ID = "06-yaliang-019";
 const READING_MODE_STORAGE_KEY = "shishuoSketch.reading-mode";
@@ -29,17 +29,56 @@ function personMentions(story: Story, person: Person, data: SiteBundle): Mention
   return resolvedMentions(story, data).filter((mention) => mention.person_id === person.id);
 }
 
-function PersonCard({ person, mentions }: { person: Person; mentions: Mention[] }) {
-  const surfaces = Array.from(new Set(mentions.map((mention) => mention.surface)));
+function readingValue(pair: ReadingPair | undefined, mode: ReadingMode, fallback: string): string {
+  return pair?.[mode] ?? fallback;
+}
+
+function personDisplayName(story: Story, person: Person, mode: ReadingMode): string {
+  return readingValue(story.reading.person_display[person.id]?.name, mode, person.canonical_name);
+}
+
+function mentionPersonDisplayName(
+  story: Story,
+  data: SiteBundle,
+  mention: Mention,
+  mode: ReadingMode,
+): string {
+  const person = data.people.find((candidate) => candidate.id === mention.person_id);
+  return person ? personDisplayName(story, person, mode) : "";
+}
+
+function PersonCard({
+  person,
+  mentions,
+  story,
+  readingMode,
+}: {
+  person: Person;
+  mentions: Mention[];
+  story: Story;
+  readingMode: ReadingMode;
+}) {
+  const surfaces = Array.from(
+    new Set(
+      mentions.map((mention) =>
+        readingValue(
+          story.reading.mention_display[mention.id]?.surface,
+          readingMode,
+          mention.surface,
+        ),
+      ),
+    ),
+  );
+  const labels = story.reading.labels;
   return (
     <details className="person-card">
       <summary>
-        <span className="person-name">{person.canonical_name}</span>
-        <span className="person-hint">查看称谓</span>
+        <span className="person-name">{personDisplayName(story, person, readingMode)}</span>
+        <span className="person-hint">{labels.alias_hint[readingMode]}</span>
       </summary>
       <div className="person-card-body">
-        <p className="person-label">本则中已解析的称谓</p>
-        <p className="surface-list">{surfaces.join("、") || "—"}</p>
+        <p className="person-label">{labels.resolved_alias_label[readingMode]}</p>
+        <p className="surface-list">{surfaces.join("、") || labels.empty_alias[readingMode]}</p>
         <p className="person-status">
           {person.assertion_status} · {person.review_status}
         </p>
@@ -48,23 +87,33 @@ function PersonCard({ person, mentions }: { person: Person; mentions: Mention[] 
   );
 }
 
-function EvidenceDetails({ story, data }: { story: Story; data: SiteBundle }) {
+function EvidenceDetails({
+  story,
+  data,
+  readingMode,
+}: {
+  story: Story;
+  data: SiteBundle;
+  readingMode: ReadingMode;
+}) {
   const evidence = story.evidence_ids
     .map((id) => data.evidence.find((item) => item.id === id))
     .filter((item): item is Evidence => Boolean(item));
 
   return (
     <details className="evidence-details">
-      <summary>证据与出处</summary>
-      <p className="evidence-intro">
-        以下信息来自已验证的 WP1 静态数据；artifact 是页面所引用的派生文件，source provenance
-        保留其上游见证信息。
-      </p>
+      <summary>{story.reading.labels.evidence_heading[readingMode]}</summary>
+      <p className="evidence-intro">{story.reading.labels.evidence_intro[readingMode]}</p>
       <div className="evidence-list">
         {evidence.map((item) => (
           <article className="evidence-item" key={item.id}>
             <div className="evidence-heading">
-              <span>{item.evidence_type}</span>
+              <span>
+                {item.evidence_type}
+                {story.reading.source_display[item.source_id] && (
+                  <> · {story.reading.source_display[item.source_id].work[readingMode]} · {story.reading.source_display[item.source_id].edition[readingMode]}</>
+                )}
+              </span>
               <code>{item.id}</code>
             </div>
             <blockquote>{item.quote}</blockquote>
@@ -141,15 +190,15 @@ function ReadingPage({ story, data }: { story: Story; data: SiteBundle }) {
 
         {annotationReading && (
           <section className="annotation-panel" key={annotationReading.id}>
-            <p className="section-label">刘孝标注</p>
+            <p className="section-label">{story.reading.labels.annotation_label[readingMode]}</p>
             <p className="annotation-text">{annotationReading[readingMode]}</p>
           </section>
         )}
 
-        <section className="people-section" aria-labelledby="people-heading">
+        <section className="people-section" aria-labelledby="people-heading" aria-label={story.reading.labels.people_section[readingMode]}>
           <div className="section-heading">
-            <p className="section-label">人物</p>
-            <h2 id="people-heading">文中已解析的称谓</h2>
+            <p className="section-label">{story.reading.labels.people_section[readingMode]}</p>
+            <h2 id="people-heading">{story.reading.labels.resolved_mentions_heading[readingMode]}</h2>
           </div>
           <div className="people-grid">
             {people.map((person) => (
@@ -157,19 +206,23 @@ function ReadingPage({ story, data }: { story: Story; data: SiteBundle }) {
                 key={person.id}
                 person={person}
                 mentions={personMentions(story, person, data)}
+                story={story}
+                readingMode={readingMode}
               />
             ))}
           </div>
-          <div className="mention-strip" aria-label="已解析称谓列表">
+          <div className="mention-strip" aria-label={story.reading.labels.resolved_mentions_heading[readingMode]}>
             {mentions.map((mention) => (
               <span className="mention-chip" key={mention.id}>
-                {mention.surface} → {data.people.find((person) => person.id === mention.person_id)?.canonical_name}
+                {readingValue(story.reading.mention_display[mention.id]?.surface, readingMode, mention.surface)}
+                {" → "}
+                {mentionPersonDisplayName(story, data, mention, readingMode)}
               </span>
             ))}
           </div>
         </section>
 
-        <EvidenceDetails story={story} data={data} />
+        <EvidenceDetails story={story} data={data} readingMode={readingMode} />
       </article>
 
       <footer className="site-footer">

@@ -16,6 +16,17 @@ except ImportError:  # pragma: no cover - direct script imports
 
 PUNCTUATION_RELATIVE_PATH = "data/annotation/wp1-punctuation.json"
 
+READER_LABELS = {
+    "people_section": "人物",
+    "resolved_mentions_heading": "文中已解析的稱謂",
+    "alias_hint": "查看稱謂",
+    "resolved_alias_label": "本則中已解析的稱謂",
+    "annotation_label": "劉孝標注",
+    "evidence_heading": "證據與出處",
+    "evidence_intro": "以下資訊來自已驗證的 WP1 靜態資料；artifact 是頁面所引用的派生檔案，source provenance 保留其上游見證資訊。",
+    "empty_alias": "—",
+}
+
 
 def read_json(path: Path) -> Any:
     return json.loads(path.read_text(encoding="utf-8"))
@@ -75,7 +86,69 @@ def validate_punctuation_round_trip(
     return errors
 
 
-def build_display_reading(record: Mapping[str, Any], converter: Any) -> dict[str, Any]:
+def _display_pair(text: str, converter: Any) -> dict[str, str]:
+    return {"original": text, "simplified": converter.convert(text)}
+
+
+def _build_person_display(people: Any, converter: Any) -> dict[str, Any]:
+    result: dict[str, Any] = {}
+    if not isinstance(people, (list, tuple)):
+        return result
+    for person in people:
+        if not isinstance(person, Mapping) or not isinstance(person.get("id"), str):
+            continue
+        aliases = []
+        for alias in person.get("aliases", []):
+            if not isinstance(alias, Mapping) or not isinstance(alias.get("surface"), str):
+                continue
+            aliases.append(
+                {
+                    "surface": _display_pair(alias["surface"], converter),
+                    "alias_type": alias.get("alias_type", ""),
+                }
+            )
+        result[person["id"]] = {
+            "name": _display_pair(str(person.get("canonical_name", "")), converter),
+            "aliases": aliases,
+        }
+    return result
+
+
+def _build_mention_display(mentions: Any, converter: Any) -> dict[str, Any]:
+    result: dict[str, Any] = {}
+    if not isinstance(mentions, (list, tuple)):
+        return result
+    for mention in mentions:
+        if not isinstance(mention, Mapping) or not isinstance(mention.get("id"), str):
+            continue
+        surface = mention.get("surface")
+        if isinstance(surface, str):
+            result[mention["id"]] = {"surface": _display_pair(surface, converter)}
+    return result
+
+
+def _build_source_display(sources: Any, converter: Any) -> dict[str, Any]:
+    result: dict[str, Any] = {}
+    if not isinstance(sources, (list, tuple)):
+        return result
+    for source in sources:
+        if not isinstance(source, Mapping) or not isinstance(source.get("id"), str):
+            continue
+        result[source["id"]] = {
+            "work": _display_pair(str(source.get("work", "")), converter),
+            "edition": _display_pair(str(source.get("edition", "")), converter),
+        }
+    return result
+
+
+def build_display_reading(
+    record: Mapping[str, Any],
+    converter: Any,
+    *,
+    people: Any = (),
+    mentions: Any = (),
+    sources: Any = (),
+) -> dict[str, Any]:
     sections = record["sections"]
     return {
         "entry_id": record["entry_id"],
@@ -97,5 +170,11 @@ def build_display_reading(record: Mapping[str, Any], converter: Any) -> dict[str
                 "simplified": converter.convert(sections["liu_annotation"]["punctuated_text"]),
             }
         ],
+        "labels": {
+            key: _display_pair(value, converter) for key, value in READER_LABELS.items()
+        },
+        "person_display": _build_person_display(people, converter),
+        "mention_display": _build_mention_display(mentions, converter),
+        "source_display": _build_source_display(sources, converter),
         "display_overrides": list(record.get("display_overrides", [])),
     }

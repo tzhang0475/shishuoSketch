@@ -9,6 +9,7 @@
     "subject_id",
     "object_id",
     "relation_type",
+    "relation_basis",
     "label",
     "story_ids",
     "evidence_ids",
@@ -21,9 +22,23 @@
     "subject_id": {"type": "string", "minLength": 1},
     "object_id": {"type": "string", "minLength": 1},
     "relation_type": {"type": "string", "minLength": 1},
+    "relation_basis": {"type": "string", "enum": ["direct", "derived"]},
+    "relation_subtype": {
+      "type": "string",
+      "enum": ["parent_child", "uncle_niece", "collateral_kinship", "spouse"]
+    },
+    "role_a": {"type": "string", "minLength": 1},
+    "role_b": {"type": "string", "minLength": 1},
     "label": {"type": "string", "minLength": 1},
-    "story_ids": {"type": "array", "items": {"type": "string"}, "minItems": 1, "uniqueItems": true},
-    "evidence_ids": {"type": "array", "items": {"type": "string"}, "minItems": 1, "uniqueItems": true},
+    "story_ids": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+    "source_entry_ids": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+    "source_unit_ids": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+    "evidence_ids": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+    "derived_from_relation_ids": {
+      "type": "array",
+      "items": {"type": "string"},
+      "uniqueItems": true
+    },
     "time": {
       "type": "object",
       "additionalProperties": false,
@@ -44,5 +59,26 @@
       "enum": ["candidate", "reviewed", "rejected", "todo"]
     },
     "notes": {"type": "string"}
-  }
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"relation_basis": {"const": "direct"}}},
+      "then": {
+        "properties": {
+          "evidence_ids": {"minItems": 1},
+          "derived_from_relation_ids": {"maxItems": 0}
+        }
+      }
+    },
+    {
+      "if": {"properties": {"relation_basis": {"const": "derived"}}},
+      "then": {
+        "required": ["derived_from_relation_ids"],
+        "properties": {
+          "evidence_ids": {"maxItems": 0},
+          "derived_from_relation_ids": {"minItems": 1}
+        }
+      }
+    }
+  ]
 }

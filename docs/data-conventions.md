@@ -61,6 +61,27 @@ Provenance validation has two explicit modes:
 The portable mode verifies identity; it does not treat a missing payload as
 validated text and never copies or substitutes source content.
 
+## Relations
+
+Relations are one semantic edge, using the existing `subject_id` and
+`object_id` fields rather than duplicated forward/reverse records. Hard
+relations may declare a `relation_subtype`, `role_a`, and `role_b`; source
+entry/unit IDs identify the canonical anchors in addition to the resolving
+Evidence IDs. Reviewed R1 relations are limited to directly supported kinship
+and marriage edges. `relation_basis: direct` identifies a directly attested
+edge and requires direct Evidence; `relation_basis: derived` identifies a
+deterministic path over reviewed direct relations and uses
+`derived_from_relation_ids` instead of an additional quotation. Symmetric
+spouse edges use one canonical endpoint order.
+Co-occurrence, shared surnames or titles, and graph transitivity never create a
+reviewed relation by themselves.
+
+The unified `data/people.json` registry is the Person identity source of truth.
+Its `scope_role` is `primary` for the six-person pilot or `supporting` for a
+minimal evidence-backed bridge Person. WP1 annotation records are generated
+projections of this registry; scope does not change identity or evidence
+semantics.
+
 ## Assertion status
 
 Every historical or interpretive assertion uses exactly one of:

@@ -3,6 +3,8 @@ export type ReviewStatus = "candidate" | "reviewed" | "rejected" | "todo";
 
 export interface Person {
   id: string;
+  scope_role?: "primary" | "supporting";
+  scope?: "primary" | "supporting";
   canonical_name: string;
   aliases: Array<{
     surface: string;
@@ -63,7 +65,29 @@ export interface StoryReading {
     original: string;
     simplified: string;
   }>;
+  labels: Record<
+    | "people_section"
+    | "resolved_mentions_heading"
+    | "alias_hint"
+    | "resolved_alias_label"
+    | "annotation_label"
+    | "evidence_heading"
+    | "evidence_intro"
+    | "empty_alias",
+    ReadingPair
+  >;
+  person_display: Record<string, {
+    name: ReadingPair;
+    aliases: Array<{ surface: ReadingPair; alias_type: string }>;
+  }>;
+  mention_display: Record<string, { surface: ReadingPair }>;
+  source_display: Record<string, { work: ReadingPair; edition: ReadingPair }>;
   display_overrides: string[];
+}
+
+export interface ReadingPair {
+  original: string;
+  simplified: string;
 }
 
 export interface Mention {
@@ -88,8 +112,15 @@ export interface Relation {
   subject_id: string;
   object_id: string;
   relation_type: string;
+  relation_basis: "direct" | "derived";
+  relation_subtype?: "parent_child" | "uncle_niece" | "collateral_kinship" | "spouse";
+  role_a?: string;
+  role_b?: string;
   label: string;
   story_ids: string[];
+  source_entry_ids?: string[];
+  source_unit_ids?: string[];
+  derived_from_relation_ids?: string[];
   evidence_ids: string[];
   time: TimeRange;
   assertion_status: AssertionStatus;

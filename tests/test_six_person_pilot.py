@@ -23,7 +23,7 @@ class SixPersonPilotTests(unittest.TestCase):
             (cls.root / "data/mentions/jinshu.json").read_text(encoding="utf-8")
         )
 
-    def test_only_the_six_target_people_are_registered(self) -> None:
+    def test_six_primary_people_and_explicit_r1_supporting_person_are_registered(self) -> None:
         expected = {
             "wang-xizhi",
             "xi-jian",
@@ -32,8 +32,18 @@ class SixPersonPilotTests(unittest.TestCase):
             "xie-daoyun",
             "xie-an",
         }
-        actual = {person["person_id"] for person in self.people["people"]}
-        self.assertEqual(actual, expected)
+        primary = {
+            person["person_id"]
+            for person in self.people["people"]
+            if person.get("scope_role") == "primary"
+        }
+        supporting = {
+            person["person_id"]
+            for person in self.people["people"]
+            if person.get("scope_role") == "supporting"
+        }
+        self.assertEqual(primary, expected)
+        self.assertEqual(supporting, {"person-007"})
 
     def test_aliases_have_source_evidence_and_preserve_orthographic_variant(self) -> None:
         records = {alias["alias_id"]: alias for alias in self.aliases["aliases"]}

@@ -52,8 +52,8 @@ JINSHU_UNIT_PATHS = {
     "065-liezhuan-001": "content/processed/jinshu/units/liezhuan/065-liezhuan-001.md",
     "096-liezhuan-016": "content/processed/jinshu/units/liezhuan/096-liezhuan-016.md",
     "079-liezhuan-002": "content/processed/jinshu/units/liezhuan/079-liezhuan-002.md",
+    "080-liezhuan-001": "content/processed/jinshu/units/liezhuan/080-liezhuan-001.md",
 }
-
 
 def write_json(path: Path, value: Any) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
@@ -155,7 +155,6 @@ def main() -> int:
     )
     if punctuation_errors:
         raise ValueError("invalid reviewed punctuation record: " + "; ".join(punctuation_errors))
-    reading = build_display_reading(punctuation_record, OpenCC("t2s"))
     existing_people = read_json(PEOPLE_PATH)["people"]
     existing_aliases = read_json(ALIASES_PATH)["aliases"]
     existing_mentions = [
@@ -164,6 +163,16 @@ def main() -> int:
         if mention.get("entry_id") == ENTRY_ID
     ]
     existing_mentions.sort(key=lambda item: item["mention_id"])
+    people_by_id = {person["person_id"]: person for person in existing_people}
+    supporting_registry_people = [
+        person for person in existing_people if person.get("scope_role") == "supporting"
+    ]
+    if len(supporting_registry_people) != 1:
+        raise ValueError(
+            "R1.1 expects exactly one unified supporting Person record; "
+            f"found {len(supporting_registry_people)}"
+        )
+    r1_supporting_person_id = supporting_registry_people[0]["person_id"]
 
     source = {
         "id": "source-001",
@@ -303,6 +312,72 @@ def main() -> int:
             "review_status": "reviewed",
             "notes": "Direct biography opening in the processed Jinshu unit for 謝安.",
         },
+        {
+            "id": "evidence-007",
+            "source_id": jinshu_source["id"],
+            "evidence_type": "primary_text",
+            "quote": "王羲之字逸少司徒導之從子也",
+            "locator": unit_locator("080-liezhuan-001", "王羲之字逸少司徒導之從子也"),
+            "assertion_status": "attested",
+            "review_status": "reviewed",
+            "notes": "Direct Jinshu statement identifying 王羲之 as 司徒王導之從子.",
+        },
+        {
+            "id": "evidence-008",
+            "source_id": jinshu_source["id"],
+            "evidence_type": "primary_text",
+            "quote": "諸子遵父先㫖固讓不受有七子知名者五人<!-- wikisource-SKchar: {\"value\": \"2593\"} -->之早卒次凝之亦工草<!-- wikisource-SKchar: {\"value\": \"1452\"} -->",
+            "locator": unit_locator(
+                "080-liezhuan-001",
+                "諸子遵父先㫖固讓不受有七子知名者五人<!-- wikisource-SKchar: {\"value\": \"2593\"} -->之早卒次凝之亦工草<!-- wikisource-SKchar: {\"value\": \"1452\"} -->",
+            ),
+            "assertion_status": "attested",
+            "review_status": "reviewed",
+            "notes": "Exact preserved Jinshu passage places 凝之 among 王羲之諸子; source character annotations remain in the quote.",
+        },
+        {
+            "id": "evidence-009",
+            "source_id": jinshu_source["id"],
+            "evidence_type": "primary_text",
+            "quote": "王凝之妻謝氏字道韞安西將軍弈之女也聰識有才辯叔父安嘗問",
+            "locator": unit_locator(
+                "096-liezhuan-016",
+                "王凝之妻謝氏字道韞安西將軍弈之女也聰識有才辯叔父安嘗問",
+            ),
+            "assertion_status": "attested",
+            "review_status": "reviewed",
+            "notes": "Exact Jinshu biography text states the uncle reference 叔父安 and identifies 謝氏字道韞; no broader genealogy is inferred.",
+        },
+        {
+            "id": "evidence-010",
+            "source_id": source["id"],
+            "evidence_type": "primary_text",
+            "quote": "因嫁\n女與焉",
+            "locator": locator(main_mention),
+            "assertion_status": "attested",
+            "review_status": "reviewed",
+            "notes": "Exact canonical Shishuo main-text phrase recording the marriage arrangement.",
+        },
+        {
+            "id": "evidence-011",
+            "source_id": source["id"],
+            "evidence_type": "annotation",
+            "quote": "妻太傅郗鑒女名璿字子房",
+            "locator": locator(annotation_mention, annotation_id="annotation-001"),
+            "assertion_status": "attested",
+            "review_status": "reviewed",
+            "notes": "Exact Liu Xiaobiao annotation identifying 璿 as 太傅郗鑒之女; source orthography is preserved.",
+        },
+        {
+            "id": "evidence-012",
+            "source_id": jinshu_source["id"],
+            "evidence_type": "primary_text",
+            "quote": "深為從伯敦導所器重",
+            "locator": unit_locator("080-liezhuan-001", "深為從伯敦導所器重"),
+            "assertion_status": "attested",
+            "review_status": "reviewed",
+            "notes": "The same Jinshu biography uses 從伯 for 王導 in its account of 王羲之.",
+        },
     ]
 
     evidence_for_section = {
@@ -361,7 +436,6 @@ def main() -> int:
             }
         )
 
-    people_by_id = {person["person_id"]: person for person in existing_people}
     direct_jinshu_evidence = {
         "wang-dao": ["evidence-004"],
         "wang-ningzhi": ["evidence-005"],
@@ -383,6 +457,8 @@ def main() -> int:
         sample_people.append(
             {
                 "id": person_id,
+                "scope_role": person.get("scope_role", "primary"),
+                "scope": person.get("scope_role", "primary"),
                 "canonical_name": person["canonical_name"],
                 "aliases": sample_aliases[person_id],
                 "story_ids": [ENTRY_ID] if person_id in sample_person_ids else [],
@@ -393,6 +469,37 @@ def main() -> int:
             }
         )
 
+    for registry_person in supporting_registry_people:
+        supporting_evidence_ids = [
+            item["id"]
+            for item in evidence
+            if item["source_id"] == source["id"]
+            and item["evidence_type"] == "annotation"
+            and any(
+                source_evidence.get("surface") in item["quote"]
+                for source_evidence in registry_person.get("source_evidence", [])
+                if isinstance(source_evidence.get("surface"), str)
+            )
+        ]
+        if not supporting_evidence_ids:
+            raise ValueError(
+                f"no generated annotation evidence matches supporting Person {registry_person['person_id']}"
+            )
+        sample_people.append(
+            {
+                "id": registry_person["person_id"],
+                "scope_role": registry_person["scope_role"],
+                "scope": registry_person["scope_role"],
+                "canonical_name": registry_person["canonical_name"],
+                "aliases": [],
+                "story_ids": [ENTRY_ID],
+                "evidence_ids": supporting_evidence_ids,
+                "assertion_status": "attested",
+                "review_status": "reviewed",
+                "notes": "Materialized from the unified data/people.json registry as the R1 supporting bridge Person.",
+            }
+        )
+
     relation = {
         "id": "relation-001",
         "subject_id": "xi-jian",
@@ -400,12 +507,132 @@ def main() -> int:
         "relation_type": "kinship",
         "label": "婚姻亲属",
         "story_ids": [ENTRY_ID],
-        "evidence_ids": ["evidence-002"],
         "time": {"status": "unknown", "label": None, "start_year": None, "end_year": None},
-        "assertion_status": "attested",
-        "review_status": "candidate",
-        "notes": "The source annotation identifies the wife as 郗鑒's daughter and the story records the marriage; direction is a reader-facing label, not a reconstructed genealogy.",
+        "evidence_ids": [],
+        "assertion_status": "inferred",
+        "review_status": "reviewed",
+        "relation_basis": "derived",
+        "derived_from_relation_ids": ["relation-gold-006", "relation-gold-005"],
+        "notes": "R1.1 derived relation only: 郗鑒→郗璿→王羲之. It is not a directly quoted atomic 岳父/女婿 edge; the legacy broad label is retained for compatibility.",
     }
+
+    r1_relations = [
+        {
+            "id": "relation-gold-001",
+            "subject_id": "wang-dao",
+            "object_id": "wang-xizhi",
+            "relation_type": "kinship",
+            "relation_subtype": "collateral_kinship",
+            "role_a": "從伯",
+            "role_b": "從子",
+            "label": "從父與從子",
+            "story_ids": [],
+            "source_entry_ids": [],
+            "source_unit_ids": ["080-liezhuan-001"],
+            "evidence_ids": ["evidence-007", "evidence-012"],
+            "time": {"status": "unknown", "label": None, "start_year": None, "end_year": None},
+            "assertion_status": "attested",
+            "review_status": "reviewed",
+            "relation_basis": "direct",
+            "notes": "R1 Gold: the Jinshu biography directly says 王羲之 is 王導之從子.",
+        },
+        {
+            "id": "relation-gold-002",
+            "subject_id": "wang-xizhi",
+            "object_id": "wang-ningzhi",
+            "relation_type": "kinship",
+            "relation_subtype": "parent_child",
+            "role_a": "父",
+            "role_b": "子",
+            "label": "父與子",
+            "story_ids": [],
+            "source_entry_ids": [],
+            "source_unit_ids": ["080-liezhuan-001"],
+            "evidence_ids": ["evidence-008"],
+            "time": {"status": "unknown", "label": None, "start_year": None, "end_year": None},
+            "assertion_status": "attested",
+            "review_status": "reviewed",
+            "relation_basis": "direct",
+            "notes": "R1 Gold: the Jinshu passage introduces 凝之 among 王羲之諸子 and continues with his biography.",
+        },
+        {
+            "id": "relation-gold-003",
+            "subject_id": "wang-ningzhi",
+            "object_id": "xie-daoyun",
+            "relation_type": "marriage",
+            "relation_subtype": "spouse",
+            "role_a": "配偶",
+            "role_b": "配偶",
+            "label": "夫妻",
+            "story_ids": [],
+            "source_entry_ids": [],
+            "source_unit_ids": ["096-liezhuan-016"],
+            "evidence_ids": ["evidence-005"],
+            "time": {"status": "unknown", "label": None, "start_year": None, "end_year": None},
+            "assertion_status": "attested",
+            "review_status": "reviewed",
+            "relation_basis": "direct",
+            "notes": "R1 Gold: the Jinshu unit opens with 王凝之妻謝氏字道韞.",
+        },
+        {
+            "id": "relation-gold-004",
+            "subject_id": "xie-an",
+            "object_id": "xie-daoyun",
+            "relation_type": "kinship",
+            "relation_subtype": "uncle_niece",
+            "role_a": "叔父",
+            "role_b": "姪女",
+            "label": "叔父與姪女",
+            "story_ids": [],
+            "source_entry_ids": [],
+            "source_unit_ids": ["096-liezhuan-016"],
+            "evidence_ids": ["evidence-009"],
+            "time": {"status": "unknown", "label": None, "start_year": None, "end_year": None},
+            "assertion_status": "attested",
+            "review_status": "reviewed",
+            "relation_basis": "direct",
+            "notes": "R1 Gold: the biography explicitly calls 安 叔父 in the passage about 謝氏字道韞.",
+        },
+        {
+            "id": "relation-gold-005",
+            "subject_id": r1_supporting_person_id,
+            "object_id": "wang-xizhi",
+            "relation_type": "marriage",
+            "relation_subtype": "spouse",
+            "role_a": "配偶",
+            "role_b": "配偶",
+            "label": "夫妻",
+            "story_ids": [ENTRY_ID],
+            "source_entry_ids": [ENTRY_ID],
+            "source_unit_ids": [],
+            "evidence_ids": ["evidence-010", "evidence-011"],
+            "time": {"status": "unknown", "label": None, "start_year": None, "end_year": None},
+            "assertion_status": "attested",
+            "review_status": "reviewed",
+            "relation_basis": "direct",
+            "notes": "R1 Gold: the canonical main text records the marriage and the Liu annotation identifies the wife as 郗鑒之女.",
+        },
+        {
+            "id": "relation-gold-006",
+            "subject_id": "xi-jian",
+            "object_id": r1_supporting_person_id,
+            "relation_type": "kinship",
+            "relation_subtype": "parent_child",
+            "role_a": "父",
+            "role_b": "女",
+            "label": "父女",
+            "story_ids": [ENTRY_ID],
+            "source_entry_ids": [ENTRY_ID],
+            "source_unit_ids": [],
+            "evidence_ids": ["evidence-011"],
+            "time": {"status": "unknown", "label": None, "start_year": None, "end_year": None},
+            "assertion_status": "attested",
+            "review_status": "reviewed",
+            "relation_basis": "direct",
+            "notes": "R1 Gold: the Liu annotation explicitly states 妻太傅郗鑒女名璿.",
+        },
+    ]
+    all_relations = [relation, *r1_relations]
 
     era = {
         "id": "era-001",
@@ -431,7 +658,7 @@ def main() -> int:
         "evidence_ids": ["evidence-001", "evidence-002"],
         "person_ids": sample_person_ids,
         "mention_ids": [mention["id"] for mention in sample_mentions],
-        "relation_ids": [relation["id"]],
+        "relation_ids": [relation["id"], "relation-gold-005", "relation-gold-006"],
         "era_ids": [era["id"]],
         "annotations": [
             {
@@ -493,7 +720,7 @@ def main() -> int:
         "stories": {"schema": 1, "records": [story]},
         "people": {"schema": 1, "records": sample_people},
         "mentions": {"schema": 1, "records": sample_mentions},
-        "relations": {"schema": 1, "records": [relation]},
+        "relations": {"schema": 1, "records": all_relations},
         "eras": {"schema": 1, "records": [era]},
         "evidence": {"schema": 1, "records": evidence},
     }
@@ -510,6 +737,13 @@ def main() -> int:
         write_json(path, records[key])
     write_json(ROOT / "data/manifest/milestone-1.json", manifest)
 
+    reading = build_display_reading(
+        punctuation_record,
+        OpenCC("t2s"),
+        people=records["people"]["records"],
+        mentions=records["mentions"]["records"],
+        sources=records["sources"]["records"],
+    )
     bundle_story = dict(story)
     bundle_story["reading"] = reading
     bundle = {

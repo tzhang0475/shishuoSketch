@@ -9,6 +9,8 @@ import unittest
 from copy import deepcopy
 from unittest.mock import patch
 
+from opencc import OpenCC
+
 import scripts.validate_wp1 as validate_wp1_module
 
 from scripts.validate_wp1 import (
@@ -72,6 +74,42 @@ class WP1Tests(unittest.TestCase):
         self.assertTrue(bundle["relations"])
         self.assertTrue(bundle["eras"])
         self.assertTrue(bundle["evidence"])
+
+    def test_reader_display_layer_converts_people_mentions_labels_and_sources(self) -> None:
+        bundle = json.loads((ROOT / "data/derived/wp1-site.json").read_text(encoding="utf-8"))
+        story = bundle["stories"][0]
+        reading = story["reading"]
+        converter = OpenCC("t2s")
+        people = {record["id"]: record for record in bundle["people"]}
+        mentions = {record["id"]: record for record in bundle["mentions"]}
+        sources = {record["id"]: record for record in bundle["sources"]}
+
+        for person_id, person in people.items():
+            display = reading["person_display"][person_id]
+            self.assertEqual(display["name"]["original"], person["canonical_name"])
+            self.assertEqual(display["name"]["simplified"], converter.convert(person["canonical_name"]))
+            self.assertEqual(len(display["aliases"]), len(person["aliases"]))
+            for display_alias, alias in zip(display["aliases"], person["aliases"]):
+                self.assertEqual(display_alias["surface"]["original"], alias["surface"])
+                self.assertEqual(display_alias["surface"]["simplified"], converter.convert(alias["surface"]))
+
+        for mention_id, mention in mentions.items():
+            display = reading["mention_display"][mention_id]["surface"]
+            self.assertEqual(display["original"], mention["surface"])
+            self.assertEqual(display["simplified"], converter.convert(mention["surface"]))
+
+        self.assertEqual(reading["labels"]["resolved_mentions_heading"]["original"], "文中已解析的稱謂")
+        self.assertEqual(reading["labels"]["resolved_mentions_heading"]["simplified"], "文中已解析的称谓")
+        for source_id, source in sources.items():
+            display = reading["source_display"][source_id]
+            for field in ("work", "edition"):
+                self.assertEqual(display[field]["original"], source[field])
+                self.assertEqual(display[field]["simplified"], converter.convert(source[field]))
+
+        # 郗/郄 remain textual distinctions; this layer only converts 鑒.
+        self.assertEqual(reading["person_display"]["xi-jian"]["name"]["original"], "郗鑒")
+        self.assertEqual(reading["person_display"]["xi-jian"]["name"]["simplified"], "郗鉴")
+        self.assertNotIn("郄", reading["person_display"]["xi-jian"]["name"]["simplified"])
 
     def _punctuation_record(self) -> tuple[dict[str, object], dict[str, str]]:
         document = json.loads(

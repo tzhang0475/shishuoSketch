@@ -15,9 +15,9 @@ except ImportError as exc:  # pragma: no cover - exercised only in incomplete en
     raise SystemExit("WP1 validation requires the Python 'jsonschema' package") from exc
 
 try:
-    from .reading_layers import canonical_sections, validate_punctuation_round_trip
+    from .reading_layers import READER_LABELS, canonical_sections, validate_punctuation_round_trip
 except ImportError:  # pragma: no cover - direct script execution
-    from reading_layers import canonical_sections, validate_punctuation_round_trip
+    from reading_layers import READER_LABELS, canonical_sections, validate_punctuation_round_trip
 
 
 OBJECTS = {
@@ -407,6 +407,280 @@ def add_ref_error(errors: list[str], label: str, ref: Any, collection: dict[str,
         errors.append(f"{label}: referenced ID does not exist: {ref!r}")
 
 
+def load_unified_person_registry(root: Path, errors: list[str]) -> dict[str, dict[str, Any]]:
+    path = root / "data/people.json"
+    try:
+        document = read_json(path)
+    except ValueError as exc:
+        errors.append(str(exc))
+        return {}
+    records = document.get("people") if isinstance(document, dict) else None
+    if not isinstance(records, list):
+        errors.append(f"{path} must contain a people array")
+        return {}
+    indexed: dict[str, dict[str, Any]] = {}
+    for index, record in enumerate(records):
+        if not isinstance(record, dict) or not isinstance(record.get("person_id"), str):
+            errors.append(f"{path}.people[{index}] must contain a person_id")
+            continue
+        person_id = record["person_id"]
+        if person_id in indexed:
+            errors.append(f"{path}: duplicate person_id: {person_id!r}")
+        indexed[person_id] = record
+    return indexed
+
+
+def validate_person_registry(
+    records_by_kind: dict[str, list[dict[str, Any]]],
+    root: Path,
+    unified_people: dict[str, dict[str, Any]],
+) -> list[str]:
+    """Ensure WP1 Person projections are derived from the unified registry."""
+    errors: list[str] = []
+    projected_people = {record.get("id"): record for record in records_by_kind.get("people", [])}
+    if set(projected_people) != set(unified_people):
+        errors.append(
+            "WP1 Person projection IDs do not match the unified data/people.json registry"
+        )
+
+    mention_index: dict[str, dict[str, Any]] = {}
+    for relative_path in ("data/mentions/shishuo.json", "data/mentions/jinshu.json"):
+        try:
+            document = read_json(root / relative_path)
+        except ValueError as exc:
+            errors.append(str(exc))
+            continue
+        key = "mentions"
+        for mention in document.get(key, []) if isinstance(document, dict) else []:
+            if isinstance(mention, dict) and isinstance(mention.get("mention_id"), str):
+                mention_index[mention["mention_id"]] = mention
+
+    for person_id, registry_person in unified_people.items():
+        scope_role = registry_person.get("scope_role")
+        if scope_role not in {"primary", "supporting"}:
+            errors.append(
+                f"Unified Person {person_id} must declare scope_role primary or supporting"
+            )
+        projected = projected_people.get(person_id)
+        if projected is None:
+            continue
+        if projected.get("canonical_name") != registry_person.get("canonical_name"):
+            errors.append(f"Person {person_id} canonical_name disagrees with unified registry")
+        if projected.get("scope_role") != scope_role or projected.get("scope") != scope_role:
+            errors.append(f"Person {person_id} scope projection disagrees with unified registry")
+
+        if scope_role != "supporting":
+            continue
+        source_evidence = registry_person.get("source_evidence")
+        if not isinstance(source_evidence, list) or not source_evidence:
+            errors.append(f"Supporting Person {person_id} must have source_evidence")
+            continue
+        for evidence_index, item in enumerate(source_evidence):
+            label = f"Unified Person {person_id} source_evidence[{evidence_index}]"
+            if not isinstance(item, dict):
+                errors.append(f"{label} must be an object")
+                continue
+            mention_id = item.get("mention_id")
+            mention = mention_index.get(mention_id)
+            if mention is None:
+                errors.append(f"{label} references a nonexistent mention_id: {mention_id!r}")
+                continue
+            provenance = item.get("provenance")
+            mention_provenance = mention.get("evidence", {}).get("provenance", {})
+            if not isinstance(provenance, dict):
+                errors.append(f"{label} must contain provenance")
+                continue
+            for key in ("source_path", "source_sha256"):
+                if provenance.get(key) != mention_provenance.get(key):
+                    errors.append(f"{label} {key} disagrees with the cited mention provenance")
+            if item.get("source_id") != mention.get("source_id"):
+                errors.append(f"{label} source_id disagrees with the cited mention")
+
+    return errors
+
+
+R1_ROLE_PAIRS = {
+    ("kinship", "parent_child"): {
+        ("父", "子"),
+        ("父", "女"),
+        ("母", "子"),
+        ("母", "女"),
+    },
+    ("kinship", "uncle_niece"): {
+        ("叔父", "姪女"),
+        ("伯父", "姪女"),
+        ("舅父", "姪女"),
+    },
+    ("kinship", "collateral_kinship"): {
+        ("從伯", "從子"),
+        ("從父", "從子"),
+        ("從父", "從女"),
+        ("從母", "從子"),
+        ("從母", "從女"),
+    },
+    ("marriage", "spouse"): {( "配偶", "配偶")},
+}
+
+
+def validate_relation_records(
+    records_by_kind: dict[str, list[dict[str, Any]]],
+    *,
+    root: Path | None = None,
+    unified_people: dict[str, dict[str, Any]] | None = None,
+) -> list[str]:
+    """Validate the small reviewed R1 relation model beyond JSON Schema."""
+    errors: list[str] = []
+    people = {record.get("id"): record for record in records_by_kind.get("people", [])}
+    stories = {record.get("id"): record for record in records_by_kind.get("stories", [])}
+    evidence = {record.get("id"): record for record in records_by_kind.get("evidence", [])}
+    relations = {record.get("id"): record for record in records_by_kind.get("relations", [])}
+    shishuo_entries: dict[str, dict[str, Any]] = {}
+    jinshu_units: dict[str, dict[str, Any]] = {}
+    if root is not None:
+        shishuo_entries = load_index(
+            root, "data/shishuo-corpus-index.json", "entries", "id", errors
+        )
+        jinshu_units = load_index(
+            root, "data/jinshu-unit-index.json", "units", "unit_id", errors
+        )
+
+    for person in people.values():
+        if person.get("scope") == "supporting":
+            evidence_ids = person.get("evidence_ids")
+            if person.get("assertion_status") != "attested" or not isinstance(evidence_ids, list) or not evidence_ids:
+                errors.append(
+                    f"Supporting Person {person.get('id')} must be attested with non-empty evidence_ids"
+                )
+
+    seen_semantic_edges: dict[tuple[Any, ...], str] = {}
+    for relation in records_by_kind.get("relations", []):
+        relation_id = relation.get("id")
+        subject_id = relation.get("subject_id")
+        object_id = relation.get("object_id")
+        relation_type = relation.get("relation_type")
+        subtype = relation.get("relation_subtype")
+        reviewed = relation.get("review_status") == "reviewed"
+
+        if isinstance(subject_id, str) and subject_id == object_id:
+            errors.append(f"Relation {relation_id} must not connect a person to themself")
+        if unified_people is not None:
+            if subject_id not in unified_people:
+                errors.append(f"Relation {relation_id} subject_id is absent from unified Person registry: {subject_id!r}")
+            if object_id not in unified_people:
+                errors.append(f"Relation {relation_id} object_id is absent from unified Person registry: {object_id!r}")
+
+        if reviewed and isinstance(subtype, str) and isinstance(subject_id, str) and isinstance(object_id, str):
+            endpoint_key = (
+                tuple(sorted((subject_id, object_id)))
+                if subtype == "spouse"
+                else (subject_id, object_id)
+            )
+            semantic_key = (relation_type, subtype, endpoint_key)
+            previous = seen_semantic_edges.get(semantic_key)
+            if previous is not None:
+                errors.append(
+                    f"Reviewed Relations {previous} and {relation_id} duplicate the same semantic edge"
+                )
+            else:
+                seen_semantic_edges[semantic_key] = str(relation_id)
+
+        for field, collection, label in (
+            ("source_entry_ids", shishuo_entries, "Shishuo entry"),
+            ("source_unit_ids", jinshu_units, "Jinshu unit"),
+        ):
+            values = relation.get(field, [])
+            if not isinstance(values, list):
+                continue
+            for value in values:
+                if root is not None and value not in collection:
+                    errors.append(
+                        f"Relation {relation_id} {field} references a nonexistent {label}: {value!r}"
+                    )
+
+        basis = relation.get("relation_basis")
+        derived_ids = relation.get("derived_from_relation_ids", [])
+        if basis == "direct" and derived_ids:
+            errors.append(f"Direct Relation {relation_id} cannot declare derived_from_relation_ids")
+        elif basis == "derived":
+            if not isinstance(derived_ids, list) or not derived_ids:
+                errors.append(f"Derived Relation {relation_id} must have derived_from_relation_ids")
+            for source_relation_id in derived_ids if isinstance(derived_ids, list) else []:
+                source_relation = relations.get(source_relation_id)
+                if source_relation is None:
+                    errors.append(
+                        f"Derived Relation {relation_id} references a nonexistent source Relation: {source_relation_id!r}"
+                    )
+                    continue
+                if source_relation.get("review_status") != "reviewed":
+                    errors.append(
+                        f"Derived Relation {relation_id} source Relation {source_relation_id} is not reviewed"
+                    )
+                if source_relation.get("relation_basis") != "direct":
+                    errors.append(
+                        f"Derived Relation {relation_id} source Relation {source_relation_id} is not direct Gold data"
+                    )
+            if relation.get("evidence_ids"):
+                errors.append(
+                    f"Derived Relation {relation_id} must not carry direct evidence_ids; use derived_from_relation_ids"
+                )
+            if reviewed and relation.get("assertion_status") != "inferred":
+                errors.append(f"Reviewed Derived Relation {relation_id} must have assertion_status='inferred'")
+            continue
+        elif basis not in {"direct", "derived"}:
+            errors.append(f"Relation {relation_id} must declare relation_basis direct or derived")
+
+        if not reviewed:
+            continue
+
+        if relation_type not in {"kinship", "marriage"}:
+            errors.append(
+                f"Reviewed Relation {relation_id} is outside the R1 hard-relation scope: {relation_type!r}"
+            )
+        if relation.get("assertion_status") != "attested":
+            errors.append(f"Reviewed Relation {relation_id} must have assertion_status='attested'")
+
+        evidence_ids = relation.get("evidence_ids")
+        relation_evidence = [evidence.get(item) for item in evidence_ids or []]
+        if not isinstance(evidence_ids, list) or not evidence_ids:
+            errors.append(f"Reviewed Relation {relation_id} must have evidence_ids")
+        elif not any(
+            isinstance(item, dict) and item.get("evidence_type") in {"primary_text", "annotation"}
+            for item in relation_evidence
+        ):
+            errors.append(
+                f"Reviewed Relation {relation_id} must use direct primary-text or annotation evidence; co-occurrence alone is insufficient"
+            )
+
+        source_entry_ids = relation.get("source_entry_ids", [])
+        source_unit_ids = relation.get("source_unit_ids", [])
+        story_ids = relation.get("story_ids", [])
+        if not (source_entry_ids or source_unit_ids or story_ids):
+            errors.append(
+                f"Reviewed Relation {relation_id} must identify at least one source entry, Jinshu unit, or story"
+            )
+        for story_id in story_ids if isinstance(story_ids, list) else []:
+            if story_id not in stories:
+                errors.append(f"Relation {relation_id} story_ids: referenced ID does not exist: {story_id!r}")
+
+        if not isinstance(subtype, str) or not isinstance(relation.get("role_a"), str) or not isinstance(relation.get("role_b"), str):
+            errors.append(f"Reviewed Relation {relation_id} must declare relation_subtype, role_a, and role_b")
+        else:
+            allowed_roles = R1_ROLE_PAIRS.get((relation_type, subtype))
+            if allowed_roles is None or (relation.get("role_a"), relation.get("role_b")) not in allowed_roles:
+                errors.append(
+                    f"Relation {relation_id} has incompatible relation subtype/roles: "
+                    f"{relation_type!r}/{subtype!r} {relation.get('role_a')!r}/{relation.get('role_b')!r}"
+                )
+
+            if subtype == "spouse":
+                if not isinstance(subject_id, str) or not isinstance(object_id, str) or subject_id >= object_id:
+                    errors.append(
+                        f"Symmetric spouse Relation {relation_id} must use canonical endpoint order subject_id < object_id"
+                    )
+
+    return errors
+
+
 def validate_canonical_provenance(
     root: Path,
     records_by_kind: dict[str, list[dict[str, Any]]],
@@ -728,6 +1002,10 @@ def validate_references(
     relations = by_kind["relations"]
     eras = by_kind["eras"]
     evidence = by_kind["evidence"]
+    unified_people: dict[str, dict[str, Any]] = {}
+    if root is not None:
+        unified_people = load_unified_person_registry(root, errors)
+        errors.extend(validate_person_registry(records_by_kind, root, unified_people))
 
     def refs(label: str, values: Any, collection: dict[str, dict[str, Any]]) -> None:
         if isinstance(values, list):
@@ -785,10 +1063,30 @@ def validate_references(
         if mention.get("anchor", {}).get("section") != mention.get("section"):
             errors.append(f"Mention {mention.get('id')} anchor section does not match section")
 
+    relation_source_entries = (
+        load_index(root, "data/shishuo-corpus-index.json", "entries", "id", errors)
+        if root is not None else {}
+    )
+    relation_source_units = (
+        load_index(root, "data/jinshu-unit-index.json", "units", "unit_id", errors)
+        if root is not None else {}
+    )
     for relation in relations.values():
         add_ref_error(errors, f"Relation {relation.get('id')} subject_id", relation.get("subject_id"), people)
         add_ref_error(errors, f"Relation {relation.get('id')} object_id", relation.get("object_id"), people)
         refs(f"Relation {relation.get('id')} story_ids", relation.get("story_ids"), stories)
+        if "source_entry_ids" in relation:
+            refs(
+                f"Relation {relation.get('id')} source_entry_ids",
+                relation.get("source_entry_ids"),
+                relation_source_entries,
+            )
+        if "source_unit_ids" in relation:
+            refs(
+                f"Relation {relation.get('id')} source_unit_ids",
+                relation.get("source_unit_ids"),
+                relation_source_units,
+            )
         refs(f"Relation {relation.get('id')} evidence_ids", relation.get("evidence_ids"), evidence)
 
     for era in eras.values():
@@ -801,6 +1099,14 @@ def validate_references(
 
     if root is not None:
         errors.extend(validate_canonical_provenance(root, records_by_kind, sources, mode=mode))
+
+    errors.extend(
+        validate_relation_records(
+            records_by_kind,
+            root=root,
+            unified_people=unified_people if root is not None else None,
+        )
+    )
 
     return errors
 
@@ -862,6 +1168,15 @@ def validate_bundle(root: Path, records_by_kind: dict[str, list[dict[str, Any]]]
         for record in punctuation_records
         if isinstance(record.get("entry_id"), str)
     }
+
+    def validate_display_pair(value: Any, label: str) -> None:
+        if not isinstance(value, dict):
+            errors.append(f"{label} must be an object with original and simplified forms")
+            return
+        for key in ("original", "simplified"):
+            if not isinstance(value.get(key), str) or not value.get(key):
+                errors.append(f"{label}.{key} must be a non-empty string")
+
     for story in bundle.get("stories", []):
         if not isinstance(story, dict):
             continue
@@ -903,6 +1218,75 @@ def validate_bundle(root: Path, records_by_kind: dict[str, list[dict[str, Any]]]
                 errors.append(f"{label}.annotations[0].original does not match reviewed punctuation")
             if not isinstance(annotation_reading.get("simplified"), str) or not annotation_reading.get("simplified"):
                 errors.append(f"{label}.annotations[0].simplified is empty")
+
+        labels = reading.get("labels")
+        if not isinstance(labels, dict) or set(labels) != set(READER_LABELS):
+            errors.append(f"{label}.labels does not match the reader-label contract")
+        elif isinstance(labels, dict):
+            for key in READER_LABELS:
+                validate_display_pair(labels.get(key), f"{label}.labels.{key}")
+
+        people_by_id = {
+            record.get("id"): record for record in records_by_kind["people"]
+        }
+        person_display = reading.get("person_display")
+        if not isinstance(person_display, dict) or set(person_display) != set(people_by_id):
+            errors.append(f"{label}.person_display IDs do not match canonical Person IDs")
+        elif isinstance(person_display, dict):
+            for person_id, person in people_by_id.items():
+                display = person_display.get(person_id)
+                if not isinstance(display, dict):
+                    errors.append(f"{label}.person_display.{person_id} is missing")
+                    continue
+                validate_display_pair(display.get("name"), f"{label}.person_display.{person_id}.name")
+                if isinstance(display.get("name"), dict) and display["name"].get("original") != person.get("canonical_name"):
+                    errors.append(f"{label}.person_display.{person_id}.name.original changes canonical_name")
+                aliases = display.get("aliases")
+                canonical_aliases = person.get("aliases", [])
+                if not isinstance(aliases, list) or len(aliases) != len(canonical_aliases):
+                    errors.append(f"{label}.person_display.{person_id}.aliases do not match canonical aliases")
+                elif isinstance(aliases, list):
+                    for alias_index, (display_alias, canonical_alias) in enumerate(zip(aliases, canonical_aliases)):
+                        alias_label = f"{label}.person_display.{person_id}.aliases[{alias_index}]"
+                        if not isinstance(display_alias, dict):
+                            errors.append(f"{alias_label} is not an object")
+                            continue
+                        validate_display_pair(display_alias.get("surface"), f"{alias_label}.surface")
+                        if isinstance(display_alias.get("surface"), dict) and display_alias["surface"].get("original") != canonical_alias.get("surface"):
+                            errors.append(f"{alias_label}.surface.original changes canonical alias surface")
+
+        mention_display = reading.get("mention_display")
+        mentions_by_id = {
+            record.get("id"): record for record in records_by_kind["mentions"]
+        }
+        if not isinstance(mention_display, dict) or set(mention_display) != set(mentions_by_id):
+            errors.append(f"{label}.mention_display IDs do not match canonical Mention IDs")
+        elif isinstance(mention_display, dict):
+            for mention_id, mention in mentions_by_id.items():
+                display = mention_display.get(mention_id)
+                if not isinstance(display, dict):
+                    errors.append(f"{label}.mention_display.{mention_id} is missing")
+                    continue
+                validate_display_pair(display.get("surface"), f"{label}.mention_display.{mention_id}.surface")
+                if isinstance(display.get("surface"), dict) and display["surface"].get("original") != mention.get("surface"):
+                    errors.append(f"{label}.mention_display.{mention_id}.surface.original changes canonical mention")
+
+        source_display = reading.get("source_display")
+        sources_by_id = {
+            record.get("id"): record for record in records_by_kind["sources"]
+        }
+        if not isinstance(source_display, dict) or set(source_display) != set(sources_by_id):
+            errors.append(f"{label}.source_display IDs do not match canonical Source IDs")
+        elif isinstance(source_display, dict):
+            for source_id, source in sources_by_id.items():
+                display = source_display.get(source_id)
+                if not isinstance(display, dict):
+                    errors.append(f"{label}.source_display.{source_id} is missing")
+                    continue
+                for field in ("work", "edition"):
+                    validate_display_pair(display.get(field), f"{label}.source_display.{source_id}.{field}")
+                    if isinstance(display.get(field), dict) and display[field].get("original") != source.get(field):
+                        errors.append(f"{label}.source_display.{source_id}.{field}.original changes canonical source title")
     public_path = root / "site/public/data/wp1-site.json"
     try:
         public_bundle = read_json(public_path)

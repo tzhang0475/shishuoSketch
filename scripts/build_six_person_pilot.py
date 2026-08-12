@@ -5,7 +5,8 @@ This script reads only the already materialized Shishuo entries and Jinshu
 units.  It never writes to either source tree.  Exact names and source-backed
 courtesy names resolve directly; contextual titles are resolved only when a
 strong identity cue occurs in the same rendered section.  Otherwise the
-mention remains unresolved.
+mention remains unresolved.  The R1 supporting bridge Person is registered
+from its own direct local attestation but is not added to the six-person scan.
 """
 
 from __future__ import annotations
@@ -29,14 +30,34 @@ JINSHU_MENTIONS_PATH = REPOSITORY_ROOT / "data/mentions/jinshu.json"
 REPORT_PATH = REPOSITORY_ROOT / "content/curated/entities/six-person-pilot.md"
 
 PERSON_DEFINITIONS: tuple[dict[str, Any], ...] = (
-    {"person_id": "wang-xizhi", "canonical_name": "王羲之"},
-    {"person_id": "xi-jian", "canonical_name": "郗鑒"},
-    {"person_id": "wang-dao", "canonical_name": "王導"},
-    {"person_id": "wang-ningzhi", "canonical_name": "王凝之"},
-    {"person_id": "xie-daoyun", "canonical_name": "謝道韞"},
-    {"person_id": "xie-an", "canonical_name": "謝安"},
+    {"person_id": "wang-xizhi", "canonical_name": "王羲之", "scope_role": "primary"},
+    {"person_id": "xi-jian", "canonical_name": "郗鑒", "scope_role": "primary"},
+    {"person_id": "wang-dao", "canonical_name": "王導", "scope_role": "primary"},
+    {"person_id": "wang-ningzhi", "canonical_name": "王凝之", "scope_role": "primary"},
+    {"person_id": "xie-daoyun", "canonical_name": "謝道韞", "scope_role": "primary"},
+    {"person_id": "xie-an", "canonical_name": "謝安", "scope_role": "primary"},
 )
 PERSON_IDS = frozenset(item["person_id"] for item in PERSON_DEFINITIONS)
+
+# R1.1 keeps the supporting bridge person in the same registry as the six
+# primary pilot people.  She is not added to the six-person mention scan:
+# her identity is attested by the existing Liu Xiaobiao annotation evidence.
+SUPPORTING_PERSON_DEFINITIONS: tuple[dict[str, Any], ...] = (
+    {
+        "person_id": "person-007",
+        "canonical_name": "郗璿",
+        "scope_role": "supporting",
+        "identity_scope": "R1 supporting bridge person; not a full 郗氏 genealogy",
+        "evidence_source": "shishuo",
+        "evidence_source_id": "06-yaliang-019",
+        "evidence_contains": "名璿",
+        "evidence_surface": "璿",
+    },
+)
+PERSON_REGISTRY_DEFINITIONS: tuple[dict[str, Any], ...] = (
+    *PERSON_DEFINITIONS,
+    *SUPPORTING_PERSON_DEFINITIONS,
+)
 
 
 @dataclass(frozen=True)
@@ -520,31 +541,61 @@ def alias_records(shishuo: Sequence[Mapping[str, Any]], jinshu: Sequence[Mapping
 def person_records(aliases: Sequence[Mapping[str, Any]], shishuo: Sequence[Mapping[str, Any]], jinshu: Sequence[Mapping[str, Any]]) -> list[dict[str, Any]]:
     mentions = list(shishuo) + list(jinshu)
     records: list[dict[str, Any]] = []
-    for definition in PERSON_DEFINITIONS:
+    for definition in PERSON_REGISTRY_DEFINITIONS:
         person_id = definition["person_id"]
         linked_aliases = [record["alias_id"] for record in aliases if person_id in record.get("person_ids", [])]
         evidence: list[dict[str, Any]] = []
-        for mention in mentions:
-            if person_id not in mention.get("candidate_person_ids", []):
-                continue
+        if definition.get("scope_role") == "supporting":
+            matching_mentions = [
+                mention
+                for mention in mentions
+                if mention.get("source") == definition["evidence_source"]
+                and mention.get("source_id") == definition["evidence_source_id"]
+                and definition["evidence_contains"] in mention.get("context", "")
+            ]
+            if not matching_mentions:
+                raise ValueError(
+                    f"supporting Person {person_id} has no local identity attestation: "
+                    f"{definition['evidence_source_id']} / {definition['evidence_contains']}"
+                )
+            mention = matching_mentions[0]
             evidence.append(
                 {
                     "mention_id": mention["mention_id"],
                     "source": mention["source"],
                     "source_id": mention["source_id"],
-                    "surface": mention["surface"],
-                    "confidence": mention["confidence"],
+                    "surface": definition["evidence_surface"],
+                    "confidence": "high",
                     "snippet": mention["evidence"]["snippet"],
                     "provenance": mention["evidence"]["provenance"],
                 }
             )
-            if len(evidence) >= 3:
-                break
+        else:
+            for mention in mentions:
+                if person_id not in mention.get("candidate_person_ids", []):
+                    continue
+                evidence.append(
+                    {
+                        "mention_id": mention["mention_id"],
+                        "source": mention["source"],
+                        "source_id": mention["source_id"],
+                        "surface": mention["surface"],
+                        "confidence": mention["confidence"],
+                        "snippet": mention["evidence"]["snippet"],
+                        "provenance": mention["evidence"]["provenance"],
+                    }
+                )
+                if len(evidence) >= 3:
+                    break
         records.append(
             {
                 "person_id": person_id,
                 "canonical_name": definition["canonical_name"],
-                "identity_scope": "six-person pilot; canonical identity is separate from observed textual spellings",
+                "scope_role": definition["scope_role"],
+                "identity_scope": definition.get(
+                    "identity_scope",
+                    "six-person pilot; canonical identity is separate from observed textual spellings",
+                ),
                 "alias_ids": linked_aliases,
                 "source_evidence": evidence,
             }
@@ -610,7 +661,7 @@ def report_text(aliases: Sequence[Mapping[str, Any]], shishuo: Sequence[Mapping[
             lines.append(f"- … {len(unresolved_mentions) - 40} additional unresolved mentions are retained in the JSON output.")
     else:
         lines.append("None.")
-    lines.extend(["", "## Scope and non-actions", "", "- Exactly six person IDs are present in `data/people.json`.", "- Source texts under `content/processed/` were read only; no source text was modified.", "- Generic title-only forms are not treated as resolved identities without same-section evidence.", "- No people outside this six-person scope are emitted, and no relationships are extracted.", ""])
+    lines.extend(["", "## Scope and non-actions", "", "- Six primary person IDs and the explicitly registered R1 supporting bridge `person-007` are present in `data/people.json`.", "- Source texts under `content/processed/` were read only; no source text was modified.", "- Generic title-only forms are not treated as resolved identities without same-section evidence.", "- No people outside the six-person pilot plus this one R1 bridge are emitted, and no relationships are extracted by this pilot builder.", ""])
     return "\n".join(lines)
 
 
