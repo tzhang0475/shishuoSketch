@@ -743,6 +743,8 @@ def main() -> int:
         people=records["people"]["records"],
         mentions=records["mentions"]["records"],
         sources=records["sources"]["records"],
+        relations=records["relations"]["records"],
+        evidence=records["evidence"]["records"],
     )
     bundle_story = dict(story)
     bundle_story["reading"] = reading

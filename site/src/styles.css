@@ -36,19 +36,60 @@ h1 { margin: 0; color: #28221d; font-size: clamp(2.2rem, 6vw, 4rem); font-weight
 .people-section { margin-top: 4rem; }
 .section-heading h2 { margin: .25rem 0 1.1rem; font-size: 1.4rem; font-weight: 500; }
 .people-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .8rem; }
-.person-card { background: #fffdf9; border: 1px solid #d9cebf; border-radius: 3px; }
-.person-card summary { display: flex; align-items: center; justify-content: space-between; gap: .75rem; list-style: none; padding: .85rem 1rem; }
-.person-card summary::-webkit-details-marker { display: none; }
-.person-card summary::after { content: "+"; color: #b18168; font-size: 1.1rem; }
-.person-card[open] summary::after { content: "−"; }
+.person-card { display: block; width: 100%; color: inherit; text-align: left; background: #fffdf9; border: 1px solid #d9cebf; border-radius: 3px; cursor: pointer; padding: 0; }
+.person-card:hover, .person-card:focus-visible, .person-card.focused { border-color: #a9785f; box-shadow: 0 0 0 2px rgba(169, 120, 95, .14); }
+.person-card-heading { display: flex; align-items: center; justify-content: space-between; gap: .75rem; padding: .85rem 1rem; }
 .person-name { color: #47352b; font-size: 1.15rem; }
 .person-hint { color: #9e9387; font-size: .65rem; }
-.person-card-body { border-top: 1px solid #e6ded2; padding: .8rem 1rem 1rem; }
+.person-card-body { display: block; border-top: 1px solid #e6ded2; padding: .8rem 1rem 1rem; }
 .person-label { margin: 0; color: #8e8274; font-size: .78rem; }
 .surface-list { margin: .2rem 0; color: #453a32; }
 .person-status { margin: .6rem 0 0; color: #a09385; font-size: .64rem; }
 .mention-strip { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: 1rem; }
-.mention-chip { border: 1px solid #dac8ba; border-radius: 999px; color: #765244; padding: .25rem .6rem; font-size: .78rem; }
+.mention-chip { border: 1px solid #dac8ba; border-radius: 999px; color: #765244; background: transparent; cursor: pointer; padding: .25rem .6rem; font-size: .78rem; }
+.mention-chip:hover:not(:disabled), .mention-chip:focus-visible { border-color: #a9785f; background: #fffdf9; }
+.mention-chip:disabled { cursor: default; opacity: .7; }
+.relation-explorer { margin-top: 3.5rem; border-top: 2px solid #302b27; padding-top: 1.4rem; }
+.relation-explorer-header { display: flex; align-items: flex-end; justify-content: space-between; gap: 1rem; margin-bottom: 1rem; }
+.relation-explorer-header h2 { margin: .2rem 0 0; color: #302b27; font-size: 1.8rem; font-weight: 500; }
+.back-button, .person-link { border: 0; background: transparent; color: #7a3d2d; cursor: pointer; text-align: left; }
+.back-button { border-bottom: 1px solid #cdb9aa; padding: .2rem 0; font-size: .82rem; }
+.back-button:hover, .person-link:hover { color: #4b271e; }
+.relation-explorer-grid { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: 1rem; align-items: stretch; }
+.person-detail-card, .ego-map-panel { min-width: 0; background: rgba(255, 253, 249, .72); border: 1px solid #d9cebf; padding: 1rem; }
+.person-detail-card h3 { margin: .2rem 0 .15rem; color: #47352b; font-size: 1.45rem; font-weight: 500; }
+.person-detail-aliases { margin: 0 0 1.1rem; color: #8c7c6d; font-size: .85rem; }
+.relation-detail-group { border-top: 1px solid #e3d9cd; padding-top: .7rem; }
+.relation-detail-group + .relation-detail-group { margin-top: 1rem; }
+.relation-detail-heading { margin: 0 0 .45rem; color: #8c6956; font-size: .78rem; }
+.relation-detail-row { border-bottom: 1px solid #eee7de; padding: .3rem 0; }
+.relation-detail-row:last-child { border-bottom: 0; }
+.person-link { display: block; width: 100%; padding: .2rem 0; font-size: .95rem; }
+.relation-evidence { margin: .15rem 0 .25rem 1rem; color: #76695e; font-size: .78rem; }
+.relation-evidence > summary { display: flex; justify-content: space-between; gap: .5rem; color: #9a6a56; }
+.relation-evidence-summary { color: #a08f80; font-size: .7rem; }
+.relation-evidence-body { margin-top: .45rem; }
+.relation-evidence-item { border-left: 2px solid #d3b6a5; padding: .35rem .7rem; }
+.relation-source-title, .relation-source-location, .relation-provenance p { margin: .2rem 0; color: #8c7d70; font-size: .7rem; }
+.relation-evidence-item blockquote { margin: .35rem 0; color: #4b4037; white-space: pre-wrap; font-size: .86rem; line-height: 1.8; }
+.relation-provenance { color: #8c7d70; font-size: .65rem; }
+.relation-empty { color: #8c7d70; font-size: .86rem; }
+.derived-group { border-top-color: #d8c6b7; }
+.derived-relation { padding: .25rem 0; }
+.derived-relation > summary { display: flex; justify-content: space-between; gap: .7rem; color: #765244; font-size: .84rem; }
+.relation-basis-note { color: #a18c7c; font-size: .7rem; }
+.derived-path { margin: .55rem 0 0 1rem; border-left: 1px solid #cdb9aa; padding-left: .8rem; color: #65564a; font-size: .82rem; }
+.derived-path-step { display: grid; gap: .12rem; padding: .2rem 0; }
+.derived-path-connector { color: #9b715d; font-size: .72rem; }
+.derived-no-quotation { margin: .55rem 0 0; color: #9a8b7d; font-size: .7rem; }
+.ego-map { position: relative; min-height: 290px; margin-top: .4rem; overflow: hidden; }
+.ego-map-edges { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.ego-map-edges line { stroke: #c8b5a7; stroke-width: .45; }
+.ego-map-edges text { fill: #98745f; font-family: inherit; font-size: 3px; paint-order: stroke; stroke: #f8f4ed; stroke-width: 1.2px; }
+.ego-node { position: absolute; transform: translate(-50%, -50%); max-width: 8.5rem; border: 1px solid #cdb9aa; border-radius: 999px; background: #fffdf9; color: #5a4337; cursor: pointer; padding: .28rem .65rem; white-space: nowrap; }
+.ego-node:hover, .ego-node:focus-visible { border-color: #8f5d47; color: #3f2e27; box-shadow: 0 0 0 2px rgba(143, 93, 71, .14); }
+.ego-node-center { left: 50%; top: 50%; border-color: #8f5d47; background: #f0e4d8; color: #3f2e27; font-weight: 600; }
+.ego-node-neighbor { font-size: .88rem; }
 .evidence-details { margin-top: 4rem; border-top: 1px solid #cfc4b4; padding-top: 1rem; }
 .evidence-details > summary { color: #6f5b4c; font-size: .95rem; }
 .evidence-intro { color: #83786c; font-size: .82rem; }
@@ -69,6 +110,9 @@ h1 { margin: 0; color: #28221d; font-size: clamp(2.2rem, 6vw, 4rem); font-weight
   .site-header { align-items: flex-start; }
   .reading-column { margin-top: 3.5rem; }
   .people-grid { grid-template-columns: 1fr; }
+  .relation-explorer-grid { grid-template-columns: 1fr; }
+  .relation-explorer-header { align-items: flex-start; flex-direction: column; }
+  .ego-map { min-height: 250px; }
   .story-text { letter-spacing: .02em; }
   .site-footer { flex-direction: column; }
 }

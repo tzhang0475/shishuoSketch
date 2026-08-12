@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import json
 from pathlib import Path
+import re
 import unicodedata
 from typing import Any, Mapping
 
@@ -25,6 +26,15 @@ READER_LABELS = {
     "evidence_heading": "證據與出處",
     "evidence_intro": "以下資訊來自已驗證的 WP1 靜態資料；artifact 是頁面所引用的派生檔案，source provenance 保留其上游見證資訊。",
     "empty_alias": "—",
+    "relation_section": "人物關係",
+    "direct_relation_label": "已審核的直接關係",
+    "derived_relation_label": "推得關係",
+    "derived_relation_note": "由關係鏈推得",
+    "relation_evidence_toggle": "查看關係依據",
+    "relation_evidence_heading": "關係依據",
+    "no_direct_relations": "目前尚無已審核的人物關係。",
+    "focused_person_label": "當前人物",
+    "back_label": "返回",
 }
 
 
@@ -141,6 +151,44 @@ def _build_source_display(sources: Any, converter: Any) -> dict[str, Any]:
     return result
 
 
+def _build_relation_display(relations: Any, converter: Any) -> dict[str, Any]:
+    result: dict[str, Any] = {}
+    if not isinstance(relations, (list, tuple)):
+        return result
+    for relation in relations:
+        if not isinstance(relation, Mapping) or not isinstance(relation.get("id"), str):
+            continue
+
+        def role_pair(key: str) -> dict[str, str] | None:
+            value = relation.get(key)
+            return _display_pair(value, converter) if isinstance(value, str) else None
+
+        result[relation["id"]] = {
+            "label": _display_pair(str(relation.get("label", "")), converter),
+            "role_a": role_pair("role_a"),
+            "role_b": role_pair("role_b"),
+        }
+    return result
+
+
+def _reader_quote(quote: str) -> str:
+    """Remove presentation-only MediaWiki comments from a reader quotation."""
+    return re.sub(r"<!--.*?-->", "", quote, flags=re.DOTALL).strip()
+
+
+def _build_evidence_display(evidence: Any, converter: Any) -> dict[str, Any]:
+    result: dict[str, Any] = {}
+    if not isinstance(evidence, (list, tuple)):
+        return result
+    for item in evidence:
+        if not isinstance(item, Mapping) or not isinstance(item.get("id"), str):
+            continue
+        quote = item.get("quote")
+        if isinstance(quote, str):
+            result[item["id"]] = _display_pair(_reader_quote(quote), converter)
+    return result
+
+
 def build_display_reading(
     record: Mapping[str, Any],
     converter: Any,
@@ -148,6 +196,8 @@ def build_display_reading(
     people: Any = (),
     mentions: Any = (),
     sources: Any = (),
+    relations: Any = (),
+    evidence: Any = (),
 ) -> dict[str, Any]:
     sections = record["sections"]
     return {
@@ -176,5 +226,7 @@ def build_display_reading(
         "person_display": _build_person_display(people, converter),
         "mention_display": _build_mention_display(mentions, converter),
         "source_display": _build_source_display(sources, converter),
+        "relation_display": _build_relation_display(relations, converter),
+        "evidence_display": _build_evidence_display(evidence, converter),
         "display_overrides": list(record.get("display_overrides", [])),
     }

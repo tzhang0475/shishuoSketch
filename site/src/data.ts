@@ -49,10 +49,38 @@ export function parseSiteBundle(value: unknown): SiteBundle {
     if (!isRecord(reading.labels) || !isRecord(reading.person_display) || !isRecord(reading.mention_display) || !isRecord(reading.source_display)) {
       throw new Error(`Story ${String(story.id)} 的 reading display layer 不完整`);
     }
+    if (!isRecord(reading.relation_display) || !isRecord(reading.evidence_display)) {
+      throw new Error(`Story ${String(story.id)} 的 relation reading layer 不完整`);
+    }
   }
   for (const mention of arrays.mentions) {
     if (!isRecord(mention) || typeof mention.story_id !== "string" || !storyIds.has(mention.story_id)) {
       throw new Error("Mention 引用了不存在的 Story");
+    }
+  }
+  const peopleIds = new Set(arrays.people.map((item) => (item as Record<string, unknown>).id));
+  const relationIds = new Set(arrays.relations.map((item) => (item as Record<string, unknown>).id));
+  const evidenceIds = new Set(arrays.evidence.map((item) => (item as Record<string, unknown>).id));
+  for (const relation of arrays.relations) {
+    if (!isRecord(relation)) throw new Error("Relation 记录格式无效");
+    if (typeof relation.subject_id !== "string" || typeof relation.object_id !== "string") {
+      throw new Error(`Relation ${String(relation.id)} 缺少人物端点`);
+    }
+    if (!peopleIds.has(relation.subject_id) || !peopleIds.has(relation.object_id)) {
+      throw new Error(`Relation ${String(relation.id)} 引用了不存在的人物`);
+    }
+    if (!Array.isArray(relation.evidence_ids) || relation.evidence_ids.some((id) => typeof id !== "string" || !evidenceIds.has(id))) {
+      throw new Error(`Relation ${String(relation.id)} 引用了不存在的依据`);
+    }
+    if (relation.relation_basis === "derived") {
+      if (!Array.isArray(relation.derived_from_relation_ids) || relation.derived_from_relation_ids.length === 0) {
+        throw new Error(`Relation ${String(relation.id)} 缺少推导来源`);
+      }
+      for (const sourceId of relation.derived_from_relation_ids) {
+        if (typeof sourceId !== "string" || !relationIds.has(sourceId)) {
+          throw new Error(`Relation ${String(relation.id)} 引用了不存在的推导关系`);
+        }
+      }
     }
   }
   return value as unknown as SiteBundle;

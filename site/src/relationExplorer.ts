@@ -1,0 +1,106 @@
+import type { Person, Relation, SiteBundle } from "./types";
+
+export interface RelationPerspective {
+  relation: Relation;
+  neighbor: Person;
+  currentRole: string;
+  neighborRole: string;
+}
+
+export interface LayoutPoint {
+  x: number;
+  y: number;
+}
+
+export interface EgoLayout {
+  center: LayoutPoint;
+  neighbors: LayoutPoint[];
+}
+
+export function reviewedDirectRelations(data: SiteBundle): Relation[] {
+  return data.relations.filter(
+    (relation) => relation.review_status === "reviewed" && relation.relation_basis === "direct",
+  );
+}
+
+export function directRelationPerspectives(personId: string, data: SiteBundle): RelationPerspective[] {
+  const people = new Map(data.people.map((person) => [person.id, person]));
+  return reviewedDirectRelations(data).flatMap((relation) => {
+    if (relation.subject_id === personId && relation.object_id !== personId) {
+      const neighbor = people.get(relation.object_id);
+      if (!neighbor) return [];
+      return [{ relation, neighbor, currentRole: relation.role_a ?? "", neighborRole: relation.role_b ?? "" }];
+    }
+    if (relation.object_id === personId && relation.subject_id !== personId) {
+      const neighbor = people.get(relation.subject_id);
+      if (!neighbor) return [];
+      return [{ relation, neighbor, currentRole: relation.role_b ?? "", neighborRole: relation.role_a ?? "" }];
+    }
+    return [];
+  });
+}
+
+export function derivedRelationsForPerson(personId: string, data: SiteBundle): Relation[] {
+  return data.relations.filter(
+    (relation) =>
+      relation.review_status === "reviewed" &&
+      relation.relation_basis === "derived" &&
+      (relation.subject_id === personId || relation.object_id === personId),
+  );
+}
+
+export function derivedPath(relation: Relation, data: SiteBundle): Relation[] {
+  const relations = new Map(data.relations.map((item) => [item.id, item]));
+  const remaining = (relation.derived_from_relation_ids ?? [])
+    .map((id) => relations.get(id))
+    .filter((item): item is Relation => Boolean(item));
+  const path: Relation[] = [];
+  let current = relation.subject_id;
+  while (current !== relation.object_id && remaining.length > 0) {
+    const index = remaining.findIndex(
+      (candidate) => candidate.subject_id === current || candidate.object_id === current,
+    );
+    if (index < 0) return [];
+    const [next] = remaining.splice(index, 1);
+    path.push(next);
+    current = next.subject_id === current ? next.object_id : next.subject_id;
+  }
+  return current === relation.object_id ? path : [];
+}
+
+export function pathPersonIds(path: Relation[], startId?: string): string[] {
+  if (path.length === 0) return [];
+  const ids = [startId ?? path[0].subject_id];
+  for (const relation of path) {
+    const last = ids[ids.length - 1];
+    if (relation.subject_id === last) ids.push(relation.object_id);
+    else if (relation.object_id === last) ids.push(relation.subject_id);
+    else return [];
+  }
+  return ids;
+}
+
+export function egoLayout(neighborCount: number): EgoLayout {
+  const center = { x: 50, y: 50 };
+  if (neighborCount <= 0) return { center, neighbors: [] };
+  if (neighborCount === 1) return { center, neighbors: [{ x: 78, y: 50 }] };
+  const radius = neighborCount >= 5 ? 34 : 31;
+  const neighbors = Array.from({ length: neighborCount }, (_, index) => {
+    const angle = (-Math.PI / 2) + (index * (2 * Math.PI)) / neighborCount;
+    return {
+      x: 50 + radius * Math.cos(angle),
+      y: 50 + radius * Math.sin(angle),
+    };
+  });
+  return { center, neighbors };
+}
+
+export function focusHistory(current: string[], nextId: string): string[] {
+  return current[current.length - 1] === nextId ? current : [...current, nextId];
+}
+
+export function backHistory(current: string[]): { history: string[]; focusedId: string | null } {
+  if (current.length < 2) return { history: current, focusedId: current[0] ?? null };
+  const history = current.slice(0, -1);
+  return { history, focusedId: history[history.length - 1] ?? null };
+}

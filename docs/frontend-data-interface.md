@@ -86,3 +86,22 @@ reading strings are generated from
 `content/processed/shishuo/entries/06-yaliang/entry-019.md` and
 `data/annotation/wp1-punctuation.json`; they are not manually retyped in
 React.
+
+## R2 local relation explorer
+
+The same static bundle carries the minimum reviewed relation display contract:
+
+* `relations` retains the unified Person endpoint IDs, endpoint roles,
+  `relation_basis`, review status, source IDs, evidence IDs, and
+  `derived_from_relation_ids`.
+* `story.reading.relation_display` contains OpenCC-derived original and
+  simplified labels and endpoint roles keyed by relation ID.
+* `story.reading.evidence_display` contains display-only quotations keyed by
+  evidence ID. Canonical evidence quotations and provenance records remain
+  unchanged.
+
+The reader derives a local ego view from reviewed `direct` relations only.
+Reviewed `derived` relations are excluded from the primary map and appear in a
+separate expandable path that resolves `derived_from_relation_ids`. Neighbor
+navigation updates the focused Person in place and keeps a small panel history.
+The explorer reads no source corpus, research Markdown, or runtime API.

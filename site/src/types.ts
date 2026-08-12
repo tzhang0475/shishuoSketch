@@ -73,7 +73,16 @@ export interface StoryReading {
     | "annotation_label"
     | "evidence_heading"
     | "evidence_intro"
-    | "empty_alias",
+    | "empty_alias"
+    | "relation_section"
+    | "direct_relation_label"
+    | "derived_relation_label"
+    | "derived_relation_note"
+    | "relation_evidence_toggle"
+    | "relation_evidence_heading"
+    | "no_direct_relations"
+    | "focused_person_label"
+    | "back_label",
     ReadingPair
   >;
   person_display: Record<string, {
@@ -82,6 +91,12 @@ export interface StoryReading {
   }>;
   mention_display: Record<string, { surface: ReadingPair }>;
   source_display: Record<string, { work: ReadingPair; edition: ReadingPair }>;
+  relation_display: Record<string, {
+    label: ReadingPair;
+    role_a: ReadingPair | null;
+    role_b: ReadingPair | null;
+  }>;
+  evidence_display: Record<string, ReadingPair>;
   display_overrides: string[];
 }
 
