@@ -1,0 +1,122 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://shishuo-sketch/schema/reading-layer.schema.json",
+  "title": "CRL1 Shishuo corpus reading layer",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "stage", "work", "entry_count", "source_annotation", "conversion", "records"],
+  "properties": {
+    "schema": {"const": 1},
+    "stage": {"const": "crl1-corpus-reading-layer"},
+    "work": {"const": "世說新語"},
+    "entry_count": {"type": "integer", "minimum": 0},
+    "source_annotation": {"type": "string", "minLength": 1},
+    "conversion": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["library", "config", "role"],
+      "properties": {
+        "library": {"type": "string", "minLength": 1},
+        "config": {"const": "t2s"},
+        "role": {"type": "string", "minLength": 1}
+      }
+    },
+    "records": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/record"}
+    }
+  },
+  "$defs": {
+    "display_text": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["original", "simplified", "available"],
+      "properties": {
+        "original": {"type": ["string", "null"]},
+        "simplified": {"type": ["string", "null"]},
+        "available": {"type": "boolean"}
+      }
+    },
+    "alignment": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "alignment_class",
+        "transfer_class",
+        "reference_case",
+        "status",
+        "reason_codes",
+        "canonical_character_count",
+        "reference_character_count",
+        "mismatch_offsets",
+        "punctuation_reference_count"
+      ],
+      "properties": {
+        "alignment_class": {"enum": ["exact-agreement", "character-disagreement", "alignment-failure"]},
+        "transfer_class": {
+          "enum": [
+            "exact_character_transfer",
+            "one_to_one_metadata_transfer",
+            "character_mismatch_around_punctuation",
+            "punctuation_boundary_disagreement",
+            "structural_or_boundary_mismatch",
+            "missing_reference"
+          ]
+        },
+        "reference_case": {"type": "string", "minLength": 1},
+        "status": {"enum": ["reviewed", "aligned", "candidate", "disputed"]},
+        "reason_codes": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1}},
+        "canonical_character_count": {"type": "integer", "minimum": 0},
+        "reference_character_count": {"type": "integer", "minimum": 0},
+        "mismatch_offsets": {"type": "array", "items": {"type": "integer", "minimum": 0}},
+        "punctuation_reference_count": {"type": "integer", "minimum": 0}
+      }
+    },
+    "record": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "entry_id",
+        "global_ordinal",
+        "chapter",
+        "punctuation_record_id",
+        "base_canonical_entry_path",
+        "base_canonical_entry_sha256",
+        "status",
+        "review_status",
+        "punctuation_basis",
+        "exact_transfer",
+        "source_qualification_id",
+        "main_text",
+        "story_reader_ready",
+        "annotation_reader_ready",
+        "round_trip_errors",
+        "alignment",
+        "automatic_comparison",
+        "display_overrides"
+      ],
+      "properties": {
+        "entry_id": {"type": "string", "minLength": 1},
+        "global_ordinal": {"type": "integer", "minimum": 1},
+        "chapter": {"type": "string", "pattern": "^[0-9]{2}$"},
+        "punctuation_record_id": {"type": "string", "minLength": 1},
+        "base_canonical_entry_path": {"type": "string", "minLength": 1},
+        "base_canonical_entry_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "status": {"enum": ["reviewed", "aligned", "candidate", "disputed"]},
+        "review_status": {"enum": ["reviewed", "unreviewed"]},
+        "punctuation_basis": {
+          "enum": ["human_reviewed", "trusted_reference_exact", "reference_candidate", "disputed"]
+        },
+        "exact_transfer": {"type": "boolean"},
+        "source_qualification_id": {"type": ["string", "null"]},
+        "main_text": {"$ref": "#/$defs/display_text"},
+        "story_reader_ready": {"type": "boolean"},
+        "annotation_reader_ready": {"type": "boolean"},
+        "round_trip_errors": {"type": "array", "items": {"type": "string"}},
+        "alignment": {"$ref": "#/$defs/alignment"},
+        "automatic_comparison": {"anyOf": [{"$ref": "#/$defs/alignment"}, {"type": "null"}]},
+        "display_overrides": {"type": "array", "items": {"type": "string"}}
+      }
+    }
+  }
+}

@@ -1,0 +1,63 @@
+{
+  "schema": 1,
+  "stage": "crl1-1-reading-source-qualification",
+  "records": [
+    {
+      "id": "qualification-shishuo-local-reference-txt-punctuation",
+      "witness_id": "shishuo-local-reference-txt",
+      "qualification": "provisionally_qualified",
+      "uses": [
+        "structure",
+        "punctuation_guidance",
+        "exact_character_transfer_analysis"
+      ],
+      "allows_exact_transfer_analysis": true,
+      "allows_trusted_reference_promotion": false,
+      "allows_reader_ready_promotion": false,
+      "source": {
+        "path": "sources/local/shishuo/reference-txt/shishuo.txt",
+        "sha256": "843c8c55956454b623a4d6f28e3e5b6ce5e7c8722aecf24822eb605914b1a205",
+        "byte_size": 824964,
+        "line_count_recorded": 23992,
+        "encoding": "UTF-8",
+        "line_ending": "CRLF"
+      },
+      "metadata": {
+        "path": "sources/local/shishuo/reference-txt/metadata.yaml",
+        "sha256": "c0795ea6c5b88e3a96401b95e02b4803fcd44ccc71434904a666b3042466d5c7",
+        "registry_path": "sources/registry/shishuo.yaml",
+        "registry_sha256": "851c1d3aa2c75a41ac7b0de08c0a316339dbd8d472d237970b565ba642086f25"
+      },
+      "documented_identity": {
+        "edition": "unresolved",
+        "source_provider": "local repository",
+        "provenance_status": "unresolved",
+        "text_authority": "low",
+        "structure_authority": "high",
+        "punctuation_present": true,
+        "manual_edit_status": "not documented"
+      },
+      "coverage": {
+        "canonical_entries": 1130,
+        "numbered_reference_paragraphs": 1128,
+        "missing_reference_entry_ids": [
+          "04-wenxue-023",
+          "08-shangyu-100"
+        ]
+      },
+      "limitations": [
+        "Edition, transcription source, publisher, and date are unresolved in tracked metadata.",
+        "The witness is simplified-or-mixed and is not a textual authority for canonical characters.",
+        "Earlier project documentation assigned it structural-reference status; punctuation use here is an explicit calibration experiment.",
+        "The available Wikisource comparison views provide character/structure alignment but no independent sentence punctuation.",
+        "No tracked record documents whether the local punctuation was manually edited."
+      ],
+      "qualification_basis": [
+        "The file is byte-stable and its SHA-256 is recorded in tracked metadata.",
+        "It contains deterministic chapter/ordinal structure and punctuation-bearing paragraphs.",
+        "Exact-transfer analysis can compare stripped reference characters to canonical entry characters without changing either witness."
+      ],
+      "notes": "Provisionally qualified for auditable punctuation transfer analysis only. It is not sufficiently identified or independently qualified to promote machine punctuation to trusted_reference_exact or story_reader_ready."
+    }
+  ]
+}

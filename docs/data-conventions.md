@@ -127,3 +127,80 @@ input generated from that same bundle. They are synchronized by the builder
 and exact-identity validation; the frontend does not publish a separate
 runtime JSON copy. The WP1 sample builder records its input entry path and
 source hashes; it does not edit the source entry.
+
+## CRL1 corpus reading layer
+
+`data/annotation/wp1-punctuation.json` is the single punctuation-record
+architecture for both the reviewed WP1 sample and the corpus-wide CRL1
+assessment. The existing `06-yaliang-019` record is preserved as a human
+reviewed override. CRL1.1 keeps `review_status` (`reviewed` or `unreviewed`)
+separate from `punctuation_basis` (`human_reviewed`,
+`trusted_reference_exact`, `reference_candidate`, or `disputed`). The legacy
+`status` field remains for compatibility; it is not a substitute for the
+orthogonal review/basis fields.
+
+The CRL1 build is:
+
+```text
+canonical entry Markdown
+    ↓
+local structural TXT punctuation guidance
+    ↓
+character-alignment assessment
+    ↓
+data/annotation/wp1-punctuation.json
+    ↓
+data/derived/shishuo-reading-layer.json
+    ↓
+OpenCC t2s display form
+```
+
+The local structural TXT is not textual authority. Character alignment may
+use a comparison-only Traditional-to-Simplified key, but derived punctuation
+is inserted at canonical offsets and must round-trip to the canonical
+sequence. The Wikisource SBCK comparison view is a same-edition alignment
+reference; because it currently contains no sentence punctuation, it does not
+count as a second punctuation reference.
+
+`exact_transfer: true` means that the transferred reference punctuation strips
+to exactly the canonical character sequence. It is a technical alignment fact,
+not editorial approval. `data/reading-source-qualification.json` records the
+source qualification. The local TXT is currently
+`provisionally_qualified` for transfer analysis only, so its exact transfers
+remain `reference_candidate` until the source is editorially qualified. A
+candidate is never reader-ready merely because OpenCC output exists.
+
+`story_reader_ready` means only that main-text punctuation has
+`review_status: reviewed` with `punctuation_basis: human_reviewed`, or an
+explicitly qualified `trusted_reference_exact` basis, the canonical round-trip
+passes, and OpenCC simplification succeeds. Liu Xiaobiao annotation coverage is tracked separately by
+`annotation_reader_ready` and does not block CRL1 main-text readiness.
+
+Run the deterministic build and derived-layer validation with:
+
+```bash
+npm run build:reading-layer
+WP1_PROVENANCE_MODE=full npm run validate:reading-layer
+WP1_PROVENANCE_MODE=portable npm run validate:reading-layer
+```
+
+The generated human-review queue is
+`content/curated/shishuo/reading-layer/review-queue.yaml`, with a Markdown
+view beside it. Entries with `candidate` or `disputed` status remain queued;
+the builder never guesses punctuation to increase reader-ready coverage.
+
+## Person ↔ Story indexing
+
+`data/derived/person-story-links.json` is deterministic navigation data derived
+from resolved Shishuo Mentions. It does not replace the Story or Person model
+and does not make a historical participation assertion. `main_text` and
+`liu_annotation` are retained as separate source layers; this pilot uses
+`presence_kind: mentioned` for both. `participant` requires a later explicit
+review decision and must be supported by a main-text Mention.
+
+`data/derived/person-story-index.json` projects reviewed links into ordered
+Person → Story references. Contextual or ambiguous Mentions remain candidate
+evidence and are never promoted by co-occurrence, Relation edges, Jinshu
+biographies, or semantic similarity. A linked Story is `reader_ready` only
+when its canonical entry, reviewed punctuation, original/simplified reading
+layer, and reviewed resolved Person link all exist.

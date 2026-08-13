@@ -32,7 +32,12 @@
       "required": ["canonical_text", "punctuated_text", "notes"],
       "properties": {
         "canonical_text": {"type": "string", "minLength": 1},
-        "punctuated_text": {"type": "string", "minLength": 1},
+        "punctuated_text": {
+          "anyOf": [
+            {"type": "string", "minLength": 1},
+            {"type": "null"}
+          ]
+        },
         "notes": {"type": "string", "minLength": 1}
       }
     },
@@ -45,6 +50,10 @@
         "base_canonical_entry_path",
         "base_canonical_entry_sha256",
         "status",
+        "review_status",
+        "punctuation_basis",
+        "exact_transfer",
+        "source_qualification_id",
         "references",
         "sections",
         "display_overrides",
@@ -55,7 +64,13 @@
         "entry_id": {"type": "string", "minLength": 1},
         "base_canonical_entry_path": {"type": "string", "minLength": 1},
         "base_canonical_entry_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
-        "status": {"const": "reviewed"},
+        "status": {"enum": ["reviewed", "aligned", "candidate", "disputed"]},
+        "review_status": {"enum": ["reviewed", "unreviewed"]},
+        "punctuation_basis": {
+          "enum": ["human_reviewed", "trusted_reference_exact", "reference_candidate", "disputed"]
+        },
+        "exact_transfer": {"type": "boolean"},
+        "source_qualification_id": {"type": ["string", "null"]},
         "references": {
           "type": "array",
           "minItems": 1,
@@ -64,12 +79,58 @@
         "sections": {
           "type": "object",
           "additionalProperties": false,
-          "required": ["main_text", "liu_annotation"],
+          "required": ["main_text"],
           "properties": {
             "main_text": {"$ref": "#/$defs/section"},
             "liu_annotation": {"$ref": "#/$defs/section"}
           }
         },
+        "alignment": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "alignment_class",
+            "transfer_class",
+            "reference_case",
+            "status",
+            "reason_codes",
+            "canonical_character_count",
+            "reference_character_count",
+            "mismatch_offsets",
+            "punctuation_reference_count"
+          ],
+          "properties": {
+            "alignment_class": {
+              "enum": ["exact-agreement", "character-disagreement", "alignment-failure"]
+            },
+            "transfer_class": {
+              "enum": [
+                "exact_character_transfer",
+                "one_to_one_metadata_transfer",
+                "character_mismatch_around_punctuation",
+                "punctuation_boundary_disagreement",
+                "structural_or_boundary_mismatch",
+                "missing_reference"
+              ]
+            },
+            "reference_case": {"type": "string", "minLength": 1},
+            "status": {"enum": ["reviewed", "aligned", "candidate", "disputed"]},
+            "reason_codes": {
+              "type": "array",
+              "minItems": 1,
+              "items": {"type": "string", "minLength": 1}
+            },
+            "canonical_character_count": {"type": "integer", "minimum": 0},
+            "reference_character_count": {"type": "integer", "minimum": 0},
+            "mismatch_offsets": {
+              "type": "array",
+              "items": {"type": "integer", "minimum": 0}
+            },
+            "punctuation_reference_count": {"type": "integer", "minimum": 0}
+          }
+        },
+        "story_reader_ready": {"type": "boolean"},
+        "annotation_reader_ready": {"type": "boolean"},
         "display_overrides": {
           "type": "array",
           "items": {"type": "string"}

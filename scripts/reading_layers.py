@@ -57,6 +57,26 @@ def canonical_sections(entry_path: Path) -> dict[str, str]:
     return result
 
 
+def canonical_reading_sections(entry_path: Path) -> dict[str, str]:
+    """Return the canonical main section and any available annotation.
+
+    CRL1 only requires main-text reading coverage.  The older WP1 helper
+    above intentionally remains strict because its reviewed sample includes a
+    Liu Xiaobiao annotation record.
+    """
+
+    result: dict[str, str] = {}
+    for section, text, metadata in parse_shishuo_sections(entry_path.read_text(encoding="utf-8")):
+        if section == "main_text":
+            result[section] = text.rstrip("\n")
+        elif section == "liu_annotation":
+            result[section] = text.rstrip("\n")
+            result.setdefault("liu_annotation_id", str(metadata.get("annotation_id", "annotation-001")))
+    if "main_text" not in result:
+        raise ValueError(f"canonical entry lacks main text: {entry_path}")
+    return result
+
+
 def strip_display_punctuation(text: str) -> str:
     """Remove Unicode punctuation and display whitespace, preserving characters."""
     return "".join(
@@ -69,12 +89,15 @@ def strip_display_punctuation(text: str) -> str:
 def validate_punctuation_round_trip(
     record: Mapping[str, Any],
     canonical: Mapping[str, str],
+    *,
+    section_names: tuple[str, ...] = ("main_text", "liu_annotation"),
+    allow_missing_punctuated: bool = False,
 ) -> list[str]:
     errors: list[str] = []
     sections = record.get("sections")
     if not isinstance(sections, Mapping):
         return [f"{record.get('id')}: sections is not an object"]
-    for section_name in ("main_text", "liu_annotation"):
+    for section_name in section_names:
         section = sections.get(section_name)
         if not isinstance(section, Mapping):
             errors.append(f"{record.get('id')}.{section_name}: section is not an object")
@@ -86,6 +109,8 @@ def validate_punctuation_round_trip(
             errors.append(
                 f"{record.get('id')}.{section_name}: canonical_text does not match the entry"
             )
+        if punctuated is None and allow_missing_punctuated:
+            continue
         if not isinstance(punctuated, str) or not punctuated:
             errors.append(f"{record.get('id')}.{section_name}: punctuated_text is empty")
             continue

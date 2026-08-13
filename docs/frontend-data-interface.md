@@ -111,3 +111,20 @@ Reviewed `derived` relations are excluded from the primary map and appear in a
 separate expandable path that resolves `derived_from_relation_ids`. Neighbor
 navigation updates the focused Person in place and keeps a small panel history.
 The explorer reads no source corpus, research Markdown, or runtime API.
+
+## CRL1 corpus reading layer
+
+CRL1 is corpus infrastructure and is not bundled into the current small
+frontend prototype. Its deterministic product is
+`data/derived/shishuo-reading-layer.json`, generated from the expanded
+`data/annotation/wp1-punctuation.json` by
+`scripts/build_shishuo_reading_layer.py`. Each of the 1,130 canonical main
+text entries has a punctuation status, alignment assessment, and a derived
+OpenCC `t2s` display form when a safe punctuation candidate exists.
+
+`story_reader_ready` depends only on main-text punctuation status, canonical
+round-trip validation, and successful simplified derivation. Liu Xiaobiao
+annotation readiness is reported separately. Candidate and disputed records
+remain in the generated review queue and are not silently presented as
+reviewed reading content. The canonical entries and all registered witness
+payloads remain outside the frontend data contract.

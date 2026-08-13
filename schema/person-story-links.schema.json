@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://shishuo-sketch/schema/person-story-links.schema.json",
+  "title": "PersonStoryLinks",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "stage",
+    "work",
+    "generated_from",
+    "person_scope",
+    "link_count",
+    "reviewed_link_count",
+    "candidate_link_count",
+    "candidate_mention_count",
+    "links"
+  ],
+  "properties": {
+    "schema": {"type": "integer", "const": 1},
+    "stage": {"type": "string", "const": "person-story-linking"},
+    "work": {"type": "string", "const": "世說新語"},
+    "generated_from": {"type": "string", "minLength": 1},
+    "person_scope": {
+      "type": "array",
+      "items": {"type": "string", "minLength": 1},
+      "uniqueItems": true
+    },
+    "link_count": {"type": "integer", "minimum": 0},
+    "reviewed_link_count": {"type": "integer", "minimum": 0},
+    "candidate_link_count": {"type": "integer", "minimum": 0},
+    "candidate_mention_count": {"type": "integer", "minimum": 0},
+    "links": {
+      "type": "array",
+      "items": {"$ref": "person-story-link.schema.json"}
+    }
+  }
+}

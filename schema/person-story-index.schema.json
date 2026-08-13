@@ -1,0 +1,145 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://shishuo-sketch/schema/person-story-index.schema.json",
+  "title": "PersonStoryIndex",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "stage",
+    "work",
+    "generated_from",
+    "person_scope",
+    "reviewed_link_count",
+    "candidate_link_count",
+    "candidate_mention_count",
+    "persons",
+    "story_readiness",
+    "candidate_selection"
+  ],
+  "properties": {
+    "schema": {"type": "integer", "const": 1},
+    "stage": {"type": "string", "const": "person-story-indexing"},
+    "work": {"type": "string", "const": "世說新語"},
+    "generated_from": {"type": "string", "minLength": 1},
+    "person_scope": {
+      "type": "array",
+      "items": {"type": "string", "minLength": 1},
+      "uniqueItems": true
+    },
+    "reviewed_link_count": {"type": "integer", "minimum": 0},
+    "candidate_link_count": {"type": "integer", "minimum": 0},
+    "candidate_mention_count": {"type": "integer", "minimum": 0},
+    "persons": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/person"}
+    },
+    "story_readiness": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/readiness"}
+    },
+    "candidate_selection": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["count", "entry_ids", "criteria"],
+      "properties": {
+        "count": {"type": "integer", "minimum": 0},
+        "entry_ids": {
+          "type": "array",
+          "items": {"type": "string", "minLength": 1},
+          "uniqueItems": true
+        },
+        "criteria": {
+          "type": "array",
+          "items": {"type": "string", "minLength": 1}
+        }
+      }
+    }
+  },
+  "$defs": {
+    "person": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["person_id", "scope_role", "story_refs", "candidate_story_ids"],
+      "properties": {
+        "person_id": {"type": "string", "minLength": 1},
+        "scope_role": {"type": "string", "enum": ["primary", "supporting"]},
+        "story_refs": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/story_ref"}
+        },
+        "candidate_story_ids": {
+          "type": "array",
+          "items": {"type": "string", "minLength": 1},
+          "uniqueItems": true
+        }
+      }
+    },
+    "story_ref": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "entry_id",
+        "chapter_id",
+        "chapter_heading",
+        "ordinal",
+        "global_ordinal",
+        "link_ids",
+        "source_layers",
+        "presence_kinds",
+        "reader_ready"
+      ],
+      "properties": {
+        "entry_id": {"type": "string", "minLength": 1},
+        "chapter_id": {"type": "string", "minLength": 1},
+        "chapter_heading": {"type": "string"},
+        "ordinal": {"type": "integer", "minimum": 1},
+        "global_ordinal": {"type": "integer", "minimum": 1},
+        "link_ids": {
+          "type": "array",
+          "items": {"type": "string", "minLength": 1},
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "source_layers": {
+          "type": "array",
+          "items": {"type": "string", "enum": ["main_text", "liu_annotation"]},
+          "uniqueItems": true
+        },
+        "presence_kinds": {
+          "type": "array",
+          "items": {"type": "string", "enum": ["participant", "mentioned"]},
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "reader_ready": {"type": "boolean"}
+      }
+    },
+    "readiness": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "entry_id",
+        "canonical_entry",
+        "reviewed_punctuation",
+        "simplified_reading",
+        "resolved_person_mentions",
+        "reviewed_link_count",
+        "unresolved_mention_count",
+        "reader_ready",
+        "reasons"
+      ],
+      "properties": {
+        "entry_id": {"type": "string", "minLength": 1},
+        "canonical_entry": {"type": "boolean"},
+        "reviewed_punctuation": {"type": "boolean"},
+        "simplified_reading": {"type": "boolean"},
+        "resolved_person_mentions": {"type": "boolean"},
+        "reviewed_link_count": {"type": "integer", "minimum": 0},
+        "unresolved_mention_count": {"type": "integer", "minimum": 0},
+        "reader_ready": {"type": "boolean"},
+        "reasons": {"type": "array", "items": {"type": "string"}}
+      }
+    }
+  }
+}

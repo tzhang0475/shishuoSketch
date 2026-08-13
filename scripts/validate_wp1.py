@@ -15,9 +15,19 @@ except ImportError as exc:  # pragma: no cover - exercised only in incomplete en
     raise SystemExit("WP1 validation requires the Python 'jsonschema' package") from exc
 
 try:
-    from .reading_layers import READER_LABELS, canonical_sections, validate_punctuation_round_trip
+    from .reading_layers import (
+        READER_LABELS,
+        canonical_reading_sections,
+        canonical_sections,
+        validate_punctuation_round_trip,
+    )
 except ImportError:  # pragma: no cover - direct script execution
-    from reading_layers import READER_LABELS, canonical_sections, validate_punctuation_round_trip
+    from reading_layers import (
+        READER_LABELS,
+        canonical_reading_sections,
+        canonical_sections,
+        validate_punctuation_round_trip,
+    )
 
 
 OBJECTS = {
@@ -896,7 +906,7 @@ def validate_punctuation_reference(
 
 
 def validate_punctuation(root: Path, mode: str = "full") -> list[str]:
-    """Validate the reviewed reading layer without treating it as source text."""
+    """Validate punctuation records without treating them as source text."""
     errors: list[str] = []
     path = root / PUNCTUATION_DATA
     try:
@@ -940,13 +950,26 @@ def validate_punctuation(root: Path, mode: str = "full") -> list[str]:
                 errors.append(f"{label} canonical hash disagrees with the Shishuo index")
         try:
             metadata = frontmatter_fields(base_path)
-            canonical = canonical_sections(base_path)
+            canonical = canonical_reading_sections(base_path)
         except (OSError, UnicodeError, ValueError) as exc:
             errors.append(f"{label} canonical entry cannot be parsed: {exc}")
             continue
         if metadata.get("entry_id") != entry_id:
             errors.append(f"{label} entry_id disagrees with canonical entry metadata")
-        errors.extend(validate_punctuation_round_trip(record, canonical))
+        record_sections = record.get("sections")
+        section_names = tuple(
+            section_name
+            for section_name in ("main_text", "liu_annotation")
+            if isinstance(record_sections, dict) and section_name in record_sections
+        )
+        errors.extend(
+            validate_punctuation_round_trip(
+                record,
+                canonical,
+                section_names=section_names,
+                allow_missing_punctuated=record.get("status") in {"candidate", "disputed"},
+            )
+        )
 
         references = record.get("references", [])
         if isinstance(references, list):
@@ -1308,6 +1331,11 @@ def validate_bundle(root: Path, records_by_kind: dict[str, list[dict[str, Any]]]
 def validate_repository(root: Path, mode: str = "full") -> list[str]:
     errors: list[str] = []
     errors.extend(validate_punctuation(root, mode=mode))
+    try:
+        from .validate_shishuo_reading_layer import validate_reading_layer
+    except ImportError:  # pragma: no cover - direct script execution
+        from validate_shishuo_reading_layer import validate_reading_layer
+    errors.extend(validate_reading_layer(root, mode=mode))
     records_by_kind: dict[str, list[dict[str, Any]]] = {}
     for label, (schema_rel, data_rel, kind) in OBJECTS.items():
         schema_path = root / schema_rel

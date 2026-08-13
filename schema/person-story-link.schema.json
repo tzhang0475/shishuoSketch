@@ -1,0 +1,87 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://shishuo-sketch/schema/person-story-link.schema.json",
+  "title": "PersonStoryLink",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "person_id",
+    "entry_id",
+    "link_basis",
+    "presences",
+    "supporting_mention_ids",
+    "candidate_mention_ids",
+    "evidence_ids",
+    "resolution_status",
+    "confidence",
+    "review_status"
+  ],
+  "properties": {
+    "id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._-]*$"},
+    "person_id": {"type": "string", "minLength": 1},
+    "entry_id": {"type": "string", "minLength": 1},
+    "link_basis": {"type": "string", "enum": ["mention", "explicit_evidence"]},
+    "presences": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/presence"
+      }
+    },
+    "supporting_mention_ids": {
+      "type": "array",
+      "items": {"type": "string", "minLength": 1},
+      "uniqueItems": true
+    },
+    "candidate_mention_ids": {
+      "type": "array",
+      "items": {"type": "string", "minLength": 1},
+      "uniqueItems": true
+    },
+    "evidence_ids": {
+      "type": "array",
+      "items": {"type": "string", "minLength": 1},
+      "uniqueItems": true
+    },
+    "resolution_status": {
+      "type": "string",
+      "enum": ["deterministic", "mixed", "contextual", "explicit_evidence", "unresolved"]
+    },
+    "confidence": {
+      "type": "string",
+      "enum": ["high", "medium", "low", "unresolved"]
+    },
+    "review_status": {
+      "type": "string",
+      "enum": ["candidate", "reviewed", "rejected", "todo"]
+    },
+    "notes": {"type": "string"}
+  },
+  "$defs": {
+    "presence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "source_layer",
+        "presence_kind",
+        "supporting_mention_ids",
+        "candidate_mention_ids"
+      ],
+      "properties": {
+        "source_layer": {"type": "string", "enum": ["main_text", "liu_annotation"]},
+        "presence_kind": {"type": "string", "enum": ["participant", "mentioned"]},
+        "supporting_mention_ids": {
+          "type": "array",
+          "items": {"type": "string", "minLength": 1},
+          "uniqueItems": true
+        },
+        "candidate_mention_ids": {
+          "type": "array",
+          "items": {"type": "string", "minLength": 1},
+          "uniqueItems": true
+        }
+      }
+    }
+  }
+}
