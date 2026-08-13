@@ -214,29 +214,354 @@ def _build_evidence_display(evidence: Any, converter: Any) -> dict[str, Any]:
     return result
 
 
+def _is_display_ignored(character: str) -> bool:
+    """Return whether a character is presentation-only for alignment.
+
+    The canonical entry may retain source line breaks and top-level annotation
+    delimiters.  Reading punctuation uses the same round-trip rule as the
+    punctuation validator: Unicode punctuation and whitespace are ignored
+    while historical characters remain exact.
+    """
+
+    return character.isspace() or unicodedata.category(character).startswith("P")
+
+
+def _significant_positions(text: str) -> list[tuple[str, int]]:
+    return [
+        (character, index)
+        for index, character in enumerate(text)
+        if not _is_display_ignored(character)
+    ]
+
+
+def _display_boundaries(canonical: str, displayed: str) -> tuple[list[int], list[int], list[str]]:
+    """Map raw canonical character offsets to displayed-text boundaries.
+
+    Offsets in the Mention records are offsets into the normalized canonical
+    section, which can contain source line breaks and annotation delimiters.
+    The displayed reading can contain a different set of punctuation and
+    whitespace.  Matching the significant character sequences gives an exact,
+    variant-preserving mapping without assuming equal string lengths.
+    """
+
+    canonical_positions = _significant_positions(canonical)
+    displayed_positions = _significant_positions(displayed)
+    canonical_text = "".join(character for character, _ in canonical_positions)
+    displayed_text = "".join(character for character, _ in displayed_positions)
+    if canonical_text != displayed_text:
+        raise ValueError("canonical/display text character sequences do not align")
+
+    raw_to_logical: list[int] = [0] * (len(canonical) + 1)
+    logical = 0
+    for raw_index in range(len(canonical) + 1):
+        raw_to_logical[raw_index] = logical
+        if raw_index < len(canonical) and not _is_display_ignored(canonical[raw_index]):
+            logical += 1
+
+    logical_to_display_start: list[int] = [0] * (len(displayed_positions) + 1)
+    for logical_index, (_character, display_index) in enumerate(displayed_positions):
+        logical_to_display_start[logical_index] = display_index
+    logical_to_display_start[len(displayed_positions)] = len(displayed)
+
+    logical_to_display_end: list[int] = [0] * (len(displayed_positions) + 1)
+    logical_to_display_end[0] = 0
+    for logical_index, (_character, display_index) in enumerate(displayed_positions, start=1):
+        logical_to_display_end[logical_index] = display_index + 1
+
+    start_boundaries = [0] * (len(canonical) + 1)
+    end_boundaries = [0] * (len(canonical) + 1)
+    for raw_index, logical_index in enumerate(raw_to_logical):
+        start_boundaries[raw_index] = logical_to_display_start[logical_index]
+        end_boundaries[raw_index] = logical_to_display_end[logical_index]
+    return start_boundaries, end_boundaries, [character for character, _ in canonical_positions]
+
+
+def _mention_id(mention: Mapping[str, Any]) -> str | None:
+    value = mention.get("mention_id", mention.get("id"))
+    return value if isinstance(value, str) and value else None
+
+
+def _mention_offset(mention: Mapping[str, Any]) -> int | None:
+    evidence = mention.get("evidence")
+    if isinstance(evidence, Mapping) and isinstance(evidence.get("section_offset"), int):
+        return evidence["section_offset"]
+    anchor = mention.get("anchor")
+    if isinstance(anchor, Mapping) and isinstance(anchor.get("offset"), int):
+        return anchor["offset"]
+    return None
+
+
+def display_span_for_anchor(
+    canonical: str,
+    displayed: str,
+    offset: int,
+    surface: str,
+) -> tuple[int, int]:
+    """Return the exact displayed span for one canonical Mention anchor."""
+
+    if offset < 0 or canonical[offset : offset + len(surface)] != surface:
+        raise ValueError("Mention anchor does not match canonical section text")
+    starts, ends, _characters = _display_boundaries(canonical, displayed)
+    end_offset = offset + len(surface)
+    if end_offset > len(canonical):
+        raise ValueError("Mention anchor exceeds canonical section text")
+    start = starts[offset]
+    end = ends[end_offset]
+    if start >= end or displayed[start:end] != surface:
+        raise ValueError("Mention anchor cannot be mapped to displayed text")
+    return start, end
+
+
+def _annotation_id(mention: Mapping[str, Any]) -> str | None:
+    metadata = mention.get("source_section_metadata")
+    if isinstance(metadata, Mapping) and isinstance(metadata.get("annotation_id"), str):
+        return metadata["annotation_id"]
+    anchor = mention.get("anchor")
+    if isinstance(anchor, Mapping) and isinstance(anchor.get("annotation_id"), str):
+        return anchor["annotation_id"]
+    return None
+
+
+def _resolved_mention(mention: Mapping[str, Any]) -> bool:
+    return (
+        isinstance(mention.get("person_id"), str)
+        and bool(mention.get("person_id"))
+        and mention.get("confidence", "unresolved") != "unresolved"
+    )
+
+
+def _placement_candidates(
+    canonical: str,
+    displayed: str,
+    mentions: Any,
+    *,
+    section: str,
+    annotation_id: str | None,
+) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
+    start_boundaries, end_boundaries, _characters = _display_boundaries(canonical, displayed)
+    placements: list[dict[str, Any]] = []
+    suppressed: list[dict[str, Any]] = []
+    if not isinstance(mentions, (list, tuple)):
+        return placements, suppressed
+
+    for mention in mentions:
+        if not isinstance(mention, Mapping) or not _resolved_mention(mention):
+            continue
+        mention_section = mention.get("section")
+        if mention_section != section:
+            continue
+        mention_annotation_id = _annotation_id(mention)
+        if section == "liu_annotation" and annotation_id is not None and mention_annotation_id != annotation_id:
+            continue
+        surface = mention.get("surface")
+        mention_id = _mention_id(mention)
+        offset = _mention_offset(mention)
+        person_id = mention.get("person_id")
+        if not isinstance(surface, str) or not mention_id or not isinstance(person_id, str) or offset is None:
+            if mention_id:
+                suppressed.append(
+                    {
+                        "mention_id": mention_id,
+                        "reason": "unsafe_anchor",
+                        "section": section,
+                        "annotation_id": annotation_id,
+                    }
+                )
+            continue
+        end_offset = offset + len(surface)
+        if offset < 0 or end_offset > len(canonical) or canonical[offset:end_offset] != surface:
+            suppressed.append(
+                {
+                    "mention_id": mention_id,
+                    "reason": "unsafe_anchor",
+                    "section": section,
+                    "annotation_id": annotation_id,
+                }
+            )
+            continue
+        start = start_boundaries[offset]
+        end = end_boundaries[end_offset]
+        if start >= end or displayed[start:end] == "":
+            suppressed.append(
+                {
+                    "mention_id": mention_id,
+                    "reason": "unsafe_anchor",
+                    "section": section,
+                    "annotation_id": annotation_id,
+                }
+            )
+            continue
+        placements.append(
+            {
+                "mention_id": mention_id,
+                "person_id": person_id,
+                "start": start,
+                "end": end,
+                "section": section,
+                "annotation_id": annotation_id,
+            }
+        )
+
+    # Prefer the shortest exact anchored surface when one resolved mention is
+    # nested inside another.  This is deterministic and keeps explicit names
+    # such as 王凝之 interactive without emitting nested buttons.  The larger
+    # mention remains visible in the secondary mention summary.
+    selected: list[dict[str, Any]] = []
+    for placement in sorted(placements, key=lambda item: (item["end"] - item["start"], item["start"], item["mention_id"])):
+        conflict = next(
+            (
+                existing
+                for existing in selected
+                if placement["start"] < existing["end"] and existing["start"] < placement["end"]
+            ),
+            None,
+        )
+        if conflict is None:
+            selected.append(placement)
+            continue
+        same_range = placement["start"] == conflict["start"] and placement["end"] == conflict["end"]
+        contains = (
+            placement["start"] <= conflict["start"] and placement["end"] >= conflict["end"]
+        ) or (
+            conflict["start"] <= placement["start"] and conflict["end"] >= placement["end"]
+        )
+        if same_range or not contains:
+            raise ValueError(
+                "incompatible overlapping resolved Mention ranges: "
+                f"{placement['mention_id']} and {conflict['mention_id']}"
+            )
+        suppressed.append(
+            {
+                "mention_id": placement["mention_id"],
+                "reason": "overlapping_anchor",
+                "section": section,
+                "annotation_id": annotation_id,
+            }
+        )
+    selected.sort(key=lambda item: (item["start"], item["end"], item["mention_id"]))
+    return selected, suppressed
+
+
+def build_reading_segments(
+    canonical: str,
+    displayed: str,
+    converter: Any,
+    mentions: Any,
+    *,
+    section: str,
+    annotation_id: str | None = None,
+) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
+    """Project resolved canonical Mention anchors into display segments."""
+
+    placements, suppressed = _placement_candidates(
+        canonical,
+        displayed,
+        mentions,
+        section=section,
+        annotation_id=annotation_id,
+    )
+    pieces: list[dict[str, Any]] = []
+    cursor = 0
+    for placement in placements:
+        if placement["start"] > cursor:
+            text = displayed[cursor : placement["start"]]
+            pieces.append({"type": "text", "display": _display_pair(text, converter)})
+        text = displayed[placement["start"] : placement["end"]]
+        piece: dict[str, Any] = {
+            "type": "person_mention",
+            "mention_id": placement["mention_id"],
+            "person_id": placement["person_id"],
+            "display": _display_pair(text, converter),
+        }
+        if section == "liu_annotation" and annotation_id is not None:
+            piece["annotation_id"] = annotation_id
+        pieces.append(piece)
+        cursor = placement["end"]
+    if cursor < len(displayed):
+        pieces.append({"type": "text", "display": _display_pair(displayed[cursor:], converter)})
+    if not pieces:
+        pieces = [{"type": "text", "display": _display_pair(displayed, converter)}]
+
+    expected_simplified = converter.convert(displayed)
+    actual_simplified = "".join(piece["display"]["simplified"] for piece in pieces)
+    if actual_simplified != expected_simplified:
+        # OpenCC can use phrase context.  If independent segment conversion
+        # would change the existing simplified reading, keep the source as one
+        # ordinary segment and make the inability to project explicit.
+        mention_ids = {
+            placement["mention_id"] for placement in placements
+        }
+        suppressed.extend(
+            {
+                "mention_id": mention_id,
+                "reason": "display_conversion_context_mismatch",
+                "section": section,
+                "annotation_id": annotation_id,
+            }
+            for mention_id in sorted(mention_ids)
+        )
+        return [{"type": "text", "display": _display_pair(displayed, converter)}], suppressed
+    return pieces, suppressed
+
+
 def build_display_reading(
     record: Mapping[str, Any],
     converter: Any,
     *,
     people: Any = (),
     mentions: Any = (),
+    placement_mentions: Any = (),
+    canonical_annotations: Any = (),
     sources: Any = (),
     relations: Any = (),
     evidence: Any = (),
 ) -> dict[str, Any]:
     sections = record["sections"]
-    annotations: list[dict[str, str]] = []
+    annotations: list[dict[str, Any]] = []
+    suppressed_mentions: list[dict[str, Any]] = []
+    canonical_annotation_by_id = {
+        str(annotation.get("id")): annotation
+        for annotation in canonical_annotations
+        if isinstance(annotation, Mapping) and isinstance(annotation.get("id"), str)
+    }
     annotation_section = sections.get("liu_annotation")
-    if isinstance(annotation_section, Mapping):
-        punctuated_annotation = annotation_section.get("punctuated_text")
-        if isinstance(punctuated_annotation, str) and punctuated_annotation:
-            annotations.append(
-                {
-                    "id": "annotation-001",
-                    "original": punctuated_annotation,
-                    "simplified": converter.convert(punctuated_annotation),
-                }
-            )
+    for annotation_id, annotation in canonical_annotation_by_id.items():
+        canonical_annotation = str(annotation.get("text", ""))
+        punctuated_annotation = None
+        if annotation_id == "annotation-001" and isinstance(annotation_section, Mapping):
+            candidate = annotation_section.get("punctuated_text")
+            if isinstance(candidate, str) and candidate:
+                punctuated_annotation = candidate
+        displayed_annotation = punctuated_annotation or canonical_annotation
+        segments, segment_suppressed = build_reading_segments(
+            canonical_annotation,
+            displayed_annotation,
+            converter,
+            placement_mentions,
+            section="liu_annotation",
+            annotation_id=annotation_id,
+        )
+        suppressed_mentions.extend(segment_suppressed)
+        annotations.append(
+            {
+                "id": annotation_id,
+                "original": displayed_annotation,
+                "simplified": converter.convert(displayed_annotation),
+                "segments": segments,
+                "display_source": "punctuation_record" if punctuated_annotation else "canonical_source",
+                "punctuation_status": "available" if punctuated_annotation else "unavailable",
+            }
+        )
+    main_canonical = str(sections["main_text"].get("canonical_text", ""))
+    main_display = str(sections["main_text"].get("punctuated_text", ""))
+    main_segments, main_suppressed = build_reading_segments(
+        main_canonical,
+        main_display,
+        converter,
+        placement_mentions,
+        section="main_text",
+    )
+    suppressed_mentions.extend(main_suppressed)
     return {
         "entry_id": record["entry_id"],
         "status": record["status"],
@@ -247,10 +572,12 @@ def build_display_reading(
             "config": "t2s",
         },
         "main_text": {
-            "original": sections["main_text"]["punctuated_text"],
-            "simplified": converter.convert(sections["main_text"]["punctuated_text"]),
+            "original": main_display,
+            "simplified": converter.convert(main_display),
+            "segments": main_segments,
         },
         "annotations": annotations,
+        "mention_projection": {"suppressed": suppressed_mentions},
         "labels": {
             key: _display_pair(value, converter) for key, value in READER_LABELS.items()
         },

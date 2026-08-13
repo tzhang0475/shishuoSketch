@@ -14,11 +14,11 @@ from opencc import OpenCC
 
 try:
     from .build_six_person_pilot import parse_shishuo_sections
-    from .reading_layers import strip_display_punctuation
+    from .reading_layers import display_span_for_anchor, strip_display_punctuation
     from .validate_wp1 import validate_source_provenance
 except ImportError:  # direct execution
     from build_six_person_pilot import parse_shishuo_sections
-    from reading_layers import strip_display_punctuation
+    from reading_layers import display_span_for_anchor, strip_display_punctuation
     from validate_wp1 import validate_source_provenance
 
 
@@ -74,6 +74,142 @@ def collect_sc1_source_provenance(bundle: dict[str, Any]) -> dict[tuple[str, str
         reference["evidence_ids"].append(evidence.get("id"))
         reference["source_ids"].append(evidence.get("source_id"))
     return references
+
+
+def validate_inline_mention_projection(
+    story: dict[str, Any],
+    mentions: dict[str, dict[str, Any]],
+    people: set[str],
+) -> list[str]:
+    """Validate deterministic inline Mention placement for one Story."""
+
+    errors: list[str] = []
+    story_id = str(story.get("id"))
+    reading = story.get("reading", {})
+    if not isinstance(reading, dict):
+        return [f"SC1 {story_id}: reading is not an object"]
+    canonical_by_layer: dict[tuple[str, str | None], str] = {
+        ("main_text", None): str(story.get("text", "")),
+    }
+    for annotation in story.get("annotations", []):
+        if isinstance(annotation, dict) and isinstance(annotation.get("id"), str):
+            canonical_by_layer[("liu_annotation", annotation["id"])] = str(annotation.get("text", ""))
+
+    placed: dict[str, tuple[str, str | None]] = {}
+    suppressed: dict[str, dict[str, Any]] = {}
+    projection = reading.get("mention_projection", {})
+    if isinstance(projection, dict) and isinstance(projection.get("suppressed"), list):
+        for item in projection["suppressed"]:
+            if not isinstance(item, dict) or not isinstance(item.get("mention_id"), str):
+                errors.append(f"SC1 {story_id}: malformed suppressed Mention record")
+                continue
+            mention_id = item["mention_id"]
+            if mention_id in suppressed:
+                errors.append(f"SC1 {story_id}: duplicate suppressed Mention {mention_id}")
+            suppressed[mention_id] = item
+            mention = mentions.get(mention_id)
+            if mention is None or mention.get("story_id") != story_id:
+                errors.append(f"SC1 {story_id}: suppressed Mention does not resolve: {mention_id}")
+            elif mention.get("section") != item.get("section"):
+                errors.append(f"SC1 {story_id}: suppressed Mention layer mismatch: {mention_id}")
+    else:
+        errors.append(f"SC1 {story_id}: missing mention_projection.suppressed")
+
+    def inspect_segments(
+        segments: Any,
+        expected_original: str,
+        expected_simplified: str,
+        layer: str,
+        annotation_id: str | None = None,
+    ) -> None:
+        if not isinstance(segments, list):
+            errors.append(f"SC1 {story_id}: {layer} segments are not an array")
+            return
+        original = ""
+        simplified = ""
+        offset = 0
+        for segment in segments:
+            if not isinstance(segment, dict):
+                errors.append(f"SC1 {story_id}: malformed {layer} segment")
+                continue
+            display = segment.get("display", {})
+            if not isinstance(display, dict) or not isinstance(display.get("original"), str) or not isinstance(display.get("simplified"), str):
+                errors.append(f"SC1 {story_id}: incomplete {layer} segment display")
+                continue
+            display_original = display["original"]
+            display_simplified = display["simplified"]
+            original += display_original
+            simplified += display_simplified
+            if segment.get("type") != "person_mention":
+                offset += len(display_original)
+                continue
+            mention_id = segment.get("mention_id")
+            person_id = segment.get("person_id")
+            if not isinstance(mention_id, str) or not isinstance(person_id, str):
+                errors.append(f"SC1 {story_id}: person segment lacks IDs")
+                offset += len(display_original)
+                continue
+            mention = mentions.get(mention_id)
+            if mention is None:
+                errors.append(f"SC1 {story_id}: inline Mention does not resolve: {mention_id}")
+            else:
+                if mention.get("story_id") != story_id or mention.get("section") != layer:
+                    errors.append(f"SC1 {story_id}: inline Mention layer mismatch: {mention_id}")
+                if mention.get("person_id") != person_id or person_id not in people:
+                    errors.append(f"SC1 {story_id}: inline Mention Person mismatch: {mention_id}")
+                if layer == "main_text" and "annotation_id" in segment:
+                    errors.append(f"SC1 {story_id}: main-text Mention has annotation_id: {mention_id}")
+                if layer == "liu_annotation" and segment.get("annotation_id") != annotation_id:
+                    errors.append(f"SC1 {story_id}: annotation block mismatch: {mention_id}")
+                canonical = canonical_by_layer.get((layer, annotation_id))
+                anchor = mention.get("anchor", {})
+                if canonical is None or not isinstance(anchor, dict) or not isinstance(anchor.get("offset"), int) or not isinstance(anchor.get("text"), str):
+                    errors.append(f"SC1 {story_id}: missing canonical anchor for {mention_id}")
+                else:
+                    try:
+                        expected_start, expected_end = display_span_for_anchor(
+                            canonical,
+                            expected_original,
+                            anchor["offset"],
+                            anchor["text"],
+                        )
+                        if offset != expected_start or offset + len(display_original) != expected_end:
+                            errors.append(f"SC1 {story_id}: inline Mention display span differs from anchor: {mention_id}")
+                    except ValueError as exc:
+                        errors.append(f"SC1 {story_id}: unsafe inline Mention anchor {mention_id}: {exc}")
+            if mention_id in placed:
+                errors.append(f"SC1 {story_id}: duplicate inline Mention: {mention_id}")
+            placed[mention_id] = (layer, annotation_id)
+            offset += len(display_original)
+        if original != expected_original or simplified != expected_simplified:
+            errors.append(f"SC1 {story_id}: {layer} segments do not reconstruct reading text")
+
+    main = reading.get("main_text", {})
+    if isinstance(main, dict):
+        inspect_segments(main.get("segments"), str(main.get("original", "")), str(main.get("simplified", "")), "main_text")
+    for annotation in reading.get("annotations", []):
+        if not isinstance(annotation, dict):
+            continue
+        annotation_id = annotation.get("id")
+        if not isinstance(annotation_id, str):
+            continue
+        inspect_segments(
+            annotation.get("segments"),
+            str(annotation.get("original", "")),
+            str(annotation.get("simplified", "")),
+            "liu_annotation",
+            annotation_id,
+        )
+
+    for mention_id in story.get("mention_ids", []):
+        mention = mentions.get(str(mention_id))
+        if not mention or not isinstance(mention.get("person_id"), str) or mention.get("confidence") == "unresolved":
+            continue
+        if mention_id not in placed and mention_id not in suppressed:
+            errors.append(f"SC1 {story_id}: resolved Mention has no inline/suppressed projection: {mention_id}")
+    if placed.keys() & suppressed.keys():
+        errors.append(f"SC1 {story_id}: Mention appears both inline and suppressed")
+    return errors
 
 
 def validate_sc1_source_provenance_coverage(
@@ -165,6 +301,7 @@ def validate(root: Path = ROOT, mode: str = "full") -> list[str]:
     relation_ids = {item.get("id") for item in bundle.get("relations", [])}
     evidence_by_id = {item.get("id"): item for item in bundle.get("evidence", [])}
     converter = OpenCC("t2s")
+    people_id_set = {str(item.get("id")) for item in bundle.get("people", []) if isinstance(item, dict) and isinstance(item.get("id"), str)}
 
     errors.extend(validate_sc1_source_provenance_coverage(root, bundle, mode=mode))
 
@@ -231,6 +368,7 @@ def validate(root: Path = ROOT, mode: str = "full") -> list[str]:
         for relation_id in story.get("relation_ids", []):
             if relation_id not in relation_ids:
                 errors.append(f"SC1 Story has an invalid Relation reference: {entry_id}/{relation_id}")
+        errors.extend(validate_inline_mention_projection(story, mention_by_id, people_id_set))
 
     # Shared WP1 identity/relation records are copied, not re-authored.
     for key in ("people", "relations", "sources", "eras"):

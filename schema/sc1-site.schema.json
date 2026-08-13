@@ -22,16 +22,53 @@
           "publication_state": {"enum": ["production_ready", "preview_ready", "blocked"]},
           "reading": {
             "type": "object",
-            "required": ["entry_id", "status", "main_text", "annotations"],
+            "required": ["entry_id", "status", "main_text", "annotations", "mention_projection"],
             "properties": {
               "entry_id": {"type": "string"},
               "status": {"enum": ["reviewed", "aligned", "candidate", "disputed"]},
               "main_text": {
                 "type": "object",
-                "required": ["original", "simplified"],
-                "properties": {"original": {"type": "string"}, "simplified": {"type": "string"}}
+                "required": ["original", "simplified", "segments"],
+                "properties": {
+                  "original": {"type": "string"},
+                  "simplified": {"type": "string"},
+                  "segments": {"type": "array", "items": {"$ref": "#/$defs/readingSegment"}}
+                }
               },
-              "annotations": {"type": "array"}
+              "annotations": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "required": ["id", "original", "simplified", "segments", "display_source", "punctuation_status"],
+                  "properties": {
+                    "id": {"type": "string"},
+                    "original": {"type": "string"},
+                    "simplified": {"type": "string"},
+                    "segments": {"type": "array", "items": {"$ref": "#/$defs/readingSegment"}},
+                    "display_source": {"enum": ["punctuation_record", "canonical_source"]},
+                    "punctuation_status": {"enum": ["available", "unavailable"]}
+                  }
+                }
+              },
+              "mention_projection": {
+                "type": "object",
+                "required": ["suppressed"],
+                "properties": {
+                  "suppressed": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "required": ["mention_id", "reason", "section"],
+                      "properties": {
+                        "mention_id": {"type": "string"},
+                        "reason": {"enum": ["unsafe_anchor", "overlapping_anchor", "display_conversion_context_mismatch"]},
+                        "section": {"enum": ["main_text", "liu_annotation"]},
+                        "annotation_id": {"type": ["string", "null"]}
+                      }
+                    }
+                  }
+                }
+              }
             }
           }
         }
@@ -55,5 +92,22 @@
       }
     },
     "ui": {"type": "object"}
+  },
+  "$defs": {
+    "readingSegment": {
+      "type": "object",
+      "required": ["type", "display"],
+      "properties": {
+        "type": {"enum": ["text", "person_mention"]},
+        "display": {
+          "type": "object",
+          "required": ["original", "simplified"],
+          "properties": {"original": {"type": "string"}, "simplified": {"type": "string"}}
+        },
+        "mention_id": {"type": "string"},
+        "person_id": {"type": "string"},
+        "annotation_id": {"type": "string"}
+      }
+    }
   }
 }

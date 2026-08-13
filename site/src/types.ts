@@ -66,12 +66,24 @@ export interface StoryReading {
   main_text: {
     original: string;
     simplified: string;
+    segments: ReadingSegment[];
   };
   annotations: Array<{
     id: string;
     original: string;
     simplified: string;
+    segments: ReadingSegment[];
+    display_source: "punctuation_record" | "canonical_source";
+    punctuation_status: "available" | "unavailable";
   }>;
+  mention_projection: {
+    suppressed: Array<{
+      mention_id: string;
+      reason: "unsafe_anchor" | "overlapping_anchor" | "display_conversion_context_mismatch";
+      section: "main_text" | "liu_annotation";
+      annotation_id?: string | null;
+    }>;
+  };
   labels: Record<
     | "people_section"
     | "resolved_mentions_heading"
@@ -111,6 +123,19 @@ export interface ReadingPair {
   original: string;
   simplified: string;
 }
+
+export type ReadingSegment =
+  | {
+      type: "text";
+      display: ReadingPair;
+    }
+  | {
+      type: "person_mention";
+      mention_id: string;
+      person_id: string;
+      display: ReadingPair;
+      annotation_id?: string;
+    };
 
 export interface Mention {
   id: string;
@@ -241,6 +266,7 @@ export interface StoryChainIndex {
 
 export interface ReadingUiLabels {
   person_stories_heading: ReadingPair;
+  story_people_heading: ReadingPair;
   primary_story_label: ReadingPair;
   annotation_story_label: ReadingPair;
   read_story: ReadingPair;

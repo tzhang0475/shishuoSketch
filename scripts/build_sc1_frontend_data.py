@@ -202,6 +202,11 @@ def frontend_mention(
         if section == "liu_annotation" and annotation_key
         else None
     ) or section_evidence.get(section, section_evidence["main_text"])
+    anchor: dict[str, Any] = {
+        "text": mention.get("surface", ""),
+        "section": section,
+        "offset": evidence.get("section_offset", 0),
+    }
     return {
         "id": mention["mention_id"],
         "story_id": mention["entry_id"],
@@ -212,11 +217,7 @@ def frontend_mention(
         "alias_type": mention.get("alias_type", ""),
         "resolution_mode": resolution_mode_for_mention(dict(mention)),
         "confidence": mention.get("confidence", "unresolved"),
-        "anchor": {
-            "text": mention.get("surface", ""),
-            "section": section,
-            "offset": evidence.get("section_offset", 0),
-        },
+        "anchor": anchor,
         "evidence_ids": [evidence_id],
         "assertion_status": assertion_for_mention(dict(mention)),
         "review_status": "candidate",
@@ -245,8 +246,9 @@ def publication_state(punctuation: Mapping[str, Any], canonical_main_text: str) 
 def build_ui_labels(converter: OpenCC) -> dict[str, Any]:
     labels = {
         "person_stories_heading": "《世說》中的故事",
-        "primary_story_label": "故事中的人物",
-        "annotation_story_label": "史料提及",
+        "story_people_heading": "本則人物",
+        "primary_story_label": "正文出現",
+        "annotation_story_label": "劉注提及",
         "read_story": "閱讀",
         "reviewed_punctuation": "句讀：已復核",
         "preview_punctuation": "句讀：參考底本整理 · 待復核",
@@ -289,12 +291,17 @@ def build(root: Path = ROOT) -> dict[str, Any]:
         if state == "blocked":
             raise ValueError(f"SC1 selected Story is blocked: {entry_id}")
 
+        entry_mentions = [
+            mention for mention in raw_mentions
+            if mention.get("entry_id") == entry_id
+        ]
+
+        canonical_path = entry_path(entry_id, entry_by_id)
         if entry_id == "06-yaliang-019":
+            # Keep the existing WP1 identity/evidence/mention records intact;
+            # only derive the SC1 reading projection from the same canonical
+            # entry and its reviewed punctuation record.
             story = dict(base_stories[entry_id])
-            # SC0 is the authoritative Story ↔ Person projection for the
-            # chain.  The legacy WP1 sample omitted the annotation-only bridge
-            # Person from Story.person_ids; retain its old artifact unchanged
-            # and correct only this derived SC1 view.
             story["person_ids"] = list(selection["linked_person_ids"])
             story["publication_state"] = state
             story["publication_note"] = "已复核句读"
@@ -302,10 +309,25 @@ def build(root: Path = ROOT) -> dict[str, Any]:
             story["chapter_display"] = pair("雅量第六", converter)
             story["ordinal"] = 19
             story["global_ordinal"] = 370
+            projected_mentions = [
+                base_mentions[mention["mention_id"]]
+                for mention in entry_mentions
+                if mention.get("mention_id") in base_mentions
+            ]
+            story["reading"] = build_display_reading(
+                punctuation,
+                converter,
+                people=base["people"],
+                mentions=projected_mentions,
+                placement_mentions=entry_mentions,
+                canonical_annotations=annotations,
+                sources=base["sources"],
+                relations=base["relations"],
+                evidence=list(base_evidence.values()),
+            )
             new_stories.append(story)
             continue
 
-        canonical_path = entry_path(entry_id, entry_by_id)
         generated_evidence, section_evidence = build_evidence(
             entry_id,
             metadata,
@@ -316,19 +338,19 @@ def build(root: Path = ROOT) -> dict[str, Any]:
         for item in generated_evidence:
             new_evidence[item["id"]] = item
 
-        entry_mentions = [
-            mention for mention in raw_mentions
-            if mention.get("entry_id") == entry_id
-        ]
+        projected_mentions: list[dict[str, Any]] = []
         for mention in entry_mentions:
             projected = frontend_mention(mention, section_evidence)
             new_mentions[projected["id"]] = projected
+            projected_mentions.append(projected)
 
         reading = build_display_reading(
             punctuation,
             converter,
             people=base["people"],
-            mentions=[new_mentions[mention["mention_id"]] for mention in entry_mentions],
+            mentions=projected_mentions,
+            placement_mentions=entry_mentions,
+            canonical_annotations=annotations,
             sources=base["sources"],
             relations=base["relations"],
             evidence=list(new_evidence.values()),

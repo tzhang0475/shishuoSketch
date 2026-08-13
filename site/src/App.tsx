@@ -21,6 +21,7 @@ import type {
   Mention,
   Person,
   ReadingPair,
+  ReadingSegment,
   Relation,
   SiteBundle,
   Story,
@@ -29,6 +30,7 @@ import type {
 const FALLBACK_STORY_ID = "06-yaliang-019";
 const READING_MODE_STORAGE_KEY = "shishuoSketch.reading-mode";
 type ReadingMode = "simplified" | "original";
+type ResolvedMention = Mention & { person_id: string };
 
 function initialReadingMode(): ReadingMode {
   if (typeof window === "undefined") return "simplified";
@@ -53,17 +55,17 @@ function storyHeading(story: Story, mode: ReadingMode): string {
 
 function uiLabel(
   data: SiteBundle,
-  key: "person_stories_heading" | "primary_story_label" | "annotation_story_label" | "read_story" | "reviewed_punctuation" | "preview_punctuation",
+  key: "person_stories_heading" | "story_people_heading" | "primary_story_label" | "annotation_story_label" | "read_story" | "reviewed_punctuation" | "preview_punctuation",
   mode: ReadingMode,
   fallback: string,
 ): string {
   return readingValue(data.ui?.[key], mode, fallback);
 }
 
-function resolvedMentions(story: Story, data: SiteBundle): Mention[] {
+function resolvedMentions(story: Story, data: SiteBundle): ResolvedMention[] {
   return story.mention_ids
     .map((id) => data.mentions.find((mention) => mention.id === id))
-    .filter((mention): mention is Mention => Boolean(mention?.person_id));
+    .filter((mention): mention is ResolvedMention => Boolean(mention?.person_id && mention.confidence !== "unresolved"));
 }
 
 function personDisplayName(story: Story, person: Person, mode: ReadingMode): string {
@@ -125,6 +127,83 @@ function initialStoryId(data: SiteBundle): string {
 function storyExcerpt(story: Story, mode: ReadingMode): string {
   const text = story.reading.main_text[mode].replace(/\s+/gu, "");
   return text.length > 54 ? `${text.slice(0, 54)}……` : text;
+}
+
+function InlineReadingSegments({
+  segments,
+  story,
+  data,
+  readingMode,
+  focusedPersonId,
+  onFocus,
+}: {
+  segments: ReadingSegment[];
+  story: Story;
+  data: SiteBundle;
+  readingMode: ReadingMode;
+  focusedPersonId: string | null;
+  onFocus: (personId: string) => void;
+}) {
+  return (
+    <>
+      {segments.map((segment, index) => {
+        const text = readingValue(segment.display, readingMode, "");
+        if (segment.type === "text") {
+          return <span key={`text-${index}`}>{text}</span>;
+        }
+        const mention = data.mentions.find((candidate) => candidate.id === segment.mention_id);
+        const person = data.people.find((candidate) => candidate.id === segment.person_id);
+        const personName = person ? personDisplayName(story, person, readingMode) : segment.person_id;
+        const active = focusedPersonId === segment.person_id;
+        return (
+          <button
+            type="button"
+            key={`${segment.mention_id}-${index}`}
+            className={active ? "inline-person-mention active" : "inline-person-mention"}
+            aria-label={`${text}，已解析为${personName}，查看人物`}
+            title={mention ? `${text} → ${personName}` : personName}
+            onClick={() => onFocus(segment.person_id)}
+          >
+            {text}
+          </button>
+        );
+      })}
+    </>
+  );
+}
+
+function MentionSummaryGroup({
+  label,
+  mentions,
+  story,
+  data,
+  readingMode,
+  onFocus,
+}: {
+  label: string;
+  mentions: ResolvedMention[];
+  story: Story;
+  data: SiteBundle;
+  readingMode: ReadingMode;
+  onFocus: (personId: string) => void;
+}) {
+  if (mentions.length === 0) return null;
+  return (
+    <div className="mention-summary-group">
+      <p className="mention-summary-label">{label}</p>
+      <ul className="mention-summary-list">
+        {mentions.map((mention) => (
+          <li key={mention.id}>
+            <button type="button" className="mention-summary-link" onClick={() => onFocus(mention.person_id)}>
+              {readingValue(story.reading.mention_display[mention.id]?.surface, readingMode, mention.surface)}
+              {" · "}
+              {mentionPersonDisplayName(story, data, mention, readingMode)}
+            </button>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
 }
 
 function RelationEvidence({
@@ -725,8 +804,8 @@ function StoryReader({
 }) {
   const readerRef = useRef<HTMLDivElement>(null);
   const mentions = resolvedMentions(story, data);
-  const readingText = story.reading.main_text[readingMode];
-  const annotationReading = story.reading.annotations[0];
+  const mainTextMentions = mentions.filter((mention) => mention.section === "main_text");
+  const annotationMentions = mentions.filter((mention) => mention.section === "liu_annotation");
 
   useEffect(() => {
     const reader = readerRef.current;
@@ -770,32 +849,59 @@ function StoryReader({
         </div>
 
         <section className="story-panel" aria-label="故事正文">
-          <p className="story-text">{readingText}</p>
+          <p className="story-text">
+            <InlineReadingSegments
+              segments={story.reading.main_text.segments}
+              story={story}
+              data={data}
+              readingMode={readingMode}
+              focusedPersonId={focusedPersonId}
+              onFocus={onFocus}
+            />
+          </p>
         </section>
 
         <section className="annotation-hook" aria-label="进一步读">
           <p className="section-label">进一步读</p>
-          {annotationReading && (
-            <details className="annotation-panel" key={annotationReading.id} open>
+          {story.reading.annotations.map((annotation) => (
+            <details className="annotation-panel" key={annotation.id} open>
               <summary>{story.reading.labels.annotation_label[readingMode]}</summary>
-              <p className="annotation-text">{annotationReading[readingMode]}</p>
+              <p className="annotation-text">
+                <InlineReadingSegments
+                  segments={annotation.segments}
+                  story={story}
+                  data={data}
+                  readingMode={readingMode}
+                  focusedPersonId={focusedPersonId}
+                  onFocus={onFocus}
+                />
+              </p>
             </details>
-          )}
+          ))}
         </section>
 
         <section className="people-section" aria-labelledby="people-heading" aria-label={story.reading.labels.people_section[readingMode]}>
           <div className="section-heading">
             <p className="section-label">{story.reading.labels.people_section[readingMode]}</p>
-            <h2 id="people-heading">{story.reading.labels.resolved_mentions_heading[readingMode]}</h2>
+            <h2 id="people-heading">{uiLabel(data, "story_people_heading", readingMode, "本则人物")}</h2>
           </div>
-          <div className="mention-strip" aria-label={story.reading.labels.resolved_mentions_heading[readingMode]}>
-            {mentions.map((mention) => (
-              <button className="mention-chip" type="button" key={mention.id} onClick={() => mention.person_id && onFocus(mention.person_id)} disabled={!mention.person_id}>
-                {readingValue(story.reading.mention_display[mention.id]?.surface, readingMode, mention.surface)}
-                {" → "}
-                {mentionPersonDisplayName(story, data, mention, readingMode)}
-              </button>
-            ))}
+          <div className="mention-summary" aria-label={uiLabel(data, "story_people_heading", readingMode, "本则人物")}>
+            <MentionSummaryGroup
+              label={uiLabel(data, "primary_story_label", readingMode, "正文出现")}
+              mentions={mainTextMentions}
+              story={story}
+              data={data}
+              readingMode={readingMode}
+              onFocus={onFocus}
+            />
+            <MentionSummaryGroup
+              label={uiLabel(data, "annotation_story_label", readingMode, "刘注提及")}
+              mentions={annotationMentions}
+              story={story}
+              data={data}
+              readingMode={readingMode}
+              onFocus={onFocus}
+            />
           </div>
         </section>
 

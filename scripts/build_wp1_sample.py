@@ -152,6 +152,10 @@ def main() -> int:
         "main_text": main_text,
         "liu_annotation": annotation_by_id["annotation-001"]["text"],
     }
+    canonical_annotations = [
+        {"id": annotation["metadata"]["id"], "text": annotation["text"]}
+        for annotation in annotations
+    ]
     punctuation_errors = validate_punctuation_round_trip(
         punctuation_record,
         canonical_reading_sections,
@@ -745,10 +749,20 @@ def main() -> int:
         OpenCC("t2s"),
         people=records["people"]["records"],
         mentions=records["mentions"]["records"],
+        canonical_annotations=canonical_annotations,
         sources=records["sources"]["records"],
         relations=records["relations"]["records"],
         evidence=records["evidence"]["records"],
     )
+    # WP1's original bundle contract predates inline mention projection.  Keep
+    # that historical sample artifact stable; SC1 opts into the richer
+    # segment contract above without creating a second source of text.
+    reading["main_text"].pop("segments", None)
+    for annotation in reading["annotations"]:
+        annotation.pop("segments", None)
+        annotation.pop("display_source", None)
+        annotation.pop("punctuation_status", None)
+    reading.pop("mention_projection", None)
     bundle_story = dict(story)
     bundle_story["reading"] = reading
     bundle = {

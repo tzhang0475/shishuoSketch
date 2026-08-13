@@ -107,14 +107,47 @@ it never changes the underlying punctuation record's `review_status`.
 The reading object is:
 
 ```ts
+type Segment = {
+  type: "text" | "person_mention",
+  display: { original: string, simplified: string },
+  mention_id?: string,
+  person_id?: string,
+  annotation_id?: string
+}
+
 {
   entry_id: string,
   status: "reviewed" | "aligned" | "candidate" | "disputed",
   punctuation_record_id: string,
   base_canonical_entry_sha256: string,
   conversion: { library: string, config: string },
-  main_text: { original: string, simplified: string },
-  annotations: Array<{ id: string, original: string, simplified: string }>,
+  main_text: {
+    original: string,
+    simplified: string,
+    segments: Array<{
+      type: "text" | "person_mention",
+      display: { original: string, simplified: string },
+      mention_id?: string,
+      person_id?: string,
+      annotation_id?: string
+    }>
+  },
+  annotations: Array<{
+    id: string,
+    original: string,
+    simplified: string,
+    segments: Array<Segment>,
+    display_source: "punctuation_record" | "canonical_source",
+    punctuation_status: "available" | "unavailable"
+  }>,
+  mention_projection: {
+    suppressed: Array<{
+      mention_id: string,
+      reason: "unsafe_anchor" | "overlapping_anchor" | "display_conversion_context_mismatch",
+      section: "main_text" | "liu_annotation",
+      annotation_id?: string
+    }>
+  },
   labels: Record<string, { original: string, simplified: string }>,
   person_display: Record<string, {
     name: { original: string, simplified: string },
@@ -136,6 +169,21 @@ current page defaults to `simplified`, offers `original`, and stores only that
 display preference in localStorage. The original fields in these maps are
 copied from canonical WP1 records; they do not normalize orthographic variants
 or change IDs and provenance.
+
+For SC1.1.1, `main_text.segments` and each annotation's `segments` are the
+build-time Mention projection. Concatenating `display.original` segments
+reconstructs the existing punctuated/original reading exactly; concatenating
+`display.simplified` segments reconstructs the existing OpenCC reading exactly.
+Only resolved Mentions become `person_mention` segments. Their `mention_id`,
+`person_id`, and optional annotation block ID are validated against the bundle
+before the browser renders them. Unresolved Mentions remain ordinary text.
+When resolved anchors overlap incompatibly (for example, an explicit name
+nested inside a broader kinship surface), the deterministic projection keeps
+the shorter safe anchor interactive and records the other in
+`mention_projection.suppressed`; the secondary Story-person list still shows
+both source-level resolutions. An annotation without a punctuation record is
+marked `canonical_source`/`unavailable` and is displayed without invented
+punctuation.
 The frontend never parses raw, normalized, research, or witness files. The
 reading strings are generated from
 `content/processed/shishuo/entries/06-yaliang/entry-019.md` and
