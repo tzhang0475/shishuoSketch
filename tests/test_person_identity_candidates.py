@@ -4,6 +4,7 @@ import hashlib
 import json
 from pathlib import Path
 import subprocess
+import tempfile
 import unittest
 
 from scripts.person_identity_discovery import OCCURRENCES_PATH, OUTPUT_PATH
@@ -12,7 +13,7 @@ from scripts.validate_person_identity_candidates import (
     validate,
     validate_primary_shishuo_lock_coverage,
 )
-from scripts.validate_wp1 import _trusted_source_records
+from scripts.validate_wp1 import _trusted_source_records, validate_source_provenance
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -62,8 +63,30 @@ class PersonIdentityDiscoveryTests(unittest.TestCase):
                 if record.get("witness_id") == witness_id and record.get("source_sha256") == source_sha256
             ]
             self.assertEqual(len(matches), 1, source_path)
-            digest = hashlib.sha256((ROOT / source_path).read_bytes()).hexdigest()
-            self.assertEqual(digest, source_sha256)
+            local_payload = ROOT / source_path
+            if local_payload.is_file():
+                digest = hashlib.sha256(local_payload.read_bytes()).hexdigest()
+                self.assertEqual(digest, source_sha256)
+
+    def test_portable_kanripo_lock_coverage_does_not_require_local_payload(self) -> None:
+        source_path = "shishuoSources/shishuo/KR3l0002_001.txt"
+        trusted = _trusted_source_records(ROOT, [])
+        record = dict(trusted[source_path][0])
+        record["registry_path"] = None
+        provenance = {
+            "source_path": source_path,
+            "source_sha256": record["source_sha256"],
+            "witness_id": record["witness_id"],
+        }
+        with tempfile.TemporaryDirectory() as temporary:
+            errors = validate_source_provenance(
+                Path(temporary),
+                provenance,
+                label="test Kanripo source",
+                mode="portable",
+                trusted_records={source_path: [record]},
+            )
+        self.assertEqual(errors, [])
 
     def test_all_committed_derived_primary_shishuo_paths_have_trusted_lock_coverage(self) -> None:
         """Keep future derived artifacts from bypassing the Kanripo lock baseline."""
@@ -124,6 +147,42 @@ class PersonIdentityDiscoveryTests(unittest.TestCase):
             trusted_records=mutated,
         )
         self.assertTrue(any(path in error for error in errors))
+
+    def test_wikisource_sbck_lock_availability_is_required_in_portable_mode(self) -> None:
+        sbck_evidence = next(
+            row
+            for row in self.document["evidence"]
+            if "sources/downloads/shishuo/wikisource-sbck/" in row["locator"]["source_provenance"].get("source_path", "")
+        )
+        provenance = dict(sbck_evidence["locator"]["source_provenance"])
+        source_path = provenance["source_path"]
+        lock_errors: list[str] = []
+        trusted = _trusted_source_records(ROOT, lock_errors)
+        self.assertEqual(lock_errors, [])
+        record = dict(trusted[source_path][0])
+        record["registry_path"] = None
+
+        with tempfile.TemporaryDirectory() as temporary:
+            self.assertEqual(
+                validate_source_provenance(
+                    Path(temporary),
+                    provenance,
+                    label="test Wikisource-SBCK source",
+                    mode="portable",
+                    trusted_records={source_path: [record]},
+                ),
+                [],
+            )
+            without_availability = dict(record)
+            without_availability.pop("availability", None)
+            errors = validate_source_provenance(
+                Path(temporary),
+                provenance,
+                label="test Wikisource-SBCK source without availability",
+                mode="portable",
+                trusted_records={source_path: [without_availability]},
+            )
+        self.assertTrue(any("not explicitly registered" in error for error in errors))
 
     def test_discovery_is_open_world_and_excludes_materialized_people(self) -> None:
         candidates = self.document["candidates"]
