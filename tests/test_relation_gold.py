@@ -65,10 +65,9 @@ class RelationGoldPilotTests(unittest.TestCase):
         people = json.loads(
             (ROOT / "data/annotation/wp1-people.json").read_text(encoding="utf-8")
         )["records"]
-        self.assertEqual(
-            {person["person_id"] for person in registry},
-            {person["id"] for person in people},
-        )
+        registry_ids = {person["person_id"] for person in registry}
+        self.assertTrue({person["id"] for person in people} <= registry_ids)
+        self.assertEqual(len(registry_ids), 17)
         bridge = next(person for person in people if person.get("scope_role") == "supporting")
         self.assertEqual(bridge["id"], "person-007")
         self.assertTrue(bridge["evidence_ids"])

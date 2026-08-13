@@ -78,18 +78,20 @@ class PersonExpansionCandidateTests(unittest.TestCase):
         }
         self.assertTrue(resolved_ids.issubset(scoped))
         self.assertTrue(self.document["current_live_story_gaps"])
-        self.assertTrue(
-            any(
-                candidate["canonical_name"] == "桓溫"
-                for candidate in self.document["candidates"]
-            )
-        )
+        self.assertGreater(self.document["candidate_count"], 0)
 
     def test_current_story_candidate_gets_coverage_without_synthesized_relation(self) -> None:
-        huan_wen = next(candidate for candidate in self.document["candidates"] if candidate["canonical_name"] == "桓溫")
-        self.assertGreater(huan_wen["metrics"]["current_main_text_story_count"], 0)
-        self.assertEqual(huan_wen["metrics"]["direct_relation_to_current_count"], 0)
-        self.assertEqual(huan_wen["direct_relation_ids"], [])
+        current_story_candidate = next(
+            candidate
+            for candidate in self.document["candidates"]
+            if candidate["metrics"]["current_liu_annotation_story_count"] > 0
+        )
+        self.assertGreater(
+            current_story_candidate["metrics"]["current_liu_annotation_story_count"],
+            0,
+        )
+        self.assertEqual(current_story_candidate["metrics"]["direct_relation_to_current_count"], 0)
+        self.assertEqual(current_story_candidate["direct_relation_ids"], [])
 
     def test_build_is_byte_deterministic_without_frontend_mutation(self) -> None:
         rebuilt, rebuilt_unresolved, rebuilt_report = build_analysis(ROOT)

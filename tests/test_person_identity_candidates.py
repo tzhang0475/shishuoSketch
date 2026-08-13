@@ -196,7 +196,9 @@ class PersonIdentityDiscoveryTests(unittest.TestCase):
 
     def test_explicit_jinshu_identity_seed_clusters_name_and_contextual_surface(self) -> None:
         桓溫 = next(row for row in self.document["candidates"] if row["preferred_name"] == "桓溫")
-        self.assertEqual(桓溫["status"], "strong_candidate")
+        self.assertIn(桓溫["status"], {"strong_candidate", "already_materialized"})
+        if 桓溫["status"] == "already_materialized":
+            self.assertEqual(桓溫["matched_person_id"], "huan-wen")
         surfaces = {row["surface"]: row for row in 桓溫["surfaces"]}
         self.assertEqual(surfaces["桓溫"]["association_mode"], "exact")
         self.assertEqual(surfaces["桓公"]["association_mode"], "contextual")

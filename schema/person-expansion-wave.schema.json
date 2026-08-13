@@ -1,0 +1,71 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://shishuo-sketch/schema/person-expansion-wave.schema.json",
+  "title": "Person expansion materialization wave",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "stage",
+    "wave_id",
+    "source_ranking_artifact",
+    "source_ranking_sha256",
+    "selection_policy",
+    "members"
+  ],
+  "properties": {
+    "schema": {"const": 1},
+    "stage": {"const": "p3b-materialization-wave"},
+    "wave_id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._-]*$"},
+    "source_ranking_artifact": {"type": "string", "minLength": 1},
+    "source_ranking_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "selection_policy": {"type": "string", "minLength": 1},
+    "members": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/member"}
+    }
+  },
+  "$defs": {
+    "member": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "candidate_id",
+        "rank_at_selection",
+        "preferred_name",
+        "person_id",
+        "candidate_status",
+        "materialization_status",
+        "review_status"
+      ],
+      "properties": {
+        "candidate_id": {"type": "string", "minLength": 1},
+        "rank_at_selection": {"type": "integer", "minimum": 1},
+        "preferred_name": {"type": "string", "minLength": 1},
+        "person_id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._-]*$"},
+        "candidate_status": {"enum": ["strong_candidate"]},
+        "materialization_status": {"enum": ["pending", "materialized"]},
+        "review_status": {"enum": ["candidate", "reviewed"]},
+        "exact_alias_count": {"type": "integer", "minimum": 0},
+        "contextual_alias_count": {"type": "integer", "minimum": 0},
+        "p3a_score": {"type": "number", "minimum": 0},
+        "p3a_tier": {"type": "string", "minLength": 1},
+        "exact_aliases": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+        "contextual_aliases": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+        "shishuo_main_story_count": {"type": "integer", "minimum": 0},
+        "shishuo_annotation_story_count": {"type": "integer", "minimum": 0},
+        "jinshu_unit_count": {"type": "integer", "minimum": 0},
+        "current_sc1_occurrence_count": {"type": "integer", "minimum": 0},
+        "direct_relation_count": {"type": "integer", "minimum": 0},
+        "promoted_occurrence_ids": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+        "promoted_mention_ids": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+        "promoted_occurrence_count": {"type": "integer", "minimum": 0},
+        "withheld_occurrence_count": {"type": "integer", "minimum": 0},
+        "withheld_occurrences": {"type": "array", "items": {"type": "object"}},
+        "current_sc1_story_ids": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+        "production_alias_ids": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+        "production_identity_evidence_ids": {"type": "array", "items": {"type": "string"}, "uniqueItems": true}
+      }
+    }
+  }
+}

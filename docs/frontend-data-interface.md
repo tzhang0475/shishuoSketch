@@ -46,9 +46,12 @@ The bundle contains these arrays:
 }
 ```
 
-The bundle is generated from the canonical Shishuo entry, the six primary
-people, and any explicitly marked supporting R1 bridge records by
-`scripts/build_wp1_sample.py`. It is not a second source text authority.
+The WP1 sample bundle is generated from the canonical Shishuo entry, the six
+primary people, and any explicitly marked supporting R1 bridge records by
+`scripts/build_wp1_sample.py`. The SC1 bundle extends that sample projection
+with the unified materialized Person registry (currently the frozen P3B.1
+Wave 1) and its approved deterministic Shishuo Mention projection. Neither is
+a second source text authority.
 
 Evidence records expose an exact derived-artifact locator (`artifact_path`,
 `artifact_sha256`, and either `entry_id` or `unit_id`) plus separate
@@ -91,7 +94,8 @@ The deployed reader imports `site/src/generated/sc1-site.json` at Vite build
 time. `scripts/build_sc1_frontend_data.py` generates that file and the
 research-side `data/derived/sc1-site.json` together from the SC0 Gold Set,
 canonical entry artifacts, existing reading-layer records, and existing
-PersonStoryLinks. They must remain byte-identical. The earlier
+PersonStoryLinks plus materialized production Persons/Mentions. They must
+remain byte-identical. The earlier
 `wp1-site.json` artifact remains the WP1 sample/research validation fixture;
 it is not a second runtime data source.
 

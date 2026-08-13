@@ -155,7 +155,15 @@ class SC1StoryChainTests(unittest.TestCase):
         self.assertIn("25-paidiao-026", refs["xie-daoyun"]["liu_annotation_only_story_ids"])
 
     def test_shared_wp1_person_relation_source_records_are_unchanged(self) -> None:
-        for key in ("people", "relations", "sources", "eras"):
+        # P3B intentionally extends the SC1 Person projection.  The WP1
+        # sample's existing seven Person records remain byte-stable, while
+        # relations/sources/eras remain exactly the shared R2 projection.
+        base_people = {item["id"]: item for item in self.base["people"]}
+        current_people = {item["id"]: item for item in self.bundle["people"]}
+        self.assertTrue(set(base_people) <= set(current_people))
+        for person_id, person in base_people.items():
+            self.assertEqual(current_people[person_id], person)
+        for key in ("relations", "sources", "eras"):
             self.assertEqual(self.bundle[key], self.base[key], key)
         self.assertEqual(
             {item["id"] for item in self.bundle["relations"]},

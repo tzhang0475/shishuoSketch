@@ -102,10 +102,16 @@ def validate(root: Path = ROOT) -> list[str]:
         linked_person_ids = set(record.get("linked_person_ids", []))
         if not linked_person_ids.issubset(people):
             errors.append(f"SC0 {entry_id} references a nonexistent Person")
-        if linked_person_ids != actual_person_ids:
+        # SC0 is a frozen editorial Story selection.  Later P3B materialized
+        # Persons may add reviewed deterministic PersonStory links for a
+        # selected Story, but they must not silently rewrite the SC0 manifest
+        # or its seven-Person connectivity snapshot.  Require every declared
+        # link to still exist; the extra post-SC0 links are validated by the
+        # unified PersonStory/SC1 layers instead.
+        if not linked_person_ids.issubset(actual_person_ids):
             errors.append(
-                f"SC0 {entry_id} linked_person_ids do not exactly project reviewed PersonStoryLinks: "
-                f"{sorted(linked_person_ids)} != {sorted(actual_person_ids)}"
+                f"SC0 {entry_id} linked_person_ids do not resolve from reviewed PersonStoryLinks: "
+                f"{sorted(linked_person_ids - actual_person_ids)}"
             )
         for person_id in linked_person_ids:
             expected_person_story.setdefault(person_id, []).append(entry_id)
@@ -141,7 +147,8 @@ def validate(root: Path = ROOT) -> list[str]:
         # silently relabeled as a main-text person.
         expected_main: set[str] = set()
         expected_annotation_only: set[str] = set()
-        for link in actual_links:
+        declared_links = [link for link in actual_links if link.get("person_id") in linked_person_ids]
+        for link in declared_links:
             layers = {presence.get("source_layer") for presence in link.get("presences", [])}
             if "main_text" in layers:
                 expected_main.add(link["person_id"])

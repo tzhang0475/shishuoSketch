@@ -448,9 +448,13 @@ def validate_person_registry(
     """Ensure WP1 Person projections are derived from the unified registry."""
     errors: list[str] = []
     projected_people = {record.get("id"): record for record in records_by_kind.get("people", [])}
-    if set(projected_people) != set(unified_people):
+    # WP1 is intentionally a seven-Person sample.  The unified registry may
+    # now contain a later materialization wave; WP1 must validate that its
+    # projected sample is a faithful subset rather than forcing the sample
+    # artifact to publish every production Person.
+    if not set(projected_people).issubset(set(unified_people)):
         errors.append(
-            "WP1 Person projection IDs do not match the unified data/people.json registry"
+            "WP1 Person projection contains IDs absent from the unified data/people.json registry"
         )
 
     mention_index: dict[str, dict[str, Any]] = {}

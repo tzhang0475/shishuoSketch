@@ -42,7 +42,27 @@ class SixPersonPilotTests(unittest.TestCase):
             for person in self.people["people"]
             if person.get("scope_role") == "supporting"
         }
-        self.assertEqual(primary, expected)
+        self.assertTrue(expected <= primary)
+        self.assertEqual(
+            {
+                person["person_id"]
+                for person in self.people["people"]
+                if isinstance(person.get("materialization"), dict)
+                and person["materialization"].get("wave_id") == "p3b-wave-1"
+            },
+            {
+                "huan-wen",
+                "liu-dan",
+                "yu-liang",
+                "wang-dun",
+                "yuan-hong",
+                "wen-qiao",
+                "wang-meng",
+                "sun-gui",
+                "wang-xia",
+                "su-jun",
+            },
+        )
         self.assertEqual(supporting, {"person-007"})
 
     def test_aliases_have_source_evidence_and_preserve_orthographic_variant(self) -> None:
@@ -114,16 +134,28 @@ class SixPersonPilotTests(unittest.TestCase):
                 self.assertEqual(checked[path], provenance["source_sha256"])
 
     def test_generation_is_deterministic(self) -> None:
-        with tempfile.TemporaryDirectory() as temporary:
-            generated = build_outputs(
-                root=Path(temporary),
+        with tempfile.TemporaryDirectory() as first, tempfile.TemporaryDirectory() as second:
+            generated_first = build_outputs(
+                root=Path(first),
                 shishuo_root=self.root / "content/processed/shishuo/entries",
                 jinshu_root=self.root / "content/processed/jinshu/units",
             )
-        self.assertEqual(generated["people"], self.people)
-        self.assertEqual(generated["aliases"], self.aliases)
-        self.assertEqual(generated["shishuo"], self.shishuo)
-        self.assertEqual(generated["jinshu"], self.jinshu)
+            generated_second = build_outputs(
+                root=Path(second),
+                shishuo_root=self.root / "content/processed/shishuo/entries",
+                jinshu_root=self.root / "content/processed/jinshu/units",
+            )
+        self.assertEqual(generated_first, generated_second)
+        self.assertEqual(generated_first["people"]["stage"], "six-person-pilot")
+        self.assertEqual(len(generated_first["people"]["people"]), 7)
+
+    def test_legacy_builder_cannot_overwrite_materialized_registry(self) -> None:
+        with self.assertRaisesRegex(RuntimeError, "cannot overwrite a materialized"):
+            build_outputs(
+                root=self.root,
+                shishuo_root=self.root / "content/processed/shishuo/entries",
+                jinshu_root=self.root / "content/processed/jinshu/units",
+            )
 
     def test_unresolved_mentions_are_retained_and_not_forced(self) -> None:
         unresolved = [

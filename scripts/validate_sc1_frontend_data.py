@@ -327,6 +327,8 @@ def validate(root: Path = ROOT, mode: str = "full") -> list[str]:
             for item in read_json(root / "data/annotation/wp1-punctuation.json")["records"]
         }
         base = read_json(root / "data/derived/wp1-site.json")
+        production_people = read_json(root / "data/people.json").get("people", [])
+        raw_shishuo_mentions = read_json(root / "data/mentions/shishuo.json").get("mentions", [])
     except (OSError, ValueError, KeyError) as exc:
         return [f"SC1 cannot read required artifact: {exc}"]
 
@@ -361,6 +363,7 @@ def validate(root: Path = ROOT, mode: str = "full") -> list[str]:
 
     errors.extend(validate_sc1_source_provenance_coverage(root, bundle, mode=mode))
     errors.extend(validate_person_sketch_bundle(root))
+    chain_story_by_id = {item.get("entry_id"): item for item in chain.get("stories", [])}
 
     for evidence_id, evidence in evidence_by_id.items():
         locator = evidence.get("locator", {})
@@ -390,7 +393,17 @@ def validate(root: Path = ROOT, mode: str = "full") -> list[str]:
         canonical = canonical_main(path)
         if story.get("text") != canonical:
             errors.append(f"SC1 Story text differs from canonical entry: {entry_id}")
-        if story.get("person_ids") != selection.get("linked_person_ids"):
+        resolved_person_ids = list(dict.fromkeys(
+            str(mention.get("person_id"))
+            for mention in raw_shishuo_mentions
+            if mention.get("entry_id") == entry_id
+            and isinstance(mention.get("person_id"), str)
+        ))
+        expected_person_ids = list(dict.fromkeys([
+            *(chain_story_by_id.get(entry_id, {}).get("linked_person_ids", selection.get("linked_person_ids", []))),
+            *resolved_person_ids,
+        ]))
+        if story.get("person_ids") != expected_person_ids:
             errors.append(f"SC1 Person projection differs for {entry_id}")
         if any(person_id not in people_by_id for person_id in story.get("person_ids", [])):
             errors.append(f"SC1 Story has an unresolved Person: {entry_id}")
@@ -433,8 +446,18 @@ def validate(root: Path = ROOT, mode: str = "full") -> list[str]:
                 errors.append(f"SC1 Story has an invalid Relation reference: {entry_id}/{relation_id}")
         errors.extend(validate_inline_mention_projection(story, mention_by_id, people_id_set))
 
-    # Shared WP1 identity/relation records are copied, not re-authored.
-    for key in ("people", "relations", "sources", "eras"):
+    # The seven WP1 Person records remain byte-identical, while the unified
+    # production registry may add the frozen P3B.1 wave.  Other shared WP1
+    # factual layers are copied without expansion.
+    base_people_by_id = {item.get("id"): item for item in base.get("people", [])}
+    bundle_people_by_id = {item.get("id"): item for item in bundle.get("people", [])}
+    production_people_by_id = {item.get("person_id"): item for item in production_people}
+    if set(bundle_people_by_id) != set(production_people_by_id):
+        errors.append("SC1 Person projection does not match the unified production registry")
+    for person_id, base_person in base_people_by_id.items():
+        if bundle_people_by_id.get(person_id) != base_person:
+            errors.append(f"SC1 changed existing WP1 Person record: {person_id}")
+    for key in ("relations", "sources", "eras"):
         if bundle.get(key) != base.get(key):
             errors.append(f"SC1 changed shared WP1 {key} records")
     base_evidence = {item["id"]: item for item in base.get("evidence", [])}
@@ -449,15 +472,23 @@ def validate(root: Path = ROOT, mode: str = "full") -> list[str]:
     frontend_chain = bundle.get("story_chain", {})
     if frontend_chain.get("story_ids") != selected_ids:
         errors.append("SC1 story_chain.story_ids does not project the Gold Set")
-    chain_story_by_id = {item.get("entry_id"): item for item in chain.get("stories", [])}
     frontend_story_refs = {
         item.get("entry_id"): item
         for item in frontend_chain.get("story_person_refs", [])
     }
-    expected_person_ids = {
+    frontend_person_ids = {
         item.get("person_id")
         for item in frontend_chain.get("person_story_refs", [])
     }
+    expected_person_ids = {
+        item.get("person_id")
+        for item in chain.get("person_story_refs", [])
+    }
+    expected_person_ids.update(
+        str(mention.get("person_id"))
+        for mention in raw_shishuo_mentions
+        if mention.get("entry_id") in selected_ids and isinstance(mention.get("person_id"), str)
+    )
     expected_person_ids.discard(None)
     for entry_id in selected_ids:
         expected = chain_story_by_id.get(entry_id)
@@ -465,8 +496,38 @@ def validate(root: Path = ROOT, mode: str = "full") -> list[str]:
         if expected is None or actual is None:
             errors.append(f"SC1 missing Story ↔ Person projection: {entry_id}")
             continue
+        story_mentions = [
+            mention for mention in raw_shishuo_mentions
+            if mention.get("entry_id") == entry_id
+            and isinstance(mention.get("person_id"), str)
+        ]
+        resolved_main = sorted({
+            str(mention["person_id"])
+            for mention in story_mentions
+            if mention.get("section") == "main_text"
+        })
+        resolved_annotation = sorted({
+            str(mention["person_id"])
+            for mention in story_mentions
+            if mention.get("section") == "liu_annotation"
+        } - set(resolved_main))
+        expected_projection = {
+            "linked_person_ids": list(dict.fromkeys([
+                *expected.get("linked_person_ids", []),
+                *resolved_main,
+                *resolved_annotation,
+            ])),
+            "main_text_person_ids": list(dict.fromkeys([
+                *expected.get("main_text_person_ids", []),
+                *resolved_main,
+            ])),
+            "liu_annotation_only_person_ids": list(dict.fromkeys([
+                *expected.get("liu_annotation_only_person_ids", []),
+                *resolved_annotation,
+            ])),
+        }
         for field in ("linked_person_ids", "main_text_person_ids", "liu_annotation_only_person_ids"):
-            if actual.get(field) != expected.get(field):
+            if actual.get(field) != expected_projection[field]:
                 errors.append(f"SC1 {field} projection differs: {entry_id}")
     for reference in frontend_chain.get("person_story_refs", []):
         if reference.get("person_id") not in people_by_id:
@@ -474,7 +535,7 @@ def validate(root: Path = ROOT, mode: str = "full") -> list[str]:
         for story_id in reference.get("story_ids", []):
             if story_id not in story_by_id:
                 errors.append(f"SC1 PersonStory reference has unknown Story: {story_id}")
-    if expected_person_ids != {item.get("person_id") for item in chain.get("person_story_refs", [])}:
+    if frontend_person_ids != expected_person_ids:
         errors.append("SC1 PersonStory reference set is incomplete")
 
     return errors

@@ -50,10 +50,14 @@ class SC111InlineMentionTests(unittest.TestCase):
     def test_main_text_mention_is_an_inline_segment_without_replacing_surface(self) -> None:
         story = self.story("02-yanyu-069")
         segments = self.person_segments(story["reading"]["main_text"]["segments"])
-        self.assertEqual(len(segments), 1)
-        self.assertEqual(segments[0]["display"]["original"], "王逸少")
-        self.assertEqual(segments[0]["person_id"], "wang-xizhi")
-        self.assertEqual(segments[0]["mention_id"], "shishuo-02-yanyu-069-main-text-001")
+        alias_segments = [
+            item
+            for item in segments
+            if item["mention_id"] == "shishuo-02-yanyu-069-main-text-001"
+        ]
+        self.assertEqual(len(alias_segments), 1)
+        self.assertEqual(alias_segments[0]["display"]["original"], "王逸少")
+        self.assertEqual(alias_segments[0]["person_id"], "wang-xizhi")
 
     def test_25_paidiao_wang_ningzhi_is_annotation_only_and_clickable_there(self) -> None:
         story = self.story("25-paidiao-026")

@@ -41,6 +41,7 @@ ALIASES_PATH = ROOT / "data/aliases.json"
 MENTIONS_PATH = ROOT / "data/mentions/shishuo.json"
 DERIVED_BUNDLE_PATH = ROOT / "data/derived/wp1-site.json"
 VITE_BUNDLE_PATH = ROOT / "site/src/generated/wp1-site.json"
+P3B_EVIDENCE_PREFIX = "evidence-p3b-wave-1-"
 
 TARGET_PERSON_IDS = (
     "wang-xizhi",
@@ -164,6 +165,11 @@ def main() -> int:
         raise ValueError("invalid reviewed punctuation record: " + "; ".join(punctuation_errors))
     existing_people = read_json(PEOPLE_PATH)["people"]
     existing_aliases = read_json(ALIASES_PATH)["aliases"]
+    existing_production_evidence = [
+        item
+        for item in read_json(ROOT / "data/evidence/wp1-evidence.json").get("records", [])
+        if isinstance(item, dict) and str(item.get("id", "")).startswith(P3B_EVIDENCE_PREFIX)
+    ]
     existing_mentions = [
         mention
         for mention in read_json(MENTIONS_PATH)["mentions"]
@@ -386,6 +392,20 @@ def main() -> int:
             "notes": "The same Jinshu biography uses 從伯 for 王導 in its account of 王羲之.",
         },
     ]
+    preserved_production_evidence = {
+        str(item["id"]): item for item in existing_production_evidence
+    }
+    collisions = {
+        str(item["id"]): item
+        for item in evidence
+        if str(item.get("id", "")).startswith(P3B_EVIDENCE_PREFIX)
+    }
+    if set(collisions) & set(preserved_production_evidence):
+        raise ValueError("WP1 generated evidence collides with P3B production Evidence")
+    evidence.extend(
+        preserved_production_evidence[evidence_id]
+        for evidence_id in sorted(preserved_production_evidence)
+    )
 
     evidence_for_section = {
         "main_text": "evidence-001",

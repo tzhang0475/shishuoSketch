@@ -77,8 +77,9 @@ Co-occurrence, shared surnames or titles, and graph transitivity never create a
 reviewed relation by themselves.
 
 The unified `data/people.json` registry is the Person identity source of truth.
-Its `scope_role` is `primary` for the six-person pilot or `supporting` for a
-minimal evidence-backed bridge Person. WP1 annotation records are generated
+Its `scope_role` is `primary` for materialized production Persons (including
+the six-person bootstrap and later P3B waves) or `supporting` for a minimal
+evidence-backed bridge Person. WP1 annotation records are generated
 projections of this registry; scope does not change identity or evidence
 semantics.
 
@@ -99,6 +100,22 @@ rows retain exact/contextual/ambiguous resolution semantics and distinguish
 main-text from Liu-annotation observations. Newly assembled capsules remain
 `candidate` unless an existing editorial review record explicitly supports
 `reviewed`. OpenCC creates only the derived Simplified display form.
+
+## P3B materialized Person expansion
+
+The six-person pilot is a legacy/bootstrap builder, not the production
+registry writer after a materialization wave exists. P3B freezes a deterministic
+P3A ranking in a reviewed wave manifest, then projects approved candidate
+identity evidence and occurrence records into the unified Person, Alias,
+Mention, Evidence, PersonStory, and Person Sketch layers. New records retain
+`candidate` review status and candidate provenance; materialization is not
+human review. Exact and contextual surface associations remain distinct, and
+contextual or unsafe occurrences are retained as withheld review data.
+
+P3B does not create Relations from co-occurrence, does not publish additional
+Stories, and does not modify canonical text, punctuation, or raw witnesses.
+Future waves reuse the materialization path with a new frozen manifest; Wave 1
+selection is never recomputed from the post-materialization ranking.
 
 ## Assertion status
 

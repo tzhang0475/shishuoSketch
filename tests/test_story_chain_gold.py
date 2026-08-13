@@ -60,7 +60,9 @@ class StoryChainGoldTests(unittest.TestCase):
         for record in self.gold["records"]:
             self.assertIn(record["entry_id"], self.entries)
             self.assertTrue(set(record["linked_person_ids"]).issubset(self.people))
-            self.assertEqual(set(record["linked_person_ids"]), by_entry[record["entry_id"]])
+            self.assertTrue(
+                set(record["linked_person_ids"]).issubset(by_entry[record["entry_id"]])
+            )
 
     def test_annotation_only_presence_is_not_promoted_to_main_text(self) -> None:
         anchor = next(item for item in self.chain["stories"] if item["entry_id"] == "06-yaliang-019")

@@ -50,6 +50,9 @@ GOLD_PATH = ROOT / "data/story-chain-gold-set.json"
 CHAIN_INDEX_PATH = ROOT / "data/derived/story-chain-gold-index.json"
 CORPUS_INDEX_PATH = ROOT / "data/shishuo-corpus-index.json"
 MENTIONS_PATH = ROOT / "data/mentions/shishuo.json"
+PEOPLE_REGISTRY_PATH = ROOT / "data/people.json"
+ALIASES_PATH = ROOT / "data/aliases.json"
+PERSON_STORY_INDEX_PATH = ROOT / "data/derived/person-story-index.json"
 PUNCTUATION_PATH = ROOT / "data/annotation/wp1-punctuation.json"
 DERIVED_PATH = ROOT / "data/derived/sc1-site.json"
 VITE_PATH = ROOT / "site/src/generated/sc1-site.json"
@@ -291,6 +294,9 @@ def build(root: Path = ROOT) -> dict[str, Any]:
         for record in read_json(PUNCTUATION_PATH)["records"]
     }
     raw_mentions = read_json(MENTIONS_PATH)["mentions"]
+    registry_people = read_json(PEOPLE_REGISTRY_PATH).get("people", [])
+    registry_aliases = read_json(ALIASES_PATH).get("aliases", [])
+    person_story_index = read_json(PERSON_STORY_INDEX_PATH)
     selected_records = gold["records"]
     selected_ids = [record["entry_id"] for record in selected_records]
     selected_set = set(selected_ids)
@@ -303,6 +309,89 @@ def build(root: Path = ROOT) -> dict[str, Any]:
     new_mentions: dict[str, dict[str, Any]] = dict(base_mentions)
     new_evidence: dict[str, dict[str, Any]] = dict(base_evidence)
     publication_by_id: dict[str, str] = {}
+
+    # WP1 intentionally remains a small seven-Person sample.  SC1 projects
+    # the full materialized registry without changing the WP1 publication
+    # contract, so Wave 1 Persons become available to the existing Story /
+    # Person navigation as soon as their approved Mentions occur in a selected
+    # Story.
+    base_people_by_id = {
+        str(person.get("id")): person
+        for person in base.get("people", [])
+        if isinstance(person, Mapping) and isinstance(person.get("id"), str)
+    }
+    aliases_by_person: dict[str, list[Mapping[str, Any]]] = {}
+    for alias in registry_aliases:
+        if not isinstance(alias, Mapping):
+            continue
+        for person_id in alias.get("person_ids", []):
+            if isinstance(person_id, str):
+                aliases_by_person.setdefault(person_id, []).append(alias)
+    mentions_by_person: dict[str, list[Mapping[str, Any]]] = {}
+    for mention in raw_mentions:
+        person_id = mention.get("person_id")
+        if isinstance(person_id, str):
+            mentions_by_person.setdefault(person_id, []).append(mention)
+
+    def frontend_people_projection() -> list[dict[str, Any]]:
+        projected: list[dict[str, Any]] = []
+        for registry_person in registry_people:
+            person_id = str(registry_person["person_id"])
+            if person_id in base_people_by_id:
+                projected.append(dict(base_people_by_id[person_id]))
+                continue
+            person_mentions = mentions_by_person.get(person_id, [])
+            selected_story_ids_for_person = sorted(
+                {
+                    str(mention.get("entry_id") or mention.get("source_id"))
+                    for mention in person_mentions
+                    if str(mention.get("entry_id") or mention.get("source_id")) in selected_set
+                }
+            )
+            evidence_ids = list(registry_person.get("materialization", {}).get("identity_evidence_ids", []))
+            for mention in person_mentions:
+                for evidence_id in mention.get("evidence", {}).get("evidence_ids", []):
+                    if evidence_id not in evidence_ids:
+                        evidence_ids.append(evidence_id)
+            aliases = []
+            for alias in sorted(
+                aliases_by_person.get(person_id, []),
+                key=lambda item: (
+                    str(item.get("alias_type", "")),
+                    str(item.get("surface", "")),
+                    str(item.get("alias_id", "")),
+                ),
+            ):
+                aliases.append(
+                    {
+                        "surface": alias.get("surface", ""),
+                        "alias_type": alias.get("alias_type", ""),
+                        "resolution_mode": alias.get("resolution_mode", "ambiguous"),
+                        "evidence_ids": [
+                            str(item.get("evidence_id"))
+                            for item in alias.get("source_evidence", [])
+                            if isinstance(item, Mapping) and isinstance(item.get("evidence_id"), str)
+                        ],
+                        "review_status": alias.get("review_status", "candidate"),
+                    }
+                )
+            projected.append(
+                {
+                    "id": person_id,
+                    "scope_role": registry_person.get("scope_role", "primary"),
+                    "scope": registry_person.get("scope_role", "primary"),
+                    "canonical_name": registry_person.get("canonical_name", ""),
+                    "aliases": aliases,
+                    "story_ids": selected_story_ids_for_person,
+                    "evidence_ids": sorted(evidence_ids),
+                    "assertion_status": "attested",
+                    "review_status": "candidate",
+                    "notes": "P3B.1 materialized Person projected into the SC1 static bundle; editorial review remains candidate.",
+                }
+            )
+        return projected
+
+    frontend_people = frontend_people_projection()
 
     for selection in selected_records:
         entry_id = selection["entry_id"]
@@ -324,7 +413,14 @@ def build(root: Path = ROOT) -> dict[str, Any]:
             # only derive the SC1 reading projection from the same canonical
             # entry and its reviewed punctuation record.
             story = dict(base_stories[entry_id])
-            story["person_ids"] = list(selection["linked_person_ids"])
+            resolved_person_ids = sorted(
+                {
+                    str(mention.get("person_id"))
+                    for mention in entry_mentions
+                    if isinstance(mention.get("person_id"), str)
+                }
+            )
+            story["person_ids"] = list(dict.fromkeys([*selection["linked_person_ids"], *resolved_person_ids]))
             story["publication_state"] = state
             story["publication_note"] = "已复核句读"
             story["chapter_heading"] = "雅量第六"
@@ -339,15 +435,22 @@ def build(root: Path = ROOT) -> dict[str, Any]:
                 and isinstance(item.get("locator", {}).get("annotation_id"), str)
                 and item["id"] in story.get("evidence_ids", [])
             }
-            projected_mentions = [
-                base_mentions[mention["mention_id"]]
-                for mention in entry_mentions
-                if mention.get("mention_id") in base_mentions
-            ]
+            projected_mentions = []
+            for mention in entry_mentions:
+                if mention.get("mention_id") in base_mentions:
+                    projected = base_mentions[mention["mention_id"]]
+                else:
+                    projected = frontend_mention(mention, {
+                        "main_text": "evidence-sc1-06-yaliang-019-main",
+                        "liu_annotation:annotation-001": "evidence-sc1-06-yaliang-019-annotation-001",
+                        "liu_annotation": "evidence-sc1-06-yaliang-019-annotation-001",
+                    })
+                new_mentions[projected["id"]] = projected
+                projected_mentions.append(projected)
             story["reading"] = build_display_reading(
                 punctuation,
                 converter,
-                people=base["people"],
+                people=frontend_people,
                 mentions=projected_mentions,
                 placement_mentions=entry_mentions,
                 canonical_annotations=annotations,
@@ -379,7 +482,7 @@ def build(root: Path = ROOT) -> dict[str, Any]:
         reading = build_display_reading(
             punctuation,
             converter,
-            people=base["people"],
+            people=frontend_people,
             mentions=projected_mentions,
             placement_mentions=entry_mentions,
             canonical_annotations=annotations,
@@ -409,7 +512,14 @@ def build(root: Path = ROOT) -> dict[str, Any]:
                     if f"liu_annotation:{annotation['id']}" in section_evidence
                 ],
             ],
-            "person_ids": selection["linked_person_ids"],
+            "person_ids": list(dict.fromkeys([
+                *selection["linked_person_ids"],
+                *[
+                    str(mention.get("person_id"))
+                    for mention in entry_mentions
+                    if isinstance(mention.get("person_id"), str)
+                ],
+            ])),
             "mention_ids": [mention["mention_id"] for mention in entry_mentions],
             "relation_ids": [],
             "era_ids": [],
@@ -439,35 +549,73 @@ def build(root: Path = ROOT) -> dict[str, Any]:
 
     new_stories.sort(key=lambda story: int(story.get("global_ordinal", 10**9)))
     chain_stories = []
-    for item in chain_index["stories"]:
-        entry_id = item["entry_id"]
-        if entry_id not in selected_set:
-            continue
+    chain_index_by_story = {
+        str(item["entry_id"]): item
+        for item in chain_index.get("stories", [])
+        if isinstance(item, Mapping) and isinstance(item.get("entry_id"), str)
+    }
+    for selection in selected_records:
+        entry_id = selection["entry_id"]
+        base_chain = chain_index_by_story.get(entry_id, {})
+        entry_mentions = [
+            mention for mention in raw_mentions
+            if mention.get("entry_id") == entry_id
+            and isinstance(mention.get("person_id"), str)
+        ]
+        resolved_main_person_ids = sorted({
+            str(mention["person_id"])
+            for mention in entry_mentions
+            if mention.get("section") == "main_text"
+        })
+        resolved_annotation_person_ids = sorted({
+            str(mention["person_id"])
+            for mention in entry_mentions
+            if mention.get("section") == "liu_annotation"
+        } - set(resolved_main_person_ids))
+        main_person_ids = list(dict.fromkeys([
+            *base_chain.get("main_text_person_ids", []),
+            *resolved_main_person_ids,
+        ]))
+        annotation_person_ids = list(dict.fromkeys([
+            *base_chain.get("liu_annotation_only_person_ids", []),
+            *resolved_annotation_person_ids,
+        ]))
+        linked_person_ids = list(dict.fromkeys([
+            *base_chain.get("linked_person_ids", selection["linked_person_ids"]),
+            *resolved_main_person_ids,
+            *resolved_annotation_person_ids,
+        ]))
         chain_stories.append(
             {
                 "entry_id": entry_id,
-                "linked_person_ids": item["linked_person_ids"],
-                "main_text_person_ids": item["main_text_person_ids"],
-                "liu_annotation_only_person_ids": item["liu_annotation_only_person_ids"],
+                "linked_person_ids": linked_person_ids,
+                "main_text_person_ids": main_person_ids,
+                "liu_annotation_only_person_ids": annotation_person_ids,
                 "publication_state": publication_by_id[entry_id],
             }
         )
     person_story_refs = []
-    for item in chain_index["person_story_refs"]:
-        story_ids = [entry_id for entry_id in item["entry_ids"] if entry_id in selected_set]
-        if not story_ids:
-            continue
+    all_chain_person_ids = sorted({
+        person_id
+        for story in chain_stories
+        for person_id in story["linked_person_ids"]
+    })
+    for person_id in all_chain_person_ids:
+        story_ids = [
+            story["entry_id"] for story in chain_stories
+            if person_id in story["linked_person_ids"]
+        ]
         main_ids = [
             story["entry_id"] for story in chain_stories
-            if item["person_id"] in story["main_text_person_ids"]
+            if person_id in story["main_text_person_ids"]
         ]
         annotation_only_ids = [
             story["entry_id"] for story in chain_stories
-            if item["person_id"] in story["liu_annotation_only_person_ids"]
+            if person_id in story["liu_annotation_only_person_ids"]
         ]
         person_story_refs.append(
             {
-                "person_id": item["person_id"],
+                "person_id": person_id,
                 "story_ids": story_ids,
                 "main_text_story_ids": main_ids,
                 "liu_annotation_only_story_ids": annotation_only_ids,
@@ -476,7 +624,7 @@ def build(root: Path = ROOT) -> dict[str, Any]:
 
     person_sketches = build_person_sketches(
         ROOT,
-        people=base["people"],
+        people=frontend_people,
         frontend_mentions=new_mentions,
         converter=converter,
     )
@@ -485,7 +633,7 @@ def build(root: Path = ROOT) -> dict[str, Any]:
         "schema": 1,
         "generated_from": "scripts/build_sc1_frontend_data.py",
         "stories": new_stories,
-        "people": base["people"],
+        "people": frontend_people,
         "mentions": sorted(new_mentions.values(), key=lambda item: item["id"]),
         "relations": base["relations"],
         "eras": base["eras"],

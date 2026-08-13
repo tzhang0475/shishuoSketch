@@ -680,6 +680,30 @@ def build_outputs(
     shishuo_root: Path | None = None,
     jinshu_root: Path | None = None,
 ) -> dict[str, Any]:
+    # The six-person builder remains the reproducible bootstrap/legacy stage.
+    # Once a materialization wave has extended the production registry, using
+    # this writer against that same root would silently erase the wave.  Keep
+    # the old parser/build function available for isolated bootstrap builds,
+    # but fail closed for a materialized repository root.
+    materialization_marker = root / "data/annotation/person-expansion-wave-1.json"
+    current_people_path = root / "data/people.json"
+    if materialization_marker.is_file() and current_people_path.is_file():
+        try:
+            current_people = json.loads(current_people_path.read_text(encoding="utf-8"))
+        except (OSError, json.JSONDecodeError) as exc:
+            raise RuntimeError(
+                "cannot determine whether the legacy six-person builder is safe to run"
+            ) from exc
+        if any(
+            isinstance(person.get("materialization"), dict)
+            and person["materialization"].get("wave_id")
+            for person in current_people.get("people", [])
+            if isinstance(person, dict)
+        ):
+            raise RuntimeError(
+                "legacy six-person bootstrap cannot overwrite a materialized "
+                "Person registry; use the applicable materialization builder"
+            )
     shishuo_root = shishuo_root or root / "content/processed/shishuo/entries"
     jinshu_root = jinshu_root or root / "content/processed/jinshu/units"
     shishuo, jinshu = all_mentions(shishuo_root, jinshu_root)

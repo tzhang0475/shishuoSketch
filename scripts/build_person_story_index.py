@@ -380,7 +380,7 @@ def render_report(
     lines = [
         "# Person ↔ Story pilot",
         "",
-        "This is deterministic navigation/index data for the six-person Shishuo pilot. It is not a personality interpretation, participation claim, or new historical assertion.",
+        "This is deterministic navigation/index data for the unified materialized Shishuo Person registry. The six-person pilot is the historical bootstrap stage; this index is not a personality interpretation, participation claim, or new historical assertion.",
         "",
         "## Semantics",
         "",

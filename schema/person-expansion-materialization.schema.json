@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://shishuo-sketch/schema/person-expansion-materialization.schema.json",
+  "title": "Person expansion materialization output",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "stage",
+    "wave_id",
+    "source_ranking_artifact",
+    "source_ranking_sha256",
+    "people_before",
+    "people_after",
+    "promoted_mention_count",
+    "withheld_occurrence_count",
+    "production_evidence_ids",
+    "members",
+    "protected_hashes"
+  ],
+  "properties": {
+    "schema": {"const": 1},
+    "stage": {"const": "p3b1-person-expansion-materialization"},
+    "wave_id": {"type": "string"},
+    "source_ranking_artifact": {"type": "string"},
+    "source_ranking_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "people_before": {"type": "integer", "minimum": 0},
+    "people_after": {"type": "integer", "minimum": 0},
+    "promoted_mention_count": {"type": "integer", "minimum": 0},
+    "withheld_occurrence_count": {"type": "integer", "minimum": 0},
+    "production_evidence_ids": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+    "members": {"type": "array", "items": {"$ref": "https://shishuo-sketch/schema/person-expansion-wave.schema.json#/$defs/member"}},
+    "protected_hashes": {
+      "type": "object",
+      "additionalProperties": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+    },
+    "notes": {"type": "array", "items": {"type": "string"}}
+  }
+}
