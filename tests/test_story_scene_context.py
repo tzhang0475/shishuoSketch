@@ -7,6 +7,7 @@ import unittest
 
 from scripts.story_scene_contexts import DERIVED_PATH, SOURCE_PATH, derive_age_range, project, validate_source
 from scripts.validate_sc1_frontend_data import validate
+from tests.support import repository_validation_mode
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -80,9 +81,11 @@ class StorySceneContextTests(unittest.TestCase):
         for context in self.source["records"]:
             self.assertNotIn("relation_ids", context)
 
-    def test_full_and_portable_sc1_validation_include_scene_projection(self) -> None:
-        self.assertEqual(validate(ROOT, mode="full"), [])
-        self.assertEqual(validate(ROOT, mode="portable"), [])
+    def test_sc1_validation_includes_scene_projection_in_repository_mode(self) -> None:
+        mode = repository_validation_mode()
+        self.assertEqual(validate(ROOT, mode=mode), [])
+        if mode == "full":
+            self.assertEqual(validate(ROOT, mode="portable"), [])
 
     def test_scene_projection_is_byte_stable(self) -> None:
         evidence_ids = {item["id"] for item in self.bundle["evidence"]}

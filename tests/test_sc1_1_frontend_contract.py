@@ -4,6 +4,7 @@ import json
 from pathlib import Path
 import shutil
 import subprocess
+import tempfile
 import unittest
 
 
@@ -44,27 +45,53 @@ class SC11FrontendContractTests(unittest.TestCase):
         node = shutil.which("node")
         if node is None:
             self.skipTest("node is unavailable")
-        script = r'''
+        typescript_runtime = ROOT / "node_modules/typescript/lib/typescript.js"
+        if not typescript_runtime.exists():
+            self.skipTest("installed TypeScript runtime is unavailable")
+        with tempfile.TemporaryDirectory() as temporary:
+            temporary_root = Path(temporary)
+            runner = temporary_root / "run-random-person.mjs"
+            compiled = temporary_root / "relationExplorer.mjs"
+            script = f'''
 import fs from "node:fs";
-import { eligiblePersonIds, randomEligiblePersonId } from "./site/src/relationExplorer.ts";
-const data = JSON.parse(fs.readFileSync("data/derived/sc1-site.json", "utf8"));
+import {{ createRequire }} from "node:module";
+import {{ pathToFileURL }} from "node:url";
+
+const require = createRequire(import.meta.url);
+const ts = require({json.dumps(str(typescript_runtime))});
+const source = fs.readFileSync({json.dumps(str(ROOT / "site/src/relationExplorer.ts"))}, "utf8");
+const transpiled = ts.transpileModule(source, {{
+  compilerOptions: {{
+    target: ts.ScriptTarget.ES2020,
+    module: ts.ModuleKind.ESNext,
+  }},
+}});
+fs.writeFileSync({json.dumps(str(compiled))}, transpiled.outputText);
+const {{ eligiblePersonIds, randomEligiblePersonId }} = await import(pathToFileURL({json.dumps(str(compiled))}).href);
+const data = JSON.parse(fs.readFileSync({json.dumps(str(ROOT / "data/derived/sc1-site.json"))}, "utf8"));
 const ids = eligiblePersonIds(data);
 const first = randomEligiblePersonId(data, () => 0);
 const second = randomEligiblePersonId(data, () => 0, first ?? undefined);
-console.log(JSON.stringify({
+console.log(JSON.stringify({{
   count: ids.length,
   first,
   second,
   allNavigable: ids.every((id) => Boolean(data.person_sketches[id]) && data.stories.some((story) => story.person_ids.includes(id))),
-}));
+}}));
 '''
-        result = subprocess.run(
-            [node, "--experimental-strip-types", "-e", script],
-            cwd=ROOT,
-            check=True,
-            capture_output=True,
-            text=True,
-        )
+            runner.write_text(script, encoding="utf-8")
+            result = subprocess.run(
+                [node, str(runner)],
+                cwd=ROOT,
+                check=False,
+                capture_output=True,
+                text=True,
+            )
+        if result.returncode != 0:
+            self.fail(
+                "Node random-person helper failed "
+                f"(stderr):\n{result.stderr}\nstdout:\n{result.stdout}"
+            )
         value = json.loads(result.stdout)
         self.assertEqual(value["count"], 13)
         self.assertTrue(value["allNavigable"])
