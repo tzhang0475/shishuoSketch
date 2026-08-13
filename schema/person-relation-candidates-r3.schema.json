@@ -1,0 +1,153 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://shishuo-sketch/schema/person-relation-candidates-r3.schema.json",
+  "title": "R3A explicit Person Relation candidate projection",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema", "stage", "generated_from", "production_person_count", "production_person_ids",
+    "reviewed_relation_count", "reviewed_direct_relation_count", "pair_count_audited",
+    "candidate_count", "tier_counts", "already_reviewed_rediscoveries",
+    "already_reviewed_rediscovery_count", "candidates", "cooccurrence_only_pair_count",
+    "cooccurrence_only_pairs", "scene_encounters", "wave1_person_ids",
+    "wave1_persons_with_candidate_relation", "isolated_person_ids_by_reviewed_relation", "notes"
+  ],
+  "properties": {
+    "schema": {"const": 1},
+    "stage": {"const": "r3a-explicit-person-relation-discovery"},
+    "generated_from": {"type": "array", "items": {"type": "string"}, "minItems": 1},
+    "production_person_count": {"type": "integer", "minimum": 1},
+    "production_person_ids": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+    "reviewed_relation_count": {"type": "integer", "minimum": 0},
+    "reviewed_direct_relation_count": {"type": "integer", "minimum": 0},
+    "pair_count_audited": {"type": "integer", "minimum": 0},
+    "candidate_count": {"type": "integer", "minimum": 0},
+    "tier_counts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["A", "B", "C"],
+      "properties": {
+        "A": {"type": "integer", "minimum": 0},
+        "B": {"type": "integer", "minimum": 0},
+        "C": {"type": "integer", "minimum": 0}
+      }
+    },
+    "already_reviewed_rediscoveries": {"type": "array", "items": {"$ref": "#/$defs/rediscovery"}},
+    "already_reviewed_rediscovery_count": {"type": "integer", "minimum": 0},
+    "candidates": {"type": "array", "items": {"$ref": "#/$defs/candidate"}},
+    "cooccurrence_only_pair_count": {"type": "integer", "minimum": 0},
+    "cooccurrence_only_pairs": {"type": "array", "items": {"$ref": "#/$defs/pair"}},
+    "scene_encounters": {"type": "array", "items": {"$ref": "#/$defs/scene_encounter"}},
+    "wave1_person_ids": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+    "wave1_persons_with_candidate_relation": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+    "isolated_person_ids_by_reviewed_relation": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+    "notes": {"type": "array", "items": {"type": "string"}}
+  },
+  "$defs": {
+    "pair": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["person_a_id", "person_b_id", "person_a_name", "person_b_name", "shared_story_count", "shared_story_ids", "reviewed_relation_ids", "has_r3a_candidate"],
+      "properties": {
+        "person_a_id": {"type": "string"},
+        "person_b_id": {"type": "string"},
+        "person_a_name": {"type": "string"},
+        "person_b_name": {"type": "string"},
+        "shared_story_count": {"type": "integer", "minimum": 0},
+        "shared_story_ids": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+        "reviewed_relation_ids": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+        "has_r3a_candidate": {"type": "boolean"}
+      }
+    },
+    "rediscovery": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["relation_id", "person_a_id", "person_b_id", "person_a_name", "person_b_name", "relation_type", "label"],
+      "properties": {
+        "relation_id": {"type": "string"},
+        "person_a_id": {"type": "string"},
+        "person_b_id": {"type": "string"},
+        "person_a_name": {"type": "string"},
+        "person_b_name": {"type": "string"},
+        "relation_type": {"type": "string"},
+        "relation_subtype": {"type": ["string", "null"]},
+        "label": {"type": "string"}
+      }
+    },
+    "evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "layer", "evidence_type", "source_entry_id", "source_unit_id", "assertion_status", "quote"],
+      "properties": {
+        "id": {"type": "string"},
+        "layer": {"type": "string"},
+        "evidence_type": {"type": "string"},
+        "source_entry_id": {"type": ["string", "null"]},
+        "source_unit_id": {"type": ["string", "null"]},
+        "assertion_status": {"type": ["string", "null"]},
+        "quote": {"type": "string"}
+      }
+    },
+    "candidate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "rank", "candidate_id", "person_a_id", "person_b_id", "person_a_name", "person_b_name",
+        "proposed_relation_class", "proposed_role_a", "proposed_role_b", "relation_scope",
+        "source_entry_ids", "source_unit_ids", "evidence_ids", "assertion_status", "review_status",
+        "review_tier", "discovery_basis", "discovery_note", "risk_flags", "metrics", "current_story_ids",
+        "evidence_summary", "existing_reviewed_relation_ids"
+      ],
+      "properties": {
+        "rank": {"type": "integer", "minimum": 1},
+        "candidate_id": {"type": "string", "pattern": "^r3-candidate-[0-9a-f]{20}$"},
+        "person_a_id": {"type": "string"},
+        "person_b_id": {"type": "string"},
+        "person_a_name": {"type": "string"},
+        "person_b_name": {"type": "string"},
+        "proposed_relation_class": {"type": "string"},
+        "proposed_role_a": {"type": "string"},
+        "proposed_role_b": {"type": "string"},
+        "relation_scope": {"type": "string"},
+        "source_entry_ids": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+        "source_unit_ids": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+        "evidence_ids": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+        "assertion_status": {"type": "string"},
+        "review_status": {"const": "candidate"},
+        "review_tier": {"enum": ["A", "B", "C"]},
+        "discovery_basis": {"type": "string"},
+        "discovery_note": {"type": "string"},
+        "risk_flags": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+        "metrics": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["evidence_count", "source_layer_count", "current_story_count", "shared_story_count"],
+          "properties": {
+            "evidence_count": {"type": "integer", "minimum": 1},
+            "source_layer_count": {"type": "integer", "minimum": 1},
+            "current_story_count": {"type": "integer", "minimum": 0},
+            "shared_story_count": {"type": "integer", "minimum": 0}
+          }
+        },
+        "current_story_ids": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+        "evidence_summary": {"type": "array", "items": {"$ref": "#/$defs/evidence"}},
+        "existing_reviewed_relation_ids": {"type": "array", "items": {"type": "string"}, "uniqueItems": true}
+      }
+    },
+    "scene_encounter": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["story_id", "person_a_id", "person_b_id", "person_a_name", "person_b_name", "reviewed_relation_ids", "r3a_candidate_id", "disposition"],
+      "properties": {
+        "story_id": {"type": "string"},
+        "person_a_id": {"type": "string"},
+        "person_b_id": {"type": "string"},
+        "person_a_name": {"type": "string"},
+        "person_b_name": {"type": "string"},
+        "reviewed_relation_ids": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+        "r3a_candidate_id": {"type": ["string", "null"]},
+        "disposition": {"enum": ["candidate_or_reviewed_relation_exists", "scene_encounter_only"]}
+      }
+    }
+  }
+}

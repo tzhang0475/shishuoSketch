@@ -172,7 +172,7 @@ body { overflow-x: hidden; }
   padding: 2rem clamp(1rem, 3vw, 2.5rem) 4rem;
 }
 .site-header-actions { display: flex; align-items: center; gap: .7rem; flex-wrap: wrap; justify-content: flex-end; }
-.random-story-button {
+.random-story-button, .random-person-button {
   min-height: 2.5rem;
   border: 1px solid #cdb9aa;
   border-radius: 999px;
@@ -182,18 +182,11 @@ body { overflow-x: hidden; }
   padding: .35rem .8rem;
   font-size: .78rem;
 }
-.random-story-button:hover, .random-story-button:focus-visible { border-color: #8f5d47; background: #fffdf9; }
-.random-person-button {
-  min-height: 2.5rem;
-  border: 1px solid #b9957d;
-  border-radius: 999px;
+.random-story-button:hover, .random-story-button:focus-visible,
+.random-person-button:hover, .random-person-button:focus-visible {
+  border-color: #8f5d47;
   background: #fffdf9;
-  color: #7a3d2d;
-  cursor: pointer;
-  padding: .35rem .8rem;
-  font-size: .78rem;
 }
-.random-person-button:hover, .random-person-button:focus-visible { border-color: #8f5d47; background: #f0e4d8; }
 .exploration-path-shell { position: relative; min-height: 2.3rem; }
 .exploration-breadcrumb {
   display: flex;
@@ -403,8 +396,7 @@ body { overflow-x: hidden; }
   .site-header { gap: .75rem; padding-bottom: 1rem; }
   .site-header-actions { gap: .35rem; }
   .prototype-badge { padding: .2rem .45rem; }
-  .random-story-button { min-height: 2.75rem; padding-inline: .65rem; }
-  .random-person-button { min-height: 2.75rem; padding-inline: .65rem; }
+  .random-story-button, .random-person-button { min-height: 2.75rem; padding-inline: .65rem; }
   .desktop-path { display: none; }
   .mobile-path-bar { display: flex; align-items: center; justify-content: space-between; gap: .5rem; margin: .35rem 0 .5rem; }
   .mobile-path-back { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }

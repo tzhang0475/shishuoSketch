@@ -117,9 +117,9 @@ Stories, and does not modify canonical text, punctuation, or raw witnesses.
 Future waves reuse the materialization path with a new frozen manifest; Wave 1
 selection is never recomputed from the post-materialization ranking.
 
-## P3B.1.1 Story Scene Context pilot
+## S1 Story Scene Context layer
 
-`data/annotation/story-scene-contexts.json` is a small Story-owned candidate
+`data/annotation/story-scene-contexts.json` is a Story-owned candidate
 context layer. It describes a specific scene's supported date/place/person
 roles/status/background and does not redefine Person identity, PersonStory,
 Mention, or Relation. `scene_role: present` requires scene-specific Evidence;
@@ -128,7 +128,11 @@ not a historical Relation. Dates and ages use explicit exact/range/approximate/
 unknown states; age derivation never invents a single year. The deterministic
 SC1 projection is `scene_contexts`, keyed by existing Story IDs, and is shown
 by the central Story Scene Card only for the pilot Stories. New claims begin as
-`candidate` and retain Evidence IDs.
+`candidate` and retain Evidence IDs; the current SC1 pilot covers only a
+reviewed selection of the published Stories. The separate
+`data/annotation/person-relation-candidates-r3.json` layer is an R3A review
+artifact only: its source-backed proposals are not production Relations and
+are not shown in the reader-facing Relation card until a later explicit review.
 
 The Person-first “随便认识一个人” entry uses only materialized Persons with a
 Person Sketch and a connection to a published Story in the generated SC1

@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://shishuo-sketch/schema/person-relation-candidate.schema.json",
+  "title": "R3A explicit Person Relation candidate source",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "stage", "records"],
+  "properties": {
+    "schema": {"const": 1},
+    "stage": {"const": "r3-explicit-person-relation-candidate-review"},
+    "records": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {"$ref": "#/$defs/record"}
+    }
+  },
+  "$defs": {
+    "person_id": {"type": "string", "minLength": 1},
+    "string_list": {"type": "array", "items": {"type": "string", "minLength": 1}, "uniqueItems": true},
+    "record": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "person_a_id", "person_b_id", "proposed_relation_class", "proposed_role_a",
+        "proposed_role_b", "relation_scope", "source_entry_ids", "source_unit_ids",
+        "evidence_ids", "assertion_status", "review_status", "discovery_basis",
+        "discovery_note", "risk_flags"
+      ],
+      "properties": {
+        "person_a_id": {"$ref": "#/$defs/person_id"},
+        "person_b_id": {"$ref": "#/$defs/person_id"},
+        "proposed_relation_class": {"enum": ["kinship", "marriage", "service_institutional", "social_intellectual", "political_counterposition", "other_explicit"]},
+        "proposed_role_a": {"type": "string", "minLength": 1},
+        "proposed_role_b": {"type": "string", "minLength": 1},
+        "relation_scope": {"enum": ["long_term_social", "institutional_service", "historical_political", "other_explicit"]},
+        "source_entry_ids": {"$ref": "#/$defs/string_list"},
+        "source_unit_ids": {"$ref": "#/$defs/string_list"},
+        "evidence_ids": {"$ref": "#/$defs/string_list"},
+        "assertion_status": {"enum": ["attested", "reported", "inferred", "unknown"]},
+        "review_status": {"const": "candidate"},
+        "discovery_basis": {"type": "string", "minLength": 1},
+        "discovery_note": {"type": "string", "minLength": 1},
+        "risk_flags": {"$ref": "#/$defs/string_list"}
+      }
+    }
+  }
+}

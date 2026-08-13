@@ -20,12 +20,19 @@ class StorySceneContextTests(unittest.TestCase):
         cls.derived = json.loads((ROOT / DERIVED_PATH).read_text(encoding="utf-8"))
         cls.bundle = json.loads((ROOT / "data/derived/sc1-site.json").read_text(encoding="utf-8"))
 
-    def test_pilot_selection_is_small_and_includes_mandatory_story(self) -> None:
+    def test_pilot_selection_is_evidence_bounded_and_includes_mandatory_story(self) -> None:
         ids = [record["story_id"] for record in self.source["records"]]
-        self.assertGreaterEqual(len(ids), 3)
-        self.assertLessEqual(len(ids), 5)
+        self.assertGreaterEqual(len(ids), 8)
+        self.assertLessEqual(len(ids), 12)
         self.assertIn("06-yaliang-029", ids)
         self.assertEqual(ids[0], "06-yaliang-029")
+
+    def test_scene_card_does_not_expose_internal_relation_model_disclaimer(self) -> None:
+        source_text = json.dumps(self.source, ensure_ascii=False)
+        bundle_text = (ROOT / "data/derived/sc1-site.json").read_text(encoding="utf-8")
+        for phrase in ("不新增长期人物关系", "不新增人物关系", "不據這段送別文字推定"):
+            self.assertNotIn(phrase, source_text)
+            self.assertNotIn(phrase, bundle_text)
 
     def test_scene_contexts_resolve_only_published_stories_and_people(self) -> None:
         self.assertEqual(validate_source(ROOT), [])
@@ -80,6 +87,11 @@ class StorySceneContextTests(unittest.TestCase):
         self.assertEqual(self.bundle["relations"], base["relations"])
         for context in self.source["records"]:
             self.assertNotIn("relation_ids", context)
+
+    def test_scene_records_remain_story_owned_and_do_not_project_relations(self) -> None:
+        self.assertEqual(len(self.derived["contexts"]), 9)
+        self.assertTrue({"02-yanyu-069", "04-wenxue-036", "05-fangzheng-055", "06-yaliang-027", "08-shangyu-077", "19-xianyuan-026"} <= set(self.derived["contexts"]))
+        self.assertFalse(any("relations" in context or "relation_ids" in context for context in self.derived["contexts"].values()))
 
     def test_sc1_validation_includes_scene_projection_in_repository_mode(self) -> None:
         mode = repository_validation_mode()

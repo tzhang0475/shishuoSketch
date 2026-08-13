@@ -55,7 +55,9 @@ status and Evidence IDs. It does not create PersonStory or Relation facts;
 `present` is a scene-specific candidate classification, not a conclusion from
 Mention or co-occurrence. The central Story reader renders a card only when a
 record exists, and its materialized Person controls reuse the existing
-exploration stack.
+exploration stack. R3A relation candidates are intentionally excluded from
+the SC1 runtime bundle; the reader continues to receive reviewed Relations
+only.
 
 The WP1 sample bundle is generated from the canonical Shishuo entry, the six
 primary people, and any explicitly marked supporting R1 bridge records by

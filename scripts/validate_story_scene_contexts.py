@@ -45,8 +45,8 @@ def validate(root: Path = ROOT) -> list[str]:
         errors.append("Scene Context source/projection keys differ")
     if "06-yaliang-029" not in expected:
         errors.append("mandatory 06-yaliang-029 Scene Context is missing")
-    if len(expected) < 3 or len(expected) > 5:
-        errors.append(f"Scene Context pilot must contain 3–5 Stories, found {len(expected)}")
+    if len(expected) < 3 or len(expected) > 12:
+        errors.append(f"Scene Context pilot must contain 3–12 Stories, found {len(expected)}")
 
     for story_id, context in expected.items():
         for person in context["people_at_scene"]:

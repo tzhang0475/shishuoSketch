@@ -34,9 +34,27 @@ class SC11FrontendContractTests(unittest.TestCase):
         self.assertIn("随便认识一个人", self.app)
         self.assertNotIn('"wang-xizhi"', self.app)
 
+    def test_random_story_and_person_actions_share_control_family(self) -> None:
+        self.assertIn(".random-story-button, .random-person-button", self.styles)
+        self.assertIn(".random-story-button:hover, .random-story-button:focus-visible,", self.styles)
+        self.assertIn(".random-person-button:hover, .random-person-button:focus-visible", self.styles)
+
     def test_scene_card_is_story_owned_and_keeps_relations_separate(self) -> None:
         self.assertIn("scene_contexts", self.bundle)
-        self.assertEqual(set(self.bundle["scene_contexts"]), {"02-yanyu-083", "05-fangzheng-023", "06-yaliang-029"})
+        self.assertEqual(
+            set(self.bundle["scene_contexts"]),
+            {
+                "02-yanyu-069",
+                "02-yanyu-083",
+                "04-wenxue-036",
+                "05-fangzheng-023",
+                "05-fangzheng-055",
+                "06-yaliang-027",
+                "06-yaliang-029",
+                "08-shangyu-077",
+                "19-xianyuan-026",
+            },
+        )
         self.assertIn("SceneCard", self.app)
         self.assertIn("if (!scene) return null", self.app)
         self.assertIn("onFocus(person.person_id)", self.app)
