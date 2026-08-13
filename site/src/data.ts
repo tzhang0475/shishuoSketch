@@ -1,5 +1,10 @@
-import type { SiteBundle } from "./types";
+import type { PublicationState, SiteBundle } from "./types";
 import generatedSiteBundle from "./generated/sc1-site.json";
+
+type RuntimeStoryRecord = Record<string, unknown> & {
+  id: string;
+  publication_state: PublicationState;
+};
 
 function isRecord(value: unknown): value is Record<string, unknown> {
   return typeof value === "object" && value !== null;
@@ -10,6 +15,14 @@ function requireArray(value: unknown, key: string): unknown[] {
     throw new Error(`静态数据缺少数组: ${key}`);
   }
   return value[key];
+}
+
+function isPublicationState(value: unknown): value is PublicationState {
+  return value === "production_ready" || value === "preview_ready" || value === "blocked";
+}
+
+function isRuntimeStoryRecord(value: unknown): value is RuntimeStoryRecord {
+  return isRecord(value) && typeof value.id === "string" && isPublicationState(value.publication_state);
 }
 
 export function parseSiteBundle(value: unknown): SiteBundle {
@@ -35,14 +48,14 @@ export function parseSiteBundle(value: unknown): SiteBundle {
     if (!isRecord(story) || !isRecord(story.reading)) {
       throw new Error("Story 缺少 reading layer");
     }
+    if (!isRuntimeStoryRecord(story)) {
+      throw new Error(`Story ${String(story.id)} 的 publication_state 无效`);
+    }
     const reading = story.reading;
     if (reading.entry_id !== story.id || typeof reading.status !== "string") {
       throw new Error(`Story ${String(story.id)} 的 reading layer 标识不一致`);
     }
     const publicationState = story.publication_state;
-    if (publicationState !== undefined && !["production_ready", "preview_ready", "blocked"].includes(String(publicationState))) {
-      throw new Error(`Story ${String(story.id)} 的 publication_state 无效`);
-    }
     if (publicationState === "production_ready" && reading.status !== "reviewed") {
       throw new Error(`Story ${String(story.id)} 的 production reading 必须是 reviewed`);
     }
@@ -110,7 +123,9 @@ export function parseSiteBundle(value: unknown): SiteBundle {
       throw new Error("story_chain.story_person_refs 引用了不存在的 Person 或 Story");
     }
     for (const storyId of chain.story_ids) {
-      const story = arrays.stories.find((item) => isRecord(item) && item.id === storyId);
+      const story = arrays.stories.find(
+        (item): item is RuntimeStoryRecord => isRuntimeStoryRecord(item) && item.id === storyId,
+      );
       if (story && story.publication_state === "blocked") {
         throw new Error(`story_chain 不得发布 blocked Story: ${storyId}`);
       }

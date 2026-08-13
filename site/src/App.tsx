@@ -622,7 +622,7 @@ function ReadingPage({
   const mentions = resolvedMentions(story, data);
   const readingText = story.reading.main_text[readingMode];
   const annotationReading = story.reading.annotations[0];
-  const backTarget = focusedPersonId && stack.length > 1
+  const backTarget = focusedId && stack.length > 1
     ? [...stack.slice(0, -1)].reverse().find((node) => node.kind === "person") ?? stack[stack.length - 2] ?? null
     : null;
 

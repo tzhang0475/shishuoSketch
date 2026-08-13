@@ -49,7 +49,7 @@ export interface Story {
   chapter_display?: ReadingPair;
   ordinal?: number;
   global_ordinal?: number;
-  publication_state?: PublicationState;
+  publication_state: PublicationState;
   publication_note?: string;
   notes?: string;
 }
