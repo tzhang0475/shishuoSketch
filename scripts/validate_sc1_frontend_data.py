@@ -46,6 +46,81 @@ def canonical_main(path: Path) -> str:
     raise ValueError(f"canonical entry has no main text: {path}")
 
 
+def collect_sc1_source_provenance(bundle: dict[str, Any]) -> dict[tuple[str, str, str], dict[str, Any]]:
+    """Collect each distinct upstream source identity used by SC1 Evidence.
+
+    SC1 publishes a small bundle, but its source references are shared across
+    many Evidence records.  Validating this set explicitly makes portable
+    lock coverage a corpus-expansion invariant rather than an accidental
+    consequence of the current number of records.
+    """
+    references: dict[tuple[str, str, str], dict[str, Any]] = {}
+    for evidence in bundle.get("evidence", []):
+        if not isinstance(evidence, dict):
+            continue
+        provenance = evidence.get("locator", {}).get("source_provenance")
+        if not isinstance(provenance, dict):
+            continue
+        witness_id = provenance.get("witness_id")
+        source_path = provenance.get("source_path")
+        source_sha256 = provenance.get("source_sha256")
+        if not all(isinstance(value, str) and value for value in (witness_id, source_path, source_sha256)):
+            continue
+        key = (witness_id, source_path, source_sha256)
+        reference = references.setdefault(
+            key,
+            {"provenance": dict(provenance), "evidence_ids": [], "source_ids": []},
+        )
+        reference["evidence_ids"].append(evidence.get("id"))
+        reference["source_ids"].append(evidence.get("source_id"))
+    return references
+
+
+def validate_sc1_source_provenance_coverage(
+    root: Path,
+    bundle: dict[str, Any],
+    *,
+    mode: str,
+) -> list[str]:
+    """Require every unique SC1 upstream source reference to pass provenance validation."""
+    errors: list[str] = []
+    source_by_id = {
+        item.get("id"): item
+        for item in bundle.get("sources", [])
+        if isinstance(item, dict)
+    }
+    for (witness_id, source_path, source_sha256), reference in sorted(
+        collect_sc1_source_provenance(bundle).items()
+    ):
+        provenance = reference["provenance"]
+        evidence_ids = ", ".join(str(item) for item in reference["evidence_ids"])
+        source_ids: list[Any] = []
+        for source_id in reference["source_ids"]:
+            if source_id not in source_ids:
+                source_ids.append(source_id)
+        for source_id in sorted(source_ids, key=lambda item: str(item)):
+            source = source_by_id.get(source_id)
+            if isinstance(source, dict) and provenance.get("witness_id") != source.get("witness_id"):
+                errors.append(
+                    "SC1 source provenance witness does not match source record: "
+                    f"{witness_id!r} != {source.get('witness_id')!r} "
+                    f"(source: {source_id!r}; Evidence: {evidence_ids})"
+                )
+        errors.extend(
+            validate_source_provenance(
+                root,
+                provenance,
+                label=(
+                    "SC1 source_provenance coverage "
+                    f"{witness_id}:{source_path}:{source_sha256[:12]} "
+                    f"(Evidence: {evidence_ids})"
+                ),
+                mode=mode,
+            )
+        )
+    return errors
+
+
 def validate(root: Path = ROOT, mode: str = "full") -> list[str]:
     root = root.resolve()
     errors: list[str] = []
@@ -91,6 +166,8 @@ def validate(root: Path = ROOT, mode: str = "full") -> list[str]:
     evidence_by_id = {item.get("id"): item for item in bundle.get("evidence", [])}
     converter = OpenCC("t2s")
 
+    errors.extend(validate_sc1_source_provenance_coverage(root, bundle, mode=mode))
+
     for evidence_id, evidence in evidence_by_id.items():
         locator = evidence.get("locator", {})
         artifact_path = locator.get("artifact_path")
@@ -102,17 +179,6 @@ def validate(root: Path = ROOT, mode: str = "full") -> list[str]:
             errors.append(f"SC1 Evidence {evidence_id} artifact is missing: {artifact_path}")
         elif locator.get("artifact_sha256") != sha256_file(artifact):
             errors.append(f"SC1 Evidence {evidence_id} artifact hash mismatch")
-        provenance = locator.get("source_provenance")
-        if isinstance(provenance, dict):
-            errors.extend(
-                validate_source_provenance(
-                    root,
-                    provenance,
-                    label=f"SC1 Evidence {evidence_id} source_provenance",
-                    mode=mode,
-                )
-            )
-
     for selection in selected:
         entry_id = selection.get("entry_id")
         story = story_by_id.get(entry_id)

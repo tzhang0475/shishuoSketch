@@ -1,10 +1,18 @@
 from __future__ import annotations
 
+from copy import deepcopy
 import json
 from pathlib import Path
+import shutil
+import tempfile
 import unittest
 
-from scripts.validate_sc1_frontend_data import validate
+from scripts.validate_sc1_frontend_data import (
+    collect_sc1_source_provenance,
+    validate,
+    validate_sc1_source_provenance_coverage,
+)
+from scripts.validate_wp1 import _trusted_source_records
 from tests.support import repository_validation_mode
 
 
@@ -23,6 +31,103 @@ class SC1StoryChainTests(unittest.TestCase):
         expected = [item["entry_id"] for item in self.gold["records"]]
         self.assertEqual(self.bundle["story_chain"]["story_ids"], expected)
         self.assertEqual([item["id"] for item in self.bundle["stories"]], expected)
+
+    def test_every_sc1_source_path_has_trusted_portable_coverage(self) -> None:
+        references = collect_sc1_source_provenance(self.bundle)
+        self.assertTrue(references)
+        self.assertEqual(
+            validate_sc1_source_provenance_coverage(ROOT, self.bundle, mode="portable"),
+            [],
+        )
+        lock_errors: list[str] = []
+        trusted = _trusted_source_records(ROOT, lock_errors)
+        self.assertEqual(lock_errors, [])
+        for witness_id, source_path, source_sha256 in references:
+            matches = trusted.get(source_path, [])
+            self.assertTrue(
+                any(
+                    item.get("witness_id") == witness_id
+                    and item.get("source_sha256") == source_sha256
+                    for item in matches
+                ),
+                source_path,
+            )
+
+    def _kanripo_source_bundle(self) -> tuple[dict[str, object], dict[str, object]]:
+        evidence = next(
+            item
+            for item in self.bundle["evidence"]
+            if item["locator"].get("source_provenance", {}).get("source_path", "").endswith("KR3l0002_001.txt")
+        )
+        provenance = deepcopy(evidence["locator"]["source_provenance"])
+        bundle = {
+            "sources": [{"id": evidence["source_id"], "witness_id": provenance["witness_id"]}],
+            "evidence": [{
+                "id": evidence["id"],
+                "source_id": evidence["source_id"],
+                "locator": {"source_provenance": provenance},
+            }],
+        }
+        return bundle, provenance
+
+    def _portable_lock_root(self) -> tuple[tempfile.TemporaryDirectory, Path]:
+        temporary = tempfile.TemporaryDirectory()
+        root = Path(temporary.name)
+        registry = root / "sources/registry"
+        registry.mkdir(parents=True)
+        shutil.copy2(
+            ROOT / "sources/registry/shishuo-provenance.lock.json",
+            registry / "shishuo-provenance.lock.json",
+        )
+        shutil.copy2(ROOT / "sources/registry/shishuo.yaml", registry / "shishuo.yaml")
+        return temporary, root
+
+    def test_portable_sc1_accepts_missing_ignored_kanripo_payload_from_lock(self) -> None:
+        bundle, _provenance = self._kanripo_source_bundle()
+        temporary, root = self._portable_lock_root()
+        try:
+            self.assertEqual(validate_sc1_source_provenance_coverage(root, bundle, mode="portable"), [])
+        finally:
+            temporary.cleanup()
+
+    def test_sc1_source_provenance_rejects_missing_lock_path(self) -> None:
+        bundle, provenance = self._kanripo_source_bundle()
+        provenance["source_path"] = "shishuoSources/shishuo/unknown.txt"
+        temporary, root = self._portable_lock_root()
+        try:
+            errors = validate_sc1_source_provenance_coverage(root, bundle, mode="portable")
+            self.assertTrue(any("no committed trusted provenance record" in error for error in errors))
+        finally:
+            temporary.cleanup()
+
+    def test_sc1_source_provenance_rejects_wrong_hash(self) -> None:
+        bundle, provenance = self._kanripo_source_bundle()
+        provenance["source_sha256"] = "0" * 64
+        temporary, root = self._portable_lock_root()
+        try:
+            errors = validate_sc1_source_provenance_coverage(root, bundle, mode="portable")
+            self.assertTrue(any("source_sha256 does not match committed trusted metadata" in error for error in errors))
+        finally:
+            temporary.cleanup()
+
+    def test_sc1_source_provenance_rejects_wrong_witness(self) -> None:
+        bundle, provenance = self._kanripo_source_bundle()
+        provenance["witness_id"] = "wrong-witness"
+        temporary, root = self._portable_lock_root()
+        try:
+            errors = validate_sc1_source_provenance_coverage(root, bundle, mode="portable")
+            self.assertTrue(any("witness_id" in error for error in errors))
+        finally:
+            temporary.cleanup()
+
+    def test_sc1_full_mode_requires_physical_source_payload(self) -> None:
+        bundle, _provenance = self._kanripo_source_bundle()
+        temporary, root = self._portable_lock_root()
+        try:
+            errors = validate_sc1_source_provenance_coverage(root, bundle, mode="full")
+            self.assertTrue(any("source_path: file does not exist" in error for error in errors))
+        finally:
+            temporary.cleanup()
 
     def test_publication_state_does_not_change_editorial_punctuation_status(self) -> None:
         stories = {item["id"]: item for item in self.bundle["stories"]}
