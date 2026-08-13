@@ -30,6 +30,7 @@ try:
     )
     from .reading_layers import build_display_reading, strip_display_punctuation
     from .person_sketch import build_person_sketches
+    from .story_scene_contexts import DERIVED_PATH as SCENE_DERIVED_PATH, SOURCE_PATH as SCENE_SOURCE_PATH, project as project_scene_contexts, validate_source as validate_scene_source
 except ImportError:  # direct execution
     from build_six_person_pilot import (
         parse_frontmatter,
@@ -42,6 +43,7 @@ except ImportError:  # direct execution
     )
     from reading_layers import build_display_reading, strip_display_punctuation
     from person_sketch import build_person_sketches
+    from story_scene_contexts import DERIVED_PATH as SCENE_DERIVED_PATH, SOURCE_PATH as SCENE_SOURCE_PATH, project as project_scene_contexts, validate_source as validate_scene_source
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -277,6 +279,15 @@ def build_ui_labels(converter: OpenCC) -> dict[str, Any]:
         "read_story": "閱讀",
         "reviewed_punctuation": "句讀：已復核",
         "preview_punctuation": "句讀：參考底本整理 · 待復核",
+        "random_story": "隨便讀一則",
+        "random_person": "隨便認識一個人",
+        "scene_heading": "場景",
+        "scene_people_heading": "這一幕裡",
+        "scene_position_heading": "這一幕中的位置",
+        "scene_background_heading": "背景",
+        "scene_evidence_heading": "查看依據",
+        "scene_unknown": "未詳",
+        "scene_not_materialized": "來源人物尚未進入人物層",
     }
     return {key: pair(value, converter) for key, value in labels.items()}
 
@@ -629,6 +640,27 @@ def build(root: Path = ROOT) -> dict[str, Any]:
         converter=converter,
     )
 
+    scene_source = read_json(ROOT / SCENE_SOURCE_PATH)
+    scene_schema_errors = validate_scene_source(ROOT)
+    if scene_schema_errors:
+        raise ValueError("Story Scene Context schema validation failed: " + "; ".join(scene_schema_errors))
+    scene_contexts = project_scene_contexts(
+        scene_source,
+        story_ids={story["id"] for story in new_stories if story["publication_state"] != "blocked"},
+        people=frontend_people,
+        evidence_ids=set(new_evidence),
+        converter=converter,
+    )
+    write_json(
+        ROOT / SCENE_DERIVED_PATH,
+        {
+            "schema": 1,
+            "stage": "story-scene-context-pilot-derived",
+            "generated_from": [str(SCENE_SOURCE_PATH), "data/derived/sc1-site.json"],
+            "contexts": scene_contexts,
+        },
+    )
+
     bundle = {
         "schema": 1,
         "generated_from": "scripts/build_sc1_frontend_data.py",
@@ -640,6 +672,7 @@ def build(root: Path = ROOT) -> dict[str, Any]:
         "evidence": sorted(new_evidence.values(), key=lambda item: item["id"]),
         "sources": base["sources"],
         "person_sketches": person_sketches,
+        "scene_contexts": scene_contexts,
         "story_chain": {
             "schema": 1,
             "stage": "sc1-story-chain-frontend",

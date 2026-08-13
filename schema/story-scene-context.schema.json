@@ -1,0 +1,133 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://shishuo-sketch/schema/story-scene-context.schema.json",
+  "title": "Story Scene Context pilot",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "stage", "records"],
+  "properties": {
+    "schema": {"const": 1},
+    "stage": {"const": "story-scene-context-pilot"},
+    "records": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {"$ref": "#/$defs/record"}
+    }
+  },
+  "$defs": {
+    "review_status": {"enum": ["candidate", "reviewed", "rejected", "todo"]},
+    "assertion_status": {"enum": ["attested", "reported", "inferred", "unknown"]},
+    "evidence_ids": {
+      "type": "array",
+      "items": {"type": "string", "minLength": 1},
+      "uniqueItems": true
+    },
+    "date_or_age": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "label", "start_year", "end_year", "assertion_status", "review_status", "evidence_ids"],
+      "properties": {
+        "status": {"enum": ["exact", "range", "approximate", "unknown"]},
+        "label": {"type": ["string", "null"]},
+        "start_year": {"type": ["integer", "null"]},
+        "end_year": {"type": ["integer", "null"]},
+        "assertion_status": {"$ref": "#/$defs/assertion_status"},
+        "review_status": {"$ref": "#/$defs/review_status"},
+        "evidence_ids": {"$ref": "#/$defs/evidence_ids"}
+      }
+    },
+    "claim": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["text", "assertion_status", "review_status", "evidence_ids"],
+      "properties": {
+        "text": {"type": "string", "minLength": 1},
+        "assertion_status": {"$ref": "#/$defs/assertion_status"},
+        "review_status": {"$ref": "#/$defs/review_status"},
+        "evidence_ids": {"$ref": "#/$defs/evidence_ids"}
+      }
+    },
+    "place": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "assertion_status", "review_status", "evidence_ids"],
+      "properties": {
+        "name": {"type": "string", "minLength": 1},
+        "assertion_status": {"$ref": "#/$defs/assertion_status"},
+        "review_status": {"$ref": "#/$defs/review_status"},
+        "evidence_ids": {"$ref": "#/$defs/evidence_ids"}
+      }
+    },
+    "person": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["person_id", "surface", "scene_role", "source_layers", "age", "status", "assertion_status", "review_status", "evidence_ids"],
+      "properties": {
+        "person_id": {"type": "string", "minLength": 1},
+        "surface": {"type": "string", "minLength": 1},
+        "scene_role": {"enum": ["present", "discussed", "referenced_in_context", "unknown"]},
+        "source_layers": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {"enum": ["main_text", "liu_annotation"]}
+        },
+        "age": {"$ref": "#/$defs/date_or_age"},
+        "status": {"anyOf": [{"$ref": "#/$defs/claim"}, {"type": "null"}]},
+        "assertion_status": {"$ref": "#/$defs/assertion_status"},
+        "review_status": {"$ref": "#/$defs/review_status"},
+        "evidence_ids": {"$ref": "#/$defs/evidence_ids"}
+      }
+    },
+    "unmaterialized_person": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["surface", "scene_role", "source_layers", "reason", "assertion_status", "review_status", "evidence_ids"],
+      "properties": {
+        "surface": {"type": "string", "minLength": 1},
+        "scene_role": {"enum": ["present", "discussed", "referenced_in_context", "unknown"]},
+        "source_layers": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {"enum": ["main_text", "liu_annotation"]}
+        },
+        "reason": {"type": "string", "minLength": 1},
+        "assertion_status": {"$ref": "#/$defs/assertion_status"},
+        "review_status": {"$ref": "#/$defs/review_status"},
+        "evidence_ids": {"$ref": "#/$defs/evidence_ids"}
+      }
+    },
+    "position": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["person_ids", "classification", "text", "assertion_status", "review_status", "evidence_ids"],
+      "properties": {
+        "person_ids": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+        "classification": {"enum": ["formal_hierarchy", "service_under", "court_relation", "peer", "same_office_context", "political_counterposition", "no_formal_hierarchy_established", "unknown"]},
+        "text": {"type": "string", "minLength": 1},
+        "assertion_status": {"$ref": "#/$defs/assertion_status"},
+        "review_status": {"$ref": "#/$defs/review_status"},
+        "evidence_ids": {"$ref": "#/$defs/evidence_ids"}
+      }
+    },
+    "record": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["story_id", "review_status", "date", "places", "people_at_scene", "unmaterialized_people", "positional_context", "event_background", "evidence_ids"],
+      "properties": {
+        "story_id": {"type": "string", "minLength": 1},
+        "review_status": {"$ref": "#/$defs/review_status"},
+        "date": {"$ref": "#/$defs/date_or_age"},
+        "places": {"type": "array", "items": {"$ref": "#/$defs/place"}},
+        "people_at_scene": {"type": "array", "items": {"$ref": "#/$defs/person"}},
+        "unmaterialized_people": {"type": "array", "items": {"$ref": "#/$defs/unmaterialized_person"}},
+        "positional_context": {"type": "array", "items": {"$ref": "#/$defs/position"}},
+        "event_background": {"type": "array", "minItems": 1, "maxItems": 3, "items": {"$ref": "#/$defs/claim"}},
+        "evidence_ids": {"$ref": "#/$defs/evidence_ids"},
+        "notes": {"type": "array", "items": {"type": "string", "minLength": 1}}
+      }
+    }
+  }
+}

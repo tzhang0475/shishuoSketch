@@ -351,6 +351,86 @@ export interface ReadingUiLabels {
   read_story: ReadingPair;
   reviewed_punctuation: ReadingPair;
   preview_punctuation: ReadingPair;
+  random_story: ReadingPair;
+  random_person: ReadingPair;
+  scene_heading: ReadingPair;
+  scene_people_heading: ReadingPair;
+  scene_position_heading: ReadingPair;
+  scene_background_heading: ReadingPair;
+  scene_evidence_heading: ReadingPair;
+  scene_unknown: ReadingPair;
+  scene_not_materialized: ReadingPair;
+}
+
+export type SceneRole = "present" | "discussed" | "referenced_in_context" | "unknown";
+
+export interface SceneDateOrAge {
+  status: "exact" | "range" | "approximate" | "unknown";
+  label: ReadingPair | null;
+  start_year: number | null;
+  end_year: number | null;
+  assertion_status: AssertionStatus;
+  review_status: ReviewStatus;
+  evidence_ids: string[];
+}
+
+export interface SceneClaim {
+  text: ReadingPair;
+  assertion_status: AssertionStatus;
+  review_status: ReviewStatus;
+  evidence_ids: string[];
+}
+
+export interface StoryScenePerson {
+  person_id: string;
+  surface: ReadingPair;
+  scene_role: SceneRole;
+  scene_role_label: ReadingPair;
+  source_layers: Array<"main_text" | "liu_annotation">;
+  age: SceneDateOrAge;
+  status: SceneClaim | null;
+  assertion_status: AssertionStatus;
+  review_status: ReviewStatus;
+  evidence_ids: string[];
+}
+
+export interface StorySceneUnmaterializedPerson {
+  surface: ReadingPair;
+  scene_role: SceneRole;
+  scene_role_label: ReadingPair;
+  source_layers: Array<"main_text" | "liu_annotation">;
+  reason: ReadingPair;
+  assertion_status: AssertionStatus;
+  review_status: ReviewStatus;
+  evidence_ids: string[];
+}
+
+export interface StoryScenePosition {
+  person_ids: string[];
+  classification: string;
+  classification_label: ReadingPair;
+  text: ReadingPair;
+  assertion_status: AssertionStatus;
+  review_status: ReviewStatus;
+  evidence_ids: string[];
+}
+
+export interface StorySceneContext {
+  story_id: string;
+  review_status: ReviewStatus;
+  date: SceneDateOrAge;
+  places: Array<{
+    name: ReadingPair;
+    assertion_status: AssertionStatus;
+    review_status: ReviewStatus;
+    evidence_ids: string[];
+  }>;
+  people_at_scene: StoryScenePerson[];
+  unmaterialized_people: StorySceneUnmaterializedPerson[];
+  positional_context: StoryScenePosition[];
+  event_background: SceneClaim[];
+  evidence_ids: string[];
+  notes: ReadingPair[];
 }
 
 export interface SiteBundle {
@@ -364,6 +444,7 @@ export interface SiteBundle {
   evidence: Evidence[];
   sources: Source[];
   person_sketches: Record<string, PersonSketch>;
+  scene_contexts: Record<string, StorySceneContext>;
   story_chain?: StoryChainIndex;
   ui?: ReadingUiLabels;
 }

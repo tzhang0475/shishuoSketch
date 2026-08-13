@@ -117,6 +117,25 @@ Stories, and does not modify canonical text, punctuation, or raw witnesses.
 Future waves reuse the materialization path with a new frozen manifest; Wave 1
 selection is never recomputed from the post-materialization ranking.
 
+## P3B.1.1 Story Scene Context pilot
+
+`data/annotation/story-scene-contexts.json` is a small Story-owned candidate
+context layer. It describes a specific scene's supported date/place/person
+roles/status/background and does not redefine Person identity, PersonStory,
+Mention, or Relation. `scene_role: present` requires scene-specific Evidence;
+co-occurrence and PersonStory presence are not enough. Contextual position is
+not a historical Relation. Dates and ages use explicit exact/range/approximate/
+unknown states; age derivation never invents a single year. The deterministic
+SC1 projection is `scene_contexts`, keyed by existing Story IDs, and is shown
+by the central Story Scene Card only for the pilot Stories. New claims begin as
+`candidate` and retain Evidence IDs.
+
+The Person-first “随便认识一个人” entry uses only materialized Persons with a
+Person Sketch and a connection to a published Story in the generated SC1
+bundle. It uses the shared exploration stack and an injected random function in
+the pure helper for deterministic tests; it does not create a Person directory
+or a second focus state.
+
 ## Assertion status
 
 Every historical or interpretive assertion uses exactly one of:

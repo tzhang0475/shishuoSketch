@@ -125,6 +125,83 @@ function validatePersonSketches(
   }
 }
 
+function validateSceneContexts(
+  value: unknown,
+  stories: unknown[],
+  people: unknown[],
+  evidenceIds: Set<string>,
+): void {
+  if (!isRecord(value)) throw new Error("静态数据缺少 scene_contexts");
+  const storyIds = new Set(
+    stories.filter(isRecord).filter((story) => typeof story.id === "string").map((story) => String(story.id)),
+  );
+  const peopleIds = new Set(
+    people.filter(isRecord).filter((person) => typeof person.id === "string").map((person) => String(person.id)),
+  );
+  const checkEvidence = (owner: string, ids: unknown): void => {
+    if (!Array.isArray(ids) || ids.some((id) => typeof id !== "string" || !evidenceIds.has(id))) {
+      throw new Error(`${owner} 的 Scene Evidence 引用无效`);
+    }
+  };
+  const checkPair = (owner: string, valueToCheck: unknown): void => {
+    if (valueToCheck !== null && !isReadingPair(valueToCheck)) throw new Error(`${owner} 的 Scene display 不完整`);
+  };
+  const checkClaim = (owner: string, claim: unknown): void => {
+    if (!isRecord(claim)) throw new Error(`${owner} 的 Scene claim 不完整`);
+    checkPair(`${owner}.text`, claim.text);
+    checkEvidence(owner, claim.evidence_ids);
+  };
+  for (const [storyId, scene] of Object.entries(value)) {
+    if (!storyIds.has(storyId) || !isRecord(scene) || scene.story_id !== storyId) {
+      throw new Error(`Scene Context ${storyId} 的 Story 引用无效`);
+    }
+    if (scene.review_status !== "candidate" && scene.review_status !== "reviewed" && scene.review_status !== "rejected" && scene.review_status !== "todo") {
+      throw new Error(`Scene Context ${storyId} 的 review_status 无效`);
+    }
+    checkEvidence(`Scene Context ${storyId}`, scene.evidence_ids);
+    if (!isRecord(scene.date)) throw new Error(`Scene Context ${storyId} 缺少 date`);
+    checkPair(`Scene Context ${storyId}.date.label`, scene.date.label);
+    checkEvidence(`Scene Context ${storyId}.date`, scene.date.evidence_ids);
+    if (!Array.isArray(scene.places) || !Array.isArray(scene.people_at_scene) || !Array.isArray(scene.unmaterialized_people) || !Array.isArray(scene.positional_context) || !Array.isArray(scene.event_background)) {
+      throw new Error(`Scene Context ${storyId} 的分层数据不完整`);
+    }
+    for (const [index, place] of scene.places.entries()) {
+      if (!isRecord(place)) throw new Error(`Scene Context ${storyId} place ${index} 无效`);
+      checkPair(`Scene Context ${storyId}.place`, place.name);
+      checkEvidence(`Scene Context ${storyId}.place`, place.evidence_ids);
+    }
+    for (const [index, person] of scene.people_at_scene.entries()) {
+      if (!isRecord(person) || typeof person.person_id !== "string" || !peopleIds.has(person.person_id)) {
+        throw new Error(`Scene Context ${storyId} Person ${index} 无效`);
+      }
+      checkPair(`Scene Context ${storyId}.person.surface`, person.surface);
+      checkPair(`Scene Context ${storyId}.person.scene_role_label`, person.scene_role_label);
+      checkEvidence(`Scene Context ${storyId}.person`, person.evidence_ids);
+      if (!isRecord(person.age)) throw new Error(`Scene Context ${storyId} Person age 不完整`);
+      checkPair(`Scene Context ${storyId}.person.age.label`, person.age.label);
+      checkEvidence(`Scene Context ${storyId}.person.age`, person.age.evidence_ids);
+      if (person.status !== null) checkClaim(`Scene Context ${storyId}.person.status`, person.status);
+    }
+    for (const [index, person] of scene.unmaterialized_people.entries()) {
+      if (!isRecord(person)) throw new Error(`Scene Context ${storyId} unmaterialized Person ${index} 无效`);
+      checkPair(`Scene Context ${storyId}.unmaterialized.surface`, person.surface);
+      checkPair(`Scene Context ${storyId}.unmaterialized.reason`, person.reason);
+      checkEvidence(`Scene Context ${storyId}.unmaterialized`, person.evidence_ids);
+    }
+    for (const [index, position] of scene.positional_context.entries()) {
+      if (!isRecord(position) || !Array.isArray(position.person_ids) || position.person_ids.some((id) => typeof id !== "string" || !peopleIds.has(id))) {
+        throw new Error(`Scene Context ${storyId} positional context ${index} 无效`);
+      }
+      checkPair(`Scene Context ${storyId}.position.classification_label`, position.classification_label);
+      checkClaim(`Scene Context ${storyId}.position`, position);
+    }
+    for (const [index, claim] of scene.event_background.entries()) checkClaim(`Scene Context ${storyId}.background ${index}`, claim);
+    if (!Array.isArray(scene.notes) || scene.notes.some((note) => !isReadingPair(note))) {
+      throw new Error(`Scene Context ${storyId} notes 无效`);
+    }
+  }
+}
+
 function validateReadingSegments(
   segments: unknown,
   expectedOriginal: string,
@@ -310,6 +387,7 @@ export function parseSiteBundle(value: unknown): SiteBundle {
   }
   const peopleIds = new Set(arrays.people.map((item) => (item as Record<string, unknown>).id));
   validatePersonSketches(value.person_sketches, arrays.people, arrays.mentions, evidenceIds);
+  validateSceneContexts(value.scene_contexts, arrays.stories, arrays.people, evidenceIds);
   const mentionById = new Map(
     arrays.mentions
       .filter(isRecord)

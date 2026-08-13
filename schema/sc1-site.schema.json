@@ -4,7 +4,7 @@
   "title": "SC1 static frontend bundle",
   "type": "object",
   "additionalProperties": true,
-  "required": ["schema", "generated_from", "stories", "people", "mentions", "relations", "eras", "evidence", "sources", "person_sketches", "story_chain", "ui"],
+  "required": ["schema", "generated_from", "stories", "people", "mentions", "relations", "eras", "evidence", "sources", "person_sketches", "scene_contexts", "story_chain", "ui"],
   "properties": {
     "schema": {"const": 1},
     "generated_from": {"const": "scripts/build_sc1_frontend_data.py"},
@@ -97,6 +97,10 @@
       "type": "object",
       "minProperties": 7,
       "additionalProperties": {"$ref": "#/$defs/personSketch"}
+    },
+    "scene_contexts": {
+      "type": "object",
+      "additionalProperties": {"type": "object", "required": ["story_id", "review_status", "date", "places", "people_at_scene", "unmaterialized_people", "positional_context", "event_background", "evidence_ids", "notes"]}
     },
     "story_chain": {
       "type": "object",

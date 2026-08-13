@@ -59,6 +59,34 @@ export function randomPublishedStoryId(
   return ids[Math.floor(value * ids.length)] ?? ids[0];
 }
 
+export function eligiblePersonIds(data: SiteBundle): string[] {
+  const publishedStories = data.stories.filter(
+    (story) => story.publication_state === "production_ready" || story.publication_state === "preview_ready",
+  );
+  const publishedPersonIds = new Set(
+    publishedStories.flatMap((story) => story.person_ids),
+  );
+  return data.people
+    .filter(
+      (person) =>
+        Boolean(data.person_sketches[person.id]) &&
+        publishedPersonIds.has(person.id),
+    )
+    .map((person) => person.id);
+}
+
+export function randomEligiblePersonId(
+  data: SiteBundle,
+  random: () => number = Math.random,
+  excludeId?: string,
+): string | null {
+  const allIds = eligiblePersonIds(data);
+  const ids = allIds.length > 1 && excludeId ? allIds.filter((id) => id !== excludeId) : allIds;
+  if (ids.length === 0) return null;
+  const value = Math.min(Math.max(random(), 0), 0.999999999);
+  return ids[Math.floor(value * ids.length)] ?? ids[0];
+}
+
 export function storyIdFromHash(hash: string): string | null {
   const match = hash.match(/^#story=([^&]+)$/u);
   if (!match) return null;

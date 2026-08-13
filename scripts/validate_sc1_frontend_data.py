@@ -17,11 +17,13 @@ try:
     from .reading_layers import display_span_for_anchor, strip_display_punctuation
     from .validate_person_sketch import validate_bundle as validate_person_sketch_bundle
     from .validate_wp1 import validate_source_provenance
+    from .story_scene_contexts import DERIVED_PATH as SCENE_DERIVED_PATH, SOURCE_PATH as SCENE_SOURCE_PATH, project as project_scene_contexts, validate_source as validate_scene_source
 except ImportError:  # direct execution
     from build_six_person_pilot import parse_shishuo_sections
     from reading_layers import display_span_for_anchor, strip_display_punctuation
     from validate_person_sketch import validate_bundle as validate_person_sketch_bundle
     from validate_wp1 import validate_source_provenance
+    from story_scene_contexts import DERIVED_PATH as SCENE_DERIVED_PATH, SOURCE_PATH as SCENE_SOURCE_PATH, project as project_scene_contexts, validate_source as validate_scene_source
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -363,6 +365,27 @@ def validate(root: Path = ROOT, mode: str = "full") -> list[str]:
 
     errors.extend(validate_sc1_source_provenance_coverage(root, bundle, mode=mode))
     errors.extend(validate_person_sketch_bundle(root))
+    errors.extend(f"Scene Context schema: {error}" for error in validate_scene_source(root))
+    try:
+        scene_source = read_json(root / SCENE_SOURCE_PATH)
+        expected_scene_contexts = project_scene_contexts(
+            scene_source,
+            story_ids={
+                str(story.get("id"))
+                for story in stories
+                if isinstance(story, dict) and story.get("publication_state") != "blocked"
+            },
+            people=bundle.get("people", []),
+            evidence_ids=set(evidence_by_id),
+            converter=converter,
+        )
+        if bundle.get("scene_contexts") != expected_scene_contexts:
+            errors.append("SC1 scene_contexts is not the deterministic projection of curated data")
+        derived_scene = read_json(root / SCENE_DERIVED_PATH)
+        if derived_scene.get("contexts") != expected_scene_contexts:
+            errors.append("derived Story Scene Context projection differs from SC1")
+    except (OSError, ValueError, KeyError, TypeError) as exc:
+        errors.append(f"SC1 Scene Context projection cannot be validated: {exc}")
     chain_story_by_id = {item.get("entry_id"): item for item in chain.get("stories", [])}
 
     for evidence_id, evidence in evidence_by_id.items():

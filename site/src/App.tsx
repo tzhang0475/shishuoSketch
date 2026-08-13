@@ -8,6 +8,7 @@ import {
   appendExploration,
   backExploration,
   currentStoryFromExploration,
+  randomEligiblePersonId,
   randomPublishedStoryId,
   storyIdFromHash,
   truncateExploration,
@@ -27,6 +28,7 @@ import type {
   Relation,
   SiteBundle,
   Story,
+  StorySceneContext,
 } from "./types";
 
 const FALLBACK_STORY_ID = "06-yaliang-019";
@@ -997,6 +999,118 @@ function EvidenceDetails({
   );
 }
 
+function SceneCard({
+  story,
+  data,
+  readingMode,
+  onFocus,
+}: {
+  story: Story;
+  data: SiteBundle;
+  readingMode: ReadingMode;
+  onFocus: PersonFocus;
+}) {
+  const scene: StorySceneContext | undefined = data.scene_contexts[story.id];
+  if (!scene) return null;
+
+  const evidence = scene.evidence_ids
+    .map((id) => data.evidence.find((item) => item.id === id))
+    .filter((item): item is Evidence => Boolean(item));
+  const dateLabel = readingValue(
+    scene.date.label ?? undefined,
+    readingMode,
+    uiLabel(data, "scene_unknown", readingMode, "时间未详"),
+  );
+  const placeLabel = scene.places.map((place) => readingValue(place.name, readingMode, "")).filter(Boolean).join(" · ");
+
+  return (
+    <section className="scene-card" aria-labelledby={`scene-heading-${story.id}`}>
+      <div className="scene-card-header">
+        <div>
+          <p className="section-label">{uiLabel(data, "scene_heading", readingMode, "场景")}</p>
+          <h2 id={`scene-heading-${story.id}`}>{uiLabel(data, "scene_heading", readingMode, "场景")}</h2>
+        </div>
+        {scene.review_status === "candidate" && <span className="scene-review-status">{uiLabel(data, "person_sketch_candidate", readingMode, "资料整理预览")}</span>}
+      </div>
+      <p className="scene-date-place">
+        {dateLabel}
+        {placeLabel && <> · {placeLabel}</>}
+      </p>
+
+      <div className="scene-people" aria-labelledby={`scene-people-heading-${story.id}`}>
+        <p className="scene-card-label" id={`scene-people-heading-${story.id}`}>{uiLabel(data, "scene_people_heading", readingMode, "这一幕里")}</p>
+        <div className="scene-person-list">
+          {scene.people_at_scene.map((person) => {
+            const resolved = data.people.find((candidate) => candidate.id === person.person_id);
+            const name = resolved ? personDisplayName(story, resolved, readingMode) : readingValue(person.surface, readingMode, person.person_id);
+            return (
+              <article className="scene-person-row" key={person.person_id}>
+                <div className="scene-person-heading">
+                  <button type="button" className="scene-person-link" onClick={() => onFocus(person.person_id)}>
+                    {name}
+                  </button>
+                  <span className="scene-person-surface">（{readingValue(person.surface, readingMode, "")}）</span>
+                  <span className="scene-person-role">{readingValue(person.scene_role_label, readingMode, person.scene_role)}</span>
+                </div>
+                <div className="scene-person-details">
+                  <span>{readingValue(person.age.label ?? undefined, readingMode, uiLabel(data, "scene_unknown", readingMode, "年龄未详"))}</span>
+                  {person.status && <span>{readingValue(person.status.text, readingMode, "")}</span>}
+                </div>
+              </article>
+            );
+          })}
+        </div>
+        {scene.unmaterialized_people.length > 0 && (
+          <div className="scene-unmaterialized-people">
+            <p className="scene-card-label">{uiLabel(data, "scene_not_materialized", readingMode, "来源人物尚未进入人物层")}</p>
+            {scene.unmaterialized_people.map((person, index) => (
+              <p key={`${person.surface.original}-${index}`}>
+                {readingValue(person.surface, readingMode, "")} · {readingValue(person.scene_role_label, readingMode, person.scene_role)}
+              </p>
+            ))}
+          </div>
+        )}
+      </div>
+
+      {scene.positional_context.length > 0 && (
+        <div className="scene-context-group">
+          <p className="scene-card-label">{uiLabel(data, "scene_position_heading", readingMode, "这一幕中的位置")}</p>
+          {scene.positional_context.map((position, index) => (
+            <p className="scene-context-text" key={`${position.classification}-${index}`}>
+              <span className="scene-context-classification">{readingValue(position.classification_label, readingMode, position.classification)}</span>
+              {readingValue(position.text, readingMode, "")}
+            </p>
+          ))}
+        </div>
+      )}
+
+      <div className="scene-context-group">
+        <p className="scene-card-label">{uiLabel(data, "scene_background_heading", readingMode, "背景")}</p>
+        {scene.event_background.map((claim, index) => (
+          <p className="scene-context-text" key={`${claim.text.original}-${index}`}>
+            {readingValue(claim.text, readingMode, "")}
+          </p>
+        ))}
+      </div>
+
+      {evidence.length > 0 && (
+        <details className="scene-evidence">
+          <summary>{uiLabel(data, "scene_evidence_heading", readingMode, "查看依据")} ›</summary>
+          {evidence.map((item) => {
+            const source = story.reading.source_display[item.source_id];
+            return (
+              <article key={item.id}>
+                <p>{source ? `${source.work[readingMode]} · ${source.edition[readingMode]}` : item.source_id}</p>
+                <blockquote>{readingValue(story.reading.evidence_display[item.id], readingMode, item.quote)}</blockquote>
+              </article>
+            );
+          })}
+        </details>
+      )}
+    </section>
+  );
+}
+
 function nodeLabel(node: ExplorationNode, story: Story, data: SiteBundle, mode: ReadingMode): string {
   if (node.kind === "story") {
     return storyReference(storyById(data, node.id) ?? story, mode);
@@ -1186,6 +1300,8 @@ function StoryReader({
           </p>
         </section>
 
+        <SceneCard story={story} data={data} readingMode={readingMode} onFocus={onFocus} />
+
         <section className="annotation-hook" aria-label="进一步读">
           <p className="section-label">进一步读</p>
           <details className="annotation-index">
@@ -1264,6 +1380,7 @@ function ReadingPage({
   onStorySelect,
   onPathSelect,
   onClosePerson,
+  onRandomPerson,
   onRandomStory,
 }: {
   story: Story;
@@ -1279,6 +1396,7 @@ function ReadingPage({
   onStorySelect: (storyId: string) => void;
   onPathSelect: (index: number) => void;
   onClosePerson: () => void;
+  onRandomPerson: () => void;
   onRandomStory: () => void;
 }) {
   const backTarget = focusedPersonId && stack.length > 1 ? stack[stack.length - 2] ?? null : null;
@@ -1295,7 +1413,10 @@ function ReadingPage({
         </div>
         <div className="site-header-actions">
           <button type="button" className="random-story-button" onClick={onRandomStory}>
-            随便读一则
+            {uiLabel(data, "random_story", readingMode, "随便读一则")}
+          </button>
+          <button type="button" className="random-person-button" onClick={onRandomPerson}>
+            {uiLabel(data, "random_person", readingMode, "随便认识一个人")}
           </button>
           <span className="prototype-badge">SC1 Preview</span>
         </div>
@@ -1416,6 +1537,13 @@ function App() {
     writeStoryAddress(storyId);
   }
 
+  function chooseRandomPerson() {
+    if (!data) return;
+    const personId = randomEligiblePersonId(data, Math.random, currentFocusedPersonId ?? undefined);
+    if (!personId) return;
+    focusPerson(personId);
+  }
+
   if (error) {
     return (
       <main className="page-shell">
@@ -1450,6 +1578,7 @@ function App() {
       onStorySelect={selectStory}
       onPathSelect={selectPath}
       onClosePerson={() => setPersonPanelOpen(false)}
+      onRandomPerson={chooseRandomPerson}
       onRandomStory={chooseRandomStory}
     />
   );

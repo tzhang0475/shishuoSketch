@@ -2,6 +2,8 @@ from __future__ import annotations
 
 import json
 from pathlib import Path
+import shutil
+import subprocess
 import unittest
 
 
@@ -23,6 +25,50 @@ class SC11FrontendContractTests(unittest.TestCase):
         self.assertIn("randomPublishedStoryId", self.explorer)
         self.assertIn("initialStoryId", self.app)
         self.assertIn("writeStoryAddress", self.app)
+
+    def test_random_person_entry_uses_generated_eligible_data(self) -> None:
+        self.assertIn("randomEligiblePersonId", self.explorer)
+        self.assertIn("eligiblePersonIds", self.explorer)
+        self.assertIn("onRandomPerson", self.app)
+        self.assertIn("随便认识一个人", self.app)
+        self.assertNotIn('"wang-xizhi"', self.app)
+
+    def test_scene_card_is_story_owned_and_keeps_relations_separate(self) -> None:
+        self.assertIn("scene_contexts", self.bundle)
+        self.assertEqual(set(self.bundle["scene_contexts"]), {"02-yanyu-083", "05-fangzheng-023", "06-yaliang-029"})
+        self.assertIn("SceneCard", self.app)
+        self.assertIn("if (!scene) return null", self.app)
+        self.assertIn("onFocus(person.person_id)", self.app)
+
+    def test_random_person_helper_is_data_driven_and_avoids_immediate_repeat(self) -> None:
+        node = shutil.which("node")
+        if node is None:
+            self.skipTest("node is unavailable")
+        script = r'''
+import fs from "node:fs";
+import { eligiblePersonIds, randomEligiblePersonId } from "./site/src/relationExplorer.ts";
+const data = JSON.parse(fs.readFileSync("data/derived/sc1-site.json", "utf8"));
+const ids = eligiblePersonIds(data);
+const first = randomEligiblePersonId(data, () => 0);
+const second = randomEligiblePersonId(data, () => 0, first ?? undefined);
+console.log(JSON.stringify({
+  count: ids.length,
+  first,
+  second,
+  allNavigable: ids.every((id) => Boolean(data.person_sketches[id]) && data.stories.some((story) => story.person_ids.includes(id))),
+}));
+'''
+        result = subprocess.run(
+            [node, "--experimental-strip-types", "-e", script],
+            cwd=ROOT,
+            check=True,
+            capture_output=True,
+            text=True,
+        )
+        value = json.loads(result.stdout)
+        self.assertEqual(value["count"], 13)
+        self.assertTrue(value["allNavigable"])
+        self.assertNotEqual(value["first"], value["second"])
 
     def test_stack_path_and_back_operations_are_shared(self) -> None:
         for name in ("truncateExploration", "backExploration", "appendExploration"):

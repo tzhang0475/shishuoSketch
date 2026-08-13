@@ -27,6 +27,7 @@ The bundle contains these arrays:
   evidence: Evidence[],
   sources: Source[],
   person_sketches: Record<string, PersonSketch>,
+  scene_contexts: Record<string, StorySceneContext>,
   story_chain?: {
     story_ids: string[],
     person_story_refs: Array<{
@@ -45,6 +46,16 @@ The bundle contains these arrays:
   }
 }
 ```
+
+`scene_contexts` is a small Story-owned projection for the S1 pilot. It is
+keyed only by published Story IDs selected in
+`data/annotation/story-scene-contexts.json`. Its date, place, scene-role,
+status, positional-context, and background claims retain assertion/review
+status and Evidence IDs. It does not create PersonStory or Relation facts;
+`present` is a scene-specific candidate classification, not a conclusion from
+Mention or co-occurrence. The central Story reader renders a card only when a
+record exists, and its materialized Person controls reuse the existing
+exploration stack.
 
 The WP1 sample bundle is generated from the canonical Shishuo entry, the six
 primary people, and any explicitly marked supporting R1 bridge records by
@@ -281,6 +292,13 @@ Reviewed `derived` relations are excluded from the primary map and appear in a
 separate expandable path that resolves `derived_from_relation_ids`. Neighbor
 navigation updates the focused Person in place and keeps a small panel history.
 The explorer reads no source corpus, research Markdown, or runtime API.
+
+The header's `随便认识一个人` action uses the same bundle-derived eligibility
+set as the pure `randomEligiblePersonId` helper: a materialized Person must
+have a Person Sketch and occur in at least one currently published Story in
+the bundle. The helper accepts an injected RNG and excludes the current Person
+when possible, so random entry is testable without adding a directory or a
+second focus state.
 
 ## CRL1 corpus reading layer
 
