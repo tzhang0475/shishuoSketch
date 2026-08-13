@@ -1,0 +1,93 @@
+{
+  "schema": 1,
+  "stage": "p3a-person-expansion-ranking",
+  "generated_from": [
+    "data/people.json",
+    "data/aliases.json",
+    "data/mentions/shishuo.json",
+    "data/mentions/jinshu.json",
+    "data/shishuo-corpus-index.json",
+    "data/annotation/wp1-relations.json",
+    "data/derived/person-story-index.json",
+    "data/story-chain-gold-set.json",
+    "data/annotation/person-sketches.json",
+    "data/derived/sc1-site.json"
+  ],
+  "candidate_identity_policy": {
+    "eligible_identity_source": "existing non-scoped person_id in structured Mention, Alias, or Relation data",
+    "stable_name_requirement": "at least one personal/courtesy/surname-plus-courtesy/orthographic alias or exact named surface",
+    "unresolved_surfaces": "reported separately and never ranked as Persons",
+    "scoped_person_ids_excluded": [
+      "person-007",
+      "wang-dao",
+      "wang-ningzhi",
+      "wang-xizhi",
+      "xi-jian",
+      "xie-an",
+      "xie-daoyun"
+    ]
+  },
+  "input_counts": {
+    "scoped_person_count": 7,
+    "shishuo_mention_count": 419,
+    "jinshu_mention_count": 711,
+    "canonical_story_count": 1130,
+    "current_sc1_story_count": 16,
+    "current_person_story_link_count": 86,
+    "sc0_gold_story_count": 16,
+    "person_sketch_record_count": 7,
+    "eligible_identity_seed_count": 0
+  },
+  "weights": {
+    "current_story_coverage": 0.22,
+    "story_unlock_potential": 0.22,
+    "current_network_connectivity": 0.16,
+    "corpus_story_coverage": 0.12,
+    "identity_evidence_quality": 0.12,
+    "clan_bridge_value": 0.06,
+    "naming_richness": 0.05,
+    "source_depth": 0.05,
+    "ambiguity_risk": 0.15
+  },
+  "normalization": {
+    "method": "bounded_linear_max_of_eligible_candidates",
+    "count_components": {
+      "current_story_coverage": 1.0,
+      "story_unlock_potential": 1.0,
+      "current_network_connectivity": 1.0,
+      "corpus_story_coverage": 1.0,
+      "clan_bridge_value": 1.0,
+      "naming_richness": 1.0,
+      "source_depth": 1.0
+    },
+    "identity_evidence_quality": {
+      "formula": "0.30 stable_name_anchor + 0.25 exact_alias/3 + 0.20 high_confidence_mentions/5 + 0.15 source_families/2 + 0.10 source_evidence/4",
+      "bounds": "each signal is capped at 1.0"
+    },
+    "ambiguity_risk": {
+      "formula": "0.25 no_exact_alias + 0.25 ambiguous_surface_ratio + 0.20 non_high_confidence_ratio + 0.15 no_structured_evidence + 0.15 no_stable_name_anchor",
+      "bounds": "each signal is capped at 1.0"
+    }
+  },
+  "candidate_count": 0,
+  "distribution": {
+    "tier_a_count": 0,
+    "tier_b_count": 0,
+    "tier_c_count": 0,
+    "deferred_count": 0,
+    "candidates_in_current_sc1": 0,
+    "median_corpus_story_coverage": 0.0,
+    "max_corpus_story_coverage": 0,
+    "strong_identity_evidence_count": 0
+  },
+  "candidates": [],
+  "current_live_story_gaps": [],
+  "unresolved_surface_count": 9,
+  "unresolved_surface_artifact": "data/derived/person-expansion-unresolved-surfaces.json",
+  "notes": [
+    "Current Story coverage and unlock potential use resolved Shishuo Person IDs only.",
+    "Shared Story appearances are navigation opportunities, not Relation records.",
+    "Only reviewed direct Relation records contribute to direct relation metrics; derived Relations are excluded.",
+    "This artifact does not materialize Persons or alter any canonical identity, Mention, Relation, or publication data."
+  ]
+}

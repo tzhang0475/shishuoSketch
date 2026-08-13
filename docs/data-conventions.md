@@ -236,3 +236,30 @@ the existing punctuation review workflow approves them.
 their existing Person IDs for a future reading surface, while
 `data/derived/story-chain-connectivity.json` is the reproducible selection
 audit. Neither artifact creates relation edges or participation claims.
+
+## P3A Person expansion candidates
+
+`data/derived/person-expansion-candidates.json` is a deterministic analysis
+artifact for deciding which non-scoped historical identities might be useful
+to materialize in a later expansion phase. It reads existing resolved
+Mention, Alias, Relation, PersonStory/SC1, and source-evidence data; it does
+not create Person records, Relations, PersonStory links, or publication
+records.
+
+Only an existing non-scoped `person_id` supported by structured project data
+can enter the ranked identity universe. Unresolved surfaces such as generic
+titles remain in the separate
+`data/derived/person-expansion-unresolved-surfaces.json` audit and are never
+ranked as Persons by frequency or co-occurrence.
+
+The ranking stores raw metrics and normalized components. Current Story
+coverage and Story-unlock potential use resolved Shishuo mentions; main-text
+presence has greater weight than Liu-annotation-only presence. Shared Story
+appearance is a navigation opportunity, not a historical Relation. Direct
+connectivity counts only reviewed direct Relation records; derived Relations
+and co-occurrence are kept separate.
+
+The score uses explicit bounded linear normalization and fixed weights in the
+generated artifact. Candidate keys have the form `candidate:<existing-id>` so
+they remain analysis keys rather than prematurely becoming canonical Person
+IDs. P3A does not expand the frontend or mutate canonical/research data.

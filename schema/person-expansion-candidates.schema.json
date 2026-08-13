@@ -1,0 +1,105 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://shishuo-sketch/schema/person-expansion-candidates.schema.json",
+  "title": "P3A Person Expansion Candidate Ranking",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "stage",
+    "generated_from",
+    "candidate_identity_policy",
+    "input_counts",
+    "weights",
+    "normalization",
+    "candidate_count",
+    "distribution",
+    "candidates",
+    "current_live_story_gaps",
+    "unresolved_surface_count",
+    "unresolved_surface_artifact",
+    "notes"
+  ],
+  "properties": {
+    "schema": {"const": 1},
+    "stage": {"const": "p3a-person-expansion-ranking"},
+    "generated_from": {"type": "array", "items": {"type": "string"}, "minItems": 1},
+    "candidate_identity_policy": {"type": "object"},
+    "input_counts": {"type": "object"},
+    "weights": {
+      "type": "object",
+      "required": [
+        "current_story_coverage",
+        "story_unlock_potential",
+        "current_network_connectivity",
+        "corpus_story_coverage",
+        "identity_evidence_quality",
+        "clan_bridge_value",
+        "naming_richness",
+        "source_depth",
+        "ambiguity_risk"
+      ],
+      "additionalProperties": {"type": "number", "minimum": 0}
+    },
+    "normalization": {"type": "object"},
+    "candidate_count": {"type": "integer", "minimum": 0},
+    "distribution": {"type": "object"},
+    "candidates": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "rank",
+          "person_key",
+          "source_person_id",
+          "canonical_name",
+          "score",
+          "tier",
+          "components",
+          "metrics",
+          "evidence_summary",
+          "top_current_story_ids",
+          "top_unlock_story_ids",
+          "connected_current_person_ids",
+          "risk_flags",
+          "direct_relation_ids"
+        ],
+        "properties": {
+          "rank": {"type": "integer", "minimum": 1},
+          "person_key": {"type": "string", "pattern": "^candidate:.+$"},
+          "source_person_id": {"type": "string", "minLength": 1},
+          "canonical_name": {"type": "string", "minLength": 1},
+          "score": {"type": "number", "minimum": 0, "maximum": 100},
+          "tier": {"enum": ["A", "B", "C", "deferred"]},
+          "components": {
+            "type": "object",
+            "additionalProperties": {"type": "number", "minimum": 0, "maximum": 1}
+          },
+          "metrics": {"type": "object"},
+          "evidence_summary": {"type": "object"},
+          "top_current_story_ids": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+          "top_unlock_story_ids": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+          "connected_current_person_ids": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+          "risk_flags": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+          "direct_relation_ids": {"type": "array", "items": {"type": "string"}, "uniqueItems": true}
+        }
+      }
+    },
+    "current_live_story_gaps": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["story_id", "unscoped_resolved_candidate_person_ids"],
+        "properties": {
+          "story_id": {"type": "string"},
+          "unscoped_resolved_candidate_person_ids": {"type": "array", "items": {"type": "string"}, "uniqueItems": true}
+        },
+        "additionalProperties": false
+      }
+    },
+    "unresolved_surface_count": {"type": "integer", "minimum": 0},
+    "unresolved_surface_artifact": {"type": "string"},
+    "notes": {"type": "array", "items": {"type": "string"}}
+  }
+}
