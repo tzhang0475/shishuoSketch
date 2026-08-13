@@ -1,5 +1,7 @@
 import type { Person, Relation, SiteBundle } from "./types";
 
+export type ExplorationNode = { kind: "story" | "person"; id: string };
+
 export interface RelationPerspective {
   relation: Relation;
   neighbor: Person;
@@ -15,6 +17,24 @@ export interface LayoutPoint {
 export interface EgoLayout {
   center: LayoutPoint;
   neighbors: LayoutPoint[];
+}
+
+export function appendExploration(stack: ExplorationNode[], node: ExplorationNode): ExplorationNode[] {
+  const last = stack[stack.length - 1];
+  if (last?.kind === node.kind && last.id === node.id) return stack;
+  return [...stack, node];
+}
+
+export function backExploration(stack: ExplorationNode[]): ExplorationNode[] {
+  return stack.length > 1 ? stack.slice(0, -1) : stack;
+}
+
+export function currentStoryFromExploration(stack: ExplorationNode[]): string | null {
+  return [...stack].reverse().find((node) => node.kind === "story")?.id ?? null;
+}
+
+export function focusedPersonFromExploration(stack: ExplorationNode[]): string | null {
+  return [...stack].reverse().find((node) => node.kind === "person")?.id ?? null;
 }
 
 export function reviewedDirectRelations(data: SiteBundle): Relation[] {

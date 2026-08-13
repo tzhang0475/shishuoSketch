@@ -11,6 +11,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 from pathlib import Path
 from typing import Any
 
@@ -18,6 +19,8 @@ from typing import Any
 ROOT = Path(__file__).resolve().parents[1]
 DERIVED_PATH = ROOT / "data/derived/wp1-site.json"
 VITE_INPUT_PATH = ROOT / "site/src/generated/wp1-site.json"
+SC1_DERIVED_PATH = ROOT / "data/derived/sc1-site.json"
+SC1_VITE_INPUT_PATH = ROOT / "site/src/generated/sc1-site.json"
 DIST_PATH = ROOT / "dist"
 
 
@@ -62,6 +65,15 @@ def generated_errors(root: Path = ROOT) -> list[str]:
     return errors
 
 
+def sc1_generated_errors(root: Path = ROOT) -> list[str]:
+    """Validate the actual SC1 bundle imported by the deployed app."""
+    try:
+        from .validate_sc1_frontend_data import validate
+    except ImportError:  # direct script execution
+        from validate_sc1_frontend_data import validate
+    return validate(root, mode=os.environ.get("WP1_PROVENANCE_MODE", "full"))
+
+
 def _production_markers(bundle: dict[str, Any]) -> set[str]:
     story = next(item for item in bundle["stories"] if item["id"] == "06-yaliang-019")
     reading = story["reading"]
@@ -80,8 +92,8 @@ def _production_markers(bundle: dict[str, Any]) -> set[str]:
 
 
 def production_errors(root: Path = ROOT) -> list[str]:
-    errors = generated_errors(root)
-    bundle = read_json(root / DERIVED_PATH.relative_to(ROOT))
+    errors = generated_errors(root) + sc1_generated_errors(root)
+    bundle = read_json(root / SC1_DERIVED_PATH.relative_to(ROOT))
     dist = root / DIST_PATH.relative_to(ROOT)
     assets = sorted((dist / "assets").glob("*.js")) if (dist / "assets").is_dir() else []
     if not assets:

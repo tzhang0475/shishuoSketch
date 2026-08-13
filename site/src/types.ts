@@ -1,5 +1,6 @@
 export type AssertionStatus = "attested" | "reported" | "inferred" | "unknown";
 export type ReviewStatus = "candidate" | "reviewed" | "rejected" | "todo";
+export type PublicationState = "production_ready" | "preview_ready" | "blocked";
 
 export interface Person {
   id: string;
@@ -44,12 +45,18 @@ export interface Story {
   assertion_status: AssertionStatus;
   review_status: ReviewStatus;
   reading: StoryReading;
+  chapter_heading?: string;
+  chapter_display?: ReadingPair;
+  ordinal?: number;
+  global_ordinal?: number;
+  publication_state?: PublicationState;
+  publication_note?: string;
   notes?: string;
 }
 
 export interface StoryReading {
   entry_id: string;
-  status: "reviewed";
+  status: "reviewed" | "aligned" | "candidate" | "disputed";
   punctuation_record_id: string;
   base_canonical_entry_sha256: string;
   conversion: {
@@ -208,6 +215,39 @@ export interface TimeRange {
   end_year: number | null;
 }
 
+export interface StoryChainPersonReference {
+  person_id: string;
+  story_ids: string[];
+  main_text_story_ids: string[];
+  liu_annotation_only_story_ids: string[];
+}
+
+export interface StoryChainStoryReference {
+  entry_id: string;
+  linked_person_ids: string[];
+  main_text_person_ids: string[];
+  liu_annotation_only_person_ids: string[];
+  publication_state: PublicationState;
+}
+
+export interface StoryChainIndex {
+  schema: 1;
+  stage: "sc1-story-chain-frontend";
+  generated_from: string[];
+  story_ids: string[];
+  person_story_refs: StoryChainPersonReference[];
+  story_person_refs: StoryChainStoryReference[];
+}
+
+export interface ReadingUiLabels {
+  person_stories_heading: ReadingPair;
+  primary_story_label: ReadingPair;
+  annotation_story_label: ReadingPair;
+  read_story: ReadingPair;
+  reviewed_punctuation: ReadingPair;
+  preview_punctuation: ReadingPair;
+}
+
 export interface SiteBundle {
   schema: 1;
   generated_from: string;
@@ -218,4 +258,6 @@ export interface SiteBundle {
   eras: Era[];
   evidence: Evidence[];
   sources: Source[];
+  story_chain?: StoryChainIndex;
+  ui?: ReadingUiLabels;
 }

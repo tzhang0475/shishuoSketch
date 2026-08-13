@@ -20,10 +20,13 @@ code, .story-meta, .prototype-badge, .person-hint, .person-status, .site-footer,
 .brand { margin: 0; color: #7a3d2d; font-size: 1.05rem; letter-spacing: .14em; }
 .tagline { margin: .25rem 0 0; color: #8a8074; font-size: .9rem; }
 .prototype-badge { display: inline-flex; border: 1px solid #c6a493; border-radius: 999px; color: #7a3d2d; padding: .25rem .65rem; font-size: .68rem; letter-spacing: .05em; white-space: nowrap; }
+.exploration-breadcrumb { max-width: 700px; margin: 1.1rem auto -2.8rem; color: #9a8c7d; font-size: .78rem; letter-spacing: .04em; overflow-wrap: anywhere; }
 .reading-column { max-width: 700px; margin: 5rem auto 0; }
 .story-reference { margin: 0 0 .45rem; color: #8a3f2f; font-size: .92rem; letter-spacing: .12em; }
 h1 { margin: 0; color: #28221d; font-size: clamp(2.2rem, 6vw, 4rem); font-weight: 500; letter-spacing: .05em; line-height: 1.25; }
 .story-meta { margin: .7rem 0 3.5rem; color: #998e80; font-size: .72rem; }
+.publication-note { margin: -2.8rem 0 1.3rem; color: #8e7566; font-size: .72rem; letter-spacing: .04em; }
+.publication-note.preview { color: #a18b7c; }
 .reading-controls { display: inline-flex; align-items: center; gap: .25rem; margin-bottom: 1.1rem; border-bottom: 1px solid #d9cebf; padding-bottom: .25rem; }
 .reading-mode-button { border: 0; background: transparent; color: #95887b; cursor: pointer; padding: .2rem .35rem; font-size: .82rem; }
 .reading-mode-button.active { color: #7a3d2d; font-weight: 600; }
@@ -82,6 +85,15 @@ h1 { margin: 0; color: #28221d; font-size: clamp(2.2rem, 6vw, 4rem); font-weight
 .derived-path-step { display: grid; gap: .12rem; padding: .2rem 0; }
 .derived-path-connector { color: #9b715d; font-size: .72rem; }
 .derived-no-quotation { margin: .55rem 0 0; color: #9a8b7d; font-size: .7rem; }
+.person-stories-group { border-top: 1px solid #e3d9cd; margin-top: 1rem; padding-top: .7rem; }
+.story-card-list { display: grid; gap: .55rem; }
+.story-card { display: block; width: 100%; border: 1px solid #e0d5c8; border-radius: 2px; background: rgba(255, 253, 249, .72); color: inherit; cursor: pointer; padding: .65rem .7rem; text-align: left; }
+.story-card:hover, .story-card:focus-visible { border-color: #a9785f; box-shadow: 0 0 0 2px rgba(169, 120, 95, .12); }
+.story-card-reference { display: block; color: #8c6956; font-size: .75rem; }
+.story-card-excerpt { display: block; margin-top: .2rem; color: #55473d; font-size: .86rem; line-height: 1.7; }
+.story-card-footer { display: flex; align-items: baseline; justify-content: space-between; gap: .6rem; margin-top: .35rem; color: #7a3d2d; font-size: .73rem; }
+.story-card-status { color: #a18f80; font-size: .62rem; }
+.annotation-story-group { margin-top: .9rem; border-top: 1px dashed #ddd0c3; padding-top: .65rem; }
 .ego-map { position: relative; min-height: 290px; margin-top: .4rem; overflow: hidden; }
 .ego-map-edges { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
 .ego-map-edges line { stroke: #c8b5a7; stroke-width: .45; }
@@ -108,7 +120,9 @@ h1 { margin: 0; color: #28221d; font-size: clamp(2.2rem, 6vw, 4rem); font-weight
 @media (max-width: 640px) {
   .page-shell { padding-top: 1.5rem; }
   .site-header { align-items: flex-start; }
+  .exploration-breadcrumb { margin: .7rem 0 -2.2rem; }
   .reading-column { margin-top: 3.5rem; }
+  .publication-note { margin-top: -2.2rem; }
   .people-grid { grid-template-columns: 1fr; }
   .relation-explorer-grid { grid-template-columns: 1fr; }
   .relation-explorer-header { align-items: flex-start; flex-direction: column; }

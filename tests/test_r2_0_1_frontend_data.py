@@ -4,7 +4,7 @@ import json
 from pathlib import Path
 import unittest
 
-from scripts.validate_frontend_artifact import generated_errors
+from scripts.validate_frontend_artifact import generated_errors, sc1_generated_errors
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -43,9 +43,13 @@ class R20FrontendDataTests(unittest.TestCase):
             },
         )
 
+    def test_sc1_bundle_is_the_actual_frontend_input(self) -> None:
+        self.assertEqual(sc1_generated_errors(ROOT), [])
+        source = (ROOT / "site/src/data.ts").read_text(encoding="utf-8")
+        self.assertIn('"./generated/sc1-site.json"', source)
+
     def test_frontend_loader_has_no_runtime_bundle_fetch(self) -> None:
         source = (ROOT / "site/src/data.ts").read_text(encoding="utf-8")
-        self.assertIn('"./generated/wp1-site.json"', source)
         self.assertNotIn("fetch(", source)
         self.assertNotIn("data/wp1-site.json", source)
 

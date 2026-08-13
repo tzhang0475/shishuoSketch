@@ -42,8 +42,14 @@ jobs:
       - name: Rebuild WP1 static data
         run: python3 scripts/build_wp1_sample.py
 
+      - name: Rebuild SC1 Story Chain static data
+        run: python3 scripts/build_sc1_frontend_data.py
+
       - name: Validate WP1 data
         run: python3 scripts/validate_wp1.py --mode portable
+
+      - name: Validate SC1 frontend data
+        run: python3 scripts/validate_sc1_frontend_data.py --mode portable
 
       - name: Run Python tests
         env:
@@ -58,6 +64,8 @@ jobs:
         run: npm run build:site
 
       - name: Validate production frontend data
+        env:
+          WP1_PROVENANCE_MODE: portable
         run: python3 scripts/validate_frontend_artifact.py --production
 
       - name: Check published artifact scope

@@ -942,7 +942,7 @@ python3 scripts/lookup_shishuo_reference.py "谢太傅" --no-cache
 查询报告缓存于 `.cache/shishuo-reference/`（已加入 Git ignore）。该工具使用
 `codex exec --search --ephemeral --sandbox read-only`，不会抓取 CText HTML、绕过 CText 认证，也不会修改 canonical Shishuo entries 或 metadata。
 
-## WP1 static prototype
+## WP1 / SC1 static prototype
 
 The first static vertical slice is anchored on `06-yaliang-019`（东床坦腹）.
 It is generated from the existing canonical entry and the six-person pilot;
@@ -988,7 +988,10 @@ Run the local development server:
 npm run dev
 ```
 
-The current prototype is a single reading page under the Vite base path
-`/shishuoSketch/`; client-side routing and the remaining 15–30 story
-selection are intentionally deferred. The final Era Sketch remains marked
-candidate/TODO in `data/manifest/milestone-1.json`.
+The current prototype is a static reading page under the Vite base path
+`/shishuoSketch/`. SC1 publishes the 16-story Story Chain Gold Set as an
+experimental preview: `npm run build:sc1` generates the build-time bundle,
+and `npm run validate:sc1` checks its publication states and Story ↔ Person
+projections. The 15 candidate punctuation records remain unreviewed; only
+their valid deterministic reading layers are marked `preview_ready`. No
+runtime API or source-corpus fetch is used.

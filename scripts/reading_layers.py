@@ -225,6 +225,18 @@ def build_display_reading(
     evidence: Any = (),
 ) -> dict[str, Any]:
     sections = record["sections"]
+    annotations: list[dict[str, str]] = []
+    annotation_section = sections.get("liu_annotation")
+    if isinstance(annotation_section, Mapping):
+        punctuated_annotation = annotation_section.get("punctuated_text")
+        if isinstance(punctuated_annotation, str) and punctuated_annotation:
+            annotations.append(
+                {
+                    "id": "annotation-001",
+                    "original": punctuated_annotation,
+                    "simplified": converter.convert(punctuated_annotation),
+                }
+            )
     return {
         "entry_id": record["entry_id"],
         "status": record["status"],
@@ -238,13 +250,7 @@ def build_display_reading(
             "original": sections["main_text"]["punctuated_text"],
             "simplified": converter.convert(sections["main_text"]["punctuated_text"]),
         },
-        "annotations": [
-            {
-                "id": "annotation-001",
-                "original": sections["liu_annotation"]["punctuated_text"],
-                "simplified": converter.convert(sections["liu_annotation"]["punctuated_text"]),
-            }
-        ],
+        "annotations": annotations,
         "labels": {
             key: _display_pair(value, converter) for key, value in READER_LABELS.items()
         },

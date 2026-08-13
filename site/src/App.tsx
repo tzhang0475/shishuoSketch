@@ -5,14 +5,25 @@ import {
   derivedRelationsForPerson,
   directRelationPerspectives,
   egoLayout,
-  backHistory,
-  focusHistory,
+  appendExploration,
+  backExploration,
+  currentStoryFromExploration,
   pathPersonIds,
+  focusedPersonFromExploration,
   type RelationPerspective,
+  type ExplorationNode,
 } from "./relationExplorer";
-import type { Evidence, Mention, Person, ReadingPair, Relation, SiteBundle, Story } from "./types";
+import type {
+  Evidence,
+  Mention,
+  Person,
+  ReadingPair,
+  Relation,
+  SiteBundle,
+  Story,
+} from "./types";
 
-const STORY_ID = "06-yaliang-019";
+const DEFAULT_STORY_ID = "06-yaliang-019";
 const READING_MODE_STORAGE_KEY = "shishuoSketch.reading-mode";
 type ReadingMode = "simplified" | "original";
 
@@ -22,11 +33,28 @@ function initialReadingMode(): ReadingMode {
   return stored === "original" ? "original" : "simplified";
 }
 
-function storyReference(story: Story): string {
-  const parts = story.id.split("-");
-  const ordinal = parts[parts.length - 1] ?? "";
-  const chapter = parts[1] === "yaliang" ? "雅量" : parts[1] ?? "";
-  return `${chapter} · ${ordinal}`;
+function readingValue(pair: ReadingPair | undefined, mode: ReadingMode, fallback: string): string {
+  return pair?.[mode] ?? fallback;
+}
+
+function storyReference(story: Story, mode: ReadingMode): string {
+  const idParts = story.id.split("-");
+  const ordinal = story.ordinal ?? Number(idParts[idParts.length - 1] ?? 0);
+  const chapter = readingValue(story.chapter_display, mode, story.chapter_heading ?? story.id);
+  return `${chapter} · ${String(ordinal).padStart(3, "0")}`;
+}
+
+function storyHeading(story: Story, mode: ReadingMode): string {
+  return story.title_source === "project_label" ? story.title : storyReference(story, mode);
+}
+
+function uiLabel(
+  data: SiteBundle,
+  key: "person_stories_heading" | "primary_story_label" | "annotation_story_label" | "read_story" | "reviewed_punctuation" | "preview_punctuation",
+  mode: ReadingMode,
+  fallback: string,
+): string {
+  return readingValue(data.ui?.[key], mode, fallback);
 }
 
 function resolvedMentions(story: Story, data: SiteBundle): Mention[] {
@@ -37,10 +65,6 @@ function resolvedMentions(story: Story, data: SiteBundle): Mention[] {
 
 function personMentions(story: Story, person: Person, data: SiteBundle): Mention[] {
   return resolvedMentions(story, data).filter((mention) => mention.person_id === person.id);
-}
-
-function readingValue(pair: ReadingPair | undefined, mode: ReadingMode, fallback: string): string {
-  return pair?.[mode] ?? fallback;
 }
 
 function personDisplayName(story: Story, person: Person, mode: ReadingMode): string {
@@ -82,6 +106,15 @@ function personNameById(story: Story, data: SiteBundle, personId: string, mode: 
   return person ? personDisplayName(story, person, mode) : personId;
 }
 
+function storyById(data: SiteBundle, storyId: string): Story | undefined {
+  return data.stories.find((story) => story.id === storyId);
+}
+
+function storyExcerpt(story: Story, mode: ReadingMode): string {
+  const text = story.reading.main_text[mode].replace(/\s+/gu, "");
+  return text.length > 54 ? `${text.slice(0, 54)}……` : text;
+}
+
 function PersonCard({
   person,
   mentions,
@@ -100,11 +133,7 @@ function PersonCard({
   const surfaces = Array.from(
     new Set(
       mentions.map((mention) =>
-        readingValue(
-          story.reading.mention_display[mention.id]?.surface,
-          readingMode,
-          mention.surface,
-        ),
+        readingValue(story.reading.mention_display[mention.id]?.surface, readingMode, mention.surface),
       ),
     ),
   );
@@ -300,6 +329,91 @@ function EgoRelationMap({
   );
 }
 
+function StoryCard({
+  story,
+  data,
+  readingMode,
+  annotationOnly,
+  onSelect,
+}: {
+  story: Story;
+  data: SiteBundle;
+  readingMode: ReadingMode;
+  annotationOnly: boolean;
+  onSelect: () => void;
+}) {
+  return (
+    <button type="button" className="story-card" onClick={onSelect}>
+      <span className="story-card-reference">{storyReference(story, readingMode)}</span>
+      <span className="story-card-excerpt">「{storyExcerpt(story, readingMode)}」</span>
+      <span className="story-card-footer">
+        <span>{annotationOnly ? uiLabel(data, "annotation_story_label", readingMode, "史料提及") : uiLabel(data, "read_story", readingMode, "閱讀")} →</span>
+        <span className="story-card-status">
+          {story.publication_state === "preview_ready"
+            ? uiLabel(data, "preview_punctuation", readingMode, "句讀：參考底本整理 · 待復核")
+            : uiLabel(data, "reviewed_punctuation", readingMode, "句讀：已復核")}
+        </span>
+      </span>
+    </button>
+  );
+}
+
+function PersonStories({
+  data,
+  focusedPerson,
+  readingMode,
+  onStorySelect,
+}: {
+  data: SiteBundle;
+  focusedPerson: Person;
+  readingMode: ReadingMode;
+  onStorySelect: (storyId: string) => void;
+}) {
+  const reference = data.story_chain?.person_story_refs.find((item) => item.person_id === focusedPerson.id);
+  const primaryIds = reference?.main_text_story_ids ?? [];
+  const annotationIds = reference?.liu_annotation_only_story_ids ?? [];
+  const primaryStories = primaryIds.map((id) => storyById(data, id)).filter((item): item is Story => Boolean(item));
+  const annotationStories = annotationIds.map((id) => storyById(data, id)).filter((item): item is Story => Boolean(item));
+  return (
+    <div className="person-stories-group">
+      <p className="relation-detail-heading">{uiLabel(data, "person_stories_heading", readingMode, "《世說》中的故事")}</p>
+      {primaryStories.length === 0 ? (
+        <p className="relation-empty">—</p>
+      ) : (
+        <div className="story-card-list">
+          {primaryStories.map((candidate) => (
+            <StoryCard
+              key={candidate.id}
+              story={candidate}
+              data={data}
+              readingMode={readingMode}
+              annotationOnly={false}
+              onSelect={() => onStorySelect(candidate.id)}
+            />
+          ))}
+        </div>
+      )}
+      {annotationStories.length > 0 && (
+        <div className="annotation-story-group">
+          <p className="relation-detail-heading">{uiLabel(data, "annotation_story_label", readingMode, "史料提及")}</p>
+          <div className="story-card-list">
+            {annotationStories.map((candidate) => (
+              <StoryCard
+                key={candidate.id}
+                story={candidate}
+                data={data}
+                readingMode={readingMode}
+                annotationOnly
+                onSelect={() => onStorySelect(candidate.id)}
+              />
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
 function PersonDetailCard({
   story,
   data,
@@ -307,6 +421,7 @@ function PersonDetailCard({
   perspectives,
   readingMode,
   onFocus,
+  onStorySelect,
 }: {
   story: Story;
   data: SiteBundle;
@@ -314,9 +429,9 @@ function PersonDetailCard({
   perspectives: RelationPerspective[];
   readingMode: ReadingMode;
   onFocus: (personId: string) => void;
+  onStorySelect: (storyId: string) => void;
 }) {
   const aliases = story.reading.person_display[focusedPerson.id]?.aliases ?? [];
-  const directRelations = perspectives;
   const derivedRelations = derivedRelationsForPerson(focusedPerson.id, data);
   return (
     <section className="person-detail-card" aria-labelledby="focused-person-heading">
@@ -327,8 +442,8 @@ function PersonDetailCard({
       </p>
       <div className="relation-detail-group">
         <p className="relation-detail-heading">{story.reading.labels.direct_relation_label[readingMode]}</p>
-        {directRelations.length === 0 && <p className="relation-empty">{story.reading.labels.no_direct_relations[readingMode]}</p>}
-        {directRelations.map((perspective) => (
+        {perspectives.length === 0 && <p className="relation-empty">{story.reading.labels.no_direct_relations[readingMode]}</p>}
+        {perspectives.map((perspective) => (
           <div className="relation-detail-row" key={perspective.relation.id}>
             <button type="button" className="person-link" onClick={() => onFocus(perspective.neighbor.id)}>
               {personDisplayName(story, perspective.neighbor, readingMode)} · {perspectiveNeighborRole(story, perspective, readingMode)}
@@ -351,31 +466,43 @@ function PersonDetailCard({
           ))}
         </div>
       )}
+      <PersonStories
+        data={data}
+        focusedPerson={focusedPerson}
+        readingMode={readingMode}
+        onStorySelect={onStorySelect}
+      />
     </section>
   );
 }
 
-function RelationExplorer({
+function EgoRelationExplorer({
   story,
   data,
-  focusedPersonId,
+  focusedPersonId: focusedId,
   readingMode,
-  history,
+  backTarget,
   onFocus,
   onBack,
+  onStorySelect,
 }: {
   story: Story;
   data: SiteBundle;
   focusedPersonId: string;
   readingMode: ReadingMode;
-  history: string[];
+  backTarget: ExplorationNode | null;
   onFocus: (personId: string) => void;
   onBack: () => void;
+  onStorySelect: (storyId: string) => void;
 }) {
-  const focusedPerson = data.people.find((person) => person.id === focusedPersonId);
+  const focusedPerson = data.people.find((person) => person.id === focusedId);
   if (!focusedPerson) return null;
   const perspectives = directRelationPerspectives(focusedPerson.id, data);
-  const previousPersonId = history[history.length - 2];
+  const backLabel = backTarget?.kind === "person"
+    ? personNameById(story, data, backTarget.id, readingMode)
+    : backTarget?.kind === "story"
+      ? storyReference(storyById(data, backTarget.id) ?? story, readingMode)
+      : "";
   return (
     <section className="relation-explorer" aria-labelledby="relation-explorer-heading">
       <div className="relation-explorer-header">
@@ -383,9 +510,9 @@ function RelationExplorer({
           <p className="section-label">{story.reading.labels.relation_section[readingMode]}</p>
           <h2 id="relation-explorer-heading">{personDisplayName(story, focusedPerson, readingMode)}</h2>
         </div>
-        {previousPersonId && (
+        {backTarget && (
           <button type="button" className="back-button" onClick={onBack}>
-            ← {story.reading.labels.back_label[readingMode]} {personNameById(story, data, previousPersonId, readingMode)}
+            ← {story.reading.labels.back_label[readingMode]} {backLabel}
           </button>
         )}
       </div>
@@ -397,6 +524,7 @@ function RelationExplorer({
           perspectives={perspectives}
           readingMode={readingMode}
           onFocus={onFocus}
+          onStorySelect={onStorySelect}
         />
         <EgoRelationMap
           story={story}
@@ -460,34 +588,47 @@ function EvidenceDetails({
   );
 }
 
-function ReadingPage({ story, data }: { story: Story; data: SiteBundle }) {
-  const [readingMode, setReadingMode] = useState<ReadingMode>(initialReadingMode);
-  const [focusedPersonId, setFocusedPersonId] = useState<string | null>(null);
-  const [personHistory, setPersonHistory] = useState<string[]>([]);
+function nodeLabel(node: ExplorationNode, story: Story, data: SiteBundle, mode: ReadingMode): string {
+  if (node.kind === "story") {
+    return storyReference(storyById(data, node.id) ?? story, mode);
+  }
+  return personNameById(story, data, node.id, mode);
+}
+
+function ReadingPage({
+  story,
+  data,
+  readingMode,
+  setReadingMode,
+  stack,
+  focusedPersonId: focusedId,
+  onFocus,
+  onBack,
+  onStorySelect,
+}: {
+  story: Story;
+  data: SiteBundle;
+  readingMode: ReadingMode;
+  setReadingMode: (mode: ReadingMode) => void;
+  stack: ExplorationNode[];
+  focusedPersonId: string | null;
+  onFocus: (personId: string) => void;
+  onBack: () => void;
+  onStorySelect: (storyId: string) => void;
+}) {
   const people = story.person_ids
     .map((id) => data.people.find((person) => person.id === id))
     .filter((person): person is Person => Boolean(person));
   const mentions = resolvedMentions(story, data);
   const readingText = story.reading.main_text[readingMode];
   const annotationReading = story.reading.annotations[0];
+  const backTarget = focusedPersonId && stack.length > 1
+    ? [...stack.slice(0, -1)].reverse().find((node) => node.kind === "person") ?? stack[stack.length - 2] ?? null
+    : null;
 
   useEffect(() => {
     window.localStorage.setItem(READING_MODE_STORAGE_KEY, readingMode);
   }, [readingMode]);
-
-  function focusPerson(personId: string) {
-    if (!data.people.some((person) => person.id === personId)) return;
-    setFocusedPersonId(personId);
-    setPersonHistory((history) => focusHistory(history, personId));
-  }
-
-  function goBack() {
-    setPersonHistory((history) => {
-      const result = backHistory(history);
-      setFocusedPersonId(result.focusedId);
-      return result.history;
-    });
-  }
 
   return (
     <main className="page-shell">
@@ -496,12 +637,23 @@ function ReadingPage({ story, data }: { story: Story; data: SiteBundle }) {
           <p className="brand">世说Sketch</p>
           <p className="tagline">从一则故事，走进魏晋</p>
         </div>
-        <span className="prototype-badge">WP1 Prototype</span>
+        <span className="prototype-badge">SC1 Preview</span>
       </header>
 
+      {stack.length > 1 && (
+        <nav className="exploration-breadcrumb" aria-label="探索路径">
+          {stack.map((node, index) => (
+            <span key={`${node.kind}-${node.id}-${index}`}>
+              {index > 0 && <span aria-hidden="true"> › </span>}
+              {nodeLabel(node, story, data, readingMode)}
+            </span>
+          ))}
+        </nav>
+      )}
+
       <article className="reading-column">
-        <p className="story-reference">{storyReference(story)}</p>
-        <h1>{story.title}</h1>
+        <p className="story-reference">{storyReference(story, readingMode)}</p>
+        <h1>{storyHeading(story, readingMode)}</h1>
         <p className="story-meta">{story.id}</p>
 
         <div className="reading-controls" role="group" aria-label="阅读模式">
@@ -523,6 +675,12 @@ function ReadingPage({ story, data }: { story: Story; data: SiteBundle }) {
             原文
           </button>
         </div>
+
+        <p className={story.publication_state === "preview_ready" ? "publication-note preview" : "publication-note"}>
+          {story.publication_state === "preview_ready"
+            ? uiLabel(data, "preview_punctuation", readingMode, "句读：参考底本整理 · 待复核")
+            : uiLabel(data, "reviewed_punctuation", readingMode, "句读：已复核")}
+        </p>
 
         <section className="story-panel" aria-label="故事正文">
           <p className="story-text">{readingText}</p>
@@ -548,14 +706,14 @@ function ReadingPage({ story, data }: { story: Story; data: SiteBundle }) {
                 mentions={personMentions(story, person, data)}
                 story={story}
                 readingMode={readingMode}
-                focused={focusedPersonId === person.id}
-                onFocus={() => focusPerson(person.id)}
+                focused={focusedId === person.id}
+                onFocus={() => onFocus(person.id)}
               />
             ))}
           </div>
           <div className="mention-strip" aria-label={story.reading.labels.resolved_mentions_heading[readingMode]}>
             {mentions.map((mention) => (
-              <button className="mention-chip" type="button" key={mention.id} onClick={() => mention.person_id && focusPerson(mention.person_id)} disabled={!mention.person_id}>
+              <button className="mention-chip" type="button" key={mention.id} onClick={() => mention.person_id && onFocus(mention.person_id)} disabled={!mention.person_id}>
                 {readingValue(story.reading.mention_display[mention.id]?.surface, readingMode, mention.surface)}
                 {" → "}
                 {mentionPersonDisplayName(story, data, mention, readingMode)}
@@ -564,15 +722,16 @@ function ReadingPage({ story, data }: { story: Story; data: SiteBundle }) {
           </div>
         </section>
 
-        {focusedPersonId && (
-          <RelationExplorer
+        {focusedId && (
+          <EgoRelationExplorer
             story={story}
             data={data}
-            focusedPersonId={focusedPersonId}
+            focusedPersonId={focusedId}
             readingMode={readingMode}
-            history={personHistory}
-            onFocus={focusPerson}
-            onBack={goBack}
+            backTarget={backTarget}
+            onFocus={onFocus}
+            onBack={onBack}
+            onStorySelect={onStorySelect}
           />
         )}
 
@@ -581,7 +740,7 @@ function ReadingPage({ story, data }: { story: Story; data: SiteBundle }) {
 
       <footer className="site-footer">
         <span>static-first · {data.generated_from}</span>
-        <span>{story.review_status}</span>
+        <span>{story.publication_state}</span>
       </footer>
     </main>
   );
@@ -590,6 +749,8 @@ function ReadingPage({ story, data }: { story: Story; data: SiteBundle }) {
 function App() {
   const [data, setData] = useState<SiteBundle | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [readingMode, setReadingMode] = useState<ReadingMode>(initialReadingMode);
+  const [stack, setStack] = useState<ExplorationNode[]>([{ kind: "story", id: DEFAULT_STORY_ID }]);
 
   useEffect(() => {
     try {
@@ -599,10 +760,25 @@ function App() {
     }
   }, []);
 
-  const story = useMemo(
-    () => data?.stories.find((item) => item.id === STORY_ID) ?? data?.stories[0],
-    [data],
-  );
+  const story = useMemo(() => {
+    if (!data) return undefined;
+    return storyById(data, currentStoryFromExploration(stack) ?? DEFAULT_STORY_ID) ?? data.stories[0];
+  }, [data, stack]);
+  const currentFocusedPersonId = focusedPersonFromExploration(stack);
+
+  function focusPerson(personId: string) {
+    if (!data?.people.some((person) => person.id === personId)) return;
+    setStack((current) => appendExploration(current, { kind: "person", id: personId }));
+  }
+
+  function selectStory(storyId: string) {
+    if (!data?.stories.some((candidate) => candidate.id === storyId)) return;
+    setStack((current) => appendExploration(current, { kind: "story", id: storyId }));
+  }
+
+  function goBack() {
+    setStack((current) => backExploration(current));
+  }
 
   if (error) {
     return (
@@ -623,7 +799,19 @@ function App() {
       </main>
     );
   }
-  return <ReadingPage story={story} data={data} />;
+  return (
+    <ReadingPage
+      story={story}
+      data={data}
+      readingMode={readingMode}
+      setReadingMode={setReadingMode}
+      stack={stack}
+      focusedPersonId={currentFocusedPersonId}
+      onFocus={focusPerson}
+      onBack={goBack}
+      onStorySelect={selectStory}
+    />
+  );
 }
 
 export default App;

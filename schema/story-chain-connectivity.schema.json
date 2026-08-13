@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://shishuo-sketch/schema/story-chain-connectivity.schema.json",
+  "title": "SC0 Story Chain connectivity audit",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "stage", "work", "generated_from", "candidate_count", "candidate_records", "gold_set_count", "gold_set_entry_ids", "unique_person_count", "story_person_link_count", "multi_person_story_count", "main_text_story_count", "annotation_only_story_count", "per_person_story_counts", "per_person_main_text_story_counts", "bipartite_components", "main_component_count", "covered_direct_relation_ids", "covered_direct_relation_count", "covered_derived_relation_ids", "covered_derived_relation_count"],
+  "properties": {
+    "schema": {"const": 1},
+    "stage": {"const": "sc0-story-chain-connectivity"},
+    "work": {"const": "世說新語"},
+    "generated_from": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1}},
+    "candidate_count": {"type": "integer", "minimum": 0},
+    "candidate_records": {"type": "array", "items": {"$ref": "#/$defs/candidate"}},
+    "gold_set_count": {"type": "integer", "minimum": 0},
+    "gold_set_entry_ids": {"type": "array", "items": {"type": "string", "minLength": 1}, "uniqueItems": true},
+    "unique_person_count": {"type": "integer", "minimum": 0},
+    "story_person_link_count": {"type": "integer", "minimum": 0},
+    "multi_person_story_count": {"type": "integer", "minimum": 0},
+    "main_text_story_count": {"type": "integer", "minimum": 0},
+    "annotation_only_story_count": {"type": "integer", "minimum": 0},
+    "per_person_story_counts": {"type": "object", "additionalProperties": {"type": "integer", "minimum": 0}},
+    "per_person_main_text_story_counts": {"type": "object", "additionalProperties": {"type": "integer", "minimum": 0}},
+    "bipartite_components": {"type": "array", "items": {"type": "array", "items": {"type": "string", "minLength": 1}, "uniqueItems": true}},
+    "main_component_count": {"type": "integer", "minimum": 0},
+    "covered_direct_relation_ids": {"type": "array", "items": {"type": "string", "minLength": 1}, "uniqueItems": true},
+    "covered_direct_relation_count": {"type": "integer", "minimum": 0},
+    "covered_derived_relation_ids": {"type": "array", "items": {"type": "string", "minLength": 1}, "uniqueItems": true},
+    "covered_derived_relation_count": {"type": "integer", "minimum": 0}
+  },
+  "$defs": {
+    "candidate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["entry_id", "chapter_id", "chapter_heading", "global_ordinal", "linked_person_ids", "main_text_person_ids", "liu_annotation_only_person_ids", "pilot_network_link_count", "punctuation_status", "punctuation_basis", "exact_transfer", "reader_ready", "canonical_character_count", "candidate_source"],
+      "properties": {
+        "entry_id": {"type": "string", "minLength": 1},
+        "chapter_id": {"type": "string", "minLength": 1},
+        "chapter_heading": {"type": "string"},
+        "global_ordinal": {"type": "integer", "minimum": 1},
+        "linked_person_ids": {"type": "array", "items": {"type": "string", "minLength": 1}, "uniqueItems": true},
+        "main_text_person_ids": {"type": "array", "items": {"type": "string", "minLength": 1}, "uniqueItems": true},
+        "liu_annotation_only_person_ids": {"type": "array", "items": {"type": "string", "minLength": 1}, "uniqueItems": true},
+        "pilot_network_link_count": {"type": "integer", "minimum": 1},
+        "punctuation_status": {"enum": ["reviewed", "aligned", "candidate", "disputed"]},
+        "punctuation_basis": {"enum": ["human_reviewed", "trusted_reference_exact", "reference_candidate", "disputed"]},
+        "exact_transfer": {"type": "boolean"},
+        "reader_ready": {"type": "boolean"},
+        "canonical_character_count": {"type": "integer", "minimum": 0},
+        "candidate_source": {"enum": ["p1a", "other_deterministic_person_story_link"]}
+      }
+    }
+  }
+}

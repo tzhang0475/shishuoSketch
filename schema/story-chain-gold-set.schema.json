@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://shishuo-sketch/schema/story-chain-gold-set.schema.json",
+  "title": "SC0 Story Chain Gold Set",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "stage", "work", "generated_from", "selection_policy", "records"],
+  "properties": {
+    "schema": {"const": 1},
+    "stage": {"const": "sc0-story-chain-gold-set"},
+    "work": {"const": "世說新語"},
+    "generated_from": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1}},
+    "selection_policy": {"type": "string", "minLength": 1},
+    "records": {
+      "type": "array",
+      "minItems": 15,
+      "maxItems": 20,
+      "items": {"$ref": "#/$defs/record"}
+    }
+  },
+  "$defs": {
+    "reading": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["punctuation_status", "punctuation_basis", "exact_transfer", "story_reader_ready"],
+      "properties": {
+        "punctuation_status": {"enum": ["reviewed", "aligned", "candidate", "disputed"]},
+        "punctuation_basis": {"enum": ["human_reviewed", "trusted_reference_exact", "reference_candidate", "disputed"]},
+        "exact_transfer": {"type": "boolean"},
+        "story_reader_ready": {"type": "boolean"}
+      }
+    },
+    "record": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["entry_id", "selection_status", "selection_reason_codes", "linked_person_ids", "reading_layer_status"],
+      "properties": {
+        "entry_id": {"type": "string", "minLength": 1},
+        "selection_status": {"enum": ["gold_anchor", "candidate_for_review"]},
+        "selection_reason_codes": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1}, "uniqueItems": true},
+        "linked_person_ids": {"type": "array", "items": {"type": "string", "minLength": 1}, "uniqueItems": true},
+        "reading_layer_status": {"$ref": "#/$defs/reading"}
+      }
+    }
+  }
+}

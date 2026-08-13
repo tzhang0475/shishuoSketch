@@ -1,5 +1,5 @@
 import type { SiteBundle } from "./types";
-import generatedSiteBundle from "./generated/wp1-site.json";
+import generatedSiteBundle from "./generated/sc1-site.json";
 
 function isRecord(value: unknown): value is Record<string, unknown> {
   return typeof value === "object" && value !== null;
@@ -14,7 +14,7 @@ function requireArray(value: unknown, key: string): unknown[] {
 
 export function parseSiteBundle(value: unknown): SiteBundle {
   if (!isRecord(value) || value.schema !== 1 || typeof value.generated_from !== "string") {
-    throw new Error("静态数据不是受支持的 WP1 bundle");
+    throw new Error("静态数据不是受支持的 frontend bundle");
   }
   const keys = ["stories", "people", "mentions", "relations", "eras", "evidence", "sources"];
   const arrays = Object.fromEntries(keys.map((key) => [key, requireArray(value, key)]));
@@ -33,11 +33,21 @@ export function parseSiteBundle(value: unknown): SiteBundle {
   const storyIds = new Set(arrays.stories.map((item) => (item as Record<string, unknown>).id));
   for (const story of arrays.stories) {
     if (!isRecord(story) || !isRecord(story.reading)) {
-      throw new Error("Story 缺少 reviewed reading layer");
+      throw new Error("Story 缺少 reading layer");
     }
     const reading = story.reading;
-    if (reading.entry_id !== story.id || reading.status !== "reviewed") {
+    if (reading.entry_id !== story.id || typeof reading.status !== "string") {
       throw new Error(`Story ${String(story.id)} 的 reading layer 标识不一致`);
+    }
+    const publicationState = story.publication_state;
+    if (publicationState !== undefined && !["production_ready", "preview_ready", "blocked"].includes(String(publicationState))) {
+      throw new Error(`Story ${String(story.id)} 的 publication_state 无效`);
+    }
+    if (publicationState === "production_ready" && reading.status !== "reviewed") {
+      throw new Error(`Story ${String(story.id)} 的 production reading 必须是 reviewed`);
+    }
+    if (publicationState === "preview_ready" && reading.status === "disputed") {
+      throw new Error(`Story ${String(story.id)} 的 preview reading 不能是 disputed`);
     }
     if (!isRecord(reading.main_text) || typeof reading.main_text.original !== "string" || typeof reading.main_text.simplified !== "string") {
       throw new Error(`Story ${String(story.id)} 的 reading.main_text 不完整`);
@@ -81,6 +91,28 @@ export function parseSiteBundle(value: unknown): SiteBundle {
         if (typeof sourceId !== "string" || !relationIds.has(sourceId)) {
           throw new Error(`Relation ${String(relation.id)} 引用了不存在的推导关系`);
         }
+      }
+    }
+  }
+  if (isRecord(value.story_chain)) {
+    const chain = value.story_chain;
+    if (!Array.isArray(chain.story_ids) || chain.story_ids.some((id) => typeof id !== "string" || !storyIds.has(id))) {
+      throw new Error("story_chain.story_ids 引用了不存在的 Story");
+    }
+    if (!Array.isArray(chain.person_story_refs) || chain.person_story_refs.some((ref) => {
+      return !isRecord(ref) || typeof ref.person_id !== "string" || !peopleIds.has(ref.person_id) || !Array.isArray(ref.story_ids) || ref.story_ids.some((id) => !storyIds.has(id));
+    })) {
+      throw new Error("story_chain.person_story_refs 引用了不存在的 Person 或 Story");
+    }
+    if (!Array.isArray(chain.story_person_refs) || chain.story_person_refs.some((ref) => {
+      return !isRecord(ref) || typeof ref.entry_id !== "string" || !storyIds.has(ref.entry_id) || !Array.isArray(ref.linked_person_ids) || ref.linked_person_ids.some((id) => !peopleIds.has(id));
+    })) {
+      throw new Error("story_chain.story_person_refs 引用了不存在的 Person 或 Story");
+    }
+    for (const storyId of chain.story_ids) {
+      const story = arrays.stories.find((item) => isRecord(item) && item.id === storyId);
+      if (story && story.publication_state === "blocked") {
+        throw new Error(`story_chain 不得发布 blocked Story: ${storyId}`);
       }
     }
   }

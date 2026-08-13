@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://shishuo-sketch/schema/sc1-site.schema.json",
+  "title": "SC1 static frontend bundle",
+  "type": "object",
+  "additionalProperties": true,
+  "required": ["schema", "generated_from", "stories", "people", "mentions", "relations", "eras", "evidence", "sources", "story_chain", "ui"],
+  "properties": {
+    "schema": {"const": 1},
+    "generated_from": {"const": "scripts/build_sc1_frontend_data.py"},
+    "stories": {
+      "type": "array",
+      "minItems": 16,
+      "items": {
+        "type": "object",
+        "required": ["id", "text", "reading", "person_ids", "mention_ids", "publication_state"],
+        "properties": {
+          "id": {"type": "string"},
+          "text": {"type": "string", "minLength": 1},
+          "person_ids": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+          "mention_ids": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+          "publication_state": {"enum": ["production_ready", "preview_ready", "blocked"]},
+          "reading": {
+            "type": "object",
+            "required": ["entry_id", "status", "main_text", "annotations"],
+            "properties": {
+              "entry_id": {"type": "string"},
+              "status": {"enum": ["reviewed", "aligned", "candidate", "disputed"]},
+              "main_text": {
+                "type": "object",
+                "required": ["original", "simplified"],
+                "properties": {"original": {"type": "string"}, "simplified": {"type": "string"}}
+              },
+              "annotations": {"type": "array"}
+            }
+          }
+        }
+      }
+    },
+    "people": {"type": "array", "items": {"type": "object", "required": ["id"]}},
+    "mentions": {"type": "array", "items": {"type": "object", "required": ["id", "story_id"]}},
+    "relations": {"type": "array", "items": {"type": "object", "required": ["id"]}},
+    "eras": {"type": "array", "items": {"type": "object", "required": ["id"]}},
+    "evidence": {"type": "array", "items": {"type": "object", "required": ["id"]}},
+    "sources": {"type": "array", "items": {"type": "object", "required": ["id"]}},
+    "story_chain": {
+      "type": "object",
+      "required": ["schema", "stage", "story_ids", "person_story_refs", "story_person_refs"],
+      "properties": {
+        "schema": {"const": 1},
+        "stage": {"const": "sc1-story-chain-frontend"},
+        "story_ids": {"type": "array", "minItems": 16, "uniqueItems": true, "items": {"type": "string"}},
+        "person_story_refs": {"type": "array"},
+        "story_person_refs": {"type": "array"}
+      }
+    },
+    "ui": {"type": "object"}
+  }
+}

@@ -204,3 +204,17 @@ evidence and are never promoted by co-occurrence, Relation edges, Jinshu
 biographies, or semantic similarity. A linked Story is `reader_ready` only
 when its canonical entry, reviewed punctuation, original/simplified reading
 layer, and reviewed resolved Person link all exist.
+
+## SC0 Story Chain Gold Set
+
+`data/story-chain-gold-set.json` is a small editorial selection over existing
+reviewed PersonStoryLinks. It contains no story text and creates no historical
+assertion. The selection prefers deterministic main-text Person presence and
+connected multi-person coverage; Liu Xiaobiao annotation-only Persons remain
+separately identified as context. New records are `candidate_for_review` until
+the existing punctuation review workflow approves them.
+
+`data/derived/story-chain-gold-index.json` projects the selected Stories to
+their existing Person IDs for a future reading surface, while
+`data/derived/story-chain-connectivity.json` is the reproducible selection
+audit. Neither artifact creates relation edges or participation claims.

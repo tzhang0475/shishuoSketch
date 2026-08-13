@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://shishuo-sketch/schema/story-chain-gold-index.schema.json",
+  "title": "SC0 Story Chain Gold Index",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "stage", "work", "generated_from", "story_count", "stories", "person_story_refs"],
+  "properties": {
+    "schema": {"const": 1},
+    "stage": {"const": "sc0-story-chain-gold-index"},
+    "work": {"const": "世說新語"},
+    "generated_from": {"const": "data/story-chain-gold-set.json"},
+    "story_count": {"type": "integer", "minimum": 0},
+    "stories": {"type": "array", "items": {"$ref": "#/$defs/story"}},
+    "person_story_refs": {"type": "array", "items": {"$ref": "#/$defs/person"}}
+  },
+  "$defs": {
+    "story": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["entry_id", "global_ordinal", "linked_person_ids", "reader_ready", "punctuation_status", "punctuation_basis", "exact_transfer", "main_text_person_ids", "liu_annotation_only_person_ids"],
+      "properties": {
+        "entry_id": {"type": "string", "minLength": 1},
+        "global_ordinal": {"type": "integer", "minimum": 1},
+        "linked_person_ids": {"type": "array", "items": {"type": "string", "minLength": 1}, "uniqueItems": true},
+        "reader_ready": {"type": "boolean"},
+        "punctuation_status": {"enum": ["reviewed", "aligned", "candidate", "disputed"]},
+        "punctuation_basis": {"enum": ["human_reviewed", "trusted_reference_exact", "reference_candidate", "disputed"]},
+        "exact_transfer": {"type": "boolean"},
+        "main_text_person_ids": {"type": "array", "items": {"type": "string", "minLength": 1}, "uniqueItems": true},
+        "liu_annotation_only_person_ids": {"type": "array", "items": {"type": "string", "minLength": 1}, "uniqueItems": true}
+      }
+    },
+    "person": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["person_id", "entry_ids"],
+      "properties": {
+        "person_id": {"type": "string", "minLength": 1},
+        "entry_ids": {"type": "array", "items": {"type": "string", "minLength": 1}, "uniqueItems": true}
+      }
+    }
+  }
+}

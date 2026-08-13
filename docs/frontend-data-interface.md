@@ -1,11 +1,11 @@
 # Static frontend data interface
 
-The frontend is static-first. The deterministic WP1 builder generates one
-frontend bundle at `site/src/generated/wp1-site.json`, and the Vite
-application imports it at build time. The browser does not fetch a separately
-cached `wp1-site.json` URL. Code and frontend data therefore enter the same
-hashed production assets and are deployed atomically; users do not need a
-hard refresh or cache-busting query parameter after deployment.
+The frontend is static-first. The deterministic WP1/SC1 builders generate
+frontend bundles under `site/src/generated/`, and the Vite application imports
+the active SC1 bundle at build time. The browser does not fetch a separately
+cached JSON URL. Code and frontend data therefore enter the same hashed
+production assets and are deployed atomically; users do not need a hard
+refresh or cache-busting query parameter after deployment.
 
 `data/derived/wp1-site.json` is the research-side derived archive of the same
 builder output. It is not an independently maintained frontend source: the
@@ -25,7 +25,23 @@ The bundle contains these arrays:
   relations: Relation[],
   eras: Era[],
   evidence: Evidence[],
-  sources: Source[]
+  sources: Source[],
+  story_chain?: {
+    story_ids: string[],
+    person_story_refs: Array<{
+      person_id: string,
+      story_ids: string[],
+      main_text_story_ids: string[],
+      liu_annotation_only_story_ids: string[]
+    }>,
+    story_person_refs: Array<{
+      entry_id: string,
+      linked_person_ids: string[],
+      main_text_person_ids: string[],
+      liu_annotation_only_person_ids: string[],
+      publication_state: "production_ready" | "preview_ready" | "blocked"
+    }>
+  }
 }
 ```
 
@@ -39,11 +55,33 @@ Evidence records expose an exact derived-artifact locator (`artifact_path`,
 The frontend treats both as metadata; it does not resolve or parse raw source
 files at runtime.
 
-The current WP1 prototype is a single reading page served under the configured
-`/shishuoSketch/` base path in local preview and on GitHub Pages. It
-intentionally does not introduce client-side routing yet. The object IDs and
-cross-object references remain available in the bundle for later reading
-surfaces.
+The current prototype is served under the configured `/shishuoSketch/` base
+path in local preview and on GitHub Pages. It intentionally does not introduce
+client-side routing yet. The object IDs and cross-object references remain
+available in the bundle for later reading surfaces.
+
+## SC1 Story Chain projection
+
+The deployed reader imports `site/src/generated/sc1-site.json` at Vite build
+time. `scripts/build_sc1_frontend_data.py` generates that file and the
+research-side `data/derived/sc1-site.json` together from the SC0 Gold Set,
+canonical entry artifacts, existing reading-layer records, and existing
+PersonStoryLinks. They must remain byte-identical. The earlier
+`wp1-site.json` artifact remains the WP1 sample/research validation fixture;
+it is not a second runtime data source.
+
+SC1 adds an orthogonal `story.publication_state`:
+
+* `production_ready` — reviewed reading layer;
+* `preview_ready` — valid deterministic candidate reading published for this
+  experimental prototype without changing its CRL1/CRL1.1 review status;
+* `blocked` — never published to the Story Chain.
+
+The `story_chain` object projects the existing SC0 Story IDs and the existing
+PersonStory links into `person_story_refs` and `story_person_refs`. It creates
+no Person, Mention, Relation, or textual assertion. Main-text links are shown
+as the primary Person → Story list; Liu-annotation-only links remain a
+separate `史料提及` projection.
 
 Relation records distinguish directly attested edges from deterministic paths
 with `relation_basis: "direct" | "derived"`. Derived records expose
@@ -55,12 +93,23 @@ The page receives the imported bundle, performs a small runtime shape/reference
 check, and renders the first validated Story. It does not call a backend,
 database, online LLM, or runtime API.
 
-Each Story in the generated bundle also carries a reviewed `reading` object:
+Each Story in the generated bundle carries a `reading` object. Its status
+remains the CRL1 editorial status (`reviewed`, `aligned`, `candidate`, or
+`disputed`) and is separate from the SC1 `publication_state`:
+
+```ts
+story.publication_state: "production_ready" | "preview_ready" | "blocked"
+```
+
+`preview_ready` is an experimental publication state for a valid candidate;
+it never changes the underlying punctuation record's `review_status`.
+
+The reading object is:
 
 ```ts
 {
   entry_id: string,
-  status: "reviewed",
+  status: "reviewed" | "aligned" | "candidate" | "disputed",
   punctuation_record_id: string,
   base_canonical_entry_sha256: string,
   conversion: { library: string, config: string },
