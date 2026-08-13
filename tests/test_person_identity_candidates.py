@@ -1,11 +1,18 @@
 from __future__ import annotations
 
+import hashlib
 import json
 from pathlib import Path
+import subprocess
 import unittest
 
 from scripts.person_identity_discovery import OCCURRENCES_PATH, OUTPUT_PATH
-from scripts.validate_person_identity_candidates import validate
+from scripts.validate_person_identity_candidates import (
+    KANRIPO_SHISHUO_PREFIX,
+    validate,
+    validate_primary_shishuo_lock_coverage,
+)
+from scripts.validate_wp1 import _trusted_source_records
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -22,6 +29,101 @@ class PersonIdentityDiscoveryTests(unittest.TestCase):
 
     def test_artifacts_validate_in_portable_mode(self) -> None:
         self.assertEqual(validate(ROOT, mode="portable"), [])
+
+    def test_all_primary_shishuo_evidence_paths_have_trusted_lock_coverage(self) -> None:
+        evidence = self.document["evidence"]
+        references = {
+            (
+                row["locator"]["source_provenance"]["source_path"],
+                row["locator"]["source_provenance"]["witness_id"],
+                row["locator"]["source_provenance"]["source_sha256"],
+            )
+            for row in evidence
+            if row.get("locator", {}).get("source_provenance", {}).get("source_path", "").startswith(
+                KANRIPO_SHISHUO_PREFIX
+            )
+        }
+        self.assertTrue(references)
+        lock_errors: list[str] = []
+        trusted = _trusted_source_records(ROOT, lock_errors)
+        self.assertEqual(lock_errors, [])
+        self.assertEqual(
+            validate_primary_shishuo_lock_coverage(
+                ROOT,
+                evidence,
+                trusted_records=trusted,
+            ),
+            [],
+        )
+        for source_path, witness_id, source_sha256 in sorted(references):
+            matches = [
+                record
+                for record in trusted.get(source_path, [])
+                if record.get("witness_id") == witness_id and record.get("source_sha256") == source_sha256
+            ]
+            self.assertEqual(len(matches), 1, source_path)
+            digest = hashlib.sha256((ROOT / source_path).read_bytes()).hexdigest()
+            self.assertEqual(digest, source_sha256)
+
+    def test_all_committed_derived_primary_shishuo_paths_have_trusted_lock_coverage(self) -> None:
+        """Keep future derived artifacts from bypassing the Kanripo lock baseline."""
+        records: list[dict[str, object]] = []
+
+        def collect(value: object, where: str) -> None:
+            if isinstance(value, dict):
+                provenance = value.get("source_provenance")
+                if isinstance(provenance, dict) and str(provenance.get("source_path", "")).startswith(
+                    KANRIPO_SHISHUO_PREFIX
+                ):
+                    records.append({"id": where, "locator": {"source_provenance": provenance}})
+                for key, child in value.items():
+                    collect(child, f"{where}.{key}")
+            elif isinstance(value, list):
+                for index, child in enumerate(value):
+                    collect(child, f"{where}[{index}]")
+
+        derived_paths = subprocess.check_output(
+            ["git", "ls-files", "data/derived"],
+            cwd=ROOT,
+            text=True,
+        ).splitlines()
+        for relative in derived_paths:
+            if not relative.endswith(".json"):
+                continue
+            collect(json.loads((ROOT / relative).read_text(encoding="utf-8")), relative)
+
+        self.assertTrue(records)
+        lock_errors: list[str] = []
+        trusted = _trusted_source_records(ROOT, lock_errors)
+        self.assertEqual(lock_errors, [])
+        self.assertEqual(
+            validate_primary_shishuo_lock_coverage(
+                ROOT,
+                records,
+                trusted_records=trusted,
+            ),
+            [],
+        )
+
+    def test_missing_primary_shishuo_lock_record_is_rejected(self) -> None:
+        evidence = self.document["evidence"]
+        lock_errors: list[str] = []
+        trusted = _trusted_source_records(ROOT, lock_errors)
+        self.assertEqual(lock_errors, [])
+        path = next(
+            row["locator"]["source_provenance"]["source_path"]
+            for row in evidence
+            if row.get("locator", {}).get("source_provenance", {}).get("source_path", "").startswith(
+                KANRIPO_SHISHUO_PREFIX
+            )
+        )
+        mutated = {key: value for key, value in trusted.items() if key != path}
+        errors = validate_primary_shishuo_lock_coverage(
+            ROOT,
+            evidence,
+            trusted_records=mutated,
+        )
+        self.assertTrue(any(path in error for error in errors))
 
     def test_discovery_is_open_world_and_excludes_materialized_people(self) -> None:
         candidates = self.document["candidates"]

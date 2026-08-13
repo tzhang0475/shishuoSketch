@@ -21,7 +21,7 @@ try:
         PEOPLE_PATH,
         SHISHUO_ENTRIES_PATH,
     )
-    from .validate_wp1 import validate_source_provenance
+    from .validate_wp1 import _trusted_source_records, validate_source_provenance
 except ImportError:
     from person_identity_discovery import (
         ALIASES_PATH,
@@ -32,17 +32,74 @@ except ImportError:
         PEOPLE_PATH,
         SHISHUO_ENTRIES_PATH,
     )
-    from validate_wp1 import validate_source_provenance
+    from validate_wp1 import _trusted_source_records, validate_source_provenance
 
 
 ROOT = Path(__file__).resolve().parents[1]
 SCHEMA_PATH = ROOT / "schema/person-identity-candidates.schema.json"
 OCCURRENCE_SCHEMA_PATH = ROOT / "schema/person-candidate-occurrences.schema.json"
 PROVENANCE_MODES = {"full", "portable"}
+KANRIPO_SHISHUO_PREFIX = "shishuoSources/shishuo/"
 
 
 def read_json(path: Path) -> Any:
     return json.loads(path.read_text(encoding="utf-8"))
+
+
+def validate_primary_shishuo_lock_coverage(
+    root: Path,
+    evidence_records: list[Mapping[str, Any]],
+    *,
+    trusted_records: Mapping[str, list[Mapping[str, Any]]],
+) -> list[str]:
+    """Require portable lock coverage for every primary Kanripo Shishuo path.
+
+    The local checkout may still contain an ignored payload, so ordinary
+    source-hash validation can mask a missing lock record.  Portable CI does
+    not have that payload; this explicit coverage check keeps the committed
+    lock baseline complete for every derived P3A.1 Evidence record.
+    """
+    errors: list[str] = []
+    references: dict[tuple[str, str, str], set[str]] = {}
+    for evidence in evidence_records:
+        locator = evidence.get("locator", {})
+        provenance = locator.get("source_provenance") if isinstance(locator, Mapping) else None
+        if not isinstance(provenance, Mapping):
+            continue
+        source_path = provenance.get("source_path")
+        witness_id = provenance.get("witness_id")
+        source_sha256 = provenance.get("source_sha256")
+        if not isinstance(source_path, str) or not source_path.startswith(KANRIPO_SHISHUO_PREFIX):
+            continue
+        if not isinstance(witness_id, str) or not isinstance(source_sha256, str):
+            continue
+        references.setdefault((Path(source_path).as_posix(), witness_id, source_sha256), set()).add(
+            str(evidence.get("id", "<unknown>"))
+        )
+
+    for (source_path, witness_id, source_sha256), evidence_ids in sorted(references.items()):
+        records = trusted_records.get(source_path, [])
+        if not records:
+            errors.append(
+                "P3A.1 portable provenance lock coverage missing for primary Shishuo path "
+                f"{source_path!r} (Evidence: {', '.join(sorted(evidence_ids))})"
+            )
+            continue
+        if not any(
+            record.get("witness_id") == witness_id and record.get("source_sha256") == source_sha256
+            for record in records
+        ):
+            trusted = "; ".join(
+                f"witness_id={record.get('witness_id')!r}, source_sha256={record.get('source_sha256')!r}"
+                for record in records
+            )
+            errors.append(
+                "P3A.1 portable provenance lock coverage mismatch for primary Shishuo path "
+                f"{source_path!r}: requested witness_id={witness_id!r}, "
+                f"source_sha256={source_sha256!r}; trusted: {trusted} "
+                f"(Evidence: {', '.join(sorted(evidence_ids))})"
+            )
+    return errors
 
 
 def _sha256(path: Path) -> str:
@@ -144,12 +201,24 @@ def validate(root: Path = ROOT, *, mode: str = "full") -> list[str]:
             if isinstance(value, (int, float)) and value < 0:
                 errors.append(f"candidate metric is negative: {candidate_id}/{metric}")
 
+    trusted_records: dict[str, list[dict[str, Any]]] | None = None
+    if mode == "portable":
+        lock_errors: list[str] = []
+        trusted_records = _trusted_source_records(root, lock_errors)
+        errors.extend(lock_errors)
+        errors.extend(
+            validate_primary_shishuo_lock_coverage(
+                root,
+                list(evidence_map.values()),
+                trusted_records=trusted_records,
+            )
+        )
+
     occurrence_rows = occurrences.get("occurrences", [])
     if len(occurrence_rows) != occurrences.get("occurrence_count"):
         errors.append("candidate occurrence count does not match occurrences length")
     occurrence_ids: set[str] = set()
     artifact_hashes: dict[str, str] = {}
-    trusted_records: dict[str, list[dict[str, Any]]] | None = None
     for occurrence in occurrence_rows:
         if not isinstance(occurrence, Mapping):
             continue
