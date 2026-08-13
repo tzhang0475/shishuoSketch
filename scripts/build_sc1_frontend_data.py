@@ -13,6 +13,7 @@ from __future__ import annotations
 import hashlib
 import json
 from pathlib import Path
+import re
 from typing import Any, Mapping
 
 from opencc import OpenCC
@@ -28,6 +29,7 @@ try:
         resolution_mode_for_mention,
     )
     from .reading_layers import build_display_reading, strip_display_punctuation
+    from .person_sketch import build_person_sketches
 except ImportError:  # direct execution
     from build_six_person_pilot import (
         parse_frontmatter,
@@ -39,6 +41,7 @@ except ImportError:  # direct execution
         resolution_mode_for_mention,
     )
     from reading_layers import build_display_reading, strip_display_punctuation
+    from person_sketch import build_person_sketches
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -88,10 +91,16 @@ def entry_path(entry_id: str, entry_by_id: Mapping[str, Mapping[str, Any]]) -> P
     return ROOT / str(entry["path"])
 
 
-def parsed_entry(entry_id: str, entry_by_id: Mapping[str, Mapping[str, Any]]) -> tuple[dict[str, Any], str, list[dict[str, Any]]]:
+def parsed_entry(entry_id: str, entry_by_id: Mapping[str, Mapping[str, Any]]) -> tuple[dict[str, Any], str, str, list[dict[str, Any]]]:
     path = entry_path(entry_id, entry_by_id)
     text = path.read_text(encoding="utf-8")
     metadata = parse_frontmatter(text)
+    source_match = re.search(
+        r"## Original source \(exact\)\n\n(.*?)\n\n## Main text",
+        text,
+        flags=re.DOTALL,
+    )
+    source_text = source_match.group(1) if source_match else ""
     main_text = ""
     annotations: list[dict[str, Any]] = []
     for section, body, section_metadata in parse_shishuo_sections(text):
@@ -108,7 +117,7 @@ def parsed_entry(entry_id: str, entry_by_id: Mapping[str, Mapping[str, Any]]) ->
             )
     if not main_text:
         raise ValueError(f"SC1 entry has no main text: {path}")
-    return metadata, main_text, annotations
+    return metadata, main_text, source_text, annotations
 
 
 def source_locator(
@@ -246,6 +255,19 @@ def publication_state(punctuation: Mapping[str, Any], canonical_main_text: str) 
 def build_ui_labels(converter: OpenCC) -> dict[str, Any]:
     labels = {
         "person_stories_heading": "《世說》中的故事",
+        "person_sketch_identity": "人物概覽",
+        "person_sketch_aliases": "《世說》怎樣稱呼他／她",
+        "person_sketch_stories": "《世說》中的他／她",
+        "person_sketch_relations": "人物關係",
+        "person_sketch_courtesy_name": "字",
+        "person_sketch_clan": "族屬",
+        "person_sketch_roles": "身份",
+        "person_sketch_intro": "簡介",
+        "person_sketch_evidence": "人物依據",
+        "person_sketch_candidate": "資料整理預覽",
+        "person_sketch_reviewed": "已復核資料",
+        "person_sketch_main_story_count": "正文故事",
+        "person_sketch_annotation_story_count": "劉注提及",
         "story_people_heading": "本則人物",
         "primary_story_label": "正文出現",
         "annotation_story_label": "劉注提及",
@@ -285,7 +307,7 @@ def build(root: Path = ROOT) -> dict[str, Any]:
     for selection in selected_records:
         entry_id = selection["entry_id"]
         punctuation = punctuation_by_id[entry_id]
-        metadata, main_text, annotations = parsed_entry(entry_id, entry_by_id)
+        metadata, main_text, source_text, annotations = parsed_entry(entry_id, entry_by_id)
         state = publication_state(punctuation, main_text)
         publication_by_id[entry_id] = state
         if state == "blocked":
@@ -309,6 +331,14 @@ def build(root: Path = ROOT) -> dict[str, Any]:
             story["chapter_display"] = pair("雅量第六", converter)
             story["ordinal"] = 19
             story["global_ordinal"] = 370
+            base_annotation_evidence = {
+                str(item.get("locator", {}).get("annotation_id")): item["id"]
+                for item in base_evidence.values()
+                if isinstance(item.get("locator"), Mapping)
+                and item.get("locator", {}).get("entry_id") == entry_id
+                and isinstance(item.get("locator", {}).get("annotation_id"), str)
+                and item["id"] in story.get("evidence_ids", [])
+            }
             projected_mentions = [
                 base_mentions[mention["mention_id"]]
                 for mention in entry_mentions
@@ -324,6 +354,8 @@ def build(root: Path = ROOT) -> dict[str, Any]:
                 sources=base["sources"],
                 relations=base["relations"],
                 evidence=list(base_evidence.values()),
+                source_text=source_text,
+                annotation_evidence_ids=base_annotation_evidence,
             )
             new_stories.append(story)
             continue
@@ -354,6 +386,13 @@ def build(root: Path = ROOT) -> dict[str, Any]:
             sources=base["sources"],
             relations=base["relations"],
             evidence=list(new_evidence.values()),
+            source_text=source_text,
+            annotation_evidence_ids={
+                annotation_id: evidence_id
+                for key, evidence_id in section_evidence.items()
+                if key.startswith("liu_annotation:")
+                for annotation_id in [key.split(":", 1)[1]]
+            },
         )
         story = {
             "id": entry_id,
@@ -364,7 +403,11 @@ def build(root: Path = ROOT) -> dict[str, Any]:
             "source_ids": ["source-001"],
             "evidence_ids": [
                 section_evidence["main_text"],
-                *([section_evidence["liu_annotation"]] if "liu_annotation" in section_evidence else []),
+                *[
+                    section_evidence[f"liu_annotation:{annotation['id']}"]
+                    for annotation in annotations
+                    if f"liu_annotation:{annotation['id']}" in section_evidence
+                ],
             ],
             "person_ids": selection["linked_person_ids"],
             "mention_ids": [mention["mention_id"] for mention in entry_mentions],
@@ -431,6 +474,13 @@ def build(root: Path = ROOT) -> dict[str, Any]:
             }
         )
 
+    person_sketches = build_person_sketches(
+        ROOT,
+        people=base["people"],
+        frontend_mentions=new_mentions,
+        converter=converter,
+    )
+
     bundle = {
         "schema": 1,
         "generated_from": "scripts/build_sc1_frontend_data.py",
@@ -441,6 +491,7 @@ def build(root: Path = ROOT) -> dict[str, Any]:
         "eras": base["eras"],
         "evidence": sorted(new_evidence.values(), key=lambda item: item["id"]),
         "sources": base["sources"],
+        "person_sketches": person_sketches,
         "story_chain": {
             "schema": 1,
             "stage": "sc1-story-chain-frontend",

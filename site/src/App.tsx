@@ -13,6 +13,8 @@ import {
   truncateExploration,
   pathPersonIds,
   focusedPersonFromExploration,
+  focusedPersonNodeFromExploration,
+  type PersonMentionRoute,
   type RelationPerspective,
   type ExplorationNode,
 } from "./relationExplorer";
@@ -31,6 +33,7 @@ const FALLBACK_STORY_ID = "06-yaliang-019";
 const READING_MODE_STORAGE_KEY = "shishuoSketch.reading-mode";
 type ReadingMode = "simplified" | "original";
 type ResolvedMention = Mention & { person_id: string };
+type PersonFocus = (personId: string, route?: PersonMentionRoute) => void;
 
 function initialReadingMode(): ReadingMode {
   if (typeof window === "undefined") return "simplified";
@@ -55,7 +58,7 @@ function storyHeading(story: Story, mode: ReadingMode): string {
 
 function uiLabel(
   data: SiteBundle,
-  key: "person_stories_heading" | "story_people_heading" | "primary_story_label" | "annotation_story_label" | "read_story" | "reviewed_punctuation" | "preview_punctuation",
+  key: keyof NonNullable<SiteBundle["ui"]>,
   mode: ReadingMode,
   fallback: string,
 ): string {
@@ -136,20 +139,102 @@ function InlineReadingSegments({
   readingMode,
   focusedPersonId,
   onFocus,
+  annotations,
+  openAnnotationIds,
+  onToggleAnnotation,
+  showAnnotationMarkers = true,
 }: {
   segments: ReadingSegment[];
   story: Story;
   data: SiteBundle;
   readingMode: ReadingMode;
   focusedPersonId: string | null;
-  onFocus: (personId: string) => void;
+  onFocus: PersonFocus;
+  annotations: Story["reading"]["annotations"];
+  openAnnotationIds: Set<string>;
+  onToggleAnnotation: (annotationId: string) => void;
+  showAnnotationMarkers?: boolean;
 }) {
+  function annotationEvidence(annotation: Story["reading"]["annotations"][number]): Evidence[] {
+    const ids = annotation.evidence_ids ?? story.evidence_ids.filter((id) => {
+      const item = data.evidence.find((candidate) => candidate.id === id);
+      return item?.locator.annotation_id === annotation.id;
+    });
+    return ids
+      .map((id) => data.evidence.find((item) => item.id === id))
+      .filter((item): item is Evidence => Boolean(item));
+  }
+
+  function annotationExpansion(annotation: Story["reading"]["annotations"][number]): JSX.Element {
+    const evidence = annotationEvidence(annotation);
+    return (
+      <span
+        className="inline-annotation-expansion"
+        id={`inline-annotation-${story.id}-${annotation.id}`}
+        role="region"
+        aria-label={readingValue(story.reading.labels.annotation_label, readingMode, "刘孝标注")}
+      >
+        <span className="inline-annotation-heading">
+          {readingValue(story.reading.labels.annotation_label, readingMode, "刘孝标注")}
+          {annotation.punctuation_status === "unavailable" && <span className="inline-annotation-status"> · 原文</span>}
+        </span>
+        <span className="inline-annotation-text">
+          <InlineReadingSegments
+            segments={annotation.segments}
+            story={story}
+            data={data}
+            readingMode={readingMode}
+            focusedPersonId={focusedPersonId}
+            onFocus={onFocus}
+            annotations={annotations}
+            openAnnotationIds={openAnnotationIds}
+            onToggleAnnotation={onToggleAnnotation}
+            showAnnotationMarkers={false}
+          />
+        </span>
+        {evidence.length > 0 && (
+          <details className="inline-annotation-evidence">
+            <summary>查看出处 ›</summary>
+            {evidence.map((item) => (
+              <span key={item.id}>
+                <span className="inline-annotation-source">
+                  {item.locator.annotation_id ? "刘孝标注" : item.source_id}
+                </span>
+                <blockquote>{readingValue(story.reading.evidence_display[item.id], readingMode, item.quote)}</blockquote>
+              </span>
+            ))}
+          </details>
+        )}
+      </span>
+    );
+  }
+
   return (
     <>
       {segments.map((segment, index) => {
         const text = readingValue(segment.display, readingMode, "");
         if (segment.type === "text") {
           return <span key={`text-${index}`}>{text}</span>;
+        }
+        if (segment.type === "annotation_marker") {
+          const annotation = annotations.find((candidate) => candidate.id === segment.annotation_id);
+          if (!showAnnotationMarkers || !annotation) return null;
+          const isOpen = openAnnotationIds.has(annotation.id);
+          return (
+            <span className="inline-annotation-marker-wrap" key={`annotation-marker-${segment.annotation_id}-${index}`}>
+              <button
+                type="button"
+                className="inline-annotation-marker"
+                aria-expanded={isOpen}
+                aria-controls={`inline-annotation-${story.id}-${annotation.id}`}
+                aria-label={`${readingValue(segment.label, readingMode, "〔注〕")}，打开刘孝标注`}
+                onClick={() => onToggleAnnotation(annotation.id)}
+              >
+                {readingValue(segment.label, readingMode, "〔注〕")}
+              </button>
+              {isOpen && annotationExpansion(annotation)}
+            </span>
+          );
         }
         const mention = data.mentions.find((candidate) => candidate.id === segment.mention_id);
         const person = data.people.find((candidate) => candidate.id === segment.person_id);
@@ -162,7 +247,7 @@ function InlineReadingSegments({
             className={active ? "inline-person-mention active" : "inline-person-mention"}
             aria-label={`${text}，已解析为${personName}，查看人物`}
             title={mention ? `${text} → ${personName}` : personName}
-            onClick={() => onFocus(segment.person_id)}
+            onClick={() => onFocus(segment.person_id, { via_mention_id: segment.mention_id, from_story_id: story.id })}
           >
             {text}
           </button>
@@ -185,7 +270,7 @@ function MentionSummaryGroup({
   story: Story;
   data: SiteBundle;
   readingMode: ReadingMode;
-  onFocus: (personId: string) => void;
+  onFocus: PersonFocus;
 }) {
   if (mentions.length === 0) return null;
   return (
@@ -194,7 +279,11 @@ function MentionSummaryGroup({
       <ul className="mention-summary-list">
         {mentions.map((mention) => (
           <li key={mention.id}>
-            <button type="button" className="mention-summary-link" onClick={() => onFocus(mention.person_id)}>
+            <button
+              type="button"
+              className="mention-summary-link"
+              onClick={() => onFocus(mention.person_id, { via_mention_id: mention.id, from_story_id: story.id })}
+            >
               {readingValue(story.reading.mention_display[mention.id]?.surface, readingMode, mention.surface)}
               {" · "}
               {mentionPersonDisplayName(story, data, mention, readingMode)}
@@ -321,7 +410,7 @@ function EgoRelationMap({
   focusedPerson: Person;
   perspectives: RelationPerspective[];
   readingMode: ReadingMode;
-  onFocus: (personId: string) => void;
+  onFocus: PersonFocus;
 }) {
   const layout = egoLayout(perspectives.length);
   return (
@@ -422,7 +511,7 @@ function PersonStories({
   const annotationStories = annotationIds.map((id) => storyById(data, id)).filter((item): item is Story => Boolean(item));
   return (
     <div className="person-stories-group">
-      <p className="relation-detail-heading">{uiLabel(data, "person_stories_heading", readingMode, "《世說》中的故事")}</p>
+      <p className="relation-detail-heading">{uiLabel(data, "person_sketch_stories", readingMode, "《世說》中的他／她")}</p>
       {primaryStories.length === 0 ? (
         <p className="relation-empty">—</p>
       ) : (
@@ -460,12 +549,213 @@ function PersonStories({
   );
 }
 
+function MentionOriginExplanation({
+  story,
+  data,
+  focusedPerson,
+  routeNode,
+  readingMode,
+}: {
+  story: Story;
+  data: SiteBundle;
+  focusedPerson: Person;
+  routeNode: ExplorationNode | null;
+  readingMode: ReadingMode;
+}) {
+  if (!routeNode || routeNode.kind !== "person" || !routeNode.via_mention_id || !routeNode.from_story_id) {
+    return null;
+  }
+  const originStory = storyById(data, routeNode.from_story_id);
+  const mention = data.mentions.find((candidate) => candidate.id === routeNode.via_mention_id);
+  if (!originStory || !mention || mention.person_id !== focusedPerson.id || mention.confidence === "unresolved") {
+    return null;
+  }
+  const mentionDisplay = originStory.reading.mention_display[mention.id];
+  const surface = readingValue(mentionDisplay?.surface, readingMode, mention.surface);
+  const explanation = readingValue(mentionDisplay?.explanation, readingMode, "本项目已将此称谓解析为此人。");
+  const evidence = mention.evidence_ids
+    .map((id) => data.evidence.find((item) => item.id === id))
+    .filter((item): item is Evidence => Boolean(item));
+  return (
+    <section className="mention-origin-explanation" aria-label="称谓解析说明">
+      <p className="mention-origin-kicker">你从这里来到他 / 她</p>
+      <p className="mention-origin-label">本则称谓</p>
+      <p className="mention-origin-surface">{surface}</p>
+      <p className="mention-origin-question">为什么这里指{personDisplayName(originStory, focusedPerson, readingMode)}？</p>
+      <p className="mention-origin-reason">{explanation}</p>
+      {evidence.length > 0 && (
+        <details className="mention-origin-evidence">
+          <summary>查看完整依据 ›</summary>
+          {evidence.map((item) => (
+            <article key={item.id}>
+              <p className="mention-origin-source">
+                {item.locator.annotation_id ? "刘孝标注" : "正文"}
+              </p>
+              <blockquote>{readingValue(originStory.reading.evidence_display[item.id], readingMode, item.quote)}</blockquote>
+            </article>
+          ))}
+        </details>
+      )}
+    </section>
+  );
+}
+
+function PersonSketchIdentity({
+  story,
+  data,
+  focusedPerson,
+  readingMode,
+}: {
+  story: Story;
+  data: SiteBundle;
+  focusedPerson: Person;
+  readingMode: ReadingMode;
+}) {
+  const sketch = data.person_sketches[focusedPerson.id];
+  if (!sketch) return null;
+  const identity = sketch.identity;
+  const roles = identity.identity_roles.map((role) => readingValue(role, readingMode, ""));
+  return (
+    <section className="person-sketch-identity" aria-label={uiLabel(data, "person_sketch_identity", readingMode, "人物概览")}>
+      <p className="person-sketch-review-status">
+        {sketch.review_status === "candidate"
+          ? uiLabel(data, "person_sketch_candidate", readingMode, "資料整理預覽")
+          : uiLabel(data, "person_sketch_reviewed", readingMode, "已復核資料")}
+      </p>
+      <dl className="person-sketch-metadata">
+        {identity.courtesy_name && (
+          <>
+            <dt>{uiLabel(data, "person_sketch_courtesy_name", readingMode, "字")}</dt>
+            <dd>{readingValue(identity.courtesy_name, readingMode, "")}</dd>
+          </>
+        )}
+        {identity.clan && (
+          <>
+            <dt>{uiLabel(data, "person_sketch_clan", readingMode, "族属")}</dt>
+            <dd>{readingValue(identity.clan, readingMode, "")}</dd>
+          </>
+        )}
+        {roles.length > 0 && (
+          <>
+            <dt>{uiLabel(data, "person_sketch_roles", readingMode, "身份")}</dt>
+            <dd>{roles.join("、")}</dd>
+          </>
+        )}
+      </dl>
+      {identity.brief_intro && (
+        <p className="person-sketch-intro">
+          {readingValue(identity.brief_intro, readingMode, "")}
+        </p>
+      )}
+    </section>
+  );
+}
+
+function PersonSketchAliasRows({
+  story,
+  data,
+  focusedPerson,
+  readingMode,
+}: {
+  story: Story;
+  data: SiteBundle;
+  focusedPerson: Person;
+  readingMode: ReadingMode;
+}) {
+  const sketch = data.person_sketches[focusedPerson.id];
+  if (!sketch) return null;
+  return (
+    <section className="person-sketch-naming" aria-label={uiLabel(data, "person_sketch_aliases", readingMode, "《世说》怎样称呼他／她")}>
+      <p className="relation-detail-heading">{uiLabel(data, "person_sketch_aliases", readingMode, "《世说》怎样称呼他／她")}</p>
+      {sketch.aliases.length === 0 ? (
+        <p className="relation-empty">{story.reading.labels.empty_alias[readingMode]}</p>
+      ) : (
+        <div className="person-sketch-alias-list">
+          {sketch.aliases.map((alias) => {
+            const layers = alias.source_layers.map((layer) => layer === "main_text"
+              ? uiLabel(data, "primary_story_label", readingMode, "正文出现")
+              : uiLabel(data, "annotation_story_label", readingMode, "刘注提及"));
+            const evidence = alias.evidence_ids
+              .map((id) => data.evidence.find((item) => item.id === id))
+              .filter((item): item is Evidence => Boolean(item));
+            return (
+              <article className="person-sketch-alias-row" key={alias.alias_id}>
+                <div className="person-sketch-alias-main">
+                  <span className="person-sketch-alias-surface">{readingValue(alias.surface, readingMode, "")}</span>
+                  <span className="person-sketch-alias-label">{readingValue(alias.label, readingMode, "称谓")}</span>
+                  <span className={alias.semantic_status === "exact" ? "person-sketch-alias-status exact" : "person-sketch-alias-status contextual"}>
+                    {readingValue(alias.semantic_label, readingMode, "需结合上下文")}
+                  </span>
+                </div>
+                <p className="person-sketch-alias-meta">
+                  {layers.join("、") || "—"} · {alias.occurrence_count}次
+                </p>
+                {evidence.length > 0 && (
+                  <details className="person-sketch-alias-evidence">
+                    <summary>{uiLabel(data, "person_sketch_evidence", readingMode, "依据")} ›</summary>
+                    {evidence.map((item) => {
+                      const source = story.reading.source_display[item.source_id];
+                      const quote = story.reading.evidence_display[item.id]?.[readingMode] ?? item.quote;
+                      return (
+                        <div key={item.id}>
+                          <p>{source ? `${source.work[readingMode]} · ${source.edition[readingMode]}` : item.source_id}</p>
+                          <blockquote>{quote}</blockquote>
+                        </div>
+                      );
+                    })}
+                  </details>
+                )}
+              </article>
+            );
+          })}
+        </div>
+      )}
+    </section>
+  );
+}
+
+function PersonSketchEvidence({
+  story,
+  data,
+  focusedPerson,
+  readingMode,
+}: {
+  story: Story;
+  data: SiteBundle;
+  focusedPerson: Person;
+  readingMode: ReadingMode;
+}) {
+  const sketch = data.person_sketches[focusedPerson.id];
+  if (!sketch) return null;
+  const evidenceIds = [...new Set([...sketch.identity.evidence_ids, ...sketch.profile_evidence_ids])];
+  const evidence = evidenceIds
+    .map((id) => data.evidence.find((item) => item.id === id))
+    .filter((item): item is Evidence => Boolean(item));
+  if (evidence.length === 0) return null;
+  return (
+    <details className="person-sketch-evidence">
+      <summary>{uiLabel(data, "person_sketch_evidence", readingMode, "人物依据")} ›</summary>
+      {evidence.map((item) => {
+        const source = story.reading.source_display[item.source_id];
+        const quote = story.reading.evidence_display[item.id]?.[readingMode] ?? item.quote;
+        return (
+          <article key={item.id}>
+            <p>{source ? `${source.work[readingMode]} · ${source.edition[readingMode]}` : item.source_id}</p>
+            <blockquote>{quote}</blockquote>
+          </article>
+        );
+      })}
+    </details>
+  );
+}
+
 function PersonDetailCard({
   story,
   data,
   focusedPerson,
   perspectives,
   readingMode,
+  routeNode,
   onFocus,
   onStorySelect,
 }: {
@@ -474,20 +764,40 @@ function PersonDetailCard({
   focusedPerson: Person;
   perspectives: RelationPerspective[];
   readingMode: ReadingMode;
-  onFocus: (personId: string) => void;
+  routeNode: ExplorationNode | null;
+  onFocus: PersonFocus;
   onStorySelect: (storyId: string) => void;
 }) {
-  const aliases = story.reading.person_display[focusedPerson.id]?.aliases ?? [];
   const derivedRelations = derivedRelationsForPerson(focusedPerson.id, data);
+  const sketch = data.person_sketches[focusedPerson.id];
+  const storyCounts = sketch?.story_counts;
   return (
     <section className="person-detail-card" aria-labelledby="focused-person-heading">
       <p className="section-label">{story.reading.labels.focused_person_label[readingMode]}</p>
       <h3 id="focused-person-heading">{personDisplayName(story, focusedPerson, readingMode)}</h3>
-      <p className="person-detail-aliases">
-        {aliases.length ? aliases.map((alias) => readingValue(alias.surface, readingMode, "")).join("、") : story.reading.labels.empty_alias[readingMode]}
-      </p>
+      <PersonSketchIdentity story={story} data={data} focusedPerson={focusedPerson} readingMode={readingMode} />
+      <MentionOriginExplanation
+        story={story}
+        data={data}
+        focusedPerson={focusedPerson}
+        routeNode={routeNode}
+        readingMode={readingMode}
+      />
+      <PersonSketchAliasRows story={story} data={data} focusedPerson={focusedPerson} readingMode={readingMode} />
+      {storyCounts && (
+        <p className="person-sketch-story-summary">
+          {storyCounts.main_text} {uiLabel(data, "person_sketch_main_story_count", readingMode, "正文故事")} · {storyCounts.liu_annotation_only} {uiLabel(data, "person_sketch_annotation_story_count", readingMode, "刘注提及")}
+        </p>
+      )}
+      <PersonStories
+        data={data}
+        focusedPerson={focusedPerson}
+        readingMode={readingMode}
+        onStorySelect={onStorySelect}
+      />
       <div className="relation-detail-group">
-        <p className="relation-detail-heading">{story.reading.labels.direct_relation_label[readingMode]}</p>
+        <p className="relation-detail-heading">{uiLabel(data, "person_sketch_relations", readingMode, "人物关系")}</p>
+        <p className="relation-detail-subheading">{story.reading.labels.direct_relation_label[readingMode]}</p>
         {perspectives.length === 0 && <p className="relation-empty">{story.reading.labels.no_direct_relations[readingMode]}</p>}
         {perspectives.map((perspective) => (
           <div className="relation-detail-row" key={perspective.relation.id}>
@@ -512,12 +822,7 @@ function PersonDetailCard({
           ))}
         </div>
       )}
-      <PersonStories
-        data={data}
-        focusedPerson={focusedPerson}
-        readingMode={readingMode}
-        onStorySelect={onStorySelect}
-      />
+      <PersonSketchEvidence story={story} data={data} focusedPerson={focusedPerson} readingMode={readingMode} />
     </section>
   );
 }
@@ -526,6 +831,7 @@ function EgoRelationExplorer({
   story,
   data,
   focusedPersonId: focusedId,
+  focusedPersonNode,
   readingMode,
   backTarget,
   onFocus,
@@ -535,9 +841,10 @@ function EgoRelationExplorer({
   story: Story;
   data: SiteBundle;
   focusedPersonId: string;
+  focusedPersonNode: ExplorationNode | null;
   readingMode: ReadingMode;
   backTarget: ExplorationNode | null;
-  onFocus: (personId: string) => void;
+  onFocus: PersonFocus;
   onBack: () => void;
   onStorySelect: (storyId: string) => void;
 }) {
@@ -569,6 +876,7 @@ function EgoRelationExplorer({
           focusedPerson={focusedPerson}
           perspectives={perspectives}
           readingMode={readingMode}
+          routeNode={focusedPersonNode}
           onFocus={onFocus}
           onStorySelect={onStorySelect}
         />
@@ -589,6 +897,7 @@ function PersonExplorerPanel({
   story,
   data,
   focusedPersonId,
+  focusedPersonNode,
   readingMode,
   backTarget,
   onFocus,
@@ -599,9 +908,10 @@ function PersonExplorerPanel({
   story: Story;
   data: SiteBundle;
   focusedPersonId: string | null;
+  focusedPersonNode: ExplorationNode | null;
   readingMode: ReadingMode;
   backTarget: ExplorationNode | null;
-  onFocus: (personId: string) => void;
+  onFocus: PersonFocus;
   onBack: () => void;
   onStorySelect: (storyId: string) => void;
   onClose: () => void;
@@ -626,6 +936,7 @@ function PersonExplorerPanel({
           story={story}
           data={data}
           focusedPersonId={focusedPersonId}
+          focusedPersonNode={focusedPersonNode}
           readingMode={readingMode}
           backTarget={backTarget}
           onFocus={onFocus}
@@ -800,19 +1111,30 @@ function StoryReader({
   readingMode: ReadingMode;
   setReadingMode: (mode: ReadingMode) => void;
   focusedPersonId: string | null;
-  onFocus: (personId: string) => void;
+  onFocus: PersonFocus;
 }) {
   const readerRef = useRef<HTMLDivElement>(null);
+  const [openAnnotationIds, setOpenAnnotationIds] = useState<Set<string>>(() => new Set());
   const mentions = resolvedMentions(story, data);
   const mainTextMentions = mentions.filter((mention) => mention.section === "main_text");
   const annotationMentions = mentions.filter((mention) => mention.section === "liu_annotation");
 
   useEffect(() => {
+    setOpenAnnotationIds(new Set());
     const reader = readerRef.current;
     if (!reader) return;
     reader.scrollTop = 0;
     reader.scrollIntoView({ behavior: "auto", block: "start" });
   }, [story.id]);
+
+  function toggleAnnotation(annotationId: string): void {
+    setOpenAnnotationIds((current) => {
+      const next = new Set(current);
+      if (next.has(annotationId)) next.delete(annotationId);
+      else next.add(annotationId);
+      return next;
+    });
+  }
 
   return (
     <div className="story-reader-stage" ref={readerRef} tabIndex={-1} aria-labelledby="story-heading">
@@ -857,27 +1179,44 @@ function StoryReader({
               readingMode={readingMode}
               focusedPersonId={focusedPersonId}
               onFocus={onFocus}
+              annotations={story.reading.annotations}
+              openAnnotationIds={openAnnotationIds}
+              onToggleAnnotation={toggleAnnotation}
             />
           </p>
         </section>
 
         <section className="annotation-hook" aria-label="进一步读">
           <p className="section-label">进一步读</p>
-          {story.reading.annotations.map((annotation) => (
-            <details className="annotation-panel" key={annotation.id} open>
-              <summary>{story.reading.labels.annotation_label[readingMode]}</summary>
-              <p className="annotation-text">
-                <InlineReadingSegments
-                  segments={annotation.segments}
-                  story={story}
-                  data={data}
-                  readingMode={readingMode}
-                  focusedPersonId={focusedPersonId}
-                  onFocus={onFocus}
-                />
-              </p>
-            </details>
-          ))}
+          <details className="annotation-index">
+            <summary>
+              {readingValue(story.reading.labels.annotation_label, readingMode, "刘孝标注")} · {story.reading.annotations.length}条
+            </summary>
+            <div className="annotation-index-list">
+              {story.reading.annotations.map((annotation) => (
+                <details className="annotation-panel" key={annotation.id}>
+                  <summary>
+                    {annotation.insertion.status === "safe" ? `〔注${annotation.insertion.label}〕` : "未定位注释"}
+                    {annotation.punctuation_status === "unavailable" && <span className="annotation-index-status"> · 原文</span>}
+                  </summary>
+                  <p className="annotation-text">
+                    <InlineReadingSegments
+                      segments={annotation.segments}
+                      story={story}
+                      data={data}
+                      readingMode={readingMode}
+                      focusedPersonId={focusedPersonId}
+                      onFocus={onFocus}
+                      annotations={story.reading.annotations}
+                      openAnnotationIds={openAnnotationIds}
+                      onToggleAnnotation={toggleAnnotation}
+                      showAnnotationMarkers={false}
+                    />
+                  </p>
+                </details>
+              ))}
+            </div>
+          </details>
         </section>
 
         <section className="people-section" aria-labelledby="people-heading" aria-label={story.reading.labels.people_section[readingMode]}>
@@ -918,6 +1257,7 @@ function ReadingPage({
   setReadingMode,
   stack,
   focusedPersonId,
+  focusedPersonNode,
   personPanelOpen,
   onFocus,
   onBack,
@@ -932,8 +1272,9 @@ function ReadingPage({
   setReadingMode: (mode: ReadingMode) => void;
   stack: ExplorationNode[];
   focusedPersonId: string | null;
+  focusedPersonNode: ExplorationNode | null;
   personPanelOpen: boolean;
-  onFocus: (personId: string) => void;
+  onFocus: PersonFocus;
   onBack: () => void;
   onStorySelect: (storyId: string) => void;
   onPathSelect: (index: number) => void;
@@ -983,6 +1324,7 @@ function ReadingPage({
             story={story}
             data={data}
             focusedPersonId={focusedPersonId}
+            focusedPersonNode={focusedPersonNode}
             readingMode={readingMode}
             backTarget={backTarget}
             onFocus={onFocus}
@@ -1029,10 +1371,15 @@ function App() {
     return storyId ? storyById(data, storyId) : undefined;
   }, [data, stack]);
   const currentFocusedPersonId = focusedPersonFromExploration(stack);
+  const currentFocusedPersonNode = focusedPersonNodeFromExploration(stack);
 
-  function focusPerson(personId: string) {
+  function focusPerson(personId: string, route?: PersonMentionRoute) {
     if (!data?.people.some((person) => person.id === personId)) return;
-    setStack((current) => appendExploration(current, { kind: "person", id: personId }));
+    setStack((current) => appendExploration(current, {
+      kind: "person",
+      id: personId,
+      ...(route ?? {}),
+    }));
     setPersonPanelOpen(true);
   }
 
@@ -1096,6 +1443,7 @@ function App() {
       setReadingMode={setReadingMode}
       stack={stack}
       focusedPersonId={currentFocusedPersonId}
+      focusedPersonNode={currentFocusedPersonNode}
       personPanelOpen={personPanelOpen}
       onFocus={focusPerson}
       onBack={goBack}

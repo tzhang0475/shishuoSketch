@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://shishuo-sketch/schema/person-sketch.schema.json",
+  "title": "Person Sketch v1 curated layer",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "stage", "person_scope", "records"],
+  "properties": {
+    "schema": {"const": 1},
+    "stage": {"const": "person-sketch-v1"},
+    "person_scope": {"type": "array", "uniqueItems": true, "items": {"type": "string"}},
+    "records": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/record"}
+    }
+  },
+  "$defs": {
+    "record": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["person_id", "review_status", "identity", "profile_evidence_ids"],
+      "properties": {
+        "person_id": {"type": "string"},
+        "review_status": {"enum": ["candidate", "reviewed"]},
+        "identity": {"$ref": "#/$defs/identity"},
+        "profile_evidence_ids": {"type": "array", "items": {"type": "string"}, "uniqueItems": true}
+      }
+    },
+    "identity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["canonical_name", "courtesy_name", "clan", "identity_roles", "brief_intro", "evidence_ids"],
+      "properties": {
+        "canonical_name": {"type": "string", "minLength": 1},
+        "courtesy_name": {"type": ["string", "null"]},
+        "clan": {"type": ["string", "null"]},
+        "identity_roles": {"type": "array", "items": {"type": "string"}},
+        "brief_intro": {"type": ["string", "null"], "maxLength": 120},
+        "evidence_ids": {"type": "array", "items": {"type": "string"}, "uniqueItems": true}
+      }
+    }
+  }
+}

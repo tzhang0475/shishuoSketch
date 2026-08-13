@@ -172,7 +172,7 @@ class SC111InlineMentionTests(unittest.TestCase):
         self.assertIn("InlineReadingSegments", self.app)
         self.assertIn("story.reading.main_text.segments", self.app)
         self.assertIn("annotation.segments", self.app)
-        self.assertIn("onFocus(segment.person_id)", self.app)
+        self.assertIn("onFocus(segment.person_id, { via_mention_id: segment.mention_id", self.app)
         self.assertNotIn("indexOf(mention.surface)", self.app)
         self.assertNotIn("inlineSelectedPersonId", self.app)
         self.assertNotIn("mentionPersonId", self.app)

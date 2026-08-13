@@ -15,10 +15,12 @@ from opencc import OpenCC
 try:
     from .build_six_person_pilot import parse_shishuo_sections
     from .reading_layers import display_span_for_anchor, strip_display_punctuation
+    from .validate_person_sketch import validate_bundle as validate_person_sketch_bundle
     from .validate_wp1 import validate_source_provenance
 except ImportError:  # direct execution
     from build_six_person_pilot import parse_shishuo_sections
     from reading_layers import display_span_for_anchor, strip_display_punctuation
+    from validate_person_sketch import validate_bundle as validate_person_sketch_bundle
     from validate_wp1 import validate_source_provenance
 
 
@@ -96,11 +98,20 @@ def validate_inline_mention_projection(
             canonical_by_layer[("liu_annotation", annotation["id"])] = str(annotation.get("text", ""))
 
     placed: dict[str, tuple[str, str | None]] = {}
+    placed_markers: set[str] = set()
     suppressed: dict[str, dict[str, Any]] = {}
     projection = reading.get("mention_projection", {})
     if isinstance(projection, dict) and isinstance(projection.get("suppressed"), list):
         for item in projection["suppressed"]:
-            if not isinstance(item, dict) or not isinstance(item.get("mention_id"), str):
+            if not isinstance(item, dict):
+                errors.append(f"SC1 {story_id}: malformed suppressed Mention record")
+                continue
+            if item.get("kind") == "annotation_marker":
+                annotation_id = item.get("annotation_id")
+                if not isinstance(annotation_id, str) or item.get("section") != "main_text":
+                    errors.append(f"SC1 {story_id}: malformed suppressed annotation marker")
+                continue
+            if not isinstance(item.get("mention_id"), str):
                 errors.append(f"SC1 {story_id}: malformed suppressed Mention record")
                 continue
             mention_id = item["mention_id"]
@@ -140,6 +151,21 @@ def validate_inline_mention_projection(
             display_simplified = display["simplified"]
             original += display_original
             simplified += display_simplified
+            if segment.get("type") == "annotation_marker":
+                annotation_marker_id = segment.get("annotation_id")
+                if layer != "main_text" or not isinstance(annotation_marker_id, str):
+                    errors.append(f"SC1 {story_id}: annotation marker is not in main text")
+                    continue
+                if display_original or display_simplified:
+                    errors.append(f"SC1 {story_id}: annotation marker changes reconstructed text")
+                label = segment.get("label")
+                if not isinstance(label, dict) or not isinstance(label.get("original"), str) or not isinstance(label.get("simplified"), str):
+                    errors.append(f"SC1 {story_id}: annotation marker label is incomplete")
+                if annotation_marker_id in placed_markers:
+                    errors.append(f"SC1 {story_id}: duplicate annotation marker: {annotation_marker_id}")
+                placed_markers.add(annotation_marker_id)
+                offset += len(display_original)
+                continue
             if segment.get("type") != "person_mention":
                 offset += len(display_original)
                 continue
@@ -200,6 +226,36 @@ def validate_inline_mention_projection(
             "liu_annotation",
             annotation_id,
         )
+
+    reading_annotations = reading.get("annotations", [])
+    source_annotations = story.get("annotations", [])
+    annotation_id_set = {
+        item.get("id") for item in reading_annotations
+        if isinstance(item, dict) and isinstance(item.get("id"), str)
+    }
+    if not isinstance(reading_annotations, list) or not isinstance(source_annotations, list) or len(reading_annotations) != len(source_annotations):
+        errors.append(f"SC1 {story_id}: canonical/reading annotation count differs")
+    elif [item.get("id") for item in reading_annotations if isinstance(item, dict)] != [item.get("id") for item in source_annotations if isinstance(item, dict)]:
+        errors.append(f"SC1 {story_id}: annotation order or IDs differ")
+    story_evidence_ids = set(story.get("evidence_ids", []))
+    for annotation in reading_annotations if isinstance(reading_annotations, list) else []:
+        if not isinstance(annotation, dict):
+            continue
+        insertion = annotation.get("insertion")
+        if not isinstance(insertion, dict) or insertion.get("status") not in {"safe", "unavailable"}:
+            errors.append(f"SC1 {story_id}: annotation insertion metadata is invalid")
+        if isinstance(insertion, dict) and insertion.get("status") == "safe" and annotation.get("id") not in placed_markers:
+            errors.append(f"SC1 {story_id}: safe annotation insertion has no marker: {annotation.get('id')}")
+        if isinstance(insertion, dict) and insertion.get("status") == "unavailable" and annotation.get("id") in placed_markers:
+            errors.append(f"SC1 {story_id}: unavailable annotation insertion has a marker: {annotation.get('id')}")
+        for evidence_id in annotation.get("evidence_ids", []):
+            if not isinstance(evidence_id, str):
+                errors.append(f"SC1 {story_id}: annotation Evidence ID is malformed: {evidence_id}")
+            if evidence_id not in story_evidence_ids:
+                errors.append(f"SC1 {story_id}: annotation Evidence is not exposed at Story level: {evidence_id}")
+    for marker_id in placed_markers:
+        if marker_id not in annotation_id_set:
+            errors.append(f"SC1 {story_id}: annotation marker references unknown annotation: {marker_id}")
 
     for mention_id in story.get("mention_ids", []):
         mention = mentions.get(str(mention_id))
@@ -304,6 +360,7 @@ def validate(root: Path = ROOT, mode: str = "full") -> list[str]:
     people_id_set = {str(item.get("id")) for item in bundle.get("people", []) if isinstance(item, dict) and isinstance(item.get("id"), str)}
 
     errors.extend(validate_sc1_source_provenance_coverage(root, bundle, mode=mode))
+    errors.extend(validate_person_sketch_bundle(root))
 
     for evidence_id, evidence in evidence_by_id.items():
         locator = evidence.get("locator", {})
@@ -365,6 +422,12 @@ def validate(root: Path = ROOT, mode: str = "full") -> list[str]:
         for evidence_id in story.get("evidence_ids", []):
             if evidence_id not in evidence_by_id:
                 errors.append(f"SC1 Story has an invalid Evidence reference: {entry_id}/{evidence_id}")
+        for annotation in story.get("reading", {}).get("annotations", []):
+            if not isinstance(annotation, dict):
+                continue
+            for evidence_id in annotation.get("evidence_ids", []):
+                if evidence_id not in evidence_by_id:
+                    errors.append(f"SC1 annotation has an invalid Evidence reference: {entry_id}/{evidence_id}")
         for relation_id in story.get("relation_ids", []):
             if relation_id not in relation_ids:
                 errors.append(f"SC1 Story has an invalid Relation reference: {entry_id}/{relation_id}")

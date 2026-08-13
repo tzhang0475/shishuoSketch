@@ -25,6 +25,106 @@ function isRuntimeStoryRecord(value: unknown): value is RuntimeStoryRecord {
   return isRecord(value) && typeof value.id === "string" && isPublicationState(value.publication_state);
 }
 
+function isReadingPair(value: unknown): value is { original: string; simplified: string } {
+  return isRecord(value) && typeof value.original === "string" && typeof value.simplified === "string";
+}
+
+function validatePersonSketches(
+  value: unknown,
+  people: unknown[],
+  mentions: unknown[],
+  evidenceIds: Set<string>,
+): void {
+  if (!isRecord(value)) throw new Error("静态数据缺少 person_sketches");
+  const peopleById = new Map<string, Record<string, unknown>>();
+  for (const person of people) {
+    if (isRecord(person) && typeof person.id === "string") peopleById.set(person.id, person);
+  }
+  const mentionIds = new Set(
+    mentions
+      .filter(isRecord)
+      .filter((mention) => typeof mention.id === "string")
+      .map((mention) => String(mention.id)),
+  );
+  const sketchIds = Object.keys(value);
+  if (sketchIds.length !== peopleById.size || sketchIds.some((id) => !peopleById.has(id))) {
+    throw new Error("person_sketches 必须覆盖且仅覆盖 canonical Person registry");
+  }
+  for (const [personId, sketch] of Object.entries(value)) {
+    if (!isRecord(sketch) || sketch.person_id !== personId) {
+      throw new Error(`Person Sketch ${personId} 的 person_id 不一致`);
+    }
+    if (sketch.scope_role !== "primary" && sketch.scope_role !== "supporting") {
+      throw new Error(`Person Sketch ${personId} 的 scope_role 无效`);
+    }
+    if (sketch.review_status !== "candidate" && sketch.review_status !== "reviewed") {
+      throw new Error(`Person Sketch ${personId} 的 review_status 无效`);
+    }
+    const person = peopleById.get(personId);
+    const identity = sketch.identity;
+    if (!person || !isRecord(identity) || !isReadingPair(identity.canonical_name)) {
+      throw new Error(`Person Sketch ${personId} 的 identity 不完整`);
+    }
+    if (identity.canonical_name.original !== person.canonical_name) {
+      throw new Error(`Person Sketch ${personId} 不得改写 canonical Person name`);
+    }
+    for (const key of ["courtesy_name", "clan", "brief_intro"]) {
+      const field = identity[key];
+      if (field !== null && !isReadingPair(field)) throw new Error(`Person Sketch ${personId} 的 ${key} 不完整`);
+    }
+    if (!Array.isArray(identity.identity_roles) || identity.identity_roles.some((item) => !isReadingPair(item))) {
+      throw new Error(`Person Sketch ${personId} 的 identity_roles 无效`);
+    }
+    if (!Array.isArray(identity.evidence_ids) || identity.evidence_ids.length === 0 || identity.evidence_ids.some((id) => typeof id !== "string" || !evidenceIds.has(id))) {
+      throw new Error(`Person Sketch ${personId} 的 identity Evidence 无效`);
+    }
+    if (!Array.isArray(sketch.profile_evidence_ids) || sketch.profile_evidence_ids.some((id) => typeof id !== "string" || !evidenceIds.has(id))) {
+      throw new Error(`Person Sketch ${personId} 的 profile Evidence 无效`);
+    }
+    if (!Array.isArray(sketch.aliases)) throw new Error(`Person Sketch ${personId} 缺少 alias rows`);
+    const aliasIds = new Set<string>();
+    let previousOrder = -1;
+    for (const alias of sketch.aliases) {
+      if (!isRecord(alias) || typeof alias.alias_id !== "string" || aliasIds.has(alias.alias_id)) {
+        throw new Error(`Person Sketch ${personId} 的 alias row 无效或重复`);
+      }
+      aliasIds.add(alias.alias_id);
+      if (!isReadingPair(alias.surface) || !isReadingPair(alias.label) || !isReadingPair(alias.semantic_label)) {
+        throw new Error(`Person Sketch ${personId} 的 alias display 不完整`);
+      }
+      if (alias.semantic_status !== "exact" && alias.semantic_status !== "contextual" && alias.semantic_status !== "ambiguous") {
+        throw new Error(`Person Sketch ${personId} 的 alias semantic status 无效`);
+      }
+      if (typeof alias.display_order !== "number" || !Number.isInteger(alias.display_order) || alias.display_order <= previousOrder) {
+        throw new Error(`Person Sketch ${personId} 的 alias order 不确定`);
+      }
+      previousOrder = alias.display_order;
+      if (!Array.isArray(alias.mention_ids) || alias.mention_ids.some((id) => typeof id !== "string" || !mentionIds.has(id))) {
+        throw new Error(`Person Sketch ${personId} 的 alias Mention 引用无效`);
+      }
+      if (!Array.isArray(alias.evidence_ids) || alias.evidence_ids.some((id) => typeof id !== "string" || !evidenceIds.has(id))) {
+        throw new Error(`Person Sketch ${personId} 的 alias Evidence 引用无效`);
+      }
+      if (!isRecord(alias.observed_in_shishuo) || typeof alias.observed_in_shishuo.main_text !== "boolean" || typeof alias.observed_in_shishuo.liu_annotation !== "boolean") {
+        throw new Error(`Person Sketch ${personId} 的 alias source layer 无效`);
+      }
+      if (!Array.isArray(alias.source_layers) || alias.source_layers.some((layer) => layer !== "main_text" && layer !== "liu_annotation")) {
+        throw new Error(`Person Sketch ${personId} 的 alias source_layers 无效`);
+      }
+      if (typeof alias.occurrence_count !== "number" || !Number.isInteger(alias.occurrence_count) || alias.occurrence_count < 0) {
+        throw new Error(`Person Sketch ${personId} 的 alias occurrence_count 无效`);
+      }
+    }
+    const storyCounts = sketch.story_counts;
+    if (!isRecord(storyCounts) || ["total", "main_text", "liu_annotation_only", "reader_ready"].some((key) => {
+      const count = storyCounts[key];
+      return typeof count !== "number" || !Number.isInteger(count) || count < 0;
+    })) {
+      throw new Error(`Person Sketch ${personId} 的 story_counts 无效`);
+    }
+  }
+}
+
 function validateReadingSegments(
   segments: unknown,
   expectedOriginal: string,
@@ -38,13 +138,14 @@ function validateReadingSegments(
   let original = "";
   let simplified = "";
   for (const segment of segments) {
-    if (!isRecord(segment) || (segment.type !== "text" && segment.type !== "person_mention")) {
+    if (!isRecord(segment) || (segment.type !== "text" && segment.type !== "person_mention" && segment.type !== "annotation_marker")) {
       throw new Error(`reading ${layer} 存在无效 segment`);
     }
     const display = segment.display;
     if (!isRecord(display) || typeof display.original !== "string" || typeof display.simplified !== "string") {
       throw new Error(`reading ${layer} segment display 不完整`);
     }
+    const displayRecord = display;
     if (segment.type === "person_mention") {
       if (typeof segment.mention_id !== "string" || typeof segment.person_id !== "string") {
         throw new Error(`reading ${layer} person segment 缺少 Mention/Person ID`);
@@ -54,6 +155,17 @@ function validateReadingSegments(
       }
       if (layer === "liu_annotation" && segment.annotation_id !== annotationId) {
         throw new Error(`annotation ${String(annotationId)} 的 person segment 层级不一致`);
+      }
+    }
+    if (segment.type === "annotation_marker") {
+      if (layer !== "main_text" || typeof segment.annotation_id !== "string" || !isRecord(segment.label)) {
+        throw new Error("annotation_marker 只能出现在主文本并且必须引用注释");
+      }
+      if (displayRecord.original !== "" || displayRecord.simplified !== "") {
+        throw new Error("annotation_marker 不得改变正文重建字符");
+      }
+      if (typeof segment.label.original !== "string" || typeof segment.label.simplified !== "string") {
+        throw new Error("annotation_marker label 不完整");
       }
     }
     original += display.original;
@@ -83,6 +195,11 @@ export function parseSiteBundle(value: unknown): SiteBundle {
     }
   }
   const storyIds = new Set(arrays.stories.map((item) => (item as Record<string, unknown>).id));
+  const evidenceIds = new Set<string>(
+    arrays.evidence
+      .map((item) => (item as Record<string, unknown>).id)
+      .filter((id): id is string => typeof id === "string"),
+  );
   for (const story of arrays.stories) {
     if (!isRecord(story) || !isRecord(story.reading)) {
       throw new Error("Story 缺少 reading layer");
@@ -111,12 +228,31 @@ export function parseSiteBundle(value: unknown): SiteBundle {
       "main_text",
     );
     if (!Array.isArray(reading.annotations) || reading.annotations.some((item) => {
-      return !isRecord(item) || typeof item.id !== "string" || typeof item.original !== "string" || typeof item.simplified !== "string" || !Array.isArray(item.segments);
+      return !isRecord(item) || typeof item.id !== "string" || typeof item.original !== "string" || typeof item.simplified !== "string" || !Array.isArray(item.segments) || !isRecord(item.insertion);
     })) {
       throw new Error(`Story ${String(story.id)} 的 reading.annotations 不完整`);
     }
+    if (!Array.isArray(story.annotations) || story.annotations.length !== reading.annotations.length) {
+      throw new Error(`Story ${String(story.id)} 的 canonical/reading annotation 数量不一致`);
+    }
+    for (const [index, sourceAnnotation] of story.annotations.entries()) {
+      const readingAnnotation = reading.annotations[index];
+      if (!isRecord(sourceAnnotation) || !readingAnnotation || sourceAnnotation.id !== readingAnnotation.id) {
+        throw new Error(`Story ${String(story.id)} 的 annotation 顺序或 ID 不一致`);
+      }
+    }
     for (const annotation of reading.annotations) {
       if (!isRecord(annotation)) continue;
+      const insertion = annotation.insertion;
+      if (!isRecord(insertion)) {
+        throw new Error(`Story ${String(story.id)} 的 annotation insertion 不完整`);
+      }
+      if (
+        (insertion.status !== "safe" && insertion.status !== "unavailable") ||
+        (insertion.status === "safe" && typeof insertion.main_text_offset !== "number")
+      ) {
+        throw new Error(`Story ${String(story.id)} 的 annotation insertion 不完整`);
+      }
       validateReadingSegments(
         annotation.segments,
         String(annotation.original),
@@ -135,6 +271,37 @@ export function parseSiteBundle(value: unknown): SiteBundle {
     if (!isRecord(reading.relation_display) || !isRecord(reading.evidence_display)) {
       throw new Error(`Story ${String(story.id)} 的 relation reading layer 不完整`);
     }
+    const annotationIds = new Set(reading.annotations.map((annotation) => String(annotation.id)));
+    const mainSegments = isRecord(reading.main_text) && Array.isArray(reading.main_text.segments)
+      ? reading.main_text.segments
+      : [];
+    for (const segment of mainSegments) {
+      if (isRecord(segment) && segment.type === "annotation_marker" && !annotationIds.has(String(segment.annotation_id))) {
+        throw new Error(`Story ${String(story.id)} annotation_marker 引用了不存在的注释`);
+      }
+      if (isRecord(segment) && segment.type === "annotation_marker") {
+        const annotation = reading.annotations.find((candidate) => candidate.id === segment.annotation_id);
+        if (!annotation || !isRecord(annotation.insertion) || annotation.insertion.status !== "safe") {
+          throw new Error(`Story ${String(story.id)} annotation_marker 没有安全的 insertion point`);
+        }
+      }
+    }
+    for (const annotation of reading.annotations) {
+      for (const evidenceId of annotation.evidence_ids ?? []) {
+        if (!evidenceIds.has(evidenceId) || !Array.isArray(story.evidence_ids) || !story.evidence_ids.includes(evidenceId)) {
+          throw new Error(`Story ${String(story.id)} annotation Evidence 覆盖不完整: ${evidenceId}`);
+        }
+      }
+    }
+    const mentionDisplay = isRecord(reading.mention_display) ? reading.mention_display : {};
+    for (const [mentionId, display] of Object.entries(mentionDisplay)) {
+      if (!isRecord(display) || !isRecord(display.surface) || !isRecord(display.explanation)) {
+        throw new Error(`Story ${String(story.id)} Mention display 不完整: ${mentionId}`);
+      }
+      if (typeof display.surface.original !== "string" || typeof display.surface.simplified !== "string" || typeof display.explanation.original !== "string" || typeof display.explanation.simplified !== "string") {
+        throw new Error(`Story ${String(story.id)} Mention display 文本不完整: ${mentionId}`);
+      }
+    }
   }
   for (const mention of arrays.mentions) {
     if (!isRecord(mention) || typeof mention.story_id !== "string" || !storyIds.has(mention.story_id)) {
@@ -142,6 +309,7 @@ export function parseSiteBundle(value: unknown): SiteBundle {
     }
   }
   const peopleIds = new Set(arrays.people.map((item) => (item as Record<string, unknown>).id));
+  validatePersonSketches(value.person_sketches, arrays.people, arrays.mentions, evidenceIds);
   const mentionById = new Map(
     arrays.mentions
       .filter(isRecord)
@@ -149,7 +317,6 @@ export function parseSiteBundle(value: unknown): SiteBundle {
       .map((item) => [String(item.id), item]),
   );
   const relationIds = new Set(arrays.relations.map((item) => (item as Record<string, unknown>).id));
-  const evidenceIds = new Set(arrays.evidence.map((item) => (item as Record<string, unknown>).id));
   for (const relation of arrays.relations) {
     if (!isRecord(relation)) throw new Error("Relation 记录格式无效");
     if (typeof relation.subject_id !== "string" || typeof relation.object_id !== "string") {
@@ -203,6 +370,7 @@ export function parseSiteBundle(value: unknown): SiteBundle {
       }
     };
     const mainText = reading.main_text;
+    const mentionDisplay = isRecord(reading.mention_display) ? reading.mention_display : {};
     if (isRecord(mainText)) inspectSegments(mainText.segments, "main_text");
     const annotations = reading.annotations;
     if (Array.isArray(annotations)) {
@@ -232,6 +400,9 @@ export function parseSiteBundle(value: unknown): SiteBundle {
       const mention = mentionById.get(String(mentionId));
       if (mention && typeof mention.person_id === "string" && mention.confidence !== "unresolved" && !placed.has(String(mentionId)) && !suppressed.has(String(mentionId))) {
         throw new Error(`Story ${story.id} resolved Mention 未投影: ${mentionId}`);
+      }
+      if (mention && typeof mention.person_id === "string" && mention.confidence !== "unresolved" && !isRecord(mentionDisplay[String(mentionId)])) {
+        throw new Error(`Story ${story.id} resolved Mention 缺少 explanation display: ${mentionId}`);
       }
     }
   }

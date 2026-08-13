@@ -80,12 +80,17 @@ def _production_markers(bundle: dict[str, Any]) -> set[str]:
     markers = {
         story["id"],
         "reading",
+        "person_sketches",
         "relation_display",
         "evidence_display",
         reading["main_text"]["original"],
         reading["main_text"]["simplified"],
     }
     markers.update(person["id"] for person in bundle["people"])
+    markers.update(
+        sketch["identity"]["canonical_name"]["original"]
+        for sketch in bundle.get("person_sketches", {}).values()
+    )
     markers.update(relation["id"] for relation in bundle["relations"])
     markers.update(evidence["id"] for evidence in bundle["evidence"])
     return markers

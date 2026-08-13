@@ -21,6 +21,50 @@ export interface Person {
   notes?: string;
 }
 
+export type PersonSketchSemanticStatus = "exact" | "contextual" | "ambiguous";
+
+export interface PersonSketchAlias {
+  alias_id: string;
+  surface: ReadingPair;
+  alias_type: string;
+  label: ReadingPair;
+  resolution_mode: "exact" | "contextual" | "ambiguous" | string;
+  semantic_status: PersonSketchSemanticStatus;
+  semantic_label: ReadingPair;
+  status: string;
+  observed_in_shishuo: {
+    main_text: boolean;
+    liu_annotation: boolean;
+  };
+  source_layers: Array<"main_text" | "liu_annotation">;
+  occurrence_count: number;
+  mention_ids: string[];
+  evidence_ids: string[];
+  display_order: number;
+}
+
+export interface PersonSketch {
+  person_id: string;
+  scope_role: "primary" | "supporting";
+  review_status: "candidate" | "reviewed";
+  identity: {
+    canonical_name: ReadingPair;
+    courtesy_name: ReadingPair | null;
+    clan: ReadingPair | null;
+    identity_roles: ReadingPair[];
+    brief_intro: ReadingPair | null;
+    evidence_ids: string[];
+  };
+  profile_evidence_ids: string[];
+  aliases: PersonSketchAlias[];
+  story_counts: {
+    total: number;
+    main_text: number;
+    liu_annotation_only: number;
+    reader_ready: number;
+  };
+}
+
 export interface Story {
   id: string;
   title: string;
@@ -68,20 +112,14 @@ export interface StoryReading {
     simplified: string;
     segments: ReadingSegment[];
   };
-  annotations: Array<{
-    id: string;
-    original: string;
-    simplified: string;
-    segments: ReadingSegment[];
-    display_source: "punctuation_record" | "canonical_source";
-    punctuation_status: "available" | "unavailable";
-  }>;
+  annotations: ReadingAnnotation[];
   mention_projection: {
     suppressed: Array<{
-      mention_id: string;
-      reason: "unsafe_anchor" | "overlapping_anchor" | "display_conversion_context_mismatch";
-      section: "main_text" | "liu_annotation";
+      mention_id?: string;
+      kind?: "annotation_marker";
       annotation_id?: string | null;
+      reason: string;
+      section: "main_text" | "liu_annotation";
     }>;
   };
   labels: Record<
@@ -108,7 +146,12 @@ export interface StoryReading {
     name: ReadingPair;
     aliases: Array<{ surface: ReadingPair; alias_type: string }>;
   }>;
-  mention_display: Record<string, { surface: ReadingPair }>;
+  mention_display: Record<string, {
+    surface: ReadingPair;
+    explanation: ReadingPair;
+    alias_type: string;
+    resolution_mode: "exact" | "contextual" | "ambiguous" | string;
+  }>;
   source_display: Record<string, { work: ReadingPair; edition: ReadingPair }>;
   relation_display: Record<string, {
     label: ReadingPair;
@@ -124,6 +167,23 @@ export interface ReadingPair {
   simplified: string;
 }
 
+export interface ReadingAnnotation {
+  id: string;
+  original: string;
+  simplified: string;
+  segments: ReadingSegment[];
+  display_source: "punctuation_record" | "canonical_source";
+  punctuation_status: "available" | "unavailable";
+  insertion: {
+    status: "safe" | "unavailable";
+    main_text_offset: number | null;
+    source: "processed_entry_structure" | null;
+    reason: string;
+    label: string;
+  };
+  evidence_ids?: string[];
+}
+
 export type ReadingSegment =
   | {
       type: "text";
@@ -135,6 +195,12 @@ export type ReadingSegment =
       person_id: string;
       display: ReadingPair;
       annotation_id?: string;
+    }
+  | {
+      type: "annotation_marker";
+      annotation_id: string;
+      label: ReadingPair;
+      display: ReadingPair;
     };
 
 export interface Mention {
@@ -266,6 +332,19 @@ export interface StoryChainIndex {
 
 export interface ReadingUiLabels {
   person_stories_heading: ReadingPair;
+  person_sketch_identity: ReadingPair;
+  person_sketch_aliases: ReadingPair;
+  person_sketch_stories: ReadingPair;
+  person_sketch_relations: ReadingPair;
+  person_sketch_courtesy_name: ReadingPair;
+  person_sketch_clan: ReadingPair;
+  person_sketch_roles: ReadingPair;
+  person_sketch_intro: ReadingPair;
+  person_sketch_evidence: ReadingPair;
+  person_sketch_candidate: ReadingPair;
+  person_sketch_reviewed: ReadingPair;
+  person_sketch_main_story_count: ReadingPair;
+  person_sketch_annotation_story_count: ReadingPair;
   story_people_heading: ReadingPair;
   primary_story_label: ReadingPair;
   annotation_story_label: ReadingPair;
@@ -284,6 +363,7 @@ export interface SiteBundle {
   eras: Era[];
   evidence: Evidence[];
   sources: Source[];
+  person_sketches: Record<string, PersonSketch>;
   story_chain?: StoryChainIndex;
   ui?: ReadingUiLabels;
 }

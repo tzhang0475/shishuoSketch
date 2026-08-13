@@ -1,6 +1,13 @@
 import type { Person, Relation, SiteBundle } from "./types";
 
-export type ExplorationNode = { kind: "story" | "person"; id: string };
+export type PersonMentionRoute = {
+  via_mention_id: string;
+  from_story_id: string;
+};
+
+export type ExplorationNode =
+  | { kind: "story"; id: string }
+  | ({ kind: "person"; id: string } & Partial<PersonMentionRoute>);
 
 export interface RelationPerspective {
   relation: Relation;
@@ -69,6 +76,10 @@ export function currentStoryFromExploration(stack: ExplorationNode[]): string | 
 
 export function focusedPersonFromExploration(stack: ExplorationNode[]): string | null {
   return [...stack].reverse().find((node) => node.kind === "person")?.id ?? null;
+}
+
+export function focusedPersonNodeFromExploration(stack: ExplorationNode[]): ExplorationNode | null {
+  return [...stack].reverse().find((node) => node.kind === "person") ?? null;
 }
 
 export function reviewedDirectRelations(data: SiteBundle): Relation[] {

@@ -82,6 +82,24 @@ minimal evidence-backed bridge Person. WP1 annotation records are generated
 projections of this registry; scope does not change identity or evidence
 semantics.
 
+## Person Sketch v1
+
+`Person` and `Person Sketch` are separate layers. `data/people.json` remains
+the canonical identity registry. `data/annotation/person-sketches.json` owns
+only a small evidence-backed reader-facing identity capsule for the current
+scope; aliases are projected from `data/aliases.json` and Shishuo Mentions,
+Stories from the PersonStory index, and relations from the canonical Relation
+layer. The sketch layer must not copy relation facts or redefine PersonStory
+links.
+
+Each scoped Person has exactly one sketch. Structured identity fields and any
+non-empty `brief_intro` require resolving Evidence IDs; the capsule is bounded
+and contains no personality interpretation or encyclopedia biography. Alias
+rows retain exact/contextual/ambiguous resolution semantics and distinguish
+main-text from Liu-annotation observations. Newly assembled capsules remain
+`candidate` unless an existing editorial review record explicitly supports
+`reviewed`. OpenCC creates only the derived Simplified display form.
+
 ## Assertion status
 
 Every historical or interpretive assertion uses exactly one of:

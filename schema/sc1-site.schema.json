@@ -4,7 +4,7 @@
   "title": "SC1 static frontend bundle",
   "type": "object",
   "additionalProperties": true,
-  "required": ["schema", "generated_from", "stories", "people", "mentions", "relations", "eras", "evidence", "sources", "story_chain", "ui"],
+  "required": ["schema", "generated_from", "stories", "people", "mentions", "relations", "eras", "evidence", "sources", "person_sketches", "story_chain", "ui"],
   "properties": {
     "schema": {"const": 1},
     "generated_from": {"const": "scripts/build_sc1_frontend_data.py"},
@@ -13,7 +13,7 @@
       "minItems": 16,
       "items": {
         "type": "object",
-        "required": ["id", "text", "reading", "person_ids", "mention_ids", "publication_state"],
+        "required": ["id", "text", "reading", "annotations", "person_ids", "mention_ids", "publication_state"],
         "properties": {
           "id": {"type": "string"},
           "text": {"type": "string", "minLength": 1},
@@ -39,14 +39,26 @@
                 "type": "array",
                 "items": {
                   "type": "object",
-                  "required": ["id", "original", "simplified", "segments", "display_source", "punctuation_status"],
+                  "required": ["id", "original", "simplified", "segments", "display_source", "punctuation_status", "insertion"],
                   "properties": {
                     "id": {"type": "string"},
                     "original": {"type": "string"},
                     "simplified": {"type": "string"},
                     "segments": {"type": "array", "items": {"$ref": "#/$defs/readingSegment"}},
                     "display_source": {"enum": ["punctuation_record", "canonical_source"]},
-                    "punctuation_status": {"enum": ["available", "unavailable"]}
+                    "punctuation_status": {"enum": ["available", "unavailable"]},
+                    "insertion": {
+                      "type": "object",
+                      "required": ["status", "main_text_offset", "source", "reason", "label"],
+                      "properties": {
+                        "status": {"enum": ["safe", "unavailable"]},
+                        "main_text_offset": {"type": ["integer", "null"]},
+                        "source": {"type": ["string", "null"]},
+                        "reason": {"type": "string"},
+                        "label": {"type": "string"}
+                      }
+                    },
+                    "evidence_ids": {"type": "array", "items": {"type": "string"}}
                   }
                 }
               },
@@ -58,12 +70,13 @@
                     "type": "array",
                     "items": {
                       "type": "object",
-                      "required": ["mention_id", "reason", "section"],
+                      "required": ["reason", "section"],
                       "properties": {
+                        "kind": {"enum": ["annotation_marker"]},
                         "mention_id": {"type": "string"},
-                        "reason": {"enum": ["unsafe_anchor", "overlapping_anchor", "display_conversion_context_mismatch"]},
-                        "section": {"enum": ["main_text", "liu_annotation"]},
-                        "annotation_id": {"type": ["string", "null"]}
+                        "annotation_id": {"type": ["string", "null"]},
+                        "reason": {"enum": ["unsafe_anchor", "overlapping_anchor", "display_conversion_context_mismatch", "unsafe_insertion_point", "insertion_inside_person_mention", "marker_projection_failed"]},
+                        "section": {"enum": ["main_text", "liu_annotation"]}
                       }
                     }
                   }
@@ -80,6 +93,11 @@
     "eras": {"type": "array", "items": {"type": "object", "required": ["id"]}},
     "evidence": {"type": "array", "items": {"type": "object", "required": ["id"]}},
     "sources": {"type": "array", "items": {"type": "object", "required": ["id"]}},
+    "person_sketches": {
+      "type": "object",
+      "minProperties": 7,
+      "additionalProperties": {"$ref": "#/$defs/personSketch"}
+    },
     "story_chain": {
       "type": "object",
       "required": ["schema", "stage", "story_ids", "person_story_refs", "story_person_refs"],
@@ -98,7 +116,7 @@
       "type": "object",
       "required": ["type", "display"],
       "properties": {
-        "type": {"enum": ["text", "person_mention"]},
+        "type": {"enum": ["text", "person_mention", "annotation_marker"]},
         "display": {
           "type": "object",
           "required": ["original", "simplified"],
@@ -106,7 +124,77 @@
         },
         "mention_id": {"type": "string"},
         "person_id": {"type": "string"},
-        "annotation_id": {"type": "string"}
+        "annotation_id": {"type": "string"},
+        "label": {
+          "type": "object",
+          "required": ["original", "simplified"],
+          "properties": {"original": {"type": "string"}, "simplified": {"type": "string"}}
+        }
+      }
+    },
+    "readingPair": {
+      "type": "object",
+      "required": ["original", "simplified"],
+      "properties": {
+        "original": {"type": "string"},
+        "simplified": {"type": "string"}
+      }
+    },
+    "personSketchAlias": {
+      "type": "object",
+      "required": ["alias_id", "surface", "alias_type", "label", "resolution_mode", "semantic_status", "semantic_label", "status", "observed_in_shishuo", "source_layers", "occurrence_count", "mention_ids", "evidence_ids", "display_order"],
+      "properties": {
+        "alias_id": {"type": "string"},
+        "surface": {"$ref": "#/$defs/readingPair"},
+        "alias_type": {"type": "string"},
+        "label": {"$ref": "#/$defs/readingPair"},
+        "resolution_mode": {"type": "string"},
+        "semantic_status": {"enum": ["exact", "contextual", "ambiguous"]},
+        "semantic_label": {"$ref": "#/$defs/readingPair"},
+        "status": {"type": "string"},
+        "observed_in_shishuo": {
+          "type": "object",
+          "required": ["main_text", "liu_annotation"],
+          "properties": {"main_text": {"type": "boolean"}, "liu_annotation": {"type": "boolean"}}
+        },
+        "source_layers": {"type": "array", "items": {"enum": ["main_text", "liu_annotation"]}},
+        "occurrence_count": {"type": "integer", "minimum": 0},
+        "mention_ids": {"type": "array", "uniqueItems": true, "items": {"type": "string"}},
+        "evidence_ids": {"type": "array", "uniqueItems": true, "items": {"type": "string"}},
+        "display_order": {"type": "integer", "minimum": 0}
+      }
+    },
+    "personSketch": {
+      "type": "object",
+      "required": ["person_id", "scope_role", "review_status", "identity", "profile_evidence_ids", "aliases", "story_counts"],
+      "properties": {
+        "person_id": {"type": "string"},
+        "scope_role": {"enum": ["primary", "supporting"]},
+        "review_status": {"enum": ["candidate", "reviewed"]},
+        "identity": {
+          "type": "object",
+          "required": ["canonical_name", "courtesy_name", "clan", "identity_roles", "brief_intro", "evidence_ids"],
+          "properties": {
+            "canonical_name": {"$ref": "#/$defs/readingPair"},
+            "courtesy_name": {"anyOf": [{"$ref": "#/$defs/readingPair"}, {"type": "null"}]},
+            "clan": {"anyOf": [{"$ref": "#/$defs/readingPair"}, {"type": "null"}]},
+            "identity_roles": {"type": "array", "items": {"$ref": "#/$defs/readingPair"}},
+            "brief_intro": {"anyOf": [{"$ref": "#/$defs/readingPair"}, {"type": "null"}]},
+            "evidence_ids": {"type": "array", "uniqueItems": true, "items": {"type": "string"}}
+          }
+        },
+        "profile_evidence_ids": {"type": "array", "uniqueItems": true, "items": {"type": "string"}},
+        "aliases": {"type": "array", "items": {"$ref": "#/$defs/personSketchAlias"}},
+        "story_counts": {
+          "type": "object",
+          "required": ["total", "main_text", "liu_annotation_only", "reader_ready"],
+          "properties": {
+            "total": {"type": "integer", "minimum": 0},
+            "main_text": {"type": "integer", "minimum": 0},
+            "liu_annotation_only": {"type": "integer", "minimum": 0},
+            "reader_ready": {"type": "integer", "minimum": 0}
+          }
+        }
       }
     }
   }

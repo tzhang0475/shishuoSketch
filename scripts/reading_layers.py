@@ -149,7 +149,61 @@ def _build_person_display(people: Any, converter: Any) -> dict[str, Any]:
     return result
 
 
-def _build_mention_display(mentions: Any, converter: Any) -> dict[str, Any]:
+def _person_name(people: Any, person_id: Any) -> str:
+    if not isinstance(people, (list, tuple)) or not isinstance(person_id, str):
+        return ""
+    for person in people:
+        if isinstance(person, Mapping) and person.get("id") == person_id:
+            value = person.get("canonical_name")
+            if isinstance(value, str):
+                return value
+    return ""
+
+
+def _mention_explanation(mention: Mapping[str, Any], people: Any) -> str:
+    """Build a restrained route explanation from structured mention facts."""
+
+    surface = str(mention.get("surface", ""))
+    person_name = _person_name(people, mention.get("person_id")) or "此人"
+    alias_type = str(mention.get("alias_type", ""))
+    resolution_mode = str(mention.get("resolution_mode", ""))
+    exact = resolution_mode == "exact"
+    if alias_type == "courtesy_name" and mention.get("confidence", "unresolved") != "unresolved":
+        return f"「{surface}」是{person_name}的字。"
+    if exact and alias_type == "personal_name":
+        return f"「{surface}」是{person_name}的名。"
+    if alias_type in {"office_title", "official_title"}:
+        if exact:
+            return f"「{surface}」是官职称谓。"
+        return (
+            f"「{surface}」是官职称谓，并非{person_name}的专名。"
+            f"本则依据上下文及现有解析证据指向{person_name}。解析方式：上下文判定。"
+        )
+    if alias_type in {"contextual_title", "general_title", "textual_shorthand"} or not exact:
+        return (
+            f"「{surface}」是上下文称谓，并非{person_name}的专名。"
+            f"本则依据现有解析证据指向{person_name}。解析方式：{resolution_mode or '上下文判定'}。"
+        )
+    if alias_type == "kinship_reference":
+        return (
+            f"「{surface}」是亲属称谓，本则依据现有解析证据指向{person_name}。"
+            f"解析方式：{resolution_mode or '上下文判定'}。"
+        )
+    if exact:
+        return f"本项目已将「{surface}」解析为{person_name}。"
+    return (
+        f"本项目已将「{surface}」解析为{person_name}。"
+        f"解析方式：{resolution_mode or '未注明'}。"
+    )
+
+
+def _build_mention_display(
+    mentions: Any,
+    converter: Any,
+    people: Any,
+    *,
+    include_explanations: bool = True,
+) -> dict[str, Any]:
     result: dict[str, Any] = {}
     if not isinstance(mentions, (list, tuple)):
         return result
@@ -158,7 +212,16 @@ def _build_mention_display(mentions: Any, converter: Any) -> dict[str, Any]:
             continue
         surface = mention.get("surface")
         if isinstance(surface, str):
-            result[mention["id"]] = {"surface": _display_pair(surface, converter)}
+            display: dict[str, Any] = {"surface": _display_pair(surface, converter)}
+            if include_explanations:
+                display.update(
+                    {
+                        "explanation": _display_pair(_mention_explanation(mention, people), converter),
+                        "alias_type": str(mention.get("alias_type", "")),
+                        "resolution_mode": str(mention.get("resolution_mode", "")),
+                    }
+                )
+            result[mention["id"]] = display
     return result
 
 
@@ -312,6 +375,18 @@ def display_span_for_anchor(
     return start, end
 
 
+def _display_offset_for_logical_offset(canonical: str, displayed: str, logical_offset: int) -> int:
+    """Map a significant-character offset to a displayed-string boundary."""
+
+    _starts, _ends, characters = _display_boundaries(canonical, displayed)
+    if logical_offset < 0 or logical_offset > len(characters):
+        raise ValueError("logical display offset exceeds canonical section")
+    displayed_positions = _significant_positions(displayed)
+    if logical_offset == len(displayed_positions):
+        return len(displayed)
+    return displayed_positions[logical_offset][1]
+
+
 def _annotation_id(mention: Mapping[str, Any]) -> str | None:
     metadata = mention.get("source_section_metadata")
     if isinstance(metadata, Mapping) and isinstance(metadata.get("annotation_id"), str):
@@ -320,6 +395,110 @@ def _annotation_id(mention: Mapping[str, Any]) -> str | None:
     if isinstance(anchor, Mapping) and isinstance(anchor.get("annotation_id"), str):
         return anchor["annotation_id"]
     return None
+
+
+def _annotation_label(index: int) -> str:
+    labels = "①②③④⑤⑥⑦⑧⑨⑩"
+    if 1 <= index <= len(labels):
+        return labels[index - 1]
+    return str(index)
+
+
+def build_annotation_insertions(
+    source_text: str | None,
+    main_canonical: str,
+    annotations: Any,
+) -> dict[str, dict[str, Any]]:
+    """Map processed-entry annotation ranges into the transmitted main text.
+
+    The processed entry records where an annotation block occurs in the source
+    stream.  This is an insertion point for reading apparatus, not a claim
+    about the lemma span that the annotation explains.
+    """
+
+    result: dict[str, dict[str, Any]] = {}
+    annotation_list = [
+        annotation
+        for annotation in annotations
+        if isinstance(annotation, Mapping) and isinstance(annotation.get("id"), str)
+    ] if isinstance(annotations, (list, tuple)) else []
+    if not source_text:
+        for index, annotation in enumerate(annotation_list, start=1):
+            result[annotation["id"]] = {
+                "status": "unavailable",
+                "main_text_offset": None,
+                "source": None,
+                "reason": "missing_processed_entry_source",
+                "label": _annotation_label(index),
+            }
+        return result
+
+    ranges: list[tuple[int, int, str, str]] = []
+    invalid_ids: set[str] = set()
+    for annotation in annotation_list:
+        annotation_id = annotation["id"]
+        metadata = annotation.get("metadata", {})
+        start = metadata.get("entry_relative_start") if isinstance(metadata, Mapping) else None
+        end = metadata.get("entry_relative_end_exclusive") if isinstance(metadata, Mapping) else None
+        text = str(annotation.get("text", ""))
+        if (
+            not isinstance(start, int)
+            or not isinstance(end, int)
+            or start < 0
+            or end <= start
+            or end > len(source_text)
+            or source_text[start:end] != text
+        ):
+            invalid_ids.add(annotation_id)
+            continue
+        ranges.append((start, end, annotation_id, text))
+
+    ranges.sort(key=lambda item: (item[0], item[1], item[2]))
+    overlaps = any(current[0] < previous[1] for previous, current in zip(ranges, ranges[1:]))
+    visible_source = source_text
+    for start, end, _annotation_id_value, _text in sorted(ranges, key=lambda item: item[0], reverse=True):
+        visible_source = visible_source[:start] + visible_source[end:]
+    visible_source = re.sub(r"<!--.*?-->", "", visible_source, flags=re.DOTALL)
+    aligned_stream = strip_display_punctuation(visible_source) == strip_display_punctuation(main_canonical)
+
+    for index, annotation in enumerate(annotation_list, start=1):
+        annotation_id = annotation["id"]
+        matching = next((item for item in ranges if item[2] == annotation_id), None)
+        reason = None
+        if annotation_id in invalid_ids:
+            reason = "invalid_entry_relative_range"
+        elif overlaps:
+            reason = "overlapping_entry_relative_ranges"
+        elif not aligned_stream:
+            reason = "processed_entry_stream_mismatch"
+        if reason or matching is None:
+            result[annotation_id] = {
+                "status": "unavailable",
+                "main_text_offset": None,
+                "source": "processed_entry_structure" if matching else None,
+                "reason": reason or "missing_entry_relative_range",
+                "label": _annotation_label(index),
+            }
+            continue
+        start = matching[0]
+        prefix = source_text[:start]
+        prior_ranges = [item for item in ranges if item[1] <= start]
+        for prior_start, prior_end, _prior_id, _prior_text in sorted(
+            prior_ranges,
+            key=lambda item: item[0],
+            reverse=True,
+        ):
+            prefix = prefix[:prior_start] + prefix[prior_end:]
+        prefix = re.sub(r"<!--.*?-->", "", prefix, flags=re.DOTALL)
+        main_offset = len(strip_display_punctuation(prefix))
+        result[annotation_id] = {
+            "status": "safe",
+            "main_text_offset": main_offset,
+            "source": "processed_entry_structure",
+            "reason": "entry_relative_range_exact",
+            "label": _annotation_label(index),
+        }
+    return result
 
 
 def _resolved_mention(mention: Mapping[str, Any]) -> bool:
@@ -450,6 +629,7 @@ def build_reading_segments(
     *,
     section: str,
     annotation_id: str | None = None,
+    annotation_markers: Any = (),
 ) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
     """Project resolved canonical Mention anchors into display segments."""
 
@@ -460,27 +640,108 @@ def build_reading_segments(
         section=section,
         annotation_id=annotation_id,
     )
-    pieces: list[dict[str, Any]] = []
-    cursor = 0
-    for placement in placements:
-        if placement["start"] > cursor:
-            text = displayed[cursor : placement["start"]]
-            pieces.append({"type": "text", "display": _display_pair(text, converter)})
-        text = displayed[placement["start"] : placement["end"]]
-        piece: dict[str, Any] = {
-            "type": "person_mention",
-            "mention_id": placement["mention_id"],
-            "person_id": placement["person_id"],
-            "display": _display_pair(text, converter),
-        }
-        if section == "liu_annotation" and annotation_id is not None:
-            piece["annotation_id"] = annotation_id
-        pieces.append(piece)
-        cursor = placement["end"]
-    if cursor < len(displayed):
-        pieces.append({"type": "text", "display": _display_pair(displayed[cursor:], converter)})
-    if not pieces:
-        pieces = [{"type": "text", "display": _display_pair(displayed, converter)}]
+    valid_markers: list[dict[str, Any]] = []
+    if section == "main_text" and isinstance(annotation_markers, (list, tuple)):
+        for marker in annotation_markers:
+            if not isinstance(marker, Mapping):
+                continue
+            annotation_id_value = marker.get("annotation_id")
+            display_offset = marker.get("display_offset")
+            if not isinstance(annotation_id_value, str) or not isinstance(display_offset, int):
+                continue
+            if display_offset < 0 or display_offset > len(displayed):
+                suppressed.append(
+                    {
+                        "kind": "annotation_marker",
+                        "annotation_id": annotation_id_value,
+                        "reason": "unsafe_insertion_point",
+                        "section": section,
+                    }
+                )
+                continue
+            if any(item["start"] < display_offset < item["end"] for item in placements):
+                suppressed.append(
+                    {
+                        "kind": "annotation_marker",
+                        "annotation_id": annotation_id_value,
+                        "reason": "insertion_inside_person_mention",
+                        "section": section,
+                    }
+                )
+                continue
+            valid_markers.append(
+                {
+                    "annotation_id": annotation_id_value,
+                    "display_offset": display_offset,
+                    "label": marker.get("label", _display_pair("〔注〕", converter)),
+                }
+            )
+
+    def make_pieces(selected_placements: list[dict[str, Any]], selected_markers: list[dict[str, Any]]) -> list[dict[str, Any]]:
+        pieces: list[dict[str, Any]] = []
+        cursor = 0
+        marker_index = 0
+        for placement in selected_placements:
+            while marker_index < len(selected_markers) and selected_markers[marker_index]["display_offset"] <= placement["start"]:
+                marker = selected_markers[marker_index]
+                marker_offset = marker["display_offset"]
+                if marker_offset < cursor:
+                    marker_index += 1
+                    continue
+                if marker_offset > cursor:
+                    text = displayed[cursor:marker_offset]
+                    pieces.append({"type": "text", "display": _display_pair(text, converter)})
+                pieces.append(
+                    {
+                        "type": "annotation_marker",
+                        "annotation_id": marker["annotation_id"],
+                        "label": marker["label"],
+                        "display": _display_pair("", converter),
+                    }
+                )
+                cursor = marker_offset
+                marker_index += 1
+            if placement["start"] > cursor:
+                text = displayed[cursor : placement["start"]]
+                pieces.append({"type": "text", "display": _display_pair(text, converter)})
+            text = displayed[placement["start"] : placement["end"]]
+            piece: dict[str, Any] = {
+                "type": "person_mention",
+                "mention_id": placement["mention_id"],
+                "person_id": placement["person_id"],
+                "display": _display_pair(text, converter),
+            }
+            if section == "liu_annotation" and annotation_id is not None:
+                piece["annotation_id"] = annotation_id
+            pieces.append(piece)
+            cursor = placement["end"]
+        while marker_index < len(selected_markers):
+            marker = selected_markers[marker_index]
+            marker_offset = marker["display_offset"]
+            if marker_offset < cursor:
+                marker_index += 1
+                continue
+            if marker_offset > cursor:
+                text = displayed[cursor:marker_offset]
+                pieces.append({"type": "text", "display": _display_pair(text, converter)})
+            pieces.append(
+                {
+                    "type": "annotation_marker",
+                    "annotation_id": marker["annotation_id"],
+                    "label": marker["label"],
+                    "display": _display_pair("", converter),
+                }
+            )
+            cursor = marker_offset
+            marker_index += 1
+        if cursor < len(displayed):
+            pieces.append({"type": "text", "display": _display_pair(displayed[cursor:], converter)})
+        if not pieces:
+            pieces = [{"type": "text", "display": _display_pair(displayed, converter)}]
+        return pieces
+
+    valid_markers.sort(key=lambda item: (item["display_offset"], item["annotation_id"]))
+    pieces = make_pieces(placements, valid_markers)
 
     expected_simplified = converter.convert(displayed)
     actual_simplified = "".join(piece["display"]["simplified"] for piece in pieces)
@@ -500,6 +761,16 @@ def build_reading_segments(
             }
             for mention_id in sorted(mention_ids)
         )
+        marker_ids = {marker["annotation_id"] for marker in valid_markers}
+        suppressed.extend(
+            {
+                "kind": "annotation_marker",
+                "annotation_id": annotation_id_value,
+                "reason": "display_conversion_context_mismatch",
+                "section": section,
+            }
+            for annotation_id_value in sorted(marker_ids)
+        )
         return [{"type": "text", "display": _display_pair(displayed, converter)}], suppressed
     return pieces, suppressed
 
@@ -515,22 +786,43 @@ def build_display_reading(
     sources: Any = (),
     relations: Any = (),
     evidence: Any = (),
+    source_text: str | None = None,
+    annotation_evidence_ids: Mapping[str, str] | None = None,
 ) -> dict[str, Any]:
     sections = record["sections"]
     annotations: list[dict[str, Any]] = []
     suppressed_mentions: list[dict[str, Any]] = []
+    main_canonical = str(sections["main_text"].get("canonical_text", ""))
+    main_display = str(sections["main_text"].get("punctuated_text", ""))
     canonical_annotation_by_id = {
         str(annotation.get("id")): annotation
         for annotation in canonical_annotations
         if isinstance(annotation, Mapping) and isinstance(annotation.get("id"), str)
     }
     annotation_section = sections.get("liu_annotation")
+    annotation_insertions = build_annotation_insertions(
+        source_text,
+        main_canonical,
+        canonical_annotations,
+    )
+    annotation_markers: list[dict[str, Any]] = []
+    try:
+        main_starts, _main_ends, _main_chars = _display_boundaries(main_canonical, main_display)
+    except ValueError:
+        main_starts = []
     for annotation_id, annotation in canonical_annotation_by_id.items():
         canonical_annotation = str(annotation.get("text", ""))
         punctuated_annotation = None
-        if annotation_id == "annotation-001" and isinstance(annotation_section, Mapping):
-            candidate = annotation_section.get("punctuated_text")
-            if isinstance(candidate, str) and candidate:
+        if isinstance(annotation_section, Mapping):
+            candidate_by_id = annotation_section.get("punctuated_text_by_id")
+            candidate = (
+                candidate_by_id.get(annotation_id)
+                if isinstance(candidate_by_id, Mapping)
+                else None
+            )
+            if annotation_id == "annotation-001" and candidate is None:
+                candidate = annotation_section.get("punctuated_text")
+            if isinstance(candidate, str) and candidate and strip_display_punctuation(candidate) == strip_display_punctuation(canonical_annotation):
                 punctuated_annotation = candidate
         displayed_annotation = punctuated_annotation or canonical_annotation
         segments, segment_suppressed = build_reading_segments(
@@ -550,18 +842,82 @@ def build_display_reading(
                 "segments": segments,
                 "display_source": "punctuation_record" if punctuated_annotation else "canonical_source",
                 "punctuation_status": "available" if punctuated_annotation else "unavailable",
+                "evidence_ids": (
+                    [annotation_evidence_ids[annotation_id]]
+                    if isinstance(annotation_evidence_ids, Mapping)
+                    and isinstance(annotation_evidence_ids.get(annotation_id), str)
+                    else []
+                ),
             }
         )
-    main_canonical = str(sections["main_text"].get("canonical_text", ""))
-    main_display = str(sections["main_text"].get("punctuated_text", ""))
+        if not annotations[-1]["evidence_ids"]:
+            annotations[-1].pop("evidence_ids", None)
+        if source_text is not None:
+            annotations[-1]["insertion"] = dict(
+                annotation_insertions.get(
+                    annotation_id,
+                    {
+                        "status": "unavailable",
+                        "main_text_offset": None,
+                        "source": None,
+                        "reason": "no_processed_entry_range",
+                        "label": _annotation_label(len(annotations)),
+                    },
+                )
+            )
+    for annotation in annotations:
+        if source_text is None:
+            continue
+        insertion = annotation.get("insertion", {})
+        if (
+            isinstance(insertion, Mapping)
+            and insertion.get("status") == "safe"
+            and isinstance(insertion.get("main_text_offset"), int)
+            and main_starts
+        ):
+            canonical_offset = insertion["main_text_offset"]
+            if 0 <= canonical_offset <= len(_significant_positions(main_canonical)):
+                annotation_markers.append(
+                    {
+                        "annotation_id": annotation["id"],
+                        "display_offset": _display_offset_for_logical_offset(
+                            main_canonical,
+                            main_display,
+                            canonical_offset,
+                        ),
+                        "label": _display_pair(
+                            f"〔注{insertion.get('label', '注')}〕",
+                            converter,
+                        ),
+                    }
+                )
     main_segments, main_suppressed = build_reading_segments(
         main_canonical,
         main_display,
         converter,
         placement_mentions,
         section="main_text",
+        annotation_markers=annotation_markers,
     )
     suppressed_mentions.extend(main_suppressed)
+    suppressed_marker_ids = {
+        item.get("annotation_id")
+        for item in main_suppressed
+        if item.get("kind") == "annotation_marker"
+    }
+    for annotation in annotations:
+        insertion = annotation.get("insertion")
+        if isinstance(insertion, dict) and annotation["id"] in suppressed_marker_ids:
+            insertion["status"] = "unavailable"
+            insertion["reason"] = next(
+                (
+                    item.get("reason")
+                    for item in main_suppressed
+                    if item.get("kind") == "annotation_marker"
+                    and item.get("annotation_id") == annotation["id"]
+                ),
+                "marker_projection_failed",
+            )
     return {
         "entry_id": record["entry_id"],
         "status": record["status"],
@@ -582,7 +938,12 @@ def build_display_reading(
             key: _display_pair(value, converter) for key, value in READER_LABELS.items()
         },
         "person_display": _build_person_display(people, converter),
-        "mention_display": _build_mention_display(mentions, converter),
+        "mention_display": _build_mention_display(
+            mentions,
+            converter,
+            people,
+            include_explanations=source_text is not None,
+        ),
         "source_display": _build_source_display(sources, converter),
         "relation_display": _build_relation_display(relations, converter),
         "evidence_display": _build_evidence_display(evidence, converter),
