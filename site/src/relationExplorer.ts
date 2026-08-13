@@ -29,6 +29,40 @@ export function backExploration(stack: ExplorationNode[]): ExplorationNode[] {
   return stack.length > 1 ? stack.slice(0, -1) : stack;
 }
 
+export function truncateExploration(stack: ExplorationNode[], index: number): ExplorationNode[] {
+  if (index < 0 || index >= stack.length) return stack;
+  return stack.slice(0, index + 1);
+}
+
+export function publishedStoryIds(data: SiteBundle): string[] {
+  return data.stories
+    .filter((story) => story.publication_state === "production_ready" || story.publication_state === "preview_ready")
+    .map((story) => story.id);
+}
+
+export function randomPublishedStoryId(
+  data: SiteBundle,
+  random: () => number = Math.random,
+  excludeId?: string,
+): string | null {
+  const allIds = publishedStoryIds(data);
+  const ids = allIds.length > 1 && excludeId ? allIds.filter((id) => id !== excludeId) : allIds;
+  if (ids.length === 0) return null;
+  const value = Math.min(Math.max(random(), 0), 0.999999999);
+  return ids[Math.floor(value * ids.length)] ?? ids[0];
+}
+
+export function storyIdFromHash(hash: string): string | null {
+  const match = hash.match(/^#story=([^&]+)$/u);
+  if (!match) return null;
+  try {
+    const value = decodeURIComponent(match[1]);
+    return value || null;
+  } catch {
+    return null;
+  }
+}
+
 export function currentStoryFromExploration(stack: ExplorationNode[]): string | null {
   return [...stack].reverse().find((node) => node.kind === "story")?.id ?? null;
 }

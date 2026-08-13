@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { loadSiteBundle } from "./data";
 import {
   derivedPath,
@@ -8,6 +8,9 @@ import {
   appendExploration,
   backExploration,
   currentStoryFromExploration,
+  randomPublishedStoryId,
+  storyIdFromHash,
+  truncateExploration,
   pathPersonIds,
   focusedPersonFromExploration,
   type RelationPerspective,
@@ -23,7 +26,7 @@ import type {
   Story,
 } from "./types";
 
-const DEFAULT_STORY_ID = "06-yaliang-019";
+const FALLBACK_STORY_ID = "06-yaliang-019";
 const READING_MODE_STORAGE_KEY = "shishuoSketch.reading-mode";
 type ReadingMode = "simplified" | "original";
 
@@ -61,10 +64,6 @@ function resolvedMentions(story: Story, data: SiteBundle): Mention[] {
   return story.mention_ids
     .map((id) => data.mentions.find((mention) => mention.id === id))
     .filter((mention): mention is Mention => Boolean(mention?.person_id));
-}
-
-function personMentions(story: Story, person: Person, data: SiteBundle): Mention[] {
-  return resolvedMentions(story, data).filter((mention) => mention.person_id === person.id);
 }
 
 function personDisplayName(story: Story, person: Person, mode: ReadingMode): string {
@@ -110,54 +109,22 @@ function storyById(data: SiteBundle, storyId: string): Story | undefined {
   return data.stories.find((story) => story.id === storyId);
 }
 
+function writeStoryAddress(storyId: string): void {
+  if (typeof window === "undefined") return;
+  const next = `${window.location.pathname}${window.location.search}#story=${encodeURIComponent(storyId)}`;
+  window.history.replaceState(null, "", next);
+}
+
+function initialStoryId(data: SiteBundle): string {
+  const target = typeof window === "undefined" ? null : storyIdFromHash(window.location.hash);
+  const addressed = target ? storyById(data, target) : undefined;
+  if (addressed && addressed.publication_state !== "blocked") return addressed.id;
+  return randomPublishedStoryId(data) ?? FALLBACK_STORY_ID;
+}
+
 function storyExcerpt(story: Story, mode: ReadingMode): string {
   const text = story.reading.main_text[mode].replace(/\s+/gu, "");
   return text.length > 54 ? `${text.slice(0, 54)}……` : text;
-}
-
-function PersonCard({
-  person,
-  mentions,
-  story,
-  readingMode,
-  focused,
-  onFocus,
-}: {
-  person: Person;
-  mentions: Mention[];
-  story: Story;
-  readingMode: ReadingMode;
-  focused: boolean;
-  onFocus: () => void;
-}) {
-  const surfaces = Array.from(
-    new Set(
-      mentions.map((mention) =>
-        readingValue(story.reading.mention_display[mention.id]?.surface, readingMode, mention.surface),
-      ),
-    ),
-  );
-  const labels = story.reading.labels;
-  return (
-    <button
-      type="button"
-      className={focused ? "person-card focused" : "person-card"}
-      aria-pressed={focused}
-      onClick={onFocus}
-    >
-      <span className="person-card-heading">
-        <span className="person-name">{personDisplayName(story, person, readingMode)}</span>
-        <span className="person-hint">{labels.alias_hint[readingMode]}</span>
-      </span>
-      <span className="person-card-body">
-        <span className="person-label">{labels.resolved_alias_label[readingMode]}</span>
-        <span className="surface-list">{surfaces.join("、") || labels.empty_alias[readingMode]}</span>
-        <span className="person-status">
-          {person.assertion_status} · {person.review_status}
-        </span>
-      </span>
-    </button>
-  );
 }
 
 function RelationEvidence({
@@ -539,6 +506,58 @@ function EgoRelationExplorer({
   );
 }
 
+function PersonExplorerPanel({
+  story,
+  data,
+  focusedPersonId,
+  readingMode,
+  backTarget,
+  onFocus,
+  onBack,
+  onStorySelect,
+  onClose,
+}: {
+  story: Story;
+  data: SiteBundle;
+  focusedPersonId: string | null;
+  readingMode: ReadingMode;
+  backTarget: ExplorationNode | null;
+  onFocus: (personId: string) => void;
+  onBack: () => void;
+  onStorySelect: (storyId: string) => void;
+  onClose: () => void;
+}) {
+  if (!focusedPersonId) return null;
+  return (
+    <aside className="person-panel-shell" aria-label="人物探索">
+      <button
+        type="button"
+        className="person-panel-backdrop"
+        aria-label="关闭人物探索"
+        onClick={onClose}
+      />
+      <div className="person-panel-surface" role="dialog" aria-modal="true" aria-labelledby="relation-explorer-heading">
+        <div className="person-panel-toolbar">
+          <span>人物探索</span>
+          <button type="button" className="panel-close-button" onClick={onClose} aria-label="关闭人物探索">
+            ×
+          </button>
+        </div>
+        <EgoRelationExplorer
+          story={story}
+          data={data}
+          focusedPersonId={focusedPersonId}
+          readingMode={readingMode}
+          backTarget={backTarget}
+          onFocus={onFocus}
+          onBack={onBack}
+          onStorySelect={onStorySelect}
+        />
+      </div>
+    </aside>
+  );
+}
+
 function EvidenceDetails({
   story,
   data,
@@ -595,121 +614,179 @@ function nodeLabel(node: ExplorationNode, story: Story, data: SiteBundle, mode: 
   return personNameById(story, data, node.id, mode);
 }
 
-function ReadingPage({
+function ExplorationPath({
+  stack,
+  story,
+  data,
+  readingMode,
+  onSelect,
+}: {
+  stack: ExplorationNode[];
+  story: Story;
+  data: SiteBundle;
+  readingMode: ReadingMode;
+  onSelect: (index: number) => void;
+}) {
+  const [menuOpen, setMenuOpen] = useState(false);
+  if (stack.length <= 1) return null;
+  const compact = stack.length > 4;
+  const visible = compact
+    ? [
+        { node: stack[0], index: 0 },
+        { node: null, index: -1 },
+        ...stack.slice(-2).map((node, offset) => ({ node, index: stack.length - 2 + offset })),
+      ]
+    : stack.map((node, index) => ({ node, index }));
+  const previous = stack[stack.length - 2];
+  if (!previous) return null;
+
+  function select(index: number) {
+    setMenuOpen(false);
+    onSelect(index);
+  }
+
+  return (
+    <div className="exploration-path-shell">
+      <nav className="exploration-breadcrumb desktop-path" aria-label="探索路径">
+        {visible.map((item, visibleIndex) => (
+          <span key={`${item.index}-${visibleIndex}`}>
+            {visibleIndex > 0 && <span aria-hidden="true"> › </span>}
+            {item.node ? (
+              <button
+                type="button"
+                className="path-item"
+                aria-current={item.index === stack.length - 1 ? "page" : undefined}
+                onClick={() => select(item.index)}
+              >
+                {nodeLabel(item.node, story, data, readingMode)}
+              </button>
+            ) : (
+              <button
+                type="button"
+                className="path-ellipsis"
+                aria-label="显示完整探索路径"
+                aria-expanded={menuOpen}
+                onClick={() => setMenuOpen((current) => !current)}
+              >
+                …
+              </button>
+            )}
+          </span>
+        ))}
+      </nav>
+      <div className="mobile-path-bar">
+        <button type="button" className="mobile-path-back" onClick={() => select(stack.length - 2)}>
+          ← {nodeLabel(previous, story, data, readingMode)}
+        </button>
+        <button
+          type="button"
+          className="mobile-path-menu-button"
+          aria-label="打开探索路径"
+          aria-expanded={menuOpen}
+          onClick={() => setMenuOpen((current) => !current)}
+        >
+          ···
+        </button>
+      </div>
+      {menuOpen && (
+        <div className="path-menu" role="menu" aria-label="探索路径">
+          <p className="path-menu-heading">探索路径</p>
+          {stack.map((node, index) => (
+            <button
+              type="button"
+              role="menuitem"
+              className="path-menu-item"
+              key={`${node.kind}-${node.id}-${index}`}
+              onClick={() => select(index)}
+            >
+              {nodeLabel(node, story, data, readingMode)}
+            </button>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+function StoryReader({
   story,
   data,
   readingMode,
   setReadingMode,
-  stack,
-  focusedPersonId: focusedId,
+  focusedPersonId,
   onFocus,
-  onBack,
-  onStorySelect,
 }: {
   story: Story;
   data: SiteBundle;
   readingMode: ReadingMode;
   setReadingMode: (mode: ReadingMode) => void;
-  stack: ExplorationNode[];
   focusedPersonId: string | null;
   onFocus: (personId: string) => void;
-  onBack: () => void;
-  onStorySelect: (storyId: string) => void;
 }) {
-  const people = story.person_ids
-    .map((id) => data.people.find((person) => person.id === id))
-    .filter((person): person is Person => Boolean(person));
+  const readerRef = useRef<HTMLDivElement>(null);
   const mentions = resolvedMentions(story, data);
   const readingText = story.reading.main_text[readingMode];
   const annotationReading = story.reading.annotations[0];
-  const backTarget = focusedId && stack.length > 1
-    ? [...stack.slice(0, -1)].reverse().find((node) => node.kind === "person") ?? stack[stack.length - 2] ?? null
-    : null;
 
   useEffect(() => {
-    window.localStorage.setItem(READING_MODE_STORAGE_KEY, readingMode);
-  }, [readingMode]);
+    const reader = readerRef.current;
+    if (!reader) return;
+    reader.scrollTop = 0;
+    reader.scrollIntoView({ behavior: "auto", block: "start" });
+  }, [story.id]);
 
   return (
-    <main className="page-shell">
-      <header className="site-header">
-        <div>
-          <p className="brand">世说Sketch</p>
-          <p className="tagline">从一则故事，走进魏晋</p>
-        </div>
-        <span className="prototype-badge">SC1 Preview</span>
-      </header>
-
-      {stack.length > 1 && (
-        <nav className="exploration-breadcrumb" aria-label="探索路径">
-          {stack.map((node, index) => (
-            <span key={`${node.kind}-${node.id}-${index}`}>
-              {index > 0 && <span aria-hidden="true"> › </span>}
-              {nodeLabel(node, story, data, readingMode)}
-            </span>
-          ))}
-        </nav>
-      )}
-
+    <div className="story-reader-stage" ref={readerRef} tabIndex={-1} aria-labelledby="story-heading">
       <article className="reading-column">
         <p className="story-reference">{storyReference(story, readingMode)}</p>
-        <h1>{storyHeading(story, readingMode)}</h1>
+        <h1 id="story-heading">{storyHeading(story, readingMode)}</h1>
         <p className="story-meta">{story.id}</p>
 
-        <div className="reading-controls" role="group" aria-label="阅读模式">
-          <button
-            type="button"
-            className={readingMode === "simplified" ? "reading-mode-button active" : "reading-mode-button"}
-            aria-pressed={readingMode === "simplified"}
-            onClick={() => setReadingMode("simplified")}
-          >
-            简体阅读
-          </button>
-          <span className="reading-mode-separator" aria-hidden="true">|</span>
-          <button
-            type="button"
-            className={readingMode === "original" ? "reading-mode-button active" : "reading-mode-button"}
-            aria-pressed={readingMode === "original"}
-            onClick={() => setReadingMode("original")}
-          >
-            原文
-          </button>
+        <div className="story-reading-toolbar">
+          <div className="reading-controls" role="group" aria-label="阅读模式">
+            <button
+              type="button"
+              className={readingMode === "simplified" ? "reading-mode-button active" : "reading-mode-button"}
+              aria-pressed={readingMode === "simplified"}
+              onClick={() => setReadingMode("simplified")}
+            >
+              简体阅读
+            </button>
+            <span className="reading-mode-separator" aria-hidden="true">|</span>
+            <button
+              type="button"
+              className={readingMode === "original" ? "reading-mode-button active" : "reading-mode-button"}
+              aria-pressed={readingMode === "original"}
+              onClick={() => setReadingMode("original")}
+            >
+              原文
+            </button>
+          </div>
+          <p className={story.publication_state === "preview_ready" ? "publication-note preview" : "publication-note"}>
+            {story.publication_state === "preview_ready"
+              ? uiLabel(data, "preview_punctuation", readingMode, "句读：参考底本整理 · 待复核")
+              : uiLabel(data, "reviewed_punctuation", readingMode, "句读：已复核")}
+          </p>
         </div>
-
-        <p className={story.publication_state === "preview_ready" ? "publication-note preview" : "publication-note"}>
-          {story.publication_state === "preview_ready"
-            ? uiLabel(data, "preview_punctuation", readingMode, "句读：参考底本整理 · 待复核")
-            : uiLabel(data, "reviewed_punctuation", readingMode, "句读：已复核")}
-        </p>
 
         <section className="story-panel" aria-label="故事正文">
           <p className="story-text">{readingText}</p>
         </section>
 
-        {annotationReading && (
-          <section className="annotation-panel" key={annotationReading.id}>
-            <p className="section-label">{story.reading.labels.annotation_label[readingMode]}</p>
-            <p className="annotation-text">{annotationReading[readingMode]}</p>
-          </section>
-        )}
+        <section className="annotation-hook" aria-label="进一步读">
+          <p className="section-label">进一步读</p>
+          {annotationReading && (
+            <details className="annotation-panel" key={annotationReading.id} open>
+              <summary>{story.reading.labels.annotation_label[readingMode]}</summary>
+              <p className="annotation-text">{annotationReading[readingMode]}</p>
+            </details>
+          )}
+        </section>
 
         <section className="people-section" aria-labelledby="people-heading" aria-label={story.reading.labels.people_section[readingMode]}>
           <div className="section-heading">
             <p className="section-label">{story.reading.labels.people_section[readingMode]}</p>
             <h2 id="people-heading">{story.reading.labels.resolved_mentions_heading[readingMode]}</h2>
-          </div>
-          <div className="people-grid">
-            {people.map((person) => (
-              <PersonCard
-                key={person.id}
-                person={person}
-                mentions={personMentions(story, person, data)}
-                story={story}
-                readingMode={readingMode}
-                focused={focusedId === person.id}
-                onFocus={() => onFocus(person.id)}
-              />
-            ))}
           </div>
           <div className="mention-strip" aria-label={story.reading.labels.resolved_mentions_heading[readingMode]}>
             {mentions.map((mention) => (
@@ -722,21 +799,93 @@ function ReadingPage({
           </div>
         </section>
 
-        {focusedId && (
-          <EgoRelationExplorer
+        <EvidenceDetails story={story} data={data} readingMode={readingMode} />
+      </article>
+    </div>
+  );
+}
+
+function ReadingPage({
+  story,
+  data,
+  readingMode,
+  setReadingMode,
+  stack,
+  focusedPersonId,
+  personPanelOpen,
+  onFocus,
+  onBack,
+  onStorySelect,
+  onPathSelect,
+  onClosePerson,
+  onRandomStory,
+}: {
+  story: Story;
+  data: SiteBundle;
+  readingMode: ReadingMode;
+  setReadingMode: (mode: ReadingMode) => void;
+  stack: ExplorationNode[];
+  focusedPersonId: string | null;
+  personPanelOpen: boolean;
+  onFocus: (personId: string) => void;
+  onBack: () => void;
+  onStorySelect: (storyId: string) => void;
+  onPathSelect: (index: number) => void;
+  onClosePerson: () => void;
+  onRandomStory: () => void;
+}) {
+  const backTarget = focusedPersonId && stack.length > 1 ? stack[stack.length - 2] ?? null : null;
+  useEffect(() => {
+    window.localStorage.setItem(READING_MODE_STORAGE_KEY, readingMode);
+  }, [readingMode]);
+
+  return (
+    <main className="page-shell">
+      <header className="site-header">
+        <div>
+          <p className="brand">世说Sketch</p>
+          <p className="tagline">从一则故事，走进魏晋</p>
+        </div>
+        <div className="site-header-actions">
+          <button type="button" className="random-story-button" onClick={onRandomStory}>
+            随便读一则
+          </button>
+          <span className="prototype-badge">SC1 Preview</span>
+        </div>
+      </header>
+
+      <ExplorationPath
+        stack={stack}
+        story={story}
+        data={data}
+        readingMode={readingMode}
+        onSelect={onPathSelect}
+      />
+
+      <div className={personPanelOpen ? "exploration-layout with-person-panel" : "exploration-layout"}>
+        <StoryReader
+          key={story.id}
+          story={story}
+          data={data}
+          readingMode={readingMode}
+          setReadingMode={setReadingMode}
+          focusedPersonId={focusedPersonId}
+          onFocus={onFocus}
+        />
+        {personPanelOpen && focusedPersonId && (
+          <PersonExplorerPanel
             story={story}
             data={data}
-            focusedPersonId={focusedId}
+            focusedPersonId={focusedPersonId}
             readingMode={readingMode}
             backTarget={backTarget}
             onFocus={onFocus}
             onBack={onBack}
             onStorySelect={onStorySelect}
+            onClose={onClosePerson}
           />
         )}
-
-        <EvidenceDetails story={story} data={data} readingMode={readingMode} />
-      </article>
+      </div>
 
       <footer className="site-footer">
         <span>static-first · {data.generated_from}</span>
@@ -750,34 +899,68 @@ function App() {
   const [data, setData] = useState<SiteBundle | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [readingMode, setReadingMode] = useState<ReadingMode>(initialReadingMode);
-  const [stack, setStack] = useState<ExplorationNode[]>([{ kind: "story", id: DEFAULT_STORY_ID }]);
+  const [stack, setStack] = useState<ExplorationNode[]>([]);
+  const [personPanelOpen, setPersonPanelOpen] = useState(false);
+  const initialized = useRef(false);
 
   useEffect(() => {
+    if (initialized.current) return;
+    initialized.current = true;
     try {
-      setData(loadSiteBundle());
+      const loaded = loadSiteBundle();
+      const storyId = initialStoryId(loaded);
+      setData(loaded);
+      setStack([{ kind: "story", id: storyId }]);
+      writeStoryAddress(storyId);
     } catch (reason: unknown) {
       setError(reason instanceof Error ? reason.message : String(reason));
     }
   }, []);
 
   const story = useMemo(() => {
-    if (!data) return undefined;
-    return storyById(data, currentStoryFromExploration(stack) ?? DEFAULT_STORY_ID) ?? data.stories[0];
+    if (!data || stack.length === 0) return undefined;
+    const storyId = currentStoryFromExploration(stack);
+    return storyId ? storyById(data, storyId) : undefined;
   }, [data, stack]);
   const currentFocusedPersonId = focusedPersonFromExploration(stack);
 
   function focusPerson(personId: string) {
     if (!data?.people.some((person) => person.id === personId)) return;
     setStack((current) => appendExploration(current, { kind: "person", id: personId }));
+    setPersonPanelOpen(true);
   }
 
   function selectStory(storyId: string) {
     if (!data?.stories.some((candidate) => candidate.id === storyId)) return;
-    setStack((current) => appendExploration(current, { kind: "story", id: storyId }));
+    const next = appendExploration(stack, { kind: "story", id: storyId });
+    setStack(next);
+    setPersonPanelOpen(false);
+    writeStoryAddress(storyId);
   }
 
   function goBack() {
-    setStack((current) => backExploration(current));
+    const next = backExploration(stack);
+    setStack(next);
+    setPersonPanelOpen(next[next.length - 1]?.kind === "person");
+    const storyId = currentStoryFromExploration(next);
+    if (storyId) writeStoryAddress(storyId);
+  }
+
+  function selectPath(index: number) {
+    const next = truncateExploration(stack, index);
+    setStack(next);
+    setPersonPanelOpen(next[next.length - 1]?.kind === "person");
+    const storyId = currentStoryFromExploration(next);
+    if (storyId) writeStoryAddress(storyId);
+  }
+
+  function chooseRandomStory() {
+    if (!data) return;
+    const storyId = randomPublishedStoryId(data, Math.random, currentStoryFromExploration(stack) ?? undefined);
+    if (!storyId) return;
+    setStack([{ kind: "story", id: storyId }]);
+    setPersonPanelOpen(false);
+    writeStoryAddress(storyId);
   }
 
   if (error) {
@@ -807,9 +990,13 @@ function App() {
       setReadingMode={setReadingMode}
       stack={stack}
       focusedPersonId={currentFocusedPersonId}
+      personPanelOpen={personPanelOpen}
       onFocus={focusPerson}
       onBack={goBack}
       onStorySelect={selectStory}
+      onPathSelect={selectPath}
+      onClosePerson={() => setPersonPanelOpen(false)}
+      onRandomStory={chooseRandomStory}
     />
   );
 }
