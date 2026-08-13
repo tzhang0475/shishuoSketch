@@ -26,6 +26,8 @@ PERSON_STORY_INDEX_PATH = Path("data/derived/person-story-index.json")
 STORY_CHAIN_PATH = Path("data/story-chain-gold-set.json")
 PERSON_SKETCH_PATH = Path("data/annotation/person-sketches.json")
 SC1_BUNDLE_PATH = Path("data/derived/sc1-site.json")
+P3A1_PATH = Path("data/derived/person-identity-candidates.json")
+P3A1_OCCURRENCES_PATH = Path("data/derived/person-candidate-occurrences.json")
 P3A_PATH = Path("data/derived/person-expansion-candidates.json")
 UNRESOLVED_PATH = Path("data/derived/person-expansion-unresolved-surfaces.json")
 REPORT_PATH = Path("docs/person-expansion-candidates.md")
@@ -532,6 +534,96 @@ def _make_profile(
     }
 
 
+def _make_p3a1_profile(
+    candidate: Mapping[str, Any],
+    occurrences: Sequence[Mapping[str, Any]],
+    *,
+    corpus_order: Mapping[str, int],
+    current_story_ids: Sequence[str],
+    current_story_presence: Mapping[str, set[str]],
+) -> dict[str, Any] | None:
+    """Adapt an eligible P3A.1 proposal to the existing ranking math.
+
+    This is a ranking projection only.  The candidate ID remains distinct
+    from a production `person_id`, and no Relation data is synthesized.
+    """
+
+    candidate_id = str(candidate.get("candidate_id"))
+    if candidate.get("status") != "strong_candidate" or candidate.get("materialization_state") != "new_candidate":
+        return None
+    rows = [row for row in occurrences if row.get("candidate_id") == candidate_id]
+    story_layers: dict[str, set[str]] = defaultdict(set)
+    story_ids: set[str] = set()
+    for row in rows:
+        story_id = row.get("source_id")
+        if isinstance(story_id, str):
+            story_ids.add(story_id)
+            story_layers[story_id].add(str(row.get("section", "unknown")))
+    main_story_ids = {story_id for story_id, layers in story_layers.items() if "main_text" in layers}
+    liu_story_ids = {story_id for story_id, layers in story_layers.items() if "liu_annotation" in layers}
+    current_set = set(current_story_ids)
+    shared_story_ids = {story_id for story_id in story_ids if current_story_presence.get(story_id)}
+    exact_count = sum(item.get("association_mode") == "exact" for item in candidate.get("surfaces", []))
+    contextual_count = sum(item.get("association_mode") != "exact" for item in candidate.get("surfaces", []))
+    high_confidence = sum(item.get("confidence") == "strong_candidate" for item in rows)
+    source_families = {"jinshu"}
+    if rows:
+        source_families.add("shishuo")
+    source_layers = sorted(
+        {layer for item in candidate.get("surfaces", []) for layer in item.get("source_layers", [])}
+        | {str(row.get("section")) for row in rows},
+        key=lambda value: (LAYER_ORDER.get(value, 9), value),
+    )
+    identity_evidence = list(candidate.get("identity_evidence_ids", []))
+    occurrence_evidence = list(candidate.get("evidence_ids", []))
+    risk_flags = set(candidate.get("risk_flags", []))
+    if candidate.get("status") == "candidate":
+        risk_flags.add("candidate_identity_requires_review")
+    return {
+        "source_person_id": candidate_id,
+        "candidate_id": candidate_id,
+        "identity_kind": "p3a1_candidate",
+        "canonical_name": str(candidate.get("preferred_name")),
+        "metrics": {
+            "current_main_text_story_count": len(main_story_ids & current_set),
+            "current_liu_annotation_story_count": len(liu_story_ids & current_set),
+            "current_liu_annotation_only_story_count": len((liu_story_ids - main_story_ids) & current_set),
+            "current_weighted_story_coverage": _round(
+                len(main_story_ids & current_set) + 0.5 * len((liu_story_ids - main_story_ids) & current_set)
+            ),
+            "corpus_story_count": len(story_ids),
+            "mention_count": len(rows),
+            "shishuo_mention_count": len(rows),
+            "source_mention_count": len(rows),
+            "direct_relation_to_current_count": 0,
+            "shared_story_with_current_count": len(shared_story_ids),
+            "unlock_story_count": len(shared_story_ids - current_set),
+            "family_relation_to_current_count": 0,
+        },
+        "evidence_summary": {
+            "exact_alias_count": exact_count,
+            "contextual_alias_count": contextual_count,
+            "high_confidence_mention_count": high_confidence,
+            "source_evidence_count": len(set(identity_evidence + occurrence_evidence)),
+            "source_layers": source_layers,
+            "source_families": sorted(source_families),
+            "stable_name_surfaces": [str(candidate.get("preferred_name"))],
+            "alias_types": sorted({str(item.get("surface_type")) for item in candidate.get("surfaces", [])}),
+            "evidence_keys": sorted(set(identity_evidence + occurrence_evidence)),
+        },
+        "all_story_ids": sorted(story_ids, key=lambda value: (corpus_order.get(value, 10**9), value)),
+        "current_story_ids": sorted(story_ids & current_set, key=lambda value: (corpus_order.get(value, 10**9), value)),
+        "shared_story_ids": sorted(shared_story_ids, key=lambda value: (corpus_order.get(value, 10**9), value)),
+        "unlock_story_ids": sorted(shared_story_ids - current_set, key=lambda value: (corpus_order.get(value, 10**9), value)),
+        "connected_current_person_ids": sorted({person_id for story_id in shared_story_ids for person_id in current_story_presence.get(story_id, set())}),
+        "direct_relation_ids": [],
+        "risk_flags": sorted(risk_flags),
+        "stable_name_anchor": True,
+        "alias_ids": [],
+        "ambiguity_surface_count": sum(item.get("association_mode") == "ambiguous" for item in candidate.get("surfaces", [])),
+    }
+
+
 def _components(
     profile: Mapping[str, Any],
     maxima: Mapping[str, float],
@@ -635,6 +727,12 @@ def build_analysis(root: Path = ROOT) -> tuple[dict[str, Any], dict[str, Any], s
     person_sketch_source = read_json(root, PERSON_SKETCH_PATH)
     current_story_ids = _current_story_ids(root)
     current_story_set = set(current_story_ids)
+    p3a1_document = read_json(root, P3A1_PATH) if (root / P3A1_PATH).is_file() else None
+    p3a1_occurrences = (
+        read_json(root, P3A1_OCCURRENCES_PATH).get("occurrences", [])
+        if (root / P3A1_OCCURRENCES_PATH).is_file()
+        else []
+    )
 
     # Current resolved Person presence is the only basis for co-occurrence and
     # unlock calculations.  Candidate IDs are never inferred from surfaces.
@@ -669,6 +767,20 @@ def build_analysis(root: Path = ROOT) -> tuple[dict[str, Any], dict[str, Any], s
         if profile is not None:
             eligible.append(profile)
 
+    p3a1_eligible_count = 0
+    if isinstance(p3a1_document, Mapping):
+        for candidate in p3a1_document.get("candidates", []):
+            profile = _make_p3a1_profile(
+                candidate,
+                p3a1_occurrences,
+                corpus_order=corpus_order,
+                current_story_ids=current_story_ids,
+                current_story_presence=current_story_presence,
+            )
+            if profile is not None:
+                eligible.append(profile)
+                p3a1_eligible_count += 1
+
     maxima = {
         "current_story_coverage": _normalization_max(
             profile["metrics"]["current_weighted_story_coverage"] for profile in eligible
@@ -702,7 +814,9 @@ def build_analysis(root: Path = ROOT) -> tuple[dict[str, Any], dict[str, Any], s
         scored.append(
             {
                 "person_key": "candidate:" + str(profile["source_person_id"]),
-                "source_person_id": profile["source_person_id"],
+                "source_person_id": None if profile.get("identity_kind") == "p3a1_candidate" else profile["source_person_id"],
+                "candidate_id": profile.get("candidate_id"),
+                "identity_kind": profile.get("identity_kind", "existing_structured_candidate"),
                 "canonical_name": profile["canonical_name"],
                 "score": score,
                 "tier": tier,
@@ -724,7 +838,7 @@ def build_analysis(root: Path = ROOT) -> tuple[dict[str, Any], dict[str, Any], s
         {
             key: candidate[key]
             for key in (
-                "rank", "person_key", "source_person_id", "canonical_name", "score", "tier",
+                "rank", "person_key", "source_person_id", "candidate_id", "identity_kind", "canonical_name", "score", "tier",
                 "components", "metrics", "evidence_summary", "top_current_story_ids",
                 "top_unlock_story_ids", "connected_current_person_ids", "risk_flags",
                 "direct_relation_ids",
@@ -761,6 +875,19 @@ def build_analysis(root: Path = ROOT) -> tuple[dict[str, Any], dict[str, Any], s
                     "unscoped_resolved_candidate_person_ids": resolved_noncurrent,
                 }
             )
+    if isinstance(p3a1_document, Mapping):
+        current_gaps = [
+            {
+                "story_id": gap.get("story_id"),
+                "unscoped_resolved_candidate_person_ids": [
+                    str(item.get("candidate_id"))
+                    for item in gap.get("candidates", [])
+                    if isinstance(item, Mapping) and isinstance(item.get("candidate_id"), str)
+                ],
+            }
+            for gap in p3a1_document.get("current_sc1_open_world_gaps", [])
+            if isinstance(gap, Mapping) and gap.get("candidates")
+        ]
 
     tiers = Counter(candidate["tier"] for candidate in scored)
     strong_identity_count = sum(
@@ -794,12 +921,16 @@ def build_analysis(root: Path = ROOT) -> tuple[dict[str, Any], dict[str, Any], s
             str(STORY_CHAIN_PATH),
             str(PERSON_SKETCH_PATH),
             str(SC1_BUNDLE_PATH),
+            str(P3A1_PATH),
+            str(P3A1_OCCURRENCES_PATH),
         ],
         "candidate_identity_policy": {
-            "eligible_identity_source": "existing non-scoped person_id in structured Mention, Alias, or Relation data",
+            "eligible_identity_source": "existing non-scoped person_id in structured data or P3A.1 strong open-world identity candidate",
             "stable_name_requirement": "at least one personal/courtesy/surname-plus-courtesy/orthographic alias or exact named surface",
             "unresolved_surfaces": "reported separately and never ranked as Persons",
             "scoped_person_ids_excluded": sorted(current_person_ids),
+            "p3a1_source": str(P3A1_PATH),
+            "p3a1_eligible_statuses": ["strong_candidate"],
         },
         "input_counts": {
             "scoped_person_count": len(current_person_ids),
@@ -811,6 +942,15 @@ def build_analysis(root: Path = ROOT) -> tuple[dict[str, Any], dict[str, Any], s
             "sc0_gold_story_count": len(story_chain_gold.get("records", [])),
             "person_sketch_record_count": len(person_sketch_source.get("records", [])),
             "eligible_identity_seed_count": len(seeds),
+            "p3a1_candidate_identity_count": int(
+                p3a1_document.get("discovery_counts", {}).get("candidate_identity_count", 0)
+                if isinstance(p3a1_document, Mapping) else 0
+            ),
+            "p3a1_strong_candidate_count": int(
+                p3a1_document.get("discovery_counts", {}).get("strong_candidate_count", 0)
+                if isinstance(p3a1_document, Mapping) else 0
+            ),
+            "p3a1_eligible_candidate_count": p3a1_eligible_count,
         },
         "weights": WEIGHTS,
         "normalization": normalization,
@@ -836,6 +976,7 @@ def build_analysis(root: Path = ROOT) -> tuple[dict[str, Any], dict[str, Any], s
             "Shared Story appearances are navigation opportunities, not Relation records.",
             "Only reviewed direct Relation records contribute to direct relation metrics; derived Relations are excluded.",
             "This artifact does not materialize Persons or alter any canonical identity, Mention, Relation, or publication data.",
+            "P3A.1 candidate IDs remain review keys and are not production person_id values.",
         ],
     }
     unresolved_document = {
@@ -857,6 +998,11 @@ def build_analysis(root: Path = ROOT) -> tuple[dict[str, Any], dict[str, Any], s
 def render_report(document: Mapping[str, Any], unresolved_document: Mapping[str, Any]) -> str:
     candidates = list(document.get("candidates", []))
     distribution = document.get("distribution", {})
+    candidate_names = {
+        str(candidate.get("candidate_id")): str(candidate.get("canonical_name"))
+        for candidate in candidates
+        if isinstance(candidate, Mapping) and isinstance(candidate.get("candidate_id"), str)
+    }
     lines = [
         "# P3A Person Expansion Candidate Ranking",
         "",
@@ -864,7 +1010,7 @@ def render_report(document: Mapping[str, Any], unresolved_document: Mapping[str,
         "",
         "## Scope result",
         "",
-        f"The current structured repository contains **{document['input_counts']['scoped_person_count']} scoped Persons** and **{document['input_counts']['canonical_story_count']} canonical Shishuo Stories**. The eligible non-scoped identity universe is **{document['candidate_count']}**.",
+        f"The current structured repository contains **{document['input_counts']['scoped_person_count']} scoped Persons** and **{document['input_counts']['canonical_story_count']} canonical Shishuo Stories**. The eligible non-scoped identity universe is **{document['candidate_count']}**; P3A.1 supplied **{document['input_counts'].get('p3a1_eligible_candidate_count', 0)}** strong open-world review keys.",
         "",
     ]
     if not candidates:
@@ -943,11 +1089,15 @@ def render_report(document: Mapping[str, Any], unresolved_document: Mapping[str,
     gaps = document.get("current_live_story_gaps", [])
     if gaps:
         for gap in gaps:
+            labels = [
+                f"{candidate_names.get(candidate_id, candidate_id)} (`{candidate_id}`)"
+                for candidate_id in gap["unscoped_resolved_candidate_person_ids"]
+            ]
             lines.append(
-                f"- `{gap['story_id']}` — {', '.join(gap['unscoped_resolved_candidate_person_ids'])}"
+                f"- `{gap['story_id']}` — {', '.join(labels)}"
             )
     else:
-        lines.append("No resolved non-scoped candidate Person appears in the current SC1 Stories. The visible gaps are unresolved surfaces, not stable candidate identities.")
+        lines.append("No supported open-world candidate appears in the current SC1 Stories. The visible gaps are unresolved surfaces, not stable candidate identities.")
     lines.extend(["", "## Unresolved surface audit", ""])
     lines.append("These are review clusters, not ranked Persons. Frequency alone does not establish identity.")
     lines.extend(["", "| Surface | Mentions | Stories | Existing candidate IDs | Reason |", "| --- | ---: | ---: | --- | --- |"])
@@ -961,15 +1111,20 @@ def render_report(document: Mapping[str, Any], unresolved_document: Mapping[str,
             "",
             "## Recommended P3B wave",
             "",
-            "No P3B Persons are recommended from this run. The repository must first add or review stable non-scoped identity records; doing so is outside P3A and cannot be replaced by guessing from generic titles or co-occurrence.",
+            "This is a review recommendation only; no Person is materialized by P3A. Recommend the top **30** ranked P3A.1-backed candidates for a staged P3B review:",
+            "",
+            "- Wave 1: ranks 1–10, prioritizing current SC1 gaps and the strongest Story traversal payoff.",
+            "- Wave 2: ranks 11–30, subject to identity/evidence review before materialization.",
+            "",
+            "The exact wave boundary remains editorial: contextual surface associations, single-source biographies, and candidate identity risks must be reviewed before any P3B registry change.",
             "",
             "## Method and safeguards",
             "",
-            "- Candidate keys are derived analysis keys (`candidate:<existing-source-id>`), not production Person IDs.",
+            "- Candidate keys are derived analysis keys (`candidate:<existing-source-id>` or `candidate:<p3a1-candidate-id>`), not production Person IDs.",
             "- Current Story coverage, corpus coverage, and unlock Stories use resolved Shishuo mentions only.",
             "- Direct connectivity counts only `reviewed` + `direct` Relation records. Derived Relations and co-occurrence are not counted as direct edges.",
             "- Jinshu evidence can strengthen source depth/evidence for an eligible identity, but Jinshu text does not create Shishuo Story links.",
-            "- No Sanguozhi data, external research, canonical text, Mention, Relation, PersonStory, punctuation, or frontend data is changed by P3A.",
+            "- P3A.1 strong candidates are ranking inputs only; no Sanguozhi data, external research, canonical text, Mention, Relation, PersonStory, punctuation, or frontend data is changed by P3A.",
             "",
         ]
     )

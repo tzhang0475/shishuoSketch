@@ -43,12 +43,13 @@ class PersonExpansionCandidateTests(unittest.TestCase):
             )
         )
 
-    def test_current_repository_has_no_stable_non_scoped_identity_to_rank(self) -> None:
-        # Existing Mention and Alias records resolve only the current seven
-        # Persons. Generic/contextual surfaces therefore remain an audit, not
-        # an invented candidate identity.
-        self.assertEqual(self.document["candidate_count"], 0)
-        self.assertEqual(self.document["input_counts"]["eligible_identity_seed_count"], 0)
+    def test_p3a_consumes_strong_open_world_candidates_without_materializing_them(self) -> None:
+        # P3A.1 supplies review keys, not production Person IDs. The P3A
+        # ranking should now be non-empty while the current registry remains
+        # excluded from its output.
+        self.assertGreater(self.document["candidate_count"], 0)
+        self.assertGreater(self.document["input_counts"]["p3a1_eligible_candidate_count"], 0)
+        self.assertTrue(all(candidate["identity_kind"] == "p3a1_candidate" for candidate in self.document["candidates"]))
         self.assertIn("王公", {row["surface"] for row in self.unresolved["surfaces"]})
         self.assertNotIn("王公", {candidate["canonical_name"] for candidate in self.document["candidates"]})
 
@@ -68,7 +69,7 @@ class PersonExpansionCandidateTests(unittest.TestCase):
         components["ambiguity_risk"] = 1.0
         self.assertEqual(calculate_score(components), 85.0)
 
-    def test_no_non_scoped_resolved_shishuo_person_creates_a_live_gap(self) -> None:
+    def test_closed_world_mentions_remain_unchanged_while_open_world_gaps_are_reported(self) -> None:
         scoped = {person["person_id"] for person in self.people}
         resolved_ids = {
             mention["person_id"]
@@ -76,7 +77,19 @@ class PersonExpansionCandidateTests(unittest.TestCase):
             if isinstance(mention.get("person_id"), str)
         }
         self.assertTrue(resolved_ids.issubset(scoped))
-        self.assertEqual(self.document["current_live_story_gaps"], [])
+        self.assertTrue(self.document["current_live_story_gaps"])
+        self.assertTrue(
+            any(
+                candidate["canonical_name"] == "桓溫"
+                for candidate in self.document["candidates"]
+            )
+        )
+
+    def test_current_story_candidate_gets_coverage_without_synthesized_relation(self) -> None:
+        huan_wen = next(candidate for candidate in self.document["candidates"] if candidate["canonical_name"] == "桓溫")
+        self.assertGreater(huan_wen["metrics"]["current_main_text_story_count"], 0)
+        self.assertEqual(huan_wen["metrics"]["direct_relation_to_current_count"], 0)
+        self.assertEqual(huan_wen["direct_relation_ids"], [])
 
     def test_build_is_byte_deterministic_without_frontend_mutation(self) -> None:
         rebuilt, rebuilt_unresolved, rebuilt_report = build_analysis(ROOT)

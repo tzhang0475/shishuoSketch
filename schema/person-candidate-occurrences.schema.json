@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://shishuo-sketch/schema/person-candidate-occurrences.schema.json",
+  "title": "P3A.1 Candidate Person Occurrences",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "stage", "generated_from", "occurrence_count", "occurrences", "notes"],
+  "properties": {
+    "schema": {"const": 1},
+    "stage": {"const": "p3a1-person-candidate-occurrences"},
+    "generated_from": {"type": "array", "items": {"type": "string"}, "minItems": 1},
+    "occurrence_count": {"type": "integer", "minimum": 0},
+    "occurrences": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["occurrence_id", "candidate_id", "source", "source_id", "section", "surface", "surface_type", "association_mode", "confidence", "evidence_ids", "offset"],
+        "properties": {
+          "occurrence_id": {"type": "string", "minLength": 1},
+          "candidate_id": {"type": "string", "pattern": "^candidate-identity-.+"},
+          "source": {"const": "shishuo"},
+          "source_id": {"type": "string", "minLength": 1},
+          "section": {"enum": ["main_text", "liu_annotation"]},
+          "surface": {"type": "string", "minLength": 1},
+          "surface_type": {"type": "string", "minLength": 1},
+          "association_mode": {"enum": ["exact", "contextual", "ambiguous"]},
+          "confidence": {"enum": ["strong_candidate", "candidate", "ambiguous"]},
+          "evidence_ids": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+          "offset": {"type": "integer", "minimum": 0}
+        }
+      }
+    },
+    "notes": {"type": "array", "items": {"type": "string"}}
+  }
+}

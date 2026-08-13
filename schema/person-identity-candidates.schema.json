@@ -1,0 +1,104 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://shishuo-sketch/schema/person-identity-candidates.schema.json",
+  "title": "P3A.1 Open-World Person Identity Candidates",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "stage",
+    "generated_from",
+    "discovery_policy",
+    "input_counts",
+    "discovery_counts",
+    "current_sc1_open_world_gaps",
+    "unresolved_surface_clusters",
+    "evidence",
+    "candidates",
+    "notes"
+  ],
+  "properties": {
+    "schema": {"const": 1},
+    "stage": {"const": "p3a1-open-world-person-discovery"},
+    "generated_from": {"type": "array", "items": {"type": "string"}, "minItems": 1},
+    "discovery_policy": {"type": "object"},
+    "input_counts": {"type": "object"},
+    "discovery_counts": {"type": "object"},
+    "current_sc1_open_world_gaps": {"type": "array"},
+    "unresolved_surface_clusters": {"type": "array"},
+    "evidence": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "candidate_id", "evidence_kind", "source", "source_id", "section", "surface", "quote", "locator", "review_status"],
+        "properties": {
+          "id": {"type": "string", "minLength": 1},
+          "candidate_id": {"type": ["string", "null"]},
+          "evidence_kind": {"type": "string", "minLength": 1},
+          "source": {"enum": ["shishuo", "jinshu"]},
+          "source_id": {"type": "string", "minLength": 1},
+          "section": {"type": "string", "minLength": 1},
+          "surface": {"type": "string", "minLength": 1},
+          "quote": {"type": "string"},
+          "locator": {"type": "object"},
+          "review_status": {"const": "candidate"}
+        }
+      }
+    },
+    "candidates": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "candidate_id",
+          "preferred_name",
+          "status",
+          "matched_person_id",
+          "materialization_state",
+          "surfaces",
+          "identity_evidence_ids",
+          "metrics",
+          "shishuo_story_ids",
+          "current_sc1_story_ids",
+          "risk_flags",
+          "identity_basis"
+        ],
+        "properties": {
+          "candidate_id": {"type": "string", "pattern": "^candidate-identity-.+"},
+          "preferred_name": {"type": "string", "minLength": 1},
+          "status": {"enum": ["strong_candidate", "candidate", "ambiguous", "already_materialized"]},
+          "matched_person_id": {"type": ["string", "null"]},
+          "materialization_state": {"enum": ["new_candidate", "already_materialized"]},
+          "surfaces": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["surface", "surface_type", "association_mode", "association_strength", "source_layers", "evidence_ids", "occurrence_count"],
+              "properties": {
+                "surface": {"type": "string", "minLength": 1},
+                "surface_type": {"type": "string", "minLength": 1},
+                "association_mode": {"enum": ["exact", "contextual", "ambiguous"]},
+                "association_strength": {"enum": ["strong", "medium", "weak"]},
+                "source_layers": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+                "evidence_ids": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+                "occurrence_count": {"type": "integer", "minimum": 0}
+              }
+            }
+          },
+          "identity_evidence_ids": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+          "metrics": {"type": "object", "additionalProperties": {"type": ["number", "integer"]}},
+          "shishuo_story_ids": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+          "current_sc1_story_ids": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+          "current_sc1_occurrence_count": {"type": "integer", "minimum": 0},
+          "risk_flags": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+          "identity_basis": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+          "evidence_ids": {"type": "array", "items": {"type": "string"}, "uniqueItems": true}
+        }
+      }
+    },
+    "notes": {"type": "array", "items": {"type": "string"}}
+  }
+}

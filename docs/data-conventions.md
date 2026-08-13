@@ -263,3 +263,27 @@ The score uses explicit bounded linear normalization and fixed weights in the
 generated artifact. Candidate keys have the form `candidate:<existing-id>` so
 they remain analysis keys rather than prematurely becoming canonical Person
 IDs. P3A does not expand the frontend or mutate canonical/research data.
+
+## P3A.1 Open-world Person identity discovery
+
+`data/derived/person-identity-candidates.json` is the reviewable discovery
+artifact that precedes P3A. It starts from processed Jinshu biography-unit
+subjects and explicit local identity cues, then attaches conservative Shishuo
+main-text and Liu Xiaobiao annotation surface evidence. A surface is not an
+identity: generic forms such as `太傅`, `王公`, and `丞相` remain unresolved
+surface clusters unless an explicit local identity bridge supports a
+contextual association.
+
+`data/derived/person-candidate-occurrences.json` contains exploratory
+occurrences for new candidates only. It is deliberately separate from
+`data/mentions/*.json`: P3A.1 never writes canonical Person IDs, Mention
+resolutions, Relations, PersonStory links, Person Sketch records, or
+publication state. Existing registry matches are retained in the discovery
+artifact as `already_materialized` rediscovery controls.
+
+Only `strong_candidate` records are eligible for the existing P3A ranking by
+default. P3A adapts their deterministic candidate keys for ranking without
+turning them into production Persons; human review and a later P3B
+materialization step remain required. Rebuilds sort candidate IDs, surfaces,
+evidence, Story IDs, and source layers explicitly so the JSON and review report
+are byte-deterministic.

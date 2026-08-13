@@ -4,11 +4,7 @@
 
 ## Scope result
 
-The current structured repository contains **7 scoped Persons** and **1130 canonical Shishuo Stories**. The eligible non-scoped identity universe is **0**.
-
-No additional stable Person identity is currently available for ranking. All resolved Shishuo/Jinshu `person_id` values are already in the seven-Person registry; other recurring surfaces remain unresolved or point only to scoped Persons.
-
-This is an intentional stopping point: P3A does not turn a surface such as `王公` or `太傅` into a Person. An identity-resolution/materialization review pass is required before a P3B wave can be recommended.
+The current structured repository contains **7 scoped Persons** and **1130 canonical Shishuo Stories**. The eligible non-scoped identity universe is **323**; P3A.1 supplied **323** strong open-world review keys.
 
 ## Ranking dimensions and weights
 
@@ -34,19 +30,159 @@ Main-text Story presence receives more current-coverage weight than Liu-annotati
 
 ## Distribution
 
-- Candidate identities: **0**
-- Tier A / B / C / deferred: **0 / 0 / 0 / 0**
-- Candidates in current SC1: **0**
-- Median / maximum corpus Story coverage: **0.0 / 0**
-- Strong identity-evidence candidates: **0**
+- Candidate identities: **323**
+- Tier A / B / C / deferred: **0 / 6 / 80 / 237**
+- Candidates in current SC1: **10**
+- Median / maximum corpus Story coverage: **1.0 / 49**
+- Strong identity-evidence candidates: **182**
 
 ## Top candidates
 
-There are no ranked identities, so a top-15 list cannot be truthfully produced.
+### 桓溫
+
+Rank: **1** · Score: **59.11** · Tier: **B**
+
+- Current Stories: 1 main-text, 0 Liu-annotation-only
+- Corpus Stories: 41 · unlock potential: 4
+- Direct reviewed Relations to current scope: 0 · shared Stories: 5
+- Risks: contextual_surface_association, single_source_unit
+
+### 劉惔
+
+Rank: **2** · Score: **51.31** · Tier: **B**
+
+- Current Stories: 1 main-text, 1 Liu-annotation-only
+- Corpus Stories: 36 · unlock potential: 0
+- Direct reviewed Relations to current scope: 0 · shared Stories: 2
+- Risks: contextual_surface_association, single_source_unit
+
+### 庾亮
+
+Rank: **3** · Score: **50.80** · Tier: **B**
+
+- Current Stories: 0 main-text, 0 Liu-annotation-only
+- Corpus Stories: 33 · unlock potential: 7
+- Direct reviewed Relations to current scope: 0 · shared Stories: 7
+- Risks: contextual_surface_association, single_source_unit
+
+### 王敦
+
+Rank: **4** · Score: **46.28** · Tier: **B**
+
+- Current Stories: 0 main-text, 0 Liu-annotation-only
+- Corpus Stories: 40 · unlock potential: 5
+- Direct reviewed Relations to current scope: 0 · shared Stories: 5
+- Risks: contextual_surface_association, single_source_unit
+
+### 袁宏
+
+Rank: **5** · Score: **44.57** · Tier: **B**
+
+- Current Stories: 1 main-text, 0 Liu-annotation-only
+- Corpus Stories: 14 · unlock potential: 2
+- Direct reviewed Relations to current scope: 0 · shared Stories: 3
+- Risks: contextual_surface_association, single_source_unit
+
+### 温嶠
+
+Rank: **6** · Score: **41.05** · Tier: **B**
+
+- Current Stories: 0 main-text, 0 Liu-annotation-only
+- Corpus Stories: 20 · unlock potential: 5
+- Direct reviewed Relations to current scope: 0 · shared Stories: 5
+- Risks: contextual_surface_association, single_source_unit
+
+### 王濛
+
+Rank: **7** · Score: **39.93** · Tier: **C**
+
+- Current Stories: 0 main-text, 1 Liu-annotation-only
+- Corpus Stories: 21 · unlock potential: 2
+- Direct reviewed Relations to current scope: 0 · shared Stories: 3
+- Risks: single_source_unit
+
+### 孫晷
+
+Rank: **8** · Score: **39.32** · Tier: **C**
+
+- Current Stories: 1 main-text, 0 Liu-annotation-only
+- Corpus Stories: 14 · unlock potential: 1
+- Direct reviewed Relations to current scope: 0 · shared Stories: 2
+- Risks: single_source_unit
+
+### 王遐
+
+Rank: **9** · Score: **37.36** · Tier: **C**
+
+- Current Stories: 1 main-text, 0 Liu-annotation-only
+- Corpus Stories: 6 · unlock potential: 1
+- Direct reviewed Relations to current scope: 0 · shared Stories: 2
+- Risks: single_source_unit
+
+### 蘇峻
+
+Rank: **10** · Score: **37.35** · Tier: **C**
+
+- Current Stories: 0 main-text, 0 Liu-annotation-only
+- Corpus Stories: 19 · unlock potential: 4
+- Direct reviewed Relations to current scope: 0 · shared Stories: 4
+- Risks: single_source_unit
+
+### 王隱
+
+Rank: **11** · Score: **36.35** · Tier: **C**
+
+- Current Stories: 0 main-text, 0 Liu-annotation-only
+- Corpus Stories: 49 · unlock potential: 1
+- Direct reviewed Relations to current scope: 0 · shared Stories: 1
+- Risks: contextual_surface_association, single_source_unit
+
+### 周顗
+
+Rank: **12** · Score: **33.03** · Tier: **C**
+
+- Current Stories: 0 main-text, 0 Liu-annotation-only
+- Corpus Stories: 24 · unlock potential: 2
+- Direct reviewed Relations to current scope: 0 · shared Stories: 2
+- Risks: contextual_surface_association, single_source_unit
+
+### 謝尚
+
+Rank: **13** · Score: **32.70** · Tier: **C**
+
+- Current Stories: 0 main-text, 0 Liu-annotation-only
+- Corpus Stories: 24 · unlock potential: 2
+- Direct reviewed Relations to current scope: 0 · shared Stories: 2
+- Risks: contextual_surface_association, single_source_unit
+
+### 王恭
+
+Rank: **14** · Score: **31.77** · Tier: **C**
+
+- Current Stories: 0 main-text, 0 Liu-annotation-only
+- Corpus Stories: 33 · unlock potential: 1
+- Direct reviewed Relations to current scope: 0 · shared Stories: 1
+- Risks: contextual_surface_association, single_source_unit
+
+### 王戎
+
+Rank: **15** · Score: **31.77** · Tier: **C**
+
+- Current Stories: 0 main-text, 0 Liu-annotation-only
+- Corpus Stories: 33 · unlock potential: 1
+- Direct reviewed Relations to current scope: 0 · shared Stories: 1
+- Risks: contextual_surface_association, single_source_unit
 
 ## Current live Story gaps
 
-No resolved non-scoped candidate Person appears in the current SC1 Stories. The visible gaps are unresolved surfaces, not stable candidate identities.
+- `02-yanyu-069` — 劉惔 (`candidate-identity-075-liezhuan-006-8fa047488139`)
+- `02-yanyu-071` — 孫恩 (`candidate-identity-100-liezhuan-010-96bcbe2d3579`)
+- `02-yanyu-083` — 袁宏 (`candidate-identity-092-liezhuan-013-76b547bbee32`)
+- `04-wenxue-036` — 向秀 (`candidate-identity-049-liezhuan-003-1e8de1e68064`)
+- `05-fangzheng-023` — 王裒 (`candidate-identity-088-liezhuan-004-7bd860ca57e7`), 孟陋 (`candidate-identity-094-liezhuan-016-86bd1f390c7b`)
+- `05-fangzheng-055` — 劉惔 (`candidate-identity-075-liezhuan-006-8fa047488139`), 王濛 (`candidate-identity-093-liezhuan-010-e8abd34dc108`), 王遐 (`candidate-identity-093-liezhuan-011-9b983af9b748`)
+- `06-yaliang-027` — candidate-identity-067-liezhuan-002-e72bf92e965f (`candidate-identity-067-liezhuan-002-e72bf92e965f`)
+- `06-yaliang-029` — candidate-identity-067-liezhuan-002-e72bf92e965f (`candidate-identity-067-liezhuan-002-e72bf92e965f`), 孫晷 (`candidate-identity-088-liezhuan-007-ca650e9ceb0f`), 桓溫 (`candidate-identity-098-liezhuan-003-7859332a18d3`)
 
 ## Unresolved surface audit
 
@@ -66,12 +202,17 @@ These are review clusters, not ranked Persons. Frequency alone does not establis
 
 ## Recommended P3B wave
 
-No P3B Persons are recommended from this run. The repository must first add or review stable non-scoped identity records; doing so is outside P3A and cannot be replaced by guessing from generic titles or co-occurrence.
+This is a review recommendation only; no Person is materialized by P3A. Recommend the top **30** ranked P3A.1-backed candidates for a staged P3B review:
+
+- Wave 1: ranks 1–10, prioritizing current SC1 gaps and the strongest Story traversal payoff.
+- Wave 2: ranks 11–30, subject to identity/evidence review before materialization.
+
+The exact wave boundary remains editorial: contextual surface associations, single-source biographies, and candidate identity risks must be reviewed before any P3B registry change.
 
 ## Method and safeguards
 
-- Candidate keys are derived analysis keys (`candidate:<existing-source-id>`), not production Person IDs.
+- Candidate keys are derived analysis keys (`candidate:<existing-source-id>` or `candidate:<p3a1-candidate-id>`), not production Person IDs.
 - Current Story coverage, corpus coverage, and unlock Stories use resolved Shishuo mentions only.
 - Direct connectivity counts only `reviewed` + `direct` Relation records. Derived Relations and co-occurrence are not counted as direct edges.
 - Jinshu evidence can strengthen source depth/evidence for an eligible identity, but Jinshu text does not create Shishuo Story links.
-- No Sanguozhi data, external research, canonical text, Mention, Relation, PersonStory, punctuation, or frontend data is changed by P3A.
+- P3A.1 strong candidates are ranking inputs only; no Sanguozhi data, external research, canonical text, Mention, Relation, PersonStory, punctuation, or frontend data is changed by P3A.

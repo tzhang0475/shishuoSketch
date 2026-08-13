@@ -1,0 +1,100 @@
+from __future__ import annotations
+
+import json
+from pathlib import Path
+import unittest
+
+from scripts.person_identity_discovery import OCCURRENCES_PATH, OUTPUT_PATH
+from scripts.validate_person_identity_candidates import validate
+
+
+ROOT = Path(__file__).resolve().parents[1]
+
+
+class PersonIdentityDiscoveryTests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls) -> None:
+        cls.document = json.loads((ROOT / OUTPUT_PATH).read_text(encoding="utf-8"))
+        cls.occurrence_document = json.loads(
+            (ROOT / OCCURRENCES_PATH).read_text(encoding="utf-8")
+        )
+        cls.people = json.loads((ROOT / "data/people.json").read_text(encoding="utf-8"))["people"]
+
+    def test_artifacts_validate_in_portable_mode(self) -> None:
+        self.assertEqual(validate(ROOT, mode="portable"), [])
+
+    def test_discovery_is_open_world_and_excludes_materialized_people(self) -> None:
+        candidates = self.document["candidates"]
+        self.assertGreater(self.document["discovery_counts"]["candidate_identity_count"], 0)
+        materialized = [row for row in candidates if row["status"] == "already_materialized"]
+        self.assertEqual(len(materialized), len(self.people))
+        self.assertTrue(all(row["materialization_state"] == "already_materialized" for row in materialized))
+        self.assertTrue(
+            all(row["materialization_state"] == "new_candidate" for row in candidates if row not in materialized)
+        )
+
+    def test_explicit_jinshu_identity_seed_clusters_name_and_contextual_surface(self) -> None:
+        桓溫 = next(row for row in self.document["candidates"] if row["preferred_name"] == "桓溫")
+        self.assertEqual(桓溫["status"], "strong_candidate")
+        surfaces = {row["surface"]: row for row in 桓溫["surfaces"]}
+        self.assertEqual(surfaces["桓溫"]["association_mode"], "exact")
+        self.assertEqual(surfaces["桓公"]["association_mode"], "contextual")
+        self.assertIn("structured_jinshu_biography_subject", 桓溫["identity_basis"])
+
+    def test_generic_title_is_not_a_person_candidate(self) -> None:
+        preferred_names = {row["preferred_name"] for row in self.document["candidates"]}
+        unresolved = {row["surface"]: row for row in self.document["unresolved_surface_clusters"]}
+        self.assertNotIn("太傅", preferred_names)
+        self.assertIn("太傅", unresolved)
+        self.assertTrue(unresolved["太傅"]["not_ranked_as_person"])
+
+    def test_current_story_gap_is_open_world_audit(self) -> None:
+        gaps = self.document["current_sc1_open_world_gaps"]
+        self.assertTrue(gaps)
+        wang_tanzhi = [
+            candidate
+            for gap in gaps
+            for candidate in gap["candidates"]
+            if candidate["preferred_name"] == "王坦之"
+        ]
+        self.assertTrue(wang_tanzhi)
+        self.assertIn("main_text", wang_tanzhi[0]["sections"])
+
+    def test_strong_corpus_identity_outside_current_stories_keeps_zero_current_coverage(self) -> None:
+        meng_jia = next(row for row in self.document["candidates"] if row["preferred_name"] == "孟嘉")
+        self.assertEqual(meng_jia["status"], "strong_candidate")
+        self.assertGreater(meng_jia["metrics"]["shishuo_main_story_count"], 0)
+        self.assertEqual(meng_jia["metrics"]["current_sc1_story_count"], 0)
+
+    def test_contextual_surface_never_becomes_an_exact_identity_alias(self) -> None:
+        huan_wen = next(row for row in self.document["candidates"] if row["preferred_name"] == "桓溫")
+        huan_gong = next(row for row in huan_wen["surfaces"] if row["surface"] == "桓公")
+        self.assertEqual(huan_gong["association_mode"], "contextual")
+        self.assertNotEqual(huan_gong["surface_type"], "personal_name")
+
+    def test_source_layers_and_occurrences_remain_separate(self) -> None:
+        occurrences = self.occurrence_document["occurrences"]
+        self.assertTrue(any(row["section"] == "main_text" for row in occurrences))
+        self.assertTrue(any(row["section"] == "liu_annotation" for row in occurrences))
+        self.assertTrue(all("person_id" not in row for row in occurrences))
+        self.assertTrue(all(row["association_mode"] in {"exact", "contextual", "ambiguous"} for row in occurrences))
+
+    def test_candidate_ids_and_surface_order_are_deterministic(self) -> None:
+        candidate_keys = [(row["preferred_name"], row["candidate_id"]) for row in self.document["candidates"]]
+        self.assertEqual(candidate_keys, sorted(candidate_keys))
+        for candidate in self.document["candidates"]:
+            surfaces = candidate["surfaces"]
+            self.assertEqual(
+                [(row["surface"], row["surface_type"]) for row in surfaces],
+                [(row["surface"], row["surface_type"]) for row in sorted(
+                    surfaces,
+                    key=lambda row: (
+                        {"personal_name": 0, "courtesy_name": 1, "surname_plus_courtesy_name": 2}.get(row["surface_type"], 9),
+                        row["surface"],
+                    )
+                )],
+            )
+
+
+if __name__ == "__main__":
+    unittest.main()

@@ -17,6 +17,7 @@ try:
         JINSHU_MENTIONS_PATH,
         PEOPLE_PATH,
         P3A_PATH,
+        P3A1_PATH,
         RELATIONS_PATH,
         SHISHUO_MENTIONS_PATH,
         UNRESOLVED_PATH,
@@ -30,6 +31,7 @@ except ImportError:  # direct execution: python scripts/validate_person_expansio
         JINSHU_MENTIONS_PATH,
         PEOPLE_PATH,
         P3A_PATH,
+        P3A1_PATH,
         RELATIONS_PATH,
         SHISHUO_MENTIONS_PATH,
         UNRESOLVED_PATH,
@@ -90,6 +92,17 @@ def validate(
         if isinstance(entry, Mapping) and isinstance(entry.get("id"), str)
     }
     aliases = read_json(root / ALIASES_PATH).get("aliases", [])
+    p3a1_candidate_ids: set[str] = set()
+    p3a1_path = root / P3A1_PATH
+    if p3a1_path.is_file():
+        p3a1_document = read_json(p3a1_path)
+        p3a1_candidate_ids = {
+            str(candidate.get("candidate_id"))
+            for candidate in p3a1_document.get("candidates", [])
+            if isinstance(candidate, Mapping)
+            and isinstance(candidate.get("candidate_id"), str)
+            and candidate.get("materialization_state") == "new_candidate"
+        }
     known_source_ids = set(scoped_ids)
     for alias in aliases:
         if isinstance(alias, Mapping):
@@ -115,19 +128,32 @@ def validate(
         errors.append("candidate identity policy does not list the current scoped registry deterministically")
     keys: set[str] = set()
     source_person_ids: set[str] = set()
+    ranked_p3a1_candidate_ids: set[str] = set()
     for candidate in candidates:
         key = candidate.get("person_key")
         source_id = candidate.get("source_person_id")
         if key in keys:
             errors.append(f"duplicate candidate key: {key}")
         keys.add(str(key))
-        if not isinstance(source_id, str) or source_id in scoped_ids:
-            errors.append(f"candidate is scoped or has invalid source Person ID: {source_id!r}")
-        elif source_id not in known_source_ids:
-            errors.append(f"candidate source Person ID is not present in existing structured data: {source_id}")
-        source_person_ids.add(str(source_id))
-        if key != "candidate:" + str(source_id):
-            errors.append(f"candidate key does not match source identity: {key!r} / {source_id!r}")
+        identity_kind = candidate.get("identity_kind", "existing_structured_candidate")
+        candidate_id = candidate.get("candidate_id")
+        if identity_kind == "p3a1_candidate":
+            if not isinstance(candidate_id, str) or not candidate_id.startswith("candidate-identity-"):
+                errors.append(f"P3A.1 candidate lacks a derived candidate_id: {key!r}")
+            if source_id is not None:
+                errors.append(f"P3A.1 candidate exposes a production source_person_id: {key!r}")
+            if key != "candidate:" + str(candidate_id):
+                errors.append(f"P3A.1 candidate key does not match candidate_id: {key!r} / {candidate_id!r}")
+            if isinstance(candidate_id, str):
+                ranked_p3a1_candidate_ids.add(candidate_id)
+        else:
+            if not isinstance(source_id, str) or source_id in scoped_ids:
+                errors.append(f"candidate is scoped or has invalid source Person ID: {source_id!r}")
+            elif source_id not in known_source_ids:
+                errors.append(f"candidate source Person ID is not present in existing structured data: {source_id}")
+            source_person_ids.add(str(source_id))
+            if key != "candidate:" + str(source_id):
+                errors.append(f"candidate key does not match source identity: {key!r} / {source_id!r}")
         for name, value in candidate.get("metrics", {}).items():
             if isinstance(value, (int, float)) and value < 0:
                 errors.append(f"candidate {key} metric {name} is negative")
@@ -150,7 +176,7 @@ def validate(
     for gap in document.get("current_live_story_gaps", []):
         if gap.get("story_id") not in story_ids:
             errors.append(f"current live Story gap references unknown Story: {gap.get('story_id')}")
-        if not set(gap.get("unscoped_resolved_candidate_person_ids", [])).issubset(known_source_ids - scoped_ids):
+        if not set(gap.get("unscoped_resolved_candidate_person_ids", [])).issubset((known_source_ids - scoped_ids) | p3a1_candidate_ids):
             errors.append(f"current live Story gap contains an unknown/non-expanded identity: {gap.get('story_id')}")
 
     if [candidate.get("rank") for candidate in candidates] != list(range(1, len(candidates) + 1)):
@@ -168,7 +194,7 @@ def validate(
         if object_id in source_person_ids and subject in scoped_ids:
             direct_relation_map.setdefault(str(object_id), set()).add(str(relation.get("id")))
     for candidate in candidates:
-        expected = direct_relation_map.get(candidate["source_person_id"], set())
+        expected = direct_relation_map.get(candidate["source_person_id"], set()) if candidate.get("source_person_id") else set()
         actual = set(candidate.get("direct_relation_ids", []))
         if actual != expected:
             errors.append(f"candidate {candidate['person_key']} direct Relation metric is not derived from reviewed direct Relations")
