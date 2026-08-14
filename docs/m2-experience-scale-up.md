@@ -10,14 +10,14 @@
 | 已发布阅读故事 | 16 | 60 |
 | 随机认识人物可选数 | 13 | 34 |
 | PersonStory links | 330 | 577 |
-| 至少一则发布故事的人物 | 35 | 34 |
-| 至少三则发布故事的人物 | 20 | 19 |
-| 多人物故事 | 52 | 49 |
-| Scene Cards | 9 | 20 |
-| 已审阅 Relation | 7 | 7 |
-| 仅按 Relation 孤立的人物 | 28 | 28 |
-| 共享故事人物对 | 84 | 90 |
-| 没有发布故事路径的人物 | 0 | 1 |
+| 至少一则发布故事的人物 | 34 | 34 |
+| 至少三则发布故事的人物 | 19 | 19 |
+| 多人物故事 | 48 | 48 |
+| Scene Cards | 9 | 21 |
+| 已审阅 Relation | 7 | 12 |
+| 仅按 Relation 孤立的人物 | 28 | 23 |
+| 共享故事人物对 | 80 | 80 |
+| 没有发布故事路径的人物 | 1 | 1 |
 | 没有可点击人物的故事 | 0 | 0 |
 | 仅有一则且该故事无其他人物的人物 | 1 | 1 |
 
@@ -29,7 +29,7 @@ ER1 的身份校正移除了 `05-fangzheng-058` 中原本错误的“文度 → 
 
 | 产物 | Before | After |
 |---|---:|---:|
-| `data/derived/sc1-site.json` bytes | 19,376,531 | 19,667,128 |
+| `data/derived/sc1-site.json` bytes | 19,713,339 | 19,894,150 |
 | Vite JS bytes | 3,533,126 | 待 production artifact pass |
 | Vite JS gzip bytes | 1,093,692 | 待 production artifact pass |
 | JS asset count | 1 | 待 production artifact pass |
@@ -128,7 +128,7 @@ Wave 2 只提升具备强身份证据、正文导航价值和安全投影路径�
 ## Relation discovery boundary
 
 - 当前生产人物：35；审计人物对：595。
-- 已审阅 Relation：7；R3A candidate：7；Tier：{'A': 2, 'B': 3, 'C': 2}。
+- 已审阅 Relation：12；R3A candidate：7；Tier：{'A': 2, 'B': 3, 'C': 2}。
 - 仅共现组合：30；这些组合未进入 Relation card。
 
 ## Provenance and determinism
@@ -139,8 +139,8 @@ Wave 2 只提升具备强身份证据、正文导航价值和安全投影路径�
 - `data/derived/m2-story-expansion-ranking.json`：`989e99cde1f75d8daa2fd31f9ede904d64619a44a41e99566174ac6705f79406`
 - `data/annotation/person-expansion-wave-2.json`：`998b3073376d9f1ceed5b0a64379092ac61265cd3c09eb1e26bd366ca9350ca1`
 - `data/annotation/story-expansion-wave-1.json`：`0d80f92be763ca7e765a6c0fc742910bbf7f2e2ba787efc84b52cff6524ea4af`
-- `data/derived/sc1-site.json`：`6cb7d74eaf396d143bac844c19ab12649bfe799005eb32476a4110ecc3ba7df2`
-- `data/derived/story-scene-contexts.json`：`5c8daa391cc65056d9fee906be2c2ac6dc268b2e28bdbe21559af01767e37f80`
-- `data/derived/person-relation-candidates-r3.json`：`2dcad727e384bcccd9de7805fcca5353a5f368e4fd40ce98d7518b60bfa2abb9`
+- `data/derived/sc1-site.json`：`7d390d731b38a205b84219a3e01aaf81fe9a30b24e8d90286cdadd2f17fcb919`
+- `data/derived/story-scene-contexts.json`：`e029763790e63f9b3ff8c77dff65ae33db6f85a256c1256432de9814744d120b`
+- `data/derived/person-relation-candidates-r3.json`：`4bee7e4f793b113ebcf49c3e798657c5b8cc9f551b7887a884b591f712f54086`
 
-本阶段未执行 P3B.2、R3B、Sanguozhi 处理或 Relation 自动审阅；未修改 canonical Shishuo/Jinshu、SC0 Gold Set、既有 Relation、标点和来源 payload。
+本报告继承 M2A 的冻结选择与 60-Story 规模；ER1 安全解析影响已保留。S2.2 只加深现有 Story/Scene/Person Sketch 内容，R3B 仅物化明确批准的 Relation，Sanguozhi 与 P3B.2 均未启动。

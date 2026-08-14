@@ -27,7 +27,7 @@ class PersonRelationCandidatesR3Tests(unittest.TestCase):
         self.assertEqual(self.derived["pair_count_audited"], 595)
         self.assertGreater(self.derived["candidate_count"], 0)
 
-    def test_candidate_endpoints_are_current_people_and_candidates_are_not_reviewed(self) -> None:
+    def test_candidate_endpoints_are_current_people_and_r3b_dispositions_are_explicit(self) -> None:
         people = {person["id"] for person in self.bundle["people"]}
         reviewed_pairs = {
             tuple(sorted((relation["subject_id"], relation["object_id"])))
@@ -39,7 +39,12 @@ class PersonRelationCandidatesR3Tests(unittest.TestCase):
             self.assertIn(candidate["person_b_id"], people)
             self.assertNotEqual(candidate["person_a_id"], candidate["person_b_id"])
             self.assertEqual(candidate["review_status"], "candidate")
-            self.assertNotIn(tuple(sorted((candidate["person_a_id"], candidate["person_b_id"]))), reviewed_pairs)
+            pair = tuple(sorted((candidate["person_a_id"], candidate["person_b_id"])))
+            if pair in reviewed_pairs:
+                self.assertEqual(candidate["review_disposition"], "approved_materialized")
+                self.assertIn(candidate["materialized_relation_id"], {relation["id"] for relation in self.relations["records"]})
+            else:
+                self.assertNotEqual(candidate.get("review_disposition"), "approved_materialized")
 
     def test_candidate_id_is_opaque_stable_hash_not_name_derived(self) -> None:
         for record in self.source["records"]:

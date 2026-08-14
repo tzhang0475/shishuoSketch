@@ -591,7 +591,7 @@ def render_report(output: Mapping[str, Any]) -> str:
         lines.append(f"- `{path}`：`{digest}`")
     lines.extend([
         "",
-        "本阶段未执行 P3B.2、R3B、Sanguozhi 处理或 Relation 自动审阅；未修改 canonical Shishuo/Jinshu、SC0 Gold Set、既有 Relation、标点和来源 payload。",
+            "本报告继承 M2A 的冻结选择与 60-Story 规模；ER1 安全解析影响已保留。S2.2 只加深现有 Story/Scene/Person Sketch 内容，R3B 仅物化明确批准的 Relation，Sanguozhi 与 P3B.2 均未启动。",
         "",
     ])
     return "\n".join(lines)

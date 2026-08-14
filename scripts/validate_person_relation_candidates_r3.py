@@ -108,8 +108,15 @@ def validate(root: Path = ROOT, *, document: Mapping[str, Any] | None = None) ->
         if pair in seen_pairs:
             errors.append(f"duplicate R3A semantic pair: {pair}")
         seen_pairs.add(pair)
+        disposition = item.get("review_disposition", "unreviewed")
         if pair in reviewed_pairs:
-            errors.append(f"R3A duplicates an existing reviewed Relation pair: {pair}")
+            if disposition != "approved_materialized":
+                errors.append(f"R3A candidate duplicates a reviewed Relation pair without an approved R3B disposition: {pair}")
+            materialized_relation_id = item.get("materialized_relation_id")
+            if materialized_relation_id not in reviewed_ids:
+                errors.append(f"R3A approved materialization does not resolve to a reviewed Relation: {item.get('candidate_id')}")
+        elif disposition == "approved_materialized":
+            errors.append(f"R3A candidate is marked approved_materialized without a reviewed Relation: {item.get('candidate_id')}")
         if item.get("review_status") != "candidate":
             errors.append(f"R3A candidate is not review_status=candidate: {item.get('candidate_id')}")
         if item.get("candidate_id") in seen_ids:
@@ -125,8 +132,9 @@ def validate(root: Path = ROOT, *, document: Mapping[str, Any] | None = None) ->
                 errors.append(f"R3A candidate ID is not the stable semantic hash: {item.get('candidate_id')}")
         if not set(item.get("evidence_ids", [])) <= evidence_ids:
             errors.append(f"R3A candidate references missing Evidence: {item.get('candidate_id')}")
-        if set(item.get("existing_reviewed_relation_ids", [])) & reviewed_ids:
-            errors.append(f"R3A candidate incorrectly carries reviewed relation IDs: {item.get('candidate_id')}")
+        existing_relation_ids = set(item.get("existing_reviewed_relation_ids", [])) & reviewed_ids
+        if existing_relation_ids and item.get("review_disposition") != "approved_materialized":
+            errors.append(f"R3A candidate incorrectly carries reviewed relation IDs without approved R3B disposition: {item.get('candidate_id')}")
         if not item.get("source_entry_ids") and not item.get("source_unit_ids"):
             errors.append(f"R3A candidate has no source anchor: {item.get('candidate_id')}")
         if any("cooccurrence" in str(flag) for flag in item.get("risk_flags", [])):

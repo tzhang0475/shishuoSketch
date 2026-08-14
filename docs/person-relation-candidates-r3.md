@@ -5,19 +5,19 @@
 ## 审计摘要
 
 - 当前生产人物：**35**
-- 已审阅 Relation：**7**（其中 direct **6**）
+- 已审阅 Relation：**12**（其中 direct **11**）
 - 人物无序对审计：**595**
 - 显式候选：**7**（Tier A 2 / B 3 / C 2）
-- 已审阅关系再发现控制项：**7**
+- 已审阅关系再发现控制项：**12**
 - 仅共现、未形成候选的组合（报告上限 30）：**30**
 - Wave-1 中已有候选端点的人物：**5**；Wave-2：**0**
-- 仅按已审阅 Relation 仍孤立的人物：**28**
+- 仅按已审阅 Relation 仍孤立的人物：**23**
 
 ## 候选关系
 
 ### 温嶠 × 庾亮
 
-- Rank：1 · Tier A · Candidate ID：`r3-candidate-abe9424bc5d46f8b10fa`
+- Rank：1 · Tier A · Candidate ID：`r3-candidate-abe9424bc5d46f8b10fa` · R3B：approved_materialized
 - 建议类别：`social_intellectual`；范围：`long_term_social`
 - 角色：温嶠（友人）— 庾亮（友人）
 - 来源：23-rendan-026
@@ -27,7 +27,7 @@
 
 ### 王導 × 庾亮
 
-- Rank：2 · Tier A · Candidate ID：`r3-candidate-4050b8666e90aca0eb44`
+- Rank：2 · Tier A · Candidate ID：`r3-candidate-4050b8666e90aca0eb44` · R3B：approved_materialized
 - 建议类别：`social_intellectual`；范围：`long_term_social`
 - 角色：王導（友人）— 庾亮（友人）
 - 来源：06-yaliang-013
@@ -37,7 +37,7 @@
 
 ### 王導 × 温嶠
 
-- Rank：3 · Tier B · Candidate ID：`r3-candidate-edd1312c55b4aa1283f4`
+- Rank：3 · Tier B · Candidate ID：`r3-candidate-edd1312c55b4aa1283f4` · R3B：deferred
 - 建议类别：`service_institutional`；范围：`institutional_service`
 - 角色：王導（朝廷同僚）— 温嶠（朝廷同僚）
 - 来源：02-yanyu-036
@@ -47,7 +47,7 @@
 
 ### 謝安 × 袁宏
 
-- Rank：4 · Tier B · Candidate ID：`r3-candidate-e66f8bb10ffc3350284a`
+- Rank：4 · Tier B · Candidate ID：`r3-candidate-e66f8bb10ffc3350284a` · R3B：deferred
 - 建议类别：`social_intellectual`；范围：`long_term_social`
 - 角色：謝安（賞識者）— 袁宏（被賞識者）
 - 来源：02-yanyu-083
@@ -57,7 +57,7 @@
 
 ### 桓溫 × 袁宏
 
-- Rank：5 · Tier B · Candidate ID：`r3-candidate-ebce58f2d02c1c137ec9`
+- Rank：5 · Tier B · Candidate ID：`r3-candidate-ebce58f2d02c1c137ec9` · R3B：approved_materialized
 - 建议类别：`service_institutional`；范围：`institutional_service`
 - 角色：桓溫（任用者）— 袁宏（大司馬記室參軍）
 - 来源：04-wenxue-097
@@ -67,7 +67,7 @@
 
 ### 蘇峻 × 庾亮
 
-- Rank：6 · Tier C · Candidate ID：`r3-candidate-53b688ea4c8b5d624fac`
+- Rank：6 · Tier C · Candidate ID：`r3-candidate-53b688ea4c8b5d624fac` · R3B：approved_materialized
 - 建议类别：`political_counterposition`；范围：`historical_political`
 - 角色：蘇峻（叛軍首領）— 庾亮（征討與被攻者）
 - 来源：05-fangzheng-036, 06-yaliang-023, 27-jiajue-008
@@ -79,7 +79,7 @@
 
 ### 蘇峻 × 温嶠
 
-- Rank：7 · Tier C · Candidate ID：`r3-candidate-396dcefe02b3110bf363`
+- Rank：7 · Tier C · Candidate ID：`r3-candidate-396dcefe02b3110bf363` · R3B：approved_materialized
 - 建议类别：`political_counterposition`；范围：`historical_political`
 - 角色：蘇峻（叛軍首領）— 温嶠（起兵衛帝者）
 - 来源：02-yanyu-102, 06-yaliang-023, 14-rongzhi-023
@@ -98,6 +98,11 @@
 - `relation-gold-004`：謝道韞 × 謝安 · 叔父與姪女
 - `relation-gold-005`：王羲之 × 郗璿 · 夫妻
 - `relation-gold-006`：郗鑒 × 郗璿 · 父女
+- `relation-r3b-001`：王導 × 庾亮 · 友人
+- `relation-r3b-002`：庾亮 × 温嶠 · 友善
+- `relation-r3b-003`：桓溫 × 袁宏 · 曾任其屬官
+- `relation-r3b-004`：庾亮 × 蘇峻 · 蘇峻之亂中對立
+- `relation-r3b-005`：温嶠 × 蘇峻 · 蘇峻之亂中對立
 
 ## Scene / Relation 交叉审计
 
@@ -148,4 +153,4 @@ Scene 只解释本则人物为何在此相遇；只有来源独立明确写出�
 
 ## 下一步
 
-本产物只供 R3B 人工审阅使用。任何候选在没有单独审阅前，都不会出现在读者端 Relation card，也不会写入 `wp1-relations.json`。
+本产物保留 R3A 候选与 R3B 决策的审计链。只有 R3B 明确批准的记录才会出现在读者端 Relation card；暂缓和未审候选不会写入生产 Relation。

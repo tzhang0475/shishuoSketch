@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://shishuo-sketch/schema/s2-narrative-density-selection.schema.json",
+  "title": "S2.2 Narrative Density selection",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "stage", "selection_version", "records"],
+  "properties": {
+    "schema": {"const": 1},
+    "stage": {"const": "s2-narrative-density-selection"},
+    "selection_version": {"const": 1},
+    "records": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["selection_rank", "story_id", "score", "dimensions", "selection_reasons", "review_status", "evidence_ids"],
+        "properties": {
+          "selection_rank": {"type": "integer", "minimum": 1},
+          "story_id": {"type": "string", "minLength": 1},
+          "score": {"type": "integer"},
+          "dimensions": {"type": "object", "additionalProperties": {"type": "integer"}},
+          "selection_reasons": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1}},
+          "review_status": {"enum": ["candidate", "reviewed"]},
+          "evidence_ids": {"type": "array", "uniqueItems": true, "items": {"type": "string", "minLength": 1}}
+        }
+      }
+    }
+  }
+}

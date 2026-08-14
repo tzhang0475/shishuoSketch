@@ -19,6 +19,7 @@ from opencc import OpenCC
 
 try:
     from .build_six_person_pilot import PERSON_DEFINITIONS, markdown_body, parse_frontmatter
+    from .person_relation_review_r3b import write_outputs as write_r3b_outputs
     from .reading_layers import (
         PUNCTUATION_RELATIVE_PATH,
         build_display_reading,
@@ -26,6 +27,7 @@ try:
     )
 except ImportError:  # direct execution: python scripts/build_wp1_sample.py
     from build_six_person_pilot import PERSON_DEFINITIONS, markdown_body, parse_frontmatter
+    from person_relation_review_r3b import write_outputs as write_r3b_outputs
     from reading_layers import (
         PUNCTUATION_RELATIVE_PATH,
         build_display_reading,
@@ -654,7 +656,9 @@ def main() -> int:
             "notes": "R1 Gold: the Liu annotation explicitly states 妻太傅郗鑒女名璿.",
         },
     ]
-    all_relations = [relation, *r1_relations]
+    r3b_projection = write_r3b_outputs(ROOT)
+    legacy_relation_records = [relation, *r1_relations]
+    all_relations = [*legacy_relation_records, *r3b_projection["materialized_relations"]]
 
     era = {
         "id": "era-001",
@@ -737,12 +741,17 @@ def main() -> int:
         "sample": {"story_id": ENTRY_ID, "relation_id": relation["id"], "era_id": era["id"]},
     }
 
+    # WP1 remains the historical seven-Person milestone sample.  Keep its
+    # legacy Relation projection unchanged, including the original Gold
+    # records whose endpoints are outside the small Story sample.  The full
+    # production Relation registry is written below and consumed by SC1.
+    sample_relation_records = legacy_relation_records
     records = {
         "sources": {"schema": 1, "records": [source, jinshu_source]},
         "stories": {"schema": 1, "records": [story]},
         "people": {"schema": 1, "records": sample_people},
         "mentions": {"schema": 1, "records": sample_mentions},
-        "relations": {"schema": 1, "records": all_relations},
+        "relations": {"schema": 1, "records": sample_relation_records},
         "eras": {"schema": 1, "records": [era]},
         "evidence": {"schema": 1, "records": evidence},
     }
@@ -767,6 +776,8 @@ def main() -> int:
                 if isinstance(item, dict) and item.get("id")
             }
             write_json(path, {"schema": 1, "records": [by_id[item_id] for item_id in sorted(by_id)]})
+        elif key == "relations":
+            write_json(path, {"schema": 1, "records": all_relations})
         else:
             write_json(path, records[key])
     write_json(ROOT / "data/manifest/milestone-1.json", manifest)

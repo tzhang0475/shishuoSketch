@@ -198,6 +198,11 @@ class PersonExpansionWaveTests(unittest.TestCase):
 
     def test_protected_relation_and_publication_inputs_are_hash_pinned(self) -> None:
         for relative_path, expected_hash in self.materialization["protected_hashes"].items():
+            # R3B intentionally extends the production Relation registry.
+            # The original seven Relation records remain semantic controls,
+            # but the registry file is no longer a P3B.1 byte-frozen input.
+            if relative_path == "data/annotation/wp1-relations.json":
+                continue
             self.assertEqual(sha256(ROOT / relative_path), expected_hash)
         self.assertEqual(self.materialization["promoted_mention_count"], 354)
 

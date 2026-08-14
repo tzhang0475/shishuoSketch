@@ -42,6 +42,8 @@
         "discovery_basis": {"type": "string", "minLength": 1},
         "discovery_note": {"type": "string", "minLength": 1},
         "risk_flags": {"$ref": "#/$defs/string_list"}
+        ,"review_disposition": {"enum": ["unreviewed", "approved_materialized", "deferred", "rejected"]}
+        ,"materialized_relation_id": {"type": "string", "pattern": "^relation-r3b-[0-9]{3}$"}
       }
     }
   }

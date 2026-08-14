@@ -557,6 +557,19 @@ R1_ROLE_PAIRS = {
     ("marriage", "spouse"): {( "配偶", "配偶")},
 }
 
+R3B_ROLE_PAIRS = {
+    ("social", "friendship"): {
+        ("友人", "友人"),
+    },
+    ("institutional", "service_under"): {
+        ("任用者", "大司馬記室參軍"),
+    },
+    ("political", "political_opposition"): {
+        ("叛軍首領", "征討與被攻者"),
+        ("叛軍首領", "起兵衛帝者"),
+    },
+}
+
 
 def validate_relation_records(
     records_by_kind: dict[str, list[dict[str, Any]]],
@@ -579,6 +592,19 @@ def validate_relation_records(
         jinshu_units = load_index(
             root, "data/jinshu-unit-index.json", "units", "unit_id", errors
         )
+        # The WP1 bundle remains a seven-Person sample, while the committed
+        # Relation registry is now the production Relation layer.  Validate
+        # production Relation foreign keys and evidence against the full
+        # generated registries rather than the WP1 sample projection.
+        try:
+            production_bundle = read_json(root / "data/derived/sc1-site.json")
+            evidence = {
+                item.get("id"): item
+                for item in production_bundle.get("evidence", [])
+                if isinstance(item, dict) and item.get("id")
+            }
+        except ValueError:
+            pass
 
     for person in people.values():
         if person.get("scope") == "supporting":
@@ -668,12 +694,12 @@ def validate_relation_records(
         if not reviewed:
             continue
 
-        if relation_type not in {"kinship", "marriage"}:
+        if relation_type not in {"kinship", "marriage", "social", "institutional", "political"}:
             errors.append(
-                f"Reviewed Relation {relation_id} is outside the R1 hard-relation scope: {relation_type!r}"
+                f"Reviewed Relation {relation_id} is outside the reviewed Relation ontology: {relation_type!r}"
             )
-        if relation.get("assertion_status") != "attested":
-            errors.append(f"Reviewed Relation {relation_id} must have assertion_status='attested'")
+        if relation.get("assertion_status") not in {"attested", "reported", "inferred"}:
+            errors.append(f"Reviewed Relation {relation_id} must have a source-backed assertion_status")
 
         evidence_ids = relation.get("evidence_ids")
         relation_evidence = [evidence.get(item) for item in evidence_ids or []]
@@ -695,13 +721,13 @@ def validate_relation_records(
                 f"Reviewed Relation {relation_id} must identify at least one source entry, Jinshu unit, or story"
             )
         for story_id in story_ids if isinstance(story_ids, list) else []:
-            if story_id not in stories:
+            if story_id not in shishuo_entries and story_id not in stories:
                 errors.append(f"Relation {relation_id} story_ids: referenced ID does not exist: {story_id!r}")
 
         if not isinstance(subtype, str) or not isinstance(relation.get("role_a"), str) or not isinstance(relation.get("role_b"), str):
             errors.append(f"Reviewed Relation {relation_id} must declare relation_subtype, role_a, and role_b")
         else:
-            allowed_roles = R1_ROLE_PAIRS.get((relation_type, subtype))
+            allowed_roles = ({**R1_ROLE_PAIRS, **R3B_ROLE_PAIRS}).get((relation_type, subtype))
             if allowed_roles is None or (relation.get("role_a"), relation.get("role_b")) not in allowed_roles:
                 errors.append(
                     f"Relation {relation_id} has incompatible relation subtype/roles: "
@@ -717,6 +743,16 @@ def validate_relation_records(
                     errors.append(
                         f"Symmetric spouse Relation {relation_id} must use canonical endpoint order subject_id < object_id"
                     )
+
+            if relation_type in {"social", "institutional", "political"}:
+                if not isinstance(relation.get("relation_scope"), str):
+                    errors.append(f"R3B Relation {relation_id} must declare relation_scope")
+                if relation_type == "political" and relation.get("relation_scope") != "event_bounded":
+                    errors.append(f"R3B political Relation {relation_id} must be event_bounded")
+                if relation_type == "political" and not isinstance(relation.get("scope_event"), str):
+                    errors.append(f"R3B political Relation {relation_id} must declare scope_event")
+                if not isinstance(relation.get("source_candidate_id"), str):
+                    errors.append(f"R3B Relation {relation_id} must retain source_candidate_id")
 
     return errors
 
@@ -1060,6 +1096,30 @@ def validate_references(
         unified_people = load_unified_person_registry(root, errors)
         errors.extend(validate_person_registry(records_by_kind, root, unified_people))
 
+    # The historical WP1 object bundle is intentionally a small sample, but
+    # wp1-relations.json is also the committed production Relation registry
+    # consumed by the SC1 projection.  Relation foreign keys therefore need
+    # the full production Person/story/evidence universe, while the ordinary
+    # WP1 Story/Person/Mention checks below must remain sample-scoped.
+    relation_people = unified_people or people
+    relation_stories = dict(stories)
+    relation_evidence = dict(evidence)
+    if root is not None:
+        relation_stories.update(
+            load_index(root, "data/shishuo-corpus-index.json", "entries", "id", errors)
+        )
+        try:
+            production_bundle = read_json(root / "data/derived/sc1-site.json")
+            relation_evidence.update(
+                {
+                    item.get("id"): item
+                    for item in production_bundle.get("evidence", [])
+                    if isinstance(item, dict) and item.get("id")
+                }
+            )
+        except ValueError:
+            pass
+
     def refs(label: str, values: Any, collection: dict[str, dict[str, Any]]) -> None:
         if isinstance(values, list):
             for value in values:
@@ -1125,9 +1185,9 @@ def validate_references(
         if root is not None else {}
     )
     for relation in relations.values():
-        add_ref_error(errors, f"Relation {relation.get('id')} subject_id", relation.get("subject_id"), people)
-        add_ref_error(errors, f"Relation {relation.get('id')} object_id", relation.get("object_id"), people)
-        refs(f"Relation {relation.get('id')} story_ids", relation.get("story_ids"), stories)
+        add_ref_error(errors, f"Relation {relation.get('id')} subject_id", relation.get("subject_id"), relation_people)
+        add_ref_error(errors, f"Relation {relation.get('id')} object_id", relation.get("object_id"), relation_people)
+        refs(f"Relation {relation.get('id')} story_ids", relation.get("story_ids"), relation_stories)
         if "source_entry_ids" in relation:
             refs(
                 f"Relation {relation.get('id')} source_entry_ids",
@@ -1140,7 +1200,7 @@ def validate_references(
                 relation.get("source_unit_ids"),
                 relation_source_units,
             )
-        refs(f"Relation {relation.get('id')} evidence_ids", relation.get("evidence_ids"), evidence)
+        refs(f"Relation {relation.get('id')} evidence_ids", relation.get("evidence_ids"), relation_evidence)
 
     for era in eras.values():
         refs(f"Era {era.get('id')} story_ids", era.get("story_ids"), stories)
@@ -1239,6 +1299,12 @@ def validate_bundle(root: Path, records_by_kind: dict[str, list[dict[str, Any]]]
                     "derived bundle evidence is missing IDs referenced by sampled records: "
                     + ", ".join(missing)
                 )
+        elif kind == "relations":
+            # The WP1 derived bundle intentionally carries only the sample's
+            # relation records; the annotation file is the full production
+            # Relation registry consumed by SC1.
+            if not actual.issubset(expected):
+                errors.append(f"derived bundle {kind} contains IDs absent from annotation records")
         elif expected != actual:
             errors.append(f"derived bundle {kind} IDs do not match annotation records")
 

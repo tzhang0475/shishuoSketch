@@ -347,6 +347,11 @@ function RelationEvidence({
     .filter((item): item is Evidence => Boolean(item));
   const neighborRole = perspectiveNeighborRole(story, perspective, readingMode);
   const neighborName = personDisplayName(story, perspective.neighbor, readingMode);
+  const relationScope = readingValue(
+    story.reading.relation_display[relation.id]?.scope ?? undefined,
+    readingMode,
+    relation.scope_event ?? "",
+  );
   const sourceLocations = [
     ...(relation.source_entry_ids ?? []).map((id) => `entry · ${id}`),
     ...(relation.source_unit_ids ?? []).map((id) => `unit · ${id}`),
@@ -355,7 +360,7 @@ function RelationEvidence({
   return (
     <details className="relation-evidence">
       <summary>
-        <span>{neighborName} · {neighborRole}</span>
+        <span>{neighborName} · {neighborRole}{relationScope ? ` · ${relationScope}` : ""}</span>
         <span className="relation-evidence-summary">{story.reading.labels.relation_evidence_toggle[readingMode]}</span>
       </summary>
       <div className="relation-evidence-body">
@@ -1153,8 +1158,8 @@ function SceneCard({
     <section className="scene-card" aria-labelledby={`scene-heading-${story.id}`}>
       <div className="scene-card-header">
         <div>
-          <p className="section-label">{uiLabel(data, "scene_heading", readingMode, "场景")}</p>
-          <h2 id={`scene-heading-${story.id}`}>{uiLabel(data, "scene_heading", readingMode, "场景")}</h2>
+          <p className="section-label">{uiLabel(data, "scene_heading", readingMode, "舞台")}</p>
+          <h2 id={`scene-heading-${story.id}`}>{uiLabel(data, "scene_heading", readingMode, "舞台")}</h2>
         </div>
         {scene.review_status === "candidate" && <span className="scene-review-status">{uiLabel(data, "person_sketch_candidate", readingMode, "资料整理预览")}</span>}
       </div>
@@ -1163,19 +1168,32 @@ function SceneCard({
         {placeLabel && <> · {placeLabel}</>}
       </p>
 
-      <div className="scene-people" aria-labelledby={`scene-people-heading-${story.id}`}>
-        <p className="scene-card-label" id={`scene-people-heading-${story.id}`}>{uiLabel(data, "scene_focus_heading", readingMode, "入画")}</p>
-        {claimList(sceneFocus)}
-        <div className="scene-person-list">
-          {personRows(inFramePeople)}
+      {(sceneFocus.length > 0 || scene.positional_context.length > 0) && (
+        <div className="scene-context-group scene-stage-group">
+          {claimList(sceneFocus)}
+          {scene.positional_context.map((position, index) => (
+            <p className="scene-context-text" key={`${position.classification}-${index}`}>
+              <span className="scene-context-classification">{readingValue(position.classification_label, readingMode, position.classification)}</span>
+              {readingValue(position.text, readingMode, "")}
+            </p>
+          ))}
         </div>
-        {inFrameUnmaterialized.length > 0 && (
-          <div className="scene-unmaterialized-people">
-            <p className="scene-card-label">{uiLabel(data, "scene_not_materialized", readingMode, "人物卡尚未建立")}</p>
-            {unmaterializedRows(inFrameUnmaterialized)}
+      )}
+
+      {(inFramePeople.length > 0 || inFrameUnmaterialized.length > 0) && (
+        <div className="scene-people" aria-labelledby={`scene-people-heading-${story.id}`}>
+          <p className="scene-card-label" id={`scene-people-heading-${story.id}`}>{uiLabel(data, "scene_people_heading", readingMode, "入画")}</p>
+          <div className="scene-person-list">
+            {personRows(inFramePeople)}
           </div>
-        )}
-      </div>
+          {inFrameUnmaterialized.length > 0 && (
+            <div className="scene-unmaterialized-people">
+              <p className="scene-card-label">{uiLabel(data, "scene_not_materialized", readingMode, "人物卡尚未建立")}</p>
+              {unmaterializedRows(inFrameUnmaterialized)}
+            </div>
+          )}
+        </div>
+      )}
 
       {(offFramePeople.length > 0 || offFrameUnmaterialized.length > 0 || offFrameClaims.length > 0) && (
         <div className="scene-context-group">
@@ -1183,18 +1201,6 @@ function SceneCard({
           {claimList(offFrameClaims)}
           <div className="scene-person-list">{personRows(offFramePeople)}</div>
           {offFrameUnmaterialized.length > 0 && <div className="scene-unmaterialized-people">{unmaterializedRows(offFrameUnmaterialized)}</div>}
-        </div>
-      )}
-
-      {scene.positional_context.length > 0 && (
-        <div className="scene-context-group">
-          <p className="scene-card-label">{uiLabel(data, "scene_position_heading", readingMode, "入画")}</p>
-          {scene.positional_context.map((position, index) => (
-            <p className="scene-context-text" key={`${position.classification}-${index}`}>
-              <span className="scene-context-classification">{readingValue(position.classification_label, readingMode, position.classification)}</span>
-              {readingValue(position.text, readingMode, "")}
-            </p>
-          ))}
         </div>
       )}
 

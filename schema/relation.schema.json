@@ -25,8 +25,14 @@
     "relation_basis": {"type": "string", "enum": ["direct", "derived"]},
     "relation_subtype": {
       "type": "string",
-      "enum": ["parent_child", "uncle_niece", "collateral_kinship", "spouse"]
+      "enum": ["parent_child", "uncle_niece", "collateral_kinship", "spouse", "friendship", "service_under", "political_opposition"]
     },
+    "relation_scope": {
+      "type": "string",
+      "enum": ["long_term_social", "institutional_tenure", "event_bounded"]
+    },
+    "scope_event": {"type": ["string", "null"]},
+    "source_candidate_id": {"type": "string", "pattern": "^r3-candidate-[0-9a-f]{20}$"},
     "role_a": {"type": "string", "minLength": 1},
     "role_b": {"type": "string", "minLength": 1},
     "label": {"type": "string", "minLength": 1},

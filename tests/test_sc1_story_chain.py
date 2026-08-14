@@ -173,18 +173,22 @@ class SC1StoryChainTests(unittest.TestCase):
         self.assertIn("25-paidiao-026", refs["person-005"]["liu_annotation_only_story_ids"])
 
     def test_shared_wp1_person_relation_source_records_are_unchanged(self) -> None:
-        # P3B intentionally extends the SC1 Person projection.  The WP1
-        # sample's existing seven Person records remain byte-stable, while
-        # relations/sources/eras remain exactly the shared R2 projection.
+        # P3B intentionally extends the SC1 Person projection and R3B now
+        # extends the production Relation registry. The WP1 sample's existing
+        # seven Person and Relation records remain byte-stable.
         base_people = {item["id"]: item for item in self.base["people"]}
         current_people = {item["id"]: item for item in self.bundle["people"]}
         self.assertTrue(set(base_people) <= set(current_people))
         for person_id, person in base_people.items():
             self.assertEqual(current_people[person_id], person)
-        for key in ("relations", "sources", "eras"):
+        base_relations = {item["id"]: item for item in self.base["relations"]}
+        current_relations = {item["id"]: item for item in self.bundle["relations"]}
+        for relation_id, relation in base_relations.items():
+            self.assertEqual(current_relations.get(relation_id), relation, relation_id)
+        for key in ("sources", "eras"):
             self.assertEqual(self.bundle[key], self.base[key], key)
         self.assertEqual(
-            {item["id"] for item in self.bundle["relations"]},
+            {item["id"] for item in self.base["relations"]},
             {
                 "relation-001",
                 "relation-gold-001",
@@ -194,6 +198,10 @@ class SC1StoryChainTests(unittest.TestCase):
                 "relation-gold-005",
                 "relation-gold-006",
             },
+        )
+        self.assertEqual(
+            {item["id"] for item in self.bundle["relations"] if item["id"].startswith("relation-r3b-")},
+            {f"relation-r3b-{index:03d}" for index in range(1, 6)},
         )
 
     def test_story_and_person_navigation_contract_is_data_driven(self) -> None:
@@ -208,7 +216,16 @@ class SC1StoryChainTests(unittest.TestCase):
     def test_r2_relation_basis_remains_direct_vs_derived(self) -> None:
         relations = {item["id"]: item for item in self.bundle["relations"]}
         direct = [item for item in relations.values() if item["review_status"] == "reviewed" and item["relation_basis"] == "direct"]
-        self.assertEqual(len(direct), 6)
+        self.assertEqual(len(direct), 11)
+        self.assertEqual(
+            sum(
+                item["review_status"] == "reviewed"
+                and item["relation_basis"] == "direct"
+                and not item["id"].startswith("relation-r3b-")
+                for item in relations.values()
+            ),
+            6,
+        )
         self.assertEqual(relations["relation-001"]["relation_basis"], "derived")
         self.assertEqual(relations["relation-001"]["derived_from_relation_ids"], ["relation-gold-006", "relation-gold-005"])
 

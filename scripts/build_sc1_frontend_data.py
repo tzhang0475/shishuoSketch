@@ -61,6 +61,7 @@ ALIASES_PATH = ROOT / "data/aliases.json"
 PERSON_STORY_INDEX_PATH = ROOT / "data/derived/person-story-index.json"
 PUNCTUATION_PATH = ROOT / "data/annotation/wp1-punctuation.json"
 PRODUCTION_EVIDENCE_PATH = ROOT / "data/evidence/wp1-evidence.json"
+PRODUCTION_RELATIONS_PATH = ROOT / "data/annotation/wp1-relations.json"
 DERIVED_PATH = ROOT / "data/derived/sc1-site.json"
 VITE_PATH = ROOT / "site/src/generated/sc1-site.json"
 
@@ -313,11 +314,11 @@ def build_ui_labels(converter: OpenCC) -> dict[str, Any]:
         "preview_punctuation": "句讀：參考底本整理 · 待復核",
         "random_story": "隨便讀一則",
         "random_person": "隨便認識一個人",
-        "scene_heading": "場景",
+        "scene_heading": "舞臺",
         "scene_people_heading": "入畫",
-        "scene_position_heading": "入畫",
+        "scene_position_heading": "舞臺",
         "scene_background_heading": "底色",
-        "scene_focus_heading": "入畫",
+        "scene_focus_heading": "舞臺",
         "scene_off_frame_heading": "畫外",
         "scene_ground_heading": "底色",
         "scene_resonance_heading": "餘韻",
@@ -332,6 +333,7 @@ def build(root: Path = ROOT) -> dict[str, Any]:
     if root.resolve() != ROOT.resolve():
         raise ValueError("SC1 builder currently requires the repository root")
     base = read_json(WP1_BUNDLE_PATH)
+    production_relations = read_json(PRODUCTION_RELATIONS_PATH).get("records", [])
     gold = read_json(GOLD_PATH)
     chain_index = read_json(CHAIN_INDEX_PATH)
     corpus_entries = read_json(CORPUS_INDEX_PATH)["entries"]
@@ -581,7 +583,7 @@ def build(root: Path = ROOT) -> dict[str, Any]:
                 placement_mentions=entry_mentions,
                 canonical_annotations=annotations,
                 sources=base["sources"],
-                relations=base["relations"],
+                relations=production_relations,
                 evidence=list(base_evidence.values()),
                 source_text=source_text,
                 annotation_evidence_ids=base_annotation_evidence,
@@ -613,7 +615,7 @@ def build(root: Path = ROOT) -> dict[str, Any]:
             placement_mentions=entry_mentions,
             canonical_annotations=annotations,
             sources=base["sources"],
-            relations=base["relations"],
+            relations=production_relations,
             evidence=list(new_evidence.values()),
             source_text=source_text,
             annotation_evidence_ids={
@@ -782,7 +784,7 @@ def build(root: Path = ROOT) -> dict[str, Any]:
         "stories": new_stories,
         "people": frontend_people,
         "mentions": sorted(new_mentions.values(), key=lambda item: item["id"]),
-        "relations": base["relations"],
+        "relations": production_relations,
         "eras": base["eras"],
         "evidence": sorted(new_evidence.values(), key=lambda item: item["id"]),
         "sources": base["sources"],

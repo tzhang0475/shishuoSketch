@@ -76,7 +76,10 @@ class StorySceneContextTests(unittest.TestCase):
 
     def test_reader_labels_use_ink_wash_vocabulary(self) -> None:
         labels = self.bundle["ui"]
-        self.assertEqual(labels["scene_focus_heading"]["original"], "入畫")
+        self.assertEqual(labels["scene_heading"]["original"], "舞臺")
+        self.assertEqual(labels["scene_focus_heading"]["original"], "舞臺")
+        self.assertEqual(labels["scene_people_heading"]["original"], "入畫")
+        self.assertEqual(labels["scene_position_heading"]["original"], "舞臺")
         self.assertEqual(labels["scene_off_frame_heading"]["original"], "畫外")
         self.assertEqual(labels["scene_ground_heading"]["original"], "底色")
         self.assertEqual(labels["scene_resonance_heading"]["original"], "餘韻")
@@ -110,15 +113,28 @@ class StorySceneContextTests(unittest.TestCase):
         self.assertTrue(any("簡文帝" in claim["text"]["original"] for claim in context["event_background"]))
 
     def test_scene_context_does_not_change_relation_layer(self) -> None:
-        base = json.loads((ROOT / "data/derived/wp1-site.json").read_text(encoding="utf-8"))
-        self.assertEqual(self.bundle["relations"], base["relations"])
+        production = json.loads((ROOT / "data/annotation/wp1-relations.json").read_text(encoding="utf-8"))
+        self.assertEqual(self.bundle["relations"], production["records"])
         for context in self.source["records"]:
             self.assertNotIn("relation_ids", context)
 
     def test_scene_records_remain_story_owned_and_do_not_project_relations(self) -> None:
-        self.assertEqual(len(self.derived["contexts"]), 20)
+        self.assertEqual(len(self.derived["contexts"]), 21)
         self.assertTrue({"02-yanyu-069", "04-wenxue-036", "05-fangzheng-055", "06-yaliang-027", "08-shangyu-077", "19-xianyuan-026", "02-yanyu-035", "05-fangzheng-032", "11-jiewu-005", "27-jiajue-008"} <= set(self.derived["contexts"]))
+        self.assertIn("02-yanyu-036", self.derived["contexts"])
         self.assertFalse(any("relations" in context or "relation_ids" in context for context in self.derived["contexts"].values()))
+
+    def test_s2_selected_stories_have_a_story_local_stage_claim(self) -> None:
+        selected = json.loads((ROOT / "data/annotation/s2-narrative-density-selection.json").read_text(encoding="utf-8"))
+        for record in selected["records"]:
+            context = self.derived["contexts"][record["story_id"]]
+            self.assertTrue(context["narrative_layers"]["scene_focus"], record["story_id"])
+
+    def test_fangzheng_031_political_prose_is_scene_focus_not_people_heading(self) -> None:
+        context = self.derived["contexts"]["05-fangzheng-031"]
+        self.assertTrue(context["narrative_layers"]["scene_focus"])
+        self.assertEqual([person["person_id"] for person in context["people_at_scene"]], ["person-019", "person-011"])
+        self.assertEqual(context["people_at_scene"][1]["scene_role"], "referenced_in_context")
 
     def test_sc1_validation_includes_scene_projection_in_repository_mode(self) -> None:
         mode = repository_validation_mode()

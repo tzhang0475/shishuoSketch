@@ -22,6 +22,7 @@ SOURCE_PATH = Path("data/annotation/person-relation-candidates-r3.json")
 SCHEMA_PATH = Path("schema/person-relation-candidate.schema.json")
 SC1_PATH = Path("data/derived/sc1-site.json")
 RELATIONS_PATH = Path("data/annotation/wp1-relations.json")
+R3B_REVIEW_PATH = Path("data/annotation/person-relation-review-r3b.json")
 WAVE_PATH = Path("data/annotation/person-expansion-wave-1.json")
 WAVE2_PATH = Path("data/annotation/person-expansion-wave-2.json")
 DERIVED_PATH = Path("data/derived/person-relation-candidates-r3.json")
@@ -137,6 +138,18 @@ def _reviewed_relations(root: Path) -> list[dict[str, Any]]:
     ]
 
 
+def _r3b_decisions(root: Path) -> dict[str, dict[str, Any]]:
+    path = root / R3B_REVIEW_PATH
+    if not path.is_file():
+        return {}
+    document = read_json(root, R3B_REVIEW_PATH)
+    return {
+        str(record["candidate_id"]): dict(record)
+        for record in document.get("records", [])
+        if isinstance(record, Mapping) and isinstance(record.get("candidate_id"), str)
+    }
+
+
 def _project_candidate(
     record: Mapping[str, Any],
     *,
@@ -144,6 +157,7 @@ def _project_candidate(
     evidence_by_id: Mapping[str, Mapping[str, Any]],
     stories: Mapping[str, Mapping[str, Any]],
     reviewed_pairs: Mapping[tuple[str, str], list[str]],
+    r3b_decisions: Mapping[str, Mapping[str, Any]],
 ) -> dict[str, Any]:
     a, b = str(record["person_a_id"]), str(record["person_b_id"])
     evidence = [evidence_by_id[evidence_id] for evidence_id in record["evidence_ids"]]
@@ -160,7 +174,17 @@ def _project_candidate(
     )
     layers = _unique_sorted(_evidence_layer(item) for item in evidence)
     relation_pair = _pair(a, b)
-    return {
+    r3b = r3b_decisions.get(candidate_id(record), {})
+    disposition = "unreviewed"
+    materialized_relation_id = None
+    if r3b:
+        disposition = {
+            "approved": "approved_materialized",
+            "deferred": "deferred",
+            "rejected": "rejected",
+        }.get(str(r3b.get("decision")), "unreviewed")
+        materialized_relation_id = r3b.get("production_relation_id")
+    result = {
         "candidate_id": candidate_id(record),
         "person_a_id": a,
         "person_b_id": b,
@@ -188,7 +212,11 @@ def _project_candidate(
         "current_story_ids": current_story_ids,
         "evidence_summary": [_evidence_summary(item) for item in evidence],
         "existing_reviewed_relation_ids": list(reviewed_pairs.get(relation_pair, [])),
+        "review_disposition": disposition,
     }
+    if isinstance(materialized_relation_id, str):
+        result["materialized_relation_id"] = materialized_relation_id
+    return result
 
 
 def _pair_audit(
@@ -257,6 +285,7 @@ def project(root: Path = ROOT) -> dict[str, Any]:
     source = read_json(root, SOURCE_PATH)
     bundle = read_json(root, SC1_PATH)
     reviewed_relations = _reviewed_relations(root)
+    r3b_decisions = _r3b_decisions(root)
     names = {
         str(person["id"]): str(person["canonical_name"])
         for person in bundle.get("people", [])
@@ -310,6 +339,7 @@ def project(root: Path = ROOT) -> dict[str, Any]:
                 evidence_by_id=evidence_by_id,
                 stories=stories,
                 reviewed_pairs=reviewed_pairs,
+                r3b_decisions=r3b_decisions,
             )
         )
     candidates.sort(key=_sort_candidate)
@@ -346,7 +376,7 @@ def project(root: Path = ROOT) -> dict[str, Any]:
     return {
         "schema": 1,
         "stage": "r3a-explicit-person-relation-discovery",
-        "generated_from": [str(SOURCE_PATH), str(SC1_PATH), str(RELATIONS_PATH), str(WAVE_PATH), str(WAVE2_PATH)],
+        "generated_from": [str(SOURCE_PATH), str(SC1_PATH), str(RELATIONS_PATH), str(R3B_REVIEW_PATH), str(WAVE_PATH), str(WAVE2_PATH)],
         "production_person_count": len(people),
         "production_person_ids": people,
         "reviewed_relation_count": len(reviewed_relations),
@@ -366,7 +396,7 @@ def project(root: Path = ROOT) -> dict[str, Any]:
         "wave2_persons_with_candidate_relation": sorted(set(wave2_person_ids) & candidate_endpoint_ids),
         "isolated_person_ids_by_reviewed_relation": isolated,
         "notes": [
-        "R3A is a candidate review layer; it does not modify data/annotation/wp1-relations.json.",
+        "R3A is a candidate review layer; approved R3B decisions are retained as provenance but only the R3B materialization builder updates production Relation output.",
             "Shared Story and Scene co-occurrence are reported separately and never become Relation candidates by themselves.",
         "Candidate IDs are opaque hashes of stable endpoint/class/source fields, not names or rank positions.",
         ],
@@ -398,7 +428,7 @@ def render_report(document: Mapping[str, Any]) -> str:
             [
                 f"### {candidate['person_a_name']} × {candidate['person_b_name']}",
                 "",
-                f"- Rank：{candidate['rank']} · Tier {candidate['review_tier']} · Candidate ID：`{candidate['candidate_id']}`",
+                f"- Rank：{candidate['rank']} · Tier {candidate['review_tier']} · Candidate ID：`{candidate['candidate_id']}` · R3B：{candidate.get('review_disposition', 'unreviewed')}",
                 f"- 建议类别：`{candidate['proposed_relation_class']}`；范围：`{candidate['relation_scope']}`",
                 f"- 角色：{candidate['person_a_name']}（{candidate['proposed_role_a']}）— {candidate['person_b_name']}（{candidate['proposed_role_b']}）",
                 f"- 来源：{', '.join(candidate['source_entry_ids'] + candidate['source_unit_ids']) or '未提供'}",
@@ -433,7 +463,7 @@ def render_report(document: Mapping[str, Any]) -> str:
             "",
             "## 下一步",
             "",
-            "本产物只供 R3B 人工审阅使用。任何候选在没有单独审阅前，都不会出现在读者端 Relation card，也不会写入 `wp1-relations.json`。",
+            "本产物保留 R3A 候选与 R3B 决策的审计链。只有 R3B 明确批准的记录才会出现在读者端 Relation card；暂缓和未审候选不会写入生产 Relation。",
             "",
         ]
     )

@@ -134,7 +134,9 @@
         },
         "current_story_ids": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
         "evidence_summary": {"type": "array", "items": {"$ref": "#/$defs/evidence"}},
-        "existing_reviewed_relation_ids": {"type": "array", "items": {"type": "string"}, "uniqueItems": true}
+        "existing_reviewed_relation_ids": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+        "review_disposition": {"enum": ["unreviewed", "approved_materialized", "deferred", "rejected"]},
+        "materialized_relation_id": {"type": "string", "pattern": "^relation-r3b-[0-9]{3}$"}
       }
     },
     "scene_encounter": {

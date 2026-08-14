@@ -287,6 +287,25 @@ def validate(root: Path = ROOT) -> list[str]:
 
     protected_hashes = materialization.get("protected_hashes", {})
     for relative_path, expected_hash in protected_hashes.items():
+        if relative_path == str(RELATIONS_PATH):
+            # R3B intentionally appends reviewed production Relations to the
+            # registry.  Preserve the P3B.1 legacy Relation facts by checking
+            # the unchanged WP1 sample projection record-by-record rather
+            # than requiring the now-expanded registry hash to remain frozen.
+            try:
+                legacy_relations = read_json(root, Path("data/derived/wp1-site.json")).get("relations", [])
+                current_relations = {
+                    str(item.get("id")): item
+                    for item in read_json(root, RELATIONS_PATH).get("records", [])
+                    if isinstance(item, Mapping) and item.get("id")
+                }
+                for legacy in legacy_relations:
+                    relation_id = str(legacy.get("id"))
+                    if current_relations.get(relation_id) != legacy:
+                        errors.append(f"protected P3B.1 Relation fact changed: {relation_id}")
+            except (OSError, ValueError, KeyError, TypeError) as exc:
+                errors.append(f"protected P3B.1 Relation baseline cannot be checked: {exc}")
+            continue
         path = root / relative_path
         if not path.is_file() or sha256_file(path) != expected_hash:
             errors.append(f"protected P3B.1 input changed: {relative_path}")

@@ -203,7 +203,7 @@ console.log(JSON.stringify({{
 
     def test_scene_card_is_story_owned_and_keeps_relations_separate(self) -> None:
         self.assertIn("scene_contexts", self.bundle)
-        self.assertEqual(len(self.bundle["scene_contexts"]), 20)
+        self.assertEqual(len(self.bundle["scene_contexts"]), 21)
         self.assertTrue(
             {
                 "02-yanyu-069",
@@ -215,6 +215,7 @@ console.log(JSON.stringify({{
                 "06-yaliang-029",
                 "08-shangyu-077",
                 "19-xianyuan-026",
+                "02-yanyu-036",
             }
             <= set(self.bundle["scene_contexts"])
         )

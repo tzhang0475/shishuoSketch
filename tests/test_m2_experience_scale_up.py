@@ -105,9 +105,9 @@ class M2ExperienceScaleUpTests(unittest.TestCase):
         self.assertEqual(self.metrics["after"]["production_person_count"], 35)
         self.assertEqual(self.metrics["before"]["published_story_count"], 16)
         self.assertEqual(self.metrics["after"]["published_story_count"], 60)
-        self.assertEqual(self.metrics["after"]["scene_card_count"], 20)
-        self.assertEqual(len(self.relations), 7)
-        self.assertEqual(self.metrics["after"]["reviewed_relation_count"], 7)
+        self.assertEqual(self.metrics["after"]["scene_card_count"], 21)
+        self.assertEqual(len(self.relations), 12)
+        self.assertEqual(self.metrics["after"]["reviewed_relation_count"], 12)
         self.assertGreater(self.metrics["after"]["story_mediated_person_pair_count"], 0)
 
     def test_wave_two_production_evidence_uses_registered_witnesses(self) -> None:

@@ -26,6 +26,7 @@ ALIASES_PATH = Path("data/aliases.json")
 PEOPLE_PATH = Path("data/people.json")
 MENTIONS_PATH = Path("data/mentions/shishuo.json")
 PERSON_STORY_INDEX_PATH = Path("data/derived/person-story-index.json")
+LIFE_GLIMPSE_OVERLAY_PATH = Path("data/annotation/s2-person-life-glimpses.json")
 
 ALIAS_TYPE_LABELS = {
     "personal_name": "名",
@@ -247,6 +248,12 @@ def build_person_sketches(
 
     converter = converter or OpenCC("t2s")
     source = load_source(root)
+    life_overlay = read_json(root, LIFE_GLIMPSE_OVERLAY_PATH) if (root / LIFE_GLIMPSE_OVERLAY_PATH).is_file() else {"records": []}
+    life_overlay_by_person = {
+        str(item["person_id"]): list(item.get("points", []))
+        for item in life_overlay.get("records", [])
+        if isinstance(item, Mapping) and isinstance(item.get("person_id"), str)
+    }
     source_by_person = {
         str(item["person_id"]): item
         for item in source.get("records", [])
@@ -301,6 +308,10 @@ def build_person_sketches(
             "brief_intro": _pair(identity.get("brief_intro"), converter),
             "evidence_ids": list(identity.get("evidence_ids", [])),
         }
+        curated_life_glimpse = list(curated.get("life_glimpse", []))
+        curated_life_glimpse.extend(life_overlay_by_person.get(person_id, []))
+        curated_with_overlay = dict(curated)
+        curated_with_overlay["life_glimpse"] = curated_life_glimpse
         result[person_id] = {
             "person_id": person_id,
             "scope_role": person.get("scope_role", person.get("scope", "primary")),
@@ -316,6 +327,6 @@ def build_person_sketches(
                 converter,
             ),
             "story_counts": _story_counts(person_id, person_story_index),
-            "life_glimpse": _life_glimpse_rows(curated, converter),
+            "life_glimpse": _life_glimpse_rows(curated_with_overlay, converter),
         }
     return result

@@ -39,6 +39,11 @@ class RelationGoldPilotTests(unittest.TestCase):
                 "relation-gold-004",
                 "relation-gold-005",
                 "relation-gold-006",
+                "relation-r3b-001",
+                "relation-r3b-002",
+                "relation-r3b-003",
+                "relation-r3b-004",
+                "relation-r3b-005",
             ],
         )
 
@@ -55,7 +60,7 @@ class RelationGoldPilotTests(unittest.TestCase):
             ["relation-gold-006", "relation-gold-005"],
         )
         self.assertEqual(relation["evidence_ids"], [])
-        self.assertEqual(len(relations), 7)
+        self.assertEqual(len(relations), 12)
 
     def test_supporting_bridge_person_is_evidence_backed(self) -> None:
         registry = json.loads((ROOT / "data/people.json").read_text(encoding="utf-8"))["people"]

@@ -572,7 +572,17 @@ def validate(root: Path = ROOT, mode: str = "full") -> list[str]:
     for person_id, base_person in base_people_by_id.items():
         if bundle_people_by_id.get(person_id) != base_person:
             errors.append(f"SC1 changed existing WP1 Person record: {person_id}")
-    for key in ("relations", "sources", "eras"):
+    # Relations are the one intentional exception to the byte-identical WP1
+    # shared-layer rule: the SC1 projection carries the current production
+    # Relation registry, which includes the reviewed R3B wave.  Preserve the
+    # historical WP1 records exactly while allowing additional reviewed
+    # production records to be projected.
+    base_relations_by_id = {item.get("id"): item for item in base.get("relations", [])}
+    bundle_relations_by_id = {item.get("id"): item for item in bundle.get("relations", [])}
+    for relation_id, base_relation in base_relations_by_id.items():
+        if bundle_relations_by_id.get(relation_id) != base_relation:
+            errors.append(f"SC1 changed existing WP1 Relation record: {relation_id}")
+    for key in ("sources", "eras"):
         if bundle.get(key) != base.get(key):
             errors.append(f"SC1 changed shared WP1 {key} records")
     base_evidence = {item["id"]: item for item in base.get("evidence", [])}

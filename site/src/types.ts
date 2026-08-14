@@ -179,6 +179,7 @@ export interface StoryReading {
     label: ReadingPair;
     role_a: ReadingPair | null;
     role_b: ReadingPair | null;
+    scope?: ReadingPair | null;
   }>;
   evidence_display: Record<string, ReadingPair>;
   display_overrides: string[];
@@ -279,7 +280,10 @@ export interface Relation {
   object_id: string;
   relation_type: string;
   relation_basis: "direct" | "derived";
-  relation_subtype?: "parent_child" | "uncle_niece" | "collateral_kinship" | "spouse";
+  relation_subtype?: "parent_child" | "uncle_niece" | "collateral_kinship" | "spouse" | "friendship" | "service_under" | "political_opposition";
+  relation_scope?: "long_term_social" | "institutional_tenure" | "event_bounded" | string;
+  scope_event?: string | null;
+  source_candidate_id?: string;
   role_a?: string;
   role_b?: string;
   label: string;

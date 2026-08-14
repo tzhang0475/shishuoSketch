@@ -291,11 +291,20 @@ def _build_relation_display(relations: Any, converter: Any) -> dict[str, Any]:
             value = relation.get(key)
             return _display_pair(value, converter) if isinstance(value, str) else None
 
-        result[relation["id"]] = {
+        display = {
             "label": _display_pair(str(relation.get("label", "")), converter),
             "role_a": role_pair("role_a"),
             "role_b": role_pair("role_b"),
         }
+        # Only expose the bounded event label to readers.  Internal ontology
+        # values such as long_term_social are schema metadata, not
+        # reader-facing prose.  Keep the field absent for legacy Relations so
+        # the existing Relation card projection remains byte/semantically
+        # stable.
+        scope = role_pair("scope_event")
+        if scope is not None:
+            display["scope"] = scope
+        result[relation["id"]] = display
     return result
 
 
