@@ -783,6 +783,47 @@ function PersonSketchEvidence({
   );
 }
 
+function PersonSketchLifeGlimpse({
+  story,
+  data,
+  focusedPerson,
+  readingMode,
+}: {
+  story: Story;
+  data: SiteBundle;
+  focusedPerson: Person;
+  readingMode: ReadingMode;
+}) {
+  const sketch = data.person_sketches[focusedPerson.id];
+  const points = sketch?.life_glimpse ?? [];
+  if (points.length === 0) return null;
+  return (
+    <section className="person-sketch-life-glimpse" aria-label={uiLabel(data, "person_sketch_life_glimpse", readingMode, "一瞥")}>
+      <p className="relation-detail-heading">{uiLabel(data, "person_sketch_life_glimpse", readingMode, "一瞥")}</p>
+      <div className="person-sketch-life-list">
+        {points.map((point, index) => {
+          const evidence = point.evidence_ids
+            .map((id) => data.evidence.find((item) => item.id === id))
+            .filter((item): item is Evidence => Boolean(item));
+          return (
+            <article className="person-sketch-life-point" key={`${point.text.original}-${index}`}>
+              <p>{readingValue(point.text, readingMode, "")}</p>
+              {evidence.length > 0 && (
+                <details className="person-sketch-life-evidence">
+                  <summary>{uiLabel(data, "person_sketch_evidence", readingMode, "依据")} ›</summary>
+                  {evidence.map((item) => (
+                    <blockquote key={item.id}>{story.reading.evidence_display[item.id]?.[readingMode] ?? item.quote}</blockquote>
+                  ))}
+                </details>
+              )}
+            </article>
+          );
+        })}
+      </div>
+    </section>
+  );
+}
+
 function PersonDetailCard({
   story,
   data,
@@ -828,6 +869,12 @@ function PersonDetailCard({
         focusedPerson={focusedPerson}
         readingMode={readingMode}
         onStorySelect={onStorySelect}
+      />
+      <PersonSketchLifeGlimpse
+        story={story}
+        data={data}
+        focusedPerson={focusedPerson}
+        readingMode={readingMode}
       />
       <div className="relation-detail-group">
         <p className="relation-detail-heading">{uiLabel(data, "person_sketch_relations", readingMode, "人物关系")}</p>
@@ -1054,6 +1101,53 @@ function SceneCard({
     uiLabel(data, "scene_unknown", readingMode, "时间未详"),
   );
   const placeLabel = scene.places.map((place) => readingValue(place.name, readingMode, "")).filter(Boolean).join(" · ");
+  const narrative = scene.narrative_layers;
+  const sceneFocus = narrative?.scene_focus ?? [];
+  const offFrameClaims = narrative?.off_frame_context ?? [];
+  const groundClaims = narrative?.historical_ground?.length ? narrative.historical_ground : scene.event_background;
+  const resonanceClaims = narrative?.resonance ?? [];
+  const inFramePeople = scene.people_at_scene.filter((person) => person.scene_role === "present");
+  const offFramePeople = scene.people_at_scene.filter((person) => person.scene_role !== "present");
+  const inFrameUnmaterialized = scene.unmaterialized_people.filter((person) => person.scene_role === "present");
+  const offFrameUnmaterialized = scene.unmaterialized_people.filter((person) => person.scene_role !== "present");
+
+  function claimList(claims: StorySceneContext["event_background"], className = "scene-context-text") {
+    return claims.map((claim, index) => (
+      <p className={className} key={`${claim.text.original}-${index}`}>
+        {readingValue(claim.text, readingMode, "")}
+      </p>
+    ));
+  }
+
+  function personRows(people: StorySceneContext["people_at_scene"]) {
+    return people.map((person) => {
+      const resolved = data.people.find((candidate) => candidate.id === person.person_id);
+      const name = resolved ? personDisplayName(story, resolved, readingMode) : readingValue(person.surface, readingMode, person.person_id);
+      return (
+        <article className="scene-person-row" key={`${person.person_id}-${person.surface.original}`}>
+          <div className="scene-person-heading">
+            <button type="button" className="scene-person-link" onClick={() => onFocus(person.person_id)}>
+              {name}
+            </button>
+            <span className="scene-person-surface">（{readingValue(person.surface, readingMode, "")}）</span>
+            <span className="scene-person-role">{readingValue(person.scene_role_label, readingMode, person.scene_role)}</span>
+          </div>
+          <div className="scene-person-details">
+            <span>{readingValue(person.age.label ?? undefined, readingMode, uiLabel(data, "scene_unknown", readingMode, "年龄未详"))}</span>
+            {person.status && <span>{readingValue(person.status.text, readingMode, "")}</span>}
+          </div>
+        </article>
+      );
+    });
+  }
+
+  function unmaterializedRows(people: StorySceneContext["unmaterialized_people"]) {
+    return people.map((person, index) => (
+      <p key={`${person.surface.original}-${index}`} className="scene-unmaterialized-person">
+        {readingValue(person.surface, readingMode, "")} · {readingValue(person.scene_role_label, readingMode, person.scene_role)}
+      </p>
+    ));
+  }
 
   return (
     <section className="scene-card" aria-labelledby={`scene-heading-${story.id}`}>
@@ -1070,43 +1164,31 @@ function SceneCard({
       </p>
 
       <div className="scene-people" aria-labelledby={`scene-people-heading-${story.id}`}>
-        <p className="scene-card-label" id={`scene-people-heading-${story.id}`}>{uiLabel(data, "scene_people_heading", readingMode, "这一幕里")}</p>
+        <p className="scene-card-label" id={`scene-people-heading-${story.id}`}>{uiLabel(data, "scene_focus_heading", readingMode, "入画")}</p>
+        {claimList(sceneFocus)}
         <div className="scene-person-list">
-          {scene.people_at_scene.map((person) => {
-            const resolved = data.people.find((candidate) => candidate.id === person.person_id);
-            const name = resolved ? personDisplayName(story, resolved, readingMode) : readingValue(person.surface, readingMode, person.person_id);
-            return (
-              <article className="scene-person-row" key={person.person_id}>
-                <div className="scene-person-heading">
-                  <button type="button" className="scene-person-link" onClick={() => onFocus(person.person_id)}>
-                    {name}
-                  </button>
-                  <span className="scene-person-surface">（{readingValue(person.surface, readingMode, "")}）</span>
-                  <span className="scene-person-role">{readingValue(person.scene_role_label, readingMode, person.scene_role)}</span>
-                </div>
-                <div className="scene-person-details">
-                  <span>{readingValue(person.age.label ?? undefined, readingMode, uiLabel(data, "scene_unknown", readingMode, "年龄未详"))}</span>
-                  {person.status && <span>{readingValue(person.status.text, readingMode, "")}</span>}
-                </div>
-              </article>
-            );
-          })}
+          {personRows(inFramePeople)}
         </div>
-        {scene.unmaterialized_people.length > 0 && (
+        {inFrameUnmaterialized.length > 0 && (
           <div className="scene-unmaterialized-people">
-            <p className="scene-card-label">{uiLabel(data, "scene_not_materialized", readingMode, "来源人物尚未进入人物层")}</p>
-            {scene.unmaterialized_people.map((person, index) => (
-              <p key={`${person.surface.original}-${index}`}>
-                {readingValue(person.surface, readingMode, "")} · {readingValue(person.scene_role_label, readingMode, person.scene_role)}
-              </p>
-            ))}
+            <p className="scene-card-label">{uiLabel(data, "scene_not_materialized", readingMode, "人物卡尚未建立")}</p>
+            {unmaterializedRows(inFrameUnmaterialized)}
           </div>
         )}
       </div>
 
+      {(offFramePeople.length > 0 || offFrameUnmaterialized.length > 0 || offFrameClaims.length > 0) && (
+        <div className="scene-context-group">
+          <p className="scene-card-label">{uiLabel(data, "scene_off_frame_heading", readingMode, "画外")}</p>
+          {claimList(offFrameClaims)}
+          <div className="scene-person-list">{personRows(offFramePeople)}</div>
+          {offFrameUnmaterialized.length > 0 && <div className="scene-unmaterialized-people">{unmaterializedRows(offFrameUnmaterialized)}</div>}
+        </div>
+      )}
+
       {scene.positional_context.length > 0 && (
         <div className="scene-context-group">
-          <p className="scene-card-label">{uiLabel(data, "scene_position_heading", readingMode, "这一幕中的位置")}</p>
+          <p className="scene-card-label">{uiLabel(data, "scene_position_heading", readingMode, "入画")}</p>
           {scene.positional_context.map((position, index) => (
             <p className="scene-context-text" key={`${position.classification}-${index}`}>
               <span className="scene-context-classification">{readingValue(position.classification_label, readingMode, position.classification)}</span>
@@ -1116,14 +1198,19 @@ function SceneCard({
         </div>
       )}
 
-      <div className="scene-context-group">
-        <p className="scene-card-label">{uiLabel(data, "scene_background_heading", readingMode, "背景")}</p>
-        {scene.event_background.map((claim, index) => (
-          <p className="scene-context-text" key={`${claim.text.original}-${index}`}>
-            {readingValue(claim.text, readingMode, "")}
-          </p>
-        ))}
-      </div>
+      {groundClaims.length > 0 && (
+        <div className="scene-context-group">
+          <p className="scene-card-label">{uiLabel(data, "scene_ground_heading", readingMode, "底色")}</p>
+          {claimList(groundClaims)}
+        </div>
+      )}
+
+      {resonanceClaims.length > 0 && (
+        <div className="scene-context-group scene-resonance-group">
+          <p className="scene-card-label">{uiLabel(data, "scene_resonance_heading", readingMode, "余韵")}</p>
+          {claimList(resonanceClaims)}
+        </div>
+      )}
 
       {evidence.length > 0 && (
         <details className="scene-evidence">

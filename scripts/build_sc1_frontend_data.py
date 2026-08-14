@@ -242,6 +242,16 @@ def frontend_mention(
         "review_status": "candidate",
         "notes": "Projected from the existing conservative Person/Mention pilot; no participant status is inferred.",
     }
+    if isinstance(mention.get("display_span"), Mapping):
+        span = mention["display_span"]
+        projected["display_span"] = {
+            "offset": span.get("offset"),
+            "end_offset_exclusive": span.get("end_offset_exclusive"),
+            "text": span.get("text"),
+            "basis": span.get("basis", "maximal_semantic_person_span"),
+            "status": span.get("status", "safe"),
+            "evidence_ids": list(span.get("evidence_ids", [])),
+        }
     for key in (
         "resolution_status",
         "resolution_target",
@@ -250,6 +260,10 @@ def frontend_mention(
         "resolution_decision_source",
         "resolution_evidence_ids",
         "resolution_note",
+        "resolution_method",
+        "derived_only",
+        "span_decision_id",
+        "coreference_antecedent_mention_id",
     ):
         if key in mention:
             projected[key] = mention[key]
@@ -290,6 +304,7 @@ def build_ui_labels(converter: OpenCC) -> dict[str, Any]:
         "person_sketch_reviewed": "已復核資料",
         "person_sketch_main_story_count": "正文故事",
         "person_sketch_annotation_story_count": "劉注提及",
+        "person_sketch_life_glimpse": "一瞥",
         "story_people_heading": "本則人物",
         "primary_story_label": "正文出現",
         "annotation_story_label": "劉注提及",
@@ -299,12 +314,16 @@ def build_ui_labels(converter: OpenCC) -> dict[str, Any]:
         "random_story": "隨便讀一則",
         "random_person": "隨便認識一個人",
         "scene_heading": "場景",
-        "scene_people_heading": "這一幕裡",
-        "scene_position_heading": "這一幕中的位置",
-        "scene_background_heading": "背景",
+        "scene_people_heading": "入畫",
+        "scene_position_heading": "入畫",
+        "scene_background_heading": "底色",
+        "scene_focus_heading": "入畫",
+        "scene_off_frame_heading": "畫外",
+        "scene_ground_heading": "底色",
+        "scene_resonance_heading": "餘韻",
         "scene_evidence_heading": "查看依據",
         "scene_unknown": "未詳",
-        "scene_not_materialized": "來源人物尚未進入人物層",
+        "scene_not_materialized": "人物卡尚未建立",
     }
     return {key: pair(value, converter) for key, value in labels.items()}
 
@@ -538,6 +557,11 @@ def build(root: Path = ROOT) -> dict[str, Any]:
                         "resolution_decision_source",
                         "resolution_evidence_ids",
                         "resolution_note",
+                        "display_span",
+                        "resolution_method",
+                        "derived_only",
+                        "span_decision_id",
+                        "coreference_antecedent_mention_id",
                     ):
                         if key in effective_projection:
                             projected[key] = effective_projection[key]

@@ -1,0 +1,77 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://shishuo-sketch/schema/person-resolution-span-decision.schema.json",
+  "title": "ER1.1 Person Resolution Span Decision",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "stage",
+    "decisions"
+  ],
+  "properties": {
+    "schema": {"const": 1},
+    "stage": {"const": "er1-1-person-resolution-span-decisions"},
+    "decisions": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {"$ref": "#/$defs/decision"}
+    }
+  },
+  "$defs": {
+    "target": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["target_kind", "canonical_name"],
+      "properties": {
+        "target_kind": {"enum": ["production_person", "identity_candidate"]},
+        "person_id": {"type": "string", "minLength": 1},
+        "candidate_id": {"type": "string", "minLength": 1},
+        "canonical_name": {"type": "string", "minLength": 1}
+      }
+    },
+    "decision": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "decision_id",
+        "story_id",
+        "section",
+        "span_start",
+        "span_end_exclusive",
+        "surface",
+        "target",
+        "alias_type",
+        "resolution_mode",
+        "coreference_surfaces",
+        "assertion_status",
+        "review_status",
+        "evidence_ids"
+      ],
+      "properties": {
+        "decision_id": {"type": "string", "minLength": 1},
+        "story_id": {"type": "string", "minLength": 1},
+        "section": {"const": "main_text"},
+        "span_start": {"type": "integer", "minimum": 0},
+        "span_end_exclusive": {"type": "integer", "minimum": 1},
+        "surface": {"type": "string", "minLength": 1},
+        "target": {"$ref": "#/$defs/target"},
+        "alias_type": {"type": "string", "minLength": 1},
+        "resolution_mode": {"enum": ["exact", "contextual", "ambiguous"]},
+        "coreference_surfaces": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {"type": "string", "minLength": 1}
+        },
+        "assertion_status": {"enum": ["attested", "reported", "inferred", "unknown"]},
+        "review_status": {"enum": ["candidate", "reviewed", "rejected", "todo"]},
+        "evidence_ids": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {"type": "string", "minLength": 1}
+        },
+        "review_note": {"type": "string"}
+      }
+    }
+  }
+}

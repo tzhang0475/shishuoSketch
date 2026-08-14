@@ -22,6 +22,10 @@ try:
         DECISIONS_PATH,
         EFFECTIVE_PATH,
         QUEUE_PATH,
+        SPAN_AUDIT_PATH,
+        SPAN_DECISIONS_PATH,
+        _published_story_ids,
+        _load_sections,
         _target_key,
         read_json,
     )
@@ -31,6 +35,10 @@ except ImportError:  # direct execution
         DECISIONS_PATH,
         EFFECTIVE_PATH,
         QUEUE_PATH,
+        SPAN_AUDIT_PATH,
+        SPAN_DECISIONS_PATH,
+        _published_story_ids,
+        _load_sections,
         _target_key,
         read_json,
     )
@@ -46,6 +54,9 @@ DECISION_SCHEMA_PATH = Path("schema/person-resolution-decision.schema.json")
 EFFECTIVE_SCHEMA_PATH = Path("schema/person-resolution-effective.schema.json")
 QUEUE_SCHEMA_PATH = Path("schema/person-resolution-review-queue.schema.json")
 COLLISION_SCHEMA_PATH = Path("schema/person-alias-collisions.schema.json")
+SPAN_DECISION_SCHEMA_PATH = Path("schema/person-resolution-span-decision.schema.json")
+SPAN_AUDIT_SCHEMA_PATH = Path("schema/person-resolution-span-audit.schema.json")
+SC1_PATH = Path("data/derived/sc1-site.json")
 
 RESOLUTION_FIELDS = {
     "person_id",
@@ -131,11 +142,17 @@ def validate(root: Path = ROOT) -> list[str]:
         effective = read_json(root, EFFECTIVE_PATH)
         queue = read_json(root, QUEUE_PATH)
         collisions = read_json(root, COLLISIONS_PATH)
+        span_decisions_document = read_json(root, SPAN_DECISIONS_PATH)
+        span_audit = read_json(root, SPAN_AUDIT_PATH)
     except (OSError, ValueError, KeyError) as exc:
         return [f"ER1 cannot read required artifact: {exc}"]
 
     for number, decision in enumerate(decisions_document.get("decisions", [])):
         errors.extend(_schema_errors(root, DECISION_SCHEMA_PATH, decision, f"ER1 decision {number}"))
+    # The span schema describes the committed decision document (including
+    # its schema/stage envelope), not an individual decision row.
+    errors.extend(_schema_errors(root, SPAN_DECISION_SCHEMA_PATH, span_decisions_document, "ER1.1 span decisions"))
+    errors.extend(_schema_errors(root, SPAN_AUDIT_SCHEMA_PATH, span_audit, "ER1.1 span audit"))
     errors.extend(_schema_errors(root, EFFECTIVE_SCHEMA_PATH, effective, "ER1 effective resolution"))
     errors.extend(_schema_errors(root, QUEUE_SCHEMA_PATH, queue, "ER1 review queue"))
     errors.extend(_schema_errors(root, COLLISION_SCHEMA_PATH, collisions, "ER1 alias collisions"))
@@ -149,6 +166,15 @@ def validate(root: Path = ROOT) -> list[str]:
         for item in [*candidates_document.get("evidence", []), *evidence_document.get("records", [])]
         if isinstance(item, Mapping) and isinstance(item.get("id"), str)
     }
+    try:
+        sc1_document = read_json(root, SC1_PATH)
+    except (OSError, ValueError):
+        sc1_document = {}
+    evidence_ids.update(
+        str(item.get("id"))
+        for item in sc1_document.get("evidence", [])
+        if isinstance(item, Mapping) and isinstance(item.get("id"), str)
+    )
     raw_mentions = [item for item in raw_document.get("mentions", []) if isinstance(item, Mapping)]
     raw_by_id = {str(item.get("mention_id")): item for item in raw_mentions if isinstance(item.get("mention_id"), str)}
     story_ids = {
@@ -204,6 +230,81 @@ def validate(root: Path = ROOT) -> list[str]:
 
     if set(effective_by_id) != set(raw_by_id):
         errors.append("ER1 effective Mention IDs do not exactly cover canonical Mentions")
+
+    derived_rows = [item for item in effective.get("derived_mentions", []) if isinstance(item, Mapping)]
+    if effective.get("derived_mention_count") != len(derived_rows):
+        errors.append("ER1 derived_mention_count does not match derived_mentions length")
+    derived_ids: set[str] = set()
+    sections = _load_sections(root)
+    for row in derived_rows:
+        mention_id = row.get("mention_id")
+        if not isinstance(mention_id, str) or mention_id in derived_ids or mention_id in raw_by_id:
+            errors.append(f"ER1.1 duplicate/invalid derived Mention ID: {mention_id!r}")
+            continue
+        derived_ids.add(mention_id)
+        story_id = str(row.get("entry_id", ""))
+        section = str(row.get("section", ""))
+        if story_id not in story_ids:
+            errors.append(f"ER1.1 derived Mention references unknown Story: {mention_id}")
+        if row.get("derived_only") is not True:
+            errors.append(f"ER1.1 derived Mention is not marked derived_only: {mention_id}")
+        errors.extend(_target_valid(row.get("resolution_target"), people_by_id=people_by_id, candidates_by_id=candidates_by_id, label=f"ER1.1 target {mention_id}"))
+        span = row.get("display_span")
+        if not isinstance(span, Mapping):
+            errors.append(f"ER1.1 derived Mention lacks display_span: {mention_id}")
+            continue
+        offset = span.get("offset")
+        end = span.get("end_offset_exclusive")
+        text = span.get("text")
+        canonical = sections.get((story_id, section), "")
+        if not isinstance(offset, int) or not isinstance(end, int) or not isinstance(text, str) or end <= offset or canonical[offset:end] != text:
+            errors.append(f"ER1.1 derived Mention span does not round-trip: {mention_id}")
+        for evidence_id in row.get("resolution_evidence_ids", []):
+            if evidence_id not in evidence_ids:
+                errors.append(f"ER1.1 derived Mention Evidence does not resolve: {mention_id}/{evidence_id}")
+
+    span_decisions = [item for item in span_decisions_document.get("decisions", []) if isinstance(item, Mapping)]
+    decision_ids: set[str] = set()
+    for decision in span_decisions:
+        decision_id = decision.get("decision_id")
+        if not isinstance(decision_id, str) or decision_id in decision_ids:
+            errors.append(f"ER1.1 duplicate/invalid span decision ID: {decision_id!r}")
+        else:
+            decision_ids.add(decision_id)
+        story_id = str(decision.get("story_id", ""))
+        section = str(decision.get("section", ""))
+        offset = decision.get("span_start")
+        end = decision.get("span_end_exclusive")
+        surface = decision.get("surface")
+        canonical = sections.get((story_id, section), "")
+        if not isinstance(offset, int) or not isinstance(end, int) or not isinstance(surface, str) or canonical[offset:end] != surface:
+            errors.append(f"ER1.1 span decision does not match canonical text: {decision_id}")
+        errors.extend(_target_valid(decision.get("target"), people_by_id=people_by_id, candidates_by_id=candidates_by_id, label=f"ER1.1 decision {decision_id}"))
+        for evidence_id in decision.get("evidence_ids", []):
+            if evidence_id not in evidence_ids:
+                errors.append(f"ER1.1 decision Evidence does not resolve: {decision_id}/{evidence_id}")
+
+    if span_audit.get("auto_fixed_count") != len(span_audit.get("records", [])):
+        errors.append("ER1.1 span audit auto_fixed_count does not match records")
+    if span_audit.get("review_required_count") != 0:
+        errors.append("ER1.1 unexpected unreviewed span audit records require manual review")
+    published_story_ids = _published_story_ids(root)
+    audited_story_ids = {
+        str(item.get("entry_id") or item.get("source_id") or "")
+        for item in effective_rows
+        if str(item.get("entry_id") or item.get("source_id") or "") in published_story_ids
+    }
+    if span_audit.get("published_story_count") != len(published_story_ids):
+        errors.append("ER1.1 span audit published_story_count is stale")
+    if span_audit.get("audited_story_count") != len(audited_story_ids):
+        errors.append("ER1.1 span audit audited_story_count is stale")
+
+    regression_derived = [item for item in derived_rows if item.get("entry_id") == "06-yaliang-017"]
+    expected_surfaces = {"庾太尉", "亮"}
+    if not expected_surfaces.issubset({str(item.get("surface")) for item in regression_derived}):
+        errors.append("ER1.1 06-yaliang-017 lacks the expected 庾太尉/亮 derived spans")
+    if any(item.get("surface") == "亮" and item.get("resolution_target", {}).get("canonical_name") != "庾亮" for item in regression_derived):
+        errors.append("ER1.1 06-yaliang-017 local 亮 span does not resolve to 庾亮")
 
     decisions = [item for item in decisions_document.get("decisions", []) if isinstance(item, Mapping)]
     if decisions_document.get("schema") != 1 or decisions_document.get("stage") != "er1-person-resolution-decisions":

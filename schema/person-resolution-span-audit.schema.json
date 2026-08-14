@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://shishuo-sketch/schema/person-resolution-span-audit.schema.json",
+  "title": "ER1.1 Person Span Audit",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "stage", "published_story_count", "audited_story_count", "auto_fixed_count", "review_required_count", "records"],
+  "properties": {
+    "schema": {"const": 1},
+    "stage": {"const": "er1-1-person-span-audit"},
+    "published_story_count": {"type": "integer", "minimum": 0},
+    "audited_story_count": {"type": "integer", "minimum": 0},
+    "auto_fixed_count": {"type": "integer", "minimum": 0},
+    "review_required_count": {"type": "integer", "minimum": 0},
+    "records": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/record"}
+    }
+  },
+  "$defs": {
+    "record": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["story_id", "section", "mention_id", "proposed_surface", "offset", "end_offset_exclusive", "status", "basis", "evidence_ids"],
+      "properties": {
+        "story_id": {"type": "string", "minLength": 1},
+        "section": {"enum": ["main_text", "liu_annotation"]},
+        "mention_id": {"type": "string", "minLength": 1},
+        "current_surface": {"type": ["string", "null"]},
+        "proposed_surface": {"type": "string", "minLength": 1},
+        "offset": {"type": "integer", "minimum": 0},
+        "end_offset_exclusive": {"type": "integer", "minimum": 1},
+        "identity": {"type": ["object", "null"]},
+        "status": {"enum": ["auto_fixed", "review_required"]},
+        "basis": {"type": "string", "minLength": 1},
+        "evidence_ids": {"type": "array", "uniqueItems": true, "items": {"type": "string"}}
+      }
+    }
+  }
+}

@@ -62,6 +62,20 @@ def validate(root: Path = ROOT) -> list[str]:
         for claim in context["event_background"]:
             if claim["text"]["original"] and not claim["evidence_ids"]:
                 errors.append(f"Scene Context {story_id} background claim lacks Evidence")
+        narrative = context.get("narrative_layers", {})
+        if not isinstance(narrative, dict):
+            errors.append(f"Scene Context {story_id} narrative_layers is missing")
+            continue
+        for layer in ("scene_focus", "off_frame_context", "historical_ground", "resonance"):
+            claims = narrative.get(layer)
+            if not isinstance(claims, list):
+                errors.append(f"Scene Context {story_id} narrative layer is invalid: {layer}")
+                continue
+            for index, claim in enumerate(claims):
+                if not claim.get("evidence_ids"):
+                    errors.append(f"Scene Context {story_id} {layer}[{index}] lacks Evidence")
+        if "relation_ids" in context:
+            errors.append(f"Scene Context {story_id} must not carry Relation IDs")
     return errors
 
 

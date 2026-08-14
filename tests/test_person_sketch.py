@@ -88,6 +88,15 @@ class PersonSketchTests(unittest.TestCase):
                 "reader_ready": ready,
             })
 
+    def test_life_glimpse_is_compact_evidence_backed_and_candidate_status(self) -> None:
+        glimpse = self.bundle["person_sketches"]["person-010"]["life_glimpse"]
+        self.assertGreaterEqual(len(glimpse), 3)
+        self.assertLessEqual(len(glimpse), 5)
+        self.assertTrue(any("庾會" in point["text"]["original"] for point in glimpse))
+        self.assertTrue(all(point["review_status"] == "candidate" for point in glimpse))
+        evidence_ids = {item["id"] for item in self.bundle["evidence"]}
+        self.assertTrue(all(set(point["evidence_ids"]).issubset(evidence_ids) for point in glimpse))
+
     def test_sketch_does_not_redefine_relations_or_story_links(self) -> None:
         for sketch in self.source["records"]:
             self.assertFalse({"relations", "relation_ids", "story_ids", "person_story_ids"}.intersection(sketch))

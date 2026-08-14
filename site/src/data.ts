@@ -122,6 +122,23 @@ function validatePersonSketches(
     })) {
       throw new Error(`Person Sketch ${personId} 的 story_counts 无效`);
     }
+    if (!Array.isArray(sketch.life_glimpse)) {
+      throw new Error(`Person Sketch ${personId} 缺少 一瞥 数据`);
+    }
+    for (const [index, point] of sketch.life_glimpse.entries()) {
+      if (!isRecord(point) || !isReadingPair(point.text) || !Array.isArray(point.evidence_ids) || point.evidence_ids.length === 0 || point.evidence_ids.some((id) => typeof id !== "string" || !evidenceIds.has(id))) {
+        throw new Error(`Person Sketch ${personId} 的 一瞥 ${index} 无效`);
+      }
+      if (point.assertion_status !== "attested" && point.assertion_status !== "reported" && point.assertion_status !== "inferred" && point.assertion_status !== "unknown") {
+        throw new Error(`Person Sketch ${personId} 的 一瞥 assertion_status 无效`);
+      }
+      if (point.review_status !== "candidate" && point.review_status !== "reviewed") {
+        throw new Error(`Person Sketch ${personId} 的 一瞥 review_status 无效`);
+      }
+      if (!Array.isArray(point.story_ids) || point.story_ids.some((id) => typeof id !== "string")) {
+        throw new Error(`Person Sketch ${personId} 的 一瞥 Story 引用无效`);
+      }
+    }
   }
 }
 
@@ -162,8 +179,13 @@ function validateSceneContexts(
     if (!isRecord(scene.date)) throw new Error(`Scene Context ${storyId} 缺少 date`);
     checkPair(`Scene Context ${storyId}.date.label`, scene.date.label);
     checkEvidence(`Scene Context ${storyId}.date`, scene.date.evidence_ids);
-    if (!Array.isArray(scene.places) || !Array.isArray(scene.people_at_scene) || !Array.isArray(scene.unmaterialized_people) || !Array.isArray(scene.positional_context) || !Array.isArray(scene.event_background)) {
+    if (!Array.isArray(scene.places) || !Array.isArray(scene.people_at_scene) || !Array.isArray(scene.unmaterialized_people) || !Array.isArray(scene.positional_context) || !Array.isArray(scene.event_background) || !isRecord(scene.narrative_layers)) {
       throw new Error(`Scene Context ${storyId} 的分层数据不完整`);
+    }
+    for (const key of ["scene_focus", "off_frame_context", "historical_ground", "resonance"]) {
+      const claims = scene.narrative_layers[key];
+      if (!Array.isArray(claims)) throw new Error(`Scene Context ${storyId} 的 ${key} 不完整`);
+      for (const [index, claim] of claims.entries()) checkClaim(`Scene Context ${storyId}.${key} ${index}`, claim);
     }
     for (const [index, place] of scene.places.entries()) {
       if (!isRecord(place)) throw new Error(`Scene Context ${storyId} place ${index} 无效`);

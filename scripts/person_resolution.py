@@ -35,6 +35,9 @@ EFFECTIVE_PATH = Path("data/derived/person-resolution-effective.json")
 QUEUE_PATH = Path("data/derived/person-resolution-review-queue.json")
 COLLISIONS_PATH = Path("data/derived/person-alias-collisions.json")
 REPORT_PATH = Path("docs/person-resolution-review.md")
+SPAN_DECISIONS_PATH = Path("data/annotation/person-resolution-span-decisions.json")
+SPAN_AUDIT_PATH = Path("data/derived/person-resolution-span-audit.json")
+SPAN_REPORT_PATH = Path("docs/person-resolution-span-audit.md")
 
 RESOLUTION_STATUSES = {"resolved", "candidate_for_review", "unresolved"}
 REVIEW_STATUSES = {"candidate", "reviewed", "rejected", "todo"}
@@ -257,6 +260,87 @@ def _full_surface(text: str, offset: int, surface: str) -> str | None:
     return prefix + surface
 
 
+def _span_decision_id(story_id: str, section: str, offset: int, surface: str) -> str:
+    """Return an opaque, stable ID for a curated contextual span rule."""
+
+    payload = f"{story_id}\x1f{section}\x1f{offset}\x1f{surface}".encode("utf-8")
+    return "span-decision-" + hashlib.sha256(payload).hexdigest()[:24]
+
+
+def _derived_mention_id(
+    story_id: str,
+    section: str,
+    offset: int,
+    surface: str,
+    target: Mapping[str, Any],
+) -> str:
+    """Return an opaque ID for a build-time-only contextual Mention."""
+
+    payload = (
+        f"{story_id}\x1f{section}\x1f{offset}\x1f{surface}\x1f{_target_key(target)}"
+    ).encode("utf-8")
+    return "er1-1-mention-" + hashlib.sha256(payload).hexdigest()[:24]
+
+
+def _maximal_semantic_span(
+    mention: Mapping[str, Any],
+    result: Mapping[str, Any],
+    *,
+    text: str,
+    alias_index: Mapping[str, list[Mapping[str, Any]]],
+) -> dict[str, Any] | None:
+    """Find a safe contiguous appellation extension for one canonical Mention.
+
+    This deliberately considers only a one-character surname/title prefix and
+    only when the complete surface is already present in the identity evidence
+    index for the same resolved target.  It is not a general Chinese NER rule.
+    """
+
+    surface = str(mention.get("surface", ""))
+    offset = _mention_offset(mention)
+    target = result.get("target")
+    if not surface or not isinstance(target, Mapping) or result.get("status") != "resolved":
+        return None
+    target_key = _target_key(target)
+    if offset <= 0 or offset + len(surface) > len(text):
+        return None
+    prefix = text[offset - 1:offset]
+    if not re.match(r"[\u3400-\u9fff]", prefix):
+        return None
+    complete = prefix + surface
+    associations = _association_candidates(alias_index, complete)
+    same_target = [
+        item
+        for item in associations
+        if _target_key(item.get("target", {})) == target_key
+        and str(item.get("alias_type", "")) in {
+            "surname_plus_courtesy_name",
+            "office_title",
+            "contextual_title",
+            "posthumous_title",
+            "honorific",
+        }
+    ]
+    if not same_target:
+        return None
+    target_keys = {_target_key(item.get("target", {})) for item in associations}
+    if len(target_keys) != 1:
+        return None
+    return {
+        "offset": offset - 1,
+        "end_offset_exclusive": offset + len(surface),
+        "text": complete,
+        "basis": "maximal_semantic_person_span",
+        "status": "safe",
+        "evidence_ids": sorted({
+            str(evidence_id)
+            for item in same_target
+            for evidence_id in item.get("evidence_ids", [])
+            if isinstance(evidence_id, str)
+        }),
+    }
+
+
 def _target_names(targets: Iterable[Mapping[str, Any]]) -> list[str]:
     return [str(target.get("canonical_name", "")) for target in targets]
 
@@ -463,6 +547,7 @@ def _local_context_targets(
     associations: list[Mapping[str, Any]],
     alias_index: Mapping[str, list[Mapping[str, Any]]],
     prior_targets: list[Mapping[str, Any]],
+    prior_entities: list[Mapping[str, Any]],
     cues_by_target: Mapping[str, list[Mapping[str, str]]],
 ) -> tuple[list[dict[str, Any]], list[str]]:
     """Find only strong same-Story signals for a colliding surface."""
@@ -523,6 +608,29 @@ def _local_context_targets(
             selected[key] = _target_copy(prior)
             signals.append("story_local_antecedent")
 
+    # A short one- or two-character reference may follow a complete
+    # appellation in the same Story-local section.  This is intentionally
+    # narrower than a global alias lookup: the prior record must itself carry
+    # a complete semantic span, and the target's canonical name must end with
+    # the short surface.  If multiple local entities fit, the caller receives
+    # candidate_for_review rather than a guessed identity.
+    if not associations and len(surface) <= 2:
+        for prior in prior_entities:
+            target = prior.get("target")
+            if not isinstance(target, Mapping):
+                continue
+            prior_surface = str(prior.get("span_surface") or prior.get("surface") or "")
+            canonical_name = str(target.get("canonical_name", ""))
+            if (
+                prior_surface
+                and prior_surface != surface
+                and len(prior_surface) > len(surface)
+                and canonical_name.endswith(surface)
+            ):
+                key = _target_key(target)
+                selected[key] = _target_copy(target)
+                signals.append("story_local_short_form_coreference")
+
     return sorted(selected.values(), key=_target_sort_key), sorted(set(signals))
 
 
@@ -533,6 +641,7 @@ def resolve_mention(
     alias_index: Mapping[str, list[Mapping[str, Any]]],
     targets_by_key: Mapping[str, Mapping[str, Any]],
     prior_targets: list[Mapping[str, Any]] = (),
+    prior_entities: list[Mapping[str, Any]] = (),
     cues_by_target: Mapping[str, list[Mapping[str, str]]] | None = None,
     decision: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
@@ -563,6 +672,7 @@ def resolve_mention(
         associations,
         alias_index,
         list(prior_targets),
+        list(prior_entities),
         cues_by_target,
     )
     reasons: list[str] = []
@@ -714,7 +824,12 @@ def apply_reviewed_decision(
     }
 
 
-def _effective_mention(mention: Mapping[str, Any], result: Mapping[str, Any]) -> dict[str, Any]:
+def _effective_mention(
+    mention: Mapping[str, Any],
+    result: Mapping[str, Any],
+    *,
+    display_span: Mapping[str, Any] | None = None,
+) -> dict[str, Any]:
     effective = dict(mention)
     target = result.get("target")
     status = str(result.get("status"))
@@ -729,6 +844,19 @@ def _effective_mention(mention: Mapping[str, Any], result: Mapping[str, Any]) ->
     effective["resolution_decision_source"] = str(result.get("decision_source", "automatic"))
     effective["resolution_evidence_ids"] = sorted({str(item) for item in result.get("resolution_evidence_ids", []) if isinstance(item, str)})
     effective["resolution_note"] = str(result.get("review_note", ""))
+    if isinstance(display_span, Mapping):
+        effective["display_span"] = {
+            "offset": int(display_span["offset"]),
+            "end_offset_exclusive": int(display_span["end_offset_exclusive"]),
+            "text": str(display_span["text"]),
+            "basis": str(display_span.get("basis", "maximal_semantic_person_span")),
+            "status": str(display_span.get("status", "safe")),
+            "evidence_ids": sorted({
+                str(item)
+                for item in display_span.get("evidence_ids", [])
+                if isinstance(item, str)
+            }),
+        }
     if isinstance(result.get("resolution_mode"), str) and result.get("resolution_mode"):
         effective["resolution_mode"] = str(result["resolution_mode"])
     if isinstance(result.get("review_conflict"), Mapping):
@@ -982,6 +1110,275 @@ def _render_report(
     return "\n".join(lines)
 
 
+def _span_decisions(root: Path) -> list[Mapping[str, Any]]:
+    if not (root / SPAN_DECISIONS_PATH).is_file():
+        return []
+    document = read_json(root, SPAN_DECISIONS_PATH)
+    decisions = document.get("decisions", [])
+    return [
+        item
+        for item in decisions
+        if isinstance(item, Mapping)
+    ]
+
+
+def _validate_span_decision(
+    decision: Mapping[str, Any],
+    *,
+    sections: Mapping[tuple[str, str], str],
+    targets_by_key: Mapping[str, Mapping[str, Any]],
+) -> tuple[str, str, int, int, str, dict[str, Any]]:
+    story_id = str(decision.get("story_id", ""))
+    section = str(decision.get("section", "main_text"))
+    offset = decision.get("span_start")
+    end = decision.get("span_end_exclusive")
+    surface = decision.get("surface")
+    if not story_id or section != "main_text" or not isinstance(offset, int) or not isinstance(end, int) or not isinstance(surface, str):
+        raise ValueError(f"invalid ER1.1 span decision: {decision.get('decision_id')}")
+    text = sections.get((story_id, section), "")
+    if offset < 0 or end <= offset or end > len(text) or text[offset:end] != surface:
+        raise ValueError(f"ER1.1 span decision does not match source text: {decision.get('decision_id')}")
+    target = decision.get("target")
+    if not isinstance(target, Mapping):
+        raise ValueError(f"ER1.1 span decision lacks a target: {decision.get('decision_id')}")
+    normalized = _target_copy(target)
+    known = targets_by_key.get(_target_key(normalized))
+    if known is None or known.get("canonical_name") != normalized.get("canonical_name"):
+        raise ValueError(f"ER1.1 span decision target is unknown: {decision.get('decision_id')}")
+    return story_id, section, offset, end, surface, _target_copy(known)
+
+
+def _derived_contextual_mentions(
+    root: Path,
+    *,
+    sections: Mapping[tuple[str, str], str],
+    targets_by_key: Mapping[str, Mapping[str, Any]],
+    canonical_mentions: list[Mapping[str, Any]],
+) -> list[dict[str, Any]]:
+    """Project only explicitly seeded high-confidence local spans.
+
+    These records are kept in a separate effective ``derived_mentions`` list;
+    canonical Mention JSON is never rewritten.  A seed may declare a bounded
+    short-form continuation (for example 庾太尉 → 亮), which is searched only
+    in the same Story/section and never promoted to a global alias.
+    """
+
+    decisions = sorted(
+        _span_decisions(root),
+        key=lambda item: (
+            str(item.get("story_id", "")),
+            str(item.get("section", "")),
+            int(item.get("span_start", 10**9)) if isinstance(item.get("span_start"), int) else 10**9,
+            str(item.get("decision_id", "")),
+        ),
+    )
+    canonical_ranges: dict[tuple[str, str], list[tuple[int, int]]] = defaultdict(list)
+    for mention in canonical_mentions:
+        story_id = str(mention.get("entry_id") or mention.get("source_id") or "")
+        section = str(mention.get("section", "main_text"))
+        offset = _mention_offset(mention)
+        surface = str(mention.get("surface", ""))
+        if surface:
+            canonical_ranges[(story_id, section)].append((offset, offset + len(surface)))
+
+    derived: list[dict[str, Any]] = []
+    seeded_short_forms: list[tuple[Mapping[str, Any], str, str, int, int, str, dict[str, Any], str]] = []
+    for decision in decisions:
+        story_id, section, offset, end, surface, target = _validate_span_decision(
+            decision,
+            sections=sections,
+            targets_by_key=targets_by_key,
+        )
+        decision_id = str(decision.get("decision_id") or _span_decision_id(story_id, section, offset, surface))
+        evidence_ids = sorted({
+            str(item)
+            for item in decision.get("evidence_ids", [])
+            if isinstance(item, str)
+        })
+        mention_id = _derived_mention_id(story_id, section, offset, surface, target)
+        record = {
+            "mention_id": mention_id,
+            "entry_id": story_id,
+            "source_id": story_id,
+            "source": "shishuo",
+            "section": section,
+            "surface": surface,
+            "alias_type": str(decision.get("alias_type", "contextual_title")),
+            "resolution_mode": str(decision.get("resolution_mode", "contextual")),
+            "confidence": "high",
+            "person_id": target.get("person_id") if target.get("target_kind") == "production_person" else None,
+            "candidate_person_ids": [str(target["person_id"])] if target.get("target_kind") == "production_person" else [],
+            "context_identity_hits": [str(target.get("canonical_name", ""))],
+            "context": sections[(story_id, section)],
+            "entry_relative_start": offset,
+            "entry_relative_end_exclusive": end,
+            "source_section_metadata": {},
+            "evidence": {"section_offset": offset, "evidence_ids": evidence_ids},
+            "anchor": {"text": surface, "section": section, "offset": offset},
+            "resolution_status": "resolved",
+            "resolution_target": target,
+            "resolution_candidates": [target],
+            "resolution_review_status": str(decision.get("review_status", "candidate")),
+            "resolution_decision_source": "automatic",
+            "resolution_evidence_ids": evidence_ids,
+            "resolution_note": str(decision.get("review_note", "")),
+            "resolution_method": "er1_1_contextual_span_seed",
+            "assertion_status": str(decision.get("assertion_status", "attested")),
+            "review_status": str(decision.get("review_status", "candidate")),
+            "derived_only": True,
+            "span_decision_id": decision_id,
+            "display_span": {
+                "offset": offset,
+                "end_offset_exclusive": end,
+                "text": surface,
+                "basis": "er1_1_contextual_span_seed",
+                "status": "safe",
+                "evidence_ids": evidence_ids,
+            },
+        }
+        derived.append(record)
+        for short_surface in decision.get("coreference_surfaces", []):
+            if isinstance(short_surface, str) and short_surface:
+                seeded_short_forms.append((decision, story_id, section, offset, end, short_surface, target, mention_id))
+
+    existing_ranges = {
+        key: list(ranges)
+        for key, ranges in canonical_ranges.items()
+    }
+    for record in derived:
+        key = (str(record["entry_id"]), str(record["section"]))
+        existing_ranges.setdefault(key, []).append((int(record["display_span"]["offset"]), int(record["display_span"]["end_offset_exclusive"])))
+
+    for decision, story_id, section, seed_offset, seed_end, short_surface, target, antecedent_id in seeded_short_forms:
+        text = sections.get((story_id, section), "")
+        cursor = seed_end
+        while cursor < len(text):
+            offset = text.find(short_surface, cursor)
+            if offset < 0:
+                break
+            end = offset + len(short_surface)
+            cursor = end
+            if any(start < end and offset < finish for start, finish in existing_ranges.get((story_id, section), [])):
+                continue
+            mention_id = _derived_mention_id(story_id, section, offset, short_surface, target)
+            evidence_ids = sorted({
+                str(item)
+                for item in decision.get("evidence_ids", [])
+                if isinstance(item, str)
+            })
+            record = {
+                "mention_id": mention_id,
+                "entry_id": story_id,
+                "source_id": story_id,
+                "source": "shishuo",
+                "section": section,
+                "surface": short_surface,
+                "alias_type": "textual_shorthand",
+                "resolution_mode": "contextual",
+                "confidence": "high",
+                "person_id": target.get("person_id") if target.get("target_kind") == "production_person" else None,
+                "candidate_person_ids": [str(target["person_id"])] if target.get("target_kind") == "production_person" else [],
+                "context_identity_hits": [str(target.get("canonical_name", ""))],
+                "context": text,
+                "entry_relative_start": offset,
+                "entry_relative_end_exclusive": end,
+                "source_section_metadata": {},
+                "evidence": {"section_offset": offset, "evidence_ids": evidence_ids},
+                "anchor": {"text": short_surface, "section": section, "offset": offset},
+                "resolution_status": "resolved",
+                "resolution_target": target,
+                "resolution_candidates": [target],
+                "resolution_review_status": str(decision.get("review_status", "candidate")),
+                "resolution_decision_source": "automatic",
+                "resolution_evidence_ids": evidence_ids,
+                "resolution_note": "同一故事中完整称谓之后的保守短称承接。",
+                "resolution_method": "er1_1_story_local_coreference",
+                "assertion_status": "attested",
+                "review_status": str(decision.get("review_status", "candidate")),
+                "derived_only": True,
+                "span_decision_id": str(decision.get("decision_id") or _span_decision_id(story_id, section, seed_offset, str(decision.get("surface", "")))),
+                "coreference_antecedent_mention_id": antecedent_id,
+                "display_span": {
+                    "offset": offset,
+                    "end_offset_exclusive": end,
+                    "text": short_surface,
+                    "basis": "story_local_coreference",
+                    "status": "safe",
+                    "evidence_ids": evidence_ids,
+                },
+            }
+            derived.append(record)
+            existing_ranges.setdefault((story_id, section), []).append((offset, end))
+
+    return sorted(
+        derived,
+        key=lambda item: (
+            str(item.get("entry_id", "")),
+            str(item.get("section", "")),
+            int(item.get("entry_relative_start", 10**9)),
+            str(item.get("mention_id", "")),
+        ),
+    )
+
+
+def _span_audit_document(
+    effective_mentions: list[Mapping[str, Any]],
+    derived_mentions: list[Mapping[str, Any]],
+    published_ids: set[str],
+) -> dict[str, Any]:
+    records: list[dict[str, Any]] = []
+    for mention in effective_mentions:
+        story_id = str(mention.get("entry_id") or mention.get("source_id") or "")
+        if story_id not in published_ids:
+            continue
+        span = mention.get("display_span")
+        surface = str(mention.get("surface", ""))
+        if not isinstance(span, Mapping) or str(span.get("text", "")) == surface:
+            continue
+        records.append({
+            "story_id": story_id,
+            "section": str(mention.get("section", "main_text")),
+            "mention_id": str(mention.get("mention_id", "")),
+            "current_surface": surface,
+            "proposed_surface": str(span.get("text", "")),
+            "offset": int(span.get("offset", 0)),
+            "end_offset_exclusive": int(span.get("end_offset_exclusive", 0)),
+            "identity": mention.get("resolution_target"),
+            "status": "auto_fixed",
+            "basis": str(span.get("basis", "maximal_semantic_person_span")),
+            "evidence_ids": list(span.get("evidence_ids", [])),
+        })
+    for mention in derived_mentions:
+        records.append({
+            "story_id": str(mention.get("entry_id", "")),
+            "section": str(mention.get("section", "main_text")),
+            "mention_id": str(mention.get("mention_id", "")),
+            "current_surface": None,
+            "proposed_surface": str(mention.get("surface", "")),
+            "offset": int(mention.get("entry_relative_start", 0)),
+            "end_offset_exclusive": int(mention.get("entry_relative_end_exclusive", 0)),
+            "identity": mention.get("resolution_target"),
+            "status": "auto_fixed",
+            "basis": str(mention.get("resolution_method", "er1_1_contextual_span_seed")),
+            "evidence_ids": list(mention.get("resolution_evidence_ids", [])),
+        })
+    records.sort(key=lambda item: (item["story_id"], item["section"], item["offset"], item["mention_id"]))
+    audited_story_ids = {
+        str(item.get("entry_id") or item.get("source_id") or "")
+        for item in effective_mentions
+        if str(item.get("entry_id") or item.get("source_id") or "") in published_ids
+    }
+    return {
+        "schema": 1,
+        "stage": "er1-1-person-span-audit",
+        "published_story_count": len(published_ids),
+        "audited_story_count": len(audited_story_ids),
+        "auto_fixed_count": len(records),
+        "review_required_count": 0,
+        "records": records,
+    }
+
+
 def build(root: Path) -> dict[str, Any]:
     people = read_json(root, PEOPLE_PATH).get("people", [])
     aliases = read_json(root, ALIASES_PATH).get("aliases", [])
@@ -1043,6 +1440,7 @@ def build(root: Path) -> dict[str, Any]:
                 if item.get("surface") == mention.get("surface")
                 and isinstance(item.get("target"), Mapping)
             ],
+            prior_entities=prior,
             cues_by_target=cues_by_target,
             decision=None,
         )
@@ -1059,18 +1457,27 @@ def build(root: Path) -> dict[str, Any]:
                     if item.get("surface") == mention.get("surface")
                     and isinstance(item.get("target"), Mapping)
                 ],
+                prior_entities=prior,
                 cues_by_target=cues_by_target,
                 decision=decision,
             )
             result = apply_reviewed_decision(automatic_result, reviewed_result)
-        effective = _effective_mention(mention, result)
+        display_span = _maximal_semantic_span(
+            mention,
+            result,
+            text=text,
+            alias_index=alias_index,
+        )
+        effective = _effective_mention(mention, result, display_span=display_span)
         effective_mentions.append(effective)
         if result.get("status") == "resolved" and isinstance(result.get("target"), Mapping):
             local_state[_local_context_key(mention)].append({
                 "offset": _mention_offset(mention),
                 "surface": mention.get("surface"),
+                "span_surface": display_span.get("text") if isinstance(display_span, Mapping) else mention.get("surface"),
                 "target": result["target"],
                 "decision_source": result.get("decision_source"),
+                "mention_id": mention.get("mention_id"),
             })
         if story_id in published_ids and (
             result.get("status") != "resolved"
@@ -1087,6 +1494,12 @@ def build(root: Path) -> dict[str, Any]:
             )
 
     effective_mentions.sort(key=lambda item: str(item.get("mention_id", "")))
+    derived_mentions = _derived_contextual_mentions(
+        root,
+        sections=sections,
+        targets_by_key=targets_by_key,
+        canonical_mentions=effective_mentions,
+    )
     review_records.sort(key=lambda item: (
         str(item.get("story_id", "")),
         str(item.get("section", "")),
@@ -1105,12 +1518,20 @@ def build(root: Path) -> dict[str, Any]:
     effective_document = {
         "schema": 1,
         "stage": "er1-effective-person-resolution",
-        "generated_from": [str(MENTIONS_PATH), str(ALIASES_PATH), str(IDENTITY_CANDIDATES_PATH), str(DECISIONS_PATH)],
+        "generated_from": [
+            str(MENTIONS_PATH),
+            str(ALIASES_PATH),
+            str(IDENTITY_CANDIDATES_PATH),
+            str(DECISIONS_PATH),
+            str(SPAN_DECISIONS_PATH),
+        ],
         "source_mentions_sha256": sha256_file(root / MENTIONS_PATH),
         "decision_sha256": sha256_file(root / DECISIONS_PATH),
         "mention_count": len(effective_mentions),
+        "derived_mention_count": len(derived_mentions),
         "counts": counts,
         "mentions": effective_mentions,
+        "derived_mentions": derived_mentions,
     }
     collision_document = _collision_document(alias_index, effective_mentions, published_ids)
     queue_document = {
@@ -1128,6 +1549,26 @@ def build(root: Path) -> dict[str, Any]:
     write_json(root, EFFECTIVE_PATH, effective_document)
     write_json(root, QUEUE_PATH, queue_document)
     write_json(root, COLLISIONS_PATH, collision_document)
+    span_audit = _span_audit_document(effective_mentions, derived_mentions, published_ids)
+    write_json(root, SPAN_AUDIT_PATH, span_audit)
+    span_lines = [
+        "# Person span audit",
+        "",
+        "ER1.1 keeps canonical Mention anchors immutable. This report lists the build-time span/coreference projection used for reader segmentation; derived records are not canonical Mentions or new Persons.",
+        "",
+        f"- published Stories audited: {span_audit['audited_story_count']} / {span_audit['published_story_count']}",
+        f"- high-confidence repaired/derived spans: {span_audit['auto_fixed_count']}",
+        f"- review-required partial-span cases: {span_audit['review_required_count']}",
+        "",
+    ]
+    for item in span_audit["records"]:
+        identity = item.get("identity") or {}
+        span_lines.append(
+            f"- `{item['story_id']}` · `{item['section']}` · `{item['proposed_surface']}` · "
+            f"{identity.get('canonical_name', '未定')} · `{item['basis']}` · {item['status']}"
+        )
+    (root / SPAN_REPORT_PATH).parent.mkdir(parents=True, exist_ok=True)
+    (root / SPAN_REPORT_PATH).write_text("\n".join(span_lines) + "\n", encoding="utf-8")
     (root / REPORT_PATH).parent.mkdir(parents=True, exist_ok=True)
     (root / REPORT_PATH).write_text(report, encoding="utf-8")
     return effective_document
@@ -1139,5 +1580,17 @@ def load_effective_mentions(root: Path) -> list[dict[str, Any]]:
         document = read_json(root, EFFECTIVE_PATH)
         mentions = document.get("mentions")
         if isinstance(mentions, list):
-            return [dict(item) for item in mentions if isinstance(item, Mapping)]
+            combined = [dict(item) for item in mentions if isinstance(item, Mapping)]
+            derived = document.get("derived_mentions", [])
+            if isinstance(derived, list):
+                combined.extend(dict(item) for item in derived if isinstance(item, Mapping))
+            return sorted(
+                combined,
+                key=lambda item: (
+                    str(item.get("entry_id") or item.get("source_id") or ""),
+                    str(item.get("section", "")),
+                    _mention_offset(item),
+                    str(item.get("mention_id", "")),
+                ),
+            )
     return [dict(item) for item in read_json(root, MENTIONS_PATH).get("mentions", []) if isinstance(item, Mapping)]

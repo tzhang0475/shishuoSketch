@@ -23,7 +23,8 @@
         "person_id": {"type": "string"},
         "review_status": {"enum": ["candidate", "reviewed"]},
         "identity": {"$ref": "#/$defs/identity"},
-        "profile_evidence_ids": {"type": "array", "items": {"type": "string"}, "uniqueItems": true}
+        "profile_evidence_ids": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+        "life_glimpse": {"type": "array", "items": {"$ref": "#/$defs/life_glimpse"}}
       }
     },
     "identity": {
@@ -37,6 +38,18 @@
         "identity_roles": {"type": "array", "items": {"type": "string"}},
         "brief_intro": {"type": ["string", "null"], "maxLength": 120},
         "evidence_ids": {"type": "array", "items": {"type": "string"}, "uniqueItems": true}
+      }
+    },
+    "life_glimpse": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["text", "assertion_status", "review_status", "evidence_ids", "story_ids"],
+      "properties": {
+        "text": {"type": "string", "minLength": 1},
+        "assertion_status": {"enum": ["attested", "reported", "inferred", "unknown"]},
+        "review_status": {"enum": ["candidate", "reviewed"]},
+        "evidence_ids": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+        "story_ids": {"type": "array", "items": {"type": "string"}, "uniqueItems": true}
       }
     }
   }

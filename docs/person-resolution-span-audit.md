@@ -1,0 +1,24 @@
+# Person span audit
+
+ER1.1 keeps canonical Mention anchors immutable. This report lists the build-time span/coreference projection used for reader segmentation; derived records are not canonical Mentions or new Persons.
+
+- published Stories audited: 60 / 60
+- high-confidence repaired/derived spans: 16
+- review-required partial-span cases: 0
+
+- `02-yanyu-069` · `main_text` · `劉真長` · 劉惔 · `maximal_semantic_person_span` · auto_fixed
+- `05-fangzheng-031` · `liu_annotation` · `温太真` · 温嶠 · `maximal_semantic_person_span` · auto_fixed
+- `05-fangzheng-051` · `main_text` · `劉真長` · 劉惔 · `maximal_semantic_person_span` · auto_fixed
+- `05-fangzheng-051` · `main_text` · `王仲祖` · 王濛 · `maximal_semantic_person_span` · auto_fixed
+- `05-fangzheng-058` · `main_text` · `王文度` · 王坦之 · `maximal_semantic_person_span` · auto_fixed
+- `06-yaliang-017` · `main_text` · `庾太尉` · 庾亮 · `er1_1_contextual_span_seed` · auto_fixed
+- `06-yaliang-017` · `main_text` · `亮` · 庾亮 · `er1_1_story_local_coreference` · auto_fixed
+- `06-yaliang-017` · `main_text` · `温太真` · 温嶠 · `maximal_semantic_person_span` · auto_fixed
+- `06-yaliang-017` · `main_text` · `亮` · 庾亮 · `er1_1_story_local_coreference` · auto_fixed
+- `07-shijian-018` · `main_text` · `王仲祖` · 王濛 · `maximal_semantic_person_span` · auto_fixed
+- `09-pinzao-022` · `main_text` · `庾元規` · 庾亮 · `maximal_semantic_person_span` · auto_fixed
+- `09-pinzao-036` · `main_text` · `王仲祖` · 王濛 · `maximal_semantic_person_span` · auto_fixed
+- `23-rendan-026` · `main_text` · `温太真` · 温嶠 · `maximal_semantic_person_span` · auto_fixed
+- `23-rendan-038` · `main_text` · `王文度` · 王坦之 · `maximal_semantic_person_span` · auto_fixed
+- `26-qingdi-002` · `main_text` · `庾元規` · 庾亮 · `maximal_semantic_person_span` · auto_fixed
+- `27-jiajue-008` · `main_text` · `庾元規` · 庾亮 · `maximal_semantic_person_span` · auto_fixed

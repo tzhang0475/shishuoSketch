@@ -147,6 +147,23 @@ class SC111InlineMentionTests(unittest.TestCase):
             ],
         )
 
+    def test_yaliang_017_uses_maximal_person_spans_and_local_coreference(self) -> None:
+        story = self.story("06-yaliang-017")
+        segments = self.person_segments(story["reading"]["main_text"]["segments"])
+        visible = [item["display"]["original"] for item in segments]
+        self.assertIn("庾太尉", visible)
+        self.assertIn("温太真", visible)
+        self.assertEqual(visible.count("亮"), 2)
+        self.assertNotIn("太真", visible)
+        by_surface = {item["display"]["original"]: item for item in segments if item["display"]["original"] != "亮"}
+        self.assertEqual(by_surface["庾太尉"]["person_id"], "person-010")
+        self.assertEqual(by_surface["温太真"]["person_id"], "person-013")
+        for item in segments:
+            if item["display"]["original"] == "亮":
+                mention = self.mentions[item["mention_id"]]
+                self.assertEqual(mention["resolution_method"], "er1_1_story_local_coreference")
+                self.assertEqual(mention["resolution_target"]["canonical_name"], "庾亮")
+
     def test_segmented_original_text_preserves_canonical_characters(self) -> None:
         for story in self.bundle["stories"]:
             rendered = "".join(

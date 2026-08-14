@@ -72,6 +72,15 @@ export interface PersonSketch {
     liu_annotation_only: number;
     reader_ready: number;
   };
+  life_glimpse: PersonSketchLifeGlimpse[];
+}
+
+export interface PersonSketchLifeGlimpse {
+  text: ReadingPair;
+  assertion_status: AssertionStatus;
+  review_status: "candidate" | "reviewed";
+  evidence_ids: string[];
+  story_ids: string[];
 }
 
 export interface Story {
@@ -248,6 +257,18 @@ export interface Mention {
   resolution_decision_source?: "automatic" | "human_review";
   resolution_evidence_ids?: string[];
   resolution_note?: string;
+  display_span?: {
+    offset: number;
+    end_offset_exclusive: number;
+    text: string;
+    basis: string;
+    status: "safe" | "review_required";
+    evidence_ids: string[];
+  };
+  derived_only?: boolean;
+  resolution_method?: string;
+  span_decision_id?: string;
+  coreference_antecedent_mention_id?: string;
 }
 
 export interface Relation {
@@ -375,6 +396,7 @@ export interface ReadingUiLabels {
   person_sketch_reviewed: ReadingPair;
   person_sketch_main_story_count: ReadingPair;
   person_sketch_annotation_story_count: ReadingPair;
+  person_sketch_life_glimpse: ReadingPair;
   story_people_heading: ReadingPair;
   primary_story_label: ReadingPair;
   annotation_story_label: ReadingPair;
@@ -387,6 +409,10 @@ export interface ReadingUiLabels {
   scene_people_heading: ReadingPair;
   scene_position_heading: ReadingPair;
   scene_background_heading: ReadingPair;
+  scene_focus_heading: ReadingPair;
+  scene_off_frame_heading: ReadingPair;
+  scene_ground_heading: ReadingPair;
+  scene_resonance_heading: ReadingPair;
   scene_evidence_heading: ReadingPair;
   scene_unknown: ReadingPair;
   scene_not_materialized: ReadingPair;
@@ -459,6 +485,12 @@ export interface StorySceneContext {
   unmaterialized_people: StorySceneUnmaterializedPerson[];
   positional_context: StoryScenePosition[];
   event_background: SceneClaim[];
+  narrative_layers: {
+    scene_focus: SceneClaim[];
+    off_frame_context: SceneClaim[];
+    historical_ground: SceneClaim[];
+    resonance: SceneClaim[];
+  };
   evidence_ids: string[];
   notes: ReadingPair[];
 }

@@ -75,7 +75,7 @@
                         "kind": {"enum": ["annotation_marker"]},
                         "mention_id": {"type": "string"},
                         "annotation_id": {"type": ["string", "null"]},
-                        "reason": {"enum": ["unsafe_anchor", "overlapping_anchor", "display_conversion_context_mismatch", "unsafe_insertion_point", "insertion_inside_person_mention", "marker_projection_failed"]},
+        "reason": {"enum": ["unsafe_anchor", "overlapping_anchor", "duplicate_display_span", "display_conversion_context_mismatch", "unsafe_insertion_point", "insertion_inside_person_mention", "marker_projection_failed"]},
                         "section": {"enum": ["main_text", "liu_annotation"]}
                       }
                     }
@@ -100,7 +100,12 @@
           "resolution_review_status": {"enum": ["candidate", "reviewed", "rejected", "todo"]},
           "resolution_decision_source": {"enum": ["automatic", "human_review"]},
           "resolution_evidence_ids": {"type": "array", "items": {"type": "string"}},
-          "resolution_note": {"type": "string"}
+          "resolution_note": {"type": "string"},
+          "display_span": {"type": "object"},
+          "derived_only": {"type": "boolean"},
+          "resolution_method": {"type": "string"},
+          "span_decision_id": {"type": "string"},
+          "coreference_antecedent_mention_id": {"type": "string"}
         }
       }
     },
@@ -115,7 +120,7 @@
     },
     "scene_contexts": {
       "type": "object",
-      "additionalProperties": {"type": "object", "required": ["story_id", "review_status", "date", "places", "people_at_scene", "unmaterialized_people", "positional_context", "event_background", "evidence_ids", "notes"]}
+      "additionalProperties": {"type": "object", "required": ["story_id", "review_status", "date", "places", "people_at_scene", "unmaterialized_people", "positional_context", "event_background", "narrative_layers", "evidence_ids", "notes"]}
     },
     "story_chain": {
       "type": "object",
@@ -227,7 +232,8 @@
             "liu_annotation_only": {"type": "integer", "minimum": 0},
             "reader_ready": {"type": "integer", "minimum": 0}
           }
-        }
+        },
+        "life_glimpse": {"type": "array"}
       }
     }
   }

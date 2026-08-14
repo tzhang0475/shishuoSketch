@@ -20,7 +20,7 @@ SC1_PATH = Path("data/derived/sc1-site.json")
 ROLE_LABELS = {
     "present": ("在場", "在场"),
     "discussed": ("被討論", "被讨论"),
-    "referenced_in_context": ("背景提及", "背景提及"),
+    "referenced_in_context": ("畫外", "画外"),
     "unknown": ("位置未詳", "位置未详"),
 }
 
@@ -227,6 +227,23 @@ def project(
                 }
             )
 
+        narrative_source = record.get("narrative_layers", {})
+        if not isinstance(narrative_source, Mapping):
+            narrative_source = {}
+
+        def claims_for(key: str, fallback: list[Mapping[str, Any]] | None = None) -> list[dict[str, Any]]:
+            value = narrative_source.get(key)
+            if not isinstance(value, list):
+                value = fallback or []
+            return [_claim_projection(claim, converter) for claim in value if isinstance(claim, Mapping)]
+
+        narrative_layers = {
+            "scene_focus": claims_for("scene_focus"),
+            "off_frame_context": claims_for("off_frame_context"),
+            "historical_ground": claims_for("historical_ground", record.get("event_background", [])),
+            "resonance": claims_for("resonance"),
+        }
+
         contexts[story_id] = {
             "story_id": story_id,
             "review_status": record["review_status"],
@@ -252,6 +269,7 @@ def project(
             "unmaterialized_people": projected_unmaterialized,
             "positional_context": projected_positions,
             "event_background": [_claim_projection(claim, converter) for claim in record["event_background"]],
+            "narrative_layers": narrative_layers,
             "evidence_ids": list(record.get("evidence_ids", [])),
             "notes": [pair(str(note), converter) for note in record.get("notes", [])],
         }

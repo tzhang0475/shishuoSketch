@@ -128,6 +128,26 @@ def _story_counts(
     }
 
 
+def _life_glimpse_rows(
+    curated: Mapping[str, Any],
+    converter: OpenCC,
+) -> list[dict[str, Any]]:
+    rows: list[dict[str, Any]] = []
+    for point in curated.get("life_glimpse", []):
+        if not isinstance(point, Mapping):
+            continue
+        rows.append(
+            {
+                "text": _pair(str(point.get("text", "")), converter),
+                "assertion_status": str(point.get("assertion_status", "unknown")),
+                "review_status": str(point.get("review_status", "candidate")),
+                "evidence_ids": sorted({str(item) for item in point.get("evidence_ids", []) if isinstance(item, str)}),
+                "story_ids": sorted({str(item) for item in point.get("story_ids", []) if isinstance(item, str)}),
+            }
+        )
+    return rows
+
+
 def _alias_rows(
     person: Mapping[str, Any],
     aliases_by_id: Mapping[str, Mapping[str, Any]],
@@ -296,5 +316,6 @@ def build_person_sketches(
                 converter,
             ),
             "story_counts": _story_counts(person_id, person_story_index),
+            "life_glimpse": _life_glimpse_rows(curated, converter),
         }
     return result

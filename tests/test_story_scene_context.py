@@ -58,6 +58,33 @@ class StorySceneContextTests(unittest.TestCase):
             for claim in context["event_background"]:
                 self.assertTrue(claim["evidence_ids"])
 
+    def test_ink_wash_layers_and_yaliang_017_resonance_are_evidence_backed(self) -> None:
+        context = self.derived["contexts"]["06-yaliang-017"]
+        self.assertEqual(
+            set(context["narrative_layers"]),
+            {"scene_focus", "off_frame_context", "historical_ground", "resonance"},
+        )
+        self.assertTrue(context["narrative_layers"]["scene_focus"])
+        self.assertTrue(context["narrative_layers"]["off_frame_context"])
+        resonance = context["narrative_layers"]["resonance"]
+        self.assertTrue(any("十九" in item["text"]["original"] for item in resonance))
+        self.assertTrue(any("遇害" in item["text"]["original"] for item in resonance))
+        for layer in context["narrative_layers"].values():
+            for claim in layer:
+                self.assertTrue(claim["evidence_ids"])
+                self.assertEqual(claim["review_status"], "candidate")
+
+    def test_reader_labels_use_ink_wash_vocabulary(self) -> None:
+        labels = self.bundle["ui"]
+        self.assertEqual(labels["scene_focus_heading"]["original"], "入畫")
+        self.assertEqual(labels["scene_off_frame_heading"]["original"], "畫外")
+        self.assertEqual(labels["scene_ground_heading"]["original"], "底色")
+        self.assertEqual(labels["scene_resonance_heading"]["original"], "餘韻")
+        self.assertEqual(labels["person_sketch_life_glimpse"]["original"], "一瞥")
+        app = (ROOT / "site/src/App.tsx").read_text(encoding="utf-8")
+        for phrase in ("这一幕里", "背景提及", "人物一瞥"):
+            self.assertNotIn(phrase, app)
+
     def test_age_derivation_preserves_exact_and_range_uncertainty(self) -> None:
         self.assertEqual(
             derive_age_range(372, 372, 320, 320),

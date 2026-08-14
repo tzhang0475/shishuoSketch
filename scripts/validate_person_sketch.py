@@ -38,6 +38,7 @@ def validate_source(root: Path = ROOT) -> list[str]:
         people = read_json(root, "data/people.json").get("people", [])
         aliases = read_json(root, "data/aliases.json").get("aliases", [])
         evidence = read_json(root, "data/evidence/wp1-evidence.json").get("records", [])
+        sc1 = read_json(root, "data/derived/sc1-site.json")
         schema = read_json(root, "schema/person-sketch.schema.json")
     except (OSError, ValueError, KeyError) as exc:
         return [f"Person Sketch cannot read required input: {exc}"]
@@ -67,6 +68,11 @@ def validate_source(root: Path = ROOT) -> list[str]:
         for item in evidence
         if isinstance(item, Mapping) and isinstance(item.get("id"), str)
     }
+    evidence_ids.update(
+        str(item.get("id"))
+        for item in sc1.get("evidence", [])
+        if isinstance(item, Mapping) and isinstance(item.get("id"), str)
+    )
     people_by_id = {
         str(item.get("id", item.get("person_id"))): item
         for item in people
@@ -103,6 +109,17 @@ def validate_source(root: Path = ROOT) -> list[str]:
         for evidence_id in [*identity_evidence, *profile_evidence]:
             if evidence_id not in evidence_ids:
                 errors.append(f"Person Sketch Evidence does not resolve: {person_id}/{evidence_id}")
+        for index, point in enumerate(record.get("life_glimpse", [])):
+            if not isinstance(point, Mapping) or not isinstance(point.get("text"), str) or not point.get("text"):
+                errors.append(f"Person Sketch life_glimpse is invalid: {person_id}/{index}")
+                continue
+            if point.get("review_status") not in {"candidate", "reviewed"}:
+                errors.append(f"Person Sketch life_glimpse review status is invalid: {person_id}/{index}")
+            if not isinstance(point.get("evidence_ids"), list) or not point.get("evidence_ids"):
+                errors.append(f"Person Sketch life_glimpse lacks Evidence: {person_id}/{index}")
+            for evidence_id in point.get("evidence_ids", []):
+                if evidence_id not in evidence_ids:
+                    errors.append(f"Person Sketch life_glimpse Evidence does not resolve: {person_id}/{evidence_id}")
         forbidden = {"relations", "relation_ids", "story_ids", "person_story_ids"}
         if forbidden.intersection(record):
             errors.append(f"Person Sketch redefines another factual layer: {person_id}")
@@ -142,6 +159,11 @@ def validate_bundle(root: Path = ROOT) -> list[str]:
         for item in bundle.get("evidence", [])
         if isinstance(item, Mapping) and isinstance(item.get("id"), str)
     }
+    story_ids = {
+        str(item.get("id"))
+        for item in bundle.get("stories", [])
+        if isinstance(item, Mapping) and isinstance(item.get("id"), str)
+    }
     sketch_map = bundle.get("person_sketches")
     if not isinstance(sketch_map, Mapping):
         return errors + ["SC1 bundle lacks person_sketches object"]
@@ -157,6 +179,16 @@ def validate_bundle(root: Path = ROOT) -> list[str]:
             for evidence_id in [*identity.get("evidence_ids", []), *sketch.get("profile_evidence_ids", [])]:
                 if evidence_id not in evidence_ids:
                     errors.append(f"SC1 Person Sketch Evidence does not resolve: {person_id}/{evidence_id}")
+        for index, point in enumerate(sketch.get("life_glimpse", [])):
+            if not isinstance(point, Mapping):
+                errors.append(f"SC1 Person Sketch life_glimpse is invalid: {person_id}/{index}")
+                continue
+            for evidence_id in point.get("evidence_ids", []):
+                if evidence_id not in evidence_ids:
+                    errors.append(f"SC1 Person Sketch life_glimpse Evidence does not resolve: {person_id}/{evidence_id}")
+            for story_id in point.get("story_ids", []):
+                if story_id not in story_ids:
+                    errors.append(f"SC1 Person Sketch life_glimpse Story does not resolve: {person_id}/{story_id}")
         for alias in sketch.get("aliases", []):
             if not isinstance(alias, Mapping):
                 continue

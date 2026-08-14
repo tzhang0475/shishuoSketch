@@ -125,6 +125,16 @@
         "unmaterialized_people": {"type": "array", "items": {"$ref": "#/$defs/unmaterialized_person"}},
         "positional_context": {"type": "array", "items": {"$ref": "#/$defs/position"}},
         "event_background": {"type": "array", "minItems": 1, "maxItems": 3, "items": {"$ref": "#/$defs/claim"}},
+        "narrative_layers": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "scene_focus": {"type": "array", "items": {"$ref": "#/$defs/claim"}},
+            "off_frame_context": {"type": "array", "items": {"$ref": "#/$defs/claim"}},
+            "historical_ground": {"type": "array", "items": {"$ref": "#/$defs/claim"}},
+            "resonance": {"type": "array", "items": {"$ref": "#/$defs/claim"}}
+          }
+        },
         "evidence_ids": {"$ref": "#/$defs/evidence_ids"},
         "notes": {"type": "array", "items": {"type": "string", "minLength": 1}}
       }

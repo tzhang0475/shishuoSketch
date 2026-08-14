@@ -602,8 +602,33 @@ def _placement_candidates(
                     }
                 )
             continue
-        end_offset = offset + len(surface)
-        if offset < 0 or end_offset > len(canonical) or canonical[offset:end_offset] != surface:
+        display_span = mention.get("display_span")
+        span_offset = offset
+        span_surface = surface
+        if isinstance(display_span, Mapping):
+            candidate_offset = display_span.get("offset")
+            candidate_end = display_span.get("end_offset_exclusive")
+            candidate_text = display_span.get("text")
+            if (
+                not isinstance(candidate_offset, int)
+                or not isinstance(candidate_end, int)
+                or not isinstance(candidate_text, str)
+                or candidate_end <= candidate_offset
+                or candidate_text == ""
+            ):
+                suppressed.append(
+                    {
+                        "mention_id": mention_id,
+                        "reason": "unsafe_display_span",
+                        "section": section,
+                        "annotation_id": annotation_id,
+                    }
+                )
+                continue
+            span_offset = candidate_offset
+            span_surface = candidate_text
+        end_offset = span_offset + len(span_surface)
+        if span_offset < 0 or end_offset > len(canonical) or canonical[span_offset:end_offset] != span_surface:
             suppressed.append(
                 {
                     "mention_id": mention_id,
@@ -613,7 +638,7 @@ def _placement_candidates(
                 }
             )
             continue
-        start = start_boundaries[offset]
+        start = start_boundaries[span_offset]
         end = end_boundaries[end_offset]
         if start >= end or displayed[start:end] == "":
             suppressed.append(
@@ -639,17 +664,31 @@ def _placement_candidates(
                 ],
                 "start": start,
                 "end": end,
+                "canonical_offset": span_offset,
+                "canonical_end_offset_exclusive": end_offset,
+                "surface": span_surface,
+                "raw_surface": surface,
+                "span_basis": str(display_span.get("basis")) if isinstance(display_span, Mapping) else "canonical_mention_surface",
                 "section": section,
                 "annotation_id": annotation_id,
             }
         )
 
-    # Prefer the shortest exact anchored surface when one resolved mention is
-    # nested inside another.  This is deterministic and keeps explicit names
-    # such as 王凝之 interactive without emitting nested buttons.  The larger
-    # mention remains visible in the secondary mention summary.
+    # Prefer the maximal semantic surface when one resolved Mention is nested
+    # inside another.  The canonical Mention anchor remains untouched; the
+    # build-time display_span is the separate span decision.  This prevents
+    # 温太真 from being rendered as only 太真 while retaining deterministic
+    # suppression of the nested shorter record.
     selected: list[dict[str, Any]] = []
-    for placement in sorted(placements, key=lambda item: (item["end"] - item["start"], item["start"], item["mention_id"])):
+    for placement in sorted(
+        placements,
+        key=lambda item: (
+            -(item["end"] - item["start"]),
+            item["start"],
+            -len(str(item.get("raw_surface", ""))),
+            item["mention_id"],
+        ),
+    ):
         conflict = next(
             (
                 existing
@@ -667,11 +706,58 @@ def _placement_candidates(
         ) or (
             conflict["start"] <= placement["start"] and conflict["end"] >= placement["end"]
         )
-        if same_range or not contains:
+        if same_range:
+            placement_target = placement.get("resolution_target") or {"person_id": placement.get("person_id")}
+            conflict_target = conflict.get("resolution_target") or {"person_id": conflict.get("person_id")}
+            if placement_target == conflict_target:
+                suppressed.append(
+                    {
+                        "mention_id": placement["mention_id"],
+                        "reason": "duplicate_display_span",
+                        "section": section,
+                        "annotation_id": annotation_id,
+                    }
+                )
+                continue
             raise ValueError(
                 "incompatible overlapping resolved Mention ranges: "
                 f"{placement['mention_id']} and {conflict['mention_id']}"
             )
+        if not contains:
+            raise ValueError(
+                "incompatible overlapping resolved Mention ranges: "
+                f"{placement['mention_id']} and {conflict['mention_id']}"
+            )
+        placement_target = placement.get("resolution_target") or {"person_id": placement.get("person_id")}
+        conflict_target = conflict.get("resolution_target") or {"person_id": conflict.get("person_id")}
+        if placement_target != conflict_target:
+            # Existing nested mentions can intentionally describe different
+            # people (for example 王凝之妻謝氏 contains 王凝之).  Preserve
+            # the established shorter anchor in that case; maximal-span
+            # preference applies only when both spans resolve to one person.
+            placement_length = placement["end"] - placement["start"]
+            conflict_length = conflict["end"] - conflict["start"]
+            if placement_length < conflict_length:
+                selected.remove(conflict)
+                suppressed.append(
+                    {
+                        "mention_id": conflict["mention_id"],
+                        "reason": "overlapping_anchor",
+                        "section": section,
+                        "annotation_id": annotation_id,
+                    }
+                )
+                selected.append(placement)
+            else:
+                suppressed.append(
+                    {
+                        "mention_id": placement["mention_id"],
+                        "reason": "overlapping_anchor",
+                        "section": section,
+                        "annotation_id": annotation_id,
+                    }
+                )
+            continue
         suppressed.append(
             {
                 "mention_id": placement["mention_id"],

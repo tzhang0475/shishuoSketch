@@ -130,6 +130,22 @@ def validate_inline_mention_projection(
     else:
         errors.append(f"SC1 {story_id}: missing mention_projection.suppressed")
 
+    def mention_anchor(mention: dict[str, Any]) -> tuple[int, str] | None:
+        """Return the effective display span without changing the raw anchor."""
+
+        span = mention.get("display_span")
+        if isinstance(span, dict):
+            offset = span.get("offset")
+            text = span.get("text")
+            end = span.get("end_offset_exclusive")
+            if isinstance(offset, int) and isinstance(end, int) and isinstance(text, str) and end == offset + len(text):
+                return offset, text
+            return None
+        anchor = mention.get("anchor", {})
+        if isinstance(anchor, dict) and isinstance(anchor.get("offset"), int) and isinstance(anchor.get("text"), str):
+            return anchor["offset"], anchor["text"]
+        return None
+
     def inspect_segments(
         segments: Any,
         expected_original: str,
@@ -190,16 +206,16 @@ def validate_inline_mention_projection(
                     if isinstance(target, dict) and target.get("canonical_name") != (segment.get("canonical_name") or {}).get("original"):
                         errors.append(f"SC1 {story_id}: identity Mention target name mismatch: {mention_id}")
                     canonical = canonical_by_layer.get((layer, annotation_id))
-                    anchor = mention.get("anchor", {})
-                    if canonical is None or not isinstance(anchor, dict) or not isinstance(anchor.get("offset"), int) or not isinstance(anchor.get("text"), str):
+                    anchor = mention_anchor(mention)
+                    if canonical is None or anchor is None:
                         errors.append(f"SC1 {story_id}: missing canonical anchor for identity Mention {mention_id}")
                     else:
                         try:
                             expected_start, expected_end = display_span_for_anchor(
                                 canonical,
                                 expected_original,
-                                anchor["offset"],
-                                anchor["text"],
+                                anchor[0],
+                                anchor[1],
                             )
                             if offset != expected_start or offset + len(display_original) != expected_end:
                                 errors.append(f"SC1 {story_id}: identity Mention display span differs from anchor: {mention_id}")
@@ -232,16 +248,16 @@ def validate_inline_mention_projection(
                 if layer == "liu_annotation" and segment.get("annotation_id") != annotation_id:
                     errors.append(f"SC1 {story_id}: annotation block mismatch: {mention_id}")
                 canonical = canonical_by_layer.get((layer, annotation_id))
-                anchor = mention.get("anchor", {})
-                if canonical is None or not isinstance(anchor, dict) or not isinstance(anchor.get("offset"), int) or not isinstance(anchor.get("text"), str):
+                anchor = mention_anchor(mention)
+                if canonical is None or anchor is None:
                     errors.append(f"SC1 {story_id}: missing canonical anchor for {mention_id}")
                 else:
                     try:
                         expected_start, expected_end = display_span_for_anchor(
                             canonical,
                             expected_original,
-                            anchor["offset"],
-                            anchor["text"],
+                            anchor[0],
+                            anchor[1],
                         )
                         if offset != expected_start or offset + len(display_original) != expected_end:
                             errors.append(f"SC1 {story_id}: inline Mention display span differs from anchor: {mention_id}")
@@ -570,6 +586,11 @@ def validate(root: Path = ROOT, mode: str = "full") -> list[str]:
         "resolution_decision_source",
         "resolution_evidence_ids",
         "resolution_note",
+        "resolution_method",
+        "display_span",
+        "derived_only",
+        "span_decision_id",
+        "coreference_antecedent_mention_id",
     }
     for mention_id, item in base_mentions.items():
         projected = mention_by_id.get(mention_id)

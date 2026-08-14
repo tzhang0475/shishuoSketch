@@ -4,7 +4,7 @@
   "title": "ER1 Effective Person Resolution",
   "type": "object",
   "additionalProperties": false,
-  "required": ["schema", "stage", "generated_from", "source_mentions_sha256", "decision_sha256", "mention_count", "counts", "mentions"],
+  "required": ["schema", "stage", "generated_from", "source_mentions_sha256", "decision_sha256", "mention_count", "derived_mention_count", "counts", "mentions", "derived_mentions"],
   "properties": {
     "schema": {"const": 1},
     "stage": {"const": "er1-effective-person-resolution"},
@@ -12,8 +12,10 @@
     "source_mentions_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
     "decision_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
     "mention_count": {"type": "integer", "minimum": 0},
+    "derived_mention_count": {"type": "integer", "minimum": 0},
     "counts": {"type": "object", "additionalProperties": {"type": "integer", "minimum": 0}},
-    "mentions": {"type": "array", "items": {"$ref": "#/$defs/mention"}}
+    "mentions": {"type": "array", "items": {"$ref": "#/$defs/mention"}},
+    "derived_mentions": {"type": "array", "items": {"$ref": "#/$defs/mention"}}
   },
   "$defs": {
     "target": {
@@ -42,7 +44,25 @@
         "resolution_target": {"anyOf": [{"$ref": "#/$defs/target"}, {"type": "null"}]},
         "resolution_candidates": {"type": "array", "items": {"$ref": "#/$defs/target"}},
         "resolution_review_status": {"enum": ["candidate", "reviewed", "rejected", "todo"]},
-        "resolution_decision_source": {"enum": ["automatic", "human_review"]}
+        "resolution_decision_source": {"enum": ["automatic", "human_review"]},
+        "display_span": {"$ref": "#/$defs/displaySpan"},
+        "derived_only": {"type": "boolean"},
+        "resolution_method": {"type": "string"},
+        "span_decision_id": {"type": "string"},
+        "coreference_antecedent_mention_id": {"type": "string"}
+      }
+    },
+    "displaySpan": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["offset", "end_offset_exclusive", "text", "basis", "status", "evidence_ids"],
+      "properties": {
+        "offset": {"type": "integer", "minimum": 0},
+        "end_offset_exclusive": {"type": "integer", "minimum": 1},
+        "text": {"type": "string", "minLength": 1},
+        "basis": {"type": "string", "minLength": 1},
+        "status": {"enum": ["safe", "review_required"]},
+        "evidence_ids": {"type": "array", "uniqueItems": true, "items": {"type": "string"}}
       }
     }
   }

@@ -70,6 +70,49 @@ class PersonResolutionTests(unittest.TestCase):
         self.assertIn(("identity_candidate", WANG_TANZHI["candidate_id"]), identities)
         self.assertIn(("production_person", SUN_GUI["person_id"]), identities)
 
+    def test_er1_1_yaliang_017_projects_maximal_spans_and_local_coreference(self) -> None:
+        effective = json.loads(
+            (ROOT / "data/derived/person-resolution-effective.json").read_text(encoding="utf-8")
+        )
+        derived = [row for row in effective["derived_mentions"] if row.get("entry_id") == "06-yaliang-017"]
+        self.assertEqual({row["surface"] for row in derived}, {"庾太尉", "亮"})
+        self.assertEqual(sum(row["surface"] == "亮" for row in derived), 2)
+        for row in derived:
+            self.assertEqual(row["resolution_target"]["canonical_name"], "庾亮")
+            self.assertTrue(row["derived_only"])
+            self.assertEqual(row["display_span"]["text"], row["surface"])
+        canonical = json.loads((ROOT / "data/mentions/shishuo.json").read_text(encoding="utf-8"))
+        raw = [row for row in canonical["mentions"] if row.get("entry_id") == "06-yaliang-017"]
+        self.assertFalse(any(row.get("surface") in {"庾太尉", "亮"} for row in raw))
+
+    def test_short_form_coreference_requires_same_local_antecedent(self) -> None:
+        target = {"target_kind": "production_person", "person_id": "person-010", "canonical_name": "庾亮"}
+        local = resolve_mention(
+            {"mention_id": "fixture-short", "surface": "亮", "person_id": None, "evidence": {}},
+            text="庾太尉亮",
+            alias_index={},
+            targets_by_key=target_map(target),
+            prior_entities=[{"span_surface": "庾太尉", "surface": "太尉", "target": target}],
+        )
+        self.assertEqual(local["status"], "resolved")
+        self.assertEqual(local["target"], target)
+        outside = resolve_mention(
+            {"mention_id": "fixture-short-outside", "surface": "亮", "person_id": None, "evidence": {}},
+            text="亮",
+            alias_index={},
+            targets_by_key=target_map(target),
+        )
+        self.assertEqual(outside["status"], "unresolved")
+
+    def test_span_audit_is_deterministic_and_reports_published_projection(self) -> None:
+        audit = json.loads((ROOT / "data/derived/person-resolution-span-audit.json").read_text(encoding="utf-8"))
+        self.assertEqual(audit["published_story_count"], 60)
+        self.assertEqual(audit["audited_story_count"], 60)
+        self.assertEqual(audit["review_required_count"], 0)
+        records = [row for row in audit["records"] if row["story_id"] == "06-yaliang-017"]
+        self.assertTrue(any(row["proposed_surface"] == "庾太尉" for row in records))
+        self.assertTrue(any(row["proposed_surface"] == "亮" for row in records))
+
     def test_resolved_identity_candidate_is_not_a_production_navigation_target(self) -> None:
         bundle = json.loads((ROOT / "data/derived/sc1-site.json").read_text(encoding="utf-8"))
         story = next(row for row in bundle["stories"] if row["id"] == "05-fangzheng-058")
