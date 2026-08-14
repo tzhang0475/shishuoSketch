@@ -31,6 +31,7 @@ try:
     )
     from .reading_layers import build_display_reading, strip_display_punctuation
     from .person_sketch import build_person_sketches
+    from .person_resolution import load_effective_mentions
     from .story_scene_contexts import DERIVED_PATH as SCENE_DERIVED_PATH, SOURCE_PATH as SCENE_SOURCE_PATH, project as project_scene_contexts, validate_source as validate_scene_source
 except ImportError:  # direct execution
     from build_six_person_pilot import (
@@ -44,6 +45,7 @@ except ImportError:  # direct execution
     )
     from reading_layers import build_display_reading, strip_display_punctuation
     from person_sketch import build_person_sketches
+    from person_resolution import load_effective_mentions
     from story_scene_contexts import DERIVED_PATH as SCENE_DERIVED_PATH, SOURCE_PATH as SCENE_SOURCE_PATH, project as project_scene_contexts, validate_source as validate_scene_source
 
 
@@ -224,7 +226,7 @@ def frontend_mention(
         "section": section,
         "offset": evidence.get("section_offset", 0),
     }
-    return {
+    projected = {
         "id": mention["mention_id"],
         "story_id": mention["entry_id"],
         "surface": mention.get("surface", ""),
@@ -240,6 +242,18 @@ def frontend_mention(
         "review_status": "candidate",
         "notes": "Projected from the existing conservative Person/Mention pilot; no participant status is inferred.",
     }
+    for key in (
+        "resolution_status",
+        "resolution_target",
+        "resolution_candidates",
+        "resolution_review_status",
+        "resolution_decision_source",
+        "resolution_evidence_ids",
+        "resolution_note",
+    ):
+        if key in mention:
+            projected[key] = mention[key]
+    return projected
 
 
 def publication_state(punctuation: Mapping[str, Any], canonical_main_text: str) -> str:
@@ -307,7 +321,10 @@ def build(root: Path = ROOT) -> dict[str, Any]:
         record["entry_id"]: record
         for record in read_json(PUNCTUATION_PATH)["records"]
     }
-    raw_mentions = read_json(MENTIONS_PATH)["mentions"]
+    # Project the ER1 effective resolution, while retaining the canonical
+    # Mention IDs/anchors.  Candidate identity targets remain non-navigable;
+    # only effective production_person targets contribute Person IDs.
+    raw_mentions = load_effective_mentions(root)
     registry_people = read_json(PEOPLE_REGISTRY_PATH).get("people", [])
     registry_aliases = read_json(ALIASES_PATH).get("aliases", [])
     person_story_index = read_json(PERSON_STORY_INDEX_PATH)
@@ -499,7 +516,31 @@ def build(root: Path = ROOT) -> dict[str, Any]:
             projected_mentions = []
             for mention in entry_mentions:
                 if mention.get("mention_id") in base_mentions:
-                    projected = base_mentions[mention["mention_id"]]
+                    # WP1 owns the original evidence projection for this
+                    # Story, while ER1 owns the effective identity state.
+                    # Merge only the latter so the special WP1 branch cannot
+                    # resurrect a collision-resolved Person target.
+                    projected = dict(base_mentions[mention["mention_id"]])
+                    effective_projection = frontend_mention(mention, {
+                        "main_text": "evidence-sc1-06-yaliang-019-main",
+                        "liu_annotation:annotation-001": "evidence-sc1-06-yaliang-019-annotation-001",
+                        "liu_annotation": "evidence-sc1-06-yaliang-019-annotation-001",
+                    })
+                    for key in (
+                        "person_id",
+                        "candidate_person_ids",
+                        "resolution_mode",
+                        "confidence",
+                        "resolution_status",
+                        "resolution_target",
+                        "resolution_candidates",
+                        "resolution_review_status",
+                        "resolution_decision_source",
+                        "resolution_evidence_ids",
+                        "resolution_note",
+                    ):
+                        if key in effective_projection:
+                            projected[key] = effective_projection[key]
                 else:
                     projected = frontend_mention(mention, {
                         "main_text": "evidence-sc1-06-yaliang-019-main",

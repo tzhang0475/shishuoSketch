@@ -14,9 +14,9 @@ This is deterministic navigation/index data for the unified materialized Shishuo
 
 - primary people: 34
 - supporting people: 1
-- reviewed PersonStoryLinks: 587
-- candidate PersonStoryLinks: 0
-- candidate contextual mentions retained: 22
+- reviewed PersonStoryLinks: 573
+- candidate PersonStoryLinks: 4
+- candidate contextual mentions retained: 27
 - reader-ready linked Stories: 1
 
 ## Person review lists
@@ -2010,9 +2010,9 @@ No Story is listed as directly participating unless a future reviewed presence e
 ### 孫晷 (`person-015`)
 
 - directly participating Stories: none currently classified; main-text appearance is retained as `mentioned` pending explicit participation review.
-- reviewed linked Stories: 14; reader-ready: 0; candidate links: 0; candidate contextual Mentions: 0
+- reviewed linked Stories: 0; reader-ready: 0; candidate links: 4; candidate contextual Mentions: 5
 - main-text presence:
-  - `02-yanyu-079` · 言語第二 · reviewed · reader_ready=false · surface: 文度
+  - `02-yanyu-079` · 言語第二 · candidate · reader_ready=false · surface: explicit annotation evidence
     ```text
 謝胡兒語庾道季
 諸人莫當就卿談可堅城壘庾
@@ -2020,7 +2020,7 @@ No Story is listed as directly participating unless a future reviewed presence e
 
 
     ```
-  - `05-fangzheng-047` · 方正第五 · reviewed · reader_ready=false · surface: 文度
+  - `05-fangzheng-047` · 方正第五 · candidate · reader_ready=false · surface: explicit annotation evidence
     ```text
 王述轉尚書令事行便拜文度曰故應讓杜許藍田
 云汝謂我堪此不文度曰何爲不堪但克讓自是美
@@ -2029,104 +2029,14 @@ No Story is listed as directly participating unless a future reviewed presence e
 
 
     ```
-  - `05-fangzheng-058` · 方正第五 · reviewed · reader_ready=false · surface: 文度
-    ```text
-
-既還藍田愛念文度雖長大猶抱著䣛上
-
-文度因言桓求已女㛰藍田大怒排文度下䣛曰惡
-見文度已復癡畏桓温靣兵那可嫁女與之文度還
-報云下官家中先得㛰處桓公曰吾知矣此尊府君
-不肯耳後桓女遂嫁文度兒
-
-
-    ```
-  - `06-yaliang-029` · 雅量第六 · reviewed · reader_ready=false · surface: 文度
-    ```text
-桓公伏甲設饌廣延朝士因此欲誅謝安王坦之
-
-王甚遽問謝曰當作何
-計謝神意不變謂文度曰晉阼存亡在此一行相與
-俱前王之恐狀轉見於色謝之寛容愈表於貌望階
-趨席方作洛生詠諷浩浩洪流桓憚其曠逺乃趣解
-兵
-
-
-
-王謝舊齊名於此始
-判優劣
-
-    ```
-  - `06-yaliang-030` · 雅量第六 · reviewed · reader_ready=false · surface: 文度
-    ```text
-謝太傅與王文度共詣郗超日旰未得前王便欲去
-謝曰不能爲性命忍俄頃
-
-    ```
-  - `08-shangyu-126` · 賞譽第八 · reviewed · reader_ready=false · surface: 文度
-    ```text
-諺曰揚州獨歩王文度後來出人郗嘉賔
-
-
-
-    ```
-  - `08-shangyu-149` · 賞譽第八 · reviewed · reader_ready=false · surface: 文度
-    ```text
-謝車騎初見王文度曰見文度雖蕭灑相遇其復愔
-愔竟夕
-
-    ```
-  - `09-pinzao-063` · 品藻第九 · reviewed · reader_ready=false · surface: 文度
+  - `09-pinzao-063` · 品藻第九 · candidate · reader_ready=false · surface: explicit annotation evidence
     ```text
 庾道季云思理倫和吾愧康伯志力彊正吾愧文度
 自此以還吾皆百之
 
     ```
-  - `23-rendan-038` · 任誕第二十三 · reviewed · reader_ready=false · surface: 文度
-    ```text
-桓車騎在荆州張玄為侍中使至江陵路經陽歧村
-俄見一人持半小籠生魚徑來造船云
-有魚欲寄作膾張乃維舟而納之問其姓字稱是劉
-遺民張素聞其名大相忻待劉既
-知張銜命問謝安王文度並佳不張甚欲話言劉了
-
-無停意既進膾便去云向得此魚觀君船上當有膾
-具是故來耳於是便去張乃追至劉家為設酒殊不
-清㫖張高其人不得已而飲之方共封飲劉便先起
-云今正伐荻不宐久廢張亦無以留之
-    ```
-  - `25-paidiao-046` · 排調第二十五 · reviewed · reader_ready=false · surface: 文度
-    ```text
-王文度范榮期俱爲簡文所要范年大而位小王年
-小而位大將前更相推在前旣移乆王遂在范後王
-因謂曰簸之揚之穅秕在前范曰洮之汰之沙礫在
-後
-
-
-    ```
-  - `25-paidiao-052` · 排調第二十五 · reviewed · reader_ready=false · surface: 文度
-    ```text
-王文度在西州與林法師講韓孫諸人並在坐林公
-
-理毎欲小屈孫興公曰法師今日如著弊絮在荆棘
-中觸地挂閡
-
-    ```
-  - `27-jiajue-012` · 假譎第二十七 · reviewed · reader_ready=false · surface: 文度
-    ```text
-王文度弟阿智惡乃不翅當年長而無人與㛰孫興
-公有一女亦僻錯又無嫁娶理因詣文度求見阿智
-
-既見便陽言此定可殊不如人所傳那得至今未有
-㛰處我有一女乃不惡但吾寒士不宐與卿計欲令
-阿智娶之文度欣然
-    ```
 - Liu-annotation-only presence:
-  - `02-yanyu-072` · 言語第二 · reviewed · reader_ready=false · surface: 文度
-    ```text
-(太原晉陽人祖東海太守/王中郎傳曰坦之字文度)
-    ```
-  - `26-qingdi-021` · 輕詆第二十六 · reviewed · reader_ready=false · surface: 文度
+  - `26-qingdi-021` · 輕詆第二十六 · candidate · reader_ready=false · surface: explicit annotation evidence
     ```text
 (箸膩顔挾左傳逐鄭康成自為高足弟/中郎坦之帢㡌也裴子曰林公云文度)
     ```
@@ -4428,8 +4338,6 @@ These 16 candidates are selected deterministically from reviewed links using onl
 - `05-fangzheng-025` · 方正第五 · 庾亮、蘇峻、謝尚、鄧攸 · multiple reviewed people; main-text presence; explicit/high-confidence resolution
 - `25-paidiao-060` · 排調第二十五 · 劉惔、孫恩、桓溫、王敦 · multiple reviewed people; main-text presence; explicit/high-confidence resolution
 - `05-fangzheng-055` · 方正第五 · 劉惔、王濛、王遐、謝安 · multiple reviewed people; main-text presence; explicit/high-confidence resolution
-- `06-yaliang-029` · 雅量第六 · 孫晷、桓溫、王導、謝安 · multiple reviewed people; main-text presence; explicit/high-confidence resolution
-- `02-yanyu-072` · 言語第二 · 伏滔、孫晷、桓溫、韓伯 · multiple reviewed people; main-text presence; explicit/high-confidence resolution
 - `04-wenxue-022` · 文學第四 · 庾亮、王導、王濛、謝尚 · multiple reviewed people; main-text presence; explicit/high-confidence resolution
 - `14-rongzhi-023` · 容止第十四 · 庾亮、温嶠、王導、蘇峻 · multiple reviewed people; main-text presence; explicit/high-confidence resolution
 - `23-rendan-033` · 任誕第二十三 · 劉惔、王濛、王遐、謝尚 · multiple reviewed people; main-text presence; explicit/high-confidence resolution
@@ -4438,6 +4346,8 @@ These 16 candidates are selected deterministically from reviewed links using onl
 - `08-shangyu-079` · 賞譽第八 · 卞壼、桓溫、王敦 · multiple reviewed people; main-text presence; explicit/high-confidence resolution
 - `09-pinzao-006` · 品藻第九 · 王導、王戎、王敦 · multiple reviewed people; main-text presence; explicit/high-confidence resolution
 - `09-pinzao-036` · 品藻第九 · 桓溫、王濛、謝尚 · multiple reviewed people; main-text presence; explicit/high-confidence resolution
+- `11-jiewu-005` · 捷悟第十一 · 温嶠、王導、王敦 · multiple reviewed people; main-text presence; explicit/high-confidence resolution
+- `14-rongzhi-024` · 容止第十四 · 庾亮、殷浩、王羲之 · multiple reviewed people; main-text presence; explicit/high-confidence resolution
 
 ## Candidate and unresolved mentions
 
@@ -4450,24 +4360,30 @@ The current supporting 郗璿 link is the only link without a legacy Mention ID;
   - `09-pinzao-028` · main_text · `王右軍` · confidence=medium · context_identity_hits=逸少
   - `14-rongzhi-024` · main_text · `右軍` · confidence=medium · context_identity_hits=王逸少,逸少
 - 郗鑒 (`person-002`):
-  - `06-yaliang-019` · liu_annotation · `太傅` · confidence=medium · context_identity_hits=郗鑒
+  - `06-yaliang-019` · liu_annotation · `太傅` · confidence=low · context_identity_hits=郗鑒
 - 王導 (`person-003`):
   - `01-dexing-027` · liu_annotation · `丞相` · confidence=medium · context_identity_hits=王導,茂弘
   - `05-fangzheng-023` · main_text · `丞相` · confidence=medium · context_identity_hits=茂弘
   - `05-fangzheng-023` · main_text · `丞相` · confidence=medium · context_identity_hits=茂弘
   - `08-shangyu-054` · liu_annotation · `丞相` · confidence=medium · context_identity_hits=王茂弘,茂弘
   - `09-pinzao-047` · liu_annotation · `丞相` · confidence=medium · context_identity_hits=王導
-  - `18-qiyi-004` · main_text · `王丞相` · confidence=medium · context_identity_hits=茂弘
+  - `18-qiyi-004` · main_text · `王丞相` · confidence=low · context_identity_hits=茂弘
   - `23-rendan-032` · liu_annotation · `丞相` · confidence=medium · context_identity_hits=王導
 - 謝安 (`person-006`):
-  - `02-yanyu-083` · liu_annotation · `太傅` · confidence=medium · context_identity_hits=謝安
+  - `02-yanyu-083` · liu_annotation · `太傅` · confidence=low · context_identity_hits=謝安
   - `06-yaliang-033` · main_text · `謝太傅` · confidence=medium · context_identity_hits=謝安
   - `06-yaliang-033` · main_text · `太傅` · confidence=medium · context_identity_hits=謝安
   - `06-yaliang-033` · main_text · `太傅` · confidence=medium · context_identity_hits=謝安
   - `07-shijian-021` · main_text · `謝公` · confidence=medium · context_identity_hits=安石
   - `08-shangyu-102` · main_text · `謝公` · confidence=medium · context_identity_hits=安石
-  - `10-guizhen-026` · liu_annotation · `太傅` · confidence=medium · context_identity_hits=謝安
+  - `10-guizhen-026` · liu_annotation · `太傅` · confidence=low · context_identity_hits=謝安
   - `25-paidiao-026` · main_text · `謝公` · confidence=medium · context_identity_hits=安石
   - `25-paidiao-038` · main_text · `謝公` · confidence=medium · context_identity_hits=安石
   - `26-qingdi-024` · main_text · `謝公` · confidence=medium · context_identity_hits=謝安
   - `26-qingdi-024` · main_text · `謝公` · confidence=medium · context_identity_hits=謝安
+- 孫晷 (`person-015`):
+  - `02-yanyu-079` · main_text · `文度` · confidence=low · context_identity_hits=孫晷
+  - `05-fangzheng-047` · main_text · `文度` · confidence=low · context_identity_hits=孫晷
+  - `05-fangzheng-047` · main_text · `文度` · confidence=low · context_identity_hits=孫晷
+  - `09-pinzao-063` · main_text · `文度` · confidence=low · context_identity_hits=孫晷
+  - `26-qingdi-021` · liu_annotation · `文度` · confidence=low · context_identity_hits=孫晷

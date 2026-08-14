@@ -435,6 +435,13 @@ def build(root: Path = ROOT) -> dict[str, Any]:
     repair_wave2_overlaps(root)
     sanitize_wave2_provenance(root)
     update_allocation_state(root)
+    try:
+        from . import person_resolution
+    except ImportError:  # direct execution
+        import person_resolution
+    # Build the ER1 overlay after materialization has settled the canonical
+    # Mention registry and before PersonStory derives production links.
+    person_resolution.build(root)
     # PersonStory is a derived navigation index.  Rebuild it after any
     # production Mention is withheld so the index cannot retain a stale link.
     try:

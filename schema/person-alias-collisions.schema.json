@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://shishuo-sketch/schema/person-alias-collisions.schema.json",
+  "title": "ER1 Person Alias Collision Audit",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "stage", "generated_from", "collision_count", "records"],
+  "properties": {
+    "schema": {"const": 1},
+    "stage": {"const": "er1-person-alias-collisions"},
+    "generated_from": {"type": "array", "items": {"type": "string"}, "minItems": 1},
+    "collision_count": {"type": "integer", "minimum": 0},
+    "records": {
+      "type": "array",
+      "items": {
+        "type": "object", "additionalProperties": true,
+        "required": ["surface", "candidate_identities", "alias_types", "occurrence_count", "story_count", "current_automatic_resolutions", "resolution_policy"],
+        "properties": {
+          "surface": {"type": "string", "minLength": 1},
+          "candidate_identities": {"type": "array", "minItems": 2},
+          "alias_types": {"type": "array", "items": {"type": "string"}},
+          "occurrence_count": {"type": "integer", "minimum": 0},
+          "story_count": {"type": "integer", "minimum": 0},
+          "current_automatic_resolutions": {"type": "array"},
+          "resolution_policy": {"type": "string", "minLength": 1}
+        }
+      }
+    }
+  }
+}

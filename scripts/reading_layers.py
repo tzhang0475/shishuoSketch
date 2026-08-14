@@ -164,7 +164,31 @@ def _mention_explanation(mention: Mapping[str, Any], people: Any) -> str:
     """Build a restrained route explanation from structured mention facts."""
 
     surface = str(mention.get("surface", ""))
-    person_name = _person_name(people, mention.get("person_id")) or "此人"
+    target = mention.get("resolution_target")
+    person_name = (
+        str(target.get("canonical_name"))
+        if isinstance(target, Mapping) and isinstance(target.get("canonical_name"), str)
+        else _person_name(people, mention.get("person_id"))
+    ) or "此人"
+    resolution_status = mention.get("resolution_status")
+    if resolution_status == "candidate_for_review":
+        names = [
+            str(item.get("canonical_name"))
+            for item in mention.get("resolution_candidates", [])
+            if isinstance(item, Mapping) and isinstance(item.get("canonical_name"), str)
+        ]
+        alias_type = str(mention.get("alias_type", ""))
+        if alias_type in {"office_title", "official_title"}:
+            return (
+                f"「{surface}」是官职称谓，需结合上下文判断；"
+                f"当前可能指{'、'.join(dict.fromkeys(names)) or '不同人物'}，证据不足以唯一判断。"
+            )
+        return (
+            f"「{surface}」可能指{'、'.join(dict.fromkeys(names)) or '不同人物'}，"
+            "当前证据不足以唯一判断。"
+        )
+    if resolution_status == "resolved" and isinstance(target, Mapping) and target.get("target_kind") == "identity_candidate":
+        return f"本项目已将「{surface}」解析为{person_name}；该人物尚未建立人物卡。"
     alias_type = str(mention.get("alias_type", ""))
     resolution_mode = str(mention.get("resolution_mode", ""))
     exact = resolution_mode == "exact"
@@ -221,6 +245,22 @@ def _build_mention_display(
                         "resolution_mode": str(mention.get("resolution_mode", "")),
                     }
                 )
+                resolution_target = mention.get("resolution_target")
+                if isinstance(resolution_target, Mapping):
+                    display["resolution_status"] = str(mention.get("resolution_status", "resolved"))
+                    display["target_kind"] = str(resolution_target.get("target_kind", ""))
+                    if isinstance(resolution_target.get("canonical_name"), str):
+                        display["canonical_name"] = _display_pair(str(resolution_target["canonical_name"]), converter)
+                candidates = mention.get("resolution_candidates")
+                if isinstance(candidates, list):
+                    names = [
+                        _display_pair(str(item["canonical_name"]), converter)
+                        for item in candidates
+                        if isinstance(item, Mapping) and isinstance(item.get("canonical_name"), str)
+                    ]
+                    if names:
+                        display["candidate_names"] = names
+                        display.setdefault("resolution_status", str(mention.get("resolution_status", "resolved")))
             result[mention["id"]] = display
     return result
 
@@ -509,6 +549,19 @@ def _resolved_mention(mention: Mapping[str, Any]) -> bool:
     )
 
 
+def _identity_resolution_mention(mention: Mapping[str, Any]) -> bool:
+    """Whether a Mention has a non-production ER1 identity projection."""
+
+    status = mention.get("resolution_status")
+    if status not in {"resolved", "candidate_for_review"}:
+        return False
+    target = mention.get("resolution_target")
+    if isinstance(target, Mapping) and target.get("target_kind") == "identity_candidate":
+        return True
+    candidates = mention.get("resolution_candidates")
+    return status == "candidate_for_review" and isinstance(candidates, list) and bool(candidates)
+
+
 def _placement_candidates(
     canonical: str,
     displayed: str,
@@ -524,7 +577,7 @@ def _placement_candidates(
         return placements, suppressed
 
     for mention in mentions:
-        if not isinstance(mention, Mapping) or not _resolved_mention(mention):
+        if not isinstance(mention, Mapping) or not (_resolved_mention(mention) or _identity_resolution_mention(mention)):
             continue
         mention_section = mention.get("section")
         if mention_section != section:
@@ -536,7 +589,9 @@ def _placement_candidates(
         mention_id = _mention_id(mention)
         offset = _mention_offset(mention)
         person_id = mention.get("person_id")
-        if not isinstance(surface, str) or not mention_id or not isinstance(person_id, str) or offset is None:
+        target = mention.get("resolution_target")
+        is_production = _resolved_mention(mention)
+        if not isinstance(surface, str) or not mention_id or (is_production and not isinstance(person_id, str)) or offset is None:
             if mention_id:
                 suppressed.append(
                     {
@@ -573,7 +628,15 @@ def _placement_candidates(
         placements.append(
             {
                 "mention_id": mention_id,
-                "person_id": person_id,
+                "person_id": person_id if isinstance(person_id, str) else None,
+                "target_kind": "production_person" if is_production else "identity_candidate",
+                "resolution_status": str(mention.get("resolution_status", "resolved")),
+                "resolution_target": dict(target) if isinstance(target, Mapping) else None,
+                "resolution_candidates": [
+                    dict(item)
+                    for item in mention.get("resolution_candidates", [])
+                    if isinstance(item, Mapping)
+                ],
                 "start": start,
                 "end": end,
                 "section": section,
@@ -705,12 +768,38 @@ def build_reading_segments(
                 text = displayed[cursor : placement["start"]]
                 pieces.append({"type": "text", "display": _display_pair(text, converter)})
             text = displayed[placement["start"] : placement["end"]]
-            piece: dict[str, Any] = {
-                "type": "person_mention",
-                "mention_id": placement["mention_id"],
-                "person_id": placement["person_id"],
-                "display": _display_pair(text, converter),
-            }
+            if placement.get("target_kind") == "production_person":
+                piece: dict[str, Any] = {
+                    "type": "person_mention",
+                    "mention_id": placement["mention_id"],
+                    "person_id": placement["person_id"],
+                    "display": _display_pair(text, converter),
+                }
+            else:
+                target = placement.get("resolution_target")
+                names: list[str] = []
+                primary_name: str | None = None
+                if isinstance(target, Mapping) and isinstance(target.get("canonical_name"), str):
+                    primary_name = str(target["canonical_name"])
+                    names.append(primary_name)
+                for candidate in placement.get("resolution_candidates", []):
+                    if isinstance(candidate, Mapping) and isinstance(candidate.get("canonical_name"), str):
+                        if candidate["canonical_name"] not in names:
+                            names.append(str(candidate["canonical_name"]))
+                piece = {
+                    "type": "identity_mention",
+                    "mention_id": placement["mention_id"],
+                    "resolution_status": placement.get("resolution_status", "resolved"),
+                    "target_kind": "identity_candidate",
+                    # A resolved target remains the recommended identity even
+                    # when the same surface has competing candidates.  The
+                    # competing names stay available in candidate_names for
+                    # the review/display layer; they must not erase the
+                    # selected target's identity label.
+                    "canonical_name": _display_pair(primary_name, converter) if primary_name else None,
+                    "candidate_names": [_display_pair(name, converter) for name in names],
+                    "display": _display_pair(text, converter),
+                }
             if section == "liu_annotation" and annotation_id is not None:
                 piece["annotation_id"] = annotation_id
             pieces.append(piece)

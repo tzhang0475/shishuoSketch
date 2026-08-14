@@ -58,7 +58,12 @@ class M2ExperienceScaleUpTests(unittest.TestCase):
         }
         sketches = set(self.bundle["person_sketches"])
         eligible = story_people & sketches
-        self.assertEqual(len(eligible), 35)
+        # ER1 deliberately removes the only unsafe Story path for 孫晷 /
+        # person-015.  Eligibility remains derived from the generated bundle;
+        # a Person without a safe published navigation path is not made
+        # eligible merely to preserve the pre-resolution count.
+        self.assertEqual(len(eligible), self.metrics["after"]["random_person_eligible_count"])
+        self.assertNotIn("person-015", eligible)
         self.assertEqual(self.metrics["after"]["random_person_eligible_count"], len(eligible))
 
     def test_m2_metrics_show_scale_without_relation_inflation(self) -> None:

@@ -10,6 +10,11 @@ from typing import Any
 
 from jsonschema import Draft202012Validator, RefResolver
 
+try:
+    from .person_resolution import load_effective_mentions
+except ImportError:  # direct execution
+    from person_resolution import load_effective_mentions
+
 
 ROOT = Path(__file__).resolve().parents[1]
 LINKS_PATH = Path("data/derived/person-story-links.json")
@@ -120,7 +125,7 @@ def validate(
     people_by_id = {person.get("person_id"): person for person in people}
     entries = read_json(root / "data/shishuo-corpus-index.json").get("entries", [])
     entries_by_id = {entry.get("id"): entry for entry in entries}
-    mentions = read_json(root / "data/mentions/shishuo.json").get("mentions", [])
+    mentions = load_effective_mentions(root)
     mentions_by_id = {mention.get("mention_id"): mention for mention in mentions}
     evidence = read_json(root / "data/evidence/wp1-evidence.json").get("records", [])
     evidence_by_id = {record.get("id"): record for record in evidence}
@@ -177,7 +182,16 @@ def validate(
             if mention is None:
                 errors.append(f"PersonStoryLink {link_id} references nonexistent Mention: {mention_id!r}")
                 continue
-            if mention.get("person_id") != person_id:
+            mention_candidate_owner = (
+                mention.get("resolution_status") == "candidate_for_review"
+                and any(
+                    isinstance(candidate, dict)
+                    and candidate.get("target_kind") == "production_person"
+                    and candidate.get("person_id") == person_id
+                    for candidate in mention.get("resolution_candidates", [])
+                )
+            )
+            if mention.get("person_id") != person_id and not (mention_candidate_owner and mention_id in candidate_mention_ids):
                 errors.append(f"PersonStoryLink {link_id} Mention {mention_id} resolves to a different Person")
             if mention.get("entry_id") != entry_id and mention.get("source_id") != entry_id:
                 errors.append(f"PersonStoryLink {link_id} Mention {mention_id} belongs to a different entry")

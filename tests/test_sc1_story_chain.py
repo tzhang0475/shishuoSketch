@@ -158,10 +158,16 @@ class SC1StoryChainTests(unittest.TestCase):
 
     def test_person_story_projection_uses_sc0_links_and_separates_annotation_only(self) -> None:
         refs = {item["person_id"]: item for item in self.bundle["story_chain"]["person_story_refs"]}
-        self.assertEqual(refs["person-001"]["story_ids"], [
+        frozen_sc0_refs = {
             "02-yanyu-069", "04-wenxue-036", "06-yaliang-019",
             "14-rongzhi-024", "19-xianyuan-026",
-        ])
+        }
+        # The M2 frontend projection extends the frozen SC0 references with
+        # published expansion Stories; SC0 itself remains the regression
+        # gold set and must still be wholly represented here.
+        self.assertTrue(frozen_sc0_refs <= set(refs["person-001"]["story_ids"]))
+        published = {story["id"] for story in self.bundle["stories"]}
+        self.assertTrue(set(refs["person-001"]["story_ids"]) <= published)
         self.assertEqual(refs["person-007"]["main_text_story_ids"], [])
         self.assertEqual(refs["person-007"]["liu_annotation_only_story_ids"], ["06-yaliang-019"])
         self.assertIn("25-paidiao-026", refs["person-005"]["liu_annotation_only_story_ids"])

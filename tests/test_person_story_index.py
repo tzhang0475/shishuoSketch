@@ -50,11 +50,26 @@ class PersonStoryIndexTests(unittest.TestCase):
         ))
 
     def test_candidate_contextual_mentions_do_not_create_second_semantic_links(self) -> None:
-        self.assertEqual(self.links["candidate_link_count"], 0)
-        self.assertEqual(self.links["candidate_mention_count"], 22)
+        candidate_links = [
+            link for link in self.links["links"]
+            if link["review_status"] == "candidate"
+        ]
+        self.assertEqual(self.links["candidate_link_count"], len(candidate_links))
+        self.assertEqual(
+            self.links["candidate_mention_count"],
+            sum(len(link["candidate_mention_ids"]) for link in self.links["links"]),
+        )
         self.assertTrue(any(link["candidate_mention_ids"] for link in self.links["links"]))
         keys = [(link["person_id"], link["entry_id"]) for link in self.links["links"]]
         self.assertEqual(len(keys), len(set(keys)))
+        # ER1 must remove the known false production link rather than retain
+        # it as a reviewed PersonStory fact.  Other contextual candidates may
+        # remain visible as review-only links.
+        self.assertFalse(any(
+            link["person_id"] == "person-015"
+            and link["entry_id"] == "05-fangzheng-058"
+            for link in self.links["links"]
+        ))
 
     def test_index_projects_reviewed_links_exactly(self) -> None:
         reviewed_by_person: dict[str, set[str]] = {}

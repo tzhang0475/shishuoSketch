@@ -17,8 +17,10 @@ from typing import Any, Iterable
 
 try:
     from .build_six_person_pilot import PERSON_DEFINITIONS, markdown_body, parse_frontmatter
+    from .person_resolution import load_effective_mentions
 except ImportError:  # direct execution: python scripts/build_person_story_index.py
     from build_six_person_pilot import PERSON_DEFINITIONS, markdown_body, parse_frontmatter
+    from person_resolution import load_effective_mentions
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -557,7 +559,16 @@ def build(root: Path = ROOT) -> tuple[dict[str, Any], dict[str, Any], str]:
     person_ids = {person["person_id"] for person in people}
     if not PRIMARY_PERSON_IDS <= person_ids:
         raise ValueError("unified Person registry is missing a primary pilot person")
-    mentions = read_json(SHISHUO_MENTIONS_PATH)["mentions"]
+    # ER1 is an effective overlay above canonical Mention segmentation.  It
+    # may target a non-materialized identity candidate, in which case the
+    # record must not create a production PersonStory link.
+    mentions = load_effective_mentions(root)
+    canonical_mentions = read_json(SHISHUO_MENTIONS_PATH).get("mentions", [])
+    canonical_by_id = {
+        mention_id(item): item
+        for item in canonical_mentions
+        if isinstance(item, dict) and isinstance(item.get("mention_id"), str)
+    }
     mentions_by_id = {mention_id(mention): mention for mention in mentions}
     corpus_entries = read_json(CORPUS_INDEX_PATH)["entries"]
     entry_by_id = {entry["id"]: entry for entry in corpus_entries}
@@ -574,14 +585,47 @@ def build(root: Path = ROOT) -> tuple[dict[str, Any], dict[str, Any], str]:
     grouped: dict[tuple[str, str], list[dict[str, Any]]] = defaultdict(list)
     for mention in mentions:
         person_id = mention.get("person_id")
-        if person_id is None:
-            continue
-        if person_id not in person_ids:
-            raise ValueError(f"resolved Shishuo mention points to unknown Person: {person_id}")
         entry_id = mention_entry_id(mention)
         if entry_id not in entry_by_id:
             raise ValueError(f"resolved Shishuo mention points to unknown entry: {entry_id}")
-        grouped[(person_id, entry_id)].append(mention)
+        canonical = canonical_by_id.get(mention_id(mention))
+        canonical_person_id = canonical.get("person_id") if isinstance(canonical, dict) else None
+        if not isinstance(canonical_person_id, str):
+            continue
+        # PersonStory is an existing navigation/fact projection, not the
+        # place where ER1 promotes every newly safe automatic guess.  Keep
+        # existing production-resolved links stable; allow ER1 to remove a
+        # link when its effective target is a different identity.  A
+        # pre-existing medium-confidence Mention remains candidate evidence
+        # even if ER1 now has a safe target; this preserves the existing
+        # PersonStory review semantics without making it a new assertion.
+        if canonical_person_id not in person_ids:
+            raise ValueError(f"resolved Shishuo mention points to unknown Person: {canonical_person_id}")
+        if person_id == canonical_person_id:
+            projected = dict(mention)
+            if canonical.get("confidence") != "high" and projected.get("resolution_status") == "resolved":
+                projected["confidence"] = canonical.get("confidence", "medium")
+            grouped[(canonical_person_id, entry_id)].append(projected)
+            continue
+
+        # An ambiguous ER1 Mention may remain attached to the production
+        # Person that was the canonical pipeline's candidate owner, but only
+        # as candidate evidence and only when ER1 still lists that Person as
+        # one of the concrete candidates.  A reviewed non-materialized
+        # identity correction (王文度 → 王坦之) never falls through here.
+        if mention.get("resolution_status") == "candidate_for_review":
+            candidate_person_ids = {
+                str(item.get("person_id"))
+                for item in mention.get("resolution_candidates", [])
+                if isinstance(item, dict) and item.get("target_kind") == "production_person" and isinstance(item.get("person_id"), str)
+            }
+            if canonical_person_id in candidate_person_ids:
+                projected = dict(mention)
+                projected["person_id"] = canonical_person_id
+                projected["candidate_person_ids"] = [canonical_person_id]
+                projected["confidence"] = "medium"
+                projected["er1_candidate_projection"] = True
+                grouped[(canonical_person_id, entry_id)].append(projected)
 
     links = [
         build_mention_link(person_id, entry_id, grouped[(person_id, entry_id)])

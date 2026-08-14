@@ -18,12 +18,14 @@ try:
     from .validate_person_sketch import validate_bundle as validate_person_sketch_bundle
     from .validate_wp1 import validate_source_provenance
     from .story_scene_contexts import DERIVED_PATH as SCENE_DERIVED_PATH, SOURCE_PATH as SCENE_SOURCE_PATH, project as project_scene_contexts, validate_source as validate_scene_source
+    from .person_resolution import load_effective_mentions
 except ImportError:  # direct execution
     from build_six_person_pilot import parse_shishuo_sections
     from reading_layers import display_span_for_anchor, strip_display_punctuation
     from validate_person_sketch import validate_bundle as validate_person_sketch_bundle
     from validate_wp1 import validate_source_provenance
     from story_scene_contexts import DERIVED_PATH as SCENE_DERIVED_PATH, SOURCE_PATH as SCENE_SOURCE_PATH, project as project_scene_contexts, validate_source as validate_scene_source
+    from person_resolution import load_effective_mentions
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -168,6 +170,46 @@ def validate_inline_mention_projection(
                 placed_markers.add(annotation_marker_id)
                 offset += len(display_original)
                 continue
+            if segment.get("type") == "identity_mention":
+                mention_id = segment.get("mention_id")
+                if not isinstance(mention_id, str):
+                    errors.append(f"SC1 {story_id}: identity segment lacks Mention ID")
+                    offset += len(display_original)
+                    continue
+                mention = mentions.get(mention_id)
+                if mention is None:
+                    errors.append(f"SC1 {story_id}: identity Mention does not resolve: {mention_id}")
+                else:
+                    if mention.get("story_id") != story_id or mention.get("section") != layer:
+                        errors.append(f"SC1 {story_id}: identity Mention layer mismatch: {mention_id}")
+                    if mention.get("resolution_status") != segment.get("resolution_status"):
+                        errors.append(f"SC1 {story_id}: identity Mention status mismatch: {mention_id}")
+                    target = mention.get("resolution_target")
+                    if segment.get("target_kind") != "identity_candidate":
+                        errors.append(f"SC1 {story_id}: identity segment target kind is invalid: {mention_id}")
+                    if isinstance(target, dict) and target.get("canonical_name") != (segment.get("canonical_name") or {}).get("original"):
+                        errors.append(f"SC1 {story_id}: identity Mention target name mismatch: {mention_id}")
+                    canonical = canonical_by_layer.get((layer, annotation_id))
+                    anchor = mention.get("anchor", {})
+                    if canonical is None or not isinstance(anchor, dict) or not isinstance(anchor.get("offset"), int) or not isinstance(anchor.get("text"), str):
+                        errors.append(f"SC1 {story_id}: missing canonical anchor for identity Mention {mention_id}")
+                    else:
+                        try:
+                            expected_start, expected_end = display_span_for_anchor(
+                                canonical,
+                                expected_original,
+                                anchor["offset"],
+                                anchor["text"],
+                            )
+                            if offset != expected_start or offset + len(display_original) != expected_end:
+                                errors.append(f"SC1 {story_id}: identity Mention display span differs from anchor: {mention_id}")
+                        except ValueError as exc:
+                            errors.append(f"SC1 {story_id}: unsafe identity Mention anchor {mention_id}: {exc}")
+                if mention_id in placed:
+                    errors.append(f"SC1 {story_id}: duplicate inline Mention: {mention_id}")
+                placed[mention_id] = (layer, annotation_id)
+                offset += len(display_original)
+                continue
             if segment.get("type") != "person_mention":
                 offset += len(display_original)
                 continue
@@ -261,7 +303,14 @@ def validate_inline_mention_projection(
 
     for mention_id in story.get("mention_ids", []):
         mention = mentions.get(str(mention_id))
-        if not mention or not isinstance(mention.get("person_id"), str) or mention.get("confidence") == "unresolved":
+        visible_resolution = bool(
+            mention
+            and (
+                isinstance(mention.get("person_id"), str)
+                or mention.get("resolution_status") in {"resolved", "candidate_for_review"}
+            )
+        )
+        if not visible_resolution:
             continue
         if mention_id not in placed and mention_id not in suppressed:
             errors.append(f"SC1 {story_id}: resolved Mention has no inline/suppressed projection: {mention_id}")
@@ -331,7 +380,7 @@ def validate(root: Path = ROOT, mode: str = "full") -> list[str]:
         }
         base = read_json(root / "data/derived/wp1-site.json")
         production_people = read_json(root / "data/people.json").get("people", [])
-        raw_shishuo_mentions = read_json(root / "data/mentions/shishuo.json").get("mentions", [])
+        raw_shishuo_mentions = load_effective_mentions(root)
     except (OSError, ValueError, KeyError) as exc:
         return [f"SC1 cannot read required artifact: {exc}"]
 
@@ -506,9 +555,37 @@ def validate(root: Path = ROOT, mode: str = "full") -> list[str]:
         if evidence_by_id.get(evidence_id) != item:
             errors.append(f"SC1 changed existing Evidence record: {evidence_id}")
     base_mentions = {item["id"]: item for item in base.get("mentions", [])}
+    # ER1 is an effective-resolution projection.  It may change only the
+    # identity-resolution fields of a copied WP1 Mention; canonical text,
+    # anchors, layer, and evidence remain immutable.
+    resolution_projection_keys = {
+        "person_id",
+        "candidate_person_ids",
+        "resolution_mode",
+        "confidence",
+        "resolution_status",
+        "resolution_target",
+        "resolution_candidates",
+        "resolution_review_status",
+        "resolution_decision_source",
+        "resolution_evidence_ids",
+        "resolution_note",
+    }
     for mention_id, item in base_mentions.items():
-        if mention_by_id.get(mention_id) != item:
-            errors.append(f"SC1 changed existing Mention record: {mention_id}")
+        projected = mention_by_id.get(mention_id)
+        if not isinstance(projected, dict):
+            errors.append(f"SC1 dropped existing Mention record: {mention_id}")
+            continue
+        immutable_base = {
+            key: value for key, value in item.items()
+            if key not in resolution_projection_keys
+        }
+        immutable_projected = {
+            key: value for key, value in projected.items()
+            if key not in resolution_projection_keys
+        }
+        if immutable_projected != immutable_base:
+            errors.append(f"SC1 changed immutable existing Mention fields: {mention_id}")
 
     frontend_chain = bundle.get("story_chain", {})
     if frontend_chain.get("story_ids") != selected_ids:

@@ -15,6 +15,11 @@ from typing import Any, Mapping, Sequence
 
 from opencc import OpenCC
 
+try:
+    from .person_resolution import load_effective_mentions
+except ImportError:  # direct execution
+    from person_resolution import load_effective_mentions
+
 
 PERSON_SKETCH_PATH = Path("data/annotation/person-sketches.json")
 ALIASES_PATH = Path("data/aliases.json")
@@ -233,7 +238,11 @@ def build_person_sketches(
         for item in aliases
         if isinstance(item, Mapping) and isinstance(item.get("alias_id"), str)
     }
-    raw_mentions = read_json(root, MENTIONS_PATH).get("mentions", [])
+    # Alias rows are a reader-facing projection of effective resolution.  The
+    # canonical Mention file remains the source of segmentation, but a
+    # collision-aware ER1 decision must not leave a false occurrence under a
+    # production Person's Sketch.
+    raw_mentions = load_effective_mentions(root)
     corpus = read_json(root, Path("data/shishuo-corpus-index.json")).get("entries", [])
     corpus_order = {
         str(item["id"]): int(item.get("global_ordinal", 10**9))

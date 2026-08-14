@@ -239,6 +239,37 @@ function InlineReadingSegments({
             </span>
           );
         }
+        if (segment.type === "identity_mention") {
+          const candidateNames = segment.candidate_names
+            .map((candidate) => readingValue(candidate, readingMode, ""))
+            .filter(Boolean);
+          const resolvedName = segment.canonical_name
+            ? readingValue(segment.canonical_name, readingMode, "")
+            : "";
+          if (segment.resolution_status === "candidate_for_review") {
+            return (
+              <details className="inline-identity-review" key={`${segment.mention_id}-${index}`}>
+                <summary aria-label={`${text}，人物尚待确认`}>{text}</summary>
+                <span className="inline-identity-review-body" role="note">
+                  <span className="inline-identity-review-heading">人物尚待确认</span>
+                  {candidateNames.length > 0 && (
+                    <span>可能是：{candidateNames.join("、")}</span>
+                  )}
+                  <span>当前证据不足以唯一判断。</span>
+                </span>
+              </details>
+            );
+          }
+          return (
+            <span
+              className="inline-identity-mention"
+              key={`${segment.mention_id}-${index}`}
+              title={resolvedName ? `${text} · ${resolvedName} · 人物卡尚未建立` : undefined}
+            >
+              {text}
+            </span>
+          );
+        }
         const mention = data.mentions.find((candidate) => candidate.id === segment.mention_id);
         const person = data.people.find((candidate) => candidate.id === segment.person_id);
         const personName = person ? personDisplayName(story, person, readingMode) : segment.person_id;

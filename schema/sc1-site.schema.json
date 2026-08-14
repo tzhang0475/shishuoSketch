@@ -88,7 +88,22 @@
       }
     },
     "people": {"type": "array", "items": {"type": "object", "required": ["id"]}},
-    "mentions": {"type": "array", "items": {"type": "object", "required": ["id", "story_id"]}},
+    "mentions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "story_id"],
+        "properties": {
+          "resolution_status": {"enum": ["resolved", "candidate_for_review", "unresolved"]},
+          "resolution_target": {"anyOf": [{"$ref": "#/$defs/resolutionTarget"}, {"type": "null"}]},
+          "resolution_candidates": {"type": "array", "items": {"$ref": "#/$defs/resolutionTarget"}},
+          "resolution_review_status": {"enum": ["candidate", "reviewed", "rejected", "todo"]},
+          "resolution_decision_source": {"enum": ["automatic", "human_review"]},
+          "resolution_evidence_ids": {"type": "array", "items": {"type": "string"}},
+          "resolution_note": {"type": "string"}
+        }
+      }
+    },
     "relations": {"type": "array", "items": {"type": "object", "required": ["id"]}},
     "eras": {"type": "array", "items": {"type": "object", "required": ["id"]}},
     "evidence": {"type": "array", "items": {"type": "object", "required": ["id"]}},
@@ -120,7 +135,7 @@
       "type": "object",
       "required": ["type", "display"],
       "properties": {
-        "type": {"enum": ["text", "person_mention", "annotation_marker"]},
+        "type": {"enum": ["text", "person_mention", "identity_mention", "annotation_marker"]},
         "display": {
           "type": "object",
           "required": ["original", "simplified"],
@@ -128,6 +143,10 @@
         },
         "mention_id": {"type": "string"},
         "person_id": {"type": "string"},
+        "target_kind": {"enum": ["production_person", "identity_candidate"]},
+        "resolution_status": {"enum": ["resolved", "candidate_for_review"]},
+        "canonical_name": {"anyOf": [{"$ref": "#/$defs/readingPair"}, {"type": "null"}]},
+        "candidate_names": {"type": "array", "items": {"$ref": "#/$defs/readingPair"}},
         "annotation_id": {"type": "string"},
         "label": {
           "type": "object",
@@ -142,6 +161,16 @@
       "properties": {
         "original": {"type": "string"},
         "simplified": {"type": "string"}
+      }
+    },
+    "resolutionTarget": {
+      "type": "object",
+      "required": ["target_kind", "canonical_name"],
+      "properties": {
+        "target_kind": {"enum": ["production_person", "identity_candidate"]},
+        "person_id": {"type": "string"},
+        "candidate_id": {"type": "string"},
+        "canonical_name": {"type": "string", "minLength": 1}
       }
     },
     "personSketchAlias": {

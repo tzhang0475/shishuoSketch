@@ -1,6 +1,15 @@
 export type AssertionStatus = "attested" | "reported" | "inferred" | "unknown";
 export type ReviewStatus = "candidate" | "reviewed" | "rejected" | "todo";
 export type PublicationState = "production_ready" | "preview_ready" | "blocked";
+export type ResolutionStatus = "resolved" | "candidate_for_review" | "unresolved";
+export type ResolutionTargetKind = "production_person" | "identity_candidate";
+
+export interface ResolutionTarget {
+  target_kind: ResolutionTargetKind;
+  person_id?: string;
+  candidate_id?: string;
+  canonical_name: string;
+}
 
 export interface Person {
   id: string;
@@ -151,6 +160,10 @@ export interface StoryReading {
     explanation: ReadingPair;
     alias_type: string;
     resolution_mode: "exact" | "contextual" | "ambiguous" | string;
+    resolution_status?: ResolutionStatus;
+    target_kind?: ResolutionTargetKind;
+    canonical_name?: ReadingPair;
+    candidate_names?: ReadingPair[];
   }>;
   source_display: Record<string, { work: ReadingPair; edition: ReadingPair }>;
   relation_display: Record<string, {
@@ -197,6 +210,16 @@ export type ReadingSegment =
       annotation_id?: string;
     }
   | {
+      type: "identity_mention";
+      mention_id: string;
+      resolution_status: "resolved" | "candidate_for_review";
+      target_kind: "identity_candidate";
+      canonical_name: ReadingPair | null;
+      candidate_names: ReadingPair[];
+      display: ReadingPair;
+      annotation_id?: string;
+    }
+  | {
       type: "annotation_marker";
       annotation_id: string;
       label: ReadingPair;
@@ -218,6 +241,13 @@ export interface Mention {
   assertion_status: AssertionStatus;
   review_status: ReviewStatus;
   notes?: string;
+  resolution_status?: ResolutionStatus;
+  resolution_target?: ResolutionTarget | null;
+  resolution_candidates?: ResolutionTarget[];
+  resolution_review_status?: ReviewStatus;
+  resolution_decision_source?: "automatic" | "human_review";
+  resolution_evidence_ids?: string[];
+  resolution_note?: string;
 }
 
 export interface Relation {

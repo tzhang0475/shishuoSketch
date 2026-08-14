@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://shishuo-sketch/schema/person-resolution-effective.schema.json",
+  "title": "ER1 Effective Person Resolution",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "stage", "generated_from", "source_mentions_sha256", "decision_sha256", "mention_count", "counts", "mentions"],
+  "properties": {
+    "schema": {"const": 1},
+    "stage": {"const": "er1-effective-person-resolution"},
+    "generated_from": {"type": "array", "items": {"type": "string"}, "minItems": 1},
+    "source_mentions_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "decision_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "mention_count": {"type": "integer", "minimum": 0},
+    "counts": {"type": "object", "additionalProperties": {"type": "integer", "minimum": 0}},
+    "mentions": {"type": "array", "items": {"$ref": "#/$defs/mention"}}
+  },
+  "$defs": {
+    "target": {
+      "type": "object", "additionalProperties": false,
+      "required": ["target_kind", "canonical_name"],
+      "properties": {
+        "target_kind": {"enum": ["production_person", "identity_candidate"]},
+        "person_id": {"type": "string", "minLength": 1},
+        "candidate_id": {"type": "string", "minLength": 1},
+        "canonical_name": {"type": "string", "minLength": 1}
+      },
+      "allOf": [
+        {"if": {"properties": {"target_kind": {"const": "production_person"}}}, "then": {"required": ["person_id"], "not": {"required": ["candidate_id"]}}},
+        {"if": {"properties": {"target_kind": {"const": "identity_candidate"}}}, "then": {"required": ["candidate_id"], "not": {"required": ["person_id"]}}}
+      ]
+    },
+    "mention": {
+      "type": "object", "additionalProperties": true,
+      "required": ["mention_id", "entry_id", "section", "surface", "resolution_status", "resolution_target", "resolution_candidates", "resolution_review_status", "resolution_decision_source"],
+      "properties": {
+        "mention_id": {"type": "string", "minLength": 1},
+        "entry_id": {"type": "string", "minLength": 1},
+        "section": {"enum": ["main_text", "liu_annotation"]},
+        "surface": {"type": "string", "minLength": 1},
+        "resolution_status": {"enum": ["resolved", "candidate_for_review", "unresolved"]},
+        "resolution_target": {"anyOf": [{"$ref": "#/$defs/target"}, {"type": "null"}]},
+        "resolution_candidates": {"type": "array", "items": {"$ref": "#/$defs/target"}},
+        "resolution_review_status": {"enum": ["candidate", "reviewed", "rejected", "todo"]},
+        "resolution_decision_source": {"enum": ["automatic", "human_review"]}
+      }
+    }
+  }
+}

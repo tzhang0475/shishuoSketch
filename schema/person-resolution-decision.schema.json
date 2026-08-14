@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://shishuo-sketch/schema/person-resolution-decision.schema.json",
+  "title": "ER1 Human Person Resolution Decision",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["mention_id", "resolution_status", "target", "review_status", "review_note", "evidence_ids"],
+  "properties": {
+    "mention_id": {"type": "string", "minLength": 1},
+    "resolution_status": {"enum": ["resolved", "candidate_for_review", "unresolved"]},
+    "target": {
+      "anyOf": [
+        {"$ref": "#/$defs/productionTarget"},
+        {"$ref": "#/$defs/candidateTarget"},
+        {"type": "null"}
+      ]
+    },
+    "review_status": {"const": "reviewed"},
+    "review_note": {"type": "string"},
+    "evidence_ids": {"type": "array", "items": {"type": "string"}, "uniqueItems": true}
+  },
+  "$defs": {
+    "productionTarget": {
+      "type": "object", "additionalProperties": false,
+      "required": ["target_kind", "person_id", "canonical_name"],
+      "properties": {
+        "target_kind": {"const": "production_person"},
+        "person_id": {"type": "string", "minLength": 1},
+        "canonical_name": {"type": "string", "minLength": 1}
+      }
+    },
+    "candidateTarget": {
+      "type": "object", "additionalProperties": false,
+      "required": ["target_kind", "candidate_id", "canonical_name"],
+      "properties": {
+        "target_kind": {"const": "identity_candidate"},
+        "candidate_id": {"type": "string", "minLength": 1},
+        "canonical_name": {"type": "string", "minLength": 1}
+      }
+    }
+  }
+}

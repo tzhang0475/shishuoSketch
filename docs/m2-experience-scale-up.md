@@ -8,18 +8,18 @@
 |---|---:|---:|
 | 生产人物 | 17 | 35 |
 | 已发布阅读故事 | 16 | 60 |
-| 随机认识人物可选数 | 13 | 35 |
-| PersonStory links | 330 | 587 |
-| 至少一则发布故事的人物 | 13 | 35 |
-| 至少三则发布故事的人物 | 3 | 20 |
-| 多人物故事 | 7 | 52 |
+| 随机认识人物可选数 | 13 | 34 |
+| PersonStory links | 330 | 577 |
+| 至少一则发布故事的人物 | 35 | 34 |
+| 至少三则发布故事的人物 | 20 | 19 |
+| 多人物故事 | 52 | 49 |
 | Scene Cards | 9 | 20 |
 | 已审阅 Relation | 7 | 7 |
-| 仅按 Relation 孤立的人物 | 10 | 28 |
-| 共享故事人物对 | 21 | 84 |
-| 没有发布故事路径的人物 | 4 | 0 |
+| 仅按 Relation 孤立的人物 | 28 | 28 |
+| 共享故事人物对 | 84 | 90 |
+| 没有发布故事路径的人物 | 0 | 1 |
 | 没有可点击人物的故事 | 0 | 0 |
-| 仅有一则且该故事无其他人物的人物 | 0 | 1 |
+| 仅有一则且该故事无其他人物的人物 | 1 | 1 |
 
 ## Performance guard
 
@@ -27,10 +27,10 @@
 
 | 产物 | Before | After |
 |---|---:|---:|
-| `data/derived/sc1-site.json` bytes | 4,051,185 | 19,376,531 |
-| Vite JS bytes | 3,533,126 | 16,111,327 |
-| Vite JS gzip bytes | 1,093,692 | 4,925,099 |
-| JS asset count | 1 | 1 |
+| `data/derived/sc1-site.json` bytes | 19,376,531 | 19,667,128 |
+| Vite JS bytes | 3,533,126 | 待 production artifact pass |
+| Vite JS gzip bytes | 1,093,692 | 待 production artifact pass |
+| JS asset count | 1 | 待 production artifact pass |
 
 本阶段未引入 backend、runtime JSON fetch 或数据库；当前体积增长保留为后续静态 code-splitting 评估项。
 
@@ -117,11 +117,11 @@ Wave 2 只提升具备强身份证据、正文导航价值和安全投影路径�
 
 图节点为 production Persons 与已发布 Stories，边为生成的 PersonStory/解析人物路径；不是 Relation graph。
 
-- connected components：2；最大组件：93 nodes / 34 Persons。
+- connected components：4；最大组件：89 nodes / 32 Persons。
 - median Person Story degree：3；median Story Person degree：2.0。
-- articulation Persons：person-006, person-012, person-015, person-033。
+- articulation Persons：person-006, person-008, person-012, person-024, person-033。
 - articulation Stories：05-fangzheng-055, 06-yaliang-019, 09-pinzao-045, 22-chongli-002, 25-paidiao-026, 27-jiajue-008。
-- Person no published Story：无。
+- Person no published Story：person-015。
 
 ## Relation discovery boundary
 
@@ -137,8 +137,8 @@ Wave 2 只提升具备强身份证据、正文导航价值和安全投影路径�
 - `data/derived/m2-story-expansion-ranking.json`：`989e99cde1f75d8daa2fd31f9ede904d64619a44a41e99566174ac6705f79406`
 - `data/annotation/person-expansion-wave-2.json`：`998b3073376d9f1ceed5b0a64379092ac61265cd3c09eb1e26bd366ca9350ca1`
 - `data/annotation/story-expansion-wave-1.json`：`0d80f92be763ca7e765a6c0fc742910bbf7f2e2ba787efc84b52cff6524ea4af`
-- `data/derived/sc1-site.json`：`46e098e93b6967087db76d9b69112ede515095132466d77bf2c5a6033f28a861`
+- `data/derived/sc1-site.json`：`6cb7d74eaf396d143bac844c19ab12649bfe799005eb32476a4110ecc3ba7df2`
 - `data/derived/story-scene-contexts.json`：`5c8daa391cc65056d9fee906be2c2ac6dc268b2e28bdbe21559af01767e37f80`
-- `data/derived/person-relation-candidates-r3.json`：`6637c01fc9474f9b2a1870082aa363173e68d7982697395a5ada7b02ff9d835c`
+- `data/derived/person-relation-candidates-r3.json`：`2dcad727e384bcccd9de7805fcca5353a5f368e4fd40ce98d7518b60bfa2abb9`
 
 本阶段未执行 P3B.2、R3B、Sanguozhi 处理或 Relation 自动审阅；未修改 canonical Shishuo/Jinshu、SC0 Gold Set、既有 Relation、标点和来源 payload。

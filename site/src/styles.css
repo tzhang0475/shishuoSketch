@@ -363,6 +363,34 @@ body { overflow-x: hidden; }
 .inline-person-mention:hover { border-bottom-style: solid; background: rgba(217, 196, 181, .22); }
 .inline-person-mention:focus-visible { outline: 2px solid #a9785f; outline-offset: 2px; border-bottom-style: solid; }
 .inline-person-mention.active { border-bottom-style: solid; background: rgba(217, 196, 181, .2); }
+.inline-identity-mention {
+  border-bottom: 1px dotted #a9785f;
+  cursor: help;
+}
+.inline-identity-review {
+  display: inline;
+  border-bottom: 1px dashed #a9785f;
+  cursor: help;
+}
+.inline-identity-review > summary {
+  display: inline;
+  list-style: none;
+}
+.inline-identity-review > summary::-webkit-details-marker { display: none; }
+.inline-identity-review > summary:focus-visible { outline: 2px solid #a9785f; outline-offset: 2px; }
+.inline-identity-review-body {
+  display: inline-flex;
+  flex-direction: column;
+  gap: .2rem;
+  margin: .35rem .2rem;
+  padding: .45rem .6rem;
+  border: 1px solid #e3d9cd;
+  background: rgba(255, 253, 249, .96);
+  color: #765244;
+  font-size: .82em;
+  vertical-align: middle;
+}
+.inline-identity-review-heading { color: #8c6956; font-weight: 600; }
 .mention-summary { display: grid; gap: .8rem; margin-top: .9rem; }
 .mention-summary-group { border-top: 1px solid #e3d9cd; padding-top: .55rem; }
 .mention-summary-label { margin: 0 0 .25rem; color: #8c6956; font-size: .78rem; }

@@ -138,13 +138,13 @@ Scene 只解释本则人物为何在此相遇；只有来源独立明确写出�
 - 王敦 × 謝鯤：共享 3 则 Story（08-shangyu-051, 09-pinzao-017, 10-guizhen-012）。
 - 王濛 × 謝尚：共享 3 则 Story（04-wenxue-022, 07-shijian-018, 09-pinzao-036）。
 - 王導 × 王敦：共享 2 则 Story（09-pinzao-006, 11-jiewu-005）。
-- 謝安 × 孫晷：共享 2 则 Story（06-yaliang-029, 23-rendan-038）。
 - 桓溫 × 王敦：共享 2 则 Story（08-shangyu-079, 25-paidiao-060）。
-- 桓溫 × 孫晷：共享 2 则 Story（05-fangzheng-058, 06-yaliang-029）。
 - 庾亮 × 謝尚：共享 2 则 Story（04-wenxue-022, 05-fangzheng-025）。
 - 庾亮 × 周顗：共享 2 则 Story（09-pinzao-022, 26-qingdi-002）。
 - 庾亮 × 謝鯤：共享 2 则 Story（09-pinzao-017, 09-pinzao-022）。
 - 庾亮 × 殷浩：共享 2 则 Story（03-zhengshi-022, 14-rongzhi-024）。
+- 王敦 × 周顗：共享 2 则 Story（05-fangzheng-027, 05-fangzheng-031）。
+- 温嶠 × 劉琨：共享 2 则 Story（02-yanyu-035, 02-yanyu-036）。
 
 ## 下一步
 
