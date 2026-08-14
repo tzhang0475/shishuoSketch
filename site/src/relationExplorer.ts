@@ -47,6 +47,37 @@ export function publishedStoryIds(data: SiteBundle): string[] {
     .map((story) => story.id);
 }
 
+function isPublishedStory(story: SiteBundle["stories"][number]): boolean {
+  return story.publication_state === "production_ready" || story.publication_state === "preview_ready";
+}
+
+/**
+ * Return the published Story connections already projected for a Person.
+ * Mention sections are consulted separately for main-text preference below.
+ */
+export function publishedStoryIdsForPerson(data: SiteBundle, personId: string): string[] {
+  return data.stories
+    .filter((story) => isPublishedStory(story) && story.person_ids.includes(personId))
+    .map((story) => story.id);
+}
+
+export function mainTextPublishedStoryIdsForPerson(data: SiteBundle, personId: string): string[] {
+  const publishedIds = new Set(publishedStoryIdsForPerson(data, personId));
+  const mainTextMentionStoryIds = new Set(
+    data.mentions
+      .filter(
+        (mention) =>
+          mention.person_id === personId &&
+          mention.section === "main_text" &&
+          mention.confidence !== "unresolved",
+      )
+      .map((mention) => mention.story_id),
+  );
+  return data.stories
+    .filter((story) => publishedIds.has(story.id) && mainTextMentionStoryIds.has(story.id))
+    .map((story) => story.id);
+}
+
 export function randomPublishedStoryId(
   data: SiteBundle,
   random: () => number = Math.random,
@@ -59,18 +90,29 @@ export function randomPublishedStoryId(
   return ids[Math.floor(value * ids.length)] ?? ids[0];
 }
 
+export function randomPublishedStoryIdForPerson(
+  data: SiteBundle,
+  personId: string,
+  random: () => number = Math.random,
+  excludeStoryId?: string,
+): string | null {
+  const allIds = publishedStoryIdsForPerson(data, personId);
+  const mainTextIds = mainTextPublishedStoryIdsForPerson(data, personId);
+  const preferredIds = mainTextIds.length > 0 ? mainTextIds : allIds;
+  const ids = preferredIds.length > 1 && excludeStoryId
+    ? preferredIds.filter((id) => id !== excludeStoryId)
+    : preferredIds;
+  if (ids.length === 0) return null;
+  const value = Math.min(Math.max(random(), 0), 0.999999999);
+  return ids[Math.floor(value * ids.length)] ?? ids[0];
+}
+
 export function eligiblePersonIds(data: SiteBundle): string[] {
-  const publishedStories = data.stories.filter(
-    (story) => story.publication_state === "production_ready" || story.publication_state === "preview_ready",
-  );
-  const publishedPersonIds = new Set(
-    publishedStories.flatMap((story) => story.person_ids),
-  );
   return data.people
     .filter(
       (person) =>
         Boolean(data.person_sketches[person.id]) &&
-        publishedPersonIds.has(person.id),
+        publishedStoryIdsForPerson(data, person.id).length > 0,
     )
     .map((person) => person.id);
 }

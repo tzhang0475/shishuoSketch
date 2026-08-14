@@ -10,6 +10,7 @@ import {
   currentStoryFromExploration,
   randomEligiblePersonId,
   randomPublishedStoryId,
+  randomPublishedStoryIdForPerson,
   storyIdFromHash,
   truncateExploration,
   pathPersonIds,
@@ -1541,7 +1542,19 @@ function App() {
     if (!data) return;
     const personId = randomEligiblePersonId(data, Math.random, currentFocusedPersonId ?? undefined);
     if (!personId) return;
-    focusPerson(personId);
+    const storyId = randomPublishedStoryIdForPerson(
+      data,
+      personId,
+      Math.random,
+      currentStoryFromExploration(stack) ?? undefined,
+    );
+    if (!storyId) return;
+    setStack([
+      { kind: "story", id: storyId },
+      { kind: "person", id: personId },
+    ]);
+    setPersonPanelOpen(true);
+    writeStoryAddress(storyId);
   }
 
   if (error) {
