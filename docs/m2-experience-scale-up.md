@@ -21,6 +21,8 @@
 | 没有可点击人物的故事 | 0 | 0 |
 | 仅有一则且该故事无其他人物的人物 | 1 | 1 |
 
+ER1 的身份校正移除了 `05-fangzheng-058` 中原本错误的“文度 → 孫晷”安全导航路径。因而 M2A 虽然物化了 35 位 Person，当前安全的“随便认识一个人” eligibility 是 34；`person-015` 仍是生产 Person，但没有安全的 published Story 入口。这里不以候选或歧义 Mention 补回路径。
+
 ## Performance guard
 
 静态架构保留不变；以下记录 SC1 数据和 Vite JS 的增长，JS 以 gzip 后体积作为下载参考。若只运行数据构建，JS 栏会在 production artifact pass 后补齐。

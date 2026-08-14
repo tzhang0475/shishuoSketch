@@ -522,6 +522,12 @@ def render_report(output: Mapping[str, Any]) -> str:
     for key, label in labels:
         lines.append(f"| {label} | {before.get(key, '—')} | {after.get(key, '—')} |")
 
+    if after.get("production_person_count") == 35 and after.get("random_person_eligible_count") == 34:
+        lines.extend([
+            "",
+            "ER1 的身份校正移除了 `05-fangzheng-058` 中原本错误的“文度 → 孫晷”安全导航路径。因而 M2A 虽然物化了 35 位 Person，当前安全的“随便认识一个人” eligibility 是 34；`person-015` 仍是生产 Person，但没有安全的 published Story 入口。这里不以候选或歧义 Mention 补回路径。",
+        ])
+
     performance = output.get("performance", {})
     def performance_value(section: str, side: str) -> str:
         value = performance.get(section, {}).get(side)

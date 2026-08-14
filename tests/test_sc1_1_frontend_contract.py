@@ -195,6 +195,7 @@ const ids = eligiblePersonIds(data);
 const first = randomEligiblePersonId(data, () => 0);
 const second = randomEligiblePersonId(data, () => 0, first ?? undefined);
 const landingStories = ids.map((id) => randomPublishedStoryIdForPerson(data, id, () => 0));
+const sunGuiLanding = randomPublishedStoryIdForPerson(data, "person-015", () => 0);
 const allLandingNavigable = landingStories.every((storyId, index) => Boolean(
   storyId &&
   data.stories.some((story) => story.id === storyId &&
@@ -203,9 +204,13 @@ const allLandingNavigable = landingStories.every((storyId, index) => Boolean(
 ));
 console.log(JSON.stringify({{
   count: ids.length,
+  ids,
   first,
   second,
-  allNavigable: ids.every((id) => Boolean(data.person_sketches[id]) && data.stories.some((story) => story.person_ids.includes(id))),
+  sunGuiLanding,
+  allNavigable: ids.every((id) => Boolean(data.person_sketches[id]) && data.stories.some((story) =>
+    (story.publication_state === "production_ready" || story.publication_state === "preview_ready") &&
+    story.person_ids.includes(id))),
   allLandingNavigable,
 }}));
 '''
@@ -223,10 +228,30 @@ console.log(JSON.stringify({{
                 f"(stderr):\n{result.stderr}\nstdout:\n{result.stdout}"
             )
         value = json.loads(result.stdout)
-        self.assertEqual(value["count"], 35)
+
+        # Derive the expected set independently from the generated bundle.
+        # `eligiblePersonIds` is the production helper under test; this
+        # assertion must not merely repeat its implementation or freeze the
+        # current count.  `story.person_ids` is the safe, navigable projection
+        # and therefore excludes candidate_for_review/unresolved identities.
+        published_states = {"production_ready", "preview_ready"}
+        published_story_people = {
+            person_id
+            for story in self.bundle["stories"]
+            if story.get("publication_state") in published_states
+            for person_id in story.get("person_ids", [])
+        }
+        sketch_ids = set(self.bundle["person_sketches"])
+        production_ids = {person["id"] for person in self.bundle["people"]}
+        expected_ids = production_ids & published_story_people & sketch_ids
+
+        self.assertEqual(set(value["ids"]), expected_ids)
+        self.assertEqual(value["count"], len(expected_ids))
+        self.assertGreaterEqual(value["count"], 30)
         self.assertTrue(value["allNavigable"])
         self.assertTrue(value["allLandingNavigable"])
         self.assertNotEqual(value["first"], value["second"])
+        self.assertIsNone(value["sunGuiLanding"])
 
     def test_stack_path_and_back_operations_are_shared(self) -> None:
         for name in ("truncateExploration", "backExploration", "appendExploration"):

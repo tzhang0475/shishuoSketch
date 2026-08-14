@@ -53,7 +53,7 @@ class M2ExperienceScaleUpTests(unittest.TestCase):
         story_people = {
             person_id
             for story in self.bundle["stories"]
-            if story.get("publication_state") != "blocked"
+            if story.get("publication_state") in {"production_ready", "preview_ready"}
             for person_id in story.get("person_ids", [])
         }
         sketches = set(self.bundle["person_sketches"])
@@ -65,6 +65,40 @@ class M2ExperienceScaleUpTests(unittest.TestCase):
         self.assertEqual(len(eligible), self.metrics["after"]["random_person_eligible_count"])
         self.assertNotIn("person-015", eligible)
         self.assertEqual(self.metrics["after"]["random_person_eligible_count"], len(eligible))
+
+    def test_er_identity_correction_does_not_restore_an_unsafe_sun_gui_path(self) -> None:
+        stories = {story["id"]: story for story in self.bundle["stories"]}
+        corrected_story = stories["05-fangzheng-058"]
+        self.assertNotIn("person-015", corrected_story["person_ids"])
+
+        corrected_mentions = [
+            mention
+            for mention in self.bundle["mentions"]
+            if mention.get("story_id") == "05-fangzheng-058"
+            and mention.get("surface") == "文度"
+        ]
+        self.assertTrue(corrected_mentions)
+        self.assertTrue(all(mention.get("person_id") != "person-015" for mention in corrected_mentions))
+        self.assertTrue(
+            all(
+                mention.get("resolution_target", {}).get("canonical_name") == "王坦之"
+                for mention in corrected_mentions
+            )
+        )
+
+        # A candidate_for_review occurrence may list 孫晷 as one possible
+        # identity, but it is not a safe production navigation edge.
+        candidate_review_count = 0
+        for mention in self.bundle["mentions"]:
+            if mention.get("resolution_status") != "candidate_for_review":
+                continue
+            candidates = mention.get("resolution_candidates", [])
+            if not any(candidate.get("person_id") == "person-015" for candidate in candidates):
+                continue
+            candidate_review_count += 1
+            story = stories[mention["story_id"]]
+            self.assertNotIn("person-015", story["person_ids"])
+        self.assertGreater(candidate_review_count, 0)
 
     def test_m2_metrics_show_scale_without_relation_inflation(self) -> None:
         self.assertEqual(self.metrics["before"]["production_person_count"], 17)

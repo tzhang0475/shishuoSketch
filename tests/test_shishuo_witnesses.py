@@ -1,7 +1,9 @@
 from __future__ import annotations
 
+from contextlib import redirect_stderr
 from dataclasses import replace
 import hashlib
+from io import StringIO
 import json
 from pathlib import Path
 import subprocess
@@ -238,7 +240,10 @@ class ShishuoWitnessTests(unittest.TestCase):
         self.assertEqual(parser.parse_args(["--shishuo-ling-volume", "3"]).shishuo_ling_volume, 3)
         self.assertTrue(parser.parse_args(["--shishuo"]).shishuo)
         self.assertTrue(parser.parse_args(["--shishuo-jianshu"]).shishuo_jianshu)
-        with self.assertRaises(SystemExit):
+        # argparse intentionally rejects the removed legacy mode. Capture its
+        # normal usage diagnostic so unittest output stays readable without
+        # changing the CLI's required-option semantics.
+        with redirect_stderr(StringIO()), self.assertRaises(SystemExit):
             parser.parse_args(["--shishuo-jiaqu"])
 
 
