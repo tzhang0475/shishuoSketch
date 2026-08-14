@@ -23,8 +23,8 @@ class PersonRelationCandidatesR3Tests(unittest.TestCase):
 
     def test_r3a_artifact_validates_and_audits_all_current_pairs(self) -> None:
         self.assertEqual(validate(ROOT), [])
-        self.assertEqual(self.derived["production_person_count"], 17)
-        self.assertEqual(self.derived["pair_count_audited"], 136)
+        self.assertEqual(self.derived["production_person_count"], 35)
+        self.assertEqual(self.derived["pair_count_audited"], 595)
         self.assertGreater(self.derived["candidate_count"], 0)
 
     def test_candidate_endpoints_are_current_people_and_candidates_are_not_reviewed(self) -> None:

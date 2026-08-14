@@ -78,8 +78,8 @@ def validate(root: Path = ROOT, *, document: Mapping[str, Any] | None = None) ->
 
     if actual != project(root):
         errors.append("derived R3A projection is not deterministic")
-    if actual.get("production_person_count") != len(people) or actual.get("production_person_count") != 17:
-        errors.append("R3A must audit exactly the current 17 production Persons")
+    if actual.get("production_person_count") != len(people):
+        errors.append("R3A production Person count does not match the current registry")
     if actual.get("production_person_ids") != sorted(people):
         errors.append("R3A production Person ordering is not deterministic")
     if actual.get("candidate_count") != len(actual.get("candidates", [])):
@@ -140,8 +140,12 @@ def validate(root: Path = ROOT, *, document: Mapping[str, Any] | None = None) ->
         errors.append("R3A candidate ranks are not sequential")
     if set(actual.get("wave1_person_ids", [])) - set(people):
         errors.append("R3A Wave-1 audit references an unknown Person")
+    if set(actual.get("wave2_person_ids", [])) - set(people):
+        errors.append("R3A Wave-2 audit references an unknown Person")
     if not set(actual.get("wave1_persons_with_candidate_relation", [])) <= set(actual.get("wave1_person_ids", [])):
         errors.append("R3A Wave-1 candidate endpoint summary is invalid")
+    if not set(actual.get("wave2_persons_with_candidate_relation", [])) <= set(actual.get("wave2_person_ids", [])):
+        errors.append("R3A Wave-2 candidate endpoint summary is invalid")
     if not set(actual.get("isolated_person_ids_by_reviewed_relation", [])) <= set(people):
         errors.append("R3A isolated Person summary references an unknown Person")
     for row in actual.get("cooccurrence_only_pairs", []):

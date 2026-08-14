@@ -10,7 +10,8 @@
     "candidate_count", "tier_counts", "already_reviewed_rediscoveries",
     "already_reviewed_rediscovery_count", "candidates", "cooccurrence_only_pair_count",
     "cooccurrence_only_pairs", "scene_encounters", "wave1_person_ids",
-    "wave1_persons_with_candidate_relation", "isolated_person_ids_by_reviewed_relation", "notes"
+    "wave1_persons_with_candidate_relation", "wave2_person_ids",
+    "wave2_persons_with_candidate_relation", "isolated_person_ids_by_reviewed_relation", "notes"
   ],
   "properties": {
     "schema": {"const": 1},
@@ -40,6 +41,8 @@
     "scene_encounters": {"type": "array", "items": {"$ref": "#/$defs/scene_encounter"}},
     "wave1_person_ids": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
     "wave1_persons_with_candidate_relation": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+    "wave2_person_ids": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+    "wave2_persons_with_candidate_relation": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
     "isolated_person_ids_by_reviewed_relation": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
     "notes": {"type": "array", "items": {"type": "string"}}
   },

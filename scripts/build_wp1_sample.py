@@ -158,10 +158,12 @@ def main() -> int:
         raise ValueError("invalid reviewed punctuation record: " + "; ".join(punctuation_errors))
     existing_people = read_json(PEOPLE_PATH)["people"]
     existing_aliases = read_json(ALIASES_PATH)["aliases"]
+    existing_evidence_records = read_json(ROOT / "data/evidence/wp1-evidence.json").get("records", [])
     existing_production_evidence = [
         item
-        for item in read_json(ROOT / "data/evidence/wp1-evidence.json").get("records", [])
-        if isinstance(item, dict) and str(item.get("id", "")).startswith(P3B_EVIDENCE_PREFIX)
+        for item in existing_evidence_records
+        if isinstance(item, dict)
+        and str(item.get("id", "")).startswith(P3B_EVIDENCE_PREFIX)
     ]
     existing_mentions = [
         mention
@@ -751,10 +753,22 @@ def main() -> int:
         "mentions": ROOT / "data/annotation/wp1-mentions.json",
         "relations": ROOT / "data/annotation/wp1-relations.json",
         "eras": ROOT / "data/annotation/wp1-eras.json",
+        # The WP1 bundle is intentionally a small milestone sample.  Its
+        # evidence projection stays limited to the sample plus legacy Wave 1;
+        # the full production Evidence registry is merged below so later M2
+        # waves are not lost when the historical sample is rebuilt.
         "evidence": ROOT / "data/evidence/wp1-evidence.json",
     }
     for key, path in paths.items():
-        write_json(path, records[key])
+        if key == "evidence":
+            by_id = {
+                str(item["id"]): item
+                for item in [*existing_evidence_records, *records[key]["records"]]
+                if isinstance(item, dict) and item.get("id")
+            }
+            write_json(path, {"schema": 1, "records": [by_id[item_id] for item_id in sorted(by_id)]})
+        else:
+            write_json(path, records[key])
     write_json(ROOT / "data/manifest/milestone-1.json", manifest)
 
     reading = build_display_reading(

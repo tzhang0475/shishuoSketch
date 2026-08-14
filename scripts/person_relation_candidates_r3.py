@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """Build the R3A explicit Person Relation discovery artifacts.
 
-R3A is deliberately a review layer.  It reads the current 17 production
-Persons and existing source Evidence, but never mutates reviewed Relations or
-projects candidate edges into the frontend.
+R3A is deliberately a review layer.  It reads the current production Person
+registry and existing source Evidence, but never mutates reviewed Relations
+or projects candidate edges into the frontend.
 """
 
 from __future__ import annotations
@@ -23,6 +23,7 @@ SCHEMA_PATH = Path("schema/person-relation-candidate.schema.json")
 SC1_PATH = Path("data/derived/sc1-site.json")
 RELATIONS_PATH = Path("data/annotation/wp1-relations.json")
 WAVE_PATH = Path("data/annotation/person-expansion-wave-1.json")
+WAVE2_PATH = Path("data/annotation/person-expansion-wave-2.json")
 DERIVED_PATH = Path("data/derived/person-relation-candidates-r3.json")
 REPORT_PATH = Path("docs/person-relation-candidates-r3.md")
 
@@ -329,6 +330,12 @@ def project(root: Path = ROOT) -> dict[str, Any]:
         for member in wave.get("members", [])
         if isinstance(member, Mapping) and isinstance(member.get("person_id"), str)
     )
+    wave2 = read_json(root, WAVE2_PATH)
+    wave2_person_ids = sorted(
+        str(member["person_id"])
+        for member in wave2.get("members", [])
+        if isinstance(member, Mapping) and isinstance(member.get("person_id"), str)
+    )
     candidate_endpoint_ids = {endpoint for item in candidates for endpoint in (item["person_a_id"], item["person_b_id"])}
     isolated = sorted(
         person_id
@@ -339,7 +346,7 @@ def project(root: Path = ROOT) -> dict[str, Any]:
     return {
         "schema": 1,
         "stage": "r3a-explicit-person-relation-discovery",
-        "generated_from": [str(SOURCE_PATH), str(SC1_PATH), str(RELATIONS_PATH), str(WAVE_PATH)],
+        "generated_from": [str(SOURCE_PATH), str(SC1_PATH), str(RELATIONS_PATH), str(WAVE_PATH), str(WAVE2_PATH)],
         "production_person_count": len(people),
         "production_person_ids": people,
         "reviewed_relation_count": len(reviewed_relations),
@@ -354,12 +361,14 @@ def project(root: Path = ROOT) -> dict[str, Any]:
         "cooccurrence_only_pairs": cooccurrence_only,
         "scene_encounters": scene_encounters,
         "wave1_person_ids": wave_person_ids,
+        "wave2_person_ids": wave2_person_ids,
         "wave1_persons_with_candidate_relation": sorted(set(wave_person_ids) & candidate_endpoint_ids),
+        "wave2_persons_with_candidate_relation": sorted(set(wave2_person_ids) & candidate_endpoint_ids),
         "isolated_person_ids_by_reviewed_relation": isolated,
         "notes": [
-            "R3A is a candidate review layer; it does not modify data/annotation/wp1-relations.json.",
+        "R3A is a candidate review layer; it does not modify data/annotation/wp1-relations.json.",
             "Shared Story and Scene co-occurrence are reported separately and never become Relation candidates by themselves.",
-            "Candidate IDs are opaque hashes of stable endpoint/class/source fields, not names or rank positions.",
+        "Candidate IDs are opaque hashes of stable endpoint/class/source fields, not names or rank positions.",
         ],
     }
 
@@ -368,7 +377,7 @@ def render_report(document: Mapping[str, Any]) -> str:
     lines = [
         "# R3A：显式人物关系发现候选",
         "",
-        "本报告是当前 17 位生产人物的关系发现审计，不是 Relation 生产写入。所有候选的 `review_status` 均为 `candidate`；同则共现、Scene 场景位置和 PersonStory 连接不会单独生成关系候选。",
+        "本报告是当前生产人物的关系发现审计，不是 Relation 生产写入。所有候选的 `review_status` 均为 `candidate`；同则共现、Scene 场景位置和 PersonStory 连接不会单独生成关系候选。",
         "",
         "## 审计摘要",
         "",
@@ -378,7 +387,7 @@ def render_report(document: Mapping[str, Any]) -> str:
         f"- 显式候选：**{document['candidate_count']}**（Tier A {document['tier_counts']['A']} / B {document['tier_counts']['B']} / C {document['tier_counts']['C']}）",
         f"- 已审阅关系再发现控制项：**{document['already_reviewed_rediscovery_count']}**",
         f"- 仅共现、未形成候选的组合（报告上限 30）：**{document['cooccurrence_only_pair_count']}**",
-        f"- Wave-1 中已有候选端点的人物：**{len(document['wave1_persons_with_candidate_relation'])}**",
+        f"- Wave-1 中已有候选端点的人物：**{len(document['wave1_persons_with_candidate_relation'])}**；Wave-2：**{len(document['wave2_persons_with_candidate_relation'])}**",
         f"- 仅按已审阅 Relation 仍孤立的人物：**{len(document['isolated_person_ids_by_reviewed_relation'])}**",
         "",
         "## 候选关系",

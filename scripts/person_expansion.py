@@ -333,14 +333,25 @@ def _collect_unresolved_surfaces(
 
 def _current_story_ids(root: Path) -> list[str]:
     bundle = read_json(root, SC1_BUNDLE_PATH)
-    ids = bundle.get("story_chain", {}).get("story_ids", [])
     gold = read_json(root, Path("data/story-chain-gold-set.json"))
     gold_ids = [str(item["entry_id"]) for item in gold.get("records", [])]
-    if isinstance(ids, list) and all(isinstance(value, str) for value in ids):
-        if gold_ids and list(ids) != gold_ids:
-            raise ValueError("SC1 story-chain IDs do not match the tracked SC0 Gold Set")
-        return list(ids)
-    return gold_ids
+    # SC0 remains the frozen gold set, while M2 publishes an explicit union
+    # of SC0 and the Story Expansion manifest.  P3A's current-coverage
+    # metrics should see the live readable Story set, but must still prove
+    # that every frozen SC0 Story remains present in that set.  The old
+    # story_chain field was SC0-only and is no longer a suitable live-set
+    # source after M2.
+    stories = bundle.get("stories", [])
+    ids = [
+        str(story.get("id"))
+        for story in stories
+        if isinstance(story, Mapping)
+        and isinstance(story.get("id"), str)
+        and story.get("publication_state") != "blocked"
+    ]
+    if gold_ids and not set(gold_ids).issubset(ids):
+        raise ValueError("SC1 live Story IDs do not contain the frozen SC0 Gold Set")
+    return ids or gold_ids
 
 
 def _relation_metrics(

@@ -155,8 +155,12 @@ def validate(root: Path = ROOT) -> list[str]:
 
     people_by_id = {str(item.get("person_id")): item for item in people if isinstance(item, Mapping)}
     wave_person_ids = {str(item.get("person_id")) for item in members}
-    if len(people) != materialization.get("people_after"):
-        errors.append("P3B.1 people_after does not match the production registry")
+    # P3B.1 records the registry size at the end of Wave 1.  Later explicit
+    # materialization waves may extend the unified registry, so the historical
+    # Wave-1 snapshot must remain an exact lower-bound checkpoint rather than
+    # rejecting valid descendants of that registry.
+    if len(people) < materialization.get("people_after"):
+        errors.append("P3B.1 people_after exceeds the current production registry")
     if not wave_person_ids.issubset(people_by_id):
         errors.append("P3B.1 production Person registry is missing a Wave Person")
     for person_id in wave_person_ids:

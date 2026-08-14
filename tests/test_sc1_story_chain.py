@@ -26,9 +26,20 @@ class SC1StoryChainTests(unittest.TestCase):
         cls.gold = json.loads((ROOT / "data/story-chain-gold-set.json").read_text(encoding="utf-8"))
         cls.base = json.loads((ROOT / "data/derived/wp1-site.json").read_text(encoding="utf-8"))
 
-    def test_sc1_bundle_validates_and_publishes_exactly_the_sixteen_gold_stories(self) -> None:
+    def test_sc1_bundle_publishes_the_sc0_union_of_the_frozen_expansion_manifest(self) -> None:
         self.assertEqual(validate(ROOT, mode=repository_validation_mode()), [])
         expected = [item["entry_id"] for item in self.gold["records"]]
+        expansion = json.loads(
+            (ROOT / "data/annotation/story-expansion-wave-1.json").read_text(encoding="utf-8")
+        )
+        expected.extend(item["story_id"] for item in expansion["records"])
+        expected.sort(
+            key=lambda story_id: next(
+                story["global_ordinal"]
+                for story in self.bundle["stories"]
+                if story["id"] == story_id
+            )
+        )
         self.assertEqual(self.bundle["story_chain"]["story_ids"], expected)
         self.assertEqual([item["id"] for item in self.bundle["stories"]], expected)
 
@@ -148,7 +159,8 @@ class SC1StoryChainTests(unittest.TestCase):
     def test_person_story_projection_uses_sc0_links_and_separates_annotation_only(self) -> None:
         refs = {item["person_id"]: item for item in self.bundle["story_chain"]["person_story_refs"]}
         self.assertEqual(refs["person-001"]["story_ids"], [
-            "02-yanyu-069", "04-wenxue-036", "06-yaliang-019", "19-xianyuan-026",
+            "02-yanyu-069", "04-wenxue-036", "06-yaliang-019",
+            "14-rongzhi-024", "19-xianyuan-026",
         ])
         self.assertEqual(refs["person-007"]["main_text_story_ids"], [])
         self.assertEqual(refs["person-007"]["liu_annotation_only_story_ids"], ["06-yaliang-019"])

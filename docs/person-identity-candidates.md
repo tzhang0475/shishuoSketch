@@ -6,61 +6,16 @@
 
 - Person-like surfaces discovered: **2699**
 - Candidate identity records: **335**
-- Already-materialized rediscoveries: **17**
-- Strong candidates: **313**
+- Already-materialized rediscoveries: **35**
+- Strong candidates: **295**
 - Weaker candidates: **1**
 - Ambiguous identity records: **4**
 - Unresolved surface clusters: **1959**
-- Candidate occurrence records: **1448**
+- Candidate occurrence records: **954**
 
 Identity seeds come from processed Jinshu biography units with explicit local name/courtesy-name cues. Shishuo and Liu text supplies separate exact or contextual occurrence evidence. A title such as `太傅` is never a Person identity by frequency alone.
 
 ## Strong candidates
-
-### 向秀
-
-Candidate ID: `candidate-identity-049-liezhuan-003-1e8de1e68064`
-Status: **strong_candidate**
-Shishuo main text: **5 Stories**; Liu annotation: **5 Stories**
-Jinshu support: **1 unit(s)**; current SC1 Stories: **1** (04-wenxue-036)
-
-Observed surfaces: 向秀（personal_name · exact）, 子期（courtesy_name · exact）, 向子期（surname_plus_courtesy_name · exact）
-
-Identity basis:
-- explicit_name_identity_cue
-- structured_jinshu_biography_subject
-
-Risks: single_source_unit
-
-### 孟陋
-
-Candidate ID: `candidate-identity-094-liezhuan-016-86bd1f390c7b`
-Status: **strong_candidate**
-Shishuo main text: **2 Stories**; Liu annotation: **8 Stories**
-Jinshu support: **1 unit(s)**; current SC1 Stories: **1** (05-fangzheng-023)
-
-Observed surfaces: 孟陋（personal_name · exact）, 少孤（courtesy_name · exact）
-
-Identity basis:
-- explicit_name_identity_cue
-- structured_jinshu_biography_subject
-
-Risks: single_source_unit
-
-### 孫恩
-
-Candidate ID: `candidate-identity-100-liezhuan-010-96bcbe2d3579`
-Status: **strong_candidate**
-Shishuo main text: **1 Stories**; Liu annotation: **4 Stories**
-Jinshu support: **1 unit(s)**; current SC1 Stories: **1** (02-yanyu-071)
-
-Observed surfaces: 孫恩（personal_name · exact）, 靈秀（courtesy_name · exact）
-
-Identity basis:
-- explicit_name_identity_cue
-- structured_jinshu_biography_subject
-
-Risks: single_source_unit
 
 ### 王裒
 
@@ -70,85 +25,6 @@ Shishuo main text: **0 Stories**; Liu annotation: **1 Stories**
 Jinshu support: **1 unit(s)**; current SC1 Stories: **1** (05-fangzheng-023)
 
 Observed surfaces: 王裒（personal_name · exact）, 偉元（courtesy_name · exact）
-
-Identity basis:
-- explicit_name_identity_cue
-- structured_jinshu_biography_subject
-
-Risks: single_source_unit
-
-### 王恭
-
-Candidate ID: `candidate-identity-084-liezhuan-001-71807a49cd63`
-Status: **strong_candidate**
-Shishuo main text: **27 Stories**; Liu annotation: **12 Stories**
-Jinshu support: **1 unit(s)**; current SC1 Stories: **0** (none)
-
-Observed surfaces: 王恭（personal_name · exact）, 孝伯（courtesy_name · exact）, 王孝伯（surname_plus_courtesy_name · exact）, 王從事中郎（office_title · contextual）
-
-Identity basis:
-- explicit_name_identity_cue
-- local_contextual_surface_bridge_recorded_separately
-- structured_jinshu_biography_subject
-
-Risks: contextual_surface_association, single_source_unit
-
-### 王戎
-
-Candidate ID: `candidate-identity-043-liezhuan-002-01e116bde4f6`
-Status: **strong_candidate**
-Shishuo main text: **26 Stories**; Liu annotation: **14 Stories**
-Jinshu support: **1 unit(s)**; current SC1 Stories: **0** (none)
-
-Observed surfaces: 王戎（personal_name · exact）, 濬沖（courtesy_name · exact）, 王濬沖（surname_plus_courtesy_name · exact）, 王戎為尚書（office_title · contextual）
-
-Identity basis:
-- explicit_name_identity_cue
-- local_contextual_surface_bridge_recorded_separately
-- structured_jinshu_biography_subject
-
-Risks: contextual_surface_association, single_source_unit
-
-### 周顗
-
-Candidate ID: `candidate-identity-069-liezhuan-004-cdd8afdd3f4a`
-Status: **strong_candidate**
-Shishuo main text: **20 Stories**; Liu annotation: **11 Stories**
-Jinshu support: **1 unit(s)**; current SC1 Stories: **0** (none)
-
-Observed surfaces: 周顗（personal_name · exact）, 伯仁（courtesy_name · exact）, 周伯仁（surname_plus_courtesy_name · exact）, 周侯（contextual_title · contextual）, 周侯周侯（contextual_title · contextual）
-
-Identity basis:
-- explicit_name_identity_cue
-- local_contextual_surface_bridge_recorded_separately
-- structured_jinshu_biography_subject
-
-Risks: contextual_surface_association, single_source_unit
-
-### 謝尚
-
-Candidate ID: `candidate-identity-079-liezhuan-001-df72bb359476`
-Status: **strong_candidate**
-Shishuo main text: **18 Stories**; Liu annotation: **8 Stories**
-Jinshu support: **1 unit(s)**; current SC1 Stories: **0** (none)
-
-Observed surfaces: 謝尚（personal_name · exact）, 仁祖（courtesy_name · exact）, 謝仁祖（surname_plus_courtesy_name · exact）, 謝尚書（office_title · contextual）
-
-Identity basis:
-- explicit_name_identity_cue
-- local_contextual_surface_bridge_recorded_separately
-- structured_jinshu_biography_subject
-
-Risks: contextual_surface_association, single_source_unit
-
-### 韓伯
-
-Candidate ID: `candidate-identity-075-liezhuan-008-5a35631d586c`
-Status: **strong_candidate**
-Shishuo main text: **16 Stories**; Liu annotation: **8 Stories**
-Jinshu support: **1 unit(s)**; current SC1 Stories: **0** (none)
-
-Observed surfaces: 韓伯（personal_name · exact）, 康伯（courtesy_name · exact）, 韓康伯（surname_plus_courtesy_name · exact）
 
 Identity basis:
 - explicit_name_identity_cue
@@ -179,21 +55,6 @@ Shishuo main text: **12 Stories**; Liu annotation: **12 Stories**
 Jinshu support: **1 unit(s)**; current SC1 Stories: **0** (none)
 
 Observed surfaces: 阮籍（personal_name · exact）, 嗣宗（courtesy_name · exact）, 阮嗣宗（surname_plus_courtesy_name · exact）
-
-Identity basis:
-- explicit_name_identity_cue
-- structured_jinshu_biography_subject
-
-Risks: single_source_unit
-
-### 和嶠
-
-Candidate ID: `candidate-identity-045-liezhuan-003-e55f9d569cb4`
-Status: **strong_candidate**
-Shishuo main text: **12 Stories**; Liu annotation: **4 Stories**
-Jinshu support: **1 unit(s)**; current SC1 Stories: **0** (none)
-
-Observed surfaces: 和嶠（personal_name · exact）, 長輿（courtesy_name · exact）, 和長輿（surname_plus_courtesy_name · exact）
 
 Identity basis:
 - explicit_name_identity_cue
@@ -232,21 +93,6 @@ Identity basis:
 
 Risks: contextual_surface_association, single_source_unit
 
-### 何充
-
-Candidate ID: `candidate-identity-077-liezhuan-002-bf4a50599e20`
-Status: **strong_candidate**
-Shishuo main text: **9 Stories**; Liu annotation: **12 Stories**
-Jinshu support: **1 unit(s)**; current SC1 Stories: **0** (none)
-
-Observed surfaces: 何充（personal_name · exact）, 次道（courtesy_name · exact）, 何次道（surname_plus_courtesy_name · exact）
-
-Identity basis:
-- explicit_name_identity_cue
-- structured_jinshu_biography_subject
-
-Risks: single_source_unit
-
 ### 孫盛
 
 Candidate ID: `candidate-identity-082-liezhuan-007-599e0d272e25`
@@ -262,21 +108,6 @@ Identity basis:
 
 Risks: single_source_unit
 
-### 朱伺
-
-Candidate ID: `candidate-identity-081-liezhuan-006-d93552731f2b`
-Status: **strong_candidate**
-Shishuo main text: **8 Stories**; Liu annotation: **7 Stories**
-Jinshu support: **1 unit(s)**; current SC1 Stories: **0** (none)
-
-Observed surfaces: 朱伺（personal_name · exact）, 仲文（courtesy_name · exact）
-
-Identity basis:
-- explicit_name_identity_cue
-- structured_jinshu_biography_subject
-
-Risks: single_source_unit
-
 ### 羊祜
 
 Candidate ID: `candidate-identity-034-liezhuan-001-2b4236eeee0a`
@@ -285,22 +116,6 @@ Shishuo main text: **8 Stories**; Liu annotation: **4 Stories**
 Jinshu support: **1 unit(s)**; current SC1 Stories: **0** (none)
 
 Observed surfaces: 羊祜（personal_name · exact）, 叔子（courtesy_name · exact）, 羊叔子（surname_plus_courtesy_name · exact）, 羊公（contextual_title · contextual）
-
-Identity basis:
-- explicit_name_identity_cue
-- local_contextual_surface_bridge_recorded_separately
-- structured_jinshu_biography_subject
-
-Risks: contextual_surface_association, single_source_unit
-
-### 殷浩
-
-Candidate ID: `candidate-identity-077-liezhuan-006-d194dde2c30b`
-Status: **strong_candidate**
-Shishuo main text: **7 Stories**; Liu annotation: **14 Stories**
-Jinshu support: **1 unit(s)**; current SC1 Stories: **0** (none)
-
-Observed surfaces: 殷浩（personal_name · exact）, 深源（courtesy_name · exact）, 殷侯（contextual_title · contextual）
 
 Identity basis:
 - explicit_name_identity_cue
@@ -369,66 +184,6 @@ Identity basis:
 
 Risks: single_source_unit
 
-### 卞壼
-
-Candidate ID: `candidate-identity-070-liezhuan-004-e1fcfab15d98`
-Status: **strong_candidate**
-Shishuo main text: **6 Stories**; Liu annotation: **5 Stories**
-Jinshu support: **1 unit(s)**; current SC1 Stories: **0** (none)
-
-Observed surfaces: 卞壼（personal_name · exact）, 望之（courtesy_name · exact）, 卞望之（surname_plus_courtesy_name · exact）
-
-Identity basis:
-- explicit_name_identity_cue
-- structured_jinshu_biography_subject
-
-Risks: single_source_unit
-
-### 鄧攸
-
-Candidate ID: `candidate-identity-090-liezhuan-011-1e0fed969fe4`
-Status: **strong_candidate**
-Shishuo main text: **6 Stories**; Liu annotation: **5 Stories**
-Jinshu support: **1 unit(s)**; current SC1 Stories: **0** (none)
-
-Observed surfaces: 鄧攸（personal_name · exact）, 伯道（courtesy_name · exact）, 鄧伯道（surname_plus_courtesy_name · exact）
-
-Identity basis:
-- explicit_name_identity_cue
-- structured_jinshu_biography_subject
-
-Risks: single_source_unit
-
-### 劉琨
-
-Candidate ID: `candidate-identity-062-liezhuan-001-26111f51e2e0`
-Status: **strong_candidate**
-Shishuo main text: **6 Stories**; Liu annotation: **4 Stories**
-Jinshu support: **1 unit(s)**; current SC1 Stories: **0** (none)
-
-Observed surfaces: 劉琨（personal_name · exact）, 越石（courtesy_name · exact）, 劉越石（surname_plus_courtesy_name · exact）
-
-Identity basis:
-- explicit_name_identity_cue
-- structured_jinshu_biography_subject
-
-Risks: single_source_unit
-
-### 陸機
-
-Candidate ID: `candidate-identity-054-liezhuan-001-94fefefff861`
-Status: **strong_candidate**
-Shishuo main text: **6 Stories**; Liu annotation: **4 Stories**
-Jinshu support: **1 unit(s)**; current SC1 Stories: **0** (none)
-
-Observed surfaces: 陸機（personal_name · exact）, 士衡（courtesy_name · exact）, 陸士衡（surname_plus_courtesy_name · exact）
-
-Identity basis:
-- explicit_name_identity_cue
-- structured_jinshu_biography_subject
-
-Risks: single_source_unit
-
 ### 褚裒
 
 Candidate ID: `candidate-identity-093-liezhuan-008-76b172946f94`
@@ -437,21 +192,6 @@ Shishuo main text: **6 Stories**; Liu annotation: **1 Stories**
 Jinshu support: **1 unit(s)**; current SC1 Stories: **0** (none)
 
 Observed surfaces: 褚裒（personal_name · exact）, 季野（courtesy_name · exact）
-
-Identity basis:
-- explicit_name_identity_cue
-- structured_jinshu_biography_subject
-
-Risks: single_source_unit
-
-### 謝鯤
-
-Candidate ID: `candidate-identity-049-liezhuan-005-149410f87660`
-Status: **strong_candidate**
-Shishuo main text: **5 Stories**; Liu annotation: **6 Stories**
-Jinshu support: **1 unit(s)**; current SC1 Stories: **0** (none)
-
-Observed surfaces: 謝鯤（personal_name · exact）, 幼輿（courtesy_name · exact）, 謝幼輿（surname_plus_courtesy_name · exact）
 
 Identity basis:
 - explicit_name_identity_cue
@@ -688,21 +428,6 @@ Identity basis:
 
 Risks: contextual_surface_association, single_source_unit
 
-### 伏滔
-
-Candidate ID: `candidate-identity-092-liezhuan-014-6cf8948b83ef`
-Status: **strong_candidate**
-Shishuo main text: **3 Stories**; Liu annotation: **4 Stories**
-Jinshu support: **1 unit(s)**; current SC1 Stories: **0** (none)
-
-Observed surfaces: 伏滔（personal_name · exact）, 度平（courtesy_name · exact）
-
-Identity basis:
-- explicit_name_identity_cue
-- structured_jinshu_biography_subject
-
-Risks: single_source_unit
-
 ### 左思
 
 Candidate ID: `candidate-identity-092-liezhuan-003-02a073a9c9f2`
@@ -779,11 +504,280 @@ Identity basis:
 
 Risks: single_source_unit
 
+### 張翰
+
+Candidate ID: `candidate-identity-092-liezhuan-009-3d50716d43e6`
+Status: **strong_candidate**
+Shishuo main text: **3 Stories**; Liu annotation: **1 Stories**
+Jinshu support: **1 unit(s)**; current SC1 Stories: **0** (none)
+
+Observed surfaces: 張翰（personal_name · exact）, 季鷹（courtesy_name · exact）, 張季鷹（surname_plus_courtesy_name · exact）
+
+Identity basis:
+- explicit_name_identity_cue
+- structured_jinshu_biography_subject
+
+Risks: single_source_unit
+
+### 武陔
+
+Candidate ID: `candidate-identity-045-liezhuan-004-45d1da4e1f29`
+Status: **strong_candidate**
+Shishuo main text: **3 Stories**; Liu annotation: **1 Stories**
+Jinshu support: **1 unit(s)**; current SC1 Stories: **0** (none)
+
+Observed surfaces: 武陔（personal_name · exact）, 元夏（courtesy_name · exact）, 武元夏（surname_plus_courtesy_name · exact）
+
+Identity basis:
+- explicit_name_identity_cue
+- structured_jinshu_biography_subject
+
+Risks: single_source_unit
+
+### 王渾
+
+Candidate ID: `candidate-identity-042-liezhuan-001-26a178d59a60`
+Status: **strong_candidate**
+Shishuo main text: **3 Stories**; Liu annotation: **1 Stories**
+Jinshu support: **1 unit(s)**; current SC1 Stories: **0** (none)
+
+Observed surfaces: 王渾（personal_name · exact）, 元沖（courtesy_name · exact）
+
+Identity basis:
+- explicit_name_identity_cue
+- structured_jinshu_biography_subject
+
+Risks: single_source_unit
+
+### 杜預
+
+Candidate ID: `candidate-identity-034-liezhuan-002-7bb7ba6f844a`
+Status: **strong_candidate**
+Shishuo main text: **2 Stories**; Liu annotation: **8 Stories**
+Jinshu support: **1 unit(s)**; current SC1 Stories: **0** (none)
+
+Observed surfaces: 杜預（personal_name · exact）, 元凱（courtesy_name · exact）
+
+Identity basis:
+- explicit_name_identity_cue
+- structured_jinshu_biography_subject
+
+Risks: single_source_unit
+
+### 衛瓘
+
+Candidate ID: `candidate-identity-036-liezhuan-001-15fc58061de7`
+Status: **strong_candidate**
+Shishuo main text: **2 Stories**; Liu annotation: **4 Stories**
+Jinshu support: **1 unit(s)**; current SC1 Stories: **0** (none)
+
+Observed surfaces: 衛瓘（personal_name · exact）, 伯玉（courtesy_name · exact）, 衛伯玉（surname_plus_courtesy_name · exact）
+
+Identity basis:
+- explicit_name_identity_cue
+- structured_jinshu_biography_subject
+
+Risks: single_source_unit
+
+### 孟嘉
+
+Candidate ID: `candidate-identity-098-liezhuan-004-265ec2654ba4`
+Status: **strong_candidate**
+Shishuo main text: **2 Stories**; Liu annotation: **3 Stories**
+Jinshu support: **1 unit(s)**; current SC1 Stories: **0** (none)
+
+Observed surfaces: 孟嘉（personal_name · exact）, 萬年（courtesy_name · exact）, 孟萬年（surname_plus_courtesy_name · exact）
+
+Identity basis:
+- explicit_name_identity_cue
+- structured_jinshu_biography_subject
+
+Risks: single_source_unit
+
+### 李重
+
+Candidate ID: `candidate-identity-046-liezhuan-002-1db3aa218da7`
+Status: **strong_candidate**
+Shishuo main text: **2 Stories**; Liu annotation: **2 Stories**
+Jinshu support: **1 unit(s)**; current SC1 Stories: **0** (none)
+
+Observed surfaces: 李重（personal_name · exact）, 茂曽（courtesy_name · exact）
+
+Identity basis:
+- explicit_name_identity_cue
+- structured_jinshu_biography_subject
+
+Risks: single_source_unit
+
+### 氾騰
+
+Candidate ID: `candidate-identity-094-liezhuan-012-c62107e1c85b`
+Status: **strong_candidate**
+Shishuo main text: **2 Stories**; Liu annotation: **2 Stories**
+Jinshu support: **1 unit(s)**; current SC1 Stories: **0** (none)
+
+Observed surfaces: 氾騰（personal_name · exact）, 無忌（courtesy_name · exact）
+
+Identity basis:
+- explicit_name_identity_cue
+- structured_jinshu_biography_subject
+
+Risks: single_source_unit
+
+### 沈充
+
+Candidate ID: `candidate-identity-098-liezhuan-002-fc645ef0f9ae`
+Status: **strong_candidate**
+Shishuo main text: **2 Stories**; Liu annotation: **2 Stories**
+Jinshu support: **1 unit(s)**; current SC1 Stories: **0** (none)
+
+Observed surfaces: 沈充（personal_name · exact）, 士居（courtesy_name · exact）
+
+Identity basis:
+- explicit_name_identity_cue
+- structured_jinshu_biography_subject
+
+Risks: single_source_unit
+
+### 王濬
+
+Candidate ID: `candidate-identity-042-liezhuan-002-cb6970863171`
+Status: **strong_candidate**
+Shishuo main text: **2 Stories**; Liu annotation: **2 Stories**
+Jinshu support: **1 unit(s)**; current SC1 Stories: **0** (none)
+
+Observed surfaces: 王濬（personal_name · exact）, 士治（courtesy_name · exact）
+
+Identity basis:
+- explicit_name_identity_cue
+- structured_jinshu_biography_subject
+
+Risks: single_source_unit
+
+### 王祥
+
+Candidate ID: `candidate-identity-033-liezhuan-001-93b1bfca17d8`
+Status: **strong_candidate**
+Shishuo main text: **2 Stories**; Liu annotation: **2 Stories**
+Jinshu support: **1 unit(s)**; current SC1 Stories: **0** (none)
+
+Observed surfaces: 王祥（personal_name · exact）, 休徴（courtesy_name · exact）
+
+Identity basis:
+- explicit_name_identity_cue
+- structured_jinshu_biography_subject
+
+Risks: single_source_unit
+
+### 王舒
+
+Candidate ID: `candidate-identity-076-liezhuan-001-873734f7c065`
+Status: **strong_candidate**
+Shishuo main text: **2 Stories**; Liu annotation: **2 Stories**
+Jinshu support: **1 unit(s)**; current SC1 Stories: **0** (none)
+
+Observed surfaces: 王舒（personal_name · exact）, 䖏明（courtesy_name · exact）, 王大將軍（office_title · contextual）
+
+Identity basis:
+- explicit_name_identity_cue
+- local_contextual_surface_bridge_recorded_separately
+- structured_jinshu_biography_subject
+
+Risks: contextual_surface_association, single_source_unit
+
+### 翟湯
+
+Candidate ID: `candidate-identity-094-liezhuan-019-e555f1487a62`
+Status: **strong_candidate**
+Shishuo main text: **2 Stories**; Liu annotation: **2 Stories**
+Jinshu support: **1 unit(s)**; current SC1 Stories: **0** (none)
+
+Observed surfaces: 翟湯（personal_name · exact）, 道深（courtesy_name · exact）
+
+Identity basis:
+- explicit_name_identity_cue
+- structured_jinshu_biography_subject
+
+Risks: single_source_unit
+
+### 范之
+
+Candidate ID: `candidate-identity-091-liezhuan-016-f789a501054c`
+Status: **strong_candidate**
+Shishuo main text: **2 Stories**; Liu annotation: **2 Stories**
+Jinshu support: **1 unit(s)**; current SC1 Stories: **0** (none)
+
+Observed surfaces: 范之（personal_name · exact）, 長文（courtesy_name · exact）
+
+Identity basis:
+- explicit_name_identity_cue
+- structured_jinshu_biography_subject
+
+Risks: single_source_unit
+
+### 桓彞
+
+Candidate ID: `candidate-identity-074-liezhuan-001-2a464ea9e180`
+Status: **strong_candidate**
+Shishuo main text: **2 Stories**; Liu annotation: **1 Stories**
+Jinshu support: **1 unit(s)**; current SC1 Stories: **0** (none)
+
+Observed surfaces: 桓彞（personal_name · exact）, 茂倫（courtesy_name · exact）, 桓茂倫（surname_plus_courtesy_name · exact）
+
+Identity basis:
+- explicit_name_identity_cue
+- structured_jinshu_biography_subject
+
+Risks: single_source_unit
+
+### 羅含
+
+Candidate ID: `candidate-identity-092-liezhuan-015-36f1a7f0f286`
+Status: **strong_candidate**
+Shishuo main text: **2 Stories**; Liu annotation: **1 Stories**
+Jinshu support: **1 unit(s)**; current SC1 Stories: **0** (none)
+
+Observed surfaces: 羅含（personal_name · exact）, 君章（courtesy_name · exact）, 羅君章（surname_plus_courtesy_name · exact）
+
+Identity basis:
+- explicit_name_identity_cue
+- structured_jinshu_biography_subject
+
+Risks: single_source_unit
+
+### 胡威
+
+Candidate ID: `candidate-identity-090-liezhuan-002-11e7cc251099`
+Status: **strong_candidate**
+Shishuo main text: **2 Stories**; Liu annotation: **1 Stories**
+Jinshu support: **1 unit(s)**; current SC1 Stories: **0** (none)
+
+Observed surfaces: 胡威（personal_name · exact）, 伯武（courtesy_name · exact）
+
+Identity basis:
+- explicit_name_identity_cue
+- structured_jinshu_biography_subject
+
+Risks: single_source_unit
+
+### 郭文
+
+Candidate ID: `candidate-identity-094-liezhuan-014-bc5983eb28b7`
+Status: **strong_candidate**
+Shishuo main text: **2 Stories**; Liu annotation: **1 Stories**
+Jinshu support: **1 unit(s)**; current SC1 Stories: **0** (none)
+
+Observed surfaces: 郭文（personal_name · exact）, 文舉（courtesy_name · exact）
+
+Identity basis:
+- explicit_name_identity_cue
+- structured_jinshu_biography_subject
+
+Risks: single_source_unit
+
 ## Current SC1 open-world gaps
 
-- `02-yanyu-071` → 孫恩 [孫恩; liu_annotation; strong_candidate]
-- `04-wenxue-036` → 向秀 [向秀; liu_annotation; strong_candidate]
-- `05-fangzheng-023` → 王裒 [王裒; liu_annotation; strong_candidate]; 孟陋 [少孤; liu_annotation; strong_candidate]
+- `05-fangzheng-023` → 王裒 [王裒; liu_annotation; strong_candidate]
 - `06-yaliang-027` → 王坦之 [王坦之; main_text; strong_candidate]
 - `06-yaliang-029` → 王坦之 [王坦之; liu_annotation, main_text; strong_candidate]
 

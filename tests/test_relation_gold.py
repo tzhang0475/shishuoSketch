@@ -67,7 +67,7 @@ class RelationGoldPilotTests(unittest.TestCase):
         )["records"]
         registry_ids = {person["person_id"] for person in registry}
         self.assertTrue({person["id"] for person in people} <= registry_ids)
-        self.assertEqual(len(registry_ids), 17)
+        self.assertEqual(len(registry_ids), 35)
         bridge = next(person for person in people if person.get("scope_role") == "supporting")
         self.assertEqual(bridge["id"], "person-007")
         self.assertTrue(bridge["evidence_ids"])

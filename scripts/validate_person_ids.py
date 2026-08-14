@@ -19,8 +19,11 @@ except ImportError:  # direct execution
 ROOT = Path(__file__).resolve().parents[1]
 MANIFEST_PATH = Path("data/migrations/person-id-canonicalization-v1.json")
 SCHEMA_PATH = Path("schema/person-id-canonicalization.schema.json")
+ALLOCATION_STATE_PATH = Path("data/derived/person-id-allocation-state.json")
+WAVE1_PATH = Path("data/annotation/person-expansion-wave-1.json")
+WAVE2_PATH = Path("data/annotation/person-expansion-wave-2.json")
 PERSON_ID_RE = re.compile(r"^person-[0-9]{3}$")
-EXPECTED_IDS = {f"person-{index:03d}" for index in range(1, 18)}
+PID1_IDS = {f"person-{index:03d}" for index in range(1, 18)}
 
 
 def read_json(path: Path) -> Any:
@@ -46,7 +49,7 @@ def _manifest_errors(root: Path) -> list[str]:
     new_ids = {str(record["new_person_id"]) for record in records}
     if len(old_ids) != 17:
         errors.append(f"P-ID1 old ID set is not a 17-ID set: {sorted(old_ids)}")
-    if new_ids != EXPECTED_IDS:
+    if new_ids != PID1_IDS:
         errors.append("P-ID1 new ID set is not exactly person-001..person-017")
     if len(records) != 17 or len(old_ids) != 17 or len(new_ids) != 17:
         errors.append("P-ID1 manifest is not a 17-row bijection")
@@ -62,12 +65,13 @@ def _production_people(root: Path) -> tuple[list[dict[str, Any]], list[str]]:
     if not isinstance(people, list):
         return [], ["data/people.json.people is not a list"]
     ids = [item.get("person_id") for item in people if isinstance(item, Mapping)]
-    if len(people) != 17:
-        errors.append(f"production Person count is {len(people)}, expected 17")
+    if len(people) < 17:
+        errors.append(f"production Person count is {len(people)}, below the frozen P-ID1 baseline")
     if len(ids) != len(set(ids)):
         errors.append("production Person IDs are not unique")
-    if set(ids) != EXPECTED_IDS:
-        errors.append(f"production Person IDs are not person-001..person-017: {sorted(ids)}")
+    expected_ids = {f"person-{index:03d}" for index in range(1, len(people) + 1)}
+    if set(ids) != expected_ids:
+        errors.append(f"production Person IDs are not contiguous person-001..person-{len(people):03d}: {sorted(ids)}")
     if any(not isinstance(value, str) or not PERSON_ID_RE.fullmatch(value) for value in ids):
         errors.append("production Person ID does not match ^person-[0-9]{3}$")
     manifest = read_json(root / MANIFEST_PATH)
@@ -77,10 +81,47 @@ def _production_people(root: Path) -> tuple[list[dict[str, Any]], list[str]]:
             continue
         pid = person.get("person_id")
         record = by_new.get(pid)
-        if record is None:
-            errors.append(f"Person {pid!r} is absent from the P-ID1 manifest")
-        elif person.get("canonical_name") != record.get("canonical_name"):
+        if record is not None and person.get("canonical_name") != record.get("canonical_name"):
             errors.append(f"canonical_name mismatch for {pid}")
+    try:
+        allocation = read_json(root / ALLOCATION_STATE_PATH)
+    except (OSError, json.JSONDecodeError) as exc:
+        errors.append(f"allocation state cannot be read: {exc}")
+    else:
+        allocations = allocation.get("allocations", [])
+        allocation_by_id = {
+            str(item.get("person_id")): item
+            for item in allocations
+            if isinstance(item, Mapping) and isinstance(item.get("person_id"), str)
+        }
+        if allocation.get("next_person_sequence") != len(people) + 1:
+            errors.append("allocation state next_person_sequence does not follow the current registry")
+        if set(allocation_by_id) != expected_ids or len(allocations) != len(people):
+            errors.append("allocation state is not a complete current Person registry")
+        for person in people:
+            if not isinstance(person, Mapping):
+                continue
+            pid = str(person.get("person_id"))
+            item = allocation_by_id.get(pid)
+            if item is not None and item.get("canonical_name") != person.get("canonical_name"):
+                errors.append(f"allocation canonical_name mismatch for {pid}")
+        try:
+            wave1 = read_json(root / WAVE1_PATH)
+            wave2 = read_json(root / WAVE2_PATH)
+            wave1_ids = [
+                item.get("person_id")
+                for item in sorted(wave1.get("members", []), key=lambda item: item.get("rank_at_selection", 0))
+            ]
+            wave2_ids = [
+                item.get("person_id")
+                for item in sorted(wave2.get("members", []), key=lambda item: item.get("rank_at_selection", 0))
+            ]
+            if wave1_ids != [f"person-{index:03d}" for index in range(8, 18)]:
+                errors.append("Wave-1 allocation order is not person-008..person-017")
+            if wave2_ids != [f"person-{index:03d}" for index in range(18, 18 + len(wave2_ids))]:
+                errors.append("Wave-2 allocation does not begin at person-018 sequentially")
+        except (OSError, json.JSONDecodeError, TypeError) as exc:
+            errors.append(f"expansion wave allocation metadata cannot be read: {exc}")
     return [dict(item) for item in people if isinstance(item, Mapping)], errors
 
 

@@ -3,7 +3,8 @@
 
 SC1 is a publication projection, not a new textual or semantic source.  It
 reads the existing WP1 bundle for shared Person/Relation/Evidence records,
-then adds the 16 SC0-selected Stories from the canonical entry index,
+then adds the frozen SC0 selection and any separate M2 experience expansion
+Stories from the canonical entry index,
 punctuation records, and reviewed PersonStoryLinks.  The two output files are
 byte-identical views of one in-memory bundle for the Vite build-time import.
 """
@@ -49,6 +50,7 @@ except ImportError:  # direct execution
 ROOT = Path(__file__).resolve().parents[1]
 WP1_BUNDLE_PATH = ROOT / "data/derived/wp1-site.json"
 GOLD_PATH = ROOT / "data/story-chain-gold-set.json"
+STORY_EXPANSION_PATH = ROOT / "data/annotation/story-expansion-wave-1.json"
 CHAIN_INDEX_PATH = ROOT / "data/derived/story-chain-gold-index.json"
 CORPUS_INDEX_PATH = ROOT / "data/shishuo-corpus-index.json"
 MENTIONS_PATH = ROOT / "data/mentions/shishuo.json"
@@ -56,6 +58,7 @@ PEOPLE_REGISTRY_PATH = ROOT / "data/people.json"
 ALIASES_PATH = ROOT / "data/aliases.json"
 PERSON_STORY_INDEX_PATH = ROOT / "data/derived/person-story-index.json"
 PUNCTUATION_PATH = ROOT / "data/annotation/wp1-punctuation.json"
+PRODUCTION_EVIDENCE_PATH = ROOT / "data/evidence/wp1-evidence.json"
 DERIVED_PATH = ROOT / "data/derived/sc1-site.json"
 VITE_PATH = ROOT / "site/src/generated/sc1-site.json"
 
@@ -308,8 +311,22 @@ def build(root: Path = ROOT) -> dict[str, Any]:
     registry_people = read_json(PEOPLE_REGISTRY_PATH).get("people", [])
     registry_aliases = read_json(ALIASES_PATH).get("aliases", [])
     person_story_index = read_json(PERSON_STORY_INDEX_PATH)
-    selected_records = gold["records"]
+    selected_records = list(gold["records"])
+    if STORY_EXPANSION_PATH.is_file():
+        expansion = read_json(STORY_EXPANSION_PATH)
+        gold_ids = [str(item["entry_id"]) for item in gold["records"]]
+        if expansion.get("gold_story_ids") != gold_ids:
+            raise ValueError("M2 Story expansion manifest does not preserve the frozen SC0 Gold Set")
+        expansion_records = [
+            {"entry_id": str(item["story_id"]), "linked_person_ids": []}
+            for item in expansion.get("records", [])
+            if isinstance(item, Mapping) and isinstance(item.get("story_id"), str)
+        ]
+        selected_records.extend(expansion_records)
+    selected_records.sort(key=lambda record: int(entry_by_id[record["entry_id"]].get("global_ordinal", 10**9)))
     selected_ids = [record["entry_id"] for record in selected_records]
+    if len(selected_ids) != len(set(selected_ids)):
+        raise ValueError("SC1 publication union contains duplicate Story IDs")
     selected_set = set(selected_ids)
     base_stories = {story["id"]: story for story in base["stories"]}
     base_mentions = {mention["id"]: mention for mention in base["mentions"]}
@@ -361,10 +378,26 @@ def build(root: Path = ROOT) -> dict[str, Any]:
             )
             evidence_ids = list(registry_person.get("materialization", {}).get("identity_evidence_ids", []))
             for mention in person_mentions:
+                mention_story_id = str(mention.get("entry_id") or mention.get("source_id"))
+                if mention_story_id not in selected_set:
+                    continue
                 for evidence_id in mention.get("evidence", {}).get("evidence_ids", []):
                     if evidence_id not in evidence_ids:
                         evidence_ids.append(evidence_id)
             aliases = []
+            selected_alias_evidence: dict[str, list[str]] = {}
+            for mention in person_mentions:
+                mention_story_id = str(mention.get("entry_id") or mention.get("source_id"))
+                if mention_story_id not in selected_set:
+                    continue
+                alias_id = mention.get("alias_id")
+                if not isinstance(alias_id, str):
+                    continue
+                selected_alias_evidence.setdefault(alias_id, []).extend(
+                    str(item)
+                    for item in mention.get("evidence", {}).get("evidence_ids", [])
+                    if isinstance(item, str)
+                )
             for alias in sorted(
                 aliases_by_person.get(person_id, []),
                 key=lambda item: (
@@ -379,9 +412,8 @@ def build(root: Path = ROOT) -> dict[str, Any]:
                         "alias_type": alias.get("alias_type", ""),
                         "resolution_mode": alias.get("resolution_mode", "ambiguous"),
                         "evidence_ids": [
-                            str(item.get("evidence_id"))
-                            for item in alias.get("source_evidence", [])
-                            if isinstance(item, Mapping) and isinstance(item.get("evidence_id"), str)
+                            evidence_id
+                            for evidence_id in sorted(set(selected_alias_evidence.get(str(alias.get("alias_id")), [])))
                         ],
                         "review_status": alias.get("review_status", "candidate"),
                     }
@@ -403,6 +435,24 @@ def build(root: Path = ROOT) -> dict[str, Any]:
         return projected
 
     frontend_people = frontend_people_projection()
+    production_evidence_by_id = {
+        str(item.get("id")): item
+        for item in read_json(PRODUCTION_EVIDENCE_PATH).get("records", [])
+        if isinstance(item, Mapping) and isinstance(item.get("id"), str)
+    }
+    frontend_people_evidence_ids: set[str] = set()
+    for person in frontend_people:
+        frontend_people_evidence_ids.update(
+            str(item) for item in person.get("evidence_ids", []) if isinstance(item, str)
+        )
+        for alias in person.get("aliases", []):
+            if isinstance(alias, Mapping):
+                frontend_people_evidence_ids.update(
+                    str(item) for item in alias.get("evidence_ids", []) if isinstance(item, str)
+                )
+    for evidence_id in sorted(frontend_people_evidence_ids):
+        if evidence_id in production_evidence_by_id:
+            new_evidence[evidence_id] = production_evidence_by_id[evidence_id]
 
     for selection in selected_records:
         entry_id = selection["entry_id"]
@@ -678,6 +728,7 @@ def build(root: Path = ROOT) -> dict[str, Any]:
             "stage": "sc1-story-chain-frontend",
             "generated_from": [
                 "data/story-chain-gold-set.json",
+                "data/annotation/story-expansion-wave-1.json",
                 "data/derived/person-story-links.json",
                 "data/derived/story-chain-gold-index.json",
                 "data/annotation/wp1-punctuation.json",

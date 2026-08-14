@@ -322,6 +322,7 @@ def validate(root: Path = ROOT, mode: str = "full") -> list[str]:
         bundle = read_json(root / SC1_PATH.relative_to(ROOT))
         vite = read_json(root / VITE_PATH.relative_to(ROOT))
         gold = read_json(root / "data/story-chain-gold-set.json")
+        expansion = read_json(root / "data/annotation/story-expansion-wave-1.json") if (root / "data/annotation/story-expansion-wave-1.json").is_file() else None
         chain = read_json(root / "data/derived/story-chain-gold-index.json")
         corpus = read_json(root / "data/shishuo-corpus-index.json")
         punctuation = {
@@ -346,16 +347,33 @@ def validate(root: Path = ROOT, mode: str = "full") -> list[str]:
     if bundle != vite:
         errors.append("SC1 derived bundle and Vite input JSON differ")
 
-    selected = gold.get("records", [])
+    gold_records = list(gold.get("records", []))
+    gold_ids = [item.get("entry_id") for item in gold_records]
+    if len(gold_ids) != 16 or len(set(gold_ids)) != 16:
+        errors.append("SC0 Gold Set must remain exactly 16 unique Stories")
+    selected = list(gold_records)
+    expansion_ids: list[str] = []
+    if expansion is not None:
+        expansion_ids = [str(item.get("story_id")) for item in expansion.get("records", [])]
+        if expansion.get("gold_story_ids") != gold_ids:
+            errors.append("M2 Story expansion manifest does not preserve the exact SC0 Gold Set")
+        if len(expansion_ids) != len(set(expansion_ids)):
+            errors.append("M2 Story expansion manifest contains duplicate Story IDs")
+        if set(expansion_ids) & set(gold_ids):
+            errors.append("M2 Story expansion manifest duplicates an SC0 Story")
+        selected.extend({"entry_id": story_id, "linked_person_ids": []} for story_id in expansion_ids)
+    selected_ids = [item.get("entry_id") for item in selected]
+    corpus_by_id = {item.get("id"): item for item in corpus.get("entries", [])}
+    selected.sort(key=lambda item: int(corpus_by_id.get(item.get("entry_id"), {}).get("global_ordinal", 10**9)))
     selected_ids = [item.get("entry_id") for item in selected]
     stories = bundle.get("stories", [])
     story_by_id = {item.get("id"): item for item in stories if isinstance(item, dict)}
     if selected_ids != [item.get("id") for item in stories]:
-        errors.append("SC1 stories are not exactly the ordered SC0 Gold Set")
-    if len(stories) != 16 or len(story_by_id) != len(stories):
-        errors.append("SC1 must contain exactly 16 unique Stories")
+        errors.append("SC1 stories are not exactly the ordered SC0 + M2 expansion union")
+    expected_story_count = len(gold_ids) + len(expansion_ids)
+    if len(stories) != expected_story_count or len(story_by_id) != len(stories):
+        errors.append(f"SC1 must contain exactly {expected_story_count} unique Stories from the frozen publication manifests")
 
-    corpus_by_id = {item.get("id"): item for item in corpus.get("entries", [])}
     people_by_id = {item.get("id"): item for item in bundle.get("people", [])}
     mention_by_id = {item.get("id"): item for item in bundle.get("mentions", [])}
     relation_ids = {item.get("id") for item in bundle.get("relations", [])}
@@ -494,7 +512,7 @@ def validate(root: Path = ROOT, mode: str = "full") -> list[str]:
 
     frontend_chain = bundle.get("story_chain", {})
     if frontend_chain.get("story_ids") != selected_ids:
-        errors.append("SC1 story_chain.story_ids does not project the Gold Set")
+        errors.append("SC1 story_chain.story_ids does not project the SC0 + M2 expansion union")
     frontend_story_refs = {
         item.get("entry_id"): item
         for item in frontend_chain.get("story_person_refs", [])
@@ -515,6 +533,31 @@ def validate(root: Path = ROOT, mode: str = "full") -> list[str]:
     expected_person_ids.discard(None)
     for entry_id in selected_ids:
         expected = chain_story_by_id.get(entry_id)
+        if expected is None:
+            story_mentions_for_entry = [
+                mention for mention in raw_shishuo_mentions
+                if mention.get("entry_id") == entry_id
+                and isinstance(mention.get("person_id"), str)
+            ]
+            resolved_main_for_entry = sorted({
+                str(mention["person_id"])
+                for mention in story_mentions_for_entry
+                if mention.get("section") == "main_text"
+            })
+            resolved_annotation_for_entry = sorted({
+                str(mention["person_id"])
+                for mention in story_mentions_for_entry
+                if mention.get("section") == "liu_annotation"
+            } - set(resolved_main_for_entry))
+            expected = {
+                "entry_id": entry_id,
+                "linked_person_ids": list(dict.fromkeys([
+                    *resolved_main_for_entry,
+                    *resolved_annotation_for_entry,
+                ])),
+                "main_text_person_ids": resolved_main_for_entry,
+                "liu_annotation_only_person_ids": resolved_annotation_for_entry,
+            }
         actual = frontend_story_refs.get(entry_id)
         if expected is None or actual is None:
             errors.append(f"SC1 missing Story ↔ Person projection: {entry_id}")

@@ -21,7 +21,7 @@ class SC11FrontendContractTests(unittest.TestCase):
 
     def test_random_landing_only_uses_published_story_states(self) -> None:
         stories = self.bundle["stories"]
-        self.assertEqual(len(stories), 16)
+        self.assertEqual(len(stories), 60)
         self.assertTrue(all(item["publication_state"] in {"production_ready", "preview_ready"} for item in stories))
         self.assertIn("randomPublishedStoryId", self.explorer)
         self.assertIn("initialStoryId", self.app)
@@ -41,8 +41,8 @@ class SC11FrontendContractTests(unittest.TestCase):
 
     def test_scene_card_is_story_owned_and_keeps_relations_separate(self) -> None:
         self.assertIn("scene_contexts", self.bundle)
-        self.assertEqual(
-            set(self.bundle["scene_contexts"]),
+        self.assertEqual(len(self.bundle["scene_contexts"]), 20)
+        self.assertTrue(
             {
                 "02-yanyu-069",
                 "02-yanyu-083",
@@ -53,7 +53,8 @@ class SC11FrontendContractTests(unittest.TestCase):
                 "06-yaliang-029",
                 "08-shangyu-077",
                 "19-xianyuan-026",
-            },
+            }
+            <= set(self.bundle["scene_contexts"])
         )
         self.assertIn("SceneCard", self.app)
         self.assertIn("if (!scene) return null", self.app)
@@ -111,7 +112,7 @@ console.log(JSON.stringify({{
                 f"(stderr):\n{result.stderr}\nstdout:\n{result.stdout}"
             )
         value = json.loads(result.stdout)
-        self.assertEqual(value["count"], 13)
+        self.assertEqual(value["count"], 35)
         self.assertTrue(value["allNavigable"])
         self.assertNotEqual(value["first"], value["second"])
 

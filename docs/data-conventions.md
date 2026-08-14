@@ -11,8 +11,9 @@ Production Person IDs use the current format `person-NNN`. They are allocated
 once and then frozen: canonical names, aliases, URLs, and Simplified or
 Traditional display changes never change a `person_id`. Identity merges and
 splits require an explicit migration; an old ID is never silently reused for
-a different identity. P-ID1 freezes `person-001` through `person-017`, and the
-next available production sequence is `person-018`. The one-time migration
+a different identity. P-ID1 freezes `person-001` through `person-017`; M2A
+allocates the frozen Wave-2 range `person-018` through `person-035`, and the
+next available production sequence is `person-036`. The one-time migration
 manifest preserves former name-slug IDs only as historical traceability; they
 are not alternative production IDs and must not occur in active Person foreign
 keys.
@@ -125,7 +126,15 @@ contextual or unsafe occurrences are retained as withheld review data.
 P3B does not create Relations from co-occurrence, does not publish additional
 Stories, and does not modify canonical text, punctuation, or raw witnesses.
 Future waves reuse the materialization path with a new frozen manifest; Wave 1
-selection is never recomputed from the post-materialization ranking.
+selection is never recomputed from the post-materialization ranking. M2A uses
+a separate experience ranking and Story expansion manifest: the original SC0
+Gold Set remains immutable, while the frontend publication set is the
+deterministic union of SC0 and the selected expansion Stories. Wave-2 Person
+selection and Story selection are allocation decisions, not historical review;
+newly materialized records remain candidate unless a later explicit review
+changes that state. The allocation state artifact records the next sequence
+and every assigned Person ID so later waves cannot derive IDs from names or
+incidental ordering.
 
 ## S1 Story Scene Context layer
 
@@ -140,7 +149,10 @@ SC1 projection is `scene_contexts`, keyed by existing Story IDs, and is shown
 by the central Story Scene Card only for the pilot Stories. New claims begin as
 `candidate` and retain Evidence IDs; the current SC1 pilot covers only a
 reviewed selection of the published Stories. The separate
-`data/annotation/person-relation-candidates-r3.json` layer is an R3A review
+The S1.1 expansion currently covers a bounded 20-Story selection inside the
+published experience set; it does not imply that every published Story has a
+Scene Card. The separate `data/annotation/person-relation-candidates-r3.json`
+layer is an R3A review
 artifact only: its source-backed proposals are not production Relations and
 are not shown in the reader-facing Relation card until a later explicit review.
 

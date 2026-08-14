@@ -43,6 +43,11 @@ MATERIALIZATION_PATH = Path("data/derived/person-expansion-wave-1-materializatio
 REPORT_PATH = Path("docs/person-expansion-wave-1.md")
 
 WAVE_ID = "p3b-wave-1"
+WAVE_LABEL = "P3B.1 Wave 1"
+SELECTION_SCORE_FIELD = "p3a_score"
+SELECTION_TIER_FIELD = "p3a_tier"
+MATERIALIZATION_STAGE = "p3b1-person-expansion-materialization"
+EXPECTED_WAVE_SIZE = 10
 EVIDENCE_PREFIX = "evidence-p3b-wave-1-"
 MENTION_PREFIX = "shishuo-p3b-wave-1-"
 ALIAS_PREFIX = "alias-p3b-wave-1-"
@@ -243,7 +248,7 @@ def _candidate_map(root: Path) -> tuple[dict[str, dict[str, Any]], dict[str, dic
 
 
 def freeze_selection(root: Path = ROOT) -> dict[str, Any]:
-    """Freeze the pre-mutation ranking bytes and validate the Top-10 guard."""
+    """Validate the pre-mutation ranking bytes and frozen wave guard."""
 
     wave_path = root / WAVE_PATH
     wave = read_json(wave_path)
@@ -279,11 +284,11 @@ def freeze_selection(root: Path = ROOT) -> dict[str, Any]:
     }
     candidates, _evidence = _candidate_map(root)
     members = wave.get("members", [])
-    if len(members) != 10:
-        raise ValueError(f"P3B.1 requires exactly 10 frozen members, found {len(members)}")
+    if len(members) != EXPECTED_WAVE_SIZE:
+        raise ValueError(f"{WAVE_LABEL} requires exactly {EXPECTED_WAVE_SIZE} frozen members, found {len(members)}")
     ranks = sorted(int(item.get("rank_at_selection", -1)) for item in members)
-    if ranks != list(range(1, 11)):
-        raise ValueError(f"P3B.1 member ranks are not exactly 1-10: {ranks}")
+    if ranks != list(range(1, EXPECTED_WAVE_SIZE + 1)):
+        raise ValueError(f"{WAVE_LABEL} member ranks are not exactly 1-{EXPECTED_WAVE_SIZE}: {ranks}")
     people = read_json(root / PEOPLE_PATH).get("people", [])
     current_ids = {str(item.get("person_id")) for item in people}
     for member in sorted(members, key=lambda item: int(item["rank_at_selection"])):
@@ -292,11 +297,11 @@ def freeze_selection(root: Path = ROOT) -> dict[str, Any]:
         ranking_row = ranking_by_candidate.get(candidate_id)
         candidate = candidates.get(str(candidate_id))
         if ranking_row is None:
-            raise ValueError(f"Wave 1 member is absent from frozen ranking: {candidate_id}")
+            raise ValueError(f"{WAVE_LABEL} member is absent from frozen ranking: {candidate_id}")
         if int(ranking_row.get("rank", -1)) != rank:
-            raise ValueError(f"Wave 1 rank changed for {candidate_id}: {ranking_row.get('rank')} != {rank}")
+            raise ValueError(f"{WAVE_LABEL} rank changed for {candidate_id}: {ranking_row.get('rank')} != {rank}")
         if candidate is None:
-            raise ValueError(f"Wave 1 member is absent from P3A.1 candidates: {candidate_id}")
+            raise ValueError(f"{WAVE_LABEL} member is absent from P3A.1 candidates: {candidate_id}")
         person_id = member.get("person_id")
         registered_wave_person = next(
             (
@@ -309,23 +314,23 @@ def freeze_selection(root: Path = ROOT) -> dict[str, Any]:
             None,
         )
         if candidate.get("status") != "strong_candidate" and registered_wave_person is None:
-            raise ValueError(f"Wave 1 member is not strong_candidate: {candidate_id}")
+            raise ValueError(f"{WAVE_LABEL} member is not strong_candidate: {candidate_id}")
         if candidate.get("materialization_state") != "new_candidate" and registered_wave_person is None:
-            raise ValueError(f"Wave 1 member is already materialized elsewhere: {candidate_id}")
+            raise ValueError(f"{WAVE_LABEL} member is already materialized elsewhere: {candidate_id}")
         if not isinstance(candidate.get("preferred_name"), str) or not candidate["preferred_name"]:
-            raise ValueError(f"Wave 1 member has no preferred name: {candidate_id}")
+            raise ValueError(f"{WAVE_LABEL} member has no preferred name: {candidate_id}")
         if not candidate.get("identity_evidence_ids"):
-            raise ValueError(f"Wave 1 member has no identity Evidence: {candidate_id}")
+            raise ValueError(f"{WAVE_LABEL} member has no identity Evidence: {candidate_id}")
         flags = set(candidate.get("risk_flags", []))
         blocking = sorted(flags & BLOCKING_FLAGS)
         if blocking:
-            raise ValueError(f"Wave 1 member has blocking identity flags {blocking}: {candidate_id}")
+            raise ValueError(f"{WAVE_LABEL} member has blocking identity flags {blocking}: {candidate_id}")
         if not isinstance(person_id, str) or not person_id:
-            raise ValueError(f"Wave 1 intended Person ID is missing or already used: {person_id!r}")
+            raise ValueError(f"{WAVE_LABEL} intended Person ID is missing or already used: {person_id!r}")
         if person_id in current_ids and registered_wave_person is None:
-            raise ValueError(f"Wave 1 intended Person ID is already used: {person_id!r}")
+            raise ValueError(f"{WAVE_LABEL} intended Person ID is already used: {person_id!r}")
         if member.get("preferred_name") != candidate.get("preferred_name"):
-            raise ValueError(f"Wave 1 preferred name drift: {candidate_id}")
+            raise ValueError(f"{WAVE_LABEL} preferred name drift: {candidate_id}")
     return wave
 
 
@@ -388,6 +393,28 @@ def _occurrence_key(mention: Mapping[str, Any]) -> tuple[str, str, int, str]:
     )
 
 
+def _mention_span(mention: Mapping[str, Any]) -> tuple[str, str, int, int] | None:
+    evidence = mention.get("evidence", {})
+    offset = evidence.get("section_offset") if isinstance(evidence, Mapping) else None
+    if not isinstance(offset, int):
+        anchor = mention.get("anchor", {})
+        offset = anchor.get("offset") if isinstance(anchor, Mapping) else None
+    surface = mention.get("surface")
+    if not isinstance(offset, int) or not isinstance(surface, str):
+        return None
+    entry_id = str(mention.get("entry_id") or mention.get("source_id"))
+    section = str(mention.get("section"))
+    return entry_id, section, offset, offset + len(surface)
+
+
+def _spans_overlap(left: Mapping[str, Any], right: Mapping[str, Any]) -> bool:
+    left_span = _mention_span(left)
+    right_span = _mention_span(right)
+    if left_span is None or right_span is None or left_span[:2] != right_span[:2]:
+        return False
+    return left_span[2] < right_span[3] and right_span[2] < left_span[3]
+
+
 def _build_mention(
     occurrence: Mapping[str, Any],
     *,
@@ -417,7 +444,7 @@ def _build_mention(
         "person_id": person_id,
         "candidate_person_ids": [person_id],
         "confidence": "high",
-        "resolution_method": "exact_p3b_wave_1_candidate_occurrence",
+        "resolution_method": f"exact_{WAVE_ID}_candidate_occurrence",
         "context_identity_hits": [str(candidate.get("preferred_name"))],
         "context": quote,
         "evidence": {
@@ -544,7 +571,7 @@ def _build_person(
         "person_id": person_id,
         "canonical_name": str(candidate["preferred_name"]),
         "scope_role": "primary",
-        "identity_scope": "P3B.1 Wave 1 materialization; identity review remains candidate",
+        "identity_scope": f"{WAVE_LABEL} materialization; identity review remains candidate",
         "alias_ids": [str(alias["alias_id"]) for alias in aliases],
         "source_evidence": source_evidence,
         "materialization": {
@@ -618,8 +645,12 @@ def _enrich_materialization_member(
     ]
     member.update(
         {
-            "p3a_score": float(ranking_row.get("score", 0.0)),
-            "p3a_tier": str(ranking_row.get("tier", "deferred")),
+            SELECTION_SCORE_FIELD: float(
+                ranking_row.get("score", ranking_row.get("m2_score", 0.0))
+            ),
+            SELECTION_TIER_FIELD: str(
+                ranking_row.get("tier", "m2-eligible" if ranking_row.get("eligible") else "deferred")
+            ),
             "exact_aliases": sorted(
                 str(item["surface"])
                 for item in surfaces
@@ -647,9 +678,9 @@ def _render_report(
     people_after: int,
 ) -> str:
     lines = [
-        "# P3B.1 Person Expansion Wave 1",
+        f"# {WAVE_LABEL} Person Expansion",
         "",
-        "> This report records the frozen Top-10 materialization. New identity, alias, Mention, and Person Sketch records remain candidate data; no Relation or Story publication fact is created here.",
+        f"> This report records the frozen {WAVE_LABEL} materialization. New identity, alias, Mention, and Person Sketch records remain candidate data; no Relation or Story publication fact is created here.",
         "",
         "## Selection freeze",
         "",
@@ -657,7 +688,7 @@ def _render_report(
         f"- Ranking artifact: `{wave['source_ranking_artifact']}`",
         f"- Ranking SHA-256: `{wave['source_ranking_sha256']}`",
         f"- Person registry: {people_before} → {people_after}",
-        "- Selection authority: pre-mutation P3A ranks 1–10; no rank substitution.",
+        f"- Selection authority: pre-mutation ranking ranks 1–{EXPECTED_WAVE_SIZE}; no rank substitution.",
         "",
         "## Materialized Persons",
         "",
@@ -750,11 +781,17 @@ def build(root: Path = ROOT) -> dict[str, Any]:
         evidence_by_id = {str(item.get("id")): item for item in existing_evidence}
         for source_evidence_id in sorted(candidate_evidence):
             production_id = production_evidence_id(source_evidence_id)
-            if production_id not in evidence_by_id:
-                continue
-            evidence_by_id[production_id] = _candidate_evidence_record(
+            # Recreate a missing derived production record deterministically.
+            # A later wave-specific provenance gate may withhold it, but an
+            # idempotent rebuild must not leave stale foreign-key references
+            # merely because an earlier projection was sanitized.
+            record = _candidate_evidence_record(
                 candidate_evidence[source_evidence_id], root=root
             )
+            existing_record = evidence_by_id.get(production_id)
+            if existing_record is not None and existing_record != record:
+                raise ValueError(f"production Evidence ID collision: {production_id}")
+            evidence_by_id[production_id] = record
         evidence_document["records"] = sorted(
             evidence_by_id.values(), key=lambda item: str(item.get("id"))
         )
@@ -844,6 +881,31 @@ def build(root: Path = ROOT) -> dict[str, Any]:
         if candidate_id in wave_by_candidate:
             occurrence_by_candidate[candidate_id].append(occurrence)
     existing_occurrence_keys = {_occurrence_key(item): item for item in existing_mentions}
+    wave_occurrences = [
+        occurrence
+        for occurrence in occurrences
+        if str(occurrence.get("candidate_id")) in wave_by_candidate
+    ]
+    cross_candidate_suppressed: dict[str, str] = {}
+    for index, left in enumerate(wave_occurrences):
+        left_probe = {
+            "entry_id": left.get("source_id"),
+            "section": left.get("section"),
+            "surface": left.get("surface"),
+            "evidence": {"section_offset": left.get("offset")},
+        }
+        for right in wave_occurrences[index + 1 :]:
+            if str(left.get("candidate_id")) == str(right.get("candidate_id")):
+                continue
+            right_probe = {
+                "entry_id": right.get("source_id"),
+                "section": right.get("section"),
+                "surface": right.get("surface"),
+                "evidence": {"section_offset": right.get("offset")},
+            }
+            if _spans_overlap(left_probe, right_probe):
+                cross_candidate_suppressed[str(left.get("occurrence_id"))] = "incompatible_overlapping_candidate_ranges"
+                cross_candidate_suppressed[str(right.get("occurrence_id"))] = "incompatible_overlapping_candidate_ranges"
     promoted_mentions: list[dict[str, Any]] = []
     materialized_members: list[dict[str, Any]] = []
     for member in wave_members:
@@ -856,9 +918,47 @@ def build(root: Path = ROOT) -> dict[str, Any]:
                 str(item.get("source_id")),
                 0 if item.get("section") == "main_text" else 1,
                 int(item.get("offset", 10**9)) if isinstance(item.get("offset"), int) else 10**9,
+                -len(str(item.get("surface", ""))),
                 str(item.get("occurrence_id")),
             ),
         )
+        suppressed_overlaps: dict[str, str] = {
+            occurrence_id: reason
+            for occurrence_id, reason in cross_candidate_suppressed.items()
+            if any(str(row.get("occurrence_id")) == occurrence_id for row in candidate_rows)
+        }
+        for index, left in enumerate(candidate_rows):
+            for right in candidate_rows[index + 1 :]:
+                left_span = (
+                    str(left.get("source_id")),
+                    str(left.get("section")),
+                    int(left.get("offset", -1)) if isinstance(left.get("offset"), int) else -1,
+                    int(left.get("offset", -1)) + len(str(left.get("surface", "")))
+                    if isinstance(left.get("offset"), int)
+                    else -1,
+                )
+                right_span = (
+                    str(right.get("source_id")),
+                    str(right.get("section")),
+                    int(right.get("offset", -1)) if isinstance(right.get("offset"), int) else -1,
+                    int(right.get("offset", -1)) + len(str(right.get("surface", "")))
+                    if isinstance(right.get("offset"), int)
+                    else -1,
+                )
+                if left_span[:2] != right_span[:2] or left_span[2] < 0 or right_span[2] < 0:
+                    continue
+                if not (left_span[2] < right_span[3] and right_span[2] < left_span[3]):
+                    continue
+                if str(left.get("candidate_id")) != str(right.get("candidate_id")):
+                    # Different candidate identities at an incompatible range
+                    # are all withheld.  The materializer must not choose a
+                    # Person merely because a wave rank happened to be first.
+                    suppressed_overlaps[str(left.get("occurrence_id"))] = "incompatible_overlapping_candidate_ranges"
+                    suppressed_overlaps[str(right.get("occurrence_id"))] = "incompatible_overlapping_candidate_ranges"
+                elif len(str(left.get("surface", ""))) >= len(str(right.get("surface", ""))):
+                    suppressed_overlaps[str(right.get("occurrence_id"))] = "nested_same_person_alias_range"
+                else:
+                    suppressed_overlaps[str(left.get("occurrence_id"))] = "nested_same_person_alias_range"
         promoted_occurrence_ids: list[str] = []
         promoted_mention_ids: list[str] = []
         withheld: list[dict[str, Any]] = []
@@ -867,12 +967,15 @@ def build(root: Path = ROOT) -> dict[str, Any]:
             strong = occurrence.get("confidence") == "strong_candidate"
             surface_type = str(occurrence.get("surface_type", ""))
             reason: str | None = None
+            reused_existing = False
+            if str(occurrence.get("occurrence_id")) in suppressed_overlaps:
+                reason = suppressed_overlaps[str(occurrence.get("occurrence_id"))]
             if not exact:
-                reason = "contextual_association"
+                reason = reason or "contextual_association"
             elif not strong:
-                reason = "non_strong_candidate_confidence"
+                reason = reason or "non_strong_candidate_confidence"
             elif surface_type not in EXACT_SURFACE_TYPES:
-                reason = "title_or_non_exact_surface_type"
+                reason = reason or "title_or_non_exact_surface_type"
             valid, validation_reason, location = _validate_occurrence(root, occurrence, entries)
             if reason is None and not valid:
                 reason = validation_reason
@@ -887,8 +990,20 @@ def build(root: Path = ROOT) -> dict[str, Any]:
                 if existing.get("person_id") == person_id:
                     promoted_occurrence_ids.append(str(occurrence["occurrence_id"]))
                     promoted_mention_ids.append(str(existing["mention_id"]))
+                    reused_existing = True
                 else:
                     reason = "existing_mention_collision"
+            if reused_existing:
+                continue
+            if reason is None:
+                probe = {
+                    "entry_id": occurrence.get("source_id"),
+                    "section": occurrence.get("section"),
+                    "surface": occurrence.get("surface"),
+                    "evidence": {"section_offset": occurrence.get("offset")},
+                }
+                if any(_spans_overlap(probe, existing) for existing in existing_mentions):
+                    reason = "overlapping_existing_mention_range"
             if reason is not None:
                 withheld.append(
                     {
@@ -1002,7 +1117,7 @@ def build(root: Path = ROOT) -> dict[str, Any]:
     write_json(root / WAVE_PATH, wave)
     materialization = {
         "schema": 1,
-        "stage": "p3b1-person-expansion-materialization",
+        "stage": MATERIALIZATION_STAGE,
         "wave_id": WAVE_ID,
         "source_ranking_artifact": wave["source_ranking_artifact"],
         "source_ranking_sha256": wave["source_ranking_sha256"],

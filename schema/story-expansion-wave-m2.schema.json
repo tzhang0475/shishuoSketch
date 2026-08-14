@@ -1,0 +1,37 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://shishuo-sketch/schema/story-expansion-wave-m2.schema.json",
+  "title": "M2A Story expansion wave manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "stage", "wave_id", "source_ranking_artifact", "source_ranking_sha256", "gold_story_ids", "expansion_story_ids", "selection_policy", "records"],
+  "properties": {
+    "schema": {"const": 1},
+    "stage": {"const": "m2a-story-expansion-wave"},
+    "wave_id": {"const": "m2-story-expansion-wave-1"},
+    "source_ranking_artifact": {"const": "data/derived/m2-story-expansion-ranking.json"},
+    "source_ranking_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "gold_story_ids": {"type": "array", "minItems": 16, "maxItems": 16, "uniqueItems": true, "items": {"type": "string"}},
+    "expansion_story_ids": {"type": "array", "minItems": 1, "items": {"type": "string"}, "uniqueItems": true},
+    "selection_policy": {"type": "string", "minLength": 1},
+    "records": {"type": "array", "items": {"$ref": "#/$defs/record"}},
+    "notes": {"type": "array", "items": {"type": "string"}}
+  },
+  "$defs": {
+    "record": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["story_id", "selection_rank", "score", "score_components", "selection_reasons", "publication_state", "review_status", "source_entry_id"],
+      "properties": {
+        "story_id": {"type": "string", "minLength": 1},
+        "selection_rank": {"type": "integer", "minimum": 1},
+        "score": {"type": "number"},
+        "score_components": {"type": "object"},
+        "selection_reasons": {"type": "array", "items": {"type": "string"}},
+        "publication_state": {"enum": ["production_ready", "preview_ready"]},
+        "review_status": {"enum": ["candidate", "reviewed"]},
+        "source_entry_id": {"type": "string"}
+      }
+    }
+  }
+}

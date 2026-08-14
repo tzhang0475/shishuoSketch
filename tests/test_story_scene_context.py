@@ -22,8 +22,8 @@ class StorySceneContextTests(unittest.TestCase):
 
     def test_pilot_selection_is_evidence_bounded_and_includes_mandatory_story(self) -> None:
         ids = [record["story_id"] for record in self.source["records"]]
-        self.assertGreaterEqual(len(ids), 8)
-        self.assertLessEqual(len(ids), 12)
+        self.assertGreaterEqual(len(ids), 20)
+        self.assertLessEqual(len(ids), 30)
         self.assertIn("06-yaliang-029", ids)
         self.assertEqual(ids[0], "06-yaliang-029")
 
@@ -89,8 +89,8 @@ class StorySceneContextTests(unittest.TestCase):
             self.assertNotIn("relation_ids", context)
 
     def test_scene_records_remain_story_owned_and_do_not_project_relations(self) -> None:
-        self.assertEqual(len(self.derived["contexts"]), 9)
-        self.assertTrue({"02-yanyu-069", "04-wenxue-036", "05-fangzheng-055", "06-yaliang-027", "08-shangyu-077", "19-xianyuan-026"} <= set(self.derived["contexts"]))
+        self.assertEqual(len(self.derived["contexts"]), 20)
+        self.assertTrue({"02-yanyu-069", "04-wenxue-036", "05-fangzheng-055", "06-yaliang-027", "08-shangyu-077", "19-xianyuan-026", "02-yanyu-035", "05-fangzheng-032", "11-jiewu-005", "27-jiajue-008"} <= set(self.derived["contexts"]))
         self.assertFalse(any("relations" in context or "relation_ids" in context for context in self.derived["contexts"].values()))
 
     def test_sc1_validation_includes_scene_projection_in_repository_mode(self) -> None:

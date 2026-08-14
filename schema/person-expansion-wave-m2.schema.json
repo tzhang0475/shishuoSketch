@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://shishuo-sketch/schema/person-expansion-wave-m2.schema.json",
+  "title": "M2A Person expansion wave manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "stage", "wave_id", "source_ranking_artifact", "source_ranking_sha256", "ranking_version", "selection_policy", "members"],
+  "properties": {
+    "schema": {"const": 1},
+    "stage": {"const": "m2a-person-expansion-wave"},
+    "wave_id": {"const": "p3b-wave-2"},
+    "source_ranking_artifact": {"const": "data/derived/m2-person-expansion-ranking.json"},
+    "source_ranking_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "ranking_version": {"const": "m2a-person-experience-ranking"},
+    "selection_policy": {"type": "string", "minLength": 1},
+    "members": {
+      "type": "array",
+      "minItems": 18,
+      "maxItems": 18,
+      "items": {"$ref": "#/$defs/member"}
+    },
+    "notes": {"type": "array", "items": {"type": "string"}}
+  },
+  "$defs": {
+    "member": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": ["candidate_id", "rank_at_selection", "preferred_name", "person_id", "candidate_status", "materialization_status", "review_status"],
+      "properties": {
+        "candidate_id": {"type": "string", "minLength": 1},
+        "rank_at_selection": {"type": "integer", "minimum": 1, "maximum": 18},
+        "preferred_name": {"type": "string", "minLength": 1},
+        "person_id": {"type": "string", "pattern": "^person-0(1[89]|2[0-9]|3[0-5])$"},
+        "candidate_status": {"const": "strong_candidate"},
+        "materialization_status": {"enum": ["pending", "materialized"]},
+        "review_status": {"enum": ["candidate", "reviewed"]},
+        "m2_score": {"type": "number", "minimum": 0},
+        "m2_components": {"type": "object"},
+        "selection_reasons": {"type": "array", "items": {"type": "string"}},
+        "identity_evidence_ids": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+        "risk_flags": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+        "exact_alias_count": {"type": "integer", "minimum": 0},
+        "contextual_alias_count": {"type": "integer", "minimum": 0},
+        "promoted_occurrence_ids": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+        "promoted_mention_ids": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+        "promoted_occurrence_count": {"type": "integer", "minimum": 0},
+        "withheld_occurrence_count": {"type": "integer", "minimum": 0},
+        "withheld_occurrences": {"type": "array", "items": {"type": "object"}}
+      }
+    }
+  }
+}

@@ -4,7 +4,7 @@
 
 ## Scope result
 
-The current structured repository contains **17 scoped Persons** and **1130 canonical Shishuo Stories**. The eligible non-scoped identity universe is **313**; P3A.1 supplied **313** strong open-world review keys.
+The current structured repository contains **35 scoped Persons** and **1130 canonical Shishuo Stories**. The eligible non-scoped identity universe is **295**; P3A.1 supplied **295** strong open-world review keys.
 
 ## Ranking dimensions and weights
 
@@ -30,154 +30,152 @@ Main-text Story presence receives more current-coverage weight than Liu-annotati
 
 ## Distribution
 
-- Candidate identities: **313**
-- Tier A / B / C / deferred: **0 / 3 / 88 / 222**
-- Candidates in current SC1: **4**
+- Candidate identities: **295**
+- Tier A / B / C / deferred: **1 / 5 / 74 / 215**
+- Candidates in current SC1: **24**
 - Median / maximum corpus Story coverage: **1.0 / 49**
-- Strong identity-evidence candidates: **172**
+- Strong identity-evidence candidates: **154**
 
 ## Top candidates
 
-### 周顗
-
-Rank: **1** · Score: **49.31** · Tier: **B**
-
-- Current Stories: 0 main-text, 0 Liu-annotation-only
-- Corpus Stories: 24 · unlock potential: 13
-- Direct reviewed Relations to current scope: 0 · shared Stories: 13
-- Risks: contextual_surface_association, single_source_unit
-
 ### 王隱
 
-Rank: **2** · Score: **49.07** · Tier: **B**
+Rank: **1** · Score: **77.84** · Tier: **A**
 
-- Current Stories: 0 main-text, 0 Liu-annotation-only
-- Corpus Stories: 49 · unlock potential: 9
-- Direct reviewed Relations to current scope: 0 · shared Stories: 9
+- Current Stories: 0 main-text, 3 Liu-annotation-only
+- Corpus Stories: 49 · unlock potential: 20
+- Direct reviewed Relations to current scope: 0 · shared Stories: 23
 - Risks: contextual_surface_association, single_source_unit
-
-### 謝尚
-
-Rank: **3** · Score: **47.23** · Tier: **B**
-
-- Current Stories: 0 main-text, 0 Liu-annotation-only
-- Corpus Stories: 24 · unlock potential: 12
-- Direct reviewed Relations to current scope: 0 · shared Stories: 12
-- Risks: contextual_surface_association, single_source_unit
-
-### 孟陋
-
-Rank: **4** · Score: **38.60** · Tier: **C**
-
-- Current Stories: 0 main-text, 1 Liu-annotation-only
-- Corpus Stories: 10 · unlock potential: 4
-- Direct reviewed Relations to current scope: 0 · shared Stories: 5
-- Risks: single_source_unit
-
-### 何充
-
-Rank: **5** · Score: **36.58** · Tier: **C**
-
-- Current Stories: 0 main-text, 0 Liu-annotation-only
-- Corpus Stories: 17 · unlock potential: 7
-- Direct reviewed Relations to current scope: 0 · shared Stories: 7
-- Risks: single_source_unit
-
-### 向秀
-
-Rank: **6** · Score: **35.47** · Tier: **C**
-
-- Current Stories: 0 main-text, 1 Liu-annotation-only
-- Corpus Stories: 9 · unlock potential: 1
-- Direct reviewed Relations to current scope: 0 · shared Stories: 2
-- Risks: single_source_unit
-
-### 孫盛
-
-Rank: **7** · Score: **35.16** · Tier: **C**
-
-- Current Stories: 0 main-text, 0 Liu-annotation-only
-- Corpus Stories: 25 · unlock potential: 5
-- Direct reviewed Relations to current scope: 0 · shared Stories: 5
-- Risks: single_source_unit
 
 ### 虞預
 
-Rank: **8** · Score: **33.68** · Tier: **C**
+Rank: **2** · Score: **56.52** · Tier: **B**
 
-- Current Stories: 0 main-text, 0 Liu-annotation-only
-- Corpus Stories: 21 · unlock potential: 6
-- Direct reviewed Relations to current scope: 0 · shared Stories: 6
+- Current Stories: 0 main-text, 3 Liu-annotation-only
+- Corpus Stories: 21 · unlock potential: 10
+- Direct reviewed Relations to current scope: 0 · shared Stories: 13
 - Risks: single_source_unit
 
-### 謝鯤
+### 嵇康
 
-Rank: **9** · Score: **33.17** · Tier: **C**
+Rank: **3** · Score: **49.43** · Tier: **B**
 
-- Current Stories: 0 main-text, 0 Liu-annotation-only
-- Corpus Stories: 10 · unlock potential: 6
+- Current Stories: 1 main-text, 0 Liu-annotation-only
+- Corpus Stories: 22 · unlock potential: 8
+- Direct reviewed Relations to current scope: 0 · shared Stories: 9
+- Risks: single_source_unit
+
+### 山濤
+
+Rank: **4** · Score: **46.14** · Tier: **B**
+
+- Current Stories: 1 main-text, 0 Liu-annotation-only
+- Corpus Stories: 17 · unlock potential: 6
+- Direct reviewed Relations to current scope: 0 · shared Stories: 7
+- Risks: contextual_surface_association, single_source_unit
+
+### 阮籍
+
+Rank: **5** · Score: **45.39** · Tier: **B**
+
+- Current Stories: 1 main-text, 0 Liu-annotation-only
+- Corpus Stories: 19 · unlock potential: 5
 - Direct reviewed Relations to current scope: 0 · shared Stories: 6
 - Risks: single_source_unit
 
 ### 徐廣
 
-Rank: **10** · Score: **32.21** · Tier: **C**
+Rank: **6** · Score: **42.22** · Tier: **B**
 
-- Current Stories: 0 main-text, 0 Liu-annotation-only
-- Corpus Stories: 15 · unlock potential: 6
-- Direct reviewed Relations to current scope: 0 · shared Stories: 6
+- Current Stories: 0 main-text, 2 Liu-annotation-only
+- Corpus Stories: 15 · unlock potential: 5
+- Direct reviewed Relations to current scope: 0 · shared Stories: 7
 - Risks: single_source_unit
 
-### 孫恩
+### 羊祜
 
-Rank: **11** · Score: **32.05** · Tier: **C**
+Rank: **7** · Score: **39.74** · Tier: **C**
 
-- Current Stories: 0 main-text, 1 Liu-annotation-only
-- Corpus Stories: 4 · unlock potential: 1
-- Direct reviewed Relations to current scope: 0 · shared Stories: 2
-- Risks: single_source_unit
+- Current Stories: 1 main-text, 0 Liu-annotation-only
+- Corpus Stories: 8 · unlock potential: 2
+- Direct reviewed Relations to current scope: 0 · shared Stories: 3
+- Risks: contextual_surface_association, single_source_unit
 
-### 殷浩
+### 陶侃
 
-Rank: **12** · Score: **31.83** · Tier: **C**
+Rank: **8** · Score: **38.65** · Tier: **C**
 
-- Current Stories: 0 main-text, 0 Liu-annotation-only
-- Corpus Stories: 19 · unlock potential: 5
+- Current Stories: 1 main-text, 0 Liu-annotation-only
+- Corpus Stories: 5 · unlock potential: 4
 - Direct reviewed Relations to current scope: 0 · shared Stories: 5
 - Risks: contextual_surface_association, single_source_unit
 
-### 嵇康
+### 劉伶
 
-Rank: **13** · Score: **31.04** · Tier: **C**
+Rank: **9** · Score: **38.30** · Tier: **C**
 
-- Current Stories: 0 main-text, 0 Liu-annotation-only
-- Corpus Stories: 22 · unlock potential: 3
-- Direct reviewed Relations to current scope: 0 · shared Stories: 3
+- Current Stories: 1 main-text, 0 Liu-annotation-only
+- Corpus Stories: 8 · unlock potential: 1
+- Direct reviewed Relations to current scope: 0 · shared Stories: 2
 - Risks: single_source_unit
 
-### 王恭
+### 荀顗
 
-Rank: **14** · Score: **30.82** · Tier: **C**
+Rank: **10** · Score: **35.37** · Tier: **C**
+
+- Current Stories: 1 main-text, 0 Liu-annotation-only
+- Corpus Stories: 5 · unlock potential: 1
+- Direct reviewed Relations to current scope: 0 · shared Stories: 2
+- Risks: single_source_unit
+
+### 孫盛
+
+Rank: **11** · Score: **34.39** · Tier: **C**
 
 - Current Stories: 0 main-text, 0 Liu-annotation-only
-- Corpus Stories: 33 · unlock potential: 1
+- Corpus Stories: 25 · unlock potential: 7
+- Direct reviewed Relations to current scope: 0 · shared Stories: 7
+- Risks: single_source_unit
+
+### 王祥
+
+Rank: **12** · Score: **33.30** · Tier: **C**
+
+- Current Stories: 1 main-text, 0 Liu-annotation-only
+- Corpus Stories: 3 · unlock potential: 0
 - Direct reviewed Relations to current scope: 0 · shared Stories: 1
-- Risks: contextual_surface_association, single_source_unit
+- Risks: single_source_unit
 
-### 王戎
+### 杜預
 
-Rank: **15** · Score: **30.82** · Tier: **C**
+Rank: **13** · Score: **32.32** · Tier: **C**
 
-- Current Stories: 0 main-text, 0 Liu-annotation-only
-- Corpus Stories: 33 · unlock potential: 1
+- Current Stories: 0 main-text, 1 Liu-annotation-only
+- Corpus Stories: 9 · unlock potential: 4
+- Direct reviewed Relations to current scope: 0 · shared Stories: 5
+- Risks: single_source_unit
+
+### 王機
+
+Rank: **14** · Score: **31.80** · Tier: **C**
+
+- Current Stories: 1 main-text, 0 Liu-annotation-only
+- Corpus Stories: 2 · unlock potential: 0
 - Direct reviewed Relations to current scope: 0 · shared Stories: 1
-- Risks: contextual_surface_association, single_source_unit
+- Risks: single_source_unit
+
+### 李充
+
+Rank: **15** · Score: **31.58** · Tier: **C**
+
+- Current Stories: 0 main-text, 1 Liu-annotation-only
+- Corpus Stories: 6 · unlock potential: 4
+- Direct reviewed Relations to current scope: 0 · shared Stories: 5
+- Risks: single_source_unit
 
 ## Current live Story gaps
 
-- `02-yanyu-071` — 孫恩 (`candidate-identity-100-liezhuan-010-96bcbe2d3579`)
-- `04-wenxue-036` — 向秀 (`candidate-identity-049-liezhuan-003-1e8de1e68064`)
-- `05-fangzheng-023` — 王裒 (`candidate-identity-088-liezhuan-004-7bd860ca57e7`), 孟陋 (`candidate-identity-094-liezhuan-016-86bd1f390c7b`)
+- `05-fangzheng-023` — 王裒 (`candidate-identity-088-liezhuan-004-7bd860ca57e7`)
 - `06-yaliang-027` — candidate-identity-067-liezhuan-002-e72bf92e965f (`candidate-identity-067-liezhuan-002-e72bf92e965f`)
 - `06-yaliang-029` — candidate-identity-067-liezhuan-002-e72bf92e965f (`candidate-identity-067-liezhuan-002-e72bf92e965f`)
 

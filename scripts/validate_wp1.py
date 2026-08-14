@@ -1207,7 +1207,39 @@ def validate_bundle(root: Path, records_by_kind: dict[str, list[dict[str, Any]]]
             continue
         expected = {record["id"] for record in records_by_kind[kind]}
         actual = {record.get("id") for record in records}
-        if expected != actual:
+        # The WP1 archive is intentionally a small milestone projection.  The
+        # canonical Evidence registry is now also the production evidence
+        # registry used by later M2 waves, so it is a strict superset of the
+        # evidence carried by this historical sample bundle.  Keep exact
+        # identity equality for every sampled object kind; for Evidence,
+        # require that the sample never invents an ID and that every evidence
+        # reference made by a sampled object is present in the sample.  The
+        # full registry itself remains validated by validate_references and
+        # validate_source_provenance above.
+        if kind == "evidence":
+            if not actual.issubset(expected):
+                errors.append("derived bundle evidence contains IDs absent from annotation records")
+            bundle_evidence_refs: set[str] = set()
+            for object_kind, object_records in bundle.items():
+                if object_kind in {"evidence", "schema", "generated_from"}:
+                    continue
+                if not isinstance(object_records, list):
+                    continue
+                for record in object_records:
+                    if not isinstance(record, dict):
+                        continue
+                    values = record.get("evidence_ids", [])
+                    if isinstance(values, list):
+                        bundle_evidence_refs.update(
+                            str(value) for value in values if isinstance(value, str)
+                        )
+            if not bundle_evidence_refs.issubset(actual):
+                missing = sorted(bundle_evidence_refs - actual)
+                errors.append(
+                    "derived bundle evidence is missing IDs referenced by sampled records: "
+                    + ", ".join(missing)
+                )
+        elif expected != actual:
             errors.append(f"derived bundle {kind} IDs do not match annotation records")
 
     try:
