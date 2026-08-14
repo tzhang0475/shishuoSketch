@@ -64,7 +64,16 @@ class M2ExperienceScaleUpTests(unittest.TestCase):
         # eligible merely to preserve the pre-resolution count.
         self.assertEqual(len(eligible), self.metrics["after"]["random_person_eligible_count"])
         self.assertNotIn("person-015", eligible)
+        self.assertNotIn("person-016", eligible)
         self.assertEqual(self.metrics["after"]["random_person_eligible_count"], len(eligible))
+
+    def test_er1_1_2_prefix_correction_removes_wang_xia_safe_story_path(self) -> None:
+        stories = {story["id"]: story for story in self.bundle["stories"]}
+        self.assertNotIn("person-016", stories["05-fangzheng-055"]["person_ids"])
+        links = read("data/derived/person-story-links.json")
+        self.assertEqual(self.metrics["after"]["person_story_link_count"], links["link_count"])
+        self.assertFalse(any(link["person_id"] == "person-016" for link in links["links"]))
+        self.assertEqual(self.metrics["after"]["person_no_published_story_count"], 2)
 
     def test_er_identity_correction_does_not_restore_an_unsafe_sun_gui_path(self) -> None:
         stories = {story["id"]: story for story in self.bundle["stories"]}

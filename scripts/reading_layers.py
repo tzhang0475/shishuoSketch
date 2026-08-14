@@ -86,6 +86,23 @@ def strip_display_punctuation(text: str) -> str:
     )
 
 
+def normalize_reader_whitespace(text: str) -> str:
+    """Collapse physical source line boundaries in reader-facing text.
+
+    Processed Shishuo entries preserve witness line boundaries for source and
+    provenance work.  The current punctuation/reading schema has no separate
+    semantic-paragraph field, so a newline in a display string is a physical
+    source boundary, not a reader paragraph.  Keep the boundary as ordinary
+    inline whitespace while leaving the canonical/source strings untouched.
+
+    If semantic paragraph breaks are introduced later, they must be carried
+    by an explicit reading-layer field and projected separately; this helper
+    deliberately does not infer them from raw newlines.
+    """
+
+    return re.sub(r"[\r\n]+", " ", text).strip()
+
+
 def validate_punctuation_round_trip(
     record: Mapping[str, Any],
     canonical: Mapping[str, str],
@@ -1094,7 +1111,12 @@ def build_display_reading(
     annotations: list[dict[str, Any]] = []
     suppressed_mentions: list[dict[str, Any]] = []
     main_canonical = str(sections["main_text"].get("canonical_text", ""))
-    main_display = str(sections["main_text"].get("punctuated_text", ""))
+    # Punctuation records are derived display input, but may still retain
+    # physical witness line boundaries.  Normalize only this reader-facing
+    # projection; canonical/source text and evidence quotations remain exact.
+    main_display = normalize_reader_whitespace(
+        str(sections["main_text"].get("punctuated_text", ""))
+    )
     canonical_annotation_by_id = {
         str(annotation.get("id")): annotation
         for annotation in canonical_annotations
@@ -1130,7 +1152,9 @@ def build_display_reading(
                 candidate = annotation_section.get("punctuated_text")
             if isinstance(candidate, str) and candidate and strip_display_punctuation(candidate) == strip_display_punctuation(canonical_annotation):
                 punctuated_annotation = candidate
-        displayed_annotation = punctuated_annotation or canonical_annotation
+        displayed_annotation = normalize_reader_whitespace(
+            punctuated_annotation or canonical_annotation
+        )
         segments, segment_suppressed = build_reading_segments(
             canonical_annotation,
             displayed_annotation,

@@ -14,14 +14,14 @@ from opencc import OpenCC
 
 try:
     from .build_six_person_pilot import parse_shishuo_sections
-    from .reading_layers import display_span_for_anchor, strip_display_punctuation
+    from .reading_layers import display_span_for_anchor, normalize_reader_whitespace, strip_display_punctuation
     from .validate_person_sketch import validate_bundle as validate_person_sketch_bundle
     from .validate_wp1 import validate_source_provenance
     from .story_scene_contexts import DERIVED_PATH as SCENE_DERIVED_PATH, SOURCE_PATH as SCENE_SOURCE_PATH, project as project_scene_contexts, validate_source as validate_scene_source
     from .person_resolution import load_effective_mentions
 except ImportError:  # direct execution
     from build_six_person_pilot import parse_shishuo_sections
-    from reading_layers import display_span_for_anchor, strip_display_punctuation
+    from reading_layers import display_span_for_anchor, normalize_reader_whitespace, strip_display_punctuation
     from validate_person_sketch import validate_bundle as validate_person_sketch_bundle
     from validate_wp1 import validate_source_provenance
     from story_scene_contexts import DERIVED_PATH as SCENE_DERIVED_PATH, SOURCE_PATH as SCENE_SOURCE_PATH, project as project_scene_contexts, validate_source as validate_scene_source
@@ -527,12 +527,22 @@ def validate(root: Path = ROOT, mode: str = "full") -> list[str]:
         main = punct.get("sections", {}).get("main_text", {})
         if reading.get("status") != punct.get("status"):
             errors.append(f"SC1 reading status differs from punctuation record: {entry_id}")
-        if reading.get("main_text", {}).get("original") != main.get("punctuated_text"):
+        expected_reader_main = normalize_reader_whitespace(str(main.get("punctuated_text", "")))
+        if reading.get("main_text", {}).get("original") != expected_reader_main:
             errors.append(f"SC1 punctuated reading differs from punctuation record: {entry_id}")
         if strip_display_punctuation(str(main.get("punctuated_text", ""))) != strip_display_punctuation(canonical):
             errors.append(f"SC1 punctuation does not round-trip: {entry_id}")
-        if reading.get("main_text", {}).get("simplified") != converter.convert(str(main.get("punctuated_text", ""))):
+        if reading.get("main_text", {}).get("simplified") != converter.convert(expected_reader_main):
             errors.append(f"SC1 simplified reading is not deterministic: {entry_id}")
+        if "\n" in expected_reader_main or "\r" in expected_reader_main:
+            errors.append(f"SC1 reader projection retains a physical source line break: {entry_id}")
+        for annotation in reading.get("annotations", []):
+            if not isinstance(annotation, dict):
+                continue
+            if "\n" in str(annotation.get("original", "")) or "\r" in str(annotation.get("original", "")):
+                errors.append(
+                    f"SC1 Liu annotation reader projection retains a physical source line break: {entry_id}/{annotation.get('id')}"
+                )
         expected_state = "production_ready" if entry_id == "06-yaliang-019" else "preview_ready"
         if story.get("publication_state") != expected_state:
             errors.append(f"SC1 publication state is wrong for {entry_id}")

@@ -21,6 +21,9 @@ try:
         COLLISIONS_PATH,
         DECISIONS_PATH,
         EFFECTIVE_PATH,
+        IDENTITY_CANDIDATES_PATH,
+        IDENTITY_TARGETS_PATH,
+        HUAN_YI_CANDIDATE_ID,
         QUEUE_PATH,
         SPAN_AUDIT_PATH,
         SPAN_DECISIONS_PATH,
@@ -34,6 +37,9 @@ except ImportError:  # direct execution
         COLLISIONS_PATH,
         DECISIONS_PATH,
         EFFECTIVE_PATH,
+        IDENTITY_CANDIDATES_PATH,
+        IDENTITY_TARGETS_PATH,
+        HUAN_YI_CANDIDATE_ID,
         QUEUE_PATH,
         SPAN_AUDIT_PATH,
         SPAN_DECISIONS_PATH,
@@ -46,8 +52,10 @@ except ImportError:  # direct execution
 
 ROOT = Path(__file__).resolve().parents[1]
 PEOPLE_PATH = Path("data/people.json")
+ALIASES_PATH = Path("data/aliases.json")
 MENTIONS_PATH = Path("data/mentions/shishuo.json")
 CANDIDATES_PATH = Path("data/derived/person-identity-candidates.json")
+IDENTITY_TARGETS_SCHEMA_PATH = Path("schema/person-resolution-identity-candidates.schema.json")
 EVIDENCE_PATH = Path("data/evidence/wp1-evidence.json")
 CORPUS_PATH = Path("data/shishuo-corpus-index.json")
 DECISION_SCHEMA_PATH = Path("schema/person-resolution-decision.schema.json")
@@ -134,11 +142,13 @@ def validate(root: Path = ROOT) -> list[str]:
     errors: list[str] = []
     try:
         people_document = read_json(root, PEOPLE_PATH)
+        aliases_document = read_json(root, ALIASES_PATH)
         raw_document = read_json(root, MENTIONS_PATH)
         candidates_document = read_json(root, CANDIDATES_PATH)
         evidence_document = read_json(root, EVIDENCE_PATH)
         corpus_document = read_json(root, CORPUS_PATH)
         decisions_document = read_json(root, DECISIONS_PATH)
+        identity_targets_document = read_json(root, IDENTITY_TARGETS_PATH)
         effective = read_json(root, EFFECTIVE_PATH)
         queue = read_json(root, QUEUE_PATH)
         collisions = read_json(root, COLLISIONS_PATH)
@@ -149,6 +159,7 @@ def validate(root: Path = ROOT) -> list[str]:
 
     for number, decision in enumerate(decisions_document.get("decisions", [])):
         errors.extend(_schema_errors(root, DECISION_SCHEMA_PATH, decision, f"ER1 decision {number}"))
+    errors.extend(_schema_errors(root, IDENTITY_TARGETS_SCHEMA_PATH, identity_targets_document, "ER1.1.2 identity targets"))
     # The span schema describes the committed decision document (including
     # its schema/stage envelope), not an individual decision row.
     errors.extend(_schema_errors(root, SPAN_DECISION_SCHEMA_PATH, span_decisions_document, "ER1.1 span decisions"))
@@ -159,8 +170,33 @@ def validate(root: Path = ROOT) -> list[str]:
 
     people = [item for item in people_document.get("people", []) if isinstance(item, Mapping)]
     people_by_id = {str(item.get("person_id")): item for item in people if isinstance(item.get("person_id"), str)}
+    aliases = [item for item in aliases_document.get("aliases", []) if isinstance(item, Mapping)]
     candidate_rows = [item for item in candidates_document.get("candidates", []) if isinstance(item, Mapping)]
     candidates_by_id = {str(item.get("candidate_id")): item for item in candidate_rows if isinstance(item.get("candidate_id"), str)}
+    identity_target_rows = [
+        item
+        for item in identity_targets_document.get("candidates", [])
+        if isinstance(item, Mapping)
+    ]
+    for candidate in identity_target_rows:
+        candidate_id = candidate.get("candidate_id")
+        if isinstance(candidate_id, str):
+            if candidate_id in candidates_by_id:
+                errors.append(f"ER1.1.2 identity target duplicates a P3A.1 candidate ID: {candidate_id}")
+            candidates_by_id[candidate_id] = candidate
+    huan_yi = candidates_by_id.get(HUAN_YI_CANDIDATE_ID)
+    if not isinstance(huan_yi, Mapping) or huan_yi.get("preferred_name") != "桓伊":
+        errors.append("ER1.1.2 missing curated 桓伊 identity target")
+    else:
+        surface_map = {
+            str(item.get("surface")): item
+            for item in huan_yi.get("surfaces", [])
+            if isinstance(item, Mapping)
+        }
+        if surface_map.get("桓子野", {}).get("association_mode") != "exact":
+            errors.append("ER1.1.2 桓子野 is not a safe exact semantic span")
+        if surface_map.get("子野", {}).get("association_mode") == "exact":
+            errors.append("ER1.1.2 子野 was promoted to a global exact alias")
     evidence_ids = {
         str(item.get("id"))
         for item in [*candidates_document.get("evidence", []), *evidence_document.get("records", [])]
@@ -175,8 +211,35 @@ def validate(root: Path = ROOT) -> list[str]:
         for item in sc1_document.get("evidence", [])
         if isinstance(item, Mapping) and isinstance(item.get("id"), str)
     )
+    overlay_evidence_ids = {
+        str(evidence_id)
+        for candidate in identity_target_rows
+        for evidence_id in [
+            *candidate.get("identity_evidence_ids", []),
+            *candidate.get("evidence_ids", []),
+            *[
+                item
+                for surface in candidate.get("surfaces", [])
+                if isinstance(surface, Mapping)
+                for item in surface.get("evidence_ids", [])
+            ],
+        ]
+        if isinstance(evidence_id, str)
+    }
+    missing_overlay_evidence = sorted(overlay_evidence_ids - evidence_ids)
+    errors.extend(
+        f"ER1.1.2 identity target Evidence does not resolve: {evidence_id}"
+        for evidence_id in missing_overlay_evidence
+    )
     raw_mentions = [item for item in raw_document.get("mentions", []) if isinstance(item, Mapping)]
     raw_by_id = {str(item.get("mention_id")): item for item in raw_mentions if isinstance(item.get("mention_id"), str)}
+    if not any(
+        alias.get("surface") == "桓子"
+        and "person-016" in alias.get("person_ids", [])
+        and alias.get("resolution_mode") == "exact"
+        for alias in aliases
+    ):
+        errors.append("ER1.1.2 removed the valid 王遐/桓子 exact identity evidence")
     story_ids = {
         str(item.get("id"))
         for item in corpus_document.get("entries", [])
@@ -385,6 +448,56 @@ def validate(root: Path = ROOT) -> list[str]:
             errors.append(f"ER1 王文度 regression is not resolved to 王坦之: {mention_id}")
         if row.get("person_id") == "person-015":
             errors.append(f"ER1 王文度 regression still navigates to 孫晷: {mention_id}")
+
+    # ER1.1.2 prefix-collision gold regressions.  The canonical Mention may
+    # still have the old short surface 桓子, but its effective target and
+    # build-time display span must be 桓伊/桓子野 whenever the source text
+    # contains the longer recognized appellation.
+    huan_prefix_story_ids = {
+        "05-fangzheng-055",
+        "23-rendan-033",
+        "23-rendan-042",
+        "23-rendan-049",
+        "26-qingdi-020",
+    }
+    huan_rows = [
+        row
+        for row in effective_rows
+        if row.get("surface") == "桓子" and row.get("entry_id") in huan_prefix_story_ids
+    ]
+    for row in huan_rows:
+        target = row.get("resolution_target")
+        if row.get("person_id") == "person-016":
+            errors.append(f"ER1.1.2 prefix collision still resolves to 王遐: {row.get('mention_id')}")
+        if not isinstance(target, Mapping) or target.get("candidate_id") != HUAN_YI_CANDIDATE_ID:
+            errors.append(f"ER1.1.2 桓子野 does not resolve to 桓伊: {row.get('mention_id')}")
+        span = row.get("display_span")
+        if not isinstance(span, Mapping) or span.get("text") != "桓子野":
+            errors.append(f"ER1.1.2 maximal 桓子野 span is missing: {row.get('mention_id')}")
+
+    huan_short_rows = [
+        row
+        for row in effective.get("derived_mentions", [])
+        if isinstance(row, Mapping)
+        and row.get("entry_id") == "05-fangzheng-055"
+        and row.get("surface") == "子野"
+    ]
+    if not huan_short_rows or any(
+        not isinstance(row.get("resolution_target"), Mapping)
+        or row["resolution_target"].get("candidate_id") != HUAN_YI_CANDIDATE_ID
+        or row.get("coreference_antecedent_mention_id") != "shishuo-p3b-wave-1-78fd849d96483f177986b7e2"
+        for row in huan_short_rows
+    ):
+        errors.append("ER1.1.2 05-fangzheng-055 子野 local coreference is missing or unsafe")
+
+    ancient_quote_ids = {
+        "shishuo-p3b-wave-1-6e59def2507645e74bf6a736",
+        "shishuo-p3b-wave-1-49ee363817c8c77394cecf83",
+    }
+    for mention_id in sorted(ancient_quote_ids):
+        row = effective_by_id.get(mention_id, {})
+        if row.get("resolution_status") != "unresolved" or row.get("person_id") is not None:
+            errors.append(f"ER1.1.2 ancient quoted 桓子 incorrectly resolves to 王遐: {mention_id}")
 
     return errors
 

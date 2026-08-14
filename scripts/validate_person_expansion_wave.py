@@ -274,9 +274,11 @@ def validate(root: Path = ROOT) -> list[str]:
             for presence in link.get("presences", []):
                 if presence.get("presence_kind") == "participant":
                     errors.append(f"Wave PersonStory link inferred participant status: {link.get('id')}")
-    for person_id in wave_person_ids:
-        if person_id not in link_by_person:
-            errors.append(f"Wave Person has no PersonStory links: {person_id}")
+    # A materialized Person may legitimately have no current PersonStory
+    # link after a later identity-correction pass.  Materialization preserves
+    # the production identity; it must not preserve an unsafe navigation edge
+    # merely to satisfy the historical Wave-1 snapshot.  Validate every link
+    # that does exist above, while allowing an empty post-correction topology.
 
     sketch_errors = validate_person_sketch_source(root)
     errors.extend(f"Person Sketch: {error}" for error in sketch_errors)

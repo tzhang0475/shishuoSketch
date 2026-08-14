@@ -334,6 +334,9 @@ export function parseSiteBundle(value: unknown): SiteBundle {
     if (!isRecord(reading.main_text) || typeof reading.main_text.original !== "string" || typeof reading.main_text.simplified !== "string") {
       throw new Error(`Story ${String(story.id)} 的 reading.main_text 不完整`);
     }
+    if (/[\r\n]/u.test(reading.main_text.original)) {
+      throw new Error(`Story ${String(story.id)} 的 reader projection 包含物理 source line break`);
+    }
     validateReadingSegments(
       reading.main_text.segments,
       reading.main_text.original,
@@ -356,6 +359,9 @@ export function parseSiteBundle(value: unknown): SiteBundle {
     }
     for (const annotation of reading.annotations) {
       if (!isRecord(annotation)) continue;
+      if (/[\r\n]/u.test(String(annotation.original))) {
+        throw new Error(`Story ${String(story.id)} 的 Liu annotation reader projection 包含物理 source line break: ${String(annotation.id)}`);
+      }
       const insertion = annotation.insertion;
       if (!isRecord(insertion)) {
         throw new Error(`Story ${String(story.id)} 的 annotation insertion 不完整`);

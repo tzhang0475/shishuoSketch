@@ -527,6 +527,16 @@ def render_report(output: Mapping[str, Any]) -> str:
             "",
             "ER1 的身份校正移除了 `05-fangzheng-058` 中原本错误的“文度 → 孫晷”安全导航路径。因而 M2A 虽然物化了 35 位 Person，当前安全的“随便认识一个人” eligibility 是 34；`person-015` 仍是生产 Person，但没有安全的 published Story 入口。这里不以候选或歧义 Mention 补回路径。",
         ])
+    if after.get("production_person_count") == 35 and after.get("random_person_eligible_count") == 33:
+        lines.extend([
+            "",
+            "M2A 物化的 35 位 Person 均保留；ER1 先移除了 `05-fangzheng-058` 中错误的“文度 → 孫晷”路径，使安全 eligibility 由 M2A 当时的 35 降至 34。ER1.1.2 又移除了 `桓子` 前缀误归 `person-016` 王遐的路径，最终安全的“随便认识一个人” eligibility 为 33；`person-015` 与 `person-016` 仍在生产注册表中，但都没有安全的 published Story 入口。候选身份、歧义 Mention 和错误前缀均不用于补回导航。",
+        ])
+    if "person-016" in after.get("graph", {}).get("isolated_person_ids", []):
+        lines.extend([
+            "",
+            "ER1.1.2 的桓子／桓子野身份校正移除了 6 条原先错误归给 `person-016` 王遐的 PersonStory 链接；其中 05-fangzheng-055 等较长称谓现解析为未物化的桓伊，05-fangzheng-035 的古引文保持未解析。因此王遐仍保留在 35 人生产注册表中，但当前没有安全的 published Story 入口，也不进入 Random Person eligibility；不以错误前缀或候选身份补回路径。",
+        ])
 
     performance = output.get("performance", {})
     def performance_value(section: str, side: str) -> str:

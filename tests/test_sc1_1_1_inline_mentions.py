@@ -1,11 +1,17 @@
 from __future__ import annotations
 
 from copy import deepcopy
+import hashlib
 import json
 from pathlib import Path
 import unittest
 
-from scripts.reading_layers import build_display_reading, effective_annotation_id, strip_display_punctuation
+from scripts.reading_layers import (
+    build_display_reading,
+    effective_annotation_id,
+    normalize_reader_whitespace,
+    strip_display_punctuation,
+)
 from scripts.validate_sc1_frontend_data import validate_inline_mention_projection
 
 
@@ -58,6 +64,82 @@ class SC111InlineMentionTests(unittest.TestCase):
         self.assertEqual(len(alias_segments), 1)
         self.assertEqual(alias_segments[0]["display"]["original"], "王逸少")
         self.assertEqual(alias_segments[0]["person_id"], "person-001")
+
+    def test_fangzheng_025_reader_text_does_not_leak_physical_source_lines(self) -> None:
+        story = self.story("05-fangzheng-025")
+        main = story["reading"]["main_text"]
+        rendered = "".join(item["display"]["original"] for item in main["segments"])
+
+        self.assertNotRegex(rendered, r"[\r\n]")
+        compact = strip_display_punctuation(rendered)
+        for left, right in (("看", "新婦"), ("于時", "謝尚書"), ("我顧", "伊庾家"), ("我", "在遣女")):
+            self.assertIn(left + right, compact)
+
+        mention_index = next(
+            index
+            for index, item in enumerate(main["segments"])
+            if item.get("mention_id") == "shishuo-05-fangzheng-025-main-text-001"
+        )
+        self.assertEqual(main["segments"][mention_index]["display"]["original"], "王右軍")
+        self.assertIn("往謝家看新婦", main["segments"][mention_index + 1]["display"]["original"].replace(" ", ""))
+
+        # The source/provenance representation remains diplomatic.  The
+        # reader projection is the only layer normalized by this regression.
+        entry = next(
+            item
+            for item in json.loads((ROOT / "data/shishuo-corpus-index.json").read_text(encoding="utf-8"))["entries"]
+            if item["id"] == "05-fangzheng-025"
+        )
+        source_bytes = (ROOT / entry["path"]).read_bytes()
+        self.assertIn("於是王右軍往謝家看\n新婦".encode("utf-8"), source_bytes)
+        self.assertEqual(hashlib.sha256(source_bytes).hexdigest(), entry["entry_sha256"])
+        self.assertEqual(story["text"].count("於是王右軍往謝家看\n新婦"), 1)
+
+    def test_reading_projection_collapses_source_line_break_but_preserves_source_quote(self) -> None:
+        class IdentityConverter:
+            @staticmethod
+            def convert(value: str) -> str:
+                return value
+
+        canonical = "於是王右軍往謝家看\n新婦猶有恢之遺法"
+        mention = {
+            "mention_id": "fixture-main-001",
+            "entry_id": "fixture-story",
+            "surface": "王右軍",
+            "section": "main_text",
+            "evidence": {"section_offset": canonical.index("王右軍")},
+            "person_id": "person-001",
+            "confidence": "high",
+        }
+        record = {
+            "entry_id": "fixture-story",
+            "status": "candidate",
+            "id": "fixture-punctuation",
+            "base_canonical_entry_sha256": "fixture",
+            "sections": {
+                "main_text": {"canonical_text": canonical, "punctuated_text": canonical},
+                "liu_annotation": {},
+            },
+            "display_overrides": [],
+        }
+        reading = build_display_reading(
+            record,
+            IdentityConverter(),
+            mentions=[mention],
+            placement_mentions=[mention],
+            evidence=[{"id": "fixture-evidence", "quote": "看\n新婦"}],
+        )
+        rendered = "".join(item["display"]["original"] for item in reading["main_text"]["segments"])
+        self.assertEqual(rendered, "於是王右軍往謝家看 新婦猶有恢之遺法")
+        self.assertNotRegex(rendered, r"[\r\n]")
+        self.assertEqual(
+            next(item for item in reading["main_text"]["segments"] if item.get("mention_id") == "fixture-main-001")["display"]["original"],
+            "王右軍",
+        )
+        self.assertEqual(reading["evidence_display"]["fixture-evidence"]["original"], "看\n新婦")
+        self.assertEqual(record["sections"]["main_text"]["canonical_text"], canonical)
+        self.assertEqual(record["sections"]["main_text"]["punctuated_text"], canonical)
+        self.assertEqual(normalize_reader_whitespace(canonical), "於是王右軍往謝家看 新婦猶有恢之遺法")
 
     def test_25_paidiao_wang_ningzhi_is_annotation_only_and_clickable_there(self) -> None:
         story = self.story("25-paidiao-026")

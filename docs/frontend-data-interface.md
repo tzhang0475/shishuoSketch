@@ -258,8 +258,11 @@ provenance noise in the normal reader view.
 
 For SC1.1.1, `main_text.segments` and each annotation's `segments` are the
 build-time Mention projection. Concatenating `display.original` segments
-reconstructs the existing punctuated/original reading exactly; concatenating
-`display.simplified` segments reconstructs the existing OpenCC reading exactly.
+reconstructs the reader-facing punctuated reading exactly; physical witness
+line boundaries are represented there as ordinary inline whitespace, while
+the canonical `Story.text`/Evidence source strings retain their exact source
+line structure. Concatenating `display.simplified` segments reconstructs the
+existing OpenCC reading exactly.
 Only resolved Mentions become `person_mention` segments. Their `mention_id`,
 `person_id`, and optional annotation block ID are validated against the bundle
 before the browser renders them. Unresolved Mentions remain ordinary text.

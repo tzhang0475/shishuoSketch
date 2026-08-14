@@ -29,6 +29,10 @@ MENTIONS_PATH = Path("data/mentions/shishuo.json")
 PEOPLE_PATH = Path("data/people.json")
 ALIASES_PATH = Path("data/aliases.json")
 IDENTITY_CANDIDATES_PATH = Path("data/derived/person-identity-candidates.json")
+# A small curated ER overlay is allowed to name a source-supported historical
+# identity that P3A.1 did not seed as a standalone biography subject.  These
+# are resolution targets only; they are never production Persons.
+IDENTITY_TARGETS_PATH = Path("data/annotation/person-resolution-identity-candidates.json")
 DECISIONS_PATH = Path("data/annotation/person-resolution-decisions.json")
 CORPUS_INDEX_PATH = Path("data/shishuo-corpus-index.json")
 GOLD_PATH = Path("data/story-chain-gold-set.json")
@@ -45,6 +49,7 @@ RESOLUTION_STATUSES = {"resolved", "candidate_for_review", "unresolved"}
 REVIEW_STATUSES = {"candidate", "reviewed", "rejected", "todo"}
 TARGET_KINDS = {"production_person", "identity_candidate"}
 PUBLISHED_STATES = {"production_ready", "preview_ready"}
+HUAN_YI_CANDIDATE_ID = "candidate-identity-er1-1-2-193fc44098a05235f63fc215"
 
 
 def read_json(root: Path, relative: Path) -> Any:
@@ -116,6 +121,18 @@ def _candidate_target(candidate: Mapping[str, Any], people_by_id: Mapping[str, M
             "canonical_name": str(candidate["preferred_name"]),
         }
     return None
+
+
+def _identity_target_overrides(root: Path) -> list[Mapping[str, Any]]:
+    path = root / IDENTITY_TARGETS_PATH
+    if not path.is_file():
+        return []
+    document = read_json(root, IDENTITY_TARGETS_PATH)
+    return [
+        item
+        for item in document.get("candidates", [])
+        if isinstance(item, Mapping)
+    ]
 
 
 def _association(
@@ -339,9 +356,33 @@ def _maximal_semantic_span(
     index for the same resolved target.  It is not a general Chinese NER rule.
     """
 
+    semantic_span = result.get("semantic_span")
+    target = result.get("target")
+    if (
+        isinstance(semantic_span, Mapping)
+        and isinstance(target, Mapping)
+        and result.get("status") == "resolved"
+        and isinstance(semantic_span.get("text"), str)
+    ):
+        offset = int(semantic_span.get("offset", -1))
+        end = int(semantic_span.get("end_offset_exclusive", -1))
+        text_value = str(semantic_span["text"])
+        if offset >= 0 and end == offset + len(text_value) and text[offset:end] == text_value:
+            return {
+                "offset": offset,
+                "end_offset_exclusive": end,
+                "text": text_value,
+                "basis": str(semantic_span.get("basis", "maximal_semantic_person_span")),
+                "status": str(semantic_span.get("status", "safe")),
+                "evidence_ids": sorted({
+                    str(evidence_id)
+                    for evidence_id in semantic_span.get("evidence_ids", [])
+                    if isinstance(evidence_id, str)
+                }),
+            }
+
     surface = str(mention.get("surface", ""))
     offset = _mention_offset(mention)
-    target = result.get("target")
     if not surface or not isinstance(target, Mapping) or result.get("status") != "resolved":
         return None
     target_key = _target_key(target)
@@ -411,6 +452,101 @@ def _target_from_association(item: Mapping[str, Any]) -> dict[str, Any]:
     return _target_copy(item["target"])
 
 
+SAFE_MAXIMAL_SURFACE_TYPES = {
+    "personal_name",
+    "courtesy_name",
+    "surname_plus_courtesy_name",
+    "established_appellation",
+    "orthographic_variant",
+}
+
+
+def _longest_safe_semantic_resolution(
+    mention: Mapping[str, Any],
+    *,
+    text: str,
+    alias_index: Mapping[str, list[Mapping[str, Any]]],
+) -> dict[str, Any] | None:
+    """Resolve a short canonical alias only when a longer known appellation wins.
+
+    The raw Mention files are historical segmentation artifacts and may carry
+    ``桓子`` because that was the alias selected by the old materializer.  A
+    longer, source-supported surface beginning at the same offset is a
+    stronger identity signal.  This helper is deliberately limited to known
+    semantic appellations; it never performs generic surname-prefix NER.
+    """
+
+    surface = str(mention.get("surface", ""))
+    offset = _mention_offset(mention)
+    if not surface or offset < 0 or offset + len(surface) > len(text):
+        return None
+    if text[offset : offset + len(surface)] != surface:
+        return None
+
+    possible: list[tuple[int, str, dict[str, Any], list[dict[str, Any]]]] = []
+    for longer_surface in sorted(alias_index, key=lambda value: (-len(value), value)):
+        if len(longer_surface) <= len(surface) or not text.startswith(longer_surface, offset):
+            continue
+        associations = _association_candidates(alias_index, longer_surface)
+        safe = [
+            item
+            for item in associations
+            if str(item.get("alias_type", "")) in SAFE_MAXIMAL_SURFACE_TYPES
+            and str(item.get("association_mode", "")) == "exact"
+            and str(item.get("association_strength", "")) == "strong"
+        ]
+        target_keys = {_target_key(item.get("target", {})) for item in safe}
+        if len(target_keys) != 1:
+            continue
+        target = _target_copy(safe[0]["target"])
+        possible.append((len(longer_surface), longer_surface, target, safe))
+
+    if not possible:
+        return None
+    possible.sort(key=lambda row: (-row[0], row[1], _target_key(row[2])))
+    longest_length = possible[0][0]
+    longest = [row for row in possible if row[0] == longest_length]
+    if len({_target_key(row[2]) for row in longest}) != 1:
+        # Two equally long recognized appellations with different identities
+        # are still ambiguous.  Do not let longest-match become a new guess.
+        return None
+    _, longer_surface, target, associations = longest[0]
+    evidence_ids = sorted({
+        str(evidence_id)
+        for item in associations
+        for evidence_id in item.get("evidence_ids", [])
+        if isinstance(evidence_id, str)
+    })
+    return {
+        "status": "resolved",
+        "target": target,
+        "candidates": [target],
+        "signals": [f"longest_safe_semantic_span:{longer_surface}"],
+        "reasons": [],
+        "review_status": "candidate",
+        "decision_source": "automatic",
+        "review_note": "",
+        "resolution_evidence_ids": sorted({
+            *evidence_ids,
+            *[
+                str(item)
+                for item in mention.get("evidence", {}).get("evidence_ids", [])
+                if isinstance(item, str)
+            ],
+        }),
+        "resolution_mode": "exact",
+        "resolution_method": "er1_1_2_longest_safe_semantic_span",
+        "semantic_span": {
+            "offset": offset,
+            "end_offset_exclusive": offset + len(longer_surface),
+            "text": longer_surface,
+            "basis": "longest_safe_semantic_span",
+            "status": "safe",
+            "evidence_ids": evidence_ids,
+        },
+    }
+
+
 def _make_review_id(mention_id: str) -> str:
     return "review-" + hashlib.sha256(mention_id.encode("utf-8")).hexdigest()[:24]
 
@@ -421,15 +557,21 @@ def _build_alias_index(
     aliases: list[Mapping[str, Any]],
     candidates: list[Mapping[str, Any]],
     candidate_evidence: Mapping[str, Mapping[str, Any]],
+    identity_overrides: list[Mapping[str, Any]] | None = None,
 ) -> tuple[dict[str, list[dict[str, Any]]], dict[str, dict[str, Any]], list[dict[str, Any]]]:
     people_by_id = {str(item.get("person_id")): item for item in people if isinstance(item.get("person_id"), str)}
     targets_by_key: dict[str, dict[str, Any]] = {}
     for person_id, person in sorted(people_by_id.items()):
         target = {"target_kind": "production_person", "person_id": person_id, "canonical_name": str(person.get("canonical_name", ""))}
         targets_by_key[_target_key(target)] = target
+    all_candidates = [
+        item
+        for item in [*(candidates or []), *(identity_overrides or [])]
+        if isinstance(item, Mapping)
+    ]
     candidate_targets: dict[str, dict[str, Any]] = {}
     candidate_cues: dict[str, list[dict[str, str]]] = {}
-    for candidate in candidates:
+    for candidate in all_candidates:
         if not isinstance(candidate, Mapping) or not isinstance(candidate.get("candidate_id"), str):
             continue
         target = _candidate_target(candidate, people_by_id)
@@ -481,7 +623,7 @@ def _build_alias_index(
     # P3A.1 surfaces are identity candidates, not production aliases.  They
     # are deliberately included here so materialization status cannot hide a
     # competing historical identity.
-    for candidate in candidates:
+    for candidate in all_candidates:
         candidate_id = candidate.get("candidate_id") if isinstance(candidate, Mapping) else None
         if not isinstance(candidate_id, str) or candidate_id not in candidate_targets:
             continue
@@ -657,7 +799,17 @@ def _local_context_targets(
     # a complete semantic span, and the target's canonical name must end with
     # the short surface.  If multiple local entities fit, the caller receives
     # candidate_for_review rather than a guessed identity.
-    if not associations and len(surface) <= 2:
+    # A short form may have a contextual registry association, but that
+    # association is never sufficient on its own.  A compatible local
+    # antecedent is the only reason it may resolve here.
+    if len(surface) <= 2 and (
+        not associations
+        or all(str(item.get("association_mode", "")) != "exact" for item in associations)
+    ):
+        association_keys = {
+            _target_key(item.get("target", {}))
+            for item in associations
+        }
         for prior in prior_entities:
             target = prior.get("target")
             if not isinstance(target, Mapping):
@@ -668,9 +820,11 @@ def _local_context_targets(
                 prior_surface
                 and prior_surface != surface
                 and len(prior_surface) > len(surface)
-                and canonical_name.endswith(surface)
+                and (prior_surface.endswith(surface) or canonical_name.endswith(surface))
             ):
                 key = _target_key(target)
+                if association_keys and key not in association_keys:
+                    continue
                 selected[key] = _target_copy(target)
                 signals.append("story_local_short_form_coreference")
 
@@ -692,11 +846,27 @@ def resolve_mention(
 
     mention_id = str(mention.get("mention_id", ""))
     if decision is not None:
+        if decision.get("resolution_status") == "unresolved" and decision.get("target") is None:
+            return {
+                "status": "unresolved",
+                "target": None,
+                "candidates": [],
+                "signals": ["human_reviewed_decision"],
+                "reasons": ["human_reviewed_unresolved"],
+                "review_status": "reviewed",
+                "decision_source": "human_review",
+                "review_note": str(decision.get("review_note", "")),
+                "resolution_evidence_ids": sorted({
+                    str(item)
+                    for item in decision.get("evidence_ids", [])
+                    if isinstance(item, str)
+                }),
+            }
         target = _validate_decision_target(decision, targets_by_key)
         return {
-            "status": "resolved",
+            "status": str(decision.get("resolution_status", "resolved")),
             "target": target,
-            "candidates": [target],
+            "candidates": [target] if str(decision.get("resolution_status", "resolved")) == "resolved" else [],
             "signals": ["human_reviewed_decision"],
             "reasons": [],
             "review_status": "reviewed",
@@ -709,6 +879,19 @@ def resolve_mention(
     associations = _association_candidates(alias_index, surface)
     candidate_targets = [_target_from_association(item) for item in associations]
     cues_by_target = cues_by_target or {}
+
+    # Explicit complete appellations take precedence over the shorter alias
+    # recorded by the canonical Mention materializer.  This is the critical
+    # ER1.1.2 guard for 桓子野: 桓子 is a valid 王遐 courtesy name, but it is
+    # not allowed to win inside the longer 桓子野 span for 桓伊.
+    longest_resolution = _longest_safe_semantic_resolution(
+        mention,
+        text=text,
+        alias_index=alias_index,
+    )
+    if longest_resolution is not None:
+        return longest_resolution
+
     local_targets, local_signals = _local_context_targets(
         mention,
         text,
@@ -927,7 +1110,9 @@ def _effective_mention(
             effective["confidence"] = "unresolved"
         else:
             effective["confidence"] = "high"
-    if status == "resolved" and isinstance(target, Mapping) and target.get("target_kind") == "identity_candidate":
+    if isinstance(result.get("resolution_method"), str) and result.get("resolution_method"):
+        effective["resolution_method"] = str(result["resolution_method"])
+    elif status == "resolved" and isinstance(target, Mapping) and target.get("target_kind") == "identity_candidate":
         effective["resolution_mode"] = "exact"
         effective["resolution_method"] = "er1_identity_candidate_resolution"
     elif status == "candidate_for_review":
@@ -1102,6 +1287,14 @@ def _render_report(
         "- all seven affected Mentions are reviewed to 王坦之 and no longer resolve to 孫晷 / `person-015`.",
         "- 王坦之 is not a production Person, so these surfaces remain non-navigable in the reader.",
         "",
+        "## ER1.1.2 prefix collision: 桓子野 / 桓伊",
+        "",
+        f"- `person-016` 王遐 retains the exact identity evidence `桓子`, but that shorter surface is not allowed to win inside the longer `桓子野` appellation.",
+        f"- The curated non-production identity target `桓伊` (`{HUAN_YI_CANDIDATE_ID}`) is supported by the 05-fangzheng-055 Liu annotation and processed Jinshu evidence; it does not allocate a Person ID or create a PersonStory link.",
+        "- The six canonical prefix occurrences in 05-fangzheng-055, 23-rendan-033, 23-rendan-042, 23-rendan-049, and 26-qingdi-020 use the maximal `桓子野` span and remain non-navigable identity mentions wherever projected.",
+        "- In 05-fangzheng-055, the later `子野` is resolved only through the same-Story antecedent; `子野` is not a global exact alias.",
+        "- The two `桓子` occurrences in the ancient 春秋 quotation in 05-fangzheng-035 are reviewed unresolved rather than assigned to 王遐.",
+        "",
         "## Shared alias collisions",
         "",
     ]
@@ -1216,6 +1409,7 @@ def _derived_contextual_mentions(
         ),
     )
     canonical_ranges: dict[tuple[str, str], list[tuple[int, int]]] = defaultdict(list)
+    canonical_semantic_spans: dict[tuple[str, str], list[tuple[int, int, str, str]]] = defaultdict(list)
     for mention in canonical_mentions:
         story_id = str(mention.get("entry_id") or mention.get("source_id") or "")
         section = str(mention.get("section", "main_text"))
@@ -1223,6 +1417,15 @@ def _derived_contextual_mentions(
         surface = str(mention.get("surface", ""))
         if surface:
             canonical_ranges[(story_id, section)].append((offset, offset + len(surface)))
+            span = mention.get("display_span")
+            span_offset = span.get("offset") if isinstance(span, Mapping) else offset
+            span_end = span.get("end_offset_exclusive") if isinstance(span, Mapping) else offset + len(surface)
+            if isinstance(span_offset, int) and isinstance(span_end, int) and span_end > span_offset:
+                target = mention.get("resolution_target")
+                target_key = _target_key(target) if isinstance(target, Mapping) else ""
+                canonical_semantic_spans[(story_id, section)].append(
+                    (span_offset, span_end, target_key, str(mention.get("mention_id", "")))
+                )
 
     derived: list[dict[str, Any]] = []
     seeded_short_forms: list[tuple[Mapping[str, Any], str, str, int, int, str, dict[str, Any], str]] = []
@@ -1238,7 +1441,17 @@ def _derived_contextual_mentions(
             for item in decision.get("evidence_ids", [])
             if isinstance(item, str)
         })
-        mention_id = _derived_mention_id(story_id, section, offset, surface, target)
+        existing_seed = next(
+            (
+                item
+                for item in canonical_semantic_spans.get((story_id, section), [])
+                if item[0] == offset
+                and item[1] == end
+                and item[2] == _target_key(target)
+            ),
+            None,
+        )
+        mention_id = existing_seed[3] if existing_seed else _derived_mention_id(story_id, section, offset, surface, target)
         record = {
             "mention_id": mention_id,
             "entry_id": story_id,
@@ -1279,7 +1492,8 @@ def _derived_contextual_mentions(
                 "evidence_ids": evidence_ids,
             },
         }
-        derived.append(record)
+        if existing_seed is None:
+            derived.append(record)
         for short_surface in decision.get("coreference_surfaces", []):
             if isinstance(short_surface, str) and short_surface:
                 seeded_short_forms.append((decision, story_id, section, offset, end, short_surface, target, mention_id))
@@ -1428,6 +1642,7 @@ def build(root: Path) -> dict[str, Any]:
     mentions = read_json(root, MENTIONS_PATH).get("mentions", [])
     candidate_document = read_json(root, IDENTITY_CANDIDATES_PATH)
     candidates = candidate_document.get("candidates", [])
+    identity_overrides = _identity_target_overrides(root)
     candidate_evidence = {
         str(item.get("id")): item
         for item in candidate_document.get("evidence", [])
@@ -1439,6 +1654,7 @@ def build(root: Path) -> dict[str, Any]:
         aliases,
         candidates,
         candidate_evidence,
+        identity_overrides,
     )
     decision_map = _decision_map(root)
     sections = _load_sections(root)
@@ -1566,6 +1782,7 @@ def build(root: Path) -> dict[str, Any]:
             str(MENTIONS_PATH),
             str(ALIASES_PATH),
             str(IDENTITY_CANDIDATES_PATH),
+            str(IDENTITY_TARGETS_PATH),
             str(DECISIONS_PATH),
             str(SPAN_DECISIONS_PATH),
         ],

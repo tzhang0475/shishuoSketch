@@ -5,7 +5,7 @@ import json
 from pathlib import Path
 import unittest
 
-from scripts.person_resolution import apply_reviewed_decision, build, resolve_mention
+from scripts.person_resolution import HUAN_YI_CANDIDATE_ID, apply_reviewed_decision, build, resolve_mention
 from scripts.validate_person_resolution import validate
 
 
@@ -20,13 +20,23 @@ SUN_GUI = {
     "person_id": "person-015",
     "canonical_name": "孫晷",
 }
+HUAN_YI = {
+    "target_kind": "identity_candidate",
+    "candidate_id": HUAN_YI_CANDIDATE_ID,
+    "canonical_name": "桓伊",
+}
 
 
-def association(target: dict[str, str], surface: str = "文度", mode: str = "exact") -> dict[str, object]:
+def association(
+    target: dict[str, str],
+    surface: str = "文度",
+    mode: str = "exact",
+    alias_type: str = "courtesy_name",
+) -> dict[str, object]:
     return {
         "target": target,
         "surface": surface,
-        "alias_type": "courtesy_name",
+        "alias_type": alias_type,
         "association_mode": mode,
         "association_strength": "strong",
         "evidence_ids": ["fixture-evidence"],
@@ -42,6 +52,125 @@ def target_map(*targets: dict[str, str]) -> dict[str, dict[str, str]]:
 
 
 class PersonResolutionTests(unittest.TestCase):
+    def test_huan_ziye_longest_safe_span_beats_person_016_prefix_alias(self) -> None:
+        result = resolve_mention(
+            {
+                "mention_id": "fixture-huan-ziye",
+                "surface": "桓子",
+                "person_id": "person-016",
+                "evidence": {"section_offset": 0},
+            },
+            text="桓子野善吹笛",
+            alias_index={
+                "桓子": [association({"target_kind": "production_person", "person_id": "person-016", "canonical_name": "王遐"}, "桓子")],
+                "桓子野": [association(HUAN_YI, "桓子野", alias_type="established_appellation")],
+            },
+            targets_by_key=target_map(
+                {"target_kind": "production_person", "person_id": "person-016", "canonical_name": "王遐"},
+                HUAN_YI,
+            ),
+        )
+        self.assertEqual(result["status"], "resolved")
+        self.assertEqual(result["target"], HUAN_YI)
+        self.assertEqual(result["semantic_span"]["text"], "桓子野")
+        self.assertEqual(result["resolution_method"], "er1_1_2_longest_safe_semantic_span")
+
+    def test_ziye_is_not_a_global_exact_alias_but_local_antecedent_resolves(self) -> None:
+        contextual = association(HUAN_YI, "子野", mode="contextual", alias_type="textual_shorthand")
+        global_result = resolve_mention(
+            {"mention_id": "fixture-ziye-global", "surface": "子野", "evidence": {}},
+            text="子野",
+            alias_index={"子野": [contextual]},
+            targets_by_key=target_map(HUAN_YI),
+        )
+        self.assertEqual(global_result["status"], "candidate_for_review")
+        local_result = resolve_mention(
+            {"mention_id": "fixture-ziye-local", "surface": "子野", "evidence": {"section_offset": 3}},
+            text="桓子野子野",
+            alias_index={"子野": [contextual]},
+            targets_by_key=target_map(HUAN_YI),
+            prior_entities=[{"span_surface": "桓子野", "surface": "桓子", "target": HUAN_YI}],
+        )
+        self.assertEqual(local_result["status"], "resolved")
+        self.assertEqual(local_result["target"], HUAN_YI)
+        self.assertIn("story_local_short_form_coreference", local_result["signals"])
+
+    def test_huan_ziye_published_projection_keeps_full_span_and_no_person_016_links(self) -> None:
+        effective = json.loads(
+            (ROOT / "data/derived/person-resolution-effective.json").read_text(encoding="utf-8")
+        )
+        target_rows = [
+            row
+            for row in effective["mentions"]
+            if row.get("entry_id") in {
+                "05-fangzheng-055",
+                "23-rendan-033",
+                "23-rendan-042",
+                "23-rendan-049",
+                "26-qingdi-020",
+            }
+            and row.get("surface") == "桓子"
+        ]
+        self.assertEqual(len(target_rows), 6)
+        for row in target_rows:
+            self.assertEqual(row["resolution_target"], HUAN_YI)
+            self.assertIsNone(row["person_id"])
+            self.assertEqual(row["display_span"]["text"], "桓子野")
+        short_rows = [
+            row
+            for row in effective["derived_mentions"]
+            if row.get("entry_id") == "05-fangzheng-055" and row.get("surface") == "子野"
+        ]
+        self.assertEqual(len(short_rows), 1)
+        self.assertEqual(short_rows[0]["resolution_target"], HUAN_YI)
+        self.assertEqual(
+            short_rows[0]["coreference_antecedent_mention_id"],
+            "shishuo-p3b-wave-1-78fd849d96483f177986b7e2",
+        )
+
+        bundle = json.loads((ROOT / "data/derived/sc1-site.json").read_text(encoding="utf-8"))
+        story = next(row for row in bundle["stories"] if row["id"] == "05-fangzheng-055")
+        identity_segments = [
+            segment
+            for segment in story["reading"]["main_text"]["segments"]
+            if segment.get("type") == "identity_mention"
+        ]
+        self.assertEqual(
+            [segment["display"]["original"] for segment in identity_segments],
+            ["桓子野", "子野"],
+        )
+        self.assertTrue(all(segment.get("canonical_name", {}).get("original") == "桓伊" for segment in identity_segments))
+
+        links = json.loads((ROOT / "data/derived/person-story-links.json").read_text(encoding="utf-8"))["links"]
+        self.assertFalse(any(link["person_id"] == "person-016" for link in links))
+
+    def test_ancient_quoted_huan_zi_is_reviewed_unresolved(self) -> None:
+        effective = json.loads(
+            (ROOT / "data/derived/person-resolution-effective.json").read_text(encoding="utf-8")
+        )
+        ids = {
+            "shishuo-p3b-wave-1-6e59def2507645e74bf6a736",
+            "shishuo-p3b-wave-1-49ee363817c8c77394cecf83",
+        }
+        rows = {row["mention_id"]: row for row in effective["mentions"] if row.get("mention_id") in ids}
+        self.assertEqual(set(rows), ids)
+        for row in rows.values():
+            self.assertEqual(row["resolution_status"], "unresolved")
+            self.assertIsNone(row["resolution_target"])
+            self.assertIsNone(row["person_id"])
+            self.assertEqual(row["resolution_decision_source"], "human_review")
+
+    def test_person_016_exact_alias_evidence_remains_in_registry(self) -> None:
+        aliases = json.loads((ROOT / "data/aliases.json").read_text(encoding="utf-8"))["aliases"]
+        self.assertTrue(
+            any(
+                alias.get("surface") == "桓子"
+                and alias.get("person_ids") == ["person-016"]
+                and alias.get("resolution_mode") == "exact"
+                for alias in aliases
+            )
+        )
+
     def test_known_wang_wendu_regression_is_reviewed_nonmaterialized(self) -> None:
         document = json.loads(
             (ROOT / "data/derived/person-resolution-effective.json").read_text(encoding="utf-8")

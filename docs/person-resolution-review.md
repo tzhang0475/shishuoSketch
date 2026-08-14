@@ -24,6 +24,14 @@ Production status is a navigation capability, not an identity-confidence signal.
 - all seven affected Mentions are reviewed to 王坦之 and no longer resolve to 孫晷 / `person-015`.
 - 王坦之 is not a production Person, so these surfaces remain non-navigable in the reader.
 
+## ER1.1.2 prefix collision: 桓子野 / 桓伊
+
+- `person-016` 王遐 retains the exact identity evidence `桓子`, but that shorter surface is not allowed to win inside the longer `桓子野` appellation.
+- The curated non-production identity target `桓伊` (`candidate-identity-er1-1-2-193fc44098a05235f63fc215`) is supported by the 05-fangzheng-055 Liu annotation and processed Jinshu evidence; it does not allocate a Person ID or create a PersonStory link.
+- The six canonical prefix occurrences in 05-fangzheng-055, 23-rendan-033, 23-rendan-042, 23-rendan-049, and 26-qingdi-020 use the maximal `桓子野` span and remain non-navigable identity mentions wherever projected.
+- In 05-fangzheng-055, the later `子野` is resolved only through the same-Story antecedent; `子野` is not a global exact alias.
+- The two `桓子` occurrences in the ancient 春秋 quotation in 05-fangzheng-035 are reviewed unresolved rather than assigned to 王遐.
+
 ## Shared alias collisions
 
 - `世英` → 陶璜、魯芝 · 0 published occurrences; never globally exact

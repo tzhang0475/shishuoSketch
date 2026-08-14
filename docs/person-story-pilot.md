@@ -14,7 +14,7 @@ This is deterministic navigation/index data for the unified materialized Shishuo
 
 - primary people: 34
 - supporting people: 1
-- reviewed PersonStoryLinks: 573
+- reviewed PersonStoryLinks: 567
 - candidate PersonStoryLinks: 4
 - candidate contextual mentions retained: 27
 - reader-ready linked Stories: 1
@@ -2044,53 +2044,11 @@ No Story is listed as directly participating unless a future reviewed presence e
 ### 王遐 (`person-016`)
 
 - directly participating Stories: none currently classified; main-text appearance is retained as `mentioned` pending explicit participation review.
-- reviewed linked Stories: 6; reader-ready: 0; candidate links: 0; candidate contextual Mentions: 0
+- reviewed linked Stories: 0; reader-ready: 0; candidate links: 0; candidate contextual Mentions: 0
 - main-text presence:
-  - `05-fangzheng-055` · 方正第五 · reviewed · reader_ready=false · surface: 桓子
-    ```text
-桓公問桓子野謝安石料萬石必敗何以不諫
-
-子野荅曰故當出於難犯耳桓作
-色曰萬石撓弱凡才有何嚴顔難犯
-
-
-    ```
-  - `23-rendan-033` · 任誕第二十三 · reviewed · reader_ready=false · surface: 桓子
-    ```text
-王劉共在杭南酣宴於桓子野家謝鎮西徃尚
-書墓還葬後三日反哭諸人欲要之初遣一信猶未
-許然已停車重要便回駕諸人門外迎之把臂便下
-裁得脫幘箸帽酣宴半坐乃覺未脫衰
-
-
-
-    ```
-  - `23-rendan-042` · 任誕第二十三 · reviewed · reader_ready=false · surface: 桓子
-    ```text
-桓子野每聞清歌輙喚奈何謝公聞之曰子野可謂
-一徃有深情
-
-    ```
-  - `23-rendan-049` · 任誕第二十三 · reviewed · reader_ready=false · surface: 桓子
-    ```text
-王子猷出都尚在渚下舊聞桓子野善吹笛
-
-
-而不相識遇桓於岸上過王在船中客有
-識之者云是桓子野王便令人與相聞云聞君善吹
-笛試為我一奏桓時已貴顯素聞王名即便回下車
-踞胡牀為作三調弄畢便上車去客主不交一言
-
-    ```
+  - none
 - Liu-annotation-only presence:
-  - `05-fangzheng-035` · 方正第五 · reviewed · reader_ready=false · surface: 桓子
-    ```text
-(許之士貞子諫而止後林父敗赤狄于曲梁賞桓子/救鄭與楚戰於邲晉師敗績桓子歸請死晉平公將)
-    ```
-  - `26-qingdi-020` · 輕詆第二十六 · reviewed · reader_ready=false · surface: 桓子
-    ```text
-(製也初邕避難江南宿於柯亭之館以竹為椽邕仰/同寮桓子野有故長笛傳之耆老云蔡邕伯喈之所)
-    ```
+  - none
 
 ### 蘇峻 (`person-017`)
 
@@ -4337,10 +4295,8 @@ These 16 candidates are selected deterministically from reviewed links using onl
 - `08-shangyu-054` · 賞譽第八 · 卞壼、王導、王敦、蘇峻、謝鯤 · multiple reviewed people; main-text presence; explicit/high-confidence resolution
 - `05-fangzheng-025` · 方正第五 · 庾亮、蘇峻、謝尚、鄧攸 · multiple reviewed people; main-text presence; explicit/high-confidence resolution
 - `25-paidiao-060` · 排調第二十五 · 劉惔、孫恩、桓溫、王敦 · multiple reviewed people; main-text presence; explicit/high-confidence resolution
-- `05-fangzheng-055` · 方正第五 · 劉惔、王濛、王遐、謝安 · multiple reviewed people; main-text presence; explicit/high-confidence resolution
 - `04-wenxue-022` · 文學第四 · 庾亮、王導、王濛、謝尚 · multiple reviewed people; main-text presence; explicit/high-confidence resolution
 - `14-rongzhi-023` · 容止第十四 · 庾亮、温嶠、王導、蘇峻 · multiple reviewed people; main-text presence; explicit/high-confidence resolution
-- `23-rendan-033` · 任誕第二十三 · 劉惔、王濛、王遐、謝尚 · multiple reviewed people; main-text presence; explicit/high-confidence resolution
 - `02-yanyu-102` · 言語第二 · 桓溫、温嶠、王導、蘇峻 · multiple reviewed people; explicit/high-confidence resolution
 - `06-yaliang-017` · 雅量第六 · 庾亮、温嶠、蘇峻 · multiple reviewed people; main-text presence; explicit/high-confidence resolution
 - `08-shangyu-079` · 賞譽第八 · 卞壼、桓溫、王敦 · multiple reviewed people; main-text presence; explicit/high-confidence resolution
@@ -4348,6 +4304,8 @@ These 16 candidates are selected deterministically from reviewed links using onl
 - `09-pinzao-036` · 品藻第九 · 桓溫、王濛、謝尚 · multiple reviewed people; main-text presence; explicit/high-confidence resolution
 - `11-jiewu-005` · 捷悟第十一 · 温嶠、王導、王敦 · multiple reviewed people; main-text presence; explicit/high-confidence resolution
 - `14-rongzhi-024` · 容止第十四 · 庾亮、殷浩、王羲之 · multiple reviewed people; main-text presence; explicit/high-confidence resolution
+- `05-fangzheng-027` · 方正第五 · 周顗、和嶠、王敦 · multiple reviewed people; main-text presence; explicit/high-confidence resolution
+- `05-fangzheng-031` · 方正第五 · 周顗、温嶠、王敦 · multiple reviewed people; main-text presence; explicit/high-confidence resolution
 
 ## Candidate and unresolved mentions
 

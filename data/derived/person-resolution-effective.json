@@ -5,13 +5,14 @@
     "data/mentions/shishuo.json",
     "data/aliases.json",
     "data/derived/person-identity-candidates.json",
+    "data/annotation/person-resolution-identity-candidates.json",
     "data/annotation/person-resolution-decisions.json",
     "data/annotation/person-resolution-span-decisions.json"
   ],
   "source_mentions_sha256": "0624aff49ead6ea9919bcc456e226e50161d5cad10b0efa3fcf8c26c374f99f4",
-  "decision_sha256": "41a4a809fd13824aa002c896a8a376c8efeaa7371668d3aeef55419173ef934d",
+  "decision_sha256": "8c9321fc69115291319957b53097735bfe3070045984919f59ddc383459aba7f",
   "mention_count": 1158,
-  "derived_mention_count": 3,
+  "derived_mention_count": 4,
   "counts": {
     "mention_count": 1158,
     "published_mention_count": 228,
@@ -522,7 +523,7 @@
         "person-003"
       ],
       "confidence": "high",
-      "resolution_method": "exact_courtesy_name",
+      "resolution_method": "er1_1_2_longest_safe_semantic_span",
       "context_identity_hits": [
         "茂弘"
       ],
@@ -577,8 +578,21 @@
       ],
       "resolution_review_status": "candidate",
       "resolution_decision_source": "automatic",
-      "resolution_evidence_ids": [],
-      "resolution_note": ""
+      "resolution_evidence_ids": [
+        "evidence-p3a1-c768bbd67b7c21efddaf"
+      ],
+      "resolution_note": "",
+      "display_span": {
+        "offset": 27,
+        "end_offset_exclusive": 31,
+        "text": "茂弘琅邪",
+        "basis": "longest_safe_semantic_span",
+        "status": "safe",
+        "evidence_ids": [
+          "evidence-p3a1-c768bbd67b7c21efddaf"
+        ]
+      },
+      "resolution_mode": "exact"
     },
     {
       "source": "shishuo",
@@ -27873,7 +27887,7 @@
         "person-009"
       ],
       "confidence": "high",
-      "resolution_method": "exact_p3b_wave_1_candidate_occurrence",
+      "resolution_method": "er1_1_2_longest_safe_semantic_span",
       "context_identity_hits": [
         "劉惔"
       ],
@@ -27940,94 +27954,21 @@
       "resolution_review_status": "candidate",
       "resolution_decision_source": "automatic",
       "resolution_evidence_ids": [
-        "evidence-p3a1-0686d82a3ad7b9cc21eb",
-        "evidence-p3a1-0d0df8e80ebe39d70606",
-        "evidence-p3a1-0e03b1f36551e02d41ef",
-        "evidence-p3a1-175c665893b4aa776a95",
-        "evidence-p3a1-1ad4711d0aa03ad706cb",
-        "evidence-p3a1-1bcd06dfa3f921587dfa",
-        "evidence-p3a1-1cba99b91ec80a3ca06b",
-        "evidence-p3a1-1dc665558574a3d7ef4c",
-        "evidence-p3a1-1e4f166e4b1613bb509f",
-        "evidence-p3a1-1efc45ddcb9cf4a3dff0",
-        "evidence-p3a1-225a60405bc1a671f17e",
-        "evidence-p3a1-2ae078bebe7787d71365",
-        "evidence-p3a1-2e232c6f59d590451d05",
-        "evidence-p3a1-31d9b3431a277d062c0b",
-        "evidence-p3a1-3528a2c2d4488c9c3ad5",
-        "evidence-p3a1-3f75f244f7f7d90f373d",
-        "evidence-p3a1-44a008d278488e866745",
-        "evidence-p3a1-54fc8cb3593cc3b4a668",
-        "evidence-p3a1-554eebf472f048c63818",
-        "evidence-p3a1-5a06dbc917871e9ccc58",
-        "evidence-p3a1-5aa52f5f8a2c06ac7987",
-        "evidence-p3a1-6045dc488730c085db6e",
-        "evidence-p3a1-67934fa09651893c5c4e",
         "evidence-p3a1-6b24f068dac646c3a29b",
-        "evidence-p3a1-6c00efe57635ee8d79b7",
-        "evidence-p3a1-7325eaee60a95a63d43c",
-        "evidence-p3a1-78af979c9641a0d3ac77",
-        "evidence-p3a1-7a542739aefb53c94593",
-        "evidence-p3a1-7d70ad5ba439528847fa",
-        "evidence-p3a1-8200f17c4c405fc919ed",
-        "evidence-p3a1-86c874000d168bc51470",
-        "evidence-p3a1-912a9880284693a490dd",
-        "evidence-p3a1-92a665e2d47de44cba21",
-        "evidence-p3a1-963199a27f2529157278",
-        "evidence-p3a1-96e5c3b601a73dc5c42f",
-        "evidence-p3a1-9e93582da8c9fd4870ff",
-        "evidence-p3a1-ad8d17a407863c517d18",
-        "evidence-p3a1-b635a2524264aeb8e174",
-        "evidence-p3a1-c08642726ad952110e38",
-        "evidence-p3a1-d844b0c653385e334a65",
-        "evidence-p3a1-dcbbcf3e4dda89bff239",
-        "evidence-p3a1-dd14f25ba990ed164250",
-        "evidence-p3a1-ef19cf5aef6a9ca4dce6",
-        "evidence-p3b-wave-1-01193ce7bd3c119261bc1dde",
-        "evidence-p3b-wave-1-02e72f9ca5eb1a35c7aff066",
-        "evidence-p3b-wave-1-04a54ca4225537cf9fb4972d",
-        "evidence-p3b-wave-1-10b0ee18423ebe3ecbf3f2d3",
-        "evidence-p3b-wave-1-125a2c8be77d3fd1d72e9893",
-        "evidence-p3b-wave-1-1b1e8ad5b099e622748446cd",
-        "evidence-p3b-wave-1-299bd9c59f7c89702c384d0f",
-        "evidence-p3b-wave-1-2f4e3e0d48d03444fb705bb0",
-        "evidence-p3b-wave-1-311875a0371e9680b679fa76",
-        "evidence-p3b-wave-1-476f51f8da30963dded8e01b",
-        "evidence-p3b-wave-1-528c1ace092bf6aee75893dc",
-        "evidence-p3b-wave-1-576931d535d88ae864368ca8",
-        "evidence-p3b-wave-1-6252eb0badead10040b5b688",
-        "evidence-p3b-wave-1-69d8ad3b7040478087ffd755",
-        "evidence-p3b-wave-1-76afb233540e25682f89c65f",
-        "evidence-p3b-wave-1-8d1aeaeb9a8fb02ecd8b1110",
-        "evidence-p3b-wave-1-91512c92e9b1d487776f22ed",
-        "evidence-p3b-wave-1-932e7c291398fe7eba428108",
-        "evidence-p3b-wave-1-959b73a8aa23d2a6733b2c3e",
-        "evidence-p3b-wave-1-979bbe8603e028dcba5063f1",
-        "evidence-p3b-wave-1-98c7e3bf11f871df4443814f",
-        "evidence-p3b-wave-1-9a14e4c9fe43d51a6be371bf",
-        "evidence-p3b-wave-1-9b4a18f1d00775030380d9e4",
-        "evidence-p3b-wave-1-9bc8bdcb6282ebfa965c6541",
-        "evidence-p3b-wave-1-ac7a25bece6173a4f79a4e6e",
-        "evidence-p3b-wave-1-b833bc890138494bf0848297",
-        "evidence-p3b-wave-1-b8f74353fcf92affb7571b57",
-        "evidence-p3b-wave-1-ba4933de98a37c7f726041b3",
-        "evidence-p3b-wave-1-c6b812422bd46659b66860e1",
-        "evidence-p3b-wave-1-d0e4dfd6f69113d21f70c6f7",
-        "evidence-p3b-wave-1-db0eaeef84661212f67c0fa1",
-        "evidence-p3b-wave-1-db9216f226a3bb4d36c37d7a",
-        "evidence-p3b-wave-1-dcca1ac818de7103c842bfe1",
-        "evidence-p3b-wave-1-e08f14949b87e4de84998875",
-        "evidence-p3b-wave-1-e0f220e77bd279b91ffa9e6c",
-        "evidence-p3b-wave-1-e178ccdc5f866e39e247f048",
-        "evidence-p3b-wave-1-e66fe0019f75a7f323de49fc",
-        "evidence-p3b-wave-1-e83f22458a97e8b98b642841",
-        "evidence-p3b-wave-1-f50271337819b5162388b855",
-        "evidence-p3b-wave-1-f57faf2543e6fa772c59819e",
-        "evidence-p3b-wave-1-f58344d8cea3ff25a8091bfe",
-        "evidence-p3b-wave-1-f83f27a267e80fe803ab75e2",
-        "evidence-p3b-wave-1-fa1153c2440f05f7a592768d"
+        "evidence-p3b-wave-1-db0eaeef84661212f67c0fa1"
       ],
-      "resolution_note": ""
+      "resolution_note": "",
+      "display_span": {
+        "offset": 27,
+        "end_offset_exclusive": 31,
+        "text": "真長沛國",
+        "basis": "longest_safe_semantic_span",
+        "status": "safe",
+        "evidence_ids": [
+          "evidence-p3a1-6b24f068dac646c3a29b"
+        ]
+      },
+      "resolution_mode": "exact"
     },
     {
       "source": "shishuo",
@@ -35481,12 +35422,10 @@
       "surface": "桓子",
       "alias_id": "alias-p3b-wave-1-wang-xia-e66fb8237f9068ef",
       "alias_type": "courtesy_name",
-      "person_id": "person-016",
-      "candidate_person_ids": [
-        "person-016"
-      ],
-      "confidence": "high",
-      "resolution_method": "exact_p3b_wave_1_candidate_occurrence",
+      "person_id": null,
+      "candidate_person_ids": [],
+      "confidence": "unresolved",
+      "resolution_method": "er1_unresolved",
       "context_identity_hits": [
         "王遐"
       ],
@@ -35537,42 +35476,25 @@
         "candidate_id": "candidate-identity-093-liezhuan-011-9b983af9b748",
         "candidate_occurrence_id": "occurrence-p3a1-76889bad9f3d9fad2012"
       },
-      "resolution_status": "resolved",
-      "resolution_target": {
-        "target_kind": "production_person",
-        "canonical_name": "王遐",
-        "person_id": "person-016"
-      },
-      "resolution_candidates": [
-        {
+      "resolution_status": "unresolved",
+      "resolution_target": null,
+      "resolution_candidates": [],
+      "resolution_review_status": "reviewed",
+      "resolution_decision_source": "human_review",
+      "resolution_evidence_ids": [
+        "evidence-p3b-wave-1-cc628e7ae0f7fab3d525311f"
+      ],
+      "resolution_note": "此处为《春秋》所引晋国桓子归请死的古事，不是王遐；不得由同一表字桓子套用到本条引文。",
+      "resolution_conflict": {
+        "automatic_status": "resolved",
+        "automatic_target": {
           "target_kind": "production_person",
           "canonical_name": "王遐",
           "person_id": "person-016"
-        }
-      ],
-      "resolution_review_status": "candidate",
-      "resolution_decision_source": "automatic",
-      "resolution_evidence_ids": [
-        "evidence-p3a1-0fd45ae599b70afcd855",
-        "evidence-p3a1-107658ed90d00b527de2",
-        "evidence-p3a1-1e4023a7869b58d0bcd9",
-        "evidence-p3a1-5530395e9f7bbdde2468",
-        "evidence-p3a1-69747574c1d5a6df97e0",
-        "evidence-p3a1-c85f879aa46c9ae22de5",
-        "evidence-p3a1-d7dfc75b51b78c4255a4",
-        "evidence-p3a1-e29f60409199c3e0a894",
-        "evidence-p3a1-f7df6c1c52895f19da94",
-        "evidence-p3b-wave-1-0120a3909151a7f47aa6718b",
-        "evidence-p3b-wave-1-2020cf8b772e1534e660892d",
-        "evidence-p3b-wave-1-8165e62e3b7592222279746f",
-        "evidence-p3b-wave-1-9170e8b7829b6231fa41bc75",
-        "evidence-p3b-wave-1-9bdf4d0f462a95cece4a6406",
-        "evidence-p3b-wave-1-9ed34cc2eea403267bcc98e4",
-        "evidence-p3b-wave-1-b4d0c11d1f109c31daf9d667",
-        "evidence-p3b-wave-1-cc628e7ae0f7fab3d525311f",
-        "evidence-p3b-wave-1-ded8ed065bac95465ec919ac"
-      ],
-      "resolution_note": ""
+        },
+        "automatic_reasons": []
+      },
+      "resolution_mode": "ambiguous"
     },
     {
       "source": "shishuo",
@@ -37732,12 +37654,10 @@
       "surface": "桓子",
       "alias_id": "alias-p3b-wave-1-wang-xia-e66fb8237f9068ef",
       "alias_type": "courtesy_name",
-      "person_id": "person-016",
-      "candidate_person_ids": [
-        "person-016"
-      ],
+      "person_id": null,
+      "candidate_person_ids": [],
       "confidence": "high",
-      "resolution_method": "exact_p3b_wave_1_candidate_occurrence",
+      "resolution_method": "er1_1_2_longest_safe_semantic_span",
       "context_identity_hits": [
         "王遐"
       ],
@@ -37783,23 +37703,38 @@
       },
       "resolution_status": "resolved",
       "resolution_target": {
-        "target_kind": "production_person",
-        "canonical_name": "王遐",
-        "person_id": "person-016"
+        "target_kind": "identity_candidate",
+        "canonical_name": "桓伊",
+        "candidate_id": "candidate-identity-er1-1-2-193fc44098a05235f63fc215"
       },
       "resolution_candidates": [
         {
-          "target_kind": "production_person",
-          "canonical_name": "王遐",
-          "person_id": "person-016"
+          "target_kind": "identity_candidate",
+          "canonical_name": "桓伊",
+          "candidate_id": "candidate-identity-er1-1-2-193fc44098a05235f63fc215"
         }
       ],
       "resolution_review_status": "candidate",
       "resolution_decision_source": "automatic",
       "resolution_evidence_ids": [
-        "evidence-p3b-wave-1-b4d0c11d1f109c31daf9d667"
+        "evidence-p3b-wave-1-b4d0c11d1f109c31daf9d667",
+        "evidence-sc1-05-fangzheng-055-annotation-001",
+        "evidence-sc1-05-fangzheng-055-annotation-002",
+        "evidence-sc1-05-fangzheng-055-main"
       ],
       "resolution_note": "",
+      "display_span": {
+        "offset": 11,
+        "end_offset_exclusive": 14,
+        "text": "桓子野",
+        "basis": "longest_safe_semantic_span",
+        "status": "safe",
+        "evidence_ids": [
+          "evidence-sc1-05-fangzheng-055-annotation-001",
+          "evidence-sc1-05-fangzheng-055-annotation-002",
+          "evidence-sc1-05-fangzheng-055-main"
+        ]
+      },
       "resolution_mode": "exact"
     },
     {
@@ -39753,12 +39688,10 @@
       "surface": "桓子",
       "alias_id": "alias-p3b-wave-1-wang-xia-e66fb8237f9068ef",
       "alias_type": "courtesy_name",
-      "person_id": "person-016",
-      "candidate_person_ids": [
-        "person-016"
-      ],
-      "confidence": "high",
-      "resolution_method": "exact_p3b_wave_1_candidate_occurrence",
+      "person_id": null,
+      "candidate_person_ids": [],
+      "confidence": "unresolved",
+      "resolution_method": "er1_unresolved",
       "context_identity_hits": [
         "王遐"
       ],
@@ -39809,26 +39742,25 @@
         "candidate_id": "candidate-identity-093-liezhuan-011-9b983af9b748",
         "candidate_occurrence_id": "occurrence-p3a1-5753187e2c6a35e94f91"
       },
-      "resolution_status": "resolved",
-      "resolution_target": {
-        "target_kind": "production_person",
-        "canonical_name": "王遐",
-        "person_id": "person-016"
-      },
-      "resolution_candidates": [
-        {
-          "target_kind": "production_person",
-          "canonical_name": "王遐",
-          "person_id": "person-016"
-        }
-      ],
-      "resolution_review_status": "candidate",
-      "resolution_decision_source": "automatic",
+      "resolution_status": "unresolved",
+      "resolution_target": null,
+      "resolution_candidates": [],
+      "resolution_review_status": "reviewed",
+      "resolution_decision_source": "human_review",
       "resolution_evidence_ids": [
         "evidence-p3b-wave-1-2020cf8b772e1534e660892d"
       ],
-      "resolution_note": "",
-      "resolution_mode": "exact"
+      "resolution_note": "此处为《春秋》所引晋国桓子归请死的古事，不是王遐；不得由同一表字桓子套用到本条引文。",
+      "resolution_conflict": {
+        "automatic_status": "resolved",
+        "automatic_target": {
+          "target_kind": "production_person",
+          "canonical_name": "王遐",
+          "person_id": "person-016"
+        },
+        "automatic_reasons": []
+      },
+      "resolution_mode": "ambiguous"
     },
     {
       "source": "shishuo",
@@ -40243,12 +40175,10 @@
       "surface": "桓子",
       "alias_id": "alias-p3b-wave-1-wang-xia-e66fb8237f9068ef",
       "alias_type": "courtesy_name",
-      "person_id": "person-016",
-      "candidate_person_ids": [
-        "person-016"
-      ],
+      "person_id": null,
+      "candidate_person_ids": [],
       "confidence": "high",
-      "resolution_method": "exact_p3b_wave_1_candidate_occurrence",
+      "resolution_method": "er1_1_2_longest_safe_semantic_span",
       "context_identity_hits": [
         "王遐"
       ],
@@ -40301,23 +40231,38 @@
       },
       "resolution_status": "resolved",
       "resolution_target": {
-        "target_kind": "production_person",
-        "canonical_name": "王遐",
-        "person_id": "person-016"
+        "target_kind": "identity_candidate",
+        "canonical_name": "桓伊",
+        "candidate_id": "candidate-identity-er1-1-2-193fc44098a05235f63fc215"
       },
       "resolution_candidates": [
         {
-          "target_kind": "production_person",
-          "canonical_name": "王遐",
-          "person_id": "person-016"
+          "target_kind": "identity_candidate",
+          "canonical_name": "桓伊",
+          "candidate_id": "candidate-identity-er1-1-2-193fc44098a05235f63fc215"
         }
       ],
       "resolution_review_status": "candidate",
       "resolution_decision_source": "automatic",
       "resolution_evidence_ids": [
-        "evidence-p3b-wave-1-0120a3909151a7f47aa6718b"
+        "evidence-p3b-wave-1-0120a3909151a7f47aa6718b",
+        "evidence-sc1-05-fangzheng-055-annotation-001",
+        "evidence-sc1-05-fangzheng-055-annotation-002",
+        "evidence-sc1-05-fangzheng-055-main"
       ],
       "resolution_note": "",
+      "display_span": {
+        "offset": 24,
+        "end_offset_exclusive": 27,
+        "text": "桓子野",
+        "basis": "longest_safe_semantic_span",
+        "status": "safe",
+        "evidence_ids": [
+          "evidence-sc1-05-fangzheng-055-annotation-001",
+          "evidence-sc1-05-fangzheng-055-annotation-002",
+          "evidence-sc1-05-fangzheng-055-main"
+        ]
+      },
       "resolution_mode": "exact"
     },
     {
@@ -41196,12 +41141,10 @@
       "surface": "桓子",
       "alias_id": "alias-p3b-wave-1-wang-xia-e66fb8237f9068ef",
       "alias_type": "courtesy_name",
-      "person_id": "person-016",
-      "candidate_person_ids": [
-        "person-016"
-      ],
+      "person_id": null,
+      "candidate_person_ids": [],
       "confidence": "high",
-      "resolution_method": "exact_p3b_wave_1_candidate_occurrence",
+      "resolution_method": "er1_1_2_longest_safe_semantic_span",
       "context_identity_hits": [
         "王遐"
       ],
@@ -41247,23 +41190,38 @@
       },
       "resolution_status": "resolved",
       "resolution_target": {
-        "target_kind": "production_person",
-        "canonical_name": "王遐",
-        "person_id": "person-016"
+        "target_kind": "identity_candidate",
+        "canonical_name": "桓伊",
+        "candidate_id": "candidate-identity-er1-1-2-193fc44098a05235f63fc215"
       },
       "resolution_candidates": [
         {
-          "target_kind": "production_person",
-          "canonical_name": "王遐",
-          "person_id": "person-016"
+          "target_kind": "identity_candidate",
+          "canonical_name": "桓伊",
+          "candidate_id": "candidate-identity-er1-1-2-193fc44098a05235f63fc215"
         }
       ],
       "resolution_review_status": "candidate",
       "resolution_decision_source": "automatic",
       "resolution_evidence_ids": [
-        "evidence-p3b-wave-1-ded8ed065bac95465ec919ac"
+        "evidence-p3b-wave-1-ded8ed065bac95465ec919ac",
+        "evidence-sc1-05-fangzheng-055-annotation-001",
+        "evidence-sc1-05-fangzheng-055-annotation-002",
+        "evidence-sc1-05-fangzheng-055-main"
       ],
       "resolution_note": "",
+      "display_span": {
+        "offset": 3,
+        "end_offset_exclusive": 6,
+        "text": "桓子野",
+        "basis": "longest_safe_semantic_span",
+        "status": "safe",
+        "evidence_ids": [
+          "evidence-sc1-05-fangzheng-055-annotation-001",
+          "evidence-sc1-05-fangzheng-055-annotation-002",
+          "evidence-sc1-05-fangzheng-055-main"
+        ]
+      },
       "resolution_mode": "exact"
     },
     {
@@ -44968,12 +44926,10 @@
       "surface": "桓子",
       "alias_id": "alias-p3b-wave-1-wang-xia-e66fb8237f9068ef",
       "alias_type": "courtesy_name",
-      "person_id": "person-016",
-      "candidate_person_ids": [
-        "person-016"
-      ],
+      "person_id": null,
+      "candidate_person_ids": [],
       "confidence": "high",
-      "resolution_method": "exact_p3b_wave_1_candidate_occurrence",
+      "resolution_method": "er1_1_2_longest_safe_semantic_span",
       "context_identity_hits": [
         "王遐"
       ],
@@ -45019,23 +44975,38 @@
       },
       "resolution_status": "resolved",
       "resolution_target": {
-        "target_kind": "production_person",
-        "canonical_name": "王遐",
-        "person_id": "person-016"
+        "target_kind": "identity_candidate",
+        "canonical_name": "桓伊",
+        "candidate_id": "candidate-identity-er1-1-2-193fc44098a05235f63fc215"
       },
       "resolution_candidates": [
         {
-          "target_kind": "production_person",
-          "canonical_name": "王遐",
-          "person_id": "person-016"
+          "target_kind": "identity_candidate",
+          "canonical_name": "桓伊",
+          "candidate_id": "candidate-identity-er1-1-2-193fc44098a05235f63fc215"
         }
       ],
       "resolution_review_status": "candidate",
       "resolution_decision_source": "automatic",
       "resolution_evidence_ids": [
-        "evidence-p3b-wave-1-8165e62e3b7592222279746f"
+        "evidence-p3b-wave-1-8165e62e3b7592222279746f",
+        "evidence-sc1-05-fangzheng-055-annotation-001",
+        "evidence-sc1-05-fangzheng-055-annotation-002",
+        "evidence-sc1-05-fangzheng-055-main"
       ],
       "resolution_note": "",
+      "display_span": {
+        "offset": 0,
+        "end_offset_exclusive": 3,
+        "text": "桓子野",
+        "basis": "longest_safe_semantic_span",
+        "status": "safe",
+        "evidence_ids": [
+          "evidence-sc1-05-fangzheng-055-annotation-001",
+          "evidence-sc1-05-fangzheng-055-annotation-002",
+          "evidence-sc1-05-fangzheng-055-main"
+        ]
+      },
       "resolution_mode": "exact"
     },
     {
@@ -47025,12 +46996,10 @@
       "surface": "桓子",
       "alias_id": "alias-p3b-wave-1-wang-xia-e66fb8237f9068ef",
       "alias_type": "courtesy_name",
-      "person_id": "person-016",
-      "candidate_person_ids": [
-        "person-016"
-      ],
+      "person_id": null,
+      "candidate_person_ids": [],
       "confidence": "high",
-      "resolution_method": "exact_p3b_wave_1_candidate_occurrence",
+      "resolution_method": "er1_1_2_longest_safe_semantic_span",
       "context_identity_hits": [
         "王遐"
       ],
@@ -47076,23 +47045,38 @@
       },
       "resolution_status": "resolved",
       "resolution_target": {
-        "target_kind": "production_person",
-        "canonical_name": "王遐",
-        "person_id": "person-016"
+        "target_kind": "identity_candidate",
+        "canonical_name": "桓伊",
+        "candidate_id": "candidate-identity-er1-1-2-193fc44098a05235f63fc215"
       },
       "resolution_candidates": [
         {
-          "target_kind": "production_person",
-          "canonical_name": "王遐",
-          "person_id": "person-016"
+          "target_kind": "identity_candidate",
+          "canonical_name": "桓伊",
+          "candidate_id": "candidate-identity-er1-1-2-193fc44098a05235f63fc215"
         }
       ],
       "resolution_review_status": "candidate",
       "resolution_decision_source": "automatic",
       "resolution_evidence_ids": [
-        "evidence-p3b-wave-1-9bdf4d0f462a95cece4a6406"
+        "evidence-p3b-wave-1-9bdf4d0f462a95cece4a6406",
+        "evidence-sc1-05-fangzheng-055-annotation-001",
+        "evidence-sc1-05-fangzheng-055-annotation-002",
+        "evidence-sc1-05-fangzheng-055-main"
       ],
       "resolution_note": "",
+      "display_span": {
+        "offset": 9,
+        "end_offset_exclusive": 12,
+        "text": "桓子野",
+        "basis": "longest_safe_semantic_span",
+        "status": "safe",
+        "evidence_ids": [
+          "evidence-sc1-05-fangzheng-055-annotation-001",
+          "evidence-sc1-05-fangzheng-055-annotation-002",
+          "evidence-sc1-05-fangzheng-055-main"
+        ]
+      },
       "resolution_mode": "exact"
     },
     {
@@ -53338,12 +53322,10 @@
       "surface": "桓子",
       "alias_id": "alias-p3b-wave-1-wang-xia-e66fb8237f9068ef",
       "alias_type": "courtesy_name",
-      "person_id": "person-016",
-      "candidate_person_ids": [
-        "person-016"
-      ],
+      "person_id": null,
+      "candidate_person_ids": [],
       "confidence": "high",
-      "resolution_method": "exact_p3b_wave_1_candidate_occurrence",
+      "resolution_method": "er1_1_2_longest_safe_semantic_span",
       "context_identity_hits": [
         "王遐"
       ],
@@ -53389,40 +53371,39 @@
       },
       "resolution_status": "resolved",
       "resolution_target": {
-        "target_kind": "production_person",
-        "canonical_name": "王遐",
-        "person_id": "person-016"
+        "target_kind": "identity_candidate",
+        "canonical_name": "桓伊",
+        "candidate_id": "candidate-identity-er1-1-2-193fc44098a05235f63fc215"
       },
       "resolution_candidates": [
         {
-          "target_kind": "production_person",
-          "canonical_name": "王遐",
-          "person_id": "person-016"
+          "target_kind": "identity_candidate",
+          "canonical_name": "桓伊",
+          "candidate_id": "candidate-identity-er1-1-2-193fc44098a05235f63fc215"
         }
       ],
       "resolution_review_status": "candidate",
       "resolution_decision_source": "automatic",
       "resolution_evidence_ids": [
-        "evidence-p3a1-0fd45ae599b70afcd855",
-        "evidence-p3a1-107658ed90d00b527de2",
-        "evidence-p3a1-1e4023a7869b58d0bcd9",
-        "evidence-p3a1-5530395e9f7bbdde2468",
-        "evidence-p3a1-69747574c1d5a6df97e0",
-        "evidence-p3a1-c85f879aa46c9ae22de5",
-        "evidence-p3a1-d7dfc75b51b78c4255a4",
-        "evidence-p3a1-e29f60409199c3e0a894",
-        "evidence-p3a1-f7df6c1c52895f19da94",
-        "evidence-p3b-wave-1-0120a3909151a7f47aa6718b",
-        "evidence-p3b-wave-1-2020cf8b772e1534e660892d",
-        "evidence-p3b-wave-1-8165e62e3b7592222279746f",
         "evidence-p3b-wave-1-9170e8b7829b6231fa41bc75",
-        "evidence-p3b-wave-1-9bdf4d0f462a95cece4a6406",
-        "evidence-p3b-wave-1-9ed34cc2eea403267bcc98e4",
-        "evidence-p3b-wave-1-b4d0c11d1f109c31daf9d667",
-        "evidence-p3b-wave-1-cc628e7ae0f7fab3d525311f",
-        "evidence-p3b-wave-1-ded8ed065bac95465ec919ac"
+        "evidence-sc1-05-fangzheng-055-annotation-001",
+        "evidence-sc1-05-fangzheng-055-annotation-002",
+        "evidence-sc1-05-fangzheng-055-main"
       ],
-      "resolution_note": ""
+      "resolution_note": "",
+      "display_span": {
+        "offset": 42,
+        "end_offset_exclusive": 45,
+        "text": "桓子野",
+        "basis": "longest_safe_semantic_span",
+        "status": "safe",
+        "evidence_ids": [
+          "evidence-sc1-05-fangzheng-055-annotation-001",
+          "evidence-sc1-05-fangzheng-055-annotation-002",
+          "evidence-sc1-05-fangzheng-055-main"
+        ]
+      },
+      "resolution_mode": "exact"
     },
     {
       "source": "shishuo",
@@ -56438,7 +56419,7 @@
         "person-010"
       ],
       "confidence": "high",
-      "resolution_method": "exact_p3b_wave_1_candidate_occurrence",
+      "resolution_method": "er1_1_2_longest_safe_semantic_span",
       "context_identity_hits": [
         "庾亮"
       ],
@@ -56505,32 +56486,23 @@
       "resolution_review_status": "candidate",
       "resolution_decision_source": "automatic",
       "resolution_evidence_ids": [
-        "evidence-p3a1-1db4e11ba17bca5f227c",
-        "evidence-p3a1-29e4fe9beeb74e82a588",
-        "evidence-p3a1-38b8aa06180e7514f87c",
         "evidence-p3a1-419b1c026a59165f6b16",
-        "evidence-p3a1-5167c02ae0cc05f1f604",
-        "evidence-p3a1-81f82f1628cd01a7590a",
-        "evidence-p3a1-a5b157de3748385e0552",
-        "evidence-p3a1-a66d97cb4d639dfd17d7",
-        "evidence-p3a1-a8513fbb3433e0c9077a",
-        "evidence-p3a1-cc5802a795fb991b248b",
-        "evidence-p3a1-ceb4a13f3b845f7db6a5",
-        "evidence-p3a1-ecf670c8812af8cb01c8",
-        "evidence-p3b-wave-1-099ca664f11a31f435142077",
-        "evidence-p3b-wave-1-0fffee7bce68216f6fbe83bb",
-        "evidence-p3b-wave-1-17b23f8d73cd38f0c000d731",
-        "evidence-p3b-wave-1-49643dff9799e99560508050",
-        "evidence-p3b-wave-1-78f1d6ab4b731e00da002fce",
-        "evidence-p3b-wave-1-84e15d4c10c6ddf514b66f2d",
-        "evidence-p3b-wave-1-ccc8b949675ada53f3ff61fa",
-        "evidence-p3b-wave-1-cf0ce03a5d71e7f796ceb725",
-        "evidence-p3b-wave-1-f0ec3c3536443b97c9217a63",
-        "evidence-p3b-wave-1-f114427662a639c512fd86d1",
-        "evidence-p3b-wave-1-f404423c9b43a75340e3f47c",
-        "evidence-p3b-wave-1-ff8e9569e60d1c0ae8e174fe"
+        "evidence-p3a1-786f91a66c79751c088d",
+        "evidence-p3b-wave-1-099ca664f11a31f435142077"
       ],
-      "resolution_note": ""
+      "resolution_note": "",
+      "display_span": {
+        "offset": 22,
+        "end_offset_exclusive": 26,
+        "text": "元規潁川",
+        "basis": "longest_safe_semantic_span",
+        "status": "safe",
+        "evidence_ids": [
+          "evidence-p3a1-419b1c026a59165f6b16",
+          "evidence-p3a1-786f91a66c79751c088d"
+        ]
+      },
+      "resolution_mode": "exact"
     },
     {
       "source": "shishuo",
@@ -60595,7 +60567,7 @@
         "person-018"
       ],
       "confidence": "high",
-      "resolution_method": "exact_p3b-wave-2_candidate_occurrence",
+      "resolution_method": "er1_1_2_longest_safe_semantic_span",
       "context_identity_hits": [
         "謝尚"
       ],
@@ -60662,54 +60634,23 @@
       "resolution_review_status": "candidate",
       "resolution_decision_source": "automatic",
       "resolution_evidence_ids": [
-        "evidence-p3a1-109cd965f8eeab0458c6",
-        "evidence-p3a1-22576bf732081e74b5a1",
-        "evidence-p3a1-2c533e8fa035df8935a9",
-        "evidence-p3a1-3adfb36b551620f51cc8",
-        "evidence-p3a1-3c9eec511263a2a43f78",
-        "evidence-p3a1-41aad768bc1a7cdcc45e",
-        "evidence-p3a1-4b8b4b7ea39ddbe4b65c",
-        "evidence-p3a1-5497d9613433f3e8b8a2",
-        "evidence-p3a1-5a8ecc83724667ddb7bb",
-        "evidence-p3a1-6b082bb6ff5bdd2ae794",
-        "evidence-p3a1-7d33aeec052f5e891342",
-        "evidence-p3a1-8f68956ed1b3e752d8fb",
-        "evidence-p3a1-8f702acf8abd76547457",
-        "evidence-p3a1-9f7a31e7c6b93663aa80",
         "evidence-p3a1-b26550c61bac7681474e",
-        "evidence-p3a1-bcbb9aa16ee7c2f662c8",
-        "evidence-p3a1-c5fb7cc68bd64381b160",
-        "evidence-p3a1-cb6a3f837c300f38ecdf",
-        "evidence-p3a1-d10d8ce3a94063fbfdb6",
-        "evidence-p3a1-d3e92626fc4da387c533",
-        "evidence-p3a1-d518071e9f255da65e1e",
-        "evidence-p3a1-dd590c6a0e47d339e34e",
-        "evidence-p3a1-f22bbc339cb7ab2553ac",
-        "evidence-p3b-wave-2-16b2a2134310984774f7a893",
-        "evidence-p3b-wave-2-1e39744b27e41aa864a5007b",
-        "evidence-p3b-wave-2-2590e15cf5b4c8dc0ed83529",
-        "evidence-p3b-wave-2-3800064c920fd1381b36cef3",
-        "evidence-p3b-wave-2-3b6a7f0300b94296827c2c87",
-        "evidence-p3b-wave-2-3df6676fb29af0bffd8c5acc",
-        "evidence-p3b-wave-2-3f2c99f2c69bfc29a0ab0f62",
-        "evidence-p3b-wave-2-43e52164fed63a276cedb941",
-        "evidence-p3b-wave-2-4697080ac3142399b52f71a3",
-        "evidence-p3b-wave-2-4868fc144bf24b9e1aa93d08",
-        "evidence-p3b-wave-2-59fc6071adc08b5eee835a4c",
-        "evidence-p3b-wave-2-5fa2ec6a84faf1cf68597963",
-        "evidence-p3b-wave-2-70f13e52a5513fff650d7a67",
-        "evidence-p3b-wave-2-98310391c24282ffeee45084",
-        "evidence-p3b-wave-2-9eabac29078b69a9fb9b15a2",
-        "evidence-p3b-wave-2-aed4598e76956d0cf6919274",
-        "evidence-p3b-wave-2-bfbb263d3143ffb50a6f739a",
-        "evidence-p3b-wave-2-c95cd264caedb879d2749dcf",
-        "evidence-p3b-wave-2-d34553c2a1e1389105eec745",
-        "evidence-p3b-wave-2-ee397cac05c8f26a5b631790",
-        "evidence-p3b-wave-2-fa269e4eb266de77a3c74efb",
-        "evidence-p3b-wave-2-fdd701faf914117bbd55160a",
-        "evidence-p3b-wave-2-ff7f233ba8df60e0ef33aaa5"
+        "evidence-p3a1-b387dd3ba5b31de2e476",
+        "evidence-p3b-wave-2-70f13e52a5513fff650d7a67"
       ],
-      "resolution_note": ""
+      "resolution_note": "",
+      "display_span": {
+        "offset": 20,
+        "end_offset_exclusive": 24,
+        "text": "仁祖陳郡",
+        "basis": "longest_safe_semantic_span",
+        "status": "safe",
+        "evidence_ids": [
+          "evidence-p3a1-b26550c61bac7681474e",
+          "evidence-p3a1-b387dd3ba5b31de2e476"
+        ]
+      },
+      "resolution_mode": "exact"
     },
     {
       "source": "shishuo",
@@ -66268,7 +66209,7 @@
         "person-019"
       ],
       "confidence": "high",
-      "resolution_method": "exact_p3b-wave-2_candidate_occurrence",
+      "resolution_method": "er1_1_2_longest_safe_semantic_span",
       "context_identity_hits": [
         "周顗"
       ],
@@ -66335,88 +66276,25 @@
       "resolution_review_status": "candidate",
       "resolution_decision_source": "automatic",
       "resolution_evidence_ids": [
-        "evidence-p3a1-1145bff888eedfca2b71",
-        "evidence-p3a1-11f34932ddab7fd82e8e",
-        "evidence-p3a1-129d4eb14302b2db2dad",
-        "evidence-p3a1-352c133b4e73e1f1a969",
-        "evidence-p3a1-48e4c3c52b11ccc93331",
-        "evidence-p3a1-4c1e61029d7594fb6a48",
-        "evidence-p3a1-4e79bf0cf23742806492",
-        "evidence-p3a1-4ea7df1734432d042c89",
-        "evidence-p3a1-51155311bbea1eaf54dd",
-        "evidence-p3a1-571933d9adae9e189bb9",
-        "evidence-p3a1-58595d6c22cf0b460a8a",
-        "evidence-p3a1-5b2281cf23c533d6058a",
-        "evidence-p3a1-6631be2dcd0b5ef1a76e",
-        "evidence-p3a1-6b15cfe641d3ecc76958",
-        "evidence-p3a1-6d86aa5d1f21a63c2ae6",
-        "evidence-p3a1-707241c6d97b713cda54",
-        "evidence-p3a1-72e11b84e1d2013f8820",
-        "evidence-p3a1-7d9d878c4e70f5746d8f",
-        "evidence-p3a1-918b51b1fc199a54c842",
-        "evidence-p3a1-9712b22751ebc2bec910",
-        "evidence-p3a1-a2850d9bbec196320752",
-        "evidence-p3a1-a50792fbd8a34a13e2ee",
-        "evidence-p3a1-a567acebd21c1b518c8f",
-        "evidence-p3a1-ae8e4858aed45434fda0",
-        "evidence-p3a1-b7943954345ecaa3250d",
-        "evidence-p3a1-bdd757541d4b75f9bb0a",
-        "evidence-p3a1-befbb9a9b8c7d4358053",
-        "evidence-p3a1-bf7e41601b30a6196f7b",
-        "evidence-p3a1-c0a29730f4b52a4aa938",
-        "evidence-p3a1-c700a376b8c103b68dd5",
-        "evidence-p3a1-ccc7c206135a412a8f00",
-        "evidence-p3a1-d25154343a13bb3e4e96",
-        "evidence-p3a1-e52a72c271b59810cf3a",
-        "evidence-p3a1-eabcf9d3326fac8486e7",
-        "evidence-p3a1-edc5d01b396a968c6bdf",
-        "evidence-p3a1-ef1ee4f86850c5377d8e",
-        "evidence-p3a1-ef585bafcd2a484cbaf0",
-        "evidence-p3a1-f45d691cad0e42abcac2",
-        "evidence-p3a1-fcf99a0eb02435e12c83",
+        "evidence-p3a1-0a3f2f9ce656307601fa",
+        "evidence-p3a1-97ec25d0d09837a118ca",
         "evidence-p3a1-fcfd1344ac91ed9a12c9",
-        "evidence-p3b-wave-2-0db150c026e062b45d82692f",
-        "evidence-p3b-wave-2-0e1308c821c19debaaf10f2b",
-        "evidence-p3b-wave-2-156fa697ebd581337ae6a1c2",
-        "evidence-p3b-wave-2-157249727d64ea1ac9c18ee7",
-        "evidence-p3b-wave-2-19e0b4effbea07108db3c25e",
-        "evidence-p3b-wave-2-1a8688f3cabc125a3bd957cd",
-        "evidence-p3b-wave-2-1cf5acde608e1a2557c99889",
-        "evidence-p3b-wave-2-1e13dd0b71e2bfc2a346d80d",
-        "evidence-p3b-wave-2-216093dddd1c3e1f4d3e0b24",
-        "evidence-p3b-wave-2-219491b4f48687a8e2c149a7",
-        "evidence-p3b-wave-2-230a5e5fe67439d3f3a45aae",
-        "evidence-p3b-wave-2-27cba2ee6b740b7fea870753",
-        "evidence-p3b-wave-2-296f7406ea052274b965c1dc",
-        "evidence-p3b-wave-2-3061c89bd47bf8043f4fc6e4",
-        "evidence-p3b-wave-2-3a37030b5051f52bf700de4a",
-        "evidence-p3b-wave-2-3cdbfbef9bcec958b9925b7f",
-        "evidence-p3b-wave-2-43dd5b2457ff99b7b7f075b8",
-        "evidence-p3b-wave-2-4c633e021b01d1d26d15c8ae",
-        "evidence-p3b-wave-2-5b36d6c9ad12b02f442098e2",
-        "evidence-p3b-wave-2-610ab407215868c31e216b24",
-        "evidence-p3b-wave-2-61e55ed1f03490aae42b1515",
-        "evidence-p3b-wave-2-7d7d6b4ee51b16266c675fcf",
-        "evidence-p3b-wave-2-8d211f43d3a6354d07890dc7",
-        "evidence-p3b-wave-2-9b7c849943742836ef6a9db3",
-        "evidence-p3b-wave-2-9b993da54b594e16023b2126",
-        "evidence-p3b-wave-2-a68e420812a4186f6cbd9867",
-        "evidence-p3b-wave-2-ac69e771d43bd91ae1608580",
-        "evidence-p3b-wave-2-ad56400a59d5f58267a7666d",
-        "evidence-p3b-wave-2-b0b7223e3e4a652e2095fbed",
-        "evidence-p3b-wave-2-c34bb57aa9e4cdf1af2b57da",
-        "evidence-p3b-wave-2-c5f95f49f35d799c1305c032",
-        "evidence-p3b-wave-2-ca270e540c49c1fdeeae11fe",
-        "evidence-p3b-wave-2-cc941a16aaf7d53f1849bc08",
-        "evidence-p3b-wave-2-cd78ba06f44e68d3b1f0137b",
-        "evidence-p3b-wave-2-d320d01d0a2bd78bbb590adb",
-        "evidence-p3b-wave-2-d6e8cb72318e32a87e8fce87",
-        "evidence-p3b-wave-2-e8e662a7a774bcf7d97546f6",
-        "evidence-p3b-wave-2-eff938eb200aa1c8ede3ddbb",
-        "evidence-p3b-wave-2-effcf0b5d87b8609705e169c",
-        "evidence-p3b-wave-2-f44cb9d3f6e6c30f8b0dfb73"
+        "evidence-p3b-wave-2-ad56400a59d5f58267a7666d"
       ],
-      "resolution_note": ""
+      "resolution_note": "",
+      "display_span": {
+        "offset": 24,
+        "end_offset_exclusive": 28,
+        "text": "伯仁汝南",
+        "basis": "longest_safe_semantic_span",
+        "status": "safe",
+        "evidence_ids": [
+          "evidence-p3a1-0a3f2f9ce656307601fa",
+          "evidence-p3a1-97ec25d0d09837a118ca",
+          "evidence-p3a1-fcfd1344ac91ed9a12c9"
+        ]
+      },
+      "resolution_mode": "exact"
     },
     {
       "source": "shishuo",
@@ -69919,7 +69797,7 @@
         "person-027"
       ],
       "confidence": "high",
-      "resolution_method": "exact_p3b-wave-2_candidate_occurrence",
+      "resolution_method": "er1_1_2_longest_safe_semantic_span",
       "context_identity_hits": [
         "向秀"
       ],
@@ -69986,30 +69864,21 @@
       "resolution_review_status": "candidate",
       "resolution_decision_source": "automatic",
       "resolution_evidence_ids": [
-        "evidence-p3a1-05ec8cda235807ecef0d",
         "evidence-p3a1-19110474597cbe55b2ca",
-        "evidence-p3a1-1bb5480e3201596618d7",
-        "evidence-p3a1-29f0dd27f67116d6238d",
-        "evidence-p3a1-41ae3900b1be86613334",
-        "evidence-p3a1-6273cb7074c450dc8f17",
-        "evidence-p3a1-7b6515ee7057720d2cca",
-        "evidence-p3a1-8fb65f9edd5aa0dddbce",
-        "evidence-p3a1-97b1fadc6447ab29f5ea",
-        "evidence-p3a1-f221f544b82f6a16f655",
-        "evidence-p3a1-f51fae10da18a711068f",
-        "evidence-p3b-wave-2-01fea60a9f773f68ad31d67d",
-        "evidence-p3b-wave-2-1101139065ae5a7127636a52",
-        "evidence-p3b-wave-2-1473b29802a20b3cfa5f3cea",
-        "evidence-p3b-wave-2-33813cc0c8a39eec0687d411",
-        "evidence-p3b-wave-2-421eb098c06ab7b732f31ad6",
-        "evidence-p3b-wave-2-5375020f85ea0c31edeb2bbe",
-        "evidence-p3b-wave-2-70bd94772c7d3da99d81e61c",
-        "evidence-p3b-wave-2-716e85dd6f378719154b1dde",
-        "evidence-p3b-wave-2-bb25b55967143f15a8d1d499",
-        "evidence-p3b-wave-2-d2de78a2514abea6ddee5764",
-        "evidence-p3b-wave-2-e38f04fcad8841e11a6e1e40"
+        "evidence-p3b-wave-2-01fea60a9f773f68ad31d67d"
       ],
-      "resolution_note": ""
+      "resolution_note": "",
+      "display_span": {
+        "offset": 22,
+        "end_offset_exclusive": 26,
+        "text": "子期河内",
+        "basis": "longest_safe_semantic_span",
+        "status": "safe",
+        "evidence_ids": [
+          "evidence-p3a1-19110474597cbe55b2ca"
+        ]
+      },
+      "resolution_mode": "exact"
     },
     {
       "source": "shishuo",
@@ -71104,7 +70973,7 @@
         "person-020"
       ],
       "confidence": "high",
-      "resolution_method": "exact_p3b-wave-2_candidate_occurrence",
+      "resolution_method": "er1_1_2_longest_safe_semantic_span",
       "context_identity_hits": [
         "王戎"
       ],
@@ -71171,24 +71040,21 @@
       "resolution_review_status": "candidate",
       "resolution_decision_source": "automatic",
       "resolution_evidence_ids": [
-        "evidence-p3a1-0e292c449cedf0369749",
-        "evidence-p3a1-17e952037fc912308925",
-        "evidence-p3a1-42c4485ae7a0b16b1a39",
         "evidence-p3a1-6ff16456a8644573133b",
-        "evidence-p3a1-829fe35d09b6c28f0ffc",
-        "evidence-p3a1-a5d68f0e6ea09ce69aec",
-        "evidence-p3a1-c898ae2fe701022bcfc2",
-        "evidence-p3a1-c8f44a18787edea570fa",
-        "evidence-p3b-wave-2-0adb733d8e91e85ea810a201",
-        "evidence-p3b-wave-2-2a979504d6df776c04cbf17a",
-        "evidence-p3b-wave-2-59bcdccf6b29d7c80b61d614",
-        "evidence-p3b-wave-2-67a9da9e219ca5ff9ae584e1",
-        "evidence-p3b-wave-2-8a72815da363d013a50d3ced",
-        "evidence-p3b-wave-2-8e9f34934dd5d5d60135aac5",
-        "evidence-p3b-wave-2-a132ceca5f420eb352577a6d",
-        "evidence-p3b-wave-2-a4c1782b6a45a76acdfb57f7"
+        "evidence-p3b-wave-2-0adb733d8e91e85ea810a201"
       ],
-      "resolution_note": ""
+      "resolution_note": "",
+      "display_span": {
+        "offset": 26,
+        "end_offset_exclusive": 30,
+        "text": "濬沖琅邪",
+        "basis": "longest_safe_semantic_span",
+        "status": "safe",
+        "evidence_ids": [
+          "evidence-p3a1-6ff16456a8644573133b"
+        ]
+      },
+      "resolution_mode": "exact"
     },
     {
       "source": "shishuo",
@@ -73475,7 +73341,7 @@
         "person-034"
       ],
       "confidence": "high",
-      "resolution_method": "exact_p3b-wave-2_candidate_occurrence",
+      "resolution_method": "er1_1_2_longest_safe_semantic_span",
       "context_identity_hits": [
         "伏滔"
       ],
@@ -73542,12 +73408,21 @@
       "resolution_review_status": "candidate",
       "resolution_decision_source": "automatic",
       "resolution_evidence_ids": [
-        "evidence-p3a1-9600a8bcbe6367f80d9c",
         "evidence-p3a1-d7bf0a79fe9d06faef19",
-        "evidence-p3b-wave-2-06e0ec8045d0858ddd1d7ae0",
         "evidence-p3b-wave-2-0f4f158387819f4855ab3dee"
       ],
-      "resolution_note": ""
+      "resolution_note": "",
+      "display_span": {
+        "offset": 37,
+        "end_offset_exclusive": 41,
+        "text": "度平昌安",
+        "basis": "longest_safe_semantic_span",
+        "status": "safe",
+        "evidence_ids": [
+          "evidence-p3a1-d7bf0a79fe9d06faef19"
+        ]
+      },
+      "resolution_mode": "exact"
     },
     {
       "source": "shishuo",
@@ -79088,7 +78963,7 @@
         "person-033"
       ],
       "confidence": "high",
-      "resolution_method": "exact_p3b-wave-2_candidate_occurrence",
+      "resolution_method": "er1_1_2_longest_safe_semantic_span",
       "context_identity_hits": [
         "孫恩"
       ],
@@ -79156,11 +79031,20 @@
       "resolution_decision_source": "automatic",
       "resolution_evidence_ids": [
         "evidence-p3a1-1a195d133e615ac4ddc2",
-        "evidence-p3a1-f52a69d58aabda6cdc09",
-        "evidence-p3b-wave-2-12a8fe7154e7053dce5efdf2",
         "evidence-p3b-wave-2-ff57b39fa2165729b0b552f7"
       ],
-      "resolution_note": ""
+      "resolution_note": "",
+      "display_span": {
+        "offset": 27,
+        "end_offset_exclusive": 31,
+        "text": "靈秀琅邪",
+        "basis": "longest_safe_semantic_span",
+        "status": "safe",
+        "evidence_ids": [
+          "evidence-p3a1-1a195d133e615ac4ddc2"
+        ]
+      },
+      "resolution_mode": "exact"
     },
     {
       "source": "shishuo",
@@ -80449,7 +80333,7 @@
         "person-022"
       ],
       "confidence": "high",
-      "resolution_method": "exact_p3b-wave-2_candidate_occurrence",
+      "resolution_method": "er1_1_2_longest_safe_semantic_span",
       "context_identity_hits": [
         "鄧攸"
       ],
@@ -80516,9 +80400,20 @@
       "resolution_review_status": "candidate",
       "resolution_decision_source": "automatic",
       "resolution_evidence_ids": [
+        "evidence-p3a1-34a54ea27354d6136665",
         "evidence-p3b-wave-2-169617676fbee18f85968ece"
       ],
       "resolution_note": "",
+      "display_span": {
+        "offset": 1,
+        "end_offset_exclusive": 5,
+        "text": "伯道平陽",
+        "basis": "longest_safe_semantic_span",
+        "status": "safe",
+        "evidence_ids": [
+          "evidence-p3a1-34a54ea27354d6136665"
+        ]
+      },
       "resolution_mode": "exact"
     },
     {
@@ -89473,7 +89368,7 @@
         "person-025"
       ],
       "confidence": "high",
-      "resolution_method": "exact_p3b-wave-2_candidate_occurrence",
+      "resolution_method": "er1_1_2_longest_safe_semantic_span",
       "context_identity_hits": [
         "何充"
       ],
@@ -89540,32 +89435,25 @@
       "resolution_review_status": "candidate",
       "resolution_decision_source": "automatic",
       "resolution_evidence_ids": [
-        "evidence-p3a1-0f17c675f991781d9b9e",
-        "evidence-p3a1-1a8a890d23eae6679f2f",
         "evidence-p3a1-2ebb64df69af4f56d33e",
-        "evidence-p3a1-41608f68c8fdb93d153b",
-        "evidence-p3a1-6d2850b2de5998969f40",
-        "evidence-p3a1-971225ac888f5d4cde97",
-        "evidence-p3a1-b58d567951988c50696e",
-        "evidence-p3a1-c0ee2ca13e37569ddb56",
-        "evidence-p3a1-c1e47504523c1e6b7259",
-        "evidence-p3a1-c3039353dabeb87620fe",
         "evidence-p3a1-d36bb845498755043e27",
-        "evidence-p3a1-eae724b53cb1528293ed",
-        "evidence-p3b-wave-2-044b8e93813fc396db90c8f4",
-        "evidence-p3b-wave-2-2aca4cac7fdc8e6db361670b",
-        "evidence-p3b-wave-2-3236196d3d2185b8be42db33",
-        "evidence-p3b-wave-2-426d3a155fd73d7d3f8fd022",
-        "evidence-p3b-wave-2-6d1186ac920c8905527f0cf9",
-        "evidence-p3b-wave-2-6f8ff578e531096a2d81a42c",
-        "evidence-p3b-wave-2-71c38b5633dc41fa5b5b35ba",
-        "evidence-p3b-wave-2-7d9efdef88b25a284777fc77",
-        "evidence-p3b-wave-2-8b040146eb1f6aa3d42cce1b",
-        "evidence-p3b-wave-2-d726c0c30ed8808ab235519b",
-        "evidence-p3b-wave-2-e04a1d6cea8a948471631f0c",
+        "evidence-p3a1-ff26939e76597e374282",
         "evidence-p3b-wave-2-f2a7f6d441631fb68ce0be9b"
       ],
-      "resolution_note": ""
+      "resolution_note": "",
+      "display_span": {
+        "offset": 23,
+        "end_offset_exclusive": 27,
+        "text": "次道廬江",
+        "basis": "longest_safe_semantic_span",
+        "status": "safe",
+        "evidence_ids": [
+          "evidence-p3a1-2ebb64df69af4f56d33e",
+          "evidence-p3a1-d36bb845498755043e27",
+          "evidence-p3a1-ff26939e76597e374282"
+        ]
+      },
+      "resolution_mode": "exact"
     },
     {
       "source": "shishuo",
@@ -89978,7 +89866,7 @@
         "person-026"
       ],
       "confidence": "high",
-      "resolution_method": "exact_p3b-wave-2_candidate_occurrence",
+      "resolution_method": "er1_1_2_longest_safe_semantic_span",
       "context_identity_hits": [
         "陸機"
       ],
@@ -90045,9 +89933,20 @@
       "resolution_review_status": "candidate",
       "resolution_decision_source": "automatic",
       "resolution_evidence_ids": [
+        "evidence-p3a1-e72e36b53654bdc3f083",
         "evidence-p3b-wave-2-47530d4c350861d90c5de1fe"
       ],
       "resolution_note": "",
+      "display_span": {
+        "offset": 22,
+        "end_offset_exclusive": 26,
+        "text": "士衡吳郡",
+        "basis": "longest_safe_semantic_span",
+        "status": "safe",
+        "evidence_ids": [
+          "evidence-p3a1-e72e36b53654bdc3f083"
+        ]
+      },
       "resolution_mode": "exact"
     },
     {
@@ -90563,7 +90462,7 @@
         "person-023"
       ],
       "confidence": "high",
-      "resolution_method": "exact_p3b-wave-2_candidate_occurrence",
+      "resolution_method": "er1_1_2_longest_safe_semantic_span",
       "context_identity_hits": [
         "謝鯤"
       ],
@@ -90630,18 +90529,23 @@
       "resolution_review_status": "candidate",
       "resolution_decision_source": "automatic",
       "resolution_evidence_ids": [
-        "evidence-p3a1-269d6dfa3e134802808b",
-        "evidence-p3a1-776771dad01e622a012e",
+        "evidence-p3a1-6e50bf1dc5dfa055a47d",
         "evidence-p3a1-860cfa47dbc95fda3015",
-        "evidence-p3a1-ab2826ebd51659427ec8",
-        "evidence-p3a1-c9f8b499c72a2bfa4894",
-        "evidence-p3b-wave-2-01b8a65930202142731b2eb1",
-        "evidence-p3b-wave-2-076dc864b8a7dc1051f617e3",
-        "evidence-p3b-wave-2-2209ec41aadae40046be8d6a",
-        "evidence-p3b-wave-2-38b5c03ce8b4cb3e54c1491e",
-        "evidence-p3b-wave-2-defd102af0a56432bd02e9c3"
+        "evidence-p3b-wave-2-01b8a65930202142731b2eb1"
       ],
-      "resolution_note": ""
+      "resolution_note": "",
+      "display_span": {
+        "offset": 28,
+        "end_offset_exclusive": 32,
+        "text": "幼輿陳郡",
+        "basis": "longest_safe_semantic_span",
+        "status": "safe",
+        "evidence_ids": [
+          "evidence-p3a1-6e50bf1dc5dfa055a47d",
+          "evidence-p3a1-860cfa47dbc95fda3015"
+        ]
+      },
+      "resolution_mode": "exact"
     },
     {
       "source": "shishuo",
@@ -90749,6 +90653,78 @@
     }
   ],
   "derived_mentions": [
+    {
+      "mention_id": "er1-1-mention-c3a463e7c90b41682d46dca4",
+      "entry_id": "05-fangzheng-055",
+      "source_id": "05-fangzheng-055",
+      "source": "shishuo",
+      "section": "main_text",
+      "surface": "子野",
+      "alias_type": "textual_shorthand",
+      "resolution_mode": "contextual",
+      "confidence": "high",
+      "person_id": null,
+      "candidate_person_ids": [],
+      "context_identity_hits": [
+        "桓伊"
+      ],
+      "context": "桓公問桓子野謝安石料萬石必敗何以不諫\n\n子野荅曰故當出於難犯耳桓作\n色曰萬石撓弱凡才有何嚴顔難犯",
+      "entry_relative_start": 20,
+      "entry_relative_end_exclusive": 22,
+      "source_section_metadata": {},
+      "evidence": {
+        "section_offset": 20,
+        "evidence_ids": [
+          "evidence-sc1-05-fangzheng-055-annotation-001",
+          "evidence-sc1-05-fangzheng-055-annotation-002",
+          "evidence-sc1-05-fangzheng-055-main"
+        ]
+      },
+      "anchor": {
+        "text": "子野",
+        "section": "main_text",
+        "offset": 20
+      },
+      "resolution_status": "resolved",
+      "resolution_target": {
+        "target_kind": "identity_candidate",
+        "canonical_name": "桓伊",
+        "candidate_id": "candidate-identity-er1-1-2-193fc44098a05235f63fc215"
+      },
+      "resolution_candidates": [
+        {
+          "target_kind": "identity_candidate",
+          "canonical_name": "桓伊",
+          "candidate_id": "candidate-identity-er1-1-2-193fc44098a05235f63fc215"
+        }
+      ],
+      "resolution_review_status": "candidate",
+      "resolution_decision_source": "automatic",
+      "resolution_evidence_ids": [
+        "evidence-sc1-05-fangzheng-055-annotation-001",
+        "evidence-sc1-05-fangzheng-055-annotation-002",
+        "evidence-sc1-05-fangzheng-055-main"
+      ],
+      "resolution_note": "同一故事中完整称谓之后的保守短称承接。",
+      "resolution_method": "er1_1_story_local_coreference",
+      "assertion_status": "attested",
+      "review_status": "candidate",
+      "derived_only": true,
+      "span_decision_id": "span-decision-5fc70d9f71b3d2675005da81",
+      "coreference_antecedent_mention_id": "shishuo-p3b-wave-1-78fd849d96483f177986b7e2",
+      "display_span": {
+        "offset": 20,
+        "end_offset_exclusive": 22,
+        "text": "子野",
+        "basis": "story_local_coreference",
+        "status": "safe",
+        "evidence_ids": [
+          "evidence-sc1-05-fangzheng-055-annotation-001",
+          "evidence-sc1-05-fangzheng-055-annotation-002",
+          "evidence-sc1-05-fangzheng-055-main"
+        ]
+      }
+    },
     {
       "mention_id": "er1-1-mention-5a4a851a209da85fd2f188b6",
       "entry_id": "06-yaliang-017",

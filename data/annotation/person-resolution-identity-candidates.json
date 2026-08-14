@@ -1,0 +1,102 @@
+{
+  "schema": 1,
+  "stage": "er1-1-2-known-identity-targets",
+  "candidates": [
+    {
+      "candidate_id": "candidate-identity-er1-1-2-193fc44098a05235f63fc215",
+      "preferred_name": "桓伊",
+      "status": "candidate",
+      "matched_person_id": null,
+      "materialization_state": "new_candidate",
+      "surfaces": [
+        {
+          "surface": "桓伊",
+          "surface_type": "personal_name",
+          "association_mode": "exact",
+          "association_strength": "strong",
+          "source_layers": ["shishuo"],
+          "evidence_ids": [
+            "evidence-sc1-05-fangzheng-055-annotation-001",
+            "evidence-p3a1-2e23ff3ddc0dda381c1d"
+          ],
+          "occurrence_count": 2
+        },
+        {
+          "surface": "桓子野",
+          "surface_type": "established_appellation",
+          "association_mode": "exact",
+          "association_strength": "strong",
+          "source_layers": ["shishuo"],
+          "evidence_ids": [
+            "evidence-sc1-05-fangzheng-055-main",
+            "evidence-sc1-05-fangzheng-055-annotation-001",
+            "evidence-sc1-05-fangzheng-055-annotation-002"
+          ],
+          "occurrence_count": 6
+        },
+        {
+          "surface": "子野",
+          "surface_type": "textual_shorthand",
+          "association_mode": "contextual",
+          "association_strength": "strong",
+          "source_layers": ["shishuo"],
+          "evidence_ids": [
+            "evidence-sc1-05-fangzheng-055-main",
+            "evidence-sc1-05-fangzheng-055-annotation-001"
+          ],
+          "occurrence_count": 2
+        },
+        {
+          "surface": "叔夏",
+          "surface_type": "courtesy_name",
+          "association_mode": "exact",
+          "association_strength": "strong",
+          "source_layers": ["shishuo", "jinshu"],
+          "evidence_ids": [
+            "evidence-sc1-05-fangzheng-055-annotation-002",
+            "evidence-p3a1-a143cfffc2bfcbf75be5"
+          ],
+          "occurrence_count": 1
+        }
+      ],
+      "identity_evidence_ids": [
+        "evidence-sc1-05-fangzheng-055-annotation-001",
+        "evidence-sc1-05-fangzheng-055-annotation-002",
+        "evidence-p3a1-a143cfffc2bfcbf75be5"
+      ],
+      "evidence_ids": [
+        "evidence-p3a1-2e23ff3ddc0dda381c1d",
+        "evidence-p3a1-a143cfffc2bfcbf75be5",
+        "evidence-sc1-05-fangzheng-055-annotation-001",
+        "evidence-sc1-05-fangzheng-055-annotation-002",
+        "evidence-sc1-05-fangzheng-055-main"
+      ],
+      "metrics": {
+        "current_sc1_story_count": 1,
+        "current_sc1_occurrence_count": 2,
+        "shishuo_main_story_count": 1,
+        "shishuo_annotation_story_count": 1,
+        "jinshu_unit_count": 1
+      },
+      "shishuo_story_ids": ["05-fangzheng-055", "23-rendan-049"],
+      "current_sc1_story_ids": ["05-fangzheng-055"],
+      "current_sc1_occurrence_count": 3,
+      "risk_flags": [
+        "curated_er_identity_bridge",
+        "nested_jinshu_biography_subject",
+        "not_materialized",
+        "shared_prefix_with_person-016"
+      ],
+      "identity_basis": [
+        "explicit_liu_annotation_full_name",
+        "processed_jinshu_identity_cue",
+        "story_local_appellation_coreference"
+      ]
+    }
+  ],
+  "notes": [
+    "These records are non-production identity targets for contextual resolution only.",
+    "They do not allocate Person IDs, create PersonStory links, or make an identity navigable.",
+    "The current P3A.1 artifact contains direct evidence for 桓伊 but no standalone candidate row because the processed Jinshu unit is headed 桓宣 and contains 伊字叔夏 as a nested biography. This curated ER bridge preserves that source-backed identity without changing P3A1 ranking semantics."
+  ]
+}

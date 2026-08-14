@@ -1,0 +1,68 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://shishuo-sketch/schema/person-resolution-identity-candidates.schema.json",
+  "title": "ER1.1.2 Known Non-Production Identity Targets",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "stage", "candidates", "notes"],
+  "properties": {
+    "schema": {"const": 1},
+    "stage": {"const": "er1-1-2-known-identity-targets"},
+    "candidates": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "candidate_id",
+          "preferred_name",
+          "status",
+          "matched_person_id",
+          "materialization_state",
+          "surfaces",
+          "identity_evidence_ids",
+          "evidence_ids",
+          "metrics",
+          "shishuo_story_ids",
+          "current_sc1_story_ids",
+          "current_sc1_occurrence_count",
+          "risk_flags",
+          "identity_basis"
+        ],
+        "properties": {
+          "candidate_id": {"type": "string", "minLength": 1},
+          "preferred_name": {"type": "string", "minLength": 1},
+          "status": {"const": "candidate"},
+          "matched_person_id": {"type": "null"},
+          "materialization_state": {"const": "new_candidate"},
+          "surfaces": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["surface", "surface_type", "association_mode", "association_strength", "source_layers", "evidence_ids", "occurrence_count"],
+              "properties": {
+                "surface": {"type": "string", "minLength": 1},
+                "surface_type": {"type": "string", "minLength": 1},
+                "association_mode": {"enum": ["exact", "contextual", "ambiguous"]},
+                "association_strength": {"enum": ["strong", "medium", "weak"]},
+                "source_layers": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+                "evidence_ids": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+                "occurrence_count": {"type": "integer", "minimum": 0}
+              }
+            }
+          },
+          "identity_evidence_ids": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+          "evidence_ids": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+          "metrics": {"type": "object", "additionalProperties": {"type": ["integer", "number"]}},
+          "shishuo_story_ids": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+          "current_sc1_story_ids": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+          "current_sc1_occurrence_count": {"type": "integer", "minimum": 0},
+          "risk_flags": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+          "identity_basis": {"type": "array", "items": {"type": "string"}, "uniqueItems": true}
+        }
+      }
+    },
+    "notes": {"type": "array", "items": {"type": "string"}}
+  }
+}
