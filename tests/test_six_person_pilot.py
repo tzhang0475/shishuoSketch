@@ -25,12 +25,12 @@ class SixPersonPilotTests(unittest.TestCase):
 
     def test_six_primary_people_and_explicit_r1_supporting_person_are_registered(self) -> None:
         expected = {
-            "wang-xizhi",
-            "xi-jian",
-            "wang-dao",
-            "wang-ningzhi",
-            "xie-daoyun",
-            "xie-an",
+            "person-001",
+            "person-002",
+            "person-003",
+            "person-004",
+            "person-005",
+            "person-006",
         }
         primary = {
             person["person_id"]
@@ -51,16 +51,16 @@ class SixPersonPilotTests(unittest.TestCase):
                 and person["materialization"].get("wave_id") == "p3b-wave-1"
             },
             {
-                "huan-wen",
-                "liu-dan",
-                "yu-liang",
-                "wang-dun",
-                "yuan-hong",
-                "wen-qiao",
-                "wang-meng",
-                "sun-gui",
-                "wang-xia",
-                "su-jun",
+                "person-008",
+                "person-009",
+                "person-010",
+                "person-011",
+                "person-012",
+                "person-013",
+                "person-014",
+                "person-015",
+                "person-016",
+                "person-017",
             },
         )
         self.assertEqual(supporting, {"person-007"})
@@ -82,11 +82,11 @@ class SixPersonPilotTests(unittest.TestCase):
         scopes = {mention["biography_scope"] for mention in self.jinshu["mentions"]}
         self.assertTrue(scopes <= {"own_biography", "other_biography", "other_unit"})
         own_units = {
-            "wang-xizhi": "080-liezhuan-001",
-            "xi-jian": "067-liezhuan-002",
-            "wang-dao": "065-liezhuan-001",
-            "xie-an": "079-liezhuan-002",
-            "xie-daoyun": "096-liezhuan-016",
+            "person-001": "080-liezhuan-001",
+            "person-002": "067-liezhuan-002",
+            "person-003": "065-liezhuan-001",
+            "person-006": "079-liezhuan-002",
+            "person-005": "096-liezhuan-016",
         }
         for person_id, unit_id in own_units.items():
             self.assertTrue(

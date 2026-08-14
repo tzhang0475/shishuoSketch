@@ -34,7 +34,7 @@ promote a relation.
 
 ## Derived relation
 
-`relation-001` (`xi-jian` → `wang-xizhi`, `婚姻亲属`) is now a reviewed
+`relation-001` (`person-002` → `person-001`, `婚姻亲属`) is now a reviewed
 deterministic relation with:
 
 ```text

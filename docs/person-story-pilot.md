@@ -23,7 +23,7 @@ This is deterministic navigation/index data for the unified materialized Shishuo
 
 No Story is listed as directly participating unless a future reviewed presence explicitly uses `participant`; this pilot currently has none.
 
-### 王羲之 (`wang-xizhi`)
+### 王羲之 (`person-001`)
 
 - directly participating Stories: none currently classified; main-text appearance is retained as `mentioned` pending explicit participation review.
 - reviewed linked Stories: 13; reader-ready: 1; candidate links: 0; candidate contextual Mentions: 3
@@ -117,7 +117,7 @@ No Story is listed as directly participating unless a future reviewed presence e
 (能述為㑹稽艱居郡境王羲之後為郡申/中興書曰羲之與述志尚不同而兩不相)
     ```
 
-### 郗鑒 (`xi-jian`)
+### 郗鑒 (`person-002`)
 
 - directly participating Stories: none currently classified; main-text appearance is retained as `mentioned` pending explicit participation review.
 - reviewed linked Stories: 6; reader-ready: 1; candidate links: 0; candidate contextual Mentions: 1
@@ -154,7 +154,7 @@ No Story is listed as directly participating unless a future reviewed presence e
 (殂朝野憂懼以玩德望乃拜司空玩辭/玩别傳曰是時王導郄鑒庾亮相繼薨)
     ```
 
-### 王導 (`wang-dao`)
+### 王導 (`person-003`)
 
 - directly participating Stories: none currently classified; main-text appearance is retained as `mentioned` pending explicit participation review.
 - reviewed linked Stories: 25; reader-ready: 0; candidate links: 0; candidate contextual Mentions: 7
@@ -315,7 +315,7 @@ No Story is listed as directly participating unless a future reviewed presence e
 (曰廙字世將祖覽父正廙髙朗豪率王導/司馬氏譜曰丞娶南陽趙氏女王廙别傳)
     ```
 
-### 王凝之 (`wang-ningzhi`)
+### 王凝之 (`person-004`)
 
 - directly participating Stories: none currently classified; main-text appearance is retained as `mentioned` pending explicit participation review.
 - reviewed linked Stories: 3; reader-ready: 0; candidate links: 0; candidate contextual Mentions: 0
@@ -349,7 +349,7 @@ No Story is listed as directly participating unless a future reviewed presence e
 (問王凝之妻謝氏曰太傅/髙靈已見婦人集載桓玄)
     ```
 
-### 謝道韞 (`xie-daoyun`)
+### 謝道韞 (`person-005`)
 
 - directly participating Stories: none currently classified; main-text appearance is retained as `mentioned` pending explicit participation review.
 - reviewed linked Stories: 1; reader-ready: 0; candidate links: 0; candidate contextual Mentions: 0
@@ -361,7 +361,7 @@ No Story is listed as directly participating unless a future reviewed presence e
 (問王凝之妻謝氏曰太傅/髙靈已見婦人集載桓玄)
     ```
 
-### 謝安 (`xie-an`)
+### 謝安 (`person-006`)
 
 - directly participating Stories: none currently classified; main-text appearance is retained as `mentioned` pending explicit participation review.
 - reviewed linked Stories: 37; reader-ready: 0; candidate links: 0; candidate contextual Mentions: 11
@@ -623,7 +623,7 @@ No Story is listed as directly participating unless a future reviewed presence e
 (忖己德量不及謝安故解揚州以讓安自謂/續晉陽秋曰桓沖本以將相異宜才用不同)
     ```
 
-### 桓溫 (`huan-wen`)
+### 桓溫 (`person-008`)
 
 - directly participating Stories: none currently classified; main-text appearance is retained as `mentioned` pending explicit participation review.
 - reviewed linked Stories: 41; reader-ready: 0; candidate links: 0; candidate contextual Mentions: 0
@@ -854,7 +854,7 @@ No Story is listed as directly participating unless a future reviewed presence e
 (位新蔡王晃首辭引與晞及子綜謀逆有司奏晞等/長不得執權常懷憤慨欲因桓温入朝殺之太宗郎)
     ```
 
-### 劉惔 (`liu-dan`)
+### 劉惔 (`person-009`)
 
 - directly participating Stories: none currently classified; main-text appearance is retained as `mentioned` pending explicit participation review.
 - reviewed linked Stories: 36; reader-ready: 0; candidate links: 0; candidate contextual Mentions: 0
@@ -1124,7 +1124,7 @@ No Story is listed as directly participating unless a future reviewed presence e
 (王濛劉惔共遊新亭濛欲招尚先以問惔曰謝仁祖/明帝文章志曰尚性輕率不拘細行兄葬後徃墓還)
     ```
 
-### 庾亮 (`yu-liang`)
+### 庾亮 (`person-010`)
 
 - directly participating Stories: none currently classified; main-text appearance is retained as `mentioned` pending explicit participation review.
 - reviewed linked Stories: 33; reader-ready: 0; candidate links: 0; candidate contextual Mentions: 0
@@ -1350,7 +1350,7 @@ No Story is listed as directly participating unless a future reviewed presence e
 (嘯神氣甚逸導謂亮曰世將為復識事亮曰正足舒/庾亮遊于石頭㑹廙至爾日迅風飛颿廙倚船樓長)
     ```
 
-### 王敦 (`wang-dun`)
+### 王敦 (`person-011`)
 
 - directly participating Stories: none currently classified; main-text appearance is retained as `mentioned` pending explicit participation review.
 - reviewed linked Stories: 40; reader-ready: 0; candidate links: 0; candidate contextual Mentions: 0
@@ -1641,7 +1641,7 @@ No Story is listed as directly participating unless a future reviewed presence e
 (馬頭𬒳殺因謂曰周家奕世令望而位不至三公/鄧粲晉紀曰王敦參軍有於敦坐樗蒱臨當成都)
     ```
 
-### 袁宏 (`yuan-hong`)
+### 袁宏 (`person-012`)
 
 - directly participating Stories: none currently classified; main-text appearance is retained as `mentioned` pending explicit participation review.
 - reviewed linked Stories: 14; reader-ready: 0; candidate links: 0; candidate contextual Mentions: 0
@@ -1752,7 +1752,7 @@ No Story is listed as directly participating unless a future reviewed presence e
 (袁宏名士傳最後出不依前史以爲鍾毓可謂謬矣/事多詳覈孫盛之徒皆采以著書並云玄距鍾㑹而)
     ```
 
-### 温嶠 (`wen-qiao`)
+### 温嶠 (`person-013`)
 
 - directly participating Stories: none currently classified; main-text appearance is retained as `mentioned` pending explicit participation review.
 - reviewed linked Stories: 20; reader-ready: 0; candidate links: 0; candidate contextual Mentions: 0
@@ -1891,7 +1891,7 @@ No Story is listed as directly participating unless a future reviewed presence e
 (嶠以母亡逼賊不得往臨葬固辭詔曰嶠以/虞預晉書曰元帝即位以温嶠為散騎侍郎)
     ```
 
-### 王濛 (`wang-meng`)
+### 王濛 (`person-014`)
 
 - directly participating Stories: none currently classified; main-text appearance is retained as `mentioned` pending explicit participation review.
 - reviewed linked Stories: 21; reader-ready: 0; candidate links: 0; candidate contextual Mentions: 0
@@ -2007,7 +2007,7 @@ No Story is listed as directly participating unless a future reviewed presence e
 (王濛劉惔共遊新亭濛欲招尚先以問惔曰謝仁祖/明帝文章志曰尚性輕率不拘細行兄葬後徃墓還)
     ```
 
-### 孫晷 (`sun-gui`)
+### 孫晷 (`person-015`)
 
 - directly participating Stories: none currently classified; main-text appearance is retained as `mentioned` pending explicit participation review.
 - reviewed linked Stories: 14; reader-ready: 0; candidate links: 0; candidate contextual Mentions: 0
@@ -2131,7 +2131,7 @@ No Story is listed as directly participating unless a future reviewed presence e
 (箸膩顔挾左傳逐鄭康成自為高足弟/中郎坦之帢㡌也裴子曰林公云文度)
     ```
 
-### 王遐 (`wang-xia`)
+### 王遐 (`person-016`)
 
 - directly participating Stories: none currently classified; main-text appearance is retained as `mentioned` pending explicit participation review.
 - reviewed linked Stories: 6; reader-ready: 0; candidate links: 0; candidate contextual Mentions: 0
@@ -2182,7 +2182,7 @@ No Story is listed as directly participating unless a future reviewed presence e
 (製也初邕避難江南宿於柯亭之館以竹為椽邕仰/同寮桓子野有故長笛傳之耆老云蔡邕伯喈之所)
     ```
 
-### 蘇峻 (`su-jun`)
+### 蘇峻 (`person-017`)
 
 - directly participating Stories: none currently classified; main-text appearance is retained as `mentioned` pending explicit participation review.
 - reviewed linked Stories: 19; reader-ready: 0; candidate links: 0; candidate contextual Mentions: 0
@@ -2373,13 +2373,13 @@ Medium contextual resolutions remain candidate mention evidence in the machine-r
 
 The current supporting 郗璿 link is the only link without a legacy Mention ID; it is backed by the existing explicit Liu Xiaobiao evidence record and is kept visible as `link_basis: explicit_evidence` rather than creating a synthetic Mention.
 
-- 王羲之 (`wang-xizhi`):
+- 王羲之 (`person-001`):
   - `08-shangyu-080` · main_text · `王右軍` · confidence=medium · context_identity_hits=逸少
   - `09-pinzao-028` · main_text · `王右軍` · confidence=medium · context_identity_hits=逸少
   - `14-rongzhi-024` · main_text · `右軍` · confidence=medium · context_identity_hits=王逸少,逸少
-- 郗鑒 (`xi-jian`):
+- 郗鑒 (`person-002`):
   - `06-yaliang-019` · liu_annotation · `太傅` · confidence=medium · context_identity_hits=郗鑒
-- 王導 (`wang-dao`):
+- 王導 (`person-003`):
   - `01-dexing-027` · liu_annotation · `丞相` · confidence=medium · context_identity_hits=王導,茂弘
   - `05-fangzheng-023` · main_text · `丞相` · confidence=medium · context_identity_hits=茂弘
   - `05-fangzheng-023` · main_text · `丞相` · confidence=medium · context_identity_hits=茂弘
@@ -2387,7 +2387,7 @@ The current supporting 郗璿 link is the only link without a legacy Mention ID;
   - `09-pinzao-047` · liu_annotation · `丞相` · confidence=medium · context_identity_hits=王導
   - `18-qiyi-004` · main_text · `王丞相` · confidence=medium · context_identity_hits=茂弘
   - `23-rendan-032` · liu_annotation · `丞相` · confidence=medium · context_identity_hits=王導
-- 謝安 (`xie-an`):
+- 謝安 (`person-006`):
   - `02-yanyu-083` · liu_annotation · `太傅` · confidence=medium · context_identity_hits=謝安
   - `06-yaliang-033` · main_text · `謝太傅` · confidence=medium · context_identity_hits=謝安
   - `06-yaliang-033` · main_text · `太傅` · confidence=medium · context_identity_hits=謝安

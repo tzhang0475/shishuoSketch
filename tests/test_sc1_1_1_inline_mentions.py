@@ -57,7 +57,7 @@ class SC111InlineMentionTests(unittest.TestCase):
         ]
         self.assertEqual(len(alias_segments), 1)
         self.assertEqual(alias_segments[0]["display"]["original"], "王逸少")
-        self.assertEqual(alias_segments[0]["person_id"], "wang-xizhi")
+        self.assertEqual(alias_segments[0]["person_id"], "person-001")
 
     def test_25_paidiao_wang_ningzhi_is_annotation_only_and_clickable_there(self) -> None:
         story = self.story("25-paidiao-026")
@@ -130,7 +130,7 @@ class SC111InlineMentionTests(unittest.TestCase):
         )
         self.assertEqual(segment["display"]["original"], "謝公")
         self.assertEqual(segment["display"]["simplified"], "谢公")
-        self.assertEqual(segment["person_id"], "xie-an")
+        self.assertEqual(segment["person_id"], "person-006")
 
     def test_duplicate_surfaces_use_distinct_anchored_segments(self) -> None:
         story = self.story("05-fangzheng-023")

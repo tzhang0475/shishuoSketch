@@ -50,6 +50,13 @@ def _pair(person_a_id: str, person_b_id: str) -> tuple[str, str]:
 def candidate_id(record: Mapping[str, Any]) -> str:
     """Return an opaque ID from stable semantic fields, never from names."""
 
+    # R3A candidate IDs are analysis identities, not Person IDs.  Once a
+    # candidate is emitted into the curated review layer, keep that opaque ID
+    # frozen across a Person foreign-key migration.
+    explicit = record.get("candidate_id")
+    if isinstance(explicit, str) and explicit:
+        return explicit
+
     payload = {
         key: record.get(key)
         for key in (
@@ -116,8 +123,6 @@ def _sort_candidate(item: Mapping[str, Any]) -> tuple[Any, ...]:
         TIER_ORDER[str(item["review_tier"])],
         -len(item.get("evidence_ids", [])),
         -int(item.get("metrics", {}).get("current_story_count", 0)),
-        str(item["person_a_id"]),
-        str(item["person_b_id"]),
         str(item["candidate_id"]),
     )
 

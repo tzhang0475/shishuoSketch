@@ -30,12 +30,12 @@ JINSHU_MENTIONS_PATH = REPOSITORY_ROOT / "data/mentions/jinshu.json"
 REPORT_PATH = REPOSITORY_ROOT / "content/curated/entities/six-person-pilot.md"
 
 PERSON_DEFINITIONS: tuple[dict[str, Any], ...] = (
-    {"person_id": "wang-xizhi", "canonical_name": "王羲之", "scope_role": "primary"},
-    {"person_id": "xi-jian", "canonical_name": "郗鑒", "scope_role": "primary"},
-    {"person_id": "wang-dao", "canonical_name": "王導", "scope_role": "primary"},
-    {"person_id": "wang-ningzhi", "canonical_name": "王凝之", "scope_role": "primary"},
-    {"person_id": "xie-daoyun", "canonical_name": "謝道韞", "scope_role": "primary"},
-    {"person_id": "xie-an", "canonical_name": "謝安", "scope_role": "primary"},
+    {"person_id": "person-001", "canonical_name": "王羲之", "scope_role": "primary"},
+    {"person_id": "person-002", "canonical_name": "郗鑒", "scope_role": "primary"},
+    {"person_id": "person-003", "canonical_name": "王導", "scope_role": "primary"},
+    {"person_id": "person-004", "canonical_name": "王凝之", "scope_role": "primary"},
+    {"person_id": "person-005", "canonical_name": "謝道韞", "scope_role": "primary"},
+    {"person_id": "person-006", "canonical_name": "謝安", "scope_role": "primary"},
 )
 PERSON_IDS = frozenset(item["person_id"] for item in PERSON_DEFINITIONS)
 
@@ -75,44 +75,44 @@ class AliasSpec:
 
 ALIAS_SPECS: tuple[AliasSpec, ...] = (
     # Direct names and source-backed personal/courtesy spellings.
-    AliasSpec("wang-xizhi-name", "王羲之", "personal_name", ("wang-xizhi",), "exact", "exact_person_name", "wang-xizhi"),
-    AliasSpec("wang-xizhi-wang-yishao", "王逸少", "courtesy_name", ("wang-xizhi",), "exact", "exact_courtesy_name", "wang-xizhi"),
-    AliasSpec("wang-xizhi-wang-youjun", "王右軍", "office_title", ("wang-xizhi",), "contextual", "contextual_title", scan_policy="contextual"),
-    AliasSpec("wang-xizhi-yishao", "逸少", "courtesy_name", ("wang-xizhi",), "exact", "exact_courtesy_name", "wang-xizhi", suppress_if_contained=True),
-    AliasSpec("wang-xizhi-youjun", "右軍", "textual_shorthand", ("wang-xizhi",), "contextual", "contextual_title", scan_policy="contextual", suppress_if_contained=True),
-    AliasSpec("xi-jian-name", "郗鑒", "personal_name", ("xi-jian",), "exact", "exact_person_name", "xi-jian"),
-    AliasSpec("xi-jian-variant-name", "郄鑒", "orthographic_variant", ("xi-jian",), "exact", "orthographic_variant", "xi-jian"),
-    AliasSpec("xi-jian-dao-hui", "道徽", "courtesy_name", ("xi-jian",), "exact", "exact_courtesy_name", "xi-jian", suppress_if_contained=True),
-    AliasSpec("xi-jian-variant-dao-hui", "郄道徽", "orthographic_variant", ("xi-jian",), "exact", "orthographic_variant", "xi-jian"),
-    AliasSpec("xi-jian-taifu", "郗太傅", "office_title", ("xi-jian",), "contextual", "contextual_title", scan_policy="contextual"),
-    AliasSpec("xi-jian-gong", "郗公", "contextual_title", ("xi-jian",), "contextual", "contextual_title", scan_policy="contextual"),
-    AliasSpec("wang-dao-name", "王導", "personal_name", ("wang-dao",), "exact", "exact_person_name", "wang-dao"),
-    AliasSpec("wang-dao-wang-maohong", "王茂弘", "courtesy_name", ("wang-dao",), "exact", "exact_courtesy_name", "wang-dao"),
-    AliasSpec("wang-dao-maohong", "茂弘", "courtesy_name", ("wang-dao",), "exact", "exact_courtesy_name", "wang-dao", suppress_if_contained=True),
-    AliasSpec("wang-dao-chengxiang", "王丞相", "office_title", ("wang-dao",), "contextual", "contextual_title", scan_policy="contextual"),
-    AliasSpec("wang-ningzhi-name", "王凝之", "personal_name", ("wang-ningzhi",), "exact", "exact_person_name", "wang-ningzhi"),
-    AliasSpec("wang-ningzhi-shuping", "叔平", "courtesy_name", ("wang-ningzhi",), "exact", "annotation_context", "wang-ningzhi"),
-    AliasSpec("xie-daoyun-courtesy", "道韞", "courtesy_name", ("xie-daoyun",), "exact", "exact_courtesy_name", "xie-daoyun"),
-    AliasSpec("xie-daoyun-kinship-name", "王凝之妻謝氏", "kinship_reference", ("xie-daoyun",), "exact", "exact_kinship_reference", "xie-daoyun"),
-    AliasSpec("xie-an-name", "謝安", "personal_name", ("xie-an",), "exact", "exact_person_name", "xie-an", suppress_if_contained=True),
-    AliasSpec("xie-an-xie-anshi", "謝安石", "courtesy_name", ("xie-an",), "exact", "exact_courtesy_name", "xie-an"),
-    AliasSpec("xie-an-anshi", "安石", "courtesy_name", ("xie-an",), "exact", "exact_courtesy_name", "xie-an", suppress_if_contained=True),
-    AliasSpec("xie-an-taifu", "謝太傅", "office_title", ("xie-an",), "contextual", "contextual_title", scan_policy="contextual"),
+    AliasSpec("wang-xizhi-name", "王羲之", "personal_name", ("person-001",), "exact", "exact_person_name", "person-001"),
+    AliasSpec("wang-xizhi-wang-yishao", "王逸少", "courtesy_name", ("person-001",), "exact", "exact_courtesy_name", "person-001"),
+    AliasSpec("wang-xizhi-wang-youjun", "王右軍", "office_title", ("person-001",), "contextual", "contextual_title", scan_policy="contextual"),
+    AliasSpec("wang-xizhi-yishao", "逸少", "courtesy_name", ("person-001",), "exact", "exact_courtesy_name", "person-001", suppress_if_contained=True),
+    AliasSpec("wang-xizhi-youjun", "右軍", "textual_shorthand", ("person-001",), "contextual", "contextual_title", scan_policy="contextual", suppress_if_contained=True),
+    AliasSpec("xi-jian-name", "郗鑒", "personal_name", ("person-002",), "exact", "exact_person_name", "person-002"),
+    AliasSpec("xi-jian-variant-name", "郄鑒", "orthographic_variant", ("person-002",), "exact", "orthographic_variant", "person-002"),
+    AliasSpec("xi-jian-dao-hui", "道徽", "courtesy_name", ("person-002",), "exact", "exact_courtesy_name", "person-002", suppress_if_contained=True),
+    AliasSpec("xi-jian-variant-dao-hui", "郄道徽", "orthographic_variant", ("person-002",), "exact", "orthographic_variant", "person-002"),
+    AliasSpec("xi-jian-taifu", "郗太傅", "office_title", ("person-002",), "contextual", "contextual_title", scan_policy="contextual"),
+    AliasSpec("xi-jian-gong", "郗公", "contextual_title", ("person-002",), "contextual", "contextual_title", scan_policy="contextual"),
+    AliasSpec("wang-dao-name", "王導", "personal_name", ("person-003",), "exact", "exact_person_name", "person-003"),
+    AliasSpec("wang-dao-wang-maohong", "王茂弘", "courtesy_name", ("person-003",), "exact", "exact_courtesy_name", "person-003"),
+    AliasSpec("wang-dao-maohong", "茂弘", "courtesy_name", ("person-003",), "exact", "exact_courtesy_name", "person-003", suppress_if_contained=True),
+    AliasSpec("wang-dao-chengxiang", "王丞相", "office_title", ("person-003",), "contextual", "contextual_title", scan_policy="contextual"),
+    AliasSpec("wang-ningzhi-name", "王凝之", "personal_name", ("person-004",), "exact", "exact_person_name", "person-004"),
+    AliasSpec("wang-ningzhi-shuping", "叔平", "courtesy_name", ("person-004",), "exact", "annotation_context", "person-004"),
+    AliasSpec("xie-daoyun-courtesy", "道韞", "courtesy_name", ("person-005",), "exact", "exact_courtesy_name", "person-005"),
+    AliasSpec("xie-daoyun-kinship-name", "王凝之妻謝氏", "kinship_reference", ("person-005",), "exact", "exact_kinship_reference", "person-005"),
+    AliasSpec("xie-an-name", "謝安", "personal_name", ("person-006",), "exact", "exact_person_name", "person-006", suppress_if_contained=True),
+    AliasSpec("xie-an-xie-anshi", "謝安石", "courtesy_name", ("person-006",), "exact", "exact_courtesy_name", "person-006"),
+    AliasSpec("xie-an-anshi", "安石", "courtesy_name", ("person-006",), "exact", "exact_courtesy_name", "person-006", suppress_if_contained=True),
+    AliasSpec("xie-an-taifu", "謝太傅", "office_title", ("person-006",), "contextual", "contextual_title", scan_policy="contextual"),
     # Contextual and potentially shared forms.  These never resolve without
     # a strong identity cue in the same section/unit.
-    AliasSpec("shared-wang-gong", "王公", "contextual_title", ("wang-dao", "wang-xizhi"), "ambiguous", "contextual_title", scan_policy="all"),
-    AliasSpec("shared-xie-gong", "謝公", "contextual_title", ("xie-an",), "ambiguous", "contextual_title", scan_policy="all"),
-    AliasSpec("generic-taifu", "太傅", "office_title", ("xie-an", "xi-jian"), "ambiguous", "contextual_title", scan_policy="contextual", suppress_if_contained=True),
-    AliasSpec("generic-chengxiang", "丞相", "office_title", ("wang-dao",), "ambiguous", "contextual_title", scan_policy="contextual", suppress_if_contained=True),
+    AliasSpec("shared-wang-gong", "王公", "contextual_title", ("person-003", "person-001"), "ambiguous", "contextual_title", scan_policy="all"),
+    AliasSpec("shared-xie-gong", "謝公", "contextual_title", ("person-006",), "ambiguous", "contextual_title", scan_policy="all"),
+    AliasSpec("generic-taifu", "太傅", "office_title", ("person-006", "person-002"), "ambiguous", "contextual_title", scan_policy="contextual", suppress_if_contained=True),
+    AliasSpec("generic-chengxiang", "丞相", "office_title", ("person-003",), "ambiguous", "contextual_title", scan_policy="contextual", suppress_if_contained=True),
 )
 SPEC_BY_SURFACE = {spec.surface: spec for spec in ALIAS_SPECS}
 STRONG_BY_PERSON: dict[str, tuple[str, ...]] = {
-    "wang-xizhi": ("王羲之", "王逸少", "逸少"),
-    "xi-jian": ("郗鑒", "郄鑒", "郄道徽", "道徽"),
-    "wang-dao": ("王導", "王茂弘", "茂弘"),
-    "wang-ningzhi": ("王凝之", "叔平"),
-    "xie-daoyun": ("道韞", "王凝之妻謝氏"),
-    "xie-an": ("謝安", "謝安石", "安石"),
+    "person-001": ("王羲之", "王逸少", "逸少"),
+    "person-002": ("郗鑒", "郄鑒", "郄道徽", "道徽"),
+    "person-003": ("王導", "王茂弘", "茂弘"),
+    "person-004": ("王凝之", "叔平"),
+    "person-005": ("道韞", "王凝之妻謝氏"),
+    "person-006": ("謝安", "謝安石", "安石"),
 }
 CONTEXT_SURFACES = frozenset(
     spec.surface for spec in ALIAS_SPECS if spec.scan_policy in {"contextual", "all"}
@@ -435,12 +435,12 @@ def biography_scope(person_id: str | None, metadata: Mapping[str, Any]) -> str:
     title = str(metadata.get("title") or "")
     unit_id = str(metadata.get("unit_id") or "")
     own_unit_ids = {
-        "wang-xizhi": {"080-liezhuan-001"},
-        "xi-jian": {"067-liezhuan-002"},
-        "wang-dao": {"065-liezhuan-001"},
-        "xie-an": {"079-liezhuan-002"},
-        "xie-daoyun": {"096-liezhuan-016"},
-        "wang-ningzhi": set(),
+        "person-001": {"080-liezhuan-001"},
+        "person-002": {"067-liezhuan-002"},
+        "person-003": {"065-liezhuan-001"},
+        "person-006": {"079-liezhuan-002"},
+        "person-005": {"096-liezhuan-016"},
+        "person-004": set(),
     }
     if person_id and unit_id in own_unit_ids.get(person_id, set()):
         return "own_biography"
@@ -459,12 +459,12 @@ def read_jinshu_mentions(root: Path = JINSHU_UNITS) -> list[dict[str, Any]]:
         section_text = text.split("## Original source (exact)\n\n", 1)[1]
         resolution_text = mask_markup_comments(section_text)
         unit_heading_identity = {
-            "王羲之": "wang-xizhi",
-            "郗鑒": "xi-jian",
-            "郄鑒": "xi-jian",
-            "王導": "wang-dao",
-            "謝安": "xie-an",
-            "王凝之妻謝氏": "xie-daoyun",
+            "王羲之": "person-001",
+            "郗鑒": "person-002",
+            "郄鑒": "person-002",
+            "王導": "person-003",
+            "謝安": "person-006",
+            "王凝之妻謝氏": "person-005",
         }.get(str(metadata.get("title") or ""))
         for match_index, (start, end, spec) in enumerate(match_specs(resolution_text, source_kind="jinshu"), start=1):
             mention = build_mention(
@@ -662,7 +662,10 @@ def report_text(aliases: Sequence[Mapping[str, Any]], shishuo: Sequence[Mapping[
     else:
         lines.append("None.")
     lines.extend(["", "## Scope and non-actions", "", "- Six primary person IDs and the explicitly registered R1 supporting bridge `person-007` are present in `data/people.json`.", "- Source texts under `content/processed/` were read only; no source text was modified.", "- Generic title-only forms are not treated as resolved identities without same-section evidence.", "- No people outside the six-person pilot plus this one R1 bridge are emitted, and no relationships are extracted by this pilot builder.", ""])
-    return "\n".join(lines)
+    # Keep the generated audit report byte-clean.  Source snippets may carry
+    # padding from the processed witness, but that padding is not meaningful
+    # in this Markdown projection.
+    return "\n".join(line.rstrip() for line in lines)
 
 
 def write_json(path: Path, value: Any) -> None:
@@ -756,10 +759,42 @@ def build_outputs(
     return outputs
 
 
+def refresh_existing_report(*, root: Path = REPOSITORY_ROOT) -> str:
+    """Refresh only the legacy pilot report from the current structured data.
+
+    After P3B materialization the bootstrap writer must remain fail-closed for
+    registry writes, but its report is still useful as a scope audit.  This
+    narrow mode reads the current Alias/Mention projections and writes only
+    the report, so it cannot erase the expanded Person registry.
+    """
+
+    aliases_document = json.loads((root / ALIASES_PATH.relative_to(REPOSITORY_ROOT)).read_text(encoding="utf-8"))
+    shishuo_document = json.loads((root / SHISHUO_MENTIONS_PATH.relative_to(REPOSITORY_ROOT)).read_text(encoding="utf-8"))
+    jinshu_document = json.loads((root / JINSHU_MENTIONS_PATH.relative_to(REPOSITORY_ROOT)).read_text(encoding="utf-8"))
+    report = report_text(
+        aliases_document["aliases"],
+        shishuo_document["mentions"],
+        jinshu_document["mentions"],
+    )
+    report_path = root / REPORT_PATH.relative_to(REPOSITORY_ROOT)
+    report_path.parent.mkdir(parents=True, exist_ok=True)
+    report_path.write_text(report, encoding="utf-8", newline="\n")
+    return report
+
+
 def main(argv: Sequence[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--root", type=Path, default=REPOSITORY_ROOT)
+    parser.add_argument(
+        "--report-only",
+        action="store_true",
+        help="refresh the legacy report without writing bootstrap data",
+    )
     args = parser.parse_args(argv)
+    if args.report_only:
+        report = refresh_existing_report(root=args.root)
+        print(f"refreshed legacy pilot report: {len(report.splitlines())} lines")
+        return 0
     outputs = build_outputs(root=args.root)
     print(f"people: {len(outputs['people']['people'])}")
     print(f"aliases: {len(outputs['aliases']['aliases'])}")

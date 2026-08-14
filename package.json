@@ -13,6 +13,7 @@
     "build:person-expansion": "python3 scripts/build_person_expansion_candidates.py",
     "build:person-relation-candidates-r3": "python3 scripts/build_person_relation_candidates_r3.py",
     "build:person-expansion-wave-1": "python3 scripts/materialize_person_expansion.py",
+    "validate:person-ids": "python3 scripts/validate_person_ids.py",
     "validate:person-identity": "python3 scripts/validate_person_identity_candidates.py",
     "validate:person-sketch": "python3 scripts/validate_person_sketch.py --bundle",
     "validate:person-expansion": "python3 scripts/validate_person_expansion_candidates.py",
@@ -29,7 +30,7 @@
     "typecheck": "tsc -p site/tsconfig.json --noEmit",
     "dev": "vite --config site/vite.config.ts",
     "build:site": "vite build --config site/vite.config.ts",
-    "build": "npm run build:sample && npm run build:sc1 && npm run validate && npm run validate:sc1 && npm run validate:story-scene-contexts && npm run validate:person-relation-candidates-r3 && npm run typecheck && vite build --config site/vite.config.ts",
+    "build": "npm run build:sample && npm run build:sc1 && npm run validate:person-ids && npm run validate && npm run validate:sc1 && npm run validate:story-scene-contexts && npm run validate:person-relation-candidates-r3 && npm run typecheck && vite build --config site/vite.config.ts",
     "test": "python3 -m unittest discover -s tests -p 'test*.py'"
   },
   "dependencies": {

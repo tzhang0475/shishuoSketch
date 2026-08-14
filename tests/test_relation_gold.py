@@ -166,7 +166,7 @@ class RelationGoldPilotTests(unittest.TestCase):
     def test_derived_edge_cannot_duplicate_an_atomic_direct_edge(self) -> None:
         def mutate(records):
             relation = next(item for item in records["relations"] if item["id"] == "relation-001")
-            relation["subject_id"] = "xi-jian"
+            relation["subject_id"] = "person-002"
             relation["object_id"] = "person-007"
             relation["relation_type"] = "kinship"
             relation["relation_subtype"] = "parent_child"

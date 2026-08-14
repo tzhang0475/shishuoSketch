@@ -16,9 +16,9 @@ from pathlib import Path
 from typing import Any, Iterable
 
 try:
-    from .build_six_person_pilot import markdown_body, parse_frontmatter
+    from .build_six_person_pilot import PERSON_DEFINITIONS, markdown_body, parse_frontmatter
 except ImportError:  # direct execution: python scripts/build_person_story_index.py
-    from build_six_person_pilot import markdown_body, parse_frontmatter
+    from build_six_person_pilot import PERSON_DEFINITIONS, markdown_body, parse_frontmatter
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -32,14 +32,7 @@ LINKS_PATH = ROOT / "data/derived/person-story-links.json"
 INDEX_PATH = ROOT / "data/derived/person-story-index.json"
 REPORT_PATH = ROOT / "docs/person-story-pilot.md"
 
-PRIMARY_PERSON_IDS = {
-    "wang-xizhi",
-    "xi-jian",
-    "wang-dao",
-    "wang-ningzhi",
-    "xie-daoyun",
-    "xie-an",
-}
+PRIMARY_PERSON_IDS = {item["person_id"] for item in PERSON_DEFINITIONS}
 
 
 def read_json(path: Path) -> Any:

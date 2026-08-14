@@ -52,6 +52,28 @@ PORTABLE_SOURCE_AVAILABILITIES = {
 }
 
 
+def person_endpoint_order_key(root: Path | None, person_id: str) -> str:
+    """Keep legacy symmetric-edge orientation across the P-ID1 migration.
+
+    Opaque IDs are not lexical identity labels.  Existing symmetric spouse
+    records were canonically oriented under the pre-migration IDs, so their
+    endpoint order is checked through the committed migration manifest while
+    the stored endpoints and roles remain untouched.
+    """
+
+    if root is not None:
+        manifest_path = root / "data/migrations/person-id-canonicalization-v1.json"
+        if manifest_path.is_file():
+            try:
+                document = read_json(manifest_path)
+                for record in document.get("records", []):
+                    if record.get("new_person_id") == person_id:
+                        return str(record.get("old_person_id"))
+            except (OSError, ValueError):
+                pass
+    return person_id
+
+
 def read_json(path: Path) -> Any:
     try:
         return json.loads(path.read_text(encoding="utf-8"))
@@ -687,7 +709,11 @@ def validate_relation_records(
                 )
 
             if subtype == "spouse":
-                if not isinstance(subject_id, str) or not isinstance(object_id, str) or subject_id >= object_id:
+                if (
+                    not isinstance(subject_id, str)
+                    or not isinstance(object_id, str)
+                    or person_endpoint_order_key(root, subject_id) >= person_endpoint_order_key(root, object_id)
+                ):
                     errors.append(
                         f"Symmetric spouse Relation {relation_id} must use canonical endpoint order subject_id < object_id"
                     )

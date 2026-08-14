@@ -92,42 +92,42 @@
 ## 已审阅关系再发现控制
 
 - `relation-001`：王羲之 × 郗鑒 · 婚姻亲属
-- `relation-gold-001`：王導 × 王羲之 · 從父與從子
-- `relation-gold-002`：王凝之 × 王羲之 · 父與子
+- `relation-gold-001`：王羲之 × 王導 · 從父與從子
+- `relation-gold-002`：王羲之 × 王凝之 · 父與子
 - `relation-gold-003`：王凝之 × 謝道韞 · 夫妻
-- `relation-gold-004`：謝安 × 謝道韞 · 叔父與姪女
-- `relation-gold-005`：郗璿 × 王羲之 · 夫妻
-- `relation-gold-006`：郗璿 × 郗鑒 · 父女
+- `relation-gold-004`：謝道韞 × 謝安 · 叔父與姪女
+- `relation-gold-005`：王羲之 × 郗璿 · 夫妻
+- `relation-gold-006`：郗鑒 × 郗璿 · 父女
 
 ## Scene / Relation 交叉审计
 
 Scene 只解释本则人物为何在此相遇；只有来源独立明确写出长期、社会或制度关系，才进入上面的候选。
 
-- `02-yanyu-069`：劉惔 × 王羲之 — 仅场景相遇，未生成 Relation 候选。
-- `05-fangzheng-055`：桓溫 × 謝安 — 仅场景相遇，未生成 Relation 候选。
-- `06-yaliang-027`：桓溫 × 謝安 — 仅场景相遇，未生成 Relation 候选。
-- `06-yaliang-029`：桓溫 × 謝安 — 仅场景相遇，未生成 Relation 候选。
-- `08-shangyu-077`：劉惔 × 王羲之 — 仅场景相遇，未生成 Relation 候选。
-- `08-shangyu-077`：劉惔 × 謝安 — 仅场景相遇，未生成 Relation 候选。
+- `02-yanyu-069`：王羲之 × 劉惔 — 仅场景相遇，未生成 Relation 候选。
+- `05-fangzheng-055`：謝安 × 桓溫 — 仅场景相遇，未生成 Relation 候选。
+- `06-yaliang-027`：謝安 × 桓溫 — 仅场景相遇，未生成 Relation 候选。
+- `06-yaliang-029`：謝安 × 桓溫 — 仅场景相遇，未生成 Relation 候选。
 - `08-shangyu-077`：王羲之 × 謝安 — 仅场景相遇，未生成 Relation 候选。
-- `19-xianyuan-026`：王凝之 × 謝安 — 仅场景相遇，未生成 Relation 候选。
-- `19-xianyuan-026`：王羲之 × 謝安 — 仅场景相遇，未生成 Relation 候选。
+- `08-shangyu-077`：王羲之 × 劉惔 — 仅场景相遇，未生成 Relation 候选。
+- `08-shangyu-077`：謝安 × 劉惔 — 仅场景相遇，未生成 Relation 候选。
 - `19-xianyuan-026`：王羲之 × 謝道韞 — 仅场景相遇，未生成 Relation 候选。
+- `19-xianyuan-026`：王羲之 × 謝安 — 仅场景相遇，未生成 Relation 候选。
+- `19-xianyuan-026`：王凝之 × 謝安 — 仅场景相遇，未生成 Relation 候选。
 
 ## 仅共现审计（不是关系）
 
-- 桓溫 × 孫晷：共享 1 则 Story（06-yaliang-029）。
-- 桓溫 × 王導：共享 1 则 Story（06-yaliang-029）。
-- 桓溫 × 謝安：共享 1 则 Story（06-yaliang-029）。
-- 劉惔 × 王濛：共享 1 则 Story（05-fangzheng-055）。
-- 劉惔 × 王遐：共享 1 则 Story（05-fangzheng-055）。
-- 劉惔 × 王羲之：共享 1 则 Story（02-yanyu-069）。
-- 劉惔 × 謝安：共享 1 则 Story（05-fangzheng-055）。
-- 孫晷 × 王導：共享 1 则 Story（06-yaliang-029）。
-- 孫晷 × 謝安：共享 1 则 Story（06-yaliang-029）。
+- 王羲之 × 劉惔：共享 1 则 Story（02-yanyu-069）。
 - 王導 × 謝安：共享 1 则 Story（06-yaliang-029）。
-- 王濛 × 王遐：共享 1 则 Story（05-fangzheng-055）。
-- 王濛 × 謝安：共享 1 则 Story（05-fangzheng-055）。
+- 王導 × 桓溫：共享 1 则 Story（06-yaliang-029）。
+- 王導 × 孫晷：共享 1 则 Story（06-yaliang-029）。
+- 王凝之 × 謝安：共享 1 则 Story（25-paidiao-026）。
+- 謝安 × 桓溫：共享 1 则 Story（06-yaliang-029）。
+- 謝安 × 劉惔：共享 1 则 Story（05-fangzheng-055）。
+- 謝安 × 王濛：共享 1 则 Story（05-fangzheng-055）。
+- 謝安 × 孫晷：共享 1 则 Story（06-yaliang-029）。
+- 謝安 × 王遐：共享 1 则 Story（05-fangzheng-055）。
+- 桓溫 × 孫晷：共享 1 则 Story（06-yaliang-029）。
+- 劉惔 × 王濛：共享 1 则 Story（05-fangzheng-055）。
 
 ## 下一步
 

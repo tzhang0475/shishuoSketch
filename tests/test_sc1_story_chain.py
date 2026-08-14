@@ -147,12 +147,12 @@ class SC1StoryChainTests(unittest.TestCase):
 
     def test_person_story_projection_uses_sc0_links_and_separates_annotation_only(self) -> None:
         refs = {item["person_id"]: item for item in self.bundle["story_chain"]["person_story_refs"]}
-        self.assertEqual(refs["wang-xizhi"]["story_ids"], [
+        self.assertEqual(refs["person-001"]["story_ids"], [
             "02-yanyu-069", "04-wenxue-036", "06-yaliang-019", "19-xianyuan-026",
         ])
         self.assertEqual(refs["person-007"]["main_text_story_ids"], [])
         self.assertEqual(refs["person-007"]["liu_annotation_only_story_ids"], ["06-yaliang-019"])
-        self.assertIn("25-paidiao-026", refs["xie-daoyun"]["liu_annotation_only_story_ids"])
+        self.assertIn("25-paidiao-026", refs["person-005"]["liu_annotation_only_story_ids"])
 
     def test_shared_wp1_person_relation_source_records_are_unchanged(self) -> None:
         # P3B intentionally extends the SC1 Person projection.  The WP1

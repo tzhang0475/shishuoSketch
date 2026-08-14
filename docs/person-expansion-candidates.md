@@ -187,15 +187,15 @@ These are review clusters, not ranked Persons. Frequency alone does not establis
 
 | Surface | Mentions | Stories | Existing candidate IDs | Reason |
 | --- | ---: | ---: | --- | --- |
-| 謝公 | 76 | 61 | xie-an | unresolved_scoped_identity |
-| 王丞相 | 48 | 45 | wang-dao | unresolved_scoped_identity |
-| 王公 | 42 | 29 | wang-dao, wang-xizhi | unresolved_scoped_identity |
-| 王右軍 | 28 | 28 | wang-xizhi | unresolved_scoped_identity |
-| 謝太傅 | 28 | 28 | xie-an | unresolved_scoped_identity |
-| 右軍 | 23 | 14 | wang-xizhi | unresolved_scoped_identity |
-| 丞相 | 22 | 14 | wang-dao | unresolved_scoped_identity |
-| 太傅 | 14 | 10 | xi-jian, xie-an | unresolved_scoped_identity |
-| 郗公 | 8 | 5 | xi-jian | unresolved_scoped_identity |
+| 謝公 | 76 | 61 | person-006 | unresolved_scoped_identity |
+| 王丞相 | 48 | 45 | person-003 | unresolved_scoped_identity |
+| 王公 | 42 | 29 | person-001, person-003 | unresolved_scoped_identity |
+| 王右軍 | 28 | 28 | person-001 | unresolved_scoped_identity |
+| 謝太傅 | 28 | 28 | person-006 | unresolved_scoped_identity |
+| 右軍 | 23 | 14 | person-001 | unresolved_scoped_identity |
+| 丞相 | 22 | 14 | person-003 | unresolved_scoped_identity |
+| 太傅 | 14 | 10 | person-002, person-006 | unresolved_scoped_identity |
+| 郗公 | 8 | 5 | person-002 | unresolved_scoped_identity |
 
 ## Recommended P3B wave
 

@@ -209,9 +209,9 @@
 ## 06-yaliang-019 · 雅量第六
 
 - selection_status: `gold_anchor`
-- linked Persons: 郗璿、王羲之、郗鑒
+- linked Persons: 王羲之、郗鑒、郗璿
 - main-text Persons: 王羲之
-- Liu-annotation-only Persons: 郗璿、郗鑒
+- Liu-annotation-only Persons: 郗鑒、郗璿
 - selection reasons: existing_reviewed_anchor, main_text_person_presence, multiple_resolved_network_persons, existing_p1a_candidate
 - punctuation: `reviewed` / `human_reviewed`
 - exact_transfer: `False`
@@ -315,8 +315,8 @@
 ## 19-xianyuan-026 · 賢媛第十九
 
 - selection_status: `candidate_for_review`
-- linked Persons: 王凝之、王羲之
-- main-text Persons: 王凝之、王羲之
+- linked Persons: 王羲之、王凝之
+- main-text Persons: 王羲之、王凝之
 - Liu-annotation-only Persons: （无）
 - selection reasons: multi_person_main_text_bridge, main_text_person_presence, multiple_resolved_network_persons, existing_p1a_candidate
 - punctuation: `candidate` / `reference_candidate`
@@ -337,7 +337,7 @@
 ## 25-paidiao-026 · 排調第二十五
 
 - selection_status: `candidate_for_review`
-- linked Persons: 王凝之、謝安、謝道韞
+- linked Persons: 王凝之、謝道韞、謝安
 - main-text Persons: 謝安
 - Liu-annotation-only Persons: 王凝之、謝道韞
 - selection reasons: main_text_person_presence, multiple_resolved_network_persons, existing_p1a_candidate

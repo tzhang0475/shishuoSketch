@@ -61,22 +61,22 @@ class R2RelationExplorerDataTests(unittest.TestCase):
         path = [self.relations[relation_id] for relation_id in derived["derived_from_relation_ids"]]
         self.assertEqual(
             [(relation["subject_id"], relation["object_id"]) for relation in path],
-            [("xi-jian", "person-007"), ("person-007", "wang-xizhi")],
+            [("person-002", "person-007"), ("person-007", "person-001")],
         )
         self.assertEqual(derived["evidence_ids"], [])
 
     def test_perspective_roles_are_counterpart_roles(self) -> None:
         self.assertEqual(
-            dict(self.direct_perspectives("wang-xizhi")),
-            {"wang-dao": "從伯", "wang-ningzhi": "子", "person-007": "配偶"},
+            dict(self.direct_perspectives("person-001")),
+            {"person-003": "從伯", "person-004": "子", "person-007": "配偶"},
         )
         self.assertEqual(
-            dict(self.direct_perspectives("wang-ningzhi")),
-            {"wang-xizhi": "父", "xie-daoyun": "配偶"},
+            dict(self.direct_perspectives("person-004")),
+            {"person-001": "父", "person-005": "配偶"},
         )
         self.assertEqual(
             dict(self.direct_perspectives("person-007")),
-            {"wang-xizhi": "配偶", "xi-jian": "父"},
+            {"person-001": "配偶", "person-002": "父"},
         )
 
     def test_all_relation_endpoints_and_supporting_person_resolve(self) -> None:
@@ -124,10 +124,10 @@ class R2RelationExplorerDataTests(unittest.TestCase):
         self.assertEqual(direct, [])
 
     def test_navigation_history_is_local_and_reversible(self) -> None:
-        history = ["wang-xizhi"]
+        history = ["person-001"]
         history = history + ["person-007"]
-        history = history + ["xi-jian"]
-        self.assertEqual(history[:-1], ["wang-xizhi", "person-007"])
+        history = history + ["person-002"]
+        self.assertEqual(history[:-1], ["person-001", "person-007"])
         self.assertEqual(history[-2], "person-007")
 
     def test_reader_display_quotes_hide_machine_comments(self) -> None:

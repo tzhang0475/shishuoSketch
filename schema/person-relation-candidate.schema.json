@@ -21,12 +21,13 @@
       "type": "object",
       "additionalProperties": false,
       "required": [
-        "person_a_id", "person_b_id", "proposed_relation_class", "proposed_role_a",
+        "candidate_id", "person_a_id", "person_b_id", "proposed_relation_class", "proposed_role_a",
         "proposed_role_b", "relation_scope", "source_entry_ids", "source_unit_ids",
         "evidence_ids", "assertion_status", "review_status", "discovery_basis",
         "discovery_note", "risk_flags"
       ],
       "properties": {
+        "candidate_id": {"type": "string", "pattern": "^r3-candidate-[0-9a-f]{20}$"},
         "person_a_id": {"$ref": "#/$defs/person_id"},
         "person_b_id": {"$ref": "#/$defs/person_id"},
         "proposed_relation_class": {"enum": ["kinship", "marriage", "service_institutional", "social_intellectual", "political_counterposition", "other_explicit"]},

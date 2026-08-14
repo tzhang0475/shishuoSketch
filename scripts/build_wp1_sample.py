@@ -18,14 +18,14 @@ from typing import Any
 from opencc import OpenCC
 
 try:
-    from .build_six_person_pilot import markdown_body, parse_frontmatter
+    from .build_six_person_pilot import PERSON_DEFINITIONS, markdown_body, parse_frontmatter
     from .reading_layers import (
         PUNCTUATION_RELATIVE_PATH,
         build_display_reading,
         validate_punctuation_round_trip,
     )
 except ImportError:  # direct execution: python scripts/build_wp1_sample.py
-    from build_six_person_pilot import markdown_body, parse_frontmatter
+    from build_six_person_pilot import PERSON_DEFINITIONS, markdown_body, parse_frontmatter
     from reading_layers import (
         PUNCTUATION_RELATIVE_PATH,
         build_display_reading,
@@ -43,14 +43,7 @@ DERIVED_BUNDLE_PATH = ROOT / "data/derived/wp1-site.json"
 VITE_BUNDLE_PATH = ROOT / "site/src/generated/wp1-site.json"
 P3B_EVIDENCE_PREFIX = "evidence-p3b-wave-1-"
 
-TARGET_PERSON_IDS = (
-    "wang-xizhi",
-    "xi-jian",
-    "wang-dao",
-    "wang-ningzhi",
-    "xie-daoyun",
-    "xie-an",
-)
+TARGET_PERSON_IDS = tuple(item["person_id"] for item in PERSON_DEFINITIONS)
 
 JINSHU_UNIT_PATHS = {
     "065-liezhuan-001": "content/processed/jinshu/units/liezhuan/065-liezhuan-001.md",
@@ -464,10 +457,10 @@ def main() -> int:
         )
 
     direct_jinshu_evidence = {
-        "wang-dao": ["evidence-004"],
-        "wang-ningzhi": ["evidence-005"],
-        "xie-daoyun": ["evidence-005"],
-        "xie-an": ["evidence-006"],
+        "person-003": ["evidence-004"],
+        "person-004": ["evidence-005"],
+        "person-005": ["evidence-005"],
+        "person-006": ["evidence-006"],
     }
     sample_people: list[dict[str, Any]] = []
     for person_id in TARGET_PERSON_IDS:
@@ -529,8 +522,8 @@ def main() -> int:
 
     relation = {
         "id": "relation-001",
-        "subject_id": "xi-jian",
-        "object_id": "wang-xizhi",
+        "subject_id": "person-002",
+        "object_id": "person-001",
         "relation_type": "kinship",
         "label": "婚姻亲属",
         "story_ids": [ENTRY_ID],
@@ -546,8 +539,8 @@ def main() -> int:
     r1_relations = [
         {
             "id": "relation-gold-001",
-            "subject_id": "wang-dao",
-            "object_id": "wang-xizhi",
+            "subject_id": "person-003",
+            "object_id": "person-001",
             "relation_type": "kinship",
             "relation_subtype": "collateral_kinship",
             "role_a": "從伯",
@@ -565,8 +558,8 @@ def main() -> int:
         },
         {
             "id": "relation-gold-002",
-            "subject_id": "wang-xizhi",
-            "object_id": "wang-ningzhi",
+            "subject_id": "person-001",
+            "object_id": "person-004",
             "relation_type": "kinship",
             "relation_subtype": "parent_child",
             "role_a": "父",
@@ -584,8 +577,8 @@ def main() -> int:
         },
         {
             "id": "relation-gold-003",
-            "subject_id": "wang-ningzhi",
-            "object_id": "xie-daoyun",
+            "subject_id": "person-004",
+            "object_id": "person-005",
             "relation_type": "marriage",
             "relation_subtype": "spouse",
             "role_a": "配偶",
@@ -603,8 +596,8 @@ def main() -> int:
         },
         {
             "id": "relation-gold-004",
-            "subject_id": "xie-an",
-            "object_id": "xie-daoyun",
+            "subject_id": "person-006",
+            "object_id": "person-005",
             "relation_type": "kinship",
             "relation_subtype": "uncle_niece",
             "role_a": "叔父",
@@ -623,7 +616,7 @@ def main() -> int:
         {
             "id": "relation-gold-005",
             "subject_id": r1_supporting_person_id,
-            "object_id": "wang-xizhi",
+            "object_id": "person-001",
             "relation_type": "marriage",
             "relation_subtype": "spouse",
             "role_a": "配偶",
@@ -641,7 +634,7 @@ def main() -> int:
         },
         {
             "id": "relation-gold-006",
-            "subject_id": "xi-jian",
+            "subject_id": "person-002",
             "object_id": r1_supporting_person_id,
             "relation_type": "kinship",
             "relation_subtype": "parent_child",

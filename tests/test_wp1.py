@@ -106,9 +106,9 @@ class WP1Tests(unittest.TestCase):
                 self.assertEqual(display[field]["simplified"], converter.convert(source[field]))
 
         # 郗/郄 remain textual distinctions; this layer only converts 鑒.
-        self.assertEqual(reading["person_display"]["xi-jian"]["name"]["original"], "郗鑒")
-        self.assertEqual(reading["person_display"]["xi-jian"]["name"]["simplified"], "郗鉴")
-        self.assertNotIn("郄", reading["person_display"]["xi-jian"]["name"]["simplified"])
+        self.assertEqual(reading["person_display"]["person-002"]["name"]["original"], "郗鑒")
+        self.assertEqual(reading["person_display"]["person-002"]["name"]["simplified"], "郗鉴")
+        self.assertNotIn("郄", reading["person_display"]["person-002"]["name"]["simplified"])
 
     def _punctuation_record(self) -> tuple[dict[str, object], dict[str, str]]:
         document = json.loads(

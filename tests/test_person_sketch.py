@@ -32,7 +32,7 @@ class PersonSketchTests(unittest.TestCase):
         self.assertEqual(validate_bundle(ROOT), [])
 
     def test_wang_xizhi_aliases_are_structured_and_ordered(self) -> None:
-        sketch = self.bundle["person_sketches"]["wang-xizhi"]
+        sketch = self.bundle["person_sketches"]["person-001"]
         self.assertGreaterEqual(len(sketch["aliases"]), 4)
         self.assertEqual(
             [item["surface"]["original"] for item in sketch["aliases"][:4]],
@@ -42,7 +42,7 @@ class PersonSketchTests(unittest.TestCase):
         self.assertFalse("、" in sketch["identity"]["canonical_name"]["original"])
 
     def test_contextual_aliases_are_not_projected_as_exact(self) -> None:
-        for person_id in ("xie-an", "xi-jian", "wang-xizhi"):
+        for person_id in ("person-006", "person-002", "person-001"):
             rows = self.bundle["person_sketches"][person_id]["aliases"]
             for alias in rows:
                 if alias["alias_type"] in {"office_title", "contextual_title", "textual_shorthand"}:

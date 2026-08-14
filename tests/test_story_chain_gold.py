@@ -66,11 +66,11 @@ class StoryChainGoldTests(unittest.TestCase):
 
     def test_annotation_only_presence_is_not_promoted_to_main_text(self) -> None:
         anchor = next(item for item in self.chain["stories"] if item["entry_id"] == "06-yaliang-019")
-        self.assertEqual(anchor["main_text_person_ids"], ["wang-xizhi"])
-        self.assertEqual(set(anchor["liu_annotation_only_person_ids"]), {"person-007", "xi-jian"})
+        self.assertEqual(anchor["main_text_person_ids"], ["person-001"])
+        self.assertEqual(set(anchor["liu_annotation_only_person_ids"]), {"person-007", "person-002"})
         annotation_bridge = next(item for item in self.chain["stories"] if item["entry_id"] == "06-yaliang-029")
-        self.assertNotIn("wang-dao", annotation_bridge["main_text_person_ids"])
-        self.assertIn("wang-dao", annotation_bridge["liu_annotation_only_person_ids"])
+        self.assertNotIn("person-003", annotation_bridge["main_text_person_ids"])
+        self.assertIn("person-003", annotation_bridge["liu_annotation_only_person_ids"])
 
     def test_selected_reading_round_trip_and_opencc_are_deterministic(self) -> None:
         converter = OpenCC("t2s")

@@ -71,7 +71,7 @@ class PersonStoryIndexTests(unittest.TestCase):
 
     def test_index_cannot_place_a_link_under_another_person_or_story(self) -> None:
         def mutate(_links, index):
-            person = next(person for person in index["persons"] if person["person_id"] == "wang-xizhi")
+            person = next(person for person in index["persons"] if person["person_id"] == "person-001")
             person["story_refs"][0]["entry_id"] = "02-yanyu-069"
 
         errors = self.errors_after(mutate)

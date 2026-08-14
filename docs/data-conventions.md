@@ -3,9 +3,19 @@
 ## Stable IDs
 
 IDs are opaque, assigned identifiers. They are never generated from a
-person's name, a title, a URL, or generated text. Existing reviewed IDs are
-retained for compatibility; in particular, `06-yaliang-019` remains the
-canonical Story ID and the six existing person IDs remain unchanged.
+person's name, a title, a URL, or generated text. Story IDs such as
+`06-yaliang-019` remain independently assigned and are not affected by Person
+ID allocation.
+
+Production Person IDs use the current format `person-NNN`. They are allocated
+once and then frozen: canonical names, aliases, URLs, and Simplified or
+Traditional display changes never change a `person_id`. Identity merges and
+splits require an explicit migration; an old ID is never silently reused for
+a different identity. P-ID1 freezes `person-001` through `person-017`, and the
+next available production sequence is `person-018`. The one-time migration
+manifest preserves former name-slug IDs only as historical traceability; they
+are not alternative production IDs and must not occur in active Person foreign
+keys.
 
 IDs are unique within an object type and should also be globally unique in a
 published data bundle. Human-readable labels belong in separate fields.

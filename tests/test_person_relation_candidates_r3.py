@@ -48,7 +48,7 @@ class PersonRelationCandidatesR3Tests(unittest.TestCase):
             self.assertNotIn(record["person_b_id"], candidate_id(record))
 
     def test_explicit_evidence_candidate_is_not_cooccurrence_only(self) -> None:
-        candidate = next(item for item in self.derived["candidates"] if item["person_a_id"] == "wang-dao" and item["person_b_id"] == "yu-liang")
+        candidate = next(item for item in self.derived["candidates"] if item["person_a_id"] == "person-003" and item["person_b_id"] == "person-010")
         self.assertIn("explicit_social_phrase", candidate["discovery_basis"])
         self.assertTrue(candidate["evidence_ids"])
         self.assertIn("evidence-p3b-wave-1-f114427662a639c512fd86d1", candidate["evidence_ids"])

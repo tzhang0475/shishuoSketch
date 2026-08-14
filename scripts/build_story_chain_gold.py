@@ -15,10 +15,10 @@ from pathlib import Path
 from typing import Any, Mapping
 
 try:
-    from .build_six_person_pilot import parse_frontmatter, parse_shishuo_sections
+    from .build_six_person_pilot import PERSON_DEFINITIONS, parse_frontmatter, parse_shishuo_sections
     from .reading_layers import strip_display_punctuation
 except ImportError:  # direct execution
-    from build_six_person_pilot import parse_frontmatter, parse_shishuo_sections
+    from build_six_person_pilot import PERSON_DEFINITIONS, parse_frontmatter, parse_shishuo_sections
     from reading_layers import strip_display_punctuation
 
 
@@ -35,14 +35,7 @@ CHAIN_INDEX_PATH = ROOT / "data/derived/story-chain-gold-index.json"
 CONNECTIVITY_PATH = ROOT / "data/derived/story-chain-connectivity.json"
 REVIEW_PATH = ROOT / "docs/story-chain-gold-review.md"
 
-PRIMARY_PERSON_IDS = (
-    "wang-xizhi",
-    "xi-jian",
-    "wang-dao",
-    "wang-ningzhi",
-    "xie-daoyun",
-    "xie-an",
-)
+PRIMARY_PERSON_IDS = tuple(item["person_id"] for item in PERSON_DEFINITIONS)
 SUPPORTING_PERSON_IDS = ("person-007",)
 PILOT_PERSON_IDS = set(PRIMARY_PERSON_IDS) | set(SUPPORTING_PERSON_IDS)
 

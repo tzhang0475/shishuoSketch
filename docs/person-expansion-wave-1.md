@@ -6,7 +6,7 @@
 
 - Wave: `p3b-wave-1`
 - Ranking artifact: `data/derived/person-expansion-wave-1-ranking.json`
-- Ranking SHA-256: `15dec56de3beb7617fe87c727fb5800ef3313de6025303ad05750d3cf3f18ae3`
+- Ranking SHA-256: `a81eefefea58f7910dd5ad997a84b395a5220a906ee46f19f44ef630362dcab2`
 - Person registry: 7 → 17
 - Selection authority: pre-mutation P3A ranks 1–10; no rank substitution.
 
@@ -14,16 +14,16 @@
 
 | Rank | Person | Candidate ID | Score | Exact aliases | Contextual aliases | Shishuo main/Liu Stories | Jinshu units | Promoted | Withheld | SC1 stories | Relations |
 |---:|---|---|---:|---|---|---:|---:|---:|---:|---:|---:|
-| 1 | 桓溫 (`huan-wen`) | `candidate-identity-098-liezhuan-003-7859332a18d3` | 59.112247 | 元子, 桓元子, 桓温, 桓溫 | 桓公, 桓宣武 | 12/34 | 1 | 51 | 3 | 1 | 0 |
-| 2 | 劉惔 (`liu-dan`) | `candidate-identity-075-liezhuan-006-8fa047488139` | 51.311118 | 劉惔, 劉真長, 真長 | 劉與林公 | 24/18 | 1 | 63 | 1 | 2 | 0 |
-| 3 | 庾亮 (`yu-liang`) | `candidate-identity-073-liezhuan-001-57cfabf05a69` | 50.804676 | 元規, 庾亮, 庾元規 | 庾公, 庾謂曰君 | 18/23 | 1 | 47 | 4 | 0 | 0 |
-| 4 | 王敦 (`wang-dun`) | `candidate-identity-098-liezhuan-001-100db758183c` | 46.281037 | 王敦, 王處仲, 處仲 | 王大將軍, 王敦聞君 | 21/28 | 1 | 57 | 7 | 0 | 0 |
-| 5 | 袁宏 (`yuan-hong`) | `candidate-identity-092-liezhuan-013-76b547bbee32` | 44.569684 | 彦伯, 袁宏, 袁彦伯 | 袁公 | 8/8 | 1 | 15 | 2 | 1 | 0 |
-| 6 | 温嶠 (`wen-qiao`) | `candidate-identity-067-liezhuan-001-1769bc7aa348` | 41.050457 | 太真, 温太真, 温嶠 | 温公 | 10/12 | 1 | 28 | 1 | 0 | 0 |
-| 7 | 王濛 (`wang-meng`) | `candidate-identity-093-liezhuan-010-e8abd34dc108` | 39.928571 | 仲祖, 王仲祖, 王濛, 王蒙 | — | 7/15 | 1 | 31 | 0 | 1 | 0 |
-| 8 | 孫晷 (`sun-gui`) | `candidate-identity-088-liezhuan-007-ca650e9ceb0f` | 39.321433 | 孫晷, 文度 | — | 12/3 | 1 | 25 | 0 | 1 | 0 |
-| 9 | 王遐 (`wang-xia`) | `candidate-identity-093-liezhuan-011-9b983af9b748` | 37.362249 | 桓子, 王遐 | — | 4/2 | 1 | 8 | 0 | 1 | 0 |
-| 10 | 蘇峻 (`su-jun`) | `candidate-identity-100-liezhuan-009-cd60f50d80a7` | 37.349490 | 子高, 蘇子高, 蘇峻 | — | 12/13 | 1 | 29 | 0 | 0 | 0 |
+| 1 | 桓溫 (`person-008`) | `candidate-identity-098-liezhuan-003-7859332a18d3` | 59.112247 | 元子, 桓元子, 桓温, 桓溫 | 桓公, 桓宣武 | 12/34 | 1 | 51 | 3 | 1 | 0 |
+| 2 | 劉惔 (`person-009`) | `candidate-identity-075-liezhuan-006-8fa047488139` | 51.311118 | 劉惔, 劉真長, 真長 | 劉與林公 | 24/18 | 1 | 63 | 1 | 2 | 0 |
+| 3 | 庾亮 (`person-010`) | `candidate-identity-073-liezhuan-001-57cfabf05a69` | 50.804676 | 元規, 庾亮, 庾元規 | 庾公, 庾謂曰君 | 18/23 | 1 | 47 | 4 | 0 | 0 |
+| 4 | 王敦 (`person-011`) | `candidate-identity-098-liezhuan-001-100db758183c` | 46.281037 | 王敦, 王處仲, 處仲 | 王大將軍, 王敦聞君 | 21/28 | 1 | 57 | 7 | 0 | 0 |
+| 5 | 袁宏 (`person-012`) | `candidate-identity-092-liezhuan-013-76b547bbee32` | 44.569684 | 彦伯, 袁宏, 袁彦伯 | 袁公 | 8/8 | 1 | 15 | 2 | 1 | 0 |
+| 6 | 温嶠 (`person-013`) | `candidate-identity-067-liezhuan-001-1769bc7aa348` | 41.050457 | 太真, 温太真, 温嶠 | 温公 | 10/12 | 1 | 28 | 1 | 0 | 0 |
+| 7 | 王濛 (`person-014`) | `candidate-identity-093-liezhuan-010-e8abd34dc108` | 39.928571 | 仲祖, 王仲祖, 王濛, 王蒙 | — | 7/15 | 1 | 31 | 0 | 1 | 0 |
+| 8 | 孫晷 (`person-015`) | `candidate-identity-088-liezhuan-007-ca650e9ceb0f` | 39.321433 | 孫晷, 文度 | — | 12/3 | 1 | 25 | 0 | 1 | 0 |
+| 9 | 王遐 (`person-016`) | `candidate-identity-093-liezhuan-011-9b983af9b748` | 37.362249 | 桓子, 王遐 | — | 4/2 | 1 | 8 | 0 | 1 | 0 |
+| 10 | 蘇峻 (`person-017`) | `candidate-identity-100-liezhuan-009-cd60f50d80a7` | 37.349490 | 子高, 蘇子高, 蘇峻 | — | 12/13 | 1 | 29 | 0 | 0 | 0 |
 
 ## Occurrence policy
 

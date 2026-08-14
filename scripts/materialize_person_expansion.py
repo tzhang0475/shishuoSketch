@@ -92,8 +92,15 @@ def production_evidence_id(source_evidence_id: str) -> str:
     return EVIDENCE_PREFIX + stable_hash(source_evidence_id)[:24]
 
 
-def production_alias_id(person_id: str, surface: str, surface_type: str) -> str:
-    return ALIAS_PREFIX + person_id + "-" + stable_hash(surface, surface_type)[:16]
+def production_alias_id(candidate_id: str, surface: str, surface_type: str) -> str:
+    """Allocate a stable analysis Alias ID without embedding a Person ID.
+
+    Existing materialized Alias IDs are preserved by the idempotent path.  A
+    future wave starts from its frozen candidate ID, so changing a Person's
+    opaque primary key cannot silently rename its aliases.
+    """
+
+    return ALIAS_PREFIX + stable_hash(candidate_id, surface, surface_type)[:24]
 
 
 def production_mention_id(occurrence_id: str) -> str:
@@ -467,7 +474,7 @@ def _build_aliases(
         if not value or not surface_type:
             continue
         key = (value, surface_type)
-        alias_id = production_alias_id(person_id, value, surface_type)
+        alias_id = production_alias_id(str(candidate["candidate_id"]), value, surface_type)
         alias_ids[key] = alias_id
         mode = str(surface.get("association_mode", "ambiguous"))
         if mode not in {"exact", "contextual", "ambiguous"}:
@@ -764,6 +771,8 @@ def build(root: Path = ROOT) -> dict[str, Any]:
         materialization["members"] = enriched_members
         wave["members"] = enriched_members
         write_json(root / WAVE_PATH, wave)
+        materialization["source_ranking_artifact"] = wave["source_ranking_artifact"]
+        materialization["source_ranking_sha256"] = wave["source_ranking_sha256"]
         materialization["protected_hashes"] = _protected_hashes(root)
         write_json(root / MATERIALIZATION_PATH, materialization)
         _update_sketch_source(

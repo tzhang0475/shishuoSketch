@@ -32,7 +32,7 @@ class SC11FrontendContractTests(unittest.TestCase):
         self.assertIn("eligiblePersonIds", self.explorer)
         self.assertIn("onRandomPerson", self.app)
         self.assertIn("随便认识一个人", self.app)
-        self.assertNotIn('"wang-xizhi"', self.app)
+        self.assertNotIn('"person-001"', self.app)
 
     def test_random_story_and_person_actions_share_control_family(self) -> None:
         self.assertIn(".random-story-button, .random-person-button", self.styles)

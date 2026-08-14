@@ -74,7 +74,7 @@ class StorySceneContextTests(unittest.TestCase):
 
     def test_mandatory_story_preserves_unmaterialized_wang_tanzhi(self) -> None:
         context = self.derived["contexts"]["06-yaliang-029"]
-        self.assertEqual([person["person_id"] for person in context["people_at_scene"]], ["huan-wen", "xie-an"])
+        self.assertEqual([person["person_id"] for person in context["people_at_scene"]], ["person-008", "person-006"])
         self.assertEqual(
             [person["surface"]["original"] for person in context["unmaterialized_people"]],
             ["王坦之"],

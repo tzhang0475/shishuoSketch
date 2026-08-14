@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://shishuo-sketch/schema/person-id-canonicalization-v1.schema.json",
+  "title": "P-ID1 Person ID canonicalization manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "migration", "next_person_sequence", "records"],
+  "properties": {
+    "schema": {"const": 1},
+    "migration": {"const": "person-id-canonicalization-v1"},
+    "next_person_sequence": {"const": 18},
+    "records": {
+      "type": "array",
+      "minItems": 17,
+      "maxItems": 17,
+      "uniqueItems": true,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["old_person_id", "new_person_id", "canonical_name", "allocation_basis"],
+        "properties": {
+          "old_person_id": {"type": "string", "minLength": 1},
+          "new_person_id": {"type": "string", "pattern": "^person-[0-9]{3}$"},
+          "canonical_name": {"type": "string", "minLength": 1},
+          "allocation_basis": {"type": "string", "minLength": 1}
+        }
+      }
+    }
+  }
+}
