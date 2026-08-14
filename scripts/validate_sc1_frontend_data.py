@@ -203,6 +203,12 @@ def validate_inline_mention_projection(
                     target = mention.get("resolution_target")
                     if segment.get("target_kind") != "identity_candidate":
                         errors.append(f"SC1 {story_id}: identity segment target kind is invalid: {mention_id}")
+                    if isinstance(target, dict) and target.get("target_kind") == "production_person":
+                        errors.append(f"SC1 {story_id}: identity Mention points to production Person: {mention_id}")
+                    if layer == "main_text" and "annotation_id" in segment:
+                        errors.append(f"SC1 {story_id}: main-text identity Mention has annotation_id: {mention_id}")
+                    if layer == "liu_annotation" and segment.get("annotation_id") != annotation_id:
+                        errors.append(f"SC1 {story_id}: annotation identity block mismatch: {mention_id}")
                     if isinstance(target, dict) and target.get("canonical_name") != (segment.get("canonical_name") or {}).get("original"):
                         errors.append(f"SC1 {story_id}: identity Mention target name mismatch: {mention_id}")
                     canonical = canonical_by_layer.get((layer, annotation_id))
@@ -322,7 +328,10 @@ def validate_inline_mention_projection(
         visible_resolution = bool(
             mention
             and (
-                isinstance(mention.get("person_id"), str)
+                (
+                    isinstance(mention.get("person_id"), str)
+                    and mention.get("confidence") != "unresolved"
+                )
                 or mention.get("resolution_status") in {"resolved", "candidate_for_review"}
             )
         )

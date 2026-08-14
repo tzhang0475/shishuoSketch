@@ -485,7 +485,11 @@ export function parseSiteBundle(value: unknown): SiteBundle {
           if (layer === "liu_annotation" && segment.annotation_id !== annotationId) {
             throw new Error(`Story ${story.id} annotation identity Mention 所属 block 不一致: ${mentionId}`);
           }
-          return;
+          // Continue scanning this annotation block.  An annotation may
+          // contain more than one resolved/identity Mention; returning here
+          // would make later segments invisible to the runtime projection
+          // invariant and produce a false "Mention 未投影" error.
+          continue;
         }
         if (segment.person_id !== mention.person_id || typeof mention.person_id !== "string" || mention.confidence === "unresolved" || !peopleIds.has(mention.person_id)) {
           throw new Error(`Story ${story.id} inline Mention 的 Person 不一致: ${mentionId}`);

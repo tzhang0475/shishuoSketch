@@ -437,6 +437,120 @@ def _annotation_id(mention: Mapping[str, Any]) -> str | None:
     return None
 
 
+def _annotation_ownership(
+    mention: Mapping[str, Any],
+    canonical_annotations: Any,
+) -> tuple[str | None, str]:
+    """Resolve Liu Mention ownership from explicit metadata or safe text evidence.
+
+    A Mention ordinal embedded in an ID is never an annotation locator.  The
+    normal path is the explicit processed-entry metadata; the fallback is
+    deliberately narrow and only accepts one canonical block whose text
+    contains the anchored surface at the anchored offset (or, when no offset
+    exists, one unique block-level occurrence).
+    """
+
+    metadata = mention.get("source_section_metadata")
+    if isinstance(metadata, Mapping) and isinstance(metadata.get("annotation_id"), str):
+        return str(metadata["annotation_id"]), "source_section_metadata.annotation_id"
+    anchor = mention.get("anchor")
+    if isinstance(anchor, Mapping) and isinstance(anchor.get("annotation_id"), str):
+        return str(anchor["annotation_id"]), "anchor.annotation_id"
+    if mention.get("section") != "liu_annotation":
+        return None, "not_liu_annotation"
+
+    surface = mention.get("surface")
+    offset = _mention_offset(mention)
+    if not isinstance(surface, str) or not surface:
+        return None, "unresolved_annotation_block"
+    candidates: list[str] = []
+    if isinstance(canonical_annotations, (list, tuple)):
+        for annotation in canonical_annotations:
+            if not isinstance(annotation, Mapping) or not isinstance(annotation.get("id"), str):
+                continue
+            annotation_id = str(annotation["id"])
+            text = str(annotation.get("text", ""))
+            if isinstance(offset, int) and offset >= 0 and text[offset : offset + len(surface)] == surface:
+                candidates.append(annotation_id)
+        if len(candidates) == 1:
+            return candidates[0], "unique_canonical_anchor_match"
+        if offset is None:
+            unique_occurrences = [
+                str(annotation["id"])
+                for annotation in canonical_annotations
+                if isinstance(annotation, Mapping)
+                and isinstance(annotation.get("id"), str)
+                and str(annotation.get("text", "")).count(surface) == 1
+            ]
+            if len(unique_occurrences) == 1:
+                return unique_occurrences[0], "unique_canonical_surface_match"
+    return None, "unresolved_annotation_block"
+
+
+def effective_annotation_id(
+    mention: Mapping[str, Any],
+    canonical_annotations: Any = (),
+) -> str | None:
+    """Return the canonical Liu annotation ID without parsing Mention IDs."""
+
+    return _annotation_ownership(mention, canonical_annotations)[0]
+
+
+def _visible_resolution_mention(mention: Any) -> bool:
+    if not isinstance(mention, Mapping):
+        return False
+    return (
+        _resolved_mention(mention)
+        or mention.get("resolution_status") in {"resolved", "candidate_for_review"}
+    )
+
+
+def _prepare_placement_mentions(
+    mentions: Any,
+    canonical_annotations: Any,
+) -> tuple[list[Mapping[str, Any]], list[dict[str, Any]]]:
+    """Normalize Liu ownership before scanning individual annotation blocks."""
+
+    if not isinstance(mentions, (list, tuple)):
+        return [], []
+    annotation_ids = {
+        str(annotation.get("id"))
+        for annotation in canonical_annotations
+        if isinstance(annotation, Mapping) and isinstance(annotation.get("id"), str)
+    } if isinstance(canonical_annotations, (list, tuple)) else set()
+    prepared: list[Mapping[str, Any]] = []
+    suppressed: list[dict[str, Any]] = []
+    for mention in mentions:
+        if not isinstance(mention, Mapping) or not _visible_resolution_mention(mention):
+            prepared.append(mention)
+            continue
+        if mention.get("section") != "liu_annotation":
+            prepared.append(mention)
+            continue
+        annotation_id, basis = _annotation_ownership(mention, canonical_annotations)
+        if annotation_id is None or annotation_id not in annotation_ids:
+            mention_id = _mention_id(mention)
+            if mention_id:
+                suppressed.append(
+                    {
+                        "mention_id": mention_id,
+                        "reason": "unresolved_annotation_block",
+                        "section": "liu_annotation",
+                        "annotation_id": annotation_id,
+                        "annotation_ownership_basis": basis,
+                    }
+                )
+            continue
+        normalized = dict(mention)
+        metadata = dict(mention.get("source_section_metadata", {})) if isinstance(mention.get("source_section_metadata"), Mapping) else {}
+        metadata["annotation_id"] = annotation_id
+        normalized["source_section_metadata"] = metadata
+        if basis not in {"source_section_metadata.annotation_id", "anchor.annotation_id"}:
+            normalized["annotation_ownership_basis"] = basis
+        prepared.append(normalized)
+    return prepared, suppressed
+
+
 def _annotation_label(index: int) -> str:
     labels = "①②③④⑤⑥⑦⑧⑨⑩"
     if 1 <= index <= len(labels):
@@ -650,29 +764,30 @@ def _placement_candidates(
                 }
             )
             continue
-        placements.append(
-            {
-                "mention_id": mention_id,
-                "person_id": person_id if isinstance(person_id, str) else None,
-                "target_kind": "production_person" if is_production else "identity_candidate",
-                "resolution_status": str(mention.get("resolution_status", "resolved")),
-                "resolution_target": dict(target) if isinstance(target, Mapping) else None,
-                "resolution_candidates": [
-                    dict(item)
-                    for item in mention.get("resolution_candidates", [])
-                    if isinstance(item, Mapping)
-                ],
-                "start": start,
-                "end": end,
-                "canonical_offset": span_offset,
-                "canonical_end_offset_exclusive": end_offset,
-                "surface": span_surface,
-                "raw_surface": surface,
-                "span_basis": str(display_span.get("basis")) if isinstance(display_span, Mapping) else "canonical_mention_surface",
-                "section": section,
-                "annotation_id": annotation_id,
-            }
-        )
+        placement = {
+            "mention_id": mention_id,
+            "person_id": person_id if isinstance(person_id, str) else None,
+            "target_kind": "production_person" if is_production else "identity_candidate",
+            "resolution_status": str(mention.get("resolution_status", "resolved")),
+            "resolution_target": dict(target) if isinstance(target, Mapping) else None,
+            "resolution_candidates": [
+                dict(item)
+                for item in mention.get("resolution_candidates", [])
+                if isinstance(item, Mapping)
+            ],
+            "start": start,
+            "end": end,
+            "canonical_offset": span_offset,
+            "canonical_end_offset_exclusive": end_offset,
+            "surface": span_surface,
+            "raw_surface": surface,
+            "span_basis": str(display_span.get("basis")) if isinstance(display_span, Mapping) else "canonical_mention_surface",
+            "section": section,
+            "annotation_id": annotation_id,
+        }
+        if isinstance(mention.get("annotation_ownership_basis"), str):
+            placement["annotation_ownership_basis"] = mention["annotation_ownership_basis"]
+        placements.append(placement)
 
     # Prefer the maximal semantic surface when one resolved Mention is nested
     # inside another.  The canonical Mention anchor remains untouched; the
@@ -888,6 +1003,8 @@ def build_reading_segments(
                 }
             if section == "liu_annotation" and annotation_id is not None:
                 piece["annotation_id"] = annotation_id
+            if isinstance(placement.get("annotation_ownership_basis"), str):
+                piece["annotation_ownership_basis"] = placement["annotation_ownership_basis"]
             pieces.append(piece)
             cursor = placement["end"]
         while marker_index < len(selected_markers):
@@ -974,6 +1091,11 @@ def build_display_reading(
         for annotation in canonical_annotations
         if isinstance(annotation, Mapping) and isinstance(annotation.get("id"), str)
     }
+    prepared_placement_mentions, ownership_suppressed = _prepare_placement_mentions(
+        placement_mentions,
+        canonical_annotations,
+    )
+    suppressed_mentions.extend(ownership_suppressed)
     annotation_section = sections.get("liu_annotation")
     annotation_insertions = build_annotation_insertions(
         source_text,
@@ -1004,7 +1126,7 @@ def build_display_reading(
             canonical_annotation,
             displayed_annotation,
             converter,
-            placement_mentions,
+            prepared_placement_mentions,
             section="liu_annotation",
             annotation_id=annotation_id,
         )
@@ -1070,7 +1192,7 @@ def build_display_reading(
         main_canonical,
         main_display,
         converter,
-        placement_mentions,
+        prepared_placement_mentions,
         section="main_text",
         annotation_markers=annotation_markers,
     )
@@ -1093,6 +1215,52 @@ def build_display_reading(
                 ),
                 "marker_projection_failed",
             )
+
+    # A visible resolution must never disappear merely because a section
+    # scanner skipped it.  Reconcile the complete build-time projection before
+    # returning the bundle so the browser cannot be the first place to find an
+    # orphan Mention.
+    visible_ids = {
+        mention_id
+        for mention in placement_mentions
+        if isinstance(mention, Mapping)
+        and _visible_resolution_mention(mention)
+        and (mention_id := _mention_id(mention))
+    } if isinstance(placement_mentions, (list, tuple)) else set()
+    placed_ids: list[str] = []
+
+    def collect_placed(segments: Any) -> None:
+        if not isinstance(segments, (list, tuple)):
+            return
+        for segment in segments:
+            if not isinstance(segment, Mapping) or segment.get("type") not in {"person_mention", "identity_mention"}:
+                continue
+            mention_id = segment.get("mention_id")
+            if isinstance(mention_id, str):
+                placed_ids.append(mention_id)
+
+    collect_placed(main_segments)
+    for annotation in annotations:
+        collect_placed(annotation.get("segments"))
+    suppressed_ids = [
+        str(item["mention_id"])
+        for item in suppressed_mentions
+        if isinstance(item, Mapping) and isinstance(item.get("mention_id"), str)
+    ]
+    placed_set = set(placed_ids)
+    suppressed_set = set(suppressed_ids)
+    if len(placed_ids) != len(placed_set):
+        duplicates = sorted({mention_id for mention_id in placed_ids if placed_ids.count(mention_id) > 1})
+        raise ValueError(f"duplicate inline Mention projection: {', '.join(duplicates)}")
+    if len(suppressed_ids) != len(suppressed_set):
+        duplicates = sorted({mention_id for mention_id in suppressed_ids if suppressed_ids.count(mention_id) > 1})
+        raise ValueError(f"duplicate suppressed Mention projection: {', '.join(duplicates)}")
+    both = sorted(placed_set & suppressed_set)
+    if both:
+        raise ValueError(f"Mention appears both inline and suppressed: {', '.join(both)}")
+    orphan_ids = sorted(visible_ids - placed_set - suppressed_set)
+    if orphan_ids:
+        raise ValueError(f"visible Mention has no inline/suppressed projection: {', '.join(orphan_ids)}")
     return {
         "entry_id": record["entry_id"],
         "status": record["status"],

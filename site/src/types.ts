@@ -217,6 +217,7 @@ export type ReadingSegment =
       person_id: string;
       display: ReadingPair;
       annotation_id?: string;
+      annotation_ownership_basis?: string;
     }
   | {
       type: "identity_mention";
@@ -227,6 +228,7 @@ export type ReadingSegment =
       candidate_names: ReadingPair[];
       display: ReadingPair;
       annotation_id?: string;
+      annotation_ownership_basis?: string;
     }
   | {
       type: "annotation_marker";

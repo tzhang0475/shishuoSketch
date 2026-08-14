@@ -137,6 +137,65 @@ console.log(JSON.stringify({{ all, main, selected, fallback, single }}));
         self.assertEqual(value["fallback"], "liu-fallback")
         self.assertEqual(value["single"], "single")
 
+    def test_runtime_parse_site_bundle_accepts_all_inline_resolution_projections(self) -> None:
+        node = shutil.which("node")
+        if node is None:
+            self.skipTest("node is unavailable")
+        typescript_runtime = ROOT / "node_modules/typescript/lib/typescript.js"
+        if not typescript_runtime.exists():
+            self.skipTest("installed TypeScript runtime is unavailable")
+        with tempfile.TemporaryDirectory() as temporary:
+            temporary_root = Path(temporary)
+            runner = temporary_root / "run-site-parser.mjs"
+            compiled = temporary_root / "data.mjs"
+            script = f'''
+import fs from "node:fs";
+import {{ createRequire }} from "node:module";
+import {{ pathToFileURL }} from "node:url";
+
+const require = createRequire(import.meta.url);
+const ts = require({json.dumps(str(typescript_runtime))});
+const source = fs.readFileSync({json.dumps(str(ROOT / "site/src/data.ts"))}, "utf8");
+const bundle = JSON.parse(fs.readFileSync({json.dumps(str(ROOT / "site/src/generated/sc1-site.json"))}, "utf8"));
+const sourceWithBundle = source.replace(
+  'import generatedSiteBundle from "./generated/sc1-site.json";',
+  "const generatedSiteBundle = " + JSON.stringify(bundle) + ";",
+);
+const transpiled = ts.transpileModule(sourceWithBundle, {{
+  compilerOptions: {{
+    target: ts.ScriptTarget.ES2020,
+    module: ts.ModuleKind.ESNext,
+  }},
+}});
+fs.writeFileSync({json.dumps(str(compiled))}, transpiled.outputText);
+const {{ parseSiteBundle }} = await import(pathToFileURL({json.dumps(str(compiled))}).href);
+const parsed = parseSiteBundle(bundle);
+const story = parsed.stories.find((item) => item.id === "02-yanyu-036");
+const annotation = story.reading.annotations.find((item) => item.id === "annotation-003");
+console.log(JSON.stringify({{
+  storyCount: parsed.stories.length,
+  targetCount: annotation.segments.filter((item) => item.mention_id === "shishuo-02-yanyu-036-liu-annotation-004").length,
+  targetType: annotation.segments.find((item) => item.mention_id === "shishuo-02-yanyu-036-liu-annotation-004")?.type,
+}}));
+'''
+            runner.write_text(script, encoding="utf-8")
+            result = subprocess.run(
+                [node, str(runner)],
+                cwd=ROOT,
+                check=False,
+                capture_output=True,
+                text=True,
+            )
+        if result.returncode != 0:
+            self.fail(
+                "Node SiteBundle parser failed "
+                f"(stderr):\n{result.stderr}\nstdout:\n{result.stdout}"
+            )
+        value = json.loads(result.stdout)
+        self.assertEqual(value["storyCount"], 60)
+        self.assertEqual(value["targetCount"], 1)
+        self.assertEqual(value["targetType"], "identity_mention")
+
     def test_random_story_and_person_actions_share_control_family(self) -> None:
         self.assertIn(".random-story-button, .random-person-button", self.styles)
         self.assertIn(".random-story-button:hover, .random-story-button:focus-visible,", self.styles)

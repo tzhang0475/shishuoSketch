@@ -5,7 +5,7 @@ import json
 from pathlib import Path
 import unittest
 
-from scripts.reading_layers import strip_display_punctuation
+from scripts.reading_layers import build_display_reading, effective_annotation_id, strip_display_punctuation
 from scripts.validate_sc1_frontend_data import validate_inline_mention_projection
 
 
@@ -83,6 +83,115 @@ class SC111InlineMentionTests(unittest.TestCase):
         self.assertEqual(errors, [])
         wang = self.mentions["shishuo-25-paidiao-026-liu-annotation-004"]
         self.assertEqual(wang["section"], "liu_annotation")
+
+    def test_yanyu_036_uses_explicit_annotation_ownership_not_mention_ordinal(self) -> None:
+        story = self.story("02-yanyu-036")
+        mention_id = "shishuo-02-yanyu-036-liu-annotation-004"
+        mention = self.mentions[mention_id]
+        self.assertEqual(mention["surface"], "王丞相")
+        self.assertEqual(mention["section"], "liu_annotation")
+        annotation = next(item for item in story["reading"]["annotations"] if item["id"] == "annotation-003")
+        target_segments = [item for item in annotation["segments"] if item.get("mention_id") == mention_id]
+        self.assertEqual(len(target_segments), 1)
+        self.assertEqual(target_segments[0]["type"], "identity_mention")
+        self.assertEqual(target_segments[0]["annotation_id"], "annotation-003")
+        self.assertEqual(target_segments[0]["resolution_status"], "candidate_for_review")
+        annotation_four = next(item for item in story["reading"]["annotations"] if item["id"] == "annotation-004")
+        self.assertFalse(any(item.get("mention_id") == mention_id for item in annotation_four["segments"]))
+
+        canonical_mention = self.canonical_mentions[mention_id]
+        without_metadata = deepcopy(canonical_mention)
+        without_metadata.pop("source_section_metadata", None)
+        self.assertEqual(
+            effective_annotation_id(without_metadata, story["annotations"]),
+            "annotation-003",
+        )
+
+    def test_all_visible_mentions_have_exactly_one_projection_or_suppression(self) -> None:
+        visible = placed = suppressed = orphan = 0
+        for story in self.bundle["stories"]:
+            story_mentions = {
+                mention_id: self.mentions[mention_id]
+                for mention_id in story.get("mention_ids", [])
+                if mention_id in self.mentions
+            }
+            placed_ids = {
+                segment["mention_id"]
+                for segment in [
+                    *story["reading"]["main_text"]["segments"],
+                    *[
+                        segment
+                        for annotation in story["reading"]["annotations"]
+                        for segment in annotation["segments"]
+                    ],
+                ]
+                if segment.get("type") in {"person_mention", "identity_mention"}
+                and isinstance(segment.get("mention_id"), str)
+            }
+            suppressed_ids = {
+                item["mention_id"]
+                for item in story["reading"]["mention_projection"]["suppressed"]
+                if isinstance(item.get("mention_id"), str)
+            }
+            visible_ids = {
+                mention_id
+                for mention_id, mention in story_mentions.items()
+                if (
+                    isinstance(mention.get("person_id"), str)
+                    and mention.get("confidence") != "unresolved"
+                ) or mention.get("resolution_status") in {"resolved", "candidate_for_review"}
+            }
+            visible += len(visible_ids)
+            placed += len(visible_ids & placed_ids)
+            suppressed += len(visible_ids & suppressed_ids)
+            orphan += len(visible_ids - placed_ids - suppressed_ids)
+            self.assertFalse(placed_ids & suppressed_ids, story["id"])
+        self.assertEqual(orphan, 0)
+        self.assertEqual(visible, placed + suppressed)
+
+    def test_build_projection_derives_unique_annotation_block_without_id_suffix(self) -> None:
+        class IdentityConverter:
+            @staticmethod
+            def convert(value: str) -> str:
+                return value
+
+        mention = {
+            "mention_id": "fixture-liu-annotation-004",
+            "entry_id": "fixture-story",
+            "surface": "甲",
+            "section": "liu_annotation",
+            "evidence": {"section_offset": 0},
+            "resolution_status": "candidate_for_review",
+            "resolution_candidates": [{"target_kind": "identity_candidate", "canonical_name": "甲某", "candidate_id": "candidate-甲"}],
+        }
+        reading = build_display_reading(
+            {
+                "entry_id": "fixture-story",
+                "status": "candidate",
+                "id": "fixture-punctuation",
+                "base_canonical_entry_sha256": "fixture",
+                "sections": {
+                    "main_text": {"canonical_text": "", "punctuated_text": ""},
+                    "liu_annotation": {},
+                },
+                "display_overrides": [],
+            },
+            IdentityConverter(),
+            mentions=[mention],
+            placement_mentions=[mention],
+            canonical_annotations=[
+                {"id": "annotation-003", "text": "甲"},
+                {"id": "annotation-004", "text": "乙"},
+            ],
+        )
+        first = next(item for item in reading["annotations"] if item["id"] == "annotation-003")
+        fourth = next(item for item in reading["annotations"] if item["id"] == "annotation-004")
+        self.assertEqual(
+            [item["mention_id"] for item in first["segments"] if item.get("type") == "identity_mention"],
+            ["fixture-liu-annotation-004"],
+        )
+        self.assertFalse(any(item.get("mention_id") == "fixture-liu-annotation-004" for item in fourth["segments"]))
+        self.assertFalse(reading["mention_projection"]["suppressed"])
 
     def test_unresolved_mentions_remain_ordinary_text(self) -> None:
         story = self.story("06-yaliang-019")

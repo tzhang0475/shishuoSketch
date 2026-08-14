@@ -19,8 +19,10 @@ from typing import Any, Iterable, Mapping
 
 try:
     from .build_six_person_pilot import parse_shishuo_sections
+    from .reading_layers import effective_annotation_id
 except ImportError:  # direct execution
     from build_six_person_pilot import parse_shishuo_sections
+    from reading_layers import effective_annotation_id
 
 
 MENTIONS_PATH = Path("data/mentions/shishuo.json")
@@ -229,7 +231,7 @@ def _section_text(sections: Mapping[tuple[str, str], str], mention: Mapping[str,
     metadata = mention.get("source_section_metadata", {})
     annotation_id = metadata.get("annotation_id") if isinstance(metadata, Mapping) else None
     if not isinstance(annotation_id, str):
-        annotation_id = "annotation-001"
+        return ""
     return sections.get((story_id, f"liu_annotation:{annotation_id}"), "")
 
 
@@ -241,8 +243,49 @@ def _local_context_key(mention: Mapping[str, Any]) -> tuple[str, str, str]:
     if section == "liu_annotation":
         metadata = mention.get("source_section_metadata", {})
         annotation_id = metadata.get("annotation_id") if isinstance(metadata, Mapping) else None
-        return story_id, section, str(annotation_id or "annotation-001")
+        if isinstance(annotation_id, str) and annotation_id:
+            return story_id, section, annotation_id
+        # An unowned Liu Mention must not inherit local context from an
+        # arbitrary annotation block.  Build-time ownership resolution may
+        # replace this with a canonical annotation ID; until then isolate it.
+        return story_id, section, f"unresolved:{mention.get('mention_id', '')}"
     return story_id, section, "main_text"
+
+
+def _with_effective_annotation_ownership(
+    mention: Mapping[str, Any],
+    sections: Mapping[tuple[str, str], str],
+) -> Mapping[str, Any]:
+    """Attach only safely derived Liu annotation ownership to a build copy."""
+
+    if mention.get("section") != "liu_annotation":
+        return mention
+    story_id = str(mention.get("entry_id") or mention.get("source_id") or "")
+    annotation_records = [
+        {
+            "id": key[1].split(":", 1)[1],
+            "text": text,
+        }
+        for key, text in sections.items()
+        if key[0] == story_id and key[1].startswith("liu_annotation:")
+    ]
+    annotation_id = effective_annotation_id(mention, annotation_records)
+    valid_ids = {str(item["id"]) for item in annotation_records}
+    if annotation_id is None or annotation_id not in valid_ids:
+        return mention
+    normalized = dict(mention)
+    metadata = dict(mention.get("source_section_metadata", {})) if isinstance(mention.get("source_section_metadata"), Mapping) else {}
+    metadata["annotation_id"] = annotation_id
+    normalized["source_section_metadata"] = metadata
+    if not (
+        isinstance(mention.get("source_section_metadata"), Mapping)
+        and isinstance(mention["source_section_metadata"].get("annotation_id"), str)
+    ) and not (
+        isinstance(mention.get("anchor"), Mapping)
+        and isinstance(mention["anchor"].get("annotation_id"), str)
+    ):
+        normalized["annotation_ownership_basis"] = "canonical_annotation_match"
+    return normalized
 
 
 def _context(text: str, offset: int, surface: str, width: int = 42) -> tuple[str, str]:
@@ -1420,13 +1463,14 @@ def build(root: Path) -> dict[str, Any]:
     review_records: list[dict[str, Any]] = []
     published_ids = _published_story_ids(root)
     for mention in sorted_mentions:
-        story_id = str(mention.get("entry_id") or mention.get("source_id") or "")
-        section = str(mention.get("section", "main_text"))
-        text = _section_text(sections, mention)
-        prior = local_state[_local_context_key(mention)]
-        decision = decision_map.get(str(mention.get("mention_id")))
+        context_mention = _with_effective_annotation_ownership(mention, sections)
+        story_id = str(context_mention.get("entry_id") or context_mention.get("source_id") or "")
+        section = str(context_mention.get("section", "main_text"))
+        text = _section_text(sections, context_mention)
+        prior = local_state[_local_context_key(context_mention)]
+        decision = decision_map.get(str(context_mention.get("mention_id")))
         automatic_result = resolve_mention(
-            mention,
+            context_mention,
             text=text,
             alias_index=alias_index,
             targets_by_key=targets_by_key,
@@ -1437,7 +1481,7 @@ def build(root: Path) -> dict[str, Any]:
             prior_targets=[
                 item["target"]
                 for item in prior
-                if item.get("surface") == mention.get("surface")
+                if item.get("surface") == context_mention.get("surface")
                 and isinstance(item.get("target"), Mapping)
             ],
             prior_entities=prior,
@@ -1447,14 +1491,14 @@ def build(root: Path) -> dict[str, Any]:
         result = automatic_result
         if decision is not None:
             reviewed_result = resolve_mention(
-                mention,
+                context_mention,
                 text=text,
                 alias_index=alias_index,
                 targets_by_key=targets_by_key,
                 prior_targets=[
                     item["target"]
                     for item in prior
-                    if item.get("surface") == mention.get("surface")
+                    if item.get("surface") == context_mention.get("surface")
                     and isinstance(item.get("target"), Mapping)
                 ],
                 prior_entities=prior,
@@ -1463,21 +1507,21 @@ def build(root: Path) -> dict[str, Any]:
             )
             result = apply_reviewed_decision(automatic_result, reviewed_result)
         display_span = _maximal_semantic_span(
-            mention,
+            context_mention,
             result,
             text=text,
             alias_index=alias_index,
         )
-        effective = _effective_mention(mention, result, display_span=display_span)
+        effective = _effective_mention(context_mention, result, display_span=display_span)
         effective_mentions.append(effective)
         if result.get("status") == "resolved" and isinstance(result.get("target"), Mapping):
-            local_state[_local_context_key(mention)].append({
-                "offset": _mention_offset(mention),
-                "surface": mention.get("surface"),
-                "span_surface": display_span.get("text") if isinstance(display_span, Mapping) else mention.get("surface"),
+            local_state[_local_context_key(context_mention)].append({
+                "offset": _mention_offset(context_mention),
+                "surface": context_mention.get("surface"),
+                "span_surface": display_span.get("text") if isinstance(display_span, Mapping) else context_mention.get("surface"),
                 "target": result["target"],
                 "decision_source": result.get("decision_source"),
-                "mention_id": mention.get("mention_id"),
+                "mention_id": context_mention.get("mention_id"),
             })
         if story_id in published_ids and (
             result.get("status") != "resolved"
@@ -1486,10 +1530,10 @@ def build(root: Path) -> dict[str, Any]:
         ):
             review_records.append(
                 _review_record(
-                    mention,
+                    context_mention,
                     result,
                     text=text,
-                    associations=_association_candidates(alias_index, str(mention.get("surface", ""))),
+                    associations=_association_candidates(alias_index, str(context_mention.get("surface", ""))),
                 )
             )
 
