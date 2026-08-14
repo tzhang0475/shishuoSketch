@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://shishuo-sketch/schema/person-relation-candidates-r3c.schema.json",
+  "title": "R3C explicit Person Relation coverage candidates",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "stage", "generated_from", "records"],
+  "properties": {
+    "schema": {"const": 1},
+    "stage": {"const": "r3c-explicit-person-relation-candidate-review"},
+    "generated_from": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+    "records": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {"$ref": "#/$defs/record"}
+    }
+  },
+  "$defs": {
+    "string_list": {
+      "type": "array",
+      "items": {"type": "string", "minLength": 1},
+      "uniqueItems": true
+    },
+    "record": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "candidate_id", "person_a_id", "person_b_id",
+        "proposed_relation_type", "proposed_relation_subtype",
+        "proposed_relation_scope", "proposed_role_a", "proposed_role_b",
+        "source_entry_ids", "source_unit_ids", "evidence_ids",
+        "assertion_status", "review_status", "discovery_basis",
+        "discovery_note", "evidence_excerpt", "risk_flags",
+        "related_r3a_candidate_ids"
+      ],
+      "properties": {
+        "candidate_id": {"type": "string", "pattern": "^r3c-candidate-[0-9a-f]{20}$"},
+        "person_a_id": {"type": "string", "pattern": "^person-[0-9]{3}$"},
+        "person_b_id": {"type": "string", "pattern": "^person-[0-9]{3}$"},
+        "proposed_relation_type": {"enum": ["kinship", "marriage", "social", "institutional", "political"]},
+        "proposed_relation_subtype": {"type": "string", "minLength": 1},
+        "proposed_relation_scope": {"enum": ["long_term_social", "institutional_tenure", "event_bounded"]},
+        "proposed_scope_event": {"type": ["string", "null"]},
+        "proposed_role_a": {"type": "string", "minLength": 1},
+        "proposed_role_b": {"type": "string", "minLength": 1},
+        "source_entry_ids": {"$ref": "#/$defs/string_list"},
+        "source_unit_ids": {"$ref": "#/$defs/string_list"},
+        "evidence_ids": {"$ref": "#/$defs/string_list"},
+        "assertion_status": {"enum": ["attested", "reported", "inferred", "unknown"]},
+        "review_status": {"const": "candidate"},
+        "discovery_basis": {"type": "string", "minLength": 1},
+        "discovery_note": {"type": "string", "minLength": 1},
+        "evidence_excerpt": {"type": "string", "minLength": 1},
+        "risk_flags": {"$ref": "#/$defs/string_list"},
+        "related_r3a_candidate_ids": {"$ref": "#/$defs/string_list"}
+      }
+    }
+  }
+}

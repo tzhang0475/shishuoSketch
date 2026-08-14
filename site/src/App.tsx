@@ -1100,11 +1100,9 @@ function SceneCard({
   const evidence = scene.evidence_ids
     .map((id) => data.evidence.find((item) => item.id === id))
     .filter((item): item is Evidence => Boolean(item));
-  const dateLabel = readingValue(
-    scene.date.label ?? undefined,
-    readingMode,
-    uiLabel(data, "scene_unknown", readingMode, "时间未详"),
-  );
+  const dateLabel = scene.date.status !== "unknown" && scene.date.label
+    ? readingValue(scene.date.label, readingMode, "")
+    : "";
   const placeLabel = scene.places.map((place) => readingValue(place.name, readingMode, "")).filter(Boolean).join(" · ");
   const narrative = scene.narrative_layers;
   const sceneFocus = narrative?.scene_focus ?? [];
@@ -1115,6 +1113,14 @@ function SceneCard({
   const offFramePeople = scene.people_at_scene.filter((person) => person.scene_role !== "present");
   const inFrameUnmaterialized = scene.unmaterialized_people.filter((person) => person.scene_role === "present");
   const offFrameUnmaterialized = scene.unmaterialized_people.filter((person) => person.scene_role !== "present");
+  const stageClaims: StorySceneContext["event_background"] = sceneFocus.length > 0
+    ? sceneFocus
+    : scene.positional_context.map((position) => ({
+      text: position.text,
+      assertion_status: position.assertion_status,
+      review_status: position.review_status,
+      evidence_ids: position.evidence_ids,
+    }));
 
   function claimList(claims: StorySceneContext["event_background"], className = "scene-context-text") {
     return claims.map((claim, index) => (
@@ -1138,7 +1144,9 @@ function SceneCard({
             <span className="scene-person-role">{readingValue(person.scene_role_label, readingMode, person.scene_role)}</span>
           </div>
           <div className="scene-person-details">
-            <span>{readingValue(person.age.label ?? undefined, readingMode, uiLabel(data, "scene_unknown", readingMode, "年龄未详"))}</span>
+            {person.age.status !== "unknown" && person.age.label && (
+              <span>{readingValue(person.age.label, readingMode, "")}</span>
+            )}
             {person.status && <span>{readingValue(person.status.text, readingMode, "")}</span>}
           </div>
         </article>
@@ -1158,25 +1166,16 @@ function SceneCard({
     <section className="scene-card" aria-labelledby={`scene-heading-${story.id}`}>
       <div className="scene-card-header">
         <div>
-          <p className="section-label">{uiLabel(data, "scene_heading", readingMode, "舞台")}</p>
           <h2 id={`scene-heading-${story.id}`}>{uiLabel(data, "scene_heading", readingMode, "舞台")}</h2>
         </div>
-        {scene.review_status === "candidate" && <span className="scene-review-status">{uiLabel(data, "person_sketch_candidate", readingMode, "资料整理预览")}</span>}
       </div>
-      <p className="scene-date-place">
-        {dateLabel}
-        {placeLabel && <> · {placeLabel}</>}
-      </p>
+      {(dateLabel || placeLabel) && (
+        <p className="scene-date-place">{[dateLabel, placeLabel].filter(Boolean).join(" · ")}</p>
+      )}
 
-      {(sceneFocus.length > 0 || scene.positional_context.length > 0) && (
+      {stageClaims.length > 0 && (
         <div className="scene-context-group scene-stage-group">
-          {claimList(sceneFocus)}
-          {scene.positional_context.map((position, index) => (
-            <p className="scene-context-text" key={`${position.classification}-${index}`}>
-              <span className="scene-context-classification">{readingValue(position.classification_label, readingMode, position.classification)}</span>
-              {readingValue(position.text, readingMode, "")}
-            </p>
-          ))}
+          {claimList(stageClaims)}
         </div>
       )}
 

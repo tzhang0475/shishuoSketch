@@ -1,0 +1,119 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://shishuo-sketch/schema/person-relation-coverage-r3c.schema.json",
+  "title": "R3C current-scope Person Relation coverage audit",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "stage", "generated_from", "scope", "summary", "attention_records"],
+  "properties": {
+    "schema": {"const": 1},
+    "stage": {"const": "r3c-relation-coverage-audit"},
+    "generated_from": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+    "scope": {"$ref": "#/$defs/scope"},
+    "summary": {"$ref": "#/$defs/summary"},
+    "attention_records": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {"$ref": "#/$defs/attention"}
+    }
+  },
+  "$defs": {
+    "string_list": {
+      "type": "array",
+      "items": {"type": "string", "minLength": 1},
+      "uniqueItems": true
+    },
+    "scope": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "production_person_count", "production_person_ids",
+        "published_story_count", "published_story_ids", "person_pair_universe",
+        "evidence_count", "shishuo_evidence_count", "jinshu_evidence_count"
+      ],
+      "properties": {
+        "production_person_count": {"type": "integer", "minimum": 0},
+        "production_person_ids": {"$ref": "#/$defs/string_list"},
+        "published_story_count": {"type": "integer", "minimum": 0},
+        "published_story_ids": {"$ref": "#/$defs/string_list"},
+        "person_pair_universe": {"type": "integer", "minimum": 0},
+        "evidence_count": {"type": "integer", "minimum": 0},
+        "shishuo_evidence_count": {"type": "integer", "minimum": 0},
+        "jinshu_evidence_count": {"type": "integer", "minimum": 0}
+      }
+    },
+    "summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "evidence_bearing_pair_count", "relation_family_hit_counts",
+        "existing_reviewed_relation_count", "existing_deferred_candidate_count",
+        "already_reviewed_rediscovery_count", "existing_deferred_rediscovery_count",
+        "new_candidate_count", "scene_only_count", "insufficient_for_relation_count",
+        "identity_blocked_count", "duplicate_evidence_count",
+        "relation_isolated_person_count", "relation_isolated_person_ids",
+        "jinshu_evidence_count", "shishuo_evidence_count"
+      ],
+      "properties": {
+        "evidence_bearing_pair_count": {"type": "integer", "minimum": 0},
+        "relation_family_hit_counts": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["kinship", "marriage", "social", "institutional", "political"],
+          "properties": {
+            "kinship": {"type": "integer", "minimum": 0},
+            "marriage": {"type": "integer", "minimum": 0},
+            "social": {"type": "integer", "minimum": 0},
+            "institutional": {"type": "integer", "minimum": 0},
+            "political": {"type": "integer", "minimum": 0}
+          }
+        },
+        "existing_reviewed_relation_count": {"type": "integer", "minimum": 0},
+        "existing_deferred_candidate_count": {"type": "integer", "minimum": 0},
+        "already_reviewed_rediscovery_count": {"type": "integer", "minimum": 0},
+        "existing_deferred_rediscovery_count": {"type": "integer", "minimum": 0},
+        "new_candidate_count": {"type": "integer", "minimum": 0},
+        "scene_only_count": {"type": "integer", "minimum": 0},
+        "insufficient_for_relation_count": {"type": "integer", "minimum": 0},
+        "identity_blocked_count": {"type": "integer", "minimum": 0},
+        "duplicate_evidence_count": {"type": "integer", "minimum": 0},
+        "relation_isolated_person_count": {"type": "integer", "minimum": 0},
+        "relation_isolated_person_ids": {"$ref": "#/$defs/string_list"},
+        "jinshu_evidence_count": {"type": "integer", "minimum": 0},
+        "shishuo_evidence_count": {"type": "integer", "minimum": 0}
+      }
+    },
+    "attention": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "attention_id", "person_a_id", "person_b_id", "disposition",
+        "source_entry_ids", "source_unit_ids", "evidence_ids",
+        "discovery_basis", "evidence_excerpt", "audit_note", "risk_flags",
+        "existing_relation_ids", "existing_r3a_candidate_ids"
+      ],
+      "properties": {
+        "attention_id": {"type": "string", "pattern": "^r3c-attention-[0-9a-f]{20}$"},
+        "person_a_id": {"type": "string", "pattern": "^person-[0-9]{3}$"},
+        "person_b_id": {"type": "string", "pattern": "^person-[0-9]{3}$"},
+        "disposition": {"enum": ["existing_reviewed", "existing_deferred", "new_candidate", "scene_only", "insufficient_for_relation", "identity_blocked", "duplicate_evidence"]},
+        "proposed_relation_type": {"type": ["string", "null"]},
+        "proposed_relation_subtype": {"type": ["string", "null"]},
+        "proposed_relation_scope": {"type": ["string", "null"]},
+        "proposed_scope_event": {"type": ["string", "null"]},
+        "proposed_role_a": {"type": ["string", "null"]},
+        "proposed_role_b": {"type": ["string", "null"]},
+        "source_entry_ids": {"$ref": "#/$defs/string_list"},
+        "source_unit_ids": {"$ref": "#/$defs/string_list"},
+        "evidence_ids": {"$ref": "#/$defs/string_list"},
+        "discovery_basis": {"type": "string", "minLength": 1},
+        "evidence_excerpt": {"type": "string", "minLength": 1},
+        "audit_note": {"type": "string", "minLength": 1},
+        "risk_flags": {"$ref": "#/$defs/string_list"},
+        "existing_relation_ids": {"$ref": "#/$defs/string_list"},
+        "existing_r3a_candidate_ids": {"$ref": "#/$defs/string_list"},
+        "candidate_id": {"type": "string", "pattern": "^r3c-candidate-[0-9a-f]{20}$"}
+      }
+    }
+  }
+}

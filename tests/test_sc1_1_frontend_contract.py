@@ -223,6 +223,34 @@ console.log(JSON.stringify({{
         self.assertIn("if (!scene) return null", self.app)
         self.assertIn("onFocus(person.person_id)", self.app)
 
+    def test_scene_card_reading_hierarchy_hides_internal_metadata(self) -> None:
+        scene_start = self.app.index("function SceneCard(")
+        scene_end = self.app.index("\nfunction nodeLabel", scene_start)
+        scene = self.app[scene_start:scene_end]
+
+        self.assertEqual(scene.count('uiLabel(data, "scene_heading"'), 1)
+        self.assertNotIn("scene.review_status", scene)
+        self.assertNotIn("资料整理预览", scene)
+        self.assertNotIn("时间未详", scene)
+        self.assertNotIn("年龄未详", scene)
+        self.assertIn('scene.date.status !== "unknown"', scene)
+        self.assertIn('person.age.status !== "unknown"', scene)
+        self.assertIn("const stageClaims", scene)
+        self.assertIn("sceneFocus.length > 0", scene)
+        self.assertIn("scene.positional_context.map", scene)
+        self.assertNotIn("classification_label", scene)
+        self.assertIn("stageClaims.length > 0", scene)
+
+    def test_scene_card_keeps_empty_layers_hidden(self) -> None:
+        scene_start = self.app.index("function SceneCard(")
+        scene_end = self.app.index("\nfunction nodeLabel", scene_start)
+        scene = self.app[scene_start:scene_end]
+
+        self.assertIn("inFramePeople.length > 0 || inFrameUnmaterialized.length > 0", scene)
+        self.assertIn("offFramePeople.length > 0 || offFrameUnmaterialized.length > 0 || offFrameClaims.length > 0", scene)
+        self.assertIn("groundClaims.length > 0", scene)
+        self.assertIn("resonanceClaims.length > 0", scene)
+
     def test_random_person_helper_is_data_driven_and_avoids_immediate_repeat(self) -> None:
         node = shutil.which("node")
         if node is None:
