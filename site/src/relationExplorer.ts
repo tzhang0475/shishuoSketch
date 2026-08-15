@@ -5,10 +5,16 @@ export type PersonMentionRoute = {
   from_story_id: string;
 };
 
+export type PersonRelationRoute = {
+  via_relation_id: string;
+  from_person_id: string;
+  context_story_id?: string;
+};
+
 export type ExplorationNode =
   | { kind: "story"; id: string }
-  | ({ kind: "person"; id: string } & Partial<PersonMentionRoute>)
-  | { kind: "era"; id: string };
+  | ({ kind: "person"; id: string } & Partial<PersonMentionRoute & PersonRelationRoute>)
+  | ({ kind: "era"; id: string } & Partial<Pick<PersonRelationRoute, "context_story_id">>);
 
 export interface RelationPerspective {
   relation: Relation;
@@ -50,6 +56,88 @@ export function publishedStoryIds(data: SiteBundle): string[] {
 
 function isPublishedStory(story: SiteBundle["stories"][number]): boolean {
   return story.publication_state === "production_ready" || story.publication_state === "preview_ready";
+}
+
+function storyOrderValue(story: SiteBundle["stories"][number]): [number, number, string] {
+  return [
+    typeof story.global_ordinal === "number" ? story.global_ordinal : Number.POSITIVE_INFINITY,
+    typeof story.ordinal === "number" ? story.ordinal : Number.POSITIVE_INFINITY,
+    story.id,
+  ];
+}
+
+function compareStories(left: SiteBundle["stories"][number], right: SiteBundle["stories"][number]): number {
+  const leftKey = storyOrderValue(left);
+  const rightKey = storyOrderValue(right);
+  return leftKey[0] - rightKey[0] || leftKey[1] - rightKey[1] || leftKey[2].localeCompare(rightKey[2]);
+}
+
+function storyHasMainTextEndpointMention(
+  data: SiteBundle,
+  storyId: string,
+  endpointIds: string[],
+): boolean {
+  const endpoints = new Set(endpointIds);
+  return data.mentions.some(
+    (mention) =>
+      mention.story_id === storyId &&
+      mention.section === "main_text" &&
+      mention.confidence !== "unresolved" &&
+      mention.person_id !== null &&
+      endpoints.has(mention.person_id),
+  );
+}
+
+function selectPublishedStory(
+  data: SiteBundle,
+  candidateIds: string[],
+  endpointIds: string[],
+  currentStoryId?: string,
+): string | null {
+  const candidateSet = new Set(candidateIds);
+  const candidates = data.stories
+    .filter((story) => isPublishedStory(story) && candidateSet.has(story.id))
+    .sort(compareStories);
+  if (candidates.length === 0) return null;
+
+  const mainTextCandidates = candidates.filter((story) =>
+    storyHasMainTextEndpointMention(data, story.id, endpointIds),
+  );
+  const preferred = mainTextCandidates.length > 0 ? mainTextCandidates : candidates;
+  const different = currentStoryId ? preferred.find((story) => story.id !== currentStoryId) : undefined;
+  return (different ?? preferred[0])?.id ?? null;
+}
+
+/**
+ * Select navigation context for a Relation traversal.
+ *
+ * This is intentionally a reader-routing decision, not a new historical
+ * assertion.  Relation evidence is preferred; Person Story coverage is only
+ * a deterministic fallback when no published supporting Story exists.
+ */
+export function relationContextStoryId(
+  data: SiteBundle,
+  relation: Relation,
+  neighborPersonId: string,
+  currentStoryId?: string,
+): string | null {
+  const endpointIds = [relation.subject_id, relation.object_id];
+  for (const supportingIds of [relation.story_ids ?? [], relation.source_entry_ids ?? []]) {
+    const selected = selectPublishedStory(data, supportingIds, endpointIds, currentStoryId);
+    if (selected) return selected;
+  }
+
+  const mainTextIds = mainTextPublishedStoryIdsForPerson(data, neighborPersonId);
+  const fallbackMain = selectPublishedStory(data, mainTextIds, [neighborPersonId], currentStoryId);
+  if (fallbackMain) return fallbackMain;
+
+  const fallbackAny = selectPublishedStory(
+    data,
+    publishedStoryIdsForPerson(data, neighborPersonId),
+    [neighborPersonId],
+    currentStoryId,
+  );
+  return fallbackAny;
 }
 
 /**
@@ -141,8 +229,18 @@ export function storyIdFromHash(hash: string): string | null {
   }
 }
 
-export function currentStoryFromExploration(stack: ExplorationNode[]): string | null {
-  return [...stack].reverse().find((node) => node.kind === "story")?.id ?? null;
+export function currentStoryFromExploration(
+  stack: ExplorationNode[],
+  validStoryIds?: ReadonlySet<string>,
+): string | null {
+  const isValid = (storyId: string): boolean => !validStoryIds || validStoryIds.has(storyId);
+  for (const node of [...stack].reverse()) {
+    if ((node.kind === "person" || node.kind === "era") && node.context_story_id && isValid(node.context_story_id)) {
+      return node.context_story_id;
+    }
+    if (node.kind === "story" && isValid(node.id)) return node.id;
+  }
+  return null;
 }
 
 export function focusedPersonFromExploration(stack: ExplorationNode[]): string | null {

@@ -38,7 +38,7 @@ class SC11FrontendContractTests(unittest.TestCase):
 
     def test_random_person_resets_to_related_story_then_person(self) -> None:
         self.assertIn(
-            "randomPublishedStoryIdForPerson(\n      data,\n      personId,\n      Math.random,\n      currentStoryFromExploration(stack) ?? undefined,\n    )",
+            "randomPublishedStoryIdForPerson(\n      data,\n      personId,\n      Math.random,\n      currentStoryFromExploration(stack, publishedStoryIdSet) ?? undefined,\n    )",
             self.app,
         )
         self.assertIn(
@@ -52,10 +52,13 @@ class SC11FrontendContractTests(unittest.TestCase):
         random_person_body = self.app[random_person_start:random_person_end]
         self.assertNotIn("focusPerson(personId)", random_person_body)
         focus_start = self.app.index("function focusPerson(personId: string")
-        focus_end = self.app.index("\n  function selectStory", focus_start)
+        focus_end = self.app.index("\n  function focusRelation", focus_start)
         focus_body = self.app[focus_start:focus_end]
         self.assertIn("setStack((current) => appendExploration(current, {", focus_body)
         self.assertNotIn("writeStoryAddress", focus_body)
+        relation_start = self.app.index("function focusRelation", focus_end)
+        relation_end = self.app.index("\n  function focusEra", relation_start)
+        self.assertIn("writeStoryAddress(visibleStoryId)", self.app[relation_start:relation_end])
         self.assertIn("onFocus={onFocus}", self.app)
 
     def test_random_person_story_helper_prefers_main_text_and_falls_back_to_liu(self) -> None:

@@ -18,10 +18,14 @@ import {
   focusedPersonNodeFromExploration,
   focusedEraFromExploration,
   focusedEraNodeFromExploration,
+  publishedStoryIds,
+  relationContextStoryId,
   type PersonMentionRoute,
+  type PersonRelationRoute,
   type RelationPerspective,
   type ExplorationNode,
 } from "./relationExplorer";
+import { normalizeReaderText } from "./readerDisplay";
 import type {
   Evidence,
   EraCard,
@@ -40,6 +44,7 @@ const READING_MODE_STORAGE_KEY = "shishuoSketch.reading-mode";
 type ReadingMode = "simplified" | "original";
 type ResolvedMention = Mention & { person_id: string };
 type PersonFocus = (personId: string, route?: PersonMentionRoute) => void;
+type RelationFocus = (perspective: RelationPerspective) => void;
 type EraFocus = (eraCardId: string) => void;
 
 function initialReadingMode(): ReadingMode {
@@ -57,10 +62,6 @@ function storyReference(story: Story, mode: ReadingMode): string {
   const ordinal = story.ordinal ?? Number(idParts[idParts.length - 1] ?? 0);
   const chapter = readingValue(story.chapter_display, mode, story.chapter_heading ?? story.id);
   return `${chapter} · ${String(ordinal).padStart(3, "0")}`;
-}
-
-function storyHeading(story: Story, mode: ReadingMode): string {
-  return story.title_source === "project_label" ? story.title : storyReference(story, mode);
 }
 
 function uiLabel(
@@ -222,7 +223,7 @@ function InlineReadingSegments({
   return (
     <>
       {segments.map((segment, index) => {
-        const text = readingValue(segment.display, readingMode, "");
+        const text = normalizeReaderText(readingValue(segment.display, readingMode, ""));
         if (segment.type === "text") {
           return <span key={`text-${index}`}>{text}</span>;
         }
@@ -465,14 +466,14 @@ function EgoRelationMap({
   focusedPerson,
   perspectives,
   readingMode,
-  onFocus,
+  onRelationFocus,
 }: {
   story: Story;
   data: SiteBundle;
   focusedPerson: Person;
   perspectives: RelationPerspective[];
   readingMode: ReadingMode;
-  onFocus: PersonFocus;
+  onRelationFocus: RelationFocus;
 }) {
   const layout = egoLayout(perspectives.length);
   return (
@@ -513,7 +514,7 @@ function EgoRelationMap({
                 className="ego-node ego-node-neighbor"
                 style={{ left: `${point.x}%`, top: `${point.y}%` }}
                 key={perspective.relation.id}
-                onClick={() => onFocus(perspective.neighbor.id)}
+                onClick={() => onRelationFocus(perspective)}
                 aria-label={`${personDisplayName(story, perspective.neighbor, readingMode)} · ${perspectiveNeighborRole(story, perspective, readingMode)}`}
               >
                 {personDisplayName(story, perspective.neighbor, readingMode)}
@@ -860,6 +861,7 @@ function PersonDetailCard({
   readingMode,
   routeNode,
   onFocus,
+  onRelationFocus,
   onStorySelect,
 }: {
   story: Story;
@@ -869,6 +871,7 @@ function PersonDetailCard({
   readingMode: ReadingMode;
   routeNode: ExplorationNode | null;
   onFocus: PersonFocus;
+  onRelationFocus: RelationFocus;
   onStorySelect: (storyId: string) => void;
 }) {
   const derivedRelations = derivedRelationsForPerson(focusedPerson.id, data);
@@ -910,7 +913,7 @@ function PersonDetailCard({
         {perspectives.length === 0 && <p className="relation-empty">{story.reading.labels.no_direct_relations[readingMode]}</p>}
         {perspectives.map((perspective) => (
           <div className="relation-detail-row" key={perspective.relation.id}>
-            <button type="button" className="person-link" onClick={() => onFocus(perspective.neighbor.id)}>
+            <button type="button" className="person-link" onClick={() => onRelationFocus(perspective)}>
               {personDisplayName(story, perspective.neighbor, readingMode)} · {perspectiveNeighborRole(story, perspective, readingMode)}
             </button>
             <RelationEvidence
@@ -944,6 +947,7 @@ function EgoRelationExplorer({
   readingMode,
   backTarget,
   onFocus,
+  onRelationFocus,
   onBack,
   onStorySelect,
 }: {
@@ -954,6 +958,7 @@ function EgoRelationExplorer({
   readingMode: ReadingMode;
   backTarget: ExplorationNode | null;
   onFocus: PersonFocus;
+  onRelationFocus: RelationFocus;
   onBack: () => void;
   onStorySelect: (storyId: string) => void;
 }) {
@@ -987,6 +992,7 @@ function EgoRelationExplorer({
           readingMode={readingMode}
           routeNode={focusedPersonNode}
           onFocus={onFocus}
+          onRelationFocus={onRelationFocus}
           onStorySelect={onStorySelect}
         />
         <EgoRelationMap
@@ -995,7 +1001,7 @@ function EgoRelationExplorer({
           focusedPerson={focusedPerson}
           perspectives={perspectives}
           readingMode={readingMode}
-          onFocus={onFocus}
+          onRelationFocus={onRelationFocus}
         />
       </div>
     </section>
@@ -1010,6 +1016,7 @@ function PersonExplorerPanel({
   readingMode,
   backTarget,
   onFocus,
+  onRelationFocus,
   onBack,
   onStorySelect,
   onClose,
@@ -1021,6 +1028,7 @@ function PersonExplorerPanel({
   readingMode: ReadingMode;
   backTarget: ExplorationNode | null;
   onFocus: PersonFocus;
+  onRelationFocus: RelationFocus;
   onBack: () => void;
   onStorySelect: (storyId: string) => void;
   onClose: () => void;
@@ -1049,6 +1057,7 @@ function PersonExplorerPanel({
           readingMode={readingMode}
           backTarget={backTarget}
           onFocus={onFocus}
+          onRelationFocus={onRelationFocus}
           onBack={onBack}
           onStorySelect={onStorySelect}
         />
@@ -1666,8 +1675,7 @@ function StoryReader({
   return (
     <div className="story-reader-stage" ref={readerRef} tabIndex={-1} aria-labelledby="story-heading">
       <article className="reading-column">
-        <p className="story-reference">{storyReference(story, readingMode)}</p>
-        <h1 id="story-heading">{storyHeading(story, readingMode)}</h1>
+        <h1 id="story-heading">{storyReference(story, readingMode)}</h1>
         {primaryEraCard && (
           <button
             type="button"
@@ -1804,6 +1812,7 @@ function ReadingPage({
   personPanelOpen,
   eraPanelOpen,
   onFocus,
+  onRelationFocus,
   onEraFocus,
   onBack,
   onStorySelect,
@@ -1824,6 +1833,7 @@ function ReadingPage({
   personPanelOpen: boolean;
   eraPanelOpen: boolean;
   onFocus: PersonFocus;
+  onRelationFocus: RelationFocus;
   onEraFocus: EraFocus;
   onBack: () => void;
   onStorySelect: (storyId: string) => void;
@@ -1883,6 +1893,7 @@ function ReadingPage({
             readingMode={readingMode}
             backTarget={backTarget}
             onFocus={onFocus}
+            onRelationFocus={onRelationFocus}
             onBack={onBack}
             onStorySelect={onStorySelect}
             onClose={onClosePerson}
@@ -1935,11 +1946,16 @@ function App() {
     }
   }, []);
 
+  const publishedStoryIdSet = useMemo(
+    () => (data ? new Set(publishedStoryIds(data)) : undefined),
+    [data],
+  );
+
   const story = useMemo(() => {
     if (!data || stack.length === 0) return undefined;
-    const storyId = currentStoryFromExploration(stack);
+    const storyId = currentStoryFromExploration(stack, publishedStoryIdSet);
     return storyId ? storyById(data, storyId) : undefined;
-  }, [data, stack]);
+  }, [data, publishedStoryIdSet, stack]);
   const currentFocusedPersonId = focusedPersonFromExploration(stack);
   const currentFocusedPersonNode = focusedPersonNodeFromExploration(stack);
   const currentFocusedEraId = focusedEraFromExploration(stack);
@@ -1954,6 +1970,33 @@ function App() {
     }));
     setPersonPanelOpen(true);
     setEraPanelOpen(false);
+  }
+
+  function focusRelation(perspective: RelationPerspective) {
+    if (!data || !currentFocusedPersonId) return;
+    if (!data.people.some((person) => person.id === perspective.neighbor.id)) return;
+    const currentStoryId = currentStoryFromExploration(stack, publishedStoryIdSet) ?? undefined;
+    const contextStoryId = relationContextStoryId(
+      data,
+      perspective.relation,
+      perspective.neighbor.id,
+      currentStoryId,
+    );
+    const route: PersonRelationRoute = {
+      via_relation_id: perspective.relation.id,
+      from_person_id: currentFocusedPersonId,
+      ...(contextStoryId ? { context_story_id: contextStoryId } : {}),
+    };
+    const next = appendExploration(stack, {
+      kind: "person",
+      id: perspective.neighbor.id,
+      ...route,
+    });
+    setStack(next);
+    setPersonPanelOpen(true);
+    setEraPanelOpen(false);
+    const visibleStoryId = currentStoryFromExploration(next, publishedStoryIdSet);
+    if (visibleStoryId) writeStoryAddress(visibleStoryId);
   }
 
   function focusEra(eraCardId: string) {
@@ -1977,7 +2020,7 @@ function App() {
     setStack(next);
     setPersonPanelOpen(next[next.length - 1]?.kind === "person");
     setEraPanelOpen(next[next.length - 1]?.kind === "era");
-    const storyId = currentStoryFromExploration(next);
+    const storyId = currentStoryFromExploration(next, publishedStoryIdSet);
     if (storyId) writeStoryAddress(storyId);
   }
 
@@ -1986,13 +2029,13 @@ function App() {
     setStack(next);
     setPersonPanelOpen(next[next.length - 1]?.kind === "person");
     setEraPanelOpen(next[next.length - 1]?.kind === "era");
-    const storyId = currentStoryFromExploration(next);
+    const storyId = currentStoryFromExploration(next, publishedStoryIdSet);
     if (storyId) writeStoryAddress(storyId);
   }
 
   function chooseRandomStory() {
     if (!data) return;
-    const storyId = randomPublishedStoryId(data, Math.random, currentStoryFromExploration(stack) ?? undefined);
+    const storyId = randomPublishedStoryId(data, Math.random, currentStoryFromExploration(stack, publishedStoryIdSet) ?? undefined);
     if (!storyId) return;
     setStack([{ kind: "story", id: storyId }]);
     setPersonPanelOpen(false);
@@ -2008,7 +2051,7 @@ function App() {
       data,
       personId,
       Math.random,
-      currentStoryFromExploration(stack) ?? undefined,
+      currentStoryFromExploration(stack, publishedStoryIdSet) ?? undefined,
     );
     if (!storyId) return;
     setStack([
@@ -2053,6 +2096,7 @@ function App() {
       personPanelOpen={personPanelOpen}
       eraPanelOpen={eraPanelOpen}
       onFocus={focusPerson}
+      onRelationFocus={focusRelation}
       onEraFocus={focusEra}
       onBack={goBack}
       onStorySelect={selectStory}

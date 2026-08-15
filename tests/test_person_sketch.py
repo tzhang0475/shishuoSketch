@@ -106,7 +106,7 @@ class PersonSketchTests(unittest.TestCase):
     def test_route_context_and_relation_navigation_remain_distinct(self) -> None:
         self.assertIn("MentionOriginExplanation", self.app)
         self.assertIn("routeNode={focusedPersonNode}", self.app)
-        self.assertIn("onClick={() => onFocus(perspective.neighbor.id)}", self.app)
+        self.assertIn("onClick={() => onRelationFocus(perspective)}", self.app)
         self.assertIn("via_mention_id", self.app)
 
     def test_full_sc1_validation_uses_existing_project_mode(self) -> None:
