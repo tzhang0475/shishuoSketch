@@ -1379,8 +1379,8 @@ function StoryReader({
       <article className="reading-column">
         <p className="story-reference">{storyReference(story, readingMode)}</p>
         <h1 id="story-heading">{storyHeading(story, readingMode)}</h1>
-        {story.period_label && (
-          <p className="story-period-label">{readingValue(story.period_label, readingMode, "")}</p>
+        {(story.temporal_orientation ?? story.period_label) && (
+          <p className="story-period-label">{readingValue(story.temporal_orientation ?? story.period_label, readingMode, "")}</p>
         )}
         <p className="story-meta">{story.id}</p>
 

@@ -63,6 +63,7 @@ PERSON_STORY_INDEX_PATH = ROOT / "data/derived/person-story-index.json"
 PUNCTUATION_PATH = ROOT / "data/annotation/wp1-punctuation.json"
 PRODUCTION_EVIDENCE_PATH = ROOT / "data/evidence/wp1-evidence.json"
 PRODUCTION_RELATIONS_PATH = ROOT / "data/annotation/wp1-relations.json"
+H0A_ANCHORS_PATH = ROOT / "data/annotation/story-temporal-anchors-h0a.json"
 DERIVED_PATH = ROOT / "data/derived/sc1-site.json"
 VITE_PATH = ROOT / "site/src/generated/sc1-site.json"
 
@@ -114,6 +115,26 @@ def apply_period_orientation(
     if isinstance(phase_id, str) and phase_id and isinstance(phase_label, str) and phase_label:
         story["period_id"] = phase_id
         story["period_label"] = pair(phase_label, converter)
+
+
+def apply_h0a_temporal_orientation(
+    story: dict[str, Any],
+    story_id: str,
+    temporal_anchors: Mapping[str, Mapping[str, Any]],
+    converter: OpenCC,
+) -> None:
+    """Project only the H0A reader label; keep the full anchor in its audit artifact."""
+
+    anchor = temporal_anchors.get(story_id)
+    if not isinstance(anchor, Mapping):
+        return
+    projection = anchor.get("reader_projection")
+    if not isinstance(projection, Mapping):
+        return
+    label = projection.get("label_zh")
+    if isinstance(label, str) and label:
+        story["temporal_anchor_id"] = str(anchor.get("anchor_id"))
+        story["temporal_orientation"] = pair(label, converter)
 
 
 def entry_path(entry_id: str, entry_by_id: Mapping[str, Mapping[str, Any]]) -> Path:
@@ -397,6 +418,14 @@ def build(root: Path = ROOT) -> dict[str, Any]:
         }
     else:
         w3_story_metadata = {}
+    temporal_anchors: dict[str, Mapping[str, Any]] = {}
+    if H0A_ANCHORS_PATH.is_file():
+        h0a_anchors = read_json(H0A_ANCHORS_PATH)
+        temporal_anchors = {
+            str(item["story_id"]): item
+            for item in h0a_anchors.get("records", [])
+            if isinstance(item, Mapping) and isinstance(item.get("story_id"), str)
+        }
     selected_records.sort(key=lambda record: int(entry_by_id[record["entry_id"]].get("global_ordinal", 10**9)))
     selected_ids = [record["entry_id"] for record in selected_records]
     if len(selected_ids) != len(set(selected_ids)):
@@ -563,6 +592,7 @@ def build(root: Path = ROOT) -> dict[str, Any]:
             story["ordinal"] = 19
             story["global_ordinal"] = 370
             apply_period_orientation(story, entry_id, w3_story_metadata, converter)
+            apply_h0a_temporal_orientation(story, entry_id, temporal_anchors, converter)
             base_annotation_evidence = {
                 str(item.get("locator", {}).get("annotation_id")): item["id"]
                 for item in base_evidence.values()
@@ -711,6 +741,7 @@ def build(root: Path = ROOT) -> dict[str, Any]:
             "notes": "SC1 preview publication preserves the unreviewed CRL1/CRL1.1 punctuation status.",
         }
         apply_period_orientation(story, entry_id, w3_story_metadata, converter)
+        apply_h0a_temporal_orientation(story, entry_id, temporal_anchors, converter)
         new_stories.append(story)
 
     new_stories.sort(key=lambda story: int(story.get("global_ordinal", 10**9)))

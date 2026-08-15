@@ -5,11 +5,11 @@ ER1 builds a deterministic effective-resolution overlay above the canonical Ment
 ## Summary
 
 - published Mention records audited: 294
-- safely auto-resolved: 261
+- safely auto-resolved: 260
 - candidate for review: 24
 - unresolved: 2
-- reviewed decisions applied: 8
-- shared identity surfaces: 20
+- reviewed decisions applied: 9
+- shared identity surfaces: 21
 
 ## Resolution precedence
 
@@ -35,6 +35,7 @@ Production status is a navigation capability, not an identity-confidence signal.
 ## Shared alias collisions
 
 - `世英` → 陶璜、魯芝 · 0 published occurrences; never globally exact
+- `仲容` → 阮咸、石苞 · 1 published occurrences; never globally exact
 - `元禮陳郡` → 袁悦之、顧悦之 · 0 published occurrences; never globally exact
 - `叔平` → 淳于智、王凝之 · 1 published occurrences; never globally exact
 - `叔時` → 孟觀、魯勝 · 0 published occurrences; never globally exact
@@ -435,6 +436,18 @@ Production status is a navigation capability, not an identity-confidence signal.
 - Candidates:
   - 王坦之 · identity_candidate · supporting: exact；strong · conflicting: insufficient_unique_local_context；shared_alias_surface
   - 孫晷 · production_person · supporting: ambiguous；strong · conflicting: insufficient_unique_local_context；shared_alias_surface
+
+### 23-rendan-013 · 仲容
+
+- Mention: `shishuo-w3-38231138347d766d147ad8bc` · section: `main_text` · status: `resolved` · review: `reviewed`
+- Context: 阮渾長成風氣韻度似父亦欲作逹步兵曰【仲容】已
+預之卿不得復爾
+- Recommendation: 阮咸
+- Candidates:
+  - 阮咸 · identity_candidate · supporting: contextual；strong · conflicting: 无
+  - 石苞 · production_person · supporting: exact；strong · conflicting: 无
+- Review note: 本则“步兵”即阮籍；“仲容”承接阮咸（阮仲容），不得因石苞亦字仲容而解析为石苞。
+- Automatic-review conflict: automatic=candidate_for_review/无目标；已审核决定优先保留。
 
 ## Manual correction workflow
 

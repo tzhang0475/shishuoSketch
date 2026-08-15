@@ -111,6 +111,8 @@ export interface Story {
   chapter_display?: ReadingPair;
   period_id?: string;
   period_label?: ReadingPair;
+  temporal_anchor_id?: string;
+  temporal_orientation?: ReadingPair;
   ordinal?: number;
   global_ordinal?: number;
   publication_state: PublicationState;

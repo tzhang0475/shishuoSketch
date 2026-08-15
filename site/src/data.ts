@@ -320,6 +320,12 @@ export function parseSiteBundle(value: unknown): SiteBundle {
     if (!isRuntimeStoryRecord(story)) {
       throw new Error(`Story ${String(story.id)} 的 publication_state 无效`);
     }
+    if (story.temporal_anchor_id !== undefined && typeof story.temporal_anchor_id !== "string") {
+      throw new Error(`Story ${String(story.id)} 的 temporal_anchor_id 无效`);
+    }
+    if (story.temporal_orientation !== undefined && !isReadingPair(story.temporal_orientation)) {
+      throw new Error(`Story ${String(story.id)} 的 temporal_orientation 无效`);
+    }
     const reading = story.reading;
     if (reading.entry_id !== story.id || typeof reading.status !== "string") {
       throw new Error(`Story ${String(story.id)} 的 reading layer 标识不一致`);

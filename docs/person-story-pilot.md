@@ -14,9 +14,9 @@ This is deterministic navigation/index data for the unified materialized Shishuo
 
 - primary people: 49
 - supporting people: 1
-- reviewed PersonStoryLinks: 705
-- candidate PersonStoryLinks: 4
-- candidate contextual mentions retained: 27
+- reviewed PersonStoryLinks: 699
+- candidate PersonStoryLinks: 5
+- candidate contextual mentions retained: 28
 - reader-ready linked Stories: 1
 
 ## Person review lists
@@ -4287,53 +4287,17 @@ No Story is listed as directly participating unless a future reviewed presence e
 ### 石苞 (`person-037`)
 
 - directly participating Stories: none currently classified; main-text appearance is retained as `mentioned` pending explicit participation review.
-- reviewed linked Stories: 6; reader-ready: 0; candidate links: 0; candidate contextual Mentions: 0
+- reviewed linked Stories: 0; reader-ready: 0; candidate links: 1; candidate contextual Mentions: 1
 - main-text presence:
-  - `23-rendan-010` · 任誕第二十三 · reviewed · reader_ready=false · surface: 仲容
-    ```text
-阮仲容步兵居道南諸阮居道北北阮皆富南阮
-貧七月七日北阮盛曬衣皆紗羅錦綺仲容以竿挂
-大布犢鼻㡓於中庭人或怪之荅曰未能免俗聊復
-爾耳
-
-
-    ```
-  - `23-rendan-012` · 任誕第二十三 · reviewed · reader_ready=false · surface: 仲容
+  - `23-rendan-012` · 任誕第二十三 · candidate · reader_ready=false · surface: explicit annotation evidence
     ```text
 諸阮皆能飲酒仲容至宗人閒共集不復用常桮斟
 酌以大&KR1805;盛酒圍坐相向大酌時有羣豬來飲直接
 去上便共飲之
 
     ```
-  - `23-rendan-013` · 任誕第二十三 · reviewed · reader_ready=false · surface: 仲容
-    ```text
-阮渾長成風氣韻度似父亦欲作逹步兵曰仲容已
-預之卿不得復爾
-
-
-
-
-
-    ```
-  - `23-rendan-015` · 任誕第二十三 · reviewed · reader_ready=false · surface: 仲容
-    ```text
-阮仲容先幸姑家鮮卑婢及居母喪姑當逺移初云
-當留婢既發定將去仲容借客驢箸重服自追之累
-騎而返曰人種不可失即遥集之母也
-
-
-
-
-    ```
 - Liu-annotation-only presence:
-  - `04-wenxue-094` · 文學第四 · reviewed · reader_ready=false · surface: 仲容
-    ```text
-(叔則樂彦輔王夷甫庾子嵩王安期阮千里衛叔寳/巨源向子期劉伯倫阮仲容王濬仲為竹林名士裴)
-    ```
-  - `08-shangyu-012` · 賞譽第八 · reviewed · reader_ready=false · surface: 仲容
-    ```text
-(當世皆怪其所爲及與之處少嗜欲哀樂至到過/名士傳曰咸字仲容陳留人籍兄子也任逹不拘)
-    ```
+  - none
 
 ### 羊祜 (`person-038`)
 
@@ -5513,7 +5477,7 @@ No Story is listed as directly participating unless a future reviewed presence e
 These 16 candidates are selected deterministically from reviewed links using only editorial flags: reader-ready representation, multiple reviewed people, main-text presence, explicit/high-confidence resolution, and canonical order. They are not importance scores or interpretations.
 
 - `06-yaliang-019` · 雅量第六 · 王羲之、郗璿、郗鑒 · reader-ready; multiple reviewed people; main-text presence; explicit/high-confidence resolution
-- `04-wenxue-094` · 文學第四 · 劉伶、向秀、山濤、嵇康、樂廣、王濬、石苞、袁宏、阮籍 · multiple reviewed people; main-text presence; explicit/high-confidence resolution
+- `04-wenxue-094` · 文學第四 · 劉伶、向秀、山濤、嵇康、樂廣、王濬、袁宏、阮籍 · multiple reviewed people; main-text presence; explicit/high-confidence resolution
 - `23-rendan-001` · 任誕第二十三 · 劉伶、向秀、山濤、嵇康、王戎、阮籍 · multiple reviewed people; main-text presence; explicit/high-confidence resolution
 - `27-jiajue-008` · 假譎第二十七 · 庾亮、温嶠、王導、蘇峻、陸機 · multiple reviewed people; main-text presence; explicit/high-confidence resolution
 - `08-shangyu-054` · 賞譽第八 · 卞壼、王導、王敦、蘇峻、謝鯤 · multiple reviewed people; main-text presence; explicit/high-confidence resolution
@@ -5567,3 +5531,5 @@ The current supporting 郗璿 link is the only link without a legacy Mention ID;
   - `05-fangzheng-047` · main_text · `文度` · confidence=low · context_identity_hits=孫晷
   - `09-pinzao-063` · main_text · `文度` · confidence=low · context_identity_hits=孫晷
   - `26-qingdi-021` · liu_annotation · `文度` · confidence=low · context_identity_hits=孫晷
+- 石苞 (`person-037`):
+  - `23-rendan-012` · main_text · `仲容` · confidence=low · context_identity_hits=石苞

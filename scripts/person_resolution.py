@@ -537,9 +537,33 @@ def _longest_safe_semantic_resolution(
     if text[offset : offset + len(surface)] != surface:
         return None
 
-    possible: list[tuple[int, str, dict[str, Any], list[dict[str, Any]]]] = []
+    possible: list[tuple[int, int, str, dict[str, Any], list[dict[str, Any]]]] = []
     for longer_surface in sorted(alias_index, key=lambda value: (-len(value), value)):
-        if len(longer_surface) <= len(surface) or not text.startswith(longer_surface, offset):
+        if len(longer_surface) <= len(surface):
+            continue
+        # A canonical Mention may have been seeded on the courtesy-name
+        # suffix of a complete surname+courtesy appellation (阮仲容 -> 仲容).
+        # Permit only the one-character, source-contiguous surname prefix
+        # when the complete known semantic surface ends at this Mention.  The
+        # surface/evidence gate below still decides identity; this is not
+        # blind left expansion.
+        possible_starts = [offset]
+        if offset > 0:
+            possible_starts.append(offset - 1)
+        start = next(
+            (
+                candidate_start
+                for candidate_start in possible_starts
+                if text.startswith(longer_surface, candidate_start)
+                and (
+                    (candidate_start == offset and longer_surface.startswith(surface))
+                    or (candidate_start == offset - 1 and longer_surface.endswith(surface))
+                )
+                and candidate_start + len(longer_surface) >= offset + len(surface)
+            ),
+            None,
+        )
+        if start is None:
             continue
         associations = _association_candidates(alias_index, longer_surface)
         safe = [
@@ -553,18 +577,18 @@ def _longest_safe_semantic_resolution(
         if len(target_keys) != 1:
             continue
         target = _target_copy(safe[0]["target"])
-        possible.append((len(longer_surface), longer_surface, target, safe))
+        possible.append((len(longer_surface), start, longer_surface, target, safe))
 
     if not possible:
         return None
-    possible.sort(key=lambda row: (-row[0], row[1], _target_key(row[2])))
+    possible.sort(key=lambda row: (-row[0], row[2], _target_key(row[3])))
     longest_length = possible[0][0]
     longest = [row for row in possible if row[0] == longest_length]
-    if len({_target_key(row[2]) for row in longest}) != 1:
+    if len({_target_key(row[3]) for row in longest}) != 1:
         # Two equally long recognized appellations with different identities
         # are still ambiguous.  Do not let longest-match become a new guess.
         return None
-    _, longer_surface, target, associations = longest[0]
+    _, start, longer_surface, target, associations = longest[0]
     evidence_ids = sorted({
         str(evidence_id)
         for item in associations
@@ -591,8 +615,8 @@ def _longest_safe_semantic_resolution(
         "resolution_mode": "exact",
         "resolution_method": "er1_1_2_longest_safe_semantic_span",
         "semantic_span": {
-            "offset": offset,
-            "end_offset_exclusive": offset + len(longer_surface),
+            "offset": start,
+            "end_offset_exclusive": start + len(longer_surface),
             "text": longer_surface,
             "basis": "longest_safe_semantic_span",
             "status": "safe",

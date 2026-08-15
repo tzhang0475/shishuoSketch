@@ -8,20 +8,20 @@
 |---|---:|---:|
 | 生产人物 | 17 | 50 |
 | 已发布阅读故事 | 16 | 83 |
-| 随机认识人物可选数 | 13 | 46 |
-| PersonStory links | 330 | 709 |
-| 至少一则发布故事的人物 | 33 | 46 |
-| 至少三则发布故事的人物 | 19 | 28 |
-| 多人物故事 | 48 | 58 |
+| 随机认识人物可选数 | 13 | 45 |
+| PersonStory links | 330 | 704 |
+| 至少一则发布故事的人物 | 46 | 45 |
+| 至少三则发布故事的人物 | 28 | 28 |
+| 多人物故事 | 58 | 57 |
 | Scene Cards | 9 | 44 |
 | 已审阅 Relation | 7 | 12 |
-| 仅按 Relation 孤立的人物 | 23 | 38 |
-| 共享故事人物对 | 77 | 105 |
-| 没有发布故事路径的人物 | 2 | 4 |
+| 仅按 Relation 孤立的人物 | 38 | 38 |
+| 共享故事人物对 | 105 | 104 |
+| 没有发布故事路径的人物 | 4 | 5 |
 | 没有可点击人物的故事 | 0 | 0 |
-| 仅有一则且该故事无其他人物的人物 | 1 | 2 |
+| 仅有一则且该故事无其他人物的人物 | 2 | 2 |
 
-身份校正后，生产注册表保留 50 位 Person，但安全的“随便认识一个人” eligibility 为 46。候选身份、歧义 Mention 和错误前缀均不用于补回导航；没有安全 published Story 入口的人物仍保留在生产数据中。
+身份校正后，生产注册表保留 50 位 Person，但安全的“随便认识一个人” eligibility 为 45。候选身份、歧义 Mention 和错误前缀均不用于补回导航；没有安全 published Story 入口的人物仍保留在生产数据中。
 
 ER1.1.2 的桓子／桓子野身份校正移除了 6 条原先错误归给 `person-016` 王遐的 PersonStory 链接；其中 05-fangzheng-055 等较长称谓现解析为未物化的桓伊，05-fangzheng-035 的古引文保持未解析。因此王遐仍保留在 50 人生产注册表中，但当前没有安全的 published Story 入口，也不进入 Random Person eligibility；不以错误前缀或候选身份补回路径。
 
@@ -31,7 +31,7 @@ ER1.1.2 的桓子／桓子野身份校正移除了 6 条原先错误归给 `pers
 
 | 产物 | Before | After |
 |---|---:|---:|
-| `data/derived/sc1-site.json` bytes | 19,898,089 | 33,265,875 |
+| `data/derived/sc1-site.json` bytes | 33,265,875 | 33,233,846 |
 | Vite JS bytes | 3,533,126 | 待 production artifact pass |
 | Vite JS gzip bytes | 1,093,692 | 待 production artifact pass |
 | JS asset count | 1 | 待 production artifact pass |
@@ -121,11 +121,11 @@ Wave 2 只提升具备强身份证据、正文导航价值和安全投影路径�
 
 图节点为 production Persons 与已发布 Stories，边为生成的 PersonStory/解析人物路径；不是 Relation graph。
 
-- connected components：7；最大组件：125 nodes / 44 Persons。
+- connected components：8；最大组件：124 nodes / 43 Persons。
 - median Person Story degree：3.0；median Story Person degree：2。
 - articulation Persons：person-003, person-006, person-008, person-012, person-013, person-020, person-024, person-033, person-035, person-036, person-038, person-039, person-040, person-041, person-043, person-044, person-045, person-046, person-047, person-049。
-- articulation Stories：01-dexing-023, 02-yanyu-079, 02-yanyu-086, 03-zhengshi-006, 05-fangzheng-012, 06-yaliang-019, 07-shijian-005, 08-shangyu-019, 09-pinzao-008, 09-pinzao-045, 22-chongli-002, 23-rendan-001, 23-rendan-013, 25-paidiao-026, 27-jiajue-008。
-- Person no published Story：person-015, person-016, person-032, person-042。
+- articulation Stories：01-dexing-023, 02-yanyu-079, 02-yanyu-086, 03-zhengshi-006, 05-fangzheng-012, 06-yaliang-019, 07-shijian-005, 08-shangyu-019, 09-pinzao-008, 09-pinzao-045, 22-chongli-002, 23-rendan-001, 25-paidiao-026, 27-jiajue-008。
+- Person no published Story：person-015, person-016, person-032, person-037, person-042。
 
 ## Relation discovery boundary
 
@@ -143,8 +143,8 @@ Wave 2 只提升具备强身份证据、正文导航价值和安全投影路径�
 - `data/annotation/story-expansion-wave-1.json`：`0d80f92be763ca7e765a6c0fc742910bbf7f2e2ba787efc84b52cff6524ea4af`
 - `data/annotation/person-expansion-wave-3.json`：`be7c6a7d408c39bea79673be94bb1ed86b933c23edf7cfd8622c1932903a105a`
 - `data/annotation/story-expansion-wave-3.json`：`41caaa834d3f5758162bf9c194ba6b9cb4b3c45b153f9fb0f6463044884541ec`
-- `data/derived/sc1-site.json`：`779497663e03e42ddbf1cc3f9b379f181501a37a75f78af783587a4e1ae60a6d`
-- `data/derived/story-scene-contexts.json`：`fd4aafd88cc26914d1a17b0b3338d70cf7814cdf69b9309f7d3a5053ac848645`
+- `data/derived/sc1-site.json`：`515952d76adfa870ac43465a9fce1224fa46fd6cef97c117a04e4fb1b5e8ef3b`
+- `data/derived/story-scene-contexts.json`：`7a7d01fd38ff89b3ddce7262e7a9dd0c3131c10388de90ce5496000982a44f80`
 - `data/derived/person-relation-candidates-r3.json`：`4bee7e4f793b113ebcf49c3e798657c5b8cc9f551b7887a884b591f712f54086`
 
 本报告继承 M2A 的冻结选择；ER1 安全解析影响已保留。W3 在此基础上增加了证据安全的早期魏晋 Person/Story 层与 SGZ0 处理层；S2.2 只加深现有 Story/Scene/Person Sketch 内容，R3B 仅物化明确批准的 Relation，P3B.2、H0、P4 与 ES0 均未启动。

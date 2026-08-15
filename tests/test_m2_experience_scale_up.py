@@ -75,7 +75,19 @@ class M2ExperienceScaleUpTests(unittest.TestCase):
         links = read("data/derived/person-story-links.json")
         self.assertEqual(self.metrics["after"]["person_story_link_count"], links["link_count"])
         self.assertFalse(any(link["person_id"] == "person-016" for link in links["links"]))
-        self.assertEqual(self.metrics["after"]["person_no_published_story_count"], 4)
+        story_people = {
+            str(person_id)
+            for story in self.bundle["stories"]
+            if story.get("publication_state") in {"production_ready", "preview_ready"}
+            for person_id in story.get("person_ids", [])
+        }
+        person_ids = {str(person["id"]) for person in self.bundle["people"]}
+        no_safe_story_path = person_ids - story_people
+        self.assertEqual(
+            self.metrics["after"]["person_no_published_story_count"],
+            len(no_safe_story_path),
+        )
+        self.assertIn("person-016", no_safe_story_path)
 
     def test_er_identity_correction_does_not_restore_an_unsafe_sun_gui_path(self) -> None:
         stories = {story["id"]: story for story in self.bundle["stories"]}
@@ -110,6 +122,18 @@ class M2ExperienceScaleUpTests(unittest.TestCase):
             story = stories[mention["story_id"]]
             self.assertNotIn("person-015", story["person_ids"])
         self.assertGreater(candidate_review_count, 0)
+
+    def test_er_identity_correction_removes_unsafe_zhongrong_path(self) -> None:
+        stories = {story["id"]: story for story in self.bundle["stories"]}
+        self.assertNotIn("person-037", stories["23-rendan-013"]["person_ids"])
+        links = read("data/derived/person-story-links.json")
+        self.assertFalse(
+            any(
+                link["person_id"] == "person-037"
+                and link["entry_id"] == "23-rendan-013"
+                for link in links["links"]
+            )
+        )
 
     def test_m2_metrics_show_scale_without_relation_inflation(self) -> None:
         self.assertEqual(self.metrics["before"]["production_person_count"], 17)
