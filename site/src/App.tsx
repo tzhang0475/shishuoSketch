@@ -1105,6 +1105,41 @@ function EraStoryLinks({
   );
 }
 
+function EraOrientationStoryLinks({
+  card,
+  data,
+  readingMode,
+  onStorySelect,
+}: {
+  card: EraCard;
+  data: SiteBundle;
+  readingMode: ReadingMode;
+  onStorySelect: (storyId: string) => void;
+}) {
+  if (card.card_kind === "ruler_reign" || card.story_ids.length === 0) return null;
+  return (
+    <div className="era-story-group">
+      <p className="relation-detail-heading">{eraLabel(readingMode, "這一時期", "这一时期")}</p>
+      <div className="story-card-list">
+        {card.story_ids.map((storyId) => {
+          const candidate = storyById(data, storyId);
+          if (!candidate) return null;
+          return (
+            <StoryCard
+              key={storyId}
+              story={candidate}
+              data={data}
+              readingMode={readingMode}
+              annotationOnly={false}
+              onSelect={() => onStorySelect(storyId)}
+            />
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
 function EraCardDetail({
   story,
   data,
@@ -1138,13 +1173,20 @@ function EraCardDetail({
   const events = card.historical_event_ids
     .map((id) => data.historical_events.find((event) => event.id === id))
     .filter((event): event is SiteBundle["historical_events"][number] => Boolean(event));
+  events.sort((left, right) => (
+    (left.start_year_ce ?? Number.POSITIVE_INFINITY) - (right.start_year_ce ?? Number.POSITIVE_INFINITY)
+    || (left.end_year_ce ?? Number.POSITIVE_INFINITY) - (right.end_year_ce ?? Number.POSITIVE_INFINITY)
+    || left.id.localeCompare(right.id)
+  ));
   return (
     <section className="era-detail-card" aria-labelledby="focused-era-heading">
       <div className="era-card-identity">
         <p className="section-label">{eraLabel(readingMode, "紀元", "纪元")}</p>
         <h3 id="focused-era-heading">{readingValue(card.title, readingMode, "紀元")}</h3>
         {card.personal_name && <p className="era-card-personal-name">{readingValue(card.personal_name, readingMode, "")}</p>}
-        <p className="era-card-reign">{readingValue(card.reign_label, readingMode, "")}</p>
+        {readingValue(card.reign_label, readingMode, "") && (
+          <p className="era-card-reign">{readingValue(card.reign_label, readingMode, "")}</p>
+        )}
         <div className="era-name-strip" aria-label={eraLabel(readingMode, "年號序列", "年号序列")}>
           {card.era_names.map((era) => (
             <span key={era.reign_period_id} className="era-name-chip">
@@ -1164,6 +1206,7 @@ function EraCardDetail({
 
       <EraStoryLinks card={{ ...card, ruler_story_links: appearsLinks }} data={data} readingMode={readingMode} linkType="appears" onStorySelect={onStorySelect} />
       <EraStoryLinks card={{ ...card, ruler_story_links: referencedLinks }} data={data} readingMode={readingMode} linkType="referenced" onStorySelect={onStorySelect} />
+      <EraOrientationStoryLinks card={card} data={data} readingMode={readingMode} onStorySelect={onStorySelect} />
 
       {card.person_intersections.length > 0 && (
         <section className="era-intersections">
@@ -1243,7 +1286,7 @@ function EraExplorerPanel({
   const backLabel = backTarget?.kind === "person"
     ? personNameById(story, data, backTarget.id, readingMode)
     : backTarget?.kind === "era"
-      ? data.era_cards.find((candidate) => candidate.era_card_id === backTarget.id)?.title[readingMode] ?? eraLabel(readingMode, "紀元", "纪元")
+      ? data.era_cards.find((candidate) => candidate.era_card_id === backTarget.id)?.orientation_label[readingMode] ?? eraLabel(readingMode, "紀元", "纪元")
       : backTarget?.kind === "story"
         ? storyReference(storyById(data, backTarget.id) ?? story, readingMode)
         : "";
@@ -1480,7 +1523,7 @@ function nodeLabel(node: ExplorationNode, story: Story, data: SiteBundle, mode: 
   }
   if (node.kind === "era") {
     const card = data.era_cards.find((candidate) => candidate.era_card_id === node.id);
-    return card ? readingValue(card.title, mode, eraLabel(mode, "紀元", "纪元")) : eraLabel(mode, "紀元", "纪元");
+    return card ? readingValue(card.orientation_label, mode, eraLabel(mode, "紀元", "纪元")) : eraLabel(mode, "紀元", "纪元");
   }
   return personNameById(story, data, node.id, mode);
 }
@@ -1601,6 +1644,7 @@ function StoryReader({
   const mentions = resolvedMentions(story, data);
   const mainTextMentions = mentions.filter((mention) => mention.section === "main_text");
   const annotationMentions = mentions.filter((mention) => mention.section === "liu_annotation");
+  const primaryEraCard = data.era_cards.find((card) => card.era_card_id === story.primary_era_card_id);
 
   useEffect(() => {
     setOpenAnnotationIds(new Set());
@@ -1624,8 +1668,15 @@ function StoryReader({
       <article className="reading-column">
         <p className="story-reference">{storyReference(story, readingMode)}</p>
         <h1 id="story-heading">{storyHeading(story, readingMode)}</h1>
-        {(story.temporal_orientation ?? story.period_label) && (
-          <p className="story-period-label">{readingValue(story.temporal_orientation ?? story.period_label, readingMode, "")}</p>
+        {primaryEraCard && (
+          <button
+            type="button"
+            className="story-era-orientation"
+            onClick={() => onEraFocus(primaryEraCard.era_card_id)}
+            aria-label={readingValue(primaryEraCard.orientation_label, readingMode, "纪元")}
+          >
+            {readingValue(primaryEraCard.orientation_label, readingMode, "纪元")} ›
+          </button>
         )}
         <p className="story-meta">{story.id}</p>
 

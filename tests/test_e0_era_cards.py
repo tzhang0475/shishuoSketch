@@ -19,6 +19,7 @@ class E0EraCardTests(unittest.TestCase):
         cls.people_registry = read_json("data/people.json")["people"]
         cls.identities = read_json("data/annotation/ruler-identities-e0.json")["records"]
         cls.cards = read_json("data/annotation/era-cards-e0.json")["records"]
+        cls.orientations = read_json("data/derived/e0-story-era-orientations.json")["records"]
         cls.audit = read_json("data/derived/e0-ruler-mention-audit.json")
         cls.metrics = read_json("data/derived/e0-metrics.json")
         cls.audit_by_story = {}
@@ -46,12 +47,80 @@ class E0EraCardTests(unittest.TestCase):
             for item in self.audit["records"]
             if item["resolution_status"] == "resolved" and item["era_card_exists"]
         }
-        self.assertEqual({item["ruler_id"] for item in self.cards}, resolved_card_rulers)
+        ruler_cards = [item for item in self.cards if item["card_kind"] == "ruler_reign"]
+        self.assertEqual({item["ruler_id"] for item in ruler_cards}, resolved_card_rulers)
         self.assertTrue(resolved_card_rulers)
         self.assertEqual(len({item["era_card_id"] for item in self.cards}), len(self.cards))
-        for card in self.cards:
+        for card in ruler_cards:
             self.assertLessEqual(card["reign_start_year"], card["reign_end_year"])
             self.assertTrue(card["era_names"])
+
+    def test_every_story_has_exactly_one_primary_era_orientation(self) -> None:
+        story_ids = {item["id"] for item in self.bundle["stories"]}
+        by_story = {item["story_id"]: item for item in self.orientations}
+        self.assertEqual(set(by_story), story_ids)
+        self.assertEqual(len(by_story), len(story_ids))
+        card_by_id = {item["era_card_id"]: item for item in self.cards}
+        for story in self.bundle["stories"]:
+            self.assertEqual(story["primary_era_card_id"], by_story[story["id"]]["primary_era_card_id"])
+            card = card_by_id[story["primary_era_card_id"]]
+            self.assertEqual(card["card_kind"], by_story[story["id"]]["card_kind"])
+            self.assertEqual(story["era_orientation"]["era_card_id"], story["primary_era_card_id"])
+
+    def test_h0a_unknown_can_coexist_with_reader_orientation(self) -> None:
+        anchors = {
+            item["story_id"]: item
+            for item in read_json("data/annotation/story-temporal-anchors-h0a.json")["records"]
+        }
+        orientations = {item["story_id"]: item for item in self.orientations}
+        unknown = [story_id for story_id, anchor in anchors.items() if anchor["precision"] == "unknown"]
+        self.assertTrue(unknown)
+        self.assertTrue(all(orientations[story_id]["primary_era_card_id"] for story_id in unknown))
+        self.assertTrue(all(orientations[story_id]["h0a_precision"] == "unknown" for story_id in unknown))
+
+    def test_referenced_ruler_does_not_replace_story_time_orientation(self) -> None:
+        orientation = next(item for item in self.orientations if item["story_id"] == "02-yanyu-078")
+        self.assertNotEqual(orientation["primary_era_card_id"], "era-card-ruler-jin-wudi")
+        self.assertEqual(orientation["card_kind"], "broad_period")
+
+    def test_participant_orientation_excludes_off_frame_people(self) -> None:
+        orientation = next(item for item in self.orientations if item["story_id"] == "05-fangzheng-031")
+        self.assertEqual(orientation["supporting_person_ids"], ["person-019"])
+        self.assertNotIn("person-011", orientation["supporting_person_ids"])
+
+    def test_all_era_events_are_chronological(self) -> None:
+        events = {
+            item["id"]: item
+            for item in self.bundle["historical_events"]
+        }
+        for card in self.cards:
+            keys = [
+                (
+                    events[event_id]["start_year_ce"] is None,
+                    events[event_id]["start_year_ce"] if events[event_id]["start_year_ce"] is not None else 10**9,
+                    events[event_id]["end_year_ce"] if events[event_id]["end_year_ce"] is not None else 10**9,
+                    event_id,
+                )
+                for event_id in card["historical_event_ids"]
+            ]
+            self.assertEqual(keys, sorted(keys), card["era_card_id"])
+
+    def test_broad_and_corpus_cards_are_not_ruler_persons(self) -> None:
+        person_ids = {item["id"] for item in self.bundle["people"]}
+        for card in self.cards:
+            if card["card_kind"] != "ruler_reign":
+                self.assertIsNone(card["ruler_id"])
+            self.assertNotIn(card["era_card_id"], person_ids)
+
+    def test_ruler_tenure_is_separate_from_observed_story_segments(self) -> None:
+        for identity in self.identities:
+            card = next(item for item in self.cards if item.get("ruler_id") == identity["ruler_id"])
+            self.assertEqual(identity["actual_reign_start_year"], identity["reign_start_year"])
+            self.assertEqual(identity["actual_reign_end_year"], identity["reign_end_year"])
+            self.assertEqual(card["actual_reign_start_year"], identity["actual_reign_start_year"])
+            self.assertEqual(card["actual_reign_end_year"], identity["actual_reign_end_year"])
+            self.assertTrue(identity["tenure_evidence"]["jinshu_unit_path"])
+            self.assertTrue(identity["observed_reign_period_ids"])
 
     def test_direct_and_referenced_story_links_remain_distinct(self) -> None:
         story_links = {

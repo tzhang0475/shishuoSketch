@@ -65,6 +65,7 @@ PRODUCTION_EVIDENCE_PATH = ROOT / "data/evidence/wp1-evidence.json"
 PRODUCTION_RELATIONS_PATH = ROOT / "data/annotation/wp1-relations.json"
 H0A_ANCHORS_PATH = ROOT / "data/annotation/story-temporal-anchors-h0a.json"
 E0_PROJECTION_PATH = ROOT / "data/derived/e0-era-card-projection.json"
+E0_ORIENTATION_PATH = ROOT / "data/derived/e0-story-era-orientations.json"
 DERIVED_PATH = ROOT / "data/derived/sc1-site.json"
 VITE_PATH = ROOT / "site/src/generated/sc1-site.json"
 
@@ -136,6 +137,30 @@ def apply_h0a_temporal_orientation(
     if isinstance(label, str) and label:
         story["temporal_anchor_id"] = str(anchor.get("anchor_id"))
         story["temporal_orientation"] = pair(label, converter)
+
+
+def apply_e0_story_era_orientation(
+    story: dict[str, Any],
+    story_id: str,
+    orientations: Mapping[str, Mapping[str, Any]],
+) -> None:
+    """Attach the universal reader entry without rewriting H0A chronology."""
+
+    record = orientations.get(story_id)
+    if not isinstance(record, Mapping):
+        raise ValueError(f"E0.1 orientation missing for published Story: {story_id}")
+    card_id = record.get("primary_era_card_id")
+    label = record.get("label")
+    if not isinstance(card_id, str) or not isinstance(label, Mapping):
+        raise ValueError(f"E0.1 orientation malformed for Story: {story_id}")
+    story["primary_era_card_id"] = card_id
+    story["era_orientation"] = {
+        "era_card_id": card_id,
+        "card_kind": str(record.get("card_kind", "")),
+        "orientation_precision": str(record.get("orientation_precision", "")),
+        "orientation_basis": str(record.get("orientation_basis", "")),
+        "label": dict(label),
+    }
 
 
 def entry_path(entry_id: str, entry_by_id: Mapping[str, Mapping[str, Any]]) -> Path:
@@ -432,6 +457,20 @@ def build(root: Path = ROOT) -> dict[str, Any]:
         candidate_projection = read_json(E0_PROJECTION_PATH)
         if isinstance(candidate_projection, Mapping):
             e0_projection = candidate_projection
+    e0_orientations: dict[str, Mapping[str, Any]] = {}
+    if E0_ORIENTATION_PATH.is_file():
+        orientation_doc = read_json(E0_ORIENTATION_PATH)
+        e0_orientations = {
+            str(item["story_id"]): item
+            for item in orientation_doc.get("records", [])
+            if isinstance(item, Mapping) and isinstance(item.get("story_id"), str)
+        }
+    elif isinstance(e0_projection.get("story_era_orientations"), list):
+        e0_orientations = {
+            str(item["story_id"]): item
+            for item in e0_projection["story_era_orientations"]
+            if isinstance(item, Mapping) and isinstance(item.get("story_id"), str)
+        }
     ruler_mentions_by_story: dict[str, list[Mapping[str, Any]]] = {}
     for item in e0_projection.get("ruler_mentions", []) if isinstance(e0_projection.get("ruler_mentions"), list) else []:
         if isinstance(item, Mapping) and isinstance(item.get("story_id"), str):
@@ -603,6 +642,7 @@ def build(root: Path = ROOT) -> dict[str, Any]:
             story["global_ordinal"] = 370
             apply_period_orientation(story, entry_id, w3_story_metadata, converter)
             apply_h0a_temporal_orientation(story, entry_id, temporal_anchors, converter)
+            apply_e0_story_era_orientation(story, entry_id, e0_orientations)
             base_annotation_evidence = {
                 str(item.get("locator", {}).get("annotation_id")): item["id"]
                 for item in base_evidence.values()
@@ -754,6 +794,7 @@ def build(root: Path = ROOT) -> dict[str, Any]:
         }
         apply_period_orientation(story, entry_id, w3_story_metadata, converter)
         apply_h0a_temporal_orientation(story, entry_id, temporal_anchors, converter)
+        apply_e0_story_era_orientation(story, entry_id, e0_orientations)
         new_stories.append(story)
 
     new_stories.sort(key=lambda story: int(story.get("global_ordinal", 10**9)))
@@ -892,6 +933,16 @@ def build(root: Path = ROOT) -> dict[str, Any]:
         "era_cards": list(e0_projection.get("era_cards", [])),
         "ruler_mentions": list(e0_projection.get("ruler_mentions", [])),
         "historical_events": list(e0_projection.get("historical_events", [])),
+        "story_era_orientations": list(
+            e0_projection.get(
+                "story_era_orientations",
+                [
+                    e0_orientations[story_id]
+                    for story_id in selected_ids
+                    if story_id in e0_orientations
+                ],
+            )
+        ),
         "person_sketches": person_sketches,
         "scene_contexts": scene_contexts,
         "story_chain": {

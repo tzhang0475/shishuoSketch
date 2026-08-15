@@ -64,3 +64,33 @@ The audit is intentionally broader than the card set. It records unresolved
 and ambiguous imperial titles, including the shared-title collision cases.
 Future work may review those records, but E0 does not promote them, add
 rulers as Persons, build a dynasty timeline, or begin H0B/P4/ES0.
+
+## E0.1 universal orientation
+
+E0.1 extends the product projection without changing H0A's historical
+assertion. Every published Story now has exactly one primary Era Card. That
+entry may be:
+
+- ruler-reign: a reviewed Story-time ruler/reign coordinate;
+- broad-period: a stable H0A/W3 phase or event window such as 东晋早期; or
+- corpus-context: a neutral 世说时代 entry when local evidence cannot safely
+  narrow the period.
+
+This is the distinction between StoryTemporalAnchor and StoryEraOrientation.
+H0A may correctly leave a Story unknown; E0.1 can still provide a useful,
+explicitly broad reading entrance. The latter never upgrades H0A or supplies
+an exact date.
+
+Broad cards reuse the five H0A phase coordinates and add only two useful
+Eastern-Jin windows for already-linked rebellion events. Their Story lists and
+Person intersections are generated from current production data. Only
+people_at_scene rows marked present, and also present in the Story's safe
+Person set, can support a participant orientation; off-frame, annotation-only,
+comparison, and later-outcome people are excluded.
+
+All card event lists and era-name strips are sorted by chronology
+(start year, end year, stable ID). The ruler registry records the ruler's
+actual tenure coordinate separately from observed Story-corpus era segments,
+with personal names only where local Jinshu evidence supports them. Rulers
+remain outside data/people, PersonStory, Random Person, and Relation
+semantics.

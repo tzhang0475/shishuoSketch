@@ -113,6 +113,8 @@ export interface Story {
   period_label?: ReadingPair;
   temporal_anchor_id?: string;
   temporal_orientation?: ReadingPair;
+  primary_era_card_id: string;
+  era_orientation: StoryEraOrientation;
   ordinal?: number;
   global_ordinal?: number;
   publication_state: PublicationState;
@@ -518,6 +520,8 @@ export interface RulerIdentity {
   canonical_title: ReadingPair;
   personal_name: ReadingPair | null;
   polity: string;
+  actual_reign_start_year: number | null;
+  actual_reign_end_year: number | null;
   reign_start_year: number | null;
   reign_end_year: number | null;
   reign_period_ids: string[];
@@ -528,6 +532,26 @@ export interface RulerIdentity {
   assertion_status: AssertionStatus;
   review_status: ReviewStatus;
   resolution_basis: string;
+}
+
+export interface StoryEraOrientation {
+  story_id: string;
+  primary_era_card_id: string;
+  card_kind: "ruler_reign" | "broad_period" | "corpus_context";
+  orientation_precision: "ruler_reign" | "broad_period" | "corpus_context" | string;
+  orientation_basis: string;
+  label: ReadingPair;
+  h0a_anchor_id: string | null;
+  h0a_precision: string;
+  supporting_person_ids: string[];
+  supporting_activity_anchor_ids: string[];
+  ruler_context_id: string | null;
+  event_ids: string[];
+  evidence_ids: string[];
+  assertion_status: AssertionStatus;
+  review_status: ReviewStatus;
+  confidence: "high" | "medium" | "low" | string;
+  rationale: string;
 }
 
 export interface RulerMention {
@@ -581,13 +605,20 @@ export interface EraCardPersonIntersection {
 
 export interface EraCard {
   era_card_id: string;
-  ruler_id: string;
+  card_kind: "ruler_reign" | "broad_period" | "corpus_context";
+  ruler_id: string | null;
   title: ReadingPair;
+  orientation_label: ReadingPair;
   personal_name: ReadingPair | null;
-  polity: string;
+  polity: string | null;
   reign_label: ReadingPair;
   reign_start_year: number | null;
   reign_end_year: number | null;
+  actual_reign_start_year: number | null;
+  actual_reign_end_year: number | null;
+  start_year_ce: number | null;
+  end_year_ce: number | null;
+  phase_ids: string[];
   era_names: Array<{
     name: ReadingPair;
     reign_period_id: string;
@@ -601,10 +632,12 @@ export interface EraCard {
     review_status: ReviewStatus;
   };
   ruler_story_links: EraCardStoryLink[];
+  story_ids: string[];
   person_intersections: EraCardPersonIntersection[];
   historical_event_ids: string[];
   evidence_ids: string[];
   source_evidence_ids: string[];
+  orientation_precision: string;
   review_status: ReviewStatus;
   selection_note: string;
 }
@@ -623,6 +656,7 @@ export interface SiteBundle {
   era_cards: EraCard[];
   ruler_mentions: RulerMention[];
   historical_events: HistoricalEventProjection[];
+  story_era_orientations: StoryEraOrientation[];
   person_sketches: Record<string, PersonSketch>;
   scene_contexts: Record<string, StorySceneContext>;
   story_chain?: StoryChainIndex;

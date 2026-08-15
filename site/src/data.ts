@@ -326,8 +326,8 @@ export function parseSiteBundle(value: unknown): SiteBundle {
       .map((item) => (item as Record<string, unknown>).id)
       .filter((id): id is string => typeof id === "string"),
   );
-  if (!Array.isArray(value.ruler_identities) || !Array.isArray(value.era_cards) || !Array.isArray(value.ruler_mentions)) {
-    throw new Error("静态数据缺少 E0 纪元投影数组");
+  if (!Array.isArray(value.ruler_identities) || !Array.isArray(value.era_cards) || !Array.isArray(value.ruler_mentions) || !Array.isArray(value.story_era_orientations)) {
+    throw new Error("静态数据缺少 E0/E0.1 纪元投影数组");
   }
   const rulerIds = new Set<string>();
   for (const identity of value.ruler_identities) {
@@ -339,6 +339,8 @@ export function parseSiteBundle(value: unknown): SiteBundle {
     if (!isReadingPair(identity.canonical_title) || !Array.isArray(identity.reign_period_ids) || !Array.isArray(identity.era_year_ids) || !Array.isArray(identity.evidence_ids)) {
       throw new Error(`E0 ruler identity ${identity.ruler_id} 结构不完整`);
     }
+    if (identity.actual_reign_start_year !== null && typeof identity.actual_reign_start_year !== "number") throw new Error("E0 ruler actual reign start invalid");
+    if (identity.actual_reign_end_year !== null && typeof identity.actual_reign_end_year !== "number") throw new Error("E0 ruler actual reign end invalid");
     if (identity.reign_start_year !== null && typeof identity.reign_start_year !== "number") throw new Error(`E0 ruler ${identity.ruler_id} 起年无效`);
     if (identity.reign_end_year !== null && typeof identity.reign_end_year !== "number") throw new Error(`E0 ruler ${identity.ruler_id} 终年无效`);
     if (typeof identity.reign_start_year === "number" && typeof identity.reign_end_year === "number" && identity.reign_start_year > identity.reign_end_year) throw new Error(`E0 ruler ${identity.ruler_id} 年界倒置`);
@@ -353,16 +355,58 @@ export function parseSiteBundle(value: unknown): SiteBundle {
   }
   const eraCardIds = new Set<string>();
   for (const card of value.era_cards) {
-    if (!isRecord(card) || typeof card.era_card_id !== "string" || eraCardIds.has(card.era_card_id) || typeof card.ruler_id !== "string" || !rulerIds.has(card.ruler_id)) {
-      throw new Error("E0 Era Card ID 或 ruler 引用无效/重复");
+    if (!isRecord(card) || typeof card.era_card_id !== "string" || eraCardIds.has(card.era_card_id)) {
+      throw new Error("E0 Era Card ID 无效或重复");
     }
     eraCardIds.add(card.era_card_id);
-    if (!isReadingPair(card.title) || !isReadingPair(card.reign_label) || !isRecord(card.era_context) || !isReadingPair(card.era_context.text)) {
+    if (card.card_kind !== "ruler_reign" && card.card_kind !== "broad_period" && card.card_kind !== "corpus_context") {
+      throw new Error("E0 Era Card kind 无效");
+    }
+    if (card.card_kind === "ruler_reign") {
+      if (typeof card.ruler_id !== "string" || !rulerIds.has(card.ruler_id)) {
+        throw new Error("E0 ruler Era Card 引用无效");
+      }
+    } else if (card.ruler_id !== null) {
+      throw new Error("E0 broad/corpus Era Card 不得伪装成 ruler card");
+    }
+    if (!isReadingPair(card.title) || !isReadingPair(card.orientation_label) || !isReadingPair(card.reign_label) || !isRecord(card.era_context) || !isReadingPair(card.era_context.text)) {
       throw new Error(`E0 Era Card ${card.era_card_id} display 不完整`);
     }
     if (typeof card.reign_start_year === "number" && typeof card.reign_end_year === "number" && card.reign_start_year > card.reign_end_year) throw new Error(`E0 Era Card ${card.era_card_id} 年界倒置`);
+    if (typeof card.start_year_ce === "number" && typeof card.end_year_ce === "number" && card.start_year_ce > card.end_year_ce) throw new Error("E0 Era Card orientation 年界倒置");
+    if (!Array.isArray(card.story_ids) || card.story_ids.some((id: unknown) => typeof id !== "string" || !storyIds.has(id))) throw new Error("E0 Era Card Story 引用无效");
+    if (!Array.isArray(card.phase_ids) || card.phase_ids.some((id: unknown) => typeof id !== "string")) throw new Error("E0 Era Card phase 引用无效");
     if (!Array.isArray(card.historical_event_ids) || card.historical_event_ids.some((id) => typeof id !== "string" || !eventIds.has(id))) throw new Error(`E0 Era Card ${card.era_card_id} HistoricalEvent 引用无效`);
+    if (!Array.isArray(card.era_names)) throw new Error("E0 Era Card 年号序列无效");
+    for (let index = 1; index < card.era_names.length; index += 1) {
+      const previous = card.era_names[index - 1];
+      const current = card.era_names[index];
+      if (typeof previous?.start_year_ce === "number" && typeof current?.start_year_ce === "number" && previous.start_year_ce > current.start_year_ce) {
+        throw new Error("E0 Era Card 年号序列未按时间排序");
+      }
+    }
   }
+  const orientationByStory = new Map<string, Record<string, unknown>>();
+  for (const orientation of value.story_era_orientations) {
+    if (!isRecord(orientation) || typeof orientation.story_id !== "string" || !storyIds.has(orientation.story_id) || typeof orientation.primary_era_card_id !== "string" || !eraCardIds.has(orientation.primary_era_card_id) || orientationByStory.has(orientation.story_id)) {
+      throw new Error("E0.1 Story Era orientation 无效、重复或引用不存在的 Story/Card");
+    }
+    if (orientation.card_kind !== "ruler_reign" && orientation.card_kind !== "broad_period" && orientation.card_kind !== "corpus_context") {
+      throw new Error("E0.1 Story card kind 无效");
+    }
+    if (!isReadingPair(orientation.label) || !Array.isArray(orientation.supporting_person_ids) || !Array.isArray(orientation.supporting_activity_anchor_ids) || !Array.isArray(orientation.event_ids) || !Array.isArray(orientation.evidence_ids)) {
+      throw new Error("E0.1 Story orientation 结构不完整");
+    }
+    const card = value.era_cards.find((candidate) => isRecord(candidate) && candidate.era_card_id === orientation.primary_era_card_id);
+    if (!card || card.card_kind !== orientation.card_kind) {
+      throw new Error("E0.1 Story 与 primary Era Card kind 不一致");
+    }
+    orientationByStory.set(orientation.story_id, orientation);
+  }
+  if (orientationByStory.size !== storyIds.size) {
+    throw new Error("E0.1 Story Era orientation 必须覆盖全部 production Stories");
+  }
+
   const rulerMentionIds = new Set<string>();
   const rulerMentionById = new Map<string, Record<string, unknown>>();
   for (const mention of value.ruler_mentions) {
@@ -385,6 +429,10 @@ export function parseSiteBundle(value: unknown): SiteBundle {
     }
     if (story.temporal_orientation !== undefined && !isReadingPair(story.temporal_orientation)) {
       throw new Error(`Story ${String(story.id)} 的 temporal_orientation 无效`);
+    }
+    const orientation = orientationByStory.get(String(story.id));
+    if (typeof story.primary_era_card_id !== "string" || !orientation || story.primary_era_card_id !== orientation.primary_era_card_id || !isRecord(story.era_orientation) || story.era_orientation.era_card_id !== story.primary_era_card_id) {
+      throw new Error("Story 的 E0.1 primary Era orientation 不完整");
     }
     const reading = story.reading;
     if (reading.entry_id !== story.id || typeof reading.status !== "string") {

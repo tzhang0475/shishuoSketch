@@ -4,7 +4,7 @@
   "title": "SC1 static frontend bundle",
   "type": "object",
   "additionalProperties": true,
-  "required": ["schema", "generated_from", "stories", "people", "mentions", "relations", "eras", "evidence", "sources", "ruler_identities", "era_cards", "ruler_mentions", "historical_events", "person_sketches", "scene_contexts", "story_chain", "ui"],
+  "required": ["schema", "generated_from", "stories", "people", "mentions", "relations", "eras", "evidence", "sources", "ruler_identities", "era_cards", "ruler_mentions", "historical_events", "story_era_orientations", "person_sketches", "scene_contexts", "story_chain", "ui"],
   "properties": {
     "schema": {"const": 1},
     "generated_from": {"const": "scripts/build_sc1_frontend_data.py"},
@@ -13,7 +13,7 @@
       "minItems": 16,
       "items": {
         "type": "object",
-        "required": ["id", "text", "reading", "annotations", "person_ids", "mention_ids", "publication_state"],
+        "required": ["id", "text", "reading", "annotations", "person_ids", "mention_ids", "primary_era_card_id", "era_orientation", "publication_state"],
         "properties": {
           "id": {"type": "string"},
           "text": {"type": "string", "minLength": 1},
@@ -114,9 +114,10 @@
     "evidence": {"type": "array", "items": {"type": "object", "required": ["id"]}},
     "sources": {"type": "array", "items": {"type": "object", "required": ["id"]}},
     "ruler_identities": {"type": "array", "items": {"type": "object", "required": ["ruler_id"]}},
-    "era_cards": {"type": "array", "items": {"type": "object", "required": ["era_card_id", "ruler_id"]}},
+    "era_cards": {"type": "array", "items": {"type": "object", "required": ["era_card_id", "card_kind", "ruler_id", "orientation_label", "story_ids"]}},
     "ruler_mentions": {"type": "array", "items": {"type": "object", "required": ["mention_id", "story_id", "section", "surface", "ruler_id", "era_card_id"]}},
     "historical_events": {"type": "array", "items": {"type": "object", "required": ["id"]}},
+    "story_era_orientations": {"type": "array", "items": {"type": "object", "required": ["story_id", "primary_era_card_id", "card_kind", "label"]}},
     "person_sketches": {
       "type": "object",
       "minProperties": 7,
