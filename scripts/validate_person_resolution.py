@@ -504,6 +504,28 @@ def validate(root: Path = ROOT) -> list[str]:
         if row.get("resolution_status") != "unresolved" or row.get("person_id") is not None:
             errors.append(f"ER1.1.2 ancient quoted 桓子 incorrectly resolves to 王遐: {mention_id}")
 
+    # Story-local office-title correction.  The canonical Mention layer did
+    # not contain 庾太尉/庾公 rows, so both are expected in the ER1.1 derived
+    # projection and must resolve only within this Story's seeded context.
+    rongzhi_rows = [
+        row
+        for row in effective.get("derived_mentions", [])
+        if isinstance(row, Mapping) and row.get("entry_id") == "14-rongzhi-024"
+    ]
+    rongzhi_by_surface = {str(row.get("surface")): row for row in rongzhi_rows}
+    for surface in ("庾太尉", "庾公"):
+        row = rongzhi_by_surface.get(surface)
+        target = row.get("resolution_target") if isinstance(row, Mapping) else None
+        if row is None or not isinstance(target, Mapping) or target.get("target_kind") != "production_person" or target.get("person_id") != "person-010":
+            errors.append(f"ER1.1.3 14-rongzhi-024 {surface} is not Story-locally resolved to 庾亮")
+        if isinstance(row, Mapping) and row.get("display_span", {}).get("text") != surface:
+            errors.append(f"ER1.1.3 14-rongzhi-024 {surface} display span is not source-exact")
+    for row in [*effective_rows, *[item for item in effective.get("derived_mentions", []) if isinstance(item, Mapping)]]:
+        if row.get("surface") in {"太尉", "公"}:
+            target = row.get("resolution_target")
+            if isinstance(target, Mapping) and target.get("target_kind") == "production_person" and target.get("person_id") == "person-010":
+                errors.append(f"ER1.1.3 bare {row.get('surface')} was globally resolved to 庾亮: {row.get('mention_id')}")
+
     return errors
 
 

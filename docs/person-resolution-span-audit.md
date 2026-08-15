@@ -3,7 +3,7 @@
 ER1.1 keeps canonical Mention anchors immutable. This report lists the build-time span/coreference projection used for reader segmentation; derived records are not canonical Mentions or new Persons.
 
 - published Stories audited: 83 / 83
-- high-confidence repaired/derived spans: 23
+- high-confidence repaired/derived spans: 25
 - review-required partial-span cases: 0
 
 - `01-dexing-015` · `liu_annotation` · `嗣宗陳留` · 阮籍 · `longest_safe_semantic_span` · auto_fixed
@@ -25,6 +25,8 @@ ER1.1 keeps canonical Mention anchors immutable. This report lists the build-tim
 - `07-shijian-018` · `main_text` · `王仲祖` · 王濛 · `longest_safe_semantic_span` · auto_fixed
 - `09-pinzao-022` · `main_text` · `庾元規` · 庾亮 · `longest_safe_semantic_span` · auto_fixed
 - `09-pinzao-036` · `main_text` · `王仲祖` · 王濛 · `longest_safe_semantic_span` · auto_fixed
+- `14-rongzhi-024` · `main_text` · `庾太尉` · 庾亮 · `er1_1_contextual_span_seed` · auto_fixed
+- `14-rongzhi-024` · `main_text` · `庾公` · 庾亮 · `er1_1_story_local_coreference` · auto_fixed
 - `23-rendan-026` · `main_text` · `温太真` · 温嶠 · `longest_safe_semantic_span` · auto_fixed
 - `23-rendan-038` · `main_text` · `王文度` · 王坦之 · `longest_safe_semantic_span` · auto_fixed
 - `26-qingdi-002` · `main_text` · `庾元規` · 庾亮 · `longest_safe_semantic_span` · auto_fixed

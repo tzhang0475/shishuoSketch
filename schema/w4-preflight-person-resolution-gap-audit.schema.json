@@ -1,0 +1,110 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://shishuo-sketch/schema/w4-preflight-person-resolution-gap-audit.schema.json",
+  "title": "W4 preflight Person-resolution gap audit",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "stage", "scope", "summary", "generated_from", "records"],
+  "properties": {
+    "schema": {"const": 1},
+    "stage": {"const": "w4-preflight-person-resolution-gap-audit"},
+    "scope": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["published_story_count", "audited_story_count", "published_story_ids", "audit_sections"],
+      "properties": {
+        "published_story_count": {"type": "integer", "minimum": 0},
+        "audited_story_count": {"type": "integer", "minimum": 0},
+        "published_story_ids": {"type": "array", "uniqueItems": true, "items": {"type": "string"}},
+        "audit_sections": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {"enum": ["main_text", "liu_annotation"]}
+        }
+      }
+    },
+    "summary": {
+      "type": "object",
+      "additionalProperties": {"type": ["integer", "object"]},
+      "required": ["record_count", "status_counts"],
+      "properties": {
+        "record_count": {"type": "integer", "minimum": 0},
+        "story_count_with_records": {"type": "integer", "minimum": 0},
+        "status_counts": {"type": "object", "additionalProperties": {"type": "integer", "minimum": 0}},
+        "safe_story_local_count": {"type": "integer", "minimum": 0},
+        "ambiguous_count": {"type": "integer", "minimum": 0},
+        "non_production_identity_count": {"type": "integer", "minimum": 0},
+        "lexical_non_identity_count": {"type": "integer", "minimum": 0},
+        "unresolved_count": {"type": "integer", "minimum": 0},
+        "stories_without_attention_records": {"type": "integer", "minimum": 0}
+      }
+    },
+    "generated_from": {"type": "array", "minItems": 1, "items": {"type": "string"}},
+    "records": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/record"}
+    }
+  },
+  "$defs": {
+    "target": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["target_kind", "canonical_name"],
+      "properties": {
+        "target_kind": {"enum": ["production_person", "identity_candidate"]},
+        "person_id": {"type": "string", "minLength": 1},
+        "candidate_id": {"type": "string", "minLength": 1},
+        "canonical_name": {"type": "string", "minLength": 1}
+      }
+    },
+    "span": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["offset", "end_offset_exclusive", "text"],
+      "properties": {
+        "offset": {"type": "integer", "minimum": 0},
+        "end_offset_exclusive": {"type": "integer", "minimum": 1},
+        "text": {"type": "string", "minLength": 1}
+      }
+    },
+    "effective": {
+      "type": ["object", "null"],
+      "additionalProperties": true
+    },
+    "record": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "audit_record_id",
+        "story_id",
+        "section",
+        "surface",
+        "span",
+        "nearby_context",
+        "existing_effective_resolution",
+        "candidate_targets",
+        "resolution_basis",
+        "discovery_bases",
+        "evidence_ids",
+        "status"
+      ],
+      "properties": {
+        "audit_record_id": {"type": "string", "minLength": 1},
+        "story_id": {"type": "string", "minLength": 1},
+        "section": {"enum": ["main_text", "liu_annotation"]},
+        "annotation_id": {"type": "string", "minLength": 1},
+        "surface": {"type": "string", "minLength": 1},
+        "span": {"$ref": "#/$defs/span"},
+        "nearby_context": {"type": "string"},
+        "existing_effective_resolution": {"$ref": "#/$defs/effective"},
+        "candidate_targets": {"type": "array", "items": {"$ref": "#/$defs/target"}},
+        "resolution_basis": {"type": "string", "minLength": 1},
+        "discovery_bases": {"type": "array", "uniqueItems": true, "items": {"type": "string"}},
+        "evidence_ids": {"type": "array", "uniqueItems": true, "items": {"type": "string"}},
+        "status": {
+          "enum": ["safe_story_local", "ambiguous", "non_production_identity", "lexical_non_identity", "unresolved"]
+        }
+      }
+    }
+  }
+}
