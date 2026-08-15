@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://shishuo-sketch/schema/person-resolution-lexical-alias-rules.schema.json",
+  "title": "Contextual lexical alias resolution rules",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "stage", "rules"],
+  "properties": {
+    "schema": {"const": 1},
+    "stage": {"const": "er1-homographic-lexical-alias-rules"},
+    "rules": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["rule_id", "surface", "candidate_targets", "allowed_story_ids", "identity_context_patterns", "default_resolution_status", "note"],
+        "properties": {
+          "rule_id": {"type": "string", "minLength": 1},
+          "surface": {"type": "string", "minLength": 1},
+          "candidate_targets": {"type": "array", "items": {"type": "object"}},
+          "allowed_story_ids": {"type": "array", "items": {"type": "string"}},
+          "identity_context_patterns": {"type": "array", "items": {"type": "string"}},
+          "default_resolution_status": {"const": "unresolved"},
+          "note": {"type": "string"}
+        }
+      }
+    }
+  }
+}

@@ -24,11 +24,11 @@ class PersonIdCanonicalizationTests(unittest.TestCase):
     def test_registry_is_exactly_opaque_person_sequence(self) -> None:
         self.assertEqual(
             [person["person_id"] for person in self.people],
-            [f"person-{index:03d}" for index in range(1, 36)],
+            [f"person-{index:03d}" for index in range(1, 51)],
         )
         self.assertEqual(self.manifest["next_person_sequence"], 18)
         allocation = read_json("data/derived/person-id-allocation-state.json")
-        self.assertEqual(allocation["next_person_sequence"], 36)
+        self.assertEqual(allocation["next_person_sequence"], 51)
 
     def test_manifest_is_bijective_and_identity_preserving(self) -> None:
         records = self.manifest["records"]
@@ -62,6 +62,8 @@ class PersonIdCanonicalizationTests(unittest.TestCase):
                 "桓溫", "劉惔", "庾亮", "王敦", "袁宏", "温嶠", "王濛", "孫晷", "王遐", "蘇峻",
                 "謝尚", "周顗", "王戎", "劉琨", "鄧攸", "謝鯤", "韓伯", "何充", "陸機", "向秀",
                 "殷浩", "卞壼", "王恭", "朱伺", "孟陋", "孫恩", "伏滔", "和嶠",
+                "王祥", "石苞", "羊祜", "杜預", "張華", "賈充", "王濬", "山濤",
+                "樂廣", "阮籍", "嵇康", "劉伶", "潘岳", "顧榮", "郭璞",
             },
         )
         story_ids = [record["entry_id"] for record in read_json("data/story-chain-gold-set.json")["records"]]

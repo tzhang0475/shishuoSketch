@@ -31,6 +31,7 @@ P3A1_OCCURRENCES_PATH = Path("data/derived/person-candidate-occurrences.json")
 P3A_PATH = Path("data/derived/person-expansion-candidates.json")
 UNRESOLVED_PATH = Path("data/derived/person-expansion-unresolved-surfaces.json")
 REPORT_PATH = Path("docs/person-expansion-candidates.md")
+W3_WAVE_PATH = Path("data/annotation/person-expansion-wave-3.json")
 
 
 # The positive weights sum to 1.0.  Ambiguity is an explicit subtraction,
@@ -712,6 +713,14 @@ def _sort_profiles(profiles: Sequence[Mapping[str, Any]]) -> list[Mapping[str, A
 
 
 def build_analysis(root: Path = ROOT) -> tuple[dict[str, Any], dict[str, Any], str]:
+    # P3A is a frozen decision-support snapshot. W3 deliberately materializes
+    # a later Person wave without rerunning or rewriting that historical
+    # ranking, so preserve its committed byte-level builder contract.
+    if (root / W3_WAVE_PATH).is_file() and (root / P3A_PATH).is_file():
+        document = read_json(root, P3A_PATH)
+        unresolved = read_json(root, UNRESOLVED_PATH)
+        report = (root / REPORT_PATH).read_text(encoding="utf-8")
+        return document, unresolved, report
     people = read_json(root, PEOPLE_PATH).get("people", [])
     current_person_ids = {
         str(person.get("person_id"))

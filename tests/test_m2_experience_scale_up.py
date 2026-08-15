@@ -23,6 +23,7 @@ class M2ExperienceScaleUpTests(unittest.TestCase):
         cls.bundle = read("data/derived/sc1-site.json")
         cls.wave = read("data/annotation/person-expansion-wave-2.json")
         cls.story_wave = read("data/annotation/story-expansion-wave-1.json")
+        cls.w3_story_wave = read("data/annotation/story-expansion-wave-3.json") if (ROOT / "data/annotation/story-expansion-wave-3.json").is_file() else {"records": []}
         cls.metrics = read("data/derived/m2-experience-metrics.json")
         cls.relations = read("data/annotation/wp1-relations.json")["records"]
         cls.evidence = read("data/evidence/wp1-evidence.json")["records"]
@@ -36,7 +37,7 @@ class M2ExperienceScaleUpTests(unittest.TestCase):
             [item["person_id"] for item in sorted(self.wave["members"], key=lambda item: item["rank_at_selection"])],
             [f"person-{index:03d}" for index in range(18, 36)],
         )
-        self.assertEqual({item["person_id"] for item in self.people}, {f"person-{index:03d}" for index in range(1, 36)})
+        self.assertEqual({item["person_id"] for item in self.people}, {f"person-{index:03d}" for index in range(1, 51)})
         self.assertEqual(validate_person_wave(ROOT), [])
 
     def test_story_publication_is_sc0_union_frozen_expansion(self) -> None:
@@ -45,7 +46,8 @@ class M2ExperienceScaleUpTests(unittest.TestCase):
         frontend = {story["id"] for story in self.bundle["stories"]}
         self.assertEqual(len(gold), 16)
         self.assertEqual(len(expansion), 44)
-        self.assertEqual(frontend, gold | expansion)
+        w3 = {item["story_id"] for item in self.w3_story_wave["records"]}
+        self.assertEqual(frontend, gold | expansion | w3)
         self.assertTrue(gold.isdisjoint(expansion))
         self.assertEqual(validate_story_wave(ROOT), [])
 
@@ -73,7 +75,7 @@ class M2ExperienceScaleUpTests(unittest.TestCase):
         links = read("data/derived/person-story-links.json")
         self.assertEqual(self.metrics["after"]["person_story_link_count"], links["link_count"])
         self.assertFalse(any(link["person_id"] == "person-016" for link in links["links"]))
-        self.assertEqual(self.metrics["after"]["person_no_published_story_count"], 2)
+        self.assertEqual(self.metrics["after"]["person_no_published_story_count"], 4)
 
     def test_er_identity_correction_does_not_restore_an_unsafe_sun_gui_path(self) -> None:
         stories = {story["id"]: story for story in self.bundle["stories"]}
@@ -111,10 +113,10 @@ class M2ExperienceScaleUpTests(unittest.TestCase):
 
     def test_m2_metrics_show_scale_without_relation_inflation(self) -> None:
         self.assertEqual(self.metrics["before"]["production_person_count"], 17)
-        self.assertEqual(self.metrics["after"]["production_person_count"], 35)
+        self.assertEqual(self.metrics["after"]["production_person_count"], 50)
         self.assertEqual(self.metrics["before"]["published_story_count"], 16)
-        self.assertEqual(self.metrics["after"]["published_story_count"], 60)
-        self.assertEqual(self.metrics["after"]["scene_card_count"], 21)
+        self.assertEqual(self.metrics["after"]["published_story_count"], len(self.bundle["stories"]))
+        self.assertEqual(self.metrics["after"]["scene_card_count"], 44)
         self.assertEqual(len(self.relations), 12)
         self.assertEqual(self.metrics["after"]["reviewed_relation_count"], 12)
         self.assertGreater(self.metrics["after"]["story_mediated_person_pair_count"], 0)

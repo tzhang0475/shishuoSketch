@@ -4,11 +4,11 @@ ER1 builds a deterministic effective-resolution overlay above the canonical Ment
 
 ## Summary
 
-- published Mention records audited: 228
-- safely auto-resolved: 199
-- candidate for review: 22
-- unresolved: 0
-- reviewed decisions applied: 7
+- published Mention records audited: 294
+- safely auto-resolved: 261
+- candidate for review: 24
+- unresolved: 2
+- reviewed decisions applied: 8
 - shared identity surfaces: 20
 
 ## Resolution precedence
@@ -42,12 +42,12 @@ Production status is a navigation capability, not an identity-confidence signal.
 - `太傅` → 郗鑒、謝安 · 2 published occurrences; never globally exact
 - `子安` → 范平、成公綏 · 0 published occurrences; never globally exact
 - `子悌宣帝` → 譙剛王遜、王遜 · 0 published occurrences; never globally exact
-- `張茂` → 張華、張茂 · 0 published occurrences; never globally exact
-- `彦先` → 顧榮、賀循 · 0 published occurrences; never globally exact
+- `張茂` → 張茂、張華 · 0 published occurrences; never globally exact
+- `彦先` → 賀循、顧榮 · 0 published occurrences; never globally exact
 - `思遠` → 紀瞻、應詹 · 0 published occurrences; never globally exact
 - `文度` → 王坦之、孫晷 · 11 published occurrences; never globally exact
 - `王丞相` → 王隱、王導 · 5 published occurrences; never globally exact
-- `王公` → 王羲之、王導 · 1 published occurrences; never globally exact
+- `王公` → 王羲之、王導 · 2 published occurrences; never globally exact
 - `王大將軍` → 王舒、王隱、王敦 · 0 published occurrences; never globally exact
 - `芬兄思别` → 左貴嬪、胡貴嬪 · 0 published occurrences; never globally exact
 - `芳父奮别` → 左貴嬪、胡貴嬪 · 0 published occurrences; never globally exact
@@ -56,6 +56,29 @@ Production status is a navigation capability, not an identity-confidence signal.
 - `邵伯魏興` → 譙剛王遜、王遜 · 0 published occurrences; never globally exact
 
 ## Review queue
+
+### 01-dexing-015 · 王公
+
+- Mention: `shishuo-01-dexing-015-liu-annotation-001` · section: `liu_annotation` · status: `candidate_for_review` · review: `candidate`
+- Context: (執事有恪亦各其慎也然天下之至慎者其唯阮嗣/尚書董仲達僕射【王公】仲上曰此諸人者温恭朝夕)
+- Reasons: insufficient_unique_local_context、shared_alias_surface
+- Candidates:
+  - 王羲之 · production_person · supporting: ambiguous；medium · conflicting: insufficient_unique_local_context；shared_alias_surface
+  - 王導 · production_person · supporting: ambiguous；medium · conflicting: insufficient_unique_local_context；shared_alias_surface
+
+### 01-dexing-026 · 少孤
+
+- Mention: `shishuo-p3b-wave-2-e72db7899b857ceab12efda4` · section: `main_text` · status: `unresolved` · review: `reviewed`
+- Context: 祖光禄【少孤】貧性至孝常自為母炊㸑作食
+
+王平北聞其佳名以兩婢餉之因取為中郎
+
+
+有人戲之者曰奴價
+- Reasons: human_reviewed_unresolved
+- Candidates:
+  - 孟陋 · production_person · supporting: exact；strong · conflicting: human_reviewed_unresolved
+- Review note: 本則“少孤”是幼年喪父的普通敘事語，不是孟陋的字；不得由全局別名少孤解析為孟陋。
 
 ### 02-yanyu-036 · 丞相
 
@@ -105,6 +128,15 @@ Production status is a navigation capability, not an identity-confidence signal.
 公欣然曰白雪紛紛何所似兄子胡兒曰
 撒鹽空
 中差可擬
+- Reasons: contextual_surface_requires_local_evidence
+- Candidates:
+  - 謝安 · production_person · supporting: contextual；medium · conflicting: contextual_surface_requires_local_evidence
+
+### 02-yanyu-078 · 謝太傅
+
+- Mention: `shishuo-02-yanyu-078-main-text-001` · section: `main_text` · status: `candidate_for_review` · review: `candidate`
+- Context: 晉武帝每餉山濤恒少【謝太傅】以問子弟車騎
+荅曰當由欲者不多而使與者忘少
 - Reasons: contextual_surface_requires_local_evidence
 - Candidates:
   - 謝安 · production_person · supporting: contextual；medium · conflicting: contextual_surface_requires_local_evidence
@@ -183,6 +215,15 @@ Production status is a navigation capability, not an identity-confidence signal.
 - Reasons: contextual_surface_requires_local_evidence
 - Candidates:
   - 王導 · production_person · supporting: ambiguous；medium · conflicting: contextual_surface_requires_local_evidence
+
+### 05-fangzheng-023 · 少孤
+
+- Mention: `shishuo-p3b-wave-2-4d4702def6513f8bed5b32ab` · section: `liu_annotation` · status: `unresolved` · review: `candidate`
+- Context: (虞氏先崩將納吳氏后與吳氏女遊後園有言之於/滎陽人【少孤】先嫁田氏夫亡依舅吳氏時中宗敬后)
+- Reasons: homographic_lexical_alias_without_identity_basis
+- Candidates:
+  - 孟陋 · production_person · supporting: exact；strong · conflicting: homographic_lexical_alias_without_identity_basis
+- Review note: 少孤既是孟陋的字，也是幼年喪父的普通語詞；没有同一故事中的明確身份語境時，不得按全局別名解析。
 
 ### 05-fangzheng-025 · 王右軍
 

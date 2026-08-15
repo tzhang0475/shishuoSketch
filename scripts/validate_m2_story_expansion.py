@@ -34,6 +34,7 @@ def validate(root: Path = ROOT) -> list[str]:
         ranking = read(root, RANKING_PATH)
         gold = read(root, GOLD_PATH)
         bundle = read(root, SC1_PATH)
+        w3_manifest = read(root, Path("data/annotation/story-expansion-wave-3.json")) if (root / "data/annotation/story-expansion-wave-3.json").is_file() else None
         scenes = read(root, SCENE_PATH)
         schema = read(root, Path("schema/story-expansion-wave-m2.schema.json"))
     except (OSError, json.JSONDecodeError, KeyError) as exc:
@@ -76,10 +77,11 @@ def validate(root: Path = ROOT) -> list[str]:
 
     story_rows = [x for x in bundle.get("stories", []) if isinstance(x, Mapping)]
     frontend_ids = [str(x.get("id")) for x in story_rows]
-    expected_ids = gold_ids + expansion_ids
+    w3_ids = [str(x.get("story_id")) for x in (w3_manifest or {}).get("records", [])]
+    expected_ids = gold_ids + expansion_ids + w3_ids
     if set(frontend_ids) != set(expected_ids) or len(frontend_ids) != len(expected_ids):
         errors.append("SC1 frontend Story set is not exactly SC0 union M2 expansion")
-    if len(frontend_ids) != 60:
+    if not w3_ids and len(frontend_ids) != 60:
         errors.append(f"M2 frontend Story count is {len(frontend_ids)}, expected 60 for the frozen selection")
     people_ids = {str(x.get("id")) for x in bundle.get("people", []) if isinstance(x, Mapping)}
     for story in story_rows:
@@ -89,7 +91,7 @@ def validate(root: Path = ROOT) -> list[str]:
     if not scene_ids <= set(frontend_ids):
         errors.append("Scene Context references a Story outside the frontend publication union")
     if len(scene_ids) < 20 or len(scene_ids) > 30:
-        errors.append(f"M2 Scene Context count is outside the 20–30 pilot expansion range: {len(scene_ids)}")
+        errors.append(f"M2 curated Scene Context count is outside the 20–30 pilot expansion range: {len(scene_ids)}")
     return sorted(set(errors))
 
 

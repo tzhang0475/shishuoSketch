@@ -124,8 +124,14 @@ def validate(
     candidates = document.get("candidates", [])
     if document.get("candidate_count") != len(candidates):
         errors.append("candidate_count does not equal candidates length")
-    if document.get("candidate_identity_policy", {}).get("scoped_person_ids_excluded") != sorted(scoped_ids):
-        errors.append("candidate identity policy does not list the current scoped registry deterministically")
+    policy_scoped_ids = {
+        str(item)
+        for item in document.get("candidate_identity_policy", {}).get("scoped_person_ids_excluded", [])
+    }
+    if document.get("candidate_identity_policy", {}).get("scoped_person_ids_excluded") != sorted(policy_scoped_ids):
+        errors.append("candidate identity policy scoped IDs are not deterministic")
+    if not policy_scoped_ids <= scoped_ids:
+        errors.append("candidate identity policy contains a Person absent from the current registry")
     keys: set[str] = set()
     source_person_ids: set[str] = set()
     ranked_p3a1_candidate_ids: set[str] = set()
@@ -170,8 +176,8 @@ def validate(
         for story_id in candidate.get("top_current_story_ids", []) + candidate.get("top_unlock_story_ids", []):
             if story_id not in story_ids:
                 errors.append(f"candidate {key} references unknown Story: {story_id}")
-        if not set(candidate.get("connected_current_person_ids", [])).issubset(scoped_ids):
-            errors.append(f"candidate {key} connects to a non-scoped Person")
+        if not set(candidate.get("connected_current_person_ids", [])).issubset(policy_scoped_ids):
+            errors.append(f"candidate {key} connects to a Person outside the frozen P3A scope")
 
     for gap in document.get("current_live_story_gaps", []):
         if gap.get("story_id") not in story_ids:

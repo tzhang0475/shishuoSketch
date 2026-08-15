@@ -188,7 +188,13 @@ class PersonIdentityDiscoveryTests(unittest.TestCase):
         candidates = self.document["candidates"]
         self.assertGreater(self.document["discovery_counts"]["candidate_identity_count"], 0)
         materialized = [row for row in candidates if row["status"] == "already_materialized"]
-        self.assertEqual(len(materialized), len(self.people))
+        # The P3A identity-discovery artifact is a frozen pre-W3 decision
+        # surface.  W3 adds production Persons through its own manifest; it
+        # must not silently rewrite this historical discovery snapshot.
+        registry_ids = {row["person_id"] for row in self.people}
+        materialized_ids = {row["matched_person_id"] for row in materialized}
+        self.assertLess(len(materialized), len(self.people))
+        self.assertTrue(materialized_ids <= registry_ids)
         self.assertTrue(all(row["materialization_state"] == "already_materialized" for row in materialized))
         self.assertTrue(
             all(row["materialization_state"] == "new_candidate" for row in candidates if row not in materialized)

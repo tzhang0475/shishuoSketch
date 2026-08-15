@@ -6,7 +6,7 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
-from story_scene_contexts import DERIVED_PATH, SC1_PATH, SOURCE_PATH, project, read_json, validate_source
+from story_scene_contexts import DERIVED_PATH, SC1_PATH, SOURCE_PATH, W3_SOURCE_PATH, combined_source, project, read_json, validate_source
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -14,7 +14,7 @@ ROOT = Path(__file__).resolve().parents[1]
 
 def validate(root: Path = ROOT) -> list[str]:
     errors = validate_source(root)
-    source = read_json(root / SOURCE_PATH)
+    source = combined_source(root)
     bundle = read_json(root / SC1_PATH)
     story_ids = {
         str(story["id"])
@@ -36,7 +36,10 @@ def validate(root: Path = ROOT) -> list[str]:
         derived = read_json(root / DERIVED_PATH)
         if derived.get("contexts") != expected:
             errors.append("derived Story Scene Context projection is not deterministic")
-        if derived.get("generated_from") != [str(SOURCE_PATH), str(SC1_PATH)]:
+        expected_generated_from = [str(SOURCE_PATH), str(SC1_PATH)]
+        if (root / W3_SOURCE_PATH).is_file():
+            expected_generated_from = [str(SOURCE_PATH), str(W3_SOURCE_PATH), str(SC1_PATH)]
+        if derived.get("generated_from") != expected_generated_from:
             errors.append("derived Story Scene Context provenance is incorrect")
     except (OSError, json.JSONDecodeError) as exc:
         errors.append(f"cannot read derived Story Scene Context artifact: {exc}")
@@ -45,8 +48,8 @@ def validate(root: Path = ROOT) -> list[str]:
         errors.append("Scene Context source/projection keys differ")
     if "06-yaliang-029" not in expected:
         errors.append("mandatory 06-yaliang-029 Scene Context is missing")
-    if len(expected) < 20 or len(expected) > 30:
-        errors.append(f"M2A Scene Context expansion must contain 20–30 Stories, found {len(expected)}")
+    if len(expected) < 20 or len(expected) > len(story_ids):
+        errors.append(f"Scene Context count must be within the published Story scope, found {len(expected)}")
 
     for story_id, context in expected.items():
         for person in context["people_at_scene"]:

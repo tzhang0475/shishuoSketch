@@ -17,6 +17,8 @@ try:
         SC1_PATH,
         SCHEMA_PATH,
         SOURCE_PATH,
+        GOLD_PATH,
+        M2_STORY_PATH,
         candidate_id,
         project,
         validate_source,
@@ -28,6 +30,8 @@ except ImportError:
         SC1_PATH,
         SCHEMA_PATH,
         SOURCE_PATH,
+        GOLD_PATH,
+        M2_STORY_PATH,
         candidate_id,
         project,
         validate_source,
@@ -58,15 +62,26 @@ def validate(root: Path = ROOT, *, document: Mapping[str, Any] | None = None) ->
         for person in bundle.get("people", [])
         if isinstance(person, Mapping) and isinstance(person.get("id"), str)
     }
+    scope_people = set(str(item) for item in actual.get("production_person_ids", []))
     evidence_ids = {
         str(item["id"])
         for item in bundle.get("evidence", [])
         if isinstance(item, Mapping) and isinstance(item.get("id"), str)
     }
+    frozen_story_ids = {
+        str(item.get("entry_id"))
+        for item in read_json(root / GOLD_PATH).get("records", [])
+        if isinstance(item, Mapping) and isinstance(item.get("entry_id"), str)
+    } | {
+        str(item.get("story_id"))
+        for item in read_json(root / M2_STORY_PATH).get("records", [])
+        if isinstance(item, Mapping) and isinstance(item.get("story_id"), str)
+    }
     story_ids = {
         str(story["id"])
         for story in bundle.get("stories", [])
         if isinstance(story, Mapping) and isinstance(story.get("id"), str)
+        and str(story.get("id")) in frozen_story_ids
     }
     reviewed_pairs: set[tuple[str, str]] = set()
     reviewed_ids: set[str] = set()
@@ -78,13 +93,13 @@ def validate(root: Path = ROOT, *, document: Mapping[str, Any] | None = None) ->
 
     if actual != project(root):
         errors.append("derived R3A projection is not deterministic")
-    if actual.get("production_person_count") != len(people):
-        errors.append("R3A production Person count does not match the current registry")
-    if actual.get("production_person_ids") != sorted(people):
-        errors.append("R3A production Person ordering is not deterministic")
+    if actual.get("production_person_count") != len(scope_people):
+        errors.append("R3A frozen-scope Person count mismatch")
+    if actual.get("production_person_ids") != sorted(scope_people):
+        errors.append("R3A frozen-scope Person ordering is not deterministic")
     if actual.get("candidate_count") != len(actual.get("candidates", [])):
         errors.append("R3A candidate_count mismatch")
-    if actual.get("pair_count_audited") != len(people) * (len(people) - 1) // 2:
+    if actual.get("pair_count_audited") != len(scope_people) * (len(scope_people) - 1) // 2:
         errors.append("R3A pair audit does not cover every unordered Person pair")
     if actual.get("already_reviewed_rediscovery_count") != len(actual.get("already_reviewed_rediscoveries", [])):
         errors.append("R3A rediscovery count mismatch")
@@ -101,7 +116,7 @@ def validate(root: Path = ROOT, *, document: Mapping[str, Any] | None = None) ->
     for item in actual.get("candidates", []):
         a, b = item.get("person_a_id"), item.get("person_b_id")
         pair = tuple(sorted((str(a), str(b))))
-        if a not in people or b not in people:
+        if a not in scope_people or b not in scope_people:
             errors.append(f"R3A candidate endpoint does not resolve: {a}, {b}")
         if a == b:
             errors.append(f"R3A candidate is a self relation: {a}")
@@ -163,7 +178,7 @@ def validate(root: Path = ROOT, *, document: Mapping[str, Any] | None = None) ->
     for row in actual.get("scene_encounters", []):
         if row.get("story_id") not in story_ids:
             errors.append(f"R3A Scene cross-audit references unknown Story: {row.get('story_id')}")
-        if row.get("person_a_id") not in people or row.get("person_b_id") not in people:
+        if row.get("person_a_id") not in scope_people or row.get("person_b_id") not in scope_people:
             errors.append(f"R3A Scene cross-audit references unknown Person: {row.get('story_id')}")
         if row.get("disposition") == "scene_encounter_only" and (row.get("r3a_candidate_id") or row.get("reviewed_relation_ids")):
             errors.append(f"R3A Scene encounter disposition is inconsistent: {row.get('story_id')}")

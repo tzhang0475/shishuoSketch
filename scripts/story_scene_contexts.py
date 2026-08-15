@@ -13,6 +13,7 @@ from opencc import OpenCC
 
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE_PATH = Path("data/annotation/story-scene-contexts.json")
+W3_SOURCE_PATH = Path("data/annotation/story-scene-contexts-w3.json")
 SCHEMA_PATH = Path("schema/story-scene-context.schema.json")
 DERIVED_PATH = Path("data/derived/story-scene-contexts.json")
 SC1_PATH = Path("data/derived/sc1-site.json")
@@ -83,8 +84,8 @@ def pair(value: str | None, converter: OpenCC) -> dict[str, str] | None:
     return {"original": value, "simplified": converter.convert(value)}
 
 
-def validate_source(root: Path = ROOT) -> list[str]:
-    source = read_json(root / SOURCE_PATH)
+def validate_source_path(root: Path, source_path: Path) -> list[str]:
+    source = read_json(root / source_path)
     schema = read_json(root / SCHEMA_PATH)
     Draft202012Validator.check_schema(schema)
     errors = [error.message for error in Draft202012Validator(schema).iter_errors(source)]
@@ -106,6 +107,23 @@ def validate_source(root: Path = ROOT) -> list[str]:
         for index, person in enumerate(record.get("people_at_scene", [])):
             check_range(f"{story_id}.people_at_scene[{index}].age", person["age"])
     return errors
+
+
+def validate_source(root: Path = ROOT) -> list[str]:
+    errors = validate_source_path(root, SOURCE_PATH)
+    if (root / W3_SOURCE_PATH).is_file():
+        errors.extend(validate_source_path(root, W3_SOURCE_PATH))
+    return errors
+
+
+def combined_source(root: Path = ROOT) -> dict[str, Any]:
+    """Return the curated base scene layer plus the frozen W3 layer."""
+
+    source = read_json(root / SOURCE_PATH)
+    records = list(source.get("records", []))
+    if (root / W3_SOURCE_PATH).is_file():
+        records.extend(read_json(root / W3_SOURCE_PATH).get("records", []))
+    return {**source, "records": records}
 
 
 def _all_evidence_ids(value: Mapping[str, Any]) -> set[str]:
@@ -277,7 +295,7 @@ def project(
 
 
 def build(root: Path = ROOT) -> dict[str, Any]:
-    source = read_json(root / SOURCE_PATH)
+    source = combined_source(root)
     errors = validate_source(root)
     if errors:
         raise ValueError("Story Scene Context schema validation failed: " + "; ".join(errors))
@@ -304,7 +322,7 @@ def build(root: Path = ROOT) -> dict[str, Any]:
     result = {
         "schema": 1,
         "stage": "story-scene-context-pilot-derived",
-        "generated_from": [str(SOURCE_PATH), str(SC1_PATH)],
+        "generated_from": [str(SOURCE_PATH), str(W3_SOURCE_PATH), str(SC1_PATH)] if (root / W3_SOURCE_PATH).is_file() else [str(SOURCE_PATH), str(SC1_PATH)],
         "contexts": contexts,
     }
     write_json(root / DERIVED_PATH, result)

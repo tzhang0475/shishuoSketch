@@ -1107,7 +1107,7 @@ function SceneCard({
   const narrative = scene.narrative_layers;
   const sceneFocus = narrative?.scene_focus ?? [];
   const offFrameClaims = narrative?.off_frame_context ?? [];
-  const groundClaims = narrative?.historical_ground?.length ? narrative.historical_ground : scene.event_background;
+  const groundClaims = narrative?.historical_ground ?? [];
   const resonanceClaims = narrative?.resonance ?? [];
   const inFramePeople = scene.people_at_scene.filter((person) => person.scene_role === "present");
   const offFramePeople = scene.people_at_scene.filter((person) => person.scene_role !== "present");
@@ -1379,6 +1379,9 @@ function StoryReader({
       <article className="reading-column">
         <p className="story-reference">{storyReference(story, readingMode)}</p>
         <h1 id="story-heading">{storyHeading(story, readingMode)}</h1>
+        {story.period_label && (
+          <p className="story-period-label">{readingValue(story.period_label, readingMode, "")}</p>
+        )}
         <p className="story-meta">{story.id}</p>
 
         <div className="story-reading-toolbar">

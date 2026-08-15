@@ -37,6 +37,7 @@ EVIDENCE_PATH = Path("data/evidence/wp1-evidence.json")
 SKETCH_PATH = Path("data/annotation/person-sketches.json")
 CORPUS_INDEX_PATH = Path("data/shishuo-corpus-index.json")
 RELATIONS_PATH = Path("data/annotation/wp1-relations.json")
+SOURCES_PATH = Path("data/sources/wp1-sources.json")
 GOLD_PATH = Path("data/story-chain-gold-set.json")
 PUNCTUATION_PATH = Path("data/annotation/wp1-punctuation.json")
 MATERIALIZATION_PATH = Path("data/derived/person-expansion-wave-1-materialization.json")
@@ -63,6 +64,7 @@ EXACT_SURFACE_TYPES = {
     "surname_plus_courtesy_name",
     "orthographic_variant",
 }
+TITLE_SUFFIXES_FOR_REPETITION = ("大司馬", "太傅", "丞相", "右軍", "宣武", "將軍", "刺史", "中郎", "太守", "尚書", "公", "侯", "君")
 
 
 def read_json(path: Path) -> Any:
@@ -91,6 +93,29 @@ def stable_hash(*values: object) -> str:
         digest.update(str(value).encode("utf-8"))
         digest.update(b"\0")
     return digest.hexdigest()
+
+
+def _is_synthetic_repeated_title_surface(surface: str, surface_type: str) -> bool:
+    """Reject a title alias made only by concatenating adjacent occurrences."""
+
+    if surface_type not in {"office_title", "contextual_title", "posthumous_title"}:
+        return False
+    suffix = next(
+        (value for value in TITLE_SUFFIXES_FOR_REPETITION if surface.endswith(value)),
+        None,
+    )
+    if suffix is None:
+        return False
+    for repeat_count in range(2, len(surface) + 1):
+        if len(surface) % repeat_count:
+            continue
+        unit_length = len(surface) // repeat_count
+        if unit_length <= len(suffix):
+            continue
+        unit = surface[:unit_length]
+        if surface == unit * repeat_count and unit.endswith(suffix):
+            return True
+    return False
 
 
 def production_evidence_id(source_evidence_id: str) -> str:
@@ -130,6 +155,36 @@ def _source_id(source: str) -> str:
     if source == "jinshu":
         return "source-002"
     raise ValueError(f"unsupported P3B.1 evidence source: {source!r}")
+
+
+def _registered_source_witnesses(root: Path) -> dict[str, str]:
+    document = read_json(root / SOURCES_PATH)
+    return {
+        str(item["id"]): str(item["witness_id"])
+        for item in document.get("records", [])
+        if isinstance(item, Mapping)
+        and isinstance(item.get("id"), str)
+        and isinstance(item.get("witness_id"), str)
+    }
+
+
+def _production_safe_evidence_ids(
+    root: Path,
+    candidate_evidence: Mapping[str, Mapping[str, Any]],
+) -> set[str]:
+    """Keep only evidence whose witness matches a registered source record."""
+
+    witnesses = _registered_source_witnesses(root)
+    allowed: set[str] = set()
+    for evidence_id, item in candidate_evidence.items():
+        try:
+            source_id = _source_id(str(item.get("source")))
+        except ValueError:
+            continue
+        actual = item.get("locator", {}).get("source_provenance", {}).get("witness_id")
+        if actual == witnesses.get(source_id):
+            allowed.add(str(evidence_id))
+    return allowed
 
 
 def _evidence_type(source: str, section: str) -> str:
@@ -471,11 +526,13 @@ def _build_mention(
 def _candidate_identity_source_evidence(
     candidate: Mapping[str, Any],
     evidence_map: Mapping[str, Mapping[str, Any]],
+    allowed_evidence_ids: set[str] | None = None,
 ) -> list[str]:
     return [
         production_evidence_id(str(evidence_id))
         for evidence_id in candidate.get("identity_evidence_ids", [])
         if str(evidence_id) in evidence_map
+        and (allowed_evidence_ids is None or str(evidence_id) in allowed_evidence_ids)
     ]
 
 
@@ -484,6 +541,7 @@ def _build_aliases(
     *,
     person_id: str,
     evidence_map: Mapping[str, Mapping[str, Any]],
+    allowed_evidence_ids: set[str] | None = None,
 ) -> tuple[list[dict[str, Any]], dict[tuple[str, str], str]]:
     aliases: list[dict[str, Any]] = []
     alias_ids: dict[tuple[str, str], str] = {}
@@ -500,9 +558,13 @@ def _build_aliases(
         surface_type = str(surface.get("surface_type", ""))
         if not value or not surface_type:
             continue
+        if _is_synthetic_repeated_title_surface(value, surface_type):
+            # A source scanner must segment ``X侯X侯`` as two occurrences.
+            # Keep this second guard at the materialization boundary so a
+            # stale analysis artifact can never create a production Alias.
+            continue
         key = (value, surface_type)
         alias_id = production_alias_id(str(candidate["candidate_id"]), value, surface_type)
-        alias_ids[key] = alias_id
         mode = str(surface.get("association_mode", "ambiguous"))
         if mode not in {"exact", "contextual", "ambiguous"}:
             mode = "ambiguous"
@@ -510,7 +572,13 @@ def _build_aliases(
             production_evidence_id(str(evidence_id))
             for evidence_id in surface.get("evidence_ids", [])
             if str(evidence_id) in evidence_map
+            and (allowed_evidence_ids is None or str(evidence_id) in allowed_evidence_ids)
         ]
+        if allowed_evidence_ids is not None and not evidence_ids:
+            # A surface supported only by an external/unregistered witness is
+            # withheld rather than admitted as a production Alias.
+            continue
+        alias_ids[key] = alias_id
         aliases.append(
             {
                 "alias_id": alias_id,
@@ -531,6 +599,7 @@ def _build_aliases(
                     }
                     for evidence_id in surface.get("evidence_ids", [])
                     if str(evidence_id) in evidence_map
+                    and (allowed_evidence_ids is None or str(evidence_id) in allowed_evidence_ids)
                 ],
                 "review_status": "candidate",
                 "materialization": {
@@ -549,12 +618,15 @@ def _build_person(
     person_id: str,
     aliases: list[Mapping[str, Any]],
     evidence_map: Mapping[str, Mapping[str, Any]],
+    allowed_evidence_ids: set[str] | None = None,
 ) -> dict[str, Any]:
-    identity_evidence_ids = _candidate_identity_source_evidence(candidate, evidence_map)
+    identity_evidence_ids = _candidate_identity_source_evidence(candidate, evidence_map, allowed_evidence_ids)
     source_evidence = []
     for source_evidence_id in candidate.get("identity_evidence_ids", []):
         item = evidence_map.get(str(source_evidence_id))
         if item is None:
+            continue
+        if allowed_evidence_ids is not None and str(source_evidence_id) not in allowed_evidence_ids:
             continue
         source_evidence.append(
             {
@@ -591,6 +663,7 @@ def _update_sketch_source(
     candidates: Mapping[str, Mapping[str, Any]],
     wave_by_candidate: Mapping[str, Mapping[str, Any]],
     evidence_map: Mapping[str, Mapping[str, Any]],
+    allowed_evidence_ids: set[str] | None = None,
 ) -> None:
     source = read_json(root / SKETCH_PATH)
     records_by_id = {
@@ -610,7 +683,7 @@ def _update_sketch_source(
             ),
             None,
         )
-        identity_evidence_ids = _candidate_identity_source_evidence(candidate, evidence_map)
+        identity_evidence_ids = _candidate_identity_source_evidence(candidate, evidence_map, allowed_evidence_ids)
         records_by_id[person_id] = {
             "person_id": person_id,
             "review_status": "candidate",
@@ -628,6 +701,86 @@ def _update_sketch_source(
     source["person_scope"] = ordered_ids
     source["records"] = [records_by_id[person_id] for person_id in ordered_ids]
     write_json(root / SKETCH_PATH, source)
+
+
+def _refresh_materialized_wave_identity_projection(
+    *,
+    people: list[Mapping[str, Any]],
+    aliases: list[Mapping[str, Any]],
+    wave_members: list[Mapping[str, Any]],
+    candidates: Mapping[str, Mapping[str, Any]],
+    evidence_map: Mapping[str, Mapping[str, Any]],
+    allowed_evidence_ids: set[str] | None = None,
+) -> tuple[list[dict[str, Any]], list[dict[str, Any]], dict[str, list[str]]]:
+    """Reconcile aliases for an already-materialized wave.
+
+    P3A.1 correctly re-runs after materialization and can remove a surface
+    that an earlier wave projection admitted.  The idempotent materializer
+    must therefore refresh the wave-owned Person/Alias projection instead of
+    preserving stale aliases forever.  Non-wave Persons and aliases are
+    copied byte-for-byte.
+    """
+
+    wave_person_ids = {str(item["person_id"]) for item in wave_members}
+    replacement_people: dict[str, dict[str, Any]] = {}
+    fresh_aliases: list[dict[str, Any]] = []
+    alias_ids_by_person: dict[str, list[str]] = {}
+    for member in sorted(wave_members, key=lambda item: int(item["rank_at_selection"])):
+        candidate_id = str(member["candidate_id"])
+        person_id = str(member["person_id"])
+        candidate = candidates[candidate_id]
+        built_aliases, _alias_ids = _build_aliases(
+            candidate,
+            person_id=person_id,
+            evidence_map=evidence_map,
+            allowed_evidence_ids=allowed_evidence_ids,
+        )
+        fresh_aliases.extend(built_aliases)
+        alias_ids = [str(item["alias_id"]) for item in built_aliases]
+        alias_ids_by_person[person_id] = alias_ids
+        replacement_people[person_id] = _build_person(
+            candidate,
+            person_id=person_id,
+            aliases=built_aliases,
+            evidence_map=evidence_map,
+            allowed_evidence_ids=allowed_evidence_ids,
+        )
+
+    old_wave_alias_ids = {
+        str(alias.get("alias_id"))
+        for alias in aliases
+        if isinstance(alias, Mapping)
+        and (
+            str(alias.get("alias_id", "")).startswith(ALIAS_PREFIX)
+            or wave_person_ids.intersection(str(item) for item in alias.get("person_ids", []))
+        )
+    }
+    retained_aliases = [
+        dict(alias)
+        for alias in aliases
+        if str(alias.get("alias_id")) not in old_wave_alias_ids
+    ]
+    refreshed_aliases = [*retained_aliases, *fresh_aliases]
+    refreshed_people = [
+        replacement_people.get(str(person.get("person_id")), dict(person))
+        for person in people
+    ]
+    return refreshed_people, refreshed_aliases, alias_ids_by_person
+
+
+def _wave_source_evidence_ids(
+    candidates: Mapping[str, Mapping[str, Any]],
+    wave_members: list[Mapping[str, Any]],
+) -> set[str]:
+    """Return the source Evidence used by the wave's identity projection."""
+
+    source_ids: set[str] = set()
+    for member in wave_members:
+        candidate = candidates[str(member["candidate_id"])]
+        source_ids.update(str(item) for item in candidate.get("identity_evidence_ids", []))
+        for surface in candidate.get("surfaces", []):
+            source_ids.update(str(item) for item in surface.get("evidence_ids", []))
+    return source_ids
 
 
 def _enrich_materialization_member(
@@ -734,6 +887,7 @@ def _render_report(
 def build(root: Path = ROOT) -> dict[str, Any]:
     wave = freeze_selection(root)
     candidates, candidate_evidence = _candidate_map(root)
+    allowed_source_evidence_ids = _production_safe_evidence_ids(root, candidate_evidence)
     occurrences_document = read_json(root / OCCURRENCES_PATH)
     occurrences = occurrences_document.get("occurrences", [])
     entries = {
@@ -778,8 +932,24 @@ def build(root: Path = ROOT) -> dict[str, Any]:
         # projection change (for example, a quotation normalization fix)
         # without re-running candidate occurrence discovery after P3A.1 has
         # classified the wave as already materialized.
-        evidence_by_id = {str(item.get("id")): item for item in existing_evidence}
-        for source_evidence_id in sorted(candidate_evidence):
+        evidence_by_id = {
+            str(item.get("id")): item
+            for item in existing_evidence
+        }
+        allowed_production_ids = {
+            production_evidence_id(source_id)
+            for source_id in allowed_source_evidence_ids
+        }
+        wave_production_ids = {
+            production_evidence_id(source_id)
+            for source_id in _wave_source_evidence_ids(candidates, wave_members)
+        }
+        evidence_by_id = {
+            evidence_id: item
+            for evidence_id, item in evidence_by_id.items()
+            if evidence_id not in wave_production_ids or evidence_id in allowed_production_ids
+        }
+        for source_evidence_id in sorted(allowed_source_evidence_ids):
             production_id = production_evidence_id(source_evidence_id)
             # Recreate a missing derived production record deterministically.
             # A later wave-specific provenance gate may withhold it, but an
@@ -792,14 +962,115 @@ def build(root: Path = ROOT) -> dict[str, Any]:
             if existing_record is not None and existing_record != record:
                 raise ValueError(f"production Evidence ID collision: {production_id}")
             evidence_by_id[production_id] = record
+        refreshed_people, refreshed_aliases, alias_ids_by_person = _refresh_materialized_wave_identity_projection(
+            people=existing_people,
+            aliases=existing_aliases,
+            wave_members=wave_members,
+            candidates=candidates,
+            evidence_map=candidate_evidence,
+            allowed_evidence_ids=allowed_source_evidence_ids,
+        )
+        wave_candidate_ids = set(wave_by_candidate)
+        bad_mentions = {
+            str(mention.get("mention_id")): mention
+            for mention in existing_mentions
+            if isinstance(mention, Mapping)
+            and isinstance(mention.get("mention_id"), str)
+            and isinstance(mention.get("materialization"), Mapping)
+            and mention["materialization"].get("wave_id") == WAVE_ID
+            and str(mention["materialization"].get("candidate_id")) in wave_candidate_ids
+            and any(
+                production_evidence_id(str(evidence_id)) not in allowed_production_ids
+                for evidence_id in mention.get("evidence", {}).get("evidence_ids", [])
+            )
+        }
+        if bad_mentions:
+            existing_mentions = [
+                mention for mention in existing_mentions
+                if str(mention.get("mention_id")) not in bad_mentions
+            ]
+            mentions_document["mentions"] = sorted(
+                existing_mentions,
+                key=lambda item: (
+                    str(item.get("entry_id") or item.get("source_id")),
+                    0 if item.get("section") == "main_text" else 1,
+                    int(item.get("evidence", {}).get("section_offset", 10**9))
+                    if isinstance(item.get("evidence"), Mapping)
+                    and isinstance(item.get("evidence", {}).get("section_offset"), int)
+                    else 10**9,
+                    str(item.get("mention_id")),
+                ),
+            )
+            mentions_document["mention_count"] = len(existing_mentions)
+        people_document["people"] = refreshed_people
+        aliases_document["aliases"] = refreshed_aliases
+        existing_people = refreshed_people
+        existing_aliases = refreshed_aliases
         evidence_document["records"] = sorted(
             evidence_by_id.values(), key=lambda item: str(item.get("id"))
         )
         write_json(root / EVIDENCE_PATH, evidence_document)
+        write_json(root / MENTIONS_PATH, mentions_document)
+        write_json(root / PEOPLE_PATH, people_document)
+        write_json(root / ALIASES_PATH, aliases_document)
         materialization = read_json(root / MATERIALIZATION_PATH)
+        for member in materialization.get("members", []):
+            removed = [
+                str(mention_id)
+                for mention_id in member.get("promoted_mention_ids", [])
+                if str(mention_id) in bad_mentions
+            ]
+            if not removed:
+                continue
+            removed_occurrence_ids = {
+                str(bad_mentions[mention_id].get("materialization", {}).get("candidate_occurrence_id"))
+                for mention_id in removed
+            }
+            member["promoted_mention_ids"] = [
+                str(mention_id)
+                for mention_id in member.get("promoted_mention_ids", [])
+                if str(mention_id) not in bad_mentions
+            ]
+            member["promoted_occurrence_ids"] = [
+                str(occurrence_id)
+                for occurrence_id in member.get("promoted_occurrence_ids", [])
+                if str(occurrence_id) not in removed_occurrence_ids
+            ]
+            member["promoted_mention_count"] = len(member["promoted_mention_ids"])
+            member["promoted_occurrence_count"] = len(member["promoted_occurrence_ids"])
+            member["withheld_occurrences"] = [
+                *member.get("withheld_occurrences", []),
+                *[
+                    {
+                        "occurrence_id": bad_mentions[mention_id].get("materialization", {}).get("candidate_occurrence_id"),
+                        "source_id": bad_mentions[mention_id].get("entry_id") or bad_mentions[mention_id].get("source_id"),
+                        "section": bad_mentions[mention_id].get("section"),
+                        "surface": bad_mentions[mention_id].get("surface"),
+                        "association_mode": "exact",
+                        "confidence": "strong_candidate",
+                        "reason": "source_provenance_not_registered_for_production",
+                        "evidence_ids": [],
+                    }
+                    for mention_id in removed
+                ],
+            ]
+            member["withheld_occurrence_count"] = len(member["withheld_occurrences"])
+        materialization["promoted_mention_count"] = sum(
+            len(member.get("promoted_mention_ids", []))
+            for member in materialization.get("members", [])
+        )
+        materialization["withheld_occurrence_count"] = sum(
+            len(member.get("withheld_occurrences", []))
+            for member in materialization.get("members", [])
+        )
         enriched_members = [
             _enrich_materialization_member(
-                dict(member),
+                {
+                    **dict(member),
+                    "production_alias_ids": alias_ids_by_person.get(
+                        str(member.get("person_id")), []
+                    ),
+                },
                 candidate=candidates[str(member["candidate_id"])],
                 ranking_row=ranking_by_candidate[str(member["candidate_id"])],
             )
@@ -810,6 +1081,11 @@ def build(root: Path = ROOT) -> dict[str, Any]:
         write_json(root / WAVE_PATH, wave)
         materialization["source_ranking_artifact"] = wave["source_ranking_artifact"]
         materialization["source_ranking_sha256"] = wave["source_ranking_sha256"]
+        materialization["production_evidence_ids"] = sorted(
+            production_evidence_id(source_id)
+            for source_id in _wave_source_evidence_ids(candidates, wave_members)
+            if source_id in candidate_evidence and source_id in allowed_source_evidence_ids
+        )
         materialization["protected_hashes"] = _protected_hashes(root)
         write_json(root / MATERIALIZATION_PATH, materialization)
         _update_sketch_source(
@@ -818,6 +1094,7 @@ def build(root: Path = ROOT) -> dict[str, Any]:
             candidates=candidates,
             wave_by_candidate=wave_by_candidate,
             evidence_map=candidate_evidence,
+            allowed_evidence_ids=allowed_source_evidence_ids,
         )
         (root / REPORT_PATH).parent.mkdir(parents=True, exist_ok=True)
         (root / REPORT_PATH).write_text(
@@ -842,6 +1119,7 @@ def build(root: Path = ROOT) -> dict[str, Any]:
             candidate,
             person_id=person_id,
             evidence_map=candidate_evidence,
+            allowed_evidence_ids=allowed_source_evidence_ids,
         )
         new_aliases.extend(aliases)
         for key, alias_id in alias_ids.items():
@@ -852,15 +1130,11 @@ def build(root: Path = ROOT) -> dict[str, Any]:
                 person_id=person_id,
                 aliases=aliases,
                 evidence_map=candidate_evidence,
+                allowed_evidence_ids=allowed_source_evidence_ids,
             )
         )
 
-    used_source_evidence_ids: set[str] = set()
-    for candidate_id in wave_by_candidate:
-        candidate = candidates[candidate_id]
-        used_source_evidence_ids.update(str(item) for item in candidate.get("identity_evidence_ids", []))
-        for surface in candidate.get("surfaces", []):
-            used_source_evidence_ids.update(str(item) for item in surface.get("evidence_ids", []))
+    used_source_evidence_ids = _wave_source_evidence_ids(candidates, wave_members) & allowed_source_evidence_ids
     production_evidence_records = {
         production_evidence_id(source_id): _candidate_evidence_record(
             candidate_evidence[source_id], root=root
@@ -968,8 +1242,13 @@ def build(root: Path = ROOT) -> dict[str, Any]:
             surface_type = str(occurrence.get("surface_type", ""))
             reason: str | None = None
             reused_existing = False
+            if not all(
+                str(evidence_id) in allowed_source_evidence_ids
+                for evidence_id in occurrence.get("evidence_ids", [])
+            ):
+                reason = "source_provenance_not_registered_for_production"
             if str(occurrence.get("occurrence_id")) in suppressed_overlaps:
-                reason = suppressed_overlaps[str(occurrence.get("occurrence_id"))]
+                reason = reason or suppressed_overlaps[str(occurrence.get("occurrence_id"))]
             if not exact:
                 reason = reason or "contextual_association"
             elif not strong:
@@ -1017,7 +1296,7 @@ def build(root: Path = ROOT) -> dict[str, Any]:
                         "evidence_ids": [
                             production_evidence_id(str(item))
                             for item in occurrence.get("evidence_ids", [])
-                            if str(item) in candidate_evidence
+                            if str(item) in candidate_evidence and str(item) in allowed_source_evidence_ids
                         ],
                     }
                 )
@@ -1077,7 +1356,7 @@ def build(root: Path = ROOT) -> dict[str, Any]:
                         if person_id in item.get("person_ids", [])
                     ],
                     "production_identity_evidence_ids": _candidate_identity_source_evidence(
-                        candidate, candidate_evidence
+                        candidate, candidate_evidence, allowed_source_evidence_ids
                     ),
                 },
                 candidate=candidate,

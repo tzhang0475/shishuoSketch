@@ -87,8 +87,10 @@ def validate(root: Path = ROOT) -> list[str]:
 
     people_by_id = {str(x.get("person_id")): x for x in people if isinstance(x, Mapping)}
     wave_ids = set(expected_ids)
-    if len(people) != 35 or not wave_ids <= set(people_by_id):
-        errors.append("Production registry does not contain exactly the 17+18 M2 Person scope")
+    # Later frozen waves extend the registry; the M2 checkpoint remains
+    # authoritative for its own 18 IDs without rejecting a valid W3 suffix.
+    if len(people) < 35 or not wave_ids <= set(people_by_id):
+        errors.append("Production registry does not contain the complete 17+18 M2 Person scope")
     if materialization.get("people_before") != 17 or materialization.get("people_after") != 35:
         errors.append("Wave 2 people_before/after does not record 17→35")
     for person_id in expected_ids:
@@ -155,8 +157,8 @@ def validate(root: Path = ROOT) -> list[str]:
         # may carry an M2 materialization marker.
         if any("p3b-wave-2" in json.dumps(x, ensure_ascii=False) or "m2a" in json.dumps(x, ensure_ascii=False) for x in relations):
             errors.append("Wave 2 materialization introduced a Relation record")
-    if allocation.get("next_person_sequence") != 36:
-        errors.append("M2 allocation state next_person_sequence must be 36")
+    if not isinstance(allocation.get("next_person_sequence"), int) or allocation.get("next_person_sequence") < 36:
+        errors.append("M2 allocation state next_person_sequence must not move backwards")
     return sorted(set(errors))
 
 

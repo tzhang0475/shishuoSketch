@@ -15,7 +15,7 @@
 | Rank | Person | Candidate ID | Score | Exact aliases | Contextual aliases | Shishuo main/Liu Stories | Jinshu units | Promoted | Withheld | SC1 stories | Relations |
 |---:|---|---|---:|---|---|---:|---:|---:|---:|---:|---:|
 | 1 | 謝尚 (`person-018`) | `candidate-identity-079-liezhuan-001-df72bb359476` | 77.014900 | 仁祖, 謝仁祖, 謝尚 | 謝尚書 | 18/8 | 1 | 31 | 16 | 0 | 0 |
-| 2 | 周顗 (`person-019`) | `candidate-identity-069-liezhuan-004-cdd8afdd3f4a` | 76.599500 | 伯仁, 周伯仁, 周顗 | 周侯, 周侯周侯 | 20/11 | 1 | 46 | 19 | 0 | 0 |
+| 2 | 周顗 (`person-019`) | `candidate-identity-069-liezhuan-004-cdd8afdd3f4a` | 76.599500 | 伯仁, 周伯仁, 周顗 | 周侯 | 20/11 | 1 | 46 | 20 | 0 | 0 |
 | 3 | 王戎 (`person-020`) | `candidate-identity-043-liezhuan-002-01e116bde4f6` | 66.371100 | 濬沖, 王戎, 王濬沖 | 王戎為尚書 | 26/14 | 1 | 46 | 5 | 0 | 0 |
 | 4 | 劉琨 (`person-021`) | `candidate-identity-062-liezhuan-001-26111f51e2e0` | 63.532600 | 劉琨, 劉越石, 越石 | — | 6/4 | 1 | 12 | 2 | 0 | 0 |
 | 5 | 鄧攸 (`person-022`) | `candidate-identity-090-liezhuan-011-1e0fed969fe4` | 61.605800 | 伯道, 鄧伯道, 鄧攸 | — | 6/5 | 1 | 10 | 3 | 0 | 0 |
@@ -64,6 +64,7 @@ No Relation records were created. PersonStory links may cover the full Shishuo c
 
 - `02-yanyu-030` · liu_annotation · `伯仁` · `overlapping_existing_or_nested_wave2_mention`
 - `08-shangyu-048` · main_text · `周侯` · `contextual_association`
+- `33-youhui-006` · main_text · `周侯` · `contextual_association`
 - `09-pinzao-022` · main_text · `伯仁` · `overlapping_existing_or_nested_wave2_mention`
 - `05-fangzheng-033` · main_text · `伯仁` · `overlapping_existing_or_nested_wave2_mention`
 - `26-qingdi-002` · main_text · `伯仁` · `overlapping_existing_or_nested_wave2_mention`
@@ -78,8 +79,8 @@ No Relation records were created. PersonStory links may cover the full Shishuo c
 - `07-shijian-014` · main_text · `伯仁` · `overlapping_existing_or_nested_wave2_mention`
 - `05-fangzheng-030` · main_text · `伯仁` · `overlapping_existing_or_nested_wave2_mention`
 - `14-rongzhi-020` · main_text · `伯仁` · `overlapping_existing_or_nested_wave2_mention`
-- `33-youhui-006` · main_text · `周侯周侯` · `contextual_association`
 - `25-paidiao-018` · main_text · `伯仁` · `overlapping_existing_or_nested_wave2_mention`
+- `33-youhui-006` · main_text · `周侯` · `contextual_association`
 - `09-pinzao-014` · main_text · `伯仁` · `overlapping_existing_or_nested_wave2_mention`
 
 ### Withheld surfaces — 王戎

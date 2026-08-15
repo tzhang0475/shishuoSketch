@@ -31,12 +31,17 @@ class PersonExpansionCandidateTests(unittest.TestCase):
 
     def test_artifacts_validate_and_scoped_people_are_excluded(self) -> None:
         self.assertEqual(validate(ROOT), [])
-        scoped = {person["person_id"] for person in self.people}
+        scoped = {
+            person["person_id"]
+            for person in self.people
+            if person["person_id"] in self.document["candidate_identity_policy"]["scoped_person_ids_excluded"]
+        }
         self.assertTrue(scoped)
         self.assertEqual(
             scoped,
             set(self.document["candidate_identity_policy"]["scoped_person_ids_excluded"]),
         )
+        self.assertLess(len(scoped), len(self.people))
         self.assertFalse(
             scoped.intersection(
                 {candidate["source_person_id"] for candidate in self.document["candidates"]}

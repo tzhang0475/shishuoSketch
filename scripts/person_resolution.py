@@ -37,6 +37,7 @@ DECISIONS_PATH = Path("data/annotation/person-resolution-decisions.json")
 CORPUS_INDEX_PATH = Path("data/shishuo-corpus-index.json")
 GOLD_PATH = Path("data/story-chain-gold-set.json")
 EXPANSION_PATH = Path("data/annotation/story-expansion-wave-1.json")
+W3_EXPANSION_PATH = Path("data/annotation/story-expansion-wave-3.json")
 EFFECTIVE_PATH = Path("data/derived/person-resolution-effective.json")
 QUEUE_PATH = Path("data/derived/person-resolution-review-queue.json")
 COLLISIONS_PATH = Path("data/derived/person-alias-collisions.json")
@@ -44,6 +45,12 @@ REPORT_PATH = Path("docs/person-resolution-review.md")
 SPAN_DECISIONS_PATH = Path("data/annotation/person-resolution-span-decisions.json")
 SPAN_AUDIT_PATH = Path("data/derived/person-resolution-span-audit.json")
 SPAN_REPORT_PATH = Path("docs/person-resolution-span-audit.md")
+LEXICAL_ALIAS_RULES_PATH = Path("data/annotation/person-resolution-lexical-alias-rules.json")
+MATERIALIZED_PERSON_WAVE_PATHS = (
+    Path("data/annotation/person-expansion-wave-1.json"),
+    Path("data/annotation/person-expansion-wave-2.json"),
+    Path("data/annotation/person-expansion-wave-3.json"),
+)
 
 RESOLUTION_STATUSES = {"resolved", "candidate_for_review", "unresolved"}
 REVIEW_STATUSES = {"candidate", "reviewed", "rejected", "todo"}
@@ -103,7 +110,20 @@ def _candidate_status(candidate: Mapping[str, Any]) -> str:
     return str(candidate.get("status", ""))
 
 
-def _candidate_target(candidate: Mapping[str, Any], people_by_id: Mapping[str, Mapping[str, Any]]) -> dict[str, Any] | None:
+def _candidate_target(
+    candidate: Mapping[str, Any],
+    people_by_id: Mapping[str, Mapping[str, Any]],
+    materialized_candidate_persons: Mapping[str, str] | None = None,
+) -> dict[str, Any] | None:
+    candidate_id = candidate.get("candidate_id")
+    if isinstance(candidate_id, str) and materialized_candidate_persons:
+        person_id = materialized_candidate_persons.get(candidate_id)
+        if isinstance(person_id, str) and person_id in people_by_id:
+            return {
+                "target_kind": "production_person",
+                "person_id": person_id,
+                "canonical_name": str(people_by_id[person_id].get("canonical_name", candidate.get("preferred_name", ""))),
+            }
     status = _candidate_status(candidate)
     if status == "already_materialized":
         person_id = candidate.get("matched_person_id")
@@ -121,6 +141,38 @@ def _candidate_target(candidate: Mapping[str, Any], people_by_id: Mapping[str, M
             "canonical_name": str(candidate["preferred_name"]),
         }
     return None
+
+
+def _materialized_candidate_persons(root: Path) -> dict[str, str]:
+    """Return frozen candidate-to-Person assignments from expansion waves.
+
+    Candidate artifacts intentionally remain identity-analysis data and may
+    still say ``new_candidate`` after a wave is materialized.  The committed
+    wave manifests are the authoritative bridge for the separate production
+    navigation capability; without it ER1 would incorrectly treat a
+    materialized identity as both a candidate and a production Person.
+    """
+
+    result: dict[str, str] = {}
+    for relative in MATERIALIZED_PERSON_WAVE_PATHS:
+        path = root / relative
+        if not path.is_file():
+            continue
+        document = read_json(root, relative)
+        for member in document.get("members", []):
+            if not isinstance(member, Mapping):
+                continue
+            candidate_id = member.get("candidate_id")
+            person_id = member.get("person_id")
+            if not isinstance(candidate_id, str) or not isinstance(person_id, str):
+                continue
+            previous = result.get(candidate_id)
+            if previous is not None and previous != person_id:
+                raise ValueError(
+                    f"candidate is assigned to multiple production Persons: {candidate_id}"
+                )
+            result[candidate_id] = person_id
+    return result
 
 
 def _identity_target_overrides(root: Path) -> list[Mapping[str, Any]]:
@@ -207,8 +259,10 @@ def _identity_cues(
 def _published_story_ids(root: Path) -> set[str]:
     gold = read_json(root, GOLD_PATH)
     ids = {str(item["entry_id"]) for item in gold.get("records", []) if isinstance(item, Mapping) and isinstance(item.get("entry_id"), str)}
-    if (root / EXPANSION_PATH).is_file():
-        expansion = read_json(root, EXPANSION_PATH)
+    for expansion_path in (EXPANSION_PATH, W3_EXPANSION_PATH):
+        if not (root / expansion_path).is_file():
+            continue
+        expansion = read_json(root, expansion_path)
         ids.update(
             str(item["story_id"])
             for item in expansion.get("records", [])
@@ -558,6 +612,7 @@ def _build_alias_index(
     candidates: list[Mapping[str, Any]],
     candidate_evidence: Mapping[str, Mapping[str, Any]],
     identity_overrides: list[Mapping[str, Any]] | None = None,
+    materialized_candidate_persons: Mapping[str, str] | None = None,
 ) -> tuple[dict[str, list[dict[str, Any]]], dict[str, dict[str, Any]], list[dict[str, Any]]]:
     people_by_id = {str(item.get("person_id")): item for item in people if isinstance(item.get("person_id"), str)}
     targets_by_key: dict[str, dict[str, Any]] = {}
@@ -574,7 +629,7 @@ def _build_alias_index(
     for candidate in all_candidates:
         if not isinstance(candidate, Mapping) or not isinstance(candidate.get("candidate_id"), str):
             continue
-        target = _candidate_target(candidate, people_by_id)
+        target = _candidate_target(candidate, people_by_id, materialized_candidate_persons)
         if target is None:
             continue
         target_key = _target_key(target)
@@ -707,6 +762,66 @@ def _decision_map(root: Path) -> dict[str, Mapping[str, Any]]:
         if decision.get("review_status") == "reviewed":
             result[str(decision["mention_id"])] = decision
     return result
+
+
+def _lexical_alias_rules(root: Path) -> dict[str, Mapping[str, Any]]:
+    """Load conservative homographic-alias guards.
+
+    Alias registry membership is historical identity evidence, not a universal
+    Mention instruction.  A rule can require a local syntax/context basis
+    before an otherwise exact alias is allowed to resolve.
+    """
+
+    path = root / LEXICAL_ALIAS_RULES_PATH
+    if not path.is_file():
+        return {}
+    document = read_json(root, LEXICAL_ALIAS_RULES_PATH)
+    return {
+        str(item["surface"]): item
+        for item in document.get("rules", [])
+        if isinstance(item, Mapping) and isinstance(item.get("surface"), str) and item.get("surface")
+    }
+
+
+def _homographic_alias_guard(
+    mention: Mapping[str, Any],
+    *,
+    text: str,
+    rule: Mapping[str, Any] | None,
+) -> dict[str, Any] | None:
+    """Return an unresolved result for a lexical alias without local basis."""
+
+    if rule is None or str(mention.get("surface", "")) != str(rule.get("surface", "")):
+        return None
+    story_id = str(mention.get("entry_id") or mention.get("source_id") or "")
+    allowed_stories = {str(item) for item in rule.get("allowed_story_ids", []) if isinstance(item, str)}
+    patterns = [str(item) for item in rule.get("identity_context_patterns", []) if isinstance(item, str) and item]
+    matched_pattern = next((pattern for pattern in patterns if re.search(pattern, text)), None)
+    if story_id in allowed_stories and matched_pattern is not None:
+        return None
+    associations = rule.get("candidate_targets", [])
+    candidates = [
+        _target_copy(item)
+        for item in associations
+        if isinstance(item, Mapping) and item.get("target_kind") in TARGET_KINDS
+    ]
+    return {
+        "status": "unresolved",
+        "target": None,
+        "candidates": candidates,
+        "signals": ["homographic_alias_guard"],
+        "reasons": ["homographic_lexical_alias_without_identity_basis"],
+        "review_status": "candidate",
+        "decision_source": "automatic",
+        "review_note": str(rule.get("note", "")),
+        "resolution_evidence_ids": sorted({
+            str(item)
+            for item in mention.get("evidence", {}).get("evidence_ids", [])
+            if isinstance(item, str)
+        }),
+        "resolution_mode": "ambiguous",
+        "resolution_method": "er1_homographic_alias_guard",
+    }
 
 
 def _validate_decision_target(
@@ -1648,6 +1763,7 @@ def build(root: Path) -> dict[str, Any]:
         for item in candidate_document.get("evidence", [])
         if isinstance(item, Mapping) and isinstance(item.get("id"), str)
     }
+    materialized_candidate_persons = _materialized_candidate_persons(root)
     alias_index, targets_by_key, candidate_metadata = _build_alias_index(
         root,
         people,
@@ -1655,8 +1771,10 @@ def build(root: Path) -> dict[str, Any]:
         candidates,
         candidate_evidence,
         identity_overrides,
+        materialized_candidate_persons,
     )
     decision_map = _decision_map(root)
+    lexical_alias_rules = _lexical_alias_rules(root)
     sections = _load_sections(root)
     cues_by_target: dict[str, list[dict[str, str]]] = defaultdict(list)
     for item in candidate_metadata:
@@ -1704,6 +1822,13 @@ def build(root: Path) -> dict[str, Any]:
             cues_by_target=cues_by_target,
             decision=None,
         )
+        homographic_guard = _homographic_alias_guard(
+            context_mention,
+            text=text,
+            rule=lexical_alias_rules.get(str(context_mention.get("surface", ""))),
+        )
+        if homographic_guard is not None:
+            automatic_result = homographic_guard
         result = automatic_result
         if decision is not None:
             reviewed_result = resolve_mention(
@@ -1785,6 +1910,8 @@ def build(root: Path) -> dict[str, Any]:
             str(IDENTITY_TARGETS_PATH),
             str(DECISIONS_PATH),
             str(SPAN_DECISIONS_PATH),
+            str(LEXICAL_ALIAS_RULES_PATH),
+            *[str(path) for path in MATERIALIZED_PERSON_WAVE_PATHS if (root / path).is_file()],
         ],
         "source_mentions_sha256": sha256_file(root / MENTIONS_PATH),
         "decision_sha256": sha256_file(root / DECISIONS_PATH),

@@ -17,14 +17,14 @@ try:
     from .reading_layers import display_span_for_anchor, normalize_reader_whitespace, strip_display_punctuation
     from .validate_person_sketch import validate_bundle as validate_person_sketch_bundle
     from .validate_wp1 import validate_source_provenance
-    from .story_scene_contexts import DERIVED_PATH as SCENE_DERIVED_PATH, SOURCE_PATH as SCENE_SOURCE_PATH, project as project_scene_contexts, validate_source as validate_scene_source
+    from .story_scene_contexts import DERIVED_PATH as SCENE_DERIVED_PATH, SOURCE_PATH as SCENE_SOURCE_PATH, project as project_scene_contexts, validate_source as validate_scene_source, validate_source_path as validate_scene_source_path
     from .person_resolution import load_effective_mentions
 except ImportError:  # direct execution
     from build_six_person_pilot import parse_shishuo_sections
     from reading_layers import display_span_for_anchor, normalize_reader_whitespace, strip_display_punctuation
     from validate_person_sketch import validate_bundle as validate_person_sketch_bundle
     from validate_wp1 import validate_source_provenance
-    from story_scene_contexts import DERIVED_PATH as SCENE_DERIVED_PATH, SOURCE_PATH as SCENE_SOURCE_PATH, project as project_scene_contexts, validate_source as validate_scene_source
+    from story_scene_contexts import DERIVED_PATH as SCENE_DERIVED_PATH, SOURCE_PATH as SCENE_SOURCE_PATH, project as project_scene_contexts, validate_source as validate_scene_source, validate_source_path as validate_scene_source_path
     from person_resolution import load_effective_mentions
 
 
@@ -397,6 +397,7 @@ def validate(root: Path = ROOT, mode: str = "full") -> list[str]:
         vite = read_json(root / VITE_PATH.relative_to(ROOT))
         gold = read_json(root / "data/story-chain-gold-set.json")
         expansion = read_json(root / "data/annotation/story-expansion-wave-1.json") if (root / "data/annotation/story-expansion-wave-1.json").is_file() else None
+        w3_expansion = read_json(root / "data/annotation/story-expansion-wave-3.json") if (root / "data/annotation/story-expansion-wave-3.json").is_file() else None
         chain = read_json(root / "data/derived/story-chain-gold-index.json")
         corpus = read_json(root / "data/shishuo-corpus-index.json")
         punctuation = {
@@ -436,6 +437,16 @@ def validate(root: Path = ROOT, mode: str = "full") -> list[str]:
         if set(expansion_ids) & set(gold_ids):
             errors.append("M2 Story expansion manifest duplicates an SC0 Story")
         selected.extend({"entry_id": story_id, "linked_person_ids": []} for story_id in expansion_ids)
+    w3_expansion_ids: list[str] = []
+    if w3_expansion is not None:
+        w3_expansion_ids = [str(item.get("story_id")) for item in w3_expansion.get("records", [])]
+        if w3_expansion.get("gold_story_ids") != gold_ids:
+            errors.append("W3 Story expansion manifest does not preserve the exact SC0 Gold Set")
+        if len(w3_expansion_ids) != len(set(w3_expansion_ids)):
+            errors.append("W3 Story expansion manifest contains duplicate Story IDs")
+        if set(w3_expansion_ids) & (set(gold_ids) | set(expansion_ids)):
+            errors.append("W3 Story expansion manifest overlaps an existing publication set")
+        selected.extend({"entry_id": story_id, "linked_person_ids": []} for story_id in w3_expansion_ids)
     selected_ids = [item.get("entry_id") for item in selected]
     corpus_by_id = {item.get("id"): item for item in corpus.get("entries", [])}
     selected.sort(key=lambda item: int(corpus_by_id.get(item.get("entry_id"), {}).get("global_ordinal", 10**9)))
@@ -443,8 +454,8 @@ def validate(root: Path = ROOT, mode: str = "full") -> list[str]:
     stories = bundle.get("stories", [])
     story_by_id = {item.get("id"): item for item in stories if isinstance(item, dict)}
     if selected_ids != [item.get("id") for item in stories]:
-        errors.append("SC1 stories are not exactly the ordered SC0 + M2 expansion union")
-    expected_story_count = len(gold_ids) + len(expansion_ids)
+        errors.append("SC1 stories are not exactly the ordered SC0 + M2 + W3 expansion union")
+    expected_story_count = len(gold_ids) + len(expansion_ids) + len(w3_expansion_ids)
     if len(stories) != expected_story_count or len(story_by_id) != len(stories):
         errors.append(f"SC1 must contain exactly {expected_story_count} unique Stories from the frozen publication manifests")
 
@@ -471,6 +482,24 @@ def validate(root: Path = ROOT, mode: str = "full") -> list[str]:
             evidence_ids=set(evidence_by_id),
             converter=converter,
         )
+        w3_scene_path = root / "data/annotation/story-scene-contexts-w3.json"
+        if w3_scene_path.is_file():
+            errors.extend(f"W3 Scene Context schema: {error}" for error in validate_scene_source_path(root, Path("data/annotation/story-scene-contexts-w3.json")))
+            w3_scene_source = read_json(w3_scene_path)
+            w3_contexts = project_scene_contexts(
+                w3_scene_source,
+                story_ids={
+                    str(story.get("id"))
+                    for story in stories
+                    if isinstance(story, dict) and story.get("publication_state") != "blocked"
+                },
+                people=bundle.get("people", []),
+                evidence_ids=set(evidence_by_id),
+                converter=converter,
+            )
+            if set(expected_scene_contexts) & set(w3_contexts):
+                errors.append("W3 Scene Context overlaps the existing curated projection")
+            expected_scene_contexts = {**expected_scene_contexts, **w3_contexts}
         if bundle.get("scene_contexts") != expected_scene_contexts:
             errors.append("SC1 scene_contexts is not the deterministic projection of curated data")
         derived_scene = read_json(root / SCENE_DERIVED_PATH)
@@ -639,7 +668,7 @@ def validate(root: Path = ROOT, mode: str = "full") -> list[str]:
 
     frontend_chain = bundle.get("story_chain", {})
     if frontend_chain.get("story_ids") != selected_ids:
-        errors.append("SC1 story_chain.story_ids does not project the SC0 + M2 expansion union")
+        errors.append("SC1 story_chain.story_ids does not project the SC0 + M2 + W3 expansion union")
     frontend_story_refs = {
         item.get("entry_id"): item
         for item in frontend_chain.get("story_person_refs", [])

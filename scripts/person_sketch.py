@@ -27,6 +27,7 @@ PEOPLE_PATH = Path("data/people.json")
 MENTIONS_PATH = Path("data/mentions/shishuo.json")
 PERSON_STORY_INDEX_PATH = Path("data/derived/person-story-index.json")
 LIFE_GLIMPSE_OVERLAY_PATH = Path("data/annotation/s2-person-life-glimpses.json")
+W3_LIFE_GLIMPSE_OVERLAY_PATH = Path("data/annotation/w3-person-life-glimpses.json")
 
 ALIAS_TYPE_LABELS = {
     "personal_name": "名",
@@ -173,6 +174,13 @@ def _alias_rows(
             )
         ]
         matches.sort(key=lambda item: _mention_sort_key(item, corpus_order))
+        # An Alias may remain in the structured registry for provenance or
+        # audit purposes even after no effective Mention supports it.  It is
+        # not a reader-facing naming row in that state.  In particular this
+        # prevents a stale synthetic surface from surviving only as an
+        # unobserved registry alias.
+        if not matches:
+            continue
         # The frontend bundle intentionally contains only the current SC1
         # publication projection.  Retain occurrence counts from the full
         # reviewed Mention corpus, but expose only Mention IDs that are
@@ -248,12 +256,17 @@ def build_person_sketches(
 
     converter = converter or OpenCC("t2s")
     source = load_source(root)
-    life_overlay = read_json(root, LIFE_GLIMPSE_OVERLAY_PATH) if (root / LIFE_GLIMPSE_OVERLAY_PATH).is_file() else {"records": []}
-    life_overlay_by_person = {
-        str(item["person_id"]): list(item.get("points", []))
-        for item in life_overlay.get("records", [])
-        if isinstance(item, Mapping) and isinstance(item.get("person_id"), str)
-    }
+    life_overlay_by_person: dict[str, list[Mapping[str, Any]]] = {}
+    for overlay_path in (LIFE_GLIMPSE_OVERLAY_PATH, W3_LIFE_GLIMPSE_OVERLAY_PATH):
+        if not (root / overlay_path).is_file():
+            continue
+        life_overlay = read_json(root, overlay_path)
+        for item in life_overlay.get("records", []):
+            if not isinstance(item, Mapping) or not isinstance(item.get("person_id"), str):
+                continue
+            life_overlay_by_person.setdefault(str(item["person_id"]), []).extend(
+                point for point in item.get("points", []) if isinstance(point, Mapping)
+            )
     source_by_person = {
         str(item["person_id"]): item
         for item in source.get("records", [])

@@ -256,6 +256,57 @@ def _surface_type_for_title(surface: str) -> str:
     return "unknown_person_like_surface"
 
 
+def _split_repeated_title_surface(
+    start: int,
+    end: int,
+    surface: str,
+    surface_type: str,
+) -> list[tuple[int, int, str, str]]:
+    """Split adjacent repetitions that are not one semantic appellation.
+
+    The title scanner deliberately looks ahead across short Han prefixes.  At
+    a source boundary such as ``周侯周侯`` that look-ahead can otherwise
+    consume both adjacent occurrences and manufacture a new alias.  A
+    repeated title-shaped unit is evidence of two occurrences, not evidence
+    for a longer title.  Legitimate reduplicated personal names are outside
+    this helper because it is only called for title-like spans.
+    """
+
+    suffix = next(
+        (
+            value
+            for value, kind in TITLE_SUFFIXES_SORTED
+            if kind == surface_type and surface.endswith(value)
+        ),
+        None,
+    )
+    if suffix is None:
+        return [(start, end, surface, surface_type)]
+
+    for repeat_count in range(2, len(surface) + 1):
+        if len(surface) % repeat_count:
+            continue
+        unit_length = len(surface) // repeat_count
+        if unit_length <= len(suffix):
+            continue
+        unit = surface[:unit_length]
+        prefix = unit[: -len(suffix)]
+        if not (1 <= len(prefix) <= 3 and _han_only(prefix)):
+            continue
+        if surface != unit * repeat_count or not unit.endswith(suffix):
+            continue
+        return [
+            (
+                start + index * unit_length,
+                start + (index + 1) * unit_length,
+                unit,
+                surface_type,
+            )
+            for index in range(repeat_count)
+        ]
+    return [(start, end, surface, surface_type)]
+
+
 def _find_title_like_surfaces(text: str) -> list[tuple[int, int, str, str]]:
     results: list[tuple[int, int, str, str]] = []
     masked = mask_markup_comments(text)
@@ -270,10 +321,17 @@ def _find_title_like_surfaces(text: str) -> list[tuple[int, int, str, str]]:
     for title in sorted(GENERIC_TITLES, key=lambda item: (-len(item), item)):
         for match in re.finditer(re.escape(title), masked):
             results.append((match.start(), match.end(), title, _surface_type_for_title(title)))
+    # A greedy short-prefix match may span two adjacent identical title
+    # occurrences.  Split those semantic repetitions before deduplicating
+    # ranges; never let adjacency create a synthetic alias.
+    split_results: list[tuple[int, int, str, str]] = []
+    for row in results:
+        split_results.extend(_split_repeated_title_surface(*row))
+
     # Same textual range can be found by a broad suffix and a specific suffix;
     # retain one deterministic row.
     unique: dict[tuple[int, int, str], tuple[int, int, str, str]] = {}
-    for row in results:
+    for row in split_results:
         unique[(row[0], row[1], row[2])] = row
     return sorted(unique.values(), key=lambda row: (row[0], row[1], row[2]))
 

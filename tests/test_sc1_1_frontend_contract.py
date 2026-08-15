@@ -21,7 +21,7 @@ class SC11FrontendContractTests(unittest.TestCase):
 
     def test_random_landing_only_uses_published_story_states(self) -> None:
         stories = self.bundle["stories"]
-        self.assertEqual(len(stories), 60)
+        self.assertEqual(len(stories), 83)
         self.assertTrue(all(item["publication_state"] in {"production_ready", "preview_ready"} for item in stories))
         self.assertIn("randomPublishedStoryId", self.explorer)
         self.assertIn("initialStoryId", self.app)
@@ -192,7 +192,7 @@ console.log(JSON.stringify({{
                 f"(stderr):\n{result.stderr}\nstdout:\n{result.stdout}"
             )
         value = json.loads(result.stdout)
-        self.assertEqual(value["storyCount"], 60)
+        self.assertEqual(value["storyCount"], len(self.bundle["stories"]))
         self.assertEqual(value["targetCount"], 1)
         self.assertEqual(value["targetType"], "identity_mention")
 
@@ -203,7 +203,7 @@ console.log(JSON.stringify({{
 
     def test_scene_card_is_story_owned_and_keeps_relations_separate(self) -> None:
         self.assertIn("scene_contexts", self.bundle)
-        self.assertEqual(len(self.bundle["scene_contexts"]), 21)
+        self.assertEqual(len(self.bundle["scene_contexts"]), 44)
         self.assertTrue(
             {
                 "02-yanyu-069",

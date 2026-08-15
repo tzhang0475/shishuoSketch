@@ -429,10 +429,155 @@ def sanitize_wave2_provenance(root: Path = ROOT) -> list[str]:
     return sorted(unsafe_ids)
 
 
+def _repeated_units(surface: str) -> list[str]:
+    """Return repeated units only when the surface is exact concatenation."""
+
+    for repeat_count in range(2, len(surface) + 1):
+        if len(surface) % repeat_count:
+            continue
+        unit_length = len(surface) // repeat_count
+        unit = surface[:unit_length]
+        if unit_length > 1 and surface == unit * repeat_count:
+            return [unit] * repeat_count
+    return []
+
+
+def repair_repeated_alias_occurrences(root: Path = ROOT) -> list[str]:
+    """Repair stale Wave-2 audit rows created by an adjacent-alias merge.
+
+    Wave-2 had already been materialized when P3A.1 was corrected, so its
+    candidate-occurrence artifact intentionally no longer contained rows for
+    already-materialized Persons.  Rebuild the stale withheld row from the
+    refreshed P3A.1 Evidence locators instead of dropping the two source
+    occurrences or inventing a production Mention.
+    """
+
+    candidates_document = read_json(root / "data/derived/person-identity-candidates.json")
+    candidates = {
+        str(item.get("candidate_id")): item
+        for item in candidates_document.get("candidates", [])
+        if isinstance(item, dict) and item.get("candidate_id")
+    }
+    candidate_evidence = {
+        str(item.get("id")): item
+        for item in candidates_document.get("evidence", [])
+        if isinstance(item, dict) and item.get("id")
+    }
+    materialization_path = root / MATERIALIZATION_PATH
+    wave_path = root / WAVE_PATH
+    materialization = read_json(materialization_path)
+    wave = read_json(wave_path)
+    replacements: list[str] = []
+
+    for owner in (materialization, wave):
+        for member in owner.get("members", []):
+            candidate_id = str(member.get("candidate_id"))
+            candidate = candidates.get(candidate_id)
+            if candidate is None:
+                continue
+            retained: list[dict[str, Any]] = []
+            for row in member.get("withheld_occurrences", []):
+                surface = str(row.get("surface", ""))
+                units = _repeated_units(surface)
+                if not units:
+                    retained.append(row)
+                    continue
+
+                unit_rows: list[dict[str, Any]] = []
+                used_unit_evidence: dict[str, int] = {}
+                for unit in units:
+                    matches = []
+                    for evidence_id in candidate.get("evidence_ids", []):
+                        evidence = candidate_evidence.get(str(evidence_id))
+                        locator = evidence.get("locator", {}) if isinstance(evidence, dict) else {}
+                        if (
+                            isinstance(evidence, dict)
+                            and evidence.get("source_id") == row.get("source_id")
+                            and evidence.get("section") == row.get("section")
+                            and evidence.get("surface") == unit
+                            and isinstance(locator.get("section_offset"), int)
+                        ):
+                            matches.append((str(evidence_id), evidence, locator))
+                    matches.sort(
+                        key=lambda item: (
+                            int(item[2]["section_offset"]),
+                            item[0],
+                        )
+                    )
+                    match_index = used_unit_evidence.get(unit, 0)
+                    if match_index >= len(matches):
+                        raise ValueError(
+                            "repeated alias cannot be repaired deterministically: "
+                            f"{candidate_id}/{row.get('source_id')}/{surface}/{unit}"
+                        )
+                    used_unit_evidence[unit] = match_index + 1
+                    source_evidence_id, evidence, locator = matches[match_index]
+                    offset = int(locator["section_offset"])
+                    occurrence_id = (
+                        "occurrence-p3a1-"
+                        + materializer.stable_hash(
+                            candidate_id,
+                            row.get("source_id"),
+                            row.get("section"),
+                            unit,
+                            offset,
+                        )[:20]
+                    )
+                    unit_rows.append(
+                        {
+                            "occurrence_id": occurrence_id,
+                            "source_id": row.get("source_id"),
+                            "section": row.get("section"),
+                            "surface": unit,
+                            "offset": offset,
+                            "association_mode": "contextual",
+                            "confidence": "candidate",
+                            "reason": "contextual_association",
+                            "evidence_ids": [
+                                materializer.production_evidence_id(source_evidence_id)
+                            ],
+                        }
+                    )
+                retained.extend(sorted(unit_rows, key=lambda item: (item["offset"], item["occurrence_id"])))
+                replacements.append(
+                    f"{row.get('source_id')}:{surface} -> "
+                    + ",".join(item["occurrence_id"] for item in unit_rows)
+                )
+            member["withheld_occurrences"] = sorted(
+                retained,
+                key=lambda item: (
+                    str(item.get("source_id")),
+                    str(item.get("section")),
+                    int(item.get("offset", 10**9)) if isinstance(item.get("offset"), int) else 10**9,
+                    str(item.get("occurrence_id")),
+                ),
+            )
+            member["withheld_occurrence_count"] = len(member["withheld_occurrences"])
+
+    materialization["withheld_occurrence_count"] = sum(
+        int(member.get("withheld_occurrence_count", 0))
+        for member in materialization.get("members", [])
+    )
+    valid_wave_evidence_ids = {
+        materializer.production_evidence_id(str(evidence_id))
+        for evidence_id in materializer._wave_source_evidence_ids(
+            candidates,
+            wave.get("members", []),
+        )
+        if str(evidence_id) in candidate_evidence
+    }
+    materialization["production_evidence_ids"] = sorted(valid_wave_evidence_ids)
+    wave["members"] = materialization["members"]
+    write_json(materialization_path, materialization)
+    write_json(wave_path, wave)
+    return replacements
+
+
 def build(root: Path = ROOT) -> dict[str, Any]:
     configure()
     materialization = materializer.build(root)
     repair_wave2_overlaps(root)
+    repair_repeated_alias_occurrences(root)
     sanitize_wave2_provenance(root)
     update_allocation_state(root)
     try:

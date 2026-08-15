@@ -119,7 +119,17 @@ class StorySceneContextTests(unittest.TestCase):
             self.assertNotIn("relation_ids", context)
 
     def test_scene_records_remain_story_owned_and_do_not_project_relations(self) -> None:
-        self.assertEqual(len(self.derived["contexts"]), 21)
+        w3_source = json.loads(
+            (ROOT / "data/annotation/story-scene-contexts-w3.json").read_text(encoding="utf-8")
+        )
+        expected_context_ids = {
+            record["story_id"] for record in self.source["records"]
+        } | {
+            record["story_id"] for record in w3_source["records"]
+        }
+        self.assertEqual(set(self.derived["contexts"]), expected_context_ids)
+        self.assertGreaterEqual(len(self.source["records"]), 20)
+        self.assertGreaterEqual(len(w3_source["records"]), 20)
         self.assertTrue({"02-yanyu-069", "04-wenxue-036", "05-fangzheng-055", "06-yaliang-027", "08-shangyu-077", "19-xianyuan-026", "02-yanyu-035", "05-fangzheng-032", "11-jiewu-005", "27-jiajue-008"} <= set(self.derived["contexts"]))
         self.assertIn("02-yanyu-036", self.derived["contexts"])
         self.assertFalse(any("relations" in context or "relation_ids" in context for context in self.derived["contexts"].values()))

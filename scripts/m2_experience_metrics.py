@@ -27,6 +27,8 @@ SCENE_PATH = Path("data/derived/story-scene-contexts.json")
 RELATIONS_PATH = Path("data/annotation/wp1-relations.json")
 WAVE2_PATH = Path("data/annotation/person-expansion-wave-2.json")
 STORY_WAVE_PATH = Path("data/annotation/story-expansion-wave-1.json")
+WAVE3_PATH = Path("data/annotation/person-expansion-wave-3.json")
+STORY_WAVE3_PATH = Path("data/annotation/story-expansion-wave-3.json")
 RANKING_PATH = Path("data/derived/m2-person-expansion-ranking.json")
 STORY_RANKING_PATH = Path("data/derived/m2-story-expansion-ranking.json")
 R3A_PATH = Path("data/derived/person-relation-candidates-r3.json")
@@ -375,7 +377,10 @@ def _eligible_count(bundle: Mapping[str, Any]) -> int:
 def _current_and_baseline(root: Path) -> tuple[dict[str, Any], dict[str, Any]]:
     current_bundle = read_json(root, SC1_PATH)
     current_links = read_json(root, LINKS_PATH)
-    current_scenes = read_json(root, SCENE_PATH)
+    # SC1 is the current reader projection.  It includes the W3 Scene layer;
+    # the older source-shaped Scene artifact remains useful for provenance but
+    # must not make the current scale metrics report only the pre-W3 count.
+    current_scenes = {"contexts": current_bundle.get("scene_contexts", {})}
     current_relations = read_json(root, RELATIONS_PATH)
     current = _snapshot_metrics(
         current_bundle,
@@ -466,7 +471,7 @@ def build(root: Path = ROOT, *, include_production_artifact: bool = False) -> di
         ),
         "input_sha256": {
             str(path): sha256_file(root / path)
-            for path in (RANKING_PATH, STORY_RANKING_PATH, WAVE2_PATH, STORY_WAVE_PATH, SC1_PATH, SCENE_PATH, R3A_PATH)
+            for path in (RANKING_PATH, STORY_RANKING_PATH, WAVE2_PATH, STORY_WAVE_PATH, WAVE3_PATH, STORY_WAVE3_PATH, SC1_PATH, SCENE_PATH, R3A_PATH)
         },
         "notes": [
             "PersonStory and Story-mediated graph edges are navigation data, not historical Relation facts.",
@@ -522,20 +527,19 @@ def render_report(output: Mapping[str, Any]) -> str:
     for key, label in labels:
         lines.append(f"| {label} | {before.get(key, '—')} | {after.get(key, '—')} |")
 
-    if after.get("production_person_count") == 35 and after.get("random_person_eligible_count") == 34:
+    if (
+        isinstance(after.get("production_person_count"), int)
+        and isinstance(after.get("random_person_eligible_count"), int)
+        and after["production_person_count"] > after["random_person_eligible_count"]
+    ):
         lines.extend([
             "",
-            "ER1 的身份校正移除了 `05-fangzheng-058` 中原本错误的“文度 → 孫晷”安全导航路径。因而 M2A 虽然物化了 35 位 Person，当前安全的“随便认识一个人” eligibility 是 34；`person-015` 仍是生产 Person，但没有安全的 published Story 入口。这里不以候选或歧义 Mention 补回路径。",
-        ])
-    if after.get("production_person_count") == 35 and after.get("random_person_eligible_count") == 33:
-        lines.extend([
-            "",
-            "M2A 物化的 35 位 Person 均保留；ER1 先移除了 `05-fangzheng-058` 中错误的“文度 → 孫晷”路径，使安全 eligibility 由 M2A 当时的 35 降至 34。ER1.1.2 又移除了 `桓子` 前缀误归 `person-016` 王遐的路径，最终安全的“随便认识一个人” eligibility 为 33；`person-015` 与 `person-016` 仍在生产注册表中，但都没有安全的 published Story 入口。候选身份、歧义 Mention 和错误前缀均不用于补回导航。",
+            f"身份校正后，生产注册表保留 {after['production_person_count']} 位 Person，但安全的“随便认识一个人” eligibility 为 {after['random_person_eligible_count']}。候选身份、歧义 Mention 和错误前缀均不用于补回导航；没有安全 published Story 入口的人物仍保留在生产数据中。",
         ])
     if "person-016" in after.get("graph", {}).get("isolated_person_ids", []):
         lines.extend([
             "",
-            "ER1.1.2 的桓子／桓子野身份校正移除了 6 条原先错误归给 `person-016` 王遐的 PersonStory 链接；其中 05-fangzheng-055 等较长称谓现解析为未物化的桓伊，05-fangzheng-035 的古引文保持未解析。因此王遐仍保留在 35 人生产注册表中，但当前没有安全的 published Story 入口，也不进入 Random Person eligibility；不以错误前缀或候选身份补回路径。",
+            f"ER1.1.2 的桓子／桓子野身份校正移除了 6 条原先错误归给 `person-016` 王遐的 PersonStory 链接；其中 05-fangzheng-055 等较长称谓现解析为未物化的桓伊，05-fangzheng-035 的古引文保持未解析。因此王遐仍保留在 {after.get('production_person_count')} 人生产注册表中，但当前没有安全的 published Story 入口，也不进入 Random Person eligibility；不以错误前缀或候选身份补回路径。",
         ])
 
     performance = output.get("performance", {})
@@ -588,8 +592,8 @@ def render_report(output: Mapping[str, Any]) -> str:
         "",
         "## Relation discovery boundary",
         "",
-        f"- 当前生产人物：{output['relation_discovery']['production_person_count']}；审计人物对：{output['relation_discovery']['pair_count_audited']}。",
-        f"- 已审阅 Relation：{output['relation_discovery']['reviewed_relation_count']}；R3A candidate：{output['relation_discovery']['candidate_count']}；Tier：{output['relation_discovery']['tier_counts']}。",
+        f"- 当前生产人物：{after['production_person_count']}；当前人物对：{after['production_person_count'] * (after['production_person_count'] - 1) // 2}。",
+        f"- R3A 冻结历史审计范围：{output['relation_discovery']['production_person_count']} 人、{output['relation_discovery']['pair_count_audited']} 对；已审阅 Relation：{output['relation_discovery']['reviewed_relation_count']}；R3A candidate：{output['relation_discovery']['candidate_count']}；Tier：{output['relation_discovery']['tier_counts']}。",
         f"- 仅共现组合：{output['relation_discovery']['cooccurrence_only_pair_count']}；这些组合未进入 Relation card。",
         "",
         "## Provenance and determinism",
@@ -601,7 +605,7 @@ def render_report(output: Mapping[str, Any]) -> str:
         lines.append(f"- `{path}`：`{digest}`")
     lines.extend([
         "",
-            "本报告继承 M2A 的冻结选择与 60-Story 规模；ER1 安全解析影响已保留。S2.2 只加深现有 Story/Scene/Person Sketch 内容，R3B 仅物化明确批准的 Relation，Sanguozhi 与 P3B.2 均未启动。",
+            "本报告继承 M2A 的冻结选择；ER1 安全解析影响已保留。W3 在此基础上增加了证据安全的早期魏晋 Person/Story 层与 SGZ0 处理层；S2.2 只加深现有 Story/Scene/Person Sketch 内容，R3B 仅物化明确批准的 Relation，P3B.2、H0、P4 与 ES0 均未启动。",
         "",
     ])
     return "\n".join(lines)

@@ -27,6 +27,7 @@ try:
         QUEUE_PATH,
         SPAN_AUDIT_PATH,
         SPAN_DECISIONS_PATH,
+        LEXICAL_ALIAS_RULES_PATH,
         _published_story_ids,
         _load_sections,
         _target_key,
@@ -43,6 +44,7 @@ except ImportError:  # direct execution
         QUEUE_PATH,
         SPAN_AUDIT_PATH,
         SPAN_DECISIONS_PATH,
+        LEXICAL_ALIAS_RULES_PATH,
         _published_story_ids,
         _load_sections,
         _target_key,
@@ -64,6 +66,7 @@ QUEUE_SCHEMA_PATH = Path("schema/person-resolution-review-queue.schema.json")
 COLLISION_SCHEMA_PATH = Path("schema/person-alias-collisions.schema.json")
 SPAN_DECISION_SCHEMA_PATH = Path("schema/person-resolution-span-decision.schema.json")
 SPAN_AUDIT_SCHEMA_PATH = Path("schema/person-resolution-span-audit.schema.json")
+LEXICAL_ALIAS_RULES_SCHEMA_PATH = Path("schema/person-resolution-lexical-alias-rules.schema.json")
 SC1_PATH = Path("data/derived/sc1-site.json")
 
 RESOLUTION_FIELDS = {
@@ -154,6 +157,7 @@ def validate(root: Path = ROOT) -> list[str]:
         collisions = read_json(root, COLLISIONS_PATH)
         span_decisions_document = read_json(root, SPAN_DECISIONS_PATH)
         span_audit = read_json(root, SPAN_AUDIT_PATH)
+        lexical_alias_rules = read_json(root, LEXICAL_ALIAS_RULES_PATH)
     except (OSError, ValueError, KeyError) as exc:
         return [f"ER1 cannot read required artifact: {exc}"]
 
@@ -164,6 +168,7 @@ def validate(root: Path = ROOT) -> list[str]:
     # its schema/stage envelope), not an individual decision row.
     errors.extend(_schema_errors(root, SPAN_DECISION_SCHEMA_PATH, span_decisions_document, "ER1.1 span decisions"))
     errors.extend(_schema_errors(root, SPAN_AUDIT_SCHEMA_PATH, span_audit, "ER1.1 span audit"))
+    errors.extend(_schema_errors(root, LEXICAL_ALIAS_RULES_SCHEMA_PATH, lexical_alias_rules, "ER1 homographic alias rules"))
     errors.extend(_schema_errors(root, EFFECTIVE_SCHEMA_PATH, effective, "ER1 effective resolution"))
     errors.extend(_schema_errors(root, QUEUE_SCHEMA_PATH, queue, "ER1 review queue"))
     errors.extend(_schema_errors(root, COLLISION_SCHEMA_PATH, collisions, "ER1 alias collisions"))

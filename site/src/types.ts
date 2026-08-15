@@ -109,6 +109,8 @@ export interface Story {
   reading: StoryReading;
   chapter_heading?: string;
   chapter_display?: ReadingPair;
+  period_id?: string;
+  period_label?: ReadingPair;
   ordinal?: number;
   global_ordinal?: number;
   publication_state: PublicationState;

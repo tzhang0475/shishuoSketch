@@ -999,7 +999,7 @@ def render_report(root: Path, coverage: Mapping[str, Any], candidates: Mapping[s
     lines = [
         "# R3C：当前范围显式人物关系覆盖审计",
         "",
-        "R3C 是关系覆盖审计，不是关系扩张器。它扫描当前 35 位生产人物、60 则已发布 Story 的正文/Liu 注，以及当前 Evidence 中已处理的《晋书》材料；新发现只进入候选层，不进入生产 Relation。",
+        f"R3C 是关系覆盖审计，不是关系扩张器。它扫描当前 {coverage['scope']['production_person_count']} 位生产人物、{coverage['scope']['published_story_count']} 则已发布 Story 的正文/Liu 注，以及当前 Evidence 中已处理的《晋书》材料；新发现只进入候选层，不进入生产 Relation。",
         "",
         "## 范围与原则",
         "",

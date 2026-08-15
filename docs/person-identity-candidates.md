@@ -4,7 +4,7 @@
 
 ## Summary
 
-- Person-like surfaces discovered: **2699**
+- Person-like surfaces discovered: **2698**
 - Candidate identity records: **335**
 - Already-materialized rediscoveries: **35**
 - Strong candidates: **295**

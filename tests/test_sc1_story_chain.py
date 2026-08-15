@@ -26,13 +26,17 @@ class SC1StoryChainTests(unittest.TestCase):
         cls.gold = json.loads((ROOT / "data/story-chain-gold-set.json").read_text(encoding="utf-8"))
         cls.base = json.loads((ROOT / "data/derived/wp1-site.json").read_text(encoding="utf-8"))
 
-    def test_sc1_bundle_publishes_the_sc0_union_of_the_frozen_expansion_manifest(self) -> None:
+    def test_sc1_bundle_publishes_the_sc0_union_of_the_frozen_expansion_manifests(self) -> None:
         self.assertEqual(validate(ROOT, mode=repository_validation_mode()), [])
         expected = [item["entry_id"] for item in self.gold["records"]]
         expansion = json.loads(
             (ROOT / "data/annotation/story-expansion-wave-1.json").read_text(encoding="utf-8")
         )
         expected.extend(item["story_id"] for item in expansion["records"])
+        w3_expansion = json.loads(
+            (ROOT / "data/annotation/story-expansion-wave-3.json").read_text(encoding="utf-8")
+        )
+        expected.extend(item["story_id"] for item in w3_expansion["records"])
         expected.sort(
             key=lambda story_id: next(
                 story["global_ordinal"]

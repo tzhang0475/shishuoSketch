@@ -32,7 +32,7 @@ try:
     from .reading_layers import build_display_reading, strip_display_punctuation
     from .person_sketch import build_person_sketches
     from .person_resolution import load_effective_mentions
-    from .story_scene_contexts import DERIVED_PATH as SCENE_DERIVED_PATH, SOURCE_PATH as SCENE_SOURCE_PATH, project as project_scene_contexts, validate_source as validate_scene_source
+    from .story_scene_contexts import DERIVED_PATH as SCENE_DERIVED_PATH, SOURCE_PATH as SCENE_SOURCE_PATH, project as project_scene_contexts, validate_source as validate_scene_source, validate_source_path as validate_scene_source_path
 except ImportError:  # direct execution
     from build_six_person_pilot import (
         parse_frontmatter,
@@ -46,13 +46,14 @@ except ImportError:  # direct execution
     from reading_layers import build_display_reading, strip_display_punctuation
     from person_sketch import build_person_sketches
     from person_resolution import load_effective_mentions
-    from story_scene_contexts import DERIVED_PATH as SCENE_DERIVED_PATH, SOURCE_PATH as SCENE_SOURCE_PATH, project as project_scene_contexts, validate_source as validate_scene_source
+    from story_scene_contexts import DERIVED_PATH as SCENE_DERIVED_PATH, SOURCE_PATH as SCENE_SOURCE_PATH, project as project_scene_contexts, validate_source as validate_scene_source, validate_source_path as validate_scene_source_path
 
 
 ROOT = Path(__file__).resolve().parents[1]
 WP1_BUNDLE_PATH = ROOT / "data/derived/wp1-site.json"
 GOLD_PATH = ROOT / "data/story-chain-gold-set.json"
 STORY_EXPANSION_PATH = ROOT / "data/annotation/story-expansion-wave-1.json"
+W3_STORY_EXPANSION_PATH = ROOT / "data/annotation/story-expansion-wave-3.json"
 CHAIN_INDEX_PATH = ROOT / "data/derived/story-chain-gold-index.json"
 CORPUS_INDEX_PATH = ROOT / "data/shishuo-corpus-index.json"
 MENTIONS_PATH = ROOT / "data/mentions/shishuo.json"
@@ -95,6 +96,24 @@ def sha256_file(path: Path) -> str:
 
 def pair(text: str, converter: OpenCC) -> dict[str, str]:
     return {"original": text, "simplified": converter.convert(text)}
+
+
+def apply_period_orientation(
+    story: dict[str, Any],
+    story_id: str,
+    w3_story_metadata: Mapping[str, Mapping[str, Any]],
+    converter: OpenCC,
+) -> None:
+    """Attach only evidence-backed C0 phase orientation to W3 Stories."""
+
+    record = w3_story_metadata.get(story_id)
+    if not isinstance(record, Mapping):
+        return
+    phase_id = record.get("phase_id")
+    phase_label = record.get("phase_label")
+    if isinstance(phase_id, str) and phase_id and isinstance(phase_label, str) and phase_label:
+        story["period_id"] = phase_id
+        story["period_label"] = pair(phase_label, converter)
 
 
 def entry_path(entry_id: str, entry_by_id: Mapping[str, Mapping[str, Any]]) -> Path:
@@ -361,6 +380,23 @@ def build(root: Path = ROOT) -> dict[str, Any]:
             if isinstance(item, Mapping) and isinstance(item.get("story_id"), str)
         ]
         selected_records.extend(expansion_records)
+    if W3_STORY_EXPANSION_PATH.is_file():
+        expansion = read_json(W3_STORY_EXPANSION_PATH)
+        gold_ids = [str(item["entry_id"]) for item in gold["records"]]
+        if expansion.get("gold_story_ids") != gold_ids:
+            raise ValueError("W3 Story expansion manifest does not preserve the frozen SC0 Gold Set")
+        selected_records.extend(
+            {"entry_id": str(item["story_id"]), "linked_person_ids": []}
+            for item in expansion.get("records", [])
+            if isinstance(item, Mapping) and isinstance(item.get("story_id"), str)
+        )
+        w3_story_metadata = {
+            str(item["story_id"]): item
+            for item in expansion.get("records", [])
+            if isinstance(item, Mapping) and isinstance(item.get("story_id"), str)
+        }
+    else:
+        w3_story_metadata = {}
     selected_records.sort(key=lambda record: int(entry_by_id[record["entry_id"]].get("global_ordinal", 10**9)))
     selected_ids = [record["entry_id"] for record in selected_records]
     if len(selected_ids) != len(set(selected_ids)):
@@ -526,6 +562,7 @@ def build(root: Path = ROOT) -> dict[str, Any]:
             story["chapter_display"] = pair("雅量第六", converter)
             story["ordinal"] = 19
             story["global_ordinal"] = 370
+            apply_period_orientation(story, entry_id, w3_story_metadata, converter)
             base_annotation_evidence = {
                 str(item.get("locator", {}).get("annotation_id")): item["id"]
                 for item in base_evidence.values()
@@ -673,6 +710,7 @@ def build(root: Path = ROOT) -> dict[str, Any]:
             "publication_note": "參考底本整理，待人工復核",
             "notes": "SC1 preview publication preserves the unreviewed CRL1/CRL1.1 punctuation status.",
         }
+        apply_period_orientation(story, entry_id, w3_story_metadata, converter)
         new_stories.append(story)
 
     new_stories.sort(key=lambda story: int(story.get("global_ordinal", 10**9)))
@@ -768,12 +806,31 @@ def build(root: Path = ROOT) -> dict[str, Any]:
         evidence_ids=set(new_evidence),
         converter=converter,
     )
+    scene_generated_from = [str(SCENE_SOURCE_PATH)]
+    if (ROOT / "data/annotation/story-scene-contexts-w3.json").is_file():
+        w3_scene_path = Path("data/annotation/story-scene-contexts-w3.json")
+        w3_source = read_json(ROOT / w3_scene_path)
+        w3_errors = validate_scene_source_path(ROOT, w3_scene_path)
+        if w3_errors:
+            raise ValueError("W3 Story Scene Context schema validation failed: " + "; ".join(w3_errors))
+        w3_contexts = project_scene_contexts(
+            w3_source,
+            story_ids={story["id"] for story in new_stories if story["publication_state"] != "blocked"},
+            people=frontend_people,
+            evidence_ids=set(new_evidence),
+            converter=converter,
+        )
+        overlap = set(scene_contexts) & set(w3_contexts)
+        if overlap:
+            raise ValueError(f"W3 Scene Context overlaps existing records: {sorted(overlap)}")
+        scene_contexts.update(w3_contexts)
+        scene_generated_from.append(str(w3_scene_path))
     write_json(
         ROOT / SCENE_DERIVED_PATH,
         {
             "schema": 1,
             "stage": "story-scene-context-pilot-derived",
-            "generated_from": [str(SCENE_SOURCE_PATH), "data/derived/sc1-site.json"],
+            "generated_from": [*scene_generated_from, "data/derived/sc1-site.json"],
             "contexts": scene_contexts,
         },
     )
@@ -796,6 +853,7 @@ def build(root: Path = ROOT) -> dict[str, Any]:
             "generated_from": [
                 "data/story-chain-gold-set.json",
                 "data/annotation/story-expansion-wave-1.json",
+                "data/annotation/story-expansion-wave-3.json",
                 "data/derived/person-story-links.json",
                 "data/derived/story-chain-gold-index.json",
                 "data/annotation/wp1-punctuation.json",

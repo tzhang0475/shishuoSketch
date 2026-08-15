@@ -235,8 +235,9 @@ class PersonResolutionTests(unittest.TestCase):
 
     def test_span_audit_is_deterministic_and_reports_published_projection(self) -> None:
         audit = json.loads((ROOT / "data/derived/person-resolution-span-audit.json").read_text(encoding="utf-8"))
-        self.assertEqual(audit["published_story_count"], 60)
-        self.assertEqual(audit["audited_story_count"], 60)
+        bundle = json.loads((ROOT / "data/derived/sc1-site.json").read_text(encoding="utf-8"))
+        self.assertEqual(audit["published_story_count"], len(bundle["stories"]))
+        self.assertEqual(audit["audited_story_count"], len(bundle["stories"]))
         self.assertEqual(audit["review_required_count"], 0)
         records = [row for row in audit["records"] if row["story_id"] == "06-yaliang-017"]
         self.assertTrue(any(row["proposed_surface"] == "庾太尉" for row in records))

@@ -25,6 +25,8 @@ RELATIONS_PATH = Path("data/annotation/wp1-relations.json")
 R3B_REVIEW_PATH = Path("data/annotation/person-relation-review-r3b.json")
 WAVE_PATH = Path("data/annotation/person-expansion-wave-1.json")
 WAVE2_PATH = Path("data/annotation/person-expansion-wave-2.json")
+GOLD_PATH = Path("data/story-chain-gold-set.json")
+M2_STORY_PATH = Path("data/annotation/story-expansion-wave-1.json")
 DERIVED_PATH = Path("data/derived/person-relation-candidates-r3.json")
 REPORT_PATH = Path("docs/person-relation-candidates-r3.md")
 
@@ -281,7 +283,53 @@ def _scene_encounters(
     return sorted(rows, key=lambda row: (row["story_id"], row["person_a_id"], row["person_b_id"]))
 
 
+def _frozen_scope_person_ids(root: Path, all_person_ids: Iterable[str]) -> list[str]:
+    """Keep R3A as its committed pre-W3 35-Person audit snapshot."""
+
+    all_ids = set(all_person_ids)
+    existing = root / DERIVED_PATH
+    if existing.is_file():
+        document = read_json(root, DERIVED_PATH)
+        frozen = {
+            str(item)
+            for item in document.get("production_person_ids", [])
+            if isinstance(item, str)
+        }
+        if frozen and frozen <= all_ids:
+            return sorted(frozen)
+    wave1 = read_json(root, WAVE_PATH)
+    wave2 = read_json(root, WAVE2_PATH)
+    frozen = {
+        str(member.get("person_id"))
+        for wave in (wave1, wave2)
+        for member in wave.get("members", [])
+        if isinstance(member, Mapping) and isinstance(member.get("person_id"), str)
+    }
+    return sorted(frozen & all_ids)
+
+
+def _frozen_scope_story_ids(root: Path) -> set[str]:
+    """R3A's published Story scope is the SC0 + M2 union, before W3."""
+
+    gold = read_json(root, GOLD_PATH)
+    m2 = read_json(root, M2_STORY_PATH)
+    return {
+        str(item.get("entry_id"))
+        for item in gold.get("records", [])
+        if isinstance(item, Mapping) and isinstance(item.get("entry_id"), str)
+    } | {
+        str(item.get("story_id"))
+        for item in m2.get("records", [])
+        if isinstance(item, Mapping) and isinstance(item.get("story_id"), str)
+    }
+
+
 def project(root: Path = ROOT) -> dict[str, Any]:
+    # R3A is a frozen 35-Person discovery snapshot. W3 extends the product
+    # scope but does not silently rerun or rewrite this prior review packet;
+    # expanded coverage belongs to R3C and later candidate review.
+    if (root / Path("data/annotation/person-expansion-wave-3.json")).is_file() and (root / DERIVED_PATH).is_file():
+        return read_json(root, DERIVED_PATH)
     source = read_json(root, SOURCE_PATH)
     bundle = read_json(root, SC1_PATH)
     reviewed_relations = _reviewed_relations(root)
@@ -291,7 +339,8 @@ def project(root: Path = ROOT) -> dict[str, Any]:
         for person in bundle.get("people", [])
         if isinstance(person, Mapping) and isinstance(person.get("id"), str)
     }
-    people = sorted(names)
+    people = _frozen_scope_person_ids(root, names)
+    names = {person_id: names[person_id] for person_id in people}
     evidence_by_id = {
         str(item["id"]): item
         for item in bundle.get("evidence", [])
@@ -302,6 +351,7 @@ def project(root: Path = ROOT) -> dict[str, Any]:
         for story in bundle.get("stories", [])
         if isinstance(story, Mapping)
         and isinstance(story.get("id"), str)
+        and str(story.get("id")) in _frozen_scope_story_ids(root)
         and story.get("publication_state") != "blocked"
     }
     reviewed_pairs: dict[tuple[str, str], list[str]] = {}
