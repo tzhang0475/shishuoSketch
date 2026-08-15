@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "H0B-1 consolidated social and temporal backbone",
+  "type": "object",
+  "required": [
+    "schema",
+    "stage",
+    "production_person_ids",
+    "h0b0_imports",
+    "new_h0b1_fact_ids",
+    "clans",
+    "clan_memberships",
+    "kinship",
+    "marriages",
+    "office_tenures",
+    "counts"
+  ],
+  "properties": {
+    "schema": {"const": 1},
+    "stage": {"const": "h0b1-social-temporal-backbone"},
+    "production_person_ids": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+    "h0b0_imports": {"type": "object"},
+    "new_h0b1_fact_ids": {"type": "object"},
+    "clans": {"type": "array", "items": {"$ref": "#/$defs/fact"}},
+    "clan_memberships": {"type": "array", "items": {"$ref": "#/$defs/fact"}},
+    "kinship": {"type": "array", "items": {"$ref": "#/$defs/fact"}},
+    "marriages": {"type": "array", "items": {"$ref": "#/$defs/fact"}},
+    "office_tenures": {"type": "array", "items": {"$ref": "#/$defs/fact"}},
+    "counts": {"type": "object"}
+  },
+  "$defs": {
+    "fact": {
+      "type": "object",
+      "required": ["evidence_ids"],
+      "properties": {
+        "evidence_ids": {"type": "array", "items": {"type": "string"}, "minItems": 1},
+        "review_status": {"type": "string"}
+      },
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": true
+}

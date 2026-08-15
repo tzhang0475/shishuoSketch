@@ -114,6 +114,37 @@ metadata only. H0B facts may later support H0A PersonActivityAnchor, but
 H0B-0 does not rewrite Story temporal anchors, Era orientation, or the existing
 12 reviewed Relations.
 
+## H0B-1 social and temporal scale-up
+
+H0B-1 is a consolidated research projection over the frozen H0B-0 facts and the
+current production scope. Existing H0B-0 IDs are imported unchanged; new
+H0B-1 IDs use their frozen seed records and never replace an older fact. New
+source-supported records normally remain `review_status: candidate` until a
+separate human review.
+
+`StoryParticipant` is distinct from Mention and PersonStory. Only
+`present`/`speaker`/`actor` roles may enter hard social-temporal intersections;
+`referenced`, `off_frame`, and `annotation_only` rows remain contextual. A
+reviewed Scene Context is authoritative for this distinction. An OfficeTenure
+is a reusable institutional fact, not an interpersonal Relation, and it can
+constrain a Story only when the Story activates that office and the tenure has
+reviewed, bounded evidence.
+
+`RelationTemporalContext` is applicability metadata over an existing Relation,
+not a second Relation graph. Event-bounded contexts may constrain a Story when
+the supporting Story evidence activates them; friendship, ClanMembership,
+surname, and generic co-occurrence do not date a Story. Empty temporal
+intersections are preserved as conflicts. H0B-1 may emit an H0A upgrade
+candidate, but `StoryTemporalAnchor` remains the conservative historical
+assertion layer and is not silently rewritten. E0 Era orientation is a separate
+reader-navigation projection and may remain broader than an H0B-1 research
+interval.
+
+The H0B-1 gap audit uses a fixed category catalog so zero-count categories are
+still machine-readable. Missing structural endpoints remain gaps and never
+allocate a production Person. The builder is deterministic and records hashes
+for the frozen H0B-0 inputs, H0A anchors, and H0B-1 seed layer.
+
 The unified `data/people.json` registry is the Person identity source of truth.
 Its `scope_role` is `primary` for materialized production Persons (including
 the six-person bootstrap and later P3B waves) or `supporting` for a minimal
