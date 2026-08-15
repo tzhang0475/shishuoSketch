@@ -1,0 +1,104 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "H0B-0 social backbone",
+  "type": "object",
+  "required": [
+    "schema",
+    "stage",
+    "production_person_ids",
+    "pilot_person_ids",
+    "clans",
+    "clan_memberships",
+    "kinship",
+    "marriages",
+    "office_tenures",
+    "existing_relation_compatibility"
+  ],
+  "properties": {
+    "schema": {
+      "const": 1
+    },
+    "stage": {
+      "const": "h0b0-social-backbone"
+    },
+    "production_person_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "pilot_person_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "clans": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/idRecord"
+      }
+    },
+    "clan_memberships": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/idRecord"
+      }
+    },
+    "kinship": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/idRecord"
+      }
+    },
+    "marriages": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/idRecord"
+      }
+    },
+    "office_tenures": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/idRecord"
+      }
+    },
+    "existing_relation_compatibility": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "relation_id",
+          "compatibility"
+        ],
+        "properties": {
+          "relation_id": {
+            "type": "string"
+          },
+          "compatibility": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": true
+      }
+    }
+  },
+  "$defs": {
+    "idRecord": {
+      "type": "object",
+      "required": [
+        "id"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": true
+}

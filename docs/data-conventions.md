@@ -87,6 +87,33 @@ spouse edges use one canonical endpoint order.
 Co-occurrence, shared surnames or titles, and graph transitivity never create a
 reviewed relation by themselves.
 
+## H0B-0 atomic social backbone
+
+H0B-0 stores four separate, evidence-backed object families:
+ClanMembership, KinshipFact, MarriageUnion, and OfficeTenure. They are not a
+second generic Relation graph. A surname or Story co-occurrence cannot create a
+ClanMembership; an OfficeTenure cannot create a colleague,
+superior/subordinate, friendship, or political Relation; and a MarriageUnion
+does not imply a clan alliance. New H0B records begin with
+review_status: candidate, even when their cited source statement is
+assertion_status: attested.
+
+ClanMembership has one current production person_id and one canonical clan_id;
+branch precision must not exceed its Evidence. KinshipFact is directional when
+the source supplies parent/child or role direction. Derived kinship may only
+use reviewed direct atomic facts and keeps derived_from_kinship_ids.
+MarriageUnion has one canonical symmetric endpoint order, so A-B and B-A are
+never separate facts. OfficeTenure belongs to one Person and may retain
+unknown dates; it is a reusable institutional fact, not an interpersonal edge.
+
+data/annotation/h0b0-pilot-selection.json is a frozen current-scope selection,
+not a new Person allocation manifest. Bridge identities outside the 50-Person
+registry remain in data/derived/h0b0-structural-gap-audit.json; they are not
+guessed or materialized. data/derived/h0b0-w4-readiness.json is planning
+metadata only. H0B facts may later support H0A PersonActivityAnchor, but
+H0B-0 does not rewrite Story temporal anchors, Era orientation, or the existing
+12 reviewed Relations.
+
 The unified `data/people.json` registry is the Person identity source of truth.
 Its `scope_role` is `primary` for materialized production Persons (including
 the six-person bootstrap and later P3B waves) or `supporting` for a minimal

@@ -1,0 +1,285 @@
+{
+  "schema": 1,
+  "stage": "h0b0-structural-gap-audit",
+  "generated_from": [
+    "data/people.json",
+    "data/evidence/wp1-evidence.json",
+    "data/annotation/wp1-relations.json",
+    "data/derived/person-story-links.json",
+    "data/annotation/h0b0-pilot-selection.json",
+    "data/annotation/h0b0-fact-seeds.json"
+  ],
+  "scope": {
+    "production_person_count": 50,
+    "pilot_person_count": 20,
+    "production_persons_are_not_expanded": true
+  },
+  "summary": {
+    "gap_count": 7,
+    "by_category": {
+      "clan_branch_unresolved": 1,
+      "marriage_spouse_not_production": 2,
+      "missing_bridge_identity": 2,
+      "missing_story_evidence": 1,
+      "office_chronology_incomplete": 1
+    }
+  },
+  "records": [
+    {
+      "gap_id": "h0b0-gap-001",
+      "category": "missing_bridge_identity",
+      "structural_type": "kinship",
+      "affected_person_ids": [
+        "person-045"
+      ],
+      "source_surface": "兄子咸",
+      "canonical_identity_candidate": "阮咸",
+      "evidence_ids": [
+        "evidence-p3b-wave-2-7bc5b27fdc7cf328d420fe0c"
+      ],
+      "why_it_matters": "阮籍—阮咸是竹林/西晋早期的关键桥接，但阮咸不在当前 production Person registry。",
+      "future_expansion_value": "bridge_person",
+      "id": "h0b0-gap-001",
+      "source_refs": [
+        {
+          "evidence_id": "evidence-p3b-wave-2-7bc5b27fdc7cf328d420fe0c",
+          "source_id": "source-002",
+          "evidence_type": "primary_text",
+          "artifact_type": "jinshu_unit",
+          "artifact_path": "content/processed/jinshu/units/liezhuan/049-liezhuan-001.md",
+          "artifact_sha256": "80c8cf3dc650563f843b91bdd73ffa836e1d6d3b7e88c96d942f694fa161862f",
+          "entry_id": null,
+          "unit_id": "049-liezhuan-001",
+          "source_witness_id": "jinshu-wikisource-siku",
+          "source_path": "sources/downloads/jinshu/wikisource-siku/text/volume-049.txt",
+          "source_sha256": "31064ca98cd75aef1869eb0a64dc6a3b1b78ed8fce9760d1ef46ae315fefe10f"
+        }
+      ],
+      "production_scope": "h0b0-pilot",
+      "review_status": "todo",
+      "assertion_status": "unknown"
+    },
+    {
+      "gap_id": "h0b0-gap-002",
+      "category": "missing_bridge_identity",
+      "structural_type": "kinship",
+      "affected_person_ids": [
+        "person-010"
+      ],
+      "source_surface": "庾亮子会",
+      "canonical_identity_candidate": "庾会",
+      "evidence_ids": [
+        "evidence-p3b-wave-2-5b4dd649db3e791c95d8b055"
+      ],
+      "why_it_matters": "庾会连接庾亮家族、王导/诸葛恢婚姻线和咸和六年后续证据，但不是当前 production Person。",
+      "future_expansion_value": "bridge_person",
+      "id": "h0b0-gap-002",
+      "source_refs": [
+        {
+          "evidence_id": "evidence-p3b-wave-2-5b4dd649db3e791c95d8b055",
+          "source_id": "source-001",
+          "evidence_type": "annotation",
+          "artifact_type": "shishuo_entry",
+          "artifact_path": "content/processed/shishuo/entries/05-fangzheng/entry-025.md",
+          "artifact_sha256": "a89de479041b0aee67f34c9b9db6fe6941a72cf2d5a346963fa91790555d15d7",
+          "entry_id": "05-fangzheng-025",
+          "unit_id": null,
+          "source_witness_id": "shishuo-kanripo-wyg",
+          "source_path": "shishuoSources/shishuo/KR3l0002_002.txt",
+          "source_sha256": "6b8a3fcf4fb07152c567a25fe56e9511f45a9748b83c107e6a8956aa7e65367a"
+        }
+      ],
+      "production_scope": "h0b0-pilot",
+      "review_status": "todo",
+      "assertion_status": "unknown"
+    },
+    {
+      "gap_id": "h0b0-gap-003",
+      "category": "marriage_spouse_not_production",
+      "structural_type": "marriage",
+      "affected_person_ids": [
+        "person-008"
+      ],
+      "source_surface": "桓女遂嫁文度儿",
+      "canonical_identity_candidate": "王坦之之子（名未详）",
+      "evidence_ids": [
+        "evidence-p3b-wave-2-03708dbe79674d89a12ec74e"
+      ],
+      "why_it_matters": "保留桓温家族与王坦之家族的婚姻桥接线，但双方配偶端不在当前 production registry。",
+      "future_expansion_value": "marriage_bridge",
+      "id": "h0b0-gap-003",
+      "source_refs": [
+        {
+          "evidence_id": "evidence-p3b-wave-2-03708dbe79674d89a12ec74e",
+          "source_id": "source-001",
+          "evidence_type": "primary_text",
+          "artifact_type": "shishuo_entry",
+          "artifact_path": "content/processed/shishuo/entries/05-fangzheng/entry-058.md",
+          "artifact_sha256": "c216b30cd5ff123683ff16e07deadabd91cd44fc4db67cf98530ada6cd7b4d16",
+          "entry_id": "05-fangzheng-058",
+          "unit_id": null,
+          "source_witness_id": "shishuo-kanripo-wyg",
+          "source_path": "shishuoSources/shishuo/KR3l0002_002.txt",
+          "source_sha256": "6b8a3fcf4fb07152c567a25fe56e9511f45a9748b83c107e6a8956aa7e65367a"
+        }
+      ],
+      "production_scope": "h0b0-pilot",
+      "review_status": "todo",
+      "assertion_status": "unknown"
+    },
+    {
+      "gap_id": "h0b0-gap-004",
+      "category": "office_chronology_incomplete",
+      "structural_type": "office_tenure",
+      "affected_person_ids": [
+        "person-008",
+        "person-012",
+        "person-034"
+      ],
+      "source_surface": "大司马桓温府／大司马记室参军",
+      "canonical_identity_candidate": null,
+      "evidence_ids": [
+        "evidence-p3b-wave-1-1c294f971d7f94ecb6d1358b",
+        "evidence-p3b-wave-1-d349085053db2fdb9bba4f55"
+      ],
+      "why_it_matters": "已有职官事实可以作为未来 chronology 约束，但当前证据不足以组成完整 OfficeTenure 时序。",
+      "future_expansion_value": "office_context",
+      "id": "h0b0-gap-004",
+      "source_refs": [
+        {
+          "evidence_id": "evidence-p3b-wave-1-1c294f971d7f94ecb6d1358b",
+          "source_id": "source-001",
+          "evidence_type": "annotation",
+          "artifact_type": "shishuo_entry",
+          "artifact_path": "content/processed/shishuo/entries/04-wenxue/entry-097.md",
+          "artifact_sha256": "4b820257a8e983ed8ef7e5bb170af75cc6d41d6e76c65a607ddb10b68ffb4c89",
+          "entry_id": "04-wenxue-097",
+          "unit_id": null,
+          "source_witness_id": "shishuo-kanripo-wyg",
+          "source_path": "shishuoSources/shishuo/KR3l0002_001.txt",
+          "source_sha256": "c36120ab58adac35d40ccab9bf76882015abe3bc4182a15ccfce77228821a3e3"
+        },
+        {
+          "evidence_id": "evidence-p3b-wave-1-d349085053db2fdb9bba4f55",
+          "source_id": "source-001",
+          "evidence_type": "annotation",
+          "artifact_type": "shishuo_entry",
+          "artifact_path": "content/processed/shishuo/entries/02-yanyu/entry-059.md",
+          "artifact_sha256": "2118ed11309bda2e6225dae86cf3ff79852bb76016f3ae0020bed55651f1e5da",
+          "entry_id": "02-yanyu-059",
+          "unit_id": null,
+          "source_witness_id": "shishuo-kanripo-wyg",
+          "source_path": "shishuoSources/shishuo/KR3l0002_001.txt",
+          "source_sha256": "c36120ab58adac35d40ccab9bf76882015abe3bc4182a15ccfce77228821a3e3"
+        }
+      ],
+      "production_scope": "h0b0-pilot",
+      "review_status": "todo",
+      "assertion_status": "unknown"
+    },
+    {
+      "gap_id": "h0b0-gap-005",
+      "category": "clan_branch_unresolved",
+      "structural_type": "clan",
+      "affected_person_ids": [
+        "person-013"
+      ],
+      "source_surface": "太原祁人",
+      "canonical_identity_candidate": "太原温氏（支系未详）",
+      "evidence_ids": [
+        "evidence-p3b-wave-2-12df786323627bed77a9b4b2"
+      ],
+      "why_it_matters": "可安全保留地域层级，但没有证据把温嶠细分到更窄支系。",
+      "future_expansion_value": "clan_precision",
+      "id": "h0b0-gap-005",
+      "source_refs": [
+        {
+          "evidence_id": "evidence-p3b-wave-2-12df786323627bed77a9b4b2",
+          "source_id": "source-001",
+          "evidence_type": "annotation",
+          "artifact_type": "shishuo_entry",
+          "artifact_path": "content/processed/shishuo/entries/02-yanyu/entry-035.md",
+          "artifact_sha256": "33f7d8ed67a1e6a8557b7aa7488844d787d04a33241abc9f92ba8d6a2a84ad5b",
+          "entry_id": "02-yanyu-035",
+          "unit_id": null,
+          "source_witness_id": "shishuo-kanripo-wyg",
+          "source_path": "shishuoSources/shishuo/KR3l0002_001.txt",
+          "source_sha256": "c36120ab58adac35d40ccab9bf76882015abe3bc4182a15ccfce77228821a3e3"
+        }
+      ],
+      "production_scope": "h0b0-pilot",
+      "review_status": "todo",
+      "assertion_status": "unknown"
+    },
+    {
+      "gap_id": "h0b0-gap-006",
+      "category": "marriage_spouse_not_production",
+      "structural_type": "marriage",
+      "affected_person_ids": [
+        "person-010"
+      ],
+      "source_surface": "庾亮子会娶恢女",
+      "canonical_identity_candidate": "诸葛恢之女（未纳入当前 production）",
+      "evidence_ids": [
+        "evidence-p3b-wave-2-5b4dd649db3e791c95d8b055"
+      ],
+      "why_it_matters": "这是庾氏—诸葛氏婚姻结构的直接端点，但缺少可安全导航的生产配偶身份。",
+      "future_expansion_value": "marriage_bridge",
+      "id": "h0b0-gap-006",
+      "source_refs": [
+        {
+          "evidence_id": "evidence-p3b-wave-2-5b4dd649db3e791c95d8b055",
+          "source_id": "source-001",
+          "evidence_type": "annotation",
+          "artifact_type": "shishuo_entry",
+          "artifact_path": "content/processed/shishuo/entries/05-fangzheng/entry-025.md",
+          "artifact_sha256": "a89de479041b0aee67f34c9b9db6fe6941a72cf2d5a346963fa91790555d15d7",
+          "entry_id": "05-fangzheng-025",
+          "unit_id": null,
+          "source_witness_id": "shishuo-kanripo-wyg",
+          "source_path": "shishuoSources/shishuo/KR3l0002_002.txt",
+          "source_sha256": "6b8a3fcf4fb07152c567a25fe56e9511f45a9748b83c107e6a8956aa7e65367a"
+        }
+      ],
+      "production_scope": "h0b0-pilot",
+      "review_status": "todo",
+      "assertion_status": "unknown"
+    },
+    {
+      "gap_id": "h0b0-gap-007",
+      "category": "missing_story_evidence",
+      "structural_type": "kinship",
+      "affected_person_ids": [
+        "person-001",
+        "person-004"
+      ],
+      "source_surface": "有七子知名者五人",
+      "canonical_identity_candidate": null,
+      "evidence_ids": [
+        "evidence-008"
+      ],
+      "why_it_matters": "现有证据确认王羲之有多个知名子女，但当前 scope 不足以安全 materialize 未识别子女或兄弟关系。",
+      "future_expansion_value": "family_context",
+      "id": "h0b0-gap-007",
+      "source_refs": [
+        {
+          "evidence_id": "evidence-008",
+          "source_id": "source-002",
+          "evidence_type": "primary_text",
+          "artifact_type": "jinshu_unit",
+          "artifact_path": "content/processed/jinshu/units/liezhuan/080-liezhuan-001.md",
+          "artifact_sha256": "e337542c2d4f4fb25568bc58d425708836f06ef3d97a96c96f8b9ae05b787874",
+          "entry_id": null,
+          "unit_id": "080-liezhuan-001",
+          "source_witness_id": "jinshu-wikisource-siku",
+          "source_path": "sources/downloads/jinshu/wikisource-siku/text/volume-080.txt",
+          "source_sha256": "e8e7821e55acae8be9e095296b186a47db7bdb0ce710c3057a11f3eec0e55cba"
+        }
+      ],
+      "production_scope": "h0b0-pilot",
+      "review_status": "todo",
+      "assertion_status": "unknown"
+    }
+  ],
+  "notes": "这些是当前生产 scope 的结构性缺口，不是 H0B-0 的待办物化事实。"
+}
