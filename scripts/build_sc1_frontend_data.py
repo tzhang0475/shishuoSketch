@@ -64,6 +64,7 @@ PUNCTUATION_PATH = ROOT / "data/annotation/wp1-punctuation.json"
 PRODUCTION_EVIDENCE_PATH = ROOT / "data/evidence/wp1-evidence.json"
 PRODUCTION_RELATIONS_PATH = ROOT / "data/annotation/wp1-relations.json"
 H0A_ANCHORS_PATH = ROOT / "data/annotation/story-temporal-anchors-h0a.json"
+E0_PROJECTION_PATH = ROOT / "data/derived/e0-era-card-projection.json"
 DERIVED_PATH = ROOT / "data/derived/sc1-site.json"
 VITE_PATH = ROOT / "site/src/generated/sc1-site.json"
 
@@ -426,6 +427,15 @@ def build(root: Path = ROOT) -> dict[str, Any]:
             for item in h0a_anchors.get("records", [])
             if isinstance(item, Mapping) and isinstance(item.get("story_id"), str)
         }
+    e0_projection: Mapping[str, Any] = {}
+    if E0_PROJECTION_PATH.is_file():
+        candidate_projection = read_json(E0_PROJECTION_PATH)
+        if isinstance(candidate_projection, Mapping):
+            e0_projection = candidate_projection
+    ruler_mentions_by_story: dict[str, list[Mapping[str, Any]]] = {}
+    for item in e0_projection.get("ruler_mentions", []) if isinstance(e0_projection.get("ruler_mentions"), list) else []:
+        if isinstance(item, Mapping) and isinstance(item.get("story_id"), str):
+            ruler_mentions_by_story.setdefault(str(item["story_id"]), []).append(item)
     selected_records.sort(key=lambda record: int(entry_by_id[record["entry_id"]].get("global_ordinal", 10**9)))
     selected_ids = [record["entry_id"] for record in selected_records]
     if len(selected_ids) != len(set(selected_ids)):
@@ -654,6 +664,7 @@ def build(root: Path = ROOT) -> dict[str, Any]:
                 evidence=list(base_evidence.values()),
                 source_text=source_text,
                 annotation_evidence_ids=base_annotation_evidence,
+                ruler_mentions=ruler_mentions_by_story.get(entry_id, []),
             )
             new_stories.append(story)
             continue
@@ -691,6 +702,7 @@ def build(root: Path = ROOT) -> dict[str, Any]:
                 if key.startswith("liu_annotation:")
                 for annotation_id in [key.split(":", 1)[1]]
             },
+            ruler_mentions=ruler_mentions_by_story.get(entry_id, []),
         )
         story = {
             "id": entry_id,
@@ -876,6 +888,10 @@ def build(root: Path = ROOT) -> dict[str, Any]:
         "eras": base["eras"],
         "evidence": sorted(new_evidence.values(), key=lambda item: item["id"]),
         "sources": base["sources"],
+        "ruler_identities": list(e0_projection.get("ruler_identities", [])),
+        "era_cards": list(e0_projection.get("era_cards", [])),
+        "ruler_mentions": list(e0_projection.get("ruler_mentions", [])),
+        "historical_events": list(e0_projection.get("historical_events", [])),
         "person_sketches": person_sketches,
         "scene_contexts": scene_contexts,
         "story_chain": {

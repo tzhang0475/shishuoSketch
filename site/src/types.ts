@@ -236,6 +236,14 @@ export type ReadingSegment =
       annotation_ownership_basis?: string;
     }
   | {
+      type: "ruler_mention";
+      mention_id: string;
+      ruler_id: string;
+      era_card_id: string;
+      display: ReadingPair;
+      annotation_id?: string;
+    }
+  | {
       type: "annotation_marker";
       annotation_id: string;
       label: ReadingPair;
@@ -505,6 +513,102 @@ export interface StorySceneContext {
   notes: ReadingPair[];
 }
 
+export interface RulerIdentity {
+  ruler_id: string;
+  canonical_title: ReadingPair;
+  personal_name: ReadingPair | null;
+  polity: string;
+  reign_start_year: number | null;
+  reign_end_year: number | null;
+  reign_period_ids: string[];
+  era_year_ids: string[];
+  aliases: ReadingPair[];
+  evidence_ids: string[];
+  source_evidence_ids: string[];
+  assertion_status: AssertionStatus;
+  review_status: ReviewStatus;
+  resolution_basis: string;
+}
+
+export interface RulerMention {
+  mention_id: string;
+  story_id: string;
+  section: "main_text" | "liu_annotation";
+  annotation_id?: string | null;
+  surface: string;
+  anchor: { text: string; section: "main_text" | "liu_annotation"; offset: number };
+  source_span: Record<string, unknown>;
+  candidate_ruler_ids: string[];
+  ruler_id: string;
+  era_card_id: string;
+  resolution_basis: string;
+  resolution_status: "resolved";
+  story_role_candidate: "appears" | "referenced";
+  evidence_ids: string[];
+  temporal_evidence_ids: string[];
+  era_card_exists: true;
+}
+
+export interface HistoricalEventProjection {
+  id: string;
+  canonical_name: ReadingPair;
+  aliases: ReadingPair[];
+  start_year_ce: number | null;
+  end_year_ce: number | null;
+  date_precision: string;
+  phase_ids: string[];
+  evidence_ids: string[];
+  source_evidence_ids: string[];
+  review_status: ReviewStatus;
+}
+
+export interface EraCardStoryLink {
+  story_id: string;
+  link_type: "appears" | "referenced" | "reign_context";
+  mention_ids: string[];
+  evidence_ids: string[];
+  source_evidence_ids: string[];
+  derivation_basis: string;
+}
+
+export interface EraCardPersonIntersection {
+  person_id: string;
+  story_ids: string[];
+  story_count: number;
+  derivation_basis: string;
+  evidence_ids: string[];
+}
+
+export interface EraCard {
+  era_card_id: string;
+  ruler_id: string;
+  title: ReadingPair;
+  personal_name: ReadingPair | null;
+  polity: string;
+  reign_label: ReadingPair;
+  reign_start_year: number | null;
+  reign_end_year: number | null;
+  era_names: Array<{
+    name: ReadingPair;
+    reign_period_id: string;
+    start_year_ce: number | null;
+    end_year_ce: number | null;
+  }>;
+  era_context: {
+    text: ReadingPair;
+    evidence_ids: string[];
+    assertion_status: AssertionStatus;
+    review_status: ReviewStatus;
+  };
+  ruler_story_links: EraCardStoryLink[];
+  person_intersections: EraCardPersonIntersection[];
+  historical_event_ids: string[];
+  evidence_ids: string[];
+  source_evidence_ids: string[];
+  review_status: ReviewStatus;
+  selection_note: string;
+}
+
 export interface SiteBundle {
   schema: 1;
   generated_from: string;
@@ -515,6 +619,10 @@ export interface SiteBundle {
   eras: Era[];
   evidence: Evidence[];
   sources: Source[];
+  ruler_identities: RulerIdentity[];
+  era_cards: EraCard[];
+  ruler_mentions: RulerMention[];
+  historical_events: HistoricalEventProjection[];
   person_sketches: Record<string, PersonSketch>;
   scene_contexts: Record<string, StorySceneContext>;
   story_chain?: StoryChainIndex;

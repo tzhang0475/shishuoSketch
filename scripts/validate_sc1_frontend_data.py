@@ -86,11 +86,14 @@ def validate_inline_mention_projection(
     story: dict[str, Any],
     mentions: dict[str, dict[str, Any]],
     people: set[str],
+    ruler_mentions: dict[str, dict[str, Any]] | None = None,
 ) -> list[str]:
     """Validate deterministic inline Mention placement for one Story."""
 
     errors: list[str] = []
     story_id = str(story.get("id"))
+    validate_ruler_registry = ruler_mentions is not None
+    ruler_mentions = ruler_mentions or {}
     reading = story.get("reading", {})
     if not isinstance(reading, dict):
         return [f"SC1 {story_id}: reading is not an object"]
@@ -184,6 +187,49 @@ def validate_inline_mention_projection(
                 if annotation_marker_id in placed_markers:
                     errors.append(f"SC1 {story_id}: duplicate annotation marker: {annotation_marker_id}")
                 placed_markers.add(annotation_marker_id)
+                offset += len(display_original)
+                continue
+            if segment.get("type") == "ruler_mention":
+                mention_id = segment.get("mention_id")
+                ruler_id = segment.get("ruler_id")
+                era_card_id = segment.get("era_card_id")
+                if not isinstance(mention_id, str) or not isinstance(ruler_id, str) or not isinstance(era_card_id, str):
+                    errors.append(f"SC1 {story_id}: ruler segment lacks IDs")
+                    offset += len(display_original)
+                    continue
+                ruler_mention = ruler_mentions.get(mention_id)
+                if validate_ruler_registry and ruler_mention is None:
+                    errors.append(f"SC1 {story_id}: ruler Mention does not resolve: {mention_id}")
+                elif validate_ruler_registry and ruler_mention is not None:
+                    if ruler_mention.get("story_id") != story_id or ruler_mention.get("section") != layer:
+                        errors.append(f"SC1 {story_id}: ruler Mention layer mismatch: {mention_id}")
+                    if ruler_mention.get("ruler_id") != ruler_id or ruler_mention.get("era_card_id") != era_card_id:
+                        errors.append(f"SC1 {story_id}: ruler Mention target mismatch: {mention_id}")
+                    if ruler_mention.get("resolution_status") != "resolved":
+                        errors.append(f"SC1 {story_id}: non-resolved ruler Mention is projected as clickable: {mention_id}")
+                    if layer == "main_text" and "annotation_id" in segment:
+                        errors.append(f"SC1 {story_id}: main-text ruler Mention has annotation_id: {mention_id}")
+                    if layer == "liu_annotation" and segment.get("annotation_id") != annotation_id:
+                        errors.append(f"SC1 {story_id}: annotation ruler block mismatch: {mention_id}")
+                    canonical = canonical_by_layer.get((layer, annotation_id))
+                    anchor = mention_anchor(ruler_mention)
+                    if canonical is None or anchor is None:
+                        errors.append(f"SC1 {story_id}: missing canonical anchor for ruler Mention {mention_id}")
+                    else:
+                        try:
+                            expected_start, expected_end = display_span_for_anchor(
+                                canonical,
+                                expected_original,
+                                anchor[0],
+                                anchor[1],
+                            )
+                            if offset != expected_start or offset + len(display_original) != expected_end:
+                                errors.append(f"SC1 {story_id}: ruler Mention display span differs from anchor: {mention_id}")
+                        except ValueError as exc:
+                            errors.append(f"SC1 {story_id}: unsafe ruler Mention anchor {mention_id}: {exc}")
+                if mention_id in placed:
+                    errors.append(f"SC1 {story_id}: duplicate inline Mention: {mention_id}")
+                placed[mention_id] = (layer, annotation_id)
                 offset += len(display_original)
                 continue
             if segment.get("type") == "identity_mention":
@@ -339,6 +385,17 @@ def validate_inline_mention_projection(
             continue
         if mention_id not in placed and mention_id not in suppressed:
             errors.append(f"SC1 {story_id}: resolved Mention has no inline/suppressed projection: {mention_id}")
+    if validate_ruler_registry:
+        expected_ruler_ids = {
+            mention_id
+            for mention_id, ruler_mention in ruler_mentions.items()
+            if isinstance(ruler_mention, dict) and ruler_mention.get("story_id") == story_id
+        }
+        if expected_ruler_ids - set(placed):
+            errors.append(
+                f"SC1 {story_id}: resolved ruler Mention has no inline projection: "
+                f"{', '.join(sorted(expected_ruler_ids - set(placed)))}"
+            )
     if placed.keys() & suppressed.keys():
         errors.append(f"SC1 {story_id}: Mention appears both inline and suppressed")
     return errors
@@ -461,6 +518,11 @@ def validate(root: Path = ROOT, mode: str = "full") -> list[str]:
 
     people_by_id = {item.get("id"): item for item in bundle.get("people", [])}
     mention_by_id = {item.get("id"): item for item in bundle.get("mentions", [])}
+    ruler_mention_by_id = {
+        item.get("mention_id"): item
+        for item in bundle.get("ruler_mentions", [])
+        if isinstance(item, dict) and isinstance(item.get("mention_id"), str)
+    }
     relation_ids = {item.get("id") for item in bundle.get("relations", [])}
     evidence_by_id = {item.get("id"): item for item in bundle.get("evidence", [])}
     converter = OpenCC("t2s")
@@ -598,7 +660,14 @@ def validate(root: Path = ROOT, mode: str = "full") -> list[str]:
         for relation_id in story.get("relation_ids", []):
             if relation_id not in relation_ids:
                 errors.append(f"SC1 Story has an invalid Relation reference: {entry_id}/{relation_id}")
-        errors.extend(validate_inline_mention_projection(story, mention_by_id, people_id_set))
+        errors.extend(
+            validate_inline_mention_projection(
+                story,
+                mention_by_id,
+                people_id_set,
+                ruler_mention_by_id,
+            )
+        )
 
     # The seven WP1 Person records remain byte-identical, while the unified
     # production registry may add the frozen P3B.1 wave.  Other shared WP1

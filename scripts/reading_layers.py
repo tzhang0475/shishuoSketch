@@ -454,6 +454,9 @@ def _display_offset_for_logical_offset(canonical: str, displayed: str, logical_o
 
 
 def _annotation_id(mention: Mapping[str, Any]) -> str | None:
+    explicit = mention.get("annotation_id")
+    if isinstance(explicit, str):
+        return explicit
     metadata = mention.get("source_section_metadata")
     if isinstance(metadata, Mapping) and isinstance(metadata.get("annotation_id"), str):
         return metadata["annotation_id"]
@@ -709,6 +712,7 @@ def _placement_candidates(
     *,
     section: str,
     annotation_id: str | None,
+    ruler_mentions: Any = (),
 ) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
     start_boundaries, end_boundaries, _characters = _display_boundaries(canonical, displayed)
     placements: list[dict[str, Any]] = []
@@ -716,8 +720,21 @@ def _placement_candidates(
     if not isinstance(mentions, (list, tuple)):
         return placements, suppressed
 
-    for mention in mentions:
-        if not isinstance(mention, Mapping) or not (_resolved_mention(mention) or _identity_resolution_mention(mention)):
+    source_mentions: list[Mapping[str, Any]] = []
+    if isinstance(mentions, (list, tuple)):
+        source_mentions.extend(item for item in mentions if isinstance(item, Mapping))
+    if isinstance(ruler_mentions, (list, tuple)):
+        source_mentions.extend(
+            {**item, "_e0_ruler_mention": True}
+            for item in ruler_mentions
+            if isinstance(item, Mapping)
+        )
+
+    for mention in source_mentions:
+        is_ruler = bool(mention.get("_e0_ruler_mention"))
+        if not isinstance(mention, Mapping) or not (
+            _resolved_mention(mention) or _identity_resolution_mention(mention) or is_ruler
+        ):
             continue
         mention_section = mention.get("section")
         if mention_section != section:
@@ -793,7 +810,7 @@ def _placement_candidates(
         placement = {
             "mention_id": mention_id,
             "person_id": person_id if isinstance(person_id, str) else None,
-            "target_kind": "production_person" if is_production else "identity_candidate",
+            "target_kind": "ruler" if is_ruler else ("production_person" if is_production else "identity_candidate"),
             "resolution_status": str(mention.get("resolution_status", "resolved")),
             "resolution_target": dict(target) if isinstance(target, Mapping) else None,
             "resolution_candidates": [
@@ -811,6 +828,10 @@ def _placement_candidates(
             "section": section,
             "annotation_id": annotation_id,
         }
+        if is_ruler:
+            placement["ruler_id"] = str(mention["ruler_id"])
+            placement["era_card_id"] = str(mention["era_card_id"])
+            placement["resolution_status"] = "resolved"
         if isinstance(mention.get("annotation_ownership_basis"), str):
             placement["annotation_ownership_basis"] = mention["annotation_ownership_basis"]
         placements.append(placement)
@@ -920,6 +941,7 @@ def build_reading_segments(
     section: str,
     annotation_id: str | None = None,
     annotation_markers: Any = (),
+    ruler_mentions: Any = (),
 ) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
     """Project resolved canonical Mention anchors into display segments."""
 
@@ -929,6 +951,7 @@ def build_reading_segments(
         mentions,
         section=section,
         annotation_id=annotation_id,
+        ruler_mentions=ruler_mentions,
     )
     valid_markers: list[dict[str, Any]] = []
     if section == "main_text" and isinstance(annotation_markers, (list, tuple)):
@@ -1002,6 +1025,16 @@ def build_reading_segments(
                     "person_id": placement["person_id"],
                     "display": _display_pair(text, converter),
                 }
+            elif placement.get("target_kind") == "ruler":
+                piece = {
+                    "type": "ruler_mention",
+                    "mention_id": placement["mention_id"],
+                    "ruler_id": placement["ruler_id"],
+                    "era_card_id": placement["era_card_id"],
+                    "display": _display_pair(text, converter),
+                }
+                if section == "liu_annotation" and annotation_id is not None:
+                    piece["annotation_id"] = annotation_id
             else:
                 target = placement.get("resolution_target")
                 names: list[str] = []
@@ -1106,6 +1139,7 @@ def build_display_reading(
     evidence: Any = (),
     source_text: str | None = None,
     annotation_evidence_ids: Mapping[str, str] | None = None,
+    ruler_mentions: Any = (),
 ) -> dict[str, Any]:
     sections = record["sections"]
     annotations: list[dict[str, Any]] = []
@@ -1162,6 +1196,7 @@ def build_display_reading(
             prepared_placement_mentions,
             section="liu_annotation",
             annotation_id=annotation_id,
+            ruler_mentions=ruler_mentions,
         )
         suppressed_mentions.extend(segment_suppressed)
         annotations.append(
@@ -1228,6 +1263,7 @@ def build_display_reading(
         prepared_placement_mentions,
         section="main_text",
         annotation_markers=annotation_markers,
+        ruler_mentions=ruler_mentions,
     )
     suppressed_mentions.extend(main_suppressed)
     suppressed_marker_ids = {

@@ -4,7 +4,7 @@
   "title": "SC1 static frontend bundle",
   "type": "object",
   "additionalProperties": true,
-  "required": ["schema", "generated_from", "stories", "people", "mentions", "relations", "eras", "evidence", "sources", "person_sketches", "scene_contexts", "story_chain", "ui"],
+  "required": ["schema", "generated_from", "stories", "people", "mentions", "relations", "eras", "evidence", "sources", "ruler_identities", "era_cards", "ruler_mentions", "historical_events", "person_sketches", "scene_contexts", "story_chain", "ui"],
   "properties": {
     "schema": {"const": 1},
     "generated_from": {"const": "scripts/build_sc1_frontend_data.py"},
@@ -113,6 +113,10 @@
     "eras": {"type": "array", "items": {"type": "object", "required": ["id"]}},
     "evidence": {"type": "array", "items": {"type": "object", "required": ["id"]}},
     "sources": {"type": "array", "items": {"type": "object", "required": ["id"]}},
+    "ruler_identities": {"type": "array", "items": {"type": "object", "required": ["ruler_id"]}},
+    "era_cards": {"type": "array", "items": {"type": "object", "required": ["era_card_id", "ruler_id"]}},
+    "ruler_mentions": {"type": "array", "items": {"type": "object", "required": ["mention_id", "story_id", "section", "surface", "ruler_id", "era_card_id"]}},
+    "historical_events": {"type": "array", "items": {"type": "object", "required": ["id"]}},
     "person_sketches": {
       "type": "object",
       "minProperties": 7,
@@ -140,7 +144,7 @@
       "type": "object",
       "required": ["type", "display"],
       "properties": {
-        "type": {"enum": ["text", "person_mention", "identity_mention", "annotation_marker"]},
+        "type": {"enum": ["text", "person_mention", "identity_mention", "ruler_mention", "annotation_marker"]},
         "display": {
           "type": "object",
           "required": ["original", "simplified"],
@@ -148,6 +152,8 @@
         },
         "mention_id": {"type": "string"},
         "person_id": {"type": "string"},
+        "ruler_id": {"type": "string"},
+        "era_card_id": {"type": "string"},
         "target_kind": {"enum": ["production_person", "identity_candidate"]},
         "resolution_status": {"enum": ["resolved", "candidate_for_review"]},
         "canonical_name": {"anyOf": [{"$ref": "#/$defs/readingPair"}, {"type": "null"}]},

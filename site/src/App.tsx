@@ -16,12 +16,15 @@ import {
   pathPersonIds,
   focusedPersonFromExploration,
   focusedPersonNodeFromExploration,
+  focusedEraFromExploration,
+  focusedEraNodeFromExploration,
   type PersonMentionRoute,
   type RelationPerspective,
   type ExplorationNode,
 } from "./relationExplorer";
 import type {
   Evidence,
+  EraCard,
   Mention,
   Person,
   ReadingPair,
@@ -37,6 +40,7 @@ const READING_MODE_STORAGE_KEY = "shishuoSketch.reading-mode";
 type ReadingMode = "simplified" | "original";
 type ResolvedMention = Mention & { person_id: string };
 type PersonFocus = (personId: string, route?: PersonMentionRoute) => void;
+type EraFocus = (eraCardId: string) => void;
 
 function initialReadingMode(): ReadingMode {
   if (typeof window === "undefined") return "simplified";
@@ -142,6 +146,7 @@ function InlineReadingSegments({
   readingMode,
   focusedPersonId,
   onFocus,
+  onEraFocus,
   annotations,
   openAnnotationIds,
   onToggleAnnotation,
@@ -153,6 +158,7 @@ function InlineReadingSegments({
   readingMode: ReadingMode;
   focusedPersonId: string | null;
   onFocus: PersonFocus;
+  onEraFocus: EraFocus;
   annotations: Story["reading"]["annotations"];
   openAnnotationIds: Set<string>;
   onToggleAnnotation: (annotationId: string) => void;
@@ -189,6 +195,7 @@ function InlineReadingSegments({
             readingMode={readingMode}
             focusedPersonId={focusedPersonId}
             onFocus={onFocus}
+            onEraFocus={onEraFocus}
             annotations={annotations}
             openAnnotationIds={openAnnotationIds}
             onToggleAnnotation={onToggleAnnotation}
@@ -268,6 +275,22 @@ function InlineReadingSegments({
             >
               {text}
             </span>
+          );
+        }
+        if (segment.type === "ruler_mention") {
+          const card = data.era_cards.find((candidate) => candidate.era_card_id === segment.era_card_id);
+          const title = card ? readingValue(card.title, readingMode, "纪元") : "纪元";
+          return (
+            <button
+              type="button"
+              className="inline-ruler-mention"
+              key={`${segment.mention_id}-${index}`}
+              aria-label={`${text}，打开${title}纪元卡`}
+              title={`${text} · ${title}`}
+              onClick={() => onEraFocus(segment.era_card_id)}
+            >
+              {text}
+            </button>
           );
         }
         const mention = data.mentions.find((candidate) => candidate.id === segment.mention_id);
@@ -1034,6 +1057,222 @@ function PersonExplorerPanel({
   );
 }
 
+function eraLabel(mode: ReadingMode, original: string, simplified: string = original): string {
+  return mode === "original" ? original : simplified;
+}
+
+function EraStoryLinks({
+  card,
+  data,
+  readingMode,
+  linkType,
+  onStorySelect,
+}: {
+  card: EraCard;
+  data: SiteBundle;
+  readingMode: ReadingMode;
+  linkType: "appears" | "referenced" | "reign_context";
+  onStorySelect: (storyId: string) => void;
+}) {
+  const links = card.ruler_story_links.filter((link) => link.link_type === linkType);
+  if (links.length === 0) return null;
+  return (
+    <div className="era-story-group">
+      <p className="relation-detail-heading">
+        {linkType === "appears"
+          ? eraLabel(readingMode, "《世說》中的他", "《世说》中的他")
+          : linkType === "referenced"
+            ? eraLabel(readingMode, "被提及", "被提及")
+            : eraLabel(readingMode, "這一時期", "这一时期")}
+      </p>
+      <div className="story-card-list">
+        {links.map((link) => {
+          const candidate = storyById(data, link.story_id);
+          if (!candidate) return null;
+          return (
+            <StoryCard
+              key={`${link.link_type}-${link.story_id}`}
+              story={candidate}
+              data={data}
+              readingMode={readingMode}
+              annotationOnly={false}
+              onSelect={() => onStorySelect(candidate.id)}
+            />
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+function EraCardDetail({
+  story,
+  data,
+  card,
+  readingMode,
+  onFocus,
+  onStorySelect,
+}: {
+  story: Story;
+  data: SiteBundle;
+  card: EraCard;
+  readingMode: ReadingMode;
+  onFocus: PersonFocus;
+  onStorySelect: (storyId: string) => void;
+}) {
+  const directByStory = new Map<string, EraCard["ruler_story_links"][number]>();
+  for (const link of card.ruler_story_links) {
+    if (link.link_type !== "appears" && link.link_type !== "referenced") continue;
+    const existing = directByStory.get(link.story_id);
+    if (!existing || (existing.link_type === "referenced" && link.link_type === "appears")) {
+      directByStory.set(link.story_id, link);
+    }
+  }
+  const directLinks = [...directByStory.values()];
+  const appearsLinks = directLinks.filter((link) => link.link_type === "appears");
+  const referencedLinks = directLinks.filter((link) => link.link_type === "referenced");
+  const directStories = new Set(directLinks.map((link) => link.story_id));
+  const contextLinks = card.ruler_story_links.filter(
+    (link) => link.link_type === "reign_context" && !directStories.has(link.story_id),
+  );
+  const events = card.historical_event_ids
+    .map((id) => data.historical_events.find((event) => event.id === id))
+    .filter((event): event is SiteBundle["historical_events"][number] => Boolean(event));
+  return (
+    <section className="era-detail-card" aria-labelledby="focused-era-heading">
+      <div className="era-card-identity">
+        <p className="section-label">{eraLabel(readingMode, "紀元", "纪元")}</p>
+        <h3 id="focused-era-heading">{readingValue(card.title, readingMode, "紀元")}</h3>
+        {card.personal_name && <p className="era-card-personal-name">{readingValue(card.personal_name, readingMode, "")}</p>}
+        <p className="era-card-reign">{readingValue(card.reign_label, readingMode, "")}</p>
+        <div className="era-name-strip" aria-label={eraLabel(readingMode, "年號序列", "年号序列")}>
+          {card.era_names.map((era) => (
+            <span key={era.reign_period_id} className="era-name-chip">
+              {readingValue(era.name, readingMode, "")}
+              {typeof era.start_year_ce === "number" && typeof era.end_year_ce === "number" && (
+                <small>{era.start_year_ce}–{era.end_year_ce}</small>
+              )}
+            </span>
+          ))}
+        </div>
+      </div>
+
+      <section className="era-context-block">
+        <p className="relation-detail-heading">{eraLabel(readingMode, "時代一瞥", "时代一瞥")}</p>
+        <p>{readingValue(card.era_context.text, readingMode, "")}</p>
+      </section>
+
+      <EraStoryLinks card={{ ...card, ruler_story_links: appearsLinks }} data={data} readingMode={readingMode} linkType="appears" onStorySelect={onStorySelect} />
+      <EraStoryLinks card={{ ...card, ruler_story_links: referencedLinks }} data={data} readingMode={readingMode} linkType="referenced" onStorySelect={onStorySelect} />
+
+      {card.person_intersections.length > 0 && (
+        <section className="era-intersections">
+          <p className="relation-detail-heading">{eraLabel(readingMode, "人物交集", "人物交集")}</p>
+          <div className="era-person-list">
+            {card.person_intersections.map((intersection) => {
+              const person = data.people.find((candidate) => candidate.id === intersection.person_id);
+              if (!person) return null;
+              return (
+                <button
+                  type="button"
+                  className="era-person-link"
+                  key={intersection.person_id}
+                  onClick={() => onFocus(intersection.person_id)}
+                >
+                  {personDisplayName(story, person, readingMode)} · {intersection.story_count}{eraLabel(readingMode, "則", "则")}
+                </button>
+              );
+            })}
+          </div>
+        </section>
+      )}
+
+      {contextLinks.length > 0 && (
+        <EraStoryLinks
+          card={{ ...card, ruler_story_links: contextLinks }}
+          data={data}
+          readingMode={readingMode}
+          linkType="reign_context"
+          onStorySelect={onStorySelect}
+        />
+      )}
+
+      {events.length > 0 && (
+        <section className="era-events">
+          <p className="relation-detail-heading">{eraLabel(readingMode, "時代節點", "时代节点")}</p>
+          {events.map((event) => (
+            <article className="era-event-row" key={event.id}>
+              <span>{readingValue(event.canonical_name, readingMode, "")}</span>
+              {typeof event.start_year_ce === "number" && typeof event.end_year_ce === "number" && (
+                <small>{event.start_year_ce}–{event.end_year_ce}</small>
+              )}
+            </article>
+          ))}
+        </section>
+      )}
+    </section>
+  );
+}
+
+function EraExplorerPanel({
+  story,
+  data,
+  focusedEraId,
+  focusedEraNode,
+  readingMode,
+  backTarget,
+  onFocus,
+  onBack,
+  onStorySelect,
+  onClose,
+}: {
+  story: Story;
+  data: SiteBundle;
+  focusedEraId: string | null;
+  focusedEraNode: ExplorationNode | null;
+  readingMode: ReadingMode;
+  backTarget: ExplorationNode | null;
+  onFocus: PersonFocus;
+  onBack: () => void;
+  onStorySelect: (storyId: string) => void;
+  onClose: () => void;
+}) {
+  if (!focusedEraId) return null;
+  const card = data.era_cards.find((candidate) => candidate.era_card_id === focusedEraId);
+  if (!card) return null;
+  const backLabel = backTarget?.kind === "person"
+    ? personNameById(story, data, backTarget.id, readingMode)
+    : backTarget?.kind === "era"
+      ? data.era_cards.find((candidate) => candidate.era_card_id === backTarget.id)?.title[readingMode] ?? eraLabel(readingMode, "紀元", "纪元")
+      : backTarget?.kind === "story"
+        ? storyReference(storyById(data, backTarget.id) ?? story, readingMode)
+        : "";
+  return (
+    <aside className="person-panel-shell era-panel-shell" aria-label={eraLabel(readingMode, "紀元探索", "纪元探索")}>
+      <button type="button" className="person-panel-backdrop" aria-label={eraLabel(readingMode, "關閉紀元探索", "关闭纪元探索")} onClick={onClose} />
+      <div className="person-panel-surface era-panel-surface" role="dialog" aria-modal="true" aria-labelledby="focused-era-heading">
+        <div className="person-panel-toolbar">
+          <span>{eraLabel(readingMode, "紀元", "纪元")}</span>
+          <button type="button" className="panel-close-button" onClick={onClose} aria-label={eraLabel(readingMode, "關閉紀元探索", "关闭纪元探索")}>×</button>
+        </div>
+        {backTarget && (
+          <button type="button" className="back-button era-panel-back" onClick={onBack}>
+            ← {eraLabel(readingMode, "返回", "返回")} {backLabel}
+          </button>
+        )}
+        <EraCardDetail
+          story={story}
+          data={data}
+          card={card}
+          readingMode={readingMode}
+          onFocus={onFocus}
+          onStorySelect={onStorySelect}
+        />
+      </div>
+    </aside>
+  );
+}
+
 function EvidenceDetails({
   story,
   data,
@@ -1239,6 +1478,10 @@ function nodeLabel(node: ExplorationNode, story: Story, data: SiteBundle, mode: 
   if (node.kind === "story") {
     return storyReference(storyById(data, node.id) ?? story, mode);
   }
+  if (node.kind === "era") {
+    const card = data.era_cards.find((candidate) => candidate.era_card_id === node.id);
+    return card ? readingValue(card.title, mode, eraLabel(mode, "紀元", "纪元")) : eraLabel(mode, "紀元", "纪元");
+  }
   return personNameById(story, data, node.id, mode);
 }
 
@@ -1343,6 +1586,7 @@ function StoryReader({
   setReadingMode,
   focusedPersonId,
   onFocus,
+  onEraFocus,
 }: {
   story: Story;
   data: SiteBundle;
@@ -1350,6 +1594,7 @@ function StoryReader({
   setReadingMode: (mode: ReadingMode) => void;
   focusedPersonId: string | null;
   onFocus: PersonFocus;
+  onEraFocus: EraFocus;
 }) {
   const readerRef = useRef<HTMLDivElement>(null);
   const [openAnnotationIds, setOpenAnnotationIds] = useState<Set<string>>(() => new Set());
@@ -1420,6 +1665,7 @@ function StoryReader({
               readingMode={readingMode}
               focusedPersonId={focusedPersonId}
               onFocus={onFocus}
+              onEraFocus={onEraFocus}
               annotations={story.reading.annotations}
               openAnnotationIds={openAnnotationIds}
               onToggleAnnotation={toggleAnnotation}
@@ -1450,6 +1696,7 @@ function StoryReader({
                       readingMode={readingMode}
                       focusedPersonId={focusedPersonId}
                       onFocus={onFocus}
+                      onEraFocus={onEraFocus}
                       annotations={story.reading.annotations}
                       openAnnotationIds={openAnnotationIds}
                       onToggleAnnotation={toggleAnnotation}
@@ -1501,8 +1748,12 @@ function ReadingPage({
   stack,
   focusedPersonId,
   focusedPersonNode,
+  focusedEraId,
+  focusedEraNode,
   personPanelOpen,
+  eraPanelOpen,
   onFocus,
+  onEraFocus,
   onBack,
   onStorySelect,
   onPathSelect,
@@ -1517,8 +1768,12 @@ function ReadingPage({
   stack: ExplorationNode[];
   focusedPersonId: string | null;
   focusedPersonNode: ExplorationNode | null;
+  focusedEraId: string | null;
+  focusedEraNode: ExplorationNode | null;
   personPanelOpen: boolean;
+  eraPanelOpen: boolean;
   onFocus: PersonFocus;
+  onEraFocus: EraFocus;
   onBack: () => void;
   onStorySelect: (storyId: string) => void;
   onPathSelect: (index: number) => void;
@@ -1526,7 +1781,7 @@ function ReadingPage({
   onRandomPerson: () => void;
   onRandomStory: () => void;
 }) {
-  const backTarget = focusedPersonId && stack.length > 1 ? stack[stack.length - 2] ?? null : null;
+  const backTarget = stack.length > 1 && (personPanelOpen || eraPanelOpen) ? stack[stack.length - 2] ?? null : null;
   useEffect(() => {
     window.localStorage.setItem(READING_MODE_STORAGE_KEY, readingMode);
   }, [readingMode]);
@@ -1557,7 +1812,7 @@ function ReadingPage({
         onSelect={onPathSelect}
       />
 
-      <div className={personPanelOpen ? "exploration-layout with-person-panel" : "exploration-layout"}>
+      <div className={personPanelOpen || eraPanelOpen ? "exploration-layout with-person-panel" : "exploration-layout"}>
         <StoryReader
           key={story.id}
           story={story}
@@ -1566,6 +1821,7 @@ function ReadingPage({
           setReadingMode={setReadingMode}
           focusedPersonId={focusedPersonId}
           onFocus={onFocus}
+          onEraFocus={onEraFocus}
         />
         {personPanelOpen && focusedPersonId && (
           <PersonExplorerPanel
@@ -1573,6 +1829,20 @@ function ReadingPage({
             data={data}
             focusedPersonId={focusedPersonId}
             focusedPersonNode={focusedPersonNode}
+            readingMode={readingMode}
+            backTarget={backTarget}
+            onFocus={onFocus}
+            onBack={onBack}
+            onStorySelect={onStorySelect}
+            onClose={onClosePerson}
+          />
+        )}
+        {eraPanelOpen && focusedEraId && (
+          <EraExplorerPanel
+            story={story}
+            data={data}
+            focusedEraId={focusedEraId}
+            focusedEraNode={focusedEraNode}
             readingMode={readingMode}
             backTarget={backTarget}
             onFocus={onFocus}
@@ -1597,6 +1867,7 @@ function App() {
   const [readingMode, setReadingMode] = useState<ReadingMode>(initialReadingMode);
   const [stack, setStack] = useState<ExplorationNode[]>([]);
   const [personPanelOpen, setPersonPanelOpen] = useState(false);
+  const [eraPanelOpen, setEraPanelOpen] = useState(false);
   const initialized = useRef(false);
 
   useEffect(() => {
@@ -1620,6 +1891,8 @@ function App() {
   }, [data, stack]);
   const currentFocusedPersonId = focusedPersonFromExploration(stack);
   const currentFocusedPersonNode = focusedPersonNodeFromExploration(stack);
+  const currentFocusedEraId = focusedEraFromExploration(stack);
+  const currentFocusedEraNode = focusedEraNodeFromExploration(stack);
 
   function focusPerson(personId: string, route?: PersonMentionRoute) {
     if (!data?.people.some((person) => person.id === personId)) return;
@@ -1629,6 +1902,14 @@ function App() {
       ...(route ?? {}),
     }));
     setPersonPanelOpen(true);
+    setEraPanelOpen(false);
+  }
+
+  function focusEra(eraCardId: string) {
+    if (!data?.era_cards.some((card) => card.era_card_id === eraCardId)) return;
+    setStack((current) => appendExploration(current, { kind: "era", id: eraCardId }));
+    setPersonPanelOpen(false);
+    setEraPanelOpen(true);
   }
 
   function selectStory(storyId: string) {
@@ -1636,6 +1917,7 @@ function App() {
     const next = appendExploration(stack, { kind: "story", id: storyId });
     setStack(next);
     setPersonPanelOpen(false);
+    setEraPanelOpen(false);
     writeStoryAddress(storyId);
   }
 
@@ -1643,6 +1925,7 @@ function App() {
     const next = backExploration(stack);
     setStack(next);
     setPersonPanelOpen(next[next.length - 1]?.kind === "person");
+    setEraPanelOpen(next[next.length - 1]?.kind === "era");
     const storyId = currentStoryFromExploration(next);
     if (storyId) writeStoryAddress(storyId);
   }
@@ -1651,6 +1934,7 @@ function App() {
     const next = truncateExploration(stack, index);
     setStack(next);
     setPersonPanelOpen(next[next.length - 1]?.kind === "person");
+    setEraPanelOpen(next[next.length - 1]?.kind === "era");
     const storyId = currentStoryFromExploration(next);
     if (storyId) writeStoryAddress(storyId);
   }
@@ -1661,6 +1945,7 @@ function App() {
     if (!storyId) return;
     setStack([{ kind: "story", id: storyId }]);
     setPersonPanelOpen(false);
+    setEraPanelOpen(false);
     writeStoryAddress(storyId);
   }
 
@@ -1680,6 +1965,7 @@ function App() {
       { kind: "person", id: personId },
     ]);
     setPersonPanelOpen(true);
+    setEraPanelOpen(false);
     writeStoryAddress(storyId);
   }
 
@@ -1711,12 +1997,16 @@ function App() {
       stack={stack}
       focusedPersonId={currentFocusedPersonId}
       focusedPersonNode={currentFocusedPersonNode}
+      focusedEraId={currentFocusedEraId}
+      focusedEraNode={currentFocusedEraNode}
       personPanelOpen={personPanelOpen}
+      eraPanelOpen={eraPanelOpen}
       onFocus={focusPerson}
+      onEraFocus={focusEra}
       onBack={goBack}
       onStorySelect={selectStory}
       onPathSelect={selectPath}
-      onClosePerson={() => setPersonPanelOpen(false)}
+      onClosePerson={() => { setPersonPanelOpen(false); setEraPanelOpen(false); }}
       onRandomPerson={chooseRandomPerson}
       onRandomStory={chooseRandomStory}
     />

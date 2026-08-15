@@ -354,6 +354,23 @@ body { overflow-x: hidden; }
 .person-panel-surface .ego-map { min-height: 250px; }
 .person-panel-surface .person-detail-card, .person-panel-surface .ego-map-panel { background: rgba(255, 253, 249, .72); }
 .person-panel-surface .story-card-footer { flex-wrap: wrap; }
+.era-panel-back { display: block; margin: .7rem 1rem 0; }
+.era-detail-card { padding: 1rem; }
+.era-card-identity { border-bottom: 1px solid #e3d9cd; padding-bottom: .9rem; }
+.era-card-identity h3 { margin: .2rem 0 .05rem; color: #47352b; font-size: 1.55rem; font-weight: 500; }
+.era-card-personal-name { margin: 0; color: #8c7c6d; font-size: .9rem; }
+.era-card-reign { margin: .35rem 0 0; color: #765244; font-size: .85rem; }
+.era-name-strip { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .75rem; }
+.era-name-chip { display: inline-flex; flex-direction: column; border: 1px solid #d9c6b8; border-radius: 999px; color: #765244; padding: .22rem .6rem; font-size: .75rem; }
+.era-name-chip small { color: #9a8b7d; font-size: .62rem; }
+.era-context-block, .era-intersections, .era-events { border-top: 1px solid #e3d9cd; margin-top: .9rem; padding-top: .7rem; }
+.era-context-block p:last-child { margin: 0; color: #55473d; font-size: .88rem; line-height: 1.85; }
+.era-story-group { border-top: 1px solid #e3d9cd; margin-top: .9rem; padding-top: .7rem; }
+.era-person-list { display: grid; gap: .15rem; }
+.era-person-link { border: 0; border-bottom: 1px solid #eee7de; background: transparent; color: #765244; cursor: pointer; padding: .32rem 0; text-align: left; }
+.era-person-link:hover, .era-person-link:focus-visible { color: #4b271e; }
+.era-event-row { display: flex; justify-content: space-between; gap: .8rem; border-bottom: 1px solid #eee7de; padding: .3rem 0; color: #55473d; font-size: .84rem; }
+.era-event-row small { color: #9a8b7d; }
 .site-footer { max-width: none; margin-top: 1.5rem; }
 
 .inline-person-mention {
@@ -371,6 +388,18 @@ body { overflow-x: hidden; }
 .inline-person-mention:hover { border-bottom-style: solid; background: rgba(217, 196, 181, .22); }
 .inline-person-mention:focus-visible { outline: 2px solid #a9785f; outline-offset: 2px; border-bottom-style: solid; }
 .inline-person-mention.active { border-bottom-style: solid; background: rgba(217, 196, 181, .2); }
+.inline-ruler-mention {
+  display: inline;
+  border: 0;
+  border-bottom: 1px solid #8b755f;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  padding: 0 .08em;
+  margin: 0 -.08em;
+  text-decoration: none;
+}
+.inline-ruler-mention:hover, .inline-ruler-mention:focus-visible { border-bottom-color: #7a3d2d; background: rgba(217, 196, 181, .2); }
 .inline-identity-mention {
   border-bottom: 1px dotted #a9785f;
   cursor: help;

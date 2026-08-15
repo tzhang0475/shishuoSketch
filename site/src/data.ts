@@ -230,6 +230,7 @@ function validateReadingSegments(
   expectedSimplified: string,
   layer: "main_text" | "liu_annotation",
   annotationId?: string,
+  rulerMentionIds?: Set<string>,
 ): void {
   if (!Array.isArray(segments)) {
     throw new Error(`reading ${layer} 缺少 segments`);
@@ -237,7 +238,7 @@ function validateReadingSegments(
   let original = "";
   let simplified = "";
   for (const segment of segments) {
-    if (!isRecord(segment) || (segment.type !== "text" && segment.type !== "person_mention" && segment.type !== "identity_mention" && segment.type !== "annotation_marker")) {
+    if (!isRecord(segment) || (segment.type !== "text" && segment.type !== "person_mention" && segment.type !== "identity_mention" && segment.type !== "ruler_mention" && segment.type !== "annotation_marker")) {
       throw new Error(`reading ${layer} 存在无效 segment`);
     }
     const display = segment.display;
@@ -270,6 +271,17 @@ function validateReadingSegments(
         throw new Error(`annotation ${String(annotationId)} 的 identity segment 层级不一致`);
       }
     }
+    if (segment.type === "ruler_mention") {
+      if (typeof segment.mention_id !== "string" || !rulerMentionIds?.has(segment.mention_id) || typeof segment.ruler_id !== "string" || typeof segment.era_card_id !== "string") {
+        throw new Error(`reading ${layer} ruler segment 不完整`);
+      }
+      if (layer === "main_text" && segment.annotation_id !== undefined) {
+        throw new Error("main_text ruler segment 不得携带 annotation_id");
+      }
+      if (layer === "liu_annotation" && segment.annotation_id !== annotationId) {
+        throw new Error(`annotation ${String(annotationId)} 的 ruler segment 层级不一致`);
+      }
+    }
     if (segment.type === "annotation_marker") {
       if (layer !== "main_text" || typeof segment.annotation_id !== "string" || !isRecord(segment.label)) {
         throw new Error("annotation_marker 只能出现在主文本并且必须引用注释");
@@ -293,7 +305,7 @@ export function parseSiteBundle(value: unknown): SiteBundle {
   if (!isRecord(value) || value.schema !== 1 || typeof value.generated_from !== "string") {
     throw new Error("静态数据不是受支持的 frontend bundle");
   }
-  const keys = ["stories", "people", "mentions", "relations", "eras", "evidence", "sources"];
+  const keys = ["stories", "people", "mentions", "relations", "eras", "evidence", "sources", "historical_events"];
   const arrays = Object.fromEntries(keys.map((key) => [key, requireArray(value, key)]));
   const ids = new Set<string>();
   for (const key of keys) {
@@ -308,11 +320,59 @@ export function parseSiteBundle(value: unknown): SiteBundle {
     }
   }
   const storyIds = new Set(arrays.stories.map((item) => (item as Record<string, unknown>).id));
+  const peopleIds = new Set(arrays.people.map((item) => (item as Record<string, unknown>).id));
   const evidenceIds = new Set<string>(
     arrays.evidence
       .map((item) => (item as Record<string, unknown>).id)
       .filter((id): id is string => typeof id === "string"),
   );
+  if (!Array.isArray(value.ruler_identities) || !Array.isArray(value.era_cards) || !Array.isArray(value.ruler_mentions)) {
+    throw new Error("静态数据缺少 E0 纪元投影数组");
+  }
+  const rulerIds = new Set<string>();
+  for (const identity of value.ruler_identities) {
+    if (!isRecord(identity) || typeof identity.ruler_id !== "string" || rulerIds.has(identity.ruler_id)) {
+      throw new Error("E0 ruler identity ID 无效或重复");
+    }
+    rulerIds.add(identity.ruler_id);
+    if (peopleIds.has(identity.ruler_id)) throw new Error(`E0 ruler ID 不得占用 Person ID: ${identity.ruler_id}`);
+    if (!isReadingPair(identity.canonical_title) || !Array.isArray(identity.reign_period_ids) || !Array.isArray(identity.era_year_ids) || !Array.isArray(identity.evidence_ids)) {
+      throw new Error(`E0 ruler identity ${identity.ruler_id} 结构不完整`);
+    }
+    if (identity.reign_start_year !== null && typeof identity.reign_start_year !== "number") throw new Error(`E0 ruler ${identity.ruler_id} 起年无效`);
+    if (identity.reign_end_year !== null && typeof identity.reign_end_year !== "number") throw new Error(`E0 ruler ${identity.ruler_id} 终年无效`);
+    if (typeof identity.reign_start_year === "number" && typeof identity.reign_end_year === "number" && identity.reign_start_year > identity.reign_end_year) throw new Error(`E0 ruler ${identity.ruler_id} 年界倒置`);
+  }
+  const eventIds = new Set(arrays.historical_events.map((item) => (item as Record<string, unknown>).id));
+  for (const event of arrays.historical_events) {
+    if (!isRecord(event) || typeof event.id !== "string") throw new Error("E0 HistoricalEvent projection 无效");
+    if (!isReadingPair(event.canonical_name) || !Array.isArray(event.source_evidence_ids) || event.source_evidence_ids.some((id) => typeof id !== "string" || !evidenceIds.has(id))) {
+      throw new Error(`E0 HistoricalEvent ${event.id} 依据无效`);
+    }
+    if (typeof event.start_year_ce === "number" && typeof event.end_year_ce === "number" && event.start_year_ce > event.end_year_ce) throw new Error(`E0 HistoricalEvent ${event.id} 年界倒置`);
+  }
+  const eraCardIds = new Set<string>();
+  for (const card of value.era_cards) {
+    if (!isRecord(card) || typeof card.era_card_id !== "string" || eraCardIds.has(card.era_card_id) || typeof card.ruler_id !== "string" || !rulerIds.has(card.ruler_id)) {
+      throw new Error("E0 Era Card ID 或 ruler 引用无效/重复");
+    }
+    eraCardIds.add(card.era_card_id);
+    if (!isReadingPair(card.title) || !isReadingPair(card.reign_label) || !isRecord(card.era_context) || !isReadingPair(card.era_context.text)) {
+      throw new Error(`E0 Era Card ${card.era_card_id} display 不完整`);
+    }
+    if (typeof card.reign_start_year === "number" && typeof card.reign_end_year === "number" && card.reign_start_year > card.reign_end_year) throw new Error(`E0 Era Card ${card.era_card_id} 年界倒置`);
+    if (!Array.isArray(card.historical_event_ids) || card.historical_event_ids.some((id) => typeof id !== "string" || !eventIds.has(id))) throw new Error(`E0 Era Card ${card.era_card_id} HistoricalEvent 引用无效`);
+  }
+  const rulerMentionIds = new Set<string>();
+  const rulerMentionById = new Map<string, Record<string, unknown>>();
+  for (const mention of value.ruler_mentions) {
+    if (!isRecord(mention) || typeof mention.mention_id !== "string" || rulerMentionIds.has(mention.mention_id) || typeof mention.story_id !== "string" || !storyIds.has(mention.story_id) || typeof mention.ruler_id !== "string" || !rulerIds.has(mention.ruler_id) || typeof mention.era_card_id !== "string" || !eraCardIds.has(mention.era_card_id)) {
+      throw new Error("E0 ruler Mention 无效或重复");
+    }
+    rulerMentionIds.add(mention.mention_id);
+    rulerMentionById.set(mention.mention_id, mention);
+    if (!Array.isArray(mention.evidence_ids) || mention.evidence_ids.some((id) => typeof id !== "string" || !evidenceIds.has(id))) throw new Error(`E0 ruler Mention ${mention.mention_id} 依据无效`);
+  }
   for (const story of arrays.stories) {
     if (!isRecord(story) || !isRecord(story.reading)) {
       throw new Error("Story 缺少 reading layer");
@@ -348,6 +408,8 @@ export function parseSiteBundle(value: unknown): SiteBundle {
       reading.main_text.original,
       reading.main_text.simplified,
       "main_text",
+      undefined,
+      rulerMentionIds,
     );
     if (!Array.isArray(reading.annotations) || reading.annotations.some((item) => {
       return !isRecord(item) || typeof item.id !== "string" || typeof item.original !== "string" || typeof item.simplified !== "string" || !Array.isArray(item.segments) || !isRecord(item.insertion);
@@ -384,6 +446,7 @@ export function parseSiteBundle(value: unknown): SiteBundle {
         String(annotation.simplified),
         "liu_annotation",
         String(annotation.id),
+        rulerMentionIds,
       );
     }
     const projection = reading.mention_projection;
@@ -433,7 +496,6 @@ export function parseSiteBundle(value: unknown): SiteBundle {
       throw new Error("Mention 引用了不存在的 Story");
     }
   }
-  const peopleIds = new Set(arrays.people.map((item) => (item as Record<string, unknown>).id));
   validatePersonSketches(value.person_sketches, arrays.people, arrays.mentions, evidenceIds);
   validateSceneContexts(value.scene_contexts, arrays.stories, arrays.people, evidenceIds);
   const mentionById = new Map(
@@ -469,10 +531,29 @@ export function parseSiteBundle(value: unknown): SiteBundle {
     if (!isRecord(story) || !isRecord(story.reading) || typeof story.id !== "string") continue;
     const reading = story.reading;
     const placed = new Set<string>();
+    const placedRuler = new Set<string>();
     const suppressed = new Set<string>();
     const inspectSegments = (segments: unknown, layer: "main_text" | "liu_annotation", annotationId?: string) => {
       if (!Array.isArray(segments)) return;
       for (const segment of segments) {
+        if (isRecord(segment) && segment.type === "ruler_mention") {
+          const rulerMentionId = segment.mention_id;
+          const rulerMention = typeof rulerMentionId === "string" ? rulerMentionById.get(rulerMentionId) : undefined;
+          if (typeof rulerMentionId === "string" && placedRuler.has(rulerMentionId)) {
+            throw new Error(`Story ${story.id} 重复渲染 ruler Mention: ${rulerMentionId}`);
+          }
+          if (!rulerMention || rulerMention.story_id !== story.id || rulerMention.ruler_id !== segment.ruler_id || rulerMention.era_card_id !== segment.era_card_id) {
+            throw new Error(`Story ${story.id} ruler segment 引用无效: ${String(rulerMentionId)}`);
+          }
+          if (rulerMention.section !== layer) {
+            throw new Error(`Story ${story.id} ruler Mention 层级不一致: ${String(rulerMentionId)}`);
+          }
+          placedRuler.add(rulerMentionId as string);
+          if (layer === "liu_annotation" && segment.annotation_id !== annotationId) {
+            throw new Error(`Story ${story.id} annotation ruler Mention 所属 block 不一致: ${String(rulerMentionId)}`);
+          }
+          continue;
+        }
         if (!isRecord(segment) || (segment.type !== "person_mention" && segment.type !== "identity_mention")) continue;
         const mentionId = segment.mention_id;
         if (typeof mentionId !== "string") continue;
@@ -518,6 +599,11 @@ export function parseSiteBundle(value: unknown): SiteBundle {
     if (Array.isArray(annotations)) {
       for (const annotation of annotations) {
         if (isRecord(annotation)) inspectSegments(annotation.segments, "liu_annotation", String(annotation.id));
+      }
+    }
+    for (const [rulerMentionId, rulerMention] of rulerMentionById.entries()) {
+      if (rulerMention.story_id === story.id && !placedRuler.has(rulerMentionId)) {
+        throw new Error(`Story ${story.id} resolved ruler Mention 未投影: ${rulerMentionId}`);
       }
     }
     const projectionRecord = reading.mention_projection;

@@ -7,7 +7,8 @@ export type PersonMentionRoute = {
 
 export type ExplorationNode =
   | { kind: "story"; id: string }
-  | ({ kind: "person"; id: string } & Partial<PersonMentionRoute>);
+  | ({ kind: "person"; id: string } & Partial<PersonMentionRoute>)
+  | { kind: "era"; id: string };
 
 export interface RelationPerspective {
   relation: Relation;
@@ -150,6 +151,14 @@ export function focusedPersonFromExploration(stack: ExplorationNode[]): string |
 
 export function focusedPersonNodeFromExploration(stack: ExplorationNode[]): ExplorationNode | null {
   return [...stack].reverse().find((node) => node.kind === "person") ?? null;
+}
+
+export function focusedEraFromExploration(stack: ExplorationNode[]): string | null {
+  return [...stack].reverse().find((node) => node.kind === "era")?.id ?? null;
+}
+
+export function focusedEraNodeFromExploration(stack: ExplorationNode[]): ExplorationNode | null {
+  return [...stack].reverse().find((node) => node.kind === "era") ?? null;
 }
 
 export function reviewedDirectRelations(data: SiteBundle): Relation[] {
