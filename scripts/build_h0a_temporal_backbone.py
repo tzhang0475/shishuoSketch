@@ -34,9 +34,11 @@ ACTIVITY_PATH = ROOT / "data/annotation/person-activity-anchors-h0a.json"
 ANCHORS_PATH = ROOT / "data/annotation/story-temporal-anchors-h0a.json"
 GAP_PATH = ROOT / "data/derived/h0a-temporal-gap-audit.json"
 METRICS_PATH = ROOT / "data/derived/h0a-metrics.json"
+H0A1_BASELINE_PATH = ROOT / "data/derived/h0a1-baseline.json"
 DOC_PATH = ROOT / "docs/h0a-historical-temporal-backbone.md"
 POLICY_DOC_PATH = ROOT / "docs/h0a-temporal-resolution-policy.md"
 GAP_DOC_PATH = ROOT / "docs/h0a-temporal-gap-audit.md"
+H0A1_DOC_PATH = ROOT / "docs/h0a1-temporal-gap-reduction.md"
 
 SCHEMA = 1
 
@@ -150,7 +152,7 @@ KNOWN_ERA_NAMES = sorted(
     {
         "建安", "黃初", "黄初", "太和", "青龍", "景初", "正始", "嘉平", "甘露", "景元", "咸熙",
         "泰始", "咸寧", "太康", "太熙", "元康", "永康", "永寧", "太安", "永興", "光熙", "永嘉",
-        "建興", "建武", "大興", "永昌", "太寧", "咸和", "咸康", "建元", "永和", "升平", "隆和",
+        "建興", "建武", "大興", "永昌", "太寧", "太寜", "咸和", "咸康", "建元", "永和", "升平", "隆和",
         "興寧", "咸安", "寧康", "太元", "隆安", "元興", "義熙", "義熈", "元熙",
         # Han surfaces are retained as chronology coordinates when observed.
         "中平", "光和", "初平", "興平", "建安", "延康", "黃初", "建武", "永平", "永元",
@@ -165,7 +167,7 @@ EVENT_CATALOG: list[dict[str, Any]] = [
     {
         "event_id": "event-wang-dun-rebellion",
         "canonical_name": "王敦之亂",
-        "aliases": ["王敦討劉隗", "王敦既下", "王敦引軍", "大將軍作亂"],
+        "aliases": ["王敦討劉隗", "王敦既下", "王敦引軍", "大將軍作亂", "大將軍下至石頭", "王敦將肆"],
         "start_year_ce": 322,
         "end_year_ce": 324,
         "date_precision": "year_range",
@@ -185,7 +187,7 @@ EVENT_CATALOG: list[dict[str, Any]] = [
     {
         "event_id": "event-yongjia-upheaval",
         "canonical_name": "永嘉之亂與南渡",
-        "aliases": ["永嘉之中", "永嘉流", "遭亂渡江", "後遭亂渡江"],
+        "aliases": ["永嘉之中", "永嘉流", "遭亂渡江", "後遭亂渡江", "來過江"],
         "start_year_ce": 307,
         "end_year_ce": 317,
         "date_precision": "year_range",
@@ -205,7 +207,7 @@ EVENT_CATALOG: list[dict[str, Any]] = [
     {
         "event_id": "event-sun-en-rebellion",
         "canonical_name": "孫恩之亂",
-        "aliases": ["孫恩作亂"],
+        "aliases": ["孫恩作亂", "孫恩賊出吳郡"],
         "start_year_ce": 399,
         "end_year_ce": 402,
         "date_precision": "year_range",
@@ -213,6 +215,56 @@ EVENT_CATALOG: list[dict[str, Any]] = [
         "scope_note": "目前只作为刘注中的后续事件证据。",
     },
 ]
+
+EVENT_TEXT_PATTERNS: dict[str, tuple[str, ...]] = {
+    # The published reading layer retains a physical source line break
+    # between 孫恩 and 賊; regex matching records that exact span rather than
+    # rewriting the source or pretending the line break is semantic.
+    "event-sun-en-rebellion": (r"孫恩\s*賊出吳郡",),
+}
+
+# These are deliberately story-local ruler readings, not a global title
+# resolver.  A bare 武帝/明帝 is unsafe in the abstract; these records bind
+# the surface only where the published Story's surrounding scene identifies
+# the Jin ruler and the ZTJ-derived ruler coordinate is available.
+RULER_REFERENCE_RULES: dict[str, dict[str, str]] = {
+    "01-dexing-017": {
+        "surface": "武帝",
+        "polity": "晉",
+        "ruler_name": "世祖武皇帝",
+        "note": "正文以武帝直接向劉仲雄發問；此為晉武帝故事場景，不是注中泛稱。",
+    },
+    "05-fangzheng-023": {
+        "surface": "元皇帝",
+        "polity": "晉",
+        "ruler_name": "中宗元皇帝",
+        "note": "正文以元皇帝既登阼開啟皇儲爭議；直接定位於元帝在位語境。",
+    },
+    "09-pinzao-014": {
+        "surface": "明帝",
+        "polity": "晉",
+        "ruler_name": "肅宗明皇帝",
+        "note": "正文由明帝直接發問；郗鑒、周顗的品評屬當下問答。",
+    },
+    "09-pinzao-017": {
+        "surface": "明帝",
+        "polity": "晉",
+        "ruler_name": "肅宗明皇帝",
+        "note": "正文由明帝直接發問；謝鯤與庾亮的比較屬當下問答。",
+    },
+    "09-pinzao-022": {
+        "surface": "明帝",
+        "polity": "晉",
+        "ruler_name": "肅宗明皇帝",
+        "note": "正文由明帝直接發問；周顗與庾亮的比較屬當下問答。",
+    },
+    "33-youhui-007": {
+        "surface": "明帝",
+        "polity": "晉",
+        "ruler_name": "肅宗明皇帝",
+        "note": "正文先明言王導、溫嶠俱見明帝；後文高貴鄉公是被談及的曹魏往事，不取其為故事年代。",
+    },
+}
 
 
 def read_json(path: Path) -> Any:
@@ -324,6 +376,8 @@ def add_temporal_evidence(
     review_status: str,
     confidence: str,
     notes: str,
+    temporal_constraint: Mapping[str, Any] | None = None,
+    coordinate_refs: list[Mapping[str, Any]] | None = None,
 ) -> dict[str, Any]:
     raw_surface = text[start:end]
     record_id = stable_id(
@@ -360,6 +414,10 @@ def add_temporal_evidence(
         "confidence": confidence,
         "notes": notes,
     }
+    if temporal_constraint:
+        record["temporal_constraint"] = dict(temporal_constraint)
+    if coordinate_refs:
+        record["coordinate_refs"] = [dict(item) for item in coordinate_refs]
     records.append(record)
     return record
 
@@ -371,10 +429,71 @@ def text_layers(story: Mapping[str, Any]) -> Iterable[tuple[str, str, str | None
             yield "liu_annotation", str(annotation.get("text", "")), str(annotation.get("id"))
 
 
+def era_relation_to_story(section: str, text: str, start: int, end: int) -> str:
+    """Classify an era surface without promoting literary comparison to date."""
+
+    window = text[max(0, start - 8):min(len(text), end + 12)]
+    if "之音" in window or "之學" in window or "故事" in window:
+        return "quoted_ancient_precedent"
+    if section != "main_text":
+        return "earlier_background"
+    return "direct_story_time"
+
+
+def era_reigns_for_name(coordinates: Mapping[str, Any], era_name: str) -> list[dict[str, Any]]:
+    normalized = normalize_era_name(era_name)
+    return [
+        item
+        for item in coordinates.get("reign_periods", [])
+        if isinstance(item, Mapping)
+        and item.get("era_name") == normalized
+        and item.get("start_year_ce") is not None
+        and item.get("end_year_ce") is not None
+    ]
+
+
+def ruler_context_for_rule(coordinates: Mapping[str, Any], rule: Mapping[str, str]) -> Mapping[str, Any] | None:
+    for item in coordinates.get("ruler_contexts", []):
+        if (
+            isinstance(item, Mapping)
+            and item.get("polity") == rule.get("polity")
+            and item.get("ruler_name") == rule.get("ruler_name")
+        ):
+            return item
+    return None
+
+
+def intersect_applicable_constraints(records: Iterable[Mapping[str, Any]]) -> tuple[tuple[int, int] | None, list[str], bool]:
+    """Intersect distinct direct Story-time intervals, preserving conflicts."""
+
+    intervals: dict[tuple[int, int], list[str]] = defaultdict(list)
+    for record in records:
+        if record.get("relation_to_story") != "direct_story_time":
+            continue
+        constraint = record.get("temporal_constraint")
+        if not isinstance(constraint, Mapping):
+            continue
+        start = constraint.get("start_year_ce")
+        end = constraint.get("end_year_ce")
+        if not isinstance(start, int) or not isinstance(end, int):
+            continue
+        intervals[(start, end)].append(str(record.get("evidence_record_id")))
+    if len(intervals) < 2:
+        return None, [], False
+    start = max(item[0] for item in intervals)
+    end = min(item[1] for item in intervals)
+    evidence_ids = [evidence_id for values in intervals.values() for evidence_id in values]
+    if start > end:
+        return None, sorted(evidence_ids), True
+    return (start, end), sorted(evidence_ids), False
+
+
 def event_match_relation(event_id: str, section: str, text: str, start: int) -> str:
     before = text[max(0, start - 10):start]
     after = text[start:start + 18]
     window = before + after
+    if event_id == "event-yongjia-upheaval" and "來過江" in window and section == "main_text":
+        return "direct_story_time"
     if event_id == "event-yongjia-upheaval" and ("永嘉之中" in window or "永嘉流" in window or "後遭亂渡江" in window):
         return "earlier_background" if "後遭亂渡江" in window else "event_context"
     if event_id == "event-eight-princes-disturbance":
@@ -386,6 +505,8 @@ def event_match_relation(event_id: str, section: str, text: str, start: int) -> 
             return "later_outcome" if "遇害" in window or section == "liu_annotation" else "event_context"
         return "direct_story_time" if section == "main_text" else "event_context"
     if event_id == "event-wang-dun-rebellion":
+        if "大將軍下至石頭" in window and section == "main_text":
+            return "direct_story_time"
         if "墓" in window or "所歎" in window:
             return "earlier_background"
         if "作亂" in window and ("俄而" in before or "如其所言" in window):
@@ -467,6 +588,34 @@ def build_coordinates(ztj_index: Mapping[str, Any]) -> dict[str, Any]:
             }
         )
 
+    ruler_groups: dict[tuple[str, str], list[dict[str, Any]]] = defaultdict(list)
+    for reign in reigns:
+        if reign.get("ruler_name") and reign.get("start_year_ce") is not None and reign.get("end_year_ce") is not None:
+            ruler_groups[(str(reign["polity"]), str(reign["ruler_name"]))].append(reign)
+    ruler_contexts: list[dict[str, Any]] = []
+    for (polity, ruler_name), group in sorted(ruler_groups.items()):
+        ruler_contexts.append(
+            {
+                "ruler_context_id": stable_id("h0a-ruler-context", polity, ruler_name),
+                "polity": polity,
+                "ruler_name": ruler_name,
+                "start_year_ce": min(int(item["start_year_ce"]) for item in group),
+                "end_year_ce": max(int(item["end_year_ce"]) for item in group),
+                "reign_ids": sorted(str(item["reign_id"]) for item in group),
+                "reign_refs": [
+                    {
+                        "reign_id": item["reign_id"],
+                        "era_name": item.get("era_name"),
+                        "source": "ztj0-chronology-index",
+                    }
+                    for item in sorted(group, key=lambda item: (str(item.get("era_name")), str(item.get("reign_id"))))
+                ],
+                "assertion_status": "attested",
+                "review_status": "reviewed",
+                "notes": "由 ZTJ0 實際觀察到的同一在位者年號區間彙整；只供故事有明確君主表面的保守定位，不是完整帝王年表。",
+            }
+        )
+
     return {
         "schema": SCHEMA,
         "stage": "h0a-temporal-coordinate-layer",
@@ -474,6 +623,7 @@ def build_coordinates(ztj_index: Mapping[str, Any]) -> dict[str, Any]:
         "phases": PHASES,
         "reign_periods": reigns,
         "era_years": era_years,
+        "ruler_contexts": ruler_contexts,
         "source_basis": {
             "ztj0_chronology_index": "data/derived/ztj0-chronology-index.json",
             "c0_phase_basis": "data/derived/c0-chronological-coverage.json",
@@ -498,6 +648,8 @@ def build_evidence_and_anchors(
     per_story_evidence: dict[str, list[dict[str, Any]]] = defaultdict(list)
     per_story_events: dict[str, set[str]] = defaultdict(set)
     per_story_era_years: dict[str, list[tuple[dict[str, Any], dict[str, Any]]]] = defaultdict(list)
+    per_story_reigns: dict[str, list[tuple[dict[str, Any], dict[str, Any]]]] = defaultdict(list)
+    per_story_rulers: dict[str, list[tuple[dict[str, Any], dict[str, Any]]]] = defaultdict(list)
 
     for story in sorted(bundle.get("stories", []), key=lambda item: str(item.get("id"))):
         story_id = str(story["id"])
@@ -511,9 +663,18 @@ def build_evidence_and_anchors(
                     continue
                 era_spans.append((match.start(), match.end()))
                 era_name, year_number, raw_surface = parsed
-                relation = "direct_story_time" if section == "main_text" else "earlier_background"
+                relation = era_relation_to_story(section, text, match.start(), match.end())
                 if story_id == "06-yaliang-017" and era_name == "咸和":
                     relation = "later_outcome"
+                candidate_reigns = era_reigns_for_name(coordinates, era_name)
+                temporal_constraint = None
+                if relation == "direct_story_time" and len(candidate_reigns) == 1:
+                    temporal_constraint = {
+                        "start_year_ce": candidate_reigns[0].get("start_year_ce"),
+                        "end_year_ce": candidate_reigns[0].get("end_year_ce"),
+                        "constraint_kind": "reign_period",
+                        "applicability": "direct_story_time",
+                    }
                 evidence = add_temporal_evidence(
                     all_evidence,
                     bundle,
@@ -524,14 +685,22 @@ def build_evidence_and_anchors(
                     start=match.start(),
                     end=match.end(),
                     evidence_type="era_year",
-                    normalized_candidate={"era_name": era_name, "era_year_number": year_number, "surface": raw_surface},
+                    normalized_candidate={
+                        "era_name": era_name,
+                        "era_year_number": year_number,
+                        "surface": raw_surface,
+                        "reign_id": candidate_reigns[0].get("reign_id") if len(candidate_reigns) == 1 else None,
+                    },
                     relation_to_story=relation,
                     assertion_status="attested",
                     review_status="candidate",
                     confidence="high" if relation == "direct_story_time" else "medium",
                     notes="保留故事层原始纪年表面；注中后世年岁不自动回填为本则发生年。",
+                    temporal_constraint=temporal_constraint,
                 )
                 per_story_evidence[story_id].append(evidence)
+                if relation == "direct_story_time" and len(candidate_reigns) == 1:
+                    per_story_reigns[story_id].append((evidence, candidate_reigns[0]))
                 for era_year in coordinates.get("era_years", []):
                     if raw_surface in era_year.get("source_surfaces", []) and era_year.get("era_year_number") == year_number:
                         per_story_era_years[story_id].append((evidence, era_year))
@@ -549,9 +718,19 @@ def build_evidence_and_anchors(
                     if any(span_start <= found < span_end for span_start, span_end in era_spans):
                         start = found + len(era_name_surface)
                         continue
-                    relation = "direct_story_time" if section == "main_text" else "earlier_background"
+                    relation = era_relation_to_story(section, text, found, found + len(era_name_surface))
                     if story_id == "06-yaliang-017" and era_name_surface == "咸和":
                         relation = "later_outcome"
+                    normalized_era_name = normalize_era_name(era_name_surface)
+                    candidate_reigns = era_reigns_for_name(coordinates, normalized_era_name)
+                    temporal_constraint = None
+                    if relation == "direct_story_time" and len(candidate_reigns) == 1:
+                        temporal_constraint = {
+                            "start_year_ce": candidate_reigns[0].get("start_year_ce"),
+                            "end_year_ce": candidate_reigns[0].get("end_year_ce"),
+                            "constraint_kind": "reign_period",
+                            "applicability": "direct_story_time",
+                        }
                     evidence = add_temporal_evidence(
                         all_evidence,
                         bundle,
@@ -562,15 +741,70 @@ def build_evidence_and_anchors(
                         start=found,
                         end=found + len(era_name_surface),
                         evidence_type="reign_reference",
-                        normalized_candidate={"era_name": normalize_era_name(era_name_surface)},
+                        normalized_candidate={
+                            "era_name": normalized_era_name,
+                            "reign_id": candidate_reigns[0].get("reign_id") if len(candidate_reigns) == 1 else None,
+                        },
                         relation_to_story=relation,
                         assertion_status="attested",
                         review_status="candidate",
                         confidence="medium" if relation != "direct_story_time" else "high",
                         notes="保留被正文或刘注明确写出的年号表面；未将分散的年号与年数拼成未经证实的精确年。",
+                        temporal_constraint=temporal_constraint,
                     )
                     per_story_evidence[story_id].append(evidence)
+                    if relation == "direct_story_time" and len(candidate_reigns) == 1:
+                        per_story_reigns[story_id].append((evidence, candidate_reigns[0]))
                     start = found + len(era_name_surface)
+
+            ruler_rule = RULER_REFERENCE_RULES.get(story_id)
+            ruler_context = ruler_context_for_rule(coordinates, ruler_rule) if ruler_rule else None
+            if section == "main_text" and ruler_rule and ruler_context:
+                surface = str(ruler_rule["surface"])
+                start = 0
+                while True:
+                    found = text.find(surface, start)
+                    if found < 0:
+                        break
+                    evidence = add_temporal_evidence(
+                        all_evidence,
+                        bundle,
+                        story_id=story_id,
+                        section=section,
+                        annotation_id=annotation_id,
+                        text=text,
+                        start=found,
+                        end=found + len(surface),
+                        evidence_type="reign_reference",
+                        normalized_candidate={
+                            "surface": surface,
+                            "polity": ruler_context.get("polity"),
+                            "ruler_name": ruler_context.get("ruler_name"),
+                            "ruler_context_id": ruler_context.get("ruler_context_id"),
+                        },
+                        relation_to_story="direct_story_time",
+                        assertion_status="attested",
+                        review_status="reviewed",
+                        confidence="high",
+                        notes=str(ruler_rule.get("note")),
+                        temporal_constraint={
+                            "start_year_ce": ruler_context.get("start_year_ce"),
+                            "end_year_ce": ruler_context.get("end_year_ce"),
+                            "constraint_kind": "ruler_context",
+                            "applicability": "direct_story_time",
+                        },
+                        coordinate_refs=[
+                            {
+                                "coordinate_type": "ruler_context",
+                                "ruler_context_id": ruler_context.get("ruler_context_id"),
+                                "reign_ids": ruler_context.get("reign_ids", []),
+                                "source": "ztj0-chronology-index",
+                            }
+                        ],
+                    )
+                    per_story_evidence[story_id].append(evidence)
+                    per_story_rulers[story_id].append((evidence, ruler_context))
+                    start = found + len(surface)
 
             for event in EVENT_CATALOG:
                 event_id = str(event["event_id"])
@@ -598,11 +832,63 @@ def build_evidence_and_anchors(
                             review_status="candidate",
                             confidence="high" if relation == "direct_story_time" else "medium",
                             notes="事件表面只作为时间证据候选；背景、后果和正文当下严格区分。",
+                            temporal_constraint=(
+                                {
+                                    "start_year_ce": event.get("start_year_ce"),
+                                    "end_year_ce": event.get("end_year_ce"),
+                                    "constraint_kind": "historical_event",
+                                    "applicability": relation,
+                                }
+                                if relation in {"direct_story_time", "event_context"}
+                                else None
+                            ),
                         )
                         per_story_evidence[story_id].append(evidence)
                         if relation in {"direct_story_time", "event_context"}:
                             per_story_events[story_id].add(event_id)
                         start = found + len(alias)
+                for pattern in EVENT_TEXT_PATTERNS.get(event_id, ()):
+                    for match in re.finditer(pattern, text):
+                        if any(
+                            item.get("evidence_type") == "historical_event_reference"
+                            and isinstance(item.get("normalized_candidate"), Mapping)
+                            and item["normalized_candidate"].get("event_id") == event_id
+                            and item.get("source_span", {}).get("char_start") == match.start()
+                            and item.get("source_span", {}).get("char_end_exclusive") == match.end()
+                            for item in per_story_evidence[story_id]
+                        ):
+                            continue
+                        relation = event_match_relation(event_id, section, text, match.start())
+                        evidence = add_temporal_evidence(
+                            all_evidence,
+                            bundle,
+                            story_id=story_id,
+                            section=section,
+                            annotation_id=annotation_id,
+                            text=text,
+                            start=match.start(),
+                            end=match.end(),
+                            evidence_type="historical_event_reference",
+                            normalized_candidate={"event_id": event_id, "event_name": event["canonical_name"]},
+                            relation_to_story=relation,
+                            assertion_status="attested",
+                            review_status="candidate",
+                            confidence="high" if relation == "direct_story_time" else "medium",
+                            notes="以保留物理换行的故事层原文匹配事件短语；不改写 canonical source。",
+                            temporal_constraint=(
+                                {
+                                    "start_year_ce": event.get("start_year_ce"),
+                                    "end_year_ce": event.get("end_year_ce"),
+                                    "constraint_kind": "historical_event",
+                                    "applicability": relation,
+                                }
+                                if relation in {"direct_story_time", "event_context"}
+                                else None
+                            ),
+                        )
+                        per_story_evidence[story_id].append(evidence)
+                        if relation in {"direct_story_time", "event_context"}:
+                            per_story_events[story_id].add(event_id)
 
             for match in re.finditer(r"(?:渡江|過江|入洛|出洛|既過江|既過江)", text):
                 relation = "direct_story_time" if section == "main_text" else "earlier_background"
@@ -682,6 +968,17 @@ def build_evidence_and_anchors(
             for record, era_year in per_story_era_years.get(story_id, [])
             if record.get("relation_to_story") == "direct_story_time" and era_year.get("year_ce") is not None
         ]
+        direct_reigns = [
+            (record, reign)
+            for record, reign in per_story_reigns.get(story_id, [])
+            if record.get("relation_to_story") == "direct_story_time"
+        ]
+        direct_rulers = [
+            (record, ruler)
+            for record, ruler in per_story_rulers.get(story_id, [])
+            if record.get("relation_to_story") == "direct_story_time"
+        ]
+        intersected_interval, intersected_evidence_ids, interval_conflict = intersect_applicable_constraints(records)
         event_ids = sorted(per_story_events.get(story_id, set()))
         w3_record = w3_by_story.get(story_id)
         phase_id: str | None = None
@@ -689,6 +986,7 @@ def build_evidence_and_anchors(
         start_year = None
         end_year = None
         reign_id = None
+        ruler_context_id = None
         era_year_ids: list[str] = []
         assertion_status = "unknown"
         review_status = "candidate"
@@ -711,6 +1009,18 @@ def build_evidence_and_anchors(
             conflict_flags.append("multiple_story_local_era_years")
             basis = "conflicting_story_local_era_evidence"
             rationale = "本则存在多个故事层纪年表面，未在没有审查的情况下选择其一。"
+        elif interval_conflict:
+            conflict_flags.append("incompatible_story_time_constraints")
+            basis = "conflicting_applicable_temporal_constraints"
+            rationale = "多个直接适用于本则的时间区间没有交集；保留冲突，不静默选择来源。"
+        elif intersected_interval is not None:
+            precision = "year_range"
+            start_year, end_year = intersected_interval
+            phase_id = phase_for_year(start_year)
+            assertion_status = "inferred"
+            review_status = "candidate"
+            basis = "applicable_constraint_intersection"
+            rationale = "多个直接适用于本则的时间约束取交集；结果仍按区间呈现，不宣称具体日。"
         elif event_ids:
             selected_event = event_by_id[event_ids[0]]
             if len(event_ids) > 1:
@@ -723,6 +1033,40 @@ def build_evidence_and_anchors(
             review_status = "candidate"
             basis = "explicit_story_event_context"
             rationale = f"本则证据直接连接到{selected_event['canonical_name']}；显示事件范围，不把事件关联扩大为人物关系。"
+        elif direct_reigns:
+            distinct_reigns = {str(item.get("reign_id")) for _, item in direct_reigns}
+            if len(distinct_reigns) > 1:
+                conflict_flags.append("multiple_story_local_reign_references")
+                basis = "conflicting_story_local_reign_evidence"
+                rationale = "本則正文出现多个不能合并的故事层年号表面，未在没有审查的情况下选择其一。"
+            else:
+                _, selected_reign = direct_reigns[0]
+                precision = "reign_bounded"
+                start_year = selected_reign.get("start_year_ce")
+                end_year = selected_reign.get("end_year_ce")
+                reign_id = selected_reign.get("reign_id")
+                phase_id = phase_for_year(start_year)
+                assertion_status = "attested"
+                review_status = "reviewed"
+                basis = "explicit_story_local_reign_reference"
+                rationale = "正文直接出现可与 ZTJ0 年号区间对应的故事层年号；保留在位区间，不虚构具体年份。"
+        elif direct_rulers:
+            distinct_rulers = {str(item.get("ruler_context_id")) for _, item in direct_rulers}
+            if len(distinct_rulers) > 1:
+                conflict_flags.append("multiple_story_local_ruler_references")
+                basis = "conflicting_story_local_ruler_evidence"
+                rationale = "本则正文出现多个不能合并的故事层君主语境，未静默选择其一。"
+            else:
+                _, selected_ruler = direct_rulers[0]
+                precision = "reign_bounded"
+                start_year = selected_ruler.get("start_year_ce")
+                end_year = selected_ruler.get("end_year_ce")
+                ruler_context_id = selected_ruler.get("ruler_context_id")
+                phase_id = phase_for_year(start_year)
+                assertion_status = "attested"
+                review_status = "reviewed"
+                basis = "explicit_story_local_ruler_reference"
+                rationale = "正文直接点出故事当下的君主；由 ZTJ0 观察到的在位区间提供保守边界。"
         elif w3_record and isinstance(w3_record.get("phase_id"), str):
             phase_id = str(w3_record["phase_id"])
             precision = "phase_only"
@@ -731,7 +1075,7 @@ def build_evidence_and_anchors(
             basis = "w3_frozen_phase_orientation"
             rationale = "沿用 W3/C0 的阶段定位；没有把阶段标签扩写成故事年份。"
 
-        evidence_ids = [str(record["evidence_record_id"]) for record in records]
+        evidence_ids = sorted(str(record["evidence_record_id"]) for record in records)
         if precision == "unknown" and any(record.get("relation_to_story") == "later_outcome" for record in records):
             basis = "later_outcome_does_not_date_story"
             rationale = "仅有后续命运／事件证据；按时间方向规则不回推为本则发生年。"
@@ -753,6 +1097,20 @@ def build_evidence_and_anchors(
         elif precision == "event_bounded" and phase_id:
             phase = phase_by_id.get(phase_id, {})
             label = f"{phase.get('label_zh', '')} · {event_by_id[event_ids[0]]['canonical_name']}"
+        elif precision == "year_range" and start_year is not None and end_year is not None:
+            label = f"{start_year}—{end_year}年"
+        elif precision == "reign_bounded":
+            if reign_id:
+                reign = next((item for item in coordinates.get("reign_periods", []) if item.get("reign_id") == reign_id), None)
+                if reign:
+                    polity_label = {"魏": "曹魏", "晉": "東晉" if (reign.get("start_year_ce") or 0) >= 317 else "西晉", "漢": "漢"}.get(reign.get("polity"), str(reign.get("polity") or ""))
+                    label = f"{polity_label} · {reign.get('era_name')}時期"
+            elif ruler_context_id:
+                ruler = next((item for item in coordinates.get("ruler_contexts", []) if item.get("ruler_context_id") == ruler_context_id), None)
+                if ruler:
+                    polity_label = {"魏": "曹魏", "晉": "東晉" if (ruler.get("start_year_ce") or 0) >= 317 else "西晉", "漢": "漢"}.get(ruler.get("polity"), str(ruler.get("polity") or ""))
+                    ruler_label = {"中宗元皇帝": "元帝", "肅宗明皇帝": "明帝", "世祖武皇帝": "武帝"}.get(str(ruler.get("ruler_name")), str(ruler.get("ruler_name") or "君主"))
+                    label = f"{polity_label} · {ruler_label}時期"
         elif precision == "phase_only" and phase_id:
             label = str(w3_record.get("phase_label") or phase_by_id.get(phase_id, {}).get("label_zh", ""))
 
@@ -763,6 +1121,7 @@ def build_evidence_and_anchors(
             "start_year_ce": start_year,
             "end_year_ce": end_year,
             "reign_id": reign_id,
+            "ruler_context_id": ruler_context_id,
             "era_year_ids": era_year_ids,
             "phase_id": phase_id,
             "event_ids": event_ids,
@@ -773,6 +1132,7 @@ def build_evidence_and_anchors(
             "resolution_basis": basis,
             "rationale": rationale,
             "conflict_flags": sorted(conflict_flags),
+            "temporal_constraint_evidence_ids": intersected_evidence_ids,
             "reader_projection": {
                 "label_zh": label,
                 "show": bool(label),
@@ -948,36 +1308,115 @@ def build_activity_anchors(bundle: Mapping[str, Any], evidence: list[dict[str, A
     return output
 
 
+def load_or_create_h0a1_baseline() -> dict[str, Any]:
+    """Freeze the completed H0A output once so H0A.1 upgrades are auditable."""
+
+    if H0A1_BASELINE_PATH.exists():
+        return read_json(H0A1_BASELINE_PATH)
+    if not ANCHORS_PATH.exists():
+        raise FileNotFoundError(f"cannot create H0A.1 baseline; missing {ANCHORS_PATH}")
+    payload = ANCHORS_PATH.read_bytes()
+    document = read_json(ANCHORS_PATH)
+    records = document.get("records", [])
+    precision = Counter(str(item.get("precision")) for item in records if isinstance(item, Mapping))
+    baseline = {
+        "schema": SCHEMA,
+        "stage": "h0a1-baseline",
+        "source_anchor_sha256": hashlib.sha256(payload).hexdigest(),
+        "story_count": len(records),
+        "precision_distribution": {
+            key: precision.get(key, 0)
+            for key in ["exact_date", "exact_year", "year_range", "event_bounded", "reign_bounded", "phase_only", "unknown"]
+        },
+        "records": [
+            {
+                "story_id": item.get("story_id"),
+                "precision": item.get("precision"),
+                "start_year_ce": item.get("start_year_ce"),
+                "end_year_ce": item.get("end_year_ce"),
+                "event_ids": item.get("event_ids", []),
+                "phase_id": item.get("phase_id"),
+            }
+            for item in sorted(records, key=lambda item: str(item.get("story_id")))
+            if isinstance(item, Mapping)
+        ],
+        "policy": "Immutable snapshot of the completed H0A anchor set; H0A.1 never rewrites it.",
+    }
+    write_json(H0A1_BASELINE_PATH, baseline)
+    return baseline
+
+
+def story_gap_reason(story: Mapping[str, Any], records: list[dict[str, Any]], anchor: Mapping[str, Any]) -> tuple[str, str, list[str], bool]:
+    text = str(story.get("text", ""))
+    mentions = [item for item in story.get("mentions", []) if isinstance(item, Mapping)]
+    # Current SC1 stores mentions globally, so this fallback is filled by the
+    # caller when a Story-local mention list is unavailable.
+    has_identity_block = any(
+        item.get("resolution_status") in {"candidate_for_review", "unresolved"}
+        and bool(item.get("resolution_candidates"))
+        for item in mentions
+    )
+    office_markers = ("丞相", "太傅", "長史", "參軍", "司馬", "刺史", "太守", "尚書", "右軍", "步兵", "中軍", "桓公")
+    ruler_markers = ("武帝", "明帝", "元帝", "元皇帝", "成帝", "惠帝", "簡文帝", "孝武帝")
+    if anchor.get("conflict_flags"):
+        return "source_conflict", "故事层存在互相冲突的直接时间约束，未静默选择一方。", ["direct_story_time"], False
+    if has_identity_block:
+        return "identity_blocked", "人物身份仍有候选／未决状态，相关生平证据不能安全投影到本则。", ["main_text", "liu_annotation", "identity_resolution"], True
+    if any(item.get("relation_to_story") == "later_outcome" for item in records) and not any(item.get("relation_to_story") == "direct_story_time" for item in records):
+        return "evidence_too_broad", "现有线索主要是人物后续命运或背景说明，不能回推为故事发生时间。", ["main_text", "liu_annotation", "biography"], False
+    if any(marker in text for marker in office_markers + ruler_markers):
+        return "local_source_search_gap", "本则含有可能具有时间约束的官称或君主表面，但当前本地活动区间尚不足以安全定年。", ["main_text", "liu_annotation", "jinshu", "sanguozhi", "ztj0"], True
+    if records:
+        return "evidence_too_broad", "已记录的本地证据只提供宽泛背景或人物活动方向，尚不足以约束故事时间。", ["main_text", "liu_annotation", "scene_context", "person_activity", "ztj0"], False
+    return "genuine_unknown", "当前已获取的本地正文、刘注与编年索引没有足够的故事时间约束。", ["main_text", "liu_annotation", "scene_context", "person_activity", "jinshu", "sanguozhi", "ztj0"], False
+
+
 def build_gap_audit(bundle: Mapping[str, Any], anchors: list[dict[str, Any]], evidence: list[dict[str, Any]]) -> dict[str, Any]:
     evidence_by_story: dict[str, list[dict[str, Any]]] = defaultdict(list)
     for record in evidence:
         evidence_by_story[str(record["story_id"])].append(record)
     rows: list[dict[str, Any]] = []
+    story_by_id = {str(item.get("id")): item for item in bundle.get("stories", []) if isinstance(item, Mapping)}
+    global_mentions = defaultdict(list)
+    for item in bundle.get("mentions", []):
+        if isinstance(item, Mapping) and item.get("story_id"):
+            global_mentions[str(item["story_id"])].append(item)
     for anchor in anchors:
         story_id = str(anchor["story_id"])
         records = evidence_by_story.get(story_id, [])
         precision = str(anchor["precision"])
         if precision == "unknown":
-            if anchor.get("conflict_flags"):
-                gap_class = "conflicting_sources"
-            elif any(item.get("relation_to_story") == "later_outcome" for item in records):
-                gap_class = "event_known_date_uncertain"
-            elif any(item.get("relation_to_story") == "earlier_background" for item in records):
-                gap_class = "ambiguous_reference"
-            else:
-                gap_class = "genuine_unknown"
+            story = dict(story_by_id.get(story_id, {}))
+            story["mentions"] = global_mentions.get(story_id, [])
+            gap_class, reason, examined_layers, modeling_possible = story_gap_reason(story, records, anchor)
         elif precision == "phase_only":
             gap_class = "phase_only"
+            reason = "本则有 W3/C0 阶段定位，但没有足够的本地证据细化到年号或事件。"
+            examined_layers = ["main_text", "liu_annotation", "scene_context"]
+            modeling_possible = False
         elif precision == "event_bounded":
             gap_class = "event_known_date_uncertain"
+            reason = anchor.get("rationale", "事件范围已建立，但不主张更细的故事年份。")
+            examined_layers = ["main_text", "liu_annotation", "ztj0"]
+            modeling_possible = False
         else:
             gap_class = "resolved_at_supported_precision"
+            reason = anchor.get("rationale", "")
+            examined_layers = ["main_text", "liu_annotation", "ztj0"]
+            modeling_possible = False
+        clues = [str(item.get("raw_surface")) for item in records if item.get("raw_surface")]
         rows.append(
             {
                 "story_id": story_id,
                 "precision": precision,
                 "gap_class": gap_class,
-                "evidence_record_ids": [str(item["evidence_record_id"]) for item in records],
+                "evidence_record_ids": sorted(str(item["evidence_record_id"]) for item in records),
+                "people_involved": sorted(str(item) for item in story_by_id.get(story_id, {}).get("person_ids", []) if item),
+                "examined_evidence_layers": examined_layers,
+                "reason_unknown": reason if precision == "unknown" else None,
+                "best_available_non_binding_clues": sorted(set(clues)),
+                "additional_local_modeling_possible": modeling_possible if precision == "unknown" else False,
+                "external_source_theoretically_required": bool(precision == "unknown" and gap_class in {"genuine_unknown", "evidence_too_broad", "source_conflict"}),
                 "notes": anchor["rationale"],
             }
         )
@@ -990,7 +1429,14 @@ def build_gap_audit(bundle: Mapping[str, Any], anchors: list[dict[str, Any]], ev
     }
 
 
-def build_metrics(bundle: Mapping[str, Any], evidence: list[dict[str, Any]], events: list[dict[str, Any]], anchors: list[dict[str, Any]], gap: Mapping[str, Any]) -> dict[str, Any]:
+def build_metrics(
+    bundle: Mapping[str, Any],
+    evidence: list[dict[str, Any]],
+    events: list[dict[str, Any]],
+    anchors: list[dict[str, Any]],
+    gap: Mapping[str, Any],
+    baseline: Mapping[str, Any],
+) -> dict[str, Any]:
     precision = Counter(str(item["precision"]) for item in anchors)
     review = Counter(str(item["review_status"]) for item in anchors)
     source_layers = Counter(str(item.get("source_layer")) for item in evidence)
@@ -1022,6 +1468,28 @@ def build_metrics(bundle: Mapping[str, Any], evidence: list[dict[str, Any]], eve
     kaoyi = ztj_manifest.get("kaoyi", {}) if isinstance(ztj_manifest, Mapping) else {}
     event_story_ids = sorted({story_id for event in events for story_id in event.get("linked_story_ids", [])})
     conflicts = sorted({flag for anchor in anchors for flag in anchor.get("conflict_flags", [])})
+    baseline_by_story = {
+        str(item.get("story_id")): item
+        for item in baseline.get("records", [])
+        if isinstance(item, Mapping)
+    }
+    anchors_by_story = {str(item.get("story_id")): item for item in anchors}
+    upgrade_rows = []
+    for story_id in sorted(set(baseline_by_story) & set(anchors_by_story)):
+        before = str(baseline_by_story[story_id].get("precision"))
+        after = str(anchors_by_story[story_id].get("precision"))
+        if before == "unknown" and after != "unknown":
+            upgrade_rows.append(
+                {
+                    "story_id": story_id,
+                    "from": before,
+                    "to": after,
+                    "resolution_basis": anchors_by_story[story_id].get("resolution_basis"),
+                    "evidence_ids": anchors_by_story[story_id].get("evidence_ids", []),
+                }
+            )
+    unknown_after = [item for item in anchors if item.get("precision") == "unknown"]
+    gap_classes = Counter(str(item.get("gap_class")) for item in gap.get("records", []) if item.get("precision") == "unknown")
     return {
         "schema": SCHEMA,
         "stage": "h0a-metrics",
@@ -1061,6 +1529,15 @@ def build_metrics(bundle: Mapping[str, Any], evidence: list[dict[str, Any]], eve
         "frontend_intentionally_unlabeled_count": sum(1 for item in anchors if not item.get("reader_projection", {}).get("show")),
         "gap_class_counts": dict(Counter(str(item["gap_class"]) for item in gap.get("records", []))),
         "unknown_story_ids": list(gap.get("unknown_story_ids", [])),
+        "h0a1": {
+            "baseline_anchor_sha256": baseline.get("source_anchor_sha256"),
+            "baseline_precision_distribution": baseline.get("precision_distribution", {}),
+            "unknown_to_precision_upgrade_counts": dict(Counter(str(item["to"]) for item in upgrade_rows)),
+            "unknown_to_still_unknown": len(unknown_after),
+            "upgrade_count": len(upgrade_rows),
+            "upgrades": upgrade_rows,
+            "remaining_unknown_categories": {key: gap_classes.get(key, 0) for key in ["genuine_unknown", "source_conflict", "identity_blocked", "evidence_too_broad", "local_source_search_gap"]},
+        },
     }
 
 
@@ -1101,6 +1578,12 @@ H0A 不创建 Clan、OfficeTenure、HistoricalCircle、Timeline UI 或完整 His
 ## 当前分布
 
 精度分布：`{json.dumps(metrics.get('precision_distribution', {}), ensure_ascii=False)}`。前端有定位标签的 Story：{metrics.get('frontend_visible_temporal_orientation_count', 0)}。
+
+## H0A.1 缺口缩减
+
+H0A.1 从已完成 H0A 的基线继续工作：基线 unknown 为 {metrics.get('h0a1', {}).get('baseline_precision_distribution', {}).get('unknown', 0)}，本次以故事正文中明确君主／年号、直接事件和南渡语境为优先，不以人物生卒年单独推定故事年份。本次升级 {metrics.get('h0a1', {}).get('upgrade_count', 0)} 则，仍 unknown {metrics.get('h0a1', {}).get('unknown_to_still_unknown', 0)} 则；每一项升级都保留 TemporalEvidence 与 resolution_basis。
+
+04-wenxue-022 的“正始之音”保留为 quoted_ancient_precedent，不误作故事发生年代；06-yaliang-017 的“咸和六年遇害”仍是 later_outcome。
 """,
         encoding="utf-8",
     )
@@ -1117,9 +1600,11 @@ H0A 不创建 Clan、OfficeTenure、HistoricalCircle、Timeline UI 或完整 His
 
 `later_outcome`、`earlier_background` 和古代引述不会自动约束故事时间。多个互相冲突的约束会降级并保留 `conflict_flags`，不会静默选择一个日期。
 
+H0A.1 只从原先 unknown 的故事中寻找本地建模缺口。正文直接君主表面、故事层年号和明确事件可给出在位／事件区间；人物一般生卒年、正文中的 literary comparison、刘注后续命运与章节顺序都不能单独定年。君主表面经过故事局部规则与 ZTJ0 ruler context 双重约束；共享别名、少孤词义冲突和候选人物不会成为时间证据。
+
 ## 前端规则
 
-只投影自然中文标签，例如“东晋 · 苏峻之乱”或“竹林—西晋初”。unknown、phase ID、event-bounded、candidate 和 review_status 永不显示。
+只投影自然中文标签，例如“东晋 · 苏峻之乱”或“竹林—西晋初”。unknown、phase ID、event-bounded、reign_bounded、candidate 和 review_status 永不显示。
 
 ## 非目标
 
@@ -1155,12 +1640,62 @@ H0A 不建立完整年表、不做日级历法、不创建 Clan/OfficeTenure/Tim
 """,
         encoding="utf-8",
     )
+    upgrades = metrics.get("h0a1", {}).get("upgrades", [])
+    upgrade_text = "\n".join(
+        f"- {item.get('story_id')}：{item.get('from')} → {item.get('to')}（{item.get('resolution_basis')}）"
+        for item in upgrades
+    ) or "- 本次没有把 unknown 提升到更高时间分辨率。"
+    remaining = metrics.get("h0a1", {}).get("remaining_unknown_categories", {})
+    H0A1_DOC_PATH.write_text(
+        f"""# H0A.1 时间缺口缩减
+
+## 目标与边界
+
+H0A.1 复用 H0A 的 HistoricalPhase、ReignPeriod、EraYear、TemporalEvidence、PersonActivityAnchor 与 StoryTemporalAnchor；它只审查当前生产 Story 中原本为 unknown 的记录，不建立第二套时间系统，也不下载新史料。
+
+核心原则是区分“本地证据尚未建模”与“现存证据确实不能定年”。人物有已知生卒年、同篇相邻、或一般文化常识，都不能单独把一则《世说》故事提升为具体年份。
+
+## 规则
+
+1. 正文直接点出的年号年可成为 exact_year；正文明确的年号／君主只给出 reign_bounded。
+2. 直接故事事件（例如孙恩贼出吴郡、王敦大将军下至石头、来过江）才可成为 event_bounded；刘注后续命运不回推故事时间。
+3. “正始之音”等文学比较归为 quoted_ancient_precedent，不约束故事时间。
+4. 多个真正适用于故事当下的区间才允许求交；矛盾约束保留冲突并降级，不静默选源。
+5. 仲容、少孤、桓子野、周侯周侯、文度等身份修复先于时间抽取；生产 Person 状态不增加历史身份可信度。
+
+## 本次结果
+
+- H0A 基线 unknown：{metrics.get('h0a1', {}).get('baseline_precision_distribution', {}).get('unknown', 0)}
+- 升级数量：{metrics.get('h0a1', {}).get('upgrade_count', 0)}
+- 升级后仍 unknown：{metrics.get('h0a1', {}).get('unknown_to_still_unknown', 0)}
+- 剩余 unknown 分类：{json.dumps(remaining, ensure_ascii=False)}
+
+升级记录：
+
+{upgrade_text}
+
+## 重点回归
+
+- 05-fangzheng-031 仍以王敦之乱的事件范围表达舞台语境，不从政治冲突生成 Relation。
+- 06-yaliang-017 中庾会咸和六年遇害是 later_outcome，不能把童年场景定在咸和六年。
+- 23-rendan-013 的仲容保持阮咸，不给石苞添加活动或时间证据。
+- 01-dexing-026 的少孤仍是普通叙事词。
+
+## 未解决缺口
+
+genuine_unknown、evidence_too_broad 与 identity_blocked 都是合法结果。local_source_search_gap 只表示本地已有官称／君主表面，未来仍可能通过当前已获取的材料改善；本阶段不以补齐数量为目标。
+
+H0A.1 停在时间证据与缺口审计；不开始 H0B、OfficeTenure、Clan、P4、ES0 或时间线 UI。
+""",
+        encoding="utf-8",
+    )
 
 
 def build() -> dict[str, Any]:
     bundle = read_json(BUNDLE_PATH)
     w3 = read_json(W3_PATH)
     ztj_index = read_json(ZTJ_INDEX_PATH)
+    baseline = load_or_create_h0a1_baseline()
     coordinates = build_coordinates(ztj_index)
     evidence, anchors, _ = build_evidence_and_anchors(bundle, coordinates, w3)
     events = build_events(evidence, ztj_index)
@@ -1177,7 +1712,7 @@ def build() -> dict[str, Any]:
         ]
         anchor["supporting_activity_anchor_ids"] = sorted(set(linked))
     gap = build_gap_audit(bundle, anchors, evidence)
-    metrics = build_metrics(bundle, evidence, events, anchors, gap)
+    metrics = build_metrics(bundle, evidence, events, anchors, gap, baseline)
 
     coordinates_hash = write_json(COORDINATES_PATH, coordinates)
     evidence_hash = write_json(
@@ -1227,6 +1762,7 @@ def build() -> dict[str, Any]:
         "person_activity_anchors": activity_hash,
         "story_temporal_anchors": anchors_hash,
         "gap_audit": gap_hash,
+        "h0a1_baseline": hashlib.sha256(H0A1_BASELINE_PATH.read_bytes()).hexdigest(),
     }
     write_json(METRICS_PATH, metrics)
     write_docs(bundle, coordinates, events, anchors, gap, metrics)

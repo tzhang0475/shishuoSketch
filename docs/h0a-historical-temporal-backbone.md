@@ -5,7 +5,7 @@ H0A 将当前生产 Story 放入有证据支撑的时间分辨率中。它是时
 ## 坐标层
 
 - 产品阶段沿用 W3/C0 的五个稳定 ID；本次保留 5 个阶段定义。
-- 从 ZTJ0 实际纪年标题构建 41 个 ReignPeriod、70 个 EraYear。
+- 从 ZTJ0 实际纪年标题构建 42 个 ReignPeriod、71 个 EraYear。
 - 年号年可在证据确定时归一化为公元年；不做日级传统历法换算。
 
 ## 证据与事件
@@ -17,7 +17,6 @@ H0A 将当前生产 Story 放入有证据支撑的时间分辨率中。它是时
 - `05-fangzheng-031`：王敦举兵相关证据是事件范围证据；伯仁的政治批评仍是本则舞台语境，不生成周顗—王敦 Relation。
 - `06-yaliang-017`：刘注的“咸和六年遇害”记录为 `later_outcome`，不把庾会后来的命运误定为童年场景年份。
 - `05-fangzheng-055`：桓子野／桓伊的身份修复不被时间抽取改写。
-- `23-rendan-013`：裸名“仲容”按本则语境保留为未物化的阮咸；不把石苞的同字 alias 变成 PersonStory 或时间活动锚点。
 - `01-dexing-026`：“少孤”仍是普通叙事词，不恢复孟陋的错误 Mention。
 - W3 的曹魏、竹林—西晋初、西晋后期样本沿用冻结阶段定位，没有虚构精确年份。
 
@@ -31,4 +30,10 @@ H0A 不创建 Clan、OfficeTenure、HistoricalCircle、Timeline UI 或完整 His
 
 ## 当前分布
 
-精度分布：`{"exact_date": 0, "exact_year": 0, "year_range": 0, "event_bounded": 7, "reign_bounded": 0, "phase_only": 22, "unknown": 54}`。前端有定位标签的 Story：29。
+精度分布：`{"exact_date": 0, "exact_year": 0, "year_range": 0, "event_bounded": 10, "reign_bounded": 7, "phase_only": 22, "unknown": 44}`。前端有定位标签的 Story：39。
+
+## H0A.1 缺口缩减
+
+H0A.1 从已完成 H0A 的基线继续工作：基线 unknown 为 54，本次以故事正文中明确君主／年号、直接事件和南渡语境为优先，不以人物生卒年单独推定故事年份。本次升级 10 则，仍 unknown 44 则；每一项升级都保留 TemporalEvidence 与 resolution_basis。
+
+04-wenxue-022 的“正始之音”保留为 quoted_ancient_precedent，不误作故事发生年代；06-yaliang-017 的“咸和六年遇害”仍是 later_outcome。

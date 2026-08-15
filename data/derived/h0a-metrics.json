@@ -6,27 +6,30 @@
     "exact_date": 0,
     "exact_year": 0,
     "year_range": 0,
-    "event_bounded": 7,
-    "reign_bounded": 0,
+    "event_bounded": 10,
+    "reign_bounded": 7,
     "phase_only": 22,
-    "unknown": 54
+    "unknown": 44
   },
   "review_distribution": {
-    "reviewed": 0,
-    "candidate": 83,
+    "reviewed": 7,
+    "candidate": 76,
     "unresolved": 0
   },
   "historical_event_count": 5,
-  "stories_linked_to_events": 13,
+  "stories_linked_to_events": 16,
   "event_story_ids": [
     "01-dexing-023",
     "01-dexing-025",
+    "01-dexing-045",
+    "02-yanyu-036",
     "05-fangzheng-012",
     "05-fangzheng-025",
     "05-fangzheng-031",
     "05-fangzheng-032",
     "06-yaliang-017",
     "08-shangyu-051",
+    "10-guizhen-012",
     "11-jiewu-005",
     "17-shangshi-008",
     "20-shujie-005",
@@ -34,8 +37,8 @@
     "27-jiajue-008"
   ],
   "evidence_counts_by_source_layer": {
-    "shishuo_main": 40,
-    "liu_annotation": 23,
+    "shishuo_main": 50,
+    "liu_annotation": 24,
     "jinshu": 0,
     "sanguozhi_main": 0,
     "pei_annotation": 0,
@@ -45,8 +48,8 @@
   },
   "source_usage_counts": {
     "story_temporal_evidence_records": {
-      "shishuo_main": 40,
-      "liu_annotation": 23,
+      "shishuo_main": 50,
+      "liu_annotation": 24,
       "jinshu": 0,
       "sanguozhi_main": 0,
       "pei_annotation": 0
@@ -64,23 +67,24 @@
       "sanguozhi_pei_annotation_units": 6526
     }
   },
-  "evidence_record_count": 63,
-  "genuine_unknown_count": 54,
+  "evidence_record_count": 74,
+  "genuine_unknown_count": 44,
   "source_conflict_count": 0,
   "conflict_flags": [],
-  "frontend_visible_temporal_orientation_count": 29,
-  "frontend_intentionally_unlabeled_count": 54,
+  "frontend_visible_temporal_orientation_count": 39,
+  "frontend_intentionally_unlabeled_count": 44,
   "gap_class_counts": {
     "phase_only": 22,
-    "genuine_unknown": 46,
-    "event_known_date_uncertain": 15
+    "resolved_at_supported_precision": 7,
+    "event_known_date_uncertain": 10,
+    "evidence_too_broad": 5,
+    "genuine_unknown": 20,
+    "identity_blocked": 9,
+    "local_source_search_gap": 10
   },
   "unknown_story_ids": [
-    "01-dexing-017",
     "01-dexing-026",
-    "01-dexing-045",
     "02-yanyu-035",
-    "02-yanyu-036",
     "02-yanyu-069",
     "02-yanyu-071",
     "02-yanyu-079",
@@ -91,7 +95,6 @@
     "04-wenxue-024",
     "04-wenxue-036",
     "04-wenxue-087",
-    "05-fangzheng-023",
     "05-fangzheng-027",
     "05-fangzheng-028",
     "05-fangzheng-051",
@@ -108,16 +111,11 @@
     "08-shangyu-043",
     "08-shangyu-077",
     "08-shangyu-079",
-    "09-pinzao-006",
-    "09-pinzao-014",
-    "09-pinzao-017",
-    "09-pinzao-022",
     "09-pinzao-026",
     "09-pinzao-030",
     "09-pinzao-036",
     "09-pinzao-045",
     "09-pinzao-063",
-    "10-guizhen-012",
     "14-rongzhi-024",
     "17-shangshi-008",
     "19-xianyuan-026",
@@ -128,15 +126,138 @@
     "25-paidiao-015",
     "25-paidiao-026",
     "25-paidiao-060",
-    "26-qingdi-002",
-    "33-youhui-007"
+    "26-qingdi-002"
   ],
+  "h0a1": {
+    "baseline_anchor_sha256": "cc4e3169e0086d3fb689b101ade6a4a66ba6d646367403d443dd51bcd53ae350",
+    "baseline_precision_distribution": {
+      "exact_date": 0,
+      "exact_year": 0,
+      "year_range": 0,
+      "event_bounded": 7,
+      "reign_bounded": 0,
+      "phase_only": 22,
+      "unknown": 54
+    },
+    "unknown_to_precision_upgrade_counts": {
+      "reign_bounded": 7,
+      "event_bounded": 3
+    },
+    "unknown_to_still_unknown": 44,
+    "upgrade_count": 10,
+    "upgrades": [
+      {
+        "story_id": "01-dexing-017",
+        "from": "unknown",
+        "to": "reign_bounded",
+        "resolution_basis": "explicit_story_local_ruler_reference",
+        "evidence_ids": [
+          "h0a-evidence-3476bfe49601f9edbe2a"
+        ]
+      },
+      {
+        "story_id": "01-dexing-045",
+        "from": "unknown",
+        "to": "event_bounded",
+        "resolution_basis": "explicit_story_event_context",
+        "evidence_ids": [
+          "h0a-evidence-b5798046e0b50ed51c9a"
+        ]
+      },
+      {
+        "story_id": "02-yanyu-036",
+        "from": "unknown",
+        "to": "event_bounded",
+        "resolution_basis": "explicit_story_event_context",
+        "evidence_ids": [
+          "h0a-evidence-6f75ae9586b792bb8ed7",
+          "h0a-evidence-c23f753584dcc55d888b",
+          "h0a-evidence-fd57dc1c856b1dc1830b"
+        ]
+      },
+      {
+        "story_id": "05-fangzheng-023",
+        "from": "unknown",
+        "to": "reign_bounded",
+        "resolution_basis": "explicit_story_local_ruler_reference",
+        "evidence_ids": [
+          "h0a-evidence-5e3b4890a7e3c9505066",
+          "h0a-evidence-a127681a6eb519f0bb19"
+        ]
+      },
+      {
+        "story_id": "09-pinzao-006",
+        "from": "unknown",
+        "to": "reign_bounded",
+        "resolution_basis": "explicit_story_local_reign_reference",
+        "evidence_ids": [
+          "h0a-evidence-7b784f7cba26e506608d",
+          "h0a-evidence-8e84a2d6e26a40d73301"
+        ]
+      },
+      {
+        "story_id": "09-pinzao-014",
+        "from": "unknown",
+        "to": "reign_bounded",
+        "resolution_basis": "explicit_story_local_ruler_reference",
+        "evidence_ids": [
+          "h0a-evidence-d1dc1dfc96d34144af82"
+        ]
+      },
+      {
+        "story_id": "09-pinzao-017",
+        "from": "unknown",
+        "to": "reign_bounded",
+        "resolution_basis": "explicit_story_local_ruler_reference",
+        "evidence_ids": [
+          "h0a-evidence-619c63e5ddbb46ade4b6"
+        ]
+      },
+      {
+        "story_id": "09-pinzao-022",
+        "from": "unknown",
+        "to": "reign_bounded",
+        "resolution_basis": "explicit_story_local_ruler_reference",
+        "evidence_ids": [
+          "h0a-evidence-52e4945a7af3e9bb473e"
+        ]
+      },
+      {
+        "story_id": "10-guizhen-012",
+        "from": "unknown",
+        "to": "event_bounded",
+        "resolution_basis": "explicit_story_event_context",
+        "evidence_ids": [
+          "h0a-evidence-955a64f92c7c1f437e4c",
+          "h0a-evidence-fab5b381b7cbc71698c7"
+        ]
+      },
+      {
+        "story_id": "33-youhui-007",
+        "from": "unknown",
+        "to": "reign_bounded",
+        "resolution_basis": "explicit_story_local_ruler_reference",
+        "evidence_ids": [
+          "h0a-evidence-6318f75bf4855197e61e",
+          "h0a-evidence-d53e8d10b259473f66d1"
+        ]
+      }
+    ],
+    "remaining_unknown_categories": {
+      "genuine_unknown": 20,
+      "source_conflict": 0,
+      "identity_blocked": 9,
+      "evidence_too_broad": 5,
+      "local_source_search_gap": 10
+    }
+  },
   "artifact_hashes": {
-    "temporal_coordinates": "40323559a756a544f775b6477b0d23b14fcebbad0c81cc44a6621ed1115db90d",
-    "temporal_evidence": "06996fe8c22b99bdd3f7dcd072f6e343831365c23f3b39fffb61e89cf926b0c0",
-    "historical_events": "f40f28c953ab98d89225ca7eb3db3f2a3729eb0c86a06ac887e9524f29b701af",
-    "person_activity_anchors": "f186838b1f3e8094a4427739511361f0e0a22f3d190edc73d23f2727efb6f332",
-    "story_temporal_anchors": "cc4e3169e0086d3fb689b101ade6a4a66ba6d646367403d443dd51bcd53ae350",
-    "gap_audit": "e86e23905ee015a66e973ae6bba63b01ded2a9944422782dc1e2c160993d0ae0"
+    "temporal_coordinates": "33b55ba0a3fa921d385440b77811ce65433f8a46d8aa8825c712c292b6dce512",
+    "temporal_evidence": "68bc8432b1a1c2bf87710ca4ca4c3e58330bccb443e3e14933105f0b672a1e3a",
+    "historical_events": "c3c1addcca65be246e818951e4002f9e52fa6d0c2a1105882e7043cb997be5e9",
+    "person_activity_anchors": "ff683e83b7aa65d69dc467328698d5fc4458c4297842f05725dc42e2b4f6d593",
+    "story_temporal_anchors": "b14e5da7a8f912f3f753bce5fc0427fb46edb77578f6a166e13a012011ba46d4",
+    "gap_audit": "45bae55aa0740c61172314fa84e6476643e5bfbc4db528965ca0a5076bbc8cac",
+    "h0a1_baseline": "181fd851f72dab987ea329b63cd354dda3577d04c1c97aa409d29c6c79fc9fc6"
   }
 }

@@ -30,9 +30,30 @@ class StorySceneContextTests(unittest.TestCase):
     def test_scene_card_does_not_expose_internal_relation_model_disclaimer(self) -> None:
         source_text = json.dumps(self.source, ensure_ascii=False)
         bundle_text = (ROOT / "data/derived/sc1-site.json").read_text(encoding="utf-8")
-        for phrase in ("不新增长期人物关系", "不新增人物关系", "不據這段送別文字推定"):
+        for phrase in (
+            "不新增长期人物关系",
+            "不新增人物关系",
+            "不據這段送別文字推定",
+            "正文中被談及而未列入當前參與者的身份，仍留在本則的畫外。",
+            "正文中被谈及而未列入当前参与者的身份，仍留在本则的画外。",
+        ):
             self.assertNotIn(phrase, source_text)
             self.assertNotIn(phrase, bundle_text)
+
+    def test_off_frame_people_render_without_generic_ontology_explanation(self) -> None:
+        w3_source = json.loads(
+            (ROOT / "data/annotation/story-scene-contexts-w3.json").read_text(encoding="utf-8")
+        )
+        w3_story_ids = {record["story_id"] for record in w3_source["records"]}
+        context = next(
+            context
+            for story_id, context in self.derived["contexts"].items()
+            if story_id in w3_story_ids
+            and any(person["scene_role"] != "present" for person in context["people_at_scene"])
+        )
+        self.assertTrue(context["people_at_scene"])
+        self.assertFalse(context["narrative_layers"]["off_frame_context"])
+        self.assertTrue(any(person["scene_role"] != "present" for person in context["people_at_scene"]))
 
     def test_scene_contexts_resolve_only_published_stories_and_people(self) -> None:
         self.assertEqual(validate_source(ROOT), [])

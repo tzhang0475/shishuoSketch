@@ -10,9 +10,11 @@
 
 `later_outcome`、`earlier_background` 和古代引述不会自动约束故事时间。多个互相冲突的约束会降级并保留 `conflict_flags`，不会静默选择一个日期。
 
+H0A.1 只从原先 unknown 的故事中寻找本地建模缺口。正文直接君主表面、故事层年号和明确事件可给出在位／事件区间；人物一般生卒年、正文中的 literary comparison、刘注后续命运与章节顺序都不能单独定年。君主表面经过故事局部规则与 ZTJ0 ruler context 双重约束；共享别名、少孤词义冲突和候选人物不会成为时间证据。
+
 ## 前端规则
 
-只投影自然中文标签，例如“东晋 · 苏峻之乱”或“竹林—西晋初”。unknown、phase ID、event-bounded、candidate 和 review_status 永不显示。
+只投影自然中文标签，例如“东晋 · 苏峻之乱”或“竹林—西晋初”。unknown、phase ID、event-bounded、reign_bounded、candidate 和 review_status 永不显示。
 
 ## 非目标
 

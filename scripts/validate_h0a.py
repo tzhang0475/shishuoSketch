@@ -17,6 +17,8 @@ EVENTS_PATH = ROOT / "data/annotation/historical-events-h0a.json"
 ACTIVITY_PATH = ROOT / "data/annotation/person-activity-anchors-h0a.json"
 ANCHORS_PATH = ROOT / "data/annotation/story-temporal-anchors-h0a.json"
 GAP_PATH = ROOT / "data/derived/h0a-temporal-gap-audit.json"
+METRICS_PATH = ROOT / "data/derived/h0a-metrics.json"
+H0A1_BASELINE_PATH = ROOT / "data/derived/h0a1-baseline.json"
 ZTJ_INDEX_PATH = ROOT / "data/derived/ztj0-chronology-index.json"
 SGZ_PATH = ROOT / "data/derived/sgz0-processed-corpus.json"
 
@@ -34,6 +36,8 @@ def validate() -> list[str]:
     activity_doc = read_json(ACTIVITY_PATH)
     anchors_doc = read_json(ANCHORS_PATH)
     gap = read_json(GAP_PATH)
+    metrics = read_json(METRICS_PATH)
+    baseline = read_json(H0A1_BASELINE_PATH)
     ztj = read_json(ZTJ_INDEX_PATH)
     sgz = read_json(SGZ_PATH)
 
@@ -58,6 +62,15 @@ def validate() -> list[str]:
     ztj_block_ids = {str(item.get("block_id")) for item in ztj.get("records", []) if isinstance(item, Mapping)}
     reign_ids = {str(item.get("reign_id")) for item in coordinates.get("reign_periods", []) if isinstance(item, Mapping)}
     era_year_ids = {str(item.get("era_year_id")) for item in coordinates.get("era_years", []) if isinstance(item, Mapping)}
+    ruler_context_ids = {str(item.get("ruler_context_id")) for item in coordinates.get("ruler_contexts", []) if isinstance(item, Mapping)}
+    for ruler_context in coordinates.get("ruler_contexts", []):
+        if not isinstance(ruler_context, Mapping):
+            errors.append("invalid ruler context record")
+            continue
+        if ruler_context.get("start_year_ce") is None or ruler_context.get("end_year_ce") is None or ruler_context["start_year_ce"] > ruler_context["end_year_ce"]:
+            errors.append(f"Ruler context interval invalid: {ruler_context.get('ruler_context_id')}")
+        if any(str(item) not in reign_ids for item in ruler_context.get("reign_ids", [])):
+            errors.append(f"Ruler context ReignPeriod missing: {ruler_context.get('ruler_context_id')}")
     for reign in coordinates.get("reign_periods", []):
         if not isinstance(reign, Mapping):
             errors.append("invalid ReignPeriod record")
@@ -105,6 +118,23 @@ def validate() -> list[str]:
             errors.append(f"TemporalEvidence source span invalid: {record.get('evidence_record_id')}")
         if record.get("source_evidence_ids") and any(str(item) not in evidence_ids for item in record.get("source_evidence_ids", [])):
             errors.append(f"TemporalEvidence source Evidence missing: {record.get('evidence_record_id')}")
+        constraint = record.get("temporal_constraint")
+        if constraint is not None:
+            if not isinstance(constraint, Mapping):
+                errors.append(f"TemporalEvidence constraint invalid: {record.get('evidence_record_id')}")
+            else:
+                start_constraint = constraint.get("start_year_ce")
+                end_constraint = constraint.get("end_year_ce")
+                if start_constraint is None or end_constraint is None or start_constraint > end_constraint:
+                    errors.append(f"TemporalEvidence constraint interval invalid: {record.get('evidence_record_id')}")
+                if constraint.get("applicability") not in {"direct_story_time", "event_context"}:
+                    errors.append(f"TemporalEvidence non-binding constraint promoted: {record.get('evidence_record_id')}")
+        candidate = record.get("normalized_candidate")
+        if isinstance(candidate, Mapping) and candidate.get("ruler_context_id") is not None and str(candidate.get("ruler_context_id")) not in ruler_context_ids:
+            errors.append(f"TemporalEvidence ruler context missing: {record.get('evidence_record_id')}")
+        if record.get("relation_to_story") == "quoted_ancient_precedent" and record.get("evidence_type") in {"reign_reference", "era_year"}:
+            if record.get("relation_to_story") == "direct_story_time":
+                errors.append(f"quoted precedent incorrectly binds Story time: {record.get('evidence_record_id')}")
 
     event_records = events_doc.get("records", [])
     event_ids = {str(item.get("event_id")) for item in event_records if isinstance(item, Mapping)}
@@ -152,6 +182,8 @@ def validate() -> list[str]:
             errors.append(f"StoryTemporalAnchor phase missing: {story_id}")
         if anchor.get("reign_id") is not None and str(anchor.get("reign_id")) not in reign_ids:
             errors.append(f"StoryTemporalAnchor ReignPeriod missing: {story_id}")
+        if anchor.get("ruler_context_id") is not None and str(anchor.get("ruler_context_id")) not in ruler_context_ids:
+            errors.append(f"StoryTemporalAnchor ruler context missing: {story_id}")
         if any(str(item) not in era_year_ids for item in anchor.get("era_year_ids", [])):
             errors.append(f"StoryTemporalAnchor EraYear missing: {story_id}")
         start = anchor.get("start_year_ce")
@@ -161,8 +193,27 @@ def validate() -> list[str]:
         precision = str(anchor.get("precision"))
         if precision == "event_bounded" and not anchor.get("event_ids"):
             errors.append(f"event_bounded Story lacks HistoricalEvent: {story_id}")
+        if precision == "reign_bounded":
+            if anchor.get("reign_id") is None and anchor.get("ruler_context_id") is None:
+                errors.append(f"reign_bounded Story lacks ReignPeriod or ruler context: {story_id}")
+            if not isinstance(start, int) or not isinstance(end, int):
+                errors.append(f"reign_bounded Story lacks bounded interval: {story_id}")
+            direct_reign_records = [
+                item for item in evidence_records
+                if isinstance(item, Mapping)
+                and item.get("story_id") == story_id
+                and item.get("evidence_type") == "reign_reference"
+                and item.get("relation_to_story") == "direct_story_time"
+            ]
+            if not direct_reign_records:
+                errors.append(f"reign_bounded Story lacks direct local reign evidence: {story_id}")
         if precision == "phase_only" and (start is not None or end is not None):
             errors.append(f"phase_only Story has invented year bounds: {story_id}")
+        if precision == "year_range":
+            if not isinstance(start, int) or not isinstance(end, int) or start == end:
+                errors.append(f"year_range Story lacks a genuine interval: {story_id}")
+            if len(anchor.get("temporal_constraint_evidence_ids", [])) < 2:
+                errors.append(f"year_range Story lacks intersected constraints: {story_id}")
         if precision == "exact_year":
             if not isinstance(start, int) or start != end or not anchor.get("era_year_ids"):
                 errors.append(f"exact_year Story lacks deterministic EraYear: {story_id}")
@@ -191,6 +242,21 @@ def validate() -> list[str]:
                 errors.append(f"frontend temporal projection missing: {story_id}")
         elif "temporal_orientation" in story:
             errors.append(f"unknown Story must not project a temporal label: {story_id}")
+
+    baseline_story_ids = {str(item.get("story_id")) for item in baseline.get("records", []) if isinstance(item, Mapping)}
+    if baseline_story_ids != story_ids:
+        errors.append("H0A.1 baseline Story set differs from current production Story set")
+    baseline_by_story = {str(item.get("story_id")): item for item in baseline.get("records", []) if isinstance(item, Mapping)}
+    for upgrade in metrics.get("h0a1", {}).get("upgrades", []):
+        story_id = str(upgrade.get("story_id"))
+        if baseline_by_story.get(story_id, {}).get("precision") != "unknown":
+            errors.append(f"H0A.1 upgrade did not start from unknown: {story_id}")
+        if not upgrade.get("evidence_ids"):
+            errors.append(f"H0A.1 upgrade lacks evidence: {story_id}")
+        if upgrade.get("to") == "phase_only" and upgrade.get("resolution_basis") == "w3_frozen_phase_orientation":
+            errors.append(f"H0A.1 phase upgrade is W3-only: {story_id}")
+    if metrics.get("h0a1", {}).get("unknown_to_still_unknown") != len(gap.get("unknown_story_ids", [])):
+        errors.append("H0A.1 unknown count does not match gap audit")
 
     if len(sgz.get("records", [])) == 0 or int(sgz.get("main_text_unit_count", 0)) <= 0 or int(sgz.get("pei_annotation_unit_count", 0)) <= 0:
         errors.append("SGZ0 Chen Shou / Pei Songzhi layers are not present")

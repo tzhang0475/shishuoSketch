@@ -172,7 +172,11 @@ def build() -> dict[str, Any]:
                 "event_background": [claim(focus, evidence_id)],
                 "narrative_layers": {
                     "scene_focus": [claim(focus, evidence_id)],
-                    "off_frame_context": [claim("正文中被谈及而未列入当前参与者的身份，仍留在本则的画外。", evidence_id)] if discussed else [],
+                    # Off-frame identities are rendered from people_at_scene
+                    # below.  Do not add a generic ontology explanation as
+                    # reader-facing prose; only Story-specific claims belong
+                    # in this layer.
+                    "off_frame_context": [],
                     "historical_ground": [],
                     "resonance": [claim(RESONANCE[story_id], evidence_id, "inferred")] if story_id in RESONANCE else [],
                 },
