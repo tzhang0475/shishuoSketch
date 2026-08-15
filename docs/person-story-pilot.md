@@ -12,9 +12,9 @@ This is deterministic navigation/index data for the unified materialized Shishuo
 
 ## Summary
 
-- primary people: 49
+- primary people: 74
 - supporting people: 1
-- reviewed PersonStoryLinks: 699
+- reviewed PersonStoryLinks: 876
 - candidate PersonStoryLinks: 5
 - candidate contextual mentions retained: 28
 - reader-ready linked Stories: 1
@@ -5472,26 +5472,1191 @@ No Story is listed as directly participating unless a future reviewed presence e
 (大禍唯固三陽可以有後故希求鎮山陽弟友爲東/忌之諷免希官遂奔于暨陽初郭璞筮冰子孫必有)
     ```
 
+### 荀顗 (`person-051`)
+
+- directly participating Stories: none currently classified; main-text appearance is retained as `mentioned` pending explicit participation review.
+- reviewed linked Stories: 4; reader-ready: 0; candidate links: 0; candidate contextual Mentions: 0
+- main-text presence:
+  - `09-pinzao-006` · 品藻第九 · reviewed · reader_ready=false · surface: 荀顗
+    ```text
+正始中人士比論以五荀方五陳荀淑方陳寔荀靖
+方陳諶
+
+荀爽方陳紀荀彧方陳群
+
+
+荀顗方陳泰
+
+又以八裴方八王裴徽方王祥裴楷
+方王夷甫裴康方王綏
+裴綽方王澄裴
+瓉方王敦裴遐方王導裴
+頠方王戎裴邈方王玄
+
+    ```
+- Liu-annotation-only presence:
+  - `01-dexing-015` · 德行第一 · reviewed · reader_ready=false · surface: 景倩
+    ```text
+(之矣可舉近世能慎者誰乎吾乃舉故太尉茍景倩/慎之道相須而成必不得已慎乃為大上曰卿言得)
+    ```
+  - `02-yanyu-020` · 言語第二 · reviewed · reader_ready=false · surface: 荀顗
+    ```text
+(雅有曾祖寵之風遷尚書令為荀顗所害/郎出為冀州刺史晉諸公贊曰奮體量清)
+    ```
+  - `02-yanyu-099` · 言語第二 · reviewed · reader_ready=false · surface: 荀顗
+    ```text
+(定法制樂則/荀顗荀朂修)
+    ```
+
+### 祖約 (`person-052`)
+
+- directly participating Stories: none currently classified; main-text appearance is retained as `mentioned` pending explicit participation review.
+- reviewed linked Stories: 7; reader-ready: 0; candidate links: 0; candidate contextual Mentions: 0
+- main-text presence:
+  - `06-yaliang-015` · 雅量第六 · reviewed · reader_ready=false · surface: 士少、祖士少、祖約
+    ```text
+祖士少好財阮遥集好屐並恒自經營同是一累而
+未判其得失
+
+
+人有詣祖見料視財物客至屏當未盡餘兩小簏
+箸背後傾身障之意未能平或有詣阮見自吹火蠟
+屐因歎曰未知一生當箸幾量屐神色閑畼於是勝
+負始
+    ```
+  - `08-shangyu-057` · 賞譽第八 · reviewed · reader_ready=false · surface: 士少、祖約
+    ```text
+王丞相招祖約夜語至曉不眠明旦有客公頭鬢未
+理亦小倦客曰公昨如是似失眠公曰昨與士少語
+遂使人忘疲
+
+    ```
+  - `08-shangyu-088` · 賞譽第八 · reviewed · reader_ready=false · surface: 祖士少
+    ```text
+王右軍道謝萬石在林澤中爲自遒上歎林公器朗
+神儁道祖士少風領毛骨恐没世
+不復見如此人道劉真長標雲柯而不扶踈
+
+
+    ```
+  - `08-shangyu-132` · 賞譽第八 · reviewed · reader_ready=false · surface: 士少
+    ```text
+王子猷説世目士少爲朗我家亦以爲徹朗
+
+
+
+    ```
+  - `14-rongzhi-022` · 容止第十四 · reviewed · reader_ready=false · surface: 祖士少
+    ```text
+祖士少見衛君長云此人有旄仗下形
+
+    ```
+- Liu-annotation-only presence:
+  - `03-zhengshi-011` · 政事第三 · reviewed · reader_ready=false · surface: 祖約
+    ```text
+(以衆㑹峻既克京師拜丹陽尹後以罪誅/栁妻祖逖子渙女蘇峻招祖約為逆約遣栁)
+    ```
+  - `14-rongzhi-023` · 容止第十四 · reviewed · reader_ready=false · surface: 祖約
+    ```text
+(臣官陶侃祖約不在其例侃約疑亮寢遺詔也中/徐廣晉紀曰肅祖遺詔庾亮王導輔㓜主而進大)
+    ```
+
+### 王廙 (`person-053`)
+
+- directly participating Stories: none currently classified; main-text appearance is retained as `mentioned` pending explicit participation review.
+- reviewed linked Stories: 5; reader-ready: 0; candidate links: 0; candidate contextual Mentions: 0
+- main-text presence:
+  - `36-chouxi-003` · 仇隟第三十六 · reviewed · reader_ready=false · surface: 世將、王廙
+    ```text
+王大將軍執司馬愍王夜遣世將載王於車而殺之
+當時不盡知也
+
+
+雖愍王家亦
+未之皆悉而無忌兄弟皆稺
+
+王胡之與無忌長甚相暱胡之甞共
+遊無忌入告母請為饌母流涕曰王敦昔肆酷汝父
+假手世將
+
+吾所以積年不告汝
+者王氏
+    ```
+- Liu-annotation-only presence:
+  - `02-yanyu-006` · 言語第二 · reviewed · reader_ready=false · surface: 王廙
+    ```text
+(辭曰金至/王廙注繋)
+    ```
+  - `02-yanyu-081` · 言語第二 · reviewed · reader_ready=false · surface: 王廙
+    ```text
+(齡琅邪臨沂人王廙之子/王胡之别傳曰胡之字脩)
+    ```
+  - `08-shangyu-004` · 賞譽第八 · reviewed · reader_ready=false · surface: 世將
+    ```text
+(覽洽聞金玉其行知世將亂避地遼東公孫度厚禮/泣耳師惻然曰苟欲學不須資也於是就業長則博)
+    ```
+  - `36-chouxi-004` · 仇隟第三十六 · reviewed · reader_ready=false · surface: 王廙
+    ```text
+(其事且王廙之害司馬丞遐邇共悉脩齡兄弟豈容/詔以贖論前章既言無忌母告之而此章復云客叙)
+    ```
+
+### 王隱 (`person-054`)
+
+- directly participating Stories: none currently classified; main-text appearance is retained as `mentioned` pending explicit participation review.
+- reviewed linked Stories: 47; reader-ready: 0; candidate links: 0; candidate contextual Mentions: 0
+- main-text presence:
+  - none
+- Liu-annotation-only presence:
+  - `01-dexing-012` · 德行第一 · reviewed · reader_ready=false · surface: 王隱
+    ```text
+(先范陽人也累遷司空/王隱晉書曰張華字茂)
+    ```
+  - `01-dexing-016` · 德行第一 · reviewed · reader_ready=false · surface: 王隱
+    ```text
+(怨徙上虞移譙國銍縣以出自㑹稽取國一支音同/康字叔夜譙國銍人王隱晉書曰嵇本姓奚其先避)
+    ```
+  - `01-dexing-017` · 德行第一 · reviewed · reader_ready=false · surface: 王隱
+    ```text
+(字仲雄東萊掖人/王隱晉書曰劉毅)
+    ```
+  - `01-dexing-026` · 德行第一 · reviewed · reader_ready=false · surface: 王隱
+    ```text
+(書曰祖/王隱晉)
+    ```
+  - `01-dexing-028` · 德行第一 · reviewed · reader_ready=false · surface: 王隱
+    ```text
+(德攸遺其驢馬䕶送令得逸王隱晉書曰攸以路逺/老姥作粥失火延逸罪應萬死勒知遣之所誣胡厚)
+    ```
+  - `01-dexing-043` · 德行第一 · reviewed · reader_ready=false · surface: 王隱
+    ```text
+(字延祖譙國銍/王隱晉書曰紹)
+    ```
+  - `02-yanyu-022` · 言語第二 · reviewed · reader_ready=false · surface: 王隱
+    ```text
+(朝太康中本州從事舉秀才王隱晉書曰洪/洪集録曰洪字叔開吳郡人有才辯初仕呉)
+    ```
+  - `02-yanyu-035` · 言語第二 · reviewed · reader_ready=false · surface: 王隱
+    ```text
+(中山魏昌人祖邁有經/王隱晉書曰琨字越石)
+    ```
+  - `02-yanyu-043` · 言語第二 · reviewed · reader_ready=false · surface: 王隱
+    ```text
+(字君平㑹稽山隂/王隱晉書曰孔坦)
+    ```
+  - `02-yanyu-047` · 言語第二 · reviewed · reader_ready=false · surface: 王隱
+    ```text
+(拜不名劒履上殿進太尉贈大司馬謚桓公按王隱/廣荆三州刺史加羽葆鼓吹封長沙郡公大將軍贊)
+    ```
+  - `03-zhengshi-006` · 政事第三 · reviewed · reader_ready=false · surface: 王隱
+    ```text
+(文和滎陽開封人/王隱晉書曰冲字)
+    ```
+  - `03-zhengshi-008` · 政事第三 · reviewed · reader_ready=false · surface: 王隱
+    ```text
+(晉書曰時以紹父康被法選官不敢舉年二十八山/晉諸公賛曰康遇事後二十年紹乃爲濤所㧞王隱)
+    ```
+  - `04-wenxue-013` · 文學第四 · reviewed · reader_ready=false · surface: 王隱
+    ```text
+(琅邪人魏雍州刺史緒/王隱晉書曰厷字茂逺)
+    ```
+  - `04-wenxue-068` · 文學第四 · reviewed · reader_ready=false · surface: 王隱
+    ```text
+(嵩曾孫也祖叔獻灞陵令父叔侯舉孝廉謐/王隱晉書曰謐字士安安定朝那人漢太尉)
+    ```
+  - `04-wenxue-073` · 文學第四 · reviewed · reader_ready=false · surface: 王隱
+    ```text
+(使詣洛廣子孫多在洛慮害乃自殺摰虞字仲治京/王隱晉書曰廣字季思東平人拜成都王為太弟欲)
+    ```
+  - `04-wenxue-076` · 文學第四 · reviewed · reader_ready=false · surface: 王隱
+    ```text
+(字景純河東聞喜/王隱晉書曰郭璞)
+    ```
+  - `04-wenxue-079` · 文學第四 · reviewed · reader_ready=false · surface: 王隱
+    ```text
+(非益也是以古人謂其屋下架屋/王隱論楊雄太玄經曰玄經雖妙)
+    ```
+  - `05-fangzheng-012` · 方正第五 · reviewed · reader_ready=false · surface: 王隱
+    ```text
+(元凱京兆杜陵人/王隱晉書曰預字)
+    ```
+  - `05-fangzheng-016` · 方正第五 · reviewed · reader_ready=false · surface: 王隱
+    ```text
+(門郎護軍將軍按王隱孫盛不與故君相聞議曰昔/春秋曰雄字茂伯河内人世語曰雄有節槩仕至黄)
+    ```
+  - `05-fangzheng-034` · 方正第五 · reviewed · reader_ready=false · surface: 王隱
+    ```text
+(廣掖人少有才學仕郡主/王隱晉書曰峻字子高長)
+    ```
+  - `05-fangzheng-037` · 方正第五 · reviewed · reader_ready=false · surface: 王隱
+    ```text
+(平陶侃欲將坦上用/按王隱晉書蘇峻事)
+    ```
+  - `05-fangzheng-039` · 方正第五 · reviewed · reader_ready=false · surface: 王隱
+    ```text
+(而遣之王隱晉書亦同按二書所敘則有惠於陶是/敦敦陳兵欲害侃敦咨議參軍梅陶諫敦乃止厚礼)
+    ```
+  - `05-fangzheng-043` · 方正第五 · reviewed · reader_ready=false · surface: 王隱
+    ```text
+(方直而有雅望/王隱晉書曰坦)
+    ```
+  - `06-yaliang-002` · 雅量第六 · reviewed · reader_ready=false · surface: 王隱
+    ```text
+(太學生數千人請之于/王隱晉書曰康之下獄)
+    ```
+  - `07-shijian-013` · 識鑒第七 · reviewed · reader_ready=false · surface: 王隱
+    ```text
+(州刺史王隱晉書曰朗有器識才量善能當世仕至/字世彦弘農人楊氏譜曰朗祖囂典軍校尉父淮冀)
+    ```
+  - `08-shangyu-005` · 賞譽第八 · reviewed · reader_ready=false · surface: 王隱
+    ```text
+(少清明曉悟/王隱晉書曰戎)
+    ```
+  - `08-shangyu-017` · 賞譽第八 · reviewed · reader_ready=false · surface: 王隱
+    ```text
+(城人㓜孤爲外氏寗家所養寗氏起宅相者曰當出/欲以我處季孟之間乎王隱晉書曰魏舒字陽元任)
+    ```
+  - `08-shangyu-027` · 賞譽第八 · reviewed · reader_ready=false · surface: 王隱
+    ```text
+(好人倫情無所撃/王隱晉書曰澄通朗)
+    ```
+  - `08-shangyu-036` · 賞譽第八 · reviewed · reader_ready=false · surface: 王隱
+    ```text
+(初到洛下于禄求榮永嘉中洛/王隱晉書曰董養字仲道太始)
+    ```
+  - `09-pinzao-008` · 品藻第九 · reviewed · reader_ready=false · surface: 王隱
+    ```text
+(恢字弘武汝南/王隱晉書曰周)
+    ```
+  - `10-guizhen-009` · 規箴第十 · reviewed · reader_ready=false · surface: 王隱
+    ```text
+(貨利之事王隱晉書曰夷甫求富貴得冨貴資財山/秋曰夷甫善施舍父時有假貸者皆與焚券未嘗謀)
+    ```
+  - `17-shangshi-004` · 傷逝第十七 · reviewed · reader_ready=false · surface: 王隱
+    ```text
+(蚤亡戎過傷痛不許人求之遂至老無/王隱晉書曰戎子綏欲取裴遁女綏既)
+    ```
+  - `18-qiyi-001` · 棲逸第十八 · reviewed · reader_ready=false · surface: 王隐
+    ```text
+(曰孫登即阮籍所見者也嵇康執弟子禮而師焉魏/事在獄為詩自責云昔慚下惠今愧孫登王隐晉書)
+    ```
+  - `19-xianyuan-011` · 賢媛第十九 · reviewed · reader_ready=false · surface: 王隱
+    ```text
+(曰忍寒我當作三公不知卿堪為夫人否耳/之度王隱晉書曰韓氏有才識濤未仕時戲之)
+    ```
+  - `19-xianyuan-013` · 賢媛第十九 · reviewed · reader_ready=false · surface: 王隱
+    ```text
+(城陽太守郭配女名槐李禁錮解詔充置左右夫人/㫁不得往還而王隱晉書亦云充既與李絶婚更取)
+    ```
+  - `19-xianyuan-014` · 賢媛第十九 · reviewed · reader_ready=false · surface: 王隐
+    ```text
+(典式八篇王隐晉書曰賈后字南風爲趙王所誅/亦才明即齊王妃婦人集曰李氏至樂浪遺二女)
+    ```
+  - `19-xianyuan-019` · 賢媛第十九 · reviewed · reader_ready=false · surface: 王隱
+    ```text
+(俊也王隱晉書曰侃母既截髪供客聞者歎曰非此/章顧榮或責羊晫曰君奈何與小人同輿晫曰此寒)
+    ```
+  - `20-shujie-008` · 術解第二十 · reviewed · reader_ready=false · surface: 王隱
+    ```text
+(消災轉禍扶厄/王隱晉書曰璞)
+    ```
+  - `23-rendan-008` · 任誕第二十三 · reviewed · reader_ready=false · surface: 王隱
+    ```text
+(親生不相識徃哭盡哀而去其逹而無檢皆此類也/王隱晉書曰籍鄰家處子有才色未嫁而卒籍與無)
+    ```
+  - `25-paidiao-044` · 排調第二十五 · reviewed · reader_ready=false · surface: 王隱
+    ```text
+(巴西安漢人好學善著述仕至中庶子初壽父爲馬/功葢應變將略非其所長也王隱晉書曰壽字承祚)
+    ```
+  - `26-qingdi-004` · 輕詆第二十六 · reviewed · reader_ready=false · surface: 王隱
+    ```text
+(乎王隱晉書戴洋傳曰丹陽太守王導問洋得病七/下公以識度裁之囂言自息豈或回貳有扇塵之事)
+    ```
+  - `27-jiajue-009` · 假譎第二十七 · reviewed · reader_ready=false · surface: 王隱
+    ```text
+(興二年嶠為劉/王隱晉書曰建)
+    ```
+  - `29-jianshe-002` · 儉嗇第二十九 · reviewed · reader_ready=false · surface: 王隱
+    ```text
+(曰戎性至/王隱晉書)
+    ```
+  - `29-jianshe-003` · 儉嗇第二十九 · reviewed · reader_ready=false · surface: 王隱
+    ```text
+(之望不重王隱晉書曰戎好治生園田周徧天下翁/要不治儀望自遇甚薄而産業過豐論者以為台輔)
+    ```
+  - `30-taichi-001` · 汰侈第三十 · reviewed · reader_ready=false · surface: 王隱
+    ```text
+(荆州刺史劫奪殺人/王隱晉書曰石崇為)
+    ```
+  - `36-chouxi-001` · 仇隟第三十六 · reviewed · reader_ready=false · surface: 王隱
+    ```text
+(腹心撓亂關中建毎匡正由是有隟王隱晉書曰石/堅石初建為馮翊太守趙王倫為征西將軍孫秀為)
+    ```
+  - `36-chouxi-004` · 仇隟第三十六 · reviewed · reader_ready=false · surface: 王隱
+    ```text
+(人璩曽孫也為人弘長有淹度飾之/王隱晉書曰應詹字思逺汝南南頓)
+    ```
+
+### 氾騰 (`person-055`)
+
+- directly participating Stories: none currently classified; main-text appearance is retained as `mentioned` pending explicit participation review.
+- reviewed linked Stories: 3; reader-ready: 0; candidate links: 0; candidate contextual Mentions: 0
+- main-text presence:
+  - `07-shijian-027` · 識鑒第七 · reviewed · reader_ready=false · surface: 無忌
+    ```text
+車胤父作南平郡功曹太守王胡之避司馬無忌之
+難置郡于酆隂是時胤十餘歲胡之每出嘗於籬中
+見而異焉謂胤父曰此兒當致高名後遊集恒命之
+胤長又爲桓宣武所知清通於多士之世官至選曹
+尚書
+
+
+
+
+
+    ```
+  - `36-chouxi-003` · 仇隟第三十六 · reviewed · reader_ready=false · surface: 無忌
+    ```text
+王大將軍執司馬愍王夜遣世將載王於車而殺之
+當時不盡知也
+
+
+雖愍王家亦
+未之皆悉而無忌兄弟皆稺
+
+王胡之與無忌長甚相暱胡之甞共
+遊無忌入告母請為饌母流涕曰王敦昔肆酷汝父
+假手世將
+
+吾所以積年不告汝
+者王氏門彊汝兄弟尚幼不欲使此聲著葢以避禍
+耳無忌驚號抽刃而出胡之去
+    ```
+- Liu-annotation-only presence:
+  - `36-chouxi-004` · 仇隟第三十六 · reviewed · reader_ready=false · surface: 無忌
+    ```text
+(其事且王廙之害司馬丞遐邇共悉脩齡兄弟豈容/詔以贖論前章既言無忌母告之而此章復云客叙)
+    ```
+
+### 李重 (`person-056`)
+
+- directly participating Stories: none currently classified; main-text appearance is retained as `mentioned` pending explicit participation review.
+- reviewed linked Stories: 3; reader-ready: 0; candidate links: 0; candidate contextual Mentions: 0
+- main-text presence:
+  - `18-qiyi-004` · 棲逸第十八 · reviewed · reader_ready=false · surface: 茂曽
+    ```text
+李廞是茂曽弟五子清貞有逺操而少羸病不肯婚
+宦居在臨海住兄侍中墓下既有髙名王丞相欲招
+禮之故辟為府掾廞得牋命笑曰茂弘乃復以一爵
+假人
+
+
+
+
+    ```
+  - `19-xianyuan-017` · 賢媛第十九 · reviewed · reader_ready=false · surface: 李重
+    ```text
+李平陽秦州子中夏名
+士于時以比王夷甫孫秀初欲立威權咸云樂令名
+望不可殺減李重者又不足殺
+
+遂逼重自裁初重在家
+有人走從門入出髻中䟽示重重看之色動入内示
+其女女直呌絶了其意出則自裁
+
+此女甚高明重每咨焉
+
+
+    ```
+- Liu-annotation-only presence:
+  - `09-pinzao-046` · 品藻第九 · reviewed · reader_ready=false · surface: 李重
+    ```text
+(鍾武人少以清尚見稱歴吏部/晉諸公賛曰李重字茂重江夏)
+    ```
+
+### 沈充 (`person-057`)
+
+- directly participating Stories: none currently classified; main-text appearance is retained as `mentioned` pending explicit participation review.
+- reviewed linked Stories: 3; reader-ready: 0; candidate links: 0; candidate contextual Mentions: 0
+- main-text presence:
+  - `06-yaliang-018` · 雅量第六 · reviewed · reader_ready=false · surface: 沈充
+    ```text
+禇公於章安令遷太尉記室㕘軍
+
+名字巳顯而位微人未多識公東出乗估客船
+送故吏數人投錢唐亭住
+爾時吳興沈充爲縣令當送客過浙
+江客出亭吏驅公移牛屋下潮水至沈令起彷徨問
+牛屋下是何物人吏云昨有一傖父來寄亭中
+有尊貴客權移之令有酒色因遥問傖父
+欲食䴵不姓何等可共語禇因舉手答曰河南禇季
+野逺近
+    ```
+  - `10-guizhen-016` · 規箴第十 · reviewed · reader_ready=false · surface: 士居、沈充
+    ```text
+蘇峻東征沈充
+
+
+請吏部郎陸邁與俱
+將至吳密勑左右令入閶門放火以示威
+陸知其意謂峻曰吳治平未久必將有亂若爲亂階
+請從我家始峻遂止
+
+    ```
+- Liu-annotation-only presence:
+  - `09-pinzao-013` · 品藻第九 · reviewed · reader_ready=false · surface: 沈充
+    ```text
+(吳郡果爲沈充所殺/然象以齒䘮身後爲)
+    ```
+
+### 鍾雅 (`person-058`)
+
+- directly participating Stories: none currently classified; main-text appearance is retained as `mentioned` pending explicit participation review.
+- reviewed linked Stories: 2; reader-ready: 0; candidate links: 0; candidate contextual Mentions: 0
+- main-text presence:
+  - `03-zhengshi-011` · 政事第三 · reviewed · reader_ready=false · surface: 彦胄、鍾雅
+    ```text
+成帝在石頭任讓在帝前
+戮侍中鍾雅
+
+右衛將軍劉超
+
+
+帝泣曰
+還我侍中讓不奉詔遂斬超雅
+事平之後陶公與讓有
+舊欲宥之許栁
+兒思妣
+者至佳諸公欲全之若全思妣則不得不
+為陶全讓於是欲并宥之事奏帝曰讓是殺我侍中
+
+者不
+    ```
+  - `05-fangzheng-034` · 方正第五 · reviewed · reader_ready=false · surface: 鍾雅
+    ```text
+蘇峻既至石頭百僚奔散
+
+
+
+
+唯侍中鍾雅獨在帝側或謂鍾曰見可
+而進知難而退古之道也君性亮直必不容於寇讎
+何不用隨時之宜而坐待其弊邪鍾曰國亂不能匡
+君危不能濟而各遜遁以求免吾懼董狐將執簡而
+進矣
+
+    ```
+- Liu-annotation-only presence:
+  - none
+
+### 孫盛 (`person-059`)
+
+- directly participating Stories: none currently classified; main-text appearance is retained as `mentioned` pending explicit participation review.
+- reviewed linked Stories: 22; reader-ready: 0; candidate links: 0; candidate contextual Mentions: 0
+- main-text presence:
+  - `02-yanyu-049` · 言語第二 · reviewed · reader_ready=false · surface: 孫盛、安國
+    ```text
+孫盛為庾公記室叅軍
+從獵將其二兒俱行庾公不
+
+知忽於獵塲見齊莊時年七八歳庾謂曰君亦復來
+邪應聲荅曰所謂無小無大從公于邁
+
+    ```
+  - `04-wenxue-025` · 文學第四 · reviewed · reader_ready=false · surface: 孫安國、孫盛
+    ```text
+禇季野語孫安國云北人學問淵綜廣博
+孫荅曰南人學問清通簡要支道林聞之曰聖賢固
+所忘言自中人以還北人㸔書如顯處視月南人學
+問如牖中窺日
+
+
+    ```
+  - `04-wenxue-031` · 文學第四 · reviewed · reader_ready=false · surface: 孫安國、孫盛
+    ```text
+孫安國徃殷中軍許共論徃反精苦客主無間左右
+進食冷而復煗者數四彼我奮擲麈尾悉脫落滿餐
+飯中賓主遂至莫忘食殷乃語孫曰卿莫作强口馬
+我當穿卿鼻孫曰卿不見决鼻牛人當穿卿頰
+
+
+    ```
+  - `04-wenxue-056` · 文學第四 · reviewed · reader_ready=false · surface: 孫安國
+    ```text
+殷中軍孫安國王謝能言諸賢悉在㑹稽王許殷與
+孫共論易象妙於見形
+
+
+
+孫語道合意
+氣干雲一坐咸不安孫理而辭不能屈㑹稽王慨然
+歎曰使眞長來故應有以制彼卽迎眞長孫意己不
+如眞長旣至先令孫自叙本理孫麤
+    ```
+  - `05-fangzheng-043` · 方正第五 · reviewed · reader_ready=false · surface: 安國
+    ```text
+孔君平疾篤庾司空爲㑹稽省之相問訊甚至爲
+
+之流涕庾既下牀孔慨然曰大丈夫將終不問安國
+寧家之術廼作兒女子相問庾聞回謝之請其話言
+
+
+    ```
+  - `14-rongzhi-004` · 容止第十四 · reviewed · reader_ready=false · surface: 安國
+    ```text
+時人目夏侯太初朗朗如日月之入懷李安國穨唐
+如玉山之将崩
+
+
+
+    ```
+  - `25-paidiao-025` · 排調第二十五 · reviewed · reader_ready=false · surface: 孫盛
+    ```text
+禇季野問孫盛卿國史何當成孫云久應竟在公無
+暇故至今日禇曰古人述而不作何必在𧖟室中
+
+
+
+
+
+    ```
+  - `25-paidiao-033` · 排調第二十五 · reviewed · reader_ready=false · surface: 孫安國
+    ```text
+庾園客詣孫監值行見齊莊在外尚㓜而有神意庾
+
+試之曰孫安國何在即荅曰庾穉恭家庾大笑曰諸
+孫大盛有兒如此又荅曰未若諸庾之翼翼還語人
+曰我故勝得重喚奴父名
+
+
+
+    ```
+- Liu-annotation-only presence:
+  - `01-dexing-046` · 德行第一 · reviewed · reader_ready=false · surface: 安國
+    ```text
+(第六子也少而孤貧能善樹節以儒素見稱歴侍/續晉陽秋曰孔安國字安國㑹稽山隂人車騎愉)
+    ```
+  - `02-yanyu-005` · 言語第二 · reviewed · reader_ready=false · surface: 孫盛
+    ```text
+(俱死猶差可安孫盛之言誠所未譬八歳小兒能懸/如此復何所辟裴松之以爲世語云融兒不辟知必)
+    ```
+  - `02-yanyu-009` · 言語第二 · reviewed · reader_ready=false · surface: 安國
+    ```text
+(景公有馬千駟民無德而稱焉孔安國曰千駟四千/陽十萬户號文信侯以詐獲爵故曰竊也論語曰齊)
+    ```
+  - `02-yanyu-022` · 言語第二 · reviewed · reader_ready=false · surface: 安國
+    ```text
+(心不則德義之經故徙於王都邇教誨也/成遷殷頑民作多士孔安國注曰殷大夫)
+    ```
+  - `02-yanyu-103` · 言語第二 · reviewed · reader_ready=false · surface: 安國
+    ```text
+(好色之心好賢人則善/孔安國注論語曰言以)
+    ```
+  - `03-zhengshi-020` · 政事第三 · reviewed · reader_ready=false · surface: 安國
+    ```text
+(機孔安國曰㡬㣲也/尚書臯陶謨一日萬)
+    ```
+  - `05-fangzheng-006` · 方正第五 · reviewed · reader_ready=false · surface: 孫盛
+    ```text
+(袁宏名士傳最後出不依前史以爲鍾毓可謂謬矣/事多詳覈孫盛之徒皆采以著書並云玄距鍾㑹而)
+    ```
+  - `05-fangzheng-016` · 方正第五 · reviewed · reader_ready=false · surface: 孫盛
+    ```text
+(門郎護軍將軍按王隱孫盛不與故君相聞議曰昔/春秋曰雄字茂伯河内人世語曰雄有節槩仕至黄)
+    ```
+  - `07-shijian-001` · 識鑒第七 · reviewed · reader_ready=false · surface: 孫盛
+    ```text
+(將子將納焉孫盛雜語曰太祖嘗問許子將我何如/語曰玄謂太祖君未有名可交許子將太祖乃造子)
+    ```
+  - `07-shijian-016` · 識鑒第七 · reviewed · reader_ready=false · surface: 孫盛
+    ```text
+(還之令孫盛作文嘲之成著嘉坐嘉還即荅四坐嗟/戒左右勿言以觀其舉止嘉初不覺良久如厠命取)
+    ```
+  - `25-paidiao-003` · 排調第二十五 · reviewed · reader_ready=false · surface: 安國
+    ```text
+(忠信為周阿黨為/孔安國注論語曰)
+    ```
+  - `25-paidiao-039` · 排調第二十五 · reviewed · reader_ready=false · surface: 安國
+    ```text
+(生可畏焉知來者之不如今孔安國曰後生少年/春秋傳曰齊桓公伐楚責苞茅之不貢論語曰後)
+    ```
+  - `27-jiajue-001` · 假譎第二十七 · reviewed · reader_ready=false · surface: 孫盛
+    ```text
+(語云武王少好俠放蕩不修行業甞私入常侍張讓/曹瞞傳曰操小字阿瞞少好譎詐逰放無度孫盛雜)
+    ```
+  - `33-youhui-017` · 尤悔第三十三 · reviewed · reader_ready=false · surface: 安國
+    ```text
+(不以其道得/孔安國注曰)
+    ```
+
+### 虞預 (`person-060`)
+
+- directly participating Stories: none currently classified; main-text appearance is retained as `mentioned` pending explicit participation review.
+- reviewed linked Stories: 19; reader-ready: 0; candidate links: 0; candidate contextual Mentions: 0
+- main-text presence:
+  - none
+- Liu-annotation-only presence:
+  - `01-dexing-014` · 德行第一 · reviewed · reader_ready=false · surface: 虞預
+    ```text
+(母故陵遲不仕年向/虞預晉書曰祥以後)
+    ```
+  - `01-dexing-021` · 德行第一 · reviewed · reader_ready=false · surface: 虞預
+    ```text
+(戎由是顯名/虞預晉書曰)
+    ```
+  - `02-yanyu-023` · 言語第二 · reviewed · reader_ready=false · surface: 虞預
+    ```text
+(晉書/虞預)
+    ```
+  - `02-yanyu-025` · 言語第二 · reviewed · reader_ready=false · surface: 虞預
+    ```text
+(輔南陽人清夷沖曠加/虞預晉書曰樂廣字彦)
+    ```
+  - `02-yanyu-035` · 言語第二 · reviewed · reader_ready=false · surface: 虞預
+    ```text
+(少標俊清徹英穎顯名為司空劉/虞預晉書曰嶠字太真太原祁人)
+    ```
+  - `03-zhengshi-005` · 政事第三 · reviewed · reader_ready=false · surface: 虞預
+    ```text
+(曰山濤字/虞預晉書)
+    ```
+  - `05-fangzheng-017` · 方正第五 · reviewed · reader_ready=false · surface: 虞預
+    ```text
+(攸子也少聦惠及長謙約好/虞預晉書曰冏字景治齊王)
+    ```
+  - `05-fangzheng-027` · 方正第五 · reviewed · reader_ready=false · surface: 虞預
+    ```text
+(協字玄亮勃海/虞預晉書曰刁)
+    ```
+  - `07-shijian-009` · 識鑒第七 · reviewed · reader_ready=false · surface: 虞預
+    ```text
+(華軼字彦夏/虞預晉書曰)
+    ```
+  - `08-shangyu-007` · 賞譽第八 · reviewed · reader_ready=false · surface: 虞預
+    ```text
+(聞喜人父潜魏太常秀有風/虞預晉書曰秀字季彦河東)
+    ```
+  - `08-shangyu-014` · 賞譽第八 · reviewed · reader_ready=false · surface: 虞預
+    ```text
+(字元夏沛國竹邑/虞預晉書曰武陔)
+    ```
+  - `08-shangyu-029` · 賞譽第八 · reviewed · reader_ready=false · surface: 虞預
+    ```text
+(紹劉漠等齊名遷尚書出爲征南将軍/虞預晉書曰簡字季倫平雅有父風與嵇)
+    ```
+  - `08-shangyu-043` · 賞譽第八 · reviewed · reader_ready=false · surface: 虞預
+    ```text
+(曰逖字士/虞預晉書)
+    ```
+  - `08-shangyu-054` · 賞譽第八 · reviewed · reader_ready=false · surface: 虞預
+    ```text
+(戴儼字若/虞預書曰)
+    ```
+  - `09-pinzao-016` · 品藻第九 · reviewed · reader_ready=false · surface: 虞預
+    ```text
+(曰嶠厚自/虞預晉書)
+    ```
+  - `15-zixin-002` · 自新第十五 · reviewed · reader_ready=false · surface: 虞預
+    ```text
+(弱登御然後髙墉之功顯孤竹在肆然後/虞預晉書曰機薦淵於趙王倫曰葢聞繁)
+    ```
+  - `19-xianyuan-012` · 賢媛第十九 · reviewed · reader_ready=false · surface: 虞預
+    ```text
+(晉陽人魏司徒昶子仕至司/虞預晉書曰渾字玄沖太原)
+    ```
+  - `33-youhui-006` · 尤悔第三十三 · reviewed · reader_ready=false · surface: 虞預
+    ```text
+(充京邑㕘軍吕/虞預晉書曰敦)
+    ```
+  - `33-youhui-009` · 尤悔第三十三 · reviewed · reader_ready=false · surface: 虞預
+    ```text
+(嶠以母亡逼賊不得往臨葬固辭詔曰嶠以/虞預晉書曰元帝即位以温嶠為散騎侍郎)
+    ```
+
+### 習鑿齒 (`person-061`)
+
+- directly participating Stories: none currently classified; main-text appearance is retained as `mentioned` pending explicit participation review.
+- reviewed linked Stories: 5; reader-ready: 0; candidate links: 0; candidate contextual Mentions: 0
+- main-text presence:
+  - `02-yanyu-072` · 言語第二 · reviewed · reader_ready=false · surface: 習鑿齒
+    ```text
+王中郎令伏玄度習鑿齒
+
+
+
+論青楚人物
+
+
+
+
+
+
+
+
+
+
+臨成以示韓康伯康伯都無言王曰何故不言
+韓曰無可無不可
+
+
+    ```
+  - `04-wenxue-080` · 文學第四 · reviewed · reader_ready=false · surface: 習鑿齒
+    ```text
+習鑿齒史才不常宣武甚器之未三十便用為荆州
+治中鑿齒謝牋亦云不遇明公荆州老從事耳後至
+都見簡文返命宣武問見相王何如荅云一生不曽
+見此人從此忤㫖出為衡陽郡性理遂錯於病中猶
+作漢晉春秋品評卓逸
+    ```
+  - `25-paidiao-041` · 排調第二十五 · reviewed · reader_ready=false · surface: 習鑿齒
+    ```text
+習鑿齒孫興公未相識同在桓公坐桓語孫可與習
+參軍共語孫云蠢爾蠻荆敢與大邦為讐習云薄伐
+獫狁至于太原
+
+
+    ```
+  - `31-fenjuan-006` · 忿狷第三十一 · reviewed · reader_ready=false · surface: 習鑿齒
+    ```text
+王令詣謝公值習鑿齒已在坐當與併榻王徙倚不
+
+坐公引之與對榻去後語胡兒曰子敬實自清立但
+人為爾多矜咳殊足損其自然
+
+
+    ```
+- Liu-annotation-only presence:
+  - `25-paidiao-046` · 排調第二十五 · reviewed · reader_ready=false · surface: 習鑿齒
+    ```text
+(說是孫綽習鑿齒言/王坦之范啓已見上)
+    ```
+
+### 郭奕 (`person-062`)
+
+- directly participating Stories: none currently classified; main-text appearance is retained as `mentioned` pending explicit participation review.
+- reviewed linked Stories: 1; reader-ready: 0; candidate links: 0; candidate contextual Mentions: 0
+- main-text presence:
+  - `05-fangzheng-041` · 方正第五 · reviewed · reader_ready=false · surface: 大業
+    ```text
+何次道庾季堅二人並爲元輔
+成帝初崩于時嗣君
+未定何欲立嗣子庾及朝議以外寇方强嗣子沖幼
+乃立康帝康帝登
+阼會群臣謂何曰朕今所以承大業爲誰之議何荅
+
+曰陛下龍飛此是庾冰之功非臣之力于時用微臣
+之議今不覩盛明之世
+
+帝有慙色
+
+    ```
+- Liu-annotation-only presence:
+  - none
+
+### 郭象 (`person-063`)
+
+- directly participating Stories: none currently classified; main-text appearance is retained as `mentioned` pending explicit participation review.
+- reviewed linked Stories: 9; reader-ready: 0; candidate links: 0; candidate contextual Mentions: 0
+- main-text presence:
+  - `04-wenxue-017` · 文學第四 · reviewed · reader_ready=false · surface: 郭象
+    ```text
+初注荘子者數十家莫能究其㫖要向秀於舊注外
+為解義妙析奇致大畼玄風
+
+
+
+
+
+唯秋
+水至樂二篇未竟而秀卒秀子㓜義遂零落然猶有
+别本郭象者為人薄行有儁才
+見秀義不傳於世遂
+竊以為已注乃自注秋水至樂二篇又易馬蹄一篇
+其餘衆篇或定㸃文句而已後
+秀義别本出故今有向郭二莊其義一也
+
+    ```
+- Liu-annotation-only presence:
+  - `01-dexing-033` · 德行第一 · reviewed · reader_ready=false · surface: 子少
+    ```text
+(衡太子少傳父裒吏部尚書奕少有器/中興書曰謝奕字無奕陳郡陽夏人祖)
+    ```
+  - `03-zhengshi-005` · 政事第三 · reviewed · reader_ready=false · surface: 子少
+    ```text
+(隱身不交世務累遷吏部尚書僕射太子少傅司徒/曰咄石生無事馬蹄閒也投傳而去果有曹爽事遂)
+    ```
+  - `05-fangzheng-009` · 方正第五 · reviewed · reader_ready=false · surface: 子少
+    ```text
+(所知每向世祖稱之歷尚書太子少傅干寳晉紀曰/南西平人父逌太常知名嶠少以雅量稱深爲賈充)
+    ```
+  - `06-yaliang-010` · 雅量第六 · reviewed · reader_ready=false · surface: 子少
+    ```text
+(王故事曰司馬越字元超高密王泰長子少尚布衣/陽王虓所䁥虓薨太傅召之大相委仗用爲長史八)
+    ```
+  - `07-shijian-003` · 識鑒第七 · reviewed · reader_ready=false · surface: 子少
+    ```text
+(徒黨鬻聲名於閭閻夏侯玄以貴臣子少有重名皆/曰是時何晏以才辯顯於貴戚之間鄧颺好交通合)
+    ```
+  - `08-shangyu-026` · 賞譽第八 · reviewed · reader_ready=false · surface: 郭象
+    ```text
+(太傅主簿任事用勢傾動一府敳謂/名士傳曰郭象字子玄自黄門郎爲)
+    ```
+  - `09-pinzao-064` · 品藻第九 · reviewed · reader_ready=false · surface: 子少
+    ```text
+(知名尚尋陽公主仕至中書郎未三十而卒坦之悼/王禕之小字也王氏世家曰禕之字文劭述次子少)
+    ```
+  - `11-jiewu-001` · 捷悟第十一 · reviewed · reader_ready=false · surface: 子少
+    ```text
+(弘農人太尉彪子少有/文士傳曰楊脩字德祖)
+    ```
+
+### 陶侃 (`person-064`)
+
+- directly participating Stories: none currently classified; main-text appearance is retained as `mentioned` pending explicit participation review.
+- reviewed linked Stories: 5; reader-ready: 0; candidate links: 0; candidate contextual Mentions: 0
+- main-text presence:
+  - none
+- Liu-annotation-only presence:
+  - `05-fangzheng-037` · 方正第五 · reviewed · reader_ready=false · surface: 陶侃
+    ```text
+(平陶侃欲將坦上用/按王隱晉書蘇峻事)
+    ```
+  - `05-fangzheng-052` · 方正第五 · reviewed · reader_ready=false · surface: 陶侃
+    ```text
+(諸子中最知名歷尚書秘書監何法盛以爲第九子/陶範小字也陶侃别傳曰範字道則侃第十子也侃)
+    ```
+  - `07-shijian-019` · 識鑒第七 · reviewed · reader_ready=false · surface: 陶侃
+    ```text
+(之代爲荆州何充曰陶公重勲/陶侃别傳曰庾翼薨表其子爰)
+    ```
+  - `14-rongzhi-023` · 容止第十四 · reviewed · reader_ready=false · surface: 陶侃
+    ```text
+(臣官陶侃祖約不在其例侃約疑亮寢遺詔也中/徐廣晉紀曰肅祖遺詔庾亮王導輔㓜主而進大)
+    ```
+  - `27-jiajue-008` · 假譎第二十七 · reviewed · reader_ready=false · surface: 陶侃
+    ```text
+(奔嶠人皆尤而少之嶠愈相崇重分兵以配給之/王愆期推征西陶侃為盟主俱赴京師時亮敗績)
+    ```
+
+### 孟嘉 (`person-065`)
+
+- directly participating Stories: none currently classified; main-text appearance is retained as `mentioned` pending explicit participation review.
+- reviewed linked Stories: 4; reader-ready: 0; candidate links: 0; candidate contextual Mentions: 0
+- main-text presence:
+  - `07-shijian-016` · 識鑒第七 · reviewed · reader_ready=false · surface: 孟嘉、萬年
+    ```text
+武昌孟嘉作庾太尉州從事巳知名禇太傅有知人
+鑒罷豫章還過武昌問庾曰聞孟從事佳今在此不
+庾云試自求之禇眄睞良乆指嘉曰此君小異得無
+
+是乎庾大笑曰然于時既歎禇之黙識又欣嘉之見
+賞
+
+
+
+
+
+
+
+
+    ```
+  - `18-qiyi-010` · 棲逸第十八 · reviewed · reader_ready=false · surface: 孟萬年、萬年
+    ```text
+孟萬年及弟少孤居武昌陽新縣萬年遊宦有盛名
+當世少孤未嘗出京邑人士思欲見之乃遣信報少
+孤云兄病篤狼狽至都時賢見之者莫不嗟重因相
+
+
+
+    ```
+- Liu-annotation-only presence:
+  - `09-pinzao-032` · 品藻第九 · reviewed · reader_ready=false · surface: 萬年
+    ```text
+(下萬年後太子不得立也帝曰何故朂曰百寮内外/訊朝士皆屬目於攸而不在太子至是朂從容曰陛)
+    ```
+  - `15-zixin-001` · 自新第十五 · reviewed · reader_ready=false · surface: 萬年
+    ```text
+(曰忠孝之道何當得兩全乃進戰斬首萬計弦絶矢/齊萬年反乃令處距萬年伏波孫秀欲表處母老處)
+    ```
+
+### 卞範之 (`person-066`)
+
+- directly participating Stories: none currently classified; main-text appearance is retained as `mentioned` pending explicit participation review.
+- reviewed linked Stories: 3; reader-ready: 0; candidate links: 0; candidate contextual Mentions: 0
+- main-text presence:
+  - `22-chongli-006` · 寵禮第二十二 · reviewed · reader_ready=false · surface: 卞範之、敬祖
+    ```text
+卞範之爲丹陽尹羊孚南州暫還徃卞許云下官疾
+動不堪坐卞便開帳拂褥羊徑上大牀入𬒳須枕卞
+回坐傾睞移晨逹莫羊去卞語曰我以第一理期卿
+卿莫負我
+
+
+
+    ```
+- Liu-annotation-only presence:
+  - `02-yanyu-106` · 言語第二 · reviewed · reader_ready=false · surface: 卞範之
+    ```text
+(少禮其寵遇隆重兼於王卞矣及玄簒位以佐命親/引為咨議叅軍時王謐見禮而不親卞範之被親而)
+    ```
+  - `09-pinzao-088` · 品藻第九 · reviewed · reader_ready=false · surface: 敬祖
+    ```text
+(尚書僕射中軍將軍晉安帝紀/中興書曰謙字敬祖沖第三子)
+    ```
+
+### 周浚 (`person-067`)
+
+- directly participating Stories: none currently classified; main-text appearance is retained as `mentioned` pending explicit participation review.
+- reviewed linked Stories: 1; reader-ready: 0; candidate links: 0; candidate contextual Mentions: 0
+- main-text presence:
+  - `19-xianyuan-018` · 賢媛第十九 · reviewed · reader_ready=false · surface: 周浚、開林
+    ```text
+周浚作安東時行獵值㬥雨過汝南李氏李氏富足
+而男子不在有女名絡秀聞外有貴人與一婢於内
+宰豬羊作數十人飮食事事精辦不聞有人聲密覘
+之獨見一女子狀貌非常浚因求爲妾父兄不許絡
+秀曰門戸殄瘁何惜
+    ```
+- Liu-annotation-only presence:
+  - none
+
+### 崔遊 (`person-068`)
+
+- directly participating Stories: none currently classified; main-text appearance is retained as `mentioned` pending explicit participation review.
+- reviewed linked Stories: 4; reader-ready: 0; candidate links: 0; candidate contextual Mentions: 0
+- main-text presence:
+  - `05-fangzheng-043` · 方正第五 · reviewed · reader_ready=false · surface: 子相
+    ```text
+孔君平疾篤庾司空爲㑹稽省之相問訊甚至爲
+
+之流涕庾既下牀孔慨然曰大丈夫將終不問安國
+寧家之術廼作兒女子相問庾聞回謝之請其話言
+
+
+    ```
+- Liu-annotation-only presence:
+  - `02-yanyu-022` · 言語第二 · reviewed · reader_ready=false · surface: 子相
+    ```text
+(對皆與此言不異無容二人同有此辭/按華令思舉秀才入洛與王武子相酬)
+    ```
+  - `02-yanyu-047` · 言語第二 · reviewed · reader_ready=false · surface: 子相
+    ```text
+(諱誰代子相者竪刁何如管仲曰自宫/呂氏春秋曰管仲病桓公問曰子如不)
+    ```
+  - `20-shujie-006` · 術解第二十 · reviewed · reader_ready=false · surface: 子相
+    ```text
+(之角㬥富貴後當滅門/青鳥子相冡書曰葬龍)
+    ```
+
+### 束晳 (`person-069`)
+
+- directly participating Stories: none currently classified; main-text appearance is retained as `mentioned` pending explicit participation review.
+- reviewed linked Stories: 1; reader-ready: 0; candidate links: 0; candidate contextual Mentions: 0
+- main-text presence:
+  - `06-yaliang-041` · 雅量第六 · reviewed · reader_ready=false · surface: 廣微、束晳
+    ```text
+殷荆州有所識作賦是束晳慢戲之流
+
+
+殷甚以爲
+有才語王恭適見新文甚可觀便於手巾函中出之
+王讀殷笑之不自勝王看竟既不笑亦不言好惡但
+
+以如意帖之而巳殷悵然自失
+
+    ```
+- Liu-annotation-only presence:
+  - none
+
+### 趙至 (`person-070`)
+
+- directly participating Stories: none currently classified; main-text appearance is retained as `mentioned` pending explicit participation review.
+- reviewed linked Stories: 2; reader-ready: 0; candidate links: 0; candidate contextual Mentions: 0
+- main-text presence:
+  - `19-xianyuan-032` · 賢媛第十九 · reviewed · reader_ready=false · surface: 景真
+    ```text
+韓康伯母殷隨孫繪之之衡陽
+於闔廬洲中逢桓南郡卞鞠是其外孫時
+來問訊謂鞠曰我不死見此竪二世作賊在衡陽數
+年繪之遇桓景真之難也
+
+殷撫屍哭曰汝父昔罷豫章徴書朝至夕發
+汝去郡邑數年為物不得動遂及於難夫復何言
+
+    ```
+- Liu-annotation-only presence:
+  - `02-yanyu-015` · 言語第二 · reviewed · reader_ready=false · surface: 趙至
+    ```text
+(漢末其祖流宕客緱氏令新之官/嵇紹趙至叙曰至字景眞代郡人)
+    ```
+
+### 劉遐 (`person-071`)
+
+- directly participating Stories: none currently classified; main-text appearance is retained as `mentioned` pending explicit participation review.
+- reviewed linked Stories: 1; reader-ready: 0; candidate links: 0; candidate contextual Mentions: 0
+- main-text presence:
+  - none
+- Liu-annotation-only presence:
+  - `02-yanyu-054` · 言語第二 · reviewed · reader_ready=false · surface: 劉遐
+    ```text
+(國之周公也足下宜以大政付之裒長史王胡之亦/裒自丹徒入朝吏部尚書劉遐勸裒曰㑹稽王令德)
+    ```
+
+### 劉隗 (`person-072`)
+
+- directly participating Stories: none currently classified; main-text appearance is retained as `mentioned` pending explicit participation review.
+- reviewed linked Stories: 2; reader-ready: 0; candidate links: 0; candidate contextual Mentions: 0
+- main-text presence:
+  - none
+- Liu-annotation-only presence:
+  - `02-yanyu-037` · 言語第二 · reviewed · reader_ready=false · surface: 劉隗
+    ```text
+(子弟二十餘人旦旦到公車泥首謝罪/中興書曰導從兄敦舉兵討劉隗導率)
+    ```
+  - `05-fangzheng-031` · 方正第五 · reviewed · reader_ready=false · surface: 劉隗
+    ```text
+(爲東宫庶子在承華門外與顗相/顗别傳曰王敦討劉隗時温太真)
+    ```
+
+### 吳隱之 (`person-073`)
+
+- directly participating Stories: none currently classified; main-text appearance is retained as `mentioned` pending explicit participation review.
+- reviewed linked Stories: 1; reader-ready: 0; candidate links: 0; candidate contextual Mentions: 0
+- main-text presence:
+  - none
+- Liu-annotation-only presence:
+  - `01-dexing-047` · 德行第一 · reviewed · reader_ready=false · surface: 吳隱之
+    ```text
+(貪泉失廉潔之性吳隱之為刺史自酌貪泉飲之題/京師歴尚書領軍將軍晉中興書曰舊云徃廣州飲)
+    ```
+
+### 干寳 (`person-074`)
+
+- directly participating Stories: none currently classified; main-text appearance is retained as `mentioned` pending explicit participation review.
+- reviewed linked Stories: 8; reader-ready: 0; candidate links: 0; candidate contextual Mentions: 0
+- main-text presence:
+  - none
+- Liu-annotation-only presence:
+  - `04-wenxue-076` · 文學第四 · reviewed · reader_ready=false · surface: 令升
+    ```text
+(嫚惰時有醉飽之失友人于令升戒之曰此伐性之/言造次詠語常人無異又不持儀檢形質穨索縱情)
+    ```
+  - `05-fangzheng-006` · 方正第五 · reviewed · reader_ready=false · surface: 干寳
+    ```text
+(収玄送廷尉干寳晉紀曰初豐之謀也使告玄玄荅/惡大將軍執政遂謀以玄代之大將軍聞其謀誅豐)
+    ```
+  - `19-xianyuan-010` · 賢媛第十九 · reviewed · reader_ready=false · surface: 干寳
+    ```text
+(以止汝者恐不得其所也以此并命何恨之有干寳/死垂泣謝母母顔色不變笑而謂曰人誰不死徃所)
+    ```
+  - `20-shujie-001` · 術解第二十 · reviewed · reader_ready=false · surface: 干寳
+    ```text
+(晉紀曰荀朂始造正徳大象之舞以魏杜䕫所制律/度朂今尺短四分方明咸果解音然無能正者干寳)
+    ```
+  - `23-rendan-002` · 任誕第二十三 · reviewed · reader_ready=false · surface: 干寳
+    ```text
+(曽嘗謂阮籍曰/干寳晉紀曰何)
+    ```
+  - `24-jianao-004` · 簡傲第二十四 · reviewed · reader_ready=false · surface: 干寳
+    ```text
+(安嘗從康或遇其行康兄喜拭席而待之弗顧獨坐/康聞之乃齎酒挾琴而造之遂相與善干寳晉紀曰)
+    ```
+  - `25-paidiao-019` · 排調第二十五 · reviewed · reader_ready=false · surface: 令升
+    ```text
+(奮武將軍父瑩丹陽丞寳少以博學/中興書曰寳字令升新蔡人祖正吳)
+    ```
+  - `36-chouxi-001` · 仇隟第三十六 · reviewed · reader_ready=false · surface: 干寳
+    ```text
+(緑珠美而工笛孫秀使人/干寳晉紀曰石崇有妓人)
+    ```
+
+### 徐廣 (`person-075`)
+
+- directly participating Stories: none currently classified; main-text appearance is retained as `mentioned` pending explicit participation review.
+- reviewed linked Stories: 15; reader-ready: 0; candidate links: 0; candidate contextual Mentions: 0
+- main-text presence:
+  - none
+- Liu-annotation-only presence:
+  - `02-yanyu-059` · 言語第二 · reviewed · reader_ready=false · surface: 徐廣
+    ```text
+(太微至二年七月猶在焉帝懲海西之事心/徐廣晉紀曰咸安元年十二月熒惑逆行入)
+    ```
+  - `02-yanyu-079` · 言語第二 · reviewed · reader_ready=false · surface: 徐廣
+    ```text
+(道季太尉亮子也風情率悟以文/道季庾龢小字徐廣晉紀曰龢字)
+    ```
+  - `03-zhengshi-015` · 政事第三 · reviewed · reader_ready=false · surface: 徐廣
+    ```text
+(綸夷險政務寛恕事從簡易/徐廣歷紀曰導阿衡三世經)
+    ```
+  - `05-fangzheng-029` · 方正第五 · reviewed · reader_ready=false · surface: 徐廣
+    ```text
+(少有重名泰興中爲騎郎蚤卒時爲悼惜之/徐廣晉紀曰顧顯字孟著吳郡人驃騎榮兄子)
+    ```
+  - `05-fangzheng-042` · 方正第五 · reviewed · reader_ready=false · surface: 徐廣
+    ```text
+(學知名兼善弈爲中興之冠累遷尚/徐廣晉紀曰江虨字思玄陳留人博)
+    ```
+  - `05-fangzheng-048` · 方正第五 · reviewed · reader_ready=false · surface: 徐廣
+    ```text
+(亮第三子拔尚率到位建威將軍吳國内史/道恩庾羲小字徐廣晉紀曰羲字叔和太和)
+    ```
+  - `05-fangzheng-062` · 方正第五 · reviewed · reader_ready=false · surface: 徐廣
+    ```text
+(彪之等啓攺作新宫太元三年二月内/徐廣晉紀曰孝武寧康二年尚書令王)
+    ```
+  - `06-yaliang-040` · 雅量第六 · reviewed · reader_ready=false · surface: 徐廣
+    ```text
+(十年九月有蓬星如/徐廣晉紀曰泰元二)
+    ```
+  - `08-shangyu-072` · 賞譽第八 · reviewed · reader_ready=false · surface: 徐廣
+    ```text
+(才具仕至太宰長史桓温以其宗彊使下邳王晃誣/字也徐廣晉紀曰倩字少彦司空氷子皇后兄也有)
+    ```
+  - `08-shangyu-078` · 賞譽第八 · reviewed · reader_ready=false · surface: 徐廣
+    ```text
+(貞審真意不顯/徐廣晉紀曰述)
+    ```
+  - `08-shangyu-082` · 賞譽第八 · reviewed · reader_ready=false · surface: 徐廣
+    ```text
+(辯玄致當時名流皆爲/徐廣晉紀曰浩清言妙)
+    ```
+  - `08-shangyu-094` · 賞譽第八 · reviewed · reader_ready=false · surface: 徐廣
+    ```text
+(江惇字思悛/徐廣晉紀曰)
+    ```
+  - `09-pinzao-036` · 品藻第九 · reviewed · reader_ready=false · surface: 徐廣
+    ```text
+(者皆舉王劉爲宗焉/徐廣晉紀曰凡稱風流)
+    ```
+  - `14-rongzhi-023` · 容止第十四 · reviewed · reader_ready=false · surface: 徐廣
+    ```text
+(臣官陶侃祖約不在其例侃約疑亮寢遺詔也中/徐廣晉紀曰肅祖遺詔庾亮王導輔㓜主而進大)
+    ```
+  - `25-paidiao-047` · 排調第二十五 · reviewed · reader_ready=false · surface: 徐廣
+    ```text
+(晉紀/徐廣)
+    ```
+
 ## Proposed first multi-story pilot candidates
 
 These 16 candidates are selected deterministically from reviewed links using only editorial flags: reader-ready representation, multiple reviewed people, main-text presence, explicit/high-confidence resolution, and canonical order. They are not importance scores or interpretations.
 
 - `06-yaliang-019` · 雅量第六 · 王羲之、郗璿、郗鑒 · reader-ready; multiple reviewed people; main-text presence; explicit/high-confidence resolution
 - `04-wenxue-094` · 文學第四 · 劉伶、向秀、山濤、嵇康、樂廣、王濬、袁宏、阮籍 · multiple reviewed people; main-text presence; explicit/high-confidence resolution
+- `14-rongzhi-023` · 容止第十四 · 庾亮、徐廣、温嶠、王導、祖約、蘇峻、陶侃 · multiple reviewed people; main-text presence; explicit/high-confidence resolution
 - `23-rendan-001` · 任誕第二十三 · 劉伶、向秀、山濤、嵇康、王戎、阮籍 · multiple reviewed people; main-text presence; explicit/high-confidence resolution
-- `27-jiajue-008` · 假譎第二十七 · 庾亮、温嶠、王導、蘇峻、陸機 · multiple reviewed people; main-text presence; explicit/high-confidence resolution
-- `08-shangyu-054` · 賞譽第八 · 卞壼、王導、王敦、蘇峻、謝鯤 · multiple reviewed people; main-text presence; explicit/high-confidence resolution
+- `27-jiajue-008` · 假譎第二十七 · 庾亮、温嶠、王導、蘇峻、陶侃、陸機 · multiple reviewed people; main-text presence; explicit/high-confidence resolution
+- `03-zhengshi-005` · 政事第三 · 和嶠、山濤、嵇康、潘岳、虞預、郭象 · multiple reviewed people; main-text presence; explicit/high-confidence resolution
+- `08-shangyu-054` · 賞譽第八 · 卞壼、王導、王敦、蘇峻、虞預、謝鯤 · multiple reviewed people; main-text presence; explicit/high-confidence resolution
+- `09-pinzao-006` · 品藻第九 · 王導、王戎、王敦、王祥、荀顗 · multiple reviewed people; main-text presence; explicit/high-confidence resolution
+- `36-chouxi-003` · 仇隟第三十六 · 庾亮、氾騰、王導、王廙、王敦 · multiple reviewed people; main-text presence; explicit/high-confidence resolution
+- `02-yanyu-047` · 言語第二 · 崔遊、張華、王隱、謝尚、陸機 · multiple reviewed people; main-text presence; explicit/high-confidence resolution
 - `05-fangzheng-025` · 方正第五 · 庾亮、蘇峻、謝尚、鄧攸 · multiple reviewed people; main-text presence; explicit/high-confidence resolution
-- `09-pinzao-006` · 品藻第九 · 王導、王戎、王敦、王祥 · multiple reviewed people; main-text presence; explicit/high-confidence resolution
+- `09-pinzao-036` · 品藻第九 · 徐廣、桓溫、王濛、謝尚 · multiple reviewed people; main-text presence; explicit/high-confidence resolution
 - `25-paidiao-060` · 排調第二十五 · 劉惔、孫恩、桓溫、王敦 · multiple reviewed people; main-text presence; explicit/high-confidence resolution
-- `03-zhengshi-005` · 政事第三 · 和嶠、山濤、嵇康、潘岳 · multiple reviewed people; main-text presence; explicit/high-confidence resolution
-- `04-wenxue-022` · 文學第四 · 庾亮、王導、王濛、謝尚 · multiple reviewed people; main-text presence; explicit/high-confidence resolution
-- `14-rongzhi-023` · 容止第十四 · 庾亮、温嶠、王導、蘇峻 · multiple reviewed people; main-text presence; explicit/high-confidence resolution
-- `02-yanyu-102` · 言語第二 · 桓溫、温嶠、王導、蘇峻 · multiple reviewed people; explicit/high-confidence resolution
-- `06-yaliang-017` · 雅量第六 · 庾亮、温嶠、蘇峻 · multiple reviewed people; main-text presence; explicit/high-confidence resolution
-- `08-shangyu-079` · 賞譽第八 · 卞壼、桓溫、王敦 · multiple reviewed people; main-text presence; explicit/high-confidence resolution
-- `09-pinzao-036` · 品藻第九 · 桓溫、王濛、謝尚 · multiple reviewed people; main-text presence; explicit/high-confidence resolution
-- `11-jiewu-005` · 捷悟第十一 · 温嶠、王導、王敦 · multiple reviewed people; main-text presence; explicit/high-confidence resolution
+- `02-yanyu-035` · 言語第二 · 劉琨、温嶠、王隱、虞預 · multiple reviewed people; main-text presence; explicit/high-confidence resolution
+- `02-yanyu-072` · 言語第二 · 伏滔、桓溫、習鑿齒、韓伯 · multiple reviewed people; main-text presence; explicit/high-confidence resolution
+- `05-fangzheng-027` · 方正第五 · 周顗、和嶠、王敦、虞預 · multiple reviewed people; main-text presence; explicit/high-confidence resolution
 
 ## Candidate and unresolved mentions
 

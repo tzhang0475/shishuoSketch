@@ -2,17 +2,25 @@
 
 ER1.1 keeps canonical Mention anchors immutable. This report lists the build-time span/coreference projection used for reader segmentation; derived records are not canonical Mentions or new Persons.
 
-- published Stories audited: 83 / 83
-- high-confidence repaired/derived spans: 25
+- published Stories audited: 143 / 143
+- high-confidence repaired/derived spans: 42
 - review-required partial-span cases: 0
 
 - `01-dexing-015` · `liu_annotation` · `嗣宗陳留` · 阮籍 · `longest_safe_semantic_span` · auto_fixed
 - `01-dexing-017` · `liu_annotation` · `濬沖琅邪` · 王戎 · `longest_safe_semantic_span` · auto_fixed
+- `01-dexing-028` · `liu_annotation` · `伯道平陽` · 鄧攸 · `longest_safe_semantic_span` · auto_fixed
 - `01-dexing-045` · `liu_annotation` · `靈秀琅邪` · 孫恩 · `longest_safe_semantic_span` · auto_fixed
+- `02-yanyu-030` · `liu_annotation` · `伯仁汝南` · 周顗 · `longest_safe_semantic_span` · auto_fixed
+- `02-yanyu-046` · `liu_annotation` · `仁祖陳郡` · 謝尚 · `longest_safe_semantic_span` · auto_fixed
+- `02-yanyu-066` · `main_text` · `劉真長` · 劉惔 · `longest_safe_semantic_span` · auto_fixed
 - `02-yanyu-069` · `main_text` · `劉真長` · 劉惔 · `longest_safe_semantic_span` · auto_fixed
+- `02-yanyu-072` · `liu_annotation` · `度平昌安` · 伏滔 · `longest_safe_semantic_span` · auto_fixed
 - `02-yanyu-086` · `liu_annotation` · `叔子太山` · 羊祜 · `longest_safe_semantic_span` · auto_fixed
+- `03-zhengshi-005` · `liu_annotation` · `巨源河内` · 山濤 · `longest_safe_semantic_span` · auto_fixed
+- `04-wenxue-094` · `liu_annotation` · `阮仲容` · 阮咸 · `longest_safe_semantic_span` · auto_fixed
 - `05-fangzheng-012` · `liu_annotation` · `元凱京兆` · 杜預 · `longest_safe_semantic_span` · auto_fixed
 - `05-fangzheng-031` · `liu_annotation` · `温太真` · 温嶠 · `longest_safe_semantic_span` · auto_fixed
+- `05-fangzheng-037` · `main_text` · `蘇子高` · 蘇峻 · `longest_safe_semantic_span` · auto_fixed
 - `05-fangzheng-051` · `main_text` · `劉真長` · 劉惔 · `longest_safe_semantic_span` · auto_fixed
 - `05-fangzheng-051` · `main_text` · `王仲祖` · 王濛 · `longest_safe_semantic_span` · auto_fixed
 - `05-fangzheng-055` · `main_text` · `桓子野` · 桓伊 · `longest_safe_semantic_span` · auto_fixed
@@ -22,12 +30,21 @@ ER1.1 keeps canonical Mention anchors immutable. This report lists the build-tim
 - `06-yaliang-017` · `main_text` · `亮` · 庾亮 · `er1_1_story_local_coreference` · auto_fixed
 - `06-yaliang-017` · `main_text` · `温太真` · 温嶠 · `longest_safe_semantic_span` · auto_fixed
 - `06-yaliang-017` · `main_text` · `亮` · 庾亮 · `er1_1_story_local_coreference` · auto_fixed
+- `06-yaliang-041` · `liu_annotation` · `廣微陽平` · 束晳 · `longest_safe_semantic_span` · auto_fixed
+- `07-shijian-006` · `liu_annotation` · `王處仲` · 王敦 · `longest_safe_semantic_span` · auto_fixed
 - `07-shijian-018` · `main_text` · `王仲祖` · 王濛 · `longest_safe_semantic_span` · auto_fixed
+- `08-shangyu-054` · `liu_annotation` · `謝幼輿` · 謝鯤 · `longest_safe_semantic_span` · auto_fixed
 - `09-pinzao-022` · `main_text` · `庾元規` · 庾亮 · `longest_safe_semantic_span` · auto_fixed
+- `09-pinzao-025` · `main_text` · `温太真` · 温嶠 · `longest_safe_semantic_span` · auto_fixed
 - `09-pinzao-036` · `main_text` · `王仲祖` · 王濛 · `longest_safe_semantic_span` · auto_fixed
 - `14-rongzhi-024` · `main_text` · `庾太尉` · 庾亮 · `er1_1_contextual_span_seed` · auto_fixed
 - `14-rongzhi-024` · `main_text` · `庾公` · 庾亮 · `er1_1_story_local_coreference` · auto_fixed
+- `19-xianyuan-018` · `liu_annotation` · `開林汝南` · 周浚 · `longest_safe_semantic_span` · auto_fixed
 - `23-rendan-026` · `main_text` · `温太真` · 温嶠 · `longest_safe_semantic_span` · auto_fixed
+- `23-rendan-033` · `main_text` · `桓子野` · 桓伊 · `longest_safe_semantic_span` · auto_fixed
 - `23-rendan-038` · `main_text` · `王文度` · 王坦之 · `longest_safe_semantic_span` · auto_fixed
+- `23-rendan-049` · `main_text` · `桓子野` · 桓伊 · `longest_safe_semantic_span` · auto_fixed
+- `23-rendan-049` · `main_text` · `桓子野` · 桓伊 · `longest_safe_semantic_span` · auto_fixed
 - `26-qingdi-002` · `main_text` · `庾元規` · 庾亮 · `longest_safe_semantic_span` · auto_fixed
 - `27-jiajue-008` · `main_text` · `庾元規` · 庾亮 · `longest_safe_semantic_span` · auto_fixed
+- `27-jiajue-012` · `main_text` · `王文度` · 王坦之 · `longest_safe_semantic_span` · auto_fixed

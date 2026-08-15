@@ -455,6 +455,7 @@ def validate(root: Path = ROOT, mode: str = "full") -> list[str]:
         gold = read_json(root / "data/story-chain-gold-set.json")
         expansion = read_json(root / "data/annotation/story-expansion-wave-1.json") if (root / "data/annotation/story-expansion-wave-1.json").is_file() else None
         w3_expansion = read_json(root / "data/annotation/story-expansion-wave-3.json") if (root / "data/annotation/story-expansion-wave-3.json").is_file() else None
+        w4_expansion = read_json(root / "data/annotation/story-expansion-wave-4.json") if (root / "data/annotation/story-expansion-wave-4.json").is_file() else None
         chain = read_json(root / "data/derived/story-chain-gold-index.json")
         corpus = read_json(root / "data/shishuo-corpus-index.json")
         punctuation = {
@@ -504,6 +505,18 @@ def validate(root: Path = ROOT, mode: str = "full") -> list[str]:
         if set(w3_expansion_ids) & (set(gold_ids) | set(expansion_ids)):
             errors.append("W3 Story expansion manifest overlaps an existing publication set")
         selected.extend({"entry_id": story_id, "linked_person_ids": []} for story_id in w3_expansion_ids)
+    w4_expansion_ids: list[str] = []
+    if w4_expansion is not None:
+        w4_expansion_ids = [str(item.get("story_id")) for item in w4_expansion.get("records", [])]
+        if w4_expansion.get("gold_story_ids") != gold_ids:
+            errors.append("W4 Story expansion manifest does not preserve the exact SC0 Gold Set")
+        if w4_expansion.get("selection_status") != "frozen":
+            errors.append("W4 Story expansion manifest is not frozen")
+        if len(w4_expansion_ids) != len(set(w4_expansion_ids)):
+            errors.append("W4 Story expansion manifest contains duplicate Story IDs")
+        if set(w4_expansion_ids) & (set(gold_ids) | set(expansion_ids) | set(w3_expansion_ids)):
+            errors.append("W4 Story expansion manifest overlaps an existing publication set")
+        selected.extend({"entry_id": story_id, "linked_person_ids": []} for story_id in w4_expansion_ids)
     selected_ids = [item.get("entry_id") for item in selected]
     corpus_by_id = {item.get("id"): item for item in corpus.get("entries", [])}
     selected.sort(key=lambda item: int(corpus_by_id.get(item.get("entry_id"), {}).get("global_ordinal", 10**9)))
@@ -511,8 +524,8 @@ def validate(root: Path = ROOT, mode: str = "full") -> list[str]:
     stories = bundle.get("stories", [])
     story_by_id = {item.get("id"): item for item in stories if isinstance(item, dict)}
     if selected_ids != [item.get("id") for item in stories]:
-        errors.append("SC1 stories are not exactly the ordered SC0 + M2 + W3 expansion union")
-    expected_story_count = len(gold_ids) + len(expansion_ids) + len(w3_expansion_ids)
+        errors.append("SC1 stories are not exactly the ordered SC0 + M2 + W3 + W4 expansion union")
+    expected_story_count = len(gold_ids) + len(expansion_ids) + len(w3_expansion_ids) + len(w4_expansion_ids)
     if len(stories) != expected_story_count or len(story_by_id) != len(stories):
         errors.append(f"SC1 must contain exactly {expected_story_count} unique Stories from the frozen publication manifests")
 
@@ -737,7 +750,7 @@ def validate(root: Path = ROOT, mode: str = "full") -> list[str]:
 
     frontend_chain = bundle.get("story_chain", {})
     if frontend_chain.get("story_ids") != selected_ids:
-        errors.append("SC1 story_chain.story_ids does not project the SC0 + M2 + W3 expansion union")
+        errors.append("SC1 story_chain.story_ids does not project the SC0 + M2 + W3 + W4 expansion union")
     frontend_story_refs = {
         item.get("entry_id"): item
         for item in frontend_chain.get("story_person_refs", [])

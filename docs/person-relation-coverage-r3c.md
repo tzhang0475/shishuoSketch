@@ -1,32 +1,32 @@
 # R3C：当前范围显式人物关系覆盖审计
 
-R3C 是关系覆盖审计，不是关系扩张器。它扫描当前 50 位生产人物、83 则已发布 Story 的正文/Liu 注，以及当前 Evidence 中已处理的《晋书》材料；新发现只进入候选层，不进入生产 Relation。
+R3C 是关系覆盖审计，不是关系扩张器。它扫描当前 75 位生产人物、143 则已发布 Story 的正文/Liu 注，以及当前 Evidence 中已处理的《晋书》材料；新发现只进入候选层，不进入生产 Relation。
 
 ## 范围与原则
 
-- 生产人物：**50**；已发布 Story：**83**；无序人物对：**1225**。
-- Evidence：Shishuo **649**；Jinshu **50**。
+- 生产人物：**75**；已发布 Story：**143**；无序人物对：**2775**。
+- Evidence：Shishuo **1245**；Jinshu **75**。
 - 覆盖目标：解释每个高信号显式关系是已审阅、已暂缓、新候选、仅场景、不足或身份受阻；不是降低关系孤立人数。
 - 硬规则：Scene ≠ Relation；共现、同席、一次褒贬、一次争论、官位高低都不能单独生成 Relation。
 
 ## 审计摘要
 
-- 有关系语义 Evidence 的人物对：**7**。
+- 有关系语义 Evidence 的人物对：**8**。
 - 当前已审阅 Relation：**12**；R3B 暂缓候选：**2**。
 - 已审阅再发现：**12**；R3B 暂缓再发现：**2**。
-- 新候选：**5**；仅场景：**27**；不足以建立关系：**3**；身份受阻：**7**；重复证据：**5**。
-- 按已审阅 Relation 计算的孤立人物：**38**（描述性指标，不是质量目标）。
+- 新候选：**5**；仅场景：**27**；不足以建立关系：**3**；身份受阻：**8**；重复证据：**8**。
+- 按已审阅 Relation 计算的孤立人物：**63**（描述性指标，不是质量目标）。
 
 ## Relation family hits
 
 - institutional: **13** explicit pattern hits
 - kinship: **1** explicit pattern hits
 - marriage: **0** explicit pattern hits
-- political: **0** explicit pattern hits
+- political: **3** explicit pattern hits
 - social: **4** explicit pattern hits
 
 - 本轮无需扩展 production Relation ontology；5 个新候选均可用现有 `institutional/service_under` 语义表达。
-- 有 **7** 组证据因身份不确定而阻断；未将其强行连接到 Relation 端点。
+- 有 **8** 组证据因身份不确定而阻断；未将其强行连接到 Relation 端点。
 - 未新增 H0/Clan/HistoricalEvent schema 或提示；可复用的事件、亲属、任职线索仍只留在当前 Evidence/审计范围内。
 
 ## R3C 新候选

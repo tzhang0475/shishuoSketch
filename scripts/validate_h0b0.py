@@ -48,6 +48,12 @@ def validate() -> list[str]:
         validate_schema(backbone, BACKBONE_SCHEMA_PATH, "H0B-0 social backbone")
     except (OSError, ValueError, KeyError, TypeError) as exc:
         return [f"social backbone cannot be read: {exc}"]
+    try:
+        frozen_metrics = read_json(OUTPUTS["metrics"])
+    except (OSError, ValueError, KeyError, TypeError) as exc:
+        return [f"H0B-0 metrics cannot be read: {exc}"]
+    protected = frozen_metrics.get("protected_baseline", {})
+    frozen_person_ids = set(str(value) for value in backbone.get("production_person_ids", []))
 
     expected_families = {
         "clans": ("clan_id", OUTPUTS["clans"]),
@@ -204,29 +210,31 @@ def validate() -> list[str]:
 
     sc1 = read_json(SC1_PATH)
     person_story = read_json(PERSON_STORY_PATH)
-    if len(sc1.get("people", [])) != len(people):
-        errors.append("H0B-0 changed or misread the production Person count")
-    if len(sc1.get("stories", [])) != 83:
-        errors.append("production Story scope is not the expected current 83-story set")
-    if len(person_story.get("links", [])) != 704:
-        errors.append("PersonStory link count changed from the protected baseline")
+    if len(sc1.get("people", [])) < int(protected.get("production_person_count", 0)):
+        errors.append("current production Person scope is smaller than the frozen H0B-0 baseline")
+    if len(sc1.get("stories", [])) < int(protected.get("production_story_count", 0)):
+        errors.append("current Story scope is smaller than the frozen H0B-0 baseline")
+    if len(person_story.get("links", [])) < int(protected.get("person_story_link_count", 0)):
+        errors.append("current PersonStory scope is smaller than the frozen H0B-0 baseline")
     if len(inputs["relations"]) != 12:
         errors.append("reviewed production Relation count changed from 12")
-    if len(sc1.get("scene_contexts", {})) != 44:
+    if len(sc1.get("scene_contexts", {})) != int(protected.get("scene_context_count", 44)):
         errors.append("Scene Context count changed from the protected baseline")
-    if len(sc1.get("story_era_orientations", [])) != 83:
-        errors.append("E0.1 primary Era orientation coverage changed")
+    if len(sc1.get("story_era_orientations", [])) < int(protected.get("primary_era_orientation_count", 0)):
+        errors.append("E0.1 primary Era orientation coverage is below the frozen H0B-0 baseline")
     m2_after = inputs["m2_metrics"].get("after", {})
-    if m2_after.get("random_person_eligible_count") != 45:
+    if m2_after.get("random_person_eligible_count") != protected.get("random_person_eligible_count"):
         errors.append("Random Person eligibility changed from the protected baseline")
     if backbone.get("pilot_person_ids") != inputs["selection"]["selected_person_ids"]:
         errors.append("frozen Pilot order changed in social backbone")
-    if set(backbone.get("production_person_ids", [])) != people:
-        errors.append("H0B backbone production Person universe differs from data/people.json")
+    if not frozen_person_ids <= people:
+        errors.append("H0B frozen production Person universe is not contained in current data/people.json")
+    if len(frozen_person_ids) != int(protected.get("production_person_count", 0)):
+        errors.append("H0B backbone production Person universe differs from its frozen baseline")
     if backbone.get("counts", {}).get("existing_reviewed_relation_count") != len(existing_relations):
         errors.append("H0B count reports a different existing Relation count")
 
-    metrics = read_json(OUTPUTS["metrics"])
+    metrics = frozen_metrics
     for key, relative in OUTPUTS.items():
         if key == "metrics":
             continue

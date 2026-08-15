@@ -244,8 +244,11 @@ def validate() -> list[str]:
             errors.append(f"unknown Story must not project a temporal label: {story_id}")
 
     baseline_story_ids = {str(item.get("story_id")) for item in baseline.get("records", []) if isinstance(item, Mapping)}
-    if baseline_story_ids != story_ids:
-        errors.append("H0A.1 baseline Story set differs from current production Story set")
+    # H0A.1 froze the pre-W4 83-Story audit.  W4 adds new anchors but does
+    # not retroactively mutate that baseline; require the frozen set to remain
+    # present as a subset of the enlarged current scope.
+    if not baseline_story_ids <= story_ids:
+        errors.append("H0A.1 baseline Story set is not contained in current production Story set")
     baseline_by_story = {str(item.get("story_id")): item for item in baseline.get("records", []) if isinstance(item, Mapping)}
     for upgrade in metrics.get("h0a1", {}).get("upgrades", []):
         story_id = str(upgrade.get("story_id"))

@@ -281,6 +281,7 @@ def build(root: Path = ROOT) -> dict[str, Any]:
         str(candidate.get("preferred_name", ""))[0]
         for candidate in candidates_by_id.values()
         if str(candidate.get("preferred_name", ""))
+        and str(candidate.get("preferred_name", ""))[0] not in GENERIC_CONTEXTUAL_SURFACES
     )
 
     # Surface -> audit discovery bases.  The list is populated from current

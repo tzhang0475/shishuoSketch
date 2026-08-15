@@ -830,6 +830,11 @@ def _render_report(
     people_before: int,
     people_after: int,
 ) -> str:
+    publication_note = (
+        "No Relation records were created. PersonStory links may cover the full Shishuo corpus; the separate W4 Story wave owns the new Story publication projection."
+        if WAVE_ID.startswith("w4-")
+        else "No Relation records were created. PersonStory links may cover the full Shishuo corpus, but the SC0/SC1 Story publication set is unchanged."
+    )
     lines = [
         f"# {WAVE_LABEL} Person Expansion",
         "",
@@ -867,7 +872,7 @@ def _render_report(
             "",
             "## Relations and publication",
             "",
-            "No Relation records were created. PersonStory links may cover the full Shishuo corpus, but the SC0/SC1 Story publication set is unchanged.",
+            publication_note,
             "",
         ]
     )

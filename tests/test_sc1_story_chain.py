@@ -37,6 +37,10 @@ class SC1StoryChainTests(unittest.TestCase):
             (ROOT / "data/annotation/story-expansion-wave-3.json").read_text(encoding="utf-8")
         )
         expected.extend(item["story_id"] for item in w3_expansion["records"])
+        w4_path = ROOT / "data/annotation/story-expansion-wave-4.json"
+        if w4_path.is_file():
+            w4_expansion = json.loads(w4_path.read_text(encoding="utf-8"))
+            expected.extend(item["story_id"] for item in w4_expansion["records"])
         expected.sort(
             key=lambda story_id: next(
                 story["global_ordinal"]

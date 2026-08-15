@@ -97,8 +97,8 @@ class ZTJ0SourceTests(unittest.TestCase):
         self.assertFalse((ROOT / "data/derived/story-temporal-anchors.json").exists())
         self.assertFalse((ROOT / "data/derived/historical-events.json").exists())
         people = read_json("data/people.json")["people"]
-        self.assertEqual(len(people), 50)
-        self.assertEqual([item["person_id"] for item in people], [f"person-{index:03d}" for index in range(1, 51)])
+        self.assertGreaterEqual(len(people), 50)
+        self.assertEqual([item["person_id"] for item in people], [f"person-{index:03d}" for index in range(1, len(people) + 1)])
 
 
 if __name__ == "__main__":

@@ -12,6 +12,7 @@ from typing import Any, Mapping
 ROOT = Path(__file__).resolve().parents[1]
 WAVE_PATH = Path("data/annotation/person-expansion-wave-3.json")
 STORY_WAVE_PATH = Path("data/annotation/story-expansion-wave-3.json")
+W4_STORY_WAVE_PATH = Path("data/annotation/story-expansion-wave-4.json")
 SC1_PATH = Path("data/derived/sc1-site.json")
 SC0_PATH = Path("data/story-chain-gold-set.json")
 M2_PATH = Path("data/annotation/story-expansion-wave-1.json")
@@ -73,6 +74,11 @@ def validate(root: Path = ROOT) -> list[str]:
         errors.append("W3 Person wave contains a Person without a Person Sketch projection")
 
     w3_story_ids = [str(item.get("story_id")) for item in story_wave.get("records", [])]
+    w4_story_ids = [
+        str(item.get("story_id"))
+        for item in read(W4_STORY_WAVE_PATH).get("records", [])
+        if isinstance(item, Mapping)
+    ] if (ROOT / W4_STORY_WAVE_PATH).is_file() else []
     if not 20 <= len(w3_story_ids) <= 30:
         errors.append(f"W3 Story wave size is {len(w3_story_ids)}, outside the evidence-safe 20–30 range")
     if len(set(w3_story_ids)) != len(w3_story_ids):
@@ -91,7 +97,7 @@ def validate(root: Path = ROOT) -> list[str]:
         for item in bundle.get("stories", [])
         if isinstance(item, Mapping) and item.get("publication_state") != "blocked"
     }
-    expected_frontend = set(gold_ids) | set(m2_ids) | set(w3_story_ids)
+    expected_frontend = set(gold_ids) | set(m2_ids) | set(w3_story_ids) | set(w4_story_ids)
     if frontend_story_ids != expected_frontend:
         errors.append("SC1 Story set is not SC0 ∪ M2 ∪ W3")
 
@@ -138,7 +144,8 @@ def validate(root: Path = ROOT) -> list[str]:
     # I-HOTFIX: the ordinary lexical phrase must not become a Person link.
     effective = read(Path("data/derived/person-resolution-effective.json"))
     lexical_alias_mentions = [
-        item for item in effective.get("mentions", [])
+        item
+        for item in [*effective.get("mentions", []), *effective.get("derived_mentions", [])]
         if item.get("surface") == "少孤"
     ]
     dexing = [item for item in lexical_alias_mentions if item.get("entry_id") == "01-dexing-026"]

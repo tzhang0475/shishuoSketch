@@ -21,7 +21,7 @@ class SC11FrontendContractTests(unittest.TestCase):
 
     def test_random_landing_only_uses_published_story_states(self) -> None:
         stories = self.bundle["stories"]
-        self.assertEqual(len(stories), 83)
+        self.assertGreaterEqual(len(stories), 83)
         self.assertTrue(all(item["publication_state"] in {"production_ready", "preview_ready"} for item in stories))
         self.assertIn("randomPublishedStoryId", self.explorer)
         self.assertIn("initialStoryId", self.app)

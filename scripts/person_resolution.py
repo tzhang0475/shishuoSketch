@@ -38,6 +38,7 @@ CORPUS_INDEX_PATH = Path("data/shishuo-corpus-index.json")
 GOLD_PATH = Path("data/story-chain-gold-set.json")
 EXPANSION_PATH = Path("data/annotation/story-expansion-wave-1.json")
 W3_EXPANSION_PATH = Path("data/annotation/story-expansion-wave-3.json")
+W4_EXPANSION_PATH = Path("data/annotation/story-expansion-wave-4.json")
 EFFECTIVE_PATH = Path("data/derived/person-resolution-effective.json")
 QUEUE_PATH = Path("data/derived/person-resolution-review-queue.json")
 COLLISIONS_PATH = Path("data/derived/person-alias-collisions.json")
@@ -50,6 +51,7 @@ MATERIALIZED_PERSON_WAVE_PATHS = (
     Path("data/annotation/person-expansion-wave-1.json"),
     Path("data/annotation/person-expansion-wave-2.json"),
     Path("data/annotation/person-expansion-wave-3.json"),
+    Path("data/annotation/person-expansion-wave-4.json"),
 )
 
 RESOLUTION_STATUSES = {"resolved", "candidate_for_review", "unresolved"}
@@ -259,7 +261,7 @@ def _identity_cues(
 def _published_story_ids(root: Path) -> set[str]:
     gold = read_json(root, GOLD_PATH)
     ids = {str(item["entry_id"]) for item in gold.get("records", []) if isinstance(item, Mapping) and isinstance(item.get("entry_id"), str)}
-    for expansion_path in (EXPANSION_PATH, W3_EXPANSION_PATH):
+    for expansion_path in (EXPANSION_PATH, W3_EXPANSION_PATH, W4_EXPANSION_PATH):
         if not (root / expansion_path).is_file():
             continue
         expansion = read_json(root, expansion_path)

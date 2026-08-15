@@ -18,8 +18,8 @@ H0A.1 复用 H0A 的 HistoricalPhase、ReignPeriod、EraYear、TemporalEvidence�
 
 - H0A 基线 unknown：54
 - 升级数量：10
-- 升级后仍 unknown：44
-- 剩余 unknown 分类：{"genuine_unknown": 20, "source_conflict": 0, "identity_blocked": 9, "evidence_too_broad": 5, "local_source_search_gap": 10}
+- 升级后仍 unknown：101
+- 剩余 unknown 分类：{"genuine_unknown": 38, "source_conflict": 0, "identity_blocked": 15, "evidence_too_broad": 22, "local_source_search_gap": 26}
 
 升级记录：
 

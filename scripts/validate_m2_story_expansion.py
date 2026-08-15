@@ -35,6 +35,7 @@ def validate(root: Path = ROOT) -> list[str]:
         gold = read(root, GOLD_PATH)
         bundle = read(root, SC1_PATH)
         w3_manifest = read(root, Path("data/annotation/story-expansion-wave-3.json")) if (root / "data/annotation/story-expansion-wave-3.json").is_file() else None
+        w4_manifest = read(root, Path("data/annotation/story-expansion-wave-4.json")) if (root / "data/annotation/story-expansion-wave-4.json").is_file() else None
         scenes = read(root, SCENE_PATH)
         schema = read(root, Path("schema/story-expansion-wave-m2.schema.json"))
     except (OSError, json.JSONDecodeError, KeyError) as exc:
@@ -78,10 +79,11 @@ def validate(root: Path = ROOT) -> list[str]:
     story_rows = [x for x in bundle.get("stories", []) if isinstance(x, Mapping)]
     frontend_ids = [str(x.get("id")) for x in story_rows]
     w3_ids = [str(x.get("story_id")) for x in (w3_manifest or {}).get("records", [])]
-    expected_ids = gold_ids + expansion_ids + w3_ids
+    w4_ids = [str(x.get("story_id")) for x in (w4_manifest or {}).get("records", [])]
+    expected_ids = gold_ids + expansion_ids + w3_ids + w4_ids
     if set(frontend_ids) != set(expected_ids) or len(frontend_ids) != len(expected_ids):
-        errors.append("SC1 frontend Story set is not exactly SC0 union M2 expansion")
-    if not w3_ids and len(frontend_ids) != 60:
+        errors.append("SC1 frontend Story set is not exactly SC0 + M2 + W3 + W4 expansion")
+    if not w3_ids and not w4_ids and len(frontend_ids) != 60:
         errors.append(f"M2 frontend Story count is {len(frontend_ids)}, expected 60 for the frozen selection")
     people_ids = {str(x.get("id")) for x in bundle.get("people", []) if isinstance(x, Mapping)}
     for story in story_rows:

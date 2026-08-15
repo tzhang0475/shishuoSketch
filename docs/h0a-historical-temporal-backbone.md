@@ -10,7 +10,7 @@ H0A 将当前生产 Story 放入有证据支撑的时间分辨率中。它是时
 
 ## 证据与事件
 
-当前 83 则 Story 均有一个 StoryTemporalAnchor；生成 5 个当前范围确实需要的 HistoricalEvent：王敦之亂, 蘇峻之亂, 永嘉之亂與南渡, 八王之亂, 孫恩之亂。事件记录保留 Story/Liu 的表面和来源层，不把事件共现转为人物 Relation。
+当前 143 则 Story 均有一个 StoryTemporalAnchor；生成 5 个当前范围确实需要的 HistoricalEvent：王敦之亂, 蘇峻之亂, 永嘉之亂與南渡, 八王之亂, 孫恩之亂。事件记录保留 Story/Liu 的表面和来源层，不把事件共现转为人物 Relation。
 
 ## 重点回归
 
@@ -30,10 +30,10 @@ H0A 不创建 Clan、OfficeTenure、HistoricalCircle、Timeline UI 或完整 His
 
 ## 当前分布
 
-精度分布：`{"exact_date": 0, "exact_year": 0, "year_range": 0, "event_bounded": 10, "reign_bounded": 7, "phase_only": 22, "unknown": 44}`。前端有定位标签的 Story：39。
+精度分布：`{"exact_date": 0, "exact_year": 1, "year_range": 0, "event_bounded": 12, "reign_bounded": 7, "phase_only": 22, "unknown": 101}`。前端有定位标签的 Story：42。
 
 ## H0A.1 缺口缩减
 
-H0A.1 从已完成 H0A 的基线继续工作：基线 unknown 为 54，本次以故事正文中明确君主／年号、直接事件和南渡语境为优先，不以人物生卒年单独推定故事年份。本次升级 10 则，仍 unknown 44 则；每一项升级都保留 TemporalEvidence 与 resolution_basis。
+H0A.1 从已完成 H0A 的基线继续工作：基线 unknown 为 54，本次以故事正文中明确君主／年号、直接事件和南渡语境为优先，不以人物生卒年单独推定故事年份。本次升级 10 则，仍 unknown 101 则；每一项升级都保留 TemporalEvidence 与 resolution_basis。
 
 04-wenxue-022 的“正始之音”保留为 quoted_ancient_precedent，不误作故事发生年代；06-yaliang-017 的“咸和六年遇害”仍是 later_outcome。

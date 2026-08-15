@@ -45,7 +45,10 @@ class H0B0SocialBackboneTests(unittest.TestCase):
         self.assertLessEqual(len(selected), 20)
         self.assertEqual(len(selected), len(set(selected)))
         self.assertTrue(set(selected) <= self.people)
-        self.assertEqual(len(self.people), 50)
+        frozen_people = set(self.backbone["production_person_ids"])
+        self.assertEqual(len(frozen_people), 50)
+        self.assertTrue(frozen_people <= self.people)
+        self.assertGreaterEqual(len(self.people), len(frozen_people))
         self.assertEqual(self.backbone["counts"]["pilot_person_count"], len(selected))
 
     def test_four_atomic_families_are_separate(self):

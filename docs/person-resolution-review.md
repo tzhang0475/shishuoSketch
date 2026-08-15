@@ -4,9 +4,9 @@ ER1 builds a deterministic effective-resolution overlay above the canonical Ment
 
 ## Summary
 
-- published Mention records audited: 294
-- safely auto-resolved: 260
-- candidate for review: 24
+- published Mention records audited: 551
+- safely auto-resolved: 507
+- candidate for review: 34
 - unresolved: 2
 - reviewed decisions applied: 9
 - shared identity surfaces: 21
@@ -35,21 +35,21 @@ Production status is a navigation capability, not an identity-confidence signal.
 ## Shared alias collisions
 
 - `世英` → 陶璜、魯芝 · 0 published occurrences; never globally exact
-- `仲容` → 阮咸、石苞 · 1 published occurrences; never globally exact
+- `仲容` → 阮咸、石苞 · 2 published occurrences; never globally exact
 - `元禮陳郡` → 袁悦之、顧悦之 · 0 published occurrences; never globally exact
 - `叔平` → 淳于智、王凝之 · 1 published occurrences; never globally exact
 - `叔時` → 孟觀、魯勝 · 0 published occurrences; never globally exact
 - `君叔少有` → 袁悦之、顧悦之 · 0 published occurrences; never globally exact
-- `太傅` → 郗鑒、謝安 · 2 published occurrences; never globally exact
+- `太傅` → 郗鑒、謝安 · 4 published occurrences; never globally exact
 - `子安` → 范平、成公綏 · 0 published occurrences; never globally exact
 - `子悌宣帝` → 譙剛王遜、王遜 · 0 published occurrences; never globally exact
 - `張茂` → 張茂、張華 · 0 published occurrences; never globally exact
 - `彦先` → 賀循、顧榮 · 0 published occurrences; never globally exact
 - `思遠` → 紀瞻、應詹 · 0 published occurrences; never globally exact
-- `文度` → 王坦之、孫晷 · 11 published occurrences; never globally exact
-- `王丞相` → 王隱、王導 · 5 published occurrences; never globally exact
-- `王公` → 王羲之、王導 · 2 published occurrences; never globally exact
-- `王大將軍` → 王舒、王隱、王敦 · 0 published occurrences; never globally exact
+- `文度` → 王坦之、孫晷 · 15 published occurrences; never globally exact
+- `王丞相` → 王導、王隱 · 8 published occurrences; never globally exact
+- `王公` → 王羲之、王導 · 5 published occurrences; never globally exact
+- `王大將軍` → 王舒、王敦、王隱 · 0 published occurrences; never globally exact
 - `芬兄思别` → 左貴嬪、胡貴嬪 · 0 published occurrences; never globally exact
 - `芳父奮别` → 左貴嬪、胡貴嬪 · 0 published occurrences; never globally exact
 - `道元` → 龔之、陳訓 · 0 published occurrences; never globally exact
@@ -95,8 +95,8 @@ Production status is a navigation capability, not an identity-confidence signal.
 - Context: (相付託温公旣見丞相便游樂不住曰旣見管仲天/下不可以無主聞者莫不踴躍植髮穿冠【王丞相】㴱)
 - Reasons: insufficient_unique_local_context、shared_alias_surface
 - Candidates:
-  - 王隱 · identity_candidate · supporting: contextual；medium · conflicting: insufficient_unique_local_context；shared_alias_surface
   - 王導 · production_person · supporting: contextual；medium · conflicting: insufficient_unique_local_context；shared_alias_surface
+  - 王隱 · production_person · supporting: contextual；medium · conflicting: insufficient_unique_local_context；shared_alias_surface
 
 ### 02-yanyu-036 · 王丞相
 
@@ -107,8 +107,8 @@ Production status is a navigation capability, not an identity-confidence signal.
 與泗俱丞相亦與之對泣叙情旣畢
 - Reasons: insufficient_unique_local_context、shared_alias_surface
 - Candidates:
-  - 王隱 · identity_candidate · supporting: contextual；medium · conflicting: insufficient_unique_local_context；shared_alias_surface
   - 王導 · production_person · supporting: contextual；medium · conflicting: insufficient_unique_local_context；shared_alias_surface
+  - 王隱 · production_person · supporting: contextual；medium · conflicting: insufficient_unique_local_context；shared_alias_surface
 
 ### 02-yanyu-036 · 丞相
 
@@ -173,8 +173,8 @@ Production status is a navigation capability, not an identity-confidence signal.
 與君共談析理
 - Reasons: insufficient_unique_local_context、shared_alias_surface
 - Candidates:
-  - 王隱 · identity_candidate · supporting: contextual；medium · conflicting: insufficient_unique_local_context；shared_alias_surface
   - 王導 · production_person · supporting: contextual；medium · conflicting: insufficient_unique_local_context；shared_alias_surface
+  - 王隱 · production_person · supporting: contextual；medium · conflicting: insufficient_unique_local_context；shared_alias_surface
 
 ### 04-wenxue-022 · 丞相
 
@@ -216,6 +216,45 @@ Production status is a navigation capability, not an identity-confidence signal.
 - Reasons: contextual_surface_requires_local_evidence
 - Candidates:
   - 王導 · production_person · supporting: ambiguous；medium · conflicting: contextual_surface_requires_local_evidence
+
+### 04-wenxue-094 · 謝公
+
+- Mention: `shishuo-04-wenxue-094-main-text-001` · section: `main_text` · status: `candidate_for_review` · review: `candidate`
+- Context: 袁彦伯作名士傳成
+
+見【謝公】公笑曰我嘗與諸人道江北事特
+作狡獪耳彦伯遂以箸書
+- Reasons: contextual_surface_requires_local_evidence
+- Candidates:
+  - 謝安 · production_person · supporting: ambiguous；strong · conflicting: contextual_surface_requires_local_evidence
+
+### 05-fangzheng-018 · 謝公
+
+- Mention: `shishuo-05-fangzheng-018-main-text-001` · section: `main_text` · status: `candidate_for_review` · review: `candidate`
+- Context: 我父祖名播海內寧有不
+知鬼子敢爾
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+議者疑
+二陸優劣【謝公】以此定之
+- Reasons: contextual_surface_requires_local_evidence
+- Candidates:
+  - 謝安 · production_person · supporting: ambiguous；strong · conflicting: contextual_surface_requires_local_evidence
 
 ### 05-fangzheng-023 · 少孤
 
@@ -366,8 +405,8 @@ Production status is a navigation capability, not an identity-confidence signal.
 亦皆可嘉聞來覓壻咸自矜持唯
 - Reasons: insufficient_unique_local_context、shared_alias_surface
 - Candidates:
-  - 王隱 · identity_candidate · supporting: contextual；medium · conflicting: insufficient_unique_local_context；shared_alias_surface
   - 王導 · production_person · supporting: contextual；medium · conflicting: insufficient_unique_local_context；shared_alias_surface
+  - 王隱 · production_person · supporting: contextual；medium · conflicting: insufficient_unique_local_context；shared_alias_surface
 
 ### 06-yaliang-019 · 丞相
 
@@ -390,6 +429,17 @@ Production status is a navigation capability, not an identity-confidence signal.
 - Candidates:
   - 郗鑒 · production_person · supporting: contextual；medium · conflicting: contextual_surface_requires_local_evidence
 
+### 08-shangyu-054 · 王丞相
+
+- Mention: `shishuo-08-shangyu-054-main-text-001` · section: `main_text` · status: `candidate_for_review` · review: `candidate`
+- Context: 【王丞相】云刁玄亮之察察戴若思之巖巖
+卞望之
+之峯距
+- Reasons: insufficient_unique_local_context、shared_alias_surface
+- Candidates:
+  - 王導 · production_person · supporting: contextual；medium · conflicting: insufficient_unique_local_context；shared_alias_surface
+  - 王隱 · production_person · supporting: contextual；medium · conflicting: insufficient_unique_local_context；shared_alias_surface
+
 ### 08-shangyu-077 · 王右軍
 
 - Mention: `shishuo-08-shangyu-077-main-text-001` · section: `main_text` · status: `candidate_for_review` · review: `candidate`
@@ -398,6 +448,16 @@ Production status is a navigation capability, not an identity-confidence signal.
 - Reasons: contextual_surface_requires_local_evidence
 - Candidates:
   - 王羲之 · production_person · supporting: contextual；medium · conflicting: contextual_surface_requires_local_evidence
+
+### 09-pinzao-018 · 王丞相
+
+- Mention: `shishuo-09-pinzao-018-main-text-001` · section: `main_text` · status: `candidate_for_review` · review: `candidate`
+- Context: 【王丞相】二弟不過江曰潁曰敝時論以潁比鄧伯道
+敝比温忠武議郎祭酒者也
+- Reasons: insufficient_unique_local_context、shared_alias_surface
+- Candidates:
+  - 王導 · production_person · supporting: contextual；medium · conflicting: insufficient_unique_local_context；shared_alias_surface
+  - 王隱 · production_person · supporting: contextual；medium · conflicting: insufficient_unique_local_context；shared_alias_surface
 
 ### 09-pinzao-026 · 王公
 
@@ -415,8 +475,8 @@ Production status is a navigation capability, not an identity-confidence signal.
 手指地曰正自爾馨
 - Reasons: insufficient_unique_local_context、shared_alias_surface
 - Candidates:
-  - 王隱 · identity_candidate · supporting: contextual；medium · conflicting: insufficient_unique_local_context；shared_alias_surface
   - 王導 · production_person · supporting: contextual；medium · conflicting: insufficient_unique_local_context；shared_alias_surface
+  - 王隱 · production_person · supporting: contextual；medium · conflicting: insufficient_unique_local_context；shared_alias_surface
 
 ### 09-pinzao-030 · 右軍
 
@@ -437,6 +497,60 @@ Production status is a navigation capability, not an identity-confidence signal.
   - 王坦之 · identity_candidate · supporting: exact；strong · conflicting: insufficient_unique_local_context；shared_alias_surface
   - 孫晷 · production_person · supporting: ambiguous；strong · conflicting: insufficient_unique_local_context；shared_alias_surface
 
+### 17-shangshi-006 · 丞相
+
+- Mention: `shishuo-17-shangshi-006-liu-annotation-003` · section: `liu_annotation` · status: `candidate_for_review` · review: `candidate`
+- Context: (馬明當改葬此君風流名士海内民望可脩三牲之/玠别傳曰玠咸和中故遷於江寜【丞相】王公教曰洗)
+- Reasons: contextual_surface_requires_local_evidence
+- Candidates:
+  - 王導 · production_person · supporting: ambiguous；medium · conflicting: contextual_surface_requires_local_evidence
+
+### 17-shangshi-006 · 王公
+
+- Mention: `shishuo-17-shangshi-006-liu-annotation-004` · section: `liu_annotation` · status: `candidate_for_review` · review: `candidate`
+- Context: (馬明當改葬此君風流名士海内民望可脩三牲之/玠别傳曰玠咸和中故遷於江寜丞相【王公】教曰洗)
+- Reasons: insufficient_unique_local_context、shared_alias_surface
+- Candidates:
+  - 王羲之 · production_person · supporting: ambiguous；medium · conflicting: insufficient_unique_local_context；shared_alias_surface
+  - 王導 · production_person · supporting: ambiguous；medium · conflicting: insufficient_unique_local_context；shared_alias_surface
+
+### 17-shangshi-006 · 丞相
+
+- Mention: `shishuo-17-shangshi-006-main-text-001` · section: `main_text` · status: `candidate_for_review` · review: `candidate`
+- Context: 衛洗馬以永嘉六年喪謝鯤哭之感動路人
+
+
+咸和中【丞相】王公教曰衛洗馬當
+改葬此君風流名士海内所瞻可脩薄祭以敦舊好
+- Reasons: contextual_surface_requires_local_evidence
+- Candidates:
+  - 王導 · production_person · supporting: ambiguous；medium · conflicting: contextual_surface_requires_local_evidence
+
+### 17-shangshi-006 · 王公
+
+- Mention: `shishuo-17-shangshi-006-main-text-002` · section: `main_text` · status: `candidate_for_review` · review: `candidate`
+- Context: 衛洗馬以永嘉六年喪謝鯤哭之感動路人
+
+
+咸和中丞相【王公】教曰衛洗馬當
+改葬此君風流名士海内所瞻可脩薄祭以敦舊好
+- Reasons: insufficient_unique_local_context、shared_alias_surface
+- Candidates:
+  - 王羲之 · production_person · supporting: ambiguous；medium · conflicting: insufficient_unique_local_context；shared_alias_surface
+  - 王導 · production_person · supporting: ambiguous；medium · conflicting: insufficient_unique_local_context；shared_alias_surface
+
+### 18-qiyi-004 · 王丞相
+
+- Mention: `shishuo-18-qiyi-004-main-text-001` · section: `main_text` · status: `candidate_for_review` · review: `candidate`
+- Context: 李廞是茂曽弟五子清貞有逺操而少羸病不肯婚
+宦居在臨海住兄侍中墓下既有髙名【王丞相】欲招
+禮之故辟為府掾廞得牋命笑曰茂弘乃復以一爵
+假人
+- Reasons: insufficient_unique_local_context、shared_alias_surface
+- Candidates:
+  - 王導 · production_person · supporting: contextual；medium · conflicting: insufficient_unique_local_context；shared_alias_surface
+  - 王隱 · production_person · supporting: contextual；medium · conflicting: insufficient_unique_local_context；shared_alias_surface
+
 ### 23-rendan-013 · 仲容
 
 - Mention: `shishuo-w3-38231138347d766d147ad8bc` · section: `main_text` · status: `resolved` · review: `reviewed`
@@ -448,6 +562,15 @@ Production status is a navigation capability, not an identity-confidence signal.
   - 石苞 · production_person · supporting: exact；strong · conflicting: 无
 - Review note: 本则“步兵”即阮籍；“仲容”承接阮咸（阮仲容），不得因石苞亦字仲容而解析为石苞。
 - Automatic-review conflict: automatic=candidate_for_review/无目标；已审核决定优先保留。
+
+### 29-jianshe-001 · 王公
+
+- Mention: `shishuo-29-jianshe-001-liu-annotation-001` · section: `liu_annotation` · status: `candidate_for_review` · review: `candidate`
+- Context: (至儉將有犯義之名語林曰嶠諸弟往園/晉諸公賛曰嶠性不通治家富擬【王公】而)
+- Reasons: insufficient_unique_local_context、shared_alias_surface
+- Candidates:
+  - 王羲之 · production_person · supporting: ambiguous；medium · conflicting: insufficient_unique_local_context；shared_alias_surface
+  - 王導 · production_person · supporting: ambiguous；medium · conflicting: insufficient_unique_local_context；shared_alias_surface
 
 ## Manual correction workflow
 

@@ -26,6 +26,7 @@ EVIDENCE_PATH = Path("data/evidence/wp1-evidence.json")
 RELATIONS_PATH = Path("data/annotation/wp1-relations.json")
 PERSON_STORY_PATH = Path("data/derived/person-story-links.json")
 SC1_PATH = Path("data/derived/sc1-site.json")
+W4_STORY_WAVE_PATH = Path("data/annotation/story-expansion-wave-4.json")
 M2_METRICS_PATH = Path("data/derived/m2-experience-metrics.json")
 SELECTION_PATH = Path("data/annotation/h0b0-pilot-selection.json")
 SEEDS_PATH = Path("data/annotation/h0b0-fact-seeds.json")
@@ -654,6 +655,23 @@ def build_outputs(inputs: Mapping[str, Any]) -> dict[str, Any]:
 
 
 def main() -> int:
+    # H0B-0 is a frozen pilot input once W4 has started.  Re-running the
+    # original builder against the enlarged production projection would
+    # rewrite its historical baseline and silently turn the pilot into an
+    # H0B-1 rebuild.  Keep the original artifacts immutable; W4 consumes
+    # them and writes separate readiness projections.
+    wave_path = ROOT / W4_STORY_WAVE_PATH
+    if wave_path.is_file():
+        wave = read_json(W4_STORY_WAVE_PATH)
+        if wave.get("selection_status") == "frozen":
+            missing = [str(path) for path in OUTPUTS.values() if not (ROOT / path).is_file()]
+            if missing:
+                raise FileNotFoundError(
+                    "H0B-0 is frozen but required pilot artifacts are missing: "
+                    + ", ".join(missing)
+                )
+            print("H0B-0 social backbone is frozen; no rebuild performed")
+            return 0
     inputs = load_inputs()
     output = build_outputs(inputs)
     counts = output["backbone"]["counts"]

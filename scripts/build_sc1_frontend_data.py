@@ -54,6 +54,7 @@ WP1_BUNDLE_PATH = ROOT / "data/derived/wp1-site.json"
 GOLD_PATH = ROOT / "data/story-chain-gold-set.json"
 STORY_EXPANSION_PATH = ROOT / "data/annotation/story-expansion-wave-1.json"
 W3_STORY_EXPANSION_PATH = ROOT / "data/annotation/story-expansion-wave-3.json"
+W4_STORY_EXPANSION_PATH = ROOT / "data/annotation/story-expansion-wave-4.json"
 CHAIN_INDEX_PATH = ROOT / "data/derived/story-chain-gold-index.json"
 CORPUS_INDEX_PATH = ROOT / "data/shishuo-corpus-index.json"
 MENTIONS_PATH = ROOT / "data/mentions/shishuo.json"
@@ -143,12 +144,22 @@ def apply_e0_story_era_orientation(
     story: dict[str, Any],
     story_id: str,
     orientations: Mapping[str, Mapping[str, Any]],
+    converter: OpenCC,
 ) -> None:
     """Attach the universal reader entry without rewriting H0A chronology."""
 
     record = orientations.get(story_id)
     if not isinstance(record, Mapping):
-        raise ValueError(f"E0.1 orientation missing for published Story: {story_id}")
+        # W4 publication is built before the next E0 projection can inspect
+        # the enlarged SC1 bundle.  This deterministic bootstrap value is
+        # replaced by the evidence-backed E0.1 projection on the next build.
+        record = {
+            "primary_era_card_id": "era-card-corpus-shishuo-era",
+            "card_kind": "corpus_context",
+            "orientation_precision": "corpus_context",
+            "orientation_basis": "w4_pre_e0_bootstrap",
+            "label": pair("世說時代", converter),
+        }
     card_id = record.get("primary_era_card_id")
     label = record.get("label")
     if not isinstance(card_id, str) or not isinstance(label, Mapping):
@@ -444,6 +455,16 @@ def build(root: Path = ROOT) -> dict[str, Any]:
         }
     else:
         w3_story_metadata = {}
+    if W4_STORY_EXPANSION_PATH.is_file():
+        expansion = read_json(W4_STORY_EXPANSION_PATH)
+        gold_ids = [str(item["entry_id"]) for item in gold["records"]]
+        if expansion.get("gold_story_ids") != gold_ids:
+            raise ValueError("W4 Story expansion manifest does not preserve the frozen SC0 Gold Set")
+        selected_records.extend(
+            {"entry_id": str(item["story_id"]), "linked_person_ids": []}
+            for item in expansion.get("records", [])
+            if isinstance(item, Mapping) and isinstance(item.get("story_id"), str)
+        )
     temporal_anchors: dict[str, Mapping[str, Any]] = {}
     if H0A_ANCHORS_PATH.is_file():
         h0a_anchors = read_json(H0A_ANCHORS_PATH)
@@ -642,7 +663,7 @@ def build(root: Path = ROOT) -> dict[str, Any]:
             story["global_ordinal"] = 370
             apply_period_orientation(story, entry_id, w3_story_metadata, converter)
             apply_h0a_temporal_orientation(story, entry_id, temporal_anchors, converter)
-            apply_e0_story_era_orientation(story, entry_id, e0_orientations)
+            apply_e0_story_era_orientation(story, entry_id, e0_orientations, converter)
             base_annotation_evidence = {
                 str(item.get("locator", {}).get("annotation_id")): item["id"]
                 for item in base_evidence.values()
@@ -794,7 +815,7 @@ def build(root: Path = ROOT) -> dict[str, Any]:
         }
         apply_period_orientation(story, entry_id, w3_story_metadata, converter)
         apply_h0a_temporal_orientation(story, entry_id, temporal_anchors, converter)
-        apply_e0_story_era_orientation(story, entry_id, e0_orientations)
+        apply_e0_story_era_orientation(story, entry_id, e0_orientations, converter)
         new_stories.append(story)
 
     new_stories.sort(key=lambda story: int(story.get("global_ordinal", 10**9)))
@@ -952,6 +973,7 @@ def build(root: Path = ROOT) -> dict[str, Any]:
                 "data/story-chain-gold-set.json",
                 "data/annotation/story-expansion-wave-1.json",
                 "data/annotation/story-expansion-wave-3.json",
+                "data/annotation/story-expansion-wave-4.json",
                 "data/derived/person-story-links.json",
                 "data/derived/story-chain-gold-index.json",
                 "data/annotation/wp1-punctuation.json",
