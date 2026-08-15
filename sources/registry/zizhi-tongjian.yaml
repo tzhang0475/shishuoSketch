@@ -1,0 +1,73 @@
+schema: 1
+work: "資治通鑑"
+witnesses:
+  - id: zizhi-tongjian-kanripo-wyg
+    work: "資治通鑑"
+    role: primary-machine
+    author_compiler: "司馬光"
+    edition: "文淵閣四庫全書 / WYG"
+    source_provider: Kanripo
+    source_type: machine-text
+    script: "traditional Chinese"
+    annotations: ["胡三省音注"]
+    local: true
+    local_path: "sources/downloads/zizhi-tongjian/kanripo-wyg"
+    remote_record: "https://github.com/kanripo/KR2b0007.git"
+    provenance_lock: "sources/downloads/zizhi-tongjian/kanripo-wyg/manifest.lock.json"
+    expected_juan_count: 294
+    text_authority: "default diplomatic machine-text witness for ZTJ0"
+    structure_authority: "actual Kanripo Org properties, FILE/page markers, and observed balanced parenthesized note spans"
+    notes: "The checked revision exposes KR2b0007_WYG page markers and a README titled / WYG. Its per-file BASEEDITION property says SBCK; that payload inconsistency is preserved and reported, never rewritten. The extra KR2b0007_295.txt stub is locked as acquired but is not treated as juan 295."
+
+  - id: zizhi-tongjian-kanripo-sbck
+    work: "資治通鑑"
+    role: early-textual-reference / machine-reference
+    author_compiler: "司馬光"
+    edition: "四部叢刊 / SBCK"
+    source_provider: Kanripo
+    source_type: machine-text-reference
+    script: "traditional Chinese"
+    annotations: ["胡三省音注"]
+    local: false
+    local_path: null
+    remote_record: "https://github.com/kanripo/KR2b0007.git"
+    provenance_status: "registered-but-not-independent-in-checked-tree"
+    text_authority: "reference only; no independent SBCK payload was exposed by the inspected KR2b0007 revision"
+    structure_authority: "Kanripo edition table and future independent witness acquisition"
+    notes: "KR2b0007/Readme.org lists SBCK and WYG as edition labels, but the checked tree contains one KR2b0007_WYG file family only. It is therefore registered distinctly without copying WYG bytes into an SBCK identity. WYG remains the processed primary."
+
+  - id: zizhi-tongjian-kaoyi-kanripo
+    work: "資治通鑑考異"
+    role: critical-chronology
+    author: "司馬光"
+    edition: "四部叢刊 / SBCK"
+    source_provider: Kanripo
+    source_type: machine-text
+    script: "traditional Chinese"
+    annotations: ["考異正文中的引書/校勘材料"]
+    local: true
+    local_path: "sources/downloads/zizhi-tongjian/kaoyi-kanripo"
+    remote_record: "https://github.com/kanripo/KR2b0008.git"
+    provenance_lock: "sources/downloads/zizhi-tongjian/kaoyi-kanripo/manifest.lock.json"
+    expected_juan_count: 30
+    text_authority: "chronology-critical evidence; not an automatic date adjudicator"
+    structure_authority: "actual Kanripo Org properties and page markers"
+    notes: "Kept as a separate evidence corpus. A Kaoyi discussion is not silently attached to a Story or treated as an authority rule."
+
+  - id: zizhi-tongjian-mulu-kanripo
+    work: "資治通鑑目錄"
+    role: chronology-reference
+    author_compiler: "司馬光"
+    edition: "文淵閣四庫全書 / WYG"
+    source_provider: Kanripo
+    source_type: machine-text / sparse-page-reference
+    script: "traditional Chinese"
+    annotations: []
+    local: true
+    local_path: "sources/downloads/zizhi-tongjian/mulu-kanripo"
+    remote_record: "https://github.com/kanripo/KR2b0010.git"
+    provenance_lock: "sources/downloads/zizhi-tongjian/mulu-kanripo/manifest.lock.json"
+    expected_juan_count: 30
+    text_authority: "lightweight chronology reference where transcription is present"
+    structure_authority: "actual Kanripo page markers and file/juan properties"
+    notes: "The acquired tree contains 30 catalogue juan plus front matter, but many pages are page markers with little or no transcription. ZTJ0 records that sparsity and does not OCR or invent missing text."
