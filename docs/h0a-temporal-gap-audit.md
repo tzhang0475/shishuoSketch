@@ -97,7 +97,7 @@
 | `08-shangyu-067` | `unknown` | `genuine_unknown` | 当前已处理证据不足以安全定位本则时间；保留 unknown，等待后续有针对性的史料审查。 |
 | `08-shangyu-073` | `unknown` | `genuine_unknown` | 当前已处理证据不足以安全定位本则时间；保留 unknown，等待后续有针对性的史料审查。 |
 | `08-shangyu-077` | `unknown` | `identity_blocked` | 当前已处理证据不足以安全定位本则时间；保留 unknown，等待后续有针对性的史料审查。 |
-| `08-shangyu-079` | `unknown` | `genuine_unknown` | 当前已处理证据不足以安全定位本则时间；保留 unknown，等待后续有针对性的史料审查。 |
+| `08-shangyu-079` | `unknown` | `identity_blocked` | 当前已处理证据不足以安全定位本则时间；保留 unknown，等待后续有针对性的史料审查。 |
 | `09-pinzao-006` | `reign_bounded` | `resolved_at_supported_precision` | 正文直接出现可与 ZTJ0 年号区间对应的故事层年号；保留在位区间，不虚构具体年份。 |
 | `09-pinzao-008` | `phase_only` | `phase_only` | 沿用 W3/C0 的阶段定位；没有把阶段标签扩写成故事年份。 |
 | `09-pinzao-014` | `reign_bounded` | `resolved_at_supported_precision` | 正文直接点出故事当下的君主；由 ZTJ0 观察到的在位区间提供保守边界。 |
@@ -143,7 +143,7 @@
 | `24-jianao-002` | `unknown` | `genuine_unknown` | 当前已处理证据不足以安全定位本则时间；保留 unknown，等待后续有针对性的史料审查。 |
 | `24-jianao-003` | `unknown` | `genuine_unknown` | 当前已处理证据不足以安全定位本则时间；保留 unknown，等待后续有针对性的史料审查。 |
 | `25-paidiao-009` | `phase_only` | `phase_only` | 沿用 W3/C0 的阶段定位；没有把阶段标签扩写成故事年份。 |
-| `25-paidiao-015` | `unknown` | `genuine_unknown` | 当前已处理证据不足以安全定位本则时间；保留 unknown，等待后续有针对性的史料审查。 |
+| `25-paidiao-015` | `unknown` | `identity_blocked` | 当前已处理证据不足以安全定位本则时间；保留 unknown，等待后续有针对性的史料审查。 |
 | `25-paidiao-026` | `unknown` | `local_source_search_gap` | 当前已处理证据不足以安全定位本则时间；保留 unknown，等待后续有针对性的史料审查。 |
 | `25-paidiao-038` | `unknown` | `local_source_search_gap` | 仅有早先背景或引述，不能当作本则故事时间。 |
 | `25-paidiao-060` | `unknown` | `evidence_too_broad` | 仅有后续命运／事件证据；按时间方向规则不回推为本则发生年。 |

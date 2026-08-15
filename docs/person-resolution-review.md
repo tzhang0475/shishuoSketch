@@ -5,9 +5,9 @@ ER1 builds a deterministic effective-resolution overlay above the canonical Ment
 ## Summary
 
 - published Mention records audited: 551
-- safely auto-resolved: 507
+- safely auto-resolved: 505
 - candidate for review: 34
-- unresolved: 2
+- unresolved: 4
 - reviewed decisions applied: 9
 - shared identity surfaces: 21
 
@@ -449,6 +449,15 @@ Production status is a navigation capability, not an identity-confidence signal.
 - Candidates:
   - 王羲之 · production_person · supporting: contextual；medium · conflicting: contextual_surface_requires_local_evidence
 
+### 08-shangyu-079 · 望之
+
+- Mention: `shishuo-p3b-wave-2-977f113ffc22eae2a1483bd0` · section: `main_text` · status: `unresolved` · review: `candidate`
+- Context: 桓温行經王敦墓邊過【望之】云可兒可兒
+- Reasons: homographic_lexical_alias_without_identity_basis
+- Candidates:
+  - 卞壼 · production_person · supporting: exact；strong · conflicting: homographic_lexical_alias_without_identity_basis
+- Review note: 望之既是卞壼的字，也是常見的動詞加代詞結構；單獨出現時不得按全局別名解析。明確的卞望之等完整稱謂仍可按原有身份證據解析。
+
 ### 09-pinzao-018 · 王丞相
 
 - Mention: `shishuo-09-pinzao-018-main-text-001` · section: `main_text` · status: `candidate_for_review` · review: `candidate`
@@ -562,6 +571,17 @@ Production status is a navigation capability, not an identity-confidence signal.
   - 石苞 · production_person · supporting: exact；strong · conflicting: 无
 - Review note: 本则“步兵”即阮籍；“仲容”承接阮咸（阮仲容），不得因石苞亦字仲容而解析为石苞。
 - Automatic-review conflict: automatic=candidate_for_review/无目标；已审核决定优先保留。
+
+### 25-paidiao-015 · 望之
+
+- Mention: `shishuo-p3b-wave-2-12f6406855f103bf93269657` · section: `main_text` · status: `unresolved` · review: `candidate`
+- Context: 謝幼輿謂周侯曰卿類社樹逺【望之】峨峨拂青天就
+而視之其根則羣狐所託下聚溷而已荅曰
+枝條拂青天不以爲高羣狐亂其下不以爲
+- Reasons: homographic_lexical_alias_without_identity_basis
+- Candidates:
+  - 卞壼 · production_person · supporting: exact；strong · conflicting: homographic_lexical_alias_without_identity_basis
+- Review note: 望之既是卞壼的字，也是常見的動詞加代詞結構；單獨出現時不得按全局別名解析。明確的卞望之等完整稱謂仍可按原有身份證據解析。
 
 ### 29-jianshe-001 · 王公
 

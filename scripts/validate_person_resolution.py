@@ -28,6 +28,7 @@ try:
         SPAN_AUDIT_PATH,
         SPAN_DECISIONS_PATH,
         LEXICAL_ALIAS_RULES_PATH,
+        LEXICAL_COLLISION_AUDIT_PATH,
         _published_story_ids,
         _load_sections,
         _target_key,
@@ -45,6 +46,7 @@ except ImportError:  # direct execution
         SPAN_AUDIT_PATH,
         SPAN_DECISIONS_PATH,
         LEXICAL_ALIAS_RULES_PATH,
+        LEXICAL_COLLISION_AUDIT_PATH,
         _published_story_ids,
         _load_sections,
         _target_key,
@@ -67,6 +69,7 @@ COLLISION_SCHEMA_PATH = Path("schema/person-alias-collisions.schema.json")
 SPAN_DECISION_SCHEMA_PATH = Path("schema/person-resolution-span-decision.schema.json")
 SPAN_AUDIT_SCHEMA_PATH = Path("schema/person-resolution-span-audit.schema.json")
 LEXICAL_ALIAS_RULES_SCHEMA_PATH = Path("schema/person-resolution-lexical-alias-rules.schema.json")
+LEXICAL_COLLISION_AUDIT_SCHEMA_PATH = Path("schema/person-resolution-lexical-collision-audit.schema.json")
 SC1_PATH = Path("data/derived/sc1-site.json")
 
 RESOLUTION_FIELDS = {
@@ -158,6 +161,7 @@ def validate(root: Path = ROOT) -> list[str]:
         span_decisions_document = read_json(root, SPAN_DECISIONS_PATH)
         span_audit = read_json(root, SPAN_AUDIT_PATH)
         lexical_alias_rules = read_json(root, LEXICAL_ALIAS_RULES_PATH)
+        lexical_collision_audit = read_json(root, LEXICAL_COLLISION_AUDIT_PATH)
     except (OSError, ValueError, KeyError) as exc:
         return [f"ER1 cannot read required artifact: {exc}"]
 
@@ -169,6 +173,7 @@ def validate(root: Path = ROOT) -> list[str]:
     errors.extend(_schema_errors(root, SPAN_DECISION_SCHEMA_PATH, span_decisions_document, "ER1.1 span decisions"))
     errors.extend(_schema_errors(root, SPAN_AUDIT_SCHEMA_PATH, span_audit, "ER1.1 span audit"))
     errors.extend(_schema_errors(root, LEXICAL_ALIAS_RULES_SCHEMA_PATH, lexical_alias_rules, "ER1 homographic alias rules"))
+    errors.extend(_schema_errors(root, LEXICAL_COLLISION_AUDIT_SCHEMA_PATH, lexical_collision_audit, "ER1 lexical collision audit"))
     errors.extend(_schema_errors(root, EFFECTIVE_SCHEMA_PATH, effective, "ER1 effective resolution"))
     errors.extend(_schema_errors(root, QUEUE_SCHEMA_PATH, queue, "ER1 review queue"))
     errors.extend(_schema_errors(root, COLLISION_SCHEMA_PATH, collisions, "ER1 alias collisions"))
@@ -366,6 +371,56 @@ def validate(root: Path = ROOT) -> list[str]:
         errors.append("ER1.1 span audit published_story_count is stale")
     if span_audit.get("audited_story_count") != len(audited_story_ids):
         errors.append("ER1.1 span audit audited_story_count is stale")
+
+    lexical_records = [
+        item for item in lexical_collision_audit.get("records", [])
+        if isinstance(item, Mapping)
+    ]
+    if lexical_collision_audit.get("scope", {}).get("occurrence_count") != len(lexical_records):
+        errors.append("ER1 lexical collision audit occurrence_count is stale")
+    if lexical_collision_audit.get("scope", {}).get("surface") != "望之":
+        errors.append("ER1 lexical collision audit does not cover 望之")
+    for record in lexical_records:
+        story_id = str(record.get("story_id", ""))
+        section = str(record.get("section", ""))
+        annotation_id = record.get("annotation_id")
+        section_key = f"liu_annotation:{annotation_id}" if section == "liu_annotation" and isinstance(annotation_id, str) else section
+        span = record.get("span", {})
+        canonical = sections.get((story_id, section_key), "")
+        offset = span.get("offset") if isinstance(span, Mapping) else None
+        end = span.get("end_offset_exclusive") if isinstance(span, Mapping) else None
+        if not isinstance(offset, int) or not isinstance(end, int) or canonical[offset:end] != "望之":
+            errors.append(f"ER1 lexical collision span does not round-trip: {record.get('audit_record_id')}")
+        current = record.get("current_resolution")
+        if isinstance(current, Mapping):
+            target = current.get("resolution_target")
+            if record.get("classification") == "lexical_verb_pronoun" and (
+                current.get("resolution_status") == "resolved" or target is not None
+            ):
+                errors.append(f"ER1 lexical 望之 occurrence still resolves as a Person: {record.get('audit_record_id')}")
+        if record.get("classification") == "identity_name" and record.get("target_person_id") != "person-029":
+            errors.append(f"ER1 positive 卞望之 control does not target person-029: {record.get('audit_record_id')}")
+
+    confirmed_lexical = [
+        item for item in lexical_records
+        if item.get("story_id") == "08-shangyu-079"
+        and item.get("section") == "main_text"
+        and item.get("surface") == "望之"
+    ]
+    if len(confirmed_lexical) != 1:
+        errors.append("ER1 08-shangyu-079 lexical 望之 audit record is missing or duplicated")
+    else:
+        record = confirmed_lexical[0]
+        current = record.get("current_resolution")
+        if record.get("classification") != "lexical_verb_pronoun":
+            errors.append("ER1 08-shangyu-079 望之 is not classified lexical_verb_pronoun")
+        if isinstance(current, Mapping) and (
+            current.get("resolution_status") != "unresolved"
+            or current.get("resolution_target") is not None
+        ):
+            errors.append("ER1 08-shangyu-079 望之 still has a resolved identity")
+    if not any(item.get("classification") == "identity_name" and item.get("target_person_id") == "person-029" for item in lexical_records):
+        errors.append("ER1 lexical collision audit lacks an explicit 卞望之 positive identity control")
 
     regression_derived = [item for item in derived_rows if item.get("entry_id") == "06-yaliang-017"]
     expected_surfaces = {"庾太尉", "亮"}

@@ -1,0 +1,75 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://shishuo-sketch/schema/person-resolution-lexical-collision-audit.schema.json",
+  "title": "Person-resolution lexical collision audit",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "stage", "scope", "generated_from", "policy", "records"],
+  "properties": {
+    "schema": {"const": 1},
+    "stage": {"const": "er1-lexical-collision-audit"},
+    "scope": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["surface", "occurrence_count", "story_count", "sections"],
+      "properties": {
+        "surface": {"const": "望之"},
+        "occurrence_count": {"type": "integer", "minimum": 0},
+        "story_count": {"type": "integer", "minimum": 0},
+        "sections": {"type": "array", "items": {"type": "string"}}
+      }
+    },
+    "generated_from": {"type": "array", "items": {"type": "string"}},
+    "policy": {"type": "string"},
+    "records": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "audit_record_id",
+          "story_id",
+          "section",
+          "surface",
+          "span",
+          "left_context",
+          "right_context",
+          "current_resolution",
+          "classification",
+          "target_person_id",
+          "evidence_ids",
+          "rationale"
+        ],
+        "properties": {
+          "audit_record_id": {"type": "string", "minLength": 1},
+          "story_id": {"type": "string", "minLength": 1},
+          "section": {"type": "string", "enum": ["main_text", "liu_annotation"]},
+          "annotation_id": {"type": "string"},
+          "surface": {"const": "望之"},
+          "span": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["offset", "end_offset_exclusive", "text"],
+            "properties": {
+              "offset": {"type": "integer", "minimum": 0},
+              "end_offset_exclusive": {"type": "integer", "minimum": 1},
+              "text": {"const": "望之"}
+            }
+          },
+          "left_context": {"type": "string"},
+          "right_context": {"type": "string"},
+          "current_resolution": {
+            "anyOf": [
+              {"type": "null"},
+              {"type": "object"}
+            ]
+          },
+          "classification": {"type": "string", "enum": ["identity_name", "lexical_verb_pronoun", "ambiguous"]},
+          "target_person_id": {"anyOf": [{"type": "null"}, {"type": "string"}]},
+          "evidence_ids": {"type": "array", "items": {"type": "string"}},
+          "rationale": {"type": "string", "minLength": 1}
+        }
+      }
+    }
+  }
+}

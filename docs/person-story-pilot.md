@@ -14,7 +14,7 @@ This is deterministic navigation/index data for the unified materialized Shishuo
 
 - primary people: 74
 - supporting people: 1
-- reviewed PersonStoryLinks: 876
+- reviewed PersonStoryLinks: 870
 - candidate PersonStoryLinks: 5
 - candidate contextual mentions retained: 28
 - reader-ready linked Stories: 1
@@ -3626,17 +3626,8 @@ No Story is listed as directly participating unless a future reviewed presence e
 ### 卞壼 (`person-029`)
 
 - directly participating Stories: none currently classified; main-text appearance is retained as `mentioned` pending explicit participation review.
-- reviewed linked Stories: 9; reader-ready: 0; candidate links: 0; candidate contextual Mentions: 0
+- reviewed linked Stories: 3; reader-ready: 0; candidate links: 0; candidate contextual Mentions: 0
 - main-text presence:
-  - `02-yanyu-085` · 言語第二 · reviewed · reader_ready=false · surface: 望之
-    ```text
-桓征西治江陵城甚麗
-㑹賓僚出江津望之
-云若能目此城者有賞顧長康時為客在坐目曰遙
-望層城丹樓如霞桓即賞以二婢
-
-
-    ```
   - `08-shangyu-054` · 賞譽第八 · reviewed · reader_ready=false · surface: 卞望之
     ```text
 王丞相云刁玄亮之察察戴若思之巖巖
@@ -3645,12 +3636,6 @@ No Story is listed as directly participating unless a future reviewed presence e
 
 
 
-
-
-    ```
-  - `08-shangyu-079` · 賞譽第八 · reviewed · reader_ready=false · surface: 望之
-    ```text
-桓温行經王敦墓邊過望之云可兒可兒
 
 
     ```
@@ -3663,30 +3648,7 @@ No Story is listed as directly participating unless a future reviewed presence e
 
 
     ```
-  - `14-rongzhi-028` · 容止第十四 · reviewed · reader_ready=false · surface: 望之
-    ```text
-王敬倫風姿似父作侍中加授桓公公服從大門入
-桓公望之曰大奴固自有鳯毛
-
-
-    ```
-  - `25-paidiao-015` · 排調第二十五 · reviewed · reader_ready=false · surface: 望之
-    ```text
-謝幼輿謂周侯曰卿類社樹逺望之峨峨拂青天就
-而視之其根則羣狐所託下聚溷而已荅曰
-枝條拂青天不以爲高羣狐亂其下不以爲濁聚溷
-之穢卿之所保何足自稱
-
-    ```
 - Liu-annotation-only presence:
-  - `02-yanyu-059` · 言語第二 · reviewed · reader_ready=false · surface: 望之
-    ```text
-(枋頭奔敗知民望之去也乃屠袁真於夀陽既而謂/月大司馬桓温廢帝為海西公晉安帝紀曰桓温於)
-    ```
-  - `02-yanyu-074` · 言語第二 · reviewed · reader_ready=false · surface: 望之
-    ```text
-(終莫能至秦始皇登㑹稽並海上冀遇三神山之竒/盡白望之如雲及至反居水下欲到即風引船而去)
-    ```
   - `24-jianao-007` · 簡傲第二十四 · reviewed · reader_ready=false · surface: 卞望之
     ```text
 (偃伏悟言神解見尚書令卞望之便/髙坐傳曰王公曽詣和上和上解帶)

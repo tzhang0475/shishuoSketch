@@ -47,6 +47,7 @@ SPAN_DECISIONS_PATH = Path("data/annotation/person-resolution-span-decisions.jso
 SPAN_AUDIT_PATH = Path("data/derived/person-resolution-span-audit.json")
 SPAN_REPORT_PATH = Path("docs/person-resolution-span-audit.md")
 LEXICAL_ALIAS_RULES_PATH = Path("data/annotation/person-resolution-lexical-alias-rules.json")
+LEXICAL_COLLISION_AUDIT_PATH = Path("data/derived/person-resolution-lexical-collision-audit.json")
 MATERIALIZED_PERSON_WAVE_PATHS = (
     Path("data/annotation/person-expansion-wave-1.json"),
     Path("data/annotation/person-expansion-wave-2.json"),
@@ -847,6 +848,188 @@ def _homographic_alias_guard(
         }),
         "resolution_mode": "ambiguous",
         "resolution_method": "er1_homographic_alias_guard",
+    }
+
+
+def _audit_section_key(section: str, annotation_id: str | None = None) -> str:
+    if section == "liu_annotation" and annotation_id:
+        return f"liu_annotation:{annotation_id}"
+    return section
+
+
+def _audit_row_section_key(row: Mapping[str, Any]) -> str:
+    section = str(row.get("section", "main_text"))
+    if section == "liu_annotation":
+        metadata = row.get("source_section_metadata", {})
+        annotation_id = metadata.get("annotation_id") if isinstance(metadata, Mapping) else None
+        return _audit_section_key(section, annotation_id if isinstance(annotation_id, str) else None)
+    return section
+
+
+def _audit_row_offset(row: Mapping[str, Any]) -> int:
+    if isinstance(row.get("evidence"), Mapping) and isinstance(row["evidence"].get("section_offset"), int):
+        return int(row["evidence"]["section_offset"])
+    value = row.get("entry_relative_start")
+    return int(value) if isinstance(value, int) else 0
+
+
+def _compact_lexical_audit_resolution(row: Mapping[str, Any] | None) -> dict[str, Any] | None:
+    if row is None:
+        return None
+    target = row.get("resolution_target")
+    return {
+        "mention_id": str(row.get("mention_id", "")),
+        "resolution_status": str(row.get("resolution_status", "")),
+        "resolution_target": _target_copy(target) if isinstance(target, Mapping) else None,
+        "resolution_method": str(row.get("resolution_method", "")),
+        "resolution_review_status": str(row.get("resolution_review_status", "")),
+        "resolution_evidence_ids": sorted(
+            str(item)
+            for item in row.get("resolution_evidence_ids", [])
+            if isinstance(item, str)
+        ),
+    }
+
+
+def _lexical_collision_classification(
+    text: str,
+    offset: int,
+    end: int,
+    effective_row: Mapping[str, Any] | None,
+    identity_target_person_id: str | None,
+) -> tuple[str, str, str | None]:
+    """Classify the exact 望之 span without changing the alias registry.
+
+    The identity branch is intentionally limited to an explicit full
+    appellation.  Standalone occurrences are recognized as lexical only when
+    their local syntax has the ordinary verb/object-pronoun shape; otherwise
+    they remain ambiguous for review.
+    """
+
+    preceding = text[max(0, offset - 1):offset]
+    identity_context = text[max(0, offset - 18):min(len(text), end + 10)]
+    if (
+        preceding == "卞"
+        or (effective_row and effective_row.get("surface") == "卞望之")
+        or re.search(r"(?:卞壼|壼)字望之", identity_context)
+    ):
+        target = effective_row.get("resolution_target") if effective_row else None
+        target_person_id = (
+            str(target.get("person_id"))
+            if isinstance(target, Mapping) and target.get("target_kind") == "production_person" and isinstance(target.get("person_id"), str)
+            else identity_target_person_id
+        )
+        return "identity_name", "explicit 卞望之 full appellation; the substring is part of a person name", target_person_id
+
+    local = text[max(0, offset - 4):min(len(text), end + 4)]
+    # These are syntactic neighbors in the acquired corpus, not a global
+    # title/name dictionary: verb or locative before 望之 and a following
+    # predicate/report/complement after it.
+    if re.search(r"(?:過|津|公|民|白|遠|逺)望之\s*(?:云|曰|如|去|峨)", local) or re.search(r"望之\s*(?:云|曰|如|去|峨)", local):
+        return "lexical_verb_pronoun", "local syntax is verb + object pronoun, not a personal appellation", None
+    return "ambiguous", "standalone 望之 is homographic; the local syntax does not establish identity", None
+
+
+def _lexical_collision_audit(
+    root: Path,
+    *,
+    sections: Mapping[tuple[str, str], str],
+    effective_mentions: list[Mapping[str, Any]],
+    identity_target_person_id: str | None,
+) -> dict[str, Any]:
+    """Audit every source occurrence of 望之 across the acquired corpus."""
+
+    effective_rows: list[Mapping[str, Any]] = [
+        row for row in effective_mentions if isinstance(row, Mapping)
+    ]
+    records: list[dict[str, Any]] = []
+    for (story_id, section_key), text in sorted(sections.items(), key=lambda item: (item[0][0], item[0][1])):
+        offset = 0
+        while True:
+            offset = text.find("望之", offset)
+            if offset < 0:
+                break
+            end = offset + len("望之")
+            overlapping = [
+                row
+                for row in effective_rows
+                if str(row.get("entry_id") or row.get("source_id") or "") == story_id
+                and _audit_row_section_key(row) == section_key
+                and _audit_row_offset(row) <= offset
+                and _audit_row_offset(row) + len(str(row.get("surface", ""))) >= end
+            ]
+            overlapping.sort(key=lambda row: (
+                _audit_row_offset(row),
+                len(str(row.get("surface", ""))),
+                str(row.get("mention_id", "")),
+            ))
+            effective_row = overlapping[0] if overlapping else None
+            classification, rationale, target_person_id = _lexical_collision_classification(
+                text, offset, end, effective_row, identity_target_person_id
+            )
+            left_context, right_context = _context(text, offset, "望之", width=36)
+            evidence_ids = set()
+            if effective_row is not None:
+                evidence_ids.update(
+                    str(item)
+                    for item in effective_row.get("resolution_evidence_ids", [])
+                    if isinstance(item, str)
+                )
+                evidence = effective_row.get("evidence", {})
+                if isinstance(evidence, Mapping):
+                    evidence_ids.update(
+                        str(item)
+                        for item in evidence.get("evidence_ids", [])
+                        if isinstance(item, str)
+                    )
+            records.append(
+                {
+                    "audit_record_id": "lexical-collision-" + hashlib.sha256(
+                        f"{story_id}\x1f{section_key}\x1f{offset}\x1f望之".encode("utf-8")
+                    ).hexdigest()[:24],
+                    "story_id": story_id,
+                    "section": "liu_annotation" if section_key.startswith("liu_annotation:") else section_key,
+                    **(
+                        {"annotation_id": section_key.split(":", 1)[1]}
+                        if section_key.startswith("liu_annotation:")
+                        else {}
+                    ),
+                    "surface": "望之",
+                    "span": {"offset": offset, "end_offset_exclusive": end, "text": "望之"},
+                    "left_context": left_context,
+                    "right_context": right_context,
+                    "current_resolution": _compact_lexical_audit_resolution(effective_row),
+                    "classification": classification,
+                    "target_person_id": target_person_id,
+                    "evidence_ids": sorted(evidence_ids),
+                    "rationale": rationale,
+                }
+            )
+            offset = end
+    records.sort(key=lambda item: (
+        str(item["story_id"]),
+        str(item["section"]),
+        str(item.get("annotation_id", "")),
+        int(item["span"]["offset"]),
+        str(item["audit_record_id"]),
+    ))
+    return {
+        "schema": 1,
+        "stage": "er1-lexical-collision-audit",
+        "scope": {
+            "surface": "望之",
+            "occurrence_count": len(records),
+            "story_count": len({str(item["story_id"]) for item in records}),
+            "sections": sorted({str(item["section"]) for item in records}),
+        },
+        "generated_from": [
+            str(CORPUS_INDEX_PATH),
+            str(LEXICAL_ALIAS_RULES_PATH),
+            str(EFFECTIVE_PATH),
+            "content/processed/shishuo/entries/",
+        ],
+        "policy": "A valid courtesy-name alias is not globally unique. Explicit 卞望之 remains identity evidence; standalone 望之 requires local syntax and otherwise remains unresolved or ambiguous.",
+        "records": records,
     }
 
 
@@ -1963,6 +2146,22 @@ def build(root: Path) -> dict[str, Any]:
     write_json(root, EFFECTIVE_PATH, effective_document)
     write_json(root, QUEUE_PATH, queue_document)
     write_json(root, COLLISIONS_PATH, collision_document)
+    lexical_collision_audit = _lexical_collision_audit(
+        root,
+        sections=sections,
+        effective_mentions=effective_mentions,
+        identity_target_person_id=next(
+            (
+                str(item.get("person_id"))
+                for item in lexical_alias_rules.get("望之", {}).get("candidate_targets", [])
+                if isinstance(item, Mapping)
+                and item.get("target_kind") == "production_person"
+                and isinstance(item.get("person_id"), str)
+            ),
+            None,
+        ),
+    )
+    write_json(root, LEXICAL_COLLISION_AUDIT_PATH, lexical_collision_audit)
     span_audit = _span_audit_document(effective_mentions, derived_mentions, published_ids)
     write_json(root, SPAN_AUDIT_PATH, span_audit)
     span_lines = [
