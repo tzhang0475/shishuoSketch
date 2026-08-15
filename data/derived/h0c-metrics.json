@@ -1,0 +1,256 @@
+{
+  "schema": 1,
+  "stage": "h0c-metrics",
+  "scope": {
+    "persons": 75,
+    "stories": 143,
+    "participant_records": 334
+  },
+  "participant_freeze": {
+    "stories_reviewed": 143,
+    "participant_records": 334,
+    "hard_participant_records": 52,
+    "role_counts": {
+      "actor": 2,
+      "annotation_only": 112,
+      "off_frame": 12,
+      "present": 50,
+      "referenced": 158
+    },
+    "reviewed_role_records": 334,
+    "reviewed_uncertain_count": 0,
+    "unreviewed_uncertainty_count": 0,
+    "hard_provenance_complete_count": 52
+  },
+  "entities": {
+    "Person": 75,
+    "Story": 143,
+    "Location": 13,
+    "Office": 25,
+    "Event": 5,
+    "Clan": 7,
+    "Regime": 2
+  },
+  "facts": {
+    "person_activity": 24,
+    "office_tenure": 26,
+    "event_participation": 24,
+    "hard_event_participation": 12,
+    "event_context_reference": 12,
+    "location_fact": 22,
+    "service_political": 3,
+    "clan_membership": 11,
+    "kinship": 5,
+    "marriage": 2,
+    "historical_fact_index": 964,
+    "fact_index_by_type": {
+      "clan_membership": 11,
+      "event": 5,
+      "event_participation": 24,
+      "event_story_context": 23,
+      "kinship": 5,
+      "location_fact": 22,
+      "marriage": 2,
+      "office_tenure": 26,
+      "person_activity": 24,
+      "person_story_link": 330,
+      "relation": 12,
+      "service_political": 3,
+      "story_participant": 334,
+      "story_temporal_anchor": 143
+    }
+  },
+  "review_status": {
+    "participant_reviewed": 334,
+    "candidate_office_tenures": 26,
+    "candidate_person_activities": 24,
+    "reviewed_service_contexts": 3
+  },
+  "temporal": {
+    "office_precision_distribution": {
+      "event_bounded": 1,
+      "unknown": 25
+    },
+    "activity_precision_distribution": {
+      "event_bounded": 24
+    },
+    "graph_temporal_edge_count": 253,
+    "h0b1_temporal_conflict_count": 0
+  },
+  "locations": {
+    "location_count": 13,
+    "location_fact_count": 22,
+    "modern_mapping_unknown_count": 13,
+    "coordinate_precision_distribution": {
+      "unknown": 13
+    }
+  },
+  "graph": {
+    "node_count": 270,
+    "edge_count": 835,
+    "node_counts": {
+      "Clan": 7,
+      "Event": 5,
+      "Location": 13,
+      "Office": 25,
+      "Person": 75,
+      "Regime": 2,
+      "Story": 143
+    },
+    "edge_counts": {
+      "active_at_location": 5,
+      "activity_context_event": 18,
+      "event_context_reference": 11,
+      "event_contextualizes_story": 21,
+      "held_office": 26,
+      "held_office_at": 9,
+      "kinship_collateral_kinship": 1,
+      "kinship_uncle_niece": 1,
+      "member_of_clan": 11,
+      "office_at_location": 9,
+      "office_in_regime": 25,
+      "office_jurisdiction_at": 8,
+      "parent_of": 3,
+      "participated_in_event": 10,
+      "person_story_link": 330,
+      "political_context": 2,
+      "relation_kinship": 1,
+      "relation_social": 2,
+      "served_under": 1,
+      "spouse_union": 2,
+      "story_participant_actor": 2,
+      "story_participant_annotation_only": 112,
+      "story_participant_off_frame": 12,
+      "story_participant_present": 50,
+      "story_participant_referenced": 158,
+      "story_present_at": 5
+    },
+    "materialized_edge_count": 835,
+    "audit_issue_counts": {
+      "orphan_nodes": 5,
+      "dangling_edges": 0,
+      "dangling_fact_references": 0,
+      "unsupported_edges": 0,
+      "duplicate_semantic_edges": 0,
+      "family_cycle_anomalies": 0,
+      "temporal_conflicts": 0,
+      "identity_collision_surfaces": 2
+    }
+  },
+  "readiness": {
+    "dimension_state_counts": {
+      "story_participation": {
+        "available": 30,
+        "partial": 39,
+        "unknown": 6
+      },
+      "temporal_footprint": {
+        "candidate_only": 13,
+        "unknown": 62
+      },
+      "geographic_footprint": {
+        "candidate_only": 9,
+        "unknown": 66
+      },
+      "family": {
+        "candidate_only": 15,
+        "unknown": 60
+      },
+      "clan": {
+        "candidate_only": 11,
+        "unknown": 64
+      },
+      "office_history": {
+        "candidate_only": 25,
+        "unknown": 50
+      },
+      "event_participation": {
+        "candidate_only": 8,
+        "partial": 5,
+        "unknown": 62
+      },
+      "service_political_context": {
+        "available": 5,
+        "unknown": 70
+      },
+      "relation_neighborhood": {
+        "available": 8,
+        "unknown": 67
+      },
+      "evidence_traceability": {
+        "available": 71,
+        "unknown": 4
+      }
+    },
+    "model_artifacts_generated": false
+  },
+  "gaps": {
+    "gap_count": 182,
+    "by_category": {
+      "participant_role_uncertain": 130,
+      "participant_provenance_missing": 0,
+      "location_not_normalized": 17,
+      "location_precision_coarse": 0,
+      "location_modern_mapping_unknown": 0,
+      "event_location_unresolved": 5,
+      "office_chronology_incomplete": 9,
+      "missing_structural_endpoint": 2,
+      "missing_family_bridge": 1,
+      "marriage_endpoint_not_production": 2,
+      "clan_branch_unresolved": 1,
+      "relation_temporal_scope_missing": 10,
+      "identity_compatibility_gap": 0,
+      "source_conflict": 0,
+      "temporal_conflict": 0,
+      "graph_orphan_node": 5,
+      "graph_unsupported_edge": 0,
+      "graph_duplicate_semantic_edge": 0,
+      "family_cycle_anomaly": 0
+    },
+    "open_count": 27,
+    "resolved_by_participant_freeze": 130
+  },
+  "protected": {
+    "production_person_count": 75,
+    "production_story_count": 143,
+    "person_story_link_count": 875,
+    "reviewed_person_story_link_count": 870,
+    "reviewed_relation_count": 12,
+    "scene_context_count": 44,
+    "orphan_mention_count": 0,
+    "primary_era_orientation_count": 143
+  },
+  "future_boundary": {
+    "hg0_implemented": false,
+    "ml_implemented": false,
+    "er2_implemented": false
+  },
+  "artifact_hashes": {
+    "participant_freeze": "2a02fa0e06b4e5e1d991d00a5aa1b7f3fcf3195ed083ef9441e3ba2bdb36f51b",
+    "locations": "c0e347d40481656ffced8eb47b7c238734431dd4b80dc206d25c35bafb342029",
+    "offices": "2ac5689ca9193a649d5572403cacdc523204fa6e2f2856878334fbc8c80115f7",
+    "events": "1c171e27e557107b1214b25e1e82d845c303cbf59b3c04f733f79bea9e186606",
+    "regimes": "43c36beb004ec42e0d28134dccf1a1678546c45b203883672f0829c504e19afb",
+    "person_activities": "f8a15058d9b38d1fe970040b584862ab806cded009d6b09110c385c9b25bd750",
+    "event_participations": "b233a3e3a6e6313508627e110164e95b7eaeaea2e5e4d27a4d1727bd7397ae8b",
+    "location_facts": "d51e73624cbdbe19b006f84b8e3126fed16757daae35ee0b2c19eade52a253a4",
+    "service_contexts": "667a4cc8d208ab3add75098473561f742a6e2577892839f073905fad1dbec1cf",
+    "historical_facts": "3aaed5927053e826331b3ab23c412add253b17fa9ac023e432afda5a11caac0c",
+    "graph": "8409bfdf3376452f0472573bf27033770d86f8db567c0cf446fff886a7dcd4b5",
+    "graph_audit": "9ef7a9482a9a862cde03242c728c022f3cb4314eb7aac9013a7f5fa53124fc01",
+    "gaps": "e3ba56f73f6fb4480989f7b99606e19f79916a35f4b1191bab9a26c691a2f2bb",
+    "readiness": "d07c4da91e881eaa14a23a3917376960865800191efbd6b0b66e765831eacab7",
+    "protection": "755b9ccc9d9e3ce94509d17a3c7d518732181fbd820e67f15a877bd93896ddb3"
+  },
+  "input_hashes": {
+    "h0b1_participants": "021e4cb4eaf4f114598dd65fd991ea5225b76cfa83d72f220f7b10066b9d2226",
+    "h0b1_backbone": "d0a50045e9260789caecf152a53ffd1f619f47cc5d42fa80c7bafcee1b368d9f",
+    "h0b1_constraints": "ff09a9f2b3b9d5204907c77e15e77a9962ab1ccf60cd715e0cf1bff899275586",
+    "h0a_anchors": "cde8dd4af6da9f3cc46e600d87c9893189752bde803d4e22a77b500c6cb67ab3",
+    "effective_mentions": "ab61f5b37cc110634c3c8ffd0346743dcca1278dfe5e7993de7d2713f4bc8d29",
+    "identity_candidates": "53daf64ab3475a5a6d0af3c9555eb3264b9fb0ad82d03b0a7a6fcccf1da7859c",
+    "entity_id_manifest": "5e8b713999025a4d5b29988eaf99988335a247ad67e9cfe18290b4814dca6492",
+    "people": "e1f917900035adaaed2c63d34618f357b1e58ff1cf082fce6ba090d1a74695c5",
+    "aliases": "69d3721334136d7e362eec7dc0b15d43c82d108e5d17dd9fd5b9ae3d93be9252"
+  }
+}

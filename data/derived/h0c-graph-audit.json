@@ -1,0 +1,53 @@
+{
+  "schema": 1,
+  "stage": "h0c-graph-audit",
+  "issues": {
+    "orphan_nodes": [
+      "Person:person-016",
+      "Person:person-032",
+      "Person:person-037",
+      "Person:person-074",
+      "Story:27-jiajue-012"
+    ],
+    "dangling_edges": [],
+    "dangling_fact_references": [],
+    "unsupported_edges": [],
+    "duplicate_semantic_edges": [],
+    "family_cycle_anomalies": [],
+    "temporal_conflicts": [],
+    "identity_collision_surfaces": [
+      {
+        "alias_id": "generic-taifu",
+        "surface": "太傅",
+        "person_ids": [
+          "person-002",
+          "person-006"
+        ]
+      },
+      {
+        "alias_id": "shared-wang-gong",
+        "surface": "王公",
+        "person_ids": [
+          "person-001",
+          "person-003"
+        ]
+      }
+    ]
+  },
+  "scope": {
+    "production_story_count": 143,
+    "person_story_links_in_production_scope": 330,
+    "person_story_links_out_of_production_scope": 545
+  },
+  "issue_counts": {
+    "orphan_nodes": 5,
+    "dangling_edges": 0,
+    "dangling_fact_references": 0,
+    "unsupported_edges": 0,
+    "duplicate_semantic_edges": 0,
+    "family_cycle_anomalies": 0,
+    "temporal_conflicts": 0,
+    "identity_collision_surfaces": 2
+  },
+  "policy": "Audits preserve anomalies and conflicts; they do not repair canonical facts or turn missing edges into negative facts."
+}

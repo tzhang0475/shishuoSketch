@@ -1,0 +1,3858 @@
+{
+  "schema": 1,
+  "stage": "h0c-ml-readiness",
+  "contract": {
+    "framework_neutral": true,
+    "node_fields": [
+      "node_id",
+      "node_type",
+      "label",
+      "canonical_reference",
+      "evidence_ids",
+      "review_status",
+      "assertion_status"
+    ],
+    "edge_fields": [
+      "edge_id",
+      "edge_type",
+      "source",
+      "target",
+      "source_facts",
+      "evidence_ids",
+      "provenance_refs",
+      "review_status",
+      "assertion_status",
+      "uncertainty_state",
+      "temporal",
+      "edge_status"
+    ],
+    "temporal_fields": [
+      "start_year_ce",
+      "end_year_ce",
+      "precision",
+      "basis"
+    ],
+    "uncertainty_states": [
+      "reviewed",
+      "candidate",
+      "unknown",
+      "uncertain",
+      "conflicted",
+      "derived"
+    ],
+    "missing_edge_policy": "missing edge is unknown, not negative evidence",
+    "negative_fact_policy": "no artificial negative facts are generated",
+    "model_artifacts_generated": false,
+    "embeddings_generated": false,
+    "training_split_generated": false
+  },
+  "dimension_catalog": [
+    "story_participation",
+    "temporal_footprint",
+    "geographic_footprint",
+    "family",
+    "clan",
+    "office_history",
+    "event_participation",
+    "service_political_context",
+    "relation_neighborhood",
+    "evidence_traceability"
+  ],
+  "person_records": [
+    {
+      "person_id": "person-001",
+      "canonical_name": "王羲之",
+      "dimensions": {
+        "story_participation": {
+          "state": "available",
+          "hard_story_count": 3,
+          "contextual_story_count": 3
+        },
+        "temporal_footprint": {
+          "state": "unknown",
+          "activity_count": 0
+        },
+        "geographic_footprint": {
+          "state": "unknown",
+          "location_fact_count": 0
+        },
+        "family": {
+          "state": "candidate_only",
+          "fact_count": 4
+        },
+        "clan": {
+          "state": "candidate_only",
+          "membership_count": 1
+        },
+        "office_history": {
+          "state": "unknown",
+          "tenure_count": 0
+        },
+        "event_participation": {
+          "state": "unknown",
+          "event_participation_count": 0,
+          "event_context_reference_count": 0
+        },
+        "service_political_context": {
+          "state": "unknown",
+          "fact_count": 0
+        },
+        "relation_neighborhood": {
+          "state": "available",
+          "edge_count": 1
+        },
+        "evidence_traceability": {
+          "state": "available",
+          "fact_count": 19,
+          "traceable_fact_count": 19
+        }
+      },
+      "graph_incident_edge_count": 16
+    },
+    {
+      "person_id": "person-002",
+      "canonical_name": "郗鑒",
+      "dimensions": {
+        "story_participation": {
+          "state": "partial",
+          "hard_story_count": 0,
+          "contextual_story_count": 3
+        },
+        "temporal_footprint": {
+          "state": "unknown",
+          "activity_count": 0
+        },
+        "geographic_footprint": {
+          "state": "unknown",
+          "location_fact_count": 0
+        },
+        "family": {
+          "state": "candidate_only",
+          "fact_count": 1
+        },
+        "clan": {
+          "state": "unknown",
+          "membership_count": 0
+        },
+        "office_history": {
+          "state": "unknown",
+          "tenure_count": 0
+        },
+        "event_participation": {
+          "state": "unknown",
+          "event_participation_count": 0,
+          "event_context_reference_count": 0
+        },
+        "service_political_context": {
+          "state": "unknown",
+          "fact_count": 0
+        },
+        "relation_neighborhood": {
+          "state": "available",
+          "edge_count": 1
+        },
+        "evidence_traceability": {
+          "state": "available",
+          "fact_count": 9,
+          "traceable_fact_count": 9
+        }
+      },
+      "graph_incident_edge_count": 8
+    },
+    {
+      "person_id": "person-003",
+      "canonical_name": "王導",
+      "dimensions": {
+        "story_participation": {
+          "state": "available",
+          "hard_story_count": 2,
+          "contextual_story_count": 11
+        },
+        "temporal_footprint": {
+          "state": "candidate_only",
+          "activity_count": 1
+        },
+        "geographic_footprint": {
+          "state": "unknown",
+          "location_fact_count": 0
+        },
+        "family": {
+          "state": "candidate_only",
+          "fact_count": 2
+        },
+        "clan": {
+          "state": "candidate_only",
+          "membership_count": 1
+        },
+        "office_history": {
+          "state": "candidate_only",
+          "tenure_count": 1
+        },
+        "event_participation": {
+          "state": "candidate_only",
+          "event_participation_count": 1,
+          "event_context_reference_count": 0
+        },
+        "service_political_context": {
+          "state": "unknown",
+          "fact_count": 0
+        },
+        "relation_neighborhood": {
+          "state": "available",
+          "edge_count": 1
+        },
+        "evidence_traceability": {
+          "state": "available",
+          "fact_count": 33,
+          "traceable_fact_count": 33
+        }
+      },
+      "graph_incident_edge_count": 33
+    },
+    {
+      "person_id": "person-004",
+      "canonical_name": "王凝之",
+      "dimensions": {
+        "story_participation": {
+          "state": "available",
+          "hard_story_count": 1,
+          "contextual_story_count": 2
+        },
+        "temporal_footprint": {
+          "state": "unknown",
+          "activity_count": 0
+        },
+        "geographic_footprint": {
+          "state": "unknown",
+          "location_fact_count": 0
+        },
+        "family": {
+          "state": "candidate_only",
+          "fact_count": 3
+        },
+        "clan": {
+          "state": "candidate_only",
+          "membership_count": 1
+        },
+        "office_history": {
+          "state": "candidate_only",
+          "tenure_count": 1
+        },
+        "event_participation": {
+          "state": "unknown",
+          "event_participation_count": 0,
+          "event_context_reference_count": 0
+        },
+        "service_political_context": {
+          "state": "unknown",
+          "fact_count": 0
+        },
+        "relation_neighborhood": {
+          "state": "unknown",
+          "edge_count": 0
+        },
+        "evidence_traceability": {
+          "state": "available",
+          "fact_count": 12,
+          "traceable_fact_count": 12
+        }
+      },
+      "graph_incident_edge_count": 10
+    },
+    {
+      "person_id": "person-005",
+      "canonical_name": "謝道韞",
+      "dimensions": {
+        "story_participation": {
+          "state": "available",
+          "hard_story_count": 1,
+          "contextual_story_count": 1
+        },
+        "temporal_footprint": {
+          "state": "unknown",
+          "activity_count": 0
+        },
+        "geographic_footprint": {
+          "state": "unknown",
+          "location_fact_count": 0
+        },
+        "family": {
+          "state": "candidate_only",
+          "fact_count": 2
+        },
+        "clan": {
+          "state": "unknown",
+          "membership_count": 0
+        },
+        "office_history": {
+          "state": "unknown",
+          "tenure_count": 0
+        },
+        "event_participation": {
+          "state": "unknown",
+          "event_participation_count": 0,
+          "event_context_reference_count": 0
+        },
+        "service_political_context": {
+          "state": "unknown",
+          "fact_count": 0
+        },
+        "relation_neighborhood": {
+          "state": "unknown",
+          "edge_count": 0
+        },
+        "evidence_traceability": {
+          "state": "available",
+          "fact_count": 7,
+          "traceable_fact_count": 7
+        }
+      },
+      "graph_incident_edge_count": 5
+    },
+    {
+      "person_id": "person-006",
+      "canonical_name": "謝安",
+      "dimensions": {
+        "story_participation": {
+          "state": "available",
+          "hard_story_count": 3,
+          "contextual_story_count": 15
+        },
+        "temporal_footprint": {
+          "state": "unknown",
+          "activity_count": 0
+        },
+        "geographic_footprint": {
+          "state": "unknown",
+          "location_fact_count": 0
+        },
+        "family": {
+          "state": "candidate_only",
+          "fact_count": 1
+        },
+        "clan": {
+          "state": "unknown",
+          "membership_count": 0
+        },
+        "office_history": {
+          "state": "candidate_only",
+          "tenure_count": 1
+        },
+        "event_participation": {
+          "state": "unknown",
+          "event_participation_count": 0,
+          "event_context_reference_count": 0
+        },
+        "service_political_context": {
+          "state": "unknown",
+          "fact_count": 0
+        },
+        "relation_neighborhood": {
+          "state": "unknown",
+          "edge_count": 0
+        },
+        "evidence_traceability": {
+          "state": "available",
+          "fact_count": 38,
+          "traceable_fact_count": 38
+        }
+      },
+      "graph_incident_edge_count": 37
+    },
+    {
+      "person_id": "person-007",
+      "canonical_name": "郗璿",
+      "dimensions": {
+        "story_participation": {
+          "state": "unknown",
+          "hard_story_count": 0,
+          "contextual_story_count": 0
+        },
+        "temporal_footprint": {
+          "state": "unknown",
+          "activity_count": 0
+        },
+        "geographic_footprint": {
+          "state": "unknown",
+          "location_fact_count": 0
+        },
+        "family": {
+          "state": "candidate_only",
+          "fact_count": 2
+        },
+        "clan": {
+          "state": "unknown",
+          "membership_count": 0
+        },
+        "office_history": {
+          "state": "unknown",
+          "tenure_count": 0
+        },
+        "event_participation": {
+          "state": "unknown",
+          "event_participation_count": 0,
+          "event_context_reference_count": 0
+        },
+        "service_political_context": {
+          "state": "unknown",
+          "fact_count": 0
+        },
+        "relation_neighborhood": {
+          "state": "unknown",
+          "edge_count": 0
+        },
+        "evidence_traceability": {
+          "state": "available",
+          "fact_count": 5,
+          "traceable_fact_count": 5
+        }
+      },
+      "graph_incident_edge_count": 3
+    },
+    {
+      "person_id": "person-008",
+      "canonical_name": "桓溫",
+      "dimensions": {
+        "story_participation": {
+          "state": "available",
+          "hard_story_count": 3,
+          "contextual_story_count": 10
+        },
+        "temporal_footprint": {
+          "state": "unknown",
+          "activity_count": 0
+        },
+        "geographic_footprint": {
+          "state": "unknown",
+          "location_fact_count": 0
+        },
+        "family": {
+          "state": "unknown",
+          "fact_count": 0
+        },
+        "clan": {
+          "state": "unknown",
+          "membership_count": 0
+        },
+        "office_history": {
+          "state": "candidate_only",
+          "tenure_count": 1
+        },
+        "event_participation": {
+          "state": "unknown",
+          "event_participation_count": 0,
+          "event_context_reference_count": 0
+        },
+        "service_political_context": {
+          "state": "available",
+          "fact_count": 1
+        },
+        "relation_neighborhood": {
+          "state": "available",
+          "edge_count": 1
+        },
+        "evidence_traceability": {
+          "state": "available",
+          "fact_count": 27,
+          "traceable_fact_count": 27
+        }
+      },
+      "graph_incident_edge_count": 26
+    },
+    {
+      "person_id": "person-009",
+      "canonical_name": "劉惔",
+      "dimensions": {
+        "story_participation": {
+          "state": "available",
+          "hard_story_count": 2,
+          "contextual_story_count": 9
+        },
+        "temporal_footprint": {
+          "state": "unknown",
+          "activity_count": 0
+        },
+        "geographic_footprint": {
+          "state": "unknown",
+          "location_fact_count": 0
+        },
+        "family": {
+          "state": "unknown",
+          "fact_count": 0
+        },
+        "clan": {
+          "state": "unknown",
+          "membership_count": 0
+        },
+        "office_history": {
+          "state": "unknown",
+          "tenure_count": 0
+        },
+        "event_participation": {
+          "state": "unknown",
+          "event_participation_count": 0,
+          "event_context_reference_count": 0
+        },
+        "service_political_context": {
+          "state": "unknown",
+          "fact_count": 0
+        },
+        "relation_neighborhood": {
+          "state": "unknown",
+          "edge_count": 0
+        },
+        "evidence_traceability": {
+          "state": "available",
+          "fact_count": 21,
+          "traceable_fact_count": 21
+        }
+      },
+      "graph_incident_edge_count": 21
+    },
+    {
+      "person_id": "person-010",
+      "canonical_name": "庾亮",
+      "dimensions": {
+        "story_participation": {
+          "state": "available",
+          "hard_story_count": 2,
+          "contextual_story_count": 12
+        },
+        "temporal_footprint": {
+          "state": "candidate_only",
+          "activity_count": 2
+        },
+        "geographic_footprint": {
+          "state": "unknown",
+          "location_fact_count": 0
+        },
+        "family": {
+          "state": "unknown",
+          "fact_count": 0
+        },
+        "clan": {
+          "state": "unknown",
+          "membership_count": 0
+        },
+        "office_history": {
+          "state": "candidate_only",
+          "tenure_count": 1
+        },
+        "event_participation": {
+          "state": "candidate_only",
+          "event_participation_count": 1,
+          "event_context_reference_count": 1
+        },
+        "service_political_context": {
+          "state": "available",
+          "fact_count": 1
+        },
+        "relation_neighborhood": {
+          "state": "available",
+          "edge_count": 3
+        },
+        "evidence_traceability": {
+          "state": "available",
+          "fact_count": 37,
+          "traceable_fact_count": 37
+        }
+      },
+      "graph_incident_edge_count": 36
+    },
+    {
+      "person_id": "person-011",
+      "canonical_name": "王敦",
+      "dimensions": {
+        "story_participation": {
+          "state": "available",
+          "hard_story_count": 4,
+          "contextual_story_count": 19
+        },
+        "temporal_footprint": {
+          "state": "candidate_only",
+          "activity_count": 4
+        },
+        "geographic_footprint": {
+          "state": "candidate_only",
+          "location_fact_count": 2
+        },
+        "family": {
+          "state": "candidate_only",
+          "fact_count": 1
+        },
+        "clan": {
+          "state": "candidate_only",
+          "membership_count": 1
+        },
+        "office_history": {
+          "state": "candidate_only",
+          "tenure_count": 1
+        },
+        "event_participation": {
+          "state": "candidate_only",
+          "event_participation_count": 3,
+          "event_context_reference_count": 1
+        },
+        "service_political_context": {
+          "state": "unknown",
+          "fact_count": 0
+        },
+        "relation_neighborhood": {
+          "state": "unknown",
+          "edge_count": 0
+        },
+        "evidence_traceability": {
+          "state": "available",
+          "fact_count": 58,
+          "traceable_fact_count": 58
+        }
+      },
+      "graph_incident_edge_count": 57
+    },
+    {
+      "person_id": "person-012",
+      "canonical_name": "袁宏",
+      "dimensions": {
+        "story_participation": {
+          "state": "available",
+          "hard_story_count": 1,
+          "contextual_story_count": 5
+        },
+        "temporal_footprint": {
+          "state": "unknown",
+          "activity_count": 0
+        },
+        "geographic_footprint": {
+          "state": "unknown",
+          "location_fact_count": 0
+        },
+        "family": {
+          "state": "unknown",
+          "fact_count": 0
+        },
+        "clan": {
+          "state": "unknown",
+          "membership_count": 0
+        },
+        "office_history": {
+          "state": "candidate_only",
+          "tenure_count": 2
+        },
+        "event_participation": {
+          "state": "unknown",
+          "event_participation_count": 0,
+          "event_context_reference_count": 0
+        },
+        "service_political_context": {
+          "state": "available",
+          "fact_count": 1
+        },
+        "relation_neighborhood": {
+          "state": "available",
+          "edge_count": 1
+        },
+        "evidence_traceability": {
+          "state": "available",
+          "fact_count": 16,
+          "traceable_fact_count": 16
+        }
+      },
+      "graph_incident_edge_count": 15
+    },
+    {
+      "person_id": "person-013",
+      "canonical_name": "温嶠",
+      "dimensions": {
+        "story_participation": {
+          "state": "available",
+          "hard_story_count": 6,
+          "contextual_story_count": 8
+        },
+        "temporal_footprint": {
+          "state": "candidate_only",
+          "activity_count": 3
+        },
+        "geographic_footprint": {
+          "state": "candidate_only",
+          "location_fact_count": 2
+        },
+        "family": {
+          "state": "candidate_only",
+          "fact_count": 1
+        },
+        "clan": {
+          "state": "candidate_only",
+          "membership_count": 1
+        },
+        "office_history": {
+          "state": "candidate_only",
+          "tenure_count": 1
+        },
+        "event_participation": {
+          "state": "candidate_only",
+          "event_participation_count": 3,
+          "event_context_reference_count": 0
+        },
+        "service_political_context": {
+          "state": "available",
+          "fact_count": 1
+        },
+        "relation_neighborhood": {
+          "state": "available",
+          "edge_count": 2
+        },
+        "evidence_traceability": {
+          "state": "available",
+          "fact_count": 41,
+          "traceable_fact_count": 41
+        }
+      },
+      "graph_incident_edge_count": 40
+    },
+    {
+      "person_id": "person-014",
+      "canonical_name": "王濛",
+      "dimensions": {
+        "story_participation": {
+          "state": "partial",
+          "hard_story_count": 0,
+          "contextual_story_count": 9
+        },
+        "temporal_footprint": {
+          "state": "unknown",
+          "activity_count": 0
+        },
+        "geographic_footprint": {
+          "state": "unknown",
+          "location_fact_count": 0
+        },
+        "family": {
+          "state": "unknown",
+          "fact_count": 0
+        },
+        "clan": {
+          "state": "unknown",
+          "membership_count": 0
+        },
+        "office_history": {
+          "state": "unknown",
+          "tenure_count": 0
+        },
+        "event_participation": {
+          "state": "unknown",
+          "event_participation_count": 0,
+          "event_context_reference_count": 0
+        },
+        "service_political_context": {
+          "state": "unknown",
+          "fact_count": 0
+        },
+        "relation_neighborhood": {
+          "state": "unknown",
+          "edge_count": 0
+        },
+        "evidence_traceability": {
+          "state": "available",
+          "fact_count": 18,
+          "traceable_fact_count": 18
+        }
+      },
+      "graph_incident_edge_count": 18
+    },
+    {
+      "person_id": "person-015",
+      "canonical_name": "孫晷",
+      "dimensions": {
+        "story_participation": {
+          "state": "partial",
+          "hard_story_count": 0,
+          "contextual_story_count": 1
+        },
+        "temporal_footprint": {
+          "state": "unknown",
+          "activity_count": 0
+        },
+        "geographic_footprint": {
+          "state": "unknown",
+          "location_fact_count": 0
+        },
+        "family": {
+          "state": "unknown",
+          "fact_count": 0
+        },
+        "clan": {
+          "state": "unknown",
+          "membership_count": 0
+        },
+        "office_history": {
+          "state": "unknown",
+          "tenure_count": 0
+        },
+        "event_participation": {
+          "state": "unknown",
+          "event_participation_count": 0,
+          "event_context_reference_count": 0
+        },
+        "service_political_context": {
+          "state": "unknown",
+          "fact_count": 0
+        },
+        "relation_neighborhood": {
+          "state": "unknown",
+          "edge_count": 0
+        },
+        "evidence_traceability": {
+          "state": "available",
+          "fact_count": 3,
+          "traceable_fact_count": 3
+        }
+      },
+      "graph_incident_edge_count": 3
+    },
+    {
+      "person_id": "person-016",
+      "canonical_name": "王遐",
+      "dimensions": {
+        "story_participation": {
+          "state": "unknown",
+          "hard_story_count": 0,
+          "contextual_story_count": 0
+        },
+        "temporal_footprint": {
+          "state": "unknown",
+          "activity_count": 0
+        },
+        "geographic_footprint": {
+          "state": "unknown",
+          "location_fact_count": 0
+        },
+        "family": {
+          "state": "unknown",
+          "fact_count": 0
+        },
+        "clan": {
+          "state": "unknown",
+          "membership_count": 0
+        },
+        "office_history": {
+          "state": "unknown",
+          "tenure_count": 0
+        },
+        "event_participation": {
+          "state": "unknown",
+          "event_participation_count": 0,
+          "event_context_reference_count": 0
+        },
+        "service_political_context": {
+          "state": "unknown",
+          "fact_count": 0
+        },
+        "relation_neighborhood": {
+          "state": "unknown",
+          "edge_count": 0
+        },
+        "evidence_traceability": {
+          "state": "unknown",
+          "fact_count": 0,
+          "traceable_fact_count": 0
+        }
+      },
+      "graph_incident_edge_count": 0
+    },
+    {
+      "person_id": "person-017",
+      "canonical_name": "蘇峻",
+      "dimensions": {
+        "story_participation": {
+          "state": "partial",
+          "hard_story_count": 0,
+          "contextual_story_count": 12
+        },
+        "temporal_footprint": {
+          "state": "candidate_only",
+          "activity_count": 3
+        },
+        "geographic_footprint": {
+          "state": "unknown",
+          "location_fact_count": 0
+        },
+        "family": {
+          "state": "unknown",
+          "fact_count": 0
+        },
+        "clan": {
+          "state": "unknown",
+          "membership_count": 0
+        },
+        "office_history": {
+          "state": "unknown",
+          "tenure_count": 0
+        },
+        "event_participation": {
+          "state": "partial",
+          "event_participation_count": 0,
+          "event_context_reference_count": 3
+        },
+        "service_political_context": {
+          "state": "available",
+          "fact_count": 2
+        },
+        "relation_neighborhood": {
+          "state": "available",
+          "edge_count": 2
+        },
+        "evidence_traceability": {
+          "state": "available",
+          "fact_count": 34,
+          "traceable_fact_count": 34
+        }
+      },
+      "graph_incident_edge_count": 30
+    },
+    {
+      "person_id": "person-018",
+      "canonical_name": "謝尚",
+      "dimensions": {
+        "story_participation": {
+          "state": "partial",
+          "hard_story_count": 0,
+          "contextual_story_count": 9
+        },
+        "temporal_footprint": {
+          "state": "candidate_only",
+          "activity_count": 1
+        },
+        "geographic_footprint": {
+          "state": "unknown",
+          "location_fact_count": 0
+        },
+        "family": {
+          "state": "candidate_only",
+          "fact_count": 2
+        },
+        "clan": {
+          "state": "candidate_only",
+          "membership_count": 1
+        },
+        "office_history": {
+          "state": "candidate_only",
+          "tenure_count": 1
+        },
+        "event_participation": {
+          "state": "partial",
+          "event_participation_count": 0,
+          "event_context_reference_count": 1
+        },
+        "service_political_context": {
+          "state": "unknown",
+          "fact_count": 0
+        },
+        "relation_neighborhood": {
+          "state": "unknown",
+          "edge_count": 0
+        },
+        "evidence_traceability": {
+          "state": "available",
+          "fact_count": 23,
+          "traceable_fact_count": 23
+        }
+      },
+      "graph_incident_edge_count": 23
+    },
+    {
+      "person_id": "person-019",
+      "canonical_name": "周顗",
+      "dimensions": {
+        "story_participation": {
+          "state": "available",
+          "hard_story_count": 1,
+          "contextual_story_count": 9
+        },
+        "temporal_footprint": {
+          "state": "candidate_only",
+          "activity_count": 2
+        },
+        "geographic_footprint": {
+          "state": "unknown",
+          "location_fact_count": 0
+        },
+        "family": {
+          "state": "unknown",
+          "fact_count": 0
+        },
+        "clan": {
+          "state": "unknown",
+          "membership_count": 0
+        },
+        "office_history": {
+          "state": "candidate_only",
+          "tenure_count": 1
+        },
+        "event_participation": {
+          "state": "candidate_only",
+          "event_participation_count": 1,
+          "event_context_reference_count": 1
+        },
+        "service_political_context": {
+          "state": "unknown",
+          "fact_count": 0
+        },
+        "relation_neighborhood": {
+          "state": "unknown",
+          "edge_count": 0
+        },
+        "evidence_traceability": {
+          "state": "available",
+          "fact_count": 25,
+          "traceable_fact_count": 25
+        }
+      },
+      "graph_incident_edge_count": 24
+    },
+    {
+      "person_id": "person-020",
+      "canonical_name": "王戎",
+      "dimensions": {
+        "story_participation": {
+          "state": "partial",
+          "hard_story_count": 0,
+          "contextual_story_count": 10
+        },
+        "temporal_footprint": {
+          "state": "unknown",
+          "activity_count": 0
+        },
+        "geographic_footprint": {
+          "state": "unknown",
+          "location_fact_count": 0
+        },
+        "family": {
+          "state": "unknown",
+          "fact_count": 0
+        },
+        "clan": {
+          "state": "unknown",
+          "membership_count": 0
+        },
+        "office_history": {
+          "state": "candidate_only",
+          "tenure_count": 1
+        },
+        "event_participation": {
+          "state": "unknown",
+          "event_participation_count": 0,
+          "event_context_reference_count": 0
+        },
+        "service_political_context": {
+          "state": "unknown",
+          "fact_count": 0
+        },
+        "relation_neighborhood": {
+          "state": "unknown",
+          "edge_count": 0
+        },
+        "evidence_traceability": {
+          "state": "available",
+          "fact_count": 21,
+          "traceable_fact_count": 21
+        }
+      },
+      "graph_incident_edge_count": 21
+    },
+    {
+      "person_id": "person-021",
+      "canonical_name": "劉琨",
+      "dimensions": {
+        "story_participation": {
+          "state": "available",
+          "hard_story_count": 1,
+          "contextual_story_count": 3
+        },
+        "temporal_footprint": {
+          "state": "candidate_only",
+          "activity_count": 1
+        },
+        "geographic_footprint": {
+          "state": "unknown",
+          "location_fact_count": 0
+        },
+        "family": {
+          "state": "unknown",
+          "fact_count": 0
+        },
+        "clan": {
+          "state": "unknown",
+          "membership_count": 0
+        },
+        "office_history": {
+          "state": "unknown",
+          "tenure_count": 0
+        },
+        "event_participation": {
+          "state": "partial",
+          "event_participation_count": 0,
+          "event_context_reference_count": 1
+        },
+        "service_political_context": {
+          "state": "unknown",
+          "fact_count": 0
+        },
+        "relation_neighborhood": {
+          "state": "unknown",
+          "edge_count": 0
+        },
+        "evidence_traceability": {
+          "state": "available",
+          "fact_count": 10,
+          "traceable_fact_count": 10
+        }
+      },
+      "graph_incident_edge_count": 10
+    },
+    {
+      "person_id": "person-022",
+      "canonical_name": "鄧攸",
+      "dimensions": {
+        "story_participation": {
+          "state": "partial",
+          "hard_story_count": 0,
+          "contextual_story_count": 4
+        },
+        "temporal_footprint": {
+          "state": "candidate_only",
+          "activity_count": 1
+        },
+        "geographic_footprint": {
+          "state": "unknown",
+          "location_fact_count": 0
+        },
+        "family": {
+          "state": "unknown",
+          "fact_count": 0
+        },
+        "clan": {
+          "state": "unknown",
+          "membership_count": 0
+        },
+        "office_history": {
+          "state": "unknown",
+          "tenure_count": 0
+        },
+        "event_participation": {
+          "state": "partial",
+          "event_participation_count": 0,
+          "event_context_reference_count": 1
+        },
+        "service_political_context": {
+          "state": "unknown",
+          "fact_count": 0
+        },
+        "relation_neighborhood": {
+          "state": "unknown",
+          "edge_count": 0
+        },
+        "evidence_traceability": {
+          "state": "available",
+          "fact_count": 10,
+          "traceable_fact_count": 10
+        }
+      },
+      "graph_incident_edge_count": 10
+    },
+    {
+      "person_id": "person-023",
+      "canonical_name": "謝鯤",
+      "dimensions": {
+        "story_participation": {
+          "state": "available",
+          "hard_story_count": 2,
+          "contextual_story_count": 6
+        },
+        "temporal_footprint": {
+          "state": "candidate_only",
+          "activity_count": 3
+        },
+        "geographic_footprint": {
+          "state": "candidate_only",
+          "location_fact_count": 2
+        },
+        "family": {
+          "state": "candidate_only",
+          "fact_count": 2
+        },
+        "clan": {
+          "state": "candidate_only",
+          "membership_count": 1
+        },
+        "office_history": {
+          "state": "candidate_only",
+          "tenure_count": 1
+        },
+        "event_participation": {
+          "state": "candidate_only",
+          "event_participation_count": 1,
+          "event_context_reference_count": 2
+        },
+        "service_political_context": {
+          "state": "unknown",
+          "fact_count": 0
+        },
+        "relation_neighborhood": {
+          "state": "unknown",
+          "edge_count": 0
+        },
+        "evidence_traceability": {
+          "state": "available",
+          "fact_count": 27,
+          "traceable_fact_count": 27
+        }
+      },
+      "graph_incident_edge_count": 26
+    },
+    {
+      "person_id": "person-024",
+      "canonical_name": "韓伯",
+      "dimensions": {
+        "story_participation": {
+          "state": "partial",
+          "hard_story_count": 0,
+          "contextual_story_count": 5
+        },
+        "temporal_footprint": {
+          "state": "unknown",
+          "activity_count": 0
+        },
+        "geographic_footprint": {
+          "state": "unknown",
+          "location_fact_count": 0
+        },
+        "family": {
+          "state": "unknown",
+          "fact_count": 0
+        },
+        "clan": {
+          "state": "unknown",
+          "membership_count": 0
+        },
+        "office_history": {
+          "state": "unknown",
+          "tenure_count": 0
+        },
+        "event_participation": {
+          "state": "unknown",
+          "event_participation_count": 0,
+          "event_context_reference_count": 0
+        },
+        "service_political_context": {
+          "state": "unknown",
+          "fact_count": 0
+        },
+        "relation_neighborhood": {
+          "state": "unknown",
+          "edge_count": 0
+        },
+        "evidence_traceability": {
+          "state": "available",
+          "fact_count": 10,
+          "traceable_fact_count": 10
+        }
+      },
+      "graph_incident_edge_count": 10
+    },
+    {
+      "person_id": "person-025",
+      "canonical_name": "何充",
+      "dimensions": {
+        "story_participation": {
+          "state": "available",
+          "hard_story_count": 1,
+          "contextual_story_count": 6
+        },
+        "temporal_footprint": {
+          "state": "unknown",
+          "activity_count": 0
+        },
+        "geographic_footprint": {
+          "state": "unknown",
+          "location_fact_count": 0
+        },
+        "family": {
+          "state": "unknown",
+          "fact_count": 0
+        },
+        "clan": {
+          "state": "unknown",
+          "membership_count": 0
+        },
+        "office_history": {
+          "state": "candidate_only",
+          "tenure_count": 1
+        },
+        "event_participation": {
+          "state": "unknown",
+          "event_participation_count": 0,
+          "event_context_reference_count": 0
+        },
+        "service_political_context": {
+          "state": "unknown",
+          "fact_count": 0
+        },
+        "relation_neighborhood": {
+          "state": "unknown",
+          "edge_count": 0
+        },
+        "evidence_traceability": {
+          "state": "available",
+          "fact_count": 15,
+          "traceable_fact_count": 15
+        }
+      },
+      "graph_incident_edge_count": 15
+    },
+    {
+      "person_id": "person-026",
+      "canonical_name": "陸機",
+      "dimensions": {
+        "story_participation": {
+          "state": "available",
+          "hard_story_count": 1,
+          "contextual_story_count": 3
+        },
+        "temporal_footprint": {
+          "state": "candidate_only",
+          "activity_count": 1
+        },
+        "geographic_footprint": {
+          "state": "unknown",
+          "location_fact_count": 0
+        },
+        "family": {
+          "state": "unknown",
+          "fact_count": 0
+        },
+        "clan": {
+          "state": "unknown",
+          "membership_count": 0
+        },
+        "office_history": {
+          "state": "unknown",
+          "tenure_count": 0
+        },
+        "event_participation": {
+          "state": "candidate_only",
+          "event_participation_count": 1,
+          "event_context_reference_count": 0
+        },
+        "service_political_context": {
+          "state": "unknown",
+          "fact_count": 0
+        },
+        "relation_neighborhood": {
+          "state": "unknown",
+          "edge_count": 0
+        },
+        "evidence_traceability": {
+          "state": "available",
+          "fact_count": 10,
+          "traceable_fact_count": 10
+        }
+      },
+      "graph_incident_edge_count": 10
+    },
+    {
+      "person_id": "person-027",
+      "canonical_name": "向秀",
+      "dimensions": {
+        "story_participation": {
+          "state": "partial",
+          "hard_story_count": 0,
+          "contextual_story_count": 4
+        },
+        "temporal_footprint": {
+          "state": "unknown",
+          "activity_count": 0
+        },
+        "geographic_footprint": {
+          "state": "unknown",
+          "location_fact_count": 0
+        },
+        "family": {
+          "state": "unknown",
+          "fact_count": 0
+        },
+        "clan": {
+          "state": "unknown",
+          "membership_count": 0
+        },
+        "office_history": {
+          "state": "unknown",
+          "tenure_count": 0
+        },
+        "event_participation": {
+          "state": "unknown",
+          "event_participation_count": 0,
+          "event_context_reference_count": 0
+        },
+        "service_political_context": {
+          "state": "unknown",
+          "fact_count": 0
+        },
+        "relation_neighborhood": {
+          "state": "unknown",
+          "edge_count": 0
+        },
+        "evidence_traceability": {
+          "state": "available",
+          "fact_count": 8,
+          "traceable_fact_count": 8
+        }
+      },
+      "graph_incident_edge_count": 8
+    },
+    {
+      "person_id": "person-028",
+      "canonical_name": "殷浩",
+      "dimensions": {
+        "story_participation": {
+          "state": "available",
+          "hard_story_count": 1,
+          "contextual_story_count": 3
+        },
+        "temporal_footprint": {
+          "state": "unknown",
+          "activity_count": 0
+        },
+        "geographic_footprint": {
+          "state": "unknown",
+          "location_fact_count": 0
+        },
+        "family": {
+          "state": "unknown",
+          "fact_count": 0
+        },
+        "clan": {
+          "state": "unknown",
+          "membership_count": 0
+        },
+        "office_history": {
+          "state": "unknown",
+          "tenure_count": 0
+        },
+        "event_participation": {
+          "state": "unknown",
+          "event_participation_count": 0,
+          "event_context_reference_count": 0
+        },
+        "service_political_context": {
+          "state": "unknown",
+          "fact_count": 0
+        },
+        "relation_neighborhood": {
+          "state": "unknown",
+          "edge_count": 0
+        },
+        "evidence_traceability": {
+          "state": "available",
+          "fact_count": 8,
+          "traceable_fact_count": 8
+        }
+      },
+      "graph_incident_edge_count": 8
+    },
+    {
+      "person_id": "person-029",
+      "canonical_name": "卞壼",
+      "dimensions": {
+        "story_participation": {
+          "state": "partial",
+          "hard_story_count": 0,
+          "contextual_story_count": 1
+        },
+        "temporal_footprint": {
+          "state": "unknown",
+          "activity_count": 0
+        },
+        "geographic_footprint": {
+          "state": "unknown",
+          "location_fact_count": 0
+        },
+        "family": {
+          "state": "unknown",
+          "fact_count": 0
+        },
+        "clan": {
+          "state": "unknown",
+          "membership_count": 0
+        },
+        "office_history": {
+          "state": "unknown",
+          "tenure_count": 0
+        },
+        "event_participation": {
+          "state": "unknown",
+          "event_participation_count": 0,
+          "event_context_reference_count": 0
+        },
+        "service_political_context": {
+          "state": "unknown",
+          "fact_count": 0
+        },
+        "relation_neighborhood": {
+          "state": "unknown",
+          "edge_count": 0
+        },
+        "evidence_traceability": {
+          "state": "available",
+          "fact_count": 2,
+          "traceable_fact_count": 2
+        }
+      },
+      "graph_incident_edge_count": 2
+    },
+    {
+      "person_id": "person-030",
+      "canonical_name": "王恭",
+      "dimensions": {
+        "story_participation": {
+          "state": "partial",
+          "hard_story_count": 0,
+          "contextual_story_count": 2
+        },
+        "temporal_footprint": {
+          "state": "unknown",
+          "activity_count": 0
+        },
+        "geographic_footprint": {
+          "state": "unknown",
+          "location_fact_count": 0
+        },
+        "family": {
+          "state": "unknown",
+          "fact_count": 0
+        },
+        "clan": {
+          "state": "unknown",
+          "membership_count": 0
+        },
+        "office_history": {
+          "state": "unknown",
+          "tenure_count": 0
+        },
+        "event_participation": {
+          "state": "unknown",
+          "event_participation_count": 0,
+          "event_context_reference_count": 0
+        },
+        "service_political_context": {
+          "state": "unknown",
+          "fact_count": 0
+        },
+        "relation_neighborhood": {
+          "state": "unknown",
+          "edge_count": 0
+        },
+        "evidence_traceability": {
+          "state": "available",
+          "fact_count": 4,
+          "traceable_fact_count": 4
+        }
+      },
+      "graph_incident_edge_count": 4
+    },
+    {
+      "person_id": "person-031",
+      "canonical_name": "朱伺",
+      "dimensions": {
+        "story_participation": {
+          "state": "partial",
+          "hard_story_count": 0,
+          "contextual_story_count": 2
+        },
+        "temporal_footprint": {
+          "state": "unknown",
+          "activity_count": 0
+        },
+        "geographic_footprint": {
+          "state": "unknown",
+          "location_fact_count": 0
+        },
+        "family": {
+          "state": "unknown",
+          "fact_count": 0
+        },
+        "clan": {
+          "state": "unknown",
+          "membership_count": 0
+        },
+        "office_history": {
+          "state": "unknown",
+          "tenure_count": 0
+        },
+        "event_participation": {
+          "state": "unknown",
+          "event_participation_count": 0,
+          "event_context_reference_count": 0
+        },
+        "service_political_context": {
+          "state": "unknown",
+          "fact_count": 0
+        },
+        "relation_neighborhood": {
+          "state": "unknown",
+          "edge_count": 0
+        },
+        "evidence_traceability": {
+          "state": "available",
+          "fact_count": 4,
+          "traceable_fact_count": 4
+        }
+      },
+      "graph_incident_edge_count": 4
+    },
+    {
+      "person_id": "person-032",
+      "canonical_name": "孟陋",
+      "dimensions": {
+        "story_participation": {
+          "state": "unknown",
+          "hard_story_count": 0,
+          "contextual_story_count": 0
+        },
+        "temporal_footprint": {
+          "state": "unknown",
+          "activity_count": 0
+        },
+        "geographic_footprint": {
+          "state": "unknown",
+          "location_fact_count": 0
+        },
+        "family": {
+          "state": "unknown",
+          "fact_count": 0
+        },
+        "clan": {
+          "state": "unknown",
+          "membership_count": 0
+        },
+        "office_history": {
+          "state": "unknown",
+          "tenure_count": 0
+        },
+        "event_participation": {
+          "state": "unknown",
+          "event_participation_count": 0,
+          "event_context_reference_count": 0
+        },
+        "service_political_context": {
+          "state": "unknown",
+          "fact_count": 0
+        },
+        "relation_neighborhood": {
+          "state": "unknown",
+          "edge_count": 0
+        },
+        "evidence_traceability": {
+          "state": "unknown",
+          "fact_count": 0,
+          "traceable_fact_count": 0
+        }
+      },
+      "graph_incident_edge_count": 0
+    },
+    {
+      "person_id": "person-033",
+      "canonical_name": "孫恩",
+      "dimensions": {
+        "story_participation": {
+          "state": "partial",
+          "hard_story_count": 0,
+          "contextual_story_count": 3
+        },
+        "temporal_footprint": {
+          "state": "candidate_only",
+          "activity_count": 1
+        },
+        "geographic_footprint": {
+          "state": "unknown",
+          "location_fact_count": 0
+        },
+        "family": {
+          "state": "unknown",
+          "fact_count": 0
+        },
+        "clan": {
+          "state": "unknown",
+          "membership_count": 0
+        },
+        "office_history": {
+          "state": "unknown",
+          "tenure_count": 0
+        },
+        "event_participation": {
+          "state": "partial",
+          "event_participation_count": 0,
+          "event_context_reference_count": 1
+        },
+        "service_political_context": {
+          "state": "unknown",
+          "fact_count": 0
+        },
+        "relation_neighborhood": {
+          "state": "unknown",
+          "edge_count": 0
+        },
+        "evidence_traceability": {
+          "state": "available",
+          "fact_count": 8,
+          "traceable_fact_count": 8
+        }
+      },
+      "graph_incident_edge_count": 8
+    },
+    {
+      "person_id": "person-034",
+      "canonical_name": "伏滔",
+      "dimensions": {
+        "story_participation": {
+          "state": "partial",
+          "hard_story_count": 0,
+          "contextual_story_count": 3
+        },
+        "temporal_footprint": {
+          "state": "unknown",
+          "activity_count": 0
+        },
+        "geographic_footprint": {
+          "state": "candidate_only",
+          "location_fact_count": 2
+        },
+        "family": {
+          "state": "unknown",
+          "fact_count": 0
+        },
+        "clan": {
+          "state": "unknown",
+          "membership_count": 0
+        },
+        "office_history": {
+          "state": "candidate_only",
+          "tenure_count": 1
+        },
+        "event_participation": {
+          "state": "unknown",
+          "event_participation_count": 0,
+          "event_context_reference_count": 0
+        },
+        "service_political_context": {
+          "state": "unknown",
+          "fact_count": 0
+        },
+        "relation_neighborhood": {
+          "state": "unknown",
+          "edge_count": 0
+        },
+        "evidence_traceability": {
+          "state": "available",
+          "fact_count": 9,
+          "traceable_fact_count": 9
+        }
+      },
+      "graph_incident_edge_count": 9
+    },
+    {
+      "person_id": "person-035",
+      "canonical_name": "和嶠",
+      "dimensions": {
+        "story_participation": {
+          "state": "partial",
+          "hard_story_count": 0,
+          "contextual_story_count": 7
+        },
+        "temporal_footprint": {
+          "state": "unknown",
+          "activity_count": 0
+        },
+        "geographic_footprint": {
+          "state": "unknown",
+          "location_fact_count": 0
+        },
+        "family": {
+          "state": "unknown",
+          "fact_count": 0
+        },
+        "clan": {
+          "state": "unknown",
+          "membership_count": 0
+        },
+        "office_history": {
+          "state": "unknown",
+          "tenure_count": 0
+        },
+        "event_participation": {
+          "state": "unknown",
+          "event_participation_count": 0,
+          "event_context_reference_count": 0
+        },
+        "service_political_context": {
+          "state": "unknown",
+          "fact_count": 0
+        },
+        "relation_neighborhood": {
+          "state": "unknown",
+          "edge_count": 0
+        },
+        "evidence_traceability": {
+          "state": "available",
+          "fact_count": 14,
+          "traceable_fact_count": 14
+        }
+      },
+      "graph_incident_edge_count": 14
+    },
+    {
+      "person_id": "person-036",
+      "canonical_name": "王祥",
+      "dimensions": {
+        "story_participation": {
+          "state": "available",
+          "hard_story_count": 1,
+          "contextual_story_count": 2
+        },
+        "temporal_footprint": {
+          "state": "unknown",
+          "activity_count": 0
+        },
+        "geographic_footprint": {
+          "state": "unknown",
+          "location_fact_count": 0
+        },
+        "family": {
+          "state": "unknown",
+          "fact_count": 0
+        },
+        "clan": {
+          "state": "unknown",
+          "membership_count": 0
+        },
+        "office_history": {
+          "state": "unknown",
+          "tenure_count": 0
+        },
+        "event_participation": {
+          "state": "unknown",
+          "event_participation_count": 0,
+          "event_context_reference_count": 0
+        },
+        "service_political_context": {
+          "state": "unknown",
+          "fact_count": 0
+        },
+        "relation_neighborhood": {
+          "state": "unknown",
+          "edge_count": 0
+        },
+        "evidence_traceability": {
+          "state": "available",
+          "fact_count": 6,
+          "traceable_fact_count": 6
+        }
+      },
+      "graph_incident_edge_count": 6
+    },
+    {
+      "person_id": "person-037",
+      "canonical_name": "石苞",
+      "dimensions": {
+        "story_participation": {
+          "state": "unknown",
+          "hard_story_count": 0,
+          "contextual_story_count": 0
+        },
+        "temporal_footprint": {
+          "state": "unknown",
+          "activity_count": 0
+        },
+        "geographic_footprint": {
+          "state": "unknown",
+          "location_fact_count": 0
+        },
+        "family": {
+          "state": "unknown",
+          "fact_count": 0
+        },
+        "clan": {
+          "state": "unknown",
+          "membership_count": 0
+        },
+        "office_history": {
+          "state": "unknown",
+          "tenure_count": 0
+        },
+        "event_participation": {
+          "state": "unknown",
+          "event_participation_count": 0,
+          "event_context_reference_count": 0
+        },
+        "service_political_context": {
+          "state": "unknown",
+          "fact_count": 0
+        },
+        "relation_neighborhood": {
+          "state": "unknown",
+          "edge_count": 0
+        },
+        "evidence_traceability": {
+          "state": "unknown",
+          "fact_count": 0,
+          "traceable_fact_count": 0
+        }
+      },
+      "graph_incident_edge_count": 0
+    },
+    {
+      "person_id": "person-038",
+      "canonical_name": "羊祜",
+      "dimensions": {
+        "story_participation": {
+          "state": "available",
+          "hard_story_count": 2,
+          "contextual_story_count": 1
+        },
+        "temporal_footprint": {
+          "state": "unknown",
+          "activity_count": 0
+        },
+        "geographic_footprint": {
+          "state": "unknown",
+          "location_fact_count": 0
+        },
+        "family": {
+          "state": "unknown",
+          "fact_count": 0
+        },
+        "clan": {
+          "state": "unknown",
+          "membership_count": 0
+        },
+        "office_history": {
+          "state": "unknown",
+          "tenure_count": 0
+        },
+        "event_participation": {
+          "state": "unknown",
+          "event_participation_count": 0,
+          "event_context_reference_count": 0
+        },
+        "service_political_context": {
+          "state": "unknown",
+          "fact_count": 0
+        },
+        "relation_neighborhood": {
+          "state": "unknown",
+          "edge_count": 0
+        },
+        "evidence_traceability": {
+          "state": "available",
+          "fact_count": 6,
+          "traceable_fact_count": 6
+        }
+      },
+      "graph_incident_edge_count": 6
+    },
+    {
+      "person_id": "person-039",
+      "canonical_name": "杜預",
+      "dimensions": {
+        "story_participation": {
+          "state": "available",
+          "hard_story_count": 1,
+          "contextual_story_count": 1
+        },
+        "temporal_footprint": {
+          "state": "unknown",
+          "activity_count": 0
+        },
+        "geographic_footprint": {
+          "state": "unknown",
+          "location_fact_count": 0
+        },
+        "family": {
+          "state": "unknown",
+          "fact_count": 0
+        },
+        "clan": {
+          "state": "unknown",
+          "membership_count": 0
+        },
+        "office_history": {
+          "state": "unknown",
+          "tenure_count": 0
+        },
+        "event_participation": {
+          "state": "unknown",
+          "event_participation_count": 0,
+          "event_context_reference_count": 0
+        },
+        "service_political_context": {
+          "state": "unknown",
+          "fact_count": 0
+        },
+        "relation_neighborhood": {
+          "state": "unknown",
+          "edge_count": 0
+        },
+        "evidence_traceability": {
+          "state": "available",
+          "fact_count": 4,
+          "traceable_fact_count": 4
+        }
+      },
+      "graph_incident_edge_count": 4
+    },
+    {
+      "person_id": "person-040",
+      "canonical_name": "張華",
+      "dimensions": {
+        "story_participation": {
+          "state": "available",
+          "hard_story_count": 2,
+          "contextual_story_count": 4
+        },
+        "temporal_footprint": {
+          "state": "unknown",
+          "activity_count": 0
+        },
+        "geographic_footprint": {
+          "state": "unknown",
+          "location_fact_count": 0
+        },
+        "family": {
+          "state": "unknown",
+          "fact_count": 0
+        },
+        "clan": {
+          "state": "unknown",
+          "membership_count": 0
+        },
+        "office_history": {
+          "state": "unknown",
+          "tenure_count": 0
+        },
+        "event_participation": {
+          "state": "unknown",
+          "event_participation_count": 0,
+          "event_context_reference_count": 0
+        },
+        "service_political_context": {
+          "state": "unknown",
+          "fact_count": 0
+        },
+        "relation_neighborhood": {
+          "state": "unknown",
+          "edge_count": 0
+        },
+        "evidence_traceability": {
+          "state": "available",
+          "fact_count": 12,
+          "traceable_fact_count": 12
+        }
+      },
+      "graph_incident_edge_count": 12
+    },
+    {
+      "person_id": "person-041",
+      "canonical_name": "賈充",
+      "dimensions": {
+        "story_participation": {
+          "state": "available",
+          "hard_story_count": 3,
+          "contextual_story_count": 1
+        },
+        "temporal_footprint": {
+          "state": "unknown",
+          "activity_count": 0
+        },
+        "geographic_footprint": {
+          "state": "unknown",
+          "location_fact_count": 0
+        },
+        "family": {
+          "state": "unknown",
+          "fact_count": 0
+        },
+        "clan": {
+          "state": "unknown",
+          "membership_count": 0
+        },
+        "office_history": {
+          "state": "unknown",
+          "tenure_count": 0
+        },
+        "event_participation": {
+          "state": "unknown",
+          "event_participation_count": 0,
+          "event_context_reference_count": 0
+        },
+        "service_political_context": {
+          "state": "unknown",
+          "fact_count": 0
+        },
+        "relation_neighborhood": {
+          "state": "unknown",
+          "edge_count": 0
+        },
+        "evidence_traceability": {
+          "state": "available",
+          "fact_count": 8,
+          "traceable_fact_count": 8
+        }
+      },
+      "graph_incident_edge_count": 8
+    },
+    {
+      "person_id": "person-042",
+      "canonical_name": "王濬",
+      "dimensions": {
+        "story_participation": {
+          "state": "partial",
+          "hard_story_count": 0,
+          "contextual_story_count": 1
+        },
+        "temporal_footprint": {
+          "state": "unknown",
+          "activity_count": 0
+        },
+        "geographic_footprint": {
+          "state": "unknown",
+          "location_fact_count": 0
+        },
+        "family": {
+          "state": "unknown",
+          "fact_count": 0
+        },
+        "clan": {
+          "state": "unknown",
+          "membership_count": 0
+        },
+        "office_history": {
+          "state": "unknown",
+          "tenure_count": 0
+        },
+        "event_participation": {
+          "state": "unknown",
+          "event_participation_count": 0,
+          "event_context_reference_count": 0
+        },
+        "service_political_context": {
+          "state": "unknown",
+          "fact_count": 0
+        },
+        "relation_neighborhood": {
+          "state": "unknown",
+          "edge_count": 0
+        },
+        "evidence_traceability": {
+          "state": "available",
+          "fact_count": 2,
+          "traceable_fact_count": 2
+        }
+      },
+      "graph_incident_edge_count": 2
+    },
+    {
+      "person_id": "person-043",
+      "canonical_name": "山濤",
+      "dimensions": {
+        "story_participation": {
+          "state": "available",
+          "hard_story_count": 1,
+          "contextual_story_count": 4
+        },
+        "temporal_footprint": {
+          "state": "unknown",
+          "activity_count": 0
+        },
+        "geographic_footprint": {
+          "state": "unknown",
+          "location_fact_count": 0
+        },
+        "family": {
+          "state": "unknown",
+          "fact_count": 0
+        },
+        "clan": {
+          "state": "unknown",
+          "membership_count": 0
+        },
+        "office_history": {
+          "state": "candidate_only",
+          "tenure_count": 1
+        },
+        "event_participation": {
+          "state": "unknown",
+          "event_participation_count": 0,
+          "event_context_reference_count": 0
+        },
+        "service_political_context": {
+          "state": "unknown",
+          "fact_count": 0
+        },
+        "relation_neighborhood": {
+          "state": "unknown",
+          "edge_count": 0
+        },
+        "evidence_traceability": {
+          "state": "available",
+          "fact_count": 11,
+          "traceable_fact_count": 11
+        }
+      },
+      "graph_incident_edge_count": 11
+    },
+    {
+      "person_id": "person-044",
+      "canonical_name": "樂廣",
+      "dimensions": {
+        "story_participation": {
+          "state": "available",
+          "hard_story_count": 1,
+          "contextual_story_count": 3
+        },
+        "temporal_footprint": {
+          "state": "candidate_only",
+          "activity_count": 1
+        },
+        "geographic_footprint": {
+          "state": "unknown",
+          "location_fact_count": 0
+        },
+        "family": {
+          "state": "unknown",
+          "fact_count": 0
+        },
+        "clan": {
+          "state": "unknown",
+          "membership_count": 0
+        },
+        "office_history": {
+          "state": "unknown",
+          "tenure_count": 0
+        },
+        "event_participation": {
+          "state": "candidate_only",
+          "event_participation_count": 1,
+          "event_context_reference_count": 0
+        },
+        "service_political_context": {
+          "state": "unknown",
+          "fact_count": 0
+        },
+        "relation_neighborhood": {
+          "state": "unknown",
+          "edge_count": 0
+        },
+        "evidence_traceability": {
+          "state": "available",
+          "fact_count": 10,
+          "traceable_fact_count": 10
+        }
+      },
+      "graph_incident_edge_count": 10
+    },
+    {
+      "person_id": "person-045",
+      "canonical_name": "阮籍",
+      "dimensions": {
+        "story_participation": {
+          "state": "available",
+          "hard_story_count": 1,
+          "contextual_story_count": 6
+        },
+        "temporal_footprint": {
+          "state": "unknown",
+          "activity_count": 0
+        },
+        "geographic_footprint": {
+          "state": "unknown",
+          "location_fact_count": 0
+        },
+        "family": {
+          "state": "unknown",
+          "fact_count": 0
+        },
+        "clan": {
+          "state": "unknown",
+          "membership_count": 0
+        },
+        "office_history": {
+          "state": "candidate_only",
+          "tenure_count": 1
+        },
+        "event_participation": {
+          "state": "unknown",
+          "event_participation_count": 0,
+          "event_context_reference_count": 0
+        },
+        "service_political_context": {
+          "state": "unknown",
+          "fact_count": 0
+        },
+        "relation_neighborhood": {
+          "state": "unknown",
+          "edge_count": 0
+        },
+        "evidence_traceability": {
+          "state": "available",
+          "fact_count": 15,
+          "traceable_fact_count": 15
+        }
+      },
+      "graph_incident_edge_count": 15
+    },
+    {
+      "person_id": "person-046",
+      "canonical_name": "嵇康",
+      "dimensions": {
+        "story_participation": {
+          "state": "available",
+          "hard_story_count": 1,
+          "contextual_story_count": 5
+        },
+        "temporal_footprint": {
+          "state": "unknown",
+          "activity_count": 0
+        },
+        "geographic_footprint": {
+          "state": "unknown",
+          "location_fact_count": 0
+        },
+        "family": {
+          "state": "unknown",
+          "fact_count": 0
+        },
+        "clan": {
+          "state": "unknown",
+          "membership_count": 0
+        },
+        "office_history": {
+          "state": "unknown",
+          "tenure_count": 0
+        },
+        "event_participation": {
+          "state": "unknown",
+          "event_participation_count": 0,
+          "event_context_reference_count": 0
+        },
+        "service_political_context": {
+          "state": "unknown",
+          "fact_count": 0
+        },
+        "relation_neighborhood": {
+          "state": "unknown",
+          "edge_count": 0
+        },
+        "evidence_traceability": {
+          "state": "available",
+          "fact_count": 12,
+          "traceable_fact_count": 12
+        }
+      },
+      "graph_incident_edge_count": 12
+    },
+    {
+      "person_id": "person-047",
+      "canonical_name": "劉伶",
+      "dimensions": {
+        "story_participation": {
+          "state": "partial",
+          "hard_story_count": 0,
+          "contextual_story_count": 3
+        },
+        "temporal_footprint": {
+          "state": "unknown",
+          "activity_count": 0
+        },
+        "geographic_footprint": {
+          "state": "unknown",
+          "location_fact_count": 0
+        },
+        "family": {
+          "state": "unknown",
+          "fact_count": 0
+        },
+        "clan": {
+          "state": "unknown",
+          "membership_count": 0
+        },
+        "office_history": {
+          "state": "unknown",
+          "tenure_count": 0
+        },
+        "event_participation": {
+          "state": "unknown",
+          "event_participation_count": 0,
+          "event_context_reference_count": 0
+        },
+        "service_political_context": {
+          "state": "unknown",
+          "fact_count": 0
+        },
+        "relation_neighborhood": {
+          "state": "unknown",
+          "edge_count": 0
+        },
+        "evidence_traceability": {
+          "state": "available",
+          "fact_count": 6,
+          "traceable_fact_count": 6
+        }
+      },
+      "graph_incident_edge_count": 6
+    },
+    {
+      "person_id": "person-048",
+      "canonical_name": "潘岳",
+      "dimensions": {
+        "story_participation": {
+          "state": "partial",
+          "hard_story_count": 0,
+          "contextual_story_count": 2
+        },
+        "temporal_footprint": {
+          "state": "unknown",
+          "activity_count": 0
+        },
+        "geographic_footprint": {
+          "state": "unknown",
+          "location_fact_count": 0
+        },
+        "family": {
+          "state": "unknown",
+          "fact_count": 0
+        },
+        "clan": {
+          "state": "unknown",
+          "membership_count": 0
+        },
+        "office_history": {
+          "state": "unknown",
+          "tenure_count": 0
+        },
+        "event_participation": {
+          "state": "unknown",
+          "event_participation_count": 0,
+          "event_context_reference_count": 0
+        },
+        "service_political_context": {
+          "state": "unknown",
+          "fact_count": 0
+        },
+        "relation_neighborhood": {
+          "state": "unknown",
+          "edge_count": 0
+        },
+        "evidence_traceability": {
+          "state": "available",
+          "fact_count": 4,
+          "traceable_fact_count": 4
+        }
+      },
+      "graph_incident_edge_count": 4
+    },
+    {
+      "person_id": "person-049",
+      "canonical_name": "顧榮",
+      "dimensions": {
+        "story_participation": {
+          "state": "available",
+          "hard_story_count": 1,
+          "contextual_story_count": 2
+        },
+        "temporal_footprint": {
+          "state": "unknown",
+          "activity_count": 0
+        },
+        "geographic_footprint": {
+          "state": "unknown",
+          "location_fact_count": 0
+        },
+        "family": {
+          "state": "unknown",
+          "fact_count": 0
+        },
+        "clan": {
+          "state": "unknown",
+          "membership_count": 0
+        },
+        "office_history": {
+          "state": "unknown",
+          "tenure_count": 0
+        },
+        "event_participation": {
+          "state": "unknown",
+          "event_participation_count": 0,
+          "event_context_reference_count": 0
+        },
+        "service_political_context": {
+          "state": "unknown",
+          "fact_count": 0
+        },
+        "relation_neighborhood": {
+          "state": "unknown",
+          "edge_count": 0
+        },
+        "evidence_traceability": {
+          "state": "available",
+          "fact_count": 6,
+          "traceable_fact_count": 6
+        }
+      },
+      "graph_incident_edge_count": 6
+    },
+    {
+      "person_id": "person-050",
+      "canonical_name": "郭璞",
+      "dimensions": {
+        "story_participation": {
+          "state": "available",
+          "hard_story_count": 1,
+          "contextual_story_count": 0
+        },
+        "temporal_footprint": {
+          "state": "unknown",
+          "activity_count": 0
+        },
+        "geographic_footprint": {
+          "state": "unknown",
+          "location_fact_count": 0
+        },
+        "family": {
+          "state": "unknown",
+          "fact_count": 0
+        },
+        "clan": {
+          "state": "unknown",
+          "membership_count": 0
+        },
+        "office_history": {
+          "state": "unknown",
+          "tenure_count": 0
+        },
+        "event_participation": {
+          "state": "unknown",
+          "event_participation_count": 0,
+          "event_context_reference_count": 0
+        },
+        "service_political_context": {
+          "state": "unknown",
+          "fact_count": 0
+        },
+        "relation_neighborhood": {
+          "state": "unknown",
+          "edge_count": 0
+        },
+        "evidence_traceability": {
+          "state": "available",
+          "fact_count": 2,
+          "traceable_fact_count": 2
+        }
+      },
+      "graph_incident_edge_count": 2
+    },
+    {
+      "person_id": "person-051",
+      "canonical_name": "荀顗",
+      "dimensions": {
+        "story_participation": {
+          "state": "partial",
+          "hard_story_count": 0,
+          "contextual_story_count": 2
+        },
+        "temporal_footprint": {
+          "state": "unknown",
+          "activity_count": 0
+        },
+        "geographic_footprint": {
+          "state": "unknown",
+          "location_fact_count": 0
+        },
+        "family": {
+          "state": "unknown",
+          "fact_count": 0
+        },
+        "clan": {
+          "state": "unknown",
+          "membership_count": 0
+        },
+        "office_history": {
+          "state": "unknown",
+          "tenure_count": 0
+        },
+        "event_participation": {
+          "state": "unknown",
+          "event_participation_count": 0,
+          "event_context_reference_count": 0
+        },
+        "service_political_context": {
+          "state": "unknown",
+          "fact_count": 0
+        },
+        "relation_neighborhood": {
+          "state": "unknown",
+          "edge_count": 0
+        },
+        "evidence_traceability": {
+          "state": "available",
+          "fact_count": 4,
+          "traceable_fact_count": 4
+        }
+      },
+      "graph_incident_edge_count": 4
+    },
+    {
+      "person_id": "person-052",
+      "canonical_name": "祖約",
+      "dimensions": {
+        "story_participation": {
+          "state": "partial",
+          "hard_story_count": 0,
+          "contextual_story_count": 1
+        },
+        "temporal_footprint": {
+          "state": "unknown",
+          "activity_count": 0
+        },
+        "geographic_footprint": {
+          "state": "candidate_only",
+          "location_fact_count": 2
+        },
+        "family": {
+          "state": "candidate_only",
+          "fact_count": 1
+        },
+        "clan": {
+          "state": "candidate_only",
+          "membership_count": 1
+        },
+        "office_history": {
+          "state": "candidate_only",
+          "tenure_count": 1
+        },
+        "event_participation": {
+          "state": "unknown",
+          "event_participation_count": 0,
+          "event_context_reference_count": 0
+        },
+        "service_political_context": {
+          "state": "unknown",
+          "fact_count": 0
+        },
+        "relation_neighborhood": {
+          "state": "unknown",
+          "edge_count": 0
+        },
+        "evidence_traceability": {
+          "state": "available",
+          "fact_count": 6,
+          "traceable_fact_count": 6
+        }
+      },
+      "graph_incident_edge_count": 6
+    },
+    {
+      "person_id": "person-053",
+      "canonical_name": "王廙",
+      "dimensions": {
+        "story_participation": {
+          "state": "partial",
+          "hard_story_count": 0,
+          "contextual_story_count": 1
+        },
+        "temporal_footprint": {
+          "state": "unknown",
+          "activity_count": 0
+        },
+        "geographic_footprint": {
+          "state": "unknown",
+          "location_fact_count": 0
+        },
+        "family": {
+          "state": "unknown",
+          "fact_count": 0
+        },
+        "clan": {
+          "state": "unknown",
+          "membership_count": 0
+        },
+        "office_history": {
+          "state": "unknown",
+          "tenure_count": 0
+        },
+        "event_participation": {
+          "state": "unknown",
+          "event_participation_count": 0,
+          "event_context_reference_count": 0
+        },
+        "service_political_context": {
+          "state": "unknown",
+          "fact_count": 0
+        },
+        "relation_neighborhood": {
+          "state": "unknown",
+          "edge_count": 0
+        },
+        "evidence_traceability": {
+          "state": "available",
+          "fact_count": 2,
+          "traceable_fact_count": 2
+        }
+      },
+      "graph_incident_edge_count": 2
+    },
+    {
+      "person_id": "person-054",
+      "canonical_name": "王隱",
+      "dimensions": {
+        "story_participation": {
+          "state": "partial",
+          "hard_story_count": 0,
+          "contextual_story_count": 14
+        },
+        "temporal_footprint": {
+          "state": "unknown",
+          "activity_count": 0
+        },
+        "geographic_footprint": {
+          "state": "unknown",
+          "location_fact_count": 0
+        },
+        "family": {
+          "state": "unknown",
+          "fact_count": 0
+        },
+        "clan": {
+          "state": "unknown",
+          "membership_count": 0
+        },
+        "office_history": {
+          "state": "unknown",
+          "tenure_count": 0
+        },
+        "event_participation": {
+          "state": "unknown",
+          "event_participation_count": 0,
+          "event_context_reference_count": 0
+        },
+        "service_political_context": {
+          "state": "unknown",
+          "fact_count": 0
+        },
+        "relation_neighborhood": {
+          "state": "unknown",
+          "edge_count": 0
+        },
+        "evidence_traceability": {
+          "state": "available",
+          "fact_count": 28,
+          "traceable_fact_count": 28
+        }
+      },
+      "graph_incident_edge_count": 28
+    },
+    {
+      "person_id": "person-055",
+      "canonical_name": "氾騰",
+      "dimensions": {
+        "story_participation": {
+          "state": "partial",
+          "hard_story_count": 0,
+          "contextual_story_count": 1
+        },
+        "temporal_footprint": {
+          "state": "unknown",
+          "activity_count": 0
+        },
+        "geographic_footprint": {
+          "state": "unknown",
+          "location_fact_count": 0
+        },
+        "family": {
+          "state": "unknown",
+          "fact_count": 0
+        },
+        "clan": {
+          "state": "unknown",
+          "membership_count": 0
+        },
+        "office_history": {
+          "state": "unknown",
+          "tenure_count": 0
+        },
+        "event_participation": {
+          "state": "unknown",
+          "event_participation_count": 0,
+          "event_context_reference_count": 0
+        },
+        "service_political_context": {
+          "state": "unknown",
+          "fact_count": 0
+        },
+        "relation_neighborhood": {
+          "state": "unknown",
+          "edge_count": 0
+        },
+        "evidence_traceability": {
+          "state": "available",
+          "fact_count": 2,
+          "traceable_fact_count": 2
+        }
+      },
+      "graph_incident_edge_count": 2
+    },
+    {
+      "person_id": "person-056",
+      "canonical_name": "李重",
+      "dimensions": {
+        "story_participation": {
+          "state": "partial",
+          "hard_story_count": 0,
+          "contextual_story_count": 1
+        },
+        "temporal_footprint": {
+          "state": "unknown",
+          "activity_count": 0
+        },
+        "geographic_footprint": {
+          "state": "unknown",
+          "location_fact_count": 0
+        },
+        "family": {
+          "state": "candidate_only",
+          "fact_count": 1
+        },
+        "clan": {
+          "state": "candidate_only",
+          "membership_count": 1
+        },
+        "office_history": {
+          "state": "unknown",
+          "tenure_count": 0
+        },
+        "event_participation": {
+          "state": "unknown",
+          "event_participation_count": 0,
+          "event_context_reference_count": 0
+        },
+        "service_political_context": {
+          "state": "unknown",
+          "fact_count": 0
+        },
+        "relation_neighborhood": {
+          "state": "unknown",
+          "edge_count": 0
+        },
+        "evidence_traceability": {
+          "state": "available",
+          "fact_count": 3,
+          "traceable_fact_count": 3
+        }
+      },
+      "graph_incident_edge_count": 3
+    },
+    {
+      "person_id": "person-057",
+      "canonical_name": "沈充",
+      "dimensions": {
+        "story_participation": {
+          "state": "available",
+          "hard_story_count": 1,
+          "contextual_story_count": 0
+        },
+        "temporal_footprint": {
+          "state": "unknown",
+          "activity_count": 0
+        },
+        "geographic_footprint": {
+          "state": "candidate_only",
+          "location_fact_count": 2
+        },
+        "family": {
+          "state": "candidate_only",
+          "fact_count": 1
+        },
+        "clan": {
+          "state": "candidate_only",
+          "membership_count": 1
+        },
+        "office_history": {
+          "state": "candidate_only",
+          "tenure_count": 1
+        },
+        "event_participation": {
+          "state": "unknown",
+          "event_participation_count": 0,
+          "event_context_reference_count": 0
+        },
+        "service_political_context": {
+          "state": "unknown",
+          "fact_count": 0
+        },
+        "relation_neighborhood": {
+          "state": "unknown",
+          "edge_count": 0
+        },
+        "evidence_traceability": {
+          "state": "available",
+          "fact_count": 6,
+          "traceable_fact_count": 6
+        }
+      },
+      "graph_incident_edge_count": 6
+    },
+    {
+      "person_id": "person-058",
+      "canonical_name": "鍾雅",
+      "dimensions": {
+        "story_participation": {
+          "state": "available",
+          "hard_story_count": 1,
+          "contextual_story_count": 0
+        },
+        "temporal_footprint": {
+          "state": "unknown",
+          "activity_count": 0
+        },
+        "geographic_footprint": {
+          "state": "candidate_only",
+          "location_fact_count": 1
+        },
+        "family": {
+          "state": "unknown",
+          "fact_count": 0
+        },
+        "clan": {
+          "state": "unknown",
+          "membership_count": 0
+        },
+        "office_history": {
+          "state": "candidate_only",
+          "tenure_count": 1
+        },
+        "event_participation": {
+          "state": "unknown",
+          "event_participation_count": 0,
+          "event_context_reference_count": 0
+        },
+        "service_political_context": {
+          "state": "unknown",
+          "fact_count": 0
+        },
+        "relation_neighborhood": {
+          "state": "unknown",
+          "edge_count": 0
+        },
+        "evidence_traceability": {
+          "state": "available",
+          "fact_count": 4,
+          "traceable_fact_count": 4
+        }
+      },
+      "graph_incident_edge_count": 4
+    },
+    {
+      "person_id": "person-059",
+      "canonical_name": "孫盛",
+      "dimensions": {
+        "story_participation": {
+          "state": "unknown",
+          "hard_story_count": 0,
+          "contextual_story_count": 0
+        },
+        "temporal_footprint": {
+          "state": "unknown",
+          "activity_count": 0
+        },
+        "geographic_footprint": {
+          "state": "unknown",
+          "location_fact_count": 0
+        },
+        "family": {
+          "state": "unknown",
+          "fact_count": 0
+        },
+        "clan": {
+          "state": "unknown",
+          "membership_count": 0
+        },
+        "office_history": {
+          "state": "candidate_only",
+          "tenure_count": 1
+        },
+        "event_participation": {
+          "state": "unknown",
+          "event_participation_count": 0,
+          "event_context_reference_count": 0
+        },
+        "service_political_context": {
+          "state": "unknown",
+          "fact_count": 0
+        },
+        "relation_neighborhood": {
+          "state": "unknown",
+          "edge_count": 0
+        },
+        "evidence_traceability": {
+          "state": "available",
+          "fact_count": 1,
+          "traceable_fact_count": 1
+        }
+      },
+      "graph_incident_edge_count": 1
+    },
+    {
+      "person_id": "person-060",
+      "canonical_name": "虞預",
+      "dimensions": {
+        "story_participation": {
+          "state": "partial",
+          "hard_story_count": 0,
+          "contextual_story_count": 6
+        },
+        "temporal_footprint": {
+          "state": "unknown",
+          "activity_count": 0
+        },
+        "geographic_footprint": {
+          "state": "unknown",
+          "location_fact_count": 0
+        },
+        "family": {
+          "state": "unknown",
+          "fact_count": 0
+        },
+        "clan": {
+          "state": "unknown",
+          "membership_count": 0
+        },
+        "office_history": {
+          "state": "unknown",
+          "tenure_count": 0
+        },
+        "event_participation": {
+          "state": "unknown",
+          "event_participation_count": 0,
+          "event_context_reference_count": 0
+        },
+        "service_political_context": {
+          "state": "unknown",
+          "fact_count": 0
+        },
+        "relation_neighborhood": {
+          "state": "unknown",
+          "edge_count": 0
+        },
+        "evidence_traceability": {
+          "state": "available",
+          "fact_count": 12,
+          "traceable_fact_count": 12
+        }
+      },
+      "graph_incident_edge_count": 12
+    },
+    {
+      "person_id": "person-061",
+      "canonical_name": "習鑿齒",
+      "dimensions": {
+        "story_participation": {
+          "state": "partial",
+          "hard_story_count": 0,
+          "contextual_story_count": 1
+        },
+        "temporal_footprint": {
+          "state": "unknown",
+          "activity_count": 0
+        },
+        "geographic_footprint": {
+          "state": "unknown",
+          "location_fact_count": 0
+        },
+        "family": {
+          "state": "unknown",
+          "fact_count": 0
+        },
+        "clan": {
+          "state": "unknown",
+          "membership_count": 0
+        },
+        "office_history": {
+          "state": "unknown",
+          "tenure_count": 0
+        },
+        "event_participation": {
+          "state": "unknown",
+          "event_participation_count": 0,
+          "event_context_reference_count": 0
+        },
+        "service_political_context": {
+          "state": "unknown",
+          "fact_count": 0
+        },
+        "relation_neighborhood": {
+          "state": "unknown",
+          "edge_count": 0
+        },
+        "evidence_traceability": {
+          "state": "available",
+          "fact_count": 2,
+          "traceable_fact_count": 2
+        }
+      },
+      "graph_incident_edge_count": 2
+    },
+    {
+      "person_id": "person-062",
+      "canonical_name": "郭奕",
+      "dimensions": {
+        "story_participation": {
+          "state": "partial",
+          "hard_story_count": 0,
+          "contextual_story_count": 1
+        },
+        "temporal_footprint": {
+          "state": "unknown",
+          "activity_count": 0
+        },
+        "geographic_footprint": {
+          "state": "unknown",
+          "location_fact_count": 0
+        },
+        "family": {
+          "state": "unknown",
+          "fact_count": 0
+        },
+        "clan": {
+          "state": "unknown",
+          "membership_count": 0
+        },
+        "office_history": {
+          "state": "unknown",
+          "tenure_count": 0
+        },
+        "event_participation": {
+          "state": "unknown",
+          "event_participation_count": 0,
+          "event_context_reference_count": 0
+        },
+        "service_political_context": {
+          "state": "unknown",
+          "fact_count": 0
+        },
+        "relation_neighborhood": {
+          "state": "unknown",
+          "edge_count": 0
+        },
+        "evidence_traceability": {
+          "state": "available",
+          "fact_count": 2,
+          "traceable_fact_count": 2
+        }
+      },
+      "graph_incident_edge_count": 2
+    },
+    {
+      "person_id": "person-063",
+      "canonical_name": "郭象",
+      "dimensions": {
+        "story_participation": {
+          "state": "partial",
+          "hard_story_count": 0,
+          "contextual_story_count": 2
+        },
+        "temporal_footprint": {
+          "state": "unknown",
+          "activity_count": 0
+        },
+        "geographic_footprint": {
+          "state": "unknown",
+          "location_fact_count": 0
+        },
+        "family": {
+          "state": "unknown",
+          "fact_count": 0
+        },
+        "clan": {
+          "state": "unknown",
+          "membership_count": 0
+        },
+        "office_history": {
+          "state": "candidate_only",
+          "tenure_count": 1
+        },
+        "event_participation": {
+          "state": "unknown",
+          "event_participation_count": 0,
+          "event_context_reference_count": 0
+        },
+        "service_political_context": {
+          "state": "unknown",
+          "fact_count": 0
+        },
+        "relation_neighborhood": {
+          "state": "unknown",
+          "edge_count": 0
+        },
+        "evidence_traceability": {
+          "state": "available",
+          "fact_count": 5,
+          "traceable_fact_count": 5
+        }
+      },
+      "graph_incident_edge_count": 5
+    },
+    {
+      "person_id": "person-064",
+      "canonical_name": "陶侃",
+      "dimensions": {
+        "story_participation": {
+          "state": "partial",
+          "hard_story_count": 0,
+          "contextual_story_count": 4
+        },
+        "temporal_footprint": {
+          "state": "unknown",
+          "activity_count": 0
+        },
+        "geographic_footprint": {
+          "state": "unknown",
+          "location_fact_count": 0
+        },
+        "family": {
+          "state": "unknown",
+          "fact_count": 0
+        },
+        "clan": {
+          "state": "unknown",
+          "membership_count": 0
+        },
+        "office_history": {
+          "state": "unknown",
+          "tenure_count": 0
+        },
+        "event_participation": {
+          "state": "unknown",
+          "event_participation_count": 0,
+          "event_context_reference_count": 0
+        },
+        "service_political_context": {
+          "state": "unknown",
+          "fact_count": 0
+        },
+        "relation_neighborhood": {
+          "state": "unknown",
+          "edge_count": 0
+        },
+        "evidence_traceability": {
+          "state": "available",
+          "fact_count": 8,
+          "traceable_fact_count": 8
+        }
+      },
+      "graph_incident_edge_count": 8
+    },
+    {
+      "person_id": "person-065",
+      "canonical_name": "孟嘉",
+      "dimensions": {
+        "story_participation": {
+          "state": "partial",
+          "hard_story_count": 0,
+          "contextual_story_count": 1
+        },
+        "temporal_footprint": {
+          "state": "unknown",
+          "activity_count": 0
+        },
+        "geographic_footprint": {
+          "state": "candidate_only",
+          "location_fact_count": 2
+        },
+        "family": {
+          "state": "unknown",
+          "fact_count": 0
+        },
+        "clan": {
+          "state": "unknown",
+          "membership_count": 0
+        },
+        "office_history": {
+          "state": "candidate_only",
+          "tenure_count": 1
+        },
+        "event_participation": {
+          "state": "unknown",
+          "event_participation_count": 0,
+          "event_context_reference_count": 0
+        },
+        "service_political_context": {
+          "state": "unknown",
+          "fact_count": 0
+        },
+        "relation_neighborhood": {
+          "state": "unknown",
+          "edge_count": 0
+        },
+        "evidence_traceability": {
+          "state": "available",
+          "fact_count": 5,
+          "traceable_fact_count": 5
+        }
+      },
+      "graph_incident_edge_count": 5
+    },
+    {
+      "person_id": "person-066",
+      "canonical_name": "卞範之",
+      "dimensions": {
+        "story_participation": {
+          "state": "partial",
+          "hard_story_count": 0,
+          "contextual_story_count": 1
+        },
+        "temporal_footprint": {
+          "state": "unknown",
+          "activity_count": 0
+        },
+        "geographic_footprint": {
+          "state": "candidate_only",
+          "location_fact_count": 2
+        },
+        "family": {
+          "state": "unknown",
+          "fact_count": 0
+        },
+        "clan": {
+          "state": "unknown",
+          "membership_count": 0
+        },
+        "office_history": {
+          "state": "candidate_only",
+          "tenure_count": 1
+        },
+        "event_participation": {
+          "state": "unknown",
+          "event_participation_count": 0,
+          "event_context_reference_count": 0
+        },
+        "service_political_context": {
+          "state": "unknown",
+          "fact_count": 0
+        },
+        "relation_neighborhood": {
+          "state": "unknown",
+          "edge_count": 0
+        },
+        "evidence_traceability": {
+          "state": "available",
+          "fact_count": 5,
+          "traceable_fact_count": 5
+        }
+      },
+      "graph_incident_edge_count": 5
+    },
+    {
+      "person_id": "person-067",
+      "canonical_name": "周浚",
+      "dimensions": {
+        "story_participation": {
+          "state": "partial",
+          "hard_story_count": 0,
+          "contextual_story_count": 1
+        },
+        "temporal_footprint": {
+          "state": "unknown",
+          "activity_count": 0
+        },
+        "geographic_footprint": {
+          "state": "unknown",
+          "location_fact_count": 0
+        },
+        "family": {
+          "state": "unknown",
+          "fact_count": 0
+        },
+        "clan": {
+          "state": "unknown",
+          "membership_count": 0
+        },
+        "office_history": {
+          "state": "unknown",
+          "tenure_count": 0
+        },
+        "event_participation": {
+          "state": "unknown",
+          "event_participation_count": 0,
+          "event_context_reference_count": 0
+        },
+        "service_political_context": {
+          "state": "unknown",
+          "fact_count": 0
+        },
+        "relation_neighborhood": {
+          "state": "unknown",
+          "edge_count": 0
+        },
+        "evidence_traceability": {
+          "state": "available",
+          "fact_count": 2,
+          "traceable_fact_count": 2
+        }
+      },
+      "graph_incident_edge_count": 2
+    },
+    {
+      "person_id": "person-068",
+      "canonical_name": "崔遊",
+      "dimensions": {
+        "story_participation": {
+          "state": "partial",
+          "hard_story_count": 0,
+          "contextual_story_count": 1
+        },
+        "temporal_footprint": {
+          "state": "unknown",
+          "activity_count": 0
+        },
+        "geographic_footprint": {
+          "state": "unknown",
+          "location_fact_count": 0
+        },
+        "family": {
+          "state": "unknown",
+          "fact_count": 0
+        },
+        "clan": {
+          "state": "unknown",
+          "membership_count": 0
+        },
+        "office_history": {
+          "state": "unknown",
+          "tenure_count": 0
+        },
+        "event_participation": {
+          "state": "unknown",
+          "event_participation_count": 0,
+          "event_context_reference_count": 0
+        },
+        "service_political_context": {
+          "state": "unknown",
+          "fact_count": 0
+        },
+        "relation_neighborhood": {
+          "state": "unknown",
+          "edge_count": 0
+        },
+        "evidence_traceability": {
+          "state": "available",
+          "fact_count": 2,
+          "traceable_fact_count": 2
+        }
+      },
+      "graph_incident_edge_count": 2
+    },
+    {
+      "person_id": "person-069",
+      "canonical_name": "束晳",
+      "dimensions": {
+        "story_participation": {
+          "state": "partial",
+          "hard_story_count": 0,
+          "contextual_story_count": 1
+        },
+        "temporal_footprint": {
+          "state": "unknown",
+          "activity_count": 0
+        },
+        "geographic_footprint": {
+          "state": "unknown",
+          "location_fact_count": 0
+        },
+        "family": {
+          "state": "unknown",
+          "fact_count": 0
+        },
+        "clan": {
+          "state": "unknown",
+          "membership_count": 0
+        },
+        "office_history": {
+          "state": "unknown",
+          "tenure_count": 0
+        },
+        "event_participation": {
+          "state": "unknown",
+          "event_participation_count": 0,
+          "event_context_reference_count": 0
+        },
+        "service_political_context": {
+          "state": "unknown",
+          "fact_count": 0
+        },
+        "relation_neighborhood": {
+          "state": "unknown",
+          "edge_count": 0
+        },
+        "evidence_traceability": {
+          "state": "available",
+          "fact_count": 2,
+          "traceable_fact_count": 2
+        }
+      },
+      "graph_incident_edge_count": 2
+    },
+    {
+      "person_id": "person-070",
+      "canonical_name": "趙至",
+      "dimensions": {
+        "story_participation": {
+          "state": "partial",
+          "hard_story_count": 0,
+          "contextual_story_count": 1
+        },
+        "temporal_footprint": {
+          "state": "unknown",
+          "activity_count": 0
+        },
+        "geographic_footprint": {
+          "state": "unknown",
+          "location_fact_count": 0
+        },
+        "family": {
+          "state": "candidate_only",
+          "fact_count": 1
+        },
+        "clan": {
+          "state": "candidate_only",
+          "membership_count": 1
+        },
+        "office_history": {
+          "state": "unknown",
+          "tenure_count": 0
+        },
+        "event_participation": {
+          "state": "unknown",
+          "event_participation_count": 0,
+          "event_context_reference_count": 0
+        },
+        "service_political_context": {
+          "state": "unknown",
+          "fact_count": 0
+        },
+        "relation_neighborhood": {
+          "state": "unknown",
+          "edge_count": 0
+        },
+        "evidence_traceability": {
+          "state": "available",
+          "fact_count": 3,
+          "traceable_fact_count": 3
+        }
+      },
+      "graph_incident_edge_count": 3
+    },
+    {
+      "person_id": "person-071",
+      "canonical_name": "劉遐",
+      "dimensions": {
+        "story_participation": {
+          "state": "partial",
+          "hard_story_count": 0,
+          "contextual_story_count": 1
+        },
+        "temporal_footprint": {
+          "state": "unknown",
+          "activity_count": 0
+        },
+        "geographic_footprint": {
+          "state": "unknown",
+          "location_fact_count": 0
+        },
+        "family": {
+          "state": "unknown",
+          "fact_count": 0
+        },
+        "clan": {
+          "state": "unknown",
+          "membership_count": 0
+        },
+        "office_history": {
+          "state": "candidate_only",
+          "tenure_count": 1
+        },
+        "event_participation": {
+          "state": "unknown",
+          "event_participation_count": 0,
+          "event_context_reference_count": 0
+        },
+        "service_political_context": {
+          "state": "unknown",
+          "fact_count": 0
+        },
+        "relation_neighborhood": {
+          "state": "unknown",
+          "edge_count": 0
+        },
+        "evidence_traceability": {
+          "state": "available",
+          "fact_count": 3,
+          "traceable_fact_count": 3
+        }
+      },
+      "graph_incident_edge_count": 3
+    },
+    {
+      "person_id": "person-072",
+      "canonical_name": "劉隗",
+      "dimensions": {
+        "story_participation": {
+          "state": "partial",
+          "hard_story_count": 0,
+          "contextual_story_count": 2
+        },
+        "temporal_footprint": {
+          "state": "unknown",
+          "activity_count": 0
+        },
+        "geographic_footprint": {
+          "state": "unknown",
+          "location_fact_count": 0
+        },
+        "family": {
+          "state": "unknown",
+          "fact_count": 0
+        },
+        "clan": {
+          "state": "unknown",
+          "membership_count": 0
+        },
+        "office_history": {
+          "state": "unknown",
+          "tenure_count": 0
+        },
+        "event_participation": {
+          "state": "unknown",
+          "event_participation_count": 0,
+          "event_context_reference_count": 0
+        },
+        "service_political_context": {
+          "state": "unknown",
+          "fact_count": 0
+        },
+        "relation_neighborhood": {
+          "state": "unknown",
+          "edge_count": 0
+        },
+        "evidence_traceability": {
+          "state": "available",
+          "fact_count": 4,
+          "traceable_fact_count": 4
+        }
+      },
+      "graph_incident_edge_count": 4
+    },
+    {
+      "person_id": "person-073",
+      "canonical_name": "吳隱之",
+      "dimensions": {
+        "story_participation": {
+          "state": "partial",
+          "hard_story_count": 0,
+          "contextual_story_count": 1
+        },
+        "temporal_footprint": {
+          "state": "unknown",
+          "activity_count": 0
+        },
+        "geographic_footprint": {
+          "state": "unknown",
+          "location_fact_count": 0
+        },
+        "family": {
+          "state": "unknown",
+          "fact_count": 0
+        },
+        "clan": {
+          "state": "unknown",
+          "membership_count": 0
+        },
+        "office_history": {
+          "state": "candidate_only",
+          "tenure_count": 1
+        },
+        "event_participation": {
+          "state": "unknown",
+          "event_participation_count": 0,
+          "event_context_reference_count": 0
+        },
+        "service_political_context": {
+          "state": "unknown",
+          "fact_count": 0
+        },
+        "relation_neighborhood": {
+          "state": "unknown",
+          "edge_count": 0
+        },
+        "evidence_traceability": {
+          "state": "available",
+          "fact_count": 3,
+          "traceable_fact_count": 3
+        }
+      },
+      "graph_incident_edge_count": 3
+    },
+    {
+      "person_id": "person-074",
+      "canonical_name": "干寳",
+      "dimensions": {
+        "story_participation": {
+          "state": "unknown",
+          "hard_story_count": 0,
+          "contextual_story_count": 0
+        },
+        "temporal_footprint": {
+          "state": "unknown",
+          "activity_count": 0
+        },
+        "geographic_footprint": {
+          "state": "unknown",
+          "location_fact_count": 0
+        },
+        "family": {
+          "state": "unknown",
+          "fact_count": 0
+        },
+        "clan": {
+          "state": "unknown",
+          "membership_count": 0
+        },
+        "office_history": {
+          "state": "unknown",
+          "tenure_count": 0
+        },
+        "event_participation": {
+          "state": "unknown",
+          "event_participation_count": 0,
+          "event_context_reference_count": 0
+        },
+        "service_political_context": {
+          "state": "unknown",
+          "fact_count": 0
+        },
+        "relation_neighborhood": {
+          "state": "unknown",
+          "edge_count": 0
+        },
+        "evidence_traceability": {
+          "state": "unknown",
+          "fact_count": 0,
+          "traceable_fact_count": 0
+        }
+      },
+      "graph_incident_edge_count": 0
+    },
+    {
+      "person_id": "person-075",
+      "canonical_name": "徐廣",
+      "dimensions": {
+        "story_participation": {
+          "state": "partial",
+          "hard_story_count": 0,
+          "contextual_story_count": 3
+        },
+        "temporal_footprint": {
+          "state": "unknown",
+          "activity_count": 0
+        },
+        "geographic_footprint": {
+          "state": "unknown",
+          "location_fact_count": 0
+        },
+        "family": {
+          "state": "unknown",
+          "fact_count": 0
+        },
+        "clan": {
+          "state": "unknown",
+          "membership_count": 0
+        },
+        "office_history": {
+          "state": "unknown",
+          "tenure_count": 0
+        },
+        "event_participation": {
+          "state": "unknown",
+          "event_participation_count": 0,
+          "event_context_reference_count": 0
+        },
+        "service_political_context": {
+          "state": "unknown",
+          "fact_count": 0
+        },
+        "relation_neighborhood": {
+          "state": "unknown",
+          "edge_count": 0
+        },
+        "evidence_traceability": {
+          "state": "available",
+          "fact_count": 6,
+          "traceable_fact_count": 6
+        }
+      },
+      "graph_incident_edge_count": 6
+    }
+  ],
+  "state_counts_by_dimension": {
+    "story_participation": {
+      "available": 30,
+      "partial": 39,
+      "unknown": 6
+    },
+    "temporal_footprint": {
+      "candidate_only": 13,
+      "unknown": 62
+    },
+    "geographic_footprint": {
+      "candidate_only": 9,
+      "unknown": 66
+    },
+    "family": {
+      "candidate_only": 15,
+      "unknown": 60
+    },
+    "clan": {
+      "candidate_only": 11,
+      "unknown": 64
+    },
+    "office_history": {
+      "candidate_only": 25,
+      "unknown": 50
+    },
+    "event_participation": {
+      "candidate_only": 8,
+      "partial": 5,
+      "unknown": 62
+    },
+    "service_political_context": {
+      "available": 5,
+      "unknown": 70
+    },
+    "relation_neighborhood": {
+      "available": 8,
+      "unknown": 67
+    },
+    "evidence_traceability": {
+      "available": 71,
+      "unknown": 4
+    }
+  },
+  "notes": "This is a coverage/readiness audit only; it does not calculate embeddings, centrality, historical importance, clusters, or learned signatures."
+}

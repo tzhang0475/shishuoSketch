@@ -1,0 +1,79 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://shishuoSketch.local/schema/h0c-historical-context.schema.json",
+  "title": "H0C historical context and graph-learning readiness artifact",
+  "type": "object",
+  "required": ["schema", "stage"],
+  "properties": {
+    "schema": {"const": 1},
+    "stage": {
+      "enum": [
+        "h0c-participant-freeze",
+        "h0c-locations",
+        "h0c-offices",
+        "h0c-events",
+        "h0c-regimes",
+        "h0c-person-activities",
+        "h0c-event-participations",
+        "h0c-location-facts",
+        "h0c-service-political-facts",
+        "h0c-historical-facts",
+        "h0c-graph-projection",
+        "h0c-graph-audit",
+        "h0c-historical-gap-audit",
+        "h0c-ml-readiness",
+        "h0c-protection-manifest",
+        "h0c-metrics",
+        "h0c-entity-id-manifest"
+      ]
+    },
+    "policy": {"type": "string"}
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"stage": {"const": "h0c-participant-freeze"}}},
+      "then": {"required": ["records", "story_records", "participant_count", "participant_freeze_sha256"]}
+    },
+    {
+      "if": {"properties": {"stage": {"enum": ["h0c-locations", "h0c-events", "h0c-regimes", "h0c-person-activities", "h0c-event-participations", "h0c-location-facts", "h0c-service-political-facts"]}}},
+      "then": {"required": ["records", "count"]}
+    },
+    {
+      "if": {"properties": {"stage": {"const": "h0c-offices"}}},
+      "then": {"required": ["entities", "tenures", "office_count", "tenure_count"]}
+    },
+    {
+      "if": {"properties": {"stage": {"const": "h0c-historical-facts"}}},
+      "then": {"required": ["fact_index", "fact_count"]}
+    },
+    {
+      "if": {"properties": {"stage": {"const": "h0c-graph-projection"}}},
+      "then": {"required": ["nodes", "edges", "node_counts", "edge_counts", "node_type_catalog", "edge_type_catalog"]}
+    },
+    {
+      "if": {"properties": {"stage": {"const": "h0c-graph-audit"}}},
+      "then": {"required": ["issues", "issue_counts"]}
+    },
+    {
+      "if": {"properties": {"stage": {"const": "h0c-historical-gap-audit"}}},
+      "then": {"required": ["category_catalog", "records", "summary"]}
+    },
+    {
+      "if": {"properties": {"stage": {"const": "h0c-ml-readiness"}}},
+      "then": {"required": ["contract", "dimension_catalog", "person_records", "state_counts_by_dimension"]}
+    },
+    {
+      "if": {"properties": {"stage": {"const": "h0c-protection-manifest"}}},
+      "then": {"required": ["baseline_commit", "protected_counts", "protected_hashes"]}
+    },
+    {
+      "if": {"properties": {"stage": {"const": "h0c-metrics"}}},
+      "then": {"required": ["scope", "entities", "facts", "graph", "protected", "future_boundary"]}
+    },
+    {
+      "if": {"properties": {"stage": {"const": "h0c-entity-id-manifest"}}},
+      "then": {"required": ["records"]}
+    }
+  ],
+  "additionalProperties": true
+}

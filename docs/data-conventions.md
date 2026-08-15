@@ -220,6 +220,37 @@ bundle. It uses the shared exploration stack and an injected random function in
 the pure helper for deterministic tests; it does not create a Person directory
 or a second focus state.
 
+## H0C historical context and graph readiness
+
+H0C is a derived historical-context layer over the frozen H0A/H0B corpus. It
+does not allocate Persons or Stories and does not rewrite canonical text,
+Mentions, PersonStory, Relations, or StoryTemporalAnchors. The participant
+freeze records Story × Person × role semantics and provenance; only
+`present`/`speaker`/`actor` are hard participation. `referenced`, `off_frame`,
+and `annotation_only` remain contextual.
+
+H0C Locations are historical entities, not untyped modern geocodes. A Location
+record retains location type, historical label, precision, Evidence IDs, and
+explicit unknown modern mapping. Offices are reusable entities projected from
+Person-specific OfficeTenure facts. Events, Clan, Kinship, Marriage, and
+PersonActivity retain their atomic source semantics and stable IDs.
+
+New H0C Location, Office, and Regime IDs are assigned in the frozen
+`data/annotation/h0c-entity-id-manifest.json`; labels are lookup keys, never
+canonical IDs.
+
+`h0c-historical-facts.json` is a traceable index; canonical facts remain in
+their H0A/H0B/Relation layers. `h0c-graph-projection.json` is a deterministic
+heterogeneous projection, never the historical source of truth. Every edge
+must resolve to a fact and Evidence or stable source provenance. A missing edge
+is unknown, not a negative historical fact; candidate, conflicted, and
+unknown facts are never collapsed into reviewed positives.
+
+`h0c-ml-readiness.json` is framework-neutral coverage metadata only. H0C does
+not generate embeddings, model features, negative samples, splits, clusters,
+centrality scores, or learned historical signatures. HG0, ML/GNN work, and ER2
+remain separate milestones.
+
 ## Assertion status
 
 Every historical or interpretive assertion uses exactly one of:
