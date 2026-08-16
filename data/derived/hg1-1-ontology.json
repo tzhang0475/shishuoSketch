@@ -1,0 +1,611 @@
+{
+  "edge_types": [
+    {
+      "edge_type": "active_at_location",
+      "layer": "unclassified",
+      "meaning": "Inherited H0C edge; inspect source ontology before use.",
+      "source": "unknown",
+      "symmetric": false,
+      "target": "unknown"
+    },
+    {
+      "edge_type": "activity_at_location",
+      "layer": "geographic",
+      "meaning": "PersonActivity location context.",
+      "source": "PersonActivity",
+      "symmetric": false,
+      "target": "Location"
+    },
+    {
+      "edge_type": "activity_context_event",
+      "layer": "event",
+      "meaning": "PersonActivity event context.",
+      "source": "PersonActivity",
+      "symmetric": false,
+      "target": "Event"
+    },
+    {
+      "edge_type": "activity_in_story",
+      "layer": "story",
+      "meaning": "PersonActivity Story context.",
+      "source": "PersonActivity",
+      "symmetric": false,
+      "target": "Story"
+    },
+    {
+      "edge_type": "event_context_reference",
+      "layer": "unclassified",
+      "meaning": "Inherited H0C edge; inspect source ontology before use.",
+      "source": "unknown",
+      "symmetric": false,
+      "target": "unknown"
+    },
+    {
+      "edge_type": "event_contextualizes_story",
+      "layer": "event",
+      "meaning": "Historical event context attached to a Story.",
+      "source": "Event",
+      "symmetric": false,
+      "target": "Story"
+    },
+    {
+      "edge_type": "has_activity",
+      "layer": "temporal",
+      "meaning": "Reified PersonActivity incidence.",
+      "source": "Person",
+      "symmetric": false,
+      "target": "PersonActivity"
+    },
+    {
+      "edge_type": "has_event_participation",
+      "layer": "event",
+      "meaning": "Reified EventParticipation incidence.",
+      "source": "Person",
+      "symmetric": false,
+      "target": "EventParticipation"
+    },
+    {
+      "edge_type": "has_office_tenure",
+      "layer": "office",
+      "meaning": "Reified OfficeTenure incidence.",
+      "source": "Person",
+      "symmetric": false,
+      "target": "OfficeTenure"
+    },
+    {
+      "edge_type": "held_office",
+      "layer": "unclassified",
+      "meaning": "Inherited H0C edge; inspect source ontology before use.",
+      "source": "unknown",
+      "symmetric": false,
+      "target": "unknown"
+    },
+    {
+      "edge_type": "held_office_at",
+      "layer": "unclassified",
+      "meaning": "Inherited H0C edge; inspect source ontology before use.",
+      "source": "unknown",
+      "symmetric": false,
+      "target": "unknown"
+    },
+    {
+      "edge_type": "kinship_collateral_kinship",
+      "layer": "family",
+      "meaning": "Explicit collateral kinship projection.",
+      "source": "Person",
+      "symmetric": false,
+      "target": "Person"
+    },
+    {
+      "edge_type": "kinship_uncle_niece",
+      "layer": "family",
+      "meaning": "Explicit uncle/niece projection.",
+      "source": "Person",
+      "symmetric": false,
+      "target": "Person"
+    },
+    {
+      "edge_type": "member_of_clan",
+      "layer": "clan",
+      "meaning": "Source-backed ClanMembership.",
+      "source": "Person",
+      "symmetric": false,
+      "target": "Clan"
+    },
+    {
+      "edge_type": "office_at_location",
+      "layer": "office",
+      "meaning": "Normalized office/location context.",
+      "source": "Office",
+      "symmetric": false,
+      "target": "Location"
+    },
+    {
+      "edge_type": "office_in_regime",
+      "layer": "office",
+      "meaning": "Normalized institutional context.",
+      "source": "Office",
+      "symmetric": false,
+      "target": "Regime"
+    },
+    {
+      "edge_type": "office_jurisdiction_at",
+      "layer": "unclassified",
+      "meaning": "Inherited H0C edge; inspect source ontology before use.",
+      "source": "unknown",
+      "symmetric": false,
+      "target": "unknown"
+    },
+    {
+      "edge_type": "parent_of",
+      "layer": "family",
+      "meaning": "Canonical directional parent-child fact.",
+      "source": "Person",
+      "symmetric": false,
+      "target": "Person"
+    },
+    {
+      "edge_type": "participated_in_event",
+      "layer": "unclassified",
+      "meaning": "Inherited H0C edge; inspect source ontology before use.",
+      "source": "unknown",
+      "symmetric": false,
+      "target": "unknown"
+    },
+    {
+      "edge_type": "participation_in_event",
+      "layer": "event",
+      "meaning": "EventParticipation event endpoint.",
+      "source": "EventParticipation",
+      "symmetric": false,
+      "target": "Event"
+    },
+    {
+      "edge_type": "participation_in_story",
+      "layer": "event",
+      "meaning": "EventParticipation Story context.",
+      "source": "EventParticipation",
+      "symmetric": false,
+      "target": "Story"
+    },
+    {
+      "edge_type": "person_story_link",
+      "layer": "story",
+      "meaning": "PersonStory index link; not participation by itself.",
+      "source": "Person",
+      "symmetric": false,
+      "target": "Story"
+    },
+    {
+      "edge_type": "political_context",
+      "layer": "unclassified",
+      "meaning": "Inherited H0C edge; inspect source ontology before use.",
+      "source": "unknown",
+      "symmetric": false,
+      "target": "unknown"
+    },
+    {
+      "edge_type": "relation_institutional",
+      "layer": "office",
+      "meaning": "Explicit reviewed Person-to-Person service/appointment relation; the reified OfficeTenure or Story context remains separately available.",
+      "source": "Person",
+      "symmetric": false,
+      "target": "Person"
+    },
+    {
+      "edge_type": "relation_kinship",
+      "layer": "family",
+      "meaning": "Existing reader Relation; not a replacement for atomic kinship.",
+      "source": "Person",
+      "symmetric": false,
+      "target": "Person"
+    },
+    {
+      "edge_type": "relation_political",
+      "layer": "service_political",
+      "meaning": "Explicit reviewed, scope-limited political act/opposition; never an inferred faction or permanent allegiance.",
+      "source": "Person",
+      "symmetric": false,
+      "target": "Person"
+    },
+    {
+      "edge_type": "relation_social",
+      "layer": "social_context",
+      "meaning": "Existing reviewed social Relation.",
+      "source": "Person",
+      "symmetric": false,
+      "target": "Person"
+    },
+    {
+      "edge_type": "served_under",
+      "layer": "unclassified",
+      "meaning": "Inherited H0C edge; inspect source ontology before use.",
+      "source": "unknown",
+      "symmetric": false,
+      "target": "unknown"
+    },
+    {
+      "edge_type": "service_context_in_event",
+      "layer": "service_political",
+      "meaning": "Event that scopes a service/political context.",
+      "source": "ServicePoliticalFact",
+      "symmetric": false,
+      "target": "Event"
+    },
+    {
+      "edge_type": "service_context_in_story",
+      "layer": "service_political",
+      "meaning": "Story that activates a service/political context.",
+      "source": "ServicePoliticalFact",
+      "symmetric": false,
+      "target": "Story"
+    },
+    {
+      "edge_type": "source_person_in_service_context",
+      "layer": "service_political",
+      "meaning": "Reified service/political context source endpoint.",
+      "source": "Person",
+      "symmetric": false,
+      "target": "ServicePoliticalFact"
+    },
+    {
+      "edge_type": "spouse_union",
+      "layer": "family",
+      "meaning": "One canonical symmetric MarriageUnion.",
+      "source": "Person",
+      "symmetric": true,
+      "target": "Person"
+    },
+    {
+      "edge_type": "story_participant_actor",
+      "layer": "story",
+      "meaning": "Reviewed hard actor role.",
+      "source": "Person",
+      "symmetric": false,
+      "target": "Story"
+    },
+    {
+      "edge_type": "story_participant_annotation_only",
+      "layer": "story",
+      "meaning": "Liu/biographical context only.",
+      "source": "Person",
+      "symmetric": false,
+      "target": "Story"
+    },
+    {
+      "edge_type": "story_participant_off_frame",
+      "layer": "story",
+      "meaning": "Named outside the scene frame.",
+      "source": "Person",
+      "symmetric": false,
+      "target": "Story"
+    },
+    {
+      "edge_type": "story_participant_present",
+      "layer": "story",
+      "meaning": "Reviewed hard scene presence.",
+      "source": "Person",
+      "symmetric": false,
+      "target": "Story"
+    },
+    {
+      "edge_type": "story_participant_referenced",
+      "layer": "story",
+      "meaning": "Contextual reference; not hard presence.",
+      "source": "Person",
+      "symmetric": false,
+      "target": "Story"
+    },
+    {
+      "edge_type": "story_participant_speaker",
+      "layer": "story",
+      "meaning": "Reviewed hard speaker role.",
+      "source": "Person",
+      "symmetric": false,
+      "target": "Story"
+    },
+    {
+      "edge_type": "story_present_at",
+      "layer": "geographic",
+      "meaning": "Story scene location.",
+      "source": "Story",
+      "symmetric": false,
+      "target": "Location"
+    },
+    {
+      "edge_type": "target_person_in_service_context",
+      "layer": "service_political",
+      "meaning": "Reified service/political context target endpoint.",
+      "source": "ServicePoliticalFact",
+      "symmetric": false,
+      "target": "Person"
+    },
+    {
+      "edge_type": "tenure_at_location",
+      "layer": "geographic",
+      "meaning": "OfficeTenure location/jurisdiction endpoint.",
+      "source": "OfficeTenure",
+      "symmetric": false,
+      "target": "Location"
+    },
+    {
+      "edge_type": "tenure_for_office",
+      "layer": "office",
+      "meaning": "OfficeTenure institutional endpoint.",
+      "source": "OfficeTenure",
+      "symmetric": false,
+      "target": "Office"
+    },
+    {
+      "edge_type": "tenure_under_regime",
+      "layer": "office",
+      "meaning": "OfficeTenure regime context.",
+      "source": "OfficeTenure",
+      "symmetric": false,
+      "target": "Regime"
+    }
+  ],
+  "extension_policy": "Only two direct edge types are added because HG0 had explicit reified service/political contexts but no direct typed Person-to-Person representation for reviewed R3B assertions. No new historical relation schema is introduced.",
+  "hg0_ontology_sha256": "770ca03c197b0792f8c9e46a86c5c84a8a9039de13c701a51f39eff480ca7ae7",
+  "layers": [
+    {
+      "layer": "clan",
+      "purpose": "Source-backed ClanMembership, never surname topology.",
+      "relevant_node_types": [
+        "Person",
+        "Clan"
+      ],
+      "sufficiency_rule": "Pilot-only when a small subset of Persons/Clans is covered."
+    },
+    {
+      "layer": "event",
+      "purpose": "Reusable Events, EventParticipation, and Story event context.",
+      "relevant_node_types": [
+        "Person",
+        "Story",
+        "Event",
+        "EventParticipation",
+        "PersonActivity"
+      ],
+      "sufficiency_rule": "Usable requires event and participant coverage across the corpus; sparse event anchors are pilot-only."
+    },
+    {
+      "layer": "family",
+      "purpose": "Typed kinship and marriage structure only.",
+      "relevant_node_types": [
+        "Person",
+        "Clan"
+      ],
+      "sufficiency_rule": "Usable requires broad production-Person endpoint coverage and reviewed/direct evidence; sparse source-backed edges remain pilot-only."
+    },
+    {
+      "layer": "geographic",
+      "purpose": "Typed historical Location usage with explicit precision.",
+      "relevant_node_types": [
+        "Person",
+        "Story",
+        "Location",
+        "OfficeTenure",
+        "PersonActivity"
+      ],
+      "sufficiency_rule": "Usable requires typed location facts for a substantial Person/Story share; missing coordinates do not fail validity but limit research."
+    },
+    {
+      "layer": "office",
+      "purpose": "Institutional Office and reified OfficeTenure history.",
+      "relevant_node_types": [
+        "Person",
+        "Office",
+        "OfficeTenure",
+        "Regime",
+        "Location"
+      ],
+      "sufficiency_rule": "Usable requires meaningful Person and tenure coverage plus temporal/location detail; otherwise pilot-only."
+    },
+    {
+      "layer": "service_political",
+      "purpose": "Explicit service/political context, not inferred factions.",
+      "relevant_node_types": [
+        "Person",
+        "Story",
+        "Event",
+        "ServicePoliticalFact"
+      ],
+      "sufficiency_rule": "Pilot-only until multiple reviewed contexts cover a substantial network."
+    },
+    {
+      "layer": "social_context",
+      "purpose": "Existing reviewed social Relations that are not automatically temporal or familial.",
+      "relevant_node_types": [
+        "Person"
+      ],
+      "sufficiency_rule": "Pilot-only for the current twelve-Relation review surface."
+    },
+    {
+      "layer": "story",
+      "purpose": "Textual and participation structure; PersonStory is not equivalent to hard presence.",
+      "relevant_node_types": [
+        "Person",
+        "Story"
+      ],
+      "sufficiency_rule": "Strong textual orientation requires near-complete published Story coverage and traceable PersonStory links; hard participation is reported separately."
+    },
+    {
+      "layer": "temporal",
+      "purpose": "Interval and relative-time attributes across historical graph facts.",
+      "relevant_node_types": [
+        "Person",
+        "Story",
+        "Event",
+        "OfficeTenure",
+        "PersonActivity",
+        "EventParticipation",
+        "ServicePoliticalFact"
+      ],
+      "sufficiency_rule": "Usable requires broad bounded edge coverage and explicit unknown/relative states; current corpus is expected to remain pilot-only."
+    }
+  ],
+  "multiplex_policy": {
+    "duplicate_policy": "One semantic edge per edge type/endpoints/support fact set; independent edge types remain parallel multiplex edges.",
+    "graph_name": "G_all",
+    "layer_views": [
+      "G_clan",
+      "G_event",
+      "G_family",
+      "G_geographic",
+      "G_office",
+      "G_service_political",
+      "G_social_context",
+      "G_story",
+      "G_temporal"
+    ],
+    "same_endpoint_different_type": "Preserve as distinct typed edges; kinship, Story co-occurrence, office and service are not interchangeable."
+  },
+  "node_types": [
+    {
+      "canonical_rule": "Reuse the canonical H0C entity ID; display labels are not identifiers.",
+      "category": "historical_entity",
+      "graph_role": "entity_node",
+      "ml_role": "typed_entity",
+      "node_type": "Person"
+    },
+    {
+      "canonical_rule": "Reuse the canonical H0C entity ID; display labels are not identifiers.",
+      "category": "historical_entity",
+      "graph_role": "entity_node",
+      "ml_role": "typed_entity",
+      "node_type": "Story"
+    },
+    {
+      "canonical_rule": "Reuse the canonical H0C entity ID; display labels are not identifiers.",
+      "category": "historical_entity",
+      "graph_role": "entity_node",
+      "ml_role": "typed_entity",
+      "node_type": "Location"
+    },
+    {
+      "canonical_rule": "Reuse the canonical H0C entity ID; display labels are not identifiers.",
+      "category": "historical_entity",
+      "graph_role": "entity_node",
+      "ml_role": "typed_entity",
+      "node_type": "Event"
+    },
+    {
+      "canonical_rule": "Reuse the canonical H0C entity ID; display labels are not identifiers.",
+      "category": "historical_entity",
+      "graph_role": "entity_node",
+      "ml_role": "typed_entity",
+      "node_type": "Office"
+    },
+    {
+      "canonical_rule": "Reuse the canonical H0C entity ID; display labels are not identifiers.",
+      "category": "historical_entity",
+      "graph_role": "entity_node",
+      "ml_role": "typed_entity",
+      "node_type": "Clan"
+    },
+    {
+      "canonical_rule": "Reuse the canonical H0C entity ID; display labels are not identifiers.",
+      "category": "historical_entity",
+      "graph_role": "entity_node",
+      "ml_role": "typed_entity",
+      "node_type": "Regime"
+    },
+    {
+      "canonical_rule": "Node ID is a deterministic projection of the H0C OfficeTenure fact ID.",
+      "category": "reified_fact",
+      "graph_role": "reified_fact_node",
+      "ml_role": "optional_fact_node",
+      "node_type": "OfficeTenure"
+    },
+    {
+      "canonical_rule": "Node ID is a deterministic projection of the H0C PersonActivity fact ID.",
+      "category": "reified_fact",
+      "graph_role": "reified_fact_node",
+      "ml_role": "optional_fact_node",
+      "node_type": "PersonActivity"
+    },
+    {
+      "canonical_rule": "Node ID is a deterministic projection of the H0C EventParticipation fact ID.",
+      "category": "reified_fact",
+      "graph_role": "reified_fact_node",
+      "ml_role": "optional_fact_node",
+      "node_type": "EventParticipation"
+    },
+    {
+      "canonical_rule": "Node ID is a deterministic projection of the H0C service/political fact ID.",
+      "category": "reified_fact",
+      "graph_role": "reified_fact_node",
+      "ml_role": "optional_fact_node",
+      "node_type": "ServicePoliticalFact"
+    }
+  ],
+  "policy": "Facts remain canonical; HG0 nodes and edges are deterministic projections and never historical truth.",
+  "reification_audit": [
+    {
+      "decision": "reified_node",
+      "fact_type": "office_tenure",
+      "reason": "Person × Office × Time × Location × Regime can lose tenure identity when collapsed to Person→Office."
+    },
+    {
+      "decision": "reified_node",
+      "fact_type": "person_activity",
+      "reason": "Person × Activity × Time × Location/Event/Story preserves the activity context and interval."
+    },
+    {
+      "decision": "reified_node",
+      "fact_type": "event_participation",
+      "reason": "Person × Event × Story × role distinguishes hard participation from contextual reference."
+    },
+    {
+      "decision": "reified_node",
+      "fact_type": "service_political",
+      "reason": "Person pair × Story/Event × temporal context must not become an unscoped Person→Person tie."
+    },
+    {
+      "decision": "direct_typed_edge_with_fact_reference",
+      "fact_type": "marriage",
+      "reason": "Current MarriageUnion is a binary canonical union; its fact ID and temporal attributes remain on one symmetric edge."
+    },
+    {
+      "decision": "direct_typed_edge_with_fact_reference",
+      "fact_type": "kinship",
+      "reason": "Directional/explicit atomic kinship is preserved as typed Person→Person edges."
+    },
+    {
+      "decision": "direct_typed_edge_with_fact_reference",
+      "fact_type": "clan_membership",
+      "reason": "Person→Clan is binary and retains source precision; it never implies kinship or chronology."
+    }
+  ],
+  "schema": 1,
+  "source_h0c_edge_catalog": [
+    "active_at_location",
+    "activity_context_event",
+    "event_context_reference",
+    "event_contextualizes_story",
+    "held_office",
+    "held_office_at",
+    "kinship_collateral_kinship",
+    "kinship_uncle_niece",
+    "member_of_clan",
+    "office_at_location",
+    "office_in_regime",
+    "office_jurisdiction_at",
+    "parent_of",
+    "participated_in_event",
+    "person_story_link",
+    "political_context",
+    "relation_kinship",
+    "relation_social",
+    "served_under",
+    "spouse_union",
+    "story_participant_actor",
+    "story_participant_annotation_only",
+    "story_participant_off_frame",
+    "story_participant_present",
+    "story_participant_referenced",
+    "story_present_at"
+  ],
+  "stage": "hg1-1-ontology"
+}

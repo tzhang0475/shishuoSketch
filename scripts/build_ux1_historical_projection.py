@@ -52,6 +52,8 @@ X1_2RF_FACT_PATH = ROOT / "data/derived/x1-2rf-materialized-facts.json"
 X1_2RF_ASSERTION_PATH = ROOT / "data/derived/x1-2rf-assertion-review.json"
 X1_2RF_SCHOLARLY_PATH = ROOT / "data/derived/x1-2rf-scholarly-assertions.json"
 X1_2R_CITATION_PATH = ROOT / "data/derived/x1-2r-citation-candidates.json"
+HG1_RELATION_PATH = ROOT / "data/derived/hg1-1-relation-materialization.json"
+HG1_TEMPORAL_PATH = ROOT / "data/derived/hg1-1-temporal-constraints.json"
 OUTPUT_ROOT = ROOT / "site/public/generated/history"
 MANIFEST_PATH = OUTPUT_ROOT / "manifest.json"
 
@@ -188,6 +190,48 @@ def make_evidence_from_sc1(
     }
 
 
+def make_evidence_from_reviewed_relation(
+    evidence: Mapping[str, Mapping[str, Any]],
+    source_display: Mapping[str, Mapping[str, Any]],
+    evidence_id: str,
+) -> dict[str, Any] | None:
+    """Project source evidence used by an independently reviewed relation.
+
+    Some R3B/HG1.1 relations were reviewed from SC1 evidence records whose
+    original evidence-row status predates the relation review.  The shard
+    therefore describes the reviewed *relation assertion*, while retaining
+    the evidence ID and source text.  It does not relabel the source corpus
+    or expose its review queue metadata.
+    """
+    item = evidence.get(evidence_id)
+    if not item:
+        return None
+    source = source_display.get(str(item.get("source_id"))) or {}
+    source_label = {
+        "work": source.get("work") or pair(item.get("source_id")) or {"original": str(item.get("source_id")), "simplified": str(item.get("source_id"))},
+        "edition": source.get("edition") or {"original": "", "simplified": ""},
+    }
+    locator = item.get("locator") or {}
+    source_provenance = item.get("source_provenance") or {}
+    return {
+        "schema": 1,
+        "projection": "ux1_evidence_detail",
+        "evidence_id": evidence_id,
+        "source_label": source_label,
+        "source_layer": item.get("evidence_type") or "historical_evidence",
+        "attribution": None,
+        "quoted_source": None,
+        "transmission_status": "reviewed_relation_assertion",
+        "locator": " · ".join(filter(None, [locator.get("artifact_path"), source_provenance.get("witness_id")])),
+        "short_excerpt": pair(short_text(item.get("quote"))) or {"original": "", "simplified": ""},
+        "assertion_status": item.get("assertion_status") or "reported",
+        "review_status": "reviewed",
+        "kind": "reviewed_relation_evidence",
+        "supporting_assertion_reviewed": True,
+        "source_record_independently_reviewed": item.get("review_status") == "reviewed",
+    }
+
+
 def make_evidence_from_x1(
     assertion: Mapping[str, Any],
     materialized_fact: Mapping[str, Any] | None = None,
@@ -294,6 +338,16 @@ def build() -> tuple[dict[str, Any], dict[str, dict[str, Any]]]:
         read_json(X1_2R_CITATION_PATH).get("records", []),
         key=lambda row: (str(row.get("story_id", "")), str(row.get("citation_id", "")), stable_record_key(row)),
     )
+    hg1_relations = sorted(
+        read_json(HG1_RELATION_PATH).get("records", []),
+        key=lambda row: (str(row.get("relation_id", "")), stable_record_key(row)),
+    )
+    hg1_temporal = read_json(HG1_TEMPORAL_PATH)
+    hg1_temporal_by_story = {
+        str(row.get("story_id")): row
+        for row in hg1_temporal.get("records", [])
+        if row.get("resolution_status") == "resolved" and row.get("review_status") == "reviewed"
+    }
 
     people = {str(row["id"]): row for row in sc1.get("people", [])}
     stories = {str(row["id"]): row for row in sc1.get("stories", [])}
@@ -302,6 +356,24 @@ def build() -> tuple[dict[str, Any], dict[str, dict[str, Any]]]:
     person_display = sc1.get("display", {}).get("people", {})
     relations = [row for row in sc1.get("relations", []) if review_ok(row)]
     relation_by_id = {str(row["id"]): row for row in relations}
+    hg1_relation_by_id = {str(row.get("relation_id")): row for row in hg1_relations}
+    # HG1.1 is a downstream projection.  Merge only its reviewed display
+    # fields into the existing relation rows; the SC1 relation identity and
+    # endpoint contract remain authoritative.
+    projected_relations: list[dict[str, Any]] = []
+    for relation in relations:
+        relation_id = str(relation["id"])
+        extension = hg1_relation_by_id.get(relation_id) or {}
+        merged = dict(relation)
+        merged["time"] = extension.get("time") or relation.get("time") or {"status": "unknown", "label": None}
+        merged["evidence_ids"] = sorted_unique(
+            list(relation.get("evidence_ids", [])) + list(extension.get("evidence_ids", []))
+        )
+        for field in ("relation_scope", "scope_event", "relation_basis", "assertion_status", "label", "notes"):
+            if extension.get(field) is not None:
+                merged[field] = extension[field]
+        projected_relations.append(merged)
+    projected_relations.sort(key=lambda row: str(row["id"]))
     office_by_id = {str(row["office_id"]): row for row in h0c_offices}
     location_by_id = {str(row["location_id"]): row for row in h0c_locations}
     selected_story_ids = sorted(str(row["story_id"]) for row in selection.get("records", []))
@@ -343,11 +415,23 @@ def build() -> tuple[dict[str, Any], dict[str, dict[str, Any]]]:
             continue
         evidence_id = x1_evidence_id(str(row.get("source_assertion_id")))
         evidence_shards.setdefault(evidence_id, make_evidence_from_x1(row))
+    # HG1.1 retains the reviewed relation assertion while keeping source
+    # evidence distinct.  Project a compact evidence detail only for IDs
+    # actually attached to an accepted relation; do not expose the source
+    # review queue or promote unrelated evidence rows.
+    for relation in hg1_relations:
+        for evidence_id in relation.get("evidence_ids", []):
+            evidence_key = str(evidence_id)
+            if evidence_key in evidence_shards:
+                continue
+            projected = make_evidence_from_reviewed_relation(evidence, source_display, evidence_key)
+            if projected:
+                evidence_shards[evidence_key] = projected
 
     # Reviewed atomic relations are the only source of family/marriage profile rows.
     family_by_person: dict[str, list[dict[str, Any]]] = defaultdict(list)
     relation_shards: dict[str, dict[str, Any]] = {}
-    for relation in sorted(relations, key=lambda row: str(row["id"])):
+    for relation in projected_relations:
         relation_id = str(relation["id"])
         subject_id = str(relation.get("subject_id"))
         object_id = str(relation.get("object_id"))
@@ -357,7 +441,7 @@ def build() -> tuple[dict[str, Any], dict[str, dict[str, Any]]]:
         relation_shards[relation_id] = {
             "schema": 1,
             "relation_id": relation_id,
-            "source": "reviewed_hg0_relation_projection",
+            "source": "reviewed_hg1_1_relation_projection",
             "subject": {"person_id": subject_id, "name": subject_name},
             "object": {"person_id": object_id, "name": object_name},
             "relation_type": relation.get("relation_type"),
@@ -444,7 +528,10 @@ def build() -> tuple[dict[str, Any], dict[str, dict[str, Any]]]:
                 "provenance": provenance,
             })
 
-    # Story orientations are shown only where their own review gate passed.
+    # Story temporal orientation is now sourced from the HG1.1 reviewed
+    # interval projection.  The older E0 orientation remains a safe fallback
+    # for compatibility if a future build has a reviewed orientation that is
+    # not yet represented in the temporal projection.
     orientations = {
         str(row.get("story_id")): row
         for row in sorted(
@@ -454,17 +541,26 @@ def build() -> tuple[dict[str, Any], dict[str, dict[str, Any]]]:
         if row.get("review_status") == "reviewed"
     }
     periods_by_person: dict[str, list[dict[str, Any]]] = defaultdict(list)
-    for story_id in sorted(orientations):
-        orientation = orientations[story_id]
+    temporal_rows_for_person = {
+        story_id: row for story_id, row in hg1_temporal_by_story.items()
+    }
+    for story_id in sorted(set(temporal_rows_for_person) | set(orientations)):
+        temporal_row = temporal_rows_for_person.get(story_id)
+        orientation = orientations.get(story_id)
         story = stories.get(story_id)
         if not story:
             continue
+        label = (temporal_row or {}).get("label") or (orientation or {}).get("label")
+        if not label:
+            continue
         for person_id in story.get("person_ids", []):
             periods_by_person[str(person_id)].append({
-                "label": orientation.get("label"),
-                "precision": orientation.get("orientation_precision"),
+                "label": label,
+                "precision": (temporal_row or {}).get("precision") or (orientation or {}).get("orientation_precision"),
+                "start_year_ce": (temporal_row or {}).get("start_year_ce"),
+                "end_year_ce": (temporal_row or {}).get("end_year_ce"),
                 "story_ids": [story_id],
-                "evidence_ids": sorted(str(x) for x in orientation.get("evidence_ids", []) if str(x) in evidence_shards),
+                "evidence_ids": sorted(str(x) for x in ((temporal_row or {}).get("evidence_ids") or (orientation or {}).get("evidence_ids", [])) if str(x) in evidence_shards),
                 "review_status": "reviewed",
             })
 
@@ -550,15 +646,19 @@ def build() -> tuple[dict[str, Any], dict[str, dict[str, Any]]]:
     story_shards: dict[str, dict[str, Any]] = {}
     for story_id in published_story_ids:
         story = stories[story_id]
+        temporal_row = hg1_temporal_by_story.get(story_id)
         orientation = orientations.get(story_id)
         context: list[dict[str, Any]] = []
-        if orientation:
+        if temporal_row or orientation:
+            temporal_label = (temporal_row or {}).get("label") or (orientation or {}).get("label")
             context.append({
                 "kind": "period",
-                "label": orientation.get("label"),
-                "precision": orientation.get("orientation_precision"),
+                "label": temporal_label,
+                "precision": (temporal_row or {}).get("precision") or (orientation or {}).get("orientation_precision"),
+                "start_year_ce": (temporal_row or {}).get("start_year_ce"),
+                "end_year_ce": (temporal_row or {}).get("end_year_ce"),
                 "review_status": "reviewed",
-                "evidence_ids": sorted(str(x) for x in orientation.get("evidence_ids", []) if str(x) in evidence_shards),
+                "evidence_ids": sorted(str(x) for x in ((temporal_row or {}).get("evidence_ids") or (orientation or {}).get("evidence_ids", [])) if str(x) in evidence_shards),
             })
         story_refs = trim_refs(scholarly_refs_by_story.get(story_id, []) + citation_refs_by_story.get(story_id, []))
         story_scholar_refs = [ref for ref in story_refs if ref.get("kind") != "citation"]
@@ -579,9 +679,10 @@ def build() -> tuple[dict[str, Any], dict[str, dict[str, Any]]]:
             ),
         }
 
-    # Era shards are intentionally small: only reviewed ruler identities and
-    # reviewed story orientations are included; candidate event/location lists
-    # remain in the existing initial Era projection and are not restated here.
+    # Era shards are intentionally small: reviewed ruler identities, resolved
+    # Story intervals, and reviewed hard participants are included.  Candidate
+    # event/location lists remain in the existing initial Era projection and
+    # are not restated here as facts.
     ruler_identities = {
         str(row.get("ruler_id")): row
         for row in sc1.get("ruler_identities", [])
@@ -591,10 +692,37 @@ def build() -> tuple[dict[str, Any], dict[str, dict[str, Any]]]:
     for card in sorted(sc1.get("era_cards", []), key=lambda x: str(x.get("era_card_id"))):
         card_id = str(card.get("era_card_id"))
         ruler = ruler_identities.get(str(card.get("ruler_id")))
-        reviewed_story_ids = [
+        reviewed_story_set = {
             str(story_id) for story_id in card.get("story_ids", [])
             if str(story_id) in orientations
-        ]
+        }
+        reviewed_story_set.update(
+            story_id for story_id, row in hg1_temporal_by_story.items()
+            if str(row.get("era_card_id")) == card_id
+        )
+        reviewed_story_ids = sorted(reviewed_story_set)
+        people_by_id: dict[str, dict[str, Any]] = {}
+        for story_id in reviewed_story_ids:
+            for participant in hard_participants_by_story.get(story_id, []):
+                person_id = str(participant["person_id"])
+                row = people_by_id.setdefault(
+                    person_id,
+                    {
+                        "person_id": person_id,
+                        "name": participant["name"],
+                        "story_ids": [],
+                        "evidence_ids": [],
+                        "review_status": "reviewed",
+                    },
+                )
+                row["story_ids"].append(story_id)
+                row["evidence_ids"].extend(participant.get("evidence_ids", []))
+        people_rows = []
+        for person_id in sorted(people_by_id):
+            row = people_by_id[person_id]
+            row["story_ids"] = sorted(set(row["story_ids"]))
+            row["evidence_ids"] = sorted(set(row["evidence_ids"]))
+            people_rows.append(row)
         payload: dict[str, Any] = {
             "schema": 1,
             "projection": "ux1_era_history",
@@ -602,12 +730,15 @@ def build() -> tuple[dict[str, Any], dict[str, dict[str, Any]]]:
             "review_policy": "reviewed_ruler_and_temporal_context_only",
             "ruler": None,
             "events": [],
-            "people": [],
+            "people": people_rows[:5],
             "offices": [],
             "locations": [],
             "story_ids": sorted(reviewed_story_ids),
-            "has_more": {"events": False, "people": False, "offices": False, "locations": False, "stories": len(reviewed_story_ids) > 5},
-            "evidence_ids": [],
+            "has_more": {"events": False, "people": len(people_rows) > 5, "offices": False, "locations": False, "stories": len(reviewed_story_ids) > 5},
+            "evidence_ids": sorted_unique(
+                [evidence_id for row in people_rows[:5] for evidence_id in row.get("evidence_ids", [])]
+                + [evidence_id for story_id in reviewed_story_ids for evidence_id in (hg1_temporal_by_story.get(story_id) or {}).get("evidence_ids", [])]
+            ),
         }
         if ruler:
             payload["ruler"] = {
@@ -620,7 +751,7 @@ def build() -> tuple[dict[str, Any], dict[str, dict[str, Any]]]:
                 "review_status": "reviewed",
                 "evidence_ids": sorted(str(x) for x in ruler.get("evidence_ids", []) if str(x) in evidence_shards),
             }
-            payload["evidence_ids"] = payload["ruler"]["evidence_ids"]
+            payload["evidence_ids"] = sorted_unique(payload["evidence_ids"] + payload["ruler"]["evidence_ids"])
         era_shards[card_id] = payload
 
     # Make the source list explicit and stable; the browser only receives shard
@@ -629,7 +760,7 @@ def build() -> tuple[dict[str, Any], dict[str, dict[str, Any]]]:
         SC1_PATH, H0C_FACTS_PATH, H0C_OFFICES_PATH, H0C_LOCATIONS_PATH,
         PARTICIPANT_PATH, SELECTION_PATH, X1_2R_PARTICIPANT_PATH,
         X1_2RF_FACT_PATH, X1_2RF_ASSERTION_PATH, X1_2RF_SCHOLARLY_PATH,
-        X1_2R_CITATION_PATH,
+        X1_2R_CITATION_PATH, HG1_RELATION_PATH, HG1_TEMPORAL_PATH,
     ]
     shards: dict[str, dict[str, Any]] = {}
     for kind, rows in (
