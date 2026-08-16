@@ -74,6 +74,38 @@ witnesses:
     text_authority: "independent secondary witness; Wikisource is alignment convenience and CText images are visual evidence"
     structure_authority: "volume, chapter, and page comparison"
     notes: "CText page images and the corresponding Wikisource transcription belong to one 四庫全書本 witness family and must not be counted as two independent editions. CText is not bulk-scraped. Neither source may overwrite the primary Kanripo/SBCK text."
+  - id: shishuo-jianshu-yujiaxi-local-epub
+    work: "世說新語"
+    role: scholarly-reference-machine
+    edition: "世說新語箋疏"
+    source_provider: "user-provided local scholarly reference"
+    source_type: structured-epub-reference
+    script: "traditional Chinese"
+    annotations: ["劉孝標注", "校文", "箋疏"]
+    local: true
+    local_path: "sources/downloads/shishuo/ssjx-2016-epub-transcription"
+    remote_record: null
+    source_family: shishuo-jianshu-yujiaxi-local
+    authority_scope: "machine parsing, search, structure, historical commentary"
+    text_authority: "scholarly working reference; not a textual witness and not a replacement for the primary text"
+    structure_authority: "ordered EPUB spine and XHTML block structure"
+    notes: "User-provided local EPUB. Internal bibliographic metadata is descriptive only; payload hashes are locked in the local download manifest."
+  - id: shishuo-jianshu-yujiaxi-local-pdf
+    work: "世說新語"
+    role: scholarly-reference-visual
+    edition: "世說新語箋疏"
+    source_provider: "user-provided local scholarly reference"
+    source_type: scanned-pdf-reference
+    script: "traditional Chinese"
+    annotations: ["劉孝標注", "校文", "箋疏"]
+    local: true
+    local_path: "sources/downloads/shishuo/ssjx-yujiaxi-2009-digital-pdf"
+    remote_record: null
+    source_family: shishuo-jianshu-yujiaxi-local
+    authority_scope: "page verification, special glyph fallback, difficult structure"
+    text_authority: "visual scholarly working reference; not a textual witness and not a replacement for the primary text"
+    structure_authority: "physical page fallback only"
+    notes: "Visual member of the same local Jianshu family as the EPUB; S1 does not OCR it."
   - id: shishuo-jianshu-yujiaxi
     work: "世說新語"
     role: scholarly-reference-machine
@@ -90,4 +122,4 @@ witnesses:
     text_authority: "scholarly reference; not a textual witness and not a replacement for the primary text"
     structure_authority: "none; reserved for later historical, person, and commentary analysis"
     retrieval_status: "blocked_requires_authentication"
-    notes: "余嘉錫《世說新語箋疏》 is registered for later historical/person/textual analysis. The official CText gettext API was queried, but complete recursive retrieval requires a registered IP or CTEXT_API_KEY; no local copy was created and no HTML fallback is permitted. Chinese Text Project currently lists the electronic base edition as unspecified."
+    notes: "External CText registration retained as a separate scholarly reference. S1 uses the user-provided local Jianshu family for deterministic processing and does not depend on CText authentication or HTML scraping."

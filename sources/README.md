@@ -75,8 +75,12 @@ For Shishuo Xinyu, the active hierarchy is:
 3. 1615 凌氏刻本 — secondary OCR plus visual witness;
 4. 四庫全書本 — independent secondary witness;
 5. local `shishuo.txt` — structural reference; and
-6. 余嘉錫《世說新語箋疏》 — scholarly-reference-machine; the official CText
-   `gettext` API is the only permitted route for a local copy.
+6. 余嘉錫《世說新語箋疏》 — a named scholarly-reference family. The
+   user-provided local EPUB is the machine-readable working reference and the
+   local PDF is its visual/page fallback; both remain separate from the
+   primary witness and share one source family.
+7. Chinese Text Project's external Jianshu registration — retained as an
+   external reference and not required for local S1 processing.
 
 The Wikisource 四部叢刊 section declarations and their referenced
 Page-namespace wikitext are retrieved through the MediaWiki API as-is for
@@ -85,14 +89,13 @@ files are discovered through Internet Archive metadata/search. Its OCR is a
 convenience derivative only; its PDF/page image is the verification
 authority, and JP2 archives are not downloaded by default. The 四庫本 remains
 a separate textual/version comparison. The local structural reference
-assists entry-count and boundary comparison. 余嘉錫《世說新語箋疏》 is kept
-separate for later historical, person, and commentary analysis; it is not a
-textual witness and must not replace the primary text. Its CTP URN is
-`ctp:wb40889`, and the API key, when required, is read only from
-`CTEXT_API_KEY` and is never recorded. The current unauthenticated API
-request returns `ERR_REQUIRES_AUTHENTICATION`, so the witness remains external
-until authorized recursive retrieval succeeds. No secondary witness
-authorizes overwriting the primary Kanripo/SBCK text.
+assists entry-count and boundary comparison. The local 余嘉錫《世說新語箋疏》
+EPUB/PDF pair is a scholarly working reference: the EPUB supplies deterministic
+machine structure and the PDF supplies selective page verification. It is not
+a textual witness and must not replace the primary text. The external CTP
+registration remains separately recorded for future reference, but S1 does
+not depend on CText authentication or scrape its HTML/API output. No
+secondary witness authorizes overwriting the primary Kanripo/SBCK text.
 
 ## Jinshu source coverage and migration
 

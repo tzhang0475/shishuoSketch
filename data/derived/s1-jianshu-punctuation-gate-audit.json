@@ -1,0 +1,79 @@
+{
+  "classification": {
+    "implementation_bug": false,
+    "result": "intentional_two_tier_policy_resolved_by_s1_source_policy",
+    "selection_mode_affects_textual_judgment": false,
+    "stale_metadata": false,
+    "validator_schema_mismatch": false
+  },
+  "gate_contract": [
+    {
+      "allowed_values": [
+        "reviewed",
+        "aligned",
+        "candidate"
+      ],
+      "gate_name": "candidate_punctuation_eligibility",
+      "implementation_location": "scripts/x1_1_common.py:make_candidate_record",
+      "reject_conditions": [
+        "missing source",
+        "explicitly disputed punctuation",
+        "missing evidence route"
+      ],
+      "required_status": "source exists and punctuation is not explicitly disputed",
+      "source_field": "data/annotation/wp1-punctuation.json plus source/evidence route",
+      "stage": "X1.1 candidate pool",
+      "why_x1_1_qualified": "X1.1 is a research-selection gate and intentionally admits reviewable candidate Stories."
+    },
+    {
+      "allowed_values": [
+        "reviewed",
+        "accepted"
+      ],
+      "gate_name": "production_editorial_admissibility_pre_s1",
+      "implementation_location": "scripts/x1_2a_common.py and scripts/x1_2p_common.py",
+      "reject_conditions": [
+        "candidate-only punctuation",
+        "unresolved source-witness conflict",
+        "unreviewed character variant"
+      ],
+      "required_status": "independent punctuation-bearing editorial witness reviewed without unresolved character conflict",
+      "source_field": "X1.2A story review plus X1.2P punctuation review",
+      "stage": "X1.2A/X1.2P",
+      "why_x1_2a_blocked": "The prior policy required an additional independent editorial witness, so all 20 selected Stories remained unresolved when their only local punctuation route was candidate-level."
+    },
+    {
+      "allowed_values": [
+        "exact",
+        "near_exact",
+        "known_minor_variant"
+      ],
+      "gate_name": "production_editorial_admissibility_s1",
+      "implementation_location": "scripts/reresolve_s1_backlog.py",
+      "reject_conditions": [
+        "unmatched",
+        "structural ambiguity",
+        "meaningful variant",
+        "segmentation unavailable"
+      ],
+      "required_status": "reliably aligned Jianshu Story with usable editorial segmentation and no meaningful identity/semantic/boundary variant",
+      "source_field": "data/derived/s1-jianshu-story-alignment.json",
+      "stage": "S1 prospective policy",
+      "why_s1_changes_policy": "The local Jianshu family is now an available named scholarly working reference; an aligned Story supplies sufficient punctuation/segmentation evidence without changing the primary text."
+    }
+  ],
+  "policy": "A selected Story receives no punctuation privilege. S1 changes only the admissible scholarly-reference route, not the textual standard or the canonical primary witness.",
+  "previous_behavior": {
+    "x1_1_candidate_story_count": 417,
+    "x1_2p_artifact_preserved": true,
+    "x1_2p_selected_story_count": 20,
+    "x1_2p_unresolved_story_count": 20
+  },
+  "schema": "s1-jianshu-punctuation-gate-audit-1",
+  "source_hashes": {
+    "x1_1_candidate_pool": "cafd9b7445b2f604c8c27692e8a7ba9e0eca87d030ffad7eb052b3a3683dc41d",
+    "x1_1_selection": "2e39981d667102322508a32aad8bd118c88604e8c6cf320d7ff67775dcee019e",
+    "x1_2p_gate_audit": "64aaabfed36988dce95ebde8eff3ceb33ac3788e32d85df999830ef1ca23ef3b"
+  },
+  "stage": "S1.3/S1.4"
+}

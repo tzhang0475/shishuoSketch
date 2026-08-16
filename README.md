@@ -1,7 +1,5 @@
 ![世说Sketch](shishuoSketch.png)
 
-![世说Sketch](shishuoSketch.png)
-
 # 世说Sketch
 
 > **从一则故事，走进魏晋。**
