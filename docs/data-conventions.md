@@ -438,3 +438,27 @@ turning them into production Persons; human review and a later P3B
 materialization step remain required. Rebuilds sort candidate IDs, surfaces,
 evidence, Story IDs, and source layers explicitly so the JSON and review report
 are byte-deterministic.
+
+## HG0 Historical Graph Foundation
+
+HG0 is a derived graph projection over the frozen H0C entity/fact layer. The
+default graph scope is `published_story_scope`: 75 production Persons, 143
+published Stories, and H0C context entities referenced by those facts. The
+global PersonStory index remains wider; links to 417 out-of-scope Story IDs
+are recorded as a boundary and are not converted into dangling graph nodes.
+
+Graph node IDs reuse canonical H0C entity IDs. Multi-dimensional facts that
+would lose identity in a direct edge are represented by deterministic reified
+nodes for `OfficeTenure`, `PersonActivity`, `EventParticipation`, and
+`ServicePoliticalFact`. Binary MarriageUnion, KinshipFact, and ClanMembership
+remain typed edges with fact references. The graph is multiplex: Story,
+family, clan, office, event, geographic, service/political, social-context,
+and temporal layer memberships are explicit. Same endpoints with different
+edge types remain distinct historical mechanisms.
+
+Every HG0 edge must resolve to a canonical H0C fact and Evidence/provenance.
+Unknown chronology, candidate facts, unresolved aliases, and isolated nodes
+remain explicit. Missing edges are unknown, not negative evidence. HG0 does
+not generate negative facts, embeddings, models, train/test splits, or GNN
+artifacts. `data/derived/hg0-ml0-readiness.json` is a framework-neutral
+contract for later projections, not an ML dataset.

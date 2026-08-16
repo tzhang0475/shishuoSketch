@@ -1,0 +1,81 @@
+{
+  "schema": 1,
+  "stage": "hg0-bias-audit",
+  "scope_id": "published_story_scope",
+  "story_layer_dominance": {
+    "h0c_edge_count": 835,
+    "story_related_edge_count": 701,
+    "external_historical_edge_count": 134,
+    "story_related_edge_ratio": 0.839521,
+    "classification": "story_textual_structure_dominant",
+    "definition": "Story-related includes PersonStory, participant roles, Story event context, and Story location context; it does not create Person-Person co-occurrence edges.",
+    "interpretation": "A future model trained on G_all can learn editorial/textual structure more easily than external social history; layer-restricted views are required."
+  },
+  "published_scope_selection": {
+    "global_person_story_links": 875,
+    "materialized_published_person_story_links": 330,
+    "excluded_links": 545,
+    "excluded_link_ratio": 0.622857,
+    "excluded_story_id_count": 417,
+    "bias": "Published scope is an editorial selection and must not be treated as the complete historical Story universe."
+  },
+  "person_story_degree_concentration": {
+    "person_count_with_published_person_story": 70,
+    "top_10_published_person_story_degree_sum": 138,
+    "published_person_story_edge_count": 330,
+    "top_10_share": 0.418182,
+    "policy": "Degree is representation/coverage metadata, not historical importance."
+  },
+  "source_layer_representation": {
+    "person_story_presence_source_layers": {
+      "liu_annotation": 577,
+      "main_text": 433
+    },
+    "participant_source_sections": {
+      "liu_annotation": 193,
+      "main_text": 222
+    },
+    "annotation_only_participant_count": 112,
+    "caveat": "Liu annotation can expand contextual connectivity without proving hard Story presence."
+  },
+  "review_status_by_layer": {
+    "clan": {
+      "candidate": 11
+    },
+    "event": {
+      "candidate": 117
+    },
+    "family": {
+      "candidate": 7,
+      "reviewed": 1
+    },
+    "geographic": {
+      "candidate": 21
+    },
+    "office": {
+      "candidate": 112
+    },
+    "service_political": {
+      "candidate": 13
+    },
+    "social_context": {
+      "reviewed": 2
+    },
+    "story": {
+      "candidate": 340,
+      "reviewed": 348
+    },
+    "temporal": {
+      "candidate": 218,
+      "reviewed": 72
+    }
+  },
+  "known_biases": [
+    "The published 143-Story scope is an editorial sample of the wider canonical PersonStory index.",
+    "The Story/textual layer dominates edge volume; external family, office, event, location, and service layers are sparse.",
+    "Liu annotation contributes contextual Person links and must not be read as scene participation.",
+    "Surviving local source evidence and production Person selection shape graph visibility; missing edges are unknown, not negative evidence.",
+    "Candidate/derived graph edges are not equivalent to reviewed historical certainty."
+  ],
+  "policy": "Bias audit describes graph construction and coverage, not sociological conclusions about Wei-Jin society."
+}

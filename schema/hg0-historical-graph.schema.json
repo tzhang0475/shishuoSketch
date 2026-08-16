@@ -1,0 +1,72 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://shishuoSketch.local/schema/hg0-historical-graph.schema.json",
+  "title": "HG0 Historical Graph Foundation artifacts",
+  "type": "object",
+  "required": ["schema", "stage"],
+  "properties": {
+    "schema": {"const": 1},
+    "stage": {
+      "enum": [
+        "hg0-ontology",
+        "hg0-graph-universe",
+        "hg0-graph-projection",
+        "hg0-temporal-projection",
+        "hg0-graph-audit",
+        "hg0-sufficiency-audit",
+        "hg0-bias-audit",
+        "hg0-graph-gap-audit",
+        "hg0-ml0-readiness",
+        "hg0-protection-manifest",
+        "hg0-metrics"
+      ]
+    }
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"stage": {"const": "hg0-ontology"}}},
+      "then": {"required": ["node_types", "edge_types", "layers", "reification_audit", "multiplex_policy"]}
+    },
+    {
+      "if": {"properties": {"stage": {"const": "hg0-graph-universe"}}},
+      "then": {"required": ["default_scope_id", "scopes", "questions_answered", "protected_counts"]}
+    },
+    {
+      "if": {"properties": {"stage": {"const": "hg0-graph-projection"}}},
+      "then": {"required": ["graph_id", "scope_id", "nodes", "edges", "node_counts", "edge_counts", "node_type_catalog", "edge_type_catalog"]}
+    },
+    {
+      "if": {"properties": {"stage": {"const": "hg0-temporal-projection"}}},
+      "then": {"required": ["scope_id", "edge_temporal_index", "coverage", "slice_query_contract"]}
+    },
+    {
+      "if": {"properties": {"stage": {"const": "hg0-graph-audit"}}},
+      "then": {"required": ["issues", "issue_counts", "multi_edge_policy_check"]}
+    },
+    {
+      "if": {"properties": {"stage": {"const": "hg0-sufficiency-audit"}}},
+      "then": {"required": ["scope_id", "graph_summary", "layers", "spatial", "temporal", "readiness_scale"]}
+    },
+    {
+      "if": {"properties": {"stage": {"const": "hg0-bias-audit"}}},
+      "then": {"required": ["scope_id", "story_layer_dominance", "published_scope_selection", "known_biases"]}
+    },
+    {
+      "if": {"properties": {"stage": {"const": "hg0-graph-gap-audit"}}},
+      "then": {"required": ["scope_id", "category_catalog", "records", "summary"]}
+    },
+    {
+      "if": {"properties": {"stage": {"const": "hg0-ml0-readiness"}}},
+      "then": {"required": ["framework_neutral", "node_contract", "edge_contract", "projection_views", "missingness_contract", "model_artifacts_generated"]}
+    },
+    {
+      "if": {"properties": {"stage": {"const": "hg0-protection-manifest"}}},
+      "then": {"required": ["baseline_h0c_commit", "h0c_input_hashes", "protected_counts", "participant_freeze_sha256"]}
+    },
+    {
+      "if": {"properties": {"stage": {"const": "hg0-metrics"}}},
+      "then": {"required": ["scope", "graph", "temporal", "spatial", "sufficiency", "bias", "gaps", "ml0", "protected", "future_boundary"]}
+    }
+  ],
+  "additionalProperties": true
+}

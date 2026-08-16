@@ -1,0 +1,139 @@
+{
+  "schema": 1,
+  "stage": "hg0-ml0-readiness",
+  "framework_neutral": true,
+  "graph_id": "hg0-published-story-scope",
+  "scope_id": "published_story_scope",
+  "node_contract": {
+    "required_fields": [
+      "node_id",
+      "node_type",
+      "canonical_reference",
+      "scope_role",
+      "evidence_ids",
+      "review_status",
+      "assertion_status",
+      "reified_fact_node"
+    ],
+    "optional_fields": [
+      "label",
+      "source_fact",
+      "fact_ids",
+      "temporal",
+      "uncertainty_state"
+    ],
+    "stable_id_rule": "Canonical H0C entity IDs are reused; reified IDs are deterministic projections of canonical fact IDs."
+  },
+  "edge_contract": {
+    "required_fields": [
+      "edge_id",
+      "edge_type",
+      "source",
+      "target",
+      "graph_layer",
+      "layer_memberships",
+      "source_facts",
+      "fact_ids",
+      "evidence_ids",
+      "review_status",
+      "assertion_status",
+      "uncertainty_state",
+      "temporal",
+      "projection_role"
+    ],
+    "optional_fields": [
+      "relation_ids",
+      "provenance_refs",
+      "attributes",
+      "source_h0c_edge_id"
+    ],
+    "traceability_rule": "Every edge must resolve to H0C fact IDs and Evidence IDs or explicit source provenance.",
+    "multi_edge_rule": "Independent edge types may share endpoints; duplicate same-type semantic edges with the same fact set are invalid."
+  },
+  "projection_views": [
+    {
+      "view_id": "all",
+      "filter": "All materialized HG0 edges; preserve candidate/unknown metadata."
+    },
+    {
+      "view_id": "reviewed_only",
+      "filter": "review_status == reviewed; this is not a claim that omitted edges are negative."
+    },
+    {
+      "view_id": "reviewed_plus_candidate",
+      "filter": "review_status in {reviewed,candidate}; uncertainty remains attached."
+    },
+    {
+      "view_id": "strict_temporal_interval",
+      "filter": "Bounded/one-sided interval overlap only; unknown and relative-only facts are separate."
+    }
+  ],
+  "temporal_contract": {
+    "query": "edges_for_interval(start_year_ce, end_year_ce, include_unknown=False)",
+    "interval_semantics": "Inclusive potential-overlap: a bounded edge is returned when its interval intersects the requested interval.",
+    "one_sided_semantics": "A lower/upper bound is returned as potentially active when it does not exclude the requested interval.",
+    "unknown_semantics": "Unknown and relative-only facts are excluded from strict slices and reported separately; include_unknown may expose them as uncertain context.",
+    "temporal_leakage_rule": "A pre-cutoff projection may include only facts whose known end is at or before the cutoff, plus an explicit uncertain bucket; future or unknown facts must not be used as observed features.",
+    "no_exactness_upgrade": "Overlap never upgrades approximate, event-bounded, phase-only, relative, or unknown evidence to an exact date."
+  },
+  "missingness_contract": {
+    "missing_edge_is_negative": false,
+    "unknown_is_false": false,
+    "candidate_is_reviewed": false,
+    "approximate_is_exact": false,
+    "negative_facts_generated": false,
+    "required_behavior": "Future experiments must carry observed-positive, candidate, unknown, conflicted, and explicit-negative states separately; HG0 generates no negative samples."
+  },
+  "raw_feature_availability": [
+    "node type and canonical reference",
+    "typed degree/counts by layer",
+    "Story participation role counts",
+    "temporal precision/state masks",
+    "Office/Clan/Event/Location incidence",
+    "review/assertion/evidence availability masks"
+  ],
+  "research_question_readiness": [
+    {
+      "question": "heterogeneous structure representation",
+      "classification": "usable",
+      "reason": "The combined graph is connected enough for deterministic heterogeneous pilot projections, while layer sparsity and source selection bias remain material."
+    },
+    {
+      "question": "constrained link-prediction pilot",
+      "classification": "pilot_only",
+      "reason": "Family/service layers are sparse and missing edges are unknown rather than negative; use reviewed-only, layer-specific evaluation."
+    },
+    {
+      "question": "temporal representation pilot",
+      "classification": "pilot_only",
+      "reason": "The layer is usable for targeted, evidence-filtered pilots but lacks broad coverage for corpus-level historical inference."
+    },
+    {
+      "question": "political-faction discovery",
+      "classification": "premature",
+      "reason": "No sourced faction ontology exists and service/political coverage is sparse; topology must not invent factions."
+    },
+    {
+      "question": "event prediction",
+      "classification": "premature",
+      "reason": "Event and temporal coverage are too sparse and the published Story scope is selected."
+    },
+    {
+      "question": "historical-importance ranking",
+      "classification": "not_supported",
+      "reason": "Degree and corpus visibility are selection-biased and are not historical importance labels."
+    }
+  ],
+  "forbidden_artifacts": [
+    "embeddings",
+    "model_checkpoints",
+    "train_test_split",
+    "negative_samples",
+    "learned_clusters",
+    "centrality_as_historical_truth"
+  ],
+  "model_artifacts_generated": false,
+  "embeddings_generated": false,
+  "training_split_generated": false,
+  "policy": "HG0 defines a framework-neutral export contract; ML0 chooses models only after the sufficiency audit and without rewriting canonical facts."
+}
