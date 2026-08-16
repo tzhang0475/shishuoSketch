@@ -368,13 +368,66 @@ def _context(text: str, offset: int, surface: str, width: int = 42) -> tuple[str
     return text[start:offset], text[offset + len(surface):end]
 
 
-def _full_surface(text: str, offset: int, surface: str) -> str | None:
+def _semantic_prefix_start(text: str, offset: int) -> int | None:
+    """Return the preceding Chinese character for a semantic span.
+
+    Processed witnesses retain physical line endings.  A surname and a
+    courtesy name can therefore be split as ``温\n太真`` even though the
+    observed appellation is ``温太真``.  Allow exactly one physical line
+    ending (including CRLF), but never cross a blank line or arbitrary
+    whitespace.  This is a span-alignment helper, not a general whitespace
+    normalizer or name recognizer.
+    """
+
     if offset <= 0:
         return None
-    prefix = text[offset - 1:offset]
-    if not prefix or not re.match(r"[\u3400-\u9fff]", prefix):
+    candidate = offset - 1
+    if text[candidate] in "\r\n":
+        if text[candidate] == "\n" and candidate > 0 and text[candidate - 1] == "\r":
+            candidate -= 1
+        candidate -= 1
+        if candidate < 0 or text[candidate] in "\r\n":
+            return None
+    if not re.match(r"[\u3400-\u9fff]", text[candidate]):
         return None
-    return prefix + surface
+    return candidate
+
+
+def _source_semantic_match_end(text: str, start: int, surface: str) -> int | None:
+    """Match a semantic surface while tolerating one physical line ending.
+
+    The returned offset is in the untouched source string, so callers can
+    preserve the exact witness slice in provenance/display-span metadata.
+    """
+
+    if start < 0 or not surface or start >= len(text):
+        return None
+    cursor = start
+    for index, character in enumerate(surface):
+        if index:
+            if text.startswith("\r\n", cursor):
+                cursor += 2
+            elif cursor < len(text) and text[cursor] in "\r\n":
+                cursor += 1
+            # A second line ending would be a paragraph/source gap, not an
+            # internal break in one semantic appellation.
+            if cursor < len(text) and text[cursor] in "\r\n":
+                return None
+        if cursor >= len(text) or text[cursor] != character:
+            return None
+        cursor += 1
+    return cursor
+
+
+def _full_surface(text: str, offset: int, surface: str) -> str | None:
+    prefix_start = _semantic_prefix_start(text, offset)
+    if prefix_start is None:
+        return None
+    prefix = text[prefix_start]
+    complete = prefix + surface
+    if _source_semantic_match_end(text, prefix_start, complete) is None:
+        return None
+    return complete
 
 
 def _span_decision_id(story_id: str, section: str, offset: int, surface: str) -> str:
@@ -445,10 +498,10 @@ def _maximal_semantic_span(
     target_key = _target_key(target)
     if offset <= 0 or offset + len(surface) > len(text):
         return None
-    prefix = text[offset - 1:offset]
-    if not re.match(r"[\u3400-\u9fff]", prefix):
+    prefix_start = _semantic_prefix_start(text, offset)
+    if prefix_start is None:
         return None
-    complete = prefix + surface
+    complete = text[prefix_start] + surface
     associations = _association_candidates(alias_index, complete)
     same_target = [
         item
@@ -467,10 +520,13 @@ def _maximal_semantic_span(
     target_keys = {_target_key(item.get("target", {})) for item in associations}
     if len(target_keys) != 1:
         return None
+    source_end = _source_semantic_match_end(text, prefix_start, complete)
+    if source_end is None:
+        return None
     return {
-        "offset": offset - 1,
-        "end_offset_exclusive": offset + len(surface),
-        "text": complete,
+        "offset": prefix_start,
+        "end_offset_exclusive": source_end,
+        "text": text[prefix_start:source_end],
         "basis": "maximal_semantic_person_span",
         "status": "safe",
         "evidence_ids": sorted({
@@ -551,23 +607,23 @@ def _longest_safe_semantic_resolution(
         # surface/evidence gate below still decides identity; this is not
         # blind left expansion.
         possible_starts = [offset]
-        if offset > 0:
-            possible_starts.append(offset - 1)
-        start = next(
-            (
-                candidate_start
-                for candidate_start in possible_starts
-                if text.startswith(longer_surface, candidate_start)
-                and (
-                    (candidate_start == offset and longer_surface.startswith(surface))
-                    or (candidate_start == offset - 1 and longer_surface.endswith(surface))
-                )
-                and candidate_start + len(longer_surface) >= offset + len(surface)
-            ),
-            None,
-        )
-        if start is None:
+        prefix_start = _semantic_prefix_start(text, offset)
+        if prefix_start is not None:
+            possible_starts.append(prefix_start)
+        matched: tuple[int, int] | None = None
+        for candidate_start in possible_starts:
+            if candidate_start == offset and not longer_surface.startswith(surface):
+                continue
+            if candidate_start != offset and not longer_surface.endswith(surface):
+                continue
+            source_end = _source_semantic_match_end(text, candidate_start, longer_surface)
+            if source_end is None or source_end < offset + len(surface):
+                continue
+            matched = (candidate_start, source_end)
+            break
+        if matched is None:
             continue
+        start, source_end = matched
         associations = _association_candidates(alias_index, longer_surface)
         safe = [
             item
@@ -592,6 +648,9 @@ def _longest_safe_semantic_resolution(
         # are still ambiguous.  Do not let longest-match become a new guess.
         return None
     _, start, longer_surface, target, associations = longest[0]
+    source_end = _source_semantic_match_end(text, start, longer_surface)
+    if source_end is None:
+        return None
     evidence_ids = sorted({
         str(evidence_id)
         for item in associations
@@ -619,8 +678,8 @@ def _longest_safe_semantic_resolution(
         "resolution_method": "er1_1_2_longest_safe_semantic_span",
         "semantic_span": {
             "offset": start,
-            "end_offset_exclusive": start + len(longer_surface),
-            "text": longer_surface,
+            "end_offset_exclusive": source_end,
+            "text": text[start:source_end],
             "basis": "longest_safe_semantic_span",
             "status": "safe",
             "evidence_ids": evidence_ids,
@@ -2176,8 +2235,10 @@ def build(root: Path) -> dict[str, Any]:
     ]
     for item in span_audit["records"]:
         identity = item.get("identity") or {}
+        proposed_surface = str(item["proposed_surface"])
+        proposed_surface = proposed_surface.replace("\r\n", "` + physical source newline + `").replace("\n", "` + physical source newline + `")
         span_lines.append(
-            f"- `{item['story_id']}` · `{item['section']}` · `{item['proposed_surface']}` · "
+            f"- `{item['story_id']}` · `{item['section']}` · `{proposed_surface}` · "
             f"{identity.get('canonical_name', '未定')} · `{item['basis']}` · {item['status']}"
         )
     (root / SPAN_REPORT_PATH).parent.mkdir(parents=True, exist_ok=True)

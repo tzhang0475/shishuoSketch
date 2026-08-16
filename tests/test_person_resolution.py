@@ -214,6 +214,74 @@ class PersonResolutionTests(unittest.TestCase):
         raw = [row for row in canonical["mentions"] if row.get("entry_id") == "06-yaliang-017"]
         self.assertFalse(any(row.get("surface") in {"庾太尉", "亮"} for row in raw))
 
+    def test_fangzheng_032_preserves_cross_line_wen_taizhen_span(self) -> None:
+        effective = json.loads(
+            (ROOT / "data/derived/person-resolution-effective.json").read_text(encoding="utf-8")
+        )
+        rows = [
+            row
+            for row in effective["mentions"]
+            if row.get("entry_id") == "05-fangzheng-032" and row.get("surface") == "太真"
+        ]
+        self.assertEqual(len(rows), 1)
+        row = rows[0]
+        self.assertEqual(row["resolution_target"], {
+            "target_kind": "production_person",
+            "person_id": "person-013",
+            "canonical_name": "温嶠",
+        })
+        self.assertEqual(row["display_span"]["text"], "温\n太真")
+        self.assertEqual(row["display_span"]["offset"], 40)
+        self.assertEqual(row["display_span"]["end_offset_exclusive"], 44)
+
+        canonical = json.loads(
+            (ROOT / "data/mentions/shishuo.json").read_text(encoding="utf-8")
+        )
+        source_row = next(
+            item
+            for item in canonical["mentions"]
+            if item.get("entry_id") == "05-fangzheng-032" and item.get("surface") == "太真"
+        )
+        self.assertEqual(source_row["surface"], "太真")
+        self.assertEqual(source_row["evidence"]["section_offset"], 42)
+
+        bundle = json.loads(
+            (ROOT / "data/derived/sc1-site.json").read_text(encoding="utf-8")
+        )
+        story = next(item for item in bundle["stories"] if item["id"] == "05-fangzheng-032")
+        person_segments = [
+            item
+            for item in story["reading"]["main_text"]["segments"]
+            if item.get("type") == "person_mention" and item.get("person_id") == "person-013"
+        ]
+        self.assertEqual(len(person_segments), 1)
+        self.assertEqual(person_segments[0]["display"]["original"], "温太真")
+        self.assertNotEqual(person_segments[0]["display"]["original"], "太真")
+
+    def test_newline_aware_longest_alias_is_not_a_global_name_rule(self) -> None:
+        target = {"target_kind": "production_person", "person_id": "person-013", "canonical_name": "温嶠"}
+        result = resolve_mention(
+            {"mention_id": "fixture-wen-taizhen", "surface": "太真", "evidence": {"section_offset": 2}},
+            text="温\n太真",
+            alias_index={
+                "太真": [association(target, "太真")],
+                "温太真": [association(target, "温太真", alias_type="surname_plus_courtesy_name")],
+            },
+            targets_by_key=target_map(target),
+        )
+        self.assertEqual(result["status"], "resolved")
+        self.assertEqual(result["target"], target)
+        self.assertEqual(result["semantic_span"]["text"], "温\n太真")
+
+        standalone = resolve_mention(
+            {"mention_id": "fixture-taizhen-standalone", "surface": "太真", "evidence": {}},
+            text="太真",
+            alias_index={"太真": [association(target, "太真")]},
+            targets_by_key=target_map(target),
+        )
+        self.assertEqual(standalone["status"], "resolved")
+        self.assertIsNone(standalone.get("semantic_span"))
+
     def test_short_form_coreference_requires_same_local_antecedent(self) -> None:
         target = {"target_kind": "production_person", "person_id": "person-010", "canonical_name": "庾亮"}
         local = resolve_mention(

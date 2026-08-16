@@ -426,7 +426,13 @@ def display_span_for_anchor(
     offset: int,
     surface: str,
 ) -> tuple[int, int]:
-    """Return the exact displayed span for one canonical Mention anchor."""
+    """Return the displayed span for one canonical Mention anchor.
+
+    A semantic span may preserve a physical source line ending (for example
+    ``温\n太真``) while the reader projection removes that witness boundary
+    (``温太真``).  Permit that presentation-only whitespace change, but keep
+    the canonical anchor and the significant character sequence strict.
+    """
 
     if offset < 0 or canonical[offset : offset + len(surface)] != surface:
         raise ValueError("Mention anchor does not match canonical section text")
@@ -436,7 +442,12 @@ def display_span_for_anchor(
         raise ValueError("Mention anchor exceeds canonical section text")
     start = starts[offset]
     end = ends[end_offset]
-    if start >= end or displayed[start:end] != surface:
+    if start >= end:
+        raise ValueError("Mention anchor cannot be mapped to displayed text")
+    visible = displayed[start:end]
+    visible_without_physical_breaks = visible.replace("\r\n", "").replace("\n", "").replace("\r", "")
+    surface_without_physical_breaks = surface.replace("\r\n", "").replace("\n", "").replace("\r", "")
+    if visible != surface and visible_without_physical_breaks != surface_without_physical_breaks:
         raise ValueError("Mention anchor cannot be mapped to displayed text")
     return start, end
 

@@ -1,116 +1,47 @@
 ![世说Sketch](shishuoSketch.png)
 
+![世说Sketch](shishuoSketch.png)
+
 # 世说Sketch
 
 > **从一则故事，走进魏晋。**
 
-世说Sketch不是《世说新语》知识图谱，也不是古籍AI问答系统。
+世说Sketch是一个以《世说新语》为中心的互动阅读与数字人文项目。
 
-它希望利用《世说新语》留下的大量人物片段，为一个个人物作“素描”，并通过许多人物、关系与故事，逐渐勾勒出一个时代的神情。
+它试图解决一个很简单的问题：
 
-项目最初想解决的问题很简单：
+> 两千年以后，我们怎样才能重新读到《世说》里的“人”？
 
-> 现代读者阅读《世说新语》时，经常被人物称谓、复杂关系、时代背景和碎片化叙事挡在故事之外。
+现代读者打开《世说新语》，常常很快遇到人物称谓、家族关系、时代背景和碎片化叙事的障碍。
 
-世说Sketch希望尽量拿掉这些障碍，但不过度解释。
+世说Sketch希望把这些障碍轻轻拿掉。
 
-用户最终感受到的应该仍然是《世说》，而不是数据库。
+你可以从一则故事开始，认出其中的人；
+从一个人走到他的其他故事；
+沿一段关系认识另一个人；
+再从另一个人进入新的故事。
 
----
-
-# 1. 核心理念
-
-## 1.1 人物不是由履历组成，而由瞬间组成
-
-《世说》很少完整介绍一个人的一生。
-
-它留下的是一个个瞬间：
-
-* 谢安临危时的从容；
-* 王羲之坦腹东床；
-* 王子猷雪夜访戴；
-* 人物之间一句意味深长的评价；
-* 宴会中的政治压力；
-* 面对死亡、友情、门第和礼法时的反应。
-
-一个人的 Sketch，应当由这些故事逐渐叠出来。
-
-因此我们首先问：
-
-> **《世说》让我们看见了怎样一个人？**
-
-而不是：
-
-> 这个人的完整生平是什么？
+最终留下的仍然应该是《世说》，而不是数据库。
 
 ---
 
-## 1.2 时代也可以被“素描”
+## 一次阅读，也是一段漫游
 
-时代不是只有：
-
-* 年表；
-* 战争；
-* 制度；
-* 帝王；
-* 政治事件。
-
-一个时代还存在反复出现的姿态：
-
-* 从容；
-* 任诞；
-* 清谈；
-* 人物品评；
-* 门第意识；
-* 婚姻；
-* 家族；
-* 友情；
-* 伤逝；
-* 政治恐惧；
-* 对死亡的态度；
-* 对自然与礼法的理解。
-
-世说Sketch希望从故事本身出发，让这些气质逐渐显现，而不是预先给用户一套“魏晋风度”的标准答案。
-
----
-
-# 2. 产品目标
-
-最终产品应当是一部：
-
-> **可漫游的沉浸式《世说新语》注本。**
-
-或者：
-
-> **Interactive Annotated Narrative Edition**
-
-用户的基本体验不是“查询”，而是“进入”。
-
-理想路径类似：
+世说Sketch的基本路径不是搜索，而是：
 
 ```text
-读一则故事
-    ↓
-知道这些人是谁
-    ↓
-点进一个人物
-    ↓
-看到他在其他故事中的样子
-    ↓
-沿一条人物关系走到另一个人
-    ↓
-进入新的故事
-    ↓
-发现一组气质相似的故事
-    ↓
-逐渐理解一个人物
-    ↓
-逐渐理解一个时代
+Story
+  ↓
+Person
+  ↓
+Relation
+  ↓
+Person
+  ↓
+Story
 ```
 
-一个用户可能只是想看看“东床坦腹”。
-
-半小时以后，他可能已经从：
+比如从“东床坦腹”开始：
 
 ```text
 王羲之
@@ -121,324 +52,219 @@
 → 谢安
 ```
 
-走进整个东晋士族社会。
+一个原本孤立的故事，会慢慢展开成家族、婚姻、友情、政治与人物品评组成的世界。
 
-这就是项目希望创造的体验。
+我们希望这种探索始终保留来路。
 
----
-
-# 3. 四个核心对象
-
-前端最终尽量只向用户暴露四种对象：
-
-## Story
-
-《世说》中的一则故事。
-
-它是整个系统最基本的内容原子。
-
-## Person
-
-一个人物在不同故事中的反复出现。
-
-Person Page 不是传统百科，而是人物素描。
-
-## Relation
-
-人与人之间有证据支持的关系。
-
-一条 Relation 不只是图上的一条线，而应当通向相关故事和史料。
-
-## Theme / Motif
-
-跨越人物和篇目的时代气质、场景和母题。
-
-例如：
-
-* 雅量；
-* 任诞；
-* 伤逝；
-* 人物品评；
-* 门第婚姻；
-* 清谈；
-* 政治危险。
+不是不断跳向新的页面，而是逐渐走进魏晋。
 
 ---
 
-# 4. 阅读体验：一则一幕
+## 人物不是由履历组成，而由瞬间组成
 
-每一则首先应该被当成一个场景。
+《世说》很少完整介绍一个人的一生。
 
-阅读界面采用逐层展开，而不是一次展示全部知识。
+它留下的是一幕幕瞬间：
 
-## Level 1 — 读故事
+* 王羲之坦腹东床；
+* 谢安临危而从容；
+* 王子猷雪夜访戴；
+* 嵇康临刑索琴；
+* 阮籍穷途而哭；
+* 朋友死后的一句话；
+* 宴席中的一次沉默；
+* 面对权势、礼法和死亡时的一种姿态。
 
-尽量保持原文。
+所以这里的 Person 不是传统人物百科。
 
-只解决最直接的阅读障碍，例如：
+我们更希望：
+
+> **让一个人从许多故事中慢慢显形。**
+
+而不是先告诉读者：
+
+> “这个人是怎样的人。”
+
+再用故事证明这个结论。
+
+这也是 **Sketch** 这个名字的含义。
+
+---
+
+## 从人物，逐渐看见一个时代
+
+人物可以被素描，时代也可以。
+
+魏晋并不只存在于帝王、战争、制度和年表中。
+
+它还存在于一些不断重现的东西里：
 
 ```text
-郗太傅 → 郗鉴
-王丞相 → 王导
-逸少   → 王羲之
+雅量
+任诞
+清谈
+伤逝
+人物品评
+门第与婚姻
+友情
+政治恐惧
+对死亡的态度
 ```
 
-目标：
+世说Sketch希望从具体故事开始，让这些气质自己出现。
 
-> **让我能够继续读下去。**
+不是先定义“魏晋风度”，再把故事放进去。
 
----
+而是读过足够多的故事以后：
 
-## Level 2 — 看见这一幕
-
-帮助读者重建场景：
-
-* 谁在场；
-* 人物是什么关系；
-* 为什么会发生这件事情；
-* 必要的门第、婚姻、政治和社会背景；
-* 故事真正的戏剧张力在哪里。
-
-目标：
-
-> **让我看见当时发生了什么。**
+> **你开始自己感觉到，那个时代似乎有一种不同的神情。**
 
 ---
 
-## Level 3 — 追史料
+# 当前可以探索什么
 
-进一步展开：
+世说Sketch已经从最初的小规模人物实验进入更完整的历史结构阶段。
 
-* 《世说新语》正文；
-* 刘孝标注；
-* 《晋书》；
-* 《三国志》及裴注；
-* 其他早期史料；
-* 《世说新语笺疏》；
-* 现代研究。
-
-目标：
-
-> **让我知道为什么可以这样理解。**
-
-史料事实、后世考证和现代解释必须明确区分。
-
----
-
-# 5. Person Sketch
-
-Person Sketch 不应首先呈现完整生平。
-
-例如谢安页面可以从若干代表性场景开始：
+目前的数据基础包括：
 
 ```text
-海上风急
-↓
-众人失色，谢安吟啸自若
+《世说新语》
+36 篇
+1130 canonical entries
 
-桓温设伏
-↓
-谢安从容赴会
-
-淝水捷报
-↓
-看完信仍继续下棋
-
-客去之后
-↓
-入户折屐齿而不觉
+当前发布研究范围
+143 Stories
+75 Persons
+330 Person ↔ Story links
 ```
 
-经过若干场景以后，用户自己逐渐形成：
+在 Story 与 Person 之外，历史上下文正在逐渐加入：
 
-> “我好像知道谢安是怎样一个人了。”
+```text
+Person
+Story
+Family
+Clan
+Office
+Event
+Location
+Regime
+Time
+```
 
-Person Sketch 可以逐步包含：
+这些结构不是为了建立一个“万能魏晋知识图谱”。
 
-* 代表性故事；
-* 反复出现的姿态；
-* 人物言语；
-* 他人评价；
-* 重要关系；
-* 不同人生阶段；
-* 《世说》与正史之间的差异。
+它们首先服务一个目的：
 
-关键原则：
-
-> **不要先给结论，再找故事证明结论。**
-
-应让人物从故事中自己显形。
+> **让故事更容易被读懂，也让人物之间原本隐约的联系重新可见。**
 
 ---
 
-# 6. Relation 不只是 Edge
+# 阅读方式
 
-知识图谱中的：
+## 读故事
+
+Story 是整个产品的中心。
+
+正文尽量保持原来的阅读节奏，只在必要的位置提供帮助。
+
+例如原文中的：
+
+```text
+郗太傅
+王丞相
+逸少
+```
+
+可以被解析为具体人物。
+
+这些称谓不是被替换掉，而是成为进入人物世界的入口。
+
+---
+
+## 认出人物
+
+点击已经解析的称谓，可以直接查看人物。
+
+人物信息不是与正文分离的百科页面，而是阅读过程的一部分：
+
+```text
+Story
+  ↓
+Person
+  ↓
+他的关系
+  ↓
+他的其他故事
+```
+
+多个故事共同构成一个 Person Sketch。
+
+---
+
+## 沿关系继续走
+
+人物关系不是一个孤立的：
 
 ```text
 A ───── B
 ```
 
-只是一个入口。
-
-真正的 Relation 应当包含：
+一条 Relation 应该能够回答：
 
 ```text
-两个人是什么关系
+他们是什么关系？
         ↓
-这段关系如何形成
+依据来自哪里？
         ↓
-哪些故事表现了它
+哪些故事与这段关系有关？
         ↓
-不同时期是否发生变化
-        ↓
-《世说》如何记录
-        ↓
-《晋书》等史料如何旁证
+还能从这里走向谁？
 ```
 
-因此：
-
-```text
-co-occurrence ≠ historical relationship
-```
-
-两个人共同出现，只能首先产生 co-occurrence evidence。
-
-友情、政治联盟、评价关系等必须有进一步证据。
+人物关系因此既是历史信息，也是阅读路径。
 
 ---
 
-# 7. Era Sketch
+## 继续追史料
 
-Era Sketch 不以传统历史年表为中心。
+如果读者想知道：
 
-它从故事中寻找反复出现的：
+> 为什么可以这样理解？
 
-## 场景
+可以继续展开证据。
 
-* 宴会；
-* 清谈；
-* 访友；
-* 婚姻；
-* 战争；
-* 临终；
-* 服丧；
-* 饮酒；
-* 人物品评。
+目前项目逐步整合：
 
-## 姿态
+* 《世说新语》正文；
+* 刘孝标注；
+* 《晋书》；
+* 其他早期史料；
+* 后世考证与现代研究。
 
-* 从容；
-* 狂放；
-* 矜持；
-* 羞耻；
-* 悲伤；
-* 机锋；
-* 任性；
-* 恐惧。
+这些来源不会被混成一个“答案”。
 
-## 社会结构
+项目尽量保持：
 
-* 门第；
-* 家族；
-* 婚姻；
-* 名望；
-* 官职；
-* 师友；
-* 政治集团。
-
-最终才逐渐进入一些更大的问题：
-
-> 什么是名士？
-
-> 为什么魏晋如此重视人物风度？
-
-> “自然”究竟是真的自然，还是一种社会表演？
-
-> 为什么人物评价具有如此大的力量？
-
-> 为什么死亡感在《世说》中如此强烈？
-
-时代 Sketch 应从故事向抽象生长，而不是把预先存在的理论套在故事上。
+```text
+史料事实
+≠ 学术考证
+≠ 数据推导
+≠ AI 判断
+≠ 现代解释
+```
 
 ---
 
-# 8. Semantic Search 的角色
+# Evidence First
 
-Semantic Search 非常重要，但不是事实判断系统。
+世说Sketch的底层原则之一是：
 
-它是：
+> **重要的历史判断应该能够回到证据。**
 
-> **发现层。**
-
-主要帮助完成：
-
-```text
-Story → Similar Stories
-
-Story → Motif
-
-Motif → Stories
-
-Motif → People
-
-Corpus → Previously unnoticed patterns
-```
+Person、Alias、Relation、Story context 等数据尽量保留 provenance 和 review status。
 
 例如：
-
-> “还有哪些人在危险中仍然表现得若无其事？”
-
-这类问题很难靠简单关键词搜索。
-
-Semantic Search 可以寻找语义邻居，然后由人工或经过审核的数据决定它们是否真正属于同一 motif。
-
-因此：
-
-```text
-Structured Graph
-→ 主要负责“谁和谁”
-
-Semantic Space
-→ 主要负责“哪些瞬间具有相似气质”
-```
-
-两者最终在 Story 层汇合。
-
----
-
-# 9. AI 的角色
-
-项目采用：
-
-> **AI is a build dependency, not a runtime dependency.**
-
-AI主要用于离线数据构建：
-
-* entity candidate；
-* alias candidate；
-* relation candidate；
-* story metadata；
-* reader difficulty；
-* motif discovery；
-* semantic embedding；
-* semantic reranking；
-* Sketch 草稿。
-
-AI产生的内容原则上首先是：
-
-```text
-candidate
-```
-
-而不是：
-
-```text
-fact
-```
-
-统一状态：
 
 ```text
 candidate
@@ -446,552 +272,240 @@ reviewed
 rejected
 ```
 
-重要解释经过人工审核以后才进入最终网站。
+共同出现也不自动等于历史关系：
+
+```text
+co-occurrence ≠ historical relationship
+```
+
+不知道的关系保持未知。
+
+缺失的边也不是“没有关系”的证据。
 
 ---
 
-# 10. Runtime 尽量不依赖 AI
+# AI 在这里做什么
 
-默认产品采用 static-first 架构：
+世说Sketch并不把“和古人聊天”作为产品中心。
+
+我们的原则是：
+
+> **AI is a build dependency, not a runtime dependency.**
+
+AI与机器学习主要用于离线研究与数据构建，例如：
 
 ```text
-离线 GPU
-    ↓
-AI / Embedding / Reranker
-    ↓
-人工 Review
-    ↓
-JSON / Markdown
-    ↓
-Static Build
-    ↓
-GitHub Pages / CDN
-    ↓
-User
+entity / alias candidates
+relation candidates
+semantic retrieval
+motif discovery
+historical graph representation
+story / person representation
 ```
 
-最终用户浏览：
+它们首先帮助：
 
-* Person Sketch；
-* Era Sketch；
-* Story；
-* Relation；
-* Similar Stories；
+> **发现值得进一步看的东西。**
 
-原则上都不需要在线 LLM 调用。
+而不是自动决定：
 
-这样即使访问量增长，AI inference cost 仍然可以接近零。
+> **历史事实是什么。**
+
+最终进入阅读界面的重要事实与解释，需要经过来源约束与审核。
+
+网站本身因此可以保持 static-first，并不要求用户每阅读一则故事都调用一次 LLM。
 
 ---
 
-# 11. 当前数据基础
+# Historical Graph
 
-项目已经建立了较稳定的文本基础设施。
+随着人物与故事范围扩大，项目正在形成一个 provenance-aware historical graph。
 
-## 《世说新语》
-
-目前已经形成：
+它连接的并不只有 Person 与 Story，还包括：
 
 ```text
-36篇
-1130 canonical entries
+Person ─ Story
+Person ─ Family
+Person ─ Clan
+Person ─ Office
+Story  ─ Event
+Story  ─ Location
+Person / Story ─ Time
 ```
 
-并经过：
+这个 graph 有两个用途。
 
-* 多 witness 校核；
-* 已知数字化缺失修补；
-* boundary audit；
-* structural review；
-* stable entry IDs；
-* provenance validation。
+第一，是为阅读提供可靠的历史上下文。
 
-这些 entry 是后续所有 Sketch 的故事基础。
+第二，是为后续机器学习提供结构化的研究空间。
 
-## 《晋书》
+但 graph 本身不是历史真相。
 
-目前采用完整四库本作为 machine primary：
-
-```text
-130卷
-```
-
-已生成结构化 historical units，可按人物和传记检索。
-
-《晋书》的主要角色是：
-
-* 人物身份确认；
-* 生平背景；
-* 家族关系；
-* 官职；
-* 时间；
-* 《世说》故事的正史旁证。
-
-它不需要像《世说》一样切成故事。
+它受到现存史料、编辑范围、人物覆盖程度以及 review status 的限制，因此项目同时保留 graph scope、coverage 和 bias audit。
 
 ---
 
-# 12. 数据管线
+# 我们在做什么
 
-整体数据流：
+当前开发重点已经从“能不能做出一页《世说》阅读器”，转向：
+
+```text
+可靠文本
+   ↓
+人物识别
+   ↓
+关系与历史上下文
+   ↓
+可漫游的阅读体验
+   ↓
+Person Sketch
+   ↓
+语义与 motif 发现
+   ↓
+Era Sketch
+```
+
+接下来的问题不是单纯增加更多人物和更多故事。
+
+而是：
+
+> **这些结构能不能真正帮助读者更好地认识一个人？**
+
+以及：
+
+> **当许多人物和故事连接起来以后，我们能不能看到一些单独阅读时不容易看到的东西？**
+
+---
+
+# 设计原则
+
+### Story first
+
+故事始终是内容原子。
+
+数据库、图结构和模型都不能取代阅读本身。
+
+### Progressive disclosure
+
+第一次阅读只提供继续读下去所需要的信息。
+
+更多人物、关系、史料和历史背景逐层展开。
+
+### Preserve context
+
+探索人物和关系时，尽量保留用户从哪里来。
+
+漫游不应该破坏阅读上下文。
+
+### Evidence before interpretation
+
+先建立可追溯的事实层，再增加解释。
+
+### Let people emerge from stories
+
+不要先替人物下结论。
+
+让许多故事共同构成人物。
+
+### Restraint
+
+技术的任务是让原本难以被感受到的东西重新显现。
+
+不是把《世说》解释完。
+
+---
+
+# 项目结构
+
+整体数据流大致为：
 
 ```text
 Raw Witnesses
       ↓
 Normalization
       ↓
-Canonical Units
+Canonical Story Units
       ↓
-Mention
+Mention / Alias / Person
       ↓
-Alias
+Historical Context
       ↓
-Person
+Evidence-backed Relations
       ↓
-Evidence-backed Relation
+Historical Graph
       ↓
-Story Interpretation
-      ↓
-Motif / Semantic Space
+Semantic / ML Layer
       ↓
 Person Sketch / Era Sketch
       ↓
-Interactive Experience
+Interactive Reading
 ```
 
----
-
-# 13. Evidence First
-
-系统中的所有历史判断尽量能够回到来源。
-
-原则：
-
-```text
-史料
-≠
-学术考证
-≠
-AI判断
-≠
-现代解释
-```
-
-例如：
-
-```text
-《世说》正文
-刘孝标注
-《晋书》
-余嘉锡《笺疏》
-现代研究
-AI推断
-```
-
-必须保持不同 provenance。
-
-任何 Relation、Alias 和重要人物身份判断，都应尽可能留下证据链。
-
----
-
-# 14. 当前开发策略：两个并行 Track
-
-## Track A — Experience
-
-先证明产品是不是值得使用：
-
-```text
-6个核心人物
-↓
-约20个代表故事
-↓
-Story Reader
-↓
-Person Sketch
-↓
-Relation Navigation
-↓
-第一个 Era Sketch
-```
-
-核心问题：
-
-> **用户有没有真正进入《世说》？**
-
-## Track B — Data / AI
-
-为未来规模化准备：
-
-```text
-Mention Resolution
-↓
-Relation Evidence
-↓
-Story Metadata
-↓
-Semantic Benchmark
-↓
-Motif Candidate
-↓
-Human Review
-```
-
-核心问题：
-
-> **这套方法能不能从6个人扩展到30个人，再扩到更多人物？**
-
-Track B 不应阻塞 Track A。
-
----
-
-# 15. 当前 MVP
-
-第一阶段只使用现有六个人：
-
-```text
-王羲之
-郗鉴
-王导
-王凝之
-谢道韫
-谢安
-```
-
-挑选约15–30则最有表现力的故事。
-
-先完成：
+前端主要围绕四种对象展开：
 
 ```text
 Story
 Person
 Relation
-Theme
+Theme / Motif
 ```
 
-四种基本体验。
-
-不需要先覆盖所有人物。
-
 ---
 
-# 16. 第一个 Person Sketch
+# 本地开发
 
-优先考虑：
+安装依赖：
 
-> **谢安**
-
-原因：
-
-* 《世说》出现频繁；
-* 有大量表现性场景；
-* 《晋书》材料丰富；
-* 家族、政治、清谈、人物品评均有体现；
-* “雅量”特征非常鲜明；
-* 可以观察人物不同阶段。
-
-成功标准：
-
-> 用户连续读完若干谢安故事以后，不需要百科介绍，也能形成一个具体的人物印象。
-
----
-
-# 17. 第一个 Era Sketch
-
-优先考虑：
-
-> **雅量**
-
-但：
-
-```text
-Era Sketch: 雅量
-≠
-《雅量》第六所有故事
-```
-
-需要结合：
-
-* 《世说》篇目；
-* 人工阅读；
-* semantic retrieval；
-* cross-chapter stories。
-
-目标不是定义“雅量”。
-
-而是让读者连续看到一组人物在压力、危险、巨大情绪中表现出的姿态，然后自己逐渐理解这个词。
-
----
-
-# 18. Semantic Benchmark
-
-在引入正式 semantic recommendation 前，建立：
-
-> **Shishuo Semantic Benchmark**
-
-人工设计一批查询，例如：
-
-```text
-临危从容
-故作自然
-真正不在意别人评价
-朋友死亡后的强烈悲痛
-门第影响婚姻
-人物相互品评
-政治宴会中的危险
-面对死亡仍然旷达
-表面平静但内心激动
-突然访友
-```
-
-比较不同 embedding / reranker 对《世说》语义的理解能力。
-
-实验室 GPU 可用于：
-
-* embedding benchmark；
-* reranker；
-* batch LLM analysis。
-
-最终选择：
-
-> **最理解《世说》的模型**
-
-而不是单纯依赖公开 benchmark 排名。
-
----
-
-# 19. 暂时不做
-
-为了避免项目无限膨胀，当前阶段明确暂缓：
-
-* 全魏晋人物数据库；
-* 所有人物自动关系抽取；
-* 完整古代官职数据库；
-* 完整地理系统；
-* Neo4j；
-* Postgres；
-* 在线向量数据库；
-* 在线 LLM 必需依赖；
-* AI Chat 作为首页；
-* 用户账户体系；
-* 全史书 RAG；
-* 全自动 Person Biography；
-* 全自动 Era Interpretation；
-* 大规模 70B 模型部署。
-
-这些都可以以后增加，但不是项目成立的前提。
-
----
-
-# 20. 资料扩展原则
-
-采用：
-
-> **Just-in-time enrichment**
-
-例如：
-
-```text
-做谢安
-→ 补谢安需要的材料
-
-做嵇康
-→ 再加强《三国志》、裴注等资料
-
-做门第婚姻
-→ 再集中补婚姻与士族研究
-```
-
-而不是先试图完成“整个魏晋数据库”。
-
----
-
-# 21. 项目成功标准
-
-不以：
-
-* 人物数量；
-* edge数量；
-* embedding数量；
-* AI模型大小；
-
-作为主要成功指标。
-
-真正的 Milestones 是：
-
-## Milestone 1
-
-一个第一次接触《世说》的用户能够自然读懂“东床坦腹”。
-
-## Milestone 2
-
-他能够从王羲之沿人物关系自然走到谢道韞、谢安。
-
-## Milestone 3
-
-读完一个 Person Sketch 后，他形成了一个有细节的人物印象。
-
-## Milestone 4
-
-读完“雅量” Era Sketch 后，他开始凭自己的感受理解所谓“魏晋风度”。
-
-## Milestone 5
-
-Semantic recommendation 能让他连续读下去，并感觉：
-
-> “这些故事之间确实存在某种说不清但能够感受到的相似。”
-
-到这里，世说Sketch才真正成立。
-
----
-
-# 22. 最终原则
-
-在今后的功能和数据设计中，可以反复用下面的问题校准方向：
-
-### 这个功能是在帮助用户进入《世说》，还是只是在展示技术？
-
-如果只是展示技术，不做。
-
-### 这个解释是在拿掉阅读障碍，还是替用户把故事解释完了？
-
-如果解释过度，删减。
-
-### 这个AI结果是帮助发现，还是在替代历史判断？
-
-如果替代历史判断，退回 candidate。
-
-### 这个新数据库真的服务当前 Sketch 吗？
-
-如果没有明确用途，暂缓建设。
-
-### 这个功能直接问 ChatGPT 是否已经可以很好完成？
-
-如果可以，就不把它作为项目核心竞争力。
-
----
-
-# 23. 一句话定义
-
-> **世说Sketch，是用《世说新语》的碎片，为人作素描，也为时代作素描。**
-
-人物不是由履历组成，而由一幕幕被记住的瞬间组成。
-
-时代也不是由年表组成，而由无数人在相似情境下反复表现出的姿态组成。
-
-技术的任务不是取代阅读，而是让那些原本因为称谓、关系、时代距离而难以被感受到的东西重新显现。
-
----
-
-# 24. 开发总路线
-
-```text
-可靠史料
-   ↓
-读懂故事
-   ↓
-认出人物
-   ↓
-理解关系
-   ↓
-重建场景
-   ↓
-发现反复出现的姿态
-   ↓
-Person Sketch
-   ↓
-Era Sketch
-   ↓
-关系漫游 + 语义漫游
-```
-
-最终希望达到的状态不是：
-
-> “我查到了很多关于魏晋的知识。”
-
-而是：
-
-> **“我好像认识这些人了，也开始感觉到那个时代是什么样子。”**
-
----
-
-## 当前开发入口
-
-### Source processing
-
-Kanripo source-processing pipeline 记录在
-[docs/source-processing.md](docs/source-processing.md) 中。它将不可变的 TXT
-源文件转换为保留 provenance 的 Markdown，并将《世说新语》切分为篇目和编辑性记录；不会简化繁体字，也不会抽取关系。
-
-运行测试：
-
-```sh
-python3 -m unittest discover -s tests -v
-```
-
-### Scholarly lookup
-
-如需按需查询余嘉锡《世说新语箋疏》，使用 Codex live web search；不会下载完整笺疏：
-
-```sh
-python3 scripts/lookup_shishuo_reference.py "谢太傅"
-python3 scripts/lookup_shishuo_reference.py "谢太傅" --entry 06-yaliang-019
-python3 scripts/lookup_shishuo_reference.py "谢太傅" --refresh
-python3 scripts/lookup_shishuo_reference.py "谢太傅" --no-cache
-```
-
-查询报告缓存于 `.cache/shishuo-reference/`（已加入 Git ignore）。该工具使用
-`codex exec --search --ephemeral --sandbox read-only`，不会抓取 CText HTML、绕过 CText 认证，也不会修改 canonical Shishuo entries 或 metadata。
-
-## WP1 / SC1 static prototype
-
-The first static vertical slice is anchored on `06-yaliang-019`（东床坦腹）.
-It is generated from the existing canonical entry and the six-person pilot;
-the source and normalized corpus are not copied by hand or modified.
-
-Install the frontend dependencies and the Python schema validator in a fresh
-environment:
-
-```sh
+```bash
 npm install
 python3 -m pip install -r requirements-dev.txt
 ```
 
-Validate the WP1 schemas, IDs, cross-references, evidence links, scope
-manifest, and generated static bundle:
+运行校验：
 
-```sh
+```bash
 npm run validate
 ```
 
-Local research checkouts can require all ignored source payloads explicitly:
+构建网站：
 
-```sh
-python3 scripts/validate_wp1.py --mode full
-```
-
-Clean CI/Pages checkouts use committed lock metadata for intentionally absent
-source payloads without weakening artifact hashing:
-
-```sh
-python3 scripts/validate_wp1.py --mode portable
-```
-
-Build the static React/Vite/TypeScript site:
-
-```sh
+```bash
 npm run build
 ```
 
-Run the local development server:
+本地开发：
 
-```sh
+```bash
 npm run dev
 ```
 
-The current prototype is a static reading page under the Vite base path
-`/shishuoSketch/`. SC1 publishes the 16-story Story Chain Gold Set as an
-experimental preview: `npm run build:sc1` generates the build-time bundle,
-and `npm run validate:sc1` checks its publication states and Story ↔ Person
-projections. The 15 candidate punctuation records remain unreviewed; only
-their valid deterministic reading layers are marked `preview_ready`. No
-runtime API or source-corpus fetch is used.
+项目使用 React / TypeScript / Vite 构建静态阅读界面，并使用 Python 完成文本处理、数据构建、schema validation 与历史图生成。
+
+---
+
+# 项目状态
+
+世说Sketch仍然是一个持续发展的 research / product prototype。
+
+当前重点不是追求：
+
+```text
+最多的人物
+最多的关系
+最大的知识图谱
+最大的语言模型
+```
+
+而是验证一个更基本的问题：
+
+> **数字工具能不能减少两千年的阅读距离，却不替读者把《世说》读完？**
+
+如果答案是可以，那么一个人可以从一则故事出发，沿着人物、关系和记忆不断走下去。
+
+最后得到的也许不是一张完整的魏晋地图。
+
+而是一幅逐渐显影的素描。
+
+---
+
+> **世说Sketch，用《世说新语》的碎片，为人作素描，也为时代作素描。**

@@ -59,6 +59,7 @@ except ImportError:
 
 ROOT = Path(__file__).resolve().parents[1]
 SCHEMA_PATH = Path("schema/h0c-historical-context.schema.json")
+PROJECTION_MIGRATION_PATH = Path("data/migrations/h0c-projection-hotfix-fangzheng-032.json")
 ROLE_SET = {"present", "speaker", "actor", "referenced", "off_frame", "annotation_only", "uncertain"}
 HARD_ROLES = {"present", "speaker", "actor"}
 
@@ -76,6 +77,36 @@ def unique_ids(rows: list[Mapping[str, Any]], key: str) -> bool:
 
 def evidence_ids(rows: list[Mapping[str, Any]]) -> set[str]:
     return {str(value) for row in rows for value in row.get("evidence_ids", [])}
+
+
+def projection_migration_updates(protection: Mapping[str, Any]) -> tuple[dict[str, str], list[str]]:
+    """Return explicitly approved post-H0C derived-input hash migrations."""
+
+    if not PROJECTION_MIGRATION_PATH.is_file():
+        return {}, []
+    try:
+        migration = read_json(PROJECTION_MIGRATION_PATH)
+    except (OSError, ValueError, json.JSONDecodeError) as exc:
+        return {}, [f"H0C projection migration cannot be read: {exc}"]
+    errors: list[str] = []
+    if migration.get("schema") != 1:
+        errors.append("H0C projection migration schema is invalid")
+    if migration.get("baseline_protection_manifest_sha256") != sha256_file(OUTPUTS["protection"]):
+        errors.append("H0C projection migration does not target the current protection manifest")
+    updates: dict[str, str] = {}
+    for item in migration.get("protected_input_updates", []):
+        name = str(item.get("name", ""))
+        old_hash = str(item.get("old_sha256", ""))
+        new_hash = str(item.get("new_sha256", ""))
+        expected_hash = protection.get("protected_hashes", {}).get(name)
+        if not name or name in updates or len(old_hash) != 64 or len(new_hash) != 64:
+            errors.append(f"invalid H0C projection migration update: {name or '<missing>'}")
+            continue
+        if expected_hash != old_hash:
+            errors.append(f"H0C projection migration old hash does not match protection manifest: {name}")
+            continue
+        updates[name] = new_hash
+    return updates, errors
 
 
 def validate() -> list[str]:
@@ -109,6 +140,8 @@ def validate() -> list[str]:
     readiness = artifacts["readiness"]
     protection = artifacts["protection"]
     metrics = artifacts["metrics"]
+    projection_updates, projection_migration_errors = projection_migration_updates(protection)
+    errors.extend(projection_migration_errors)
 
     # Protected corpus and source layers.
     protected = protection.get("protected_counts", {})
@@ -144,7 +177,8 @@ def validate() -> list[str]:
     }.items():
         expected_hash = protection.get("protected_hashes", {}).get(name)
         if expected_hash and sha256_file(path) != expected_hash:
-            errors.append(f"protected input hash changed: {name}")
+            if sha256_file(path) != projection_updates.get(name):
+                errors.append(f"protected input hash changed: {name}")
     for name, path in H0B0_INPUTS.items():
         expected_hash = protection.get("frozen_h0b0_hashes", {}).get(name)
         if expected_hash and sha256_file(path) != expected_hash:

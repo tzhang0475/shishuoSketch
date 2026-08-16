@@ -1,0 +1,37 @@
+{
+  "schema": 1,
+  "migration": "h0c-projection-hotfix-fangzheng-032",
+  "baseline_protection_manifest_sha256": "755b9ccc9d9e3ce94509d17a3c7d518732181fbd820e67f15a877bd93896ddb3",
+  "reason": "Correct story-local 明帝 ruler resolution and preserve the complete 温太真 semantic display span without changing canonical source text or H0C participation semantics.",
+  "protected_input_updates": [
+    {
+      "name": "effective_mentions",
+      "old_sha256": "ab61f5b37cc110634c3c8ffd0346743dcca1278dfe5e7993de7d2713f4bc8d29",
+      "new_sha256": "b4f65b46c8a49002c04e0f25051de694fb9ce078a4283988f9245991abb2eb37",
+      "affected_story_ids": [
+        "02-yanyu-100",
+        "05-fangzheng-032",
+        "05-fangzheng-059",
+        "08-shangyu-009"
+      ],
+      "change_type": "derived_semantic_display_span"
+    },
+    {
+      "name": "sc1_site",
+      "old_sha256": "25d458b59f1ccde05fc41ac15f82758e6a8951674f15b32531bc0460607f251b",
+      "new_sha256": "3b1a1fd0bfbd8bc7c4c4d53bcde4060943d2e8c49da77db87a5bee5cd34a2d2a",
+      "affected_story_ids": ["05-fangzheng-032"],
+      "change_type": "story_local_ruler_and_reader_span_projection"
+    }
+  ],
+  "invariants": {
+    "canonical_sources_unchanged": true,
+    "canonical_mentions_unchanged": true,
+    "participant_semantics_unchanged": true,
+    "production_person_count": 75,
+    "production_story_count": 143,
+    "person_story_link_count": 875,
+    "reviewed_person_story_link_count": 870
+  },
+  "policy": "This migration authorizes only the listed post-H0C derived projection hashes. It does not authorize changes to H0C facts, participant roles, canonical sources, or graph truth."
+}

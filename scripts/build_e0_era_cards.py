@@ -190,6 +190,10 @@ SAFE_REFERENCES: dict[tuple[str, str, int, str], dict[str, str]] = {
     ("05-fangzheng-023", "main_text", 13, "明帝"): {"ruler_id": "ruler-jin-mingdi", "role": "referenced", "basis": "story_local_dynastic_reference"},
     ("05-fangzheng-023", "main_text", 35, "明帝"): {"ruler_id": "ruler-jin-mingdi", "role": "referenced", "basis": "story_local_dynastic_reference"},
     ("05-fangzheng-023", "main_text", 73, "元帝"): {"ruler_id": "ruler-jin-yuandi", "role": "appears", "basis": "story_local_short_form_coreference"},
+    # This 明帝 is the Jin ruler named by the story's local political
+    # context (王敦's proposed deposition of the current emperor).  It is a
+    # reviewed occurrence decision, not a global 明帝 alias.
+    ("05-fangzheng-032", "main_text", 11, "明帝"): {"ruler_id": "ruler-jin-mingdi", "role": "referenced", "basis": "story_local_reviewed_ruler_reference"},
     ("08-shangyu-034", "liu_annotation", 10, "晉明帝"): {"ruler_id": "ruler-jin-mingdi", "role": "referenced", "basis": "explicit_full_ruler_title"},
 }
 

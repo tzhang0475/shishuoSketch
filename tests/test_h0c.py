@@ -132,6 +132,16 @@ class H0CHistoricalContextTests(unittest.TestCase):
         self.assertEqual(protected["orphan_mention_count"], 0)
         self.assertEqual(protected["primary_era_orientation_count"], 143)
 
+    def test_post_h0c_projection_hotfix_is_explicit_and_narrow(self) -> None:
+        migration = read_json("data/migrations/h0c-projection-hotfix-fangzheng-032.json")
+        self.assertEqual(migration["migration"], "h0c-projection-hotfix-fangzheng-032")
+        self.assertTrue(migration["invariants"]["canonical_sources_unchanged"])
+        self.assertTrue(migration["invariants"]["participant_semantics_unchanged"])
+        self.assertEqual(
+            {item["name"] for item in migration["protected_input_updates"]},
+            {"effective_mentions", "sc1_site"},
+        )
+
 
 if __name__ == "__main__":
     unittest.main()

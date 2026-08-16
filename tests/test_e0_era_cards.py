@@ -172,6 +172,45 @@ class E0EraCardTests(unittest.TestCase):
             self.assertTrue(matches)
             self.assertTrue(all(item["ruler_id"] == ruler_id for item in matches))
 
+    def test_fangzheng_032_resolves_mingdi_story_locally(self) -> None:
+        records = [
+            item
+            for item in self.audit["records"]
+            if item["story_id"] == "05-fangzheng-032"
+            and item["section"] == "main_text"
+            and item["surface"] == "明帝"
+        ]
+        self.assertEqual(len(records), 1)
+        record = records[0]
+        self.assertEqual(record["ruler_id"], "ruler-jin-mingdi")
+        self.assertEqual(record["resolution_status"], "resolved")
+        self.assertEqual(record["story_role_candidate"], "referenced")
+        self.assertEqual(record["resolution_basis"], "story_local_reviewed_ruler_reference")
+
+        story = next(item for item in self.bundle["stories"] if item["id"] == "05-fangzheng-032")
+        segments = [
+            item
+            for item in story["reading"]["main_text"]["segments"]
+            if item.get("type") == "ruler_mention" and item.get("display", {}).get("original") == "明帝"
+        ]
+        self.assertEqual(len(segments), 1)
+        self.assertEqual(segments[0]["ruler_id"], "ruler-jin-mingdi")
+        self.assertEqual(segments[0]["era_card_id"], "era-card-ruler-jin-mingdi")
+
+        identity = next(item for item in self.identities if item["ruler_id"] == "ruler-jin-mingdi")
+        self.assertEqual(identity["canonical_title"]["original"], "晉明帝")
+        self.assertEqual(identity["personal_name"]["original"], "司馬紹")
+
+    def test_mingdi_remains_ambiguous_without_story_local_evidence(self) -> None:
+        records = [
+            item
+            for item in self.audit["records"]
+            if item["story_id"] == "11-jiewu-005" and item["surface"] == "明帝"
+        ]
+        self.assertEqual(len(records), 1)
+        self.assertEqual(records[0]["resolution_status"], "ambiguous")
+        self.assertIsNone(records[0]["ruler_id"])
+
     def test_person_intersections_are_story_derived_not_relations(self) -> None:
         self.assertEqual(len(self.bundle["relations"]), len(read_json("data/annotation/wp1-relations.json")["records"]))
         person_ids = {item["id"] for item in self.bundle["people"]}

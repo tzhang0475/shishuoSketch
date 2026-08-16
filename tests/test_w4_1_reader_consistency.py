@@ -59,6 +59,33 @@ class W41ReaderConsistencyTests(unittest.TestCase):
         self.assertNotIn("className=\"story-reference\"", self.app)
         self.assertIn('<h1 id="story-heading">{storyReference(story, readingMode)}</h1>', self.app)
 
+    def test_flowing_entity_mentions_use_fragmentable_inline_keyboard_controls(self) -> None:
+        helper_start = self.app.index("function InlineEntityMention")
+        helper_end = self.app.index("function InlineReadingSegments")
+        helper = self.app[helper_start:helper_end]
+
+        self.assertIn('<span\n      role="button"', helper)
+        self.assertIn("tabIndex={0}", helper)
+        self.assertIn("onClick={onActivate}", helper)
+        self.assertIn('event.key !== "Enter"', helper)
+        self.assertIn('event.key !== " "', helper)
+        self.assertIn("event.preventDefault()", helper)
+        self.assertIn("onActivate()", helper)
+        self.assertNotRegex(self.app, r"<button\s+[^>]*inline-person-mention")
+        self.assertNotRegex(self.app, r"<button\s+[^>]*inline-ruler-mention")
+        self.assertEqual(self.app.count("<InlineEntityMention"), 2)
+
+        flowing_styles = self.styles[
+            self.styles.index(".inline-person-mention {"):
+            self.styles.index(".inline-identity-mention {")
+        ]
+        self.assertIn("display: inline", flowing_styles)
+        self.assertIn("text-decoration-line: underline", flowing_styles)
+        self.assertNotIn("border-bottom", flowing_styles)
+        self.assertNotIn("white-space", flowing_styles)
+        self.assertNotIn("inline-block", flowing_styles)
+        self.assertNotIn("inline-flex", flowing_styles)
+
     def test_relation_navigation_is_explicit_and_shared_by_row_and_ego_map(self) -> None:
         self.assertEqual(self.app.count("onClick={() => onRelationFocus(perspective)}"), 2)
         self.assertIn("relationContextStoryId", self.app)

@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState, type KeyboardEvent } from "react";
 import { loadSiteBundle } from "./data";
 import {
   derivedPath,
@@ -138,6 +138,40 @@ function initialStoryId(data: SiteBundle): string {
 function storyExcerpt(story: Story, mode: ReadingMode): string {
   const text = story.reading.main_text[mode].replace(/\s+/gu, "");
   return text.length > 54 ? `${text.slice(0, 54)}……` : text;
+}
+
+function InlineEntityMention({
+  className,
+  text,
+  ariaLabel,
+  title,
+  onActivate,
+}: {
+  className: string;
+  text: string;
+  ariaLabel: string;
+  title: string;
+  onActivate: () => void;
+}) {
+  function handleKeyDown(event: KeyboardEvent<HTMLSpanElement>): void {
+    if (event.key !== "Enter" && event.key !== " ") return;
+    event.preventDefault();
+    onActivate();
+  }
+
+  return (
+    <span
+      role="button"
+      tabIndex={0}
+      className={className}
+      aria-label={ariaLabel}
+      title={title}
+      onClick={onActivate}
+      onKeyDown={handleKeyDown}
+    >
+      {text}
+    </span>
+  );
 }
 
 function InlineReadingSegments({
@@ -282,16 +316,14 @@ function InlineReadingSegments({
           const card = data.era_cards.find((candidate) => candidate.era_card_id === segment.era_card_id);
           const title = card ? readingValue(card.title, readingMode, "纪元") : "纪元";
           return (
-            <button
-              type="button"
+            <InlineEntityMention
               className="inline-ruler-mention"
               key={`${segment.mention_id}-${index}`}
-              aria-label={`${text}，打开${title}纪元卡`}
+              text={text}
+              ariaLabel={`${text}，打开${title}纪元卡`}
               title={`${text} · ${title}`}
-              onClick={() => onEraFocus(segment.era_card_id)}
-            >
-              {text}
-            </button>
+              onActivate={() => onEraFocus(segment.era_card_id)}
+            />
           );
         }
         const mention = data.mentions.find((candidate) => candidate.id === segment.mention_id);
@@ -299,16 +331,14 @@ function InlineReadingSegments({
         const personName = person ? personDisplayName(story, person, readingMode) : segment.person_id;
         const active = focusedPersonId === segment.person_id;
         return (
-          <button
-            type="button"
-            key={`${segment.mention_id}-${index}`}
+          <InlineEntityMention
             className={active ? "inline-person-mention active" : "inline-person-mention"}
-            aria-label={`${text}，已解析为${personName}，查看人物`}
+            key={`${segment.mention_id}-${index}`}
+            text={text}
+            ariaLabel={`${text}，已解析为${personName}，查看人物`}
             title={mention ? `${text} → ${personName}` : personName}
-            onClick={() => onFocus(segment.person_id, { via_mention_id: segment.mention_id, from_story_id: story.id })}
-          >
-            {text}
-          </button>
+            onActivate={() => onFocus(segment.person_id, { via_mention_id: segment.mention_id, from_story_id: story.id })}
+          />
         );
       })}
     </>
