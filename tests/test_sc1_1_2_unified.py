@@ -130,7 +130,7 @@ class SC112UnifiedTests(unittest.TestCase):
         self.assertIn("inline-identity-review", self.app)
         self.assertRegex(
             (ROOT / "site/src/styles.css").read_text(encoding="utf-8"),
-            r"\.inline-identity-review > summary \{[^}]*white-space: nowrap;",
+            r"\.inline-identity-review > summary \{[^}]*text-decoration-line: underline;",
         )
 
     def test_contextual_office_title_stays_contextual(self) -> None:

@@ -81,15 +81,52 @@ class W41ReaderConsistencyTests(unittest.TestCase):
         ]
         self.assertIn("display: inline", flowing_styles)
         self.assertIn("text-decoration-line: underline", flowing_styles)
-        self.assertIn("white-space: nowrap", flowing_styles)
+        self.assertNotIn("white-space: nowrap", flowing_styles)
+        self.assertNotIn("word-break: keep-all", flowing_styles)
         self.assertNotIn("border-bottom", flowing_styles)
         self.assertNotIn("inline-block", flowing_styles)
         self.assertNotIn("inline-flex", flowing_styles)
 
         self.assertRegex(
             self.styles,
-            r"\.inline-identity-review > summary \{[^}]*white-space: nowrap;",
+            r"\.inline-identity-review > summary \{[^}]*text-decoration-line: underline;",
         )
+
+    def test_entity_surfaces_keep_normal_cjk_wrapping_contract(self) -> None:
+        flowing_blocks = []
+        for selector in (
+            ".inline-person-mention",
+            ".inline-ruler-mention",
+            ".inline-identity-mention",
+            ".inline-identity-review > summary",
+        ):
+            start = self.styles.index(selector)
+            end = self.styles.find("}", start)
+            self.assertNotEqual(end, -1, selector)
+            flowing_blocks.append(self.styles[start:end + 1])
+
+        for block in flowing_blocks:
+            self.assertNotIn("white-space: nowrap", block)
+            self.assertNotIn("word-break: keep-all", block)
+            self.assertNotIn("display: inline-block", block)
+            self.assertNotIn("display: inline-flex", block)
+            self.assertIn("text-decoration-line: underline", block)
+
+        regression_surfaces = [
+            ("02-yanyu-071", "谢太傅"),
+            ("04-wenxue-094", "谢公"),
+            ("05-fangzheng-025", "王右军"),
+            ("05-fangzheng-032", "温太真"),
+            ("05-fangzheng-032", "明帝"),
+        ]
+        for story_id, surface in regression_surfaces:
+            story = self.story(story_id)
+            mention_surfaces = {
+                segment["display"]["simplified"]
+                for segment in story["reading"]["main_text"]["segments"]
+                if segment.get("type") in {"person_mention", "ruler_mention", "identity_mention"}
+            }
+            self.assertIn(surface, mention_surfaces, story_id)
 
     def test_relation_navigation_is_explicit_and_shared_by_row_and_ego_map(self) -> None:
         self.assertEqual(self.app.count("onClick={() => onRelationFocus(perspective)}"), 2)
