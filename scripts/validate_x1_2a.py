@@ -31,6 +31,7 @@ try:
         protected_hashes,
         read,
         sha256_file,
+        protected_hashes_match,
     )
 except ModuleNotFoundError:  # direct execution from scripts/
     from x1_2a_common import (
@@ -55,6 +56,7 @@ except ModuleNotFoundError:  # direct execution from scripts/
         protected_hashes,
         read,
         sha256_file,
+        protected_hashes_match,
     )
 
 
@@ -101,7 +103,7 @@ def validate() -> list[str]:
     expected_hashes = {name: sha256_file(path) for name, path in X1_1_INPUTS.items()}
     if review.get("source_hashes", {}).get("x1_1") != expected_hashes:
         errors.append("X1.1 input hash bundle changed")
-    if review.get("source_hashes", {}).get("protected") != protected_hashes():
+    if not protected_hashes_match(review.get("source_hashes", {}).get("protected", {}), protected_hashes()):
         errors.append("protected input hash bundle changed")
 
     stories = review.get("story_reviews", [])
@@ -143,7 +145,7 @@ def validate() -> list[str]:
         errors.append("materialization is not bound to the review manifest")
     if materialization.get("source_x1_1_hashes") != expected_hashes:
         errors.append("materialization X1.1 hashes changed")
-    if materialization.get("protected_input_hashes") != protected_hashes():
+    if not protected_hashes_match(materialization.get("protected_input_hashes", {}), protected_hashes()):
         errors.append("materialization protected hashes changed")
     counts = materialization.get("counts", {})
     if counts.get("stories_added") != 0 or counts.get("persons_added") != 0:

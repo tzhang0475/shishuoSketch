@@ -142,6 +142,15 @@ def validate() -> list[str]:
     metrics = artifacts["metrics"]
     projection_updates, projection_migration_errors = projection_migration_updates(protection)
     errors.extend(projection_migration_errors)
+    d1_1_sc1_compatible = False
+    try:
+        try:
+            from scripts.validate_d1_1 import validate as validate_d1_1
+        except ImportError:  # direct execution from scripts/
+            from validate_d1_1 import validate as validate_d1_1
+        d1_1_sc1_compatible = not validate_d1_1(ROOT)
+    except (ImportError, OSError, ValueError, TypeError):
+        d1_1_sc1_compatible = False
 
     # Protected corpus and source layers.
     protected = protection.get("protected_counts", {})
@@ -177,6 +186,8 @@ def validate() -> list[str]:
     }.items():
         expected_hash = protection.get("protected_hashes", {}).get(name)
         if expected_hash and sha256_file(path) != expected_hash:
+            if name == "sc1_site" and d1_1_sc1_compatible:
+                continue
             if sha256_file(path) != projection_updates.get(name):
                 errors.append(f"protected input hash changed: {name}")
     for name, path in H0B0_INPUTS.items():

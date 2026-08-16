@@ -1,5 +1,12 @@
 import { useEffect, useMemo, useRef, useState, type KeyboardEvent } from "react";
-import { loadSiteBundle } from "./data";
+import {
+  evidenceDisplay,
+  loadSiteBundle,
+  personDisplay,
+  readingLabel,
+  relationDisplay,
+  sourceDisplay,
+} from "./data";
 import {
   derivedPath,
   derivedRelationsForPerson,
@@ -37,6 +44,7 @@ import type {
   SiteBundle,
   Story,
   StorySceneContext,
+  StoryReadingLabels,
 } from "./types";
 
 const FALLBACK_STORY_ID = "06-yaliang-019";
@@ -73,14 +81,23 @@ function uiLabel(
   return readingValue(data.ui?.[key], mode, fallback);
 }
 
+function storyLabel(
+  data: SiteBundle,
+  key: keyof StoryReadingLabels,
+  mode: ReadingMode,
+  fallback: string,
+): string {
+  return readingValue(readingLabel(data, key), mode, fallback);
+}
+
 function resolvedMentions(story: Story, data: SiteBundle): ResolvedMention[] {
   return story.mention_ids
     .map((id) => data.mentions.find((mention) => mention.id === id))
     .filter((mention): mention is ResolvedMention => Boolean(mention?.person_id && mention.confidence !== "unresolved"));
 }
 
-function personDisplayName(story: Story, person: Person, mode: ReadingMode): string {
-  return readingValue(story.reading.person_display[person.id]?.name, mode, person.canonical_name);
+function personDisplayName(story: Story, data: SiteBundle, person: Person, mode: ReadingMode): string {
+  return readingValue(personDisplay(data, person.id)?.name, mode, person.canonical_name);
 }
 
 function mentionPersonDisplayName(
@@ -90,32 +107,34 @@ function mentionPersonDisplayName(
   mode: ReadingMode,
 ): string {
   const person = data.people.find((candidate) => candidate.id === mention.person_id);
-  return person ? personDisplayName(story, person, mode) : "";
+  return person ? personDisplayName(story, data, person, mode) : "";
 }
 
 function relationDisplayPair(
   story: Story,
+  data: SiteBundle,
   relation: Relation,
   role: "role_a" | "role_b" | "label",
   mode: ReadingMode,
   fallback: string,
 ): string {
-  return readingValue(story.reading.relation_display[relation.id]?.[role] ?? undefined, mode, fallback);
+  return readingValue(relationDisplay(data, relation.id)?.[role] ?? undefined, mode, fallback);
 }
 
 function perspectiveNeighborRole(
   story: Story,
+  data: SiteBundle,
   perspective: RelationPerspective,
   mode: ReadingMode,
 ): string {
   const role = perspective.relation.subject_id === perspective.neighbor.id ? "role_a" : "role_b";
-  return relationDisplayPair(story, perspective.relation, role, mode, perspective.neighborRole)
-    || relationDisplayPair(story, perspective.relation, "label", mode, perspective.relation.label);
+  return relationDisplayPair(story, data, perspective.relation, role, mode, perspective.neighborRole)
+    || relationDisplayPair(story, data, perspective.relation, "label", mode, perspective.relation.label);
 }
 
 function personNameById(story: Story, data: SiteBundle, personId: string, mode: ReadingMode): string {
   const person = data.people.find((candidate) => candidate.id === personId);
-  return person ? personDisplayName(story, person, mode) : personId;
+  return person ? personDisplayName(story, data, person, mode) : personId;
 }
 
 function storyById(data: SiteBundle, storyId: string): Story | undefined {
@@ -216,10 +235,10 @@ function InlineReadingSegments({
         className="inline-annotation-expansion"
         id={`inline-annotation-${story.id}-${annotation.id}`}
         role="region"
-        aria-label={readingValue(story.reading.labels.annotation_label, readingMode, "刘孝标注")}
+        aria-label={storyLabel(data, "annotation_label", readingMode, "刘孝标注")}
       >
         <span className="inline-annotation-heading">
-          {readingValue(story.reading.labels.annotation_label, readingMode, "刘孝标注")}
+          {storyLabel(data, "annotation_label", readingMode, "刘孝标注")}
           {annotation.punctuation_status === "unavailable" && <span className="inline-annotation-status"> · 原文</span>}
         </span>
         <span className="inline-annotation-text">
@@ -245,7 +264,7 @@ function InlineReadingSegments({
                 <span className="inline-annotation-source">
                   {item.locator.annotation_id ? "刘孝标注" : item.source_id}
                 </span>
-                <blockquote>{readingValue(story.reading.evidence_display[item.id], readingMode, item.quote)}</blockquote>
+                <blockquote>{readingValue(evidenceDisplay(data, item.id), readingMode, item.quote)}</blockquote>
               </span>
             ))}
           </details>
@@ -328,7 +347,7 @@ function InlineReadingSegments({
         }
         const mention = data.mentions.find((candidate) => candidate.id === segment.mention_id);
         const person = data.people.find((candidate) => candidate.id === segment.person_id);
-        const personName = person ? personDisplayName(story, person, readingMode) : segment.person_id;
+        const personName = person ? personDisplayName(story, data, person, readingMode) : segment.person_id;
         const active = focusedPersonId === segment.person_id;
         return (
           <InlineEntityMention
@@ -399,10 +418,10 @@ function RelationEvidence({
   const evidence = relation.evidence_ids
     .map((id) => data.evidence.find((item) => item.id === id))
     .filter((item): item is Evidence => Boolean(item));
-  const neighborRole = perspectiveNeighborRole(story, perspective, readingMode);
-  const neighborName = personDisplayName(story, perspective.neighbor, readingMode);
+  const neighborRole = perspectiveNeighborRole(story, data, perspective, readingMode);
+  const neighborName = personDisplayName(story, data, perspective.neighbor, readingMode);
   const relationScope = readingValue(
-    story.reading.relation_display[relation.id]?.scope ?? undefined,
+    relationDisplay(data, relation.id)?.scope ?? undefined,
     readingMode,
     relation.scope_event ?? "",
   );
@@ -415,12 +434,12 @@ function RelationEvidence({
     <details className="relation-evidence">
       <summary>
         <span>{neighborName} · {neighborRole}{relationScope ? ` · ${relationScope}` : ""}</span>
-        <span className="relation-evidence-summary">{story.reading.labels.relation_evidence_toggle[readingMode]}</span>
+        <span className="relation-evidence-summary">{storyLabel(data, "relation_evidence_toggle", readingMode, "查看关系依据")}</span>
       </summary>
       <div className="relation-evidence-body">
         {evidence.map((item) => {
-          const source = story.reading.source_display[item.source_id];
-          const quote = readingValue(story.reading.evidence_display[item.id], readingMode, item.quote);
+          const source = sourceDisplay(data, item.source_id);
+          const quote = readingValue(evidenceDisplay(data, item.id), readingMode, item.quote);
           return (
             <article className="relation-evidence-item" key={item.id}>
               <p className="relation-source-title">
@@ -462,19 +481,19 @@ function DerivedRelationDetails({
   return (
     <details className="derived-relation">
       <summary>
-        <span>{personNameById(story, data, otherPersonId, readingMode)} · {relationDisplayPair(story, relation, "label", readingMode, relation.label)}</span>
-        <span className="relation-basis-note">{story.reading.labels.derived_relation_note[readingMode]}</span>
+        <span>{personNameById(story, data, otherPersonId, readingMode)} · {relationDisplayPair(story, data, relation, "label", readingMode, relation.label)}</span>
+        <span className="relation-basis-note">{storyLabel(data, "derived_relation_note", readingMode, "由关系链推得")}</span>
       </summary>
-      <div className="derived-path" aria-label={story.reading.labels.derived_relation_label[readingMode]}>
+      <div className="derived-path" aria-label={storyLabel(data, "derived_relation_label", readingMode, "推得关系")}>
         {path.length === 0 ? (
-          <p>{story.reading.labels.derived_relation_note[readingMode]}</p>
+          <p>{storyLabel(data, "derived_relation_note", readingMode, "由关系链推得")}</p>
         ) : (
           path.map((edge, index) => {
             const fromId = displayIds[index] ?? edge.subject_id;
             const toId = displayIds[index + 1] ?? edge.object_id;
             const fromName = personNameById(story, data, fromId, readingMode);
             const toName = personNameById(story, data, toId, readingMode);
-            const edgeLabel = relationDisplayPair(story, edge, "label", readingMode, edge.label);
+            const edgeLabel = relationDisplayPair(story, data, edge, "label", readingMode, edge.label);
             return (
               <div className="derived-path-step" key={edge.id}>
                 <span>{fromName}</span>
@@ -484,7 +503,7 @@ function DerivedRelationDetails({
             );
           })
         )}
-        <p className="derived-no-quotation">{story.reading.labels.derived_relation_note[readingMode]}</p>
+        <p className="derived-no-quotation">{storyLabel(data, "derived_relation_note", readingMode, "由关系链推得")}</p>
       </div>
     </details>
   );
@@ -509,17 +528,17 @@ function EgoRelationMap({
   return (
     <section className="ego-map-panel" aria-labelledby="ego-map-heading">
       <div className="section-heading">
-        <p className="section-label">{story.reading.labels.relation_section[readingMode]}</p>
-        <h3 id="ego-map-heading">{story.reading.labels.direct_relation_label[readingMode]}</h3>
+        <p className="section-label">{storyLabel(data, "relation_section", readingMode, "人物关系")}</p>
+        <h3 id="ego-map-heading">{storyLabel(data, "direct_relation_label", readingMode, "已审阅的直接关系")}</h3>
       </div>
       {perspectives.length === 0 ? (
-        <p className="relation-empty">{story.reading.labels.no_direct_relations[readingMode]}</p>
+        <p className="relation-empty">{storyLabel(data, "no_direct_relations", readingMode, "目前尚无已审核的人物关系。")}</p>
       ) : (
-        <div className="ego-map" aria-label={story.reading.labels.direct_relation_label[readingMode]}>
+        <div className="ego-map" aria-label={storyLabel(data, "direct_relation_label", readingMode, "已审阅的直接关系")}>
           <svg className="ego-map-edges" viewBox="0 0 100 100" aria-hidden="true" preserveAspectRatio="none">
             {perspectives.map((perspective, index) => {
               const point = layout.neighbors[index];
-              const edgeLabel = perspectiveNeighborRole(story, perspective, readingMode);
+              const edgeLabel = perspectiveNeighborRole(story, data, perspective, readingMode);
               const midpoint = { x: (layout.center.x + point.x) / 2, y: (layout.center.y + point.y) / 2 };
               return (
                 <g key={perspective.relation.id}>
@@ -531,10 +550,10 @@ function EgoRelationMap({
           </svg>
           <span
             className="ego-node ego-node-center"
-            aria-label={personDisplayName(story, focusedPerson, readingMode)}
+            aria-label={personDisplayName(story, data, focusedPerson, readingMode)}
             aria-current="true"
           >
-            {personDisplayName(story, focusedPerson, readingMode)}
+            {personDisplayName(story, data, focusedPerson, readingMode)}
           </span>
           {perspectives.map((perspective, index) => {
             const point = layout.neighbors[index];
@@ -545,9 +564,9 @@ function EgoRelationMap({
                 style={{ left: `${point.x}%`, top: `${point.y}%` }}
                 key={perspective.relation.id}
                 onClick={() => onRelationFocus(perspective)}
-                aria-label={`${personDisplayName(story, perspective.neighbor, readingMode)} · ${perspectiveNeighborRole(story, perspective, readingMode)}`}
+                aria-label={`${personDisplayName(story, data, perspective.neighbor, readingMode)} · ${perspectiveNeighborRole(story, data, perspective, readingMode)}`}
               >
-                {personDisplayName(story, perspective.neighbor, readingMode)}
+                {personDisplayName(story, data, perspective.neighbor, readingMode)}
               </button>
             );
           })}
@@ -674,7 +693,7 @@ function MentionOriginExplanation({
       <p className="mention-origin-kicker">你从这里来到他 / 她</p>
       <p className="mention-origin-label">本则称谓</p>
       <p className="mention-origin-surface">{surface}</p>
-      <p className="mention-origin-question">为什么这里指{personDisplayName(originStory, focusedPerson, readingMode)}？</p>
+      <p className="mention-origin-question">为什么这里指{personDisplayName(originStory, data, focusedPerson, readingMode)}？</p>
       <p className="mention-origin-reason">{explanation}</p>
       {evidence.length > 0 && (
         <details className="mention-origin-evidence">
@@ -684,7 +703,7 @@ function MentionOriginExplanation({
               <p className="mention-origin-source">
                 {item.locator.annotation_id ? "刘孝标注" : "正文"}
               </p>
-              <blockquote>{readingValue(originStory.reading.evidence_display[item.id], readingMode, item.quote)}</blockquote>
+              <blockquote>{readingValue(evidenceDisplay(data, item.id), readingMode, item.quote)}</blockquote>
             </article>
           ))}
         </details>
@@ -761,7 +780,7 @@ function PersonSketchAliasRows({
     <section className="person-sketch-naming" aria-label={uiLabel(data, "person_sketch_aliases", readingMode, "《世说》怎样称呼他／她")}>
       <p className="relation-detail-heading">{uiLabel(data, "person_sketch_aliases", readingMode, "《世说》怎样称呼他／她")}</p>
       {sketch.aliases.length === 0 ? (
-        <p className="relation-empty">{story.reading.labels.empty_alias[readingMode]}</p>
+        <p className="relation-empty">{storyLabel(data, "empty_alias", readingMode, "—")}</p>
       ) : (
         <div className="person-sketch-alias-list">
           {sketch.aliases.map((alias) => {
@@ -787,8 +806,8 @@ function PersonSketchAliasRows({
                   <details className="person-sketch-alias-evidence">
                     <summary>{uiLabel(data, "person_sketch_evidence", readingMode, "依据")} ›</summary>
                     {evidence.map((item) => {
-                      const source = story.reading.source_display[item.source_id];
-                      const quote = story.reading.evidence_display[item.id]?.[readingMode] ?? item.quote;
+                      const source = sourceDisplay(data, item.source_id);
+                      const quote = evidenceDisplay(data, item.id)?.[readingMode] ?? item.quote;
                       return (
                         <div key={item.id}>
                           <p>{source ? `${source.work[readingMode]} · ${source.edition[readingMode]}` : item.source_id}</p>
@@ -829,8 +848,8 @@ function PersonSketchEvidence({
     <details className="person-sketch-evidence">
       <summary>{uiLabel(data, "person_sketch_evidence", readingMode, "人物依据")} ›</summary>
       {evidence.map((item) => {
-        const source = story.reading.source_display[item.source_id];
-        const quote = story.reading.evidence_display[item.id]?.[readingMode] ?? item.quote;
+        const source = sourceDisplay(data, item.source_id);
+        const quote = evidenceDisplay(data, item.id)?.[readingMode] ?? item.quote;
         return (
           <article key={item.id}>
             <p>{source ? `${source.work[readingMode]} · ${source.edition[readingMode]}` : item.source_id}</p>
@@ -871,7 +890,7 @@ function PersonSketchLifeGlimpse({
                 <details className="person-sketch-life-evidence">
                   <summary>{uiLabel(data, "person_sketch_evidence", readingMode, "依据")} ›</summary>
                   {evidence.map((item) => (
-                    <blockquote key={item.id}>{story.reading.evidence_display[item.id]?.[readingMode] ?? item.quote}</blockquote>
+                    <blockquote key={item.id}>{evidenceDisplay(data, item.id)?.[readingMode] ?? item.quote}</blockquote>
                   ))}
                 </details>
               )}
@@ -909,8 +928,8 @@ function PersonDetailCard({
   const storyCounts = sketch?.story_counts;
   return (
     <section className="person-detail-card" aria-labelledby="focused-person-heading">
-      <p className="section-label">{story.reading.labels.focused_person_label[readingMode]}</p>
-      <h3 id="focused-person-heading">{personDisplayName(story, focusedPerson, readingMode)}</h3>
+      <p className="section-label">{storyLabel(data, "focused_person_label", readingMode, "当前人物")}</p>
+      <h3 id="focused-person-heading">{personDisplayName(story, data, focusedPerson, readingMode)}</h3>
       <PersonSketchIdentity story={story} data={data} focusedPerson={focusedPerson} readingMode={readingMode} />
       <MentionOriginExplanation
         story={story}
@@ -939,12 +958,12 @@ function PersonDetailCard({
       />
       <div className="relation-detail-group">
         <p className="relation-detail-heading">{uiLabel(data, "person_sketch_relations", readingMode, "人物关系")}</p>
-        <p className="relation-detail-subheading">{story.reading.labels.direct_relation_label[readingMode]}</p>
-        {perspectives.length === 0 && <p className="relation-empty">{story.reading.labels.no_direct_relations[readingMode]}</p>}
+        <p className="relation-detail-subheading">{storyLabel(data, "direct_relation_label", readingMode, "已审阅的直接关系")}</p>
+        {perspectives.length === 0 && <p className="relation-empty">{storyLabel(data, "no_direct_relations", readingMode, "目前尚无已审核的人物关系。")}</p>}
         {perspectives.map((perspective) => (
           <div className="relation-detail-row" key={perspective.relation.id}>
             <button type="button" className="person-link" onClick={() => onRelationFocus(perspective)}>
-              {personDisplayName(story, perspective.neighbor, readingMode)} · {perspectiveNeighborRole(story, perspective, readingMode)}
+              {personDisplayName(story, data, perspective.neighbor, readingMode)} · {perspectiveNeighborRole(story, data, perspective, readingMode)}
             </button>
             <RelationEvidence
               relation={perspective.relation}
@@ -958,7 +977,7 @@ function PersonDetailCard({
       </div>
       {derivedRelations.length > 0 && (
         <div className="relation-detail-group derived-group">
-          <p className="relation-detail-heading">{story.reading.labels.derived_relation_label[readingMode]}</p>
+          <p className="relation-detail-heading">{storyLabel(data, "derived_relation_label", readingMode, "推得关系")}</p>
           {derivedRelations.map((relation) => (
             <DerivedRelationDetails key={relation.id} relation={relation} story={story} data={data} readingMode={readingMode} focusedPersonId={focusedPerson.id} />
           ))}
@@ -1004,12 +1023,12 @@ function EgoRelationExplorer({
     <section className="relation-explorer" aria-labelledby="relation-explorer-heading">
       <div className="relation-explorer-header">
         <div>
-          <p className="section-label">{story.reading.labels.relation_section[readingMode]}</p>
-          <h2 id="relation-explorer-heading">{personDisplayName(story, focusedPerson, readingMode)}</h2>
+          <p className="section-label">{storyLabel(data, "relation_section", readingMode, "人物关系")}</p>
+          <h2 id="relation-explorer-heading">{personDisplayName(story, data, focusedPerson, readingMode)}</h2>
         </div>
         {backTarget && (
           <button type="button" className="back-button" onClick={onBack}>
-            ← {story.reading.labels.back_label[readingMode]} {backLabel}
+            ← {storyLabel(data, "back_label", readingMode, "返回")} {backLabel}
           </button>
         )}
       </div>
@@ -1261,7 +1280,7 @@ function EraCardDetail({
                   key={intersection.person_id}
                   onClick={() => onFocus(intersection.person_id)}
                 >
-                  {personDisplayName(story, person, readingMode)} · {intersection.story_count}{eraLabel(readingMode, "則", "则")}
+                  {personDisplayName(story, data, person, readingMode)} · {intersection.story_count}{eraLabel(readingMode, "則", "则")}
                 </button>
               );
             })}
@@ -1370,21 +1389,21 @@ function EvidenceDetails({
 
   return (
     <details className="evidence-details">
-      <summary>{story.reading.labels.evidence_heading[readingMode]}</summary>
-      <p className="evidence-intro">{story.reading.labels.evidence_intro[readingMode]}</p>
+      <summary>{storyLabel(data, "evidence_heading", readingMode, "证据与出处")}</summary>
+      <p className="evidence-intro">{storyLabel(data, "evidence_intro", readingMode, "以下资讯来自已验证的 WP1 静态资料；artifact 是页面所引用的派生档案，source provenance 保留其上游见证资讯。")}</p>
       <div className="evidence-list">
         {evidence.map((item) => (
           <article className="evidence-item" key={item.id}>
             <div className="evidence-heading">
               <span>
                 {item.evidence_type}
-                {story.reading.source_display[item.source_id] && (
-                  <> · {story.reading.source_display[item.source_id].work[readingMode]} · {story.reading.source_display[item.source_id].edition[readingMode]}</>
+                {sourceDisplay(data, item.source_id) && (
+                  <> · {sourceDisplay(data, item.source_id)?.work[readingMode]} · {sourceDisplay(data, item.source_id)?.edition[readingMode]}</>
                 )}
               </span>
               <code>{item.id}</code>
             </div>
-            <blockquote>{readingValue(story.reading.evidence_display[item.id], readingMode, item.quote)}</blockquote>
+            <blockquote>{readingValue(evidenceDisplay(data, item.id), readingMode, item.quote)}</blockquote>
             <dl className="provenance-grid">
               <dt>artifact</dt>
               <dd>
@@ -1454,7 +1473,7 @@ function SceneCard({
   function personRows(people: StorySceneContext["people_at_scene"]) {
     return people.map((person) => {
       const resolved = data.people.find((candidate) => candidate.id === person.person_id);
-      const name = resolved ? personDisplayName(story, resolved, readingMode) : readingValue(person.surface, readingMode, person.person_id);
+      const name = resolved ? personDisplayName(story, data, resolved, readingMode) : readingValue(person.surface, readingMode, person.person_id);
       return (
         <article className="scene-person-row" key={`${person.person_id}-${person.surface.original}`}>
           <div className="scene-person-heading">
@@ -1542,11 +1561,11 @@ function SceneCard({
         <details className="scene-evidence">
           <summary>{uiLabel(data, "scene_evidence_heading", readingMode, "查看依据")} ›</summary>
           {evidence.map((item) => {
-            const source = story.reading.source_display[item.source_id];
+            const source = sourceDisplay(data, item.source_id);
             return (
               <article key={item.id}>
                 <p>{source ? `${source.work[readingMode]} · ${source.edition[readingMode]}` : item.source_id}</p>
-                <blockquote>{readingValue(story.reading.evidence_display[item.id], readingMode, item.quote)}</blockquote>
+                <blockquote>{readingValue(evidenceDisplay(data, item.id), readingMode, item.quote)}</blockquote>
               </article>
             );
           })}
@@ -1768,7 +1787,7 @@ function StoryReader({
           <p className="section-label">进一步读</p>
           <details className="annotation-index">
             <summary>
-              {readingValue(story.reading.labels.annotation_label, readingMode, "刘孝标注")} · {story.reading.annotations.length}条
+              {storyLabel(data, "annotation_label", readingMode, "刘孝标注")} · {story.reading.annotations.length}条
             </summary>
             <div className="annotation-index-list">
               {story.reading.annotations.map((annotation) => (
@@ -1798,9 +1817,9 @@ function StoryReader({
           </details>
         </section>
 
-        <section className="people-section" aria-labelledby="people-heading" aria-label={story.reading.labels.people_section[readingMode]}>
+        <section className="people-section" aria-labelledby="people-heading" aria-label={storyLabel(data, "people_section", readingMode, "人物")}>
           <div className="section-heading">
-            <p className="section-label">{story.reading.labels.people_section[readingMode]}</p>
+            <p className="section-label">{storyLabel(data, "people_section", readingMode, "人物")}</p>
             <h2 id="people-heading">{uiLabel(data, "story_people_heading", readingMode, "本则人物")}</h2>
           </div>
           <div className="mention-summary" aria-label={uiLabel(data, "story_people_heading", readingMode, "本则人物")}>

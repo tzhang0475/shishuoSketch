@@ -25,6 +25,7 @@ try:
         read,
         selection_by_story,
         sha256_file,
+        source_bundle_matches,
     )
 except ModuleNotFoundError:  # direct execution from scripts/
     from x1_2p_common import (
@@ -43,6 +44,7 @@ except ModuleNotFoundError:  # direct execution from scripts/
         read,
         selection_by_story,
         sha256_file,
+        source_bundle_matches,
     )
 
 
@@ -93,10 +95,10 @@ def validate() -> list[str]:
         (readiness, "candidate readiness"),
         (recommendation, "next-step recommendation"),
     ):
-        if document.get("source_hashes") != expected_source_hashes:
+        if not source_bundle_matches(document.get("source_hashes", {}), expected_source_hashes):
             errors.append(f"{label} source hashes are stale")
     summary_hashes = summary.get("source_hashes", {})
-    if any(summary_hashes.get(key) != value for key, value in expected_source_hashes.items()):
+    if not source_bundle_matches(expected_source_hashes, summary_hashes, allow_extra=True):
         errors.append("summary source hashes are stale")
 
     story_rows = story.get("records", [])

@@ -28,6 +28,13 @@ The bundle contains these arrays:
   sources: Source[],
   person_sketches: Record<string, PersonSketch>,
   scene_contexts: Record<string, StorySceneContext>,
+  display: {
+    labels: Record<string, ReadingPair>,
+    people: Record<string, PersonDisplay>,
+    relations: Record<string, RelationDisplay>,
+    sources: Record<string, SourceDisplay>,
+    evidence: Record<string, ReadingPair>
+  },
   story_chain?: {
     story_ids: string[],
     person_story_refs: Array<{
@@ -76,6 +83,46 @@ The current prototype is served under the configured `/shishuoSketch/` base
 path in local preview and on GitHub Pages. It intentionally does not introduce
 client-side routing yet. The object IDs and cross-object references remain
 available in the bundle for later reading surfaces.
+
+## D1.1 shared display registry
+
+D1.1 removes the former repeated display projection from every Story. The
+previous shape placed complete global maps under each `story.reading`:
+
+```text
+Story
+└── reading
+    ├── labels
+    ├── person_display
+    ├── relation_display
+    ├── source_display
+    └── evidence_display
+```
+
+The runtime bundle now materializes those verified-global tables once:
+
+```text
+SiteBundle
+├── display
+│   ├── labels
+│   ├── people
+│   ├── relations
+│   ├── sources
+│   └── evidence
+└── stories
+    └── reading
+        ├── main_text / annotations / segments
+        └── mention_display
+```
+
+`display` contains bilingual names, relation labels, source labels, evidence
+quotes, and reader labels that are identical across Stories. Story-local text,
+annotation insertion, Mention segments, Mention explanations, punctuation
+state, and Era context remain inside the Story projection. The frontend uses
+the accessors in `site/src/data.ts`, so this physical placement is not part of
+reader component behavior. D1.1 does not introduce sharding, lazy loading, or
+dynamic imports; the complete shared registry is still part of the static
+bundle.
 
 ## P2 Person Sketch v1 projection
 
@@ -286,11 +333,12 @@ The same static bundle carries the minimum reviewed relation display contract:
 * `relations` retains the unified Person endpoint IDs, endpoint roles,
   `relation_basis`, review status, source IDs, evidence IDs, and
   `derived_from_relation_ids`.
-* `story.reading.relation_display` contains OpenCC-derived original and
-  simplified labels and endpoint roles keyed by relation ID.
-* `story.reading.evidence_display` contains display-only quotations keyed by
-  evidence ID. Canonical evidence quotations and provenance records remain
-  unchanged.
+* `display.relations` contains OpenCC-derived original and simplified labels
+  and endpoint roles keyed by relation ID.
+* `display.evidence` contains display-only quotations keyed by evidence ID.
+  Canonical evidence quotations and provenance records remain unchanged.
+* `display.sources` contains the bilingual source work/edition labels used by
+  evidence panels.
 
 The reader derives a local ego view from reviewed `direct` relations only.
 Reviewed `derived` relations are excluded from the primary map and appear in a

@@ -4,7 +4,9 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 from pathlib import Path
+import subprocess
 from typing import Any
 
 try:
@@ -56,14 +58,61 @@ def validate(root: Path) -> list[str]:
     current_derived_sha = sha256_file(derived_path)
     current_generated_sha = sha256_file(generated_path)
     inputs = audit.get("inputs", {}) if isinstance(audit, dict) else {}
-    if inputs.get("derived_sha256") != current_derived_sha:
+    current_bundle = read_json(derived_path)
+    d1_1_shape = (
+        isinstance(current_bundle, dict)
+        and isinstance(current_bundle.get("display"), dict)
+        and all(
+            key not in story.get("reading", {})
+            for story in current_bundle.get("stories", [])
+            if isinstance(story, dict)
+        for key in ("labels", "person_display", "source_display", "relation_display", "evidence_display")
+        )
+    )
+    if inputs.get("derived_sha256") != current_derived_sha and not d1_1_shape:
         errors.append("recorded derived SC1 SHA256 does not match the current file")
-    if inputs.get("generated_sha256") != current_generated_sha:
+    if inputs.get("generated_sha256") != current_generated_sha and not d1_1_shape:
         errors.append("recorded generated SC1 SHA256 does not match the current file")
     if inputs.get("byte_identical") is not True:
         errors.append("audit did not record byte identity")
     if inputs.get("required_top_level_fields") != REQUIRED_TOP_LEVEL_FIELDS:
         errors.append("required top-level field manifest is incomplete or reordered")
+
+    if d1_1_shape:
+        # D1.0 remains a frozen measurement of the pre-deduplication bundle.
+        # Validate that historical input from the recorded Git revision still
+        # matches the audit, while allowing the intentional D1.1 projection to
+        # replace the current working-tree bytes.
+        commit = str(audit.get("baseline", {}).get("git_head", ""))
+        expected_sha = str(inputs.get("derived_sha256", ""))
+        try:
+            baseline_payload = subprocess.check_output(
+                ["git", "show", f"{commit}:data/derived/sc1-site.json"],
+                cwd=root,
+            )
+            if hashlib.sha256(baseline_payload).hexdigest() != expected_sha:
+                errors.append("frozen D1.0 Git input no longer matches its recorded SHA256")
+        except (OSError, subprocess.CalledProcessError) as exc:
+            errors.append(f"cannot verify frozen D1.0 Git input: {exc}")
+        size = audit.get("bundle_size", {})
+        top_fields = audit.get("top_level_fields", [])
+        if isinstance(size, dict) and isinstance(top_fields, list):
+            if sum(row.get("serialized_bytes", 0) for row in top_fields) != size.get("top_level_field_serialized_bytes"):
+                errors.append("frozen D1.0 top-level byte total is inconsistent")
+            if size.get("top_level_field_serialized_bytes", 0) + size.get("top_level_syntax_overhead_bytes", 0) != size.get("compact_serialized_bytes"):
+                errors.append("frozen D1.0 compact byte total is inconsistent")
+        consumers = dependencies.get("consumers", []) if isinstance(dependencies, dict) else []
+        paths = [row.get("path") for row in consumers if isinstance(row, dict)]
+        if len(paths) != len(set(paths)) or dependencies.get("duplicate_path_count") != 0:
+            errors.append("frozen D1.0 dependency audit contains duplicate paths")
+        protection = audit.get("protection_manifest", [])
+        for row in protection if isinstance(protection, list) else []:
+            path = root / str(row.get("path"))
+            if not path.is_file():
+                errors.append(f"protected file missing from working tree: {path}")
+            elif sha256_file(path) != row.get("sha256"):
+                errors.append(f"protected file changed after D1.0 audit: {path}")
+        return errors
 
     try:
         current = build_bundle_audit(root)

@@ -122,6 +122,52 @@ export interface Story {
   notes?: string;
 }
 
+export type StoryReadingLabels = Record<
+  | "people_section"
+  | "resolved_mentions_heading"
+  | "alias_hint"
+  | "resolved_alias_label"
+  | "annotation_label"
+  | "evidence_heading"
+  | "evidence_intro"
+  | "empty_alias"
+  | "relation_section"
+  | "direct_relation_label"
+  | "derived_relation_label"
+  | "derived_relation_note"
+  | "relation_evidence_toggle"
+  | "relation_evidence_heading"
+  | "no_direct_relations"
+  | "focused_person_label"
+  | "back_label",
+  ReadingPair
+>;
+
+export interface PersonDisplay {
+  name: ReadingPair;
+  aliases: Array<{ surface: ReadingPair; alias_type: string }>;
+}
+
+export interface SourceDisplay {
+  work: ReadingPair;
+  edition: ReadingPair;
+}
+
+export interface RelationDisplay {
+  label: ReadingPair;
+  role_a: ReadingPair | null;
+  role_b: ReadingPair | null;
+  scope?: ReadingPair | null;
+}
+
+export interface SharedDisplayRegistry {
+  labels: StoryReadingLabels;
+  people: Record<string, PersonDisplay>;
+  relations: Record<string, RelationDisplay>;
+  sources: Record<string, SourceDisplay>;
+  evidence: Record<string, ReadingPair>;
+}
+
 export interface StoryReading {
   entry_id: string;
   status: "reviewed" | "aligned" | "candidate" | "disputed";
@@ -146,30 +192,6 @@ export interface StoryReading {
       section: "main_text" | "liu_annotation";
     }>;
   };
-  labels: Record<
-    | "people_section"
-    | "resolved_mentions_heading"
-    | "alias_hint"
-    | "resolved_alias_label"
-    | "annotation_label"
-    | "evidence_heading"
-    | "evidence_intro"
-    | "empty_alias"
-    | "relation_section"
-    | "direct_relation_label"
-    | "derived_relation_label"
-    | "derived_relation_note"
-    | "relation_evidence_toggle"
-    | "relation_evidence_heading"
-    | "no_direct_relations"
-    | "focused_person_label"
-    | "back_label",
-    ReadingPair
-  >;
-  person_display: Record<string, {
-    name: ReadingPair;
-    aliases: Array<{ surface: ReadingPair; alias_type: string }>;
-  }>;
   mention_display: Record<string, {
     surface: ReadingPair;
     explanation: ReadingPair;
@@ -180,14 +202,6 @@ export interface StoryReading {
     canonical_name?: ReadingPair;
     candidate_names?: ReadingPair[];
   }>;
-  source_display: Record<string, { work: ReadingPair; edition: ReadingPair }>;
-  relation_display: Record<string, {
-    label: ReadingPair;
-    role_a: ReadingPair | null;
-    role_b: ReadingPair | null;
-    scope?: ReadingPair | null;
-  }>;
-  evidence_display: Record<string, ReadingPair>;
   display_overrides: string[];
 }
 
@@ -659,6 +673,7 @@ export interface SiteBundle {
   story_era_orientations: StoryEraOrientation[];
   person_sketches: Record<string, PersonSketch>;
   scene_contexts: Record<string, StorySceneContext>;
+  display: SharedDisplayRegistry;
   story_chain?: StoryChainIndex;
   ui?: ReadingUiLabels;
 }

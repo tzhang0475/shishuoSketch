@@ -4,7 +4,7 @@
   "title": "SC1 static frontend bundle",
   "type": "object",
   "additionalProperties": true,
-  "required": ["schema", "generated_from", "stories", "people", "mentions", "relations", "eras", "evidence", "sources", "ruler_identities", "era_cards", "ruler_mentions", "historical_events", "story_era_orientations", "person_sketches", "scene_contexts", "story_chain", "ui"],
+  "required": ["schema", "generated_from", "stories", "people", "mentions", "relations", "eras", "evidence", "sources", "ruler_identities", "era_cards", "ruler_mentions", "historical_events", "story_era_orientations", "person_sketches", "scene_contexts", "display", "story_chain", "ui"],
   "properties": {
     "schema": {"const": 1},
     "generated_from": {"const": "scripts/build_sc1_frontend_data.py"},
@@ -75,13 +75,22 @@
                         "kind": {"enum": ["annotation_marker"]},
                         "mention_id": {"type": "string"},
                         "annotation_id": {"type": ["string", "null"]},
-        "reason": {"enum": ["unsafe_anchor", "overlapping_anchor", "duplicate_display_span", "display_conversion_context_mismatch", "unsafe_insertion_point", "insertion_inside_person_mention", "marker_projection_failed"]},
+                        "reason": {"enum": ["unsafe_anchor", "overlapping_anchor", "duplicate_display_span", "display_conversion_context_mismatch", "unsafe_insertion_point", "insertion_inside_person_mention", "marker_projection_failed"]},
                         "section": {"enum": ["main_text", "liu_annotation"]}
                       }
                     }
                   }
                 }
               }
+            },
+            "not": {
+              "anyOf": [
+                {"required": ["labels"]},
+                {"required": ["person_display"]},
+                {"required": ["source_display"]},
+                {"required": ["relation_display"]},
+                {"required": ["evidence_display"]}
+              ]
             }
           }
         }
@@ -126,6 +135,17 @@
     "scene_contexts": {
       "type": "object",
       "additionalProperties": {"type": "object", "required": ["story_id", "review_status", "date", "places", "people_at_scene", "unmaterialized_people", "positional_context", "event_background", "narrative_layers", "evidence_ids", "notes"]}
+    },
+    "display": {
+      "type": "object",
+      "required": ["labels", "people", "relations", "sources", "evidence"],
+      "properties": {
+        "labels": {"type": "object", "additionalProperties": {"$ref": "#/$defs/readingPair"}},
+        "people": {"type": "object"},
+        "relations": {"type": "object"},
+        "sources": {"type": "object"},
+        "evidence": {"type": "object", "additionalProperties": {"$ref": "#/$defs/readingPair"}}
+      }
     },
     "story_chain": {
       "type": "object",

@@ -538,6 +538,56 @@ def validate(root: Path = ROOT, mode: str = "full") -> list[str]:
     }
     relation_ids = {item.get("id") for item in bundle.get("relations", [])}
     evidence_by_id = {item.get("id"): item for item in bundle.get("evidence", [])}
+    shared_display = bundle.get("display")
+    if not isinstance(shared_display, dict):
+        errors.append("SC1 shared display registry is missing")
+    else:
+        required_display_tables = {
+            "labels": None,
+            "people": set(people_by_id),
+            "relations": set(relation_ids),
+            "sources": {
+                item.get("id")
+                for item in bundle.get("sources", [])
+                if isinstance(item, dict) and isinstance(item.get("id"), str)
+            },
+            "evidence": set(evidence_by_id),
+        }
+        for table_name, expected_ids in required_display_tables.items():
+            table = shared_display.get(table_name)
+            if not isinstance(table, dict):
+                errors.append(f"SC1 shared display table is missing: {table_name}")
+                continue
+            if expected_ids is not None and set(table) != expected_ids:
+                errors.append(f"SC1 shared display table keys differ: {table_name}")
+            for key, value in table.items():
+                if table_name in {"labels", "evidence"}:
+                    if not isinstance(value, dict) or not isinstance(value.get("original"), str) or not isinstance(value.get("simplified"), str):
+                        errors.append(f"SC1 shared display pair is incomplete: {table_name}/{key}")
+                elif not isinstance(value, dict):
+                    errors.append(f"SC1 shared display record is invalid: {table_name}/{key}")
+        labels = shared_display.get("labels")
+        for key in (
+            "people_section",
+            "resolved_mentions_heading",
+            "alias_hint",
+            "resolved_alias_label",
+            "annotation_label",
+            "evidence_heading",
+            "evidence_intro",
+            "empty_alias",
+            "relation_section",
+            "direct_relation_label",
+            "derived_relation_label",
+            "derived_relation_note",
+            "relation_evidence_toggle",
+            "relation_evidence_heading",
+            "no_direct_relations",
+            "focused_person_label",
+            "back_label",
+        ):
+            if not isinstance(labels, dict) or key not in labels:
+                errors.append(f"SC1 shared display labels missing: {key}")
     converter = OpenCC("t2s")
     people_id_set = {str(item.get("id")) for item in bundle.get("people", []) if isinstance(item, dict) and isinstance(item.get("id"), str)}
 
@@ -628,6 +678,10 @@ def validate(root: Path = ROOT, mode: str = "full") -> list[str]:
             errors.append(f"SC1 Story has an unresolved Person: {entry_id}")
 
         reading = story.get("reading", {})
+        if isinstance(reading, dict):
+            for key in ("labels", "person_display", "source_display", "relation_display", "evidence_display"):
+                if key in reading:
+                    errors.append(f"SC1 Story retains duplicated shared display table: {entry_id}/{key}")
         main = punct.get("sections", {}).get("main_text", {})
         if reading.get("status") != punct.get("status"):
             errors.append(f"SC1 reading status differs from punctuation record: {entry_id}")

@@ -343,6 +343,32 @@ def _build_evidence_display(evidence: Any, converter: Any) -> dict[str, Any]:
     return result
 
 
+def build_shared_display_registry(
+    *,
+    people: Any = (),
+    sources: Any = (),
+    relations: Any = (),
+    evidence: Any = (),
+    converter: Any,
+) -> dict[str, Any]:
+    """Build the verified-global reader display tables once.
+
+    Story reading projections still own text, annotation, segment, and
+    Mention-specific display data.  These tables are derived only from
+    bundle-wide registries and therefore must not be copied into every Story.
+    """
+
+    return {
+        "labels": {
+            key: _display_pair(value, converter) for key, value in READER_LABELS.items()
+        },
+        "people": _build_person_display(people, converter),
+        "relations": _build_relation_display(relations, converter),
+        "sources": _build_source_display(sources, converter),
+        "evidence": _build_evidence_display(evidence, converter),
+    }
+
+
 def _is_display_ignored(character: str) -> bool:
     """Return whether a character is presentation-only for alignment.
 
@@ -1151,6 +1177,7 @@ def build_display_reading(
     source_text: str | None = None,
     annotation_evidence_ids: Mapping[str, str] | None = None,
     ruler_mentions: Any = (),
+    include_global_display: bool = True,
 ) -> dict[str, Any]:
     sections = record["sections"]
     annotations: list[dict[str, Any]] = []
@@ -1341,7 +1368,7 @@ def build_display_reading(
     orphan_ids = sorted(visible_ids - placed_set - suppressed_set)
     if orphan_ids:
         raise ValueError(f"visible Mention has no inline/suppressed projection: {', '.join(orphan_ids)}")
-    return {
+    reading = {
         "entry_id": record["entry_id"],
         "status": record["status"],
         "punctuation_record_id": record["id"],
@@ -1357,18 +1384,29 @@ def build_display_reading(
         },
         "annotations": annotations,
         "mention_projection": {"suppressed": suppressed_mentions},
-        "labels": {
-            key: _display_pair(value, converter) for key, value in READER_LABELS.items()
-        },
-        "person_display": _build_person_display(people, converter),
         "mention_display": _build_mention_display(
             mentions,
             converter,
             people,
             include_explanations=source_text is not None,
         ),
-        "source_display": _build_source_display(sources, converter),
-        "relation_display": _build_relation_display(relations, converter),
-        "evidence_display": _build_evidence_display(evidence, converter),
         "display_overrides": list(record.get("display_overrides", [])),
     }
+    if include_global_display:
+        shared = build_shared_display_registry(
+            people=people,
+            sources=sources,
+            relations=relations,
+            evidence=evidence,
+            converter=converter,
+        )
+        reading.update(
+            {
+                "labels": shared["labels"],
+                "person_display": shared["people"],
+                "source_display": shared["sources"],
+                "relation_display": shared["relations"],
+                "evidence_display": shared["evidence"],
+            }
+        )
+    return reading

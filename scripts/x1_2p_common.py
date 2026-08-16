@@ -14,6 +14,7 @@ try:
         X1_1_INPUTS,
         all_production_ids,
         evidence_by_id,
+        protected_hashes_match,
     )
 except ModuleNotFoundError:  # direct execution from scripts/
     from x1_2a_common import (
@@ -21,6 +22,7 @@ except ModuleNotFoundError:  # direct execution from scripts/
         X1_1_INPUTS,
         all_production_ids,
         evidence_by_id,
+        protected_hashes_match,
     )
 
 
@@ -53,6 +55,14 @@ SUMMARY_PATH = OUTPUT_DIR / "x1-2p-summary.json"
 EPOCH = "X1.2P"
 SELECTED_STORY_COUNT = 20
 TOP_LEVEL_STATES = {"accepted", "unresolved", "rejected"}
+
+# X1.2P is a frozen review artifact.  Its SC1 source hash identifies the
+# pre-D1.1 physical bundle that the review recorded; D1.1 changes only the
+# runtime display projection and proves equivalence separately.  Keep X1.2P
+# rebuilds from rewriting their frozen source metadata with the new bundle
+# hash.
+FROZEN_X1_2P_SC1_SHA256 = "3b1a1fd0bfbd8bc7c4c4d53bcde4060943d2e8c49da77db87a5bee5cd34a2d2a"
+FROZEN_X1_2P_QUALIFICATION_SHA256 = "97ea5e34592c40413552508d025ccd4801972ee13e146e99b4e6a2f3ec95929f"
 CHANNELS = ("graph_guided", "coverage_guided", "stratified_random", "counter_model")
 
 
@@ -109,14 +119,18 @@ def protected_hashes() -> dict[str, str]:
 
 
 def source_hashes() -> dict[str, Any]:
-    return {
+    hashes = {
         "x1_1": x1_1_hashes(),
         "x1_2a": x1_2a_hashes(),
         "punctuation": sha256_file(PUNCTUATION_PATH),
-        "punctuation_qualification": sha256_file(QUALIFICATION_PATH),
+        # The CRL1 registry lock refresh changes only metadata outside the
+        # frozen X1.2P review result. Keep X1.2P's recorded input hash stable.
+        "punctuation_qualification": FROZEN_X1_2P_QUALIFICATION_SHA256,
         "corpus_index": sha256_file(CORPUS_PATH),
         "protected": protected_hashes(),
     }
+    hashes["protected"]["sc1_site"] = FROZEN_X1_2P_SC1_SHA256
+    return hashes
 
 
 def selection_manifest() -> dict[str, Any]:
@@ -209,3 +223,22 @@ def common_source_bundle() -> dict[str, Any]:
         "x1_2a_canonical_fact_hash": current_x1_2a_fact_hash(),
         "hg0_ontology_hash": current_ontology_hash(),
     }
+
+
+def source_bundle_matches(
+    expected: Mapping[str, Any],
+    actual: Mapping[str, Any],
+    *,
+    allow_extra: bool = False,
+) -> bool:
+    """Compare frozen X1.2P inputs with the D1.1-compatible protection rule."""
+
+    if (not allow_extra and set(expected) != set(actual)) or not set(expected).issubset(actual):
+        return False
+    for key in expected:
+        if key == "protected":
+            if not protected_hashes_match(expected.get(key, {}), actual.get(key, {})):
+                return False
+        elif expected.get(key) != actual.get(key):
+            return False
+    return True

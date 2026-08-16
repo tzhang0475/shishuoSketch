@@ -29,7 +29,11 @@ try:
         read_json as read_wp1_json,
         resolution_mode_for_mention,
     )
-    from .reading_layers import build_display_reading, strip_display_punctuation
+    from .reading_layers import (
+        build_display_reading,
+        build_shared_display_registry,
+        strip_display_punctuation,
+    )
     from .person_sketch import build_person_sketches
     from .person_resolution import load_effective_mentions
     from .story_scene_contexts import DERIVED_PATH as SCENE_DERIVED_PATH, SOURCE_PATH as SCENE_SOURCE_PATH, project as project_scene_contexts, validate_source as validate_scene_source, validate_source_path as validate_scene_source_path
@@ -43,7 +47,7 @@ except ImportError:  # direct execution
         read_json as read_wp1_json,
         resolution_mode_for_mention,
     )
-    from reading_layers import build_display_reading, strip_display_punctuation
+    from reading_layers import build_display_reading, build_shared_display_registry, strip_display_punctuation
     from person_sketch import build_person_sketches
     from person_resolution import load_effective_mentions
     from story_scene_contexts import DERIVED_PATH as SCENE_DERIVED_PATH, SOURCE_PATH as SCENE_SOURCE_PATH, project as project_scene_contexts, validate_source as validate_scene_source, validate_source_path as validate_scene_source_path
@@ -726,6 +730,7 @@ def build(root: Path = ROOT) -> dict[str, Any]:
                 source_text=source_text,
                 annotation_evidence_ids=base_annotation_evidence,
                 ruler_mentions=ruler_mentions_by_story.get(entry_id, []),
+                include_global_display=False,
             )
             new_stories.append(story)
             continue
@@ -764,6 +769,7 @@ def build(root: Path = ROOT) -> dict[str, Any]:
                 for annotation_id in [key.split(":", 1)[1]]
             },
             ruler_mentions=ruler_mentions_by_story.get(entry_id, []),
+            include_global_display=False,
         )
         story = {
             "id": entry_id,
@@ -819,6 +825,13 @@ def build(root: Path = ROOT) -> dict[str, Any]:
         new_stories.append(story)
 
     new_stories.sort(key=lambda story: int(story.get("global_ordinal", 10**9)))
+    shared_display = build_shared_display_registry(
+        people=frontend_people,
+        sources=base["sources"],
+        relations=production_relations,
+        evidence=list(new_evidence.values()),
+        converter=converter,
+    )
     chain_stories = []
     chain_index_by_story = {
         str(item["entry_id"]): item
@@ -966,6 +979,7 @@ def build(root: Path = ROOT) -> dict[str, Any]:
         ),
         "person_sketches": person_sketches,
         "scene_contexts": scene_contexts,
+        "display": shared_display,
         "story_chain": {
             "schema": 1,
             "stage": "sc1-story-chain-frontend",

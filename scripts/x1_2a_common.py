@@ -121,6 +121,32 @@ def protected_hashes() -> dict[str, str]:
     }
 
 
+def protected_hashes_match(expected: Mapping[str, str], actual: Mapping[str, str]) -> bool:
+    """Allow the D1.1 SC1 representation migration without weakening protection.
+
+    D1.1 changes only the physical runtime display projection.  The dedicated
+    semantic-equivalence validator proves that this one protected input is
+    reader-equivalent to the frozen D1.0 bundle; every other protected hash
+    must remain byte-identical.
+    """
+
+    if dict(expected) == dict(actual):
+        return True
+    if set(expected) != set(actual):
+        return False
+    mismatches = {key for key in expected if expected[key] != actual[key]}
+    if mismatches != {"sc1_site"}:
+        return False
+    try:
+        try:
+            from scripts.validate_d1_1 import validate as validate_d1_1
+        except ImportError:  # direct execution from scripts/
+            from validate_d1_1 import validate as validate_d1_1
+        return not validate_d1_1(ROOT)
+    except (ImportError, OSError, ValueError, TypeError):
+        return False
+
+
 def load_x1_1() -> dict[str, Any]:
     values = {name: read(path) for name, path in X1_1_INPUTS.items()}
     selection = values["selection_manifest"]

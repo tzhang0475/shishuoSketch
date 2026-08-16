@@ -80,9 +80,10 @@ def _production_markers(bundle: dict[str, Any]) -> set[str]:
     markers = {
         story["id"],
         "reading",
+        "display",
         "person_sketches",
-        "relation_display",
-        "evidence_display",
+        "evidence",
+        "relations",
         reading["main_text"]["original"],
         reading["main_text"]["simplified"],
     }

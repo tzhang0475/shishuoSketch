@@ -1,4 +1,13 @@
-import type { PublicationState, SiteBundle } from "./types";
+import type {
+  PersonDisplay,
+  PublicationState,
+  ReadingPair,
+  RelationDisplay,
+  SharedDisplayRegistry,
+  SiteBundle,
+  SourceDisplay,
+  StoryReadingLabels,
+} from "./types";
 import generatedSiteBundle from "./generated/sc1-site.json";
 
 type RuntimeStoryRecord = Record<string, unknown> & {
@@ -27,6 +36,19 @@ function isRuntimeStoryRecord(value: unknown): value is RuntimeStoryRecord {
 
 function isReadingPair(value: unknown): value is { original: string; simplified: string } {
   return isRecord(value) && typeof value.original === "string" && typeof value.simplified === "string";
+}
+
+function validateSharedDisplay(value: unknown): asserts value is SharedDisplayRegistry {
+  if (!isRecord(value)) throw new Error("静态数据缺少 shared display registry");
+  for (const key of ["labels", "people", "relations", "sources", "evidence"]) {
+    if (!isRecord(value[key])) throw new Error(`shared display registry 缺少 ${key}`);
+  }
+  for (const [key, pair] of Object.entries(value.labels as Record<string, unknown>)) {
+    if (!isReadingPair(pair)) throw new Error(`shared display label ${key} 不完整`);
+  }
+  for (const [key, pair] of Object.entries(value.evidence as Record<string, unknown>)) {
+    if (!isReadingPair(pair)) throw new Error(`shared evidence display ${key} 不完整`);
+  }
 }
 
 function validatePersonSketches(
@@ -307,6 +329,7 @@ export function parseSiteBundle(value: unknown): SiteBundle {
   }
   const keys = ["stories", "people", "mentions", "relations", "eras", "evidence", "sources", "historical_events"];
   const arrays = Object.fromEntries(keys.map((key) => [key, requireArray(value, key)]));
+  validateSharedDisplay(value.display);
   const ids = new Set<string>();
   for (const key of keys) {
     for (const item of arrays[key]) {
@@ -501,11 +524,11 @@ export function parseSiteBundle(value: unknown): SiteBundle {
     if (!isRecord(projection) || !Array.isArray(projection.suppressed)) {
       throw new Error(`Story ${String(story.id)} 的 mention projection 不完整`);
     }
-    if (!isRecord(reading.labels) || !isRecord(reading.person_display) || !isRecord(reading.mention_display) || !isRecord(reading.source_display)) {
-      throw new Error(`Story ${String(story.id)} 的 reading display layer 不完整`);
+    if (!isRecord(reading.mention_display)) {
+      throw new Error(`Story ${String(story.id)} 的 Mention display layer 不完整`);
     }
-    if (!isRecord(reading.relation_display) || !isRecord(reading.evidence_display)) {
-      throw new Error(`Story ${String(story.id)} 的 relation reading layer 不完整`);
+    for (const key of ["labels", "person_display", "source_display", "relation_display", "evidence_display"]) {
+      if (key in reading) throw new Error(`Story ${String(story.id)} 不得重复携带 shared display map: ${key}`);
     }
     const annotationIds = new Set(reading.annotations.map((annotation) => String(annotation.id)));
     const mainSegments = isRecord(reading.main_text) && Array.isArray(reading.main_text.segments)
@@ -715,6 +738,26 @@ export function parseSiteBundle(value: unknown): SiteBundle {
     }
   }
   return value as unknown as SiteBundle;
+}
+
+export function readingLabel(data: SiteBundle, key: keyof StoryReadingLabels): ReadingPair | undefined {
+  return data.display.labels[key];
+}
+
+export function personDisplay(data: SiteBundle, personId: string): PersonDisplay | undefined {
+  return data.display.people[personId];
+}
+
+export function relationDisplay(data: SiteBundle, relationId: string): RelationDisplay | undefined {
+  return data.display.relations[relationId];
+}
+
+export function sourceDisplay(data: SiteBundle, sourceId: string): SourceDisplay | undefined {
+  return data.display.sources[sourceId];
+}
+
+export function evidenceDisplay(data: SiteBundle, evidenceId: string): ReadingPair | undefined {
+  return data.display.evidence[evidenceId];
 }
 
 export function loadSiteBundle(): SiteBundle {
