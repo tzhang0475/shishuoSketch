@@ -1,0 +1,543 @@
+{
+  "schema": "historical-situation-gold-spec",
+  "schema_version": "v0",
+  "stage": "HR0",
+  "review_policy": "manual_deterministic_annotation_from_existing_evidence",
+  "records": [
+    {
+      "story_id": "02-yanyu-035",
+      "selection_categories": ["simple_single_episode", "liu_dependent_interpretation"],
+      "selection_reason": "单一交涉场景，正文给出刘琨与温嶠的言语行动，刘注提供异称与身份线索。",
+      "episodes": [
+        {"episode_id": "e1", "episode_kind": "single_episode", "summary": "刘琨与温嶠在正文中交涉并各自发言。", "presence_scope": "story_scene", "assertion_status": "attested", "evidence_ids": ["evidence-sc1-02-yanyu-035-main"]}
+      ],
+      "participant_states": [
+        {"state_id": "p1", "episode_id": "e1", "person_id": "person-021", "surface": "劉琨", "role": "speaker", "presence_status": "in_scene", "resolution_status": "resolved", "evidence_ids": ["evidence-sc1-02-yanyu-035-main"], "review_note": "正文直接以姓名标示发言者。"},
+        {"state_id": "p2", "episode_id": "e1", "person_id": "person-013", "surface": "温嶠", "role": "speaker", "presence_status": "in_scene", "resolution_status": "resolved", "evidence_ids": ["evidence-sc1-02-yanyu-035-main"], "review_note": "正文直接以姓名标示对话对象。"}
+      ],
+      "temporal_relations": [
+        {"temporal_relation_id": "t1", "relation_type": "unknown", "from_episode_id": "e1", "to_episode_id": null, "anchor_surface": null, "precision": "unknown", "expression": "本则未给出可安全结构化的年代锚点。", "evidence_ids": ["evidence-sc1-02-yanyu-035-main"]}
+      ],
+      "person_states": [
+        {"state_id": "s1", "person_id": "person-013", "state_kind": "identity_context", "value": "刘注以“太真”作为温嶠的字。", "assertion_status": "reported", "modality": "reported", "review_status": "reviewed", "evidence_ids": ["evidence-sc1-02-yanyu-035-annotation-001"]}
+      ],
+      "title_mentions": [
+        {"title_mention_id": "m1", "surface": "太真", "entity_type": "person", "entity_id": "person-013", "candidate_entity_ids": [], "resolution_status": "resolved", "semantic_role": "courtesy_name", "review_status": "reviewed", "evidence_ids": ["evidence-sc1-02-yanyu-035-annotation-001"]}
+      ],
+      "uncertainties": [
+        {"uncertainty_id": "u1", "uncertainty_type": "temporal", "scope": "temporal_relations", "description": "正文与所用注释未提供本则可直接采用的精确或有界年代。", "status": "unresolved", "review_status": "reviewed", "evidence_ids": ["evidence-sc1-02-yanyu-035-main", "evidence-sc1-02-yanyu-035-annotation-001"]}
+      ],
+      "review_notes": ["场景参与者仅按正文交涉语义标注；刘注异称保留为身份上下文，不改写正文参与者。"]
+    },
+    {
+      "story_id": "02-yanyu-036",
+      "selection_categories": ["multi_episode", "retrospective_reported", "presence_reference", "temporal_ambiguity"],
+      "selection_reason": "同一故事含过江使行、拜见王丞相及离开后的叙述层，适合区分在场、被述及与事件顺序。",
+      "episodes": [
+        {"episode_id": "e1", "episode_kind": "single_episode", "summary": "温嶠以刘琨使者身份过江并处理初到江左的事务。", "presence_scope": "story_scene", "assertion_status": "attested", "evidence_ids": ["evidence-sc1-02-yanyu-036-main"]},
+        {"episode_id": "e2", "episode_kind": "reported_event", "summary": "温嶠既诣王丞相，陈述所见并形成故事中的转折。", "presence_scope": "story_scene", "assertion_status": "attested", "evidence_ids": ["evidence-sc1-02-yanyu-036-main"]}
+      ],
+      "participant_states": [
+        {"state_id": "p1", "episode_id": "e1", "person_id": "person-013", "surface": "温嶠", "role": "actor", "presence_status": "in_scene", "resolution_status": "resolved", "evidence_ids": ["evidence-sc1-02-yanyu-036-main"], "review_note": "正文将过江使行直接归于温嶠。"},
+        {"state_id": "p2", "episode_id": "e1", "person_id": "person-021", "surface": "劉琨", "role": "reported_subject", "presence_status": "reported", "resolution_status": "resolved", "evidence_ids": ["evidence-sc1-02-yanyu-036-main"], "review_note": "刘琨是使者关系的叙述对象，不能据此标为过江现场在场者。"},
+        {"state_id": "p3", "episode_id": "e2", "person_id": "person-003", "surface": "王丞相", "role": "referenced", "presence_status": "in_scene", "resolution_status": "resolved", "evidence_ids": ["evidence-sc1-02-yanyu-036-main"], "review_note": "沿用已有王导身份解析；此处只记录故事场景中的称谓和会见。"}
+      ],
+      "temporal_relations": [
+        {"temporal_relation_id": "t1", "relation_type": "sequence", "from_episode_id": "e1", "to_episode_id": "e2", "anchor_surface": "既诣", "precision": "relative", "expression": "过江及初到江左叙述先于既诣王丞相。", "evidence_ids": ["evidence-sc1-02-yanyu-036-main"]},
+        {"temporal_relation_id": "t2", "relation_type": "unknown", "from_episode_id": "e1", "to_episode_id": null, "anchor_surface": null, "precision": "unknown", "expression": "本则没有可直接转为年份的年代信息。", "evidence_ids": ["evidence-sc1-02-yanyu-036-main"]}
+      ],
+      "person_states": [],
+      "title_mentions": [
+        {"title_mention_id": "m1", "surface": "王丞相", "entity_type": "person", "entity_id": "person-003", "candidate_entity_ids": [], "resolution_status": "resolved", "semantic_role": "reference_title", "review_status": "reviewed", "evidence_ids": ["evidence-sc1-02-yanyu-036-main"]}
+      ],
+      "uncertainties": [
+        {"uncertainty_id": "u1", "uncertainty_type": "participant_scope", "scope": "person-021", "description": "刘琨在本则作为使者关系中的被述及人物，不据正文把他标为过江现场在场者。", "status": "bounded", "review_status": "reviewed", "evidence_ids": ["evidence-sc1-02-yanyu-036-main"]},
+        {"uncertainty_id": "u2", "uncertainty_type": "temporal", "scope": "record", "description": "事件顺序可读，绝对年代未定。", "status": "unresolved", "review_status": "reviewed", "evidence_ids": ["evidence-sc1-02-yanyu-036-main"]}
+      ],
+      "review_notes": ["顺序关系来自正文叙述连接，不使用任何派生 Story 年份。"]
+    },
+    {
+      "story_id": "02-yanyu-069",
+      "selection_categories": ["simple_single_episode", "presence_reference", "identity_ambiguity", "comparative_evaluation"],
+      "selection_reason": "刘惔与许玄度的住宿交往包含对话和比较，许玄度的现有身份端点仍需保持未决。",
+      "episodes": [
+        {"episode_id": "e1", "episode_kind": "comparative_exchange", "summary": "刘真长与许玄度在住宿场景中交谈，并比较居处与东山。", "presence_scope": "story_scene", "assertion_status": "attested", "evidence_ids": ["evidence-sc1-02-yanyu-069-main"]}
+      ],
+      "participant_states": [
+        {"state_id": "p1", "episode_id": "e1", "person_id": "person-009", "surface": "劉真長", "role": "speaker", "presence_status": "in_scene", "resolution_status": "resolved", "evidence_ids": ["evidence-sc1-02-yanyu-069-main"], "review_note": "已有刘惔别称解析。"},
+        {"state_id": "p2", "episode_id": "e1", "person_id": null, "candidate_person_ids": [], "surface": "許玄度", "role": "speaker", "presence_status": "in_scene", "resolution_status": "unresolved", "evidence_ids": ["evidence-sc1-02-yanyu-069-main", "evidence-sc1-02-yanyu-069-annotation-001"], "review_note": "正文角色在场且发言，但本 Gold 不越过现有未决身份端点。"}
+      ],
+      "temporal_relations": [
+        {"temporal_relation_id": "t1", "relation_type": "during", "from_episode_id": "e1", "to_episode_id": null, "anchor_surface": "宿", "precision": "relative", "expression": "事件限定为一次住宿交谈，未给出绝对年代。", "evidence_ids": ["evidence-sc1-02-yanyu-069-main"]}
+      ],
+      "person_states": [
+        {"state_id": "s1", "person_id": "person-009", "state_kind": "evaluation", "value": "刘惔在交谈中对居处与东山作比较。", "assertion_status": "comparative", "modality": "none", "review_status": "reviewed", "evidence_ids": ["evidence-sc1-02-yanyu-069-main"]}
+      ],
+      "title_mentions": [
+        {"title_mention_id": "m1", "surface": "真長", "entity_type": "person", "entity_id": "person-009", "candidate_entity_ids": [], "resolution_status": "resolved", "semantic_role": "courtesy_name", "review_status": "reviewed", "evidence_ids": ["evidence-sc1-02-yanyu-069-main"]},
+        {"title_mention_id": "m2", "surface": "玄度", "entity_type": "person", "entity_id": null, "candidate_entity_ids": [], "resolution_status": "unresolved", "semantic_role": "courtesy_name", "review_status": "reviewed", "evidence_ids": ["evidence-sc1-02-yanyu-069-main", "evidence-sc1-02-yanyu-069-annotation-001"]}
+      ],
+      "uncertainties": [
+        {"uncertainty_id": "u1", "uncertainty_type": "identity", "scope": "許玄度", "description": "故事中的许玄度参与场景，但本 Gold 不把称字直接提升为无歧义 canonical Person 端点。", "status": "unresolved", "review_status": "reviewed", "evidence_ids": ["evidence-sc1-02-yanyu-069-main", "evidence-sc1-02-yanyu-069-annotation-001"]},
+        {"uncertainty_id": "u2", "uncertainty_type": "temporal", "scope": "record", "description": "住宿与比较的相对情境明确，年代未定。", "status": "unresolved", "review_status": "reviewed", "evidence_ids": ["evidence-sc1-02-yanyu-069-main"]}
+      ],
+      "review_notes": ["身份未决不妨碍记录场景中的未解析人物表面；不创建新 Person。"]
+    },
+    {
+      "story_id": "02-yanyu-079",
+      "selection_categories": ["comparative_evaluation", "identity_ambiguity", "liu_dependent_interpretation"],
+      "selection_reason": "正文用军事比喻评价文度与康伯，刘注同时涉及称字和引书，适合测试比较语义与身份未决。",
+      "episodes": [
+        {"episode_id": "e1", "episode_kind": "comparative_exchange", "summary": "谢胡儿转述对庾道季的谈论，文度与康伯作为比较对象出现。", "presence_scope": "reported_in_story", "assertion_status": "reported", "evidence_ids": ["evidence-sc1-02-yanyu-079-main"]}
+      ],
+      "participant_states": [
+        {"state_id": "p1", "episode_id": "e1", "person_id": null, "candidate_person_ids": [], "surface": "謝胡兒", "role": "reported_subject", "presence_status": "reported", "resolution_status": "unresolved", "evidence_ids": ["evidence-sc1-02-yanyu-079-main"], "review_note": "叙述以转述开篇，身份端点不在本 Gold 中强行补齐。"},
+        {"state_id": "p2", "episode_id": "e1", "person_id": "person-024", "surface": "康伯", "role": "comparand", "presence_status": "reported", "resolution_status": "resolved", "evidence_ids": ["evidence-sc1-02-yanyu-079-main"], "review_note": "现有 mention 已解析为韩伯；这里保留比较对象角色。"},
+        {"state_id": "p3", "episode_id": "e1", "person_id": null, "candidate_person_ids": [], "surface": "文度", "role": "comparand", "presence_status": "reported", "resolution_status": "unresolved", "evidence_ids": ["evidence-sc1-02-yanyu-079-main", "evidence-sc1-02-yanyu-079-annotation-001"], "review_note": "称字与人物端点未在本记录中越过身份门槛。"}
+      ],
+      "temporal_relations": [
+        {"temporal_relation_id": "t1", "relation_type": "unknown", "from_episode_id": "e1", "to_episode_id": null, "anchor_surface": null, "precision": "unknown", "expression": "比较叙述没有可安全使用的绝对年代。", "evidence_ids": ["evidence-sc1-02-yanyu-079-main", "evidence-sc1-02-yanyu-079-annotation-001"]}
+      ],
+      "person_states": [
+        {"state_id": "s1", "person_id": "person-024", "state_kind": "evaluation", "value": "康伯被置于“济河焚舟”的比较语境中。", "assertion_status": "comparative", "modality": "none", "review_status": "reviewed", "evidence_ids": ["evidence-sc1-02-yanyu-079-main"]}
+      ],
+      "title_mentions": [
+        {"title_mention_id": "m1", "surface": "文度", "entity_type": "person", "entity_id": null, "candidate_entity_ids": [], "resolution_status": "unresolved", "semantic_role": "courtesy_name", "review_status": "reviewed", "evidence_ids": ["evidence-sc1-02-yanyu-079-main", "evidence-sc1-02-yanyu-079-annotation-001"]},
+        {"title_mention_id": "m2", "surface": "康伯", "entity_type": "person", "entity_id": "person-024", "candidate_entity_ids": [], "resolution_status": "resolved", "semantic_role": "courtesy_name", "review_status": "reviewed", "evidence_ids": ["evidence-sc1-02-yanyu-079-main"]}
+      ],
+      "uncertainties": [
+        {"uncertainty_id": "u1", "uncertainty_type": "identity", "scope": "文度及谢胡儿", "description": "比较对象和转述者的文字表面可保留，但端点不完整。", "status": "unresolved", "review_status": "reviewed", "evidence_ids": ["evidence-sc1-02-yanyu-079-main", "evidence-sc1-02-yanyu-079-annotation-001"]},
+        {"uncertainty_id": "u2", "uncertainty_type": "comparative", "scope": "episode:e1", "description": "军事比喻记录为比较语境，不扩写为真实军事行动或人物关系。", "status": "bounded", "review_status": "reviewed", "evidence_ids": ["evidence-sc1-02-yanyu-079-main"]}
+      ],
+      "review_notes": ["比较语句不是新的军事事实；刘注中的引书只作为解释线索保留。"]
+    },
+    {
+      "story_id": "02-yanyu-083",
+      "selection_categories": ["simple_single_episode", "ambiguous_title", "liu_dependent_interpretation", "temporal_ambiguity"],
+      "selection_reason": "正文明确记载袁宏为安南司马及送别场景，刘注补充字、家世和仕履，适合区分正文角色与注中背景。",
+      "episodes": [
+        {"episode_id": "e1", "episode_kind": "single_episode", "summary": "袁彦伯以安南司马身份被都下诸人送至濑乡并叹咏江山。", "presence_scope": "story_scene", "assertion_status": "attested", "evidence_ids": ["evidence-sc1-02-yanyu-083-main"]}
+      ],
+      "participant_states": [
+        {"state_id": "p1", "episode_id": "e1", "person_id": "person-012", "surface": "袁彦伯", "role": "actor", "presence_status": "in_scene", "resolution_status": "resolved", "evidence_ids": ["evidence-sc1-02-yanyu-083-main"], "review_note": "正文明确为被送别者。"},
+        {"state_id": "p2", "episode_id": "e1", "person_id": "person-006", "surface": "謝安", "role": "referenced", "presence_status": "mentioned", "resolution_status": "resolved", "evidence_ids": ["evidence-sc1-02-yanyu-083-main"], "review_note": "谢安是官职关系中的提及对象，不标为濑乡现场在场者。"}
+      ],
+      "temporal_relations": [
+        {"temporal_relation_id": "t1", "relation_type": "sequence", "from_episode_id": "e1", "to_episode_id": null, "anchor_surface": "將别", "precision": "relative", "expression": "送至濑乡后将别，随后有叹咏。", "evidence_ids": ["evidence-sc1-02-yanyu-083-main"]}
+      ],
+      "person_states": [
+        {"state_id": "s1", "person_id": "person-012", "state_kind": "office_context", "value": "正文将袁彦伯置于“安南司马”的官职语境。", "assertion_status": "attested", "modality": "none", "review_status": "reviewed", "evidence_ids": ["evidence-sc1-02-yanyu-083-main"]},
+        {"state_id": "s2", "person_id": "person-012", "state_kind": "identity_context", "value": "刘注记“袁宏字彦伯”。", "assertion_status": "reported", "modality": "reported", "review_status": "reviewed", "evidence_ids": ["evidence-sc1-02-yanyu-083-annotation-003"]}
+      ],
+      "title_mentions": [
+        {"title_mention_id": "m1", "surface": "彦伯", "entity_type": "person", "entity_id": "person-012", "candidate_entity_ids": [], "resolution_status": "resolved", "semantic_role": "courtesy_name", "review_status": "reviewed", "evidence_ids": ["evidence-sc1-02-yanyu-083-main", "evidence-sc1-02-yanyu-083-annotation-003"]},
+        {"title_mention_id": "m2", "surface": "安南司马", "entity_type": "office_title", "entity_id": null, "candidate_entity_ids": [], "resolution_status": "resolved", "semantic_role": "office_title", "review_status": "reviewed", "evidence_ids": ["evidence-sc1-02-yanyu-083-main"]}
+      ],
+      "uncertainties": [
+        {"uncertainty_id": "u1", "uncertainty_type": "temporal", "scope": "record", "description": "送别顺序明确，但未给出绝对年代。", "status": "unresolved", "review_status": "reviewed", "evidence_ids": ["evidence-sc1-02-yanyu-083-main"]},
+        {"uncertainty_id": "u2", "uncertainty_type": "participant_scope", "scope": "person-006", "description": "谢安由官职关系提及，不能从该提及推断其在濑乡现场。", "status": "bounded", "review_status": "reviewed", "evidence_ids": ["evidence-sc1-02-yanyu-083-main"]}
+      ],
+      "review_notes": ["注中家世与仕履是背景层，不被复制为本次送别的现场事实。"]
+    },
+    {
+      "story_id": "04-wenxue-036",
+      "selection_categories": ["multi_episode", "presence_reference", "liu_dependent_interpretation", "identity_ambiguity"],
+      "selection_reason": "正文把王逸少、支道林、孙兴公放在一次相见和评价中，人物在场与注释身份说明需要分层。",
+      "episodes": [
+        {"episode_id": "e1", "episode_kind": "single_episode", "summary": "王逸少初到会稽时，支道林在场，孙兴公向王逸少评价支道林。", "presence_scope": "story_scene", "assertion_status": "attested", "evidence_ids": ["evidence-sc1-04-wenxue-036-main"]}
+      ],
+      "participant_states": [
+        {"state_id": "p1", "episode_id": "e1", "person_id": "person-001", "surface": "王逸少", "role": "present", "presence_status": "in_scene", "resolution_status": "resolved", "evidence_ids": ["evidence-sc1-04-wenxue-036-main"], "review_note": "已有别称解析为王羲之。"},
+        {"state_id": "p2", "episode_id": "e1", "person_id": null, "candidate_person_ids": [], "surface": "支道林", "role": "present", "presence_status": "in_scene", "resolution_status": "unresolved", "evidence_ids": ["evidence-sc1-04-wenxue-036-main"], "review_note": "正文明确在场；身份端点不在现有 production Person 中补造。"},
+        {"state_id": "p3", "episode_id": "e1", "person_id": null, "candidate_person_ids": [], "surface": "孙兴公", "role": "speaker", "presence_status": "in_scene", "resolution_status": "unresolved", "evidence_ids": ["evidence-sc1-04-wenxue-036-main"], "review_note": "正文明确发言；本 Gold 保留未解析表面。"}
+      ],
+      "temporal_relations": [
+        {"temporal_relation_id": "t1", "relation_type": "during", "from_episode_id": "e1", "to_episode_id": null, "anchor_surface": "初至", "precision": "relative", "expression": "事件位于王逸少初至会稽的叙述阶段，非绝对年代。", "evidence_ids": ["evidence-sc1-04-wenxue-036-main"]}
+      ],
+      "person_states": [
+        {"state_id": "s1", "person_id": "person-001", "state_kind": "evaluation", "value": "孙兴公在对话中评价支道林的才识与胸怀。", "assertion_status": "reported", "modality": "reported", "review_status": "reviewed", "evidence_ids": ["evidence-sc1-04-wenxue-036-main"]}
+      ],
+      "title_mentions": [
+        {"title_mention_id": "m1", "surface": "逸少", "entity_type": "person", "entity_id": "person-001", "candidate_entity_ids": [], "resolution_status": "resolved", "semantic_role": "courtesy_name", "review_status": "reviewed", "evidence_ids": ["evidence-sc1-04-wenxue-036-main"]}
+      ],
+      "uncertainties": [
+        {"uncertainty_id": "u1", "uncertainty_type": "identity", "scope": "支道林、孙兴公", "description": "在场和发言可由正文标注，但本记录不把未解析表面强行映射为新增 Person。", "status": "unresolved", "review_status": "reviewed", "evidence_ids": ["evidence-sc1-04-wenxue-036-main"]},
+        {"uncertainty_id": "u2", "uncertainty_type": "temporal", "scope": "record", "description": "“初至”只提供相对阶段。", "status": "bounded", "review_status": "reviewed", "evidence_ids": ["evidence-sc1-04-wenxue-036-main"]}
+      ],
+      "review_notes": ["刘注的佛教人物背景不复制为现场人物；正文场景与注释解释分开。"]
+    },
+    {
+      "story_id": "04-wenxue-094",
+      "selection_categories": ["simple_single_episode", "presence_reference", "identity_ambiguity", "comparative_evaluation"],
+      "selection_reason": "袁宏作传后见谢公的短场景含身份有歧义的谢公和评价性言语，适合测试人物端点不确定。",
+      "episodes": [
+        {"episode_id": "e1", "episode_kind": "comparative_exchange", "summary": "袁彦伯作《名士传》成后见谢公，谢公笑言其书写缘由。", "presence_scope": "story_scene", "assertion_status": "attested", "evidence_ids": ["evidence-sc1-04-wenxue-094-main"]}
+      ],
+      "participant_states": [
+        {"state_id": "p1", "episode_id": "e1", "person_id": "person-012", "surface": "袁彦伯", "role": "actor", "presence_status": "in_scene", "resolution_status": "resolved", "evidence_ids": ["evidence-sc1-04-wenxue-094-main"], "review_note": "袁宏身份与字已有解析。"},
+        {"state_id": "p2", "episode_id": "e1", "person_id": null, "candidate_person_ids": ["person-006"], "surface": "謝公", "role": "speaker", "presence_status": "in_scene", "resolution_status": "ambiguous", "evidence_ids": ["evidence-sc1-04-wenxue-094-main", "evidence-sc1-04-wenxue-094-annotation-003"], "review_note": "现有候选指向谢安，但 Gold 不用称号拓扑自行消除歧义。"}
+      ],
+      "temporal_relations": [
+        {"temporal_relation_id": "t1", "relation_type": "sequence", "from_episode_id": "e1", "to_episode_id": null, "anchor_surface": "成、见", "precision": "relative", "expression": "作传完成后发生会见，具体年代未知。", "evidence_ids": ["evidence-sc1-04-wenxue-094-main"]}
+      ],
+      "person_states": [
+        {"state_id": "s1", "person_id": "person-012", "state_kind": "action_context", "value": "袁彦伯完成《名士传》并以所闻著书。", "assertion_status": "attested", "modality": "none", "review_status": "reviewed", "evidence_ids": ["evidence-sc1-04-wenxue-094-main"]}
+      ],
+      "title_mentions": [
+        {"title_mention_id": "m1", "surface": "謝公", "entity_type": "person", "entity_id": null, "candidate_entity_ids": ["person-006"], "resolution_status": "ambiguous", "semantic_role": "reference_title", "review_status": "reviewed", "evidence_ids": ["evidence-sc1-04-wenxue-094-main", "evidence-sc1-04-wenxue-094-annotation-003"]}
+      ],
+      "uncertainties": [
+        {"uncertainty_id": "u1", "uncertainty_type": "identity", "scope": "謝公", "description": "称号候选为谢安，但本记录不将候选当作已解决端点。", "status": "unresolved", "review_status": "reviewed", "evidence_ids": ["evidence-sc1-04-wenxue-094-main", "evidence-sc1-04-wenxue-094-annotation-003"]},
+        {"uncertainty_id": "u2", "uncertainty_type": "comparative", "scope": "episode:e1", "description": "“狡獪”是对言说与著书的评价语境，不结构化为新的性格事实。", "status": "bounded", "review_status": "reviewed", "evidence_ids": ["evidence-sc1-04-wenxue-094-main"]}
+      ],
+      "review_notes": ["谢公完整表面保留；候选 Person 仅用于审阅提示，不作为已解决事实端点。"]
+    },
+    {
+      "story_id": "05-fangzheng-023",
+      "selection_categories": ["simple_single_episode", "ambiguous_title", "liu_dependent_interpretation", "temporal_ambiguity"],
+      "selection_reason": "王导参与王室继承讨论，正文与刘注同时出现元皇帝、明帝等称号及中兴书引文。",
+      "episodes": [
+        {"episode_id": "e1", "episode_kind": "comparative_exchange", "summary": "王导在继承人德与年齿的讨论中回答二王孰贤。", "presence_scope": "story_scene", "assertion_status": "attested", "evidence_ids": ["evidence-sc1-05-fangzheng-023-main"]}
+      ],
+      "participant_states": [
+        {"state_id": "p1", "episode_id": "e1", "person_id": "person-003", "surface": "丞相、茂弘", "role": "speaker", "presence_status": "in_scene", "resolution_status": "resolved", "evidence_ids": ["evidence-sc1-05-fangzheng-023-main"], "review_note": "已有王导称谓解析。"},
+        {"state_id": "p2", "episode_id": "e1", "person_id": null, "candidate_person_ids": [], "surface": "二王", "role": "comparand", "presence_status": "mentioned", "resolution_status": "unresolved", "evidence_ids": ["evidence-sc1-05-fangzheng-023-main", "evidence-sc1-05-fangzheng-023-annotation-005"], "review_note": "比较对象的完整端点不在本 Gold 中补齐。"}
+      ],
+      "temporal_relations": [
+        {"temporal_relation_id": "t1", "relation_type": "relative_to_event", "from_episode_id": "e1", "to_episode_id": null, "anchor_surface": "即位", "precision": "relative", "expression": "注释以即位及后续礼制背景说明叙述阶段，未转为年份。", "evidence_ids": ["evidence-sc1-05-fangzheng-023-annotation-003"]}
+      ],
+      "person_states": [
+        {"state_id": "s1", "person_id": "person-003", "state_kind": "evaluation", "value": "王导以“立子以德不以年”回应二王比较。", "assertion_status": "attested", "modality": "none", "review_status": "reviewed", "evidence_ids": ["evidence-sc1-05-fangzheng-023-main"]}
+      ],
+      "title_mentions": [
+        {"title_mention_id": "m1", "surface": "元皇帝", "entity_type": "ruler", "entity_id": "ruler-jin-yuandi", "candidate_entity_ids": [], "resolution_status": "resolved", "semantic_role": "ruler_title", "review_status": "reviewed", "evidence_ids": ["evidence-sc1-05-fangzheng-023-annotation-005"]},
+        {"title_mention_id": "m2", "surface": "明帝", "entity_type": "ruler", "entity_id": "ruler-jin-mingdi", "candidate_entity_ids": [], "resolution_status": "resolved", "semantic_role": "ruler_title", "review_status": "reviewed", "evidence_ids": ["evidence-sc1-05-fangzheng-023-annotation-005"]}
+      ],
+      "uncertainties": [
+        {"uncertainty_id": "u1", "uncertainty_type": "temporal", "scope": "record", "description": "即位是相对锚点，不提供可直接作为答案的年份。", "status": "bounded", "review_status": "reviewed", "evidence_ids": ["evidence-sc1-05-fangzheng-023-annotation-003", "evidence-sc1-05-fangzheng-023-annotation-005"]},
+        {"uncertainty_id": "u2", "uncertainty_type": "comparative", "scope": "二王", "description": "二王的比较结构被保留，未将其扩写为完整家族关系或人物评价标签。", "status": "unresolved", "review_status": "reviewed", "evidence_ids": ["evidence-sc1-05-fangzheng-023-main"]}
+      ],
+      "review_notes": ["王室称号作为 title_mentions 保留；刘注引用的中兴书没有被当作独立已核原典。"]
+    },
+    {
+      "story_id": "05-fangzheng-028",
+      "selection_categories": ["simple_single_episode", "presence_reference", "event_context"],
+      "selection_reason": "公共座中对王含在庐江表现的评价，王敦与何充的在场和抗辩清晰，且含服务语境但不强推政治关系。",
+      "episodes": [
+        {"episode_id": "e1", "episode_kind": "comparative_exchange", "summary": "众坐中王敦替王含称誉，何充在王敦主簿语境中独自抗之。", "presence_scope": "story_scene", "assertion_status": "attested", "evidence_ids": ["evidence-sc1-05-fangzheng-028-main"]}
+      ],
+      "participant_states": [
+        {"state_id": "p1", "episode_id": "e1", "person_id": "person-011", "surface": "王敦", "role": "speaker", "presence_status": "in_scene", "resolution_status": "resolved", "evidence_ids": ["evidence-sc1-05-fangzheng-028-main"] , "review_note": "正文直接叙述王敦在众坐发言。"},
+        {"state_id": "p2", "episode_id": "e1", "person_id": "person-025", "surface": "何充", "role": "actor", "presence_status": "in_scene", "resolution_status": "resolved", "evidence_ids": ["evidence-sc1-05-fangzheng-028-main"] , "review_note": "正文直接叙述何充抗辩。"},
+        {"state_id": "p3", "episode_id": "e1", "person_id": null, "candidate_person_ids": [], "surface": "王含", "role": "referenced", "presence_status": "mentioned", "resolution_status": "unresolved", "evidence_ids": ["evidence-sc1-05-fangzheng-028-main"], "review_note": "王含是被评价对象，不能由本则自动提升为现场参与者。"}
+      ],
+      "temporal_relations": [
+        {"temporal_relation_id": "t1", "relation_type": "unknown", "from_episode_id": "e1", "to_episode_id": null, "anchor_surface": null, "precision": "unknown", "expression": "公共座中交涉的相对场景可见，年代未详。", "evidence_ids": ["evidence-sc1-05-fangzheng-028-main"]}
+      ],
+      "person_states": [
+        {"state_id": "s1", "person_id": "person-025", "state_kind": "action_context", "value": "何充在王敦主簿的叙述语境中独自抗之。", "assertion_status": "attested", "modality": "none", "review_status": "reviewed", "evidence_ids": ["evidence-sc1-05-fangzheng-028-main"]}
+      ],
+      "title_mentions": [],
+      "uncertainties": [
+        {"uncertainty_id": "u1", "uncertainty_type": "participant_scope", "scope": "person-025", "description": "何充的具体职任语义依赖正文句法；本记录不推导长期政治关系。", "status": "bounded", "review_status": "reviewed", "evidence_ids": ["evidence-sc1-05-fangzheng-028-main"]},
+        {"uncertainty_id": "u2", "uncertainty_type": "temporal", "scope": "record", "description": "故事没有可直接使用的年代锚点。", "status": "unresolved", "review_status": "reviewed", "evidence_ids": ["evidence-sc1-05-fangzheng-028-main"]}
+      ],
+      "review_notes": ["何充的抗辩按故事行动记录，不把座中共现投影为新的 Person–Person 关系。"]
+    },
+    {
+      "story_id": "05-fangzheng-031",
+      "selection_categories": ["multi_episode", "retrospective_reported", "presence_reference", "comparative_evaluation"],
+      "selection_reason": "周顗对王敦举兵的批评兼有现场发言与政治背景回溯，温太真和刘隗只保留为注释/背景层。",
+      "episodes": [
+        {"episode_id": "e1", "episode_kind": "comparative_exchange", "summary": "伯仁在王大将军下兵的语境中指出人臣不当称兵向朝廷。", "presence_scope": "story_scene", "assertion_status": "attested", "evidence_ids": ["evidence-sc1-05-fangzheng-031-main"]},
+        {"episode_id": "e2", "episode_kind": "retrospective", "summary": "刘注以别传等材料补充王敦、刘隗及温太真的政治背景。", "presence_scope": "annotation_context", "assertion_status": "contextual", "evidence_ids": ["evidence-sc1-05-fangzheng-031-annotation-001"]}
+      ],
+      "participant_states": [
+        {"state_id": "p1", "episode_id": "e1", "person_id": "person-019", "surface": "伯仁", "role": "speaker", "presence_status": "in_scene", "resolution_status": "resolved", "evidence_ids": ["evidence-sc1-05-fangzheng-031-main"] , "review_note": "已有别称解析为周顗。"},
+        {"state_id": "p2", "episode_id": "e1", "person_id": "person-011", "surface": "王大將軍、處仲", "role": "actor", "presence_status": "in_scene", "resolution_status": "resolved", "evidence_ids": ["evidence-sc1-05-fangzheng-031-main"] , "review_note": "王敦为故事行动对象。"},
+        {"state_id": "p3", "episode_id": "e2", "person_id": "person-013", "surface": "温太真", "role": "annotation_only", "presence_status": "contextual", "resolution_status": "resolved", "evidence_ids": ["evidence-sc1-05-fangzheng-031-annotation-001"], "review_note": "仅来自刘注背景，不提升为正文在场者。"},
+        {"state_id": "p4", "episode_id": "e2", "person_id": "person-072", "surface": "劉隗", "role": "annotation_only", "presence_status": "contextual", "resolution_status": "resolved", "evidence_ids": ["evidence-sc1-05-fangzheng-031-annotation-001"], "review_note": "仅作为注释中的政治背景人物。"}
+      ],
+      "temporal_relations": [
+        {"temporal_relation_id": "t1", "relation_type": "retrospective", "from_episode_id": "e2", "to_episode_id": "e1", "anchor_surface": "别传曰", "precision": "relative", "expression": "注释对正文政治语境作回溯说明，未提供本故事的绝对日期。", "evidence_ids": ["evidence-sc1-05-fangzheng-031-annotation-001"]}
+      ],
+      "person_states": [
+        {"state_id": "s1", "person_id": "person-019", "state_kind": "evaluation", "value": "周顗评价人臣不可称兵向朝廷。", "assertion_status": "attested", "modality": "none", "review_status": "reviewed", "evidence_ids": ["evidence-sc1-05-fangzheng-031-main"]},
+        {"state_id": "s2", "person_id": "person-011", "state_kind": "action_context", "value": "王敦在正文中被置于称兵向朝廷的语境。", "assertion_status": "attested", "modality": "none", "review_status": "reviewed", "evidence_ids": ["evidence-sc1-05-fangzheng-031-main"]}
+      ],
+      "title_mentions": [
+        {"title_mention_id": "m1", "surface": "伯仁", "entity_type": "person", "entity_id": "person-019", "candidate_entity_ids": [], "resolution_status": "resolved", "semantic_role": "courtesy_name", "review_status": "reviewed", "evidence_ids": ["evidence-sc1-05-fangzheng-031-main"]},
+        {"title_mention_id": "m2", "surface": "處仲", "entity_type": "person", "entity_id": "person-011", "candidate_entity_ids": [], "resolution_status": "resolved", "semantic_role": "courtesy_name", "review_status": "reviewed", "evidence_ids": ["evidence-sc1-05-fangzheng-031-main"]}
+      ],
+      "uncertainties": [
+        {"uncertainty_id": "u1", "uncertainty_type": "participant_scope", "scope": "annotation_only_persons", "description": "温太真与刘隗只在注释背景中出现，不能成为正文硬参与者。", "status": "bounded", "review_status": "reviewed", "evidence_ids": ["evidence-sc1-05-fangzheng-031-annotation-001"]},
+        {"uncertainty_id": "u2", "uncertainty_type": "temporal", "scope": "record", "description": "政治背景有回溯关系，但无安全的精确或有界年份。", "status": "unresolved", "review_status": "reviewed", "evidence_ids": ["evidence-sc1-05-fangzheng-031-main", "evidence-sc1-05-fangzheng-031-annotation-001"]}
+      ],
+      "review_notes": ["现场批评、注释背景、人物身份三层分开；未把批评语句升级为新的政治派系事实。"]
+    },
+    {
+      "story_id": "05-fangzheng-032",
+      "selection_categories": ["multi_episode", "presence_reference", "ambiguous_title", "event_context", "temporal_ambiguity"],
+      "selection_reason": "王敦在石头欲废明帝，温太真到场答问；故事同时提供明帝的地方性标题和温嶠官职语境。",
+      "episodes": [
+        {"episode_id": "e1", "episode_kind": "contextual_event", "summary": "王敦驻船石头并显露欲废明帝的意图，宾客满坐。", "presence_scope": "story_scene", "assertion_status": "attested", "evidence_ids": ["evidence-sc1-05-fangzheng-032-main"]},
+        {"episode_id": "e2", "episode_kind": "comparative_exchange", "summary": "温太真来后，王敦以皇太子为题逼问，温嶠以礼侍亲答之。", "presence_scope": "story_scene", "assertion_status": "attested", "evidence_ids": ["evidence-sc1-05-fangzheng-032-main"]}
+      ],
+      "participant_states": [
+        {"state_id": "p1", "episode_id": "e1", "person_id": "person-011", "surface": "王敦", "role": "actor", "presence_status": "in_scene", "resolution_status": "resolved", "evidence_ids": ["evidence-sc1-05-fangzheng-032-main"] , "review_note": "正文直接叙述王敦的意图与行动。"},
+        {"state_id": "p2", "episode_id": "e2", "person_id": "person-013", "surface": "温太真", "role": "speaker", "presence_status": "in_scene", "resolution_status": "resolved", "evidence_ids": ["evidence-sc1-05-fangzheng-032-main"] , "review_note": "完整表面解析为温嶠；保留温太真而非只保留太真。"},
+        {"state_id": "p3", "episode_id": "e1", "person_id": null, "candidate_person_ids": [], "surface": "明帝", "role": "referenced", "presence_status": "mentioned", "resolution_status": "unresolved", "evidence_ids": ["evidence-sc1-05-fangzheng-032-main", "evidence-sc1-05-fangzheng-032-annotation-001"], "review_note": "participant_states 只承载 Person 端点；故事局部 ruler 解析在 title_mentions 中记录，不作全局标题映射。"}
+      ],
+      "temporal_relations": [
+        {"temporal_relation_id": "t1", "relation_type": "sequence", "from_episode_id": "e1", "to_episode_id": "e2", "anchor_surface": "須臾", "precision": "relative", "expression": "宾客满坐的意图叙述后，须臾温来并发生答问。", "evidence_ids": ["evidence-sc1-05-fangzheng-032-main"]},
+        {"temporal_relation_id": "t2", "relation_type": "unknown", "from_episode_id": "e1", "to_episode_id": null, "anchor_surface": null, "precision": "unknown", "expression": "正文没有给出可直接结构化的绝对年代。", "evidence_ids": ["evidence-sc1-05-fangzheng-032-main"]}
+      ],
+      "person_states": [
+        {"state_id": "s1", "person_id": "person-013", "state_kind": "office_context", "value": "正文说明温太真曾为东宫率，后为王敦司马。", "assertion_status": "attested", "modality": "none", "review_status": "reviewed", "evidence_ids": ["evidence-sc1-05-fangzheng-032-main"]},
+        {"state_id": "s2", "person_id": "person-013", "state_kind": "evaluation", "value": "温嶠以礼侍亲可称为孝回应对皇太子的追问。", "assertion_status": "attested", "modality": "none", "review_status": "reviewed", "evidence_ids": ["evidence-sc1-05-fangzheng-032-main"]}
+      ],
+      "title_mentions": [
+        {"title_mention_id": "m1", "surface": "明帝", "entity_type": "ruler", "entity_id": "ruler-jin-mingdi", "candidate_entity_ids": [], "resolution_status": "resolved", "semantic_role": "ruler_title", "review_status": "reviewed", "evidence_ids": ["evidence-sc1-05-fangzheng-032-main", "evidence-sc1-05-fangzheng-032-annotation-001"]},
+        {"title_mention_id": "m2", "surface": "温太真", "entity_type": "person", "entity_id": "person-013", "candidate_entity_ids": [], "resolution_status": "resolved", "semantic_role": "courtesy_name", "review_status": "reviewed", "evidence_ids": ["evidence-sc1-05-fangzheng-032-main"]},
+        {"title_mention_id": "m3", "surface": "司马", "entity_type": "office_title", "entity_id": null, "candidate_entity_ids": [], "resolution_status": "resolved", "semantic_role": "office_title", "review_status": "reviewed", "evidence_ids": ["evidence-sc1-05-fangzheng-032-main"]}
+      ],
+      "uncertainties": [
+        {"uncertainty_id": "u1", "uncertainty_type": "temporal", "scope": "record", "description": "须臾只确定两个叙事片段的顺序，不能给出年份。", "status": "bounded", "review_status": "reviewed", "evidence_ids": ["evidence-sc1-05-fangzheng-032-main"]},
+        {"uncertainty_id": "u2", "uncertainty_type": "title", "scope": "明帝", "description": "明帝解析依赖本故事局部审定证据，不作为所有故事中同表面的全局规则。", "status": "bounded", "review_status": "reviewed", "evidence_ids": ["evidence-sc1-05-fangzheng-032-main", "evidence-sc1-05-fangzheng-032-annotation-001"]}
+      ],
+      "review_notes": ["此记录专门保留温太真完整 observed surface 与故事局部明帝解析；不改变 canonical 文本。"]
+    },
+    {
+      "story_id": "05-fangzheng-055",
+      "selection_categories": ["simple_single_episode", "presence_reference", "ambiguous_title", "comparative_evaluation", "liu_dependent_interpretation"],
+      "selection_reason": "桓公、桓子野与谢安石之间的问答以评价为中心，桓氏称谓和注释身份需要和正文行动分开。",
+      "episodes": [
+        {"episode_id": "e1", "episode_kind": "comparative_exchange", "summary": "桓公问桓子野为何不谏谢安石对万石必败的判断，随后作色评价万石。", "presence_scope": "story_scene", "assertion_status": "attested", "evidence_ids": ["evidence-sc1-05-fangzheng-055-main"]}
+      ],
+      "participant_states": [
+        {"state_id": "p1", "episode_id": "e1", "person_id": null, "candidate_person_ids": ["person-008"], "surface": "桓公", "role": "speaker", "presence_status": "in_scene", "resolution_status": "ambiguous", "evidence_ids": ["evidence-sc1-05-fangzheng-055-main", "evidence-sc1-05-fangzheng-055-annotation-001"], "review_note": "桓公的标题候选不在本记录中用称号单独消歧。"},
+        {"state_id": "p2", "episode_id": "e1", "person_id": null, "candidate_person_ids": [], "surface": "桓子野", "role": "speaker", "presence_status": "in_scene", "resolution_status": "unresolved", "evidence_ids": ["evidence-sc1-05-fangzheng-055-main", "evidence-sc1-05-fangzheng-055-annotation-001"], "review_note": "正文角色在场并回答，但端点保持未决。"},
+        {"state_id": "p3", "episode_id": "e1", "person_id": "person-006", "surface": "謝安石", "role": "referenced", "presence_status": "mentioned", "resolution_status": "resolved", "evidence_ids": ["evidence-sc1-05-fangzheng-055-main"], "review_note": "谢安石是被评价对象，并非由正文明确为答问现场在场者。"}
+      ],
+      "temporal_relations": [
+        {"temporal_relation_id": "t1", "relation_type": "unknown", "from_episode_id": "e1", "to_episode_id": null, "anchor_surface": null, "precision": "unknown", "expression": "问答语境没有可直接采用的年代锚点。", "evidence_ids": ["evidence-sc1-05-fangzheng-055-main"]}
+      ],
+      "person_states": [
+        {"state_id": "s1", "person_id": "person-006", "state_kind": "evaluation", "value": "谢安石对万石必败的判断成为问答中的被评对象。", "assertion_status": "reported", "modality": "reported", "review_status": "reviewed", "evidence_ids": ["evidence-sc1-05-fangzheng-055-main"]}
+      ],
+      "title_mentions": [
+        {"title_mention_id": "m1", "surface": "桓公", "entity_type": "person", "entity_id": null, "candidate_entity_ids": ["person-008"], "resolution_status": "ambiguous", "semantic_role": "reference_title", "review_status": "reviewed", "evidence_ids": ["evidence-sc1-05-fangzheng-055-main", "evidence-sc1-05-fangzheng-055-annotation-001"]},
+        {"title_mention_id": "m2", "surface": "桓子野", "entity_type": "person", "entity_id": null, "candidate_entity_ids": [], "resolution_status": "unresolved", "semantic_role": "courtesy_name", "review_status": "reviewed", "evidence_ids": ["evidence-sc1-05-fangzheng-055-main", "evidence-sc1-05-fangzheng-055-annotation-001"]}
+      ],
+      "uncertainties": [
+        {"uncertainty_id": "u1", "uncertainty_type": "identity", "scope": "桓公、桓子野", "description": "标题及字的文字表面明确，人物端点仍保留审阅歧义。", "status": "unresolved", "review_status": "reviewed", "evidence_ids": ["evidence-sc1-05-fangzheng-055-main", "evidence-sc1-05-fangzheng-055-annotation-001"]},
+        {"uncertainty_id": "u2", "uncertainty_type": "comparative", "scope": "万石", "description": "万石的评价只作为正文中的讨论对象，不转换成事实性人物状态。", "status": "bounded", "review_status": "reviewed", "evidence_ids": ["evidence-sc1-05-fangzheng-055-main"]}
+      ],
+      "review_notes": ["评价语境不制造桓氏与谢安的 canonical 关系；未解析标题仍可作为 Gold 表面。"]
+    },
+    {
+      "story_id": "06-yaliang-017",
+      "selection_categories": ["multi_episode", "retrospective_reported", "ambiguous_title", "liu_dependent_interpretation", "temporal_ambiguity"],
+      "selection_reason": "庾太尉子女与温太真的前后叙述，含注释中的年龄/遇害与苏峻背景，适合检验回溯和注释依赖。",
+      "episodes": [
+        {"episode_id": "e1", "episode_kind": "single_episode", "summary": "庾太尉的仪容和幼子气质在正文中被观察，温太真亦在相关叙述中出现。", "presence_scope": "story_scene", "assertion_status": "attested", "evidence_ids": ["evidence-sc1-06-yaliang-017-main"]},
+        {"episode_id": "e2", "episode_kind": "retrospective", "summary": "刘注补充庾会年龄与苏峻时遇害的背景。", "presence_scope": "annotation_context", "assertion_status": "reported", "evidence_ids": ["evidence-sc1-06-yaliang-017-annotation-001", "evidence-sc1-06-yaliang-017-annotation-002"]}
+      ],
+      "participant_states": [
+        {"state_id": "p1", "episode_id": "e1", "person_id": "person-010", "surface": "庾太尉、亮", "role": "present", "presence_status": "in_scene", "resolution_status": "resolved", "evidence_ids": ["evidence-sc1-06-yaliang-017-main"], "review_note": "庾太尉沿用已有庾亮解析。"},
+        {"state_id": "p2", "episode_id": "e1", "person_id": "person-013", "surface": "温太真", "role": "referenced", "presence_status": "mentioned", "resolution_status": "resolved", "evidence_ids": ["evidence-sc1-06-yaliang-017-main"], "review_note": "温太真表面完整解析为温嶠。"},
+        {"state_id": "p3", "episode_id": "e2", "person_id": "person-017", "surface": "蘇峻", "role": "reported_subject", "presence_status": "reported", "resolution_status": "resolved", "evidence_ids": ["evidence-sc1-06-yaliang-017-annotation-002"], "review_note": "苏峻只作为注释的后续时间背景。"}
+      ],
+      "temporal_relations": [
+        {"temporal_relation_id": "t1", "relation_type": "after", "from_episode_id": "e2", "to_episode_id": "e1", "anchor_surface": "後、蘇峻時", "precision": "relative", "expression": "注释把遇害置于正文幼年/早期叙述之后的苏峻时背景，未转为年份。", "evidence_ids": ["evidence-sc1-06-yaliang-017-main", "evidence-sc1-06-yaliang-017-annotation-002"]}
+      ],
+      "person_states": [
+        {"state_id": "s1", "person_id": "person-010", "state_kind": "office_context", "value": "正文以“太尉”称庾亮。", "assertion_status": "attested", "modality": "none", "review_status": "reviewed", "evidence_ids": ["evidence-sc1-06-yaliang-017-main"]},
+        {"state_id": "s2", "person_id": "person-017", "state_kind": "reported_outcome", "value": "刘注在苏峻时背景中使用“遇害”描述后续命运。", "assertion_status": "reported", "modality": "reported", "review_status": "reviewed", "evidence_ids": ["evidence-sc1-06-yaliang-017-annotation-002"]}
+      ],
+      "title_mentions": [
+        {"title_mention_id": "m1", "surface": "庾太尉", "entity_type": "person", "entity_id": "person-010", "candidate_entity_ids": [], "resolution_status": "resolved", "semantic_role": "office_title", "review_status": "reviewed", "evidence_ids": ["evidence-sc1-06-yaliang-017-main"]},
+        {"title_mention_id": "m2", "surface": "温太真", "entity_type": "person", "entity_id": "person-013", "candidate_entity_ids": [], "resolution_status": "resolved", "semantic_role": "courtesy_name", "review_status": "reviewed", "evidence_ids": ["evidence-sc1-06-yaliang-017-main"]}
+      ],
+      "uncertainties": [
+        {"uncertainty_id": "u1", "uncertainty_type": "temporal", "scope": "episode:e1→e2", "description": "前后关系可读，但刘注的相对时间不提供精确年月。", "status": "bounded", "review_status": "reviewed", "evidence_ids": ["evidence-sc1-06-yaliang-017-main", "evidence-sc1-06-yaliang-017-annotation-002"]},
+        {"uncertainty_id": "u2", "uncertainty_type": "participant_scope", "scope": "person-017", "description": "苏峻是注释背景中的叙述对象，不是正文场景参与者。", "status": "bounded", "review_status": "reviewed", "evidence_ids": ["evidence-sc1-06-yaliang-017-annotation-002"]}
+      ],
+      "review_notes": ["“十九”等注释数字没有被转成场景日期或年龄答案；仅保留回溯语义。"]
+    },
+    {
+      "story_id": "06-yaliang-027",
+      "selection_categories": ["multi_episode", "presence_reference", "ambiguous_title", "temporal_ambiguity"],
+      "selection_reason": "桓宣武与郗超夜议、次晨召谢安王坦之，事件顺序清楚而具体政治时间未定。",
+      "episodes": [
+        {"episode_id": "e1", "episode_kind": "contextual_event", "summary": "桓宣武与郗超夜间议定芟夷朝臣的条牒。", "presence_scope": "story_scene", "assertion_status": "attested", "evidence_ids": ["evidence-sc1-06-yaliang-027-main"]},
+        {"episode_id": "e2", "episode_kind": "reported_event", "summary": "次晨呼谢安、王坦之入内示牒，郗超仍在帐内。", "presence_scope": "story_scene", "assertion_status": "attested", "evidence_ids": ["evidence-sc1-06-yaliang-027-main"]}
+      ],
+      "participant_states": [
+        {"state_id": "p1", "episode_id": "e1", "person_id": "person-008", "surface": "桓宣武", "role": "actor", "presence_status": "in_scene", "resolution_status": "resolved", "evidence_ids": ["evidence-sc1-06-yaliang-027-main"], "review_note": "桓温的已有称号解析用于本故事表面。"},
+        {"state_id": "p2", "episode_id": "e2", "person_id": "person-006", "surface": "謝安", "role": "referenced", "presence_status": "in_scene", "resolution_status": "resolved", "evidence_ids": ["evidence-sc1-06-yaliang-027-main"], "review_note": "正文明确被召入。"},
+        {"state_id": "p3", "episode_id": "e2", "person_id": null, "candidate_person_ids": [], "surface": "王坦之", "role": "referenced", "presence_status": "in_scene", "resolution_status": "unresolved", "evidence_ids": ["evidence-sc1-06-yaliang-027-main"], "review_note": "入内人物的表面清楚，canonical Person 端点未在本 Gold 新建。"}
+      ],
+      "temporal_relations": [
+        {"temporal_relation_id": "t1", "relation_type": "sequence", "from_episode_id": "e1", "to_episode_id": "e2", "anchor_surface": "其夜、明晨", "precision": "relative", "expression": "夜议先于次晨召见。", "evidence_ids": ["evidence-sc1-06-yaliang-027-main"]}
+      ],
+      "person_states": [],
+      "title_mentions": [
+        {"title_mention_id": "m1", "surface": "桓宣武", "entity_type": "person", "entity_id": "person-008", "candidate_entity_ids": [], "resolution_status": "resolved", "semantic_role": "reference_title", "review_status": "reviewed", "evidence_ids": ["evidence-sc1-06-yaliang-027-main"]}
+      ],
+      "uncertainties": [
+        {"uncertainty_id": "u1", "uncertainty_type": "identity", "scope": "王坦之", "description": "正文的表面和场景位置明确，但不创建未有的 canonical Person。", "status": "unresolved", "review_status": "reviewed", "evidence_ids": ["evidence-sc1-06-yaliang-027-main"]},
+        {"uncertainty_id": "u2", "uncertainty_type": "temporal", "scope": "record", "description": "“其夜、明晨”提供顺序而不是绝对日期。", "status": "bounded", "review_status": "reviewed", "evidence_ids": ["evidence-sc1-06-yaliang-027-main"]}
+      ],
+      "review_notes": ["夜议与次晨召见分成两个 episode；不从共同场景自动建立人物关系。"]
+    },
+    {
+      "story_id": "06-yaliang-029",
+      "selection_categories": ["multi_episode", "retrospective_reported", "presence_reference", "ambiguous_title", "liu_dependent_interpretation", "event_context"],
+      "selection_reason": "桓温伏甲设馔与新亭会见的正文场景，叠加简文帝晏驾后的刘注背景，具有明确的现场/回溯分层。",
+      "episodes": [
+        {"episode_id": "e1", "episode_kind": "retrospective", "summary": "刘注以简文帝晏驾后的背景说明桓温依诏行事的政治语境。", "presence_scope": "annotation_context", "assertion_status": "contextual", "evidence_ids": ["evidence-sc1-06-yaliang-029-annotation-002"]},
+        {"episode_id": "e2", "episode_kind": "contextual_event", "summary": "桓公伏甲设馔延朝士，欲诛谢安王坦之，随后在新亭相见。", "presence_scope": "story_scene", "assertion_status": "attested", "evidence_ids": ["evidence-sc1-06-yaliang-029-main"]}
+      ],
+      "participant_states": [
+        {"state_id": "p1", "episode_id": "e2", "person_id": "person-008", "surface": "桓公、桓温", "role": "actor", "presence_status": "in_scene", "resolution_status": "resolved", "evidence_ids": ["evidence-sc1-06-yaliang-029-main", "evidence-sc1-06-yaliang-029-annotation-002"], "review_note": "正文行动与注释称号均可归于现有桓温。"},
+        {"state_id": "p2", "episode_id": "e2", "person_id": "person-006", "surface": "謝安", "role": "actor", "presence_status": "in_scene", "resolution_status": "resolved", "evidence_ids": ["evidence-sc1-06-yaliang-029-main"], "review_note": "正文明确被延请并应对。"},
+        {"state_id": "p3", "episode_id": "e2", "person_id": null, "candidate_person_ids": [], "surface": "王坦之", "role": "referenced", "presence_status": "in_scene", "resolution_status": "unresolved", "evidence_ids": ["evidence-sc1-06-yaliang-029-main"], "review_note": "保留在场表面，不创建新 Person。"}
+      ],
+      "temporal_relations": [
+        {"temporal_relation_id": "t1", "relation_type": "after", "from_episode_id": "e2", "to_episode_id": "e1", "anchor_surface": "簡文帝晏駕後", "precision": "relative", "expression": "注释把正文行动置于简文帝晏驾之后的相对背景。", "evidence_ids": ["evidence-sc1-06-yaliang-029-annotation-002"]}
+      ],
+      "person_states": [
+        {"state_id": "s1", "person_id": "person-008", "state_kind": "action_context", "value": "正文记桓温伏甲设馔并欲诛谢安、王坦之。", "assertion_status": "attested", "modality": "none", "review_status": "reviewed", "evidence_ids": ["evidence-sc1-06-yaliang-029-main"]},
+        {"state_id": "s2", "person_id": "person-006", "state_kind": "evaluation", "value": "正文以神意不变描写谢安的应对状态。", "assertion_status": "attested", "modality": "none", "review_status": "reviewed", "evidence_ids": ["evidence-sc1-06-yaliang-029-main"]}
+      ],
+      "title_mentions": [
+        {"title_mention_id": "m1", "surface": "桓公", "entity_type": "person", "entity_id": "person-008", "candidate_entity_ids": [], "resolution_status": "resolved", "semantic_role": "reference_title", "review_status": "reviewed", "evidence_ids": ["evidence-sc1-06-yaliang-029-main"]},
+        {"title_mention_id": "m2", "surface": "文度", "entity_type": "person", "entity_id": null, "candidate_entity_ids": [], "resolution_status": "unresolved", "semantic_role": "courtesy_name", "review_status": "reviewed", "evidence_ids": ["evidence-sc1-06-yaliang-029-main"]}
+      ],
+      "uncertainties": [
+        {"uncertainty_id": "u1", "uncertainty_type": "temporal", "scope": "episode:e1→e2", "description": "晏驾后是相对政治锚点，不推导年份或任期。", "status": "bounded", "review_status": "reviewed", "evidence_ids": ["evidence-sc1-06-yaliang-029-annotation-002"]},
+        {"uncertainty_id": "u2", "uncertainty_type": "participant_scope", "scope": "王坦之", "description": "王坦之由正文提及但未有本 Gold 可用 canonical Person 端点。", "status": "unresolved", "review_status": "reviewed", "evidence_ids": ["evidence-sc1-06-yaliang-029-main"]}
+      ],
+      "review_notes": ["简文帝晏驾只作为注释提供的相对背景；不把共同危机语境投影为 direct relation。"]
+    },
+    {
+      "story_id": "08-shangyu-077",
+      "selection_categories": ["simple_single_episode", "identity_ambiguity", "temporal_ambiguity", "presence_reference", "liu_dependent_interpretation"],
+      "selection_reason": "王右军与刘尹谈谢安，王右军的故事局部身份仍需保留候选，注释提供东山与会稽背景但不作为故事日期。",
+      "episodes": [
+        {"episode_id": "e1", "episode_kind": "comparative_exchange", "summary": "王右军与刘尹谈论谢安是否应为天下所共同推重。", "presence_scope": "story_scene", "assertion_status": "attested", "evidence_ids": ["evidence-sc1-08-shangyu-077-main"]}
+      ],
+      "participant_states": [
+        {"state_id": "p1", "episode_id": "e1", "person_id": null, "candidate_person_ids": ["person-001"], "surface": "王右軍", "role": "speaker", "presence_status": "in_scene", "resolution_status": "ambiguous", "evidence_ids": ["evidence-sc1-08-shangyu-077-main"], "review_note": "王右军有王羲之候选，但本 Gold 保持故事局部身份待审。"},
+        {"state_id": "p2", "episode_id": "e1", "person_id": "person-006", "surface": "安石", "role": "comparand", "presence_status": "mentioned", "resolution_status": "resolved", "evidence_ids": ["evidence-sc1-08-shangyu-077-main"] , "review_note": "安石已有谢安解析。"}
+      ],
+      "temporal_relations": [
+        {"temporal_relation_id": "t1", "relation_type": "during", "from_episode_id": "e1", "to_episode_id": null, "anchor_surface": "东山志立", "precision": "relative", "expression": "正文将“东山志立”作为谢安的行动条件，而非故事年代。", "evidence_ids": ["evidence-sc1-08-shangyu-077-main"]}
+      ],
+      "person_states": [
+        {"state_id": "s1", "person_id": "person-006", "state_kind": "evaluation", "value": "刘尹谈到谢安若立东山志，天下当共推之。", "assertion_status": "reported", "modality": "reported", "review_status": "reviewed", "evidence_ids": ["evidence-sc1-08-shangyu-077-main"]}
+      ],
+      "title_mentions": [
+        {"title_mention_id": "m1", "surface": "王右軍", "entity_type": "person", "entity_id": null, "candidate_entity_ids": ["person-001"], "resolution_status": "ambiguous", "semantic_role": "office_title", "review_status": "reviewed", "evidence_ids": ["evidence-sc1-08-shangyu-077-main"]},
+        {"title_mention_id": "m2", "surface": "安石", "entity_type": "person", "entity_id": "person-006", "candidate_entity_ids": [], "resolution_status": "resolved", "semantic_role": "courtesy_name", "review_status": "reviewed", "evidence_ids": ["evidence-sc1-08-shangyu-077-main"]}
+      ],
+      "uncertainties": [
+        {"uncertainty_id": "u1", "uncertainty_type": "identity", "scope": "王右軍", "description": "故事局部保留王羲之候选，但不以称号 alone 结束身份审查。", "status": "unresolved", "review_status": "reviewed", "evidence_ids": ["evidence-sc1-08-shangyu-077-main"]},
+        {"uncertainty_id": "u2", "uncertainty_type": "temporal", "scope": "record", "description": "注释的六七年等背景数字不复制为本故事日期；本记录仅保留相对志向语境。", "status": "unresolved", "review_status": "reviewed", "evidence_ids": ["evidence-sc1-08-shangyu-077-main", "evidence-sc1-08-shangyu-077-annotation-001"]}
+      ],
+      "review_notes": ["王右军的完整 observed surface 保留；不把派生 Story 年代或注释时间跨度写入语义答案。"]
+    },
+    {
+      "story_id": "09-pinzao-017",
+      "selection_categories": ["simple_single_episode", "ambiguous_title", "comparative_evaluation", "event_context"],
+      "selection_reason": "明帝问谢鲲与庾亮孰优，答案明确区分朝堂才能与丘壑自守，包含 ruler title 和比较状态。",
+      "episodes": [
+        {"episode_id": "e1", "episode_kind": "comparative_exchange", "summary": "明帝询问谢鲲自谓与庾亮相比如何，谢鲲分别回答二人的长处。", "presence_scope": "story_scene", "assertion_status": "attested", "evidence_ids": ["evidence-sc1-09-pinzao-017-main"]}
+      ],
+      "participant_states": [
+        {"state_id": "p1", "episode_id": "e1", "person_id": "person-023", "surface": "謝鯤", "role": "speaker", "presence_status": "in_scene", "resolution_status": "resolved", "evidence_ids": ["evidence-sc1-09-pinzao-017-main"] , "review_note": "正文直接回答。"},
+        {"state_id": "p2", "episode_id": "e1", "person_id": "person-010", "surface": "庾亮", "role": "comparand", "presence_status": "mentioned", "resolution_status": "resolved", "evidence_ids": ["evidence-sc1-09-pinzao-017-main"] , "review_note": "庾亮是比较对象，不据此标为回答现场行动者。"},
+        {"state_id": "p3", "episode_id": "e1", "person_id": null, "candidate_person_ids": [], "surface": "明帝", "role": "speaker", "presence_status": "in_scene", "resolution_status": "unresolved", "evidence_ids": ["evidence-sc1-09-pinzao-017-main"] , "review_note": "participant_states 只承载 Person 端点；既有 ruler 解析在 title_mentions 中记录。"}
+      ],
+      "temporal_relations": [
+        {"temporal_relation_id": "t1", "relation_type": "unknown", "from_episode_id": "e1", "to_episode_id": null, "anchor_surface": null, "precision": "unknown", "expression": "明帝问答场景的绝对年代未在本 Gold 中求解。", "evidence_ids": ["evidence-sc1-09-pinzao-017-main"]}
+      ],
+      "person_states": [
+        {"state_id": "s1", "person_id": "person-023", "state_kind": "evaluation", "value": "谢鲲自陈在丘壑方面胜过庾亮，而朝堂礼法不如庾亮。", "assertion_status": "comparative", "modality": "none", "review_status": "reviewed", "evidence_ids": ["evidence-sc1-09-pinzao-017-main"]},
+        {"state_id": "s2", "person_id": "person-010", "state_kind": "evaluation", "value": "庾亮在谢鲲的回答中代表端委庙堂、使百僚准则的一端。", "assertion_status": "comparative", "modality": "reported", "review_status": "reviewed", "evidence_ids": ["evidence-sc1-09-pinzao-017-main"]}
+      ],
+      "title_mentions": [
+        {"title_mention_id": "m1", "surface": "明帝", "entity_type": "ruler", "entity_id": "ruler-jin-mingdi", "candidate_entity_ids": [], "resolution_status": "resolved", "semantic_role": "ruler_title", "review_status": "reviewed", "evidence_ids": ["evidence-sc1-09-pinzao-017-main"]}
+      ],
+      "uncertainties": [
+        {"uncertainty_id": "u1", "uncertainty_type": "comparative", "scope": "person-023/person-010", "description": "回答是人物自评与比较，不转换成全局人物排名。", "status": "bounded", "review_status": "reviewed", "evidence_ids": ["evidence-sc1-09-pinzao-017-main"]},
+        {"uncertainty_id": "u2", "uncertainty_type": "temporal", "scope": "record", "description": "ruler 在场并不提供可直接采用的 Story 年份。", "status": "unresolved", "review_status": "reviewed", "evidence_ids": ["evidence-sc1-09-pinzao-017-main"]}
+      ],
+      "review_notes": ["比较评价只留在 situation；不生成历史重要性排序。"]
+    },
+    {
+      "story_id": "19-xianyuan-026",
+      "selection_categories": ["simple_single_episode", "family_context", "presence_reference", "ambiguous_title"],
+      "selection_reason": "王凝之与谢夫人的婚姻/家世语境清晰，太傅的安慰和逸少之子为家庭关系标注提供证据。",
+      "episodes": [
+        {"episode_id": "e1", "episode_kind": "contextual_event", "summary": "谢夫人归王氏后不满王凝之，太傅以王郎为逸少之子等语安慰。", "presence_scope": "story_scene", "assertion_status": "attested", "evidence_ids": ["evidence-sc1-19-xianyuan-026-main"]}
+      ],
+      "participant_states": [
+        {"state_id": "p1", "episode_id": "e1", "person_id": "person-004", "surface": "王凝之", "role": "actor", "presence_status": "in_scene", "resolution_status": "resolved", "evidence_ids": ["evidence-sc1-19-xianyuan-026-main"] , "review_note": "正文为婚姻关系中的人物。"},
+        {"state_id": "p2", "episode_id": "e1", "person_id": "person-005", "surface": "謝夫人", "role": "actor", "presence_status": "in_scene", "resolution_status": "resolved", "evidence_ids": ["evidence-sc1-19-xianyuan-026-main"] , "review_note": "沿用谢道韫的已有身份。"},
+        {"state_id": "p3", "episode_id": "e1", "person_id": "person-006", "surface": "太傅", "role": "speaker", "presence_status": "in_scene", "resolution_status": "resolved", "evidence_ids": ["evidence-sc1-19-xianyuan-026-main"] , "review_note": "故事语境中的太傅沿用谢安身份解析。"},
+        {"state_id": "p4", "episode_id": "e1", "person_id": "person-001", "surface": "逸少", "role": "referenced", "presence_status": "mentioned", "resolution_status": "resolved", "evidence_ids": ["evidence-sc1-19-xianyuan-026-main"] , "review_note": "逸少是王凝之父的家庭端点。"}
+      ],
+      "temporal_relations": [
+        {"temporal_relation_id": "t1", "relation_type": "sequence", "from_episode_id": "e1", "to_episode_id": null, "anchor_surface": "既往、既還", "precision": "relative", "expression": "谢夫人往王氏及王凝之还谢家构成叙述顺序，年代未详。", "evidence_ids": ["evidence-sc1-19-xianyuan-026-main"]}
+      ],
+      "person_states": [
+        {"state_id": "s1", "person_id": "person-004", "state_kind": "family_context", "value": "正文称王凝之为逸少之子。", "assertion_status": "attested", "modality": "none", "review_status": "reviewed", "evidence_ids": ["evidence-sc1-19-xianyuan-026-main"]},
+        {"state_id": "s2", "person_id": "person-005", "state_kind": "family_context", "value": "谢夫人与王凝之处于婚姻家庭语境。", "assertion_status": "attested", "modality": "none", "review_status": "reviewed", "evidence_ids": ["evidence-sc1-19-xianyuan-026-main"]}
+      ],
+      "title_mentions": [
+        {"title_mention_id": "m1", "surface": "太傅", "entity_type": "person", "entity_id": "person-006", "candidate_entity_ids": [], "resolution_status": "resolved", "semantic_role": "office_title", "review_status": "reviewed", "evidence_ids": ["evidence-sc1-19-xianyuan-026-main"]},
+        {"title_mention_id": "m2", "surface": "逸少", "entity_type": "person", "entity_id": "person-001", "candidate_entity_ids": [], "resolution_status": "resolved", "semantic_role": "courtesy_name", "review_status": "reviewed", "evidence_ids": ["evidence-sc1-19-xianyuan-026-main"]}
+      ],
+      "uncertainties": [
+        {"uncertainty_id": "u1", "uncertainty_type": "temporal", "scope": "record", "description": "婚姻叙述的先后清楚，绝对年代未给出。", "status": "unresolved", "review_status": "reviewed", "evidence_ids": ["evidence-sc1-19-xianyuan-026-main"]},
+        {"uncertainty_id": "u2", "uncertainty_type": "title", "scope": "太傅", "description": "本记录依据既有局部解析使用谢安端点，不将太傅作为全局无上下文映射规则。", "status": "bounded", "review_status": "reviewed", "evidence_ids": ["evidence-sc1-19-xianyuan-026-main"]}
+      ],
+      "review_notes": ["家庭语境只记录正文显式的婚姻与父子表述，不根据姓氏或社会接近性扩展亲属。"]
+    },
+    {
+      "story_id": "27-jiajue-008",
+      "selection_categories": ["multi_episode", "retrospective_reported", "presence_reference", "event_context", "liu_dependent_interpretation"],
+      "selection_reason": "陶侃赴苏峻之难、庾亮欲奔/欲会的现场与注释政治背景并置，适合事件背景和人物行动分层。",
+      "episodes": [
+        {"episode_id": "e1", "episode_kind": "contextual_event", "summary": "陶公自上流来赴苏峻之难，提出诛庾公以谢苏峻。", "presence_scope": "story_scene", "assertion_status": "attested", "evidence_ids": ["evidence-sc1-27-jiajue-008-main"]},
+        {"episode_id": "e2", "episode_kind": "comparative_exchange", "summary": "庾亮在奔窜与会见之间权衡，形成故事中的行动选择。", "presence_scope": "story_scene", "assertion_status": "attested", "evidence_ids": ["evidence-sc1-27-jiajue-008-main"]},
+        {"episode_id": "e3", "episode_kind": "retrospective", "summary": "刘注补充苏峻近甸拥兵、庾亮辅政等背景。", "presence_scope": "annotation_context", "assertion_status": "contextual", "evidence_ids": ["evidence-sc1-27-jiajue-008-annotation-001"]}
+      ],
+      "participant_states": [
+        {"state_id": "p1", "episode_id": "e1", "person_id": "person-064", "surface": "陶公", "role": "actor", "presence_status": "in_scene", "resolution_status": "resolved", "evidence_ids": ["evidence-sc1-27-jiajue-008-main"], "review_note": "已有陶侃身份解析。"},
+        {"state_id": "p2", "episode_id": "e2", "person_id": "person-010", "surface": "庾公、庾亮", "role": "actor", "presence_status": "in_scene", "resolution_status": "resolved", "evidence_ids": ["evidence-sc1-27-jiajue-008-main"], "review_note": "已有庾亮身份解析。"},
+        {"state_id": "p3", "episode_id": "e1", "person_id": "person-017", "surface": "蘇峻", "role": "referenced", "presence_status": "mentioned", "resolution_status": "resolved", "evidence_ids": ["evidence-sc1-27-jiajue-008-main"], "review_note": "苏峻是事件背景与行动目标，不标为会面现场在场者。"},
+        {"state_id": "p4", "episode_id": "e3", "person_id": "person-003", "surface": "王導", "role": "annotation_only", "presence_status": "contextual", "resolution_status": "resolved", "evidence_ids": ["evidence-sc1-27-jiajue-008-annotation-001"], "review_note": "王导只在注释背景中出现。"}
+      ],
+      "temporal_relations": [
+        {"temporal_relation_id": "t1", "relation_type": "relative_to_event", "from_episode_id": "e1", "to_episode_id": null, "anchor_surface": "蘇峻之難", "precision": "broad_period", "expression": "正文明确把行动置于苏峻之难的事件背景中。", "evidence_ids": ["evidence-sc1-27-jiajue-008-main"]},
+        {"temporal_relation_id": "t2", "relation_type": "retrospective", "from_episode_id": "e3", "to_episode_id": "e1", "anchor_surface": "晉陽秋曰", "precision": "relative", "expression": "注释回看事件背景，未提供本故事的精确日期。", "evidence_ids": ["evidence-sc1-27-jiajue-008-annotation-001"]}
+      ],
+      "person_states": [
+        {"state_id": "s1", "person_id": "person-064", "state_kind": "action_context", "value": "陶侃自上流来赴苏峻之难。", "assertion_status": "attested", "modality": "none", "review_status": "reviewed", "evidence_ids": ["evidence-sc1-27-jiajue-008-main"]},
+        {"state_id": "s2", "person_id": "person-010", "state_kind": "action_context", "value": "庾亮在奔窜与会见之间作出故事内的选择。", "assertion_status": "attested", "modality": "none", "review_status": "reviewed", "evidence_ids": ["evidence-sc1-27-jiajue-008-main"]}
+      ],
+      "title_mentions": [
+        {"title_mention_id": "m1", "surface": "陶公", "entity_type": "person", "entity_id": "person-064", "candidate_entity_ids": [], "resolution_status": "resolved", "semantic_role": "reference_title", "review_status": "reviewed", "evidence_ids": ["evidence-sc1-27-jiajue-008-main"]},
+        {"title_mention_id": "m2", "surface": "庾公", "entity_type": "person", "entity_id": "person-010", "candidate_entity_ids": [], "resolution_status": "resolved", "semantic_role": "reference_title", "review_status": "reviewed", "evidence_ids": ["evidence-sc1-27-jiajue-008-main"]}
+      ],
+      "uncertainties": [
+        {"uncertainty_id": "u1", "uncertainty_type": "temporal", "scope": "record", "description": "苏峻之难提供宽泛事件锚点，但不在本 Gold 中求解具体年份。", "status": "bounded", "review_status": "reviewed", "evidence_ids": ["evidence-sc1-27-jiajue-008-main"]},
+        {"uncertainty_id": "u2", "uncertainty_type": "participant_scope", "scope": "person-003", "description": "王导仅为注释背景人物，不列为正文场景硬参与者。", "status": "bounded", "review_status": "reviewed", "evidence_ids": ["evidence-sc1-27-jiajue-008-annotation-001"]}
+      ],
+      "review_notes": ["事件背景与正文行动分开；注释引用保持来源层，不创建新的政治关系。"]
+    }
+  ]
+}

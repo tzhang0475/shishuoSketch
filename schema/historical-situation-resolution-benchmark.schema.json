@@ -1,0 +1,261 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://shishuo.example/schema/historical-situation-resolution-benchmark-v0.json",
+  "title": "ShishuoSketch HistoricalSituation Ambiguity & Evidence Resolution Benchmark v0",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "stage",
+    "schema_version",
+    "scope",
+    "records",
+    "counts",
+    "source_hashes",
+    "policy"
+  ],
+  "properties": {
+    "schema": {"const": "historical-situation-resolution-benchmark"},
+    "stage": {"const": "HR0.1"},
+    "schema_version": {"const": "v0"},
+    "scope": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["story_count", "selected_story_ids", "pass_a", "pass_b"],
+      "properties": {
+        "story_count": {"type": "integer", "minimum": 1},
+        "selected_story_ids": {
+          "type": "array",
+          "items": {"type": "string", "minLength": 1},
+          "uniqueItems": true
+        },
+        "pass_a": {"const": "shishuo_only"},
+        "pass_b": {"const": "evidence_augmented"}
+      }
+    },
+    "records": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/record"}
+    },
+    "counts": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "source_hashes": {
+      "type": "object",
+      "additionalProperties": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+    },
+    "policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "canonical_data_write_back",
+        "hr0_input_immutable",
+        "resolution_requires_explicit_evidence",
+        "unresolved_preserved",
+        "llm",
+        "rag",
+        "temporal_solver"
+      ],
+      "properties": {
+        "canonical_data_write_back": {"const": false},
+        "hr0_input_immutable": {"const": true},
+        "resolution_requires_explicit_evidence": {"const": true},
+        "unresolved_preserved": {"const": true},
+        "llm": {"const": false},
+        "rag": {"const": false},
+        "temporal_solver": {"const": false}
+      }
+    }
+  },
+  "$defs": {
+    "evidence_id": {"type": "string", "minLength": 1},
+    "evidence_ref": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": ["evidence_id", "source_layer", "source_id", "evidence_type", "review_status", "assertion_status", "locator"],
+      "properties": {
+        "evidence_id": {"$ref": "#/$defs/evidence_id"},
+        "source_layer": {"type": "string", "minLength": 1},
+        "source_id": {"type": "string", "minLength": 1},
+        "evidence_type": {"type": "string", "minLength": 1},
+        "review_status": {"type": "string", "minLength": 1},
+        "assertion_status": {"type": "string", "minLength": 1},
+        "locator": {"type": "object"}
+      }
+    },
+    "view_item": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": ["availability", "evidence_ids"],
+      "properties": {
+        "availability": {
+          "type": "string",
+          "enum": [
+            "available_from_shishuo",
+            "partially_available",
+            "requires_external_evidence",
+            "evidence_resolved"
+          ]
+        },
+        "evidence_ids": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/evidence_id"},
+          "uniqueItems": true
+        }
+      }
+    },
+    "view": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "view_name",
+        "evidence_ids",
+        "case_ids",
+        "episodes",
+        "participant_states",
+        "temporal_relations",
+        "person_states",
+        "title_mentions",
+        "uncertainties"
+      ],
+      "properties": {
+        "view_name": {"enum": ["shishuo_only", "evidence_resolved"]},
+        "evidence_ids": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/evidence_id"},
+          "uniqueItems": true
+        },
+        "case_ids": {
+          "type": "array",
+          "items": {"type": "string", "minLength": 1},
+          "uniqueItems": true
+        },
+        "episodes": {"type": "array", "items": {"$ref": "#/$defs/view_item"}},
+        "participant_states": {"type": "array", "items": {"$ref": "#/$defs/view_item"}},
+        "temporal_relations": {"type": "array", "items": {"$ref": "#/$defs/view_item"}},
+        "person_states": {"type": "array", "items": {"$ref": "#/$defs/view_item"}},
+        "title_mentions": {"type": "array", "items": {"$ref": "#/$defs/view_item"}},
+        "uncertainties": {"type": "array", "items": {"$ref": "#/$defs/view_item"}}
+      }
+    },
+    "resolution_dependency": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "uncertainty_id",
+        "dimension",
+        "shishuo_status",
+        "resolved_status",
+        "resolved_value",
+        "requires",
+        "evidence_refs"
+      ],
+      "properties": {
+        "uncertainty_id": {"type": "string", "minLength": 1},
+        "dimension": {
+          "type": "string",
+          "enum": [
+            "identity",
+            "title_identity",
+            "title_temporality",
+            "participant_presence_reference",
+            "episode_boundary",
+            "temporal_relation",
+            "retrospective_reference",
+            "person_state_resolution",
+            "comparative_evaluation",
+            "evidence_layer",
+            "location"
+          ]
+        },
+        "shishuo_status": {"enum": ["clear", "limited", "ambiguous", "unavailable"]},
+        "resolved_status": {
+          "enum": ["resolved", "refined", "unresolved", "unresolved_even_with_available_evidence"]
+        },
+        "resolved_value": {"type": ["object", "array", "string", "number", "boolean", "null"]},
+        "requires": {
+          "type": "array",
+          "items": {"enum": ["liu_annotation", "jianshu", "external_source", "canonical_fact"]},
+          "uniqueItems": true
+        },
+        "evidence_refs": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/evidence_id"},
+          "minItems": 1,
+          "uniqueItems": true
+        }
+      }
+    },
+    "resolution_case": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "case_id",
+        "story_id",
+        "situation_id",
+        "review_status",
+        "review_note",
+        "shishuo_evidence_refs",
+        "resolution_evidence_refs",
+        "resolution_dependency"
+      ],
+      "properties": {
+        "case_id": {"type": "string", "minLength": 1},
+        "story_id": {"type": "string", "minLength": 1},
+        "situation_id": {"type": "string", "minLength": 1},
+        "review_status": {"const": "reviewed"},
+        "review_note": {"type": "string", "minLength": 1},
+        "shishuo_evidence_refs": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/evidence_id"},
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "resolution_evidence_refs": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/evidence_id"},
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "affected_items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["field", "item_id", "shishuo_only_action"],
+            "properties": {
+              "field": {"enum": ["episodes", "participant_states", "temporal_relations", "person_states", "title_mentions", "uncertainties"]},
+              "item_id": {"type": "string", "minLength": 1},
+              "shishuo_only_action": {"enum": ["preserve_context", "mask_endpoint"]}
+            }
+          },
+          "uniqueItems": true
+        },
+        "resolution_dependency": {"$ref": "#/$defs/resolution_dependency"}
+      }
+    },
+    "record": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "situation_id",
+        "story_id",
+        "evidence_refs",
+        "case_ids",
+        "shishuo_only_gold",
+        "evidence_resolved_gold",
+        "resolution_cases"
+      ],
+      "properties": {
+        "situation_id": {"type": "string", "minLength": 1},
+        "story_id": {"type": "string", "minLength": 1},
+        "evidence_refs": {"type": "array", "items": {"$ref": "#/$defs/evidence_ref"}, "minItems": 1},
+        "case_ids": {"type": "array", "items": {"type": "string", "minLength": 1}, "uniqueItems": true},
+        "shishuo_only_gold": {"$ref": "#/$defs/view"},
+        "evidence_resolved_gold": {"$ref": "#/$defs/view"},
+        "resolution_cases": {"type": "array", "items": {"$ref": "#/$defs/resolution_case"}, "minItems": 1}
+      }
+    }
+  }
+}
