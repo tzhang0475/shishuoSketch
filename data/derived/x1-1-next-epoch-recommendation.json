@@ -1,0 +1,55 @@
+{
+  "schema": 1,
+  "stage": "x1-1-next-epoch-recommendation",
+  "selection_epoch": "X1.1",
+  "research_only": true,
+  "recommended_x1_2_ratios": {
+    "graph_guided": 0.3,
+    "coverage_guided": 0.4,
+    "stratified_random": 0.15,
+    "counter_model": 0.15
+  },
+  "ratio_reason": "Coverage-guided review produced materially more observed review-queue/structural units per selected Story in this epoch.",
+  "long_term_floors": {
+    "stratified_random_minimum": 0.1,
+    "counter_model_minimum": 0.1,
+    "floor_policy": "Retain both independent discovery channels unless a documented source/qualification constraint prevents it."
+  },
+  "priorities": {
+    "historical_layers": [
+      "family",
+      "service_political",
+      "clan",
+      "event",
+      "geographic",
+      "office",
+      "temporal"
+    ],
+    "primary_action": "review_candidate_ADD_FACT_targets_before_broad_story_materialization",
+    "story_expansion": "selective_and_source_gated",
+    "person_expansion": "defer_unless_identity_review_finds_a_secure_non_production_bridge",
+    "ontology": "review_recurrent_counter_model_surfaces_before_any_HG1_1_ontology_change"
+  },
+  "selection_channel_findings": {
+    "graph_guided": "Use for bridge and heterogeneous-connectivity opportunities, with concentration monitoring.",
+    "coverage_guided": "Use for office/event/temporal/family deficits identified from source-backed gaps.",
+    "stratified_random": "Maintain as an independent exploration/control channel.",
+    "counter_model": "Maintain as an explicit model-blind-spot channel; do not replace it with global low-score sampling."
+  },
+  "basis": {
+    "information_gain_sha256": "8ad0b9d9bfe09da7697eadcb67d61cd92a0eb5acbb246e507b84791e22d9ceee",
+    "bias_audit_sha256": "6be6d527fb7a48d424be0376f3e268ed1396427e350767aff3cde7c4b3d0455c",
+    "ontology_gap_sha256": "929fb8b85c5adb0f2d5fdccc2294004c16e4c2de37ac731269598c4d516ab727"
+  },
+  "limitations": [
+    "One 20-Story epoch cannot establish causal superiority of a selection strategy.",
+    "Accepted X1.1 Stories are a research overlay until downstream participant/punctuation/fact projection is reviewed.",
+    "Model disagreement is treated as a review signal, never as evidence against qualified history."
+  ],
+  "do_not_execute": [
+    "X1.2",
+    "HG1.1",
+    "ML1.1",
+    "ER2"
+  ]
+}

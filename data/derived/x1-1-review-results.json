@@ -1,0 +1,2839 @@
+{
+  "schema": 1,
+  "stage": "x1-1-review-results",
+  "selection_epoch": "X1.1",
+  "research_only": true,
+  "source_selection_manifest": "data/derived/x1-1-selection-manifest.json",
+  "source_selection_manifest_sha256": "2e39981d667102322508a32aad8bd118c88604e8c6cf320d7ff67775dcee019e",
+  "source_candidate_pool": "data/derived/x1-1-candidate-pool.json",
+  "source_candidate_pool_sha256": "cafd9b7445b2f604c8c27692e8a7ba9e0eca87d030ffad7eb052b3a3683dc41d",
+  "review_policy": {
+    "accepted_scope": "frozen X1.1 research overlay only",
+    "canonical_facts_added": false,
+    "canonical_stories_added": false,
+    "canonical_persons_added": false,
+    "participant_projection_added": false,
+    "person_story_does_not_imply_participation": true,
+    "model_output_does_not_create_facts": true,
+    "missing_edges_are_not_negative_facts": true
+  },
+  "counts": {
+    "selected_story_count": 20,
+    "accepted_story_overlay_count": 20,
+    "rejected_story_count": 0,
+    "canonical_story_addition_count": 0,
+    "canonical_fact_addition_count": 0,
+    "canonical_person_addition_count": 0,
+    "candidate_fact_action_count": 88,
+    "person_identity_review_candidate_count": 8,
+    "action_counts": {
+      "ADD_FACT": 88,
+      "ADD_PERSON": 8,
+      "ADD_STORY": 20
+    },
+    "action_status_counts": {
+      "ADD_FACT:candidate_review_queue": 88,
+      "ADD_PERSON:identity_review_required": 8,
+      "ADD_STORY:accepted_for_x1_1_review_overlay": 20
+    }
+  },
+  "records": [
+    {
+      "story_id": "02-yanyu-025",
+      "selection_epoch": "X1.1",
+      "selection_mode": "graph_guided",
+      "selection_rank": 1,
+      "selection_status": "selected",
+      "review_status": "candidate",
+      "selection_manifest_frozen": true,
+      "source": {
+        "path": "content/processed/shishuo/entries/02-yanyu/entry-025.md",
+        "sha256": "423dd0049189c2efe5c0039caf9eba10fa93639c82d3b607a6c272d60e78eeb0",
+        "main_text_length": 98,
+        "annotation_count": 7,
+        "source_witness_status": "present"
+      },
+      "production_person_ids": [
+        "person-020",
+        "person-044",
+        "person-060"
+      ],
+      "production_person_names": [
+        "王戎",
+        "樂廣",
+        "虞預"
+      ],
+      "evidence_ids": [
+        "evidence-p3b-wave-2-1be2542d1a8306c8201ae0b8",
+        "evidence-p3b-wave-2-4fd0211ad2e465b6bef49bec",
+        "evidence-p3b-wave-2-735d985e3b9e329fd2d59174",
+        "evidence-p3b-wave-2-983c57c3a9075514d12e9937",
+        "evidence-p3b-wave-2-a84a9520b6a2f7f45496ec7c",
+        "evidence-w3-person-4fd0211ad2e465b6bef49bec",
+        "evidence-w4-person-a84a9520b6a2f7f45496ec7c"
+      ],
+      "link_ids": [
+        "person-story-person-020-02-yanyu-025",
+        "person-story-person-044-02-yanyu-025",
+        "person-story-person-060-02-yanyu-025"
+      ],
+      "identity_review": {
+        "resolved_production_person_path": true,
+        "non_production_or_unresolved_surfaces": [],
+        "person_story_is_not_participation": true,
+        "scene_participant_status": "deferred_to_hg1_1_participant_review"
+      },
+      "review_checks": {
+        "canonical_source_exists": true,
+        "canonical_source_hash_present": true,
+        "outside_current_production_scope": true,
+        "punctuation_not_disputed": true,
+        "local_evidence_traceable": true,
+        "identity_route_reviewable": true,
+        "reader_publication_ready": false,
+        "participant_projection_materialized": false
+      },
+      "enrichment_priorities": {
+        "high": [
+          "family"
+        ],
+        "medium": [
+          "clan",
+          "geographic",
+          "service_political"
+        ]
+      },
+      "actions": [
+        {
+          "action": "ADD_FACT",
+          "status": "candidate_review_queue",
+          "accepted": false,
+          "targets": [
+            {
+              "layer": "clan",
+              "candidate_fact_types": [
+                "ClanMembership"
+              ],
+              "status": "review_queue",
+              "accepted": false,
+              "review_status": "candidate",
+              "reason": "The Story exposes a coverage opportunity, but X1.1 does not promote a semantic fact from a keyword or PersonStory link alone."
+            },
+            {
+              "layer": "family",
+              "candidate_fact_types": [
+                "KinshipFact",
+                "MarriageUnion"
+              ],
+              "status": "review_queue",
+              "accepted": false,
+              "review_status": "candidate",
+              "reason": "The Story exposes a coverage opportunity, but X1.1 does not promote a semantic fact from a keyword or PersonStory link alone."
+            },
+            {
+              "layer": "geographic",
+              "candidate_fact_types": [
+                "LocationFact",
+                "PersonActivity"
+              ],
+              "status": "review_queue",
+              "accepted": false,
+              "review_status": "candidate",
+              "reason": "The Story exposes a coverage opportunity, but X1.1 does not promote a semantic fact from a keyword or PersonStory link alone."
+            },
+            {
+              "layer": "service_political",
+              "candidate_fact_types": [
+                "ServicePoliticalFact",
+                "RelationTemporalContext"
+              ],
+              "status": "review_queue",
+              "accepted": false,
+              "review_status": "candidate",
+              "reason": "The Story exposes a coverage opportunity, but X1.1 does not promote a semantic fact from a keyword or PersonStory link alone."
+            }
+          ],
+          "evidence_ids": [
+            "evidence-p3b-wave-2-1be2542d1a8306c8201ae0b8",
+            "evidence-p3b-wave-2-4fd0211ad2e465b6bef49bec",
+            "evidence-p3b-wave-2-735d985e3b9e329fd2d59174",
+            "evidence-p3b-wave-2-983c57c3a9075514d12e9937",
+            "evidence-p3b-wave-2-a84a9520b6a2f7f45496ec7c",
+            "evidence-w3-person-4fd0211ad2e465b6bef49bec",
+            "evidence-w4-person-a84a9520b6a2f7f45496ec7c"
+          ],
+          "reason": "Coverage-guided review target; requires source-level semantic review before canonicalization."
+        },
+        {
+          "action": "ADD_STORY",
+          "status": "accepted_for_x1_1_review_overlay",
+          "accepted": true,
+          "canonical_production_materialization": "deferred_to_HG1_1",
+          "reason": "Canonical source and stable identity/evidence route passed X1.1 screening; reader publication and participant projection remain separate gates."
+        }
+      ],
+      "screening_status": "completed",
+      "acceptance_status": "accepted_for_x1_1_review_overlay",
+      "canonical_status": "not_materialized"
+    },
+    {
+      "story_id": "02-yanyu-102",
+      "selection_epoch": "X1.1",
+      "selection_mode": "graph_guided",
+      "selection_rank": 2,
+      "selection_status": "selected",
+      "review_status": "candidate",
+      "selection_manifest_frozen": true,
+      "source": {
+        "path": "content/processed/shishuo/entries/02-yanyu/entry-102.md",
+        "sha256": "c81cae2d2bd64e510b95dc50dd78c0d376140ffee9224e329b5010830e41db67",
+        "main_text_length": 84,
+        "annotation_count": 7,
+        "source_witness_status": "present"
+      },
+      "production_person_ids": [
+        "person-003",
+        "person-008",
+        "person-013",
+        "person-017"
+      ],
+      "production_person_names": [
+        "王導",
+        "桓溫",
+        "温嶠",
+        "蘇峻"
+      ],
+      "evidence_ids": [
+        "evidence-p3b-wave-1-08618cd2a0ad0dcf1c3185b9",
+        "evidence-p3b-wave-1-1a0fba663e9f13728b3c904f",
+        "evidence-p3b-wave-1-eb4a32296e21815b0b86a321",
+        "evidence-p3b-wave-2-08618cd2a0ad0dcf1c3185b9",
+        "evidence-p3b-wave-2-1a0fba663e9f13728b3c904f",
+        "evidence-p3b-wave-2-1dd5525e2d1c6225817db8ca",
+        "evidence-p3b-wave-2-eb4a32296e21815b0b86a321"
+      ],
+      "link_ids": [
+        "person-story-person-003-02-yanyu-102",
+        "person-story-person-008-02-yanyu-102",
+        "person-story-person-013-02-yanyu-102",
+        "person-story-person-017-02-yanyu-102"
+      ],
+      "identity_review": {
+        "resolved_production_person_path": true,
+        "non_production_or_unresolved_surfaces": [],
+        "person_story_is_not_participation": true,
+        "scene_participant_status": "deferred_to_hg1_1_participant_review"
+      },
+      "review_checks": {
+        "canonical_source_exists": true,
+        "canonical_source_hash_present": true,
+        "outside_current_production_scope": true,
+        "punctuation_not_disputed": true,
+        "local_evidence_traceable": true,
+        "identity_route_reviewable": true,
+        "reader_publication_ready": false,
+        "participant_projection_materialized": false
+      },
+      "enrichment_priorities": {
+        "high": [],
+        "medium": []
+      },
+      "actions": [
+        {
+          "action": "ADD_STORY",
+          "status": "accepted_for_x1_1_review_overlay",
+          "accepted": true,
+          "canonical_production_materialization": "deferred_to_HG1_1",
+          "reason": "Canonical source and stable identity/evidence route passed X1.1 screening; reader publication and participant projection remain separate gates."
+        }
+      ],
+      "screening_status": "completed",
+      "acceptance_status": "accepted_for_x1_1_review_overlay",
+      "canonical_status": "not_materialized"
+    },
+    {
+      "story_id": "03-zhengshi-011",
+      "selection_epoch": "X1.1",
+      "selection_mode": "graph_guided",
+      "selection_rank": 3,
+      "selection_status": "selected",
+      "review_status": "candidate",
+      "selection_manifest_frozen": true,
+      "source": {
+        "path": "content/processed/shishuo/entries/03-zhengshi/entry-011.md",
+        "sha256": "db9aee641c38f39e812b9a09eae81cfeeaff1b28b7c32c35cc1611f84f9b7013",
+        "main_text_length": 120,
+        "annotation_count": 12,
+        "source_witness_status": "present"
+      },
+      "production_person_ids": [
+        "person-017",
+        "person-052",
+        "person-058"
+      ],
+      "production_person_names": [
+        "蘇峻",
+        "祖約",
+        "鍾雅"
+      ],
+      "evidence_ids": [
+        "evidence-p3b-wave-1-b594617cc759804229c73d78",
+        "evidence-p3b-wave-1-bd2db9e367e4d9b93c1ad9a0",
+        "evidence-p3b-wave-1-cae5cd3486eb7a302327e59c",
+        "evidence-p3b-wave-2-0e9401ce2c1ac12ef1301adc",
+        "evidence-p3b-wave-2-1a8504611cb8a888d429b638",
+        "evidence-p3b-wave-2-1dcee0b4e33c0624cba1437b",
+        "evidence-p3b-wave-2-22c7f478341dc12b8e887a46",
+        "evidence-p3b-wave-2-24e9e6f79dd87b84141de780",
+        "evidence-p3b-wave-2-8bd6feed059bcf9fac037d79",
+        "evidence-p3b-wave-2-b4c025523b2ea278d49087f4",
+        "evidence-p3b-wave-2-b594617cc759804229c73d78",
+        "evidence-p3b-wave-2-bd2db9e367e4d9b93c1ad9a0",
+        "evidence-p3b-wave-2-cae5cd3486eb7a302327e59c",
+        "evidence-w4-person-0e9401ce2c1ac12ef1301adc",
+        "evidence-w4-person-22c7f478341dc12b8e887a46",
+        "evidence-w4-person-8bd6feed059bcf9fac037d79"
+      ],
+      "link_ids": [
+        "person-story-person-017-03-zhengshi-011",
+        "person-story-person-052-03-zhengshi-011",
+        "person-story-person-058-03-zhengshi-011"
+      ],
+      "identity_review": {
+        "resolved_production_person_path": true,
+        "non_production_or_unresolved_surfaces": [],
+        "person_story_is_not_participation": true,
+        "scene_participant_status": "deferred_to_hg1_1_participant_review"
+      },
+      "review_checks": {
+        "canonical_source_exists": true,
+        "canonical_source_hash_present": true,
+        "outside_current_production_scope": true,
+        "punctuation_not_disputed": true,
+        "local_evidence_traceable": true,
+        "identity_route_reviewable": true,
+        "reader_publication_ready": false,
+        "participant_projection_materialized": false
+      },
+      "enrichment_priorities": {
+        "high": [
+          "family"
+        ],
+        "medium": []
+      },
+      "actions": [
+        {
+          "action": "ADD_FACT",
+          "status": "candidate_review_queue",
+          "accepted": false,
+          "targets": [
+            {
+              "layer": "family",
+              "candidate_fact_types": [
+                "KinshipFact",
+                "MarriageUnion"
+              ],
+              "status": "review_queue",
+              "accepted": false,
+              "review_status": "candidate",
+              "reason": "The Story exposes a coverage opportunity, but X1.1 does not promote a semantic fact from a keyword or PersonStory link alone."
+            }
+          ],
+          "evidence_ids": [
+            "evidence-p3b-wave-1-b594617cc759804229c73d78",
+            "evidence-p3b-wave-1-bd2db9e367e4d9b93c1ad9a0",
+            "evidence-p3b-wave-1-cae5cd3486eb7a302327e59c",
+            "evidence-p3b-wave-2-0e9401ce2c1ac12ef1301adc",
+            "evidence-p3b-wave-2-1a8504611cb8a888d429b638",
+            "evidence-p3b-wave-2-1dcee0b4e33c0624cba1437b",
+            "evidence-p3b-wave-2-22c7f478341dc12b8e887a46",
+            "evidence-p3b-wave-2-24e9e6f79dd87b84141de780",
+            "evidence-p3b-wave-2-8bd6feed059bcf9fac037d79",
+            "evidence-p3b-wave-2-b4c025523b2ea278d49087f4",
+            "evidence-p3b-wave-2-b594617cc759804229c73d78",
+            "evidence-p3b-wave-2-bd2db9e367e4d9b93c1ad9a0",
+            "evidence-p3b-wave-2-cae5cd3486eb7a302327e59c",
+            "evidence-w4-person-0e9401ce2c1ac12ef1301adc",
+            "evidence-w4-person-22c7f478341dc12b8e887a46",
+            "evidence-w4-person-8bd6feed059bcf9fac037d79"
+          ],
+          "reason": "Coverage-guided review target; requires source-level semantic review before canonicalization."
+        },
+        {
+          "action": "ADD_STORY",
+          "status": "accepted_for_x1_1_review_overlay",
+          "accepted": true,
+          "canonical_production_materialization": "deferred_to_HG1_1",
+          "reason": "Canonical source and stable identity/evidence route passed X1.1 screening; reader publication and participant projection remain separate gates."
+        }
+      ],
+      "screening_status": "completed",
+      "acceptance_status": "accepted_for_x1_1_review_overlay",
+      "canonical_status": "not_materialized"
+    },
+    {
+      "story_id": "05-fangzheng-039",
+      "selection_epoch": "X1.1",
+      "selection_mode": "graph_guided",
+      "selection_rank": 4,
+      "selection_status": "selected",
+      "review_status": "candidate",
+      "selection_manifest_frozen": true,
+      "source": {
+        "path": "content/processed/shishuo/entries/05-fangzheng/entry-039.md",
+        "sha256": "01c8c036977356e424e9669bc01df99ffe643f820cb29e52b868b53352178700",
+        "main_text_length": 86,
+        "annotation_count": 5,
+        "source_witness_status": "present"
+      },
+      "production_person_ids": [
+        "person-011",
+        "person-054"
+      ],
+      "production_person_names": [
+        "王敦",
+        "王隱"
+      ],
+      "evidence_ids": [
+        "evidence-p3b-wave-1-5379b338ecc0fcdb8029af5b",
+        "evidence-p3b-wave-2-5379b338ecc0fcdb8029af5b",
+        "evidence-p3b-wave-2-a5e2b4e93d85848cd7331dc0",
+        "evidence-w4-person-a5e2b4e93d85848cd7331dc0"
+      ],
+      "link_ids": [
+        "person-story-person-011-05-fangzheng-039",
+        "person-story-person-054-05-fangzheng-039"
+      ],
+      "identity_review": {
+        "resolved_production_person_path": true,
+        "non_production_or_unresolved_surfaces": [
+          "王丞相",
+          "王公"
+        ],
+        "person_story_is_not_participation": true,
+        "scene_participant_status": "deferred_to_hg1_1_participant_review"
+      },
+      "review_checks": {
+        "canonical_source_exists": true,
+        "canonical_source_hash_present": true,
+        "outside_current_production_scope": true,
+        "punctuation_not_disputed": true,
+        "local_evidence_traceable": true,
+        "identity_route_reviewable": true,
+        "reader_publication_ready": false,
+        "participant_projection_materialized": false
+      },
+      "enrichment_priorities": {
+        "high": [
+          "family"
+        ],
+        "medium": [
+          "service_political"
+        ]
+      },
+      "actions": [
+        {
+          "action": "ADD_FACT",
+          "status": "candidate_review_queue",
+          "accepted": false,
+          "targets": [
+            {
+              "layer": "family",
+              "candidate_fact_types": [
+                "KinshipFact",
+                "MarriageUnion"
+              ],
+              "status": "review_queue",
+              "accepted": false,
+              "review_status": "candidate",
+              "reason": "The Story exposes a coverage opportunity, but X1.1 does not promote a semantic fact from a keyword or PersonStory link alone."
+            },
+            {
+              "layer": "service_political",
+              "candidate_fact_types": [
+                "ServicePoliticalFact",
+                "RelationTemporalContext"
+              ],
+              "status": "review_queue",
+              "accepted": false,
+              "review_status": "candidate",
+              "reason": "The Story exposes a coverage opportunity, but X1.1 does not promote a semantic fact from a keyword or PersonStory link alone."
+            }
+          ],
+          "evidence_ids": [
+            "evidence-p3b-wave-1-5379b338ecc0fcdb8029af5b",
+            "evidence-p3b-wave-2-5379b338ecc0fcdb8029af5b",
+            "evidence-p3b-wave-2-a5e2b4e93d85848cd7331dc0",
+            "evidence-w4-person-a5e2b4e93d85848cd7331dc0"
+          ],
+          "reason": "Coverage-guided review target; requires source-level semantic review before canonicalization."
+        },
+        {
+          "action": "ADD_STORY",
+          "status": "accepted_for_x1_1_review_overlay",
+          "accepted": true,
+          "canonical_production_materialization": "deferred_to_HG1_1",
+          "reason": "Canonical source and stable identity/evidence route passed X1.1 screening; reader publication and participant projection remain separate gates."
+        },
+        {
+          "action": "ADD_PERSON",
+          "status": "identity_review_required",
+          "accepted": false,
+          "surfaces": [
+            "王丞相",
+            "王公"
+          ],
+          "related_production_person_ids": [
+            "person-011",
+            "person-054"
+          ],
+          "reason": "Non-production or unresolved surfaces are recorded for identity review only; no new Person is allocated in X1.1."
+        }
+      ],
+      "screening_status": "completed",
+      "acceptance_status": "accepted_for_x1_1_review_overlay",
+      "canonical_status": "not_materialized"
+    },
+    {
+      "story_id": "07-shijian-016",
+      "selection_epoch": "X1.1",
+      "selection_mode": "graph_guided",
+      "selection_rank": 5,
+      "selection_status": "selected",
+      "review_status": "candidate",
+      "selection_manifest_frozen": true,
+      "source": {
+        "path": "content/processed/shishuo/entries/07-shijian/entry-016.md",
+        "sha256": "e9f4d9d81bb16ab7926a2d0565f5a9c3c1ea0fed51c8a2dabe9b73dec2830a69",
+        "main_text_length": 86,
+        "annotation_count": 8,
+        "source_witness_status": "present"
+      },
+      "production_person_ids": [
+        "person-008",
+        "person-010",
+        "person-059",
+        "person-065"
+      ],
+      "production_person_names": [
+        "桓溫",
+        "庾亮",
+        "孫盛",
+        "孟嘉"
+      ],
+      "evidence_ids": [
+        "evidence-p3b-wave-1-3d593850abbfc2dfc5cd9524",
+        "evidence-p3b-wave-1-4fbfb7bdaa279fb70a760121",
+        "evidence-p3b-wave-2-02d3f966665e16d9e913d90c",
+        "evidence-p3b-wave-2-17579d3579c4a94f7235e2ab",
+        "evidence-p3b-wave-2-3d593850abbfc2dfc5cd9524",
+        "evidence-p3b-wave-2-4a29f83528be155506a9380b",
+        "evidence-p3b-wave-2-4fbfb7bdaa279fb70a760121",
+        "evidence-p3b-wave-2-86e1ebb3001f7d7bcbb98933",
+        "evidence-p3b-wave-2-b63efc9270ddeb80813865a5",
+        "evidence-w4-person-02d3f966665e16d9e913d90c",
+        "evidence-w4-person-17579d3579c4a94f7235e2ab",
+        "evidence-w4-person-4a29f83528be155506a9380b",
+        "evidence-w4-person-86e1ebb3001f7d7bcbb98933",
+        "evidence-w4-person-b63efc9270ddeb80813865a5"
+      ],
+      "link_ids": [
+        "person-story-person-008-07-shijian-016",
+        "person-story-person-010-07-shijian-016",
+        "person-story-person-059-07-shijian-016",
+        "person-story-person-065-07-shijian-016"
+      ],
+      "identity_review": {
+        "resolved_production_person_path": true,
+        "non_production_or_unresolved_surfaces": [],
+        "person_story_is_not_participation": true,
+        "scene_participant_status": "deferred_to_hg1_1_participant_review"
+      },
+      "review_checks": {
+        "canonical_source_exists": true,
+        "canonical_source_hash_present": true,
+        "outside_current_production_scope": true,
+        "punctuation_not_disputed": true,
+        "local_evidence_traceable": true,
+        "identity_route_reviewable": true,
+        "reader_publication_ready": false,
+        "participant_projection_materialized": false
+      },
+      "enrichment_priorities": {
+        "high": [
+          "family"
+        ],
+        "medium": [
+          "clan"
+        ]
+      },
+      "actions": [
+        {
+          "action": "ADD_FACT",
+          "status": "candidate_review_queue",
+          "accepted": false,
+          "targets": [
+            {
+              "layer": "clan",
+              "candidate_fact_types": [
+                "ClanMembership"
+              ],
+              "status": "review_queue",
+              "accepted": false,
+              "review_status": "candidate",
+              "reason": "The Story exposes a coverage opportunity, but X1.1 does not promote a semantic fact from a keyword or PersonStory link alone."
+            },
+            {
+              "layer": "family",
+              "candidate_fact_types": [
+                "KinshipFact",
+                "MarriageUnion"
+              ],
+              "status": "review_queue",
+              "accepted": false,
+              "review_status": "candidate",
+              "reason": "The Story exposes a coverage opportunity, but X1.1 does not promote a semantic fact from a keyword or PersonStory link alone."
+            }
+          ],
+          "evidence_ids": [
+            "evidence-p3b-wave-1-3d593850abbfc2dfc5cd9524",
+            "evidence-p3b-wave-1-4fbfb7bdaa279fb70a760121",
+            "evidence-p3b-wave-2-02d3f966665e16d9e913d90c",
+            "evidence-p3b-wave-2-17579d3579c4a94f7235e2ab",
+            "evidence-p3b-wave-2-3d593850abbfc2dfc5cd9524",
+            "evidence-p3b-wave-2-4a29f83528be155506a9380b",
+            "evidence-p3b-wave-2-4fbfb7bdaa279fb70a760121",
+            "evidence-p3b-wave-2-86e1ebb3001f7d7bcbb98933",
+            "evidence-p3b-wave-2-b63efc9270ddeb80813865a5",
+            "evidence-w4-person-02d3f966665e16d9e913d90c",
+            "evidence-w4-person-17579d3579c4a94f7235e2ab",
+            "evidence-w4-person-4a29f83528be155506a9380b",
+            "evidence-w4-person-86e1ebb3001f7d7bcbb98933",
+            "evidence-w4-person-b63efc9270ddeb80813865a5"
+          ],
+          "reason": "Coverage-guided review target; requires source-level semantic review before canonicalization."
+        },
+        {
+          "action": "ADD_STORY",
+          "status": "accepted_for_x1_1_review_overlay",
+          "accepted": true,
+          "canonical_production_materialization": "deferred_to_HG1_1",
+          "reason": "Canonical source and stable identity/evidence route passed X1.1 screening; reader publication and participant projection remain separate gates."
+        }
+      ],
+      "screening_status": "completed",
+      "acceptance_status": "accepted_for_x1_1_review_overlay",
+      "canonical_status": "not_materialized"
+    },
+    {
+      "story_id": "10-guizhen-017",
+      "selection_epoch": "X1.1",
+      "selection_mode": "graph_guided",
+      "selection_rank": 6,
+      "selection_status": "selected",
+      "review_status": "candidate",
+      "selection_manifest_frozen": true,
+      "source": {
+        "path": "content/processed/shishuo/entries/10-guizhen/entry-017.md",
+        "sha256": "df4b500d67aa944afe2624d1555622924a8e96637d55fe88b623cd5edcc01870",
+        "main_text_length": 50,
+        "annotation_count": 2,
+        "source_witness_status": "present"
+      },
+      "production_person_ids": [
+        "person-002",
+        "person-003",
+        "person-010"
+      ],
+      "production_person_names": [
+        "郗鑒",
+        "王導",
+        "庾亮"
+      ],
+      "evidence_ids": [
+        "evidence-p3b-wave-1-4f3738440aa2c47f0c5a4e17",
+        "evidence-p3b-wave-2-4f3738440aa2c47f0c5a4e17",
+        "evidence-p3b-wave-2-c7e89c99fdd68432762eb355",
+        "evidence-p3b-wave-2-fb96b7fe3108d77ac5d56631"
+      ],
+      "link_ids": [
+        "person-story-person-002-10-guizhen-017",
+        "person-story-person-003-10-guizhen-017",
+        "person-story-person-010-10-guizhen-017"
+      ],
+      "identity_review": {
+        "resolved_production_person_path": true,
+        "non_production_or_unresolved_surfaces": [],
+        "person_story_is_not_participation": true,
+        "scene_participant_status": "deferred_to_hg1_1_participant_review"
+      },
+      "review_checks": {
+        "canonical_source_exists": true,
+        "canonical_source_hash_present": true,
+        "outside_current_production_scope": true,
+        "punctuation_not_disputed": true,
+        "local_evidence_traceable": true,
+        "identity_route_reviewable": true,
+        "reader_publication_ready": false,
+        "participant_projection_materialized": false
+      },
+      "enrichment_priorities": {
+        "high": [],
+        "medium": []
+      },
+      "actions": [
+        {
+          "action": "ADD_STORY",
+          "status": "accepted_for_x1_1_review_overlay",
+          "accepted": true,
+          "canonical_production_materialization": "deferred_to_HG1_1",
+          "reason": "Canonical source and stable identity/evidence route passed X1.1 screening; reader publication and participant projection remain separate gates."
+        }
+      ],
+      "screening_status": "completed",
+      "acceptance_status": "accepted_for_x1_1_review_overlay",
+      "canonical_status": "not_materialized"
+    },
+    {
+      "story_id": "23-rendan-032",
+      "selection_epoch": "X1.1",
+      "selection_mode": "graph_guided",
+      "selection_rank": 7,
+      "selection_status": "selected",
+      "review_status": "candidate",
+      "selection_manifest_frozen": true,
+      "source": {
+        "path": "content/processed/shishuo/entries/23-rendan/entry-032.md",
+        "sha256": "b033becbaa34b0255c6c869dead2f5190a3f7361586c4a35369b510e289344ca",
+        "main_text_length": 44,
+        "annotation_count": 4,
+        "source_witness_status": "present"
+      },
+      "production_person_ids": [
+        "person-003",
+        "person-014",
+        "person-018"
+      ],
+      "production_person_names": [
+        "王導",
+        "王濛",
+        "謝尚"
+      ],
+      "evidence_ids": [
+        "evidence-p3b-wave-1-8905044d2d0aeb0f37ec0606",
+        "evidence-p3b-wave-2-6d8b3ef58de6200f5aab4aae",
+        "evidence-p3b-wave-2-8905044d2d0aeb0f37ec0606",
+        "evidence-p3b-wave-2-a82e4222963c8621e77a1e76",
+        "evidence-p3b-wave-2-bfbb263d3143ffb50a6f739a"
+      ],
+      "link_ids": [
+        "person-story-person-003-23-rendan-032",
+        "person-story-person-014-23-rendan-032",
+        "person-story-person-018-23-rendan-032"
+      ],
+      "identity_review": {
+        "resolved_production_person_path": true,
+        "non_production_or_unresolved_surfaces": [
+          "王公"
+        ],
+        "person_story_is_not_participation": true,
+        "scene_participant_status": "deferred_to_hg1_1_participant_review"
+      },
+      "review_checks": {
+        "canonical_source_exists": true,
+        "canonical_source_hash_present": true,
+        "outside_current_production_scope": true,
+        "punctuation_not_disputed": true,
+        "local_evidence_traceable": true,
+        "identity_route_reviewable": true,
+        "reader_publication_ready": false,
+        "participant_projection_materialized": false
+      },
+      "enrichment_priorities": {
+        "high": [],
+        "medium": [
+          "service_political"
+        ]
+      },
+      "actions": [
+        {
+          "action": "ADD_FACT",
+          "status": "candidate_review_queue",
+          "accepted": false,
+          "targets": [
+            {
+              "layer": "service_political",
+              "candidate_fact_types": [
+                "ServicePoliticalFact",
+                "RelationTemporalContext"
+              ],
+              "status": "review_queue",
+              "accepted": false,
+              "review_status": "candidate",
+              "reason": "The Story exposes a coverage opportunity, but X1.1 does not promote a semantic fact from a keyword or PersonStory link alone."
+            }
+          ],
+          "evidence_ids": [
+            "evidence-p3b-wave-1-8905044d2d0aeb0f37ec0606",
+            "evidence-p3b-wave-2-6d8b3ef58de6200f5aab4aae",
+            "evidence-p3b-wave-2-8905044d2d0aeb0f37ec0606",
+            "evidence-p3b-wave-2-a82e4222963c8621e77a1e76",
+            "evidence-p3b-wave-2-bfbb263d3143ffb50a6f739a"
+          ],
+          "reason": "Coverage-guided review target; requires source-level semantic review before canonicalization."
+        },
+        {
+          "action": "ADD_STORY",
+          "status": "accepted_for_x1_1_review_overlay",
+          "accepted": true,
+          "canonical_production_materialization": "deferred_to_HG1_1",
+          "reason": "Canonical source and stable identity/evidence route passed X1.1 screening; reader publication and participant projection remain separate gates."
+        },
+        {
+          "action": "ADD_PERSON",
+          "status": "identity_review_required",
+          "accepted": false,
+          "surfaces": [
+            "王公"
+          ],
+          "related_production_person_ids": [
+            "person-003",
+            "person-014",
+            "person-018"
+          ],
+          "reason": "Non-production or unresolved surfaces are recorded for identity review only; no new Person is allocated in X1.1."
+        }
+      ],
+      "screening_status": "completed",
+      "acceptance_status": "accepted_for_x1_1_review_overlay",
+      "canonical_status": "not_materialized"
+    },
+    {
+      "story_id": "26-qingdi-004",
+      "selection_epoch": "X1.1",
+      "selection_mode": "graph_guided",
+      "selection_rank": 8,
+      "selection_status": "selected",
+      "review_status": "candidate",
+      "selection_manifest_frozen": true,
+      "source": {
+        "path": "content/processed/shishuo/entries/26-qingdi/entry-004.md",
+        "sha256": "86c8b54a41e203529a3f5ee5930a75c4357e8b788ef2e8300a87685df1ae7326",
+        "main_text_length": 33,
+        "annotation_count": 6,
+        "source_witness_status": "present"
+      },
+      "production_person_ids": [
+        "person-003",
+        "person-010",
+        "person-054"
+      ],
+      "production_person_names": [
+        "王導",
+        "庾亮",
+        "王隱"
+      ],
+      "evidence_ids": [
+        "evidence-p3b-wave-1-0fffee7bce68216f6fbe83bb",
+        "evidence-p3b-wave-2-0fffee7bce68216f6fbe83bb",
+        "evidence-p3b-wave-2-3dff7a27bb467d540204c749",
+        "evidence-p3b-wave-2-955aab221ac09c0ac3feef16",
+        "evidence-p3b-wave-2-f0164c0ef3628714e4e6401c",
+        "evidence-w4-person-3dff7a27bb467d540204c749"
+      ],
+      "link_ids": [
+        "person-story-person-003-26-qingdi-004",
+        "person-story-person-010-26-qingdi-004",
+        "person-story-person-054-26-qingdi-004"
+      ],
+      "identity_review": {
+        "resolved_production_person_path": true,
+        "non_production_or_unresolved_surfaces": [
+          "王公"
+        ],
+        "person_story_is_not_participation": true,
+        "scene_participant_status": "deferred_to_hg1_1_participant_review"
+      },
+      "review_checks": {
+        "canonical_source_exists": true,
+        "canonical_source_hash_present": true,
+        "outside_current_production_scope": true,
+        "punctuation_not_disputed": true,
+        "local_evidence_traceable": true,
+        "identity_route_reviewable": true,
+        "reader_publication_ready": false,
+        "participant_projection_materialized": false
+      },
+      "enrichment_priorities": {
+        "high": [],
+        "medium": []
+      },
+      "actions": [
+        {
+          "action": "ADD_STORY",
+          "status": "accepted_for_x1_1_review_overlay",
+          "accepted": true,
+          "canonical_production_materialization": "deferred_to_HG1_1",
+          "reason": "Canonical source and stable identity/evidence route passed X1.1 screening; reader publication and participant projection remain separate gates."
+        },
+        {
+          "action": "ADD_PERSON",
+          "status": "identity_review_required",
+          "accepted": false,
+          "surfaces": [
+            "王公"
+          ],
+          "related_production_person_ids": [
+            "person-003",
+            "person-010",
+            "person-054"
+          ],
+          "reason": "Non-production or unresolved surfaces are recorded for identity review only; no new Person is allocated in X1.1."
+        }
+      ],
+      "screening_status": "completed",
+      "acceptance_status": "accepted_for_x1_1_review_overlay",
+      "canonical_status": "not_materialized"
+    },
+    {
+      "story_id": "04-wenxue-080",
+      "selection_epoch": "X1.1",
+      "selection_mode": "coverage_guided",
+      "selection_rank": 1,
+      "selection_status": "selected",
+      "review_status": "candidate",
+      "selection_manifest_frozen": true,
+      "source": {
+        "path": "content/processed/shishuo/entries/04-wenxue/entry-080.md",
+        "sha256": "1e861a10e3e340a2f97671dabb05e02ada09807aba45bcefd2fb81890b09a75e",
+        "main_text_length": 93,
+        "annotation_count": 6,
+        "source_witness_status": "present"
+      },
+      "production_person_ids": [
+        "person-061"
+      ],
+      "production_person_names": [
+        "習鑿齒"
+      ],
+      "evidence_ids": [
+        "evidence-p3b-wave-2-48b6e2e48b0072a0876d9311",
+        "evidence-w4-person-48b6e2e48b0072a0876d9311"
+      ],
+      "link_ids": [
+        "person-story-person-061-04-wenxue-080"
+      ],
+      "identity_review": {
+        "resolved_production_person_path": true,
+        "non_production_or_unresolved_surfaces": [],
+        "person_story_is_not_participation": true,
+        "scene_participant_status": "deferred_to_hg1_1_participant_review"
+      },
+      "review_checks": {
+        "canonical_source_exists": true,
+        "canonical_source_hash_present": true,
+        "outside_current_production_scope": true,
+        "punctuation_not_disputed": true,
+        "local_evidence_traceable": true,
+        "identity_route_reviewable": true,
+        "reader_publication_ready": false,
+        "participant_projection_materialized": false
+      },
+      "enrichment_priorities": {
+        "high": [
+          "event",
+          "family",
+          "office",
+          "temporal"
+        ],
+        "medium": [
+          "clan",
+          "geographic",
+          "service_political"
+        ]
+      },
+      "actions": [
+        {
+          "action": "ADD_FACT",
+          "status": "candidate_review_queue",
+          "accepted": false,
+          "targets": [
+            {
+              "layer": "clan",
+              "candidate_fact_types": [
+                "ClanMembership"
+              ],
+              "status": "review_queue",
+              "accepted": false,
+              "review_status": "candidate",
+              "reason": "The Story exposes a coverage opportunity, but X1.1 does not promote a semantic fact from a keyword or PersonStory link alone."
+            },
+            {
+              "layer": "event",
+              "candidate_fact_types": [
+                "Event",
+                "EventParticipation"
+              ],
+              "status": "review_queue",
+              "accepted": false,
+              "review_status": "candidate",
+              "reason": "The Story exposes a coverage opportunity, but X1.1 does not promote a semantic fact from a keyword or PersonStory link alone."
+            },
+            {
+              "layer": "family",
+              "candidate_fact_types": [
+                "KinshipFact",
+                "MarriageUnion"
+              ],
+              "status": "review_queue",
+              "accepted": false,
+              "review_status": "candidate",
+              "reason": "The Story exposes a coverage opportunity, but X1.1 does not promote a semantic fact from a keyword or PersonStory link alone."
+            },
+            {
+              "layer": "geographic",
+              "candidate_fact_types": [
+                "LocationFact",
+                "PersonActivity"
+              ],
+              "status": "review_queue",
+              "accepted": false,
+              "review_status": "candidate",
+              "reason": "The Story exposes a coverage opportunity, but X1.1 does not promote a semantic fact from a keyword or PersonStory link alone."
+            },
+            {
+              "layer": "office",
+              "candidate_fact_types": [
+                "Office",
+                "OfficeTenure"
+              ],
+              "status": "review_queue",
+              "accepted": false,
+              "review_status": "candidate",
+              "reason": "The Story exposes a coverage opportunity, but X1.1 does not promote a semantic fact from a keyword or PersonStory link alone."
+            },
+            {
+              "layer": "service_political",
+              "candidate_fact_types": [
+                "ServicePoliticalFact",
+                "RelationTemporalContext"
+              ],
+              "status": "review_queue",
+              "accepted": false,
+              "review_status": "candidate",
+              "reason": "The Story exposes a coverage opportunity, but X1.1 does not promote a semantic fact from a keyword or PersonStory link alone."
+            },
+            {
+              "layer": "temporal",
+              "candidate_fact_types": [
+                "StoryTemporalConstraint",
+                "PersonActivityCandidate"
+              ],
+              "status": "review_queue",
+              "accepted": false,
+              "review_status": "candidate",
+              "reason": "The Story exposes a coverage opportunity, but X1.1 does not promote a semantic fact from a keyword or PersonStory link alone."
+            }
+          ],
+          "evidence_ids": [
+            "evidence-p3b-wave-2-48b6e2e48b0072a0876d9311",
+            "evidence-w4-person-48b6e2e48b0072a0876d9311"
+          ],
+          "reason": "Coverage-guided review target; requires source-level semantic review before canonicalization."
+        },
+        {
+          "action": "ADD_STORY",
+          "status": "accepted_for_x1_1_review_overlay",
+          "accepted": true,
+          "canonical_production_materialization": "deferred_to_HG1_1",
+          "reason": "Canonical source and stable identity/evidence route passed X1.1 screening; reader publication and participant projection remain separate gates."
+        }
+      ],
+      "screening_status": "completed",
+      "acceptance_status": "accepted_for_x1_1_review_overlay",
+      "canonical_status": "not_materialized"
+    },
+    {
+      "story_id": "07-shijian-010",
+      "selection_epoch": "X1.1",
+      "selection_mode": "coverage_guided",
+      "selection_rank": 2,
+      "selection_status": "selected",
+      "review_status": "candidate",
+      "selection_manifest_frozen": true,
+      "source": {
+        "path": "content/processed/shishuo/entries/07-shijian/entry-010.md",
+        "sha256": "291ce08879715bd7992e940b1e00c24f2b8070aea34153168aa5ea59e1ac33d6",
+        "main_text_length": 64,
+        "annotation_count": 4,
+        "source_witness_status": "present"
+      },
+      "production_person_ids": [
+        "person-049"
+      ],
+      "production_person_names": [
+        "顧榮"
+      ],
+      "evidence_ids": [
+        "evidence-p3b-wave-2-04215791c385af06480b8845",
+        "evidence-p3b-wave-2-1aa2b741c39645eacdf53c88",
+        "evidence-p3b-wave-2-8c506299bbf775aed956ebba",
+        "evidence-p3b-wave-2-9cc1b789be4699727e6538d5",
+        "evidence-p3b-wave-2-ed43861cd91b78b2e083a025",
+        "evidence-w3-person-1aa2b741c39645eacdf53c88"
+      ],
+      "link_ids": [
+        "person-story-person-049-07-shijian-010"
+      ],
+      "identity_review": {
+        "resolved_production_person_path": true,
+        "non_production_or_unresolved_surfaces": [],
+        "person_story_is_not_participation": true,
+        "scene_participant_status": "deferred_to_hg1_1_participant_review"
+      },
+      "review_checks": {
+        "canonical_source_exists": true,
+        "canonical_source_hash_present": true,
+        "outside_current_production_scope": true,
+        "punctuation_not_disputed": true,
+        "local_evidence_traceable": true,
+        "identity_route_reviewable": true,
+        "reader_publication_ready": false,
+        "participant_projection_materialized": false
+      },
+      "enrichment_priorities": {
+        "high": [
+          "event",
+          "family",
+          "office",
+          "temporal"
+        ],
+        "medium": [
+          "clan",
+          "geographic",
+          "service_political"
+        ]
+      },
+      "actions": [
+        {
+          "action": "ADD_FACT",
+          "status": "candidate_review_queue",
+          "accepted": false,
+          "targets": [
+            {
+              "layer": "clan",
+              "candidate_fact_types": [
+                "ClanMembership"
+              ],
+              "status": "review_queue",
+              "accepted": false,
+              "review_status": "candidate",
+              "reason": "The Story exposes a coverage opportunity, but X1.1 does not promote a semantic fact from a keyword or PersonStory link alone."
+            },
+            {
+              "layer": "event",
+              "candidate_fact_types": [
+                "Event",
+                "EventParticipation"
+              ],
+              "status": "review_queue",
+              "accepted": false,
+              "review_status": "candidate",
+              "reason": "The Story exposes a coverage opportunity, but X1.1 does not promote a semantic fact from a keyword or PersonStory link alone."
+            },
+            {
+              "layer": "family",
+              "candidate_fact_types": [
+                "KinshipFact",
+                "MarriageUnion"
+              ],
+              "status": "review_queue",
+              "accepted": false,
+              "review_status": "candidate",
+              "reason": "The Story exposes a coverage opportunity, but X1.1 does not promote a semantic fact from a keyword or PersonStory link alone."
+            },
+            {
+              "layer": "geographic",
+              "candidate_fact_types": [
+                "LocationFact",
+                "PersonActivity"
+              ],
+              "status": "review_queue",
+              "accepted": false,
+              "review_status": "candidate",
+              "reason": "The Story exposes a coverage opportunity, but X1.1 does not promote a semantic fact from a keyword or PersonStory link alone."
+            },
+            {
+              "layer": "office",
+              "candidate_fact_types": [
+                "Office",
+                "OfficeTenure"
+              ],
+              "status": "review_queue",
+              "accepted": false,
+              "review_status": "candidate",
+              "reason": "The Story exposes a coverage opportunity, but X1.1 does not promote a semantic fact from a keyword or PersonStory link alone."
+            },
+            {
+              "layer": "service_political",
+              "candidate_fact_types": [
+                "ServicePoliticalFact",
+                "RelationTemporalContext"
+              ],
+              "status": "review_queue",
+              "accepted": false,
+              "review_status": "candidate",
+              "reason": "The Story exposes a coverage opportunity, but X1.1 does not promote a semantic fact from a keyword or PersonStory link alone."
+            },
+            {
+              "layer": "temporal",
+              "candidate_fact_types": [
+                "StoryTemporalConstraint",
+                "PersonActivityCandidate"
+              ],
+              "status": "review_queue",
+              "accepted": false,
+              "review_status": "candidate",
+              "reason": "The Story exposes a coverage opportunity, but X1.1 does not promote a semantic fact from a keyword or PersonStory link alone."
+            }
+          ],
+          "evidence_ids": [
+            "evidence-p3b-wave-2-04215791c385af06480b8845",
+            "evidence-p3b-wave-2-1aa2b741c39645eacdf53c88",
+            "evidence-p3b-wave-2-8c506299bbf775aed956ebba",
+            "evidence-p3b-wave-2-9cc1b789be4699727e6538d5",
+            "evidence-p3b-wave-2-ed43861cd91b78b2e083a025",
+            "evidence-w3-person-1aa2b741c39645eacdf53c88"
+          ],
+          "reason": "Coverage-guided review target; requires source-level semantic review before canonicalization."
+        },
+        {
+          "action": "ADD_STORY",
+          "status": "accepted_for_x1_1_review_overlay",
+          "accepted": true,
+          "canonical_production_materialization": "deferred_to_HG1_1",
+          "reason": "Canonical source and stable identity/evidence route passed X1.1 screening; reader publication and participant projection remain separate gates."
+        }
+      ],
+      "screening_status": "completed",
+      "acceptance_status": "accepted_for_x1_1_review_overlay",
+      "canonical_status": "not_materialized"
+    },
+    {
+      "story_id": "10-guizhen-006",
+      "selection_epoch": "X1.1",
+      "selection_mode": "coverage_guided",
+      "selection_rank": 3,
+      "selection_status": "selected",
+      "review_status": "candidate",
+      "selection_manifest_frozen": true,
+      "source": {
+        "path": "content/processed/shishuo/entries/10-guizhen/entry-006.md",
+        "sha256": "2b91ddee83c8a7974a68fa07f2478995fbbc79d7036c756df9960a384e68cc2f",
+        "main_text_length": 103,
+        "annotation_count": 18,
+        "source_witness_status": "present"
+      },
+      "production_person_ids": [
+        "person-039"
+      ],
+      "production_person_names": [
+        "杜預"
+      ],
+      "evidence_ids": [
+        "evidence-p3b-wave-2-046bd8c9c6841f3e219217d6",
+        "evidence-w3-person-046bd8c9c6841f3e219217d6"
+      ],
+      "link_ids": [
+        "person-story-person-039-10-guizhen-006"
+      ],
+      "identity_review": {
+        "resolved_production_person_path": true,
+        "non_production_or_unresolved_surfaces": [],
+        "person_story_is_not_participation": true,
+        "scene_participant_status": "deferred_to_hg1_1_participant_review"
+      },
+      "review_checks": {
+        "canonical_source_exists": true,
+        "canonical_source_hash_present": true,
+        "outside_current_production_scope": true,
+        "punctuation_not_disputed": true,
+        "local_evidence_traceable": true,
+        "identity_route_reviewable": true,
+        "reader_publication_ready": false,
+        "participant_projection_materialized": false
+      },
+      "enrichment_priorities": {
+        "high": [
+          "event",
+          "family",
+          "office",
+          "temporal"
+        ],
+        "medium": [
+          "clan",
+          "geographic",
+          "service_political"
+        ]
+      },
+      "actions": [
+        {
+          "action": "ADD_FACT",
+          "status": "candidate_review_queue",
+          "accepted": false,
+          "targets": [
+            {
+              "layer": "clan",
+              "candidate_fact_types": [
+                "ClanMembership"
+              ],
+              "status": "review_queue",
+              "accepted": false,
+              "review_status": "candidate",
+              "reason": "The Story exposes a coverage opportunity, but X1.1 does not promote a semantic fact from a keyword or PersonStory link alone."
+            },
+            {
+              "layer": "event",
+              "candidate_fact_types": [
+                "Event",
+                "EventParticipation"
+              ],
+              "status": "review_queue",
+              "accepted": false,
+              "review_status": "candidate",
+              "reason": "The Story exposes a coverage opportunity, but X1.1 does not promote a semantic fact from a keyword or PersonStory link alone."
+            },
+            {
+              "layer": "family",
+              "candidate_fact_types": [
+                "KinshipFact",
+                "MarriageUnion"
+              ],
+              "status": "review_queue",
+              "accepted": false,
+              "review_status": "candidate",
+              "reason": "The Story exposes a coverage opportunity, but X1.1 does not promote a semantic fact from a keyword or PersonStory link alone."
+            },
+            {
+              "layer": "geographic",
+              "candidate_fact_types": [
+                "LocationFact",
+                "PersonActivity"
+              ],
+              "status": "review_queue",
+              "accepted": false,
+              "review_status": "candidate",
+              "reason": "The Story exposes a coverage opportunity, but X1.1 does not promote a semantic fact from a keyword or PersonStory link alone."
+            },
+            {
+              "layer": "office",
+              "candidate_fact_types": [
+                "Office",
+                "OfficeTenure"
+              ],
+              "status": "review_queue",
+              "accepted": false,
+              "review_status": "candidate",
+              "reason": "The Story exposes a coverage opportunity, but X1.1 does not promote a semantic fact from a keyword or PersonStory link alone."
+            },
+            {
+              "layer": "service_political",
+              "candidate_fact_types": [
+                "ServicePoliticalFact",
+                "RelationTemporalContext"
+              ],
+              "status": "review_queue",
+              "accepted": false,
+              "review_status": "candidate",
+              "reason": "The Story exposes a coverage opportunity, but X1.1 does not promote a semantic fact from a keyword or PersonStory link alone."
+            },
+            {
+              "layer": "temporal",
+              "candidate_fact_types": [
+                "StoryTemporalConstraint",
+                "PersonActivityCandidate"
+              ],
+              "status": "review_queue",
+              "accepted": false,
+              "review_status": "candidate",
+              "reason": "The Story exposes a coverage opportunity, but X1.1 does not promote a semantic fact from a keyword or PersonStory link alone."
+            }
+          ],
+          "evidence_ids": [
+            "evidence-p3b-wave-2-046bd8c9c6841f3e219217d6",
+            "evidence-w3-person-046bd8c9c6841f3e219217d6"
+          ],
+          "reason": "Coverage-guided review target; requires source-level semantic review before canonicalization."
+        },
+        {
+          "action": "ADD_STORY",
+          "status": "accepted_for_x1_1_review_overlay",
+          "accepted": true,
+          "canonical_production_materialization": "deferred_to_HG1_1",
+          "reason": "Canonical source and stable identity/evidence route passed X1.1 screening; reader publication and participant projection remain separate gates."
+        }
+      ],
+      "screening_status": "completed",
+      "acceptance_status": "accepted_for_x1_1_review_overlay",
+      "canonical_status": "not_materialized"
+    },
+    {
+      "story_id": "15-zixin-001",
+      "selection_epoch": "X1.1",
+      "selection_mode": "coverage_guided",
+      "selection_rank": 4,
+      "selection_status": "selected",
+      "review_status": "candidate",
+      "selection_manifest_frozen": true,
+      "source": {
+        "path": "content/processed/shishuo/entries/15-zixin/entry-001.md",
+        "sha256": "4eb319a1f1008b33872f9ace7b46ac2c6d8a3a56eedcfdaaad01f62e57f95bf5",
+        "main_text_length": 203,
+        "annotation_count": 8,
+        "source_witness_status": "present"
+      },
+      "production_person_ids": [
+        "person-065"
+      ],
+      "production_person_names": [
+        "孟嘉"
+      ],
+      "evidence_ids": [
+        "evidence-p3b-wave-2-078322c62b177445d621fe81",
+        "evidence-p3b-wave-2-6d483c973c364d7b23254979",
+        "evidence-p3b-wave-2-c100f9f8d5ce2449b2ee39cb",
+        "evidence-p3b-wave-2-ff4c641ecffcd1c1a0641ea3",
+        "evidence-w4-person-6d483c973c364d7b23254979",
+        "evidence-w4-person-ff4c641ecffcd1c1a0641ea3"
+      ],
+      "link_ids": [
+        "person-story-person-065-15-zixin-001"
+      ],
+      "identity_review": {
+        "resolved_production_person_path": true,
+        "non_production_or_unresolved_surfaces": [],
+        "person_story_is_not_participation": true,
+        "scene_participant_status": "deferred_to_hg1_1_participant_review"
+      },
+      "review_checks": {
+        "canonical_source_exists": true,
+        "canonical_source_hash_present": true,
+        "outside_current_production_scope": true,
+        "punctuation_not_disputed": true,
+        "local_evidence_traceable": true,
+        "identity_route_reviewable": true,
+        "reader_publication_ready": false,
+        "participant_projection_materialized": false
+      },
+      "enrichment_priorities": {
+        "high": [
+          "event",
+          "family",
+          "temporal"
+        ],
+        "medium": [
+          "clan",
+          "service_political"
+        ]
+      },
+      "actions": [
+        {
+          "action": "ADD_FACT",
+          "status": "candidate_review_queue",
+          "accepted": false,
+          "targets": [
+            {
+              "layer": "clan",
+              "candidate_fact_types": [
+                "ClanMembership"
+              ],
+              "status": "review_queue",
+              "accepted": false,
+              "review_status": "candidate",
+              "reason": "The Story exposes a coverage opportunity, but X1.1 does not promote a semantic fact from a keyword or PersonStory link alone."
+            },
+            {
+              "layer": "event",
+              "candidate_fact_types": [
+                "Event",
+                "EventParticipation"
+              ],
+              "status": "review_queue",
+              "accepted": false,
+              "review_status": "candidate",
+              "reason": "The Story exposes a coverage opportunity, but X1.1 does not promote a semantic fact from a keyword or PersonStory link alone."
+            },
+            {
+              "layer": "family",
+              "candidate_fact_types": [
+                "KinshipFact",
+                "MarriageUnion"
+              ],
+              "status": "review_queue",
+              "accepted": false,
+              "review_status": "candidate",
+              "reason": "The Story exposes a coverage opportunity, but X1.1 does not promote a semantic fact from a keyword or PersonStory link alone."
+            },
+            {
+              "layer": "service_political",
+              "candidate_fact_types": [
+                "ServicePoliticalFact",
+                "RelationTemporalContext"
+              ],
+              "status": "review_queue",
+              "accepted": false,
+              "review_status": "candidate",
+              "reason": "The Story exposes a coverage opportunity, but X1.1 does not promote a semantic fact from a keyword or PersonStory link alone."
+            },
+            {
+              "layer": "temporal",
+              "candidate_fact_types": [
+                "StoryTemporalConstraint",
+                "PersonActivityCandidate"
+              ],
+              "status": "review_queue",
+              "accepted": false,
+              "review_status": "candidate",
+              "reason": "The Story exposes a coverage opportunity, but X1.1 does not promote a semantic fact from a keyword or PersonStory link alone."
+            }
+          ],
+          "evidence_ids": [
+            "evidence-p3b-wave-2-078322c62b177445d621fe81",
+            "evidence-p3b-wave-2-6d483c973c364d7b23254979",
+            "evidence-p3b-wave-2-c100f9f8d5ce2449b2ee39cb",
+            "evidence-p3b-wave-2-ff4c641ecffcd1c1a0641ea3",
+            "evidence-w4-person-6d483c973c364d7b23254979",
+            "evidence-w4-person-ff4c641ecffcd1c1a0641ea3"
+          ],
+          "reason": "Coverage-guided review target; requires source-level semantic review before canonicalization."
+        },
+        {
+          "action": "ADD_STORY",
+          "status": "accepted_for_x1_1_review_overlay",
+          "accepted": true,
+          "canonical_production_materialization": "deferred_to_HG1_1",
+          "reason": "Canonical source and stable identity/evidence route passed X1.1 screening; reader publication and participant projection remain separate gates."
+        }
+      ],
+      "screening_status": "completed",
+      "acceptance_status": "accepted_for_x1_1_review_overlay",
+      "canonical_status": "not_materialized"
+    },
+    {
+      "story_id": "19-xianyuan-010",
+      "selection_epoch": "X1.1",
+      "selection_mode": "coverage_guided",
+      "selection_rank": 5,
+      "selection_status": "selected",
+      "review_status": "candidate",
+      "selection_manifest_frozen": true,
+      "source": {
+        "path": "content/processed/shishuo/entries/19-xianyuan/entry-010.md",
+        "sha256": "678fd57623421b72cdf4415f0d98aa00234a8259d4da776618370ad4fbfcc13b",
+        "main_text_length": 85,
+        "annotation_count": 7,
+        "source_witness_status": "present"
+      },
+      "production_person_ids": [
+        "person-074"
+      ],
+      "production_person_names": [
+        "干寳"
+      ],
+      "evidence_ids": [
+        "evidence-p3b-wave-2-37be81ef6efd7284a9dbacaf",
+        "evidence-p3b-wave-2-6d2d0b014bbb6f879b5dbc23",
+        "evidence-w4-person-37be81ef6efd7284a9dbacaf",
+        "evidence-w4-person-6d2d0b014bbb6f879b5dbc23"
+      ],
+      "link_ids": [
+        "person-story-person-074-19-xianyuan-010"
+      ],
+      "identity_review": {
+        "resolved_production_person_path": true,
+        "non_production_or_unresolved_surfaces": [],
+        "person_story_is_not_participation": true,
+        "scene_participant_status": "deferred_to_hg1_1_participant_review"
+      },
+      "review_checks": {
+        "canonical_source_exists": true,
+        "canonical_source_hash_present": true,
+        "outside_current_production_scope": true,
+        "punctuation_not_disputed": true,
+        "local_evidence_traceable": true,
+        "identity_route_reviewable": true,
+        "reader_publication_ready": false,
+        "participant_projection_materialized": false
+      },
+      "enrichment_priorities": {
+        "high": [
+          "event",
+          "family",
+          "office",
+          "temporal"
+        ],
+        "medium": [
+          "clan",
+          "geographic",
+          "service_political"
+        ]
+      },
+      "actions": [
+        {
+          "action": "ADD_FACT",
+          "status": "candidate_review_queue",
+          "accepted": false,
+          "targets": [
+            {
+              "layer": "clan",
+              "candidate_fact_types": [
+                "ClanMembership"
+              ],
+              "status": "review_queue",
+              "accepted": false,
+              "review_status": "candidate",
+              "reason": "The Story exposes a coverage opportunity, but X1.1 does not promote a semantic fact from a keyword or PersonStory link alone."
+            },
+            {
+              "layer": "event",
+              "candidate_fact_types": [
+                "Event",
+                "EventParticipation"
+              ],
+              "status": "review_queue",
+              "accepted": false,
+              "review_status": "candidate",
+              "reason": "The Story exposes a coverage opportunity, but X1.1 does not promote a semantic fact from a keyword or PersonStory link alone."
+            },
+            {
+              "layer": "family",
+              "candidate_fact_types": [
+                "KinshipFact",
+                "MarriageUnion"
+              ],
+              "status": "review_queue",
+              "accepted": false,
+              "review_status": "candidate",
+              "reason": "The Story exposes a coverage opportunity, but X1.1 does not promote a semantic fact from a keyword or PersonStory link alone."
+            },
+            {
+              "layer": "geographic",
+              "candidate_fact_types": [
+                "LocationFact",
+                "PersonActivity"
+              ],
+              "status": "review_queue",
+              "accepted": false,
+              "review_status": "candidate",
+              "reason": "The Story exposes a coverage opportunity, but X1.1 does not promote a semantic fact from a keyword or PersonStory link alone."
+            },
+            {
+              "layer": "office",
+              "candidate_fact_types": [
+                "Office",
+                "OfficeTenure"
+              ],
+              "status": "review_queue",
+              "accepted": false,
+              "review_status": "candidate",
+              "reason": "The Story exposes a coverage opportunity, but X1.1 does not promote a semantic fact from a keyword or PersonStory link alone."
+            },
+            {
+              "layer": "service_political",
+              "candidate_fact_types": [
+                "ServicePoliticalFact",
+                "RelationTemporalContext"
+              ],
+              "status": "review_queue",
+              "accepted": false,
+              "review_status": "candidate",
+              "reason": "The Story exposes a coverage opportunity, but X1.1 does not promote a semantic fact from a keyword or PersonStory link alone."
+            },
+            {
+              "layer": "temporal",
+              "candidate_fact_types": [
+                "StoryTemporalConstraint",
+                "PersonActivityCandidate"
+              ],
+              "status": "review_queue",
+              "accepted": false,
+              "review_status": "candidate",
+              "reason": "The Story exposes a coverage opportunity, but X1.1 does not promote a semantic fact from a keyword or PersonStory link alone."
+            }
+          ],
+          "evidence_ids": [
+            "evidence-p3b-wave-2-37be81ef6efd7284a9dbacaf",
+            "evidence-p3b-wave-2-6d2d0b014bbb6f879b5dbc23",
+            "evidence-w4-person-37be81ef6efd7284a9dbacaf",
+            "evidence-w4-person-6d2d0b014bbb6f879b5dbc23"
+          ],
+          "reason": "Coverage-guided review target; requires source-level semantic review before canonicalization."
+        },
+        {
+          "action": "ADD_STORY",
+          "status": "accepted_for_x1_1_review_overlay",
+          "accepted": true,
+          "canonical_production_materialization": "deferred_to_HG1_1",
+          "reason": "Canonical source and stable identity/evidence route passed X1.1 screening; reader publication and participant projection remain separate gates."
+        }
+      ],
+      "screening_status": "completed",
+      "acceptance_status": "accepted_for_x1_1_review_overlay",
+      "canonical_status": "not_materialized"
+    },
+    {
+      "story_id": "19-xianyuan-017",
+      "selection_epoch": "X1.1",
+      "selection_mode": "coverage_guided",
+      "selection_rank": 6,
+      "selection_status": "selected",
+      "review_status": "candidate",
+      "selection_manifest_frozen": true,
+      "source": {
+        "path": "content/processed/shishuo/entries/19-xianyuan/entry-017.md",
+        "sha256": "5cc5a7356df215db8650fc8b021b71066f8030608ff79bafd36985a32e2fd65e",
+        "main_text_length": 100,
+        "annotation_count": 6,
+        "source_witness_status": "present"
+      },
+      "production_person_ids": [
+        "person-056"
+      ],
+      "production_person_names": [
+        "李重"
+      ],
+      "evidence_ids": [
+        "evidence-p3b-wave-2-4205177e3721b8dcfad360cd",
+        "evidence-p3b-wave-2-8b52c94b636d735cb8a02bf5",
+        "evidence-p3b-wave-2-9ea90a5335c5e3f9ce9ae7f0",
+        "evidence-w4-person-4205177e3721b8dcfad360cd",
+        "evidence-w4-person-9ea90a5335c5e3f9ce9ae7f0"
+      ],
+      "link_ids": [
+        "person-story-person-056-19-xianyuan-017"
+      ],
+      "identity_review": {
+        "resolved_production_person_path": true,
+        "non_production_or_unresolved_surfaces": [],
+        "person_story_is_not_participation": true,
+        "scene_participant_status": "deferred_to_hg1_1_participant_review"
+      },
+      "review_checks": {
+        "canonical_source_exists": true,
+        "canonical_source_hash_present": true,
+        "outside_current_production_scope": true,
+        "punctuation_not_disputed": true,
+        "local_evidence_traceable": true,
+        "identity_route_reviewable": true,
+        "reader_publication_ready": false,
+        "participant_projection_materialized": false
+      },
+      "enrichment_priorities": {
+        "high": [
+          "event",
+          "family",
+          "office",
+          "temporal"
+        ],
+        "medium": [
+          "geographic",
+          "service_political"
+        ]
+      },
+      "actions": [
+        {
+          "action": "ADD_FACT",
+          "status": "candidate_review_queue",
+          "accepted": false,
+          "targets": [
+            {
+              "layer": "event",
+              "candidate_fact_types": [
+                "Event",
+                "EventParticipation"
+              ],
+              "status": "review_queue",
+              "accepted": false,
+              "review_status": "candidate",
+              "reason": "The Story exposes a coverage opportunity, but X1.1 does not promote a semantic fact from a keyword or PersonStory link alone."
+            },
+            {
+              "layer": "family",
+              "candidate_fact_types": [
+                "KinshipFact",
+                "MarriageUnion"
+              ],
+              "status": "review_queue",
+              "accepted": false,
+              "review_status": "candidate",
+              "reason": "The Story exposes a coverage opportunity, but X1.1 does not promote a semantic fact from a keyword or PersonStory link alone."
+            },
+            {
+              "layer": "geographic",
+              "candidate_fact_types": [
+                "LocationFact",
+                "PersonActivity"
+              ],
+              "status": "review_queue",
+              "accepted": false,
+              "review_status": "candidate",
+              "reason": "The Story exposes a coverage opportunity, but X1.1 does not promote a semantic fact from a keyword or PersonStory link alone."
+            },
+            {
+              "layer": "office",
+              "candidate_fact_types": [
+                "Office",
+                "OfficeTenure"
+              ],
+              "status": "review_queue",
+              "accepted": false,
+              "review_status": "candidate",
+              "reason": "The Story exposes a coverage opportunity, but X1.1 does not promote a semantic fact from a keyword or PersonStory link alone."
+            },
+            {
+              "layer": "service_political",
+              "candidate_fact_types": [
+                "ServicePoliticalFact",
+                "RelationTemporalContext"
+              ],
+              "status": "review_queue",
+              "accepted": false,
+              "review_status": "candidate",
+              "reason": "The Story exposes a coverage opportunity, but X1.1 does not promote a semantic fact from a keyword or PersonStory link alone."
+            },
+            {
+              "layer": "temporal",
+              "candidate_fact_types": [
+                "StoryTemporalConstraint",
+                "PersonActivityCandidate"
+              ],
+              "status": "review_queue",
+              "accepted": false,
+              "review_status": "candidate",
+              "reason": "The Story exposes a coverage opportunity, but X1.1 does not promote a semantic fact from a keyword or PersonStory link alone."
+            }
+          ],
+          "evidence_ids": [
+            "evidence-p3b-wave-2-4205177e3721b8dcfad360cd",
+            "evidence-p3b-wave-2-8b52c94b636d735cb8a02bf5",
+            "evidence-p3b-wave-2-9ea90a5335c5e3f9ce9ae7f0",
+            "evidence-w4-person-4205177e3721b8dcfad360cd",
+            "evidence-w4-person-9ea90a5335c5e3f9ce9ae7f0"
+          ],
+          "reason": "Coverage-guided review target; requires source-level semantic review before canonicalization."
+        },
+        {
+          "action": "ADD_STORY",
+          "status": "accepted_for_x1_1_review_overlay",
+          "accepted": true,
+          "canonical_production_materialization": "deferred_to_HG1_1",
+          "reason": "Canonical source and stable identity/evidence route passed X1.1 screening; reader publication and participant projection remain separate gates."
+        }
+      ],
+      "screening_status": "completed",
+      "acceptance_status": "accepted_for_x1_1_review_overlay",
+      "canonical_status": "not_materialized"
+    },
+    {
+      "story_id": "15-zixin-002",
+      "selection_epoch": "X1.1",
+      "selection_mode": "stratified_random",
+      "selection_rank": 1,
+      "selection_status": "selected",
+      "review_status": "candidate",
+      "selection_manifest_frozen": true,
+      "source": {
+        "path": "content/processed/shishuo/entries/15-zixin/entry-002.md",
+        "sha256": "7c07b21f7e7389149503af3095d36c935a3e644b9fe141e1c60358f960192c85",
+        "main_text_length": 121,
+        "annotation_count": 4,
+        "source_witness_status": "present"
+      },
+      "production_person_ids": [
+        "person-060"
+      ],
+      "production_person_names": [
+        "虞預"
+      ],
+      "evidence_ids": [
+        "evidence-p3b-wave-2-586ad232701eb91a0f11d711",
+        "evidence-p3b-wave-2-ad716d81071da46d1b8040fb",
+        "evidence-w4-person-586ad232701eb91a0f11d711"
+      ],
+      "link_ids": [
+        "person-story-person-060-15-zixin-002"
+      ],
+      "identity_review": {
+        "resolved_production_person_path": true,
+        "non_production_or_unresolved_surfaces": [],
+        "person_story_is_not_participation": true,
+        "scene_participant_status": "deferred_to_hg1_1_participant_review"
+      },
+      "review_checks": {
+        "canonical_source_exists": true,
+        "canonical_source_hash_present": true,
+        "outside_current_production_scope": true,
+        "punctuation_not_disputed": true,
+        "local_evidence_traceable": true,
+        "identity_route_reviewable": true,
+        "reader_publication_ready": false,
+        "participant_projection_materialized": false
+      },
+      "enrichment_priorities": {
+        "high": [
+          "event",
+          "family",
+          "office",
+          "temporal"
+        ],
+        "medium": [
+          "clan",
+          "geographic",
+          "service_political"
+        ]
+      },
+      "actions": [
+        {
+          "action": "ADD_FACT",
+          "status": "candidate_review_queue",
+          "accepted": false,
+          "targets": [
+            {
+              "layer": "clan",
+              "candidate_fact_types": [
+                "ClanMembership"
+              ],
+              "status": "review_queue",
+              "accepted": false,
+              "review_status": "candidate",
+              "reason": "The Story exposes a coverage opportunity, but X1.1 does not promote a semantic fact from a keyword or PersonStory link alone."
+            },
+            {
+              "layer": "event",
+              "candidate_fact_types": [
+                "Event",
+                "EventParticipation"
+              ],
+              "status": "review_queue",
+              "accepted": false,
+              "review_status": "candidate",
+              "reason": "The Story exposes a coverage opportunity, but X1.1 does not promote a semantic fact from a keyword or PersonStory link alone."
+            },
+            {
+              "layer": "family",
+              "candidate_fact_types": [
+                "KinshipFact",
+                "MarriageUnion"
+              ],
+              "status": "review_queue",
+              "accepted": false,
+              "review_status": "candidate",
+              "reason": "The Story exposes a coverage opportunity, but X1.1 does not promote a semantic fact from a keyword or PersonStory link alone."
+            },
+            {
+              "layer": "geographic",
+              "candidate_fact_types": [
+                "LocationFact",
+                "PersonActivity"
+              ],
+              "status": "review_queue",
+              "accepted": false,
+              "review_status": "candidate",
+              "reason": "The Story exposes a coverage opportunity, but X1.1 does not promote a semantic fact from a keyword or PersonStory link alone."
+            },
+            {
+              "layer": "office",
+              "candidate_fact_types": [
+                "Office",
+                "OfficeTenure"
+              ],
+              "status": "review_queue",
+              "accepted": false,
+              "review_status": "candidate",
+              "reason": "The Story exposes a coverage opportunity, but X1.1 does not promote a semantic fact from a keyword or PersonStory link alone."
+            },
+            {
+              "layer": "service_political",
+              "candidate_fact_types": [
+                "ServicePoliticalFact",
+                "RelationTemporalContext"
+              ],
+              "status": "review_queue",
+              "accepted": false,
+              "review_status": "candidate",
+              "reason": "The Story exposes a coverage opportunity, but X1.1 does not promote a semantic fact from a keyword or PersonStory link alone."
+            },
+            {
+              "layer": "temporal",
+              "candidate_fact_types": [
+                "StoryTemporalConstraint",
+                "PersonActivityCandidate"
+              ],
+              "status": "review_queue",
+              "accepted": false,
+              "review_status": "candidate",
+              "reason": "The Story exposes a coverage opportunity, but X1.1 does not promote a semantic fact from a keyword or PersonStory link alone."
+            }
+          ],
+          "evidence_ids": [
+            "evidence-p3b-wave-2-586ad232701eb91a0f11d711",
+            "evidence-p3b-wave-2-ad716d81071da46d1b8040fb",
+            "evidence-w4-person-586ad232701eb91a0f11d711"
+          ],
+          "reason": "Coverage-guided review target; requires source-level semantic review before canonicalization."
+        },
+        {
+          "action": "ADD_STORY",
+          "status": "accepted_for_x1_1_review_overlay",
+          "accepted": true,
+          "canonical_production_materialization": "deferred_to_HG1_1",
+          "reason": "Canonical source and stable identity/evidence route passed X1.1 screening; reader publication and participant projection remain separate gates."
+        }
+      ],
+      "screening_status": "completed",
+      "acceptance_status": "accepted_for_x1_1_review_overlay",
+      "canonical_status": "not_materialized"
+    },
+    {
+      "story_id": "26-qingdi-010",
+      "selection_epoch": "X1.1",
+      "selection_mode": "stratified_random",
+      "selection_rank": 2,
+      "selection_status": "selected",
+      "review_status": "candidate",
+      "selection_manifest_frozen": true,
+      "source": {
+        "path": "content/processed/shishuo/entries/26-qingdi/entry-010.md",
+        "sha256": "8b464e2145d55ebee96a0855e63c14a79b4b78bebe602b9e4f288f8ae0992fea",
+        "main_text_length": 45,
+        "annotation_count": 0,
+        "source_witness_status": "present"
+      },
+      "production_person_ids": [
+        "person-009"
+      ],
+      "production_person_names": [
+        "劉惔"
+      ],
+      "evidence_ids": [
+        "evidence-p3b-wave-1-04a54ca4225537cf9fb4972d",
+        "evidence-p3b-wave-1-10b0ee18423ebe3ecbf3f2d3",
+        "evidence-p3b-wave-2-04a54ca4225537cf9fb4972d",
+        "evidence-p3b-wave-2-10b0ee18423ebe3ecbf3f2d3"
+      ],
+      "link_ids": [
+        "person-story-person-009-26-qingdi-010"
+      ],
+      "identity_review": {
+        "resolved_production_person_path": true,
+        "non_production_or_unresolved_surfaces": [],
+        "person_story_is_not_participation": true,
+        "scene_participant_status": "deferred_to_hg1_1_participant_review"
+      },
+      "review_checks": {
+        "canonical_source_exists": true,
+        "canonical_source_hash_present": true,
+        "outside_current_production_scope": true,
+        "punctuation_not_disputed": true,
+        "local_evidence_traceable": true,
+        "identity_route_reviewable": true,
+        "reader_publication_ready": false,
+        "participant_projection_materialized": false
+      },
+      "enrichment_priorities": {
+        "high": [
+          "event",
+          "family",
+          "office",
+          "temporal"
+        ],
+        "medium": [
+          "clan",
+          "geographic",
+          "service_political"
+        ]
+      },
+      "actions": [
+        {
+          "action": "ADD_FACT",
+          "status": "candidate_review_queue",
+          "accepted": false,
+          "targets": [
+            {
+              "layer": "clan",
+              "candidate_fact_types": [
+                "ClanMembership"
+              ],
+              "status": "review_queue",
+              "accepted": false,
+              "review_status": "candidate",
+              "reason": "The Story exposes a coverage opportunity, but X1.1 does not promote a semantic fact from a keyword or PersonStory link alone."
+            },
+            {
+              "layer": "event",
+              "candidate_fact_types": [
+                "Event",
+                "EventParticipation"
+              ],
+              "status": "review_queue",
+              "accepted": false,
+              "review_status": "candidate",
+              "reason": "The Story exposes a coverage opportunity, but X1.1 does not promote a semantic fact from a keyword or PersonStory link alone."
+            },
+            {
+              "layer": "family",
+              "candidate_fact_types": [
+                "KinshipFact",
+                "MarriageUnion"
+              ],
+              "status": "review_queue",
+              "accepted": false,
+              "review_status": "candidate",
+              "reason": "The Story exposes a coverage opportunity, but X1.1 does not promote a semantic fact from a keyword or PersonStory link alone."
+            },
+            {
+              "layer": "geographic",
+              "candidate_fact_types": [
+                "LocationFact",
+                "PersonActivity"
+              ],
+              "status": "review_queue",
+              "accepted": false,
+              "review_status": "candidate",
+              "reason": "The Story exposes a coverage opportunity, but X1.1 does not promote a semantic fact from a keyword or PersonStory link alone."
+            },
+            {
+              "layer": "office",
+              "candidate_fact_types": [
+                "Office",
+                "OfficeTenure"
+              ],
+              "status": "review_queue",
+              "accepted": false,
+              "review_status": "candidate",
+              "reason": "The Story exposes a coverage opportunity, but X1.1 does not promote a semantic fact from a keyword or PersonStory link alone."
+            },
+            {
+              "layer": "service_political",
+              "candidate_fact_types": [
+                "ServicePoliticalFact",
+                "RelationTemporalContext"
+              ],
+              "status": "review_queue",
+              "accepted": false,
+              "review_status": "candidate",
+              "reason": "The Story exposes a coverage opportunity, but X1.1 does not promote a semantic fact from a keyword or PersonStory link alone."
+            },
+            {
+              "layer": "temporal",
+              "candidate_fact_types": [
+                "StoryTemporalConstraint",
+                "PersonActivityCandidate"
+              ],
+              "status": "review_queue",
+              "accepted": false,
+              "review_status": "candidate",
+              "reason": "The Story exposes a coverage opportunity, but X1.1 does not promote a semantic fact from a keyword or PersonStory link alone."
+            }
+          ],
+          "evidence_ids": [
+            "evidence-p3b-wave-1-04a54ca4225537cf9fb4972d",
+            "evidence-p3b-wave-1-10b0ee18423ebe3ecbf3f2d3",
+            "evidence-p3b-wave-2-04a54ca4225537cf9fb4972d",
+            "evidence-p3b-wave-2-10b0ee18423ebe3ecbf3f2d3"
+          ],
+          "reason": "Coverage-guided review target; requires source-level semantic review before canonicalization."
+        },
+        {
+          "action": "ADD_STORY",
+          "status": "accepted_for_x1_1_review_overlay",
+          "accepted": true,
+          "canonical_production_materialization": "deferred_to_HG1_1",
+          "reason": "Canonical source and stable identity/evidence route passed X1.1 screening; reader publication and participant projection remain separate gates."
+        }
+      ],
+      "screening_status": "completed",
+      "acceptance_status": "accepted_for_x1_1_review_overlay",
+      "canonical_status": "not_materialized"
+    },
+    {
+      "story_id": "36-chouxi-001",
+      "selection_epoch": "X1.1",
+      "selection_mode": "stratified_random",
+      "selection_rank": 3,
+      "selection_status": "selected",
+      "review_status": "candidate",
+      "selection_manifest_frozen": true,
+      "source": {
+        "path": "content/processed/shishuo/entries/36-chouxi/entry-001.md",
+        "sha256": "cee8b0e8218fcad7910493de67ccb4176e2ddfc6002599310d87b6f77d2d0252",
+        "main_text_length": 138,
+        "annotation_count": 12,
+        "source_witness_status": "present"
+      },
+      "production_person_ids": [
+        "person-048",
+        "person-054",
+        "person-074"
+      ],
+      "production_person_names": [
+        "潘岳",
+        "王隱",
+        "干寳"
+      ],
+      "evidence_ids": [
+        "evidence-p3b-wave-2-28702ea04579979cafe588d0",
+        "evidence-p3b-wave-2-35f8a295ae8deff44acb64b7",
+        "evidence-p3b-wave-2-7522e9fd94741f315c19a594",
+        "evidence-p3b-wave-2-a371b8443e94ff970187ae43",
+        "evidence-p3b-wave-2-ccf3c9a5e421d293e2972ee6",
+        "evidence-p3b-wave-2-eb273782acdac53f338b262b",
+        "evidence-p3b-wave-2-f0d06a8d76fa4450798a8f5d",
+        "evidence-w3-person-7522e9fd94741f315c19a594",
+        "evidence-w3-person-ccf3c9a5e421d293e2972ee6",
+        "evidence-w3-person-eb273782acdac53f338b262b",
+        "evidence-w4-person-28702ea04579979cafe588d0",
+        "evidence-w4-person-35f8a295ae8deff44acb64b7",
+        "evidence-w4-person-a371b8443e94ff970187ae43"
+      ],
+      "link_ids": [
+        "person-story-person-048-36-chouxi-001",
+        "person-story-person-054-36-chouxi-001",
+        "person-story-person-074-36-chouxi-001"
+      ],
+      "identity_review": {
+        "resolved_production_person_path": true,
+        "non_production_or_unresolved_surfaces": [],
+        "person_story_is_not_participation": true,
+        "scene_participant_status": "deferred_to_hg1_1_participant_review"
+      },
+      "review_checks": {
+        "canonical_source_exists": true,
+        "canonical_source_hash_present": true,
+        "outside_current_production_scope": true,
+        "punctuation_not_disputed": true,
+        "local_evidence_traceable": true,
+        "identity_route_reviewable": true,
+        "reader_publication_ready": false,
+        "participant_projection_materialized": false
+      },
+      "enrichment_priorities": {
+        "high": [
+          "event",
+          "family",
+          "office"
+        ],
+        "medium": [
+          "clan",
+          "geographic",
+          "service_political"
+        ]
+      },
+      "actions": [
+        {
+          "action": "ADD_FACT",
+          "status": "candidate_review_queue",
+          "accepted": false,
+          "targets": [
+            {
+              "layer": "clan",
+              "candidate_fact_types": [
+                "ClanMembership"
+              ],
+              "status": "review_queue",
+              "accepted": false,
+              "review_status": "candidate",
+              "reason": "The Story exposes a coverage opportunity, but X1.1 does not promote a semantic fact from a keyword or PersonStory link alone."
+            },
+            {
+              "layer": "event",
+              "candidate_fact_types": [
+                "Event",
+                "EventParticipation"
+              ],
+              "status": "review_queue",
+              "accepted": false,
+              "review_status": "candidate",
+              "reason": "The Story exposes a coverage opportunity, but X1.1 does not promote a semantic fact from a keyword or PersonStory link alone."
+            },
+            {
+              "layer": "family",
+              "candidate_fact_types": [
+                "KinshipFact",
+                "MarriageUnion"
+              ],
+              "status": "review_queue",
+              "accepted": false,
+              "review_status": "candidate",
+              "reason": "The Story exposes a coverage opportunity, but X1.1 does not promote a semantic fact from a keyword or PersonStory link alone."
+            },
+            {
+              "layer": "geographic",
+              "candidate_fact_types": [
+                "LocationFact",
+                "PersonActivity"
+              ],
+              "status": "review_queue",
+              "accepted": false,
+              "review_status": "candidate",
+              "reason": "The Story exposes a coverage opportunity, but X1.1 does not promote a semantic fact from a keyword or PersonStory link alone."
+            },
+            {
+              "layer": "office",
+              "candidate_fact_types": [
+                "Office",
+                "OfficeTenure"
+              ],
+              "status": "review_queue",
+              "accepted": false,
+              "review_status": "candidate",
+              "reason": "The Story exposes a coverage opportunity, but X1.1 does not promote a semantic fact from a keyword or PersonStory link alone."
+            },
+            {
+              "layer": "service_political",
+              "candidate_fact_types": [
+                "ServicePoliticalFact",
+                "RelationTemporalContext"
+              ],
+              "status": "review_queue",
+              "accepted": false,
+              "review_status": "candidate",
+              "reason": "The Story exposes a coverage opportunity, but X1.1 does not promote a semantic fact from a keyword or PersonStory link alone."
+            }
+          ],
+          "evidence_ids": [
+            "evidence-p3b-wave-2-28702ea04579979cafe588d0",
+            "evidence-p3b-wave-2-35f8a295ae8deff44acb64b7",
+            "evidence-p3b-wave-2-7522e9fd94741f315c19a594",
+            "evidence-p3b-wave-2-a371b8443e94ff970187ae43",
+            "evidence-p3b-wave-2-ccf3c9a5e421d293e2972ee6",
+            "evidence-p3b-wave-2-eb273782acdac53f338b262b",
+            "evidence-p3b-wave-2-f0d06a8d76fa4450798a8f5d",
+            "evidence-w3-person-7522e9fd94741f315c19a594",
+            "evidence-w3-person-ccf3c9a5e421d293e2972ee6",
+            "evidence-w3-person-eb273782acdac53f338b262b",
+            "evidence-w4-person-28702ea04579979cafe588d0",
+            "evidence-w4-person-35f8a295ae8deff44acb64b7",
+            "evidence-w4-person-a371b8443e94ff970187ae43"
+          ],
+          "reason": "Coverage-guided review target; requires source-level semantic review before canonicalization."
+        },
+        {
+          "action": "ADD_STORY",
+          "status": "accepted_for_x1_1_review_overlay",
+          "accepted": true,
+          "canonical_production_materialization": "deferred_to_HG1_1",
+          "reason": "Canonical source and stable identity/evidence route passed X1.1 screening; reader publication and participant projection remain separate gates."
+        }
+      ],
+      "screening_status": "completed",
+      "acceptance_status": "accepted_for_x1_1_review_overlay",
+      "canonical_status": "not_materialized"
+    },
+    {
+      "story_id": "01-dexing-024",
+      "selection_epoch": "X1.1",
+      "selection_mode": "counter_model",
+      "selection_rank": 1,
+      "selection_status": "selected",
+      "review_status": "candidate",
+      "selection_manifest_frozen": true,
+      "source": {
+        "path": "content/processed/shishuo/entries/01-dexing/entry-024.md",
+        "sha256": "c2f4be85d636791293b6278a91fc29edb7fbf4767937cb70e896f39b5ac79cd3",
+        "main_text_length": 117,
+        "annotation_count": 5,
+        "source_witness_status": "present"
+      },
+      "production_person_ids": [
+        "person-002"
+      ],
+      "production_person_names": [
+        "郗鑒"
+      ],
+      "evidence_ids": [
+        "evidence-p3b-wave-2-bc49d8b454dce5cb199505a8"
+      ],
+      "link_ids": [
+        "person-story-person-002-01-dexing-024"
+      ],
+      "identity_review": {
+        "resolved_production_person_path": true,
+        "non_production_or_unresolved_surfaces": [
+          "郗公"
+        ],
+        "person_story_is_not_participation": true,
+        "scene_participant_status": "deferred_to_hg1_1_participant_review"
+      },
+      "review_checks": {
+        "canonical_source_exists": true,
+        "canonical_source_hash_present": true,
+        "outside_current_production_scope": true,
+        "punctuation_not_disputed": true,
+        "local_evidence_traceable": true,
+        "identity_route_reviewable": true,
+        "reader_publication_ready": false,
+        "participant_projection_materialized": false
+      },
+      "enrichment_priorities": {
+        "high": [
+          "event",
+          "office"
+        ],
+        "medium": [
+          "clan",
+          "geographic",
+          "service_political"
+        ]
+      },
+      "actions": [
+        {
+          "action": "ADD_FACT",
+          "status": "candidate_review_queue",
+          "accepted": false,
+          "targets": [
+            {
+              "layer": "clan",
+              "candidate_fact_types": [
+                "ClanMembership"
+              ],
+              "status": "review_queue",
+              "accepted": false,
+              "review_status": "candidate",
+              "reason": "The Story exposes a coverage opportunity, but X1.1 does not promote a semantic fact from a keyword or PersonStory link alone."
+            },
+            {
+              "layer": "event",
+              "candidate_fact_types": [
+                "Event",
+                "EventParticipation"
+              ],
+              "status": "review_queue",
+              "accepted": false,
+              "review_status": "candidate",
+              "reason": "The Story exposes a coverage opportunity, but X1.1 does not promote a semantic fact from a keyword or PersonStory link alone."
+            },
+            {
+              "layer": "geographic",
+              "candidate_fact_types": [
+                "LocationFact",
+                "PersonActivity"
+              ],
+              "status": "review_queue",
+              "accepted": false,
+              "review_status": "candidate",
+              "reason": "The Story exposes a coverage opportunity, but X1.1 does not promote a semantic fact from a keyword or PersonStory link alone."
+            },
+            {
+              "layer": "office",
+              "candidate_fact_types": [
+                "Office",
+                "OfficeTenure"
+              ],
+              "status": "review_queue",
+              "accepted": false,
+              "review_status": "candidate",
+              "reason": "The Story exposes a coverage opportunity, but X1.1 does not promote a semantic fact from a keyword or PersonStory link alone."
+            },
+            {
+              "layer": "service_political",
+              "candidate_fact_types": [
+                "ServicePoliticalFact",
+                "RelationTemporalContext"
+              ],
+              "status": "review_queue",
+              "accepted": false,
+              "review_status": "candidate",
+              "reason": "The Story exposes a coverage opportunity, but X1.1 does not promote a semantic fact from a keyword or PersonStory link alone."
+            }
+          ],
+          "evidence_ids": [
+            "evidence-p3b-wave-2-bc49d8b454dce5cb199505a8"
+          ],
+          "reason": "Coverage-guided review target; requires source-level semantic review before canonicalization."
+        },
+        {
+          "action": "ADD_STORY",
+          "status": "accepted_for_x1_1_review_overlay",
+          "accepted": true,
+          "canonical_production_materialization": "deferred_to_HG1_1",
+          "reason": "Canonical source and stable identity/evidence route passed X1.1 screening; reader publication and participant projection remain separate gates."
+        },
+        {
+          "action": "ADD_PERSON",
+          "status": "identity_review_required",
+          "accepted": false,
+          "surfaces": [
+            "郗公"
+          ],
+          "related_production_person_ids": [
+            "person-002"
+          ],
+          "reason": "Non-production or unresolved surfaces are recorded for identity review only; no new Person is allocated in X1.1."
+        }
+      ],
+      "screening_status": "completed",
+      "acceptance_status": "accepted_for_x1_1_review_overlay",
+      "canonical_status": "not_materialized"
+    },
+    {
+      "story_id": "02-yanyu-033",
+      "selection_epoch": "X1.1",
+      "selection_mode": "counter_model",
+      "selection_rank": 2,
+      "selection_status": "selected",
+      "review_status": "candidate",
+      "selection_manifest_frozen": true,
+      "source": {
+        "path": "content/processed/shishuo/entries/02-yanyu/entry-033.md",
+        "sha256": "e5b6ec650578348421344d3dbf3faa42cb5fbe86e08c55660eaa413387453815",
+        "main_text_length": 76,
+        "annotation_count": 5,
+        "source_witness_status": "present"
+      },
+      "production_person_ids": [
+        "person-049"
+      ],
+      "production_person_names": [
+        "顧榮"
+      ],
+      "evidence_ids": [
+        "evidence-p3b-wave-2-765b40acd80a47af5867999e",
+        "evidence-p3b-wave-2-8e6fe735d8c68a7ba16407ed",
+        "evidence-p3b-wave-2-cb6354f1f2e9355486d96077",
+        "evidence-w3-person-765b40acd80a47af5867999e"
+      ],
+      "link_ids": [
+        "person-story-person-049-02-yanyu-033"
+      ],
+      "identity_review": {
+        "resolved_production_person_path": true,
+        "non_production_or_unresolved_surfaces": [
+          "丞相",
+          "王丞相"
+        ],
+        "person_story_is_not_participation": true,
+        "scene_participant_status": "deferred_to_hg1_1_participant_review"
+      },
+      "review_checks": {
+        "canonical_source_exists": true,
+        "canonical_source_hash_present": true,
+        "outside_current_production_scope": true,
+        "punctuation_not_disputed": true,
+        "local_evidence_traceable": true,
+        "identity_route_reviewable": true,
+        "reader_publication_ready": false,
+        "participant_projection_materialized": false
+      },
+      "enrichment_priorities": {
+        "high": [
+          "event",
+          "family",
+          "office",
+          "temporal"
+        ],
+        "medium": [
+          "clan",
+          "geographic",
+          "service_political"
+        ]
+      },
+      "actions": [
+        {
+          "action": "ADD_FACT",
+          "status": "candidate_review_queue",
+          "accepted": false,
+          "targets": [
+            {
+              "layer": "clan",
+              "candidate_fact_types": [
+                "ClanMembership"
+              ],
+              "status": "review_queue",
+              "accepted": false,
+              "review_status": "candidate",
+              "reason": "The Story exposes a coverage opportunity, but X1.1 does not promote a semantic fact from a keyword or PersonStory link alone."
+            },
+            {
+              "layer": "event",
+              "candidate_fact_types": [
+                "Event",
+                "EventParticipation"
+              ],
+              "status": "review_queue",
+              "accepted": false,
+              "review_status": "candidate",
+              "reason": "The Story exposes a coverage opportunity, but X1.1 does not promote a semantic fact from a keyword or PersonStory link alone."
+            },
+            {
+              "layer": "family",
+              "candidate_fact_types": [
+                "KinshipFact",
+                "MarriageUnion"
+              ],
+              "status": "review_queue",
+              "accepted": false,
+              "review_status": "candidate",
+              "reason": "The Story exposes a coverage opportunity, but X1.1 does not promote a semantic fact from a keyword or PersonStory link alone."
+            },
+            {
+              "layer": "geographic",
+              "candidate_fact_types": [
+                "LocationFact",
+                "PersonActivity"
+              ],
+              "status": "review_queue",
+              "accepted": false,
+              "review_status": "candidate",
+              "reason": "The Story exposes a coverage opportunity, but X1.1 does not promote a semantic fact from a keyword or PersonStory link alone."
+            },
+            {
+              "layer": "office",
+              "candidate_fact_types": [
+                "Office",
+                "OfficeTenure"
+              ],
+              "status": "review_queue",
+              "accepted": false,
+              "review_status": "candidate",
+              "reason": "The Story exposes a coverage opportunity, but X1.1 does not promote a semantic fact from a keyword or PersonStory link alone."
+            },
+            {
+              "layer": "service_political",
+              "candidate_fact_types": [
+                "ServicePoliticalFact",
+                "RelationTemporalContext"
+              ],
+              "status": "review_queue",
+              "accepted": false,
+              "review_status": "candidate",
+              "reason": "The Story exposes a coverage opportunity, but X1.1 does not promote a semantic fact from a keyword or PersonStory link alone."
+            },
+            {
+              "layer": "temporal",
+              "candidate_fact_types": [
+                "StoryTemporalConstraint",
+                "PersonActivityCandidate"
+              ],
+              "status": "review_queue",
+              "accepted": false,
+              "review_status": "candidate",
+              "reason": "The Story exposes a coverage opportunity, but X1.1 does not promote a semantic fact from a keyword or PersonStory link alone."
+            }
+          ],
+          "evidence_ids": [
+            "evidence-p3b-wave-2-765b40acd80a47af5867999e",
+            "evidence-p3b-wave-2-8e6fe735d8c68a7ba16407ed",
+            "evidence-p3b-wave-2-cb6354f1f2e9355486d96077",
+            "evidence-w3-person-765b40acd80a47af5867999e"
+          ],
+          "reason": "Coverage-guided review target; requires source-level semantic review before canonicalization."
+        },
+        {
+          "action": "ADD_STORY",
+          "status": "accepted_for_x1_1_review_overlay",
+          "accepted": true,
+          "canonical_production_materialization": "deferred_to_HG1_1",
+          "reason": "Canonical source and stable identity/evidence route passed X1.1 screening; reader publication and participant projection remain separate gates."
+        },
+        {
+          "action": "ADD_PERSON",
+          "status": "identity_review_required",
+          "accepted": false,
+          "surfaces": [
+            "丞相",
+            "王丞相"
+          ],
+          "related_production_person_ids": [
+            "person-049"
+          ],
+          "reason": "Non-production or unresolved surfaces are recorded for identity review only; no new Person is allocated in X1.1."
+        }
+      ],
+      "screening_status": "completed",
+      "acceptance_status": "accepted_for_x1_1_review_overlay",
+      "canonical_status": "not_materialized"
+    },
+    {
+      "story_id": "04-wenxue-021",
+      "selection_epoch": "X1.1",
+      "selection_mode": "counter_model",
+      "selection_rank": 3,
+      "selection_status": "selected",
+      "review_status": "candidate",
+      "selection_manifest_frozen": true,
+      "source": {
+        "path": "content/processed/shishuo/entries/04-wenxue/entry-021.md",
+        "sha256": "0cd6517cd6ff07f45c3c84e4821b6c6644344ec52a6d8b58330c6b0127987558",
+        "main_text_length": 39,
+        "annotation_count": 8,
+        "source_witness_status": "present"
+      },
+      "production_person_ids": [
+        "person-046"
+      ],
+      "production_person_names": [
+        "嵇康"
+      ],
+      "evidence_ids": [
+        "evidence-p3b-wave-2-5d00c8f88be7dd5abcf0b687",
+        "evidence-p3b-wave-2-8fdcaf53c2241c2858533acd",
+        "evidence-p3b-wave-2-ad695e914f5af76ee6cd0624",
+        "evidence-w3-person-5d00c8f88be7dd5abcf0b687",
+        "evidence-w3-person-8fdcaf53c2241c2858533acd",
+        "evidence-w3-person-ad695e914f5af76ee6cd0624"
+      ],
+      "link_ids": [
+        "person-story-person-046-04-wenxue-021"
+      ],
+      "identity_review": {
+        "resolved_production_person_path": true,
+        "non_production_or_unresolved_surfaces": [
+          "王丞相"
+        ],
+        "person_story_is_not_participation": true,
+        "scene_participant_status": "deferred_to_hg1_1_participant_review"
+      },
+      "review_checks": {
+        "canonical_source_exists": true,
+        "canonical_source_hash_present": true,
+        "outside_current_production_scope": true,
+        "punctuation_not_disputed": true,
+        "local_evidence_traceable": true,
+        "identity_route_reviewable": true,
+        "reader_publication_ready": false,
+        "participant_projection_materialized": false
+      },
+      "enrichment_priorities": {
+        "high": [
+          "event",
+          "family",
+          "office",
+          "temporal"
+        ],
+        "medium": [
+          "clan",
+          "geographic",
+          "service_political"
+        ]
+      },
+      "actions": [
+        {
+          "action": "ADD_FACT",
+          "status": "candidate_review_queue",
+          "accepted": false,
+          "targets": [
+            {
+              "layer": "clan",
+              "candidate_fact_types": [
+                "ClanMembership"
+              ],
+              "status": "review_queue",
+              "accepted": false,
+              "review_status": "candidate",
+              "reason": "The Story exposes a coverage opportunity, but X1.1 does not promote a semantic fact from a keyword or PersonStory link alone."
+            },
+            {
+              "layer": "event",
+              "candidate_fact_types": [
+                "Event",
+                "EventParticipation"
+              ],
+              "status": "review_queue",
+              "accepted": false,
+              "review_status": "candidate",
+              "reason": "The Story exposes a coverage opportunity, but X1.1 does not promote a semantic fact from a keyword or PersonStory link alone."
+            },
+            {
+              "layer": "family",
+              "candidate_fact_types": [
+                "KinshipFact",
+                "MarriageUnion"
+              ],
+              "status": "review_queue",
+              "accepted": false,
+              "review_status": "candidate",
+              "reason": "The Story exposes a coverage opportunity, but X1.1 does not promote a semantic fact from a keyword or PersonStory link alone."
+            },
+            {
+              "layer": "geographic",
+              "candidate_fact_types": [
+                "LocationFact",
+                "PersonActivity"
+              ],
+              "status": "review_queue",
+              "accepted": false,
+              "review_status": "candidate",
+              "reason": "The Story exposes a coverage opportunity, but X1.1 does not promote a semantic fact from a keyword or PersonStory link alone."
+            },
+            {
+              "layer": "office",
+              "candidate_fact_types": [
+                "Office",
+                "OfficeTenure"
+              ],
+              "status": "review_queue",
+              "accepted": false,
+              "review_status": "candidate",
+              "reason": "The Story exposes a coverage opportunity, but X1.1 does not promote a semantic fact from a keyword or PersonStory link alone."
+            },
+            {
+              "layer": "service_political",
+              "candidate_fact_types": [
+                "ServicePoliticalFact",
+                "RelationTemporalContext"
+              ],
+              "status": "review_queue",
+              "accepted": false,
+              "review_status": "candidate",
+              "reason": "The Story exposes a coverage opportunity, but X1.1 does not promote a semantic fact from a keyword or PersonStory link alone."
+            },
+            {
+              "layer": "temporal",
+              "candidate_fact_types": [
+                "StoryTemporalConstraint",
+                "PersonActivityCandidate"
+              ],
+              "status": "review_queue",
+              "accepted": false,
+              "review_status": "candidate",
+              "reason": "The Story exposes a coverage opportunity, but X1.1 does not promote a semantic fact from a keyword or PersonStory link alone."
+            }
+          ],
+          "evidence_ids": [
+            "evidence-p3b-wave-2-5d00c8f88be7dd5abcf0b687",
+            "evidence-p3b-wave-2-8fdcaf53c2241c2858533acd",
+            "evidence-p3b-wave-2-ad695e914f5af76ee6cd0624",
+            "evidence-w3-person-5d00c8f88be7dd5abcf0b687",
+            "evidence-w3-person-8fdcaf53c2241c2858533acd",
+            "evidence-w3-person-ad695e914f5af76ee6cd0624"
+          ],
+          "reason": "Coverage-guided review target; requires source-level semantic review before canonicalization."
+        },
+        {
+          "action": "ADD_STORY",
+          "status": "accepted_for_x1_1_review_overlay",
+          "accepted": true,
+          "canonical_production_materialization": "deferred_to_HG1_1",
+          "reason": "Canonical source and stable identity/evidence route passed X1.1 screening; reader publication and participant projection remain separate gates."
+        },
+        {
+          "action": "ADD_PERSON",
+          "status": "identity_review_required",
+          "accepted": false,
+          "surfaces": [
+            "王丞相"
+          ],
+          "related_production_person_ids": [
+            "person-046"
+          ],
+          "reason": "Non-production or unresolved surfaces are recorded for identity review only; no new Person is allocated in X1.1."
+        }
+      ],
+      "screening_status": "completed",
+      "acceptance_status": "accepted_for_x1_1_review_overlay",
+      "canonical_status": "not_materialized"
+    }
+  ],
+  "policy": "X1.1 completes selection and historical review screening; HG1.1 must perform the downstream canonical projection only after participant, punctuation, and fact-level review."
+}

@@ -474,3 +474,22 @@ Relations, or participant freeze. Computational corruptions used for ranking
 are ML-only and are never historical negative facts. Names, labels, and
 canonical IDs are not predictive feature values. A missing edge remains
 unknown, and candidate/reviewed status remains machine-readable.
+
+## X1.1 active corpus densification
+
+X1.1 is a deterministic research overlay downstream of ML0. Its candidate
+universe may include canonical Story entries outside the published graph
+scope, but selection does not create dangling HG0 Story nodes. Four disjoint
+selection channels are explicit: graph-guided, coverage-guided,
+stratified-random, and counter-model. The default allocation is 40/30/15/15
+and the selection manifest is frozen before review enrichment. Seeded random
+selection is an independent control; counter-model selection requires
+independent source or coverage value and is not global low-score sampling.
+
+X1.1 actions are labeled `ADD_FACT`, `ADD_STORY`, or `ADD_PERSON`, with
+selected, reviewed, accepted-overlay, candidate, and canonical-materialized
+states kept separate. PersonStory identity routes do not imply participation,
+and model output never creates historical facts. Missing edges remain unknown;
+rejected candidates are not negative evidence. X1.1 does not modify H0C/HG0/
+ML0 truth or the production Person/Story scope; downstream projection is a
+later milestone.
