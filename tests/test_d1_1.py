@@ -100,6 +100,17 @@ class D11RuntimeDisplayTests(unittest.TestCase):
         )
         self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
 
+    def test_semantic_baseline_is_committed_and_history_independent(self) -> None:
+        baseline = json.loads(
+            (ROOT / "data/derived/d1-0-semantic-baseline.json").read_text(encoding="utf-8")
+        )
+        self.assertEqual(baseline["schema"], 1)
+        self.assertEqual(set(baseline["display_tables"]), {
+            "labels", "people", "relations", "sources", "evidence"
+        })
+        validator = (ROOT / "scripts/validate_d1_1.py").read_text(encoding="utf-8")
+        self.assertNotIn("git show", validator)
+
 
 if __name__ == "__main__":
     unittest.main()

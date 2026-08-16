@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """Validate the D1.1 shared-display migration without changing data.
 
-The D1.0 bundle is loaded from its frozen Git revision and normalized into the
-new logical shape.  This lets the validator compare reader-visible semantics
-while allowing the physical JSON representation to change.
+The frozen D1.0 reader semantics are represented by compact committed
+fingerprints. This keeps validation portable in shallow checkouts while
+allowing the physical JSON representation to change.
 """
 
 from __future__ import annotations
@@ -13,7 +13,6 @@ from copy import deepcopy
 import hashlib
 import json
 from pathlib import Path
-import subprocess
 from typing import Any
 
 
@@ -21,6 +20,7 @@ ROOT = Path(__file__).resolve().parents[1]
 DERIVED_PATH = ROOT / "data/derived/sc1-site.json"
 GENERATED_PATH = ROOT / "site/src/generated/sc1-site.json"
 D10_AUDIT_PATH = ROOT / "data/derived/d1-0-bundle-size-audit.json"
+D10_BASELINE_PATH = ROOT / "data/derived/d1-0-semantic-baseline.json"
 
 DISPLAY_TABLES = {
     "labels": "labels",
@@ -31,37 +31,12 @@ DISPLAY_TABLES = {
 }
 
 
-def read_json_bytes(payload: bytes) -> Any:
-    return json.loads(payload.decode("utf-8"))
-
-
 def read_json(path: Path) -> Any:
     return json.loads(path.read_text(encoding="utf-8"))
 
 
 def sha256_bytes(payload: bytes) -> str:
     return hashlib.sha256(payload).hexdigest()
-
-
-def load_frozen_d10_bundle(root: Path) -> tuple[dict[str, Any], str]:
-    audit = read_json(root / D10_AUDIT_PATH.relative_to(ROOT))
-    commit = str(audit.get("baseline", {}).get("git_head", ""))
-    expected_sha = str(audit.get("inputs", {}).get("derived_sha256", ""))
-    if not commit or not expected_sha:
-        raise ValueError("D1.0 audit does not identify its frozen SC1 input")
-    try:
-        payload = subprocess.check_output(
-            ["git", "show", f"{commit}:data/derived/sc1-site.json"],
-            cwd=root,
-        )
-    except (OSError, subprocess.CalledProcessError) as exc:
-        raise ValueError(f"cannot load frozen D1.0 SC1 bundle: {exc}") from exc
-    if sha256_bytes(payload) != expected_sha:
-        raise ValueError("frozen D1.0 SC1 bundle hash does not match its audit")
-    bundle = read_json_bytes(payload)
-    if not isinstance(bundle, dict):
-        raise ValueError("frozen D1.0 SC1 bundle is not an object")
-    return bundle, commit
 
 
 def logical_core(bundle: dict[str, Any]) -> dict[str, Any]:
@@ -77,6 +52,23 @@ def logical_core(bundle: dict[str, Any]) -> dict[str, Any]:
     return result
 
 
+def canonical_json_bytes(value: Any) -> bytes:
+    return json.dumps(
+        value,
+        ensure_ascii=False,
+        sort_keys=True,
+        separators=(",", ":"),
+    ).encode("utf-8")
+
+
+def canonical_sha256(value: Any) -> str:
+    return sha256_bytes(canonical_json_bytes(value))
+
+
+def table_key_sha256(table: dict[str, Any]) -> str:
+    return canonical_sha256(sorted(table))
+
+
 def validate(root: Path = ROOT) -> list[str]:
     root = root.resolve()
     errors: list[str] = []
@@ -85,7 +77,7 @@ def validate(root: Path = ROOT) -> list[str]:
         generated = read_json(root / GENERATED_PATH.relative_to(ROOT))
         current_bytes = (root / DERIVED_PATH.relative_to(ROOT)).read_bytes()
         generated_bytes = (root / GENERATED_PATH.relative_to(ROOT)).read_bytes()
-        baseline, baseline_commit = load_frozen_d10_bundle(root)
+        baseline = read_json(root / D10_BASELINE_PATH.relative_to(ROOT))
         d10_audit = read_json(root / D10_AUDIT_PATH.relative_to(ROOT))
     except (OSError, ValueError, json.JSONDecodeError) as exc:
         return [f"cannot read D1.1 validation inputs: {exc}"]
@@ -94,6 +86,17 @@ def validate(root: Path = ROOT) -> list[str]:
         errors.append("SC1 derived and generated bundle views are not byte/JSON identical")
     if not isinstance(current, dict):
         return ["current SC1 bundle is not an object"]
+    if not isinstance(baseline, dict) or baseline.get("schema") != 1:
+        errors.append("D1.0 semantic baseline has an invalid schema marker")
+    if baseline.get("artifact") != "D1.0 semantic baseline":
+        errors.append("D1.0 semantic baseline has an invalid artifact marker")
+    baseline_source = baseline.get("source", {}) if isinstance(baseline, dict) else {}
+    d10_inputs = d10_audit.get("inputs", {}) if isinstance(d10_audit, dict) else {}
+    if isinstance(baseline_source, dict) and isinstance(d10_inputs, dict):
+        if baseline_source.get("bundle_sha256") != d10_inputs.get("derived_sha256"):
+            errors.append("D1.0 semantic baseline is not anchored to the D1.0 input SHA256")
+        if baseline_source.get("bundle_size_bytes") != d10_audit.get("bundle_size", {}).get("raw_file_bytes"):
+            errors.append("D1.0 semantic baseline is not anchored to the D1.0 input size")
     shared = current.get("display")
     if not isinstance(shared, dict):
         errors.append("SC1 bundle lacks shared display registry")
@@ -107,25 +110,36 @@ def validate(root: Path = ROOT) -> list[str]:
             if field in reading:
                 errors.append(f"Story {story.get('id')} retains duplicated display map: {field}")
 
-    if logical_core(current) != logical_core(baseline):
-        errors.append(
-            "logical reader projection differs from frozen D1.0 bundle "
-            f"({baseline_commit})"
-        )
-    baseline_tables: dict[str, dict[str, Any]] = {table: {} for table in DISPLAY_TABLES}
-    for story in baseline.get("stories", []):
-        reading = story.get("reading", {}) if isinstance(story, dict) else {}
-        for table, old_field in DISPLAY_TABLES.items():
-            for key, value in reading.get(old_field, {}).items():
-                if key in baseline_tables[table] and baseline_tables[table][key] != value:
-                    errors.append(f"frozen D1.0 display values conflict: {old_field}/{key}")
-                baseline_tables[table].setdefault(key, value)
+    expected_core = baseline.get("logical_core", {}) if isinstance(baseline, dict) else {}
+    if isinstance(expected_core, dict):
+        actual_core = logical_core(current)
+        if canonical_sha256(actual_core) != expected_core.get("sha256"):
+            errors.append("logical reader projection differs from committed D1.0 semantic baseline")
+        expected_counts = expected_core.get("record_counts", {})
+        if isinstance(expected_counts, dict):
+            for field, expected_count in expected_counts.items():
+                if expected_count is None:
+                    continue
+                value = actual_core.get(field)
+                actual_count = len(value) if isinstance(value, (list, dict)) else None
+                if actual_count != expected_count:
+                    errors.append(f"D1.0 logical-core count differs for {field}")
+    expected_tables = baseline.get("display_tables", {}) if isinstance(baseline, dict) else {}
+    if not isinstance(expected_tables, dict):
+        errors.append("D1.0 semantic baseline display_tables is not an object")
+        expected_tables = {}
     if isinstance(shared, dict):
-        for table, expected in baseline_tables.items():
+        for table in DISPLAY_TABLES:
             current_table = shared.get(table, {})
-            for key, value in expected.items():
-                if current_table.get(key) != value:
-                    errors.append(f"shared display value differs from D1.0: {table}/{key}")
+            expected = expected_tables.get(table, {})
+            if not isinstance(current_table, dict) or not isinstance(expected, dict):
+                continue
+            if len(current_table) != expected.get("record_count"):
+                errors.append(f"shared display count differs from D1.0: {table}")
+            if canonical_sha256(current_table) != expected.get("sha256"):
+                errors.append(f"shared display values differ from D1.0: {table}")
+            if table_key_sha256(current_table) != expected.get("keys_sha256"):
+                errors.append(f"shared display keys differ from D1.0: {table}")
     if isinstance(shared, dict):
         expected_ids = {
             "people": {item.get("id") for item in current.get("people", [])},

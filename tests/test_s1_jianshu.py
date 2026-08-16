@@ -1,11 +1,13 @@
 from __future__ import annotations
 
+import hashlib
 import json
 from pathlib import Path
 import subprocess
 import unittest
 
 from scripts.s1_jianshu_common import discover_payloads, primary_witness_snapshot
+from tests.support import skip_if_portable_payload_missing
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -25,11 +27,7 @@ class S1JianshuIntegrationTests(unittest.TestCase):
         cls.gate = read_json("data/derived/s1-jianshu-punctuation-gate-audit.json")
         cls.readiness = read_json("data/derived/s1-jianshu-candidate-punctuation-readiness.json")
 
-    def test_local_source_family_has_one_machine_and_one_visual_payload(self):
-        discovered = discover_payloads()
-        self.assertEqual(set(discovered), {"epub", "pdf"})
-        self.assertEqual(discovered["epub"].suffix, ".epub")
-        self.assertEqual(discovered["pdf"].suffix, ".pdf")
+    def test_local_source_registration_contract(self):
         payloads = self.registration["payloads"]
         self.assertEqual({row["source_id"] for row in payloads}, {
             "shishuo-jianshu-yujiaxi-local-epub",
@@ -40,6 +38,21 @@ class S1JianshuIntegrationTests(unittest.TestCase):
         tracked = subprocess.run(["git", "ls-files", "sources/downloads/shishuo"], cwd=ROOT, capture_output=True, text=True, check=True).stdout
         self.assertNotIn(".epub", tracked)
         self.assertNotIn(".pdf", tracked)
+
+    def test_local_source_payload_discovery_and_hashes(self):
+        payloads = self.registration["payloads"]
+        paths = [row["local_path"] for row in payloads]
+        skip_if_portable_payload_missing(self, ROOT, *paths)
+        discovered = discover_payloads()
+        self.assertEqual(set(discovered), {"epub", "pdf"})
+        self.assertEqual(discovered["epub"].suffix, ".epub")
+        self.assertEqual(discovered["pdf"].suffix, ".pdf")
+        by_format = {row["format"]: row for row in payloads}
+        for kind, path in discovered.items():
+            record = by_format[kind]
+            self.assertEqual(path.relative_to(ROOT).as_posix(), record["local_path"])
+            self.assertEqual(path.stat().st_size, record["byte_size"])
+            self.assertEqual(hashlib.sha256(path.read_bytes()).hexdigest(), record["sha256"])
 
     def test_epub_structure_covers_all_categories_and_story_entries(self):
         self.assertEqual(self.structure["chapters_detected"], 36)
@@ -52,6 +65,7 @@ class S1JianshuIntegrationTests(unittest.TestCase):
 
     def test_structured_cache_retains_concrete_editorial_layers(self):
         cache = ROOT / ".cache/shishuo-reference/jianshu/story-records.jsonl"
+        skip_if_portable_payload_missing(self, ROOT, ".cache/shishuo-reference/jianshu/story-records.jsonl")
         records = [json.loads(line) for line in cache.read_text(encoding="utf-8").splitlines()]
 
         note_only = next(
@@ -122,10 +136,39 @@ class S1JianshuIntegrationTests(unittest.TestCase):
     def test_x1_2a_and_x1_2p_are_protected(self):
         protected = self.registration["protected_input_hashes"]
         for path, digest in protected.items():
-            actual = __import__("hashlib").sha256((ROOT / path).read_bytes()).hexdigest()
+            actual = hashlib.sha256((ROOT / path).read_bytes()).hexdigest()
             self.assertEqual(actual, digest, path)
         self.assertTrue(self.backlog["existing_x1_2a_extension"]["preserved_without_mutation"])
         self.assertTrue(self.registration["primary_shishuo_witness_unchanged"])
+
+    def test_primary_witness_lock_contract_is_committed(self):
+        lock_path = ROOT / "sources/registry/shishuo-provenance.lock.json"
+        lock = read_json("sources/registry/shishuo-provenance.lock.json")
+        witness = self.registration["primary_shishuo_witness"]
+        self.assertEqual(witness["witness_id"], lock["witness_id"])
+        self.assertEqual(witness["lock_path"], "sources/registry/shishuo-provenance.lock.json")
+        self.assertEqual(witness["lock_sha256"], hashlib.sha256(lock_path.read_bytes()).hexdigest())
+        expected_files = [
+            {
+                "path": row["path"],
+                "expected_size": row["size"],
+                "expected_sha256": row["sha256"],
+            }
+            for row in lock["files"]
+        ]
+        actual_files = [
+            {
+                "path": row["path"],
+                "expected_size": row["expected_size"],
+                "expected_sha256": row["expected_sha256"],
+            }
+            for row in witness["files"]
+        ]
+        self.assertEqual(actual_files, expected_files)
+
+    def test_live_primary_witness_snapshot_matches_lock(self):
+        lock = read_json("sources/registry/shishuo-provenance.lock.json")
+        skip_if_portable_payload_missing(self, ROOT, *(row["path"] for row in lock["files"]))
         self.assertEqual(self.registration["primary_shishuo_witness"], primary_witness_snapshot())
 
 
