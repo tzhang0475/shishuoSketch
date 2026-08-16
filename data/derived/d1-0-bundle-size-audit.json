@@ -1,0 +1,2753 @@
+{
+  "audit": "D1.0",
+  "baseline": {
+    "branch": "main",
+    "frozen_state": "X1.2P",
+    "git_head": "7b1c4ab361a8db097607b5fc9f0931302a529345"
+  },
+  "bundle_size": {
+    "compact_serialized_bytes": 64933215,
+    "compact_serialized_mib": 61.925139,
+    "formatted_payload_bytes_without_trailing_newline": 80421488,
+    "raw_file_bytes": 80421489,
+    "raw_file_mib": 76.695909,
+    "top_level_field_percentages_sum": 99.999597,
+    "top_level_field_serialized_bytes": 64932953,
+    "top_level_syntax_overhead_bytes": 262
+  },
+  "duplication_findings": {
+    "evidence_source_provenance": {
+      "interpretation": "Witness/source identity is meaningful provenance; repeated source metadata could be normalized behind an Evidence-side reference without deleting provenance.",
+      "largest_duplicate_groups": [
+        {
+          "bytes_per_copy": 175,
+          "copies": 804
+        },
+        {
+          "bytes_per_copy": 175,
+          "copies": 466
+        },
+        {
+          "bytes_per_copy": 175,
+          "copies": 168
+        },
+        {
+          "bytes_per_copy": 199,
+          "copies": 6
+        },
+        {
+          "bytes_per_copy": 199,
+          "copies": 5
+        },
+        {
+          "bytes_per_copy": 199,
+          "copies": 4
+        },
+        {
+          "bytes_per_copy": 199,
+          "copies": 3
+        },
+        {
+          "bytes_per_copy": 199,
+          "copies": 3
+        },
+        {
+          "bytes_per_copy": 199,
+          "copies": 3
+        },
+        {
+          "bytes_per_copy": 199,
+          "copies": 3
+        }
+      ],
+      "path": "evidence[].locator.source_provenance",
+      "record_count": 1513,
+      "repeat_serialized_bytes_upper_bound": 257692,
+      "serialized_bytes": 266575,
+      "source_record_count": 1513,
+      "unique_serializations": 45,
+      "unique_serialized_bytes": 8883
+    },
+    "generated_views": {
+      "byte_identical": true,
+      "bytes_per_copy": 80421489,
+      "interpretation": "One research-side archive and one Vite input are kept as exact generated views. Git can deduplicate identical blob content, but checkout/deployment/runtime still carry both copies before bundling.",
+      "paths": [
+        "data/derived/sc1-site.json",
+        "site/src/generated/sc1-site.json"
+      ],
+      "sha256": "3b1a1fd0bfbd8bc7c4c4d53bcde4060943d2e8c49da77db87a5bee5cd34a2d2a",
+      "working_tree_duplicate_bytes": 80421489
+    },
+    "intentional_or_semantic_repetition": [
+      {
+        "path": "stories[].reading.main_text.original/simplified",
+        "reason": "The reader needs an evidence-backed punctuation/conversion projection. It is not interchangeable with physical-line canonical Story.text or source Evidence."
+      },
+      {
+        "path": "stories[].reading.main_text.segments",
+        "reason": "Inline Mention/ruler/annotation-marker interaction is a Story-local projection; it preserves display spans and target IDs."
+      },
+      {
+        "path": "stories[].evidence_ids / person_ids / mention_ids / relation_ids",
+        "reason": "These are cross-reference IDs, not copies of the referenced payloads; they are comparatively small and preserve local traversal."
+      },
+      {
+        "path": "evidence[].locator.source_provenance",
+        "reason": "Repeated provenance is semantically meaningful, although stable source records could be referenced indirectly in a later runtime representation."
+      }
+    ],
+    "runtime_projection_dedup_upper_bound": {
+      "components": [
+        {
+          "current_serialized_bytes": 241670,
+          "one_shared_copy_bytes": 1690,
+          "path": "stories[].reading.labels",
+          "repeat_bytes_upper_bound": 239980
+        },
+        {
+          "current_serialized_bytes": 3389100,
+          "one_shared_copy_bytes": 23700,
+          "path": "stories[].reading.person_display",
+          "repeat_bytes_upper_bound": 3365400
+        },
+        {
+          "current_serialized_bytes": 46475,
+          "one_shared_copy_bytes": 325,
+          "path": "stories[].reading.source_display",
+          "repeat_bytes_upper_bound": 46150
+        },
+        {
+          "current_serialized_bytes": 344773,
+          "one_shared_copy_bytes": 2411,
+          "path": "stories[].reading.relation_display",
+          "repeat_bytes_upper_bound": 342362
+        },
+        {
+          "current_serialized_bytes": 56413044,
+          "one_shared_copy_bytes": 493699,
+          "path": "stories[].reading.evidence_display",
+          "repeat_bytes_upper_bound": 55919345
+        }
+      ],
+      "interpretation": "Upper bound if repeated display maps become shared/indexed runtime data. It is not a D1.0 deletion estimate and does not remove canonical source/evidence data.",
+      "percentage_of_compact_bundle": 92.269014,
+      "repeat_bytes_upper_bound": 59913237
+    },
+    "story_common_reading_maps": {
+      "labels": {
+        "largest_duplicate_groups": [
+          {
+            "bytes_per_copy": 1690,
+            "copies": 143
+          }
+        ],
+        "record_count": 143,
+        "repeat_serialized_bytes_upper_bound": 239980,
+        "serialized_bytes": 241670,
+        "unique_serializations": 1,
+        "unique_serialized_bytes": 1690
+      },
+      "person_display": {
+        "largest_duplicate_groups": [
+          {
+            "bytes_per_copy": 23700,
+            "copies": 143
+          }
+        ],
+        "record_count": 143,
+        "repeat_serialized_bytes_upper_bound": 3365400,
+        "serialized_bytes": 3389100,
+        "unique_serializations": 1,
+        "unique_serialized_bytes": 23700
+      },
+      "relation_display": {
+        "largest_duplicate_groups": [
+          {
+            "bytes_per_copy": 2411,
+            "copies": 143
+          }
+        ],
+        "record_count": 143,
+        "repeat_serialized_bytes_upper_bound": 342362,
+        "serialized_bytes": 344773,
+        "unique_serializations": 1,
+        "unique_serialized_bytes": 2411
+      },
+      "source_display": {
+        "largest_duplicate_groups": [
+          {
+            "bytes_per_copy": 325,
+            "copies": 143
+          }
+        ],
+        "record_count": 143,
+        "repeat_serialized_bytes_upper_bound": 46150,
+        "serialized_bytes": 46475,
+        "unique_serializations": 1,
+        "unique_serialized_bytes": 325
+      }
+    },
+    "story_reading_evidence_display": {
+      "entry_occurrences": 167109,
+      "interpretation": "The current builder passes the complete global Evidence list to each reading projection. This is display duplication, not independent source evidence.",
+      "path": "stories[].reading.evidence_display",
+      "repeat_value_bytes_upper_bound": 48298332,
+      "serialized_bytes_in_current_bundle": 56413044,
+      "shared_map_serialized_bytes_estimate": 493699,
+      "story_count": 143,
+      "unique_evidence_ids": 1513,
+      "value_bytes_across_occurrences": 48723199,
+      "value_bytes_for_one_shared_value_per_evidence_id": 424867
+    }
+  },
+  "git_and_runtime_observations": {
+    "dist_javascript_bytes": 65940650,
+    "dist_javascript_files": [
+      {
+        "bytes": 65940650,
+        "path": "dist/assets/index-BkI6REDL.js"
+      }
+    ],
+    "git_note": "The two identical files point to one identical Git blob when Git object deduplication applies, but each generated update creates a large changed artifact/diff surface and both copies remain in checkout/deployment inputs.",
+    "github_large_file_hard_limit_bytes": 104857600,
+    "github_large_file_warning_threshold_bytes": 52428800,
+    "hard_limit_crossed": false,
+    "initial_parse_behavior": "The JSON module is included in the initial Vite JavaScript asset; loadSiteBundle then calls parseSiteBundle on the complete imported object. No runtime JSON fetch or lazy shard boundary exists.",
+    "vite_import_path": "site/src/data.ts -> site/src/generated/sc1-site.json",
+    "vite_static_import": true,
+    "warning_threshold_crossed": true
+  },
+  "inputs": {
+    "byte_identical": true,
+    "derived_path": "data/derived/sc1-site.json",
+    "derived_sha256": "3b1a1fd0bfbd8bc7c4c4d53bcde4060943d2e8c49da77db87a5bee5cd34a2d2a",
+    "generated_path": "site/src/generated/sc1-site.json",
+    "generated_sha256": "3b1a1fd0bfbd8bc7c4c4d53bcde4060943d2e8c49da77db87a5bee5cd34a2d2a",
+    "required_top_level_fields": [
+      "schema",
+      "generated_from",
+      "stories",
+      "people",
+      "mentions",
+      "relations",
+      "eras",
+      "evidence",
+      "sources",
+      "ruler_identities",
+      "era_cards",
+      "ruler_mentions",
+      "historical_events",
+      "story_era_orientations",
+      "person_sketches",
+      "scene_contexts",
+      "story_chain",
+      "ui"
+    ]
+  },
+  "largest_contributors": [
+    {
+      "path": "stories[].reading.evidence_display",
+      "percentage_of_compact_bundle": 86.878563,
+      "serialized_bytes": 56413044
+    },
+    {
+      "path": "stories[].reading.person_display",
+      "percentage_of_compact_bundle": 5.219363,
+      "serialized_bytes": 3389100
+    },
+    {
+      "path": "evidence",
+      "percentage_of_compact_bundle": 2.362581,
+      "serialized_bytes": 1534100
+    },
+    {
+      "path": "evidence[].locator",
+      "percentage_of_compact_bundle": 1.309875,
+      "serialized_bytes": 850544
+    },
+    {
+      "path": "mentions",
+      "percentage_of_compact_bundle": 1.018807,
+      "serialized_bytes": 661544
+    },
+    {
+      "path": "stories[].reading.annotations",
+      "percentage_of_compact_bundle": 0.797261,
+      "serialized_bytes": 517687
+    },
+    {
+      "path": "stories[].reading.relation_display",
+      "percentage_of_compact_bundle": 0.530966,
+      "serialized_bytes": 344773
+    },
+    {
+      "path": "stories[].reading.main_text",
+      "percentage_of_compact_bundle": 0.529165,
+      "serialized_bytes": 343604
+    },
+    {
+      "path": "evidence[].locator.source_provenance",
+      "percentage_of_compact_bundle": 0.410537,
+      "serialized_bytes": 266575
+    },
+    {
+      "path": "stories[].reading.mention_display",
+      "percentage_of_compact_bundle": 0.409036,
+      "serialized_bytes": 265600
+    }
+  ],
+  "nested_metrics": {
+    "evidence_person_sketch_scene": [
+      {
+        "average_record_bytes": 128.607,
+        "path": "evidence[].quote",
+        "percentage_of_compact_bundle": 0.299665,
+        "record_count": 1513,
+        "serialized_bytes_across_records": 194582
+      },
+      {
+        "average_record_bytes": 562.157,
+        "path": "evidence[].locator",
+        "percentage_of_compact_bundle": 1.309875,
+        "record_count": 1513,
+        "serialized_bytes_across_records": 850544
+      },
+      {
+        "average_record_bytes": 10.0,
+        "path": "evidence[].assertion_status",
+        "percentage_of_compact_bundle": 0.023301,
+        "record_count": 1513,
+        "serialized_bytes_across_records": 15130
+      },
+      {
+        "average_record_bytes": 10.992,
+        "path": "evidence[].review_status",
+        "percentage_of_compact_bundle": 0.025612,
+        "record_count": 1513,
+        "serialized_bytes_across_records": 16631
+      },
+      {
+        "average_record_bytes": 129.987,
+        "path": "evidence[].notes",
+        "percentage_of_compact_bundle": 0.30288,
+        "record_count": 1513,
+        "serialized_bytes_across_records": 196670
+      },
+      {
+        "average_record_bytes": 176.19,
+        "notes": "Repeated source/witness metadata; some repetition is intentional provenance, but it is a candidate shared table in D1.1.",
+        "path": "evidence[].locator.source_provenance",
+        "percentage_of_compact_bundle": 0.410537,
+        "record_count": 1513,
+        "serialized_bytes_across_records": 266575
+      },
+      {
+        "average_record_bytes": 58.812,
+        "path": "evidence[].locator.artifact_path",
+        "percentage_of_compact_bundle": 0.137036,
+        "record_count": 1513,
+        "serialized_bytes_across_records": 88982
+      },
+      {
+        "average_record_bytes": 66.0,
+        "path": "evidence[].locator.artifact_sha256",
+        "percentage_of_compact_bundle": 0.153786,
+        "record_count": 1513,
+        "serialized_bytes_across_records": 99858
+      },
+      {
+        "average_record_bytes": 15.118,
+        "path": "evidence[].locator.entry_id",
+        "percentage_of_compact_bundle": 0.035225,
+        "record_count": 1513,
+        "serialized_bytes_across_records": 22873
+      },
+      {
+        "average_record_bytes": 4.694,
+        "path": "evidence[].locator.unit_id",
+        "percentage_of_compact_bundle": 0.010937,
+        "record_count": 1513,
+        "serialized_bytes_across_records": 7102
+      },
+      {
+        "average_record_bytes": 243.667,
+        "path": "person_sketches[].identity",
+        "percentage_of_compact_bundle": 0.028144,
+        "record_count": 75,
+        "serialized_bytes_across_records": 18275
+      },
+      {
+        "average_record_bytes": 44.88,
+        "path": "person_sketches[].profile_evidence_ids",
+        "percentage_of_compact_bundle": 0.005184,
+        "record_count": 75,
+        "serialized_bytes_across_records": 3366
+      },
+      {
+        "average_record_bytes": 1666.667,
+        "path": "person_sketches[].aliases",
+        "percentage_of_compact_bundle": 0.192505,
+        "record_count": 75,
+        "serialized_bytes_across_records": 125000
+      },
+      {
+        "average_record_bytes": 66.747,
+        "path": "person_sketches[].story_counts",
+        "percentage_of_compact_bundle": 0.007709,
+        "record_count": 75,
+        "serialized_bytes_across_records": 5006
+      },
+      {
+        "average_record_bytes": 243.76,
+        "path": "person_sketches[].life_glimpse",
+        "percentage_of_compact_bundle": 0.028155,
+        "record_count": 75,
+        "serialized_bytes_across_records": 18282
+      },
+      {
+        "average_record_bytes": 62.341,
+        "path": "scene_contexts[].evidence_ids",
+        "percentage_of_compact_bundle": 0.004224,
+        "record_count": 44,
+        "serialized_bytes_across_records": 2743
+      },
+      {
+        "average_record_bytes": 153.409,
+        "path": "scene_contexts[].date",
+        "percentage_of_compact_bundle": 0.010395,
+        "record_count": 44,
+        "serialized_bytes_across_records": 6750
+      },
+      {
+        "average_record_bytes": 20.818,
+        "path": "scene_contexts[].places",
+        "percentage_of_compact_bundle": 0.001411,
+        "record_count": 44,
+        "serialized_bytes_across_records": 916
+      },
+      {
+        "average_record_bytes": 867.5,
+        "path": "scene_contexts[].people_at_scene",
+        "percentage_of_compact_bundle": 0.058783,
+        "record_count": 44,
+        "serialized_bytes_across_records": 38170
+      },
+      {
+        "average_record_bytes": 135.136,
+        "path": "scene_contexts[].unmaterialized_people",
+        "percentage_of_compact_bundle": 0.009157,
+        "record_count": 44,
+        "serialized_bytes_across_records": 5946
+      },
+      {
+        "average_record_bytes": 195.295,
+        "path": "scene_contexts[].positional_context",
+        "percentage_of_compact_bundle": 0.013234,
+        "record_count": 44,
+        "serialized_bytes_across_records": 8593
+      },
+      {
+        "average_record_bytes": 472.682,
+        "path": "scene_contexts[].event_background",
+        "percentage_of_compact_bundle": 0.03203,
+        "record_count": 44,
+        "serialized_bytes_across_records": 20798
+      },
+      {
+        "average_record_bytes": 948.409,
+        "path": "scene_contexts[].narrative_layers",
+        "percentage_of_compact_bundle": 0.064266,
+        "record_count": 44,
+        "serialized_bytes_across_records": 41730
+      },
+      {
+        "average_record_bytes": 283.455,
+        "path": "scene_contexts[].notes",
+        "percentage_of_compact_bundle": 0.019207,
+        "record_count": 44,
+        "serialized_bytes_across_records": 12472
+      }
+    ],
+    "story_and_reading": [
+      {
+        "average_story_bytes": 213.832,
+        "largest_story_records": [
+          {
+            "bytes": 582,
+            "record_id": "05-fangzheng-023"
+          },
+          {
+            "bytes": 577,
+            "record_id": "27-jiajue-006"
+          },
+          {
+            "bytes": 538,
+            "record_id": "08-shangyu-020"
+          },
+          {
+            "bytes": 509,
+            "record_id": "19-xianyuan-018"
+          },
+          {
+            "bytes": 509,
+            "record_id": "23-rendan-038"
+          },
+          {
+            "bytes": 478,
+            "record_id": "04-wenxue-022"
+          },
+          {
+            "bytes": 447,
+            "record_id": "27-jiajue-009"
+          },
+          {
+            "bytes": 435,
+            "record_id": "09-pinzao-036"
+          },
+          {
+            "bytes": 406,
+            "record_id": "05-fangzheng-032"
+          },
+          {
+            "bytes": 394,
+            "record_id": "10-guizhen-012"
+          }
+        ],
+        "path": "stories[].text",
+        "percentage_of_compact_bundle": 0.047091,
+        "serialized_bytes_across_stories": 30578,
+        "story_count": 143
+      },
+      {
+        "average_story_bytes": 857.448,
+        "largest_story_records": [
+          {
+            "bytes": 5266,
+            "record_id": "05-fangzheng-018"
+          },
+          {
+            "bytes": 3554,
+            "record_id": "02-yanyu-072"
+          },
+          {
+            "bytes": 2779,
+            "record_id": "19-xianyuan-013"
+          },
+          {
+            "bytes": 2334,
+            "record_id": "08-shangyu-020"
+          },
+          {
+            "bytes": 2332,
+            "record_id": "09-pinzao-006"
+          },
+          {
+            "bytes": 2067,
+            "record_id": "02-yanyu-047"
+          },
+          {
+            "bytes": 1992,
+            "record_id": "03-zhengshi-005"
+          },
+          {
+            "bytes": 1987,
+            "record_id": "09-pinzao-032"
+          },
+          {
+            "bytes": 1981,
+            "record_id": "01-dexing-047"
+          },
+          {
+            "bytes": 1969,
+            "record_id": "04-wenxue-069"
+          }
+        ],
+        "path": "stories[].annotations",
+        "percentage_of_compact_bundle": 0.188832,
+        "serialized_bytes_across_stories": 122615,
+        "story_count": 143
+      },
+      {
+        "average_story_bytes": 430988.077,
+        "largest_story_records": [
+          {
+            "bytes": 541338,
+            "record_id": "36-chouxi-003"
+          },
+          {
+            "bytes": 526150,
+            "record_id": "35-huoni-003"
+          },
+          {
+            "bytes": 524264,
+            "record_id": "27-jiajue-008"
+          },
+          {
+            "bytes": 521526,
+            "record_id": "27-jiajue-009"
+          },
+          {
+            "bytes": 521370,
+            "record_id": "33-youhui-007"
+          },
+          {
+            "bytes": 520481,
+            "record_id": "27-jiajue-012"
+          },
+          {
+            "bytes": 519919,
+            "record_id": "29-jianshe-001"
+          },
+          {
+            "bytes": 519760,
+            "record_id": "34-pilou-001"
+          },
+          {
+            "bytes": 517503,
+            "record_id": "29-jianshe-008"
+          },
+          {
+            "bytes": 515065,
+            "record_id": "26-qingdi-002"
+          }
+        ],
+        "path": "stories[].reading",
+        "percentage_of_compact_bundle": 94.914898,
+        "serialized_bytes_across_stories": 61631295,
+        "story_count": 143
+      },
+      {
+        "average_story_bytes": 15.65,
+        "largest_story_records": [
+          {
+            "bytes": 18,
+            "record_id": "05-fangzheng-009"
+          },
+          {
+            "bytes": 18,
+            "record_id": "05-fangzheng-011"
+          },
+          {
+            "bytes": 18,
+            "record_id": "05-fangzheng-012"
+          },
+          {
+            "bytes": 18,
+            "record_id": "05-fangzheng-018"
+          },
+          {
+            "bytes": 18,
+            "record_id": "05-fangzheng-023"
+          },
+          {
+            "bytes": 18,
+            "record_id": "05-fangzheng-025"
+          },
+          {
+            "bytes": 18,
+            "record_id": "05-fangzheng-027"
+          },
+          {
+            "bytes": 18,
+            "record_id": "05-fangzheng-028"
+          },
+          {
+            "bytes": 18,
+            "record_id": "05-fangzheng-030"
+          },
+          {
+            "bytes": 18,
+            "record_id": "05-fangzheng-031"
+          }
+        ],
+        "path": "stories[].reading.entry_id",
+        "percentage_of_compact_bundle": 0.003447,
+        "serialized_bytes_across_stories": 2238,
+        "story_count": 143
+      },
+      {
+        "average_story_bytes": 10.993,
+        "largest_story_records": [
+          {
+            "bytes": 11,
+            "record_id": "01-dexing-012"
+          },
+          {
+            "bytes": 11,
+            "record_id": "01-dexing-014"
+          },
+          {
+            "bytes": 11,
+            "record_id": "01-dexing-015"
+          },
+          {
+            "bytes": 11,
+            "record_id": "01-dexing-016"
+          },
+          {
+            "bytes": 11,
+            "record_id": "01-dexing-017"
+          },
+          {
+            "bytes": 11,
+            "record_id": "01-dexing-023"
+          },
+          {
+            "bytes": 11,
+            "record_id": "01-dexing-025"
+          },
+          {
+            "bytes": 11,
+            "record_id": "01-dexing-026"
+          },
+          {
+            "bytes": 11,
+            "record_id": "01-dexing-028"
+          },
+          {
+            "bytes": 11,
+            "record_id": "01-dexing-045"
+          }
+        ],
+        "path": "stories[].reading.status",
+        "percentage_of_compact_bundle": 0.002421,
+        "serialized_bytes_across_stories": 1572,
+        "story_count": 143
+      },
+      {
+        "average_story_bytes": 32.615,
+        "largest_story_records": [
+          {
+            "bytes": 35,
+            "record_id": "05-fangzheng-009"
+          },
+          {
+            "bytes": 35,
+            "record_id": "05-fangzheng-011"
+          },
+          {
+            "bytes": 35,
+            "record_id": "05-fangzheng-012"
+          },
+          {
+            "bytes": 35,
+            "record_id": "05-fangzheng-018"
+          },
+          {
+            "bytes": 35,
+            "record_id": "05-fangzheng-023"
+          },
+          {
+            "bytes": 35,
+            "record_id": "05-fangzheng-025"
+          },
+          {
+            "bytes": 35,
+            "record_id": "05-fangzheng-027"
+          },
+          {
+            "bytes": 35,
+            "record_id": "05-fangzheng-028"
+          },
+          {
+            "bytes": 35,
+            "record_id": "05-fangzheng-030"
+          },
+          {
+            "bytes": 35,
+            "record_id": "05-fangzheng-031"
+          }
+        ],
+        "path": "stories[].reading.punctuation_record_id",
+        "percentage_of_compact_bundle": 0.007183,
+        "serialized_bytes_across_stories": 4664,
+        "story_count": 143
+      },
+      {
+        "average_story_bytes": 66.0,
+        "largest_story_records": [
+          {
+            "bytes": 66,
+            "record_id": "01-dexing-012"
+          },
+          {
+            "bytes": 66,
+            "record_id": "01-dexing-014"
+          },
+          {
+            "bytes": 66,
+            "record_id": "01-dexing-015"
+          },
+          {
+            "bytes": 66,
+            "record_id": "01-dexing-016"
+          },
+          {
+            "bytes": 66,
+            "record_id": "01-dexing-017"
+          },
+          {
+            "bytes": 66,
+            "record_id": "01-dexing-023"
+          },
+          {
+            "bytes": 66,
+            "record_id": "01-dexing-025"
+          },
+          {
+            "bytes": 66,
+            "record_id": "01-dexing-026"
+          },
+          {
+            "bytes": 66,
+            "record_id": "01-dexing-028"
+          },
+          {
+            "bytes": 66,
+            "record_id": "01-dexing-045"
+          }
+        ],
+        "path": "stories[].reading.base_canonical_entry_sha256",
+        "percentage_of_compact_bundle": 0.014535,
+        "serialized_bytes_across_stories": 9438,
+        "story_count": 143
+      },
+      {
+        "average_story_bytes": 56.0,
+        "largest_story_records": [
+          {
+            "bytes": 56,
+            "record_id": "01-dexing-012"
+          },
+          {
+            "bytes": 56,
+            "record_id": "01-dexing-014"
+          },
+          {
+            "bytes": 56,
+            "record_id": "01-dexing-015"
+          },
+          {
+            "bytes": 56,
+            "record_id": "01-dexing-016"
+          },
+          {
+            "bytes": 56,
+            "record_id": "01-dexing-017"
+          },
+          {
+            "bytes": 56,
+            "record_id": "01-dexing-023"
+          },
+          {
+            "bytes": 56,
+            "record_id": "01-dexing-025"
+          },
+          {
+            "bytes": 56,
+            "record_id": "01-dexing-026"
+          },
+          {
+            "bytes": 56,
+            "record_id": "01-dexing-028"
+          },
+          {
+            "bytes": 56,
+            "record_id": "01-dexing-045"
+          }
+        ],
+        "path": "stories[].reading.conversion",
+        "percentage_of_compact_bundle": 0.012333,
+        "serialized_bytes_across_stories": 8008,
+        "story_count": 143
+      },
+      {
+        "average_story_bytes": 2402.825,
+        "largest_story_records": [
+          {
+            "bytes": 6576,
+            "record_id": "05-fangzheng-018"
+          },
+          {
+            "bytes": 5775,
+            "record_id": "05-fangzheng-023"
+          },
+          {
+            "bytes": 5166,
+            "record_id": "05-fangzheng-058"
+          },
+          {
+            "bytes": 5144,
+            "record_id": "05-fangzheng-025"
+          },
+          {
+            "bytes": 4950,
+            "record_id": "36-chouxi-003"
+          },
+          {
+            "bytes": 4836,
+            "record_id": "09-pinzao-006"
+          },
+          {
+            "bytes": 4822,
+            "record_id": "08-shangyu-020"
+          },
+          {
+            "bytes": 4806,
+            "record_id": "04-wenxue-022"
+          },
+          {
+            "bytes": 4620,
+            "record_id": "19-xianyuan-013"
+          },
+          {
+            "bytes": 4464,
+            "record_id": "01-dexing-017"
+          }
+        ],
+        "path": "stories[].reading.main_text",
+        "percentage_of_compact_bundle": 0.529165,
+        "serialized_bytes_across_stories": 343604,
+        "story_count": 143
+      },
+      {
+        "average_story_bytes": 3620.189,
+        "largest_story_records": [
+          {
+            "bytes": 19669,
+            "record_id": "05-fangzheng-018"
+          },
+          {
+            "bytes": 15149,
+            "record_id": "02-yanyu-072"
+          },
+          {
+            "bytes": 10805,
+            "record_id": "19-xianyuan-013"
+          },
+          {
+            "bytes": 9098,
+            "record_id": "03-zhengshi-005"
+          },
+          {
+            "bytes": 9040,
+            "record_id": "08-shangyu-020"
+          },
+          {
+            "bytes": 8918,
+            "record_id": "01-dexing-047"
+          },
+          {
+            "bytes": 8783,
+            "record_id": "02-yanyu-047"
+          },
+          {
+            "bytes": 8726,
+            "record_id": "09-pinzao-006"
+          },
+          {
+            "bytes": 8280,
+            "record_id": "36-chouxi-003"
+          },
+          {
+            "bytes": 7866,
+            "record_id": "02-yanyu-035"
+          }
+        ],
+        "path": "stories[].reading.annotations",
+        "percentage_of_compact_bundle": 0.797261,
+        "serialized_bytes_across_stories": 517687,
+        "story_count": 143
+      },
+      {
+        "average_story_bytes": 32.65,
+        "largest_story_records": [
+          {
+            "bytes": 292,
+            "record_id": "05-fangzheng-051"
+          },
+          {
+            "bytes": 171,
+            "record_id": "05-fangzheng-031"
+          },
+          {
+            "bytes": 171,
+            "record_id": "07-shijian-006"
+          },
+          {
+            "bytes": 165,
+            "record_id": "25-paidiao-026"
+          },
+          {
+            "bytes": 154,
+            "record_id": "02-yanyu-066"
+          },
+          {
+            "bytes": 154,
+            "record_id": "02-yanyu-069"
+          },
+          {
+            "bytes": 154,
+            "record_id": "05-fangzheng-037"
+          },
+          {
+            "bytes": 154,
+            "record_id": "06-yaliang-017"
+          },
+          {
+            "bytes": 154,
+            "record_id": "07-shijian-018"
+          },
+          {
+            "bytes": 154,
+            "record_id": "09-pinzao-022"
+          }
+        ],
+        "path": "stories[].reading.mention_projection",
+        "percentage_of_compact_bundle": 0.00719,
+        "serialized_bytes_across_stories": 4669,
+        "story_count": 143
+      },
+      {
+        "average_story_bytes": 1690.0,
+        "largest_story_records": [
+          {
+            "bytes": 1690,
+            "record_id": "01-dexing-012"
+          },
+          {
+            "bytes": 1690,
+            "record_id": "01-dexing-014"
+          },
+          {
+            "bytes": 1690,
+            "record_id": "01-dexing-015"
+          },
+          {
+            "bytes": 1690,
+            "record_id": "01-dexing-016"
+          },
+          {
+            "bytes": 1690,
+            "record_id": "01-dexing-017"
+          },
+          {
+            "bytes": 1690,
+            "record_id": "01-dexing-023"
+          },
+          {
+            "bytes": 1690,
+            "record_id": "01-dexing-025"
+          },
+          {
+            "bytes": 1690,
+            "record_id": "01-dexing-026"
+          },
+          {
+            "bytes": 1690,
+            "record_id": "01-dexing-028"
+          },
+          {
+            "bytes": 1690,
+            "record_id": "01-dexing-045"
+          }
+        ],
+        "notes": "Measured as a per-Story projection; identical copies are reported separately in duplication_findings.",
+        "path": "stories[].reading.labels",
+        "percentage_of_compact_bundle": 0.372182,
+        "serialized_bytes_across_stories": 241670,
+        "story_count": 143
+      },
+      {
+        "average_story_bytes": 23700.0,
+        "largest_story_records": [
+          {
+            "bytes": 23700,
+            "record_id": "01-dexing-012"
+          },
+          {
+            "bytes": 23700,
+            "record_id": "01-dexing-014"
+          },
+          {
+            "bytes": 23700,
+            "record_id": "01-dexing-015"
+          },
+          {
+            "bytes": 23700,
+            "record_id": "01-dexing-016"
+          },
+          {
+            "bytes": 23700,
+            "record_id": "01-dexing-017"
+          },
+          {
+            "bytes": 23700,
+            "record_id": "01-dexing-023"
+          },
+          {
+            "bytes": 23700,
+            "record_id": "01-dexing-025"
+          },
+          {
+            "bytes": 23700,
+            "record_id": "01-dexing-026"
+          },
+          {
+            "bytes": 23700,
+            "record_id": "01-dexing-028"
+          },
+          {
+            "bytes": 23700,
+            "record_id": "01-dexing-045"
+          }
+        ],
+        "notes": "Measured as a per-Story projection; identical copies are reported separately in duplication_findings.",
+        "path": "stories[].reading.person_display",
+        "percentage_of_compact_bundle": 5.219363,
+        "serialized_bytes_across_stories": 3389100,
+        "story_count": 143
+      },
+      {
+        "average_story_bytes": 1857.343,
+        "largest_story_records": [
+          {
+            "bytes": 5815,
+            "record_id": "36-chouxi-003"
+          },
+          {
+            "bytes": 5026,
+            "record_id": "08-shangyu-054"
+          },
+          {
+            "bytes": 4992,
+            "record_id": "05-fangzheng-058"
+          },
+          {
+            "bytes": 4896,
+            "record_id": "04-wenxue-094"
+          },
+          {
+            "bytes": 4580,
+            "record_id": "27-jiajue-008"
+          },
+          {
+            "bytes": 4528,
+            "record_id": "01-dexing-017"
+          },
+          {
+            "bytes": 4505,
+            "record_id": "14-rongzhi-023"
+          },
+          {
+            "bytes": 4420,
+            "record_id": "02-yanyu-072"
+          },
+          {
+            "bytes": 4097,
+            "record_id": "06-yaliang-019"
+          },
+          {
+            "bytes": 3996,
+            "record_id": "04-wenxue-022"
+          }
+        ],
+        "path": "stories[].reading.mention_display",
+        "percentage_of_compact_bundle": 0.409036,
+        "serialized_bytes_across_stories": 265600,
+        "story_count": 143
+      },
+      {
+        "average_story_bytes": 325.0,
+        "largest_story_records": [
+          {
+            "bytes": 325,
+            "record_id": "01-dexing-012"
+          },
+          {
+            "bytes": 325,
+            "record_id": "01-dexing-014"
+          },
+          {
+            "bytes": 325,
+            "record_id": "01-dexing-015"
+          },
+          {
+            "bytes": 325,
+            "record_id": "01-dexing-016"
+          },
+          {
+            "bytes": 325,
+            "record_id": "01-dexing-017"
+          },
+          {
+            "bytes": 325,
+            "record_id": "01-dexing-023"
+          },
+          {
+            "bytes": 325,
+            "record_id": "01-dexing-025"
+          },
+          {
+            "bytes": 325,
+            "record_id": "01-dexing-026"
+          },
+          {
+            "bytes": 325,
+            "record_id": "01-dexing-028"
+          },
+          {
+            "bytes": 325,
+            "record_id": "01-dexing-045"
+          }
+        ],
+        "notes": "Measured as a per-Story projection; identical copies are reported separately in duplication_findings.",
+        "path": "stories[].reading.source_display",
+        "percentage_of_compact_bundle": 0.071574,
+        "serialized_bytes_across_stories": 46475,
+        "story_count": 143
+      },
+      {
+        "average_story_bytes": 2411.0,
+        "largest_story_records": [
+          {
+            "bytes": 2411,
+            "record_id": "01-dexing-012"
+          },
+          {
+            "bytes": 2411,
+            "record_id": "01-dexing-014"
+          },
+          {
+            "bytes": 2411,
+            "record_id": "01-dexing-015"
+          },
+          {
+            "bytes": 2411,
+            "record_id": "01-dexing-016"
+          },
+          {
+            "bytes": 2411,
+            "record_id": "01-dexing-017"
+          },
+          {
+            "bytes": 2411,
+            "record_id": "01-dexing-023"
+          },
+          {
+            "bytes": 2411,
+            "record_id": "01-dexing-025"
+          },
+          {
+            "bytes": 2411,
+            "record_id": "01-dexing-026"
+          },
+          {
+            "bytes": 2411,
+            "record_id": "01-dexing-028"
+          },
+          {
+            "bytes": 2411,
+            "record_id": "01-dexing-045"
+          }
+        ],
+        "notes": "Measured as a per-Story projection; identical copies are reported separately in duplication_findings.",
+        "path": "stories[].reading.relation_display",
+        "percentage_of_compact_bundle": 0.530966,
+        "serialized_bytes_across_stories": 344773,
+        "story_count": 143
+      },
+      {
+        "average_story_bytes": 394496.811,
+        "largest_story_records": [
+          {
+            "bytes": 493699,
+            "record_id": "36-chouxi-003"
+          },
+          {
+            "bytes": 490532,
+            "record_id": "35-huoni-003"
+          },
+          {
+            "bytes": 488769,
+            "record_id": "34-pilou-001"
+          },
+          {
+            "bytes": 488155,
+            "record_id": "33-youhui-007"
+          },
+          {
+            "bytes": 487345,
+            "record_id": "29-jianshe-008"
+          },
+          {
+            "bytes": 486942,
+            "record_id": "29-jianshe-001"
+          },
+          {
+            "bytes": 486013,
+            "record_id": "27-jiajue-012"
+          },
+          {
+            "bytes": 484925,
+            "record_id": "27-jiajue-009"
+          },
+          {
+            "bytes": 482875,
+            "record_id": "27-jiajue-008"
+          },
+          {
+            "bytes": 480861,
+            "record_id": "27-jiajue-006"
+          }
+        ],
+        "notes": "Currently a complete global evidence display map is repeated inside every Story reading.",
+        "path": "stories[].reading.evidence_display",
+        "percentage_of_compact_bundle": 86.878563,
+        "serialized_bytes_across_stories": 56413044,
+        "story_count": 143
+      },
+      {
+        "average_story_bytes": 2.0,
+        "largest_story_records": [
+          {
+            "bytes": 2,
+            "record_id": "01-dexing-012"
+          },
+          {
+            "bytes": 2,
+            "record_id": "01-dexing-014"
+          },
+          {
+            "bytes": 2,
+            "record_id": "01-dexing-015"
+          },
+          {
+            "bytes": 2,
+            "record_id": "01-dexing-016"
+          },
+          {
+            "bytes": 2,
+            "record_id": "01-dexing-017"
+          },
+          {
+            "bytes": 2,
+            "record_id": "01-dexing-023"
+          },
+          {
+            "bytes": 2,
+            "record_id": "01-dexing-025"
+          },
+          {
+            "bytes": 2,
+            "record_id": "01-dexing-026"
+          },
+          {
+            "bytes": 2,
+            "record_id": "01-dexing-028"
+          },
+          {
+            "bytes": 2,
+            "record_id": "01-dexing-045"
+          }
+        ],
+        "path": "stories[].reading.display_overrides",
+        "percentage_of_compact_bundle": 0.00044,
+        "serialized_bytes_across_stories": 286,
+        "story_count": 143
+      },
+      {
+        "average_story_bytes": 256.636,
+        "largest_story_records": [
+          {
+            "bytes": 701,
+            "record_id": "27-jiajue-006"
+          },
+          {
+            "bytes": 666,
+            "record_id": "05-fangzheng-023"
+          },
+          {
+            "bytes": 626,
+            "record_id": "23-rendan-038"
+          },
+          {
+            "bytes": 623,
+            "record_id": "09-pinzao-036"
+          },
+          {
+            "bytes": 603,
+            "record_id": "08-shangyu-020"
+          },
+          {
+            "bytes": 596,
+            "record_id": "19-xianyuan-018"
+          },
+          {
+            "bytes": 560,
+            "record_id": "04-wenxue-022"
+          },
+          {
+            "bytes": 548,
+            "record_id": "27-jiajue-009"
+          },
+          {
+            "bytes": 503,
+            "record_id": "05-fangzheng-032"
+          },
+          {
+            "bytes": 469,
+            "record_id": "04-wenxue-036"
+          }
+        ],
+        "notes": "Reader-facing punctuation/conversion projection; canonical source text remains separate.",
+        "path": "stories[].reading.main_text.original",
+        "percentage_of_compact_bundle": 0.056518,
+        "serialized_bytes_across_stories": 36699,
+        "story_count": 143
+      },
+      {
+        "average_story_bytes": 256.692,
+        "largest_story_records": [
+          {
+            "bytes": 701,
+            "record_id": "27-jiajue-006"
+          },
+          {
+            "bytes": 666,
+            "record_id": "05-fangzheng-023"
+          },
+          {
+            "bytes": 626,
+            "record_id": "23-rendan-038"
+          },
+          {
+            "bytes": 623,
+            "record_id": "09-pinzao-036"
+          },
+          {
+            "bytes": 603,
+            "record_id": "08-shangyu-020"
+          },
+          {
+            "bytes": 596,
+            "record_id": "19-xianyuan-018"
+          },
+          {
+            "bytes": 560,
+            "record_id": "04-wenxue-022"
+          },
+          {
+            "bytes": 548,
+            "record_id": "27-jiajue-009"
+          },
+          {
+            "bytes": 503,
+            "record_id": "05-fangzheng-032"
+          },
+          {
+            "bytes": 469,
+            "record_id": "04-wenxue-036"
+          }
+        ],
+        "notes": "Reader-facing punctuation/conversion projection; canonical source text remains separate.",
+        "path": "stories[].reading.main_text.simplified",
+        "percentage_of_compact_bundle": 0.05653,
+        "serialized_bytes_across_stories": 36707,
+        "story_count": 143
+      },
+      {
+        "average_story_bytes": 1850.497,
+        "largest_story_records": [
+          {
+            "bytes": 5909,
+            "record_id": "05-fangzheng-018"
+          },
+          {
+            "bytes": 4404,
+            "record_id": "05-fangzheng-023"
+          },
+          {
+            "bytes": 4313,
+            "record_id": "05-fangzheng-058"
+          },
+          {
+            "bytes": 4273,
+            "record_id": "05-fangzheng-025"
+          },
+          {
+            "bytes": 4173,
+            "record_id": "09-pinzao-006"
+          },
+          {
+            "bytes": 4037,
+            "record_id": "36-chouxi-003"
+          },
+          {
+            "bytes": 3905,
+            "record_id": "02-yanyu-072"
+          },
+          {
+            "bytes": 3761,
+            "record_id": "19-xianyuan-013"
+          },
+          {
+            "bytes": 3749,
+            "record_id": "01-dexing-017"
+          },
+          {
+            "bytes": 3647,
+            "record_id": "04-wenxue-022"
+          }
+        ],
+        "notes": "Reader-facing punctuation/conversion projection; canonical source text remains separate.",
+        "path": "stories[].reading.main_text.segments",
+        "percentage_of_compact_bundle": 0.407528,
+        "serialized_bytes_across_stories": 264621,
+        "story_count": 143
+      }
+    ]
+  },
+  "protection_manifest": [
+    {
+      "bytes": 854995,
+      "exists": true,
+      "path": "data/aliases.json",
+      "sha256": "69d3721334136d7e362eec7dc0b15d43c82d108e5d17dd9fd5b9ae3d93be9252"
+    },
+    {
+      "bytes": 3540499,
+      "exists": true,
+      "path": "data/annotation/wp1-punctuation.json",
+      "sha256": "a4c3f24c9100aa7e0c36e2537710d6ba16f6b6cbc92663ebfc6c06e7ee389471"
+    },
+    {
+      "bytes": 11151,
+      "exists": true,
+      "path": "data/annotation/wp1-relations.json",
+      "sha256": "29dfcef616ee149da375a7fa11b9435843538b668875e000ef8c872453efd2fc"
+    },
+    {
+      "bytes": 16883,
+      "exists": true,
+      "path": "data/derived/h0c-event-participations.json",
+      "sha256": "b233a3e3a6e6313508627e110164e95b7eaeaea2e5e4d27a4d1727bd7397ae8b"
+    },
+    {
+      "bytes": 30104,
+      "exists": true,
+      "path": "data/derived/h0c-events.json",
+      "sha256": "1c171e27e557107b1214b25e1e82d845c303cbf59b3c04f733f79bea9e186606"
+    },
+    {
+      "bytes": 121144,
+      "exists": true,
+      "path": "data/derived/h0c-gap-audit.json",
+      "sha256": "e3ba56f73f6fb4480989f7b99606e19f79916a35f4b1191bab9a26c691a2f2bb"
+    },
+    {
+      "bytes": 1358,
+      "exists": true,
+      "path": "data/derived/h0c-graph-audit.json",
+      "sha256": "9ef7a9482a9a862cde03242c728c022f3cb4314eb7aac9013a7f5fa53124fc01"
+    },
+    {
+      "bytes": 1504340,
+      "exists": true,
+      "path": "data/derived/h0c-graph-projection.json",
+      "sha256": "8409bfdf3376452f0472573bf27033770d86f8db567c0cf446fff886a7dcd4b5"
+    },
+    {
+      "bytes": 794202,
+      "exists": true,
+      "path": "data/derived/h0c-historical-facts.json",
+      "sha256": "3aaed5927053e826331b3ab23c412add253b17fa9ac023e432afda5a11caac0c"
+    },
+    {
+      "bytes": 13607,
+      "exists": true,
+      "path": "data/derived/h0c-location-facts.json",
+      "sha256": "d51e73624cbdbe19b006f84b8e3126fed16757daae35ee0b2c19eade52a253a4"
+    },
+    {
+      "bytes": 12760,
+      "exists": true,
+      "path": "data/derived/h0c-locations.json",
+      "sha256": "c0e347d40481656ffced8eb47b7c238734431dd4b80dc206d25c35bafb342029"
+    },
+    {
+      "bytes": 7957,
+      "exists": true,
+      "path": "data/derived/h0c-metrics.json",
+      "sha256": "8fb8d0cb1e4a3e14ef45ca2f48af2eba81ccbece22c13d219fb71b614b15a70c"
+    },
+    {
+      "bytes": 99911,
+      "exists": true,
+      "path": "data/derived/h0c-ml-readiness.json",
+      "sha256": "d07c4da91e881eaa14a23a3917376960865800191efbd6b0b66e765831eacab7"
+    },
+    {
+      "bytes": 59815,
+      "exists": true,
+      "path": "data/derived/h0c-offices.json",
+      "sha256": "2ac5689ca9193a649d5572403cacdc523204fa6e2f2856878334fbc8c80115f7"
+    },
+    {
+      "bytes": 873995,
+      "exists": true,
+      "path": "data/derived/h0c-participant-freeze.json",
+      "sha256": "2a02fa0e06b4e5e1d991d00a5aa1b7f3fcf3195ed083ef9441e3ba2bdb36f51b"
+    },
+    {
+      "bytes": 21591,
+      "exists": true,
+      "path": "data/derived/h0c-person-activities.json",
+      "sha256": "f8a15058d9b38d1fe970040b584862ab806cded009d6b09110c385c9b25bd750"
+    },
+    {
+      "bytes": 2357,
+      "exists": true,
+      "path": "data/derived/h0c-protection-manifest.json",
+      "sha256": "755b9ccc9d9e3ce94509d17a3c7d518732181fbd820e67f15a877bd93896ddb3"
+    },
+    {
+      "bytes": 3057,
+      "exists": true,
+      "path": "data/derived/h0c-regimes.json",
+      "sha256": "43c36beb004ec42e0d28134dccf1a1678546c45b203883672f0829c504e19afb"
+    },
+    {
+      "bytes": 3543,
+      "exists": true,
+      "path": "data/derived/h0c-service-political-facts.json",
+      "sha256": "667a4cc8d208ab3add75098473561f742a6e2577892839f073905fad1dbec1cf"
+    },
+    {
+      "bytes": 2974,
+      "exists": true,
+      "path": "data/derived/hg0-bias-audit.json",
+      "sha256": "6de86392053e2e2499477f1452f69a18f5bc1b5bf4350925a1fd968ac246e1f2"
+    },
+    {
+      "bytes": 16517,
+      "exists": true,
+      "path": "data/derived/hg0-gap-audit.json",
+      "sha256": "2c876b8240f22368ec71bdb94b983c67139da202edccd6146eb12bbaad93b2a3"
+    },
+    {
+      "bytes": 2038,
+      "exists": true,
+      "path": "data/derived/hg0-graph-audit.json",
+      "sha256": "3fb0b178ec03f4178e5807c0b95c1c0e00aa82989696dee970b22b244dff46f5"
+    },
+    {
+      "bytes": 2131865,
+      "exists": true,
+      "path": "data/derived/hg0-graph-projection.json",
+      "sha256": "d7e4a592d2c0fe5307168707ab1f5f6688e1c88ea0a89f6ca0a055b9bf4a0198"
+    },
+    {
+      "bytes": 8016,
+      "exists": true,
+      "path": "data/derived/hg0-graph-universe.json",
+      "sha256": "18fcc7f2630b659a356c4f879fcfe11d533f19a0c67fdbe109b052093823a945"
+    },
+    {
+      "bytes": 8773,
+      "exists": true,
+      "path": "data/derived/hg0-metrics.json",
+      "sha256": "cd7242ca0a4dfc8839f75a77694e13ce5bb000db244061953906e41e89571c56"
+    },
+    {
+      "bytes": 5495,
+      "exists": true,
+      "path": "data/derived/hg0-ml0-readiness.json",
+      "sha256": "52a94017fbe0cf3fdda8ddf632b9ae6dadff27b932a071fedce53f110b16c6f8"
+    },
+    {
+      "bytes": 18391,
+      "exists": true,
+      "path": "data/derived/hg0-ontology.json",
+      "sha256": "770ca03c197b0792f8c9e46a86c5c84a8a9039de13c701a51f39eff480ca7ae7"
+    },
+    {
+      "bytes": 2086,
+      "exists": true,
+      "path": "data/derived/hg0-protection-manifest.json",
+      "sha256": "251ebf5a61c8f5de95536d2bb6d2358201c09c73c1e7ef26f11c9c768373d6c7"
+    },
+    {
+      "bytes": 52147,
+      "exists": true,
+      "path": "data/derived/hg0-sufficiency-audit.json",
+      "sha256": "9eacf61d0dfe4a964db919faa77b39ec9e9795e8bd2f8606cf0595af2565cff7"
+    },
+    {
+      "bytes": 565899,
+      "exists": true,
+      "path": "data/derived/hg0-temporal-projection.json",
+      "sha256": "1334fd346d3377cae0b0f3c8d9a33e9e3cc124b35a9cfc4f709c8f9afab6be72"
+    },
+    {
+      "bytes": 5806,
+      "exists": true,
+      "path": "data/derived/ml0-ablation-results.json",
+      "sha256": "f11de4f7aaecd3c437c9017d8f516e9a6f32768f4aa196b91b0d257d4aa688a9"
+    },
+    {
+      "bytes": 11707,
+      "exists": true,
+      "path": "data/derived/ml0-baseline-results.json",
+      "sha256": "80792b7898f9e0a3e5a9243d8cb1298cd84f1da7cc07e72647cbf7ab5eb4ef7d"
+    },
+    {
+      "bytes": 1780,
+      "exists": true,
+      "path": "data/derived/ml0-bias-diagnostic.json",
+      "sha256": "9372f3ce777f03e487aa39edec42e9d5e19c3732831ada7b88854c1291716244"
+    },
+    {
+      "bytes": 2025311,
+      "exists": true,
+      "path": "data/derived/ml0-dataset-manifest.json",
+      "sha256": "c586efbb04a54771d1d180493e95f287bb1f6e1c03df472cb04fbcac48c42132"
+    },
+    {
+      "bytes": 6442,
+      "exists": true,
+      "path": "data/derived/ml0-expansion-recommendation.json",
+      "sha256": "dd34661a589ebc6bd536ce0711cd31e0a5d96bff566e35f4088d2ce00ce1b547"
+    },
+    {
+      "bytes": 17808,
+      "exists": true,
+      "path": "data/derived/ml0-experiment-manifest.json",
+      "sha256": "56e581c704dd476eb783f804b5c1df85ed0d61993b1175d92ea0f35d5ac07756"
+    },
+    {
+      "bytes": 81107,
+      "exists": true,
+      "path": "data/derived/ml0-gnn-results.json",
+      "sha256": "903efc41fec50b810952a6266818c10ce1b57a069d680ab5b1ed88f1a6ead143"
+    },
+    {
+      "bytes": 14454,
+      "exists": true,
+      "path": "data/derived/ml0-link-feasibility.json",
+      "sha256": "1110706894c654591d5e3b0ee29f1989cd6abc31452c9229df01a05c0303afd4"
+    },
+    {
+      "bytes": 2260,
+      "exists": true,
+      "path": "data/derived/ml0-metrics.json",
+      "sha256": "4560958c5a0e028d9adcaf1b1f2a0fb3aaaf3a3edf08d2d924985ed65015fde8"
+    },
+    {
+      "bytes": 1520,
+      "exists": true,
+      "path": "data/derived/ml0-protection-manifest.json",
+      "sha256": "92fd4eaf7935303b00815ce6130905422d9c82bd9335e989f2be734a68e7983d"
+    },
+    {
+      "bytes": 28949,
+      "exists": true,
+      "path": "data/derived/ml0-temporal-feasibility.json",
+      "sha256": "8e7f048fe742026705ee60e605ac15969b9858e555129daa86f3bcb3935d1640"
+    },
+    {
+      "bytes": 675501,
+      "exists": true,
+      "path": "data/derived/person-story-index.json",
+      "sha256": "13731c774c715b0a81a28762e672619126dce463f293f76a0b6cda256477f24d"
+    },
+    {
+      "bytes": 29494,
+      "exists": true,
+      "path": "data/derived/x1-1-selection-manifest.json",
+      "sha256": "2e39981d667102322508a32aad8bd118c88604e8c6cf320d7ff67775dcee019e"
+    },
+    {
+      "bytes": 5733,
+      "exists": true,
+      "path": "data/derived/x1-2a-bias-audit.json",
+      "sha256": "98128ab2394c8299ad26821f7ab969ab7658d04d0725edcdcb75f2c68c8c1b57"
+    },
+    {
+      "bytes": 33185,
+      "exists": true,
+      "path": "data/derived/x1-2a-canonical-facts.json",
+      "sha256": "46ccf3fd098cda2dd3ee58af5e3f5f9988fec38bdba9fa90291528f21b175795"
+    },
+    {
+      "bytes": 2944,
+      "exists": true,
+      "path": "data/derived/x1-2a-conflict-audit.json",
+      "sha256": "98ac9781e0cdeef34f65b021cfb7a1b11d3371fb4e642552497615ff2ba573a6"
+    },
+    {
+      "bytes": 4323,
+      "exists": true,
+      "path": "data/derived/x1-2a-counter-model-audit.json",
+      "sha256": "a238ad7309a7256a79f9c276347968c2ac5752bbecd0ebd8d9f67f45a66791f1"
+    },
+    {
+      "bytes": 477586,
+      "exists": true,
+      "path": "data/derived/x1-2a-fact-review.json",
+      "sha256": "b5dc9a55fdbdcf22f69a8e5d24b34570bfbac12956f09126290b1fba651f214f"
+    },
+    {
+      "bytes": 112512,
+      "exists": true,
+      "path": "data/derived/x1-2a-gap-audit.json",
+      "sha256": "8731034406e288f7a0ec72cd5ab273cc305303d9a17845577c0b7fcd9f75465a"
+    },
+    {
+      "bytes": 3805,
+      "exists": true,
+      "path": "data/derived/x1-2a-materialization-manifest.json",
+      "sha256": "aa6cc2c8b6b2a634722c8b737c379ff07a52ccfcdfacb4e4747da9fe7f5a7cf5"
+    },
+    {
+      "bytes": 4569,
+      "exists": true,
+      "path": "data/derived/x1-2a-next-epoch-recommendation.json",
+      "sha256": "8f3283c1dd75b599512ac0d07146327b75991f255df66d387a2fa28938f5eaa8"
+    },
+    {
+      "bytes": 31034,
+      "exists": true,
+      "path": "data/derived/x1-2a-ontology-gap-review.json",
+      "sha256": "57d382db80096255483856d90e92c13359801bbd7dc9b8c5f015ad73613a0863"
+    },
+    {
+      "bytes": 37187,
+      "exists": true,
+      "path": "data/derived/x1-2a-person-review.json",
+      "sha256": "bfa9affaa51e8d3668a734908854f37dfb27c095b6dad71cdbb1ae936565209f"
+    },
+    {
+      "bytes": 7937,
+      "exists": true,
+      "path": "data/derived/x1-2a-realized-yield.json",
+      "sha256": "6e91f22632b2203eac8e05580a086992f69fef2385f401a10f0f16f32b03bb15"
+    },
+    {
+      "bytes": 694125,
+      "exists": true,
+      "path": "data/derived/x1-2a-review-manifest.json",
+      "sha256": "29bb0d50750df5e18e46d71385914f233fb8e702d671885938e5fdf7cbb5b655"
+    },
+    {
+      "bytes": 144905,
+      "exists": true,
+      "path": "data/derived/x1-2a-story-review.json",
+      "sha256": "190716e3df56c179da82f8d1d612433b29b3f8658baf6c3fa02970cbde087856"
+    },
+    {
+      "bytes": 7602,
+      "exists": true,
+      "path": "data/derived/x1-2a-summary.json",
+      "sha256": "08f00e193b2ac181860b1e995e3d6813f4bc3dd26720c1f45e3462f086fe2b85"
+    },
+    {
+      "bytes": 255490,
+      "exists": true,
+      "path": "data/derived/x1-2p-candidate-punctuation-readiness.json",
+      "sha256": "dbf3b7d063fe2af004bf9112a8df04325c50da8dd7dc9d49a55f6647bc3386f2"
+    },
+    {
+      "bytes": 5652,
+      "exists": true,
+      "path": "data/derived/x1-2p-channel-audit.json",
+      "sha256": "92068f1e8fbce9c6c7dc2183b2420dfa1c082682437f853ffe288c4e1c5ff697"
+    },
+    {
+      "bytes": 77113,
+      "exists": true,
+      "path": "data/derived/x1-2p-dependency-audit.json",
+      "sha256": "95e5ba4ee3d919b27b952fcad5805dfe0d467c402e05e51f72f067c831c28564"
+    },
+    {
+      "bytes": 4895,
+      "exists": true,
+      "path": "data/derived/x1-2p-next-step-recommendation.json",
+      "sha256": "5ab55e89f04a32dfe158b531b11b9d19c839149a29f4ce40ffb149199fb8d02c"
+    },
+    {
+      "bytes": 17719,
+      "exists": true,
+      "path": "data/derived/x1-2p-punctuation-gate-audit.json",
+      "sha256": "64aaabfed36988dce95ebde8eff3ceb33ac3788e32d85df999830ef1ca23ef3b"
+    },
+    {
+      "bytes": 16931,
+      "exists": true,
+      "path": "data/derived/x1-2p-rematerialization-eligibility.json",
+      "sha256": "244e9a9c3f66fad82c57f7c8b2c1388f92d28301fe09c679086d4e3a6be1b73a"
+    },
+    {
+      "bytes": 231558,
+      "exists": true,
+      "path": "data/derived/x1-2p-story-review.json",
+      "sha256": "b2fc44fec1e1cf0aa7a10db6e66be97d412d5ccaf325c74ccbe64695579518dc"
+    },
+    {
+      "bytes": 10923,
+      "exists": true,
+      "path": "data/derived/x1-2p-summary.json",
+      "sha256": "635e4058d16f22bf2888413ac7acc6f260efab2dd1cd2cbc93386e1f41468860"
+    },
+    {
+      "bytes": 3542119,
+      "exists": true,
+      "path": "data/evidence/wp1-evidence.json",
+      "sha256": "dc8438a53b6ece41b4b1076cfe9b69919c4def44dca8d2f2c2b8db8a60ba8dc1"
+    },
+    {
+      "bytes": 3620155,
+      "exists": true,
+      "path": "data/mentions/shishuo.json",
+      "sha256": "0d7181007964a6797d0475b54c1516c38aac61ada7df6b6ff07fa81bcde7fa46"
+    },
+    {
+      "bytes": 152697,
+      "exists": true,
+      "path": "data/people.json",
+      "sha256": "e1f917900035adaaed2c63d34618f357b1e58ff1cf082fce6ba090d1a74695c5"
+    }
+  ],
+  "runtime_necessity": {
+    "current_loading_behavior": "All fields enter the browser in one statically imported JSON module and are parsed by loadSiteBundle at application startup.",
+    "method": "static inspection of site/src/App.tsx, site/src/relationExplorer.ts, site/src/data.ts, and site/src/types.ts",
+    "nested": [
+      {
+        "classification": "story_required",
+        "current_frontend_use": "Primary reader prose and inline segment interaction.",
+        "path": "stories[].reading.main_text"
+      },
+      {
+        "classification": "story_required",
+        "current_frontend_use": "Story annotation panel and annotation evidence links.",
+        "path": "stories[].reading.annotations"
+      },
+      {
+        "classification": "story_required",
+        "current_frontend_use": "Story-local display names for resolved Persons; currently repeats the global Person display map.",
+        "path": "stories[].reading.person_display"
+      },
+      {
+        "classification": "story_required",
+        "current_frontend_use": "Inline Mention labels/explanations and Person route context.",
+        "path": "stories[].reading.mention_display"
+      },
+      {
+        "classification": "evidence_on_demand",
+        "current_frontend_use": "Source work/edition labels in evidence panels; only needed with evidence display.",
+        "path": "stories[].reading.source_display"
+      },
+      {
+        "classification": "relation_required",
+        "current_frontend_use": "Relation labels/scopes; only needed with relation panels.",
+        "path": "stories[].reading.relation_display"
+      },
+      {
+        "classification": "evidence_on_demand",
+        "current_frontend_use": "Evidence reading pairs are used when evidence is opened; current builder repeats the complete global map per Story.",
+        "path": "stories[].reading.evidence_display"
+      },
+      {
+        "classification": "startup_required",
+        "current_frontend_use": "Reader labels; identical copies could be a shared UI table.",
+        "path": "stories[].reading.labels"
+      },
+      {
+        "classification": "validation_only",
+        "current_frontend_use": "Projection integrity is checked by the parser; current components consume already projected segments.",
+        "path": "stories[].reading.mention_projection"
+      },
+      {
+        "classification": "validation_only",
+        "current_frontend_use": "Canonical source-line text is retained for validation/provenance; current reader renders reading.main_text.",
+        "path": "stories[].text"
+      },
+      {
+        "classification": "validation_only",
+        "current_frontend_use": "Source annotation records support build/validation; reader renders reading.annotations instead.",
+        "path": "stories[].annotations"
+      },
+      {
+        "classification": "story_required",
+        "current_frontend_use": "Cross-reference IDs select evidence on Story panels.",
+        "path": "stories[].evidence_ids"
+      },
+      {
+        "classification": "validation_only",
+        "current_frontend_use": "Current reader resolves source display through reading.source_display, not this raw ID list.",
+        "path": "stories[].source_ids"
+      },
+      {
+        "classification": "era_required",
+        "current_frontend_use": "Available in the Story contract; current reader mostly uses projected Era orientation.",
+        "path": "stories[].time"
+      },
+      {
+        "classification": "era_required",
+        "current_frontend_use": "Story-local primary Era orientation is rendered and navigated.",
+        "path": "stories[].era_orientation"
+      },
+      {
+        "classification": "story_required",
+        "current_frontend_use": "Two reader modes; not redundant with physical-line canonical text.",
+        "path": "stories[].reading.main_text.original/simplified"
+      }
+    ],
+    "top_level": {
+      "era_cards": {
+        "classification": "era_required",
+        "current_frontend_use": "Story orientation, Era panel, and Story↔Era navigation use Era Cards.",
+        "semantic_dependency": "field_subset"
+      },
+      "eras": {
+        "classification": "validation_only",
+        "current_frontend_use": "Required by parseSiteBundle shape checks; current reader does not directly read data.eras.",
+        "semantic_dependency": "parser_contract"
+      },
+      "evidence": {
+        "classification": "evidence_on_demand",
+        "current_frontend_use": "Collapsed Story/Person/Relation/Scene evidence panels read it after navigation; currently parsed at startup.",
+        "semantic_dependency": "field_subset"
+      },
+      "generated_from": {
+        "classification": "build_only",
+        "current_frontend_use": "Build provenance; not read by the reader.",
+        "semantic_dependency": "none"
+      },
+      "historical_events": {
+        "classification": "era_required",
+        "current_frontend_use": "Era/event panels resolve event IDs through this array.",
+        "semantic_dependency": "field_subset"
+      },
+      "mentions": {
+        "classification": "story_required",
+        "current_frontend_use": "Story inline resolution and Person route context use mentions.",
+        "semantic_dependency": "field_subset"
+      },
+      "people": {
+        "classification": "startup_required",
+        "current_frontend_use": "Person lookup, Person panel, random Person, and relation traversal use the registry.",
+        "semantic_dependency": "whole_bundle"
+      },
+      "person_sketches": {
+        "classification": "person_required",
+        "current_frontend_use": "Person panel and Person Explorer read sketches for the focused Person.",
+        "semantic_dependency": "field_subset"
+      },
+      "relations": {
+        "classification": "relation_required",
+        "current_frontend_use": "Relation rows, ego map, and relation-context navigation use reviewed Relations.",
+        "semantic_dependency": "field_subset"
+      },
+      "ruler_identities": {
+        "classification": "validation_only",
+        "current_frontend_use": "Validated for ruler Mention integrity; current reader uses projected era-card data.",
+        "semantic_dependency": "parser_contract"
+      },
+      "ruler_mentions": {
+        "classification": "validation_only",
+        "current_frontend_use": "Validated against projected ruler segments; current reader does not directly query the registry.",
+        "semantic_dependency": "parser_contract"
+      },
+      "scene_contexts": {
+        "classification": "story_required",
+        "current_frontend_use": "Scene card is Story-local and only rendered when a record exists; it is currently loaded globally.",
+        "semantic_dependency": "field_subset"
+      },
+      "schema": {
+        "classification": "startup_required",
+        "current_frontend_use": "parseSiteBundle schema guard; no reader rendering.",
+        "semantic_dependency": "parser_contract"
+      },
+      "sources": {
+        "classification": "validation_only",
+        "current_frontend_use": "Current reader uses reading.source_display; it does not directly read data.sources.",
+        "semantic_dependency": "parser_contract"
+      },
+      "stories": {
+        "classification": "startup_required",
+        "current_frontend_use": "Initial Story, random Story, Story→Person and navigation indexes use the full published list.",
+        "semantic_dependency": "whole_bundle"
+      },
+      "story_chain": {
+        "classification": "person_required",
+        "current_frontend_use": "Person→Story lists use the projected chain index; it can be deferred until Person navigation.",
+        "semantic_dependency": "field_subset"
+      },
+      "story_era_orientations": {
+        "classification": "validation_only",
+        "current_frontend_use": "Story-local era_orientation is rendered; this parallel list is currently parser-validated only.",
+        "semantic_dependency": "parser_contract"
+      },
+      "ui": {
+        "classification": "startup_required",
+        "current_frontend_use": "Small reader labels and scene labels are used throughout the current UI.",
+        "semantic_dependency": "field_subset"
+      }
+    },
+    "unused_or_parser_only_fields": [
+      "generated_from",
+      "eras",
+      "sources",
+      "ruler_identities",
+      "ruler_mentions",
+      "story_era_orientations",
+      "stories[].text",
+      "stories[].annotations",
+      "stories[].source_ids",
+      "stories[].reading.mention_projection"
+    ]
+  },
+  "schema": 1,
+  "top_level_fields": [
+    {
+      "average_record_bytes": null,
+      "largest_records": [],
+      "notes": "Required top-level key; value is intentionally kept for the current SiteBundle contract.",
+      "path": "schema",
+      "percentage_of_compact_bundle": 2e-06,
+      "record_count": 1,
+      "serialized_bytes": 1,
+      "value_kind": "int"
+    },
+    {
+      "average_record_bytes": null,
+      "largest_records": [],
+      "notes": "Required top-level key; value is intentionally kept for the current SiteBundle contract.",
+      "path": "generated_from",
+      "percentage_of_compact_bundle": 5.5e-05,
+      "record_count": 1,
+      "serialized_bytes": 36,
+      "value_kind": "str"
+    },
+    {
+      "average_record_bytes": 433596.895,
+      "largest_records": [
+        {
+          "bytes": 545624,
+          "record_id": "36-chouxi-003"
+        },
+        {
+          "bytes": 529019,
+          "record_id": "35-huoni-003"
+        },
+        {
+          "bytes": 527477,
+          "record_id": "27-jiajue-008"
+        },
+        {
+          "bytes": 524308,
+          "record_id": "27-jiajue-009"
+        },
+        {
+          "bytes": 523257,
+          "record_id": "33-youhui-007"
+        },
+        {
+          "bytes": 522344,
+          "record_id": "27-jiajue-012"
+        },
+        {
+          "bytes": 521788,
+          "record_id": "29-jianshe-001"
+        },
+        {
+          "bytes": 521301,
+          "record_id": "34-pilou-001"
+        },
+        {
+          "bytes": 518978,
+          "record_id": "29-jianshe-008"
+        },
+        {
+          "bytes": 517616,
+          "record_id": "26-qingdi-002"
+        }
+      ],
+      "notes": "Required top-level key; value is intentionally kept for the current SiteBundle contract.",
+      "path": "stories",
+      "percentage_of_compact_bundle": 95.48965,
+      "record_count": 143,
+      "serialized_bytes": 62004500,
+      "value_kind": "list"
+    },
+    {
+      "average_record_bytes": 1275.733,
+      "largest_records": [
+        {
+          "bytes": 4482,
+          "record_id": "person-011"
+        },
+        {
+          "bytes": 3561,
+          "record_id": "person-010"
+        },
+        {
+          "bytes": 3188,
+          "record_id": "person-019"
+        },
+        {
+          "bytes": 3056,
+          "record_id": "person-013"
+        },
+        {
+          "bytes": 2897,
+          "record_id": "person-008"
+        },
+        {
+          "bytes": 2727,
+          "record_id": "person-054"
+        },
+        {
+          "bytes": 2719,
+          "record_id": "person-017"
+        },
+        {
+          "bytes": 2717,
+          "record_id": "person-009"
+        },
+        {
+          "bytes": 2624,
+          "record_id": "person-020"
+        },
+        {
+          "bytes": 2354,
+          "record_id": "person-035"
+        }
+      ],
+      "notes": "Required top-level key; value is intentionally kept for the current SiteBundle contract.",
+      "path": "people",
+      "percentage_of_compact_bundle": 0.147468,
+      "record_count": 75,
+      "serialized_bytes": 95756,
+      "value_kind": "list"
+    },
+    {
+      "average_record_bytes": 1186.689,
+      "largest_records": [
+        {
+          "bytes": 4869,
+          "record_id": "shishuo-p3b-wave-1-ab0eca7376bb79571876345c"
+        },
+        {
+          "bytes": 4594,
+          "record_id": "shishuo-p3b-wave-1-114dde1766c2b620eb059c4e"
+        },
+        {
+          "bytes": 4594,
+          "record_id": "shishuo-p3b-wave-1-6e5ab584e4cca3f8929d0d15"
+        },
+        {
+          "bytes": 4586,
+          "record_id": "shishuo-p3b-wave-1-1846cdb61b3fcdc9b14f4e08"
+        },
+        {
+          "bytes": 4420,
+          "record_id": "shishuo-p3b-wave-2-2c45067410d3b4c0350f7ce7"
+        },
+        {
+          "bytes": 4420,
+          "record_id": "shishuo-p3b-wave-2-e4050ad85cdf177fe584ea92"
+        },
+        {
+          "bytes": 4341,
+          "record_id": "shishuo-p3b-wave-2-5137ecbe948a5c8b99e38b78"
+        },
+        {
+          "bytes": 4341,
+          "record_id": "shishuo-p3b-wave-2-9d9145e7e3229d8e4881b973"
+        },
+        {
+          "bytes": 4334,
+          "record_id": "shishuo-p3b-wave-2-3f46f84975040667e521c7ee"
+        },
+        {
+          "bytes": 3637,
+          "record_id": "shishuo-p3b-wave-2-2138cf7308b39acd476af60a"
+        }
+      ],
+      "notes": "Required top-level key; value is intentionally kept for the current SiteBundle contract.",
+      "path": "mentions",
+      "percentage_of_compact_bundle": 1.018807,
+      "record_count": 557,
+      "serialized_bytes": 661544,
+      "value_kind": "list"
+    },
+    {
+      "average_record_bytes": 672.25,
+      "largest_records": [
+        {
+          "bytes": 941,
+          "record_id": "relation-r3b-004"
+        },
+        {
+          "bytes": 941,
+          "record_id": "relation-r3b-005"
+        },
+        {
+          "bytes": 787,
+          "record_id": "relation-r3b-003"
+        },
+        {
+          "bytes": 728,
+          "record_id": "relation-r3b-002"
+        },
+        {
+          "bytes": 721,
+          "record_id": "relation-r3b-001"
+        },
+        {
+          "bytes": 604,
+          "record_id": "relation-gold-005"
+        },
+        {
+          "bytes": 575,
+          "record_id": "relation-001"
+        },
+        {
+          "bytes": 570,
+          "record_id": "relation-gold-001"
+        },
+        {
+          "bytes": 565,
+          "record_id": "relation-gold-002"
+        },
+        {
+          "bytes": 563,
+          "record_id": "relation-gold-004"
+        }
+      ],
+      "notes": "Required top-level key; value is intentionally kept for the current SiteBundle contract.",
+      "path": "relations",
+      "percentage_of_compact_bundle": 0.012444,
+      "record_count": 12,
+      "serialized_bytes": 8080,
+      "value_kind": "list"
+    },
+    {
+      "average_record_bytes": 478.0,
+      "largest_records": [
+        {
+          "bytes": 478,
+          "record_id": "era-001"
+        }
+      ],
+      "notes": "Required top-level key; value is intentionally kept for the current SiteBundle contract.",
+      "path": "eras",
+      "percentage_of_compact_bundle": 0.000739,
+      "record_count": 1,
+      "serialized_bytes": 480,
+      "value_kind": "list"
+    },
+    {
+      "average_record_bytes": 1012.945,
+      "largest_records": [
+        {
+          "bytes": 1538,
+          "record_id": "evidence-sc1-05-fangzheng-023-main"
+        },
+        {
+          "bytes": 1523,
+          "record_id": "evidence-sc1-27-jiajue-006-main"
+        },
+        {
+          "bytes": 1488,
+          "record_id": "evidence-sc1-08-shangyu-020-main"
+        },
+        {
+          "bytes": 1463,
+          "record_id": "evidence-sc1-19-xianyuan-018-main"
+        },
+        {
+          "bytes": 1455,
+          "record_id": "evidence-sc1-23-rendan-038-main"
+        },
+        {
+          "bytes": 1424,
+          "record_id": "evidence-sc1-04-wenxue-022-main"
+        },
+        {
+          "bytes": 1393,
+          "record_id": "evidence-sc1-27-jiajue-009-main"
+        },
+        {
+          "bytes": 1379,
+          "record_id": "evidence-sc1-09-pinzao-036-main"
+        },
+        {
+          "bytes": 1362,
+          "record_id": "evidence-sc1-05-fangzheng-032-main"
+        },
+        {
+          "bytes": 1342,
+          "record_id": "evidence-sc1-10-guizhen-012-main"
+        }
+      ],
+      "notes": "Required top-level key; value is intentionally kept for the current SiteBundle contract.",
+      "path": "evidence",
+      "percentage_of_compact_bundle": 2.362581,
+      "record_count": 1513,
+      "serialized_bytes": 1534100,
+      "value_kind": "list"
+    },
+    {
+      "average_record_bytes": 564.0,
+      "largest_records": [
+        {
+          "bytes": 619,
+          "record_id": "source-002"
+        },
+        {
+          "bytes": 509,
+          "record_id": "source-001"
+        }
+      ],
+      "notes": "Required top-level key; value is intentionally kept for the current SiteBundle contract.",
+      "path": "sources",
+      "percentage_of_compact_bundle": 0.001742,
+      "record_count": 2,
+      "serialized_bytes": 1131,
+      "value_kind": "list"
+    },
+    {
+      "average_record_bytes": 1462.667,
+      "largest_records": [
+        {
+          "bytes": 1552,
+          "record_id": "ruler-jin-mingdi"
+        },
+        {
+          "bytes": 1444,
+          "record_id": "ruler-jin-yuandi"
+        },
+        {
+          "bytes": 1392,
+          "record_id": "ruler-jin-wudi"
+        }
+      ],
+      "notes": "Required top-level key; value is intentionally kept for the current SiteBundle contract.",
+      "path": "ruler_identities",
+      "percentage_of_compact_bundle": 0.006764,
+      "record_count": 3,
+      "serialized_bytes": 4392,
+      "value_kind": "list"
+    },
+    {
+      "average_record_bytes": 11565.818,
+      "largest_records": [
+        {
+          "bytes": 80241,
+          "record_id": "era-card-corpus-shishuo-era"
+        },
+        {
+          "bytes": 8548,
+          "record_id": "era-card-period-phase-1"
+        },
+        {
+          "bytes": 6489,
+          "record_id": "era-card-period-phase-4"
+        },
+        {
+          "bytes": 6419,
+          "record_id": "era-card-period-east-jin-early"
+        },
+        {
+          "bytes": 6248,
+          "record_id": "era-card-ruler-jin-mingdi"
+        },
+        {
+          "bytes": 5302,
+          "record_id": "era-card-period-phase-2"
+        },
+        {
+          "bytes": 4103,
+          "record_id": "era-card-period-phase-3"
+        },
+        {
+          "bytes": 3378,
+          "record_id": "era-card-ruler-jin-yuandi"
+        },
+        {
+          "bytes": 2752,
+          "record_id": "era-card-ruler-jin-wudi"
+        },
+        {
+          "bytes": 2074,
+          "record_id": "era-card-period-phase-5"
+        }
+      ],
+      "notes": "Required top-level key; value is intentionally kept for the current SiteBundle contract.",
+      "path": "era_cards",
+      "percentage_of_compact_bundle": 0.195949,
+      "record_count": 11,
+      "serialized_bytes": 127236,
+      "value_kind": "list"
+    },
+    {
+      "average_record_bytes": 814.231,
+      "largest_records": [
+        {
+          "bytes": 851,
+          "record_id": "08-shangyu-034"
+        },
+        {
+          "bytes": 836,
+          "record_id": "05-fangzheng-023"
+        },
+        {
+          "bytes": 824,
+          "record_id": "33-youhui-007"
+        },
+        {
+          "bytes": 821,
+          "record_id": "09-pinzao-014"
+        },
+        {
+          "bytes": 821,
+          "record_id": "09-pinzao-017"
+        },
+        {
+          "bytes": 821,
+          "record_id": "09-pinzao-022"
+        },
+        {
+          "bytes": 821,
+          "record_id": "33-youhui-007"
+        },
+        {
+          "bytes": 818,
+          "record_id": "01-dexing-017"
+        },
+        {
+          "bytes": 803,
+          "record_id": "05-fangzheng-032"
+        },
+        {
+          "bytes": 798,
+          "record_id": "05-fangzheng-023"
+        }
+      ],
+      "notes": "Required top-level key; value is intentionally kept for the current SiteBundle contract.",
+      "path": "ruler_mentions",
+      "percentage_of_compact_bundle": 0.016323,
+      "record_count": 13,
+      "serialized_bytes": 10599,
+      "value_kind": "list"
+    },
+    {
+      "average_record_bytes": 852.8,
+      "largest_records": [
+        {
+          "bytes": 1175,
+          "record_id": "event-wang-dun-rebellion"
+        },
+        {
+          "bytes": 1070,
+          "record_id": "event-yongjia-upheaval"
+        },
+        {
+          "bytes": 823,
+          "record_id": "event-su-jun-rebellion"
+        },
+        {
+          "bytes": 644,
+          "record_id": "event-eight-princes-disturbance"
+        },
+        {
+          "bytes": 552,
+          "record_id": "event-sun-en-rebellion"
+        }
+      ],
+      "notes": "Required top-level key; value is intentionally kept for the current SiteBundle contract.",
+      "path": "historical_events",
+      "percentage_of_compact_bundle": 0.006576,
+      "record_count": 5,
+      "serialized_bytes": 4270,
+      "value_kind": "list"
+    },
+    {
+      "average_record_bytes": 678.189,
+      "largest_records": [
+        {
+          "bytes": 966,
+          "record_id": "08-shangyu-051"
+        },
+        {
+          "bytes": 876,
+          "record_id": "17-shangshi-006"
+        },
+        {
+          "bytes": 848,
+          "record_id": "11-jiewu-005"
+        },
+        {
+          "bytes": 844,
+          "record_id": "01-dexing-023"
+        },
+        {
+          "bytes": 843,
+          "record_id": "02-yanyu-036"
+        },
+        {
+          "bytes": 818,
+          "record_id": "01-dexing-025"
+        },
+        {
+          "bytes": 811,
+          "record_id": "27-jiajue-008"
+        },
+        {
+          "bytes": 803,
+          "record_id": "05-fangzheng-032"
+        },
+        {
+          "bytes": 790,
+          "record_id": "05-fangzheng-031"
+        },
+        {
+          "bytes": 788,
+          "record_id": "06-yaliang-017"
+        }
+      ],
+      "notes": "Required top-level key; value is intentionally kept for the current SiteBundle contract.",
+      "path": "story_era_orientations",
+      "percentage_of_compact_bundle": 0.149577,
+      "record_count": 143,
+      "serialized_bytes": 97125,
+      "value_kind": "list"
+    },
+    {
+      "average_record_bytes": 2421.76,
+      "largest_records": [
+        {
+          "bytes": 6290,
+          "record_id": "person-006"
+        },
+        {
+          "bytes": 6228,
+          "record_id": "person-010"
+        },
+        {
+          "bytes": 5734,
+          "record_id": "person-011"
+        },
+        {
+          "bytes": 4948,
+          "record_id": "person-013"
+        },
+        {
+          "bytes": 4866,
+          "record_id": "person-003"
+        },
+        {
+          "bytes": 4541,
+          "record_id": "person-017"
+        },
+        {
+          "bytes": 4292,
+          "record_id": "person-008"
+        },
+        {
+          "bytes": 4241,
+          "record_id": "person-009"
+        },
+        {
+          "bytes": 4233,
+          "record_id": "person-001"
+        },
+        {
+          "bytes": 3905,
+          "record_id": "person-019"
+        }
+      ],
+      "notes": "Required top-level key; value is intentionally kept for the current SiteBundle contract.",
+      "path": "person_sketches",
+      "percentage_of_compact_bundle": 0.28134,
+      "record_count": 75,
+      "serialized_bytes": 182683,
+      "value_kind": "dict"
+    },
+    {
+      "average_record_bytes": 3344.727,
+      "largest_records": [
+        {
+          "bytes": 6842,
+          "record_id": "06-yaliang-029"
+        },
+        {
+          "bytes": 6243,
+          "record_id": "19-xianyuan-026"
+        },
+        {
+          "bytes": 5760,
+          "record_id": "08-shangyu-077"
+        },
+        {
+          "bytes": 5418,
+          "record_id": "06-yaliang-017"
+        },
+        {
+          "bytes": 5399,
+          "record_id": "06-yaliang-027"
+        },
+        {
+          "bytes": 5389,
+          "record_id": "04-wenxue-036"
+        },
+        {
+          "bytes": 5214,
+          "record_id": "02-yanyu-036"
+        },
+        {
+          "bytes": 5149,
+          "record_id": "05-fangzheng-055"
+        },
+        {
+          "bytes": 5114,
+          "record_id": "05-fangzheng-023"
+        },
+        {
+          "bytes": 5017,
+          "record_id": "02-yanyu-083"
+        }
+      ],
+      "notes": "Required top-level key; value is intentionally kept for the current SiteBundle contract.",
+      "path": "scene_contexts",
+      "percentage_of_compact_bundle": 0.227845,
+      "record_count": 44,
+      "serialized_bytes": 147947,
+      "value_kind": "dict"
+    },
+    {
+      "average_record_bytes": null,
+      "largest_records": [],
+      "notes": "Required top-level key; value is intentionally kept for the current SiteBundle contract.",
+      "path": "story_chain",
+      "percentage_of_compact_bundle": 0.077497,
+      "record_count": 1,
+      "serialized_bytes": 50321,
+      "value_kind": "dict"
+    },
+    {
+      "average_record_bytes": null,
+      "largest_records": [],
+      "notes": "Required top-level key; value is intentionally kept for the current SiteBundle contract.",
+      "path": "ui",
+      "percentage_of_compact_bundle": 0.004238,
+      "record_count": 1,
+      "serialized_bytes": 2752,
+      "value_kind": "dict"
+    }
+  ]
+}
