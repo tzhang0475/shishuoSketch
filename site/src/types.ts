@@ -210,6 +210,171 @@ export interface ReadingPair {
   simplified: string;
 }
 
+/* UX1 is a lazy display projection.  These records are intentionally not
+ * canonical H0C/HG0 entities: they contain only reviewed display data and
+ * references used by optional historical-depth panels. */
+export interface HistoricalEvidenceProjection {
+  evidence_id: string;
+  source_label: { work: ReadingPair; edition: ReadingPair } | ReadingPair;
+  source_layer: string;
+  attribution: string | null;
+  quoted_source: string | null;
+  transmission_status?: string | null;
+  locator: string;
+  short_excerpt: ReadingPair;
+  assertion_status: string;
+  modality?: string | null;
+  parent_assertion_modality?: string | null;
+  review_status: "reviewed";
+  kind: string;
+}
+
+export interface HistoricalReferenceProjection {
+  evidence_id: string;
+  label: ReadingPair;
+  kind: "scholarly" | "citation" | string;
+  source_layer: string;
+  attribution: string | null;
+  quoted_source: string | null;
+  modality: string | null;
+  review_status: "reviewed" | "research_only";
+}
+
+export interface HistoricalFamilyProjection {
+  person_id: string;
+  name: ReadingPair;
+  relation_id: string;
+  relation_label: ReadingPair;
+  relation_basis: string;
+  assertion_status: AssertionStatus;
+  review_status: "reviewed";
+  evidence_ids: string[];
+}
+
+export interface HistoricalOfficeProjection {
+  fact_id: string;
+  office_id: string | null;
+  name: ReadingPair;
+  temporal_label: ReadingPair | null;
+  temporal_precision: string;
+  assertion_status: AssertionStatus;
+  review_status: "reviewed";
+  evidence_ids: string[];
+  provenance: {
+    source_family: string | null;
+    source_layer: string | null;
+    attribution: string | null;
+    quoted_source: string | null;
+    transmission_status: string | null;
+    temporal_precision: string;
+    parent_assertion_modality: string | null;
+  };
+}
+
+export interface HistoricalLocationProjection {
+  fact_id: string;
+  location_id: string | null;
+  name: ReadingPair;
+  role: ReadingPair;
+  temporal_precision: string;
+  assertion_status: AssertionStatus;
+  review_status: "reviewed";
+  evidence_ids: string[];
+  provenance: HistoricalOfficeProjection["provenance"];
+}
+
+export interface HistoricalPeriodProjection {
+  label: ReadingPair;
+  precision: string;
+  story_ids: string[];
+  evidence_ids: string[];
+  review_status: "reviewed";
+}
+
+export interface PersonHistoricalProjection {
+  schema: 1;
+  projection: "ux1_person_history";
+  person_id: string;
+  review_policy: string;
+  family: HistoricalFamilyProjection[];
+  offices: HistoricalOfficeProjection[];
+  locations: HistoricalLocationProjection[];
+  events: unknown[];
+  periods: HistoricalPeriodProjection[];
+  scholarly_refs: HistoricalReferenceProjection[];
+  evidence_ids: string[];
+}
+
+export interface StoryHistoricalParticipant {
+  person_id: string;
+  name: ReadingPair;
+  role: string;
+  review_status: "reviewed";
+  evidence_ids: string[];
+}
+
+export interface StoryHistoricalProjection {
+  schema: 1;
+  projection: "ux1_story_history";
+  story_id: string;
+  review_policy: string;
+  historical_context: Array<{
+    kind: string;
+    label: ReadingPair | null;
+    precision?: string;
+    review_status: "reviewed";
+    evidence_ids: string[];
+  }>;
+  participant_context: StoryHistoricalParticipant[];
+  scholarly_refs: HistoricalReferenceProjection[];
+  citation_refs: HistoricalReferenceProjection[];
+  evidence_ids: string[];
+}
+
+export interface EraHistoricalProjection {
+  schema: 1;
+  projection: "ux1_era_history";
+  era_id: string;
+  review_policy: string;
+  ruler: {
+    ruler_id: string;
+    title: ReadingPair;
+    personal_name: ReadingPair;
+    polity: ReadingPair | null;
+    reign_start_year: number | null;
+    reign_end_year: number | null;
+    review_status: "reviewed";
+    evidence_ids: string[];
+  } | null;
+  events: unknown[];
+  people: unknown[];
+  offices: unknown[];
+  locations: unknown[];
+  story_ids: string[];
+  has_more: Record<string, boolean>;
+  evidence_ids: string[];
+}
+
+export interface RelationHistoricalProjection {
+  schema: 1;
+  projection: "ux1_relation_history" | string;
+  relation_id: string;
+  source: string;
+  subject: { person_id: string; name: ReadingPair };
+  object: { person_id: string; name: ReadingPair };
+  relation_type: string;
+  relation_subtype?: string;
+  label: ReadingPair;
+  relation_basis: string;
+  assertion_status: AssertionStatus;
+  review_status: "reviewed";
+  time: { status?: string; label?: ReadingPair | null; start_year?: number | null; end_year?: number | null };
+  story_ids: string[];
+  evidence_ids: string[];
+  context_label: ReadingPair;
+  notes?: string | null;
+}
+
 export interface ReadingAnnotation {
   id: string;
   original: string;

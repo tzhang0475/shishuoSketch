@@ -33,16 +33,27 @@ import {
   type ExplorationNode,
 } from "./relationExplorer";
 import { normalizeReaderText } from "./readerDisplay";
+import {
+  loadHistoricalEvidence,
+  loadHistoricalProjection,
+  type HistoricalProjection,
+} from "./historical";
 import type {
   Evidence,
   EraCard,
+  EraHistoricalProjection,
+  HistoricalEvidenceProjection,
+  HistoricalReferenceProjection,
+  PersonHistoricalProjection,
   Mention,
   Person,
   ReadingPair,
   ReadingSegment,
+  RelationHistoricalProjection,
   Relation,
   SiteBundle,
   Story,
+  StoryHistoricalProjection,
   StorySceneContext,
   StoryReadingLabels,
 } from "./types";
@@ -152,6 +163,375 @@ function initialStoryId(data: SiteBundle): string {
   const addressed = target ? storyById(data, target) : undefined;
   if (addressed && addressed.publication_state !== "blocked") return addressed.id;
   return randomPublishedStoryId(data) ?? FALLBACK_STORY_ID;
+}
+
+function historicalSourceLabel(
+  sourceLabel: HistoricalEvidenceProjection["source_label"],
+  mode: ReadingMode,
+): string {
+  if ("work" in sourceLabel) {
+    const work = readingValue(sourceLabel.work, mode, "");
+    const edition = readingValue(sourceLabel.edition, mode, "");
+    return [work, edition].filter(Boolean).join(" · ");
+  }
+  return readingValue(sourceLabel, mode, "");
+}
+
+function historicalModalityLabel(modality: string | null | undefined): string {
+  return {
+    disputed: "存疑",
+    probable: "或然",
+    possible: "可能",
+    unknown: "未详",
+  }[modality ?? ""] ?? "";
+}
+
+function useHistoricalProjection<T extends HistoricalProjection>(
+  kind: "person" | "story" | "era" | "relation" | "evidence",
+  id: string | null,
+): { value: T | null; loading: boolean; failed: boolean } {
+  const [value, setValue] = useState<T | null>(null);
+  const [loading, setLoading] = useState(Boolean(id));
+  const [failed, setFailed] = useState(false);
+
+  useEffect(() => {
+    if (!id) {
+      setValue(null);
+      setLoading(false);
+      setFailed(false);
+      return;
+    }
+    let active = true;
+    setLoading(true);
+    setFailed(false);
+    // The shared loader owns the in-flight request.  Keeping it alive across
+    // a React remount avoids aborting the promise that a concurrent panel
+    // consumer is already waiting for.
+    void loadHistoricalProjection<T>(kind, id)
+      .then((next) => {
+        if (!active) return;
+        setValue(next);
+        setLoading(false);
+      })
+      .catch(() => {
+        if (!active) return;
+        setValue(null);
+        setLoading(false);
+        setFailed(true);
+      });
+    return () => {
+      active = false;
+    };
+  }, [kind, id]);
+
+  return { value, loading, failed };
+}
+
+function HistoricalEvidenceDisclosure({
+  evidenceIds,
+  readingMode,
+}: {
+  evidenceIds: string[];
+  readingMode: ReadingMode;
+}) {
+  const [open, setOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [failed, setFailed] = useState(false);
+  const [evidence, setEvidence] = useState<HistoricalEvidenceProjection[]>([]);
+  if (evidenceIds.length === 0) return null;
+
+  async function toggle(): Promise<void> {
+    const nextOpen = !open;
+    setOpen(nextOpen);
+    if (!nextOpen || evidence.length > 0 || failed) return;
+    setLoading(true);
+    try {
+      setEvidence(await loadHistoricalEvidence(evidenceIds));
+    } catch {
+      setFailed(true);
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  return (
+    <div className="ux1-evidence-disclosure">
+      <button type="button" className="ux1-evidence-button" aria-expanded={open} onClick={() => void toggle()}>
+        查看依据
+      </button>
+      {open && (
+        <div className="ux1-evidence-detail">
+          {loading && <p className="ux1-loading">依据载入中…</p>}
+          {failed && <p className="ux1-muted">依据暂时不可用。</p>}
+          {evidence.map((item) => (
+            <article key={item.evidence_id} className="ux1-evidence-item">
+              <p className="ux1-evidence-source">
+                {historicalSourceLabel(item.source_label, readingMode)}
+                {item.attribution ? ` · ${item.attribution}` : ""}
+                {item.quoted_source ? ` · 引${item.quoted_source}` : ""}
+                {historicalModalityLabel(item.modality) ? ` · ${historicalModalityLabel(item.modality)}` : ""}
+                {historicalModalityLabel(item.parent_assertion_modality) ? ` · 上位断言${historicalModalityLabel(item.parent_assertion_modality)}` : ""}
+              </p>
+              <blockquote>{readingValue(item.short_excerpt, readingMode, "")}</blockquote>
+              {item.locator && <p className="ux1-evidence-locator">{item.locator}</p>}
+            </article>
+          ))}
+          {!loading && !failed && evidence.length === 0 && <p className="ux1-muted">暂无可展开的依据。</p>}
+        </div>
+      )}
+    </div>
+  );
+}
+
+function HistoricalReferenceList({
+  refs,
+  readingMode,
+}: {
+  refs: HistoricalReferenceProjection[];
+  readingMode: ReadingMode;
+}) {
+  if (refs.length === 0) return null;
+  return (
+    <section className="ux1-further-reading">
+      <p className="relation-detail-heading">进一步读</p>
+      <ul className="ux1-reference-list">
+        {refs.slice(0, 3).map((ref) => (
+          <li key={ref.evidence_id} className="ux1-reference-row">
+            <span>
+              {readingValue(ref.label, readingMode, "进一步读")}
+              {ref.attribution ? ` · ${ref.attribution}` : ""}
+              {ref.quoted_source ? ` · 引${ref.quoted_source}` : ""}
+              {ref.modality && ref.modality !== "explicit" ? ` · ${ref.modality}` : ""}
+            </span>
+            <HistoricalEvidenceDisclosure evidenceIds={[ref.evidence_id]} readingMode={readingMode} />
+          </li>
+        ))}
+      </ul>
+      {refs.length > 3 && <p className="ux1-muted">另有 {refs.length - 3} 条，按需展开。</p>}
+    </section>
+  );
+}
+
+function PersonHistoricalProfile({
+  personId,
+  readingMode,
+  onFocus,
+}: {
+  personId: string;
+  readingMode: ReadingMode;
+  onFocus: PersonFocus;
+}) {
+  const { value, loading, failed } = useHistoricalProjection<PersonHistoricalProjection>("person", personId);
+  if (loading) return <p className="ux1-loading ux1-person-history-loading">史事载入中…</p>;
+  if (failed || !value) return null;
+  const hasProfile = value.family.length > 0 || value.offices.length > 0 || value.locations.length > 0
+    || value.periods.length > 0 || value.scholarly_refs.length > 0;
+  if (!hasProfile) return null;
+  const evidenceIds = [...new Set([
+    ...value.family.flatMap((row) => row.evidence_ids),
+    ...value.offices.flatMap((row) => row.evidence_ids),
+    ...value.locations.flatMap((row) => row.evidence_ids),
+    ...value.periods.flatMap((row) => row.evidence_ids),
+  ])];
+  return (
+    <section className="ux1-person-history" aria-label="历史">
+      <p className="relation-detail-heading">历史</p>
+      {value.family.length > 0 && (
+        <div className="ux1-history-group">
+          <p className="ux1-history-label">家世</p>
+          {value.family.map((row) => (
+            <button type="button" className="ux1-history-link" key={row.relation_id} onClick={() => onFocus(row.person_id)}>
+              {readingValue(row.name, readingMode, row.person_id)} · {readingValue(row.relation_label, readingMode, "关系")}
+              {row.relation_basis === "derived" ? "（推得）" : ""}
+            </button>
+          ))}
+        </div>
+      )}
+      {value.offices.length > 0 && (
+        <div className="ux1-history-group">
+          <p className="ux1-history-label">仕宦</p>
+          {value.offices.map((row) => (
+            <p className="ux1-history-value" key={row.fact_id}>
+              {readingValue(row.name, readingMode, "官职")}
+              {row.temporal_label && ` · ${readingValue(row.temporal_label, readingMode, "")}`}
+              {row.temporal_precision !== "unknown" && <small>（{row.temporal_precision}）</small>}
+            </p>
+          ))}
+        </div>
+      )}
+      {value.locations.length > 0 && (
+        <div className="ux1-history-group">
+          <p className="ux1-history-label">所到</p>
+          {value.locations.map((row) => (
+            <p className="ux1-history-value" key={row.fact_id}>
+              {readingValue(row.name, readingMode, "地点")} · {readingValue(row.role, readingMode, "历史地点")}
+            </p>
+          ))}
+        </div>
+      )}
+      {value.periods.length > 0 && (
+        <div className="ux1-history-group">
+          <p className="ux1-history-label">所处</p>
+          {value.periods.map((row) => (
+            <p className="ux1-history-value" key={`${row.label.original}-${row.story_ids.join(",")}`}>
+              {readingValue(row.label, readingMode, "时代定位")}
+            </p>
+          ))}
+        </div>
+      )}
+      <HistoricalReferenceList refs={value.scholarly_refs} readingMode={readingMode} />
+      <HistoricalEvidenceDisclosure evidenceIds={evidenceIds} readingMode={readingMode} />
+    </section>
+  );
+}
+
+function RelationHistoricalContext({ relationId, readingMode }: { relationId: string; readingMode: ReadingMode }) {
+  const [open, setOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [value, setValue] = useState<RelationHistoricalProjection | null>(null);
+  const [failed, setFailed] = useState(false);
+
+  async function reveal(): Promise<void> {
+    const nextOpen = !open;
+    setOpen(nextOpen);
+    if (!nextOpen || value || failed) return;
+    setLoading(true);
+    try {
+      setValue(await loadHistoricalProjection<RelationHistoricalProjection>("relation", relationId));
+    } catch {
+      setFailed(true);
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  return (
+    <div className="ux1-relation-context">
+      <button type="button" className="ux1-evidence-button" aria-expanded={open} onClick={() => void reveal()}>
+        历史语境
+      </button>
+      {open && (
+        <div className="ux1-relation-context-body">
+          {loading && <p className="ux1-loading">史事载入中…</p>}
+          {failed && <p className="ux1-muted">历史语境暂时不可用。</p>}
+          {value && (
+            <>
+              <p>{readingValue(value.context_label, readingMode, "已审阅关系")}</p>
+              {value.time.label && <p>{readingValue(value.time.label, readingMode, "")}</p>}
+              {value.notes && <p className="ux1-muted">{value.notes}</p>}
+              <HistoricalEvidenceDisclosure evidenceIds={value.evidence_ids} readingMode={readingMode} />
+            </>
+          )}
+          {!loading && !failed && !value && <p className="ux1-muted">暂无补充语境。</p>}
+        </div>
+      )}
+    </div>
+  );
+}
+
+function StoryHistoricalDepth({
+  storyId,
+  readingMode,
+  onFocus,
+}: {
+  storyId: string;
+  readingMode: ReadingMode;
+  onFocus: PersonFocus;
+}) {
+  const [open, setOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [value, setValue] = useState<StoryHistoricalProjection | null>(null);
+  const [failed, setFailed] = useState(false);
+
+  async function reveal(): Promise<void> {
+    const nextOpen = !open;
+    setOpen(nextOpen);
+    if (!nextOpen || value || failed) return;
+    setLoading(true);
+    try {
+      setValue(await loadHistoricalProjection<StoryHistoricalProjection>("story", storyId));
+    } catch {
+      setFailed(true);
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  return (
+    <section className="ux1-story-history" aria-label="历史上下文">
+      <button type="button" className="ux1-further-reading-toggle" aria-expanded={open} onClick={() => void reveal()}>
+        进一步读
+      </button>
+      {open && (
+        <div className="ux1-story-history-body">
+          {loading && <p className="ux1-loading">史事载入中…</p>}
+          {failed && <p className="ux1-muted">历史资料暂时不可用。</p>}
+          {value && (
+            <>
+              {value.historical_context.length > 0 && (
+                <div className="ux1-story-history-group">
+                  <p className="ux1-history-label">此时</p>
+                  {value.historical_context.map((row) => <p key={`${row.kind}-${row.label?.original}`}>{readingValue(row.label ?? undefined, readingMode, "")}</p>)}
+                </div>
+              )}
+              {value.participant_context.length > 0 && (
+                <div className="ux1-story-history-group">
+                  <p className="ux1-history-label">在场</p>
+                  {value.participant_context.map((row) => (
+                    <button type="button" className="ux1-history-link" key={`${row.person_id}-${row.role}`} onClick={() => onFocus(row.person_id, { via_mention_id: "ux1-history", from_story_id: storyId })}>
+                      {readingValue(row.name, readingMode, row.person_id)} · {row.role}
+                    </button>
+                  ))}
+                </div>
+              )}
+              <HistoricalReferenceList refs={value.scholarly_refs} readingMode={readingMode} />
+              <HistoricalReferenceList refs={value.citation_refs} readingMode={readingMode} />
+              <HistoricalEvidenceDisclosure evidenceIds={value.evidence_ids} readingMode={readingMode} />
+              {value.historical_context.length === 0 && value.participant_context.length === 0 && value.scholarly_refs.length === 0 && value.citation_refs.length === 0 && <p className="ux1-muted">暂无可补充的已审阅历史资料。</p>}
+            </>
+          )}
+          {!loading && !failed && !value && <p className="ux1-muted">暂无可补充的已审阅历史资料。</p>}
+        </div>
+      )}
+    </section>
+  );
+}
+
+function EraHistoricalDepth({
+  eraId,
+  readingMode,
+  onFocus,
+  onStorySelect,
+}: {
+  eraId: string;
+  readingMode: ReadingMode;
+  onFocus: PersonFocus;
+  onStorySelect: (storyId: string) => void;
+}) {
+  const { value, loading, failed } = useHistoricalProjection<EraHistoricalProjection>("era", eraId);
+  if (loading) return <p className="ux1-loading ux1-era-history-loading">史事载入中…</p>;
+  if (failed || !value) return null;
+  const hasContent = Boolean(value.ruler) || value.people.length > 0 || value.events.length > 0 || value.offices.length > 0 || value.locations.length > 0 || value.story_ids.length > 0;
+  if (!hasContent) return null;
+  return (
+    <section className="ux1-era-history" aria-label="时代历史">
+      <p className="relation-detail-heading">历史</p>
+      {value.ruler && (
+        <div className="ux1-era-ruler">
+          <p>{readingValue(value.ruler.title, readingMode, "")}{value.ruler.personal_name ? ` · ${readingValue(value.ruler.personal_name, readingMode, "")}` : ""}</p>
+          <small>{[value.ruler.reign_start_year, value.ruler.reign_end_year].every((year) => typeof year === "number") ? `${value.ruler.reign_start_year}–${value.ruler.reign_end_year}` : ""}</small>
+        </div>
+      )}
+      {value.people.length > 0 && <div className="ux1-history-group"><p className="ux1-history-label">人物</p>{value.people.slice(0, 5).map((row: any) => <button type="button" className="ux1-history-link" key={row.person_id} onClick={() => onFocus(row.person_id)}>{readingValue(row.name, readingMode, row.person_id)}</button>)}</div>}
+      {value.events.length > 0 && <div className="ux1-history-group"><p className="ux1-history-label">此时</p>{value.events.slice(0, 3).map((row: any) => <p className="ux1-history-value" key={row.event_id}>{readingValue(row.name, readingMode, row.event_id)}</p>)}</div>}
+      {value.offices.length > 0 && <div className="ux1-history-group"><p className="ux1-history-label">仕宦</p>{value.offices.slice(0, 3).map((row: any) => <p className="ux1-history-value" key={row.office_id}>{readingValue(row.name, readingMode, row.office_id)}</p>)}</div>}
+      {value.locations.length > 0 && <div className="ux1-history-group"><p className="ux1-history-label">所及</p>{value.locations.slice(0, 3).map((row: any) => <p className="ux1-history-value" key={row.location_id}>{readingValue(row.name, readingMode, row.location_id)}</p>)}</div>}
+      {value.story_ids.length > 0 && (
+        <div className="ux1-history-group"><p className="ux1-history-label">相关故事</p>{value.story_ids.slice(0, 5).map((storyId) => <button type="button" className="ux1-history-link" key={storyId} onClick={() => onStorySelect(storyId)}>{storyId}</button>)}</div>
+      )}
+      <HistoricalEvidenceDisclosure evidenceIds={value.evidence_ids} readingMode={readingMode} />
+    </section>
+  );
 }
 
 function storyExcerpt(story: Story, mode: ReadingMode): string {
@@ -455,6 +835,7 @@ function RelationEvidence({
             </article>
           );
         })}
+        <RelationHistoricalContext relationId={relation.id} readingMode={readingMode} />
       </div>
     </details>
   );
@@ -956,6 +1337,7 @@ function PersonDetailCard({
         focusedPerson={focusedPerson}
         readingMode={readingMode}
       />
+      <PersonHistoricalProfile personId={focusedPerson.id} readingMode={readingMode} onFocus={onFocus} />
       <div className="relation-detail-group">
         <p className="relation-detail-heading">{uiLabel(data, "person_sketch_relations", readingMode, "人物关系")}</p>
         <p className="relation-detail-subheading">{storyLabel(data, "direct_relation_label", readingMode, "已审阅的直接关系")}</p>
@@ -1311,6 +1693,12 @@ function EraCardDetail({
           ))}
         </section>
       )}
+      <EraHistoricalDepth
+        eraId={card.era_card_id}
+        readingMode={readingMode}
+        onFocus={onFocus}
+        onStorySelect={onStorySelect}
+      />
     </section>
   );
 }
@@ -1782,6 +2170,8 @@ function StoryReader({
         </section>
 
         <SceneCard story={story} data={data} readingMode={readingMode} onFocus={onFocus} />
+
+        <StoryHistoricalDepth storyId={story.id} readingMode={readingMode} onFocus={onFocus} />
 
         <section className="annotation-hook" aria-label="进一步读">
           <p className="section-label">进一步读</p>
