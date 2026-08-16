@@ -462,3 +462,15 @@ remain explicit. Missing edges are unknown, not negative evidence. HG0 does
 not generate negative facts, embeddings, models, train/test splits, or GNN
 artifacts. `data/derived/hg0-ml0-readiness.json` is a framework-neutral
 contract for later projections, not an ML dataset.
+
+## ML0 research projection
+
+ML0 is an optional, disposable research layer downstream of HG0. Its
+`data/derived/ml0-*.json` artifacts are reproducible dataset views, experiment
+manifests, baselines, model diagnostics, temporal-feasibility checks, and
+future data recommendations. They must record HG0 input hashes and never write
+model output back into canonical facts, graph truth, Persons, Stories,
+Relations, or participant freeze. Computational corruptions used for ranking
+are ML-only and are never historical negative facts. Names, labels, and
+canonical IDs are not predictive feature values. A missing edge remains
+unknown, and candidate/reviewed status remains machine-readable.

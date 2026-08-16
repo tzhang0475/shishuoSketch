@@ -1,0 +1,57 @@
+{
+  "schema": 1,
+  "stage": "ml0-bias-diagnostic",
+  "story_edge_ratio_from_hg0": 0.839521,
+  "gnn_mrr": {
+    "G_all": 0.3556832495771421,
+    "G_story": 0.3023307740356713,
+    "G_external": 0.16666666666666666
+  },
+  "random_mrr_reference": 0.27453430407975865,
+  "representation_comparisons": {
+    "G_all_vs_G_story": {
+      "pairwise_distance_correlation": {
+        "mean": 0.6619094401375974,
+        "std": 0.03498116283302473
+      },
+      "nearest_neighbor_overlap_at_5": {
+        "mean": 0.4117333333333333,
+        "std": 0.030056539314358133
+      },
+      "procrustes_similarity": {
+        "mean": 0.3373152611499795,
+        "std": 0.017172397605008827
+      }
+    },
+    "G_all_vs_G_external": {
+      "pairwise_distance_correlation": {
+        "mean": 0.40439703631674506,
+        "std": 0.05697636229769574
+      },
+      "nearest_neighbor_overlap_at_5": {
+        "mean": 0.23093333333333335,
+        "std": 0.016999869280543194
+      },
+      "procrustes_similarity": {
+        "mean": 0.1326754505750601,
+        "std": 0.044851769492087364
+      }
+    }
+  },
+  "classification": {
+    "story_dominance": "mixed signal",
+    "external_historical_signal": "weak",
+    "graph_trainability": "stable"
+  },
+  "thresholds": {
+    "story_ratio_for_dominance": 0.7,
+    "all_story_distance_correlation_for_dominance": 0.8,
+    "external_mrr_margin_over_random_for_meaningful": 0.05,
+    "note": "These are transparent pilot diagnostic thresholds, not historical truth scores."
+  },
+  "limitations": [
+    "The task reconstructs observed PersonStory links and is selected by published corpus scope.",
+    "Model-space similarity is not historical similarity.",
+    "Candidate/reviewed status changes measure epistemic sensitivity, not source correctness."
+  ]
+}

@@ -1,0 +1,142 @@
+{
+  "schema": 1,
+  "stage": "ml0-expansion-recommendation",
+  "research_only": true,
+  "layers": [
+    {
+      "layer": "family",
+      "current_status": "pilot_only",
+      "ml0_signal": "weak_sensitivity",
+      "representation_similarity_to_g_all": 0.8823367178207304,
+      "reason": "Layer readiness and controlled ablation sensitivity are reported together; neither is historical importance.",
+      "recommended_action": "enrich_targeted",
+      "priority": "high",
+      "target_types": [
+        "Person",
+        "KinshipFact",
+        "MarriageUnion",
+        "Clan"
+      ],
+      "selection_policy": "Use local-source availability, bridge/coverage value, and provenance completeness; do not select by model score, centrality, fame, or inferred historical importance."
+    },
+    {
+      "layer": "clan",
+      "current_status": "pilot_only",
+      "ml0_signal": "weak_sensitivity",
+      "representation_similarity_to_g_all": 0.9203336686039852,
+      "reason": "Layer readiness and controlled ablation sensitivity are reported together; neither is historical importance.",
+      "recommended_action": "enrich_targeted",
+      "priority": "medium",
+      "target_types": [
+        "Person",
+        "Clan",
+        "ClanMembership"
+      ],
+      "selection_policy": "Use local-source availability, bridge/coverage value, and provenance completeness; do not select by model score, centrality, fame, or inferred historical importance."
+    },
+    {
+      "layer": "office",
+      "current_status": "pilot_only",
+      "ml0_signal": "weak_sensitivity",
+      "representation_similarity_to_g_all": 0.8815686883692115,
+      "reason": "Layer readiness and controlled ablation sensitivity are reported together; neither is historical importance.",
+      "recommended_action": "enrich_targeted",
+      "priority": "high",
+      "target_types": [
+        "Person",
+        "Office",
+        "OfficeTenure",
+        "Location"
+      ],
+      "selection_policy": "Use local-source availability, bridge/coverage value, and provenance completeness; do not select by model score, centrality, fame, or inferred historical importance."
+    },
+    {
+      "layer": "event",
+      "current_status": "pilot_only",
+      "ml0_signal": "weak_sensitivity",
+      "representation_similarity_to_g_all": 0.8723205780722334,
+      "reason": "Layer readiness and controlled ablation sensitivity are reported together; neither is historical importance.",
+      "recommended_action": "enrich_targeted",
+      "priority": "high",
+      "target_types": [
+        "Person",
+        "Event",
+        "EventParticipation"
+      ],
+      "selection_policy": "Use local-source availability, bridge/coverage value, and provenance completeness; do not select by model score, centrality, fame, or inferred historical importance."
+    },
+    {
+      "layer": "geographic",
+      "current_status": "pilot_only",
+      "ml0_signal": "weak_sensitivity",
+      "representation_similarity_to_g_all": 0.9872118980015729,
+      "reason": "Layer readiness and controlled ablation sensitivity are reported together; neither is historical importance.",
+      "recommended_action": "enrich_targeted",
+      "priority": "medium",
+      "target_types": [
+        "Person",
+        "Location",
+        "PersonActivity"
+      ],
+      "selection_policy": "Use local-source availability, bridge/coverage value, and provenance completeness; do not select by model score, centrality, fame, or inferred historical importance."
+    },
+    {
+      "layer": "service_political",
+      "current_status": "insufficient",
+      "ml0_signal": "weak_sensitivity",
+      "representation_similarity_to_g_all": 0.9717280951595201,
+      "reason": "Layer readiness and controlled ablation sensitivity are reported together; neither is historical importance.",
+      "recommended_action": "enrich_targeted",
+      "priority": "medium",
+      "target_types": [
+        "Person",
+        "ServicePoliticalFact",
+        "Event"
+      ],
+      "selection_policy": "Use local-source availability, bridge/coverage value, and provenance completeness; do not select by model score, centrality, fame, or inferred historical importance."
+    },
+    {
+      "layer": "temporal",
+      "current_status": "pilot_only",
+      "ml0_signal": "unknown",
+      "representation_similarity_to_g_all": null,
+      "reason": "Layer readiness and controlled ablation sensitivity are reported together; neither is historical importance.",
+      "recommended_action": "enrich_targeted",
+      "priority": "high",
+      "target_types": [
+        "PersonActivity",
+        "OfficeTenure",
+        "Event",
+        "Story"
+      ],
+      "selection_policy": "Use local-source availability, bridge/coverage value, and provenance completeness; do not select by model score, centrality, fame, or inferred historical importance."
+    },
+    {
+      "layer": "social_context",
+      "current_status": "insufficient",
+      "ml0_signal": "unknown",
+      "representation_similarity_to_g_all": null,
+      "reason": "Layer readiness and controlled ablation sensitivity are reported together; neither is historical importance.",
+      "recommended_action": "retain_as_audit_only",
+      "priority": "medium",
+      "target_types": [
+        "Relation",
+        "Evidence"
+      ],
+      "selection_policy": "Use local-source availability, bridge/coverage value, and provenance completeness; do not select by model score, centrality, fame, or inferred historical importance."
+    }
+  ],
+  "story_expansion": {
+    "recommendation": "defer_broad_expansion_pending_targeted_enrichment",
+    "reason": "The pilot does not establish enough independent external signal to justify broad corpus growth.",
+    "do_not_execute": true,
+    "selection_policy": "If expanded later, choose Stories that close documented office/family/event/location/temporal gaps and have qualified local source evidence; do not expand to optimize graph size."
+  },
+  "person_expansion": {
+    "recommendation": "selective_review_only",
+    "reason": "Promote only secure identities that are necessary bridges for selected source-backed Stories or historical layers; no centrality/fame/model-score ranking.",
+    "do_not_execute": true,
+    "selection_policy": "Review bridge endpoint gaps and local evidence first; missing historical edges remain unknown."
+  },
+  "decision": "ML0 recommends targeted X1 planning, not immediate broad Story or Person expansion."
+}

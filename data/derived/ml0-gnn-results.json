@@ -1,0 +1,2405 @@
+{
+  "schema": 1,
+  "stage": "ml0-gnn-results",
+  "implementation": {
+    "framework": "NumPy 1.x custom implementation",
+    "framework_status": "PyTorch/PyG unavailable in execution environment; this is a lightweight relation-aware R-GCN-style pilot, not a production ML dependency.",
+    "model": "two-layer relation-aware message-passing autoencoder with typed-edge reconstruction objective",
+    "write_back": false
+  },
+  "task": "held-out observed PersonStory reconstruction",
+  "views": [
+    {
+      "run_count": 5,
+      "completed_count": 5,
+      "status": "completed",
+      "metrics": {
+        "mrr": {
+          "mean": 0.3023307740356713,
+          "std": 0.0440698485851871
+        },
+        "hits_at_1": {
+          "mean": 0.10909090909090909,
+          "std": 0.04535342286998717
+        },
+        "hits_at_3": {
+          "mean": 0.3181818181818182,
+          "std": 0.07666127661014253
+        },
+        "hits_at_10": {
+          "mean": 0.8666666666666666,
+          "std": 0.045353422869987156
+        },
+        "mean_rank": {
+          "mean": 5.804545454545455,
+          "std": 0.48331670912799407
+        }
+      },
+      "loss_last": {
+        "mean": 0.4018285310470321,
+        "std": 0.036425736635468796
+      },
+      "view_id": "G_story",
+      "context_edge_count": 556,
+      "view_edge_count": 688,
+      "seed_policy": [
+        17,
+        29,
+        43,
+        61,
+        73
+      ],
+      "model": "numpy_rgcn_style_two_layer_relation_aware_message_passing",
+      "hyperparameters": {
+        "hidden_dimension": 16,
+        "layers": 2,
+        "epochs": 60,
+        "learning_rate": 0.01,
+        "train_corruptions_per_positive": 2,
+        "test_corruptions_per_positive": 10,
+        "activation": "tanh",
+        "normalization": "symmetric degree normalization on directed forward/reverse relation messages"
+      }
+    },
+    {
+      "run_count": 5,
+      "completed_count": 5,
+      "status": "completed",
+      "metrics": {
+        "mrr": {
+          "mean": 0.16666666666666666,
+          "std": 0.0
+        },
+        "hits_at_1": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "hits_at_3": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "hits_at_10": {
+          "mean": 1.0,
+          "std": 0.0
+        },
+        "mean_rank": {
+          "mean": 6.0,
+          "std": 0.0
+        }
+      },
+      "loss_last": {
+        "mean": 0.6365363233700283,
+        "std": 1.0713663482976834e-05
+      },
+      "view_id": "G_external",
+      "context_edge_count": 229,
+      "view_edge_count": 229,
+      "seed_policy": [
+        17,
+        29,
+        43,
+        61,
+        73
+      ],
+      "model": "numpy_rgcn_style_two_layer_relation_aware_message_passing",
+      "hyperparameters": {
+        "hidden_dimension": 16,
+        "layers": 2,
+        "epochs": 60,
+        "learning_rate": 0.01,
+        "train_corruptions_per_positive": 2,
+        "test_corruptions_per_positive": 10,
+        "activation": "tanh",
+        "normalization": "symmetric degree normalization on directed forward/reverse relation messages"
+      }
+    },
+    {
+      "run_count": 5,
+      "completed_count": 5,
+      "status": "completed",
+      "metrics": {
+        "mrr": {
+          "mean": 0.3556832495771421,
+          "std": 0.02898929856065282
+        },
+        "hits_at_1": {
+          "mean": 0.1696969696969697,
+          "std": 0.0411050302007592
+        },
+        "hits_at_3": {
+          "mean": 0.38181818181818183,
+          "std": 0.039972442297796736
+        },
+        "hits_at_10": {
+          "mean": 0.9454545454545455,
+          "std": 0.04453617714151233
+        },
+        "mean_rank": {
+          "mean": 5.134848484848485,
+          "std": 0.39734541553542013
+        }
+      },
+      "loss_last": {
+        "mean": 0.30941891979265146,
+        "std": 0.025589766560847528
+      },
+      "view_id": "G_all",
+      "context_edge_count": 864,
+      "view_edge_count": 996,
+      "seed_policy": [
+        17,
+        29,
+        43,
+        61,
+        73
+      ],
+      "model": "numpy_rgcn_style_two_layer_relation_aware_message_passing",
+      "hyperparameters": {
+        "hidden_dimension": 16,
+        "layers": 2,
+        "epochs": 60,
+        "learning_rate": 0.01,
+        "train_corruptions_per_positive": 2,
+        "test_corruptions_per_positive": 10,
+        "activation": "tanh",
+        "normalization": "symmetric degree normalization on directed forward/reverse relation messages"
+      }
+    },
+    {
+      "run_count": 5,
+      "completed_count": 5,
+      "status": "completed",
+      "metrics": {
+        "mrr": {
+          "mean": 0.33542764630788835,
+          "std": 0.01184751076652638
+        },
+        "hits_at_1": {
+          "mean": 0.16363636363636364,
+          "std": 0.02010075630518424
+        },
+        "hits_at_3": {
+          "mean": 0.3575757575757576,
+          "std": 0.029690784761008226
+        },
+        "hits_at_10": {
+          "mean": 0.9121212121212121,
+          "std": 0.02606765232437161
+        },
+        "mean_rank": {
+          "mean": 5.6,
+          "std": 0.12359402126989784
+        }
+      },
+      "loss_last": {
+        "mean": 0.41478381724073526,
+        "std": 0.01756408441961159
+      },
+      "view_id": "G_reviewed",
+      "context_edge_count": 281,
+      "view_edge_count": 351,
+      "seed_policy": [
+        17,
+        29,
+        43,
+        61,
+        73
+      ],
+      "model": "numpy_rgcn_style_two_layer_relation_aware_message_passing",
+      "hyperparameters": {
+        "hidden_dimension": 16,
+        "layers": 2,
+        "epochs": 60,
+        "learning_rate": 0.01,
+        "train_corruptions_per_positive": 2,
+        "test_corruptions_per_positive": 10,
+        "activation": "tanh",
+        "normalization": "symmetric degree normalization on directed forward/reverse relation messages"
+      }
+    },
+    {
+      "run_count": 3,
+      "completed_count": 3,
+      "status": "completed",
+      "metrics": {
+        "mrr": {
+          "mean": 0.3392681153599157,
+          "std": 0.02015266484720612
+        },
+        "hits_at_1": {
+          "mean": 0.15151515151515152,
+          "std": 0.024742320634173517
+        },
+        "hits_at_3": {
+          "mean": 0.35353535353535354,
+          "std": 0.025752623806024166
+        },
+        "hits_at_10": {
+          "mean": 0.9393939393939394,
+          "std": 0.05669177858748396
+        },
+        "mean_rank": {
+          "mean": 5.234848484848485,
+          "std": 0.48405870018202984
+        }
+      },
+      "loss_last": {
+        "mean": 0.3127757509924132,
+        "std": 0.031177775017341827
+      },
+      "view_id": "G_reviewed_plus_candidate",
+      "context_edge_count": 864,
+      "view_edge_count": 996,
+      "seed_policy": [
+        17,
+        29,
+        43
+      ],
+      "model": "numpy_rgcn_style_two_layer_relation_aware_message_passing",
+      "hyperparameters": {
+        "hidden_dimension": 16,
+        "layers": 2,
+        "epochs": 60,
+        "learning_rate": 0.01,
+        "train_corruptions_per_positive": 2,
+        "test_corruptions_per_positive": 10,
+        "activation": "tanh",
+        "normalization": "symmetric degree normalization on directed forward/reverse relation messages"
+      }
+    },
+    {
+      "run_count": 3,
+      "completed_count": 3,
+      "status": "completed",
+      "metrics": {
+        "mrr": {
+          "mean": 0.24865955164529138,
+          "std": 0.02206419990096306
+        },
+        "hits_at_1": {
+          "mean": 0.0707070707070707,
+          "std": 0.025752623806024166
+        },
+        "hits_at_3": {
+          "mean": 0.10606060606060606,
+          "std": 0.02142747821777416
+        },
+        "hits_at_10": {
+          "mean": 0.9494949494949495,
+          "std": 0.02575262380602418
+        },
+        "mean_rank": {
+          "mean": 5.525252525252525,
+          "std": 0.2223656561894071
+        }
+      },
+      "loss_last": {
+        "mean": 0.520491650061499,
+        "std": 0.008227650433848046
+      },
+      "view_id": "G_temporal_bounded",
+      "context_edge_count": 268,
+      "view_edge_count": 290,
+      "seed_policy": [
+        17,
+        29,
+        43
+      ],
+      "model": "numpy_rgcn_style_two_layer_relation_aware_message_passing",
+      "hyperparameters": {
+        "hidden_dimension": 16,
+        "layers": 2,
+        "epochs": 60,
+        "learning_rate": 0.01,
+        "train_corruptions_per_positive": 2,
+        "test_corruptions_per_positive": 10,
+        "activation": "tanh",
+        "normalization": "symmetric degree normalization on directed forward/reverse relation messages"
+      }
+    },
+    {
+      "run_count": 3,
+      "completed_count": 3,
+      "status": "completed",
+      "metrics": {
+        "mrr": {
+          "mean": 0.33990818384757776,
+          "std": 0.024790085110937027
+        },
+        "hits_at_1": {
+          "mean": 0.14646464646464646,
+          "std": 0.025752623806024166
+        },
+        "hits_at_3": {
+          "mean": 0.3888888888888889,
+          "std": 0.0397677165354132
+        },
+        "hits_at_10": {
+          "mean": 0.914141414141414,
+          "std": 0.04999744917480639
+        },
+        "mean_rank": {
+          "mean": 5.26010101010101,
+          "std": 0.5521936847917823
+        }
+      },
+      "loss_last": {
+        "mean": 0.33111487592108,
+        "std": 0.033265499147276265
+      },
+      "view_id": "G_all_minus_family",
+      "context_edge_count": 856,
+      "view_edge_count": 988,
+      "seed_policy": [
+        17,
+        29,
+        43
+      ],
+      "model": "numpy_rgcn_style_two_layer_relation_aware_message_passing",
+      "hyperparameters": {
+        "hidden_dimension": 16,
+        "layers": 2,
+        "epochs": 60,
+        "learning_rate": 0.01,
+        "train_corruptions_per_positive": 2,
+        "test_corruptions_per_positive": 10,
+        "activation": "tanh",
+        "normalization": "symmetric degree normalization on directed forward/reverse relation messages"
+      }
+    },
+    {
+      "run_count": 3,
+      "completed_count": 3,
+      "status": "completed",
+      "metrics": {
+        "mrr": {
+          "mean": 0.3450512351581871,
+          "std": 0.011274921956338807
+        },
+        "hits_at_1": {
+          "mean": 0.16161616161616163,
+          "std": 0.018897259529161325
+        },
+        "hits_at_3": {
+          "mean": 0.3686868686868687,
+          "std": 0.0142849854785161
+        },
+        "hits_at_10": {
+          "mean": 0.9040404040404041,
+          "std": 0.061025484715124104
+        },
+        "mean_rank": {
+          "mean": 5.26010101010101,
+          "std": 0.39049256121369097
+        }
+      },
+      "loss_last": {
+        "mean": 0.30779806758334943,
+        "std": 0.025608553410822164
+      },
+      "view_id": "G_all_minus_clan",
+      "context_edge_count": 853,
+      "view_edge_count": 985,
+      "seed_policy": [
+        17,
+        29,
+        43
+      ],
+      "model": "numpy_rgcn_style_two_layer_relation_aware_message_passing",
+      "hyperparameters": {
+        "hidden_dimension": 16,
+        "layers": 2,
+        "epochs": 60,
+        "learning_rate": 0.01,
+        "train_corruptions_per_positive": 2,
+        "test_corruptions_per_positive": 10,
+        "activation": "tanh",
+        "normalization": "symmetric degree normalization on directed forward/reverse relation messages"
+      }
+    },
+    {
+      "run_count": 3,
+      "completed_count": 3,
+      "status": "completed",
+      "metrics": {
+        "mrr": {
+          "mean": 0.31755244326545573,
+          "std": 0.016873863929932415
+        },
+        "hits_at_1": {
+          "mean": 0.1313131313131313,
+          "std": 0.025752623806024163
+        },
+        "hits_at_3": {
+          "mean": 0.3333333333333333,
+          "std": 0.0
+        },
+        "hits_at_10": {
+          "mean": 0.9090909090909091,
+          "std": 0.012371160317086747
+        },
+        "mean_rank": {
+          "mean": 5.507575757575758,
+          "std": 0.22302426430120825
+        }
+      },
+      "loss_last": {
+        "mean": 0.2983127137100354,
+        "std": 0.03168306584604135
+      },
+      "view_id": "G_all_minus_office",
+      "context_edge_count": 752,
+      "view_edge_count": 884,
+      "seed_policy": [
+        17,
+        29,
+        43
+      ],
+      "model": "numpy_rgcn_style_two_layer_relation_aware_message_passing",
+      "hyperparameters": {
+        "hidden_dimension": 16,
+        "layers": 2,
+        "epochs": 60,
+        "learning_rate": 0.01,
+        "train_corruptions_per_positive": 2,
+        "test_corruptions_per_positive": 10,
+        "activation": "tanh",
+        "normalization": "symmetric degree normalization on directed forward/reverse relation messages"
+      }
+    },
+    {
+      "run_count": 3,
+      "completed_count": 3,
+      "status": "completed",
+      "metrics": {
+        "mrr": {
+          "mean": 0.31445669930518416,
+          "std": 0.004253932936234248
+        },
+        "hits_at_1": {
+          "mean": 0.1414141414141414,
+          "std": 0.007142492739258062
+        },
+        "hits_at_3": {
+          "mean": 0.29797979797979796,
+          "std": 0.028569970957032224
+        },
+        "hits_at_10": {
+          "mean": 0.9191919191919192,
+          "std": 0.018897259529161343
+        },
+        "mean_rank": {
+          "mean": 5.613636363636363,
+          "std": 0.2471137337924255
+        }
+      },
+      "loss_last": {
+        "mean": 0.3272728099303828,
+        "std": 0.02283200854193744
+      },
+      "view_id": "G_all_minus_event",
+      "context_edge_count": 747,
+      "view_edge_count": 879,
+      "seed_policy": [
+        17,
+        29,
+        43
+      ],
+      "model": "numpy_rgcn_style_two_layer_relation_aware_message_passing",
+      "hyperparameters": {
+        "hidden_dimension": 16,
+        "layers": 2,
+        "epochs": 60,
+        "learning_rate": 0.01,
+        "train_corruptions_per_positive": 2,
+        "test_corruptions_per_positive": 10,
+        "activation": "tanh",
+        "normalization": "symmetric degree normalization on directed forward/reverse relation messages"
+      }
+    },
+    {
+      "run_count": 3,
+      "completed_count": 3,
+      "status": "completed",
+      "metrics": {
+        "mrr": {
+          "mean": 0.3413162034374156,
+          "std": 0.017917735457811296
+        },
+        "hits_at_1": {
+          "mean": 0.16161616161616163,
+          "std": 0.025752623806024163
+        },
+        "hits_at_3": {
+          "mean": 0.3383838383838384,
+          "std": 0.01889725952916133
+        },
+        "hits_at_10": {
+          "mean": 0.9292929292929294,
+          "std": 0.06226680811079773
+        },
+        "mean_rank": {
+          "mean": 5.295454545454546,
+          "std": 0.369481639559028
+        }
+      },
+      "loss_last": {
+        "mean": 0.31966979899761183,
+        "std": 0.031858480342731935
+      },
+      "view_id": "G_all_minus_geographic",
+      "context_edge_count": 843,
+      "view_edge_count": 975,
+      "seed_policy": [
+        17,
+        29,
+        43
+      ],
+      "model": "numpy_rgcn_style_two_layer_relation_aware_message_passing",
+      "hyperparameters": {
+        "hidden_dimension": 16,
+        "layers": 2,
+        "epochs": 60,
+        "learning_rate": 0.01,
+        "train_corruptions_per_positive": 2,
+        "test_corruptions_per_positive": 10,
+        "activation": "tanh",
+        "normalization": "symmetric degree normalization on directed forward/reverse relation messages"
+      }
+    },
+    {
+      "run_count": 3,
+      "completed_count": 3,
+      "status": "completed",
+      "metrics": {
+        "mrr": {
+          "mean": 0.3288434909647031,
+          "std": 0.0162507066676235
+        },
+        "hits_at_1": {
+          "mean": 0.1414141414141414,
+          "std": 0.031133404055398873
+        },
+        "hits_at_3": {
+          "mean": 0.3383838383838384,
+          "std": 0.039767716535413174
+        },
+        "hits_at_10": {
+          "mean": 0.9393939393939394,
+          "std": 0.03273101362832255
+        },
+        "mean_rank": {
+          "mean": 5.275252525252525,
+          "std": 0.38833096538870887
+        }
+      },
+      "loss_last": {
+        "mean": 0.3279442077120904,
+        "std": 0.030269405342787242
+      },
+      "view_id": "G_all_minus_service_political",
+      "context_edge_count": 851,
+      "view_edge_count": 983,
+      "seed_policy": [
+        17,
+        29,
+        43
+      ],
+      "model": "numpy_rgcn_style_two_layer_relation_aware_message_passing",
+      "hyperparameters": {
+        "hidden_dimension": 16,
+        "layers": 2,
+        "epochs": 60,
+        "learning_rate": 0.01,
+        "train_corruptions_per_positive": 2,
+        "test_corruptions_per_positive": 10,
+        "activation": "tanh",
+        "normalization": "symmetric degree normalization on directed forward/reverse relation messages"
+      }
+    }
+  ],
+  "runs": {
+    "G_story": [
+      {
+        "status": "completed",
+        "seed": 17,
+        "losses": {
+          "first": 1.1195293383280955,
+          "last": 0.43628078177061175,
+          "minimum": 0.43628078177061175,
+          "epoch_count": 60
+        },
+        "metrics": {
+          "evaluated_positive_count": 66,
+          "mrr": 0.26081103240194153,
+          "mean_rank": 6.492424242424242,
+          "hits_at_1": 0.07575757575757576,
+          "hits_at_3": 0.2727272727272727,
+          "hits_at_10": 0.803030303030303,
+          "negative_semantics": "ML-only deterministic corruptions; they are not historical negative facts."
+        },
+        "embedding_dimension": 16,
+        "person_embedding_sha256": "31a767761994934099c5c1317bb6cbdf358fdd4c2d285d268ad73644e0402356",
+        "context_edge_count": 556,
+        "view_edge_count": 688,
+        "feature_shape": [
+          347,
+          113
+        ],
+        "train_positive_count": 264,
+        "test_positive_count": 66,
+        "corruption_policy": "Deterministic endpoint-type constrained computational corruptions only; no negative historical facts are emitted."
+      },
+      {
+        "status": "completed",
+        "seed": 29,
+        "losses": {
+          "first": 0.8926659614750827,
+          "last": 0.4182282288493711,
+          "minimum": 0.4182282288493711,
+          "epoch_count": 60
+        },
+        "metrics": {
+          "evaluated_positive_count": 66,
+          "mrr": 0.25641960287682214,
+          "mean_rank": 5.8106060606060606,
+          "hits_at_1": 0.045454545454545456,
+          "hits_at_3": 0.24242424242424243,
+          "hits_at_10": 0.9090909090909091,
+          "negative_semantics": "ML-only deterministic corruptions; they are not historical negative facts."
+        },
+        "embedding_dimension": 16,
+        "person_embedding_sha256": "84cf1587a465446a42e39a0145e3d9c0b8ce78b8a48638ea780d774a59214ac0",
+        "context_edge_count": 556,
+        "view_edge_count": 688,
+        "feature_shape": [
+          347,
+          113
+        ],
+        "train_positive_count": 264,
+        "test_positive_count": 66,
+        "corruption_policy": "Deterministic endpoint-type constrained computational corruptions only; no negative historical facts are emitted."
+      },
+      {
+        "status": "completed",
+        "seed": 43,
+        "losses": {
+          "first": 1.7673065032375292,
+          "last": 0.38659225487928367,
+          "minimum": 0.38659225487928367,
+          "epoch_count": 60
+        },
+        "metrics": {
+          "evaluated_positive_count": 66,
+          "mrr": 0.2865311721771052,
+          "mean_rank": 6.159090909090909,
+          "hits_at_1": 0.10606060606060606,
+          "hits_at_3": 0.2727272727272727,
+          "hits_at_10": 0.8333333333333334,
+          "negative_semantics": "ML-only deterministic corruptions; they are not historical negative facts."
+        },
+        "embedding_dimension": 16,
+        "person_embedding_sha256": "522c629a30e2c71601ea40b87677fc961aaa453d8b6222cee142ee224e4a2f7e",
+        "context_edge_count": 556,
+        "view_edge_count": 688,
+        "feature_shape": [
+          347,
+          113
+        ],
+        "train_positive_count": 264,
+        "test_positive_count": 66,
+        "corruption_policy": "Deterministic endpoint-type constrained computational corruptions only; no negative historical facts are emitted."
+      },
+      {
+        "status": "completed",
+        "seed": 61,
+        "losses": {
+          "first": 1.4870422373508603,
+          "last": 0.3375885852398456,
+          "minimum": 0.3375885852398456,
+          "epoch_count": 60
+        },
+        "metrics": {
+          "evaluated_positive_count": 66,
+          "mrr": 0.3662166505925301,
+          "mean_rank": 5.378787878787879,
+          "hits_at_1": 0.16666666666666666,
+          "hits_at_3": 0.45454545454545453,
+          "hits_at_10": 0.8636363636363636,
+          "negative_semantics": "ML-only deterministic corruptions; they are not historical negative facts."
+        },
+        "embedding_dimension": 16,
+        "person_embedding_sha256": "011f573a0f910f18b468204ea1dd044e275df57b99ff7e7319224828aa5e09bb",
+        "context_edge_count": 556,
+        "view_edge_count": 688,
+        "feature_shape": [
+          347,
+          113
+        ],
+        "train_positive_count": 264,
+        "test_positive_count": 66,
+        "corruption_policy": "Deterministic endpoint-type constrained computational corruptions only; no negative historical facts are emitted."
+      },
+      {
+        "status": "completed",
+        "seed": 73,
+        "losses": {
+          "first": 1.0777258246176669,
+          "last": 0.4304528044960486,
+          "minimum": 0.4304528044960486,
+          "epoch_count": 60
+        },
+        "metrics": {
+          "evaluated_positive_count": 66,
+          "mrr": 0.3416754121299576,
+          "mean_rank": 5.181818181818182,
+          "hits_at_1": 0.15151515151515152,
+          "hits_at_3": 0.3484848484848485,
+          "hits_at_10": 0.9242424242424242,
+          "negative_semantics": "ML-only deterministic corruptions; they are not historical negative facts."
+        },
+        "embedding_dimension": 16,
+        "person_embedding_sha256": "d41798156199f2bfbcece8e7caab5dd6b96f63cca83650dff2e92c788eb6aec3",
+        "context_edge_count": 556,
+        "view_edge_count": 688,
+        "feature_shape": [
+          347,
+          113
+        ],
+        "train_positive_count": 264,
+        "test_positive_count": 66,
+        "corruption_policy": "Deterministic endpoint-type constrained computational corruptions only; no negative historical facts are emitted."
+      }
+    ],
+    "G_external": [
+      {
+        "status": "completed",
+        "seed": 17,
+        "losses": {
+          "first": 0.7287866730145417,
+          "last": 0.6365468884233116,
+          "minimum": 0.6365287411938282,
+          "epoch_count": 60
+        },
+        "metrics": {
+          "evaluated_positive_count": 66,
+          "mrr": 0.16666666666666666,
+          "mean_rank": 6.0,
+          "hits_at_1": 0.0,
+          "hits_at_3": 0.0,
+          "hits_at_10": 1.0,
+          "negative_semantics": "ML-only deterministic corruptions; they are not historical negative facts."
+        },
+        "embedding_dimension": 16,
+        "person_embedding_sha256": "f14eb1f74b9c14b569bfe94894d124d36422d239acce85ecda5ad674066aa6e1",
+        "context_edge_count": 229,
+        "view_edge_count": 229,
+        "feature_shape": [
+          347,
+          113
+        ],
+        "train_positive_count": 264,
+        "test_positive_count": 66,
+        "corruption_policy": "Deterministic endpoint-type constrained computational corruptions only; no negative historical facts are emitted."
+      },
+      {
+        "status": "completed",
+        "seed": 29,
+        "losses": {
+          "first": 0.686539551578819,
+          "last": 0.6365502027554379,
+          "minimum": 0.6365268136039448,
+          "epoch_count": 60
+        },
+        "metrics": {
+          "evaluated_positive_count": 66,
+          "mrr": 0.16666666666666666,
+          "mean_rank": 6.0,
+          "hits_at_1": 0.0,
+          "hits_at_3": 0.0,
+          "hits_at_10": 1.0,
+          "negative_semantics": "ML-only deterministic corruptions; they are not historical negative facts."
+        },
+        "embedding_dimension": 16,
+        "person_embedding_sha256": "807a4de348796522d00f22fd2c8f054acba207b773b3403aa877a5225940f5eb",
+        "context_edge_count": 229,
+        "view_edge_count": 229,
+        "feature_shape": [
+          347,
+          113
+        ],
+        "train_positive_count": 264,
+        "test_positive_count": 66,
+        "corruption_policy": "Deterministic endpoint-type constrained computational corruptions only; no negative historical facts are emitted."
+      },
+      {
+        "status": "completed",
+        "seed": 43,
+        "losses": {
+          "first": 0.7022950562273242,
+          "last": 0.6365242318967905,
+          "minimum": 0.6365242318967905,
+          "epoch_count": 60
+        },
+        "metrics": {
+          "evaluated_positive_count": 66,
+          "mrr": 0.16666666666666666,
+          "mean_rank": 6.0,
+          "hits_at_1": 0.0,
+          "hits_at_3": 0.0,
+          "hits_at_10": 1.0,
+          "negative_semantics": "ML-only deterministic corruptions; they are not historical negative facts."
+        },
+        "embedding_dimension": 16,
+        "person_embedding_sha256": "08d41de90af6d1f26f911e01d41cea8f63bcb776d50837f18d369e71f7484c38",
+        "context_edge_count": 229,
+        "view_edge_count": 229,
+        "feature_shape": [
+          347,
+          113
+        ],
+        "train_positive_count": 264,
+        "test_positive_count": 66,
+        "corruption_policy": "Deterministic endpoint-type constrained computational corruptions only; no negative historical facts are emitted."
+      },
+      {
+        "status": "completed",
+        "seed": 61,
+        "losses": {
+          "first": 0.7041546072888931,
+          "last": 0.6365350024837149,
+          "minimum": 0.6365250807161044,
+          "epoch_count": 60
+        },
+        "metrics": {
+          "evaluated_positive_count": 66,
+          "mrr": 0.16666666666666666,
+          "mean_rank": 6.0,
+          "hits_at_1": 0.0,
+          "hits_at_3": 0.0,
+          "hits_at_10": 1.0,
+          "negative_semantics": "ML-only deterministic corruptions; they are not historical negative facts."
+        },
+        "embedding_dimension": 16,
+        "person_embedding_sha256": "bc95b3aa38d49feae667f307002502de44a8163443ea22c3c4cbcbfa091e7b72",
+        "context_edge_count": 229,
+        "view_edge_count": 229,
+        "feature_shape": [
+          347,
+          113
+        ],
+        "train_positive_count": 264,
+        "test_positive_count": 66,
+        "corruption_policy": "Deterministic endpoint-type constrained computational corruptions only; no negative historical facts are emitted."
+      },
+      {
+        "status": "completed",
+        "seed": 73,
+        "losses": {
+          "first": 0.6833119070650763,
+          "last": 0.6365252912908865,
+          "minimum": 0.6365252912908865,
+          "epoch_count": 60
+        },
+        "metrics": {
+          "evaluated_positive_count": 66,
+          "mrr": 0.16666666666666666,
+          "mean_rank": 6.0,
+          "hits_at_1": 0.0,
+          "hits_at_3": 0.0,
+          "hits_at_10": 1.0,
+          "negative_semantics": "ML-only deterministic corruptions; they are not historical negative facts."
+        },
+        "embedding_dimension": 16,
+        "person_embedding_sha256": "25733057866a59c640dc731dd4d14719d6ca23f7837a08526ff6a0a010a834bd",
+        "context_edge_count": 229,
+        "view_edge_count": 229,
+        "feature_shape": [
+          347,
+          113
+        ],
+        "train_positive_count": 264,
+        "test_positive_count": 66,
+        "corruption_policy": "Deterministic endpoint-type constrained computational corruptions only; no negative historical facts are emitted."
+      }
+    ],
+    "G_all": [
+      {
+        "status": "completed",
+        "seed": 17,
+        "losses": {
+          "first": 1.1056628078661284,
+          "last": 0.33800022816992253,
+          "minimum": 0.33800022816992253,
+          "epoch_count": 60
+        },
+        "metrics": {
+          "evaluated_positive_count": 66,
+          "mrr": 0.31579922602649874,
+          "mean_rank": 5.916666666666667,
+          "hits_at_1": 0.15151515151515152,
+          "hits_at_3": 0.3181818181818182,
+          "hits_at_10": 0.8636363636363636,
+          "negative_semantics": "ML-only deterministic corruptions; they are not historical negative facts."
+        },
+        "embedding_dimension": 16,
+        "person_embedding_sha256": "b10bf40b8f4c11be78e1c21358507ffbf741b8b55928a828b7d9f3128887fe9d",
+        "context_edge_count": 864,
+        "view_edge_count": 996,
+        "feature_shape": [
+          347,
+          113
+        ],
+        "train_positive_count": 264,
+        "test_positive_count": 66,
+        "corruption_policy": "Deterministic endpoint-type constrained computational corruptions only; no negative historical facts are emitted."
+      },
+      {
+        "status": "completed",
+        "seed": 29,
+        "losses": {
+          "first": 0.9182442302146488,
+          "last": 0.3314824331368027,
+          "minimum": 0.3314824331368027,
+          "epoch_count": 60
+        },
+        "metrics": {
+          "evaluated_positive_count": 66,
+          "mrr": 0.336998872092455,
+          "mean_rank": 4.840909090909091,
+          "hits_at_1": 0.12121212121212122,
+          "hits_at_3": 0.36363636363636365,
+          "hits_at_10": 1.0,
+          "negative_semantics": "ML-only deterministic corruptions; they are not historical negative facts."
+        },
+        "embedding_dimension": 16,
+        "person_embedding_sha256": "fdc1ed06a0ebc1722ab130c717e97dc26b65b812bd929f559e69163dd301b4bc",
+        "context_edge_count": 864,
+        "view_edge_count": 996,
+        "feature_shape": [
+          347,
+          113
+        ],
+        "train_positive_count": 264,
+        "test_positive_count": 66,
+        "corruption_policy": "Deterministic endpoint-type constrained computational corruptions only; no negative historical facts are emitted."
+      },
+      {
+        "status": "completed",
+        "seed": 43,
+        "losses": {
+          "first": 2.0432854520887975,
+          "last": 0.26884459167051455,
+          "minimum": 0.26884459167051455,
+          "epoch_count": 60
+        },
+        "metrics": {
+          "evaluated_positive_count": 66,
+          "mrr": 0.3650062479607934,
+          "mean_rank": 4.946969696969697,
+          "hits_at_1": 0.18181818181818182,
+          "hits_at_3": 0.3787878787878788,
+          "hits_at_10": 0.9545454545454546,
+          "negative_semantics": "ML-only deterministic corruptions; they are not historical negative facts."
+        },
+        "embedding_dimension": 16,
+        "person_embedding_sha256": "62772c95d5f6a98fa81a3d5b9796a02873bf20d794b216d355ffb29030222ef7",
+        "context_edge_count": 864,
+        "view_edge_count": 996,
+        "feature_shape": [
+          347,
+          113
+        ],
+        "train_positive_count": 264,
+        "test_positive_count": 66,
+        "corruption_policy": "Deterministic endpoint-type constrained computational corruptions only; no negative historical facts are emitted."
+      },
+      {
+        "status": "completed",
+        "seed": 61,
+        "losses": {
+          "first": 1.4393453952695225,
+          "last": 0.2926894985817967,
+          "minimum": 0.2926894985817967,
+          "epoch_count": 60
+        },
+        "metrics": {
+          "evaluated_positive_count": 66,
+          "mrr": 0.3583675972889314,
+          "mean_rank": 5.0606060606060606,
+          "hits_at_1": 0.15151515151515152,
+          "hits_at_3": 0.42424242424242425,
+          "hits_at_10": 0.9545454545454546,
+          "negative_semantics": "ML-only deterministic corruptions; they are not historical negative facts."
+        },
+        "embedding_dimension": 16,
+        "person_embedding_sha256": "44e5f1a7d922ad4ebddae0394d0cb408a0e73add5d5ed557d0f78fafce85af28",
+        "context_edge_count": 864,
+        "view_edge_count": 996,
+        "feature_shape": [
+          347,
+          113
+        ],
+        "train_positive_count": 264,
+        "test_positive_count": 66,
+        "corruption_policy": "Deterministic endpoint-type constrained computational corruptions only; no negative historical facts are emitted."
+      },
+      {
+        "status": "completed",
+        "seed": 73,
+        "losses": {
+          "first": 1.1927830790528964,
+          "last": 0.31607784740422074,
+          "minimum": 0.31607784740422074,
+          "epoch_count": 60
+        },
+        "metrics": {
+          "evaluated_positive_count": 66,
+          "mrr": 0.4022443045170318,
+          "mean_rank": 4.909090909090909,
+          "hits_at_1": 0.24242424242424243,
+          "hits_at_3": 0.42424242424242425,
+          "hits_at_10": 0.9545454545454546,
+          "negative_semantics": "ML-only deterministic corruptions; they are not historical negative facts."
+        },
+        "embedding_dimension": 16,
+        "person_embedding_sha256": "61aaf8999d8aa79f2b5aad005eaf498d252cd6b709b450d2e4ae4d10080c7ef4",
+        "context_edge_count": 864,
+        "view_edge_count": 996,
+        "feature_shape": [
+          347,
+          113
+        ],
+        "train_positive_count": 264,
+        "test_positive_count": 66,
+        "corruption_policy": "Deterministic endpoint-type constrained computational corruptions only; no negative historical facts are emitted."
+      }
+    ],
+    "G_reviewed": [
+      {
+        "status": "completed",
+        "seed": 17,
+        "losses": {
+          "first": 0.968827748456061,
+          "last": 0.44620089155333315,
+          "minimum": 0.44620089155333315,
+          "epoch_count": 60
+        },
+        "metrics": {
+          "evaluated_positive_count": 66,
+          "mrr": 0.32937437141982595,
+          "mean_rank": 5.431818181818182,
+          "hits_at_1": 0.15151515151515152,
+          "hits_at_3": 0.3484848484848485,
+          "hits_at_10": 0.9545454545454546,
+          "negative_semantics": "ML-only deterministic corruptions; they are not historical negative facts."
+        },
+        "embedding_dimension": 16,
+        "person_embedding_sha256": "bae472dc515e3133ae06cd9eff39ee2acd40f8555ee5a0954db09b9bea56bee9",
+        "context_edge_count": 281,
+        "view_edge_count": 351,
+        "feature_shape": [
+          347,
+          113
+        ],
+        "train_positive_count": 264,
+        "test_positive_count": 66,
+        "corruption_policy": "Deterministic endpoint-type constrained computational corruptions only; no negative historical facts are emitted."
+      },
+      {
+        "status": "completed",
+        "seed": 29,
+        "losses": {
+          "first": 1.1654046026148714,
+          "last": 0.41381986240135765,
+          "minimum": 0.41381986240135765,
+          "epoch_count": 60
+        },
+        "metrics": {
+          "evaluated_positive_count": 66,
+          "mrr": 0.3224993830116262,
+          "mean_rank": 5.575757575757576,
+          "hits_at_1": 0.13636363636363635,
+          "hits_at_3": 0.36363636363636365,
+          "hits_at_10": 0.9242424242424242,
+          "negative_semantics": "ML-only deterministic corruptions; they are not historical negative facts."
+        },
+        "embedding_dimension": 16,
+        "person_embedding_sha256": "92e769907e7b32746e61c64a6456641d366e3f864e4f7b27713543524a5740ad",
+        "context_edge_count": 281,
+        "view_edge_count": 351,
+        "feature_shape": [
+          347,
+          113
+        ],
+        "train_positive_count": 264,
+        "test_positive_count": 66,
+        "corruption_policy": "Deterministic endpoint-type constrained computational corruptions only; no negative historical facts are emitted."
+      },
+      {
+        "status": "completed",
+        "seed": 43,
+        "losses": {
+          "first": 0.6689706732007563,
+          "last": 0.3929910135468505,
+          "minimum": 0.3929910135468505,
+          "epoch_count": 60
+        },
+        "metrics": {
+          "evaluated_positive_count": 66,
+          "mrr": 0.32617826125777155,
+          "mean_rank": 5.795454545454546,
+          "hits_at_1": 0.16666666666666666,
+          "hits_at_3": 0.3181818181818182,
+          "hits_at_10": 0.8787878787878788,
+          "negative_semantics": "ML-only deterministic corruptions; they are not historical negative facts."
+        },
+        "embedding_dimension": 16,
+        "person_embedding_sha256": "975d70dd79df6ea80290c188ca381c174f0d26e05bcee8348dc589ce3c0abcf4",
+        "context_edge_count": 281,
+        "view_edge_count": 351,
+        "feature_shape": [
+          347,
+          113
+        ],
+        "train_positive_count": 264,
+        "test_positive_count": 66,
+        "corruption_policy": "Deterministic endpoint-type constrained computational corruptions only; no negative historical facts are emitted."
+      },
+      {
+        "status": "completed",
+        "seed": 61,
+        "losses": {
+          "first": 0.9059969414823709,
+          "last": 0.4150415081204503,
+          "minimum": 0.4150415081204503,
+          "epoch_count": 60
+        },
+        "metrics": {
+          "evaluated_positive_count": 66,
+          "mrr": 0.35218808343984254,
+          "mean_rank": 5.53030303030303,
+          "hits_at_1": 0.19696969696969696,
+          "hits_at_3": 0.3484848484848485,
+          "hits_at_10": 0.9090909090909091,
+          "negative_semantics": "ML-only deterministic corruptions; they are not historical negative facts."
+        },
+        "embedding_dimension": 16,
+        "person_embedding_sha256": "be53adaf7dd7ca17167ebb1a7bf49b02e851af28f0f38ee4c4843876ba13b96f",
+        "context_edge_count": 281,
+        "view_edge_count": 351,
+        "feature_shape": [
+          347,
+          113
+        ],
+        "train_positive_count": 264,
+        "test_positive_count": 66,
+        "corruption_policy": "Deterministic endpoint-type constrained computational corruptions only; no negative historical facts are emitted."
+      },
+      {
+        "status": "completed",
+        "seed": 73,
+        "losses": {
+          "first": 0.8610181955627159,
+          "last": 0.4058658105816847,
+          "minimum": 0.4058658105816847,
+          "epoch_count": 60
+        },
+        "metrics": {
+          "evaluated_positive_count": 66,
+          "mrr": 0.3468981324103756,
+          "mean_rank": 5.666666666666667,
+          "hits_at_1": 0.16666666666666666,
+          "hits_at_3": 0.4090909090909091,
+          "hits_at_10": 0.8939393939393939,
+          "negative_semantics": "ML-only deterministic corruptions; they are not historical negative facts."
+        },
+        "embedding_dimension": 16,
+        "person_embedding_sha256": "6335dc6313838f4bb0d35e4e3d49ea1e92d3a934f221bfc30524483aa4529dcf",
+        "context_edge_count": 281,
+        "view_edge_count": 351,
+        "feature_shape": [
+          347,
+          113
+        ],
+        "train_positive_count": 264,
+        "test_positive_count": 66,
+        "corruption_policy": "Deterministic endpoint-type constrained computational corruptions only; no negative historical facts are emitted."
+      }
+    ],
+    "G_reviewed_plus_candidate": [
+      {
+        "status": "completed",
+        "seed": 17,
+        "losses": {
+          "first": 1.1056628078661284,
+          "last": 0.33800022816992253,
+          "minimum": 0.33800022816992253,
+          "epoch_count": 60
+        },
+        "metrics": {
+          "evaluated_positive_count": 66,
+          "mrr": 0.31579922602649874,
+          "mean_rank": 5.916666666666667,
+          "hits_at_1": 0.15151515151515152,
+          "hits_at_3": 0.3181818181818182,
+          "hits_at_10": 0.8636363636363636,
+          "negative_semantics": "ML-only deterministic corruptions; they are not historical negative facts."
+        },
+        "embedding_dimension": 16,
+        "person_embedding_sha256": "b10bf40b8f4c11be78e1c21358507ffbf741b8b55928a828b7d9f3128887fe9d",
+        "context_edge_count": 864,
+        "view_edge_count": 996,
+        "feature_shape": [
+          347,
+          113
+        ],
+        "train_positive_count": 264,
+        "test_positive_count": 66,
+        "corruption_policy": "Deterministic endpoint-type constrained computational corruptions only; no negative historical facts are emitted."
+      },
+      {
+        "status": "completed",
+        "seed": 29,
+        "losses": {
+          "first": 0.9182442302146488,
+          "last": 0.3314824331368027,
+          "minimum": 0.3314824331368027,
+          "epoch_count": 60
+        },
+        "metrics": {
+          "evaluated_positive_count": 66,
+          "mrr": 0.336998872092455,
+          "mean_rank": 4.840909090909091,
+          "hits_at_1": 0.12121212121212122,
+          "hits_at_3": 0.36363636363636365,
+          "hits_at_10": 1.0,
+          "negative_semantics": "ML-only deterministic corruptions; they are not historical negative facts."
+        },
+        "embedding_dimension": 16,
+        "person_embedding_sha256": "fdc1ed06a0ebc1722ab130c717e97dc26b65b812bd929f559e69163dd301b4bc",
+        "context_edge_count": 864,
+        "view_edge_count": 996,
+        "feature_shape": [
+          347,
+          113
+        ],
+        "train_positive_count": 264,
+        "test_positive_count": 66,
+        "corruption_policy": "Deterministic endpoint-type constrained computational corruptions only; no negative historical facts are emitted."
+      },
+      {
+        "status": "completed",
+        "seed": 43,
+        "losses": {
+          "first": 2.0432854520887975,
+          "last": 0.26884459167051455,
+          "minimum": 0.26884459167051455,
+          "epoch_count": 60
+        },
+        "metrics": {
+          "evaluated_positive_count": 66,
+          "mrr": 0.3650062479607934,
+          "mean_rank": 4.946969696969697,
+          "hits_at_1": 0.18181818181818182,
+          "hits_at_3": 0.3787878787878788,
+          "hits_at_10": 0.9545454545454546,
+          "negative_semantics": "ML-only deterministic corruptions; they are not historical negative facts."
+        },
+        "embedding_dimension": 16,
+        "person_embedding_sha256": "62772c95d5f6a98fa81a3d5b9796a02873bf20d794b216d355ffb29030222ef7",
+        "context_edge_count": 864,
+        "view_edge_count": 996,
+        "feature_shape": [
+          347,
+          113
+        ],
+        "train_positive_count": 264,
+        "test_positive_count": 66,
+        "corruption_policy": "Deterministic endpoint-type constrained computational corruptions only; no negative historical facts are emitted."
+      }
+    ],
+    "G_temporal_bounded": [
+      {
+        "status": "completed",
+        "seed": 17,
+        "losses": {
+          "first": 0.710087365355673,
+          "last": 0.5222202559949722,
+          "minimum": 0.5222202559949722,
+          "epoch_count": 60
+        },
+        "metrics": {
+          "evaluated_positive_count": 66,
+          "mrr": 0.279198044973446,
+          "mean_rank": 5.21969696969697,
+          "hits_at_1": 0.10606060606060606,
+          "hits_at_3": 0.13636363636363635,
+          "hits_at_10": 0.9848484848484849,
+          "negative_semantics": "ML-only deterministic corruptions; they are not historical negative facts."
+        },
+        "embedding_dimension": 16,
+        "person_embedding_sha256": "fdb0779496d0671eb80269d07b3831a801519b0d423237e217ddc12bd31f1f72",
+        "context_edge_count": 268,
+        "view_edge_count": 290,
+        "feature_shape": [
+          347,
+          113
+        ],
+        "train_positive_count": 264,
+        "test_positive_count": 66,
+        "corruption_policy": "Deterministic endpoint-type constrained computational corruptions only; no negative historical facts are emitted."
+      },
+      {
+        "status": "completed",
+        "seed": 29,
+        "losses": {
+          "first": 0.8838265226483051,
+          "last": 0.5295923001120862,
+          "minimum": 0.5295923001120862,
+          "epoch_count": 60
+        },
+        "metrics": {
+          "evaluated_positive_count": 66,
+          "mrr": 0.23893951166678437,
+          "mean_rank": 5.613636363636363,
+          "hits_at_1": 0.06060606060606061,
+          "hits_at_3": 0.09090909090909091,
+          "hits_at_10": 0.9393939393939394,
+          "negative_semantics": "ML-only deterministic corruptions; they are not historical negative facts."
+        },
+        "embedding_dimension": 16,
+        "person_embedding_sha256": "f00ba9db51553244272944a78043f160fccd8d7986239df94979cd10bd8df499",
+        "context_edge_count": 268,
+        "view_edge_count": 290,
+        "feature_shape": [
+          347,
+          113
+        ],
+        "train_positive_count": 264,
+        "test_positive_count": 66,
+        "corruption_policy": "Deterministic endpoint-type constrained computational corruptions only; no negative historical facts are emitted."
+      },
+      {
+        "status": "completed",
+        "seed": 43,
+        "losses": {
+          "first": 0.7222926507502239,
+          "last": 0.5096623940774386,
+          "minimum": 0.5096623940774386,
+          "epoch_count": 60
+        },
+        "metrics": {
+          "evaluated_positive_count": 66,
+          "mrr": 0.22784109829564375,
+          "mean_rank": 5.742424242424242,
+          "hits_at_1": 0.045454545454545456,
+          "hits_at_3": 0.09090909090909091,
+          "hits_at_10": 0.9242424242424242,
+          "negative_semantics": "ML-only deterministic corruptions; they are not historical negative facts."
+        },
+        "embedding_dimension": 16,
+        "person_embedding_sha256": "74ea4720adbd5d9e272d2a6a5a3a34a91cbef1ce0830c78ddfcc0b8aa052a028",
+        "context_edge_count": 268,
+        "view_edge_count": 290,
+        "feature_shape": [
+          347,
+          113
+        ],
+        "train_positive_count": 264,
+        "test_positive_count": 66,
+        "corruption_policy": "Deterministic endpoint-type constrained computational corruptions only; no negative historical facts are emitted."
+      }
+    ],
+    "G_all_minus_family": [
+      {
+        "status": "completed",
+        "seed": 17,
+        "losses": {
+          "first": 1.1236290206683104,
+          "last": 0.35679994262724696,
+          "minimum": 0.35679994262724696,
+          "epoch_count": 60
+        },
+        "metrics": {
+          "evaluated_positive_count": 66,
+          "mrr": 0.3089815907997726,
+          "mean_rank": 6.037878787878788,
+          "hits_at_1": 0.13636363636363635,
+          "hits_at_3": 0.3333333333333333,
+          "hits_at_10": 0.8484848484848485,
+          "negative_semantics": "ML-only deterministic corruptions; they are not historical negative facts."
+        },
+        "embedding_dimension": 16,
+        "person_embedding_sha256": "b51d0b166305f8cb75a8b4cee92ab6ebf4dbade32a0cddafe7f4e998066ed95f",
+        "context_edge_count": 856,
+        "view_edge_count": 988,
+        "feature_shape": [
+          347,
+          113
+        ],
+        "train_positive_count": 264,
+        "test_positive_count": 66,
+        "corruption_policy": "Deterministic endpoint-type constrained computational corruptions only; no negative historical facts are emitted."
+      },
+      {
+        "status": "completed",
+        "seed": 29,
+        "losses": {
+          "first": 0.9076015521678092,
+          "last": 0.3524058768341837,
+          "minimum": 0.3524058768341837,
+          "epoch_count": 60
+        },
+        "metrics": {
+          "evaluated_positive_count": 66,
+          "mrr": 0.3410717649354013,
+          "mean_rank": 4.8106060606060606,
+          "hits_at_1": 0.12121212121212122,
+          "hits_at_3": 0.42424242424242425,
+          "hits_at_10": 0.9696969696969697,
+          "negative_semantics": "ML-only deterministic corruptions; they are not historical negative facts."
+        },
+        "embedding_dimension": 16,
+        "person_embedding_sha256": "d9fd8938dce0b397d10ed4b63dad4891dc4f11bbdff143c55229088aae5c936a",
+        "context_edge_count": 856,
+        "view_edge_count": 988,
+        "feature_shape": [
+          347,
+          113
+        ],
+        "train_positive_count": 264,
+        "test_positive_count": 66,
+        "corruption_policy": "Deterministic endpoint-type constrained computational corruptions only; no negative historical facts are emitted."
+      },
+      {
+        "status": "completed",
+        "seed": 43,
+        "losses": {
+          "first": 2.0290715575601435,
+          "last": 0.2841388083018094,
+          "minimum": 0.2841388083018094,
+          "epoch_count": 60
+        },
+        "metrics": {
+          "evaluated_positive_count": 66,
+          "mrr": 0.36967119580755947,
+          "mean_rank": 4.931818181818182,
+          "hits_at_1": 0.18181818181818182,
+          "hits_at_3": 0.4090909090909091,
+          "hits_at_10": 0.9242424242424242,
+          "negative_semantics": "ML-only deterministic corruptions; they are not historical negative facts."
+        },
+        "embedding_dimension": 16,
+        "person_embedding_sha256": "54f9c1b23798b3ec44f39d396235a8a36194ab2db8147e55eed6f5acee3ad9ce",
+        "context_edge_count": 856,
+        "view_edge_count": 988,
+        "feature_shape": [
+          347,
+          113
+        ],
+        "train_positive_count": 264,
+        "test_positive_count": 66,
+        "corruption_policy": "Deterministic endpoint-type constrained computational corruptions only; no negative historical facts are emitted."
+      }
+    ],
+    "G_all_minus_clan": [
+      {
+        "status": "completed",
+        "seed": 17,
+        "losses": {
+          "first": 1.1336832469003009,
+          "last": 0.33585964721059597,
+          "minimum": 0.33585964721059597,
+          "epoch_count": 60
+        },
+        "metrics": {
+          "evaluated_positive_count": 66,
+          "mrr": 0.3337000962000962,
+          "mean_rank": 5.8106060606060606,
+          "hits_at_1": 0.16666666666666666,
+          "hits_at_3": 0.3484848484848485,
+          "hits_at_10": 0.8181818181818182,
+          "negative_semantics": "ML-only deterministic corruptions; they are not historical negative facts."
+        },
+        "embedding_dimension": 16,
+        "person_embedding_sha256": "b332bf04b4fe72caecf6e3147f6a4f18697d08c0a92a129cf79e929232be65c6",
+        "context_edge_count": 853,
+        "view_edge_count": 985,
+        "feature_shape": [
+          347,
+          113
+        ],
+        "train_positive_count": 264,
+        "test_positive_count": 66,
+        "corruption_policy": "Deterministic endpoint-type constrained computational corruptions only; no negative historical facts are emitted."
+      },
+      {
+        "status": "completed",
+        "seed": 29,
+        "losses": {
+          "first": 0.9209835536354287,
+          "last": 0.31359422466808073,
+          "minimum": 0.31359422466808073,
+          "epoch_count": 60
+        },
+        "metrics": {
+          "evaluated_positive_count": 66,
+          "mrr": 0.34102889089520105,
+          "mean_rank": 4.946969696969697,
+          "hits_at_1": 0.13636363636363635,
+          "hits_at_3": 0.3787878787878788,
+          "hits_at_10": 0.9393939393939394,
+          "negative_semantics": "ML-only deterministic corruptions; they are not historical negative facts."
+        },
+        "embedding_dimension": 16,
+        "person_embedding_sha256": "1841722701cb11ae4be2880671922f627e38ff7679d24ede70845817f49e693d",
+        "context_edge_count": 853,
+        "view_edge_count": 985,
+        "feature_shape": [
+          347,
+          113
+        ],
+        "train_positive_count": 264,
+        "test_positive_count": 66,
+        "corruption_policy": "Deterministic endpoint-type constrained computational corruptions only; no negative historical facts are emitted."
+      },
+      {
+        "status": "completed",
+        "seed": 43,
+        "losses": {
+          "first": 2.0180026433459988,
+          "last": 0.27394033087137154,
+          "minimum": 0.27394033087137154,
+          "epoch_count": 60
+        },
+        "metrics": {
+          "evaluated_positive_count": 66,
+          "mrr": 0.3604247183792638,
+          "mean_rank": 5.0227272727272725,
+          "hits_at_1": 0.18181818181818182,
+          "hits_at_3": 0.3787878787878788,
+          "hits_at_10": 0.9545454545454546,
+          "negative_semantics": "ML-only deterministic corruptions; they are not historical negative facts."
+        },
+        "embedding_dimension": 16,
+        "person_embedding_sha256": "b5af185500722075eac86ec8bc3c654b950d208437159bf1bbee2ea90d35e184",
+        "context_edge_count": 853,
+        "view_edge_count": 985,
+        "feature_shape": [
+          347,
+          113
+        ],
+        "train_positive_count": 264,
+        "test_positive_count": 66,
+        "corruption_policy": "Deterministic endpoint-type constrained computational corruptions only; no negative historical facts are emitted."
+      }
+    ],
+    "G_all_minus_office": [
+      {
+        "status": "completed",
+        "seed": 17,
+        "losses": {
+          "first": 1.0983000795691056,
+          "last": 0.3430337756580039,
+          "minimum": 0.3430337756580039,
+          "epoch_count": 60
+        },
+        "metrics": {
+          "evaluated_positive_count": 66,
+          "mrr": 0.29530149984695436,
+          "mean_rank": 5.8106060606060606,
+          "hits_at_1": 0.10606060606060606,
+          "hits_at_3": 0.3333333333333333,
+          "hits_at_10": 0.8939393939393939,
+          "negative_semantics": "ML-only deterministic corruptions; they are not historical negative facts."
+        },
+        "embedding_dimension": 16,
+        "person_embedding_sha256": "8d1b288fde974f1cd00f4ab87cdb1671a22062d706372e8f9c2765a7fbe49be9",
+        "context_edge_count": 752,
+        "view_edge_count": 884,
+        "feature_shape": [
+          347,
+          113
+        ],
+        "train_positive_count": 264,
+        "test_positive_count": 66,
+        "corruption_policy": "Deterministic endpoint-type constrained computational corruptions only; no negative historical facts are emitted."
+      },
+      {
+        "status": "completed",
+        "seed": 29,
+        "losses": {
+          "first": 0.9130034252273888,
+          "last": 0.27355531899537655,
+          "minimum": 0.27355531899537655,
+          "epoch_count": 60
+        },
+        "metrics": {
+          "evaluated_positive_count": 66,
+          "mrr": 0.32121048143775416,
+          "mean_rank": 5.28030303030303,
+          "hits_at_1": 0.12121212121212122,
+          "hits_at_3": 0.3333333333333333,
+          "hits_at_10": 0.9090909090909091,
+          "negative_semantics": "ML-only deterministic corruptions; they are not historical negative facts."
+        },
+        "embedding_dimension": 16,
+        "person_embedding_sha256": "37ad23956ade0fc71ae3a78363b0211c1c0c560880774464f1af39b523bd7244",
+        "context_edge_count": 752,
+        "view_edge_count": 884,
+        "feature_shape": [
+          347,
+          113
+        ],
+        "train_positive_count": 264,
+        "test_positive_count": 66,
+        "corruption_policy": "Deterministic endpoint-type constrained computational corruptions only; no negative historical facts are emitted."
+      },
+      {
+        "status": "completed",
+        "seed": 43,
+        "losses": {
+          "first": 2.0414858696779334,
+          "last": 0.27834904647672576,
+          "minimum": 0.27834904647672576,
+          "epoch_count": 60
+        },
+        "metrics": {
+          "evaluated_positive_count": 66,
+          "mrr": 0.33614534851165867,
+          "mean_rank": 5.431818181818182,
+          "hits_at_1": 0.16666666666666666,
+          "hits_at_3": 0.3333333333333333,
+          "hits_at_10": 0.9242424242424242,
+          "negative_semantics": "ML-only deterministic corruptions; they are not historical negative facts."
+        },
+        "embedding_dimension": 16,
+        "person_embedding_sha256": "5d3100cbab561e5a347d59edf175f7d3ec9a7d8205c6921ead7aa331dc5647aa",
+        "context_edge_count": 752,
+        "view_edge_count": 884,
+        "feature_shape": [
+          347,
+          113
+        ],
+        "train_positive_count": 264,
+        "test_positive_count": 66,
+        "corruption_policy": "Deterministic endpoint-type constrained computational corruptions only; no negative historical facts are emitted."
+      }
+    ],
+    "G_all_minus_event": [
+      {
+        "status": "completed",
+        "seed": 17,
+        "losses": {
+          "first": 1.106877069471959,
+          "last": 0.33279766010458783,
+          "minimum": 0.33279766010458783,
+          "epoch_count": 60
+        },
+        "metrics": {
+          "evaluated_positive_count": 66,
+          "mrr": 0.31120949757313393,
+          "mean_rank": 5.962121212121212,
+          "hits_at_1": 0.15151515151515152,
+          "hits_at_3": 0.25757575757575757,
+          "hits_at_10": 0.9242424242424242,
+          "negative_semantics": "ML-only deterministic corruptions; they are not historical negative facts."
+        },
+        "embedding_dimension": 16,
+        "person_embedding_sha256": "2f7f2d5eb4f6465b25b024862f13b5ca01e9731c22ac787cf14266553edde3c2",
+        "context_edge_count": 747,
+        "view_edge_count": 879,
+        "feature_shape": [
+          347,
+          113
+        ],
+        "train_positive_count": 264,
+        "test_positive_count": 66,
+        "corruption_policy": "Deterministic endpoint-type constrained computational corruptions only; no negative historical facts are emitted."
+      },
+      {
+        "status": "completed",
+        "seed": 29,
+        "losses": {
+          "first": 0.9131854521951445,
+          "last": 0.3520613910681552,
+          "minimum": 0.3520613910681552,
+          "epoch_count": 60
+        },
+        "metrics": {
+          "evaluated_positive_count": 66,
+          "mrr": 0.32046615001160456,
+          "mean_rank": 5.416666666666667,
+          "hits_at_1": 0.13636363636363635,
+          "hits_at_3": 0.3181818181818182,
+          "hits_at_10": 0.9393939393939394,
+          "negative_semantics": "ML-only deterministic corruptions; they are not historical negative facts."
+        },
+        "embedding_dimension": 16,
+        "person_embedding_sha256": "607b0d5327a591b536bec0b81a8665e9e721281846b5fea1b790021e88791cbc",
+        "context_edge_count": 747,
+        "view_edge_count": 879,
+        "feature_shape": [
+          347,
+          113
+        ],
+        "train_positive_count": 264,
+        "test_positive_count": 66,
+        "corruption_policy": "Deterministic endpoint-type constrained computational corruptions only; no negative historical facts are emitted."
+      },
+      {
+        "status": "completed",
+        "seed": 43,
+        "losses": {
+          "first": 1.8865558962938949,
+          "last": 0.2969593786184054,
+          "minimum": 0.2969593786184054,
+          "epoch_count": 60
+        },
+        "metrics": {
+          "evaluated_positive_count": 66,
+          "mrr": 0.311694450330814,
+          "mean_rank": 5.462121212121212,
+          "hits_at_1": 0.13636363636363635,
+          "hits_at_3": 0.3181818181818182,
+          "hits_at_10": 0.8939393939393939,
+          "negative_semantics": "ML-only deterministic corruptions; they are not historical negative facts."
+        },
+        "embedding_dimension": 16,
+        "person_embedding_sha256": "a37ee1fccdd7444d9f3bc74c40a93c1e5e8dc5bc42fbe07c1a4c4c788f001a32",
+        "context_edge_count": 747,
+        "view_edge_count": 879,
+        "feature_shape": [
+          347,
+          113
+        ],
+        "train_positive_count": 264,
+        "test_positive_count": 66,
+        "corruption_policy": "Deterministic endpoint-type constrained computational corruptions only; no negative historical facts are emitted."
+      }
+    ],
+    "G_all_minus_geographic": [
+      {
+        "status": "completed",
+        "seed": 17,
+        "losses": {
+          "first": 1.112026728196822,
+          "last": 0.34619442446466336,
+          "minimum": 0.34619442446466336,
+          "epoch_count": 60
+        },
+        "metrics": {
+          "evaluated_positive_count": 66,
+          "mrr": 0.32193252875071054,
+          "mean_rank": 5.8106060606060606,
+          "hits_at_1": 0.15151515151515152,
+          "hits_at_3": 0.3333333333333333,
+          "hits_at_10": 0.8484848484848485,
+          "negative_semantics": "ML-only deterministic corruptions; they are not historical negative facts."
+        },
+        "embedding_dimension": 16,
+        "person_embedding_sha256": "a1d85433ca7ac1519caa1c58eb7b50718a605e4124a559343bdc94d28ce2915f",
+        "context_edge_count": 843,
+        "view_edge_count": 975,
+        "feature_shape": [
+          347,
+          113
+        ],
+        "train_positive_count": 264,
+        "test_positive_count": 66,
+        "corruption_policy": "Deterministic endpoint-type constrained computational corruptions only; no negative historical facts are emitted."
+      },
+      {
+        "status": "completed",
+        "seed": 29,
+        "losses": {
+          "first": 0.9138919260303641,
+          "last": 0.3379475772198337,
+          "minimum": 0.3379475772198337,
+          "epoch_count": 60
+        },
+        "metrics": {
+          "evaluated_positive_count": 66,
+          "mrr": 0.33687394255576075,
+          "mean_rank": 4.962121212121212,
+          "hits_at_1": 0.13636363636363635,
+          "hits_at_3": 0.3181818181818182,
+          "hits_at_10": 1.0,
+          "negative_semantics": "ML-only deterministic corruptions; they are not historical negative facts."
+        },
+        "embedding_dimension": 16,
+        "person_embedding_sha256": "6162d59aca02d1444d941ebb7841a6f21cb3a7af85d8ad8604c73b26a417634c",
+        "context_edge_count": 843,
+        "view_edge_count": 975,
+        "feature_shape": [
+          347,
+          113
+        ],
+        "train_positive_count": 264,
+        "test_positive_count": 66,
+        "corruption_policy": "Deterministic endpoint-type constrained computational corruptions only; no negative historical facts are emitted."
+      },
+      {
+        "status": "completed",
+        "seed": 43,
+        "losses": {
+          "first": 2.0413797067474135,
+          "last": 0.27486739530833837,
+          "minimum": 0.27486739530833837,
+          "epoch_count": 60
+        },
+        "metrics": {
+          "evaluated_positive_count": 66,
+          "mrr": 0.3651421390057754,
+          "mean_rank": 5.113636363636363,
+          "hits_at_1": 0.19696969696969696,
+          "hits_at_3": 0.36363636363636365,
+          "hits_at_10": 0.9393939393939394,
+          "negative_semantics": "ML-only deterministic corruptions; they are not historical negative facts."
+        },
+        "embedding_dimension": 16,
+        "person_embedding_sha256": "a73de7a2849b100d26dd362d78cfc82602b7cc0b8674dc232afc9a20c3932c9a",
+        "context_edge_count": 843,
+        "view_edge_count": 975,
+        "feature_shape": [
+          347,
+          113
+        ],
+        "train_positive_count": 264,
+        "test_positive_count": 66,
+        "corruption_policy": "Deterministic endpoint-type constrained computational corruptions only; no negative historical facts are emitted."
+      }
+    ],
+    "G_all_minus_service_political": [
+      {
+        "status": "completed",
+        "seed": 17,
+        "losses": {
+          "first": 1.1094867126599857,
+          "last": 0.3553976577317423,
+          "minimum": 0.3553976577317423,
+          "epoch_count": 60
+        },
+        "metrics": {
+          "evaluated_positive_count": 66,
+          "mrr": 0.30864325068870524,
+          "mean_rank": 5.8106060606060606,
+          "hits_at_1": 0.13636363636363635,
+          "hits_at_3": 0.30303030303030304,
+          "hits_at_10": 0.8939393939393939,
+          "negative_semantics": "ML-only deterministic corruptions; they are not historical negative facts."
+        },
+        "embedding_dimension": 16,
+        "person_embedding_sha256": "ea946a3d394b74691530328baf611318ab1bfa2441f8ab60f4cf52631d26fee5",
+        "context_edge_count": 851,
+        "view_edge_count": 983,
+        "feature_shape": [
+          347,
+          113
+        ],
+        "train_positive_count": 264,
+        "test_positive_count": 66,
+        "corruption_policy": "Deterministic endpoint-type constrained computational corruptions only; no negative historical facts are emitted."
+      },
+      {
+        "status": "completed",
+        "seed": 29,
+        "losses": {
+          "first": 0.9168120796282254,
+          "last": 0.34266192699676223,
+          "minimum": 0.34266192699676223,
+          "epoch_count": 60
+        },
+        "metrics": {
+          "evaluated_positive_count": 66,
+          "mrr": 0.32945198740653286,
+          "mean_rank": 4.901515151515151,
+          "hits_at_1": 0.10606060606060606,
+          "hits_at_3": 0.3939393939393939,
+          "hits_at_10": 0.9545454545454546,
+          "negative_semantics": "ML-only deterministic corruptions; they are not historical negative facts."
+        },
+        "embedding_dimension": 16,
+        "person_embedding_sha256": "62c473e7af8d3f3cf1deaf749d4ec69a424b0dcc1859c3b550899406ca11edfc",
+        "context_edge_count": 851,
+        "view_edge_count": 983,
+        "feature_shape": [
+          347,
+          113
+        ],
+        "train_positive_count": 264,
+        "test_positive_count": 66,
+        "corruption_policy": "Deterministic endpoint-type constrained computational corruptions only; no negative historical facts are emitted."
+      },
+      {
+        "status": "completed",
+        "seed": 43,
+        "losses": {
+          "first": 2.036655307191606,
+          "last": 0.2857730384077666,
+          "minimum": 0.2857730384077666,
+          "epoch_count": 60
+        },
+        "metrics": {
+          "evaluated_positive_count": 66,
+          "mrr": 0.3484352347988712,
+          "mean_rank": 5.113636363636363,
+          "hits_at_1": 0.18181818181818182,
+          "hits_at_3": 0.3181818181818182,
+          "hits_at_10": 0.9696969696969697,
+          "negative_semantics": "ML-only deterministic corruptions; they are not historical negative facts."
+        },
+        "embedding_dimension": 16,
+        "person_embedding_sha256": "c11b8749199348113fcfc95588ac05a2568464b286174abb866dbd26445b388d",
+        "context_edge_count": 851,
+        "view_edge_count": 983,
+        "feature_shape": [
+          347,
+          113
+        ],
+        "train_positive_count": 264,
+        "test_positive_count": 66,
+        "corruption_policy": "Deterministic endpoint-type constrained computational corruptions only; no negative historical facts are emitted."
+      }
+    ]
+  },
+  "representation_comparisons": [
+    {
+      "left_view": "G_all",
+      "right_view": "G_story",
+      "common_seed_count": 5,
+      "seed_comparisons": [
+        {
+          "seed": 17,
+          "pairwise_distance_correlation": 0.647177328904555,
+          "nearest_neighbor_overlap_at_5": 0.41333333333333333,
+          "procrustes_similarity": 0.3577933893733083
+        },
+        {
+          "seed": 29,
+          "pairwise_distance_correlation": 0.6058085504265647,
+          "nearest_neighbor_overlap_at_5": 0.40800000000000003,
+          "procrustes_similarity": 0.3077917802238478
+        },
+        {
+          "seed": 43,
+          "pairwise_distance_correlation": 0.659149634727069,
+          "nearest_neighbor_overlap_at_5": 0.37866666666666665,
+          "procrustes_similarity": 0.3303301240712123
+        },
+        {
+          "seed": 61,
+          "pairwise_distance_correlation": 0.6943185469650015,
+          "nearest_neighbor_overlap_at_5": 0.39199999999999996,
+          "procrustes_similarity": 0.34357179988734854
+        },
+        {
+          "seed": 73,
+          "pairwise_distance_correlation": 0.7030931396647974,
+          "nearest_neighbor_overlap_at_5": 0.4666666666666667,
+          "procrustes_similarity": 0.34708921219418054
+        }
+      ],
+      "summary": {
+        "pairwise_distance_correlation": {
+          "mean": 0.6619094401375974,
+          "std": 0.03498116283302473
+        },
+        "nearest_neighbor_overlap_at_5": {
+          "mean": 0.4117333333333333,
+          "std": 0.030056539314358133
+        },
+        "procrustes_similarity": {
+          "mean": 0.3373152611499795,
+          "std": 0.017172397605008827
+        }
+      },
+      "interpretation": "Model-space similarity only; it is not historical or social similarity."
+    },
+    {
+      "left_view": "G_all",
+      "right_view": "G_external",
+      "common_seed_count": 5,
+      "seed_comparisons": [
+        {
+          "seed": 17,
+          "pairwise_distance_correlation": 0.3016089308618489,
+          "nearest_neighbor_overlap_at_5": 0.21066666666666667,
+          "procrustes_similarity": 0.08067176569392831
+        },
+        {
+          "seed": 29,
+          "pairwise_distance_correlation": 0.4735809225141267,
+          "nearest_neighbor_overlap_at_5": 0.2586666666666667,
+          "procrustes_similarity": 0.1785859637997803
+        },
+        {
+          "seed": 43,
+          "pairwise_distance_correlation": 0.4110042401980389,
+          "nearest_neighbor_overlap_at_5": 0.216,
+          "procrustes_similarity": 0.16315075637344922
+        },
+        {
+          "seed": 61,
+          "pairwise_distance_correlation": 0.43325213881411223,
+          "nearest_neighbor_overlap_at_5": 0.23199999999999998,
+          "procrustes_similarity": 0.16531885222468523
+        },
+        {
+          "seed": 73,
+          "pairwise_distance_correlation": 0.40253894919559846,
+          "nearest_neighbor_overlap_at_5": 0.23733333333333334,
+          "procrustes_similarity": 0.0756499147834575
+        }
+      ],
+      "summary": {
+        "pairwise_distance_correlation": {
+          "mean": 0.40439703631674506,
+          "std": 0.05697636229769574
+        },
+        "nearest_neighbor_overlap_at_5": {
+          "mean": 0.23093333333333335,
+          "std": 0.016999869280543194
+        },
+        "procrustes_similarity": {
+          "mean": 0.1326754505750601,
+          "std": 0.044851769492087364
+        }
+      },
+      "interpretation": "Model-space similarity only; it is not historical or social similarity."
+    },
+    {
+      "left_view": "G_all",
+      "right_view": "G_reviewed",
+      "common_seed_count": 5,
+      "seed_comparisons": [
+        {
+          "seed": 17,
+          "pairwise_distance_correlation": 0.4740173746259255,
+          "nearest_neighbor_overlap_at_5": 0.2,
+          "procrustes_similarity": 0.17441884499398208
+        },
+        {
+          "seed": 29,
+          "pairwise_distance_correlation": 0.4539331142993857,
+          "nearest_neighbor_overlap_at_5": 0.20800000000000002,
+          "procrustes_similarity": 0.17681783649913807
+        },
+        {
+          "seed": 43,
+          "pairwise_distance_correlation": 0.45637305770291403,
+          "nearest_neighbor_overlap_at_5": 0.2346666666666667,
+          "procrustes_similarity": 0.18757825399330275
+        },
+        {
+          "seed": 61,
+          "pairwise_distance_correlation": 0.4254101315100741,
+          "nearest_neighbor_overlap_at_5": 0.22933333333333333,
+          "procrustes_similarity": 0.16187530008950202
+        },
+        {
+          "seed": 73,
+          "pairwise_distance_correlation": 0.4604064860938618,
+          "nearest_neighbor_overlap_at_5": 0.24,
+          "procrustes_similarity": 0.17014312627257244
+        }
+      ],
+      "summary": {
+        "pairwise_distance_correlation": {
+          "mean": 0.45402803284643223,
+          "std": 0.015904407430725985
+        },
+        "nearest_neighbor_overlap_at_5": {
+          "mean": 0.22240000000000001,
+          "std": 0.015603988094216308
+        },
+        "procrustes_similarity": {
+          "mean": 0.17416667236969946,
+          "std": 0.008417001124466422
+        }
+      },
+      "interpretation": "Model-space similarity only; it is not historical or social similarity."
+    },
+    {
+      "left_view": "G_reviewed",
+      "right_view": "G_reviewed_plus_candidate",
+      "common_seed_count": 3,
+      "seed_comparisons": [
+        {
+          "seed": 17,
+          "pairwise_distance_correlation": 0.4740173746259255,
+          "nearest_neighbor_overlap_at_5": 0.2,
+          "procrustes_similarity": 0.1744188449939822
+        },
+        {
+          "seed": 29,
+          "pairwise_distance_correlation": 0.4539331142993857,
+          "nearest_neighbor_overlap_at_5": 0.20800000000000002,
+          "procrustes_similarity": 0.17681783649913896
+        },
+        {
+          "seed": 43,
+          "pairwise_distance_correlation": 0.4563730577029141,
+          "nearest_neighbor_overlap_at_5": 0.2346666666666667,
+          "procrustes_similarity": 0.18757825399330297
+        }
+      ],
+      "summary": {
+        "pairwise_distance_correlation": {
+          "mean": 0.46144118220940844,
+          "std": 0.008948325456979898
+        },
+        "nearest_neighbor_overlap_at_5": {
+          "mean": 0.21422222222222223,
+          "std": 0.014820739556029397
+        },
+        "procrustes_similarity": {
+          "mean": 0.17960497849547472,
+          "std": 0.005722390624185838
+        }
+      },
+      "interpretation": "Model-space similarity only; it is not historical or social similarity."
+    },
+    {
+      "left_view": "G_all",
+      "right_view": "G_all_minus_family",
+      "common_seed_count": 3,
+      "seed_comparisons": [
+        {
+          "seed": 17,
+          "pairwise_distance_correlation": 0.8346054997632321,
+          "nearest_neighbor_overlap_at_5": 0.6346666666666667,
+          "procrustes_similarity": 0.5532135056846281
+        },
+        {
+          "seed": 29,
+          "pairwise_distance_correlation": 0.8943562004093569,
+          "nearest_neighbor_overlap_at_5": 0.7546666666666667,
+          "procrustes_similarity": 0.6364905550360401
+        },
+        {
+          "seed": 43,
+          "pairwise_distance_correlation": 0.9180484532896022,
+          "nearest_neighbor_overlap_at_5": 0.7893333333333333,
+          "procrustes_similarity": 0.688676863342528
+        }
+      ],
+      "summary": {
+        "pairwise_distance_correlation": {
+          "mean": 0.8823367178207304,
+          "std": 0.03510966243618901
+        },
+        "nearest_neighbor_overlap_at_5": {
+          "mean": 0.7262222222222222,
+          "std": 0.06626844024752283
+        },
+        "procrustes_similarity": {
+          "mean": 0.626126974687732,
+          "std": 0.055786098418960386
+        }
+      },
+      "interpretation": "Model-space similarity only; it is not historical or social similarity."
+    },
+    {
+      "left_view": "G_all",
+      "right_view": "G_all_minus_clan",
+      "common_seed_count": 3,
+      "seed_comparisons": [
+        {
+          "seed": 17,
+          "pairwise_distance_correlation": 0.9072215028899087,
+          "nearest_neighbor_overlap_at_5": 0.768,
+          "procrustes_similarity": 0.649351971438597
+        },
+        {
+          "seed": 29,
+          "pairwise_distance_correlation": 0.8950343465265275,
+          "nearest_neighbor_overlap_at_5": 0.728,
+          "procrustes_similarity": 0.6255422448228082
+        },
+        {
+          "seed": 43,
+          "pairwise_distance_correlation": 0.9587451563955194,
+          "nearest_neighbor_overlap_at_5": 0.784,
+          "procrustes_similarity": 0.7392831906648115
+        }
+      ],
+      "summary": {
+        "pairwise_distance_correlation": {
+          "mean": 0.9203336686039852,
+          "std": 0.027612961821407496
+        },
+        "nearest_neighbor_overlap_at_5": {
+          "mean": 0.7600000000000001,
+          "std": 0.023551362310207612
+        },
+        "procrustes_similarity": {
+          "mean": 0.6713924689754056,
+          "std": 0.048980188777443014
+        }
+      },
+      "interpretation": "Model-space similarity only; it is not historical or social similarity."
+    },
+    {
+      "left_view": "G_all",
+      "right_view": "G_all_minus_office",
+      "common_seed_count": 3,
+      "seed_comparisons": [
+        {
+          "seed": 17,
+          "pairwise_distance_correlation": 0.894640324080113,
+          "nearest_neighbor_overlap_at_5": 0.6666666666666666,
+          "procrustes_similarity": 0.6223391024443263
+        },
+        {
+          "seed": 29,
+          "pairwise_distance_correlation": 0.8534764520636152,
+          "nearest_neighbor_overlap_at_5": 0.5786666666666667,
+          "procrustes_similarity": 0.50328214921097
+        },
+        {
+          "seed": 43,
+          "pairwise_distance_correlation": 0.8965892889639065,
+          "nearest_neighbor_overlap_at_5": 0.6719999999999999,
+          "procrustes_similarity": 0.5963674944000475
+        }
+      ],
+      "summary": {
+        "pairwise_distance_correlation": {
+          "mean": 0.8815686883692115,
+          "std": 0.019880139528629482
+        },
+        "nearest_neighbor_overlap_at_5": {
+          "mean": 0.6391111111111111,
+          "std": 0.04279609997230477
+        },
+        "procrustes_similarity": {
+          "mean": 0.5739962486851146,
+          "std": 0.05111421201212584
+        }
+      },
+      "interpretation": "Model-space similarity only; it is not historical or social similarity."
+    },
+    {
+      "left_view": "G_all",
+      "right_view": "G_all_minus_event",
+      "common_seed_count": 3,
+      "seed_comparisons": [
+        {
+          "seed": 17,
+          "pairwise_distance_correlation": 0.8259243818668107,
+          "nearest_neighbor_overlap_at_5": 0.6,
+          "procrustes_similarity": 0.45787321098433453
+        },
+        {
+          "seed": 29,
+          "pairwise_distance_correlation": 0.8964883991289683,
+          "nearest_neighbor_overlap_at_5": 0.6053333333333333,
+          "procrustes_similarity": 0.5322985641149321
+        },
+        {
+          "seed": 43,
+          "pairwise_distance_correlation": 0.8945489532209211,
+          "nearest_neighbor_overlap_at_5": 0.6373333333333334,
+          "procrustes_similarity": 0.5452610943769785
+        }
+      ],
+      "summary": {
+        "pairwise_distance_correlation": {
+          "mean": 0.8723205780722334,
+          "std": 0.032816618039814484
+        },
+        "nearest_neighbor_overlap_at_5": {
+          "mean": 0.6142222222222222,
+          "std": 0.016486432880881308
+        },
+        "procrustes_similarity": {
+          "mean": 0.5118109564920817,
+          "std": 0.03850512598380024
+        }
+      },
+      "interpretation": "Model-space similarity only; it is not historical or social similarity."
+    },
+    {
+      "left_view": "G_all",
+      "right_view": "G_all_minus_geographic",
+      "common_seed_count": 3,
+      "seed_comparisons": [
+        {
+          "seed": 17,
+          "pairwise_distance_correlation": 0.9856074396031178,
+          "nearest_neighbor_overlap_at_5": 0.8133333333333334,
+          "procrustes_similarity": 0.8366366994827784
+        },
+        {
+          "seed": 29,
+          "pairwise_distance_correlation": 0.9918104389953701,
+          "nearest_neighbor_overlap_at_5": 0.8666666666666667,
+          "procrustes_similarity": 0.8730121887727724
+        },
+        {
+          "seed": 43,
+          "pairwise_distance_correlation": 0.9842178154062311,
+          "nearest_neighbor_overlap_at_5": 0.8240000000000001,
+          "procrustes_similarity": 0.8232539494750948
+        }
+      ],
+      "summary": {
+        "pairwise_distance_correlation": {
+          "mean": 0.9872118980015729,
+          "std": 0.0033007775150579012
+        },
+        "nearest_neighbor_overlap_at_5": {
+          "mean": 0.8346666666666667,
+          "std": 0.023042633594339057
+        },
+        "procrustes_similarity": {
+          "mean": 0.8443009459102152,
+          "std": 0.02102420984605757
+        }
+      },
+      "interpretation": "Model-space similarity only; it is not historical or social similarity."
+    },
+    {
+      "left_view": "G_all",
+      "right_view": "G_all_minus_service_political",
+      "common_seed_count": 3,
+      "seed_comparisons": [
+        {
+          "seed": 17,
+          "pairwise_distance_correlation": 0.9552805653962843,
+          "nearest_neighbor_overlap_at_5": 0.6853333333333333,
+          "procrustes_similarity": 0.6795007632872649
+        },
+        {
+          "seed": 29,
+          "pairwise_distance_correlation": 0.9731948153598492,
+          "nearest_neighbor_overlap_at_5": 0.808,
+          "procrustes_similarity": 0.7679228288354933
+        },
+        {
+          "seed": 43,
+          "pairwise_distance_correlation": 0.9867089047224269,
+          "nearest_neighbor_overlap_at_5": 0.8346666666666667,
+          "procrustes_similarity": 0.8426574567088698
+        }
+      ],
+      "summary": {
+        "pairwise_distance_correlation": {
+          "mean": 0.9717280951595201,
+          "std": 0.012872414415053896
+        },
+        "nearest_neighbor_overlap_at_5": {
+          "mean": 0.7760000000000001,
+          "std": 0.06502876856238891
+        },
+        "procrustes_similarity": {
+          "mean": 0.7633603496105428,
+          "std": 0.06668652444872937
+        }
+      },
+      "interpretation": "Model-space similarity only; it is not historical or social similarity."
+    }
+  ]
+}
