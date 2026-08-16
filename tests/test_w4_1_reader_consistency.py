@@ -81,10 +81,15 @@ class W41ReaderConsistencyTests(unittest.TestCase):
         ]
         self.assertIn("display: inline", flowing_styles)
         self.assertIn("text-decoration-line: underline", flowing_styles)
+        self.assertIn("white-space: nowrap", flowing_styles)
         self.assertNotIn("border-bottom", flowing_styles)
-        self.assertNotIn("white-space", flowing_styles)
         self.assertNotIn("inline-block", flowing_styles)
         self.assertNotIn("inline-flex", flowing_styles)
+
+        self.assertRegex(
+            self.styles,
+            r"\.inline-identity-review > summary \{[^}]*white-space: nowrap;",
+        )
 
     def test_relation_navigation_is_explicit_and_shared_by_row_and_ego_map(self) -> None:
         self.assertEqual(self.app.count("onClick={() => onRelationFocus(perspective)}"), 2)

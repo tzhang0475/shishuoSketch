@@ -118,6 +118,21 @@ class SC112UnifiedTests(unittest.TestCase):
         self.assertIn("王凝之的字", display["explanation"]["original"])
         self.assertEqual(display["alias_type"], "courtesy_name")
 
+    def test_yanyu_071_she_taifu_surface_and_no_split_css_contract(self) -> None:
+        story = self.story("02-yanyu-071")
+        mention = next(
+            item
+            for item in story["reading"]["main_text"]["segments"]
+            if item.get("mention_id") == "shishuo-02-yanyu-071-main-text-001"
+        )
+        self.assertEqual(mention["type"], "identity_mention")
+        self.assertEqual(mention["display"]["simplified"], "谢太傅")
+        self.assertIn("inline-identity-review", self.app)
+        self.assertRegex(
+            (ROOT / "site/src/styles.css").read_text(encoding="utf-8"),
+            r"\.inline-identity-review > summary \{[^}]*white-space: nowrap;",
+        )
+
     def test_contextual_office_title_stays_contextual(self) -> None:
         story = self.story("06-yaliang-019")
         display = story["reading"]["mention_display"]["shishuo-06-yaliang-019-liu-annotation-006"]
