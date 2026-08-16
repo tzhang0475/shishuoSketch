@@ -331,6 +331,52 @@ export interface StoryHistoricalProjection {
   evidence_ids: string[];
 }
 
+/* NL0 is a reviewed, non-canonical narrative projection.  It is fetched only
+ * for the development StorySketch slice; none of these fields belong to the
+ * initial SC1 bundle or to canonical historical data. */
+export interface StorySketchClaim {
+  claim_type: "era_profile" | "scene_core" | "essential_background" | "resonance";
+  text: ReadingPair;
+  evidence_ids: string[];
+  grounding_note?: string;
+}
+
+export interface StorySketchSupportingEvidence {
+  evidence_id: string;
+  source_id: string;
+  source_layer: string;
+  evidence_type: string;
+  source_review_status: string;
+  nl0_review_status: "reviewed";
+  support_roles: Array<"era_profile" | "scene_core" | "essential_background" | "resonance">;
+}
+
+export interface StorySketchEvidenceProjection {
+  schema: 1;
+  projection: "nl0_story_sketch_evidence";
+  evidence_id: string;
+  source_label: { work: ReadingPair; edition: ReadingPair };
+  source_layer: string;
+  evidence_type: string;
+  source_review_status: string;
+  nl0_review_status: "reviewed";
+  locator: string;
+  short_excerpt: ReadingPair;
+}
+
+export interface StorySketchProjection {
+  schema: 1;
+  projection: "nl0_story_sketch";
+  story_id: string;
+  review_status: "accepted";
+  selection_categories: string[];
+  era_profile: StorySketchClaim | null;
+  scene_core: StorySketchClaim;
+  essential_background: StorySketchClaim[];
+  resonance: StorySketchClaim | null;
+  supporting_evidence: StorySketchSupportingEvidence[];
+}
+
 export interface EraHistoricalProjection {
   schema: 1;
   projection: "ux1_era_history";

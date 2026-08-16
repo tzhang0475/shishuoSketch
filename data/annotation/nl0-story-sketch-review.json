@@ -1,0 +1,225 @@
+{
+  "schema": "story-sketch",
+  "stage": "NL0",
+  "schema_version": "v0",
+  "document_kind": "review_spec",
+  "scope": {
+    "story_count": 7,
+    "selected_story_ids": [
+      "02-yanyu-035",
+      "02-yanyu-036",
+      "05-fangzheng-032",
+      "06-yaliang-017",
+      "09-pinzao-017",
+      "19-xianyuan-026",
+      "27-jiajue-008"
+    ],
+    "selection_policy": "NL0 representative pilot: simple exchange, multi-episode report, title/identity ambiguity, retrospective annotation, comparative evaluation, family context, and event context."
+  },
+  "counts": {"records": 7},
+  "source_hashes": {},
+  "policy": {
+    "canonical_data_write_back": false,
+    "canonical_fact_materialization": false,
+    "llm": false,
+    "rag": false,
+    "generated_fields_may_abstain": true,
+    "frontend_requires_accepted_review": true
+  },
+  "records": [
+    {
+      "story_id": "02-yanyu-035",
+      "selection_categories": ["liu_dependent_interpretation", "simple_single_episode"],
+      "candidate_status": "candidate",
+      "review_status": "reviewed",
+      "review_decision": "accepted",
+      "review_note": "正文只支持一场交涉与发言；没有足够的时代锚点，时代字段保持空缺。",
+      "era_profile": null,
+      "scene_core": {
+        "claim_type": "scene_core",
+        "text": {"original": "刘琨与温嶠在故事中交涉并各自发言。", "simplified": "刘琨与温峤在故事中交涉并各自发言。"},
+        "evidence_ids": ["evidence-sc1-02-yanyu-035-main"],
+        "grounding_note": "取自 HR0 的单一交涉 episode 与正文发言参与者。"
+      },
+      "essential_background": [],
+      "resonance": null
+    },
+    {
+      "story_id": "02-yanyu-036",
+      "selection_categories": ["multi_episode", "presence_reference", "temporal_ambiguity"],
+      "candidate_status": "candidate",
+      "review_status": "reviewed",
+      "review_decision": "accepted",
+      "review_note": "正文明确给出过江、入见、陈说与相泣的顺序，但不提供可安全采用的精确年代。",
+      "era_profile": {
+        "claim_type": "era_profile",
+        "text": {"original": "江左初建、纲纪未举之时。", "simplified": "江左初建、纲纪未举之时。"},
+        "evidence_ids": ["evidence-sc1-02-yanyu-036-main"],
+        "grounding_note": "直接采用正文对江左局面的叙述，不转换为精确年份。"
+      },
+      "scene_core": {
+        "claim_type": "scene_core",
+        "text": {"original": "温嶠入见王丞相，陈说国事；二人相对而泣，既而相互酬纳。", "simplified": "温峤入见王丞相，陈说国事；二人相对而泣，既而相互酬纳。"},
+        "evidence_ids": ["evidence-sc1-02-yanyu-036-main"],
+        "grounding_note": "压缩 HR0 的两个 episode，保留入见、陈说、相泣和酬纳这条行动线。"
+      },
+      "essential_background": [
+        {
+          "claim_type": "essential_background",
+          "text": {"original": "温嶠奉刘琨之使过江，入见王丞相。", "simplified": "温峤奉刘琨之使过江，入见王丞相。"},
+          "evidence_ids": ["evidence-sc1-02-yanyu-036-main"],
+          "grounding_note": "交代人物如何进入场景；刘琨仍保留为使者关系中的被述人物。"
+        }
+      ],
+      "resonance": null
+    },
+    {
+      "story_id": "05-fangzheng-032",
+      "selection_categories": ["ambiguous_title", "identity_ambiguity", "liu_dependent_interpretation", "presence_reference"],
+      "candidate_status": "candidate",
+      "review_status": "reviewed",
+      "review_decision": "accepted",
+      "review_note": "明帝与温太真的局部解析沿用 HR0.1 的证据边界；不把局部标题解析扩展为全局规则。",
+      "era_profile": {
+        "claim_type": "era_profile",
+        "text": {"original": "王敦之乱中的明帝在位场景。", "simplified": "王敦之乱中的明帝在位场景。"},
+        "evidence_ids": ["evidence-sc1-05-fangzheng-032-main", "evidence-sc1-05-fangzheng-032-annotation-001"],
+        "grounding_note": "正文写王敦有废明帝之意，刘注引《晋纪》补出同一目的；不推定精确年份。"
+      },
+      "scene_core": {
+        "claim_type": "scene_core",
+        "text": {"original": "王敦以太子侍亲为题追问，温嶠在威势之下以“孝”作答。", "simplified": "王敦以太子侍亲为题追问，温峤在威势之下以“孝”作答。"},
+        "evidence_ids": ["evidence-sc1-05-fangzheng-032-main"],
+        "grounding_note": "聚焦正文的连续问答，不把故事改写成王敦或温嶠的总体评价。"
+      },
+      "essential_background": [
+        {
+          "claim_type": "essential_background",
+          "text": {"original": "王敦驻船石头，并有废明帝之意。", "simplified": "王敦驻船石头，并有废明帝之意。"},
+          "evidence_ids": ["evidence-sc1-05-fangzheng-032-main", "evidence-sc1-05-fangzheng-032-annotation-001"],
+          "grounding_note": "说明温嶠回答所处的即时政治压力；不扩展为政治阵营判断。"
+        }
+      ],
+      "resonance": {
+        "claim_type": "resonance",
+        "text": {"original": "刘注又引《晋纪》记王敦欲废明帝，补出正文问答的政治目的。", "simplified": "刘注又引《晋纪》记王敦欲废明帝，补出正文问答的政治目的。"},
+        "evidence_ids": ["evidence-sc1-05-fangzheng-032-annotation-001"],
+        "grounding_note": "这是注释传来的具体补充，保留“引《晋纪》”的来源层，不称为独立核验。"
+      }
+    },
+    {
+      "story_id": "06-yaliang-017",
+      "selection_categories": ["liu_dependent_interpretation", "presence_reference", "retrospective_reported", "temporal_ambiguity"],
+      "candidate_status": "candidate",
+      "review_status": "reviewed",
+      "review_decision": "accepted",
+      "review_note": "正文观察、刘注身份说明和苏峻时的后续记录保持分层；不为幼年场景补精确日期。",
+      "era_profile": {
+        "claim_type": "era_profile",
+        "text": {"original": "庾亮任太尉、苏峻时局构成的前后背景。", "simplified": "庾亮任太尉、苏峻时局构成的前后背景。"},
+        "evidence_ids": ["evidence-sc1-06-yaliang-017-main", "evidence-sc1-06-yaliang-017-annotation-001", "evidence-sc1-06-yaliang-017-annotation-002"],
+        "grounding_note": "以正文官称和正文/刘注的苏峻时记载给出粗粒度定位，保留相对时间。"
+      },
+      "scene_core": {
+        "claim_type": "scene_core",
+        "text": {"original": "温太真试探庾太尉幼子，孩子在惊扰中仍神色恬然。", "simplified": "温太真试探庾太尉幼子，孩子在惊扰中仍神色恬然。"},
+        "evidence_ids": ["evidence-sc1-06-yaliang-017-main"],
+        "grounding_note": "保留正文的试探、反应和观察，不把评价扩大为人物性格定论。"
+      },
+      "essential_background": [
+        {
+          "claim_type": "essential_background",
+          "text": {"original": "刘注补出孩子庾会及其字会宗。", "simplified": "刘注补出孩子庾会及其字会宗。"},
+          "evidence_ids": ["evidence-sc1-06-yaliang-017-annotation-001"],
+          "grounding_note": "身份来自刘注，不把注释人物自动变成正文硬参与者。"
+        }
+      ],
+      "resonance": {
+        "claim_type": "resonance",
+        "text": {"original": "刘注又记其在苏峻时遇害；这是幼年片段之外的明确后续记录。", "simplified": "刘注又记其在苏峻时遇害；这是幼年片段之外的明确后续记录。"},
+        "evidence_ids": ["evidence-sc1-06-yaliang-017-annotation-002"],
+        "grounding_note": "只呈现注释给出的后续，不把它改写成对故事意义的泛化解释。"
+      }
+    },
+    {
+      "story_id": "09-pinzao-017",
+      "selection_categories": ["ambiguous_title", "comparative_evaluation", "temporal_ambiguity"],
+      "candidate_status": "candidate",
+      "review_status": "reviewed",
+      "review_decision": "accepted",
+      "review_note": "比较语境与明帝标题均保留在本则范围内；不把人物自评转换成全局排名或精确年代。",
+      "era_profile": {
+        "claim_type": "era_profile",
+        "text": {"original": "明帝问答中的东晋宫廷场景。", "simplified": "明帝问答中的东晋宫廷场景。"},
+        "evidence_ids": ["evidence-sc1-09-pinzao-017-main"],
+        "grounding_note": "正文明确出现明帝与帝前问答；标题解析不承担年份推断。"
+      },
+      "scene_core": {
+        "claim_type": "scene_core",
+        "text": {"original": "明帝问谢鲲如何自比庾亮，谢鲲把朝堂与丘壑分开回答。", "simplified": "明帝问谢鲲如何自比庾亮，谢鲲把朝堂与丘壑分开回答。"},
+        "evidence_ids": ["evidence-sc1-09-pinzao-017-main"],
+        "grounding_note": "保留比较的两个维度，不改写为总排名。"
+      },
+      "essential_background": [],
+      "resonance": null
+    },
+    {
+      "story_id": "19-xianyuan-026",
+      "selection_categories": ["family_context", "identity_ambiguity", "presence_reference", "temporal_ambiguity"],
+      "candidate_status": "candidate",
+      "review_status": "reviewed",
+      "review_decision": "accepted",
+      "review_note": "婚姻家庭语境与逸少身份来自正文；不将亲属网络外推为未被正文支持的关系。",
+      "era_profile": {
+        "claim_type": "era_profile",
+        "text": {"original": "王氏与谢氏的婚姻家庭语境。", "simplified": "王氏与谢氏的婚姻家庭语境。"},
+        "evidence_ids": ["evidence-sc1-19-xianyuan-026-main"],
+        "grounding_note": "这是场景的社会关系背景，不冒充年代定位。"
+      },
+      "scene_core": {
+        "claim_type": "scene_core",
+        "text": {"original": "谢夫人归王氏后不满王凝之，太傅以王郎为逸少之子相慰。", "simplified": "谢夫人归王氏后不满王凝之，太傅以王郎为逸少之子相慰。"},
+        "evidence_ids": ["evidence-sc1-19-xianyuan-026-main"],
+        "grounding_note": "保留不满、安慰和答语这条场景动作线。"
+      },
+      "essential_background": [
+        {
+          "claim_type": "essential_background",
+          "text": {"original": "王凝之是逸少之子；谢夫人的比较来自谢氏一门。", "simplified": "王凝之是逸少之子；谢夫人的比较来自谢氏一门。"},
+          "evidence_ids": ["evidence-sc1-19-xianyuan-026-main"],
+          "grounding_note": "正文直接给出王凝之与逸少的父子关系及谢氏家族比较语境。"
+        }
+      ],
+      "resonance": null
+    },
+    {
+      "story_id": "27-jiajue-008",
+      "selection_categories": ["event_context", "multi_episode", "liu_dependent_interpretation", "presence_reference", "temporal_ambiguity"],
+      "candidate_status": "candidate",
+      "review_status": "reviewed",
+      "review_decision": "accepted",
+      "review_note": "正文会面、苏峻事件锚点与刘注背景分开呈现；不把政治背景扩写成阵营判断。",
+      "era_profile": {
+        "claim_type": "era_profile",
+        "text": {"original": "苏峻之难中的东晋政治会面。", "simplified": "苏峻之难中的东晋政治会面。"},
+        "evidence_ids": ["evidence-sc1-27-jiajue-008-main", "evidence-sc1-27-jiajue-008-annotation-001"],
+        "grounding_note": "正文与刘注都提供苏峻事件背景，但没有在 StorySketch 中求解具体年份。"
+      },
+      "scene_core": {
+        "claim_type": "scene_core",
+        "text": {"original": "温公劝庾亮诣陶，陶侃起身止拜，庾亮入坐后引咎相谢。", "simplified": "温公劝庾亮诣陶，陶侃起身止拜，庾亮入坐后引咎相谢。"},
+        "evidence_ids": ["evidence-sc1-27-jiajue-008-main"],
+        "grounding_note": "压缩三个 HR0 episode，保留劝行、止拜、入坐和相谢的连续动作。"
+      },
+      "essential_background": [
+        {
+          "claim_type": "essential_background",
+          "text": {"original": "刘注引《晋阳秋》补记成帝尚幼、太后临朝。", "simplified": "刘注引《晋阳秋》补记成帝尚幼、太后临朝。"},
+          "evidence_ids": ["evidence-sc1-27-jiajue-008-annotation-001"],
+          "grounding_note": "这是刘注对会面压力的背景说明，保留注释来源层。"
+        }
+      ],
+      "resonance": null
+    }
+  ]
+}

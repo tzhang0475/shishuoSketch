@@ -38,6 +38,7 @@ import {
   loadHistoricalProjection,
   type HistoricalProjection,
 } from "./historical";
+import { loadStorySketch, loadStorySketchEvidence, NL0_STORY_IDS } from "./storySketch";
 import type {
   Evidence,
   EraCard,
@@ -54,12 +55,15 @@ import type {
   SiteBundle,
   Story,
   StoryHistoricalProjection,
+  StorySketchProjection,
+  StorySketchEvidenceProjection,
   StorySceneContext,
   StoryReadingLabels,
 } from "./types";
 
 const FALLBACK_STORY_ID = "06-yaliang-019";
 const READING_MODE_STORAGE_KEY = "shishuoSketch.reading-mode";
+const NL0_STORY_SKETCH_ENABLED = import.meta.env.DEV || import.meta.env.VITE_NL0_STORY_SKETCH === "1";
 type ReadingMode = "simplified" | "original";
 type ResolvedMention = Mention & { person_id: string };
 type PersonFocus = (personId: string, route?: PersonMentionRoute) => void;
@@ -283,6 +287,59 @@ function HistoricalEvidenceDisclosure({
   );
 }
 
+function StorySketchEvidenceDisclosure({
+  evidenceIds,
+  readingMode,
+}: {
+  evidenceIds: string[];
+  readingMode: ReadingMode;
+}) {
+  const [open, setOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [failed, setFailed] = useState(false);
+  const [evidence, setEvidence] = useState<StorySketchEvidenceProjection[]>([]);
+  if (evidenceIds.length === 0) return null;
+
+  async function toggle(): Promise<void> {
+    const nextOpen = !open;
+    setOpen(nextOpen);
+    if (!nextOpen || evidence.length > 0 || failed) return;
+    setLoading(true);
+    try {
+      setEvidence(await loadStorySketchEvidence(evidenceIds));
+    } catch {
+      setFailed(true);
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  return (
+    <div className="ux1-evidence-disclosure">
+      <button type="button" className="ux1-evidence-button" aria-expanded={open} onClick={() => void toggle()}>
+        查看依据
+      </button>
+      {open && (
+        <div className="ux1-evidence-detail">
+          {loading && <p className="ux1-loading">依据载入中…</p>}
+          {failed && <p className="ux1-muted">依据暂时不可用。</p>}
+          {evidence.map((item) => (
+            <article key={item.evidence_id} className="ux1-evidence-item">
+              <p className="ux1-evidence-source">
+                {readingValue(item.source_label.work, readingMode, "世说新语")}
+                {item.source_layer ? ` · ${item.source_layer}` : ""}
+              </p>
+              <blockquote>{readingValue(item.short_excerpt, readingMode, "")}</blockquote>
+              {item.locator && <p className="ux1-evidence-locator">{item.locator}</p>}
+            </article>
+          ))}
+          {!loading && !failed && evidence.length === 0 && <p className="ux1-muted">暂无可展开的依据。</p>}
+        </div>
+      )}
+    </div>
+  );
+}
+
 function HistoricalReferenceList({
   refs,
   readingMode,
@@ -493,6 +550,53 @@ function StoryHistoricalDepth({
           {!loading && !failed && !value && <p className="ux1-muted">暂无可补充的已审阅历史资料。</p>}
         </div>
       )}
+    </section>
+  );
+}
+
+function StorySketchView({
+  value,
+  readingMode,
+}: {
+  value: StorySketchProjection;
+  readingMode: ReadingMode;
+}) {
+  const evidenceIds = [...new Set(value.supporting_evidence.map((row) => row.evidence_id))];
+
+  return (
+    <section className="nl0-story-sketch" aria-label="Story Sketch">
+      <div className="nl0-sketch-heading">
+        <p className="section-label">Sketch</p>
+        <span className="nl0-sketch-review">已审阅投影</span>
+      </div>
+      {value.era_profile && (
+        <div className="nl0-sketch-group nl0-sketch-era">
+          <p className="nl0-sketch-label">Era</p>
+          <p className="nl0-sketch-text">{readingValue(value.era_profile.text, readingMode, "")}</p>
+        </div>
+      )}
+      <div className="nl0-sketch-group nl0-sketch-core">
+        <p className="nl0-sketch-label">Scene Core</p>
+        <p className="nl0-sketch-text">{readingValue(value.scene_core.text, readingMode, "")}</p>
+      </div>
+      {value.essential_background.length > 0 && (
+        <div className="nl0-sketch-group">
+          <p className="nl0-sketch-label">Essential Background</p>
+          {value.essential_background.map((claim) => (
+            <p className="nl0-sketch-text" key={claim.text.original}>{readingValue(claim.text, readingMode, "")}</p>
+          ))}
+        </div>
+      )}
+      {value.resonance && (
+        <div className="nl0-sketch-group nl0-sketch-resonance">
+          <p className="nl0-sketch-label">Resonance</p>
+          <p className="nl0-sketch-text">{readingValue(value.resonance.text, readingMode, "")}</p>
+        </div>
+      )}
+      <div className="nl0-sketch-evidence">
+        <span>{value.supporting_evidence.length} 条依据</span>
+        <StorySketchEvidenceDisclosure evidenceIds={evidenceIds} readingMode={readingMode} />
+      </div>
     </section>
   );
 }
@@ -2087,13 +2191,22 @@ function StoryReader({
 }) {
   const readerRef = useRef<HTMLDivElement>(null);
   const [openAnnotationIds, setOpenAnnotationIds] = useState<Set<string>>(() => new Set());
+  const [storyView, setStoryView] = useState<"original" | "sketch">("original");
+  const [storySketch, setStorySketch] = useState<StorySketchProjection | null>(null);
+  const [storySketchLoading, setStorySketchLoading] = useState(false);
+  const [storySketchFailed, setStorySketchFailed] = useState(false);
   const mentions = resolvedMentions(story, data);
   const mainTextMentions = mentions.filter((mention) => mention.section === "main_text");
   const annotationMentions = mentions.filter((mention) => mention.section === "liu_annotation");
   const primaryEraCard = data.era_cards.find((card) => card.era_card_id === story.primary_era_card_id);
+  const storySketchAvailable = NL0_STORY_SKETCH_ENABLED && NL0_STORY_IDS.has(story.id);
 
   useEffect(() => {
     setOpenAnnotationIds(new Set());
+    setStoryView("original");
+    setStorySketch(null);
+    setStorySketchLoading(false);
+    setStorySketchFailed(false);
     const reader = readerRef.current;
     if (!reader) return;
     reader.scrollTop = 0;
@@ -2107,6 +2220,19 @@ function StoryReader({
       else next.add(annotationId);
       return next;
     });
+  }
+
+  async function chooseStoryView(next: "original" | "sketch"): Promise<void> {
+    setStoryView(next);
+    if (next !== "sketch" || storySketch || storySketchFailed) return;
+    setStorySketchLoading(true);
+    try {
+      setStorySketch(await loadStorySketch(story.id));
+    } catch {
+      setStorySketchFailed(true);
+    } finally {
+      setStorySketchLoading(false);
+    }
   }
 
   return (
@@ -2145,6 +2271,27 @@ function StoryReader({
               原文
             </button>
           </div>
+          {storySketchAvailable && (
+            <div className="nl0-view-controls" role="group" aria-label="Story view">
+              <button
+                type="button"
+                className={storyView === "original" ? "nl0-view-button active" : "nl0-view-button"}
+                aria-pressed={storyView === "original"}
+                onClick={() => void chooseStoryView("original")}
+              >
+                Original
+              </button>
+              <span className="nl0-view-separator" aria-hidden="true">|</span>
+              <button
+                type="button"
+                className={storyView === "sketch" ? "nl0-view-button active" : "nl0-view-button"}
+                aria-pressed={storyView === "sketch"}
+                onClick={() => void chooseStoryView("sketch")}
+              >
+                Sketch
+              </button>
+            </div>
+          )}
           <p className={story.publication_state === "preview_ready" ? "publication-note preview" : "publication-note"}>
             {story.publication_state === "preview_ready"
               ? uiLabel(data, "preview_punctuation", readingMode, "句读：参考底本整理 · 待复核")
@@ -2169,7 +2316,19 @@ function StoryReader({
           </p>
         </section>
 
-        <SceneCard story={story} data={data} readingMode={readingMode} onFocus={onFocus} />
+        {storyView === "sketch" ? (
+          storySketchLoading ? (
+            <p className="nl0-sketch-loading">历史素描载入中…</p>
+          ) : storySketchFailed ? (
+            <p className="nl0-sketch-unavailable">Story Sketch 暂时不可用。</p>
+          ) : storySketch ? (
+            <StorySketchView value={storySketch} readingMode={readingMode} />
+          ) : (
+            <p className="nl0-sketch-unavailable">本则暂无已审阅 Story Sketch。</p>
+          )
+        ) : (
+          <SceneCard story={story} data={data} readingMode={readingMode} onFocus={onFocus} />
+        )}
 
         <StoryHistoricalDepth storyId={story.id} readingMode={readingMode} onFocus={onFocus} />
 

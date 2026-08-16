@@ -1,0 +1,187 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://shishuo.example/schema/story-sketch-v0.json",
+  "title": "ShishuoSketch NL0 StorySketch v0",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "stage",
+    "schema_version",
+    "document_kind",
+    "scope",
+    "records",
+    "counts",
+    "source_hashes",
+    "policy"
+  ],
+  "properties": {
+    "schema": {"const": "story-sketch"},
+    "stage": {"const": "NL0"},
+    "schema_version": {"const": "v0"},
+    "document_kind": {"enum": ["review_spec", "candidates", "gold"]},
+    "scope": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["story_count", "selected_story_ids", "selection_policy"],
+      "properties": {
+        "story_count": {"type": "integer", "minimum": 1},
+        "selected_story_ids": {
+          "type": "array",
+          "items": {"type": "string", "minLength": 1},
+          "uniqueItems": true
+        },
+        "selection_policy": {"type": "string", "minLength": 1}
+      }
+    },
+    "records": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/record"}
+    },
+    "counts": {
+      "type": "object",
+      "additionalProperties": {"type": "integer", "minimum": 0}
+    },
+    "source_hashes": {
+      "type": "object",
+      "additionalProperties": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+    },
+    "policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "canonical_data_write_back",
+        "canonical_fact_materialization",
+        "llm",
+        "rag",
+        "generated_fields_may_abstain",
+        "frontend_requires_accepted_review"
+      ],
+      "properties": {
+        "canonical_data_write_back": {"const": false},
+        "canonical_fact_materialization": {"const": false},
+        "llm": {"const": false},
+        "rag": {"const": false},
+        "generated_fields_may_abstain": {"const": true},
+        "frontend_requires_accepted_review": {"const": true}
+      }
+    }
+  },
+  "$defs": {
+    "pair": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["original", "simplified"],
+      "properties": {
+        "original": {"type": "string", "minLength": 1},
+        "simplified": {"type": "string", "minLength": 1}
+      }
+    },
+    "claim": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["claim_type", "text", "evidence_ids", "grounding_note"],
+      "properties": {
+        "claim_type": {"enum": ["era_profile", "scene_core", "essential_background", "resonance"]},
+        "text": {"$ref": "#/$defs/pair"},
+        "evidence_ids": {
+          "type": "array",
+          "items": {"type": "string", "minLength": 1},
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "grounding_note": {"type": "string", "minLength": 1}
+      }
+    },
+    "supporting_evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "evidence_id",
+        "source_id",
+        "source_layer",
+        "evidence_type",
+        "source_review_status",
+        "nl0_review_status",
+        "support_roles"
+      ],
+      "properties": {
+        "evidence_id": {"type": "string", "minLength": 1},
+        "source_id": {"type": "string", "minLength": 1},
+        "source_layer": {"type": "string", "minLength": 1},
+        "evidence_type": {"type": "string", "minLength": 1},
+        "source_review_status": {"type": "string", "minLength": 1},
+        "nl0_review_status": {"const": "reviewed"},
+        "support_roles": {
+          "type": "array",
+          "items": {"enum": ["era_profile", "scene_core", "essential_background", "resonance"]},
+          "minItems": 1,
+          "uniqueItems": true
+        }
+      }
+    },
+    "record": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "story_id",
+        "selection_categories",
+        "candidate_status",
+        "review_status",
+        "review_decision",
+        "review_note",
+        "era_profile",
+        "scene_core",
+        "essential_background",
+        "resonance",
+        "supporting_evidence",
+        "grounded_inputs"
+      ],
+      "properties": {
+        "story_id": {"type": "string", "minLength": 1},
+        "sketch_id": {"type": "string", "minLength": 1},
+        "selection_categories": {
+          "type": "array",
+          "items": {"type": "string", "minLength": 1},
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "candidate_status": {"enum": ["candidate", "reviewed", "accepted", "rejected"]},
+        "review_status": {"enum": ["candidate", "reviewed", "accepted", "rejected"]},
+        "review_decision": {"enum": ["pending", "accepted", "rejected"]},
+        "review_note": {"type": "string", "minLength": 1},
+        "era_profile": {"anyOf": [{"$ref": "#/$defs/claim"}, {"type": "null"}]},
+        "scene_core": {"$ref": "#/$defs/claim"},
+        "essential_background": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/claim"},
+          "maxItems": 2
+        },
+        "resonance": {"anyOf": [{"$ref": "#/$defs/claim"}, {"type": "null"}]},
+        "supporting_evidence": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/supporting_evidence"},
+          "uniqueItems": true
+        },
+        "grounded_inputs": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["hr0_situation_id", "hr0_1_case_ids", "historical_fact_ids"],
+          "properties": {
+            "hr0_situation_id": {"type": "string", "minLength": 1},
+            "hr0_1_case_ids": {
+              "type": "array",
+              "items": {"type": "string", "minLength": 1},
+              "uniqueItems": true
+            },
+            "historical_fact_ids": {
+              "type": "array",
+              "items": {"type": "string", "minLength": 1},
+              "uniqueItems": true
+            }
+          }
+        }
+      }
+    }
+  }
+}

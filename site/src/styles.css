@@ -255,6 +255,11 @@ body { overflow-x: hidden; }
 .story-reading-toolbar { display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin: 0 0 1.2rem; }
 .story-reading-toolbar .reading-controls { flex: 0 0 auto; margin: 0; }
 .story-reading-toolbar .publication-note { flex: 0 1 auto; margin: 0; }
+.nl0-view-controls { display: inline-flex; align-items: center; gap: .25rem; border-bottom: 1px solid #d9cebf; padding-bottom: .25rem; }
+.nl0-view-button { border: 0; background: transparent; color: #95887b; cursor: pointer; padding: .2rem .35rem; font-size: .78rem; }
+.nl0-view-button.active { color: #7a3d2d; font-weight: 600; }
+.nl0-view-button:hover, .nl0-view-button:focus-visible { color: #4b271e; }
+.nl0-view-separator { color: #c1b3a4; font-size: .75rem; }
 .story-panel { border-top-width: 1px; }
 .scene-card {
   margin-top: 1.7rem;
@@ -493,6 +498,22 @@ body { overflow-x: hidden; }
   border-left: 2px solid #d8c7ba;
   background: rgba(248, 242, 235, .52);
 }
+
+.nl0-story-sketch {
+  margin-top: 1.6rem;
+  border-top: 2px solid #302b27;
+  border-bottom: 1px solid #cfc4b4;
+  padding: 1rem 0 1.1rem;
+}
+.nl0-sketch-heading { display: flex; align-items: baseline; justify-content: space-between; gap: .8rem; }
+.nl0-sketch-review { color: #a18f80; font-size: .68rem; }
+.nl0-sketch-group { margin-top: .85rem; }
+.nl0-sketch-label { margin: 0 0 .18rem; color: #9a6a56; font-size: .74rem; letter-spacing: .08em; }
+.nl0-sketch-text { margin: 0; color: #55473d; line-height: 1.85; }
+.nl0-sketch-core { border-left: 2px solid #b9957d; padding-left: .75rem; }
+.nl0-sketch-resonance { border-top: 1px solid #e3d9cd; padding-top: .7rem; }
+.nl0-sketch-evidence { display: flex; align-items: center; gap: .65rem; margin-top: 1rem; color: #8c6956; font-size: .72rem; }
+.nl0-sketch-loading, .nl0-sketch-unavailable { margin: 1.6rem 0; color: #9a8b7d; font-size: .82rem; }
 
 @keyframes story-stage-enter {
   from { opacity: .82; transform: translateY(.25rem); }
