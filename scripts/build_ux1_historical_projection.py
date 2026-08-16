@@ -14,25 +14,30 @@ from collections import defaultdict
 from pathlib import Path
 from typing import Any, Iterable, Mapping
 
-try:
-    from opencc import OpenCC
-except ImportError:  # Keep the optional projection builder usable in shallow CI.
-    class OpenCC:  # type: ignore[no-redef]
-        _fallback = str.maketrans({
-            "長": "长", "從": "从", "陽": "阳", "晉": "晋", "與": "与",
-            "為": "为", "縣": "县", "書": "书", "國": "国", "門": "门",
-            "會": "会", "東": "东", "學": "学", "時": "时", "後": "后",
-            "傳": "传", "親": "亲", "屬": "属", "據": "据", "應": "应",
-            "開": "开", "見": "见", "於": "于", "無": "无", "舊": "旧",
-            "為": "为", "華": "华", "賢": "贤", "劉": "刘", "謝": "谢",
-            "嶠": "峤", "書": "书", "陽": "阳", "陽": "阳", "郡": "郡",
-        })
+class DeterministicDisplayConverter:
+    """Small, repository-owned converter for UX1 display projections.
 
-        def __init__(self, _config: str) -> None:
-            pass
+    The main SC1 build already stores its bilingual display pairs.  UX1 also
+    needs pairs for a small number of extension/provenance strings.  Using
+    OpenCC opportunistically here made committed shards depend on whether the
+    local Python environment happened to have the optional package installed:
+    the full converter and this fallback produce different bytes.  Keep the
+    existing shallow-pipeline conversion table as the sole implementation so
+    identical inputs produce identical artifacts in every build environment.
+    """
 
-        def convert(self, value: str) -> str:
-            return value.translate(self._fallback)
+    _fallback = str.maketrans({
+        "長": "长", "從": "从", "陽": "阳", "晉": "晋", "與": "与",
+        "為": "为", "縣": "县", "書": "书", "國": "国", "門": "门",
+        "會": "会", "東": "东", "學": "学", "時": "时", "後": "后",
+        "傳": "传", "親": "亲", "屬": "属", "據": "据", "應": "应",
+        "開": "开", "見": "见", "於": "于", "無": "无", "舊": "旧",
+        "華": "华", "賢": "贤", "劉": "刘", "謝": "谢", "嶠": "峤",
+        "郡": "郡",
+    })
+
+    def convert(self, value: str) -> str:
+        return value.translate(self._fallback)
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -50,13 +55,18 @@ X1_2R_CITATION_PATH = ROOT / "data/derived/x1-2r-citation-candidates.json"
 OUTPUT_ROOT = ROOT / "site/public/generated/history"
 MANIFEST_PATH = OUTPUT_ROOT / "manifest.json"
 
-CONVERTER = OpenCC("t2s")
+CONVERTER = DeterministicDisplayConverter()
 MAX_EXCERPT = 280
 MAX_REFS = 3
 
 
 def read_json(path: Path) -> Any:
     return json.loads(path.read_text(encoding="utf-8"))
+
+
+def stable_record_key(record: Mapping[str, Any]) -> str:
+    """Return a deterministic tie-break key for source records."""
+    return json.dumps(record, ensure_ascii=False, sort_keys=True, separators=(",", ":"))
 
 
 def write_json(path: Path, value: Any) -> None:
@@ -187,6 +197,7 @@ def make_evidence_from_x1(
     attribution = assertion.get("attribution") or (materialized_fact or {}).get("attribution")
     quoted_source = assertion.get("quoted_source") or (materialized_fact or {}).get("quoted_source")
     excerpt = assertion.get("evidence_excerpt") or assertion.get("quoted_passage") or ""
+    fact_modality = (materialized_fact or {}).get("source_assertion_modality") or (materialized_fact or {}).get("modality")
     return {
         "schema": 1,
         "projection": "ux1_evidence_detail",
@@ -199,7 +210,7 @@ def make_evidence_from_x1(
         "locator": source_locator(assertion) or source_locator(materialized_fact or {}),
         "short_excerpt": pair(short_text(excerpt)) or {"original": "", "simplified": ""},
         "assertion_status": (materialized_fact or {}).get("assertion_status") or assertion.get("modality") or "scholarly_assertion",
-        "modality": assertion.get("modality") or (materialized_fact or {}).get("modality"),
+        "modality": fact_modality or assertion.get("modality"),
         "parent_assertion_modality": (materialized_fact or {}).get("parent_assertion_modality"),
         "review_status": "reviewed",
         "kind": "scholarly_reference" if not materialized_fact else "reviewed_extension_fact_evidence",
@@ -253,12 +264,36 @@ def build() -> tuple[dict[str, Any], dict[str, dict[str, Any]]]:
     h0c_locations = read_json(H0C_LOCATIONS_PATH).get("records", [])
     participant_freeze = read_json(PARTICIPANT_PATH).get("records", [])
     selection = read_json(SELECTION_PATH)
-    x1_participants = read_json(X1_2R_PARTICIPANT_PATH).get("records", [])
+    x1_participants = sorted(
+        read_json(X1_2R_PARTICIPANT_PATH).get("records", []),
+        key=lambda row: (
+            str(row.get("story_id", "")),
+            str(row.get("person_id", "")),
+            str(row.get("review_item_id", "")),
+            stable_record_key(row),
+        ),
+    )
     x1_fact_document = read_json(X1_2RF_FACT_PATH)
-    x1_facts = x1_fact_document.get("facts", x1_fact_document.get("records", []))
-    x1_assertions = read_json(X1_2RF_ASSERTION_PATH).get("records", [])
-    x1_scholarly = read_json(X1_2RF_SCHOLARLY_PATH).get("records", [])
-    citations = read_json(X1_2R_CITATION_PATH).get("records", [])
+    x1_facts = sorted(
+        x1_fact_document.get("facts", x1_fact_document.get("records", [])),
+        key=lambda row: (str(row.get("fact_id", "")), stable_record_key(row)),
+    )
+    x1_assertions = sorted(
+        read_json(X1_2RF_ASSERTION_PATH).get("records", []),
+        key=lambda row: (
+            str(row.get("source_assertion_id", "")),
+            str(row.get("review_item_id", "")),
+            stable_record_key(row),
+        ),
+    )
+    x1_scholarly = sorted(
+        read_json(X1_2RF_SCHOLARLY_PATH).get("records", []),
+        key=lambda row: (str(row.get("story_id", "")), str(row.get("review_item_id", "")), stable_record_key(row)),
+    )
+    citations = sorted(
+        read_json(X1_2R_CITATION_PATH).get("records", []),
+        key=lambda row: (str(row.get("story_id", "")), str(row.get("citation_id", "")), stable_record_key(row)),
+    )
 
     people = {str(row["id"]): row for row in sc1.get("people", [])}
     stories = {str(row["id"]): row for row in sc1.get("stories", [])}
@@ -412,11 +447,15 @@ def build() -> tuple[dict[str, Any], dict[str, dict[str, Any]]]:
     # Story orientations are shown only where their own review gate passed.
     orientations = {
         str(row.get("story_id")): row
-        for row in sc1.get("story_era_orientations", [])
+        for row in sorted(
+            sc1.get("story_era_orientations", []),
+            key=lambda item: (str(item.get("story_id", "")), stable_record_key(item)),
+        )
         if row.get("review_status") == "reviewed"
     }
     periods_by_person: dict[str, list[dict[str, Any]]] = defaultdict(list)
-    for story_id, orientation in orientations.items():
+    for story_id in sorted(orientations):
+        orientation = orientations[story_id]
         story = stories.get(story_id)
         if not story:
             continue
@@ -431,7 +470,15 @@ def build() -> tuple[dict[str, Any], dict[str, dict[str, Any]]]:
 
     # Retain participant semantics for the Story shard without turning references into facts.
     hard_participants_by_story: dict[str, list[dict[str, Any]]] = defaultdict(list)
-    for row in participant_freeze:
+    for row in sorted(
+        participant_freeze,
+        key=lambda item: (
+            str(item.get("story_id", "")),
+            str(item.get("person_id", "")),
+            str(item.get("role", "")),
+            stable_record_key(item),
+        ),
+    ):
         if row.get("review_status") != "reviewed" or row.get("role") not in {"present", "speaker", "actor"}:
             continue
         story_id = str(row.get("story_id"))
@@ -459,13 +506,15 @@ def build() -> tuple[dict[str, Any], dict[str, dict[str, Any]]]:
     # Per-person and per-story scholarly references are summary-only; full excerpts
     # are behind evidence shards.
     scholarly_refs_by_story: dict[str, list[dict[str, Any]]] = defaultdict(list)
-    for story_id, rows in scholarly_by_story.items():
+    for story_id in sorted(scholarly_by_story):
+        rows = scholarly_by_story[story_id]
         for row in sorted(rows, key=lambda x: str(x.get("review_item_id"))):
             evidence_id = x1_evidence_id(str(row.get("source_assertion_id")))
             kind = "citation" if row.get("review_status") == "citation_only" else "scholarly"
             scholarly_refs_by_story[story_id].append(ref_from_evidence(row, evidence_id, kind))
     citation_refs_by_story: dict[str, list[dict[str, Any]]] = defaultdict(list)
-    for story_id, rows in citation_by_story.items():
+    for story_id in sorted(citation_by_story):
+        rows = citation_by_story[story_id]
         for row in sorted(rows, key=lambda x: str(x.get("citation_id"))):
             citation_refs_by_story[story_id].append(ref_from_evidence(row, x1_evidence_id(str(row.get("assertion_id"))), "citation"))
 
@@ -596,7 +645,10 @@ def build() -> tuple[dict[str, Any], dict[str, dict[str, Any]]]:
         "schema": 1,
         "projection": "UX1 historical depth",
         "generated_from": "reviewed downstream projections; no initial-bundle expansion",
-        "source_hashes": {path.relative_to(ROOT).as_posix(): sha256_file(path) for path in inputs},
+        "source_hashes": {
+            relative: sha256_file(ROOT / relative)
+            for relative in sorted(path.relative_to(ROOT).as_posix() for path in inputs)
+        },
         "scope": {
             "published_story_count": len(published_story_ids),
             "person_count": len(person_shards),

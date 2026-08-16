@@ -80,6 +80,16 @@ class UX1ProjectionTests(unittest.TestCase):
         self.assertNotIn('import "./generated/history', app)
         self.assertNotIn("fetchHistoricalCorpus", app)
 
+    def test_manifest_has_only_relative_nonvolatile_metadata(self):
+        manifest_path = HISTORY / "manifest.json"
+        manifest = read(manifest_path)
+        self.assertNotIn("manifest.json", manifest["shards"])
+        self.assertTrue(all(not path.startswith("/") for path in manifest["source_hashes"]))
+        text = manifest_path.read_text(encoding="utf-8")
+        for volatile_key in ("generated_at", "timestamp", "build_time", "built_at"):
+            self.assertNotIn(volatile_key, text)
+        self.assertNotIn(str(ROOT), text)
+
     def test_summary_shards_do_not_contain_large_source_payloads(self):
         for kind in ("person", "story", "era", "relation"):
             for path in (HISTORY / kind).glob("*.json"):
@@ -97,15 +107,30 @@ class UX1ProjectionTests(unittest.TestCase):
         self.assertLessEqual(comparison["initial_total"]["delta_percent"], 5)
 
     def test_projection_rebuild_is_deterministic(self):
-        before = {path.relative_to(HISTORY).as_posix(): sha256(path) for path in HISTORY.rglob("*.json")}
+        def snapshot():
+            return {path.relative_to(HISTORY).as_posix(): sha256(path) for path in HISTORY.rglob("*.json")}
+
+        before = snapshot()
         subprocess.run(
             ["python3", "scripts/build_ux1_historical_projection.py"],
             cwd=ROOT,
             check=True,
             stdout=subprocess.DEVNULL,
         )
-        after = {path.relative_to(HISTORY).as_posix(): sha256(path) for path in HISTORY.rglob("*.json")}
-        self.assertEqual(before, after)
+        first = snapshot()
+        subprocess.run(
+            ["python3", "scripts/build_ux1_historical_projection.py"],
+            cwd=ROOT,
+            check=True,
+            stdout=subprocess.DEVNULL,
+        )
+        second = snapshot()
+
+        def changed(left, right):
+            return sorted(path for path in set(left) | set(right) if left.get(path) != right.get(path))
+
+        self.assertEqual(before, first, f"committed projection differs after rebuild: {changed(before, first)}")
+        self.assertEqual(first, second, f"consecutive projection rebuilds differ: {changed(first, second)}")
 
 
 if __name__ == "__main__":

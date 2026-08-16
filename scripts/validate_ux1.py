@@ -108,6 +108,16 @@ def main() -> int:
         fail("UX1 projection was embedded in the initial SC1 bundle")
 
     manifest = read_json(MANIFEST)
+    manifest_text = MANIFEST.read_text(encoding="utf-8")
+    if "manifest.json" in manifest.get("shards", {}):
+        fail("manifest contains a self-referential shard hash")
+    if any(Path(relative).is_absolute() for relative in manifest.get("source_hashes", {})):
+        fail("manifest contains an absolute source path")
+    for volatile_key in ("generated_at", "timestamp", "build_time", "built_at"):
+        if volatile_key in manifest_text:
+            fail(f"manifest contains volatile field {volatile_key}")
+    if str(ROOT) in manifest_text:
+        fail("manifest contains an absolute repository path")
     if manifest.get("policies", {}).get("unresolved_facts_projected") is not False:
         fail("manifest does not prohibit unresolved factual projection")
     source_hashes = manifest.get("source_hashes", {})
