@@ -41,6 +41,7 @@ import {
   type HistoricalProjection,
 } from "./historical";
 import { loadStorySketch, loadStorySketchEvidence, NL0_STORY_IDS } from "./storySketch";
+import { IRRReviewPage } from "./IRRReviewPage";
 import type {
   Evidence,
   EraCard,
@@ -83,6 +84,13 @@ function isIndexLocation(): boolean {
   const base = import.meta.env.BASE_URL.replace(/\/+$/u, "");
   const path = window.location.pathname.replace(/\/+$/u, "");
   return path === `${base}/index`;
+}
+
+function isIRRReviewLocation(): boolean {
+  if (typeof window === "undefined") return false;
+  const base = import.meta.env.BASE_URL.replace(/\/+$/u, "");
+  const path = window.location.pathname.replace(/\/+$/u, "");
+  return path === `${base}/review/irr0`;
 }
 
 function readingValue(pair: ReadingPair | undefined, mode: ReadingMode, fallback: string): string {
@@ -2768,6 +2776,7 @@ function App() {
   useEffect(() => {
     if (initialized.current) return;
     initialized.current = true;
+    if (isIRRReviewLocation()) return;
     try {
       const loaded = loadSiteBundle();
       const storyId = initialStoryId(loaded);
@@ -2793,6 +2802,10 @@ function App() {
   const currentFocusedPersonNode = focusedPersonNodeFromExploration(stack);
   const currentFocusedEraId = focusedEraFromExploration(stack);
   const currentFocusedEraNode = focusedEraNodeFromExploration(stack);
+
+  if (isIRRReviewLocation()) {
+    return <IRRReviewPage />;
+  }
 
   function focusPerson(personId: string, route?: PersonMentionRoute) {
     if (!data?.people.some((person) => person.id === personId)) return;

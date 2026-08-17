@@ -1,0 +1,178 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://shishuo.example/schema/model-iterative-reading-v0.json",
+  "title": "ShishuoSketch Model Iterative Reading Output v0",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "historical_reading",
+    "text_reading",
+    "aesthetic_reading",
+    "open_questions",
+    "new_questions",
+    "reading_delta"
+  ],
+  "properties": {
+    "historical_reading": {"$ref": "#/$defs/historical_reading"},
+    "text_reading": {"$ref": "#/$defs/text_reading"},
+    "aesthetic_reading": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/aesthetic_item"}
+    },
+    "open_questions": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/question"}
+    },
+    "new_questions": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/question"}
+    },
+    "reading_delta": {
+      "anyOf": [
+        {"type": "null"},
+        {"$ref": "#/$defs/reading_delta"}
+      ]
+    }
+  },
+  "$defs": {
+    "evidence_ref": {
+      "type": "string",
+      "minLength": 1
+    },
+    "refs": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/evidence_ref"},
+      "uniqueItems": true
+    },
+    "claim": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["text", "evidence_refs"],
+      "properties": {
+        "text": {"type": "string", "minLength": 1},
+        "evidence_refs": {"$ref": "#/$defs/refs"},
+        "status": {
+          "type": "string",
+          "enum": ["observed", "reported", "contextual", "resolved", "open", "bounded"]
+        },
+        "person_id": {"type": ["string", "null"]},
+        "scope": {"type": ["string", "null"]}
+      }
+    },
+    "historical_reading": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "era",
+        "participant_states",
+        "relationship_states",
+        "prior_events",
+        "later_events",
+        "scene_pressure",
+        "uncertainties"
+      ],
+      "properties": {
+        "era": {"type": ["string", "null"]},
+        "participant_states": {"type": "array", "items": {"$ref": "#/$defs/claim"}},
+        "relationship_states": {"type": "array", "items": {"$ref": "#/$defs/claim"}},
+        "prior_events": {"type": "array", "items": {"$ref": "#/$defs/claim"}},
+        "later_events": {"type": "array", "items": {"$ref": "#/$defs/claim"}},
+        "scene_pressure": {"type": "array", "items": {"$ref": "#/$defs/claim"}},
+        "uncertainties": {"type": "array", "items": {"$ref": "#/$defs/claim"}}
+      }
+    },
+    "salient_span": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "span",
+        "literal_meaning",
+        "contextual_meaning",
+        "depth_self_assessment",
+        "evidence_refs"
+      ],
+      "properties": {
+        "span": {"type": "string", "minLength": 1},
+        "literal_meaning": {"type": "string", "minLength": 1},
+        "contextual_meaning": {"type": ["string", "null"]},
+        "depth_self_assessment": {"type": "integer", "minimum": 0, "maximum": 4},
+        "evidence_refs": {"$ref": "#/$defs/refs"}
+      }
+    },
+    "text_reading": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["salient_spans"],
+      "properties": {
+        "salient_spans": {"type": "array", "items": {"$ref": "#/$defs/salient_span"}}
+      }
+    },
+    "aesthetic_item": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["span", "operations", "omitted_context", "interpretation", "evidence_refs"],
+      "properties": {
+        "span": {"type": "string", "minLength": 1},
+        "operations": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "selection",
+              "compression",
+              "omission",
+              "juxtaposition",
+              "action_substitution",
+              "speaker_exposure",
+              "delayed_revelation"
+            ]
+          },
+          "uniqueItems": true
+        },
+        "omitted_context": {"type": "array", "items": {"type": "string"}},
+        "interpretation": {"type": ["string", "null"]},
+        "evidence_refs": {"$ref": "#/$defs/refs"}
+      }
+    },
+    "question": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["question", "evidence_refs"],
+      "properties": {
+        "question": {"type": "string", "minLength": 1},
+        "evidence_refs": {"$ref": "#/$defs/refs"}
+      }
+    },
+    "delta_item": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["text", "evidence_refs"],
+      "properties": {
+        "text": {"type": "string", "minLength": 1},
+        "evidence_refs": {"$ref": "#/$defs/refs"}
+      }
+    },
+    "reading_delta": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "historical_changes",
+        "newly_salient_spans",
+        "reinterpretations",
+        "newly_understood_omissions",
+        "new_connections",
+        "resolved_questions",
+        "new_questions"
+      ],
+      "properties": {
+        "historical_changes": {"type": "array", "items": {"$ref": "#/$defs/delta_item"}},
+        "newly_salient_spans": {"type": "array", "items": {"$ref": "#/$defs/delta_item"}},
+        "reinterpretations": {"type": "array", "items": {"$ref": "#/$defs/delta_item"}},
+        "newly_understood_omissions": {"type": "array", "items": {"$ref": "#/$defs/delta_item"}},
+        "new_connections": {"type": "array", "items": {"$ref": "#/$defs/delta_item"}},
+        "resolved_questions": {"type": "array", "items": {"$ref": "#/$defs/delta_item"}},
+        "new_questions": {"type": "array", "items": {"$ref": "#/$defs/delta_item"}}
+      }
+    }
+  }
+}

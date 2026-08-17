@@ -1,0 +1,191 @@
+{
+  "condition_summary": {
+    "all_at_once": {
+      "aesthetic_operation_score": 0.34,
+      "critical_span_score": 0.2,
+      "distraction_error_count": 0.0,
+      "historical_score": 0.140839,
+      "linguistic_salience_score": 0.1,
+      "omission_context_score": 0.0,
+      "story_count": 5,
+      "uncertainty_score": 0.666667
+    },
+    "iterative": {
+      "aesthetic_operation_score": 0.34,
+      "critical_span_score": 0.2,
+      "distraction_error_count": 0.0,
+      "historical_score": 0.140839,
+      "linguistic_salience_score": 0.1,
+      "omission_context_score": 0.0,
+      "story_count": 5,
+      "uncertainty_score": 0.666667
+    },
+    "text_only": {
+      "aesthetic_operation_score": 0.213333,
+      "critical_span_score": 0.2,
+      "distraction_error_count": 0.0,
+      "historical_score": 0.071913,
+      "linguistic_salience_score": 0.05,
+      "omission_context_score": 0.8,
+      "story_count": 5,
+      "uncertainty_score": 0.666667
+    }
+  },
+  "iterative_analysis": {
+    "degradation_cases": [],
+    "hard_negative_cases": [
+      {
+        "model_depth_after": 2.0,
+        "model_depth_before": 2.0,
+        "recognized": true,
+        "round": 2,
+        "story_id": "06-yaliang-017"
+      }
+    ],
+    "monotonic_stories": [
+      "27-jiajue-008",
+      "06-yaliang-017",
+      "09-pinzao-017",
+      "19-xianyuan-026",
+      "05-fangzheng-032"
+    ],
+    "stories": {
+      "05-fangzheng-032": {
+        "gold_depths": [
+          1.0,
+          2.0,
+          3.0
+        ],
+        "monotonic_non_decreasing": true,
+        "predicted_depths": [
+          1.0,
+          2.0,
+          3.0
+        ],
+        "strict_progression": true
+      },
+      "06-yaliang-017": {
+        "gold_depths": [
+          1.0,
+          2.0,
+          2.0
+        ],
+        "monotonic_non_decreasing": true,
+        "predicted_depths": [
+          1.0,
+          2.0,
+          2.0
+        ],
+        "strict_progression": false
+      },
+      "09-pinzao-017": {
+        "gold_depths": [
+          1.0,
+          2.0,
+          4.0
+        ],
+        "monotonic_non_decreasing": true,
+        "predicted_depths": [
+          1.0,
+          2.0,
+          3.0
+        ],
+        "strict_progression": true
+      },
+      "19-xianyuan-026": {
+        "gold_depths": [
+          1.0,
+          2.0,
+          3.0
+        ],
+        "monotonic_non_decreasing": true,
+        "predicted_depths": [
+          1.0,
+          2.0,
+          2.0
+        ],
+        "strict_progression": false
+      },
+      "27-jiajue-008": {
+        "gold_depths": [
+          1.0,
+          2.0,
+          3.0
+        ],
+        "monotonic_non_decreasing": true,
+        "predicted_depths": [
+          1.0,
+          2.0,
+          3.0
+        ],
+        "strict_progression": true
+      }
+    }
+  },
+  "pairwise": {
+    "all_at_once_vs_iterative": {
+      "delta_definition": "iterative - all_at_once; positive is higher except distraction_error_count",
+      "deltas": {
+        "aesthetic_operation_score": 0.0,
+        "critical_span_score": 0.0,
+        "distraction_error_count": 0.0,
+        "historical_score": 0.0,
+        "linguistic_salience_score": 0.0,
+        "omission_context_score": 0.0,
+        "uncertainty_score": 0.0
+      }
+    },
+    "text_only_vs_all_at_once": {
+      "delta_definition": "all_at_once - text_only; positive is higher except distraction_error_count",
+      "deltas": {
+        "aesthetic_operation_score": 0.126667,
+        "critical_span_score": 0.0,
+        "distraction_error_count": 0.0,
+        "historical_score": 0.068926,
+        "linguistic_salience_score": 0.05,
+        "omission_context_score": -0.8,
+        "uncertainty_score": 0.0
+      }
+    },
+    "text_only_vs_iterative": {
+      "delta_definition": "iterative - text_only; positive is higher except distraction_error_count",
+      "deltas": {
+        "aesthetic_operation_score": 0.126667,
+        "critical_span_score": 0.0,
+        "distraction_error_count": 0.0,
+        "historical_score": 0.068926,
+        "linguistic_salience_score": 0.05,
+        "omission_context_score": -0.8,
+        "uncertainty_score": 0.0
+      }
+    }
+  },
+  "questions": {
+    "any_degradation": false,
+    "context_improves_over_text_only": true,
+    "hard_negative_recognized": true,
+    "iterative_outperforms_all_at_once": false
+  },
+  "schema": "irr0.2-comparison",
+  "schema_version": "v0",
+  "scientific_status": "fixture_pipeline_only",
+  "scope": {
+    "story_count": 5,
+    "story_ids": [
+      "27-jiajue-008",
+      "06-yaliang-017",
+      "09-pinzao-017",
+      "19-xianyuan-026",
+      "05-fangzheng-032"
+    ]
+  },
+  "scoring_policy": {
+    "historical_score": "evidence-reference and grounded-claim token coverage against condition-matched Gold round",
+    "mrg": "diagnostic vector; never an authoritative scalar or historical-importance score",
+    "primary_judge": "deterministic annotation overlap and structure checks; no LLM judge"
+  },
+  "source_hashes": {
+    "data/derived/irr0-iterative-reading-gold.json": "633e47debad756e3fb1985402dfafcc5e4ff47a2b3e45b60e87ebe14db372168"
+  },
+  "stage": "IRR0.2"
+}
