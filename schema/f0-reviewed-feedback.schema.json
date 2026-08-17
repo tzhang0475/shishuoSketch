@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": ["schema", "schema_version", "document_kind", "policy", "source", "records"],
+  "properties": {
+    "schema": { "const": "f0-reviewed-feedback" },
+    "schema_version": { "const": 1 },
+    "document_kind": { "const": "user_feedback_reviewed" },
+    "policy": {
+      "type": "object",
+      "required": ["canonical_write_back", "gold_write_back", "model_training", "identifying_fields_exported"],
+      "properties": {
+        "canonical_write_back": { "const": false },
+        "gold_write_back": { "const": false },
+        "model_training": { "const": false },
+        "identifying_fields_exported": { "const": false }
+      },
+      "additionalProperties": false
+    },
+    "source": {
+      "type": "object",
+      "required": ["raw_store", "raw_store_sha256"],
+      "properties": {
+        "raw_store": { "type": "string" },
+        "raw_store_sha256": { "type": ["string", "null"] }
+      },
+      "additionalProperties": false
+    },
+    "records": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["feedback_id", "story_id", "target_type", "category", "reason_code", "status", "created_at"],
+        "properties": {
+          "feedback_id": { "type": "string", "minLength": 1 },
+          "story_id": { "type": "string", "minLength": 1 },
+          "target_type": { "enum": ["story", "evidence", "narrative", "person", "relation"] },
+          "target_id": { "type": "string" },
+          "category": { "enum": ["text", "historical_fact", "narrative", "bug", "other"] },
+          "reason_code": { "type": "string", "minLength": 1 },
+          "comment": { "type": "string", "maxLength": 2000 },
+          "target_text_snapshot": { "type": "string", "maxLength": 500 },
+          "data_version": { "type": "string" },
+          "frontend_version": { "type": "string" },
+          "status": { "enum": ["accepted", "rejected", "duplicate", "resolved"] },
+          "duplicate_of": { "type": "string" },
+          "review_note": { "type": "string", "maxLength": 2000 },
+          "created_at": { "type": "string", "minLength": 1 },
+          "reviewed_at": { "type": "string" }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

@@ -33,6 +33,7 @@ import {
   type ExplorationNode,
 } from "./relationExplorer";
 import { loadUX2Index, type PersonIndexRecord, type StoryIndexRecord } from "./indexData";
+import { FeedbackButton, FeedbackReviewPanel } from "./Feedback";
 import { normalizeReaderText } from "./readerDisplay";
 import {
   loadHistoricalEvidence,
@@ -242,9 +243,13 @@ function useHistoricalProjection<T extends HistoricalProjection>(
 function HistoricalEvidenceDisclosure({
   evidenceIds,
   readingMode,
+  data,
+  feedbackStoryId,
 }: {
   evidenceIds: string[];
   readingMode: ReadingMode;
+  data?: SiteBundle;
+  feedbackStoryId?: string;
 }) {
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -286,6 +291,16 @@ function HistoricalEvidenceDisclosure({
               </p>
               <blockquote>{readingValue(item.short_excerpt, readingMode, "")}</blockquote>
               {item.locator && <p className="ux1-evidence-locator">{item.locator}</p>}
+              {feedbackStoryId && data && (
+                <FeedbackButton
+                  data={data}
+                  storyId={feedbackStoryId}
+                  targetType="evidence"
+                  targetId={item.evidence_id}
+                  targetTextSnapshot={readingValue(item.short_excerpt, readingMode, "")}
+                  label="反馈此依据"
+                />
+              )}
             </article>
           ))}
           {!loading && !failed && evidence.length === 0 && <p className="ux1-muted">暂无可展开的依据。</p>}
@@ -298,9 +313,13 @@ function HistoricalEvidenceDisclosure({
 function StorySketchEvidenceDisclosure({
   evidenceIds,
   readingMode,
+  data,
+  feedbackStoryId,
 }: {
   evidenceIds: string[];
   readingMode: ReadingMode;
+  data?: SiteBundle;
+  feedbackStoryId?: string;
 }) {
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -339,6 +358,16 @@ function StorySketchEvidenceDisclosure({
               </p>
               <blockquote>{readingValue(item.short_excerpt, readingMode, "")}</blockquote>
               {item.locator && <p className="ux1-evidence-locator">{item.locator}</p>}
+              {feedbackStoryId && data && (
+                <FeedbackButton
+                  data={data}
+                  storyId={feedbackStoryId}
+                  targetType="evidence"
+                  targetId={item.evidence_id}
+                  targetTextSnapshot={readingValue(item.short_excerpt, readingMode, "")}
+                  label="反馈此依据"
+                />
+              )}
             </article>
           ))}
           {!loading && !failed && evidence.length === 0 && <p className="ux1-muted">暂无可展开的依据。</p>}
@@ -351,9 +380,13 @@ function StorySketchEvidenceDisclosure({
 function HistoricalReferenceList({
   refs,
   readingMode,
+  data,
+  storyId,
 }: {
   refs: HistoricalReferenceProjection[];
   readingMode: ReadingMode;
+  data?: SiteBundle;
+  storyId?: string;
 }) {
   if (refs.length === 0) return null;
   return (
@@ -368,7 +401,7 @@ function HistoricalReferenceList({
               {ref.quoted_source ? ` · 引${ref.quoted_source}` : ""}
               {ref.modality && ref.modality !== "explicit" ? ` · ${ref.modality}` : ""}
             </span>
-            <HistoricalEvidenceDisclosure evidenceIds={[ref.evidence_id]} readingMode={readingMode} />
+            <HistoricalEvidenceDisclosure evidenceIds={[ref.evidence_id]} readingMode={readingMode} data={data} feedbackStoryId={storyId} />
           </li>
         ))}
       </ul>
@@ -496,10 +529,12 @@ function RelationHistoricalContext({ relationId, readingMode }: { relationId: st
 
 function StoryHistoricalDepth({
   storyId,
+  data,
   readingMode,
   onFocus,
 }: {
   storyId: string;
+  data: SiteBundle;
   readingMode: ReadingMode;
   onFocus: PersonFocus;
 }) {
@@ -549,9 +584,9 @@ function StoryHistoricalDepth({
                   ))}
                 </div>
               )}
-              <HistoricalReferenceList refs={value.scholarly_refs} readingMode={readingMode} />
-              <HistoricalReferenceList refs={value.citation_refs} readingMode={readingMode} />
-              <HistoricalEvidenceDisclosure evidenceIds={value.evidence_ids} readingMode={readingMode} />
+              <HistoricalReferenceList refs={value.scholarly_refs} readingMode={readingMode} data={data} storyId={storyId} />
+              <HistoricalReferenceList refs={value.citation_refs} readingMode={readingMode} data={data} storyId={storyId} />
+              <HistoricalEvidenceDisclosure evidenceIds={value.evidence_ids} readingMode={readingMode} data={data} feedbackStoryId={storyId} />
               {value.historical_context.length === 0 && value.participant_context.length === 0 && value.scholarly_refs.length === 0 && value.citation_refs.length === 0 && <p className="ux1-muted">暂无可补充的已审阅历史资料。</p>}
             </>
           )}
@@ -564,9 +599,11 @@ function StoryHistoricalDepth({
 
 function StorySketchView({
   value,
+  data,
   readingMode,
 }: {
   value: StorySketchProjection;
+  data: SiteBundle;
   readingMode: ReadingMode;
 }) {
   const evidenceIds = [...new Set(value.supporting_evidence.map((row) => row.evidence_id))];
@@ -576,6 +613,14 @@ function StorySketchView({
       <div className="nl0-sketch-heading">
         <p className="section-label">Sketch</p>
         <span className="nl0-sketch-review">已审阅投影</span>
+        <FeedbackButton
+          data={data}
+          storyId={value.story_id}
+          targetType="narrative"
+          targetId={`story-sketch-nl0-${value.story_id}`}
+          targetTextSnapshot={readingValue(value.scene_core.text, readingMode, "")}
+          label="反馈此段"
+        />
       </div>
       {value.era_profile && (
         <div className="nl0-sketch-group nl0-sketch-era">
@@ -603,7 +648,7 @@ function StorySketchView({
       )}
       <div className="nl0-sketch-evidence">
         <span>{value.supporting_evidence.length} 条依据</span>
-        <StorySketchEvidenceDisclosure evidenceIds={evidenceIds} readingMode={readingMode} />
+        <StorySketchEvidenceDisclosure evidenceIds={evidenceIds} readingMode={readingMode} data={data} feedbackStoryId={value.story_id} />
       </div>
     </section>
   );
@@ -2062,6 +2107,14 @@ function SceneCard({
               <article key={item.id}>
                 <p>{source ? `${source.work[readingMode]} · ${source.edition[readingMode]}` : item.source_id}</p>
                 <blockquote>{readingValue(evidenceDisplay(data, item.id), readingMode, item.quote)}</blockquote>
+                <FeedbackButton
+                  data={data}
+                  storyId={story.id}
+                  targetType="evidence"
+                  targetId={item.id}
+                  targetTextSnapshot={readingValue(evidenceDisplay(data, item.id), readingMode, item.quote)}
+                  label="反馈此依据"
+                />
               </article>
             );
           })}
@@ -2301,6 +2354,13 @@ function StoryReader({
               ? uiLabel(data, "preview_punctuation", readingMode, "句读：参考底本整理 · 待复核")
               : uiLabel(data, "reviewed_punctuation", readingMode, "句读：已复核")}
           </p>
+          <FeedbackButton
+            data={data}
+            storyId={story.id}
+            targetType="story"
+            targetId={story.id}
+            targetTextSnapshot={readingValue(story.reading.main_text, readingMode, story.text)}
+          />
         </div>
 
         <section className="story-panel" aria-label="故事正文">
@@ -2326,7 +2386,7 @@ function StoryReader({
           ) : storySketchFailed ? (
             <p className="nl0-sketch-unavailable">Story Sketch 暂时不可用。</p>
           ) : storySketch ? (
-            <StorySketchView value={storySketch} readingMode={readingMode} />
+            <StorySketchView value={storySketch} data={data} readingMode={readingMode} />
           ) : (
             <p className="nl0-sketch-unavailable">本则暂无已审阅 Story Sketch。</p>
           )
@@ -2334,7 +2394,7 @@ function StoryReader({
           <SceneCard story={story} data={data} readingMode={readingMode} onFocus={onFocus} />
         )}
 
-        <StoryHistoricalDepth storyId={story.id} readingMode={readingMode} onFocus={onFocus} />
+        <StoryHistoricalDepth storyId={story.id} data={data} readingMode={readingMode} onFocus={onFocus} />
 
         <section className="annotation-hook" aria-label="进一步读">
           <p className="section-label">进一步读</p>
@@ -2684,6 +2744,8 @@ function ReadingPage({
           />
         )}
       </div>
+
+      <FeedbackReviewPanel storyId={story.id} />
 
       <footer className="site-footer">
         <span>static-first · {data.generated_from}</span>
