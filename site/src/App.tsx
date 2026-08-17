@@ -26,12 +26,14 @@ import {
   focusedEraFromExploration,
   focusedEraNodeFromExploration,
   publishedStoryIds,
+  randomPublishedStoryIdForPerson,
   relationContextStoryId,
   type PersonMentionRoute,
   type PersonRelationRoute,
   type RelationPerspective,
   type ExplorationNode,
 } from "./relationExplorer";
+import { loadUX2Index, type PersonIndexRecord, type StoryIndexRecord } from "./indexData";
 import { normalizeReaderText } from "./readerDisplay";
 import {
   loadHistoricalEvidence,
@@ -74,6 +76,13 @@ function initialReadingMode(): ReadingMode {
   if (typeof window === "undefined") return "simplified";
   const stored = window.localStorage.getItem(READING_MODE_STORAGE_KEY);
   return stored === "original" ? "original" : "simplified";
+}
+
+function isIndexLocation(): boolean {
+  if (typeof window === "undefined") return false;
+  const base = import.meta.env.BASE_URL.replace(/\/+$/u, "");
+  const path = window.location.pathname.replace(/\/+$/u, "");
+  return path === `${base}/index`;
 }
 
 function readingValue(pair: ReadingPair | undefined, mode: ReadingMode, fallback: string): string {
@@ -785,24 +794,20 @@ function InlineReadingSegments({
           );
         }
         if (segment.type === "identity_mention") {
-          const candidateNames = segment.candidate_names
-            .map((candidate) => readingValue(candidate, readingMode, ""))
-            .filter(Boolean);
           const resolvedName = segment.canonical_name
             ? readingValue(segment.canonical_name, readingMode, "")
             : "";
           if (segment.resolution_status === "candidate_for_review") {
             return (
-              <details className="inline-identity-review" key={`${segment.mention_id}-${index}`}>
-                <summary aria-label={`${text}，人物尚待确认`}>{text}</summary>
-                <span className="inline-identity-review-body" role="note">
-                  <span className="inline-identity-review-heading">人物尚待确认</span>
-                  {candidateNames.length > 0 && (
-                    <span>可能是：{candidateNames.join("、")}</span>
-                  )}
-                  <span>当前证据不足以唯一判断。</span>
-                </span>
-              </details>
+              <span
+                className="inline-identity-candidate"
+                key={`${segment.mention_id}-${index}`}
+                data-mention-id={segment.mention_id}
+                aria-label={`${text}，人物尚待确认`}
+                title="人物尚待确认；候选与依据保留在资料层"
+              >
+                {text}
+              </span>
             );
           }
           return (
@@ -2397,6 +2402,171 @@ function StoryReader({
   );
 }
 
+function UX2IndexPage({
+  readingMode,
+  onPersonSelect,
+  onStorySelect,
+}: {
+  readingMode: ReadingMode;
+  onPersonSelect: (personId: string) => void;
+  onStorySelect: (storyId: string) => void;
+}) {
+  const [index, setIndex] = useState<{ people: PersonIndexRecord[]; stories: StoryIndexRecord[] } | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [failed, setFailed] = useState(false);
+  const [tab, setTab] = useState<"people" | "stories">("people");
+  const [query, setQuery] = useState("");
+
+  useEffect(() => {
+    let active = true;
+    void loadUX2Index()
+      .then((projection) => {
+        if (!active) return;
+        setIndex({ people: projection.people.records, stories: projection.stories.records });
+        setLoading(false);
+      })
+      .catch(() => {
+        if (!active) return;
+        setLoading(false);
+        setFailed(true);
+      });
+    return () => {
+      active = false;
+    };
+  }, []);
+
+  const normalizedQuery = query.trim().toLocaleLowerCase();
+  const people = (index?.people ?? []).filter((person) => {
+    if (!normalizedQuery) return true;
+    return [person.name.original, person.name.simplified, person.surname.original, person.surname.simplified]
+      .some((value) => value.toLocaleLowerCase().includes(normalizedQuery));
+  });
+  const peopleBySurname = new Map<string, PersonIndexRecord[]>();
+  for (const person of people) {
+    const key = readingMode === "original" ? person.surname.original : person.surname.simplified;
+    const rows = peopleBySurname.get(key) ?? [];
+    rows.push(person);
+    peopleBySurname.set(key, rows);
+  }
+  const storiesByCategory = new Map<string, StoryIndexRecord[]>();
+  for (const story of index?.stories ?? []) {
+    const rows = storiesByCategory.get(story.category_id) ?? [];
+    rows.push(story);
+    storiesByCategory.set(story.category_id, rows);
+  }
+
+  return (
+    <main className="page-shell ux2-index-page">
+      <header className="site-header">
+        <div>
+          <p className="brand">世说Sketch</p>
+          <h1 className="ux2-index-title">人物与篇目</h1>
+          <p className="tagline">从索引回到故事，也从故事认识人物</p>
+        </div>
+        <a className="ux2-index-back" href={import.meta.env.BASE_URL}>返回阅读</a>
+      </header>
+      <nav className="ux2-index-tabs" aria-label="索引分类" role="tablist">
+        <button
+          type="button"
+          role="tab"
+          aria-selected={tab === "people"}
+          className={tab === "people" ? "ux2-index-tab active" : "ux2-index-tab"}
+          onClick={() => setTab("people")}
+        >
+          人物
+        </button>
+        <button
+          type="button"
+          role="tab"
+          aria-selected={tab === "stories"}
+          className={tab === "stories" ? "ux2-index-tab active" : "ux2-index-tab"}
+          onClick={() => setTab("stories")}
+        >
+          篇目
+        </button>
+      </nav>
+
+      {loading && <p className="ux2-index-status">索引载入中…</p>}
+      {failed && <p className="ux2-index-status">索引暂时不可用。</p>}
+      {!loading && !failed && index && tab === "people" && (
+        <section className="ux2-index-section" aria-labelledby="ux2-people-heading">
+          <div className="ux2-index-section-heading">
+            <div>
+              <p className="section-label">人物</p>
+              <h2 id="ux2-people-heading">《世说》人物</h2>
+            </div>
+            <label className="ux2-index-search">
+              <span>查找人物</span>
+              <input
+                type="search"
+                value={query}
+                onChange={(event) => setQuery(event.target.value)}
+                placeholder="姓名"
+                aria-label="查找人物"
+              />
+            </label>
+          </div>
+          <div className="ux2-index-groups">
+            {[...peopleBySurname.entries()].map(([surname, rows]) => (
+              <section className="ux2-index-group" key={surname}>
+                <h3>{surname}</h3>
+                <div className="ux2-index-person-list">
+                  {rows.map((person) => (
+                    <button
+                      type="button"
+                      className="ux2-index-person"
+                      key={person.person_id}
+                      data-person-id={person.person_id}
+                      onClick={() => onPersonSelect(person.person_id)}
+                    >
+                      {readingMode === "original" ? person.name.original : person.name.simplified}
+                    </button>
+                  ))}
+                </div>
+              </section>
+            ))}
+          </div>
+          {people.length === 0 && <p className="ux2-index-status">没有符合条件的人物。</p>}
+        </section>
+      )}
+      {!loading && !failed && index && tab === "stories" && (
+        <section className="ux2-index-section" aria-labelledby="ux2-stories-heading">
+          <div className="ux2-index-section-heading">
+            <div>
+              <p className="section-label">篇目</p>
+              <h2 id="ux2-stories-heading">《世说新语》门类</h2>
+            </div>
+            <span className="ux2-index-count">{index.stories.length} 则</span>
+          </div>
+          <div className="ux2-index-groups">
+            {[...storiesByCategory.entries()].map(([categoryId, rows]) => {
+              const label = readingMode === "original" ? rows[0].category.original : rows[0].category.simplified;
+              return (
+                <section className="ux2-index-group" key={categoryId}>
+                  <h3>{label}</h3>
+                  <div className="ux2-index-story-list">
+                    {rows.map((story) => (
+                      <button
+                        type="button"
+                        className="ux2-index-story"
+                        key={story.story_id}
+                        data-story-id={story.story_id}
+                        onClick={() => onStorySelect(story.story_id)}
+                      >
+                        {readingMode === "original" ? story.reference.original : story.reference.simplified}
+                      </button>
+                    ))}
+                  </div>
+                </section>
+              );
+            })}
+          </div>
+        </section>
+      )}
+    </main>
+  );
+}
+
 function ReadingPage({
   story,
   data,
@@ -2459,6 +2629,9 @@ function ReadingPage({
           <button type="button" className="random-person-button" onClick={onRandomPerson}>
             {uiLabel(data, "random_person", readingMode, "随便认识一个人")}
           </button>
+          <a className="index-link" href={`${import.meta.env.BASE_URL}index`} target="_blank" rel="noreferrer">
+            人物 / 篇目
+          </a>
           <span className="prototype-badge">SC1 Preview</span>
         </div>
       </header>
@@ -2528,6 +2701,7 @@ function App() {
   const [stack, setStack] = useState<ExplorationNode[]>([]);
   const [personPanelOpen, setPersonPanelOpen] = useState(false);
   const [eraPanelOpen, setEraPanelOpen] = useState(false);
+  const [indexPage, setIndexPage] = useState(isIndexLocation);
   const initialized = useRef(false);
 
   useEffect(() => {
@@ -2538,7 +2712,7 @@ function App() {
       const storyId = initialStoryId(loaded);
       setData(loaded);
       setStack([{ kind: "story", id: storyId }]);
-      writeStoryAddress(storyId);
+      if (!isIndexLocation()) writeStoryAddress(storyId);
     } catch (reason: unknown) {
       setError(reason instanceof Error ? reason.message : String(reason));
     }
@@ -2597,6 +2771,26 @@ function App() {
     if (visibleStoryId) writeStoryAddress(visibleStoryId);
   }
 
+  function leaveIndex(): void {
+    setIndexPage(false);
+    if (typeof window !== "undefined" && isIndexLocation()) {
+      window.history.replaceState(null, "", import.meta.env.BASE_URL);
+    }
+  }
+
+  function focusPersonFromIndex(personId: string): void {
+    if (!data?.people.some((person) => person.id === personId)) return;
+    const storyId = randomPublishedStoryIdForPerson(data, personId, () => 0)
+      ?? currentStoryFromExploration(stack, publishedStoryIdSet)
+      ?? publishedStoryIds(data)[0];
+    if (!storyId) return;
+    leaveIndex();
+    setStack([{ kind: "story", id: storyId }, { kind: "person", id: personId }]);
+    setPersonPanelOpen(true);
+    setEraPanelOpen(false);
+    writeStoryAddress(storyId);
+  }
+
   function focusEra(eraCardId: string) {
     if (!data?.era_cards.some((card) => card.era_card_id === eraCardId)) return;
     setStack((current) => appendExploration(current, { kind: "era", id: eraCardId }));
@@ -2611,6 +2805,12 @@ function App() {
     setPersonPanelOpen(false);
     setEraPanelOpen(false);
     writeStoryAddress(storyId);
+  }
+
+  function selectStoryFromIndex(storyId: string): void {
+    if (!data?.stories.some((storyCandidate) => storyCandidate.id === storyId)) return;
+    leaveIndex();
+    selectStory(storyId);
   }
 
   function goBack() {
@@ -2672,7 +2872,24 @@ function App() {
       </main>
     );
   }
-  if (!data || !story) {
+  if (!data) {
+    return (
+      <main className="page-shell loading-state">
+        <p className="brand">世说Sketch</p>
+        <p>正在读取故事……</p>
+      </main>
+    );
+  }
+  if (indexPage) {
+    return (
+      <UX2IndexPage
+        readingMode={readingMode}
+        onPersonSelect={focusPersonFromIndex}
+        onStorySelect={selectStoryFromIndex}
+      />
+    );
+  }
+  if (!story) {
     return (
       <main className="page-shell loading-state">
         <p className="brand">世说Sketch</p>

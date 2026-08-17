@@ -127,11 +127,10 @@ class SC112UnifiedTests(unittest.TestCase):
         )
         self.assertEqual(mention["type"], "identity_mention")
         self.assertEqual(mention["display"]["simplified"], "谢太傅")
-        self.assertIn("inline-identity-review", self.app)
-        self.assertRegex(
-            (ROOT / "site/src/styles.css").read_text(encoding="utf-8"),
-            r"\.inline-identity-review > summary \{[^}]*text-decoration-line: underline;",
-        )
+        self.assertIn("inline-identity-candidate", self.app)
+        styles = (ROOT / "site/src/styles.css").read_text(encoding="utf-8")
+        self.assertRegex(styles, r"\.inline-identity-candidate \{[^}]*display: inline;")
+        self.assertNotIn("inline-identity-review-body", self.app)
 
     def test_contextual_office_title_stays_contextual(self) -> None:
         story = self.story("06-yaliang-019")

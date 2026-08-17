@@ -87,10 +87,7 @@ class W41ReaderConsistencyTests(unittest.TestCase):
         self.assertNotIn("inline-block", flowing_styles)
         self.assertNotIn("inline-flex", flowing_styles)
 
-        self.assertRegex(
-            self.styles,
-            r"\.inline-identity-review > summary \{[^}]*text-decoration-line: underline;",
-        )
+        self.assertIn(".inline-identity-candidate", self.styles)
 
     def test_entity_surfaces_keep_normal_cjk_wrapping_contract(self) -> None:
         flowing_blocks = []
@@ -98,7 +95,7 @@ class W41ReaderConsistencyTests(unittest.TestCase):
             ".inline-person-mention",
             ".inline-ruler-mention",
             ".inline-identity-mention",
-            ".inline-identity-review > summary",
+            ".inline-identity-candidate",
         ):
             start = self.styles.index(selector)
             end = self.styles.find("}", start)
@@ -110,7 +107,8 @@ class W41ReaderConsistencyTests(unittest.TestCase):
             self.assertNotIn("word-break: keep-all", block)
             self.assertNotIn("display: inline-block", block)
             self.assertNotIn("display: inline-flex", block)
-            self.assertIn("text-decoration-line: underline", block)
+            if selector != ".inline-identity-candidate":
+                self.assertIn("text-decoration-line: underline", block)
 
         regression_surfaces = [
             ("02-yanyu-071", "谢太傅"),
