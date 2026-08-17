@@ -1,0 +1,290 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://shishuo.example/schema/nl1-narrative-corpus-v0.json",
+  "title": "ShishuoSketch NL1 Story-centered narrative corpus v0",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "stage",
+    "schema_version",
+    "document_kind",
+    "scope",
+    "records",
+    "counts",
+    "source_hashes",
+    "policy"
+  ],
+  "properties": {
+    "schema": {"enum": ["narrative-context", "narrative-selection"]},
+    "stage": {"const": "NL1"},
+    "schema_version": {"const": "v0"},
+    "document_kind": {"enum": ["narrative_context", "narrative_selection"]},
+    "scope": {"$ref": "#/$defs/scope"},
+    "records": {
+      "type": "array",
+      "minItems": 30,
+      "items": {
+        "oneOf": [
+          {"$ref": "#/$defs/context_record"},
+          {"$ref": "#/$defs/selection_record"}
+        ]
+      }
+    },
+    "counts": {
+      "type": "object",
+      "additionalProperties": {
+        "anyOf": [
+          {"type": "integer", "minimum": 0},
+          {"type": "object"}
+        ]
+      }
+    },
+    "source_hashes": {
+      "type": "object",
+      "additionalProperties": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+    },
+    "policy": {"$ref": "#/$defs/policy"}
+  },
+  "$defs": {
+    "pair": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["original", "simplified"],
+      "properties": {
+        "original": {"type": "string", "minLength": 1},
+        "simplified": {"type": "string", "minLength": 1}
+      }
+    },
+    "scope": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["story_count", "selected_story_ids", "selection_policy"],
+      "properties": {
+        "story_count": {"type": "integer", "minimum": 30},
+        "selected_story_ids": {
+          "type": "array",
+          "minItems": 30,
+          "uniqueItems": true,
+          "items": {"type": "string", "minLength": 1}
+        },
+        "selection_policy": {"type": "string", "minLength": 1}
+      }
+    },
+    "policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "canonical_data_write_back",
+        "canonical_fact_materialization",
+        "llm",
+        "rag",
+        "automatic_narrative_materialization",
+        "generated_fields_may_abstain",
+        "uncertainty_preserved"
+      ],
+      "properties": {
+        "canonical_data_write_back": {"const": false},
+        "canonical_fact_materialization": {"const": false},
+        "llm": {"const": false},
+        "rag": {"const": false},
+        "automatic_narrative_materialization": {"const": false},
+        "generated_fields_may_abstain": {"const": true},
+        "uncertainty_preserved": {"const": true}
+      }
+    },
+    "evidence_ids": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {"type": "string", "minLength": 1}
+    },
+    "reviewed_item": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["item_id", "text", "assertion_status", "evidence_ids", "review_status"],
+      "properties": {
+        "item_id": {"type": "string", "minLength": 1},
+        "text": {"$ref": "#/$defs/pair"},
+        "assertion_status": {"enum": ["attested", "reported", "inferred", "disputed", "unknown"]},
+        "evidence_ids": {"$ref": "#/$defs/evidence_ids"},
+        "review_status": {"const": "reviewed"},
+        "kind": {"type": "string", "minLength": 1}
+      }
+    },
+    "participant": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["participant_id", "person_id", "surface", "role", "presence_status", "evidence_ids", "review_status"],
+      "properties": {
+        "participant_id": {"type": "string", "minLength": 1},
+        "person_id": {"type": ["string", "null"]},
+        "surface": {"$ref": "#/$defs/pair"},
+        "role": {"enum": ["speaker", "actor", "present", "referenced", "reported_subject", "comparand", "annotation_only", "unknown"]},
+        "presence_status": {"enum": ["in_scene", "reported", "referenced", "contextual", "unknown"]},
+        "evidence_ids": {"$ref": "#/$defs/evidence_ids"},
+        "review_note": {"type": "string", "minLength": 1},
+        "review_status": {"const": "reviewed"}
+      }
+    },
+    "current_scene": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["scene_id", "summary", "source_text", "episode_ids", "participant_states", "evidence_ids", "review_status"],
+      "properties": {
+        "scene_id": {"type": "string", "minLength": 1},
+        "summary": {"$ref": "#/$defs/pair"},
+        "source_text": {"$ref": "#/$defs/pair"},
+        "episode_ids": {"type": "array", "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+        "participant_states": {"type": "array", "items": {"$ref": "#/$defs/participant"}},
+        "evidence_ids": {"$ref": "#/$defs/evidence_ids"},
+        "review_status": {"const": "reviewed"}
+      }
+    },
+    "person_state": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["state_id", "person_id", "surface", "state_kind", "value", "modality", "evidence_ids", "review_status"],
+      "properties": {
+        "state_id": {"type": "string", "minLength": 1},
+        "person_id": {"type": ["string", "null"]},
+        "surface": {"$ref": "#/$defs/pair"},
+        "state_kind": {"type": "string", "minLength": 1},
+        "value": {"$ref": "#/$defs/pair"},
+        "modality": {"enum": ["none", "reported", "probable", "possible", "disputed", "unknown"]},
+        "evidence_ids": {"$ref": "#/$defs/evidence_ids"},
+        "review_status": {"const": "reviewed"}
+      }
+    },
+    "relationship": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["relationship_id", "relation_scope", "subject_person_id", "object_person_id", "description", "evidence_ids", "review_status"],
+      "properties": {
+        "relationship_id": {"type": "string", "minLength": 1},
+        "relation_scope": {"enum": ["explicit_story_relation", "story_context", "reviewed_fact_context", "not_inferred", "uncertain"]},
+        "subject_person_id": {"type": ["string", "null"]},
+        "object_person_id": {"type": ["string", "null"]},
+        "description": {"$ref": "#/$defs/pair"},
+        "evidence_ids": {"$ref": "#/$defs/evidence_ids"},
+        "review_status": {"const": "reviewed"}
+      }
+    },
+    "source_span": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["evidence_id", "source_layer", "evidence_type", "span_role", "locator", "review_status"],
+      "properties": {
+        "evidence_id": {"type": "string", "minLength": 1},
+        "source_layer": {"type": "string", "minLength": 1},
+        "evidence_type": {"type": "string", "minLength": 1},
+        "span_role": {"type": "string", "minLength": 1},
+        "locator": {"type": "object", "additionalProperties": true},
+        "source_review_status": {"type": "string", "minLength": 1},
+        "review_status": {"const": "reviewed"}
+      }
+    },
+    "uncertainty": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["uncertainty_id", "dimension", "description", "evidence_ids", "status", "review_status"],
+      "properties": {
+        "uncertainty_id": {"type": "string", "minLength": 1},
+        "dimension": {"type": "string", "minLength": 1},
+        "description": {"$ref": "#/$defs/pair"},
+        "evidence_ids": {"$ref": "#/$defs/evidence_ids"},
+        "status": {"enum": ["unresolved", "partially_resolved", "abstained"]},
+        "review_status": {"const": "reviewed"}
+      }
+    },
+    "grounded_inputs": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["hr0_situation_id", "hr0_1_case_ids", "nl0_sketch_id", "historical_fact_ids", "source_scope"],
+      "properties": {
+        "hr0_situation_id": {"type": ["string", "null"]},
+        "hr0_1_case_ids": {"type": "array", "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+        "nl0_sketch_id": {"type": ["string", "null"]},
+        "historical_fact_ids": {"type": "array", "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+        "s1_assertion_ids": {"type": "array", "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+        "s1_citation_ids": {"type": "array", "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+        "source_scope": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "minLength": 1}}
+      }
+    },
+    "context_record": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["context_id", "story_id", "selection_categories", "review_status", "review_note", "current_scene", "historical_stakes", "person_states", "relationship_context", "prior_events", "later_events", "key_source_spans", "uncertainties", "grounded_inputs"],
+      "properties": {
+        "context_id": {"type": "string", "minLength": 1},
+        "story_id": {"type": "string", "minLength": 1},
+        "selection_categories": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+        "review_status": {"const": "reviewed"},
+        "review_note": {"type": "string", "minLength": 1},
+        "current_scene": {"$ref": "#/$defs/current_scene"},
+        "historical_stakes": {"type": "array", "items": {"$ref": "#/$defs/reviewed_item"}},
+        "person_states": {"type": "array", "items": {"$ref": "#/$defs/person_state"}},
+        "relationship_context": {"type": "array", "items": {"$ref": "#/$defs/relationship"}},
+        "prior_events": {"type": "array", "items": {"$ref": "#/$defs/reviewed_item"}},
+        "later_events": {"type": "array", "items": {"$ref": "#/$defs/reviewed_item"}},
+        "key_source_spans": {"type": "array", "items": {"$ref": "#/$defs/source_span"}},
+        "uncertainties": {"type": "array", "items": {"$ref": "#/$defs/uncertainty"}},
+        "grounded_inputs": {"$ref": "#/$defs/grounded_inputs"}
+      }
+    },
+    "candidate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["candidate_id", "role", "candidate_status", "text", "supporting_evidence", "selection_reason"],
+      "properties": {
+        "candidate_id": {"type": "string", "minLength": 1},
+        "role": {"enum": ["background", "in_scene", "off_scene", "person_glimpse", "resonance"]},
+        "candidate_status": {"enum": ["selected", "rejected", "abstained"]},
+        "text": {"anyOf": [{"$ref": "#/$defs/pair"}, {"type": "null"}]},
+        "supporting_evidence": {"$ref": "#/$defs/evidence_ids"},
+        "selection_reason": {"type": "string", "minLength": 1},
+        "rejection_reason": {"type": "string", "minLength": 1},
+        "source_scope": {"type": "string", "minLength": 1}
+      }
+    },
+    "role_selection": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["role", "role_label", "selection_state", "selected_candidate_ids", "rejected_candidate_ids", "abstained_candidate_ids", "candidates"],
+      "properties": {
+        "role": {"enum": ["background", "in_scene", "off_scene", "person_glimpse", "resonance"]},
+        "role_label": {"type": "string", "minLength": 1},
+        "selection_state": {"enum": ["selected", "abstained"]},
+        "selected_candidate_ids": {"type": "array", "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+        "rejected_candidate_ids": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+        "abstained_candidate_ids": {"type": "array", "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+        "candidates": {"type": "array", "minItems": 2, "items": {"$ref": "#/$defs/candidate"}}
+      }
+    },
+    "selection_record": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["selection_id", "story_id", "context_id", "selection_categories", "review_status", "review_note", "roles"],
+      "properties": {
+        "selection_id": {"type": "string", "minLength": 1},
+        "story_id": {"type": "string", "minLength": 1},
+        "context_id": {"type": "string", "minLength": 1},
+        "selection_categories": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+        "review_status": {"const": "reviewed_gold"},
+        "review_note": {"type": "string", "minLength": 1},
+        "roles": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["background", "in_scene", "off_scene", "person_glimpse", "resonance"],
+          "properties": {
+            "background": {"$ref": "#/$defs/role_selection"},
+            "in_scene": {"$ref": "#/$defs/role_selection"},
+            "off_scene": {"$ref": "#/$defs/role_selection"},
+            "person_glimpse": {"$ref": "#/$defs/role_selection"},
+            "resonance": {"$ref": "#/$defs/role_selection"}
+          }
+        }
+      }
+    }
+  }
+}

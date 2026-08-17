@@ -1,0 +1,457 @@
+{
+  "schema": "narrative-selection",
+  "stage": "NL1",
+  "schema_version": "v0",
+  "document_kind": "review_spec",
+  "scope": {
+    "story_count": 30,
+    "selected_story_ids": [
+      "01-dexing-014",
+      "01-dexing-016",
+      "01-dexing-025",
+      "02-yanyu-035",
+      "02-yanyu-036",
+      "02-yanyu-069",
+      "02-yanyu-079",
+      "02-yanyu-083",
+      "04-wenxue-036",
+      "04-wenxue-094",
+      "05-fangzheng-012",
+      "05-fangzheng-023",
+      "05-fangzheng-025",
+      "05-fangzheng-028",
+      "05-fangzheng-031",
+      "05-fangzheng-032",
+      "05-fangzheng-055",
+      "06-yaliang-017",
+      "06-yaliang-027",
+      "06-yaliang-029",
+      "07-shijian-005",
+      "08-shangyu-077",
+      "09-pinzao-017",
+      "11-jiewu-005",
+      "17-shangshi-002",
+      "19-xianyuan-026",
+      "20-shujie-005",
+      "25-paidiao-009",
+      "27-jiajue-008",
+      "35-huoni-003"
+    ],
+    "selection_policy": "NL1 reviewed pilot: all 19 HR0/HR0.1 Stories plus 11 existing evidence-rich contrast Stories; no ranking, corpus expansion, or model selection."
+  },
+  "policy": {
+    "canonical_data_write_back": false,
+    "canonical_fact_materialization": false,
+    "llm": false,
+    "rag": false,
+    "automatic_narrative_materialization": false,
+    "generated_fields_may_abstain": true,
+    "uncertainty_preserved": true
+  },
+  "records": [
+    {
+      "story_id": "01-dexing-014",
+      "selection_categories": ["family_context", "strong_scene", "simple_control"],
+      "review_note": "以王祥护树与跪请死为行动场面；后母的身份关系来自正文，但不将孝行扩写为超出本则的道德结论。",
+      "current_scene": {"original": "王祥抱树而泣，知后母憾之，因跪前请死，后母于是感悟。", "simplified": "王祥抱树而泣，知后母憾之，因跪前请死，后母于是感悟。"},
+      "scene_participants": [
+        {"person_id": "person-036", "surface": "王祥", "role": "actor", "presence_status": "in_scene", "evidence_ids": ["evidence-sc1-01-dexing-014-main"], "review_note": "正文直接写王祥的行动。"},
+        {"person_id": null, "surface": "朱夫人", "role": "actor", "presence_status": "in_scene", "evidence_ids": ["evidence-sc1-01-dexing-014-main"], "review_note": "后母身份由正文给出，但当前人物索引没有安全 canonical Person 端点。"}
+      ],
+      "role_selections": {
+        "in_scene": {"text": "王祥护树并跪前请死，后母由此感悟。", "evidence_ids": ["evidence-sc1-01-dexing-014-main"], "reason": "保留连续行动与关系转折，不加入外部评价。"},
+        "person_glimpse": {"text": "本则以抱树、跪请死两个动作写王祥的应对。", "evidence_ids": ["evidence-sc1-01-dexing-014-main"], "reason": "这是可直接回到正文的动作一瞥。"}
+      },
+      "abstentions": {"background": "没有必要补入家世或年代背景。", "off_scene": "没有必要把注中传记人物带入当前场景。", "resonance": "本则没有可安全外接的后续史事。"}
+    },
+    {
+      "story_id": "01-dexing-016",
+      "selection_categories": ["retrospective_reported", "relationship_context", "simple_control"],
+      "review_note": "这是王戎对与嵇康共居经历的回忆性转述；嵇康是被述及对象，不据回忆把他重新标为当前在场。",
+      "current_scene": {"original": "王戎说与嵇康居二十年，未尝见其喜愠之色。", "simplified": "王戎说与嵇康居二十年，未尝见其喜愠之色。"},
+      "scene_participants": [
+        {"person_id": "person-020", "surface": "王戎", "role": "speaker", "presence_status": "in_scene", "evidence_ids": ["evidence-sc1-01-dexing-016-main"], "review_note": "正文以王戎云标示回忆发言。"},
+        {"person_id": "person-046", "surface": "嵇康", "role": "reported_subject", "presence_status": "reported", "evidence_ids": ["evidence-sc1-01-dexing-016-main"], "review_note": "嵇康是回忆中的对象，不是当前对话现场的行动者。"}
+      ],
+      "prior_events": [{"text": "王戎称与嵇康同居二十年。", "evidence_ids": ["evidence-sc1-01-dexing-016-main"], "reason": "这是正文明确给出的回忆关系。"}],
+      "role_selections": {
+        "off_scene": {"text": "嵇康作为王戎回忆中的同居者被述及，不写成当前现场人物。", "evidence_ids": ["evidence-sc1-01-dexing-016-main"], "reason": "区分被回忆者与当前叙述位置。"},
+        "person_glimpse": {"text": "王戎以“未尝见其喜愠之色”留下对嵇康的单一观察。", "evidence_ids": ["evidence-sc1-01-dexing-016-main"], "reason": "保留观察句，不扩写为完整性格画像。"}
+      },
+      "abstentions": {"background": "二十年同居已是本则提供的背景，不再补入竹林群体叙事。", "in_scene": "本则核心是回忆性报告，不把被述及的嵇康改写为当前在场。", "resonance": "没有在本则证据中直接给出的后续命运可供余韵。"}
+    },
+    {
+      "story_id": "01-dexing-025",
+      "selection_categories": ["multi_episode", "later_fate", "strong_scene"],
+      "review_note": "前段让炙与后段渡江遇危构成同一则的前后照应；余韵只复述受炙人的报恩，不外推为普遍道德寓言。",
+      "current_scene": {"original": "顾荣在宴席上让炙，后来渡江遇危，才知道护助自己的人正是受炙人。", "simplified": "顾荣在宴席上让炙，后来渡江遇危，才知道护助自己的人正是受炙人。"},
+      "scene_participants": [
+        {"person_id": "person-049", "surface": "顧榮", "role": "actor", "presence_status": "in_scene", "evidence_ids": ["evidence-sc1-01-dexing-025-main"], "review_note": "正文连续写顾荣前后两段行动。"},
+        {"person_id": null, "surface": "行炙人", "role": "referenced", "presence_status": "in_scene", "evidence_ids": ["evidence-sc1-01-dexing-025-main"], "review_note": "役人的身份与后续护助由正文相连，但没有 canonical Person 身份。"}
+      ],
+      "later_events": [{"text": "渡江后顾荣每逢危急都有一人相助，后来知道是当年的受炙人。", "evidence_ids": ["evidence-sc1-01-dexing-025-main"], "reason": "后段是正文明确写出的后续事件。"}],
+      "role_selections": {
+        "in_scene": {"text": "顾荣让出自己的炙，后段在渡江危急中认出受炙人的护助。", "evidence_ids": ["evidence-sc1-01-dexing-025-main"], "reason": "保留两段动作及其识认转折。"},
+        "person_glimpse": {"text": "顾荣说“岂有终日执之而不知其味者乎”，把让炙写成当场的体察。", "evidence_ids": ["evidence-sc1-01-dexing-025-main"], "reason": "使用原文发言作为人物一瞥。"},
+        "resonance": {"text": "后来危急时受炙人相助，使最初的一餐之惠回到故事后段。", "evidence_ids": ["evidence-sc1-01-dexing-025-main"], "reason": "只采用正文的前后照应，不增加泛化评语。"}
+      },
+      "abstentions": {"background": "不补入顾荣家世或永嘉乱事的外部解释。", "off_scene": "受炙人的身份未解析，不为其创建人物履历。"}
+    },
+    {
+      "story_id": "02-yanyu-035",
+      "selection_categories": ["liu_dependent_interpretation", "simple_single_episode"],
+      "review_note": "保留刘琨与温嶠的交涉和温嶠的应答；太真异称可作为身份背景，但不为本则强补年代。",
+      "role_selections": {
+        "in_scene": {"text": "刘琨向温峤提出河北、江南的分工，温峤回应并受命。", "evidence_ids": ["evidence-sc1-02-yanyu-035-main"], "reason": "正文明确给出双方发言与行动。"},
+        "person_glimpse": {"text": "温峤以“不敏”自谦，却承接刘琨所托。", "evidence_ids": ["evidence-sc1-02-yanyu-035-main"], "reason": "保留一句发言中的姿态，不写成稳定人格判断。"}
+      },
+      "abstentions": {"background": "本则没有足以安全结构化的年代或政治全景。", "off_scene": "注中人物与引书不进入当前交涉场面。", "resonance": "没有本则直接给出的后续事件。"}
+    },
+    {
+      "story_id": "02-yanyu-036",
+      "selection_categories": ["multi_episode", "presence_reference", "temporal_ambiguity"],
+      "review_note": "过江、见王丞相、陈情与相泣按正文顺序保留；刘琨作为使者关系中的被述及人物，不改成现场参与者。",
+      "role_selections": {
+        "in_scene": {"text": "温峤过江后见王丞相，陈述江左局势，二人相对而泣。", "evidence_ids": ["evidence-sc1-02-yanyu-036-main"], "reason": "保留正文的连续 episode 与情绪转折。"},
+        "background": {"text": "江左初建、纲纪未举，是温峤陈情所处的本则背景。", "evidence_ids": ["evidence-sc1-02-yanyu-036-main"], "reason": "只取正文直接说明的局势底色。"},
+        "off_scene": {"text": "刘琨以使者关系被提及，但不写成温峤过江现场的在场人物。", "evidence_ids": ["evidence-sc1-02-yanyu-036-main"], "reason": "回应 HR0 的 presence/reference 区分。"},
+        "person_glimpse": {"text": "温峤言与泗俱，王丞相亦与之对泣，显出陈情的重量。", "evidence_ids": ["evidence-sc1-02-yanyu-036-main"], "reason": "采用正文动作与语言，不补入心理解释。"}
+      },
+      "abstentions": {"resonance": "管夷吾是正文类比，不把它扩为后来历史结论。"}
+    },
+    {
+      "story_id": "02-yanyu-069",
+      "selection_categories": ["identity_ambiguity", "comparative_evaluation", "temporal_ambiguity"],
+      "review_note": "住宿与交谈是场景核心；玄度端点仍遵守 HR0.1 的局部不确定性，不将比较语句扩为人物总评。",
+      "role_selections": {
+        "in_scene": {"text": "刘真长与许玄度住宿交谈，谈到居处、吉凶与东山。", "evidence_ids": ["evidence-sc1-02-yanyu-069-main"], "reason": "正文直接写出住宿和对话。"},
+        "person_glimpse": {"text": "刘真长以“吉凶由人”回应许玄度对居处的感叹。", "evidence_ids": ["evidence-sc1-02-yanyu-069-main"], "reason": "保留一句回应，不把它提升为普遍思想标签。"}
+      },
+      "abstentions": {"background": "没有必要补入东山的完整历史背景。", "off_scene": "玄度身份的局部歧义不适合再增加场外人物。", "resonance": "没有直接后续事件。"}
+    },
+    {
+      "story_id": "02-yanyu-079",
+      "selection_categories": ["comparative_evaluation", "identity_ambiguity", "temporal_ambiguity"],
+      "review_note": "这是转述与比较语境，不制造实际军事行动；文度、康伯的称谓端点保持局部状态。",
+      "role_selections": {
+        "off_scene": {"text": "文度、康伯作为被比较的人物出现在转述中，并非当前行动现场。", "evidence_ids": ["evidence-sc1-02-yanyu-079-main"], "reason": "保留 reported/comparand 语义。"},
+        "person_glimpse": null
+      },
+      "abstentions": {"background": "不补入庾氏或谢氏的长期政治背景。", "in_scene": "正文是转述性比较，不标注一个未被明确给出的现场。", "person_glimpse": "比喻属于比较语气，尚不足以单独承担人物一瞥。", "resonance": "无安全的后续史事。"}
+    },
+    {
+      "story_id": "02-yanyu-083",
+      "selection_categories": ["office_context", "strong_scene", "temporal_ambiguity"],
+      "review_note": "以送别与叹咏为当前场面，安南司马只作正文官职语境；谢安被提及不等于在濑乡现场。",
+      "role_selections": {
+        "in_scene": {"text": "袁彦伯任安南司马，众人送至濑乡，将别时叹说江山辽落。", "evidence_ids": ["evidence-sc1-02-yanyu-083-main"], "reason": "保留送别、将别、叹咏的顺序。"},
+        "background": {"text": "“安南司马”是袁彦伯在本则中的官职背景。", "evidence_ids": ["evidence-sc1-02-yanyu-083-main"], "reason": "直接使用正文官职，不推导任期。"},
+        "off_scene": {"text": "谢安只以职事关系被提到，不写作濑乡送别现场人物。", "evidence_ids": ["evidence-sc1-02-yanyu-083-main"], "reason": "遵守 HR0 的场外引用边界。"},
+        "person_glimpse": {"text": "将别时一句“江山辽落”，是袁彦伯对眼前山川的短促感受。", "evidence_ids": ["evidence-sc1-02-yanyu-083-main"], "reason": "保留原句的观察位置，不做时代抒情扩写。"}
+      },
+      "abstentions": {"resonance": "没有后续史事可安全接入。"}
+    },
+    {
+      "story_id": "04-wenxue-036",
+      "selection_categories": ["strong_scene", "liu_dependent_interpretation", "temporal_ambiguity"],
+      "review_note": "王逸少初至会稽、孙兴公引见支道林、论庄子构成场面；不以玄学共同体概念替代正文。",
+      "role_selections": {
+        "in_scene": {"text": "支道林在王逸少初至会稽时与之论庄子，王由轻视转为披襟留连。", "evidence_ids": ["evidence-sc1-04-wenxue-036-main"], "reason": "保留会面与态度转折。"},
+        "background": {"text": "“初至会稽”提供故事的相对位置，但不提供绝对年代。", "evidence_ids": ["evidence-sc1-04-wenxue-036-main"], "reason": "使用有限的阶段信息。"},
+        "person_glimpse": {"text": "支道林以数千言论《庄子·逍遥游》，使王逸少留连不能已。", "evidence_ids": ["evidence-sc1-04-wenxue-036-main"], "reason": "用一场论说的行动写人物一瞥。"}
+      },
+      "abstentions": {"off_scene": "刘注中的其他名士不进入当前会面。", "resonance": "不把玄学评论外推为时代判断。"}
+    },
+    {
+      "story_id": "04-wenxue-094",
+      "selection_categories": ["retrospective_reported", "ambiguous_title", "strong_scene"],
+      "review_note": "袁彦伯作传后见谢公的短场面保留“谢公”局部解析；不把狡獪的语境变成人物性格事实。",
+      "role_selections": {
+        "in_scene": {"text": "袁彦伯作《名士传》成后见谢公，谢公笑说江北事只是狡獪。", "evidence_ids": ["evidence-sc1-04-wenxue-094-main"], "reason": "完整保留著书后会见这一动作链。"},
+        "person_glimpse": {"text": "谢公以笑语回应《名士传》的写法，袁彦伯遂以所闻著书。", "evidence_ids": ["evidence-sc1-04-wenxue-094-main"], "reason": "使用正文中的笑语和著书动作，不解释称号。"}
+      },
+      "abstentions": {"background": "不补入《名士传》的完整名士谱系。", "off_scene": "注中列举的名士不进入当前见面。", "resonance": "没有直接后续史事。"}
+    },
+    {
+      "story_id": "05-fangzheng-012",
+      "selection_categories": ["strong_scene", "relationship_context", "office_context"],
+      "review_note": "祖饯席上杨济离席、和峤追而复席是场面动作；杨济的身份表面保留为未解析，不从席面反推关系。",
+      "current_scene": {"original": "杜预赴荆州，杨济因不满离席，和峤追到大夏门把他抱回车中。", "simplified": "杜预赴荆州，杨济因不满离席，和峤追到大夏门把他抱回车中。"},
+      "scene_participants": [
+        {"person_id": "person-039", "surface": "杜预", "role": "actor", "presence_status": "in_scene", "evidence_ids": ["evidence-sc1-05-fangzheng-012-main"], "review_note": "正文以赴荆州和祖饯交代场面。"},
+        {"person_id": "person-035", "surface": "和长舆", "role": "actor", "presence_status": "in_scene", "evidence_ids": ["evidence-sc1-05-fangzheng-012-main"], "review_note": "和峤的字面与行动在正文中相连。"},
+        {"person_id": null, "surface": "杨右卫", "role": "referenced", "presence_status": "reported", "evidence_ids": ["evidence-sc1-05-fangzheng-012-main"], "review_note": "杨济的 surface 未在当前 canonical 人物映射中安全落定。"}
+      ],
+      "role_selections": {
+        "in_scene": {"text": "杨济离席后，和峤到大夏门盘马，把他抱入车中，席面恢复如初。", "evidence_ids": ["evidence-sc1-05-fangzheng-012-main"], "reason": "场面由离席、追赶、复席三个动作构成。"},
+        "person_glimpse": {"text": "和峤用抱入车中的动作恢复席面秩序。", "evidence_ids": ["evidence-sc1-05-fangzheng-012-main"], "reason": "只呈现可观察行动，不加长期关系解释。"}
+      },
+      "abstentions": {"background": "不补入荆州任职的完整履历。", "off_scene": "杨济身份尚未安全解析，不另造场外人物链。", "resonance": "无直接后续史事。"}
+    },
+    {
+      "story_id": "05-fangzheng-023",
+      "selection_categories": ["event_context", "political_context", "temporal_ambiguity"],
+      "review_note": "继承人讨论与王导裂诏的即时场面为核心；明帝局部 ruler 解析依赖本则证据，不扩展全局称号规则。",
+      "role_selections": {
+        "in_scene": {"text": "周侯与丞相入见，丞相直至御床前，元帝最终裂诏，皇储于是定下。", "evidence_ids": ["evidence-sc1-05-fangzheng-023-main"], "reason": "保留政治场面的动作推进。"},
+        "background": {"text": "元帝欲舍长立少，围绕明帝与简文的继承讨论构成故事底色。", "evidence_ids": ["evidence-sc1-05-fangzheng-023-main"], "reason": "这是正文直接交代的 stakes，不补入后世评价。"},
+        "off_scene": {"text": "二王作为继承讨论的比较对象出现，不把未在对话动作中出现的亲属网络展开。", "evidence_ids": ["evidence-sc1-05-fangzheng-023-main"], "reason": "保持比较对象与现场行动的区分。"},
+        "person_glimpse": {"text": "王导披拨传诏径至御床前，显出本则最关键的行动判断。", "evidence_ids": ["evidence-sc1-05-fangzheng-023-main"], "reason": "从动作而不是抽象品评入手。"}
+      },
+      "abstentions": {"resonance": "不把这一幕扩写成抽象的皇权或门阀寓言。"}
+    },
+    {
+      "story_id": "05-fangzheng-025",
+      "selection_categories": ["family_context", "relationship_context", "strong_scene", "ambiguous_title"],
+      "review_note": "婚姻网络是画外底色，王右军到谢家看新妇是末段入画；不从婚姻叙述自动创建额外 Relation。",
+      "current_scene": {"original": "诸葛恢诸女的婚姻安排层层展开，末段王右军到谢家看新妇。", "simplified": "诸葛恢诸女的婚姻安排层层展开，末段王右军到谢家看新妇。"},
+      "scene_participants": [
+        {"person_id": null, "surface": "王右军", "role": "actor", "presence_status": "in_scene", "evidence_ids": ["evidence-sc1-05-fangzheng-025-main"], "review_note": "末段行动明确，但称号在当前投影中不作为新人物解析。"},
+        {"person_id": "person-010", "surface": "庾亮", "role": "referenced", "presence_status": "referenced", "evidence_ids": ["evidence-sc1-05-fangzheng-025-main"], "review_note": "庾亮位于婚姻背景中。"},
+        {"person_id": "person-017", "surface": "苏峻", "role": "referenced", "presence_status": "referenced", "evidence_ids": ["evidence-sc1-05-fangzheng-025-main"], "review_note": "苏峻作为婚姻背景中的事件人物被提及。"},
+        {"person_id": "person-022", "surface": "邓攸", "role": "referenced", "presence_status": "referenced", "evidence_ids": ["evidence-sc1-05-fangzheng-025-main"], "review_note": "邓攸只在婚姻网络中被提及。"},
+        {"person_id": "person-018", "surface": "谢尚", "role": "referenced", "presence_status": "referenced", "evidence_ids": ["evidence-sc1-05-fangzheng-025-main"], "review_note": "谢尚只在求婚语境中出现。"}
+      ],
+      "relationship_context": [{"description": "正文把庾、羊、江、邓、谢数家的婚姻安排作为诸葛恢判断的背景；本记录不把背景自动升级为新的 canonical Relation。", "evidence_ids": ["evidence-sc1-05-fangzheng-025-main"], "relation_scope": "story_context"}],
+      "role_selections": {
+        "background": {"text": "诸葛恢诸女的婚姻安排和家族往来构成王右军看新妇之前的底色。", "evidence_ids": ["evidence-sc1-05-fangzheng-025-main"], "reason": "不读懂婚姻背景就无法理解末段的遗法与新妇。"},
+        "in_scene": {"text": "王右军到谢家看新妇，看到她仍有诸葛恢的遗法。", "evidence_ids": ["evidence-sc1-05-fangzheng-025-main"], "reason": "末段是唯一明确推进到当前观看动作的场面。"},
+        "off_scene": {"text": "前段庾、羊、江、邓、谢的婚姻关系留在画外背景，不写成同一现场的群像。", "evidence_ids": ["evidence-sc1-05-fangzheng-025-main"], "reason": "保持婚姻网络与末段访问的层次差异。"},
+        "person_glimpse": {"text": "新妇威仪端详、容服光整，王右军由此发出感叹。", "evidence_ids": ["evidence-sc1-05-fangzheng-025-main"], "reason": "保留正文可见的仪态，不给人物增加履历。"}
+      },
+      "abstentions": {"resonance": "不把婚姻网络外推成门阀总体结论。"}
+    },
+    {
+      "story_id": "05-fangzheng-028",
+      "selection_categories": ["political_context", "presence_reference", "simple_control"],
+      "review_note": "何充在众坐中直言的动作是核心；王含是被议论对象，不能由同席或亲属关系推出长期政治关系。",
+      "role_selections": {
+        "in_scene": {"text": "王敦当众称誉王含，何充以所闻不同正色回应，王敦默然。", "evidence_ids": ["evidence-sc1-05-fangzheng-028-main"], "reason": "保留众坐、直言、默然的场面节奏。"},
+        "off_scene": {"text": "王含是王敦替兄长称誉时的被提及人物，不写成当前对谈行动者。", "evidence_ids": ["evidence-sc1-05-fangzheng-028-main"], "reason": "明确 referenced 与 in-scene 的区别。"},
+        "person_glimpse": {"text": "何充正色直言而神意自若，动作与状态都直接见于正文。", "evidence_ids": ["evidence-sc1-05-fangzheng-028-main"], "reason": "不把它扩大成长期政治立场。"}
+      },
+      "abstentions": {"background": "不补入王敦政治生涯的外部概述。", "resonance": "无直接后续史事。"}
+    },
+    {
+      "story_id": "05-fangzheng-031",
+      "selection_categories": ["political_context", "liu_dependent_interpretation", "presence_reference", "retrospective_reported"],
+      "review_note": "正文的称兵批评入画，注释中温太真、刘隗的政治背景画外；不把注释人物变成正文硬参与者。",
+      "role_selections": {
+        "in_scene": {"text": "伯仁在王大将军称兵向朝廷的语境中指出人臣不当如此。", "evidence_ids": ["evidence-sc1-05-fangzheng-031-main"], "reason": "保留正文发言与即时冲突。"},
+        "background": {"text": "刘注补充的政治背景只能作为理解称兵语境的底色，年代保持相对。", "evidence_ids": ["evidence-sc1-05-fangzheng-031-annotation-001"], "reason": "使用注释作为背景而不改写成正文行动。"},
+        "off_scene": {"text": "温太真与刘隗只在注释背景中出现，留在画外。", "evidence_ids": ["evidence-sc1-05-fangzheng-031-annotation-001"], "reason": "回归 HR0 的 annotation_only 处理。"},
+        "person_glimpse": {"text": "伯仁以“人臣安得称兵以向朝廷”截住讨论。", "evidence_ids": ["evidence-sc1-05-fangzheng-031-main"], "reason": "保留关键语句，不生成阵营标签。"}
+      },
+      "abstentions": {"resonance": "不由政治背景推导长期派系或人物命运。"}
+    },
+    {
+      "story_id": "05-fangzheng-032",
+      "selection_categories": ["ambiguous_title", "identity_ambiguity", "liu_dependent_interpretation", "presence_reference"],
+      "review_note": "明帝局部 ruler 解析和温太真完整 surface 沿用既有证据；王敦逼问、温峤应答是当前 scene。",
+      "role_selections": {
+        "in_scene": {"text": "王敦逼问温太真皇太子如何，温峤以“礼侍亲可称为孝”回答。", "evidence_ids": ["evidence-sc1-05-fangzheng-032-main"], "reason": "保持王敦、温峤的实际交涉与明帝的被提及位置。"},
+        "background": {"text": "王敦欲废明帝的意图是本则问答的政治底色。", "evidence_ids": ["evidence-sc1-05-fangzheng-032-main"], "reason": "正文直接说明，不扩成派系判断。"},
+        "off_scene": {"text": "明帝是被讨论的 ruler，不因“明帝”一词写成当前石头船上在场。", "evidence_ids": ["evidence-sc1-05-fangzheng-032-main"], "reason": "保持 referenced 与 speaker/actor 的区分。"},
+        "person_glimpse": {"text": "温峤在威压下仍以礼侍亲回答，成为本则最短的人物一瞥。", "evidence_ids": ["evidence-sc1-05-fangzheng-032-main"], "reason": "事实性地描述发言动作，不增加性格诊断。"}
+      },
+      "abstentions": {"resonance": "不把局部明帝解析外推为全局称号规则或后续史论。"}
+    },
+    {
+      "story_id": "05-fangzheng-055",
+      "selection_categories": ["ambiguous_title", "comparative_evaluation", "identity_ambiguity"],
+      "review_note": "桓公与桓子野的称谓端点保持不确定；谢安石和万石是问答中的被评对象，不生成完整人物评价。",
+      "role_selections": {
+        "in_scene": {"text": "桓公问桓子野为何不谏谢安石对万石的判断，桓公随后作色。", "evidence_ids": ["evidence-sc1-05-fangzheng-055-main"], "reason": "场景由问答和表情转折组成。"},
+        "off_scene": {"text": "谢安石与万石留在问答所谈的被评位置，不写作当前对话行动者。", "evidence_ids": ["evidence-sc1-05-fangzheng-055-main"], "reason": "区分被评对象与发言者。"},
+        "person_glimpse": {"text": "桓子野以“难犯”解释不谏，桓公随即作色反问。", "evidence_ids": ["evidence-sc1-05-fangzheng-055-main"], "reason": "保留两句问答的张力，不替难犯下定义。"}
+      },
+      "abstentions": {"background": "称谓端点未完全解决，不补官职或年代背景。", "resonance": "无直接后续史事。"}
+    },
+    {
+      "story_id": "06-yaliang-017",
+      "selection_categories": ["liu_dependent_interpretation", "presence_reference", "retrospective_reported", "temporal_ambiguity"],
+      "review_note": "幼年观察、温太真惊试、刘注的苏峻时后续分层保留；不为幼年场景补精确日期。",
+      "role_selections": {
+        "in_scene": {"text": "温太真隐幔惊试庾家幼子，孩子神色恬然并徐跪回答。", "evidence_ids": ["evidence-sc1-06-yaliang-017-main"], "reason": "保留观察与应答动作。"},
+        "off_scene": {"text": "苏峻时的遇害只在刘注后续背景中出现，不作为幼年场景的在场人物。", "evidence_ids": ["evidence-sc1-06-yaliang-017-annotation-002"], "reason": "保持后续报道与现场参与的区分。"},
+        "person_glimpse": {"text": "幼子受到惊试仍神色恬然、徐跪而答，是本则的动作一瞥。", "evidence_ids": ["evidence-sc1-06-yaliang-017-main"], "reason": "只使用正文可观察行为。"},
+        "resonance": {"text": "刘注把遇害置于苏峻时，给幼年场面添上一层后来命运的阴影。", "evidence_ids": ["evidence-sc1-06-yaliang-017-annotation-002"], "reason": "保留报道语气与相对时间，不制造精确年代。"}
+      },
+      "abstentions": {"background": "不补庾会完整生平或苏峻事件全景。"}
+    },
+    {
+      "story_id": "06-yaliang-027",
+      "selection_categories": ["multi_episode", "political_context", "temporal_ambiguity"],
+      "review_note": "夜议与次晨召见是两个相邻 episode；不将“入幕宾”写成新的社会关系事实。",
+      "role_selections": {
+        "in_scene": {"text": "桓宣武与郗超夜议，次晨召谢安、王坦之示牒，谢安含笑说郗生是入幕宾。", "evidence_ids": ["evidence-sc1-06-yaliang-027-main"], "reason": "保留夜议到次晨的顺序。"},
+        "person_glimpse": {"text": "谢安无言、直擲还牒，最后以含笑一句收束场面。", "evidence_ids": ["evidence-sc1-06-yaliang-027-main"], "reason": "以动作和原话作为一瞥。"}
+      },
+      "abstentions": {"background": "不补入朝臣名单或政治阵营解释。", "off_scene": "所有可用人物都服务于正文两个 episode，不增加画外人物。", "resonance": "无直接后续史事。"}
+    },
+    {
+      "story_id": "06-yaliang-029",
+      "selection_categories": ["event_context", "political_context", "presence_reference"],
+      "review_note": "桓温设馔欲诛、谢安应对与简文帝晏驾后的注释背景分开；王坦之仍是正文提及端点。",
+      "role_selections": {
+        "in_scene": {"text": "桓温伏甲设馔延朝士，谢安与王坦之入席，新亭相见而神意不变。", "evidence_ids": ["evidence-sc1-06-yaliang-029-main"], "reason": "保留设伏与相见的即时场面。"},
+        "background": {"text": "简文帝晏驾后是刘注给出的相对政治背景，不写成具体年份。", "evidence_ids": ["evidence-sc1-06-yaliang-029-annotation-002"], "reason": "使用相对锚点并保留不确定度。"},
+        "off_scene": {"text": "王坦之在正文中被提及但当前人物端点未完全解析，留在场景关系的未决边缘。", "evidence_ids": ["evidence-sc1-06-yaliang-029-main"], "reason": "不为缺失身份补人。"},
+        "person_glimpse": {"text": "谢安面对设伏仍神意不变，是正文直接留下的状态。", "evidence_ids": ["evidence-sc1-06-yaliang-029-main"], "reason": "不把状态扩成历史重要性判断。"}
+      },
+      "abstentions": {"resonance": "不由设伏场景推出政治阵营或长期结局。"}
+    },
+    {
+      "story_id": "07-shijian-005",
+      "selection_categories": ["life_stage", "comparative_evaluation", "strong_scene", "simple_control"],
+      "review_note": "少年王夷甫入见与羊祜的判语并置；判语保留为当场评价，不把它当作已实现的后世事实。",
+      "current_scene": {"original": "少年王夷甫入见羊祜、山涛，以才辩令二人惊异，羊祜留下判语。", "simplified": "少年王夷甫入见羊祜、山涛，以才辩令二人惊异，羊祜留下判语。"},
+      "scene_participants": [
+        {"person_id": null, "surface": "王夷甫", "role": "actor", "presence_status": "in_scene", "evidence_ids": ["evidence-sc1-07-shijian-005-main"], "review_note": "少年身份与行为在正文明确，canonical Person 端点仍不在当前索引中。"},
+        {"person_id": "person-038", "surface": "羊祜", "role": "speaker", "presence_status": "in_scene", "evidence_ids": ["evidence-sc1-07-shijian-005-main"], "review_note": "正文直接写羊祜的判断。"},
+        {"person_id": "person-043", "surface": "山涛", "role": "speaker", "presence_status": "in_scene", "evidence_ids": ["evidence-sc1-07-shijian-005-main"], "review_note": "正文直接写山涛的反应。"}
+      ],
+      "role_selections": {
+        "background": {"text": "“总角”只提供王夷甫的少年阶段，不补精确年龄。", "evidence_ids": ["evidence-sc1-07-shijian-005-main"], "reason": "阶段信息足以帮助进入场景，避免时间过度精确。"},
+        "in_scene": {"text": "少年王夷甫入见羊祜、山涛，二人先惊其才辩，后留下不同判语。", "evidence_ids": ["evidence-sc1-07-shijian-005-main"], "reason": "保留一次拜见与当场反应。"},
+        "person_glimpse": {"text": "王夷甫叙致快而有理，成为羊祜、山涛评价他的直接依据。", "evidence_ids": ["evidence-sc1-07-shijian-005-main"], "reason": "从正文写出的言说方式入手。"}
+      },
+      "abstentions": {"off_scene": "父亲王乂的职任不是当前拜见场面中的叙事行动。", "resonance": "不把“乱天下者”当作已验证的历史结论。"}
+    },
+    {
+      "story_id": "08-shangyu-077",
+      "selection_categories": ["ambiguous_title", "comparative_evaluation", "identity_ambiguity"],
+      "review_note": "王右军称谓保留局部身份不确定，安石是比较对象；六七年等注释数字不复制为本则日期。",
+      "role_selections": {
+        "in_scene": {"text": "王右军与刘尹谈到谢安若立东山之志，天下当共同推重。", "evidence_ids": ["evidence-sc1-08-shangyu-077-main"], "reason": "保留谈论条件与评价对象，不扩展称号。"},
+        "off_scene": {"text": "安石作为谢安的称字/比较对象被谈到，不写作本则现场的第三位行动者。", "evidence_ids": ["evidence-sc1-08-shangyu-077-main"], "reason": "保持被评对象位置。"},
+        "person_glimpse": null
+      },
+      "abstentions": {"background": "注释中的年数不作为本则时代底色。", "person_glimpse": "“东山志立”是条件语境，不足以单独形成可靠人物一瞥。", "resonance": "不把推重语境写成历史重要性结论。"}
+    },
+    {
+      "story_id": "09-pinzao-017",
+      "selection_categories": ["ambiguous_title", "comparative_evaluation", "temporal_ambiguity"],
+      "review_note": "明帝的 ruler 解析限于本则；谢鲲的回答是自评与比较，不转换为全局人物排名。",
+      "role_selections": {
+        "in_scene": {"text": "明帝问谢鲲与庾亮相比如何，谢鲲分别回答丘壑与朝堂礼法的长处。", "evidence_ids": ["evidence-sc1-09-pinzao-017-main"], "reason": "保留问答的比较结构。"},
+        "off_scene": {"text": "庾亮作为谢鲲回答中的比较对象出现，不写成当前问答的另一位发言者。", "evidence_ids": ["evidence-sc1-09-pinzao-017-main"], "reason": "区分 comparand 与 speaker。"},
+        "person_glimpse": {"text": "谢鲲以丘壑与端委庙堂分说自己和庾亮的长处。", "evidence_ids": ["evidence-sc1-09-pinzao-017-main"], "reason": "保留原文的自我定位，不给出排序。"}
+      },
+      "abstentions": {"background": "不补明帝在位年份或谢庾生平。", "resonance": "无直接后续史事。"}
+    },
+    {
+      "story_id": "11-jiewu-005",
+      "selection_categories": ["political_context", "strong_scene", "presence_reference"],
+      "review_note": "大桁危局、明帝震怒、温峤求酒炙、王导徒跣谢罪都属于当前场面；不由即时位置推长期关系。",
+      "current_scene": {"original": "王敦引军逼近大桁，明帝震怒，温峤与王导先后应对。", "simplified": "王敦引军逼近大桁，明帝震怒，温峤与王导先后应对。"},
+      "scene_participants": [
+        {"person_id": "person-011", "surface": "王敦", "role": "actor", "presence_status": "in_scene", "evidence_ids": ["evidence-sc1-11-jiewu-005-main"], "review_note": "正文以引军交代他的行动位置。"},
+        {"person_id": "person-013", "surface": "温嶠", "role": "actor", "presence_status": "in_scene", "evidence_ids": ["evidence-sc1-11-jiewu-005-main"], "review_note": "温峤应召入场并行动。"},
+        {"person_id": "person-003", "surface": "王導", "role": "actor", "presence_status": "in_scene", "evidence_ids": ["evidence-sc1-11-jiewu-005-main"], "review_note": "王导徒跣下地谢罪是正文动作。"}
+      ],
+      "role_selections": {
+        "background": {"text": "王敦引军逼近大桁，使中堂应对处于即时危局。", "evidence_ids": ["evidence-sc1-11-jiewu-005-main"], "reason": "这是理解众人反应所需的场面底色。"},
+        "in_scene": {"text": "温峤先求酒炙，王导徒跣谢罪，明帝因此释然。", "evidence_ids": ["evidence-sc1-11-jiewu-005-main"], "reason": "保留本则最具体的应对动作。"},
+        "person_glimpse": {"text": "王导徒跣下地谢罪，使王机悟的名言在场面中落地。", "evidence_ids": ["evidence-sc1-11-jiewu-005-main"], "reason": "用可观察动作，不补政治性格。"}
+      },
+      "abstentions": {"off_scene": "不增加未在正文行动的朝廷人物。", "resonance": "不把危局扩写为政治史总论。"}
+    },
+    {
+      "story_id": "17-shangshi-002",
+      "selection_categories": ["retrospective_reported", "later_fate", "strong_scene"],
+      "review_note": "王濬冲经过酒垆的当下与竹林旧游、嵇康阮籍后续命运分层；不把回忆人物当作现场在场者。",
+      "current_scene": {"original": "王濬冲经过黄公酒垆，回忆与嵇康、阮籍在此酣饮的旧游。", "simplified": "王濬冲经过黄公酒垆，回忆与嵇康、阮籍在此酣饮的旧游。"},
+      "scene_participants": [
+        {"person_id": null, "surface": "王濬沖", "role": "actor", "presence_status": "in_scene", "evidence_ids": ["evidence-sc1-17-shangshi-002-main"], "review_note": "当前投影未将王濬冲称字安全映射为 canonical Person。"},
+        {"person_id": "person-045", "surface": "阮嗣宗", "role": "reported_subject", "presence_status": "reported", "evidence_ids": ["evidence-sc1-17-shangshi-002-main"], "review_note": "阮籍是旧游回忆中的人物。"},
+        {"person_id": null, "surface": "嵇叔夜", "role": "reported_subject", "presence_status": "reported", "evidence_ids": ["evidence-sc1-17-shangshi-002-main"], "review_note": "嵇康以称字出现于旧游回忆。"}
+      ],
+      "prior_events": [{"text": "王濬冲曾与嵇叔夜、阮嗣宗在酒垆酣饮，参与竹林游。", "evidence_ids": ["evidence-sc1-17-shangshi-002-main"], "reason": "正文明确的旧游回忆。"}],
+      "later_events": [{"text": "嵇生夭、阮公亡后，王濬冲再看酒垆，觉得近处已邈若山河。", "evidence_ids": ["evidence-sc1-17-shangshi-002-main"], "reason": "正文明确写出的后续命运与回望。"}],
+      "role_selections": {
+        "background": {"text": "竹林旧游和嵇康、阮籍后来夭亡，是王濬冲回望酒垆的背景。", "evidence_ids": ["evidence-sc1-17-shangshi-002-main"], "reason": "没有这层前后关系就无法理解“邈若山河”。"},
+        "in_scene": {"text": "王濬冲经过酒垆，对后车客说起旧游。", "evidence_ids": ["evidence-sc1-17-shangshi-002-main"], "reason": "区分当下经过与回忆中的人物。"},
+        "off_scene": {"text": "嵇康与阮籍留在旧游和后续命运的画外，不写成今日酒垆在场者。", "evidence_ids": ["evidence-sc1-17-shangshi-002-main"], "reason": "保持 retrospective 叙述边界。"},
+        "person_glimpse": {"text": "王濬冲以“今日视此虽近，邈若山河”收束自己的回望。", "evidence_ids": ["evidence-sc1-17-shangshi-002-main"], "reason": "保留原文句式作为人物一瞥。"},
+        "resonance": {"text": "旧游人物的夭亡，使同一酒垆在王濬冲眼中近而不可即。", "evidence_ids": ["evidence-sc1-17-shangshi-002-main"], "reason": "只把正文已经写出的前后关系压缩为余韵。"}
+      },
+      "abstentions": {}
+    },
+    {
+      "story_id": "19-xianyuan-026",
+      "selection_categories": ["family_context", "identity_ambiguity", "presence_reference", "temporal_ambiguity"],
+      "review_note": "婚姻家庭场面与逸少身份来自正文；太傅局部解析沿用已有证据，不把家族网络外推。",
+      "role_selections": {
+        "background": {"text": "谢夫人归王氏、对王凝之不满，是太傅安慰她时的家庭底色。", "evidence_ids": ["evidence-sc1-19-xianyuan-026-main"], "reason": "只使用正文直接给出的婚姻关系。"},
+        "in_scene": {"text": "谢夫人与王凝之在家庭场面中交涉，太傅以逸少之子等语安慰她。", "evidence_ids": ["evidence-sc1-19-xianyuan-026-main"], "reason": "保留家庭场景中的发言与关系。"},
+        "off_scene": {"text": "逸少作为被提及的父亲身份留在画外，不写成当前家庭对话的行动者。", "evidence_ids": ["evidence-sc1-19-xianyuan-026-main"], "reason": "区分被引述的身份与现场人物。"},
+        "person_glimpse": {"text": "太傅用“王郎是逸少之子”等话安慰谢夫人。", "evidence_ids": ["evidence-sc1-19-xianyuan-026-main"], "reason": "从安慰动作入手，不扩写婚姻评价。"}
+      },
+      "abstentions": {"resonance": "无直接后续史事。"}
+    },
+    {
+      "story_id": "20-shujie-005",
+      "selection_categories": ["later_fate", "event_context", "strong_scene"],
+      "review_note": "哭吊、呼字、随后大将军作乱构成短促的前后链；不把“如其所言”扩成超自然预言事实。",
+      "current_scene": {"original": "郭璞哭吊陈述，呼其字嗣祖并说焉知非福，随后大将军作乱。", "simplified": "郭璞哭吊陈述，呼其字嗣祖并说焉知非福，随后大将军作乱。"},
+      "scene_participants": [
+        {"person_id": "person-050", "surface": "郭璞", "role": "actor", "presence_status": "in_scene", "evidence_ids": ["evidence-sc1-20-shujie-005-main"], "review_note": "正文直接写郭璞哭吊和发言。"},
+        {"person_id": null, "surface": "陈述", "role": "reported_subject", "presence_status": "reported", "evidence_ids": ["evidence-sc1-20-shujie-005-main"], "review_note": "陈述为被吊者，当前索引没有安全 Person 端点。"}
+      ],
+      "later_events": [{"text": "郭璞哭吊后不久，大将军作乱，正文说如其所言。", "evidence_ids": ["evidence-sc1-20-shujie-005-main"], "reason": "后续事件直接写在同一则中。"}],
+      "role_selections": {
+        "background": {"text": "陈述曾为大将军掾，是哭吊场景中唯一明确的职事背景。", "evidence_ids": ["evidence-sc1-20-shujie-005-main"], "reason": "只保留正文职任，不补具体大将军身份。"},
+        "in_scene": {"text": "郭璞前往哭吊陈述，呼其字嗣祖并说“焉知非福”。", "evidence_ids": ["evidence-sc1-20-shujie-005-main"], "reason": "保留哭吊与发言的场面。"},
+        "person_glimpse": {"text": "郭璞以“焉知非福”回应死亡场面。", "evidence_ids": ["evidence-sc1-20-shujie-005-main"], "reason": "原句足以承担一瞥，不补性格判断。"},
+        "resonance": {"text": "不久大将军作乱，回应了这场哭吊中的“焉知非福”。", "evidence_ids": ["evidence-sc1-20-shujie-005-main"], "reason": "把同一则的后续连接保留为余韵。"}
+      },
+      "abstentions": {"off_scene": "不补入大将军或陈述的完整政治网络。"}
+    },
+    {
+      "story_id": "25-paidiao-009",
+      "selection_categories": ["simple_single_episode", "strong_scene", "simple_control"],
+      "review_note": "荀鸣鹤与陆士龙初会互对是低背景控制样本；不需要补入两人的完整家世或后续。",
+      "current_scene": {"original": "荀鸣鹤与陆士龙初会，张华促成二人互相试对，最后抚掌大笑。", "simplified": "荀鸣鹤与陆士龙初会，张华促成二人互相试对，最后抚掌大笑。"},
+      "scene_participants": [
+        {"person_id": "person-040", "surface": "张茂先", "role": "actor", "presence_status": "in_scene", "evidence_ids": ["evidence-sc1-25-paidiao-009-main"], "review_note": "张华促成问答并抚掌大笑。"},
+        {"person_id": null, "surface": "荀鸣鹤", "role": "speaker", "presence_status": "in_scene", "evidence_ids": ["evidence-sc1-25-paidiao-009-main"], "review_note": "称字表面明确，canonical Person 端点未在当前投影中确定。"},
+        {"person_id": null, "surface": "陆士龙", "role": "speaker", "presence_status": "in_scene", "evidence_ids": ["evidence-sc1-25-paidiao-009-main"], "review_note": "称字表面明确，canonical Person 端点未在当前投影中确定。"}
+      ],
+      "role_selections": {
+        "in_scene": {"text": "荀鸣鹤与陆士龙初会，以云龙、山鹿互相试对，张华抚掌大笑。", "evidence_ids": ["evidence-sc1-25-paidiao-009-main"], "reason": "这是完整而低背景的单一场景。"},
+        "person_glimpse": {"text": "“云间陆士龙”与“日下荀鸣鹤”的互答保留了二人的当场锋芒。", "evidence_ids": ["evidence-sc1-25-paidiao-009-main"], "reason": "原文对答优先于解释。"}
+      },
+      "abstentions": {"background": "不补家世、仕宦或时代解释。", "off_scene": "没有需要另列的画外人物。", "resonance": "没有后续史事。"}
+    },
+    {
+      "story_id": "27-jiajue-008",
+      "selection_categories": ["event_context", "multi_episode", "liu_dependent_interpretation", "presence_reference", "temporal_ambiguity"],
+      "review_note": "苏峻之难是宽泛事件锚点，陶公与庾公的行动入画，王导只留在刘注背景；不将政治背景扩成阵营判断。",
+      "role_selections": {
+        "background": {"text": "苏峻之难是陶公上流赴援、庾公权衡行动的宽泛事件底色。", "evidence_ids": ["evidence-sc1-27-jiajue-008-main"], "reason": "正文直接给出事件锚点，不推年份。"},
+        "in_scene": {"text": "陶公提出诛庾公以谢苏峻，庾公在奔窜与会见之间作出选择。", "evidence_ids": ["evidence-sc1-27-jiajue-008-main"], "reason": "保留两个行动段落。"},
+        "off_scene": {"text": "王导只在刘注补充的辅政背景中出现，留在画外。", "evidence_ids": ["evidence-sc1-27-jiajue-008-annotation-001"], "reason": "遵守 annotation_only 语义。"},
+        "person_glimpse": {"text": "陶公和庾公在危局中的选择构成当前人物一瞥。", "evidence_ids": ["evidence-sc1-27-jiajue-008-main"], "reason": "写行动，不写政治阵营。"}
+      },
+      "abstentions": {"resonance": "不从苏峻事件推导未被本则支持的长期政治后果。"}
+    },
+    {
+      "story_id": "35-huoni-003",
+      "selection_categories": ["family_context", "strong_scene", "simple_control"],
+      "review_note": "乳母、孩子与郭氏的家庭动作构成冷峻场面；“酷妒”保留为正文叙述语，不生成心理诊断或后世评价。",
+      "current_scene": {"original": "郭氏因妒杀乳母，孩子不肯另乳而死，故事以郭氏终无子收束。", "simplified": "郭氏因妒杀乳母，孩子不肯另乳而死，故事以郭氏终无子收束。"},
+      "scene_participants": [
+        {"person_id": "person-041", "surface": "贾公闾", "role": "actor", "presence_status": "in_scene", "evidence_ids": ["evidence-sc1-35-huoni-003-main"], "review_note": "贾充回家抱儿的动作由正文写出。"},
+        {"person_id": null, "surface": "郭氏", "role": "actor", "presence_status": "in_scene", "evidence_ids": ["evidence-sc1-35-huoni-003-main"], "review_note": "郭氏是正文行动者，但当前人物索引没有安全端点。"},
+        {"person_id": null, "surface": "乳母", "role": "actor", "presence_status": "in_scene", "evidence_ids": ["evidence-sc1-35-huoni-003-main"], "review_note": "乳母是场景行动者，无 canonical Person。"},
+        {"person_id": null, "surface": "黎民", "role": "actor", "presence_status": "in_scene", "evidence_ids": ["evidence-sc1-35-huoni-003-main"], "review_note": "孩子由正文写为动作后果的承受者，无 canonical Person。"}
+      ],
+      "role_selections": {
+        "in_scene": {"text": "贾充抱儿，郭氏远望而杀乳母，孩子拒乳而死。", "evidence_ids": ["evidence-sc1-35-huoni-003-main"], "reason": "保留连贯的家庭行动和后果。"},
+        "person_glimpse": {"text": "郭氏杀乳母、孩子拒乳，是正文直接给出的行为片段。", "evidence_ids": ["evidence-sc1-35-huoni-003-main"], "reason": "不把行为改写成现代心理诊断。"}
+      },
+      "abstentions": {"background": "不补贾充家族或贾后政治背景。", "off_scene": "乳母与孩子仅按本则场景处理，不创建人物网络。", "resonance": "末句是故事收束，不另加外部余韵。"}
+    }
+  ]
+}
