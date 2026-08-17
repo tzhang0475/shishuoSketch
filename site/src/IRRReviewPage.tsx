@@ -4,6 +4,7 @@ import {
   loadIRRReviewBundle,
   type IRRClaim,
   type IRRComparison,
+  type IRRDeltaItem,
   type IRREvidence,
   type IRRGoldRecord,
   type IRRGoldRound,
@@ -12,6 +13,7 @@ import {
   type IRRModelRecord,
   type IRRReviewBundle,
   type IRRReviewMode,
+  type IRRReadingDelta,
   type IRRScoredRound,
 } from "./irrReview";
 
@@ -217,7 +219,17 @@ function GainVector({
 
 function Delta({ output }: { output: IRRModelOutput }) {
   if (!output.reading_delta) return null;
-  const rows = Object.entries(output.reading_delta).flatMap(([key, items]) => items.map((item) => ({ key, item })));
+  const delta = output.reading_delta;
+  const groups: Array<[keyof IRRReadingDelta, IRRDeltaItem[]]> = [
+    ["historical_changes", delta.historical_changes],
+    ["newly_salient_spans", delta.newly_salient_spans],
+    ["reinterpretations", delta.reinterpretations],
+    ["newly_understood_omissions", delta.newly_understood_omissions],
+    ["new_connections", delta.new_connections],
+    ["resolved_questions", delta.resolved_questions],
+    ["new_questions", delta.new_questions],
+  ];
+  const rows = groups.flatMap(([key, items]) => items.map((item) => ({ key, item })));
   return (
     <section className="irr0-delta">
       <p className="irr0-label">Reading delta</p>
@@ -348,7 +360,6 @@ export function IRRReviewPage() {
     return recordFor(records, selectedStory);
   }, [bundle, mode, selectedStory]);
   const selectedGold = gold?.find((record) => record.story_id === selectedStory);
-  const storyInput = recordFor(bundle.textOnly.records, selectedStory)?.inference_input?.story;
   const currentReviewKey = `${selectedStory}:${mode}`;
 
   function chooseReview(value: ReviewChoice): void {
@@ -358,7 +369,8 @@ export function IRRReviewPage() {
   }
 
   if (loading) return <main className="page-shell loading-state"><p className="brand">世说Sketch</p><p>正在读取 IRR 重读实验……</p></main>;
-  if (error || !bundle) return <main className="page-shell"><section className="error-panel"><p className="brand">世说Sketch</p><h1>IRR 实验载入失败</h1><p>{error ?? "实验数据不可用。"}</p></section></main>;
+  if (error || bundle === null) return <main className="page-shell"><section className="error-panel"><p className="brand">世说Sketch</p><h1>IRR 实验载入失败</h1><p>{error ?? "实验数据不可用。"}</p></section></main>;
+  const storyInput = recordFor(bundle.textOnly.records, selectedStory)?.inference_input?.story;
 
   return (
     <main className="page-shell irr0-review-page">
