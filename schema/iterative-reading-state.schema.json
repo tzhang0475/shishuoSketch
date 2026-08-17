@@ -1,0 +1,363 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://shishuo.example/schema/iterative-reading-state-v0.json",
+  "title": "ShishuoSketch Iterative Reading State v0",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "stage",
+    "schema_version",
+    "scope",
+    "records",
+    "counts",
+    "source_hashes",
+    "policy",
+    "scoring_policy"
+  ],
+  "properties": {
+    "schema": {"const": "iterative-reading-state-gold"},
+    "stage": {"const": "IRR0.1"},
+    "schema_version": {"const": "v0"},
+    "scope": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["story_count", "story_ids", "rounds_per_story"],
+      "properties": {
+        "story_count": {"type": "integer", "minimum": 1},
+        "story_ids": {
+          "type": "array",
+          "items": {"type": "string", "minLength": 1},
+          "uniqueItems": true
+        },
+        "rounds_per_story": {
+          "type": "object",
+          "additionalProperties": {"type": "integer", "minimum": 2}
+        }
+      }
+    },
+    "records": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/record"}
+    },
+    "counts": {
+      "type": "object",
+      "additionalProperties": {"type": "integer", "minimum": 0}
+    },
+    "source_hashes": {
+      "type": "object",
+      "additionalProperties": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+    },
+    "policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "canonical_data_write_back",
+        "canonical_fact_materialization",
+        "llm_calls",
+        "retrieval",
+        "persistent_memory",
+        "frontend_changes",
+        "new_historical_facts",
+        "review_model"
+      ],
+      "properties": {
+        "canonical_data_write_back": {"const": false},
+        "canonical_fact_materialization": {"const": false},
+        "llm_calls": {"const": false},
+        "retrieval": {"const": false},
+        "persistent_memory": {"const": false},
+        "frontend_changes": {"const": false},
+        "new_historical_facts": {"const": false},
+        "review_model": {"const": "reviewed_deterministic_annotation"}
+      }
+    },
+    "scoring_policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["normalization", "mrg_definition"],
+      "properties": {
+        "normalization": {"type": "string", "minLength": 1},
+        "mrg_definition": {"type": "string", "minLength": 1}
+      }
+    }
+  },
+  "$defs": {
+    "evidence_ref": {"type": "string", "minLength": 1},
+    "text_claim": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["text", "evidence_refs"],
+      "properties": {
+        "text": {"type": "string", "minLength": 1},
+        "evidence_refs": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/evidence_ref"},
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "status": {"type": "string", "enum": ["observed", "reported", "contextual", "resolved", "open", "bounded"]}
+      }
+    },
+    "era": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "required": ["label", "precision", "evidence_refs"],
+      "properties": {
+        "label": {"type": "string", "minLength": 1},
+        "precision": {"type": "string", "enum": ["exact", "bounded", "broad_period", "event_bounded", "relative", "unknown"]},
+        "attribution": {"type": ["string", "null"]},
+        "label_status": {"type": "string", "enum": ["text_only", "reviewed_context", "scholarly_context"]},
+        "evidence_refs": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/evidence_ref"},
+          "minItems": 1,
+          "uniqueItems": true
+        }
+      }
+    },
+    "participant_state": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["surface", "state", "scope", "evidence_refs"],
+      "properties": {
+        "person_id": {"type": ["string", "null"]},
+        "surface": {"type": "string", "minLength": 1},
+        "state": {"type": "string", "minLength": 1},
+        "scope": {"type": "string", "enum": ["in_scene", "referenced", "reported", "annotation_only", "uncertain", "contextual"]},
+        "evidence_refs": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/evidence_ref"},
+          "minItems": 1,
+          "uniqueItems": true
+        }
+      }
+    },
+    "relationship_state": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["description", "scope", "evidence_refs"],
+      "properties": {
+        "subject_person_id": {"type": ["string", "null"]},
+        "object_person_id": {"type": ["string", "null"]},
+        "description": {"type": "string", "minLength": 1},
+        "scope": {"type": "string", "enum": ["story_interaction", "family_context", "comparison", "reported_context", "uncertain"]},
+        "evidence_refs": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/evidence_ref"},
+          "minItems": 1,
+          "uniqueItems": true
+        }
+      }
+    },
+    "event_state": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["description", "status", "evidence_refs"],
+      "properties": {
+        "description": {"type": "string", "minLength": 1},
+        "status": {"type": "string", "enum": ["prior", "later", "reported", "contextual", "uncertain"]},
+        "evidence_refs": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/evidence_ref"},
+          "minItems": 1,
+          "uniqueItems": true
+        }
+      }
+    },
+    "uncertainty": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["question", "status", "evidence_refs"],
+      "properties": {
+        "question": {"type": "string", "minLength": 1},
+        "status": {"type": "string", "enum": ["open", "narrowed", "resolved"]},
+        "evidence_refs": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/evidence_ref"},
+          "minItems": 1,
+          "uniqueItems": true
+        }
+      }
+    },
+    "historical_reading": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["era", "participant_states", "relationship_states", "prior_events", "later_events", "scene_pressure", "uncertainties"],
+      "properties": {
+        "era": {"$ref": "#/$defs/era"},
+        "participant_states": {"type": "array", "items": {"$ref": "#/$defs/participant_state"}},
+        "relationship_states": {"type": "array", "items": {"$ref": "#/$defs/relationship_state"}},
+        "prior_events": {"type": "array", "items": {"$ref": "#/$defs/event_state"}},
+        "later_events": {"type": "array", "items": {"$ref": "#/$defs/event_state"}},
+        "scene_pressure": {"type": "array", "items": {"$ref": "#/$defs/text_claim"}},
+        "uncertainties": {"type": "array", "items": {"$ref": "#/$defs/uncertainty"}}
+      }
+    },
+    "salient_span": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["span", "literal_meaning", "contextual_meaning", "depth", "critical", "evidence_refs"],
+      "properties": {
+        "span": {"type": "string", "minLength": 1},
+        "source_span": {"type": "string", "minLength": 1},
+        "surface_simplified": {"type": ["string", "null"]},
+        "reviewed_phrase": {"type": ["string", "null"]},
+        "literal_meaning": {"type": "string", "minLength": 1},
+        "contextual_meaning": {"type": ["string", "null"]},
+        "depth": {"type": "integer", "minimum": 0, "maximum": 4},
+        "critical": {"type": "boolean"},
+        "evidence_refs": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/evidence_ref"},
+          "minItems": 1,
+          "uniqueItems": true
+        }
+      }
+    },
+    "text_reading": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["salient_spans"],
+      "properties": {
+        "salient_spans": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/salient_span"},
+          "minItems": 1
+        }
+      }
+    },
+    "aesthetic_item": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["span", "operations", "omitted_context", "interpretation", "evidence_refs"],
+      "properties": {
+        "span": {"type": "string", "minLength": 1},
+        "operations": {
+          "type": "array",
+          "items": {"type": "string", "enum": ["selection", "compression", "omission", "juxtaposition", "action_substitution", "speaker_exposure", "delayed_revelation"]},
+          "uniqueItems": true
+        },
+        "omitted_context": {"type": "array", "items": {"type": "string"}},
+        "interpretation": {"type": ["string", "null"]},
+        "evidence_refs": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/evidence_ref"},
+          "minItems": 1,
+          "uniqueItems": true
+        }
+      }
+    },
+    "delta_item": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["text", "evidence_refs"],
+      "properties": {
+        "text": {"type": "string", "minLength": 1},
+        "evidence_refs": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/evidence_ref"},
+          "minItems": 1,
+          "uniqueItems": true
+        }
+      }
+    },
+    "reading_delta": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "required": ["historical_changes", "newly_salient_spans", "reinterpretations", "newly_understood_omissions", "new_connections", "resolved_questions", "new_questions"],
+      "properties": {
+        "historical_changes": {"type": "array", "items": {"$ref": "#/$defs/delta_item"}},
+        "newly_salient_spans": {"type": "array", "items": {"$ref": "#/$defs/delta_item"}},
+        "reinterpretations": {"type": "array", "items": {"$ref": "#/$defs/delta_item"}},
+        "newly_understood_omissions": {"type": "array", "items": {"$ref": "#/$defs/delta_item"}},
+        "new_connections": {"type": "array", "items": {"$ref": "#/$defs/delta_item"}},
+        "resolved_questions": {"type": "array", "items": {"$ref": "#/$defs/delta_item"}},
+        "new_questions": {"type": "array", "items": {"$ref": "#/$defs/delta_item"}}
+      }
+    },
+    "evidence_added": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["evidence_ref", "source", "claim_support_summary", "expected_role", "review_status"],
+      "properties": {
+        "evidence_ref": {"$ref": "#/$defs/evidence_ref"},
+        "source": {"type": "string", "minLength": 1},
+        "claim_support_summary": {"type": "string", "minLength": 1},
+        "expected_role": {"type": "string", "enum": ["high_gain", "medium_gain", "hard_negative"]},
+        "source_assertion_ids": {"type": "array", "items": {"type": "string", "minLength": 1}, "uniqueItems": true},
+        "review_status": {"const": "reviewed"}
+      }
+    },
+    "gain_vector": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["G_H", "G_L", "G_A", "G_C", "G_U", "G_D", "MRG"],
+      "properties": {
+        "G_H": {"type": "number", "minimum": 0, "maximum": 1},
+        "G_L": {"type": "number", "minimum": 0, "maximum": 1},
+        "G_A": {"type": "number", "minimum": 0, "maximum": 1},
+        "G_C": {"type": "number", "minimum": 0, "maximum": 1},
+        "G_U": {"type": "number", "minimum": 0, "maximum": 1},
+        "G_D": {"type": "number", "minimum": 0, "maximum": 1},
+        "MRG": {"type": "number"}
+      }
+    },
+    "round": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["round", "evidence_added", "historical_reading", "text_reading", "aesthetic_reading", "reading_delta", "open_questions", "distraction_flags", "gain_vector"],
+      "properties": {
+        "round": {"type": "integer", "minimum": 0},
+        "evidence_added": {"type": "array", "items": {"$ref": "#/$defs/evidence_added"}},
+        "historical_reading": {"$ref": "#/$defs/historical_reading"},
+        "text_reading": {"$ref": "#/$defs/text_reading"},
+        "aesthetic_reading": {"type": "array", "items": {"$ref": "#/$defs/aesthetic_item"}},
+        "reading_delta": {"$ref": "#/$defs/reading_delta"},
+        "open_questions": {"type": "array", "items": {"$ref": "#/$defs/uncertainty"}},
+        "distraction_flags": {"type": "array", "items": {"type": "string"}},
+        "gain_vector": {"$ref": "#/$defs/gain_vector"}
+      }
+    },
+    "evidence_descriptor": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["evidence_ref", "kind", "source_layer", "source_id", "assertion_status", "review_status", "locator"],
+      "properties": {
+        "evidence_ref": {"$ref": "#/$defs/evidence_ref"},
+        "kind": {"type": "string", "enum": ["story_evidence", "s1_assertion"]},
+        "source_layer": {"type": "string", "minLength": 1},
+        "source_id": {"type": "string", "minLength": 1},
+        "assertion_status": {"type": "string", "minLength": 1},
+        "review_status": {"type": "string", "minLength": 1},
+        "quote_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "locator": {"type": "object", "additionalProperties": true}
+      }
+    },
+    "record": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["story_id", "state_id", "review_status", "grounding", "evidence_index", "critical_spans", "rounds"],
+      "properties": {
+        "story_id": {"type": "string", "minLength": 1},
+        "state_id": {"type": "string", "minLength": 1},
+        "review_status": {"const": "reviewed_gold"},
+        "grounding": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["hr0_situation_id", "hr0_1_case_ids", "nl0_story_sketch_id", "nl1_context_id", "nl1_selection_id"],
+          "properties": {
+            "hr0_situation_id": {"type": "string", "minLength": 1},
+            "hr0_1_case_ids": {"type": "array", "items": {"type": "string", "minLength": 1}, "uniqueItems": true},
+            "nl0_story_sketch_id": {"type": "string", "minLength": 1},
+            "nl1_context_id": {"type": "string", "minLength": 1},
+            "nl1_selection_id": {"type": "string", "minLength": 1}
+          }
+        },
+        "evidence_index": {"type": "array", "items": {"$ref": "#/$defs/evidence_descriptor"}, "minItems": 1},
+        "critical_spans": {"type": "array", "items": {"type": "string", "minLength": 1}, "minItems": 1},
+        "rounds": {"type": "array", "items": {"$ref": "#/$defs/round"}, "minItems": 2, "maxItems": 4}
+      }
+    }
+  }
+}
