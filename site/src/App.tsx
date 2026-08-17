@@ -2699,6 +2699,9 @@ function ReadingPage({
           <a className="index-link" href={`${import.meta.env.BASE_URL}index`} target="_blank" rel="noreferrer">
             人物 / 篇目
           </a>
+          <a className="index-link" href={`${import.meta.env.BASE_URL}review/irr0`}>
+            IRR 重读实验
+          </a>
           <span className="prototype-badge">SC1 Preview</span>
         </div>
       </header>
