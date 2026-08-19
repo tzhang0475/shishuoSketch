@@ -1,0 +1,103 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://shishuo.example/schema/model-irr0-4-semantic-ladder-v0.json",
+  "title": "ShishuoSketch IRR0.4 Semantic Ladder Model Output v0",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "span_readings",
+    "historical_situation_delta",
+    "new_questions",
+    "aesthetic_observations"
+  ],
+  "properties": {
+    "span_readings": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/span_reading"}
+    },
+    "historical_situation_delta": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/evidence_claim"}
+    },
+    "new_questions": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/evidence_claim"}
+    },
+    "aesthetic_observations": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/aesthetic_observation"}
+    }
+  },
+  "$defs": {
+    "depth": {"type": "integer", "minimum": 0, "maximum": 4},
+    "evidence_refs": {
+      "type": "array",
+      "items": {"type": "string", "minLength": 1},
+      "uniqueItems": true
+    },
+    "span_reading": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "span",
+        "literal_reading",
+        "current_interpretation",
+        "changed_from_previous",
+        "change_type",
+        "supporting_evidence_ids",
+        "unsupported_inference",
+        "scene_historical_depth",
+        "relational_depth",
+        "retrospective_depth",
+        "aesthetic_depth"
+      ],
+      "properties": {
+        "span": {"type": "string", "minLength": 1},
+        "literal_reading": {"type": "string"},
+        "current_interpretation": {"type": "string"},
+        "changed_from_previous": {"type": "boolean"},
+        "change_type": {"enum": ["historical", "relational", "aesthetic", "none"]},
+        "supporting_evidence_ids": {"$ref": "#/$defs/evidence_refs"},
+        "unsupported_inference": {"type": "boolean"},
+        "scene_historical_depth": {"$ref": "#/$defs/depth"},
+        "relational_depth": {"$ref": "#/$defs/depth"},
+        "retrospective_depth": {"$ref": "#/$defs/depth"},
+        "aesthetic_depth": {"$ref": "#/$defs/depth"}
+      }
+    },
+    "evidence_claim": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["text", "evidence_ids"],
+      "properties": {
+        "text": {"type": "string", "minLength": 1},
+        "evidence_ids": {"$ref": "#/$defs/evidence_refs"}
+      }
+    },
+    "aesthetic_observation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["span", "operations", "observation", "evidence_ids"],
+      "properties": {
+        "span": {"type": "string", "minLength": 1},
+        "operations": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "selection",
+              "compression",
+              "omission",
+              "juxtaposition",
+              "action_substitution",
+              "speaker_exposure",
+              "delayed_revelation"
+            ]
+          },
+          "uniqueItems": true
+        },
+        "observation": {"type": "string", "minLength": 1},
+        "evidence_ids": {"$ref": "#/$defs/evidence_refs"}
+      }
+    }
+  }
+}

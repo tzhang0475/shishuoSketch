@@ -22,6 +22,7 @@ import {
   type IRR03Bundle,
   type IRR03ModelRound,
 } from "./irr03Review";
+import { IRR04SemanticLadder } from "./IRR04SemanticLadder";
 
 const PILOT_STORIES = [
   "27-jiajue-008",
@@ -30,6 +31,7 @@ const PILOT_STORIES = [
   "19-xianyuan-026",
   "05-fangzheng-032",
 ];
+const IRR04_PILOT_STORIES = ["27-jiajue-008", "09-pinzao-017", "06-yaliang-017"];
 const REVIEW_STORAGE_KEY = "shishuoSketch.irr0-2-blind-review";
 const REVIEW_OPTIONS = ["明显深化", "轻微深化", "无明显变化", "变差"] as const;
 type ReviewChoice = typeof REVIEW_OPTIONS[number];
@@ -707,7 +709,7 @@ export function IRRReviewPage() {
   const [gold, setGold] = useState<IRRGoldRecord[] | null>(null);
   const [selectedStory, setSelectedStory] = useState(PILOT_STORIES[0]);
   const [mode, setMode] = useState<IRRReviewMode>("text_only");
-  const [surface, setSurface] = useState<"conditions" | "span_review">("conditions");
+  const [surface, setSurface] = useState<"conditions" | "span_review" | "semantic_ladder">("conditions");
   const [blind, setBlind] = useState(false);
   const [reviews, setReviews] = useState<Record<string, ReviewChoice>>(loadStoredReviews);
   const [spanReviews, setSpanReviews] = useState<Record<string, IRR03LocalReviewRecord>>(loadStoredSpanReviews);
@@ -757,6 +759,7 @@ export function IRRReviewPage() {
   }, [bundle, mode, selectedStory]);
   const selectedGold = gold?.find((record) => record.story_id === selectedStory);
   const currentReviewKey = `${selectedStory}:${mode}`;
+  const storyOptions = surface === "semantic_ladder" ? IRR04_PILOT_STORIES : PILOT_STORIES;
 
   function chooseReview(value: ReviewChoice): void {
     const next = { ...reviews, [currentReviewKey]: value };
@@ -789,11 +792,12 @@ export function IRRReviewPage() {
       <section className="irr0-review-toolbar" aria-label="实验控制">
         <div className="irr0-story-selector">
           <p className="irr0-label">Stories</p>
-          {PILOT_STORIES.map((storyId) => <button type="button" key={storyId} className={selectedStory === storyId ? "active" : ""} onClick={() => setSelectedStory(storyId)}>{storyId}</button>)}
+          {storyOptions.map((storyId) => <button type="button" key={storyId} className={selectedStory === storyId ? "active" : ""} onClick={() => setSelectedStory(storyId)}>{storyId}</button>)}
         </div>
         <div className="irr0-condition-selector" role="tablist" aria-label="审阅视图">
           <button type="button" role="tab" aria-selected={surface === "conditions"} className={surface === "conditions" ? "active" : ""} onClick={() => setSurface("conditions")}>条件比较</button>
           <button type="button" role="tab" aria-selected={surface === "span_review"} className={surface === "span_review" ? "active" : ""} onClick={() => setSurface("span_review")}>Span Review</button>
+          <button type="button" role="tab" aria-selected={surface === "semantic_ladder"} className={surface === "semantic_ladder" ? "active" : ""} onClick={() => { setSurface("semantic_ladder"); if (!IRR04_PILOT_STORIES.includes(selectedStory)) setSelectedStory(IRR04_PILOT_STORIES[0]); }}>Semantic Ladder</button>
         </div>
         {surface === "conditions" && <div className="irr0-condition-selector" role="tablist" aria-label="阅读条件">
           {(["text_only", "all_at_once", "iterative"] as IRRReviewMode[]).map((current) => <button type="button" role="tab" aria-selected={mode === current} key={current} className={mode === current ? "active" : ""} onClick={() => setMode(current)}>{conditionLabel(current)}</button>)}
@@ -803,11 +807,15 @@ export function IRRReviewPage() {
           <button type="button" onClick={() => { setBlind((value) => !value); if (!blind && mode === "gold") setMode("text_only"); }}>Blind review: {blind ? "ON" : "OFF"}</button>
           {surface === "conditions"
             ? <button type="button" onClick={() => downloadReviews(reviews)}>导出本地判断</button>
-            : <button type="button" onClick={() => downloadSpanReviews(spanReviews)}>导出 Span Review</button>}
+            : surface === "span_review"
+              ? <button type="button" onClick={() => downloadSpanReviews(spanReviews)}>导出 Span Review</button>
+              : null}
         </div>
       </section>
 
-      {surface === "span_review" ? (
+      {surface === "semantic_ladder" ? (
+        <IRR04SemanticLadder storyId={selectedStory} blind={blind} />
+      ) : surface === "span_review" ? (
         spanLoading
           ? <section className="irr0-condition-panel"><p className="irr0-muted">Span Review 载入中……</p></section>
           : spanError

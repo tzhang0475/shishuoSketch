@@ -1,0 +1,60 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://shishuo.example/schema/irr0-4-human-review-v0.json",
+  "title": "ShishuoSketch IRR0.4 Human Semantic Ladder Review v0",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "stage", "schema_version", "scope", "records"],
+  "properties": {
+    "schema": {"const": "irr0.4-human-review"},
+    "stage": {"const": "IRR0.4"},
+    "schema_version": {"const": "v0"},
+    "scope": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["story_ids"],
+      "properties": {
+        "story_ids": {
+          "type": "array",
+          "items": {"type": "string", "minLength": 1},
+          "uniqueItems": true
+        }
+      }
+    },
+    "records": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/review_record"}
+    }
+  },
+  "$defs": {
+    "review_record": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "story_id",
+        "branch",
+        "round_label",
+        "condition",
+        "visible_deepening",
+        "historical_depth",
+        "aesthetic_depth",
+        "unsupported_interpretation",
+        "anchoring_detected",
+        "continue_reading"
+      ],
+      "properties": {
+        "story_id": {"type": "string", "minLength": 1},
+        "branch": {"enum": ["main", "negative_control"]},
+        "round_label": {"type": "string", "minLength": 1},
+        "condition": {"enum": ["memory", "fresh"]},
+        "visible_deepening": {"enum": ["clear", "slight", "none", "worse", null]},
+        "historical_depth": {"type": ["integer", "null"], "minimum": 0, "maximum": 4},
+        "aesthetic_depth": {"type": ["integer", "null"], "minimum": 0, "maximum": 4},
+        "unsupported_interpretation": {"enum": ["none", "unsupported", "misleading", null]},
+        "anchoring_detected": {"enum": ["yes", "no", null]},
+        "continue_reading": {"enum": ["yes", "no", null]},
+        "notes": {"type": "string"}
+      }
+    }
+  }
+}

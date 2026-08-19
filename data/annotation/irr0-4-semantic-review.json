@@ -1,0 +1,199 @@
+{
+  "schema": "irr0.4-semantic-ladder-review",
+  "stage": "IRR0.4",
+  "schema_version": "v0",
+  "scope": {
+    "story_ids": [
+      "27-jiajue-008",
+      "09-pinzao-017",
+      "06-yaliang-017"
+    ]
+  },
+  "policy": {
+    "semantic_stages": [
+      "literal",
+      "event_context",
+      "relational_context",
+      "aesthetic_rereading"
+    ],
+    "inference_does_not_see": [
+      "gold_expected_effect",
+      "gold_target_spans",
+      "branch_role",
+      "human_review",
+      "IRR0.1_Gold",
+      "IRR0.3_scores"
+    ],
+    "negative_control": "A related, source-backed addition is presented after R1 without a claimed scene explanation."
+  },
+  "records": [
+    {
+      "story_id": "27-jiajue-008",
+      "critical_spans": [
+        "陶自起止之",
+        "庾乃引咎责躬，深相逊谢"
+      ],
+      "rounds": [
+        {
+          "round": 0,
+          "semantic_stage": "literal",
+          "driving_question": "只从原文动作和语句顺序读这一幕，不借助外部背景。",
+          "evidence_bundle": [],
+          "gold_expected_effect": "先保留拜、止、同坐、引咎、释然的字面动作链。",
+          "gold_target_spans": ["陶自起止之", "庾乃引咎责躬，深相逊谢"]
+        },
+        {
+          "round": 1,
+          "semantic_stage": "event_context",
+          "driving_question": "什么历史事件和既有责任使‘引咎责躬’不只是一般道歉？",
+          "evidence_bundle": [
+            "evidence-sc1-27-jiajue-008-annotation-001",
+            "evidence-sc1-27-jiajue-008-annotation-002",
+            "evidence-sc1-27-jiajue-008-annotation-003"
+          ],
+          "gold_expected_effect": "苏峻之乱、庾亮辅政及当时政治危机使引咎具有具体责任语境。",
+          "gold_target_spans": ["陶自起止之", "庾乃引咎责躬，深相逊谢"]
+        },
+        {
+          "round": 2,
+          "semantic_stage": "relational_context",
+          "driving_question": "为什么庾亮需要陶侃，而陶侃又能这样回应？温峤的中介如何进入动作链？",
+          "evidence_bundle": [
+            "evidence-sc1-27-jiajue-008-annotation-004"
+          ],
+          "gold_expected_effect": "拜、止、同坐、引咎、释然从孤立礼节变成合作与依赖关系中的连续行动。",
+          "gold_target_spans": ["陶自起止之", "庾乃引咎责躬，深相逊谢"]
+        },
+        {
+          "round": 3,
+          "semantic_stage": "aesthetic_rereading",
+          "driving_question": "在已有验证背景上重读原文：叙事保留了哪些动作，又省略了哪些解释？为什么动作顺序比概括更有力？",
+          "evidence_bundle": [],
+          "gold_expected_effect": "不增加普通史实，而是看见叙事以动作选择和压缩保存关系变化。",
+          "gold_target_spans": ["陶自起止之", "庾乃引咎责躬，深相逊谢"]
+        }
+      ],
+      "negative_control": {
+        "base_round": 1,
+        "round_label": "1N",
+        "semantic_stage": "event_context",
+        "driving_question": "这条真实的校勘信息是否实际改变目标动作链？如果没有，请明确说没有。",
+        "evidence_bundle": [
+          "s1-assertion-e961c56cd3ad9321f252"
+        ],
+        "branch_role": "hard_negative",
+        "gold_expected_effect": "字形和复字异文不应迫使目标跨度产生新的历史或审美解释。",
+        "gold_target_spans": ["陶自起止之", "庾乃引咎责躬，深相逊谢"]
+      }
+    },
+    {
+      "story_id": "09-pinzao-017",
+      "critical_spans": ["一丘一壑，自谓过之"],
+      "rounds": [
+        {
+          "round": 0,
+          "semantic_stage": "literal",
+          "driving_question": "只从问答原文读比较对象和字面自评。",
+          "evidence_bundle": [],
+          "gold_expected_effect": "保留‘庾亮不如我’与‘一丘一壑胜过我’的字面并置，不急于解释。",
+          "gold_target_spans": ["一丘一壑，自谓过之"]
+        },
+        {
+          "round": 1,
+          "semantic_stage": "event_context",
+          "driving_question": "谁在比较什么？这一问答处在怎样的东宫和名士评价语境中？",
+          "evidence_bundle": [
+            "evidence-sc1-09-pinzao-017-annotation-002",
+            "evidence-sc1-09-pinzao-017-annotation-004"
+          ],
+          "gold_expected_effect": "自夸不再是脱离场景的泛泛自恋，而是明帝所问、谢鲲与庾亮相方的具体比较。",
+          "gold_target_spans": ["一丘一壑，自谓过之"]
+        },
+        {
+          "round": 2,
+          "semantic_stage": "relational_context",
+          "driving_question": "‘一丘一壑’承接了什么思想和文学语境？为什么‘过之’不是泛说山水优美？",
+          "evidence_bundle": [
+            "s1-assertion-07c6f5dd5159a5892ca0"
+          ],
+          "gold_expected_effect": "短语成为对庾亮庙堂功业的另一种生活方式和自我位置的精确对照。",
+          "gold_target_spans": ["一丘一壑，自谓过之"]
+        },
+        {
+          "round": 3,
+          "semantic_stage": "aesthetic_rereading",
+          "driving_question": "为什么这句话成为叙事中心？原文拒绝解释什么？为什么保留原句比改写成结论更重要？",
+          "evidence_bundle": [],
+          "gold_expected_effect": "在不增加新事实的情况下，认识选择、并置和留白如何构成语句的力量。",
+          "gold_target_spans": ["一丘一壑，自谓过之"]
+        }
+      ],
+      "negative_control": {
+        "base_round": 1,
+        "round_label": "1N",
+        "semantic_stage": "event_context",
+        "driving_question": "这条同时代东宫线索是否改变‘一丘一壑’的思想对照？如果没有，请明确说没有。",
+        "evidence_bundle": [
+          "s1-assertion-c0d39acdd4727f36a166"
+        ],
+        "branch_role": "hard_negative",
+        "gold_expected_effect": "相关时代线索不应被强行转化为当前比较短语的新解释。",
+        "gold_target_spans": ["一丘一壑，自谓过之"]
+      }
+    },
+    {
+      "story_id": "06-yaliang-017",
+      "critical_spans": ["神色恬然"],
+      "rounds": [
+        {
+          "round": 0,
+          "semantic_stage": "literal",
+          "driving_question": "只读童年场景中的动作、神色和问答。",
+          "evidence_bundle": [],
+          "gold_expected_effect": "先把‘神色恬然’作为现场反应理解，不提前带入后来的命运。",
+          "gold_target_spans": ["神色恬然"]
+        },
+        {
+          "round": 1,
+          "semantic_stage": "event_context",
+          "driving_question": "这个孩子是谁、当时大约几岁，现场人物关系如何确定？",
+          "evidence_bundle": [
+            "evidence-sc1-06-yaliang-017-annotation-001"
+          ],
+          "gold_expected_effect": "庾会的身份和年龄使镇定反应落在具体人物身上，但不改变现场的克制。",
+          "gold_target_spans": ["神色恬然"]
+        },
+        {
+          "round": 2,
+          "semantic_stage": "relational_context",
+          "driving_question": "已知这个童年人物后来在苏峻时遇害，重读时哪些是现场理解，哪些是回望产生的余韵？",
+          "evidence_bundle": [
+            "evidence-sc1-06-yaliang-017-annotation-002"
+          ],
+          "gold_expected_effect": "现场历史理解只小幅变化，但童年镇定与短促后命运之间形成可见的回望张力。",
+          "gold_target_spans": ["神色恬然"]
+        },
+        {
+          "round": 3,
+          "semantic_stage": "aesthetic_rereading",
+          "driving_question": "带着后来命运重读童年场景，但不要补写情感或作煽情总结；原文如何让两者并置？",
+          "evidence_bundle": [],
+          "gold_expected_effect": "不把后死改写成童年预兆，只认识叙事的并置、节制与未解释的余韵。",
+          "gold_target_spans": ["神色恬然"]
+        }
+      ],
+      "negative_control": {
+        "base_round": 1,
+        "round_label": "1N",
+        "semantic_stage": "event_context",
+        "driving_question": "阿恭这一小字线索是否改变‘神色恬然’的现场或回望意义？如果没有，请明确说没有。",
+        "evidence_bundle": [
+          "evidence-sc1-06-yaliang-017-annotation-003"
+        ],
+        "branch_role": "hard_negative",
+        "gold_expected_effect": "小字和称谓信息有身份价值，但不应迫使现场动作产生新的解释。",
+        "gold_target_spans": ["神色恬然"]
+      }
+    }
+  ]
+}
