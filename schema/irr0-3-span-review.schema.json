@@ -1,0 +1,115 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://shishuo.example/schema/irr0-3-span-review-v0.json",
+  "title": "ShishuoSketch IRR0.3 Human Span Review v0",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "stage", "schema_version", "scope", "records"],
+  "properties": {
+    "schema": {"const": "irr0.3-span-review"},
+    "stage": {"const": "IRR0.3"},
+    "schema_version": {"const": "v0"},
+    "scope": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["story_ids"],
+      "properties": {
+        "story_ids": {
+          "type": "array",
+          "items": {"type": "string", "minLength": 1},
+          "uniqueItems": true
+        }
+      }
+    },
+    "records": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/review_record"}
+    }
+  },
+  "$defs": {
+    "aesthetic_dimensions": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["salience", "compression", "omission", "selection"],
+      "properties": {
+        "salience": {"type": "integer", "minimum": 0, "maximum": 1},
+        "compression": {"type": "integer", "minimum": 0, "maximum": 1},
+        "omission": {"type": "integer", "minimum": 0, "maximum": 1},
+        "selection": {"type": "integer", "minimum": 0, "maximum": 1}
+      }
+    },
+    "span_review": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "span",
+        "interpretation_depth",
+        "unsupported_interpretation",
+        "aesthetic_dimensions",
+        "evidence_refs"
+      ],
+      "properties": {
+        "span": {"type": "string", "minLength": 1},
+        "before_interpretation": {"type": "string"},
+        "after_interpretation": {"type": "string"},
+        "interpretation_depth": {"type": "integer", "minimum": 0, "maximum": 4},
+        "unsupported_interpretation": {"type": "integer", "minimum": 0, "maximum": 2},
+        "aesthetic_dimensions": {"$ref": "#/$defs/aesthetic_dimensions"},
+        "evidence_refs": {
+          "type": "array",
+          "items": {"type": "string", "minLength": 1},
+          "uniqueItems": true
+        },
+        "notes": {"type": "string"}
+      }
+    },
+    "review_record": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "story_id",
+        "round",
+        "evidence_ids",
+        "selected_spans",
+        "no_effect",
+        "span_reviews",
+        "continue_reading"
+      ],
+      "properties": {
+        "story_id": {"type": "string", "minLength": 1},
+        "round": {"type": "integer", "minimum": 1},
+        "evidence_ids": {
+          "type": "array",
+          "items": {"type": "string", "minLength": 1},
+          "uniqueItems": true
+        },
+        "selected_spans": {
+          "type": "array",
+          "items": {"type": "string", "minLength": 1},
+          "uniqueItems": true
+        },
+        "no_effect": {"type": "boolean"},
+        "custom_span": {"type": "string"},
+        "span_reviews": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/span_review"}
+        },
+        "continue_reading": {
+          "type": ["string", "null"],
+          "enum": ["yes", "no", null]
+        },
+        "stop_reason": {
+          "type": ["string", "null"],
+          "enum": [
+            "unresolved_high_value_question",
+            "more_context_may_change_span",
+            "saturated",
+            "new_evidence_low_value",
+            "unsupported_drift",
+            null
+          ]
+        }
+      }
+    }
+  }
+}

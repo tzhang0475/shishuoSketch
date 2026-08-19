@@ -16,6 +16,12 @@ import {
   type IRRReadingDelta,
   type IRRScoredRound,
 } from "./irrReview";
+import {
+  loadIRR03ReviewBundle,
+  type IRR03AffectedSpan,
+  type IRR03Bundle,
+  type IRR03ModelRound,
+} from "./irr03Review";
 
 const PILOT_STORIES = [
   "27-jiajue-008",
@@ -27,6 +33,43 @@ const PILOT_STORIES = [
 const REVIEW_STORAGE_KEY = "shishuoSketch.irr0-2-blind-review";
 const REVIEW_OPTIONS = ["明显深化", "轻微深化", "无明显变化", "变差"] as const;
 type ReviewChoice = typeof REVIEW_OPTIONS[number];
+
+type SpanContinueChoice = "yes" | "no" | null;
+type SpanStopReason =
+  | "unresolved_high_value_question"
+  | "more_context_may_change_span"
+  | "saturated"
+  | "new_evidence_low_value"
+  | "unsupported_drift"
+  | null;
+
+interface IRR03HumanSpanReview {
+  span: string;
+  before_interpretation: string;
+  after_interpretation: string;
+  interpretation_depth: number;
+  unsupported_interpretation: number;
+  aesthetic_dimensions: {
+    salience: number;
+    compression: number;
+    omission: number;
+    selection: number;
+  };
+  evidence_refs: string[];
+  notes?: string;
+}
+
+interface IRR03LocalReviewRecord {
+  story_id: string;
+  round: number;
+  evidence_ids: string[];
+  selected_spans: string[];
+  no_effect: boolean;
+  custom_span?: string;
+  span_reviews: IRR03HumanSpanReview[];
+  continue_reading: SpanContinueChoice;
+  stop_reason: SpanStopReason;
+}
 
 function recordFor(records: IRRModelRecord[], storyId: string): IRRModelRecord | undefined {
   return records.find((record) => record.story_id === storyId);
@@ -302,10 +345,318 @@ function GoldRounds({ record }: { record: IRRGoldRecord }) {
   );
 }
 
+function spanReviewKey(storyId: string, round: number): string {
+  return storyId + ":R" + String(round);
+}
+
+function emptySpanReview(round: IRR03ModelRound, storyId: string): IRR03LocalReviewRecord {
+  return {
+    story_id: storyId,
+    round: round.round,
+    evidence_ids: round.transition?.evidence_ids ?? [],
+    selected_spans: [],
+    no_effect: false,
+    span_reviews: [],
+    continue_reading: null,
+    stop_reason: null,
+  };
+}
+
+function spanOptions(round: IRR03ModelRound, storyText: string): string[] {
+  const modelSpans = [
+    ...(round.transition?.affected_spans ?? []).map((item) => item.span),
+    ...round.output.text_reading.salient_spans.map((item) => item.span),
+  ];
+  const storyClauses = storyText
+    .split(/[。！？；]/u)
+    .map((item) => item.trim())
+    .filter(Boolean);
+  return [...new Set([...modelSpans, ...storyClauses])].slice(0, 12);
+}
+
+function modelInterpretation(output: IRRModelOutput, span: string): string {
+  const row = output.text_reading.salient_spans.find((item) => item.span === span)
+    ?? output.text_reading.salient_spans.find((item) => item.span.includes(span) || span.includes(item.span));
+  return row?.contextual_meaning || row?.literal_meaning || "";
+}
+
+function reportForRound(bundle: IRR03Bundle, storyId: string, round: number): Record<string, unknown> | undefined {
+  const records = Array.isArray(bundle.spanGainReport.records) ? bundle.spanGainReport.records : [];
+  return records.find((item) => {
+    const row = asRecord(item);
+    return row.story_id === storyId && row.round === round;
+  }) as Record<string, unknown> | undefined;
+}
+
+function numericValue(value: unknown): string {
+  return typeof value === "number" ? value.toFixed(2) : "—";
+}
+
+function SpanReviewSurface({
+  bundle,
+  storyId,
+  blind,
+  reviews,
+  onReviewChange,
+}: {
+  bundle: IRR03Bundle;
+  storyId: string;
+  blind: boolean;
+  reviews: Record<string, IRR03LocalReviewRecord>;
+  onReviewChange: (review: IRR03LocalReviewRecord) => void;
+}) {
+  const record = bundle.iterative.records.find((item) => item.story_id === storyId);
+  const rounds = record?.rounds ?? [];
+  const storyText = rounds[0]?.inference_input.story.text.simplified ?? "";
+  if (!record || rounds.length === 0) {
+    return <p className="irr0-muted">没有可用的迭代模型输出。</p>;
+  }
+
+  function updateSpan(
+    review: IRR03LocalReviewRecord,
+    span: string,
+    changes: Partial<IRR03HumanSpanReview>,
+  ): void {
+    const round = rounds.find((item) => item.round === review.round);
+    const modelSpan = round?.transition?.affected_spans.find((item) => item.span === span);
+    const current = review.span_reviews.find((item) => item.span === span);
+    const next: IRR03HumanSpanReview = {
+      span,
+      before_interpretation: current?.before_interpretation ?? modelSpan?.before_interpretation ?? "",
+      after_interpretation: current?.after_interpretation ?? modelSpan?.after_interpretation ?? "",
+      interpretation_depth: current?.interpretation_depth ?? 0,
+      unsupported_interpretation: current?.unsupported_interpretation ?? 0,
+      aesthetic_dimensions: current?.aesthetic_dimensions ?? {
+        salience: 0,
+        compression: 0,
+        omission: 0,
+        selection: 0,
+      },
+      evidence_refs: current?.evidence_refs ?? review.evidence_ids,
+      ...changes,
+    };
+    onReviewChange({
+      ...review,
+      span_reviews: [
+        ...review.span_reviews.filter((item) => item.span !== span),
+        next,
+      ],
+    });
+  }
+
+  return (
+    <section className="irr0-span-review-surface">
+      <div className="irr0-span-review-heading">
+        <div>
+          <p className="irr0-label">Span Review</p>
+          <h2>证据 → 原文跨度 → 重读变化</h2>
+        </div>
+        <span className={bundle.manifest.execution.run_type === "real_model" ? "irr0-provider-badge" : "irr0-fixture-badge"}>
+          {bundle.manifest.execution.run_type === "real_model"
+            ? bundle.manifest.execution.provider + " · " + bundle.manifest.execution.model
+            : "fixture pipeline only"}
+        </span>
+      </div>
+      <article className="irr0-story-source">
+        <p className="irr0-label">原文</p>
+        <p className="irr0-story-id">{storyId}</p>
+        <p className="irr0-story-text">{storyText}</p>
+      </article>
+      <div className="irr0-rounds">
+        {rounds.filter((round) => round.round > 0).map((round) => {
+          const previous = rounds.find((candidate) => candidate.round === round.round - 1);
+          const key = spanReviewKey(storyId, round.round);
+          const review = reviews[key] ?? emptySpanReview(round, storyId);
+          const options = spanOptions(round, storyText);
+          const report = reportForRound(bundle, storyId, round.round);
+          const metrics = asRecord(report?.metrics);
+          const selected = review.selected_spans;
+          return (
+            <section className="irr0-round irr0-span-review-round" key={round.round}>
+              <div className="irr0-round-heading">
+                <h3>Round {round.round}</h3>
+                <span>新增史料后的人工作业</span>
+              </div>
+              <EvidenceList evidence={round.evidence_added} />
+              <div className="irr0-span-choice-block">
+                <p className="irr0-label">原文 spans</p>
+                <div className="irr0-span-choice-list">
+                  {options.map((span, index) => (
+                    <label className="irr0-span-choice" key={span + "-" + String(index)}>
+                      <input
+                        type="checkbox"
+                        checked={selected.includes(span)}
+                        onChange={(event) => {
+                          const nextSelected = event.target.checked
+                            ? [...new Set([...selected, span])]
+                            : selected.filter((item) => item !== span);
+                          onReviewChange({
+                            ...review,
+                            selected_spans: nextSelected,
+                            no_effect: false,
+                          });
+                        }}
+                      />
+                      <span>{span}</span>
+                    </label>
+                  ))}
+                  <label className="irr0-span-choice">
+                    <input
+                      type="checkbox"
+                      checked={review.no_effect}
+                      onChange={(event) => onReviewChange({
+                        ...review,
+                        no_effect: event.target.checked,
+                        selected_spans: event.target.checked ? [] : selected,
+                      })}
+                    />
+                    <span>没有影响</span>
+                  </label>
+                </div>
+                <label className="irr0-span-other">
+                  <span>其他</span>
+                  <input
+                    value={review.custom_span ?? ""}
+                    onChange={(event) => {
+                      const custom = event.target.value;
+                      onReviewChange({
+                        ...review,
+                        custom_span: custom,
+                        selected_spans: custom ? [...new Set([...selected, custom])] : selected,
+                        no_effect: false,
+                      });
+                    }}
+                    placeholder="输入原文跨度"
+                  />
+                </label>
+              </div>
+
+              <div className="irr0-span-before-after">
+                <div>
+                  <p className="irr0-label">Before interpretation</p>
+                  {selected.length === 0
+                    ? <p className="irr0-muted">尚未选择跨度。</p>
+                    : selected.map((span) => <p key={"before-" + span}>{modelInterpretation(previous?.output ?? round.output, span)}</p>)}
+                </div>
+                <div>
+                  <p className="irr0-label">After interpretation</p>
+                  {selected.length === 0
+                    ? <p className="irr0-muted">尚未选择跨度。</p>
+                    : selected.map((span) => <p key={"after-" + span}>{modelInterpretation(round.output, span)}</p>)}
+                </div>
+              </div>
+
+              {selected.map((span) => {
+                const modelSpan: IRR03AffectedSpan | undefined = round.transition?.affected_spans.find((item) => item.span === span);
+                const humanSpan = review.span_reviews.find((item) => item.span === span);
+                const depth = humanSpan?.interpretation_depth ?? 0;
+                const unsupported = humanSpan?.unsupported_interpretation ?? 0;
+                const dimensions = humanSpan?.aesthetic_dimensions ?? {
+                  salience: 0,
+                  compression: 0,
+                  omission: 0,
+                  selection: 0,
+                };
+                return (
+                  <article className="irr0-span-review-card" key={"review-" + span}>
+                    <p className="irr0-span-text">{span}</p>
+                    {modelSpan && <p className="irr0-muted">模型 affected span · 历史 {modelSpan.historical_depth} · 审美 {modelSpan.aesthetic_depth}</p>}
+                    <div className="irr0-span-scale">
+                      <span>历史深度</span>
+                      {[0, 1, 2, 3, 4].map((value) => (
+                        <label key={"depth-" + String(value)}>
+                          <input
+                            type="radio"
+                            name={key + "-depth-" + span}
+                            checked={depth === value}
+                            onChange={() => updateSpan(review, span, { interpretation_depth: value })}
+                          />
+                          {value}
+                        </label>
+                      ))}
+                    </div>
+                    <div className="irr0-span-scale">
+                      <span>审美深度</span>
+                      {(["salience", "compression", "omission", "selection"] as const).map((dimension) => (
+                        <label key={dimension}>
+                          <input
+                            type="checkbox"
+                            checked={dimensions[dimension] === 1}
+                            onChange={(event) => updateSpan(review, span, {
+                              aesthetic_dimensions: {
+                                ...dimensions,
+                                [dimension]: event.target.checked ? 1 : 0,
+                              },
+                            })}
+                          />
+                          {dimension}
+                        </label>
+                      ))}
+                    </div>
+                    <label className="irr0-span-select">
+                      <span>过度解释</span>
+                      <select
+                        value={String(unsupported)}
+                        onChange={(event) => updateSpan(review, span, { unsupported_interpretation: Number(event.target.value) })}
+                      >
+                        <option value="0">支持</option>
+                        <option value="1">无支持的延伸</option>
+                        <option value="2">误导性重释</option>
+                      </select>
+                    </label>
+                  </article>
+                );
+              })}
+
+              <div className="irr0-span-review-stop">
+                <p className="irr0-label">继续查史？</p>
+                <div className="irr0-review-choice-list">
+                  <button type="button" className={review.continue_reading === "yes" ? "active" : ""} onClick={() => onReviewChange({ ...review, continue_reading: "yes", stop_reason: null })}>Yes</button>
+                  <button type="button" className={review.continue_reading === "no" ? "active" : ""} onClick={() => onReviewChange({ ...review, continue_reading: "no" })}>No</button>
+                </div>
+                <select
+                  value={review.stop_reason ?? ""}
+                  onChange={(event) => onReviewChange({ ...review, stop_reason: (event.target.value || null) as SpanStopReason })}
+                >
+                  <option value="">停止/继续理由（可选）</option>
+                  <option value="unresolved_high_value_question">仍有高价值问题</option>
+                  <option value="more_context_may_change_span">更多材料可能改变跨度</option>
+                  <option value="saturated">已饱和</option>
+                  <option value="new_evidence_low_value">新增材料价值低</option>
+                  <option value="unsupported_drift">出现无支持漂移</option>
+                </select>
+              </div>
+
+              <div className="irr0-span-metrics">
+                <p className="irr0-label">模型诊断（非 Gold）</p>
+                <span>历史深度 {numericValue(metrics.historical_depth)}</span>
+                <span>审美深度 {numericValue(metrics.aesthetic_depth)}</span>
+                <span>问题深度 {numericValue(metrics.question_depth)}</span>
+                <span>过度解释 {numericValue(metrics.unsupported_interpretation_count)}</span>
+              </div>
+              {blind && <p className="irr0-muted">Blind review：Gold、目标深度与证据角色已隐藏。</p>}
+            </section>
+          );
+        })}
+      </div>
+    </section>
+  );
+}
+
 function loadStoredReviews(): Record<string, ReviewChoice> {
   if (typeof window === "undefined") return {};
   try {
     const value = JSON.parse(window.localStorage.getItem(REVIEW_STORAGE_KEY) ?? "{}") as Record<string, ReviewChoice>;
+    return value && typeof value === "object" ? value : {};
+  } catch {
+    return {};
+  }
+}
+
+function loadStoredSpanReviews(): Record<string, IRR03LocalReviewRecord> {
+  if (typeof window === "undefined") return {};
+  try {
+    const value = JSON.parse(window.localStorage.getItem("shishuoSketch.irr0-3-span-review") ?? "{}") as Record<string, IRR03LocalReviewRecord>;
     return value && typeof value === "object" ? value : {};
   } catch {
     return {};
@@ -318,6 +669,26 @@ function downloadReviews(value: Record<string, ReviewChoice>): void {
   const anchor = document.createElement("a");
   anchor.href = url;
   anchor.download = "irr0-2-local-review.json";
+  anchor.click();
+  URL.revokeObjectURL(url);
+}
+
+function downloadSpanReviews(value: Record<string, IRR03LocalReviewRecord>): void {
+  const records = Object.values(value).sort((left, right) => {
+    const storyOrder = left.story_id.localeCompare(right.story_id);
+    return storyOrder || left.round - right.round;
+  });
+  const blob = new Blob([JSON.stringify({
+    schema: "irr0.3-span-review",
+    stage: "IRR0.3",
+    schema_version: "v0",
+    scope: { story_ids: PILOT_STORIES },
+    records,
+  }, null, 2)], { type: "application/json" });
+  const url = URL.createObjectURL(blob);
+  const anchor = document.createElement("a");
+  anchor.href = url;
+  anchor.download = "irr0-3-span-review.json";
   anchor.click();
   URL.revokeObjectURL(url);
 }
@@ -336,8 +707,13 @@ export function IRRReviewPage() {
   const [gold, setGold] = useState<IRRGoldRecord[] | null>(null);
   const [selectedStory, setSelectedStory] = useState(PILOT_STORIES[0]);
   const [mode, setMode] = useState<IRRReviewMode>("text_only");
+  const [surface, setSurface] = useState<"conditions" | "span_review">("conditions");
   const [blind, setBlind] = useState(false);
   const [reviews, setReviews] = useState<Record<string, ReviewChoice>>(loadStoredReviews);
+  const [spanReviews, setSpanReviews] = useState<Record<string, IRR03LocalReviewRecord>>(loadStoredSpanReviews);
+  const [spanBundle, setSpanBundle] = useState<IRR03Bundle | null>(null);
+  const [spanLoading, setSpanLoading] = useState(false);
+  const [spanError, setSpanError] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -354,6 +730,26 @@ export function IRRReviewPage() {
     void loadIRRGold().then((next) => setGold(next.records)).catch(() => setGold([]));
   }, [gold, mode]);
 
+  useEffect(() => {
+    if (surface !== "span_review" || spanBundle || spanError) return;
+    let active = true;
+    setSpanLoading(true);
+    void loadIRR03ReviewBundle()
+      .then((next) => {
+        if (active) {
+          setSpanBundle(next);
+          setSpanLoading(false);
+        }
+      })
+      .catch((reason: unknown) => {
+        if (active) {
+          setSpanError(reason instanceof Error ? reason.message : String(reason));
+          setSpanLoading(false);
+        }
+      });
+    return () => { active = false; };
+  }, [spanBundle, spanError, surface]);
+
   const selectedModelRecord = useMemo(() => {
     if (!bundle || mode === "gold") return undefined;
     const records = mode === "text_only" ? bundle.textOnly.records : mode === "all_at_once" ? bundle.allAtOnce.records : bundle.iterative.records;
@@ -368,6 +764,13 @@ export function IRRReviewPage() {
     window.localStorage.setItem(REVIEW_STORAGE_KEY, JSON.stringify(next));
   }
 
+  function chooseSpanReview(value: IRR03LocalReviewRecord): void {
+    const key = spanReviewKey(value.story_id, value.round);
+    const next = { ...spanReviews, [key]: value };
+    setSpanReviews(next);
+    window.localStorage.setItem("shishuoSketch.irr0-3-span-review", JSON.stringify(next));
+  }
+
   if (loading) return <main className="page-shell loading-state"><p className="brand">世说Sketch</p><p>正在读取 IRR 重读实验……</p></main>;
   if (error || bundle === null) return <main className="page-shell"><section className="error-panel"><p className="brand">世说Sketch</p><h1>IRR 实验载入失败</h1><p>{error ?? "实验数据不可用。"}</p></section></main>;
   const storyInput = recordFor(bundle.textOnly.records, selectedStory)?.inference_input?.story;
@@ -377,8 +780,8 @@ export function IRRReviewPage() {
       <header className="site-header irr0-review-header">
         <div>
           <p className="brand">世说Sketch · Research</p>
-          <h1>IRR0.2 模型重读实验</h1>
-          <p className="tagline">比较 Text only、All context 与 Iterative；模型输出不是史实。</p>
+          <h1>IRR0.3 模型重读实验</h1>
+          <p className="tagline">比较三种重读条件，并以 Span Review 检查证据对原文跨度的影响；模型输出不是史实。</p>
         </div>
         <a className="ux2-index-back" href={import.meta.env.BASE_URL}>返回阅读</a>
       </header>
@@ -388,16 +791,32 @@ export function IRRReviewPage() {
           <p className="irr0-label">Stories</p>
           {PILOT_STORIES.map((storyId) => <button type="button" key={storyId} className={selectedStory === storyId ? "active" : ""} onClick={() => setSelectedStory(storyId)}>{storyId}</button>)}
         </div>
-        <div className="irr0-condition-selector" role="tablist" aria-label="阅读条件">
+        <div className="irr0-condition-selector" role="tablist" aria-label="审阅视图">
+          <button type="button" role="tab" aria-selected={surface === "conditions"} className={surface === "conditions" ? "active" : ""} onClick={() => setSurface("conditions")}>条件比较</button>
+          <button type="button" role="tab" aria-selected={surface === "span_review"} className={surface === "span_review" ? "active" : ""} onClick={() => setSurface("span_review")}>Span Review</button>
+        </div>
+        {surface === "conditions" && <div className="irr0-condition-selector" role="tablist" aria-label="阅读条件">
           {(["text_only", "all_at_once", "iterative"] as IRRReviewMode[]).map((current) => <button type="button" role="tab" aria-selected={mode === current} key={current} className={mode === current ? "active" : ""} onClick={() => setMode(current)}>{conditionLabel(current)}</button>)}
           {!blind && <button type="button" role="tab" aria-selected={mode === "gold"} className={mode === "gold" ? "gold active" : "gold"} onClick={() => setMode("gold")}>Gold</button>}
-        </div>
+        </div>}
         <div className="irr0-blind-controls">
           <button type="button" onClick={() => { setBlind((value) => !value); if (!blind && mode === "gold") setMode("text_only"); }}>Blind review: {blind ? "ON" : "OFF"}</button>
-          <button type="button" onClick={() => downloadReviews(reviews)}>导出本地判断</button>
+          {surface === "conditions"
+            ? <button type="button" onClick={() => downloadReviews(reviews)}>导出本地判断</button>
+            : <button type="button" onClick={() => downloadSpanReviews(spanReviews)}>导出 Span Review</button>}
         </div>
       </section>
 
+      {surface === "span_review" ? (
+        spanLoading
+          ? <section className="irr0-condition-panel"><p className="irr0-muted">Span Review 载入中……</p></section>
+          : spanError
+            ? <section className="irr0-condition-panel"><p className="irr0-muted">Span Review 暂时不可用：{spanError}</p></section>
+            : spanBundle
+              ? <SpanReviewSurface bundle={spanBundle} storyId={selectedStory} blind={blind} reviews={spanReviews} onReviewChange={chooseSpanReview} />
+              : <section className="irr0-condition-panel"><p className="irr0-muted">Span Review 尚未载入。</p></section>
+      ) : (
+      <>
       <article className="irr0-story-source">
         <p className="irr0-label">原文</p>
         <p className="irr0-story-id">{selectedStory}</p>
@@ -437,6 +856,8 @@ export function IRRReviewPage() {
         </div>
         {reviews[currentReviewKey] && <p className="irr0-muted">已保存：{reviews[currentReviewKey]}</p>}
       </section>}
+      </>
+      )}
     </main>
   );
 }

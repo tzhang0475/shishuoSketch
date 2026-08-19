@@ -1,0 +1,226 @@
+{
+  "schema": "irr0.3-context-review",
+  "stage": "IRR0.3",
+  "schema_version": "v0",
+  "policy": {
+    "scope": "frozen IRR0.1 five-Story pilot",
+    "all_at_once_is_union_of_iterative_rounds": true,
+    "hard_negative_policy": "each Story has one reviewed, source-backed, scene-low-value addition",
+    "inference_sees": [
+      "Story text",
+      "allowed evidence descriptors for the current round"
+    ],
+    "inference_does_not_see": [
+      "expected_role",
+      "review_reason",
+      "human span review",
+      "IRR0.1 Gold"
+    ]
+  },
+  "scope": {
+    "story_ids": [
+      "27-jiajue-008",
+      "06-yaliang-017",
+      "09-pinzao-017",
+      "19-xianyuan-026",
+      "05-fangzheng-032"
+    ]
+  },
+  "records": [
+    {
+      "story_id": "27-jiajue-008",
+      "rounds": [
+        {"round": 0, "evidence_added": []},
+        {
+          "round": 1,
+          "evidence_added": [
+            {
+              "evidence_ref": "evidence-sc1-27-jiajue-008-annotation-001",
+              "expected_role": "high_gain",
+              "review_status": "reviewed",
+              "review_reason": "成帝尚幼、太后临朝与庾亮辅政为当前拜礼冲突提供历史背景。"
+            }
+          ]
+        },
+        {
+          "round": 2,
+          "evidence_added": [
+            {
+              "evidence_ref": "s1-assertion-8d9bfa662b350908073b",
+              "expected_role": "high_gain",
+              "review_status": "reviewed",
+              "review_reason": "笺疏的定年与叙事位置意见可改变对当前事件时序的理解，但保留其学者归属。"
+            }
+          ]
+        },
+        {
+          "round": 3,
+          "evidence_added": [
+            {
+              "evidence_ref": "s1-assertion-e961c56cd3ad9321f252",
+              "expected_role": "hard_negative",
+              "review_status": "reviewed",
+              "review_reason": "校文所记字形与重复字差异属于文本校勘信息，真实存在但不改变当前人物动作链。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "story_id": "06-yaliang-017",
+      "rounds": [
+        {"round": 0, "evidence_added": []},
+        {
+          "round": 1,
+          "evidence_added": [
+            {
+              "evidence_ref": "evidence-sc1-06-yaliang-017-annotation-001",
+              "expected_role": "high_gain",
+              "review_status": "reviewed",
+              "review_reason": "注释明确幼子庾会、字会宗及年龄语境，帮助分辨试探问答中的人物。"
+            }
+          ]
+        },
+        {
+          "round": 2,
+          "evidence_added": [
+            {
+              "evidence_ref": "evidence-sc1-06-yaliang-017-annotation-003",
+              "expected_role": "hard_negative",
+              "review_status": "reviewed",
+              "review_reason": "阿恭与小字是相关称谓线索，但不改变跪答、神色恬然的现场动作。"
+            }
+          ]
+        },
+        {
+          "round": 3,
+          "evidence_added": [
+            {
+              "evidence_ref": "evidence-sc1-06-yaliang-017-annotation-002",
+              "expected_role": "hard_negative",
+              "review_status": "reviewed",
+              "review_reason": "遇害与六年属于相关人物的远后事件，不能改写本则当下的试探问答。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "story_id": "09-pinzao-017",
+      "rounds": [
+        {"round": 0, "evidence_added": []},
+        {
+          "round": 1,
+          "evidence_added": [
+            {
+              "evidence_ref": "evidence-sc1-09-pinzao-017-annotation-002",
+              "expected_role": "high_gain",
+              "review_status": "reviewed",
+              "review_reason": "东宫问答和君方庾亮的背景使当前比较语句的语境更清楚。"
+            }
+          ]
+        },
+        {
+          "round": 2,
+          "evidence_added": [
+            {
+              "evidence_ref": "s1-assertion-07c6f5dd5159a5892ca0",
+              "expected_role": "high_gain",
+              "review_status": "reviewed",
+              "review_reason": "笺疏说明一丘一壑承用班嗣论庄周的语意，直接影响关键语句的审美理解。"
+            }
+          ]
+        },
+        {
+          "round": 3,
+          "evidence_added": [
+            {
+              "evidence_ref": "s1-assertion-c0d39acdd4727f36a166",
+              "expected_role": "hard_negative",
+              "review_status": "reviewed",
+              "review_reason": "晋书同样记明帝在东宫是相关时代线索，但对当前丘壑比较的语言动作增益很低。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "story_id": "19-xianyuan-026",
+      "rounds": [
+        {"round": 0, "evidence_added": []},
+        {
+          "round": 1,
+          "evidence_added": [
+            {
+              "evidence_ref": "evidence-sc1-19-xianyuan-026-annotation-001",
+              "expected_role": "high_gain",
+              "review_status": "reviewed",
+              "review_reason": "封胡遏末的称谓与人物对应线索直接关系到王郎惊叹的对象。"
+            }
+          ]
+        },
+        {
+          "round": 2,
+          "evidence_added": [
+            {
+              "evidence_ref": "s1-assertion-0db2baeda8ef6c2ec771",
+              "expected_role": "medium_gain",
+              "review_status": "reviewed",
+              "review_reason": "群从兄弟的称谓层次补充场景结构，但不解决全部身份争议。"
+            }
+          ]
+        },
+        {
+          "round": 3,
+          "evidence_added": [
+            {
+              "evidence_ref": "s1-assertion-2be2e3295b82c540dc98",
+              "expected_role": "hard_negative",
+              "review_status": "reviewed",
+              "review_reason": "晋书异文中的称谓差异是真实的来源信息，但不改变当前惊叹动作本身。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "story_id": "05-fangzheng-032",
+      "rounds": [
+        {"round": 0, "evidence_added": []},
+        {
+          "round": 1,
+          "evidence_added": [
+            {
+              "evidence_ref": "s1-assertion-fb4c93388c3fc7e83b4a",
+              "expected_role": "high_gain",
+              "review_status": "reviewed",
+              "review_reason": "引晋纪明确王敦欲废明帝，使短答中的政治压力可被具体理解。"
+            }
+          ]
+        },
+        {
+          "round": 2,
+          "evidence_added": [
+            {
+              "evidence_ref": "s1-assertion-9759d6624ac173400d37",
+              "expected_role": "medium_gain",
+              "review_status": "reviewed",
+              "review_reason": "温嶠东宫履历补充人物背景，但不是本则答问的直接依据。"
+            }
+          ]
+        },
+        {
+          "round": 3,
+          "evidence_added": [
+            {
+              "evidence_ref": "s1-assertion-5f058f1eddabf56e24fa",
+              "expected_role": "hard_negative",
+              "review_status": "reviewed",
+              "review_reason": "笺疏对温嶠官职与年代的考辨属于相关的远背景，不能改变当前答语动作。"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
