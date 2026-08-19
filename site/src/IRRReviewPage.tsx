@@ -707,9 +707,9 @@ function conditionLabel(mode: IRRReviewMode): string {
 export function IRRReviewPage() {
   const [bundle, setBundle] = useState<IRRReviewBundle | null>(null);
   const [gold, setGold] = useState<IRRGoldRecord[] | null>(null);
-  const [selectedStory, setSelectedStory] = useState(PILOT_STORIES[0]);
+  const [selectedStory, setSelectedStory] = useState(IRR04_PILOT_STORIES[0]);
   const [mode, setMode] = useState<IRRReviewMode>("text_only");
-  const [surface, setSurface] = useState<"conditions" | "span_review" | "semantic_ladder">("conditions");
+  const [surface, setSurface] = useState<"conditions" | "span_review" | "semantic_ladder">("semantic_ladder");
   const [blind, setBlind] = useState(false);
   const [reviews, setReviews] = useState<Record<string, ReviewChoice>>(loadStoredReviews);
   const [spanReviews, setSpanReviews] = useState<Record<string, IRR03LocalReviewRecord>>(loadStoredSpanReviews);
@@ -783,8 +783,8 @@ export function IRRReviewPage() {
       <header className="site-header irr0-review-header">
         <div>
           <p className="brand">世说Sketch · Research</p>
-          <h1>IRR0.3 模型重读实验</h1>
-          <p className="tagline">比较三种重读条件，并以 Span Review 检查证据对原文跨度的影响；模型输出不是史实。</p>
+          <h1>IRR0.4 语义递进重读实验</h1>
+          <p className="tagline">以同一原文跨度为中心，比较字面、历史、关系与审美重读；同时检查 Memory / Fresh 与 Negative Control。</p>
         </div>
         <a className="ux2-index-back" href={import.meta.env.BASE_URL}>返回阅读</a>
       </header>
@@ -795,9 +795,9 @@ export function IRRReviewPage() {
           {storyOptions.map((storyId) => <button type="button" key={storyId} className={selectedStory === storyId ? "active" : ""} onClick={() => setSelectedStory(storyId)}>{storyId}</button>)}
         </div>
         <div className="irr0-condition-selector" role="tablist" aria-label="审阅视图">
-          <button type="button" role="tab" aria-selected={surface === "conditions"} className={surface === "conditions" ? "active" : ""} onClick={() => setSurface("conditions")}>条件比较</button>
-          <button type="button" role="tab" aria-selected={surface === "span_review"} className={surface === "span_review" ? "active" : ""} onClick={() => setSurface("span_review")}>Span Review</button>
-          <button type="button" role="tab" aria-selected={surface === "semantic_ladder"} className={surface === "semantic_ladder" ? "active" : ""} onClick={() => { setSurface("semantic_ladder"); if (!IRR04_PILOT_STORIES.includes(selectedStory)) setSelectedStory(IRR04_PILOT_STORIES[0]); }}>Semantic Ladder</button>
+          <button type="button" role="tab" aria-selected={surface === "semantic_ladder"} className={surface === "semantic_ladder" ? "active" : ""} onClick={() => { setSurface("semantic_ladder"); if (!IRR04_PILOT_STORIES.includes(selectedStory)) setSelectedStory(IRR04_PILOT_STORIES[0]); }}>IRR0.4 Semantic Ladder</button>
+          <button type="button" role="tab" aria-selected={surface === "span_review"} className={surface === "span_review" ? "active" : ""} onClick={() => setSurface("span_review")}>IRR0.3 Span Review</button>
+          <button type="button" role="tab" aria-selected={surface === "conditions"} className={surface === "conditions" ? "active" : ""} onClick={() => setSurface("conditions")}>Baseline Conditions</button>
         </div>
         {surface === "conditions" && <div className="irr0-condition-selector" role="tablist" aria-label="阅读条件">
           {(["text_only", "all_at_once", "iterative"] as IRRReviewMode[]).map((current) => <button type="button" role="tab" aria-selected={mode === current} key={current} className={mode === current ? "active" : ""} onClick={() => setMode(current)}>{conditionLabel(current)}</button>)}
