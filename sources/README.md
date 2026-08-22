@@ -97,6 +97,16 @@ registration remains separately recorded for future reference, but S1 does
 not depend on CText authentication or scrape its HTML/API output. No
 secondary witness authorizes overwriting the primary Kanripo/SBCK text.
 
+## Sanguozhi witness hierarchy
+
+For 《三國志》, `sanguozhi-kanripo-wyg` is explicitly the local 魏書 1–30
+machine witness. SGZ1 adds `sanguozhi-wikisource`, a complete 65-juan
+Wikisource machine witness covering 魏書 1–30、蜀書 31–45、吳書 46–65. The
+locally registered `sanguozhi-song-shoryobu` is a complete South-Song visual
+reference witness; its searchable PDF/OCR derivatives are for locating and
+alignment only, and OCR is non-authoritative. None of these registrations
+materializes historical facts or changes the canonical corpus.
+
 ## Jinshu source coverage and migration
 
 The active Jinshu primary is `jinshu-wikisource-siku`, the complete

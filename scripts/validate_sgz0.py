@@ -38,6 +38,19 @@ def validate(mode: str = "portable") -> list[str]:
         errors.append("SGZ0 manifest stage is invalid")
     if lock.get("witness_id") != manifest.get("primary_witness"):
         errors.append("SGZ0 provenance lock witness does not match manifest")
+    coverage = manifest.get("witness_coverage", {})
+    if coverage != {
+        "work": "三國志",
+        "section": "魏書",
+        "global_juan": "1-30",
+        "section_juan": "1-30",
+    }:
+        errors.append("SGZ0 primary witness coverage must be 魏書 1-30")
+    local_coverage = manifest.get("local_payload_coverage", {})
+    if local_coverage.get("registered_expected_volume_range") != [1, 30]:
+        errors.append("SGZ0 local expected volume range must be 1-30")
+    if local_coverage.get("missing_local_volumes"):
+        errors.append("SGZ0 魏書 witness has missing local volumes")
     lock_by_path = {str(item.get("source_path")): item for item in lock.get("records", [])}
     seen_source: set[str] = set()
     for record in manifest.get("records", []):

@@ -219,6 +219,12 @@ def build() -> dict[str, Any]:
         "processor": "scripts/build_sgz0_corpus.py",
         "work": "三國志",
         "primary_witness": "sanguozhi-kanripo-wyg",
+        "witness_coverage": {
+            "work": "三國志",
+            "section": "魏書",
+            "global_juan": "1-30",
+            "section_juan": "1-30",
+        },
         "source_registry": "sources/registry/sanguozhi.yaml",
         "observed_grammar": {
             "front_matter": "Org/Emacs properties before page markers",
@@ -232,9 +238,9 @@ def build() -> dict[str, Any]:
         "local_payload_coverage": {
             "front_matter": 1 if any(item["kind"] == "front_matter" for item in records) else 0,
             "volumes": available_volumes,
-            "registered_expected_volume_range": [1, 65],
-            "missing_local_volumes": [item for item in range(1, 66) if item not in available_volumes],
-            "note": "Only the locally present, git-ignored registered Kanripo files are processed; missing upstream payloads are not fabricated or downloaded.",
+            "registered_expected_volume_range": [1, 30],
+            "missing_local_volumes": [item for item in range(1, 31) if item not in available_volumes],
+            "note": "KR2a0012 is the registered 魏書 30卷 witness. SGZ1 supplies 蜀書 and 吳書 coverage; volumes outside 1–30 are not missing files from this witness.",
         },
         "volume_count": len(available_volumes),
         "main_text_unit_count": sum(item["layer_counts"]["main_text"] for item in records),

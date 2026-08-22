@@ -1,0 +1,26 @@
+schema: 1
+id: "sanguozhi-wikisource"
+work: "三國志"
+role: "secondary / complete-machine-text"
+edition: "中文維基文庫《三國志》"
+source_provider: "Wikisource"
+source_type: "MediaWiki-wikitext"
+local: true
+local_path: "sources/downloads/sanguozhi/wikisource"
+source_record: "https://zh.wikisource.org/wiki/三國志"
+api_endpoint: "https://zh.wikisource.org/w/api.php"
+coverage: "1-65"
+expected_juan_count: 65
+retrieved_juan_count: 65
+status: "complete"
+text_authority: "complete machine-text witness for SGZ1; not a replacement for Kanripo/WYG"
+structure_authority: "MediaWiki page titles, structured header sections, and explicit annotation templates"
+section_counts:
+  吳書: 20
+  蜀書: 15
+  魏書: 30
+notes:
+  - "The 65 page titles are fetched through the MediaWiki API as raw wikitext; rendered HTML is not scraped."
+  - "Global juan to 魏書/蜀書/吳書 mapping is checked against each page's structured header section."
+  - "Raw API JSON and returned source wikitext are retained without textual correction or simplification."
+  - "The witness is complete machine-text evidence infrastructure and does not overwrite Kanripo/WYG or create historical facts."

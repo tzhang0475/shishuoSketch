@@ -1,9 +1,10 @@
 # SGZ0：三国志 / 裴松之注处理层
 
 SGZ0 adds a deterministic, provenance-preserving processed layer for the
-locally registered `sanguozhi-kanripo-wyg` witness. It is evidence
+locally registered `sanguozhi-kanripo-wyg` witness. That witness is the
+魏書 30卷 portion of 《三國志》, not a 65-juan witness. It is evidence
 infrastructure for W3; it does not create production Persons, Relations, or a
-chronological graph.
+chronological graph. SGZ1 supplies the complete 65-juan machine witness.
 
 ## Observed local grammar
 
@@ -35,11 +36,11 @@ not the Shishuo Markdown grammar:
   and SHA-256 locks.
 - `scripts/validate_sgz0.py` — full/portable validation.
 
-The current checkout contains the registered local files for volumes 1–30
-plus front matter. Volumes 31–65 are recorded as unavailable; no ignored
-payload was downloaded or fabricated. Full validation verifies every present
-payload. Portable validation verifies the lock and processed artifact when an
-external upstream payload is absent.
+The current checkout contains the registered local files for 魏書 volumes 1–30
+plus front matter. Volumes 31–65 are not missing files from this witness;
+they belong to the 蜀書 and 吳書 portions supplied by SGZ1. Full validation
+verifies every present payload. Portable validation verifies the lock and
+processed artifact when an external upstream payload is absent.
 
 Current processed counts:
 

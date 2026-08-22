@@ -59,6 +59,14 @@ class DownloadWitnessTests(unittest.TestCase):
             "sources/downloads/jinshu/wikisource-siku",
         )
         self.assertEqual(config["sources"]["sanguozhi"]["primary"], "shishuoSources/sanguozhi")
+        self.assertEqual(
+            config["sources"]["sanguozhi"]["complete_machine"],
+            "sources/downloads/sanguozhi/wikisource",
+        )
+        self.assertEqual(
+            config["downloads"]["sanguozhi_wikisource"],
+            "sources/downloads/sanguozhi/wikisource",
+        )
         for relative in config["downloads"].values():
             self.assertFalse(Path(relative).is_absolute())
 

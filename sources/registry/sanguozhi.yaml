@@ -14,7 +14,36 @@ witnesses:
     remote_record: "https://github.com/kanripo/KR2a0012.git"
     text_authority: "default diplomatic machine-text witness"
     structure_authority: "Kanripo juan declarations, FILE directives, and page markers"
+    coverage:
+      work: "三國志"
+      section: "魏書"
+      global_juan: "1-30"
+      section_juan: "1-30"
     notes: "Immutable local upstream source."
+  - id: sanguozhi-wikisource
+    work: "三國志"
+    role: "secondary / complete-machine-text"
+    edition: "中文維基文庫《三國志》"
+    source_provider: Wikisource
+    source_type: MediaWiki-wikitext
+    script: "traditional Chinese"
+    annotations: ["裴松之注"]
+    local: true
+    local_path: "sources/downloads/sanguozhi/wikisource"
+    remote_record:
+      source_url: "https://zh.wikisource.org/wiki/三國志"
+      api_endpoint: "https://zh.wikisource.org/w/api.php"
+      page_pattern: "三國志/卷01 … 三國志/卷65"
+    text_authority: "complete machine-text witness for SGZ1; not a replacement for Kanripo/WYG"
+    structure_authority: "MediaWiki page titles, structured header section, and explicit annotation templates"
+    coverage:
+      work: "三國志"
+      global_juan: "1-65"
+      sections:
+        魏書: "1-30"
+        蜀書: "31-45"
+        吳書: "46-65"
+    notes: "Raw Wikisource API text is retained as a local, provenance-locked machine witness."
   - id: sanguozhi-wuyingdian
     work: "三國志"
     role: "secondary / visual-reference"
@@ -31,7 +60,7 @@ witnesses:
     notes: "Registered but not bulk-scraped."
   - id: sanguozhi-song-shoryobu
     work: "三國志"
-    role: "secondary / early textual witness"
+    role: "secondary / visual-reference"
     edition: "南宋刊本，有補抄"
     authors: ["陳壽", "裴松之注"]
     holding_institution: "日本宮內廳書陵部"
@@ -49,4 +78,11 @@ witnesses:
       target_title: "三国志.六十五卷.晋陈寿撰.刘宋.裴松之注.日本宫内厅书陵部藏.有补抄.南宋刊本"
     text_authority: "page-image witness; selected searchable PDF and OCR are derivatives"
     structure_authority: "scanned page sequence and bibliographic title"
-    notes: "The downloader resolves the actual filename from IA metadata; JP2 ZIP is excluded by default. OCR is for search/alignment only."
+    coverage:
+      work: "三國志"
+      global_juan: "1-65"
+      sections:
+        魏書: "1-30"
+        蜀書: "31-45"
+        吳書: "46-65"
+    notes: "Complete 65-juan visual/reference witness. The downloader resolves the actual filename from IA metadata; JP2 ZIP is excluded by default. OCR is for search/alignment only and is non-authoritative."
