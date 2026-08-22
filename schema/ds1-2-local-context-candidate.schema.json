@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://shishuo.example/schema/ds1-2-local-context-candidate.schema.json",
+  "title": "DS1.2 Local Evidence Context Candidate",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "schema_version",
+    "stage",
+    "artifact_kind",
+    "story_id",
+    "candidate_status",
+    "run_type",
+    "model",
+    "provider",
+    "prompt_config_version",
+    "retrieved_evidence_refs",
+    "opened_evidence_refs",
+    "retrieval_trace",
+    "result",
+    "validation_errors",
+    "canonical_write_back"
+  ],
+  "properties": {
+    "schema": {"const": "ds1-2-local-context-candidate"},
+    "schema_version": {"const": 1},
+    "stage": {"const": "DS1.2"},
+    "artifact_kind": {"const": "generated_local_context_candidate"},
+    "story_id": {"const": "27-jiajue-008"},
+    "candidate_status": {"const": "candidate"},
+    "run_type": {"const": "real_model"},
+    "run_id": {"type": "string"},
+    "model": {"type": "string", "minLength": 1},
+    "provider": {"const": "deepseek"},
+    "timestamp": {"type": "string"},
+    "prompt_config_version": {"type": "string", "minLength": 1},
+    "parameters": {"type": "object"},
+    "initial_input_hash": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "retrieved_evidence_refs": {"type": "array", "items": {"type": "string"}},
+    "opened_evidence_refs": {"type": "array", "items": {"type": "string"}},
+    "retrieval_trace": {"type": "string", "const": "data/generated/ds1-2/27-jiajue-008-trace.json"},
+    "token_usage": {"type": "array"},
+    "result": {
+      "type": "object",
+      "required": [
+        "historical_preconditions",
+        "participant_historical_states",
+        "relationship_state_before_scene",
+        "reader_needed_context",
+        "context_to_text_links",
+        "uncertainties"
+      ]
+    },
+    "validation_errors": {"type": "array", "items": {"type": "string"}},
+    "canonical_write_back": {"const": false}
+  }
+}

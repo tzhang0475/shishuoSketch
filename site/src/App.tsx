@@ -41,6 +41,7 @@ import {
   type HistoricalProjection,
 } from "./historical";
 import { loadStorySketch, loadStorySketchEvidence, NL0_STORY_IDS } from "./storySketch";
+import { loadDs1Preview, type DS1Preview } from "./ds1";
 import { IRRReviewPage } from "./IRRReviewPage";
 import type {
   Evidence,
@@ -615,6 +616,33 @@ function StorySketchView({
   readingMode: ReadingMode;
 }) {
   const evidenceIds = [...new Set(value.supporting_evidence.map((row) => row.evidence_id))];
+  const [ds1Preview, setDs1Preview] = useState<DS1Preview | null>(null);
+  const [ds1Loading, setDs1Loading] = useState(false);
+
+  useEffect(() => {
+    if (value.story_id !== "27-jiajue-008") {
+      setDs1Preview(null);
+      setDs1Loading(false);
+      return;
+    }
+    const controller = new AbortController();
+    let active = true;
+    setDs1Loading(true);
+    void loadDs1Preview(value.story_id, controller.signal)
+      .then((preview) => {
+        if (active) setDs1Preview(preview);
+      })
+      .catch(() => {
+        if (active) setDs1Preview(null);
+      })
+      .finally(() => {
+        if (active) setDs1Loading(false);
+      });
+    return () => {
+      active = false;
+      controller.abort();
+    };
+  }, [value.story_id]);
 
   return (
     <section className="nl0-story-sketch" aria-label="Story Sketch">
@@ -630,6 +658,28 @@ function StorySketchView({
           label="反馈此段"
         />
       </div>
+      {(ds1Loading || ds1Preview) && (
+        <section className="nl0-sketch-group ds1-story-context" aria-label="此刻">
+          <p className="nl0-sketch-label">此刻</p>
+          {ds1Loading && <p className="nl0-sketch-text">史事载入中…</p>}
+          {ds1Preview && (
+            <>
+              {ds1Preview.scene_context.scene_summary.text && (
+                <p className="nl0-sketch-text">{ds1Preview.scene_context.scene_summary.text}</p>
+              )}
+              {ds1Preview.scene_context.participant_states.length > 0 && (
+                <p className="ds1-preview-detail">
+                  {ds1Preview.scene_context.participant_states
+                    .filter((row) => row.state)
+                    .map((row) => `${row.surface}：${row.state}`)
+                    .join("；")}
+                </p>
+              )}
+              <span className="ds1-preview-meta">DS1 已审阅预览 · {ds1Preview.evidence_bundle_ids.length} 条依据</span>
+            </>
+          )}
+        </section>
+      )}
       {value.era_profile && (
         <div className="nl0-sketch-group nl0-sketch-era">
           <p className="nl0-sketch-label">Era</p>

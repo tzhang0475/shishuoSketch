@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://shishuo.example/schema/ds1-scene-context.schema.json",
+  "title": "DS1 SceneContext candidate",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "scene_summary",
+    "participant_states",
+    "relationship_context",
+    "reader_needed_context",
+    "uncertainties"
+  ],
+  "properties": {
+    "scene_summary": { "$ref": "#/$defs/claim" },
+    "participant_states": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/participant" }
+    },
+    "relationship_context": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/claim" }
+    },
+    "reader_needed_context": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/claim" }
+    },
+    "uncertainties": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/claim" }
+    }
+  },
+  "$defs": {
+    "claim": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["text", "evidence_refs"],
+      "properties": {
+        "text": { "type": ["string", "null"] },
+        "evidence_refs": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    },
+    "participant": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["person_id", "surface", "state", "evidence_refs"],
+      "properties": {
+        "person_id": { "type": ["string", "null"] },
+        "surface": { "type": "string", "minLength": 1 },
+        "state": { "type": ["string", "null"] },
+        "evidence_refs": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    }
+  }
+}

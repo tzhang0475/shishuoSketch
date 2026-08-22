@@ -1,0 +1,97 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://shishuo.example/schema/ds1-2r-local-context-candidate.schema.json",
+  "title": "DS1.2R Local Context Candidate",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "schema_version", "stage", "artifact_kind", "story_id", "candidate_status", "run_type", "model", "provider", "result", "retrieved_evidence_refs", "opened_evidence_refs", "retrieval_trace", "validation_errors", "canonical_write_back"],
+  "properties": {
+    "schema": {"const": "ds1-2r-local-context-candidate"},
+    "schema_version": {"const": 1},
+    "stage": {"const": "DS1.2R"},
+    "artifact_kind": {"const": "generated_local_context_candidate"},
+    "story_id": {"const": "27-jiajue-008"},
+    "candidate_status": {"const": "candidate"},
+    "run_type": {"const": "real_model"},
+    "model": {"type": "string"},
+    "provider": {"const": "deepseek"},
+    "run_id": {"type": "string"},
+    "timestamp": {"type": "string"},
+    "prompt_config_version": {"type": "string"},
+    "parameters": {"type": "object"},
+    "initial_input_hash": {"type": "string"},
+    "retrieved_evidence_refs": {"type": "array", "items": {"type": "string"}},
+    "opened_evidence_refs": {"type": "array", "items": {"type": "string"}},
+    "retrieval_trace": {"const": "data/generated/ds1-2r/27-jiajue-008-trace.json"},
+    "token_usage": {"type": "array"},
+    "deduplication": {"type": "object"},
+    "epistemic_adjustments": {"type": "array"},
+    "result": {"$ref": "#/$defs/result"},
+    "validation_errors": {"type": "array", "items": {"type": "string"}},
+    "canonical_write_back": {"const": false}
+  },
+  "$defs": {
+    "epistemic": {"enum": ["attested", "supported_inference", "uncertain", "conflicted", "disputed_source"]},
+    "claim": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["text", "evidence_refs", "epistemic_status"],
+      "properties": {
+        "text": {"type": ["string", "null"]},
+        "evidence_refs": {"type": "array", "items": {"type": "string"}},
+        "epistemic_status": {"$ref": "#/$defs/epistemic"}
+      }
+    },
+    "participant": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["person_id", "text", "evidence_refs", "epistemic_status"],
+      "properties": {
+        "person_id": {"type": ["string", "null"]},
+        "text": {"type": ["string", "null"]},
+        "evidence_refs": {"type": "array", "items": {"type": "string"}},
+        "epistemic_status": {"$ref": "#/$defs/epistemic"}
+      }
+    },
+    "link": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["context", "text_span", "reading_effect", "evidence_refs", "epistemic_status"],
+      "properties": {
+        "context": {"type": ["string", "null"]},
+        "text_span": {"type": ["string", "null"]},
+        "reading_effect": {"type": ["string", "null"]},
+        "evidence_refs": {"type": "array", "items": {"type": "string"}},
+        "epistemic_status": {"$ref": "#/$defs/epistemic"}
+      }
+    },
+    "conflict": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["conflict_type", "existing_record", "suggested_resolution", "reason", "evidence_refs", "confidence", "action"],
+      "properties": {
+        "conflict_type": {"enum": ["identity_resolution", "participant_scope", "relation", "temporal", "other"]},
+        "existing_record": {"type": "object"},
+        "suggested_resolution": {"type": "object"},
+        "reason": {"type": "string"},
+        "evidence_refs": {"type": "array", "minItems": 1, "items": {"type": "string"}},
+        "confidence": {"enum": ["high", "medium", "low"]},
+        "action": {"const": "human_review_required"}
+      }
+    },
+    "result": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["historical_preconditions", "participant_historical_states", "relationship_state_before_scene", "reader_needed_context", "context_to_text_links", "uncertainties", "data_conflicts"],
+      "properties": {
+        "historical_preconditions": {"type": "array", "items": {"$ref": "#/$defs/claim"}},
+        "participant_historical_states": {"type": "array", "items": {"$ref": "#/$defs/participant"}},
+        "relationship_state_before_scene": {"type": "array", "items": {"$ref": "#/$defs/claim"}},
+        "reader_needed_context": {"type": "array", "items": {"$ref": "#/$defs/claim"}},
+        "context_to_text_links": {"type": "array", "items": {"$ref": "#/$defs/link"}},
+        "uncertainties": {"type": "array", "items": {"$ref": "#/$defs/claim"}},
+        "data_conflicts": {"type": "array", "items": {"$ref": "#/$defs/conflict"}}
+      }
+    }
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://shishuo.example/schema/ds2-context-candidate.schema.json",
+  "title": "DS2 Context Generalization Candidate",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "schema_version", "stage", "artifact_kind", "story_id", "candidate_status", "run_type", "model", "provider", "result", "retrieved_evidence_refs", "opened_evidence_refs", "retrieval_trace", "validation_errors", "canonical_write_back"],
+  "properties": {
+    "schema": {"const": "ds2-context-candidate"},
+    "schema_version": {"const": 1},
+    "stage": {"const": "DS2"},
+    "artifact_kind": {"const": "generated_context_candidate"},
+    "story_id": {"type": "string"},
+    "candidate_status": {"const": "candidate"},
+    "run_type": {"const": "real_model"},
+    "run_id": {"type": "string"},
+    "model": {"type": "string"},
+    "provider": {"const": "deepseek"},
+    "timestamp": {"type": "string"},
+    "prompt_config_version": {"type": "string"},
+    "parameters": {"type": "object"},
+    "initial_input_hash": {"type": "string"},
+    "retrieved_evidence_refs": {"type": "array", "items": {"type": "string"}},
+    "opened_evidence_refs": {"type": "array", "items": {"type": "string"}},
+    "retrieval_trace": {"type": "string"},
+    "token_usage": {"type": "array"},
+    "deduplication": {"type": "object"},
+    "normalization_adjustments": {"type": "array"},
+    "result": {"type": "object"},
+    "validation_errors": {"type": "array", "items": {"type": "string"}},
+    "canonical_write_back": {"const": false}
+  }
+}
