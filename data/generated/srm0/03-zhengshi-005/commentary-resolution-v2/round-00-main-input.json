@@ -1,0 +1,29 @@
+{
+  "canonical_write_back": false,
+  "execution_kind": "real_model",
+  "external_search_performed": false,
+  "messages": [
+    {
+      "content": "你第一次阅读这一则《世说新语》。\n\n现在只给正文。找出至多三个如果不进一步理解，就可能影响正文阅读的关键缺口。\n\n每个 gap 必须：\n- 绑定正文中的准确文字；\n- 只描述“缺什么”；\n- 简短、单一、可继续核查。\n\n不要尝试回答，不要提出可能答案，不要解释词义，不要猜异文，不要使用外部历史知识，不要生成搜索词。\n\n只返回以下 JSON，不要添加其他字段：\n{\"gaps\":[{\"question_id\":\"Q1\",\"story_span\":\"正文原文\",\"gap\":\"具体缺少什么\"}]}\n\n最多三个 gap。gap 不要包含“可能是”“应为”“即”“换言之”等答案或解释。",
+      "role": "system"
+    },
+    {
+      "content": "{\n  \"primary_text\": {\n    \"label\": \"世說新語正文\",\n    \"text\": \"山公以器重朝望年踰七十猶知管時任\\n\\n\\n\\n\\n\\n貴勝年少若和裴王之徒並共宗詠有署\\n閣柱曰閣東有大牛和嶠鞅裴楷鞦王濟剔嬲不得\\n休\\n或云潘尼作之\"\n  },\n  \"story_id\": \"03-zhengshi-005\"\n}\n",
+      "role": "user"
+    }
+  ],
+  "model": "deepseek-v4-flash",
+  "parameters": {
+    "response_format": {
+      "type": "json_object"
+    },
+    "temperature": 0,
+    "tools": []
+  },
+  "prompt_version": "srm0.3b-minimal-question-semantic-delta-v1",
+  "provider": "deepseek",
+  "run_id": "srm0-3b-6763488ad2b7cc28",
+  "schema": "srm0-3b-main-input",
+  "schema_version": 1,
+  "story_id": "03-zhengshi-005"
+}

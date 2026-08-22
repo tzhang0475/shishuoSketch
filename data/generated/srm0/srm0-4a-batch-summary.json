@@ -1,0 +1,446 @@
+{
+  "aggregate": {
+    "average_evidence_rounds_per_story": 1.167,
+    "evidence_saturation_rate": 0.0,
+    "premature_stop_candidates": [],
+    "reading_convergence_rate": 1.0,
+    "stable_conflict_rate": 0.0,
+    "story_count": 6,
+    "terminal_question_counts": {
+      "evidence_saturated": 0,
+      "hard_cap": 0,
+      "not_worth_pursuing": 0,
+      "reading_sufficient": 6,
+      "stable_conflict": 0,
+      "unresolved_no_evidence": 0
+    },
+    "unnecessary_continuation_candidates": [],
+    "unresolved_no_evidence_rate": 0.0
+  },
+  "canonical_write_back": false,
+  "external_search_performed": false,
+  "schema": "srm0-4a-batch-summary",
+  "schema_version": 1,
+  "selection": {
+    "candidate_counts": {
+      "low_context_control": 199,
+      "medium_commentary": 859,
+      "rich_commentary": 64
+    },
+    "canonical_write_back": false,
+    "excluded_stories": [
+      "02-yanyu-035",
+      "02-yanyu-036",
+      "03-zhengshi-005",
+      "05-fangzheng-032",
+      "06-yaliang-017",
+      "09-pinzao-017",
+      "19-xianyuan-026",
+      "27-jiajue-008"
+    ],
+    "rules": {
+      "low": {
+        "jianshu_chars_max": 99,
+        "liu_blocks_max": 1
+      },
+      "medium": {
+        "jianshu_chars_min": 100,
+        "liu_blocks_min": 1
+      },
+      "rich": {
+        "jianshu_chars_min": 500,
+        "liu_blocks_min": 4,
+        "main_text_chars_min": 50
+      }
+    },
+    "schema": "srm0-4a-selection",
+    "schema_version": 1,
+    "selected": [
+      {
+        "class": "low_context_control",
+        "jianshu_chars": 0,
+        "jianshu_note_count": 0,
+        "liu_block_count": 0,
+        "main_text_chars": 52,
+        "selection_hash": "021fefa99e70e8c37cae3995e117d6404a5da8c5b508ae9b24da9666d73dd9e2",
+        "story_id": "33-youhui-012"
+      },
+      {
+        "class": "medium_commentary",
+        "jianshu_chars": 589,
+        "jianshu_note_count": 4,
+        "liu_block_count": 2,
+        "main_text_chars": 89,
+        "selection_hash": "00614741c3c11fc469bb671e96ec825a81bf0d52bc3c860f88ccf7c900b5d744",
+        "story_id": "01-dexing-040"
+      },
+      {
+        "class": "medium_commentary",
+        "jianshu_chars": 0,
+        "jianshu_note_count": 0,
+        "liu_block_count": 2,
+        "main_text_chars": 32,
+        "selection_hash": "011bba1b786120eb5b55928799f85577751a15dedc2c2e905de8e1571d4f55f6",
+        "story_id": "09-pinzao-038"
+      },
+      {
+        "class": "rich_commentary",
+        "jianshu_chars": 2007,
+        "jianshu_note_count": 26,
+        "liu_block_count": 33,
+        "main_text_chars": 103,
+        "selection_hash": "01c6bc49180e411e9a8a62facb6ea3cf84f2f16db5cffb2c47fcd7cc97998ff7",
+        "story_id": "25-paidiao-007"
+      },
+      {
+        "class": "rich_commentary",
+        "jianshu_chars": 568,
+        "jianshu_note_count": 5,
+        "liu_block_count": 7,
+        "main_text_chars": 85,
+        "selection_hash": "02680d35e61588ec1e6051ba444bd21f23b89b7d86f209e7c880d0181be8ee7d",
+        "story_id": "19-xianyuan-010"
+      },
+      {
+        "class": "rich_commentary",
+        "jianshu_chars": 510,
+        "jianshu_note_count": 4,
+        "liu_block_count": 7,
+        "main_text_chars": 73,
+        "selection_hash": "04bcc282b4bf5f434c08c8d01fbcadb0c6f786da90e613ae66088c5aae4de270",
+        "story_id": "02-yanyu-053"
+      }
+    ],
+    "selection_rationale": "All prior SRM/DS/IRR pilot Stories are excluded. Within each observed commentary class, SHA-256(Story ID) ordering selects the first eligible records; no success-based hand selection is used.",
+    "stage": "deterministic_fresh_story_selection"
+  },
+  "stories": [
+    {
+      "accepted_gap_count": 1,
+      "class": "medium_commentary",
+      "initial_gap_count": 1,
+      "jianshu_chars": 589,
+      "liu_block_count": 2,
+      "low_leverage_gaps_removed": 0,
+      "main_text_chars": 89,
+      "new_used_refs": [
+        "L02"
+      ],
+      "opened_refs": [],
+      "retrieved_refs": [],
+      "round_metrics": [
+        {
+          "D_t": 1,
+          "G_t": 1,
+          "N_t": 1.0,
+          "new_used_evidence_refs": [
+            "L02"
+          ],
+          "retrieval": false,
+          "round": 1,
+          "used_evidence_refs": [
+            "L02"
+          ]
+        }
+      ],
+      "rounds_executed": [
+        0,
+        1
+      ],
+      "searched_corpora": [],
+      "self_resolved_gaps_removed": 0,
+      "story_id": "01-dexing-040",
+      "story_status": "converged",
+      "terminal_reasons": {
+        "Q1": "reading_sufficient"
+      },
+      "token_usage": {
+        "completion_count": 0,
+        "total_tokens": 0
+      },
+      "used_refs": [
+        "L02"
+      ],
+      "validation_errors": []
+    },
+    {
+      "accepted_gap_count": 1,
+      "class": "rich_commentary",
+      "initial_gap_count": 1,
+      "jianshu_chars": 510,
+      "liu_block_count": 7,
+      "low_leverage_gaps_removed": 0,
+      "main_text_chars": 73,
+      "new_used_refs": [
+        "L07"
+      ],
+      "opened_refs": [],
+      "retrieved_refs": [],
+      "round_metrics": [
+        {
+          "D_t": 1,
+          "G_t": 1,
+          "N_t": 1.0,
+          "new_used_evidence_refs": [
+            "L07"
+          ],
+          "retrieval": false,
+          "round": 1,
+          "used_evidence_refs": [
+            "L07"
+          ]
+        }
+      ],
+      "rounds_executed": [
+        0,
+        1
+      ],
+      "searched_corpora": [],
+      "self_resolved_gaps_removed": 0,
+      "story_id": "02-yanyu-053",
+      "story_status": "converged",
+      "terminal_reasons": {
+        "Q1": "reading_sufficient"
+      },
+      "token_usage": {
+        "completion_count": 0,
+        "total_tokens": 0
+      },
+      "used_refs": [
+        "L07"
+      ],
+      "validation_errors": []
+    },
+    {
+      "accepted_gap_count": 1,
+      "class": "medium_commentary",
+      "initial_gap_count": 1,
+      "jianshu_chars": 0,
+      "liu_block_count": 2,
+      "low_leverage_gaps_removed": 0,
+      "main_text_chars": 32,
+      "new_used_refs": [
+        "L02"
+      ],
+      "opened_refs": [],
+      "retrieved_refs": [],
+      "round_metrics": [
+        {
+          "D_t": 1,
+          "G_t": 1,
+          "N_t": 1.0,
+          "new_used_evidence_refs": [
+            "L02"
+          ],
+          "retrieval": false,
+          "round": 1,
+          "used_evidence_refs": [
+            "L02"
+          ]
+        }
+      ],
+      "rounds_executed": [
+        0,
+        1
+      ],
+      "searched_corpora": [],
+      "self_resolved_gaps_removed": 0,
+      "story_id": "09-pinzao-038",
+      "story_status": "converged",
+      "terminal_reasons": {
+        "Q1": "reading_sufficient"
+      },
+      "token_usage": {
+        "completion_count": 0,
+        "total_tokens": 0
+      },
+      "used_refs": [
+        "L02"
+      ],
+      "validation_errors": []
+    },
+    {
+      "accepted_gap_count": 1,
+      "class": "rich_commentary",
+      "initial_gap_count": 1,
+      "jianshu_chars": 568,
+      "liu_block_count": 7,
+      "low_leverage_gaps_removed": 0,
+      "main_text_chars": 85,
+      "new_used_refs": [
+        "L07"
+      ],
+      "opened_refs": [],
+      "retrieved_refs": [],
+      "round_metrics": [
+        {
+          "D_t": 1,
+          "G_t": 1,
+          "N_t": 1.0,
+          "new_used_evidence_refs": [
+            "L07"
+          ],
+          "retrieval": false,
+          "round": 1,
+          "used_evidence_refs": [
+            "L07"
+          ]
+        }
+      ],
+      "rounds_executed": [
+        0,
+        1
+      ],
+      "searched_corpora": [],
+      "self_resolved_gaps_removed": 0,
+      "story_id": "19-xianyuan-010",
+      "story_status": "converged",
+      "terminal_reasons": {
+        "Q1": "reading_sufficient"
+      },
+      "token_usage": {
+        "completion_count": 0,
+        "total_tokens": 0
+      },
+      "used_refs": [
+        "L07"
+      ],
+      "validation_errors": []
+    },
+    {
+      "accepted_gap_count": 1,
+      "class": "rich_commentary",
+      "initial_gap_count": 1,
+      "jianshu_chars": 2007,
+      "liu_block_count": 33,
+      "low_leverage_gaps_removed": 0,
+      "main_text_chars": 103,
+      "new_used_refs": [
+        "L33"
+      ],
+      "opened_refs": [],
+      "retrieved_refs": [],
+      "round_metrics": [
+        {
+          "D_t": 1,
+          "G_t": 1,
+          "N_t": 1.0,
+          "new_used_evidence_refs": [
+            "L33"
+          ],
+          "retrieval": false,
+          "round": 1,
+          "used_evidence_refs": [
+            "L33"
+          ]
+        }
+      ],
+      "rounds_executed": [
+        0,
+        1
+      ],
+      "searched_corpora": [],
+      "self_resolved_gaps_removed": 0,
+      "story_id": "25-paidiao-007",
+      "story_status": "converged",
+      "terminal_reasons": {
+        "Q1": "reading_sufficient"
+      },
+      "token_usage": {
+        "completion_count": 0,
+        "total_tokens": 0
+      },
+      "used_refs": [
+        "L33"
+      ],
+      "validation_errors": []
+    },
+    {
+      "accepted_gap_count": 1,
+      "class": "low_context_control",
+      "initial_gap_count": 1,
+      "jianshu_chars": 0,
+      "liu_block_count": 0,
+      "low_leverage_gaps_removed": 0,
+      "main_text_chars": 52,
+      "new_used_refs": [
+        "jinshu:076-liezhuan-002"
+      ],
+      "opened_refs": [
+        "jinshu:027-zhi-001",
+        "jinshu:064-liezhuan-001",
+        "jinshu:076-liezhuan-002",
+        "sanguozhi:sgz1-juan-017-000016",
+        "shishuo:02-yanyu-056:main"
+      ],
+      "retrieved_refs": [
+        "jinshu:027-zhi-001",
+        "jinshu:064-liezhuan-001",
+        "jinshu:076-liezhuan-002",
+        "s1:s1-assertion-0000e3d3bb0f3c4a22b3",
+        "s1:s1-assertion-3fcee2c50fe10f792d8f",
+        "s1:s1-assertion-889fecf458fa2b370e2c",
+        "sanguozhi:sgz1-juan-005-000036",
+        "sanguozhi:sgz1-juan-010-000088",
+        "sanguozhi:sgz1-juan-017-000016",
+        "shishuo:02-yanyu-056:main",
+        "shishuo:02-yanyu-059:main",
+        "shishuo:14-rongzhi-034:main"
+      ],
+      "round_metrics": [
+        {
+          "D_t": 1,
+          "G_t": 1,
+          "N_t": 0.0,
+          "new_used_evidence_refs": [],
+          "retrieval": false,
+          "round": 1,
+          "used_evidence_refs": []
+        },
+        {
+          "D_t": 1,
+          "G_t": 1,
+          "N_t": 1.0,
+          "new_used_evidence_refs": [
+            "jinshu:076-liezhuan-002"
+          ],
+          "opened_evidence_count": 5,
+          "retrieval": true,
+          "retrieved_evidence_count": 5,
+          "round": 2,
+          "used_evidence_refs": [
+            "jinshu:076-liezhuan-002"
+          ]
+        }
+      ],
+      "rounds_executed": [
+        0,
+        1,
+        2
+      ],
+      "searched_corpora": [
+        "世說新語",
+        "余嘉錫箋疏",
+        "晉書",
+        "三國志",
+        "資治通鑑",
+        "資治通鑑考異"
+      ],
+      "self_resolved_gaps_removed": 0,
+      "story_id": "33-youhui-012",
+      "story_status": "converged",
+      "terminal_reasons": {
+        "Q1": "refined_to_child",
+        "Q1.1": "reading_sufficient"
+      },
+      "token_usage": {
+        "completion_count": 0,
+        "total_tokens": 0
+      },
+      "used_refs": [
+        "jinshu:076-liezhuan-002"
+      ],
+      "validation_errors": []
+    }
+  ]
+}

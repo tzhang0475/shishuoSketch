@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "SRM0.2M layered commentary reading result",
+  "type": "object",
+  "required": ["reading_questions", "commentary_issues", "person_connections", "appraisals"],
+  "additionalProperties": false,
+  "properties": {
+    "reading_questions": {
+      "type": "array",
+      "maxItems": 3,
+      "items": {
+        "type": "object",
+        "required": ["story_span", "question", "why_it_matters", "commentary_clues", "reading_change_if_answered", "additional_evidence_needed"],
+        "additionalProperties": false,
+        "properties": {
+          "story_span": {"type": "string", "minLength": 1},
+          "question": {"type": "string", "minLength": 1},
+          "why_it_matters": {"type": "string", "minLength": 1},
+          "commentary_clues": {"type": "array"},
+          "reading_change_if_answered": {"type": "string", "minLength": 1},
+          "additional_evidence_needed": {"type": "string", "minLength": 1}
+        }
+      }
+    },
+    "commentary_issues": {"type": "array", "maxItems": 3},
+    "person_connections": {"type": "array", "maxItems": 4},
+    "appraisals": {"type": "array", "maxItems": 4}
+  }
+}

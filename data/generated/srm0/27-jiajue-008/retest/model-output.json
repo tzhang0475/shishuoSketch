@@ -1,0 +1,96 @@
+{
+  "api_usage": {
+    "completion_tokens": 760,
+    "prompt_cache_hit_tokens": 0,
+    "prompt_cache_miss_tokens": 2030,
+    "prompt_tokens": 2030,
+    "raw_usage": {
+      "completion_tokens": 760,
+      "prompt_cache_hit_tokens": 0,
+      "prompt_cache_miss_tokens": 2030,
+      "prompt_tokens": 2030,
+      "prompt_tokens_details": {
+        "cached_tokens": 0
+      },
+      "total_tokens": 2790
+    },
+    "total_tokens": 2790
+  },
+  "artifact_kind": "generated_retest_output",
+  "candidate_status": "candidate",
+  "canonical_write_back": false,
+  "execution_kind": "real_model",
+  "json_repair": "none",
+  "model": "deepseek-v4-flash",
+  "normalized_output": {
+    "appraisal_candidates": [],
+    "candidate_subquestion": null,
+    "deprioritized_associations": [
+      {
+        "idea": "陶侃因庾亮噉薤留白而賞其有治實，可能反映其重實際，但非釋然直接原因。",
+        "reason": "该关联存在时间方向风险，不能自动作为当前释然的直接原因。",
+        "trigger_refs": [
+          "jinshu:073-liezhuan-001",
+          "s1-assertion-1cc16661eadaf2634b20"
+        ]
+      }
+    ],
+    "question_resolution": {
+      "current_answer": "陶公釋然的關鍵在於庾亮見面時主動引咎責躬、深相遜謝，態度誠懇且風度可觀，使陶侃感受到尊重與誠意，因而放下先前敵意。",
+      "evidence_refs": [
+        "jinshu:073-liezhuan-001",
+        "s1-assertion-1cc16661eadaf2634b20",
+        "s1-assertion-ac839ae3949439680021"
+      ],
+      "question_id": "Q1",
+      "remaining_gap": "無",
+      "status": "resolved"
+    },
+    "reading_links": [
+      {
+        "context": "direct_parallel",
+        "reading_effect": "direct_parallel",
+        "refs": [
+          "jinshu:073-liezhuan-001"
+        ],
+        "text_span": "庾乃引咎責躬，深相遜謝。陶不覺釋然。"
+      }
+    ],
+    "static_relation_candidates": [],
+    "stop_recommendation": {
+      "reason": "Q1已由直接證據充分回答，無必要繼續追問。",
+      "stop": true
+    },
+    "useful_evidence": [
+      {
+        "finding": "庾亮見陶侃時引咎自責，風止可觀，侃不覺釋然，並稱讚其風流與為政之實。",
+        "ref": "jinshu:073-liezhuan-001",
+        "role": "direct_support"
+      },
+      {
+        "finding": "陶侃曾因肅祖顧命不及己，且蘇峻之亂釁由諸庾，故欲誅庾亮兄弟以謝天下。",
+        "ref": "s1-assertion-ac839ae3949439680021",
+        "role": "context"
+      },
+      {
+        "finding": "陶侃愛惜物力，因庾亮噉薤留白而賞其有治實，可見其重實際才能。",
+        "ref": "s1-assertion-1cc16661eadaf2634b20",
+        "role": "direct_support"
+      },
+      {
+        "finding": "溫嶠在王導機智解圍後下謝，帝乃釋然，顯示釋然可因對方得體謝罪而發生。",
+        "ref": "shishuo:11-jiewu-005:main",
+        "role": "context"
+      }
+    ]
+  },
+  "prompt_version": "srm0.1r-v1",
+  "provider": "deepseek",
+  "raw_content": "{\n  \"useful_evidence\": [\n    {\n      \"ref\": \"jinshu:073-liezhuan-001\",\n      \"finding\": \"庾亮見陶侃時引咎自責，風止可觀，侃不覺釋然，並稱讚其風流與為政之實。\",\n      \"role\": \"supports\"\n    },\n    {\n      \"ref\": \"s1-assertion-ac839ae3949439680021\",\n      \"finding\": \"陶侃曾因肅祖顧命不及己，且蘇峻之亂釁由諸庾，故欲誅庾亮兄弟以謝天下。\",\n      \"role\": \"background\"\n    },\n    {\n      \"ref\": \"s1-assertion-1cc16661eadaf2634b20\",\n      \"finding\": \"陶侃愛惜物力，因庾亮噉薤留白而賞其有治實，可見其重實際才能。\",\n      \"role\": \"supports\"\n    },\n    {\n      \"ref\": \"shishuo:11-jiewu-005:main\",\n      \"finding\": \"溫嶠在王導機智解圍後下謝，帝乃釋然，顯示釋然可因對方得體謝罪而發生。\",\n      \"role\": \"analogy\"\n    }\n  ],\n  \"question_resolution\": {\n    \"question_id\": \"Q1\",\n    \"status\": \"resolved\",\n    \"current_answer\": \"陶公釋然的關鍵在於庾亮見面時主動引咎責躬、深相遜謝，態度誠懇且風度可觀，使陶侃感受到尊重與誠意，因而放下先前敵意。\",\n    \"remaining_gap\": \"無\",\n    \"evidence_refs\": [\n      \"jinshu:073-liezhuan-001\",\n      \"s1-assertion-ac839ae3949439680021\",\n      \"s1-assertion-1cc16661eadaf2634b20\"\n    ]\n  },\n  \"reading_links\": [\n    {\n      \"text_span\": \"庾乃引咎責躬，深相遜謝。陶不覺釋然。\",\n      \"ref\": \"jinshu:073-liezhuan-001\",\n      \"link_type\": \"direct_parallel\"\n    },\n    {\n      \"text_span\": \"嶠於是下謝，帝乃釋然。\",\n      \"ref\": \"shishuo:11-jiewu-005:main\",\n      \"link_type\": \"parallel\"\n    }\n  ],\n  \"static_relation_candidates\": [],\n  \"appraisal_candidates\": [\n    {\n      \"text_span\": \"風止可觀\",\n      \"ref\": \"jinshu:073-liezhuan-001\",\n      \"appraisal\": \"positive_appreciation\"\n    },\n    {\n      \"text_span\": \"深相遜謝\",\n      \"ref\": \"jinshu:073-liezhuan-001\",\n      \"appraisal\": \"positive_judgment\"\n    }\n  ],\n  \"candidate_subquestion\": null,\n  \"deprioritized_associations\": [\n    \"陶侃因庾亮噉薤留白而賞其有治實，可能反映其重實際，但非釋然直接原因。\"\n  ],\n  \"stop_recommendation\": {\n    \"stop\": true,\n    \"reason\": \"Q1已由直接證據充分回答，無必要繼續追問。\"\n  }\n}",
+  "run_id": "srm0-1r-5b11b89386ce4ed03d34",
+  "schema": "srm0-1r-model-output",
+  "schema_version": 1,
+  "stage": "completion_2_evidence_consumption_retest",
+  "story_id": "27-jiajue-008",
+  "validation_errors": []
+}

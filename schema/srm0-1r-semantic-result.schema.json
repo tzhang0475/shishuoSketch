@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "SRM0.1R semantic evidence-consumption result",
+  "type": "object",
+  "required": [
+    "useful_evidence",
+    "question_resolution",
+    "reading_links",
+    "static_relation_candidates",
+    "appraisal_candidates",
+    "candidate_subquestion",
+    "deprioritized_associations",
+    "stop_recommendation"
+  ],
+  "properties": {
+    "useful_evidence": {"type": "array", "maxItems": 4},
+    "question_resolution": {"type": "object"},
+    "reading_links": {"type": "array", "maxItems": 2},
+    "static_relation_candidates": {"type": "array", "maxItems": 3},
+    "appraisal_candidates": {"type": "array", "maxItems": 3},
+    "candidate_subquestion": {"type": ["object", "null"]},
+    "deprioritized_associations": {"type": "array", "maxItems": 3},
+    "stop_recommendation": {"type": "object"}
+  },
+  "additionalProperties": false
+}

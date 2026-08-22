@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "srm0-4a-convergence.schema.json",
+  "title": "SRM0.4A convergence artifact",
+  "type": "object",
+  "required": ["story_id", "round_metrics", "canonical_write_back"],
+  "properties": {
+    "story_id": {"type": "string", "minLength": 1},
+    "story_status": {"type": "string"},
+    "canonical_write_back": {"const": false},
+    "external_search_performed": {"const": false},
+    "round_metrics": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["round", "G_t", "D_t", "N_t"],
+        "properties": {
+          "round": {"type": "integer", "minimum": 1, "maximum": 4},
+          "G_t": {"type": "integer", "minimum": 0},
+          "D_t": {"type": "integer", "enum": [0, 1]},
+          "N_t": {"type": "number", "minimum": 0, "maximum": 1}
+        }
+      }
+    }
+  }
+}

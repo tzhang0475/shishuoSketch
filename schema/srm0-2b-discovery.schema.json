@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "SRM0.2B blind discovery result",
+  "type": "object",
+  "required": ["questions", "person_connections", "appraisals"],
+  "additionalProperties": false,
+  "properties": {
+    "questions": {
+      "type": "array",
+      "maxItems": 3,
+      "items": {
+        "type": "object",
+        "required": ["question", "trigger_text", "why_it_matters", "what_more_evidence_is_needed"],
+        "additionalProperties": false,
+        "properties": {
+          "question": {"type": "string", "minLength": 1},
+          "trigger_text": {"type": "string", "minLength": 1},
+          "why_it_matters": {"type": "string", "minLength": 1},
+          "what_more_evidence_is_needed": {"type": "string", "minLength": 1}
+        }
+      }
+    },
+    "person_connections": {
+      "type": "array",
+      "maxItems": 5,
+      "items": {
+        "type": "object",
+        "required": ["persons", "observation", "basis", "needs_verification"],
+        "additionalProperties": false,
+        "properties": {
+          "persons": {"type": "array", "minItems": 2, "items": {"type": "string", "minLength": 1}},
+          "observation": {"type": "string", "minLength": 1},
+          "basis": {"type": "string", "minLength": 1},
+          "needs_verification": {"type": "boolean"}
+        }
+      }
+    },
+    "appraisals": {
+      "type": "array",
+      "maxItems": 5,
+      "items": {
+        "type": "object",
+        "required": ["evaluator", "target", "observation", "basis"],
+        "additionalProperties": false,
+        "properties": {
+          "evaluator": {"type": "string", "minLength": 1},
+          "target": {"type": "string", "minLength": 1},
+          "observation": {"type": "string", "minLength": 1},
+          "basis": {"type": "string", "minLength": 1}
+        }
+      }
+    }
+  }
+}

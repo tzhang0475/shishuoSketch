@@ -1,0 +1,37 @@
+{
+  "artifact_kind": "generated_discovery_input",
+  "canonical_write_back": false,
+  "character_metrics": {
+    "instruction_chars": 504,
+    "liu_annotation_chars": 307,
+    "serialized_payload_chars": 1198,
+    "serialized_prompt_chars": 1702,
+    "story_chars": 68
+  },
+  "execution_kind": "real_model",
+  "messages": [
+    {
+      "content": "你正在第一次阅读一则《世说新语》正文及刘注。\n只根据当前提供的材料观察，不使用外部历史知识补足事实，不搜索，不回答尚无证据的问题。\n\n请指出：\n1. 最值得进一步查证的至多三个问题；\n2. 当前材料中你注意到的、可能值得进一步确认的人物之间联系；\n3. 当前材料中出现的明确或可能的人物评价。\n\n问题必须由正文或刘注中的具体内容触发，而不是泛泛询问人物生平。对每个问题说明：\n- 哪段文字触发；\n- 为什么值得查；\n- 还需要什么类型的史料才能继续判断。\n\n人物联系只描述当前材料显示出的现象，不要把猜测写成事实，不要预设关系类别。\n人物评价必须说明谁评价谁、评价依据是什么。如果无法确定评价者或对象，可以明确保留不确定。\n此阶段只观察和提问，不搜索，不作最终解释。\n\n只返回 JSON，顶层字段必须是 questions、person_connections、appraisals。\nquestions 最多 3 项；person_connections 最多 5 项；appraisals 最多 5 项。\n不要输出问题分类、关系类别、搜索词、最终答案、事实数据库字段或任何 canonical 写回字段。",
+      "role": "system"
+    },
+    {
+      "content": "{\n  \"chapter\": \"政事第三\",\n  \"liu_annotations\": [\n    {\n      \"annotation_id\": \"annotation-001\",\n      \"text\": \"(曰山濤字/虞預晉書)\"\n    },\n    {\n      \"annotation_id\": \"annotation-002\",\n      \"text\": \"(貧少有器量宿士猶不慢之年十七宗人謂宣帝曰/巨源河内懐人祖本郡孝廉父曜宛句令濤蚤孤而)\"\n    },\n    {\n      \"annotation_id\": \"annotation-003\",\n      \"text\": \"(此快人邪好荘老與嵇康善為河内從事與石鑒共/濤當與景文共綱紀天下者也帝戱曰卿小族那得)\"\n    },\n    {\n      \"annotation_id\": \"annotation-004\",\n      \"text\": \"(意鑒曰宰相三日不朝與尺一令歸第君何慮焉濤/傳宿濤夜起蹋鑒曰今何等時而眠也知太傅卧何)\"\n    },\n    {\n      \"annotation_id\": \"annotation-005\",\n      \"text\": \"(隱身不交世務累遷吏部尚書僕射太子少傅司徒/曰咄石生無事馬蹄閒也投傳而去果有曹爽事遂)\"\n    },\n    {\n      \"annotation_id\": \"annotation-006\",\n      \"text\": \"(薨諡康侯/年七十九)\"\n    },\n    {\n      \"annotation_id\": \"annotation-007\",\n      \"text\": \"(曰閣東有大牛王濟鞅裴楷鞦和嶠刺促不得休/王隱晉書曰初濤領吏部潘岳内非之宻為作謡)\"\n    },\n    {\n      \"annotation_id\": \"annotation-008\",\n      \"text\": \"(選非望路絶故貽是言/竹林七賢論曰濤之處)\"\n    },\n    {\n      \"annotation_id\": \"annotation-009\",\n      \"text\": \"(字正叔滎陽/文士傳曰尼)\"\n    },\n    {\n      \"annotation_id\": \"annotation-010\",\n      \"text\": \"(尼少有清才文詞温雅初應州辟終太常卿/人祖朂尚書左丞父滿平原太守並以文學稱)\"\n    }\n  ],\n  \"story_id\": \"03-zhengshi-005\",\n  \"story_text\": \"山公以器重朝望年踰七十猶知管時任\\n\\n\\n\\n\\n\\n貴勝年少若和裴王之徒並共宗詠有署\\n閣柱曰閣東有大牛和嶠鞅裴楷鞦王濟剔嬲不得\\n休\\n或云潘尼作之\"\n}\n",
+      "role": "user"
+    }
+  ],
+  "model": "deepseek-v4-flash",
+  "parameters": {
+    "response_format": {
+      "type": "json_object"
+    },
+    "temperature": 0,
+    "tools": []
+  },
+  "prompt_version": "srm0.2b-blind-discovery-v1",
+  "provider": "deepseek",
+  "run_id": "srm0-2b-6763488ad2b7-20260822164045",
+  "schema": "srm0-2b-model-input",
+  "schema_version": 1,
+  "stage": "blind_rich_story_discovery",
+  "story_id": "03-zhengshi-005"
+}

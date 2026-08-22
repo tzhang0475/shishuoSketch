@@ -1,0 +1,41 @@
+{
+  "artifact_kind": "generated_layered_input",
+  "canonical_write_back": false,
+  "character_metrics": {
+    "instruction_chars": 655,
+    "jianshu_full_available_chars": 1629,
+    "jianshu_model_chars": 1629,
+    "liu_chars": 307,
+    "main_text_chars": 68,
+    "serialized_payload_chars": 5753,
+    "serialized_prompt_chars": 6408
+  },
+  "execution_kind": "real_model",
+  "external_search_performed": false,
+  "jianshu_mode": "full",
+  "messages": [
+    {
+      "content": "你正在第一次阅读一则《世说新语》。\n\n材料分为三层：\n1. 正文：当前真正要理解的对象；\n2. 刘孝标注：早期注释和史料补充；\n3. 余嘉锡《笺疏》：后世考辨、引证和解释。\n\n注释可以帮助你理解正文，但不要因为注释更长，就把与正文阅读关系较弱的考据问题自动列为最重要的问题。\n\n首先从正文中找出至多三个真正值得进一步研究的地方。每个主要问题必须绑定一段准确的正文文字，并说明：\n- 为什么仅凭正文仍不容易充分理解；\n- 刘注或笺疏提供了什么线索；\n- 如果进一步查清，会怎样改变对这段正文的理解。\n\n如果刘注或笺疏自身出现版本、作者、史源等值得考证的问题，可以另列为 commentary_issue，但不要与主要的正文阅读问题混为一类。\n\n同时记录材料中明确显示或值得进一步核查的人物联系，以及有明确来源的人物评价。\n\n不使用提供材料之外的历史知识。不搜索。不作最终历史断言。不把同现、同姓或推测自动当成人物关系。不把后来的材料自动作为先前行为的原因。\n\n只返回 JSON，顶层字段必须是 reading_questions、commentary_issues、person_connections、appraisals。\nreading_questions 最多 3 项；commentary_issues 最多 3 项；person_connections 最多 4 项；appraisals 最多 4 项。\n不要输出问题分类、关系类别、搜索词、最终答案、事实数据库字段或 canonical 写回字段。",
+      "role": "system"
+    },
+    {
+      "content": "{\n  \"early_commentary\": {\n    \"label\": \"劉孝標注\",\n    \"notes\": [\n      {\n        \"anchor\": null,\n        \"note_id\": \"L01\",\n        \"text\": \"(曰山濤字/虞預晉書)\"\n      },\n      {\n        \"anchor\": null,\n        \"note_id\": \"L02\",\n        \"text\": \"(貧少有器量宿士猶不慢之年十七宗人謂宣帝曰/巨源河内懐人祖本郡孝廉父曜宛句令濤蚤孤而)\"\n      },\n      {\n        \"anchor\": null,\n        \"note_id\": \"L03\",\n        \"text\": \"(此快人邪好荘老與嵇康善為河内從事與石鑒共/濤當與景文共綱紀天下者也帝戱曰卿小族那得)\"\n      },\n      {\n        \"anchor\": null,\n        \"note_id\": \"L04\",\n        \"text\": \"(意鑒曰宰相三日不朝與尺一令歸第君何慮焉濤/傳宿濤夜起蹋鑒曰今何等時而眠也知太傅卧何)\"\n      },\n      {\n        \"anchor\": null,\n        \"note_id\": \"L05\",\n        \"text\": \"(隱身不交世務累遷吏部尚書僕射太子少傅司徒/曰咄石生無事馬蹄閒也投傳而去果有曹爽事遂)\"\n      },\n      {\n        \"anchor\": null,\n        \"note_id\": \"L06\",\n        \"text\": \"(薨諡康侯/年七十九)\"\n      },\n      {\n        \"anchor\": null,\n        \"note_id\": \"L07\",\n        \"text\": \"(曰閣東有大牛王濟鞅裴楷鞦和嶠刺促不得休/王隱晉書曰初濤領吏部潘岳内非之宻為作謡)\"\n      },\n      {\n        \"anchor\": null,\n        \"note_id\": \"L08\",\n        \"text\": \"(選非望路絶故貽是言/竹林七賢論曰濤之處)\"\n      },\n      {\n        \"anchor\": null,\n        \"note_id\": \"L09\",\n        \"text\": \"(字正叔滎陽/文士傳曰尼)\"\n      },\n      {\n        \"anchor\": null,\n        \"note_id\": \"L10\",\n        \"text\": \"(尼少有清才文詞温雅初應州辟終太常卿/人祖朂尚書左丞父滿平原太守並以文學稱)\"\n      }\n    ]\n  },\n  \"later_commentary\": {\n    \"label\": \"余嘉錫箋疏\",\n    \"mode\": \"full\",\n    \"notes\": [\n      {\n        \"anchor\": null,\n        \"layer\": \"liu_annotation\",\n        \"note_id\": \"J01\",\n        \"source_labels\": [],\n        \"speaker\": null,\n        \"text\": \"〔三〕 帝戲曰：『卿小族，那得此快人邪？』好莊、老，與嵇康善。為河內從事，與石鑒共傳宿，濤夜起蹋鑒曰：『今何等時而眠也！知太傅臥何意？』鑒曰：『宰相三日不朝，與尺一令歸第，君何慮焉？』濤曰：『咄！石生，無事馬蹄閒也。』投傳而去，果有曹爽事，遂隱身不交世務。累遷吏部尚書、僕射、太子少傅、司徒。年七十九薨，諡康侯。」 貴勝年少，若和、裴、王之徒，並共言詠。有署閣柱曰：「閣東，\"\n      },\n      {\n        \"anchor\": null,\n        \"layer\": \"liu_annotation\",\n        \"note_id\": \"J02\",\n        \"source_labels\": [\n          \"晉書\"\n        ],\n        \"speaker\": null,\n        \"text\": \"〔五〕 王隱晉書曰：「初，濤領吏部，潘岳內非之，密為作謠曰：『閣東，有大牛，王濟鞅，裴楷鞦，和嶠刺促不得休。』」竹林七賢論曰：「濤之處選，非望路絕，故貽是言。」 或云：潘尼作之。\"\n      },\n      {\n        \"anchor\": null,\n        \"layer\": \"liu_annotation\",\n        \"note_id\": \"J03\",\n        \"source_labels\": [],\n        \"speaker\": null,\n        \"text\": \"〔二〕 宗人謂宣帝曰：『濤當與景、文共綱紀天下者也。』\"\n      },\n      {\n        \"anchor\": null,\n        \"layer\": \"liu_annotation\",\n        \"note_id\": \"J04\",\n        \"source_labels\": [],\n        \"speaker\": null,\n        \"text\": \"〔四〕 有大牛，和嶠鞅，裴楷鞦，王濟剔嬲不得休。」\"\n      },\n      {\n        \"anchor\": null,\n        \"layer\": \"liu_annotation\",\n        \"note_id\": \"J05\",\n        \"source_labels\": [],\n        \"speaker\": null,\n        \"text\": \"〔六〕 文士傳曰：「尼字正叔，滎陽人。祖最，尚書左丞。父滿，平原太守。並以文學稱。尼少有清才，文詞溫雅。初應州辟，終太常卿。」\"\n      },\n      {\n        \"anchor\": null,\n        \"layer\": \"liu_annotation\",\n        \"note_id\": \"J06\",\n        \"source_labels\": [],\n        \"speaker\": null,\n        \"text\": \"〔一〕 濤蚤孤而貧，少有器量，宿士猶不慢之。年十七，\"\n      },\n      {\n        \"anchor\": null,\n        \"layer\": \"collation_note\",\n        \"note_id\": \"J07\",\n        \"source_labels\": [],\n        \"speaker\": null,\n        \"text\": \"注「冤句」「冤」，沈本作「宛」。「並共言詠」「言」，景宋本作「宗」。注「祖最」「最」，景宋本作「勖」。\"\n      },\n      {\n        \"anchor\": null,\n        \"layer\": \"jianshu_note\",\n        \"note_id\": \"J08\",\n        \"source_labels\": [\n          \"晉書\"\n        ],\n        \"speaker\": \"余嘉錫\",\n        \"text\": \"〔一〕 嘉錫案：冤句，晉書本傳作宛句。元和姓纂卷四亦云「山輝宛句令」，然考諸史地志，濟陰郡有冤句縣，作「宛」者非。\"\n      },\n      {\n        \"anchor\": null,\n        \"layer\": \"jianshu_note\",\n        \"note_id\": \"J09\",\n        \"source_labels\": [\n          \"晉書\"\n        ],\n        \"speaker\": \"余嘉錫\",\n        \"text\": \"〔二〕 吳承仕曰：「濤年十七為黃初二年。」嘉錫案：山濤之年，吳氏以晉書本傳言「太康四年薨，年七十九」推知之也。\"\n      },\n      {\n        \"anchor\": null,\n        \"layer\": \"jianshu_note\",\n        \"note_id\": \"J10\",\n        \"source_labels\": [\n          \"晉書\"\n        ],\n        \"speaker\": \"余嘉錫\",\n        \"text\": \"〔三〕 李慈銘云：「案宗人下當有脫字。晉書言濤與宣穆后有中表親。宣穆后者，司馬懿夫人張氏也。此云景、文者，指懿子師、昭，乃後人追述之辭。然對父而生稱其子之謚，有以見預書之無法。」嘉錫案：景、文謂懿子景帝師，文帝昭也。按晉書本紀：師以魏正元二年卒，年四十八，當生於漢建安十三年。昭以咸熙二年卒，年五十五，當生於建安十六年。下數至魏文帝黃初二年，師才十四歲，昭十一歲耳。縱令早慧夙成，亦安知其他日必能綱紀天下？且懿是年始為侍中尚書右僕射，柄用方新，勛名尚淺，雖有不臣之心，而反形未具，外人惡能測其心腹，知其必能父子相繼，盜弄天下之柄耶？虞預之言，明出傅會，理不可信。唐修晉書棄而不取，當矣。\"\n      },\n      {\n        \"anchor\": null,\n        \"layer\": \"jianshu_note\",\n        \"note_id\": \"J11\",\n        \"source_labels\": [\n          \"後漢書\",\n          \"晉書\",\n          \"漢書\"\n        ],\n        \"speaker\": \"余嘉錫\",\n        \"text\": \"〔四〕 程炎震云：「晉書潘岳傳云『閣道東』，此及注文並當有道字。晉書五行志：『永興二年七月甲午，尚書諸曹火起，延崇禮闥及閣道。』蓋閣道與尚書省相近，故岳得題其柱耳。」文選陸士衡答賈謐詩注引謝承後漢書曰：「承父嬰，為尚書侍郎，每讀高祖及光武之後將相名臣策文通訓，條在南宮，祕於省閣。唯臺郎升複道取急，因得開覽。」嘉錫案：漢、晉臺閣之制殆相似。\"\n      },\n      {\n        \"anchor\": null,\n        \"layer\": \"jianshu_note\",\n        \"note_id\": \"J12\",\n        \"source_labels\": [\n          \"晉書\"\n        ],\n        \"speaker\": \"余嘉錫\",\n        \"text\": \"〔五〕 攷工記輖人云：「故登阤者，倍任者也。猶能以登及其下阤也。不援其邸，必緧其牛後。」鄭注：「阤，阪也。倍任，用力倍也。」惠士奇禮說十四曰：「說文『馬尾●，今之般緧』，則般緧在馬尾，故曰緧其後。緧一作鞦。釋名曰：『鞦，遒也。在後遒追，使不得卻縮也。』潘岳疾王濟、裴楷，乃題閣道為謠曰：『閣道東，有大牛，王濟鞅，裴楷。』夾頸為鞅，後遒為。言濟在前，楷在後也。」嘉錫案：惠氏所用乃今晉書潘岳傳，故與孝標所引王隱書不盡同。岳意以大牛比山濤，言其為人所牽制，不能自主也。黃生義府下曰：「世說『剔嬲不得休』，方言云：『妯，擾也。』嵇康絕交書：『嬲之不置。』注：『擿嬈也。』剔嬲即妯擾，即擿嬈。」\"\n      },\n      {\n        \"anchor\": null,\n        \"layer\": \"jianshu_note\",\n        \"note_id\": \"J13\",\n        \"source_labels\": [],\n        \"speaker\": \"余嘉錫\",\n        \"text\": \"李詳云：「黃生義府引作踢嬲，方言：『妯，嬈也。』嵇康絕交書『嬲之不置』，注，擿嬈也。踢嬲即擿嬈。又按胡氏紹煐文選箋證：說文：嬈，苛也。段注：謂嬲乃嬈之俗。眾經音義引三倉：嬲、嬈同乃了切。嬲、嬈一字。孫氏星衍以為嬲即嫋字，蓋嬈為本字，別作嫋。草書作●，遂誤而為嬲。」嘉錫案：宋、明本俱作剔嬲，黃生清初人，未必別見古本，不足據也。\"\n      },\n      {\n        \"anchor\": null,\n        \"layer\": \"jianshu_note\",\n        \"note_id\": \"J14\",\n        \"source_labels\": [],\n        \"speaker\": \"程炎震\",\n        \"text\": \"〔六〕 程炎震云：「山濤以太康四年卒。此事當在咸寧太康閒。濤傳曰：『太康初，自尚書僕射遷右僕射，掌選如故。』時和嶠為中書令，裴楷、王濟並為侍中也。潘岳嘗為尚書郎，蓋在其時。岳傳載於河陽懷令之閒，或有別本。潘尼則於太康中始舉秀才，為太常博士，疑不及濤時矣。」\"\n      }\n    ]\n  },\n  \"primary_text\": {\n    \"label\": \"世說新語正文\",\n    \"text\": \"山公以器重朝望年踰七十猶知管時任\\n\\n\\n\\n\\n\\n貴勝年少若和裴王之徒並共宗詠有署\\n閣柱曰閣東有大牛和嶠鞅裴楷鞦王濟剔嬲不得\\n休\\n或云潘尼作之\"\n  },\n  \"story_id\": \"03-zhengshi-005\"\n}\n",
+      "role": "user"
+    }
+  ],
+  "model": "deepseek-v4-flash",
+  "parameters": {
+    "response_format": {
+      "type": "json_object"
+    },
+    "temperature": 0,
+    "tools": []
+  },
+  "prompt_version": "srm0.2m-layered-commentary-v1",
+  "provider": "deepseek",
+  "run_id": "srm0-2m-6763488ad2b7-20260822170913",
+  "schema": "srm0-2m-model-input",
+  "schema_version": 1,
+  "stage": "layered_commentary_first_reading",
+  "story_id": "03-zhengshi-005"
+}

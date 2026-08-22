@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "SRM0.1 generated research memory",
+  "type": "object",
+  "required": ["story_id", "iteration", "claims", "active_questions", "resolved_questions", "superseded_questions", "deprioritized_questions", "unresolved_no_evidence_questions", "reading_links", "seen_evidence_refs", "research_status", "canonical_write_back"],
+  "properties": {
+    "story_id": {"type": "string"},
+    "iteration": {"const": 1},
+    "claims": {"type": "array"},
+    "active_questions": {"type": "array"},
+    "resolved_questions": {"type": "array"},
+    "superseded_questions": {"type": "array"},
+    "deprioritized_questions": {"type": "array"},
+    "unresolved_no_evidence_questions": {"type": "array"},
+    "reading_links": {"type": "array"},
+    "seen_evidence_refs": {"type": "array", "items": {"type": "string"}},
+    "research_status": {"type": "string"},
+    "canonical_write_back": {"const": false}
+  },
+  "additionalProperties": true
+}

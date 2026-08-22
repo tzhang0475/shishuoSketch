@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "SRM0.1 Completion 2 research memory patch",
+  "type": "object",
+  "required": ["evidence_decisions", "claim_updates", "question_updates", "new_questions", "reading_link_updates", "stop_recommendation"],
+  "properties": {
+    "evidence_decisions": {"type": "array"},
+    "claim_updates": {"type": "array", "maxItems": 3},
+    "question_updates": {"type": "array"},
+    "new_questions": {"type": "array", "maxItems": 2},
+    "reading_link_updates": {"type": "array", "maxItems": 2},
+    "stop_recommendation": {"type": "object"}
+  },
+  "additionalProperties": false
+}

@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "SRM0.1 Completion 1 question generation",
+  "type": "object",
+  "required": ["textual_puzzles", "active_question", "search_probes"],
+  "properties": {
+    "textual_puzzles": {"type": "array", "minItems": 1, "maxItems": 3},
+    "active_question": {"type": "object", "required": ["question", "derived_from", "why_needed", "reading_target", "importance"]},
+    "search_probes": {"type": "array", "minItems": 3, "maxItems": 5, "items": {"type": "string"}}
+  },
+  "additionalProperties": false
+}

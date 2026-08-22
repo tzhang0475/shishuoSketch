@@ -1,0 +1,36 @@
+{
+  "canonical_write_back": false,
+  "execution_kind": "real_model",
+  "input_hash": "8d835a7a25a3ceb4e6155e24d9a06dd36b4643328549dc48c657f8547296d9dc",
+  "messages": [
+    {
+      "content": "你是受控的《世说新语》研究记忆更新器。请从头重读原文，只使用本轮提供的 active question 和本地检索候选，不得使用预训练常识。区分 new evidence、refinement、contradiction、irrelevant association；证据不足就保留不确定。请为每个候选 ref 做一项 evidence_decision；没有帮助时使用 insufficient 或 discard，不要强行保留。每项实质性 claim 和 reading link 必须引用本轮候选中的 ref。最多保留三条 evidence ref、三条 claim update、两条 new question、两条 reading-link update。必须返回恰好一条 next_active_question=true 的 new_questions；即使证据不足，也要提出一个用于下一轮核查的窄问题，而不是把列表留空。该问题必须有 derived_from、why_needed、reading_target、importance。不要执行这个新问题，不要写隐藏推理或长篇散文。严格返回 JSON，顶层字段只能是 evidence_decisions、claim_updates、question_updates、new_questions、reading_link_updates、stop_recommendation。new_questions 示例是一个含 question_id、question、derived_from、why_needed、reading_target、importance、next_active_question=true 的对象数组。",
+      "role": "system"
+    },
+    {
+      "content": "{\n  \"active_question\": {\n    \"derived_from\": [\n      \"P3\"\n    ],\n    \"importance\": \"high\",\n    \"question\": \"陶公為何在庾亮引咎責躬後不覺釋然，其轉變的關鍵是什麼？\",\n    \"question_id\": \"Q1\",\n    \"reading_target\": \"陶不覺釋然\",\n    \"status\": \"active\",\n    \"why_needed\": \"理解陶侃態度轉變的機制是解讀整個計謀成功的核心，但原文未明言。\"\n  },\n  \"candidate_evidence\": [\n    {\n      \"ref\": \"s1-assertion-ac839ae3949439680021\",\n      \"snippet\": \"〔二〕 陶公云：「肅祖顧命不見及，且蘇峻作亂，釁由諸庾，誅其兄弟，不足以謝天下。」 徐廣晉紀曰：「肅祖遺詔，庾亮、王導輔幼主而進大臣官，陶侃、祖約不在其例。侃、約疑亮●遺詔也。」中興書曰：「初，庾\",\n      \"source_layer\": \"liu_annotation\",\n      \"work\": \"世说新语笺疏\"\n    },\n    {\n      \"ref\": \"jinshu:073-liezhuan-001\",\n      \"snippet\": \"\\\"2959\\\"} -->而倒船上咸失色欲散亮不動容徐曰此手何可使著賊衆心乃安亮攜其三弟懌條翼南奔温嶠嶠素欽重亮雖在奔敗猶欲推為都統亮固辭乃與嶠推陶侃為盟主侃至尋陽既有憾於亮議者咸謂侃欲誅執政以謝天下亮甚懼及見侃引咎自責風止可觀侃不覺釋然乃謂亮曰君侯修石頭以擬老子今日反見求耶便談宴終日亮噉薤因留白侃問曰安用此為亮云故可以種侃於是尤相稱歎云非唯風流兼有為政之實既至石頭亮遣督護王彰討峻黨張曜反為所敗亮送節傳以謝侃侃答曰古人三敗君侯始二當今事急不宜\",\n      \"source_layer\": \"jinshu_unit\",\n      \"work\": \"晉書\"\n    },\n    {\n      \"ref\": \"shishuo:11-jiewu-005:main\",\n      \"snippet\": \"王敦引軍垂至大桁明帝自出中堂温嶠為丹陽尹\\n帝令斷大桁故未斷帝大怒瞋目左右莫不悚懼\\n\\n召諸公來嶠至不謝但求酒炙王導須\\n\\n吏至徒跣下地謝曰天威在顔遂使温嶠不容得謝\\n嶠於是下謝帝廼釋然諸公共嘆王機悟名言\",\n      \"source_layer\": \"base_text\",\n      \"work\": \"世说新语\"\n    },\n    {\n      \"ref\": \"s1-assertion-b1577d3b2945ed793a14\",\n      \"snippet\": \"〔二〕 召諸公來。嶠至不謝，但求酒炙。王導須臾至，徒跣下地，謝曰：「天威在顏，遂使溫嶠不容得謝。」嶠於是下謝，帝乃釋然。諸公共嘆王機悟名言。\",\n      \"source_layer\": \"liu_annotation\",\n      \"work\": \"世说新语笺疏\"\n    },\n    {\n      \"ref\": \"s1-assertion-bfc7ff516eabc1574559\",\n      \"snippet\": \"〔三〕 程炎震云：「御覽五百八十七賦門引並及二事，皆作世說，蓋雜以注文。」嘉錫案：孝標之意，蓋疑不道陶公與不及桓彝為即一事，而傳聞異辭。今晉書文苑宏傳則兩事並載。嘉錫以為二者宜皆有之。陶侃為庾亮所忌，於其身後奏廢其子夏，又殺其子稱，由是陶氏不顯於晉。當宏作賦時，陶氏式微已甚。其孫雖嗣爵，而名宦不達。陶範雖存，復不為名氏所與。觀方正篇載王脩齡卻陶胡奴送米，厭惡之情可見。非必胡奴之為人果得罪於清議也，直以其家，出自寒門，擯之不以為氣類，以示流品之嚴而已。宏之不道陶公，亦猶是耳。至於桓溫，固是老兵，然生殺在手，宏安敢違忤取禍？其初所以宣言不及桓宣城者，蓋腹稿已\",\n      \"source_layer\": \"jianshu_note\",\n      \"work\": \"世说新语笺疏\"\n    },\n    {\n      \"ref\": \"shishuo:07-shijian-019:annotation-003\",\n      \"snippet\": \"(之代爲荆州何充曰陶公重勲/陶侃别傳曰庾翼薨表其子爰)\",\n      \"source_layer\": \"liu_annotation\",\n      \"work\": \"世说新语\"\n    },\n    {\n      \"ref\": \"s1-assertion-1cc16661eadaf2634b20\",\n      \"snippet\": \"〔一〕 嘉錫案：陶公愛惜物力，竹頭木屑，皆得其用。既是性之所長，亦遂以此取人。其因庾亮噉薤留白，而賞其有治實，猶之有一官長取竹連根，而超兩階用之之意也。事見政事篇。此之儉吝，正其平生經濟所在。與王戎輩守財\",\n      \"source_layer\": \"jianshu_note\",\n      \"work\": \"世说新语笺疏\"\n    },\n    {\n      \"ref\": \"s1-assertion-58bb2a6cb8d76012413c\",\n      \"snippet\": \"有父翼風，桓溫徙于豫章。年三十六而卒。」 朝廷慮其不從命，未知所遣，乃共議用桓溫。劉尹曰：「使伊去，必能克定西楚，然恐不可復制。」 陶侃別傳曰：「庾翼薨，表其子爰之代為荊州。何充曰：『陶公重勳也，臨終高讓。丞相未薨，敬豫為四品將軍，\",\n      \"source_layer\": \"liu_annotation\",\n      \"work\": \"世说新语笺疏\"\n    }\n  ],\n  \"current_research_state\": {\n    \"claims\": [],\n    \"reading_links\": [],\n    \"seen_evidence_refs\": []\n  },\n  \"story_id\": \"27-jiajue-008\",\n  \"story_text\": \"陶公自上流來赴蘇峻之難，令誅庾公。謂必戮庾，可以謝峻。庾欲奔竄則不可，欲㑹，恐見執，進退無計。温公勸庾詣陶，曰：“卿但遥拜，必無它。我為卿保之。”庾從温言詣陶。至，便拜。陶自起止之，曰：“庾元規何縁拜陶士衡？”畢，又降就下坐。陶又自要起同坐。坐定，庾乃引咎責躬，深相遜謝。陶不覺釋然。\"\n}\n",
+      "role": "user"
+    }
+  ],
+  "metrics": {
+    "compression_ratio": 1.360573,
+    "model_evidence_chars": 1012,
+    "model_input_chars": 3513,
+    "raw_input_chars": 2582,
+    "raw_retrieval_chars": 1031
+  },
+  "model": "deepseek-v4-flash",
+  "parameters": {
+    "response_format": {
+      "type": "json_object"
+    },
+    "temperature": 0,
+    "tools": []
+  },
+  "prompt_version": "srm0.1-v1",
+  "provider": "deepseek",
+  "run_id": "srm0-41cc51f7e4ac341f96d7",
+  "schema": "srm0-1-round-input",
+  "stage": "completion_2_memory_patch",
+  "story_id": "27-jiajue-008"
+}

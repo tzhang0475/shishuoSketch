@@ -1,0 +1,84 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "SRM0.3A commentary resolution result",
+  "type": "object",
+  "required": ["question_updates", "relation_candidates", "appraisal_candidates"],
+  "additionalProperties": false,
+  "properties": {
+    "question_updates": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/question_update"}
+    },
+    "relation_candidates": {
+      "type": "array",
+      "maxItems": 4,
+      "items": {"$ref": "#/$defs/relation_candidate"}
+    },
+    "appraisal_candidates": {
+      "type": "array",
+      "maxItems": 4,
+      "items": {"$ref": "#/$defs/appraisal_candidate"}
+    }
+  },
+  "$defs": {
+    "evidence": {
+      "type": "object",
+      "required": ["ref", "quote", "role"],
+      "additionalProperties": false,
+      "properties": {
+        "ref": {"type": "string", "pattern": "^[LJ][0-9]{2}$"},
+        "quote": {"type": "string", "minLength": 1},
+        "role": {"enum": ["supports", "limits", "conflicts"]}
+      }
+    },
+    "question_update": {
+      "type": "object",
+      "required": ["question_id", "story_span", "question", "state", "working_answer", "evidence", "remaining_gap", "next_action", "refined_question"],
+      "additionalProperties": false,
+      "properties": {
+        "question_id": {"type": "string", "minLength": 1},
+        "story_span": {"type": "string", "minLength": 1},
+        "question": {"type": "string", "minLength": 1},
+        "state": {"enum": ["unexplained", "partially_explained", "substantially_explained", "conflicted"]},
+        "working_answer": {"type": "string", "minLength": 1},
+        "evidence": {"type": "array", "items": {"$ref": "#/$defs/source_evidence"}},
+        "remaining_gap": {"type": "string"},
+        "next_action": {"enum": ["stop", "refine_question", "external_search"]},
+        "refined_question": {"type": ["string", "null"]}
+      }
+    },
+    "relation_candidate": {
+      "type": "object",
+      "required": ["persons", "observation", "evidence", "status"],
+      "additionalProperties": false,
+      "properties": {
+        "persons": {"type": "array", "minItems": 2, "maxItems": 2, "items": {"type": "string", "minLength": 1}},
+        "observation": {"type": "string", "minLength": 1},
+        "evidence": {"type": "array", "items": {"$ref": "#/$defs/evidence"}},
+        "status": {"const": "candidate"}
+      }
+    },
+    "appraisal_candidate": {
+      "type": "object",
+      "required": ["evaluator", "target", "appraisal_text", "evidence_ref", "evidence_quote", "status"],
+      "additionalProperties": false,
+      "properties": {
+        "evaluator": {"type": "string", "minLength": 1},
+        "target": {"type": "string", "minLength": 1},
+        "appraisal_text": {"type": "string", "minLength": 1},
+        "evidence_ref": {"type": "string", "pattern": "^[LJ][0-9]{2}$"},
+        "evidence_quote": {"type": "string", "minLength": 1},
+        "status": {"const": "candidate"}
+      }
+    },
+    "source_evidence": {
+      "type": "object",
+      "required": ["ref", "quote"],
+      "additionalProperties": false,
+      "properties": {
+        "ref": {"type": "string", "pattern": "^[LJ][0-9]{2}$"},
+        "quote": {"type": "string", "minLength": 1}
+      }
+    }
+  }
+}

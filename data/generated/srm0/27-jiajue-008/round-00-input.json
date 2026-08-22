@@ -1,0 +1,36 @@
+{
+  "canonical_write_back": false,
+  "execution_kind": "real_model",
+  "input_hash": "6ac41aa45efcb88dc406610cba740bf8672d6225335fad6c7072c40e40890b2c",
+  "messages": [
+    {
+      "content": "你是《世说新语》单篇研究的第一阶段问题生成器。只能使用用户提供的原文、刘注和导航卡，不得调用检索，不得用预训练常识补足史实，也不要回答问题。请找出最多三个由准确原文跨度触发的 textual puzzle，说明未解释之处和回答后可能重读的原文跨度。span 和 reading_target 必须逐字取自用户给出的 Story 原文；不要改成简体，不要加入原文没有的标点。分类只能使用 identity、temporal、participant_state、relationship_state、causal_precondition、stakes、reading_link。必须选择且只选择一个 active_question，并给出三至五个紧凑的字符检索 probe。严格返回如下 JSON 字段：{\"textual_puzzles\":[{\"span\":\"原文跨度\",\"category\":\"...\",\"unexplained\":\"...\",\"reading_target\":\"...\",\"importance\":\"high|medium|low\"}],\"active_question\":{\"question\":\"...\",\"derived_from\":[\"P1\"],\"why_needed\":\"...\",\"reading_target\":\"原文跨度\",\"importance\":\"high|medium|low\"},\"search_probes\":[\"...\"]}。返回 JSON，不要输出 JSON 以外的文字。",
+      "role": "system"
+    },
+    {
+      "content": "{\n  \"canonical_write_back\": false,\n  \"chapter\": \"假譎第二十七\",\n  \"era_orientation\": {\n    \"broad_temporal_anchor\": \"event_bounded\",\n    \"era\": \"東晉早期\",\n    \"precision_status\": \"broad_period\"\n  },\n  \"known_conflict_notices\": [\n    {\n      \"action\": \"human_review_required\",\n      \"conflict_type\": \"identity_resolution\",\n      \"existing_resolution\": {\n        \"canonical_name\": \"陸機\",\n        \"person_id\": \"person-026\"\n      },\n      \"notice\": \"现有独立表面解析与正文复合称谓并存；本实验不改写身份，只保留冲突供研究记忆处理。\",\n      \"surface\": \"士衡\",\n      \"textual_context\": \"陶士衡\"\n    }\n  ],\n  \"liu_annotations\": [\n    {\n      \"annotation_id\": \"annotation-001\",\n      \"source_layer\": \"liu_annotation\",\n      \"text\": \"(令庾亮以元舅輔政欲以風軌格政繩御四/晉陽秋曰是時成帝在繦褓太后臨朝中書)\"\n    },\n    {\n      \"annotation_id\": \"annotation-002\",\n      \"source_layer\": \"liu_annotation\",\n      \"text\": \"(不欲亮曰蘇峻豺狼終為禍亂晁錯所謂削亦反不/海而峻擁兵近甸為逋逃藪亮圖召峻王導卞壷並)\"\n    },\n    {\n      \"annotation_id\": \"annotation-003\",\n      \"source_layer\": \"liu_annotation\",\n      \"text\": \"(殺我也遂克京邑平南温嶠聞亂號泣登舟遣叅軍/削亦反遂下優詔以大司農徵之峻怒曰庾亮欲誘)\"\n    },\n    {\n      \"annotation_id\": \"annotation-004\",\n      \"source_layer\": \"liu_annotation\",\n      \"text\": \"(奔嶠人皆尤而少之嶠愈相崇重分兵以配給之/王愆期推征西陶侃為盟主俱赴京師時亮敗績)\"\n    }\n  ],\n  \"person_orientation_cards\": [\n    {\n      \"aliases\": [\n        \"王導\",\n        \"王茂弘\",\n        \"茂弘\"\n      ],\n      \"canonical_name\": \"王導\",\n      \"current_story_role\": \"annotation_only\",\n      \"person_id\": \"person-003\"\n    },\n    {\n      \"aliases\": [\n        \"元規\",\n        \"庾亮\",\n        \"庾元規\"\n      ],\n      \"canonical_name\": \"庾亮\",\n      \"current_story_role\": \"present\",\n      \"person_id\": \"person-010\"\n    },\n    {\n      \"aliases\": [\n        \"太真\",\n        \"温太真\",\n        \"温嶠\"\n      ],\n      \"canonical_name\": \"温嶠\",\n      \"current_story_role\": \"present\",\n      \"person_id\": \"person-013\"\n    },\n    {\n      \"aliases\": [\n        \"子高\",\n        \"蘇子高\",\n        \"蘇峻\"\n      ],\n      \"canonical_name\": \"蘇峻\",\n      \"current_story_role\": \"off_frame\",\n      \"person_id\": \"person-017\"\n    },\n    {\n      \"aliases\": [\n        \"士衡\",\n        \"陸士衡\",\n        \"陸機\"\n      ],\n      \"canonical_name\": \"陸機\",\n      \"current_story_role\": \"present\",\n      \"person_id\": \"person-026\"\n    },\n    {\n      \"aliases\": [\n        \"士行\",\n        \"陶侃\"\n      ],\n      \"canonical_name\": \"陶侃\",\n      \"current_story_role\": \"annotation_only\",\n      \"person_id\": \"person-064\"\n    }\n  ],\n  \"schema\": \"srm0-1-initial-model-packet\",\n  \"schema_version\": 1,\n  \"story_id\": \"27-jiajue-008\",\n  \"story_text\": \"陶公自上流來赴蘇峻之難，令誅庾公。謂必戮庾，可以謝峻。庾欲奔竄則不可，欲㑹，恐見執，進退無計。温公勸庾詣陶，曰：“卿但遥拜，必無它。我為卿保之。”庾從温言詣陶。至，便拜。陶自起止之，曰：“庾元規何縁拜陶士衡？”畢，又降就下坐。陶又自要起同坐。坐定，庾乃引咎責躬，深相遜謝。陶不覺釋然。\"\n}\n",
+      "role": "user"
+    }
+  ],
+  "metrics": {
+    "compression_ratio": 1.256003,
+    "model_evidence_chars": 0,
+    "model_input_chars": 3243,
+    "raw_input_chars": 2582,
+    "raw_retrieval_chars": 0
+  },
+  "model": "deepseek-v4-flash",
+  "parameters": {
+    "response_format": {
+      "type": "json_object"
+    },
+    "temperature": 0,
+    "tools": []
+  },
+  "prompt_version": "srm0.1-v1",
+  "provider": "deepseek",
+  "run_id": "srm0-41cc51f7e4ac341f96d7",
+  "schema": "srm0-1-round-input",
+  "stage": "completion_1_question_generation",
+  "story_id": "27-jiajue-008"
+}
