@@ -33,6 +33,28 @@ OUTPUT_MANIFEST = Path("data/derived/sgz1-sanguozhi-complete-corpus.json")
 HEADER_START_RE = re.compile(r"\{\{header2?\b")
 PEI_TEMPLATE_RE = re.compile(r"\{\{\s*\*\s*\|")
 
+# These are the explicitly observed Wikisource/MediaWiki page constructs in
+# the locked SGZ1 payloads.  This is intentionally a whitelist: textual
+# templates such as ``YL``, ``ProperNoun``, and ``quote`` remain part of the
+# surrounding source layer.
+EDITORIAL_MAGIC_WORDS = frozenset({"__FORCETOC__", "__TOC__"})
+EDITORIAL_TAGS = frozenset({"<onlyinclude>", "</onlyinclude>"})
+EDITORIAL_TEMPLATE_NAMES = frozenset(
+    {"footer", "西晉作品", "PD-old", "Novel-f", "wikipedia"}
+)
+EDITORIAL_MAGIC_RE = re.compile(
+    "|".join(re.escape(value) for value in sorted(EDITORIAL_MAGIC_WORDS))
+)
+EDITORIAL_TAG_RE = re.compile(
+    "|".join(re.escape(value) for value in sorted(EDITORIAL_TAGS))
+)
+EDITORIAL_TEMPLATE_START_RE = re.compile(
+    r"\{\{\s*(?:"
+    + "|".join(re.escape(value) for value in sorted(EDITORIAL_TEMPLATE_NAMES))
+    + r")(?=\s*(?:\||\}|$))"
+)
+EDITORIAL_CATEGORY_RE = re.compile(r"\[\[(?:[Cc]ategory|分類):[^\]\n]+\]\]")
+
 
 def sha256_bytes(value: bytes) -> str:
     return hashlib.sha256(value).hexdigest()
@@ -71,6 +93,114 @@ def balanced_template_end(text: str, start: int) -> int:
             continue
         index += 1
     raise ValueError(f"unbalanced MediaWiki template at offset {start}")
+
+
+def _heading_line_spans(content: str, start: int) -> list[dict[str, Any]]:
+    """Return complete source-line spans for MediaWiki section headings."""
+
+    spans: list[dict[str, Any]] = []
+    line_start = content.rfind("\n", 0, start) + 1
+    while line_start < len(content):
+        newline = content.find("\n", line_start)
+        line_end = len(content) if newline < 0 else newline + 1
+        if line_start >= start:
+            line = content[line_start:line_end].rstrip("\r\n")
+            stripped = line.strip()
+            if re.fullmatch(r"(={2,6})(?!\=).*?(?<!\=)\1", stripped):
+                spans.append(
+                    {
+                        "start": line_start,
+                        "end": line_end,
+                        "kind": "section_heading",
+                    }
+                )
+        if newline < 0:
+            break
+        line_start = line_end
+    return spans
+
+
+def explicit_pei_spans(content: str, *, start: int = 0) -> list[tuple[int, int]]:
+    """Return balanced spans for the explicit ``{{*|...}}`` note marker."""
+
+    spans: list[tuple[int, int]] = []
+    search_cursor = start
+    while True:
+        match = PEI_TEMPLATE_RE.search(content, search_cursor)
+        if match is None:
+            break
+        end = balanced_template_end(content, match.start())
+        spans.append((match.start(), end))
+        search_cursor = end
+    return spans
+
+
+def recognized_editorial_spans(
+    content: str,
+    *,
+    start: int = 0,
+    exclude_pei: bool = False,
+) -> list[dict[str, Any]]:
+    """Return spans classified as Wikisource page/editorial structure.
+
+    The grammar is deliberately conservative and shared by the builder and
+    validator.  It identifies only constructs observed in the locked local
+    Wikisource pages; it does not classify arbitrary MediaWiki templates.
+    """
+
+    candidates: list[dict[str, Any]] = []
+    for match in EDITORIAL_MAGIC_RE.finditer(content, start):
+        candidates.append(
+            {"start": match.start(), "end": match.end(), "kind": "magic_word"}
+        )
+    for match in EDITORIAL_TAG_RE.finditer(content, start):
+        candidates.append(
+            {"start": match.start(), "end": match.end(), "kind": "include_wrapper"}
+        )
+    for match in EDITORIAL_CATEGORY_RE.finditer(content, start):
+        candidates.append(
+            {"start": match.start(), "end": match.end(), "kind": "category"}
+        )
+    for match in EDITORIAL_TEMPLATE_START_RE.finditer(content, start):
+        try:
+            end = balanced_template_end(content, match.start())
+        except ValueError:
+            # An unbalanced non-textual template is left in the source body;
+            # the parser must not guess a span across it.
+            continue
+        candidates.append(
+            {
+                "start": match.start(),
+                "end": end,
+                "kind": "page_template",
+            }
+        )
+    candidates.extend(_heading_line_spans(content, start))
+
+    if exclude_pei:
+        pei_spans = explicit_pei_spans(content, start=start)
+        candidates = [
+            candidate
+            for candidate in candidates
+            if not any(
+                candidate["start"] < pei_end and pei_start < candidate["end"]
+                for pei_start, pei_end in pei_spans
+            )
+        ]
+
+    selected: list[dict[str, Any]] = []
+    for candidate in sorted(
+        candidates,
+        key=lambda item: (item["start"], -(item["end"] - item["start"]), item["kind"]),
+    ):
+        if any(
+            candidate["start"] < existing["end"]
+            and existing["start"] < candidate["end"]
+            for existing in selected
+        ):
+            continue
+        selected.append(candidate)
+    return sorted(selected, key=lambda item: (item["start"], item["end"]))
 
 
 def _unit(
@@ -114,12 +244,13 @@ def parse_sgz1_layers(
     source_path: str = "",
     source_sha256: str = "",
 ) -> tuple[list[dict[str, Any]], str]:
-    """Split only explicit Wikisource annotation templates.
+    """Split explicit annotations from conservative page/editorial markup.
 
     ``{{*|...}}`` is the observed structural marker for Pei Songzhi notes.
-    No punctuation, parentheses, or semantic heuristics are used.  If no
-    marker is present, the body remains one ``unparsed`` unit instead of being
-    assigned to either author layer.
+    Recognized Wikisource page constructs are retained as metadata units.  No
+    punctuation, parentheses, or semantic heuristics are used.  If no Pei
+    marker is present, substantive body text remains ``unparsed`` instead of
+    being assigned to either author layer.
     """
 
     units: list[dict[str, Any]] = []
@@ -166,12 +297,49 @@ def parse_sgz1_layers(
         body_start = header_end
         cursor = header_end
 
-    note_count = 0
-    for match in PEI_TEMPLATE_RE.finditer(content, body_start):
-        start = match.start()
+    pei_spans = explicit_pei_spans(content, start=body_start)
+    editorial_spans = recognized_editorial_spans(
+        content, start=body_start, exclude_pei=True
+    )
+    events: list[tuple[int, int, str]] = [
+        (start, end, "pei") for start, end in pei_spans
+    ] + [
+        (span["start"], span["end"], "editorial") for span in editorial_spans
+    ]
+    events.sort(key=lambda event: (event[0], event[1], event[2]))
+    note_count = len(pei_spans)
+
+    def append_plain(start: int, end: int) -> None:
+        nonlocal sequence
+        if start >= end:
+            return
+        sequence += 1
+        segmented = bool(note_count)
+        units.append(
+            _unit(
+                sequence=sequence,
+                global_juan=global_juan,
+                source_path=source_path,
+                source_sha256=source_sha256,
+                content=content,
+                start=start,
+                end=end,
+                layer="main_text" if segmented else "unparsed",
+                author_layer="陳壽" if segmented else None,
+                text=content[start:end],
+                segmentation_status=(
+                    "structural_template_marker"
+                    if segmented
+                    else "unresolved_no_structural_pei_marker"
+                ),
+            )
+        )
+
+    for start, end, event_type in events:
         if start < cursor:
             continue
-        if start > cursor:
+        append_plain(cursor, start)
+        if event_type == "editorial":
             sequence += 1
             units.append(
                 _unit(
@@ -180,15 +348,17 @@ def parse_sgz1_layers(
                     source_path=source_path,
                     source_sha256=source_sha256,
                     content=content,
-                    start=cursor,
-                    end=start,
-                    layer="main_text",
-                    author_layer="陳壽",
-                    text=content[cursor:start],
-                    segmentation_status="structural_template_marker",
+                    start=start,
+                    end=end,
+                    layer="metadata",
+                    author_layer=None,
+                    text=content[start:end],
+                    segmentation_status="source_editorial_markup",
                 )
             )
-        end = balanced_template_end(content, start)
+            cursor = end
+            continue
+
         raw_note = content[start:end]
         pipe = raw_note.find("|")
         inner = raw_note[pipe + 1 : -2] if pipe >= 0 and raw_note.endswith("}}") else raw_note
@@ -208,30 +378,9 @@ def parse_sgz1_layers(
                 segmentation_status="structural_template_marker",
             )
         )
-        note_count += 1
         cursor = end
 
-    if cursor < len(content):
-        sequence += 1
-        units.append(
-            _unit(
-                sequence=sequence,
-                global_juan=global_juan,
-                source_path=source_path,
-                source_sha256=source_sha256,
-                content=content,
-                start=cursor,
-                end=len(content),
-                layer="main_text" if note_count else "unparsed",
-                author_layer="陳壽" if note_count else None,
-                text=content[cursor:],
-                segmentation_status=(
-                    "structural_template_marker"
-                    if note_count
-                    else "unresolved_no_structural_pei_marker"
-                ),
-            )
-        )
+    append_plain(cursor, len(content))
     if not units and content:
         sequence += 1
         units.append(
@@ -271,11 +420,12 @@ def render_processed_record(record: Mapping[str, Any]) -> str:
         "",
     ]
     for unit in record["units"]:
+        rendered_text = unit["text"] if unit["text"].strip() else ""
         lines.extend(
             [
                 f"## {unit['layer']} · {unit['unit_id']}",
                 "",
-                unit["text"],
+                rendered_text,
                 "",
             ]
         )
@@ -407,6 +557,7 @@ def build(
         "author_layer_policy": {
             "main_text": "陳壽 when source structure is explicit",
             "pei_annotation": "裴松之 only for explicit {{*|...}} templates",
+            "metadata": "Wikisource editorial/page markup retained without a historical author layer",
             "unparsed": "no author layer assigned when no safe structural boundary exists",
         },
         "author_layer_unit_counts": author_layer_counts,
@@ -416,6 +567,7 @@ def build(
             "SGZ1 is evidence infrastructure; it does not create Persons, Relations, Events, PersonStory links, Mentions, or canonical facts.",
             "Raw Wikisource wikitext remains in the ignored source download area; this processed projection preserves source hashes and coordinates.",
             "Pei Songzhi notes are separated only by the observed explicit {{*|...}} template marker. No punctuation or parenthesis heuristic is used.",
+            "Observed Wikisource page/editorial constructs are retained as metadata units without assigning them to 陳壽 or 裴松之; this is structural provenance handling, not source-text editing.",
         ],
     }
     output_manifest_path.parent.mkdir(parents=True, exist_ok=True)

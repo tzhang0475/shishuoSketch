@@ -79,6 +79,67 @@ class SGZ1Tests(unittest.TestCase):
         self.assertEqual("".join(unit["raw_text"] for unit in units), revision.content)
         self.assertEqual(units[2]["author_layer"], "裴松之")
 
+    def test_wikisource_editorial_markup_has_no_author_layer(self) -> None:
+        content = (
+            "{{header\n"
+            "| section = 蜀書一 測試\n"
+            "}}\n"
+            "__FORCETOC__\n"
+            "<onlyinclude>\n"
+            "==人物甲==\n"
+            "陳壽正文{{YL|建安十五年}}。\n"
+            "{{*|裴松之注。}}\n"
+            "\n==【評】==\n"
+            "評曰：正文。\n\n"
+            "</onlyinclude>\n"
+            "{{footer}}\n"
+            "{{西晉作品}}\n"
+        )
+        units, status = builder.parse_sgz1_layers(content, global_juan=31)
+        self.assertEqual(status, "structurally_segmented")
+        self.assertEqual("".join(unit["raw_text"] for unit in units), content)
+
+        def matching(raw: str) -> list[dict[str, object]]:
+            return [unit for unit in units if raw in str(unit["raw_text"])]
+
+        for markup in (
+            "__FORCETOC__",
+            "<onlyinclude>",
+            "==人物甲==",
+            "==【評】==",
+            "</onlyinclude>",
+            "{{footer}}",
+            "{{西晉作品}}",
+        ):
+            found = matching(markup)
+            self.assertEqual(len(found), 1, markup)
+            self.assertEqual(found[0]["layer"], "metadata")
+            self.assertIsNone(found[0]["author_layer"])
+            self.assertEqual(found[0]["segmentation_status"], "source_editorial_markup")
+
+        main_units = matching("陳壽正文") + matching("評曰：正文")
+        self.assertTrue(main_units)
+        self.assertTrue(all(unit["layer"] == "main_text" for unit in main_units))
+        self.assertTrue(all(unit["author_layer"] == "陳壽" for unit in main_units))
+        self.assertTrue(any("{{YL|建安十五年}}" in str(unit["raw_text"]) for unit in main_units))
+
+        pei_units = matching("{{*|裴松之注。}}")
+        self.assertEqual(len(pei_units), 1)
+        self.assertEqual(pei_units[0]["layer"], "pei_annotation")
+        self.assertEqual(pei_units[0]["author_layer"], "裴松之")
+        self.assertEqual(
+            [span["kind"] for span in builder.recognized_editorial_spans(content)],
+            [
+                "magic_word",
+                "include_wrapper",
+                "section_heading",
+                "section_heading",
+                "include_wrapper",
+                "page_template",
+                "page_template",
+            ],
+        )
+
     def test_no_annotation_marker_remains_unparsed(self) -> None:
         content = "{{header|section=魏書一 測試}}\n正文"
         units, status = builder.parse_sgz1_layers(content, global_juan=1)

@@ -36,14 +36,20 @@ files make the local payload reproducible when it is available.
 ## Author layers
 
 The Wikisource pages use an explicit `{{*|...}}` template for Pei Songzhi
-notes. SGZ1 separates only that structural marker:
+notes. Substantive text outside that marker can be assigned to Chen Shou;
+the observed Wikisource page/editorial markup is retained separately without
+an author layer:
 
 ```text
 {{*|...}} → layer = pei_annotation, author_layer = 裴松之
-outside the marker → layer = main_text, author_layer = 陳壽
+substantive text outside the marker → layer = main_text, author_layer = 陳壽
+page/editorial markup → layer = metadata, author_layer = null
 ```
 
-The page header is retained as `metadata`. If a future source has no safe
+This includes the recognized page headers, magic words, section headings,
+include wrappers, footer/page templates, and category links. The markup is
+not deleted or normalized: assigning it to `metadata` is structural and
+provenance handling, not source-text editing. If a future source has no safe
 structural annotation marker, SGZ1 keeps the body as `unparsed` and assigns no
 author layer; it never invents a boundary from punctuation or parentheses.
 

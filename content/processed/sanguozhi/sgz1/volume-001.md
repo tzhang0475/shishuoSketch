@@ -1217,15 +1217,11 @@ segmentation_status: structurally_segmented
 
 
 
-
-
 ## pei_annotation · sgz1-juan-001-000239
 
 《[[傅子]]》曰：太祖愍嫁娶之奢僭，公女適人，皆以皁帳，從婢不過十人。
 
 ## main_text · sgz1-juan-001-000240
-
-
 
 
 
@@ -1237,15 +1233,11 @@ segmentation_status: structurally_segmented
 
 
 
-
-
 ## pei_annotation · sgz1-juan-001-000243
 
 《[[傅子]]》曰：漢末王公，多委王服，以幅巾爲雅，是以袁紹、崔{{另|豹|鈞}}之徒，雖爲將帥，皆著縑巾。魏太祖以天下凶荒，資財乏匱，擬古皮弁，裁縑帛以爲帢，合于簡易隨時之義，以色別其貴賤，于今施行，可謂軍容，非國容也。
 
 ## main_text · sgz1-juan-001-000244
-
-
 
 
 
@@ -1258,5 +1250,16 @@ segmentation_status: structurally_segmented
 
 
 評曰：漢末，天下大亂，雄豪並起，而袁紹虎眎四州，彊盛莫敵。太祖運籌演謀，鞭撻宇內，擥申、商之法術，該韓、白之奇策，官方授材，各因其器，矯情任筭，不念舊惡，終能總御皇機，克成洪業者，惟其明略最優也。抑可謂非常之人，超世之傑矣。
+
+
+## metadata · sgz1-juan-001-000247
+
 {{footer}}
+
+## main_text · sgz1-juan-001-000248
+
+
+
+## metadata · sgz1-juan-001-000249
+
 {{西晉作品}}

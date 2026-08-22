@@ -10,6 +10,11 @@ from pathlib import Path
 from typing import Any, Mapping
 
 try:
+    from .build_sgz1_corpus import recognized_editorial_spans
+except ImportError:  # pragma: no cover - direct script execution
+    from build_sgz1_corpus import recognized_editorial_spans
+
+try:
     import yaml
 except ImportError:  # pragma: no cover - repository validators normally have PyYAML
     yaml = None  # type: ignore
@@ -183,6 +188,49 @@ def _validate_units(
     return errors
 
 
+def _validate_editorial_attribution(
+    record: Mapping[str, Any],
+    *,
+    source_content: str,
+) -> list[str]:
+    """Ensure recognized page markup is not assigned to a historical author."""
+
+    errors: list[str] = []
+    units = record.get("units", [])
+    spans = recognized_editorial_spans(source_content, exclude_pei=True)
+    for editorial in spans:
+        start = editorial["start"]
+        end = editorial["end"]
+        containing = []
+        for unit in units:
+            span = unit.get("source_span", {}) if isinstance(unit, Mapping) else {}
+            unit_start = span.get("char_start") if isinstance(span, Mapping) else None
+            unit_end = span.get("char_end_exclusive") if isinstance(span, Mapping) else None
+            if (
+                isinstance(unit_start, int)
+                and isinstance(unit_end, int)
+                and unit_start <= start
+                and end <= unit_end
+            ):
+                containing.append(unit)
+        if len(containing) != 1:
+            errors.append(
+                f"SGZ1 editorial span is not isolated in one unit: juan {record.get('global_juan')} "
+                f"{start}:{end}"
+            )
+            continue
+        unit = containing[0]
+        if (
+            unit.get("layer") != "metadata"
+            or unit.get("author_layer") is not None
+            or unit.get("segmentation_status") != "source_editorial_markup"
+        ):
+            errors.append(
+                f"SGZ1 editorial markup has an author attribution: {unit.get('unit_id')}"
+            )
+    return errors
+
+
 def validate(mode: str = "portable") -> list[str]:
     errors: list[str] = []
     registry, registry_errors = _registry()
@@ -277,7 +325,19 @@ def validate(mode: str = "portable") -> list[str]:
                 source_content = source_path.read_text(encoding="utf-8")
             except UnicodeDecodeError as exc:
                 errors.append(f"SGZ1 source is not UTF-8: {source_path}: {exc}")
+        if source_content is None:
+            raw_units = [
+                unit.get("raw_text")
+                for unit in record.get("units", [])
+                if isinstance(unit, Mapping)
+            ]
+            if raw_units and all(isinstance(raw, str) for raw in raw_units):
+                source_content = "".join(raw_units)
         errors.extend(_validate_units(record, source_content=source_content))
+        if source_content is not None:
+            errors.extend(
+                _validate_editorial_attribution(record, source_content=source_content)
+            )
     if seen_juans != list(range(1, 66)):
         errors.append("SGZ1 derived global juan sequence has gaps or duplicates")
     if section_counts != {"魏書": 30, "蜀書": 15, "吳書": 20}:

@@ -51,6 +51,12 @@ jobs:
       - name: Validate SC1 frontend data
         run: python3 scripts/validate_sc1_frontend_data.py --mode portable
 
+      - name: Validate SGZ0 corpus
+        run: python3 scripts/validate_sgz0.py --mode portable
+
+      - name: Validate SGZ1 corpus
+        run: python3 scripts/validate_sgz1.py --mode portable
+
       - name: Run Python tests
         env:
           WP1_PROVENANCE_MODE: portable
