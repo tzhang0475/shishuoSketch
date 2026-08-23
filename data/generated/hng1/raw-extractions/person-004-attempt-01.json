@@ -1,0 +1,82 @@
+{
+  "attempts": [
+    {
+      "actual_request": true,
+      "api_usage": {
+        "completion_tokens": 520,
+        "completion_tokens_details": {
+          "reasoning_tokens": 505
+        },
+        "prompt_cache_hit_tokens": 512,
+        "prompt_cache_miss_tokens": 1016,
+        "prompt_tokens": 1528,
+        "prompt_tokens_details": {
+          "cached_tokens": 512
+        },
+        "total_tokens": 2048
+      },
+      "attempt": 1,
+      "completion_kind": "source_extraction",
+      "elapsed_seconds": 5.556071,
+      "exception_class": null,
+      "exception_message": null,
+      "failure_class": null,
+      "http_status": 200,
+      "response_model": "deepseek-v4-flash",
+      "round": 1,
+      "start_time": "2026-08-23T17:47:22.088961+00:00",
+      "story_id": "person-004"
+    }
+  ],
+  "canonical_write_back": false,
+  "content": "{\"relation_candidates\":[],\"temporal_candidates\":[]}",
+  "failure_class": null,
+  "immutable": true,
+  "model": "deepseek-v4-flash",
+  "model_input_hash": "52ce313cc4175b6d256c66ab98a987a8d41a492c40270cdf332999e9a8e82656",
+  "prompt_version": "hng1-frozen-hng02r-source-extraction-v1",
+  "raw_response": {
+    "choices": [
+      {
+        "finish_reason": "stop",
+        "index": 0,
+        "logprobs": null,
+        "message": {
+          "content": "{\"relation_candidates\":[],\"temporal_candidates\":[]}",
+          "reasoning_content": "We need extract from given passages only. Need output JSON with relation_candidates and temporal_candidates. Seed person 王凝之. Need look at passages. Passages hng02...010,074,075,089,100,111. Need see if any mention 王凝之? I recall in Jin Shu, 王凝之 was during Sun En rebellion, maybe in text? Let's inspect passages.\n\nPassage 010: 慕容德陷青州... no 王凝之.\n\n074: \"俄而恭敗，無終遣書求降。修既旋軍，而楊佺期已至石頭...\" no 王凝之.\n\n075: financial advice? no.\n\n089: \"其喪柩始反，言尋傷悼。可贈龍驤將軍、雍州刺史...\" no.\n\n100: \"王恭之役，泰私合義兵，得數千人，為國討恭。黃門郎孔道、鄱陽太守桓放之、驃騎諮議周勰等皆敬事之，會稽世子元顯亦數詣泰求其秘術。泰見天下兵起，以為晉祚將終，乃扇動百姓，私集徒眾，三吳士庶多從之。于時朝士皆懼泰為亂，以其與元顯交厚，咸莫敢言。\" This mentions 王恭 (not 王凝之), 泰 (probably 孫泰), 孔道, 桓放之, 周勰, 元顯. No 王凝之.\n\n111: \"號曰樂屬... 孫恩因民心騷動，自海島帥其黨殺上虞令...\" no 王凝之.\n\nSo no evidence supporting any relation or temporal for seed. Need output empty arrays. But careful: Could \"王恭\" be relative? Not same as 王凝之, but seed identity? no aliases. No relation to seed. Passage 074 \"王恭\" maybe political opponent? But no seed. Need not infer. So candidates empty.\n\nNeed ensure JSON only. Use {\"relation_candidates\":[],\"temporal_candidates\":[]}.\n\nNeed include \"historical_verification_open\"? In instructions each candidate must have those fields, but no candidates. So empty arrays fine.\n\nNeed maybe output no arrays? Should output with empty arrays.\n\nLet's produce.",
+          "role": "assistant"
+        }
+      }
+    ],
+    "created": 1787507242,
+    "id": "82820eb5-f635-492b-b403-aa34c6fbccdb",
+    "model": "deepseek-v4-flash",
+    "object": "chat.completion",
+    "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+    "usage": {
+      "completion_tokens": 520,
+      "completion_tokens_details": {
+        "reasoning_tokens": 505
+      },
+      "prompt_cache_hit_tokens": 512,
+      "prompt_cache_miss_tokens": 1016,
+      "prompt_tokens": 1528,
+      "prompt_tokens_details": {
+        "cached_tokens": 512
+      },
+      "total_tokens": 2048
+    }
+  },
+  "retrieved_refs": [
+    "hng02-jinshu-wikisource-punctuated-010",
+    "hng02-jinshu-wikisource-punctuated-074",
+    "hng02-jinshu-wikisource-punctuated-075",
+    "hng02-jinshu-wikisource-punctuated-089",
+    "hng02-jinshu-wikisource-punctuated-100",
+    "hng02-zizhi-tongjian-wikisource-hu-111"
+  ],
+  "schema": 1,
+  "seed_person_id": "person-004",
+  "stage": "hng1-raw-extraction",
+  "transport_error": null
+}

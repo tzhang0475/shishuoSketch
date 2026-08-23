@@ -97,6 +97,17 @@ GENERIC_SURFACES = {
 }
 TITLE_PREFIXES = ("元", "明", "成", "文", "武", "簡文", "康獻", "明穆", "景獻", "東海", "琅邪", "太傅", "丞相", "司徒", "大將軍", "侯", "王")
 
+# HNG0.2R adds one deliberately small, generic resolution stage.  The
+# default HNG0.2 resolver keeps this stage disabled so rebuilding the HNG0.2
+# baseline remains byte-for-byte compatible with its locked projection.
+DECORATED_RESOLVER_VERSION = "hng0.2r-decorated-name-suffix-v1"
+DECORATED_DECORATOR_TYPES = {"geographic", "office", "title", "nobility", "kinship-role", "other"}
+DECORATED_GEOGRAPHIC_MARKERS = ("國", "郡", "縣", "州", "鄉", "邑", "里", "京", "關", "山", "江", "河")
+DECORATED_OFFICE_MARKERS = ("尚書", "中書", "侍中", "僕射", "丞相", "司徒", "司空", "太傅", "將軍", "刺史", "太守", "令", "卿", "校尉", "掾", "參軍", "長史")
+DECORATED_TITLE_MARKERS = ("皇帝", "帝", "太子", "世子", "公主", "夫人", "君")
+DECORATED_NOBILITY_MARKERS = ("王", "公", "侯", "伯", "子")
+DECORATED_KINSHIP_MARKERS = ("祖", "孫", "父", "母", "兄", "弟", "叔", "舅", "婿", "妻", "兄子", "從兄", "從弟", "長子")
+
 # This fold is only for lookup/ranking.  It is never applied to stored quotes.
 LOOKUP_FOLD = str.maketrans({
     "寳": "寶", "宝": "寶", "彞": "彝", "彛": "彝", "温": "溫", "陆": "陸", "机": "機",
@@ -292,6 +303,109 @@ def exact_resolution_method(person: Mapping[str, Any], surface: str) -> str:
     return "exact_name"
 
 
+def classify_decorator(prefix: str) -> str:
+    """Classify only the visible decorator; never rewrite the source surface."""
+
+    value = lookup(prefix)
+    if not value:
+        return "other"
+    if any(marker in value for marker in DECORATED_KINSHIP_MARKERS):
+        return "kinship-role"
+    if any(marker in value for marker in DECORATED_OFFICE_MARKERS):
+        return "office"
+    if any(marker in value for marker in DECORATED_TITLE_MARKERS):
+        return "title"
+    if any(marker in value for marker in DECORATED_NOBILITY_MARKERS):
+        return "nobility"
+    if any(value.endswith(marker) or marker in value for marker in DECORATED_GEOGRAPHIC_MARKERS):
+        return "geographic"
+    return "other"
+
+
+def _decorated_context_contains(surface: str, context: str, candidate: Mapping[str, Any], evidence_records: Sequence[Mapping[str, Any]]) -> bool:
+    """Require the complete decorated spelling in the same supplied passage."""
+
+    target = lookup(surface)
+    if not target:
+        return False
+    snippets = [str(context or "")]
+    snippets.extend(str(item.get("quote") or "") for item in candidate.get("evidence_quotes", []) if isinstance(item, Mapping))
+    snippets.extend(str(item.get("original_text") or "") for item in evidence_records if isinstance(item, Mapping))
+    return any(target in lookup(snippet) for snippet in snippets if snippet)
+
+
+def resolve_decorated_suffix(
+    *,
+    surface: str,
+    context: str,
+    candidate: Mapping[str, Any],
+    evidence_records: Sequence[Mapping[str, Any]],
+    catalog: Mapping[str, Mapping[str, Any]],
+) -> dict[str, Any] | None:
+    """Resolve a unique multi-character canonical suffix in a source surface.
+
+    This is intentionally conservative.  It does not use person-specific
+    tables, and it never treats a generic one-character surface as a name.
+    ``None`` means the stage found no safe resolution.  An explicit
+    ``ambiguous_identity`` result is returned when the source surface has a
+    tied longest canonical suffix, so the caller can preserve that failure.
+    """
+
+    raw = compact(surface)
+    folded = lookup(raw)
+    if len(folded) < 3 or not _decorated_context_contains(raw, context, candidate, evidence_records):
+        return None
+    if any("temporal_conflict" in str(item) for item in candidate.get("temporal_warnings", []) if item):
+        return None
+
+    matches: list[tuple[int, str, str]] = []
+    for pid, person in sorted(catalog.items()):
+        canonical_forms = person.get("canonical_forms", []) or [person.get("canonical_name", "")]
+        for form in canonical_forms:
+            suffix = lookup(form)
+            if len(suffix) < 2 or not folded.endswith(suffix):
+                continue
+            prefix_folded = folded[: -len(suffix)]
+            if len(prefix_folded) < 2:
+                continue
+            matches.append((len(suffix), str(pid), compact(form)))
+
+    if not matches:
+        return None
+    longest = max(item[0] for item in matches)
+    longest_matches = sorted({(pid, form) for length, pid, form in matches if length == longest})
+    unique_people = sorted({pid for pid, _ in longest_matches})
+    if len(unique_people) != 1:
+        return {
+            "resolution_status": "ambiguous_identity",
+            "resolution_method": "ambiguous",
+            "matches": unique_people,
+            "confidence": "low",
+            "note": "longest decorated canonical suffix is not unique",
+        }
+
+    pid = unique_people[0]
+    suffix_form = sorted(form for candidate_pid, form in longest_matches if candidate_pid == pid)[0]
+    # Prefer the diplomatic raw suffix when available; otherwise use the
+    # canonical form only for identifying the split boundary.
+    raw_suffix = suffix_form if raw.endswith(suffix_form) else raw[-len(suffix_form):]
+    decorator = raw[: len(raw) - len(raw_suffix)]
+    if len(lookup(decorator)) < 2:
+        return None
+    return {
+        "resolution_status": "resolved_existing_person",
+        "resolution_method": "decorated_name_suffix",
+        "resolved_person_id": pid,
+        "resolved_label": catalog[pid].get("canonical_name"),
+        "matches": [pid],
+        "confidence": "medium",
+        "normalized_person_surface": compact(catalog[pid].get("canonical_name") or suffix_form),
+        "decorator_surface": decorator,
+        "decorator_type": classify_decorator(decorator),
+        "note": "unique canonical-person suffix in the same evidence passage",
+    }
+
+
 def resolve_identity(
     *,
     surface: str,
@@ -301,6 +415,7 @@ def resolve_identity(
     evidence_records: Sequence[Mapping[str, Any]],
     catalog: Mapping[str, Mapping[str, Any]],
     exact_index: Mapping[str, Sequence[str]],
+    allow_decorated: bool = False,
 ) -> dict[str, Any]:
     raw = compact(surface)
     refs = [str(row.get("evidence_ref")) for row in evidence_records if row.get("evidence_ref")]
@@ -312,8 +427,8 @@ def resolve_identity(
         *[str(item.get("quote") or "") for item in candidate.get("evidence_quotes", []) if isinstance(item, Mapping)],
     ]))
 
-    def result(status: str, method: str, *, pid: str | None = None, provisional: str | None = None, label: str | None = None, matches: Sequence[str] = (), confidence: str = "low", note: str = "") -> dict[str, Any]:
-        return {
+    def result(status: str, method: str, *, pid: str | None = None, provisional: str | None = None, label: str | None = None, matches: Sequence[str] = (), confidence: str = "low", note: str = "", extra: Mapping[str, Any] | None = None) -> dict[str, Any]:
+        row = {
             "surface": raw,
             "resolved_person_id": pid,
             "provisional_person_id": provisional,
@@ -326,6 +441,9 @@ def resolve_identity(
             "matches": sorted(set(matches)),
             "note": note,
         }
+        if extra:
+            row.update(dict(extra))
+        return row
 
     if not raw:
         return result("unresolved_identity", "unresolved", confidence="low", note="empty surface")
@@ -341,6 +459,39 @@ def resolve_identity(
     if len(compound_matches) == 1:
         pid = compound_matches[0]
         return result("resolved_existing_person", "biography_local_context", pid=pid, label=catalog[pid].get("canonical_name"), matches=[pid], confidence="medium", note="contextual compound surface")
+
+    if allow_decorated:
+        decorated = resolve_decorated_suffix(
+            surface=raw,
+            context=context,
+            candidate=candidate,
+            evidence_records=evidence_records,
+            catalog=catalog,
+        )
+        if decorated:
+            if decorated.get("resolution_status") == "ambiguous_identity":
+                return result(
+                    "ambiguous_identity",
+                    "ambiguous",
+                    matches=decorated.get("matches", []),
+                    confidence="low",
+                    note=str(decorated.get("note") or "ambiguous decorated suffix"),
+                )
+            return result(
+                "resolved_existing_person",
+                "decorated_name_suffix",
+                pid=str(decorated.get("resolved_person_id")),
+                label=decorated.get("resolved_label"),
+                matches=decorated.get("matches", []),
+                confidence=str(decorated.get("confidence") or "medium"),
+                note=str(decorated.get("note") or ""),
+                extra={
+                    "original_surface": raw,
+                    "normalized_person_surface": decorated.get("normalized_person_surface"),
+                    "decorator_surface": decorated.get("decorator_surface"),
+                    "decorator_type": decorated.get("decorator_type"),
+                },
+            )
 
     exact = list(exact_index.get(lookup(raw), []))
     if len(exact) == 1:
@@ -392,6 +543,7 @@ def resolution_for_candidate(
     catalog: Mapping[str, Mapping[str, Any]],
     exact_index: Mapping[str, Sequence[str]],
     surface_key: str,
+    allow_decorated: bool = False,
 ) -> dict[str, Any]:
     seed_id = str(candidate.get("person_a") or candidate.get("person_id") or candidate.get("seed_person_id") or "")
     seed = seed_profiles.get(seed_id, catalog.get(seed_id, {"person_id": seed_id, "canonical_name": seed_id}))
@@ -400,7 +552,7 @@ def resolution_for_candidate(
     # is frozen HNG0.1 evidence metadata, not new model interpretation.
     context = "\n".join([context, str(candidate.get("claim") or ""), *[str(x.get("quote") or "") for x in candidate.get("evidence_quotes", []) if isinstance(x, Mapping)]])
     surface = str(candidate.get(surface_key) or "")
-    resolution = resolve_identity(surface=surface, seed=seed, candidate=candidate, context=context, evidence_records=records, catalog=catalog, exact_index=exact_index)
+    resolution = resolve_identity(surface=surface, seed=seed, candidate=candidate, context=context, evidence_records=records, catalog=catalog, exact_index=exact_index, allow_decorated=allow_decorated)
     resolution["candidate_id"] = str(candidate.get("relation_id") or candidate.get("temporal_id") or "")
     resolution["candidate_kind"] = "relation" if "relation_type" in candidate else "temporal"
     resolution["seed_person_id"] = seed_id

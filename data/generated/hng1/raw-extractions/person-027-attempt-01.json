@@ -1,0 +1,82 @@
+{
+  "attempts": [
+    {
+      "actual_request": true,
+      "api_usage": {
+        "completion_tokens": 4976,
+        "completion_tokens_details": {
+          "reasoning_tokens": 4502
+        },
+        "prompt_cache_hit_tokens": 512,
+        "prompt_cache_miss_tokens": 1090,
+        "prompt_tokens": 1602,
+        "prompt_tokens_details": {
+          "cached_tokens": 512
+        },
+        "total_tokens": 6578
+      },
+      "attempt": 1,
+      "completion_kind": "source_extraction",
+      "elapsed_seconds": 40.823986,
+      "exception_class": null,
+      "exception_message": null,
+      "failure_class": null,
+      "http_status": 200,
+      "response_model": "deepseek-v4-flash",
+      "round": 1,
+      "start_time": "2026-08-23T17:43:21.440836+00:00",
+      "story_id": "person-027"
+    }
+  ],
+  "canonical_write_back": false,
+  "content": "{\"relation_candidates\":[{\"seed_person_id\":\"person-027\",\"counterpart_surface\":\"山涛\",\"relation_type\":\"explicit_friendship_association\",\"direction\":\"undirected\",\"claim\":\"向秀与山涛特相友善，同号竹林七贤。\",\"evidence_ref\":\"hng02-zizhi-tongjian-wikisource-hu-078\",\"exact_quote\":\"河內山濤、河南向秀、{{*|向，式亮翻。}}琅邪王戎、沛國劉伶特相友善，號竹林七賢。\",\"confidence\":\"high\",\"ambiguity\":\"原文仅列举四人，未提及竹林七贤其余成员，但明确表明向秀与山涛友善。\",\"historical_verification_open\":true},{\"seed_person_id\":\"person-027\",\"counterpart_surface\":\"王戎\",\"relation_type\":\"explicit_friendship_association\",\"direction\":\"undirected\",\"claim\":\"向秀与王戎特相友善，同号竹林七贤。\",\"evidence_ref\":\"hng02-zizhi-tongjian-wikisource-hu-078\",\"exact_quote\":\"河內山濤、河南向秀、{{*|向，式亮翻。}}琅邪王戎、沛國劉伶特相友善，號竹林七賢。\",\"confidence\":\"high\",\"ambiguity\":\"原文仅列举四人，未提及竹林七贤其余成员，但明确表明向秀与王戎友善。\",\"historical_verification_open\":true},{\"seed_person_id\":\"person-027\",\"counterpart_surface\":\"刘伶\",\"relation_type\":\"explicit_friendship_association\",\"direction\":\"undirected\",\"claim\":\"向秀与刘伶特相友善，同号竹林七贤。\",\"evidence_ref\":\"hng02-zizhi-tongjian-wikisource-hu-078\",\"exact_quote\":\"河內山濤、河南向秀、{{*|向，式亮翻。}}琅邪王戎、沛國劉伶特相友善，號竹林七賢。\",\"confidence\":\"high\",\"ambiguity\":\"原文仅列举四人，未提及竹林七贤其余成员，但明确表明向秀与刘伶友善。\",\"historical_verification_open\":true}],\"temporal_candidates\":[]}",
+  "failure_class": null,
+  "immutable": true,
+  "model": "deepseek-v4-flash",
+  "model_input_hash": "99d7c7eb0431e7a4fcaf0a90de80b333bcef024da9780030f3de3c215693c415",
+  "prompt_version": "hng1-frozen-hng02r-source-extraction-v1",
+  "raw_response": {
+    "choices": [
+      {
+        "finish_reason": "stop",
+        "index": 0,
+        "logprobs": null,
+        "message": {
+          "content": "{\"relation_candidates\":[{\"seed_person_id\":\"person-027\",\"counterpart_surface\":\"山涛\",\"relation_type\":\"explicit_friendship_association\",\"direction\":\"undirected\",\"claim\":\"向秀与山涛特相友善，同号竹林七贤。\",\"evidence_ref\":\"hng02-zizhi-tongjian-wikisource-hu-078\",\"exact_quote\":\"河內山濤、河南向秀、{{*|向，式亮翻。}}琅邪王戎、沛國劉伶特相友善，號竹林七賢。\",\"confidence\":\"high\",\"ambiguity\":\"原文仅列举四人，未提及竹林七贤其余成员，但明确表明向秀与山涛友善。\",\"historical_verification_open\":true},{\"seed_person_id\":\"person-027\",\"counterpart_surface\":\"王戎\",\"relation_type\":\"explicit_friendship_association\",\"direction\":\"undirected\",\"claim\":\"向秀与王戎特相友善，同号竹林七贤。\",\"evidence_ref\":\"hng02-zizhi-tongjian-wikisource-hu-078\",\"exact_quote\":\"河內山濤、河南向秀、{{*|向，式亮翻。}}琅邪王戎、沛國劉伶特相友善，號竹林七賢。\",\"confidence\":\"high\",\"ambiguity\":\"原文仅列举四人，未提及竹林七贤其余成员，但明确表明向秀与王戎友善。\",\"historical_verification_open\":true},{\"seed_person_id\":\"person-027\",\"counterpart_surface\":\"刘伶\",\"relation_type\":\"explicit_friendship_association\",\"direction\":\"undirected\",\"claim\":\"向秀与刘伶特相友善，同号竹林七贤。\",\"evidence_ref\":\"hng02-zizhi-tongjian-wikisource-hu-078\",\"exact_quote\":\"河內山濤、河南向秀、{{*|向，式亮翻。}}琅邪王戎、沛國劉伶特相友善，號竹林七賢。\",\"confidence\":\"high\",\"ambiguity\":\"原文仅列举四人，未提及竹林七贤其余成员，但明确表明向秀与刘伶友善。\",\"historical_verification_open\":true}],\"temporal_candidates\":[]}",
+          "reasoning_content": "我们需要从提供的原文中抽取关系候选和时间候选。seed_person_id是\"person-027\"，对应向秀。我们需要对照原文。\n\n首先看提供的passages：\n\n1. hng02-jinshu-wikisource-punctuated-045: 文本：\"泰始初，鄭沖、王祥、何曾、荀顗、裴秀等各以老疾歸第。帝優寵大臣，不欲勞以筋力，數遣愷諭旨于諸公，諮以當世大政，參議得失。愷惡賈充之為人也，不欲令久執朝政，每裁抑焉。充病之，不知所為。\"\n\n这段是晋书中的，关于“愷”（可能是指任愷？）和贾充。没有提到向秀。所以不相关。\n\n2. hng02-jinshu-wikisource-punctuated-049: 这是晋书卷四十九列传第十九的header，提到了“阮籍 兄子咸 咸子瞻 瞻弟孚 從子脩 族弟放 放弟裕 嵇康 向秀 劉伶 謝鯤 胡毋輔之 子:謙之 畢卓 羊曼 弟:聃 光逸”。这里有“向秀”的名字，但只是列传目录，没有具体关系描述。另外正文开始是阮籍传。没有关于向秀的具体事实。这段可以用于确认向秀是竹林七贤之一吗？但文本本身没有说。在资治通鉴中有。\n\n3. hng02-zizhi-tongjian-wikisource-hu-078: 文本：\"《周詩》有侵阮徂共之辭，子孫以國爲姓。後漢有己吾令阮敦。}}河內山濤、河南向秀、{{*|向，式亮翻。}}琅邪王戎、沛國劉伶特相友善，號竹林七賢。\"\n\n这段明确提到：河內山濤、河南向秀、琅邪王戎、沛國劉伶特相友善，號竹林七賢。这里向秀与山涛、王戎、刘伶相友善，且号竹林七贤。注意这里没有提到阮籍、嵇康，但根据标题可能上下文有。但这里明确说他们“特相友善”，这可以形成关系吗？允许的关系类型有documented_social_interaction, explicit_friendship_association, friendship等。这里说“特相友善”，是明确的友谊关联。我们可以抽取向秀与山涛、王戎、刘伶的友谊关系。但注意，seed是向秀，所以counterpart可以是山涛、王戎、刘伶。方向是undirected，因为是相互友善。\n\n另外，这也可以形成shared_explicit_event吗？他们一起被称为竹林七贤，这是一个共享事件。但“号竹林七贤”是一种称号，不是事件。但“特相友善”是关系。\n\n还有，这里提到“河內山濤、河南向秀、琅邪王戎、沛國劉伶”，其中向秀是河南人，但不确定这是否是籍贯。但不需要。\n\n4. hng02-zizhi-tongjian-wikisource-hu-096: 关于王导薨，与向秀无关。\n\n5. hng02-zizhi-tongjian-wikisource-hu-128: 关于魏高宗，无关。\n\n6. hng02-jinshu-wikisource-punctuated-050: 关于郭象，提到“太尉王衍每云：「聽象語，如懸河瀉水，注而不竭。」” 这里有王衍对郭象的评价，但seed是向秀，无关。\n\n所以只有passage hu-078 有关。\n\n注意，seed_identity中有aliases空，courtesy_name空，等等。但向秀的字是子期，但这里没提供。\n\n我们需要抽取关系候选。根据关系类型，允许的包括：explicit_friendship_association, friendship, documented_social_interaction, shared_explicit_event等。这里“特相友善”明确表示他们关系好，所以可以抽取友谊。\n\n具体看文本：河內山濤、河南向秀、琅邪王戎、沛國劉伶特相友善，號竹林七賢。这里向秀与山涛、王戎、刘伶是友善关系。也可以说他们共同被号竹林七贤，这是一个共享称号，但“号竹林七贤”是集体称号，不是事件。\n\n由于seed是向秀，我们为每个对方人物（山涛、王戎、刘伶）创建一个关系候选？但注意，原文说“河內山濤、河南向秀、琅邪王戎、沛國劉伶特相友善”，这里的“相友善”是相互的，所以我们可以为这三个人分别创建关系，或者也可以合并为一个？但每个counterpart不同，所以分别创建。\n\n另外，既然说“號竹林七賢”，这是一个群体称号，但这里只列出了四个人，可能上下文还有其他人。但就本段文字，只提到这四个人。所以我们可以提到他们四个之间友善，并且被号称为竹林七贤。但关系类型是explicit_friendship_association，还是friendship？我觉得explicit_friendship_association更合适，因为原文明确说“特相友善”，是明确友谊关联。也可以选friendship，但allowed包含friendship，不过explicit_friendship_association更精确。\n\n另外，shared_explicit_event可能适合“號竹林七賢”这个称号，但不是一个事件，而是称号。所以可能不适合。\n\n另外，documented_social_interaction也可以，但“相友善”是持续状态，不是一次互动。\n\n所以选择explicit_friendship_association。\n\n方向：原文是“特相友善”，是相互的，所以方向可以undirected。或者我们可以分别指定seed_to_counterpart和counterpart_to_seed都是，但通常undirected即可。\n\nclaim：描述事实。例如：“向秀与山涛、王戎、刘伶特相友善，同为竹林七贤。”\n\n但注意，我们只抽取原文明确支持的事实。原文明确说他们友善，并号竹林七贤。但“竹林七贤”中还包括阮籍、嵇康、阮咸等，但这里没提。所以claim要基于原文。\n\n我们可以为每个人写一个claim，例如：“向秀与山涛特相友善，并同号竹林七贤。” 但注意，原文说“河內山濤、河南向秀、琅邪王戎、沛國劉伶特相友善”，所以山涛、向秀、王戎、刘伶四个人之间都友善。所以可以写“向秀与山涛特相友善”。\n\n另外，是否需要抽取时间？这里没有明确时间，只是说“特相友善”，没有年份。所以时间候选可能没有。\n\n但我们可以考虑major_event_participation？他们被号竹林七贤，可以视为一个事件？但原文没有时间。所以不抽取时间。\n\n另外，注意passage中还有“《周詩》有侵阮徂共之辭，子孫以國爲姓。後漢有己吾令阮敦。”这是关于阮姓的起源，不是向秀。\n\n所以关系候选就是三个：与山涛、王戎、刘伶。\n\n但是否需要抽取向秀与竹林七贤整体的关系？counterpart_surface可以是“竹林七贤”群体，但原文说“號竹林七賢”，但seed是向秀，他属于其中，所以可以有一个关系是“向秀与竹林七贤”吗？但counterpart是群体，也许可以。但更标准的是抽取具体人物。\n\n因为原文明确列出四个人，所以抽取三个具体人物。\n\n另外，注意allowed_relation_types中还有same_clan，但向秀和这些人不同姓，所以不是。\n\n还有cousin_clan_kin等，无关。\n\n所以关系候选有三个。\n\n现在再看有没有其他有关向秀的文本？在passage 049中，有“向秀”出现在header的列表里，但没有关系描述。所以不抽取。\n\n另外，passage 078中还有“河內山濤、河南向秀、琅邪王戎、沛國劉伶特相友善”，其中“河南向秀”可能暗示籍贯，但我们不需要。\n\n关于temporal_candidates：我们没有时间信息。所以不输出时间候选。\n\n现在构造JSON。\n\n注意：每条候选必须引用一个evidence_ref和exact_quote。exact_quote必须是逐字连续的。我们可以从文本中提取。\n\n对于山涛：exact_quote可以是“河內山濤、河南向秀、琅邪王戎、沛國劉伶特相友善”这个完整句子，因为它是连续的。但为了精确，我们可以摘取包含“向秀”和“山濤”的部分。但整个句子是连续的，所以我们用整个句子。\n\n或者我们可以分别用“山濤”和“向秀”的名字，但那样不连续。所以最好用整个句子。\n\n由于三个关系都来自同一句话，exact_quote相同。\n\nclaim要区分。\n\n比如对于山涛：“向秀与山涛特相友善，同号竹林七贤。”\n\n对于王戎：“向秀与王戎特相友善，同号竹林七贤。”\n\n对于刘伶：“向秀与刘伶特相友善，同号竹林七贤。”\n\n注意，原文是“特相友善”，我们写“特相友善”没问题。\n\n关于ambiguity：这里没有歧义，但可能需要注意“竹林七贤”是否包括其他人，但原文没有提。所以我们可以写“原文仅列举向秀与山涛、王戎、刘伶三人相友善并同号竹林七贤，未提及阮籍、嵇康等。” 但这不是歧义，而是范围。不过我们可以在ambiguity中说明。\n\n另外，direction：undirected。\n\nconfidence：高，因为原文明确。\n\nhistorical_verification_open：可能为true，因为这是历史记载，但也许我们确信，但按指令为true。\n\n现在我们构造关系候选。\n\n注意seed_person_id是\"person-027\"。\n\ncounterpart_surface：原文中的称谓是“山濤”、“王戎”、“劉伶”，但原文中就是这些名字。所以用“山涛”、“王戎”、“刘伶”即可。\n\nrelation_type：explicit_friendship_association。\n\n另外，还需要考虑是否还有documented_political_interaction？没有。\n\n所以输出三个关系候选。\n\n现在检查是否有任何其他可能的关系？比如向秀与“竹林七贤”作为群体？但指令说“不要给对方人物分配 person_id”，所以counterpart_surface可以是群体，但关系类型可能不合适。我们按具体人物处理。\n\n另外，temporal_candidates为空。\n\n现在生成JSON。\n\n注意每个候选需要包含所有字段，包括ambiguity和historical_verification_open。\n\n我们还可以为每个候选设置不同的claim，但事实相同。\n\n为了节省，我们可以写一个候选用一个列表，但counterpart不同。\n\n最终JSON结构：\n\n{\n  \"relation_candidates\": [\n    {\n      \"seed_person_id\": \"person-027\",\n      \"counterpart_surface\": \"山涛\",\n      \"relation_type\": \"explicit_friendship_association\",\n      \"direction\": \"undirected\",\n      \"claim\": \"向秀与山涛特相友善，同号竹林七贤。\",\n      \"evidence_ref\": \"hng02-zizhi-tongjian-wikisource-hu-078\",\n      \"exact_quote\": \"河內山濤、河南向秀、琅邪王戎、沛國劉伶特相友善，號竹林七賢。\",\n      \"confidence\": \"high\",\n      \"ambiguity\": \"原文仅列举四人，未提及竹林七贤其余成员。\",\n      \"historical_verification_open\": true\n    },\n    {\n      \"seed_person_id\": \"person-027\",\n      \"counterpart_surface\": \"王戎\",\n      \"relation_type\": \"explicit_friendship_association\",\n      \"direction\": \"undirected\",\n      \"claim\": \"向秀与王戎特相友善，同号竹林七贤。\",\n      \"evidence_ref\": \"hng02-zizhi-tongjian-wikisource-hu-078\",\n      \"exact_quote\": \"河內山濤、河南向秀、琅邪王戎、沛國劉伶特相友善，號竹林七賢。\",\n      \"confidence\": \"high\",\n      \"ambiguity\": \"同上。\",\n      \"historical_verification_open\": true\n    },\n    {\n      \"seed_person_id\": \"person-027\",\n      \"counterpart_surface\": \"刘伶\",\n      \"relation_type\": \"explicit_friendship_association\",\n      \"direction\": \"undirected\",\n      \"claim\": \"向秀与刘伶特相友善，同号竹林七贤。\",\n      \"evidence_ref\": \"hng02-zizhi-tongjian-wikisource-hu-078\",\n      \"exact_quote\": \"河內山濤、河南向秀、琅邪王戎、沛國劉伶特相友善，號竹林七賢。\",\n      \"confidence\": \"high\",\n      \"ambiguity\": \"同上。\",\n      \"historical_verification_open\": true\n    }\n  ],\n  \"temporal_candidates\": []\n}\n\n但注意，我们是否应该用“explicit_friendship_association”还是“friendship”？两者都允许。但“explicit_friendship_association”更精确，因为原文明确说“特相友善”。\n\n另外，注意原文中有“特相友善”四个字，是明确的友谊。\n\n另外，我们是否可以将“號竹林七賢”作为shared_explicit_event？但事件是“号”这个称号，但“号”不是事件，是称说。所以不采用。\n\n还有，我们是否应该抽取向秀与山涛等人的社会互动？但“特相友善”是状态，不是具体互动。所以友谊更贴切。\n\n现在检查是否有任何时间信息？没有。\n\n所以最终输出如上。\n\n但注意，指令要求“只使用提供的本地原文，不使用预训练知识补足事实。” 我们只用原文。\n\n另外，注意“同现、同姓、推测、性格判断不能单独形成关系。” 这里“特相友善”是明确的关系，不是同现，所以可以。\n\n现在确认exact_quote是否逐字连续。原文中句子是“河內山濤、河南向秀、琅邪王戎、沛國劉伶特相友善，號竹林七賢。” 注意原文中可能没有句号，但这里有句号。我们保留标点。\n\n在passage中，文本是：“河內山濤、河南向秀、{{*|向，式亮翻。}}琅邪王戎、沛國劉伶特相友善，號竹林七賢。” 注意插入了一个注释“{{*|向，式亮翻。}}”，这是注音注释，不是原文的一部分？从证据文本看，它是以{{*}}括起来的注释，应该不是正文。但exact_quote必须逐字连续，如果我们引用整个句子，需要包含这些注释吗？注释是原文中有的吗？在wikisource中，这种{{*}}是注释，可能不属于原文。为了安全，我们应该避免引用有注释的部分。我们可以引用不包含注释的片段。\n\n例如，可以引用“河內山濤、河南向秀、琅邪王戎、沛國劉伶特相友善”，这个片段连续且不包含注释。但“河南向秀”后面有注释，所以如果引用到“向秀”就停了，那就不包含后面的内容。但我们需要提到“特相友善”，所以可以引用“河南向秀、琅邪王戎、沛國劉伶特相友善”，但这样就不包含“山濤”了。\n\n或者我们可以分别引用包含每个名字的短语。但为了统一，我们可以引用“向秀”与“山濤”等，但需要连续。\n\n另一种方式，我们可以引用“河內山濤、河南向秀、琅邪王戎、沛國劉伶特相友善”，这个片段是从“河內山濤”到“特相友善”，中间有注释吗？在文本中，“河南向秀”后面是“{{*|向，式亮翻。}}”然后才是“琅邪王戎”，所以如果我们要包含“琅邪王戎”和“刘伶”，就必须跳过注释，但引用必须是连续的，所以不能跳过。因此，如果我们要用完整句子，就必须包含注释。但注释可能不是我们认为的正文。\n\n也许我们可以用从“河內山濤”到“特相友善”的片段，但中间有注释。或者我们可以分几个短引用。\n\n但指令说“每一条候选必须引用一个给定 evidence_ref 和其中逐字连续的 exact_quote。” 所以exact_quote必须是原文中的连续字符串。如果我们引用包含注释的字符串，那也是原文中存在的，但注释是后来加的，可能不算是原文。但evidence_ref是wikisource的文本，它包含了这些注释标记。所以我们可以引用它，但最好避免。\n\n或许我们可以找到另一个passage，但其他passage没有向秀的关系。\n\n或者我们可以在passage 049中找到向秀？但只有header列表，没有关系。\n\n所以只能依赖078。\n\n让我们仔细看078的文本：\n\n\"《周詩》有侵阮徂共之辭，子孫以國爲姓。後漢有己吾令阮敦。}}河內山濤、河南向秀、{{*|向，式亮翻。}}琅邪王戎、沛國劉伶特相友善，號竹林七賢。\"\n\n注意开头有“}}”可能是格式。但我们需要引用连续的文本。我们可以从“河內山濤”开始到“特相友善”结束，但中间有注释。我们可以把注释也作为连续文本的一部分吗？是的，在文本中它是连续的字符。所以可以。\n\n但为了更干净，我们可以引用“向秀”与“劉伶”之间的部分？不。\n\n也许我们可以引用“河南向秀”和“特相友善”，但中间隔了“{{*|向，式亮翻。}}琅邪王戎、沛國劉伶”，所以不连续。\n\n所以如果我们想同时包含向秀和其中一个同伴，我们需要包含整个片段。\n\n另一种思路，我们可以选择不包含所有名字，而是针对每个同伴，引用一个更短的连续片段，例如：\n\n对于山涛：我们可以引用“河內山濤、河南向秀” 因为这是连续的，但向秀后面有注释，所以“河內山濤、河南向秀”是连续的，但只包含山涛和向秀。然后我们还提到“特相友善”不在这个片段中，但我们可以将其作为另一个引用？但每个候选只能有一个evidence_ref和exact_quote，所以我们不能合并两个片段。\n\n所以也许我们可以将claim建立在“河內山濤、河南向秀”这个片段上，说明他们同时被提到，但“特相友善”才是关系证据。所以我们需要包含“特相友善”。\n\n或者我们可以引用“河南向秀、{{*|向，式亮翻。}}琅邪王戎、沛國劉伶特相友善”但这就包含了注释和所有。\n\n实际上，为了符合“逐字连续”，我们可以引用整个从“河內山濤”到“竹林七賢”的句子，包括注释。这应该可以被接受。\n\n我们检查原文中是否有完整的句子？原文是叙述，没有标点句号，但我们可以看其标点。在文本中，有逗号分隔。整个句子是“河內山濤、河南向秀、{{*|向，式亮翻。}}琅邪王戎、沛國劉伶特相友善，號竹林七賢。” 所以这是一个连续字符串。\n\n所以exact_quote可以设为这个字符串。\n\n但注意，在文本中还有“}}”之前的部分，但我们从“河內山濤”开始即可。\n\n因此，我们可以用这个全句。\n\n现在，关于temporal_candidates，没有。\n\n所以最终输出三个关系候选。\n\n但注意，我们是否应该把“號竹林七賢”作为shared_explicit_event？也许可以，但关系类型是shared_explicit_event，但“号”不是事件，而是称号。所以不适合。\n\n另外，我们是否应该抽取向秀与“竹林七贤”作为一个整体？但counterpart_surface可以是“竹林七贤”，但关系类型？可能不合适，因为“竹林七贤”是群体，而且向秀是其中一员。但我们可以说向秀属于竹林七贤，但这不是关系类型中的一种。所以不抽取。\n\n因此，最终如上。\n\n现在检查是否还有其他关系？比如向秀与山涛等是“特相友善”，这明确是友谊。所以没问题。\n\n关于ambiguity，我们可以写“原文未明确说明‘竹林七贤’具体包括全部七人，只列举四人，但‘特相友善’明确表明向秀与所列三人关系密切。”\n\n我们就这样写。\n\n现在生成JSON。\n\n注意，每个候选的exact_quote相同，但我们可以注明。\n\n另外，注意“evidence_ref”是“hng02-zizhi-tongjian-wikisource-hu-078”。\n\n现在输出。\n\n确保JSON格式正确，没有多余文本。",
+          "role": "assistant"
+        }
+      }
+    ],
+    "created": 1787507001,
+    "id": "bfa67c11-cccd-4c0a-b0c7-c6b655a853b8",
+    "model": "deepseek-v4-flash",
+    "object": "chat.completion",
+    "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+    "usage": {
+      "completion_tokens": 4976,
+      "completion_tokens_details": {
+        "reasoning_tokens": 4502
+      },
+      "prompt_cache_hit_tokens": 512,
+      "prompt_cache_miss_tokens": 1090,
+      "prompt_tokens": 1602,
+      "prompt_tokens_details": {
+        "cached_tokens": 512
+      },
+      "total_tokens": 6578
+    }
+  },
+  "retrieved_refs": [
+    "hng02-jinshu-wikisource-punctuated-045",
+    "hng02-jinshu-wikisource-punctuated-049",
+    "hng02-zizhi-tongjian-wikisource-hu-078",
+    "hng02-zizhi-tongjian-wikisource-hu-096",
+    "hng02-zizhi-tongjian-wikisource-hu-128",
+    "hng02-jinshu-wikisource-punctuated-050"
+  ],
+  "schema": 1,
+  "seed_person_id": "person-027",
+  "stage": "hng1-raw-extraction",
+  "transport_error": null
+}

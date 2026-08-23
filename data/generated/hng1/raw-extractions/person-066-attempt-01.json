@@ -1,0 +1,82 @@
+{
+  "attempts": [
+    {
+      "actual_request": true,
+      "api_usage": {
+        "completion_tokens": 3478,
+        "completion_tokens_details": {
+          "reasoning_tokens": 3077
+        },
+        "prompt_cache_hit_tokens": 512,
+        "prompt_cache_miss_tokens": 931,
+        "prompt_tokens": 1443,
+        "prompt_tokens_details": {
+          "cached_tokens": 512
+        },
+        "total_tokens": 4921
+      },
+      "attempt": 1,
+      "completion_kind": "source_extraction",
+      "elapsed_seconds": 27.863084,
+      "exception_class": null,
+      "exception_message": null,
+      "failure_class": null,
+      "http_status": 200,
+      "response_model": "deepseek-v4-flash",
+      "round": 1,
+      "start_time": "2026-08-23T17:35:46.075488+00:00",
+      "story_id": "person-066"
+    }
+  ],
+  "canonical_write_back": false,
+  "content": "{\"relation_candidates\":[{\"seed_person_id\":\"person-066\",\"counterpart_surface\":\"桓玄\",\"relation_type\":\"factional_alignment\",\"direction\":\"seed_to_counterpart\",\"claim\":\"卞範之是桓玄同党，属于桓玄阵营\",\"evidence_ref\":\"hng02-jinshu-wikisource-punctuated-085\",\"exact_quote\":\"毅執玄党卞範之、羊僧壽、夏侯崇之、桓道恭等，皆斬之。\",\"confidence\":\"high\",\"ambiguity\":\"‘党’表示党派归属，未明确私人关系或隶属职务\",\"historical_verification_open\":true},{\"seed_person_id\":\"person-066\",\"counterpart_surface\":\"毅\",\"relation_type\":\"documented_political_interaction\",\"direction\":\"counterpart_to_seed\",\"claim\":\"毅擒获卞範之并将其斩杀\",\"evidence_ref\":\"hng02-jinshu-wikisource-punctuated-085\",\"exact_quote\":\"毅執玄党卞範之、羊僧壽、夏侯崇之、桓道恭等，皆斬之。\",\"confidence\":\"high\",\"ambiguity\":\"此处的‘毅’未给出全名，候选关系限定于原文所称的‘毅’\",\"historical_verification_open\":true}],\"temporal_candidates\":[{\"seed_person_id\":\"person-066\",\"subject_surface\":\"卞範之\",\"temporal_type\":\"death\",\"claim\":\"卞範之被毅等斩首处死\",\"temporal_scope\":{},\"precision\":\"unknown\",\"evidence_ref\":\"hng02-jinshu-wikisource-punctuated-085\",\"exact_quote\":\"毅執玄党卞範之、羊僧壽、夏侯崇之、桓道恭等，皆斬之。\",\"confidence\":\"high\",\"ambiguity\":\"原文只载被斩，未载具体日期\",\"historical_verification_open\":true}]}",
+  "failure_class": null,
+  "immutable": true,
+  "model": "deepseek-v4-flash",
+  "model_input_hash": "e9fee9f83f0e9fcda03a2762993a0afc35fd85e7cb300043393ab5e9fe7e6d59",
+  "prompt_version": "hng1-frozen-hng02r-source-extraction-v1",
+  "raw_response": {
+    "choices": [
+      {
+        "finish_reason": "stop",
+        "index": 0,
+        "logprobs": null,
+        "message": {
+          "content": "{\"relation_candidates\":[{\"seed_person_id\":\"person-066\",\"counterpart_surface\":\"桓玄\",\"relation_type\":\"factional_alignment\",\"direction\":\"seed_to_counterpart\",\"claim\":\"卞範之是桓玄同党，属于桓玄阵营\",\"evidence_ref\":\"hng02-jinshu-wikisource-punctuated-085\",\"exact_quote\":\"毅執玄党卞範之、羊僧壽、夏侯崇之、桓道恭等，皆斬之。\",\"confidence\":\"high\",\"ambiguity\":\"‘党’表示党派归属，未明确私人关系或隶属职务\",\"historical_verification_open\":true},{\"seed_person_id\":\"person-066\",\"counterpart_surface\":\"毅\",\"relation_type\":\"documented_political_interaction\",\"direction\":\"counterpart_to_seed\",\"claim\":\"毅擒获卞範之并将其斩杀\",\"evidence_ref\":\"hng02-jinshu-wikisource-punctuated-085\",\"exact_quote\":\"毅執玄党卞範之、羊僧壽、夏侯崇之、桓道恭等，皆斬之。\",\"confidence\":\"high\",\"ambiguity\":\"此处的‘毅’未给出全名，候选关系限定于原文所称的‘毅’\",\"historical_verification_open\":true}],\"temporal_candidates\":[{\"seed_person_id\":\"person-066\",\"subject_surface\":\"卞範之\",\"temporal_type\":\"death\",\"claim\":\"卞範之被毅等斩首处死\",\"temporal_scope\":{},\"precision\":\"unknown\",\"evidence_ref\":\"hng02-jinshu-wikisource-punctuated-085\",\"exact_quote\":\"毅執玄党卞範之、羊僧壽、夏侯崇之、桓道恭等，皆斬之。\",\"confidence\":\"high\",\"ambiguity\":\"原文只载被斩，未载具体日期\",\"historical_verification_open\":true}]}",
+          "reasoning_content": "We need respond JSON only. Need extract relation/temporal candidates from provided passages for seed 卞範之. Need carefully use local text only. Need output relation_candidates and temporal_candidates possibly empty. Need evidence_ref and exact_quote verbatim continuous from given passage.\n\nWe need inspect passages. We have seed person 卞範之 (person-066). Passages mention 卞範之 in hng02-jinshu-wikisource-punctuated-085: \"毅执玄党卞範之、羊僧壽、夏侯崇之、桓道恭等，皆斬之。\" This gives event: 毅 (刘毅) captured/executed 卞範之 as 玄党. Relation? There is documented political interaction? It is an execution/capture by 刘毅, perhaps documented_social_interaction? But relation types include documented_political_interaction, superior_subordinate? Need seed to counterpart. The text says 毅執玄党卞範之...皆斬之. 毅 captures and executes. This is a documented political/military action. Candidate relation: seed to counterpart? counterpart 毅 (刘毅) executed seed. relation_type maybe documented_political_interaction, direction counterpart_to_seed? Or \"shared_explicit_event\"? We should not invent relationship beyond event. Relation candidate could be documented_political_interaction between 卞範之 and 毅, direction counterpart_to_seed (毅 towards seed) claim \"刘毅擒获卞範之并将其斩杀\" based on evidence. But relation types must be from list. documented_political_interaction is allowed. confidence high. exact quote \"毅執玄党卞範之、羊僧壽、夏侯崇之、桓道恭等，皆斬之。\" Need quote continuous. Also seed 卞範之 has with 桓玄: text says \"玄党卞範之\" => 卞範之 was part of Huan Xuan's faction. Relation: factional_alignment or explicit_political_cooperation_opposition? \"玄党\" indicates factional alignment. seed to counterpart? counterpart_surface \"玄\" or \"桓玄\". Relation_type \"factional_alignment\", direction \"seed_to_counterpart\" (卞範之 aligned with 桓玄). exact quote from 085 \"毅執玄党卞範之...\" Quote includes \"玄党卞範之\". Also in jinshu 099 header \"桓玄 卞範之 殷仲文\" indicates biography section? It lists persons in same 列傳, but that's not a relation. Need not.\n\nPassage hng02-jinshu-wikisource-punctuated-099 includes only \"桓玄 卞範之 殷仲文\" in header notes, and \"桓玄，字敬道，一名靈寶，大司馬溫之孽子也.\" No relation involving 卞範之 beyond being included in same 卷. Could be same document? Not necessarily explicit relation. Skip.\n\nPassage hng02-zizhi-tongjian-wikisource-hu-110: \"楊佺期爲人驕悍，玄每以寒士裁之，佺期甚恨，密說仲堪以玄終爲患，請於壇所襲之。仲堪忌佺期兄弟勇健，恐旣殺玄，不可復制.\" No 卞範之. Skip.\n\nPassage hu-112, hu-113: no 卞範之. hu-114: \"桓謙棄城走。毅等入江陵，執卞範之等，斬之。桓振還，望見火起，知城已陷，其衆皆潰，振逃于溳川。\" This gives event: 毅等入江陵, 執卞範之等斬之. Also \"桓謙棄城走\" and \"桓振還...\". Relation? Seed 卞範之 was executed by 毅. Same as 085. Could include as another candidate? Need maybe only one evidence per fact? We can include both. Relation with 桓玄? Here no \"玄党\" but \"卞範之等\" captured in context of Huan Xuan rebellion after Huan Xuan's death? Need not.\n\nTemporal candidates: Need allowed temporal types: birth, death, major_event_participation, office_tenure, residence_activity_phase. We have death of 卞範之? Actually text says 執卞範之等，斬之. That implies execution, death. But exact quote supports event. Need temporal_type \"death\" for seed. subject_surface \"卞範之\". claim \"卞範之被刘毅等擒获并斩杀\" from evidence. temporal_scope? We don't know date. Could put \"precision\":\"unknown\" because no date in quote. But temporal_type death, claim death event. historical_verification_open true maybe. confidence high for event, but temporal date unknown. Need temporal_scope {} maybe empty or with known? The instruction \"temporal_scope\":{}. Since no date, unknown. precision \"unknown\". Could include one temporal candidate for death. Also maybe \"major_event_participation\" for \"玄党\" or being captured? The text \"毅執玄党卞範之...\" shows 卞範之 participated in Huan Xuan's faction/rebellion. But allowed major_event_participation means participation in major event. Text doesn't describe event beyond being captured. We can infer he was part of 玄党 and involved in the rebellion? But needs explicit. \"玄党\" indicates faction. But \"major_event_participation\" maybe no explicit event. Skip.\n\nNeed maybe relation \"same_clan\" no.\n\nNeed be careful: The seed identity says aliases empty, canonical 卞範之. The text uses same surface.\n\nNeed relation candidates with relation_type from list. Candidate 1: relation with 桓玄: factional_alignment. counterpart_surface \"桓玄（玄）\" Actually text uses \"玄\" as shorthand. But evidence_ref 085 exact_quote \"毅執玄党卞範之...\" The quote includes \"玄党\" meaning Huan Xuan's party. exact_quote continuous \"毅執玄党卞範之、羊僧壽、夏侯崇之、桓道恭等，皆斬之。\" Good. claim \"卞範之被称作‘玄党’，表明他归属桓玄一党\" Direction seed_to_counterpart? Factional alignment is mutual membership? But \"玄党\" indicates seed is a partisan of 桓玄. So direction seed_to_counterpart (卞範之 aligned with 桓玄). Confidence high for explicit label. Ambiguity maybe \"党\" could mean faction not personal relation. Historical verification open true.\n\nCandidate 2: relation with 刘毅? The text \"毅執玄党卞範之\" and \"毅等入江陵，執卞範之等，斬之\" establishes documented political interaction (capture/execution). counterpart_surface \"毅\" (or \"刘毅\" infer? But only \"毅\" in text; cannot assign person_id but surface can be \"毅\". Need maybe include as \"毅\" to avoid inference. But if we call \"刘毅\" that might use external knowledge. So counterpart_surface \"毅\". relation_type documented_political_interaction. direction counterpart_to_seed (毅 captured/executed seed). claim \"毅擒获并斩杀卞範之\" exact_quote \"毅執玄党卞範之、羊僧壽、夏侯崇之、桓道恭等，皆斬之。\" But exact quote includes others. Could use shorter \"毅執玄党卞範之\" if continuous? The instruction exact_quote must be verbatim continuous substring. \"毅執玄党卞範之\" is continuous substring. Good. But include full? Need evidence_ref one of given. Use hng02-jinshu-wikisource-punctuated-085. exact_quote \"毅執玄党卞範之\" or full. I think full is better.\n\nAnother relation with \"毅等\" from hu-114: exact_quote \"毅等入江陵，執卞範之等，斬之。\" same relation. Could include both as separate candidates? Usually duplicates across passages can be multiple evidence. But output candidates might be unique relations. Need we include all? The instruction says \"每条候选必须引用一个给定 evidence_ref\". It doesn't limit. We can include two relation candidates same relation but different evidence. But maybe redundant. To be safe, include one for each factual assertion? Need maybe \"relation_candidates\" list can include multiple. But maybe better include one relation candidate for 毅 based on 085, and one based on 114? The relation is same. However there is subtle: 085 says 毅執玄党卞範之...皆斬之; 114 says 毅等入江陵，執卞範之等，斬之. Same relation. Could include one with high confidence. But if one quote references \"毅等\" (not \"毅\" singular) and another \"毅\". The counterpart is \"毅\" or \"毅等\". Actually in hu-114 \"毅等\" includes 毅 and others; the action is collective. But relation type documented_political_interaction between seed and 毅? The text doesn't say \"毅\" alone, but \"毅等\" includes 毅. Since 毅 etc. captured. If strict, counterpart could be \"毅等\" (group). But seed relation with 毅? \"毅等\" includes 毅, but no specific action by 毅 alone. So use 085 where 毅 alone. Good.\n\nTemporal candidate: death. Use exact quote \"毅執玄党卞範之、羊僧壽、夏侯崇之、桓道恭等，皆斬之。\" or \"執卞範之等，斬之\". The first is more direct for 卞範之 executed. For death, we need claim \"卞範之被斬殺\". exact_quote maybe \"毅執玄党卞範之、羊僧壽、夏侯崇之、桓道恭等，皆斬之。\" This is continuous. temporal_scope {} empty because no date. precision \"unknown\". confidence high for execution event, but date unknown. Maybe precision \"unknown\" because no temporal info. But temporal_type \"death\" implies a point event. The evidence supports death, no date. The instruction allows precision unknown. historical_verification_open true.\n\nNeed maybe major_event_participation: \"玄党\" indicates he was part of Huan Xuan's faction, but not event. Also \"毅執玄党...\" maybe event of downfall. But death already.\n\nNeed consider relation \"superior_subordinate\" between 卞範之 and 桓玄? \"玄党\" could imply serving under Huan Xuan? But \"党\" not necessarily formal superior-subordinate. Factional alignment is safer.\n\nCould there be relation \"same_clan\" with 卞範之? No.\n\nNeed maybe relation with 桓振? In hu-114, \"桓振還，望見火起，知城已陷\" no interaction.\n\nNeed output JSON with both arrays. The temporal_candidates may include death. Need ensure exact_quote is from a passage and continuous.\n\nLet's compose JSON.\n\nNeed include \"seed_person_id\": \"person-066\" in each candidate.\n\nRelation candidate 1:\n{\n\"seed_person_id\": \"person-066\",\n\"counterpart_surface\": \"桓玄\",\n\"relation_type\": \"factional_alignment\",\n\"direction\": \"seed_to_counterpart\",\n\"claim\": \"卞範之是桓玄同党，属于桓玄阵营\",\n\"evidence_ref\": \"hng02-jinshu-wikisource-punctuated-085\",\n\"exact_quote\": \"毅執玄党卞範之、羊僧壽、夏侯崇之、桓道恭等，皆斬之。\",\n\"confidence\": \"high\",\n\"ambiguity\": \"‘党’表示党派归属，未明确私人关系或隶属职务\",\n\"historical_verification_open\": true\n}\nNote direction seed_to_counterpart: seed to 桓玄 means 卞範之 belongs to 桓玄 faction. Good.\n\nRelation candidate 2:\n{\n\"seed_person_id\": \"person-066\",\n\"counterpart_surface\": \"毅\",\n\"relation_type\": \"documented_political_interaction\",\n\"direction\": \"counterpart_to_seed\",\n\"claim\": \"毅擒获卞範之并将其斩杀\",\n\"evidence_ref\": \"hng02-jinshu-wikisource-punctuated-085\",\n\"exact_quote\": \"毅執玄党卞範之、羊僧壽、夏侯崇之、桓道恭等，皆斬之。\",\n\"confidence\": \"high\",\n\"ambiguity\": \"此处的‘毅’未给出全名，候选关系限定于原文所称的‘毅’\",\n\"historical_verification_open\": true\n}\nCould also use hu-114 exact_quote \"毅等入江陵，執卞範之等，斬之。\" But counterpart is \"毅等\" (multiple). Maybe avoid. But relation type documented_political_interaction between seed and \"毅等\" (group) might be less precise. Use 085.\n\nTemporal candidate:\n{\n\"seed_person_id\":\"person-066\",\n\"subject_surface\":\"卞範之\",\n\"temporal_type\":\"death\",\n\"claim\":\"卞範之被毅等斩首处死\",\n\"temporal_scope\":{},\n\"precision\":\"unknown\",\n\"evidence_ref\":\"hng02-jinshu-wikisource-punctuated-085\",\n\"exact_quote\":\"毅執玄党卞範之、羊僧壽、夏侯崇之、桓道恭等，皆斬之。\",\n\"confidence\":\"high\",\n\"ambiguity\":\"原文只载被斩，未载具体日期\",\n\"historical_verification_open\":true\n}\n\nNeed maybe include another temporal candidate for \"office_tenure\"? No.\n\nNeed consider \"birth\" no.\n\nNeed maybe relation \"documented_social_interaction\" with 桓玄? No.\n\nNeed maybe \"explicit_political_cooperation_opposition\": \"玄党\" is explicit. But relation_type factional_alignment more precise. Actually list has \"factional_alignment\" and \"explicit_political_cooperation_opposition\". Both allowed. Factional_alignment is better for 党.\n\nNeed maybe \"shared_explicit_event\" with 羊僧壽 etc? They were captured together, but that's not relation.\n\nNeed ensure no Markdown. Output JSON only.\n\nLet's produce final.",
+          "role": "assistant"
+        }
+      }
+    ],
+    "created": 1787506546,
+    "id": "981e2ee9-7627-46c5-b949-d6c70d997b76",
+    "model": "deepseek-v4-flash",
+    "object": "chat.completion",
+    "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+    "usage": {
+      "completion_tokens": 3478,
+      "completion_tokens_details": {
+        "reasoning_tokens": 3077
+      },
+      "prompt_cache_hit_tokens": 512,
+      "prompt_cache_miss_tokens": 931,
+      "prompt_tokens": 1443,
+      "prompt_tokens_details": {
+        "cached_tokens": 512
+      },
+      "total_tokens": 4921
+    }
+  },
+  "retrieved_refs": [
+    "hng02-jinshu-wikisource-punctuated-085",
+    "hng02-jinshu-wikisource-punctuated-099",
+    "hng02-zizhi-tongjian-wikisource-hu-110",
+    "hng02-zizhi-tongjian-wikisource-hu-112",
+    "hng02-zizhi-tongjian-wikisource-hu-113",
+    "hng02-zizhi-tongjian-wikisource-hu-114"
+  ],
+  "schema": 1,
+  "seed_person_id": "person-066",
+  "stage": "hng1-raw-extraction",
+  "transport_error": null
+}

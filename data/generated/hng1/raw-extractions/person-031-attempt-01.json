@@ -1,0 +1,82 @@
+{
+  "attempts": [
+    {
+      "actual_request": true,
+      "api_usage": {
+        "completion_tokens": 3429,
+        "completion_tokens_details": {
+          "reasoning_tokens": 2932
+        },
+        "prompt_cache_hit_tokens": 512,
+        "prompt_cache_miss_tokens": 1025,
+        "prompt_tokens": 1537,
+        "prompt_tokens_details": {
+          "cached_tokens": 512
+        },
+        "total_tokens": 4966
+      },
+      "attempt": 1,
+      "completion_kind": "source_extraction",
+      "elapsed_seconds": 25.201376,
+      "exception_class": null,
+      "exception_message": null,
+      "failure_class": null,
+      "http_status": 200,
+      "response_model": "deepseek-v4-flash",
+      "round": 1,
+      "start_time": "2026-08-23T17:44:05.451287+00:00",
+      "story_id": "person-031"
+    }
+  ],
+  "canonical_write_back": false,
+  "content": "{\n  \"relation_candidates\": [\n    {\n      \"seed_person_id\": \"person-031\",\n      \"counterpart_surface\": \"欽\",\n      \"relation_type\": \"superior_subordinate\",\n      \"direction\": \"counterpart_to_seed\",\n      \"claim\": \"朱伺是欽的部將；欽兵敗後與部將朱伺奔武昌。\",\n      \"evidence_ref\": \"hng02-zizhi-tongjian-wikisource-hu-085\",\n      \"exact_quote\": \"欽兵敗，與部將朱伺奔武昌\",\n      \"confidence\": \"high\",\n      \"ambiguity\": \"欽僅稱名，未見姓氏；具體上下級關係由『部將』表述支撐。\",\n      \"historical_verification_open\": true\n    },\n    {\n      \"seed_person_id\": \"person-031\",\n      \"counterpart_surface\": \"廙\",\n      \"relation_type\": \"documented_political_interaction\",\n      \"direction\": \"seed_to_counterpart\",\n      \"claim\": \"朱伺對廙說（曰），構成直接政治性互動。\",\n      \"evidence_ref\": \"hng02-zizhi-tongjian-wikisource-hu-090\",\n      \"exact_quote\": \"竟陵內史朱伺謂廙曰\",\n      \"confidence\": \"high\",\n      \"ambiguity\": \"廙未見全名，且對話內容未錄；互動性質由『謂廙曰』及上下文軍事背景判斷。\",\n      \"historical_verification_open\": true\n    }\n  ],\n  \"temporal_candidates\": [\n    {\n      \"seed_person_id\": \"person-031\",\n      \"subject_surface\": \"朱伺\",\n      \"temporal_type\": \"office_tenure\",\n      \"claim\": \"朱伺任竟陵內史。\",\n      \"temporal_scope\": {},\n      \"precision\": \"unknown\",\n      \"evidence_ref\": \"hng02-zizhi-tongjian-wikisource-hu-090\",\n      \"exact_quote\": \"竟陵內史朱伺謂廙曰\",\n      \"confidence\": \"high\",\n      \"ambiguity\": \"任職起訖時間不詳。\",\n      \"historical_verification_open\": true\n    }\n  ]\n}",
+  "failure_class": null,
+  "immutable": true,
+  "model": "deepseek-v4-flash",
+  "model_input_hash": "13c56e1ca0a13fa0b6cb210cafca36d6645c9c0cf0ba62b0eb879c02c1f6d37a",
+  "prompt_version": "hng1-frozen-hng02r-source-extraction-v1",
+  "raw_response": {
+    "choices": [
+      {
+        "finish_reason": "stop",
+        "index": 0,
+        "logprobs": null,
+        "message": {
+          "content": "{\n  \"relation_candidates\": [\n    {\n      \"seed_person_id\": \"person-031\",\n      \"counterpart_surface\": \"欽\",\n      \"relation_type\": \"superior_subordinate\",\n      \"direction\": \"counterpart_to_seed\",\n      \"claim\": \"朱伺是欽的部將；欽兵敗後與部將朱伺奔武昌。\",\n      \"evidence_ref\": \"hng02-zizhi-tongjian-wikisource-hu-085\",\n      \"exact_quote\": \"欽兵敗，與部將朱伺奔武昌\",\n      \"confidence\": \"high\",\n      \"ambiguity\": \"欽僅稱名，未見姓氏；具體上下級關係由『部將』表述支撐。\",\n      \"historical_verification_open\": true\n    },\n    {\n      \"seed_person_id\": \"person-031\",\n      \"counterpart_surface\": \"廙\",\n      \"relation_type\": \"documented_political_interaction\",\n      \"direction\": \"seed_to_counterpart\",\n      \"claim\": \"朱伺對廙說（曰），構成直接政治性互動。\",\n      \"evidence_ref\": \"hng02-zizhi-tongjian-wikisource-hu-090\",\n      \"exact_quote\": \"竟陵內史朱伺謂廙曰\",\n      \"confidence\": \"high\",\n      \"ambiguity\": \"廙未見全名，且對話內容未錄；互動性質由『謂廙曰』及上下文軍事背景判斷。\",\n      \"historical_verification_open\": true\n    }\n  ],\n  \"temporal_candidates\": [\n    {\n      \"seed_person_id\": \"person-031\",\n      \"subject_surface\": \"朱伺\",\n      \"temporal_type\": \"office_tenure\",\n      \"claim\": \"朱伺任竟陵內史。\",\n      \"temporal_scope\": {},\n      \"precision\": \"unknown\",\n      \"evidence_ref\": \"hng02-zizhi-tongjian-wikisource-hu-090\",\n      \"exact_quote\": \"竟陵內史朱伺謂廙曰\",\n      \"confidence\": \"high\",\n      \"ambiguity\": \"任職起訖時間不詳。\",\n      \"historical_verification_open\": true\n    }\n  ]\n}",
+          "reasoning_content": "We need process input. Need output JSON only. Need use only passages. Need extract relation candidates and temporal candidates for seed person 朱伺 (person-031). Need inspect passages.\n\nPassages:\n\n1 hng02-jinshu-wikisource-punctuated-081: 王遜 蔡豹... no mention 朱伺? Text: \"王遜，字邵伯，魏興人也。仕郡察孝廉，為吏部令史，轉殿中將軍。\" No 朱伺. Not relevant.\n\n2 hng02-zizhi-tongjian-wikisource-hu-085: \"{{*|《姓譜》：弓姓，魯大夫叔弓之後。余按孔子弟子有仲弓，又有馯臂子弓，而獨以魯叔弓後，殊爲未通。}}昌遂攻郡，欽兵敗，與部將朱伺奔武昌。{{*|伺，相吏翻。\" This mentions 昌, 欽, 朱伺. Relationship: 欽兵敗，與部將朱伺奔武昌. So 朱伺 is 部將 (subordinate) of 欽? \"欽兵敗，與部將朱伺奔武昌\" means 欽's troops defeated, and with his subordinate general Zhu Si fled to Wuchang. So relationship: 朱伺 served under 欽 (superior_subordinate), direction counterpart_to_seed? Need define. relation_type \"superior_subordinate\" or \"recruitment_served_under\"? allowed includes \"superior_subordinate\", \"recruitment_served_under\". Since original says \"部將\" -> subordinate general. For seed 朱伺, counterpart 欽 is his superior; direction counterpart_to_seed (欽 is superior? Actually \"朱伺 is 欽's 部將\" means 朱伺 subordinate to 欽. We can encode relation_type \"superior_subordinate\", direction \"counterpart_to_seed\" meaning counterpart is superior to seed? Or \"seed_to_counterpart\" meaning seed to counterpart? Need define in JSON: direction should indicate agent relation? Let's think. Candidate: seed_person_id \"person-031\", counterpart_surface \"欽\", relation_type \"superior_subordinate\", direction \"counterpart_to_seed\" (counterpart 欽 superior to seed 朱伺). Claim: 朱伺是欽的部將，欽兵敗後與朱伺奔武昌. Exact quote: \"欽兵敗，與部將朱伺奔武昌\" or maybe include preceding 昌遂攻郡. Need evidence_ref hng02-zizhi-tongjian-wikisource-hu-085.\n\nAlso temporal? None obvious.\n\n3 hng02-zizhi-tongjian-wikisource-hu-086: \"西陽夷寇江夏...\" No 朱伺.\n\n4 hng02-zizhi-tongjian-wikisource-hu-088: \"起冶鑄兵，募得二千餘人而後進。⑲胡亢性猜忌，殺其驍將數人。杜曾懼，潛引王沖之兵使攻亢。\" No 朱伺.\n\n5 hng02-zizhi-tongjian-wikisource-hu-089: \"此人不死，州土未寧，足下當識吾言！」崧以宛中兵少，藉曾爲外援，不從。曾復帥流亡二千餘人圍襄陽，數日，不克而還。\" No 朱伺.\n\n6 hng02-zizhi-tongjian-wikisource-hu-090: \"廙將赴荊州，留長史劉浚鎭揚口壘。{{*|...}}竟陵內史朱伺謂廙曰：{{*|伺，相吏翻。\" This mentions 廙, 劉浚, 朱伺. 朱伺 as 竟陵內史 (office title) and he speaks to 廙. Relationship: documented_social_interaction? Interaction: 朱伺謂廙曰 (Zhu Si said to Yi). This is a documented social/political interaction? More specifically dialogue. Could be \"documented_political_interaction\" because advising? We need decide. Relationship between Zhu Si and 廙: seed 朱伺 says to 廙. So direction seed_to_counterpart (seed speaks to counterpart). Relation type maybe \"documented_political_interaction\" or \"documented_social_interaction\". The text: \"竟陵內史朱伺謂廙曰\" means Zhu Si, the Neishi of Jingling, said to Yi. It's an interaction. Since content likely military/political advice. Need infer from context? The excerpt only includes this sentence. Actually text: \"廙將赴荊州，留長史劉浚鎮揚口壘。竟陵內史朱伺謂廙曰\" This is Zhu Si addressing 廙. So relation_type \"documented_political_interaction\" perhaps. Also \"superior_subordinate\"? No, 朱伺 is local official and 廙 maybe provincial governor? Could be interaction. But rule: don't assign relationship beyond explicit. We can use \"documented_social_interaction\" or \"political\". Need choose one. Allowed includes \"documented_political_interaction\", \"documented_social_interaction\". The action of saying to someone is a documented interaction. Since context is official/military, political. But we only have \"謂廙曰\", no content. It is an explicit interaction. We'll include with relation_type \"documented_political_interaction\" perhaps. Also \"documented_social_interaction\" might be too generic. Need maybe include both? Better not duplicate. We can include one candidate with \"documented_political_interaction\" and direction \"seed_to_counterpart\".\n\nAlso temporal candidate: \"竟陵內史朱伺\" indicates office_tenure: Zhu Si held office 竟陵內史. The text explicitly says \"竟陵內史朱伺\" (Zhu Si, the Neishi of Jingling). This is an office title, so temporal_type \"office_tenure\". Need temporal_scope {}? We don't know date. Evidence_ref: hng02-zizhi-tongjian-wikisource-hu-090. Exact quote: \"竟陵內史朱伺謂廙曰\" (quote includes title). Subject_surface \"朱伺\". Precision \"unknown\" or \"office_tenure\" but no dates. We can set precision \"unknown\" maybe. Claim: 朱伺任竟陵內史. Need maybe also from 085: \"部將朱伺\" suggests military role, not office.\n\nAlso relation with 杜曾? In passage 088, \"杜曾懼，潛引王沖之兵使攻亢。\" No Zhu Si. Passage 089 \"曾復帥流亡二千餘人圍襄陽\" no. Not.\n\nNeed perhaps relation with 胡亢? No.\n\nCould combine 085 and 090? 085: 朱伺 is 部將 of 欽. 090: 朱伺 as 竟陵內史. But we must use one evidence_ref per candidate.\n\nNeed also check if 朱伺 appears in 081? No.\n\nNeed also note ambiguity: in 085, 欽's full name? The text says \"欽兵敗\" and earlier context? We don't have. So counterpart_surface \"欽\" with ambiguity \"欽未著姓氏\". Relation_type \"superior_subordinate\" (or \"recruitment_served_under\"). The seed is 朱伺, relation to 欽: 朱伺是欽的部將. Direction: counterpart_to_seed? Let's define direction semantics: \"seed_to_counterpart\" means relationship is oriented from seed to counterpart (e.g., seed is subordinate of counterpart? Actually if relation_type \"superior_subordinate\", need direction to indicate which is superior. Could use relationship type as a symmetric relation but direction disambiguates. In many schema, direction \"seed_to_counterpart\" means \"seed is the subject of the relation_type with respect to counterpart\" but relation_type \"superior_subordinate\" is ambiguous. Better use direction \"counterpart_to_seed\" to mean counterpart is superior, seed is subordinate? Or claim clarifies. Need decide based on instructions? The instruction doesn't define direction semantics; but we can set direction according to agent. Maybe direction should represent the flow of relationship. For \"superior_subordinate\", counterpart_to_seed likely means counterpart is superior to seed. We'll state in claim.\n\nNeed produce JSON object with relation_candidates and temporal_candidates.\n\nLet's construct candidates:\n\n1. Relation: seed_person_id \"person-031\", counterpart_surface \"欽\", relation_type \"superior_subordinate\", direction \"counterpart_to_seed\", claim \"朱伺是欽的部將；欽兵敗後與部將朱伺奔武昌\", evidence_ref \"hng02-zizhi-tongjian-wikisource-hu-085\", exact_quote \"欽兵敗，與部將朱伺奔武昌\", confidence \"high\", ambiguity \"欽僅稱名，未見姓氏\", historical_verification_open true.\n\n2. Relation: seed_person_id \"person-031\", counterpart_surface \"廙\", relation_type \"documented_political_interaction\", direction \"seed_to_counterpart\", claim \"朱伺對廙說（曰）\", evidence_ref \"hng02-zizhi-tongjian-wikisource-hu-090\", exact_quote \"竟陵內史朱伺謂廙曰\", confidence \"high\", ambiguity \"廙未見全名，對話內容未錄\", historical_verification_open true.\n\nMaybe also \"documented_social_interaction\"? But relation_type should be one. We'll use political.\n\nTemporal candidate:\n- office_tenure: subject_surface \"朱伺\", temporal_type \"office_tenure\", claim \"朱伺任竟陵內史\", temporal_scope {} (maybe include start/end none), precision \"unknown\" because no dates. evidence_ref same 090, exact_quote \"竟陵內史朱伺謂廙曰\", confidence \"high\", ambiguity \"任職時間不詳\", historical_verification_open true.\n\nAlso maybe another temporal from 085? \"奔武昌\" is an event, not in allowed temporal types except major_event_participation? Could say major_event_participation? No, \"奔武昌\" is a movement, not a listed event type. temporal_type must be one of birth, death, major_event_participation, office_tenure, residence_activity_phase. \"奔武昌\" could be \"residence_activity_phase\" maybe not exactly. But not necessary.\n\nNeed verify exact_quote is verbatim contiguous. For 085: text is \"昌遂攻郡，欽兵敗，與部將朱伺奔武昌。\" Our quote \"欽兵敗，與部將朱伺奔武昌\" is contiguous. Note there is \"{{*|...}}\" before. Need quote exactly as in text with punctuation. In text: \"昌遂攻郡，欽兵敗，與部將朱伺奔武昌。\" So quote: \"欽兵敗，與部將朱伺奔武昌\" (without final period) is verbatim. Contains no weird chars. Good.\n\nFor 090: text: \"竟陵內史朱伺謂廙曰：{{*|伺，相吏翻。\" Actually full text: \"竟陵內史朱伺謂廙曰：{{*|伺，相吏翻。\" The quote \"竟陵內史朱伺謂廙曰\" is contiguous before colon. Yes.\n\nNeed maybe include relation with 劉浚? In 090, 廙留長史劉浚鎮揚口壘. Zhu Si says to 廙, not to 劉浚. No.\n\nCould there be relation from 085: \"昌\" attacks commandery, \"欽\" defeated, \"與部將朱伺奔武昌\" indicates Zhu Si with 欽 fled. This is shared_explicit_event? Also relation with 欽. But we already have superior_subordinate.\n\nNeed consider \"部將\" is a role indicating recruitment/served under. Could also be \"recruitment_served_under\". But one relation only. Use \"superior_subordinate\" as default. Or \"recruitment_served_under\" might be more specific because 部將 means subordinate general. Let's see allowed types: \"recruitment_served_under\" could be for \"served under\". \"superior_subordinate\" is more general. Both okay. We'll choose \"superior_subordinate\" because text explicitly says 部將.\n\nNeed also consider \"documented_political_interaction\" might require explicit political content? The quote only says \"speaks to\", no content. But the act of saying is a documented interaction. Could be \"documented_social_interaction\" instead. Which is more appropriate? Since it's an official context (廙 is going to Jingzhou, military camp), likely political. But to be safe, maybe use \"documented_social_interaction\" because no content? But the instruction says \"同现、同姓、推测、性格判断不能单独形成关系.\" Here \"朱伺謂廙曰\" is more than co-occurrence, it's direct address. So relation exists. For relation_type, \"documented_political_interaction\" is acceptable. Let's output one.\n\nNeed include historical_verification_open true for all because uncertain? Actually based on source, it's historical fact but maybe open for verification? The instruction says include boolean, likely true for all? We can set true.\n\nNeed ensure JSON strictly.\n\nLet's produce.",
+          "role": "assistant"
+        }
+      }
+    ],
+    "created": 1787507045,
+    "id": "3af39e2c-6fc0-4478-b028-80fda4f9102b",
+    "model": "deepseek-v4-flash",
+    "object": "chat.completion",
+    "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+    "usage": {
+      "completion_tokens": 3429,
+      "completion_tokens_details": {
+        "reasoning_tokens": 2932
+      },
+      "prompt_cache_hit_tokens": 512,
+      "prompt_cache_miss_tokens": 1025,
+      "prompt_tokens": 1537,
+      "prompt_tokens_details": {
+        "cached_tokens": 512
+      },
+      "total_tokens": 4966
+    }
+  },
+  "retrieved_refs": [
+    "hng02-jinshu-wikisource-punctuated-081",
+    "hng02-zizhi-tongjian-wikisource-hu-085",
+    "hng02-zizhi-tongjian-wikisource-hu-086",
+    "hng02-zizhi-tongjian-wikisource-hu-088",
+    "hng02-zizhi-tongjian-wikisource-hu-089",
+    "hng02-zizhi-tongjian-wikisource-hu-090"
+  ],
+  "schema": 1,
+  "seed_person_id": "person-031",
+  "stage": "hng1-raw-extraction",
+  "transport_error": null
+}

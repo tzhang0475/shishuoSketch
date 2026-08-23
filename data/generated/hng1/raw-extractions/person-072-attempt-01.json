@@ -1,0 +1,82 @@
+{
+  "attempts": [
+    {
+      "actual_request": true,
+      "api_usage": {
+        "completion_tokens": 1652,
+        "completion_tokens_details": {
+          "reasoning_tokens": 1425
+        },
+        "prompt_cache_hit_tokens": 512,
+        "prompt_cache_miss_tokens": 931,
+        "prompt_tokens": 1443,
+        "prompt_tokens_details": {
+          "cached_tokens": 512
+        },
+        "total_tokens": 3095
+      },
+      "attempt": 1,
+      "completion_kind": "source_extraction",
+      "elapsed_seconds": 16.669184,
+      "exception_class": null,
+      "exception_message": null,
+      "failure_class": null,
+      "http_status": 200,
+      "response_model": "deepseek-v4-flash",
+      "round": 1,
+      "start_time": "2026-08-23T17:30:07.726723+00:00",
+      "story_id": "person-072"
+    }
+  ],
+  "canonical_write_back": false,
+  "content": "{\n  \"relation_candidates\": [],\n  \"temporal_candidates\": [\n    {\n      \"seed_person_id\": \"person-072\",\n      \"subject_surface\": \"鎮北將軍劉隗\",\n      \"temporal_type\": \"major_event_participation\",\n      \"claim\": \"劉隗在永昌元年三月王敦攻京都之亂中出奔。\",\n      \"temporal_scope\": {\n        \"chinese_calendar\": \"永昌元年三月\",\n        \"approx_year\": 322\n      },\n      \"precision\": \"exact\",\n      \"evidence_ref\": \"hng02-jinshu-wikisource-punctuated-013\",\n      \"exact_quote\": \"又，鎮北將軍劉隗出奔。\",\n      \"confidence\": \"high\",\n      \"ambiguity\": \"原文明確記載年月，但具體公曆日期對應需換算；劉隗出奔為事件一部分，非主動參與之戰事。\",\n      \"historical_verification_open\": true\n    }\n  ]\n}",
+  "failure_class": null,
+  "immutable": true,
+  "model": "deepseek-v4-flash",
+  "model_input_hash": "3736466378f5d337dacdb47585fd1554a61e1a35e88dd19991b336b32927ae3c",
+  "prompt_version": "hng1-frozen-hng02r-source-extraction-v1",
+  "raw_response": {
+    "choices": [
+      {
+        "finish_reason": "stop",
+        "index": 0,
+        "logprobs": null,
+        "message": {
+          "content": "{\n  \"relation_candidates\": [],\n  \"temporal_candidates\": [\n    {\n      \"seed_person_id\": \"person-072\",\n      \"subject_surface\": \"鎮北將軍劉隗\",\n      \"temporal_type\": \"major_event_participation\",\n      \"claim\": \"劉隗在永昌元年三月王敦攻京都之亂中出奔。\",\n      \"temporal_scope\": {\n        \"chinese_calendar\": \"永昌元年三月\",\n        \"approx_year\": 322\n      },\n      \"precision\": \"exact\",\n      \"evidence_ref\": \"hng02-jinshu-wikisource-punctuated-013\",\n      \"exact_quote\": \"又，鎮北將軍劉隗出奔。\",\n      \"confidence\": \"high\",\n      \"ambiguity\": \"原文明確記載年月，但具體公曆日期對應需換算；劉隗出奔為事件一部分，非主動參與之戰事。\",\n      \"historical_verification_open\": true\n    }\n  ]\n}",
+          "reasoning_content": "我们根据给定的规则和文本抽取关系/时间候选。种子人物是劉隗，person_id person-072，在提供的片段中出现于 hng02-jinshu-wikisource-punctuated-013：“鎮北將軍劉隗出奔。” 以及 hng02-jinshu-wikisource-punctuated-049？检查049文本中没有刘隗。只有013出现。\n\n根据允许的关系类型和时间类型，文本中关于刘隗的信息仅有：“又，鎮北將軍劉隗出奔。” 这是主要事件。描述永昌元年三月王敦攻京都，杀了周顗、刁协、戴若思，镇北将军刘隗出奔。没有明确的关系，只有共同事件（王敦之乱）。但刘隗是镇北将军，属于官职。时间类型包括 office_tenure 可能可以抽取，但需要明确的时间信息。这里只说“镇北將軍劉隗”，没有时间跨度。事件是永昌元年（公元322年），刘隗出奔。这可以视为 major_event_participation，时间永昌元年三月（约322年3月）。但事件是“出奔”，不是参与？可以说刘隗参与了这一政治军事事件。然而规则要求只抽取原文明确支持的一跳关系或时间事实。时间事实可以用：人物刘隗在永昌元年三月出奔。属于 major_event_participation。但 temporal_type 里没有 “出奔” 这个类型，只有 “major_event_participation”，这里“王敦率众来攻京都，六军距战，败绩……刘隗出奔” 是事件的一部分。可以抽取。\n\n另外关系：王敦与刘隗？王敦率军攻京都，刘隗作为镇北将军出奔，但原文没有直接说明王敦与刘隗的关系。可以视为 documented_political_interaction？需要“一跳人物关系”，但这里同现于事件，不是明确的关系。更合适的是 shared_explicit_event？但共享事件需要两者在同一事件中，这里王敦攻京都，刘隗出奔，确实同一事件。但这是稳定关系吗？规则说不要把一次共同出现写成稳定关系。所以不应抽取。\n\n刘隗与谁有明确关系？文中“鎮北將軍劉隗出奔” 没有与其他人物直接互动。所以关系候选为空。\n\n时间候选：刘隗的 office_tenure 是“鎮北將軍”？原文只说他是镇北将军，没有说就任时间，所以不能作为 office_tenure 的精确时间。也许 temporal_type 是 residence_activity_phase？出奔是活动阶段？但 better to use major_event_participation：他在永昌元年三月出奔，这是重大事件参与。具体引用：“永昌元年三月，王敦率江荊之眾來攻京都，六軍距戰，敗績，人主謝過而已。於是殺護軍將軍周顗、尚書令刁協、驃騎將軍戴若思。又，鎮北將軍劉隗出奔。” 所以刘隗作为参与者（出奔者）出现在该事件中。temporal_scope：精确时间大约是 永昌元年三月，即公元322年3月。precision 可以是 exact 或 circa？原文有“永昌元年三月”，月份明确，所以是 exact（如果换算成公历有不确定性，可以写exact按原文）。但为了保险，用 circa？因为永昌元年三月是农历，公历不确定，但历史学研究常按年份。可以设为 exact 或 circa。按规则，precision 有 exact 表示时间精确。这里原文给出了具体年月，所以 exact。不过需要注意事件并非刘隗主动，而是被动出奔。仍然是他参与的事件。\n\nsubject_surface 应该是刘隗的称谓“鎮北將軍劉隗”或“劉隗”。seed_person_id 是 person-072。claim 写清楚：“刘隗在永昌元年三月出奔” 或 “永昌元年三月刘隗出奔”。\n\n证据引用 hng02-jinshu-wikisource-punctuated-013，exact_quote 需要逐字连续的原文。注意标点，我们使用原文文本。原文：“永昌元年三月，王敦率江荊之眾來攻京都，六軍距戰，敗績，人主謝過而已。於是殺護軍將軍周顗、尚書令刁協、驃騎將軍戴若思。又，鎮北將軍劉隗出奔。” 我们提取包含刘隗的连续片段：“又，鎮北將軍劉隗出奔。” 这是逐字连续的。可以。\n\n所以 temporal_candidates 一个。\n\n另外，注意文本中还有“永昌元年三月”，是时间状语，所以 claim 可以更具体。\n\n我们还要检查是否还有其他刘隗出场。文本 037 没有。049 没有。所以只一个。\n\n现在构建 JSON。关系候选留空数组。\n\n注意要求：“不要把一次共同出现写成稳定关系。” 所以 no relations.\n\n另外，关于 temporal_scope 对象，应该提供什么？根据 schema，temporal_scope 是 {} 空对象？但需要描述。通常可以包含 start/end 等。但这里没有明确说明结构。我们使用简单的 {\"date_range\": \"322-03\"}？但最好按输出要求。可能 temporal_scope 是可选字段，需要包含具体信息。我们设为 {\"year\": 322, \"month\": 3} 或者 {\"earliest\": \"322-03-01\", \"latest\": \"322-03-31\"}？为了符合，尽量精确。由于农历与公历差异，不能直接映射到具体日。我们可以使用 {\"year\": 322, \"month\": 3} 表示农历三月。或者写 {\"chinese_calendar\": \"永昌元年三月\"}。但题目没说结构，我们灵活。为了简单，可以写 {}，但那样没有信息。我们给出一个合理的。\n\n注意输出格式要求：“temporal_scope”:{} 是一个对象，可以包含键值。我们提供。\n\n另外，evidence_ref 和 exact_quote 必须对应。\n\nconfidence：事件和官职都明确，所以 high。ambiguity：可能指出时间换算成公历有不确定性。historical_verification_open 默认 true？规则说如果证据不足就不输出，这里证据足，但 historical_verification_open 通常表示需要进一步核实，可能 true。根据示例，似乎总是 true。我们设 true。\n\n现在生成 JSON。\n\n注意确保严格 JSON，无 markdown。\n\n检查一下：是输出整个对象，包含 relation_candidates 和 temporal_candidates。\n\n我们输出。",
+          "role": "assistant"
+        }
+      }
+    ],
+    "created": 1787506207,
+    "id": "50293b34-82ce-45df-ae94-d1ad79b9e43d",
+    "model": "deepseek-v4-flash",
+    "object": "chat.completion",
+    "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+    "usage": {
+      "completion_tokens": 1652,
+      "completion_tokens_details": {
+        "reasoning_tokens": 1425
+      },
+      "prompt_cache_hit_tokens": 512,
+      "prompt_cache_miss_tokens": 931,
+      "prompt_tokens": 1443,
+      "prompt_tokens_details": {
+        "cached_tokens": 512
+      },
+      "total_tokens": 3095
+    }
+  },
+  "retrieved_refs": [
+    "hng02-jinshu-wikisource-punctuated-006",
+    "hng02-jinshu-wikisource-punctuated-012",
+    "hng02-jinshu-wikisource-punctuated-013",
+    "hng02-jinshu-wikisource-punctuated-029",
+    "hng02-jinshu-wikisource-punctuated-037",
+    "hng02-jinshu-wikisource-punctuated-049"
+  ],
+  "schema": 1,
+  "seed_person_id": "person-072",
+  "stage": "hng1-raw-extraction",
+  "transport_error": null
+}

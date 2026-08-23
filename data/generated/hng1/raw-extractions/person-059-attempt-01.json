@@ -1,0 +1,82 @@
+{
+  "attempts": [
+    {
+      "actual_request": true,
+      "api_usage": {
+        "completion_tokens": 803,
+        "completion_tokens_details": {
+          "reasoning_tokens": 788
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 1376,
+        "prompt_tokens": 1376,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "total_tokens": 2179
+      },
+      "attempt": 1,
+      "completion_kind": "source_extraction",
+      "elapsed_seconds": 8.972607,
+      "exception_class": null,
+      "exception_message": null,
+      "failure_class": null,
+      "http_status": 200,
+      "response_model": "deepseek-v4-flash",
+      "round": 1,
+      "start_time": "2026-08-23T17:21:06.579612+00:00",
+      "story_id": "person-059"
+    }
+  ],
+  "canonical_write_back": false,
+  "content": "{\"relation_candidates\": [], \"temporal_candidates\": []}",
+  "failure_class": null,
+  "immutable": true,
+  "model": "deepseek-v4-flash",
+  "model_input_hash": "2294f1b9fbeb63abd2faf2a3797869084a69893aa56e395207bbe342de21f98f",
+  "prompt_version": "hng1-frozen-hng02r-source-extraction-v1",
+  "raw_response": {
+    "choices": [
+      {
+        "finish_reason": "stop",
+        "index": 0,
+        "logprobs": null,
+        "message": {
+          "content": "{\"relation_candidates\": [], \"temporal_candidates\": []}",
+          "reasoning_content": "We need answer JSON only. Need parse task. We have allowed relation types and temporal types. Passages. Seed person 孫盛. Need extract candidate relations and temporal facts from provided passages only. Need output relation_candidates and temporal_candidates. Need be careful. Need identify from passages explicit facts involving 孫盛? Passages mention maybe in hng02-jinshu-wikisource-punctuated-056: \"初，楚與同郡王濟友善，濟為本州大中正，訪問銓邑人品狀，至楚，濟曰：「此人非卿所能目，吾自為之。」乃狀楚曰：「天才英博，亮拔不群。」楚少時欲隱居，謂濟曰：「當欲枕石漱流。」誤云「漱石枕流」。\" This passage appears about 楚 (likely person named 王楚? Need context). It mentions \"楚\" and \"王濟\" friendly. Is seed 孫盛? No, not in text. We need only if seed appears. Maybe seed 孫盛 might be \"楚\"? Wait \"楚\" could be \"孫楚\" (relative of 孫盛? Let's know: 孫盛 was Jin dynasty historian, grandson of 孫楚? Actually 孫盛 (302-373) was son of 孫洵, grandson of 孫楚? Let's recall: 孫楚 (c. 218-293) was a Western Jin official, known for \"漱石枕流\" anecdote with 王濟. 孫盛 was grandson of 孫楚? Yes, likely 孫楚's grandson. But not sure. The passage mentions \"楚\" and 王濟. seed identity 孫盛 has aliases maybe \"楚\"? No. But seed person is 孫盛, not 孫楚. Need not use external knowledge. But if \"楚\" is shorthand for 孫楚, is that same person? Not seed. So no relation involving 孫盛.\n\nOther passages: hng02-jinshu-wikisource-punctuated-006: \"太尉荀組薨。罷司徒，幷丞相。閏月己丑，帝崩于內殿，時年四十七，葬建平陵，廟號中宗。\" This mentions 荀組 death, emperor death. No seed.\n\n027: mentions \"孝武太元十三年四月...\" and 王敦 etc. No seed.\n\n028: \"自帝受命，至湣懷之廢，凡三十五年焉。太康七年十一月丙辰，四角獸見於河間，河間王顒獲以獻...\" No seed.\n\n029: \"魏土運...\" No seed.\n\n075: \"臣以為王者之作...今之所以宥廣，正以宗等耳...\" No seed maybe a quote by someone. Not seed.\n\nThus no candidates? But likely need output empty arrays? However maybe there are temporal candidates about \"帝崩\" etc? But seed is 孫盛, so only facts about seed. Need not output unrelated. Need ensure no external knowledge. So empty.\n\nBut let's think: Maybe passage 056 actually about 孫楚? It says \"楚\" without surname. If 孫盛's relation? Could be \"楚\" is 孫楚, ancestor of 孫盛. But seed is 孫盛, not \"楚\". Need not assign person_id. Could we consider \"孫盛\" appears in omitted part? No, only provided text. We can only use provided local original text. No.\n\nNeed output JSON with empty arrays? The instructions: \"证据不足就不输出\" meaning if insufficient, don't output. So relation_candidates: [], temporal_candidates: [].\n\nNeed ensure JSON only. Use exactly.",
+          "role": "assistant"
+        }
+      }
+    ],
+    "created": 1787505666,
+    "id": "0c195639-50c9-41ef-90c0-ee1df52262a8",
+    "model": "deepseek-v4-flash",
+    "object": "chat.completion",
+    "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+    "usage": {
+      "completion_tokens": 803,
+      "completion_tokens_details": {
+        "reasoning_tokens": 788
+      },
+      "prompt_cache_hit_tokens": 0,
+      "prompt_cache_miss_tokens": 1376,
+      "prompt_tokens": 1376,
+      "prompt_tokens_details": {
+        "cached_tokens": 0
+      },
+      "total_tokens": 2179
+    }
+  },
+  "retrieved_refs": [
+    "hng02-jinshu-wikisource-punctuated-006",
+    "hng02-jinshu-wikisource-punctuated-027",
+    "hng02-jinshu-wikisource-punctuated-028",
+    "hng02-jinshu-wikisource-punctuated-029",
+    "hng02-jinshu-wikisource-punctuated-056",
+    "hng02-jinshu-wikisource-punctuated-075"
+  ],
+  "schema": 1,
+  "seed_person_id": "person-059",
+  "stage": "hng1-raw-extraction",
+  "transport_error": null
+}

@@ -1,0 +1,82 @@
+{
+  "attempts": [
+    {
+      "actual_request": true,
+      "api_usage": {
+        "completion_tokens": 2775,
+        "completion_tokens_details": {
+          "reasoning_tokens": 2760
+        },
+        "prompt_cache_hit_tokens": 512,
+        "prompt_cache_miss_tokens": 902,
+        "prompt_tokens": 1414,
+        "prompt_tokens_details": {
+          "cached_tokens": 512
+        },
+        "total_tokens": 4189
+      },
+      "attempt": 1,
+      "completion_kind": "source_extraction",
+      "elapsed_seconds": 26.388757,
+      "exception_class": null,
+      "exception_message": null,
+      "failure_class": null,
+      "http_status": 200,
+      "response_model": "deepseek-v4-flash",
+      "round": 1,
+      "start_time": "2026-08-23T17:23:11.764742+00:00",
+      "story_id": "person-014"
+    }
+  ],
+  "canonical_write_back": false,
+  "content": "{\"relation_candidates\": [], \"temporal_candidates\": []}",
+  "failure_class": null,
+  "immutable": true,
+  "model": "deepseek-v4-flash",
+  "model_input_hash": "2eaeac7cb8c1b7b3e946c2152022131187361a40a2edf82572704189dc3341b9",
+  "prompt_version": "hng1-frozen-hng02r-source-extraction-v1",
+  "raw_response": {
+    "choices": [
+      {
+        "finish_reason": "stop",
+        "index": 0,
+        "logprobs": null,
+        "message": {
+          "content": "{\"relation_candidates\": [], \"temporal_candidates\": []}",
+          "reasoning_content": "We need answer only JSON. Need process instructions. Need extract candidates from passages with seed person 王濛 person-014. We need scan passages? Note seed identity 王濛, but passages may not mention 王濛? We need identify relation candidates involving seed? The passages are from 晋书 etc. We need use given passages only. We need check each passage for mentions of 王濛? Need maybe seed appears in some passage? The texts: hng02-jinshu-wikisource-punctuated-056 text about \"君子立行...\" no 王濛. hng02-075 about 崧改葬, 二子蕤羨; no 王濛. hng02-080 about 羲之自為之傳... no 王濛. hng02-081 about 翼怒,貶宣... no. hng02-093 about 孝武帝深愛之... \"時澄腳疾\" maybe 王澄? no. hng02-zizhi-tongjian-hu-095 about 導謂領軍將軍陶回: \"導\" likely 王導, not 王濛. None mention 王濛. Maybe seed 王濛 with \"濛\" not present. Need maybe \"王濛\" appears in hidden? But supplied passages don't. We cannot use knowledge. Therefore no candidates. But must return JSON with empty arrays. Need ensure strict JSON. Could include \"relation_candidates\":[], \"temporal_candidates\":[].\n\nBut let's be meticulous: maybe \"cleaned\" passages include \"濛\" in hng02-jinshu-wikisource-punctuated-056? Text: \"每以為君子立行... 蘇峻之亂，避地東陽山，太尉郗鑒檄為兗州治中，又辟太尉掾；\" This seems from biography of someone (maybe 王濛? Actually this is from 晉書·王濛傳? Let's recall: 王濛,字仲祖,太原晉陽人. \"每以為君子立行，應依禮而動，雖隱顯殊途，未有不傍禮教者也。若乃放達不羈，以肆縱為貴者，非但動違禮法，亦道之所棄也。乃著《通道崇檢論》，世咸稱之。蘇峻之亂，避地東陽山，太尉郗鑒檄為兗州治中，又辟太尉掾；\" This indeed might be from 王濛's biography! Wait the seed is 王濛, and passage 056 contains \"每以為君子立行...\" Could be the subject is 王濛, but the text doesn't explicitly include \"王濛\" within this snippet? However the source passage may be from 王濛's biography but the OCR text starts mid-paragraph without the name. Since instruction: only use provided local original text, no pretrained knowledge. The passage itself lacks explicit \"王濛\"; so cannot associate events to seed unless maybe \"蘇峻之亂\" but no person. We need not infer. But maybe seed_identity is given separately; if passage is part of that person's biography in source? But they said only use provided local original text. The evidence_ref might correspond to a passage from the biography of 王濛, but the text snippet doesn't contain the name. Need decide if we can attribute? The prompt says \"only use provided local original text\" and \"seed_person_id\" maybe given. Usually for relation extraction, if passage is from biography of seed, but not explicit? Need exact_quote must support claim. The exact quote must contain evidence of relationship/time. If no explicit mention, cannot. But hng02-jinshu-wikisource-punctuated-056 could support temporal event: \"蘇峻之亂\" maybe \"major_event_participation\"? The subject is unspecified in quote. Could be seed? But seed not in quote. Actually the sentence before \"每以為君子立行\" has no subject; but context from source might be 王濛. However prompt explicitly says \"不要给对方人物分配 person_id，只返回原文中的称谓或表面\" and \"每条候选必须引用一个给定 evidence_ref 和其中逐字连续的 exact_quote.\" Also \"不要使用预训练知识补足事实.\" We shouldn't use knowledge that this is from 王濛傳. But perhaps the seed identity and evidence_ref pairing is intentional: passage 056 is from 王濛's biography but name omitted due to section start? Let's evaluate possible candidates.\n\nPassage 056: \"蘇峻之亂，避地東陽山，太尉郗鑒檄為兗州治中，又辟太尉掾；\" If we treat subject as seed (王濛), then temporal candidate: major_event_participation in 蘇峻之亂? Actually \"避地東陽山\" during rebellion, not direct participation. Could be \"residence_activity_phase\" at 東陽山? The relation types: allowed_temporal_types include major_event_participation and residence_activity_phase. But exact quote must contain a subject? The quote \"蘇峻之亂，避地東陽山\" has no overt subject but in Chinese pro-drop; source context is about 王濛. But instruction \"原文明确支持的一跳人物关系或时间事实\" maybe subject from seed_identity can be implicit? \"使用提供的本地原文\" includes the given seed identity. If seed identity is told, and the passage is part of that person's biography, then the unexpressed subject is the seed. But how to know? The evidence ref hng02-jinshu-wikisource-punctuated-056 may be from 晋書 volume 93? Let's recall: 晉書·王濛傳 text: \"王濛，字仲祖，太原晉陽人也。祖蓟，大將軍掾。父訥，司徒左長史。濛少時放縱不羈，不為鄉曲所齒，晚節始克己勵行，有風流美譽，虛己應物，恕而後行，時人以為有公輔之量。 ... 每以為君子立行，應依禮而動，雖隱顯殊途，未有不傍禮教者也。若乃放達不羈，以肆縱為貴者，非但動違禮法，亦道之所棄也。乃著《通道崇檢論》，世咸稱之。蘇峻之亂，避地東陽山，太尉郗鑒檄為兗州治中，又辟太尉掾；...\" So yes, the snippet starts with \"每以為...\" and antecedent is 王濛. The seed_identity is 王濛. This evidence_ref is likely from 王濛's biography. The instruction says \"只使用提供的本地原文\" but the seed is provided. In such tasks, the passage is expected to be about seed, and if the name doesn't appear but the paragraph is from biography, we can use the seed to resolve pronouns? However the system says \"不要给对方人物分配 person_id，只返回原文中的称谓或表面.\" For counterpart, need surface. For temporal candidate subject_surface can be seed's surface maybe \"王濛\" even if not in quote? \"subject_surface\" should be \"原文中的称谓或表面\" perhaps from seed_identity canonical name? Need infer.\n\nLet's read the user's instruction carefully: \"你是历史资料候选抽取器。只使用提供的本地原文，不使用预训练知识补足事实。只抽取原文明确支持的一跳人物关系或时间事实；同现、同姓、推测、性格判断不能单独形成关系。不要给对方人物分配 person_id，只返回原文中的称谓或表面。每条候选必须引用一个给定 evidence_ref 和其中逐字连续的 exact_quote。关系须属于给定 relation_type；时间须属于给定 temporal_type；证据不足就不输出。不要把一次共同出现写成稳定关系。\"\n\nThis is a strict extraction. We need only \"原文明确支持\". For temporal events, if the subject is not in the quote, it's not explicitly supported. But \"原文\" includes the passage. The passage may be an excerpt from biography but the text starts mid-sentence; the provided \"evidence_ref\" itself contains only that text. So the quote \"每以為君子立行...\" doesn't mention 王濛. Yet evidence_ref might be a reference to the source; the entire passage is local original. We might not be allowed to bring in surrounding context not provided. \"提供的本地原文\" likely means exactly the given passages. So cannot know subject.\n\nBut maybe there are more passages not shown? Actually we have the entire input: six passages. None mention \"濛\" or \"王濛\". Let's verify each:\n\nhng02-jinshu-wikisource-punctuated-056: no \"濛\" character? Let's see: \"每以為君子立行，應依禮而動，雖隱顯殊途，未有不傍禮教者也。若乃放達不羈，以肆縱為貴者，非但動違禮法，亦道之所棄也。乃著《通道崇檢論》，世咸稱之。蘇峻之亂，避地東陽山，太尉郗鑒檄為兗州治中，又辟太尉掾；\" Contains \"檄\" \"郗鑒\" etc. No 王濛.\n\nhng02-jinshu-wikisource-punctuated-075: \"」不從。{{YL|升平四年}}，崧改葬，詔賜錢百萬，布五千匹。有二子：蕤、羨。蕤嗣。\" No.\n\nhng02-jinshu-wikisource-punctuated-080: \"」羲之自為之傳，述靈異之跡甚多，不可詳記。玄自後莫測所終，好道者皆謂之羽化矣。\" No.\n\nhng02-jinshu-wikisource-punctuated-081: \"翼怒，貶宣為建威將軍，使移戍峴山。宣望實俱喪，兼以老疾，時南蠻校尉王愆期守江陵，以疾求代，翼以宣為鎮南將軍、南郡太守，代愆期。宣不得志，未之官，發憤卒。追贈鎮南將軍。\" Contains 王愆期, 翼, 宣. No 王濛.\n\nhng02-jinshu-wikisource-punctuated-093: \"孝武帝深愛之，以為冠軍將軍、吳國內史。太元末，琅邪王出居外第，妙選師傅，徵拜尚書，領琅邪王師。安帝即位，遷尚書左僕射，典選、王師如故。時澄腳疾，固讓，特聽不朝，坐家視事。\" Contains 孝武帝, 琅邪王, 安帝, 澄. No 王濛. Could \"澄\" be 王澄? But not seed.\n\nhng02-zizhi-tongjian-wikisource-hu-095: \"會熒惑守南斗經旬，{{*|《晉‧天文志》：南斗六星，天廟也，丞相、太宰之位。}}導謂領軍將軍陶回曰：「斗，揚州之分，{{*|《天文志》：斗、牛、女，揚州；九江入斗一度，丹陽入斗十六度。分，扶問翻。\" Contains 導 (王導), 陶回. No 王濛.\n\nThus no explicit mention of 王濛. So likely empty. But wait the task may be designed to extract candidates that are not directly about seed? User says \"seed_person_id\" and \"one-hop relation or temporal facts\" involving seed. If seed not in passages, no candidates. Return empty.\n\nHowever we should consider if the \"seed_identity\" is canonical name 王濛, and passage 056 is from his biography but due to text segmentation, the name appears earlier not in our text. But they said \"passages\" are \"provided local original text\". The \"evidence_ref\" uniquely identifies the passage; we cannot look up external. So no.\n\nLet's ensure we don't output any candidate with hallucination. The correct answer is empty.\n\nBut before final, let's think: The instruction \"historical_verification_open\": true required for each candidate; no candidates so irrelevant. Need output JSON exactly:\n\n{\"relation_candidates\": [], \"temporal_candidates\": []}\n\nCould include spaces? Fine.\n\nNeed not include markdown. Let's produce.",
+          "role": "assistant"
+        }
+      }
+    ],
+    "created": 1787505791,
+    "id": "7dab6597-f005-40ec-b3ce-feaeacf3a7a4",
+    "model": "deepseek-v4-flash",
+    "object": "chat.completion",
+    "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+    "usage": {
+      "completion_tokens": 2775,
+      "completion_tokens_details": {
+        "reasoning_tokens": 2760
+      },
+      "prompt_cache_hit_tokens": 512,
+      "prompt_cache_miss_tokens": 902,
+      "prompt_tokens": 1414,
+      "prompt_tokens_details": {
+        "cached_tokens": 512
+      },
+      "total_tokens": 4189
+    }
+  },
+  "retrieved_refs": [
+    "hng02-jinshu-wikisource-punctuated-056",
+    "hng02-jinshu-wikisource-punctuated-075",
+    "hng02-jinshu-wikisource-punctuated-080",
+    "hng02-jinshu-wikisource-punctuated-081",
+    "hng02-jinshu-wikisource-punctuated-093",
+    "hng02-zizhi-tongjian-wikisource-hu-095"
+  ],
+  "schema": 1,
+  "seed_person_id": "person-014",
+  "stage": "hng1-raw-extraction",
+  "transport_error": null
+}
