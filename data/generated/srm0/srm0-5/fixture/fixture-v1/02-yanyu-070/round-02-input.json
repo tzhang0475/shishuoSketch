@@ -1,0 +1,31 @@
+{
+  "canonical_write_back": false,
+  "execution_kind": "fixture",
+  "external_search_performed": false,
+  "messages": [
+    {
+      "content": "请根据当前正文阅读缺口和本轮本地史料候选，更新语义理解。只使用输入候选，不使用预训练知识。\n\n只写实际被候选证据支持的 answered_aspects；unanswered_aspects 只保留仍影响正文理解的窄缺口；conflicts 只写材料明确冲突。reading_sufficient 表示当前阅读是否足够，不等于历史学上的最终验证。不要输出 state、next_action、搜索词或 canonical 事实，不要为了有趣继续研究。\n\n每个使用的证据必须引用候选 ref 和逐字 quote。只返回 JSON 对象，且只能有顶层字段 updates；每个 update 只能有 question_id、answered_aspects、unanswered_aspects、conflicts、reading_sufficient、historical_verification_open。不要返回数组本身或其他状态字段。",
+      "role": "system"
+    },
+    {
+      "content": "{\n  \"active_questions\": [\n    {\n      \"current_reading\": {\n        \"remaining_gap\": \"仍需一轮本地史料检索确认其对正文理解的具体作用。\",\n        \"state\": \"unexplained\",\n        \"supporting_refs\": [],\n        \"working_answer\": \"\"\n      },\n      \"gap\": \"仍需一轮本地史料检索确认其对正文理解的具体作用。\",\n      \"parent_aspect_id\": \"Q1-U1\",\n      \"parent_question_id\": \"Q1\",\n      \"question_id\": \"Q1.1\",\n      \"story_span\": \"王右軍與謝太傅共登冶城\\n\\n謝悠然逺想\"\n    }\n  ],\n  \"local_evidence_candidates\": [\n    {\n      \"ref\": \"shishuo:05-fangzheng-061:main\",\n      \"snippet\": \"王右軍與謝公詣阮公至門語謝故當共推主\\n人謝曰推人正自難\",\n      \"source_layer\": \"main_text\",\n      \"work\": \"世說新語\"\n    },\n    {\n      \"ref\": \"shishuo:02-yanyu-062:main\",\n      \"snippet\": \"謝太傅語王右軍曰中年傷於哀樂與親友别輙作\\n數日惡王曰\\n年在桑榆自然至此正賴\\n絲竹陶寫恒恐兒軰覺損欣樂之趣\",\n      \"source_layer\": \"main_text\",\n      \"work\": \"世說新語\"\n    },\n    {\n      \"ref\": \"shishuo:06-yaliang-034:main\",\n      \"snippet\": \"戴公從東出謝太傅往看之謝本輕戴見但與論琴\\n書戴既無吝色而談琴書愈妙謝悠然知其量\",\n      \"source_layer\": \"main_text\",\n      \"work\": \"世說新語\"\n    },\n    {\n      \"ref\": \"jinshu:079-liezhuan-002\",\n      \"snippet\": \">雖㑹稽王道子亦頼弼諧之益時彊敵寇境邊書續至梁益不守樊鄧䧟没安毎鎮以和靖御以長算徳政既行文武用命不存小察<!-- wikisource-SKchar: {\\\"value\\\": \\\"2592\\\"} -->以大綱威懐外著人皆比之王導謂文雅過之嘗與王羲之登冶城悠然遐想有髙世之志羲之謂曰夏禹勤王手足胼胝文王旰食日不暇給今四郊多壘宜思自效而虛談廢務浮文妨要恐非當今所宜安曰秦任商鞅二世而亡豈清言致患邪是時宮室毁壊安欲繕之尚書令王彪之等以外寇為諫安不從竟獨決之宮室用成皆仰模<!-- wikisource-SKchar: {\\\"value\\\": \\\"2593\\\"} -->象合體辰極而役無勞怨又領揚州刺史詔以甲仗百人入殿時帝始親萬幾進安中書監驃騎將軍録尚書事固讓軍號于時懸象失度亢旱彌年安奏興滅繼絶求晉初佐命功臣後而封之頃之加司徒後軍文武盡配大府\",\n      \"source_layer\": \"main_text\",\n      \"work\": \"晉書\"\n    },\n    {\n      \"ref\": \"s1:s1-assertion-6ea9c091f43df249ba88\",\n      \"snippet\": \"〔五〕 嘉錫案：「咄咄」，驚歎之辭。「咄咄逼人」，亦晉人口頭常語。法書要錄卷二宋羊欣采古來能書人名曰：「王脩善隸、行，與羲之善，殆窮其妙，子敬每省修書云：『咄咄逼人。』」又卷十王右軍與司空郗公書曰：「獻之，字子敬，少有清譽，善隸書，咄咄逼人。」淳化閣帖卷五衛夫人書曰：「衛有一弟子王逸少，甚能學衛真書，咄咄逼人。」\",\n      \"source_layer\": \"jianshu_note\",\n      \"work\": \"余嘉錫箋疏\"\n    }\n  ],\n  \"primary_text\": {\n    \"label\": \"世說新語正文\",\n    \"text\": \"王右軍與謝太傅共登冶城\\n\\n謝悠然逺想有髙世之志王謂謝曰夏禹勤\\n王手足胼胝\\n文王旰食日不暇給今四郊多\\n壘宜人人自效而虛談廢務浮文\\n妨要恐非當今所宜謝荅曰秦任商鞅二世而亡\\n豈清言致患邪\"\n  },\n  \"story_id\": \"02-yanyu-070\"\n}\n",
+      "role": "user"
+    }
+  ],
+  "model": "deepseek-v4-flash",
+  "parameters": {
+    "connect_timeout": 15,
+    "read_timeout": 180,
+    "response_format": {
+      "type": "json_object"
+    },
+    "temperature": 0,
+    "tools": []
+  },
+  "prompt_version": "srm0.4b-robust-live-convergence-v1",
+  "provider": "deepseek",
+  "round": 2,
+  "schema": "srm0-5-model-input",
+  "schema_version": 1,
+  "stage": "local_retrieval_delta"
+}

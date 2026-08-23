@@ -1,0 +1,31 @@
+{
+  "canonical_write_back": false,
+  "execution_kind": "fixture",
+  "external_search_performed": false,
+  "messages": [
+    {
+      "content": "请根据当前正文阅读缺口和本轮本地史料候选，更新语义理解。只使用输入候选，不使用预训练知识。\n\n只写实际被候选证据支持的 answered_aspects；unanswered_aspects 只保留仍影响正文理解的窄缺口；conflicts 只写材料明确冲突。reading_sufficient 表示当前阅读是否足够，不等于历史学上的最终验证。不要输出 state、next_action、搜索词或 canonical 事实，不要为了有趣继续研究。\n\n每个使用的证据必须引用候选 ref 和逐字 quote。只返回 JSON 对象，且只能有顶层字段 updates；每个 update 只能有 question_id、answered_aspects、unanswered_aspects、conflicts、reading_sufficient、historical_verification_open。不要返回数组本身或其他状态字段。",
+      "role": "system"
+    },
+    {
+      "content": "{\n  \"active_questions\": [\n    {\n      \"current_reading\": {\n        \"remaining_gap\": \"仍需一轮本地史料检索确认其对正文理解的具体作用。\",\n        \"state\": \"unexplained\",\n        \"supporting_refs\": [],\n        \"working_answer\": \"\"\n      },\n      \"gap\": \"仍需一轮本地史料检索确认其对正文理解的具体作用。\",\n      \"parent_aspect_id\": \"Q1-U1\",\n      \"parent_question_id\": \"Q1\",\n      \"question_id\": \"Q1.1\",\n      \"story_span\": \"公孫度目邴原所謂雲中白鶴非燕雀之網所\"\n    }\n  ],\n  \"local_evidence_candidates\": [\n    {\n      \"ref\": \"sanguozhi:sgz1-juan-011-000071\",\n      \"snippet\": \"，歎息增懷。頃知來至，近在三山。詩不云乎，『來歸自鎬，我行永久』。今遣五官掾，奉問榜人舟楫之勞，禍福動靜告慰。亂階未已，阻兵之雄，若棊奕爭梟。」原於是遂復反還。積十餘年，後乃遁還。南行已數日，而度甫覺。度知原之不可復追也，因曰：「邴君所謂雲中白鶴，非鶉鷃之網所能羅矣。又吾自遣之，勿復求也。」遂免危難。自反國土，原於是講述禮樂，吟詠詩書，門徒數百，服道數十。時鄭玄博學洽聞，注解典籍，故儒雅之士集焉。原亦自以高遠清白，頤志澹泊，口無擇言，身無擇行，故英偉之士向焉。是時海內清議，云青州有邴、鄭之學。魏太祖為司空，辟原署東閤祭酒。太祖北伐三郡單于，還住昌國，燕士大夫。酒酣，太祖曰：「孤反，鄴守諸君必將來迎，今日明旦，度皆至矣。其不來者，獨有邴祭酒耳！」言訖未久，而原先至。門下通謁，太祖大驚喜，擥履而起，遠出迎原曰：「賢\",\n      \"source_layer\": \"pei_annotation\",\n      \"work\": \"三國志\"\n    },\n    {\n      \"ref\": \"s1:s1-assertion-1dabdcb47fc204cbba98\",\n      \"snippet\": \"「世說皆當時語。若評論古人，不當收入。疑「叔向」二字有誤。注則明人妄增也。」嘉錫案：凡題目人者，必親見其人，挹其風流，聽其言論，觀其氣宇，察其度量，然後為之品題。其言多用比興之體，以極其形容。如本篇世目李元禮謖謖如勁松下風，公孫度目邴原為雲中白鶴，以及裴令公之目夏侯太初等，庾子嵩之目和嶠皆是也。卞令目叔向朗朗如百閒屋，蓋言其氣度恢宏，此非與之親熟者不能道。若為春秋時之晉大夫，卞望之與之相去且千年，安得見其人而為之題目乎？然則叔向之非羊舌，亦已明矣。稱叔向而不言其姓，周氏以為卞令之叔，不為無理也。\",\n      \"source_layer\": \"jianshu_note\",\n      \"work\": \"余嘉錫箋疏\"\n    },\n    {\n      \"ref\": \"jinshu:014-zhi-001\",\n      \"snippet\": \"s|秦置統縣三戶二千八百\\\"} -->\\n　　陽樂　肥如　海陽\\n　　惠帝之後幽州沒於石勒及穆帝永和五年慕容儁僭號於薊是為前燕七年儁移都於鄴儁死子暐為苻堅所滅堅敗地復入慕容垂是為後燕垂死寳遷於和龍○平州按禹貢冀州之域於周為幽州界漢屬右北平郡後漢末公孫度自號平州牧及其子康康子文懿竝擅㩀遼東東夷九種皆服事焉魏置東夷校尉居襄平而分遼東昌黎<!-- wikisource-SKchar: {\\\"value\\\": \\\"2593\\\"} -->莵帯方樂浪五郡為平州後還合為幽州及文懿滅後有䕶東夷校尉居襄平咸寧二年十月分昌黎遼東<!-- wikisource-SKchar: {\\\"value\\\": \\\"2593\\\"} -->莵帯方樂浪等郡國五置平州統縣二十六戶一萬八千一百\\n　　昌黎郡<!-- wikisource-note: {\\\"wikitext\\\": \",\n      \"source_layer\": \"main_text\",\n      \"work\": \"晉書\"\n    },\n    {\n      \"ref\": \"sanguozhi:sgz1-juan-011-000066\",\n      \"snippet\": \"\\n邴原字根矩，北海朱虛人也。少與管寧俱以操尚稱，州府辟命皆不就。黃巾起，原將家屬入海，住鬱洲山中。時孔融為北海相，舉原有道。原以黃巾方盛，遂至遼東，與同郡劉政俱有勇略雄氣。遼東太守公孫度畏惡欲殺之，盡收捕其家，政得脫。度告諸縣：「敢有藏政者與同罪。」政窘急，往投原，\\n\\n\",\n      \"source_layer\": \"main_text\",\n      \"work\": \"三國志\"\n    },\n    {\n      \"ref\": \"sanguozhi:sgz1-juan-011-000078\",\n      \"snippet\": \"年十六喪父，中表愍其孤貧，咸共贈賵，悉辭不受，稱財以送終。長八尺，美鬚眉。與平原華歆、同縣邴原相友，俱游學於異國，並敬善陳仲弓。天下大亂，聞公孫度令行於海外，遂與原及平原王烈等至于遼東。度虛館以候之。旣往見度，乃廬於山谷。時避難者多居郡南，而寧居北，示無遷志，後漸來從之。太祖為司空，辟寧，度子康絕命不宣。\",\n      \"source_layer\": \"main_text\",\n      \"work\": \"三國志\"\n    }\n  ],\n  \"primary_text\": {\n    \"label\": \"世說新語正文\",\n    \"text\": \"公孫度目邴原所謂雲中白鶴非燕雀之網所能羅\\n也\"\n  },\n  \"story_id\": \"08-shangyu-004\"\n}\n",
+      "role": "user"
+    }
+  ],
+  "model": "deepseek-v4-flash",
+  "parameters": {
+    "connect_timeout": 15,
+    "read_timeout": 180,
+    "response_format": {
+      "type": "json_object"
+    },
+    "temperature": 0,
+    "tools": []
+  },
+  "prompt_version": "srm0.4b-robust-live-convergence-v1",
+  "provider": "deepseek",
+  "round": 2,
+  "schema": "srm0-5-model-input",
+  "schema_version": 1,
+  "stage": "local_retrieval_delta"
+}

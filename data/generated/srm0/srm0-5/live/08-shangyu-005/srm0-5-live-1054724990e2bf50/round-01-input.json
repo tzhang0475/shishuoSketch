@@ -1,0 +1,31 @@
+{
+  "canonical_write_back": false,
+  "execution_kind": "live_model",
+  "external_search_performed": false,
+  "messages": [
+    {
+      "content": "请检查冻结的正文阅读缺口，以及所附刘孝标注、余嘉锡《笺疏》。只返回语义增量，不输出 state 或 next_action。\n\n判断注释实际回答了什么、仍有什么影响正文理解的缺口、是否有材料冲突。reading_sufficient 只表示当前阅读已经足够，不表示历史事实已被最终验证。不要为了有趣继续研究，不使用外部知识。\n\n每个 answered_aspect 和 conflict 都必须引用输入中的 ref 与逐字 quote。unanswered_aspects 只保留仍影响正文理解的事项，使用 aspect_id、gap、reading_impact(high|medium|low)。\n\n只返回 JSON：{\"updates\":[{\"question_id\":\"Q1\",\"answered_aspects\":[{\"aspect_id\":\"Q1-A1\",\"claim\":\"...\",\"evidence\":[{\"ref\":\"...\",\"quote\":\"...\"}]}],\"unanswered_aspects\":[{\"aspect_id\":\"Q1-U1\",\"gap\":\"...\",\"reading_impact\":\"high\"}],\"conflicts\":[{\"conflict_id\":\"Q1-C1\",\"description\":\"...\",\"evidence\":[{\"ref\":\"...\",\"quote\":\"...\"}]}],\"reading_sufficient\":true,\"historical_verification_open\":false}]}。",
+      "role": "system"
+    },
+    {
+      "content": "{\n  \"early_commentary\": {\n    \"label\": \"劉孝標注\",\n    \"notes\": [\n      {\n        \"ref\": \"L01\",\n        \"text\": \"(少清明曉悟/王隱晉書曰戎)\"\n      },\n      {\n        \"ref\": \"L02\",\n        \"text\": \"(巳見/裴頠)\"\n      },\n      {\n        \"ref\": \"L03\",\n        \"text\": \"(文王文王辟以爲掾不聞爲吏部郎/按諸書皆云鍾會薦裴楷王戎於晉)\"\n      }\n    ]\n  },\n  \"frozen_questions\": [\n    {\n      \"gap\": \"缺少關於「阿戎」與「王安豐」是指同一人（王戎）的信息，否則會誤解為鍾會評價了兩個不同的人。\",\n      \"question_id\": \"Q1\",\n      \"story_span\": \"鍾士季目王安豐阿戎了了解人意\"\n    }\n  ],\n  \"later_commentary\": {\n    \"label\": \"余嘉錫箋疏\",\n    \"notes\": [\n      {\n        \"layer\": \"jianshu_note\",\n        \"ref\": \"J01\",\n        \"source_labels\": [\n          \"太平御覽\",\n          \"晉書\"\n        ],\n        \"speaker\": \"余嘉錫\",\n        \"text\": \"〔一〕 嘉錫案：吏部郎以下當別為一條。吏部郎以下出王隱晉書，見御覽四百四十五。\"\n      },\n      {\n        \"layer\": \"jianshu_note\",\n        \"ref\": \"J02\",\n        \"source_labels\": [\n          \"太平御覽\",\n          \"晉書\"\n        ],\n        \"speaker\": \"余嘉錫\",\n        \"text\": \"〔二〕 程炎震云：「文選五十八褚淵碑注引臧榮緒晉書，與世說同。今晉書楷傳則又轉據臧書。孝標此駁，蓋以楷辟掾有年，則為吏部郎時，無假鍾會再薦，非謂楷不為吏部郎也。」嘉錫案：孝標謂諸書並無此事。臧榮緒書雖有之，或因榮緒齊人，後出之書不足為據。然御覽四百四十五引王隱晉書，亦與世說同，僅少「於是用裴」四字，頗疑孝標失檢。及細考之御覽，此卷所引王書自「衛玠妻父」以下凡十條，並與今晉書一字不異。蓋其閒必有一條，本引「晉書曰」，誤作「又曰」，於是諸條並蒙上文為王隱晉書矣。證以此注，尤為明白。使其事果先見王書，孝標必不束書不觀，妄發此言也。\"\n      }\n    ]\n  },\n  \"primary_text\": {\n    \"label\": \"世說新語正文\",\n    \"text\": \"鍾士季目王安豐阿戎了了解人意\\n謂裴公之談經日不竭吏部郎闕文帝問其人\\n\\n於鍾會會曰裴楷清通王戎簡要皆其選也於是用\\n裴\"\n  },\n  \"story_id\": \"08-shangyu-005\"\n}\n",
+      "role": "user"
+    }
+  ],
+  "model": "deepseek-v4-flash",
+  "parameters": {
+    "connect_timeout": 15,
+    "read_timeout": 180,
+    "response_format": {
+      "type": "json_object"
+    },
+    "temperature": 0,
+    "tools": []
+  },
+  "prompt_version": "srm0.4b-robust-live-convergence-v1",
+  "provider": "deepseek",
+  "round": 1,
+  "schema": "srm0-5-model-input",
+  "schema_version": 1,
+  "stage": "attached_commentary_delta"
+}

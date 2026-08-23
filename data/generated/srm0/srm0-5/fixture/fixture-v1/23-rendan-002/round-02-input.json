@@ -1,0 +1,31 @@
+{
+  "canonical_write_back": false,
+  "execution_kind": "fixture",
+  "external_search_performed": false,
+  "messages": [
+    {
+      "content": "请根据当前正文阅读缺口和本轮本地史料候选，更新语义理解。只使用输入候选，不使用预训练知识。\n\n只写实际被候选证据支持的 answered_aspects；unanswered_aspects 只保留仍影响正文理解的窄缺口；conflicts 只写材料明确冲突。reading_sufficient 表示当前阅读是否足够，不等于历史学上的最终验证。不要输出 state、next_action、搜索词或 canonical 事实，不要为了有趣继续研究。\n\n每个使用的证据必须引用候选 ref 和逐字 quote。只返回 JSON 对象，且只能有顶层字段 updates；每个 update 只能有 question_id、answered_aspects、unanswered_aspects、conflicts、reading_sufficient、historical_verification_open。不要返回数组本身或其他状态字段。",
+      "role": "system"
+    },
+    {
+      "content": "{\n  \"active_questions\": [\n    {\n      \"current_reading\": {\n        \"remaining_gap\": \"仍需一轮本地史料检索确认其对正文理解的具体作用。\",\n        \"state\": \"unexplained\",\n        \"supporting_refs\": [],\n        \"working_answer\": \"\"\n      },\n      \"gap\": \"仍需一轮本地史料检索确认其对正文理解的具体作用。\",\n      \"parent_aspect_id\": \"Q1-U1\",\n      \"parent_question_id\": \"Q1\",\n      \"question_id\": \"Q1.1\",\n      \"story_span\": \"阮籍遭母喪在晉文王坐進酒肉司隷何曽亦\"\n    }\n  ],\n  \"local_evidence_candidates\": [\n    {\n      \"ref\": \"s1:s1-assertion-09b729150afbbb20a5f6\",\n      \"snippet\": \"〔一〕 程炎震云：「阮長於裴且三十歲，宜裴以儀軌自居。然阮喪母在嘉平中，楷時未弱冠，似未必有此事。」又云：「御覽五百六十一引裴楷別傳云：『初陳留阮籍遭母喪，楷弱冠往弔。』」\",\n      \"source_layer\": \"jianshu_note\",\n      \"work\": \"余嘉錫箋疏\"\n    },\n    {\n      \"ref\": \"s1:s1-assertion-225b6f6a9a9ac044f380\",\n      \"snippet\": \"〔二〕 書鈔八十五引裴楷別傳云：「阮籍遭母喪，楷往弔。籍乃離喪位，神氣晏然，縱情嘯詠，旁若無人。楷便率情獨哭，哭畢而退。」\",\n      \"source_layer\": \"jianshu_note\",\n      \"work\": \"余嘉錫箋疏\"\n    },\n    {\n      \"ref\": \"jinshu:038-liezhuan-001\",\n      \"snippet\": \"日誅賞三百餘人皆自繇出東夷校尉文俶父欽爲繇外祖諸葛誕所殺繇慮俶爲舅家之患是日亦以非罪誅俶繇兄澹屢搆繇於汝南王亮亮不納至是以繇專行誅賞澹因隙譖之亮惑其說遂免繇官以公就第坐有悖言廢徙帶方永康中徵繇復封拜宗正卿遷尚書轉左僕射惠帝之討成都王頴時繇遭母喪在鄴勸頴解兵而降及王師敗績頴怨繇乃害之後立琅邪王覲子長樂亭侯渾爲東安王以奉繇祀尋薨國除\\n　　淮陵元王漼字思沖初封廣陵公食邑二千九百户歴左將軍散騎常侍趙王倫之簒也三王起義漼與左衞將軍王輿攻殺孫秀因而廢倫以功進封淮陵王入爲尚書加侍中轉宗正光禄大夫薨子貞王融立薨無子安帝時立武陵威王孫蘊爲淮陵王以奉元王之祀位至散騎常侍薨無子以臨川王寶子安之爲嗣宋受禪國除\\n　　清惠亭侯京字子佐魏末以公子賜爵年二十四薨追贈射聲校尉以文帝子機字太<!-- wikisource-SKchar: {\\\"va\",\n      \"source_layer\": \"main_text\",\n      \"work\": \"晉書\"\n    },\n    {\n      \"ref\": \"sanguozhi:sgz1-juan-004-000078\",\n      \"snippet\": \"如前。是月，襄武縣言有大人見，長三丈餘，迹長三尺二寸，白髮，著黃單衣，黃巾，柱杖，呼民王始語云：「今當太平。」九月乙未，大赦。戊午，司徒何曾為晉丞相。癸亥，以驃騎將軍司馬望為司徒，征東大將軍石苞為驃騎將軍，征南大將軍陳騫為車騎將軍。乙亥，葬晉文王。閏月庚辰，康居、大宛獻名馬，歸于相國府，以顯懷萬國致遠之勳。\\n\\n十二月壬戌，天祿永終，歷數在晉。詔羣公卿士具儀設壇于南郊，使使者奉皇帝璽綬冊，禪位于晉嗣王，如漢魏故事。甲子，使使者奉策。遂改次于金墉城，而終館于鄴，時年二十。\",\n      \"source_layer\": \"main_text\",\n      \"work\": \"三國志\"\n    },\n    {\n      \"ref\": \"shishuo:04-wenxue-067:main\",\n      \"snippet\": \"魏朝封晉文王為公備禮九錫文王固讓不受公卿\\n將校當詣府敦喻司空鄭冲馳遣信就阮籍求\\n文籍時在袁孝尼家\\n\\n宿醉扶起書札為之無所㸃定乃寫付使時\\n人以為神筆\",\n      \"source_layer\": \"main_text\",\n      \"work\": \"世說新語\"\n    }\n  ],\n  \"primary_text\": {\n    \"label\": \"世說新語正文\",\n    \"text\": \"阮籍遭母喪在晉文王坐進酒肉司隷何曽亦在坐\\n\\n曰明公方以孝治天下而阮籍以重喪顯\\n於公坐飲酒食肉宐流之海外以正風教文王曰嗣\\n\\n宗毁頓如此君不能共憂之何謂且有疾而飲酒食\\n肉固喪禮也籍飲噉不輟神色自若\"\n  },\n  \"story_id\": \"23-rendan-002\"\n}\n",
+      "role": "user"
+    }
+  ],
+  "model": "deepseek-v4-flash",
+  "parameters": {
+    "connect_timeout": 15,
+    "read_timeout": 180,
+    "response_format": {
+      "type": "json_object"
+    },
+    "temperature": 0,
+    "tools": []
+  },
+  "prompt_version": "srm0.4b-robust-live-convergence-v1",
+  "provider": "deepseek",
+  "round": 2,
+  "schema": "srm0-5-model-input",
+  "schema_version": 1,
+  "stage": "local_retrieval_delta"
+}

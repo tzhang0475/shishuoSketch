@@ -1,0 +1,31 @@
+{
+  "canonical_write_back": false,
+  "execution_kind": "fixture",
+  "external_search_performed": false,
+  "messages": [
+    {
+      "content": "你第一次阅读一则《世说新语》，现在只给你正文。\n找出至多三个如果不进一步理解，就可能影响正文阅读的关键缺口。\n\n每个缺口必须绑定正文准确文字，只描述缺什么，不尝试回答，不解释词义，不猜异文，不使用外部知识，不生成搜索词。\n优先选择答案可能改变人物处境、行动意义、场景关系、隐喻或叙事力量的缺口；不要只扩展姓名或孤立字词，除非它确实改变正文理解。\n如果正文其他部分已经直接回答某个问题，不要列为缺口。\n\n只返回 JSON：{\"gaps\":[{\"question_id\":\"Q1\",\"story_span\":\"正文原文\",\"gap\":\"简短缺口\"}]}，最多三个。",
+      "role": "system"
+    },
+    {
+      "content": "{\n  \"primary_text\": {\n    \"label\": \"世說新語正文\",\n    \"text\": \"王祥事後母朱夫人甚謹\\n\\n\\n\\n家有一李樹結子殊好母恒使守之時風雨\\n忽至祥抱樹而泣\\n祥嘗在别牀眠母自徃闇斫\\n之值祥私起空斫得被既還知母憾之不巳因跪前\\n\\n請死母於是感悟愛之如己子\"\n  },\n  \"story_id\": \"01-dexing-014\"\n}\n",
+      "role": "user"
+    }
+  ],
+  "model": "deepseek-v4-flash",
+  "parameters": {
+    "connect_timeout": 15,
+    "read_timeout": 180,
+    "response_format": {
+      "type": "json_object"
+    },
+    "temperature": 0,
+    "tools": []
+  },
+  "prompt_version": "srm0.4b-robust-live-convergence-v1",
+  "provider": "deepseek",
+  "round": 0,
+  "schema": "srm0-5-model-input",
+  "schema_version": 1,
+  "stage": "main_text_gap_discovery"
+}

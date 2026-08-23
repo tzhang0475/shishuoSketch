@@ -1,0 +1,31 @@
+{
+  "canonical_write_back": false,
+  "execution_kind": "fixture",
+  "external_search_performed": false,
+  "messages": [
+    {
+      "content": "请检查冻结的正文阅读缺口，以及所附刘孝标注、余嘉锡《笺疏》。只返回语义增量，不输出 state 或 next_action。\n\n判断注释实际回答了什么、仍有什么影响正文理解的缺口、是否有材料冲突。reading_sufficient 只表示当前阅读已经足够，不表示历史事实已被最终验证。不要为了有趣继续研究，不使用外部知识。\n\n每个 answered_aspect 和 conflict 都必须引用输入中的 ref 与逐字 quote。unanswered_aspects 只保留仍影响正文理解的事项，使用 aspect_id、gap、reading_impact(high|medium|low)。\n\n只返回 JSON：{\"updates\":[{\"question_id\":\"Q1\",\"answered_aspects\":[{\"aspect_id\":\"Q1-A1\",\"claim\":\"...\",\"evidence\":[{\"ref\":\"...\",\"quote\":\"...\"}]}],\"unanswered_aspects\":[{\"aspect_id\":\"Q1-U1\",\"gap\":\"...\",\"reading_impact\":\"high\"}],\"conflicts\":[{\"conflict_id\":\"Q1-C1\",\"description\":\"...\",\"evidence\":[{\"ref\":\"...\",\"quote\":\"...\"}]}],\"reading_sufficient\":true,\"historical_verification_open\":false}]}。",
+      "role": "system"
+    },
+    {
+      "content": "{\n  \"early_commentary\": {\n    \"label\": \"劉孝標注\",\n    \"notes\": [\n      {\n        \"ref\": \"L01\",\n        \"text\": \"(邪臨沂人祥世家曰祥父/晉諸公贊曰祥字休徵琅)\"\n      },\n      {\n        \"ref\": \"L02\",\n        \"text\": \"(曰後母數譖祥屢以非理使祥弟覽輙與祥俱又虐/融娶髙平薛氏生祥繼室以廬江朱氏生覽晉陽秋)\"\n      },\n      {\n        \"ref\": \"L03\",\n        \"text\": \"(魚祥解衣将剖氷求之㑹有處氷小解魚出蕭廣濟/使祥婦覽妻亦趨而共之母患方盛寒氷凍母欲生)\"\n      },\n      {\n        \"ref\": \"L04\",\n        \"text\": \"(數十黄雀飛入其幕母之所須必自奔走無不得焉/孝子傳曰祥後母忽欲黄雀炙祥念難卒致須臾有)\"\n      },\n      {\n        \"ref\": \"L05\",\n        \"text\": \"(如此/其誠至)\"\n      },\n      {\n        \"ref\": \"L06\",\n        \"text\": \"(李始結子使祥晝視鳥雀夜則趍/蕭廣濟孝子傳曰祥後母庭中有)\"\n      },\n      {\n        \"ref\": \"L07\",\n        \"text\": \"(泣至曉母見之惻然/鼠一夜風雨大至祥抱)\"\n      },\n      {\n        \"ref\": \"L08\",\n        \"text\": \"(母故陵遲不仕年向/虞預晉書曰祥以後)\"\n      },\n      {\n        \"ref\": \"L09\",\n        \"text\": \"(康寔賴王祥邦國不空别駕之功累遷太保/六十刺史呂䖍檄為别駕時人歌之曰海沂之)\"\n      }\n    ]\n  },\n  \"frozen_questions\": [\n    {\n      \"gap\": \"这段行动或处境为何影响正文理解？\",\n      \"question_id\": \"Q1\",\n      \"story_span\": \"王祥事後母朱夫人甚謹\\n\\n\\n\\n家有一李\"\n    }\n  ],\n  \"later_commentary\": {\n    \"label\": \"余嘉錫箋疏\",\n    \"notes\": [\n      {\n        \"layer\": \"collation_note\",\n        \"ref\": \"J01\",\n        \"source_labels\": [],\n        \"speaker\": null,\n        \"text\": \"注「晝視鳥雀，夜則趍鼠」「雀」、「趍」，景宋本及沈本作為「爵」、「趁」。\"\n      },\n      {\n        \"layer\": \"jianshu_note\",\n        \"ref\": \"J02\",\n        \"source_labels\": [\n          \"晉書\"\n        ],\n        \"speaker\": \"余嘉錫\",\n        \"text\": \"〔一〕 後山談叢二曰：「世傳王祥臥冰求魚以養母。至今沂水歲寒冰厚，獨祥臥處，闕而不合。」焦循易餘籥錄二十曰：「晉書王祥傳：『母常欲生魚，時天寒水凍，祥解衣將剖冰求之。』按解衣者，將用力擊開冰凍，冬月衣厚，不便用力也。非必裸至於赤體，俗傳為臥冰，無此事也。」嘉錫案：初學記三引師覺孝子傳曰：「王祥少有德行，失母，後母憎而譖之，祥孝彌謹。盛寒河冰，網罟不施，母欲得生魚。祥解褐扣冰求之，忽冰少開，有雙鯉出游，祥垂綸獲之而歸。人謂之至孝所致也。」其敘事極為明，可見祥未嘗臥冰。記纂淵海二引孝子傳曰：「王祥事繼母至孝，母疾思食魚，時冬月，冰堅不可得。祥解衣臥冰上，少時冰開，雙鯉躍出。」此所引孝子傳，不知何家；臥冰之說，蓋始於此。則其傳訛，亦已久矣。\"\n      },\n      {\n        \"layer\": \"jianshu_note\",\n        \"ref\": \"J03\",\n        \"source_labels\": [],\n        \"speaker\": \"劉盼遂\",\n        \"text\": \"〔二〕 劉盼遂曰：「左氏襄十五年傳：『師慧過宋朝，將私焉。』杜注：『私，小便。』」\"\n      },\n      {\n        \"layer\": \"jianshu_note\",\n        \"ref\": \"J04\",\n        \"source_labels\": [\n          \"晉書\"\n        ],\n        \"speaker\": \"余嘉錫\",\n        \"text\": \"〔三〕 今晉書王祥傳亦云：「徐州刺史呂虔檄為別駕，祥年垂耳順，固辭不受，覽勸之。」錢大昕二十二史考異云：「祥以泰始五年薨，年八十五。魏志呂虔為徐州刺史，在文帝時。計文帝黃初元年，祥纔三十有六耳。即使被徵在黃初之末，亦止四十餘。何得云耳順也。王隱晉書云：『祥始出仕，年過五十。』蓋據舉秀才除溫令而言，非指為別駕之日也。」嘉錫案：魏志呂虔傳云：「文帝即王位，加裨將軍，封益壽亭侯，遷徐州刺史。請琅邪王祥為別駕，民事一以委之。」似虔之遷徐州檄祥為別駕，尚在延康元年未改元黃初之前。晉書祥傳載祥遺令曰：「吾年八十有五，啟手何恨。」又云：「泰始五年，薨。」故錢氏本此計祥年壽。然裴松之注引王隱晉書曰：「祥泰始四年年八十九，薨。」與武帝紀書「泰始四年夏四月戊戌，太保睢陵公王祥薨」合。本傳遺令及卒年，疑皆傳寫之誤。若依王隱書計之，…\"\n      }\n    ]\n  },\n  \"primary_text\": {\n    \"label\": \"世說新語正文\",\n    \"text\": \"王祥事後母朱夫人甚謹\\n\\n\\n\\n家有一李樹結子殊好母恒使守之時風雨\\n忽至祥抱樹而泣\\n祥嘗在别牀眠母自徃闇斫\\n之值祥私起空斫得被既還知母憾之不巳因跪前\\n\\n請死母於是感悟愛之如己子\"\n  },\n  \"story_id\": \"01-dexing-014\"\n}\n",
+      "role": "user"
+    }
+  ],
+  "model": "deepseek-v4-flash",
+  "parameters": {
+    "connect_timeout": 15,
+    "read_timeout": 180,
+    "response_format": {
+      "type": "json_object"
+    },
+    "temperature": 0,
+    "tools": []
+  },
+  "prompt_version": "srm0.4b-robust-live-convergence-v1",
+  "provider": "deepseek",
+  "round": 1,
+  "schema": "srm0-5-model-input",
+  "schema_version": 1,
+  "stage": "attached_commentary_delta"
+}

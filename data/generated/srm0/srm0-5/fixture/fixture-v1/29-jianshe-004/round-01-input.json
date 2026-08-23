@@ -1,0 +1,31 @@
+{
+  "canonical_write_back": false,
+  "execution_kind": "fixture",
+  "external_search_performed": false,
+  "messages": [
+    {
+      "content": "请检查冻结的正文阅读缺口，以及所附刘孝标注、余嘉锡《笺疏》。只返回语义增量，不输出 state 或 next_action。\n\n判断注释实际回答了什么、仍有什么影响正文理解的缺口、是否有材料冲突。reading_sufficient 只表示当前阅读已经足够，不表示历史事实已被最终验证。不要为了有趣继续研究，不使用外部知识。\n\n每个 answered_aspect 和 conflict 都必须引用输入中的 ref 与逐字 quote。unanswered_aspects 只保留仍影响正文理解的事项，使用 aspect_id、gap、reading_impact(high|medium|low)。\n\n只返回 JSON：{\"updates\":[{\"question_id\":\"Q1\",\"answered_aspects\":[{\"aspect_id\":\"Q1-A1\",\"claim\":\"...\",\"evidence\":[{\"ref\":\"...\",\"quote\":\"...\"}]}],\"unanswered_aspects\":[{\"aspect_id\":\"Q1-U1\",\"gap\":\"...\",\"reading_impact\":\"high\"}],\"conflicts\":[{\"conflict_id\":\"Q1-C1\",\"description\":\"...\",\"evidence\":[{\"ref\":\"...\",\"quote\":\"...\"}]}],\"reading_sufficient\":true,\"historical_verification_open\":false}]}。",
+      "role": "system"
+    },
+    {
+      "content": "{\n  \"early_commentary\": {\n    \"label\": \"劉孝標注\",\n    \"notes\": []\n  },\n  \"frozen_questions\": [\n    {\n      \"gap\": \"这段行动或处境为何影响正文理解？\",\n      \"question_id\": \"Q1\",\n      \"story_span\": \"王戎有好李賣之恐人得其種恒鑚其核\"\n    }\n  ],\n  \"later_commentary\": {\n    \"label\": \"余嘉錫箋疏\",\n    \"notes\": []\n  },\n  \"primary_text\": {\n    \"label\": \"世說新語正文\",\n    \"text\": \"王戎有好李賣之恐人得其種恒鑚其核\"\n  },\n  \"story_id\": \"29-jianshe-004\"\n}\n",
+      "role": "user"
+    }
+  ],
+  "model": "deepseek-v4-flash",
+  "parameters": {
+    "connect_timeout": 15,
+    "read_timeout": 180,
+    "response_format": {
+      "type": "json_object"
+    },
+    "temperature": 0,
+    "tools": []
+  },
+  "prompt_version": "srm0.4b-robust-live-convergence-v1",
+  "provider": "deepseek",
+  "round": 1,
+  "schema": "srm0-5-model-input",
+  "schema_version": 1,
+  "stage": "attached_commentary_delta"
+}

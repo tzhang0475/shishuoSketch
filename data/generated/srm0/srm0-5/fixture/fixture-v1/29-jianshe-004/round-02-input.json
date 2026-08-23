@@ -1,0 +1,31 @@
+{
+  "canonical_write_back": false,
+  "execution_kind": "fixture",
+  "external_search_performed": false,
+  "messages": [
+    {
+      "content": "请根据当前正文阅读缺口和本轮本地史料候选，更新语义理解。只使用输入候选，不使用预训练知识。\n\n只写实际被候选证据支持的 answered_aspects；unanswered_aspects 只保留仍影响正文理解的窄缺口；conflicts 只写材料明确冲突。reading_sufficient 表示当前阅读是否足够，不等于历史学上的最终验证。不要输出 state、next_action、搜索词或 canonical 事实，不要为了有趣继续研究。\n\n每个使用的证据必须引用候选 ref 和逐字 quote。只返回 JSON 对象，且只能有顶层字段 updates；每个 update 只能有 question_id、answered_aspects、unanswered_aspects、conflicts、reading_sufficient、historical_verification_open。不要返回数组本身或其他状态字段。",
+      "role": "system"
+    },
+    {
+      "content": "{\n  \"active_questions\": [\n    {\n      \"current_reading\": {\n        \"remaining_gap\": \"仍缺少能直接改变该段阅读的具体历史材料。\",\n        \"state\": \"unexplained\",\n        \"supporting_refs\": [],\n        \"working_answer\": \"\"\n      },\n      \"gap\": \"仍缺少能直接改变该段阅读的具体历史材料。\",\n      \"parent_aspect_id\": \"Q1-U1\",\n      \"parent_question_id\": \"Q1\",\n      \"question_id\": \"Q1.1\",\n      \"story_span\": \"王戎有好李賣之恐人得其種恒鑚其核\"\n    }\n  ],\n  \"local_evidence_candidates\": [\n    {\n      \"ref\": \"jinshu:043-liezhuan-002\",\n      \"snippet\": \"公也故吏多至大官道路相遇輒避之性好興利廣收八方園田水碓周徧天下積實聚錢不知紀極毎自執牙籌晝夜算計恒若不足而又儉嗇不自奉養天下人謂之膏肓之疾女適裴頠貸錢數萬久而未還女後歸寜戎色不悅女遽還直然後乃懽從子將婚戎遺其一單衣婚訖而更責取家有好李常出貨之恐人得種恒鑽其核以此獲譏於世其後從帝北伐王師敗績於蕩陰戎復詣鄴隨帝還洛陽車駕之西遷也戎出奔于郟在危難之間親接鋒刃談笑自若未嘗有懼容時召親賔歡娯永日永興二年薨于郟縣時年七十二諡曰元戎有人倫鑒識常目山濤如璞玉渾金人皆欽其寳莫知名其器王衍神姿髙徹如瑤林瓊樹自然是風塵表物謂裴頠拙於用長荀朂工於用短陳道寜□□如束長竿族弟敦有髙名戎惡之敦毎候戎輒託疾不見敦後果為逆亂其鑒賞先見如此嘗經黄公酒壚下過顧為後車客曰吾昔與嵇叔夜阮嗣宗酣暢於此竹林之游亦預其末自嵇阮云亡吾便為時之所覊紲今日視之雖近\",\n      \"source_layer\": \"main_text\",\n      \"work\": \"晉書\"\n    },\n    {\n      \"ref\": \"jinshu:042-liezhuan-001\",\n      \"snippet\": \"始見委任而濟遂被斥外於是乃移第北芒山下性豪侈麗服玉食時洛京地甚貴濟買地爲馬埓編錢滿之時人謂為金溝王愷以帝舅奢豪有牛名八百里駁常瑩其蹄角濟請以錢千萬與牛對射而賭之愷亦自恃其能令濟先射一發破的因據胡牀叱左右速探牛心來湏㬰而至一割便去和嶠性至儉家有好李帝求之不過數十濟<!-- wikisource-SKchar: {\\\"value\\\": \\\"1974\\\"} -->其上直率少年詣園共啖畢伐樹而去帝嘗幸其宅供饌甚豐悉貯琉璃器中蒸肫甚美帝問其故答曰以人乳蒸之帝色甚不平食未畢而去濟善解馬性甞乗一馬著連乾障泥前有水終不肯渡濟云此必是惜障泥使人解去便渡故杜預謂濟有馬癖帝甞謂和嶠曰我將罵濟而後官爵之何如嶠曰濟俊爽恐不可屈帝因召濟切譲之既而曰知愧不濟答曰尺布斗粟之謡常為陛下耻之他人能令親疎臣不能使親親以此愧陛下耳帝黙然帝甞與濟奕棋而孫皓在側\",\n      \"source_layer\": \"main_text\",\n      \"work\": \"晉書\"\n    },\n    {\n      \"ref\": \"jinshu:047-liezhuan-001\",\n      \"snippet\": \"之臣者此尤今之要也乃使<!-- wikisource-SKchar: {\\\"value\\\": \\\"2593\\\"} -->草詔進之<!-- wikisource-SKchar: {\\\"value\\\": \\\"2593\\\"} -->復上疏曰臣聞舜舉五臣無為而化用人得其要也天下羣司猥多不可不審得其人也不得其人一日則損不貲况積日乎典謨曰無曠庶官言職之不可乆廢也諸有疾病滿百日不差宜令去職優其禮秩而寵存之既差而後更用臣不廢職於朝國無曠官之累此王政之急也臣聞先王分士農工商以經國制事各業其業而殊其務自士已上子弟為之立太學以教之選眀師以訓之各隨其才優劣而授用之農以豐其食工以足其噐商賈以通其貨故雖天下之大兆庶之衆無有一人游手分數之法周備如此漢魏不定其分百官子弟不修經藝而務交遊未知蒞事而坐享天禄農工之業多廢或逐淫利而離其事徒繫名於太學然不聞先王之風今\",\n      \"source_layer\": \"main_text\",\n      \"work\": \"晉書\"\n    },\n    {\n      \"ref\": \"sanguozhi:sgz1-juan-028-000023\",\n      \"snippet\": \"《魏氏春秋》曰：廣字公淵。弟飛梟、金虎，並才武過人。太傅嘗從容問蔣濟，濟曰：「凌文武俱贍，當今無雙。廣等志力，有美於父耳。」退而悔之，告所親曰：「吾此言，滅人門宗矣。」《魏末傳》曰：凌少子字明山，最知名，善書，多技藝，人得其書，皆以為法。走向太原，追軍及之，時有飛鳥集桑樹，隨枝低卬，舉弓射之即倒，追人乃止不復進。明山投親家食，親家告吏，乃就執之。\",\n      \"source_layer\": \"pei_annotation\",\n      \"work\": \"三國志\"\n    },\n    {\n      \"ref\": \"shishuo:29-jianshe-001:main\",\n      \"snippet\": \"和嶠性至儉家有好李王武子求之與不過數十王\\n武子因其上直率將少年能食之者持斧詣園飽共\\n噉畢伐之送一車枝與和公問曰何如君李和既得\\n唯笑而已\",\n      \"source_layer\": \"main_text\",\n      \"work\": \"世說新語\"\n    }\n  ],\n  \"primary_text\": {\n    \"label\": \"世說新語正文\",\n    \"text\": \"王戎有好李賣之恐人得其種恒鑚其核\"\n  },\n  \"story_id\": \"29-jianshe-004\"\n}\n",
+      "role": "user"
+    }
+  ],
+  "model": "deepseek-v4-flash",
+  "parameters": {
+    "connect_timeout": 15,
+    "read_timeout": 180,
+    "response_format": {
+      "type": "json_object"
+    },
+    "temperature": 0,
+    "tools": []
+  },
+  "prompt_version": "srm0.4b-robust-live-convergence-v1",
+  "provider": "deepseek",
+  "round": 2,
+  "schema": "srm0-5-model-input",
+  "schema_version": 1,
+  "stage": "local_retrieval_delta"
+}

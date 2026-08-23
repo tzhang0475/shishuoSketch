@@ -1,0 +1,31 @@
+{
+  "canonical_write_back": false,
+  "execution_kind": "live_model",
+  "external_search_performed": false,
+  "messages": [
+    {
+      "content": "请根据当前正文阅读缺口和本轮本地史料候选，更新语义理解。只使用输入候选，不使用预训练知识。\n\n只写实际被候选证据支持的 answered_aspects；unanswered_aspects 只保留仍影响正文理解的窄缺口；conflicts 只写材料明确冲突。reading_sufficient 表示当前阅读是否足够，不等于历史学上的最终验证。不要输出 state、next_action、搜索词或 canonical 事实，不要为了有趣继续研究。\n\n每个使用的证据必须引用候选 ref 和逐字 quote。只返回 JSON 对象，且只能有顶层字段 updates；每个 update 只能有 question_id、answered_aspects、unanswered_aspects、conflicts、reading_sufficient、historical_verification_open。不要返回数组本身或其他状态字段。",
+      "role": "system"
+    },
+    {
+      "content": "{\n  \"active_questions\": [\n    {\n      \"current_reading\": {\n        \"remaining_gap\": \"缺少安石与阿万的具体身份（如姓名字号）及二人的兄弟关系，导致王羲之为何特意提及阿万缺乏明确背景。\",\n        \"state\": \"unexplained\",\n        \"supporting_refs\": [],\n        \"working_answer\": \"\"\n      },\n      \"gap\": \"缺少安石与阿万的具体身份（如姓名字号）及二人的兄弟关系，导致王羲之为何特意提及阿万缺乏明确背景。\",\n      \"parent_aspect_id\": \"Q1-U1\",\n      \"parent_question_id\": \"Q1\",\n      \"question_id\": \"Q1.1\",\n      \"story_span\": \"安石故相爲雄阿萬當裂眼争邪\"\n    },\n    {\n      \"current_reading\": {\n        \"remaining_gap\": \"缺少许玄度的身份及其与王羲之、安石、阿万的关系背景，无法解释王羲之为何以许玄度与安石比较。\",\n        \"state\": \"unexplained\",\n        \"supporting_refs\": [],\n        \"working_answer\": \"\"\n      },\n      \"gap\": \"缺少许玄度的身份及其与王羲之、安石、阿万的关系背景，无法解释王羲之为何以许玄度与安石比较。\",\n      \"parent_aspect_id\": \"Q2-U1\",\n      \"parent_question_id\": \"Q2\",\n      \"question_id\": \"Q2.1\",\n      \"story_span\": \"王右軍問許玄度\"\n    }\n  ],\n  \"local_evidence_candidates\": [\n    {\n      \"ref\": \"jinshu:080-liezhuan-001\",\n      \"snippet\": \"\\\": \\\"215\\\"} -->狂或汚身穢跡可謂艱矣今僕坐而獲免遂其宿心其為慶幸豈非天賜違天不祥頃東游還修植桑果今盛敷榮率諸子抱弱孫游觀其間有一味之甘割而分之以娛目前雖植徳無殊邈猶欲教養子孫以敦厚退讓或有輕薄庶令舉䇿數馬彷彿萬石之風君謂此何如比當與安石東游山海并行田視地利頤養閑暇衣食之餘欲與親知時共懽讌雖不能興言髙詠銜杯引滿語田里所行故以為撫掌之資其為得意可勝言邪常依陸賈班嗣楊王孫之處世甚欲希風數子老夫志願盡於此也萬後為豫州都督又遺萬書誡之曰以君邁徃不屑之韻而俯同羣辟誠難為意也然所謂通識正自當隨事行藏乃為逺耳願君每與士之下者同則盡善矣食不二味居不重席此復何有而古人以為美談濟否所由實在積小以致髙大君其存之萬不能用果敗年五十九卒贈金紫光禄大夫諸子遵父先㫖固讓不受有七子知名者五人<!-- wikisource-SKchar\",\n      \"source_layer\": \"main_text\",\n      \"work\": \"晉書\"\n    },\n    {\n      \"ref\": \"shishuo:10-guizhen-020:main\",\n      \"snippet\": \"王右軍與王敬仁許玄度並善二人亡後右軍爲論\\n議更克孔巖誡之曰明府昔與王許周旋有情及逝\\n\\n沒之後無慎終之好民所不取右軍甚愧\",\n      \"source_layer\": \"main_text\",\n      \"work\": \"世說新語\"\n    },\n    {\n      \"ref\": \"s1:s1-assertion-7811f9fef35bf2d5bf6e\",\n      \"snippet\": \"〔一〕 王先謙曰：「按右軍，羲之；安期，王承字；長豫，王悅字。晉書王羲之傳：裕目羲之與王承、王悅，不及王應。此註語應有誤。」劉盼遂曰：「按晉書蓋摭世說而誤，未可據晉書駁世說也。考王承字安期，王應亦字安期。承卒於元帝渡江之初，自不與敬豫、羲之相接。應名德雖不若敬豫、羲之，然應覈荊州之守文（本書識鑒篇文），知迴颿於撾鼓（本書豪爽注），敦亦稱其神候似欲可者，則應亦爾時之髦士也。與敬豫、羲之既同德業，又居昆弟，三少同稱，亦固其所。且三年少皆出琅琊，承望屬太原，何能與敬豫、逸少并論乎？特以世人知承字安期者多，知應字安期者少，故唐修晉書遂誤王應為王承，而未計及，於情勢及劉注皆不合也。葵園乃是晉書而非劉注，是可謂倒植矣。」\",\n      \"source_layer\": \"jianshu_note\",\n      \"work\": \"余嘉錫箋疏\"\n    },\n    {\n      \"ref\": \"jinshu:124-zaiji-001\",\n      \"snippet\": \"乎而燕詠闕而不論盛徳掩而不述非所謂也乃命中書更為燕頌以述恪之功焉又引中書令常忠尚書陽璆祕書監郎敷于東堂問曰古來君子皆謂周公忠聖豈不謬哉璆曰周公居攝政之重而能逹君臣之名及流言之謗致烈風以悟主道契神靈義光萬代故累葉稱其髙後王無以奪其美盛曰常令以為何如忠曰昔武王疾篤周公有請命之誠流言之際義感天地楚撻伯禽以訓就王徳周公為臣之忠聖逹之美詩書已來未之有也盛曰異哉二君之言朕見周公之詐未見其忠聖也昔武王得九齡之夢白文王文王曰我百爾九十吾與爾三焉及文王之終已驗武王之夀矣武王之算未盡而求代其死是非詐乎若惑於天命是不聖也據攝天位而丹誠不見致兄弟之間有干戈之事夫文王之化自近及逺故曰刑于寡妻至于兄弟周公親違聖父之典而蹈嫌疑之蹤戮罰同氣以逞私忿何忠之有乎但時無直筆之史後儒承其謬談故也忠曰啓金縢而返風亦足以明其不詐遭二叔流言之變而能大義滅親\",\n      \"source_layer\": \"main_text\",\n      \"work\": \"晉書\"\n    },\n    {\n      \"ref\": \"s1:s1-assertion-6b3fbf9e4a052d9f69ee\",\n      \"snippet\": \"下注云：「公自注：『即謝安東山也。』東山在會稽上虞縣西南四十五里，晉太傅文靖公謝安所居，一名謝安山。巋然特立於眾峰閒，拱揖虧蔽，如鸞鶴飛舞。其巔有謝公調馬路，白雲、明月二堂址。千嶂林立，下視蒼海，天水相接，蓋絕景也。下山出微徑，為國慶寺。乃安石故宅。安石傳云：『寓居會稽，與王羲之、許詢、支遁遊，出則漁獵山水，入則言詠屬文，後雖受朝寄，然東山之志，始終不渝。』安石孫靈運傳云：『父祖並葬始寧山中，并有故宅及墅。』故其詩云：『偶與張邴合，久欲還東山。』世說王羲之語劉惔曰：『若安石東山志立，當與天下共推之。』注引續晉陽秋曰：『安石家于上虞，放情邱壑。』正在此山。自東漢末，析上虞之始寧鄉為始寧縣，至東晉有上虞、始寧二邑。陽秋所載，得其實矣。汝陰王性之銍遊東山記，刻石國慶，攷究甚備。性之云…\",\n      \"source_layer\": \"jianshu_note\",\n      \"work\": \"余嘉錫箋疏\"\n    }\n  ],\n  \"primary_text\": {\n    \"label\": \"世說新語正文\",\n    \"text\": \"王右軍問許玄度卿自言何如安石許未荅王因曰\\n安石故相爲雄阿萬當裂眼争邪\"\n  },\n  \"story_id\": \"09-pinzao-055\"\n}\n",
+      "role": "user"
+    }
+  ],
+  "model": "deepseek-v4-flash",
+  "parameters": {
+    "connect_timeout": 15,
+    "read_timeout": 180,
+    "response_format": {
+      "type": "json_object"
+    },
+    "temperature": 0,
+    "tools": []
+  },
+  "prompt_version": "srm0.4b-robust-live-convergence-v1",
+  "provider": "deepseek",
+  "round": 2,
+  "schema": "srm0-5-model-input",
+  "schema_version": 1,
+  "stage": "local_retrieval_delta"
+}

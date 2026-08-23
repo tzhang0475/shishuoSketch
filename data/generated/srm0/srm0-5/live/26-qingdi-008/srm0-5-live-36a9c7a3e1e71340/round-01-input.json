@@ -1,0 +1,31 @@
+{
+  "canonical_write_back": false,
+  "execution_kind": "live_model",
+  "external_search_performed": false,
+  "messages": [
+    {
+      "content": "请检查冻结的正文阅读缺口，以及所附刘孝标注、余嘉锡《笺疏》。只返回语义增量，不输出 state 或 next_action。\n\n判断注释实际回答了什么、仍有什么影响正文理解的缺口、是否有材料冲突。reading_sufficient 只表示当前阅读已经足够，不表示历史事实已被最终验证。不要为了有趣继续研究，不使用外部知识。\n\n每个 answered_aspect 和 conflict 都必须引用输入中的 ref 与逐字 quote。unanswered_aspects 只保留仍影响正文理解的事项，使用 aspect_id、gap、reading_impact(high|medium|low)。\n\n只返回 JSON：{\"updates\":[{\"question_id\":\"Q1\",\"answered_aspects\":[{\"aspect_id\":\"Q1-A1\",\"claim\":\"...\",\"evidence\":[{\"ref\":\"...\",\"quote\":\"...\"}]}],\"unanswered_aspects\":[{\"aspect_id\":\"Q1-U1\",\"gap\":\"...\",\"reading_impact\":\"high\"}],\"conflicts\":[{\"conflict_id\":\"Q1-C1\",\"description\":\"...\",\"evidence\":[{\"ref\":\"...\",\"quote\":\"...\"}]}],\"reading_sufficient\":true,\"historical_verification_open\":false}]}。",
+      "role": "system"
+    },
+    {
+      "content": "{\n  \"early_commentary\": {\n    \"label\": \"劉孝標注\",\n    \"notes\": [\n      {\n        \"ref\": \"L01\",\n        \"text\": \"(夀琅邪人祖正尚書郎父彬衛將軍彭之/虎㹠王彭之小字也王氏譜曰彭之字安)\"\n      },\n      {\n        \"ref\": \"L02\",\n        \"text\": \"(三弟年二十而頭須皓白時人謂之王白須少有局/仕至黄門郎虎犢彪之小字也彪之字叔虎彭之第)\"\n      },\n      {\n        \"ref\": \"L03\",\n        \"text\": \"(左光禄大夫/榦之稱累遷至)\"\n      }\n    ]\n  },\n  \"frozen_questions\": [\n    {\n      \"gap\": \"缺少『虎㹠虎犢』是具體人物小字還是比喻的說明，若不確定，無法判斷王導是在點名還是在泛論子姪。\",\n      \"question_id\": \"Q1\",\n      \"story_span\": \"云虎㹠虎犢\"\n    },\n    {\n      \"gap\": \"缺少『還其所如』的語義或出處，若不理解此語，無法把握王導感嘆的落點與褒貶邏輯。\",\n      \"question_id\": \"Q2\",\n      \"story_span\": \"還其所如\"\n    },\n    {\n      \"gap\": \"缺少王導與王右軍的宗族關係及通信語境，影響理解為何向王右軍傾訴自家子姪不成器，以及此事何以入『輕詆』。\",\n      \"question_id\": \"Q3\",\n      \"story_span\": \"王右軍在南丞相與書\"\n    }\n  ],\n  \"later_commentary\": {\n    \"label\": \"余嘉錫箋疏\",\n    \"notes\": [\n      {\n        \"layer\": \"collation_note\",\n        \"ref\": \"J01\",\n        \"source_labels\": [],\n        \"speaker\": null,\n        \"text\": \"注兩「鬚」字，景宋本俱作「須」。\"\n      },\n      {\n        \"layer\": \"jianshu_note\",\n        \"ref\": \"J02\",\n        \"source_labels\": [],\n        \"speaker\": \"余嘉錫\",\n        \"text\": \"〔一〕 程炎震云：「王導卒於咸康五年，彪之年三十四。此蓋彪之初為郎時，右軍當在江州。」嘉錫案：言彭之、彪之，生長高門，而才質凡下，羊質虎皮，恰如其名也。嘉錫又案：言彭之真豚犬之流，彪之初生之犢，二人之才正如其小字耳。\"\n      }\n    ]\n  },\n  \"primary_text\": {\n    \"label\": \"世說新語正文\",\n    \"text\": \"王右軍在南丞相與書毎歎子姪不令云虎㹠虎犢\\n還其所如\"\n  },\n  \"story_id\": \"26-qingdi-008\"\n}\n",
+      "role": "user"
+    }
+  ],
+  "model": "deepseek-v4-flash",
+  "parameters": {
+    "connect_timeout": 15,
+    "read_timeout": 180,
+    "response_format": {
+      "type": "json_object"
+    },
+    "temperature": 0,
+    "tools": []
+  },
+  "prompt_version": "srm0.4b-robust-live-convergence-v1",
+  "provider": "deepseek",
+  "round": 1,
+  "schema": "srm0-5-model-input",
+  "schema_version": 1,
+  "stage": "attached_commentary_delta"
+}

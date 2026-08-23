@@ -1,0 +1,31 @@
+{
+  "canonical_write_back": false,
+  "execution_kind": "live_model",
+  "external_search_performed": false,
+  "messages": [
+    {
+      "content": "请检查冻结的正文阅读缺口，以及所附刘孝标注、余嘉锡《笺疏》。只返回语义增量，不输出 state 或 next_action。\n\n判断注释实际回答了什么、仍有什么影响正文理解的缺口、是否有材料冲突。reading_sufficient 只表示当前阅读已经足够，不表示历史事实已被最终验证。不要为了有趣继续研究，不使用外部知识。\n\n每个 answered_aspect 和 conflict 都必须引用输入中的 ref 与逐字 quote。unanswered_aspects 只保留仍影响正文理解的事项，使用 aspect_id、gap、reading_impact(high|medium|low)。\n\n只返回 JSON：{\"updates\":[{\"question_id\":\"Q1\",\"answered_aspects\":[{\"aspect_id\":\"Q1-A1\",\"claim\":\"...\",\"evidence\":[{\"ref\":\"...\",\"quote\":\"...\"}]}],\"unanswered_aspects\":[{\"aspect_id\":\"Q1-U1\",\"gap\":\"...\",\"reading_impact\":\"high\"}],\"conflicts\":[{\"conflict_id\":\"Q1-C1\",\"description\":\"...\",\"evidence\":[{\"ref\":\"...\",\"quote\":\"...\"}]}],\"reading_sufficient\":true,\"historical_verification_open\":false}]}。",
+      "role": "system"
+    },
+    {
+      "content": "{\n  \"early_commentary\": {\n    \"label\": \"劉孝標注\",\n    \"notes\": []\n  },\n  \"frozen_questions\": [\n    {\n      \"gap\": \"缺三月三日作为上巳节、文士集会赋诗的节候及习俗信息，以理解'会作诗'的场合与氛围。\",\n      \"question_id\": \"Q1\",\n      \"story_span\": \"三月三日㑹作詩\"\n    },\n    {\n      \"gap\": \"缺桓公即桓温的身份信息，影响理解郝隆'千里投公'所投奔对象的权势地位，以及由此产生的政治意味。\",\n      \"question_id\": \"Q2\",\n      \"story_span\": \"桓公\"\n    },\n    {\n      \"gap\": \"缺'参军'这一官位在晋代幕府中属较低级属官的信息，否则郝隆以'蛮府参军'自嘲的幽默感难以充分体现。\",\n      \"question_id\": \"Q3\",\n      \"story_span\": \"始得蠻府叅\\n軍\"\n    }\n  ],\n  \"later_commentary\": {\n    \"label\": \"余嘉錫箋疏\",\n    \"notes\": [\n      {\n        \"layer\": \"collation_note\",\n        \"ref\": \"J01\",\n        \"source_labels\": [],\n        \"speaker\": null,\n        \"text\": \"「三月三日會，作詩。不能者」渚宮舊事五作「三月三日大會參佐，令賦詩，遲者」。「三升」景宋本及沈本作「三斗」。\"\n      },\n      {\n        \"layer\": \"collation_note\",\n        \"ref\": \"J02\",\n        \"source_labels\": [],\n        \"speaker\": null,\n        \"text\": \"「蠻語也」渚宮舊事五無「也」字，「語」下有「溫大笑」三字。\"\n      }\n    ]\n  },\n  \"primary_text\": {\n    \"label\": \"世說新語正文\",\n    \"text\": \"郝隆為桓公南蠻叅軍三月三日㑹作詩不能者罰\\n\\n酒三升隆初以不能受罰既飲攬筆便作一句云娵\\n隅躍清池桓問娵隅是何物荅曰蠻名魚為娵隅桓\\n公曰作詩何以作蠻語隆曰千里投公始得蠻府叅\\n軍那得不作蠻語也\"\n  },\n  \"story_id\": \"25-paidiao-035\"\n}\n",
+      "role": "user"
+    }
+  ],
+  "model": "deepseek-v4-flash",
+  "parameters": {
+    "connect_timeout": 15,
+    "read_timeout": 180,
+    "response_format": {
+      "type": "json_object"
+    },
+    "temperature": 0,
+    "tools": []
+  },
+  "prompt_version": "srm0.4b-robust-live-convergence-v1",
+  "provider": "deepseek",
+  "round": 1,
+  "schema": "srm0-5-model-input",
+  "schema_version": 1,
+  "stage": "attached_commentary_delta"
+}

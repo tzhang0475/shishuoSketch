@@ -1,0 +1,6090 @@
+{
+  "aggregate": {
+    "active_unresolved_rate": 0.0,
+    "by_stratum": {
+      "low_context_control": {
+        "convergence_rate": 0.6,
+        "evaluable_questions": 10,
+        "external_evidence_need_rate": 0.5,
+        "mean_evidence_rounds": 1.6,
+        "reading_sufficient_rate": 0.3,
+        "story_count": 5,
+        "tokens_per_converged_question": 12360.833333333334
+      },
+      "medium_commentary": {
+        "convergence_rate": 0.5,
+        "evaluable_questions": 10,
+        "external_evidence_need_rate": 0.5,
+        "mean_evidence_rounds": 1.6,
+        "reading_sufficient_rate": 0.4,
+        "story_count": 5,
+        "tokens_per_converged_question": 15744.4
+      },
+      "rich_commentary": {
+        "convergence_rate": 0.8461538461538461,
+        "evaluable_questions": 13,
+        "external_evidence_need_rate": 0.3076923076923077,
+        "mean_evidence_rounds": 1.6,
+        "reading_sufficient_rate": 0.7692307692307693,
+        "story_count": 5,
+        "tokens_per_converged_question": 7892.181818181818
+      }
+    },
+    "commentary_only_resolution_count": 14,
+    "completion_tokens": 193756,
+    "converged_question_count": 22,
+    "evaluable_question_count": 33,
+    "evidence_saturated_rate": 0.0,
+    "external_evidence_need_rate": 0.42424242424242425,
+    "external_retrieval_required_count": 14,
+    "max_evidence_rounds": 2,
+    "max_successful_api_latency": 162.349813,
+    "mean_evidence_rounds": 1.6,
+    "mean_successful_api_latency": 47.22275643589744,
+    "median_evidence_rounds": 2,
+    "median_successful_api_latency": 38.45193,
+    "no_opaque_convergence_score": true,
+    "prompt_tokens": 45945,
+    "protocol_failure_rate": 0.0,
+    "question_convergence_rate": 0.6666666666666666,
+    "reading_sufficient_rate": 0.5151515151515151,
+    "resolution_source_counts": {
+      "jianshu_resolved": 6,
+      "liu_resolved": 6,
+      "main_text_self_resolved": 4,
+      "multi_source_resolved": 3,
+      "unresolved": 14
+    },
+    "semantic_failure_rate": 0.4666666666666667,
+    "stable_conflict_rate": 0.0,
+    "story_count": 15,
+    "terminal_state_distribution": {
+      "not_worth_pursuing": 5,
+      "reading_sufficient": 17
+    },
+    "tokens_per_converged_question": 10895.5,
+    "tokens_per_evaluable_question": 7263.666666666667,
+    "tokens_per_story": 15980.066666666668,
+    "total_api_tokens": 239701,
+    "transport_failure_rate": 0.0,
+    "transport_metrics": {
+      "connect_timeout_count": 0,
+      "failure_classes": {},
+      "max_successful_latency_seconds": 162.349813,
+      "median_successful_latency_seconds": 38.45193,
+      "read_timeout_count": 0,
+      "server_error_count": 0,
+      "successful_latencies_seconds": [
+        60.978392,
+        88.797519,
+        6.622616,
+        24.536309,
+        69.578635,
+        2.698987,
+        23.988276,
+        69.075417,
+        36.928033,
+        22.229731,
+        138.748223,
+        82.410924,
+        34.255628,
+        126.611923,
+        76.96098,
+        5.472059,
+        82.951225,
+        47.552037,
+        5.666545,
+        15.056641,
+        34.453789,
+        25.090017,
+        31.515871,
+        60.491859,
+        38.45193,
+        60.24445,
+        33.97824,
+        48.750544,
+        6.786681,
+        68.274484,
+        41.091417,
+        4.740703,
+        162.349813,
+        14.920653,
+        68.211163,
+        39.221493,
+        63.35032,
+        11.37815,
+        7.265824
+      ],
+      "tls_failure_count": 0,
+      "transport_request_count": 39,
+      "transport_retry_count": 0,
+      "transport_success_count": 39
+    },
+    "unresolved_terminal_rate": 0.15151515151515152,
+    "valid_question_count": 22
+  },
+  "canonical_write_back": false,
+  "execution_kind": "live_model",
+  "external_search_performed": false,
+  "protocol_hash": "88883991f12c459b233e24d9e14e4c3db2e409ed29ca485a8cc2720805150437",
+  "schema": "srm0-5-summary",
+  "schema_version": 1,
+  "selected_story_ids": [
+    "01-dexing-045",
+    "01-dexing-014",
+    "02-yanyu-008",
+    "23-rendan-002",
+    "02-yanyu-070",
+    "26-qingdi-008",
+    "10-guizhen-021",
+    "08-shangyu-004",
+    "09-pinzao-055",
+    "08-shangyu-005",
+    "27-jiajue-004",
+    "25-paidiao-035",
+    "23-rendan-012",
+    "25-paidiao-021",
+    "29-jianshe-004"
+  ],
+  "stage": "srm0.5-fresh-story-generalization",
+  "stories": [
+    {
+      "accepted_gaps": [
+        {
+          "gap": "袁府君的具體身份（如吳郡太守）及其與陳遺的官方從屬關係未被說明，使讀者難以理解陳遺作為主簿為何必須隨軍出征。",
+          "question_id": "Q1",
+          "story_span": "袁府君即日便征"
+        },
+        {
+          "gap": "孫恩之亂的性質與規模未被交代，讀者無法判斷這是地方騷亂還是重大戰爭，影響對吳郡緊急狀態和後續戰敗意義的感知。",
+          "question_id": "Q2",
+          "story_span": "孫恩\n賊出吳郡"
+        },
+        {
+          "gap": "未說明陳遺在潰敗中如何保存焦飯，以及這袋焦飯是否足以支持他存活，使『獨活』的幸運性與孝報關聯缺乏具體的因果支撐。",
+          "question_id": "Q3",
+          "story_span": "遺獨以焦飯\n\n得活"
+        }
+      ],
+      "canonical_write_back": false,
+      "commentary_only_resolution_count": 2,
+      "convergence_status": "semantic_partial_failure",
+      "evidence_rounds": [
+        {
+          "D_t": 1,
+          "G_t": 3,
+          "N_t": 1.0,
+          "Q_t": 1,
+          "new_used_evidence_refs": [
+            "J02",
+            "J04",
+            "J06",
+            "L02",
+            "L03"
+          ],
+          "question_metrics": [
+            {
+              "D_t": 1,
+              "N_t": 1.0,
+              "Q_t": 0,
+              "active": false,
+              "conflict_fingerprints": [
+                "60650f69f8fcccbda6b3919b6b0e8f1d8c5e3dfb8bf6fcb4cfa3a5a4601ec321"
+              ],
+              "d_basis": "validated_evidence_change",
+              "new_used_evidence_refs": [
+                "J02",
+                "J06"
+              ],
+              "question_id": "Q1",
+              "reading_sufficient": true,
+              "round": 1,
+              "used_evidence_refs": [
+                "J02",
+                "J06"
+              ]
+            },
+            {
+              "D_t": 1,
+              "N_t": 1.0,
+              "Q_t": 0,
+              "active": false,
+              "conflict_fingerprints": [
+                "bafbe4645f9b446c8bf67e5f110da004858384c0e61916d8b2ab66640b3d3725"
+              ],
+              "d_basis": "validated_evidence_change",
+              "new_used_evidence_refs": [
+                "J04",
+                "L02",
+                "L03"
+              ],
+              "question_id": "Q2",
+              "reading_sufficient": true,
+              "round": 1,
+              "used_evidence_refs": [
+                "J04",
+                "L02",
+                "L03"
+              ]
+            },
+            {
+              "D_t": 0,
+              "N_t": 0.0,
+              "Q_t": 1,
+              "active": true,
+              "conflict_fingerprints": [],
+              "d_basis": "none",
+              "new_used_evidence_refs": [],
+              "question_id": "Q3",
+              "reading_sufficient": false,
+              "round": 1,
+              "used_evidence_refs": []
+            }
+          ],
+          "retrieval": false,
+          "round": 1,
+          "used_evidence_refs": [
+            "J02",
+            "J04",
+            "J06",
+            "L02",
+            "L03"
+          ]
+        },
+        {
+          "D_t": 0,
+          "G_t": 1,
+          "N_t": 0.0,
+          "Q_t": 0,
+          "new_used_evidence_refs": [],
+          "opened_evidence_count": 5,
+          "question_metrics": [],
+          "retrieval": true,
+          "retrieved_evidence_count": 12,
+          "round": 2,
+          "used_evidence_refs": []
+        }
+      ],
+      "execution_kind": "live_model",
+      "external_retrieval_required_count": 1,
+      "external_search_performed": false,
+      "initial_gaps": [
+        {
+          "gap": "袁府君的具體身份（如吳郡太守）及其與陳遺的官方從屬關係未被說明，使讀者難以理解陳遺作為主簿為何必須隨軍出征。",
+          "question_id": "Q1",
+          "story_span": "袁府君即日便征"
+        },
+        {
+          "gap": "孫恩之亂的性質與規模未被交代，讀者無法判斷這是地方騷亂還是重大戰爭，影響對吳郡緊急狀態和後續戰敗意義的感知。",
+          "question_id": "Q2",
+          "story_span": "孫恩\n賊出吳郡"
+        },
+        {
+          "gap": "未說明陳遺在潰敗中如何保存焦飯，以及這袋焦飯是否足以支持他存活，使『獨活』的幸運性與孝報關聯缺乏具體的因果支撐。",
+          "question_id": "Q3",
+          "story_span": "遺獨以焦飯\n\n得活"
+        }
+      ],
+      "jianshu_chars": 796,
+      "latency_seconds": {
+        "max": 88.797519,
+        "mean": 52.13284233333333,
+        "median": 60.978392,
+        "successful": [
+          60.978392,
+          88.797519,
+          6.622616
+        ]
+      },
+      "liu_block_count": 4,
+      "main_text_chars": 108,
+      "new_used_evidence": [
+        "J02",
+        "J04",
+        "J06",
+        "L02",
+        "L03"
+      ],
+      "opened_refs": [
+        "jinshu:005-benji-001",
+        "jinshu:020-zhi-001",
+        "jinshu:046-liezhuan-001",
+        "sanguozhi:sgz1-juan-010-000020",
+        "sanguozhi:sgz1-juan-012-000064"
+      ],
+      "protocol_errors": [],
+      "question_metrics": {
+        "converged_question_count": 2,
+        "evaluable_question_count": 3,
+        "evidence_saturated_question_count": 0,
+        "hard_cap_question_count": 0,
+        "not_worth_pursuing_question_count": 0,
+        "protocol_failed_question_count": 0,
+        "reading_sufficient_question_count": 2,
+        "semantic_failed_question_count": 1,
+        "stable_conflict_question_count": 0,
+        "terminal_state_counts": {
+          "reading_sufficient": 2
+        },
+        "transport_failed_question_count": 0,
+        "unresolved_question_count": 0,
+        "unresolved_terminal_question_count": 0,
+        "valid_question_count": 2
+      },
+      "question_resolution_sources": {
+        "Q1": [
+          "jianshu_resolved"
+        ],
+        "Q2": [
+          "multi_source_resolved"
+        ],
+        "Q3": [
+          "unresolved"
+        ],
+        "Q3.1": [
+          "unresolved"
+        ]
+      },
+      "questions": [
+        {
+          "active": false,
+          "evidence_round_refs": [
+            {
+              "refs": [
+                "J02",
+                "J06"
+              ],
+              "round": 1
+            }
+          ],
+          "evidence_rounds": 1,
+          "failure_type": null,
+          "gap": "袁府君的具體身份（如吳郡太守）及其與陳遺的官方從屬關係未被說明，使讀者難以理解陳遺作為主簿為何必須隨軍出征。",
+          "historical_verification_open": true,
+          "last_round": 1,
+          "next_action": "stop",
+          "parent_aspect_id": null,
+          "parent_question_id": null,
+          "question_id": "Q1",
+          "reading_sufficient": true,
+          "remaining_gap": null,
+          "state": "conflicted",
+          "story_span": "袁府君即日便征",
+          "supporting_refs": [
+            "J02",
+            "J06"
+          ],
+          "terminal_reason": "reading_sufficient",
+          "working_answer": "袁府君即袁山松，隆安五年死於滬瀆，與正文『戰於滬瀆』相合。"
+        },
+        {
+          "active": false,
+          "evidence_round_refs": [
+            {
+              "refs": [
+                "J04",
+                "L02",
+                "L03"
+              ],
+              "round": 1
+            }
+          ],
+          "evidence_rounds": 1,
+          "failure_type": null,
+          "gap": "孫恩之亂的性質與規模未被交代，讀者無法判斷這是地方騷亂還是重大戰爭，影響對吳郡緊急狀態和後續戰敗意義的感知。",
+          "historical_verification_open": true,
+          "last_round": 1,
+          "next_action": "stop",
+          "parent_aspect_id": null,
+          "parent_question_id": null,
+          "question_id": "Q2",
+          "reading_sufficient": true,
+          "remaining_gap": null,
+          "state": "conflicted",
+          "story_span": "孫恩\n賊出吳郡",
+          "supporting_refs": [
+            "J04",
+            "L02",
+            "L03"
+          ],
+          "terminal_reason": "reading_sufficient",
+          "working_answer": "孫恩之亂起於五斗米道，孫泰因謀反被誅，孫恩逃於海上，後聚衆十萬人攻沒郡縣，是一場大規模叛亂。"
+        },
+        {
+          "active": false,
+          "evidence_round_refs": [
+            {
+              "refs": [],
+              "round": 1
+            }
+          ],
+          "evidence_rounds": 1,
+          "failure_type": null,
+          "gap": "未說明陳遺在潰敗中如何保存焦飯，以及這袋焦飯是否足以支持他存活，使『獨活』的幸運性與孝報關聯缺乏具體的因果支撐。",
+          "historical_verification_open": false,
+          "last_round": 1,
+          "next_action": "retrieve_local",
+          "parent_aspect_id": null,
+          "parent_question_id": null,
+          "question_id": "Q3",
+          "reading_sufficient": false,
+          "remaining_gap": "注釋未說明陳遺如何在潰敗中保存焦飯，亦未說明焦飯數量是否足以支持他存活，使『獨活』與孝報的因果關聯缺乏具體支撐。",
+          "state": "unexplained",
+          "story_span": "遺獨以焦飯\n\n得活",
+          "supporting_refs": [],
+          "terminal_reason": "refined_to_child",
+          "working_answer": ""
+        },
+        {
+          "active": false,
+          "evidence_round_refs": [],
+          "evidence_rounds": 0,
+          "failure_type": "semantic_failed",
+          "gap": "注釋未說明陳遺如何在潰敗中保存焦飯，亦未說明焦飯數量是否足以支持他存活，使『獨活』與孝報的因果關聯缺乏具體支撐。",
+          "historical_verification_open": false,
+          "last_round": 1,
+          "next_action": "retrieve_local",
+          "parent_aspect_id": "Q3-U1",
+          "parent_question_id": "Q3",
+          "question_id": "Q3.1",
+          "reading_sufficient": false,
+          "remaining_gap": "注釋未說明陳遺如何在潰敗中保存焦飯，亦未說明焦飯數量是否足以支持他存活，使『獨活』與孝報的因果關聯缺乏具體支撐。",
+          "state": "unexplained",
+          "story_span": "遺獨以焦飯\n\n得活",
+          "supporting_refs": [],
+          "terminal_reason": "semantic_failed",
+          "working_answer": ""
+        }
+      ],
+      "rejected_claims": [],
+      "rejected_evidence": [],
+      "rejected_gaps": [],
+      "resolution_sources": [
+        "jianshu_resolved",
+        "multi_source_resolved",
+        "unresolved"
+      ],
+      "retrieval_attempts": {
+        "Q1": 0,
+        "Q2": 0,
+        "Q3": 0,
+        "Q3.1": 1
+      },
+      "retrieved_refs": [
+        "jinshu:005-benji-001",
+        "jinshu:020-zhi-001",
+        "jinshu:046-liezhuan-001",
+        "s1:s1-assertion-046e63cdbffb0a56ae16",
+        "s1:s1-assertion-074c369da3f4946e4a95",
+        "s1:s1-assertion-e55a51484e9ce2490d90",
+        "sanguozhi:sgz1-juan-002-000043",
+        "sanguozhi:sgz1-juan-010-000020",
+        "sanguozhi:sgz1-juan-012-000064",
+        "shishuo:01-dexing-043:liu:annotation-006",
+        "shishuo:02-yanyu-015:liu:annotation-013",
+        "shishuo:02-yanyu-015:main"
+      ],
+      "round_metrics": [
+        {
+          "D_t": 1,
+          "G_t": 3,
+          "N_t": 1.0,
+          "Q_t": 1,
+          "new_used_evidence_refs": [
+            "J02",
+            "J04",
+            "J06",
+            "L02",
+            "L03"
+          ],
+          "question_metrics": [
+            {
+              "D_t": 1,
+              "N_t": 1.0,
+              "Q_t": 0,
+              "active": false,
+              "conflict_fingerprints": [
+                "60650f69f8fcccbda6b3919b6b0e8f1d8c5e3dfb8bf6fcb4cfa3a5a4601ec321"
+              ],
+              "d_basis": "validated_evidence_change",
+              "new_used_evidence_refs": [
+                "J02",
+                "J06"
+              ],
+              "question_id": "Q1",
+              "reading_sufficient": true,
+              "round": 1,
+              "used_evidence_refs": [
+                "J02",
+                "J06"
+              ]
+            },
+            {
+              "D_t": 1,
+              "N_t": 1.0,
+              "Q_t": 0,
+              "active": false,
+              "conflict_fingerprints": [
+                "bafbe4645f9b446c8bf67e5f110da004858384c0e61916d8b2ab66640b3d3725"
+              ],
+              "d_basis": "validated_evidence_change",
+              "new_used_evidence_refs": [
+                "J04",
+                "L02",
+                "L03"
+              ],
+              "question_id": "Q2",
+              "reading_sufficient": true,
+              "round": 1,
+              "used_evidence_refs": [
+                "J04",
+                "L02",
+                "L03"
+              ]
+            },
+            {
+              "D_t": 0,
+              "N_t": 0.0,
+              "Q_t": 1,
+              "active": true,
+              "conflict_fingerprints": [],
+              "d_basis": "none",
+              "new_used_evidence_refs": [],
+              "question_id": "Q3",
+              "reading_sufficient": false,
+              "round": 1,
+              "used_evidence_refs": []
+            }
+          ],
+          "retrieval": false,
+          "round": 1,
+          "used_evidence_refs": [
+            "J02",
+            "J04",
+            "J06",
+            "L02",
+            "L03"
+          ]
+        },
+        {
+          "D_t": 0,
+          "G_t": 1,
+          "N_t": 0.0,
+          "Q_t": 0,
+          "new_used_evidence_refs": [],
+          "opened_evidence_count": 5,
+          "question_metrics": [],
+          "retrieval": true,
+          "retrieved_evidence_count": 12,
+          "round": 2,
+          "used_evidence_refs": []
+        }
+      ],
+      "rounds_executed": [
+        0,
+        1,
+        2
+      ],
+      "run_id": "srm0-5-live-e7528c3fc65108c0",
+      "search_trace_count": 1,
+      "searched_corpora": [
+        "世說新語",
+        "余嘉錫箋疏",
+        "晉書",
+        "三國志",
+        "資治通鑑",
+        "資治通鑑考異"
+      ],
+      "semantic_failed_questions": [
+        "Q3.1"
+      ],
+      "story_id": "01-dexing-045",
+      "story_status": "semantic_partial_failure",
+      "story_text": "呉郡陳遺家至孝母好食鐺底焦飯遺作郡主簿\n恒裝一囊每煮食輙貯録焦飯歸以遺母後值孫恩\n賊出吳郡\n袁府君即日便征\n遺己聚歛得數斗焦飯未展歸家遂帶以從軍戰於\n滬瀆敗軍人潰散逃走山澤皆多饑死遺獨以焦飯\n\n得活時人以為純孝之報也",
+      "stratum": "rich_commentary",
+      "structural_normalizations": [
+        {
+          "action": "normalize_whitespace",
+          "normalized": "孫恩\n賊出吳郡",
+          "original": "孫恩賊出吳郡",
+          "path": "$.gaps[1].story_span",
+          "reason": "span whitespace aligned to canonical Story text",
+          "stage": "initial"
+        },
+        {
+          "action": "normalize_whitespace",
+          "normalized": "遺獨以焦飯\n\n得活",
+          "original": "遺獨以焦飯得活",
+          "path": "$.gaps[2].story_span",
+          "reason": "span whitespace aligned to canonical Story text",
+          "stage": "initial"
+        }
+      ],
+      "terminal_reason_per_question": {
+        "Q1": "reading_sufficient",
+        "Q2": "reading_sufficient",
+        "Q3": "refined_to_child",
+        "Q3.1": "semantic_failed"
+      },
+      "token_usage": {
+        "completion_tokens": 16899,
+        "prompt_tokens": 4982,
+        "total_tokens": 21881
+      },
+      "transport_errors": [],
+      "transport_metrics": {
+        "connect_timeout_count": 0,
+        "failure_classes": {},
+        "max_successful_latency_seconds": 88.797519,
+        "median_successful_latency_seconds": 60.978392,
+        "read_timeout_count": 0,
+        "server_error_count": 0,
+        "successful_latencies_seconds": [
+          60.978392,
+          88.797519,
+          6.622616
+        ],
+        "tls_failure_count": 0,
+        "transport_request_count": 3,
+        "transport_retry_count": 0,
+        "transport_success_count": 3
+      },
+      "used_evidence": [
+        "J02",
+        "J04",
+        "J06",
+        "L02",
+        "L03"
+      ]
+    },
+    {
+      "accepted_gaps": [
+        {
+          "gap": "王祥抱樹而泣的原因未明，影響對其孝行與情感的理解",
+          "question_id": "Q1",
+          "story_span": "時風雨\n忽至祥抱樹而泣"
+        },
+        {
+          "gap": "『憾』所指的情緒具體為何（遺憾未能殺他，還是怨恨）未明，影響王祥請死的動機",
+          "question_id": "Q2",
+          "story_span": "知母憾之不巳"
+        },
+        {
+          "gap": "後母突然暗殺王祥的具體動機或事件背景未明，影響對後母心理及家庭衝突的理解",
+          "question_id": "Q3",
+          "story_span": "母自徃闇斫\n之"
+        }
+      ],
+      "canonical_write_back": false,
+      "commentary_only_resolution_count": 2,
+      "convergence_status": "semantic_partial_failure",
+      "evidence_rounds": [
+        {
+          "D_t": 1,
+          "G_t": 3,
+          "N_t": 1.0,
+          "Q_t": 1,
+          "new_used_evidence_refs": [
+            "L02",
+            "L06",
+            "L07"
+          ],
+          "question_metrics": [
+            {
+              "D_t": 1,
+              "N_t": 1.0,
+              "Q_t": 0,
+              "active": false,
+              "conflict_fingerprints": [],
+              "d_basis": "validated_evidence_change",
+              "new_used_evidence_refs": [
+                "L06",
+                "L07"
+              ],
+              "question_id": "Q1",
+              "reading_sufficient": true,
+              "round": 1,
+              "used_evidence_refs": [
+                "L06",
+                "L07"
+              ]
+            },
+            {
+              "D_t": 0,
+              "N_t": 0.0,
+              "Q_t": 1,
+              "active": true,
+              "conflict_fingerprints": [],
+              "d_basis": "none",
+              "new_used_evidence_refs": [],
+              "question_id": "Q2",
+              "reading_sufficient": false,
+              "round": 1,
+              "used_evidence_refs": []
+            },
+            {
+              "D_t": 1,
+              "N_t": 1.0,
+              "Q_t": 0,
+              "active": false,
+              "conflict_fingerprints": [],
+              "d_basis": "validated_evidence_change",
+              "new_used_evidence_refs": [
+                "L02"
+              ],
+              "question_id": "Q3",
+              "reading_sufficient": true,
+              "round": 1,
+              "used_evidence_refs": [
+                "L02"
+              ]
+            }
+          ],
+          "retrieval": false,
+          "round": 1,
+          "used_evidence_refs": [
+            "L02",
+            "L06",
+            "L07"
+          ]
+        },
+        {
+          "D_t": 0,
+          "G_t": 1,
+          "N_t": 0.0,
+          "Q_t": 0,
+          "new_used_evidence_refs": [],
+          "opened_evidence_count": 5,
+          "question_metrics": [],
+          "retrieval": true,
+          "retrieved_evidence_count": 12,
+          "round": 2,
+          "used_evidence_refs": []
+        }
+      ],
+      "execution_kind": "live_model",
+      "external_retrieval_required_count": 1,
+      "external_search_performed": false,
+      "initial_gaps": [
+        {
+          "gap": "王祥抱樹而泣的原因未明，影響對其孝行與情感的理解",
+          "question_id": "Q1",
+          "story_span": "時風雨\n忽至祥抱樹而泣"
+        },
+        {
+          "gap": "『憾』所指的情緒具體為何（遺憾未能殺他，還是怨恨）未明，影響王祥請死的動機",
+          "question_id": "Q2",
+          "story_span": "知母憾之不巳"
+        },
+        {
+          "gap": "後母突然暗殺王祥的具體動機或事件背景未明，影響對後母心理及家庭衝突的理解",
+          "question_id": "Q3",
+          "story_span": "母自徃闇斫\n之"
+        }
+      ],
+      "jianshu_chars": 759,
+      "latency_seconds": {
+        "max": 69.578635,
+        "mean": 32.27131033333333,
+        "median": 24.536309,
+        "successful": [
+          24.536309,
+          69.578635,
+          2.698987
+        ]
+      },
+      "liu_block_count": 9,
+      "main_text_chars": 86,
+      "new_used_evidence": [
+        "L02",
+        "L06",
+        "L07"
+      ],
+      "opened_refs": [
+        "jinshu:001-benji-001",
+        "jinshu:003-benji-001",
+        "jinshu:087-liezhuan-001",
+        "sanguozhi:sgz1-juan-002-000043",
+        "sanguozhi:sgz1-juan-013-000082"
+      ],
+      "protocol_errors": [],
+      "question_metrics": {
+        "converged_question_count": 2,
+        "evaluable_question_count": 3,
+        "evidence_saturated_question_count": 0,
+        "hard_cap_question_count": 0,
+        "not_worth_pursuing_question_count": 0,
+        "protocol_failed_question_count": 0,
+        "reading_sufficient_question_count": 2,
+        "semantic_failed_question_count": 1,
+        "stable_conflict_question_count": 0,
+        "terminal_state_counts": {
+          "reading_sufficient": 2
+        },
+        "transport_failed_question_count": 0,
+        "unresolved_question_count": 0,
+        "unresolved_terminal_question_count": 0,
+        "valid_question_count": 2
+      },
+      "question_resolution_sources": {
+        "Q1": [
+          "liu_resolved"
+        ],
+        "Q2": [
+          "unresolved"
+        ],
+        "Q2.1": [
+          "unresolved"
+        ],
+        "Q3": [
+          "liu_resolved"
+        ]
+      },
+      "questions": [
+        {
+          "active": false,
+          "evidence_round_refs": [
+            {
+              "refs": [
+                "L06",
+                "L07"
+              ],
+              "round": 1
+            }
+          ],
+          "evidence_rounds": 1,
+          "failure_type": null,
+          "gap": "王祥抱樹而泣的原因未明，影響對其孝行與情感的理解",
+          "historical_verification_open": false,
+          "last_round": 1,
+          "next_action": "stop",
+          "parent_aspect_id": null,
+          "parent_question_id": null,
+          "question_id": "Q1",
+          "reading_sufficient": true,
+          "remaining_gap": null,
+          "state": "substantially_explained",
+          "story_span": "時風雨\n忽至祥抱樹而泣",
+          "supporting_refs": [
+            "L06",
+            "L07"
+          ],
+          "terminal_reason": "reading_sufficient",
+          "working_answer": "王祥抱樹而泣的原因是風雨之夜他受後母之命守護李樹，擔心李樹受損，因而抱樹哭泣至天亮（據蕭廣濟《孝子傳》）。"
+        },
+        {
+          "active": false,
+          "evidence_round_refs": [
+            {
+              "refs": [],
+              "round": 1
+            }
+          ],
+          "evidence_rounds": 1,
+          "failure_type": null,
+          "gap": "『憾』所指的情緒具體為何（遺憾未能殺他，還是怨恨）未明，影響王祥請死的動機",
+          "historical_verification_open": false,
+          "last_round": 1,
+          "next_action": "retrieve_local",
+          "parent_aspect_id": null,
+          "parent_question_id": null,
+          "question_id": "Q2",
+          "reading_sufficient": false,
+          "remaining_gap": "『憾』字的具體情緒指向（遺憾殺之未成，還是怨恨）未見注釋說明，影響對王祥跪前請死之動機的深層理解。",
+          "state": "unexplained",
+          "story_span": "知母憾之不巳",
+          "supporting_refs": [],
+          "terminal_reason": "refined_to_child",
+          "working_answer": ""
+        },
+        {
+          "active": false,
+          "evidence_round_refs": [],
+          "evidence_rounds": 0,
+          "failure_type": "semantic_failed",
+          "gap": "『憾』字的具體情緒指向（遺憾殺之未成，還是怨恨）未見注釋說明，影響對王祥跪前請死之動機的深層理解。",
+          "historical_verification_open": false,
+          "last_round": 1,
+          "next_action": "retrieve_local",
+          "parent_aspect_id": "Q2-U1",
+          "parent_question_id": "Q2",
+          "question_id": "Q2.1",
+          "reading_sufficient": false,
+          "remaining_gap": "『憾』字的具體情緒指向（遺憾殺之未成，還是怨恨）未見注釋說明，影響對王祥跪前請死之動機的深層理解。",
+          "state": "unexplained",
+          "story_span": "知母憾之不巳",
+          "supporting_refs": [],
+          "terminal_reason": "semantic_failed",
+          "working_answer": ""
+        },
+        {
+          "active": false,
+          "evidence_round_refs": [
+            {
+              "refs": [
+                "L02"
+              ],
+              "round": 1
+            }
+          ],
+          "evidence_rounds": 1,
+          "failure_type": null,
+          "gap": "後母突然暗殺王祥的具體動機或事件背景未明，影響對後母心理及家庭衝突的理解",
+          "historical_verification_open": false,
+          "last_round": 1,
+          "next_action": "stop",
+          "parent_aspect_id": null,
+          "parent_question_id": null,
+          "question_id": "Q3",
+          "reading_sufficient": true,
+          "remaining_gap": null,
+          "state": "substantially_explained",
+          "story_span": "母自徃闇斫\n之",
+          "supporting_refs": [
+            "L02"
+          ],
+          "terminal_reason": "reading_sufficient",
+          "working_answer": "後母朱氏為繼室，生覽，對王祥屢加讒害、非理使喚並虐待，提供了她暗殺王祥的家庭衝突背景。"
+        }
+      ],
+      "rejected_claims": [],
+      "rejected_evidence": [],
+      "rejected_gaps": [],
+      "resolution_sources": [
+        "liu_resolved",
+        "unresolved"
+      ],
+      "retrieval_attempts": {
+        "Q1": 0,
+        "Q2": 0,
+        "Q2.1": 1,
+        "Q3": 0
+      },
+      "retrieved_refs": [
+        "jinshu:001-benji-001",
+        "jinshu:003-benji-001",
+        "jinshu:087-liezhuan-001",
+        "s1:s1-assertion-08e4f67c0729cdeb0894",
+        "s1:s1-assertion-14b58bffabcc8478acde",
+        "s1:s1-assertion-60c66a08f8f4cd10632f",
+        "sanguozhi:sgz1-juan-002-000043",
+        "sanguozhi:sgz1-juan-013-000082",
+        "sanguozhi:sgz1-juan-019-000022",
+        "shishuo:01-dexing-003:main",
+        "shishuo:01-dexing-008:main",
+        "shishuo:01-dexing-013:liu:annotation-003"
+      ],
+      "round_metrics": [
+        {
+          "D_t": 1,
+          "G_t": 3,
+          "N_t": 1.0,
+          "Q_t": 1,
+          "new_used_evidence_refs": [
+            "L02",
+            "L06",
+            "L07"
+          ],
+          "question_metrics": [
+            {
+              "D_t": 1,
+              "N_t": 1.0,
+              "Q_t": 0,
+              "active": false,
+              "conflict_fingerprints": [],
+              "d_basis": "validated_evidence_change",
+              "new_used_evidence_refs": [
+                "L06",
+                "L07"
+              ],
+              "question_id": "Q1",
+              "reading_sufficient": true,
+              "round": 1,
+              "used_evidence_refs": [
+                "L06",
+                "L07"
+              ]
+            },
+            {
+              "D_t": 0,
+              "N_t": 0.0,
+              "Q_t": 1,
+              "active": true,
+              "conflict_fingerprints": [],
+              "d_basis": "none",
+              "new_used_evidence_refs": [],
+              "question_id": "Q2",
+              "reading_sufficient": false,
+              "round": 1,
+              "used_evidence_refs": []
+            },
+            {
+              "D_t": 1,
+              "N_t": 1.0,
+              "Q_t": 0,
+              "active": false,
+              "conflict_fingerprints": [],
+              "d_basis": "validated_evidence_change",
+              "new_used_evidence_refs": [
+                "L02"
+              ],
+              "question_id": "Q3",
+              "reading_sufficient": true,
+              "round": 1,
+              "used_evidence_refs": [
+                "L02"
+              ]
+            }
+          ],
+          "retrieval": false,
+          "round": 1,
+          "used_evidence_refs": [
+            "L02",
+            "L06",
+            "L07"
+          ]
+        },
+        {
+          "D_t": 0,
+          "G_t": 1,
+          "N_t": 0.0,
+          "Q_t": 0,
+          "new_used_evidence_refs": [],
+          "opened_evidence_count": 5,
+          "question_metrics": [],
+          "retrieval": true,
+          "retrieved_evidence_count": 12,
+          "round": 2,
+          "used_evidence_refs": []
+        }
+      ],
+      "rounds_executed": [
+        0,
+        1,
+        2
+      ],
+      "run_id": "srm0-5-live-8973919122815c2c",
+      "search_trace_count": 1,
+      "searched_corpora": [
+        "世說新語",
+        "余嘉錫箋疏",
+        "晉書",
+        "三國志",
+        "資治通鑑",
+        "資治通鑑考異"
+      ],
+      "semantic_failed_questions": [
+        "Q2.1"
+      ],
+      "story_id": "01-dexing-014",
+      "story_status": "semantic_partial_failure",
+      "story_text": "王祥事後母朱夫人甚謹\n\n\n\n家有一李樹結子殊好母恒使守之時風雨\n忽至祥抱樹而泣\n祥嘗在别牀眠母自徃闇斫\n之值祥私起空斫得被既還知母憾之不巳因跪前\n\n請死母於是感悟愛之如己子",
+      "stratum": "rich_commentary",
+      "structural_normalizations": [
+        {
+          "action": "normalize_whitespace",
+          "normalized": "時風雨\n忽至祥抱樹而泣",
+          "original": "時風雨忽至祥抱樹而泣",
+          "path": "$.gaps[0].story_span",
+          "reason": "span whitespace aligned to canonical Story text",
+          "stage": "initial"
+        },
+        {
+          "action": "normalize_whitespace",
+          "normalized": "母自徃闇斫\n之",
+          "original": "母自徃闇斫之",
+          "path": "$.gaps[2].story_span",
+          "reason": "span whitespace aligned to canonical Story text",
+          "stage": "initial"
+        }
+      ],
+      "terminal_reason_per_question": {
+        "Q1": "reading_sufficient",
+        "Q2": "refined_to_child",
+        "Q2.1": "semantic_failed",
+        "Q3": "reading_sufficient"
+      },
+      "token_usage": {
+        "completion_tokens": 9606,
+        "prompt_tokens": 4931,
+        "total_tokens": 14537
+      },
+      "transport_errors": [],
+      "transport_metrics": {
+        "connect_timeout_count": 0,
+        "failure_classes": {},
+        "max_successful_latency_seconds": 69.578635,
+        "median_successful_latency_seconds": 24.536309,
+        "read_timeout_count": 0,
+        "server_error_count": 0,
+        "successful_latencies_seconds": [
+          24.536309,
+          69.578635,
+          2.698987
+        ],
+        "tls_failure_count": 0,
+        "transport_request_count": 3,
+        "transport_retry_count": 0,
+        "transport_success_count": 3
+      },
+      "used_evidence": [
+        "L02",
+        "L06",
+        "L07"
+      ]
+    },
+    {
+      "accepted_gaps": [
+        {
+          "gap": "孔融所引典故中胥靡与发明王梦的含义缺失，影响理解其劝谏曹操的用意及曹操惭愧赦免的原因。",
+          "question_id": "Q1",
+          "story_span": "孔融曰禰衡罪同胥靡不能\n發明王之夢"
+        },
+        {
+          "gap": "漁陽摻檛这一鼓曲的来历或情感含义不明，影响理解祢衡借鼓声表达心志及四座改容的深层意义。",
+          "question_id": "Q2",
+          "story_span": "揚枹為漁陽\n\n摻檛"
+        }
+      ],
+      "canonical_write_back": false,
+      "commentary_only_resolution_count": 2,
+      "convergence_status": "converged",
+      "evidence_rounds": [
+        {
+          "D_t": 1,
+          "G_t": 2,
+          "N_t": 1.0,
+          "Q_t": 0,
+          "new_used_evidence_refs": [
+            "J01",
+            "J02",
+            "J04",
+            "L07",
+            "L10",
+            "L11"
+          ],
+          "question_metrics": [
+            {
+              "D_t": 1,
+              "N_t": 1.0,
+              "Q_t": 0,
+              "active": false,
+              "conflict_fingerprints": [],
+              "d_basis": "validated_evidence_change",
+              "new_used_evidence_refs": [
+                "L10",
+                "L11"
+              ],
+              "question_id": "Q1",
+              "reading_sufficient": true,
+              "round": 1,
+              "used_evidence_refs": [
+                "L10",
+                "L11"
+              ]
+            },
+            {
+              "D_t": 1,
+              "N_t": 1.0,
+              "Q_t": 0,
+              "active": false,
+              "conflict_fingerprints": [
+                "811ac08e5c7c3c6e59e2c89bfcb7ec74caf46c87118e2cc4dac95bcb15b02693",
+                "f41680804718d99bf273a17e9a877cd24a6e76ebded2e904623b1febced92a3a"
+              ],
+              "d_basis": "validated_evidence_change",
+              "new_used_evidence_refs": [
+                "J01",
+                "J02",
+                "J04",
+                "L07"
+              ],
+              "question_id": "Q2",
+              "reading_sufficient": true,
+              "round": 1,
+              "used_evidence_refs": [
+                "J01",
+                "J02",
+                "J04",
+                "L07"
+              ]
+            }
+          ],
+          "retrieval": false,
+          "round": 1,
+          "used_evidence_refs": [
+            "J01",
+            "J02",
+            "J04",
+            "L07",
+            "L10",
+            "L11"
+          ]
+        }
+      ],
+      "execution_kind": "live_model",
+      "external_retrieval_required_count": 0,
+      "external_search_performed": false,
+      "initial_gaps": [
+        {
+          "gap": "孔融所引典故中胥靡与发明王梦的含义缺失，影响理解其劝谏曹操的用意及曹操惭愧赦免的原因。",
+          "question_id": "Q1",
+          "story_span": "孔融曰禰衡罪同胥靡不能\n發明王之夢"
+        },
+        {
+          "gap": "漁陽摻檛这一鼓曲的来历或情感含义不明，影响理解祢衡借鼓声表达心志及四座改容的深层意义。",
+          "question_id": "Q2",
+          "story_span": "揚枹為漁陽\n\n摻檛"
+        }
+      ],
+      "jianshu_chars": 964,
+      "latency_seconds": {
+        "max": 69.075417,
+        "mean": 46.5318465,
+        "median": 46.5318465,
+        "successful": [
+          23.988276,
+          69.075417
+        ]
+      },
+      "liu_block_count": 11,
+      "main_text_chars": 70,
+      "new_used_evidence": [
+        "J01",
+        "J02",
+        "J04",
+        "L07",
+        "L10",
+        "L11"
+      ],
+      "opened_refs": [],
+      "protocol_errors": [],
+      "question_metrics": {
+        "converged_question_count": 2,
+        "evaluable_question_count": 2,
+        "evidence_saturated_question_count": 0,
+        "hard_cap_question_count": 0,
+        "not_worth_pursuing_question_count": 0,
+        "protocol_failed_question_count": 0,
+        "reading_sufficient_question_count": 2,
+        "semantic_failed_question_count": 0,
+        "stable_conflict_question_count": 0,
+        "terminal_state_counts": {
+          "reading_sufficient": 2
+        },
+        "transport_failed_question_count": 0,
+        "unresolved_question_count": 0,
+        "unresolved_terminal_question_count": 0,
+        "valid_question_count": 2
+      },
+      "question_resolution_sources": {
+        "Q1": [
+          "liu_resolved"
+        ],
+        "Q2": [
+          "multi_source_resolved"
+        ]
+      },
+      "questions": [
+        {
+          "active": false,
+          "evidence_round_refs": [
+            {
+              "refs": [
+                "L10",
+                "L11"
+              ],
+              "round": 1
+            }
+          ],
+          "evidence_rounds": 1,
+          "failure_type": null,
+          "gap": "孔融所引典故中胥靡与发明王梦的含义缺失，影响理解其劝谏曹操的用意及曹操惭愧赦免的原因。",
+          "historical_verification_open": false,
+          "last_round": 1,
+          "next_action": "stop",
+          "parent_aspect_id": null,
+          "parent_question_id": null,
+          "question_id": "Q1",
+          "reading_sufficient": true,
+          "remaining_gap": null,
+          "state": "substantially_explained",
+          "story_span": "孔融曰禰衡罪同胥靡不能\n發明王之夢",
+          "supporting_refs": [
+            "L10",
+            "L11"
+          ],
+          "terminal_reason": "reading_sufficient",
+          "working_answer": "劉孝標注解釋了「胥靡」為刑徒，並引武丁夢得傅說的典故說明「發明王之夢」的含義，使孔融勸諫之意可解。"
+        },
+        {
+          "active": false,
+          "evidence_round_refs": [
+            {
+              "refs": [
+                "J01",
+                "J02",
+                "J04",
+                "L07"
+              ],
+              "round": 1
+            }
+          ],
+          "evidence_rounds": 1,
+          "failure_type": null,
+          "gap": "漁陽摻檛这一鼓曲的来历或情感含义不明，影响理解祢衡借鼓声表达心志及四座改容的深层意义。",
+          "historical_verification_open": true,
+          "last_round": 1,
+          "next_action": "stop",
+          "parent_aspect_id": null,
+          "parent_question_id": null,
+          "question_id": "Q2",
+          "reading_sufficient": true,
+          "remaining_gap": "「漁陽」作為鼓曲名的具體來由仍未說明，但由所引鼓歌可感知其邊地蒼涼意涵，對理解正文影響不大。",
+          "state": "conflicted",
+          "story_span": "揚枹為漁陽\n\n摻檛",
+          "supporting_refs": [
+            "J01",
+            "J02",
+            "J04",
+            "L07"
+          ],
+          "terminal_reason": "reading_sufficient",
+          "working_answer": "余嘉錫箋疏及所引李慈銘說詳考「摻檛」的異文、讀音與含義，指出它或以鼓杖三擊為名，或為鼓曲名，並引鼓歌暗示其邊塞蒼涼之情。"
+        }
+      ],
+      "rejected_claims": [],
+      "rejected_evidence": [],
+      "rejected_gaps": [],
+      "resolution_sources": [
+        "liu_resolved",
+        "multi_source_resolved"
+      ],
+      "retrieval_attempts": {
+        "Q1": 0,
+        "Q2": 0
+      },
+      "retrieved_refs": [],
+      "round_metrics": [
+        {
+          "D_t": 1,
+          "G_t": 2,
+          "N_t": 1.0,
+          "Q_t": 0,
+          "new_used_evidence_refs": [
+            "J01",
+            "J02",
+            "J04",
+            "L07",
+            "L10",
+            "L11"
+          ],
+          "question_metrics": [
+            {
+              "D_t": 1,
+              "N_t": 1.0,
+              "Q_t": 0,
+              "active": false,
+              "conflict_fingerprints": [],
+              "d_basis": "validated_evidence_change",
+              "new_used_evidence_refs": [
+                "L10",
+                "L11"
+              ],
+              "question_id": "Q1",
+              "reading_sufficient": true,
+              "round": 1,
+              "used_evidence_refs": [
+                "L10",
+                "L11"
+              ]
+            },
+            {
+              "D_t": 1,
+              "N_t": 1.0,
+              "Q_t": 0,
+              "active": false,
+              "conflict_fingerprints": [
+                "811ac08e5c7c3c6e59e2c89bfcb7ec74caf46c87118e2cc4dac95bcb15b02693",
+                "f41680804718d99bf273a17e9a877cd24a6e76ebded2e904623b1febced92a3a"
+              ],
+              "d_basis": "validated_evidence_change",
+              "new_used_evidence_refs": [
+                "J01",
+                "J02",
+                "J04",
+                "L07"
+              ],
+              "question_id": "Q2",
+              "reading_sufficient": true,
+              "round": 1,
+              "used_evidence_refs": [
+                "J01",
+                "J02",
+                "J04",
+                "L07"
+              ]
+            }
+          ],
+          "retrieval": false,
+          "round": 1,
+          "used_evidence_refs": [
+            "J01",
+            "J02",
+            "J04",
+            "L07",
+            "L10",
+            "L11"
+          ]
+        }
+      ],
+      "rounds_executed": [
+        0,
+        1
+      ],
+      "run_id": "srm0-5-live-f9af4657cc57ed11",
+      "search_trace_count": 0,
+      "searched_corpora": [],
+      "semantic_failed_questions": [],
+      "story_id": "02-yanyu-008",
+      "story_status": "converged",
+      "story_text": "禰衡被魏武謫為鼓吏正月半試鼓衡揚枹為漁陽\n\n摻檛淵淵有金石聲四坐為之改容\n\n\n\n\n\n\n\n孔融曰禰衡罪同胥靡不能\n發明王之夢\n\n魏武慚而\n赦之",
+      "stratum": "rich_commentary",
+      "structural_normalizations": [
+        {
+          "action": "normalize_whitespace",
+          "normalized": "孔融曰禰衡罪同胥靡不能\n發明王之夢",
+          "original": "孔融曰禰衡罪同胥靡不能發明王之夢",
+          "path": "$.gaps[0].story_span",
+          "reason": "span whitespace aligned to canonical Story text",
+          "stage": "initial"
+        },
+        {
+          "action": "normalize_whitespace",
+          "normalized": "揚枹為漁陽\n\n摻檛",
+          "original": "揚枹為漁陽摻檛",
+          "path": "$.gaps[1].story_span",
+          "reason": "span whitespace aligned to canonical Story text",
+          "stage": "initial"
+        }
+      ],
+      "terminal_reason_per_question": {
+        "Q1": "reading_sufficient",
+        "Q2": "reading_sufficient"
+      },
+      "token_usage": {
+        "completion_tokens": 9886,
+        "prompt_tokens": 2847,
+        "total_tokens": 12733
+      },
+      "transport_errors": [],
+      "transport_metrics": {
+        "connect_timeout_count": 0,
+        "failure_classes": {},
+        "max_successful_latency_seconds": 69.075417,
+        "median_successful_latency_seconds": 46.5318465,
+        "read_timeout_count": 0,
+        "server_error_count": 0,
+        "successful_latencies_seconds": [
+          23.988276,
+          69.075417
+        ],
+        "tls_failure_count": 0,
+        "transport_request_count": 2,
+        "transport_retry_count": 0,
+        "transport_success_count": 2
+      },
+      "used_evidence": [
+        "J01",
+        "J02",
+        "J04",
+        "L07",
+        "L10",
+        "L11"
+      ]
+    },
+    {
+      "accepted_gaps": [
+        {
+          "gap": "嗣宗指代阮籍的字，缺失这一指代信息会导致此句主语不明，误以为文王另言他人。",
+          "question_id": "Q1",
+          "story_span": "文王曰嗣\n\n宗毁頓如此"
+        },
+        {
+          "gap": "文王以阮籍有疾为辩护，但正文未明示阮籍有疾，缺失“毁顿”与“有疾”之间关联的理解，会影响辩护逻辑。",
+          "question_id": "Q2",
+          "story_span": "且有疾而飲酒食\n肉固喪禮也"
+        }
+      ],
+      "canonical_write_back": false,
+      "commentary_only_resolution_count": 2,
+      "convergence_status": "converged",
+      "evidence_rounds": [
+        {
+          "D_t": 1,
+          "G_t": 2,
+          "N_t": 1.0,
+          "Q_t": 0,
+          "new_used_evidence_refs": [
+            "L06"
+          ],
+          "question_metrics": [
+            {
+              "D_t": 0,
+              "N_t": 0.0,
+              "Q_t": 0,
+              "active": false,
+              "conflict_fingerprints": [],
+              "d_basis": "none",
+              "new_used_evidence_refs": [],
+              "question_id": "Q1",
+              "reading_sufficient": true,
+              "round": 1,
+              "used_evidence_refs": []
+            },
+            {
+              "D_t": 1,
+              "N_t": 1.0,
+              "Q_t": 0,
+              "active": false,
+              "conflict_fingerprints": [],
+              "d_basis": "validated_evidence_change",
+              "new_used_evidence_refs": [
+                "L06"
+              ],
+              "question_id": "Q2",
+              "reading_sufficient": true,
+              "round": 1,
+              "used_evidence_refs": [
+                "L06"
+              ]
+            }
+          ],
+          "retrieval": false,
+          "round": 1,
+          "used_evidence_refs": [
+            "L06"
+          ]
+        }
+      ],
+      "execution_kind": "live_model",
+      "external_retrieval_required_count": 0,
+      "external_search_performed": false,
+      "initial_gaps": [
+        {
+          "gap": "嗣宗指代阮籍的字，缺失这一指代信息会导致此句主语不明，误以为文王另言他人。",
+          "question_id": "Q1",
+          "story_span": "文王曰嗣\n\n宗毁頓如此"
+        },
+        {
+          "gap": "文王以阮籍有疾为辩护，但正文未明示阮籍有疾，缺失“毁顿”与“有疾”之间关联的理解，会影响辩护逻辑。",
+          "question_id": "Q2",
+          "story_span": "且有疾而飲酒食\n肉固喪禮也"
+        }
+      ],
+      "jianshu_chars": 533,
+      "latency_seconds": {
+        "max": 36.928033,
+        "mean": 29.578882,
+        "median": 29.578882,
+        "successful": [
+          36.928033,
+          22.229731
+        ]
+      },
+      "liu_block_count": 6,
+      "main_text_chars": 96,
+      "new_used_evidence": [
+        "L06"
+      ],
+      "opened_refs": [],
+      "protocol_errors": [],
+      "question_metrics": {
+        "converged_question_count": 2,
+        "evaluable_question_count": 2,
+        "evidence_saturated_question_count": 0,
+        "hard_cap_question_count": 0,
+        "not_worth_pursuing_question_count": 0,
+        "protocol_failed_question_count": 0,
+        "reading_sufficient_question_count": 2,
+        "semantic_failed_question_count": 0,
+        "stable_conflict_question_count": 0,
+        "terminal_state_counts": {
+          "reading_sufficient": 2
+        },
+        "transport_failed_question_count": 0,
+        "unresolved_question_count": 0,
+        "unresolved_terminal_question_count": 0,
+        "valid_question_count": 2
+      },
+      "question_resolution_sources": {
+        "Q1": [
+          "main_text_self_resolved"
+        ],
+        "Q2": [
+          "liu_resolved"
+        ]
+      },
+      "questions": [
+        {
+          "active": false,
+          "evidence_round_refs": [
+            {
+              "refs": [],
+              "round": 1
+            }
+          ],
+          "evidence_rounds": 1,
+          "failure_type": null,
+          "gap": "嗣宗指代阮籍的字，缺失这一指代信息会导致此句主语不明，误以为文王另言他人。",
+          "historical_verification_open": false,
+          "last_round": 1,
+          "next_action": "stop",
+          "parent_aspect_id": null,
+          "parent_question_id": null,
+          "question_id": "Q1",
+          "reading_sufficient": true,
+          "remaining_gap": "注释未直接说明嗣宗为阮籍之字，但正文前文有阮籍遭母丧，可推断。",
+          "state": "substantially_explained",
+          "story_span": "文王曰嗣\n\n宗毁頓如此",
+          "supporting_refs": [],
+          "terminal_reason": "reading_sufficient",
+          "working_answer": ""
+        },
+        {
+          "active": false,
+          "evidence_round_refs": [
+            {
+              "refs": [
+                "L06"
+              ],
+              "round": 1
+            }
+          ],
+          "evidence_rounds": 1,
+          "failure_type": null,
+          "gap": "文王以阮籍有疾为辩护，但正文未明示阮籍有疾，缺失“毁顿”与“有疾”之间关联的理解，会影响辩护逻辑。",
+          "historical_verification_open": false,
+          "last_round": 1,
+          "next_action": "stop",
+          "parent_aspect_id": null,
+          "parent_question_id": null,
+          "question_id": "Q2",
+          "reading_sufficient": true,
+          "remaining_gap": null,
+          "state": "substantially_explained",
+          "story_span": "且有疾而飲酒食\n肉固喪禮也",
+          "supporting_refs": [
+            "L06"
+          ],
+          "terminal_reason": "reading_sufficient",
+          "working_answer": "注释以“毁几灭性”解释阮籍的毁顿程度，为“有疾”提供了依据。"
+        }
+      ],
+      "rejected_claims": [],
+      "rejected_evidence": [],
+      "rejected_gaps": [],
+      "resolution_sources": [
+        "liu_resolved",
+        "main_text_self_resolved"
+      ],
+      "retrieval_attempts": {
+        "Q1": 0,
+        "Q2": 0
+      },
+      "retrieved_refs": [],
+      "round_metrics": [
+        {
+          "D_t": 1,
+          "G_t": 2,
+          "N_t": 1.0,
+          "Q_t": 0,
+          "new_used_evidence_refs": [
+            "L06"
+          ],
+          "question_metrics": [
+            {
+              "D_t": 0,
+              "N_t": 0.0,
+              "Q_t": 0,
+              "active": false,
+              "conflict_fingerprints": [],
+              "d_basis": "none",
+              "new_used_evidence_refs": [],
+              "question_id": "Q1",
+              "reading_sufficient": true,
+              "round": 1,
+              "used_evidence_refs": []
+            },
+            {
+              "D_t": 1,
+              "N_t": 1.0,
+              "Q_t": 0,
+              "active": false,
+              "conflict_fingerprints": [],
+              "d_basis": "validated_evidence_change",
+              "new_used_evidence_refs": [
+                "L06"
+              ],
+              "question_id": "Q2",
+              "reading_sufficient": true,
+              "round": 1,
+              "used_evidence_refs": [
+                "L06"
+              ]
+            }
+          ],
+          "retrieval": false,
+          "round": 1,
+          "used_evidence_refs": [
+            "L06"
+          ]
+        }
+      ],
+      "rounds_executed": [
+        0,
+        1
+      ],
+      "run_id": "srm0-5-live-06ee1be607ea41e9",
+      "search_trace_count": 0,
+      "searched_corpora": [],
+      "semantic_failed_questions": [],
+      "story_id": "23-rendan-002",
+      "story_status": "converged",
+      "story_text": "阮籍遭母喪在晉文王坐進酒肉司隷何曽亦在坐\n\n曰明公方以孝治天下而阮籍以重喪顯\n於公坐飲酒食肉宐流之海外以正風教文王曰嗣\n\n宗毁頓如此君不能共憂之何謂且有疾而飲酒食\n肉固喪禮也籍飲噉不輟神色自若",
+      "stratum": "rich_commentary",
+      "structural_normalizations": [
+        {
+          "action": "normalize_whitespace",
+          "normalized": "文王曰嗣\n\n宗毁頓如此",
+          "original": "文王曰嗣宗毁頓如此",
+          "path": "$.gaps[0].story_span",
+          "reason": "span whitespace aligned to canonical Story text",
+          "stage": "initial"
+        },
+        {
+          "action": "normalize_whitespace",
+          "normalized": "且有疾而飲酒食\n肉固喪禮也",
+          "original": "且有疾而飲酒食肉固喪禮也",
+          "path": "$.gaps[1].story_span",
+          "reason": "span whitespace aligned to canonical Story text",
+          "stage": "initial"
+        }
+      ],
+      "terminal_reason_per_question": {
+        "Q1": "reading_sufficient",
+        "Q2": "reading_sufficient"
+      },
+      "token_usage": {
+        "completion_tokens": 5357,
+        "prompt_tokens": 2089,
+        "total_tokens": 7446
+      },
+      "transport_errors": [],
+      "transport_metrics": {
+        "connect_timeout_count": 0,
+        "failure_classes": {},
+        "max_successful_latency_seconds": 36.928033,
+        "median_successful_latency_seconds": 29.578882,
+        "read_timeout_count": 0,
+        "server_error_count": 0,
+        "successful_latencies_seconds": [
+          36.928033,
+          22.229731
+        ],
+        "tls_failure_count": 0,
+        "transport_request_count": 2,
+        "transport_retry_count": 0,
+        "transport_success_count": 2
+      },
+      "used_evidence": [
+        "L06"
+      ]
+    },
+    {
+      "accepted_gaps": [
+        {
+          "gap": "缺少商鞅與清言/務實政治之間對比關係的交代，否則謝的反駁邏輯不清楚。",
+          "question_id": "Q1",
+          "story_span": "秦任商鞅二世而亡\n豈清言致患邪"
+        },
+        {
+          "gap": "缺少『高世之志』與下文『虛談廢務』之間的指涉鏈接，否則王批評的靶子不明確。",
+          "question_id": "Q2",
+          "story_span": "謝悠然逺想有髙世之志"
+        },
+        {
+          "gap": "缺少『謝太傅』稱號與謝當時是否任職的關係，否則『人人自效』的勸勉對象容易被誤解。",
+          "question_id": "Q3",
+          "story_span": "王右軍與謝太傅共登冶城"
+        }
+      ],
+      "canonical_write_back": false,
+      "commentary_only_resolution_count": 0,
+      "convergence_status": "converged",
+      "evidence_rounds": [
+        {
+          "D_t": 1,
+          "G_t": 3,
+          "N_t": 1.0,
+          "Q_t": 1,
+          "new_used_evidence_refs": [
+            "J02",
+            "J03",
+            "J04",
+            "L07"
+          ],
+          "question_metrics": [
+            {
+              "D_t": 1,
+              "N_t": 1.0,
+              "Q_t": 1,
+              "active": true,
+              "conflict_fingerprints": [
+                "de82972ee0d0a2f82c15ac83765f5c7a60df6d33b9e317d0008ebb817d210acf"
+              ],
+              "d_basis": "validated_evidence_change",
+              "new_used_evidence_refs": [
+                "J03",
+                "L07"
+              ],
+              "question_id": "Q1",
+              "reading_sufficient": false,
+              "round": 1,
+              "used_evidence_refs": [
+                "J03",
+                "L07"
+              ]
+            },
+            {
+              "D_t": 0,
+              "N_t": 0.0,
+              "Q_t": 1,
+              "active": true,
+              "conflict_fingerprints": [],
+              "d_basis": "none",
+              "new_used_evidence_refs": [],
+              "question_id": "Q2",
+              "reading_sufficient": false,
+              "round": 1,
+              "used_evidence_refs": []
+            },
+            {
+              "D_t": 1,
+              "N_t": 1.0,
+              "Q_t": 0,
+              "active": false,
+              "conflict_fingerprints": [
+                "df8ff88020d262b3a37de903bcd5cc7e9c0537dfa2db983d4efda47e8ce44037"
+              ],
+              "d_basis": "validated_evidence_change",
+              "new_used_evidence_refs": [
+                "J02",
+                "J04"
+              ],
+              "question_id": "Q3",
+              "reading_sufficient": false,
+              "round": 1,
+              "used_evidence_refs": [
+                "J02",
+                "J04"
+              ]
+            }
+          ],
+          "retrieval": false,
+          "round": 1,
+          "used_evidence_refs": [
+            "J02",
+            "J03",
+            "J04",
+            "L07"
+          ]
+        },
+        {
+          "D_t": 0,
+          "G_t": 2,
+          "N_t": 0.0,
+          "Q_t": 0,
+          "new_used_evidence_refs": [],
+          "opened_evidence_count": 5,
+          "question_metrics": [
+            {
+              "D_t": 0,
+              "N_t": 0.0,
+              "Q_t": 0,
+              "active": false,
+              "conflict_fingerprints": [],
+              "d_basis": "none",
+              "new_used_evidence_refs": [],
+              "question_id": "Q1.1",
+              "reading_sufficient": true,
+              "round": 2,
+              "used_evidence_refs": []
+            },
+            {
+              "D_t": 0,
+              "N_t": 0.0,
+              "Q_t": 0,
+              "active": false,
+              "conflict_fingerprints": [],
+              "d_basis": "none",
+              "new_used_evidence_refs": [],
+              "question_id": "Q2.1",
+              "reading_sufficient": true,
+              "round": 2,
+              "used_evidence_refs": []
+            }
+          ],
+          "retrieval": true,
+          "retrieved_evidence_count": 23,
+          "round": 2,
+          "used_evidence_refs": []
+        }
+      ],
+      "execution_kind": "live_model",
+      "external_retrieval_required_count": 2,
+      "external_search_performed": false,
+      "initial_gaps": [
+        {
+          "gap": "缺少商鞅與清言/務實政治之間對比關係的交代，否則謝的反駁邏輯不清楚。",
+          "question_id": "Q1",
+          "story_span": "秦任商鞅二世而亡\n豈清言致患邪"
+        },
+        {
+          "gap": "缺少『高世之志』與下文『虛談廢務』之間的指涉鏈接，否則王批評的靶子不明確。",
+          "question_id": "Q2",
+          "story_span": "謝悠然逺想有髙世之志"
+        },
+        {
+          "gap": "缺少『謝太傅』稱號與謝當時是否任職的關係，否則『人人自效』的勸勉對象容易被誤解。",
+          "question_id": "Q3",
+          "story_span": "王右軍與謝太傅共登冶城"
+        }
+      ],
+      "jianshu_chars": 602,
+      "latency_seconds": {
+        "max": 138.748223,
+        "mean": 85.13825833333333,
+        "median": 82.410924,
+        "successful": [
+          138.748223,
+          82.410924,
+          34.255628
+        ]
+      },
+      "liu_block_count": 7,
+      "main_text_chars": 90,
+      "new_used_evidence": [
+        "J02",
+        "J03",
+        "J04",
+        "L07"
+      ],
+      "opened_refs": [
+        "jinshu:030-zhi-001",
+        "jinshu:046-liezhuan-001",
+        "jinshu:049-liezhuan-001",
+        "jinshu:056-liezhuan-002",
+        "jinshu:079-liezhuan-002",
+        "s1:s1-assertion-3f305ef663b5e7151e7c",
+        "sanguozhi:sgz1-juan-002-000043",
+        "sanguozhi:sgz1-juan-020-000083",
+        "sanguozhi:sgz1-juan-025-000022"
+      ],
+      "protocol_errors": [],
+      "question_metrics": {
+        "converged_question_count": 3,
+        "evaluable_question_count": 3,
+        "evidence_saturated_question_count": 0,
+        "hard_cap_question_count": 0,
+        "not_worth_pursuing_question_count": 1,
+        "protocol_failed_question_count": 0,
+        "reading_sufficient_question_count": 2,
+        "semantic_failed_question_count": 0,
+        "stable_conflict_question_count": 0,
+        "terminal_state_counts": {
+          "not_worth_pursuing": 1,
+          "reading_sufficient": 2
+        },
+        "transport_failed_question_count": 0,
+        "unresolved_question_count": 0,
+        "unresolved_terminal_question_count": 0,
+        "valid_question_count": 3
+      },
+      "question_resolution_sources": {
+        "Q1": [
+          "multi_source_resolved"
+        ],
+        "Q1.1": [
+          "main_text_self_resolved"
+        ],
+        "Q2": [
+          "unresolved"
+        ],
+        "Q2.1": [
+          "main_text_self_resolved"
+        ],
+        "Q3": [
+          "jianshu_resolved"
+        ]
+      },
+      "questions": [
+        {
+          "active": false,
+          "evidence_round_refs": [
+            {
+              "refs": [
+                "J03",
+                "L07"
+              ],
+              "round": 1
+            }
+          ],
+          "evidence_rounds": 1,
+          "failure_type": null,
+          "gap": "缺少商鞅與清言/務實政治之間對比關係的交代，否則謝的反駁邏輯不清楚。",
+          "historical_verification_open": true,
+          "last_round": 1,
+          "next_action": "retrieve_local",
+          "parent_aspect_id": null,
+          "parent_question_id": null,
+          "question_id": "Q1",
+          "reading_sufficient": false,
+          "remaining_gap": "商鞅与清言/务实政治之间的对比关系未交代。谢安用‘秦任商鞅，二世而亡’来反驳‘清言致患’，其逻辑是：秦以法家治国而亡，可见亡国非因清言。但此意须读者自行推理，注释未点明。",
+          "state": "conflicted",
+          "story_span": "秦任商鞅二世而亡\n豈清言致患邪",
+          "supporting_refs": [
+            "J03",
+            "L07"
+          ],
+          "terminal_reason": "refined_to_child",
+          "working_answer": "刘孝标注引策文说明了商鞅的出身与封地。"
+        },
+        {
+          "active": false,
+          "evidence_round_refs": [
+            {
+              "refs": [],
+              "round": 2
+            }
+          ],
+          "evidence_rounds": 1,
+          "failure_type": null,
+          "gap": "商鞅与清言/务实政治之间的对比关系未交代。谢安用‘秦任商鞅，二世而亡’来反驳‘清言致患’，其逻辑是：秦以法家治国而亡，可见亡国非因清言。但此意须读者自行推理，注释未点明。",
+          "historical_verification_open": false,
+          "last_round": 2,
+          "next_action": "stop",
+          "parent_aspect_id": "Q1-U1",
+          "parent_question_id": "Q1",
+          "question_id": "Q1.1",
+          "reading_sufficient": true,
+          "remaining_gap": null,
+          "state": "substantially_explained",
+          "story_span": "秦任商鞅二世而亡\n豈清言致患邪",
+          "supporting_refs": [],
+          "terminal_reason": "reading_sufficient",
+          "working_answer": ""
+        },
+        {
+          "active": false,
+          "evidence_round_refs": [
+            {
+              "refs": [],
+              "round": 1
+            }
+          ],
+          "evidence_rounds": 1,
+          "failure_type": null,
+          "gap": "缺少『高世之志』與下文『虛談廢務』之間的指涉鏈接，否則王批評的靶子不明確。",
+          "historical_verification_open": false,
+          "last_round": 1,
+          "next_action": "retrieve_local",
+          "parent_aspect_id": null,
+          "parent_question_id": null,
+          "question_id": "Q2",
+          "reading_sufficient": false,
+          "remaining_gap": "刘注未解释谢安‘高世之志’的具体内涵，也未说明王羲之将‘高世之志’视为‘虚谈废务’的原因，导致批评对象不明。",
+          "state": "unexplained",
+          "story_span": "謝悠然逺想有髙世之志",
+          "supporting_refs": [],
+          "terminal_reason": "refined_to_child",
+          "working_answer": ""
+        },
+        {
+          "active": false,
+          "evidence_round_refs": [
+            {
+              "refs": [],
+              "round": 2
+            }
+          ],
+          "evidence_rounds": 1,
+          "failure_type": null,
+          "gap": "刘注未解释谢安‘高世之志’的具体内涵，也未说明王羲之将‘高世之志’视为‘虚谈废务’的原因，导致批评对象不明。",
+          "historical_verification_open": false,
+          "last_round": 2,
+          "next_action": "stop",
+          "parent_aspect_id": "Q2-U1",
+          "parent_question_id": "Q2",
+          "question_id": "Q2.1",
+          "reading_sufficient": true,
+          "remaining_gap": null,
+          "state": "substantially_explained",
+          "story_span": "謝悠然逺想有髙世之志",
+          "supporting_refs": [],
+          "terminal_reason": "reading_sufficient",
+          "working_answer": ""
+        },
+        {
+          "active": false,
+          "evidence_round_refs": [
+            {
+              "refs": [
+                "J02",
+                "J04"
+              ],
+              "round": 1
+            }
+          ],
+          "evidence_rounds": 1,
+          "failure_type": null,
+          "gap": "缺少『謝太傅』稱號與謝當時是否任職的關係，否則『人人自效』的勸勉對象容易被誤解。",
+          "historical_verification_open": true,
+          "last_round": 1,
+          "next_action": "stop",
+          "parent_aspect_id": null,
+          "parent_question_id": null,
+          "question_id": "Q3",
+          "reading_sufficient": false,
+          "remaining_gap": "对于谢安当时是否任职，程炎震与姚鼐意见相反，尚无定论。‘谢太傅’为追称，但正文以之称谢安，读者仍可能误以为谢安当时已有官职，影响‘人人自效’的劝勉对象的理解。",
+          "state": "conflicted",
+          "story_span": "王右軍與謝太傅共登冶城",
+          "supporting_refs": [
+            "J02",
+            "J04"
+          ],
+          "terminal_reason": "not_worth_pursuing",
+          "working_answer": "程炎震考证王谢共登冶城可能发生在永和二三年间，当时谢安尚未经事任，王羲之责以自效或有不合。姚鼐认为此事为《世说》之妄，因为王羲之誓墓后不再入都，谢安仕进在王羲之去官后，二人无由共登冶城。"
+        }
+      ],
+      "rejected_claims": [
+        {
+          "path": "$.updates[0].answered_aspects[0]",
+          "question_id": "Q1.1",
+          "reason": "claim_missing_id_or_text"
+        },
+        {
+          "path": "$.updates[0].answered_aspects[1]",
+          "question_id": "Q1.1",
+          "reason": "claim_missing_id_or_text"
+        },
+        {
+          "path": "$.updates[1].answered_aspects[0]",
+          "question_id": "Q2.1",
+          "reason": "claim_missing_id_or_text"
+        },
+        {
+          "path": "$.updates[1].answered_aspects[1]",
+          "question_id": "Q2.1",
+          "reason": "claim_missing_id_or_text"
+        }
+      ],
+      "rejected_evidence": [],
+      "rejected_gaps": [],
+      "resolution_sources": [
+        "jianshu_resolved",
+        "main_text_self_resolved",
+        "multi_source_resolved",
+        "unresolved"
+      ],
+      "retrieval_attempts": {
+        "Q1": 0,
+        "Q1.1": 1,
+        "Q2": 0,
+        "Q2.1": 1,
+        "Q3": 0
+      },
+      "retrieved_refs": [
+        "jinshu:030-zhi-001",
+        "jinshu:046-liezhuan-001",
+        "jinshu:049-liezhuan-001",
+        "jinshu:056-liezhuan-002",
+        "jinshu:079-liezhuan-002",
+        "s1:s1-assertion-038dcb522984c2183e1d",
+        "s1:s1-assertion-08732388ac3d22c3b91f",
+        "s1:s1-assertion-0cbc322ce5598f10a10e",
+        "s1:s1-assertion-3f305ef663b5e7151e7c",
+        "s1:s1-assertion-6b3fbf9e4a052d9f69ee",
+        "s1:s1-assertion-e6934a412981618775e0",
+        "sanguozhi:sgz1-juan-002-000043",
+        "sanguozhi:sgz1-juan-002-000093",
+        "sanguozhi:sgz1-juan-006-000141",
+        "sanguozhi:sgz1-juan-015-000012",
+        "sanguozhi:sgz1-juan-020-000083",
+        "sanguozhi:sgz1-juan-025-000022",
+        "shishuo:01-dexing-026:liu:annotation-002",
+        "shishuo:02-yanyu-059:liu:annotation-003",
+        "shishuo:02-yanyu-062:liu:annotation-001",
+        "shishuo:06-yaliang-011:liu:annotation-002",
+        "shishuo:06-yaliang-028:liu:annotation-002",
+        "shishuo:10-guizhen-002:liu:annotation-006"
+      ],
+      "round_metrics": [
+        {
+          "D_t": 1,
+          "G_t": 3,
+          "N_t": 1.0,
+          "Q_t": 1,
+          "new_used_evidence_refs": [
+            "J02",
+            "J03",
+            "J04",
+            "L07"
+          ],
+          "question_metrics": [
+            {
+              "D_t": 1,
+              "N_t": 1.0,
+              "Q_t": 1,
+              "active": true,
+              "conflict_fingerprints": [
+                "de82972ee0d0a2f82c15ac83765f5c7a60df6d33b9e317d0008ebb817d210acf"
+              ],
+              "d_basis": "validated_evidence_change",
+              "new_used_evidence_refs": [
+                "J03",
+                "L07"
+              ],
+              "question_id": "Q1",
+              "reading_sufficient": false,
+              "round": 1,
+              "used_evidence_refs": [
+                "J03",
+                "L07"
+              ]
+            },
+            {
+              "D_t": 0,
+              "N_t": 0.0,
+              "Q_t": 1,
+              "active": true,
+              "conflict_fingerprints": [],
+              "d_basis": "none",
+              "new_used_evidence_refs": [],
+              "question_id": "Q2",
+              "reading_sufficient": false,
+              "round": 1,
+              "used_evidence_refs": []
+            },
+            {
+              "D_t": 1,
+              "N_t": 1.0,
+              "Q_t": 0,
+              "active": false,
+              "conflict_fingerprints": [
+                "df8ff88020d262b3a37de903bcd5cc7e9c0537dfa2db983d4efda47e8ce44037"
+              ],
+              "d_basis": "validated_evidence_change",
+              "new_used_evidence_refs": [
+                "J02",
+                "J04"
+              ],
+              "question_id": "Q3",
+              "reading_sufficient": false,
+              "round": 1,
+              "used_evidence_refs": [
+                "J02",
+                "J04"
+              ]
+            }
+          ],
+          "retrieval": false,
+          "round": 1,
+          "used_evidence_refs": [
+            "J02",
+            "J03",
+            "J04",
+            "L07"
+          ]
+        },
+        {
+          "D_t": 0,
+          "G_t": 2,
+          "N_t": 0.0,
+          "Q_t": 0,
+          "new_used_evidence_refs": [],
+          "opened_evidence_count": 5,
+          "question_metrics": [
+            {
+              "D_t": 0,
+              "N_t": 0.0,
+              "Q_t": 0,
+              "active": false,
+              "conflict_fingerprints": [],
+              "d_basis": "none",
+              "new_used_evidence_refs": [],
+              "question_id": "Q1.1",
+              "reading_sufficient": true,
+              "round": 2,
+              "used_evidence_refs": []
+            },
+            {
+              "D_t": 0,
+              "N_t": 0.0,
+              "Q_t": 0,
+              "active": false,
+              "conflict_fingerprints": [],
+              "d_basis": "none",
+              "new_used_evidence_refs": [],
+              "question_id": "Q2.1",
+              "reading_sufficient": true,
+              "round": 2,
+              "used_evidence_refs": []
+            }
+          ],
+          "retrieval": true,
+          "retrieved_evidence_count": 23,
+          "round": 2,
+          "used_evidence_refs": []
+        }
+      ],
+      "rounds_executed": [
+        0,
+        1,
+        2
+      ],
+      "run_id": "srm0-5-live-e560ea69d99ff852",
+      "search_trace_count": 2,
+      "searched_corpora": [
+        "世說新語",
+        "余嘉錫箋疏",
+        "晉書",
+        "三國志",
+        "資治通鑑",
+        "資治通鑑考異"
+      ],
+      "semantic_failed_questions": [],
+      "story_id": "02-yanyu-070",
+      "story_status": "converged",
+      "story_text": "王右軍與謝太傅共登冶城\n\n謝悠然逺想有髙世之志王謂謝曰夏禹勤\n王手足胼胝\n文王旰食日不暇給今四郊多\n壘宜人人自效而虛談廢務浮文\n妨要恐非當今所宜謝荅曰秦任商鞅二世而亡\n豈清言致患邪",
+      "stratum": "rich_commentary",
+      "structural_normalizations": [
+        {
+          "action": "normalize_whitespace",
+          "normalized": "秦任商鞅二世而亡\n豈清言致患邪",
+          "original": "秦任商鞅二世而亡豈清言致患邪",
+          "path": "$.gaps[0].story_span",
+          "reason": "span whitespace aligned to canonical Story text",
+          "stage": "initial"
+        }
+      ],
+      "terminal_reason_per_question": {
+        "Q1": "refined_to_child",
+        "Q1.1": "reading_sufficient",
+        "Q2": "refined_to_child",
+        "Q2.1": "reading_sufficient",
+        "Q3": "not_worth_pursuing"
+      },
+      "token_usage": {
+        "completion_tokens": 25304,
+        "prompt_tokens": 4913,
+        "total_tokens": 30217
+      },
+      "transport_errors": [],
+      "transport_metrics": {
+        "connect_timeout_count": 0,
+        "failure_classes": {},
+        "max_successful_latency_seconds": 138.748223,
+        "median_successful_latency_seconds": 82.410924,
+        "read_timeout_count": 0,
+        "server_error_count": 0,
+        "successful_latencies_seconds": [
+          138.748223,
+          82.410924,
+          34.255628
+        ],
+        "tls_failure_count": 0,
+        "transport_request_count": 3,
+        "transport_retry_count": 0,
+        "transport_success_count": 3
+      },
+      "used_evidence": [
+        "J02",
+        "J03",
+        "J04",
+        "L07"
+      ]
+    },
+    {
+      "accepted_gaps": [
+        {
+          "gap": "缺少『虎㹠虎犢』是具體人物小字還是比喻的說明，若不確定，無法判斷王導是在點名還是在泛論子姪。",
+          "question_id": "Q1",
+          "story_span": "云虎㹠虎犢"
+        },
+        {
+          "gap": "缺少『還其所如』的語義或出處，若不理解此語，無法把握王導感嘆的落點與褒貶邏輯。",
+          "question_id": "Q2",
+          "story_span": "還其所如"
+        },
+        {
+          "gap": "缺少王導與王右軍的宗族關係及通信語境，影響理解為何向王右軍傾訴自家子姪不成器，以及此事何以入『輕詆』。",
+          "question_id": "Q3",
+          "story_span": "王右軍在南丞相與書"
+        }
+      ],
+      "canonical_write_back": false,
+      "commentary_only_resolution_count": 2,
+      "convergence_status": "semantic_partial_failure",
+      "evidence_rounds": [
+        {
+          "D_t": 1,
+          "G_t": 3,
+          "N_t": 1.0,
+          "Q_t": 1,
+          "new_used_evidence_refs": [
+            "J02",
+            "L01",
+            "L02"
+          ],
+          "question_metrics": [
+            {
+              "D_t": 1,
+              "N_t": 1.0,
+              "Q_t": 0,
+              "active": false,
+              "conflict_fingerprints": [],
+              "d_basis": "validated_evidence_change",
+              "new_used_evidence_refs": [
+                "L01",
+                "L02"
+              ],
+              "question_id": "Q1",
+              "reading_sufficient": true,
+              "round": 1,
+              "used_evidence_refs": [
+                "L01",
+                "L02"
+              ]
+            },
+            {
+              "D_t": 1,
+              "N_t": 1.0,
+              "Q_t": 0,
+              "active": false,
+              "conflict_fingerprints": [],
+              "d_basis": "validated_evidence_change",
+              "new_used_evidence_refs": [
+                "J02"
+              ],
+              "question_id": "Q2",
+              "reading_sufficient": true,
+              "round": 1,
+              "used_evidence_refs": [
+                "J02"
+              ]
+            },
+            {
+              "D_t": 1,
+              "N_t": 0.0,
+              "Q_t": 1,
+              "active": true,
+              "conflict_fingerprints": [],
+              "d_basis": "validated_evidence_change",
+              "new_used_evidence_refs": [],
+              "question_id": "Q3",
+              "reading_sufficient": false,
+              "round": 1,
+              "used_evidence_refs": [
+                "J02"
+              ]
+            }
+          ],
+          "retrieval": false,
+          "round": 1,
+          "used_evidence_refs": [
+            "J02",
+            "L01",
+            "L02"
+          ]
+        },
+        {
+          "D_t": 0,
+          "G_t": 1,
+          "N_t": 0.0,
+          "Q_t": 0,
+          "new_used_evidence_refs": [],
+          "opened_evidence_count": 5,
+          "question_metrics": [],
+          "retrieval": true,
+          "retrieved_evidence_count": 12,
+          "round": 2,
+          "used_evidence_refs": []
+        }
+      ],
+      "execution_kind": "live_model",
+      "external_retrieval_required_count": 1,
+      "external_search_performed": false,
+      "initial_gaps": [
+        {
+          "gap": "缺少『虎㹠虎犢』是具體人物小字還是比喻的說明，若不確定，無法判斷王導是在點名還是在泛論子姪。",
+          "question_id": "Q1",
+          "story_span": "云虎㹠虎犢"
+        },
+        {
+          "gap": "缺少『還其所如』的語義或出處，若不理解此語，無法把握王導感嘆的落點與褒貶邏輯。",
+          "question_id": "Q2",
+          "story_span": "還其所如"
+        },
+        {
+          "gap": "缺少王導與王右軍的宗族關係及通信語境，影響理解為何向王右軍傾訴自家子姪不成器，以及此事何以入『輕詆』。",
+          "question_id": "Q3",
+          "story_span": "王右軍在南丞相與書"
+        }
+      ],
+      "jianshu_chars": 124,
+      "latency_seconds": {
+        "max": 126.611923,
+        "mean": 69.68165400000001,
+        "median": 76.96098,
+        "successful": [
+          126.611923,
+          76.96098,
+          5.472059
+        ]
+      },
+      "liu_block_count": 3,
+      "main_text_chars": 25,
+      "new_used_evidence": [
+        "J02",
+        "L01",
+        "L02"
+      ],
+      "opened_refs": [
+        "jinshu:058-liezhuan-002",
+        "jinshu:074-liezhuan-001",
+        "jinshu:080-liezhuan-001",
+        "shishuo:08-shangyu-134:liu:annotation-002",
+        "shishuo:27-jiajue-007:main"
+      ],
+      "protocol_errors": [],
+      "question_metrics": {
+        "converged_question_count": 2,
+        "evaluable_question_count": 3,
+        "evidence_saturated_question_count": 0,
+        "hard_cap_question_count": 0,
+        "not_worth_pursuing_question_count": 0,
+        "protocol_failed_question_count": 0,
+        "reading_sufficient_question_count": 2,
+        "semantic_failed_question_count": 1,
+        "stable_conflict_question_count": 0,
+        "terminal_state_counts": {
+          "reading_sufficient": 2
+        },
+        "transport_failed_question_count": 0,
+        "unresolved_question_count": 0,
+        "unresolved_terminal_question_count": 0,
+        "valid_question_count": 2
+      },
+      "question_resolution_sources": {
+        "Q1": [
+          "liu_resolved"
+        ],
+        "Q2": [
+          "jianshu_resolved"
+        ],
+        "Q3": [
+          "jianshu_resolved"
+        ],
+        "Q3.1": [
+          "unresolved"
+        ]
+      },
+      "questions": [
+        {
+          "active": false,
+          "evidence_round_refs": [
+            {
+              "refs": [
+                "L01",
+                "L02"
+              ],
+              "round": 1
+            }
+          ],
+          "evidence_rounds": 1,
+          "failure_type": null,
+          "gap": "缺少『虎㹠虎犢』是具體人物小字還是比喻的說明，若不確定，無法判斷王導是在點名還是在泛論子姪。",
+          "historical_verification_open": true,
+          "last_round": 1,
+          "next_action": "stop",
+          "parent_aspect_id": null,
+          "parent_question_id": null,
+          "question_id": "Q1",
+          "reading_sufficient": true,
+          "remaining_gap": null,
+          "state": "substantially_explained",
+          "story_span": "云虎㹠虎犢",
+          "supporting_refs": [
+            "L01",
+            "L02"
+          ],
+          "terminal_reason": "reading_sufficient",
+          "working_answer": "虎㹠虎犢是王彭之與王彪之的小字，而非泛論比喻。"
+        },
+        {
+          "active": false,
+          "evidence_round_refs": [
+            {
+              "refs": [
+                "J02"
+              ],
+              "round": 1
+            }
+          ],
+          "evidence_rounds": 1,
+          "failure_type": null,
+          "gap": "缺少『還其所如』的語義或出處，若不理解此語，無法把握王導感嘆的落點與褒貶邏輯。",
+          "historical_verification_open": false,
+          "last_round": 1,
+          "next_action": "stop",
+          "parent_aspect_id": null,
+          "parent_question_id": null,
+          "question_id": "Q2",
+          "reading_sufficient": true,
+          "remaining_gap": null,
+          "state": "substantially_explained",
+          "story_span": "還其所如",
+          "supporting_refs": [
+            "J02"
+          ],
+          "terminal_reason": "reading_sufficient",
+          "working_answer": "『還其所如』意為恰如其小字，指王彭之、王彪之才質凡下，徒有虎名而實如豚犢。"
+        },
+        {
+          "active": false,
+          "evidence_round_refs": [
+            {
+              "refs": [
+                "J02"
+              ],
+              "round": 1
+            }
+          ],
+          "evidence_rounds": 1,
+          "failure_type": null,
+          "gap": "缺少王導與王右軍的宗族關係及通信語境，影響理解為何向王右軍傾訴自家子姪不成器，以及此事何以入『輕詆』。",
+          "historical_verification_open": true,
+          "last_round": 1,
+          "next_action": "retrieve_local",
+          "parent_aspect_id": null,
+          "parent_question_id": null,
+          "question_id": "Q3",
+          "reading_sufficient": false,
+          "remaining_gap": "注文未解釋王導嘆子姪不令、言『虎㹠虎犢還其所如』何以歸入『輕詆』篇，影響對篇目歸類意圖的理解",
+          "state": "partially_explained",
+          "story_span": "王右軍在南丞相與書",
+          "supporting_refs": [
+            "J02"
+          ],
+          "terminal_reason": "refined_to_child",
+          "working_answer": "程炎震推斷此事發生於王彪之初為郎時，王羲之身在江州，為通信語境提供了時間地點背景。"
+        },
+        {
+          "active": false,
+          "evidence_round_refs": [],
+          "evidence_rounds": 0,
+          "failure_type": "semantic_failed",
+          "gap": "注文未解釋王導嘆子姪不令、言『虎㹠虎犢還其所如』何以歸入『輕詆』篇，影響對篇目歸類意圖的理解",
+          "historical_verification_open": false,
+          "last_round": 1,
+          "next_action": "retrieve_local",
+          "parent_aspect_id": "Q3-U2",
+          "parent_question_id": "Q3",
+          "question_id": "Q3.1",
+          "reading_sufficient": false,
+          "remaining_gap": "注文未解釋王導嘆子姪不令、言『虎㹠虎犢還其所如』何以歸入『輕詆』篇，影響對篇目歸類意圖的理解",
+          "state": "unexplained",
+          "story_span": "王右軍在南丞相與書",
+          "supporting_refs": [],
+          "terminal_reason": "semantic_failed",
+          "working_answer": ""
+        }
+      ],
+      "rejected_claims": [],
+      "rejected_evidence": [],
+      "rejected_gaps": [],
+      "resolution_sources": [
+        "jianshu_resolved",
+        "liu_resolved",
+        "unresolved"
+      ],
+      "retrieval_attempts": {
+        "Q1": 0,
+        "Q2": 0,
+        "Q3": 0,
+        "Q3.1": 1
+      },
+      "retrieved_refs": [
+        "jinshu:058-liezhuan-002",
+        "jinshu:074-liezhuan-001",
+        "jinshu:080-liezhuan-001",
+        "s1:s1-assertion-117acc9f11b86b21aa81",
+        "s1:s1-assertion-12cf58944969c40c41ea",
+        "s1:s1-assertion-91022c6c98eb3c7c0852",
+        "sanguozhi:sgz1-juan-002-000043",
+        "sanguozhi:sgz1-juan-009-000093",
+        "sanguozhi:sgz1-juan-012-000026",
+        "shishuo:08-shangyu-134:liu:annotation-002",
+        "shishuo:09-pinzao-028:main",
+        "shishuo:27-jiajue-007:main"
+      ],
+      "round_metrics": [
+        {
+          "D_t": 1,
+          "G_t": 3,
+          "N_t": 1.0,
+          "Q_t": 1,
+          "new_used_evidence_refs": [
+            "J02",
+            "L01",
+            "L02"
+          ],
+          "question_metrics": [
+            {
+              "D_t": 1,
+              "N_t": 1.0,
+              "Q_t": 0,
+              "active": false,
+              "conflict_fingerprints": [],
+              "d_basis": "validated_evidence_change",
+              "new_used_evidence_refs": [
+                "L01",
+                "L02"
+              ],
+              "question_id": "Q1",
+              "reading_sufficient": true,
+              "round": 1,
+              "used_evidence_refs": [
+                "L01",
+                "L02"
+              ]
+            },
+            {
+              "D_t": 1,
+              "N_t": 1.0,
+              "Q_t": 0,
+              "active": false,
+              "conflict_fingerprints": [],
+              "d_basis": "validated_evidence_change",
+              "new_used_evidence_refs": [
+                "J02"
+              ],
+              "question_id": "Q2",
+              "reading_sufficient": true,
+              "round": 1,
+              "used_evidence_refs": [
+                "J02"
+              ]
+            },
+            {
+              "D_t": 1,
+              "N_t": 0.0,
+              "Q_t": 1,
+              "active": true,
+              "conflict_fingerprints": [],
+              "d_basis": "validated_evidence_change",
+              "new_used_evidence_refs": [],
+              "question_id": "Q3",
+              "reading_sufficient": false,
+              "round": 1,
+              "used_evidence_refs": [
+                "J02"
+              ]
+            }
+          ],
+          "retrieval": false,
+          "round": 1,
+          "used_evidence_refs": [
+            "J02",
+            "L01",
+            "L02"
+          ]
+        },
+        {
+          "D_t": 0,
+          "G_t": 1,
+          "N_t": 0.0,
+          "Q_t": 0,
+          "new_used_evidence_refs": [],
+          "opened_evidence_count": 5,
+          "question_metrics": [],
+          "retrieval": true,
+          "retrieved_evidence_count": 12,
+          "round": 2,
+          "used_evidence_refs": []
+        }
+      ],
+      "rounds_executed": [
+        0,
+        1,
+        2
+      ],
+      "run_id": "srm0-5-live-36a9c7a3e1e71340",
+      "search_trace_count": 1,
+      "searched_corpora": [
+        "世說新語",
+        "余嘉錫箋疏",
+        "晉書",
+        "三國志",
+        "資治通鑑",
+        "資治通鑑考異"
+      ],
+      "semantic_failed_questions": [
+        "Q3.1"
+      ],
+      "story_id": "26-qingdi-008",
+      "story_status": "semantic_partial_failure",
+      "story_text": "王右軍在南丞相與書毎歎子姪不令云虎㹠虎犢\n還其所如",
+      "stratum": "medium_commentary",
+      "structural_normalizations": [],
+      "terminal_reason_per_question": {
+        "Q1": "reading_sufficient",
+        "Q2": "reading_sufficient",
+        "Q3": "refined_to_child",
+        "Q3.1": "semantic_failed"
+      },
+      "token_usage": {
+        "completion_tokens": 20245,
+        "prompt_tokens": 3382,
+        "total_tokens": 23627
+      },
+      "transport_errors": [],
+      "transport_metrics": {
+        "connect_timeout_count": 0,
+        "failure_classes": {},
+        "max_successful_latency_seconds": 126.611923,
+        "median_successful_latency_seconds": 76.96098,
+        "read_timeout_count": 0,
+        "server_error_count": 0,
+        "successful_latencies_seconds": [
+          126.611923,
+          76.96098,
+          5.472059
+        ],
+        "tls_failure_count": 0,
+        "transport_request_count": 3,
+        "transport_retry_count": 0,
+        "transport_success_count": 3
+      },
+      "used_evidence": [
+        "J02",
+        "L01",
+        "L02"
+      ]
+    },
+    {
+      "accepted_gaps": [
+        {
+          "gap": "需要知道玉帖鐙是什麼物件及其用途，才能理解為何在敗逃中索求此物是故事的重點。",
+          "question_id": "Q1",
+          "story_span": "猶求玉帖鐙"
+        },
+        {
+          "gap": "需要知道太傅是誰、與謝中郎的關係；他的身份決定其沉默與語氣的意義。",
+          "question_id": "Q2",
+          "story_span": "太傅在軍前\n後初無損益之言"
+        },
+        {
+          "gap": "需要確定這句話是太傅對謝中郎所言，還是謝中郎自己說的話；這直接影響故事意旨。",
+          "question_id": "Q3",
+          "story_span": "爾日猶云當今豈須煩此"
+        }
+      ],
+      "canonical_write_back": false,
+      "commentary_only_resolution_count": 0,
+      "convergence_status": "semantic_partial_failure",
+      "evidence_rounds": [
+        {
+          "D_t": 1,
+          "G_t": 3,
+          "N_t": 1.0,
+          "Q_t": 1,
+          "new_used_evidence_refs": [
+            "L02"
+          ],
+          "question_metrics": [
+            {
+              "D_t": 0,
+              "N_t": 0.0,
+              "Q_t": 1,
+              "active": true,
+              "conflict_fingerprints": [],
+              "d_basis": "none",
+              "new_used_evidence_refs": [],
+              "question_id": "Q1",
+              "reading_sufficient": false,
+              "round": 1,
+              "used_evidence_refs": []
+            },
+            {
+              "D_t": 0,
+              "N_t": 0.0,
+              "Q_t": 0,
+              "active": false,
+              "conflict_fingerprints": [],
+              "d_basis": "none",
+              "new_used_evidence_refs": [],
+              "question_id": "Q2",
+              "reading_sufficient": false,
+              "round": 1,
+              "used_evidence_refs": []
+            },
+            {
+              "D_t": 1,
+              "N_t": 1.0,
+              "Q_t": 1,
+              "active": true,
+              "conflict_fingerprints": [],
+              "d_basis": "validated_evidence_change",
+              "new_used_evidence_refs": [
+                "L02"
+              ],
+              "question_id": "Q3",
+              "reading_sufficient": false,
+              "round": 1,
+              "used_evidence_refs": [
+                "L02"
+              ]
+            }
+          ],
+          "retrieval": false,
+          "round": 1,
+          "used_evidence_refs": [
+            "L02"
+          ]
+        },
+        {
+          "D_t": 0,
+          "G_t": 2,
+          "N_t": 0.0,
+          "Q_t": 0,
+          "new_used_evidence_refs": [],
+          "opened_evidence_count": 5,
+          "question_metrics": [],
+          "retrieval": true,
+          "retrieved_evidence_count": 23,
+          "round": 2,
+          "used_evidence_refs": []
+        }
+      ],
+      "execution_kind": "live_model",
+      "external_retrieval_required_count": 2,
+      "external_search_performed": false,
+      "initial_gaps": [
+        {
+          "gap": "需要知道玉帖鐙是什麼物件及其用途，才能理解為何在敗逃中索求此物是故事的重點。",
+          "question_id": "Q1",
+          "story_span": "猶求玉帖鐙"
+        },
+        {
+          "gap": "需要知道太傅是誰、與謝中郎的關係；他的身份決定其沉默與語氣的意義。",
+          "question_id": "Q2",
+          "story_span": "太傅在軍前\n後初無損益之言"
+        },
+        {
+          "gap": "需要確定這句話是太傅對謝中郎所言，還是謝中郎自己說的話；這直接影響故事意旨。",
+          "question_id": "Q3",
+          "story_span": "爾日猶云當今豈須煩此"
+        }
+      ],
+      "jianshu_chars": 14,
+      "latency_seconds": {
+        "max": 82.951225,
+        "mean": 45.389935666666666,
+        "median": 47.552037,
+        "successful": [
+          82.951225,
+          47.552037,
+          5.666545
+        ]
+      },
+      "liu_block_count": 2,
+      "main_text_chars": 38,
+      "new_used_evidence": [
+        "L02"
+      ],
+      "opened_refs": [
+        "jinshu:001-benji-001",
+        "jinshu:020-zhi-001",
+        "jinshu:030-zhi-001",
+        "jinshu:073-liezhuan-001",
+        "jinshu:075-liezhuan-001",
+        "jinshu:102-zaiji-001",
+        "sanguozhi:sgz1-juan-002-000043",
+        "sanguozhi:sgz1-juan-013-000022",
+        "sanguozhi:sgz1-juan-023-000051",
+        "sanguozhi:sgz1-juan-046-000054"
+      ],
+      "protocol_errors": [],
+      "question_metrics": {
+        "converged_question_count": 1,
+        "evaluable_question_count": 3,
+        "evidence_saturated_question_count": 0,
+        "hard_cap_question_count": 0,
+        "not_worth_pursuing_question_count": 1,
+        "protocol_failed_question_count": 0,
+        "reading_sufficient_question_count": 0,
+        "semantic_failed_question_count": 2,
+        "stable_conflict_question_count": 0,
+        "terminal_state_counts": {
+          "not_worth_pursuing": 1
+        },
+        "transport_failed_question_count": 0,
+        "unresolved_question_count": 0,
+        "unresolved_terminal_question_count": 0,
+        "valid_question_count": 1
+      },
+      "question_resolution_sources": {
+        "Q1": [
+          "unresolved"
+        ],
+        "Q1.1": [
+          "unresolved"
+        ],
+        "Q2": [
+          "unresolved"
+        ],
+        "Q3": [
+          "liu_resolved"
+        ],
+        "Q3.1": [
+          "unresolved"
+        ]
+      },
+      "questions": [
+        {
+          "active": false,
+          "evidence_round_refs": [
+            {
+              "refs": [],
+              "round": 1
+            }
+          ],
+          "evidence_rounds": 1,
+          "failure_type": null,
+          "gap": "需要知道玉帖鐙是什麼物件及其用途，才能理解為何在敗逃中索求此物是故事的重點。",
+          "historical_verification_open": false,
+          "last_round": 1,
+          "next_action": "retrieve_local",
+          "parent_aspect_id": null,
+          "parent_question_id": null,
+          "question_id": "Q1",
+          "reading_sufficient": false,
+          "remaining_gap": "玉帖鐙的具體物類與用途未見注釋說明，無法理解何以在敗逃中索求此物成為故事重點。",
+          "state": "unexplained",
+          "story_span": "猶求玉帖鐙",
+          "supporting_refs": [],
+          "terminal_reason": "refined_to_child",
+          "working_answer": ""
+        },
+        {
+          "active": false,
+          "evidence_round_refs": [],
+          "evidence_rounds": 0,
+          "failure_type": "semantic_failed",
+          "gap": "玉帖鐙的具體物類與用途未見注釋說明，無法理解何以在敗逃中索求此物成為故事重點。",
+          "historical_verification_open": false,
+          "last_round": 1,
+          "next_action": "retrieve_local",
+          "parent_aspect_id": "Q1-U1",
+          "parent_question_id": "Q1",
+          "question_id": "Q1.1",
+          "reading_sufficient": false,
+          "remaining_gap": "玉帖鐙的具體物類與用途未見注釋說明，無法理解何以在敗逃中索求此物成為故事重點。",
+          "state": "unexplained",
+          "story_span": "猶求玉帖鐙",
+          "supporting_refs": [],
+          "terminal_reason": "semantic_failed",
+          "working_answer": ""
+        },
+        {
+          "active": false,
+          "evidence_round_refs": [
+            {
+              "refs": [],
+              "round": 1
+            }
+          ],
+          "evidence_rounds": 1,
+          "failure_type": null,
+          "gap": "需要知道太傅是誰、與謝中郎的關係；他的身份決定其沉默與語氣的意義。",
+          "historical_verification_open": true,
+          "last_round": 1,
+          "next_action": "stop",
+          "parent_aspect_id": null,
+          "parent_question_id": null,
+          "question_id": "Q2",
+          "reading_sufficient": false,
+          "remaining_gap": "太傅與謝中郎的具體關係未說明，影響理解太傅沉默的態度是否為親屬間的包容或另有含意。",
+          "state": "unexplained",
+          "story_span": "太傅在軍前\n後初無損益之言",
+          "supporting_refs": [],
+          "terminal_reason": "not_worth_pursuing",
+          "working_answer": ""
+        },
+        {
+          "active": false,
+          "evidence_round_refs": [
+            {
+              "refs": [
+                "L02"
+              ],
+              "round": 1
+            }
+          ],
+          "evidence_rounds": 1,
+          "failure_type": null,
+          "gap": "需要確定這句話是太傅對謝中郎所言，還是謝中郎自己說的話；這直接影響故事意旨。",
+          "historical_verification_open": true,
+          "last_round": 1,
+          "next_action": "retrieve_local",
+          "parent_aspect_id": null,
+          "parent_question_id": null,
+          "question_id": "Q3",
+          "reading_sufficient": false,
+          "remaining_gap": "劉注仍未說明『爾日猶云』的說話者究竟為太傅還是謝中郎；若太傅不在場，是否為謝中郎自語也未交代。",
+          "state": "partially_explained",
+          "story_span": "爾日猶云當今豈須煩此",
+          "supporting_refs": [
+            "L02"
+          ],
+          "terminal_reason": "refined_to_child",
+          "working_answer": "劉注以『迂謬巳甚』評論此處記載，並指出太傅謝安當時未仕高臥東山，故不可能說出或發生此語，暗示此話並非太傅所言。"
+        },
+        {
+          "active": false,
+          "evidence_round_refs": [],
+          "evidence_rounds": 0,
+          "failure_type": "semantic_failed",
+          "gap": "劉注仍未說明『爾日猶云』的說話者究竟為太傅還是謝中郎；若太傅不在場，是否為謝中郎自語也未交代。",
+          "historical_verification_open": false,
+          "last_round": 1,
+          "next_action": "retrieve_local",
+          "parent_aspect_id": "Q3-U1",
+          "parent_question_id": "Q3",
+          "question_id": "Q3.1",
+          "reading_sufficient": false,
+          "remaining_gap": "劉注仍未說明『爾日猶云』的說話者究竟為太傅還是謝中郎；若太傅不在場，是否為謝中郎自語也未交代。",
+          "state": "unexplained",
+          "story_span": "爾日猶云當今豈須煩此",
+          "supporting_refs": [],
+          "terminal_reason": "semantic_failed",
+          "working_answer": ""
+        }
+      ],
+      "rejected_claims": [
+        {
+          "path": "$.updates[1].answered_aspects[0]",
+          "question_id": "Q2",
+          "reason": "claim_has_no_valid_evidence"
+        }
+      ],
+      "rejected_evidence": [
+        {
+          "path": "$.updates[1].answered_aspects[0].evidence[0]",
+          "reason": "quote_not_found",
+          "ref": "L02"
+        },
+        {
+          "path": "$.updates[2].answered_aspects[0].evidence[1]",
+          "reason": "quote_not_found",
+          "ref": "L02"
+        }
+      ],
+      "rejected_gaps": [],
+      "resolution_sources": [
+        "liu_resolved",
+        "unresolved"
+      ],
+      "retrieval_attempts": {
+        "Q1": 0,
+        "Q1.1": 1,
+        "Q2": 0,
+        "Q3": 0,
+        "Q3.1": 1
+      },
+      "retrieved_refs": [
+        "jinshu:001-benji-001",
+        "jinshu:020-zhi-001",
+        "jinshu:030-zhi-001",
+        "jinshu:073-liezhuan-001",
+        "jinshu:075-liezhuan-001",
+        "jinshu:102-zaiji-001",
+        "s1:s1-assertion-4929c4fd2933973765ce",
+        "s1:s1-assertion-5db344dcc3873bac83e1",
+        "s1:s1-assertion-a1b2c352943edded229d",
+        "s1:s1-assertion-da4e64f6a8d23b2fde15",
+        "s1:s1-assertion-e3d87dcb26c47b712ce8",
+        "s1:s1-assertion-f6227ce11efa578c7932",
+        "sanguozhi:sgz1-juan-002-000043",
+        "sanguozhi:sgz1-juan-013-000022",
+        "sanguozhi:sgz1-juan-023-000051",
+        "sanguozhi:sgz1-juan-046-000025",
+        "sanguozhi:sgz1-juan-046-000054",
+        "shishuo:01-dexing-018:main",
+        "shishuo:01-dexing-027:liu:annotation-009",
+        "shishuo:02-yanyu-018:main",
+        "shishuo:02-yanyu-077:main",
+        "shishuo:02-yanyu-100:main",
+        "shishuo:05-fangzheng-019:main"
+      ],
+      "round_metrics": [
+        {
+          "D_t": 1,
+          "G_t": 3,
+          "N_t": 1.0,
+          "Q_t": 1,
+          "new_used_evidence_refs": [
+            "L02"
+          ],
+          "question_metrics": [
+            {
+              "D_t": 0,
+              "N_t": 0.0,
+              "Q_t": 1,
+              "active": true,
+              "conflict_fingerprints": [],
+              "d_basis": "none",
+              "new_used_evidence_refs": [],
+              "question_id": "Q1",
+              "reading_sufficient": false,
+              "round": 1,
+              "used_evidence_refs": []
+            },
+            {
+              "D_t": 0,
+              "N_t": 0.0,
+              "Q_t": 0,
+              "active": false,
+              "conflict_fingerprints": [],
+              "d_basis": "none",
+              "new_used_evidence_refs": [],
+              "question_id": "Q2",
+              "reading_sufficient": false,
+              "round": 1,
+              "used_evidence_refs": []
+            },
+            {
+              "D_t": 1,
+              "N_t": 1.0,
+              "Q_t": 1,
+              "active": true,
+              "conflict_fingerprints": [],
+              "d_basis": "validated_evidence_change",
+              "new_used_evidence_refs": [
+                "L02"
+              ],
+              "question_id": "Q3",
+              "reading_sufficient": false,
+              "round": 1,
+              "used_evidence_refs": [
+                "L02"
+              ]
+            }
+          ],
+          "retrieval": false,
+          "round": 1,
+          "used_evidence_refs": [
+            "L02"
+          ]
+        },
+        {
+          "D_t": 0,
+          "G_t": 2,
+          "N_t": 0.0,
+          "Q_t": 0,
+          "new_used_evidence_refs": [],
+          "opened_evidence_count": 5,
+          "question_metrics": [],
+          "retrieval": true,
+          "retrieved_evidence_count": 23,
+          "round": 2,
+          "used_evidence_refs": []
+        }
+      ],
+      "rounds_executed": [
+        0,
+        1,
+        2
+      ],
+      "run_id": "srm0-5-live-d45a94ab3399236c",
+      "search_trace_count": 2,
+      "searched_corpora": [
+        "世說新語",
+        "余嘉錫箋疏",
+        "晉書",
+        "三國志",
+        "資治通鑑",
+        "資治通鑑考異"
+      ],
+      "semantic_failed_questions": [
+        "Q1.1",
+        "Q3.1"
+      ],
+      "story_id": "10-guizhen-021",
+      "story_status": "semantic_partial_failure",
+      "story_text": "謝中郎在壽春敗臨奔走猶求玉帖鐙太傅在軍前\n後初無損益之言爾日猶云當今豈須煩此",
+      "stratum": "medium_commentary",
+      "structural_normalizations": [
+        {
+          "action": "normalize_whitespace",
+          "normalized": "太傅在軍前\n後初無損益之言",
+          "original": "太傅在軍前後初無損益之言",
+          "path": "$.gaps[1].story_span",
+          "reason": "span whitespace aligned to canonical Story text",
+          "stage": "initial"
+        }
+      ],
+      "terminal_reason_per_question": {
+        "Q1": "refined_to_child",
+        "Q1.1": "semantic_failed",
+        "Q2": "not_worth_pursuing",
+        "Q3": "refined_to_child",
+        "Q3.1": "semantic_failed"
+      },
+      "token_usage": {
+        "completion_tokens": 15155,
+        "prompt_tokens": 3773,
+        "total_tokens": 18928
+      },
+      "transport_errors": [],
+      "transport_metrics": {
+        "connect_timeout_count": 0,
+        "failure_classes": {},
+        "max_successful_latency_seconds": 82.951225,
+        "median_successful_latency_seconds": 47.552037,
+        "read_timeout_count": 0,
+        "server_error_count": 0,
+        "successful_latencies_seconds": [
+          82.951225,
+          47.552037,
+          5.666545
+        ],
+        "tls_failure_count": 0,
+        "transport_request_count": 3,
+        "transport_retry_count": 0,
+        "transport_success_count": 3
+      },
+      "used_evidence": [
+        "L02"
+      ]
+    },
+    {
+      "accepted_gaps": [
+        {
+          "gap": "公孙度是否曾试图招揽邴原而邴原未从，这决定了对‘非燕雀之网所能罗’具体所指的理解",
+          "question_id": "Q1",
+          "story_span": "公孫度目邴原所謂雲中白鶴非燕雀之網所能羅\n也"
+        }
+      ],
+      "canonical_write_back": false,
+      "commentary_only_resolution_count": 1,
+      "convergence_status": "converged",
+      "evidence_rounds": [
+        {
+          "D_t": 1,
+          "G_t": 1,
+          "N_t": 1.0,
+          "Q_t": 0,
+          "new_used_evidence_refs": [
+            "L03",
+            "L05"
+          ],
+          "question_metrics": [
+            {
+              "D_t": 1,
+              "N_t": 1.0,
+              "Q_t": 0,
+              "active": false,
+              "conflict_fingerprints": [],
+              "d_basis": "validated_evidence_change",
+              "new_used_evidence_refs": [
+                "L03",
+                "L05"
+              ],
+              "question_id": "Q1",
+              "reading_sufficient": true,
+              "round": 1,
+              "used_evidence_refs": [
+                "L03",
+                "L05"
+              ]
+            }
+          ],
+          "retrieval": false,
+          "round": 1,
+          "used_evidence_refs": [
+            "L03",
+            "L05"
+          ]
+        }
+      ],
+      "execution_kind": "live_model",
+      "external_retrieval_required_count": 0,
+      "external_search_performed": false,
+      "initial_gaps": [
+        {
+          "gap": "公孙度是否曾试图招揽邴原而邴原未从，这决定了对‘非燕雀之网所能罗’具体所指的理解",
+          "question_id": "Q1",
+          "story_span": "公孫度目邴原所謂雲中白鶴非燕雀之網所能羅\n也"
+        }
+      ],
+      "jianshu_chars": 91,
+      "latency_seconds": {
+        "max": 34.453789,
+        "mean": 24.755215,
+        "median": 24.755215,
+        "successful": [
+          15.056641,
+          34.453789
+        ]
+      },
+      "liu_block_count": 6,
+      "main_text_chars": 22,
+      "new_used_evidence": [
+        "L03",
+        "L05"
+      ],
+      "opened_refs": [],
+      "protocol_errors": [],
+      "question_metrics": {
+        "converged_question_count": 1,
+        "evaluable_question_count": 1,
+        "evidence_saturated_question_count": 0,
+        "hard_cap_question_count": 0,
+        "not_worth_pursuing_question_count": 0,
+        "protocol_failed_question_count": 0,
+        "reading_sufficient_question_count": 1,
+        "semantic_failed_question_count": 0,
+        "stable_conflict_question_count": 0,
+        "terminal_state_counts": {
+          "reading_sufficient": 1
+        },
+        "transport_failed_question_count": 0,
+        "unresolved_question_count": 0,
+        "unresolved_terminal_question_count": 0,
+        "valid_question_count": 1
+      },
+      "question_resolution_sources": {
+        "Q1": [
+          "liu_resolved"
+        ]
+      },
+      "questions": [
+        {
+          "active": false,
+          "evidence_round_refs": [
+            {
+              "refs": [
+                "L03",
+                "L05"
+              ],
+              "round": 1
+            }
+          ],
+          "evidence_rounds": 1,
+          "failure_type": null,
+          "gap": "公孙度是否曾试图招揽邴原而邴原未从，这决定了对‘非燕雀之网所能罗’具体所指的理解",
+          "historical_verification_open": false,
+          "last_round": 1,
+          "next_action": "stop",
+          "parent_aspect_id": null,
+          "parent_question_id": null,
+          "question_id": "Q1",
+          "reading_sufficient": true,
+          "remaining_gap": null,
+          "state": "substantially_explained",
+          "story_span": "公孫度目邴原所謂雲中白鶴非燕雀之網所能羅\n也",
+          "supporting_refs": [
+            "L03",
+            "L05"
+          ],
+          "terminal_reason": "reading_sufficient",
+          "working_answer": "刘孝标注引《邴原别传》说明公孙度曾厚礼邴原并阻止其离去，邴原最终夜逃，公孙度追之不及而叹云中白鹤非网罗所能获。这直接解释了正文‘非燕雀之网所能罗’是指公孙度虽欲留住邴原但未能罗致。"
+        }
+      ],
+      "rejected_claims": [],
+      "rejected_evidence": [
+        {
+          "path": "$.updates[0].answered_aspects[0].evidence[1]",
+          "reason": "quote_not_found",
+          "ref": "L04"
+        }
+      ],
+      "rejected_gaps": [],
+      "resolution_sources": [
+        "liu_resolved"
+      ],
+      "retrieval_attempts": {
+        "Q1": 0
+      },
+      "retrieved_refs": [],
+      "round_metrics": [
+        {
+          "D_t": 1,
+          "G_t": 1,
+          "N_t": 1.0,
+          "Q_t": 0,
+          "new_used_evidence_refs": [
+            "L03",
+            "L05"
+          ],
+          "question_metrics": [
+            {
+              "D_t": 1,
+              "N_t": 1.0,
+              "Q_t": 0,
+              "active": false,
+              "conflict_fingerprints": [],
+              "d_basis": "validated_evidence_change",
+              "new_used_evidence_refs": [
+                "L03",
+                "L05"
+              ],
+              "question_id": "Q1",
+              "reading_sufficient": true,
+              "round": 1,
+              "used_evidence_refs": [
+                "L03",
+                "L05"
+              ]
+            }
+          ],
+          "retrieval": false,
+          "round": 1,
+          "used_evidence_refs": [
+            "L03",
+            "L05"
+          ]
+        }
+      ],
+      "rounds_executed": [
+        0,
+        1
+      ],
+      "run_id": "srm0-5-live-4547e6cfcdac9c9c",
+      "search_trace_count": 0,
+      "searched_corpora": [],
+      "semantic_failed_questions": [],
+      "story_id": "08-shangyu-004",
+      "story_status": "converged",
+      "story_text": "公孫度目邴原所謂雲中白鶴非燕雀之網所能羅\n也",
+      "stratum": "medium_commentary",
+      "structural_normalizations": [
+        {
+          "action": "normalize_whitespace",
+          "normalized": "公孫度目邴原所謂雲中白鶴非燕雀之網所能羅\n也",
+          "original": "公孫度目邴原所謂雲中白鶴非燕雀之網所能羅也",
+          "path": "$.gaps[0].story_span",
+          "reason": "span whitespace aligned to canonical Story text",
+          "stage": "initial"
+        }
+      ],
+      "terminal_reason_per_question": {
+        "Q1": "reading_sufficient"
+      },
+      "token_usage": {
+        "completion_tokens": 5330,
+        "prompt_tokens": 1416,
+        "total_tokens": 6746
+      },
+      "transport_errors": [],
+      "transport_metrics": {
+        "connect_timeout_count": 0,
+        "failure_classes": {},
+        "max_successful_latency_seconds": 34.453789,
+        "median_successful_latency_seconds": 24.755215,
+        "read_timeout_count": 0,
+        "server_error_count": 0,
+        "successful_latencies_seconds": [
+          15.056641,
+          34.453789
+        ],
+        "tls_failure_count": 0,
+        "transport_request_count": 2,
+        "transport_retry_count": 0,
+        "transport_success_count": 2
+      },
+      "used_evidence": [
+        "L03",
+        "L05"
+      ]
+    },
+    {
+      "accepted_gaps": [
+        {
+          "gap": "缺少安石和阿万的具体身份及两人关系（如兄弟），否则不知王羲之为何提起阿万。",
+          "question_id": "Q1",
+          "story_span": "安石故相爲雄阿萬當裂眼争邪"
+        },
+        {
+          "gap": "缺少许玄度与王羲之、安石及阿万的关系背景，否则不知王羲之为何拿许玄度与安石比较。",
+          "question_id": "Q2",
+          "story_span": "王右軍問許玄度"
+        }
+      ],
+      "canonical_write_back": false,
+      "commentary_only_resolution_count": 0,
+      "convergence_status": "semantic_failed",
+      "evidence_rounds": [
+        {
+          "D_t": 1,
+          "G_t": 2,
+          "N_t": 1.0,
+          "Q_t": 1,
+          "new_used_evidence_refs": [
+            "L01",
+            "L02"
+          ],
+          "question_metrics": [
+            {
+              "D_t": 1,
+              "N_t": 1.0,
+              "Q_t": 1,
+              "active": true,
+              "conflict_fingerprints": [],
+              "d_basis": "validated_evidence_change",
+              "new_used_evidence_refs": [
+                "L01",
+                "L02"
+              ],
+              "question_id": "Q1",
+              "reading_sufficient": false,
+              "round": 1,
+              "used_evidence_refs": [
+                "L01",
+                "L02"
+              ]
+            },
+            {
+              "D_t": 0,
+              "N_t": 0.0,
+              "Q_t": 1,
+              "active": true,
+              "conflict_fingerprints": [],
+              "d_basis": "none",
+              "new_used_evidence_refs": [],
+              "question_id": "Q2",
+              "reading_sufficient": false,
+              "round": 1,
+              "used_evidence_refs": []
+            }
+          ],
+          "retrieval": false,
+          "round": 1,
+          "used_evidence_refs": [
+            "L01",
+            "L02"
+          ]
+        },
+        {
+          "D_t": 0,
+          "G_t": 2,
+          "N_t": 0.0,
+          "Q_t": 0,
+          "new_used_evidence_refs": [],
+          "opened_evidence_count": 5,
+          "question_metrics": [],
+          "retrieval": true,
+          "retrieved_evidence_count": 21,
+          "round": 2,
+          "used_evidence_refs": []
+        }
+      ],
+      "execution_kind": "live_model",
+      "external_retrieval_required_count": 2,
+      "external_search_performed": false,
+      "initial_gaps": [
+        {
+          "gap": "缺少安石和阿万的具体身份及两人关系（如兄弟），否则不知王羲之为何提起阿万。",
+          "question_id": "Q1",
+          "story_span": "安石故相爲雄阿萬當裂眼争邪"
+        },
+        {
+          "gap": "缺少许玄度与王羲之、安石及阿万的关系背景，否则不知王羲之为何拿许玄度与安石比较。",
+          "question_id": "Q2",
+          "story_span": "王右軍問許玄度"
+        }
+      ],
+      "jianshu_chars": 51,
+      "latency_seconds": {
+        "max": 60.491859,
+        "mean": 39.03258233333333,
+        "median": 31.515871,
+        "successful": [
+          25.090017,
+          31.515871,
+          60.491859
+        ]
+      },
+      "liu_block_count": 2,
+      "main_text_chars": 34,
+      "new_used_evidence": [
+        "L01",
+        "L02"
+      ],
+      "opened_refs": [
+        "jinshu:067-liezhuan-002",
+        "jinshu:079-liezhuan-002",
+        "jinshu:080-liezhuan-001",
+        "jinshu:124-zaiji-001",
+        "s1:s1-assertion-5de6d9a6ff2238c1f039",
+        "s1:s1-assertion-6b3fbf9e4a052d9f69ee",
+        "s1:s1-assertion-7811f9fef35bf2d5bf6e",
+        "shishuo:10-guizhen-020:main"
+      ],
+      "protocol_errors": [],
+      "question_metrics": {
+        "converged_question_count": 0,
+        "evaluable_question_count": 2,
+        "evidence_saturated_question_count": 0,
+        "hard_cap_question_count": 0,
+        "not_worth_pursuing_question_count": 0,
+        "protocol_failed_question_count": 0,
+        "reading_sufficient_question_count": 0,
+        "semantic_failed_question_count": 2,
+        "stable_conflict_question_count": 0,
+        "terminal_state_counts": {},
+        "transport_failed_question_count": 0,
+        "unresolved_question_count": 0,
+        "unresolved_terminal_question_count": 0,
+        "valid_question_count": 0
+      },
+      "question_resolution_sources": {
+        "Q1": [
+          "liu_resolved"
+        ],
+        "Q1.1": [
+          "unresolved"
+        ],
+        "Q2": [
+          "unresolved"
+        ],
+        "Q2.1": [
+          "unresolved"
+        ]
+      },
+      "questions": [
+        {
+          "active": false,
+          "evidence_round_refs": [
+            {
+              "refs": [
+                "L01",
+                "L02"
+              ],
+              "round": 1
+            }
+          ],
+          "evidence_rounds": 1,
+          "failure_type": null,
+          "gap": "缺少安石和阿万的具体身份及两人关系（如兄弟），否则不知王羲之为何提起阿万。",
+          "historical_verification_open": false,
+          "last_round": 1,
+          "next_action": "retrieve_local",
+          "parent_aspect_id": null,
+          "parent_question_id": null,
+          "question_id": "Q1",
+          "reading_sufficient": false,
+          "remaining_gap": "缺少安石与阿万的具体身份（如姓名字号）及二人的兄弟关系，导致王羲之为何特意提及阿万缺乏明确背景。",
+          "state": "partially_explained",
+          "story_span": "安石故相爲雄阿萬當裂眼争邪",
+          "supporting_refs": [
+            "L01",
+            "L02"
+          ],
+          "terminal_reason": "refined_to_child",
+          "working_answer": "刘注指出“万”不及“安石”，并引《中兴书》言“万”的器量，表明阿万是与安石作比较的人物。刘注提到“名稱居萬上也”，涉及与“万”的名声比较，同样指向安石与阿万的高下关系。"
+        },
+        {
+          "active": false,
+          "evidence_round_refs": [],
+          "evidence_rounds": 0,
+          "failure_type": "semantic_failed",
+          "gap": "缺少安石与阿万的具体身份（如姓名字号）及二人的兄弟关系，导致王羲之为何特意提及阿万缺乏明确背景。",
+          "historical_verification_open": false,
+          "last_round": 1,
+          "next_action": "retrieve_local",
+          "parent_aspect_id": "Q1-U1",
+          "parent_question_id": "Q1",
+          "question_id": "Q1.1",
+          "reading_sufficient": false,
+          "remaining_gap": "缺少安石与阿万的具体身份（如姓名字号）及二人的兄弟关系，导致王羲之为何特意提及阿万缺乏明确背景。",
+          "state": "unexplained",
+          "story_span": "安石故相爲雄阿萬當裂眼争邪",
+          "supporting_refs": [],
+          "terminal_reason": "semantic_failed",
+          "working_answer": ""
+        },
+        {
+          "active": false,
+          "evidence_round_refs": [
+            {
+              "refs": [],
+              "round": 1
+            }
+          ],
+          "evidence_rounds": 1,
+          "failure_type": null,
+          "gap": "缺少许玄度与王羲之、安石及阿万的关系背景，否则不知王羲之为何拿许玄度与安石比较。",
+          "historical_verification_open": false,
+          "last_round": 1,
+          "next_action": "retrieve_local",
+          "parent_aspect_id": null,
+          "parent_question_id": null,
+          "question_id": "Q2",
+          "reading_sufficient": false,
+          "remaining_gap": "缺少许玄度的身份及其与王羲之、安石、阿万的关系背景，无法解释王羲之为何以许玄度与安石比较。",
+          "state": "unexplained",
+          "story_span": "王右軍問許玄度",
+          "supporting_refs": [],
+          "terminal_reason": "refined_to_child",
+          "working_answer": ""
+        },
+        {
+          "active": false,
+          "evidence_round_refs": [],
+          "evidence_rounds": 0,
+          "failure_type": "semantic_failed",
+          "gap": "缺少许玄度的身份及其与王羲之、安石、阿万的关系背景，无法解释王羲之为何以许玄度与安石比较。",
+          "historical_verification_open": false,
+          "last_round": 1,
+          "next_action": "retrieve_local",
+          "parent_aspect_id": "Q2-U1",
+          "parent_question_id": "Q2",
+          "question_id": "Q2.1",
+          "reading_sufficient": false,
+          "remaining_gap": "缺少许玄度的身份及其与王羲之、安石、阿万的关系背景，无法解释王羲之为何以许玄度与安石比较。",
+          "state": "unexplained",
+          "story_span": "王右軍問許玄度",
+          "supporting_refs": [],
+          "terminal_reason": "semantic_failed",
+          "working_answer": ""
+        }
+      ],
+      "rejected_claims": [
+        {
+          "path": "$.updates[0].answered_aspects[0]",
+          "question_id": "Q1.1",
+          "reason": "claim_missing_id_or_text"
+        },
+        {
+          "path": "$.updates[0].answered_aspects[1]",
+          "question_id": "Q1.1",
+          "reason": "claim_missing_id_or_text"
+        },
+        {
+          "path": "$.updates[1].answered_aspects[0]",
+          "question_id": "Q2.1",
+          "reason": "claim_missing_id_or_text"
+        },
+        {
+          "path": "$.updates[1].answered_aspects[1]",
+          "question_id": "Q2.1",
+          "reason": "claim_missing_id_or_text"
+        }
+      ],
+      "rejected_evidence": [],
+      "rejected_gaps": [],
+      "resolution_sources": [
+        "liu_resolved",
+        "unresolved"
+      ],
+      "retrieval_attempts": {
+        "Q1": 0,
+        "Q1.1": 1,
+        "Q2": 0,
+        "Q2.1": 1
+      },
+      "retrieved_refs": [
+        "jinshu:067-liezhuan-002",
+        "jinshu:079-liezhuan-002",
+        "jinshu:080-liezhuan-001",
+        "jinshu:124-zaiji-001",
+        "s1:s1-assertion-3f305ef663b5e7151e7c",
+        "s1:s1-assertion-5de6d9a6ff2238c1f039",
+        "s1:s1-assertion-6b3fbf9e4a052d9f69ee",
+        "s1:s1-assertion-7811f9fef35bf2d5bf6e",
+        "s1:s1-assertion-d35fbb5a03fb5470cbf2",
+        "sanguozhi:sgz1-juan-001-000145",
+        "sanguozhi:sgz1-juan-004-000051",
+        "sanguozhi:sgz1-juan-018-000067",
+        "sanguozhi:sgz1-juan-019-000040",
+        "sanguozhi:sgz1-juan-021-000067",
+        "sanguozhi:sgz1-juan-045-000029",
+        "shishuo:02-yanyu-062:liu:annotation-001",
+        "shishuo:06-yaliang-028:liu:annotation-002",
+        "shishuo:08-shangyu-077:main",
+        "shishuo:08-shangyu-141:main",
+        "shishuo:09-pinzao-087:liu:annotation-002",
+        "shishuo:10-guizhen-020:main"
+      ],
+      "round_metrics": [
+        {
+          "D_t": 1,
+          "G_t": 2,
+          "N_t": 1.0,
+          "Q_t": 1,
+          "new_used_evidence_refs": [
+            "L01",
+            "L02"
+          ],
+          "question_metrics": [
+            {
+              "D_t": 1,
+              "N_t": 1.0,
+              "Q_t": 1,
+              "active": true,
+              "conflict_fingerprints": [],
+              "d_basis": "validated_evidence_change",
+              "new_used_evidence_refs": [
+                "L01",
+                "L02"
+              ],
+              "question_id": "Q1",
+              "reading_sufficient": false,
+              "round": 1,
+              "used_evidence_refs": [
+                "L01",
+                "L02"
+              ]
+            },
+            {
+              "D_t": 0,
+              "N_t": 0.0,
+              "Q_t": 1,
+              "active": true,
+              "conflict_fingerprints": [],
+              "d_basis": "none",
+              "new_used_evidence_refs": [],
+              "question_id": "Q2",
+              "reading_sufficient": false,
+              "round": 1,
+              "used_evidence_refs": []
+            }
+          ],
+          "retrieval": false,
+          "round": 1,
+          "used_evidence_refs": [
+            "L01",
+            "L02"
+          ]
+        },
+        {
+          "D_t": 0,
+          "G_t": 2,
+          "N_t": 0.0,
+          "Q_t": 0,
+          "new_used_evidence_refs": [],
+          "opened_evidence_count": 5,
+          "question_metrics": [],
+          "retrieval": true,
+          "retrieved_evidence_count": 21,
+          "round": 2,
+          "used_evidence_refs": []
+        }
+      ],
+      "rounds_executed": [
+        0,
+        1,
+        2
+      ],
+      "run_id": "srm0-5-live-ca8da2d4ede96bcb",
+      "search_trace_count": 2,
+      "searched_corpora": [
+        "世說新語",
+        "余嘉錫箋疏",
+        "晉書",
+        "三國志",
+        "資治通鑑",
+        "資治通鑑考異"
+      ],
+      "semantic_failed_questions": [
+        "Q1.1",
+        "Q2.1"
+      ],
+      "story_id": "09-pinzao-055",
+      "story_status": "semantic_failed",
+      "story_text": "王右軍問許玄度卿自言何如安石許未荅王因曰\n安石故相爲雄阿萬當裂眼争邪",
+      "stratum": "medium_commentary",
+      "structural_normalizations": [
+        {
+          "action": "normalize_whitespace",
+          "normalized": "安石故相爲雄阿萬當裂眼争邪",
+          "original": "安石故相爲雄 阿萬當裂眼争邪",
+          "path": "$.gaps[0].story_span",
+          "reason": "span whitespace aligned to canonical Story text",
+          "stage": "initial"
+        }
+      ],
+      "terminal_reason_per_question": {
+        "Q1": "refined_to_child",
+        "Q1.1": "semantic_failed",
+        "Q2": "refined_to_child",
+        "Q2.1": "semantic_failed"
+      },
+      "token_usage": {
+        "completion_tokens": 13478,
+        "prompt_tokens": 3451,
+        "total_tokens": 16929
+      },
+      "transport_errors": [],
+      "transport_metrics": {
+        "connect_timeout_count": 0,
+        "failure_classes": {},
+        "max_successful_latency_seconds": 60.491859,
+        "median_successful_latency_seconds": 31.515871,
+        "read_timeout_count": 0,
+        "server_error_count": 0,
+        "successful_latencies_seconds": [
+          25.090017,
+          31.515871,
+          60.491859
+        ],
+        "tls_failure_count": 0,
+        "transport_request_count": 3,
+        "transport_retry_count": 0,
+        "transport_success_count": 3
+      },
+      "used_evidence": [
+        "L01",
+        "L02"
+      ]
+    },
+    {
+      "accepted_gaps": [
+        {
+          "gap": "缺少關於「阿戎」與「王安豐」是指同一人（王戎）的信息，否則會誤解為鍾會評價了兩個不同的人。",
+          "question_id": "Q1",
+          "story_span": "鍾士季目王安豐阿戎了了解人意"
+        }
+      ],
+      "canonical_write_back": false,
+      "commentary_only_resolution_count": 1,
+      "convergence_status": "converged",
+      "evidence_rounds": [
+        {
+          "D_t": 1,
+          "G_t": 1,
+          "N_t": 1.0,
+          "Q_t": 0,
+          "new_used_evidence_refs": [
+            "J02",
+            "L01",
+            "L03"
+          ],
+          "question_metrics": [
+            {
+              "D_t": 1,
+              "N_t": 1.0,
+              "Q_t": 0,
+              "active": false,
+              "conflict_fingerprints": [
+                "d1453b4f97ec0860becf15141d12e1f7c717551a9fbb41325e667dc43c6f9b84"
+              ],
+              "d_basis": "validated_evidence_change",
+              "new_used_evidence_refs": [
+                "J02",
+                "L01",
+                "L03"
+              ],
+              "question_id": "Q1",
+              "reading_sufficient": true,
+              "round": 1,
+              "used_evidence_refs": [
+                "J02",
+                "L01",
+                "L03"
+              ]
+            }
+          ],
+          "retrieval": false,
+          "round": 1,
+          "used_evidence_refs": [
+            "J02",
+            "L01",
+            "L03"
+          ]
+        }
+      ],
+      "execution_kind": "live_model",
+      "external_retrieval_required_count": 0,
+      "external_search_performed": false,
+      "initial_gaps": [
+        {
+          "gap": "缺少關於「阿戎」與「王安豐」是指同一人（王戎）的信息，否則會誤解為鍾會評價了兩個不同的人。",
+          "question_id": "Q1",
+          "story_span": "鍾士季目王安豐阿戎了了解人意"
+        }
+      ],
+      "jianshu_chars": 304,
+      "latency_seconds": {
+        "max": 60.24445,
+        "mean": 49.34819,
+        "median": 49.34819,
+        "successful": [
+          38.45193,
+          60.24445
+        ]
+      },
+      "liu_block_count": 3,
+      "main_text_chars": 57,
+      "new_used_evidence": [
+        "J02",
+        "L01",
+        "L03"
+      ],
+      "opened_refs": [],
+      "protocol_errors": [],
+      "question_metrics": {
+        "converged_question_count": 1,
+        "evaluable_question_count": 1,
+        "evidence_saturated_question_count": 0,
+        "hard_cap_question_count": 0,
+        "not_worth_pursuing_question_count": 0,
+        "protocol_failed_question_count": 0,
+        "reading_sufficient_question_count": 1,
+        "semantic_failed_question_count": 0,
+        "stable_conflict_question_count": 0,
+        "terminal_state_counts": {
+          "reading_sufficient": 1
+        },
+        "transport_failed_question_count": 0,
+        "unresolved_question_count": 0,
+        "unresolved_terminal_question_count": 0,
+        "valid_question_count": 1
+      },
+      "question_resolution_sources": {
+        "Q1": [
+          "multi_source_resolved"
+        ]
+      },
+      "questions": [
+        {
+          "active": false,
+          "evidence_round_refs": [
+            {
+              "refs": [
+                "J02",
+                "L01",
+                "L03"
+              ],
+              "round": 1
+            }
+          ],
+          "evidence_rounds": 1,
+          "failure_type": null,
+          "gap": "缺少關於「阿戎」與「王安豐」是指同一人（王戎）的信息，否則會誤解為鍾會評價了兩個不同的人。",
+          "historical_verification_open": true,
+          "last_round": 1,
+          "next_action": "stop",
+          "parent_aspect_id": null,
+          "parent_question_id": null,
+          "question_id": "Q1",
+          "reading_sufficient": true,
+          "remaining_gap": null,
+          "state": "conflicted",
+          "story_span": "鍾士季目王安豐阿戎了了解人意",
+          "supporting_refs": [
+            "J02",
+            "L01",
+            "L03"
+          ],
+          "terminal_reason": "reading_sufficient",
+          "working_answer": "「阿戎」與「王安豐」同指王戎：劉孝標引《王隱晉書》以「戎」釋「阿戎」，且按語中列「王戎」為鍾會所薦之人，故「阿戎了了」與「王戎簡要」指同一人，並非兩個人。"
+        }
+      ],
+      "rejected_claims": [],
+      "rejected_evidence": [],
+      "rejected_gaps": [],
+      "resolution_sources": [
+        "multi_source_resolved"
+      ],
+      "retrieval_attempts": {
+        "Q1": 0
+      },
+      "retrieved_refs": [],
+      "round_metrics": [
+        {
+          "D_t": 1,
+          "G_t": 1,
+          "N_t": 1.0,
+          "Q_t": 0,
+          "new_used_evidence_refs": [
+            "J02",
+            "L01",
+            "L03"
+          ],
+          "question_metrics": [
+            {
+              "D_t": 1,
+              "N_t": 1.0,
+              "Q_t": 0,
+              "active": false,
+              "conflict_fingerprints": [
+                "d1453b4f97ec0860becf15141d12e1f7c717551a9fbb41325e667dc43c6f9b84"
+              ],
+              "d_basis": "validated_evidence_change",
+              "new_used_evidence_refs": [
+                "J02",
+                "L01",
+                "L03"
+              ],
+              "question_id": "Q1",
+              "reading_sufficient": true,
+              "round": 1,
+              "used_evidence_refs": [
+                "J02",
+                "L01",
+                "L03"
+              ]
+            }
+          ],
+          "retrieval": false,
+          "round": 1,
+          "used_evidence_refs": [
+            "J02",
+            "L01",
+            "L03"
+          ]
+        }
+      ],
+      "rounds_executed": [
+        0,
+        1
+      ],
+      "run_id": "srm0-5-live-1054724990e2bf50",
+      "search_trace_count": 0,
+      "searched_corpora": [],
+      "semantic_failed_questions": [],
+      "story_id": "08-shangyu-005",
+      "story_status": "converged",
+      "story_text": "鍾士季目王安豐阿戎了了解人意\n謂裴公之談經日不竭吏部郎闕文帝問其人\n\n於鍾會會曰裴楷清通王戎簡要皆其選也於是用\n裴",
+      "stratum": "medium_commentary",
+      "structural_normalizations": [],
+      "terminal_reason_per_question": {
+        "Q1": "reading_sufficient"
+      },
+      "token_usage": {
+        "completion_tokens": 11071,
+        "prompt_tokens": 1421,
+        "total_tokens": 12492
+      },
+      "transport_errors": [],
+      "transport_metrics": {
+        "connect_timeout_count": 0,
+        "failure_classes": {},
+        "max_successful_latency_seconds": 60.24445,
+        "median_successful_latency_seconds": 49.34819,
+        "read_timeout_count": 0,
+        "server_error_count": 0,
+        "successful_latencies_seconds": [
+          38.45193,
+          60.24445
+        ],
+        "tls_failure_count": 0,
+        "transport_request_count": 2,
+        "transport_retry_count": 0,
+        "transport_success_count": 2
+      },
+      "used_evidence": [
+        "J02",
+        "L01",
+        "L03"
+      ]
+    },
+    {
+      "accepted_gaps": [
+        {
+          "gap": "需要明确“陽眠”是假装睡觉还是白天睡觉，以判断曹操杀人是故意还是无意。",
+          "question_id": "Q1",
+          "story_span": "陽眠"
+        },
+        {
+          "gap": "需要明确“所幸”指受宠爱的人还是恰巧的人，以理解被杀者与曹操的关系。",
+          "question_id": "Q2",
+          "story_span": "所幸一人"
+        }
+      ],
+      "canonical_write_back": false,
+      "commentary_only_resolution_count": 0,
+      "convergence_status": "semantic_failed",
+      "evidence_rounds": [
+        {
+          "D_t": 1,
+          "G_t": 2,
+          "N_t": 1.0,
+          "Q_t": 1,
+          "new_used_evidence_refs": [
+            "J01"
+          ],
+          "question_metrics": [
+            {
+              "D_t": 1,
+              "N_t": 1.0,
+              "Q_t": 1,
+              "active": false,
+              "conflict_fingerprints": [
+                "5a47f46b80dedef1b4fe4b041ef56a774b091978b1559e6639b3652de96c5a94"
+              ],
+              "d_basis": "validated_evidence_change",
+              "new_used_evidence_refs": [
+                "J01"
+              ],
+              "question_id": "Q1",
+              "reading_sufficient": true,
+              "round": 1,
+              "used_evidence_refs": [
+                "J01"
+              ]
+            },
+            {
+              "D_t": 0,
+              "N_t": 0.0,
+              "Q_t": 1,
+              "active": false,
+              "conflict_fingerprints": [],
+              "d_basis": "none",
+              "new_used_evidence_refs": [],
+              "question_id": "Q2",
+              "reading_sufficient": true,
+              "round": 1,
+              "used_evidence_refs": []
+            }
+          ],
+          "retrieval": false,
+          "round": 1,
+          "used_evidence_refs": [
+            "J01"
+          ]
+        },
+        {
+          "D_t": 0,
+          "G_t": 2,
+          "N_t": 0.0,
+          "Q_t": 0,
+          "new_used_evidence_refs": [],
+          "opened_evidence_count": 5,
+          "question_metrics": [],
+          "retrieval": true,
+          "retrieved_evidence_count": 24,
+          "round": 2,
+          "used_evidence_refs": []
+        }
+      ],
+      "execution_kind": "live_model",
+      "external_retrieval_required_count": 2,
+      "external_search_performed": false,
+      "initial_gaps": [
+        {
+          "gap": "需要明确“陽眠”是假装睡觉还是白天睡觉，以判断曹操杀人是故意还是无意。",
+          "question_id": "Q1",
+          "story_span": "陽眠"
+        },
+        {
+          "gap": "需要明确“所幸”指受宠爱的人还是恰巧的人，以理解被杀者与曹操的关系。",
+          "question_id": "Q2",
+          "story_span": "所幸一人"
+        }
+      ],
+      "jianshu_chars": 26,
+      "latency_seconds": {
+        "max": 48.750544,
+        "mean": 29.83848833333333,
+        "median": 33.97824,
+        "successful": [
+          33.97824,
+          48.750544,
+          6.786681
+        ]
+      },
+      "liu_block_count": 0,
+      "main_text_chars": 53,
+      "new_used_evidence": [
+        "J01"
+      ],
+      "opened_refs": [
+        "jinshu:017-zhi-001",
+        "jinshu:030-zhi-001",
+        "jinshu:036-liezhuan-001",
+        "jinshu:045-liezhuan-001",
+        "jinshu:055-liezhuan-002",
+        "jinshu:078-liezhuan-001",
+        "sanguozhi:sgz1-juan-001-000137",
+        "sanguozhi:sgz1-juan-002-000043",
+        "sanguozhi:sgz1-juan-014-000078",
+        "sanguozhi:sgz1-juan-018-000067"
+      ],
+      "protocol_errors": [],
+      "question_metrics": {
+        "converged_question_count": 0,
+        "evaluable_question_count": 2,
+        "evidence_saturated_question_count": 0,
+        "hard_cap_question_count": 0,
+        "not_worth_pursuing_question_count": 0,
+        "protocol_failed_question_count": 0,
+        "reading_sufficient_question_count": 0,
+        "semantic_failed_question_count": 2,
+        "stable_conflict_question_count": 0,
+        "terminal_state_counts": {},
+        "transport_failed_question_count": 0,
+        "unresolved_question_count": 0,
+        "unresolved_terminal_question_count": 0,
+        "valid_question_count": 0
+      },
+      "question_resolution_sources": {
+        "Q1": [
+          "jianshu_resolved"
+        ],
+        "Q1.1": [
+          "unresolved"
+        ],
+        "Q2": [
+          "unresolved"
+        ],
+        "Q2.1": [
+          "unresolved"
+        ]
+      },
+      "questions": [
+        {
+          "active": false,
+          "evidence_round_refs": [
+            {
+              "refs": [
+                "J01"
+              ],
+              "round": 1
+            }
+          ],
+          "evidence_rounds": 1,
+          "failure_type": null,
+          "gap": "需要明确“陽眠”是假装睡觉还是白天睡觉，以判断曹操杀人是故意还是无意。",
+          "historical_verification_open": true,
+          "last_round": 1,
+          "next_action": "stop",
+          "parent_aspect_id": null,
+          "parent_question_id": null,
+          "question_id": "Q1",
+          "reading_sufficient": true,
+          "remaining_gap": "注释未直接解释‘陽眠’的词义，需明确其为‘假装睡觉’还是‘白天睡觉’；异文‘陽凍’也未作训释。",
+          "state": "conflicted",
+          "story_span": "陽眠",
+          "supporting_refs": [
+            "J01"
+          ],
+          "terminal_reason": "refined_to_child",
+          "working_answer": "余嘉锡提供了‘陽眠’的异文‘陽凍’，表明该词存在版本差异。"
+        },
+        {
+          "active": false,
+          "evidence_round_refs": [],
+          "evidence_rounds": 0,
+          "failure_type": "semantic_failed",
+          "gap": "注释未直接解释‘陽眠’的词义，需明确其为‘假装睡觉’还是‘白天睡觉’；异文‘陽凍’也未作训释。",
+          "historical_verification_open": false,
+          "last_round": 1,
+          "next_action": "retrieve_local",
+          "parent_aspect_id": "Q1-U1",
+          "parent_question_id": "Q1",
+          "question_id": "Q1.1",
+          "reading_sufficient": false,
+          "remaining_gap": "注释未直接解释‘陽眠’的词义，需明确其为‘假装睡觉’还是‘白天睡觉’；异文‘陽凍’也未作训释。",
+          "state": "unexplained",
+          "story_span": "陽眠",
+          "supporting_refs": [],
+          "terminal_reason": "semantic_failed",
+          "working_answer": ""
+        },
+        {
+          "active": false,
+          "evidence_round_refs": [
+            {
+              "refs": [],
+              "round": 1
+            }
+          ],
+          "evidence_rounds": 1,
+          "failure_type": null,
+          "gap": "需要明确“所幸”指受宠爱的人还是恰巧的人，以理解被杀者与曹操的关系。",
+          "historical_verification_open": false,
+          "last_round": 1,
+          "next_action": "stop",
+          "parent_aspect_id": null,
+          "parent_question_id": null,
+          "question_id": "Q2",
+          "reading_sufficient": true,
+          "remaining_gap": "现有注释未涉及‘所幸’的含义，需明确其指‘受宠爱的人’还是‘恰好的人’以理解被杀者与曹操的关系。",
+          "state": "substantially_explained",
+          "story_span": "所幸一人",
+          "supporting_refs": [],
+          "terminal_reason": "refined_to_child",
+          "working_answer": ""
+        },
+        {
+          "active": false,
+          "evidence_round_refs": [],
+          "evidence_rounds": 0,
+          "failure_type": "semantic_failed",
+          "gap": "现有注释未涉及‘所幸’的含义，需明确其指‘受宠爱的人’还是‘恰好的人’以理解被杀者与曹操的关系。",
+          "historical_verification_open": false,
+          "last_round": 1,
+          "next_action": "retrieve_local",
+          "parent_aspect_id": "Q2-U1",
+          "parent_question_id": "Q2",
+          "question_id": "Q2.1",
+          "reading_sufficient": false,
+          "remaining_gap": "现有注释未涉及‘所幸’的含义，需明确其指‘受宠爱的人’还是‘恰好的人’以理解被杀者与曹操的关系。",
+          "state": "unexplained",
+          "story_span": "所幸一人",
+          "supporting_refs": [],
+          "terminal_reason": "semantic_failed",
+          "working_answer": ""
+        }
+      ],
+      "rejected_claims": [],
+      "rejected_evidence": [],
+      "rejected_gaps": [],
+      "resolution_sources": [
+        "jianshu_resolved",
+        "unresolved"
+      ],
+      "retrieval_attempts": {
+        "Q1": 0,
+        "Q1.1": 1,
+        "Q2": 0,
+        "Q2.1": 1
+      },
+      "retrieved_refs": [
+        "jinshu:017-zhi-001",
+        "jinshu:030-zhi-001",
+        "jinshu:036-liezhuan-001",
+        "jinshu:045-liezhuan-001",
+        "jinshu:055-liezhuan-002",
+        "jinshu:078-liezhuan-001",
+        "s1:s1-assertion-08928a525e09dfa5c09e",
+        "s1:s1-assertion-0c2502e3a355f2a04860",
+        "s1:s1-assertion-0c9cabafcc3ca4c6a42a",
+        "s1:s1-assertion-0d4f63598681988ae926",
+        "s1:s1-assertion-2338e93339de6e374156",
+        "s1:s1-assertion-c12a096b3eb829bd09d3",
+        "sanguozhi:sgz1-juan-001-000137",
+        "sanguozhi:sgz1-juan-002-000043",
+        "sanguozhi:sgz1-juan-003-000049",
+        "sanguozhi:sgz1-juan-014-000078",
+        "sanguozhi:sgz1-juan-018-000067",
+        "sanguozhi:sgz1-juan-035-000020",
+        "shishuo:01-dexing-013:main",
+        "shishuo:01-dexing-024:main",
+        "shishuo:01-dexing-025:main",
+        "shishuo:02-yanyu-003:liu:annotation-004",
+        "shishuo:04-wenxue-006:liu:annotation-007",
+        "shishuo:04-wenxue-014:main"
+      ],
+      "round_metrics": [
+        {
+          "D_t": 1,
+          "G_t": 2,
+          "N_t": 1.0,
+          "Q_t": 1,
+          "new_used_evidence_refs": [
+            "J01"
+          ],
+          "question_metrics": [
+            {
+              "D_t": 1,
+              "N_t": 1.0,
+              "Q_t": 1,
+              "active": false,
+              "conflict_fingerprints": [
+                "5a47f46b80dedef1b4fe4b041ef56a774b091978b1559e6639b3652de96c5a94"
+              ],
+              "d_basis": "validated_evidence_change",
+              "new_used_evidence_refs": [
+                "J01"
+              ],
+              "question_id": "Q1",
+              "reading_sufficient": true,
+              "round": 1,
+              "used_evidence_refs": [
+                "J01"
+              ]
+            },
+            {
+              "D_t": 0,
+              "N_t": 0.0,
+              "Q_t": 1,
+              "active": false,
+              "conflict_fingerprints": [],
+              "d_basis": "none",
+              "new_used_evidence_refs": [],
+              "question_id": "Q2",
+              "reading_sufficient": true,
+              "round": 1,
+              "used_evidence_refs": []
+            }
+          ],
+          "retrieval": false,
+          "round": 1,
+          "used_evidence_refs": [
+            "J01"
+          ]
+        },
+        {
+          "D_t": 0,
+          "G_t": 2,
+          "N_t": 0.0,
+          "Q_t": 0,
+          "new_used_evidence_refs": [],
+          "opened_evidence_count": 5,
+          "question_metrics": [],
+          "retrieval": true,
+          "retrieved_evidence_count": 24,
+          "round": 2,
+          "used_evidence_refs": []
+        }
+      ],
+      "rounds_executed": [
+        0,
+        1,
+        2
+      ],
+      "run_id": "srm0-5-live-968e64c981c02045",
+      "search_trace_count": 2,
+      "searched_corpora": [
+        "世說新語",
+        "余嘉錫箋疏",
+        "晉書",
+        "三國志",
+        "資治通鑑",
+        "資治通鑑考異"
+      ],
+      "semantic_failed_questions": [
+        "Q1.1",
+        "Q2.1"
+      ],
+      "story_id": "27-jiajue-004",
+      "story_status": "semantic_failed",
+      "story_text": "魏武常云我眠中不可妄近近便斫人亦不自覺左\n右冝深慎此後陽眠所幸一人竊以𬒳覆之因便斫\n殺自爾毎眠左右莫敢近者",
+      "stratum": "low_context_control",
+      "structural_normalizations": [],
+      "terminal_reason_per_question": {
+        "Q1": "refined_to_child",
+        "Q1.1": "semantic_failed",
+        "Q2": "refined_to_child",
+        "Q2.1": "semantic_failed"
+      },
+      "token_usage": {
+        "completion_tokens": 10057,
+        "prompt_tokens": 3499,
+        "total_tokens": 13556
+      },
+      "transport_errors": [],
+      "transport_metrics": {
+        "connect_timeout_count": 0,
+        "failure_classes": {},
+        "max_successful_latency_seconds": 48.750544,
+        "median_successful_latency_seconds": 33.97824,
+        "read_timeout_count": 0,
+        "server_error_count": 0,
+        "successful_latencies_seconds": [
+          33.97824,
+          48.750544,
+          6.786681
+        ],
+        "tls_failure_count": 0,
+        "transport_request_count": 3,
+        "transport_retry_count": 0,
+        "transport_success_count": 3
+      },
+      "used_evidence": [
+        "J01"
+      ]
+    },
+    {
+      "accepted_gaps": [
+        {
+          "gap": "缺三月三日作为上巳节、文士集会赋诗的节候及习俗信息，以理解'会作诗'的场合与氛围。",
+          "question_id": "Q1",
+          "story_span": "三月三日㑹作詩"
+        },
+        {
+          "gap": "缺桓公即桓温的身份信息，影响理解郝隆'千里投公'所投奔对象的权势地位，以及由此产生的政治意味。",
+          "question_id": "Q2",
+          "story_span": "桓公"
+        },
+        {
+          "gap": "缺'参军'这一官位在晋代幕府中属较低级属官的信息，否则郝隆以'蛮府参军'自嘲的幽默感难以充分体现。",
+          "question_id": "Q3",
+          "story_span": "始得蠻府叅\n軍"
+        }
+      ],
+      "canonical_write_back": false,
+      "commentary_only_resolution_count": 0,
+      "convergence_status": "semantic_partial_failure",
+      "evidence_rounds": [
+        {
+          "D_t": 1,
+          "G_t": 3,
+          "N_t": 1.0,
+          "Q_t": 1,
+          "new_used_evidence_refs": [
+            "J01"
+          ],
+          "question_metrics": [
+            {
+              "D_t": 1,
+              "N_t": 1.0,
+              "Q_t": 0,
+              "active": false,
+              "conflict_fingerprints": [
+                "68e14e5dc6d5cc96eb4b4212cefd1233633d0e584700d6d44052888a79a7d10a"
+              ],
+              "d_basis": "validated_evidence_change",
+              "new_used_evidence_refs": [
+                "J01"
+              ],
+              "question_id": "Q1",
+              "reading_sufficient": false,
+              "round": 1,
+              "used_evidence_refs": [
+                "J01"
+              ]
+            },
+            {
+              "D_t": 0,
+              "N_t": 0.0,
+              "Q_t": 1,
+              "active": true,
+              "conflict_fingerprints": [],
+              "d_basis": "none",
+              "new_used_evidence_refs": [],
+              "question_id": "Q2",
+              "reading_sufficient": false,
+              "round": 1,
+              "used_evidence_refs": []
+            },
+            {
+              "D_t": 0,
+              "N_t": 0.0,
+              "Q_t": 1,
+              "active": true,
+              "conflict_fingerprints": [],
+              "d_basis": "none",
+              "new_used_evidence_refs": [],
+              "question_id": "Q3",
+              "reading_sufficient": false,
+              "round": 1,
+              "used_evidence_refs": []
+            }
+          ],
+          "retrieval": false,
+          "round": 1,
+          "used_evidence_refs": [
+            "J01"
+          ]
+        },
+        {
+          "D_t": 0,
+          "G_t": 2,
+          "N_t": 0.0,
+          "Q_t": 0,
+          "new_used_evidence_refs": [],
+          "opened_evidence_count": 5,
+          "question_metrics": [],
+          "retrieval": true,
+          "retrieved_evidence_count": 24,
+          "round": 2,
+          "used_evidence_refs": []
+        }
+      ],
+      "execution_kind": "live_model",
+      "external_retrieval_required_count": 2,
+      "external_search_performed": false,
+      "initial_gaps": [
+        {
+          "gap": "缺三月三日作为上巳节、文士集会赋诗的节候及习俗信息，以理解'会作诗'的场合与氛围。",
+          "question_id": "Q1",
+          "story_span": "三月三日㑹作詩"
+        },
+        {
+          "gap": "缺桓公即桓温的身份信息，影响理解郝隆'千里投公'所投奔对象的权势地位，以及由此产生的政治意味。",
+          "question_id": "Q2",
+          "story_span": "桓公"
+        },
+        {
+          "gap": "缺'参军'这一官位在晋代幕府中属较低级属官的信息，否则郝隆以'蛮府参军'自嘲的幽默感难以充分体现。",
+          "question_id": "Q3",
+          "story_span": "始得蠻府叅\n軍"
+        }
+      ],
+      "jianshu_chars": 83,
+      "latency_seconds": {
+        "max": 68.274484,
+        "mean": 38.03553466666666,
+        "median": 41.091417,
+        "successful": [
+          68.274484,
+          41.091417,
+          4.740703
+        ]
+      },
+      "liu_block_count": 0,
+      "main_text_chars": 93,
+      "new_used_evidence": [
+        "J01"
+      ],
+      "opened_refs": [
+        "jinshu:014-zhi-001",
+        "jinshu:019-zhi-001",
+        "jinshu:026-zhi-001",
+        "jinshu:028-zhi-001",
+        "jinshu:033-liezhuan-001",
+        "jinshu:067-liezhuan-002",
+        "sanguozhi:sgz1-juan-006-000141",
+        "sanguozhi:sgz1-juan-021-000074",
+        "shishuo:22-chongli-002:main",
+        "shishuo:25-paidiao-032:main"
+      ],
+      "protocol_errors": [],
+      "question_metrics": {
+        "converged_question_count": 1,
+        "evaluable_question_count": 3,
+        "evidence_saturated_question_count": 0,
+        "hard_cap_question_count": 0,
+        "not_worth_pursuing_question_count": 1,
+        "protocol_failed_question_count": 0,
+        "reading_sufficient_question_count": 0,
+        "semantic_failed_question_count": 2,
+        "stable_conflict_question_count": 0,
+        "terminal_state_counts": {
+          "not_worth_pursuing": 1
+        },
+        "transport_failed_question_count": 0,
+        "unresolved_question_count": 0,
+        "unresolved_terminal_question_count": 0,
+        "valid_question_count": 1
+      },
+      "question_resolution_sources": {
+        "Q1": [
+          "jianshu_resolved"
+        ],
+        "Q2": [
+          "unresolved"
+        ],
+        "Q2.1": [
+          "unresolved"
+        ],
+        "Q3": [
+          "unresolved"
+        ],
+        "Q3.1": [
+          "unresolved"
+        ]
+      },
+      "questions": [
+        {
+          "active": false,
+          "evidence_round_refs": [
+            {
+              "refs": [
+                "J01"
+              ],
+              "round": 1
+            }
+          ],
+          "evidence_rounds": 1,
+          "failure_type": null,
+          "gap": "缺三月三日作为上巳节、文士集会赋诗的节候及习俗信息，以理解'会作诗'的场合与氛围。",
+          "historical_verification_open": true,
+          "last_round": 1,
+          "next_action": "stop",
+          "parent_aspect_id": null,
+          "parent_question_id": null,
+          "question_id": "Q1",
+          "reading_sufficient": false,
+          "remaining_gap": "仍缺三月三日作为上巳节的节候及习俗（如祓禊、曲水流觞）信息，这些背景有助于理解为何在此日集会赋诗及其特殊氛围。",
+          "state": "conflicted",
+          "story_span": "三月三日㑹作詩",
+          "supporting_refs": [
+            "J01"
+          ],
+          "terminal_reason": "not_worth_pursuing",
+          "working_answer": "余嘉锡引《渚宫旧事》异文显示，原文“三月三日會，作詩。不能者”或作“三月三日大會參佐，令賦詩，遲者”，表明这是一次召集僚佐的赋诗活动，且受罚者可能指作诗迟缓者而非不能作诗者，这有助于理解集会场合与罚酒原因。"
+        },
+        {
+          "active": false,
+          "evidence_round_refs": [
+            {
+              "refs": [],
+              "round": 1
+            }
+          ],
+          "evidence_rounds": 1,
+          "failure_type": null,
+          "gap": "缺桓公即桓温的身份信息，影响理解郝隆'千里投公'所投奔对象的权势地位，以及由此产生的政治意味。",
+          "historical_verification_open": false,
+          "last_round": 1,
+          "next_action": "retrieve_local",
+          "parent_aspect_id": null,
+          "parent_question_id": null,
+          "question_id": "Q2",
+          "reading_sufficient": false,
+          "remaining_gap": "注释未提供桓公即桓温的身份信息，仍缺其权势地位及政治意味，影响理解“千里投公”所投奔对象的地位与投靠含义。",
+          "state": "unexplained",
+          "story_span": "桓公",
+          "supporting_refs": [],
+          "terminal_reason": "refined_to_child",
+          "working_answer": ""
+        },
+        {
+          "active": false,
+          "evidence_round_refs": [],
+          "evidence_rounds": 0,
+          "failure_type": "semantic_failed",
+          "gap": "注释未提供桓公即桓温的身份信息，仍缺其权势地位及政治意味，影响理解“千里投公”所投奔对象的地位与投靠含义。",
+          "historical_verification_open": false,
+          "last_round": 1,
+          "next_action": "retrieve_local",
+          "parent_aspect_id": "Q2-U1",
+          "parent_question_id": "Q2",
+          "question_id": "Q2.1",
+          "reading_sufficient": false,
+          "remaining_gap": "注释未提供桓公即桓温的身份信息，仍缺其权势地位及政治意味，影响理解“千里投公”所投奔对象的地位与投靠含义。",
+          "state": "unexplained",
+          "story_span": "桓公",
+          "supporting_refs": [],
+          "terminal_reason": "semantic_failed",
+          "working_answer": ""
+        },
+        {
+          "active": false,
+          "evidence_round_refs": [
+            {
+              "refs": [],
+              "round": 1
+            }
+          ],
+          "evidence_rounds": 1,
+          "failure_type": null,
+          "gap": "缺'参军'这一官位在晋代幕府中属较低级属官的信息，否则郝隆以'蛮府参军'自嘲的幽默感难以充分体现。",
+          "historical_verification_open": false,
+          "last_round": 1,
+          "next_action": "retrieve_local",
+          "parent_aspect_id": null,
+          "parent_question_id": null,
+          "question_id": "Q3",
+          "reading_sufficient": false,
+          "remaining_gap": "注释未提供“参军”在晋代幕府中属较低级属官的信息，郝隆以“蛮府参军”自嘲的幽默感仍难以充分体现。",
+          "state": "unexplained",
+          "story_span": "始得蠻府叅\n軍",
+          "supporting_refs": [],
+          "terminal_reason": "refined_to_child",
+          "working_answer": ""
+        },
+        {
+          "active": false,
+          "evidence_round_refs": [],
+          "evidence_rounds": 0,
+          "failure_type": "semantic_failed",
+          "gap": "注释未提供“参军”在晋代幕府中属较低级属官的信息，郝隆以“蛮府参军”自嘲的幽默感仍难以充分体现。",
+          "historical_verification_open": false,
+          "last_round": 1,
+          "next_action": "retrieve_local",
+          "parent_aspect_id": "Q3-U1",
+          "parent_question_id": "Q3",
+          "question_id": "Q3.1",
+          "reading_sufficient": false,
+          "remaining_gap": "注释未提供“参军”在晋代幕府中属较低级属官的信息，郝隆以“蛮府参军”自嘲的幽默感仍难以充分体现。",
+          "state": "unexplained",
+          "story_span": "始得蠻府叅\n軍",
+          "supporting_refs": [],
+          "terminal_reason": "semantic_failed",
+          "working_answer": ""
+        }
+      ],
+      "rejected_claims": [
+        {
+          "path": "$.updates[1].answered_aspects[0]",
+          "question_id": "Q3.1",
+          "reason": "claim_missing_id_or_text"
+        }
+      ],
+      "rejected_evidence": [],
+      "rejected_gaps": [],
+      "resolution_sources": [
+        "jianshu_resolved",
+        "unresolved"
+      ],
+      "retrieval_attempts": {
+        "Q1": 0,
+        "Q2": 0,
+        "Q2.1": 1,
+        "Q3": 0,
+        "Q3.1": 1
+      },
+      "retrieved_refs": [
+        "jinshu:014-zhi-001",
+        "jinshu:019-zhi-001",
+        "jinshu:026-zhi-001",
+        "jinshu:028-zhi-001",
+        "jinshu:033-liezhuan-001",
+        "jinshu:067-liezhuan-002",
+        "s1:s1-assertion-02f02fd0f619542552ca",
+        "s1:s1-assertion-0ad48765203aba4a790c",
+        "s1:s1-assertion-0e487dbcb9ace95281b5",
+        "s1:s1-assertion-12a9d3b7a200b43473ca",
+        "s1:s1-assertion-35134ba3d3bb00a76b1f",
+        "s1:s1-assertion-c12a096b3eb829bd09d3",
+        "sanguozhi:sgz1-juan-002-000043",
+        "sanguozhi:sgz1-juan-003-000033",
+        "sanguozhi:sgz1-juan-003-000042",
+        "sanguozhi:sgz1-juan-006-000141",
+        "sanguozhi:sgz1-juan-021-000074",
+        "sanguozhi:sgz1-juan-051-000057",
+        "shishuo:01-dexing-001:liu:annotation-004",
+        "shishuo:01-dexing-024:liu:annotation-003",
+        "shishuo:01-dexing-037:liu:annotation-002",
+        "shishuo:05-fangzheng-058:main",
+        "shishuo:22-chongli-002:main",
+        "shishuo:25-paidiao-032:main"
+      ],
+      "round_metrics": [
+        {
+          "D_t": 1,
+          "G_t": 3,
+          "N_t": 1.0,
+          "Q_t": 1,
+          "new_used_evidence_refs": [
+            "J01"
+          ],
+          "question_metrics": [
+            {
+              "D_t": 1,
+              "N_t": 1.0,
+              "Q_t": 0,
+              "active": false,
+              "conflict_fingerprints": [
+                "68e14e5dc6d5cc96eb4b4212cefd1233633d0e584700d6d44052888a79a7d10a"
+              ],
+              "d_basis": "validated_evidence_change",
+              "new_used_evidence_refs": [
+                "J01"
+              ],
+              "question_id": "Q1",
+              "reading_sufficient": false,
+              "round": 1,
+              "used_evidence_refs": [
+                "J01"
+              ]
+            },
+            {
+              "D_t": 0,
+              "N_t": 0.0,
+              "Q_t": 1,
+              "active": true,
+              "conflict_fingerprints": [],
+              "d_basis": "none",
+              "new_used_evidence_refs": [],
+              "question_id": "Q2",
+              "reading_sufficient": false,
+              "round": 1,
+              "used_evidence_refs": []
+            },
+            {
+              "D_t": 0,
+              "N_t": 0.0,
+              "Q_t": 1,
+              "active": true,
+              "conflict_fingerprints": [],
+              "d_basis": "none",
+              "new_used_evidence_refs": [],
+              "question_id": "Q3",
+              "reading_sufficient": false,
+              "round": 1,
+              "used_evidence_refs": []
+            }
+          ],
+          "retrieval": false,
+          "round": 1,
+          "used_evidence_refs": [
+            "J01"
+          ]
+        },
+        {
+          "D_t": 0,
+          "G_t": 2,
+          "N_t": 0.0,
+          "Q_t": 0,
+          "new_used_evidence_refs": [],
+          "opened_evidence_count": 5,
+          "question_metrics": [],
+          "retrieval": true,
+          "retrieved_evidence_count": 24,
+          "round": 2,
+          "used_evidence_refs": []
+        }
+      ],
+      "rounds_executed": [
+        0,
+        1,
+        2
+      ],
+      "run_id": "srm0-5-live-320e76356c7f9a08",
+      "search_trace_count": 2,
+      "searched_corpora": [
+        "世說新語",
+        "余嘉錫箋疏",
+        "晉書",
+        "三國志",
+        "資治通鑑",
+        "資治通鑑考異"
+      ],
+      "semantic_failed_questions": [
+        "Q2.1",
+        "Q3.1"
+      ],
+      "story_id": "25-paidiao-035",
+      "story_status": "semantic_partial_failure",
+      "story_text": "郝隆為桓公南蠻叅軍三月三日㑹作詩不能者罰\n\n酒三升隆初以不能受罰既飲攬筆便作一句云娵\n隅躍清池桓問娵隅是何物荅曰蠻名魚為娵隅桓\n公曰作詩何以作蠻語隆曰千里投公始得蠻府叅\n軍那得不作蠻語也",
+      "stratum": "low_context_control",
+      "structural_normalizations": [
+        {
+          "action": "normalize_whitespace",
+          "normalized": "始得蠻府叅\n軍",
+          "original": "始得蠻府叅軍",
+          "path": "$.gaps[2].story_span",
+          "reason": "span whitespace aligned to canonical Story text",
+          "stage": "initial"
+        }
+      ],
+      "terminal_reason_per_question": {
+        "Q1": "not_worth_pursuing",
+        "Q2": "refined_to_child",
+        "Q2.1": "semantic_failed",
+        "Q3": "refined_to_child",
+        "Q3.1": "semantic_failed"
+      },
+      "token_usage": {
+        "completion_tokens": 12395,
+        "prompt_tokens": 3965,
+        "total_tokens": 16360
+      },
+      "transport_errors": [],
+      "transport_metrics": {
+        "connect_timeout_count": 0,
+        "failure_classes": {},
+        "max_successful_latency_seconds": 68.274484,
+        "median_successful_latency_seconds": 41.091417,
+        "read_timeout_count": 0,
+        "server_error_count": 0,
+        "successful_latencies_seconds": [
+          68.274484,
+          41.091417,
+          4.740703
+        ],
+        "tls_failure_count": 0,
+        "transport_request_count": 3,
+        "transport_retry_count": 0,
+        "transport_success_count": 3
+      },
+      "used_evidence": [
+        "J01"
+      ]
+    },
+    {
+      "accepted_gaps": [
+        {
+          "gap": "缺少『直接去上』的主語和動作方向：是阮氏眾人徑直上前與豬共飲，還是豬徑直上前與人共飲；這決定了人豬共飲場面中誰主動、如何發生。",
+          "question_id": "Q1",
+          "story_span": "直接\n去上便共飲之"
+        }
+      ],
+      "canonical_write_back": false,
+      "commentary_only_resolution_count": 1,
+      "convergence_status": "converged",
+      "evidence_rounds": [
+        {
+          "D_t": 1,
+          "G_t": 1,
+          "N_t": 1.0,
+          "Q_t": 0,
+          "new_used_evidence_refs": [
+            "J02"
+          ],
+          "question_metrics": [
+            {
+              "D_t": 1,
+              "N_t": 1.0,
+              "Q_t": 0,
+              "active": false,
+              "conflict_fingerprints": [],
+              "d_basis": "validated_evidence_change",
+              "new_used_evidence_refs": [
+                "J02"
+              ],
+              "question_id": "Q1",
+              "reading_sufficient": true,
+              "round": 1,
+              "used_evidence_refs": [
+                "J02"
+              ]
+            }
+          ],
+          "retrieval": false,
+          "round": 1,
+          "used_evidence_refs": [
+            "J02"
+          ]
+        }
+      ],
+      "execution_kind": "live_model",
+      "external_retrieval_required_count": 0,
+      "external_search_performed": false,
+      "initial_gaps": [
+        {
+          "gap": "缺少『直接去上』的主語和動作方向：是阮氏眾人徑直上前與豬共飲，還是豬徑直上前與人共飲；這決定了人豬共飲場面中誰主動、如何發生。",
+          "question_id": "Q1",
+          "story_span": "直接\n去上便共飲之"
+        }
+      ],
+      "jianshu_chars": 50,
+      "latency_seconds": {
+        "max": 162.349813,
+        "mean": 88.635233,
+        "median": 88.635233,
+        "successful": [
+          162.349813,
+          14.920653
+        ]
+      },
+      "liu_block_count": 0,
+      "main_text_chars": 55,
+      "new_used_evidence": [
+        "J02"
+      ],
+      "opened_refs": [],
+      "protocol_errors": [],
+      "question_metrics": {
+        "converged_question_count": 1,
+        "evaluable_question_count": 1,
+        "evidence_saturated_question_count": 0,
+        "hard_cap_question_count": 0,
+        "not_worth_pursuing_question_count": 0,
+        "protocol_failed_question_count": 0,
+        "reading_sufficient_question_count": 1,
+        "semantic_failed_question_count": 0,
+        "stable_conflict_question_count": 0,
+        "terminal_state_counts": {
+          "reading_sufficient": 1
+        },
+        "transport_failed_question_count": 0,
+        "unresolved_question_count": 0,
+        "unresolved_terminal_question_count": 0,
+        "valid_question_count": 1
+      },
+      "question_resolution_sources": {
+        "Q1": [
+          "jianshu_resolved"
+        ]
+      },
+      "questions": [
+        {
+          "active": false,
+          "evidence_round_refs": [
+            {
+              "refs": [
+                "J02"
+              ],
+              "round": 1
+            }
+          ],
+          "evidence_rounds": 1,
+          "failure_type": null,
+          "gap": "缺少『直接去上』的主語和動作方向：是阮氏眾人徑直上前與豬共飲，還是豬徑直上前與人共飲；這決定了人豬共飲場面中誰主動、如何發生。",
+          "historical_verification_open": false,
+          "last_round": 1,
+          "next_action": "stop",
+          "parent_aspect_id": null,
+          "parent_question_id": null,
+          "question_id": "Q1",
+          "reading_sufficient": true,
+          "remaining_gap": "「去上」中「上」的具體所指（酒甕之上或豬群所在）仍不明確，但不影響對人豬共飲場景的基本理解。",
+          "state": "substantially_explained",
+          "story_span": "直接\n去上便共飲之",
+          "supporting_refs": [
+            "J02"
+          ],
+          "terminal_reason": "reading_sufficient",
+          "working_answer": "「直接去上」的主語是阮咸（仲容），動作方向是阮咸上前與豬共飲，而非豬主動上前。"
+        }
+      ],
+      "rejected_claims": [],
+      "rejected_evidence": [],
+      "rejected_gaps": [],
+      "resolution_sources": [
+        "jianshu_resolved"
+      ],
+      "retrieval_attempts": {
+        "Q1": 0
+      },
+      "retrieved_refs": [],
+      "round_metrics": [
+        {
+          "D_t": 1,
+          "G_t": 1,
+          "N_t": 1.0,
+          "Q_t": 0,
+          "new_used_evidence_refs": [
+            "J02"
+          ],
+          "question_metrics": [
+            {
+              "D_t": 1,
+              "N_t": 1.0,
+              "Q_t": 0,
+              "active": false,
+              "conflict_fingerprints": [],
+              "d_basis": "validated_evidence_change",
+              "new_used_evidence_refs": [
+                "J02"
+              ],
+              "question_id": "Q1",
+              "reading_sufficient": true,
+              "round": 1,
+              "used_evidence_refs": [
+                "J02"
+              ]
+            }
+          ],
+          "retrieval": false,
+          "round": 1,
+          "used_evidence_refs": [
+            "J02"
+          ]
+        }
+      ],
+      "rounds_executed": [
+        0,
+        1
+      ],
+      "run_id": "srm0-5-live-c4ca6bb7c6737e77",
+      "search_trace_count": 0,
+      "searched_corpora": [],
+      "semantic_failed_questions": [],
+      "story_id": "23-rendan-012",
+      "story_status": "converged",
+      "story_text": "諸阮皆能飲酒仲容至宗人閒共集不復用常桮斟\n酌以大&KR1805;盛酒圍坐相向大酌時有羣豬來飲直接\n去上便共飲之",
+      "stratum": "low_context_control",
+      "structural_normalizations": [
+        {
+          "action": "normalize_whitespace",
+          "normalized": "直接\n去上便共飲之",
+          "original": "直接去上便共飲之",
+          "path": "$.gaps[0].story_span",
+          "reason": "span whitespace aligned to canonical Story text",
+          "stage": "initial"
+        }
+      ],
+      "terminal_reason_per_question": {
+        "Q1": "reading_sufficient"
+      },
+      "token_usage": {
+        "completion_tokens": 18607,
+        "prompt_tokens": 1069,
+        "total_tokens": 19676
+      },
+      "transport_errors": [],
+      "transport_metrics": {
+        "connect_timeout_count": 0,
+        "failure_classes": {},
+        "max_successful_latency_seconds": 162.349813,
+        "median_successful_latency_seconds": 88.635233,
+        "read_timeout_count": 0,
+        "server_error_count": 0,
+        "successful_latencies_seconds": [
+          162.349813,
+          14.920653
+        ],
+        "tls_failure_count": 0,
+        "transport_request_count": 2,
+        "transport_retry_count": 0,
+        "transport_success_count": 2
+      },
+      "used_evidence": [
+        "J02"
+      ]
+    },
+    {
+      "accepted_gaps": [
+        {
+          "gap": "Why having a high nose and deep eyes would be grounds for teasing is not explained, leaving the motivation unclear.",
+          "question_id": "Q1",
+          "story_span": "康僧淵目深而鼻高王丞相毎調之"
+        }
+      ],
+      "canonical_write_back": false,
+      "commentary_only_resolution_count": 1,
+      "convergence_status": "converged",
+      "evidence_rounds": [
+        {
+          "D_t": 1,
+          "G_t": 1,
+          "N_t": 1.0,
+          "Q_t": 0,
+          "new_used_evidence_refs": [
+            "J01"
+          ],
+          "question_metrics": [
+            {
+              "D_t": 1,
+              "N_t": 1.0,
+              "Q_t": 0,
+              "active": false,
+              "conflict_fingerprints": [],
+              "d_basis": "validated_evidence_change",
+              "new_used_evidence_refs": [
+                "J01"
+              ],
+              "question_id": "Q1",
+              "reading_sufficient": true,
+              "round": 1,
+              "used_evidence_refs": [
+                "J01"
+              ]
+            }
+          ],
+          "retrieval": false,
+          "round": 1,
+          "used_evidence_refs": [
+            "J01"
+          ]
+        }
+      ],
+      "execution_kind": "live_model",
+      "external_retrieval_required_count": 0,
+      "external_search_performed": false,
+      "initial_gaps": [
+        {
+          "gap": "Why having a high nose and deep eyes would be grounds for teasing is not explained, leaving the motivation unclear.",
+          "question_id": "Q1",
+          "story_span": "康僧淵目深而鼻高王丞相毎調之"
+        }
+      ],
+      "jianshu_chars": 59,
+      "latency_seconds": {
+        "max": 68.211163,
+        "mean": 53.716328000000004,
+        "median": 53.716328000000004,
+        "successful": [
+          68.211163,
+          39.221493
+        ]
+      },
+      "liu_block_count": 1,
+      "main_text_chars": 41,
+      "new_used_evidence": [
+        "J01"
+      ],
+      "opened_refs": [],
+      "protocol_errors": [],
+      "question_metrics": {
+        "converged_question_count": 1,
+        "evaluable_question_count": 1,
+        "evidence_saturated_question_count": 0,
+        "hard_cap_question_count": 0,
+        "not_worth_pursuing_question_count": 0,
+        "protocol_failed_question_count": 0,
+        "reading_sufficient_question_count": 1,
+        "semantic_failed_question_count": 0,
+        "stable_conflict_question_count": 0,
+        "terminal_state_counts": {
+          "reading_sufficient": 1
+        },
+        "transport_failed_question_count": 0,
+        "unresolved_question_count": 0,
+        "unresolved_terminal_question_count": 0,
+        "valid_question_count": 1
+      },
+      "question_resolution_sources": {
+        "Q1": [
+          "jianshu_resolved"
+        ]
+      },
+      "questions": [
+        {
+          "active": false,
+          "evidence_round_refs": [
+            {
+              "refs": [
+                "J01"
+              ],
+              "round": 1
+            }
+          ],
+          "evidence_rounds": 1,
+          "failure_type": null,
+          "gap": "Why having a high nose and deep eyes would be grounds for teasing is not explained, leaving the motivation unclear.",
+          "historical_verification_open": false,
+          "last_round": 1,
+          "next_action": "stop",
+          "parent_aspect_id": null,
+          "parent_question_id": null,
+          "question_id": "Q1",
+          "reading_sufficient": true,
+          "remaining_gap": null,
+          "state": "substantially_explained",
+          "story_span": "康僧淵目深而鼻高王丞相毎調之",
+          "supporting_refs": [
+            "J01"
+          ],
+          "terminal_reason": "reading_sufficient",
+          "working_answer": "李詳注指出康僧淵本是胡人，這解釋了他因胡人特有的高鼻深目外貌而被王丞相戲弄的原因。"
+        }
+      ],
+      "rejected_claims": [],
+      "rejected_evidence": [],
+      "rejected_gaps": [
+        {
+          "gap": "The connection between the monk's name '淵' and the word '淵' in his metaphor is not explicitly stated, making the pun easy to miss.",
+          "index": 1,
+          "question_id": "Q2",
+          "reason": "answer_or_explanation_leakage",
+          "story_span": "僧淵曰鼻者面之山目者面之淵"
+        },
+        {
+          "gap": "What makes a high mountain 'spiritual' and a deep abyss 'clear' is not elaborated, so the logic of the monk's self-defense is incomplete.",
+          "index": 2,
+          "question_id": "Q3",
+          "reason": "answer_or_explanation_leakage",
+          "story_span": "山不高則不靈淵不深則不清"
+        }
+      ],
+      "resolution_sources": [
+        "jianshu_resolved"
+      ],
+      "retrieval_attempts": {
+        "Q1": 0
+      },
+      "retrieved_refs": [],
+      "round_metrics": [
+        {
+          "D_t": 1,
+          "G_t": 1,
+          "N_t": 1.0,
+          "Q_t": 0,
+          "new_used_evidence_refs": [
+            "J01"
+          ],
+          "question_metrics": [
+            {
+              "D_t": 1,
+              "N_t": 1.0,
+              "Q_t": 0,
+              "active": false,
+              "conflict_fingerprints": [],
+              "d_basis": "validated_evidence_change",
+              "new_used_evidence_refs": [
+                "J01"
+              ],
+              "question_id": "Q1",
+              "reading_sufficient": true,
+              "round": 1,
+              "used_evidence_refs": [
+                "J01"
+              ]
+            }
+          ],
+          "retrieval": false,
+          "round": 1,
+          "used_evidence_refs": [
+            "J01"
+          ]
+        }
+      ],
+      "rounds_executed": [
+        0,
+        1
+      ],
+      "run_id": "srm0-5-live-e84cae8d85861e7d",
+      "search_trace_count": 0,
+      "searched_corpora": [],
+      "semantic_failed_questions": [],
+      "story_id": "25-paidiao-021",
+      "story_status": "converged",
+      "story_text": "康僧淵目深而鼻高王丞相毎調之僧淵曰鼻者面\n之山目者面之\n淵山不高則不靈淵不深則不清",
+      "stratum": "low_context_control",
+      "structural_normalizations": [
+        {
+          "action": "normalize_whitespace",
+          "normalized": "僧淵曰鼻者面\n之山目者面之\n淵",
+          "original": "僧淵曰鼻者面之山目者面之淵",
+          "path": "$.gaps[1].story_span",
+          "reason": "span whitespace aligned to canonical Story text",
+          "stage": "initial"
+        }
+      ],
+      "terminal_reason_per_question": {
+        "Q1": "reading_sufficient"
+      },
+      "token_usage": {
+        "completion_tokens": 11581,
+        "prompt_tokens": 1026,
+        "total_tokens": 12607
+      },
+      "transport_errors": [],
+      "transport_metrics": {
+        "connect_timeout_count": 0,
+        "failure_classes": {},
+        "max_successful_latency_seconds": 68.211163,
+        "median_successful_latency_seconds": 53.716328000000004,
+        "read_timeout_count": 0,
+        "server_error_count": 0,
+        "successful_latencies_seconds": [
+          68.211163,
+          39.221493
+        ],
+        "tls_failure_count": 0,
+        "transport_request_count": 2,
+        "transport_retry_count": 0,
+        "transport_success_count": 2
+      },
+      "used_evidence": [
+        "J01"
+      ]
+    },
+    {
+      "accepted_gaps": [
+        {
+          "gap": "种子在果核内，钻核才能使人无法获得种子，但文中未说明这一物理关系。",
+          "question_id": "Q1",
+          "story_span": "恒鑚其核"
+        },
+        {
+          "gap": "担心别人获得种子是怕别人种出同样好李而竞争，但动机未明示。",
+          "question_id": "Q2",
+          "story_span": "恐人得其種"
+        },
+        {
+          "gap": "钻核必须发生在出售前，否则顾客已取得核，行动無意义，但时间顺序未说明。",
+          "question_id": "Q3",
+          "story_span": "賣之恐人得其種恒鑚其核"
+        }
+      ],
+      "canonical_write_back": false,
+      "commentary_only_resolution_count": 0,
+      "convergence_status": "converged",
+      "evidence_rounds": [
+        {
+          "D_t": 0,
+          "G_t": 3,
+          "N_t": 0.0,
+          "Q_t": 0,
+          "new_used_evidence_refs": [],
+          "question_metrics": [
+            {
+              "D_t": 0,
+              "N_t": 0.0,
+              "Q_t": 0,
+              "active": false,
+              "conflict_fingerprints": [],
+              "d_basis": "none",
+              "new_used_evidence_refs": [],
+              "question_id": "Q1",
+              "reading_sufficient": false,
+              "round": 1,
+              "used_evidence_refs": []
+            },
+            {
+              "D_t": 0,
+              "N_t": 0.0,
+              "Q_t": 0,
+              "active": false,
+              "conflict_fingerprints": [],
+              "d_basis": "none",
+              "new_used_evidence_refs": [],
+              "question_id": "Q2",
+              "reading_sufficient": false,
+              "round": 1,
+              "used_evidence_refs": []
+            },
+            {
+              "D_t": 0,
+              "N_t": 0.0,
+              "Q_t": 0,
+              "active": true,
+              "conflict_fingerprints": [],
+              "d_basis": "none",
+              "new_used_evidence_refs": [],
+              "question_id": "Q3",
+              "reading_sufficient": false,
+              "round": 1,
+              "used_evidence_refs": []
+            }
+          ],
+          "retrieval": false,
+          "round": 1,
+          "used_evidence_refs": []
+        },
+        {
+          "D_t": 0,
+          "G_t": 1,
+          "N_t": 0.0,
+          "Q_t": 0,
+          "new_used_evidence_refs": [],
+          "opened_evidence_count": 5,
+          "question_metrics": [
+            {
+              "D_t": 0,
+              "N_t": 0.0,
+              "Q_t": 0,
+              "active": false,
+              "conflict_fingerprints": [],
+              "d_basis": "none",
+              "new_used_evidence_refs": [],
+              "question_id": "Q3",
+              "reading_sufficient": true,
+              "round": 2,
+              "used_evidence_refs": []
+            }
+          ],
+          "retrieval": true,
+          "retrieved_evidence_count": 12,
+          "round": 2,
+          "used_evidence_refs": []
+        }
+      ],
+      "execution_kind": "live_model",
+      "external_retrieval_required_count": 1,
+      "external_search_performed": false,
+      "initial_gaps": [
+        {
+          "gap": "种子在果核内，钻核才能使人无法获得种子，但文中未说明这一物理关系。",
+          "question_id": "Q1",
+          "story_span": "恒鑚其核"
+        },
+        {
+          "gap": "担心别人获得种子是怕别人种出同样好李而竞争，但动机未明示。",
+          "question_id": "Q2",
+          "story_span": "恐人得其種"
+        },
+        {
+          "gap": "钻核必须发生在出售前，否则顾客已取得核，行动無意义，但时间顺序未说明。",
+          "question_id": "Q3",
+          "story_span": "賣之恐人得其種恒鑚其核"
+        }
+      ],
+      "jianshu_chars": 0,
+      "latency_seconds": {
+        "max": 63.35032,
+        "mean": 27.331431333333335,
+        "median": 11.37815,
+        "successful": [
+          63.35032,
+          11.37815,
+          7.265824
+        ]
+      },
+      "liu_block_count": 0,
+      "main_text_chars": 16,
+      "new_used_evidence": [],
+      "opened_refs": [
+        "jinshu:042-liezhuan-002",
+        "jinshu:043-liezhuan-002",
+        "jinshu:056-liezhuan-001",
+        "sanguozhi:sgz1-juan-011-000040",
+        "sanguozhi:sgz1-juan-028-000023"
+      ],
+      "protocol_errors": [],
+      "question_metrics": {
+        "converged_question_count": 3,
+        "evaluable_question_count": 3,
+        "evidence_saturated_question_count": 0,
+        "hard_cap_question_count": 0,
+        "not_worth_pursuing_question_count": 2,
+        "protocol_failed_question_count": 0,
+        "reading_sufficient_question_count": 1,
+        "semantic_failed_question_count": 0,
+        "stable_conflict_question_count": 0,
+        "terminal_state_counts": {
+          "not_worth_pursuing": 2,
+          "reading_sufficient": 1
+        },
+        "transport_failed_question_count": 0,
+        "unresolved_question_count": 0,
+        "unresolved_terminal_question_count": 0,
+        "valid_question_count": 3
+      },
+      "question_resolution_sources": {
+        "Q1": [
+          "unresolved"
+        ],
+        "Q2": [
+          "unresolved"
+        ],
+        "Q3": [
+          "main_text_self_resolved"
+        ]
+      },
+      "questions": [
+        {
+          "active": false,
+          "evidence_round_refs": [
+            {
+              "refs": [],
+              "round": 1
+            }
+          ],
+          "evidence_rounds": 1,
+          "failure_type": null,
+          "gap": "种子在果核内，钻核才能使人无法获得种子，但文中未说明这一物理关系。",
+          "historical_verification_open": false,
+          "last_round": 1,
+          "next_action": "stop",
+          "parent_aspect_id": null,
+          "parent_question_id": null,
+          "question_id": "Q1",
+          "reading_sufficient": false,
+          "remaining_gap": "种子在果核内，钻核才能使人无法获得种子，但文中未说明这一物理关系。",
+          "state": "unexplained",
+          "story_span": "恒鑚其核",
+          "supporting_refs": [],
+          "terminal_reason": "not_worth_pursuing",
+          "working_answer": ""
+        },
+        {
+          "active": false,
+          "evidence_round_refs": [
+            {
+              "refs": [],
+              "round": 1
+            }
+          ],
+          "evidence_rounds": 1,
+          "failure_type": null,
+          "gap": "担心别人获得种子是怕别人种出同样好李而竞争，但动机未明示。",
+          "historical_verification_open": false,
+          "last_round": 1,
+          "next_action": "stop",
+          "parent_aspect_id": null,
+          "parent_question_id": null,
+          "question_id": "Q2",
+          "reading_sufficient": false,
+          "remaining_gap": "担心别人获得种子是怕别人种出同样好李而竞争，但动机未明示。",
+          "state": "unexplained",
+          "story_span": "恐人得其種",
+          "supporting_refs": [],
+          "terminal_reason": "not_worth_pursuing",
+          "working_answer": ""
+        },
+        {
+          "active": false,
+          "evidence_round_refs": [
+            {
+              "refs": [],
+              "round": 1
+            },
+            {
+              "refs": [],
+              "round": 2
+            }
+          ],
+          "evidence_rounds": 2,
+          "failure_type": null,
+          "gap": "钻核必须发生在出售前，否则顾客已取得核，行动無意义，但时间顺序未说明。",
+          "historical_verification_open": false,
+          "last_round": 2,
+          "next_action": "stop",
+          "parent_aspect_id": null,
+          "parent_question_id": null,
+          "question_id": "Q3",
+          "reading_sufficient": true,
+          "remaining_gap": null,
+          "state": "substantially_explained",
+          "story_span": "賣之恐人得其種恒鑚其核",
+          "supporting_refs": [],
+          "terminal_reason": "reading_sufficient",
+          "working_answer": ""
+        }
+      ],
+      "rejected_claims": [
+        {
+          "path": "$.updates[0].answered_aspects[0]",
+          "question_id": "Q3",
+          "reason": "claim_missing_id_or_text"
+        },
+        {
+          "path": "$.updates[0].answered_aspects[1]",
+          "question_id": "Q3",
+          "reason": "claim_missing_id_or_text"
+        }
+      ],
+      "rejected_evidence": [],
+      "rejected_gaps": [],
+      "resolution_sources": [
+        "main_text_self_resolved",
+        "unresolved"
+      ],
+      "retrieval_attempts": {
+        "Q1": 0,
+        "Q2": 0,
+        "Q3": 1
+      },
+      "retrieved_refs": [
+        "jinshu:042-liezhuan-002",
+        "jinshu:043-liezhuan-002",
+        "jinshu:056-liezhuan-001",
+        "s1:s1-assertion-005e1693c77319ba6a61",
+        "s1:s1-assertion-0f44513921fd0586bcd0",
+        "s1:s1-assertion-11d01d187842dff4ad64",
+        "sanguozhi:sgz1-juan-011-000040",
+        "sanguozhi:sgz1-juan-022-000056",
+        "sanguozhi:sgz1-juan-028-000023",
+        "shishuo:01-dexing-031:main",
+        "shishuo:02-yanyu-009:liu:annotation-010",
+        "shishuo:03-zhengshi-007:liu:annotation-002"
+      ],
+      "round_metrics": [
+        {
+          "D_t": 0,
+          "G_t": 3,
+          "N_t": 0.0,
+          "Q_t": 0,
+          "new_used_evidence_refs": [],
+          "question_metrics": [
+            {
+              "D_t": 0,
+              "N_t": 0.0,
+              "Q_t": 0,
+              "active": false,
+              "conflict_fingerprints": [],
+              "d_basis": "none",
+              "new_used_evidence_refs": [],
+              "question_id": "Q1",
+              "reading_sufficient": false,
+              "round": 1,
+              "used_evidence_refs": []
+            },
+            {
+              "D_t": 0,
+              "N_t": 0.0,
+              "Q_t": 0,
+              "active": false,
+              "conflict_fingerprints": [],
+              "d_basis": "none",
+              "new_used_evidence_refs": [],
+              "question_id": "Q2",
+              "reading_sufficient": false,
+              "round": 1,
+              "used_evidence_refs": []
+            },
+            {
+              "D_t": 0,
+              "N_t": 0.0,
+              "Q_t": 0,
+              "active": true,
+              "conflict_fingerprints": [],
+              "d_basis": "none",
+              "new_used_evidence_refs": [],
+              "question_id": "Q3",
+              "reading_sufficient": false,
+              "round": 1,
+              "used_evidence_refs": []
+            }
+          ],
+          "retrieval": false,
+          "round": 1,
+          "used_evidence_refs": []
+        },
+        {
+          "D_t": 0,
+          "G_t": 1,
+          "N_t": 0.0,
+          "Q_t": 0,
+          "new_used_evidence_refs": [],
+          "opened_evidence_count": 5,
+          "question_metrics": [
+            {
+              "D_t": 0,
+              "N_t": 0.0,
+              "Q_t": 0,
+              "active": false,
+              "conflict_fingerprints": [],
+              "d_basis": "none",
+              "new_used_evidence_refs": [],
+              "question_id": "Q3",
+              "reading_sufficient": true,
+              "round": 2,
+              "used_evidence_refs": []
+            }
+          ],
+          "retrieval": true,
+          "retrieved_evidence_count": 12,
+          "round": 2,
+          "used_evidence_refs": []
+        }
+      ],
+      "rounds_executed": [
+        0,
+        1,
+        2
+      ],
+      "run_id": "srm0-5-live-c9a44ecbaf3f3d32",
+      "search_trace_count": 1,
+      "searched_corpora": [
+        "世說新語",
+        "余嘉錫箋疏",
+        "晉書",
+        "三國志",
+        "資治通鑑",
+        "資治通鑑考異"
+      ],
+      "semantic_failed_questions": [],
+      "story_id": "29-jianshe-004",
+      "story_status": "converged",
+      "story_text": "王戎有好李賣之恐人得其種恒鑚其核",
+      "stratum": "low_context_control",
+      "structural_normalizations": [],
+      "terminal_reason_per_question": {
+        "Q1": "not_worth_pursuing",
+        "Q2": "not_worth_pursuing",
+        "Q3": "reading_sufficient"
+      },
+      "token_usage": {
+        "completion_tokens": 8785,
+        "prompt_tokens": 3181,
+        "total_tokens": 11966
+      },
+      "transport_errors": [],
+      "transport_metrics": {
+        "connect_timeout_count": 0,
+        "failure_classes": {},
+        "max_successful_latency_seconds": 63.35032,
+        "median_successful_latency_seconds": 11.37815,
+        "read_timeout_count": 0,
+        "server_error_count": 0,
+        "successful_latencies_seconds": [
+          63.35032,
+          11.37815,
+          7.265824
+        ],
+        "tls_failure_count": 0,
+        "transport_request_count": 3,
+        "transport_retry_count": 0,
+        "transport_success_count": 3
+      },
+      "used_evidence": []
+    }
+  ]
+}

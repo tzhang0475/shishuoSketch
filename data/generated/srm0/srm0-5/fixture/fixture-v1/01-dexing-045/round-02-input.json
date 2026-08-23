@@ -1,0 +1,31 @@
+{
+  "canonical_write_back": false,
+  "execution_kind": "fixture",
+  "external_search_performed": false,
+  "messages": [
+    {
+      "content": "请根据当前正文阅读缺口和本轮本地史料候选，更新语义理解。只使用输入候选，不使用预训练知识。\n\n只写实际被候选证据支持的 answered_aspects；unanswered_aspects 只保留仍影响正文理解的窄缺口；conflicts 只写材料明确冲突。reading_sufficient 表示当前阅读是否足够，不等于历史学上的最终验证。不要输出 state、next_action、搜索词或 canonical 事实，不要为了有趣继续研究。\n\n每个使用的证据必须引用候选 ref 和逐字 quote。只返回 JSON 对象，且只能有顶层字段 updates；每个 update 只能有 question_id、answered_aspects、unanswered_aspects、conflicts、reading_sufficient、historical_verification_open。不要返回数组本身或其他状态字段。",
+      "role": "system"
+    },
+    {
+      "content": "{\n  \"active_questions\": [\n    {\n      \"current_reading\": {\n        \"remaining_gap\": \"仍需一轮本地史料检索确认其对正文理解的具体作用。\",\n        \"state\": \"unexplained\",\n        \"supporting_refs\": [],\n        \"working_answer\": \"\"\n      },\n      \"gap\": \"仍需一轮本地史料检索确认其对正文理解的具体作用。\",\n      \"parent_aspect_id\": \"Q1-U1\",\n      \"parent_question_id\": \"Q1\",\n      \"question_id\": \"Q1.1\",\n      \"story_span\": \"呉郡陳遺家至孝母好食鐺底焦飯遺作郡主\"\n    }\n  ],\n  \"local_evidence_candidates\": [\n    {\n      \"ref\": \"shishuo:03-zhengshi-017:main\",\n      \"snippet\": \"何驃騎作㑹稽\\n虞存弟謇作郡主簿\\n\\n以何見客勞損欲白斷常客使家人節量\\n擇可通者作白事成以見存存時為何上佐正與謇\\n共食語云白事甚好待我食畢作教食竟取筆題白\\n事後云若得門庭長如郭林宗者當如所白\\n\\n\\n汝何處得此人謇於是止\",\n      \"source_layer\": \"main_text\",\n      \"work\": \"世說新語\"\n    },\n    {\n      \"ref\": \"s1:s1-assertion-65983d68edb29eec2d80\",\n      \"snippet\": \"〔一〕 晉陽秋曰：「何充字次道，廬江人。思韻淹通，有文義才情。累遷會稽內史、侍中、驃騎將軍、揚州刺史。贈司徒。」 虞存弟謇作郡主簿，\",\n      \"source_layer\": \"liu_annotation\",\n      \"work\": \"余嘉錫箋疏\"\n    },\n    {\n      \"ref\": \"s1:s1-assertion-d59d798bbb700bb7f341\",\n      \"snippet\": \"開冰凍，冬月衣厚，不便用力也。非必裸至於赤體，俗傳為臥冰，無此事也。」嘉錫案：初學記三引師覺孝子傳曰：「王祥少有德行，失母，後母憎而譖之，祥孝彌謹。盛寒河冰，網罟不施，母欲得生魚。祥解褐扣冰求之，忽冰少開，有雙鯉出游，祥垂綸獲之而歸。人謂之至孝所致也。」其敘事極為明，可見祥未嘗臥冰。記纂淵海二引孝子傳曰：「王祥事繼母至孝，母疾思食魚，時冬月，冰堅不可得。祥解衣臥冰上，少時冰開，雙鯉躍出。」此所引孝子傳，不知何家；臥冰之說，蓋始於此。則其傳訛，亦已久矣。\",\n      \"source_layer\": \"jianshu_note\",\n      \"work\": \"余嘉錫箋疏\"\n    },\n    {\n      \"ref\": \"jinshu:049-liezhuan-001\",\n      \"snippet\": \"與焉㑹帝譲九錫公卿将勸進使籍為其辭籍沉醉忘作臨詣府使取之見籍方據按醉眠使者以告籍便書按使寫之無所改竄辭甚清壯為時所重籍雖不拘禮敎然發言<!-- wikisource-SKchar: {\\\"value\\\": \\\"2593\\\"} -->遠口不臧否人物性至孝母終正與人圍碁對者求止籍留與决賭既而飲酒二斗舉聲一號吐血數升及將葬食一蒸肫飲二斗酒然後臨訣直言窮矣舉聲一號因又吐血數升毁瘠骨立殆致滅性裴楷往弔之籍散髪箕踞醉而直視楷弔喭畢便去或問楷凡弔者主哭客乃為禮籍既不哭君何為哭楷曰阮籍既方外之士故不崇禮典我俗中之士故以軌儀自居時人嘆為兩得籍又能為青白眼見禮俗之士以白眼對之及嵇喜來弔籍作白眼喜不懌而退喜弟康聞之乃齎酒挾琴造焉籍大悦乃見青眼由是禮法之士疾之若讐而帝每保護之籍嫂嘗歸寧籍相見與别或譏之籍曰禮豈為我設邪隣家少婦有羙色當墟沽酒籍嘗\",\n      \"source_layer\": \"main_text\",\n      \"work\": \"晉書\"\n    },\n    {\n      \"ref\": \"jinshu:097-liezhuan-006\",\n      \"snippet\": \"十<!-- wikisource-SKchar: {\\\"value\\\": \\\"2902\\\"} -->其父為羌酋姜聰所害每旦縛草為姜聰之象哭而射之中之則號泣不中則瞋目大呼其母謂曰姜聰諸將已屠鱠之矣汝何為如此葉延泣曰誠知射草人不益於先讐以申罔極之志耳性至孝母病五日不食葉延亦不食長而沉毅好問天地造化帝王年厯司馬薄洛鄰曰臣等不學實未審三皇何父之子五帝誰母所生延曰自羲皇以來符命<!-- wikisource-SKchar: {\\\"value\\\": \\\"2593\\\"} -->象昭言著見而卿等面牆何其鄙哉語曰夏蟲不知冬冰良不虚也又曰禮云公孫之子得以王父字為氏吾始祖自昌黎光宅於此今以吐谷渾為氏尊祖之義也在位二十三年卒年三十三有子四人長子辟奚嗣\\n　　辟奚性仁厚慈惠初聞苻堅之盛遣使獻馬五十匹金銀五百斤堅大悦拜為安遠將軍時辟奚三弟皆專恣長史鍾惡地恐\",\n      \"source_layer\": \"main_text\",\n      \"work\": \"晉書\"\n    }\n  ],\n  \"primary_text\": {\n    \"label\": \"世說新語正文\",\n    \"text\": \"呉郡陳遺家至孝母好食鐺底焦飯遺作郡主簿\\n恒裝一囊每煮食輙貯録焦飯歸以遺母後值孫恩\\n賊出吳郡\\n袁府君即日便征\\n遺己聚歛得數斗焦飯未展歸家遂帶以從軍戰於\\n滬瀆敗軍人潰散逃走山澤皆多饑死遺獨以焦飯\\n\\n得活時人以為純孝之報也\"\n  },\n  \"story_id\": \"01-dexing-045\"\n}\n",
+      "role": "user"
+    }
+  ],
+  "model": "deepseek-v4-flash",
+  "parameters": {
+    "connect_timeout": 15,
+    "read_timeout": 180,
+    "response_format": {
+      "type": "json_object"
+    },
+    "temperature": 0,
+    "tools": []
+  },
+  "prompt_version": "srm0.4b-robust-live-convergence-v1",
+  "provider": "deepseek",
+  "round": 2,
+  "schema": "srm0-5-model-input",
+  "schema_version": 1,
+  "stage": "local_retrieval_delta"
+}

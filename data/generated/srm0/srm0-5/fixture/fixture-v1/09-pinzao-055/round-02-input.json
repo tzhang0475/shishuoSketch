@@ -1,0 +1,31 @@
+{
+  "canonical_write_back": false,
+  "execution_kind": "fixture",
+  "external_search_performed": false,
+  "messages": [
+    {
+      "content": "请根据当前正文阅读缺口和本轮本地史料候选，更新语义理解。只使用输入候选，不使用预训练知识。\n\n只写实际被候选证据支持的 answered_aspects；unanswered_aspects 只保留仍影响正文理解的窄缺口；conflicts 只写材料明确冲突。reading_sufficient 表示当前阅读是否足够，不等于历史学上的最终验证。不要输出 state、next_action、搜索词或 canonical 事实，不要为了有趣继续研究。\n\n每个使用的证据必须引用候选 ref 和逐字 quote。只返回 JSON 对象，且只能有顶层字段 updates；每个 update 只能有 question_id、answered_aspects、unanswered_aspects、conflicts、reading_sufficient、historical_verification_open。不要返回数组本身或其他状态字段。",
+      "role": "system"
+    },
+    {
+      "content": "{\n  \"active_questions\": [\n    {\n      \"current_reading\": {\n        \"remaining_gap\": \"仍需一轮本地史料检索确认其对正文理解的具体作用。\",\n        \"state\": \"unexplained\",\n        \"supporting_refs\": [],\n        \"working_answer\": \"\"\n      },\n      \"gap\": \"仍需一轮本地史料检索确认其对正文理解的具体作用。\",\n      \"parent_aspect_id\": \"Q1-U1\",\n      \"parent_question_id\": \"Q1\",\n      \"question_id\": \"Q1.1\",\n      \"story_span\": \"王右軍問許玄度卿自言何如安石許未荅王\"\n    }\n  ],\n  \"local_evidence_candidates\": [\n    {\n      \"ref\": \"shishuo:10-guizhen-020:main\",\n      \"snippet\": \"王右軍與王敬仁許玄度並善二人亡後右軍爲論\\n議更克孔巖誡之曰明府昔與王許周旋有情及逝\\n\\n沒之後無慎終之好民所不取右軍甚愧\",\n      \"source_layer\": \"main_text\",\n      \"work\": \"世說新語\"\n    },\n    {\n      \"ref\": \"shishuo:25-paidiao-029:main\",\n      \"snippet\": \"王劉毎不重蔡公二人甞詣蔡語良久乃問蔡曰公\\n自言何如夷甫荅曰身不如夷甫王劉相目而笑曰\\n公何處不如荅曰夷甫無君輩客\",\n      \"source_layer\": \"main_text\",\n      \"work\": \"世說新語\"\n    },\n    {\n      \"ref\": \"jinshu:080-liezhuan-001\",\n      \"snippet\": \"一道士養好鵝羲之徃觀焉意甚悅固求市之道士云為寫道徳經當舉羣相贈耳羲之欣然寫畢籠鵝而歸甚以為樂其任率如此嘗詣門生家見棐几滑淨因書之眞草相半後為其父誤刮去之門生驚懊者累日又嘗在蕺山見一老姥持六角竹扇賣之羲之書其扇各為五字姥初有愠色因謂姥曰但言是王右軍書以求百錢邪姥如其言人競買之他日姥又持扇来羲之笑而不答其書為世所重皆此類也每自稱我書比鍾繇當抗行比張芝草猶當鴈行也曽與人書云張芝臨池學書池水盡黒使人耽之若是未必後之也羲之書初不勝庾翼郄愔及其暮年方妙嘗以草章答庾亮而翼深歎伏因與羲之書云吾昔有伯英章草十紙過江顚狽遂乃忘失常歎妙迹永絶忽見足下答家兄書煥若神眀頓還舊觀時驃騎將軍王述少有名譽與羲之齊名而羲之甚輕之由是情好不協述先為㑹稽以母喪居郡境羲之代述止一弔遂不重詣述每聞角聲謂羲之當候已輙灑埽而待之如此者累年而羲之竟不顧述深以\",\n      \"source_layer\": \"main_text\",\n      \"work\": \"晉書\"\n    },\n    {\n      \"ref\": \"shishuo:08-shangyu-077:main\",\n      \"snippet\": \"王右軍語劉尹故當共推安石劉尹曰若安石東山\\n志立當與天下共推之\",\n      \"source_layer\": \"main_text\",\n      \"work\": \"世說新語\"\n    },\n    {\n      \"ref\": \"s1:s1-assertion-d086293fc9983c55465a\",\n      \"snippet\": \"〔一〕 知及文章，事事有意。王右軍向劉尹稱之。劉問「何如方回？」 郗愔別傳曰：「愔字方回，高平金鄉人，太宰鑒長子也。淵靖純素，無執無競，簡私暱，罕交遊。歷會稽內史、侍中、司徒。」\",\n      \"source_layer\": \"liu_annotation\",\n      \"work\": \"余嘉錫箋疏\"\n    }\n  ],\n  \"primary_text\": {\n    \"label\": \"世說新語正文\",\n    \"text\": \"王右軍問許玄度卿自言何如安石許未荅王因曰\\n安石故相爲雄阿萬當裂眼争邪\"\n  },\n  \"story_id\": \"09-pinzao-055\"\n}\n",
+      "role": "user"
+    }
+  ],
+  "model": "deepseek-v4-flash",
+  "parameters": {
+    "connect_timeout": 15,
+    "read_timeout": 180,
+    "response_format": {
+      "type": "json_object"
+    },
+    "temperature": 0,
+    "tools": []
+  },
+  "prompt_version": "srm0.4b-robust-live-convergence-v1",
+  "provider": "deepseek",
+  "round": 2,
+  "schema": "srm0-5-model-input",
+  "schema_version": 1,
+  "stage": "local_retrieval_delta"
+}

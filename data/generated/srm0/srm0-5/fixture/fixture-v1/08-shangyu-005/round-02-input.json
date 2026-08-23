@@ -1,0 +1,31 @@
+{
+  "canonical_write_back": false,
+  "execution_kind": "fixture",
+  "external_search_performed": false,
+  "messages": [
+    {
+      "content": "请根据当前正文阅读缺口和本轮本地史料候选，更新语义理解。只使用输入候选，不使用预训练知识。\n\n只写实际被候选证据支持的 answered_aspects；unanswered_aspects 只保留仍影响正文理解的窄缺口；conflicts 只写材料明确冲突。reading_sufficient 表示当前阅读是否足够，不等于历史学上的最终验证。不要输出 state、next_action、搜索词或 canonical 事实，不要为了有趣继续研究。\n\n每个使用的证据必须引用候选 ref 和逐字 quote。只返回 JSON 对象，且只能有顶层字段 updates；每个 update 只能有 question_id、answered_aspects、unanswered_aspects、conflicts、reading_sufficient、historical_verification_open。不要返回数组本身或其他状态字段。",
+      "role": "system"
+    },
+    {
+      "content": "{\n  \"active_questions\": [\n    {\n      \"current_reading\": {\n        \"remaining_gap\": \"仍需一轮本地史料检索确认其对正文理解的具体作用。\",\n        \"state\": \"unexplained\",\n        \"supporting_refs\": [],\n        \"working_answer\": \"\"\n      },\n      \"gap\": \"仍需一轮本地史料检索确认其对正文理解的具体作用。\",\n      \"parent_aspect_id\": \"Q1-U1\",\n      \"parent_question_id\": \"Q1\",\n      \"question_id\": \"Q1.1\",\n      \"story_span\": \"鍾士季目王安豐阿戎了了解人意\\n謂裴公\"\n    }\n  ],\n  \"local_evidence_candidates\": [\n    {\n      \"ref\": \"shishuo:14-rongzhi-006:main\",\n      \"snippet\": \"裴令公目王安豐眼爛爛如巖下電\",\n      \"source_layer\": \"main_text\",\n      \"work\": \"世說新語\"\n    },\n    {\n      \"ref\": \"jinshu:043-liezhuan-002\",\n      \"snippet\": \"value\\\": \\\"2593\\\"} -->著其為識鑒者所賞如此戎嘗與阮籍飲時兗州刺史劉昶字公榮在坐籍以酒少酌不及昶昶無恨色戎異之他日問籍曰彼何如人也答曰勝公榮不可不與飲若減公榮則不敢不共飲惟公榮可不與飲戎每與籍為竹林之游戎嘗後至籍曰俗物已復來敗人意戎笑曰卿軰意亦復易敗耳鍾㑹伐蜀過與戎别問計將安出戎曰道家有言為而不恃非成功難保之難也及㑹敗議者以為知言襲父爵辟相國掾歴吏部黄門郎散騎常侍河東太守荆州刺史坐遣吏修園宅應免官詔以贖論遷豫州刺史加建威將軍受詔伐呉戎遣叅軍羅尚劉喬領前鋒進攻武昌呉將楊雍孫述江夏太守劉朗各率衆詣戎降戎督大軍臨江呉牙門將孟泰以蘄春邾二縣降呉平進爵安豐縣侯増邑六千户賜絹六千匹戎渡江綏慰新附宣揚威惠呉光禄勲石偉方直不容皓朝稱疾歸家戎嘉其清節表薦之詔拜偉為議郎以二千石禄終其身荆土悅服徴為侍中南郡太守劉肇賂戎\",\n      \"source_layer\": \"main_text\",\n      \"work\": \"晉書\"\n    },\n    {\n      \"ref\": \"sanguozhi:sgz1-juan-025-000015\",\n      \"snippet\": \"』憲英曰：『安可以不出。職守，人之大義也。凡人在難，猶或卹之；爲人執鞭而棄其事，不祥，不可也。且爲人死，爲人任，親昵之職也，從衆而已。』敞遂出。宣王果誅爽。事定之後，敞歎曰：『吾不謀於姊，幾不獲於義。』逮鍾會爲鎮西將軍，憲英謂從子羊祜曰：『鍾士季何故西出？』祜曰：『將爲滅蜀也。』憲英曰：『會在事縱恣，非持乆處下之道，吾畏其有他志也。』祜曰：『季母勿多言。』其後會請子琇爲參軍，憲英憂曰：『他日見鍾會之出，吾爲國憂之矣。今日難至吾家，此國之大事，必不得止也。』琇固請司馬文王，文王不聽。憲英語琇曰：『行矣，戒之！古之君子，入則致孝於親，出則致節於國，在職思其所司，在義思其所立，不遺父母憂患而已。軍旅之間，可以濟者，其惟仁恕乎！汝其慎之！』琇竟以全身。憲英年至七十有九，{{YL|泰始五年|269年}}卒。」\",\n      \"source_layer\": \"pei_annotation\",\n      \"work\": \"三國志\"\n    },\n    {\n      \"ref\": \"sanguozhi:sgz1-juan-028-000101\",\n      \"snippet\": \"《世語》曰：夏侯霸奔蜀，蜀朝問「司馬公如何德」？霸曰：「自當作家門。」「京師俊士」？曰：「有鍾士季，其人管朝政，吳、蜀之憂也。」《[[漢晉春秋]]》曰：初，夏侯霸降蜀，姜維問之曰：「司馬懿既得彼政，當復有征伐之志不？」霸曰：「彼方營立家門，未遑外事。有鍾士季者，其人雖少，終為吳、蜀之憂，然非非常之人亦不能用也。」後十五年而會果滅蜀。按習鑿齒此言，非出他書，故採用《世語》而附益也。\",\n      \"source_layer\": \"pei_annotation\",\n      \"work\": \"三國志\"\n    },\n    {\n      \"ref\": \"shishuo:01-dexing-020:main\",\n      \"snippet\": \"王安豐遭艱至性過人裴令徃弔之曰若使一慟果\\n能傷人濬沖必不免滅性之譏\",\n      \"source_layer\": \"main_text\",\n      \"work\": \"世說新語\"\n    }\n  ],\n  \"primary_text\": {\n    \"label\": \"世說新語正文\",\n    \"text\": \"鍾士季目王安豐阿戎了了解人意\\n謂裴公之談經日不竭吏部郎闕文帝問其人\\n\\n於鍾會會曰裴楷清通王戎簡要皆其選也於是用\\n裴\"\n  },\n  \"story_id\": \"08-shangyu-005\"\n}\n",
+      "role": "user"
+    }
+  ],
+  "model": "deepseek-v4-flash",
+  "parameters": {
+    "connect_timeout": 15,
+    "read_timeout": 180,
+    "response_format": {
+      "type": "json_object"
+    },
+    "temperature": 0,
+    "tools": []
+  },
+  "prompt_version": "srm0.4b-robust-live-convergence-v1",
+  "provider": "deepseek",
+  "round": 2,
+  "schema": "srm0-5-model-input",
+  "schema_version": 1,
+  "stage": "local_retrieval_delta"
+}

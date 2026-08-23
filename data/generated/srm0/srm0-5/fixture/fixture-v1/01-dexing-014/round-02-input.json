@@ -1,0 +1,31 @@
+{
+  "canonical_write_back": false,
+  "execution_kind": "fixture",
+  "external_search_performed": false,
+  "messages": [
+    {
+      "content": "请根据当前正文阅读缺口和本轮本地史料候选，更新语义理解。只使用输入候选，不使用预训练知识。\n\n只写实际被候选证据支持的 answered_aspects；unanswered_aspects 只保留仍影响正文理解的窄缺口；conflicts 只写材料明确冲突。reading_sufficient 表示当前阅读是否足够，不等于历史学上的最终验证。不要输出 state、next_action、搜索词或 canonical 事实，不要为了有趣继续研究。\n\n每个使用的证据必须引用候选 ref 和逐字 quote。只返回 JSON 对象，且只能有顶层字段 updates；每个 update 只能有 question_id、answered_aspects、unanswered_aspects、conflicts、reading_sufficient、historical_verification_open。不要返回数组本身或其他状态字段。",
+      "role": "system"
+    },
+    {
+      "content": "{\n  \"active_questions\": [\n    {\n      \"current_reading\": {\n        \"remaining_gap\": \"仍需一轮本地史料检索确认其对正文理解的具体作用。\",\n        \"state\": \"unexplained\",\n        \"supporting_refs\": [],\n        \"working_answer\": \"\"\n      },\n      \"gap\": \"仍需一轮本地史料检索确认其对正文理解的具体作用。\",\n      \"parent_aspect_id\": \"Q1-U1\",\n      \"parent_question_id\": \"Q1\",\n      \"question_id\": \"Q1.1\",\n      \"story_span\": \"王祥事後母朱夫人甚謹\\n\\n\\n\\n家有一李\"\n    }\n  ],\n  \"local_evidence_candidates\": [\n    {\n      \"ref\": \"jinshu:030-zhi-001\",\n      \"snippet\": \"宜死之人也然衆庶不知将為倉卒願陛下下之於吏而暴其罪均其死也不汙宫掖不為搢紳驚惋不為逺近所疑人命至重難生易殺氣絶而不續者也是以聖王重之孟軻云殺一不辜而取天下者仁者不為也世祖武皇帝接三統之微酌千年之範乃命有司大眀刑憲于時詔書頒新法於天下海内同軌人甚安之條綱雖設稱為簡惠仰昭天睠下濟民心道有法而無敗徳俟刑而乆立及晉圗南徙百有二年仰止前規挹其流潤江左無外蠻陬來格孝武時㑹稽王道子傾弄朝權其所樹之黨貨官私獄烈祖惛迷不聞司敗晉之綱紀大亂焉\\n　　傳曰三皇設言而民不違五帝畫象而民知禁則書所謂象以典刑流宥五刑鞭作官刑朴作教刑者也然則犯黥者皂其巾犯劓者丹其服犯臏者黑其體犯宫者雜其屨大辟之罪殊刑之極布其衣<!-- wikisource-SKchar: {\\\"value\\\": \\\"3433\\\"} -->而無領縁投之於市與衆弃之舜命臯陶曰五刑有服五\",\n      \"source_layer\": \"main_text\",\n      \"work\": \"晉書\"\n    },\n    {\n      \"ref\": \"jinshu:003-benji-001\",\n      \"snippet\": \"役罷部曲將長吏以下質任省郡國御調禁樂府靡麗百戲之技及雕文㳺畋之具開直言之路置諌官以掌之是月鳳皇六青龍三白龍二麒麟各一見于郡國二年春正月景戌遣兼侍中侯史光等持節四方循省風俗除禳祝之不在祀典者丁亥有司請建七廟帝重其役不許庚寅罷雞鳴歌辛丑尊景皇帝夫人羊氏曰景皇后宫曰<!-- wikisource-SKchar: {\\\"value\\\": \\\"2592\\\"} -->訓景午立皇后楊氏二月除漢宗室禁錮己未常山王衡薨詔曰五等之封皆錄舊勲本為縣侯者傳封次子為亭侯為鄉侯為闗内侯亭侯為闗中侯皆食本戶十分之一丁丑郊祀宣皇帝以配天宗祀文皇帝扵眀堂以配上帝庚午詔曰古者百官官箴王闕然保氏特以諌諍為職今之侍中常侍實處此位擇其能正色弼違匡救不逮者以兼此選三月戊戌吳人来弔祭有司奏為答詔帝曰昔漢文光武懐撫尉佗公孫述皆未正君臣之儀所以羈縻未賓也晧遣使之始未知\",\n      \"source_layer\": \"main_text\",\n      \"work\": \"晉書\"\n    },\n    {\n      \"ref\": \"sanguozhi:sgz1-juan-050-000001\",\n      \"snippet\": \"妃嬪傳\\n|author=陳壽\\n|previous=[[../卷49|《吳書》·劉繇、太史慈、士燮傳]]\\n|next=[[../卷51|《吳書》·宗室傳]]\\n|notes='''吳夫人　謝夫人　徐夫人　步夫人　王夫人　王夫人　潘夫人　全夫人　朱夫人　何姬　滕夫人'''\\n}}\",\n      \"source_layer\": \"metadata\",\n      \"work\": \"三國志\"\n    },\n    {\n      \"ref\": \"sanguozhi:sgz1-juan-050-000048\",\n      \"snippet\": \"==朱夫人==\\n\",\n      \"source_layer\": \"metadata\",\n      \"work\": \"三國志\"\n    },\n    {\n      \"ref\": \"sanguozhi:sgz1-juan-050-000049\",\n      \"snippet\": \"\\n　　孫休朱夫人，朱據女，休姊公主所生也。\",\n      \"source_layer\": \"main_text\",\n      \"work\": \"三國志\"\n    }\n  ],\n  \"primary_text\": {\n    \"label\": \"世說新語正文\",\n    \"text\": \"王祥事後母朱夫人甚謹\\n\\n\\n\\n家有一李樹結子殊好母恒使守之時風雨\\n忽至祥抱樹而泣\\n祥嘗在别牀眠母自徃闇斫\\n之值祥私起空斫得被既還知母憾之不巳因跪前\\n\\n請死母於是感悟愛之如己子\"\n  },\n  \"story_id\": \"01-dexing-014\"\n}\n",
+      "role": "user"
+    }
+  ],
+  "model": "deepseek-v4-flash",
+  "parameters": {
+    "connect_timeout": 15,
+    "read_timeout": 180,
+    "response_format": {
+      "type": "json_object"
+    },
+    "temperature": 0,
+    "tools": []
+  },
+  "prompt_version": "srm0.4b-robust-live-convergence-v1",
+  "provider": "deepseek",
+  "round": 2,
+  "schema": "srm0-5-model-input",
+  "schema_version": 1,
+  "stage": "local_retrieval_delta"
+}

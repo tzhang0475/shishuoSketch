@@ -1,0 +1,31 @@
+{
+  "canonical_write_back": false,
+  "execution_kind": "fixture",
+  "external_search_performed": false,
+  "messages": [
+    {
+      "content": "请根据当前正文阅读缺口和本轮本地史料候选，更新语义理解。只使用输入候选，不使用预训练知识。\n\n只写实际被候选证据支持的 answered_aspects；unanswered_aspects 只保留仍影响正文理解的窄缺口；conflicts 只写材料明确冲突。reading_sufficient 表示当前阅读是否足够，不等于历史学上的最终验证。不要输出 state、next_action、搜索词或 canonical 事实，不要为了有趣继续研究。\n\n每个使用的证据必须引用候选 ref 和逐字 quote。只返回 JSON 对象，且只能有顶层字段 updates；每个 update 只能有 question_id、answered_aspects、unanswered_aspects、conflicts、reading_sufficient、historical_verification_open。不要返回数组本身或其他状态字段。",
+      "role": "system"
+    },
+    {
+      "content": "{\n  \"active_questions\": [\n    {\n      \"current_reading\": {\n        \"remaining_gap\": \"仍需一轮本地史料检索确认其对正文理解的具体作用。\",\n        \"state\": \"unexplained\",\n        \"supporting_refs\": [],\n        \"working_answer\": \"\"\n      },\n      \"gap\": \"仍需一轮本地史料检索确认其对正文理解的具体作用。\",\n      \"parent_aspect_id\": \"Q1-U1\",\n      \"parent_question_id\": \"Q1\",\n      \"question_id\": \"Q1.1\",\n      \"story_span\": \"康僧淵目深而鼻高王丞相毎調之僧淵曰鼻\"\n    }\n  ],\n  \"local_evidence_candidates\": [\n    {\n      \"ref\": \"shishuo:01-dexing-027:main\",\n      \"snippet\": \"周鎮罷臨川郡還都未及上住泊青溪渚\\n王丞相\\n徃看之\\n時夏月暴雨卒至舫至狹小而又大漏\\n殆無復坐處王曰胡威之清何以過此即啓用為吳\\n\\n興郡\",\n      \"source_layer\": \"main_text\",\n      \"work\": \"世說新語\"\n    },\n    {\n      \"ref\": \"shishuo:02-yanyu-031:main\",\n      \"snippet\": \"過江諸人每至美日輙相邀新亭藉卉飲宴\\n周侯中坐而歎曰風\\n景不殊正自有山河之異皆相視流淚唯王丞相\\n\\n愀然變色曰當共勠力王室克復神州何至作楚囚\\n相對\",\n      \"source_layer\": \"main_text\",\n      \"work\": \"世說新語\"\n    },\n    {\n      \"ref\": \"shishuo:02-yanyu-033:main\",\n      \"snippet\": \"顧司空未知名詣王丞相丞相小極對之疲睡顧思\\n所以叩㑹之\\n因謂同坐曰昔每\\n聞元公道公恊贊中宗保全江表\\n體小不\\n安令人喘息丞相因覺謂顧曰此子珪璋特達機警\\n有鋒\",\n      \"source_layer\": \"main_text\",\n      \"work\": \"世說新語\"\n    },\n    {\n      \"ref\": \"s1:s1-assertion-082d9d419465667a1362\",\n      \"snippet\": \"〔一〕 夷甫都無言，盥洗畢，牽王丞相臂，與共載去。在車中照鏡語丞相曰：「汝看我眼光，迺出牛背上。」 王夷甫蓋自謂風神英俊，不至與人校。\",\n      \"source_layer\": \"liu_annotation\",\n      \"work\": \"余嘉錫箋疏\"\n    },\n    {\n      \"ref\": \"s1:s1-assertion-0fcfdff37efef8f26861\",\n      \"snippet\": \"〔一〕 其人有才理勝望。 虞光祿傳曰：「字思行，會稽餘姚人。虞翻曾孫，右光祿潭兄子也。雖機榦不及潭，而至行過之。歷吏部郎、吳興守，徵為金紫光祿大夫，卒。」 王丞相嘗謂曰：「孔愉有公才而無公望，丁潭有公望而無公才，\",\n      \"source_layer\": \"liu_annotation\",\n      \"work\": \"余嘉錫箋疏\"\n    }\n  ],\n  \"primary_text\": {\n    \"label\": \"世說新語正文\",\n    \"text\": \"康僧淵目深而鼻高王丞相毎調之僧淵曰鼻者面\\n之山目者面之\\n淵山不高則不靈淵不深則不清\"\n  },\n  \"story_id\": \"25-paidiao-021\"\n}\n",
+      "role": "user"
+    }
+  ],
+  "model": "deepseek-v4-flash",
+  "parameters": {
+    "connect_timeout": 15,
+    "read_timeout": 180,
+    "response_format": {
+      "type": "json_object"
+    },
+    "temperature": 0,
+    "tools": []
+  },
+  "prompt_version": "srm0.4b-robust-live-convergence-v1",
+  "provider": "deepseek",
+  "round": 2,
+  "schema": "srm0-5-model-input",
+  "schema_version": 1,
+  "stage": "local_retrieval_delta"
+}

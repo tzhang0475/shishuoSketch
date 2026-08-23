@@ -1,0 +1,31 @@
+{
+  "canonical_write_back": false,
+  "execution_kind": "fixture",
+  "external_search_performed": false,
+  "messages": [
+    {
+      "content": "请检查冻结的正文阅读缺口，以及所附刘孝标注、余嘉锡《笺疏》。只返回语义增量，不输出 state 或 next_action。\n\n判断注释实际回答了什么、仍有什么影响正文理解的缺口、是否有材料冲突。reading_sufficient 只表示当前阅读已经足够，不表示历史事实已被最终验证。不要为了有趣继续研究，不使用外部知识。\n\n每个 answered_aspect 和 conflict 都必须引用输入中的 ref 与逐字 quote。unanswered_aspects 只保留仍影响正文理解的事项，使用 aspect_id、gap、reading_impact(high|medium|low)。\n\n只返回 JSON：{\"updates\":[{\"question_id\":\"Q1\",\"answered_aspects\":[{\"aspect_id\":\"Q1-A1\",\"claim\":\"...\",\"evidence\":[{\"ref\":\"...\",\"quote\":\"...\"}]}],\"unanswered_aspects\":[{\"aspect_id\":\"Q1-U1\",\"gap\":\"...\",\"reading_impact\":\"high\"}],\"conflicts\":[{\"conflict_id\":\"Q1-C1\",\"description\":\"...\",\"evidence\":[{\"ref\":\"...\",\"quote\":\"...\"}]}],\"reading_sufficient\":true,\"historical_verification_open\":false}]}。",
+      "role": "system"
+    },
+    {
+      "content": "{\n  \"early_commentary\": {\n    \"label\": \"劉孝標注\",\n    \"notes\": [\n      {\n        \"ref\": \"L01\",\n        \"text\": \"(鑄之所吳平猶不廢王/揚州記曰冶城吳時鼓)\"\n      },\n      {\n        \"ref\": \"L02\",\n        \"text\": \"(治也/茂弘所)\"\n      },\n      {\n        \"ref\": \"L03\",\n        \"text\": \"(禹病偏枯足不相過今稱禹步是也/帝王世紀曰禹治洪水手足胼胝世傳)\"\n      },\n      {\n        \"ref\": \"L04\",\n        \"text\": \"(于日晐不遑暇食/尚書曰文王自朝至)\"\n      },\n      {\n        \"ref\": \"L05\",\n        \"text\": \"(卿大夫之辱也/禮記曰四郊多壘)\"\n      },\n      {\n        \"ref\": \"L06\",\n        \"text\": \"(國/戰)\"\n      },\n      {\n        \"ref\": \"L07\",\n        \"text\": \"(氏少好刑名學為秦孝公相封於商/策曰衛商鞅諸庶孽子名鞅姓公孫)\"\n      }\n    ]\n  },\n  \"frozen_questions\": [\n    {\n      \"gap\": \"这段行动或处境为何影响正文理解？\",\n      \"question_id\": \"Q1\",\n      \"story_span\": \"王右軍與謝太傅共登冶城\\n\\n謝悠然逺想\"\n    }\n  ],\n  \"later_commentary\": {\n    \"label\": \"余嘉錫箋疏\",\n    \"notes\": [\n      {\n        \"layer\": \"collation_note\",\n        \"ref\": \"J01\",\n        \"source_labels\": [],\n        \"speaker\": null,\n        \"text\": \"注「衛商鞅諸庶孽子」景宋本及沈本作「衛鞅衛諸庶孽子也」。\"\n      },\n      {\n        \"layer\": \"jianshu_note\",\n        \"ref\": \"J02\",\n        \"source_labels\": [\n          \"晉書\"\n        ],\n        \"speaker\": \"程炎震\",\n        \"text\": \"〔一〕 程炎震云：「王、謝冶城之語，晉書載於安石執政時，誠誤。晉略列傳二十七謝安傳，作『咸康中，庾冰強致之。會羲之亦為庾亮長史，入都，共登冶城』云云。其自注曰：『安執政，羲之已歾。』遞推上年，惟是時二人共在京師。考庾冰為揚州，傳不記其年。據本紀，當是咸康五年，王導薨後。其明年正月一日，庾亮亦薨。如周說，則王、謝相遇必於是年矣。然是年安石方二十歲，傳云弱冠詣王濛，為所賞。中經司徒府辟，又除佐著作郎。恐庾冰強致，非當年事。右軍長安石十七歲，方佐劇府，鞅掌不遑。下都游憩，事或有之，無緣對未經事任之少年，而責以自效也。吾意是永和二三年間右軍為護軍時事。安石雖累避徵辟，而其兄仁祖方鎮歷陽，容有下都之事，且年事既長，不能無意於當世，故右軍有此言耳。過此以往，則右軍入東，不至京師矣。」\"\n      },\n      {\n        \"layer\": \"jianshu_note\",\n        \"ref\": \"J03\",\n        \"source_labels\": [],\n        \"speaker\": \"余嘉錫\",\n        \"text\": \"〔二〕 李慈銘云：「案史記商君傳：『商君者，衛之諸庶孽公子也。名鞅，姓公孫氏。』若戰國策，無此語。魏策但載公孫痤曰：『痤御庶子公孫鞅。』又秦策魏鞅下高誘注云：『衛公子叔痤之子也。』」嘉錫案：疑劉子誤史記為戰國策耳。此處衛與商鞅字又誤倒，各本皆同。\"\n      },\n      {\n        \"layer\": \"jianshu_note\",\n        \"ref\": \"J04\",\n        \"source_labels\": [\n          \"晉書\"\n        ],\n        \"speaker\": null,\n        \"text\": \"〔三〕 姚鼐惜抱軒筆記五云：「晉書謝安傳載安登石頭遠想，羲之規之。按逸少誓墓之後，未嘗更入都，而安之仕進，在逸少去官後。安在官而有遠想遺事之過，逸少安得規之？此事出於世說，則世說之妄也。唐時執筆者蓋乏學識，故其取舍皆謬。」\"\n      }\n    ]\n  },\n  \"primary_text\": {\n    \"label\": \"世說新語正文\",\n    \"text\": \"王右軍與謝太傅共登冶城\\n\\n謝悠然逺想有髙世之志王謂謝曰夏禹勤\\n王手足胼胝\\n文王旰食日不暇給今四郊多\\n壘宜人人自效而虛談廢務浮文\\n妨要恐非當今所宜謝荅曰秦任商鞅二世而亡\\n豈清言致患邪\"\n  },\n  \"story_id\": \"02-yanyu-070\"\n}\n",
+      "role": "user"
+    }
+  ],
+  "model": "deepseek-v4-flash",
+  "parameters": {
+    "connect_timeout": 15,
+    "read_timeout": 180,
+    "response_format": {
+      "type": "json_object"
+    },
+    "temperature": 0,
+    "tools": []
+  },
+  "prompt_version": "srm0.4b-robust-live-convergence-v1",
+  "provider": "deepseek",
+  "round": 1,
+  "schema": "srm0-5-model-input",
+  "schema_version": 1,
+  "stage": "attached_commentary_delta"
+}

@@ -1,0 +1,31 @@
+{
+  "canonical_write_back": false,
+  "execution_kind": "fixture",
+  "external_search_performed": false,
+  "messages": [
+    {
+      "content": "你第一次阅读一则《世说新语》，现在只给你正文。\n找出至多三个如果不进一步理解，就可能影响正文阅读的关键缺口。\n\n每个缺口必须绑定正文准确文字，只描述缺什么，不尝试回答，不解释词义，不猜异文，不使用外部知识，不生成搜索词。\n优先选择答案可能改变人物处境、行动意义、场景关系、隐喻或叙事力量的缺口；不要只扩展姓名或孤立字词，除非它确实改变正文理解。\n如果正文其他部分已经直接回答某个问题，不要列为缺口。\n\n只返回 JSON：{\"gaps\":[{\"question_id\":\"Q1\",\"story_span\":\"正文原文\",\"gap\":\"简短缺口\"}]}，最多三个。",
+      "role": "system"
+    },
+    {
+      "content": "{\n  \"primary_text\": {\n    \"label\": \"世說新語正文\",\n    \"text\": \"禰衡被魏武謫為鼓吏正月半試鼓衡揚枹為漁陽\\n\\n摻檛淵淵有金石聲四坐為之改容\\n\\n\\n\\n\\n\\n\\n\\n孔融曰禰衡罪同胥靡不能\\n發明王之夢\\n\\n魏武慚而\\n赦之\"\n  },\n  \"story_id\": \"02-yanyu-008\"\n}\n",
+      "role": "user"
+    }
+  ],
+  "model": "deepseek-v4-flash",
+  "parameters": {
+    "connect_timeout": 15,
+    "read_timeout": 180,
+    "response_format": {
+      "type": "json_object"
+    },
+    "temperature": 0,
+    "tools": []
+  },
+  "prompt_version": "srm0.4b-robust-live-convergence-v1",
+  "provider": "deepseek",
+  "round": 0,
+  "schema": "srm0-5-model-input",
+  "schema_version": 1,
+  "stage": "main_text_gap_discovery"
+}

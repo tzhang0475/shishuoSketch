@@ -1,0 +1,31 @@
+{
+  "canonical_write_back": false,
+  "execution_kind": "live_model",
+  "external_search_performed": false,
+  "messages": [
+    {
+      "content": "请根据当前正文阅读缺口和本轮本地史料候选，更新语义理解。只使用输入候选，不使用预训练知识。\n\n只写实际被候选证据支持的 answered_aspects；unanswered_aspects 只保留仍影响正文理解的窄缺口；conflicts 只写材料明确冲突。reading_sufficient 表示当前阅读是否足够，不等于历史学上的最终验证。不要输出 state、next_action、搜索词或 canonical 事实，不要为了有趣继续研究。\n\n每个使用的证据必须引用候选 ref 和逐字 quote。只返回 JSON 对象，且只能有顶层字段 updates；每个 update 只能有 question_id、answered_aspects、unanswered_aspects、conflicts、reading_sufficient、historical_verification_open。不要返回数组本身或其他状态字段。",
+      "role": "system"
+    },
+    {
+      "content": "{\n  \"active_questions\": [\n    {\n      \"current_reading\": {\n        \"remaining_gap\": \"注文未解釋王導嘆子姪不令、言『虎㹠虎犢還其所如』何以歸入『輕詆』篇，影響對篇目歸類意圖的理解\",\n        \"state\": \"unexplained\",\n        \"supporting_refs\": [],\n        \"working_answer\": \"\"\n      },\n      \"gap\": \"注文未解釋王導嘆子姪不令、言『虎㹠虎犢還其所如』何以歸入『輕詆』篇，影響對篇目歸類意圖的理解\",\n      \"parent_aspect_id\": \"Q3-U2\",\n      \"parent_question_id\": \"Q3\",\n      \"question_id\": \"Q3.1\",\n      \"story_span\": \"王右軍在南丞相與書\"\n    }\n  ],\n  \"local_evidence_candidates\": [\n    {\n      \"ref\": \"jinshu:058-liezhuan-002\",\n      \"snippet\": \"之心訪恒切齒敦雖懐逆謀故終訪之世未敢為非初訪少時遇善相者廬江陳訓謂訪與陶侃曰二君皆位至方嶽功名略同但陶得上夀周得下夀優劣更由年耳訪小侃一歳太興三年卒時年六十一帝哭之甚慟詔贈征西将軍諡曰壮立碑於本郡二子撫光撫字道和彊毅有父風而將御不及元帝辟為丞相掾父䘮去官服闋襲爵除鷹揚将軍武昌太守王敦命為從事中郎與鄧嶽俱為敦爪牙甘卓遇害敦以撫為沔北諸軍事南中郎将鎮沔中及敦作逆撫領二千人從之敦敗撫與嶽俱亡走撫弟光将資遣其兄而隂欲取嶽撫怒曰我與伯山同亡何不先斬我㑹嶽至撫出門遥謂之曰何不速去今骨肉尚欲相違况他人乎嶽廻船而走撫遂共入西陽蠻中蠻酋向蠶納之初嶽為西陽欲伐諸蠻及是諸蠻皆怨将殺之蠶不聽曰鄧府君窮来歸我我何忍殺之由是俱得免明年詔原敦黨嶽撫詣闕請罪有詔禁錮之咸和初司徒王導以撫為從事中郎出為寜逺将軍江夏相蘇峻作逆率所領從温嶠討之峻平遷\",\n      \"source_layer\": \"main_text\",\n      \"work\": \"晉書\"\n    },\n    {\n      \"ref\": \"jinshu:074-liezhuan-001\",\n      \"snippet\": \"茂倫譙國龍亢人漢五更榮之九世孫也父顥官至郎中彞少孤貧雖簞瓢處之晏如性通朗早獲盛名有人倫識鑒拔才取士或出於無聞或得之孩抱時人方之許郭少與庾亮深交雅為周顗所重顗嘗歎曰茂倫嶔崎歴落固可笑人也起家州主簿赴齊王冏義拜騎都尉元帝為安東將軍版行逡遒令尋辟丞相中兵屬累遷中書郎尚書吏部郎名顯朝廷于時王敦擅權嫌忌士望<!-- wikisource-SKchar: {\\\"value\\\": \\\"2835\\\"} -->以疾去職嘗過輿縣縣宰東海徐寧字安期通朗博渉彝遇之欣然停留累日結交而别先是庾亮毎屬彞覔一佳吏部及至都謂亮曰為卿得一吏部矣亮問所在彞曰人所應有而不必有人所應無而不必無徐寕真海岱清士因為叙之即遷吏部郎竟歴顯職明帝將伐王敦拜彞散騎常侍引叅宻謀及敦平以功封萬寕縣男丹陽尹溫嶠上言宣城阻帶山川頻經變亂宜得望實居之竊謂桓彞可充其選帝手詔曰適得太真\",\n      \"source_layer\": \"main_text\",\n      \"work\": \"晉書\"\n    },\n    {\n      \"ref\": \"jinshu:080-liezhuan-001\",\n      \"snippet\": \"一道士養好鵝羲之徃觀焉意甚悅固求市之道士云為寫道徳經當舉羣相贈耳羲之欣然寫畢籠鵝而歸甚以為樂其任率如此嘗詣門生家見棐几滑淨因書之眞草相半後為其父誤刮去之門生驚懊者累日又嘗在蕺山見一老姥持六角竹扇賣之羲之書其扇各為五字姥初有愠色因謂姥曰但言是王右軍書以求百錢邪姥如其言人競買之他日姥又持扇来羲之笑而不答其書為世所重皆此類也每自稱我書比鍾繇當抗行比張芝草猶當鴈行也曽與人書云張芝臨池學書池水盡黒使人耽之若是未必後之也羲之書初不勝庾翼郄愔及其暮年方妙嘗以草章答庾亮而翼深歎伏因與羲之書云吾昔有伯英章草十紙過江顚狽遂乃忘失常歎妙迹永絶忽見足下答家兄書煥若神眀頓還舊觀時驃騎將軍王述少有名譽與羲之齊名而羲之甚輕之由是情好不協述先為㑹稽以母喪居郡境羲之代述止一弔遂不重詣述每聞角聲謂羲之當候已輙灑埽而待之如此者累年而羲之竟不顧述深以\",\n      \"source_layer\": \"main_text\",\n      \"work\": \"晉書\"\n    },\n    {\n      \"ref\": \"shishuo:27-jiajue-007:main\",\n      \"snippet\": \"王右軍年減十嵗時大將軍甚愛之恒置帳中眠大\\n將軍甞先出右軍猶未起須臾錢鳳入屏人論事\\n都忘\\n右軍在帳中便言逆節之謀右軍覺既聞所論知無\\n活理乃剔吐汙頭靣被褥詐孰眠敦論事造半方意\\n右軍未起相與大驚曰不得不除之及開帳乃見吐\\n唾從横信其實孰眠於是得全于時稱其有智\",\n      \"source_layer\": \"main_text\",\n      \"work\": \"世說新語\"\n    },\n    {\n      \"ref\": \"shishuo:08-shangyu-134:liu:annotation-002\",\n      \"snippet\": \"(遲後以馬迎敬仁雖復風雨亦不以車也/之王右軍在郡迎敬仁叔仁輒同車常惡其)\",\n      \"source_layer\": \"liu_annotation\",\n      \"work\": \"世說新語\"\n    }\n  ],\n  \"primary_text\": {\n    \"label\": \"世說新語正文\",\n    \"text\": \"王右軍在南丞相與書毎歎子姪不令云虎㹠虎犢\\n還其所如\"\n  },\n  \"story_id\": \"26-qingdi-008\"\n}\n",
+      "role": "user"
+    }
+  ],
+  "model": "deepseek-v4-flash",
+  "parameters": {
+    "connect_timeout": 15,
+    "read_timeout": 180,
+    "response_format": {
+      "type": "json_object"
+    },
+    "temperature": 0,
+    "tools": []
+  },
+  "prompt_version": "srm0.4b-robust-live-convergence-v1",
+  "provider": "deepseek",
+  "round": 2,
+  "schema": "srm0-5-model-input",
+  "schema_version": 1,
+  "stage": "local_retrieval_delta"
+}

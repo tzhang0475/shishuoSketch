@@ -1,0 +1,31 @@
+{
+  "canonical_write_back": false,
+  "execution_kind": "fixture",
+  "external_search_performed": false,
+  "messages": [
+    {
+      "content": "请根据当前正文阅读缺口和本轮本地史料候选，更新语义理解。只使用输入候选，不使用预训练知识。\n\n只写实际被候选证据支持的 answered_aspects；unanswered_aspects 只保留仍影响正文理解的窄缺口；conflicts 只写材料明确冲突。reading_sufficient 表示当前阅读是否足够，不等于历史学上的最终验证。不要输出 state、next_action、搜索词或 canonical 事实，不要为了有趣继续研究。\n\n每个使用的证据必须引用候选 ref 和逐字 quote。只返回 JSON 对象，且只能有顶层字段 updates；每个 update 只能有 question_id、answered_aspects、unanswered_aspects、conflicts、reading_sufficient、historical_verification_open。不要返回数组本身或其他状态字段。",
+      "role": "system"
+    },
+    {
+      "content": "{\n  \"active_questions\": [\n    {\n      \"current_reading\": {\n        \"remaining_gap\": \"仍需一轮本地史料检索确认其对正文理解的具体作用。\",\n        \"state\": \"unexplained\",\n        \"supporting_refs\": [],\n        \"working_answer\": \"\"\n      },\n      \"gap\": \"仍需一轮本地史料检索确认其对正文理解的具体作用。\",\n      \"parent_aspect_id\": \"Q1-U1\",\n      \"parent_question_id\": \"Q1\",\n      \"question_id\": \"Q1.1\",\n      \"story_span\": \"郝隆為桓公南蠻叅軍三月三日㑹作詩不能\"\n    }\n  ],\n  \"local_evidence_candidates\": [\n    {\n      \"ref\": \"jinshu:062-liezhuan-001\",\n      \"snippet\": \"太尉涼州刺史軌紏合二州同恤王室冠軍將軍允護軍將軍綝總齊六軍戮力國難王旅大㨗俘馘千計旌旗首於晉路金鼓振於河曲崤函無䖍劉之驚汧隴有安業之慶斯誠宗廟社稷陛下神武之所致含氣之類莫不引領况臣之心能無踊躍臣前表當與鮮卑猗盧剋今年三月都㑹平陽會匈羯石勒以三月三日徑掩薊城大司馬博陵公浚受其偽和為勒所虜勒勢轉盛欲來襲臣城塢駭懼志在自守又猗盧國内欲生姦謀幸盧警慮尋皆誅滅遂使南北顧慮用愆成舉臣所以泣血宵吟扼腕長歎者也勒據襄國與臣隔山寇騎朝發夕及臣城同惡相求其徒實繁自東北八州勒滅其七先朝所授存者唯臣是以勒朝夕謀慮以圖臣為計闚伺間隙寇抄相尋戎士不得解甲百姓不得在野天網雖張靈澤未及唯臣孑然與寇為伍自守則稽聰之謀進討則勒襲其後進退唯谷首尾狼狽徒懐憤踊力不從願慙怖征營痛心疾首形留所在神馳寇庭秋穀既登胡馬已肥前鋒諸軍並有至者臣當首啓戎行身先士卒\",\n      \"source_layer\": \"main_text\",\n      \"work\": \"晉書\"\n    },\n    {\n      \"ref\": \"jinshu:086-liezhuan-001\",\n      \"snippet\": \"不能曜侍中徐邈曰君來和同而云不能何也騭曰齊桓貫澤之盟憂心兢兢諸侯不召自至葵丘之會驕而矜誕叛者九國趙國之化常如今日可也若政教陵遲尚未能察邇者之變況鄙州乎曜顧謂左右曰此涼州髙士使乎得人禮而遣之太寧元年駿猶稱建興十二年駿親耕籍田尋承元帝崩問駿大臨三日㑹有黄龍見於揖次之嘉泉右長史汜禕言於駿曰按建興之年是少帝始起之號帝以凶終理應改易朝廷越在江南音問隔絶宜因龍改號以章休徵不從初駿之立也姑臧謡曰鴻從南來雀不驚誰謂孤雛尾翅生髙舉六翮鳯凰鳴至是而復收河南之地咸和初駿遣武威太守竇濤金城太守張閬武興太守辛巖揚烈將軍宋輯等率衆東會韓璞攻討秦州諸郡曜遣其將劉<!-- wikisource-SKchar: {\\\"value\\\": \\\"2596\\\"} -->来距屯于狄道城韓璞進度沃干嶺辛巖曰我握衆數萬藉氐羌之鋭宜速戰以滅之不可以久久則變生璞曰自夏末\",\n      \"source_layer\": \"main_text\",\n      \"work\": \"晉書\"\n    },\n    {\n      \"ref\": \"jinshu:099-liezhuan-001\",\n      \"snippet\": \"ar: {\\\"value\\\": \\\"2593\\\"} -->觧平西豫州以平西文武配相國府新野人庾仄聞<!-- wikisource-SKchar: {\\\"value\\\": \\\"2593\\\"} -->受九錫乃起義兵襲馮該於襄陽走之仄有衆七千於城南設壇祭祖宗七廟南蠻叅軍庾彬安西叅軍楊道護江安令鄧襄子謀為内應仄本仲堪黨桓偉既死石康未至故乘間而發江陵震動桓濟之子亮起兵于羅縣自號平南將軍湘州刺史以討仄為名南蠻校尉羊僧壽與石康共攻襄陽仄衆散奔姚興彬等皆遇害長沙相陶延壽以亮乘亂起兵遣收之<!-- wikisource-SKchar: {\\\"value\\\": \\\"2593\\\"} -->徙亮于衡陽誅其同謀桓奥等<!-- wikisource-SKchar: {\\\"value\\\": \\\"2593\\\"} -->偽上表求歸藩又自作詔留之遣使宣旨<!-- wikisou\",\n      \"source_layer\": \"main_text\",\n      \"work\": \"晉書\"\n    },\n    {\n      \"ref\": \"shishuo:05-fangzheng-018:liu:annotation-016\",\n      \"snippet\": \"(乍浮乍没既上岸充往開車後戸見崔氏女與三嵗/墓追以懊惋居四年三月三日臨水戯忽見一犢車)\",\n      \"source_layer\": \"liu_annotation\",\n      \"work\": \"世說新語\"\n    },\n    {\n      \"ref\": \"s1:s1-assertion-2532ac36378f0fa7ef52\",\n      \"snippet\": \"畢，還見崔。崔曰：『君可歸矣。女有娠相，生男，當以相還；生女，當留自養。』敕外嚴車送客。崔送至門，執手零涕，離別之感，無異生人。復致衣一襲，被褥一副。充便上車，去如電逝，須臾至家。家人相見，悲喜推問，知崔是亡人，而入其墓，追以懊惋。居四年，三月三日臨水戲，忽見一犢車，乍浮乍沒。既上岸，充往開車後戶，見崔氏女與三歲男兒共載。充見之忻然，欲捉其手。女舉手指後車曰：『府君見人。』即見少府，充往問訊。女抱兒還充…\",\n      \"source_layer\": \"liu_annotation\",\n      \"work\": \"余嘉錫箋疏\"\n    }\n  ],\n  \"primary_text\": {\n    \"label\": \"世說新語正文\",\n    \"text\": \"郝隆為桓公南蠻叅軍三月三日㑹作詩不能者罰\\n\\n酒三升隆初以不能受罰既飲攬筆便作一句云娵\\n隅躍清池桓問娵隅是何物荅曰蠻名魚為娵隅桓\\n公曰作詩何以作蠻語隆曰千里投公始得蠻府叅\\n軍那得不作蠻語也\"\n  },\n  \"story_id\": \"25-paidiao-035\"\n}\n",
+      "role": "user"
+    }
+  ],
+  "model": "deepseek-v4-flash",
+  "parameters": {
+    "connect_timeout": 15,
+    "read_timeout": 180,
+    "response_format": {
+      "type": "json_object"
+    },
+    "temperature": 0,
+    "tools": []
+  },
+  "prompt_version": "srm0.4b-robust-live-convergence-v1",
+  "provider": "deepseek",
+  "round": 2,
+  "schema": "srm0-5-model-input",
+  "schema_version": 1,
+  "stage": "local_retrieval_delta"
+}
