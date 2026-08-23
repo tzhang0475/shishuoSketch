@@ -52,6 +52,16 @@ import {
   type Hng0TemporalItem,
   type HngReviewStatus,
 } from "./hng0";
+import {
+  loadHng01Site,
+  readHng01Review,
+  writeHng01Review,
+  type Hng01Evidence,
+  type Hng01Relation,
+  type Hng01ReviewOverlay,
+  type Hng01TemporalItem,
+  type Hng01ReviewStatus,
+} from "./hng01";
 import { IRRReviewPage } from "./IRRReviewPage";
 import type {
   Evidence,
@@ -79,6 +89,7 @@ const FALLBACK_STORY_ID = "06-yaliang-019";
 const READING_MODE_STORAGE_KEY = "shishuoSketch.reading-mode";
 const NL0_STORY_SKETCH_ENABLED = import.meta.env.DEV || import.meta.env.VITE_NL0_STORY_SKETCH === "1";
 const HNG0_SITE = loadHng0Site();
+const HNG01_SITE = loadHng01Site();
 type ReadingMode = "simplified" | "original";
 type ResolvedMention = Mention & { person_id: string };
 type PersonFocus = (personId: string, route?: PersonMentionRoute) => void;
@@ -1772,6 +1783,192 @@ function PersonHng0Surface({
   );
 }
 
+function hng01RelationLabel(relation: Hng01Relation): string {
+  return {
+    parent_child: "亲子",
+    sibling: "兄弟姐妹",
+    uncle_nephew: "叔侄／舅甥",
+    cousin_clan_kin: "从亲／族亲",
+    marriage: "婚姻",
+    affinal_relation: "姻亲",
+    same_clan: "同族",
+    superior_subordinate: "上下属",
+    recruitment_served_under: "任用／事奉",
+    teacher_student: "师生",
+    explicit_friendship_association: "明确交游",
+    explicit_political_cooperation_opposition: "政治合作／对立",
+    shared_explicit_event: "共同事件",
+  }[relation.relation_type] ?? relation.relation_type;
+}
+
+function hng01InitialReview(): Hng01ReviewOverlay {
+  const relationDecisions: Hng01ReviewOverlay["relation_decisions"] = {};
+  const temporalDecisions: Hng01ReviewOverlay["temporal_decisions"] = {};
+  for (const relation of HNG01_SITE.relations) {
+    relationDecisions[relation.relation_id] = { review_status: relation.review_status, reviewer_note: "" };
+  }
+  for (const item of HNG01_SITE.temporal_items) {
+    temporalDecisions[item.temporal_id] = { review_status: item.review_status, reviewer_note: "" };
+  }
+  const saved = readHng01Review();
+  return {
+    schema: 1,
+    stage: "hng0-1-local-review",
+    canonical_write_back: false,
+    relation_decisions: { ...relationDecisions, ...(saved?.relation_decisions ?? {}) },
+    temporal_decisions: { ...temporalDecisions, ...(saved?.temporal_decisions ?? {}) },
+  };
+}
+
+function Hng01ReviewControls({
+  status,
+  onChange,
+}: {
+  status: Hng01ReviewStatus;
+  onChange: (status: Hng01ReviewStatus) => void;
+}) {
+  const choices: Hng01ReviewStatus[] = ["accepted", "rejected", "uncertain", "needs_more_evidence"];
+  return (
+    <div className="hng0-review-controls" aria-label="HNG0.1 本地评审">
+      {choices.map((choice) => (
+        <button
+          type="button"
+          key={choice}
+          className={status === choice ? "hng0-review-button active" : "hng0-review-button"}
+          onClick={() => onChange(choice)}
+        >
+          {hngStatusLabel(choice)}
+        </button>
+      ))}
+    </div>
+  );
+}
+
+function Hng01EvidenceDetails({ refs }: { refs: string[] }) {
+  return (
+    <div className="hng0-evidence-panel selected">
+      <p className="hng0-evidence-heading">Newly extracted · 证据 {refs.length} 条</p>
+      {refs.map((ref) => {
+        const evidence: Hng01Evidence | undefined = HNG01_SITE.evidence[ref];
+        if (!evidence) return null;
+        return (
+          <article className="hng0-evidence-item" key={ref}>
+            <p className="hng0-evidence-meta">{evidence.source_work} · {evidence.source_layer} · {ref}</p>
+            <blockquote>{evidence.model_snippet ?? evidence.original_text}</blockquote>
+            <p className="hng0-evidence-provenance">{evidence.source_path ?? "来源定位未展开"}</p>
+          </article>
+        );
+      })}
+    </div>
+  );
+}
+
+function hng01TimeLabel(item: Hng01TemporalItem): string {
+  const start = item.temporal_scope?.start_year;
+  const end = item.temporal_scope?.end_year;
+  if (typeof start === "number" && typeof end === "number") return start === end ? `${start}` : `${start}–${end}`;
+  if (typeof start === "number") return `${start}（${item.precision}）`;
+  return "年代未定";
+}
+
+function PersonHng01Surface({
+  focusedPersonId,
+  onFocus,
+}: {
+  focusedPersonId: string;
+  onFocus: PersonFocus;
+}) {
+  const neighborhood = HNG01_SITE.people[focusedPersonId];
+  const [review, setReview] = useState<Hng01ReviewOverlay>(hng01InitialReview);
+  const [selectedRelationId, setSelectedRelationId] = useState<string | null>(null);
+  const [selectedTemporalId, setSelectedTemporalId] = useState<string | null>(null);
+  useEffect(() => {
+    writeHng01Review(review);
+  }, [review]);
+  if (!neighborhood) return null;
+  const relations = neighborhood.newly_extracted_relations ?? [];
+  const temporalItems = neighborhood.newly_extracted_temporal_items ?? [];
+  const relationStatus = (row: Hng01Relation): Hng01ReviewStatus => review.relation_decisions[row.relation_id]?.review_status ?? row.review_status;
+  const temporalStatus = (row: Hng01TemporalItem): Hng01ReviewStatus => review.temporal_decisions[row.temporal_id]?.review_status ?? row.review_status;
+  const setRelationStatus = (id: string, status: Hng01ReviewStatus) => setReview((current) => ({
+    ...current,
+    relation_decisions: { ...current.relation_decisions, [id]: { ...current.relation_decisions[id], review_status: status } },
+  }));
+  const setTemporalStatus = (id: string, status: Hng01ReviewStatus) => setReview((current) => ({
+    ...current,
+    temporal_decisions: { ...current.temporal_decisions, [id]: { ...current.temporal_decisions[id], review_status: status } },
+  }));
+  const selectedRelation = relations.find((row) => row.relation_id === selectedRelationId) ?? null;
+  const selectedTemporal = temporalItems.find((row) => row.temporal_id === selectedTemporalId) ?? null;
+  return (
+    <section className="hng0-surface hng01-surface" aria-label="HNG0.1 证据引导人物增长">
+      <div className="hng0-heading-row">
+        <div>
+          <p className="relation-detail-heading">HNG0.1 Evidence-Guided Growth</p>
+          <p className="hng0-subtitle">Newly extracted · 源文检索候选，不写回历史事实</p>
+        </div>
+        <span className="hng0-status-note">{HNG01_SITE.execution_kind}</span>
+      </div>
+      {relations.length === 0 && temporalItems.length === 0 ? (
+        <p className="hng0-muted">当前没有可展示的真实模型候选；本地检索与运行状态保留在 HNG0.1 生成层。</p>
+      ) : (
+        <>
+          <div className="hng0-summary-grid">
+            <span>新关系 {relations.length}</span>
+            <span>新时间条目 {temporalItems.length}</span>
+            <span>邻居 {neighborhood.new_neighbor_ids?.length ?? 0}</span>
+          </div>
+          <div className="hng0-section">
+            <p className="relation-detail-heading">Newly extracted · Relations</p>
+            <div className="hng0-graph" aria-label="HNG0.1 一跳候选关系">
+              {relations.map((relation) => {
+                const otherId = relation.person_a === focusedPersonId ? relation.person_b : relation.person_a;
+                const otherName = relation.person_a === focusedPersonId ? relation.person_b_name : relation.person_a_name;
+                return (
+                  <div className="hng0-graph-row" key={relation.relation_id}>
+                    <button type="button" className="hng0-node" disabled={!otherId} onClick={() => otherId && onFocus(otherId)}>{otherName ?? relation.counterpart_surface}</button>
+                    <button type="button" className={selectedRelationId === relation.relation_id ? "hng0-edge active" : "hng0-edge"} onClick={() => { setSelectedRelationId(relation.relation_id); setSelectedTemporalId(null); }}>
+                      {hng01RelationLabel(relation)} · {hngStatusLabel(relationStatus(relation))}
+                    </button>
+                  </div>
+                );
+              })}
+            </div>
+            {selectedRelation && (
+              <article className="hng0-detail-card">
+                <div className="hng0-detail-title"><span>{selectedRelation.person_a_name ?? focusedPersonId} — {hng01RelationLabel(selectedRelation)} — {selectedRelation.person_b_name ?? selectedRelation.counterpart_surface}</span><span>{hngStatusLabel(relationStatus(selectedRelation))}</span></div>
+                <p className="hng0-detail-meta">{selectedRelation.claim} · {selectedRelation.certainty} · {selectedRelation.resolution_status}</p>
+                {selectedRelation.temporal_warnings.length > 0 && <p className="hng0-muted">时间警告：{selectedRelation.temporal_warnings.join("；")}</p>}
+                <Hng01ReviewControls status={relationStatus(selectedRelation)} onChange={(status) => setRelationStatus(selectedRelation.relation_id, status)} />
+                <Hng01EvidenceDetails refs={selectedRelation.evidence_refs} />
+              </article>
+            )}
+          </div>
+          <div className="hng0-section">
+            <p className="relation-detail-heading">Newly extracted · Timeline</p>
+            <div className="hng0-timeline">
+              {temporalItems.map((item) => (
+                <article className="hng0-timeline-item approximate" key={item.temporal_id}>
+                  <button type="button" className="hng0-timeline-main" onClick={() => { setSelectedTemporalId(item.temporal_id); setSelectedRelationId(null); }}>
+                    <span className="hng0-time-label">{hng01TimeLabel(item)}</span><span>{item.claim}</span><span className="hng0-time-kind">{item.temporal_type} · {hngStatusLabel(temporalStatus(item))}</span>
+                  </button>
+                  {selectedTemporalId === item.temporal_id && (
+                    <div className="hng0-detail-card inline">
+                      <p className="hng0-detail-meta">{item.certainty} · {item.subject_resolution_status}{item.temporal_warnings.length > 0 ? ` · ${item.temporal_warnings.join("；")}` : ""}</p>
+                      <Hng01ReviewControls status={temporalStatus(item)} onChange={(status) => setTemporalStatus(item.temporal_id, status)} />
+                      <Hng01EvidenceDetails refs={item.evidence_refs} />
+                    </div>
+                  )}
+                </article>
+              ))}
+            </div>
+          </div>
+        </>
+      )}
+    </section>
+  );
+}
+
 function PersonDetailCard({
   story,
   data,
@@ -1833,6 +2030,7 @@ function PersonDetailCard({
         onFocus={onFocus}
         onStorySelect={onStorySelect}
       />
+      <PersonHng01Surface focusedPersonId={focusedPerson.id} onFocus={onFocus} />
       <PersonHistoricalProfile personId={focusedPerson.id} readingMode={readingMode} onFocus={onFocus} />
       <div className="relation-detail-group">
         <p className="relation-detail-heading">{uiLabel(data, "person_sketch_relations", readingMode, "人物关系")}</p>
