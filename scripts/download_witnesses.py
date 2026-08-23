@@ -16,6 +16,8 @@ Examples::
     python scripts/download_witnesses.py --shishuo
     python scripts/download_witnesses.py --jinshu-jiaozhu
     python scripts/download_witnesses.py --jinshu-wikisource-siku
+    python scripts/download_witnesses.py --jinshu-wikisource-punctuated
+    python scripts/download_witnesses.py --zizhi-tongjian-wikisource-hu
     python scripts/download_witnesses.py --sanguozhi-wikisource
     python scripts/download_witnesses.py --sanguozhi-song
     python scripts/download_witnesses.py --all
@@ -85,6 +87,16 @@ JINSHU_WIKISOURCE_WITNESS_ID = "jinshu-wikisource-siku"
 JINSHU_WIKISOURCE_ROOT = "sources/downloads/jinshu/wikisource-siku"
 JINSHU_WIKISOURCE_VOLUME_COUNT = 130
 JINSHU_WIKISOURCE_BATCH_SIZE = 10
+JINSHU_WIKISOURCE_PUNCTUATED_WITNESS_ID = "jinshu-wikisource-punctuated"
+JINSHU_WIKISOURCE_PUNCTUATED_ROOT = "sources/downloads/jinshu/wikisource-punctuated"
+JINSHU_WIKISOURCE_PUNCTUATED_BASE_TITLE = "晉書"
+JINSHU_WIKISOURCE_PUNCTUATED_VOLUME_COUNT = 130
+JINSHU_WIKISOURCE_PUNCTUATED_BATCH_SIZE = 25
+ZTJ_WIKISOURCE_HU_WITNESS_ID = "zizhi-tongjian-wikisource-hu"
+ZTJ_WIKISOURCE_HU_ROOT = "sources/downloads/zizhi-tongjian/wikisource-hu"
+ZTJ_WIKISOURCE_HU_BASE_TITLE = "資治通鑒 (胡三省音注)"
+ZTJ_WIKISOURCE_HU_VOLUME_COUNT = 294
+ZTJ_WIKISOURCE_HU_BATCH_SIZE = 25
 JINSHU_FIRST_IDENTIFIER = 18
 JINSHU_LAST_IDENTIFIER = 75
 JINSHU_WITNESS_ID = "jinshu-jiaozhu"
@@ -869,7 +881,19 @@ def parse_wikisource_revisions(
     """Parse a multi-title MediaWiki revision response in requested order."""
 
     pages = _wikisource_page_objects(payload)
-    by_title = {str(page.get("title") or ""): page for page in pages}
+    by_title: dict[str, Mapping[str, Any]] = {}
+    duplicate_titles: set[str] = set()
+    for page in pages:
+        page_title = str(page.get("title") or "")
+        if page_title in by_title:
+            duplicate_titles.add(page_title)
+        else:
+            by_title[page_title] = page
+    if duplicate_titles:
+        raise WitnessDownloadError(
+            "Wikisource batch returned duplicate page titles: "
+            + ", ".join(sorted(duplicate_titles))
+        )
     revisions: list[WikisourceRevision] = []
     for title in titles:
         page = by_title.get(title)
@@ -1070,6 +1094,32 @@ def jinshu_wikisource_volume_titles(
             number: f"{JINSHU_WIKISOURCE_BASE_TITLE}/卷{number:03d}"
             for number in range(2, volume_count + 1)
         },
+    }
+
+
+def jinshu_wikisource_punctuated_volume_titles(
+    volume_count: int = JINSHU_WIKISOURCE_PUNCTUATED_VOLUME_COUNT,
+) -> dict[int, str]:
+    """Return the independent punctuated-reference Jinshu page titles."""
+
+    if volume_count < 1:
+        raise ValueError("volume_count must be positive")
+    return {
+        number: f"{JINSHU_WIKISOURCE_PUNCTUATED_BASE_TITLE}/卷{number:03d}"
+        for number in range(1, volume_count + 1)
+    }
+
+
+def zizhi_tongjian_wikisource_hu_volume_titles(
+    volume_count: int = ZTJ_WIKISOURCE_HU_VOLUME_COUNT,
+) -> dict[int, str]:
+    """Return the punctuated Hu Sansheng ZTJ page titles."""
+
+    if volume_count < 1:
+        raise ValueError("volume_count must be positive")
+    return {
+        number: f"{ZTJ_WIKISOURCE_HU_BASE_TITLE}/卷{number:03d}"
+        for number in range(1, volume_count + 1)
     }
 
 
@@ -2201,6 +2251,414 @@ def _write_bytes_without_overwrite(path: Path, data: bytes) -> tuple[str, int, s
     return "downloaded", len(data), digest
 
 
+def _write_reference_wikisource_metadata(path: Path, data: Mapping[str, Any]) -> None:
+    """Write the small tracked metadata companion for a raw reference witness."""
+
+    scalar_keys = (
+        "schema",
+        "id",
+        "work",
+        "role",
+        "edition",
+        "source_provider",
+        "source_type",
+        "script",
+        "author_compiler",
+        "local",
+        "local_path",
+        "source_record",
+        "api_endpoint",
+        "base_title",
+        "coverage",
+        "expected_juan_count",
+        "retrieved_juan_count",
+        "retrieval_date",
+        "status",
+        "text_authority",
+        "structure_authority",
+    )
+    lines: list[str] = []
+    for key in scalar_keys:
+        if key not in data:
+            continue
+        value = data[key]
+        if isinstance(value, bool):
+            rendered = "true" if value else "false"
+        elif isinstance(value, int):
+            rendered = str(value)
+        elif value is None:
+            rendered = "null"
+        else:
+            rendered = json.dumps(str(value), ensure_ascii=False)
+        lines.append(f"{key}: {rendered}")
+    for key in ("annotations", "missing_juans", "duplicate_juans", "notes"):
+        values = data.get(key, [])
+        if not values:
+            lines.append(f"{key}: []")
+            continue
+        lines.append(f"{key}:")
+        if isinstance(values, Sequence) and not isinstance(values, (str, bytes)):
+            for value in values:
+                rendered = str(value) if isinstance(value, int) else json.dumps(str(value), ensure_ascii=False)
+                lines.append(f"  - {rendered}")
+    lines.append("volume_page_titles:")
+    for number, title in sorted(
+        data.get("volume_page_titles", {}).items(), key=lambda item: int(item[0])
+    ):
+        lines.append(f"  - volume: {int(number)}")
+        lines.append(f"    page_title: {json.dumps(str(title), ensure_ascii=False)}")
+    path.parent.mkdir(parents=True, exist_ok=True)
+    temporary = path.with_name(path.name + ".tmp")
+    temporary.write_text("\n".join(lines) + "\n", encoding="utf-8", newline="\n")
+    temporary.replace(path)
+
+
+def run_wikisource_reference_witness(
+    root: Path,
+    *,
+    witness_id: str,
+    work: str,
+    role: str,
+    edition: str,
+    source_record: str,
+    base_title: str,
+    root_relative: str,
+    volume_titles: Mapping[int, str],
+    batch_size: int,
+    text_authority: str,
+    structure_authority: str,
+    notes: Sequence[str],
+    annotations: Sequence[str] = (),
+    author_compiler: str | None = None,
+    timeout: float = 120.0,
+    batch_fetcher: Callable[
+        [Sequence[str]], tuple[list[WikisourceRevision], bytes, str]
+    ] | None = None,
+    retrieval_timestamp: str | None = None,
+) -> tuple[Path, dict[str, Any]]:
+    """Acquire a complete numbered Wikisource reference witness.
+
+    This helper deliberately stores raw API responses and raw wikitext as
+    separate payloads.  It only validates page/revision identity and volume
+    coverage; it does not parse or rewrite Wikisource markup.
+    """
+
+    if not volume_titles:
+        raise ValueError("volume_titles must not be empty")
+    expected_numbers = list(sorted(volume_titles))
+    if expected_numbers != list(range(1, len(expected_numbers) + 1)):
+        raise ValueError("volume_titles must be a contiguous 1-based sequence")
+    if batch_size < 1:
+        raise ValueError("batch_size must be positive")
+
+    destination_root = root / root_relative
+    raw_root = destination_root / "raw"
+    text_root = destination_root / "text"
+    lock_path = destination_root / "manifest.lock.json"
+    previous_lock = _read_json(lock_path)
+    manifest_timestamp = str(
+        (previous_lock or {}).get("retrieved_at")
+        or retrieval_timestamp
+        or _timestamp()
+    )
+    errors: list[dict[str, Any]] = []
+    records: list[dict[str, Any]] = []
+    auxiliary_files: list[dict[str, Any]] = []
+    duplicate_juan_candidates: set[int] = set()
+
+    if batch_fetcher is None:
+        batch_fetcher = lambda titles: fetch_wikisource_revisions_with_raw(
+            titles, timeout=timeout
+        )
+
+    all_titles = [volume_titles[number] for number in expected_numbers]
+    seen_juans: list[int] = []
+    for batch_number, offset in enumerate(
+        range(0, len(all_titles), batch_size), start=1
+    ):
+        titles = all_titles[offset : offset + batch_size]
+        raw_path = raw_root / f"batch-{batch_number:03d}.json"
+        try:
+            revisions, raw_bytes, api_url = batch_fetcher(titles)
+            raw_status, raw_size, raw_digest = _write_bytes_without_overwrite(
+                raw_path, raw_bytes
+            )
+            previous_auxiliary = next(
+                (
+                    item
+                    for item in (previous_lock or {}).get("auxiliary_files", [])
+                    if isinstance(item, Mapping)
+                    and item.get("path") == raw_path.relative_to(root).as_posix()
+                ),
+                None,
+            )
+            auxiliary_files.append(
+                {
+                    "kind": "api-revision-batch",
+                    "path": raw_path.relative_to(root).as_posix(),
+                    "size": raw_size,
+                    "sha256": raw_digest,
+                    "status": str(
+                        (previous_auxiliary or {}).get("status") or raw_status
+                    ),
+                    "source_url": api_url,
+                    "page_titles": list(titles),
+                }
+            )
+            by_title: dict[str, WikisourceRevision] = {}
+            duplicate_titles: set[str] = set()
+            for revision in revisions:
+                if revision.page_title in by_title:
+                    duplicate_titles.add(revision.page_title)
+                else:
+                    by_title[revision.page_title] = revision
+            unexpected_titles = sorted(set(by_title) - set(titles))
+            if duplicate_titles:
+                duplicate_juan_candidates.update(
+                    number
+                    for number, title in volume_titles.items()
+                    if title in duplicate_titles
+                )
+                raise WitnessDownloadError(
+                    "duplicate page titles returned: "
+                    + ", ".join(sorted(duplicate_titles))
+                )
+            if unexpected_titles:
+                raise WitnessDownloadError(
+                    "unexpected page titles returned: "
+                    + ", ".join(unexpected_titles)
+                )
+            for number, title in zip(expected_numbers[offset : offset + len(titles)], titles):
+                revision = by_title.get(title)
+                if revision is None:
+                    raise WitnessDownloadError(
+                        f"Wikisource batch response omitted page: {title}"
+                    )
+                if revision.page_title != title:
+                    raise WitnessDownloadError(
+                        f"Wikisource page title mismatch: requested {title!r}, got {revision.page_title!r}"
+                    )
+                if revision.page_id is None or revision.revision_id is None or not revision.timestamp:
+                    raise WitnessDownloadError(
+                        f"Wikisource page has unresolved revision provenance: {title}"
+                    )
+                if not revision.content:
+                    raise WitnessDownloadError(f"empty Wikisource source page: {title}")
+                text_path = text_root / f"volume-{number:03d}.wikitext"
+                text_status, text_size, text_digest = _write_bytes_without_overwrite(
+                    text_path, revision.content.encode("utf-8")
+                )
+                previous = _old_wikisource_record(
+                    previous_lock, page_title=revision.page_title
+                )
+                retrieved_at = str(
+                    (previous or {}).get("retrieved_at") or manifest_timestamp
+                )
+                stable_status = str(
+                    (previous or {}).get("status") or text_status
+                )
+                records.append(
+                    {
+                        "work": work,
+                        "witness_id": witness_id,
+                        "global_juan": number,
+                        "volume": number,
+                        "page_title": revision.page_title,
+                        "source_url": revision.source_url,
+                        "api_url": revision.api_url,
+                        "page_id": revision.page_id,
+                        "revision_id": revision.revision_id,
+                        "source_revision": revision.revision_id,
+                        "parent_revision_id": revision.parent_revision_id,
+                        "revision_timestamp": revision.timestamp,
+                        "raw_api_path": raw_path.relative_to(root).as_posix(),
+                        "raw_api_size": raw_size,
+                        "raw_api_sha256": raw_digest,
+                        "source_path": text_path.relative_to(root).as_posix(),
+                        "source_size": text_size,
+                        "source_sha256": text_digest,
+                        "retrieved_at": retrieved_at,
+                        "retrieval_date": retrieved_at[:10],
+                        "status": stable_status,
+                        "text_authority": text_authority,
+                        "structure_authority": structure_authority,
+                    }
+                )
+                seen_juans.append(number)
+        except Exception as error:
+            errors.append(
+                {
+                    "kind": "juan-batch",
+                    "global_juans": expected_numbers[offset : offset + len(titles)],
+                    "page_titles": list(titles),
+                    "reason": f"{type(error).__name__}: {error}",
+                }
+            )
+
+    seen_set = set(seen_juans)
+    duplicate_juans = sorted(
+        set(duplicate_juan_candidates)
+        | {
+            number for number in set(seen_juans) if seen_juans.count(number) > 1
+        }
+    )
+    missing_juans = sorted(set(expected_numbers) - seen_set)
+    if duplicate_juans:
+        errors.append(
+            {
+                "kind": "duplicate-juans",
+                "global_juans": duplicate_juans,
+                "reason": "duplicate global juan records",
+            }
+        )
+    if missing_juans:
+        errors.append(
+            {
+                "kind": "missing-juans",
+                "global_juans": missing_juans,
+                "reason": "Wikisource reference coverage is incomplete",
+            }
+        )
+    records.sort(key=lambda record: int(record["global_juan"]))
+    complete = (
+        len(records) == len(expected_numbers)
+        and seen_juans == expected_numbers
+        and not errors
+    )
+    status = "complete" if complete else "incomplete"
+    manifest: dict[str, Any] = {
+        "schema": 1,
+        "work": work,
+        "witness_id": witness_id,
+        "role": role,
+        "edition": edition,
+        "source_record": source_record,
+        "api_endpoint": WIKISOURCE_API_ENDPOINT,
+        "base_title": base_title,
+        "coverage": f"1-{len(expected_numbers)}",
+        "expected_juan_count": len(expected_numbers),
+        "retrieved_juan_count": len(records),
+        "missing_juans": missing_juans,
+        "duplicate_juans": duplicate_juans,
+        "retrieved_at": manifest_timestamp,
+        "status": status,
+        "records": records,
+        "auxiliary_files": auxiliary_files,
+        "errors": errors,
+        "notes": list(notes),
+        "availability": "git-ignored-upstream-payload",
+    }
+    if annotations:
+        manifest["annotations"] = list(annotations)
+    if author_compiler is not None:
+        manifest["author_compiler"] = author_compiler
+    _write_json(lock_path, manifest)
+
+    metadata: dict[str, Any] = {
+        "schema": 1,
+        "id": witness_id,
+        "work": work,
+        "role": role,
+        "edition": edition,
+        "source_provider": "Wikisource",
+        "source_type": "MediaWiki-wikitext",
+        "script": "traditional Chinese",
+        "local": True,
+        "local_path": root_relative,
+        "source_record": source_record,
+        "api_endpoint": WIKISOURCE_API_ENDPOINT,
+        "base_title": base_title,
+        "coverage": f"1-{len(expected_numbers)}",
+        "expected_juan_count": len(expected_numbers),
+        "retrieved_juan_count": len(records),
+        "retrieval_date": manifest_timestamp[:10],
+        "status": status,
+        "volume_page_titles": {str(number): title for number, title in volume_titles.items()},
+        "missing_juans": missing_juans,
+        "duplicate_juans": duplicate_juans,
+        "annotations": list(annotations),
+        "text_authority": text_authority,
+        "structure_authority": structure_authority,
+        "notes": list(notes),
+    }
+    if author_compiler is not None:
+        metadata["author_compiler"] = author_compiler
+    _write_reference_wikisource_metadata(destination_root / "metadata.yaml", metadata)
+    return lock_path, manifest
+
+
+def run_jinshu_wikisource_punctuated(
+    root: Path,
+    *,
+    timeout: float = 120.0,
+    batch_fetcher: Callable[
+        [Sequence[str]], tuple[list[WikisourceRevision], bytes, str]
+    ] | None = None,
+    retrieval_timestamp: str | None = None,
+) -> tuple[Path, dict[str, Any]]:
+    """Retrieve the independent punctuated 130-juan Jinshu reference."""
+
+    return run_wikisource_reference_witness(
+        root,
+        witness_id=JINSHU_WIKISOURCE_PUNCTUATED_WITNESS_ID,
+        work="晉書",
+        role="punctuated-reference / machine-reference",
+        edition="中文維基文庫《晉書》",
+        source_record="https://zh.wikisource.org/wiki/晉書",
+        base_title=JINSHU_WIKISOURCE_PUNCTUATED_BASE_TITLE,
+        root_relative=JINSHU_WIKISOURCE_PUNCTUATED_ROOT,
+        volume_titles=jinshu_wikisource_punctuated_volume_titles(),
+        batch_size=JINSHU_WIKISOURCE_PUNCTUATED_BATCH_SIZE,
+        text_authority="punctuation reference and machine search; not a replacement for jinshu-wikisource-siku",
+        structure_authority="MediaWiki page titles and revision provenance; full raw wikitext retained",
+        notes=(
+            "The 130 requested pages are fetched through the official MediaWiki API; rendered HTML is not scraped.",
+            "Raw API JSON and returned wikitext remain unchanged; punctuation is reference evidence, not textual adjudication.",
+            "This witness is independent from jinshu-wikisource-siku and is not merged into the primary corpus.",
+        ),
+        batch_fetcher=batch_fetcher,
+        timeout=timeout,
+        retrieval_timestamp=retrieval_timestamp,
+    )
+
+
+def run_zizhi_tongjian_wikisource_hu(
+    root: Path,
+    *,
+    timeout: float = 120.0,
+    batch_fetcher: Callable[
+        [Sequence[str]], tuple[list[WikisourceRevision], bytes, str]
+    ] | None = None,
+    retrieval_timestamp: str | None = None,
+) -> tuple[Path, dict[str, Any]]:
+    """Retrieve the independent punctuated/annotated 294-juan ZTJ reference."""
+
+    return run_wikisource_reference_witness(
+        root,
+        witness_id=ZTJ_WIKISOURCE_HU_WITNESS_ID,
+        work="資治通鑒",
+        role="punctuated-reference / annotated-machine-reference",
+        edition="中文維基文庫《資治通鑒（胡三省音注）》",
+        source_record="https://zh.wikisource.org/wiki/資治通鑒_(胡三省音注)",
+        base_title=ZTJ_WIKISOURCE_HU_BASE_TITLE,
+        root_relative=ZTJ_WIKISOURCE_HU_ROOT,
+        volume_titles=zizhi_tongjian_wikisource_hu_volume_titles(),
+        batch_size=ZTJ_WIKISOURCE_HU_BATCH_SIZE,
+        author_compiler="司馬光",
+        annotations=("胡三省音注",),
+        text_authority="punctuation and Hu Sansheng annotation reference; not a replacement for zizhi-tongjian-kanripo-wyg",
+        structure_authority="MediaWiki page titles and revision provenance; full raw wikitext retained without semantic parsing",
+        notes=(
+            "The 294 requested pages are fetched through the official MediaWiki API; rendered HTML is not scraped.",
+            "司馬光正文 and 胡三省音注 are retained together in raw wikitext; no punctuation or annotation is merged into ZTJ0.",
+            "This witness is independent from zizhi-tongjian-kanripo-wyg and is reference evidence only.",
+        ),
+        batch_fetcher=batch_fetcher,
+        timeout=timeout,
+        retrieval_timestamp=retrieval_timestamp,
+    )
+
+
 def _write_sanguozhi_wikisource_metadata(path: Path, data: Mapping[str, Any]) -> None:
     """Write the small tracked metadata companion for the 65-juan witness."""
 
@@ -3230,7 +3688,9 @@ def _load_yaml(path: Path) -> Mapping[str, Any]:
     return value
 
 
-def _resolve_download_roots(root: Path, config_path: Path) -> tuple[Path, Path, Path, Path, Path, Path]:
+def _resolve_download_roots(
+    root: Path, config_path: Path
+) -> tuple[Path, Path, Path, Path, Path, Path, Path, Path]:
     config = _load_yaml(config_path)
     shishuo_wikisource = root / _config_value(config, "shishuo_wikisource")
     shishuo_ling = root / _config_value(config, "shishuo_ling")
@@ -3238,12 +3698,20 @@ def _resolve_download_roots(root: Path, config_path: Path) -> tuple[Path, Path, 
     sanguozhi = root / _config_value(config, "sanguozhi_song")
     sanguozhi_wikisource = root / _config_value(config, "sanguozhi_wikisource")
     jinshu_wikisource = root / _config_value(config, "jinshu_wikisource_siku")
+    jinshu_wikisource_punctuated = root / _config_value(
+        config, "jinshu_wikisource_punctuated"
+    )
+    zizhi_tongjian_wikisource_hu = root / _config_value(
+        config, "zizhi_tongjian_wikisource_hu"
+    )
     expected_shishuo_wikisource = root / "sources/downloads/shishuo/wikisource-sbck"
     expected_shishuo_ling = root / "sources/downloads/shishuo/ling-1615"
     expected_jinshu = root / "sources/downloads/jinshu/jinshu-jiaozhu"
     expected_sanguozhi = root / "sources/downloads/sanguozhi/song-edition"
     expected_sanguozhi_wikisource = root / SANGUOZHI_WIKISOURCE_ROOT
     expected_jinshu_wikisource = root / JINSHU_WIKISOURCE_ROOT
+    expected_jinshu_wikisource_punctuated = root / JINSHU_WIKISOURCE_PUNCTUATED_ROOT
+    expected_zizhi_tongjian_wikisource_hu = root / ZTJ_WIKISOURCE_HU_ROOT
     if (
         shishuo_wikisource != expected_shishuo_wikisource
         or shishuo_ling != expected_shishuo_ling
@@ -3251,6 +3719,8 @@ def _resolve_download_roots(root: Path, config_path: Path) -> tuple[Path, Path, 
         or sanguozhi != expected_sanguozhi
         or sanguozhi_wikisource != expected_sanguozhi_wikisource
         or jinshu_wikisource != expected_jinshu_wikisource
+        or jinshu_wikisource_punctuated != expected_jinshu_wikisource_punctuated
+        or zizhi_tongjian_wikisource_hu != expected_zizhi_tongjian_wikisource_hu
     ):
         raise WitnessDownloadError(
             "download roots in config/sources.yaml do not match the registered witness layout"
@@ -3262,6 +3732,8 @@ def _resolve_download_roots(root: Path, config_path: Path) -> tuple[Path, Path, 
         shishuo_wikisource,
         shishuo_ling,
         jinshu_wikisource,
+        jinshu_wikisource_punctuated,
+        zizhi_tongjian_wikisource_hu,
     )
 
 
@@ -3411,6 +3883,8 @@ def build_argument_parser() -> argparse.ArgumentParser:
     modes.add_argument("--shishuo", action="store_true", help="download registered downloadable Shishuo witnesses")
     modes.add_argument("--jinshu-jiaozhu", action="store_true", help="discover and download the Jinshu 斠注 series")
     modes.add_argument("--jinshu-wikisource-siku", action="store_true", help="download the Jinshu 四庫全書本 completion from Wikisource's MediaWiki API")
+    modes.add_argument("--jinshu-wikisource-punctuated", action="store_true", help="download the independent punctuated 130-juan Jinshu Wikisource reference")
+    modes.add_argument("--zizhi-tongjian-wikisource-hu", action="store_true", help="download the punctuated 294-juan Hu Sansheng Zizhi Tongjian Wikisource reference")
     modes.add_argument("--sanguozhi-wikisource", action="store_true", help="download the complete 65-juan Sanguozhi machine witness from Wikisource")
     modes.add_argument("--sanguozhi-song", action="store_true", help="discover and download the selected Sanguozhi Song-edition derivatives")
     modes.add_argument("--all", action="store_true", help="download both witnesses; excludes archival JP2")
@@ -3439,6 +3913,8 @@ def main(argv: Sequence[str] | None = None) -> int:
             shishuo_wikisource_root,
             shishuo_ling_root,
             jinshu_wikisource_root,
+            jinshu_wikisource_punctuated_root,
+            zizhi_tongjian_wikisource_hu_root,
         ) = _resolve_download_roots(root, config)
         if args.list:
             _print_shishuo_list(discover_shishuo_ling())
@@ -3458,6 +3934,13 @@ def main(argv: Sequence[str] | None = None) -> int:
                 errors.extend(
                     verify_lock_manifest(root, jinshu_wikisource_root / "manifest.lock.json")
                 )
+            for reference_root in (
+                jinshu_wikisource_punctuated_root,
+                zizhi_tongjian_wikisource_hu_root,
+            ):
+                reference_lock = reference_root / "manifest.lock.json"
+                if reference_lock.exists():
+                    errors.extend(verify_lock_manifest(root, reference_lock))
             ctext_lock = root / CTEXT_JIANSHU_ROOT / "manifest.lock.json"
             if ctext_lock.exists():
                 errors.extend(verify_ctext_lock_manifest(root, ctext_lock))
@@ -3501,6 +3984,24 @@ def main(argv: Sequence[str] | None = None) -> int:
             results.append((run_jinshu(root, timeout=args.timeout)[0], {}))
         if args.jinshu_wikisource_siku or args.all:
             results.append((run_jinshu_wikisource(root, timeout=args.timeout)[0], {}))
+        if args.jinshu_wikisource_punctuated or args.all:
+            results.append(
+                (
+                    run_jinshu_wikisource_punctuated(
+                        root, timeout=args.timeout
+                    )[0],
+                    {},
+                )
+            )
+        if args.zizhi_tongjian_wikisource_hu or args.all:
+            results.append(
+                (
+                    run_zizhi_tongjian_wikisource_hu(
+                        root, timeout=args.timeout
+                    )[0],
+                    {},
+                )
+            )
         if args.sanguozhi_song or args.all:
             if args.include_archival and args.all:
                 parser.error("--include-archival is not enabled by --all; use --sanguozhi-song explicitly")
