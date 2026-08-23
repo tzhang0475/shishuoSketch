@@ -42,6 +42,16 @@ import {
 } from "./historical";
 import { loadStorySketch, loadStorySketchEvidence, NL0_STORY_IDS } from "./storySketch";
 import { loadDs1Preview, type DS1Preview } from "./ds1";
+import {
+  loadHng0Site,
+  readHng0Review,
+  writeHng0Review,
+  type Hng0Evidence,
+  type Hng0Relation,
+  type Hng0ReviewOverlay,
+  type Hng0TemporalItem,
+  type HngReviewStatus,
+} from "./hng0";
 import { IRRReviewPage } from "./IRRReviewPage";
 import type {
   Evidence,
@@ -68,6 +78,7 @@ import type {
 const FALLBACK_STORY_ID = "06-yaliang-019";
 const READING_MODE_STORAGE_KEY = "shishuoSketch.reading-mode";
 const NL0_STORY_SKETCH_ENABLED = import.meta.env.DEV || import.meta.env.VITE_NL0_STORY_SKETCH === "1";
+const HNG0_SITE = loadHng0Site();
 type ReadingMode = "simplified" | "original";
 type ResolvedMention = Mention & { person_id: string };
 type PersonFocus = (personId: string, route?: PersonMentionRoute) => void;
@@ -1494,6 +1505,273 @@ function PersonSketchLifeGlimpse({
   );
 }
 
+function hngPairValue(pair: { original: string; simplified: string } | null | undefined, readingMode: ReadingMode): string {
+  return pair?.[readingMode] ?? "";
+}
+
+function hngStatusLabel(status: HngReviewStatus): string {
+  return {
+    candidate: "候选",
+    accepted: "接受",
+    rejected: "拒绝",
+    uncertain: "不确定",
+    needs_more_evidence: "需要更多证据",
+  }[status];
+}
+
+function hngRelationLabel(relation: Hng0Relation): string {
+  return {
+    parent_child: "亲子",
+    sibling: "兄弟姐妹",
+    uncle_nephew: "叔侄／舅甥",
+    cousin_clan_kin: "从亲／族亲",
+    marriage: "婚姻",
+    affinal_relation: "姻亲",
+    same_clan: "同族",
+    superior_subordinate: "上下属",
+    recruitment_served_under: "任用／事奉",
+    teacher_student: "师生",
+    explicit_friendship_association: "明确交游",
+    explicit_political_cooperation_opposition: "政治合作／对立",
+    shared_explicit_event: "共同事件",
+  }[relation.relation_type] ?? relation.relation_type;
+}
+
+function hngTimeLabel(item: Hng0TemporalItem): string {
+  if (item.precision === "exact" && item.start_year !== null) return `${item.start_year}`;
+  if (item.precision === "between" && item.start_year !== null && item.end_year !== null) return `${item.start_year}–${item.end_year}`;
+  if (item.precision === "circa" && item.start_year !== null) return `约${item.start_year}`;
+  if (item.precision === "before" && item.start_year !== null) return `${item.start_year}以前`;
+  if (item.precision === "after" && item.start_year !== null) return `${item.start_year}以后`;
+  if (item.precision === "reign_period") return "年号／时代范围";
+  return "年代未定";
+}
+
+function hngInitialReview(): Hng0ReviewOverlay {
+  const relationDecisions: Hng0ReviewOverlay["relation_decisions"] = {};
+  const temporalDecisions: Hng0ReviewOverlay["temporal_decisions"] = {};
+  for (const relation of HNG0_SITE.relations) {
+    relationDecisions[relation.relation_id] = { review_status: relation.review_status, reviewer_note: "" };
+  }
+  for (const item of HNG0_SITE.temporal_items) {
+    temporalDecisions[item.temporal_id] = { review_status: item.review_status, reviewer_note: "" };
+  }
+  const saved = readHng0Review();
+  return {
+    schema: 1,
+    stage: "hng0-local-review",
+    canonical_write_back: false,
+    relation_decisions: { ...relationDecisions, ...(saved?.relation_decisions ?? {}) },
+    temporal_decisions: { ...temporalDecisions, ...(saved?.temporal_decisions ?? {}) },
+  };
+}
+
+function Hng0ReviewControls({
+  status,
+  onChange,
+}: {
+  status: HngReviewStatus;
+  onChange: (status: HngReviewStatus) => void;
+}) {
+  const choices: HngReviewStatus[] = ["accepted", "rejected", "uncertain", "needs_more_evidence"];
+  return (
+    <div className="hng0-review-controls" aria-label="HNG0 本地评审">
+      {choices.map((choice) => (
+        <button
+          type="button"
+          key={choice}
+          className={status === choice ? "hng0-review-button active" : "hng0-review-button"}
+          onClick={() => onChange(choice)}
+        >
+          {hngStatusLabel(choice)}
+        </button>
+      ))}
+    </div>
+  );
+}
+
+function Hng0EvidenceDetails({
+  refs,
+  selected,
+}: {
+  refs: string[];
+  selected: boolean;
+}) {
+  return (
+    <div className={selected ? "hng0-evidence-panel selected" : "hng0-evidence-panel"}>
+      <p className="hng0-evidence-heading">证据 {refs.length} 条</p>
+      {refs.length === 0 && <p className="hng0-muted">暂无证据引用。</p>}
+      {refs.map((ref) => {
+        const evidence: Hng0Evidence | undefined = HNG0_SITE.evidence[ref];
+        if (!evidence) return null;
+        return (
+          <article className="hng0-evidence-item" key={ref}>
+            <p className="hng0-evidence-meta">{evidence.source_work} · {evidence.source_layer} · {ref}</p>
+            {evidence.original_text ? <blockquote>{evidence.original_text}</blockquote> : <p className="hng0-muted">此引用保留了来源记录与定位；当前投影没有重复载入原文。</p>}
+            <p className="hng0-evidence-provenance">{evidence.source_path ?? "来源定位未展开"} · {evidence.assertion_status} · {evidence.source_review_status}</p>
+          </article>
+        );
+      })}
+    </div>
+  );
+}
+
+function PersonHng0Surface({
+  focusedPersonId,
+  data,
+  readingMode,
+  onFocus,
+  onStorySelect,
+}: {
+  focusedPersonId: string;
+  data: SiteBundle;
+  readingMode: ReadingMode;
+  onFocus: PersonFocus;
+  onStorySelect: (storyId: string) => void;
+}) {
+  const neighborhood = HNG0_SITE.people[focusedPersonId];
+  const [review, setReview] = useState<Hng0ReviewOverlay>(hngInitialReview);
+  const [selectedRelationId, setSelectedRelationId] = useState<string | null>(null);
+  const [selectedTemporalId, setSelectedTemporalId] = useState<string | null>(null);
+  useEffect(() => {
+    writeHng0Review(review);
+  }, [review]);
+  if (!neighborhood) {
+    return (
+      <section className="hng0-surface" aria-label="HNG0 历史导航">
+        <p className="relation-detail-heading">HNG0 历史导航</p>
+        <p className="hng0-muted">此人物未进入本轮种子范围；HNG0 不递归扩展关系邻居。</p>
+      </section>
+    );
+  }
+  const setRelationStatus = (relationId: string, status: HngReviewStatus) => {
+    setReview((current) => ({
+      ...current,
+      relation_decisions: {
+        ...current.relation_decisions,
+        [relationId]: { ...current.relation_decisions[relationId], review_status: status },
+      },
+    }));
+  };
+  const setTemporalStatus = (temporalId: string, status: HngReviewStatus) => {
+    setReview((current) => ({
+      ...current,
+      temporal_decisions: {
+        ...current.temporal_decisions,
+        [temporalId]: { ...current.temporal_decisions[temporalId], review_status: status },
+      },
+    }));
+  };
+  const relationStatus = (relation: Hng0Relation): HngReviewStatus => review.relation_decisions[relation.relation_id]?.review_status ?? relation.review_status;
+  const temporalStatus = (item: Hng0TemporalItem): HngReviewStatus => review.temporal_decisions[item.temporal_id]?.review_status ?? item.review_status;
+  const selectedRelation = neighborhood.relations.find((relation) => relation.relation_id === selectedRelationId) ?? null;
+  const selectedTemporal = neighborhood.temporal_spine.find((item) => item.temporal_id === selectedTemporalId) ?? null;
+  const personStories = neighborhood.stories;
+  return (
+    <section className="hng0-surface" aria-label="HNG0 历史导航">
+      <div className="hng0-heading-row">
+        <div>
+          <p className="relation-detail-heading">HNG0 历史导航</p>
+          <p className="hng0-subtitle">一跳候选图 · 本地评审，不写回历史事实</p>
+        </div>
+        <span className="hng0-status-note">{neighborhood.nearby_person_ids.length} 位邻近人物</span>
+      </div>
+      <div className="hng0-summary-grid">
+        <span>关系 {neighborhood.relations.length}</span>
+        <span>时间条目 {neighborhood.temporal_spine.length}</span>
+        <span>故事 {neighborhood.stories.length}</span>
+        <span>时间窗 {neighborhood.approximate_temporal_window.start_year ?? "?"}–{neighborhood.approximate_temporal_window.end_year ?? "?"}</span>
+      </div>
+
+      <div className="hng0-section">
+        <p className="relation-detail-heading">Relations · 一跳关系</p>
+        <div className="hng0-graph" aria-label="一跳人物关系图">
+          <div className="hng0-graph-center">{hngPairValue(neighborhood.person.name, readingMode)}</div>
+          {neighborhood.relations.length === 0 && <p className="hng0-muted">暂无有证据的关系候选。</p>}
+          {neighborhood.relations.map((relation) => {
+            const otherId = relation.person_a === focusedPersonId ? relation.person_b : relation.person_a;
+            const otherName = relation.person_a === focusedPersonId ? relation.person_b_name : relation.person_a_name;
+            const status = relationStatus(relation);
+            return (
+              <div className="hng0-graph-row" key={relation.relation_id}>
+                <button type="button" className="hng0-node" onClick={() => onFocus(otherId)}>{otherName ?? HNG0_SITE.person_labels[otherId] ?? otherId}</button>
+                <button
+                  type="button"
+                  className={selectedRelationId === relation.relation_id ? "hng0-edge active" : "hng0-edge"}
+                  onClick={() => { setSelectedRelationId(relation.relation_id); setSelectedTemporalId(null); }}
+                >
+                  {hngRelationLabel(relation)} · {hngStatusLabel(status)}
+                </button>
+              </div>
+            );
+          })}
+        </div>
+        {selectedRelation && (
+          <article className="hng0-detail-card">
+            <div className="hng0-detail-title">
+              <span>{selectedRelation.person_a_name} — {hngRelationLabel(selectedRelation)} — {selectedRelation.person_b_name}</span>
+              <span>{hngStatusLabel(relationStatus(selectedRelation))}</span>
+            </div>
+            <p className="hng0-detail-meta">{selectedRelation.certainty} · {selectedRelation.extraction_method} · {selectedRelation.source_review_status}</p>
+            <Hng0ReviewControls status={relationStatus(selectedRelation)} onChange={(status) => setRelationStatus(selectedRelation.relation_id, status)} />
+            <Hng0EvidenceDetails refs={selectedRelation.evidence_refs} selected />
+          </article>
+        )}
+      </div>
+
+      <div className="hng0-section">
+        <p className="relation-detail-heading">Timeline · 最小时间脊</p>
+        <div className="hng0-timeline">
+          {neighborhood.temporal_spine.length === 0 && <p className="hng0-muted">暂无带证据的时间条目。</p>}
+          {neighborhood.temporal_spine.map((item) => {
+            const status = temporalStatus(item);
+            return (
+              <article className={item.precision === "exact" ? "hng0-timeline-item exact" : "hng0-timeline-item approximate"} key={item.temporal_id}>
+                <button type="button" className="hng0-timeline-main" onClick={() => { setSelectedTemporalId(item.temporal_id); setSelectedRelationId(null); }}>
+                  <span className="hng0-time-label">{hngTimeLabel(item)}</span>
+                  <span>{item.label}</span>
+                  <span className="hng0-time-kind">{item.kind} · {hngStatusLabel(status)}</span>
+                </button>
+                {selectedTemporalId === item.temporal_id && (
+                  <div className="hng0-detail-card inline">
+                    <p className="hng0-detail-meta">时间精度：{item.precision} · {item.certainty} · {item.source_review_status}</p>
+                    <Hng0ReviewControls status={status} onChange={(next) => setTemporalStatus(item.temporal_id, next)} />
+                    <Hng0EvidenceDetails refs={item.evidence_refs} selected />
+                  </div>
+                )}
+              </article>
+            );
+          })}
+        </div>
+      </div>
+
+      <div className="hng0-section">
+        <p className="relation-detail-heading">Stories · 相关故事</p>
+        <div className="hng0-story-list">
+          {personStories.map((item) => {
+            const story = data.stories.find((candidate) => candidate.id === item.story_id);
+            const canOpen = Boolean(story);
+            return (
+              <button type="button" className="hng0-story-row" key={`${item.story_id}-${item.person_story_link_id ?? "link"}`} disabled={!canOpen} onClick={() => canOpen && onStorySelect(item.story_id)}>
+                <span className="hng0-story-ref">{item.chapter_heading} · {String(item.story_ordinal ?? "?").padStart(3, "0")}</span>
+                <span className="hng0-story-excerpt">{item.short_excerpt || "（仅有注释层关联）"}</span>
+                <span className="hng0-story-meta">{item.source_presence} · {item.research_scope === "published" ? "已出版范围" : "研究范围"} · {item.review_status ?? "未标记"}</span>
+              </button>
+            );
+          })}
+        </div>
+      </div>
+
+      {(selectedRelation || selectedTemporal) && (
+        <div className="hng0-section">
+          <p className="relation-detail-heading">Evidence · 证据面板</p>
+          <Hng0EvidenceDetails refs={selectedRelation?.evidence_refs ?? selectedTemporal?.evidence_refs ?? []} selected />
+        </div>
+      )}
+    </section>
+  );
+}
+
 function PersonDetailCard({
   story,
   data,
@@ -1547,6 +1825,13 @@ function PersonDetailCard({
         data={data}
         focusedPerson={focusedPerson}
         readingMode={readingMode}
+      />
+      <PersonHng0Surface
+        focusedPersonId={focusedPerson.id}
+        data={data}
+        readingMode={readingMode}
+        onFocus={onFocus}
+        onStorySelect={onStorySelect}
       />
       <PersonHistoricalProfile personId={focusedPerson.id} readingMode={readingMode} onFocus={onFocus} />
       <div className="relation-detail-group">
