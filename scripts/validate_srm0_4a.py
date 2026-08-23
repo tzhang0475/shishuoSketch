@@ -29,6 +29,7 @@ from srm0_4a_common import (  # noqa: E402
 
 
 OUTPUT_BASE = Path("data/generated/srm0")
+STATUS_PATH = Path("data/generated/srm0/srm0-4-status.json")
 REVIEW_PATH = Path("data/annotation/srm0-4a-review.json")
 ALLOWED_SEARCH_CORPORA = {
     "世說新語", "余嘉錫箋疏", "晉書", "三國志", "資治通鑑", "資治通鑑考異"
@@ -266,6 +267,11 @@ def main() -> int:
     story_ids = [args.story] if args.story else expected_ids
     if args.story and args.story not in expected_ids:
         errors.append(f"requested Story is not selected: {args.story}")
+    status = read_json(ROOT / STATUS_PATH)
+    legacy_results_present = any((ROOT / OUTPUT_BASE / story_id / "convergence" / "round-00-input.json").is_file() for story_id in expected_ids)
+    if status.get("previous_live_results_reset") is True and not (ROOT / BATCH_SUMMARY_PATH).is_file() and not legacy_results_present:
+        print("SRM0.4A validation passed (generated results reset)")
+        return 0
     has_trace = any((ROOT / OUTPUT_BASE / story_id / "convergence" / "search-trace.jsonl").is_file() and (ROOT / OUTPUT_BASE / story_id / "convergence" / "search-trace.jsonl").stat().st_size for story_id in story_ids)
     registry = build_retrieval_registry(ROOT) if has_trace else {}
     summaries: list[dict[str, Any]] = []

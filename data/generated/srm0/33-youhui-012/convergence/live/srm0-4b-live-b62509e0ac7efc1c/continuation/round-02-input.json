@@ -1,0 +1,31 @@
+{
+  "canonical_write_back": false,
+  "execution_kind": "live_model",
+  "external_search_performed": false,
+  "messages": [
+    {
+      "content": "请根据当前正文阅读缺口和本轮本地史料候选，更新语义理解。只使用输入候选，不使用预训练知识。\n\n只写实际被候选证据支持的 answered_aspects；unanswered_aspects 只保留仍影响正文理解的窄缺口；conflicts 只写材料明确冲突。reading_sufficient 表示当前阅读是否足够，不等于历史学上的最终验证。不要输出 state、next_action、搜索词或 canonical 事实，不要为了有趣继续研究。\n\n每个使用的证据必须引用候选 ref 和逐字 quote。只返回 JSON 对象，且只能有顶层字段 updates；每个 update 只能有 question_id、answered_aspects、unanswered_aspects、conflicts、reading_sufficient、historical_verification_open。不要返回数组本身或其他状态字段。",
+      "role": "system"
+    },
+    {
+      "content": "{\n  \"active_questions\": [\n    {\n      \"current_reading\": {\n        \"remaining_gap\": \"簡文帝為何見到桓宣武就掉淚？是悲痛、恐懼還是另有所感？\",\n        \"state\": \"unexplained\",\n        \"supporting_refs\": [],\n        \"working_answer\": \"\"\n      },\n      \"gap\": \"簡文帝為何見到桓宣武就掉淚？是悲痛、恐懼還是另有所感？\",\n      \"parent_aspect_id\": null,\n      \"parent_question_id\": null,\n      \"question_id\": \"Q1\",\n      \"story_span\": \"簡文便泣下數\\n十行\"\n    },\n    {\n      \"current_reading\": {\n        \"remaining_gap\": \"「不甚得語」的具體含義與原因（是不善言辭，還是兩人關係緊張）缺失，影響對桓宣武為何預撰演說的理解。\",\n        \"state\": \"unexplained\",\n        \"supporting_refs\": [],\n        \"working_answer\": \"\"\n      },\n      \"gap\": \"「不甚得語」的具體含義與原因（是不善言辭，還是兩人關係緊張）缺失，影響對桓宣武為何預撰演說的理解。\",\n      \"parent_aspect_id\": null,\n      \"parent_question_id\": null,\n      \"question_id\": \"Q2\",\n      \"story_span\": \"桓宣武對簡文帝不甚得語\"\n    },\n    {\n      \"current_reading\": {\n        \"remaining_gap\": \"桓宣武所撰數百語的具體內容缺失——他如何辯護廢海西、立簡文帝，這決定了後文沉默的諷刺力量。\",\n        \"state\": \"unexplained\",\n        \"supporting_refs\": [],\n        \"working_answer\": \"\"\n      },\n      \"gap\": \"桓宣武所撰數百語的具體內容缺失——他如何辯護廢海西、立簡文帝，這決定了後文沉默的諷刺力量。\",\n      \"parent_aspect_id\": null,\n      \"parent_question_id\": null,\n      \"question_id\": \"Q3\",\n      \"story_span\": \"乃\\n豫撰數百語陳廢立之意\"\n    }\n  ],\n  \"local_evidence_candidates\": [\n    {\n      \"ref\": \"jinshu:098-liezhuan-003\",\n      \"snippet\": \"頓減於是參軍郄超進廢立之計溫乃廢帝而立簡文帝詔溫依諸葛亮故事甲仗百人入殿賜錢五千萬絹二萬匹布二萬匹溫多所廢徙誅庾倩殷涓曹秀等是時溫威勢翕赫侍中謝安見而遙拜溫驚曰安石卿何事乃爾安曰未有君拜於前臣揖於後時溫有脚疾詔乘輿入朝既見欲陳廢立本意帝便泣下數十行溫兢懼不得一言而出初元明世郭璞為䜟曰君非無嗣兄弟代禪謂成帝有子而以國祚傳弟又曰有人姓李兒專征戰譬如車軸脱在一面兒者子也李去子木存車去軸為亘合成桓字也又曰爾來爾來河内大縣爾來謂自爾已來為元始溫字元子也故河内大縣溫也成康既崩桓氏始大故連言之又曰頼子之薨延我國祚痛子之隕皇運其暮二子者元子道子也溫志在簒奪事未成而死幸之也會稽王道子雖首亂晉國而其死亦晉衰之由也故云痛也溫復還白石上疏求歸姑孰詔曰夫乾坤體合而化成萬物二人同心則不言所利古之哲王咸頼元輔姬旦光于四夷而周道以隆伊尹格于皇\",\n      \"source_layer\": \"main_text\",\n      \"work\": \"晉書\"\n    },\n    {\n      \"ref\": \"jinshu:027-zhi-001\",\n      \"snippet\": \"　成帝咸和二年五月京師火\\n　　康帝建元元年七月庚申吳郡災\\n　　穆帝永和五年六月震災石季龍大武殿及兩廟端門震災月餘乃滅金石皆盡其後季龍死大亂遂滅亡海西公太和中郄愔為會稽太守六月大旱災火燒數千家延及山隂倉米數百萬斛炎煙蔽天不可撲滅此亦桓溫強盛将廢海西極隂生陽之應也\\n　　孝武帝寜康元年三月京師風火大起是時桓溫入朝志在陵上少主踐位人懐憂恐此與太寜火事同太元十年正月國子學生因風放火焚房百餘間是後考課不厲賞黜無章盖有育才之名而無收賢之實此不哲之罰先兆也\\n　　十三年十二月乙未延賢堂災是月景申螽斯則百堂及客館驃騎府庫皆災于時朝多弊政衰陵日兆不哲之罰皆有象類主相不悟終至亂亡㑹稽王道子寵幸尼及姏母各樹用其親戚乃至出入宮掖禮見人主天戒若曰登延賢堂及客館者多非其人故災之也又孝武帝更不立皇后寵幸㣲賤張夫人夫人驕妬皇子不繁乖螽斯則百之道故\",\n      \"source_layer\": \"main_text\",\n      \"work\": \"晉書\"\n    },\n    {\n      \"ref\": \"jinshu:076-liezhuan-002\",\n      \"snippet\": \"勢震主四方佛敬皆遣上佐綱紀彪之獨曰大司馬誠為富貴朝廷既有宰相動静之宜自當諮禀修敬若遣綱紀致貢天子復何以過之竟不遣溫以山隂縣折布米不時畢郡不彈糾上免彪之彪之去郡郡見罪讁未上州臺者皆原散之温復以為罪乃檻收下吏㑹赦免左降為尚書頃之復為僕射是時溫將廢海西公百寮震慄温亦色動莫知所為彪之既知温不臣迹已著理不可奪乃謂溫曰公阿衡皇家便當倚傍先代耳命取霍光傳禮度儀制定扵須臾曽無懼容温歎曰作元凱不當如是邪時廢立之儀既絶於曠代朝廷莫有識其故典者彪之神彩毅然朝服當階文武儀準莫不取定朝廷以此服之温又廢武陵王遵以事示彪之彪之曰武陵親尊未有顯罪不可以猜嫌之間便相廢徙公建立聖明遐邇歸心當崇奬王室伊周同美此大事宜更深詳溫曰此已成事卿勿復言及簡文崩羣臣疑惑未敢立嗣或云宜當須大司馬䖏分彪之正色曰君崩太子代立大司馬何容得異若先面諮必反為所責矣於是朝議\",\n      \"source_layer\": \"main_text\",\n      \"work\": \"晉書\"\n    },\n    {\n      \"ref\": \"shishuo:25-paidiao-038:main\",\n      \"snippet\": \"桓公既廢海西立簡文\\n\\n侍中謝公見桓公拜桓驚笑曰安石卿何事至爾謝\\n曰未有君拜於前臣立於後\",\n      \"source_layer\": \"main_text\",\n      \"work\": \"世說新語\"\n    },\n    {\n      \"ref\": \"jinshu:064-liezhuan-001\",\n      \"snippet\": \"納輕剽苞藏亡命又息綜矜忍虐加于人袁真叛逆事相連染頃日猜懼將成亂階請免晞官以王歸藩免其世子綜官解子㻱散騎常侍㻱以梁王隨晞晞既見黜送馬八十五匹三百人杖以歸温溫又逼新蔡王晃使自誣與晞綜及著作郎殷㳙太宰長史庾籍掾曹秀舍人劉疆等謀逆遂收付廷尉請誅之簡文帝不許溫於是奏徙新安郡家屬悉從之而族誅殷㳙等廢晃徙衡陽郡太元六年晞卒于新安時年六十六孝武帝三日臨于西堂詔曰感惟摧慟便奉迎靈柩幷改移妃應氏及故世子梁王諸喪家屬悉還復下詔曰故前武陵王體自皇極剋已思愆仰惟先朝仁宥之㫖豈可情禮靡寄其追封新寧郡王邑千戸晞三子綜㻱遵以遵嗣追贈綜給事中㻱散騎郎十二年追復晞武陵國綜㻱各復其官㻱還繼梁國\\n　　梁王㻱字賢明出繼梁王翹官至永安太僕與父晞俱廢薨子龢嗣太元中復國薨子珍之嗣桓<!-- wikisource-SKchar: {\\\"value\\\": \\\"2593\",\n      \"source_layer\": \"main_text\",\n      \"work\": \"晉書\"\n    }\n  ],\n  \"primary_text\": {\n    \"label\": \"世說新語正文\",\n    \"text\": \"桓宣武對簡文帝不甚得語廢海西後宜自申叙乃\\n豫撰數百語陳廢立之意既見簡文簡文便泣下數\\n十行宣武矜愧不得一言\"\n  },\n  \"story_id\": \"33-youhui-012\"\n}\n",
+      "role": "user"
+    }
+  ],
+  "model": "deepseek-v4-flash",
+  "parameters": {
+    "connect_timeout": 15,
+    "read_timeout": 180,
+    "response_format": {
+      "type": "json_object"
+    },
+    "temperature": 0,
+    "tools": []
+  },
+  "prompt_version": "srm0.4b-robust-live-convergence-v1",
+  "provider": "deepseek",
+  "round": 2,
+  "schema": "srm0-4c-model-input",
+  "schema_version": 1,
+  "stage": "local_retrieval_delta"
+}

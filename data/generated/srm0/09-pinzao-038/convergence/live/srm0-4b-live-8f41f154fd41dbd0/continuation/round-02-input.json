@@ -1,0 +1,31 @@
+{
+  "canonical_write_back": false,
+  "execution_kind": "live_model",
+  "external_search_performed": false,
+  "messages": [
+    {
+      "content": "请根据当前正文阅读缺口和本轮本地史料候选，更新语义理解。只使用输入候选，不使用预训练知识。\n\n只写实际被候选证据支持的 answered_aspects；unanswered_aspects 只保留仍影响正文理解的窄缺口；conflicts 只写材料明确冲突。reading_sufficient 表示当前阅读是否足够，不等于历史学上的最终验证。不要输出 state、next_action、搜索词或 canonical 事实，不要为了有趣继续研究。\n\n每个使用的证据必须引用候选 ref 和逐字 quote。只返回 JSON 对象，且只能有顶层字段 updates；每个 update 只能有 question_id、answered_aspects、unanswered_aspects、conflicts、reading_sufficient、historical_verification_open。不要返回数组本身或其他状态字段。",
+      "role": "system"
+    },
+    {
+      "content": "{\n  \"active_questions\": [\n    {\n      \"current_reading\": {\n        \"remaining_gap\": \"缺少正确断句，可能被误读为“殷侯既废桓公”，导致行动主体颠倒\",\n        \"state\": \"unexplained\",\n        \"supporting_refs\": [],\n        \"working_answer\": \"\"\n      },\n      \"gap\": \"缺少正确断句，可能被误读为“殷侯既废桓公”，导致行动主体颠倒\",\n      \"parent_aspect_id\": null,\n      \"parent_question_id\": null,\n      \"question_id\": \"Q1\",\n      \"story_span\": \"殷侯既廢桓公語諸人曰\"\n    },\n    {\n      \"current_reading\": {\n        \"remaining_gap\": \"缺少“渊源”即殷侯（殷浩）的字，否则会误以为另一人\",\n        \"state\": \"unexplained\",\n        \"supporting_refs\": [],\n        \"working_answer\": \"\"\n      },\n      \"gap\": \"缺少“渊源”即殷侯（殷浩）的字，否则会误以为另一人\",\n      \"parent_aspect_id\": \"Q2-U1\",\n      \"parent_question_id\": \"Q2\",\n      \"question_id\": \"Q2.1\",\n      \"story_span\": \"少時與淵源共騎竹馬\"\n    },\n    {\n      \"current_reading\": {\n        \"remaining_gap\": \"缺少“巳”应理解为“己”（自己，指桓温）的说明，否则可能误为“已”\",\n        \"state\": \"unexplained\",\n        \"supporting_refs\": [],\n        \"working_answer\": \"\"\n      },\n      \"gap\": \"缺少“巳”应理解为“己”（自己，指桓温）的说明，否则可能误为“已”\",\n      \"parent_aspect_id\": null,\n      \"parent_question_id\": null,\n      \"question_id\": \"Q3\",\n      \"story_span\": \"巳輒取之\"\n    }\n  ],\n  \"local_evidence_candidates\": [\n    {\n      \"ref\": \"jinshu:077-liezhuan-006\",\n      \"snippet\": \"\\\"value\\\": \\\"2592\\\"} -->未忍誅殛且宜遐棄擯之荒裔雖未足以塞山海之責粗可以宣誡於將来矣竟坐廢為庶人徙于東陽之信安縣浩少與溫齊名而每心競溫嘗問浩君何如我浩曰我與君周旋久寧作我也溫既以雄豪自許每輕浩浩不之憚也至是溫語人曰少時吾與浩共騎竹馬我棄去浩輒取之故當出我下也又謂郄超曰浩有徳有言向使作令僕足以儀刑百揆朝廷用違其才耳浩雖被黜放口無怨言夷神委命談詠不輟雖家人不見其有流放之慼但終日書空作咄咄怪事四字而已浩甥韓伯浩素賞愛之随至徙所經嵗還都浩送至渚側詠曹顔逺詩云富貴他人合貧賤親戚離因而泣下後溫將以浩為尚書令遺書告之浩欣然許焉將答書慮有謬誤開閉者數十竟達空函大忤温意由是遂絶永和十二年卒子涓亦有羙名咸安初桓溫廢太宰武陵王晞誣涓及庾倩與晞謀反害之浩後將改葬其故吏顧悦之上疏訟浩曰伏見故中軍將軍<!-- wikiso\",\n      \"source_layer\": \"main_text\",\n      \"work\": \"晉書\"\n    },\n    {\n      \"ref\": \"jinshu:081-liezhuan-002\",\n      \"snippet\": \"胡寇方至使君且當攝職為百姓障扞賊退謝罪不晚也豹從之元帝聞豹退使收之使者至王舒夜以兵圍豹豹以為他難率麾下擊之聞有詔乃止舒執豹送至建康斬之尸于市三日時年五十二豹在徐土内撫將士外懐諸衆甚得逺近情聞其死多悼惜之無子兄子裔字元子散騎常侍兖州刺史高陽鄉侯殷浩北伐使裔率衆出彭城卒於軍\\n\",\n      \"source_layer\": \"main_text\",\n      \"work\": \"晉書\"\n    },\n    {\n      \"ref\": \"jinshu:056-liezhuan-002\",\n      \"snippet\": \"urce-SKchar: {\\\"value\\\": \\\"2592\\\"} -->養徳業括囊元吉豈不快乎今温唱髙議聖朝互同臣以輕微獨獻管見出言之難實在今日而臣區區必聞天聽者切以無諱之朝狂瞽進說芻蕘之謀聖賢所察所以不勝至憂觸冒干陳若陛下垂神温少留思豈非屈於一人而允億兆之願哉如以干忤罪大欲加顯戮使丹誠上達退受刑誅雖沒泉壤尸且不朽桓温見綽表不恱曰致意興公何不尋君遂初賦知人家國事邪尋轉廷尉卿領著作綽少以文才垂稱于時文士綽為其冠温王郄庾諸公之薨必湏綽為碑文然後刋石焉年五十八卒子嗣有綽風文章相亞位至中軍㕘軍早亡\\n　　史臣曰江統風檢操行良有可稱陳留多士斯為其冠徙戎之論實是經國逺圖然運距中衰陵替有漸假其言見用恐速禍招怨無救於将顛也逮愍懐廢徙冒禁拜辭所謂命輕鴻毛義貴熊掌虨位隆端右竭誠獻替惇遺忽榮利聿修天爵雖出處異塗俱難兄弟矣孫楚體英絢之姿超然\",\n      \"source_layer\": \"main_text\",\n      \"work\": \"晉書\"\n    },\n    {\n      \"ref\": \"jinshu:073-liezhuan-001\",\n      \"snippet\": \"累遷黄門郎豫章太守徴拜祕書監賜爵鄉亭侯出為冠軍將軍臨川太守豫章黄韜自稱孝神皇帝臨川人李髙為相聚黨數百人乘犢車衣皂袍攻郡縣條討平之條於兄弟最凡劣故禄位不至卒官贈左將軍\\n　　翼字稚恭風儀秀偉少有經綸大畧京兆杜乂陳郡殷浩並才名冠世而翼弗之重也毎語人曰此軰宜束之髙閣俟天下太平然後議其任耳見桓溫總角之中便期之以遠畧因言於成帝曰桓溫有英雄之才願陛下勿以常人遇之常壻畜之宜委以方邵之任必有<!-- wikisource-SKchar: {\\\"value\\\": \\\"2592\\\"} -->濟艱難之勲蘇峻作逆翼時年二十二兄亮使白衣領數百人備石頭亮敗與翼俱奔事平始辟太尉陶侃府轉叅軍累遷從事中郎在公府雍容諷議頃之除振威將軍鄱陽太守轉建威將軍西陽太守撫和百姓甚得歡心遷南蠻校尉領南郡太守加輔國將軍假節及邾城失守石城被圍翼屢設竒兵潜致糧杖石城得全翼之\",\n      \"source_layer\": \"main_text\",\n      \"work\": \"晉書\"\n    },\n    {\n      \"ref\": \"sanguozhi:sgz1-juan-013-000049\",\n      \"snippet\": \"《列異傳》曰：歆爲諸生時，嘗宿人門外。主人婦夜產。有頃，兩吏詣門，便辟易却，相謂曰：「公在此。」躊躇良乆，一吏曰：「籍當定，柰何得住？」乃前向歆拜，相將入。出並行，共語曰：「當與幾歲？」一人曰：「當三歲。」天明，歆去。後欲驗其事，至三歲，故往問兒消息，果已死。歆乃自知當爲公。　臣松之按《[[晉陽秋]]》說魏舒少時寄宿事，亦如之。以爲理無二人俱有此事，將由傳者不同。今寧信列異。\",\n      \"source_layer\": \"pei_annotation\",\n      \"work\": \"三國志\"\n    }\n  ],\n  \"primary_text\": {\n    \"label\": \"世說新語正文\",\n    \"text\": \"殷侯既廢桓公語諸人曰少時與淵源共騎竹馬我\\n棄去巳輒取之故當出我下\"\n  },\n  \"story_id\": \"09-pinzao-038\"\n}\n",
+      "role": "user"
+    }
+  ],
+  "model": "deepseek-v4-flash",
+  "parameters": {
+    "connect_timeout": 15,
+    "read_timeout": 180,
+    "response_format": {
+      "type": "json_object"
+    },
+    "temperature": 0,
+    "tools": []
+  },
+  "prompt_version": "srm0.4b-robust-live-convergence-v1",
+  "provider": "deepseek",
+  "round": 2,
+  "schema": "srm0-4c-model-input",
+  "schema_version": 1,
+  "stage": "local_retrieval_delta"
+}

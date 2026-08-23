@@ -1,0 +1,64 @@
+{
+  "audit": {
+    "normalizations": [
+      {
+        "action": "wrap_singleton_array",
+        "path": "$",
+        "reason": "single update projected to updates array",
+        "stage": "repair"
+      },
+      {
+        "action": "field_alias",
+        "path": "$.updates[0].answered_aspects[0]",
+        "reason": "aspect projected to claim",
+        "stage": "repair"
+      },
+      {
+        "action": "generate_structural_id",
+        "path": "$.updates[0].answered_aspects[0]",
+        "reason": "missing aspect_id",
+        "stage": "repair",
+        "value": "Q3-A1"
+      }
+    ],
+    "rejected_aspects": [
+      {
+        "path": "$.updates[0].unanswered_aspects[0]",
+        "question_id": "Q3",
+        "reason": "unanswered_aspect_invalid"
+      }
+    ],
+    "rejected_claims": [],
+    "rejected_evidence": [],
+    "rejected_updates": []
+  },
+  "canonical_write_back": false,
+  "external_search_performed": false,
+  "normalized_output": {
+    "updates": [
+      {
+        "answered_aspects": [
+          {
+            "aspect_id": "Q3-A1",
+            "claim": "桓宣武所撰數百語的內容性質",
+            "evidence": [
+              {
+                "quote": "欲陳廢立本意",
+                "ref": "jinshu:098-liezhuan-003"
+              }
+            ]
+          }
+        ],
+        "conflicts": [],
+        "historical_verification_open": false,
+        "question_id": "Q3",
+        "reading_sufficient": false,
+        "unanswered_aspects": []
+      }
+    ]
+  },
+  "round": 2,
+  "schema": "srm0-4d-repair",
+  "source_output": "data/generated/srm0/33-youhui-012/convergence/live/srm0-4b-live-b62509e0ac7efc1c/continuation/round-02-output.json",
+  "story_id": "33-youhui-012"
+}

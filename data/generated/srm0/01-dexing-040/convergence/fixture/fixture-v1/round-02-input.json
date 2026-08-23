@@ -1,0 +1,29 @@
+{
+  "canonical_write_back": false,
+  "execution_kind": "fixture",
+  "external_search_performed": false,
+  "messages": [
+    {
+      "content": "请根据当前正文阅读缺口和本轮本地史料候选，更新语义理解。只使用输入候选，不使用预训练知识。\n\n只写实际被候选证据支持的 answered_aspects；unanswered_aspects 只保留仍影响正文理解的窄缺口；conflicts 只写材料明确冲突。reading_sufficient 表示当前阅读是否足够，不等于历史学上的最终验证。不要输出 state、next_action、搜索词或 canonical 事实，不要为了有趣继续研究。\n\n每个使用的证据必须引用候选 ref 和逐字 quote。只返回 JSON 对象，且只能有顶层字段 updates；每个 update 只能有 question_id、answered_aspects、unanswered_aspects、conflicts、reading_sufficient、historical_verification_open。不要返回数组本身或其他状态字段。",
+      "role": "system"
+    },
+    {
+      "content": "{\n  \"active_questions\": [\n    {\n      \"current_reading\": {\n        \"remaining_gap\": \"仍需一轮本地史料检索确认其对正文理解的具体作用。\",\n        \"state\": \"unexplained\",\n        \"supporting_refs\": [],\n        \"working_answer\": \"\"\n      },\n      \"gap\": \"仍需一轮本地史料检索确认其对正文理解的具体作用。\",\n      \"parent_aspect_id\": \"Q1-U1\",\n      \"parent_question_id\": \"Q1\",\n      \"question_id\": \"Q1.1\",\n      \"story_span\": \"殷仲堪既為荆州值水儉食常五盌盤外無餘\"\n    }\n  ],\n  \"local_evidence_candidates\": [\n    {\n      \"ref\": \"jinshu:084-liezhuan-004\",\n      \"snippet\": \"} -->使郭銓苻宏撃之遹等敗走<!-- wikisource-SKchar: {\\\"value\\\": \\\"2593\\\"} -->頓巴陵而館其穀<!-- wikisource-SKchar: {\\\"value\\\": \\\"2593\\\"} -->又破楊廣於夏口仲堪既失巴陵之積又諸將皆敗江陵震駭城内大飢以胡麻為廪仲堪急召佺期佺期率衆赴之直濟江擊<!-- wikisource-SKchar: {\\\"value\\\": \\\"2593\\\"} -->為<!-- wikisource-SKchar: {\\\"value\\\": \\\"2593\\\"} -->所敗走還襄陽仲堪出奔鄼城為<!-- wikisource-SKchar: {\\\"value\\\": \\\"2593\\\"} -->追兵所獲逼令自殺死于柞溪弟子道䕶叅軍羅企生等並被殺仲堪少奉天師道又精心事神不吝財賄而怠行仁義嗇於周\",\n      \"source_layer\": \"main_text\",\n      \"work\": \"晉書\"\n    },\n    {\n      \"ref\": \"jinshu:064-liezhuan-001\",\n      \"snippet\": \"e-SKchar: {\\\"value\\\": \\\"2593\\\"} -->殷仲堪等復至石頭元顯於竹里馳還京師遣丹陽尹王愷鄱陽太守桓放之新蔡内史何嗣潁川太守温詳新安太守孫泰等發京邑士庶數萬人據石頭以距之道子將出頓中堂忽有驚馬蹂藉軍中因而擾亂赴江而死者甚衆仲堪既知王㳟敗死狼狽西走與桓<!-- wikisource-SKchar: {\\\"value\\\": \\\"2593\\\"} -->屯于尋陽朝廷嚴兵相拒内外騷然詔元顯甲杖百人入殿尋加散騎常侍中書令又領中領軍持節都督如故㑹道子有疾加以昏醉元顯知朝望去之謀奪其權諷天子解道子揚州司徒而道子不之覺元顯自以少年頓居權重慮有譏議於是以琅邪王領司徒元顯自為揚州刺史既而道子酒醒方知去職於是大怒而無如之何廬江太守㑹稽張法順以刀筆之才為元顯謀主交結朋援多樹親黨自桓謙以下諸貴遊皆斂袵請交元顯性苛刻生殺自已法順屢\",\n      \"source_layer\": \"main_text\",\n      \"work\": \"晉書\"\n    },\n    {\n      \"ref\": \"shishuo:07-shijian-028:main\",\n      \"snippet\": \"王忱死西鎭未定朝貴人人有望時殷仲堪在門下\\n雖居機要資名輕小人情未以方嶽相許晉孝武欲\\n拔親近腹心遂以殷爲荆州事定詔未出王珣問殷\\n曰陜西何故未有處分殷曰巳有人王歷問公卿咸\\n云非王自計才地必應在巳復問非我邪殷曰亦似\\n非其夜詔出用殷王語所親曰豈有黄門郎而受如\\n此任仲堪此舉迺是國之亡徴\",\n      \"source_layer\": \"main_text\",\n      \"work\": \"世說新語\"\n    },\n    {\n      \"ref\": \"jinshu:028-zhi-001\",\n      \"snippet\": \"又所在多上春竟囚不以其辜建康獄吏枉暴既甚此又僭踰不從寃濫之罰\\n　　安帝隆安三年冬旱寒甚\\n　　四年五月旱\\n　　五年夏秋大旱十二月不雨時孫恩作亂桓<!-- wikisource-SKchar: {\\\"value\\\": \\\"2593\\\"} -->疑貳廹殺殷仲堪而朝廷即授以荆州之任司馬元顯又諷百僚悉使敬已内外騷動兵革煩興此皆陵僭憂愁之應也\\n　　元興元年七月大饑九月十月不雨泉水涸\\n　　二年六月不雨冬又旱時桓<!-- wikisource-SKchar: {\\\"value\\\": \\\"2593\\\"} -->奢僭十二月遂簒位三年八月不雨\\n　　義熙四年冬不雨\\n　　六年九月不<!-- wikisource-SKchar: {\\\"value\\\": \\\"1699\\\"} -->\\n　　八年十月不雨\\n　　九年秋冬不雨\\n　　十年九月旱十二月又旱井瀆多竭是時軍役煩興詩\",\n      \"source_layer\": \"main_text\",\n      \"work\": \"晉書\"\n    },\n    {\n      \"ref\": \"shishuo:01-dexing-041:liu:annotation-002\",\n      \"snippet\": \"(國與荆州刺史殷仲堪素舊情好甚隆周祗隆安記/郡公拜太子洗馬義興太守不得志少時去職歸其)\",\n      \"source_layer\": \"liu_annotation\",\n      \"work\": \"世說新語\"\n    }\n  ],\n  \"primary_text\": {\n    \"label\": \"世說新語正文\",\n    \"text\": \"殷仲堪既為荆州值水儉食常五盌盤外無餘肴飯\\n粒脫落盤席閒輙拾以噉之雖欲率物亦縁其性真\\n\\n素每語子弟云勿以我受任方州云我豁平昔時意\\n今吾處之不易貧者士之常焉得登枝而捐其本爾\\n曹其存之\"\n  },\n  \"story_id\": \"01-dexing-040\"\n}\n",
+      "role": "user"
+    }
+  ],
+  "model": "deepseek-v4-flash",
+  "parameters": {
+    "response_format": {
+      "type": "json_object"
+    },
+    "temperature": 0,
+    "tools": []
+  },
+  "prompt_version": "srm0.4b-robust-live-convergence-v1",
+  "provider": "deepseek",
+  "round": 2,
+  "schema": "srm0-4b-model-input",
+  "schema_version": 1,
+  "stage": "local_retrieval_delta"
+}

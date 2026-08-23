@@ -1,0 +1,91 @@
+{
+  "active_questions": [
+    "Q1"
+  ],
+  "canonical_write_back": false,
+  "execution_kind": "live_model",
+  "external_search_performed": false,
+  "protocol_errors": [],
+  "question_metrics": {
+    "conflicted_question_count": 0,
+    "converged_question_count": 0,
+    "evaluable_question_count": 1,
+    "evidence_saturated_question_count": 0,
+    "protocol_failed_question_count": 0,
+    "reading_sufficient_question_count": 0,
+    "semantic_failed_question_count": 0,
+    "stable_conflict_question_count": 0,
+    "unresolved_question_count": 1,
+    "valid_question_count": 1
+  },
+  "questions": [
+    {
+      "active": true,
+      "claim_fingerprints": [],
+      "conflict_fingerprints": [],
+      "conflict_ids": [],
+      "evidence_rounds": 0,
+      "gap": "缺少对柏梁、钟夔典故及其与“上扇以好不以新”类比关系的理解，否则刘劭的辩护逻辑不连贯",
+      "historical_verification_open": false,
+      "last_round": 0,
+      "next_action": "retrieve_local",
+      "question_id": "Q1",
+      "reading_sufficient": false,
+      "remaining_gap": "缺少对柏梁、钟夔典故及其与“上扇以好不以新”类比关系的理解，否则刘劭的辩护逻辑不连贯",
+      "state": "unexplained",
+      "story_span": "栢梁雲構\n工匠先居其下管弦繁奏鍾夔先聽其音",
+      "supporting_refs": [],
+      "terminal_reason": null,
+      "terminal_state": "active",
+      "working_answer": ""
+    }
+  ],
+  "rejected_gaps": [
+    {
+      "gap": "缺少对“以好不以新”这一进献标准的合理性说明，即为何“好”而非“新”是更重要的价值，否则无法体会此语化解武帝疑虑的力量",
+      "index": 1,
+      "question_id": "Q2",
+      "reason": "answer_or_explanation_leakage",
+      "story_span": "穉恭上扇以好不以新"
+    }
+  ],
+  "repair_actions": [
+    "protocol_recovered_initial_gaps"
+  ],
+  "schema": "srm0-4d-repair",
+  "schema_version": 1,
+  "semantic_failed_questions": [],
+  "source_run": "data/generated/srm0/02-yanyu-053/convergence/live/srm0-4b-live-70dd810e0594dc2a",
+  "stage": "protocol_recovered",
+  "story_id": "02-yanyu-053",
+  "story_status": "active_unresolved",
+  "structural_normalizations": [
+    {
+      "action": "normalize_whitespace",
+      "normalized": "栢梁雲構\n工匠先居其下管弦繁奏鍾夔先聽其音",
+      "original": "栢梁雲構工匠先居其下管弦繁奏鍾夔先聽其音",
+      "path": "$.gaps[0].story_span",
+      "reason": "span whitespace aligned to canonical Story text",
+      "stage": "initial"
+    }
+  ],
+  "targeted_rerun": {
+    "api_usage": {
+      "completion_tokens": 10455,
+      "completion_tokens_details": {
+        "reasoning_tokens": 10290
+      },
+      "prompt_cache_hit_tokens": 256,
+      "prompt_cache_miss_tokens": 110,
+      "prompt_tokens": 366,
+      "prompt_tokens_details": {
+        "cached_tokens": 256
+      },
+      "total_tokens": 10821
+    },
+    "count": 1,
+    "failure_class": null,
+    "performed": true
+  },
+  "terminal_questions": []
+}

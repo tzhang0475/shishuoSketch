@@ -1,0 +1,29 @@
+{
+  "canonical_write_back": false,
+  "execution_kind": "fixture",
+  "external_search_performed": false,
+  "messages": [
+    {
+      "content": "请检查冻结的正文阅读缺口，以及所附刘孝标注、余嘉锡《笺疏》。只返回语义增量，不输出 state 或 next_action。\n\n判断注释实际回答了什么、仍有什么影响正文理解的缺口、是否有材料冲突。reading_sufficient 只表示当前阅读已经足够，不表示历史事实已被最终验证。不要为了有趣继续研究，不使用外部知识。\n\n每个 answered_aspect 和 conflict 都必须引用输入中的 ref 与逐字 quote。unanswered_aspects 只保留仍影响正文理解的事项，使用 aspect_id、gap、reading_impact(high|medium|low)。\n\n只返回 JSON：{\"updates\":[{\"question_id\":\"Q1\",\"answered_aspects\":[{\"aspect_id\":\"Q1-A1\",\"claim\":\"...\",\"evidence\":[{\"ref\":\"...\",\"quote\":\"...\"}]}],\"unanswered_aspects\":[{\"aspect_id\":\"Q1-U1\",\"gap\":\"...\",\"reading_impact\":\"high\"}],\"conflicts\":[{\"conflict_id\":\"Q1-C1\",\"description\":\"...\",\"evidence\":[{\"ref\":\"...\",\"quote\":\"...\"}]}],\"reading_sufficient\":true,\"historical_verification_open\":false}]}。",
+      "role": "system"
+    },
+    {
+      "content": "{\n  \"early_commentary\": {\n    \"label\": \"劉孝標注\",\n    \"notes\": [\n      {\n        \"ref\": \"L01\",\n        \"text\": \"(騎將軍謝玄請爲長史孝武說之俄爲黃/晉安帝紀曰仲堪陳郡人太常融孫也車)\"\n      },\n      {\n        \"ref\": \"L02\",\n        \"text\": \"(恭爲北蕃荆州刺史王忱死乃中詔用仲堪代焉/門侍郎自殺袁恱之後上深爲晏駕後計故先出王)\"\n      }\n    ]\n  },\n  \"frozen_questions\": [\n    {\n      \"gap\": \"这段行动或处境为何影响正文理解？\",\n      \"question_id\": \"Q1\",\n      \"story_span\": \"殷仲堪既為荆州值水儉食常五盌盤外無餘\"\n    }\n  ],\n  \"later_commentary\": {\n    \"label\": \"余嘉錫箋疏\",\n    \"notes\": [\n      {\n        \"layer\": \"jianshu_note\",\n        \"ref\": \"J01\",\n        \"source_labels\": [],\n        \"speaker\": \"程炎震\",\n        \"text\": \"〔一〕 程炎震云：「太元十七年，仲堪為荊州。」\"\n      },\n      {\n        \"layer\": \"jianshu_note\",\n        \"ref\": \"J02\",\n        \"source_labels\": [\n          \"太平御覽\",\n          \"晉書\"\n        ],\n        \"speaker\": \"余嘉錫\",\n        \"text\": \"〔二〕 嘉錫案：世說盛稱仲堪之儉約，然晉書本傳云：「仲堪少奉天師道，又精心事神，不吝財賄，而怠行仁義，嗇於周急。」然則仲堪之儉，特鄙吝之天性耳。道藏「懷」字號唐王懸河三洞珠囊一，引道學傳第十六卷云：「殷仲堪者，陳郡人也。為太子中庶子，少奉天師道，受治及正一，精心事法，不吝財賄。家有疾病，躬為章符，往往有應。鄉人及左右或請為之，時行周救，弘益不少也。」與本傳可以互證。儉於自奉，而侈於事神，將不為達士所笑乎？晉時士大夫奉天師道者，有琅邪王氏父子、郗愔郗曇兄弟及仲堪。此皆明著於本傳者。其他史所不言，不知凡幾。釋寶唱比丘尼傳一道容尼傳曰：「簡文帝先事清水道師。道師，京都所謂王濮陽也。」考御覽六百六十六引太平經曰「濮陽者，不知何許人，事道專心，祈請皆驗。晉簡文廢世子，無嗣，時使人祈請於陽」云云。比丘尼傳所指必是此人。其…\"\n      },\n      {\n        \"layer\": \"jianshu_note\",\n        \"ref\": \"J03\",\n        \"source_labels\": [\n          \"晉書\"\n        ],\n        \"speaker\": \"余嘉錫\",\n        \"text\": \"〔三〕 嘉錫案：廣雅釋詁云：「方，大也。」謂大州為方州，乃晉人常用之語。晉書王敦傳云敦上疏曰「往段匹磾尚未有勞，便以方州與之」，是也。淮南覽冥訓云：「顓民生背方州，抱圓天。」注云：「方州，地。」班固典引云：「卓犖乎方州，羡溢乎要荒。」則謂四方諸州耳。均與此不同。\"\n      },\n      {\n        \"layer\": \"jianshu_note\",\n        \"ref\": \"J04\",\n        \"source_labels\": [],\n        \"speaker\": \"余嘉錫\",\n        \"text\": \"〔四〕 嘉錫案：說苑雜言篇云：「孔子見榮啟期問曰：『先生何樂也？』對曰：『夫貧者，士之常也；死者，民之終也。處常待終，當何憂乎？』」家語六，本篇略同。\"\n      }\n    ]\n  },\n  \"primary_text\": {\n    \"label\": \"世說新語正文\",\n    \"text\": \"殷仲堪既為荆州值水儉食常五盌盤外無餘肴飯\\n粒脫落盤席閒輙拾以噉之雖欲率物亦縁其性真\\n\\n素每語子弟云勿以我受任方州云我豁平昔時意\\n今吾處之不易貧者士之常焉得登枝而捐其本爾\\n曹其存之\"\n  },\n  \"story_id\": \"01-dexing-040\"\n}\n",
+      "role": "user"
+    }
+  ],
+  "model": "deepseek-v4-flash",
+  "parameters": {
+    "response_format": {
+      "type": "json_object"
+    },
+    "temperature": 0,
+    "tools": []
+  },
+  "prompt_version": "srm0.4b-robust-live-convergence-v1",
+  "provider": "deepseek",
+  "round": 1,
+  "schema": "srm0-4b-model-input",
+  "schema_version": 1,
+  "stage": "attached_commentary_delta"
+}

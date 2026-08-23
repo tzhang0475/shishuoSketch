@@ -1,0 +1,29 @@
+{
+  "canonical_write_back": false,
+  "execution_kind": "fixture",
+  "external_search_performed": false,
+  "messages": [
+    {
+      "content": "请根据当前正文阅读缺口和本轮本地史料候选，更新语义理解。只使用输入候选，不使用预训练知识。\n\n只写实际被候选证据支持的 answered_aspects；unanswered_aspects 只保留仍影响正文理解的窄缺口；conflicts 只写材料明确冲突。reading_sufficient 表示当前阅读是否足够，不等于历史学上的最终验证。不要输出 state、next_action、搜索词或 canonical 事实，不要为了有趣继续研究。\n\n每个使用的证据必须引用候选 ref 和逐字 quote。只返回 JSON 对象，且只能有顶层字段 updates；每个 update 只能有 question_id、answered_aspects、unanswered_aspects、conflicts、reading_sufficient、historical_verification_open。不要返回数组本身或其他状态字段。",
+      "role": "system"
+    },
+    {
+      "content": "{\n  \"active_questions\": [\n    {\n      \"current_reading\": {\n        \"remaining_gap\": \"仍需一轮本地史料检索确认其对正文理解的具体作用。\",\n        \"state\": \"unexplained\",\n        \"supporting_refs\": [],\n        \"working_answer\": \"\"\n      },\n      \"gap\": \"仍需一轮本地史料检索确认其对正文理解的具体作用。\",\n      \"parent_aspect_id\": \"Q1-U1\",\n      \"parent_question_id\": \"Q1\",\n      \"question_id\": \"Q1.1\",\n      \"story_span\": \"庾穉恭為荆州\\n以毛扇上武帝武帝\\n疑是\"\n    }\n  ],\n  \"local_evidence_candidates\": [\n    {\n      \"ref\": \"jinshu:074-liezhuan-001\",\n      \"snippet\": \"史尋以母憂去職服闋復本位乆之命移鎮馬頭石䖍求停歴陽許之太元十三年卒追贈右將軍追論平閻震功進爵作塘侯第五子誕嗣誕長兄洪㐮城太守洪弟振振字道全少果鋭而無行<!-- wikisource-SKchar: {\\\"value\\\": \\\"2593\\\"} -->為荆州以振為揚武將軍淮南太守轉江夏相以兇横見黜及<!-- wikisource-SKchar: {\\\"value\\\": \\\"2593\\\"} -->之敗也桓謙匿於沮中振逃于華容之涌中<!-- wikisource-SKchar: {\\\"value\\\": \\\"2593\\\"} -->先令將軍王稚徽戍巴陵稚徽遣人報振云桓欽已剋京邑馮稚等復平尋陽劉毅諸軍並敗於中路振大喜時安帝在江陵振乃聚黨數十人襲江陵比至城有衆二百謙亦聚衆而出遂䧟江陵迎帝於行宫振聞桓昇死大怒將肆逆於帝謙苦禁之乃止遂命羣臣辭以楚祚不終百\",\n      \"source_layer\": \"main_text\",\n      \"work\": \"晉書\"\n    },\n    {\n      \"ref\": \"jinshu:084-liezhuan-004\",\n      \"snippet\": \"e\\\": \\\"2593\\\"} -->從兄修告會稽王道子曰西軍可説而解也修知其情矣若許佺期以重利無不倒戈於仲堪者道子納之乃以<!-- wikisource-SKchar: {\\\"value\\\": \\\"2593\\\"} -->為江州佺期為雍州黜仲堪為廣州以桓修為荆州遣仲堪叔父太常茂宣詔廻軍仲堪恚被貶退以王恭雖敗已衆亦足以立事令<!-- wikisource-SKchar: {\\\"value\\\": \\\"2593\\\"} -->等急進軍<!-- wikisource-SKchar: {\\\"value\\\": \\\"2593\\\"} -->等喜於寵授並欲順朝命猶豫未决會仲堪弟遹為佺期司馬夜奔仲堪説佺期受朝命納桓修仲堪惶遽即於蕪湖南歸使狥於<!-- wikisource-SKchar: {\\\"value\\\": \\\"2593\\\"} -->等軍曰若不各散而歸大軍至江陵當悉戮\",\n      \"source_layer\": \"main_text\",\n      \"work\": \"晉書\"\n    },\n    {\n      \"ref\": \"shishuo:02-yanyu-049:liu:annotation-002\",\n      \"snippet\": \"(征西主簿累遷祕書監/陽令庾亮為荆州以為)\",\n      \"source_layer\": \"liu_annotation\",\n      \"work\": \"世說新語\"\n    },\n    {\n      \"ref\": \"jinshu:003-benji-001\",\n      \"snippet\": \"扵宣武觀至于己巳十二月丁亥追尊宣帝廟曰髙祖景帝曰世宗文帝曰太祖是月大疫洛陽死者太半封裴頠為鉅鹿公\\n　　二年春正月以疾疫廢朝賜諸散吏至于士卒絲各有差二月景戌河間王洪薨甲午赦五嵗刑以下東夷八國歸化并州虜犯塞監并州諸軍事胡奮擊破之初燉煌太守尹璩卒州以燉煌令梁澄領太守事議郎令狐豐廢澄自領郡事豐死弟宏代之至是涼州刺史楊欣斬宏傳首洛陽先是帝不豫及瘳羣臣上夀詔曰每念頃遇疫氣死亡為之愴然豈以一身之休息忘百姓之艱邪諸上禮者皆絶之夏五月鎮西大將軍汝陰王駿討北胡斬其渠帥吐敦立國子學庚午大雩六月癸丑薦荔枝于太廟甲戌有星孛于氐自春旱至于是月始雨吳京下督孫楷帥衆来降以為車騎將軍封丹陽侯白龍二見于新興井中秋七月有星孛于大角吳臨平湖自漢末壅塞至是自開父老相傳云此湖塞天下亂此湖開天下平癸丑安平王隆薨東夷十七國内附河南魏郡暴水殺百餘人詔給棺鮮卑阿\",\n      \"source_layer\": \"main_text\",\n      \"work\": \"晉書\"\n    },\n    {\n      \"ref\": \"sanguozhi:sgz1-juan-003-000020\",\n      \"snippet\": \"考爲皇，稱妣爲后，則股肱大臣，誅之無赦。其書之金策，藏之宗廟，著于今典。」\\n\\n冬十月，改平望觀曰聽訟觀。帝常言「獄者，天下之性命也」，每斷大獄，常幸觀臨聽之。\\n\\n初，洛陽宗廟未成，神主在鄴廟。十一月，廟始成，使太常韓曁持節迎高皇帝、太皇帝、武帝、文帝神主于鄴，十二月己丑至，奉安神主于廟。\",\n      \"source_layer\": \"main_text\",\n      \"work\": \"三國志\"\n    }\n  ],\n  \"primary_text\": {\n    \"label\": \"世說新語正文\",\n    \"text\": \"庾穉恭為荆州\\n以毛扇上武帝武帝\\n疑是故物\\n侍\\n中劉劭曰\\n栢梁雲構\\n工匠先居其下管弦繁奏鍾夔先聽其音\\n穉恭上扇以好不以新庾後聞之曰此人宜在帝左\\n\\n右\"\n  },\n  \"story_id\": \"02-yanyu-053\"\n}\n",
+      "role": "user"
+    }
+  ],
+  "model": "deepseek-v4-flash",
+  "parameters": {
+    "response_format": {
+      "type": "json_object"
+    },
+    "temperature": 0,
+    "tools": []
+  },
+  "prompt_version": "srm0.4b-robust-live-convergence-v1",
+  "provider": "deepseek",
+  "round": 2,
+  "schema": "srm0-4b-model-input",
+  "schema_version": 1,
+  "stage": "local_retrieval_delta"
+}

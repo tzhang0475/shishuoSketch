@@ -1,0 +1,29 @@
+{
+  "canonical_write_back": false,
+  "execution_kind": "fixture",
+  "external_search_performed": false,
+  "messages": [
+    {
+      "content": "请根据当前正文阅读缺口和本轮本地史料候选，更新语义理解。只使用输入候选，不使用预训练知识。\n\n只写实际被候选证据支持的 answered_aspects；unanswered_aspects 只保留仍影响正文理解的窄缺口；conflicts 只写材料明确冲突。reading_sufficient 表示当前阅读是否足够，不等于历史学上的最终验证。不要输出 state、next_action、搜索词或 canonical 事实，不要为了有趣继续研究。\n\n每个使用的证据必须引用候选 ref 和逐字 quote。只返回 JSON 对象，且只能有顶层字段 updates；每个 update 只能有 question_id、answered_aspects、unanswered_aspects、conflicts、reading_sufficient、historical_verification_open。不要返回数组本身或其他状态字段。",
+      "role": "system"
+    },
+    {
+      "content": "{\n  \"active_questions\": [\n    {\n      \"current_reading\": {\n        \"remaining_gap\": \"仍缺少能直接改变该段阅读的具体历史材料。\",\n        \"state\": \"unexplained\",\n        \"supporting_refs\": [],\n        \"working_answer\": \"\"\n      },\n      \"gap\": \"仍缺少能直接改变该段阅读的具体历史材料。\",\n      \"parent_aspect_id\": \"Q1-U1\",\n      \"parent_question_id\": \"Q1\",\n      \"question_id\": \"Q1.1\",\n      \"story_span\": \"桓宣武對簡文帝不甚得語廢海西後宜自申\"\n    }\n  ],\n  \"local_evidence_candidates\": [\n    {\n      \"ref\": \"jinshu:076-liezhuan-002\",\n      \"snippet\": \"勢震主四方佛敬皆遣上佐綱紀彪之獨曰大司馬誠為富貴朝廷既有宰相動静之宜自當諮禀修敬若遣綱紀致貢天子復何以過之竟不遣溫以山隂縣折布米不時畢郡不彈糾上免彪之彪之去郡郡見罪讁未上州臺者皆原散之温復以為罪乃檻收下吏㑹赦免左降為尚書頃之復為僕射是時溫將廢海西公百寮震慄温亦色動莫知所為彪之既知温不臣迹已著理不可奪乃謂溫曰公阿衡皇家便當倚傍先代耳命取霍光傳禮度儀制定扵須臾曽無懼容温歎曰作元凱不當如是邪時廢立之儀既絶於曠代朝廷莫有識其故典者彪之神彩毅然朝服當階文武儀準莫不取定朝廷以此服之温又廢武陵王遵以事示彪之彪之曰武陵親尊未有顯罪不可以猜嫌之間便相廢徙公建立聖明遐邇歸心當崇奬王室伊周同美此大事宜更深詳溫曰此已成事卿勿復言及簡文崩羣臣疑惑未敢立嗣或云宜當須大司馬䖏分彪之正色曰君崩太子代立大司馬何容得異若先面諮必反為所責矣於是朝議\",\n      \"source_layer\": \"main_text\",\n      \"work\": \"晉書\"\n    },\n    {\n      \"ref\": \"jinshu:064-liezhuan-001\",\n      \"snippet\": \"納輕剽苞藏亡命又息綜矜忍虐加于人袁真叛逆事相連染頃日猜懼將成亂階請免晞官以王歸藩免其世子綜官解子㻱散騎常侍㻱以梁王隨晞晞既見黜送馬八十五匹三百人杖以歸温溫又逼新蔡王晃使自誣與晞綜及著作郎殷㳙太宰長史庾籍掾曹秀舍人劉疆等謀逆遂收付廷尉請誅之簡文帝不許溫於是奏徙新安郡家屬悉從之而族誅殷㳙等廢晃徙衡陽郡太元六年晞卒于新安時年六十六孝武帝三日臨于西堂詔曰感惟摧慟便奉迎靈柩幷改移妃應氏及故世子梁王諸喪家屬悉還復下詔曰故前武陵王體自皇極剋已思愆仰惟先朝仁宥之㫖豈可情禮靡寄其追封新寧郡王邑千戸晞三子綜㻱遵以遵嗣追贈綜給事中㻱散騎郎十二年追復晞武陵國綜㻱各復其官㻱還繼梁國\\n　　梁王㻱字賢明出繼梁王翹官至永安太僕與父晞俱廢薨子龢嗣太元中復國薨子珍之嗣桓<!-- wikisource-SKchar: {\\\"value\\\": \\\"2593\",\n      \"source_layer\": \"main_text\",\n      \"work\": \"晉書\"\n    },\n    {\n      \"ref\": \"jinshu:027-zhi-001\",\n      \"snippet\": \"　成帝咸和二年五月京師火\\n　　康帝建元元年七月庚申吳郡災\\n　　穆帝永和五年六月震災石季龍大武殿及兩廟端門震災月餘乃滅金石皆盡其後季龍死大亂遂滅亡海西公太和中郄愔為會稽太守六月大旱災火燒數千家延及山隂倉米數百萬斛炎煙蔽天不可撲滅此亦桓溫強盛将廢海西極隂生陽之應也\\n　　孝武帝寜康元年三月京師風火大起是時桓溫入朝志在陵上少主踐位人懐憂恐此與太寜火事同太元十年正月國子學生因風放火焚房百餘間是後考課不厲賞黜無章盖有育才之名而無收賢之實此不哲之罰先兆也\\n　　十三年十二月乙未延賢堂災是月景申螽斯則百堂及客館驃騎府庫皆災于時朝多弊政衰陵日兆不哲之罰皆有象類主相不悟終至亂亡㑹稽王道子寵幸尼及姏母各樹用其親戚乃至出入宮掖禮見人主天戒若曰登延賢堂及客館者多非其人故災之也又孝武帝更不立皇后寵幸㣲賤張夫人夫人驕妬皇子不繁乖螽斯則百之道故\",\n      \"source_layer\": \"main_text\",\n      \"work\": \"晉書\"\n    },\n    {\n      \"ref\": \"sanguozhi:sgz1-juan-017-000016\",\n      \"snippet\": \"郃}}、{{ProperNoun|徐晃}}俱爲名將，{{ProperNoun|太祖}}每-{征}-伐，-{咸}-遞行爲軍鋒，還爲-{後}-拒；而{{ProperNoun|禁}}持軍嚴整，得賊財物，無所私入，由是賞賜特重。然以法-{御}-下，不甚得士衆心。{{ProperNoun|太祖}}常恨{{ProperNoun|-{朱}-靈}}，欲奪其營。以{{ProperNoun|禁}}有威重，遣{{ProperNoun|禁}}將數十騎，賫令書，徑詣{{ProperNoun|靈}}營奪其軍，{{ProperNoun|靈}}及其部衆莫敢動；乃以{{ProperNoun|靈}}爲{{ProperNoun|禁}}部下督，衆皆震服，其見憚如此。遷左將軍，假節鉞，分邑五百戸，封一子列侯。\\n\\n{{YL|建安二十四年}}，{{Prop\",\n      \"source_layer\": \"main_text\",\n      \"work\": \"三國志\"\n    },\n    {\n      \"ref\": \"shishuo:02-yanyu-056:main\",\n      \"snippet\": \"簡文作撫軍時嘗與桓宣武俱入朝更相讓在前宣\\n武不得已而先之因曰伯也執殳為王前驅\\n簡文曰所謂無小無大從公于邁\",\n      \"source_layer\": \"main_text\",\n      \"work\": \"世說新語\"\n    }\n  ],\n  \"primary_text\": {\n    \"label\": \"世說新語正文\",\n    \"text\": \"桓宣武對簡文帝不甚得語廢海西後宜自申叙乃\\n豫撰數百語陳廢立之意既見簡文簡文便泣下數\\n十行宣武矜愧不得一言\"\n  },\n  \"story_id\": \"33-youhui-012\"\n}\n",
+      "role": "user"
+    }
+  ],
+  "model": "deepseek-v4-flash",
+  "parameters": {
+    "response_format": {
+      "type": "json_object"
+    },
+    "temperature": 0,
+    "tools": []
+  },
+  "prompt_version": "srm0.4b-robust-live-convergence-v1",
+  "provider": "deepseek",
+  "round": 2,
+  "schema": "srm0-4b-model-input",
+  "schema_version": 1,
+  "stage": "local_retrieval_delta"
+}

@@ -1,0 +1,29 @@
+{
+  "canonical_write_back": false,
+  "execution_kind": "fixture",
+  "external_search_performed": false,
+  "messages": [
+    {
+      "content": "你第一次阅读一则《世说新语》，现在只给你正文。\n找出至多三个如果不进一步理解，就可能影响正文阅读的关键缺口。\n\n每个缺口必须绑定正文准确文字，只描述缺什么，不尝试回答，不解释词义，不猜异文，不使用外部知识，不生成搜索词。\n优先选择答案可能改变人物处境、行动意义、场景关系、隐喻或叙事力量的缺口；不要只扩展姓名或孤立字词，除非它确实改变正文理解。\n如果正文其他部分已经直接回答某个问题，不要列为缺口。\n\n只返回 JSON：{\"gaps\":[{\"question_id\":\"Q1\",\"story_span\":\"正文原文\",\"gap\":\"简短缺口\"}]}，最多三个。",
+      "role": "system"
+    },
+    {
+      "content": "{\n  \"primary_text\": {\n    \"label\": \"世說新語正文\",\n    \"text\": \"頭責秦子羽云子曽不如太原温顒潁川荀㝢\\n\\n范陽張華士卿劉許\\n義陽鄒湛\\n河南鄭詡\\n此數子者或謇喫無宫商或尫陋希\\n言語或淹伊多姿態或讙譁少智諝或口如含膠飴\\n或頭如巾韲杵\\n\\n而猶以文采可觀意思詳\\n序攀龍附鳯並登天府\"\n  },\n  \"story_id\": \"25-paidiao-007\"\n}\n",
+      "role": "user"
+    }
+  ],
+  "model": "deepseek-v4-flash",
+  "parameters": {
+    "response_format": {
+      "type": "json_object"
+    },
+    "temperature": 0,
+    "tools": []
+  },
+  "prompt_version": "srm0.4b-robust-live-convergence-v1",
+  "provider": "deepseek",
+  "round": 0,
+  "schema": "srm0-4b-model-input",
+  "schema_version": 1,
+  "stage": "main_text_gap_discovery"
+}

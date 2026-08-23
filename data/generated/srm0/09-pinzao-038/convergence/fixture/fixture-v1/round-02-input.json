@@ -1,0 +1,29 @@
+{
+  "canonical_write_back": false,
+  "execution_kind": "fixture",
+  "external_search_performed": false,
+  "messages": [
+    {
+      "content": "请根据当前正文阅读缺口和本轮本地史料候选，更新语义理解。只使用输入候选，不使用预训练知识。\n\n只写实际被候选证据支持的 answered_aspects；unanswered_aspects 只保留仍影响正文理解的窄缺口；conflicts 只写材料明确冲突。reading_sufficient 表示当前阅读是否足够，不等于历史学上的最终验证。不要输出 state、next_action、搜索词或 canonical 事实，不要为了有趣继续研究。\n\n每个使用的证据必须引用候选 ref 和逐字 quote。只返回 JSON 对象，且只能有顶层字段 updates；每个 update 只能有 question_id、answered_aspects、unanswered_aspects、conflicts、reading_sufficient、historical_verification_open。不要返回数组本身或其他状态字段。",
+      "role": "system"
+    },
+    {
+      "content": "{\n  \"active_questions\": [\n    {\n      \"current_reading\": {\n        \"remaining_gap\": \"仍需一轮本地史料检索确认其对正文理解的具体作用。\",\n        \"state\": \"unexplained\",\n        \"supporting_refs\": [],\n        \"working_answer\": \"\"\n      },\n      \"gap\": \"仍需一轮本地史料检索确认其对正文理解的具体作用。\",\n      \"parent_aspect_id\": \"Q1-U1\",\n      \"parent_question_id\": \"Q1\",\n      \"question_id\": \"Q1.1\",\n      \"story_span\": \"殷侯既廢桓公語諸人曰少時與淵源共騎竹\"\n    }\n  ],\n  \"local_evidence_candidates\": [\n    {\n      \"ref\": \"jinshu:077-liezhuan-006\",\n      \"snippet\": \"char: {\\\"value\\\": \\\"2592\\\"} -->未忍誅殛且宜遐棄擯之荒裔雖未足以塞山海之責粗可以宣誡於將来矣竟坐廢為庶人徙于東陽之信安縣浩少與溫齊名而每心競溫嘗問浩君何如我浩曰我與君周旋久寧作我也溫既以雄豪自許每輕浩浩不之憚也至是溫語人曰少時吾與浩共騎竹馬我棄去浩輒取之故當出我下也又謂郄超曰浩有徳有言向使作令僕足以儀刑百揆朝廷用違其才耳浩雖被黜放口無怨言夷神委命談詠不輟雖家人不見其有流放之慼但終日書空作咄咄怪事四字而已浩甥韓伯浩素賞愛之随至徙所經嵗還都浩送至渚側詠曹顔逺詩云富貴他人合貧賤親戚離因而泣下後溫將以浩為尚書令遺書告之浩欣然許焉將答書慮有謬誤開閉者數十竟達空函大忤温意由是遂絶永和十二年卒子涓亦有羙名咸安初桓溫廢太宰武陵王晞誣涓及庾倩與晞謀反害之浩後將改葬其故吏顧悦之上疏訟浩曰伏見故中軍將軍<!--\",\n      \"source_layer\": \"main_text\",\n      \"work\": \"晉書\"\n    },\n    {\n      \"ref\": \"jinshu:073-liezhuan-001\",\n      \"snippet\": \"累遷黄門郎豫章太守徴拜祕書監賜爵鄉亭侯出為冠軍將軍臨川太守豫章黄韜自稱孝神皇帝臨川人李髙為相聚黨數百人乘犢車衣皂袍攻郡縣條討平之條於兄弟最凡劣故禄位不至卒官贈左將軍\\n　　翼字稚恭風儀秀偉少有經綸大畧京兆杜乂陳郡殷浩並才名冠世而翼弗之重也毎語人曰此軰宜束之髙閣俟天下太平然後議其任耳見桓溫總角之中便期之以遠畧因言於成帝曰桓溫有英雄之才願陛下勿以常人遇之常壻畜之宜委以方邵之任必有<!-- wikisource-SKchar: {\\\"value\\\": \\\"2592\\\"} -->濟艱難之勲蘇峻作逆翼時年二十二兄亮使白衣領數百人備石頭亮敗與翼俱奔事平始辟太尉陶侃府轉叅軍累遷從事中郎在公府雍容諷議頃之除振威將軍鄱陽太守轉建威將軍西陽太守撫和百姓甚得歡心遷南蠻校尉領南郡太守加輔國將軍假節及邾城失守石城被圍翼屢設竒兵潜致糧杖石城得全翼之\",\n      \"source_layer\": \"main_text\",\n      \"work\": \"晉書\"\n    },\n    {\n      \"ref\": \"sanguozhi:sgz1-juan-032-000010\",\n      \"snippet\": \"先主少時，與宗中諸小兒於樹下戲，言：「吾必當乘此羽葆蓋車。」叔父子敬謂曰：「汝勿妄語，滅吾門也！」年十五，母使行學，與同宗劉德然、遼西公孫瓚俱事故九江太守同郡盧植。德然父元起常資給先主，與德然等。元起妻曰：「各自一家，何能常爾邪！」起曰：「吾宗中有此兒，非常人也。」而瓚深與先主相友。瓚年長，先主以兄事之。先主不甚樂讀書，喜狗馬、音樂、美衣服。身長七尺五寸，垂手下膝，顧自見其耳。少語言，善下人，喜怒不形於色。好交結豪俠，年少爭附之。中山大商張世平、蘇雙等貲累千金，販馬周旋於涿郡，見而異之，乃多與之金財。先主由是得用合徒眾。 \\n\\n　　靈帝末，黃巾起，州郡各舉義兵，先主率其屬從校尉鄒靖討黃巾賊有功，除安喜尉。 \",\n      \"source_layer\": \"main_text\",\n      \"work\": \"三國志\"\n    },\n    {\n      \"ref\": \"sanguozhi:sgz1-juan-047-000023\",\n      \"snippet\": \"之。公曰：「此必孫權欲身見吾軍部伍也。」敕軍中皆精嚴，弓弩不得妄發。權行五六里，回還作鼓吹。公見舟船器仗軍伍整肅，喟然嘆曰：「生子當如孫仲謀，劉景升兒子若豚犬耳！」權爲箋與曹公，説：「春水方生，公宜速去。」別紙言：「足下不死，孤不得安。」曹公語諸將曰：「孫權不欺孤。」乃徹軍還。魏略曰：權乘大船來觀軍，公使弓弩亂發，箭著其船，船偏重將覆，權因回船，復以一面受箭，箭均船平，乃還。\",\n      \"source_layer\": \"pei_annotation\",\n      \"work\": \"三國志\"\n    },\n    {\n      \"ref\": \"shishuo:04-wenxue-019:main\",\n      \"snippet\": \"裴散騎娶王太尉女婚後三日諸壻大㑹\\n當\\n時名士王裴子弟悉集郭子玄在坐挑與裴談子玄\\n才甚豐贍始數交未快郭陳張甚盛裴徐理前語理\\n致甚微四坐咨嗟稱快\\n\\n王亦以為竒謂諸人曰君軰勿為\\n爾將受困寡人女壻\",\n      \"source_layer\": \"main_text\",\n      \"work\": \"世說新語\"\n    }\n  ],\n  \"primary_text\": {\n    \"label\": \"世說新語正文\",\n    \"text\": \"殷侯既廢桓公語諸人曰少時與淵源共騎竹馬我\\n棄去巳輒取之故當出我下\"\n  },\n  \"story_id\": \"09-pinzao-038\"\n}\n",
+      "role": "user"
+    }
+  ],
+  "model": "deepseek-v4-flash",
+  "parameters": {
+    "response_format": {
+      "type": "json_object"
+    },
+    "temperature": 0,
+    "tools": []
+  },
+  "prompt_version": "srm0.4b-robust-live-convergence-v1",
+  "provider": "deepseek",
+  "round": 2,
+  "schema": "srm0-4b-model-input",
+  "schema_version": 1,
+  "stage": "local_retrieval_delta"
+}

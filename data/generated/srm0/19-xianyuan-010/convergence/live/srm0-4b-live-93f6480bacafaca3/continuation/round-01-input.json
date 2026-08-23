@@ -1,0 +1,29 @@
+{
+  "canonical_write_back": false,
+  "execution_kind": "live_model",
+  "external_search_performed": false,
+  "messages": [
+    {
+      "content": "请检查冻结的正文阅读缺口，以及所附刘孝标注、余嘉锡《笺疏》。只返回语义增量，不输出 state 或 next_action。\n\n判断注释实际回答了什么、仍有什么影响正文理解的缺口、是否有材料冲突。reading_sufficient 只表示当前阅读已经足够，不表示历史事实已被最终验证。不要为了有趣继续研究，不使用外部知识。\n\n每个 answered_aspect 和 conflict 都必须引用输入中的 ref 与逐字 quote。unanswered_aspects 只保留仍影响正文理解的事项，使用 aspect_id、gap、reading_impact(high|medium|low)。\n\n只返回 JSON：{\"updates\":[{\"question_id\":\"Q1\",\"answered_aspects\":[{\"aspect_id\":\"Q1-A1\",\"claim\":\"...\",\"evidence\":[{\"ref\":\"...\",\"quote\":\"...\"}]}],\"unanswered_aspects\":[{\"aspect_id\":\"Q1-U1\",\"gap\":\"...\",\"reading_impact\":\"high\"}],\"conflicts\":[{\"conflict_id\":\"Q1-C1\",\"description\":\"...\",\"evidence\":[{\"ref\":\"...\",\"quote\":\"...\"}]}],\"reading_sufficient\":true,\"historical_verification_open\":false}]}。",
+      "role": "system"
+    },
+    {
+      "content": "{\n  \"early_commentary\": {\n    \"label\": \"劉孝標注\",\n    \"notes\": [\n      {\n        \"ref\": \"L01\",\n        \"text\": \"(業馳告文王經以正直不出因沈業申意後誅經/世語曰經字彦偉清河人高貴郷公之難王沈王)\"\n      },\n      {\n        \"ref\": \"L02\",\n        \"text\": \"(矣漢晉春秋曰初曹髦將自討司馬昭經諌曰昔魯/及其母晉諸公賛曰沈業將出呼經不從曰吾子行)\"\n      },\n      {\n        \"ref\": \"L03\",\n        \"text\": \"(朝廷四方皆為之致死不顧逆順之理非一日也且/昭不忍季氏敗走失國為天下笑今權在其門久矣)\"\n      },\n      {\n        \"ref\": \"L04\",\n        \"text\": \"(乃欲除疾而更深之邪髦不聽後殺經并及其母将/宿衛空闕寸刃無有陛下何所資用而一旦如此無)\"\n      },\n      {\n        \"ref\": \"L05\",\n        \"text\": \"(以止汝者恐不得其所也以此并命何恨之有干寳/死垂泣謝母母顔色不變笑而謂曰人誰不死徃所)\"\n      },\n      {\n        \"ref\": \"L06\",\n        \"text\": \"(則是經實忠貞於魏而世語既謂其正直復云因沈/晉紀曰經正直不忠於我故誅之按傅畼干寳所記)\"\n      },\n      {\n        \"ref\": \"L07\",\n        \"text\": \"(故二家之言深得之/業申意何其相反乎)\"\n      }\n    ]\n  },\n  \"frozen_questions\": [\n    {\n      \"gap\": \"魏与晋的政治关系及王经所属政权不明，无法理解助魏为何构成不忠于晋并导致被收\",\n      \"question_id\": \"Q1\",\n      \"story_span\": \"為尚書助魏不忠\\n於晉𬒳收\"\n    },\n    {\n      \"gap\": \"王经自称不从母敕，母亲却称他孝，矛盾需用当时的忠孝观念解释，否则理解困难\",\n      \"question_id\": \"Q2\",\n      \"story_span\": \"母都無\\n慽容語之曰為子則孝為臣則忠\"\n    },\n    {\n      \"gap\": \"王经不听从母亲劝止而继续任官的动机缺失，影响对其选择及悲剧结局的理解\",\n      \"question_id\": \"Q3\",\n      \"story_span\": \"涕泣辭母曰不從母敕以至今日\"\n    }\n  ],\n  \"later_commentary\": {\n    \"label\": \"余嘉錫箋疏\",\n    \"notes\": [\n      {\n        \"layer\": \"collation_note\",\n        \"ref\": \"J01\",\n        \"source_labels\": [],\n        \"speaker\": null,\n        \"text\": \"注「笑而謂曰」「笑」，景宋本及沈本作「哭」。\"\n      },\n      {\n        \"layer\": \"jianshu_note\",\n        \"ref\": \"J02\",\n        \"source_labels\": [\n          \"太平御覽\"\n        ],\n        \"speaker\": \"余嘉錫\",\n        \"text\": \"〔一〕 孫志祖讀書脞錄續編三曰：「陳壽魏志不為王經立傳，而附見於夏侯尚傳末。朱昭芑史糾譏之。志祖案：壽為司馬氏之臣，不能無所回避。其曲筆猶可諒也。宋臨川王義慶作世說時，晉室久移，乃於賢媛篇載經母事而曰：『經助魏，不忠於晉。』此何言歟？夫司馬氏亦魏臣也。經以身殉國，豈得謂之助魏不忠於晉乎？臨川此言，三綱壞矣。」嘉錫案：世說雜采群書，此條出自裴啟語林，見御覽四百四十。「助魏不忠於晉」，亦用語林本文。裴啟晉人，其立言自不得不如此。然云助魏，正是許其以身殉國。云不忠於晉，則其忠於魏可知。微文見意，何損於經？且曰「為子則孝，為臣則忠」，其稱經亦至矣。孫氏此言，似正而實未達文義，殆不足取。\"\n      },\n      {\n        \"layer\": \"jianshu_note\",\n        \"ref\": \"J03\",\n        \"source_labels\": [],\n        \"speaker\": null,\n        \"text\": \"〔二〕 魏志夏侯玄傳注引晉武帝太始元年詔曰：「故尚書王經，雖身陷法辟，然守志可嘉。門戶湮沒，意常愍之。其賜經孫郎中。」\"\n      },\n      {\n        \"layer\": \"jianshu_note\",\n        \"ref\": \"J04\",\n        \"source_labels\": [\n          \"世語\"\n        ],\n        \"speaker\": \"余嘉錫\",\n        \"text\": \"〔三〕 文選四十七三國名臣序贊曰：「王經字承宗，李注云：「裴松之曰：『經字彥緯』，今云承宗，蓋有二字也。」嘉錫案：今本魏志夏侯尚傳注引世語作「字彥偉」，與此同。而文選集注九十四引陸善經李善注皆作「字彥緯」，當從之。\"\n      },\n      {\n        \"layer\": \"jianshu_note\",\n        \"ref\": \"J05\",\n        \"source_labels\": [],\n        \"speaker\": \"程炎震\",\n        \"text\": \"〔四〕 程炎震云：「魏志高貴鄉公紀注引重經字是也。」又云：「此正直，謂以尚書在直，非忠貞之謂也。因沈、業申意，固是誣善之辭，然孝標誤認正直二字與干寶同解，肆其彈射，亦為失矣。」\"\n      }\n    ]\n  },\n  \"primary_text\": {\n    \"label\": \"世說新語正文\",\n    \"text\": \"王經少貧苦仕至二千石母語之曰汝本寒家子仕\\n至二千石此可以止乎經不能用為尚書助魏不忠\\n於晉𬒳收涕泣辭母曰不從母敕以至今日母都無\\n慽容語之曰為子則孝為臣則忠有孝有忠何負吾\\n邪\"\n  },\n  \"story_id\": \"19-xianyuan-010\"\n}\n",
+      "role": "user"
+    }
+  ],
+  "model": "deepseek-v4-flash",
+  "parameters": {
+    "response_format": {
+      "type": "json_object"
+    },
+    "temperature": 0,
+    "tools": []
+  },
+  "prompt_version": "srm0.4b-robust-live-convergence-v1",
+  "provider": "deepseek",
+  "round": 1,
+  "schema": "srm0-4b-model-input",
+  "schema_version": 1,
+  "stage": "attached_commentary_delta"
+}
