@@ -1,0 +1,55 @@
+{
+  "canonical_write_back": false,
+  "case_id": "preflight",
+  "elapsed_seconds": 2.092289,
+  "endpoint": "https://api.deepseek.com/chat/completions",
+  "finish_reason": "stop",
+  "immutable": true,
+  "input_hash": "39aa750e0c6d63402dc559df45b43b985d8386210e4f3206c8054779ed465f76",
+  "kind": "search-plan-preflight",
+  "model": "deepseek-v4-flash",
+  "parse_error": null,
+  "prompt_version": "hng2-sc1-search-plan-v1",
+  "provider": "deepseek",
+  "response": {
+    "choices": [
+      {
+        "finish_reason": "stop",
+        "index": 0,
+        "logprobs": null,
+        "message": {
+          "content": "{\n  \"search_plan\": {\n    \"target_constraint\": \"title_identity\",\n    \"goal\": \"验证《晉書》中‘庾太尉’是否指庾亮，通过检索‘太尉’官职与庾亮的关联证据。\",\n    \"candidate_keys\": [\"c0\"],\n    \"preferred_sources\": [\"晉書\", \"世說新語\", \"劉孝標注\", \"余嘉錫笺疏\", \"資治通鑑\"],\n    \"search_entities\": [\"庾亮\", \"庾太尉\", \"太尉\"],\n    \"search_patterns\": [\"庾亮.*太尉\", \"庾太尉\", \"太尉庾亮\", \"庾亮為太尉\", \"庾亮.*都督.*太尉\"],\n    \"temporal_scope\": {\"start_year\": 289, \"end_year\": 340},\n    \"graph_neighborhood_scope\": \"case_only\",\n    \"stop_condition\": \"找到庾亮任太尉的明确记载，或找到‘庾太尉’指代他人的反证。\"\n  }\n}",
+          "role": "assistant"
+        }
+      }
+    ],
+    "created": 1787583382,
+    "id": "47a65341-b0a9-4d91-a33e-8c5bba7f1086",
+    "model": "deepseek-v4-flash",
+    "object": "chat.completion",
+    "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+    "usage": {
+      "completion_tokens": 238,
+      "prompt_cache_hit_tokens": 384,
+      "prompt_cache_miss_tokens": 37,
+      "prompt_tokens": 421,
+      "prompt_tokens_details": {
+        "cached_tokens": 384
+      },
+      "total_tokens": 659
+    }
+  },
+  "response_channel": "content",
+  "sequence": 1,
+  "start_time": "2026-08-24T14:56:22Z",
+  "status": "response",
+  "strict_function": false,
+  "tool_call_count": 0,
+  "usage": {
+    "completion_tokens": 238,
+    "prompt_cache_hit_tokens": 384,
+    "prompt_cache_miss_tokens": 37,
+    "prompt_tokens": 421,
+    "total_tokens": 659
+  }
+}

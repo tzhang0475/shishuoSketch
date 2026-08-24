@@ -101,6 +101,46 @@ def extract_response_payload(response: Mapping[str, Any]) -> tuple[Any | None, s
     return None, "none", "empty_response"
 
 
+def extract_strict_tool_payload(response: Mapping[str, Any]) -> tuple[Any | None, str, str | None]:
+    """Extract only the forced HNG2 EvidenceCard function call.
+
+    Strict semantic calls deliberately do not fall back to assistant content
+    or reasoning_content.  The provider envelope must contain exactly one
+    call to the function selected by the controller, and its arguments are
+    then passed through the same Python card validator as replay fixtures.
+    """
+
+    choices = response.get("choices") if isinstance(response, Mapping) else None
+    if not isinstance(choices, list) or not choices or not isinstance(choices[0], Mapping):
+        return None, "none", "choices_missing"
+    message = choices[0].get("message")
+    if not isinstance(message, Mapping):
+        return None, "none", "message_missing"
+    tool_calls = message.get("tool_calls")
+    if not isinstance(tool_calls, list) or not tool_calls:
+        return None, "none", "tool_calls_missing"
+    if len(tool_calls) != 1:
+        return None, "tool_call", "tool_call_count_not_one"
+    call = tool_calls[0]
+    if not isinstance(call, Mapping):
+        return None, "tool_call", "tool_call_not_object"
+    function = call.get("function")
+    if not isinstance(function, Mapping):
+        return None, "tool_call", "function_missing"
+    if _text(function.get("name")) != "submit_historical_entity_card":
+        return None, "tool_call", "unexpected_function_name"
+    arguments = function.get("arguments")
+    if not isinstance(arguments, str) or not arguments.strip():
+        return None, "tool_call", "function_arguments_missing"
+    try:
+        payload = json.loads(arguments)
+    except json.JSONDecodeError:
+        return None, "tool_call", "function_arguments_invalid_json"
+    if not isinstance(payload, Mapping):
+        return None, "tool_call", "function_arguments_not_object"
+    return payload, "tool_call", None
+
+
 def _valid_local_key(value: Any, pattern: re.Pattern[str]) -> bool:
     return bool(pattern.fullmatch(_text(value)))
 
@@ -700,7 +740,7 @@ def typed_fallback_search_plan(case: Mapping[str, Any], gap: Mapping[str, Any], 
 
 
 __all__ = [
-    "CARD_TOP_FIELDS", "EVIDENCE_ASSERTION_TYPES", "extract_response_payload", "validate_evidence_span",
+    "CARD_TOP_FIELDS", "EVIDENCE_ASSERTION_TYPES", "extract_response_payload", "extract_strict_tool_payload", "validate_evidence_span",
     "validate_card_payload", "generate_candidates", "translate_constraints", "recalculate_research_gap",
     "state_delta", "project_identity_decision", "project_valid_card", "typed_fallback_search_plan",
 ]

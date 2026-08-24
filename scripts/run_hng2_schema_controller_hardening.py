@@ -28,6 +28,7 @@ if str(SCRIPTS) not in sys.path:
 import build_hng0_2 as hng02  # noqa: E402
 import hng1_common  # noqa: E402
 import hng2_schema_controller as controller  # noqa: E402
+import hng2_schema_strict_tools as strict_tools  # noqa: E402
 import historical_entity_schema as schema  # noqa: E402
 import run_hng2_schema_controller as base  # noqa: E402
 from smoke_deepseek import call_deepseek  # noqa: E402
@@ -43,14 +44,14 @@ PROVIDER = "deepseek"
 PROMPT_VERSION = "hng2-sc1-card-hardening-v1"
 SEARCH_PROMPT_VERSION = "hng2-sc1-search-plan-v1"
 ALLOWED_SOURCES = tuple(base.ALLOWED_SOURCES)
+STRICT_ENDPOINT = strict_tools.STRICT_COMPLETIONS_ENDPOINT
 
-SEMANTIC_SYSTEM = """你是历史实体 Schema v1 的结构化证据卡辅助器。严格返回一个 json 对象，不要返回 JSON 之外的文本。
-只处理当前 ResearchGap 所需的最少内容，不作百科式抽取。合并同一局部实体的重复指称，使用证明断言的最短连续原文，不枚举无关事件；最多 6 个 EvidenceEntity、最多 8 个 EvidenceAssertion。
-必须返回顶层字段 evidence_interpretation、semantic_assessment、identity_recommendation、research_gap，且全部为对象。evidence_interpretation 必须含 target_entity_key：它应指向当前目标实体；若目标不能表示，只有在明确 unresolved、not_a_person 或 not_a_single_person 时才可为 null。
-实体和断言的 key 只能是本次回答内部的 e0/e1/... 与 a0/a1/...；不得创建 person_id、candidate_key、provisional_person_id、relation_id 或 graph_id。chosen_candidate_key 只能复制输入候选键；新人物只能使用 new_entity_key=n0。
-不要修改 Python 提供的 hard_constraints。summary 只供人工阅读，Python 不用它控制状态。
-所有实体、断言和辅助 evidence_spans 的证据都必须来自给定 source_passages 的连续原文。严格使用输入中给定的枚举值。
-输出形状必须接近此最小 json 骨架，不得改名或添加语义控制字段：{"evidence_interpretation":{"target_entity_key":"e0","entities":[],"assertions":[]},"semantic_assessment":{"assessment_status":"assessed","semantic_fit":"unknown","observed_role":"unknown","evidence_spans":[]},"identity_recommendation":{"decision":"unresolved","chosen_candidate_key":null,"confidence":"unknown","reason_codes":[],"evidence_spans":[],"new_entity_candidate":null,"new_entity_key":null,"unresolved_reason":""},"research_gap":{"status":"open","missing_constraints":[],"blocking_question":"","next_best_action":"human_review","candidate_keys":[],"stop_condition":""}}。"""
+SEMANTIC_SYSTEM = """先理解给定的历史史料原文，再提交当前 ResearchGap 所需的结构化 EvidenceCard。
+只抽取解决当前问题必需的实体和断言，不做全文人物抽取；合并同一局部实体的重复指称，优先使用能证明判断的最短连续原文，不枚举无关事件。
+目标实体必须与 target_entity_key 对应。所有实体、断言、语义评估和身份建议只能依据输入的 source passages 与 Python 提供的候选、硬约束；不得修改硬约束。
+不得创建任何 Person ID、candidate key、provisional_person_id、relation_id 或 graph_id。候选 key 只能复制输入，新的局部人物只能使用工具结构允许的 n0。
+每个证据 ref 和 evidence span 都必须逐字来自输入原文；不确定时明确选择 unresolved、ambiguous、not_a_person 或 not_a_single_person，不要为了填满字段而猜测。
+请只通过被强制调用的 submit_historical_entity_card 工具提交卡片，不输出助手 prose；工具参数中的 summary 只供人工审核，Python 不依赖它控制状态。"""
 
 SEARCH_SYSTEM = """你是历史实体 SearchPlan 规划器。只为当前 ResearchGap 生成一次本地检索计划，不回答历史问题，不扩展 frontier。
 只返回 JSON 对象：{"search_plan":{"target_constraint":"title_identity|kinship|temporal|biography_identity|short_name_identity","goal":"","candidate_keys":[],"preferred_sources":[],"search_entities":[],"search_patterns":[],"temporal_scope":{},"graph_neighborhood_scope":"case_only","stop_condition":""}}。
@@ -100,7 +101,6 @@ def target_interpretation(case: Mapping[str, Any], *, kind: str | None = None, r
     """Make a local packet interpretation without changing frozen inputs."""
 
     result = dict(case.get("interpretation") or {})
-    surface = text((case.get("observation") or {}).get("surface"))
     if kind:
         result["entity_kind"] = kind
     if reference:
@@ -109,11 +109,6 @@ def target_interpretation(case: Mapping[str, Any], *, kind: str | None = None, r
         result["mention_scope"] = scope
     if role:
         result["discourse_role"] = role
-    # A target full-name mention must not inherit a nearby structural chain.
-    if surface == "虞喜":
-        result.update({"entity_kind": "named_person", "reference_form": "full_name", "mention_scope": "narrative", "discourse_role": "referenced_person", "structural_kinship": None})
-    if surface == "廙":
-        result.update({"entity_kind": "abbreviated_name", "reference_form": "abbreviated", "mention_scope": "narrative", "discourse_role": "referenced_person", "structural_kinship": None})
     return result
 
 
@@ -183,7 +178,7 @@ def finish_reason(response: Mapping[str, Any] | None) -> str | None:
     return None
 
 
-def classify_response(record: Mapping[str, Any], case: Mapping[str, Any], passages: Mapping[str, Mapping[str, Any]], *, require_target: bool, candidate_rows: Sequence[Mapping[str, Any]] | None = None) -> dict[str, Any]:
+def classify_response(record: Mapping[str, Any], case: Mapping[str, Any], passages: Mapping[str, Mapping[str, Any]], *, require_target: bool, candidate_rows: Sequence[Mapping[str, Any]] | None = None, strict_function: bool = False) -> dict[str, Any]:
     """Classify envelope/parse/card failures without semantic repair."""
 
     response = record.get("response") if isinstance(record, Mapping) else None
@@ -192,14 +187,18 @@ def classify_response(record: Mapping[str, Any], case: Mapping[str, Any], passag
         return {"classification": "provider_rate_limit", "response_channel": "none", "finish_reason": finish, "validation": None}
     if record.get("status") not in {None, "response"}:
         return {"classification": "provider_request_failure", "response_channel": "none", "finish_reason": finish, "validation": None}
-    payload, channel, parse_error = controller.extract_response_payload(response or {})
+    if strict_function:
+        payload, channel, parse_error = controller.extract_strict_tool_payload(response or {})
+    else:
+        payload, channel, parse_error = controller.extract_response_payload(response or {})
     if finish == "length":
         return {"classification": "response_truncated", "response_channel": channel, "finish_reason": finish, "parse_error": parse_error, "payload_present": payload is not None, "validation": None}
     if payload is None:
         return {"classification": "response_parse_failure", "response_channel": channel, "finish_reason": finish, "parse_error": parse_error, "payload_present": False, "validation": None}
-    validation = controller.validate_card_payload(payload, case, passages, candidate_rows=candidate_rows, require_target=require_target)
+    wire_payload = strict_tools.wire_to_controller_payload(payload) if strict_function else payload
+    validation = controller.validate_card_payload(wire_payload, case, passages, candidate_rows=candidate_rows, require_target=require_target)
     classification = "valid_card" if validation.get("valid") else "card_validation_failure"
-    return {"classification": classification, "response_channel": channel, "finish_reason": finish, "parse_error": parse_error, "payload_present": True, "validation": validation, "payload": payload}
+    return {"classification": classification, "response_channel": channel, "finish_reason": finish, "parse_error": parse_error, "payload_present": True, "validation": validation, "payload": wire_payload, "strict_function": strict_function}
 
 
 def _entity(entity_key: str, surface: str, kind: str, reference: str, ref: str, span: str) -> dict[str, Any]:
@@ -455,12 +454,28 @@ def usage_from(response: Mapping[str, Any]) -> dict[str, int]:
 
 def call_live_record(kind: str, case_id: str, payload: Mapping[str, Any], raw_dir: Path, sequence: int) -> dict[str, Any]:
     started = time.monotonic()
-    record: dict[str, Any] = {"kind": kind, "case_id": case_id, "sequence": sequence, "start_time": now(), "model": MODEL, "provider": PROVIDER, "prompt_version": PROMPT_VERSION if kind == "semantic" else SEARCH_PROMPT_VERSION, "input_hash": json_hash(payload), "canonical_write_back": False, "immutable": True}
+    strict_function = kind == "semantic"
+    endpoint = STRICT_ENDPOINT if strict_function else None
+    record: dict[str, Any] = {"kind": kind, "case_id": case_id, "sequence": sequence, "start_time": now(), "model": MODEL, "provider": PROVIDER, "endpoint": endpoint or "https://api.deepseek.com/chat/completions", "strict_function": strict_function, "prompt_version": PROMPT_VERSION if kind == "semantic" else SEARCH_PROMPT_VERSION, "input_hash": json_hash(payload), "canonical_write_back": False, "immutable": True}
     try:
-        response = call_deepseek([{"role": "system", "content": SEMANTIC_SYSTEM if kind == "semantic" else SEARCH_SYSTEM}, {"role": "user", "content": json.dumps(payload, ensure_ascii=False, sort_keys=True)}], model=MODEL, temperature=0, response_format={"type": "json_object"}, tools=[], thinking={"type": "disabled"}, max_tokens=1600 if kind == "semantic" else 700, timeout=180)
+        messages = [{"role": "system", "content": SEMANTIC_SYSTEM if strict_function else SEARCH_SYSTEM}, {"role": "user", "content": json.dumps(payload, ensure_ascii=False, sort_keys=True)}]
+        if strict_function:
+            # The prompt asks for at most six entities/eight assertions.  A
+            # modest 2400-token ceiling keeps a long but bounded strict card
+            # from being cut off; it does not change the semantic contract.
+            response = call_deepseek(messages, model=MODEL, temperature=0, tools=[strict_tools.strict_function_definition()], tool_choice=strict_tools.strict_tool_choice(), thinking={"type": "disabled"}, max_tokens=2400, timeout=180, endpoint=STRICT_ENDPOINT)
+        else:
+            response = call_deepseek(messages, model=MODEL, temperature=0, response_format={"type": "json_object"}, tools=[], thinking={"type": "disabled"}, max_tokens=700, timeout=180)
         record.update({"status": "response", "response": response, "usage": usage_from(response), "finish_reason": finish_reason(response)})
-        _, channel, parse_error = controller.extract_response_payload(response)
-        record.update({"response_channel": channel, "parse_error": parse_error})
+        if strict_function:
+            _, channel, parse_error = controller.extract_strict_tool_payload(response)
+            choices = response.get("choices") if isinstance(response, Mapping) else []
+            message = choices[0].get("message") if isinstance(choices, list) and choices and isinstance(choices[0], Mapping) else {}
+            tool_calls = message.get("tool_calls") if isinstance(message, Mapping) else []
+            record.update({"response_channel": channel, "parse_error": parse_error, "tool_call_count": len(tool_calls) if isinstance(tool_calls, list) else 0, "tool_name": ((tool_calls[0].get("function") or {}).get("name") if isinstance(tool_calls, list) and tool_calls and isinstance(tool_calls[0], Mapping) and isinstance(tool_calls[0].get("function"), Mapping) else None)})
+        else:
+            _, channel, parse_error = controller.extract_response_payload(response)
+            record.update({"response_channel": channel, "parse_error": parse_error, "tool_call_count": 0})
     except Exception as exc:
         http_status = getattr(exc, "http_status", None)
         body = str(getattr(exc, "provider_error_body", "") or "")
@@ -532,7 +547,7 @@ def live(run_id: str) -> dict[str, Any]:
             rec = call_live_record("semantic", case_id, packet, raw_dir, sequence)
             sequence += 1
             usage.append(rec)
-            classification = classify_response(rec, case, passages, require_target=True, candidate_rows=candidates)
+            classification = classify_response(rec, case, passages, require_target=True, candidate_rows=candidates, strict_function=True)
             validation = classification.get("validation") or {"valid": False, "errors": [classification.get("parse_error") or classification.get("classification")], "invalid_enum_outputs": [], "invented_id_attempts": [], "evidence_span_failures": 0}
             validations.append({"case_id": case_id, "round": round_no, **{key: classification.get(key) for key in ("classification", "response_channel", "finish_reason", "parse_error", "payload_present")}, "validation": validation})
             round_row: dict[str, Any] = {"round": round_no, "classification": classification.get("classification"), "response_channel": classification.get("response_channel"), "validation": validation}

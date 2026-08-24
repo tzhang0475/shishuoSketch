@@ -9,6 +9,7 @@ from typing import Any, Mapping, Sequence
 
 
 API_URL = "https://api.deepseek.com/chat/completions"
+DEEPSEEK_BETA_URL = "https://api.deepseek.com/beta/chat/completions"
 MODEL = "deepseek-v4-flash"
 PROMPT = 'Return JSON: {"status":"connected"}'
 
@@ -24,6 +25,7 @@ def call_deepseek(
     thinking: Mapping[str, Any] | None = None,
     max_tokens: int | None = None,
     timeout: int = 60,
+    endpoint: str | None = None,
 ) -> dict[str, Any]:
     """Call the existing OpenAI-compatible DeepSeek endpoint.
 
@@ -54,7 +56,7 @@ def call_deepseek(
         payload["max_tokens"] = int(max_tokens)
     body = json.dumps(payload, ensure_ascii=False).encode("utf-8")
     request = urllib.request.Request(
-        API_URL,
+        endpoint or API_URL,
         data=body,
         headers={
             "Authorization": f"Bearer {api_key}",

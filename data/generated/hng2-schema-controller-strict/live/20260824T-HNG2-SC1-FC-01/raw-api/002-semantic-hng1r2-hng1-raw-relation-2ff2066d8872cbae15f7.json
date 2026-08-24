@@ -1,0 +1,67 @@
+{
+  "canonical_write_back": false,
+  "case_id": "hng1r2-hng1-raw-relation-2ff2066d8872cbae15f7",
+  "elapsed_seconds": 6.179514,
+  "endpoint": "https://api.deepseek.com/beta/chat/completions",
+  "finish_reason": "tool_calls",
+  "immutable": true,
+  "input_hash": "fd5957311c826b3f8ccf5a77b01ba1dc5aaf19bddcc9411d7a034dc7e1afd3a7",
+  "kind": "semantic",
+  "model": "deepseek-v4-flash",
+  "parse_error": null,
+  "prompt_version": "hng2-sc1-strict-function-card-v1",
+  "provider": "deepseek",
+  "response": {
+    "choices": [
+      {
+        "finish_reason": "tool_calls",
+        "index": 0,
+        "logprobs": null,
+        "message": {
+          "content": "",
+          "role": "assistant",
+          "tool_calls": [
+            {
+              "function": {
+                "arguments": "{\"evidence_interpretation\": {\"target_entity_key\": \"庾太尉\", \"entities\": [{\"entity_key\": \"e0\", \"surface\": \"庾太尉\", \"entity_kind\": \"person_office_title\", \"reference_form\": \"office_title_only\", \"evidence_ref\": \"hng01-shishuo-07-shijian-016-main\", \"evidence_span\": \"庾太尉\"}, {\"entity_key\": \"e1\", \"surface\": \"庾\", \"entity_kind\": \"abbreviated_name\", \"reference_form\": \"abbreviated\", \"evidence_ref\": \"hng01-shishuo-07-shijian-016-main\", \"evidence_span\": \"問庾曰\"}, {\"entity_key\": \"e2\", \"surface\": \"庾公\", \"entity_kind\": \"person_title\", \"reference_form\": \"title_only\", \"evidence_ref\": \"hng01-shishuo-14-rongzhi-024-main\", \"evidence_span\": \"定是庾公\"}, {\"entity_key\": \"e3\", \"surface\": \"元規\", \"entity_kind\": \"courtesy_name\", \"reference_form\": \"courtesy\", \"evidence_ref\": \"hng01-shishuo-14-rongzhi-024-main\", \"evidence_span\": \"元規爾時風範不得不小穨\"}, {\"entity_key\": \"e4\", \"surface\": \"孟嘉\", \"entity_kind\": \"named_person\", \"reference_form\": \"full_name\", \"evidence_ref\": \"hng01-shishuo-07-shijian-016-main\", \"evidence_span\": \"武昌孟嘉作庾太尉州從事\"}, {\"entity_key\": \"e5\", \"surface\": \"禇太傅\", \"entity_kind\": \"person_office_title\", \"reference_form\": \"office_title_only\", \"evidence_ref\": \"hng01-shishuo-07-shijian-016-main\", \"evidence_span\": \"禇太傅有知人鑒\"}]}, \"assertions\": [{\"assertion_id\": \"a0\", \"assertion_type\": \"identity_equivalence\", \"subject_entity_key\": \"e0\", \"object_entity_key\": \"e1\", \"value\": \"\", \"direction\": \"\", \"evidence_ref\": \"hng01-shishuo-07-shijian-016-main\", \"evidence_span\": \"問庾曰\", \"confidence\": \"high\"}, {\"assertion_id\": \"a1\", \"assertion_type\": \"identity_equivalence\", \"subject_entity_key\": \"e0\", \"object_entity_key\": \"e2\", \"value\": \"\", \"direction\": \"\", \"evidence_ref\": \"hng01-shishuo-14-rongzhi-024-main\", \"evidence_span\": \"定是庾公\", \"confidence\": \"high\"}, {\"assertion_id\": \"a2\", \"assertion_type\": \"courtesy_name_of\", \"subject_entity_key\": \"e3\", \"object_entity_key\": \"e0\", \"value\": \"\", \"direction\": \"\", \"evidence_ref\": \"hng01-shishuo-14-rongzhi-024-main\", \"evidence_span\": \"元規爾時風範不得不小穨\", \"confidence\": \"medium\"}, {\"assertion_id\": \"a3\", \"assertion_type\": \"office_held_by\", \"subject_entity_key\": \"e0\", \"object_entity_key\": \"\", \"value\": \"州從事\", \"direction\": \"\", \"evidence_ref\": \"hng01-shishuo-07-shijian-016-main\", \"evidence_span\": \"武昌孟嘉作庾太尉州從事\", \"confidence\": \"high\"}, {\"assertion_id\": \"a4\", \"assertion_type\": \"participates_in_event\", \"subject_entity_key\": \"e0\", \"object_entity_key\": \"\", \"value\": \"在武昌與諸人登南樓詠謔\", \"direction\": \"\", \"evidence_ref\": \"hng01-shishuo-14-rongzhi-024-main\", \"evidence_span\": \"庾太尉在武昌秋夜氣佳景清使吏殷浩王胡之之徒登南樓理詠\", \"confidence\": \"high\"}], \"summary\": \"庾太尉在四段世說新語原文中出現，均為官职称谓指人。在hng01-shishuo-07-shijian-016中，庾太尉為武昌州從事孟嘉的上司，與禇太傅對話；在hng01-shishuo-14-rongzhi-024中，庾太尉在武昌與殷浩、王胡之等登南樓詠謔，後文以\\\"庾公\\\"指稱，並由王逸少轉述丞相稱其字\\\"元規\\\"。hng01-shishuo-02-yanyu-052中庾法畼造訪庾太尉。hng01-shishuo-08-shangyu-035中庾太尉少為王眉子所知。這些上下文均指向同一人物，其字為元規，與候選庾亮（字元規）相符。\"}",
+                "name": "submit_historical_entity_card"
+              },
+              "id": "call_00_4lPz2kB2TywwItGT9dc51601",
+              "index": 0,
+              "type": "function"
+            }
+          ]
+        }
+      }
+    ],
+    "created": 1787583392,
+    "id": "6aab539a-60c6-426d-9398-ffdccba5642e",
+    "model": "deepseek-v4-flash",
+    "object": "chat.completion",
+    "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+    "usage": {
+      "completion_tokens": 1182,
+      "prompt_cache_hit_tokens": 0,
+      "prompt_cache_miss_tokens": 5520,
+      "prompt_tokens": 5520,
+      "prompt_tokens_details": {
+        "cached_tokens": 0
+      },
+      "total_tokens": 6702
+    }
+  },
+  "response_channel": "tool_call",
+  "sequence": 2,
+  "start_time": "2026-08-24T14:56:32Z",
+  "status": "response",
+  "strict_function": true,
+  "tool_call_count": 1,
+  "tool_name": "submit_historical_entity_card",
+  "usage": {
+    "completion_tokens": 1182,
+    "prompt_cache_hit_tokens": 0,
+    "prompt_cache_miss_tokens": 5520,
+    "prompt_tokens": 5520,
+    "total_tokens": 6702
+  }
+}
