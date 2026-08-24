@@ -1,0 +1,2787 @@
+{
+  "canonical_write_back": false,
+  "fixtures": [
+    {
+      "expected": {
+        "valid": true
+      },
+      "fixture_id": "wu-emperor-propagation",
+      "prior_constraints_preserved": true,
+      "projection": {
+        "candidate_info": {
+          "entity_pids": {
+            "e0": [],
+            "e1": [
+              "person-fixture-sima-yan"
+            ]
+          },
+          "entity_to_candidate": {
+            "e0": "c0",
+            "e1": "c0"
+          },
+          "identity_propagations": [
+            {
+              "assertion_id": "a0",
+              "evidence_span": "武皇帝諱炎",
+              "propagation_rule": "identity_equivalence",
+              "resulting_candidate_key": "c0",
+              "resulting_person_id": "person-fixture-sima-yan",
+              "source_entity_key": "e1",
+              "source_ref": "fixture-wu-emperor",
+              "target_entity_key": "e0"
+            }
+          ]
+        },
+        "candidates": [
+          {
+            "candidate_key": "c0",
+            "canonical_name": "司馬炎",
+            "known_forms": [
+              "司馬炎",
+              "炎"
+            ],
+            "person_id": "person-fixture-sima-yan"
+          }
+        ],
+        "card": {
+          "assertions": [
+            {
+              "assertion_id": "a0",
+              "assertion_type": "identity_equivalence",
+              "confidence": "high",
+              "direction": null,
+              "evidence_ref": "fixture-wu-emperor",
+              "evidence_span": "武皇帝諱炎",
+              "object_entity_key": "e1",
+              "subject_entity_key": "e0",
+              "value": null
+            }
+          ],
+          "entities": [
+            {
+              "entity_key": "e0",
+              "entity_kind": "person_title",
+              "evidence_ref": "fixture-wu-emperor",
+              "evidence_span": "武皇帝",
+              "reference_form": "title_only",
+              "surface": "武皇帝"
+            },
+            {
+              "entity_key": "e1",
+              "entity_kind": "named_person",
+              "evidence_ref": "fixture-wu-emperor",
+              "evidence_span": "諱炎",
+              "reference_form": "full_name",
+              "surface": "炎"
+            }
+          ],
+          "summary": "fixture only",
+          "target_entity_key": "e0"
+        },
+        "constraints": [
+          {
+            "assertion_id": "a0",
+            "assertion_side": "subject",
+            "candidate_key": "c0",
+            "computed_by": "python",
+            "constraint_scope": "candidate",
+            "constraint_type": "name",
+            "evidence_refs": [
+              "fixture-wu-emperor"
+            ],
+            "evidence_span": "武皇帝諱炎",
+            "independent": true,
+            "propagation_rule": null,
+            "reason_code": "validated_assertion:identity_equivalence",
+            "source_entity_key": "e0",
+            "status": "support",
+            "target_entity_key": "e1"
+          },
+          {
+            "assertion_id": null,
+            "candidate_key": null,
+            "computed_by": "python",
+            "constraint_scope": "case",
+            "constraint_type": "source_local_context",
+            "evidence_refs": [
+              "fixture-wu-emperor"
+            ],
+            "evidence_span": "",
+            "independent": true,
+            "reason_code": "supplied_passage",
+            "status": "support"
+          }
+        ],
+        "graph_action": {
+          "action": "link_existing",
+          "frontier_status": "eligible",
+          "node_type": "existing_person",
+          "person_id": "person-fixture-sima-yan",
+          "provisional_person_id": null,
+          "reason_codes": [
+            "evidence_card_validated",
+            "hng2_sc1_fixture"
+          ]
+        },
+        "identity_decision": {
+          "canonical_write_back": false,
+          "case_id": "fixture-wu-emperor",
+          "chosen_candidate_key": "c0",
+          "confidence": "high",
+          "decision_summary": "fixture only",
+          "identity_status": "resolved_existing",
+          "new_entity_key": null,
+          "person_id": "person-fixture-sima-yan",
+          "reason_codes": [
+            "hng2_sc1_fixture"
+          ],
+          "supporting_evidence_refs": [
+            "fixture-wu-emperor"
+          ],
+          "target_entity_key": "e0"
+        },
+        "recommendation": {
+          "chosen_candidate_key": "c0",
+          "confidence": "high",
+          "decision": "choose_candidate",
+          "evidence_spans": [
+            {
+              "ref": "fixture-wu-emperor",
+              "span": "武皇帝"
+            }
+          ],
+          "new_entity_candidate": null,
+          "new_entity_key": null,
+          "reason_codes": [
+            "hng2_sc1_fixture"
+          ],
+          "summary": "fixture only",
+          "unresolved_reason": ""
+        },
+        "research_gap": {
+          "blocking_question": "",
+          "candidate_keys": [],
+          "missing_constraints": [],
+          "next_best_action": "none",
+          "status": "closed",
+          "stop_condition": "validated candidate has structured source support"
+        },
+        "state_delta": {
+          "added_candidates": [],
+          "added_constraints": [
+            "{\"assertion_id\": \"a0\", \"assertion_side\": \"subject\", \"candidate_key\": \"c0\", \"computed_by\": \"python\", \"constraint_scope\": \"candidate\", \"constraint_type\": \"name\", \"evidence_refs\": [\"fixture-wu-emperor\"], \"evidence_span\": \"武皇帝諱炎\", \"independent\": true, \"propagation_rule\": null, \"reason_code\": \"validated_assertion:identity_equivalence\", \"source_entity_key\": \"e0\", \"status\": \"support\", \"target_entity_key\": \"e1\"}",
+            "{\"assertion_id\": null, \"candidate_key\": null, \"computed_by\": \"python\", \"constraint_scope\": \"case\", \"constraint_type\": \"source_local_context\", \"evidence_refs\": [\"fixture-wu-emperor\"], \"evidence_span\": \"\", \"independent\": true, \"reason_code\": \"supplied_passage\", \"status\": \"support\"}"
+          ],
+          "changed_constraints": [
+            "{\"assertion_id\": \"a0\", \"assertion_side\": \"subject\", \"candidate_key\": \"c0\", \"computed_by\": \"python\", \"constraint_scope\": \"candidate\", \"constraint_type\": \"name\", \"evidence_refs\": [\"fixture-wu-emperor\"], \"evidence_span\": \"武皇帝諱炎\", \"independent\": true, \"propagation_rule\": null, \"reason_code\": \"validated_assertion:identity_equivalence\", \"source_entity_key\": \"e0\", \"status\": \"support\", \"target_entity_key\": \"e1\"}",
+            "{\"assertion_id\": null, \"candidate_key\": null, \"computed_by\": \"python\", \"constraint_scope\": \"case\", \"constraint_type\": \"source_local_context\", \"evidence_refs\": [\"fixture-wu-emperor\"], \"evidence_span\": \"\", \"independent\": true, \"reason_code\": \"supplied_passage\", \"status\": \"support\"}"
+          ],
+          "conflicts": [],
+          "identity_propagations": [],
+          "material": true,
+          "new_candidates": [],
+          "new_conflicts": [],
+          "new_evidence": [
+            "fixture-wu-emperor"
+          ],
+          "preserved_constraints": [],
+          "removed_candidates": [],
+          "removed_conflicts": [],
+          "unchanged_candidates": [
+            "c0"
+          ],
+          "upgraded_candidates": []
+        },
+        "supporting_refs": [
+          "fixture-wu-emperor"
+        ]
+      },
+      "validation": {
+        "errors": [],
+        "evidence_span_failures": 0,
+        "invalid_enum_outputs": [],
+        "invented_id_attempts": [],
+        "valid": true
+      }
+    },
+    {
+      "expected": {
+        "valid": true
+      },
+      "fixture_id": "yu-taiwei-propagation",
+      "prior_constraints_preserved": true,
+      "projection": {
+        "candidate_info": {
+          "entity_pids": {
+            "e0": [
+              "person-010"
+            ],
+            "e1": [
+              "person-010"
+            ]
+          },
+          "entity_to_candidate": {
+            "e0": "c0",
+            "e1": "c0"
+          },
+          "identity_propagations": []
+        },
+        "candidates": [
+          {
+            "candidate_key": "c0",
+            "canonical_name": "庾亮",
+            "known_forms": [
+              "庾亮"
+            ],
+            "person_id": "person-010"
+          }
+        ],
+        "card": {
+          "assertions": [
+            {
+              "assertion_id": "a0",
+              "assertion_type": "title_of",
+              "confidence": "high",
+              "direction": null,
+              "evidence_ref": "fixture-yu-taiwei",
+              "evidence_span": "庾太尉庾亮",
+              "object_entity_key": "e1",
+              "subject_entity_key": "e0",
+              "value": null
+            }
+          ],
+          "entities": [
+            {
+              "entity_key": "e0",
+              "entity_kind": "person_office_title",
+              "evidence_ref": "fixture-yu-taiwei",
+              "evidence_span": "庾太尉",
+              "reference_form": "office_title_only",
+              "surface": "庾太尉"
+            },
+            {
+              "entity_key": "e1",
+              "entity_kind": "named_person",
+              "evidence_ref": "fixture-yu-taiwei",
+              "evidence_span": "庾亮",
+              "reference_form": "full_name",
+              "surface": "庾亮"
+            }
+          ],
+          "summary": "fixture only",
+          "target_entity_key": "e0"
+        },
+        "constraints": [
+          {
+            "assertion_id": "a0",
+            "assertion_side": "subject",
+            "candidate_key": "c0",
+            "computed_by": "python",
+            "constraint_scope": "candidate",
+            "constraint_type": "title",
+            "evidence_refs": [
+              "fixture-yu-taiwei"
+            ],
+            "evidence_span": "庾太尉庾亮",
+            "independent": true,
+            "propagation_rule": null,
+            "reason_code": "validated_assertion:title_of",
+            "source_entity_key": "e0",
+            "status": "support",
+            "target_entity_key": "e1"
+          },
+          {
+            "assertion_id": null,
+            "candidate_key": null,
+            "computed_by": "python",
+            "constraint_scope": "case",
+            "constraint_type": "source_local_context",
+            "evidence_refs": [
+              "fixture-yu-taiwei"
+            ],
+            "evidence_span": "",
+            "independent": true,
+            "reason_code": "supplied_passage",
+            "status": "support"
+          }
+        ],
+        "graph_action": {
+          "action": "link_existing",
+          "frontier_status": "eligible",
+          "node_type": "existing_person",
+          "person_id": "person-010",
+          "provisional_person_id": null,
+          "reason_codes": [
+            "evidence_card_validated",
+            "hng2_sc1_fixture"
+          ]
+        },
+        "identity_decision": {
+          "canonical_write_back": false,
+          "case_id": "fixture-yu-taiwei",
+          "chosen_candidate_key": "c0",
+          "confidence": "high",
+          "decision_summary": "fixture only",
+          "identity_status": "resolved_existing",
+          "new_entity_key": null,
+          "person_id": "person-010",
+          "reason_codes": [
+            "hng2_sc1_fixture"
+          ],
+          "supporting_evidence_refs": [
+            "fixture-yu-taiwei"
+          ],
+          "target_entity_key": "e0"
+        },
+        "recommendation": {
+          "chosen_candidate_key": "c0",
+          "confidence": "high",
+          "decision": "choose_candidate",
+          "evidence_spans": [
+            {
+              "ref": "fixture-yu-taiwei",
+              "span": "庾太尉"
+            }
+          ],
+          "new_entity_candidate": null,
+          "new_entity_key": null,
+          "reason_codes": [
+            "hng2_sc1_fixture"
+          ],
+          "summary": "fixture only",
+          "unresolved_reason": ""
+        },
+        "research_gap": {
+          "blocking_question": "",
+          "candidate_keys": [],
+          "missing_constraints": [],
+          "next_best_action": "none",
+          "status": "closed",
+          "stop_condition": "validated candidate has structured source support"
+        },
+        "state_delta": {
+          "added_candidates": [],
+          "added_constraints": [
+            "{\"assertion_id\": \"a0\", \"assertion_side\": \"subject\", \"candidate_key\": \"c0\", \"computed_by\": \"python\", \"constraint_scope\": \"candidate\", \"constraint_type\": \"title\", \"evidence_refs\": [\"fixture-yu-taiwei\"], \"evidence_span\": \"庾太尉庾亮\", \"independent\": true, \"propagation_rule\": null, \"reason_code\": \"validated_assertion:title_of\", \"source_entity_key\": \"e0\", \"status\": \"support\", \"target_entity_key\": \"e1\"}",
+            "{\"assertion_id\": null, \"candidate_key\": null, \"computed_by\": \"python\", \"constraint_scope\": \"case\", \"constraint_type\": \"source_local_context\", \"evidence_refs\": [\"fixture-yu-taiwei\"], \"evidence_span\": \"\", \"independent\": true, \"reason_code\": \"supplied_passage\", \"status\": \"support\"}"
+          ],
+          "changed_constraints": [
+            "{\"assertion_id\": \"a0\", \"assertion_side\": \"subject\", \"candidate_key\": \"c0\", \"computed_by\": \"python\", \"constraint_scope\": \"candidate\", \"constraint_type\": \"title\", \"evidence_refs\": [\"fixture-yu-taiwei\"], \"evidence_span\": \"庾太尉庾亮\", \"independent\": true, \"propagation_rule\": null, \"reason_code\": \"validated_assertion:title_of\", \"source_entity_key\": \"e0\", \"status\": \"support\", \"target_entity_key\": \"e1\"}",
+            "{\"assertion_id\": null, \"candidate_key\": null, \"computed_by\": \"python\", \"constraint_scope\": \"case\", \"constraint_type\": \"source_local_context\", \"evidence_refs\": [\"fixture-yu-taiwei\"], \"evidence_span\": \"\", \"independent\": true, \"reason_code\": \"supplied_passage\", \"status\": \"support\"}"
+          ],
+          "conflicts": [],
+          "identity_propagations": [],
+          "material": true,
+          "new_candidates": [],
+          "new_conflicts": [],
+          "new_evidence": [
+            "fixture-yu-taiwei"
+          ],
+          "preserved_constraints": [],
+          "removed_candidates": [],
+          "removed_conflicts": [],
+          "unchanged_candidates": [
+            "c0"
+          ],
+          "upgraded_candidates": []
+        },
+        "supporting_refs": [
+          "fixture-yu-taiwei"
+        ]
+      },
+      "validation": {
+        "errors": [],
+        "evidence_span_failures": 0,
+        "invalid_enum_outputs": [],
+        "invented_id_attempts": [],
+        "valid": true
+      }
+    },
+    {
+      "expected": {
+        "valid": true
+      },
+      "fixture_id": "yuxi-target-separation",
+      "prior_constraints_preserved": true,
+      "projection": {
+        "candidate_info": {
+          "entity_pids": {
+            "e0": []
+          },
+          "entity_to_candidate": {
+            "e0": "c0"
+          },
+          "identity_propagations": []
+        },
+        "candidates": [
+          {
+            "candidate_key": "c0",
+            "candidate_source": "evidence_card_named_person",
+            "canonical_name": "虞喜",
+            "chronology_summary": "",
+            "graph_summary": "",
+            "known_forms": [
+              "虞喜"
+            ],
+            "person_id": null
+          }
+        ],
+        "card": {
+          "assertions": [
+            {
+              "assertion_id": "a0",
+              "assertion_type": "kinship_relation",
+              "confidence": "high",
+              "direction": null,
+              "evidence_ref": "fixture-yuxi-target",
+              "evidence_span": "娉喜弟預女為妻",
+              "object_entity_key": "e1",
+              "subject_entity_key": "e0",
+              "value": null
+            }
+          ],
+          "entities": [
+            {
+              "entity_key": "e0",
+              "entity_kind": "named_person",
+              "evidence_ref": "fixture-yuxi-target",
+              "evidence_span": "虞喜",
+              "reference_form": "full_name",
+              "surface": "虞喜"
+            },
+            {
+              "entity_key": "e1",
+              "entity_kind": "structural_kinship_expression",
+              "evidence_ref": "fixture-yuxi-target",
+              "evidence_span": "喜弟預女",
+              "reference_form": "kinship_plus_name",
+              "surface": "喜弟預女"
+            }
+          ],
+          "summary": "fixture only",
+          "target_entity_key": "e0"
+        },
+        "constraints": [
+          {
+            "assertion_id": "a0",
+            "assertion_side": "subject",
+            "candidate_key": "c0",
+            "computed_by": "python",
+            "constraint_scope": "candidate",
+            "constraint_type": "kinship",
+            "evidence_refs": [
+              "fixture-yuxi-target"
+            ],
+            "evidence_span": "娉喜弟預女為妻",
+            "independent": true,
+            "propagation_rule": null,
+            "reason_code": "validated_assertion:kinship_relation",
+            "source_entity_key": "e0",
+            "status": "support",
+            "target_entity_key": "e1"
+          },
+          {
+            "assertion_id": null,
+            "candidate_key": null,
+            "computed_by": "python",
+            "constraint_scope": "case",
+            "constraint_type": "source_local_context",
+            "evidence_refs": [
+              "fixture-yuxi-target"
+            ],
+            "evidence_span": "",
+            "independent": true,
+            "reason_code": "supplied_passage",
+            "status": "support"
+          }
+        ],
+        "graph_action": {
+          "action": "create_provisional_candidate",
+          "frontier_status": "candidate",
+          "node_type": "provisional_person",
+          "person_id": null,
+          "provisional_person_id": "hng2-sc-provisional-956afb1a7e7baa2ecd8b",
+          "reason_codes": [
+            "evidence_card_new_person",
+            "hng2_sc1_fixture"
+          ]
+        },
+        "identity_decision": {
+          "canonical_write_back": false,
+          "case_id": "fixture-yuxi-target",
+          "chosen_candidate_key": null,
+          "confidence": "high",
+          "decision_summary": "fixture only",
+          "identity_status": "resolved_new_candidate",
+          "new_entity_key": "n0",
+          "person_id": null,
+          "reason_codes": [
+            "hng2_sc1_fixture"
+          ],
+          "supporting_evidence_refs": [
+            "fixture-yuxi-target"
+          ],
+          "target_entity_key": "e0"
+        },
+        "recommendation": {
+          "chosen_candidate_key": null,
+          "confidence": "high",
+          "decision": "new_person_candidate",
+          "evidence_spans": [
+            {
+              "ref": "fixture-yuxi-target",
+              "span": "虞喜"
+            }
+          ],
+          "new_entity_candidate": {
+            "surface": "虞喜"
+          },
+          "new_entity_key": "n0",
+          "reason_codes": [
+            "hng2_sc1_fixture"
+          ],
+          "summary": "fixture only",
+          "unresolved_reason": ""
+        },
+        "research_gap": {
+          "blocking_question": "",
+          "candidate_keys": [],
+          "missing_constraints": [],
+          "next_best_action": "none",
+          "status": "closed",
+          "stop_condition": "named new-person candidate is source-supported"
+        },
+        "state_delta": {
+          "added_candidates": [
+            "c0"
+          ],
+          "added_constraints": [
+            "{\"assertion_id\": \"a0\", \"assertion_side\": \"subject\", \"candidate_key\": \"c0\", \"computed_by\": \"python\", \"constraint_scope\": \"candidate\", \"constraint_type\": \"kinship\", \"evidence_refs\": [\"fixture-yuxi-target\"], \"evidence_span\": \"娉喜弟預女為妻\", \"independent\": true, \"propagation_rule\": null, \"reason_code\": \"validated_assertion:kinship_relation\", \"source_entity_key\": \"e0\", \"status\": \"support\", \"target_entity_key\": \"e1\"}",
+            "{\"assertion_id\": null, \"candidate_key\": null, \"computed_by\": \"python\", \"constraint_scope\": \"case\", \"constraint_type\": \"source_local_context\", \"evidence_refs\": [\"fixture-yuxi-target\"], \"evidence_span\": \"\", \"independent\": true, \"reason_code\": \"supplied_passage\", \"status\": \"support\"}"
+          ],
+          "changed_constraints": [
+            "{\"assertion_id\": \"a0\", \"assertion_side\": \"subject\", \"candidate_key\": \"c0\", \"computed_by\": \"python\", \"constraint_scope\": \"candidate\", \"constraint_type\": \"kinship\", \"evidence_refs\": [\"fixture-yuxi-target\"], \"evidence_span\": \"娉喜弟預女為妻\", \"independent\": true, \"propagation_rule\": null, \"reason_code\": \"validated_assertion:kinship_relation\", \"source_entity_key\": \"e0\", \"status\": \"support\", \"target_entity_key\": \"e1\"}",
+            "{\"assertion_id\": null, \"candidate_key\": null, \"computed_by\": \"python\", \"constraint_scope\": \"case\", \"constraint_type\": \"source_local_context\", \"evidence_refs\": [\"fixture-yuxi-target\"], \"evidence_span\": \"\", \"independent\": true, \"reason_code\": \"supplied_passage\", \"status\": \"support\"}"
+          ],
+          "conflicts": [],
+          "identity_propagations": [],
+          "material": true,
+          "new_candidates": [
+            "c0"
+          ],
+          "new_conflicts": [],
+          "new_evidence": [
+            "fixture-yuxi-target"
+          ],
+          "preserved_constraints": [],
+          "removed_candidates": [],
+          "removed_conflicts": [],
+          "unchanged_candidates": [],
+          "upgraded_candidates": []
+        },
+        "supporting_refs": [
+          "fixture-yuxi-target"
+        ]
+      },
+      "validation": {
+        "errors": [],
+        "evidence_span_failures": 0,
+        "invalid_enum_outputs": [],
+        "invented_id_attempts": [],
+        "valid": true
+      }
+    },
+    {
+      "expected": {
+        "valid": true
+      },
+      "fixture_id": "structural-target",
+      "prior_constraints_preserved": true,
+      "projection": {
+        "candidate_info": {
+          "entity_pids": {},
+          "entity_to_candidate": {},
+          "identity_propagations": []
+        },
+        "candidates": [],
+        "card": {
+          "assertions": [
+            {
+              "assertion_id": "a0",
+              "assertion_type": "kinship_relation",
+              "confidence": "high",
+              "direction": null,
+              "evidence_ref": "fixture-structural-target",
+              "evidence_span": "喜弟預女",
+              "subject_entity_key": "e0",
+              "value": null
+            }
+          ],
+          "entities": [
+            {
+              "entity_key": "e0",
+              "entity_kind": "structural_kinship_expression",
+              "evidence_ref": "fixture-structural-target",
+              "evidence_span": "喜弟預女",
+              "reference_form": "kinship_plus_name",
+              "surface": "喜弟預女"
+            }
+          ],
+          "summary": "fixture only",
+          "target_entity_key": "e0"
+        },
+        "constraints": [
+          {
+            "assertion_id": "a0",
+            "assertion_side": "subject",
+            "candidate_key": null,
+            "computed_by": "python",
+            "constraint_scope": "passage",
+            "constraint_type": "kinship",
+            "evidence_refs": [
+              "fixture-structural-target"
+            ],
+            "evidence_span": "喜弟預女",
+            "independent": true,
+            "propagation_rule": null,
+            "reason_code": "unbound_assertion:kinship_relation",
+            "source_entity_key": "e0",
+            "status": "support",
+            "target_entity_key": null
+          },
+          {
+            "assertion_id": null,
+            "candidate_key": null,
+            "computed_by": "python",
+            "constraint_scope": "case",
+            "constraint_type": "source_local_context",
+            "evidence_refs": [
+              "fixture-structural-target"
+            ],
+            "evidence_span": "",
+            "independent": true,
+            "reason_code": "supplied_passage",
+            "status": "support"
+          }
+        ],
+        "graph_action": {
+          "action": "no_person_node",
+          "frontier_status": "blocked",
+          "node_type": "none",
+          "person_id": null,
+          "provisional_person_id": null,
+          "reason_codes": [
+            "structural_kinship_expression",
+            "hng2_sc1_fixture"
+          ]
+        },
+        "identity_decision": {
+          "canonical_write_back": false,
+          "case_id": "fixture-structural-target",
+          "chosen_candidate_key": null,
+          "confidence": "high",
+          "decision_summary": "fixture only",
+          "identity_status": "not_single_person",
+          "new_entity_key": null,
+          "person_id": null,
+          "reason_codes": [
+            "hng2_sc1_fixture"
+          ],
+          "supporting_evidence_refs": [
+            "fixture-structural-target"
+          ],
+          "target_entity_key": "e0"
+        },
+        "recommendation": {
+          "chosen_candidate_key": null,
+          "confidence": "high",
+          "decision": "not_a_single_person",
+          "evidence_spans": [
+            {
+              "ref": "fixture-structural-target",
+              "span": "喜弟預女"
+            }
+          ],
+          "new_entity_candidate": null,
+          "new_entity_key": null,
+          "reason_codes": [
+            "hng2_sc1_fixture"
+          ],
+          "summary": "fixture only",
+          "unresolved_reason": ""
+        },
+        "research_gap": {
+          "blocking_question": "",
+          "candidate_keys": [],
+          "missing_constraints": [],
+          "next_best_action": "none",
+          "status": "closed",
+          "stop_condition": "structured card establishes that no single Person node is required"
+        },
+        "state_delta": {
+          "added_candidates": [],
+          "added_constraints": [
+            "{\"assertion_id\": \"a0\", \"assertion_side\": \"subject\", \"candidate_key\": null, \"computed_by\": \"python\", \"constraint_scope\": \"passage\", \"constraint_type\": \"kinship\", \"evidence_refs\": [\"fixture-structural-target\"], \"evidence_span\": \"喜弟預女\", \"independent\": true, \"propagation_rule\": null, \"reason_code\": \"unbound_assertion:kinship_relation\", \"source_entity_key\": \"e0\", \"status\": \"support\", \"target_entity_key\": null}",
+            "{\"assertion_id\": null, \"candidate_key\": null, \"computed_by\": \"python\", \"constraint_scope\": \"case\", \"constraint_type\": \"source_local_context\", \"evidence_refs\": [\"fixture-structural-target\"], \"evidence_span\": \"\", \"independent\": true, \"reason_code\": \"supplied_passage\", \"status\": \"support\"}"
+          ],
+          "changed_constraints": [
+            "{\"assertion_id\": \"a0\", \"assertion_side\": \"subject\", \"candidate_key\": null, \"computed_by\": \"python\", \"constraint_scope\": \"passage\", \"constraint_type\": \"kinship\", \"evidence_refs\": [\"fixture-structural-target\"], \"evidence_span\": \"喜弟預女\", \"independent\": true, \"propagation_rule\": null, \"reason_code\": \"unbound_assertion:kinship_relation\", \"source_entity_key\": \"e0\", \"status\": \"support\", \"target_entity_key\": null}",
+            "{\"assertion_id\": null, \"candidate_key\": null, \"computed_by\": \"python\", \"constraint_scope\": \"case\", \"constraint_type\": \"source_local_context\", \"evidence_refs\": [\"fixture-structural-target\"], \"evidence_span\": \"\", \"independent\": true, \"reason_code\": \"supplied_passage\", \"status\": \"support\"}"
+          ],
+          "conflicts": [],
+          "identity_propagations": [],
+          "material": true,
+          "new_candidates": [],
+          "new_conflicts": [],
+          "new_evidence": [
+            "fixture-structural-target"
+          ],
+          "preserved_constraints": [],
+          "removed_candidates": [],
+          "removed_conflicts": [],
+          "unchanged_candidates": [],
+          "upgraded_candidates": []
+        },
+        "supporting_refs": [
+          "fixture-structural-target"
+        ]
+      },
+      "validation": {
+        "errors": [],
+        "evidence_span_failures": 0,
+        "invalid_enum_outputs": [],
+        "invented_id_attempts": [],
+        "valid": true
+      }
+    },
+    {
+      "expected": {
+        "valid": true
+      },
+      "fixture_id": "wangyi-propagation",
+      "prior_constraints_preserved": true,
+      "projection": {
+        "candidate_info": {
+          "entity_pids": {
+            "e0": [],
+            "e1": [
+              "person-053"
+            ]
+          },
+          "entity_to_candidate": {
+            "e0": "c0",
+            "e1": "c0"
+          },
+          "identity_propagations": [
+            {
+              "assertion_id": "a0",
+              "evidence_span": "廙王廙",
+              "propagation_rule": "identity_equivalence",
+              "resulting_candidate_key": "c0",
+              "resulting_person_id": "person-053",
+              "source_entity_key": "e1",
+              "source_ref": "fixture-wangyi-propagation",
+              "target_entity_key": "e0"
+            }
+          ]
+        },
+        "candidates": [
+          {
+            "candidate_key": "c0",
+            "canonical_name": "王廙",
+            "known_forms": [
+              "王廙"
+            ],
+            "person_id": "person-053"
+          }
+        ],
+        "card": {
+          "assertions": [
+            {
+              "assertion_id": "a0",
+              "assertion_type": "identity_equivalence",
+              "confidence": "high",
+              "direction": null,
+              "evidence_ref": "fixture-wangyi-propagation",
+              "evidence_span": "廙王廙",
+              "object_entity_key": "e1",
+              "subject_entity_key": "e0",
+              "value": null
+            }
+          ],
+          "entities": [
+            {
+              "entity_key": "e0",
+              "entity_kind": "abbreviated_name",
+              "evidence_ref": "fixture-wangyi-propagation",
+              "evidence_span": "廙",
+              "reference_form": "abbreviated",
+              "surface": "廙"
+            },
+            {
+              "entity_key": "e1",
+              "entity_kind": "named_person",
+              "evidence_ref": "fixture-wangyi-propagation",
+              "evidence_span": "王廙",
+              "reference_form": "full_name",
+              "surface": "王廙"
+            }
+          ],
+          "summary": "fixture only",
+          "target_entity_key": "e0"
+        },
+        "constraints": [
+          {
+            "assertion_id": "a0",
+            "assertion_side": "subject",
+            "candidate_key": "c0",
+            "computed_by": "python",
+            "constraint_scope": "candidate",
+            "constraint_type": "name",
+            "evidence_refs": [
+              "fixture-wangyi-propagation"
+            ],
+            "evidence_span": "廙王廙",
+            "independent": true,
+            "propagation_rule": null,
+            "reason_code": "validated_assertion:identity_equivalence",
+            "source_entity_key": "e0",
+            "status": "support",
+            "target_entity_key": "e1"
+          },
+          {
+            "assertion_id": null,
+            "candidate_key": null,
+            "computed_by": "python",
+            "constraint_scope": "case",
+            "constraint_type": "source_local_context",
+            "evidence_refs": [
+              "fixture-wangyi-propagation"
+            ],
+            "evidence_span": "",
+            "independent": true,
+            "reason_code": "supplied_passage",
+            "status": "support"
+          }
+        ],
+        "graph_action": {
+          "action": "link_existing",
+          "frontier_status": "eligible",
+          "node_type": "existing_person",
+          "person_id": "person-053",
+          "provisional_person_id": null,
+          "reason_codes": [
+            "evidence_card_validated",
+            "hng2_sc1_fixture"
+          ]
+        },
+        "identity_decision": {
+          "canonical_write_back": false,
+          "case_id": "fixture-wangyi-propagation",
+          "chosen_candidate_key": "c0",
+          "confidence": "high",
+          "decision_summary": "fixture only",
+          "identity_status": "resolved_existing",
+          "new_entity_key": null,
+          "person_id": "person-053",
+          "reason_codes": [
+            "hng2_sc1_fixture"
+          ],
+          "supporting_evidence_refs": [
+            "fixture-wangyi-propagation"
+          ],
+          "target_entity_key": "e0"
+        },
+        "recommendation": {
+          "chosen_candidate_key": "c0",
+          "confidence": "high",
+          "decision": "choose_candidate",
+          "evidence_spans": [
+            {
+              "ref": "fixture-wangyi-propagation",
+              "span": "廙"
+            }
+          ],
+          "new_entity_candidate": null,
+          "new_entity_key": null,
+          "reason_codes": [
+            "hng2_sc1_fixture"
+          ],
+          "summary": "fixture only",
+          "unresolved_reason": ""
+        },
+        "research_gap": {
+          "blocking_question": "",
+          "candidate_keys": [],
+          "missing_constraints": [],
+          "next_best_action": "none",
+          "status": "closed",
+          "stop_condition": "validated candidate has structured source support"
+        },
+        "state_delta": {
+          "added_candidates": [],
+          "added_constraints": [
+            "{\"assertion_id\": \"a0\", \"assertion_side\": \"subject\", \"candidate_key\": \"c0\", \"computed_by\": \"python\", \"constraint_scope\": \"candidate\", \"constraint_type\": \"name\", \"evidence_refs\": [\"fixture-wangyi-propagation\"], \"evidence_span\": \"廙王廙\", \"independent\": true, \"propagation_rule\": null, \"reason_code\": \"validated_assertion:identity_equivalence\", \"source_entity_key\": \"e0\", \"status\": \"support\", \"target_entity_key\": \"e1\"}",
+            "{\"assertion_id\": null, \"candidate_key\": null, \"computed_by\": \"python\", \"constraint_scope\": \"case\", \"constraint_type\": \"source_local_context\", \"evidence_refs\": [\"fixture-wangyi-propagation\"], \"evidence_span\": \"\", \"independent\": true, \"reason_code\": \"supplied_passage\", \"status\": \"support\"}"
+          ],
+          "changed_constraints": [
+            "{\"assertion_id\": \"a0\", \"assertion_side\": \"subject\", \"candidate_key\": \"c0\", \"computed_by\": \"python\", \"constraint_scope\": \"candidate\", \"constraint_type\": \"name\", \"evidence_refs\": [\"fixture-wangyi-propagation\"], \"evidence_span\": \"廙王廙\", \"independent\": true, \"propagation_rule\": null, \"reason_code\": \"validated_assertion:identity_equivalence\", \"source_entity_key\": \"e0\", \"status\": \"support\", \"target_entity_key\": \"e1\"}",
+            "{\"assertion_id\": null, \"candidate_key\": null, \"computed_by\": \"python\", \"constraint_scope\": \"case\", \"constraint_type\": \"source_local_context\", \"evidence_refs\": [\"fixture-wangyi-propagation\"], \"evidence_span\": \"\", \"independent\": true, \"reason_code\": \"supplied_passage\", \"status\": \"support\"}"
+          ],
+          "conflicts": [],
+          "identity_propagations": [],
+          "material": true,
+          "new_candidates": [],
+          "new_conflicts": [],
+          "new_evidence": [
+            "fixture-wangyi-propagation"
+          ],
+          "preserved_constraints": [],
+          "removed_candidates": [],
+          "removed_conflicts": [],
+          "unchanged_candidates": [
+            "c0"
+          ],
+          "upgraded_candidates": []
+        },
+        "supporting_refs": [
+          "fixture-wangyi-propagation"
+        ]
+      },
+      "validation": {
+        "errors": [],
+        "evidence_span_failures": 0,
+        "invalid_enum_outputs": [],
+        "invented_id_attempts": [],
+        "valid": true
+      }
+    },
+    {
+      "expected": {
+        "valid": true
+      },
+      "fixture_id": "prior-temporal-preservation",
+      "prior_constraints_preserved": true,
+      "projection": {
+        "candidate_info": {
+          "entity_pids": {
+            "e0": [
+              "person-053"
+            ]
+          },
+          "entity_to_candidate": {
+            "e0": "c0"
+          },
+          "identity_propagations": []
+        },
+        "candidates": [
+          {
+            "candidate_key": "c0",
+            "canonical_name": "王廙",
+            "known_forms": [
+              "王廙"
+            ],
+            "person_id": "person-053"
+          }
+        ],
+        "card": {
+          "assertions": [
+            {
+              "assertion_id": "a0",
+              "assertion_type": "person_mention",
+              "confidence": "high",
+              "direction": null,
+              "evidence_ref": "fixture-prior-temporal",
+              "evidence_span": "王廙",
+              "subject_entity_key": "e0",
+              "value": null
+            }
+          ],
+          "entities": [
+            {
+              "entity_key": "e0",
+              "entity_kind": "named_person",
+              "evidence_ref": "fixture-prior-temporal",
+              "evidence_span": "王廙",
+              "reference_form": "full_name",
+              "surface": "王廙"
+            }
+          ],
+          "summary": "fixture only",
+          "target_entity_key": "e0"
+        },
+        "constraints": [
+          {
+            "candidate_key": "c0",
+            "computed_by": "python_seed_temporal",
+            "constraint_scope": "candidate",
+            "constraint_type": "temporal",
+            "evidence_refs": [
+              "seed-temporal-1"
+            ],
+            "independent": true,
+            "reason_code": "frozen_prior_temporal",
+            "status": "strong_support"
+          },
+          {
+            "assertion_id": "a0",
+            "assertion_side": "subject",
+            "candidate_key": "c0",
+            "computed_by": "python",
+            "constraint_scope": "candidate",
+            "constraint_type": "source_local_context",
+            "evidence_refs": [
+              "fixture-prior-temporal"
+            ],
+            "evidence_span": "王廙",
+            "independent": true,
+            "propagation_rule": null,
+            "reason_code": "validated_assertion:person_mention",
+            "source_entity_key": "e0",
+            "status": "support",
+            "target_entity_key": null
+          },
+          {
+            "assertion_id": null,
+            "candidate_key": null,
+            "computed_by": "python",
+            "constraint_scope": "case",
+            "constraint_type": "source_local_context",
+            "evidence_refs": [
+              "fixture-prior-temporal",
+              "seed-temporal-1"
+            ],
+            "evidence_span": "",
+            "independent": true,
+            "reason_code": "supplied_passage",
+            "status": "support"
+          }
+        ],
+        "graph_action": {
+          "action": "link_existing",
+          "frontier_status": "eligible",
+          "node_type": "existing_person",
+          "person_id": "person-053",
+          "provisional_person_id": null,
+          "reason_codes": [
+            "evidence_card_validated",
+            "hng2_sc1_fixture"
+          ]
+        },
+        "identity_decision": {
+          "canonical_write_back": false,
+          "case_id": "fixture-prior-temporal",
+          "chosen_candidate_key": "c0",
+          "confidence": "high",
+          "decision_summary": "fixture only",
+          "identity_status": "resolved_existing",
+          "new_entity_key": null,
+          "person_id": "person-053",
+          "reason_codes": [
+            "hng2_sc1_fixture"
+          ],
+          "supporting_evidence_refs": [
+            "fixture-prior-temporal"
+          ],
+          "target_entity_key": "e0"
+        },
+        "recommendation": {
+          "chosen_candidate_key": "c0",
+          "confidence": "high",
+          "decision": "choose_candidate",
+          "evidence_spans": [
+            {
+              "ref": "fixture-prior-temporal",
+              "span": "王廙"
+            }
+          ],
+          "new_entity_candidate": null,
+          "new_entity_key": null,
+          "reason_codes": [
+            "hng2_sc1_fixture"
+          ],
+          "summary": "fixture only",
+          "unresolved_reason": ""
+        },
+        "research_gap": {
+          "blocking_question": "",
+          "candidate_keys": [],
+          "missing_constraints": [],
+          "next_best_action": "none",
+          "status": "closed",
+          "stop_condition": "validated candidate has structured source support"
+        },
+        "state_delta": {
+          "added_candidates": [],
+          "added_constraints": [
+            "{\"assertion_id\": \"a0\", \"assertion_side\": \"subject\", \"candidate_key\": \"c0\", \"computed_by\": \"python\", \"constraint_scope\": \"candidate\", \"constraint_type\": \"source_local_context\", \"evidence_refs\": [\"fixture-prior-temporal\"], \"evidence_span\": \"王廙\", \"independent\": true, \"propagation_rule\": null, \"reason_code\": \"validated_assertion:person_mention\", \"source_entity_key\": \"e0\", \"status\": \"support\", \"target_entity_key\": null}",
+            "{\"assertion_id\": null, \"candidate_key\": null, \"computed_by\": \"python\", \"constraint_scope\": \"case\", \"constraint_type\": \"source_local_context\", \"evidence_refs\": [\"fixture-prior-temporal\", \"seed-temporal-1\"], \"evidence_span\": \"\", \"independent\": true, \"reason_code\": \"supplied_passage\", \"status\": \"support\"}"
+          ],
+          "changed_constraints": [
+            "{\"assertion_id\": \"a0\", \"assertion_side\": \"subject\", \"candidate_key\": \"c0\", \"computed_by\": \"python\", \"constraint_scope\": \"candidate\", \"constraint_type\": \"source_local_context\", \"evidence_refs\": [\"fixture-prior-temporal\"], \"evidence_span\": \"王廙\", \"independent\": true, \"propagation_rule\": null, \"reason_code\": \"validated_assertion:person_mention\", \"source_entity_key\": \"e0\", \"status\": \"support\", \"target_entity_key\": null}",
+            "{\"assertion_id\": null, \"candidate_key\": null, \"computed_by\": \"python\", \"constraint_scope\": \"case\", \"constraint_type\": \"source_local_context\", \"evidence_refs\": [\"fixture-prior-temporal\", \"seed-temporal-1\"], \"evidence_span\": \"\", \"independent\": true, \"reason_code\": \"supplied_passage\", \"status\": \"support\"}"
+          ],
+          "conflicts": [],
+          "identity_propagations": [],
+          "material": true,
+          "new_candidates": [],
+          "new_conflicts": [],
+          "new_evidence": [
+            "fixture-prior-temporal"
+          ],
+          "preserved_constraints": [
+            "{\"candidate_key\": \"c0\", \"computed_by\": \"python_seed_temporal\", \"constraint_scope\": \"candidate\", \"constraint_type\": \"temporal\", \"evidence_refs\": [\"seed-temporal-1\"], \"independent\": true, \"reason_code\": \"frozen_prior_temporal\", \"status\": \"strong_support\"}"
+          ],
+          "removed_candidates": [],
+          "removed_conflicts": [],
+          "unchanged_candidates": [
+            "c0"
+          ],
+          "upgraded_candidates": []
+        },
+        "supporting_refs": [
+          "fixture-prior-temporal"
+        ]
+      },
+      "validation": {
+        "errors": [],
+        "evidence_span_failures": 0,
+        "invalid_enum_outputs": [],
+        "invented_id_attempts": [],
+        "valid": true
+      }
+    },
+    {
+      "expected": {
+        "valid": true
+      },
+      "fixture_id": "known-person-candidate-upgrade",
+      "prior_constraints_preserved": true,
+      "projection": {
+        "candidate_info": {
+          "entity_pids": {
+            "e0": [
+              "person-053"
+            ]
+          },
+          "entity_to_candidate": {
+            "e0": "c0"
+          },
+          "identity_propagations": []
+        },
+        "candidates": [
+          {
+            "candidate_key": "c0",
+            "candidate_source": "evidence_card_catalogue_upgrade",
+            "canonical_name": "王廙",
+            "known_forms": [
+              "世將",
+              "王廙"
+            ],
+            "person_id": "person-053"
+          }
+        ],
+        "card": {
+          "assertions": [
+            {
+              "assertion_id": "a0",
+              "assertion_type": "person_mention",
+              "confidence": "high",
+              "direction": null,
+              "evidence_ref": "fixture-known-person-upgrade",
+              "evidence_span": "王廙",
+              "subject_entity_key": "e0",
+              "value": null
+            }
+          ],
+          "entities": [
+            {
+              "entity_key": "e0",
+              "entity_kind": "named_person",
+              "evidence_ref": "fixture-known-person-upgrade",
+              "evidence_span": "王廙",
+              "reference_form": "full_name",
+              "surface": "王廙"
+            }
+          ],
+          "summary": "fixture only",
+          "target_entity_key": "e0"
+        },
+        "constraints": [
+          {
+            "assertion_id": "a0",
+            "assertion_side": "subject",
+            "candidate_key": "c0",
+            "computed_by": "python",
+            "constraint_scope": "candidate",
+            "constraint_type": "source_local_context",
+            "evidence_refs": [
+              "fixture-known-person-upgrade"
+            ],
+            "evidence_span": "王廙",
+            "independent": true,
+            "propagation_rule": null,
+            "reason_code": "validated_assertion:person_mention",
+            "source_entity_key": "e0",
+            "status": "support",
+            "target_entity_key": null
+          },
+          {
+            "assertion_id": null,
+            "candidate_key": null,
+            "computed_by": "python",
+            "constraint_scope": "case",
+            "constraint_type": "source_local_context",
+            "evidence_refs": [
+              "fixture-known-person-upgrade"
+            ],
+            "evidence_span": "",
+            "independent": true,
+            "reason_code": "supplied_passage",
+            "status": "support"
+          }
+        ],
+        "graph_action": {
+          "action": "link_existing",
+          "frontier_status": "eligible",
+          "node_type": "existing_person",
+          "person_id": "person-053",
+          "provisional_person_id": null,
+          "reason_codes": [
+            "evidence_card_validated",
+            "hng2_sc1_fixture"
+          ]
+        },
+        "identity_decision": {
+          "canonical_write_back": false,
+          "case_id": "fixture-known-person-upgrade",
+          "chosen_candidate_key": "c0",
+          "confidence": "high",
+          "decision_summary": "fixture only",
+          "identity_status": "resolved_existing",
+          "new_entity_key": null,
+          "person_id": "person-053",
+          "reason_codes": [
+            "hng2_sc1_fixture"
+          ],
+          "supporting_evidence_refs": [
+            "fixture-known-person-upgrade"
+          ],
+          "target_entity_key": "e0"
+        },
+        "recommendation": {
+          "chosen_candidate_key": "c0",
+          "confidence": "high",
+          "decision": "choose_candidate",
+          "evidence_spans": [
+            {
+              "ref": "fixture-known-person-upgrade",
+              "span": "王廙"
+            }
+          ],
+          "new_entity_candidate": null,
+          "new_entity_key": null,
+          "reason_codes": [
+            "hng2_sc1_fixture"
+          ],
+          "summary": "fixture only",
+          "unresolved_reason": ""
+        },
+        "research_gap": {
+          "blocking_question": "",
+          "candidate_keys": [],
+          "missing_constraints": [],
+          "next_best_action": "none",
+          "status": "closed",
+          "stop_condition": "validated candidate has structured source support"
+        },
+        "state_delta": {
+          "added_candidates": [],
+          "added_constraints": [
+            "{\"assertion_id\": \"a0\", \"assertion_side\": \"subject\", \"candidate_key\": \"c0\", \"computed_by\": \"python\", \"constraint_scope\": \"candidate\", \"constraint_type\": \"source_local_context\", \"evidence_refs\": [\"fixture-known-person-upgrade\"], \"evidence_span\": \"王廙\", \"independent\": true, \"propagation_rule\": null, \"reason_code\": \"validated_assertion:person_mention\", \"source_entity_key\": \"e0\", \"status\": \"support\", \"target_entity_key\": null}",
+            "{\"assertion_id\": null, \"candidate_key\": null, \"computed_by\": \"python\", \"constraint_scope\": \"case\", \"constraint_type\": \"source_local_context\", \"evidence_refs\": [\"fixture-known-person-upgrade\"], \"evidence_span\": \"\", \"independent\": true, \"reason_code\": \"supplied_passage\", \"status\": \"support\"}"
+          ],
+          "changed_constraints": [
+            "{\"assertion_id\": \"a0\", \"assertion_side\": \"subject\", \"candidate_key\": \"c0\", \"computed_by\": \"python\", \"constraint_scope\": \"candidate\", \"constraint_type\": \"source_local_context\", \"evidence_refs\": [\"fixture-known-person-upgrade\"], \"evidence_span\": \"王廙\", \"independent\": true, \"propagation_rule\": null, \"reason_code\": \"validated_assertion:person_mention\", \"source_entity_key\": \"e0\", \"status\": \"support\", \"target_entity_key\": null}",
+            "{\"assertion_id\": null, \"candidate_key\": null, \"computed_by\": \"python\", \"constraint_scope\": \"case\", \"constraint_type\": \"source_local_context\", \"evidence_refs\": [\"fixture-known-person-upgrade\"], \"evidence_span\": \"\", \"independent\": true, \"reason_code\": \"supplied_passage\", \"status\": \"support\"}"
+          ],
+          "conflicts": [],
+          "identity_propagations": [],
+          "material": true,
+          "new_candidates": [],
+          "new_conflicts": [],
+          "new_evidence": [
+            "fixture-known-person-upgrade"
+          ],
+          "preserved_constraints": [],
+          "removed_candidates": [],
+          "removed_conflicts": [],
+          "unchanged_candidates": [],
+          "upgraded_candidates": [
+            "c0"
+          ]
+        },
+        "supporting_refs": [
+          "fixture-known-person-upgrade"
+        ]
+      },
+      "validation": {
+        "errors": [],
+        "evidence_span_failures": 0,
+        "invalid_enum_outputs": [],
+        "invented_id_attempts": [],
+        "valid": true
+      }
+    },
+    {
+      "expected": {
+        "valid": true
+      },
+      "fixture_id": "new-person-transition",
+      "prior_constraints_preserved": true,
+      "projection": {
+        "candidate_info": {
+          "entity_pids": {
+            "e0": []
+          },
+          "entity_to_candidate": {
+            "e0": "c0"
+          },
+          "identity_propagations": []
+        },
+        "candidates": [
+          {
+            "candidate_key": "c0",
+            "candidate_source": "evidence_card_named_person",
+            "canonical_name": "新史人物",
+            "chronology_summary": "",
+            "graph_summary": "",
+            "known_forms": [
+              "新史人物"
+            ],
+            "person_id": null
+          }
+        ],
+        "card": {
+          "assertions": [
+            {
+              "assertion_id": "a0",
+              "assertion_type": "person_mention",
+              "confidence": "high",
+              "direction": null,
+              "evidence_ref": "fixture-new-person",
+              "evidence_span": "新史人物",
+              "subject_entity_key": "e0",
+              "value": null
+            }
+          ],
+          "entities": [
+            {
+              "entity_key": "e0",
+              "entity_kind": "named_person",
+              "evidence_ref": "fixture-new-person",
+              "evidence_span": "新史人物",
+              "reference_form": "full_name",
+              "surface": "新史人物"
+            }
+          ],
+          "summary": "fixture only",
+          "target_entity_key": "e0"
+        },
+        "constraints": [
+          {
+            "assertion_id": "a0",
+            "assertion_side": "subject",
+            "candidate_key": "c0",
+            "computed_by": "python",
+            "constraint_scope": "candidate",
+            "constraint_type": "source_local_context",
+            "evidence_refs": [
+              "fixture-new-person"
+            ],
+            "evidence_span": "新史人物",
+            "independent": true,
+            "propagation_rule": null,
+            "reason_code": "validated_assertion:person_mention",
+            "source_entity_key": "e0",
+            "status": "support",
+            "target_entity_key": null
+          },
+          {
+            "assertion_id": null,
+            "candidate_key": null,
+            "computed_by": "python",
+            "constraint_scope": "case",
+            "constraint_type": "source_local_context",
+            "evidence_refs": [
+              "fixture-new-person"
+            ],
+            "evidence_span": "",
+            "independent": true,
+            "reason_code": "supplied_passage",
+            "status": "support"
+          }
+        ],
+        "graph_action": {
+          "action": "create_provisional_candidate",
+          "frontier_status": "candidate",
+          "node_type": "provisional_person",
+          "person_id": null,
+          "provisional_person_id": "hng2-sc-provisional-f2cd9810ea691bac07b5",
+          "reason_codes": [
+            "evidence_card_new_person",
+            "hng2_sc1_fixture"
+          ]
+        },
+        "identity_decision": {
+          "canonical_write_back": false,
+          "case_id": "fixture-new-person",
+          "chosen_candidate_key": null,
+          "confidence": "high",
+          "decision_summary": "fixture only",
+          "identity_status": "resolved_new_candidate",
+          "new_entity_key": "n0",
+          "person_id": null,
+          "reason_codes": [
+            "hng2_sc1_fixture"
+          ],
+          "supporting_evidence_refs": [
+            "fixture-new-person"
+          ],
+          "target_entity_key": "e0"
+        },
+        "recommendation": {
+          "chosen_candidate_key": null,
+          "confidence": "high",
+          "decision": "new_person_candidate",
+          "evidence_spans": [
+            {
+              "ref": "fixture-new-person",
+              "span": "新史人物"
+            }
+          ],
+          "new_entity_candidate": {
+            "surface": "新史人物"
+          },
+          "new_entity_key": "n0",
+          "reason_codes": [
+            "hng2_sc1_fixture"
+          ],
+          "summary": "fixture only",
+          "unresolved_reason": ""
+        },
+        "research_gap": {
+          "blocking_question": "",
+          "candidate_keys": [],
+          "missing_constraints": [],
+          "next_best_action": "none",
+          "status": "closed",
+          "stop_condition": "named new-person candidate is source-supported"
+        },
+        "state_delta": {
+          "added_candidates": [
+            "c0"
+          ],
+          "added_constraints": [
+            "{\"assertion_id\": \"a0\", \"assertion_side\": \"subject\", \"candidate_key\": \"c0\", \"computed_by\": \"python\", \"constraint_scope\": \"candidate\", \"constraint_type\": \"source_local_context\", \"evidence_refs\": [\"fixture-new-person\"], \"evidence_span\": \"新史人物\", \"independent\": true, \"propagation_rule\": null, \"reason_code\": \"validated_assertion:person_mention\", \"source_entity_key\": \"e0\", \"status\": \"support\", \"target_entity_key\": null}",
+            "{\"assertion_id\": null, \"candidate_key\": null, \"computed_by\": \"python\", \"constraint_scope\": \"case\", \"constraint_type\": \"source_local_context\", \"evidence_refs\": [\"fixture-new-person\"], \"evidence_span\": \"\", \"independent\": true, \"reason_code\": \"supplied_passage\", \"status\": \"support\"}"
+          ],
+          "changed_constraints": [
+            "{\"assertion_id\": \"a0\", \"assertion_side\": \"subject\", \"candidate_key\": \"c0\", \"computed_by\": \"python\", \"constraint_scope\": \"candidate\", \"constraint_type\": \"source_local_context\", \"evidence_refs\": [\"fixture-new-person\"], \"evidence_span\": \"新史人物\", \"independent\": true, \"propagation_rule\": null, \"reason_code\": \"validated_assertion:person_mention\", \"source_entity_key\": \"e0\", \"status\": \"support\", \"target_entity_key\": null}",
+            "{\"assertion_id\": null, \"candidate_key\": null, \"computed_by\": \"python\", \"constraint_scope\": \"case\", \"constraint_type\": \"source_local_context\", \"evidence_refs\": [\"fixture-new-person\"], \"evidence_span\": \"\", \"independent\": true, \"reason_code\": \"supplied_passage\", \"status\": \"support\"}"
+          ],
+          "conflicts": [],
+          "identity_propagations": [],
+          "material": true,
+          "new_candidates": [
+            "c0"
+          ],
+          "new_conflicts": [],
+          "new_evidence": [
+            "fixture-new-person"
+          ],
+          "preserved_constraints": [],
+          "removed_candidates": [],
+          "removed_conflicts": [],
+          "unchanged_candidates": [],
+          "upgraded_candidates": []
+        },
+        "supporting_refs": [
+          "fixture-new-person"
+        ]
+      },
+      "validation": {
+        "errors": [],
+        "evidence_span_failures": 0,
+        "invalid_enum_outputs": [],
+        "invented_id_attempts": [],
+        "valid": true
+      }
+    }
+  ],
+  "metrics": {
+    "api_calls": 0,
+    "candidate_upgrade_count": 1,
+    "canonical_write_back": false,
+    "fixture_count": 8,
+    "fixture_invalid_count": 0,
+    "fixture_valid_count": 8,
+    "hng2_sc07_raw_response_count": 10,
+    "identity_propagation_count": 2,
+    "invalid_cards": 7,
+    "no_frontier_expansion": true,
+    "parse_failures": 0,
+    "prior_temporal_constraint_preserved": true,
+    "reasoning_content_responses_recovered": 3,
+    "resolved_existing_count": 5,
+    "resolved_new_candidate_count": 2,
+    "response_classifications": {
+      "card_validation_failure": 7,
+      "response_truncated": 1,
+      "valid_card": 5
+    },
+    "stage": "hng2-schema-controller-hardening-replay",
+    "target_validation_fixture_count": 8,
+    "truncated_responses": 1,
+    "unresolved_count": 0,
+    "valid_cards": 13
+  },
+  "rows": [
+    {
+      "case_id": "hng2-live-hng2-live-w1-temporal-7787c8e7d9f2c14fc5b5",
+      "classification": "valid_card",
+      "finish_reason": "stop",
+      "parse_error": null,
+      "path": "data/generated/hng2-schema-controller-live/raw-api/20260824T-HNG2-SC-07/002-semantic-hng2-live-hng2-live-w1-temporal-7787c8e7d9f2c14fc5b5.json",
+      "payload_present": true,
+      "prior_constraints_preserved": true,
+      "projection": {
+        "candidate_info": {
+          "entity_pids": {
+            "e0": []
+          },
+          "entity_to_candidate": {
+            "e0": "c0"
+          },
+          "identity_propagations": []
+        },
+        "candidates": [
+          {
+            "candidate_key": "c0",
+            "candidate_source": "evidence_card_named_person",
+            "canonical_name": "何曾",
+            "chronology_summary": "",
+            "graph_summary": "",
+            "known_forms": [
+              "何曾"
+            ],
+            "person_id": null
+          }
+        ],
+        "card": {
+          "assertions": [
+            {
+              "assertion_id": "a0",
+              "assertion_type": "person_mention",
+              "confidence": "high",
+              "evidence_ref": "hng02-jinshu-wikisource-punctuated-003",
+              "evidence_span": "何曾等固爭曰",
+              "subject_entity_key": "e0"
+            },
+            {
+              "assertion_id": "a1",
+              "assertion_type": "participates_in_event",
+              "confidence": "high",
+              "evidence_ref": "hng02-jinshu-wikisource-punctuated-003",
+              "evidence_span": "何曾等固爭曰",
+              "subject_entity_key": "e0",
+              "value": "固爭立世子之事"
+            }
+          ],
+          "entities": [
+            {
+              "entity_key": "e0",
+              "entity_kind": "named_person",
+              "evidence_ref": "hng02-jinshu-wikisource-punctuated-003",
+              "evidence_span": "何曾等固爭曰",
+              "reference_form": "full_name",
+              "surface": "何曾"
+            }
+          ],
+          "summary": "",
+          "target_entity_key": null
+        },
+        "constraints": [
+          {
+            "assertion_id": "a0",
+            "assertion_side": "subject",
+            "candidate_key": "c0",
+            "computed_by": "python",
+            "constraint_scope": "candidate",
+            "constraint_type": "source_local_context",
+            "evidence_refs": [
+              "hng02-jinshu-wikisource-punctuated-003"
+            ],
+            "evidence_span": "何曾等固爭曰",
+            "independent": true,
+            "propagation_rule": null,
+            "reason_code": "validated_assertion:person_mention",
+            "source_entity_key": "e0",
+            "status": "support",
+            "target_entity_key": null
+          },
+          {
+            "assertion_id": "a1",
+            "assertion_side": "subject",
+            "candidate_key": "c0",
+            "computed_by": "python",
+            "constraint_scope": "candidate",
+            "constraint_type": "event",
+            "evidence_refs": [
+              "hng02-jinshu-wikisource-punctuated-003"
+            ],
+            "evidence_span": "何曾等固爭曰",
+            "independent": true,
+            "propagation_rule": null,
+            "reason_code": "validated_assertion:participates_in_event",
+            "source_entity_key": "e0",
+            "status": "support",
+            "target_entity_key": null
+          },
+          {
+            "assertion_id": null,
+            "candidate_key": null,
+            "computed_by": "python",
+            "constraint_scope": "case",
+            "constraint_type": "source_local_context",
+            "evidence_refs": [
+              "hng02-jinshu-wikisource-punctuated-003",
+              "hng02-jinshu-wikisource-punctuated-024",
+              "hng02-jinshu-wikisource-punctuated-028",
+              "hng02-jinshu-wikisource-punctuated-030"
+            ],
+            "evidence_span": "",
+            "independent": true,
+            "reason_code": "supplied_passage",
+            "status": "support"
+          }
+        ],
+        "graph_action": {
+          "action": "hold_for_review",
+          "frontier_status": "needs_semantic_parse",
+          "node_type": "none",
+          "person_id": null,
+          "provisional_person_id": null,
+          "reason_codes": [
+            "unresolved_recommendation",
+            "no_candidate_provided"
+          ]
+        },
+        "identity_decision": {
+          "canonical_write_back": false,
+          "case_id": "hng2-live-hng2-live-w1-temporal-7787c8e7d9f2c14fc5b5",
+          "chosen_candidate_key": null,
+          "confidence": "unknown",
+          "decision_summary": "The surface is a clear named person mention, but without candidate list, identity remains unresolved.",
+          "identity_status": "unresolved",
+          "new_entity_key": null,
+          "person_id": null,
+          "reason_codes": [
+            "no_candidate_provided"
+          ],
+          "supporting_evidence_refs": [
+            "hng02-jinshu-wikisource-punctuated-003"
+          ],
+          "target_entity_key": null
+        },
+        "recommendation": {
+          "chosen_candidate_key": null,
+          "confidence": "unknown",
+          "decision": "unresolved",
+          "evidence_spans": [
+            {
+              "ref": "hng02-jinshu-wikisource-punctuated-003",
+              "span": "何曾等固爭曰"
+            }
+          ],
+          "new_entity_candidate": null,
+          "new_entity_key": null,
+          "reason_codes": [
+            "no_candidate_provided"
+          ],
+          "summary": "The surface is a clear named person mention, but without candidate list, identity remains unresolved.",
+          "unresolved_reason": "No candidate keys were provided in the input, so identity cannot be resolved."
+        },
+        "research_gap": {
+          "blocking_question": "What source-local evidence identifies this surface?",
+          "candidate_keys": [
+            "c0"
+          ],
+          "missing_constraints": [
+            "identity_evidence"
+          ],
+          "next_best_action": "search_biography_context",
+          "status": "open",
+          "stop_condition": "stop when an exact or structurally explicit identity is found"
+        },
+        "state_delta": {
+          "added_candidates": [
+            "c0"
+          ],
+          "added_constraints": [
+            "{\"assertion_id\": \"a0\", \"assertion_side\": \"subject\", \"candidate_key\": \"c0\", \"computed_by\": \"python\", \"constraint_scope\": \"candidate\", \"constraint_type\": \"source_local_context\", \"evidence_refs\": [\"hng02-jinshu-wikisource-punctuated-003\"], \"evidence_span\": \"何曾等固爭曰\", \"independent\": true, \"propagation_rule\": null, \"reason_code\": \"validated_assertion:person_mention\", \"source_entity_key\": \"e0\", \"status\": \"support\", \"target_entity_key\": null}",
+            "{\"assertion_id\": \"a1\", \"assertion_side\": \"subject\", \"candidate_key\": \"c0\", \"computed_by\": \"python\", \"constraint_scope\": \"candidate\", \"constraint_type\": \"event\", \"evidence_refs\": [\"hng02-jinshu-wikisource-punctuated-003\"], \"evidence_span\": \"何曾等固爭曰\", \"independent\": true, \"propagation_rule\": null, \"reason_code\": \"validated_assertion:participates_in_event\", \"source_entity_key\": \"e0\", \"status\": \"support\", \"target_entity_key\": null}",
+            "{\"assertion_id\": null, \"candidate_key\": null, \"computed_by\": \"python\", \"constraint_scope\": \"case\", \"constraint_type\": \"source_local_context\", \"evidence_refs\": [\"hng02-jinshu-wikisource-punctuated-003\", \"hng02-jinshu-wikisource-punctuated-024\", \"hng02-jinshu-wikisource-punctuated-028\", \"hng02-jinshu-wikisource-punctuated-030\"], \"evidence_span\": \"\", \"independent\": true, \"reason_code\": \"supplied_passage\", \"status\": \"support\"}"
+          ],
+          "changed_constraints": [
+            "{\"assertion_id\": \"a0\", \"assertion_side\": \"subject\", \"candidate_key\": \"c0\", \"computed_by\": \"python\", \"constraint_scope\": \"candidate\", \"constraint_type\": \"source_local_context\", \"evidence_refs\": [\"hng02-jinshu-wikisource-punctuated-003\"], \"evidence_span\": \"何曾等固爭曰\", \"independent\": true, \"propagation_rule\": null, \"reason_code\": \"validated_assertion:person_mention\", \"source_entity_key\": \"e0\", \"status\": \"support\", \"target_entity_key\": null}",
+            "{\"assertion_id\": \"a1\", \"assertion_side\": \"subject\", \"candidate_key\": \"c0\", \"computed_by\": \"python\", \"constraint_scope\": \"candidate\", \"constraint_type\": \"event\", \"evidence_refs\": [\"hng02-jinshu-wikisource-punctuated-003\"], \"evidence_span\": \"何曾等固爭曰\", \"independent\": true, \"propagation_rule\": null, \"reason_code\": \"validated_assertion:participates_in_event\", \"source_entity_key\": \"e0\", \"status\": \"support\", \"target_entity_key\": null}",
+            "{\"assertion_id\": null, \"candidate_key\": null, \"computed_by\": \"python\", \"constraint_scope\": \"case\", \"constraint_type\": \"source_local_context\", \"evidence_refs\": [\"hng02-jinshu-wikisource-punctuated-003\", \"hng02-jinshu-wikisource-punctuated-024\", \"hng02-jinshu-wikisource-punctuated-028\", \"hng02-jinshu-wikisource-punctuated-030\"], \"evidence_span\": \"\", \"independent\": true, \"reason_code\": \"supplied_passage\", \"status\": \"support\"}"
+          ],
+          "conflicts": [],
+          "identity_propagations": [],
+          "material": true,
+          "new_candidates": [
+            "c0"
+          ],
+          "new_conflicts": [],
+          "new_evidence": [
+            "hng02-jinshu-wikisource-punctuated-003"
+          ],
+          "preserved_constraints": [],
+          "removed_candidates": [],
+          "removed_conflicts": [],
+          "unchanged_candidates": [],
+          "upgraded_candidates": []
+        },
+        "supporting_refs": [
+          "hng02-jinshu-wikisource-punctuated-003"
+        ]
+      },
+      "response_channel": "content",
+      "sequence": 2,
+      "source_run": "HNG2-SC-07",
+      "validation": {
+        "errors": [],
+        "evidence_span_failures": 0,
+        "invalid_enum_outputs": [],
+        "invented_id_attempts": [],
+        "valid": true
+      }
+    },
+    {
+      "case_id": "hng2-live-hng2-live-w1-temporal-7787c8e7d9f2c14fc5b5",
+      "classification": "card_validation_failure",
+      "finish_reason": "stop",
+      "parse_error": null,
+      "path": "data/generated/hng2-schema-controller-live/raw-api/20260824T-HNG2-SC-07/004-semantic-hng2-live-hng2-live-w1-temporal-7787c8e7d9f2c14fc5b5.json",
+      "payload_present": true,
+      "response_channel": "content",
+      "sequence": 4,
+      "source_run": "HNG2-SC-07",
+      "validation": {
+        "errors": [
+          "invented_candidate_key:c0"
+        ],
+        "evidence_span_failures": 0,
+        "invalid_enum_outputs": [],
+        "invented_id_attempts": [],
+        "valid": false
+      }
+    },
+    {
+      "case_id": "hng2-hng02-relation-35297c7dc00a768062fe",
+      "classification": "valid_card",
+      "finish_reason": "stop",
+      "parse_error": null,
+      "path": "data/generated/hng2-schema-controller-live/raw-api/20260824T-HNG2-SC-07/005-semantic-hng2-hng02-relation-35297c7dc00a768062fe.json",
+      "payload_present": true,
+      "prior_constraints_preserved": true,
+      "projection": {
+        "candidate_info": {
+          "entity_pids": {
+            "e0": []
+          },
+          "entity_to_candidate": {
+            "e0": "c0"
+          },
+          "identity_propagations": []
+        },
+        "candidates": [
+          {
+            "candidate_key": "c0",
+            "candidate_source": "evidence_card_named_person",
+            "canonical_name": "簡文皇帝",
+            "chronology_summary": "",
+            "graph_summary": "",
+            "known_forms": [
+              "簡文皇帝"
+            ],
+            "person_id": null
+          }
+        ],
+        "card": {
+          "assertions": [
+            {
+              "assertion_id": "a0",
+              "assertion_type": "title_of",
+              "confidence": "high",
+              "direction": null,
+              "evidence_ref": "hng02-jinshu-wikisource-punctuated-009",
+              "evidence_span": "簡文皇帝",
+              "object_entity_key": null,
+              "subject_entity_key": "e0",
+              "value": "簡文皇帝"
+            }
+          ],
+          "entities": [
+            {
+              "entity_key": "e0",
+              "entity_kind": "person_title",
+              "evidence_ref": "hng02-jinshu-wikisource-punctuated-009",
+              "evidence_span": "簡文皇帝",
+              "reference_form": "title_only",
+              "surface": "簡文皇帝"
+            }
+          ],
+          "summary": "",
+          "target_entity_key": null
+        },
+        "constraints": [
+          {
+            "assertion_id": "a0",
+            "assertion_side": "subject",
+            "candidate_key": "c0",
+            "computed_by": "python",
+            "constraint_scope": "candidate",
+            "constraint_type": "title",
+            "evidence_refs": [
+              "hng02-jinshu-wikisource-punctuated-009"
+            ],
+            "evidence_span": "簡文皇帝",
+            "independent": true,
+            "propagation_rule": null,
+            "reason_code": "validated_assertion:title_of",
+            "source_entity_key": "e0",
+            "status": "support",
+            "target_entity_key": null
+          },
+          {
+            "assertion_id": null,
+            "candidate_key": null,
+            "computed_by": "python",
+            "constraint_scope": "case",
+            "constraint_type": "source_local_context",
+            "evidence_refs": [
+              "hng02-jinshu-wikisource-punctuated-009"
+            ],
+            "evidence_span": "",
+            "independent": true,
+            "reason_code": "supplied_passage",
+            "status": "support"
+          }
+        ],
+        "graph_action": {
+          "action": "hold_for_review",
+          "frontier_status": "needs_semantic_parse",
+          "node_type": "none",
+          "person_id": null,
+          "provisional_person_id": null,
+          "reason_codes": [
+            "unresolved_recommendation",
+            "no_candidate",
+            "title_only"
+          ]
+        },
+        "identity_decision": {
+          "canonical_write_back": false,
+          "case_id": "hng2-hng02-relation-35297c7dc00a768062fe",
+          "chosen_candidate_key": null,
+          "confidence": "unknown",
+          "decision_summary": "The title '簡文皇帝' is a title-only expression; without candidate list or additional context, identity cannot be resolved.",
+          "identity_status": "unresolved",
+          "new_entity_key": null,
+          "person_id": null,
+          "reason_codes": [
+            "no_candidate",
+            "title_only"
+          ],
+          "supporting_evidence_refs": [
+            "hng02-jinshu-wikisource-punctuated-009"
+          ],
+          "target_entity_key": null
+        },
+        "recommendation": {
+          "chosen_candidate_key": null,
+          "confidence": "unknown",
+          "decision": "unresolved",
+          "evidence_spans": [
+            {
+              "ref": "hng02-jinshu-wikisource-punctuated-009",
+              "span": "簡文皇帝"
+            }
+          ],
+          "new_entity_candidate": null,
+          "new_entity_key": null,
+          "reason_codes": [
+            "no_candidate",
+            "title_only"
+          ],
+          "summary": "The title '簡文皇帝' is a title-only expression; without candidate list or additional context, identity cannot be resolved.",
+          "unresolved_reason": "The title '簡文皇帝' denotes a historical person, but no candidate list is provided and the passage does not give a full name or unambiguous identification."
+        },
+        "research_gap": {
+          "blocking_question": "Which historical person does this title denote in this passage?",
+          "candidate_keys": [
+            "c0"
+          ],
+          "missing_constraints": [
+            "title_identity"
+          ],
+          "next_best_action": "search_title_identity",
+          "status": "open",
+          "stop_condition": "stop when one context-compatible person is independently supported"
+        },
+        "state_delta": {
+          "added_candidates": [
+            "c0"
+          ],
+          "added_constraints": [
+            "{\"assertion_id\": \"a0\", \"assertion_side\": \"subject\", \"candidate_key\": \"c0\", \"computed_by\": \"python\", \"constraint_scope\": \"candidate\", \"constraint_type\": \"title\", \"evidence_refs\": [\"hng02-jinshu-wikisource-punctuated-009\"], \"evidence_span\": \"簡文皇帝\", \"independent\": true, \"propagation_rule\": null, \"reason_code\": \"validated_assertion:title_of\", \"source_entity_key\": \"e0\", \"status\": \"support\", \"target_entity_key\": null}",
+            "{\"assertion_id\": null, \"candidate_key\": null, \"computed_by\": \"python\", \"constraint_scope\": \"case\", \"constraint_type\": \"source_local_context\", \"evidence_refs\": [\"hng02-jinshu-wikisource-punctuated-009\"], \"evidence_span\": \"\", \"independent\": true, \"reason_code\": \"supplied_passage\", \"status\": \"support\"}"
+          ],
+          "changed_constraints": [
+            "{\"assertion_id\": \"a0\", \"assertion_side\": \"subject\", \"candidate_key\": \"c0\", \"computed_by\": \"python\", \"constraint_scope\": \"candidate\", \"constraint_type\": \"title\", \"evidence_refs\": [\"hng02-jinshu-wikisource-punctuated-009\"], \"evidence_span\": \"簡文皇帝\", \"independent\": true, \"propagation_rule\": null, \"reason_code\": \"validated_assertion:title_of\", \"source_entity_key\": \"e0\", \"status\": \"support\", \"target_entity_key\": null}",
+            "{\"assertion_id\": null, \"candidate_key\": null, \"computed_by\": \"python\", \"constraint_scope\": \"case\", \"constraint_type\": \"source_local_context\", \"evidence_refs\": [\"hng02-jinshu-wikisource-punctuated-009\"], \"evidence_span\": \"\", \"independent\": true, \"reason_code\": \"supplied_passage\", \"status\": \"support\"}"
+          ],
+          "conflicts": [],
+          "identity_propagations": [],
+          "material": true,
+          "new_candidates": [
+            "c0"
+          ],
+          "new_conflicts": [],
+          "new_evidence": [
+            "hng02-jinshu-wikisource-punctuated-009"
+          ],
+          "preserved_constraints": [],
+          "removed_candidates": [],
+          "removed_conflicts": [],
+          "unchanged_candidates": [],
+          "upgraded_candidates": []
+        },
+        "supporting_refs": [
+          "hng02-jinshu-wikisource-punctuated-009"
+        ]
+      },
+      "response_channel": "content",
+      "sequence": 5,
+      "source_run": "HNG2-SC-07",
+      "validation": {
+        "errors": [],
+        "evidence_span_failures": 0,
+        "invalid_enum_outputs": [],
+        "invented_id_attempts": [],
+        "valid": true
+      }
+    },
+    {
+      "case_id": "hng2-hng02-relation-35297c7dc00a768062fe",
+      "classification": "card_validation_failure",
+      "finish_reason": "stop",
+      "parse_error": null,
+      "path": "data/generated/hng2-schema-controller-live/raw-api/20260824T-HNG2-SC-07/007-semantic-hng2-hng02-relation-35297c7dc00a768062fe.json",
+      "payload_present": true,
+      "response_channel": "content",
+      "sequence": 7,
+      "source_run": "HNG2-SC-07",
+      "validation": {
+        "errors": [
+          "invented_candidate_key:c0"
+        ],
+        "evidence_span_failures": 0,
+        "invalid_enum_outputs": [],
+        "invented_id_attempts": [],
+        "valid": false
+      }
+    },
+    {
+      "case_id": "hng1r2-hng1-raw-relation-2ff2066d8872cbae15f7",
+      "classification": "card_validation_failure",
+      "finish_reason": "stop",
+      "parse_error": null,
+      "path": "data/generated/hng2-schema-controller-live/raw-api/20260824T-HNG2-SC-07/008-semantic-hng1r2-hng1-raw-relation-2ff2066d8872cbae15f7.json",
+      "payload_present": true,
+      "response_channel": "content",
+      "sequence": 8,
+      "source_run": "HNG2-SC-07",
+      "validation": {
+        "errors": [
+          "reference_form:courtesy_name",
+          "reference_form:surname_only",
+          "reference_form:title_plus_surname"
+        ],
+        "evidence_span_failures": 0,
+        "invalid_enum_outputs": [
+          "reference_form:courtesy_name",
+          "reference_form:surname_only",
+          "reference_form:title_plus_surname"
+        ],
+        "invented_id_attempts": [],
+        "valid": false
+      }
+    },
+    {
+      "case_id": "hng2-hng02-relation-53df6f655bff9d79d0c5",
+      "classification": "valid_card",
+      "finish_reason": "stop",
+      "parse_error": null,
+      "path": "data/generated/hng2-schema-controller-live/raw-api/20260824T-HNG2-SC-07/009-semantic-hng2-hng02-relation-53df6f655bff9d79d0c5.json",
+      "payload_present": true,
+      "prior_constraints_preserved": true,
+      "projection": {
+        "candidate_info": {
+          "entity_pids": {
+            "e0": []
+          },
+          "entity_to_candidate": {},
+          "identity_propagations": []
+        },
+        "candidates": [],
+        "card": {
+          "assertions": [
+            {
+              "assertion_id": "a0",
+              "assertion_type": "office_held_by",
+              "confidence": "high",
+              "direction": null,
+              "evidence_ref": "hng02-zizhi-tongjian-wikisource-hu-162",
+              "evidence_span": "湘州刺史河東王譽",
+              "object_entity_key": null,
+              "subject_entity_key": "e0",
+              "value": "湘州刺史"
+            },
+            {
+              "assertion_id": "a1",
+              "assertion_type": "title_of",
+              "confidence": "high",
+              "direction": null,
+              "evidence_ref": "hng02-zizhi-tongjian-wikisource-hu-162",
+              "evidence_span": "河東王譽",
+              "object_entity_key": null,
+              "subject_entity_key": "e0",
+              "value": "河東王"
+            },
+            {
+              "assertion_id": "a2",
+              "assertion_type": "participates_in_event",
+              "confidence": "high",
+              "direction": null,
+              "evidence_ref": "hng02-zizhi-tongjian-wikisource-hu-162",
+              "evidence_span": "譽軍於青草湖",
+              "object_entity_key": null,
+              "subject_entity_key": "e0",
+              "value": "軍於青草湖"
+            }
+          ],
+          "entities": [
+            {
+              "entity_key": "e0",
+              "entity_kind": "abbreviated_name",
+              "evidence_ref": "hng02-zizhi-tongjian-wikisource-hu-162",
+              "evidence_span": "湘州刺史河東王譽軍於青草湖",
+              "reference_form": "abbreviated",
+              "surface": "譽"
+            }
+          ],
+          "summary": "",
+          "target_entity_key": null
+        },
+        "constraints": [
+          {
+            "assertion_id": "a0",
+            "assertion_side": "subject",
+            "candidate_key": null,
+            "computed_by": "python",
+            "constraint_scope": "passage",
+            "constraint_type": "office",
+            "evidence_refs": [
+              "hng02-zizhi-tongjian-wikisource-hu-162"
+            ],
+            "evidence_span": "湘州刺史河東王譽",
+            "independent": true,
+            "propagation_rule": null,
+            "reason_code": "unbound_assertion:office_held_by",
+            "source_entity_key": "e0",
+            "status": "support",
+            "target_entity_key": null
+          },
+          {
+            "assertion_id": "a1",
+            "assertion_side": "subject",
+            "candidate_key": null,
+            "computed_by": "python",
+            "constraint_scope": "passage",
+            "constraint_type": "title",
+            "evidence_refs": [
+              "hng02-zizhi-tongjian-wikisource-hu-162"
+            ],
+            "evidence_span": "河東王譽",
+            "independent": true,
+            "propagation_rule": null,
+            "reason_code": "unbound_assertion:title_of",
+            "source_entity_key": "e0",
+            "status": "support",
+            "target_entity_key": null
+          },
+          {
+            "assertion_id": "a2",
+            "assertion_side": "subject",
+            "candidate_key": null,
+            "computed_by": "python",
+            "constraint_scope": "passage",
+            "constraint_type": "event",
+            "evidence_refs": [
+              "hng02-zizhi-tongjian-wikisource-hu-162"
+            ],
+            "evidence_span": "譽軍於青草湖",
+            "independent": true,
+            "propagation_rule": null,
+            "reason_code": "unbound_assertion:participates_in_event",
+            "source_entity_key": "e0",
+            "status": "support",
+            "target_entity_key": null
+          },
+          {
+            "assertion_id": null,
+            "candidate_key": null,
+            "computed_by": "python",
+            "constraint_scope": "case",
+            "constraint_type": "source_local_context",
+            "evidence_refs": [
+              "hng02-zizhi-tongjian-wikisource-hu-162"
+            ],
+            "evidence_span": "",
+            "independent": true,
+            "reason_code": "supplied_passage",
+            "status": "support"
+          }
+        ],
+        "graph_action": {
+          "action": "hold_for_review",
+          "frontier_status": "needs_semantic_parse",
+          "node_type": "none",
+          "person_id": null,
+          "provisional_person_id": null,
+          "reason_codes": [
+            "unresolved_recommendation",
+            "no_candidate_list",
+            "insufficient_identity_evidence"
+          ]
+        },
+        "identity_decision": {
+          "canonical_write_back": false,
+          "case_id": "hng2-hng02-relation-53df6f655bff9d79d0c5",
+          "chosen_candidate_key": null,
+          "confidence": "unknown",
+          "decision_summary": "The surface '譽' is an abbreviated name for a person with title 河東王 and office 湘州刺史. Without candidate list or full name, identity remains unresolved.",
+          "identity_status": "unresolved",
+          "new_entity_key": null,
+          "person_id": null,
+          "reason_codes": [
+            "no_candidate_list",
+            "insufficient_identity_evidence"
+          ],
+          "supporting_evidence_refs": [
+            "hng02-zizhi-tongjian-wikisource-hu-162"
+          ],
+          "target_entity_key": null
+        },
+        "recommendation": {
+          "chosen_candidate_key": null,
+          "confidence": "unknown",
+          "decision": "unresolved",
+          "evidence_spans": [
+            {
+              "ref": "hng02-zizhi-tongjian-wikisource-hu-162",
+              "span": "湘州刺史河東王譽軍於青草湖"
+            }
+          ],
+          "new_entity_candidate": null,
+          "new_entity_key": null,
+          "reason_codes": [
+            "no_candidate_list",
+            "insufficient_identity_evidence"
+          ],
+          "summary": "The surface '譽' is an abbreviated name for a person with title 河東王 and office 湘州刺史. Without candidate list or full name, identity remains unresolved.",
+          "unresolved_reason": "No candidate keys were provided, and the surface '譽' is an abbreviated form. The full name is not given in the passage, so identity cannot be resolved without additional context."
+        },
+        "research_gap": {
+          "blocking_question": "What source-local evidence identifies this surface?",
+          "candidate_keys": [],
+          "missing_constraints": [
+            "identity_evidence"
+          ],
+          "next_best_action": "search_biography_context",
+          "status": "open",
+          "stop_condition": "stop when an exact or structurally explicit identity is found"
+        },
+        "state_delta": {
+          "added_candidates": [],
+          "added_constraints": [
+            "{\"assertion_id\": \"a0\", \"assertion_side\": \"subject\", \"candidate_key\": null, \"computed_by\": \"python\", \"constraint_scope\": \"passage\", \"constraint_type\": \"office\", \"evidence_refs\": [\"hng02-zizhi-tongjian-wikisource-hu-162\"], \"evidence_span\": \"湘州刺史河東王譽\", \"independent\": true, \"propagation_rule\": null, \"reason_code\": \"unbound_assertion:office_held_by\", \"source_entity_key\": \"e0\", \"status\": \"support\", \"target_entity_key\": null}",
+            "{\"assertion_id\": \"a1\", \"assertion_side\": \"subject\", \"candidate_key\": null, \"computed_by\": \"python\", \"constraint_scope\": \"passage\", \"constraint_type\": \"title\", \"evidence_refs\": [\"hng02-zizhi-tongjian-wikisource-hu-162\"], \"evidence_span\": \"河東王譽\", \"independent\": true, \"propagation_rule\": null, \"reason_code\": \"unbound_assertion:title_of\", \"source_entity_key\": \"e0\", \"status\": \"support\", \"target_entity_key\": null}",
+            "{\"assertion_id\": \"a2\", \"assertion_side\": \"subject\", \"candidate_key\": null, \"computed_by\": \"python\", \"constraint_scope\": \"passage\", \"constraint_type\": \"event\", \"evidence_refs\": [\"hng02-zizhi-tongjian-wikisource-hu-162\"], \"evidence_span\": \"譽軍於青草湖\", \"independent\": true, \"propagation_rule\": null, \"reason_code\": \"unbound_assertion:participates_in_event\", \"source_entity_key\": \"e0\", \"status\": \"support\", \"target_entity_key\": null}",
+            "{\"assertion_id\": null, \"candidate_key\": null, \"computed_by\": \"python\", \"constraint_scope\": \"case\", \"constraint_type\": \"source_local_context\", \"evidence_refs\": [\"hng02-zizhi-tongjian-wikisource-hu-162\"], \"evidence_span\": \"\", \"independent\": true, \"reason_code\": \"supplied_passage\", \"status\": \"support\"}"
+          ],
+          "changed_constraints": [
+            "{\"assertion_id\": \"a0\", \"assertion_side\": \"subject\", \"candidate_key\": null, \"computed_by\": \"python\", \"constraint_scope\": \"passage\", \"constraint_type\": \"office\", \"evidence_refs\": [\"hng02-zizhi-tongjian-wikisource-hu-162\"], \"evidence_span\": \"湘州刺史河東王譽\", \"independent\": true, \"propagation_rule\": null, \"reason_code\": \"unbound_assertion:office_held_by\", \"source_entity_key\": \"e0\", \"status\": \"support\", \"target_entity_key\": null}",
+            "{\"assertion_id\": \"a1\", \"assertion_side\": \"subject\", \"candidate_key\": null, \"computed_by\": \"python\", \"constraint_scope\": \"passage\", \"constraint_type\": \"title\", \"evidence_refs\": [\"hng02-zizhi-tongjian-wikisource-hu-162\"], \"evidence_span\": \"河東王譽\", \"independent\": true, \"propagation_rule\": null, \"reason_code\": \"unbound_assertion:title_of\", \"source_entity_key\": \"e0\", \"status\": \"support\", \"target_entity_key\": null}",
+            "{\"assertion_id\": \"a2\", \"assertion_side\": \"subject\", \"candidate_key\": null, \"computed_by\": \"python\", \"constraint_scope\": \"passage\", \"constraint_type\": \"event\", \"evidence_refs\": [\"hng02-zizhi-tongjian-wikisource-hu-162\"], \"evidence_span\": \"譽軍於青草湖\", \"independent\": true, \"propagation_rule\": null, \"reason_code\": \"unbound_assertion:participates_in_event\", \"source_entity_key\": \"e0\", \"status\": \"support\", \"target_entity_key\": null}",
+            "{\"assertion_id\": null, \"candidate_key\": null, \"computed_by\": \"python\", \"constraint_scope\": \"case\", \"constraint_type\": \"source_local_context\", \"evidence_refs\": [\"hng02-zizhi-tongjian-wikisource-hu-162\"], \"evidence_span\": \"\", \"independent\": true, \"reason_code\": \"supplied_passage\", \"status\": \"support\"}"
+          ],
+          "conflicts": [],
+          "identity_propagations": [],
+          "material": true,
+          "new_candidates": [],
+          "new_conflicts": [],
+          "new_evidence": [
+            "hng02-zizhi-tongjian-wikisource-hu-162"
+          ],
+          "preserved_constraints": [],
+          "removed_candidates": [],
+          "removed_conflicts": [],
+          "unchanged_candidates": [],
+          "upgraded_candidates": []
+        },
+        "supporting_refs": [
+          "hng02-zizhi-tongjian-wikisource-hu-162"
+        ]
+      },
+      "response_channel": "content",
+      "sequence": 9,
+      "source_run": "HNG2-SC-07",
+      "validation": {
+        "errors": [],
+        "evidence_span_failures": 0,
+        "invalid_enum_outputs": [],
+        "invented_id_attempts": [],
+        "valid": true
+      }
+    },
+    {
+      "case_id": "hng2-hng02-relation-53df6f655bff9d79d0c5",
+      "classification": "valid_card",
+      "finish_reason": "stop",
+      "parse_error": null,
+      "path": "data/generated/hng2-schema-controller-live/raw-api/20260824T-HNG2-SC-07/011-semantic-hng2-hng02-relation-53df6f655bff9d79d0c5.json",
+      "payload_present": true,
+      "prior_constraints_preserved": true,
+      "projection": {
+        "candidate_info": {
+          "entity_pids": {
+            "e0": []
+          },
+          "entity_to_candidate": {},
+          "identity_propagations": []
+        },
+        "candidates": [],
+        "card": {
+          "assertions": [
+            {
+              "assertion_id": "a0",
+              "assertion_type": "office_held_by",
+              "confidence": "high",
+              "evidence_ref": "hng02-zizhi-tongjian-wikisource-hu-162",
+              "evidence_span": "湘州刺史河東王譽",
+              "subject_entity_key": "e0",
+              "value": "湘州刺史"
+            },
+            {
+              "assertion_id": "a1",
+              "assertion_type": "title_of",
+              "confidence": "high",
+              "evidence_ref": "hng02-zizhi-tongjian-wikisource-hu-162",
+              "evidence_span": "河東王譽",
+              "subject_entity_key": "e0",
+              "value": "河東王"
+            },
+            {
+              "assertion_id": "a2",
+              "assertion_type": "participates_in_event",
+              "confidence": "high",
+              "evidence_ref": "hng02-zizhi-tongjian-wikisource-hu-162",
+              "evidence_span": "譽軍於青草湖",
+              "subject_entity_key": "e0",
+              "value": "軍於青草湖"
+            }
+          ],
+          "entities": [
+            {
+              "entity_key": "e0",
+              "entity_kind": "abbreviated_name",
+              "evidence_ref": "hng02-zizhi-tongjian-wikisource-hu-162",
+              "evidence_span": "湘州刺史河東王譽軍於青草湖",
+              "reference_form": "abbreviated",
+              "surface": "譽"
+            }
+          ],
+          "summary": "",
+          "target_entity_key": null
+        },
+        "constraints": [
+          {
+            "assertion_id": "a0",
+            "assertion_side": "subject",
+            "candidate_key": null,
+            "computed_by": "python",
+            "constraint_scope": "passage",
+            "constraint_type": "office",
+            "evidence_refs": [
+              "hng02-zizhi-tongjian-wikisource-hu-162"
+            ],
+            "evidence_span": "湘州刺史河東王譽",
+            "independent": true,
+            "propagation_rule": null,
+            "reason_code": "unbound_assertion:office_held_by",
+            "source_entity_key": "e0",
+            "status": "support",
+            "target_entity_key": null
+          },
+          {
+            "assertion_id": "a1",
+            "assertion_side": "subject",
+            "candidate_key": null,
+            "computed_by": "python",
+            "constraint_scope": "passage",
+            "constraint_type": "title",
+            "evidence_refs": [
+              "hng02-zizhi-tongjian-wikisource-hu-162"
+            ],
+            "evidence_span": "河東王譽",
+            "independent": true,
+            "propagation_rule": null,
+            "reason_code": "unbound_assertion:title_of",
+            "source_entity_key": "e0",
+            "status": "support",
+            "target_entity_key": null
+          },
+          {
+            "assertion_id": "a2",
+            "assertion_side": "subject",
+            "candidate_key": null,
+            "computed_by": "python",
+            "constraint_scope": "passage",
+            "constraint_type": "event",
+            "evidence_refs": [
+              "hng02-zizhi-tongjian-wikisource-hu-162"
+            ],
+            "evidence_span": "譽軍於青草湖",
+            "independent": true,
+            "propagation_rule": null,
+            "reason_code": "unbound_assertion:participates_in_event",
+            "source_entity_key": "e0",
+            "status": "support",
+            "target_entity_key": null
+          },
+          {
+            "assertion_id": null,
+            "candidate_key": null,
+            "computed_by": "python",
+            "constraint_scope": "case",
+            "constraint_type": "source_local_context",
+            "evidence_refs": [
+              "hng02-zizhi-tongjian-wikisource-hu-162"
+            ],
+            "evidence_span": "",
+            "independent": true,
+            "reason_code": "supplied_passage",
+            "status": "support"
+          }
+        ],
+        "graph_action": {
+          "action": "hold_for_review",
+          "frontier_status": "needs_semantic_parse",
+          "node_type": "none",
+          "person_id": null,
+          "provisional_person_id": null,
+          "reason_codes": [
+            "unresolved_recommendation",
+            "no_candidate_list",
+            "insufficient_identity_evidence"
+          ]
+        },
+        "identity_decision": {
+          "canonical_write_back": false,
+          "case_id": "hng2-hng02-relation-53df6f655bff9d79d0c5",
+          "chosen_candidate_key": null,
+          "confidence": "unknown",
+          "decision_summary": "The surface '譽' is an abbreviated reference to a person with title 河東王 and office 湘州刺史. No candidates were supplied, so identity remains unresolved.",
+          "identity_status": "unresolved",
+          "new_entity_key": null,
+          "person_id": null,
+          "reason_codes": [
+            "no_candidate_list",
+            "insufficient_identity_evidence"
+          ],
+          "supporting_evidence_refs": [
+            "hng02-zizhi-tongjian-wikisource-hu-162"
+          ],
+          "target_entity_key": null
+        },
+        "recommendation": {
+          "chosen_candidate_key": null,
+          "confidence": "unknown",
+          "decision": "unresolved",
+          "evidence_spans": [
+            {
+              "ref": "hng02-zizhi-tongjian-wikisource-hu-162",
+              "span": "湘州刺史河東王譽軍於青草湖"
+            }
+          ],
+          "new_entity_candidate": null,
+          "new_entity_key": null,
+          "reason_codes": [
+            "no_candidate_list",
+            "insufficient_identity_evidence"
+          ],
+          "summary": "The surface '譽' is an abbreviated reference to a person with title 河東王 and office 湘州刺史. No candidates were supplied, so identity remains unresolved.",
+          "unresolved_reason": "No candidate keys provided; the surface is an abbreviated name with title and office, but identity cannot be resolved without external knowledge."
+        },
+        "research_gap": {
+          "blocking_question": "What source-local evidence identifies this surface?",
+          "candidate_keys": [],
+          "missing_constraints": [
+            "identity_evidence"
+          ],
+          "next_best_action": "search_biography_context",
+          "status": "open",
+          "stop_condition": "stop when an exact or structurally explicit identity is found"
+        },
+        "state_delta": {
+          "added_candidates": [],
+          "added_constraints": [
+            "{\"assertion_id\": \"a0\", \"assertion_side\": \"subject\", \"candidate_key\": null, \"computed_by\": \"python\", \"constraint_scope\": \"passage\", \"constraint_type\": \"office\", \"evidence_refs\": [\"hng02-zizhi-tongjian-wikisource-hu-162\"], \"evidence_span\": \"湘州刺史河東王譽\", \"independent\": true, \"propagation_rule\": null, \"reason_code\": \"unbound_assertion:office_held_by\", \"source_entity_key\": \"e0\", \"status\": \"support\", \"target_entity_key\": null}",
+            "{\"assertion_id\": \"a1\", \"assertion_side\": \"subject\", \"candidate_key\": null, \"computed_by\": \"python\", \"constraint_scope\": \"passage\", \"constraint_type\": \"title\", \"evidence_refs\": [\"hng02-zizhi-tongjian-wikisource-hu-162\"], \"evidence_span\": \"河東王譽\", \"independent\": true, \"propagation_rule\": null, \"reason_code\": \"unbound_assertion:title_of\", \"source_entity_key\": \"e0\", \"status\": \"support\", \"target_entity_key\": null}",
+            "{\"assertion_id\": \"a2\", \"assertion_side\": \"subject\", \"candidate_key\": null, \"computed_by\": \"python\", \"constraint_scope\": \"passage\", \"constraint_type\": \"event\", \"evidence_refs\": [\"hng02-zizhi-tongjian-wikisource-hu-162\"], \"evidence_span\": \"譽軍於青草湖\", \"independent\": true, \"propagation_rule\": null, \"reason_code\": \"unbound_assertion:participates_in_event\", \"source_entity_key\": \"e0\", \"status\": \"support\", \"target_entity_key\": null}",
+            "{\"assertion_id\": null, \"candidate_key\": null, \"computed_by\": \"python\", \"constraint_scope\": \"case\", \"constraint_type\": \"source_local_context\", \"evidence_refs\": [\"hng02-zizhi-tongjian-wikisource-hu-162\"], \"evidence_span\": \"\", \"independent\": true, \"reason_code\": \"supplied_passage\", \"status\": \"support\"}"
+          ],
+          "changed_constraints": [
+            "{\"assertion_id\": \"a0\", \"assertion_side\": \"subject\", \"candidate_key\": null, \"computed_by\": \"python\", \"constraint_scope\": \"passage\", \"constraint_type\": \"office\", \"evidence_refs\": [\"hng02-zizhi-tongjian-wikisource-hu-162\"], \"evidence_span\": \"湘州刺史河東王譽\", \"independent\": true, \"propagation_rule\": null, \"reason_code\": \"unbound_assertion:office_held_by\", \"source_entity_key\": \"e0\", \"status\": \"support\", \"target_entity_key\": null}",
+            "{\"assertion_id\": \"a1\", \"assertion_side\": \"subject\", \"candidate_key\": null, \"computed_by\": \"python\", \"constraint_scope\": \"passage\", \"constraint_type\": \"title\", \"evidence_refs\": [\"hng02-zizhi-tongjian-wikisource-hu-162\"], \"evidence_span\": \"河東王譽\", \"independent\": true, \"propagation_rule\": null, \"reason_code\": \"unbound_assertion:title_of\", \"source_entity_key\": \"e0\", \"status\": \"support\", \"target_entity_key\": null}",
+            "{\"assertion_id\": \"a2\", \"assertion_side\": \"subject\", \"candidate_key\": null, \"computed_by\": \"python\", \"constraint_scope\": \"passage\", \"constraint_type\": \"event\", \"evidence_refs\": [\"hng02-zizhi-tongjian-wikisource-hu-162\"], \"evidence_span\": \"譽軍於青草湖\", \"independent\": true, \"propagation_rule\": null, \"reason_code\": \"unbound_assertion:participates_in_event\", \"source_entity_key\": \"e0\", \"status\": \"support\", \"target_entity_key\": null}",
+            "{\"assertion_id\": null, \"candidate_key\": null, \"computed_by\": \"python\", \"constraint_scope\": \"case\", \"constraint_type\": \"source_local_context\", \"evidence_refs\": [\"hng02-zizhi-tongjian-wikisource-hu-162\"], \"evidence_span\": \"\", \"independent\": true, \"reason_code\": \"supplied_passage\", \"status\": \"support\"}"
+          ],
+          "conflicts": [],
+          "identity_propagations": [],
+          "material": true,
+          "new_candidates": [],
+          "new_conflicts": [],
+          "new_evidence": [
+            "hng02-zizhi-tongjian-wikisource-hu-162"
+          ],
+          "preserved_constraints": [],
+          "removed_candidates": [],
+          "removed_conflicts": [],
+          "unchanged_candidates": [],
+          "upgraded_candidates": []
+        },
+        "supporting_refs": [
+          "hng02-zizhi-tongjian-wikisource-hu-162"
+        ]
+      },
+      "response_channel": "content",
+      "sequence": 11,
+      "source_run": "HNG2-SC-07",
+      "validation": {
+        "errors": [],
+        "evidence_span_failures": 0,
+        "invalid_enum_outputs": [],
+        "invented_id_attempts": [],
+        "valid": true
+      }
+    },
+    {
+      "case_id": "hng1r2-hng1-raw-relation-b97bdeb3fbec092978bc",
+      "classification": "card_validation_failure",
+      "finish_reason": "stop",
+      "parse_error": null,
+      "path": "data/generated/hng2-schema-controller-live/raw-api/20260824T-HNG2-SC-07/012-semantic-hng1r2-hng1-raw-relation-b97bdeb3fbec092978bc.json",
+      "payload_present": true,
+      "response_channel": "content",
+      "sequence": 12,
+      "source_run": "HNG2-SC-07",
+      "validation": {
+        "errors": [
+          "assertion[0]:evidence_span_not_found",
+          "assertion[1]:unknown_object",
+          "assertion[2]:unknown_object",
+          "entity[0]:evidence_span_not_found",
+          "recommendation_evidence[0]:span_not_found:hng01-jinshu-088-liezhuan-007",
+          "research_gap.next_best_action:search_historical_records",
+          "semantic_evidence[0]:span_not_found:hng01-jinshu-088-liezhuan-007"
+        ],
+        "evidence_span_failures": 4,
+        "invalid_enum_outputs": [
+          "research_gap.next_best_action:search_historical_records"
+        ],
+        "invented_id_attempts": [],
+        "valid": false
+      }
+    },
+    {
+      "case_id": "hng1r2-hng1-raw-relation-921d528c3cf9154fa43c",
+      "classification": "response_truncated",
+      "finish_reason": "length",
+      "parse_error": "ValueError",
+      "path": "data/generated/hng2-schema-controller-live/raw-api/20260824T-HNG2-SC-07/013-semantic-hng1r2-hng1-raw-relation-921d528c3cf9154fa43c.json",
+      "payload_present": false,
+      "response_channel": "content",
+      "sequence": 13,
+      "source_run": "HNG2-SC-07",
+      "validation": null
+    },
+    {
+      "case_id": "hng2-hng02-relation-2164c52caaa53337435e",
+      "classification": "valid_card",
+      "finish_reason": "stop",
+      "parse_error": null,
+      "path": "data/generated/hng2-schema-controller-live/raw-api/20260824T-HNG2-SC-07/014-semantic-hng2-hng02-relation-2164c52caaa53337435e.json",
+      "payload_present": true,
+      "prior_constraints_preserved": true,
+      "projection": {
+        "candidate_info": {
+          "entity_pids": {},
+          "entity_to_candidate": {},
+          "identity_propagations": []
+        },
+        "candidates": [],
+        "card": {
+          "assertions": [
+            {
+              "assertion_id": "a0",
+              "assertion_type": "kinship_relation",
+              "confidence": "high",
+              "direction": null,
+              "evidence_ref": "hng01-jinshu-088-liezhuan-007",
+              "evidence_span": "娉喜弟預女為妻",
+              "object_entity_key": null,
+              "subject_entity_key": "e0",
+              "value": "喜弟預女"
+            }
+          ],
+          "entities": [
+            {
+              "entity_key": "e0",
+              "entity_kind": "structural_kinship_expression",
+              "evidence_ref": "hng01-jinshu-088-liezhuan-007",
+              "evidence_span": "娉喜弟預女為妻",
+              "reference_form": "kinship_plus_name",
+              "surface": "喜弟預女"
+            }
+          ],
+          "summary": "",
+          "target_entity_key": null
+        },
+        "constraints": [
+          {
+            "assertion_id": "a0",
+            "assertion_side": "subject",
+            "candidate_key": null,
+            "computed_by": "python",
+            "constraint_scope": "passage",
+            "constraint_type": "kinship",
+            "evidence_refs": [
+              "hng01-jinshu-088-liezhuan-007"
+            ],
+            "evidence_span": "娉喜弟預女為妻",
+            "independent": true,
+            "propagation_rule": null,
+            "reason_code": "unbound_assertion:kinship_relation",
+            "source_entity_key": "e0",
+            "status": "support",
+            "target_entity_key": null
+          },
+          {
+            "assertion_id": null,
+            "candidate_key": null,
+            "computed_by": "python",
+            "constraint_scope": "case",
+            "constraint_type": "source_local_context",
+            "evidence_refs": [
+              "hng01-jinshu-088-liezhuan-007",
+              "hng02-jinshu-wikisource-punctuated-088"
+            ],
+            "evidence_span": "",
+            "independent": true,
+            "reason_code": "supplied_passage",
+            "status": "support"
+          }
+        ],
+        "graph_action": {
+          "action": "no_person_node",
+          "frontier_status": "blocked",
+          "node_type": "none",
+          "person_id": null,
+          "provisional_person_id": null,
+          "reason_codes": [
+            "structural_kinship_expression",
+            "kinship_chain_unparsed",
+            "no_candidates"
+          ]
+        },
+        "identity_decision": {
+          "canonical_write_back": false,
+          "case_id": "hng2-hng02-relation-2164c52caaa53337435e",
+          "chosen_candidate_key": null,
+          "confidence": "unknown",
+          "decision_summary": "The expression is a structural kinship expression, not a direct name. No candidate is provided, and the chain is not parsed. Therefore, identity remains unresolved.",
+          "identity_status": "not_single_person",
+          "new_entity_key": null,
+          "person_id": null,
+          "reason_codes": [
+            "kinship_chain_unparsed",
+            "no_candidates"
+          ],
+          "supporting_evidence_refs": [
+            "hng01-jinshu-088-liezhuan-007"
+          ],
+          "target_entity_key": null
+        },
+        "recommendation": {
+          "chosen_candidate_key": null,
+          "confidence": "unknown",
+          "decision": "unresolved",
+          "evidence_spans": [
+            {
+              "ref": "hng01-jinshu-088-liezhuan-007",
+              "span": "娉喜弟預女為妻"
+            }
+          ],
+          "new_entity_candidate": null,
+          "new_entity_key": null,
+          "reason_codes": [
+            "kinship_chain_unparsed",
+            "no_candidates"
+          ],
+          "summary": "The expression is a structural kinship expression, not a direct name. No candidate is provided, and the chain is not parsed. Therefore, identity remains unresolved.",
+          "unresolved_reason": "The kinship chain '喜弟預女' cannot be resolved to a single person without additional context identifying '喜' and '預'."
+        },
+        "research_gap": {
+          "blocking_question": "",
+          "candidate_keys": [],
+          "missing_constraints": [],
+          "next_best_action": "none",
+          "status": "closed",
+          "stop_condition": "structured card establishes that no single Person node is required"
+        },
+        "state_delta": {
+          "added_candidates": [],
+          "added_constraints": [
+            "{\"assertion_id\": \"a0\", \"assertion_side\": \"subject\", \"candidate_key\": null, \"computed_by\": \"python\", \"constraint_scope\": \"passage\", \"constraint_type\": \"kinship\", \"evidence_refs\": [\"hng01-jinshu-088-liezhuan-007\"], \"evidence_span\": \"娉喜弟預女為妻\", \"independent\": true, \"propagation_rule\": null, \"reason_code\": \"unbound_assertion:kinship_relation\", \"source_entity_key\": \"e0\", \"status\": \"support\", \"target_entity_key\": null}",
+            "{\"assertion_id\": null, \"candidate_key\": null, \"computed_by\": \"python\", \"constraint_scope\": \"case\", \"constraint_type\": \"source_local_context\", \"evidence_refs\": [\"hng01-jinshu-088-liezhuan-007\", \"hng02-jinshu-wikisource-punctuated-088\"], \"evidence_span\": \"\", \"independent\": true, \"reason_code\": \"supplied_passage\", \"status\": \"support\"}"
+          ],
+          "changed_constraints": [
+            "{\"assertion_id\": \"a0\", \"assertion_side\": \"subject\", \"candidate_key\": null, \"computed_by\": \"python\", \"constraint_scope\": \"passage\", \"constraint_type\": \"kinship\", \"evidence_refs\": [\"hng01-jinshu-088-liezhuan-007\"], \"evidence_span\": \"娉喜弟預女為妻\", \"independent\": true, \"propagation_rule\": null, \"reason_code\": \"unbound_assertion:kinship_relation\", \"source_entity_key\": \"e0\", \"status\": \"support\", \"target_entity_key\": null}",
+            "{\"assertion_id\": null, \"candidate_key\": null, \"computed_by\": \"python\", \"constraint_scope\": \"case\", \"constraint_type\": \"source_local_context\", \"evidence_refs\": [\"hng01-jinshu-088-liezhuan-007\", \"hng02-jinshu-wikisource-punctuated-088\"], \"evidence_span\": \"\", \"independent\": true, \"reason_code\": \"supplied_passage\", \"status\": \"support\"}"
+          ],
+          "conflicts": [],
+          "identity_propagations": [],
+          "material": true,
+          "new_candidates": [],
+          "new_conflicts": [],
+          "new_evidence": [
+            "hng01-jinshu-088-liezhuan-007"
+          ],
+          "preserved_constraints": [],
+          "removed_candidates": [],
+          "removed_conflicts": [],
+          "unchanged_candidates": [],
+          "upgraded_candidates": []
+        },
+        "supporting_refs": [
+          "hng01-jinshu-088-liezhuan-007"
+        ]
+      },
+      "response_channel": "content",
+      "sequence": 14,
+      "source_run": "HNG2-SC-07",
+      "validation": {
+        "errors": [],
+        "evidence_span_failures": 0,
+        "invalid_enum_outputs": [],
+        "invented_id_attempts": [],
+        "valid": true
+      }
+    },
+    {
+      "case_id": "hng1r2-hng1-raw-relation-50e9ff6ad57e3925753a",
+      "classification": "card_validation_failure",
+      "finish_reason": "stop",
+      "parse_error": null,
+      "path": "data/generated/hng2-schema-live/raw-api/20260824T-HNG2-SL/003-semantic-hng1r2-hng1-raw-relation-50e9ff6ad57e3925753a.json",
+      "payload_present": true,
+      "response_channel": "reasoning_content",
+      "sequence": 3,
+      "source_run": "HNG2-SL-envelope-regression",
+      "validation": {
+        "errors": [
+          "evidence_assertions_not_array",
+          "evidence_entities_not_array",
+          "missing_evidence_interpretation"
+        ],
+        "evidence_span_failures": 0,
+        "invalid_enum_outputs": [],
+        "invented_id_attempts": [],
+        "valid": false
+      }
+    },
+    {
+      "case_id": "hng1r2-hng1-raw-relation-1153a723032c48422396",
+      "classification": "card_validation_failure",
+      "finish_reason": "stop",
+      "parse_error": null,
+      "path": "data/generated/hng2-schema-live/raw-api/20260824T-HNG2-SL/007-semantic-hng1r2-hng1-raw-relation-1153a723032c48422396.json",
+      "payload_present": true,
+      "response_channel": "reasoning_content",
+      "sequence": 7,
+      "source_run": "HNG2-SL-envelope-regression",
+      "validation": {
+        "errors": [
+          "evidence_assertions_not_array",
+          "evidence_entities_not_array",
+          "missing_evidence_interpretation"
+        ],
+        "evidence_span_failures": 0,
+        "invalid_enum_outputs": [],
+        "invented_id_attempts": [],
+        "valid": false
+      }
+    },
+    {
+      "case_id": "hng2-hng02-relation-53df6f655bff9d79d0c5",
+      "classification": "card_validation_failure",
+      "finish_reason": "stop",
+      "parse_error": null,
+      "path": "data/generated/hng2-schema-live/raw-api/20260824T-HNG2-SL/018-semantic-hng2-hng02-relation-53df6f655bff9d79d0c5.json",
+      "payload_present": true,
+      "response_channel": "reasoning_content",
+      "sequence": 18,
+      "source_run": "HNG2-SL-envelope-regression",
+      "validation": {
+        "errors": [
+          "evidence_assertions_not_array",
+          "evidence_entities_not_array",
+          "missing_evidence_interpretation",
+          "new_entity_key_without_new_person_decision"
+        ],
+        "evidence_span_failures": 0,
+        "invalid_enum_outputs": [],
+        "invented_id_attempts": [],
+        "valid": false
+      }
+    }
+  ],
+  "schema": "historical-entity-schema-v1",
+  "source": "frozen HNG2-SC-07 plus HNG2-SL envelope samples"
+}

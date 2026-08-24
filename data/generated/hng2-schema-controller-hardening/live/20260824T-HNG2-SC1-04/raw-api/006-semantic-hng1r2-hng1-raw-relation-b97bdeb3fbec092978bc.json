@@ -1,0 +1,52 @@
+{
+  "canonical_write_back": false,
+  "case_id": "hng1r2-hng1-raw-relation-b97bdeb3fbec092978bc",
+  "elapsed_seconds": 3.762192,
+  "finish_reason": "stop",
+  "immutable": true,
+  "input_hash": "7e1f80eac9f73a4ffdd10473668a7709803a81d014f6f5a5fa136b64d112582e",
+  "kind": "semantic",
+  "model": "deepseek-v4-flash",
+  "parse_error": null,
+  "prompt_version": "hng2-sc1-card-hardening-v1",
+  "provider": "deepseek",
+  "response": {
+    "choices": [
+      {
+        "finish_reason": "stop",
+        "index": 0,
+        "logprobs": null,
+        "message": {
+          "content": "{\n  \"evidence_interpretation\": {\n    \"target_entity_key\": \"e0\",\n    \"target_entity_surface\": \"虞喜\",\n    \"target_entity_kind\": \"named_person\",\n    \"target_entity_role\": \"referenced_person\",\n    \"target_entity_scope\": \"narrative\",\n    \"target_entity_reference_form\": \"full_name\",\n    \"target_entity_summary\": \"虞喜 is a named person mentioned in the primary text as a recluse in the sea, admired by Sun Zhai, who married Yu Xi's brother's daughter.\",\n    \"evidence_spans\": [\n      \"會稽虞喜隠居海嵎有高世之風\",\n      \"晷欽其徳娉喜弟預女為妻\"\n    ]\n  },\n  \"semantic_assessment\": {\n    \"expression_type\": \"full_name\",\n    \"identifiability\": \"single_person\",\n    \"function\": \"referenced_person\",\n    \"supporting_evidence\": [\n      \"會稽虞喜隠居海嵎有高世之風\",\n      \"晷欽其徳娉喜弟預女為妻\"\n    ],\n    \"ambiguity\": \"none\",\n    \"hard_constraint_compliance\": \"no_hard_constraints\"\n  },\n  \"identity_recommendation\": {\n    \"recommendation\": \"create_new_entity\",\n    \"new_entity_key\": \"n0\",\n    \"chosen_candidate_key\": null,\n    \"rationale\": \"The target expression '虞喜' is a clear full name of a person in the primary text. No candidate keys were provided, and the evidence supports a distinct individual. Therefore, a new entity is recommended.\",\n    \"confidence\": \"high\"\n  },\n  \"research_gap\": {\n    \"blocking_question\": \"Which individuals are represented by the kinship chain?\",\n    \"candidate_keys\": [],\n    \"missing_constraints\": [\"structural_kinship_parse\"],\n    \"next_best_action\": \"search_kinship_context\",\n    \"status\": \"open\",\n    \"stop_condition\": \"do not create a node until the chain is parsed\"\n  }\n}",
+          "role": "assistant"
+        }
+      }
+    ],
+    "created": 1787581029,
+    "id": "45d0a6a4-bf22-47f3-90fa-e6e2a2ee19ef",
+    "model": "deepseek-v4-flash",
+    "object": "chat.completion",
+    "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+    "usage": {
+      "completion_tokens": 467,
+      "prompt_cache_hit_tokens": 256,
+      "prompt_cache_miss_tokens": 1601,
+      "prompt_tokens": 1857,
+      "prompt_tokens_details": {
+        "cached_tokens": 256
+      },
+      "total_tokens": 2324
+    }
+  },
+  "response_channel": "content",
+  "sequence": 6,
+  "start_time": "2026-08-24T14:17:09Z",
+  "status": "response",
+  "usage": {
+    "completion_tokens": 467,
+    "prompt_cache_hit_tokens": 256,
+    "prompt_cache_miss_tokens": 1601,
+    "prompt_tokens": 1857,
+    "total_tokens": 2324
+  }
+}

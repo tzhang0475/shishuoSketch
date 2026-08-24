@@ -1,0 +1,52 @@
+{
+  "canonical_write_back": false,
+  "case_id": "hng1r2-hng1-raw-relation-1153a723032c48422396",
+  "elapsed_seconds": 2.807809,
+  "finish_reason": "stop",
+  "immutable": true,
+  "input_hash": "b937f35b0bf09de15af546ac8c8a09c434159c7902a7bc21bbe16c5e0cff2a84",
+  "kind": "semantic",
+  "model": "deepseek-v4-flash",
+  "parse_error": null,
+  "prompt_version": "hng2-sc1-card-hardening-v1",
+  "provider": "deepseek",
+  "response": {
+    "choices": [
+      {
+        "finish_reason": "stop",
+        "index": 0,
+        "logprobs": null,
+        "message": {
+          "content": "{\n  \"evidence_interpretation\": {\n    \"target_entity_key\": \"e0\",\n    \"entities\": [\n      {\n        \"key\": \"e0\",\n        \"surface\": \"宣\",\n        \"entity_type\": \"person\",\n        \"description\": \"A person referred to by the abbreviated name '宣' in the passage.\"\n      }\n    ],\n    \"assertions\": [\n      {\n        \"key\": \"a0\",\n        \"entity_key\": \"e0\",\n        \"assertion_type\": \"identity_evidence\",\n        \"text\": \"宣又不受\",\n        \"evidence_spans\": [\n          {\n            \"start\": 0,\n            \"end\": 4,\n            \"text\": \"宣又不受\"\n          }\n        ]\n      }\n    ]\n  },\n  \"semantic_assessment\": {\n    \"assessment_status\": \"assessed\",\n    \"semantic_fit\": \"unknown\",\n    \"observed_role\": \"referenced_person\",\n    \"evidence_spans\": [\n      {\n        \"start\": 0,\n        \"end\": 4,\n        \"text\": \"宣又不受\"\n      }\n    ]\n  },\n  \"identity_recommendation\": {\n    \"decision\": \"unresolved\",\n    \"chosen_candidate_key\": null,\n    \"confidence\": \"unknown\",\n    \"reason_codes\": [\"insufficient_evidence\"],\n    \"evidence_spans\": [\n      {\n        \"start\": 0,\n        \"end\": 4,\n        \"text\": \"宣又不受\"\n      }\n    ],\n    \"new_entity_candidate\": null,\n    \"new_entity_key\": null,\n    \"unresolved_reason\": \"The surface '宣' appears as an abbreviated name, but the passage does not provide sufficient context to identify the person uniquely.\"\n  },\n  \"research_gap\": {\n    \"status\": \"open\",\n    \"missing_constraints\": [\"identity_evidence\"],\n    \"blocking_question\": \"What source-local evidence identifies this surface?\",\n    \"next_best_action\": \"search_biography_context\",\n    \"candidate_keys\": [],\n    \"stop_condition\": \"stop when an exact or structurally explicit identity is found\"\n  }\n}",
+          "role": "assistant"
+        }
+      }
+    ],
+    "created": 1787581182,
+    "id": "1b5600a6-1565-4e0b-a9bc-4a1dfc29c93f",
+    "model": "deepseek-v4-flash",
+    "object": "chat.completion",
+    "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+    "usage": {
+      "completion_tokens": 459,
+      "prompt_cache_hit_tokens": 256,
+      "prompt_cache_miss_tokens": 766,
+      "prompt_tokens": 1022,
+      "prompt_tokens_details": {
+        "cached_tokens": 256
+      },
+      "total_tokens": 1481
+    }
+  },
+  "response_channel": "content",
+  "sequence": 3,
+  "start_time": "2026-08-24T14:19:42Z",
+  "status": "response",
+  "usage": {
+    "completion_tokens": 459,
+    "prompt_cache_hit_tokens": 256,
+    "prompt_cache_miss_tokens": 766,
+    "prompt_tokens": 1022,
+    "total_tokens": 1481
+  }
+}

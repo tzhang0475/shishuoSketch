@@ -1,0 +1,52 @@
+{
+  "canonical_write_back": false,
+  "case_id": "preflight",
+  "elapsed_seconds": 2.090765,
+  "finish_reason": "stop",
+  "immutable": true,
+  "input_hash": "39aa750e0c6d63402dc559df45b43b985d8386210e4f3206c8054779ed465f76",
+  "kind": "search-plan-preflight",
+  "model": "deepseek-v4-flash",
+  "parse_error": null,
+  "prompt_version": "hng2-sc1-search-plan-v1",
+  "provider": "deepseek",
+  "response": {
+    "choices": [
+      {
+        "finish_reason": "stop",
+        "index": 0,
+        "logprobs": null,
+        "message": {
+          "content": "{\n  \"search_plan\": {\n    \"target_constraint\": \"title_identity\",\n    \"goal\": \"验证庾亮是否以'庾太尉'之衔见于《晉書》等史料，以确认'庾太尉'即庾亮。\",\n    \"candidate_keys\": [\"c0\"],\n    \"preferred_sources\": [\"晉書\", \"世說新語\", \"劉孝標注\", \"余嘉錫笺疏\", \"資治通鑑\"],\n    \"search_entities\": [\"庾亮\", \"庾太尉\", \"太尉\"],\n    \"search_patterns\": [\"庾太尉\", \"庾亮.*太尉\", \"太尉.*庾亮\"],\n    \"temporal_scope\": {\n      \"start\": null,\n      \"end\": null\n    },\n    \"graph_neighborhood_scope\": \"case_only\",\n    \"stop_condition\": \"找到《晉書》或《世說新語》等史料中'庾太尉'明确指代庾亮的记载，或确认无此称谓。\"\n  }\n}",
+          "role": "assistant"
+        }
+      }
+    ],
+    "created": 1787581167,
+    "id": "b0c57e55-8ce7-4152-b228-098cf8a9ab55",
+    "model": "deepseek-v4-flash",
+    "object": "chat.completion",
+    "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+    "usage": {
+      "completion_tokens": 235,
+      "prompt_cache_hit_tokens": 384,
+      "prompt_cache_miss_tokens": 37,
+      "prompt_tokens": 421,
+      "prompt_tokens_details": {
+        "cached_tokens": 384
+      },
+      "total_tokens": 656
+    }
+  },
+  "response_channel": "content",
+  "sequence": 1,
+  "start_time": "2026-08-24T14:19:27Z",
+  "status": "response",
+  "usage": {
+    "completion_tokens": 235,
+    "prompt_cache_hit_tokens": 384,
+    "prompt_cache_miss_tokens": 37,
+    "prompt_tokens": 421,
+    "total_tokens": 656
+  }
+}

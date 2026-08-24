@@ -1,0 +1,133 @@
+{
+  "canonical_write_back": false,
+  "cases": [
+    {
+      "case_id": "hng1r2-hng1-raw-relation-2ff2066d8872cbae15f7",
+      "category": "title_existing",
+      "packet_interpretation_override": {},
+      "research_gap": {
+        "blocking_question": "Which historical person does this title denote in this passage?",
+        "candidate_keys": [
+          "c0"
+        ],
+        "case_id": "hng1r2-hng1-raw-relation-2ff2066d8872cbae15f7",
+        "missing_constraints": [
+          "title_identity"
+        ],
+        "next_best_action": "search_title_identity",
+        "status": "open",
+        "stop_condition": "stop when one context-compatible person is independently supported"
+      },
+      "selection_key": "05c20a372b2ce52edf0aedd19f26e948080210b28525e34a8a506e25a6ab4375",
+      "source_ref": "hng01-shishuo-07-shijian-016-main",
+      "surface": "庾太尉"
+    },
+    {
+      "case_id": "hng1r2-hng1-raw-relation-1153a723032c48422396",
+      "category": "genuine_unresolved",
+      "packet_interpretation_override": {
+        "kind": "abbreviated_name",
+        "reference": "abbreviated",
+        "role": "referenced_person",
+        "scope": "narrative"
+      },
+      "research_gap": {
+        "blocking_question": "What source-local evidence identifies this surface?",
+        "candidate_keys": [],
+        "case_id": "hng1r2-hng1-raw-relation-1153a723032c48422396",
+        "missing_constraints": [
+          "identity_evidence"
+        ],
+        "next_best_action": "search_biography_context",
+        "status": "open",
+        "stop_condition": "stop when an exact or structurally explicit identity is found"
+      },
+      "selection_key": "153153913d5b85cbf821a5cc66a7218b2ca93bee422905170e50dec1d2c74d62",
+      "source_ref": "hng01-shishuo-01-dexing-038-annotation-006",
+      "surface": "宣"
+    },
+    {
+      "case_id": "hng1r2-hng1-raw-relation-921d528c3cf9154fa43c",
+      "category": "abbreviated_existing",
+      "packet_interpretation_override": {
+        "kind": "abbreviated_name",
+        "reference": "abbreviated",
+        "role": "referenced_person",
+        "scope": "narrative"
+      },
+      "research_gap": {
+        "blocking_question": "Which individuals are represented by the kinship chain?",
+        "candidate_keys": [
+          "c0"
+        ],
+        "case_id": "hng1r2-hng1-raw-relation-921d528c3cf9154fa43c",
+        "missing_constraints": [
+          "structural_kinship_parse"
+        ],
+        "next_best_action": "search_kinship_context",
+        "status": "open",
+        "stop_condition": "do not create a node until the chain is parsed"
+      },
+      "selection_key": "540302f7f96684690ca8d0db0e4e5edc9e76f29b57c5655f793bf4cc02c6d3e3",
+      "source_ref": "hng02-zizhi-tongjian-wikisource-hu-090",
+      "surface": "廙"
+    },
+    {
+      "case_id": "hng2-live-hng2-live-w1-identity-33afe84247b036e9d9cb",
+      "category": "new_person",
+      "packet_interpretation_override": {
+        "kind": "named_person",
+        "reference": "full_name",
+        "role": "referenced_person",
+        "scope": "narrative"
+      },
+      "research_gap": {
+        "blocking_question": "What source-local evidence identifies this surface?",
+        "candidate_keys": [],
+        "case_id": "hng2-live-hng2-live-w1-identity-33afe84247b036e9d9cb",
+        "missing_constraints": [
+          "identity_evidence"
+        ],
+        "next_best_action": "search_biography_context",
+        "status": "open",
+        "stop_condition": "stop when an exact or structurally explicit identity is found"
+      },
+      "selection_key": "8332aeff17319240ea262b484cd01061027c68de52c612899fd8171bca03383c",
+      "source_ref": "hng2-live:hng2-live-w1-identity-33afe84247b036e9d9cb",
+      "surface": "陳騫"
+    },
+    {
+      "case_id": "hng1r2-hng1-raw-relation-b97bdeb3fbec092978bc",
+      "category": "kinship_target_separation",
+      "packet_interpretation_override": {
+        "kind": "named_person",
+        "reference": "full_name",
+        "role": "referenced_person",
+        "scope": "narrative"
+      },
+      "research_gap": {
+        "blocking_question": "Which individuals are represented by the kinship chain?",
+        "candidate_keys": [],
+        "case_id": "hng1r2-hng1-raw-relation-b97bdeb3fbec092978bc",
+        "missing_constraints": [
+          "structural_kinship_parse"
+        ],
+        "next_best_action": "search_kinship_context",
+        "status": "open",
+        "stop_condition": "do not create a node until the chain is parsed"
+      },
+      "selection_key": "af8eb36e3a70225f6a52e107b1a64ebcbcba4238c8d58644627efd1562a29944",
+      "source_ref": "hng01-jinshu-088-liezhuan-007",
+      "surface": "虞喜"
+    }
+  ],
+  "frozen": true,
+  "max_retrieval_rounds_per_case": 1,
+  "max_semantic_calls_per_case": 2,
+  "no_frontier_expansion": true,
+  "schema": "historical-entity-schema-v1",
+  "selected_case_count": 5,
+  "selection_version": "hng2-sc1-live-selection-v1",
+  "source_case_namespace": "data/generated/hng2-schema/research-gaps.json",
+  "stage": "hng2-schema-controller-hardening-live"
+}

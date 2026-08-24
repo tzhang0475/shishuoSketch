@@ -1,0 +1,52 @@
+{
+  "canonical_write_back": false,
+  "case_id": "hng1r2-hng1-raw-relation-2ff2066d8872cbae15f7",
+  "elapsed_seconds": 6.046631,
+  "finish_reason": "stop",
+  "immutable": true,
+  "input_hash": "fd5957311c826b3f8ccf5a77b01ba1dc5aaf19bddcc9411d7a034dc7e1afd3a7",
+  "kind": "semantic",
+  "model": "deepseek-v4-flash",
+  "parse_error": null,
+  "prompt_version": "hng2-sc1-card-hardening-v1",
+  "provider": "deepseek",
+  "response": {
+    "choices": [
+      {
+        "finish_reason": "stop",
+        "index": 0,
+        "logprobs": null,
+        "message": {
+          "content": "{\n  \"evidence_interpretation\": {\n    \"target_entity_key\": \"e0\",\n    \"target_entity_surface\": \"庾太尉\",\n    \"target_entity_kind\": \"person_office_title\",\n    \"target_entity_role\": \"office_holder\",\n    \"target_entity_scope\": \"narrative\",\n    \"target_entity_reference_form\": \"office_title_only\",\n    \"target_entity_summary\": \"title-only expression denoting a person with office of 太尉\",\n    \"evidence_entities\": [\n      {\n        \"entity_key\": \"e0\",\n        \"entity_type\": \"person_office_title\",\n        \"canonical_name\": \"庾太尉\",\n        \"known_forms\": [\"庾太尉\", \"庾公\", \"元規\"],\n        \"evidence_spans\": [\n          {\n            \"passage_ref\": \"hng01-shishuo-07-shijian-016-main\",\n            \"span_text\": \"庾太尉\"\n          },\n          {\n            \"passage_ref\": \"hng01-shishuo-14-rongzhi-024-main\",\n            \"span_text\": \"庾太尉\"\n          }\n        ]\n      },\n      {\n        \"entity_key\": \"e1\",\n        \"entity_type\": \"person\",\n        \"canonical_name\": \"庾亮\",\n        \"known_forms\": [\"庾亮\", \"元規\"],\n        \"evidence_spans\": [\n          {\n            \"passage_ref\": \"hng01-shishuo-14-rongzhi-024-main\",\n            \"span_text\": \"元規\"\n          }\n        ]\n      }\n    ],\n    \"evidence_assertions\": [\n      {\n        \"assertion_key\": \"a0\",\n        \"assertion_type\": \"identity\",\n        \"subject_entity_key\": \"e0\",\n        \"object_entity_key\": \"e1\",\n        \"relation\": \"same_person\",\n        \"evidence_spans\": [\n          {\n            \"passage_ref\": \"hng01-shishuo-14-rongzhi-024-main\",\n            \"span_text\": \"庾太尉在武昌\"\n          },\n          {\n            \"passage_ref\": \"hng01-shishuo-14-rongzhi-024-main\",\n            \"span_text\": \"定是庾公\"\n          },\n          {\n            \"passage_ref\": \"hng01-shishuo-14-rongzhi-024-main\",\n            \"span_text\": \"元規爾時風範\"\n          }\n        ],\n        \"confidence\": \"high\"\n      },\n      {\n        \"assertion_key\": \"a1\",\n        \"assertion_type\": \"office_holding\",\n        \"subject_entity_key\": \"e0\",\n        \"object_entity_key\": null,\n        \"relation\": \"holds_office\",\n        \"office\": \"太尉\",\n        \"evidence_spans\": [\n          {\n            \"passage_ref\": \"hng01-shishuo-07-shijian-016-main\",\n            \"span_text\": \"庾太尉\"\n          }\n        ],\n        \"confidence\": \"high\"\n      }\n    ]\n  },\n  \"semantic_assessment\": {\n    \"expression_nature\": \"office_title_only\",\n    \"expression_function\": \"event_participant\",\n    \"identifiable_person\": true,\n    \"candidate_support\": [\n      {\n        \"candidate_key\": \"c0\",\n        \"supporting_evidence\": [\n          {\n            \"passage_ref\": \"hng01-shishuo-14-rongzhi-024-main\",\n            \"span_text\": \"元規\"\n          }\n        ],\n        \"opposing_evidence\": [],\n        \"assessment\": \"supported_by_alias\"\n      }\n    ],\n    \"uniqueness\": \"sufficient\",\n    \"ambiguity_type\": \"none\",\n    \"conclusion\": \"庾太尉 denotes 庾亮 in this passage\"\n  },\n  \"identity_recommendation\": {\n    \"recommendation\": \"accept_candidate\",\n    \"chosen_candidate_key\": \"c0\",\n    \"new_entity_key\": null,\n    \"reason\": \"The title 庾太尉 is used for 庾亮 in the same work, as evidenced by the alias 元規 in the same passage.\",\n    \"remaining_uncertainty\": \"none\"\n  },\n  \"research_gap\": {\n    \"blocking_question\": \"Which historical person does this title denote in this passage?\",\n    \"candidate_keys\": [\"c0\"],\n    \"missing_constraints\": [],\n    \"next_best_action\": \"none\",\n    \"status\": \"resolved\",\n    \"stop_condition\": \"stop when one context-compatible person is independently supported\"\n  }\n}",
+          "role": "assistant"
+        }
+      }
+    ],
+    "created": 1787581010,
+    "id": "b264af7c-8306-42d5-b8f4-20938f2bc448",
+    "model": "deepseek-v4-flash",
+    "object": "chat.completion",
+    "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+    "usage": {
+      "completion_tokens": 1010,
+      "prompt_cache_hit_tokens": 0,
+      "prompt_cache_miss_tokens": 1816,
+      "prompt_tokens": 1816,
+      "prompt_tokens_details": {
+        "cached_tokens": 0
+      },
+      "total_tokens": 2826
+    }
+  },
+  "response_channel": "content",
+  "sequence": 2,
+  "start_time": "2026-08-24T14:16:50Z",
+  "status": "response",
+  "usage": {
+    "completion_tokens": 1010,
+    "prompt_cache_hit_tokens": 0,
+    "prompt_cache_miss_tokens": 1816,
+    "prompt_tokens": 1816,
+    "total_tokens": 2826
+  }
+}

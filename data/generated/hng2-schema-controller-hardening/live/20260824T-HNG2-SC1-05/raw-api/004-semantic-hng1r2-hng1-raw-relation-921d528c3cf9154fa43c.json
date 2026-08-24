@@ -1,0 +1,52 @@
+{
+  "canonical_write_back": false,
+  "case_id": "hng1r2-hng1-raw-relation-921d528c3cf9154fa43c",
+  "elapsed_seconds": 3.178248,
+  "finish_reason": "stop",
+  "immutable": true,
+  "input_hash": "c83201e523858c47834e148fdcd544e11e1e84e8b4f2485fc411bfba69525000",
+  "kind": "semantic",
+  "model": "deepseek-v4-flash",
+  "parse_error": null,
+  "prompt_version": "hng2-sc1-card-hardening-v1",
+  "provider": "deepseek",
+  "response": {
+    "choices": [
+      {
+        "finish_reason": "stop",
+        "index": 0,
+        "logprobs": null,
+        "message": {
+          "content": "{\n  \"evidence_interpretation\": {\n    \"target_entity_key\": \"e0\",\n    \"entities\": [\n      {\n        \"key\": \"e0\",\n        \"canonical_name\": \"王廙\",\n        \"entity_type\": \"person\",\n        \"evidence_spans\": [\n          {\n            \"ref\": \"hng02-zizhi-tongjian-wikisource-hu-090\",\n            \"text\": \"鄭攀等相與拒王廙\"\n          }\n        ]\n      }\n    ],\n    \"assertions\": [\n      {\n        \"key\": \"a0\",\n        \"entity_key\": \"e0\",\n        \"predicate\": \"is_referred_to_as\",\n        \"object\": \"廙\",\n        \"evidence_spans\": [\n          {\n            \"ref\": \"hng02-zizhi-tongjian-wikisource-hu-090\",\n            \"text\": \"廙將赴荊州\"\n          }\n        ]\n      }\n    ]\n  },\n  \"semantic_assessment\": {\n    \"assessment_status\": \"assessed\",\n    \"semantic_fit\": \"high\",\n    \"observed_role\": \"referenced_person\",\n    \"evidence_spans\": [\n      {\n        \"ref\": \"hng02-zizhi-tongjian-wikisource-hu-090\",\n        \"text\": \"鄭攀等相與拒王廙\"\n      },\n      {\n        \"ref\": \"hng02-zizhi-tongjian-wikisource-hu-090\",\n        \"text\": \"廙將赴荊州\"\n      }\n    ]\n  },\n  \"identity_recommendation\": {\n    \"decision\": \"accept\",\n    \"chosen_candidate_key\": \"c0\",\n    \"confidence\": \"high\",\n    \"reason_codes\": [\"canonical_name_in_context\", \"abbreviated_form_match\"],\n    \"evidence_spans\": [\n      {\n        \"ref\": \"hng02-zizhi-tongjian-wikisource-hu-090\",\n        \"text\": \"鄭攀等相與拒王廙\"\n      }\n    ],\n    \"new_entity_candidate\": null,\n    \"new_entity_key\": null,\n    \"unresolved_reason\": \"\"\n  },\n  \"research_gap\": {\n    \"status\": \"closed\",\n    \"missing_constraints\": [],\n    \"blocking_question\": \"\",\n    \"next_best_action\": \"none\",\n    \"candidate_keys\": [\"c0\"],\n    \"stop_condition\": \"identity resolved\"\n  }\n}",
+          "role": "assistant"
+        }
+      }
+    ],
+    "created": 1787581185,
+    "id": "42a0d1bf-4a00-4151-89bc-dc78069a63fa",
+    "model": "deepseek-v4-flash",
+    "object": "chat.completion",
+    "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+    "usage": {
+      "completion_tokens": 535,
+      "prompt_cache_hit_tokens": 384,
+      "prompt_cache_miss_tokens": 2055,
+      "prompt_tokens": 2439,
+      "prompt_tokens_details": {
+        "cached_tokens": 384
+      },
+      "total_tokens": 2974
+    }
+  },
+  "response_channel": "content",
+  "sequence": 4,
+  "start_time": "2026-08-24T14:19:45Z",
+  "status": "response",
+  "usage": {
+    "completion_tokens": 535,
+    "prompt_cache_hit_tokens": 384,
+    "prompt_cache_miss_tokens": 2055,
+    "prompt_tokens": 2439,
+    "total_tokens": 2974
+  }
+}

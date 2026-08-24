@@ -1,0 +1,52 @@
+{
+  "canonical_write_back": false,
+  "case_id": "hng2-live-hng2-live-w1-identity-33afe84247b036e9d9cb",
+  "elapsed_seconds": 4.05765,
+  "finish_reason": "stop",
+  "immutable": true,
+  "input_hash": "ceaff054ab8c2f8ed88ff8a8ee9a1aea86d45ab1f1b72ad2fc45e594b6b4b8cd",
+  "kind": "semantic",
+  "model": "deepseek-v4-flash",
+  "parse_error": null,
+  "prompt_version": "hng2-sc1-card-hardening-v1",
+  "provider": "deepseek",
+  "response": {
+    "choices": [
+      {
+        "finish_reason": "stop",
+        "index": 0,
+        "logprobs": null,
+        "message": {
+          "content": "{\n  \"evidence_interpretation\": {\n    \"target_entity_key\": \"e0\",\n    \"entities\": [\n      {\n        \"key\": \"e0\",\n        \"name\": \"陳騫\",\n        \"type\": \"named_person\",\n        \"description\": \"車騎將軍，被封為高平公\",\n        \"evidence_spans\": [\n          {\n            \"passage_ref\": \"hng2-live:hng2-live-w1-identity-33afe84247b036e9d9cb\",\n            \"text\": \"車騎將軍陳騫爲高平公\"\n          }\n        ]\n      }\n    ],\n    \"assertions\": [\n      {\n        \"key\": \"a0\",\n        \"subject_key\": \"e0\",\n        \"predicate\": \"holds_title\",\n        \"object\": \"車騎將軍\",\n        \"evidence_spans\": [\n          {\n            \"passage_ref\": \"hng2-live:hng2-live-w1-identity-33afe84247b036e9d9cb\",\n            \"text\": \"車騎將軍陳騫\"\n          }\n        ]\n      },\n      {\n        \"key\": \"a1\",\n        \"subject_key\": \"e0\",\n        \"predicate\": \"enfeoffed_as\",\n        \"object\": \"高平公\",\n        \"evidence_spans\": [\n          {\n            \"passage_ref\": \"hng2-live:hng2-live-w1-identity-33afe84247b036e9d9cb\",\n            \"text\": \"陳騫爲高平公\"\n          }\n        ]\n      }\n    ]\n  },\n  \"semantic_assessment\": {\n    \"assessment_status\": \"assessed\",\n    \"semantic_fit\": \"exact\",\n    \"observed_role\": \"referenced_person\",\n    \"evidence_spans\": [\n      {\n        \"passage_ref\": \"hng2-live:hng2-live-w1-identity-33afe84247b036e9d9cb\",\n        \"text\": \"車騎將軍陳騫爲高平公\"\n      }\n    ]\n  },\n  \"identity_recommendation\": {\n    \"decision\": \"unresolved\",\n    \"chosen_candidate_key\": null,\n    \"confidence\": \"unknown\",\n    \"reason_codes\": [\"no_candidate_provided\"],\n    \"evidence_spans\": [\n      {\n        \"passage_ref\": \"hng2-live:hng2-live-w1-identity-33afe84247b036e9d9cb\",\n        \"text\": \"車騎將軍陳騫爲高平公\"\n      }\n    ],\n    \"new_entity_candidate\": null,\n    \"new_entity_key\": null,\n    \"unresolved_reason\": \"No candidate keys were provided in the input, and the source passage only gives the name and titles without further identifying context.\"\n  },\n  \"research_gap\": {\n    \"status\": \"open\",\n    \"missing_constraints\": [\"identity_evidence\"],\n    \"blocking_question\": \"What source-local evidence identifies this surface?\",\n    \"next_best_action\": \"search_biography_context\",\n    \"candidate_keys\": [],\n    \"stop_condition\": \"stop when an exact or structurally explicit identity is found\"\n  }\n}",
+          "role": "assistant"
+        }
+      }
+    ],
+    "created": 1787581188,
+    "id": "4f3171e8-3ace-40ea-add2-8d7f4e9b790a",
+    "model": "deepseek-v4-flash",
+    "object": "chat.completion",
+    "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+    "usage": {
+      "completion_tokens": 699,
+      "prompt_cache_hit_tokens": 384,
+      "prompt_cache_miss_tokens": 619,
+      "prompt_tokens": 1003,
+      "prompt_tokens_details": {
+        "cached_tokens": 384
+      },
+      "total_tokens": 1702
+    }
+  },
+  "response_channel": "content",
+  "sequence": 5,
+  "start_time": "2026-08-24T14:19:48Z",
+  "status": "response",
+  "usage": {
+    "completion_tokens": 699,
+    "prompt_cache_hit_tokens": 384,
+    "prompt_cache_miss_tokens": 619,
+    "prompt_tokens": 1003,
+    "total_tokens": 1702
+  }
+}

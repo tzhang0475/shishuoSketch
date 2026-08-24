@@ -1,0 +1,52 @@
+{
+  "canonical_write_back": false,
+  "case_id": "preflight",
+  "elapsed_seconds": 2.03252,
+  "finish_reason": "stop",
+  "immutable": true,
+  "input_hash": "39aa750e0c6d63402dc559df45b43b985d8386210e4f3206c8054779ed465f76",
+  "kind": "search-plan-preflight",
+  "model": "deepseek-v4-flash",
+  "parse_error": null,
+  "prompt_version": "hng2-sc1-search-plan-v1",
+  "provider": "deepseek",
+  "response": {
+    "choices": [
+      {
+        "finish_reason": "stop",
+        "index": 0,
+        "logprobs": null,
+        "message": {
+          "content": "{\n  \"search_plan\": {\n    \"target_constraint\": \"title_identity\",\n    \"goal\": \"验证庾亮是否拥有‘太尉’这一官职称号，以确认‘庾太尉’指代庾亮。\",\n    \"candidate_keys\": [\"c0\"],\n    \"preferred_sources\": [\"晉書\", \"世說新語\", \"劉孝標注\", \"余嘉錫笺疏\", \"資治通鑑\"],\n    \"search_entities\": [\"庾亮\", \"庾太尉\", \"太尉\"],\n    \"search_patterns\": [\"庾亮.*太尉\", \"庾太尉\", \"太尉庾亮\"],\n    \"temporal_scope\": {\"start\": 289, \"end\": 340},\n    \"graph_neighborhood_scope\": \"case_only\",\n    \"stop_condition\": \"找到庾亮任太尉的明确记载，或确认其从未任太尉。\"\n  }\n}",
+          "role": "assistant"
+        }
+      }
+    ],
+    "created": 1787580882,
+    "id": "06577d3d-9d17-4d8b-9676-45950df53f96",
+    "model": "deepseek-v4-flash",
+    "object": "chat.completion",
+    "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+    "usage": {
+      "completion_tokens": 208,
+      "prompt_cache_hit_tokens": 384,
+      "prompt_cache_miss_tokens": 37,
+      "prompt_tokens": 421,
+      "prompt_tokens_details": {
+        "cached_tokens": 384
+      },
+      "total_tokens": 629
+    }
+  },
+  "response_channel": "content",
+  "sequence": 1,
+  "start_time": "2026-08-24T14:14:42Z",
+  "status": "response",
+  "usage": {
+    "completion_tokens": 208,
+    "prompt_cache_hit_tokens": 384,
+    "prompt_cache_miss_tokens": 37,
+    "prompt_tokens": 421,
+    "total_tokens": 629
+  }
+}

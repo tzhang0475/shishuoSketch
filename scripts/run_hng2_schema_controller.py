@@ -39,10 +39,15 @@ PROVIDER = "deepseek"
 RUN_SCHEMA = 1
 PROMPT_VERSION = "hng2-sc-card-controller-v1"
 SEARCH_PROMPT_VERSION = "hng2-sc-search-plan-v1"
+ALLOWED_SOURCES = (
+    "世說新語", "劉孝標注", "余嘉錫笺疏", "晉書", "三國志",
+    "資治通鑑", "資治通鑑考異", "local source corpus",
+)
 
 SEMANTIC_SYSTEM = """你是历史实体 Schema v1 的结构化证据卡辅助器。
 只根据输入正文、注释、候选人物和 Python 提供的 hard_constraints 理解当前文字。
-先识别本段出现的实体，再把原文直接支持的身份、称谓、亲属、事件或时间断言填入 evidence_interpretation。
+只处理当前 ResearchGap 所需的最少实体和断言：合并同一局部实体的重复指称，使用能证明断言的最短连续原文，不枚举无关事件；最多 6 个 EvidenceEntity、最多 8 个 EvidenceAssertion。
+先识别本段出现的实体，再把原文直接支持的身份、称谓、亲属、事件或时间断言填入 evidence_interpretation。必须指出 target_entity_key；若目标未能表示，只有在明确 unresolved/not-person reasoning 时才可为 null。
 所有 entity_key 只能是本次回答内部的 e0/e1/...；不得创造 person_id、candidate_key、provisional_person_id、relation_id 或 graph_id。
 chosen_candidate_key 只能使用输入中给定的候选键；新的可识别人物只能使用 new_entity_key=n0，不得写人物 ID。
 不得修改 hard_constraints。summary 仅供人工审阅，Python 不会用它控制状态。
@@ -252,7 +257,7 @@ def semantic_packet(case: Mapping[str, Any], gap: Mapping[str, Any], candidates:
 
 
 def search_packet(case: Mapping[str, Any], gap: Mapping[str, Any], candidates: Sequence[Mapping[str, Any]], passages: Mapping[str, Mapping[str, Any]]) -> dict[str, Any]:
-    return {"research_gap": {key: gap.get(key) for key in ("status", "missing_constraints", "blocking_question", "next_best_action", "candidate_keys", "stop_condition")}, "mention": {"surface": (case.get("observation") or {}).get("surface"), "source_work": (case.get("observation") or {}).get("source_work")}, "candidates": [{key: row.get(key) for key in ("candidate_key", "canonical_name", "known_forms")} for row in candidates], "source_passages": _compact_passages(passages, 2), "planning_questions": list(schema.CHINESE_SEARCH_PLAN_QUESTIONS)}
+    return {"research_gap": {key: gap.get(key) for key in ("status", "missing_constraints", "blocking_question", "next_best_action", "candidate_keys", "stop_condition")}, "mention": {"surface": (case.get("observation") or {}).get("surface"), "source_work": (case.get("observation") or {}).get("source_work")}, "candidates": [{key: row.get(key) for key in ("candidate_key", "canonical_name", "known_forms")} for row in candidates], "source_passages": _compact_passages(passages, 2), "allowed_sources": list(ALLOWED_SOURCES), "planning_questions": list(schema.CHINESE_SEARCH_PLAN_QUESTIONS)}
 
 
 def _usage(response: Mapping[str, Any]) -> dict[str, int]:
@@ -331,7 +336,7 @@ def _fixture_payload(kind: str, ref: str, span: str, source_text: str, candidate
     entity = {"entity_key": "e0", "surface": span, "entity_kind": entity_kind, "reference_form": reference, "evidence_ref": ref, "evidence_span": span}
     assertion = {"assertion_id": "a0", "assertion_type": assertion_type, "subject_entity_key": "e0", "value": None, "direction": None, "evidence_ref": ref, "evidence_span": span, "confidence": "high" if decision in {"not_a_single_person", "choose_candidate"} else "medium"}
     rec: dict[str, Any] = {"decision": decision, "chosen_candidate_key": candidate.get("candidate_key") if candidate and decision == "choose_candidate" else None, "confidence": "high" if decision == "not_a_single_person" else "medium", "reason_codes": ["offline_fixture"], "evidence_spans": [{"ref": ref, "span": span}], "new_entity_candidate": {"surface": span} if decision == "new_person_candidate" else None, "new_entity_key": "n0" if decision == "new_person_candidate" else None, "unresolved_reason": "fixture leaves identity open" if decision in {"ambiguous", "unresolved"} else "", "summary": "fixture"}
-    return {"evidence_interpretation": {"entities": [entity], "assertions": [assertion], "summary": "fixture"}, "semantic_assessment": {"assessment_status": "assessed", "semantic_fit": fit, "observed_role": role, "evidence_spans": [{"ref": ref, "span": span}], "summary": "fixture"}, "identity_recommendation": rec, "research_gap": {"status": "open" if decision in {"ambiguous", "unresolved"} else "closed", "missing_constraints": ["identity_evidence"] if decision in {"ambiguous", "unresolved"} else [], "blocking_question": "fixture open" if decision in {"ambiguous", "unresolved"} else "", "next_best_action": "human_review" if decision == "ambiguous" else "search_biography_context" if decision == "unresolved" else "none", "candidate_keys": [candidate.get("candidate_key")] if candidate else [], "stop_condition": "fixture"}}
+    return {"evidence_interpretation": {"entities": [entity], "assertions": [assertion], "summary": "fixture", "target_entity_key": "e0"}, "semantic_assessment": {"assessment_status": "assessed", "semantic_fit": fit, "observed_role": role, "evidence_spans": [{"ref": ref, "span": span}], "summary": "fixture"}, "identity_recommendation": rec, "research_gap": {"status": "open" if decision in {"ambiguous", "unresolved"} else "closed", "missing_constraints": ["identity_evidence"] if decision in {"ambiguous", "unresolved"} else [], "blocking_question": "fixture open" if decision in {"ambiguous", "unresolved"} else "", "next_best_action": "human_review" if decision == "ambiguous" else "search_biography_context" if decision == "unresolved" else "none", "candidate_keys": [candidate.get("candidate_key")] if candidate else [], "stop_condition": "fixture"}}
 
 
 def fixture_cases(cases: Mapping[str, Mapping[str, Any]], source_map: Mapping[str, Mapping[str, Any]]) -> list[dict[str, Any]]:
@@ -482,7 +487,7 @@ def write_projection(out: Path, raw_records: Sequence[Mapping[str, Any]], fixtur
     write_json(out / "metrics.json", {**dict(metrics), "stage": stage, "canonical_write_back": False, "no_frontier_expansion": True})
 
 
-def _search_plan_from_response(payload: Any, case: Mapping[str, Any], candidates: Sequence[Mapping[str, Any]]) -> tuple[dict[str, Any] | None, list[str]]:
+def _search_plan_from_response(payload: Any, case: Mapping[str, Any], candidates: Sequence[Mapping[str, Any]], allowed_sources: Sequence[str] | None = None) -> tuple[dict[str, Any] | None, list[str]]:
     if not isinstance(payload, Mapping) or not isinstance(payload.get("search_plan"), Mapping):
         return None, ["missing_search_plan"]
     plan = dict(payload["search_plan"])
@@ -495,7 +500,7 @@ def _search_plan_from_response(payload: Any, case: Mapping[str, Any], candidates
         errors.append("unknown_candidate_key")
     if plan.get("graph_neighborhood_scope") != "case_only":
         errors.append("frontier_expansion")
-    approved = {"世說新語", "劉孝標注", "余嘉錫笺疏", "晉書", "三國志", "資治通鑑", "資治通鑑考異", "local source corpus"}
+    approved = set(allowed_sources or ALLOWED_SOURCES)
     if not isinstance(plan.get("preferred_sources"), list) or any(str(source) not in approved for source in plan.get("preferred_sources", [])):
         errors.append("unapproved_source")
     for key in ("goal", "stop_condition"):

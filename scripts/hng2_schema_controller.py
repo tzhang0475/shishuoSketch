@@ -163,7 +163,7 @@ def _validate_evidence_list(items: Any, passages: Mapping[str, Mapping[str, Any]
     return valid, errors, boundary
 
 
-def validate_card_payload(payload: Any, case: Mapping[str, Any], passages: Mapping[str, Mapping[str, Any]], candidate_rows: Sequence[Mapping[str, Any]] | None = None) -> dict[str, Any]:
+def validate_card_payload(payload: Any, case: Mapping[str, Any], passages: Mapping[str, Mapping[str, Any]], candidate_rows: Sequence[Mapping[str, Any]] | None = None, *, require_target: bool = False) -> dict[str, Any]:
     """Strictly validate the complete card/envelope before any projection."""
 
     errors: list[str] = []
@@ -211,6 +211,15 @@ def validate_card_payload(payload: Any, case: Mapping[str, Any], passages: Mappi
         ok, normalized = validate_evidence_span(_text(row.get("evidence_ref")), _text(row.get("evidence_span")), passages)
         if not ok:
             errors.append(f"entity[{index}]:evidence_span_not_found")
+
+    target_present = isinstance(card, Mapping) and "target_entity_key" in card
+    target_key = _text(card.get("target_entity_key")) if isinstance(card, Mapping) else ""
+    if require_target and not target_present:
+        errors.append("missing_target_entity_key")
+    if target_present and target_key and target_key not in entity_keys:
+        errors.append("target_entity_key_not_declared")
+    if target_present and target_key and not _valid_local_key(target_key, LOCAL_ENTITY_RE):
+        errors.append("target_entity_key_invalid")
 
     assertion_rows = card.get("assertions") if isinstance(card, Mapping) else None
     if not isinstance(assertion_rows, list):
@@ -274,6 +283,8 @@ def validate_card_payload(payload: Any, case: Mapping[str, Any], passages: Mappi
             errors.append("non_choose_candidate_has_key")
         _, span_errors, _ = _validate_evidence_list(recommendation.get("evidence_spans", []), passages, "recommendation_evidence")
         errors.extend(span_errors)
+        if target_present and not target_key and recommendation.get("decision") not in {"ambiguous", "unresolved", "not_a_single_person", "not_a_person"}:
+            errors.append("null_target_without_unresolved_reason")
     if isinstance(gap, Mapping):
         errors.extend(f"unknown_gap_field:{key}" for key in set(gap) - {"status", "missing_constraints", "blocking_question", "next_best_action", "candidate_keys", "stop_condition"})
         if gap.get("status") not in schema.RESEARCH_GAP_STATUSES:
@@ -328,47 +339,113 @@ def _entity_candidate_match(entity: Mapping[str, Any], catalog: Mapping[str, Map
 
 
 def generate_candidates(case: Mapping[str, Any], card: Mapping[str, Any], passages: Mapping[str, Mapping[str, Any]], prior: Sequence[Mapping[str, Any]], catalog: Mapping[str, Mapping[str, Any]], index: Mapping[str, Sequence[str]]) -> tuple[list[dict[str, Any]], dict[str, Any]]:
-    """Generate/extend candidates strictly from card entities and catalogue."""
+    """Generate candidates after deterministic catalogue lookup and propagation.
+
+    Existing Persons are always considered before a local ``person_id=null``
+    candidate.  Binary identity assertions can transfer an existing catalogue
+    mapping between the two local EvidenceEntity keys; the transfer is kept
+    as provenance and never writes a canonical relation.
+    """
 
     result = [dict(row) for row in prior if isinstance(row, Mapping) and row.get("candidate_key")]
-    by_name = {resolver.matching_normalize(_text(row.get("canonical_name"))): row for row in result}
     context = "\n".join(_text(row.get("text")) for row in passages.values())
+    entity_rows = [row for row in card.get("entities", []) if isinstance(row, Mapping)] if isinstance(card.get("entities"), list) else []
     entity_to_candidate: dict[str, str] = {}
-    for entity in card.get("entities", []) if isinstance(card.get("entities"), list) else []:
-        if not isinstance(entity, Mapping):
-            continue
+    entity_pids: dict[str, list[str]] = {}
+    identity_propagations: list[dict[str, Any]] = []
+
+    def find_by_pid(pid: str) -> dict[str, Any] | None:
+        return next((row for row in result if _text(row.get("person_id")) == pid), None)
+
+    def find_by_surface(surface: str) -> dict[str, Any] | None:
+        folded = resolver.matching_normalize(surface)
+        return next((row for row in result if folded and (folded == resolver.matching_normalize(_text(row.get("canonical_name"))) or folded in {resolver.matching_normalize(_text(x)) for x in row.get("known_forms", [])})), None)
+
+    def ensure_existing(pid: str, surface: str) -> str:
+        person = catalog[pid]
+        row = find_by_pid(pid)
+        if row is None:
+            # A prior local candidate for the same surface is upgraded in
+            # place, retaining its local key and provenance history.
+            row = find_by_surface(surface)
+            if row is not None and not _text(row.get("person_id")):
+                row["person_id"] = pid
+                row["canonical_name"] = _text(person.get("canonical_name")) or _text(row.get("canonical_name"))
+                row["known_forms"] = sorted(set([_text(row.get("canonical_name")), *[_text(x) for x in row.get("known_forms", [])], *_source_forms(person)]))
+                row["candidate_source"] = "evidence_card_catalogue_upgrade"
+            else:
+                key = f"c{len(result)}"
+                row = _candidate_from_person(key, pid, person, "evidence_card_catalogue_match")
+                result.append(row)
+        return _text(row.get("candidate_key"))
+
+    # First pass: direct exact/alias/title/resolver matches only.
+    for entity in entity_rows:
+        key = _text(entity.get("entity_key"))
         kind = _text(entity.get("entity_kind"))
         if kind in {"generic_role", "not_person", "collective_persons", "structural_kinship_expression", "unknown"}:
             continue
         surface = _text(entity.get("surface"))
         pids = _entity_candidate_match(entity, catalog, index, context)
-        chosen_key = None
-        for row in result:
-            forms = {_text(row.get("canonical_name")), *[_text(x) for x in row.get("known_forms", [])]}
-            if resolver.matching_normalize(surface) in {resolver.matching_normalize(x) for x in forms if x}:
-                chosen_key = _text(row.get("candidate_key"))
-                break
-        if chosen_key is None and len(pids) == 1:
-            pid = pids[0]
-            for row in result:
-                if _text(row.get("person_id")) == pid:
-                    chosen_key = _text(row.get("candidate_key"))
-                    break
-            if chosen_key is None:
-                key = f"c{len(result)}"
-                result.append(_candidate_from_person(key, pid, catalog[pid], "evidence_card_catalogue_match"))
-                chosen_key = key
-        if chosen_key is None and kind in {"named_person", "courtesy_name", "abbreviated_name", "kinship_reference", "person_title", "person_office_title"} and len(resolver.matching_normalize(surface)) >= 2:
-            folded_surface = resolver.matching_normalize(surface)
-            if folded_surface not in by_name:
-                key = f"c{len(result)}"
-                row = {"candidate_key": key, "person_id": None, "canonical_name": surface, "known_forms": [surface], "candidate_source": "evidence_card_named_person", "chronology_summary": "", "graph_summary": ""}
-                result.append(row)
-                by_name[folded_surface] = row
-                chosen_key = key
-        if chosen_key:
-            entity_to_candidate[_text(entity.get("entity_key"))] = chosen_key
-    return result, {"entity_to_candidate": entity_to_candidate}
+        entity_pids[key] = pids
+        if len(pids) == 1:
+            entity_to_candidate[key] = ensure_existing(pids[0], surface)
+        else:
+            prior_row = find_by_surface(surface)
+            if prior_row is not None:
+                entity_to_candidate[key] = _text(prior_row.get("candidate_key"))
+
+    # Second pass: identity-bearing binary assertions propagate only an
+    # existing Person mapping, never an unresolved local candidate.
+    propagation_types = {"identity_equivalence", "title_of", "courtesy_name_of", "alias_of"}
+    for assertion in card.get("assertions", []) if isinstance(card.get("assertions"), list) else []:
+        if not isinstance(assertion, Mapping) or _text(assertion.get("assertion_type")) not in propagation_types:
+            continue
+        subject = _text(assertion.get("subject_entity_key"))
+        object_key = _text(assertion.get("object_entity_key"))
+        if not subject or not object_key:
+            continue
+        source_key = target_key = ""
+        if assertion.get("assertion_type") == "title_of":
+            source_key, target_key = object_key, subject
+        else:
+            source_key, target_key = subject, object_key
+        source_candidate = entity_to_candidate.get(source_key)
+        source_row = next((row for row in result if _text(row.get("candidate_key")) == source_candidate), None)
+        if source_row is None or not _text(source_row.get("person_id")):
+            # For identity_equivalence/alias/courtesy, either side may be
+            # the already identified one.
+            source_key, target_key = target_key, source_key
+            source_candidate = entity_to_candidate.get(source_key)
+            source_row = next((row for row in result if _text(row.get("candidate_key")) == source_candidate), None)
+        if source_row is None or not _text(source_row.get("person_id")):
+            continue
+        if target_key not in entity_to_candidate:
+            entity_to_candidate[target_key] = _text(source_row.get("candidate_key"))
+            identity_propagations.append({"assertion_id": _text(assertion.get("assertion_id")), "source_ref": _text(assertion.get("evidence_ref")), "evidence_span": _text(assertion.get("evidence_span")), "propagation_rule": _text(assertion.get("assertion_type")), "source_entity_key": source_key, "target_entity_key": target_key, "resulting_candidate_key": _text(source_row.get("candidate_key")), "resulting_person_id": _text(source_row.get("person_id"))})
+
+    # Final pass: create a local candidate only after all deterministic and
+    # binary propagation paths have failed.
+    existing_names = {resolver.matching_normalize(_text(row.get("canonical_name"))) for row in result}
+    for entity in entity_rows:
+        key = _text(entity.get("entity_key"))
+        if key in entity_to_candidate:
+            continue
+        kind = _text(entity.get("entity_kind"))
+        surface = _text(entity.get("surface"))
+        if kind not in {"named_person", "courtesy_name", "abbreviated_name", "kinship_reference", "person_title", "person_office_title"} or len(resolver.matching_normalize(surface)) < 2:
+            continue
+        folded_surface = resolver.matching_normalize(surface)
+        if folded_surface in existing_names:
+            row = find_by_surface(surface)
+            if row is not None:
+                entity_to_candidate[key] = _text(row.get("candidate_key"))
+            continue
+        candidate_key = f"c{len(result)}"
+        result.append({"candidate_key": candidate_key, "person_id": None, "canonical_name": surface, "known_forms": [surface], "candidate_source": "evidence_card_named_person", "chronology_summary": "", "graph_summary": ""})
+        existing_names.add(folded_surface)
+        entity_to_candidate[key] = candidate_key
+    return result, {"entity_to_candidate": entity_to_candidate, "entity_pids": entity_pids, "identity_propagations": identity_propagations}
 
 
 def _candidate_for_entity(entity_key: str, entity_map: Mapping[str, str]) -> str | None:
@@ -384,37 +461,61 @@ def translate_constraints(card: Mapping[str, Any], candidate_info: Mapping[str, 
         if not isinstance(assertion, Mapping):
             continue
         assertion_id = _text(assertion.get("assertion_id")) or f"a{index}"
-        ckey = _candidate_for_entity(_text(assertion.get("subject_entity_key")), entity_map)
-        constraint_type, status = ASSERTION_TO_CONSTRAINT.get(_text(assertion.get("assertion_type")), ("source_local_context", "support"))
-        if ckey:
+        atype = _text(assertion.get("assertion_type"))
+        subject_key = _text(assertion.get("subject_entity_key"))
+        object_key = _text(assertion.get("object_entity_key"))
+        ckeys: list[tuple[str | None, str]] = []
+        subject_candidate = _candidate_for_entity(subject_key, entity_map)
+        object_candidate = _candidate_for_entity(object_key, entity_map) if object_key else None
+        if atype in {"identity_equivalence", "alias_of", "courtesy_name_of", "title_of"} and subject_candidate and object_candidate and subject_candidate != object_candidate:
+            ckeys.extend([(subject_candidate, "subject"), (object_candidate, "object")])
+        elif atype in {"parent_child", "sibling"} and subject_candidate and object_candidate:
+            ckeys.extend([(subject_candidate, "subject"), (object_candidate, "object")])
+        else:
+            ckeys.append((subject_candidate, "subject"))
+        constraint_type, status = ASSERTION_TO_CONSTRAINT.get(atype, ("source_local_context", "support"))
+        for ckey, side in ckeys:
             rows.append({
                 "constraint_type": constraint_type,
                 "candidate_key": ckey,
-                "constraint_scope": "candidate",
+                "constraint_scope": "candidate" if ckey else "passage",
                 "status": status,
                 "computed_by": "python",
                 "evidence_refs": [_text(assertion.get("evidence_ref"))],
                 "evidence_span": _text(assertion.get("evidence_span")),
                 "assertion_id": assertion_id,
                 "independent": True,
-                "reason_code": f"validated_assertion:{_text(assertion.get('assertion_type'))}",
-            })
-        else:
-            rows.append({
-                "constraint_type": constraint_type,
-                "candidate_key": None,
-                "constraint_scope": "passage",
-                "status": status,
-                "computed_by": "python",
-                "evidence_refs": [_text(assertion.get("evidence_ref"))],
-                "evidence_span": _text(assertion.get("evidence_span")),
-                "assertion_id": assertion_id,
-                "independent": True,
-                "reason_code": f"unbound_assertion:{_text(assertion.get('assertion_type'))}",
+                "reason_code": f"validated_assertion:{atype}" if ckey else f"unbound_assertion:{atype}",
+                "propagation_rule": atype if len(ckeys) > 1 else None,
+                "source_entity_key": subject_key,
+                "target_entity_key": object_key or None,
+                "assertion_side": side,
             })
     # Preserve the immutable seed/case constraints in a compact form.
     rows.append({"constraint_type": "source_local_context", "candidate_key": None, "constraint_scope": "case", "status": "support" if passages else "unknown", "computed_by": "python", "evidence_refs": sorted(passages), "evidence_span": "", "assertion_id": None, "independent": True, "reason_code": "supplied_passage"})
     return rows
+
+
+def merge_constraints(prior: Sequence[Mapping[str, Any]], derived: Sequence[Mapping[str, Any]]) -> list[dict[str, Any]]:
+    """Preserve prior Python constraints and append deterministic new rows.
+
+    Exact duplicates are removed, but rows with different provenance or
+    status are retained so conflicts remain visible.  Prior rows are copied
+    byte-for-byte at the JSON value level and remain first in the projection.
+    """
+
+    result: list[dict[str, Any]] = []
+    seen: set[str] = set()
+    for row in [*prior, *derived]:
+        if not isinstance(row, Mapping):
+            continue
+        clean = dict(row)
+        marker = json.dumps(clean, ensure_ascii=False, sort_keys=True, separators=(",", ":"))
+        if marker in seen:
+            continue
+        seen.add(marker)
+        result.append(clean)
+    return result
 
 
 def _has_identifiable_entity(card: Mapping[str, Any]) -> bool:
@@ -425,26 +526,35 @@ def _has_structural_entity(card: Mapping[str, Any]) -> bool:
     return any(isinstance(row, Mapping) and _text(row.get("entity_kind")) == "structural_kinship_expression" for row in card.get("entities", []) if isinstance(card.get("entities"), list))
 
 
-def recalculate_research_gap(case: Mapping[str, Any], card: Mapping[str, Any], recommendation: Mapping[str, Any], candidates: Sequence[Mapping[str, Any]], constraints: Sequence[Mapping[str, Any]], valid_evidence_refs: Sequence[str]) -> dict[str, Any]:
+def recalculate_research_gap(case: Mapping[str, Any], card: Mapping[str, Any], recommendation: Mapping[str, Any], candidates: Sequence[Mapping[str, Any]], constraints: Sequence[Mapping[str, Any]], valid_evidence_refs: Sequence[str], candidate_info: Mapping[str, Any] | None = None) -> dict[str, Any]:
     """Derive the next action from structured evidence, never summary prose."""
 
     decision = _text(recommendation.get("decision"))
     chosen = _text(recommendation.get("chosen_candidate_key"))
     new_key = _text(recommendation.get("new_entity_key"))
-    structural = _has_structural_entity(card)
-    identifiable = _has_identifiable_entity(card)
-    conflict = any(_text(row.get("status")) == "conflict" for row in constraints if isinstance(row, Mapping))
-    supported = any(_text(row.get("status")) in {"strong_support", "support"} for row in constraints if isinstance(row, Mapping))
-    if structural or decision in {"not_a_single_person", "not_a_person"}:
+    entity_map = candidate_info.get("entity_to_candidate") if isinstance(candidate_info, Mapping) and isinstance(candidate_info.get("entity_to_candidate"), Mapping) else {}
+    target_key = _text(card.get("target_entity_key"))
+    target_entity = next((row for row in card.get("entities", []) if isinstance(row, Mapping) and _text(row.get("entity_key")) == target_key), None) if target_key else None
+    target_kind = _text((target_entity or {}).get("entity_kind"))
+    target_candidate_key = _text(entity_map.get(target_key)) if target_key else ""
+    if not target_candidate_key and decision == "choose_candidate" and chosen and any(_text(row.get("candidate_key")) == chosen for row in candidates):
+        target_candidate_key = chosen
+    identifiable = target_kind in {"named_person", "courtesy_name", "abbreviated_name", "kinship_reference", "person_title", "person_office_title"} if target_key else _has_identifiable_entity(card)
+    structural_target = target_kind == "structural_kinship_expression" if target_key else _has_structural_entity(card)
+    supported = any(_text(row.get("candidate_key")) == target_candidate_key and _text(row.get("status")) in {"strong_support", "support"} for row in constraints if isinstance(row, Mapping)) if target_candidate_key else any(_text(row.get("status")) in {"strong_support", "support"} for row in constraints if isinstance(row, Mapping))
+    blocking_conflict = any(_text(row.get("status")) == "conflict" and (not target_candidate_key or _text(row.get("candidate_key")) in {"", target_candidate_key} or _text(row.get("constraint_scope")) in {"seed", "case", "passage"}) for row in constraints if isinstance(row, Mapping))
+    if structural_target and decision in {"not_a_single_person", "unresolved", "ambiguous"}:
         return {"status": "closed", "missing_constraints": [], "blocking_question": "", "next_best_action": "none", "candidate_keys": [], "stop_condition": "structured card establishes that no single Person node is required"}
+    if decision == "not_a_person" and (not target_key or target_kind in {"not_person", "generic_role", "collective_persons"}):
+        return {"status": "closed", "missing_constraints": [], "blocking_question": "", "next_best_action": "none", "candidate_keys": [], "stop_condition": "structured card establishes that no Person node is required"}
     selected = next((row for row in candidates if _text(row.get("candidate_key")) == chosen), None)
     # A candidate generated from a card's named surface may be a local
     # evidence candidate without a catalogue person_id. It is not an
     # existing-person resolution, so choosing it cannot close the gap until
     # Python has an existing person to link.
-    if decision == "choose_candidate" and chosen and selected and selected.get("person_id") and supported:
+    if decision == "choose_candidate" and chosen and chosen == target_candidate_key and selected and selected.get("person_id") and supported and not blocking_conflict:
         return {"status": "closed", "missing_constraints": [], "blocking_question": "", "next_best_action": "none", "candidate_keys": [], "stop_condition": "validated candidate has structured source support"}
-    if decision == "new_person_candidate" and new_key and identifiable and supported:
+    if decision == "new_person_candidate" and new_key and (not target_key or target_candidate_key) and identifiable and supported and not blocking_conflict:
         return {"status": "closed", "missing_constraints": [], "blocking_question": "", "next_best_action": "none", "candidate_keys": [], "stop_condition": "named new-person candidate is source-supported"}
     old = case.get("research_gap") if isinstance(case.get("research_gap"), Mapping) else {}
     missing = [str(x) for x in old.get("missing_constraints", []) if str(x)] or ["identity_evidence"]
@@ -462,7 +572,7 @@ def recalculate_research_gap(case: Mapping[str, Any], card: Mapping[str, Any], r
     return {"status": "open", "missing_constraints": missing, "blocking_question": str(old.get("blocking_question") or "Structured evidence does not uniquely identify this mention"), "next_best_action": action, "candidate_keys": [str(row.get("candidate_key")) for row in candidates if row.get("candidate_key")], "stop_condition": str(old.get("stop_condition") or "stop when independent source-local evidence resolves the remaining constraint")}
 
 
-def state_delta(before_candidates: Sequence[Mapping[str, Any]], after_candidates: Sequence[Mapping[str, Any]], before_constraints: Sequence[Mapping[str, Any]], after_constraints: Sequence[Mapping[str, Any]], before_refs: Sequence[str], after_refs: Sequence[str], previous_conflicts: Sequence[Mapping[str, Any]] = ()) -> dict[str, Any]:
+def state_delta(before_candidates: Sequence[Mapping[str, Any]], after_candidates: Sequence[Mapping[str, Any]], before_constraints: Sequence[Mapping[str, Any]], after_constraints: Sequence[Mapping[str, Any]], before_refs: Sequence[str], after_refs: Sequence[str], previous_conflicts: Sequence[Mapping[str, Any]] = (), identity_propagations: Sequence[Mapping[str, Any]] = ()) -> dict[str, Any]:
     before_by = {str(row.get("candidate_key")): row for row in before_candidates if isinstance(row, Mapping) and row.get("candidate_key")}
     after_by = {str(row.get("candidate_key")): row for row in after_candidates if isinstance(row, Mapping) and row.get("candidate_key")}
     before_canonical = {key: json.dumps(row, ensure_ascii=False, sort_keys=True) for key, row in before_by.items()}
@@ -472,25 +582,39 @@ def state_delta(before_candidates: Sequence[Mapping[str, Any]], after_candidates
     added = sorted(set(after_by) - set(before_by))
     removed = sorted(set(before_by) - set(after_by))
     changed = sorted(key for key in set(before_canonical) & set(after_canonical) if before_canonical[key] != after_canonical[key])
+    upgraded = sorted(key for key in set(before_by) & set(after_by) if not _text(before_by[key].get("person_id")) and _text(after_by[key].get("person_id")))
+    added_constraints = sorted(after_checks - before_checks)
+    preserved_constraints = sorted(after_checks & before_checks)
+    conflicts = [dict(row) for row in after_constraints if isinstance(row, Mapping) and _text(row.get("status")) == "conflict"]
     return {
         "new_evidence": sorted(set(after_refs) - set(before_refs)),
+        "added_candidates": added,
         "new_candidates": added,
+        "upgraded_candidates": upgraded,
         "removed_candidates": removed,
         "unchanged_candidates": sorted(set(before_by) & set(after_by) - set(changed)),
+        "added_constraints": added_constraints,
+        "preserved_constraints": preserved_constraints,
         "changed_constraints": sorted(after_checks - before_checks),
         "removed_conflicts": [],
         "new_conflicts": sorted(row for row in after_constraints if isinstance(row, Mapping) and row.get("status") == "conflict" and json.dumps(row, ensure_ascii=False, sort_keys=True) not in before_checks),
-        "material": bool(set(after_refs) - set(before_refs) or added or removed or changed or after_checks != before_checks),
+        "conflicts": conflicts,
+        "identity_propagations": [dict(row) for row in identity_propagations if isinstance(row, Mapping)],
+        "material": bool(set(after_refs) - set(before_refs) or added or upgraded or removed or changed or after_checks != before_checks or identity_propagations),
     }
 
 
-def project_identity_decision(case: Mapping[str, Any], recommendation: Mapping[str, Any], candidates: Sequence[Mapping[str, Any]], card: Mapping[str, Any], gap: Mapping[str, Any], supporting_refs: Sequence[str]) -> tuple[dict[str, Any], dict[str, Any]]:
+def project_identity_decision(case: Mapping[str, Any], recommendation: Mapping[str, Any], candidates: Sequence[Mapping[str, Any]], card: Mapping[str, Any], gap: Mapping[str, Any], supporting_refs: Sequence[str], target_candidate_key: str | None = None) -> tuple[dict[str, Any], dict[str, Any]]:
     chosen = _text(recommendation.get("chosen_candidate_key")) or None
     selected = next((row for row in candidates if _text(row.get("candidate_key")) == chosen), None)
     decision = _text(recommendation.get("decision"))
     confidence = _text(recommendation.get("confidence")) or "unknown"
     reasons = [str(x) for x in recommendation.get("reason_codes", []) if str(x)] if isinstance(recommendation.get("reason_codes"), list) else []
-    if decision == "choose_candidate" and selected and selected.get("person_id"):
+    target_key = _text(card.get("target_entity_key"))
+    target_entity = next((row for row in card.get("entities", []) if isinstance(row, Mapping) and _text(row.get("entity_key")) == target_key), None) if target_key else None
+    target_structural = _text((target_entity or {}).get("entity_kind")) == "structural_kinship_expression" if target_key else _has_structural_entity(card)
+    target_match = not target_candidate_key or not chosen or chosen == target_candidate_key
+    if decision == "choose_candidate" and target_match and selected and selected.get("person_id"):
         identity_status = "resolved_existing"
         person_id = _text(selected.get("person_id"))
         new_entity_key = None
@@ -501,7 +625,7 @@ def project_identity_decision(case: Mapping[str, Any], recommendation: Mapping[s
         new_entity_key = _text(recommendation.get("new_entity_key"))
         provisional = f"hng2-sc-provisional-{stable_hash({'case_id': case.get('case_id'), 'new_entity_key': new_entity_key})[:20]}"
         action = {"action": "create_provisional_candidate", "node_type": "provisional_person", "person_id": None, "provisional_person_id": provisional, "frontier_status": "candidate", "reason_codes": ["evidence_card_new_person", *reasons]}
-    elif decision == "not_a_single_person" or _has_structural_entity(card):
+    elif target_structural and (decision == "not_a_single_person" or decision in {"unresolved", "ambiguous"}):
         identity_status = "not_single_person"
         person_id = None
         new_entity_key = None
@@ -522,7 +646,7 @@ def project_identity_decision(case: Mapping[str, Any], recommendation: Mapping[s
         new_entity_key = None
         action = {"action": "hold_for_review", "node_type": "none", "person_id": None, "provisional_person_id": None, "frontier_status": "needs_semantic_parse", "reason_codes": ["unresolved_recommendation", *reasons]}
     decision_doc = {
-        "case_id": case.get("case_id"), "identity_status": identity_status, "chosen_candidate_key": chosen if identity_status == "resolved_existing" else None,
+        "case_id": case.get("case_id"), "target_entity_key": target_key or None, "identity_status": identity_status, "chosen_candidate_key": chosen if identity_status == "resolved_existing" else None,
         "person_id": person_id, "new_entity_key": new_entity_key, "confidence": confidence, "reason_codes": reasons,
         "supporting_evidence_refs": sorted(set(str(x) for x in supporting_refs if x)), "decision_summary": _text(recommendation.get("summary") or recommendation.get("unresolved_reason")), "canonical_write_back": False,
     }
@@ -531,18 +655,23 @@ def project_identity_decision(case: Mapping[str, Any], recommendation: Mapping[s
 
 def card_to_dict(payload: Mapping[str, Any]) -> dict[str, Any]:
     card = payload.get("evidence_interpretation") if isinstance(payload.get("evidence_interpretation"), Mapping) else {}
-    return {"entities": [dict(row) for row in card.get("entities", []) if isinstance(row, Mapping)], "assertions": [dict(row) for row in card.get("assertions", []) if isinstance(row, Mapping)], "summary": _text(card.get("summary"))}
+    return {"entities": [dict(row) for row in card.get("entities", []) if isinstance(row, Mapping)], "assertions": [dict(row) for row in card.get("assertions", []) if isinstance(row, Mapping)], "summary": _text(card.get("summary")), "target_entity_key": _text(card.get("target_entity_key")) or None}
 
 
 def project_valid_card(case: Mapping[str, Any], payload: Mapping[str, Any], passages: Mapping[str, Mapping[str, Any]], prior_candidates: Sequence[Mapping[str, Any]], prior_constraints: Sequence[Mapping[str, Any]], prior_refs: Sequence[str], catalog: Mapping[str, Mapping[str, Any]], index: Mapping[str, Sequence[str]]) -> dict[str, Any]:
     card = card_to_dict(payload)
     candidates, candidate_info = generate_candidates(case, card, passages, prior_candidates, catalog, index)
-    constraints = translate_constraints(card, candidate_info, candidates, passages)
     recommendation = payload.get("identity_recommendation") if isinstance(payload.get("identity_recommendation"), Mapping) else {}
+    target_key = _text(card.get("target_entity_key"))
+    if target_key and not candidate_info.get("entity_to_candidate", {}).get(target_key) and _text(recommendation.get("chosen_candidate_key")) and any(_text(row.get("candidate_key")) == _text(recommendation.get("chosen_candidate_key")) and _text(row.get("person_id")) for row in candidates):
+        candidate_info.setdefault("entity_to_candidate", {})[target_key] = _text(recommendation.get("chosen_candidate_key"))
+        candidate_info.setdefault("target_bindings", []).append({"target_entity_key": target_key, "candidate_key": _text(recommendation.get("chosen_candidate_key")), "rule": "target_recommendation_binding"})
+    constraints = merge_constraints(prior_constraints, translate_constraints(card, candidate_info, candidates, passages))
     refs = sorted(set([_text(row.get("evidence_ref")) for row in card.get("entities", []) if isinstance(row, Mapping)] + [_text(row.get("evidence_ref")) for row in card.get("assertions", []) if isinstance(row, Mapping)] + list(prior_refs)))
-    gap = recalculate_research_gap(case, card, recommendation, candidates, constraints, refs)
-    decision, action = project_identity_decision(case, recommendation, candidates, card, gap, refs)
-    delta = state_delta(prior_candidates, candidates, prior_constraints, constraints, prior_refs, refs)
+    gap = recalculate_research_gap(case, card, recommendation, candidates, constraints, refs, candidate_info)
+    target_candidate_key = _text(candidate_info.get("entity_to_candidate", {}).get(target_key)) if target_key else None
+    decision, action = project_identity_decision(case, recommendation, candidates, card, gap, refs, target_candidate_key)
+    delta = state_delta(prior_candidates, candidates, prior_constraints, constraints, prior_refs, refs, candidate_info.get("identity_propagations", []))
     return {"card": card, "candidates": candidates, "candidate_info": candidate_info, "constraints": constraints, "recommendation": dict(recommendation), "research_gap": gap, "identity_decision": decision, "graph_action": action, "state_delta": delta, "supporting_refs": refs}
 
 

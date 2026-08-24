@@ -1,0 +1,52 @@
+{
+  "canonical_write_back": false,
+  "case_id": "hng1r2-hng1-raw-relation-b97bdeb3fbec092978bc",
+  "elapsed_seconds": 4.965088,
+  "finish_reason": "stop",
+  "immutable": true,
+  "input_hash": "7e1f80eac9f73a4ffdd10473668a7709803a81d014f6f5a5fa136b64d112582e",
+  "kind": "semantic",
+  "model": "deepseek-v4-flash",
+  "parse_error": null,
+  "prompt_version": "hng2-sc1-card-hardening-v1",
+  "provider": "deepseek",
+  "response": {
+    "choices": [
+      {
+        "finish_reason": "stop",
+        "index": 0,
+        "logprobs": null,
+        "message": {
+          "content": "{\n  \"evidence_interpretation\": {\n    \"target_entity_key\": \"e0\",\n    \"entities\": [\n      {\n        \"key\": \"e0\",\n        \"surface\": \"虞喜\",\n        \"entity_type\": \"named_person\",\n        \"description\": \"會稽虞喜，隱居海嵎，有高世之風\"\n      },\n      {\n        \"key\": \"e1\",\n        \"surface\": \"喜弟預\",\n        \"entity_type\": \"named_person\",\n        \"description\": \"虞喜之弟，名預\"\n      },\n      {\n        \"key\": \"e2\",\n        \"surface\": \"喜弟預女\",\n        \"entity_type\": \"named_person\",\n        \"description\": \"虞預之女，嫁與孫晷\"\n      }\n    ],\n    \"assertions\": [\n      {\n        \"key\": \"a0\",\n        \"subject_key\": \"e0\",\n        \"predicate\": \"隱居海嵎\",\n        \"object\": \"有高世之風\",\n        \"evidence_spans\": [\n          {\n            \"passage_ref\": \"hng01-jinshu-088-liezhuan-007\",\n            \"start\": 0,\n            \"end\": 0,\n            \"text\": \"會稽虞喜隠居海嵎有高世之風\"\n          }\n        ]\n      },\n      {\n        \"key\": \"a1\",\n        \"subject_key\": \"e0\",\n        \"predicate\": \"有弟\",\n        \"object\": \"預\",\n        \"evidence_spans\": [\n          {\n            \"passage_ref\": \"hng01-jinshu-088-liezhuan-007\",\n            \"start\": 0,\n            \"end\": 0,\n            \"text\": \"娉喜弟預女為妻\"\n          }\n        ]\n      },\n      {\n        \"key\": \"a2\",\n        \"subject_key\": \"e1\",\n        \"predicate\": \"有女\",\n        \"object\": \"嫁與孫晷\",\n        \"evidence_spans\": [\n          {\n            \"passage_ref\": \"hng01-jinshu-088-liezhuan-007\",\n            \"start\": 0,\n            \"end\": 0,\n            \"text\": \"娉喜弟預女為妻\"\n          }\n        ]\n      }\n    ]\n  },\n  \"semantic_assessment\": {\n    \"assessment_status\": \"assessed\",\n    \"semantic_fit\": \"unknown\",\n    \"observed_role\": \"referenced_person\",\n    \"evidence_spans\": [\n      {\n        \"passage_ref\": \"hng01-jinshu-088-liezhuan-007\",\n        \"start\": 0,\n        \"end\": 0,\n        \"text\": \"會稽虞喜隠居海嵎有高世之風\"\n      },\n      {\n        \"passage_ref\": \"hng01-jinshu-088-liezhuan-007\",\n        \"start\": 0,\n        \"end\": 0,\n        \"text\": \"娉喜弟預女為妻\"\n      }\n    ]\n  },\n  \"identity_recommendation\": {\n    \"decision\": \"unresolved\",\n    \"chosen_candidate_key\": null,\n    \"confidence\": \"unknown\",\n    \"reason_codes\": [\"kinship_chain_unparsed\"],\n    \"evidence_spans\": [\n      {\n        \"passage_ref\": \"hng01-jinshu-088-liezhuan-007\",\n        \"start\": 0,\n        \"end\": 0,\n        \"text\": \"會稽虞喜隠居海嵎有高世之風\"\n      },\n      {\n        \"passage_ref\": \"hng01-jinshu-088-liezhuan-007\",\n        \"start\": 0,\n        \"end\": 0,\n        \"text\": \"娉喜弟預女為妻\"\n      }\n    ],\n    \"new_entity_candidate\": null,\n    \"new_entity_key\": null,\n    \"unresolved_reason\": \"The kinship chain involving 虞喜, his brother 預, and 預's daughter is not fully parsed; cannot uniquely identify the target entity.\"\n  },\n  \"research_gap\": {\n    \"status\": \"open\",\n    \"missing_constraints\": [\"structural_kinship_parse\"],\n    \"blocking_question\": \"Which individuals are represented by the kinship chain?\",\n    \"next_best_action\": \"search_kinship_context\",\n    \"candidate_keys\": [],\n    \"stop_condition\": \"do not create a node until the chain is parsed\"\n  }\n}",
+          "role": "assistant"
+        }
+      }
+    ],
+    "created": 1787581192,
+    "id": "5a1c2df0-4759-4cbe-91b4-26b125578cec",
+    "model": "deepseek-v4-flash",
+    "object": "chat.completion",
+    "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+    "usage": {
+      "completion_tokens": 985,
+      "prompt_cache_hit_tokens": 384,
+      "prompt_cache_miss_tokens": 1647,
+      "prompt_tokens": 2031,
+      "prompt_tokens_details": {
+        "cached_tokens": 384
+      },
+      "total_tokens": 3016
+    }
+  },
+  "response_channel": "content",
+  "sequence": 6,
+  "start_time": "2026-08-24T14:19:52Z",
+  "status": "response",
+  "usage": {
+    "completion_tokens": 985,
+    "prompt_cache_hit_tokens": 384,
+    "prompt_cache_miss_tokens": 1647,
+    "prompt_tokens": 2031,
+    "total_tokens": 3016
+  }
+}

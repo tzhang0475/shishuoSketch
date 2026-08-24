@@ -1,0 +1,52 @@
+{
+  "canonical_write_back": false,
+  "case_id": "hng1r2-hng1-raw-relation-921d528c3cf9154fa43c",
+  "elapsed_seconds": 5.102716,
+  "finish_reason": "stop",
+  "immutable": true,
+  "input_hash": "c83201e523858c47834e148fdcd544e11e1e84e8b4f2485fc411bfba69525000",
+  "kind": "semantic",
+  "model": "deepseek-v4-flash",
+  "parse_error": null,
+  "prompt_version": "hng2-sc1-card-hardening-v1",
+  "provider": "deepseek",
+  "response": {
+    "choices": [
+      {
+        "finish_reason": "stop",
+        "index": 0,
+        "logprobs": null,
+        "message": {
+          "content": "{\n  \"evidence_interpretation\": {\n    \"target_entity_key\": \"e0\",\n    \"target_entity_surface\": \"廙\",\n    \"entity_kind\": \"abbreviated_name\",\n    \"discourse_role\": \"referenced_person\",\n    \"mention_scope\": \"narrative\",\n    \"reference_form\": \"abbreviated\",\n    \"summary\": \"The surface '廙' refers to a person named 王廙, who is a general in the narrative, involved in military actions against 鄭攀 and 杜曾.\"\n  },\n  \"semantic_assessment\": {\n    \"nature\": \"abbreviated_name\",\n    \"identifiability\": \"single_person\",\n    \"function\": \"event_participant\",\n    \"evidence\": [\n      \"廙將赴荊州，留長史劉浚鎭揚口壘。\",\n      \"竟陵內史朱伺謂廙曰：\",\n      \"廙性矜厲自用，以伺爲老怯，遂西行。\",\n      \"廙乃遣伺歸，裁至壘，卽爲曾所圍。\"\n    ],\n    \"candidate_assessment\": [\n      {\n        \"candidate_key\": \"c0\",\n        \"status\": \"support\",\n        \"evidence\": \"廙將赴荊州，留長史劉浚鎭揚口壘。\"\n      }\n    ]\n  },\n  \"identity_recommendation\": {\n    \"decision\": \"match\",\n    \"chosen_candidate_key\": \"c0\",\n    \"new_entity_key\": null,\n    \"reason\": \"The surface '廙' is an abbreviation of the name 王廙, and the context clearly refers to the same person as the candidate c0. The hard constraint 'source_local_context' supports this identification.\"\n  },\n  \"research_gap\": {\n    \"status\": \"resolved\",\n    \"blocking_question\": null,\n    \"missing_constraints\": [],\n    \"next_best_action\": null,\n    \"stop_condition\": \"The target entity is identified as candidate c0.\"\n  },\n  \"evidence_entities\": [\n    {\n      \"key\": \"e0\",\n      \"name\": \"王廙\",\n      \"type\": \"person\",\n      \"canonical\": true,\n      \"evidence_spans\": [\n        \"廙將赴荊州\",\n        \"竟陵內史朱伺謂廙曰\",\n        \"廙性矜厲自用\",\n        \"廙乃遣伺歸\"\n      ]\n    }\n  ],\n  \"evidence_assertions\": [\n    {\n      \"key\": \"a0\",\n      \"entity_key\": \"e0\",\n      \"property\": \"identity\",\n      \"value\": \"王廙\",\n      \"evidence_spans\": [\n        \"廙將赴荊州\"\n      ]\n    },\n    {\n      \"key\": \"a1\",\n      \"entity_key\": \"e0\",\n      \"property\": \"role\",\n      \"value\": \"general\",\n      \"evidence_spans\": [\n        \"廙將赴荊州\"\n      ]\n    },\n    {\n      \"key\": \"a2\",\n      \"entity_key\": \"e0\",\n      \"property\": \"action\",\n      \"value\": \"leading troops to Jingzhou\",\n      \"evidence_spans\": [\n        \"廙將赴荊州\"\n      ]\n    },\n    {\n      \"key\": \"a3\",\n      \"entity_key\": \"e0\",\n      \"property\": \"interlocutor\",\n      \"value\": \"朱伺\",\n      \"evidence_spans\": [\n        \"竟陵內史朱伺謂廙曰\"\n      ]\n    },\n    {\n      \"key\": \"a4\",\n      \"entity_key\": \"e0\",\n      \"property\": \"character\",\n      \"value\": \"矜厲自用\",\n      \"evidence_spans\": [\n        \"廙性矜厲自用\"\n      ]\n    },\n    {\n      \"key\": \"a5\",\n      \"entity_key\": \"e0\",\n      \"property\": \"action\",\n      \"value\": \"sending 伺 back\",\n      \"evidence_spans\": [\n        \"廙乃遣伺歸\"\n      ]\n    }\n  ]\n}",
+          "role": "assistant"
+        }
+      }
+    ],
+    "created": 1787581021,
+    "id": "38953347-1d70-4c5e-9fcc-cf16c57a0064",
+    "model": "deepseek-v4-flash",
+    "object": "chat.completion",
+    "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+    "usage": {
+      "completion_tokens": 901,
+      "prompt_cache_hit_tokens": 256,
+      "prompt_cache_miss_tokens": 2009,
+      "prompt_tokens": 2265,
+      "prompt_tokens_details": {
+        "cached_tokens": 256
+      },
+      "total_tokens": 3166
+    }
+  },
+  "response_channel": "content",
+  "sequence": 4,
+  "start_time": "2026-08-24T14:17:01Z",
+  "status": "response",
+  "usage": {
+    "completion_tokens": 901,
+    "prompt_cache_hit_tokens": 256,
+    "prompt_cache_miss_tokens": 2009,
+    "prompt_tokens": 2265,
+    "total_tokens": 3166
+  }
+}

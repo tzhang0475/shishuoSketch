@@ -255,12 +255,18 @@ class EvidenceInterpretation:
     entities: list[EvidenceEntity] = field(default_factory=list)
     assertions: list[EvidenceAssertion] = field(default_factory=list)
     summary: str = ""
+    target_entity_key: str | None = None
 
     def __post_init__(self) -> None:
         keys = [entity.entity_key for entity in self.entities]
         if len(keys) != len(set(keys)):
             raise ValueError("EvidenceInterpretation entity_key must be unique")
         known = set(keys)
+        if self.target_entity_key is not None:
+            if not re_match_local_key(self.target_entity_key, "e"):
+                raise ValueError("EvidenceInterpretation.target_entity_key must be eN or null")
+            if self.target_entity_key not in known:
+                raise ValueError("EvidenceInterpretation.target_entity_key is not declared")
         for assertion in self.assertions:
             if assertion.subject_entity_key not in known:
                 raise ValueError("EvidenceAssertion subject key is not declared")
