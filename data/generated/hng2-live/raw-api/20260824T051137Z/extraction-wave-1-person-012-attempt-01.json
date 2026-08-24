@@ -1,0 +1,92 @@
+{
+  "attempts": [
+    {
+      "actual_request": true,
+      "api_usage": {
+        "completion_tokens": 3324,
+        "completion_tokens_details": {
+          "reasoning_tokens": 2860
+        },
+        "prompt_cache_hit_tokens": 512,
+        "prompt_cache_miss_tokens": 733,
+        "prompt_tokens": 1245,
+        "prompt_tokens_details": {
+          "cached_tokens": 512
+        },
+        "total_tokens": 4569
+      },
+      "attempt": 1,
+      "completion_kind": "source_extraction",
+      "elapsed_seconds": 32.35789,
+      "exception_class": null,
+      "exception_message": null,
+      "failure_class": null,
+      "http_status": 200,
+      "response_model": "deepseek-v4-flash",
+      "round": 1,
+      "start_time": "2026-08-24T05:31:31.233736+00:00",
+      "story_id": "person-012"
+    }
+  ],
+  "canonical_write_back": false,
+  "content": "{\n  \"relation_candidates\": [\n    {\n      \"counterpart_surface\": \"朂\",\n      \"relation_type\": \"parent_child\",\n      \"semantic_level\": \"explicit\",\n      \"direction\": \"counterpart_to_seed\",\n      \"claim\": \"袁宏之父為朂，官臨汝令。\",\n      \"evidence_ref\": \"hng01-shishuo-02-yanyu-083-annotation-003\",\n      \"exact_quote\": \"父朂臨汝令\",\n      \"confidence\": \"high\",\n      \"historical_verification_open\": true\n    },\n    {\n      \"counterpart_surface\": \"猷\",\n      \"relation_type\": \"grandparent_grandchild\",\n      \"semantic_level\": \"explicit\",\n      \"direction\": \"counterpart_to_seed\",\n      \"claim\": \"袁宏之祖父為猷，官侍中。\",\n      \"evidence_ref\": \"hng01-shishuo-02-yanyu-083-annotation-003\",\n      \"exact_quote\": \"祖猷侍中\",\n      \"confidence\": \"high\",\n      \"historical_verification_open\": true\n    }\n  ],\n  \"temporal_candidates\": [],\n  \"identity_surfaces\": [\n    {\n      \"surface\": \"袁宏\",\n      \"evidence_ref\": \"hng02-zizhi-tongjian-wikisource-hu-062\",\n      \"exact_quote\": \"袁宏《紀》\"\n    },\n    {\n      \"surface\": \"袁宏\",\n      \"evidence_ref\": \"hng01-shishuo-02-yanyu-083-annotation-003\",\n      \"exact_quote\": \"袁宏字彦伯\"\n    },\n    {\n      \"surface\": \"彦伯\",\n      \"evidence_ref\": \"hng01-shishuo-02-yanyu-083-annotation-003\",\n      \"exact_quote\": \"字彦伯\"\n    },\n    {\n      \"surface\": \"宏\",\n      \"evidence_ref\": \"hng01-shishuo-02-yanyu-083-annotation-003\",\n      \"exact_quote\": \"宏起家\"\n    }\n  ]\n}",
+  "failure_class": null,
+  "frontier_id": "person-012",
+  "immutable": true,
+  "model": "deepseek-v4-flash",
+  "model_input_hash": "de03456c54a0f0a33fd6fd86acbb81c2e0163db853613b1807c576e403a13b73",
+  "opened_refs": [
+    "hng02-zizhi-tongjian-wikisource-hu-062",
+    "hng01-shishuo-02-yanyu-083-annotation-003",
+    "hng02-jinshu-wikisource-punctuated-075",
+    "hng02-jinshu-wikisource-punctuated-076"
+  ],
+  "prompt_version": "hng2-live-frozen-extraction-and-identity-v1",
+  "raw_response": {
+    "choices": [
+      {
+        "finish_reason": "stop",
+        "index": 0,
+        "logprobs": null,
+        "message": {
+          "content": "{\n  \"relation_candidates\": [\n    {\n      \"counterpart_surface\": \"朂\",\n      \"relation_type\": \"parent_child\",\n      \"semantic_level\": \"explicit\",\n      \"direction\": \"counterpart_to_seed\",\n      \"claim\": \"袁宏之父為朂，官臨汝令。\",\n      \"evidence_ref\": \"hng01-shishuo-02-yanyu-083-annotation-003\",\n      \"exact_quote\": \"父朂臨汝令\",\n      \"confidence\": \"high\",\n      \"historical_verification_open\": true\n    },\n    {\n      \"counterpart_surface\": \"猷\",\n      \"relation_type\": \"grandparent_grandchild\",\n      \"semantic_level\": \"explicit\",\n      \"direction\": \"counterpart_to_seed\",\n      \"claim\": \"袁宏之祖父為猷，官侍中。\",\n      \"evidence_ref\": \"hng01-shishuo-02-yanyu-083-annotation-003\",\n      \"exact_quote\": \"祖猷侍中\",\n      \"confidence\": \"high\",\n      \"historical_verification_open\": true\n    }\n  ],\n  \"temporal_candidates\": [],\n  \"identity_surfaces\": [\n    {\n      \"surface\": \"袁宏\",\n      \"evidence_ref\": \"hng02-zizhi-tongjian-wikisource-hu-062\",\n      \"exact_quote\": \"袁宏《紀》\"\n    },\n    {\n      \"surface\": \"袁宏\",\n      \"evidence_ref\": \"hng01-shishuo-02-yanyu-083-annotation-003\",\n      \"exact_quote\": \"袁宏字彦伯\"\n    },\n    {\n      \"surface\": \"彦伯\",\n      \"evidence_ref\": \"hng01-shishuo-02-yanyu-083-annotation-003\",\n      \"exact_quote\": \"字彦伯\"\n    },\n    {\n      \"surface\": \"宏\",\n      \"evidence_ref\": \"hng01-shishuo-02-yanyu-083-annotation-003\",\n      \"exact_quote\": \"宏起家\"\n    }\n  ]\n}",
+          "reasoning_content": "我们被要求从给定的本地原文中抽取候选。Seed person是袁宏（袁彦伯，彦伯，袁公，袁宏）。我们只看提供的四个passages。\n\n我们需要抽取关系候选、时间候选、身份表面（即袁宏的别名等）。但“identity_surfaces”是对于seed person的表面？还是任何人物表面？指令说“抽取原文明确支持的一跳人物关系、时间事实和人物表面”。人物表面可能指提到的所有人名？但seed是袁宏，identity_surfaces应该是袁宏的外号/别名？或者所有出现的表面？我们看例子：identity_surfaces输出{surface, evidence_ref, exact_quote}。通常是seed的别名。题目中说“不要把person_id分配”。这里seed_person给出了aliases。我们要从passages中抽取袁宏的表面形式（如果出现）。但片段中只有第二段有袁宏的信息：“陽秋曰袁宏字彦伯陳郡人魏郎中令煥六世孫也”。这里袁宏字彦伯。所以identity_surfaces可以包括“袁宏”、“彦伯”。但是题目要求“只抽取原文明确支持的一跳人物关系、时间事实和人物表面”。人物表面可能指所有出现的人物表面，但通常identity_surfaces是用于seed的。我们仔细看输出结构：identity_surfaces是包含surface, evidence_ref, exact_quote的列表。很可能就是seed的别名/称号。我们只列出袁宏相关的表面，因为seed是袁宏。注意“袁公”也可能出现？但在文本中没有。我们只输出出现过的。\n\n现在看passages：\n\n1. 資治通鑑卷062：“帝以暹、楊有翼車駕之功，詔一切勿問。辛亥，以曹操領司隸校尉、錄尚書事。操於是誅尚書馮碩等三人，討有罪也；{{*|袁宏《紀》曰：誅碩及議郎侯祈、侍中壺崇。” 这里出现了袁宏，但只是作为《紀》的作者，注释引用了袁宏《紀》。这是原文文本中的，evidence_ref是hng02-zizhi-tongjian-wikisource-hu-062。exact_quote可以是“袁宏《紀》”。这算不算袁宏的表面？是。但这里没有关系、时间事实（关于袁宏的没有）。只是提及。\n\n2. 世說新語注：“(祖猷侍中父朂臨汝令宏起家建威參軍安南司馬/陽秋曰袁宏字彦伯陳郡人魏郎中令煥六世孫也)” 这里明确说袁宏字彦伯，陈郡人，是魏郎中令袁焕六世孙。所以有身份信息。这里可以抽取身份表面“袁宏”、“彦伯”。关系：袁宏是袁焕的六世孙（同族？但六世孙不是直接的关系类型，allowed中有cousin_clan_kin? 还有same_clan? uncle_nephew? grandparent_grandchild? 没有直接六世孙。六世孙是后代，在allowed中只有grandparent_grandchild，但那是祖孙关系。六世孙太远，不属于这些类型。关系类型中没有“ancestor_descendant”这种。所以可能不能抽。时间事实：没有出生死亡。但“起家建威參軍安南司馬”是官职？office_tenure？这是袁宏的官职，但没有时间。可以抽office_tenure吗？需要时间吗？temporal_candidates的claim要包含时间？它说“时间事实”，有major_event_participation，office_tenure等。这里说他起家建威参军、安南司马，这是官职，但没有时间，我们不知道何时。但原文说“起家”即初仕，是事件。可以抽office_tenure或residence_activity_phase? 但temporal_scope需要时间范围。没有时间信息，所以可能不抽。但我们可以说precision是unknown? 不，更好不抽。\n\n3. 晉書卷075：这一段是文章，没有袁宏出现。不抽。\n\n4. 晉書卷076：“於是朝議乃定。及孝武帝即位，太皇太后令以帝沖幼，加在諒闇，令溫依周公居攝故事。事已施行，彪之曰：“此異常大事，大司馬必當固讓，使萬機停滯，稽廢山陵，未敢奉令。謹具封還內，請停。” 这里袁宏没出现。不抽。\n\n所以我们要输出候选。\n\n注意：关系必须是seed到counterpart的一跳关系。这里seed是袁宏，只有一个可能的counterpart是袁焕（六世祖）。但关系类型没有ancestor。也许可以归为“same_clan”？但六世孙也算同族。或者“cousin_clan_kin”？“cousin_clan_kin”可能指堂表亲或宗族亲属。袁宏是袁焕六世孙，属于同族，但“cousin_clan_kin”可能更近。我们看定义：allowed_relation_types中有“same_clan”和“cousin_clan_kin”。same_clan意思是同宗族。袁宏和袁焕同族，但关系明确为祖先，所以可以用same_clan吗？但是same_clan通常表示同属一个宗族，而这里具体是祖先关系。但类型没有ancestor。也许不抽关系，因为类型不匹配。但指令说“只使用allowed_relation_types”，所以没有合适类型就不抽。\n\n另一个可能关系：袁宏是“魏郎中令煥六世孫”，即袁焕的后代，这属于亲属关系，但不在列表中。列表有grandparent_grandchild（祖孙），但六世孙不是孙。所以不能抽。\n\n或者袁宏的“父朂臨汝令宏起家建威參軍”等等，这里“祖猷侍中父朂臨汝令”是说袁宏的祖父名猷，官侍中；父亲名朂，官临汝令。这也是亲属关系，但类型中没有“祖孙”和“父子”之外的？有parent_child，但那是直接父子，这里袁宏与父朂是父子关系，但父朂不是袁宏？注意：“祖猷侍中父朂臨汝令宏起家”意思是（袁宏）祖父（名猷）是侍中，父亲（名朂）是临汝令。这里明确袁宏的父亲是朂。所以可以抽parent_child关系，counterpart是“朂”或“袁朂”？只出现“朂”。我们能否把“朂”作为袁宏之父？原文“祖猷侍中父朂臨汝令宏起家建威參軍安南司馬”，这是袁宏的谱系。所以袁宏的父亲是“朂”。祖父是“猷”。我们可以抽关系：袁宏与朂为父子关系，direction是counterpart_to_seed? seed是袁宏，关系是朂是袁宏之父，所以方向是parent到child，即counterpart_to_seed。关系类型为parent_child。证据是“父朂臨汝令”。注意exact_quote需要连续引用：“(祖猷侍中父朂臨汝令宏起家建威參軍安南司馬/陽秋曰袁宏字彦伯陳郡人魏郎中令煥六世孫也)” 但这是整段，可以引用其中连续部分如“父朂臨汝令”。但exact_quote要求“逐字引用其中的连续exact_quote”，所以我们可以用“祖猷侍中父朂臨汝令”或者“父朂臨汝令”。为了包含关系，用“父朂臨汝令”即可。\n\n同样，祖孙关系：袁宏与祖父猷，关系类型为grandparent_grandchild，方向是counterpart_to_seed（祖父到孙）。原文“祖猷侍中”，我们可以抽。注意这是袁宏的祖父，所以是grandparent_grandchild关系。\n\n还有六世祖袁焕，按说也是祖先，但类型没有，不抽。\n\n还有“彦伯”是字，属于identity surface。\n\n还有“袁宏”在通鉴注释中出现，也是表面。\n\n还有“袁公”？没有出现。\n\n现在时间候选：passage2中“宏起家建威參軍安南司馬”是官职起家，但没有时间。我们可以尝试提取major_event_participation或office_tenure，但必须要有时间。没有时间，我们可以不抽。但也许“起家”是一个事件，其时间是未知，可以以precision=\"unknown\"输出？但指令说“temporal_scope”必须给出。如果precision为unknown，scope可以空？但是temporal_scope是对象，可能需要时间范围。保险起见，不抽没有明确时间的事实。\n\n但我们可能忽略passage1中的“辛亥”是日期，指曹操的事情，不是袁宏。所以无关。\n\n所以最终：\n\n关系候选：\n- 袁宏与“朂”（父亲） parent_child，direction counterpart_to_seed，claim \"袁宏之父為朂（字？），官臨汝令。\" evidence_ref hng01-shishuo-02-yanyu-083-annotation-003，exact_quote \"父朂臨汝令\"（注意原文有括号，但这是连续文本）\n- 袁宏与“猷”（祖父） grandparent_grandchild，direction counterpart_to_seed，claim \"袁宏之祖父為猷，官侍中。\" exact_quote \"祖猷侍中\"\n- 袁宏与“煥”（六世祖）没有合适类型，不抽。\n- 袁宏与“建威參軍”等官职不是人物关系。\n\n注意：“起家建威參軍安南司馬”是官职，不是人物。\n\n身份表面：\n- \"袁宏\" 出现在两处：通鉴注释“袁宏《紀》”和世说注“袁宏字彦伯”。\n- \"彦伯\" 出现在“字彦伯”。\n- \"袁公\"? 没有。\n- \"宏\" 出现在“宏起家”，是名。\n我们输出每个surface，并引用证据。注意同一引用可以重复？可以。\n\n所以identity_surfaces可能：\n{ \"surface\": \"袁宏\", \"evidence_ref\": \"hng02-zizhi-tongjian-wikisource-hu-062\", \"exact_quote\": \"袁宏《紀》\" }\n{ \"surface\": \"袁宏\", \"evidence_ref\": \"hng01-shishuo-02-yanyu-083-annotation-003\", \"exact_quote\": \"袁宏字彦伯\" }\n{ \"surface\": \"彦伯\", \"evidence_ref\": \"hng01-shishuo-02-yanyu-083-annotation-003\", \"exact_quote\": \"宏字彦伯\" } 注意原文是“袁宏字彦伯”，所以可以引用“字彦伯”。\n{ \"surface\": \"宏\", \"evidence_ref\": \"hng01-shishuo-02-yanyu-083-annotation-003\", \"exact_quote\": \"宏起家\" } 但“宏”是单名，也是表面。注意我们应只输出seed的表面，所以可以包括。\n\n注意指令说“只抽取原文明确支持的一跳人物关系、时间事实和人物表面”。所以人物表面可以包括所有提及的人物表面，但这里我们关注seed。可能系统期望包括所有人物？但seed_person已经给出，identity_surfaces通常是seed的别名。为了安全，我们只输出袁宏的别名，但“宏”也是别名，可以。\n\n另外，注意在第一个passage中“袁宏”是作为注释引用来源，不是人物出现，但仍是表面。\n\n现在检查是否有时间候选。没有。\n\n我们输出JSON。\n\n注意confidence设置。关系明确，high。身份表面也high。\n\nhistorical_verification_open：对于历史事实，是否开放？默认true？我们设为true。\n\n现在构造JSON。\n\n注意“semantic_level”字段：关系候选中有semantic_level，这个是什么？在我们的指令中没有明确说semantic_level的选项。看允许的格式，有\"semantic_level\":\"\"。可能是指关系的语义级别，比如“direct”或“inferred”？我们需要自己判断。可能的值为“direct”、“indirect”？或者“explicit”、“implicit”？但指令没有给出枚举。我们可以使用“explicit”或“direct”。看前面的例子没有。我们设定为“explicit”表示直接陈述。或者留空？不，必须给。我们给\"explicit\"。\n\ndirection: seed_to_counterpart|counterpart_to_seed|undirected。对于parent_child，方向是counterpart_to_seed，因为父是counterpart。\n\nclaim明确。\n\nexact_quote必须连续逐字。\n\n对于“祖猷侍中”，原文是“祖猷侍中父朂臨汝令宏起家”，所以我们引用“祖猷侍中”是连续的。\n\n现在写出JSON。注意所有字段都要有，包括historical_verification_open。\n\n我们还需要temporal_candidates数组，为空。\n\n注意输出必须严格JSON，不要Markdown。所以直接输出JSON。\n\n让我们生成。",
+          "role": "assistant"
+        }
+      }
+    ],
+    "created": 1787549491,
+    "id": "a7a7a076-f6b9-454f-bc82-b5e4c0b8eeef",
+    "model": "deepseek-v4-flash",
+    "object": "chat.completion",
+    "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+    "usage": {
+      "completion_tokens": 3324,
+      "completion_tokens_details": {
+        "reasoning_tokens": 2860
+      },
+      "prompt_cache_hit_tokens": 512,
+      "prompt_cache_miss_tokens": 733,
+      "prompt_tokens": 1245,
+      "prompt_tokens_details": {
+        "cached_tokens": 512
+      },
+      "total_tokens": 4569
+    }
+  },
+  "retrieved_refs": [
+    "hng02-zizhi-tongjian-wikisource-hu-062",
+    "hng01-shishuo-02-yanyu-083-annotation-003",
+    "hng02-jinshu-wikisource-punctuated-075",
+    "hng02-jinshu-wikisource-punctuated-076",
+    "hng02-jinshu-wikisource-punctuated-079",
+    "hng02-jinshu-wikisource-punctuated-083",
+    "hng02-jinshu-wikisource-punctuated-091",
+    "hng02-jinshu-wikisource-punctuated-092"
+  ],
+  "run_id": "20260824T051137Z",
+  "schema": 1,
+  "stage": "hng2-live-raw-extraction",
+  "transport_error": "",
+  "wave": 1
+}

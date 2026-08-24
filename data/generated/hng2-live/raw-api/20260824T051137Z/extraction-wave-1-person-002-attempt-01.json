@@ -1,0 +1,92 @@
+{
+  "attempts": [
+    {
+      "actual_request": true,
+      "api_usage": {
+        "completion_tokens": 1107,
+        "completion_tokens_details": {
+          "reasoning_tokens": 1044
+        },
+        "prompt_cache_hit_tokens": 512,
+        "prompt_cache_miss_tokens": 794,
+        "prompt_tokens": 1306,
+        "prompt_tokens_details": {
+          "cached_tokens": 512
+        },
+        "total_tokens": 2413
+      },
+      "attempt": 1,
+      "completion_kind": "source_extraction",
+      "elapsed_seconds": 10.843691,
+      "exception_class": null,
+      "exception_message": null,
+      "failure_class": null,
+      "http_status": 200,
+      "response_model": "deepseek-v4-flash",
+      "round": 1,
+      "start_time": "2026-08-24T05:18:19.021970+00:00",
+      "story_id": "person-002"
+    }
+  ],
+  "canonical_write_back": false,
+  "content": "{\"relation_candidates\":[],\"temporal_candidates\":[],\"identity_surfaces\":[{\"surface\":\"郗鑒\",\"evidence_ref\":\"hng02-jinshu-wikisource-punctuated-067\",\"exact_quote\":\"溫嶠郗鑒\"}]}",
+  "failure_class": null,
+  "frontier_id": "person-002",
+  "immutable": true,
+  "model": "deepseek-v4-flash",
+  "model_input_hash": "d2f10be3d3572cc0800894b9717bae948ee6d5cb29a2350cc3b3cbfe88a0d1d4",
+  "opened_refs": [
+    "hng02-jinshu-wikisource-punctuated-075",
+    "hng02-jinshu-wikisource-punctuated-013",
+    "hng02-jinshu-wikisource-punctuated-067",
+    "hng02-jinshu-wikisource-punctuated-068"
+  ],
+  "prompt_version": "hng2-live-frozen-extraction-and-identity-v1",
+  "raw_response": {
+    "choices": [
+      {
+        "finish_reason": "stop",
+        "index": 0,
+        "logprobs": null,
+        "message": {
+          "content": "{\"relation_candidates\":[],\"temporal_candidates\":[],\"identity_surfaces\":[{\"surface\":\"郗鑒\",\"evidence_ref\":\"hng02-jinshu-wikisource-punctuated-067\",\"exact_quote\":\"溫嶠郗鑒\"}]}",
+          "reasoning_content": "我们根据指令，只使用给定的passages。需要抽取关系候选、时间候选、身份表面。种子是郗鑒，别名包括郄道徽、郗太傅、太傅、道徽、郄鑒、郗公、郗鑒。但passages中出现了哪些？我们看：\n\npassage1 没有明确提及郗鑒。文本：\"為政所由。息馬投戈，猶可講藝，今雖日不暇給，豈忘本而遺存邪！可共博議者詳之。」議者多請從崧所奏。\" 这段讲的是“崧”，可能是指某人上奏。但没有种子人物。\n\npassage2 也没有郗鑒，是天文占卜。\n\npassage3 是温嶠传，提到\"溫嶠，字太真，司徒羨弟之子也。父憺，河東太守。\"没有郗鑒。\n\npassage4 提到\"假榮右將軍、丹陽內史。榮數踐危亡之際...\"也没有郗鑒。\n\n所以给定的passages中没有郗鑒。我们需要抽取郗鑒相关的候选，但没有直接提及。可能passage3的标题中“溫嶠郗鑒”标题有郗鑒？但正文只有温嶠部分。标题是“卷六十七 列傳第三十七 溫嶠郗鑒”，但正文没有郗鑒的内容。指令说“只使用所给本地原文”，那么标题也算原文？但标题是“溫嶠郗鑒”，明确提到郗鑒。但这个是标题，不是正文。在passage3中，正文包括标题“溫嶠郗鑒”，还有“溫嶠，字太真，司徒羨弟之子也。父憺，河東太守。” 标题中“郗鑒”出现，但没有其他信息。作为身份表面，可以抽取“郗鑒”作为表面，evidence_ref是passage3，exact_quote是“溫嶠郗鑒”中的“郗鑒”部分？但必须是连续的exact quote，我们可以引用整个“溫嶠郗鑒”。但注意标点：标题是“溫嶠郗鑒”连续。所以可以输出身份表面郗鑒。\n\n但关系候选呢？没有郗鑒与人物的关系。也没有时间。所以关系候选为空，时间候选为空，只有身份表面。\n\n注意允许关系类型中包括\"cousin_clan_kin\"等，但这里没有。所以输出空数组。\n\n需要确保只输出JSON。另外，历史验证开放标志，对于身份表面不需要。身份表面没有confidence等字段？指令中identity_surfaces是数组，每个有surface, evidence_ref, exact_quote。好。\n\n所以最终输出：{\"relation_candidates\":[],\"temporal_candidates\":[],\"identity_surfaces\":[{\"surface\":\"郗鑒\",\"evidence_ref\":\"hng02-jinshu-wikisource-punctuated-067\",\"exact_quote\":\"溫嶠郗鑒\"}]}\n\n但exact_quote必须是连续的原文。在passage3中，开头标题为“==溫嶠==”和“{{wikipedia|溫嶠}}”以及“溫嶠，字太真，司徒羨弟之子也。”  在header中，notes有“溫嶠郗鑒{{*|（子愔 愔子超 愔弟曇 叔父隆）}}” 这里notes里写了“溫嶠郗鑒”，这是连续的。所以exact_quote可以是“溫嶠郗鑒”。另外文中还有“{{header2|title=[[../]]|section=卷六十七 列傳第三十七|author = 房玄齡|previous=[[../卷066|卷六十六]]|next=[[../卷068|卷六十八]]|notes=溫嶠郗鑒{{*|（子愔 愔子超 愔弟曇 叔父隆）}}}}” 所以引用“溫嶠郗鑒”是准确的。\n\n但注意，passage3的文本实际上包含了很多标记，我们需要逐字引用。在原文中notes部分有“溫嶠郗鑒”，所以可以。\n\n另外，passage3正文开始是“==溫嶠==”，然后“溫嶠，字太真，司徒羨弟之子也。父憺，河東太守。” 没有直接说郗鑒。所以只有标题notes中的“郗鑒”。\n\n身份表面只有这个。\n\n关系候选：种子是郗鑒，但没有任何关于郗鑒的关系。所以不输出。\n\n时间候选：也没有。\n\n所以最终JSON如上。\n\n注意确保没有多余内容。",
+          "role": "assistant"
+        }
+      }
+    ],
+    "created": 1787548698,
+    "id": "ac282004-a2b4-49f7-8e76-98d95d486700",
+    "model": "deepseek-v4-flash",
+    "object": "chat.completion",
+    "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+    "usage": {
+      "completion_tokens": 1107,
+      "completion_tokens_details": {
+        "reasoning_tokens": 1044
+      },
+      "prompt_cache_hit_tokens": 512,
+      "prompt_cache_miss_tokens": 794,
+      "prompt_tokens": 1306,
+      "prompt_tokens_details": {
+        "cached_tokens": 512
+      },
+      "total_tokens": 2413
+    }
+  },
+  "retrieved_refs": [
+    "hng02-jinshu-wikisource-punctuated-075",
+    "hng02-jinshu-wikisource-punctuated-013",
+    "hng02-jinshu-wikisource-punctuated-067",
+    "hng02-jinshu-wikisource-punctuated-068",
+    "hng02-jinshu-wikisource-punctuated-070",
+    "hng02-jinshu-wikisource-punctuated-074",
+    "hng02-jinshu-wikisource-punctuated-076",
+    "hng02-jinshu-wikisource-punctuated-077"
+  ],
+  "run_id": "20260824T051137Z",
+  "schema": 1,
+  "stage": "hng2-live-raw-extraction",
+  "transport_error": "",
+  "wave": 1
+}

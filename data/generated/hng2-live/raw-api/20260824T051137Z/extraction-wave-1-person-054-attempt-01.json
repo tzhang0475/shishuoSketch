@@ -1,0 +1,92 @@
+{
+  "attempts": [
+    {
+      "actual_request": true,
+      "api_usage": {
+        "completion_tokens": 2282,
+        "completion_tokens_details": {
+          "reasoning_tokens": 2226
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 1452,
+        "prompt_tokens": 1452,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "total_tokens": 3734
+      },
+      "attempt": 1,
+      "completion_kind": "source_extraction",
+      "elapsed_seconds": 21.189121,
+      "exception_class": null,
+      "exception_message": null,
+      "failure_class": null,
+      "http_status": 200,
+      "response_model": "deepseek-v4-flash",
+      "round": 1,
+      "start_time": "2026-08-24T05:12:30.587613+00:00",
+      "story_id": "person-054"
+    }
+  ],
+  "canonical_write_back": false,
+  "content": "{\"relation_candidates\":[],\"temporal_candidates\":[],\"identity_surfaces\":[{\"surface\":\"王隱\",\"evidence_ref\":\"hng02-jinshu-wikisource-punctuated-082\",\"exact_quote\":\"王隱\"}]}",
+  "failure_class": null,
+  "frontier_id": "person-054",
+  "immutable": true,
+  "model": "deepseek-v4-flash",
+  "model_input_hash": "ced8ad0986d20be1ed317cbfc0481ae48580916e638ee44722db0218611c9bad",
+  "opened_refs": [
+    "hng02-jinshu-wikisource-punctuated-082",
+    "hng02-jinshu-wikisource-punctuated-003",
+    "hng02-jinshu-wikisource-punctuated-004",
+    "hng02-jinshu-wikisource-punctuated-005"
+  ],
+  "prompt_version": "hng2-live-frozen-extraction-and-identity-v1",
+  "raw_response": {
+    "choices": [
+      {
+        "finish_reason": "stop",
+        "index": 0,
+        "logprobs": null,
+        "message": {
+          "content": "{\"relation_candidates\":[],\"temporal_candidates\":[],\"identity_surfaces\":[{\"surface\":\"王隱\",\"evidence_ref\":\"hng02-jinshu-wikisource-punctuated-082\",\"exact_quote\":\"王隱\"}]}",
+          "reasoning_content": "We need answer JSON only. Need extract candidates from provided passages. Need understand task: We are given allowed types, passages only four: juan 82, 3,4,5 (but text snippets). Seed person 王隱 (Wang Yin), aliases. Need extract relation candidates, temporal candidates, identity surfaces from local original text. Only use evidence refs quoted. Need no external knowledge. Need one-hop relationships supported explicitly; co-occurrence not enough. Need not assign person_id.\n\nWe have passages:\n1. ref hng02-jinshu-wikisource-punctuated-082 text:\n\"{{Textquality|50%}}{{header2 ... notes=陳壽 王長文 虞溥 司馬彪 王隱 虞預 孫盛 干寶 鄧粲 謝沈 習鑿齒 徐廣}}__TOC__ == 陳壽== 　　陳壽，字承祚，巴西安漢人也。少好學，師事同郡譙周，仕蜀為觀閣令史。\"\nThis passage includes 王隱 in header notes, but actual text about 陳壽. The seed is 王隱, but in this passage only appears in notes list (as one of biographees). Could extract identity surface 王隱 from notes? The text note is in page title header, evidence exact quote includes \"王隱\" in list. But relationship with Chen Shou? Not directly. Same list of \"列傳第五十二\" subjects? The header notes lists names of persons in the juan 82 biographies: \"陳壽 王長文 虞溥 司馬彪 王隱 虞預 孫盛 干寶 鄧粲 謝沈 習鑿齒 徐廣\". That indicates 王隱 has own separate biography in same juan, but not a relationship with others except same_juan? No allowed relationship for same document. Identity surface candidate 王隱 with quote \"王隱\" from header. But need evidence_ref exact quote from text; can cite this. But perhaps if not in passage text proper? It is in source text. Good.\n\n2. ref hng02-jinshu-wikisource-punctuated-003 text:\n\"</ref>\\n\\n　　六月，益、梁八郡水，殺三百餘人，沒邸閣別倉。\\n\\n　　秋七月，以都督豫州諸軍事王渾爲都督揚州諸軍事。中山王睦以罪廢爲丹水侯。\\n\\n　　\"\nContains no 王隱. No candidates.\n\n3. ref hng02-jinshu-wikisource-punctuated-004 text:\n\"徵征西大將軍、趙王倫爲車騎將軍，以太子太保、梁王肜爲征西大將軍、都督雍梁二州諸軍事，鎮關中。\\n\\n秋八月，雍州刺史解系又爲度元所破。秦雍氐、羌悉叛，推氐帥齊萬年僭號稱帝，圍涇陽。\\n\\n冬十月乙未，曲赦雍、涼二州。\"\nNo 王隱. No candidates.\n\n4. ref hng02-jinshu-wikisource-punctuated-005 text:\n\"王師不戰而潰，北地太守麴昌奔于京師。曜進至涇陽，渭北諸城悉潰，建威將軍魯充、散騎常侍梁緯、少府皇甫陽等皆死之。\\n\\n　　八月，劉曜逼京師，內外斷絕，鎮西將軍焦嵩、平東將軍宋哲、始平太守竺恢等同赴國難<ref>始平太守竺恢　周校：「始平」一作「新平」。麴允傳新平太守竺恢與始平太守楊像並列，一時不得有兩始平太守，宜作「新平」爲是。\"\nNo 王隱. No candidates.\n\nSo only passage 082 has 王隱 in notes; but no biographical content about 王隱 except listed. Need decide if any relation/temporal candidates can be extracted? The instructions: \"不抽取外部知识... 只抽取原文明确支持的一跳人物关系、时间事实和人物表面；同现、同姓、推测、性格判断不能单独形成关系。\" Also \"关系只使用 allowed_relation_types，时间只使用 allowed_temporal_types；证据不足就不输出.\" Since no actual relationship/time facts for Wang Yin. Can output empty candidates? Need produce JSON structure with arrays maybe empty except identity surfaces? Need include identity_surfaces maybe for name \"王隱\" if exact quote. But is \"identity surface\" not a relationship; we can output the alias \"王隱\" from header. But maybe should include \"王隱\" with evidence_ref and exact_quote. Note that aliases provided includes \"王隐\", \"王隱\". The surface in original text is \"王隱\". We can output identity surface. But perhaps need no identity if no mention with context? The text \"王隱\" is a name, yes.\n\nNeed ensure \"只使用所给本地原文\" – the header notes includes \"王隱\", so use that.\n\nPotentially passage 082 also contains \"陳壽 ... 師事同郡譙周\" but unrelated to seed. Since seed is 王隱, not Chen Shou. We don't output relation for others unless seed involved.\n\nNeed think if the \"notes=陳壽 ... 王隱 ...\" means 王隱 is author? Actually header of juan 82 \"列傳第五十二\" with notes listing persons whose biographies are in this volume. 王隱 is one of the subjects, same as Chen Shou etc. In the header title, it says \"notes=陳壽 王長文...\" yes. The exact quote \"notes=陳壽 王長文 虞溥 司馬彪 王隱 虞預 孫盛 干寶 鄧粲 謝沈 習鑿齒 徐廣\" includes 王隱. But if using exact_quote, must be \"consecutive exact_quote\" in original. We can cite just \"王隱\" from within it. Is that consecutive? Yes. But maybe better quote a slightly larger string to show context: \"陳壽 王長文 虞溥 司馬彪 王隱 虞預 孫盛 干寶 鄧粲 謝沈 習鑿齒 徐廣\" includes spaces. But exact_quote should be from the text; likely fine. However \"notes=...\" is metadata? In wikisource text header, it is part of page. The source_form is punctuated; \"text\" field includes header2 with notes=... Actually the text field starts with \"{{Textquality|50%}}{{header2 ... notes=陳壽...\" Yes.\n\nNeed output relation_candidates: empty? Let's examine if there is any implicit relationship from \"師事同郡譙周\" in same passage but for 陳壽, not seed. Could \"王隱\" listed among \"authors/people\" not relationship. No.\n\nNeed maybe output none for temporal.\n\nNeed identity_surfaces: The seed aliases include \"王隐\", \"王隱\", \"處叔\", \"王丞相\", \"王大將軍\", \"王庾諸公\" but only \"王隱\" appears in text. We should use the exact surface from text. evidence_ref hng02...082 exact_quote maybe \"王隱\" or the larger list. Confidence? Identity surface maybe not have confidence; schema requires evidence_ref and exact_quote only, no confidence. Need include `surface`: \"王隱\". Since canonical is 王隱.\n\nNeed output JSON only. The JSON structure:\n{\n  \"relation_candidates\": [],\n  \"temporal_candidates\": [],\n  \"identity_surfaces\": [\n    {\n      \"surface\": \"王隱\",\n      \"evidence_ref\": \"hng02-jinshu-wikisource-punctuated-082\",\n      \"exact_quote\": \"王隱\"\n    }\n  ]\n}\nNeed maybe exact_quote \"notes=陳壽 王長文 虞溥 司馬彪 王隱 ...\" But exact quote must be consecutive in text. \"王隱\" is enough but maybe to show context, \"notes=陳壽 王長文 虞溥 司馬彪 王隱\" contains \"王隱\" and is consecutive. Let's use \"notes=陳壽 王長文 虞溥 司馬彪 王隱\" but does exact quote include \"notes=\"? This is from text field? The original has \"|notes=陳壽...\" in wikitext; in text field it's within header2 template. If exact quote should be from the provided text string; the string contains \"{{header2\\n|title=[[../]]\\n|section=卷八十二 列傳第五十二\\n|author = 房玄齡\\n|previous=[[../卷081|卷八十一]]\\n|next=[[../卷083|卷八十三]]\\n|notes=陳壽 王長文 虞溥 司馬彪 王隱 虞預 孫盛 干寶 鄧粲 謝沈 習鑿齒 徐廣}}\\n__TOC__\". So \"notes=陳壽 王長文 虞溥 司馬彪 王隱\" exact. But better quote minimal \"王隱\" to avoid requiring exact formatting. The instruction says \"逐字引用其中的连续 exact_quote\"; any exact substring is okay. \"王隱\" appears twice? Let's check in text: \"notes=陳壽 王長文 虞溥 司馬彪 王隱 虞預...\" once. So okay.\n\nNeed consider if \"歷史資料候選抽取器\" expects candidates only when evidence sufficient. Since only identity surface, output empty for relations/temporals.\n\nBut perhaps there is a \"documented_political_interaction\" relation between \"王隱\" and \"陳壽\" from title \"卷八十二 列傳第五十二\" and notes? They are both listed in same juan, but that is not relationship. No.\n\nNeed include no \"person_id\". Good.\n\nNeed maybe include \"semantic_level\" in relation candidates? none.\n\nLet's craft final JSON compact or pretty. It says reply with JSON object ONLY. Fine.\n\nNeed ensure no Markdown.",
+          "role": "assistant"
+        }
+      }
+    ],
+    "created": 1787548350,
+    "id": "fc2433b5-89df-4d39-8ff6-5c14b6584ce0",
+    "model": "deepseek-v4-flash",
+    "object": "chat.completion",
+    "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+    "usage": {
+      "completion_tokens": 2282,
+      "completion_tokens_details": {
+        "reasoning_tokens": 2226
+      },
+      "prompt_cache_hit_tokens": 0,
+      "prompt_cache_miss_tokens": 1452,
+      "prompt_tokens": 1452,
+      "prompt_tokens_details": {
+        "cached_tokens": 0
+      },
+      "total_tokens": 3734
+    }
+  },
+  "retrieved_refs": [
+    "hng02-jinshu-wikisource-punctuated-082",
+    "hng02-jinshu-wikisource-punctuated-003",
+    "hng02-jinshu-wikisource-punctuated-004",
+    "hng02-jinshu-wikisource-punctuated-005",
+    "hng02-jinshu-wikisource-punctuated-012",
+    "hng02-jinshu-wikisource-punctuated-027",
+    "hng02-jinshu-wikisource-punctuated-062",
+    "hng02-jinshu-wikisource-punctuated-089"
+  ],
+  "run_id": "20260824T051137Z",
+  "schema": 1,
+  "stage": "hng2-live-raw-extraction",
+  "transport_error": "",
+  "wave": 1
+}

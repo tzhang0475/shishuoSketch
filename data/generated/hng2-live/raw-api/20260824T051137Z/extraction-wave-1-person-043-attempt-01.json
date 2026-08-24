@@ -1,0 +1,92 @@
+{
+  "attempts": [
+    {
+      "actual_request": true,
+      "api_usage": {
+        "completion_tokens": 3029,
+        "completion_tokens_details": {
+          "reasoning_tokens": 2640
+        },
+        "prompt_cache_hit_tokens": 512,
+        "prompt_cache_miss_tokens": 797,
+        "prompt_tokens": 1309,
+        "prompt_tokens_details": {
+          "cached_tokens": 512
+        },
+        "total_tokens": 4338
+      },
+      "attempt": 1,
+      "completion_kind": "source_extraction",
+      "elapsed_seconds": 27.218676,
+      "exception_class": null,
+      "exception_message": null,
+      "failure_class": null,
+      "http_status": 200,
+      "response_model": "deepseek-v4-flash",
+      "round": 1,
+      "start_time": "2026-08-24T05:17:48.317271+00:00",
+      "story_id": "person-043"
+    }
+  ],
+  "canonical_write_back": false,
+  "content": "{\"relation_candidates\":[{\"counterpart_surface\":\"山曜\",\"relation_type\":\"parent_child\",\"semantic_level\":\"explicit\",\"direction\":\"counterpart_to_seed\",\"claim\":\"山濤的父親是山曜\",\"evidence_ref\":\"hng02-jinshu-wikisource-punctuated-043\",\"exact_quote\":\"山濤，字巨源，河內懷人也。父曜，宛句令。\",\"confidence\":\"high\",\"historical_verification_open\":true},{\"counterpart_surface\":\"山簡\",\"relation_type\":\"parent_child\",\"semantic_level\":\"explicit\",\"direction\":\"seed_to_counterpart\",\"claim\":\"山濤的兒子是山簡\",\"evidence_ref\":\"hng02-jinshu-wikisource-punctuated-043\",\"exact_quote\":\"山濤{{*|（子簡 簡子遐）}}\",\"confidence\":\"medium\",\"historical_verification_open\":true},{\"counterpart_surface\":\"山遐\",\"relation_type\":\"grandparent_grandchild\",\"semantic_level\":\"explicit\",\"direction\":\"seed_to_counterpart\",\"claim\":\"山濤的孫子是山遐\",\"evidence_ref\":\"hng02-jinshu-wikisource-punctuated-043\",\"exact_quote\":\"山濤{{*|（子簡 簡子遐）}}\",\"confidence\":\"medium\",\"historical_verification_open\":true}],\"temporal_candidates\":[],\"identity_surfaces\":[{\"surface\":\"山濤\",\"evidence_ref\":\"hng02-jinshu-wikisource-punctuated-043\",\"exact_quote\":\"山濤，字巨源，河內懷人也。父曜，宛句令。\"},{\"surface\":\"巨源\",\"evidence_ref\":\"hng02-jinshu-wikisource-punctuated-043\",\"exact_quote\":\"山濤，字巨源\"}]}",
+  "failure_class": null,
+  "frontier_id": "person-043",
+  "immutable": true,
+  "model": "deepseek-v4-flash",
+  "model_input_hash": "3515e508ad7a7847cd67fa93ce1177f5051512f8bf3671fb2959d175c7ef11e0",
+  "opened_refs": [
+    "hng02-jinshu-wikisource-punctuated-043",
+    "hng02-jinshu-wikisource-punctuated-049",
+    "hng02-zizhi-tongjian-wikisource-hu-080",
+    "hng02-zizhi-tongjian-wikisource-hu-081"
+  ],
+  "prompt_version": "hng2-live-frozen-extraction-and-identity-v1",
+  "raw_response": {
+    "choices": [
+      {
+        "finish_reason": "stop",
+        "index": 0,
+        "logprobs": null,
+        "message": {
+          "content": "{\"relation_candidates\":[{\"counterpart_surface\":\"山曜\",\"relation_type\":\"parent_child\",\"semantic_level\":\"explicit\",\"direction\":\"counterpart_to_seed\",\"claim\":\"山濤的父親是山曜\",\"evidence_ref\":\"hng02-jinshu-wikisource-punctuated-043\",\"exact_quote\":\"山濤，字巨源，河內懷人也。父曜，宛句令。\",\"confidence\":\"high\",\"historical_verification_open\":true},{\"counterpart_surface\":\"山簡\",\"relation_type\":\"parent_child\",\"semantic_level\":\"explicit\",\"direction\":\"seed_to_counterpart\",\"claim\":\"山濤的兒子是山簡\",\"evidence_ref\":\"hng02-jinshu-wikisource-punctuated-043\",\"exact_quote\":\"山濤{{*|（子簡 簡子遐）}}\",\"confidence\":\"medium\",\"historical_verification_open\":true},{\"counterpart_surface\":\"山遐\",\"relation_type\":\"grandparent_grandchild\",\"semantic_level\":\"explicit\",\"direction\":\"seed_to_counterpart\",\"claim\":\"山濤的孫子是山遐\",\"evidence_ref\":\"hng02-jinshu-wikisource-punctuated-043\",\"exact_quote\":\"山濤{{*|（子簡 簡子遐）}}\",\"confidence\":\"medium\",\"historical_verification_open\":true}],\"temporal_candidates\":[],\"identity_surfaces\":[{\"surface\":\"山濤\",\"evidence_ref\":\"hng02-jinshu-wikisource-punctuated-043\",\"exact_quote\":\"山濤，字巨源，河內懷人也。父曜，宛句令。\"},{\"surface\":\"巨源\",\"evidence_ref\":\"hng02-jinshu-wikisource-punctuated-043\",\"exact_quote\":\"山濤，字巨源\"}]}",
+          "reasoning_content": "We need answer JSON. Need extract candidates from provided passages only? Seed 山濤. Need use passages. Need output relation_candidates/temporal_candidates/identity_surfaces.\n\nWe need inspect texts. Passages:\n1 晉書/卷043 text includes title and first line: \"山濤，字巨源，河內懷人也。父曜，宛句令。\" And header mentions 山濤 (子簡 簡子遐) 王戎... etc. This is explicit: 山濤 father 山曜, 山濤 son 山簡, 山簡 son 山遐? Actually header: 山濤{{*|（子簡 簡子遐）}} means 山濤 (son 簡; 簡's son 遐). But only text snippet has \"山濤，字巨源，河內懷人也。父曜，宛句令。\" So relation parent_child 山曜 father of 山濤, direction counterpart_to_seed (曜 -> 濤). Also son? Header says 子簡 簡子遐 but not in exact_quote? exact_quote needs continuous quote from text. Could use header text? The passage text includes header lines \"山濤{{*|（子簡 簡子遐）}} 王戎...\" The exact quote can include \"山濤{{*|（子簡 簡子遐）}}\" but the parenthetical is annotation? Source form punctuated includes braces? It's wikisource markup. Need perhaps use \"山濤\" only. But relation son \"山簡\" is not explicitly in prose except header annotation. Is header considered evidence? The instructions: only use supplied original text. The header is in passage text. Could extract identity surface for 山簡? But relation? \"子簡\" means son Jian. But exact_quote must be continuous. \"山濤{{*|（子簡 簡子遐）}}\" is continuous? It includes header2 title and summary. Need perhaps quote exact substring \"山濤{{*|（子簡 簡子遐）}}\" from text. But it's markup not pure original? The source is punctuated and includes braces from template. The exact quote should be verbatim from source. Hmm.\n\nAlternatively only \"山濤，字巨源，河內懷人也。父曜，宛句令。\" contains parent. Also \"巨源\" alias, identity surface maybe \"巨源\".\n\n2 晉書/卷049 text: \"太康中，爲太子庶子。\\n\\n===籍兄子 -{咸}-===\\n\\n　　阮-{咸}-字仲容。父熙，武都太守。\" This is about 阮咸? Seed is 山濤, no relation to 山濤. Could be no candidates.\n\n3 資治通鑒/卷080 text: \"嬪，毗賓翻。}}有寵於帝，后疾篤，恐帝立貴嬪爲后，致太子不安，枕帝膝泣曰：{{*|枕，職任翻。}}「叔父駿女芷有德色，{{*|言有德有色也。}}願陛下以備六宮。\" This is about 楊后? No 山濤.\n\n4 資治通鑒/卷081 text: \"}}彼旣不吞聲，將虧雍穆之弘，興矜爭之鄙，{{*|雍穆，和也。《書》曰：汝惟不矜，天下莫與汝爭能。}}斯實愚情之所不取也。」浚得牋，卽諫止渾。\" No 山濤.\n\nSo only passage 1 has seed facts. Need extract relation candidates, temporal candidates, identity surfaces.\n\nNeed decide allowed relation types. Parent_child: 山濤's father 山曜. Direction: counterpart_to_seed because 山曜 is parent to seed? Relation type \"parent_child\" direction \"counterpart_to_seed\" maybe counterpart is father -> seed child. Claim: \"山濤之父為山曜\" or \"山曜是山濤的父親\". Need exact quote \"父曜\". Actually full sentence \"山濤，字巨源，河內懷人也。父曜，宛句令。\" Exact quote can be \"父曜\" or \"山濤，字巨源，河內懷人也。父曜，宛句令。\" Use continuous. Evidence ref hng02-jinshu-wikisource-punctuated-043.\n\nIdentity surfaces: \"山巨源\" \"山公\" \"巨源\" maybe in aliases, but surface must appear in text? \"巨源\" appears in \"字巨源\". \"山濤\" appears. \"河內懷人\" maybe no. We should output identity_surfaces for names in text referring to seed: \"山濤\", \"巨源\". Maybe \"山公\" not in text. Also \"山巨源\" not in text. So surfaces: \"山濤\", \"巨源\".\n\nTemporal candidates: \"birth\"? The text says \"河內懷人也\" not birth date. No temporal. \"office_tenure\"? \"宛句令\" is father's office not seed. No. Maybe \"major_event_participation\"? No. So none.\n\nNeed perhaps relation with 山簡? Header indicates \"山濤（子簡 簡子遐）\" — relation parent_child 山濤->山簡, direction seed_to_counterpart. But exact_quote \"子簡\" within header. Should we include? The instruction says one-hop relations explicitly supported. \"子簡\" clearly indicates son (named 簡). \"簡子遐\" indicates 簡's son 遐 (grandson of 山濤), so grandparent_grandchild relation seed->遐? Actually header includes \"子簡 簡子遐\" — for 山濤, son 簡, 簡's son 遐. So from seed to 遐 is grandparent-grandchild. But are these reliable? It's from book's table of contents header. It's in the passage. Need extract? The task likely expects to extract from provided text. The passage includes header. We can include relation candidates for 山簡 and 山遐. However \"exact_quote\" must be continuous. The header text: \"山濤{{*|（子簡 簡子遐）}} 王戎{{*|（從弟衍 衍弟澄）}} 郭舒 樂廣\" This includes many names. The substring \"山濤{{*|（子簡 簡子遐）}}\" is continuous from \"山\" to \"）\". But includes template markup. If we use exact quote \"山濤{{*|（子簡 簡子遐）}}\" maybe okay. But \"exact_quote\" should be verbatim; this is verbatim from passage. However output might be weird. We could instead quote \"山濤\" only and claim \"卷題注記山濤子簡、簡子遐\" but exact_quote doesn't support \"子簡\". Need exact quote include \"（子簡 簡子遐）\". Since passage text includes \"{{*|（子簡 簡子遐）}}\", the exact quote should include that.\n\nMaybe better not include due to annotation? But it's still original text? Let's consider the prompt says \"只使用所给本地原文\" and \"逐字引用其中的连续 exact_quote\". The \"header\" is part of text. It's okay.\n\nNeed also maybe relation \"王戎 from弟衍\" etc not seed.\n\nNeed perhaps \"山簡\" identity surface? It appears in header. We can include relation candidate but no identity surface? Identity_surfaces list all surface names in text referencing seed? Actually \"identity_surfaces\" maybe for seed person? Schema says \"identity_surfaces\":[{\"surface\":\"\"...}] likely all names/aliases for seed. We only need surface for seed. \"山簡\" is not seed.\n\nNeed relation_candidates structure includes counterpart_surface. Could be \"山曜\", \"山簡\", \"山遐\".\n\nNeed confidence. For \"山曜\" from explicit sentence high. For header relations maybe medium/low because annotation.\n\nNeed \"historical_verification_open\": true for all? Schema says maybe bool. We can set true or false? They say \"historical_verification_open\": true in examples. likely always true because can't verify? We'll set true.\n\nNeed produce JSON only.\n\nLet's craft. relation_candidates:\n\n1 counterpart_surface \"山曜\", relation_type \"parent_child\", semantic_level? There is no semantic_level in schema? Actually schema shows \"semantic_level\": \"\" in example. Need include. What values? Maybe \"explicit\" or \"inferred\"? Not specified. We can set \"explicit\" for direct statement. For header maybe \"inferred\"? Let's see instructions: \"只抽取原文明确支持的一跳人物关系、时间事实和人物表面；同现、同姓、推测、性格判断不能单独形成关系。\" No semantic_level defined. But output schema includes semantic_level. Need fill. Could use \"explicit\" or \"mentioned\"/\"inferred\". Hmm. Since no guidance, choose \"explicit\" for direct, \"inferred\" for header annotation? Better maybe \"direct\" and \"indirect\"? Need be safe. Maybe semantic_level means \"surface\" or \"semantic\"? Actually \"semantic_level\" in relation schema likely \"event\" or \"relation\"? Hmm. Let's inspect: \"semantic_level\":\"\" maybe from source? Could be \"high\"? Not defined. The instructions don't define allowed values. We need output a string. Use \"explicit\" for direct statement, \"derived\" for header annotation? We'll use \"explicit\" for both? But header annotation is explicit in text. Let's set \"explicit\" for all relation candidates based on explicit text.\n\ndirection: For 山曜 -> seed: \"counterpart_to_seed\". For 山簡 (son) -> seed? Relation type parent_child between seed and son: seed is parent, counterpart is child. Direction \"seed_to_counterpart\" if seed -> son. For 山遐 (grandson): seed -> grandson? Relation \"grandparent_grandchild\" direction \"seed_to_counterpart\".\n\nclaim: \"山濤的父親是山曜\" / \"山濤的兒子是山簡\" / \"山濤的孫子是山遐\". Or \"山濤為山曜之子\".\n\nexact_quote:\n- For 山曜: \"山濤，字巨源，河內懷人也。父曜，宛句令。\" This is continuous. Maybe use \"父曜\" only. \"山濤，字巨源，河內懷人也。父曜，宛句令。\" is fine.\n- For 山簡: \"山濤{{*|（子簡 簡子遐）}}\" But exact_quote includes special chars. Need maybe use \"子簡\" but it alone doesn't mention 山濤. The full quote from \"山濤\" to \"遐）\" is \"山濤{{*|（子簡 簡子遐）}}\" which contains \"子簡\". Good.\n- For 山遐: same exact_quote.\n\nevidence_ref: hng02-jinshu-wikisource-punctuated-043 for all.\n\nconfidence: high for 山曜; medium for header-derived.\n\nNeed temporal_candidates: any? \"太康中\" in passage 2 is about 阮咸 perhaps not seed. \"有寵於帝\" no. No.\n\nIdentity_surfaces: \"山濤\", \"巨源\". Evidence ref same, exact quote \"山濤，字巨源\" maybe support both. But each identity surface needs evidence_ref and exact_quote. For \"山濤\" quote \"山濤，字巨源\"; for \"巨源\" quote same. Or exact_quote \"字巨源\". Let's do:\n- {\"surface\":\"山濤\",\"evidence_ref\":\"hng02-jinshu-wikisource-punctuated-043\",\"exact_quote\":\"山濤，字巨源，河內懷人也。父曜，宛句令。\"}\n- {\"surface\":\"巨源\",\"evidence_ref\":\"hng02-jinshu-wikisource-punctuated-043\",\"exact_quote\":\"山濤，字巨源\"}\n\nNeed ensure JSON valid, no markdown.\n\nPotential issue: \"山公\" is alias but not in text, so omit. \"山巨源\" not in text, omit.\n\nLet's produce final JSON.",
+          "role": "assistant"
+        }
+      }
+    ],
+    "created": 1787548668,
+    "id": "1720d449-9123-44a6-adc0-47798360d19b",
+    "model": "deepseek-v4-flash",
+    "object": "chat.completion",
+    "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+    "usage": {
+      "completion_tokens": 3029,
+      "completion_tokens_details": {
+        "reasoning_tokens": 2640
+      },
+      "prompt_cache_hit_tokens": 512,
+      "prompt_cache_miss_tokens": 797,
+      "prompt_tokens": 1309,
+      "prompt_tokens_details": {
+        "cached_tokens": 512
+      },
+      "total_tokens": 4338
+    }
+  },
+  "retrieved_refs": [
+    "hng02-jinshu-wikisource-punctuated-043",
+    "hng02-jinshu-wikisource-punctuated-049",
+    "hng02-zizhi-tongjian-wikisource-hu-080",
+    "hng02-zizhi-tongjian-wikisource-hu-081",
+    "hng02-zizhi-tongjian-wikisource-hu-167",
+    "hng02-jinshu-wikisource-punctuated-002",
+    "hng02-jinshu-wikisource-punctuated-003",
+    "hng02-jinshu-wikisource-punctuated-021"
+  ],
+  "run_id": "20260824T051137Z",
+  "schema": 1,
+  "stage": "hng2-live-raw-extraction",
+  "transport_error": "",
+  "wave": 1
+}

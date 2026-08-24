@@ -1,0 +1,92 @@
+{
+  "attempts": [
+    {
+      "actual_request": true,
+      "api_usage": {
+        "completion_tokens": 3242,
+        "completion_tokens_details": {
+          "reasoning_tokens": 3009
+        },
+        "prompt_cache_hit_tokens": 512,
+        "prompt_cache_miss_tokens": 886,
+        "prompt_tokens": 1398,
+        "prompt_tokens_details": {
+          "cached_tokens": 512
+        },
+        "total_tokens": 4640
+      },
+      "attempt": 1,
+      "completion_kind": "source_extraction",
+      "elapsed_seconds": 29.518245,
+      "exception_class": null,
+      "exception_message": null,
+      "failure_class": null,
+      "http_status": 200,
+      "response_model": "deepseek-v4-flash",
+      "round": 1,
+      "start_time": "2026-08-24T05:18:33.387533+00:00",
+      "story_id": "person-031"
+    }
+  ],
+  "canonical_write_back": false,
+  "content": "{\n  \"relation_candidates\": [\n    {\n      \"counterpart_surface\": \"欽\",\n      \"relation_type\": \"superior_subordinate\",\n      \"semantic_level\": \"explicit\",\n      \"direction\": \"counterpart_to_seed\",\n      \"claim\": \"朱伺是欽的部將，欽兵敗後與欽一同奔武昌。\",\n      \"evidence_ref\": \"hng02-zizhi-tongjian-wikisource-hu-085\",\n      \"exact_quote\": \"昌遂攻郡，欽兵敗，與部將朱伺奔武昌。\",\n      \"confidence\": \"high\",\n      \"historical_verification_open\": true\n    }\n  ],\n  \"temporal_candidates\": [],\n  \"identity_surfaces\": [\n    {\n      \"surface\": \"朱伺\",\n      \"evidence_ref\": \"hng02-zizhi-tongjian-wikisource-hu-085\",\n      \"exact_quote\": \"昌遂攻郡，欽兵敗，與部將朱伺奔武昌。\"\n    }\n  ]\n}",
+  "failure_class": null,
+  "frontier_id": "person-031",
+  "immutable": true,
+  "model": "deepseek-v4-flash",
+  "model_input_hash": "4708f17abd66511be30c8741b6d45fc6e90c3f586df544d5492dc5928498d7c3",
+  "opened_refs": [
+    "hng02-jinshu-wikisource-punctuated-081",
+    "hng02-zizhi-tongjian-wikisource-hu-085",
+    "hng02-zizhi-tongjian-wikisource-hu-086",
+    "hng02-zizhi-tongjian-wikisource-hu-088"
+  ],
+  "prompt_version": "hng2-live-frozen-extraction-and-identity-v1",
+  "raw_response": {
+    "choices": [
+      {
+        "finish_reason": "stop",
+        "index": 0,
+        "logprobs": null,
+        "message": {
+          "content": "{\n  \"relation_candidates\": [\n    {\n      \"counterpart_surface\": \"欽\",\n      \"relation_type\": \"superior_subordinate\",\n      \"semantic_level\": \"explicit\",\n      \"direction\": \"counterpart_to_seed\",\n      \"claim\": \"朱伺是欽的部將，欽兵敗後與欽一同奔武昌。\",\n      \"evidence_ref\": \"hng02-zizhi-tongjian-wikisource-hu-085\",\n      \"exact_quote\": \"昌遂攻郡，欽兵敗，與部將朱伺奔武昌。\",\n      \"confidence\": \"high\",\n      \"historical_verification_open\": true\n    }\n  ],\n  \"temporal_candidates\": [],\n  \"identity_surfaces\": [\n    {\n      \"surface\": \"朱伺\",\n      \"evidence_ref\": \"hng02-zizhi-tongjian-wikisource-hu-085\",\n      \"exact_quote\": \"昌遂攻郡，欽兵敗，與部將朱伺奔武昌。\"\n    }\n  ]\n}",
+          "reasoning_content": "我们需要从提供的passages中抽取关于朱伺（仲文）的关系、时间和身份表面。注意要求只使用所给本地原文，不外部知识。每条候选必须引用一个给定evidence_ref，并逐字引用连续exact_quote。关系类型限制在列表中。\n\n先看所有passages：\n\n1. ref hng02-jinshu-wikisource-punctuated-081，text: \"{{Textquality|50%}}{{header2 ... 王遜，字邵伯，魏興人也。仕郡察孝廉，為吏部令史，轉殿中將軍。\" 等等。这在卷081，但似乎主要是王逊的传记开头，没有提到朱伺。所以这部分可能没有关于朱伺的信息。\n\n2. ref hng02-zizhi-tongjian-wikisource-hu-085，text: \"{{*|《姓譜》：弓姓，魯大夫叔弓之後。余按孔子弟子有仲弓，又有馯臂子弓，而獨以魯叔弓後，殊爲未通。}}昌遂攻郡，欽兵敗，與部將朱伺奔武昌。{{*|伺，相吏翻。\" 这里提到朱伺（仲文？），但朱伺是\"部將\"？\"欽兵敗，與部將朱伺奔武昌\" 意思是昌攻郡，钦兵败，与部将朱伺逃奔武昌。这里朱伺是钦的部将？也可能是\"部將\"指钦的部将，那么朱伺是钦的部将，但钦是谁？可能是\"王钦\"？没有上下文。但至少明确朱伺是某人的部将，与某事件相关。不过我们需要种子是朱伺，所以关系可能：朱伺与\"欽\"是 superior_subordinate? 朱伺是部将，所以 superior_subordinate (seed_to_counterpart? 朱伺是部将，counterpart是钦，关系是朱伺 served under 钦？方向 seed_to_counterpart? Or counterpart_to_seed? 需要明确。这里原文说\"與部將朱伺\" 即\"with his subordinate general Zhu Si\"? 主语是钦，所以钦与部将朱伺。朱伺 is subordinate to 钦. So relation_type \"superior_subordinate\", direction \"counterpart_to_seed\" (钦 to 朱伺) or \"seed_to_counterpart\"? Since \"served under\" usually from subordinate to superior. We can specify relation_type \"superior_subordinate\" and direction \"counterpart_to_seed\" maybe. Or \"recruitment_served_under\" is also allowed. Actually \"recruitment_served_under\" might be more precise? But \"superior_subordinate\" is also there. We can choose one. We need claim: 朱伺为钦的部将，一起奔武昌. evidence quote exact.\n\nAlso \"仲文\" appears in the seed aliases, but not in quote. The quote only has \"朱伺\". There is also a note \"伺，相吏翻\" - that's a phonetic note, not relation.\n\n3. ref hng02-zizhi-tongjian-wikisource-hu-086, text: \"⑤西陽夷寇江夏，{{*|西陽縣，春秋弦子之國，漢爲縣，屬江夏郡，晉屬弋陽郡。漢和帝永元末，巫蠻反，討降之，徙置江夏西陽諸蠻是也。沈約曰：晉惠帝分弋陽爲西陽國。劉昫曰：吳分江夏，置蘄春郡，晉改爲西陽郡，唐蘄州卽其地。\" 无朱伺。\n\n4. ref hng02-zizhi-tongjian-wikisource-hu-088, text: \"}}起冶鑄兵，募得二千餘人而後進。\\n\\n⑲胡亢性猜忌，殺其驍將數人。杜曾懼，潛引王沖之兵使攻亢。{{*|王沖，荊州賊也。\" 无朱伺。\n\nSo only passage 085 has explicit mention of 朱伺. There might be no other information. Let's check if any other passages mention \"仲文\" or \"朱伺\" in the text? The seed aliases include \"仲文\", but the passages given do not contain \"仲文\". So identity_surfaces: \"朱伺\" from ref 085. Also possibly \"仲文\" not in text, so no.\n\nNow relations: From 085: \"欽兵敗，與部將朱伺奔武昌。\" This indicates that 朱伺 is a 部將 of 欽. The context: \"昌遂攻郡，欽兵敗，與部將朱伺奔武昌。\" The subject of \"與\" here is likely \"欽\" (whoever he is). So 欽's 部將 is 朱伺. So relationship between 朱伺 and 欽: superior_subordinate. Direction: 欽 is superior, 朱伺 is subordinate. Seed is 朱伺, so direction \"counterpart_to_seed\" (欽 -> 朱伺) because the relation type is superior_subordinate, and we might define direction as \"seed_to_counterpart\" meaning seed is superior? The allowed directions: \"seed_to_counterpart|counterpart_to_seed|undirected\". We need to decide semantics. For superior_subordinate, we can also use \"recruitment_served_under\" which implies served under. Let's see allowed types: \"superior_subordinate\" and \"recruitment_served_under\". Both are present. \"recruitment_served_under\" might be more specific if it indicates serving under, but \"superior_subordinate\" is general. The quote simply says \"部将\" so it's a direct hierarchical relation, not necessarily recruitment. Choose \"superior_subordinate\". Direction we need to specify: \"counterpart_to_seed\" means the counterpart is superior? Actually the direction field likely indicates from which side the relation is stated. For \"superior_subordinate\", we can say \"seed_to_counterpart\" if seed is superior, \"counterpart_to_seed\" if counterpart is superior. In this case, 欽 is the counterpart, and he is superior, so \"counterpart_to_seed\". Alternatively, the relation type \"superior_subordinate\" might inherently be asymmetric, and direction indicates the direction of subordination? Let's be explicit in claim.\n\nAnother possible relation: 朱伺 and 昌? \"昌遂攻郡，欽兵敗\" — 昌 attacks the commandery, 欽 is defeated. That's shared event? But no direct interaction between 朱伺 and 昌 except being on opposing sides? Not clear enough.\n\nAlso \"奔武昌\" indicates event, but not a relation.\n\nSo only one relation candidate.\n\nNow temporal candidates: Are there any clear temporal facts about 朱伺? The quote only says \"奔武昌\" at some time, but no date. So no temporal facts with explicit time. The text in 086 and 088 are about different things, not about 朱伺. So no temporal candidates.\n\nBut wait, in 085, the note \"伺，相吏翻\" is pronunciation. Not temporal.\n\nIdentity_surfaces: \"朱伺\" appears in quote \"與部將朱伺奔武昌\". The seed person has aliases \"仲文\", \"朱伺\", canonical \"朱伺\". So we should output identity surface \"朱伺\" with evidence. Also possibly \"部將朱伺\" but surface is just \"朱伺\". Should we include \"仲文\"? Not present in text. So only \"朱伺\".\n\nWe also need to check if there are other quotes where \"朱伺\" appears? In the provided passages, only in 085. So one identity surface.\n\nNow we need to construct JSON. Each relation_candidate must have counterpart_surface, relation_type, semantic_level, direction, claim, evidence_ref, exact_quote, confidence, historical_verification_open. semantic_level? Probably one of \"explicit\" or \"inferred\" or something? The instruction didn't specify allowed values for semantic_level, but we need to output something. It says \"只使用所给本地原文，不使用外部知识。只抽取原文明确支持的一跳人物关系...同现、同姓、推测、性格判断不能单独形成关系。\" So semantic_level might be \"explicit\" if directly stated. I'll use \"explicit\" for direct statement.\n\nAlso temporal_candidates: none.\n\nIdentity_surfaces: array of {surface, evidence_ref, exact_quote}.\n\nLet's be careful: The exact_quote must be a continuous verbatim quote from the text. The text in 085 includes \"昌遂攻郡，欽兵敗，與部將朱伺奔武昌。\" plus the note. We can quote exactly: \"昌遂攻郡，欽兵敗，與部將朱伺奔武昌。\" That includes 朱伺. But the full text has punctuation. We should preserve the punctuation as in the source: \"昌遂攻郡，欽兵敗，與部將朱伺奔武昌。\" That's exactly there. However, there is also a preceding \"{{*|...}}\" note. We can quote exactly that sentence. It is continuous.\n\nNow evidence_ref is the given ref \"hng02-zizhi-tongjian-wikisource-hu-085\".\n\nRelation claim: \"朱伺是欽的部將，隨欽一起逃奔武昌。\" Actually more precisely: \"欽兵敗，與部將朱伺奔武昌\" - 朱伺 as 部將 of 欽. So claim: \"朱伺為欽的部將，在欽兵敗後與欽一同逃往武昌。\"\n\nDirection: \"counterpart_to_seed\" because counterpart \"欽\" is superior. Let's verify: \"superior_subordinate\" relation type, we need to say who is superior. In direction field, we can interpret: \"seed_to_counterpart\" means seed is at the left side of the relation? Actually typical ontology might use direction to indicate the direction of the relation from seed to counterpart. For \"superior_subordinate\", if we model seed as subordinate, then relation type \"served_under\" would be seed_to_counterpart. But here relation type is \"superior_subordinate\" which is symmetric? No, it's asymmetric. We need to specify direction. The allowed directions include \"seed_to_counterpart|counterpart_to_seed|undirected\". So I'll define: direction indicates which party is the primary subject of the relation as expressed? Better to use \"counterpart_to_seed\" to indicate that the counterpart is the superior, and the seed is the subordinate, so the relation holds from counterpart to seed. I'll do that.\n\nAlternatively, we could choose \"recruitment_served_under\" and direction \"seed_to_counterpart\" meaning seed served under counterpart. That might be clearer. But the instruction lists both \"superior_subordinate\" and \"recruitment_served_under\". Which one is more appropriate? \"部将\" directly means subordinate general, so \"superior_subordinate\" is exact. \"recruitment_served_under\" might imply a longer-term service relationship, but it's not necessarily recruitment. I'll use \"superior_subordinate\".\n\nNow semantic_level: Perhaps the level of semantics: \"explicit\" since the text explicitly labels 朱伺 as 部将. We can also set \"direct\" but I'll use \"explicit\".\n\nConfidence: high, because it's direct. historical_verification_open: true.\n\nNow temporal candidates: None, so empty array.\n\nNow identity_surfaces: one.\n\nLet's double-check the exact quote from 085: The text: \"{{*|《姓譜》：弓姓，魯大夫叔弓之後。余按孔子弟子有仲弓，又有馯臂子弓，而獨以魯叔弓後，殊爲未通。}}昌遂攻郡，欽兵敗，與部將朱伺奔武昌。{{*|伺，相吏翻。\" So the sentence is \"昌遂攻郡，欽兵敗，與部將朱伺奔武昌。\" We can use that exact quote. It includes \"昌\" but that's fine.\n\nWe should also consider if there is any other relation: 朱伺 and 武昌? Not a person. No.\n\nAlso \"昌\" is a person? In 085, \"昌遂攻郡\" — who is 昌? Could be \"王昌\"? But no context. We don't know. The relation between 朱伺 and 昌: they are adversaries? The text says 昌 attacks, 欽 is defeated, 朱伺 flees with 欽. That might imply that 朱伺 and 昌 were on opposite sides in a military conflict. Could be \"political_opposition\" or \"rivalry\"? But it's not explicit that they directly interacted. Also \"shared_explicit_event\" could be they participated in the same event (battle of the commandery), but 朱伺 was on the losing side. The instruction says \"同现、同姓、推测、性格判断不能单独形成关系\" - co-occurrence alone cannot form a relation. So we shouldn't infer a relation between 朱伺 and 昌 just from co-occurrence. So no.\n\nWhat about \"欽\" — we don't have a full name. Could be \"王欽\"? Not sure. But the relationship is clear: superior-subordinate.\n\nNow the identity surfaces: Also the seed person's aliases include \"仲文\", but no text. We only output what is in the text.\n\nNow build JSON.\n\nMake sure to include exact quotes with the Chinese characters as in the text. The text has punctuation and perhaps the HTML markup? We should quote the continuous text without the markup. The relevant part: \"昌遂攻郡，欽兵敗，與部將朱伺奔武昌。\" We can include that.\n\nLet's verify if there is any other mention of 朱伺 in the other passages? No.\n\nSo final JSON.",
+          "role": "assistant"
+        }
+      }
+    ],
+    "created": 1787548713,
+    "id": "b620f3b4-3e7e-4b3b-ae8c-25b5cd285cd4",
+    "model": "deepseek-v4-flash",
+    "object": "chat.completion",
+    "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+    "usage": {
+      "completion_tokens": 3242,
+      "completion_tokens_details": {
+        "reasoning_tokens": 3009
+      },
+      "prompt_cache_hit_tokens": 512,
+      "prompt_cache_miss_tokens": 886,
+      "prompt_tokens": 1398,
+      "prompt_tokens_details": {
+        "cached_tokens": 512
+      },
+      "total_tokens": 4640
+    }
+  },
+  "retrieved_refs": [
+    "hng02-jinshu-wikisource-punctuated-081",
+    "hng02-zizhi-tongjian-wikisource-hu-085",
+    "hng02-zizhi-tongjian-wikisource-hu-086",
+    "hng02-zizhi-tongjian-wikisource-hu-088",
+    "hng02-zizhi-tongjian-wikisource-hu-089",
+    "hng02-zizhi-tongjian-wikisource-hu-090",
+    "hng02-zizhi-tongjian-wikisource-hu-144",
+    "hng02-jinshu-wikisource-punctuated-010"
+  ],
+  "run_id": "20260824T051137Z",
+  "schema": 1,
+  "stage": "hng2-live-raw-extraction",
+  "transport_error": "",
+  "wave": 1
+}

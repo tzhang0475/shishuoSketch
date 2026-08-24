@@ -1,0 +1,91 @@
+{
+  "attempts": [
+    {
+      "actual_request": true,
+      "api_usage": {
+        "completion_tokens": 2096,
+        "completion_tokens_details": {
+          "reasoning_tokens": 1874
+        },
+        "prompt_cache_hit_tokens": 512,
+        "prompt_cache_miss_tokens": 882,
+        "prompt_tokens": 1394,
+        "prompt_tokens_details": {
+          "cached_tokens": 512
+        },
+        "total_tokens": 3490
+      },
+      "attempt": 1,
+      "completion_kind": "source_extraction",
+      "elapsed_seconds": 19.021221,
+      "exception_class": null,
+      "exception_message": null,
+      "failure_class": null,
+      "http_status": 200,
+      "response_model": "deepseek-v4-flash",
+      "round": 2,
+      "start_time": "2026-08-24T05:34:31.495946+00:00",
+      "story_id": "person-017"
+    }
+  ],
+  "canonical_write_back": false,
+  "content": "{\"relation_candidates\":[{\"counterpart_surface\":\"溫嶠\",\"relation_type\":\"political_opposition\",\"semantic_level\":\"explicit\",\"direction\":\"counterpart_to_seed\",\"claim\":\"溫嶠討伐蘇峻於石頭\",\"evidence_ref\":\"hng02-zizhi-tongjian-wikisource-hu-080\",\"exact_quote\":\"嶠討蘇峻於石頭\",\"confidence\":\"high\",\"historical_verification_open\":true}],\"temporal_candidates\":[],\"identity_surfaces\":[{\"surface\":\"蘇峻\",\"evidence_ref\":\"hng02-jinshu-wikisource-punctuated-100\",\"exact_quote\":\"王彌 張昌 陳敏 王如 杜曾 杜弢 王機 祖約 蘇峻 孫恩 盧循 譙縱\"},{\"surface\":\"蘇峻\",\"evidence_ref\":\"hng02-zizhi-tongjian-wikisource-hu-080\",\"exact_quote\":\"嶠討蘇峻於石頭\"}]}",
+  "failure_class": null,
+  "frontier_id": "person-017",
+  "immutable": true,
+  "model": "deepseek-v4-flash",
+  "model_input_hash": "5146247ae38c616abbf446f0fb793580b8bca678b133539a5c5def29be9e3f72",
+  "opened_refs": [
+    "hng02-jinshu-wikisource-punctuated-100",
+    "hng02-zizhi-tongjian-wikisource-hu-080",
+    "hng02-jinshu-wikisource-punctuated-006",
+    "hng02-jinshu-wikisource-punctuated-012"
+  ],
+  "prompt_version": "hng2-live-frozen-extraction-and-identity-v1",
+  "raw_response": {
+    "choices": [
+      {
+        "finish_reason": "stop",
+        "index": 0,
+        "logprobs": null,
+        "message": {
+          "content": "{\"relation_candidates\":[{\"counterpart_surface\":\"溫嶠\",\"relation_type\":\"political_opposition\",\"semantic_level\":\"explicit\",\"direction\":\"counterpart_to_seed\",\"claim\":\"溫嶠討伐蘇峻於石頭\",\"evidence_ref\":\"hng02-zizhi-tongjian-wikisource-hu-080\",\"exact_quote\":\"嶠討蘇峻於石頭\",\"confidence\":\"high\",\"historical_verification_open\":true}],\"temporal_candidates\":[],\"identity_surfaces\":[{\"surface\":\"蘇峻\",\"evidence_ref\":\"hng02-jinshu-wikisource-punctuated-100\",\"exact_quote\":\"王彌 張昌 陳敏 王如 杜曾 杜弢 王機 祖約 蘇峻 孫恩 盧循 譙縱\"},{\"surface\":\"蘇峻\",\"evidence_ref\":\"hng02-zizhi-tongjian-wikisource-hu-080\",\"exact_quote\":\"嶠討蘇峻於石頭\"}]}",
+          "reasoning_content": "We need to extract candidates from the given passages for seed person 蘇峻. But we need to check if the passages mention 蘇峻 directly? Let's see. Passages: \n\n1. 晉書卷100 header mentions 王彌 張昌 陳敏 王如 杜曾 杜弢 王機 祖約 蘇峻 孫恩 盧循 譙縱 - so 蘇峻 is in list of persons in that juan. But the actual text snippet only shows header and beginning of 王彌 biography. No relation facts about 蘇峻.\n\n2. 資治通鑒卷080: \"姬愬於吳主，... 據《晉書‧溫嶠傳》：嶠討蘇峻於石頭，結壘於四望磯。\" This mentions 蘇峻 in a note citing 溫嶠傳. It says 嶠討蘇峻於石頭. So this is an explicit event: 溫嶠 attacked 蘇峻 at Stone City. But the seed is 蘇峻, counterpart 溫嶠. Relation type? \"political_opposition\" or \"shared_explicit_event\"? Actually 討 means punitive expedition against. So documented political interaction / opposition. But we need to be careful: the evidence quote is from the note, which is not the main text but a Hu Sanxing commentary quoting 晉書. But the passage is from 資治通鑒 with commentary. The evidence_ref is the passage, quote includes \"嶠討蘇峻於石頭\". This is a direct claim. So we can output a relation candidate with counterpart 溫嶠 (or 嶠) relation_type \"political_opposition\" or \"documented_political_interaction\". Direction: counterpart_to_seed? Actually 溫嶠討蘇峻, so 溫嶠 is acting against 蘇峻. So counterpart_to_seed? The seed is 蘇峻, so 溫嶠 attacked 蘇峻, so relation is from counterpart to seed: counterpart_to_seed. Direction field allowed values: seed_to_counterpart, counterpart_to_seed, undirected. We'll use counterpart_to_seed. Claim: 溫嶠討伐蘇峻於石頭. Historical verification open: true (since it is a historical claim). Confidence: high or medium? The source is 資治通鑑 with Hu Sanxing commentary quoting 晉書, so fairly high. But the passage itself is a note. We can use high? Let's decide medium/high. Maybe high.\n\nAlso identity surfaces: The seed has aliases 蘇子高, 子高, 蘇峻. But none of the passages mention these aliases. The passage mentions \"蘇峻\" in the 資治通鑒 passage. So identity surface \"蘇峻\" with evidence_ref from that passage. Also the header of 晉書卷100 lists \"蘇峻\" as a biography title. So we can output identity_surfaces for \"蘇峻\" with evidence from both? But we need one evidence_ref and exact_quote. The header quote contains \"蘇峻\". So we can have identity_surface with evidence_ref \"hng02-jinshu-wikisource-punctuated-100\" and exact_quote \"王彌 張昌 陳敏 王如 杜曾 杜弢 王機 祖約 蘇峻 孫恩 盧循 譙縱\" (that's the notes line). But exact_quote must be continuous from the text? The text has \"notes = '''王彌 張昌 陳敏 王如 杜曾 杜弢 王機 祖約 蘇峻 孫恩 盧循 譙縱</sub>'''\" So the continuous string includes those names. We can quote \"王彌 張昌 陳敏 王如 杜曾 杜弢 王機 祖約 蘇峻 孫恩 盧循 譙縱\" as it appears. That's fine.\n\nAlso the temporal candidates? The passage says \"嶠討蘇峻於石頭\" but no explicit date. So no temporal candidate. But maybe the header of 晉書卷100 indicates that the biographies are in 卷100, but no time. However, we might infer a major_event_participation? But no specific date. We cannot extract temporal without explicit time.\n\nCheck other passages: 晉書卷006 mentions 王敦 etc., no 蘇峻. 晉書卷012 mentions 惠帝元康九年, no explicit 蘇峻. So nothing.\n\nThus the output should have one relation candidate and one identity surface, maybe multiple identity surfaces? We can include the same surface \"蘇峻\" with evidence from the 資治通鑒 passage as well. But the instructions say each candidate must reference a given evidence_ref. We can have multiple identity surfaces for different sources if both evidence support same surface. That's fine. But to be minimal, we can include two: one from 晉書卷100 header, one from 資治通鑒. Both evidence.\n\nAlso relation candidate: counterpart_surface \"溫嶠\" or \"嶠\"? The text uses \"嶠\" referring to 溫嶠. But we can use canonical \"溫嶠\" as the counterpart surface. But the instruction says \"counterpart_surface\" - the surface form in the text? Probably we can use \"溫嶠\" because the quote says \"嶠\" - but the full name is known from context \"據《晉書‧溫嶠傳》：嶠討蘇峻於石頭\". The surface form in the quote is \"嶠\". But we are allowed to use counterpart_surface as the name we refer to. To be precise, use \"溫嶠\" or \"嶠\"? Since the quote calls him 嶠, we can set \"嶠\" as the surface, but the instruction may expect a normalized name. Looking at the example? Not provided. Better to use \"溫嶠\" as the counterpart person, with the exact quote containing \"嶠\". The relationship is explicit.\n\nAlso relation_type allowed: \"political_opposition\" fits. Or \"documented_political_interaction\". \"political_opposition\" is more specific. The act of 討 is military confrontation, so political opposition. Let's use \"political_opposition\". Direction: counterpart_to_seed because 溫嶠 is attacking 蘇峻. But also could be undirected? Actually opposition is mutual; but direction from the actor? The relation type is political_opposition, direction can be undirected. But the sentence indicates 溫嶠 is the subject. So \"counterpart_to_seed\" is fine.\n\nClaim: \"溫嶠討伐蘇峻於石頭\" in Chinese.\n\nSemantic_level: \"explicit\" or \"implied\"? The phrase is explicit. Usually \"semantic_level\" can be \"explicit\" / \"implied\"? The instructions didn't specify an allowed enum, but in previous tasks we use \"explicit\" or \"implied\". We'll set \"explicit\".\n\nConfidence: high.\n\nHistorical_verification_open: true.\n\nTemporal candidates: maybe \"major_event_participation\" could be inferred, but no date. So skip.\n\nLet's craft JSON.\n\nNote: The quote must be continuous. For the 資治通鑒 passage, the exact quote could be \"嶠討蘇峻於石頭\" which is a continuous substring within the note text. Yes.\n\nFor the 晉書卷100 header, the exact quote could be \"王彌 張昌 陳敏 王如 杜曾 杜弢 王機 祖約 蘇峻 孫恩 盧循 譙縱\" - that is continuous in the notes line, though the notes line has \"'''\" before and after. The text includes \"notes = '''王彌 張昌 陳敏 王如 杜曾 杜弢 王機 祖約 蘇峻 孫恩 盧循 譙縱</sub>'''\" So the quote can be from \"王彌\" to \"譙縱\".\n\nAlso identity_surface from 資治通鑒: \"蘇峻\" appears as part of \"討蘇峻於石頭\". So we can have a separate identity surface.\n\nWe should output JSON with relation_candidates, temporal_candidates (empty array), identity_surfaces (two objects or one?). The instruction says \"identity_surfaces\": list of surfaces. Each surface must have \"surface\", \"evidence_ref\", \"exact_quote\". We can include both.\n\nLet's now construct.\n\nCheck whether we need to include \"semantic_level\" and \"direction\" for relation. Yes.\n\nLet's produce.\n\nMake sure to adhere to strict JSON, no Markdown.\n\nNow output.",
+          "role": "assistant"
+        }
+      }
+    ],
+    "created": 1787549671,
+    "id": "83ca79b2-afa3-468f-8596-8119ad440dd2",
+    "model": "deepseek-v4-flash",
+    "object": "chat.completion",
+    "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+    "usage": {
+      "completion_tokens": 2096,
+      "completion_tokens_details": {
+        "reasoning_tokens": 1874
+      },
+      "prompt_cache_hit_tokens": 512,
+      "prompt_cache_miss_tokens": 882,
+      "prompt_tokens": 1394,
+      "prompt_tokens_details": {
+        "cached_tokens": 512
+      },
+      "total_tokens": 3490
+    }
+  },
+  "retrieved_refs": [
+    "hng02-jinshu-wikisource-punctuated-100",
+    "hng02-zizhi-tongjian-wikisource-hu-080",
+    "hng02-jinshu-wikisource-punctuated-006",
+    "hng02-jinshu-wikisource-punctuated-012",
+    "hng02-jinshu-wikisource-punctuated-013",
+    "hng02-jinshu-wikisource-punctuated-015",
+    "hng02-jinshu-wikisource-punctuated-019",
+    "hng02-jinshu-wikisource-punctuated-027"
+  ],
+  "run_id": "20260824T051137Z",
+  "schema": 1,
+  "stage": "hng2-live-raw-extraction",
+  "wave": 2
+}
