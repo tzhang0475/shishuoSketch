@@ -1,0 +1,87 @@
+{
+  "canonical_write_back": false,
+  "case_id": "hng2-live-hng2-live-w1-temporal-7787c8e7d9f2c14fc5b5",
+  "elapsed_seconds": 2.123042,
+  "immutable": true,
+  "input_hash": "00e694ae3fdb1297c3eeffd7e00e6835ee10a6a7c520580c08ba90437494675e",
+  "kind": "semantic",
+  "model": "deepseek-v4-flash",
+  "parse_error": null,
+  "parsed": {
+    "evidence_interpretation": {
+      "assertions": [
+        {
+          "assertion_id": "a0",
+          "assertion_type": "person_mention",
+          "confidence": "high",
+          "evidence_ref": "hng02-jinshu-wikisource-punctuated-003",
+          "evidence_span": "何曾等固爭曰",
+          "subject_entity_key": "e0"
+        }
+      ],
+      "entities": [
+        {
+          "entity_key": "e0",
+          "entity_kind": "person",
+          "evidence_ref": "hng02-jinshu-wikisource-punctuated-003",
+          "evidence_span": "何曾等固爭曰",
+          "reference_form": "full_name",
+          "surface": "何曾"
+        }
+      ]
+    },
+    "identity_recommendation": "new_person",
+    "research_gap": {
+      "blocking_question": "What source-local evidence identifies this surface?",
+      "candidate_keys": [],
+      "missing_constraints": [
+        "identity_evidence"
+      ],
+      "next_best_action": "search_biography_context",
+      "status": "open",
+      "stop_condition": "stop when an exact or structurally explicit identity is found"
+    },
+    "semantic_assessment": "explicit_name"
+  },
+  "prompt_version": "hng2-sc-card-controller-v1",
+  "provider": "deepseek",
+  "response": {
+    "choices": [
+      {
+        "finish_reason": "stop",
+        "index": 0,
+        "logprobs": null,
+        "message": {
+          "content": "{\n  \"evidence_interpretation\": {\n    \"entities\": [\n      {\n        \"entity_key\": \"e0\",\n        \"surface\": \"何曾\",\n        \"entity_kind\": \"person\",\n        \"reference_form\": \"full_name\",\n        \"evidence_ref\": \"hng02-jinshu-wikisource-punctuated-003\",\n        \"evidence_span\": \"何曾等固爭曰\"\n      }\n    ],\n    \"assertions\": [\n      {\n        \"assertion_id\": \"a0\",\n        \"assertion_type\": \"person_mention\",\n        \"subject_entity_key\": \"e0\",\n        \"evidence_ref\": \"hng02-jinshu-wikisource-punctuated-003\",\n        \"evidence_span\": \"何曾等固爭曰\",\n        \"confidence\": \"high\"\n      }\n    ]\n  },\n  \"semantic_assessment\": \"explicit_name\",\n  \"identity_recommendation\": \"new_person\",\n  \"research_gap\": {\n    \"blocking_question\": \"What source-local evidence identifies this surface?\",\n    \"candidate_keys\": [],\n    \"missing_constraints\": [\"identity_evidence\"],\n    \"next_best_action\": \"search_biography_context\",\n    \"status\": \"open\",\n    \"stop_condition\": \"stop when an exact or structurally explicit identity is found\"\n  }\n}",
+          "role": "assistant"
+        }
+      }
+    ],
+    "created": 1787577442,
+    "id": "48e5082f-d734-4b2b-9a4a-ec0d78e163a3",
+    "model": "deepseek-v4-flash",
+    "object": "chat.completion",
+    "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+    "usage": {
+      "completion_tokens": 291,
+      "prompt_cache_hit_tokens": 0,
+      "prompt_cache_miss_tokens": 2106,
+      "prompt_tokens": 2106,
+      "prompt_tokens_details": {
+        "cached_tokens": 0
+      },
+      "total_tokens": 2397
+    }
+  },
+  "response_channel": "content",
+  "sequence": 2,
+  "start_time": "2026-08-24T13:17:22Z",
+  "status": "response",
+  "usage": {
+    "completion_tokens": 291,
+    "prompt_cache_hit_tokens": 0,
+    "prompt_cache_miss_tokens": 2106,
+    "prompt_tokens": 2106,
+    "total_tokens": 2397
+  }
+}

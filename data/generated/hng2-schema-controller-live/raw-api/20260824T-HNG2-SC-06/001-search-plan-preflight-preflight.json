@@ -1,0 +1,78 @@
+{
+  "canonical_write_back": false,
+  "case_id": "preflight",
+  "elapsed_seconds": 1.990815,
+  "immutable": true,
+  "input_hash": "cedebc4cf78cf89f7ff65f27864c8ca28d4ffa286f84d872b95d5e5578ec873a",
+  "kind": "search-plan-preflight",
+  "model": "deepseek-v4-flash",
+  "parse_error": null,
+  "parsed": {
+    "search_plan": {
+      "candidate_keys": [
+        "c0"
+      ],
+      "goal": "验证候选庾亮是否具有'太尉'这一官职身份，以确认其身份匹配。",
+      "graph_neighborhood_scope": "case_only",
+      "preferred_sources": [
+        "晉書"
+      ],
+      "search_entities": [
+        "庾亮",
+        "庾太尉"
+      ],
+      "search_patterns": [
+        "庾亮.*太尉",
+        "庾太尉.*庾亮",
+        "太尉.*庾亮"
+      ],
+      "stop_condition": "在晉書中找到明确记载庾亮曾任太尉的条目，或找到其官职为太尉的明确表述。",
+      "target_constraint": "title_identity",
+      "temporal_scope": {
+        "end_year": 340,
+        "start_year": 289
+      }
+    }
+  },
+  "prompt_version": "hng2-sc-search-plan-v1",
+  "provider": "deepseek",
+  "response": {
+    "choices": [
+      {
+        "finish_reason": "stop",
+        "index": 0,
+        "logprobs": null,
+        "message": {
+          "content": "{\n  \"search_plan\": {\n    \"target_constraint\": \"title_identity\",\n    \"goal\": \"验证候选庾亮是否具有'太尉'这一官职身份，以确认其身份匹配。\",\n    \"candidate_keys\": [\"c0\"],\n    \"preferred_sources\": [\"晉書\"],\n    \"search_entities\": [\"庾亮\", \"庾太尉\"],\n    \"search_patterns\": [\"庾亮.*太尉\", \"庾太尉.*庾亮\", \"太尉.*庾亮\"],\n    \"temporal_scope\": {\n      \"start_year\": 289,\n      \"end_year\": 340\n    },\n    \"graph_neighborhood_scope\": \"case_only\",\n    \"stop_condition\": \"在晉書中找到明确记载庾亮曾任太尉的条目，或找到其官职为太尉的明确表述。\"\n  }\n}",
+          "role": "assistant"
+        }
+      }
+    ],
+    "created": 1787577515,
+    "id": "5ac385b8-49e1-4a5b-9dd8-4ba1db818433",
+    "model": "deepseek-v4-flash",
+    "object": "chat.completion",
+    "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+    "usage": {
+      "completion_tokens": 191,
+      "prompt_cache_hit_tokens": 384,
+      "prompt_cache_miss_tokens": 38,
+      "prompt_tokens": 422,
+      "prompt_tokens_details": {
+        "cached_tokens": 384
+      },
+      "total_tokens": 613
+    }
+  },
+  "response_channel": "content",
+  "sequence": 1,
+  "start_time": "2026-08-24T13:18:35Z",
+  "status": "response",
+  "usage": {
+    "completion_tokens": 191,
+    "prompt_cache_hit_tokens": 384,
+    "prompt_cache_miss_tokens": 38,
+    "prompt_tokens": 422,
+    "total_tokens": 613
+  }
+}

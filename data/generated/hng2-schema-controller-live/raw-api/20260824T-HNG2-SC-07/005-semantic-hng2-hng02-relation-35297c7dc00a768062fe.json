@@ -1,0 +1,119 @@
+{
+  "canonical_write_back": false,
+  "case_id": "hng2-hng02-relation-35297c7dc00a768062fe",
+  "elapsed_seconds": 3.840472,
+  "immutable": true,
+  "input_hash": "4c2ab70f32832be76292f77fd8db1ed10b9a52acda3217304bd25630e9bcd7f7",
+  "kind": "semantic",
+  "model": "deepseek-v4-flash",
+  "parse_error": null,
+  "parsed": {
+    "evidence_interpretation": {
+      "assertions": [
+        {
+          "assertion_id": "a0",
+          "assertion_type": "title_of",
+          "confidence": "high",
+          "direction": null,
+          "evidence_ref": "hng02-jinshu-wikisource-punctuated-009",
+          "evidence_span": "簡文皇帝",
+          "object_entity_key": null,
+          "subject_entity_key": "e0",
+          "value": "簡文皇帝"
+        }
+      ],
+      "entities": [
+        {
+          "entity_key": "e0",
+          "entity_kind": "person_title",
+          "evidence_ref": "hng02-jinshu-wikisource-punctuated-009",
+          "evidence_span": "簡文皇帝",
+          "reference_form": "title_only",
+          "surface": "簡文皇帝"
+        }
+      ]
+    },
+    "identity_recommendation": {
+      "chosen_candidate_key": null,
+      "confidence": "unknown",
+      "decision": "unresolved",
+      "evidence_spans": [
+        {
+          "ref": "hng02-jinshu-wikisource-punctuated-009",
+          "span": "簡文皇帝"
+        }
+      ],
+      "new_entity_candidate": null,
+      "new_entity_key": null,
+      "reason_codes": [
+        "no_candidate",
+        "title_only"
+      ],
+      "summary": "The title '簡文皇帝' is a title-only expression; without candidate list or additional context, identity cannot be resolved.",
+      "unresolved_reason": "The title '簡文皇帝' denotes a historical person, but no candidate list is provided and the passage does not give a full name or unambiguous identification."
+    },
+    "research_gap": {
+      "blocking_question": "Which historical person does this title denote in this passage?",
+      "candidate_keys": [],
+      "missing_constraints": [
+        "title_identity"
+      ],
+      "next_best_action": "search_title_identity",
+      "status": "open",
+      "stop_condition": "stop when one context-compatible person is independently supported"
+    },
+    "semantic_assessment": {
+      "assessment_status": "assessed",
+      "evidence_spans": [
+        {
+          "ref": "hng02-jinshu-wikisource-punctuated-009",
+          "span": "簡文皇帝"
+        }
+      ],
+      "observed_role": "office_holder",
+      "semantic_fit": "unknown",
+      "summary": "The expression '簡文皇帝' is a title-only reference to a person, likely Emperor Jianwen of Jin, but the passage does not provide a full name or explicit identification beyond the title."
+    }
+  },
+  "prompt_version": "hng2-sc-card-controller-v1",
+  "provider": "deepseek",
+  "response": {
+    "choices": [
+      {
+        "finish_reason": "stop",
+        "index": 0,
+        "logprobs": null,
+        "message": {
+          "content": "{\n  \"evidence_interpretation\": {\n    \"entities\": [\n      {\n        \"entity_key\": \"e0\",\n        \"surface\": \"簡文皇帝\",\n        \"entity_kind\": \"person_title\",\n        \"reference_form\": \"title_only\",\n        \"evidence_ref\": \"hng02-jinshu-wikisource-punctuated-009\",\n        \"evidence_span\": \"簡文皇帝\"\n      }\n    ],\n    \"assertions\": [\n      {\n        \"assertion_id\": \"a0\",\n        \"assertion_type\": \"title_of\",\n        \"subject_entity_key\": \"e0\",\n        \"object_entity_key\": null,\n        \"value\": \"簡文皇帝\",\n        \"direction\": null,\n        \"evidence_ref\": \"hng02-jinshu-wikisource-punctuated-009\",\n        \"evidence_span\": \"簡文皇帝\",\n        \"confidence\": \"high\"\n      }\n    ]\n  },\n  \"semantic_assessment\": {\n    \"assessment_status\": \"assessed\",\n    \"semantic_fit\": \"unknown\",\n    \"observed_role\": \"office_holder\",\n    \"evidence_spans\": [\n      {\n        \"ref\": \"hng02-jinshu-wikisource-punctuated-009\",\n        \"span\": \"簡文皇帝\"\n      }\n    ],\n    \"summary\": \"The expression '簡文皇帝' is a title-only reference to a person, likely Emperor Jianwen of Jin, but the passage does not provide a full name or explicit identification beyond the title.\"\n  },\n  \"identity_recommendation\": {\n    \"decision\": \"unresolved\",\n    \"chosen_candidate_key\": null,\n    \"confidence\": \"unknown\",\n    \"reason_codes\": [\"no_candidate\", \"title_only\"],\n    \"evidence_spans\": [\n      {\n        \"ref\": \"hng02-jinshu-wikisource-punctuated-009\",\n        \"span\": \"簡文皇帝\"\n      }\n    ],\n    \"new_entity_candidate\": null,\n    \"new_entity_key\": null,\n    \"unresolved_reason\": \"The title '簡文皇帝' denotes a historical person, but no candidate list is provided and the passage does not give a full name or unambiguous identification.\",\n    \"summary\": \"The title '簡文皇帝' is a title-only expression; without candidate list or additional context, identity cannot be resolved.\"\n  },\n  \"research_gap\": {\n    \"status\": \"open\",\n    \"missing_constraints\": [\"title_identity\"],\n    \"blocking_question\": \"Which historical person does this title denote in this passage?\",\n    \"next_best_action\": \"search_title_identity\",\n    \"candidate_keys\": [],\n    \"stop_condition\": \"stop when one context-compatible person is independently supported\"\n  }\n}",
+          "role": "assistant"
+        }
+      }
+    ],
+    "created": 1787577676,
+    "id": "a9466342-f894-45ac-8f40-330a8368f308",
+    "model": "deepseek-v4-flash",
+    "object": "chat.completion",
+    "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+    "usage": {
+      "completion_tokens": 599,
+      "prompt_cache_hit_tokens": 768,
+      "prompt_cache_miss_tokens": 1231,
+      "prompt_tokens": 1999,
+      "prompt_tokens_details": {
+        "cached_tokens": 768
+      },
+      "total_tokens": 2598
+    }
+  },
+  "response_channel": "content",
+  "sequence": 5,
+  "start_time": "2026-08-24T13:21:16Z",
+  "status": "response",
+  "usage": {
+    "completion_tokens": 599,
+    "prompt_cache_hit_tokens": 768,
+    "prompt_cache_miss_tokens": 1231,
+    "prompt_tokens": 1999,
+    "total_tokens": 2598
+  }
+}

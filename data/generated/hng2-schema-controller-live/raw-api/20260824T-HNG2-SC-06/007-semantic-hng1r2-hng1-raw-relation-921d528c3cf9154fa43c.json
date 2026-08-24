@@ -1,0 +1,109 @@
+{
+  "canonical_write_back": false,
+  "case_id": "hng1r2-hng1-raw-relation-921d528c3cf9154fa43c",
+  "elapsed_seconds": 3.094317,
+  "immutable": true,
+  "input_hash": "5835af90b4812971098c3afe30c9f2cf0c5c7f044fb4197a4400dfc5b41ef7df",
+  "kind": "semantic",
+  "model": "deepseek-v4-flash",
+  "parse_error": null,
+  "parsed": {
+    "evidence_interpretation": {
+      "assertions": [
+        {
+          "assertion_id": "a0",
+          "assertion_type": "person_mention",
+          "confidence": "high",
+          "evidence_ref": "hng02-zizhi-tongjian-wikisource-hu-090",
+          "evidence_span": "廙",
+          "subject_entity_key": "e0"
+        }
+      ],
+      "entities": [
+        {
+          "entity_key": "e0",
+          "entity_kind": "named_person",
+          "evidence_ref": "hng02-zizhi-tongjian-wikisource-hu-090",
+          "evidence_span": "廙",
+          "reference_form": "full_name",
+          "surface": "廙"
+        }
+      ]
+    },
+    "identity_recommendation": {
+      "chosen_candidate_key": "c0",
+      "confidence": "medium",
+      "decision": "resolved",
+      "evidence_spans": [
+        "廙"
+      ],
+      "new_entity_candidate": null,
+      "new_entity_key": null,
+      "reason_codes": [
+        "canonical_name_in_context"
+      ],
+      "summary": "The mention '廙' matches candidate c0 (王廙) based on context and the source_local_context constraint supporting the canonical name.",
+      "unresolved_reason": ""
+    },
+    "research_gap": {
+      "blocking_question": "",
+      "candidate_keys": [
+        "c0"
+      ],
+      "missing_constraints": [],
+      "next_best_action": "none",
+      "status": "closed",
+      "stop_condition": "identity resolved"
+    },
+    "semantic_assessment": {
+      "assessment_status": "assessed",
+      "evidence_spans": [
+        "廙"
+      ],
+      "observed_role": "kinship_node",
+      "semantic_fit": "match",
+      "summary": "The surface '廙' is a single-character name referring to a person, likely Wang Yi (王廙), based on context. It appears as a participant in events, not as a kinship expression."
+    }
+  },
+  "prompt_version": "hng2-sc-card-controller-v1",
+  "provider": "deepseek",
+  "response": {
+    "choices": [
+      {
+        "finish_reason": "stop",
+        "index": 0,
+        "logprobs": null,
+        "message": {
+          "content": "{\n  \"evidence_interpretation\": {\n    \"entities\": [\n      {\n        \"entity_key\": \"e0\",\n        \"surface\": \"廙\",\n        \"entity_kind\": \"named_person\",\n        \"reference_form\": \"full_name\",\n        \"evidence_ref\": \"hng02-zizhi-tongjian-wikisource-hu-090\",\n        \"evidence_span\": \"廙\"\n      }\n    ],\n    \"assertions\": [\n      {\n        \"assertion_id\": \"a0\",\n        \"assertion_type\": \"person_mention\",\n        \"subject_entity_key\": \"e0\",\n        \"evidence_ref\": \"hng02-zizhi-tongjian-wikisource-hu-090\",\n        \"evidence_span\": \"廙\",\n        \"confidence\": \"high\"\n      }\n    ]\n  },\n  \"semantic_assessment\": {\n    \"assessment_status\": \"assessed\",\n    \"semantic_fit\": \"match\",\n    \"observed_role\": \"kinship_node\",\n    \"evidence_spans\": [\"廙\"],\n    \"summary\": \"The surface '廙' is a single-character name referring to a person, likely Wang Yi (王廙), based on context. It appears as a participant in events, not as a kinship expression.\"\n  },\n  \"identity_recommendation\": {\n    \"decision\": \"resolved\",\n    \"chosen_candidate_key\": \"c0\",\n    \"confidence\": \"medium\",\n    \"reason_codes\": [\"canonical_name_in_context\"],\n    \"evidence_spans\": [\"廙\"],\n    \"new_entity_candidate\": null,\n    \"new_entity_key\": null,\n    \"unresolved_reason\": \"\",\n    \"summary\": \"The mention '廙' matches candidate c0 (王廙) based on context and the source_local_context constraint supporting the canonical name.\"\n  },\n  \"research_gap\": {\n    \"status\": \"closed\",\n    \"missing_constraints\": [],\n    \"blocking_question\": \"\",\n    \"next_best_action\": \"none\",\n    \"candidate_keys\": [\"c0\"],\n    \"stop_condition\": \"identity resolved\"\n  }\n}",
+          "role": "assistant"
+        }
+      }
+    ],
+    "created": 1787577547,
+    "id": "6850e10f-c8be-44df-9435-e5478aae102f",
+    "model": "deepseek-v4-flash",
+    "object": "chat.completion",
+    "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+    "usage": {
+      "completion_tokens": 458,
+      "prompt_cache_hit_tokens": 512,
+      "prompt_cache_miss_tokens": 2068,
+      "prompt_tokens": 2580,
+      "prompt_tokens_details": {
+        "cached_tokens": 512
+      },
+      "total_tokens": 3038
+    }
+  },
+  "response_channel": "content",
+  "sequence": 7,
+  "start_time": "2026-08-24T13:19:07Z",
+  "status": "response",
+  "usage": {
+    "completion_tokens": 458,
+    "prompt_cache_hit_tokens": 512,
+    "prompt_cache_miss_tokens": 2068,
+    "prompt_tokens": 2580,
+    "total_tokens": 3038
+  }
+}

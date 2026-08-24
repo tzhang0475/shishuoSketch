@@ -1,0 +1,97 @@
+{
+  "canonical_write_back": false,
+  "case_id": "hng1r2-hng1-raw-relation-b97bdeb3fbec092978bc",
+  "elapsed_seconds": 2.682911,
+  "immutable": true,
+  "input_hash": "16142db740085c586a4f9de7c55024ca288f2617c77ac59eae769eec96e71591",
+  "kind": "semantic",
+  "model": "deepseek-v4-flash",
+  "parse_error": null,
+  "parsed": {
+    "evidence_interpretation": {
+      "assertions": [
+        {
+          "assertion_id": "a0",
+          "assertion_type": "person_mention",
+          "confidence": "high",
+          "evidence_ref": "hng01-jinshu-088-liezhuan-007",
+          "evidence_span": "會稽虞喜隠居海嵎有高世之風",
+          "subject_entity_key": "e0"
+        },
+        {
+          "assertion_id": "a1",
+          "assertion_type": "kinship_relation",
+          "confidence": "high",
+          "direction": "brother_of",
+          "evidence_ref": "hng01-jinshu-088-liezhuan-007",
+          "evidence_span": "娉喜弟預女為妻",
+          "object_entity_key": "e0",
+          "subject_entity_key": "e0"
+        }
+      ],
+      "entities": [
+        {
+          "entity_key": "e0",
+          "entity_kind": "named_person",
+          "evidence_ref": "hng01-jinshu-088-liezhuan-007",
+          "evidence_span": "會稽虞喜隠居海嵎有高世之風晷欽其徳娉喜弟預女為妻喜戒女棄華尚素與晷同志時人號為梁鴻夫婦",
+          "reference_form": "full_name",
+          "surface": "虞喜"
+        }
+      ]
+    },
+    "identity_recommendation": "new_person_candidate",
+    "research_gap": {
+      "blocking_question": "Which individuals are represented by the kinship chain?",
+      "candidate_keys": [],
+      "missing_constraints": [
+        "structural_kinship_parse"
+      ],
+      "next_best_action": "search_kinship_context",
+      "status": "open",
+      "stop_condition": "do not create a node until the chain is parsed"
+    },
+    "semantic_assessment": "named_person_mention"
+  },
+  "prompt_version": "hng2-sc-card-controller-v1",
+  "provider": "deepseek",
+  "response": {
+    "choices": [
+      {
+        "finish_reason": "stop",
+        "index": 0,
+        "logprobs": null,
+        "message": {
+          "content": "{\n  \"evidence_interpretation\": {\n    \"entities\": [\n      {\n        \"entity_key\": \"e0\",\n        \"surface\": \"虞喜\",\n        \"entity_kind\": \"named_person\",\n        \"reference_form\": \"full_name\",\n        \"evidence_ref\": \"hng01-jinshu-088-liezhuan-007\",\n        \"evidence_span\": \"會稽虞喜隠居海嵎有高世之風晷欽其徳娉喜弟預女為妻喜戒女棄華尚素與晷同志時人號為梁鴻夫婦\"\n      }\n    ],\n    \"assertions\": [\n      {\n        \"assertion_id\": \"a0\",\n        \"assertion_type\": \"person_mention\",\n        \"subject_entity_key\": \"e0\",\n        \"evidence_ref\": \"hng01-jinshu-088-liezhuan-007\",\n        \"evidence_span\": \"會稽虞喜隠居海嵎有高世之風\",\n        \"confidence\": \"high\"\n      },\n      {\n        \"assertion_id\": \"a1\",\n        \"assertion_type\": \"kinship_relation\",\n        \"subject_entity_key\": \"e0\",\n        \"object_entity_key\": \"e0\",\n        \"direction\": \"brother_of\",\n        \"evidence_ref\": \"hng01-jinshu-088-liezhuan-007\",\n        \"evidence_span\": \"娉喜弟預女為妻\",\n        \"confidence\": \"high\"\n      }\n    ]\n  },\n  \"semantic_assessment\": \"named_person_mention\",\n  \"identity_recommendation\": \"new_person_candidate\",\n  \"research_gap\": {\n    \"blocking_question\": \"Which individuals are represented by the kinship chain?\",\n    \"candidate_keys\": [],\n    \"missing_constraints\": [\"structural_kinship_parse\"],\n    \"next_best_action\": \"search_kinship_context\",\n    \"status\": \"open\",\n    \"stop_condition\": \"do not create a node until the chain is parsed\"\n  }\n}",
+          "role": "assistant"
+        }
+      }
+    ],
+    "created": 1787577453,
+    "id": "d5202232-7a7f-4ec3-b8e6-b97d6aa25880",
+    "model": "deepseek-v4-flash",
+    "object": "chat.completion",
+    "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+    "usage": {
+      "completion_tokens": 449,
+      "prompt_cache_hit_tokens": 384,
+      "prompt_cache_miss_tokens": 1559,
+      "prompt_tokens": 1943,
+      "prompt_tokens_details": {
+        "cached_tokens": 384
+      },
+      "total_tokens": 2392
+    }
+  },
+  "response_channel": "content",
+  "sequence": 6,
+  "start_time": "2026-08-24T13:17:33Z",
+  "status": "response",
+  "usage": {
+    "completion_tokens": 449,
+    "prompt_cache_hit_tokens": 384,
+    "prompt_cache_miss_tokens": 1559,
+    "prompt_tokens": 1943,
+    "total_tokens": 2392
+  }
+}

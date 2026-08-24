@@ -1,0 +1,118 @@
+{
+  "canonical_write_back": false,
+  "case_id": "hng1r2-hng1-raw-relation-b97bdeb3fbec092978bc",
+  "elapsed_seconds": 4.953594,
+  "immutable": true,
+  "input_hash": "16142db740085c586a4f9de7c55024ca288f2617c77ac59eae769eec96e71591",
+  "kind": "semantic",
+  "model": "deepseek-v4-flash",
+  "parse_error": null,
+  "parsed": {
+    "evidence_interpretation": {
+      "assertions": [
+        {
+          "assertion_id": "a0",
+          "assertion_type": "person_mention",
+          "confidence": "high",
+          "evidence_ref": "hng01-jinshu-088-liezhuan-007",
+          "evidence_span": "會稽虞喜隠居海嵎有高世之風",
+          "subject_entity_key": "e0"
+        },
+        {
+          "assertion_id": "a1",
+          "assertion_type": "kinship_relation",
+          "confidence": "high",
+          "evidence_ref": "hng01-jinshu-088-liezhuan-007",
+          "evidence_span": "娉喜弟預女為妻",
+          "object_entity_key": "e1",
+          "subject_entity_key": "e0"
+        }
+      ],
+      "entities": [
+        {
+          "entity_key": "e0",
+          "entity_kind": "named_person",
+          "evidence_ref": "hng01-jinshu-088-liezhuan-007",
+          "evidence_span": "會稽虞喜隠居海嵎有高世之風晷欽其徳娉喜弟預女為妻喜戒女棄華尚素與晷同志時人號為梁鴻夫婦",
+          "reference_form": "full_name",
+          "surface": "虞喜"
+        }
+      ]
+    },
+    "identity_recommendation": {
+      "chosen_candidate_key": null,
+      "confidence": "unknown",
+      "decision": "unresolved",
+      "evidence_spans": [
+        "會稽虞喜隠居海嵎有高世之風晷欽其徳娉喜弟預女為妻喜戒女棄華尚素與晷同志時人號為梁鴻夫婦"
+      ],
+      "new_entity_candidate": null,
+      "new_entity_key": null,
+      "reason_codes": [
+        "no_candidate_provided"
+      ],
+      "summary": "目标'虞喜'为明确姓名，但无候选人物可匹配，身份认定未解决。",
+      "unresolved_reason": "系统未提供候选人物，且当前证据不足以唯一认定具体历史人物身份，需进一步检索外部知识。"
+    },
+    "research_gap": {
+      "blocking_question": "虞喜的具体历史身份（如东晋学者虞喜）是否与目标一致？",
+      "candidate_keys": [],
+      "missing_constraints": [
+        "candidate_person_list"
+      ],
+      "next_best_action": "search_external_knowledge",
+      "status": "open",
+      "stop_condition": "获得候选人物列表或外部权威知识后再做认定"
+    },
+    "semantic_assessment": {
+      "assessment_status": "assessed",
+      "evidence_spans": [
+        "會稽虞喜隠居海嵎有高世之風晷欽其徳娉喜弟預女為妻喜戒女棄華尚素與晷同志時人號為梁鴻夫婦"
+      ],
+      "observed_role": "referenced_person",
+      "semantic_fit": "full_match",
+      "summary": "目标表达'虞喜'是明确姓名，指代会稽人虞喜，在叙事中被提及，并作为亲属链中的关键人物（其弟虞预之女嫁与孙晷）。"
+    }
+  },
+  "prompt_version": "hng2-sc-card-controller-v1",
+  "provider": "deepseek",
+  "response": {
+    "choices": [
+      {
+        "finish_reason": "stop",
+        "index": 0,
+        "logprobs": null,
+        "message": {
+          "content": "{\n  \"evidence_interpretation\": {\n    \"entities\": [\n      {\n        \"entity_key\": \"e0\",\n        \"surface\": \"虞喜\",\n        \"entity_kind\": \"named_person\",\n        \"reference_form\": \"full_name\",\n        \"evidence_ref\": \"hng01-jinshu-088-liezhuan-007\",\n        \"evidence_span\": \"會稽虞喜隠居海嵎有高世之風晷欽其徳娉喜弟預女為妻喜戒女棄華尚素與晷同志時人號為梁鴻夫婦\"\n      }\n    ],\n    \"assertions\": [\n      {\n        \"assertion_id\": \"a0\",\n        \"assertion_type\": \"person_mention\",\n        \"subject_entity_key\": \"e0\",\n        \"evidence_ref\": \"hng01-jinshu-088-liezhuan-007\",\n        \"evidence_span\": \"會稽虞喜隠居海嵎有高世之風\",\n        \"confidence\": \"high\"\n      },\n      {\n        \"assertion_id\": \"a1\",\n        \"assertion_type\": \"kinship_relation\",\n        \"subject_entity_key\": \"e0\",\n        \"object_entity_key\": \"e1\",\n        \"evidence_ref\": \"hng01-jinshu-088-liezhuan-007\",\n        \"evidence_span\": \"娉喜弟預女為妻\",\n        \"confidence\": \"high\"\n      }\n    ]\n  },\n  \"semantic_assessment\": {\n    \"assessment_status\": \"assessed\",\n    \"semantic_fit\": \"full_match\",\n    \"observed_role\": \"referenced_person\",\n    \"evidence_spans\": [\n      \"會稽虞喜隠居海嵎有高世之風晷欽其徳娉喜弟預女為妻喜戒女棄華尚素與晷同志時人號為梁鴻夫婦\"\n    ],\n    \"summary\": \"目标表达'虞喜'是明确姓名，指代会稽人虞喜，在叙事中被提及，并作为亲属链中的关键人物（其弟虞预之女嫁与孙晷）。\"\n  },\n  \"identity_recommendation\": {\n    \"decision\": \"unresolved\",\n    \"chosen_candidate_key\": null,\n    \"confidence\": \"unknown\",\n    \"reason_codes\": [\"no_candidate_provided\"],\n    \"evidence_spans\": [\n      \"會稽虞喜隠居海嵎有高世之風晷欽其徳娉喜弟預女為妻喜戒女棄華尚素與晷同志時人號為梁鴻夫婦\"\n    ],\n    \"new_entity_candidate\": null,\n    \"new_entity_key\": null,\n    \"unresolved_reason\": \"系统未提供候选人物，且当前证据不足以唯一认定具体历史人物身份，需进一步检索外部知识。\",\n    \"summary\": \"目标'虞喜'为明确姓名，但无候选人物可匹配，身份认定未解决。\"\n  },\n  \"research_gap\": {\n    \"status\": \"open\",\n    \"missing_constraints\": [\"candidate_person_list\"],\n    \"blocking_question\": \"虞喜的具体历史身份（如东晋学者虞喜）是否与目标一致？\",\n    \"next_best_action\": \"search_external_knowledge\",\n    \"candidate_keys\": [],\n    \"stop_condition\": \"获得候选人物列表或外部权威知识后再做认定\"\n  }\n}",
+          "role": "assistant"
+        }
+      }
+    ],
+    "created": 1787577542,
+    "id": "2eff1588-eaec-430a-b726-ae182c0db6f1",
+    "model": "deepseek-v4-flash",
+    "object": "chat.completion",
+    "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+    "usage": {
+      "completion_tokens": 760,
+      "prompt_cache_hit_tokens": 640,
+      "prompt_cache_miss_tokens": 1536,
+      "prompt_tokens": 2176,
+      "prompt_tokens_details": {
+        "cached_tokens": 640
+      },
+      "total_tokens": 2936
+    }
+  },
+  "response_channel": "content",
+  "sequence": 6,
+  "start_time": "2026-08-24T13:19:02Z",
+  "status": "response",
+  "usage": {
+    "completion_tokens": 760,
+    "prompt_cache_hit_tokens": 640,
+    "prompt_cache_miss_tokens": 1536,
+    "prompt_tokens": 2176,
+    "total_tokens": 2936
+  }
+}

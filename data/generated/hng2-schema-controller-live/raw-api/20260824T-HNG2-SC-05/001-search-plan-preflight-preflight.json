@@ -1,0 +1,78 @@
+{
+  "canonical_write_back": false,
+  "case_id": "preflight",
+  "elapsed_seconds": 1.902443,
+  "immutable": true,
+  "input_hash": "cedebc4cf78cf89f7ff65f27864c8ca28d4ffa286f84d872b95d5e5578ec873a",
+  "kind": "search-plan-preflight",
+  "model": "deepseek-v4-flash",
+  "parse_error": null,
+  "parsed": {
+    "search_plan": {
+      "candidate_keys": [
+        "c0"
+      ],
+      "goal": "Find evidence in local sources that confirms the title '太尉' for 庾亮, thereby validating the identity of the entity referred to as '庾太尉'.",
+      "graph_neighborhood_scope": "case_only",
+      "preferred_sources": [
+        "晉書"
+      ],
+      "search_entities": [
+        "庾亮",
+        "庾太尉"
+      ],
+      "search_patterns": [
+        "庾亮.*太尉",
+        "太尉.*庾亮",
+        "庾太尉"
+      ],
+      "stop_condition": "Stop when a passage in 晉書 explicitly states that 庾亮 held the title '太尉' (e.g., '庾亮為太尉' or similar), or when multiple independent passages consistently associate 庾亮 with the title '太尉'.",
+      "target_constraint": "title_identity",
+      "temporal_scope": {
+        "end_year": 340,
+        "start_year": 289
+      }
+    }
+  },
+  "prompt_version": "hng2-sc-search-plan-v1",
+  "provider": "deepseek",
+  "response": {
+    "choices": [
+      {
+        "finish_reason": "stop",
+        "index": 0,
+        "logprobs": null,
+        "message": {
+          "content": "{\n  \"search_plan\": {\n    \"target_constraint\": \"title_identity\",\n    \"goal\": \"Find evidence in local sources that confirms the title '太尉' for 庾亮, thereby validating the identity of the entity referred to as '庾太尉'.\",\n    \"candidate_keys\": [\"c0\"],\n    \"preferred_sources\": [\"晉書\"],\n    \"search_entities\": [\"庾亮\", \"庾太尉\"],\n    \"search_patterns\": [\"庾亮.*太尉\", \"太尉.*庾亮\", \"庾太尉\"],\n    \"temporal_scope\": {\n      \"start_year\": 289,\n      \"end_year\": 340\n    },\n    \"graph_neighborhood_scope\": \"case_only\",\n    \"stop_condition\": \"Stop when a passage in 晉書 explicitly states that 庾亮 held the title '太尉' (e.g., '庾亮為太尉' or similar), or when multiple independent passages consistently associate 庾亮 with the title '太尉'.\"\n  }\n}",
+          "role": "assistant"
+        }
+      }
+    ],
+    "created": 1787577432,
+    "id": "5c392a1b-3fe0-4527-9b50-4971c054ba74",
+    "model": "deepseek-v4-flash",
+    "object": "chat.completion",
+    "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+    "usage": {
+      "completion_tokens": 230,
+      "prompt_cache_hit_tokens": 0,
+      "prompt_cache_miss_tokens": 422,
+      "prompt_tokens": 422,
+      "prompt_tokens_details": {
+        "cached_tokens": 0
+      },
+      "total_tokens": 652
+    }
+  },
+  "response_channel": "content",
+  "sequence": 1,
+  "start_time": "2026-08-24T13:17:12Z",
+  "status": "response",
+  "usage": {
+    "completion_tokens": 230,
+    "prompt_cache_hit_tokens": 0,
+    "prompt_cache_miss_tokens": 422,
+    "prompt_tokens": 422,
+    "total_tokens": 652
+  }
+}

@@ -1,0 +1,125 @@
+{
+  "canonical_write_back": false,
+  "case_id": "hng2-live-hng2-live-w1-temporal-7787c8e7d9f2c14fc5b5",
+  "elapsed_seconds": 4.208648,
+  "immutable": true,
+  "input_hash": "3841bcb528a654923e69be580eaeb093079b41956ae65e26d261fb0d2a9c5fcb",
+  "kind": "semantic",
+  "model": "deepseek-v4-flash",
+  "parse_error": null,
+  "parsed": {
+    "evidence_interpretation": {
+      "assertions": [
+        {
+          "assertion_id": "a0",
+          "assertion_type": "person_mention",
+          "confidence": "high",
+          "evidence_ref": "hng02-jinshu-wikisource-punctuated-003",
+          "evidence_span": "何曾等固爭曰",
+          "subject_entity_key": "e0"
+        },
+        {
+          "assertion_id": "a1",
+          "assertion_type": "participates_in_event",
+          "confidence": "high",
+          "evidence_ref": "hng02-jinshu-wikisource-punctuated-003",
+          "evidence_span": "何曾等固爭曰",
+          "subject_entity_key": "e0",
+          "value": "固爭"
+        }
+      ],
+      "entities": [
+        {
+          "entity_key": "e0",
+          "entity_kind": "named_person",
+          "evidence_ref": "hng02-jinshu-wikisource-punctuated-003",
+          "evidence_span": "何曾等固爭曰",
+          "reference_form": "full_name",
+          "surface": "何曾"
+        }
+      ]
+    },
+    "identity_recommendation": {
+      "chosen_candidate_key": "c0",
+      "confidence": "high",
+      "decision": "choose_candidate",
+      "evidence_spans": [
+        {
+          "ref": "hng02-jinshu-wikisource-punctuated-003",
+          "span": "何曾等固爭曰"
+        }
+      ],
+      "new_entity_candidate": null,
+      "new_entity_key": null,
+      "reason_codes": [
+        "exact_name_match",
+        "source_local_context"
+      ],
+      "summary": "The surface '何曾' exactly matches the candidate's canonical name, and the source context confirms his participation in the event. No conflicting evidence found.",
+      "unresolved_reason": ""
+    },
+    "research_gap": {
+      "blocking_question": "",
+      "candidate_keys": [
+        "c0"
+      ],
+      "missing_constraints": [],
+      "next_best_action": "none",
+      "status": "closed",
+      "stop_condition": "Identity resolved with high confidence."
+    },
+    "semantic_assessment": {
+      "assessment_status": "assessed",
+      "evidence_spans": [
+        {
+          "ref": "hng02-jinshu-wikisource-punctuated-003",
+          "span": "何曾等固爭曰"
+        }
+      ],
+      "observed_role": "event_participant",
+      "semantic_fit": "strong_support",
+      "summary": "The surface '何曾' appears as a full name in the source, functioning as an event participant who argues with others. The context strongly supports the candidate c0 (何曾)."
+    }
+  },
+  "prompt_version": "hng2-sc-card-controller-v1",
+  "provider": "deepseek",
+  "response": {
+    "choices": [
+      {
+        "finish_reason": "stop",
+        "index": 0,
+        "logprobs": null,
+        "message": {
+          "content": "{\n  \"evidence_interpretation\": {\n    \"entities\": [\n      {\n        \"entity_key\": \"e0\",\n        \"surface\": \"何曾\",\n        \"entity_kind\": \"named_person\",\n        \"reference_form\": \"full_name\",\n        \"evidence_ref\": \"hng02-jinshu-wikisource-punctuated-003\",\n        \"evidence_span\": \"何曾等固爭曰\"\n      }\n    ],\n    \"assertions\": [\n      {\n        \"assertion_id\": \"a0\",\n        \"assertion_type\": \"person_mention\",\n        \"subject_entity_key\": \"e0\",\n        \"evidence_ref\": \"hng02-jinshu-wikisource-punctuated-003\",\n        \"evidence_span\": \"何曾等固爭曰\",\n        \"confidence\": \"high\"\n      },\n      {\n        \"assertion_id\": \"a1\",\n        \"assertion_type\": \"participates_in_event\",\n        \"subject_entity_key\": \"e0\",\n        \"value\": \"固爭\",\n        \"evidence_ref\": \"hng02-jinshu-wikisource-punctuated-003\",\n        \"evidence_span\": \"何曾等固爭曰\",\n        \"confidence\": \"high\"\n      }\n    ]\n  },\n  \"semantic_assessment\": {\n    \"assessment_status\": \"assessed\",\n    \"semantic_fit\": \"strong_support\",\n    \"observed_role\": \"event_participant\",\n    \"evidence_spans\": [\n      {\n        \"ref\": \"hng02-jinshu-wikisource-punctuated-003\",\n        \"span\": \"何曾等固爭曰\"\n      }\n    ],\n    \"summary\": \"The surface '何曾' appears as a full name in the source, functioning as an event participant who argues with others. The context strongly supports the candidate c0 (何曾).\"\n  },\n  \"identity_recommendation\": {\n    \"decision\": \"choose_candidate\",\n    \"chosen_candidate_key\": \"c0\",\n    \"confidence\": \"high\",\n    \"reason_codes\": [\"exact_name_match\", \"source_local_context\"],\n    \"evidence_spans\": [\n      {\n        \"ref\": \"hng02-jinshu-wikisource-punctuated-003\",\n        \"span\": \"何曾等固爭曰\"\n      }\n    ],\n    \"new_entity_candidate\": null,\n    \"new_entity_key\": null,\n    \"unresolved_reason\": \"\",\n    \"summary\": \"The surface '何曾' exactly matches the candidate's canonical name, and the source context confirms his participation in the event. No conflicting evidence found.\"\n  },\n  \"research_gap\": {\n    \"status\": \"closed\",\n    \"missing_constraints\": [],\n    \"blocking_question\": \"\",\n    \"next_best_action\": \"none\",\n    \"candidate_keys\": [\"c0\"],\n    \"stop_condition\": \"Identity resolved with high confidence.\"\n  }\n}",
+          "role": "assistant"
+        }
+      }
+    ],
+    "created": 1787577672,
+    "id": "5ee04400-009c-4aa0-b7cd-d5ee4a9be6ab",
+    "model": "deepseek-v4-flash",
+    "object": "chat.completion",
+    "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+    "usage": {
+      "completion_tokens": 637,
+      "prompt_cache_hit_tokens": 512,
+      "prompt_cache_miss_tokens": 2266,
+      "prompt_tokens": 2778,
+      "prompt_tokens_details": {
+        "cached_tokens": 512
+      },
+      "total_tokens": 3415
+    }
+  },
+  "response_channel": "content",
+  "sequence": 4,
+  "start_time": "2026-08-24T13:21:12Z",
+  "status": "response",
+  "usage": {
+    "completion_tokens": 637,
+    "prompt_cache_hit_tokens": 512,
+    "prompt_cache_miss_tokens": 2266,
+    "prompt_tokens": 2778,
+    "total_tokens": 3415
+  }
+}

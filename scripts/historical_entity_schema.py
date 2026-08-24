@@ -67,6 +67,11 @@ RESEARCH_ACTIONS = {
     "search_biography_context", "human_review", "none",
 }
 SEMANTIC_LEVELS = {"hard_relation", "documented_interaction", "interpreted_relation"}
+EVIDENCE_ASSERTION_TYPES = {
+    "identity_equivalence", "alias_of", "courtesy_name_of", "title_of",
+    "office_held_by", "parent_child", "sibling", "kinship_relation",
+    "participates_in_event", "temporal_statement", "person_mention",
+}
 
 
 def _plain(value: Any) -> Any:
@@ -163,6 +168,7 @@ class ConstraintCheck:
     independent: bool = True
     reason_code: str = ""
     constraint_scope: str = "candidate"
+    assertion_id: str | None = None
 
     def __post_init__(self) -> None:
         _check(self.status, CONSTRAINT_STATUSES, "constraint status")
@@ -187,6 +193,86 @@ class SemanticAssessment:
         _check(self.assessment_status, ASSESSMENT_STATUSES, "assessment status")
         _check(self.semantic_fit, SEMANTIC_FITS, "semantic fit")
         _check(self.observed_role, DISCOURSE_ROLES, "observed role")
+
+
+@dataclass
+class EvidenceEntity:
+    """A locally keyed entity observed in a supplied source passage.
+
+    The key is deliberately local to one model response.  It is never a
+    Person ID, candidate key, graph ID, or canonical identifier.
+    """
+
+    entity_key: str
+    surface: str
+    entity_kind: str
+    reference_form: str
+    evidence_ref: str
+    evidence_span: str
+
+    def __post_init__(self) -> None:
+        if not re_match_local_key(self.entity_key, "e"):
+            raise ValueError("EvidenceEntity.entity_key must be e0/e1/... local key")
+        for name in ("surface", "evidence_ref", "evidence_span"):
+            if not str(getattr(self, name) or "").strip():
+                raise ValueError(f"empty EvidenceEntity.{name}")
+        _check(self.entity_kind, ENTITY_KINDS, "evidence entity kind")
+        _check(self.reference_form, REFERENCE_FORMS, "evidence reference form")
+
+
+@dataclass
+class EvidenceAssertion:
+    """A source-grounded assertion over local EvidenceEntity keys."""
+
+    assertion_type: str
+    subject_entity_key: str
+    object_entity_key: str | None = None
+    value: str | None = None
+    direction: str | None = None
+    evidence_ref: str = ""
+    evidence_span: str = ""
+    confidence: str = "unknown"
+    assertion_id: str = ""
+
+    def __post_init__(self) -> None:
+        _check(self.assertion_type, EVIDENCE_ASSERTION_TYPES, "evidence assertion type")
+        if not re_match_local_key(self.subject_entity_key, "e"):
+            raise ValueError("EvidenceAssertion.subject_entity_key must be a local e key")
+        if self.object_entity_key is not None and not re_match_local_key(self.object_entity_key, "e"):
+            raise ValueError("EvidenceAssertion.object_entity_key must be a local e key")
+        for name in ("evidence_ref", "evidence_span"):
+            if not str(getattr(self, name) or "").strip():
+                raise ValueError(f"empty EvidenceAssertion.{name}")
+        _check(self.confidence, CONFIDENCE_LEVELS, "evidence assertion confidence")
+        if self.assertion_id and not re_match_local_key(self.assertion_id, "a"):
+            raise ValueError("EvidenceAssertion.assertion_id must be a0/a1/... local key")
+
+
+@dataclass
+class EvidenceInterpretation:
+    """Structured evidence card returned by a semantic model call."""
+
+    entities: list[EvidenceEntity] = field(default_factory=list)
+    assertions: list[EvidenceAssertion] = field(default_factory=list)
+    summary: str = ""
+
+    def __post_init__(self) -> None:
+        keys = [entity.entity_key for entity in self.entities]
+        if len(keys) != len(set(keys)):
+            raise ValueError("EvidenceInterpretation entity_key must be unique")
+        known = set(keys)
+        for assertion in self.assertions:
+            if assertion.subject_entity_key not in known:
+                raise ValueError("EvidenceAssertion subject key is not declared")
+            if assertion.object_entity_key is not None and assertion.object_entity_key not in known:
+                raise ValueError("EvidenceAssertion object key is not declared")
+
+
+def re_match_local_key(value: str, prefix: str) -> bool:
+    """Small dependency-free local-key check used by card dataclasses."""
+
+    text = str(value or "")
+    return len(text) > 1 and text.startswith(prefix) and text[1:].isdigit()
 
 
 @dataclass
@@ -341,8 +427,10 @@ __all__ = [
     "CONSTRAINT_STATUSES", "ASSESSMENT_STATUSES", "SEMANTIC_FITS", "CONFIDENCE_LEVELS",
     "CONSTRAINT_SCOPES", "RECOMMENDATION_DECISIONS", "IDENTITY_STATUSES", "GRAPH_ACTIONS",
     "GRAPH_NODE_TYPES", "FRONTIER_STATUSES", "RESEARCH_GAP_STATUSES", "RESEARCH_ACTIONS",
+    "EVIDENCE_ASSERTION_TYPES",
     "SEMANTIC_LEVELS", "MentionObservation", "EntityInterpretation", "CandidateEntity",
-    "ConstraintCheck", "SemanticAssessment", "IdentityRecommendation", "IdentityDecision",
+    "ConstraintCheck", "SemanticAssessment", "EvidenceEntity", "EvidenceAssertion",
+    "EvidenceInterpretation", "IdentityRecommendation", "IdentityDecision",
     "GraphAction", "ResearchGap", "SearchPlan", "RelationAssertion",
     "HistoricalEntityResolutionCase", "CHINESE_SEMANTIC_ASSIST_QUESTIONS", "CHINESE_SEARCH_PLAN_QUESTIONS", "to_dict",
     "validate_semantic_level", "validate_identity_status",

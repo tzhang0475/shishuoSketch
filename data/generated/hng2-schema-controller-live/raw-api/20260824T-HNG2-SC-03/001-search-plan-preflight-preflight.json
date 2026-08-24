@@ -1,0 +1,83 @@
+{
+  "canonical_write_back": false,
+  "case_id": "preflight",
+  "elapsed_seconds": 18.233841,
+  "immutable": true,
+  "input_hash": "cedebc4cf78cf89f7ff65f27864c8ca28d4ffa286f84d872b95d5e5578ec873a",
+  "kind": "search-plan-preflight",
+  "model": "deepseek-v4-flash",
+  "parse_error": null,
+  "parsed": {
+    "search_plan": {
+      "candidate_keys": [
+        "c0"
+      ],
+      "goal": "确认“庾太尉”这一称号与候选人庾亮的对应关系，验证其太尉身份。",
+      "graph_neighborhood_scope": "case_only",
+      "preferred_sources": [
+        "晉書"
+      ],
+      "search_entities": [
+        "庾亮",
+        "庾太尉",
+        "庾公"
+      ],
+      "search_patterns": [
+        "庾太尉 庾亮",
+        "庾亮 太尉 追赠",
+        "庾公 太尉"
+      ],
+      "stop_condition": "找到《晋书》中明确记载“庾太尉”指代庾亮，或记载庾亮被追赠太尉的史料，即可结束本轮检索。",
+      "target_constraint": "title_identity",
+      "temporal_scope": {
+        "end": "350",
+        "start": "289"
+      }
+    }
+  },
+  "prompt_version": "hng2-sc-search-plan-v1",
+  "provider": "deepseek",
+  "response": {
+    "choices": [
+      {
+        "finish_reason": "stop",
+        "index": 0,
+        "logprobs": null,
+        "message": {
+          "content": "{\n  \"search_plan\": {\n    \"target_constraint\": \"title_identity\",\n    \"goal\": \"确认“庾太尉”这一称号与候选人庾亮的对应关系，验证其太尉身份。\",\n    \"candidate_keys\": [\"c0\"],\n    \"preferred_sources\": [\"晉書\"],\n    \"search_entities\": [\"庾亮\", \"庾太尉\", \"庾公\"],\n    \"search_patterns\": [\"庾太尉 庾亮\", \"庾亮 太尉 追赠\", \"庾公 太尉\"],\n    \"temporal_scope\": {\n      \"start\": \"289\",\n      \"end\": \"350\"\n    },\n    \"graph_neighborhood_scope\": \"case_only\",\n    \"stop_condition\": \"找到《晋书》中明确记载“庾太尉”指代庾亮，或记载庾亮被追赠太尉的史料，即可结束本轮检索。\"\n  }\n}",
+          "reasoning_content": "我们需要根据用户提供的输入生成 JSON 搜索计划。输入包含 candidates、planning_questions、research_gap 和 source_passages。要求只输出 JSON 对象，包含 search_plan 字段，其中包含 target_constraint、goal、candidate_keys、preferred_sources、search_entities、search_patterns、temporal_scope、graph_neighborhood_scope、stop_condition。\n\n首先理解输入：\n- candidates: 一个候选，c0，规范名“庾亮”，已知形式“庾公”。\n- planning_questions: 一系列问题，但看起来它们是用于指导规划，而不是直接作为内容。我们需要根据这些问题制定计划。\n- research_gap: 阻塞问题“choose a local identity source”，候选键 [\"c0\"]，缺少约束 [\"title_identity\"]，下一步动作“search_title_identity”，状态 open，停止条件“return a valid local plan”。\n- source_passages: 一个段落，层 main，ref preflight-ref，source_form punctuated，提供文本“庾太尉”，作品“晉書”。\n\n因此，我们处于一个身份识别场景：我们有一个候选庾亮，但尚缺少“title_identity”（可能指官职头衔身份）。给出的文本是“庾太尉”，这可能是一个称号，但我们需要确认它是否对应庾亮。庾亮曾官至太尉？实际上，庾亮是东晋大臣，官至征西将军、荆州刺史等，是否任太尉？根据历史，庾亮在咸康五年（339年）被任命为司空，但未拜，后来又加太尉？需要核实。但根据《晋书》记载，庾亮死后追赠太尉？实际上，《晋书·庾亮传》记载：“亮自邾城还，病笃，未至而卒，年五十二。丧至，举朝痛悼。追赠太尉，谥曰文康。”所以“庾太尉”确实可以指庾亮，因为死后追赠太尉。因此，目标约束可能是“title_identity”，即确认“庾太尉”这个头衔身份。\n\n任务：制定搜索计划。根据研究缺口，我们需要在本地历史资料中寻找证据来验证“庾太尉”是否指庾亮，或者是否有其他可能的庾姓人物曾任太尉。由于只提供了候选，可能只需验证庾亮。\n\n搜索计划中：\n- target_constraint: 可能是“title_identity”，因为缺失的约束是这个。\n- goal: 描述目标，比如“确认‘庾太尉’是否指庾亮，并验证其头衔身份”。\n- candidate_keys: [\"c0\"]。\n- preferred_sources: 只能从给定的本地来源中选择。输入中给出了“晉書”作为作品，但“preferred_sources”字段需要从给定的本地来源中选择。这里没有明确列出本地来源列表，但source_passages中提到work为“晉書”。可能本地来源就是《晋书》等。我们需要从上下文推断。题目说“preferred_sources 只能从给定的本地来源中选择。”但给定的本地来源有哪些？在输入中没有显式列表。可能是指source_passages中出现的作品，或者需要从通用意义上考虑。由于只有“晉書”被提到，我们可以将preferred_sources设为[\"晉書\"]。但可能还有其他如《资治通鉴》等，但未列出。为了安全，只使用给定的来源：这里只有《晋书》出现在source_passages中，所以选择它。\n\n- search_entities: 需要搜索的实体，应该包括“庾亮”、“庾太尉”以及可能的其他相关人物，如庾氏家族、官职太尉等。\n- search_patterns: 检索模式，例如“庾太尉”、“庾亮 太尉”等。\n- temporal_scope: 时间范围，可能围绕晋代，或庾亮活动时期（约289-340年）。但需注意，需要基于本地史料。可以设置起始年约 317-420（东晋）。\n- graph_neighborhood_scope: 应该是“case_only”，因为只涉及当前案例。\n- stop_condition: 根据research_gap中的stop_condition，是“return a valid local plan”，即生成有效计划即可。但也可以具体化：找到明确记载“庾太尉即庾亮”或追赠太尉的记载即可停止。\n\n注意，planning_questions 提示我们需要考虑：\n- 缺少哪种证据？ -> 缺少title_identity，即官职头衔身份。\n- 这种证据最可能出现在哪类史料中？ -> 正史传记、墓志、职官表等。\n- 应围绕哪些已知人物、亲属词、官职、事件或年代检索？ -> 围绕庾亮、其字元规、兄弟庾冰、庾翼，官职如太尉、司空、征西将军，事件如苏峻之乱，年代如东晋成帝、咸和、咸康年间。\n- 哪些候选需要分别验证或排除？ -> 只有c0，验证它。\n- 找到什么样的证据即可结束？ -> 找到《晋书》等史料明确记载“庾太尉”指庾亮，或庾亮被追赠太尉的记载。\n\n现在构建JSON。\n\n注意格式要求：严格只返回json对象，字段名用双引号，字符串用双引号。\n\n候选键：[\"c0\"]\n\npreferred_sources: 从给定本地来源选择，这里只有\"晉書\"（注意繁体）。所以写[\"晉書\"]\n\nsearch_entities: 包括人物“庾亮”、“庾太尉”，还有可能“庾元规”（字），官职“太尉”，家族“庾氏”等。但search_entities应该是实体，可能指人名或机构。合理的是[\"庾亮\", \"庾太尉\", \"庾元规\", \"太尉\"]。但注意“太尉”不是实体，而是官职。可以放在pattern中。为了准确，search_entities可以是[\"庾亮\", \"庾太尉\"]。\n\nsearch_patterns: 具体检索词组合，比如\"庾亮 太尉\", \"庾太尉 追赠\", \"庾亮 官职\"等。\n\ntemporal_scope: 对象，可以包含start和end。由于是东晋早期，设置\"start\": \"265\", \"end\": \"420\"？但为了更精确，庾亮生卒约289-340。但作为搜索时间范围，可以设为\"start\": \"289\", \"end\": \"340\"。但本地史料可能涉及追赠的时间，所以扩展一点：\"start\": \"300\", \"end\": \"350\"。或者更一般：{\"dynasty\": \"东晋\"}？但字段期望可能是年份。既然没有明确格式，我们可以采用对象形式，如{\"start\": \"300\", \"end\": \"350\"}。另外可加上\"relevant_era\": \"东晋早期\"。\n\ngraph_neighborhood_scope: \"case_only\"\n\nstop_condition: 写“找到《晋书》中明确记载‘庾太尉’指代庾亮，或记载庾亮被追赠太尉的史料，即可结束本轮检索。”\n\ngoal: 用一句话概括：“确认‘庾太尉’这一称号与候选人庾亮的对应关系，验证其太尉身份。”\n\ntarget_constraint: \"title_identity\"\n\n现在整合。\n\n注意：candidate_keys应为[\"c0\"]。\n\npreferred_sources只选择“晉書”。\n\nsearch_entities可能也需要包含“庾公”？但已知形式有“庾公”，可以加入。但关键是“庾太尉”。所以[\"庾亮\", \"庾太尉\", \"庾公\"]。\n\nsearch_patterns可以如：\"庾太尉 庾亮\", \"庾亮 太尉 追赠\", \"庾公 太尉\"。\n\ntemporal_scope可以设置对象如{\"start\":\"289\",\"end\":\"340\"}，但为了涵盖追赠，可到“350”。或者使用朝代。为了简单，提供具体年份范围。\n\n此外，注意到source_passages已经有“庾太尉”，所以搜索计划应利用这一点。\n\n最终生成JSON。\n\n确保只输出JSON。",
+          "role": "assistant"
+        }
+      }
+    ],
+    "created": 1787576629,
+    "id": "31057841-8b2b-4f1d-84ba-cb7b0a6050b6",
+    "model": "deepseek-v4-flash",
+    "object": "chat.completion",
+    "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+    "usage": {
+      "completion_tokens": 1971,
+      "completion_tokens_details": {
+        "reasoning_tokens": 1759
+      },
+      "prompt_cache_hit_tokens": 0,
+      "prompt_cache_miss_tokens": 501,
+      "prompt_tokens": 501,
+      "prompt_tokens_details": {
+        "cached_tokens": 0
+      },
+      "total_tokens": 2472
+    }
+  },
+  "response_channel": "content",
+  "sequence": 1,
+  "start_time": "2026-08-24T13:03:49Z",
+  "status": "response",
+  "usage": {
+    "completion_tokens": 1971,
+    "prompt_cache_hit_tokens": 0,
+    "prompt_cache_miss_tokens": 501,
+    "prompt_tokens": 501,
+    "total_tokens": 2472
+  }
+}

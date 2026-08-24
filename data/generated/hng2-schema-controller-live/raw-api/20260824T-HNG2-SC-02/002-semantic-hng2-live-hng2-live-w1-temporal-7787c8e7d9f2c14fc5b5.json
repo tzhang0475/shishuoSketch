@@ -1,0 +1,123 @@
+{
+  "canonical_write_back": false,
+  "case_id": "hng2-live-hng2-live-w1-temporal-7787c8e7d9f2c14fc5b5",
+  "elapsed_seconds": 28.966357,
+  "immutable": true,
+  "input_hash": "00e694ae3fdb1297c3eeffd7e00e6835ee10a6a7c520580c08ba90437494675e",
+  "kind": "semantic",
+  "model": "deepseek-v4-flash",
+  "parse_error": null,
+  "parsed": {
+    "evidence_interpretation": {
+      "assertions": [
+        {
+          "assertion_id": "a0",
+          "assertion_type": "person_mention",
+          "confidence": "high",
+          "evidence_ref": "hng02-jinshu-wikisource-punctuated-003",
+          "evidence_span": "何曾",
+          "subject_entity_key": "e0"
+        },
+        {
+          "assertion_id": "a1",
+          "assertion_type": "participates_in_event",
+          "confidence": "high",
+          "evidence_ref": "hng02-jinshu-wikisource-punctuated-003",
+          "evidence_span": "何曾等固爭曰",
+          "subject_entity_key": "e0"
+        },
+        {
+          "assertion_id": "a2",
+          "assertion_type": "office_held_by",
+          "confidence": "high",
+          "evidence_ref": "hng02-jinshu-wikisource-punctuated-024",
+          "evidence_span": "何曾為司徒",
+          "subject_entity_key": "e0",
+          "value": "司徒"
+        },
+        {
+          "assertion_id": "a3",
+          "assertion_type": "parent_child",
+          "confidence": "high",
+          "evidence_ref": "hng02-jinshu-wikisource-punctuated-028",
+          "evidence_span": "何曾謂子遵曰",
+          "object_entity_key": "e1",
+          "subject_entity_key": "e0"
+        }
+      ],
+      "entities": [
+        {
+          "entity_key": "e0",
+          "entity_kind": "person",
+          "evidence_ref": "hng02-jinshu-wikisource-punctuated-003",
+          "evidence_span": "何曾",
+          "reference_form": "何曾",
+          "surface": "何曾"
+        },
+        {
+          "entity_key": "e1",
+          "entity_kind": "person",
+          "evidence_ref": "hng02-jinshu-wikisource-punctuated-028",
+          "evidence_span": "遵",
+          "reference_form": "遵",
+          "surface": "遵"
+        }
+      ]
+    },
+    "identity_recommendation": "new_entity",
+    "research_gap": {
+      "blocking_question": null,
+      "candidate_keys": [],
+      "missing_constraints": [],
+      "next_best_action": null,
+      "note": "Surface '何曾' is directly attested as a historical person in the provided passages; no candidate list was supplied, so a new entity is recommended.",
+      "status": "resolved"
+    },
+    "semantic_assessment": "proper_name"
+  },
+  "prompt_version": "hng2-sc-card-controller-v1",
+  "provider": "deepseek",
+  "response": {
+    "choices": [
+      {
+        "finish_reason": "stop",
+        "index": 0,
+        "logprobs": null,
+        "message": {
+          "content": "{\n  \"evidence_interpretation\": {\n    \"entities\": [\n      {\n        \"entity_key\": \"e0\",\n        \"surface\": \"何曾\",\n        \"entity_kind\": \"person\",\n        \"reference_form\": \"何曾\",\n        \"evidence_ref\": \"hng02-jinshu-wikisource-punctuated-003\",\n        \"evidence_span\": \"何曾\"\n      },\n      {\n        \"entity_key\": \"e1\",\n        \"surface\": \"遵\",\n        \"entity_kind\": \"person\",\n        \"reference_form\": \"遵\",\n        \"evidence_ref\": \"hng02-jinshu-wikisource-punctuated-028\",\n        \"evidence_span\": \"遵\"\n      }\n    ],\n    \"assertions\": [\n      {\n        \"assertion_id\": \"a0\",\n        \"assertion_type\": \"person_mention\",\n        \"subject_entity_key\": \"e0\",\n        \"evidence_ref\": \"hng02-jinshu-wikisource-punctuated-003\",\n        \"evidence_span\": \"何曾\",\n        \"confidence\": \"high\"\n      },\n      {\n        \"assertion_id\": \"a1\",\n        \"assertion_type\": \"participates_in_event\",\n        \"subject_entity_key\": \"e0\",\n        \"evidence_ref\": \"hng02-jinshu-wikisource-punctuated-003\",\n        \"evidence_span\": \"何曾等固爭曰\",\n        \"confidence\": \"high\"\n      },\n      {\n        \"assertion_id\": \"a2\",\n        \"assertion_type\": \"office_held_by\",\n        \"subject_entity_key\": \"e0\",\n        \"value\": \"司徒\",\n        \"evidence_ref\": \"hng02-jinshu-wikisource-punctuated-024\",\n        \"evidence_span\": \"何曾為司徒\",\n        \"confidence\": \"high\"\n      },\n      {\n        \"assertion_id\": \"a3\",\n        \"assertion_type\": \"parent_child\",\n        \"subject_entity_key\": \"e0\",\n        \"object_entity_key\": \"e1\",\n        \"evidence_ref\": \"hng02-jinshu-wikisource-punctuated-028\",\n        \"evidence_span\": \"何曾謂子遵曰\",\n        \"confidence\": \"high\"\n      }\n    ]\n  },\n  \"semantic_assessment\": \"proper_name\",\n  \"identity_recommendation\": \"new_entity\",\n  \"research_gap\": {\n    \"status\": \"resolved\",\n    \"blocking_question\": null,\n    \"candidate_keys\": [],\n    \"missing_constraints\": [],\n    \"next_best_action\": null,\n    \"note\": \"Surface '何曾' is directly attested as a historical person in the provided passages; no candidate list was supplied, so a new entity is recommended.\"\n  }\n}",
+          "reasoning_content": "我们只需要输出 JSON。先理解任务：根据输入，只有一个 candidate（空列表），case exact_span \"將議立世子，屬意於攸。何曾等固爭曰\"，source_work 晉書，surface \"何曾\"。需要输出 JSON with evidence_interpretation, semantic_assessment, identity_recommendation, research_gap.\n\nWe need to parse source passages. The exact span is in passage ref hng02-jinshu-wikisource-punctuated-003: \"將議立世子，屬意於攸。何曾等固爭曰：「中撫軍聰明神武，有超世之才。髮委地，手過膝，此非人臣之相也。」\" The surface is \"何曾\" referring to He Zeng. We need to identify entity e0. There are no candidates. hard_constraints empty.\n\nWe need to fill evidence_interpretation.entities: entity_key e0, surface 何曾, entity_kind likely person (historical figure). reference_form \"何曾\". evidence_ref \"hng02-jinshu-wikisource-punctuated-003\". evidence_span must be continuous original text from source_passages. The span \"何曾\" appears in that passage. Actually the exact_span includes \"何曾等固爭曰\"; but the surface is just \"何曾\". evidence_span could be \"何曾\" or \"何曾等固爭曰\"? The instructions: evidence_span must be continuous original text. We can use \"何曾等固爭曰\" if it supports the mention. But for entity surface, use \"何曾\".\n\nAssertions: Need at least one? Possibly assertion_type person_mention, subject e0. Also maybe identity_equivalence? We don't have candidates. We can assert person_mention. Also maybe title_of? From passage 024: \"何曾為司徒\" and passage 028: \"何曾謂子遵曰\". We can include assertions supporting identity? But only based on current text? The instruction: \"只根据输入正文、注释、候选人物和 Python 提供的 hard_constraints 理解当前文字。\" So we can use all source_passages provided. We should extract evidence from all passages that mention He Zeng. The exact_span is in 003, but other passages mention 何曾. We can include them.\n\nLet's examine passages:\n\n- 003: \"何曾等固爭曰\" – speaks, participant.\n- 024: \"何曾為司徒\" – office.\n- 028: \"何曾謂子遵曰\" – speaks, has son 遵.\n- 030: no 何曾? Actually 030 has 荀氏, 顗, etc. No 何曾.\n\nSo entity e0 = 何曾. Assertions:\n- person_mention: evidence_span \"何曾\" in 003.\n- participates_in_event: \"何曾等固爭\" – event of arguing. But better assertion_type participates_in_event with object? The event is \"固爭\" maybe no event entity. assertion_type allows participates_in_event, subject e0, evidence_span \"何曾等固爭曰\". Confidence high.\n- office_held_by: from 024 \"何曾為司徒\" – subject e0, value \"司徒\" or object? Actually office_held_by direction? The allowed assertion_type includes office_held_by. We can set subject_entity_key e0, value \"司徒\", evidence_span \"何曾為司徒\". confidence high.\n- kinship_relation: from 028 \"何曾謂子遵曰\" – indicates He Zeng has son named 遵. But 遵 is not e0? We could create entity e1 for 遵? The instruction: entities for 本段出现的实体. 遵 appears in 028 as \"子遵\" (his son). We can create e1 for 遵? But the user didn't ask for that specifically. However, we can note kinship_relation: subject e0, object entity? We could create e1 for 遵. But does the input require us to identify all entities? It says \"先识别本段出现的实体\". The overall input includes multiple passages. Entities in source_passages include 何曾, 遵. Also others. But maybe we only need to focus on the target surface? The case is about \"何曾\". The instruction says \"只根据输入正文、注释、候选人物和 Python 提供的 hard_constraints 理解当前文字。先识别本段出现的实体，再把原文直接支持的身份、称谓、亲属、事件或时间断言填入 evidence_interpretation。\" So we should identify entities in the passages relevant to the target? Given the candidate list empty, but target surface \"何曾\". We can identify e0 for 何曾, and optionally e1 for 遵 because it's mentioned in relationship. But to keep focused, maybe only e0. But assertion kinship_relation would need object. We could use value \"遵\" as object_entity_key? But no entity for 遵. Alternatively, assertion_type kinship_relation with object_entity_key e1 if we create e1. Let's see if it's needed. The exact_span doesn't include 遵. But passage 028 provides evidence for He Zeng's son. We can include it if it helps identity. Since there are no candidates, identity is straightforward: He Zeng is a known historical figure. But we need to make semantic assessment.\n\nLet's read the semantic questions. They ask about the nature of expression, whether it's a person, function, etc. We answer through the JSON.\n\nThe identity_recommendation fixed enums? Need to know allowed values. Not provided explicitly. We need guess from common schema. Probably \"match_candidate\", \"new_entity\", \"ambiguous\", \"insufficient_evidence\", \"not_person\", etc. Since no candidates, and we can identify 何曾 as a historical person, perhaps \"new_entity\" if no candidate key provided. But we are not to create person_id. The instruction: \"chosen_candidate_key 只能使用输入中给定的候选键；新的可识别人物只能使用 new_entity_key=n0，不得写人物 ID。\" So identity_recommendation likely includes something like \"new_entity\" with new_entity_key n0? Actually identity_recommendation is for the target surface. Since no candidates, we recommend \"new_entity\" (or \"new_person\") and set new_entity_key? The format doesn't specify fields. We need to infer from instructions. The top-level JSON should have identity_recommendation, probably an object with status. Let's look at the research_gap object: contains statuses like \"open\", etc. The identity_recommendation likely has similar structure. Since the task is to assist, we should output something like {\"recommendation\": \"new_entity\", \"new_entity_key\": \"n0\", \"confidence\": \"high\"}? But the instruction says \"identity_recommendation 使用固定枚举\". That suggests it's just an enum value, not object. Similarly semantic_assessment uses fixed enums. The user asks \"semantic_assessment 使用固定枚举；identity_recommendation 使用固定枚举；research_gap 只报告模型观察，最终状态由 Python 重算。\" So semantic_assessment and identity_recommendation should be strings from fixed enum. We need to know the enum values. Not provided. We can infer from the semantic questions: options like \"proper_name\", \"abbreviated_name\", \"title\", \"kinship_term\", \"pronoun\", \"generic\", \"not_person\", etc. For identity_recommendation: options like \"single_candidate\", \"new_entity\", \"ambiguous\", \"insufficient_evidence\", \"not_person\". Given no candidates, and we can identify He Zeng as a distinct person, it should be \"new_entity\" or \"unique_identification\"? Let's think.\n\nThe research_gap has blocking_question \"What source-local evidence identifies this surface?\", candidate_keys empty, missing_constraints [\"identity_evidence\"], status \"open\". So Python is waiting for evidence to identify. We are to provide evidence. Since He Zeng is clearly a historical person, we can recommend \"new_entity\" (since no candidate). Or maybe \"match_candidate\" not possible because none. So likely \"new_entity\".\n\nSemantic assessment: The surface \"何曾\" is a personal name (full name). It's a proper name, not a kinship term or title. So semantic_assessment could be \"proper_name\" or \"full_name\". The reference_form \"何曾\" is full name. The entity_kind is \"person\". So semantic_assessment = \"proper_name\".\n\nLet's craft JSON.\n\nNeed to ensure evidence_span is continuous original text. For entity e0, evidence_span \"何曾\" from passage 003. But the surface appears multiple times in different passages. We can include multiple evidence_ref? The entities list has fields evidence_ref and evidence_span (singular). So we should pick one primary evidence. But we can have multiple assertions with different evidence.\n\nAssertions list:\n- a0: person_mention, subject e0, evidence_ref 003, evidence_span \"何曾\", confidence \"high\".\n- a1: participates_in_event, subject e0, evidence_ref 003, evidence_span \"何曾等固爭曰\", confidence \"high\". Maybe add value? Not needed.\n- a2: office_held_by, subject e0, value \"司徒\", evidence_ref 024, evidence_span \"何曾為司徒\", confidence \"high\".\n- a3: kinship_relation, subject e0, object_entity_key e1, evidence_ref 028, evidence_span \"何曾謂子遵曰\", confidence \"high\". But we need to define e1. Let's add e1 entity: surface \"遵\", entity_kind \"person\", reference_form \"遵\", evidence_ref 028, evidence_span \"遵\". However, \"遵\" in the passage is \"何曾謂子遵曰\" - the surface might be \"子遵\" but the name is 遵. We can set surface \"遵\". Also note \"子遵\" means \"his son 遵\". So kinship_relation parent_child? Better assertion_type parent_child? Because it's father-son. The allowed types include parent_child. So we can assert parent_child: subject e0, object e1, evidence_span \"子遵\" maybe. But \"子遵\" in context means \"his son, Zun\". Use continuous span \"子遵\". We'll set assertion_type parent_child.\n\nWait, we need to be careful: The source passage 028 is: \"何曾謂子遵曰：「國家無貽厥之謀，及身而已，後嗣其殆乎！\" So 何曾 said to his son 遵. This clearly indicates parent-child. So e1 = 遵 (son). We'll include.\n\nAlso assertion temporal_statement? Maybe from 024: \"世祖武皇帝即位之初\" but not directly about He Zeng's time. We don't need.\n\nNow semantic_assessment: \"proper_name\" or \"personal_name\". We'll use \"proper_name\".\n\nidentity_recommendation: \"new_entity\" or \"identifiable_new_entity\". The enum fixed, but we don't know. We can use \"new_entity\" as a reasonable value. Alternatively \"new_person\". The instruction says \"新的可识别人物只能使用 new_entity_key=n0\", so recommendation likely includes \"new_entity\". Let's use \"new_entity\".\n\nresearch_gap: We need to provide a report. The instruction: \"research_gap 只报告模型观察，最终状态由 Python 重算。\" So we can set status \"resolved\" if we have enough evidence? But original research_gap status \"open\". Since we found identity, maybe we should set status \"resolved\" and blocking_question empty? But it says final state recalculated by Python. We can output a simple observation. Let's set:\n\"research_gap\": {\n  \"status\": \"resolved\",\n  \"blocking_question\": null,\n  \"candidate_keys\": [],\n  \"missing_constraints\": [],\n  \"next_best_action\": null,\n  \"note\": \"No candidate provided; surface '何曾' matches the historical person He Zeng in Jin Shu with supporting evidence.\"\n}\n\nBut maybe it should remain \"open\" because Python will decide? The instruction says \"research_gap 只报告模型观察，最终状态由 Python 重算。\" So we can report that we found evidence and no gap. We'll set status \"resolved\" but it's just observation.\n\nNow ensure JSON structure exactly.\n\nLet's produce JSON.\n\nWe need to be careful with evidence_span quoting, use Chinese quotes? The original text uses \"「」\" in the passage. But we extract continuous text.\n\nFor entity e0, evidence_span \"何曾\" in passage 003. We should use the text as it appears. The passage has \"何曾等固爭曰\" so \"何曾\" is at start.\n\nFor assertion a1, evidence_span \"何曾等固爭曰\" includes the full clause.\n\nFor a2, evidence_span \"何曾為司徒\" from 024.\n\nFor a3, evidence_span \"何曾謂子遵曰\" from 028.\n\nFor e1, evidence_span \"子遵\" or \"遵\". \"子遵\" means \"son Zun\", but the surface is \"遵\". The entity surface should be \"遵\". Use evidence_span \"遵\" but that appears inside \"子遵\". The span \"遵\" is continuous, but \"子遵\" also continuous. Better to use \"子遵\" as evidence_span because it contains the relationship. But for entity mention, the surface is \"遵\"; the evidence_span can be \"遵\". We'll set both: entity e1 has surface \"遵\", evidence_span \"遵\". The assertion parent_child has evidence_span \"子遵\".\n\nAlso, we might include an alias? Not needed.\n\nNow confidence: use \"high\", \"medium\", etc. We'll use \"high\".\n\nLet's write JSON.",
+          "role": "assistant"
+        }
+      }
+    ],
+    "created": 1787575608,
+    "id": "0784c7ea-06bb-4d1a-bc07-0ea9487de815",
+    "model": "deepseek-v4-flash",
+    "object": "chat.completion",
+    "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+    "usage": {
+      "completion_tokens": 3612,
+      "completion_tokens_details": {
+        "reasoning_tokens": 3002
+      },
+      "prompt_cache_hit_tokens": 0,
+      "prompt_cache_miss_tokens": 2185,
+      "prompt_tokens": 2185,
+      "prompt_tokens_details": {
+        "cached_tokens": 0
+      },
+      "total_tokens": 5797
+    }
+  },
+  "response_channel": "content",
+  "sequence": 2,
+  "start_time": "2026-08-24T12:46:48Z",
+  "status": "response",
+  "usage": {
+    "completion_tokens": 3612,
+    "prompt_cache_hit_tokens": 0,
+    "prompt_cache_miss_tokens": 2185,
+    "prompt_tokens": 2185,
+    "total_tokens": 5797
+  }
+}

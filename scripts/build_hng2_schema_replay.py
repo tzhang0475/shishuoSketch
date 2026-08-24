@@ -266,6 +266,22 @@ def _is_structural_kinship(surface: str, parsed: Mapping[str, Any]) -> bool:
     return bool(re.search(rf"^[\u3400-\u9fff]{{1,3}}{marker}[\u3400-\u9fff]{{1,4}}(?:女|子)$", folded))
 
 
+def _kinship_context_covers_target(surface: str, parsed: Mapping[str, Any]) -> bool:
+    """Apply contextual kinship semantics only to the target mention.
+
+    A nearby family expression is not enough to reinterpret an independently
+    observed full name.  This prevents ``虞喜`` from inheriting the
+    neighbouring ``喜弟預女`` structure while still allowing a target such as
+    ``廙`` in ``兄子廙`` to be represented as a kinship reference.
+    """
+
+    marker = _text(parsed.get("kinship_marker"))
+    candidate = _text(parsed.get("candidate_surface"))
+    target = resolver.matching_normalize(surface)
+    expression = resolver.matching_normalize(f"{marker}{candidate}")
+    return bool(target and expression and target in expression)
+
+
 def _interpretation(
     *, mention_id: str, surface: str, quote: str, context: str, source_ref: str,
     source_work: str, raw: Mapping[str, Any], catalog: Mapping[str, Mapping[str, Any]],
@@ -293,9 +309,9 @@ def _interpretation(
     contextual_kin = resolver.parse_structural_kinship_context(
         context, seed_surname=_text(_seed(catalog, raw).get("surname"))
     )
-    if contextual_kin and not contextual_kin.get("malformed_person_surface"):
+    if contextual_kin and _kinship_context_covers_target(surface, contextual_kin) and not contextual_kin.get("malformed_person_surface"):
         return EntityInterpretation(mention_id, "kinship_reference", "kinship_plus_name", "genealogical", "kinship_node", contextual_kin, "kinship-bearing abbreviated reference")
-    if contextual_kin and contextual_kin.get("malformed_person_surface"):
+    if contextual_kin and _kinship_context_covers_target(surface, contextual_kin) and contextual_kin.get("malformed_person_surface"):
         return EntityInterpretation(mention_id, "structural_kinship_expression", "kinship_plus_name", "genealogical", "kinship_node", contextual_kin, "multi-node kinship chain")
     if method in {"title", "reviewed_contextual_alias"} and _title_like(surface):
         kind = "person_office_title" if any(resolver.matching_normalize(marker) in folded for marker in OFFICE_MARKERS) else "person_title"

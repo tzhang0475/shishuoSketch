@@ -22,6 +22,7 @@ def call_deepseek(
     tools: Sequence[Mapping[str, Any]] | None = None,
     tool_choice: str | Mapping[str, Any] | None = None,
     thinking: Mapping[str, Any] | None = None,
+    max_tokens: int | None = None,
     timeout: int = 60,
 ) -> dict[str, Any]:
     """Call the existing OpenAI-compatible DeepSeek endpoint.
@@ -49,6 +50,8 @@ def call_deepseek(
         payload["tool_choice"] = tool_choice
     if thinking is not None:
         payload["thinking"] = dict(thinking)
+    if max_tokens is not None:
+        payload["max_tokens"] = int(max_tokens)
     body = json.dumps(payload, ensure_ascii=False).encode("utf-8")
     request = urllib.request.Request(
         API_URL,
@@ -64,9 +67,20 @@ def call_deepseek(
         with urllib.request.urlopen(request, timeout=timeout) as response:
             return json.load(response)
     except urllib.error.HTTPError as error:
-        raise RuntimeError(f"DeepSeek API request failed with HTTP {error.code}") from error
+        body = ""
+        try:
+            body = error.read().decode("utf-8", "replace")[:4000]
+        except Exception:
+            body = ""
+        failure = RuntimeError(f"DeepSeek API request failed with HTTP {error.code}")
+        failure.http_status = error.code  # type: ignore[attr-defined]
+        failure.provider_error_body = body  # type: ignore[attr-defined]
+        raise failure from error
     except urllib.error.URLError as error:
-        raise RuntimeError(f"DeepSeek API request failed: {error.reason}") from error
+        failure = RuntimeError(f"DeepSeek API request failed: {error.reason}")
+        failure.http_status = None  # type: ignore[attr-defined]
+        failure.provider_error_body = ""  # type: ignore[attr-defined]
+        raise failure from error
 
 
 def main() -> int:

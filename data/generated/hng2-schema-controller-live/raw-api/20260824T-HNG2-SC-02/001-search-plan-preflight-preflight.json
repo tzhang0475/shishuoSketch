@@ -1,0 +1,72 @@
+{
+  "canonical_write_back": false,
+  "case_id": "preflight",
+  "elapsed_seconds": 9.494149,
+  "immutable": true,
+  "input_hash": "5f1749b180672a4d89f472a6883e6c1cfe76a56e7480b136c0e47180fd55ef55",
+  "kind": "search-plan-preflight",
+  "model": "deepseek-v4-flash",
+  "parse_error": null,
+  "parsed": {
+    "search_plan": {
+      "candidate_keys": [],
+      "goal": "查找本地权威出处，以确认或建立该历史人物的头衔/称号身份。",
+      "graph_neighborhood_scope": "case_only",
+      "preferred_sources": [],
+      "search_entities": [],
+      "search_patterns": [
+        "[人物名] 衔",
+        "[人物名] 称号",
+        "title for [人物名]"
+      ],
+      "stop_condition": "当找到至少一个本地来源，其中包含与该候选者匹配的 title_identity 约束时停止。",
+      "target_constraint": "title_identity",
+      "temporal_scope": {}
+    }
+  },
+  "prompt_version": "hng2-sc-search-plan-v1",
+  "provider": "deepseek",
+  "response": {
+    "choices": [
+      {
+        "finish_reason": "stop",
+        "index": 0,
+        "logprobs": null,
+        "message": {
+          "content": "{\"search_plan\":{\"target_constraint\":\"title_identity\",\"goal\":\"查找本地权威出处，以确认或建立该历史人物的头衔/称号身份。\",\"candidate_keys\":[],\"preferred_sources\":[],\"search_entities\":[],\"search_patterns\":[\"[人物名] 衔\",\"[人物名] 称号\",\"title for [人物名]\"],\"temporal_scope\":{},\"graph_neighborhood_scope\":\"case_only\",\"stop_condition\":\"当找到至少一个本地来源，其中包含与该候选者匹配的 title_identity 约束时停止。\"}}",
+          "reasoning_content": "我们只需要输出 JSON。注意要求：只根据给定的 ResearchGap、候选和短正文材料制定一次本地检索计划。给出的材料：candidates 为空列表；planning_questions；research_gap 的 blocking_question 是 \"choose a local identity source\"，missing_constraints 只有 [\"title_identity\"]，next_best_action 是 search_title_identity，status open，stop_condition \"return a valid local plan\"；source_passages 为空。没有提供任何本地来源列表。但是由于 task 要求 preferred_sources 只能从给定的本地来源中选择，而给定材料中没有列出，怎么办？可能我们需要假设默认的历史实体检索本地来源？但是要求是“只能从给定的本地来源中选择”，但这里没有给。或许应该输出空的或者根据上下文推断？再读一遍用户消息：只给出一个 JSON 格式的输入，里面有 candidates: []，planning_questions 等。没有单独的本地来源列表。所以我们只能输出一个计划，preferred_sources 可能是空数组。但题目说“preferred_sources 只能从给定的本地来源中选择”，如果不提供，就为空。同时注意 target_constraint 必须是 title_identity，因为 missing_constraints 是 [\"title_identity\"]。candidate_keys 为空。goal 应该围绕选择本地身份来源。由于没有具体候选，我们需要制定一个通用计划，搜索与 title 身份相关的实体。我们需要使用在给定材料中提到的实体吗？没有。所以搜索实体可能为空。但为了实用，我们可以构建一个合理的计划。但不应该虚构。可以设置 search_entities 为空，search_patterns 为关于头衔/称号的通用模式。temporal_scope 可以是“未知”或空对象。graph_neighborhood_scope 必须是 \"case_only\" 因为这是唯一允许的值。stop_condition 可以是“当找到具有匹配 title_identity 的本地来源时停止”。\n\n注意要求：strictly 只返回 json。所以输出如下结构。\n\n注意：candidate_keys 要求是数组，虽然为空。search_entities 和 search_patterns 也要求数组。temporal_scope 要求对象。\n\n我们可以构造：\n\n{\n  \"search_plan\": {\n    \"target_constraint\": \"title_identity\",\n    \"goal\": \"查找本地权威出处，以确认或建立该历史人物的头衔/称号身份。\",\n    \"candidate_keys\": [],\n    \"preferred_sources\": [],\n    \"search_entities\": [],\n    \"search_patterns\": [\"[人物名] 衔\", \"[人物名] 称号\", \"title for [人物名]\"],\n    \"temporal_scope\": {},\n    \"graph_neighborhood_scope\": \"case_only\",\n    \"stop_condition\": \"当找到至少一个本地来源，其中包含与该候选者匹配的 title_identity 约束时停止。\"\n  }\n}\n\n这符合要求吗？需要确保 target_constraint 取自允许的值：\"title_identity\" 是允许的。preferred_sources 为空，因为没有给定来源。但合理吗？也许我们可以说没有给定来源。或者我们可以从 planning_questions 里推断？没有来源列表。所以空数组。\n\n注意：输出必须是纯 JSON 对象，没有其他文本。\n\n我们还可以考虑更具体的搜索模式，但因为没有实体，所以只能泛泛。或许可以使用 “title identity” 相关术语。但 search_patterns 应该是用于检索的模式。我们可以用中文，因为材料是中文。虽然指令是英文，但我们可以用中文。\n\n另外，temporal_scope 应为空对象 {} 或指定范围？没信息。\n\n所以最终输出如上。但检查一下：research_gap 中 blocking_question 是 \"choose a local identity source\"，所以我们 goal 可以是“从本地来源中选择一个身份来源”。\n\n此外，stop_condition 已经由给定 \"return a valid local plan\" 指定？严格说 research_gap.stop_condition 是 \"return a valid local plan\"，但我们的计划中的 stop_condition 应该是“找到什么证据即可结束本轮检索”。所以我们应写一个基于证据的 stop_condition。例如“当找到一个本地来源，其中包含匹配 title_identity 约束的条目时”。\n\n所以就这样。确保用双引号。\n\n因此输出 JSON。",
+          "role": "assistant"
+        }
+      }
+    ],
+    "created": 1787575587,
+    "id": "2b55887a-7b4f-41c9-ac26-ea792e6552db",
+    "model": "deepseek-v4-flash",
+    "object": "chat.completion",
+    "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+    "usage": {
+      "completion_tokens": 1007,
+      "completion_tokens_details": {
+        "reasoning_tokens": 883
+      },
+      "prompt_cache_hit_tokens": 0,
+      "prompt_cache_miss_tokens": 424,
+      "prompt_tokens": 424,
+      "prompt_tokens_details": {
+        "cached_tokens": 0
+      },
+      "total_tokens": 1431
+    }
+  },
+  "response_channel": "content",
+  "sequence": 1,
+  "start_time": "2026-08-24T12:46:27Z",
+  "status": "response",
+  "usage": {
+    "completion_tokens": 1007,
+    "prompt_cache_hit_tokens": 0,
+    "prompt_cache_miss_tokens": 424,
+    "prompt_tokens": 424,
+    "total_tokens": 1431
+  }
+}

@@ -1,0 +1,126 @@
+{
+  "canonical_write_back": false,
+  "case_id": "hng1r2-hng1-raw-relation-2ff2066d8872cbae15f7",
+  "elapsed_seconds": 4.513398,
+  "immutable": true,
+  "input_hash": "b3067ef5c227d435ab21ddd7717b791217518cde8e69c7f7e37dd00556f7ba5d",
+  "kind": "semantic",
+  "model": "deepseek-v4-flash",
+  "parse_error": null,
+  "parsed": {
+    "evidence_interpretation": {
+      "assertions": [
+        {
+          "assertion_id": "a0",
+          "assertion_type": "office_held_by",
+          "confidence": "high",
+          "direction": null,
+          "evidence_ref": "hng01-shishuo-07-shijian-016-main",
+          "evidence_span": "庾太尉",
+          "object_entity_key": null,
+          "subject_entity_key": "e0",
+          "value": "太尉"
+        },
+        {
+          "assertion_id": "a1",
+          "assertion_type": "participates_in_event",
+          "confidence": "high",
+          "direction": null,
+          "evidence_ref": "hng01-shishuo-07-shijian-016-main",
+          "evidence_span": "問庾曰聞孟從事佳今在此不庾云試自求之",
+          "object_entity_key": null,
+          "subject_entity_key": "e0",
+          "value": "與褚太傅對話，評價孟嘉"
+        }
+      ],
+      "entities": [
+        {
+          "entity_key": "e0",
+          "entity_kind": "person_office_title",
+          "evidence_ref": "hng01-shishuo-07-shijian-016-main",
+          "evidence_span": "庾太尉",
+          "reference_form": "office_title_only",
+          "surface": "庾太尉"
+        }
+      ]
+    },
+    "identity_recommendation": {
+      "chosen_candidate_key": null,
+      "confidence": "unknown",
+      "decision": "unresolved",
+      "evidence_spans": [
+        "庾太尉"
+      ],
+      "new_entity_candidate": null,
+      "new_entity_key": null,
+      "reason_codes": [
+        "title_not_unique",
+        "no_full_name_local_context"
+      ],
+      "summary": "The title '庾太尉' could refer to 庾亮, but the evidence is insufficient to confirm uniquely. The candidate 庾亮 is plausible but not independently supported by the passage.",
+      "unresolved_reason": "The title '太尉' is not unique to a single person, and the passage lacks a full name or other distinguishing context to uniquely identify the referent."
+    },
+    "research_gap": {
+      "blocking_question": "Which historical person does this title denote in this passage?",
+      "candidate_keys": [
+        "c0"
+      ],
+      "missing_constraints": [
+        "title_identity"
+      ],
+      "next_best_action": "search_title_identity",
+      "status": "open",
+      "stop_condition": "stop when one context-compatible person is independently supported"
+    },
+    "semantic_assessment": {
+      "assessment_status": "assessed",
+      "evidence_spans": [
+        "庾太尉"
+      ],
+      "observed_role": "office_holder",
+      "semantic_fit": "unknown",
+      "summary": "The expression '庾太尉' is a title-only reference to a person holding the office of Grand Commandant. The passage describes him as a participant in a conversation with 褚太傅 about 孟嘉. The title is not unique, and the passage does not provide a full name or other unique identifier."
+    }
+  },
+  "prompt_version": "hng2-sc-card-controller-v1",
+  "provider": "deepseek",
+  "response": {
+    "choices": [
+      {
+        "finish_reason": "stop",
+        "index": 0,
+        "logprobs": null,
+        "message": {
+          "content": "{\n  \"evidence_interpretation\": {\n    \"entities\": [\n      {\n        \"entity_key\": \"e0\",\n        \"surface\": \"庾太尉\",\n        \"entity_kind\": \"person_office_title\",\n        \"reference_form\": \"office_title_only\",\n        \"evidence_ref\": \"hng01-shishuo-07-shijian-016-main\",\n        \"evidence_span\": \"庾太尉\"\n      }\n    ],\n    \"assertions\": [\n      {\n        \"assertion_id\": \"a0\",\n        \"assertion_type\": \"office_held_by\",\n        \"subject_entity_key\": \"e0\",\n        \"object_entity_key\": null,\n        \"value\": \"太尉\",\n        \"direction\": null,\n        \"evidence_ref\": \"hng01-shishuo-07-shijian-016-main\",\n        \"evidence_span\": \"庾太尉\",\n        \"confidence\": \"high\"\n      },\n      {\n        \"assertion_id\": \"a1\",\n        \"assertion_type\": \"participates_in_event\",\n        \"subject_entity_key\": \"e0\",\n        \"object_entity_key\": null,\n        \"value\": \"與褚太傅對話，評價孟嘉\",\n        \"direction\": null,\n        \"evidence_ref\": \"hng01-shishuo-07-shijian-016-main\",\n        \"evidence_span\": \"問庾曰聞孟從事佳今在此不庾云試自求之\",\n        \"confidence\": \"high\"\n      }\n    ]\n  },\n  \"semantic_assessment\": {\n    \"assessment_status\": \"assessed\",\n    \"semantic_fit\": \"unknown\",\n    \"observed_role\": \"office_holder\",\n    \"evidence_spans\": [\n      \"庾太尉\"\n    ],\n    \"summary\": \"The expression '庾太尉' is a title-only reference to a person holding the office of Grand Commandant. The passage describes him as a participant in a conversation with 褚太傅 about 孟嘉. The title is not unique, and the passage does not provide a full name or other unique identifier.\"\n  },\n  \"identity_recommendation\": {\n    \"decision\": \"unresolved\",\n    \"chosen_candidate_key\": null,\n    \"confidence\": \"unknown\",\n    \"reason_codes\": [\n      \"title_not_unique\",\n      \"no_full_name_local_context\"\n    ],\n    \"evidence_spans\": [\n      \"庾太尉\"\n    ],\n    \"new_entity_candidate\": null,\n    \"new_entity_key\": null,\n    \"unresolved_reason\": \"The title '太尉' is not unique to a single person, and the passage lacks a full name or other distinguishing context to uniquely identify the referent.\",\n    \"summary\": \"The title '庾太尉' could refer to 庾亮, but the evidence is insufficient to confirm uniquely. The candidate 庾亮 is plausible but not independently supported by the passage.\"\n  },\n  \"research_gap\": {\n    \"status\": \"open\",\n    \"missing_constraints\": [\n      \"title_identity\"\n    ],\n    \"blocking_question\": \"Which historical person does this title denote in this passage?\",\n    \"next_best_action\": \"search_title_identity\",\n    \"candidate_keys\": [\n      \"c0\"\n    ],\n    \"stop_condition\": \"stop when one context-compatible person is independently supported\"\n  }\n}",
+          "role": "assistant"
+        }
+      }
+    ],
+    "created": 1787577532,
+    "id": "ca87051f-0366-4e90-9f4b-a5b568dc593e",
+    "model": "deepseek-v4-flash",
+    "object": "chat.completion",
+    "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+    "usage": {
+      "completion_tokens": 728,
+      "prompt_cache_hit_tokens": 0,
+      "prompt_cache_miss_tokens": 2125,
+      "prompt_tokens": 2125,
+      "prompt_tokens_details": {
+        "cached_tokens": 0
+      },
+      "total_tokens": 2853
+    }
+  },
+  "response_channel": "content",
+  "sequence": 4,
+  "start_time": "2026-08-24T13:18:52Z",
+  "status": "response",
+  "usage": {
+    "completion_tokens": 728,
+    "prompt_cache_hit_tokens": 0,
+    "prompt_cache_miss_tokens": 2125,
+    "prompt_tokens": 2125,
+    "total_tokens": 2853
+  }
+}

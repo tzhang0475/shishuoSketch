@@ -1,0 +1,90 @@
+{
+  "canonical_write_back": false,
+  "case_id": "hng2-hng02-relation-35297c7dc00a768062fe",
+  "elapsed_seconds": 2.155974,
+  "immutable": true,
+  "input_hash": "4c2ab70f32832be76292f77fd8db1ed10b9a52acda3217304bd25630e9bcd7f7",
+  "kind": "semantic",
+  "model": "deepseek-v4-flash",
+  "parse_error": null,
+  "parsed": {
+    "evidence_interpretation": {
+      "assertions": [
+        {
+          "assertion_id": "a0",
+          "assertion_type": "title_of",
+          "confidence": "high",
+          "direction": null,
+          "evidence_ref": "hng02-jinshu-wikisource-punctuated-009",
+          "evidence_span": "簡文皇帝",
+          "object_entity_key": null,
+          "subject_entity_key": "e0",
+          "value": null
+        }
+      ],
+      "entities": [
+        {
+          "entity_key": "e0",
+          "entity_kind": "person_title",
+          "evidence_ref": "hng02-jinshu-wikisource-punctuated-009",
+          "evidence_span": "簡文皇帝",
+          "reference_form": "title_only",
+          "surface": "簡文皇帝"
+        }
+      ]
+    },
+    "identity_recommendation": "insufficient_evidence",
+    "research_gap": {
+      "blocking_question": "Which historical person does this title denote in this passage?",
+      "candidate_keys": [],
+      "missing_constraints": [
+        "title_identity"
+      ],
+      "next_best_action": "search_title_identity",
+      "status": "open",
+      "stop_condition": "stop when one context-compatible person is independently supported"
+    },
+    "semantic_assessment": "title_only_expression"
+  },
+  "prompt_version": "hng2-sc-card-controller-v1",
+  "provider": "deepseek",
+  "response": {
+    "choices": [
+      {
+        "finish_reason": "stop",
+        "index": 0,
+        "logprobs": null,
+        "message": {
+          "content": "{\n  \"evidence_interpretation\": {\n    \"entities\": [\n      {\n        \"entity_key\": \"e0\",\n        \"surface\": \"簡文皇帝\",\n        \"entity_kind\": \"person_title\",\n        \"reference_form\": \"title_only\",\n        \"evidence_ref\": \"hng02-jinshu-wikisource-punctuated-009\",\n        \"evidence_span\": \"簡文皇帝\"\n      }\n    ],\n    \"assertions\": [\n      {\n        \"assertion_id\": \"a0\",\n        \"assertion_type\": \"title_of\",\n        \"subject_entity_key\": \"e0\",\n        \"object_entity_key\": null,\n        \"value\": null,\n        \"direction\": null,\n        \"evidence_ref\": \"hng02-jinshu-wikisource-punctuated-009\",\n        \"evidence_span\": \"簡文皇帝\",\n        \"confidence\": \"high\"\n      }\n    ]\n  },\n  \"semantic_assessment\": \"title_only_expression\",\n  \"identity_recommendation\": \"insufficient_evidence\",\n  \"research_gap\": {\n    \"blocking_question\": \"Which historical person does this title denote in this passage?\",\n    \"candidate_keys\": [],\n    \"missing_constraints\": [\"title_identity\"],\n    \"next_best_action\": \"search_title_identity\",\n    \"status\": \"open\",\n    \"stop_condition\": \"stop when one context-compatible person is independently supported\"\n  }\n}",
+          "role": "assistant"
+        }
+      }
+    ],
+    "created": 1787577444,
+    "id": "f1bcde31-bd8e-40de-b422-4f5df0d1fe0f",
+    "model": "deepseek-v4-flash",
+    "object": "chat.completion",
+    "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+    "usage": {
+      "completion_tokens": 311,
+      "prompt_cache_hit_tokens": 0,
+      "prompt_cache_miss_tokens": 1626,
+      "prompt_tokens": 1626,
+      "prompt_tokens_details": {
+        "cached_tokens": 0
+      },
+      "total_tokens": 1937
+    }
+  },
+  "response_channel": "content",
+  "sequence": 3,
+  "start_time": "2026-08-24T13:17:24Z",
+  "status": "response",
+  "usage": {
+    "completion_tokens": 311,
+    "prompt_cache_hit_tokens": 0,
+    "prompt_cache_miss_tokens": 1626,
+    "prompt_tokens": 1626,
+    "total_tokens": 1937
+  }
+}

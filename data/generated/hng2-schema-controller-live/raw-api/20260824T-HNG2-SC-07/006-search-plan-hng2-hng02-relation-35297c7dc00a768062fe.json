@@ -1,0 +1,82 @@
+{
+  "canonical_write_back": false,
+  "case_id": "hng2-hng02-relation-35297c7dc00a768062fe",
+  "elapsed_seconds": 2.514649,
+  "immutable": true,
+  "input_hash": "254c39538662798e02c60c434bc4d233371eace2bd81ba18e70d221869848b6c",
+  "kind": "search-plan",
+  "model": "deepseek-v4-flash",
+  "parse_error": null,
+  "parsed": {
+    "search_plan": {
+      "candidate_keys": [
+        "c0"
+      ],
+      "goal": "Confirm that 簡文皇帝 in this passage denotes 司馬昱 (晉簡文帝), the only candidate, by verifying title-to-person mapping in the local source.",
+      "graph_neighborhood_scope": "case_only",
+      "preferred_sources": [
+        "hng02-jinshu-wikisource-punctuated-009"
+      ],
+      "search_entities": [
+        "簡文皇帝",
+        "司馬昱",
+        "昱",
+        "元帝",
+        "琅邪王",
+        "會稽王"
+      ],
+      "search_patterns": [
+        "簡文皇帝諱昱",
+        "簡文皇帝.*司馬昱",
+        "簡文皇帝.*字道萬"
+      ],
+      "stop_condition": "stop when the passage's opening '簡文皇帝諱昱，字道萬' is confirmed as identifying the title with 司馬昱, and no alternative person is suggested by the local text.",
+      "target_constraint": "title_identity",
+      "temporal_scope": {
+        "end_year": 372,
+        "start_year": 322
+      }
+    }
+  },
+  "prompt_version": "hng2-sc-search-plan-v1",
+  "provider": "deepseek",
+  "response": {
+    "choices": [
+      {
+        "finish_reason": "stop",
+        "index": 0,
+        "logprobs": null,
+        "message": {
+          "content": "{\"search_plan\":{\"target_constraint\":\"title_identity\",\"goal\":\"Confirm that 簡文皇帝 in this passage denotes 司馬昱 (晉簡文帝), the only candidate, by verifying title-to-person mapping in the local source.\",\"candidate_keys\":[\"c0\"],\"preferred_sources\":[\"hng02-jinshu-wikisource-punctuated-009\"],\"search_entities\":[\"簡文皇帝\",\"司馬昱\",\"昱\",\"元帝\",\"琅邪王\",\"會稽王\"],\"search_patterns\":[\"簡文皇帝諱昱\",\"簡文皇帝.*司馬昱\",\"簡文皇帝.*字道萬\"],\"temporal_scope\":{\"start_year\":322,\"end_year\":372},\"graph_neighborhood_scope\":\"case_only\",\"stop_condition\":\"stop when the passage's opening '簡文皇帝諱昱，字道萬' is confirmed as identifying the title with 司馬昱, and no alternative person is suggested by the local text.\"}}",
+          "role": "assistant"
+        }
+      }
+    ],
+    "created": 1787577680,
+    "id": "9e0edac0-57b1-4d1c-a83c-64ab8a9d8cb2",
+    "model": "deepseek-v4-flash",
+    "object": "chat.completion",
+    "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+    "usage": {
+      "completion_tokens": 210,
+      "prompt_cache_hit_tokens": 0,
+      "prompt_cache_miss_tokens": 1216,
+      "prompt_tokens": 1216,
+      "prompt_tokens_details": {
+        "cached_tokens": 0
+      },
+      "total_tokens": 1426
+    }
+  },
+  "response_channel": "content",
+  "sequence": 6,
+  "start_time": "2026-08-24T13:21:20Z",
+  "status": "response",
+  "usage": {
+    "completion_tokens": 210,
+    "prompt_cache_hit_tokens": 0,
+    "prompt_cache_miss_tokens": 1216,
+    "prompt_tokens": 1216,
+    "total_tokens": 1426
+  }
+}

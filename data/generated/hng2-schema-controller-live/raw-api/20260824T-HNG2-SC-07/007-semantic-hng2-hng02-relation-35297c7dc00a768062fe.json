@@ -1,0 +1,119 @@
+{
+  "canonical_write_back": false,
+  "case_id": "hng2-hng02-relation-35297c7dc00a768062fe",
+  "elapsed_seconds": 3.637863,
+  "immutable": true,
+  "input_hash": "ef9978428cae0b77691802044204adae822783ab55d591e822453037eeb5a145",
+  "kind": "semantic",
+  "model": "deepseek-v4-flash",
+  "parse_error": null,
+  "parsed": {
+    "evidence_interpretation": {
+      "assertions": [
+        {
+          "assertion_id": "a0",
+          "assertion_type": "title_of",
+          "confidence": "high",
+          "direction": null,
+          "evidence_ref": "hng02-jinshu-wikisource-punctuated-009",
+          "evidence_span": "簡文皇帝",
+          "object_entity_key": null,
+          "subject_entity_key": "e0",
+          "value": null
+        }
+      ],
+      "entities": [
+        {
+          "entity_key": "e0",
+          "entity_kind": "person_title",
+          "evidence_ref": "hng02-jinshu-wikisource-punctuated-009",
+          "evidence_span": "簡文皇帝",
+          "reference_form": "title_only",
+          "surface": "簡文皇帝"
+        }
+      ]
+    },
+    "identity_recommendation": {
+      "chosen_candidate_key": "c0",
+      "confidence": "high",
+      "decision": "choose_candidate",
+      "evidence_spans": [
+        {
+          "ref": "hng02-jinshu-wikisource-punctuated-009",
+          "span": "簡文皇帝"
+        }
+      ],
+      "new_entity_candidate": null,
+      "new_entity_key": null,
+      "reason_codes": [
+        "title_match",
+        "context_support"
+      ],
+      "summary": "The title '簡文皇帝' directly matches candidate c0, and the passage context (describing Emperor Jianwen's life) strongly supports this identification.",
+      "unresolved_reason": ""
+    },
+    "research_gap": {
+      "blocking_question": "",
+      "candidate_keys": [
+        "c0"
+      ],
+      "missing_constraints": [],
+      "next_best_action": "none",
+      "status": "closed",
+      "stop_condition": "stop when one context-compatible person is independently supported"
+    },
+    "semantic_assessment": {
+      "assessment_status": "assessed",
+      "evidence_spans": [
+        {
+          "ref": "hng02-jinshu-wikisource-punctuated-009",
+          "span": "簡文皇帝"
+        }
+      ],
+      "observed_role": "office_holder",
+      "semantic_fit": "compatible",
+      "summary": "The expression '簡文皇帝' is a title-only reference to the Emperor Jianwen. The passage identifies him as 諱昱, 字道萬, 元帝之少子, and describes his life events. This is compatible with candidate c0 (簡文皇帝)."
+    }
+  },
+  "prompt_version": "hng2-sc-card-controller-v1",
+  "provider": "deepseek",
+  "response": {
+    "choices": [
+      {
+        "finish_reason": "stop",
+        "index": 0,
+        "logprobs": null,
+        "message": {
+          "content": "{\n  \"evidence_interpretation\": {\n    \"entities\": [\n      {\n        \"entity_key\": \"e0\",\n        \"surface\": \"簡文皇帝\",\n        \"entity_kind\": \"person_title\",\n        \"reference_form\": \"title_only\",\n        \"evidence_ref\": \"hng02-jinshu-wikisource-punctuated-009\",\n        \"evidence_span\": \"簡文皇帝\"\n      }\n    ],\n    \"assertions\": [\n      {\n        \"assertion_id\": \"a0\",\n        \"assertion_type\": \"title_of\",\n        \"subject_entity_key\": \"e0\",\n        \"object_entity_key\": null,\n        \"value\": null,\n        \"direction\": null,\n        \"evidence_ref\": \"hng02-jinshu-wikisource-punctuated-009\",\n        \"evidence_span\": \"簡文皇帝\",\n        \"confidence\": \"high\"\n      }\n    ]\n  },\n  \"semantic_assessment\": {\n    \"assessment_status\": \"assessed\",\n    \"semantic_fit\": \"compatible\",\n    \"observed_role\": \"office_holder\",\n    \"evidence_spans\": [\n      {\n        \"ref\": \"hng02-jinshu-wikisource-punctuated-009\",\n        \"span\": \"簡文皇帝\"\n      }\n    ],\n    \"summary\": \"The expression '簡文皇帝' is a title-only reference to the Emperor Jianwen. The passage identifies him as 諱昱, 字道萬, 元帝之少子, and describes his life events. This is compatible with candidate c0 (簡文皇帝).\"\n  },\n  \"identity_recommendation\": {\n    \"decision\": \"choose_candidate\",\n    \"chosen_candidate_key\": \"c0\",\n    \"confidence\": \"high\",\n    \"reason_codes\": [\"title_match\", \"context_support\"],\n    \"evidence_spans\": [\n      {\n        \"ref\": \"hng02-jinshu-wikisource-punctuated-009\",\n        \"span\": \"簡文皇帝\"\n      }\n    ],\n    \"new_entity_candidate\": null,\n    \"new_entity_key\": null,\n    \"unresolved_reason\": \"\",\n    \"summary\": \"The title '簡文皇帝' directly matches candidate c0, and the passage context (describing Emperor Jianwen's life) strongly supports this identification.\"\n  },\n  \"research_gap\": {\n    \"status\": \"closed\",\n    \"missing_constraints\": [],\n    \"blocking_question\": \"\",\n    \"next_best_action\": \"none\",\n    \"candidate_keys\": [\"c0\"],\n    \"stop_condition\": \"stop when one context-compatible person is independently supported\"\n  }\n}",
+          "role": "assistant"
+        }
+      }
+    ],
+    "created": 1787577686,
+    "id": "5b3e0ecb-d952-4edd-ab5d-b72caafb7c1d",
+    "model": "deepseek-v4-flash",
+    "object": "chat.completion",
+    "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+    "usage": {
+      "completion_tokens": 578,
+      "prompt_cache_hit_tokens": 768,
+      "prompt_cache_miss_tokens": 1619,
+      "prompt_tokens": 2387,
+      "prompt_tokens_details": {
+        "cached_tokens": 768
+      },
+      "total_tokens": 2965
+    }
+  },
+  "response_channel": "content",
+  "sequence": 7,
+  "start_time": "2026-08-24T13:21:26Z",
+  "status": "response",
+  "usage": {
+    "completion_tokens": 578,
+    "prompt_cache_hit_tokens": 768,
+    "prompt_cache_miss_tokens": 1619,
+    "prompt_tokens": 2387,
+    "total_tokens": 2965
+  }
+}

@@ -1,0 +1,81 @@
+{
+  "canonical_write_back": false,
+  "case_id": "preflight",
+  "elapsed_seconds": 6.534199,
+  "immutable": true,
+  "input_hash": "cedebc4cf78cf89f7ff65f27864c8ca28d4ffa286f84d872b95d5e5578ec873a",
+  "kind": "search-plan-preflight",
+  "model": "deepseek-v4-flash",
+  "parse_error": null,
+  "parsed": {
+    "search_plan": {
+      "candidate_keys": [
+        "c0"
+      ],
+      "goal": "验证庾亮（庾公）是否具有“太尉”这一官职/称号，以锁定其身份",
+      "graph_neighborhood_scope": "case_only",
+      "preferred_sources": [
+        "晉書"
+      ],
+      "search_entities": [
+        "庾亮",
+        "庾公",
+        "太尉"
+      ],
+      "search_patterns": [
+        "庾亮 太尉",
+        "庾公 太尉",
+        "庾亮拜太尉",
+        "太尉庾公"
+      ],
+      "stop_condition": "找到明确记载庾亮曾任或获赠“太尉”的段落，或同时出现“庾亮/庾公”与“太尉”且无身份歧义的表述",
+      "target_constraint": "title_identity",
+      "temporal_scope": {}
+    }
+  },
+  "prompt_version": "hng2-sc-search-plan-v1",
+  "provider": "deepseek",
+  "response": {
+    "choices": [
+      {
+        "finish_reason": "stop",
+        "index": 0,
+        "logprobs": null,
+        "message": {
+          "content": "{\"search_plan\":{\"target_constraint\":\"title_identity\",\"goal\":\"验证庾亮（庾公）是否具有“太尉”这一官职/称号，以锁定其身份\",\"candidate_keys\":[\"c0\"],\"preferred_sources\":[\"晉書\"],\"search_entities\":[\"庾亮\",\"庾公\",\"太尉\"],\"search_patterns\":[\"庾亮 太尉\",\"庾公 太尉\",\"庾亮拜太尉\",\"太尉庾公\"],\"temporal_scope\":{},\"graph_neighborhood_scope\":\"case_only\",\"stop_condition\":\"找到明确记载庾亮曾任或获赠“太尉”的段落，或同时出现“庾亮/庾公”与“太尉”且无身份歧义的表述\"}}",
+          "reasoning_content": "We need answer in JSON. Need obey. Need produce search_plan. Need use given sources? In source_passages work=晉書. \"local sources\" maybe given? Need pick preferred_sources from given local sources. Only source mention 晉書. But perhaps \"candidates\" has canonical_name, known_forms. Need plan for missing title_identity. Need search entities/patterns. Target constraint title_identity. Need candidate_keys c0. Preferred_sources from given local sources: \"晉書\" if allowed. Could include 世說新語? Not given. Only given sources: \"晉書\" in source_passages. Need strict JSON.\n\nNeed craft search_plan:\ntarget_constraint: \"title_identity\"\ngoal: \"确定庾亮是否拥有'太尉'这一官职/称号，并排除/验证候选身份\"\ncandidate_keys: [\"c0\"]\npreferred_sources: [\"晉書\"]\nsearch_entities: [\"庾亮\", \"庾公\", \"太尉\"]\nsearch_patterns: maybe [\"庾亮 太尉\", \"庾公 太尉\", \"庾亮 拜 太尉\", \"太尉 庾亮\"]\ntemporal_scope: {} maybe \"dynasty\": \"東晉\"? Need temporal scope? Could include \"period\": \"東晉\" maybe not specified. Stop condition: \"找到明确记载庾亮曾任/获赠太尉的条文，或同时出现'庾亮'与'太尉'且无歧义的表述，即可停止\". Graph neighborhood scope \"case_only\". Need include \"known_forms\"? maybe \"search_entities\": [\"庾亮\",\"庾公\",\"太尉\"].\n\nNeed maybe \"kinship\" not relevant. \"biography_identity\" maybe verify biography. Need \"target_constraint\":\"title_identity\" exactly. Also \"missing_constraints\": [\"title_identity\"] from research_gap. Need maybe \"search_patterns\": include \"庾亮 太尉\", \"庾公 太尉\", \"庾亮為太尉\", \"太尉庾公\".\n\nNeed maybe \"preferred_sources\": [\"晉書\"] only. Is that allowed? \"只能从给定的本地来源中选择\", yes given \"晉書\" in source_passages. Good.\n\nNeed output JSON only. Ensure no extra.\n\nLet's formulate.",
+          "role": "assistant"
+        }
+      }
+    ],
+    "created": 1787576700,
+    "id": "7949db03-0943-46cc-befc-255b27645ba9",
+    "model": "deepseek-v4-flash",
+    "object": "chat.completion",
+    "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+    "usage": {
+      "completion_tokens": 667,
+      "completion_tokens_details": {
+        "reasoning_tokens": 495
+      },
+      "prompt_cache_hit_tokens": 384,
+      "prompt_cache_miss_tokens": 117,
+      "prompt_tokens": 501,
+      "prompt_tokens_details": {
+        "cached_tokens": 384
+      },
+      "total_tokens": 1168
+    }
+  },
+  "response_channel": "content",
+  "sequence": 1,
+  "start_time": "2026-08-24T13:05:00Z",
+  "status": "response",
+  "usage": {
+    "completion_tokens": 667,
+    "prompt_cache_hit_tokens": 384,
+    "prompt_cache_miss_tokens": 117,
+    "prompt_tokens": 501,
+    "total_tokens": 1168
+  }
+}

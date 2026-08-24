@@ -1,0 +1,127 @@
+{
+  "canonical_write_back": false,
+  "plans": [
+    {
+      "canonical_write_back": false,
+      "case_id": "hng2-live-hng2-live-w1-temporal-7787c8e7d9f2c14fc5b5",
+      "plan": {
+        "candidate_keys": [
+          "c0"
+        ],
+        "fallback": true,
+        "gap_type": "biography_identity",
+        "goal": "What source-local evidence identifies this surface?",
+        "graph_neighborhood_scope": "case_only",
+        "preferred_sources": [
+          "晉書",
+          "世說新語",
+          "三國志"
+        ],
+        "search_entities": [
+          "何曾",
+          "何曾"
+        ],
+        "search_patterns": [
+          "何曾",
+          "字",
+          "本名",
+          "父",
+          "兄"
+        ],
+        "stop_condition": "stop when an exact or structurally explicit identity is found",
+        "target_constraint": "biography_identity",
+        "temporal_scope": {}
+      },
+      "response_channel": "content",
+      "round": 1,
+      "validation_errors": [
+        "unapproved_source",
+        "typed_fallback_used"
+      ]
+    },
+    {
+      "canonical_write_back": false,
+      "case_id": "hng2-hng02-relation-35297c7dc00a768062fe",
+      "plan": {
+        "candidate_keys": [
+          "c0"
+        ],
+        "fallback": true,
+        "gap_type": "title_identity",
+        "goal": "Which historical person does this title denote in this passage?",
+        "graph_neighborhood_scope": "case_only",
+        "preferred_sources": [
+          "晉書",
+          "世說新語",
+          "余嘉錫笺疏"
+        ],
+        "search_entities": [
+          "簡文皇帝",
+          "簡文皇帝"
+        ],
+        "search_patterns": [
+          "簡文皇帝",
+          "官職",
+          "爵號",
+          "本名"
+        ],
+        "stop_condition": "stop when one context-compatible person is independently supported",
+        "target_constraint": "title_identity",
+        "temporal_scope": {}
+      },
+      "response_channel": "content",
+      "round": 1,
+      "validation_errors": [
+        "unapproved_source",
+        "typed_fallback_used"
+      ]
+    },
+    {
+      "canonical_write_back": false,
+      "case_id": "hng2-hng02-relation-53df6f655bff9d79d0c5",
+      "plan": {
+        "candidate_keys": [],
+        "goal": "Identify the person referred to by the surface '譽' in the given passage from Zizhi Tongjian, using local biographical context and nearby named individuals.",
+        "graph_neighborhood_scope": "case_only",
+        "preferred_sources": [
+          "資治通鑑"
+        ],
+        "search_entities": [
+          "譽",
+          "韋粲",
+          "柳仲禮",
+          "侯景",
+          "鄭逸",
+          "劉叔胤",
+          "韋尼",
+          "韋助",
+          "韋警",
+          "韋構",
+          "韋昂",
+          "郭山石",
+          "惠臶",
+          "邵陵王綸",
+          "臨城公大連",
+          "新淦公大成"
+        ],
+        "search_patterns": [
+          "譽",
+          "韋譽",
+          "粲子譽",
+          "譽.*韋",
+          "韋.*譽"
+        ],
+        "stop_condition": "stop when an explicit identification of '譽' as a specific person (e.g., Wei Yu, son of Wei Can) is found in the local text or its immediate annotations.",
+        "target_constraint": "biography_identity",
+        "temporal_scope": {
+          "end": 549,
+          "start": 549
+        }
+      },
+      "response_channel": "content",
+      "round": 1,
+      "validation_errors": []
+    }
+  ],
+  "schema": "historical-entity-schema-v1"
+}

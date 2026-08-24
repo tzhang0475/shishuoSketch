@@ -1,0 +1,81 @@
+{
+  "canonical_write_back": false,
+  "case_id": "hng2-live-hng2-live-w1-temporal-7787c8e7d9f2c14fc5b5",
+  "elapsed_seconds": 2.490193,
+  "immutable": true,
+  "input_hash": "47b3890a97352c6167a2dec8b8ad409b97bef9e5c521626aefa8ab600ad53243",
+  "kind": "search-plan",
+  "model": "deepseek-v4-flash",
+  "parse_error": null,
+  "parsed": {
+    "search_plan": {
+      "candidate_keys": [
+        "c0"
+      ],
+      "goal": "Find source-local evidence in 晉書 that identifies the surface 何曾 as the historical figure 何曾 (魏司徒, 晉丞相), confirming the candidate c0.",
+      "graph_neighborhood_scope": "case_only",
+      "preferred_sources": [
+        "hng02-jinshu-wikisource-punctuated-003",
+        "hng02-jinshu-wikisource-punctuated-024"
+      ],
+      "search_entities": [
+        "何曾",
+        "魏司徒",
+        "丞相",
+        "晉書"
+      ],
+      "search_patterns": [
+        "何曾",
+        "司徒",
+        "丞相"
+      ],
+      "stop_condition": "stop when an explicit statement in 晉書 links 何曾 to the offices of 魏司徒 and 晉丞相, or a biography entry for 何曾 is found.",
+      "target_constraint": "biography_identity",
+      "temporal_scope": {
+        "end": 290,
+        "start": 220
+      }
+    }
+  },
+  "prompt_version": "hng2-sc-search-plan-v1",
+  "provider": "deepseek",
+  "response": {
+    "choices": [
+      {
+        "finish_reason": "stop",
+        "index": 0,
+        "logprobs": null,
+        "message": {
+          "content": "{\"search_plan\":{\"target_constraint\":\"biography_identity\",\"goal\":\"Find source-local evidence in 晉書 that identifies the surface 何曾 as the historical figure 何曾 (魏司徒, 晉丞相), confirming the candidate c0.\",\"candidate_keys\":[\"c0\"],\"preferred_sources\":[\"hng02-jinshu-wikisource-punctuated-003\",\"hng02-jinshu-wikisource-punctuated-024\"],\"search_entities\":[\"何曾\",\"魏司徒\",\"丞相\",\"晉書\"],\"search_patterns\":[\"何曾\",\"司徒\",\"丞相\"],\"temporal_scope\":{\"start\":220,\"end\":290},\"graph_neighborhood_scope\":\"case_only\",\"stop_condition\":\"stop when an explicit statement in 晉書 links 何曾 to the offices of 魏司徒 and 晉丞相, or a biography entry for 何曾 is found.\"}}",
+          "role": "assistant"
+        }
+      }
+    ],
+    "created": 1787577667,
+    "id": "0896d962-e324-428a-b511-2c4c56ed5fad",
+    "model": "deepseek-v4-flash",
+    "object": "chat.completion",
+    "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+    "usage": {
+      "completion_tokens": 197,
+      "prompt_cache_hit_tokens": 0,
+      "prompt_cache_miss_tokens": 1397,
+      "prompt_tokens": 1397,
+      "prompt_tokens_details": {
+        "cached_tokens": 0
+      },
+      "total_tokens": 1594
+    }
+  },
+  "response_channel": "content",
+  "sequence": 3,
+  "start_time": "2026-08-24T13:21:07Z",
+  "status": "response",
+  "usage": {
+    "completion_tokens": 197,
+    "prompt_cache_hit_tokens": 0,
+    "prompt_cache_miss_tokens": 1397,
+    "prompt_tokens": 1397,
+    "total_tokens": 1594
+  }
+}

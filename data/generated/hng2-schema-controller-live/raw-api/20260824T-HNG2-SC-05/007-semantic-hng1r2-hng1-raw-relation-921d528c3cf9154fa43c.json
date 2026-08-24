@@ -1,0 +1,142 @@
+{
+  "canonical_write_back": false,
+  "case_id": "hng1r2-hng1-raw-relation-921d528c3cf9154fa43c",
+  "elapsed_seconds": 4.071973,
+  "immutable": true,
+  "input_hash": "5835af90b4812971098c3afe30c9f2cf0c5c7f044fb4197a4400dfc5b41ef7df",
+  "kind": "semantic",
+  "model": "deepseek-v4-flash",
+  "parse_error": null,
+  "parsed": {
+    "evidence_interpretation": {
+      "assertions": [
+        {
+          "assertion_id": "a0",
+          "assertion_type": "identity_equivalence",
+          "confidence": "high",
+          "evidence_ref": "hng02-zizhi-tongjian-wikisource-hu-090",
+          "evidence_span": "廙",
+          "object_entity_key": "e1",
+          "subject_entity_key": "e0"
+        },
+        {
+          "assertion_id": "a1",
+          "assertion_type": "participates_in_event",
+          "confidence": "high",
+          "direction": null,
+          "evidence_ref": "hng02-zizhi-tongjian-wikisource-hu-090",
+          "evidence_span": "鄭攀等相與拒王廙",
+          "object_entity_key": null,
+          "subject_entity_key": "e1",
+          "value": "拒王廙"
+        },
+        {
+          "assertion_id": "a2",
+          "assertion_type": "participates_in_event",
+          "confidence": "high",
+          "direction": null,
+          "evidence_ref": "hng02-zizhi-tongjian-wikisource-hu-090",
+          "evidence_span": "廙將赴荊州",
+          "object_entity_key": null,
+          "subject_entity_key": "e1",
+          "value": "廙將赴荊州"
+        },
+        {
+          "assertion_id": "a3",
+          "assertion_type": "participates_in_event",
+          "confidence": "high",
+          "direction": null,
+          "evidence_ref": "hng02-zizhi-tongjian-wikisource-hu-090",
+          "evidence_span": "廙性矜厲自用",
+          "object_entity_key": null,
+          "subject_entity_key": "e1",
+          "value": "廙性矜厲自用"
+        },
+        {
+          "assertion_id": "a4",
+          "assertion_type": "participates_in_event",
+          "confidence": "high",
+          "direction": null,
+          "evidence_ref": "hng02-zizhi-tongjian-wikisource-hu-090",
+          "evidence_span": "廙乃遣伺歸",
+          "object_entity_key": null,
+          "subject_entity_key": "e1",
+          "value": "廙乃遣伺歸"
+        }
+      ],
+      "entities": [
+        {
+          "entity_key": "e0",
+          "entity_kind": "person",
+          "evidence_ref": "hng02-zizhi-tongjian-wikisource-hu-090",
+          "evidence_span": "廙",
+          "reference_form": "廙",
+          "surface": "廙"
+        },
+        {
+          "entity_key": "e1",
+          "entity_kind": "person",
+          "evidence_ref": "hng02-zizhi-tongjian-wikisource-hu-090",
+          "evidence_span": "王廙",
+          "reference_form": "王廙",
+          "surface": "王廙"
+        }
+      ]
+    },
+    "identity_recommendation": "match_candidate",
+    "research_gap": {
+      "blocking_question": "Which individuals are represented by the kinship chain?",
+      "candidate_keys": [
+        "c0"
+      ],
+      "missing_constraints": [
+        "structural_kinship_parse"
+      ],
+      "next_best_action": "search_kinship_context",
+      "status": "open",
+      "stop_condition": "do not create a node until the chain is parsed"
+    },
+    "semantic_assessment": "proper_name"
+  },
+  "prompt_version": "hng2-sc-card-controller-v1",
+  "provider": "deepseek",
+  "response": {
+    "choices": [
+      {
+        "finish_reason": "stop",
+        "index": 0,
+        "logprobs": null,
+        "message": {
+          "content": "{\n  \"evidence_interpretation\": {\n    \"entities\": [\n      {\n        \"entity_key\": \"e0\",\n        \"surface\": \"廙\",\n        \"entity_kind\": \"person\",\n        \"reference_form\": \"廙\",\n        \"evidence_ref\": \"hng02-zizhi-tongjian-wikisource-hu-090\",\n        \"evidence_span\": \"廙\"\n      },\n      {\n        \"entity_key\": \"e1\",\n        \"surface\": \"王廙\",\n        \"entity_kind\": \"person\",\n        \"reference_form\": \"王廙\",\n        \"evidence_ref\": \"hng02-zizhi-tongjian-wikisource-hu-090\",\n        \"evidence_span\": \"王廙\"\n      }\n    ],\n    \"assertions\": [\n      {\n        \"assertion_id\": \"a0\",\n        \"assertion_type\": \"identity_equivalence\",\n        \"subject_entity_key\": \"e0\",\n        \"object_entity_key\": \"e1\",\n        \"evidence_ref\": \"hng02-zizhi-tongjian-wikisource-hu-090\",\n        \"evidence_span\": \"廙\",\n        \"confidence\": \"high\"\n      },\n      {\n        \"assertion_id\": \"a1\",\n        \"assertion_type\": \"participates_in_event\",\n        \"subject_entity_key\": \"e1\",\n        \"object_entity_key\": null,\n        \"value\": \"拒王廙\",\n        \"direction\": null,\n        \"evidence_ref\": \"hng02-zizhi-tongjian-wikisource-hu-090\",\n        \"evidence_span\": \"鄭攀等相與拒王廙\",\n        \"confidence\": \"high\"\n      },\n      {\n        \"assertion_id\": \"a2\",\n        \"assertion_type\": \"participates_in_event\",\n        \"subject_entity_key\": \"e1\",\n        \"object_entity_key\": null,\n        \"value\": \"廙將赴荊州\",\n        \"direction\": null,\n        \"evidence_ref\": \"hng02-zizhi-tongjian-wikisource-hu-090\",\n        \"evidence_span\": \"廙將赴荊州\",\n        \"confidence\": \"high\"\n      },\n      {\n        \"assertion_id\": \"a3\",\n        \"assertion_type\": \"participates_in_event\",\n        \"subject_entity_key\": \"e1\",\n        \"object_entity_key\": null,\n        \"value\": \"廙性矜厲自用\",\n        \"direction\": null,\n        \"evidence_ref\": \"hng02-zizhi-tongjian-wikisource-hu-090\",\n        \"evidence_span\": \"廙性矜厲自用\",\n        \"confidence\": \"high\"\n      },\n      {\n        \"assertion_id\": \"a4\",\n        \"assertion_type\": \"participates_in_event\",\n        \"subject_entity_key\": \"e1\",\n        \"object_entity_key\": null,\n        \"value\": \"廙乃遣伺歸\",\n        \"direction\": null,\n        \"evidence_ref\": \"hng02-zizhi-tongjian-wikisource-hu-090\",\n        \"evidence_span\": \"廙乃遣伺歸\",\n        \"confidence\": \"high\"\n      }\n    ]\n  },\n  \"semantic_assessment\": \"proper_name\",\n  \"identity_recommendation\": \"match_candidate\",\n  \"research_gap\": {\n    \"blocking_question\": \"Which individuals are represented by the kinship chain?\",\n    \"candidate_keys\": [\"c0\"],\n    \"missing_constraints\": [\"structural_kinship_parse\"],\n    \"next_best_action\": \"search_kinship_context\",\n    \"status\": \"open\",\n    \"stop_condition\": \"do not create a node until the chain is parsed\"\n  }\n}",
+          "role": "assistant"
+        }
+      }
+    ],
+    "created": 1787577456,
+    "id": "e808b616-4c49-450a-a56e-c59b223c0906",
+    "model": "deepseek-v4-flash",
+    "object": "chat.completion",
+    "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+    "usage": {
+      "completion_tokens": 813,
+      "prompt_cache_hit_tokens": 384,
+      "prompt_cache_miss_tokens": 1963,
+      "prompt_tokens": 2347,
+      "prompt_tokens_details": {
+        "cached_tokens": 384
+      },
+      "total_tokens": 3160
+    }
+  },
+  "response_channel": "content",
+  "sequence": 7,
+  "start_time": "2026-08-24T13:17:36Z",
+  "status": "response",
+  "usage": {
+    "completion_tokens": 813,
+    "prompt_cache_hit_tokens": 384,
+    "prompt_cache_miss_tokens": 1963,
+    "prompt_tokens": 2347,
+    "total_tokens": 3160
+  }
+}

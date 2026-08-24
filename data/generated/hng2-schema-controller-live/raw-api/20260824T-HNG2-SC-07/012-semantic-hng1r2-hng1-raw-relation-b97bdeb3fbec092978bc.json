@@ -1,0 +1,135 @@
+{
+  "canonical_write_back": false,
+  "case_id": "hng1r2-hng1-raw-relation-b97bdeb3fbec092978bc",
+  "elapsed_seconds": 6.338247,
+  "immutable": true,
+  "input_hash": "16142db740085c586a4f9de7c55024ca288f2617c77ac59eae769eec96e71591",
+  "kind": "semantic",
+  "model": "deepseek-v4-flash",
+  "parse_error": null,
+  "parsed": {
+    "evidence_interpretation": {
+      "assertions": [
+        {
+          "assertion_id": "a0",
+          "assertion_type": "person_mention",
+          "confidence": "high",
+          "evidence_ref": "hng01-jinshu-088-liezhuan-007",
+          "evidence_span": "會稽虞喜隠居海嵎有高世之風",
+          "subject_entity_key": "e0"
+        },
+        {
+          "assertion_id": "a1",
+          "assertion_type": "kinship_relation",
+          "confidence": "high",
+          "evidence_ref": "hng01-jinshu-088-liezhuan-007",
+          "evidence_span": "娉喜弟預女為妻",
+          "object_entity_key": "e1",
+          "subject_entity_key": "e0"
+        },
+        {
+          "assertion_id": "a2",
+          "assertion_type": "participates_in_event",
+          "confidence": "medium",
+          "evidence_ref": "hng01-jinshu-088-liezhuan-007",
+          "evidence_span": "喜戒女棄華尚素與晷同志時人號為梁鴻夫婦",
+          "object_entity_key": "e2",
+          "subject_entity_key": "e0"
+        }
+      ],
+      "entities": [
+        {
+          "entity_key": "e0",
+          "entity_kind": "named_person",
+          "evidence_ref": "hng01-jinshu-088-liezhuan-007",
+          "evidence_span": "會稽虞喜隠居海嵎有高世之風晷欽其徳娉喜弟預女為妻喜戒女棄華尚素與晷同志時人號為梁鴻夫婦",
+          "reference_form": "full_name",
+          "surface": "虞喜"
+        }
+      ]
+    },
+    "identity_recommendation": {
+      "chosen_candidate_key": null,
+      "confidence": "unknown",
+      "decision": "unresolved",
+      "evidence_spans": [
+        {
+          "ref": "hng01-jinshu-088-liezhuan-007",
+          "span": "會稽虞喜隠居海嵎有高世之風晷欽其徳娉喜弟預女為妻喜戒女棄華尚素與晷同志時人號為梁鴻夫婦"
+        }
+      ],
+      "new_entity_candidate": null,
+      "new_entity_key": null,
+      "reason_codes": [
+        "no_candidate_provided",
+        "insufficient_evidence"
+      ],
+      "summary": "由于没有候选人物可供匹配，且证据不足以确定具体身份，决定为未解决。",
+      "unresolved_reason": "系统未提供候选人物，且原文仅给出虞喜的亲属关系和隐居信息，不足以唯一认定其身份。"
+    },
+    "research_gap": {
+      "blocking_question": "虞喜的具体身份（如生卒年、官职等）是什么？",
+      "candidate_keys": [],
+      "missing_constraints": [
+        "candidate_list",
+        "historical_context"
+      ],
+      "next_best_action": "search_historical_records",
+      "status": "open",
+      "stop_condition": "找到足够证据唯一确定虞喜的身份"
+    },
+    "semantic_assessment": {
+      "assessment_status": "assessed",
+      "evidence_spans": [
+        {
+          "ref": "hng01-jinshu-088-liezhuan-007",
+          "span": "會稽虞喜隠居海嵎有高世之風晷欽其徳娉喜弟預女為妻喜戒女棄華尚素與晷同志時人號為梁鴻夫婦"
+        }
+      ],
+      "observed_role": "referenced_person",
+      "semantic_fit": "unknown",
+      "summary": "目标表达'虞喜'在原文中作为被提及的人物出现，是孙晷妻子的兄长，且被描述为隐居海嵎、有高世之风。其身份明确，但未提供足够信息以匹配具体历史人物候选。"
+    }
+  },
+  "prompt_version": "hng2-sc-card-controller-v1",
+  "provider": "deepseek",
+  "response": {
+    "choices": [
+      {
+        "finish_reason": "stop",
+        "index": 0,
+        "logprobs": null,
+        "message": {
+          "content": "{\n  \"evidence_interpretation\": {\n    \"entities\": [\n      {\n        \"entity_key\": \"e0\",\n        \"surface\": \"虞喜\",\n        \"entity_kind\": \"named_person\",\n        \"reference_form\": \"full_name\",\n        \"evidence_ref\": \"hng01-jinshu-088-liezhuan-007\",\n        \"evidence_span\": \"會稽虞喜隠居海嵎有高世之風晷欽其徳娉喜弟預女為妻喜戒女棄華尚素與晷同志時人號為梁鴻夫婦\"\n      }\n    ],\n    \"assertions\": [\n      {\n        \"assertion_id\": \"a0\",\n        \"assertion_type\": \"person_mention\",\n        \"subject_entity_key\": \"e0\",\n        \"evidence_ref\": \"hng01-jinshu-088-liezhuan-007\",\n        \"evidence_span\": \"會稽虞喜隠居海嵎有高世之風\",\n        \"confidence\": \"high\"\n      },\n      {\n        \"assertion_id\": \"a1\",\n        \"assertion_type\": \"kinship_relation\",\n        \"subject_entity_key\": \"e0\",\n        \"object_entity_key\": \"e1\",\n        \"evidence_ref\": \"hng01-jinshu-088-liezhuan-007\",\n        \"evidence_span\": \"娉喜弟預女為妻\",\n        \"confidence\": \"high\"\n      },\n      {\n        \"assertion_id\": \"a2\",\n        \"assertion_type\": \"participates_in_event\",\n        \"subject_entity_key\": \"e0\",\n        \"object_entity_key\": \"e2\",\n        \"evidence_ref\": \"hng01-jinshu-088-liezhuan-007\",\n        \"evidence_span\": \"喜戒女棄華尚素與晷同志時人號為梁鴻夫婦\",\n        \"confidence\": \"medium\"\n      }\n    ]\n  },\n  \"semantic_assessment\": {\n    \"assessment_status\": \"assessed\",\n    \"semantic_fit\": \"unknown\",\n    \"observed_role\": \"referenced_person\",\n    \"evidence_spans\": [\n      {\n        \"ref\": \"hng01-jinshu-088-liezhuan-007\",\n        \"span\": \"會稽虞喜隠居海嵎有高世之風晷欽其徳娉喜弟預女為妻喜戒女棄華尚素與晷同志時人號為梁鴻夫婦\"\n      }\n    ],\n    \"summary\": \"目标表达'虞喜'在原文中作为被提及的人物出现，是孙晷妻子的兄长，且被描述为隐居海嵎、有高世之风。其身份明确，但未提供足够信息以匹配具体历史人物候选。\"\n  },\n  \"identity_recommendation\": {\n    \"decision\": \"unresolved\",\n    \"chosen_candidate_key\": null,\n    \"confidence\": \"unknown\",\n    \"reason_codes\": [\"no_candidate_provided\", \"insufficient_evidence\"],\n    \"evidence_spans\": [\n      {\n        \"ref\": \"hng01-jinshu-088-liezhuan-007\",\n        \"span\": \"會稽虞喜隠居海嵎有高世之風晷欽其徳娉喜弟預女為妻喜戒女棄華尚素與晷同志時人號為梁鴻夫婦\"\n      }\n    ],\n    \"new_entity_candidate\": null,\n    \"new_entity_key\": null,\n    \"unresolved_reason\": \"系统未提供候选人物，且原文仅给出虞喜的亲属关系和隐居信息，不足以唯一认定其身份。\",\n    \"summary\": \"由于没有候选人物可供匹配，且证据不足以确定具体身份，决定为未解决。\"\n  },\n  \"research_gap\": {\n    \"status\": \"open\",\n    \"missing_constraints\": [\"candidate_list\", \"historical_context\"],\n    \"blocking_question\": \"虞喜的具体身份（如生卒年、官职等）是什么？\",\n    \"next_best_action\": \"search_historical_records\",\n    \"candidate_keys\": [],\n    \"stop_condition\": \"找到足够证据唯一确定虞喜的身份\"\n  }\n}",
+          "role": "assistant"
+        }
+      }
+    ],
+    "created": 1787577715,
+    "id": "965a82db-9470-489f-a5ec-a07e67e044b9",
+    "model": "deepseek-v4-flash",
+    "object": "chat.completion",
+    "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+    "usage": {
+      "completion_tokens": 926,
+      "prompt_cache_hit_tokens": 768,
+      "prompt_cache_miss_tokens": 1548,
+      "prompt_tokens": 2316,
+      "prompt_tokens_details": {
+        "cached_tokens": 768
+      },
+      "total_tokens": 3242
+    }
+  },
+  "response_channel": "content",
+  "sequence": 12,
+  "start_time": "2026-08-24T13:21:55Z",
+  "status": "response",
+  "usage": {
+    "completion_tokens": 926,
+    "prompt_cache_hit_tokens": 768,
+    "prompt_cache_miss_tokens": 1548,
+    "prompt_tokens": 2316,
+    "total_tokens": 3242
+  }
+}

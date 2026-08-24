@@ -1,0 +1,89 @@
+{
+  "canonical_write_back": false,
+  "case_id": "hng2-hng02-relation-2164c52caaa53337435e",
+  "elapsed_seconds": 2.245279,
+  "immutable": true,
+  "input_hash": "c35772212b897f89f5fc1baf42351179f676b62108031df10c305ed366b9cc25",
+  "kind": "semantic",
+  "model": "deepseek-v4-flash",
+  "parse_error": null,
+  "parsed": {
+    "evidence_interpretation": {
+      "assertions": [
+        {
+          "assertion_id": "a0",
+          "assertion_type": "kinship_relation",
+          "confidence": "high",
+          "direction": "self",
+          "evidence_ref": "hng01-jinshu-088-liezhuan-007",
+          "evidence_span": "娉喜弟預女為妻",
+          "object_entity_key": "e0",
+          "subject_entity_key": "e0"
+        }
+      ],
+      "entities": [
+        {
+          "entity_key": "e0",
+          "entity_kind": "structural_kinship_expression",
+          "evidence_ref": "hng01-jinshu-088-liezhuan-007",
+          "evidence_span": "娉喜弟預女為妻",
+          "reference_form": "kinship_plus_name",
+          "surface": "喜弟預女"
+        }
+      ]
+    },
+    "identity_recommendation": "not_single_person",
+    "research_gap": {
+      "blocking_question": "Which individuals are represented by the kinship chain?",
+      "candidate_keys": [],
+      "missing_constraints": [
+        "structural_kinship_parse"
+      ],
+      "next_best_action": "search_kinship_context",
+      "status": "open",
+      "stop_condition": "do not create a node until the chain is parsed"
+    },
+    "semantic_assessment": "structural_kinship_expression"
+  },
+  "prompt_version": "hng2-sc-card-controller-v1",
+  "provider": "deepseek",
+  "response": {
+    "choices": [
+      {
+        "finish_reason": "stop",
+        "index": 0,
+        "logprobs": null,
+        "message": {
+          "content": "{\n  \"evidence_interpretation\": {\n    \"entities\": [\n      {\n        \"entity_key\": \"e0\",\n        \"surface\": \"喜弟預女\",\n        \"entity_kind\": \"structural_kinship_expression\",\n        \"reference_form\": \"kinship_plus_name\",\n        \"evidence_ref\": \"hng01-jinshu-088-liezhuan-007\",\n        \"evidence_span\": \"娉喜弟預女為妻\"\n      }\n    ],\n    \"assertions\": [\n      {\n        \"assertion_id\": \"a0\",\n        \"assertion_type\": \"kinship_relation\",\n        \"subject_entity_key\": \"e0\",\n        \"object_entity_key\": \"e0\",\n        \"direction\": \"self\",\n        \"evidence_ref\": \"hng01-jinshu-088-liezhuan-007\",\n        \"evidence_span\": \"娉喜弟預女為妻\",\n        \"confidence\": \"high\"\n      }\n    ]\n  },\n  \"semantic_assessment\": \"structural_kinship_expression\",\n  \"identity_recommendation\": \"not_single_person\",\n  \"research_gap\": {\n    \"blocking_question\": \"Which individuals are represented by the kinship chain?\",\n    \"candidate_keys\": [],\n    \"missing_constraints\": [\"structural_kinship_parse\"],\n    \"next_best_action\": \"search_kinship_context\",\n    \"status\": \"open\",\n    \"stop_condition\": \"do not create a node until the chain is parsed\"\n  }\n}",
+          "role": "assistant"
+        }
+      }
+    ],
+    "created": 1787577460,
+    "id": "98260cc5-076a-4494-acbe-e5b00f6a6422",
+    "model": "deepseek-v4-flash",
+    "object": "chat.completion",
+    "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+    "usage": {
+      "completion_tokens": 329,
+      "prompt_cache_hit_tokens": 384,
+      "prompt_cache_miss_tokens": 1263,
+      "prompt_tokens": 1647,
+      "prompt_tokens_details": {
+        "cached_tokens": 384
+      },
+      "total_tokens": 1976
+    }
+  },
+  "response_channel": "content",
+  "sequence": 8,
+  "start_time": "2026-08-24T13:17:40Z",
+  "status": "response",
+  "usage": {
+    "completion_tokens": 329,
+    "prompt_cache_hit_tokens": 384,
+    "prompt_cache_miss_tokens": 1263,
+    "prompt_tokens": 1647,
+    "total_tokens": 1976
+  }
+}

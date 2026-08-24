@@ -1,0 +1,124 @@
+{
+  "canonical_write_back": false,
+  "case_id": "hng2-live-hng2-live-w1-temporal-7787c8e7d9f2c14fc5b5",
+  "elapsed_seconds": 3.828714,
+  "immutable": true,
+  "input_hash": "00e694ae3fdb1297c3eeffd7e00e6835ee10a6a7c520580c08ba90437494675e",
+  "kind": "semantic",
+  "model": "deepseek-v4-flash",
+  "parse_error": null,
+  "parsed": {
+    "evidence_interpretation": {
+      "assertions": [
+        {
+          "assertion_id": "a0",
+          "assertion_type": "person_mention",
+          "confidence": "high",
+          "evidence_ref": "hng02-jinshu-wikisource-punctuated-003",
+          "evidence_span": "何曾等固爭曰",
+          "subject_entity_key": "e0"
+        },
+        {
+          "assertion_id": "a1",
+          "assertion_type": "participates_in_event",
+          "confidence": "high",
+          "evidence_ref": "hng02-jinshu-wikisource-punctuated-003",
+          "evidence_span": "何曾等固爭曰",
+          "subject_entity_key": "e0",
+          "value": "固爭立世子之事"
+        }
+      ],
+      "entities": [
+        {
+          "entity_key": "e0",
+          "entity_kind": "named_person",
+          "evidence_ref": "hng02-jinshu-wikisource-punctuated-003",
+          "evidence_span": "何曾等固爭曰",
+          "reference_form": "full_name",
+          "surface": "何曾"
+        }
+      ]
+    },
+    "identity_recommendation": {
+      "chosen_candidate_key": null,
+      "confidence": "unknown",
+      "decision": "unresolved",
+      "evidence_spans": [
+        {
+          "ref": "hng02-jinshu-wikisource-punctuated-003",
+          "span": "何曾等固爭曰"
+        }
+      ],
+      "new_entity_candidate": null,
+      "new_entity_key": null,
+      "reason_codes": [
+        "no_candidate_provided"
+      ],
+      "summary": "The surface is a clear named person mention, but without candidate list, identity remains unresolved.",
+      "unresolved_reason": "No candidate keys were provided in the input, so identity cannot be resolved."
+    },
+    "research_gap": {
+      "blocking_question": "What source-local evidence identifies this surface?",
+      "candidate_keys": [],
+      "missing_constraints": [
+        "identity_evidence"
+      ],
+      "next_best_action": "search_biography_context",
+      "status": "open",
+      "stop_condition": "stop when an exact or structurally explicit identity is found"
+    },
+    "semantic_assessment": {
+      "assessment_status": "assessed",
+      "evidence_spans": [
+        {
+          "ref": "hng02-jinshu-wikisource-punctuated-003",
+          "span": "何曾等固爭曰"
+        }
+      ],
+      "observed_role": "event_participant",
+      "semantic_fit": "unknown",
+      "summary": "The surface '何曾' appears as a named person in the narrative, participating in the event of arguing about the succession. No candidate list was provided, so identity cannot be assessed against candidates."
+    }
+  },
+  "prompt_version": "hng2-sc-card-controller-v1",
+  "provider": "deepseek",
+  "response": {
+    "choices": [
+      {
+        "finish_reason": "stop",
+        "index": 0,
+        "logprobs": null,
+        "message": {
+          "content": "{\n  \"evidence_interpretation\": {\n    \"entities\": [\n      {\n        \"entity_key\": \"e0\",\n        \"surface\": \"何曾\",\n        \"entity_kind\": \"named_person\",\n        \"reference_form\": \"full_name\",\n        \"evidence_ref\": \"hng02-jinshu-wikisource-punctuated-003\",\n        \"evidence_span\": \"何曾等固爭曰\"\n      }\n    ],\n    \"assertions\": [\n      {\n        \"assertion_id\": \"a0\",\n        \"assertion_type\": \"person_mention\",\n        \"subject_entity_key\": \"e0\",\n        \"evidence_ref\": \"hng02-jinshu-wikisource-punctuated-003\",\n        \"evidence_span\": \"何曾等固爭曰\",\n        \"confidence\": \"high\"\n      },\n      {\n        \"assertion_id\": \"a1\",\n        \"assertion_type\": \"participates_in_event\",\n        \"subject_entity_key\": \"e0\",\n        \"value\": \"固爭立世子之事\",\n        \"evidence_ref\": \"hng02-jinshu-wikisource-punctuated-003\",\n        \"evidence_span\": \"何曾等固爭曰\",\n        \"confidence\": \"high\"\n      }\n    ]\n  },\n  \"semantic_assessment\": {\n    \"assessment_status\": \"assessed\",\n    \"semantic_fit\": \"unknown\",\n    \"observed_role\": \"event_participant\",\n    \"evidence_spans\": [\n      {\n        \"ref\": \"hng02-jinshu-wikisource-punctuated-003\",\n        \"span\": \"何曾等固爭曰\"\n      }\n    ],\n    \"summary\": \"The surface '何曾' appears as a named person in the narrative, participating in the event of arguing about the succession. No candidate list was provided, so identity cannot be assessed against candidates.\"\n  },\n  \"identity_recommendation\": {\n    \"decision\": \"unresolved\",\n    \"chosen_candidate_key\": null,\n    \"confidence\": \"unknown\",\n    \"reason_codes\": [\"no_candidate_provided\"],\n    \"evidence_spans\": [\n      {\n        \"ref\": \"hng02-jinshu-wikisource-punctuated-003\",\n        \"span\": \"何曾等固爭曰\"\n      }\n    ],\n    \"new_entity_candidate\": null,\n    \"new_entity_key\": null,\n    \"unresolved_reason\": \"No candidate keys were provided in the input, so identity cannot be resolved.\",\n    \"summary\": \"The surface is a clear named person mention, but without candidate list, identity remains unresolved.\"\n  },\n  \"research_gap\": {\n    \"status\": \"open\",\n    \"missing_constraints\": [\"identity_evidence\"],\n    \"blocking_question\": \"What source-local evidence identifies this surface?\",\n    \"next_best_action\": \"search_biography_context\",\n    \"candidate_keys\": [],\n    \"stop_condition\": \"stop when an exact or structurally explicit identity is found\"\n  }\n}",
+          "role": "assistant"
+        }
+      }
+    ],
+    "created": 1787577663,
+    "id": "02ebde95-ee3f-4997-aedf-479360c95f17",
+    "model": "deepseek-v4-flash",
+    "object": "chat.completion",
+    "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+    "usage": {
+      "completion_tokens": 656,
+      "prompt_cache_hit_tokens": 512,
+      "prompt_cache_miss_tokens": 1967,
+      "prompt_tokens": 2479,
+      "prompt_tokens_details": {
+        "cached_tokens": 512
+      },
+      "total_tokens": 3135
+    }
+  },
+  "response_channel": "content",
+  "sequence": 2,
+  "start_time": "2026-08-24T13:21:03Z",
+  "status": "response",
+  "usage": {
+    "completion_tokens": 656,
+    "prompt_cache_hit_tokens": 512,
+    "prompt_cache_miss_tokens": 1967,
+    "prompt_tokens": 2479,
+    "total_tokens": 3135
+  }
+}

@@ -1,0 +1,118 @@
+{
+  "canonical_write_back": false,
+  "case_id": "hng2-live-hng2-live-w1-temporal-7787c8e7d9f2c14fc5b5",
+  "elapsed_seconds": 3.978061,
+  "immutable": true,
+  "input_hash": "00e694ae3fdb1297c3eeffd7e00e6835ee10a6a7c520580c08ba90437494675e",
+  "kind": "semantic",
+  "model": "deepseek-v4-flash",
+  "parse_error": null,
+  "parsed": {
+    "evidence_interpretation": {
+      "assertions": [
+        {
+          "assertion_id": "a0",
+          "assertion_type": "person_mention",
+          "confidence": "high",
+          "evidence_ref": "hng02-jinshu-wikisource-punctuated-003",
+          "evidence_span": "何曾等固爭曰",
+          "subject_entity_key": "e0"
+        },
+        {
+          "assertion_id": "a1",
+          "assertion_type": "participates_in_event",
+          "confidence": "high",
+          "evidence_ref": "hng02-jinshu-wikisource-punctuated-003",
+          "evidence_span": "何曾等固爭曰",
+          "subject_entity_key": "e0",
+          "value": "固爭立世子之事"
+        }
+      ],
+      "entities": [
+        {
+          "entity_key": "e0",
+          "entity_kind": "named_person",
+          "evidence_ref": "hng02-jinshu-wikisource-punctuated-003",
+          "evidence_span": "何曾等固爭曰",
+          "reference_form": "full_name",
+          "surface": "何曾"
+        }
+      ]
+    },
+    "identity_recommendation": {
+      "chosen_candidate_key": null,
+      "confidence": "unknown",
+      "decision": "unresolved",
+      "evidence_spans": [
+        "何曾等固爭曰"
+      ],
+      "new_entity_candidate": null,
+      "new_entity_key": null,
+      "reason_codes": [
+        "no_candidate_provided"
+      ],
+      "summary": "The surface '何曾' is a clear named person, but no candidate list was given, so identity remains unresolved.",
+      "unresolved_reason": "No candidate keys were provided in the input; cannot resolve identity."
+    },
+    "research_gap": {
+      "blocking_question": "What source-local evidence identifies this surface?",
+      "candidate_keys": [],
+      "missing_constraints": [
+        "identity_evidence"
+      ],
+      "next_best_action": "search_biography_context",
+      "status": "open",
+      "stop_condition": "stop when an exact or structurally explicit identity is found"
+    },
+    "semantic_assessment": {
+      "assessment_status": "assessed",
+      "evidence_spans": [
+        "何曾等固爭曰"
+      ],
+      "observed_role": "event_participant",
+      "semantic_fit": "exact",
+      "summary": "何曾 appears as a named person and active participant in the debate about establishing the heir."
+    }
+  },
+  "prompt_version": "hng2-sc-card-controller-v1",
+  "provider": "deepseek",
+  "response": {
+    "choices": [
+      {
+        "finish_reason": "stop",
+        "index": 0,
+        "logprobs": null,
+        "message": {
+          "content": "{\n  \"evidence_interpretation\": {\n    \"entities\": [\n      {\n        \"entity_key\": \"e0\",\n        \"surface\": \"何曾\",\n        \"entity_kind\": \"named_person\",\n        \"reference_form\": \"full_name\",\n        \"evidence_ref\": \"hng02-jinshu-wikisource-punctuated-003\",\n        \"evidence_span\": \"何曾等固爭曰\"\n      }\n    ],\n    \"assertions\": [\n      {\n        \"assertion_id\": \"a0\",\n        \"assertion_type\": \"person_mention\",\n        \"subject_entity_key\": \"e0\",\n        \"evidence_ref\": \"hng02-jinshu-wikisource-punctuated-003\",\n        \"evidence_span\": \"何曾等固爭曰\",\n        \"confidence\": \"high\"\n      },\n      {\n        \"assertion_id\": \"a1\",\n        \"assertion_type\": \"participates_in_event\",\n        \"subject_entity_key\": \"e0\",\n        \"value\": \"固爭立世子之事\",\n        \"evidence_ref\": \"hng02-jinshu-wikisource-punctuated-003\",\n        \"evidence_span\": \"何曾等固爭曰\",\n        \"confidence\": \"high\"\n      }\n    ]\n  },\n  \"semantic_assessment\": {\n    \"assessment_status\": \"assessed\",\n    \"semantic_fit\": \"exact\",\n    \"observed_role\": \"event_participant\",\n    \"evidence_spans\": [\"何曾等固爭曰\"],\n    \"summary\": \"何曾 appears as a named person and active participant in the debate about establishing the heir.\"\n  },\n  \"identity_recommendation\": {\n    \"decision\": \"unresolved\",\n    \"chosen_candidate_key\": null,\n    \"confidence\": \"unknown\",\n    \"reason_codes\": [\"no_candidate_provided\"],\n    \"evidence_spans\": [\"何曾等固爭曰\"],\n    \"new_entity_candidate\": null,\n    \"new_entity_key\": null,\n    \"unresolved_reason\": \"No candidate keys were provided in the input; cannot resolve identity.\",\n    \"summary\": \"The surface '何曾' is a clear named person, but no candidate list was given, so identity remains unresolved.\"\n  },\n  \"research_gap\": {\n    \"status\": \"open\",\n    \"missing_constraints\": [\"identity_evidence\"],\n    \"blocking_question\": \"What source-local evidence identifies this surface?\",\n    \"next_best_action\": \"search_biography_context\",\n    \"candidate_keys\": [],\n    \"stop_condition\": \"stop when an exact or structurally explicit identity is found\"\n  }\n}",
+          "role": "assistant"
+        }
+      }
+    ],
+    "created": 1787577525,
+    "id": "84592de5-15e9-4f6a-89f1-491c3f8d7416",
+    "model": "deepseek-v4-flash",
+    "object": "chat.completion",
+    "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+    "usage": {
+      "completion_tokens": 574,
+      "prompt_cache_hit_tokens": 0,
+      "prompt_cache_miss_tokens": 2339,
+      "prompt_tokens": 2339,
+      "prompt_tokens_details": {
+        "cached_tokens": 0
+      },
+      "total_tokens": 2913
+    }
+  },
+  "response_channel": "content",
+  "sequence": 2,
+  "start_time": "2026-08-24T13:18:45Z",
+  "status": "response",
+  "usage": {
+    "completion_tokens": 574,
+    "prompt_cache_hit_tokens": 0,
+    "prompt_cache_miss_tokens": 2339,
+    "prompt_tokens": 2339,
+    "total_tokens": 2913
+  }
+}

@@ -1,0 +1,136 @@
+{
+  "canonical_write_back": false,
+  "case_id": "hng2-hng02-relation-53df6f655bff9d79d0c5",
+  "elapsed_seconds": 5.165104,
+  "immutable": true,
+  "input_hash": "f3c99ba33bf1f608aa1e83bdc0d1fb8215234f82a6cd0e9f40dd72aa5a5791e2",
+  "kind": "semantic",
+  "model": "deepseek-v4-flash",
+  "parse_error": null,
+  "parsed": {
+    "evidence_interpretation": {
+      "assertions": [
+        {
+          "assertion_id": "a0",
+          "assertion_type": "office_held_by",
+          "confidence": "high",
+          "evidence_ref": "hng02-zizhi-tongjian-wikisource-hu-162",
+          "evidence_span": "湘州刺史河東王譽",
+          "subject_entity_key": "e0",
+          "value": "湘州刺史"
+        },
+        {
+          "assertion_id": "a1",
+          "assertion_type": "title_of",
+          "confidence": "high",
+          "evidence_ref": "hng02-zizhi-tongjian-wikisource-hu-162",
+          "evidence_span": "河東王譽",
+          "subject_entity_key": "e0",
+          "value": "河東王"
+        },
+        {
+          "assertion_id": "a2",
+          "assertion_type": "participates_in_event",
+          "confidence": "high",
+          "evidence_ref": "hng02-zizhi-tongjian-wikisource-hu-162",
+          "evidence_span": "譽軍於青草湖",
+          "subject_entity_key": "e0",
+          "value": "軍於青草湖"
+        }
+      ],
+      "entities": [
+        {
+          "entity_key": "e0",
+          "entity_kind": "abbreviated_name",
+          "evidence_ref": "hng02-zizhi-tongjian-wikisource-hu-162",
+          "evidence_span": "湘州刺史河東王譽軍於青草湖",
+          "reference_form": "abbreviated",
+          "surface": "譽"
+        }
+      ]
+    },
+    "identity_recommendation": {
+      "chosen_candidate_key": null,
+      "confidence": "unknown",
+      "decision": "unresolved",
+      "evidence_spans": [
+        {
+          "ref": "hng02-zizhi-tongjian-wikisource-hu-162",
+          "span": "湘州刺史河東王譽軍於青草湖"
+        }
+      ],
+      "new_entity_candidate": null,
+      "new_entity_key": null,
+      "reason_codes": [
+        "no_candidate_list",
+        "insufficient_identity_evidence"
+      ],
+      "summary": "The surface '譽' is an abbreviated reference to a person with title 河東王 and office 湘州刺史. No candidates were supplied, so identity remains unresolved.",
+      "unresolved_reason": "No candidate keys provided; the surface is an abbreviated name with title and office, but identity cannot be resolved without external knowledge."
+    },
+    "research_gap": {
+      "blocking_question": "What source-local evidence identifies this surface?",
+      "candidate_keys": [],
+      "missing_constraints": [
+        "identity_evidence",
+        "candidate_list"
+      ],
+      "next_best_action": "search_biography_context",
+      "status": "open",
+      "stop_condition": "stop when an exact or structurally explicit identity is found"
+    },
+    "semantic_assessment": {
+      "assessment_status": "assessed",
+      "evidence_spans": [
+        {
+          "ref": "hng02-zizhi-tongjian-wikisource-hu-162",
+          "span": "湘州刺史河東王譽軍於青草湖"
+        }
+      ],
+      "observed_role": "referenced_person",
+      "semantic_fit": "unknown",
+      "summary": "The surface '譽' is an abbreviated form referring to a person titled 河東王 and holding office 湘州刺史, participating in the event of stationing troops at 青草湖. No candidate list provided, so identity cannot be determined."
+    }
+  },
+  "prompt_version": "hng2-sc-card-controller-v1",
+  "provider": "deepseek",
+  "response": {
+    "choices": [
+      {
+        "finish_reason": "stop",
+        "index": 0,
+        "logprobs": null,
+        "message": {
+          "content": "{\n  \"evidence_interpretation\": {\n    \"entities\": [\n      {\n        \"entity_key\": \"e0\",\n        \"surface\": \"譽\",\n        \"entity_kind\": \"abbreviated_name\",\n        \"reference_form\": \"abbreviated\",\n        \"evidence_ref\": \"hng02-zizhi-tongjian-wikisource-hu-162\",\n        \"evidence_span\": \"湘州刺史河東王譽軍於青草湖\"\n      }\n    ],\n    \"assertions\": [\n      {\n        \"assertion_id\": \"a0\",\n        \"assertion_type\": \"office_held_by\",\n        \"subject_entity_key\": \"e0\",\n        \"value\": \"湘州刺史\",\n        \"evidence_ref\": \"hng02-zizhi-tongjian-wikisource-hu-162\",\n        \"evidence_span\": \"湘州刺史河東王譽\",\n        \"confidence\": \"high\"\n      },\n      {\n        \"assertion_id\": \"a1\",\n        \"assertion_type\": \"title_of\",\n        \"subject_entity_key\": \"e0\",\n        \"value\": \"河東王\",\n        \"evidence_ref\": \"hng02-zizhi-tongjian-wikisource-hu-162\",\n        \"evidence_span\": \"河東王譽\",\n        \"confidence\": \"high\"\n      },\n      {\n        \"assertion_id\": \"a2\",\n        \"assertion_type\": \"participates_in_event\",\n        \"subject_entity_key\": \"e0\",\n        \"value\": \"軍於青草湖\",\n        \"evidence_ref\": \"hng02-zizhi-tongjian-wikisource-hu-162\",\n        \"evidence_span\": \"譽軍於青草湖\",\n        \"confidence\": \"high\"\n      }\n    ]\n  },\n  \"semantic_assessment\": {\n    \"assessment_status\": \"assessed\",\n    \"semantic_fit\": \"unknown\",\n    \"observed_role\": \"referenced_person\",\n    \"evidence_spans\": [\n      {\n        \"ref\": \"hng02-zizhi-tongjian-wikisource-hu-162\",\n        \"span\": \"湘州刺史河東王譽軍於青草湖\"\n      }\n    ],\n    \"summary\": \"The surface '譽' is an abbreviated form referring to a person titled 河東王 and holding office 湘州刺史, participating in the event of stationing troops at 青草湖. No candidate list provided, so identity cannot be determined.\"\n  },\n  \"identity_recommendation\": {\n    \"decision\": \"unresolved\",\n    \"chosen_candidate_key\": null,\n    \"confidence\": \"unknown\",\n    \"reason_codes\": [\"no_candidate_list\", \"insufficient_identity_evidence\"],\n    \"evidence_spans\": [\n      {\n        \"ref\": \"hng02-zizhi-tongjian-wikisource-hu-162\",\n        \"span\": \"湘州刺史河東王譽軍於青草湖\"\n      }\n    ],\n    \"new_entity_candidate\": null,\n    \"new_entity_key\": null,\n    \"unresolved_reason\": \"No candidate keys provided; the surface is an abbreviated name with title and office, but identity cannot be resolved without external knowledge.\",\n    \"summary\": \"The surface '譽' is an abbreviated reference to a person with title 河東王 and office 湘州刺史. No candidates were supplied, so identity remains unresolved.\"\n  },\n  \"research_gap\": {\n    \"status\": \"open\",\n    \"missing_constraints\": [\"identity_evidence\", \"candidate_list\"],\n    \"blocking_question\": \"What source-local evidence identifies this surface?\",\n    \"next_best_action\": \"search_biography_context\",\n    \"candidate_keys\": [],\n    \"stop_condition\": \"stop when an exact or structurally explicit identity is found\"\n  }\n}",
+          "role": "assistant"
+        }
+      }
+    ],
+    "created": 1787577710,
+    "id": "59020cd7-657b-43f4-8946-e550551e8ae3",
+    "model": "deepseek-v4-flash",
+    "object": "chat.completion",
+    "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+    "usage": {
+      "completion_tokens": 814,
+      "prompt_cache_hit_tokens": 768,
+      "prompt_cache_miss_tokens": 1907,
+      "prompt_tokens": 2675,
+      "prompt_tokens_details": {
+        "cached_tokens": 768
+      },
+      "total_tokens": 3489
+    }
+  },
+  "response_channel": "content",
+  "sequence": 11,
+  "start_time": "2026-08-24T13:21:50Z",
+  "status": "response",
+  "usage": {
+    "completion_tokens": 814,
+    "prompt_cache_hit_tokens": 768,
+    "prompt_cache_miss_tokens": 1907,
+    "prompt_tokens": 2675,
+    "total_tokens": 3489
+  }
+}
