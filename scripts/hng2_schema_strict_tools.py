@@ -146,6 +146,88 @@ ASSERTION_TYPE_LABELS = {
     "person_mention": "原文明确提及人物，但没有更具体关系可抽取",
 }
 
+# The current semantic extraction pass deliberately has a smaller wire
+# contract than the original controller card.  Keep this list local to the
+# wire contract: the broader Schema V1 assertion vocabulary is still used by
+# older replay artifacts and by Python-side projections.
+SMALL_ASSERTION_TYPES = {
+    "identity_equivalence",
+    "alias_of",
+    "courtesy_name_of",
+    "title_of",
+    "parent_child",
+    "sibling",
+    "kinship_relation",
+    "person_mention",
+}
+
+SMALL_ASSERTION_TYPE_LABELS = {
+    "identity_equivalence": "原文明确表明两个实体表达指同一人物；主体和客体是两个局部表达",
+    "alias_of": "原文明确表明主体是客体的别名或异称；两者指同一人物",
+    "courtesy_name_of": "原文明确表明主体是客体的字或字号；主体是字号表达，客体是人物表达",
+    "title_of": "原文明确表明主体的帝王、爵号、尊号等称号属于客体人物；主体是称号，客体是人物",
+    "parent_child": "原文明确表明主体与客体存在父母—子女关系；方向按原文关系填写",
+    "sibling": "原文明确表明主体与客体是兄弟姊妹；两者都是人物实体",
+    "kinship_relation": "原文明确表明其他亲属关系，但不能精确归入父子或兄弟；主体和客体是亲属链中的实体",
+    "person_mention": "原文明确提及主体人物，但没有足够文字支持更具体的实体关系；不凭共现添加关系",
+}
+
+
+def small_evidence_entity_schema() -> dict[str, Any]:
+    return _object(
+        {
+            "entity_key": _string("本次回答内部的局部实体编号，如 e0、e1；它不是 Person ID、candidate key 或 graph ID。"),
+            "surface": _string("史料中实际出现、需要解释的最小文字形式；只填写当前目标或理解当前目标所必需的上下文实体。"),
+            "entity_kind": _enum(schema.ENTITY_KINDS, "该表达在当前语境中的人物语义类别，不是数据库身份决定。", ENTITY_KIND_LABELS),
+            "reference_form": _enum(schema.REFERENCE_FORMS, "该表达通过什么语言形式指向人物；这是语言形式，不是最终身份判断。", REFERENCE_FORM_LABELS),
+            "evidence_refs": _array(_string("逐字复制系统提供的 source passage ref；不得自行生成或写入 Person ID。"), "包含该实体原文的输入 passage ref 列表。"),
+        },
+        "解决当前目标所必需的实体表达。实体字段只记录史料文字层观察，不作数据库身份决定。",
+    )
+
+
+def small_evidence_assertion_schema() -> dict[str, Any]:
+    return _object(
+        {
+            "assertion_id": _string("本次回答内部的局部断言编号，如 a0、a1；它不是 relation ID 或 graph ID。"),
+            "assertion_type": _enum(SMALL_ASSERTION_TYPES, "原文直接支持的最小实体断言。", SMALL_ASSERTION_TYPE_LABELS),
+            "subject_entity_key": _string("断言主体，必须引用 entities 中已声明的 eN。其语义取决于 assertion_type 的 subject 定义。"),
+            "object_entity_key": _nullable_wire_string("涉及第二实体时填写 entities 中已有的 eN；没有第二实体时填写空字符串。"),
+            "evidence_refs": _array(_string("逐字复制系统提供的 source passage ref；每个 ref 必须直接支持本断言。"), "直接支持本断言的输入 passage ref 列表；不复制长引文。"),
+            "confidence": _enum(schema.CONFIDENCE_LEVELS, "模型对原文是否明确表达该断言的信心，不是数据库最终事实真实性。", CONFIDENCE_LABELS),
+        },
+        "只记录由输入原文直接支持的最小断言。evidence_refs 是出处指针；Python 负责验证、匹配和生成约束。",
+    )
+
+
+def small_card_parameters_schema() -> dict[str, Any]:
+    return _object(
+        {
+            "target_entity_key": _string("当前 ResearchGap 的目标表达对应的 EvidenceEntity 局部编号，通常为 e0；必须指向 entities 中已声明的目标实体。"),
+            "entities": _array(small_evidence_entity_schema(), "只抽取解决当前目标所必需的人物、称号、简称或亲属表达；合并同一局部实体的重复指称。"),
+            "assertions": _array(small_evidence_assertion_schema(), "只填写输入史料明确支持的最小实体断言；共现本身不是关系。"),
+            "note": _string("供人工审核的简短阅读备注。它不是结构化证据，Python 绝不使用它控制候选、约束、IdentityDecision 或 ResearchGap。"),
+        },
+        "这是小型 Historical Evidence Card。它记录模型从给定史料中直接读出的最小文字证据，而不是数据库事实、身份决定或图谱动作。模型不创建任何数据库 ID。",
+    )
+
+
+def small_card_function_definition() -> dict[str, Any]:
+    return {
+        "type": "function",
+        "function": {
+            "name": FUNCTION_NAME,
+            "description": "提交当前目标所需的最小 Historical Evidence Card；只记录输入原文直接支持的实体与断言，不作数据库决定。",
+            "strict": True,
+            "parameters": small_card_parameters_schema(),
+        },
+    }
+
+
+def small_card_schema_hash() -> str:
+    raw = json.dumps(small_card_parameters_schema(), ensure_ascii=False, sort_keys=True, separators=(",", ":")).encode("utf-8")
+    return hashlib.sha256(raw).hexdigest()
+
 
 def evidence_span_schema() -> dict[str, Any]:
     return _object(
@@ -272,7 +354,7 @@ def card_parameters_schema() -> dict[str, Any]:
     )
 
 
-def strict_function_definition() -> dict[str, Any]:
+def legacy_strict_function_definition() -> dict[str, Any]:
     return {
         "type": "function",
         "function": {
@@ -282,6 +364,16 @@ def strict_function_definition() -> dict[str, Any]:
             "parameters": card_parameters_schema(),
         },
     }
+
+
+def strict_function_definition() -> dict[str, Any]:
+    """Return the current small semantic card function.
+
+    The previous large card remains available explicitly as
+    ``legacy_strict_function_definition`` for immutable replay compatibility.
+    """
+
+    return small_card_function_definition()
 
 
 def strict_tool_choice() -> dict[str, Any]:
@@ -341,12 +433,63 @@ def controller_payload_to_wire(payload: Any) -> Any:
     return result
 
 
+def small_card_to_controller_card(payload: Any) -> Any:
+    """Convert the small strict wire card to the controller's legacy card shape.
+
+    This is a transport adapter only.  It does not add a recommendation,
+    ResearchGap, candidate key, or evidence span.  The small-card controller
+    projection creates those Python-owned values after validation.
+    """
+
+    if not isinstance(payload, Mapping):
+        return payload
+    card = {
+        "target_entity_key": str(payload.get("target_entity_key") or "") or None,
+        "entities": [],
+        "assertions": [],
+        "summary": str(payload.get("note") or ""),
+    }
+    for row in payload.get("entities", []) if isinstance(payload.get("entities"), list) else []:
+        if not isinstance(row, Mapping):
+            continue
+        refs = [str(ref).strip() for ref in row.get("evidence_refs", []) if str(ref).strip()] if isinstance(row.get("evidence_refs"), list) else []
+        card["entities"].append({
+            "entity_key": str(row.get("entity_key") or ""),
+            "surface": str(row.get("surface") or ""),
+            "entity_kind": str(row.get("entity_kind") or ""),
+            "reference_form": str(row.get("reference_form") or ""),
+            "evidence_ref": refs[0] if refs else "",
+            "evidence_refs": refs,
+            "evidence_span": "",
+        })
+    for row in payload.get("assertions", []) if isinstance(payload.get("assertions"), list) else []:
+        if not isinstance(row, Mapping):
+            continue
+        refs = [str(ref).strip() for ref in row.get("evidence_refs", []) if str(ref).strip()] if isinstance(row.get("evidence_refs"), list) else []
+        object_key = str(row.get("object_entity_key") or "") or None
+        card["assertions"].append({
+            "assertion_id": str(row.get("assertion_id") or ""),
+            "assertion_type": str(row.get("assertion_type") or ""),
+            "subject_entity_key": str(row.get("subject_entity_key") or ""),
+            "object_entity_key": object_key,
+            "value": None,
+            "direction": None,
+            "evidence_ref": refs[0] if refs else "",
+            "evidence_refs": refs,
+            "evidence_span": "",
+            "confidence": str(row.get("confidence") or ""),
+        })
+    return card
+
+
 def schema_hash() -> str:
     raw = json.dumps(card_parameters_schema(), ensure_ascii=False, sort_keys=True, separators=(",", ":")).encode("utf-8")
     return hashlib.sha256(raw).hexdigest()
 
 
 __all__ = [
-    "FUNCTION_NAME", "STRICT_ENDPOINT", "STRICT_COMPLETIONS_ENDPOINT", "card_parameters_schema", "strict_function_definition",
-    "strict_tool_choice", "wire_to_controller_payload", "controller_payload_to_wire", "schema_hash",
+    "FUNCTION_NAME", "STRICT_ENDPOINT", "STRICT_COMPLETIONS_ENDPOINT", "card_parameters_schema", "legacy_strict_function_definition", "strict_function_definition",
+    "strict_tool_choice", "wire_to_controller_payload", "controller_payload_to_wire", "small_evidence_entity_schema",
+    "small_evidence_assertion_schema", "small_card_parameters_schema", "small_card_function_definition",
+    "small_card_schema_hash", "small_card_to_controller_card", "SMALL_ASSERTION_TYPES", "schema_hash",
 ]

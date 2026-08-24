@@ -1,0 +1,68 @@
+{
+  "canonical_write_back": false,
+  "case_id": "hng1r2-hng1-raw-relation-2ff2066d8872cbae15f7",
+  "elapsed_seconds": 4.204537,
+  "endpoint": "https://api.deepseek.com/beta/chat/completions",
+  "finish_reason": "tool_calls",
+  "immutable": true,
+  "input_hash": "010b45605bb713ede7609fea079b532894183e4dceb1d29189b9bf30e87c88cd",
+  "kind": "semantic",
+  "model": "deepseek-v4-flash",
+  "parse_error": null,
+  "preflight": false,
+  "prompt_version": "hng2-sc1-small-evidence-card-v1",
+  "provider": "deepseek",
+  "response": {
+    "choices": [
+      {
+        "finish_reason": "tool_calls",
+        "index": 0,
+        "logprobs": null,
+        "message": {
+          "content": "",
+          "role": "assistant",
+          "tool_calls": [
+            {
+              "function": {
+                "arguments": "{\"target_entity_key\": \"e0\", \"entities\": [{\"entity_key\": \"e0\", \"surface\": \"庾太尉\", \"entity_kind\": \"person_office_title\", \"reference_form\": \"office_title_only\", \"evidence_refs\": [\"hng01-shishuo-07-shijian-016-main\"]}, {\"entity_key\": \"e1\", \"surface\": \"庾\", \"entity_kind\": \"abbreviated_name\", \"reference_form\": \"abbreviated\", \"evidence_refs\": [\"hng01-shishuo-07-shijian-016-main\"]}, {\"entity_key\": \"e2\", \"surface\": \"孟嘉\", \"entity_kind\": \"named_person\", \"reference_form\": \"full_name\", \"evidence_refs\": [\"hng01-shishuo-07-shijian-016-main\"]}, {\"entity_key\": \"e3\", \"surface\": \"禇太傅\", \"entity_kind\": \"person_office_title\", \"reference_form\": \"office_title_only\", \"evidence_refs\": [\"hng01-shishuo-07-shijian-016-main\"]}, {\"entity_key\": \"e4\", \"surface\": \"孟從事\", \"entity_kind\": \"person_office_title\", \"reference_form\": \"office_title_only\", \"evidence_refs\": [\"hng01-shishuo-07-shijian-016-main\"]}], \"assertions\": [{\"assertion_id\": \"a0\", \"assertion_type\": \"identity_equivalence\", \"subject_entity_key\": \"e0\", \"object_entity_key\": \"e1\", \"evidence_refs\": [\"hng01-shishuo-07-shijian-016-main\"], \"confidence\": \"high\"}, {\"assertion_id\": \"a1\", \"assertion_type\": \"person_mention\", \"subject_entity_key\": \"e2\", \"object_entity_key\": \"\", \"evidence_refs\": [\"hng01-shishuo-07-shijian-016-main\"], \"confidence\": \"high\"}, {\"assertion_id\": \"a2\", \"assertion_type\": \"person_mention\", \"subject_entity_key\": \"e3\", \"object_entity_key\": \"\", \"evidence_refs\": [\"hng01-shishuo-07-shijian-016-main\"], \"confidence\": \"high\"}, {\"assertion_id\": \"a3\", \"assertion_type\": \"person_mention\", \"subject_entity_key\": \"e4\", \"object_entity_key\": \"\", \"evidence_refs\": [\"hng01-shishuo-07-shijian-016-main\"], \"confidence\": \"high\"}], \"note\": \"庾太尉（e0）与后文\\\"庾\\\"（e1）在原文中同指一人（庾云/庾大笑），故建立 identity_equivalence。孟嘉、禇太傅、孟從事为理解语境所需的最小上下文实体。原文未明确庾太尉的具体姓名，仅以官职称谓指人。\"}",
+                "name": "submit_historical_entity_card"
+              },
+              "id": "call_00_fvB3q13ryBS8B3XERUiP4368",
+              "index": 0,
+              "type": "function"
+            }
+          ]
+        }
+      }
+    ],
+    "created": 1787589780,
+    "id": "0ada4e51-09d8-4f42-b360-f5d282e849b1",
+    "model": "deepseek-v4-flash",
+    "object": "chat.completion",
+    "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+    "usage": {
+      "completion_tokens": 712,
+      "prompt_cache_hit_tokens": 0,
+      "prompt_cache_miss_tokens": 2545,
+      "prompt_tokens": 2545,
+      "prompt_tokens_details": {
+        "cached_tokens": 0
+      },
+      "total_tokens": 3257
+    }
+  },
+  "response_channel": "tool_call",
+  "sequence": 2,
+  "start_time": "2026-08-24T16:43:00Z",
+  "status": "response",
+  "strict_function": true,
+  "tool_call_count": 1,
+  "tool_name": "submit_historical_entity_card",
+  "usage": {
+    "completion_tokens": 712,
+    "prompt_cache_hit_tokens": 0,
+    "prompt_cache_miss_tokens": 2545,
+    "prompt_tokens": 2545,
+    "total_tokens": 3257
+  }
+}

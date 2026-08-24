@@ -463,7 +463,7 @@ def call_live_record(kind: str, case_id: str, payload: Mapping[str, Any], raw_di
             # The prompt asks for at most six entities/eight assertions.  A
             # modest 2400-token ceiling keeps a long but bounded strict card
             # from being cut off; it does not change the semantic contract.
-            response = call_deepseek(messages, model=MODEL, temperature=0, tools=[strict_tools.strict_function_definition()], tool_choice=strict_tools.strict_tool_choice(), thinking={"type": "disabled"}, max_tokens=2400, timeout=180, endpoint=STRICT_ENDPOINT)
+            response = call_deepseek(messages, model=MODEL, temperature=0, tools=[strict_tools.legacy_strict_function_definition()], tool_choice=strict_tools.strict_tool_choice(), thinking={"type": "disabled"}, max_tokens=2400, timeout=180, endpoint=STRICT_ENDPOINT)
         else:
             response = call_deepseek(messages, model=MODEL, temperature=0, response_format={"type": "json_object"}, tools=[], thinking={"type": "disabled"}, max_tokens=700, timeout=180)
         record.update({"status": "response", "response": response, "usage": usage_from(response), "finish_reason": finish_reason(response)})

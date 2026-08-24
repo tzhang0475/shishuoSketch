@@ -1,0 +1,68 @@
+{
+  "canonical_write_back": false,
+  "case_id": "hng1r2-hng1-raw-relation-921d528c3cf9154fa43c",
+  "elapsed_seconds": 4.096488,
+  "endpoint": "https://api.deepseek.com/beta/chat/completions",
+  "finish_reason": "tool_calls",
+  "immutable": true,
+  "input_hash": "f794af08088f9989f428ad6586e031e79d33070b335968f840f74932944500d2",
+  "kind": "semantic",
+  "model": "deepseek-v4-flash",
+  "parse_error": null,
+  "preflight": false,
+  "prompt_version": "hng2-sc1-small-evidence-card-v1",
+  "provider": "deepseek",
+  "response": {
+    "choices": [
+      {
+        "finish_reason": "tool_calls",
+        "index": 0,
+        "logprobs": null,
+        "message": {
+          "content": "",
+          "role": "assistant",
+          "tool_calls": [
+            {
+              "function": {
+                "arguments": "{\"target_entity_key\": \"e0\", \"entities\": [{\"entity_key\": \"e0\", \"surface\": \"廙\", \"entity_kind\": \"named_person\", \"reference_form\": \"full_name\", \"evidence_refs\": [\"hng02-zizhi-tongjian-wikisource-hu-090\"], \"description\": \"原文中多次出现的'廙'，指王廙（王敦之弟），如'鄭攀等相與拒王廙'、'廙將赴荊州'、'王廙始得至荊州'等。\"}, {\"entity_key\": \"e1\", \"surface\": \"王廙\", \"entity_kind\": \"named_person\", \"reference_form\": \"full_name\", \"evidence_refs\": [\"hng02-zizhi-tongjian-wikisource-hu-090\"], \"description\": \"原文明确写作'王廙'，与'廙'指同一人。\"}], \"assertions\": [{\"assertion_id\": \"a0\", \"assertion_type\": \"identity_equivalence\", \"subject_entity_key\": \"e0\", \"object_entity_key\": \"e1\", \"evidence_refs\": [\"hng02-zizhi-tongjian-wikisource-hu-090\"], \"confidence\": \"high\"}, {\"assertion_id\": \"a1\", \"assertion_type\": \"person_mention\", \"subject_entity_key\": \"e1\", \"object_entity_key\": \"\", \"evidence_refs\": [\"hng02-zizhi-tongjian-wikisource-hu-090\"], \"confidence\": \"high\"}], \"note\": \"目标'廙'在原文中为单字简称，指王廙。原文多处出现'廙'（如'鄭攀等相與拒王廙'、'廙將赴荊州'、'廙性矜厲自用'、'王廙始得至荊州'），且明确有'王廙'全称，故'廙'与'王廙'为同一人物。王廙为王敦之弟（'王敦遣武昌太守趙誘'等上下文），但原文未直接明示兄弟关系，故不作sibling断言。\"}",
+                "name": "submit_historical_entity_card"
+              },
+              "id": "call_00_mhbhtDYRxpU6vW5Q65Vn4737",
+              "index": 0,
+              "type": "function"
+            }
+          ]
+        }
+      }
+    ],
+    "created": 1787589788,
+    "id": "14111136-97da-4e15-a466-2ba833425812",
+    "model": "deepseek-v4-flash",
+    "object": "chat.completion",
+    "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+    "usage": {
+      "completion_tokens": 554,
+      "prompt_cache_hit_tokens": 1792,
+      "prompt_cache_miss_tokens": 16274,
+      "prompt_tokens": 18066,
+      "prompt_tokens_details": {
+        "cached_tokens": 1792
+      },
+      "total_tokens": 18620
+    }
+  },
+  "response_channel": "tool_call",
+  "sequence": 4,
+  "start_time": "2026-08-24T16:43:08Z",
+  "status": "response",
+  "strict_function": true,
+  "tool_call_count": 1,
+  "tool_name": "submit_historical_entity_card",
+  "usage": {
+    "completion_tokens": 554,
+    "prompt_cache_hit_tokens": 1792,
+    "prompt_cache_miss_tokens": 16274,
+    "prompt_tokens": 18066,
+    "total_tokens": 18620
+  }
+}

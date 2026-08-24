@@ -1,0 +1,68 @@
+{
+  "canonical_write_back": false,
+  "case_id": "hng1r2-hng1-raw-relation-b97bdeb3fbec092978bc",
+  "elapsed_seconds": 3.178485,
+  "endpoint": "https://api.deepseek.com/beta/chat/completions",
+  "finish_reason": "tool_calls",
+  "immutable": true,
+  "input_hash": "fc3889019bb4c5b81cf33d32fd1c992778e7ffce1e5d89cdd1f21c77c98444ad",
+  "kind": "semantic",
+  "model": "deepseek-v4-flash",
+  "parse_error": null,
+  "preflight": false,
+  "prompt_version": "hng2-sc1-small-evidence-card-v1",
+  "provider": "deepseek",
+  "response": {
+    "choices": [
+      {
+        "finish_reason": "tool_calls",
+        "index": 0,
+        "logprobs": null,
+        "message": {
+          "content": "",
+          "role": "assistant",
+          "tool_calls": [
+            {
+              "function": {
+                "arguments": "{\"target_entity_key\": \"e0\", \"entities\": [{\"entity_key\": \"e0\", \"surface\": \"虞喜\", \"entity_kind\": \"named_person\", \"reference_form\": \"full_name\", \"evidence_refs\": [\"hng01-jinshu-088-liezhuan-007\"]}, {\"entity_key\": \"e1\", \"surface\": \"喜弟預\", \"entity_kind\": \"structural_kinship_expression\", \"reference_form\": \"kinship_plus_name\", \"evidence_refs\": [\"hng01-jinshu-088-liezhuan-007\"]}, {\"entity_key\": \"e2\", \"surface\": \"喜\", \"entity_kind\": \"abbreviated_name\", \"reference_form\": \"abbreviated\", \"evidence_refs\": [\"hng01-jinshu-088-liezhuan-007\"]}], \"assertions\": [{\"assertion_id\": \"a0\", \"assertion_type\": \"person_mention\", \"subject_entity_key\": \"e0\", \"object_entity_key\": \"\", \"evidence_refs\": [\"hng01-jinshu-088-liezhuan-007\"], \"confidence\": \"high\"}, {\"assertion_id\": \"a1\", \"assertion_type\": \"identity_equivalence\", \"subject_entity_key\": \"e2\", \"object_entity_key\": \"e0\", \"evidence_refs\": [\"hng01-jinshu-088-liezhuan-007\"], \"confidence\": \"high\"}, {\"assertion_id\": \"a2\", \"assertion_type\": \"kinship_relation\", \"subject_entity_key\": \"e1\", \"object_entity_key\": \"e0\", \"evidence_refs\": [\"hng01-jinshu-088-liezhuan-007\"], \"confidence\": \"high\"}], \"note\": \"原文「會稽虞喜隱居海嵎有高世之風晷欽其徳娉喜弟預女為妻」明確提及虞喜，並以「喜」簡稱指代同一人；「喜弟預」為虞喜之弟，屬兄弟關係（structural kinship expression）。\"}",
+                "name": "submit_historical_entity_card"
+              },
+              "id": "call_00_l7urh5uHleqaBelwSQcg6420",
+              "index": 0,
+              "type": "function"
+            }
+          ]
+        }
+      }
+    ],
+    "created": 1787589795,
+    "id": "1a1afebf-3210-4f98-a33d-cf019799c0f6",
+    "model": "deepseek-v4-flash",
+    "object": "chat.completion",
+    "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+    "usage": {
+      "completion_tokens": 530,
+      "prompt_cache_hit_tokens": 1792,
+      "prompt_cache_miss_tokens": 1360,
+      "prompt_tokens": 3152,
+      "prompt_tokens_details": {
+        "cached_tokens": 1792
+      },
+      "total_tokens": 3682
+    }
+  },
+  "response_channel": "tool_call",
+  "sequence": 6,
+  "start_time": "2026-08-24T16:43:15Z",
+  "status": "response",
+  "strict_function": true,
+  "tool_call_count": 1,
+  "tool_name": "submit_historical_entity_card",
+  "usage": {
+    "completion_tokens": 530,
+    "prompt_cache_hit_tokens": 1792,
+    "prompt_cache_miss_tokens": 1360,
+    "prompt_tokens": 3152,
+    "total_tokens": 3682
+  }
+}

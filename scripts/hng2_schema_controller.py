@@ -24,6 +24,11 @@ from hng0_1_common import quote_matches, stable_hash
 CARD_TOP_FIELDS = {
     "evidence_interpretation", "semantic_assessment", "identity_recommendation", "research_gap",
 }
+SMALL_CARD_TOP_FIELDS = {"target_entity_key", "entities", "assertions", "note"}
+SMALL_ASSERTION_TYPES = {
+    "identity_equivalence", "alias_of", "courtesy_name_of", "title_of",
+    "parent_child", "sibling", "kinship_relation", "person_mention",
+}
 SEMANTIC_FIELDS = {
     "assessment_status", "semantic_fit", "observed_role", "evidence_spans", "summary",
 }
@@ -344,6 +349,132 @@ def validate_card_payload(payload: Any, case: Mapping[str, Any], passages: Mappi
     }
 
 
+def validate_small_card_payload(payload: Any, case: Mapping[str, Any], passages: Mapping[str, Mapping[str, Any]], *, require_target: bool = True) -> dict[str, Any]:
+    """Validate the candidate-blind, strict small Evidence Card.
+
+    The small card has no evidence spans and no model-owned decision fields.
+    Python therefore validates only local keys, controlled semantic enums and
+    passage-ref provenance here; all identity/candidate/state projection is
+    performed later by :func:`project_small_card`.
+    """
+
+    errors: list[str] = []
+    invalid_enums: list[str] = []
+    invented_ids = _provided_ids(payload)
+    if not isinstance(payload, Mapping):
+        return {
+            "valid": False, "errors": ["payload_not_object"],
+            "invalid_enum_outputs": [], "invented_id_attempts": invented_ids,
+            "evidence_span_failures": 0, "evidence_ref_failures": 0,
+        }
+    errors.extend(f"unknown_top_field:{key}" for key in sorted(set(payload) - SMALL_CARD_TOP_FIELDS))
+    for field in SMALL_CARD_TOP_FIELDS:
+        if field not in payload:
+            errors.append(f"missing_top_field:{field}")
+    if not isinstance(payload.get("target_entity_key"), str):
+        errors.append("target_entity_key_not_string")
+    target_key = _text(payload.get("target_entity_key"))
+    if require_target and not target_key:
+        errors.append("missing_target_entity_key")
+    if target_key and not _valid_local_key(target_key, LOCAL_ENTITY_RE):
+        errors.append("target_entity_key_invalid")
+    if not isinstance(payload.get("note"), str):
+        errors.append("note_not_string")
+
+    entity_keys: set[str] = set()
+    entity_fields = {"entity_key", "surface", "entity_kind", "reference_form", "evidence_refs"}
+    entity_rows = payload.get("entities")
+    if not isinstance(entity_rows, list):
+        errors.append("entities_not_array")
+        entity_rows = []
+    for index, row in enumerate(entity_rows):
+        if not isinstance(row, Mapping):
+            errors.append(f"entity[{index}]:not_object")
+            continue
+        errors.extend(f"entity[{index}]:unknown_field:{key}" for key in sorted(set(row) - entity_fields))
+        for field in entity_fields:
+            if field not in row:
+                errors.append(f"entity[{index}]:missing_{field}")
+        key = _text(row.get("entity_key"))
+        if not _valid_local_key(key, LOCAL_ENTITY_RE):
+            errors.append(f"entity[{index}]:invalid_local_key")
+        elif key in entity_keys:
+            errors.append(f"entity[{index}]:duplicate_local_key:{key}")
+        entity_keys.add(key)
+        for field in ("surface", "entity_kind", "reference_form"):
+            if not _text(row.get(field)):
+                errors.append(f"entity[{index}]:empty_{field}")
+        if row.get("entity_kind") not in schema.ENTITY_KINDS:
+            invalid_enums.append(f"entity_kind:{row.get('entity_kind')}")
+        if row.get("reference_form") not in schema.REFERENCE_FORMS:
+            invalid_enums.append(f"reference_form:{row.get('reference_form')}")
+        refs = row.get("evidence_refs")
+        if not isinstance(refs, list) or not refs:
+            errors.append(f"entity[{index}]:evidence_refs_not_nonempty_array")
+            refs = []
+        for ref_index, ref in enumerate(refs):
+            if not isinstance(ref, str) or not _text(ref):
+                errors.append(f"entity[{index}]:evidence_ref[{ref_index}]:empty")
+            elif _text(ref) not in passages:
+                errors.append(f"entity[{index}]:evidence_ref[{ref_index}]:unknown:{_text(ref)}")
+
+    if target_key and target_key not in entity_keys:
+        errors.append("target_entity_key_not_declared")
+
+    assertion_fields = {"assertion_id", "assertion_type", "subject_entity_key", "object_entity_key", "evidence_refs", "confidence"}
+    assertion_rows = payload.get("assertions")
+    if not isinstance(assertion_rows, list):
+        errors.append("assertions_not_array")
+        assertion_rows = []
+    assertion_ids: set[str] = set()
+    for index, row in enumerate(assertion_rows):
+        if not isinstance(row, Mapping):
+            errors.append(f"assertion[{index}]:not_object")
+            continue
+        errors.extend(f"assertion[{index}]:unknown_field:{key}" for key in sorted(set(row) - assertion_fields))
+        for field in assertion_fields:
+            if field not in row:
+                errors.append(f"assertion[{index}]:missing_{field}")
+        assertion_id = _text(row.get("assertion_id"))
+        if not _valid_local_key(assertion_id, LOCAL_ASSERTION_RE):
+            errors.append(f"assertion[{index}]:invalid_local_key")
+        elif assertion_id in assertion_ids:
+            errors.append(f"assertion[{index}]:duplicate_local_key:{assertion_id}")
+        assertion_ids.add(assertion_id)
+        if row.get("assertion_type") not in SMALL_ASSERTION_TYPES:
+            invalid_enums.append(f"assertion_type:{row.get('assertion_type')}")
+        subject = _text(row.get("subject_entity_key"))
+        object_key = row.get("object_entity_key")
+        if subject not in entity_keys:
+            errors.append(f"assertion[{index}]:unknown_subject")
+        if not isinstance(object_key, str):
+            errors.append(f"assertion[{index}]:object_entity_key_not_string")
+        elif _text(object_key) and _text(object_key) not in entity_keys:
+            errors.append(f"assertion[{index}]:unknown_object")
+        refs = row.get("evidence_refs")
+        if not isinstance(refs, list) or not refs:
+            errors.append(f"assertion[{index}]:evidence_refs_not_nonempty_array")
+            refs = []
+        for ref_index, ref in enumerate(refs):
+            if not isinstance(ref, str) or not _text(ref):
+                errors.append(f"assertion[{index}]:evidence_ref[{ref_index}]:empty")
+            elif _text(ref) not in passages:
+                errors.append(f"assertion[{index}]:evidence_ref[{ref_index}]:unknown:{_text(ref)}")
+        if row.get("confidence") not in schema.CONFIDENCE_LEVELS:
+            invalid_enums.append(f"assertion_confidence:{row.get('confidence')}")
+
+    errors.extend(f"forbidden_or_invented_id:{item}" for item in invented_ids)
+    errors.extend(invalid_enums)
+    return {
+        "valid": not errors,
+        "errors": sorted(set(errors)),
+        "invalid_enum_outputs": sorted(set(invalid_enums)),
+        "invented_id_attempts": sorted(set(invented_ids)),
+        "evidence_span_failures": 0,
+        "evidence_ref_failures": sum(":unknown:" in error or ":empty" in error for error in errors if "evidence_ref" in error),
+    }
+
+
 def _source_forms(person: Mapping[str, Any]) -> list[str]:
     return resolver.catalog_forms(person)
 
@@ -462,7 +593,8 @@ def generate_candidates(case: Mapping[str, Any], card: Mapping[str, Any], passag
             continue
         if target_key not in entity_to_candidate:
             entity_to_candidate[target_key] = _text(source_row.get("candidate_key"))
-            identity_propagations.append({"assertion_id": _text(assertion.get("assertion_id")), "source_ref": _text(assertion.get("evidence_ref")), "evidence_span": _text(assertion.get("evidence_span")), "propagation_rule": _text(assertion.get("assertion_type")), "source_entity_key": source_key, "target_entity_key": target_key, "resulting_candidate_key": _text(source_row.get("candidate_key")), "resulting_person_id": _text(source_row.get("person_id"))})
+            assertion_refs = assertion.get("evidence_refs") if isinstance(assertion.get("evidence_refs"), list) else [_text(assertion.get("evidence_ref"))]
+            identity_propagations.append({"assertion_id": _text(assertion.get("assertion_id")), "source_ref": _text(assertion.get("evidence_ref")), "evidence_refs": sorted(set(_text(ref) for ref in assertion_refs if _text(ref))), "evidence_span": _text(assertion.get("evidence_span")), "propagation_rule": _text(assertion.get("assertion_type")), "source_entity_key": source_key, "target_entity_key": target_key, "resulting_candidate_key": _text(source_row.get("candidate_key")), "resulting_person_id": _text(source_row.get("person_id"))})
 
     # Final pass: create a local candidate only after all deterministic and
     # binary propagation paths have failed.
@@ -514,6 +646,8 @@ def translate_constraints(card: Mapping[str, Any], candidate_info: Mapping[str, 
         else:
             ckeys.append((subject_candidate, "subject"))
         constraint_type, status = ASSERTION_TO_CONSTRAINT.get(atype, ("source_local_context", "support"))
+        assertion_refs = assertion.get("evidence_refs") if isinstance(assertion.get("evidence_refs"), list) else [_text(assertion.get("evidence_ref"))]
+        assertion_refs = sorted(set(_text(ref) for ref in assertion_refs if _text(ref)))
         for ckey, side in ckeys:
             rows.append({
                 "constraint_type": constraint_type,
@@ -521,7 +655,7 @@ def translate_constraints(card: Mapping[str, Any], candidate_info: Mapping[str, 
                 "constraint_scope": "candidate" if ckey else "passage",
                 "status": status,
                 "computed_by": "python",
-                "evidence_refs": [_text(assertion.get("evidence_ref"))],
+                "evidence_refs": assertion_refs,
                 "evidence_span": _text(assertion.get("evidence_span")),
                 "assertion_id": assertion_id,
                 "independent": True,
@@ -715,6 +849,54 @@ def project_valid_card(case: Mapping[str, Any], payload: Mapping[str, Any], pass
     return {"card": card, "candidates": candidates, "candidate_info": candidate_info, "constraints": constraints, "recommendation": dict(recommendation), "research_gap": gap, "identity_decision": decision, "graph_action": action, "state_delta": delta, "supporting_refs": refs}
 
 
+def _small_python_recommendation(card: Mapping[str, Any], candidates: Sequence[Mapping[str, Any]], candidate_info: Mapping[str, Any]) -> dict[str, Any]:
+    """Create the identity recommendation owned by Python after a small card.
+
+    The model does not receive candidates and cannot make this decision.  The
+    recommendation is a compact internal bridge so the established decision
+    and ResearchGap projections can be reused without treating ``note`` as
+    machine semantics.
+    """
+
+    target_key = _text(card.get("target_entity_key"))
+    entities = [row for row in card.get("entities", []) if isinstance(row, Mapping)] if isinstance(card.get("entities"), list) else []
+    target = next((row for row in entities if _text(row.get("entity_key")) == target_key), None)
+    kind = _text((target or {}).get("entity_kind"))
+    surface = _text((target or {}).get("surface"))
+    entity_map = candidate_info.get("entity_to_candidate") if isinstance(candidate_info.get("entity_to_candidate"), Mapping) else {}
+    target_candidate_key = _text(entity_map.get(target_key))
+    target_pids = (candidate_info.get("entity_pids") or {}).get(target_key, []) if isinstance(candidate_info.get("entity_pids"), Mapping) else []
+    selected = next((row for row in candidates if _text(row.get("candidate_key")) == target_candidate_key), None)
+    reasons: list[str] = ["python_small_card_projection"]
+    if kind == "structural_kinship_expression":
+        return {"decision": "not_a_single_person", "chosen_candidate_key": None, "confidence": "high", "reason_codes": [*reasons, "target_structural_kinship"], "evidence_spans": [], "new_entity_candidate": None, "new_entity_key": None, "unresolved_reason": "target is a structural kinship expression", "summary": ""}
+    if kind in {"not_person", "generic_role", "collective_persons"}:
+        return {"decision": "not_a_person", "chosen_candidate_key": None, "confidence": "high", "reason_codes": [*reasons, "target_not_person"], "evidence_spans": [], "new_entity_candidate": None, "new_entity_key": None, "unresolved_reason": "target is not an individual person expression", "summary": ""}
+    if len(target_pids) > 1 and not target_candidate_key:
+        return {"decision": "ambiguous", "chosen_candidate_key": None, "confidence": "medium", "reason_codes": [*reasons, "multiple_catalogue_matches"], "evidence_spans": [], "new_entity_candidate": None, "new_entity_key": None, "unresolved_reason": "multiple catalogue identities remain", "summary": ""}
+    if selected and _text(selected.get("person_id")):
+        return {"decision": "choose_candidate", "chosen_candidate_key": target_candidate_key, "confidence": "high", "reason_codes": [*reasons, "catalogue_match"], "evidence_spans": [], "new_entity_candidate": None, "new_entity_key": None, "unresolved_reason": "", "summary": ""}
+    if selected and kind in {"named_person", "courtesy_name", "abbreviated_name", "kinship_reference", "person_title", "person_office_title"} and len(surface) >= 2:
+        return {"decision": "new_person_candidate", "chosen_candidate_key": None, "confidence": "medium", "reason_codes": [*reasons, "named_surface_without_catalogue_person"], "evidence_spans": [], "new_entity_candidate": {"surface": surface}, "new_entity_key": "n0", "unresolved_reason": "", "summary": ""}
+    return {"decision": "unresolved", "chosen_candidate_key": None, "confidence": "unknown", "reason_codes": [*reasons, "target_not_bound"], "evidence_spans": [], "new_entity_candidate": None, "new_entity_key": None, "unresolved_reason": "the target has not been deterministically bound to one person candidate", "summary": ""}
+
+
+def project_small_card(case: Mapping[str, Any], card: Mapping[str, Any], passages: Mapping[str, Mapping[str, Any]], prior_candidates: Sequence[Mapping[str, Any]], prior_constraints: Sequence[Mapping[str, Any]], prior_refs: Sequence[str], catalog: Mapping[str, Mapping[str, Any]], index: Mapping[str, Sequence[str]]) -> dict[str, Any]:
+    """Project a validated small card through the existing Python controller."""
+
+    candidates, candidate_info = generate_candidates(case, card, passages, prior_candidates, catalog, index)
+    derived_constraints = translate_constraints(card, candidate_info, candidates, passages, assertion_source="python_small_card_projection")
+    constraints = merge_constraints(prior_constraints, derived_constraints)
+    refs: list[str] = sorted(set(str(ref) for row in card.get("entities", []) if isinstance(row, Mapping) for ref in (row.get("evidence_refs") if isinstance(row.get("evidence_refs"), list) else [row.get("evidence_ref")]) if _text(ref)) | set(str(ref) for row in card.get("assertions", []) if isinstance(row, Mapping) for ref in (row.get("evidence_refs") if isinstance(row.get("evidence_refs"), list) else [row.get("evidence_ref")]) if _text(ref)) | set(str(ref) for ref in prior_refs if _text(ref)))
+    recommendation = _small_python_recommendation(card, candidates, candidate_info)
+    gap = recalculate_research_gap(case, card, recommendation, candidates, constraints, refs, candidate_info)
+    target_key = _text(card.get("target_entity_key"))
+    target_candidate_key = _text(candidate_info.get("entity_to_candidate", {}).get(target_key)) if target_key and isinstance(candidate_info.get("entity_to_candidate"), Mapping) else None
+    decision, action = project_identity_decision(case, recommendation, candidates, card, gap, refs, target_candidate_key)
+    delta = state_delta(prior_candidates, candidates, prior_constraints, constraints, prior_refs, refs, candidate_info.get("identity_propagations", []))
+    return {"card": dict(card), "candidates": candidates, "candidate_info": candidate_info, "constraints": constraints, "recommendation": recommendation, "research_gap": gap, "identity_decision": decision, "graph_action": action, "state_delta": delta, "supporting_refs": refs}
+
+
 def typed_fallback_search_plan(case: Mapping[str, Any], gap: Mapping[str, Any], candidates: Sequence[Mapping[str, Any]]) -> dict[str, Any]:
     missing = _text((gap.get("missing_constraints") or ["identity_evidence"])[0])
     type_map = {
@@ -741,6 +923,6 @@ def typed_fallback_search_plan(case: Mapping[str, Any], gap: Mapping[str, Any], 
 
 __all__ = [
     "CARD_TOP_FIELDS", "EVIDENCE_ASSERTION_TYPES", "extract_response_payload", "extract_strict_tool_payload", "validate_evidence_span",
-    "validate_card_payload", "generate_candidates", "translate_constraints", "recalculate_research_gap",
-    "state_delta", "project_identity_decision", "project_valid_card", "typed_fallback_search_plan",
+    "validate_card_payload", "validate_small_card_payload", "generate_candidates", "translate_constraints", "recalculate_research_gap",
+    "state_delta", "project_identity_decision", "project_valid_card", "project_small_card", "typed_fallback_search_plan",
 ]

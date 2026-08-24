@@ -1,0 +1,68 @@
+{
+  "canonical_write_back": false,
+  "case_id": "hng1r2-hng1-raw-relation-1153a723032c48422396",
+  "elapsed_seconds": 3.452455,
+  "endpoint": "https://api.deepseek.com/beta/chat/completions",
+  "finish_reason": "tool_calls",
+  "immutable": true,
+  "input_hash": "efa7d2413f2e7db64c7e0893185e7b0155bf82ed050ac61d190b2cec874d71f0",
+  "kind": "semantic",
+  "model": "deepseek-v4-flash",
+  "parse_error": null,
+  "preflight": false,
+  "prompt_version": "hng2-sc1-small-evidence-card-v1",
+  "provider": "deepseek",
+  "response": {
+    "choices": [
+      {
+        "finish_reason": "tool_calls",
+        "index": 0,
+        "logprobs": null,
+        "message": {
+          "content": "",
+          "role": "assistant",
+          "tool_calls": [
+            {
+              "function": {
+                "arguments": "{\"target_entity_key\": \"e0\", \"entities\": [{\"entity_key\": \"e0\", \"surface\": \"宣\", \"entity_kind\": \"abbreviated_name\", \"reference_form\": \"abbreviated\", \"evidence_refs\": [\"hng01-shishuo-01-dexing-038-annotation-006\"]}, {\"entity_key\": \"e1\", \"surface\": \"韓伯字康伯\", \"entity_kind\": \"named_person\", \"reference_form\": \"full_name\", \"evidence_refs\": [\"hng01-shishuo-01-dexing-038-annotation-006\"]}], \"assertions\": [{\"assertion_id\": \"a0\", \"assertion_type\": \"person_mention\", \"subject_entity_key\": \"e0\", \"object_entity_key\": \"\", \"evidence_refs\": [\"hng01-shishuo-01-dexing-038-annotation-006\"], \"confidence\": \"medium\"}, {\"assertion_id\": \"a1\", \"assertion_type\": \"courtesy_name_of\", \"subject_entity_key\": \"e1\", \"object_entity_key\": \"\", \"evidence_refs\": [\"hng01-shishuo-01-dexing-038-annotation-006\"], \"confidence\": \"high\"}], \"note\": \"原文为《續晉陽秋》引文「韓伯字康伯」，提及韓伯及其字康伯。目標「宣」出現在前文「宣又不受」中，但此段引文內未直接說明「宣」為何人；「宣」可能為前文人物之簡稱，但本段文字未提供足夠支持將其與韓伯關聯。僅記錄文字層觀察。\"}",
+                "name": "submit_historical_entity_card"
+              },
+              "id": "call_00_juLatrckee7vIda6TZPq6194",
+              "index": 0,
+              "type": "function"
+            }
+          ]
+        }
+      }
+    ],
+    "created": 1787589784,
+    "id": "53a3d538-7301-4142-9429-e7d008a9a3f1",
+    "model": "deepseek-v4-flash",
+    "object": "chat.completion",
+    "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+    "usage": {
+      "completion_tokens": 433,
+      "prompt_cache_hit_tokens": 0,
+      "prompt_cache_miss_tokens": 2052,
+      "prompt_tokens": 2052,
+      "prompt_tokens_details": {
+        "cached_tokens": 0
+      },
+      "total_tokens": 2485
+    }
+  },
+  "response_channel": "tool_call",
+  "sequence": 3,
+  "start_time": "2026-08-24T16:43:04Z",
+  "status": "response",
+  "strict_function": true,
+  "tool_call_count": 1,
+  "tool_name": "submit_historical_entity_card",
+  "usage": {
+    "completion_tokens": 433,
+    "prompt_cache_hit_tokens": 0,
+    "prompt_cache_miss_tokens": 2052,
+    "prompt_tokens": 2052,
+    "total_tokens": 2485
+  }
+}
