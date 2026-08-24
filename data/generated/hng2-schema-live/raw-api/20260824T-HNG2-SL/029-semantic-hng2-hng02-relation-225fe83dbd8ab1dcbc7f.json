@@ -1,0 +1,53 @@
+{
+  "canonical_write_back": false,
+  "case_id": "hng2-hng02-relation-225fe83dbd8ab1dcbc7f",
+  "content": "{\"semantic_assessment\": {\n  \"assessment_status\": \"assessed\",\n  \"semantic_fit\": \"unknown\",\n  \"observed_role\": \"event_participant\",\n  \"evidence_spans\": [\n    {\"ref\": \"hng02-jinshu-wikisource-punctuated-030\", \"span\": \"文帝為晉王\"},\n    {\"ref\": \"hng02-jinshu-wikisource-punctuated-030\", \"span\": \"令賈充定法律\"}\n  ],\n  \"summary\": \"The expression is a title-only reference to a monarchically titled person who acts as the subject of the passage: he is described as 晉王 and issues an order to codify law. No personal name or candidate identification is available in the supplied text.\"\n},\n\"identity_recommendation\": {\n  \"decision\": \"unresolved\",\n  \"chosen_candidate_key\": null,\n  \"confidence\": \"low\",\n  \"reason_codes\": [\"title_identity_missing\", \"no_candidate_evidence\"],\n  \"evidence_spans\": [\n    {\"ref\": \"hng02-jinshu-wikisource-punctuated-030\", \"span\": \"文帝為晉王\"},\n    {\"ref\": \"hng02-jinshu-wikisource-punctuated-030\", \"span\": \"令賈充定法律\"}\n  ],\n  \"new_entity_candidate\": null,\n  \"new_entity_key\": null,\n  \"unresolved_reason\": \"The text identifies the referent only by the title 文帝 and the role 晉王; no candidate key or personal name is provided, so the specific historical person cannot be conclusively matched.\",\n  \"summary\": \"The title 文帝 denotes an event participant in the law-revision narrative, but without candidate data or a named person, the individual cannot be resolved.\"\n},\n\"research_gap\": {\n  \"status\": \"open\",\n  \"missing_constraints\": [\"title_identity\"],\n  \"blocking_question\": \"Which historical person does this title denote in this passage?\",\n  \"next_best_action\": \"search_title_identity\",\n  \"candidate_keys\": [],\n  \"stop_condition\": \"stop when one context-compatible person is independently supported\"\n}\n}",
+  "elapsed_seconds": 13.02131,
+  "immutable": true,
+  "input_hash": "21cfdd10df4f32172bf6bc0bf91961f9fed2299cf1fba7c0818f9a56205071d1",
+  "kind": "semantic",
+  "model": "deepseek-v4-flash",
+  "prompt_version": "hng2-sl-semantic-assist-v1",
+  "response": {
+    "choices": [
+      {
+        "finish_reason": "stop",
+        "index": 0,
+        "logprobs": null,
+        "message": {
+          "content": "{\"semantic_assessment\": {\n  \"assessment_status\": \"assessed\",\n  \"semantic_fit\": \"unknown\",\n  \"observed_role\": \"event_participant\",\n  \"evidence_spans\": [\n    {\"ref\": \"hng02-jinshu-wikisource-punctuated-030\", \"span\": \"文帝為晉王\"},\n    {\"ref\": \"hng02-jinshu-wikisource-punctuated-030\", \"span\": \"令賈充定法律\"}\n  ],\n  \"summary\": \"The expression is a title-only reference to a monarchically titled person who acts as the subject of the passage: he is described as 晉王 and issues an order to codify law. No personal name or candidate identification is available in the supplied text.\"\n},\n\"identity_recommendation\": {\n  \"decision\": \"unresolved\",\n  \"chosen_candidate_key\": null,\n  \"confidence\": \"low\",\n  \"reason_codes\": [\"title_identity_missing\", \"no_candidate_evidence\"],\n  \"evidence_spans\": [\n    {\"ref\": \"hng02-jinshu-wikisource-punctuated-030\", \"span\": \"文帝為晉王\"},\n    {\"ref\": \"hng02-jinshu-wikisource-punctuated-030\", \"span\": \"令賈充定法律\"}\n  ],\n  \"new_entity_candidate\": null,\n  \"new_entity_key\": null,\n  \"unresolved_reason\": \"The text identifies the referent only by the title 文帝 and the role 晉王; no candidate key or personal name is provided, so the specific historical person cannot be conclusively matched.\",\n  \"summary\": \"The title 文帝 denotes an event participant in the law-revision narrative, but without candidate data or a named person, the individual cannot be resolved.\"\n},\n\"research_gap\": {\n  \"status\": \"open\",\n  \"missing_constraints\": [\"title_identity\"],\n  \"blocking_question\": \"Which historical person does this title denote in this passage?\",\n  \"next_best_action\": \"search_title_identity\",\n  \"candidate_keys\": [],\n  \"stop_condition\": \"stop when one context-compatible person is independently supported\"\n}\n}",
+          "reasoning_content": "We need answer JSON. Need assess. We have case exact_span \"文帝\" in 晉書 passage. Candidates empty. Need semantic assessment and identity recommendation. Need obey. Hard constraints: seed temporal unknown, passage context support, case identity support. Need determine title \"文帝\" in passage. Source passage: \"文帝為晉王，患前代律令本注煩雜...\" In 晉書, \"文帝\" likely Sima Zhao (司馬昭), posthumous title 文帝, also Jin king. He ordered Jia Chong etc to revise law. Need identify. But candidates empty, hard constraint title_identity missing, next action search_title_identity. We cannot use external knowledge? We can use passage context. \"文帝為晉王\" indicates he is 晉王. Historically Sima Zhao was 晉王 and posthumously 文帝. But no candidate list. Need choose? The instruction says only use candidates and hard constraints. Candidates empty. We need recommend? Could be ambiguous/unresolved? But semantic question asks \"Which historical person?\" With no candidates, cannot choose candidate_key. But we can assess as office_holder title. Need decide between unresolved/new_person? Since no candidate list, and title identity missing, likely \"unresolved\" with reason insufficient candidate evidence. However perhaps we can infer from source text \"文帝為晉王\" and \"令賈充定法律\" but no candidate data. Need not external knowledge. We can state title denotes person holding title Emperor Wen? Actually \"文帝\" is posthumous title. \"為晉王\" indicates he is the Duke/King of Jin, but not name. In context, the person is a narrative participant? He \"為晉王\" and \"患...\" \"令...\" so event participant? Or office_holder? Let's parse.\n\nNeed produce JSON fields. \"semantic_assessment\": assessment_status assessed? We have enough to assess as title-only expression? The semantic question asks nature. We can assess \"文帝\" is an imperial posthumous title (office_holder? person_title). observed_role: maybe \"event_participant\" because he acts: \"文帝為晉王... 患... 令...\" He is subject of actions. discourse_role office_holder from interpretation. But observed_role can be event_participant. Need evidence spans verbatim: \"文帝為晉王\" and \"令賈充定法律\" etc. Need choose concise.\n\nIdentity recommendation: decision? candidates empty. Options: \"choose_candidate\" impossible. \"new_person_candidate\" if independent person not in candidates? Could create new? But no identity details. \"ambiguous\" if multiple? No. \"unresolved\" for insufficient evidence? Yes. \"not_a_single_person\" no, \"not_a_person\" no. Could be \"unresolved\" with chosen_candidate_key null. Reason codes: maybe [\"title_identity_open\",\"no_candidate_evidence\"]. Need confidence low/unknown? Since no candidates, decision unresolved. But we have some evidence: \"晉王\" suggests specific person, but not named. In Jin Shu, \"文帝\" is a known title. But without candidate list, cannot identify. However can we say choose_candidate? There is no candidate key. Need null. Maybe \"ambiguous\" because title could refer to multiple people (Sima Zhao? Sima Yan? Actually \"文帝\" often Sima Zhao in Jin Shu). But not ambiguous in context? The source passage says \"文帝為晉王\" — in Jin histories, Sima Zhao was granted title 晉王. So context supports Sima Zhao. But we cannot use external? We can use text: he is 晉王 and orders Jia Chong. But no name. Hard constraint missing title_identity. So unresolved.\n\nNeed perhaps include new_entity_candidate? The instruction says if cannot choose candidate, new_person_candidate? But new_person_candidate requires details. The case has no candidates, so maybe we could propose new entity? But \"new_entity_candidate\": null unless creating. Since we don't know identity, null. new_entity_key null.\n\nResearch gap: status \"open\" because title_identity missing. missing_constraints [\"title_identity\"]? Already from frozen_gap. blocking_question same. next_best_action \"search_title_identity\". candidate_keys empty. stop_condition from frozen_gap.\n\nNeed ensure evidence spans from supplied_text. Use continuous short quotations. \"文帝為晉王\" and \"令賈充定法律\" perhaps. Need ref \"hng02-jinshu-wikisource-punctuated-030\".\n\nNeed maybe include \"semantic_fit\": \"unknown\" because no candidate. \"observed_role\": \"event_participant\". \"evidence_spans\": [{\"ref\": ..., \"span\":\"文帝為晉王\"}, {\"ref\":...,\"span\":\"令賈充定法律\"}].\n\nNeed \"summary\" short.\n\nLet's craft JSON. Must only JSON.",
+          "role": "assistant"
+        }
+      }
+    ],
+    "created": 1787569335,
+    "id": "643e5437-3f22-43f9-962c-a121ec0cf863",
+    "model": "deepseek-v4-flash",
+    "object": "chat.completion",
+    "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+    "usage": {
+      "completion_tokens": 1517,
+      "completion_tokens_details": {
+        "reasoning_tokens": 1036
+      },
+      "prompt_cache_hit_tokens": 512,
+      "prompt_cache_miss_tokens": 984,
+      "prompt_tokens": 1496,
+      "prompt_tokens_details": {
+        "cached_tokens": 512
+      },
+      "total_tokens": 3013
+    }
+  },
+  "sequence": 29,
+  "start_time": "2026-08-24T11:02:15Z",
+  "status": "response",
+  "usage": {
+    "completion_tokens": 1517,
+    "prompt_cache_hit_tokens": 512,
+    "prompt_cache_miss_tokens": 984,
+    "prompt_tokens": 1496,
+    "total_tokens": 3013
+  }
+}

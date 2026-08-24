@@ -36,6 +36,14 @@ DISCOURSE_ROLES = {
 CONSTRAINT_STATUSES = {
     "strong_support", "support", "compatible", "weak", "unknown", "conflict", "not_applicable",
 }
+ASSESSMENT_STATUSES = {
+    "assessed", "insufficient_context", "not_applicable", "invalid",
+}
+SEMANTIC_FITS = {
+    "strong_support", "support", "compatible", "weak", "unknown", "conflict",
+}
+CONFIDENCE_LEVELS = {"high", "medium", "low", "unknown"}
+CONSTRAINT_SCOPES = {"candidate", "seed", "passage", "case"}
 RECOMMENDATION_DECISIONS = {
     "choose_candidate", "new_person_candidate", "ambiguous", "unresolved",
     "not_a_single_person", "not_a_person",
@@ -113,12 +121,19 @@ class EntityInterpretation:
     discourse_role: str = "unknown"
     structural_kinship: dict[str, Any] | None = None
     summary: str = ""
+    independent_narrative_mention_id: str | None = None
 
     def __post_init__(self) -> None:
         _check(self.entity_kind, ENTITY_KINDS, "entity_kind")
         _check(self.reference_form, REFERENCE_FORMS, "reference_form")
         _check(self.mention_scope, MENTION_SCOPES, "mention_scope")
         _check(self.discourse_role, DISCOURSE_ROLES, "discourse_role")
+        if (
+            self.mention_scope == "metatextual"
+            and self.discourse_role in {"event_participant", "speaker"}
+            and not self.independent_narrative_mention_id
+        ):
+            raise ValueError("metatextual mention cannot be a narrative participant without an independent mention")
 
 
 @dataclass
@@ -141,26 +156,37 @@ class CandidateEntity:
 @dataclass(frozen=True)
 class ConstraintCheck:
     constraint_type: str
-    candidate_key: str
+    candidate_key: str | None
     status: str
     computed_by: str
     evidence_refs: tuple[str, ...] = ()
     independent: bool = True
     reason_code: str = ""
+    constraint_scope: str = "candidate"
 
     def __post_init__(self) -> None:
         _check(self.status, CONSTRAINT_STATUSES, "constraint status")
+        _check(self.constraint_scope, CONSTRAINT_SCOPES, "constraint scope")
+        if self.constraint_scope == "candidate" and not self.candidate_key:
+            raise ValueError("candidate constraint requires candidate_key")
+        if self.constraint_scope != "candidate" and self.candidate_key is not None:
+            raise ValueError("non-candidate constraint must not carry candidate_key")
 
 
 @dataclass
 class SemanticAssessment:
     mention_id: str
-    assessment_status: str = "unassessed"
+    assessment_status: str = "assessed"
     semantic_fit: str = "unknown"
     observed_role: str = "unknown"
     evidence_spans: list[str] = field(default_factory=list)
     summary: str = ""
     hard_constraints_immutable: bool = True
+
+    def __post_init__(self) -> None:
+        _check(self.assessment_status, ASSESSMENT_STATUSES, "assessment status")
+        _check(self.semantic_fit, SEMANTIC_FITS, "semantic fit")
+        _check(self.observed_role, DISCOURSE_ROLES, "observed role")
 
 
 @dataclass
@@ -173,9 +199,13 @@ class IdentityRecommendation:
     new_entity_candidate: dict[str, Any] | None = None
     unresolved_reason: str = ""
     summary: str = ""
+    new_entity_key: str | None = None
 
     def __post_init__(self) -> None:
         _check(self.decision, RECOMMENDATION_DECISIONS, "recommendation decision")
+        _check(self.confidence, CONFIDENCE_LEVELS, "recommendation confidence")
+        if self.decision == "new_person_candidate" and not self.new_entity_key:
+            raise ValueError("new_person_candidate requires new_entity_key")
 
 
 @dataclass
@@ -183,18 +213,19 @@ class IdentityDecision:
     identity_status: str
     chosen_candidate_key: str | None = None
     person_id: str | None = None
-    provisional_person_id: str | None = None
     confidence: str = "low"
     reason_codes: list[str] = field(default_factory=list)
     supporting_evidence_refs: list[str] = field(default_factory=list)
     decision_summary: str = ""
+    new_entity_key: str | None = None
 
     def __post_init__(self) -> None:
         _check(self.identity_status, IDENTITY_STATUSES, "identity status")
+        _check(self.confidence, CONFIDENCE_LEVELS, "identity confidence")
         if self.identity_status == "resolved_existing" and not self.person_id:
             raise ValueError("resolved_existing requires person_id")
-        if self.identity_status == "resolved_new_candidate" and not self.provisional_person_id:
-            raise ValueError("resolved_new_candidate requires provisional_person_id")
+        if self.identity_status == "resolved_new_candidate" and not self.new_entity_key:
+            raise ValueError("resolved_new_candidate requires new_entity_key")
 
 
 @dataclass
@@ -287,6 +318,14 @@ CHINESE_SEMANTIC_ASSIST_QUESTIONS = (
     "哪些连续原文直接支持上述判断？不补写，不改写。",
 )
 
+CHINESE_SEARCH_PLAN_QUESTIONS = (
+    "当前缺少哪一种证据，最可能改变人物身份判断？",
+    "这种证据最可能出现在哪类史料中？",
+    "应围绕哪些已知人物、亲属词、官职、事件或年代检索？",
+    "哪些候选需要分别验证或排除？",
+    "找到什么样的证据即可结束本轮检索？",
+)
+
 
 def validate_semantic_level(value: str) -> bool:
     return value in SEMANTIC_LEVELS
@@ -299,11 +338,12 @@ def validate_identity_status(value: str) -> bool:
 
 __all__ = [
     "SCHEMA_VERSION", "ENTITY_KINDS", "REFERENCE_FORMS", "MENTION_SCOPES", "DISCOURSE_ROLES",
-    "CONSTRAINT_STATUSES", "RECOMMENDATION_DECISIONS", "IDENTITY_STATUSES", "GRAPH_ACTIONS",
+    "CONSTRAINT_STATUSES", "ASSESSMENT_STATUSES", "SEMANTIC_FITS", "CONFIDENCE_LEVELS",
+    "CONSTRAINT_SCOPES", "RECOMMENDATION_DECISIONS", "IDENTITY_STATUSES", "GRAPH_ACTIONS",
     "GRAPH_NODE_TYPES", "FRONTIER_STATUSES", "RESEARCH_GAP_STATUSES", "RESEARCH_ACTIONS",
     "SEMANTIC_LEVELS", "MentionObservation", "EntityInterpretation", "CandidateEntity",
     "ConstraintCheck", "SemanticAssessment", "IdentityRecommendation", "IdentityDecision",
     "GraphAction", "ResearchGap", "SearchPlan", "RelationAssertion",
-    "HistoricalEntityResolutionCase", "CHINESE_SEMANTIC_ASSIST_QUESTIONS", "to_dict",
+    "HistoricalEntityResolutionCase", "CHINESE_SEMANTIC_ASSIST_QUESTIONS", "CHINESE_SEARCH_PLAN_QUESTIONS", "to_dict",
     "validate_semantic_level", "validate_identity_status",
 ]

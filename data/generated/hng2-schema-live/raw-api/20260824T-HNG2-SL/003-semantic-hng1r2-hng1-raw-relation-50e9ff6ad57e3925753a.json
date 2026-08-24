@@ -1,0 +1,53 @@
+{
+  "canonical_write_back": false,
+  "case_id": "hng1r2-hng1-raw-relation-50e9ff6ad57e3925753a",
+  "content": "",
+  "elapsed_seconds": 4.981713,
+  "immutable": true,
+  "input_hash": "f7d1ddd3c48b875223198308edb2128d350bff2790e4a8d979b2bedbbb1955dc",
+  "kind": "semantic",
+  "model": "deepseek-v4-flash",
+  "prompt_version": "hng2-sl-semantic-assist-v1",
+  "response": {
+    "choices": [
+      {
+        "finish_reason": "stop",
+        "index": 0,
+        "logprobs": null,
+        "message": {
+          "content": "",
+          "reasoning_content": "{\n  \"semantic_assessment\": {\n    \"assessment_status\": \"assessed\",\n    \"semantic_fit\": \"compatible\",\n    \"observed_role\": \"office_holder\",\n    \"evidence_spans\": [\n      {\"ref\": \"hng01-jinshu-091-liezhuan-007\", \"span\": \"泰始初武帝録叙文帝故府僚屬就家拜郎中\"}, \n      {\"ref\": \"hng02-jinshu-wikisource-punctuated-003\", \"span\": \"武皇帝諱炎，字安世，文帝長子也\"}\n    ],\n    \"summary\": \"In the primary passage, 武帝 is used as an imperial title in narrative context: at the beginning of the Taishi era, 武帝 records/reviews Wen Di's former staff and appoints Cui You as langzhong. The reference text from the annals identifies 武帝 as 武皇帝, i.e., 司馬炎, the first Jin emperor. No candidates were supplied; the expression is a title-only reference to a single office holder.\"\n  },\n  \"identity_recommendation\": {\n    \"decision\": \"unresolved\",\n    \"chosen_candidate_key\": null,\n    \"confidence\": \"medium\",\n    \"reason_codes\": [\"no_candidate_keys\", \"title_identity_in_context_supported\", \"unique_emperor_likely\"],\n    \"evidence_spans\": [\n      {\"ref\": \"hng01-jinshu-091-liezhuan-007\", \"span\": \"泰始初武帝録叙文帝故府僚屬\"},\n      {\"ref\": \"hng02-jinshu-wikisource-punctuated-003\", \"span\": \"武皇帝諱炎，字安世，文帝長子也\"}\n    ],\n    \"new_entity_candidate\": null,\n    \"new_entity_key\": null,\n    \"unresolved_reason\": \"No candidate keys were provided and the title '武帝' is contextually likely the Jin emperor 司馬炎 (posthumous 武皇帝), but hard constraints do not link it to any supplied candidate.\",\n    \"summary\": \"The title 武帝 appears in the primary narrative and identifies an emperor; the source work's annals equate 武帝 with 武皇帝 司馬炎. Because no candidates were supplied, the system cannot make a candidate choice and the case remains unresolved.\"\n  },\n  \"research_gap\": {\n    \"status\": \"open\",\n    \"missing_constraints\": [\"title_identity\"],\n    \"blocking_question\": \"No candidate keys were supplied and the title '武帝' alone cannot be uniquely resolved to a single historical person within the given constraints.\",\n    \"next_best_action\": \"search_title_identity\",\n    \"candidate_keys\": [],\n    \"stop_condition\": \"stop when one context-compatible person is independently supported\"\n  }\n}",
+          "role": "assistant"
+        }
+      }
+    ],
+    "created": 1787568615,
+    "id": "c26b481c-ba76-4570-9685-2c677c23049b",
+    "model": "deepseek-v4-flash",
+    "object": "chat.completion",
+    "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+    "usage": {
+      "completion_tokens": 608,
+      "completion_tokens_details": {
+        "reasoning_tokens": 608
+      },
+      "prompt_cache_hit_tokens": 0,
+      "prompt_cache_miss_tokens": 1889,
+      "prompt_tokens": 1889,
+      "prompt_tokens_details": {
+        "cached_tokens": 0
+      },
+      "total_tokens": 2497
+    }
+  },
+  "sequence": 3,
+  "start_time": "2026-08-24T10:50:15Z",
+  "status": "response",
+  "usage": {
+    "completion_tokens": 608,
+    "prompt_cache_hit_tokens": 0,
+    "prompt_cache_miss_tokens": 1889,
+    "prompt_tokens": 1889,
+    "total_tokens": 2497
+  }
+}

@@ -1,0 +1,53 @@
+{
+  "canonical_write_back": false,
+  "case_id": "hng1r2-hng1-raw-relation-1153a723032c48422396",
+  "content": "",
+  "elapsed_seconds": 3.081832,
+  "immutable": true,
+  "input_hash": "d2e1eda56317aed6f211b066e451ba86709ed2af38ed99135d5253e7e059129f",
+  "kind": "semantic",
+  "model": "deepseek-v4-flash",
+  "prompt_version": "hng2-sl-semantic-assist-v1",
+  "response": {
+    "choices": [
+      {
+        "finish_reason": "stop",
+        "index": 0,
+        "logprobs": null,
+        "message": {
+          "content": "",
+          "reasoning_content": "{\n  \"semantic_assessment\": {\n    \"assessment_status\": \"insufficient_context\",\n    \"semantic_fit\": \"unknown\",\n    \"observed_role\": \"referenced_person\",\n    \"evidence_spans\": [\n      {\"ref\": \"hng01-shishuo-01-dexing-038-annotation-006\", \"span\": \"宣又不受\"}\n    ],\n    \"summary\": \"The surface '宣' appears in Liu Xiaobiao's annotation, but the immediately surrounding text is a note about Han Bo. The passage is fragmentary and lacks a predicate or clause that clearly identifies whom '宣' refers to.\"\n  },\n  \"identity_recommendation\": {\n    \"decision\": \"unresolved\",\n    \"chosen_candidate_key\": null,\n    \"confidence\": \"low\",\n    \"reason_codes\": [\"insufficient_identity_evidence\", \"fragmentary_passage\"],\n    \"evidence_spans\": [\n      {\"ref\": \"hng01-shishuo-01-dexing-038-annotation-006\", \"span\": \"宣又不受\"}\n    ],\n    \"new_entity_candidate\": null,\n    \"new_entity_key\": null,\n    \"unresolved_reason\": \"No source-local evidence in the supplied annotation text identifies the referent of the surface '宣'. The preceding clause names Han Bo, but there is no explicit link to '宣'.\",\n    \"summary\": \"The mention is unresolved because the current passage does not supply a clear identity for '宣'.\"\n  },\n  \"research_gap\": {\n    \"status\": \"open\",\n    \"missing_constraints\": [\"identity_evidence\"],\n    \"blocking_question\": \"What source-local evidence identifies this surface?\",\n    \"next_best_action\": \"search_biography_context\",\n    \"candidate_keys\": [],\n    \"stop_condition\": \"stop when an exact or structurally explicit identity is found\"\n  }\n}",
+          "role": "assistant"
+        }
+      }
+    ],
+    "created": 1787568711,
+    "id": "a835163c-fe5d-48ed-bf08-ad6c94dbac07",
+    "model": "deepseek-v4-flash",
+    "object": "chat.completion",
+    "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+    "usage": {
+      "completion_tokens": 405,
+      "completion_tokens_details": {
+        "reasoning_tokens": 405
+      },
+      "prompt_cache_hit_tokens": 512,
+      "prompt_cache_miss_tokens": 744,
+      "prompt_tokens": 1256,
+      "prompt_tokens_details": {
+        "cached_tokens": 512
+      },
+      "total_tokens": 1661
+    }
+  },
+  "sequence": 7,
+  "start_time": "2026-08-24T10:51:51Z",
+  "status": "response",
+  "usage": {
+    "completion_tokens": 405,
+    "prompt_cache_hit_tokens": 512,
+    "prompt_cache_miss_tokens": 744,
+    "prompt_tokens": 1256,
+    "total_tokens": 1661
+  }
+}
