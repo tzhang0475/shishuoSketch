@@ -1,0 +1,65 @@
+{
+  "canonical_write_back": false,
+  "case_id": "hng1r2-hng1-raw-relation-72e698708d54086b78ac",
+  "elapsed_seconds": 4.42829,
+  "endpoint": "https://api.deepseek.com/beta/chat/completions",
+  "finish_reason": "tool_calls",
+  "function_name": "submit_historical_entity_card",
+  "immutable": true,
+  "input_hash": "bfd3fc44ca10e3a8bdfd9621c6ceb63203482112ea411f9701217b3d8229a1a7",
+  "kind": "round1",
+  "model": "deepseek-v4-flash",
+  "preflight": false,
+  "prompt_version": "hng2-sc2-p-small-card-followup-v1",
+  "provider": "deepseek",
+  "response": {
+    "choices": [
+      {
+        "finish_reason": "tool_calls",
+        "index": 0,
+        "logprobs": null,
+        "message": {
+          "content": "",
+          "role": "assistant",
+          "tool_calls": [
+            {
+              "function": {
+                "arguments": "{\"target_entity_key\": \"e0\", \"entities\": [{\"entity_key\": \"e0\", \"surface\": \"文帝\", \"entity_kind\": \"person_title\", \"reference_form\": \"title_only\", \"evidence_refs\": [\"hng02-jinshu-wikisource-punctuated-030\"]}, {\"entity_key\": \"e1\", \"surface\": \"魏文帝\", \"entity_kind\": \"person_title\", \"reference_form\": \"title_only\", \"evidence_refs\": [\"hng02-jinshu-wikisource-punctuated-030\"]}], \"assertions\": [{\"assertion_id\": \"a0\", \"assertion_type\": \"person_mention\", \"subject_entity_key\": \"e0\", \"object_entity_key\": \"\", \"evidence_refs\": [\"hng02-jinshu-wikisource-punctuated-030\"], \"confidence\": \"high\"}, {\"assertion_id\": \"a1\", \"assertion_type\": \"identity_equivalence\", \"subject_entity_key\": \"e0\", \"object_entity_key\": \"e1\", \"evidence_refs\": [\"hng02-jinshu-wikisource-punctuated-030\"], \"confidence\": \"medium\"}], \"note\": \"目标\\\"文帝\\\"出现在刑法志\\\"文帝\\\"章节标题及正文中。正文有\\\"魏文帝受禪，又議肉刑\\\"（魏文帝受禅后议肉刑），以及\\\"文帝為晉王\\\"（晋文帝为晋王时令贾充定法律）。同一\\\"文帝\\\"表面形式在文中指代不同人物（魏文帝曹丕 vs 晋文帝司马昭），需结合上下文区分。此处仅记录文字层观察。\", \"unresolved_observations\": [{\"source_ref\": \"hng02-jinshu-wikisource-punctuated-030\", \"exact_span\": \"魏文帝受禪，又議肉刑\", \"observation\": \"正文明确出现'魏文帝受禪'，表明此处的'文帝'指魏文帝（受禅），与晋文帝（为晋王）不同。\", \"search_terms\": [\"魏文帝\", \"受禪\", \"肉刑\"]}, {\"source_ref\": \"hng02-jinshu-wikisource-punctuated-030\", \"exact_span\": \"文帝為晉王，患前代律令本注煩雜\", \"observation\": \"正文另有'文帝為晉王'，指晋文帝（为晋王时），与魏文帝为不同人物，但表面形式同为'文帝'。\", \"search_terms\": [\"文帝為晉王\", \"賈充\", \"定律\"]}]}",
+                "name": "submit_historical_entity_card"
+              },
+              "id": "call_00_xUT2yRFIOtbhJ7KEYG0m9626",
+              "index": 0,
+              "type": "function"
+            }
+          ]
+        }
+      }
+    ],
+    "created": 1787594114,
+    "id": "e972a7e8-224d-4a0f-80ba-237b8d054270",
+    "model": "deepseek-v4-flash",
+    "object": "chat.completion",
+    "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+    "usage": {
+      "completion_tokens": 649,
+      "prompt_cache_hit_tokens": 0,
+      "prompt_cache_miss_tokens": 16934,
+      "prompt_tokens": 16934,
+      "prompt_tokens_details": {
+        "cached_tokens": 0
+      },
+      "total_tokens": 17583
+    }
+  },
+  "sequence": 3,
+  "start_time": "2026-08-24T17:55:14Z",
+  "status": "response",
+  "strict_function": true,
+  "usage": {
+    "completion_tokens": 649,
+    "prompt_cache_hit_tokens": 0,
+    "prompt_cache_miss_tokens": 16934,
+    "prompt_tokens": 16934,
+    "total_tokens": 17583
+  }
+}

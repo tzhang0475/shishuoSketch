@@ -1,0 +1,65 @@
+{
+  "canonical_write_back": false,
+  "case_id": "hng2-live-hng2-live-w1-identity-33afe84247b036e9d9cb",
+  "elapsed_seconds": 2.864952,
+  "endpoint": "https://api.deepseek.com/beta/chat/completions",
+  "finish_reason": "tool_calls",
+  "function_name": "submit_historical_entity_card",
+  "immutable": true,
+  "input_hash": "e4323aa29258a426fbff1083a83cd0c4c58a38697419fa7fe471d8849bda2985",
+  "kind": "baseline",
+  "model": "deepseek-v4-flash",
+  "preflight": false,
+  "prompt_version": "hng2-sc2-p-small-card-followup-v1",
+  "provider": "deepseek",
+  "response": {
+    "choices": [
+      {
+        "finish_reason": "tool_calls",
+        "index": 0,
+        "logprobs": null,
+        "message": {
+          "content": "",
+          "role": "assistant",
+          "tool_calls": [
+            {
+              "function": {
+                "arguments": "{\"target_entity_key\": \"e0\", \"entities\": [{\"entity_key\": \"e0\", \"surface\": \"陳騫\", \"entity_kind\": \"named_person\", \"reference_form\": \"full_name\", \"evidence_refs\": [\"hng2-live:hng2-live-w1-identity-33afe84247b036e9d9cb\"]}, {\"entity_key\": \"e1\", \"surface\": \"車騎將軍\", \"entity_kind\": \"person_office_title\", \"reference_form\": \"office_title_only\", \"evidence_refs\": [\"hng2-live:hng2-live-w1-identity-33afe84247b036e9d9cb\"]}, {\"entity_key\": \"e2\", \"surface\": \"高平公\", \"entity_kind\": \"person_title\", \"reference_form\": \"title_only\", \"evidence_refs\": [\"hng2-live:hng2-live-w1-identity-33afe84247b036e9d9cb\"]}], \"assertions\": [{\"assertion_id\": \"a0\", \"assertion_type\": \"person_mention\", \"subject_entity_key\": \"e0\", \"object_entity_key\": \"\", \"evidence_refs\": [\"hng2-live:hng2-live-w1-identity-33afe84247b036e9d9cb\"], \"confidence\": \"high\"}, {\"assertion_id\": \"a1\", \"assertion_type\": \"title_of\", \"subject_entity_key\": \"e2\", \"object_entity_key\": \"e0\", \"evidence_refs\": [\"hng2-live:hng2-live-w1-identity-33afe84247b036e9d9cb\"], \"confidence\": \"high\"}], \"note\": \"原文「車騎將軍陳騫爲高平公」明確提及陳騫，並表明其獲封高平公。車騎將軍為其官職稱謂，未直接與陳騫建立明確的官職歸屬斷言（僅共現），故僅記錄 title_of 高平公屬陳騫。\"}",
+                "name": "submit_historical_entity_card"
+              },
+              "id": "call_00_Ie06kyAWjXeb3OGTNI8L5222",
+              "index": 0,
+              "type": "function"
+            }
+          ]
+        }
+      }
+    ],
+    "created": 1787594135,
+    "id": "7989736e-b143-4621-9b26-6416c5991556",
+    "model": "deepseek-v4-flash",
+    "object": "chat.completion",
+    "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+    "usage": {
+      "completion_tokens": 521,
+      "prompt_cache_hit_tokens": 1920,
+      "prompt_cache_miss_tokens": 118,
+      "prompt_tokens": 2038,
+      "prompt_tokens_details": {
+        "cached_tokens": 1920
+      },
+      "total_tokens": 2559
+    }
+  },
+  "sequence": 7,
+  "start_time": "2026-08-24T17:55:35Z",
+  "status": "response",
+  "strict_function": true,
+  "usage": {
+    "completion_tokens": 521,
+    "prompt_cache_hit_tokens": 1920,
+    "prompt_cache_miss_tokens": 118,
+    "prompt_tokens": 2038,
+    "total_tokens": 2559
+  }
+}

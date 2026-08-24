@@ -1,0 +1,65 @@
+{
+  "canonical_write_back": false,
+  "case_id": "hng2-hng02-relation-35297c7dc00a768062fe",
+  "elapsed_seconds": 3.672364,
+  "endpoint": "https://api.deepseek.com/beta/chat/completions",
+  "finish_reason": "tool_calls",
+  "function_name": "submit_historical_entity_card",
+  "immutable": true,
+  "input_hash": "8a0d890a13481d983e2252933e8eb2171962e048049286143f1c7ea840d7653d",
+  "kind": "baseline",
+  "model": "deepseek-v4-flash",
+  "preflight": false,
+  "prompt_version": "hng2-sc2-p-small-card-followup-v1",
+  "provider": "deepseek",
+  "response": {
+    "choices": [
+      {
+        "finish_reason": "tool_calls",
+        "index": 0,
+        "logprobs": null,
+        "message": {
+          "content": "",
+          "role": "assistant",
+          "tool_calls": [
+            {
+              "function": {
+                "arguments": "{\"target_entity_key\": \"e0\", \"entities\": [{\"entity_key\": \"e0\", \"surface\": \"簡文皇帝\", \"entity_kind\": \"person_title\", \"reference_form\": \"title_only\", \"evidence_refs\": [\"hng02-jinshu-wikisource-punctuated-009\"]}, {\"entity_key\": \"e1\", \"surface\": \"昱\", \"entity_kind\": \"named_person\", \"reference_form\": \"full_name\", \"evidence_refs\": [\"hng02-jinshu-wikisource-punctuated-009\"]}, {\"entity_key\": \"e2\", \"surface\": \"道萬\", \"entity_kind\": \"courtesy_name\", \"reference_form\": \"courtesy\", \"evidence_refs\": [\"hng02-jinshu-wikisource-punctuated-009\"]}, {\"entity_key\": \"e3\", \"surface\": \"元帝\", \"entity_kind\": \"person_title\", \"reference_form\": \"title_only\", \"evidence_refs\": [\"hng02-jinshu-wikisource-punctuated-009\"]}], \"assertions\": [{\"assertion_id\": \"a0\", \"assertion_type\": \"title_of\", \"subject_entity_key\": \"e0\", \"object_entity_key\": \"e1\", \"evidence_refs\": [\"hng02-jinshu-wikisource-punctuated-009\"], \"confidence\": \"high\"}, {\"assertion_id\": \"a1\", \"assertion_type\": \"courtesy_name_of\", \"subject_entity_key\": \"e2\", \"object_entity_key\": \"e1\", \"evidence_refs\": [\"hng02-jinshu-wikisource-punctuated-009\"], \"confidence\": \"high\"}, {\"assertion_id\": \"a2\", \"assertion_type\": \"parent_child\", \"subject_entity_key\": \"e3\", \"object_entity_key\": \"e1\", \"evidence_refs\": [\"hng02-jinshu-wikisource-punctuated-009\"], \"confidence\": \"high\"}], \"note\": \"原文開篇「簡文皇帝諱昱，字道萬，元帝之少子也」明確表明：簡文皇帝是昱的尊號（title_of），道萬是昱的字（courtesy_name_of），元帝是昱之父（parent_child，元帝為父、昱為子）。\"}",
+                "name": "submit_historical_entity_card"
+              },
+              "id": "call_00_ybqNxMDBvodzsdbuVzCF4531",
+              "index": 0,
+              "type": "function"
+            }
+          ]
+        }
+      }
+    ],
+    "created": 1787594127,
+    "id": "b6bc8856-d458-4dc1-a8cf-a0a0712882ae",
+    "model": "deepseek-v4-flash",
+    "object": "chat.completion",
+    "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+    "usage": {
+      "completion_tokens": 592,
+      "prompt_cache_hit_tokens": 1792,
+      "prompt_cache_miss_tokens": 11733,
+      "prompt_tokens": 13525,
+      "prompt_tokens_details": {
+        "cached_tokens": 1792
+      },
+      "total_tokens": 14117
+    }
+  },
+  "sequence": 5,
+  "start_time": "2026-08-24T17:55:27Z",
+  "status": "response",
+  "strict_function": true,
+  "usage": {
+    "completion_tokens": 592,
+    "prompt_cache_hit_tokens": 1792,
+    "prompt_cache_miss_tokens": 11733,
+    "prompt_tokens": 13525,
+    "total_tokens": 14117
+  }
+}

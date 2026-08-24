@@ -1,0 +1,65 @@
+{
+  "canonical_write_back": false,
+  "case_id": "hng2-live-hng2-live-w1-temporal-7787c8e7d9f2c14fc5b5",
+  "elapsed_seconds": 2.94822,
+  "endpoint": "https://api.deepseek.com/beta/chat/completions",
+  "finish_reason": "tool_calls",
+  "function_name": "submit_historical_entity_card",
+  "immutable": true,
+  "input_hash": "076f4a3275da3ac70fdafed919087d52419e65cbac304634151ab28d7f7696b3",
+  "kind": "baseline",
+  "model": "deepseek-v4-flash",
+  "preflight": false,
+  "prompt_version": "hng2-sc2-p-small-card-followup-v1",
+  "provider": "deepseek",
+  "response": {
+    "choices": [
+      {
+        "finish_reason": "tool_calls",
+        "index": 0,
+        "logprobs": null,
+        "message": {
+          "content": "",
+          "role": "assistant",
+          "tool_calls": [
+            {
+              "function": {
+                "arguments": "{\"target_entity_key\": \"e0\", \"entities\": [{\"entity_key\": \"e0\", \"surface\": \"何曾\", \"entity_kind\": \"named_person\", \"reference_form\": \"full_name\", \"evidence_refs\": [\"hng02-jinshu-wikisource-punctuated-003\"]}, {\"entity_key\": \"e1\", \"surface\": \"何曾\", \"entity_kind\": \"named_person\", \"reference_form\": \"full_name\", \"evidence_refs\": [\"hng02-jinshu-wikisource-punctuated-028\"]}], \"assertions\": [{\"assertion_id\": \"a0\", \"assertion_type\": \"person_mention\", \"subject_entity_key\": \"e0\", \"object_entity_key\": \"\", \"evidence_refs\": [\"hng02-jinshu-wikisource-punctuated-003\"], \"confidence\": \"high\"}, {\"assertion_id\": \"a1\", \"assertion_type\": \"person_mention\", \"subject_entity_key\": \"e1\", \"object_entity_key\": \"\", \"evidence_refs\": [\"hng02-jinshu-wikisource-punctuated-028\"], \"confidence\": \"high\"}], \"note\": \"目标为何曾在卷三帝紀中「將議立世子，屬意於攸。何曾等固爭曰」的提及。何曾亦見於卷二十八（hng02-jinshu-wikisource-punctuated-028）「何曾謂子遵曰」，兩處均為明確姓名提及，未見原文直接表明二者為同一人物之外的其他关系，故仅记录 person_mention。\"}",
+                "name": "submit_historical_entity_card"
+              },
+              "id": "call_00_AUuSOh39cnG17TFjhvlx2098",
+              "index": 0,
+              "type": "function"
+            }
+          ]
+        }
+      }
+    ],
+    "created": 1787594155,
+    "id": "a807e2ef-d523-48f4-a385-88e1ab39cf94",
+    "model": "deepseek-v4-flash",
+    "object": "chat.completion",
+    "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+    "usage": {
+      "completion_tokens": 426,
+      "prompt_cache_hit_tokens": 1792,
+      "prompt_cache_miss_tokens": 17168,
+      "prompt_tokens": 18960,
+      "prompt_tokens_details": {
+        "cached_tokens": 1792
+      },
+      "total_tokens": 19386
+    }
+  },
+  "sequence": 12,
+  "start_time": "2026-08-24T17:55:55Z",
+  "status": "response",
+  "strict_function": true,
+  "usage": {
+    "completion_tokens": 426,
+    "prompt_cache_hit_tokens": 1792,
+    "prompt_cache_miss_tokens": 17168,
+    "prompt_tokens": 18960,
+    "total_tokens": 19386
+  }
+}

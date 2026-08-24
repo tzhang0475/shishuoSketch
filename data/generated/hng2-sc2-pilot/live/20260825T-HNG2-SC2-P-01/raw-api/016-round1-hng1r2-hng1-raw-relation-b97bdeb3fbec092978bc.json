@@ -1,0 +1,65 @@
+{
+  "canonical_write_back": false,
+  "case_id": "hng1r2-hng1-raw-relation-b97bdeb3fbec092978bc",
+  "elapsed_seconds": 3.711199,
+  "endpoint": "https://api.deepseek.com/beta/chat/completions",
+  "finish_reason": "tool_calls",
+  "function_name": "submit_historical_entity_card",
+  "immutable": true,
+  "input_hash": "fc3889019bb4c5b81cf33d32fd1c992778e7ffce1e5d89cdd1f21c77c98444ad",
+  "kind": "round1",
+  "model": "deepseek-v4-flash",
+  "preflight": false,
+  "prompt_version": "hng2-sc2-p-small-card-followup-v1",
+  "provider": "deepseek",
+  "response": {
+    "choices": [
+      {
+        "finish_reason": "tool_calls",
+        "index": 0,
+        "logprobs": null,
+        "message": {
+          "content": "",
+          "role": "assistant",
+          "tool_calls": [
+            {
+              "function": {
+                "arguments": "{\"target_entity_key\": \"e0\", \"entities\": [{\"entity_key\": \"e0\", \"surface\": \"虞喜\", \"entity_kind\": \"named_person\", \"reference_form\": \"full_name\", \"evidence_refs\": [\"hng01-jinshu-088-liezhuan-007\"]}, {\"entity_key\": \"e1\", \"surface\": \"喜弟預\", \"entity_kind\": \"kinship_reference\", \"reference_form\": \"kinship_plus_name\", \"evidence_refs\": [\"hng01-jinshu-088-liezhuan-007\"]}, {\"entity_key\": \"e2\", \"surface\": \"孫晷\", \"entity_kind\": \"named_person\", \"reference_form\": \"full_name\", \"evidence_refs\": [\"hng01-jinshu-088-liezhuan-007\"]}], \"assertions\": [{\"assertion_id\": \"a0\", \"assertion_type\": \"person_mention\", \"subject_entity_key\": \"e0\", \"object_entity_key\": \"\", \"evidence_refs\": [\"hng01-jinshu-088-liezhuan-007\"], \"confidence\": \"high\"}, {\"assertion_id\": \"a1\", \"assertion_type\": \"kinship_relation\", \"subject_entity_key\": \"e1\", \"object_entity_key\": \"e0\", \"evidence_refs\": [\"hng01-jinshu-088-liezhuan-007\"], \"confidence\": \"high\"}], \"note\": \"原文「會稽虞喜隱居海嵎有高世之風晷欽其徳娉喜弟預女為妻」：虞喜為會稽人，隱居海嵎；孫晷欽其德，聘虞喜之弟預的女兒為妻。虞喜與其弟預為兄弟關係（喜弟預）。\", \"unresolved_observations\": [{\"source_ref\": \"hng01-jinshu-088-liezhuan-007\", \"exact_span\": \"會稽虞喜隱居海嵎有高世之風\", \"observation\": \"虞喜為會稽人，隱居海嵎，有高世之風；此為人物背景描述，非可壓縮為小斷言的人物關係。\", \"search_terms\": [\"虞喜\", \"會稽\", \"隱居海嵎\"]}]}",
+                "name": "submit_historical_entity_card"
+              },
+              "id": "call_00_rxcE7B95COVB4nikQDre4133",
+              "index": 0,
+              "type": "function"
+            }
+          ]
+        }
+      }
+    ],
+    "created": 1787594171,
+    "id": "5928bb40-5c48-463c-901f-9b7725732561",
+    "model": "deepseek-v4-flash",
+    "object": "chat.completion",
+    "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+    "usage": {
+      "completion_tokens": 597,
+      "prompt_cache_hit_tokens": 2176,
+      "prompt_cache_miss_tokens": 1351,
+      "prompt_tokens": 3527,
+      "prompt_tokens_details": {
+        "cached_tokens": 2176
+      },
+      "total_tokens": 4124
+    }
+  },
+  "sequence": 16,
+  "start_time": "2026-08-24T17:56:11Z",
+  "status": "response",
+  "strict_function": true,
+  "usage": {
+    "completion_tokens": 597,
+    "prompt_cache_hit_tokens": 2176,
+    "prompt_cache_miss_tokens": 1351,
+    "prompt_tokens": 3527,
+    "total_tokens": 4124
+  }
+}

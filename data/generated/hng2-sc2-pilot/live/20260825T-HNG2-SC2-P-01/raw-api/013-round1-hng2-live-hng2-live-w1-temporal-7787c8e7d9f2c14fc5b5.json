@@ -1,0 +1,65 @@
+{
+  "canonical_write_back": false,
+  "case_id": "hng2-live-hng2-live-w1-temporal-7787c8e7d9f2c14fc5b5",
+  "elapsed_seconds": 4.522977,
+  "endpoint": "https://api.deepseek.com/beta/chat/completions",
+  "finish_reason": "tool_calls",
+  "function_name": "submit_historical_entity_card",
+  "immutable": true,
+  "input_hash": "076f4a3275da3ac70fdafed919087d52419e65cbac304634151ab28d7f7696b3",
+  "kind": "round1",
+  "model": "deepseek-v4-flash",
+  "preflight": false,
+  "prompt_version": "hng2-sc2-p-small-card-followup-v1",
+  "provider": "deepseek",
+  "response": {
+    "choices": [
+      {
+        "finish_reason": "tool_calls",
+        "index": 0,
+        "logprobs": null,
+        "message": {
+          "content": "",
+          "role": "assistant",
+          "tool_calls": [
+            {
+              "function": {
+                "arguments": "{\"target_entity_key\": \"e0\", \"entities\": [{\"entity_key\": \"e0\", \"surface\": \"何曾\", \"entity_kind\": \"named_person\", \"reference_form\": \"full_name\", \"evidence_refs\": [\"hng02-jinshu-wikisource-punctuated-003\"]}, {\"entity_key\": \"e1\", \"surface\": \"攸\", \"entity_kind\": \"abbreviated_name\", \"reference_form\": \"abbreviated\", \"evidence_refs\": [\"hng02-jinshu-wikisource-punctuated-003\"]}, {\"entity_key\": \"e2\", \"surface\": \"文帝\", \"entity_kind\": \"person_title\", \"reference_form\": \"title_only\", \"evidence_refs\": [\"hng02-jinshu-wikisource-punctuated-003\"]}], \"assertions\": [{\"assertion_id\": \"a0\", \"assertion_type\": \"person_mention\", \"subject_entity_key\": \"e0\", \"object_entity_key\": \"\", \"evidence_refs\": [\"hng02-jinshu-wikisource-punctuated-003\"], \"confidence\": \"high\"}, {\"assertion_id\": \"a1\", \"assertion_type\": \"person_mention\", \"subject_entity_key\": \"e1\", \"object_entity_key\": \"\", \"evidence_refs\": [\"hng02-jinshu-wikisource-punctuated-003\"], \"confidence\": \"high\"}], \"note\": \"目标为何曾。原文\\\"將議立世子，屬意於攸。何曾等固爭曰\\\"明确提及何曾与攸（文帝弟攸，即齐王攸）。何曾与攸之间无直接亲属关系表述，仅共现于同一事件。文帝为武帝之父，此处提及\\\"文帝以景帝既宣帝之嫡...以帝弟攸為嗣\\\"，攸为文帝之弟。\", \"unresolved_observations\": [{\"source_ref\": \"hng02-jinshu-wikisource-punctuated-003\", \"exact_span\": \"以帝弟攸爲嗣\", \"observation\": \"原文明确攸为文帝之弟（帝弟攸），即攸与武帝为兄弟关系，但当前断言词汇中兄弟关系需攸与武帝两个实体，此处攸仅以简称出现。\", \"search_terms\": [\"帝弟攸\", \"齊王攸\", \"文帝弟\"]}]}",
+                "name": "submit_historical_entity_card"
+              },
+              "id": "call_00_7MQpC94ba45i7Mb7Jsr81022",
+              "index": 0,
+              "type": "function"
+            }
+          ]
+        }
+      }
+    ],
+    "created": 1787594158,
+    "id": "ef6bd013-8459-4414-a90c-1788d0442ebc",
+    "model": "deepseek-v4-flash",
+    "object": "chat.completion",
+    "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+    "usage": {
+      "completion_tokens": 603,
+      "prompt_cache_hit_tokens": 2176,
+      "prompt_cache_miss_tokens": 17159,
+      "prompt_tokens": 19335,
+      "prompt_tokens_details": {
+        "cached_tokens": 2176
+      },
+      "total_tokens": 19938
+    }
+  },
+  "sequence": 13,
+  "start_time": "2026-08-24T17:55:58Z",
+  "status": "response",
+  "strict_function": true,
+  "usage": {
+    "completion_tokens": 603,
+    "prompt_cache_hit_tokens": 2176,
+    "prompt_cache_miss_tokens": 17159,
+    "prompt_tokens": 19335,
+    "total_tokens": 19938
+  }
+}

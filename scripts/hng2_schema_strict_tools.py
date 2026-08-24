@@ -172,6 +172,103 @@ SMALL_ASSERTION_TYPE_LABELS = {
     "person_mention": "原文明确提及主体人物，但没有足够文字支持更具体的实体关系；不凭共现添加关系",
 }
 
+UNRESOLVED_OBSERVATION_FIELDS = {"source_ref", "exact_span", "observation", "search_terms"}
+
+
+def unresolved_observation_schema() -> dict[str, Any]:
+    return _object(
+        {
+            "source_ref": _string("系统提供的 source passage ref；必须逐字复制，不能自行生成。"),
+            "exact_span": _string("史料中尚不能安全压缩为当前小断言的连续原文；必须原样存在于 source_ref 对应文本中。"),
+            "observation": _string("对当前 target 有关、但当前断言词汇尚不能表达的文字层观察；不是历史事实、身份决定或关系。"),
+            "search_terms": _array(_string("只用于一次本地 FIND 的检索提示；不得写外部网址、Person ID 或未经原文支持的历史结论。"), "最多三个简短检索词。"),
+        },
+        "记录模型在给定原文中看见、但暂时无法用小型 assertion vocabulary 安全表达的直接观察。它不创建任何人物、关系、事实或图谱对象。",
+    )
+
+
+def small_card_with_observations_parameters_schema() -> dict[str, Any]:
+    properties = dict(small_card_parameters_schema()["properties"])
+    properties["unresolved_observations"] = _array(
+        unresolved_observation_schema(),
+        "当前 target 的未解决文字观察；最多两个，每条只保留直接锚定原文且可继续本地检索的缺口。",
+    )
+    return _object(
+        properties,
+        "SC2 Round 1 的扩展小型 Historical Evidence Card。基础实体和断言字段与 SC1 相同；unresolved_observations 只是检索提示，不是历史事实或 Python 状态。",
+    )
+
+
+def small_card_with_observations_function_definition() -> dict[str, Any]:
+    return {
+        "type": "function",
+        "function": {
+            "name": FUNCTION_NAME,
+            "description": "提交当前目标的最小 Evidence Card，并记录最多两个直接锚定原文、尚不能由小断言表达的观察；不作数据库决定。",
+            "strict": True,
+            "parameters": small_card_with_observations_parameters_schema(),
+        },
+    }
+
+
+ROUND2_FUNCTION_NAME = "submit_historical_evidence_resolution"
+ROUND2_FACT_KINDS = {
+    "identity", "kinship", "office", "title", "relation", "interaction", "temporal", "event", "other",
+}
+ROUND2_STATUS = {"resolved", "partially_resolved", "unresolved"}
+
+
+def round2_resolution_parameters_schema() -> dict[str, Any]:
+    finding = _object(
+        {
+            "subject_surface": _string("新证据中直接出现、与当前 target 或待核查观察相关的主体文字；不填写 Person ID。"),
+            "predicate": _string("用简短文字描述 source passage 直接表达的谓词；不得把未写出的历史推论当作谓词。"),
+            "object_surface": _string("新证据中直接出现的客体文字；无明确客体时填写空字符串。"),
+            "fact_kind": _enum(ROUND2_FACT_KINDS, "该 finding 的文字证据类别；other 用于当前受限词汇无法精确归类但原文明确支持的最小发现。", {
+                "identity": "身份或同一表达",
+                "kinship": "亲属关系",
+                "office": "官职任用或职任",
+                "title": "帝王、爵号、尊号等称号",
+                "relation": "明确关系",
+                "interaction": "明确互动或事件中的行动",
+                "temporal": "时间、年代或先后",
+                "event": "事件参与或事件事实",
+                "other": "其他直接文字发现",
+            }),
+            "source_ref": _string("直接支持 finding 的输入 source passage ref；必须逐字复制。"),
+            "exact_span": _string("直接支持 finding 的最短连续原文；必须原样存在于 source_ref 对应文本中。"),
+            "confidence": _enum(schema.CONFIDENCE_LEVELS, "模型对 supplied text 是否直接支持该 finding 的信心，不是数据库事实真实性。", CONFIDENCE_LABELS),
+        },
+        "一个只由新输入原文直接支持的最小发现；Python 会逐条验证 source_ref 和 exact_span。",
+    )
+    return _object(
+        {
+            "status": _enum(ROUND2_STATUS, "对当前观察的证据核查结果。resolved 表示新证据足以支持 findings，partially_resolved 表示只支持部分，unresolved 表示仍不能支持。", {
+                "resolved": "新证据足以支持一个或多个最小 finding",
+                "partially_resolved": "新证据只支持部分问题",
+                "unresolved": "新证据仍不能直接支持可用 finding",
+            }),
+            "findings": _array(finding, "只填写新 source passages 直接支持的 findings；不要重复无关内容，不创建数据库 ID。"),
+        },
+        "SC2 Round 2 的小型证据核查卡。它只报告新输入原文直接支持的文字发现，不决定人物身份、关系、事实或图谱动作。",
+    )
+
+
+def round2_resolution_function_definition() -> dict[str, Any]:
+    return {
+        "type": "function",
+        "function": {
+            "name": ROUND2_FUNCTION_NAME,
+            "description": "核查一个 Round 1 文字观察，只提交新原文直接支持的最小 findings。",
+            "strict": True,
+            "parameters": round2_resolution_parameters_schema(),
+        },
+    }
+
+
+def round2_tool_choice() -> dict[str, Any]:
+    return {"type": "function", "function": {"name": ROUND2_FUNCTION_NAME}}
+
 
 def small_evidence_entity_schema() -> dict[str, Any]:
     return _object(
@@ -226,6 +323,11 @@ def small_card_function_definition() -> dict[str, Any]:
 
 def small_card_schema_hash() -> str:
     raw = json.dumps(small_card_parameters_schema(), ensure_ascii=False, sort_keys=True, separators=(",", ":")).encode("utf-8")
+    return hashlib.sha256(raw).hexdigest()
+
+
+def small_card_with_observations_schema_hash() -> str:
+    raw = json.dumps(small_card_with_observations_parameters_schema(), ensure_ascii=False, sort_keys=True, separators=(",", ":")).encode("utf-8")
     return hashlib.sha256(raw).hexdigest()
 
 
@@ -488,8 +590,9 @@ def schema_hash() -> str:
 
 
 __all__ = [
-    "FUNCTION_NAME", "STRICT_ENDPOINT", "STRICT_COMPLETIONS_ENDPOINT", "card_parameters_schema", "legacy_strict_function_definition", "strict_function_definition",
+    "FUNCTION_NAME", "ROUND2_FUNCTION_NAME", "STRICT_ENDPOINT", "STRICT_COMPLETIONS_ENDPOINT", "card_parameters_schema", "legacy_strict_function_definition", "strict_function_definition",
     "strict_tool_choice", "wire_to_controller_payload", "controller_payload_to_wire", "small_evidence_entity_schema",
     "small_evidence_assertion_schema", "small_card_parameters_schema", "small_card_function_definition",
-    "small_card_schema_hash", "small_card_to_controller_card", "SMALL_ASSERTION_TYPES", "schema_hash",
+    "unresolved_observation_schema", "small_card_with_observations_parameters_schema", "small_card_with_observations_function_definition",
+    "small_card_schema_hash", "small_card_with_observations_schema_hash", "small_card_to_controller_card", "SMALL_ASSERTION_TYPES", "ROUND2_FACT_KINDS", "ROUND2_STATUS", "round2_resolution_parameters_schema", "round2_resolution_function_definition", "round2_tool_choice", "schema_hash",
 ]

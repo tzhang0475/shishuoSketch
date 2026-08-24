@@ -1,0 +1,1584 @@
+{
+  "api_calls": 0,
+  "canonical_write_back": false,
+  "cases": [
+    {
+      "api_calls": 0,
+      "canonical_write_back": false,
+      "case_id": "hng1r2-hng1-raw-relation-72e698708d54086b78ac",
+      "category": "rich_title_temporal_context",
+      "fixture_only": true,
+      "round1_projection": {
+        "candidate_info": {
+          "entity_pids": {
+            "e0": []
+          },
+          "entity_to_candidate": {
+            "e0": "c0"
+          },
+          "identity_propagations": []
+        },
+        "candidates": [
+          {
+            "candidate_key": "c0",
+            "candidate_source": "evidence_card_named_person",
+            "canonical_name": "文帝",
+            "chronology_summary": "",
+            "graph_summary": "",
+            "known_forms": [
+              "文帝"
+            ],
+            "person_id": null
+          }
+        ],
+        "card": {
+          "assertions": [
+            {
+              "assertion_id": "a0",
+              "assertion_type": "person_mention",
+              "confidence": "medium",
+              "direction": null,
+              "evidence_ref": "hng02-jinshu-wikisource-punctuated-030",
+              "evidence_refs": [
+                "hng02-jinshu-wikisource-punctuated-030"
+              ],
+              "evidence_span": "",
+              "object_entity_key": null,
+              "subject_entity_key": "e0",
+              "value": null
+            }
+          ],
+          "entities": [
+            {
+              "entity_key": "e0",
+              "entity_kind": "person_title",
+              "evidence_ref": "hng02-jinshu-wikisource-punctuated-030",
+              "evidence_refs": [
+                "hng02-jinshu-wikisource-punctuated-030"
+              ],
+              "evidence_span": "",
+              "reference_form": "title_only",
+              "surface": "文帝"
+            }
+          ],
+          "summary": "fixture only",
+          "target_entity_key": "e0"
+        },
+        "constraints": [
+          {
+            "assertion_id": "a0",
+            "assertion_side": "subject",
+            "candidate_key": "c0",
+            "computed_by": "python",
+            "constraint_scope": "candidate",
+            "constraint_type": "source_local_context",
+            "evidence_refs": [
+              "hng02-jinshu-wikisource-punctuated-030"
+            ],
+            "evidence_span": "",
+            "independent": true,
+            "propagation_rule": null,
+            "reason_code": "validated_assertion:person_mention",
+            "source_entity_key": "e0",
+            "status": "support",
+            "target_entity_key": null
+          },
+          {
+            "assertion_id": null,
+            "candidate_key": null,
+            "computed_by": "python",
+            "constraint_scope": "case",
+            "constraint_type": "source_local_context",
+            "evidence_refs": [
+              "hng02-jinshu-wikisource-punctuated-030"
+            ],
+            "evidence_span": "",
+            "independent": true,
+            "reason_code": "supplied_passage",
+            "status": "support"
+          }
+        ],
+        "graph_action": {
+          "action": "create_provisional_candidate",
+          "frontier_status": "candidate",
+          "node_type": "provisional_person",
+          "person_id": null,
+          "provisional_person_id": "hng2-sc-provisional-357980f507abe8dd4894",
+          "reason_codes": [
+            "evidence_card_new_person",
+            "python_small_card_projection",
+            "named_surface_without_catalogue_person"
+          ]
+        },
+        "identity_decision": {
+          "canonical_write_back": false,
+          "case_id": "hng1r2-hng1-raw-relation-72e698708d54086b78ac",
+          "chosen_candidate_key": null,
+          "confidence": "medium",
+          "decision_summary": "",
+          "identity_status": "resolved_new_candidate",
+          "new_entity_key": "n0",
+          "person_id": null,
+          "reason_codes": [
+            "python_small_card_projection",
+            "named_surface_without_catalogue_person"
+          ],
+          "supporting_evidence_refs": [
+            "hng02-jinshu-wikisource-punctuated-030"
+          ],
+          "target_entity_key": "e0"
+        },
+        "recommendation": {
+          "chosen_candidate_key": null,
+          "confidence": "medium",
+          "decision": "new_person_candidate",
+          "evidence_spans": [],
+          "new_entity_candidate": {
+            "surface": "文帝"
+          },
+          "new_entity_key": "n0",
+          "reason_codes": [
+            "python_small_card_projection",
+            "named_surface_without_catalogue_person"
+          ],
+          "summary": "",
+          "unresolved_reason": ""
+        },
+        "research_gap": {
+          "blocking_question": "",
+          "candidate_keys": [],
+          "missing_constraints": [],
+          "next_best_action": "none",
+          "status": "closed",
+          "stop_condition": "named new-person candidate is source-supported"
+        },
+        "state_delta": {
+          "added_candidates": [
+            "c0"
+          ],
+          "added_constraints": [
+            "{\"assertion_id\": \"a0\", \"assertion_side\": \"subject\", \"candidate_key\": \"c0\", \"computed_by\": \"python\", \"constraint_scope\": \"candidate\", \"constraint_type\": \"source_local_context\", \"evidence_refs\": [\"hng02-jinshu-wikisource-punctuated-030\"], \"evidence_span\": \"\", \"independent\": true, \"propagation_rule\": null, \"reason_code\": \"validated_assertion:person_mention\", \"source_entity_key\": \"e0\", \"status\": \"support\", \"target_entity_key\": null}",
+            "{\"assertion_id\": null, \"candidate_key\": null, \"computed_by\": \"python\", \"constraint_scope\": \"case\", \"constraint_type\": \"source_local_context\", \"evidence_refs\": [\"hng02-jinshu-wikisource-punctuated-030\"], \"evidence_span\": \"\", \"independent\": true, \"reason_code\": \"supplied_passage\", \"status\": \"support\"}"
+          ],
+          "changed_constraints": [
+            "{\"assertion_id\": \"a0\", \"assertion_side\": \"subject\", \"candidate_key\": \"c0\", \"computed_by\": \"python\", \"constraint_scope\": \"candidate\", \"constraint_type\": \"source_local_context\", \"evidence_refs\": [\"hng02-jinshu-wikisource-punctuated-030\"], \"evidence_span\": \"\", \"independent\": true, \"propagation_rule\": null, \"reason_code\": \"validated_assertion:person_mention\", \"source_entity_key\": \"e0\", \"status\": \"support\", \"target_entity_key\": null}",
+            "{\"assertion_id\": null, \"candidate_key\": null, \"computed_by\": \"python\", \"constraint_scope\": \"case\", \"constraint_type\": \"source_local_context\", \"evidence_refs\": [\"hng02-jinshu-wikisource-punctuated-030\"], \"evidence_span\": \"\", \"independent\": true, \"reason_code\": \"supplied_passage\", \"status\": \"support\"}"
+          ],
+          "conflicts": [],
+          "identity_propagations": [],
+          "material": true,
+          "new_candidates": [
+            "c0"
+          ],
+          "new_conflicts": [],
+          "new_evidence": [
+            "hng02-jinshu-wikisource-punctuated-030"
+          ],
+          "preserved_constraints": [],
+          "removed_candidates": [],
+          "removed_conflicts": [],
+          "unchanged_candidates": [],
+          "upgraded_candidates": []
+        },
+        "supporting_refs": [
+          "hng02-jinshu-wikisource-punctuated-030"
+        ]
+      },
+      "round1_validation": {
+        "base": {
+          "errors": [],
+          "evidence_ref_failures": 0,
+          "evidence_span_failures": 0,
+          "invalid_enum_outputs": [],
+          "invented_id_attempts": [],
+          "valid": true
+        },
+        "observations": {
+          "errors": [],
+          "span_failures": 0,
+          "valid": true
+        }
+      },
+      "round2_validation": {
+        "errors": [],
+        "finding_rejections": [],
+        "valid": true,
+        "valid_findings": [
+          {
+            "confidence": "low",
+            "exact_span": "文帝",
+            "fact_kind": "other",
+            "object_surface": "",
+            "predicate": "person_mention",
+            "source_ref": "hng02-jinshu-wikisource-punctuated-030",
+            "subject_surface": "文帝"
+          }
+        ]
+      }
+    },
+    {
+      "api_calls": 0,
+      "canonical_write_back": false,
+      "case_id": "hng2-hng02-relation-35297c7dc00a768062fe",
+      "category": "rich_title",
+      "fixture_only": true,
+      "round1_projection": {
+        "candidate_info": {
+          "entity_pids": {
+            "e0": []
+          },
+          "entity_to_candidate": {
+            "e0": "c0"
+          },
+          "identity_propagations": []
+        },
+        "candidates": [
+          {
+            "candidate_key": "c0",
+            "candidate_source": "evidence_card_named_person",
+            "canonical_name": "簡文皇帝",
+            "chronology_summary": "",
+            "graph_summary": "",
+            "known_forms": [
+              "簡文皇帝"
+            ],
+            "person_id": null
+          }
+        ],
+        "card": {
+          "assertions": [
+            {
+              "assertion_id": "a0",
+              "assertion_type": "person_mention",
+              "confidence": "medium",
+              "direction": null,
+              "evidence_ref": "hng02-jinshu-wikisource-punctuated-009",
+              "evidence_refs": [
+                "hng02-jinshu-wikisource-punctuated-009"
+              ],
+              "evidence_span": "",
+              "object_entity_key": null,
+              "subject_entity_key": "e0",
+              "value": null
+            }
+          ],
+          "entities": [
+            {
+              "entity_key": "e0",
+              "entity_kind": "person_title",
+              "evidence_ref": "hng02-jinshu-wikisource-punctuated-009",
+              "evidence_refs": [
+                "hng02-jinshu-wikisource-punctuated-009"
+              ],
+              "evidence_span": "",
+              "reference_form": "title_only",
+              "surface": "簡文皇帝"
+            }
+          ],
+          "summary": "fixture only",
+          "target_entity_key": "e0"
+        },
+        "constraints": [
+          {
+            "assertion_id": "a0",
+            "assertion_side": "subject",
+            "candidate_key": "c0",
+            "computed_by": "python",
+            "constraint_scope": "candidate",
+            "constraint_type": "source_local_context",
+            "evidence_refs": [
+              "hng02-jinshu-wikisource-punctuated-009"
+            ],
+            "evidence_span": "",
+            "independent": true,
+            "propagation_rule": null,
+            "reason_code": "validated_assertion:person_mention",
+            "source_entity_key": "e0",
+            "status": "support",
+            "target_entity_key": null
+          },
+          {
+            "assertion_id": null,
+            "candidate_key": null,
+            "computed_by": "python",
+            "constraint_scope": "case",
+            "constraint_type": "source_local_context",
+            "evidence_refs": [
+              "hng02-jinshu-wikisource-punctuated-009"
+            ],
+            "evidence_span": "",
+            "independent": true,
+            "reason_code": "supplied_passage",
+            "status": "support"
+          }
+        ],
+        "graph_action": {
+          "action": "create_provisional_candidate",
+          "frontier_status": "candidate",
+          "node_type": "provisional_person",
+          "person_id": null,
+          "provisional_person_id": "hng2-sc-provisional-17ce4d60e829807ca3b0",
+          "reason_codes": [
+            "evidence_card_new_person",
+            "python_small_card_projection",
+            "named_surface_without_catalogue_person"
+          ]
+        },
+        "identity_decision": {
+          "canonical_write_back": false,
+          "case_id": "hng2-hng02-relation-35297c7dc00a768062fe",
+          "chosen_candidate_key": null,
+          "confidence": "medium",
+          "decision_summary": "",
+          "identity_status": "resolved_new_candidate",
+          "new_entity_key": "n0",
+          "person_id": null,
+          "reason_codes": [
+            "python_small_card_projection",
+            "named_surface_without_catalogue_person"
+          ],
+          "supporting_evidence_refs": [
+            "hng02-jinshu-wikisource-punctuated-009"
+          ],
+          "target_entity_key": "e0"
+        },
+        "recommendation": {
+          "chosen_candidate_key": null,
+          "confidence": "medium",
+          "decision": "new_person_candidate",
+          "evidence_spans": [],
+          "new_entity_candidate": {
+            "surface": "簡文皇帝"
+          },
+          "new_entity_key": "n0",
+          "reason_codes": [
+            "python_small_card_projection",
+            "named_surface_without_catalogue_person"
+          ],
+          "summary": "",
+          "unresolved_reason": ""
+        },
+        "research_gap": {
+          "blocking_question": "",
+          "candidate_keys": [],
+          "missing_constraints": [],
+          "next_best_action": "none",
+          "status": "closed",
+          "stop_condition": "named new-person candidate is source-supported"
+        },
+        "state_delta": {
+          "added_candidates": [
+            "c0"
+          ],
+          "added_constraints": [
+            "{\"assertion_id\": \"a0\", \"assertion_side\": \"subject\", \"candidate_key\": \"c0\", \"computed_by\": \"python\", \"constraint_scope\": \"candidate\", \"constraint_type\": \"source_local_context\", \"evidence_refs\": [\"hng02-jinshu-wikisource-punctuated-009\"], \"evidence_span\": \"\", \"independent\": true, \"propagation_rule\": null, \"reason_code\": \"validated_assertion:person_mention\", \"source_entity_key\": \"e0\", \"status\": \"support\", \"target_entity_key\": null}",
+            "{\"assertion_id\": null, \"candidate_key\": null, \"computed_by\": \"python\", \"constraint_scope\": \"case\", \"constraint_type\": \"source_local_context\", \"evidence_refs\": [\"hng02-jinshu-wikisource-punctuated-009\"], \"evidence_span\": \"\", \"independent\": true, \"reason_code\": \"supplied_passage\", \"status\": \"support\"}"
+          ],
+          "changed_constraints": [
+            "{\"assertion_id\": \"a0\", \"assertion_side\": \"subject\", \"candidate_key\": \"c0\", \"computed_by\": \"python\", \"constraint_scope\": \"candidate\", \"constraint_type\": \"source_local_context\", \"evidence_refs\": [\"hng02-jinshu-wikisource-punctuated-009\"], \"evidence_span\": \"\", \"independent\": true, \"propagation_rule\": null, \"reason_code\": \"validated_assertion:person_mention\", \"source_entity_key\": \"e0\", \"status\": \"support\", \"target_entity_key\": null}",
+            "{\"assertion_id\": null, \"candidate_key\": null, \"computed_by\": \"python\", \"constraint_scope\": \"case\", \"constraint_type\": \"source_local_context\", \"evidence_refs\": [\"hng02-jinshu-wikisource-punctuated-009\"], \"evidence_span\": \"\", \"independent\": true, \"reason_code\": \"supplied_passage\", \"status\": \"support\"}"
+          ],
+          "conflicts": [],
+          "identity_propagations": [],
+          "material": true,
+          "new_candidates": [
+            "c0"
+          ],
+          "new_conflicts": [],
+          "new_evidence": [
+            "hng02-jinshu-wikisource-punctuated-009"
+          ],
+          "preserved_constraints": [],
+          "removed_candidates": [],
+          "removed_conflicts": [],
+          "unchanged_candidates": [],
+          "upgraded_candidates": []
+        },
+        "supporting_refs": [
+          "hng02-jinshu-wikisource-punctuated-009"
+        ]
+      },
+      "round1_validation": {
+        "base": {
+          "errors": [],
+          "evidence_ref_failures": 0,
+          "evidence_span_failures": 0,
+          "invalid_enum_outputs": [],
+          "invented_id_attempts": [],
+          "valid": true
+        },
+        "observations": {
+          "errors": [],
+          "span_failures": 0,
+          "valid": true
+        }
+      },
+      "round2_validation": {
+        "errors": [],
+        "finding_rejections": [],
+        "valid": true,
+        "valid_findings": [
+          {
+            "confidence": "low",
+            "exact_span": "簡文皇帝",
+            "fact_kind": "other",
+            "object_surface": "",
+            "predicate": "person_mention",
+            "source_ref": "hng02-jinshu-wikisource-punctuated-009",
+            "subject_surface": "簡文皇帝"
+          }
+        ]
+      }
+    },
+    {
+      "api_calls": 0,
+      "canonical_write_back": false,
+      "case_id": "hng2-live-hng2-live-w1-identity-33afe84247b036e9d9cb",
+      "category": "control_required_new_person",
+      "fixture_only": true,
+      "round1_projection": {
+        "candidate_info": {
+          "entity_pids": {
+            "e0": []
+          },
+          "entity_to_candidate": {
+            "e0": "c0"
+          },
+          "identity_propagations": []
+        },
+        "candidates": [
+          {
+            "candidate_key": "c0",
+            "candidate_source": "evidence_card_named_person",
+            "canonical_name": "陳騫",
+            "chronology_summary": "",
+            "graph_summary": "",
+            "known_forms": [
+              "陳騫"
+            ],
+            "person_id": null
+          }
+        ],
+        "card": {
+          "assertions": [
+            {
+              "assertion_id": "a0",
+              "assertion_type": "person_mention",
+              "confidence": "medium",
+              "direction": null,
+              "evidence_ref": "hng2-live:hng2-live-w1-identity-33afe84247b036e9d9cb",
+              "evidence_refs": [
+                "hng2-live:hng2-live-w1-identity-33afe84247b036e9d9cb"
+              ],
+              "evidence_span": "",
+              "object_entity_key": null,
+              "subject_entity_key": "e0",
+              "value": null
+            }
+          ],
+          "entities": [
+            {
+              "entity_key": "e0",
+              "entity_kind": "named_person",
+              "evidence_ref": "hng2-live:hng2-live-w1-identity-33afe84247b036e9d9cb",
+              "evidence_refs": [
+                "hng2-live:hng2-live-w1-identity-33afe84247b036e9d9cb"
+              ],
+              "evidence_span": "",
+              "reference_form": "full_name",
+              "surface": "陳騫"
+            }
+          ],
+          "summary": "fixture only",
+          "target_entity_key": "e0"
+        },
+        "constraints": [
+          {
+            "assertion_id": "a0",
+            "assertion_side": "subject",
+            "candidate_key": "c0",
+            "computed_by": "python",
+            "constraint_scope": "candidate",
+            "constraint_type": "source_local_context",
+            "evidence_refs": [
+              "hng2-live:hng2-live-w1-identity-33afe84247b036e9d9cb"
+            ],
+            "evidence_span": "",
+            "independent": true,
+            "propagation_rule": null,
+            "reason_code": "validated_assertion:person_mention",
+            "source_entity_key": "e0",
+            "status": "support",
+            "target_entity_key": null
+          },
+          {
+            "assertion_id": null,
+            "candidate_key": null,
+            "computed_by": "python",
+            "constraint_scope": "case",
+            "constraint_type": "source_local_context",
+            "evidence_refs": [
+              "hng2-live:hng2-live-w1-identity-33afe84247b036e9d9cb"
+            ],
+            "evidence_span": "",
+            "independent": true,
+            "reason_code": "supplied_passage",
+            "status": "support"
+          }
+        ],
+        "graph_action": {
+          "action": "create_provisional_candidate",
+          "frontier_status": "candidate",
+          "node_type": "provisional_person",
+          "person_id": null,
+          "provisional_person_id": "hng2-sc-provisional-33671647f5e5f4e59b28",
+          "reason_codes": [
+            "evidence_card_new_person",
+            "python_small_card_projection",
+            "named_surface_without_catalogue_person"
+          ]
+        },
+        "identity_decision": {
+          "canonical_write_back": false,
+          "case_id": "hng2-live-hng2-live-w1-identity-33afe84247b036e9d9cb",
+          "chosen_candidate_key": null,
+          "confidence": "medium",
+          "decision_summary": "",
+          "identity_status": "resolved_new_candidate",
+          "new_entity_key": "n0",
+          "person_id": null,
+          "reason_codes": [
+            "python_small_card_projection",
+            "named_surface_without_catalogue_person"
+          ],
+          "supporting_evidence_refs": [
+            "hng2-live:hng2-live-w1-identity-33afe84247b036e9d9cb"
+          ],
+          "target_entity_key": "e0"
+        },
+        "recommendation": {
+          "chosen_candidate_key": null,
+          "confidence": "medium",
+          "decision": "new_person_candidate",
+          "evidence_spans": [],
+          "new_entity_candidate": {
+            "surface": "陳騫"
+          },
+          "new_entity_key": "n0",
+          "reason_codes": [
+            "python_small_card_projection",
+            "named_surface_without_catalogue_person"
+          ],
+          "summary": "",
+          "unresolved_reason": ""
+        },
+        "research_gap": {
+          "blocking_question": "",
+          "candidate_keys": [],
+          "missing_constraints": [],
+          "next_best_action": "none",
+          "status": "closed",
+          "stop_condition": "named new-person candidate is source-supported"
+        },
+        "state_delta": {
+          "added_candidates": [
+            "c0"
+          ],
+          "added_constraints": [
+            "{\"assertion_id\": \"a0\", \"assertion_side\": \"subject\", \"candidate_key\": \"c0\", \"computed_by\": \"python\", \"constraint_scope\": \"candidate\", \"constraint_type\": \"source_local_context\", \"evidence_refs\": [\"hng2-live:hng2-live-w1-identity-33afe84247b036e9d9cb\"], \"evidence_span\": \"\", \"independent\": true, \"propagation_rule\": null, \"reason_code\": \"validated_assertion:person_mention\", \"source_entity_key\": \"e0\", \"status\": \"support\", \"target_entity_key\": null}",
+            "{\"assertion_id\": null, \"candidate_key\": null, \"computed_by\": \"python\", \"constraint_scope\": \"case\", \"constraint_type\": \"source_local_context\", \"evidence_refs\": [\"hng2-live:hng2-live-w1-identity-33afe84247b036e9d9cb\"], \"evidence_span\": \"\", \"independent\": true, \"reason_code\": \"supplied_passage\", \"status\": \"support\"}"
+          ],
+          "changed_constraints": [
+            "{\"assertion_id\": \"a0\", \"assertion_side\": \"subject\", \"candidate_key\": \"c0\", \"computed_by\": \"python\", \"constraint_scope\": \"candidate\", \"constraint_type\": \"source_local_context\", \"evidence_refs\": [\"hng2-live:hng2-live-w1-identity-33afe84247b036e9d9cb\"], \"evidence_span\": \"\", \"independent\": true, \"propagation_rule\": null, \"reason_code\": \"validated_assertion:person_mention\", \"source_entity_key\": \"e0\", \"status\": \"support\", \"target_entity_key\": null}",
+            "{\"assertion_id\": null, \"candidate_key\": null, \"computed_by\": \"python\", \"constraint_scope\": \"case\", \"constraint_type\": \"source_local_context\", \"evidence_refs\": [\"hng2-live:hng2-live-w1-identity-33afe84247b036e9d9cb\"], \"evidence_span\": \"\", \"independent\": true, \"reason_code\": \"supplied_passage\", \"status\": \"support\"}"
+          ],
+          "conflicts": [],
+          "identity_propagations": [],
+          "material": true,
+          "new_candidates": [
+            "c0"
+          ],
+          "new_conflicts": [],
+          "new_evidence": [
+            "hng2-live:hng2-live-w1-identity-33afe84247b036e9d9cb"
+          ],
+          "preserved_constraints": [],
+          "removed_candidates": [],
+          "removed_conflicts": [],
+          "unchanged_candidates": [],
+          "upgraded_candidates": []
+        },
+        "supporting_refs": [
+          "hng2-live:hng2-live-w1-identity-33afe84247b036e9d9cb"
+        ]
+      },
+      "round1_validation": {
+        "base": {
+          "errors": [],
+          "evidence_ref_failures": 0,
+          "evidence_span_failures": 0,
+          "invalid_enum_outputs": [],
+          "invented_id_attempts": [],
+          "valid": true
+        },
+        "observations": {
+          "errors": [],
+          "span_failures": 0,
+          "valid": true
+        }
+      },
+      "round2_validation": {
+        "errors": [],
+        "finding_rejections": [],
+        "valid": true,
+        "valid_findings": [
+          {
+            "confidence": "low",
+            "exact_span": "陳騫",
+            "fact_kind": "other",
+            "object_surface": "",
+            "predicate": "person_mention",
+            "source_ref": "hng2-live:hng2-live-w1-identity-33afe84247b036e9d9cb",
+            "subject_surface": "陳騫"
+          }
+        ]
+      }
+    },
+    {
+      "api_calls": 0,
+      "canonical_write_back": false,
+      "case_id": "hng1r2-hng1-raw-relation-2ff2066d8872cbae15f7",
+      "category": "control_title_known",
+      "fixture_only": true,
+      "round1_projection": {
+        "candidate_info": {
+          "entity_pids": {
+            "e0": [
+              "person-010"
+            ]
+          },
+          "entity_to_candidate": {
+            "e0": "c0"
+          },
+          "identity_propagations": []
+        },
+        "candidates": [
+          {
+            "candidate_key": "c0",
+            "candidate_source": "person_catalog",
+            "canonical_name": "庾亮",
+            "chronology_summary": "",
+            "graph_summary": "",
+            "known_forms": [
+              "庾謂曰君",
+              "庾元規",
+              "元規",
+              "庾亮",
+              "庾公"
+            ],
+            "person_id": "person-010"
+          }
+        ],
+        "card": {
+          "assertions": [
+            {
+              "assertion_id": "a0",
+              "assertion_type": "person_mention",
+              "confidence": "medium",
+              "direction": null,
+              "evidence_ref": "hng01-shishuo-07-shijian-016-main",
+              "evidence_refs": [
+                "hng01-shishuo-07-shijian-016-main"
+              ],
+              "evidence_span": "",
+              "object_entity_key": null,
+              "subject_entity_key": "e0",
+              "value": null
+            }
+          ],
+          "entities": [
+            {
+              "entity_key": "e0",
+              "entity_kind": "person_office_title",
+              "evidence_ref": "hng01-shishuo-07-shijian-016-main",
+              "evidence_refs": [
+                "hng01-shishuo-07-shijian-016-main"
+              ],
+              "evidence_span": "",
+              "reference_form": "office_title_only",
+              "surface": "庾太尉"
+            }
+          ],
+          "summary": "fixture only",
+          "target_entity_key": "e0"
+        },
+        "constraints": [
+          {
+            "candidate_key": "c0",
+            "computed_by": "python",
+            "constraint_type": "name",
+            "evidence_refs": [
+              "hng01-shishuo-07-shijian-016-main"
+            ],
+            "independent": true,
+            "reason_code": "no_direct_form_match",
+            "status": "unknown"
+          },
+          {
+            "candidate_key": "c0",
+            "computed_by": "python",
+            "constraint_type": "alias",
+            "evidence_refs": [
+              "hng01-shishuo-07-shijian-016-main"
+            ],
+            "independent": true,
+            "reason_code": "not_a_catalogue_alias",
+            "status": "not_applicable"
+          },
+          {
+            "candidate_key": "c0",
+            "computed_by": "python",
+            "constraint_type": "title",
+            "evidence_refs": [
+              "hng01-shishuo-07-shijian-016-main"
+            ],
+            "independent": true,
+            "reason_code": "title_not_unique",
+            "status": "unknown"
+          },
+          {
+            "candidate_key": "c0",
+            "computed_by": "python",
+            "constraint_type": "kinship",
+            "evidence_refs": [
+              "hng01-shishuo-07-shijian-016-main"
+            ],
+            "independent": true,
+            "reason_code": "not_kinship_case",
+            "status": "not_applicable"
+          },
+          {
+            "candidate_key": "c0",
+            "computed_by": "python",
+            "constraint_type": "temporal",
+            "evidence_refs": [
+              "hng01-shishuo-07-shijian-016-main"
+            ],
+            "independent": true,
+            "reason_code": "chronology_not_deterministic",
+            "status": "unknown"
+          },
+          {
+            "candidate_key": "c0",
+            "computed_by": "python",
+            "constraint_type": "graph_relation",
+            "evidence_refs": [
+              "hng01-shishuo-07-shijian-016-main"
+            ],
+            "independent": false,
+            "reason_code": "no_independent_graph_support",
+            "status": "unknown"
+          },
+          {
+            "candidate_key": "c0",
+            "computed_by": "python",
+            "constraint_type": "source_local_context",
+            "evidence_refs": [
+              "hng01-shishuo-07-shijian-016-main"
+            ],
+            "independent": true,
+            "reason_code": "no_full_name_local_context",
+            "status": "unknown"
+          },
+          {
+            "assertion_id": "a0",
+            "assertion_side": "subject",
+            "candidate_key": "c0",
+            "computed_by": "python",
+            "constraint_scope": "candidate",
+            "constraint_type": "source_local_context",
+            "evidence_refs": [
+              "hng01-shishuo-07-shijian-016-main"
+            ],
+            "evidence_span": "",
+            "independent": true,
+            "propagation_rule": null,
+            "reason_code": "validated_assertion:person_mention",
+            "source_entity_key": "e0",
+            "status": "support",
+            "target_entity_key": null
+          },
+          {
+            "assertion_id": null,
+            "candidate_key": null,
+            "computed_by": "python",
+            "constraint_scope": "case",
+            "constraint_type": "source_local_context",
+            "evidence_refs": [
+              "hng01-shishuo-02-yanyu-052-main",
+              "hng01-shishuo-07-shijian-016-main",
+              "hng01-shishuo-08-shangyu-035-main",
+              "hng01-shishuo-14-rongzhi-024-main",
+              "hng01-shishuo-18-qiyi-009-main"
+            ],
+            "evidence_span": "",
+            "independent": true,
+            "reason_code": "supplied_passage",
+            "status": "support"
+          }
+        ],
+        "graph_action": {
+          "action": "link_existing",
+          "frontier_status": "eligible",
+          "node_type": "existing_person",
+          "person_id": "person-010",
+          "provisional_person_id": null,
+          "reason_codes": [
+            "evidence_card_validated",
+            "python_small_card_projection",
+            "catalogue_match"
+          ]
+        },
+        "identity_decision": {
+          "canonical_write_back": false,
+          "case_id": "hng1r2-hng1-raw-relation-2ff2066d8872cbae15f7",
+          "chosen_candidate_key": "c0",
+          "confidence": "high",
+          "decision_summary": "",
+          "identity_status": "resolved_existing",
+          "new_entity_key": null,
+          "person_id": "person-010",
+          "reason_codes": [
+            "python_small_card_projection",
+            "catalogue_match"
+          ],
+          "supporting_evidence_refs": [
+            "hng01-shishuo-07-shijian-016-main"
+          ],
+          "target_entity_key": "e0"
+        },
+        "recommendation": {
+          "chosen_candidate_key": "c0",
+          "confidence": "high",
+          "decision": "choose_candidate",
+          "evidence_spans": [],
+          "new_entity_candidate": null,
+          "new_entity_key": null,
+          "reason_codes": [
+            "python_small_card_projection",
+            "catalogue_match"
+          ],
+          "summary": "",
+          "unresolved_reason": ""
+        },
+        "research_gap": {
+          "blocking_question": "",
+          "candidate_keys": [],
+          "missing_constraints": [],
+          "next_best_action": "none",
+          "status": "closed",
+          "stop_condition": "validated candidate has structured source support"
+        },
+        "state_delta": {
+          "added_candidates": [],
+          "added_constraints": [
+            "{\"assertion_id\": \"a0\", \"assertion_side\": \"subject\", \"candidate_key\": \"c0\", \"computed_by\": \"python\", \"constraint_scope\": \"candidate\", \"constraint_type\": \"source_local_context\", \"evidence_refs\": [\"hng01-shishuo-07-shijian-016-main\"], \"evidence_span\": \"\", \"independent\": true, \"propagation_rule\": null, \"reason_code\": \"validated_assertion:person_mention\", \"source_entity_key\": \"e0\", \"status\": \"support\", \"target_entity_key\": null}",
+            "{\"assertion_id\": null, \"candidate_key\": null, \"computed_by\": \"python\", \"constraint_scope\": \"case\", \"constraint_type\": \"source_local_context\", \"evidence_refs\": [\"hng01-shishuo-02-yanyu-052-main\", \"hng01-shishuo-07-shijian-016-main\", \"hng01-shishuo-08-shangyu-035-main\", \"hng01-shishuo-14-rongzhi-024-main\", \"hng01-shishuo-18-qiyi-009-main\"], \"evidence_span\": \"\", \"independent\": true, \"reason_code\": \"supplied_passage\", \"status\": \"support\"}"
+          ],
+          "changed_constraints": [
+            "{\"assertion_id\": \"a0\", \"assertion_side\": \"subject\", \"candidate_key\": \"c0\", \"computed_by\": \"python\", \"constraint_scope\": \"candidate\", \"constraint_type\": \"source_local_context\", \"evidence_refs\": [\"hng01-shishuo-07-shijian-016-main\"], \"evidence_span\": \"\", \"independent\": true, \"propagation_rule\": null, \"reason_code\": \"validated_assertion:person_mention\", \"source_entity_key\": \"e0\", \"status\": \"support\", \"target_entity_key\": null}",
+            "{\"assertion_id\": null, \"candidate_key\": null, \"computed_by\": \"python\", \"constraint_scope\": \"case\", \"constraint_type\": \"source_local_context\", \"evidence_refs\": [\"hng01-shishuo-02-yanyu-052-main\", \"hng01-shishuo-07-shijian-016-main\", \"hng01-shishuo-08-shangyu-035-main\", \"hng01-shishuo-14-rongzhi-024-main\", \"hng01-shishuo-18-qiyi-009-main\"], \"evidence_span\": \"\", \"independent\": true, \"reason_code\": \"supplied_passage\", \"status\": \"support\"}"
+          ],
+          "conflicts": [],
+          "identity_propagations": [],
+          "material": true,
+          "new_candidates": [],
+          "new_conflicts": [],
+          "new_evidence": [
+            "hng01-shishuo-07-shijian-016-main"
+          ],
+          "preserved_constraints": [
+            "{\"candidate_key\": \"c0\", \"computed_by\": \"python\", \"constraint_type\": \"alias\", \"evidence_refs\": [\"hng01-shishuo-07-shijian-016-main\"], \"independent\": true, \"reason_code\": \"not_a_catalogue_alias\", \"status\": \"not_applicable\"}",
+            "{\"candidate_key\": \"c0\", \"computed_by\": \"python\", \"constraint_type\": \"graph_relation\", \"evidence_refs\": [\"hng01-shishuo-07-shijian-016-main\"], \"independent\": false, \"reason_code\": \"no_independent_graph_support\", \"status\": \"unknown\"}",
+            "{\"candidate_key\": \"c0\", \"computed_by\": \"python\", \"constraint_type\": \"kinship\", \"evidence_refs\": [\"hng01-shishuo-07-shijian-016-main\"], \"independent\": true, \"reason_code\": \"not_kinship_case\", \"status\": \"not_applicable\"}",
+            "{\"candidate_key\": \"c0\", \"computed_by\": \"python\", \"constraint_type\": \"name\", \"evidence_refs\": [\"hng01-shishuo-07-shijian-016-main\"], \"independent\": true, \"reason_code\": \"no_direct_form_match\", \"status\": \"unknown\"}",
+            "{\"candidate_key\": \"c0\", \"computed_by\": \"python\", \"constraint_type\": \"source_local_context\", \"evidence_refs\": [\"hng01-shishuo-07-shijian-016-main\"], \"independent\": true, \"reason_code\": \"no_full_name_local_context\", \"status\": \"unknown\"}",
+            "{\"candidate_key\": \"c0\", \"computed_by\": \"python\", \"constraint_type\": \"temporal\", \"evidence_refs\": [\"hng01-shishuo-07-shijian-016-main\"], \"independent\": true, \"reason_code\": \"chronology_not_deterministic\", \"status\": \"unknown\"}",
+            "{\"candidate_key\": \"c0\", \"computed_by\": \"python\", \"constraint_type\": \"title\", \"evidence_refs\": [\"hng01-shishuo-07-shijian-016-main\"], \"independent\": true, \"reason_code\": \"title_not_unique\", \"status\": \"unknown\"}"
+          ],
+          "removed_candidates": [],
+          "removed_conflicts": [],
+          "unchanged_candidates": [
+            "c0"
+          ],
+          "upgraded_candidates": []
+        },
+        "supporting_refs": [
+          "hng01-shishuo-07-shijian-016-main"
+        ]
+      },
+      "round1_validation": {
+        "base": {
+          "errors": [],
+          "evidence_ref_failures": 0,
+          "evidence_span_failures": 0,
+          "invalid_enum_outputs": [],
+          "invented_id_attempts": [],
+          "valid": true
+        },
+        "observations": {
+          "errors": [],
+          "span_failures": 0,
+          "valid": true
+        }
+      },
+      "round2_validation": {
+        "errors": [],
+        "finding_rejections": [],
+        "valid": true,
+        "valid_findings": [
+          {
+            "confidence": "low",
+            "exact_span": "庾太尉",
+            "fact_kind": "other",
+            "object_surface": "",
+            "predicate": "person_mention",
+            "source_ref": "hng01-shishuo-07-shijian-016-main",
+            "subject_surface": "庾太尉"
+          }
+        ]
+      }
+    },
+    {
+      "api_calls": 0,
+      "canonical_write_back": false,
+      "case_id": "hng2-live-hng2-live-w1-temporal-7787c8e7d9f2c14fc5b5",
+      "category": "temporal_era",
+      "fixture_only": true,
+      "round1_projection": {
+        "candidate_info": {
+          "entity_pids": {
+            "e0": []
+          },
+          "entity_to_candidate": {
+            "e0": "c0"
+          },
+          "identity_propagations": []
+        },
+        "candidates": [
+          {
+            "candidate_key": "c0",
+            "candidate_source": "evidence_card_named_person",
+            "canonical_name": "何曾",
+            "chronology_summary": "",
+            "graph_summary": "",
+            "known_forms": [
+              "何曾"
+            ],
+            "person_id": null
+          }
+        ],
+        "card": {
+          "assertions": [
+            {
+              "assertion_id": "a0",
+              "assertion_type": "person_mention",
+              "confidence": "medium",
+              "direction": null,
+              "evidence_ref": "hng02-jinshu-wikisource-punctuated-003",
+              "evidence_refs": [
+                "hng02-jinshu-wikisource-punctuated-003"
+              ],
+              "evidence_span": "",
+              "object_entity_key": null,
+              "subject_entity_key": "e0",
+              "value": null
+            }
+          ],
+          "entities": [
+            {
+              "entity_key": "e0",
+              "entity_kind": "named_person",
+              "evidence_ref": "hng02-jinshu-wikisource-punctuated-003",
+              "evidence_refs": [
+                "hng02-jinshu-wikisource-punctuated-003"
+              ],
+              "evidence_span": "",
+              "reference_form": "full_name",
+              "surface": "何曾"
+            }
+          ],
+          "summary": "fixture only",
+          "target_entity_key": "e0"
+        },
+        "constraints": [
+          {
+            "assertion_id": "a0",
+            "assertion_side": "subject",
+            "candidate_key": "c0",
+            "computed_by": "python",
+            "constraint_scope": "candidate",
+            "constraint_type": "source_local_context",
+            "evidence_refs": [
+              "hng02-jinshu-wikisource-punctuated-003"
+            ],
+            "evidence_span": "",
+            "independent": true,
+            "propagation_rule": null,
+            "reason_code": "validated_assertion:person_mention",
+            "source_entity_key": "e0",
+            "status": "support",
+            "target_entity_key": null
+          },
+          {
+            "assertion_id": null,
+            "candidate_key": null,
+            "computed_by": "python",
+            "constraint_scope": "case",
+            "constraint_type": "source_local_context",
+            "evidence_refs": [
+              "hng02-jinshu-wikisource-punctuated-003",
+              "hng02-jinshu-wikisource-punctuated-024",
+              "hng02-jinshu-wikisource-punctuated-028",
+              "hng02-jinshu-wikisource-punctuated-030"
+            ],
+            "evidence_span": "",
+            "independent": true,
+            "reason_code": "supplied_passage",
+            "status": "support"
+          }
+        ],
+        "graph_action": {
+          "action": "create_provisional_candidate",
+          "frontier_status": "candidate",
+          "node_type": "provisional_person",
+          "person_id": null,
+          "provisional_person_id": "hng2-sc-provisional-7d897991b69bd08f28c4",
+          "reason_codes": [
+            "evidence_card_new_person",
+            "python_small_card_projection",
+            "named_surface_without_catalogue_person"
+          ]
+        },
+        "identity_decision": {
+          "canonical_write_back": false,
+          "case_id": "hng2-live-hng2-live-w1-temporal-7787c8e7d9f2c14fc5b5",
+          "chosen_candidate_key": null,
+          "confidence": "medium",
+          "decision_summary": "",
+          "identity_status": "resolved_new_candidate",
+          "new_entity_key": "n0",
+          "person_id": null,
+          "reason_codes": [
+            "python_small_card_projection",
+            "named_surface_without_catalogue_person"
+          ],
+          "supporting_evidence_refs": [
+            "hng02-jinshu-wikisource-punctuated-003"
+          ],
+          "target_entity_key": "e0"
+        },
+        "recommendation": {
+          "chosen_candidate_key": null,
+          "confidence": "medium",
+          "decision": "new_person_candidate",
+          "evidence_spans": [],
+          "new_entity_candidate": {
+            "surface": "何曾"
+          },
+          "new_entity_key": "n0",
+          "reason_codes": [
+            "python_small_card_projection",
+            "named_surface_without_catalogue_person"
+          ],
+          "summary": "",
+          "unresolved_reason": ""
+        },
+        "research_gap": {
+          "blocking_question": "",
+          "candidate_keys": [],
+          "missing_constraints": [],
+          "next_best_action": "none",
+          "status": "closed",
+          "stop_condition": "named new-person candidate is source-supported"
+        },
+        "state_delta": {
+          "added_candidates": [
+            "c0"
+          ],
+          "added_constraints": [
+            "{\"assertion_id\": \"a0\", \"assertion_side\": \"subject\", \"candidate_key\": \"c0\", \"computed_by\": \"python\", \"constraint_scope\": \"candidate\", \"constraint_type\": \"source_local_context\", \"evidence_refs\": [\"hng02-jinshu-wikisource-punctuated-003\"], \"evidence_span\": \"\", \"independent\": true, \"propagation_rule\": null, \"reason_code\": \"validated_assertion:person_mention\", \"source_entity_key\": \"e0\", \"status\": \"support\", \"target_entity_key\": null}",
+            "{\"assertion_id\": null, \"candidate_key\": null, \"computed_by\": \"python\", \"constraint_scope\": \"case\", \"constraint_type\": \"source_local_context\", \"evidence_refs\": [\"hng02-jinshu-wikisource-punctuated-003\", \"hng02-jinshu-wikisource-punctuated-024\", \"hng02-jinshu-wikisource-punctuated-028\", \"hng02-jinshu-wikisource-punctuated-030\"], \"evidence_span\": \"\", \"independent\": true, \"reason_code\": \"supplied_passage\", \"status\": \"support\"}"
+          ],
+          "changed_constraints": [
+            "{\"assertion_id\": \"a0\", \"assertion_side\": \"subject\", \"candidate_key\": \"c0\", \"computed_by\": \"python\", \"constraint_scope\": \"candidate\", \"constraint_type\": \"source_local_context\", \"evidence_refs\": [\"hng02-jinshu-wikisource-punctuated-003\"], \"evidence_span\": \"\", \"independent\": true, \"propagation_rule\": null, \"reason_code\": \"validated_assertion:person_mention\", \"source_entity_key\": \"e0\", \"status\": \"support\", \"target_entity_key\": null}",
+            "{\"assertion_id\": null, \"candidate_key\": null, \"computed_by\": \"python\", \"constraint_scope\": \"case\", \"constraint_type\": \"source_local_context\", \"evidence_refs\": [\"hng02-jinshu-wikisource-punctuated-003\", \"hng02-jinshu-wikisource-punctuated-024\", \"hng02-jinshu-wikisource-punctuated-028\", \"hng02-jinshu-wikisource-punctuated-030\"], \"evidence_span\": \"\", \"independent\": true, \"reason_code\": \"supplied_passage\", \"status\": \"support\"}"
+          ],
+          "conflicts": [],
+          "identity_propagations": [],
+          "material": true,
+          "new_candidates": [
+            "c0"
+          ],
+          "new_conflicts": [],
+          "new_evidence": [
+            "hng02-jinshu-wikisource-punctuated-003"
+          ],
+          "preserved_constraints": [],
+          "removed_candidates": [],
+          "removed_conflicts": [],
+          "unchanged_candidates": [],
+          "upgraded_candidates": []
+        },
+        "supporting_refs": [
+          "hng02-jinshu-wikisource-punctuated-003"
+        ]
+      },
+      "round1_validation": {
+        "base": {
+          "errors": [],
+          "evidence_ref_failures": 0,
+          "evidence_span_failures": 0,
+          "invalid_enum_outputs": [],
+          "invented_id_attempts": [],
+          "valid": true
+        },
+        "observations": {
+          "errors": [],
+          "span_failures": 0,
+          "valid": true
+        }
+      },
+      "round2_validation": {
+        "errors": [],
+        "finding_rejections": [],
+        "valid": true,
+        "valid_findings": [
+          {
+            "confidence": "low",
+            "exact_span": "何曾",
+            "fact_kind": "other",
+            "object_surface": "",
+            "predicate": "person_mention",
+            "source_ref": "hng02-jinshu-wikisource-punctuated-003",
+            "subject_surface": "何曾"
+          }
+        ]
+      }
+    },
+    {
+      "api_calls": 0,
+      "canonical_write_back": false,
+      "case_id": "hng1r2-hng1-raw-relation-b97bdeb3fbec092978bc",
+      "category": "relation_kinship_target",
+      "fixture_only": true,
+      "round1_projection": {
+        "candidate_info": {
+          "entity_pids": {
+            "e0": []
+          },
+          "entity_to_candidate": {
+            "e0": "c0"
+          },
+          "identity_propagations": []
+        },
+        "candidates": [
+          {
+            "candidate_key": "c0",
+            "candidate_source": "evidence_card_named_person",
+            "canonical_name": "虞喜",
+            "chronology_summary": "",
+            "graph_summary": "",
+            "known_forms": [
+              "虞喜"
+            ],
+            "person_id": null
+          }
+        ],
+        "card": {
+          "assertions": [
+            {
+              "assertion_id": "a0",
+              "assertion_type": "person_mention",
+              "confidence": "medium",
+              "direction": null,
+              "evidence_ref": "hng01-jinshu-088-liezhuan-007",
+              "evidence_refs": [
+                "hng01-jinshu-088-liezhuan-007"
+              ],
+              "evidence_span": "",
+              "object_entity_key": null,
+              "subject_entity_key": "e0",
+              "value": null
+            }
+          ],
+          "entities": [
+            {
+              "entity_key": "e0",
+              "entity_kind": "named_person",
+              "evidence_ref": "hng01-jinshu-088-liezhuan-007",
+              "evidence_refs": [
+                "hng01-jinshu-088-liezhuan-007"
+              ],
+              "evidence_span": "",
+              "reference_form": "full_name",
+              "surface": "虞喜"
+            }
+          ],
+          "summary": "fixture only",
+          "target_entity_key": "e0"
+        },
+        "constraints": [
+          {
+            "assertion_id": "a0",
+            "assertion_side": "subject",
+            "candidate_key": "c0",
+            "computed_by": "python",
+            "constraint_scope": "candidate",
+            "constraint_type": "source_local_context",
+            "evidence_refs": [
+              "hng01-jinshu-088-liezhuan-007"
+            ],
+            "evidence_span": "",
+            "independent": true,
+            "propagation_rule": null,
+            "reason_code": "validated_assertion:person_mention",
+            "source_entity_key": "e0",
+            "status": "support",
+            "target_entity_key": null
+          },
+          {
+            "assertion_id": null,
+            "candidate_key": null,
+            "computed_by": "python",
+            "constraint_scope": "case",
+            "constraint_type": "source_local_context",
+            "evidence_refs": [
+              "hng01-jinshu-088-liezhuan-007",
+              "hng02-jinshu-wikisource-punctuated-006",
+              "hng02-jinshu-wikisource-punctuated-019",
+              "hng02-jinshu-wikisource-punctuated-043",
+              "hng02-jinshu-wikisource-punctuated-068"
+            ],
+            "evidence_span": "",
+            "independent": true,
+            "reason_code": "supplied_passage",
+            "status": "support"
+          }
+        ],
+        "graph_action": {
+          "action": "create_provisional_candidate",
+          "frontier_status": "candidate",
+          "node_type": "provisional_person",
+          "person_id": null,
+          "provisional_person_id": "hng2-sc-provisional-86ce328e91c6bff8dac7",
+          "reason_codes": [
+            "evidence_card_new_person",
+            "python_small_card_projection",
+            "named_surface_without_catalogue_person"
+          ]
+        },
+        "identity_decision": {
+          "canonical_write_back": false,
+          "case_id": "hng1r2-hng1-raw-relation-b97bdeb3fbec092978bc",
+          "chosen_candidate_key": null,
+          "confidence": "medium",
+          "decision_summary": "",
+          "identity_status": "resolved_new_candidate",
+          "new_entity_key": "n0",
+          "person_id": null,
+          "reason_codes": [
+            "python_small_card_projection",
+            "named_surface_without_catalogue_person"
+          ],
+          "supporting_evidence_refs": [
+            "hng01-jinshu-088-liezhuan-007"
+          ],
+          "target_entity_key": "e0"
+        },
+        "recommendation": {
+          "chosen_candidate_key": null,
+          "confidence": "medium",
+          "decision": "new_person_candidate",
+          "evidence_spans": [],
+          "new_entity_candidate": {
+            "surface": "虞喜"
+          },
+          "new_entity_key": "n0",
+          "reason_codes": [
+            "python_small_card_projection",
+            "named_surface_without_catalogue_person"
+          ],
+          "summary": "",
+          "unresolved_reason": ""
+        },
+        "research_gap": {
+          "blocking_question": "",
+          "candidate_keys": [],
+          "missing_constraints": [],
+          "next_best_action": "none",
+          "status": "closed",
+          "stop_condition": "named new-person candidate is source-supported"
+        },
+        "state_delta": {
+          "added_candidates": [
+            "c0"
+          ],
+          "added_constraints": [
+            "{\"assertion_id\": \"a0\", \"assertion_side\": \"subject\", \"candidate_key\": \"c0\", \"computed_by\": \"python\", \"constraint_scope\": \"candidate\", \"constraint_type\": \"source_local_context\", \"evidence_refs\": [\"hng01-jinshu-088-liezhuan-007\"], \"evidence_span\": \"\", \"independent\": true, \"propagation_rule\": null, \"reason_code\": \"validated_assertion:person_mention\", \"source_entity_key\": \"e0\", \"status\": \"support\", \"target_entity_key\": null}",
+            "{\"assertion_id\": null, \"candidate_key\": null, \"computed_by\": \"python\", \"constraint_scope\": \"case\", \"constraint_type\": \"source_local_context\", \"evidence_refs\": [\"hng01-jinshu-088-liezhuan-007\", \"hng02-jinshu-wikisource-punctuated-006\", \"hng02-jinshu-wikisource-punctuated-019\", \"hng02-jinshu-wikisource-punctuated-043\", \"hng02-jinshu-wikisource-punctuated-068\"], \"evidence_span\": \"\", \"independent\": true, \"reason_code\": \"supplied_passage\", \"status\": \"support\"}"
+          ],
+          "changed_constraints": [
+            "{\"assertion_id\": \"a0\", \"assertion_side\": \"subject\", \"candidate_key\": \"c0\", \"computed_by\": \"python\", \"constraint_scope\": \"candidate\", \"constraint_type\": \"source_local_context\", \"evidence_refs\": [\"hng01-jinshu-088-liezhuan-007\"], \"evidence_span\": \"\", \"independent\": true, \"propagation_rule\": null, \"reason_code\": \"validated_assertion:person_mention\", \"source_entity_key\": \"e0\", \"status\": \"support\", \"target_entity_key\": null}",
+            "{\"assertion_id\": null, \"candidate_key\": null, \"computed_by\": \"python\", \"constraint_scope\": \"case\", \"constraint_type\": \"source_local_context\", \"evidence_refs\": [\"hng01-jinshu-088-liezhuan-007\", \"hng02-jinshu-wikisource-punctuated-006\", \"hng02-jinshu-wikisource-punctuated-019\", \"hng02-jinshu-wikisource-punctuated-043\", \"hng02-jinshu-wikisource-punctuated-068\"], \"evidence_span\": \"\", \"independent\": true, \"reason_code\": \"supplied_passage\", \"status\": \"support\"}"
+          ],
+          "conflicts": [],
+          "identity_propagations": [],
+          "material": true,
+          "new_candidates": [
+            "c0"
+          ],
+          "new_conflicts": [],
+          "new_evidence": [
+            "hng01-jinshu-088-liezhuan-007"
+          ],
+          "preserved_constraints": [],
+          "removed_candidates": [],
+          "removed_conflicts": [],
+          "unchanged_candidates": [],
+          "upgraded_candidates": []
+        },
+        "supporting_refs": [
+          "hng01-jinshu-088-liezhuan-007"
+        ]
+      },
+      "round1_validation": {
+        "base": {
+          "errors": [],
+          "evidence_ref_failures": 0,
+          "evidence_span_failures": 0,
+          "invalid_enum_outputs": [],
+          "invented_id_attempts": [],
+          "valid": true
+        },
+        "observations": {
+          "errors": [],
+          "span_failures": 0,
+          "valid": true
+        }
+      },
+      "round2_validation": {
+        "errors": [],
+        "finding_rejections": [],
+        "valid": true,
+        "valid_findings": [
+          {
+            "confidence": "low",
+            "exact_span": "虞喜",
+            "fact_kind": "other",
+            "object_surface": "",
+            "predicate": "person_mention",
+            "source_ref": "hng01-jinshu-088-liezhuan-007",
+            "subject_surface": "虞喜"
+          }
+        ]
+      }
+    },
+    {
+      "api_calls": 0,
+      "canonical_write_back": false,
+      "case_id": "hng2-hng02-relation-2164c52caaa53337435e",
+      "category": "relation_kinship_structure",
+      "fixture_only": true,
+      "round1_projection": {
+        "candidate_info": {
+          "entity_pids": {},
+          "entity_to_candidate": {},
+          "identity_propagations": []
+        },
+        "candidates": [],
+        "card": {
+          "assertions": [
+            {
+              "assertion_id": "a0",
+              "assertion_type": "person_mention",
+              "confidence": "medium",
+              "direction": null,
+              "evidence_ref": "hng01-jinshu-088-liezhuan-007",
+              "evidence_refs": [
+                "hng01-jinshu-088-liezhuan-007"
+              ],
+              "evidence_span": "",
+              "object_entity_key": null,
+              "subject_entity_key": "e0",
+              "value": null
+            }
+          ],
+          "entities": [
+            {
+              "entity_key": "e0",
+              "entity_kind": "structural_kinship_expression",
+              "evidence_ref": "hng01-jinshu-088-liezhuan-007",
+              "evidence_refs": [
+                "hng01-jinshu-088-liezhuan-007"
+              ],
+              "evidence_span": "",
+              "reference_form": "full_name",
+              "surface": "喜弟預女"
+            }
+          ],
+          "summary": "fixture only",
+          "target_entity_key": "e0"
+        },
+        "constraints": [
+          {
+            "assertion_id": "a0",
+            "assertion_side": "subject",
+            "candidate_key": null,
+            "computed_by": "python",
+            "constraint_scope": "passage",
+            "constraint_type": "source_local_context",
+            "evidence_refs": [
+              "hng01-jinshu-088-liezhuan-007"
+            ],
+            "evidence_span": "",
+            "independent": true,
+            "propagation_rule": null,
+            "reason_code": "unbound_assertion:person_mention",
+            "source_entity_key": "e0",
+            "status": "support",
+            "target_entity_key": null
+          },
+          {
+            "assertion_id": null,
+            "candidate_key": null,
+            "computed_by": "python",
+            "constraint_scope": "case",
+            "constraint_type": "source_local_context",
+            "evidence_refs": [
+              "hng01-jinshu-088-liezhuan-007",
+              "hng02-jinshu-wikisource-punctuated-088"
+            ],
+            "evidence_span": "",
+            "independent": true,
+            "reason_code": "supplied_passage",
+            "status": "support"
+          }
+        ],
+        "graph_action": {
+          "action": "no_person_node",
+          "frontier_status": "blocked",
+          "node_type": "none",
+          "person_id": null,
+          "provisional_person_id": null,
+          "reason_codes": [
+            "structural_kinship_expression",
+            "python_small_card_projection",
+            "target_structural_kinship"
+          ]
+        },
+        "identity_decision": {
+          "canonical_write_back": false,
+          "case_id": "hng2-hng02-relation-2164c52caaa53337435e",
+          "chosen_candidate_key": null,
+          "confidence": "high",
+          "decision_summary": "target is a structural kinship expression",
+          "identity_status": "not_single_person",
+          "new_entity_key": null,
+          "person_id": null,
+          "reason_codes": [
+            "python_small_card_projection",
+            "target_structural_kinship"
+          ],
+          "supporting_evidence_refs": [
+            "hng01-jinshu-088-liezhuan-007"
+          ],
+          "target_entity_key": "e0"
+        },
+        "recommendation": {
+          "chosen_candidate_key": null,
+          "confidence": "high",
+          "decision": "not_a_single_person",
+          "evidence_spans": [],
+          "new_entity_candidate": null,
+          "new_entity_key": null,
+          "reason_codes": [
+            "python_small_card_projection",
+            "target_structural_kinship"
+          ],
+          "summary": "",
+          "unresolved_reason": "target is a structural kinship expression"
+        },
+        "research_gap": {
+          "blocking_question": "",
+          "candidate_keys": [],
+          "missing_constraints": [],
+          "next_best_action": "none",
+          "status": "closed",
+          "stop_condition": "structured card establishes that no single Person node is required"
+        },
+        "state_delta": {
+          "added_candidates": [],
+          "added_constraints": [
+            "{\"assertion_id\": \"a0\", \"assertion_side\": \"subject\", \"candidate_key\": null, \"computed_by\": \"python\", \"constraint_scope\": \"passage\", \"constraint_type\": \"source_local_context\", \"evidence_refs\": [\"hng01-jinshu-088-liezhuan-007\"], \"evidence_span\": \"\", \"independent\": true, \"propagation_rule\": null, \"reason_code\": \"unbound_assertion:person_mention\", \"source_entity_key\": \"e0\", \"status\": \"support\", \"target_entity_key\": null}",
+            "{\"assertion_id\": null, \"candidate_key\": null, \"computed_by\": \"python\", \"constraint_scope\": \"case\", \"constraint_type\": \"source_local_context\", \"evidence_refs\": [\"hng01-jinshu-088-liezhuan-007\", \"hng02-jinshu-wikisource-punctuated-088\"], \"evidence_span\": \"\", \"independent\": true, \"reason_code\": \"supplied_passage\", \"status\": \"support\"}"
+          ],
+          "changed_constraints": [
+            "{\"assertion_id\": \"a0\", \"assertion_side\": \"subject\", \"candidate_key\": null, \"computed_by\": \"python\", \"constraint_scope\": \"passage\", \"constraint_type\": \"source_local_context\", \"evidence_refs\": [\"hng01-jinshu-088-liezhuan-007\"], \"evidence_span\": \"\", \"independent\": true, \"propagation_rule\": null, \"reason_code\": \"unbound_assertion:person_mention\", \"source_entity_key\": \"e0\", \"status\": \"support\", \"target_entity_key\": null}",
+            "{\"assertion_id\": null, \"candidate_key\": null, \"computed_by\": \"python\", \"constraint_scope\": \"case\", \"constraint_type\": \"source_local_context\", \"evidence_refs\": [\"hng01-jinshu-088-liezhuan-007\", \"hng02-jinshu-wikisource-punctuated-088\"], \"evidence_span\": \"\", \"independent\": true, \"reason_code\": \"supplied_passage\", \"status\": \"support\"}"
+          ],
+          "conflicts": [],
+          "identity_propagations": [],
+          "material": true,
+          "new_candidates": [],
+          "new_conflicts": [],
+          "new_evidence": [
+            "hng01-jinshu-088-liezhuan-007"
+          ],
+          "preserved_constraints": [],
+          "removed_candidates": [],
+          "removed_conflicts": [],
+          "unchanged_candidates": [],
+          "upgraded_candidates": []
+        },
+        "supporting_refs": [
+          "hng01-jinshu-088-liezhuan-007"
+        ]
+      },
+      "round1_validation": {
+        "base": {
+          "errors": [],
+          "evidence_ref_failures": 0,
+          "evidence_span_failures": 0,
+          "invalid_enum_outputs": [],
+          "invented_id_attempts": [],
+          "valid": true
+        },
+        "observations": {
+          "errors": [],
+          "span_failures": 0,
+          "valid": true
+        }
+      },
+      "round2_validation": {
+        "errors": [],
+        "finding_rejections": [],
+        "valid": true,
+        "valid_findings": [
+          {
+            "confidence": "low",
+            "exact_span": "喜弟預女",
+            "fact_kind": "other",
+            "object_surface": "",
+            "predicate": "person_mention",
+            "source_ref": "hng01-jinshu-088-liezhuan-007",
+            "subject_surface": "喜弟預女"
+          }
+        ]
+      }
+    }
+  ],
+  "fixture_only": true,
+  "no_frontier_expansion": true,
+  "stage": "hng2-sc2-p-offline-replay"
+}

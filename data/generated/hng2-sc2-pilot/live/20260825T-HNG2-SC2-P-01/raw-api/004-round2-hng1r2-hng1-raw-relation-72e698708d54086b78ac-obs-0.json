@@ -1,0 +1,65 @@
+{
+  "canonical_write_back": false,
+  "case_id": "hng1r2-hng1-raw-relation-72e698708d54086b78ac-obs-0",
+  "elapsed_seconds": 1.710962,
+  "endpoint": "https://api.deepseek.com/beta/chat/completions",
+  "finish_reason": "tool_calls",
+  "function_name": "submit_historical_evidence_resolution",
+  "immutable": true,
+  "input_hash": "cd560fe3a708249339f132b1aa34a54298dc6295a64886bd132d3a1d0a405458",
+  "kind": "round2",
+  "model": "deepseek-v4-flash",
+  "preflight": false,
+  "prompt_version": "hng2-sc2-p-small-card-followup-v1",
+  "provider": "deepseek",
+  "response": {
+    "choices": [
+      {
+        "finish_reason": "tool_calls",
+        "index": 0,
+        "logprobs": null,
+        "message": {
+          "content": "",
+          "role": "assistant",
+          "tool_calls": [
+            {
+              "function": {
+                "arguments": "{\"status\": \"resolved\", \"findings\": [{\"subject_surface\": \"魏文帝\", \"predicate\": \"受禪\", \"object_surface\": \"\", \"fact_kind\": \"event\", \"source_ref\": \"hng02-jinshu-wikisource-punctuated-030\", \"exact_span\": \"魏文帝受禪，又議肉刑\", \"confidence\": \"high\"}, {\"subject_surface\": \"魏文帝\", \"predicate\": \"受禪後又議肉刑\", \"object_surface\": \"肉刑\", \"fact_kind\": \"event\", \"source_ref\": \"hng02-jinshu-wikisource-punctuated-030\", \"exact_span\": \"魏文帝受禪，又議肉刑\", \"confidence\": \"high\"}]}",
+                "name": "submit_historical_evidence_resolution"
+              },
+              "id": "call_00_5JyBgkWI7rKKrGFh1qF89287",
+              "index": 0,
+              "type": "function"
+            }
+          ]
+        }
+      }
+    ],
+    "created": 1787594122,
+    "id": "f3f881c8-4987-4343-8ec0-1bf458140851",
+    "model": "deepseek-v4-flash",
+    "object": "chat.completion",
+    "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+    "usage": {
+      "completion_tokens": 220,
+      "prompt_cache_hit_tokens": 0,
+      "prompt_cache_miss_tokens": 2604,
+      "prompt_tokens": 2604,
+      "prompt_tokens_details": {
+        "cached_tokens": 0
+      },
+      "total_tokens": 2824
+    }
+  },
+  "sequence": 4,
+  "start_time": "2026-08-24T17:55:22Z",
+  "status": "response",
+  "strict_function": true,
+  "usage": {
+    "completion_tokens": 220,
+    "prompt_cache_hit_tokens": 0,
+    "prompt_cache_miss_tokens": 2604,
+    "prompt_tokens": 2604,
+    "total_tokens": 2824
+  }
+}

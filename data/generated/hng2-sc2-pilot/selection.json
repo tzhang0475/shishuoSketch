@@ -1,0 +1,157 @@
+{
+  "canonical_write_back": false,
+  "cases": [
+    {
+      "case_id": "hng1r2-hng1-raw-relation-72e698708d54086b78ac",
+      "category": "rich_title_temporal_context",
+      "rationale": "title-only 文帝 case retained as a difficult title/era control from the frozen open-gap inventory",
+      "reading_gap": {
+        "blocking_question": "Which historical person does this title denote in this passage?",
+        "candidate_keys": [],
+        "case_id": "hng1r2-hng1-raw-relation-72e698708d54086b78ac",
+        "missing_constraints": [
+          "title_identity"
+        ],
+        "next_best_action": "search_title_identity",
+        "status": "open",
+        "stop_condition": "stop when one context-compatible person is independently supported"
+      },
+      "selection_key": "3fe93610e9950a98fc898fc990c71c4a5bb02ebb83783d6b8e10de5ea9458d80",
+      "source_ref": "hng02-jinshu-wikisource-punctuated-030",
+      "source_work": "晉書",
+      "surface": "文帝"
+    },
+    {
+      "case_id": "hng2-hng02-relation-35297c7dc00a768062fe",
+      "category": "rich_title",
+      "rationale": "punctuated Jinshu passage contains richer imperial title/name context than the target surface alone",
+      "reading_gap": {
+        "blocking_question": "Which historical person does this title denote in this passage?",
+        "candidate_keys": [],
+        "case_id": "hng2-hng02-relation-35297c7dc00a768062fe",
+        "missing_constraints": [
+          "title_identity"
+        ],
+        "next_best_action": "search_title_identity",
+        "status": "open",
+        "stop_condition": "stop when one context-compatible person is independently supported"
+      },
+      "selection_key": "6d4b1479078051c7c72c4ca80af97c056da92edc08aad158f6b5c8acb56700be",
+      "source_ref": "hng02-jinshu-wikisource-punctuated-009",
+      "source_work": "晉書",
+      "surface": "簡文皇帝"
+    },
+    {
+      "case_id": "hng2-live-hng2-live-w1-identity-33afe84247b036e9d9cb",
+      "category": "control_required_new_person",
+      "rationale": "required 陳騫 case and existing named-person control; tests that follow-up does not needlessly expand a clear name",
+      "reading_gap": {
+        "blocking_question": "What source-local evidence identifies this surface?",
+        "candidate_keys": [],
+        "case_id": "hng2-live-hng2-live-w1-identity-33afe84247b036e9d9cb",
+        "missing_constraints": [
+          "identity_evidence"
+        ],
+        "next_best_action": "search_biography_context",
+        "status": "open",
+        "stop_condition": "stop when an exact or structurally explicit identity is found"
+      },
+      "selection_key": "8004a965f7bf63263c9fdfa7942665809589452636526e3d8430cb95fa98c651",
+      "source_ref": "hng2-live:hng2-live-w1-identity-33afe84247b036e9d9cb",
+      "source_work": "晉書",
+      "surface": "陳騫"
+    },
+    {
+      "case_id": "hng1r2-hng1-raw-relation-2ff2066d8872cbae15f7",
+      "category": "control_title_known",
+      "rationale": "existing title/office case with a reviewed candidate; control for a question already handled by the small card",
+      "reading_gap": {
+        "blocking_question": "Which historical person does this title denote in this passage?",
+        "candidate_keys": [
+          "c0"
+        ],
+        "case_id": "hng1r2-hng1-raw-relation-2ff2066d8872cbae15f7",
+        "missing_constraints": [
+          "title_identity"
+        ],
+        "next_best_action": "search_title_identity",
+        "status": "open",
+        "stop_condition": "stop when one context-compatible person is independently supported"
+      },
+      "selection_key": "9e8c9acc0e0ff5c99ad9fae79d535769f618a64b4658bc1bdedddc4569f106ef",
+      "source_ref": "hng01-shishuo-07-shijian-016-main",
+      "source_work": "世說新語",
+      "surface": "庾太尉"
+    },
+    {
+      "case_id": "hng2-live-hng2-live-w1-temporal-7787c8e7d9f2c14fc5b5",
+      "category": "temporal_era",
+      "rationale": "temporal/office context around 何曾; tests whether follow-up discovers period information without broad extraction",
+      "reading_gap": {
+        "blocking_question": "What source-local evidence identifies this surface?",
+        "candidate_keys": [],
+        "case_id": "hng2-live-hng2-live-w1-temporal-7787c8e7d9f2c14fc5b5",
+        "missing_constraints": [
+          "identity_evidence"
+        ],
+        "next_best_action": "search_biography_context",
+        "status": "open",
+        "stop_condition": "stop when an exact or structurally explicit identity is found"
+      },
+      "selection_key": "a39999ba3e6359981be8b22e7ac433c7008845d439785617e7dcc7c0981b3898",
+      "source_ref": "hng02-jinshu-wikisource-punctuated-003",
+      "source_work": "晉書",
+      "surface": "何曾"
+    },
+    {
+      "case_id": "hng1r2-hng1-raw-relation-b97bdeb3fbec092978bc",
+      "category": "relation_kinship_target",
+      "rationale": "虞喜 target with contextual kinship material; target/context separation is directly testable",
+      "reading_gap": {
+        "blocking_question": "Which individuals are represented by the kinship chain?",
+        "candidate_keys": [],
+        "case_id": "hng1r2-hng1-raw-relation-b97bdeb3fbec092978bc",
+        "missing_constraints": [
+          "structural_kinship_parse"
+        ],
+        "next_best_action": "search_kinship_context",
+        "status": "open",
+        "stop_condition": "do not create a node until the chain is parsed"
+      },
+      "selection_key": "a6a19105c6e8bb056cc5be98477325fa6b4fbf2a447e0bd942c6c2ea5ffb4978",
+      "source_ref": "hng01-jinshu-088-liezhuan-007",
+      "source_work": "晉書",
+      "surface": "虞喜"
+    },
+    {
+      "case_id": "hng2-hng02-relation-2164c52caaa53337435e",
+      "category": "relation_kinship_structure",
+      "rationale": "喜弟預女 structural expression; relation vocabulary is intentionally too small for all useful context",
+      "reading_gap": {
+        "blocking_question": "Which individuals are represented by the kinship chain?",
+        "candidate_keys": [],
+        "case_id": "hng2-hng02-relation-2164c52caaa53337435e",
+        "missing_constraints": [
+          "structural_kinship_parse"
+        ],
+        "next_best_action": "search_kinship_context",
+        "status": "open",
+        "stop_condition": "do not create a node until the chain is parsed"
+      },
+      "selection_key": "d84efd1f9f1bff0b47e2f3dd5367e483574a3e196236921050e67c3d40d9605a",
+      "source_ref": "hng01-jinshu-088-liezhuan-007",
+      "source_work": "晉書",
+      "surface": "喜弟預女"
+    }
+  ],
+  "frozen": true,
+  "max_followup_rounds": 1,
+  "max_new_opened_passages_per_case": 4,
+  "max_observations_per_case": 2,
+  "max_search_terms_per_observation": 3,
+  "no_frontier_expansion": true,
+  "selected_case_count": 7,
+  "selection_basis": "existing HNG2 schema open ResearchGap inventory; deterministic required-case composition",
+  "selection_version": "hng2-sc2-p-frozen-selection-v1",
+  "stage": "hng2-sc2-p"
+}

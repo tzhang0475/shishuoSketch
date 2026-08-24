@@ -106,7 +106,7 @@ def extract_response_payload(response: Mapping[str, Any]) -> tuple[Any | None, s
     return None, "none", "empty_response"
 
 
-def extract_strict_tool_payload(response: Mapping[str, Any]) -> tuple[Any | None, str, str | None]:
+def extract_strict_tool_payload(response: Mapping[str, Any], *, expected_function_name: str = "submit_historical_entity_card") -> tuple[Any | None, str, str | None]:
     """Extract only the forced HNG2 EvidenceCard function call.
 
     Strict semantic calls deliberately do not fall back to assistant content
@@ -132,7 +132,7 @@ def extract_strict_tool_payload(response: Mapping[str, Any]) -> tuple[Any | None
     function = call.get("function")
     if not isinstance(function, Mapping):
         return None, "tool_call", "function_missing"
-    if _text(function.get("name")) != "submit_historical_entity_card":
+    if _text(function.get("name")) != expected_function_name:
         return None, "tool_call", "unexpected_function_name"
     arguments = function.get("arguments")
     if not isinstance(arguments, str) or not arguments.strip():

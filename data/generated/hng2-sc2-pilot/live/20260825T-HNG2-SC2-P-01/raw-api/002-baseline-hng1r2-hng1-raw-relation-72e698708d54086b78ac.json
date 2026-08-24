@@ -1,0 +1,65 @@
+{
+  "canonical_write_back": false,
+  "case_id": "hng1r2-hng1-raw-relation-72e698708d54086b78ac",
+  "elapsed_seconds": 3.602441,
+  "endpoint": "https://api.deepseek.com/beta/chat/completions",
+  "finish_reason": "tool_calls",
+  "function_name": "submit_historical_entity_card",
+  "immutable": true,
+  "input_hash": "bfd3fc44ca10e3a8bdfd9621c6ceb63203482112ea411f9701217b3d8229a1a7",
+  "kind": "baseline",
+  "model": "deepseek-v4-flash",
+  "preflight": false,
+  "prompt_version": "hng2-sc2-p-small-card-followup-v1",
+  "provider": "deepseek",
+  "response": {
+    "choices": [
+      {
+        "finish_reason": "tool_calls",
+        "index": 0,
+        "logprobs": null,
+        "message": {
+          "content": "",
+          "role": "assistant",
+          "tool_calls": [
+            {
+              "function": {
+                "arguments": "{\"target_entity_key\": \"e0\", \"entities\": [{\"entity_key\": \"e0\", \"surface\": \"文帝\", \"entity_kind\": \"person_title\", \"reference_form\": \"title_only\", \"evidence_refs\": [\"hng02-jinshu-wikisource-punctuated-030\"]}, {\"entity_key\": \"e1\", \"surface\": \"魏文帝\", \"entity_kind\": \"person_title\", \"reference_form\": \"title_only\", \"evidence_refs\": [\"hng02-jinshu-wikisource-punctuated-030\"]}, {\"entity_key\": \"e2\", \"surface\": \"文帝\", \"entity_kind\": \"person_title\", \"reference_form\": \"title_only\", \"evidence_refs\": [\"hng02-jinshu-wikisource-punctuated-030\"]}], \"assertions\": [{\"assertion_id\": \"a0\", \"assertion_type\": \"person_mention\", \"subject_entity_key\": \"e0\", \"object_entity_key\": \"\", \"evidence_refs\": [\"hng02-jinshu-wikisource-punctuated-030\"], \"confidence\": \"high\"}, {\"assertion_id\": \"a1\", \"assertion_type\": \"identity_equivalence\", \"subject_entity_key\": \"e1\", \"object_entity_key\": \"e0\", \"evidence_refs\": [\"hng02-jinshu-wikisource-punctuated-030\"], \"confidence\": \"high\"}, {\"assertion_id\": \"a2\", \"assertion_type\": \"person_mention\", \"subject_entity_key\": \"e2\", \"object_entity_key\": \"\", \"evidence_refs\": [\"hng02-jinshu-wikisource-punctuated-030\"], \"confidence\": \"high\"}], \"note\": \"目标\\\"文帝\\\"出现在刑法志中。文中\\\"魏文帝受禪，又議肉刑\\\"明确指魏文帝（e1与e0同一）。另有\\\"文帝為晉王\\\"一节，指晋文帝（司马昭），与魏文帝不同人物。两处\\\"文帝\\\"为不同人物，分别记录。\"}",
+                "name": "submit_historical_entity_card"
+              },
+              "id": "call_00_S7CwnIMEf6XYzMMy1xmf2995",
+              "index": 0,
+              "type": "function"
+            }
+          ]
+        }
+      }
+    ],
+    "created": 1787594111,
+    "id": "1a14bcbb-807e-489d-9b9d-b2bd7fe9d081",
+    "model": "deepseek-v4-flash",
+    "object": "chat.completion",
+    "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+    "usage": {
+      "completion_tokens": 524,
+      "prompt_cache_hit_tokens": 1792,
+      "prompt_cache_miss_tokens": 14767,
+      "prompt_tokens": 16559,
+      "prompt_tokens_details": {
+        "cached_tokens": 1792
+      },
+      "total_tokens": 17083
+    }
+  },
+  "sequence": 2,
+  "start_time": "2026-08-24T17:55:11Z",
+  "status": "response",
+  "strict_function": true,
+  "usage": {
+    "completion_tokens": 524,
+    "prompt_cache_hit_tokens": 1792,
+    "prompt_cache_miss_tokens": 14767,
+    "prompt_tokens": 16559,
+    "total_tokens": 17083
+  }
+}

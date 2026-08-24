@@ -1,0 +1,65 @@
+{
+  "canonical_write_back": false,
+  "case_id": "hng1r2-hng1-raw-relation-2ff2066d8872cbae15f7",
+  "elapsed_seconds": 4.028749,
+  "endpoint": "https://api.deepseek.com/beta/chat/completions",
+  "finish_reason": "tool_calls",
+  "function_name": "submit_historical_entity_card",
+  "immutable": true,
+  "input_hash": "010b45605bb713ede7609fea079b532894183e4dceb1d29189b9bf30e87c88cd",
+  "kind": "baseline",
+  "model": "deepseek-v4-flash",
+  "preflight": false,
+  "prompt_version": "hng2-sc2-p-small-card-followup-v1",
+  "provider": "deepseek",
+  "response": {
+    "choices": [
+      {
+        "finish_reason": "tool_calls",
+        "index": 0,
+        "logprobs": null,
+        "message": {
+          "content": "",
+          "role": "assistant",
+          "tool_calls": [
+            {
+              "function": {
+                "arguments": "{\"target_entity_key\": \"e0\", \"entities\": [{\"entity_key\": \"e0\", \"surface\": \"庾太尉\", \"entity_kind\": \"person_office_title\", \"reference_form\": \"office_title_only\", \"evidence_refs\": [\"hng01-shishuo-07-shijian-016-main\"]}, {\"entity_key\": \"e1\", \"surface\": \"庾\", \"entity_kind\": \"abbreviated_name\", \"reference_form\": \"abbreviated\", \"evidence_refs\": [\"hng01-shishuo-07-shijian-016-main\"]}, {\"entity_key\": \"e2\", \"surface\": \"孟嘉\", \"entity_kind\": \"named_person\", \"reference_form\": \"full_name\", \"evidence_refs\": [\"hng01-shishuo-07-shijian-016-main\"]}, {\"entity_key\": \"e3\", \"surface\": \"禇太傅\", \"entity_kind\": \"person_office_title\", \"reference_form\": \"office_title_only\", \"evidence_refs\": [\"hng01-shishuo-07-shijian-016-main\"]}, {\"entity_key\": \"e4\", \"surface\": \"孟從事\", \"entity_kind\": \"person_office_title\", \"reference_form\": \"office_title_only\", \"evidence_refs\": [\"hng01-shishuo-07-shijian-016-main\"]}], \"assertions\": [{\"assertion_id\": \"a0\", \"assertion_type\": \"identity_equivalence\", \"subject_entity_key\": \"e0\", \"object_entity_key\": \"e1\", \"evidence_refs\": [\"hng01-shishuo-07-shijian-016-main\"], \"confidence\": \"high\"}, {\"assertion_id\": \"a1\", \"assertion_type\": \"person_mention\", \"subject_entity_key\": \"e2\", \"object_entity_key\": \"\", \"evidence_refs\": [\"hng01-shishuo-07-shijian-016-main\"], \"confidence\": \"high\"}, {\"assertion_id\": \"a2\", \"assertion_type\": \"person_mention\", \"subject_entity_key\": \"e3\", \"object_entity_key\": \"\", \"evidence_refs\": [\"hng01-shishuo-07-shijian-016-main\"], \"confidence\": \"high\"}, {\"assertion_id\": \"a3\", \"assertion_type\": \"person_mention\", \"subject_entity_key\": \"e4\", \"object_entity_key\": \"\", \"evidence_refs\": [\"hng01-shishuo-07-shijian-016-main\"], \"confidence\": \"high\"}], \"note\": \"庾太尉在本文中与后文\\\"庾\\\"指同一人（庾云/庾大笑），为同一局部实体。孟嘉为孟從事所指之人，但原文未明确\\\"孟從事\\\"即孟嘉的别名关系，仅以官职称谓指代，故仅作person_mention。禇太傅为独立人物。\"}",
+                "name": "submit_historical_entity_card"
+              },
+              "id": "call_00_2N3u4NKYvgKvbjlF3A722195",
+              "index": 0,
+              "type": "function"
+            }
+          ]
+        }
+      }
+    ],
+    "created": 1787594147,
+    "id": "4a1f31fd-8fab-4796-8f7f-dcfc819f6023",
+    "model": "deepseek-v4-flash",
+    "object": "chat.completion",
+    "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+    "usage": {
+      "completion_tokens": 712,
+      "prompt_cache_hit_tokens": 2432,
+      "prompt_cache_miss_tokens": 113,
+      "prompt_tokens": 2545,
+      "prompt_tokens_details": {
+        "cached_tokens": 2432
+      },
+      "total_tokens": 3257
+    }
+  },
+  "sequence": 10,
+  "start_time": "2026-08-24T17:55:47Z",
+  "status": "response",
+  "strict_function": true,
+  "usage": {
+    "completion_tokens": 712,
+    "prompt_cache_hit_tokens": 2432,
+    "prompt_cache_miss_tokens": 113,
+    "prompt_tokens": 2545,
+    "total_tokens": 3257
+  }
+}
