@@ -23,6 +23,10 @@ import historical_entity_schema as schema
 
 ROOT = Path(__file__).resolve().parents[1]
 FUNCTION_NAME = "submit_historical_context_card"
+PERSON_READ_FUNCTION = "submit_person_evidence_observations"
+PERSON_FILL_FUNCTION = "submit_person_card"
+TEMPORAL_READ_FUNCTION = "submit_story_temporal_observations"
+TEMPORAL_FILL_FUNCTION = "submit_story_temporal_card"
 STRICT_ENDPOINT = "https://api.deepseek.com/beta/chat/completions"
 
 RELATION_CLASSES = {
@@ -945,7 +949,7 @@ def _story_id_from_ref(ref: str) -> str | None:
 
 
 def h0a_compatibility(item: Mapping[str, Any], case: Mapping[str, Any]) -> dict[str, Any]:
-    story_id = _story_id_from_ref(_text(item.get("evidence_ref")))
+    story_id = _text(case.get("story_id")) or _story_id_from_ref(_text(item.get("evidence_ref")))
     if not story_id:
         return {"status": "not_applicable", "reason": "source is not a Story-linked H0A ref"}
     path = ROOT / "data/annotation/story-temporal-evidence-h0a.json"
@@ -977,12 +981,562 @@ def json_hash(value: Any) -> str:
     ).hexdigest()
 
 
+# HNG2-C.1 keeps the consolidated evidence selector and resolver above, but
+# splits reading from card filling and separates person work from Story time.
+# These wire contracts are intentionally small; all database interpretation
+# remains in Python.
+PERSON_READ_FUNCTION = "submit_person_evidence_observations"
+PERSON_FILL_FUNCTION = "submit_person_card"
+TEMPORAL_READ_FUNCTION = "submit_story_temporal_observations"
+TEMPORAL_FILL_FUNCTION = "submit_story_temporal_card"
+
+PERSON_OBSERVATION_KINDS = {
+    "identity_name", "kinship", "marriage", "office_title",
+    "institutional", "interaction", "other",
+}
+OBSERVATION_CERTAINTY = {"explicit", "probable", "unclear"}
+TEMPORAL_OBSERVATION_KINDS = {
+    "date", "reign", "era_year", "event", "before_after",
+    "person_age", "office_period", "other",
+}
+TEMPORAL_ROLES = {
+    "scene_time", "background_context", "later_outcome",
+    "quoted_precedent", "relative_person_time", "office_context",
+    "uncertain",
+}
+
+
+def _person_observation_schema() -> dict[str, Any]:
+    return _object(
+        {
+            "observation_id": _string("局部观察编号 o0、o1……。"),
+            "observation_kind": _enum(
+                PERSON_OBSERVATION_KINDS,
+                "原文信息的宽类别；other 用于原文明示但当前宽分类无法覆盖的信息。",
+            ),
+            "subject_surface": _string("关系或身份说明的主体原文；必须直接出现在 exact_span 中。"),
+            "predicate_surface": _string("原文关系措辞；身份同一可用原文称谓连接方式，无法单独切分时可为空字符串。"),
+            "object_surface": _string("关系客体原文；单项官职/身份描述无独立客体时可为空字符串。"),
+            "evidence_ref": _string("必须复制 source_passages 中已有 ref。"),
+            "exact_span": _string("直接支持观察的最短连续 evidence_text，必须逐字复制。"),
+            "certainty": _enum(OBSERVATION_CERTAINTY, "原文表达这一观察的明确程度。"),
+        },
+        "阅读阶段发现的、与当前 target 直接相关的史料观察；不是数据库事实。",
+    )
+
+
+def _person_fill_entity_schema() -> dict[str, Any]:
+    return _object(
+        {
+            "entity_key": _string("本次回答内部的局部实体编号 e0、e1……。"),
+            "surface": _string("史料中实际出现的人物或人物表达。"),
+            "entity_kind": _enum(schema.ENTITY_KINDS, "目标或上下文表达在当前原文中的人物语义类别。"),
+            "reference_form": _enum(schema.REFERENCE_FORMS, "该表达的语言指称形式，不是数据库身份决定。"),
+            "evidence_refs": _array(_string("输入中已有的 source passage ref。"), "实体直接出现的一个或多个 ref。"),
+        },
+        "Person Fill Card 的局部实体。不得创建 Person ID 或 candidate key。",
+    )
+
+
+def _person_fill_relation_schema() -> dict[str, Any]:
+    return _object(
+        {
+            "relation_id": _string("本次回答内部的局部关系编号 r0、r1……。"),
+            "subject_entity_key": _string("关系主体，必须引用本卡 entities 的 eN。"),
+            "object_entity_key": _string("关系客体，必须引用本卡 entities 的 eN。"),
+            "relation_surface": _string("原文中的关系措辞，例如父、妻、辟、拜、詣、與語。"),
+            "relation_class": _enum(RELATION_CLASSES, "宽关系分类；不得升级成持久友谊或政治联盟。"),
+            "evidence_ref": _string("直接支持关系的输入 ref。"),
+            "exact_span": _string("直接支持关系的最短连续 evidence_text。"),
+            "confidence": _enum(CONFIDENCE_LEVELS, "原文是否明确表达该关系的信心。"),
+        },
+        "仅把经 Python grounding 保留的证据指针重新映射为宽关系卡。",
+    )
+
+
+def _temporal_observation_schema() -> dict[str, Any]:
+    return _object(
+        {
+            "observation_id": _string("局部时间观察编号 t0、t1……。"),
+            "temporal_surface": _string("原文中的时间、年号、事件、先后或官职时期表达。"),
+            "temporal_kind": _enum(TEMPORAL_OBSERVATION_KINDS, "时间表达的文字类别。"),
+            "temporal_role": _enum(
+                TEMPORAL_ROLES,
+                "该时间相对当前 Story 场景的作用；later_outcome、quoted_precedent 和 background_context 不可用于倒推 scene_time。",
+            ),
+            "reference_surface": _string("时间表达所绑定的人物、事件或场景原文；没有时可为空字符串。"),
+            "evidence_ref": _string("必须复制 source_passages 中已有 ref。"),
+            "exact_span": _string("直接支持观察的最短连续 evidence_text，必须逐字复制。"),
+            "certainty": _enum(OBSERVATION_CERTAINTY, "原文表达这一时间作用的明确程度。"),
+        },
+        "只记录与当前 Story/scene 定位有关的时间观察，并区分后果、背景和引述。",
+    )
+
+
+def _temporal_fill_schema() -> dict[str, Any]:
+    return _object(
+        {
+            "temporal_id": _string("本卡内部的局部时间断言编号 t0、t1……。"),
+            "temporal_surface": _string("原文中实际出现的时间表达。"),
+            "temporal_type": _enum(TEMPORAL_TYPES, "时间表达的宽类型，由 Python 后续映射到 H0A。"),
+            "temporal_role": _enum(TEMPORAL_ROLES, "该时间相对 Story 场景的作用。"),
+            "reference_surface": _string("时间表达绑定的人物、事件或场景原文；没有时可为空字符串。"),
+            "evidence_ref": _string("直接支持断言的输入 ref。"),
+            "exact_span": _string("直接支持断言的最短连续 evidence_text。"),
+            "confidence": _enum(CONFIDENCE_LEVELS, "原文是否明确表达该时间信息的信心。"),
+        },
+        "Story Temporal Fill Card 的时间断言；不修改 H0A。",
+    )
+
+
+def read_fill_function_definition(lane: str) -> dict[str, Any]:
+    definitions = {
+        "person_read": (
+            PERSON_READ_FUNCTION,
+            _object(
+                {"observations": _array(_person_observation_schema(), "最多六条、只涉及当前 target 的阅读观察。")},
+                "Person Read 输出；记录史料发现，不做数据库身份决定。",
+            ),
+        ),
+        "person_fill": (
+            PERSON_FILL_FUNCTION,
+            _object(
+                {
+                    "entities": _array(_person_fill_entity_schema(), "最多五个必要实体。"),
+                    "relations": _array(_person_fill_relation_schema(), "最多五条明确关系。"),
+                },
+                "Person Fill Card；只把已 grounding 的证据指针映射为局部实体和宽关系。",
+            ),
+        ),
+        "temporal_read": (
+            TEMPORAL_READ_FUNCTION,
+            _object(
+                {"observations": _array(_temporal_observation_schema(), "最多五条与当前 Story 定位有关的时间观察。")},
+                "Story Temporal Read 输出。",
+            ),
+        ),
+        "temporal_fill": (
+            TEMPORAL_FILL_FUNCTION,
+            _object(
+                {"temporal_assertions": _array(_temporal_fill_schema(), "最多四条经 grounding 指向的时间断言。")},
+                "Story Temporal Fill Card。",
+            ),
+        ),
+    }
+    if lane not in definitions:
+        raise ValueError(f"unknown read/fill lane: {lane}")
+    name, parameters = definitions[lane]
+    return {
+        "type": "function",
+        "function": {
+            "name": name,
+            "description": parameters["description"],
+            "strict": True,
+            "parameters": parameters,
+        },
+    }
+
+
+def read_fill_tool_choice(lane: str) -> dict[str, Any]:
+    name = {
+        "person_read": PERSON_READ_FUNCTION,
+        "person_fill": PERSON_FILL_FUNCTION,
+        "temporal_read": TEMPORAL_READ_FUNCTION,
+        "temporal_fill": TEMPORAL_FILL_FUNCTION,
+    }[lane]
+    return {"type": "function", "function": {"name": name}}
+
+
+PERSON_READ_SYSTEM = (
+    "只阅读给定历史原文，发现解决当前人物 target 所必需的明确身份、亲属、婚姻、官职、制度或互动信息。"
+    "暂不填写数据库卡，不创建任何 ID，不枚举无关人物或事件。每条观察必须直接涉及 target 或是解析 target 必需的上下文，"
+    "并逐字引用输入 evidence_text；共现不是关系，other 可保留当前宽分类无法表达但原文明示的信息。最多六条。"
+)
+PERSON_FILL_SYSTEM = (
+    "重新阅读给定原文，并把 Python 已验证的 observations 仅当作证据指针，不能把其解释预设为真。"
+    "只把原文直接支持、与当前 target 有关的信息填入 Person Card，不发现无关新事实，不创建数据库 ID。"
+    "保留关系原词；共现不是关系。最多五个实体、五条关系。"
+)
+TEMPORAL_READ_SYSTEM = (
+    "以 Story/scene 而非 Person 为目标，只阅读给定故事和历史上下文，发现用于定位场景时间的明确证据。"
+    "严格区分 scene_time、later_outcome、quoted_precedent、background_context、relative_person_time 和 office_context；"
+    "后续结果或引文不得倒推场景时间。逐字引用 evidence_text，最多五条，不建立新年代系统。"
+)
+TEMPORAL_FILL_SYSTEM = (
+    "重新阅读给定 Story 原文，并把 Python 已验证的 temporal observations 仅当作证据指针。"
+    "将原文支持的时间信息填入小型 Temporal Card，保留其相对场景角色；不把 later_outcome、背景或引文改成 scene_time，"
+    "不修改 H0A。最多四条。"
+)
+
+
+def model_visible_evidence_text(raw: str) -> str:
+    """Create one deterministic display field without changing source files.
+
+    Existing punctuated Story text should be passed directly.  For legacy
+    frozen wikitext windows this conservative projection removes only common
+    MediaWiki wrappers while preserving internal historical characters.
+    Validation always uses the resulting string, never the raw source.
+    """
+
+    value = str(raw or "")
+    value = re.sub(r"<!--.*?-->", "", value, flags=re.DOTALL)
+    value = re.sub(r"\[\[([^\]|]+)\|([^\]]+)\]\]", r"\2", value)
+    value = re.sub(r"\[\[([^\]]+)\]\]", r"\1", value)
+
+    def template(match: re.Match[str]) -> str:
+        body = match.group(1)
+        parts = [part.strip() for part in body.split("|")]
+        visible = [part for part in parts[1:] if part and "=" not in part]
+        return visible[-1] if visible else ""
+
+    previous = None
+    while previous != value:
+        previous = value
+        value = re.sub(r"\{\{([^{}]*)\}\}", template, value)
+    value = value.replace("'''", "").replace("''", "")
+    return value.strip()
+
+
+def prepare_evidence_window(row: Mapping[str, Any]) -> dict[str, Any]:
+    raw = _text(row.get("raw_source") or row.get("text") or row.get("source_text"))
+    visible = row.get("evidence_text")
+    evidence_text = str(visible) if isinstance(visible, str) else model_visible_evidence_text(raw)
+    return {
+        "ref": _text(row.get("ref") or row.get("source_ref")),
+        "work": row.get("work") or row.get("source_work"),
+        "layer": row.get("layer") or row.get("source_layer"),
+        "source_form": row.get("source_form") or "legacy_local",
+        "locator": row.get("locator"),
+        "raw_source": raw,
+        "evidence_text": evidence_text,
+        "raw_source_sha256": hashlib.sha256(raw.encode("utf-8")).hexdigest(),
+        "evidence_text_sha256": hashlib.sha256(evidence_text.encode("utf-8")).hexdigest(),
+    }
+
+
+def evidence_text_map(windows: Sequence[Mapping[str, Any]]) -> dict[str, str]:
+    return {
+        _text(row.get("ref")): str(row.get("evidence_text") or "")
+        for row in windows
+        if _text(row.get("ref"))
+    }
+
+
+def _reject(index: int, reason: str, item: Any) -> dict[str, Any]:
+    return {"index": index, "reason": reason, "item": item}
+
+
+def validate_person_read(payload: Any, windows: Sequence[Mapping[str, Any]]) -> dict[str, Any]:
+    texts = evidence_text_map(windows)
+    rows = payload.get("observations") if isinstance(payload, Mapping) else None
+    top_errors = [] if isinstance(rows, list) else ["observations_not_array"]
+    rows = rows if isinstance(rows, list) else []
+    valid: list[dict[str, Any]] = []
+    rejected: list[dict[str, Any]] = []
+    seen: set[str] = set()
+    expected = {"observation_id", "observation_kind", "subject_surface", "predicate_surface", "object_surface", "evidence_ref", "exact_span", "certainty"}
+    for index, item in enumerate(rows):
+        reason = ""
+        if not isinstance(item, Mapping) or set(item) != expected:
+            reason = "field_set_mismatch"
+        else:
+            oid = _text(item.get("observation_id")); ref = _text(item.get("evidence_ref")); span = _text(item.get("exact_span"))
+            subject = _text(item.get("subject_surface")); obj = _text(item.get("object_surface")); predicate = _text(item.get("predicate_surface"))
+            if not re.fullmatch(r"o[0-9]+", oid) or oid in seen:
+                reason = "invalid_or_duplicate_observation_id"
+            elif item.get("observation_kind") not in PERSON_OBSERVATION_KINDS or item.get("certainty") not in OBSERVATION_CERTAINTY:
+                reason = "invalid_enum"
+            elif ref not in texts or not span or span not in texts.get(ref, ""):
+                reason = "evidence_span_not_found"
+            elif not subject or subject not in span:
+                reason = "subject_not_grounded"
+            elif obj and obj not in span:
+                reason = "object_not_grounded"
+            elif predicate and predicate not in span:
+                reason = "predicate_not_grounded"
+            if not reason:
+                seen.add(oid)
+        if reason:
+            rejected.append(_reject(index, reason, item))
+        elif len(valid) < 6:
+            valid.append(dict(item))
+        else:
+            rejected.append(_reject(index, "max_observations_exceeded", item))
+    return {"valid": not top_errors, "usable": bool(valid) or (not top_errors and not rows), "top_errors": top_errors, "valid_observations": valid, "rejected_observations": rejected}
+
+
+def validate_person_fill(payload: Any, windows: Sequence[Mapping[str, Any]]) -> dict[str, Any]:
+    texts = evidence_text_map(windows)
+    top_errors: list[str] = []
+    if not isinstance(payload, Mapping):
+        return {"valid": False, "usable": False, "top_errors": ["payload_not_object"], "valid_entities": [], "valid_relations": [], "rejected_entities": [], "rejected_relations": []}
+    if set(payload) != {"entities", "relations"}:
+        top_errors.append("top_field_set_mismatch")
+    entities = payload.get("entities") if isinstance(payload.get("entities"), list) else []
+    relations = payload.get("relations") if isinstance(payload.get("relations"), list) else []
+    valid_entities: list[dict[str, Any]] = []; rejected_entities: list[dict[str, Any]] = []; seen: set[str] = set()
+    efields = {"entity_key", "surface", "entity_kind", "reference_form", "evidence_refs"}
+    for index, item in enumerate(entities):
+        reason = ""
+        if not isinstance(item, Mapping) or set(item) != efields:
+            reason = "field_set_mismatch"
+        else:
+            key = _text(item.get("entity_key")); surface = _text(item.get("surface")); refs = item.get("evidence_refs")
+            if not LOCAL_ENTITY.fullmatch(key) or key in seen:
+                reason = "invalid_or_duplicate_entity_key"
+            elif item.get("entity_kind") not in schema.ENTITY_KINDS or item.get("reference_form") not in schema.REFERENCE_FORMS:
+                reason = "invalid_enum"
+            elif not isinstance(refs, list) or not refs or any(_text(ref) not in texts for ref in refs):
+                reason = "invalid_evidence_refs"
+            elif not surface or not any(surface in texts[_text(ref)] for ref in refs):
+                reason = "surface_not_grounded"
+            if not reason:
+                seen.add(key)
+        if reason:
+            rejected_entities.append(_reject(index, reason, item))
+        elif len(valid_entities) < 5:
+            valid_entities.append(dict(item))
+        else:
+            rejected_entities.append(_reject(index, "max_entities_exceeded", item))
+    valid_relations: list[dict[str, Any]] = []; rejected_relations: list[dict[str, Any]] = []; rseen: set[str] = set()
+    rfields = {"relation_id", "subject_entity_key", "object_entity_key", "relation_surface", "relation_class", "evidence_ref", "exact_span", "confidence"}
+    for index, item in enumerate(relations):
+        reason = ""
+        if not isinstance(item, Mapping) or set(item) != rfields:
+            reason = "field_set_mismatch"
+        else:
+            rid = _text(item.get("relation_id")); subject = _text(item.get("subject_entity_key")); obj = _text(item.get("object_entity_key")); ref = _text(item.get("evidence_ref")); span = _text(item.get("exact_span")); surface = _text(item.get("relation_surface"))
+            if not LOCAL_RELATION.fullmatch(rid) or rid in rseen:
+                reason = "invalid_or_duplicate_relation_id"
+            elif subject not in seen or obj not in seen:
+                reason = "unknown_entity_key"
+            elif subject == obj and item.get("relation_class") != "identity_name":
+                reason = "self_relation"
+            elif item.get("relation_class") not in RELATION_CLASSES or item.get("confidence") not in CONFIDENCE_LEVELS:
+                reason = "invalid_enum"
+            elif ref not in texts or not span or span not in texts.get(ref, ""):
+                reason = "evidence_span_not_found"
+            elif not surface or surface not in span:
+                reason = "relation_surface_not_grounded"
+            if not reason:
+                rseen.add(rid)
+        if reason:
+            rejected_relations.append(_reject(index, reason, item))
+        elif len(valid_relations) < 5:
+            valid_relations.append(dict(item))
+        else:
+            rejected_relations.append(_reject(index, "max_relations_exceeded", item))
+    return {"valid": not top_errors, "usable": bool(valid_entities), "top_errors": top_errors, "valid_entities": valid_entities, "valid_relations": valid_relations, "rejected_entities": rejected_entities, "rejected_relations": rejected_relations}
+
+
+def validate_temporal_read(payload: Any, windows: Sequence[Mapping[str, Any]]) -> dict[str, Any]:
+    texts = evidence_text_map(windows)
+    rows = payload.get("observations") if isinstance(payload, Mapping) else None
+    top_errors = [] if isinstance(rows, list) else ["observations_not_array"]
+    rows = rows if isinstance(rows, list) else []
+    valid: list[dict[str, Any]] = []; rejected: list[dict[str, Any]] = []; seen: set[str] = set()
+    fields = {"observation_id", "temporal_surface", "temporal_kind", "temporal_role", "reference_surface", "evidence_ref", "exact_span", "certainty"}
+    for index, item in enumerate(rows):
+        reason = ""
+        if not isinstance(item, Mapping) or set(item) != fields:
+            reason = "field_set_mismatch"
+        else:
+            oid = _text(item.get("observation_id")); surface = _text(item.get("temporal_surface")); ref = _text(item.get("evidence_ref")); span = _text(item.get("exact_span")); reference = _text(item.get("reference_surface"))
+            if not re.fullmatch(r"t[0-9]+", oid) or oid in seen:
+                reason = "invalid_or_duplicate_observation_id"
+            elif item.get("temporal_kind") not in TEMPORAL_OBSERVATION_KINDS or item.get("temporal_role") not in TEMPORAL_ROLES or item.get("certainty") not in OBSERVATION_CERTAINTY:
+                reason = "invalid_enum"
+            elif ref not in texts or not span or span not in texts.get(ref, ""):
+                reason = "evidence_span_not_found"
+            elif not surface or surface not in span:
+                reason = "temporal_surface_not_grounded"
+            elif reference and reference not in span:
+                reason = "reference_surface_not_grounded"
+            if not reason:
+                seen.add(oid)
+        if reason:
+            rejected.append(_reject(index, reason, item))
+        elif len(valid) < 5:
+            valid.append(dict(item))
+        else:
+            rejected.append(_reject(index, "max_observations_exceeded", item))
+    return {"valid": not top_errors, "usable": bool(valid) or (not top_errors and not rows), "top_errors": top_errors, "valid_observations": valid, "rejected_observations": rejected}
+
+
+def validate_temporal_fill(payload: Any, windows: Sequence[Mapping[str, Any]]) -> dict[str, Any]:
+    texts = evidence_text_map(windows)
+    rows = payload.get("temporal_assertions") if isinstance(payload, Mapping) else None
+    top_errors = [] if isinstance(rows, list) else ["temporal_assertions_not_array"]
+    rows = rows if isinstance(rows, list) else []
+    valid: list[dict[str, Any]] = []; rejected: list[dict[str, Any]] = []; seen: set[str] = set()
+    fields = {"temporal_id", "temporal_surface", "temporal_type", "temporal_role", "reference_surface", "evidence_ref", "exact_span", "confidence"}
+    for index, item in enumerate(rows):
+        reason = ""
+        if not isinstance(item, Mapping) or set(item) != fields:
+            reason = "field_set_mismatch"
+        else:
+            tid = _text(item.get("temporal_id")); surface = _text(item.get("temporal_surface")); ref = _text(item.get("evidence_ref")); span = _text(item.get("exact_span")); reference = _text(item.get("reference_surface"))
+            if not LOCAL_TEMPORAL.fullmatch(tid) or tid in seen:
+                reason = "invalid_or_duplicate_temporal_id"
+            elif item.get("temporal_type") not in TEMPORAL_TYPES or item.get("temporal_role") not in TEMPORAL_ROLES or item.get("confidence") not in CONFIDENCE_LEVELS:
+                reason = "invalid_enum"
+            elif ref not in texts or not span or span not in texts.get(ref, ""):
+                reason = "evidence_span_not_found"
+            elif not surface or surface not in span:
+                reason = "temporal_surface_not_grounded"
+            elif reference and reference not in span:
+                reason = "reference_surface_not_grounded"
+            if not reason:
+                seen.add(tid)
+        if reason:
+            rejected.append(_reject(index, reason, item))
+        elif len(valid) < 4:
+            valid.append(dict(item))
+        else:
+            rejected.append(_reject(index, "max_temporal_assertions_exceeded", item))
+    return {"valid": not top_errors, "usable": bool(valid) or (not top_errors and not rows), "top_errors": top_errors, "valid_temporal_assertions": valid, "rejected_temporal_assertions": rejected}
+
+
+def person_fill_prompt(target: Mapping[str, Any], grounded: Mapping[str, Any], windows: Sequence[Mapping[str, Any]]) -> dict[str, Any]:
+    refs = {_text(row.get("evidence_ref")) for row in grounded.get("valid_observations", [])}
+    selected = [dict(row) for row in windows if _text(row.get("ref")) in refs] or [dict(row) for row in windows]
+    return {"target": dict(target), "validated_observation_pointers": grounded.get("valid_observations", []), "source_passages": _model_windows(selected)}
+
+
+def temporal_fill_prompt(story: Mapping[str, Any], grounded: Mapping[str, Any], windows: Sequence[Mapping[str, Any]]) -> dict[str, Any]:
+    refs = {_text(row.get("evidence_ref")) for row in grounded.get("valid_observations", [])}
+    selected = [dict(row) for row in windows if _text(row.get("ref")) in refs] or [dict(row) for row in windows]
+    return {"story": dict(story), "validated_temporal_pointers": grounded.get("valid_observations", []), "source_passages": _model_windows(selected)}
+
+
+def _model_windows(windows: Sequence[Mapping[str, Any]]) -> list[dict[str, Any]]:
+    return [
+        {"ref": row.get("ref"), "work": row.get("work"), "layer": row.get("layer"), "source_form": row.get("source_form"), "evidence_text": row.get("evidence_text")}
+        for row in windows
+    ]
+
+
+def person_read_prompt(target: Mapping[str, Any], windows: Sequence[Mapping[str, Any]]) -> dict[str, Any]:
+    return {"target": dict(target), "source_passages": _model_windows(windows)}
+
+
+def temporal_read_prompt(story: Mapping[str, Any], windows: Sequence[Mapping[str, Any]]) -> dict[str, Any]:
+    return {"story": dict(story), "source_passages": _model_windows(windows)}
+
+
+def normalize_person_fill(
+    validation: Mapping[str, Any], *, case: Mapping[str, Any], windows: Sequence[Mapping[str, Any]], known_evidence: Mapping[str, Mapping[str, Any]] | None = None,
+) -> dict[str, Any]:
+    """Adapt the split Person Card to the consolidated candidate projector."""
+
+    texts = evidence_text_map(windows)
+    old_entities: list[dict[str, Any]] = []
+    for row in validation.get("valid_entities", []):
+        ref = next((_text(ref) for ref in row.get("evidence_refs", []) if _text(row.get("surface")) in texts.get(_text(ref), "")), "")
+        if not ref:
+            continue
+        old_entities.append({
+            "entity_key": row.get("entity_key"), "surface": row.get("surface"), "entity_kind": row.get("entity_kind"),
+            "reference_form": row.get("reference_form"), "evidence_ref": ref, "exact_span": row.get("surface"),
+        })
+    adapted = {
+        "valid_entities": old_entities,
+        "valid_relations": list(validation.get("valid_relations", [])),
+        "valid_temporal_assertions": [],
+    }
+    bundle = {"passages": [{"ref": row.get("ref"), "text": row.get("evidence_text"), "work": row.get("work"), "layer": row.get("layer"), "source_form": row.get("source_form")} for row in windows]}
+    return normalize_card(adapted, case=case, bundle=bundle, known_evidence=known_evidence or {})
+
+
+def normalize_story_temporal(validation: Mapping[str, Any], *, story_id: str) -> dict[str, Any]:
+    era_index = _load_era_index()
+    case = {"story_id": story_id}
+    rows: list[dict[str, Any]] = []
+    for item in validation.get("valid_temporal_assertions", []):
+        role = _text(item.get("temporal_role"))
+        normalized = normalize_temporal_surface(_text(item.get("temporal_surface")), era_index)
+        h0a_item = dict(item)
+        # The canonical Story evidence ref format lets h0a_compatibility reuse
+        # the reviewed temporal backbone without changing it.
+        h0a = story_temporal_h0a_compatibility(h0a_item, story_id)
+        scene_candidate = role == "scene_time" and h0a.get("status") != "conflict"
+        rows.append({
+            **dict(item),
+            "normalized": normalized,
+            "h0a": h0a,
+            "scene_constraint_candidate": scene_candidate,
+            "excluded_from_scene_constraint_reason": None if scene_candidate else ("h0a_conflict" if h0a.get("status") == "conflict" else role),
+            "candidate_projection_only": True,
+            "canonical_write_back": False,
+        })
+    return {"story_id": story_id, "temporal_assertions": rows, "candidate_projection_only": True, "h0a_write_back": False, "canonical_write_back": False}
+
+
+def story_temporal_h0a_compatibility(item: Mapping[str, Any], story_id: str) -> dict[str, Any]:
+    """Compare a Story-focused temporal role with the frozen H0A backbone."""
+
+    evidence_path = ROOT / "data/annotation/story-temporal-evidence-h0a.json"
+    anchor_path = ROOT / "data/annotation/story-temporal-anchors-h0a.json"
+    if not evidence_path.is_file() or not anchor_path.is_file():
+        return {"status": "unknown", "reason": "H0A files unavailable"}
+    evidence = json.loads(evidence_path.read_text(encoding="utf-8")).get("records", [])
+    anchors = json.loads(anchor_path.read_text(encoding="utf-8")).get("records", [])
+    span = _text(item.get("exact_span")); surface = _text(item.get("temporal_surface")); role = _text(item.get("temporal_role"))
+    matches = []
+    for row in evidence:
+        if not isinstance(row, Mapping) or row.get("story_id") != story_id:
+            continue
+        raw = _text(row.get("raw_surface"))
+        if raw and (raw in span or surface in raw or raw in surface):
+            matches.append(row)
+    role_map = {
+        "direct_story_time": {"scene_time"},
+        "later_outcome": {"later_outcome"},
+        "quoted_ancient_precedent": {"quoted_precedent"},
+        "earlier_background": {"background_context"},
+        "person_activity_context": {"relative_person_time", "later_outcome", "office_context", "uncertain"},
+        "event_context": {"scene_time", "background_context", "uncertain"},
+    }
+    for row in matches:
+        expected = role_map.get(_text(row.get("relation_to_story")), {"uncertain"})
+        if role not in expected and role != "uncertain":
+            return {
+                "status": "conflict",
+                "reason": "temporal_role_conflicts_with_h0a",
+                "evidence_id": row.get("evidence_record_id"),
+                "h0a_relation_to_story": row.get("relation_to_story"),
+                "model_temporal_role": role,
+            }
+        return {
+            "status": "compatible",
+            "evidence_id": row.get("evidence_record_id"),
+            "raw_surface": row.get("raw_surface"),
+            "h0a_relation_to_story": row.get("relation_to_story"),
+        }
+    normalized = normalize_temporal_surface(surface, _load_era_index())
+    if role == "scene_time" and normalized.get("year") is not None:
+        anchor = next((row for row in anchors if isinstance(row, Mapping) and row.get("story_id") == story_id), None)
+        if anchor and anchor.get("start_year_ce") is not None and anchor.get("end_year_ce") is not None:
+            year = int(normalized["year"])
+            if not int(anchor["start_year_ce"]) <= year <= int(anchor["end_year_ce"]):
+                return {"status": "conflict", "reason": "normalized_year_outside_h0a_anchor", "year": year, "anchor": [anchor.get("start_year_ce"), anchor.get("end_year_ce")]}
+    return {"status": "unknown", "reason": "no_direct_h0a_surface_match"}
+
+
 __all__ = [
     "FUNCTION_NAME",
+    "PERSON_READ_FUNCTION",
+    "PERSON_FILL_FUNCTION",
+    "TEMPORAL_READ_FUNCTION",
+    "TEMPORAL_FILL_FUNCTION",
     "STRICT_ENDPOINT",
     "RELATION_CLASSES",
     "TEMPORAL_TYPES",
     "SYSTEM_PROMPT",
+    "PERSON_READ_SYSTEM",
+    "PERSON_FILL_SYSTEM",
+    "TEMPORAL_READ_SYSTEM",
+    "TEMPORAL_FILL_SYSTEM",
     "card_parameters_schema",
     "function_definition",
     "tool_choice",
@@ -994,4 +1548,20 @@ __all__ = [
     "normalize_temporal_surface",
     "h0a_compatibility",
     "json_hash",
+    "read_fill_function_definition",
+    "read_fill_tool_choice",
+    "model_visible_evidence_text",
+    "prepare_evidence_window",
+    "evidence_text_map",
+    "person_read_prompt",
+    "person_fill_prompt",
+    "temporal_read_prompt",
+    "temporal_fill_prompt",
+    "validate_person_read",
+    "validate_person_fill",
+    "validate_temporal_read",
+    "validate_temporal_fill",
+    "normalize_person_fill",
+    "normalize_story_temporal",
+    "story_temporal_h0a_compatibility",
 ]
