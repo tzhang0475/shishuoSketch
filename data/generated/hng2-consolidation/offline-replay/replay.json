@@ -229,25 +229,48 @@
   "projections": [
     {
       "candidate_projection_only": true,
-      "candidates": [],
+      "candidates": [
+        {
+          "candidate_key": "c0",
+          "candidate_source": "python_existing_catalogue",
+          "canonical_name": "王廙",
+          "known_forms": [
+            "世將",
+            "王廙"
+          ],
+          "person_id": "person-053"
+        }
+      ],
       "canonical_write_back": false,
       "case_id": "hng1r2-hng1-raw-relation-921d528c3cf9154fa43c",
       "entities": [
         {
-          "candidate_key": null,
-          "candidate_set": [],
-          "confidence": "medium",
+          "candidate_key": "c0",
+          "candidate_set": [
+            "person-053"
+          ],
+          "confidence": "high",
           "context_signals": [
-            "surname_inheriting_kinship"
+            "surname_inheriting_kinship",
+            "binary_identity_propagation"
           ],
           "entity_key": "e0",
           "entity_kind": "named_person",
           "evidence_ref": "hng02-zizhi-tongjian-wikisource-hu-090",
           "exact_span": "廙",
-          "identity_status": "unresolved",
+          "identity_propagation": {
+            "evidence_ref": "hng02-zizhi-tongjian-wikisource-hu-090",
+            "exact_span": "王廙，{{*|廙",
+            "relation_id": "python-identity-name-expansion-0",
+            "source_entity_key": "e1",
+            "target_entity_key": "e0"
+          },
+          "identity_resolution_basis": "contextual_name_projection",
+          "identity_status": "resolved_existing",
+          "person_resolution": "provisional",
           "reference_form": "full_name",
-          "resolution_method": "kinship_context",
-          "resolved_person_id": null,
+          "resolution_method": "identity_name_assertion",
+          "resolved_person_id": "person-053",
           "resolver_result": {
             "candidate_set": [],
             "confidence": "medium",
@@ -272,9 +295,88 @@
             "temporal_status": "unknown"
           },
           "surface": "廙"
+        },
+        {
+          "candidate_key": "c0",
+          "candidate_set": [
+            "person-053"
+          ],
+          "confidence": "high",
+          "context_signals": [
+            "exact_or_catalogue_form",
+            "explicit_full_name_elsewhere"
+          ],
+          "entity_key": "e1",
+          "entity_kind": "named_person",
+          "evidence_ref": "hng02-zizhi-tongjian-wikisource-hu-090",
+          "exact_span": "王廙，{{*|廙",
+          "identity_resolution_basis": "catalogue_exact_match",
+          "identity_status": "resolved_existing",
+          "person_resolution": "resolved_existing_person",
+          "reference_form": "full_name",
+          "resolution_method": "alias",
+          "resolved_person_id": "person-053",
+          "resolver_result": {
+            "candidate_set": [
+              "person-053"
+            ],
+            "confidence": "high",
+            "context_signals": [
+              "exact_or_catalogue_form",
+              "explicit_full_name_elsewhere"
+            ],
+            "decision_level": "AUTO_HIGH",
+            "graph_support": {
+              "excluded_circular_edges": [],
+              "graph_support_edges": [],
+              "independent_graph_support_count": 0
+            },
+            "normalized_person_surface": "王廙",
+            "resolution_method": "alias",
+            "resolution_status": "resolved_existing_person",
+            "resolved_label": "王廙",
+            "resolved_person_id": "person-053",
+            "surface": "王廙",
+            "temporal_status": "unknown"
+          },
+          "surface": "王廙"
         }
       ],
-      "relations": [],
+      "rejected_normalized_relations": [],
+      "relations": [
+        {
+          "canonical_write_back": false,
+          "confidence": "high",
+          "evidence_ref": "hng02-zizhi-tongjian-wikisource-hu-090",
+          "exact_span": "王廙，{{*|廙",
+          "graph_candidate": false,
+          "matches_existing_evidence_ref": true,
+          "object_entity_key": "e1",
+          "person_a": "person-053",
+          "person_b": "person-053",
+          "relation_class": "identity_name",
+          "relation_id": "python-identity-name-expansion-0",
+          "relation_surface": "王廙",
+          "semantic_level": "hard_relation",
+          "subject_entity_key": "e0"
+        }
+      ],
+      "source_grounded_identity_expansions": [
+        {
+          "assertion_id": "python-identity-name-expansion-0",
+          "candidate_key": "c0",
+          "derivation": "target_suffix_within_unique_existing_candidate_form",
+          "evidence_ref": "hng02-zizhi-tongjian-wikisource-hu-090",
+          "exact_span": "王廙，{{*|廙",
+          "full_name_entity_key": "e1",
+          "full_name_surface": "王廙",
+          "hard_conflict": false,
+          "identity_resolution_basis": "contextual_name_projection",
+          "person_id": "person-053",
+          "target_entity_key": "e0",
+          "target_surface": "廙"
+        }
+      ],
       "temporal_assertions": []
     },
     {
@@ -304,7 +406,9 @@
           "entity_kind": "named_person",
           "evidence_ref": "hng01-jinshu-088-liezhuan-007",
           "exact_span": "虞喜",
+          "identity_resolution_basis": "new_candidate",
           "identity_status": "resolved_new_candidate",
+          "person_resolution": "provisional",
           "reference_form": "full_name",
           "resolution_method": "kinship_context",
           "resolved_person_id": null,
@@ -333,7 +437,9 @@
           "surface": "虞喜"
         }
       ],
+      "rejected_normalized_relations": [],
       "relations": [],
+      "source_grounded_identity_expansions": [],
       "temporal_assertions": []
     },
     {
@@ -353,7 +459,9 @@
           "entity_kind": "kinship_reference",
           "evidence_ref": "hng02-jinshu-wikisource-punctuated-067",
           "exact_span": "嶠",
+          "identity_resolution_basis": "unresolved",
           "identity_status": "unresolved",
+          "person_resolution": "provisional",
           "reference_form": "kinship_plus_name",
           "resolution_method": "kinship_context",
           "resolved_person_id": null,
@@ -383,7 +491,9 @@
           "surface": "嶠"
         }
       ],
+      "rejected_normalized_relations": [],
       "relations": [],
+      "source_grounded_identity_expansions": [],
       "temporal_assertions": []
     },
     {
@@ -401,7 +511,9 @@
           "entity_kind": "abbreviated_name",
           "evidence_ref": "hng01-shishuo-01-dexing-038-annotation-006",
           "exact_span": "宣",
+          "identity_resolution_basis": "unresolved",
           "identity_status": "unresolved",
+          "person_resolution": "unresolved",
           "reference_form": "abbreviated",
           "resolution_method": "unresolved",
           "resolved_person_id": null,
@@ -418,7 +530,9 @@
           "surface": "宣"
         }
       ],
+      "rejected_normalized_relations": [],
       "relations": [],
+      "source_grounded_identity_expansions": [],
       "temporal_assertions": []
     },
     {
@@ -451,7 +565,9 @@
           "entity_kind": "named_person",
           "evidence_ref": "hng01-shishuo-03-zhengshi-011-main",
           "exact_span": "鍾雅",
+          "identity_resolution_basis": "catalogue_exact_match",
           "identity_status": "resolved_existing",
+          "person_resolution": "resolved_existing_person",
           "reference_form": "full_name",
           "resolution_method": "reviewed_contextual_alias",
           "resolved_person_id": "person-058",
@@ -492,7 +608,9 @@
           "surface": "鍾雅"
         }
       ],
+      "rejected_normalized_relations": [],
       "relations": [],
+      "source_grounded_identity_expansions": [],
       "temporal_assertions": []
     },
     {
@@ -528,7 +646,9 @@
           "entity_kind": "person_office_title",
           "evidence_ref": "hng01-shishuo-07-shijian-016-main",
           "exact_span": "庾太尉",
+          "identity_resolution_basis": "catalogue_exact_match",
           "identity_status": "resolved_existing",
+          "person_resolution": "resolved_existing_person",
           "reference_form": "office_title_only",
           "resolution_method": "title",
           "resolved_person_id": "person-010",
@@ -552,7 +672,9 @@
           "surface": "庾太尉"
         }
       ],
+      "rejected_normalized_relations": [],
       "relations": [],
+      "source_grounded_identity_expansions": [],
       "temporal_assertions": []
     },
     {
@@ -564,53 +686,38 @@
         {
           "candidate_key": null,
           "candidate_set": [],
-          "confidence": "low",
+          "confidence": "unknown",
           "context_signals": [
-            "malformed_kinship_chain"
+            "non_person_like_entity_kind"
           ],
           "entity_key": "e0",
           "entity_kind": "structural_kinship_expression",
           "evidence_ref": "hng01-jinshu-088-liezhuan-007",
           "exact_span": "喜弟預女",
+          "identity_resolution_basis": "unresolved",
           "identity_status": "not_single_person",
+          "person_resolution": "not_applicable",
           "reference_form": "kinship_plus_name",
-          "resolution_method": "kinship_context",
+          "resolution_method": "entity_kind_type_gate",
           "resolved_person_id": null,
           "resolver_result": {
             "candidate_set": [],
-            "confidence": "low",
+            "confidence": "unknown",
             "context_signals": [
-              "malformed_kinship_chain"
+              "non_person_like_entity_kind"
             ],
-            "decision_level": "UNRESOLVED",
-            "kinship_parse": {
-              "candidate_surface": "喜預女",
-              "family_surname": null,
-              "is_kinship": true,
-              "kinship_marker": "弟",
-              "malformed_person_surface": true,
-              "relation_chain": [
-                {
-                  "relation": "sibling_or_kinship",
-                  "surface": "喜"
-                },
-                {
-                  "relation": "descendant_or_affinal",
-                  "surface": "預女"
-                }
-              ],
-              "surname_inheriting": true
-            },
-            "note": "structural kinship chain is not one person",
-            "resolution_method": "kinship_context",
-            "resolution_status": "unresolved",
-            "surface": "喜弟預女",
-            "temporal_status": "unknown"
+            "resolution_method": "entity_kind_type_gate",
+            "resolution_status": "not_applicable",
+            "resolved_label": null,
+            "resolved_person_id": null,
+            "surface": "喜弟預女"
           },
           "surface": "喜弟預女"
         }
       ],
+      "rejected_normalized_relations": [],
       "relations": [],
+      "source_grounded_identity_expansions": [],
       "temporal_assertions": []
     },
     {
@@ -630,7 +737,9 @@
           "entity_kind": "kinship_reference",
           "evidence_ref": "hng2-live:hng2-live-w1-identity-33afe84247b036e9d9cb",
           "exact_span": "陳騫",
+          "identity_resolution_basis": "unresolved",
           "identity_status": "unresolved",
+          "person_resolution": "provisional",
           "reference_form": "kinship_plus_name",
           "resolution_method": "source_local_context",
           "resolved_person_id": null,
@@ -651,7 +760,9 @@
           "surface": "陳騫"
         }
       ],
+      "rejected_normalized_relations": [],
       "relations": [],
+      "source_grounded_identity_expansions": [],
       "temporal_assertions": []
     },
     {
@@ -671,7 +782,9 @@
           "entity_kind": "kinship_reference",
           "evidence_ref": "hng02-jinshu-wikisource-punctuated-067",
           "exact_span": "錢鳳",
+          "identity_resolution_basis": "unresolved",
           "identity_status": "unresolved",
+          "person_resolution": "provisional",
           "reference_form": "kinship_plus_name",
           "resolution_method": "kinship_context",
           "resolved_person_id": null,
@@ -701,7 +814,9 @@
           "surface": "錢鳳"
         }
       ],
+      "rejected_normalized_relations": [],
       "relations": [],
+      "source_grounded_identity_expansions": [],
       "temporal_assertions": []
     },
     {
@@ -737,7 +852,9 @@
           "entity_kind": "kinship_reference",
           "evidence_ref": "hng02-jinshu-wikisource-punctuated-021",
           "exact_span": "山濤",
+          "identity_resolution_basis": "catalogue_exact_match",
           "identity_status": "resolved_existing",
+          "person_resolution": "resolved_existing_person",
           "reference_form": "kinship_plus_name",
           "resolution_method": "frozen_case_candidate",
           "resolved_person_id": "person-043",
@@ -771,7 +888,9 @@
           "surface": "山濤"
         }
       ],
+      "rejected_normalized_relations": [],
       "relations": [],
+      "source_grounded_identity_expansions": [],
       "temporal_assertions": []
     },
     {
@@ -791,7 +910,9 @@
           "entity_kind": "kinship_reference",
           "evidence_ref": "hng02-zizhi-tongjian-wikisource-hu-162",
           "exact_span": "譽",
+          "identity_resolution_basis": "unresolved",
           "identity_status": "unresolved",
+          "person_resolution": "provisional",
           "reference_form": "kinship_plus_name",
           "resolution_method": "kinship_context",
           "resolved_person_id": null,
@@ -821,7 +942,9 @@
           "surface": "譽"
         }
       ],
+      "rejected_normalized_relations": [],
       "relations": [],
+      "source_grounded_identity_expansions": [],
       "temporal_assertions": []
     },
     {
@@ -841,7 +964,9 @@
           "entity_kind": "kinship_reference",
           "evidence_ref": "hng02-jinshu-wikisource-punctuated-003",
           "exact_span": "何曾",
+          "identity_resolution_basis": "unresolved",
           "identity_status": "unresolved",
+          "person_resolution": "provisional",
           "reference_form": "kinship_plus_name",
           "resolution_method": "kinship_context",
           "resolved_person_id": null,
@@ -871,7 +996,9 @@
           "surface": "何曾"
         }
       ],
+      "rejected_normalized_relations": [],
       "relations": [],
+      "source_grounded_identity_expansions": [],
       "temporal_assertions": []
     }
   ],
