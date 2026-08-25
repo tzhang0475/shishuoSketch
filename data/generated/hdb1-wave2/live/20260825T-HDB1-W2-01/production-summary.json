@@ -1,0 +1,868 @@
+{
+  "candidate_artifacts": {
+    "hdb1-wave2-identity-candidates.json": "/home/tzhang/projects/shishuoSketch/data/annotation/hdb1-wave2-identity-candidates.json",
+    "hdb1-wave2-kinship-candidates.json": "/home/tzhang/projects/shishuoSketch/data/annotation/hdb1-wave2-kinship-candidates.json",
+    "hdb1-wave2-marriage-candidates.json": "/home/tzhang/projects/shishuoSketch/data/annotation/hdb1-wave2-marriage-candidates.json",
+    "hdb1-wave2-office-candidates.json": "/home/tzhang/projects/shishuoSketch/data/annotation/hdb1-wave2-office-candidates.json",
+    "hdb1-wave2-person-candidates.json": "/home/tzhang/projects/shishuoSketch/data/annotation/hdb1-wave2-person-candidates.json",
+    "hdb1-wave2-production-metrics.json": "/home/tzhang/projects/shishuoSketch/data/derived/hdb1-wave2-production-metrics.json",
+    "hdb1-wave2-rejected-items.json": "/home/tzhang/projects/shishuoSketch/data/annotation/hdb1-wave2-rejected-items.json",
+    "hdb1-wave2-relation-candidates.json": "/home/tzhang/projects/shishuoSketch/data/annotation/hdb1-wave2-relation-candidates.json",
+    "hdb1-wave2-review-queue.json": "/home/tzhang/projects/shishuoSketch/data/annotation/hdb1-wave2-review-queue.json",
+    "hdb1-wave2-temporal-candidates.json": "/home/tzhang/projects/shishuoSketch/data/annotation/hdb1-wave2-temporal-candidates.json",
+    "rejected-items.json": "/home/tzhang/projects/shishuoSketch/data/generated/hdb1-wave2/live/20260825T-HDB1-W2-01/rejected-items.json"
+  },
+  "candidate_only": true,
+  "canonical_write_back": false,
+  "metrics": {
+    "candidate_only": true,
+    "canonical_write_back": false,
+    "completion_tokens": 117845,
+    "deepseek": {
+      "api_calls": 303,
+      "completion_tokens": 117845,
+      "expected_semantic_calls": 302,
+      "max_latency_seconds": 4.598,
+      "median_latency_seconds": 2.5515,
+      "model": "deepseek-v4-flash",
+      "parse_failures": 0,
+      "preflight_calls": 1,
+      "prompt_tokens": 411545,
+      "prompt_versions": {
+        "person_fill": "hng2-c3-frozen-evidence-atoms-v1",
+        "person_read": "hng2-c3-frozen-evidence-atoms-v1",
+        "temporal_fill": "hng2-c3-frozen-evidence-atoms-v1",
+        "temporal_read": "hng2-c3-frozen-evidence-atoms-v1"
+      },
+      "provider_failures": 0,
+      "retries": 0,
+      "semantic_calls": 302,
+      "token_usage": {
+        "completion_tokens": 117845,
+        "prompt_tokens": 411545,
+        "total_tokens": 529390
+      },
+      "total_tokens": 529390,
+      "truncations": 0
+    },
+    "evidence": {
+      "person_grounding_rejection_reasons": {
+        "exact_span_missing": 6,
+        "object_not_in_span": 6,
+        "predicate_not_in_span": 5,
+        "subject_not_in_span": 109
+      },
+      "rejected_person_atoms": 126,
+      "valid_person_atoms": 243
+    },
+    "known_target_correct": 64,
+    "known_target_unresolved": 14,
+    "known_target_wrong": 0,
+    "main_text_targets": 78,
+    "max_latency": 4.598,
+    "median_latency": 2.5515,
+    "novelty": {
+      "existing_match_rate": 0.2850678733031674,
+      "new_candidates_per_story": 0.8356164383561644,
+      "unresolved_rate": 0.5769230769230769
+    },
+    "parse_failures": 0,
+    "person": {
+      "ambiguous": 3,
+      "identity_resolution_basis": {
+        "catalogue_exact_match": 107,
+        "evidence_identity_assertion": 13,
+        "new_candidate": 44,
+        "unresolved": 99
+      },
+      "new_person_candidate_observations": 44,
+      "nonperson_person_id_anomalies": 0,
+      "resolved_existing": 120,
+      "resolved_new_candidate": 44,
+      "target_evaluation": {
+        "correct": 64,
+        "rows": [
+          {
+            "actual_person_id": "person-015",
+            "expected_person_id": "person-015",
+            "status": "correct",
+            "story_id": "27-jiajue-012",
+            "target_id": "hdb1-target-27-jiajue-012-p1",
+            "target_surface": "文度",
+            "unit_id": "hdb1-target-27-jiajue-012-p1"
+          },
+          {
+            "actual_person_id": "person-043",
+            "expected_person_id": "person-043",
+            "status": "correct",
+            "story_id": "02-yanyu-078",
+            "target_id": "hdb1-target-02-yanyu-078-p1",
+            "target_surface": "山濤",
+            "unit_id": "hdb1-target-02-yanyu-078-p1"
+          },
+          {
+            "actual_person_id": "person-013",
+            "expected_person_id": "person-013",
+            "status": "correct",
+            "story_id": "02-yanyu-035",
+            "target_id": "hdb1-target-02-yanyu-035-p1",
+            "target_surface": "温嶠",
+            "unit_id": "hdb1-target-02-yanyu-035-p1"
+          },
+          {
+            "actual_person_id": null,
+            "expected_person_id": "person-021",
+            "status": "unresolved",
+            "story_id": "02-yanyu-035",
+            "target_id": "hdb1-target-02-yanyu-035-p2",
+            "target_surface": "劉琨",
+            "unit_id": "hdb1-target-02-yanyu-035-p2"
+          },
+          {
+            "actual_person_id": "person-006",
+            "expected_person_id": "person-006",
+            "status": "correct",
+            "story_id": "04-wenxue-087",
+            "target_id": "hdb1-target-04-wenxue-087-p1",
+            "target_surface": "安石",
+            "unit_id": "hdb1-target-04-wenxue-087-p1"
+          },
+          {
+            "actual_person_id": "person-012",
+            "expected_person_id": "person-012",
+            "status": "correct",
+            "story_id": "08-shangyu-034",
+            "target_id": "hdb1-target-08-shangyu-034-p1",
+            "target_surface": "袁宏",
+            "unit_id": "hdb1-target-08-shangyu-034-p1"
+          },
+          {
+            "actual_person_id": "person-017",
+            "expected_person_id": "person-017",
+            "status": "correct",
+            "story_id": "17-shangshi-008",
+            "target_id": "hdb1-target-17-shangshi-008-p1",
+            "target_surface": "蘇峻",
+            "unit_id": "hdb1-target-17-shangshi-008-p1"
+          },
+          {
+            "actual_person_id": null,
+            "expected_person_id": "person-010",
+            "status": "unresolved",
+            "story_id": "17-shangshi-008",
+            "target_id": "hdb1-target-17-shangshi-008-p2",
+            "target_surface": "庾亮",
+            "unit_id": "hdb1-target-17-shangshi-008-p2"
+          },
+          {
+            "actual_person_id": "person-011",
+            "expected_person_id": "person-011",
+            "status": "correct",
+            "story_id": "27-jiajue-006",
+            "target_id": "hdb1-target-27-jiajue-006-p1",
+            "target_surface": "王敦",
+            "unit_id": "hdb1-target-27-jiajue-006-p1"
+          },
+          {
+            "actual_person_id": null,
+            "expected_person_id": "person-006",
+            "status": "unresolved",
+            "story_id": "06-yaliang-033",
+            "target_id": "hdb1-target-06-yaliang-033-p1",
+            "target_surface": "謝太傅",
+            "unit_id": "hdb1-target-06-yaliang-033-p1"
+          },
+          {
+            "actual_person_id": "person-018",
+            "expected_person_id": "person-018",
+            "status": "correct",
+            "story_id": "09-pinzao-026",
+            "target_id": "hdb1-target-09-pinzao-026-p1",
+            "target_surface": "謝仁祖",
+            "unit_id": "hdb1-target-09-pinzao-026-p1"
+          },
+          {
+            "actual_person_id": null,
+            "expected_person_id": "person-024",
+            "status": "unresolved",
+            "story_id": "01-dexing-047",
+            "target_id": "hdb1-target-01-dexing-047-p1",
+            "target_surface": "康伯",
+            "unit_id": "hdb1-target-01-dexing-047-p1"
+          },
+          {
+            "actual_person_id": "person-048",
+            "expected_person_id": "person-048",
+            "status": "correct",
+            "story_id": "02-yanyu-107",
+            "target_id": "hdb1-target-02-yanyu-107-p1",
+            "target_surface": "潘岳",
+            "unit_id": "hdb1-target-02-yanyu-107-p1"
+          },
+          {
+            "actual_person_id": "person-025",
+            "expected_person_id": "person-025",
+            "status": "correct",
+            "story_id": "08-shangyu-067",
+            "target_id": "hdb1-target-08-shangyu-067-p1",
+            "target_surface": "何次道",
+            "unit_id": "hdb1-target-08-shangyu-067-p1"
+          },
+          {
+            "actual_person_id": "person-014",
+            "expected_person_id": "person-014",
+            "status": "correct",
+            "story_id": "07-shijian-018",
+            "target_id": "hdb1-target-07-shijian-018-p1",
+            "target_surface": "仲祖",
+            "unit_id": "hdb1-target-07-shijian-018-p1"
+          },
+          {
+            "actual_person_id": null,
+            "expected_person_id": "person-011",
+            "status": "unresolved",
+            "story_id": "02-yanyu-037",
+            "target_id": "hdb1-target-02-yanyu-037-p1",
+            "target_surface": "王敦",
+            "unit_id": "hdb1-target-02-yanyu-037-p1"
+          },
+          {
+            "actual_person_id": "person-013",
+            "expected_person_id": "person-013",
+            "status": "correct",
+            "story_id": "23-rendan-026",
+            "target_id": "hdb1-target-23-rendan-026-p1",
+            "target_surface": "太真",
+            "unit_id": "hdb1-target-23-rendan-026-p1"
+          },
+          {
+            "actual_person_id": "person-017",
+            "expected_person_id": "person-017",
+            "status": "correct",
+            "story_id": "29-jianshe-008",
+            "target_id": "hdb1-target-29-jianshe-008-p1",
+            "target_surface": "蘇峻",
+            "unit_id": "hdb1-target-29-jianshe-008-p1"
+          },
+          {
+            "actual_person_id": null,
+            "expected_person_id": "person-046",
+            "status": "unresolved",
+            "story_id": "01-dexing-016",
+            "target_id": "hdb1-target-01-dexing-016-p1",
+            "target_surface": "嵇康",
+            "unit_id": "hdb1-target-01-dexing-016-p1"
+          },
+          {
+            "actual_person_id": "person-020",
+            "expected_person_id": "person-020",
+            "status": "correct",
+            "story_id": "24-jianao-002",
+            "target_id": "hdb1-target-24-jianao-002-p1",
+            "target_surface": "王戎",
+            "unit_id": "hdb1-target-24-jianao-002-p1"
+          },
+          {
+            "actual_person_id": "person-045",
+            "expected_person_id": "person-045",
+            "status": "correct",
+            "story_id": "24-jianao-002",
+            "target_id": "hdb1-target-24-jianao-002-p2",
+            "target_surface": "阮籍",
+            "unit_id": "hdb1-target-24-jianao-002-p2"
+          },
+          {
+            "actual_person_id": "person-023",
+            "expected_person_id": "person-023",
+            "status": "correct",
+            "story_id": "10-guizhen-012",
+            "target_id": "hdb1-target-10-guizhen-012-p1",
+            "target_surface": "謝鯤",
+            "unit_id": "hdb1-target-10-guizhen-012-p1"
+          },
+          {
+            "actual_person_id": "person-006",
+            "expected_person_id": "person-006",
+            "status": "correct",
+            "story_id": "04-wenxue-024",
+            "target_id": "hdb1-target-04-wenxue-024-p1",
+            "target_surface": "謝安",
+            "unit_id": "hdb1-target-04-wenxue-024-p1"
+          },
+          {
+            "actual_person_id": "person-017",
+            "expected_person_id": "person-017",
+            "status": "correct",
+            "story_id": "14-rongzhi-023",
+            "target_id": "hdb1-target-14-rongzhi-023-p1",
+            "target_surface": "蘇峻",
+            "unit_id": "hdb1-target-14-rongzhi-023-p1"
+          },
+          {
+            "actual_person_id": "person-014",
+            "expected_person_id": "person-014",
+            "status": "correct",
+            "story_id": "09-pinzao-030",
+            "target_id": "hdb1-target-09-pinzao-030-p1",
+            "target_surface": "仲祖",
+            "unit_id": "hdb1-target-09-pinzao-030-p1"
+          },
+          {
+            "actual_person_id": "person-019",
+            "expected_person_id": "person-019",
+            "status": "correct",
+            "story_id": "05-fangzheng-031",
+            "target_id": "hdb1-target-05-fangzheng-031-p1",
+            "target_surface": "伯仁",
+            "unit_id": "hdb1-target-05-fangzheng-031-p1"
+          },
+          {
+            "actual_person_id": "person-015",
+            "expected_person_id": "person-015",
+            "status": "correct",
+            "story_id": "02-yanyu-079",
+            "target_id": "hdb1-target-02-yanyu-079-p1",
+            "target_surface": "文度",
+            "unit_id": "hdb1-target-02-yanyu-079-p1"
+          },
+          {
+            "actual_person_id": "person-006",
+            "expected_person_id": "person-006",
+            "status": "correct",
+            "story_id": "25-paidiao-026",
+            "target_id": "hdb1-target-25-paidiao-026-p1",
+            "target_surface": "謝公",
+            "unit_id": "hdb1-target-25-paidiao-026-p1"
+          },
+          {
+            "actual_person_id": "person-008",
+            "expected_person_id": "person-008",
+            "status": "correct",
+            "story_id": "02-yanyu-101",
+            "target_id": "hdb1-target-02-yanyu-101-p1",
+            "target_surface": "桓温",
+            "unit_id": "hdb1-target-02-yanyu-101-p1"
+          },
+          {
+            "actual_person_id": "person-006",
+            "expected_person_id": "person-006",
+            "status": "correct",
+            "story_id": "08-shangyu-077",
+            "target_id": "hdb1-target-08-shangyu-077-p1",
+            "target_surface": "安石",
+            "unit_id": "hdb1-target-08-shangyu-077-p1"
+          },
+          {
+            "actual_person_id": null,
+            "expected_person_id": "person-016",
+            "status": "unresolved",
+            "story_id": "23-rendan-033",
+            "target_id": "hdb1-target-23-rendan-033-p1",
+            "target_surface": "桓子",
+            "unit_id": "hdb1-target-23-rendan-033-p1"
+          },
+          {
+            "actual_person_id": "person-011",
+            "expected_person_id": "person-011",
+            "status": "correct",
+            "story_id": "08-shangyu-043",
+            "target_id": "hdb1-target-08-shangyu-043-p1",
+            "target_surface": "王敦",
+            "unit_id": "hdb1-target-08-shangyu-043-p1"
+          },
+          {
+            "actual_person_id": "person-021",
+            "expected_person_id": "person-021",
+            "status": "correct",
+            "story_id": "08-shangyu-043",
+            "target_id": "hdb1-target-08-shangyu-043-p2",
+            "target_surface": "劉琨",
+            "unit_id": "hdb1-target-08-shangyu-043-p2"
+          },
+          {
+            "actual_person_id": "person-035",
+            "expected_person_id": "person-035",
+            "status": "correct",
+            "story_id": "05-fangzheng-011",
+            "target_id": "hdb1-target-05-fangzheng-011-p1",
+            "target_surface": "和嶠",
+            "unit_id": "hdb1-target-05-fangzheng-011-p1"
+          },
+          {
+            "actual_person_id": "person-019",
+            "expected_person_id": "person-019",
+            "status": "correct",
+            "story_id": "05-fangzheng-033",
+            "target_id": "hdb1-target-05-fangzheng-033-p1",
+            "target_surface": "周伯仁",
+            "unit_id": "hdb1-target-05-fangzheng-033-p1"
+          },
+          {
+            "actual_person_id": "person-026",
+            "expected_person_id": "person-026",
+            "status": "correct",
+            "story_id": "08-shangyu-020",
+            "target_id": "hdb1-target-08-shangyu-020-p1",
+            "target_surface": "陸士衡",
+            "unit_id": "hdb1-target-08-shangyu-020-p1"
+          },
+          {
+            "actual_person_id": "person-041",
+            "expected_person_id": "person-041",
+            "status": "correct",
+            "story_id": "35-huoni-003",
+            "target_id": "hdb1-target-35-huoni-003-p1",
+            "target_surface": "賈公閭",
+            "unit_id": "hdb1-target-35-huoni-003-p1"
+          },
+          {
+            "actual_person_id": "person-031",
+            "expected_person_id": "person-031",
+            "status": "correct",
+            "story_id": "09-pinzao-088",
+            "target_id": "hdb1-target-09-pinzao-088-p1",
+            "target_surface": "仲文",
+            "unit_id": "hdb1-target-09-pinzao-088-p1"
+          },
+          {
+            "actual_person_id": "person-009",
+            "expected_person_id": "person-009",
+            "status": "correct",
+            "story_id": "02-yanyu-066",
+            "target_id": "hdb1-target-02-yanyu-066-p1",
+            "target_surface": "真長",
+            "unit_id": "hdb1-target-02-yanyu-066-p1"
+          },
+          {
+            "actual_person_id": "person-004",
+            "expected_person_id": "person-004",
+            "status": "correct",
+            "story_id": "02-yanyu-071",
+            "target_id": "hdb1-target-02-yanyu-071-p1",
+            "target_surface": "王凝之",
+            "unit_id": "hdb1-target-02-yanyu-071-p1"
+          },
+          {
+            "actual_person_id": "person-019",
+            "expected_person_id": "person-019",
+            "status": "correct",
+            "story_id": "05-fangzheng-030",
+            "target_id": "hdb1-target-05-fangzheng-030-p1",
+            "target_surface": "周伯仁",
+            "unit_id": "hdb1-target-05-fangzheng-030-p1"
+          },
+          {
+            "actual_person_id": "person-009",
+            "expected_person_id": "person-009",
+            "status": "correct",
+            "story_id": "02-yanyu-054",
+            "target_id": "hdb1-target-02-yanyu-054-p1",
+            "target_surface": "真長",
+            "unit_id": "hdb1-target-02-yanyu-054-p1"
+          },
+          {
+            "actual_person_id": null,
+            "expected_person_id": "person-018",
+            "status": "unresolved",
+            "story_id": "23-rendan-037",
+            "target_id": "hdb1-target-23-rendan-037-p1",
+            "target_surface": "謝仁祖",
+            "unit_id": "hdb1-target-23-rendan-037-p1"
+          },
+          {
+            "actual_person_id": "person-020",
+            "expected_person_id": "person-020",
+            "status": "correct",
+            "story_id": "17-shangshi-002",
+            "target_id": "hdb1-target-17-shangshi-002-p1",
+            "target_surface": "王濬沖",
+            "unit_id": "hdb1-target-17-shangshi-002-p1"
+          },
+          {
+            "actual_person_id": "person-070",
+            "expected_person_id": "person-070",
+            "status": "correct",
+            "story_id": "19-xianyuan-032",
+            "target_id": "hdb1-target-19-xianyuan-032-p1",
+            "target_surface": "景真",
+            "unit_id": "hdb1-target-19-xianyuan-032-p1"
+          },
+          {
+            "actual_person_id": null,
+            "expected_person_id": "person-049",
+            "status": "unresolved",
+            "story_id": "01-dexing-025",
+            "target_id": "hdb1-target-01-dexing-025-p1",
+            "target_surface": "顧榮",
+            "unit_id": "hdb1-target-01-dexing-025-p1"
+          },
+          {
+            "actual_person_id": null,
+            "expected_person_id": "person-041",
+            "status": "unresolved",
+            "story_id": "19-xianyuan-013",
+            "target_id": "hdb1-target-19-xianyuan-013-p1",
+            "target_surface": "賈充",
+            "unit_id": "hdb1-target-19-xianyuan-013-p1"
+          },
+          {
+            "actual_person_id": "person-035",
+            "expected_person_id": "person-035",
+            "status": "correct",
+            "story_id": "05-fangzheng-009",
+            "target_id": "hdb1-target-05-fangzheng-009-p1",
+            "target_surface": "和嶠",
+            "unit_id": "hdb1-target-05-fangzheng-009-p1"
+          },
+          {
+            "actual_person_id": null,
+            "expected_person_id": "person-057",
+            "status": "unresolved",
+            "story_id": "10-guizhen-016",
+            "target_id": "hdb1-target-10-guizhen-016-p1",
+            "target_surface": "沈充",
+            "unit_id": "hdb1-target-10-guizhen-016-p1"
+          },
+          {
+            "actual_person_id": null,
+            "expected_person_id": "person-019",
+            "status": "unresolved",
+            "story_id": "02-yanyu-030",
+            "target_id": "hdb1-target-02-yanyu-030-p1",
+            "target_surface": "周伯仁",
+            "unit_id": "hdb1-target-02-yanyu-030-p1"
+          },
+          {
+            "actual_person_id": "person-006",
+            "expected_person_id": "person-006",
+            "status": "correct",
+            "story_id": "06-yaliang-029",
+            "target_id": "hdb1-target-06-yaliang-029-p1",
+            "target_surface": "謝安",
+            "unit_id": "hdb1-target-06-yaliang-029-p1"
+          },
+          {
+            "actual_person_id": "person-018",
+            "expected_person_id": "person-018",
+            "status": "correct",
+            "story_id": "02-yanyu-046",
+            "target_id": "hdb1-target-02-yanyu-046-p1",
+            "target_surface": "謝仁祖",
+            "unit_id": "hdb1-target-02-yanyu-046-p1"
+          },
+          {
+            "actual_person_id": "person-023",
+            "expected_person_id": "person-023",
+            "status": "correct",
+            "story_id": "08-shangyu-051",
+            "target_id": "hdb1-target-08-shangyu-051-p1",
+            "target_surface": "謝鯤",
+            "unit_id": "hdb1-target-08-shangyu-051-p1"
+          },
+          {
+            "actual_person_id": "person-011",
+            "expected_person_id": "person-011",
+            "status": "correct",
+            "story_id": "08-shangyu-051",
+            "target_id": "hdb1-target-08-shangyu-051-p2",
+            "target_surface": "王敦",
+            "unit_id": "hdb1-target-08-shangyu-051-p2"
+          },
+          {
+            "actual_person_id": "person-001",
+            "expected_person_id": "person-001",
+            "status": "correct",
+            "story_id": "04-wenxue-036",
+            "target_id": "hdb1-target-04-wenxue-036-p1",
+            "target_surface": "王逸少",
+            "unit_id": "hdb1-target-04-wenxue-036-p1"
+          },
+          {
+            "actual_person_id": "person-023",
+            "expected_person_id": "person-023",
+            "status": "correct",
+            "story_id": "09-pinzao-017",
+            "target_id": "hdb1-target-09-pinzao-017-p1",
+            "target_surface": "謝鯤",
+            "unit_id": "hdb1-target-09-pinzao-017-p1"
+          },
+          {
+            "actual_person_id": "person-044",
+            "expected_person_id": "person-044",
+            "status": "correct",
+            "story_id": "01-dexing-023",
+            "target_id": "hdb1-target-01-dexing-023-p1",
+            "target_surface": "樂廣",
+            "unit_id": "hdb1-target-01-dexing-023-p1"
+          },
+          {
+            "actual_person_id": "person-019",
+            "expected_person_id": "person-019",
+            "status": "correct",
+            "story_id": "09-pinzao-022",
+            "target_id": "hdb1-target-09-pinzao-022-p1",
+            "target_surface": "周伯仁",
+            "unit_id": "hdb1-target-09-pinzao-022-p1"
+          },
+          {
+            "actual_person_id": "person-004",
+            "expected_person_id": "person-004",
+            "status": "correct",
+            "story_id": "19-xianyuan-026",
+            "target_id": "hdb1-target-19-xianyuan-026-p1",
+            "target_surface": "王凝之",
+            "unit_id": "hdb1-target-19-xianyuan-026-p1"
+          },
+          {
+            "actual_person_id": "person-002",
+            "expected_person_id": "person-002",
+            "status": "correct",
+            "story_id": "09-pinzao-019",
+            "target_id": "hdb1-target-09-pinzao-019-p1",
+            "target_surface": "郗鑒",
+            "unit_id": "hdb1-target-09-pinzao-019-p1"
+          },
+          {
+            "actual_person_id": "person-019",
+            "expected_person_id": "person-019",
+            "status": "correct",
+            "story_id": "26-qingdi-002",
+            "target_id": "hdb1-target-26-qingdi-002-p1",
+            "target_surface": "周伯仁",
+            "unit_id": "hdb1-target-26-qingdi-002-p1"
+          },
+          {
+            "actual_person_id": "person-003",
+            "expected_person_id": "person-003",
+            "status": "correct",
+            "story_id": "33-youhui-007",
+            "target_id": "hdb1-target-33-youhui-007-p1",
+            "target_surface": "王導",
+            "unit_id": "hdb1-target-33-youhui-007-p1"
+          },
+          {
+            "actual_person_id": "person-045",
+            "expected_person_id": "person-045",
+            "status": "correct",
+            "story_id": "01-dexing-015",
+            "target_id": "hdb1-target-01-dexing-015-p1",
+            "target_surface": "阮嗣宗",
+            "unit_id": "hdb1-target-01-dexing-015-p1"
+          },
+          {
+            "actual_person_id": "person-030",
+            "expected_person_id": "person-030",
+            "status": "correct",
+            "story_id": "02-yanyu-086",
+            "target_id": "hdb1-target-02-yanyu-086-p1",
+            "target_surface": "王孝伯",
+            "unit_id": "hdb1-target-02-yanyu-086-p1"
+          },
+          {
+            "actual_person_id": null,
+            "expected_person_id": "person-016",
+            "status": "unresolved",
+            "story_id": "23-rendan-049",
+            "target_id": "hdb1-target-23-rendan-049-p1",
+            "target_surface": "桓子",
+            "unit_id": "hdb1-target-23-rendan-049-p1"
+          },
+          {
+            "actual_person_id": null,
+            "expected_person_id": "person-016",
+            "status": "unresolved",
+            "story_id": "05-fangzheng-055",
+            "target_id": "hdb1-target-05-fangzheng-055-p1",
+            "target_surface": "桓子",
+            "unit_id": "hdb1-target-05-fangzheng-055-p1"
+          },
+          {
+            "actual_person_id": "person-001",
+            "expected_person_id": "person-001",
+            "status": "correct",
+            "story_id": "06-yaliang-019",
+            "target_id": "hdb1-target-06-yaliang-019-p1",
+            "target_surface": "逸少",
+            "unit_id": "hdb1-target-06-yaliang-019-p1"
+          },
+          {
+            "actual_person_id": "person-030",
+            "expected_person_id": "person-030",
+            "status": "correct",
+            "story_id": "06-yaliang-041",
+            "target_id": "hdb1-target-06-yaliang-041-p1",
+            "target_surface": "王恭",
+            "unit_id": "hdb1-target-06-yaliang-041-p1"
+          },
+          {
+            "actual_person_id": "person-006",
+            "expected_person_id": "person-006",
+            "status": "correct",
+            "story_id": "06-yaliang-027",
+            "target_id": "hdb1-target-06-yaliang-027-p1",
+            "target_surface": "謝安",
+            "unit_id": "hdb1-target-06-yaliang-027-p1"
+          },
+          {
+            "actual_person_id": "person-003",
+            "expected_person_id": "person-003",
+            "status": "correct",
+            "story_id": "10-guizhen-011",
+            "target_id": "hdb1-target-10-guizhen-011-p1",
+            "target_surface": "王茂弘",
+            "unit_id": "hdb1-target-10-guizhen-011-p1"
+          },
+          {
+            "actual_person_id": "person-006",
+            "expected_person_id": "person-006",
+            "status": "correct",
+            "story_id": "25-paidiao-038",
+            "target_id": "hdb1-target-25-paidiao-038-p1",
+            "target_surface": "安石",
+            "unit_id": "hdb1-target-25-paidiao-038-p1"
+          },
+          {
+            "actual_person_id": "person-020",
+            "expected_person_id": "person-020",
+            "status": "correct",
+            "story_id": "08-shangyu-013",
+            "target_id": "hdb1-target-08-shangyu-013-p1",
+            "target_surface": "王戎",
+            "unit_id": "hdb1-target-08-shangyu-013-p1"
+          },
+          {
+            "actual_person_id": "person-031",
+            "expected_person_id": "person-031",
+            "status": "correct",
+            "story_id": "09-pinzao-045",
+            "target_id": "hdb1-target-09-pinzao-045-p1",
+            "target_surface": "仲文",
+            "unit_id": "hdb1-target-09-pinzao-045-p1"
+          },
+          {
+            "actual_person_id": "person-020",
+            "expected_person_id": "person-020",
+            "status": "correct",
+            "story_id": "08-shangyu-006",
+            "target_id": "hdb1-target-08-shangyu-006-p1",
+            "target_surface": "王戎",
+            "unit_id": "hdb1-target-08-shangyu-006-p1"
+          },
+          {
+            "actual_person_id": "person-008",
+            "expected_person_id": "person-008",
+            "status": "correct",
+            "story_id": "08-shangyu-073",
+            "target_id": "hdb1-target-08-shangyu-073-p1",
+            "target_surface": "桓温",
+            "unit_id": "hdb1-target-08-shangyu-073-p1"
+          },
+          {
+            "actual_person_id": "person-011",
+            "expected_person_id": "person-011",
+            "status": "correct",
+            "story_id": "34-pilou-001",
+            "target_id": "hdb1-target-34-pilou-001-p1",
+            "target_surface": "王敦",
+            "unit_id": "hdb1-target-34-pilou-001-p1"
+          },
+          {
+            "actual_person_id": "person-045",
+            "expected_person_id": "person-045",
+            "status": "correct",
+            "story_id": "24-jianao-001",
+            "target_id": "hdb1-target-24-jianao-001-p1",
+            "target_surface": "阮籍",
+            "unit_id": "hdb1-target-24-jianao-001-p1"
+          },
+          {
+            "actual_person_id": "person-026",
+            "expected_person_id": "person-026",
+            "status": "correct",
+            "story_id": "05-fangzheng-018",
+            "target_id": "hdb1-target-05-fangzheng-018-p1",
+            "target_surface": "陸士衡",
+            "unit_id": "hdb1-target-05-fangzheng-018-p1"
+          }
+        ],
+        "unresolved": 14,
+        "wrong": 0
+      },
+      "unresolved": 96
+    },
+    "person_targets": 78,
+    "prompt_tokens": 411545,
+    "provider_failures": 0,
+    "relations": {
+      "collapsed_nonidentity_self_relations": 0,
+      "existing_fact_matches": 1,
+      "existing_relation_matches": 5,
+      "new_kinship_candidates": 15,
+      "new_marriage_candidates": 8,
+      "new_office_candidates": 17,
+      "new_relation_candidates": 17,
+      "relation_classes": {
+        "identity_name": 27,
+        "institutional": 17,
+        "interaction": 93,
+        "kinship": 16,
+        "marriage": 8,
+        "other": 4
+      },
+      "unresolved_endpoint_candidates": 116,
+      "valid_relation_observations": 165
+    },
+    "retries": 0,
+    "review_burden": {
+      "P0": 0,
+      "P1": 105,
+      "P2": 34,
+      "P3": 216,
+      "review_items_per_story": 4.863013698630137,
+      "total_review_items": 355
+    },
+    "secondary_targets": 5,
+    "semantic_calls": 302,
+    "source_form_distribution": {
+      "legacy_local": 371,
+      "punctuated": 153
+    },
+    "stage": "hdb1-wave2-remaining-scope-production",
+    "stories_processed": 73,
+    "temporal": {
+      "false_temporal_promotions": 0,
+      "h0a_compatible": 8,
+      "h0a_evidence_outside_scanner_scope": 0,
+      "h0a_scene_affecting_conflicts": 0,
+      "h0a_upgrade_candidates": 37,
+      "later_outcome_excluded": 15,
+      "no_temporal_evidence": 7,
+      "no_temporal_evidence_stories": [
+        "09-pinzao-026",
+        "09-pinzao-030",
+        "02-yanyu-079",
+        "23-rendan-037",
+        "02-yanyu-030",
+        "05-fangzheng-055",
+        "09-pinzao-045"
+      ],
+      "non_scene_role_disagreements": 5,
+      "quoted_background_excluded": 70,
+      "rejected_temporal_atoms": 60,
+      "scanner_visible_recall_misses": 0,
+      "scanner_visible_surfaces": 68,
+      "scanner_visible_surfaces_considered_by_t1": 53,
+      "t1_temporal_atoms_outside_scanner_scope": 0,
+      "valid_temporal_assertions": 163,
+      "valid_temporal_atoms": 179
+    },
+    "total_tokens": 529390,
+    "truncations": 0,
+    "useful_story_count": 72,
+    "wave_id": "HDB1-W2"
+  },
+  "run_id": "20260825T-HDB1-W2-01",
+  "selection_hash": "dcb2b105127f9aa55fe31b9dbeeb6900178210d87b07b2f7bbc3a993dfd1e44d",
+  "stage": "hdb1-wave2-remaining-scope-production",
+  "wave_id": "HDB1-W2"
+}
