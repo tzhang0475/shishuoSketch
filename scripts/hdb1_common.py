@@ -27,6 +27,10 @@ ROOT = Path(__file__).resolve().parents[1]
 SELECTION_PATH = ROOT / "data/annotation/hdb1-wave1-selection.json"
 STAGE = "hdb1-wave1-controlled-candidate-production"
 RUN_VERSION = "hdb1-w1-v1"
+# HDB1 selections are historical production artifacts.  Their selection
+# contract includes the HNG2 exclusion manifest that existed when W1/W2 were
+# frozen; later HNG2 files must not make an old selection rebuild drift.
+FROZEN_SELECTION_CONTRACT = "hdb1-wave1-wave2-selection-v1"
 PRODUCTION_SCOPE_PATH = ROOT / "data/derived/sc1-site.json"
 PERSON_LIKE_KINDS = {
     "named_person",
@@ -58,6 +62,26 @@ def stable_hash(value: Any) -> str:
     return hashlib.sha256(
         json.dumps(value, ensure_ascii=False, sort_keys=True, separators=(",", ":")).encode("utf-8")
     ).hexdigest()
+
+
+def load_frozen_previous_hng2_exclusion() -> dict[str, Any]:
+    """Load the exclusion snapshot captured by the frozen HDB1 contract.
+
+    The live HNG2 exclusion scanner is intentionally cumulative.  Reusing it
+    for an HDB1 rebuild would add files from later experiments to the old
+    manifest even when the excluded Story IDs remain identical.  HDB1's
+    historical serializer therefore uses the immutable snapshot stored in
+    the W1 artifact, falling back to the live scanner only for a brand-new
+    checkout without a frozen artifact.
+    """
+
+    frozen = read_json(SELECTION_PATH, {}) or {}
+    snapshot = frozen.get("previous_hng2_exclusion")
+    if isinstance(snapshot, Mapping) and snapshot.get("exclusion_hash"):
+        return dict(snapshot)
+    import run_hng2_fresh_validation as current_exclusion  # local fallback
+
+    return current_exclusion.collect_previous_hng2_exclusion()
 
 
 def file_hash(path: Path) -> str:
@@ -293,7 +317,7 @@ def build_selection() -> dict[str, Any]:
     missing = sorted(story_id for story_id, values in options.items() if not values)
     if missing:
         raise RuntimeError(f"hdb1_missing_main_text_targets:{','.join(missing)}")
-    exclusion = frozen.collect_previous_hng2_exclusion()
+    exclusion = load_frozen_previous_hng2_exclusion()
     excluded_ids = set(exclusion.get("story_ids", []))
     untouched = sorted(story_id for story_id in story_map if story_id not in excluded_ids)
     reused_pool = sorted(story_id for story_id in story_map if story_id in excluded_ids)
@@ -442,4 +466,3 @@ def looks_like_office_relation(relation: Mapping[str, Any], entities_by_key: Map
 
 def relation_has_explicit_evidence(relation: Mapping[str, Any]) -> bool:
     return bool(str(relation.get("evidence_ref") or "") and str(relation.get("exact_span") or ""))
-

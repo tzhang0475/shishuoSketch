@@ -106,26 +106,47 @@ class ShishuoReferenceMigrationTests(unittest.TestCase):
         config = yaml.safe_load(
             (REPO_ROOT / "config/sources.yaml").read_text(encoding="utf-8")
         )
+        jinshu = config["sources"]["jinshu"]
+        # These paths predate WREF1 and remain the protected Jinshu routing.
+        for key, expected in {
+            "primary": "sources/downloads/jinshu/wikisource-siku",
+            "primary_witness": "jinshu-wikisource-siku",
+            "primary_coverage": "1-130",
+            "same_edition_machine_completion": "sources/downloads/jinshu/wikisource-siku",
+            "historical_partial": "shishuoSources/jinshu",
+            "critical": "sources/downloads/jinshu/jinshu-jiaozhu",
+            "visual_reference": "external:jinshu-wuyingdian",
+        }.items():
+            with self.subTest(key=key):
+                self.assertEqual(jinshu[key], expected)
+
+        # WREF1 intentionally added an independent punctuated witness; keep
+        # those provenance fields explicit instead of asserting the obsolete
+        # pre-WREF1 whole-dictionary snapshot.
         self.assertEqual(
-            config["sources"]["jinshu"],
-            {
-                "primary": "sources/downloads/jinshu/wikisource-siku",
-                "primary_witness": "jinshu-wikisource-siku",
-                "primary_coverage": "1-130",
-                "same_edition_machine_completion": "sources/downloads/jinshu/wikisource-siku",
-                "historical_partial": "shishuoSources/jinshu",
-                "critical": "sources/downloads/jinshu/jinshu-jiaozhu",
-                "visual_reference": "external:jinshu-wuyingdian",
-            },
+            jinshu["punctuated_reference"],
+            "sources/downloads/jinshu/wikisource-punctuated",
         )
+        self.assertEqual(jinshu["punctuated_reference_coverage"], "1-130")
         self.assertEqual(
-            config["sources"]["sanguozhi"],
-            {
-                "primary": "shishuoSources/sanguozhi",
-                "secondary": "sources/downloads/sanguozhi/song-edition",
-                "visual_reference": "external:sanguozhi-wuyingdian",
-            },
+            jinshu["punctuated_reference_witness"],
+            "jinshu-wikisource-punctuated",
         )
+        sanguozhi = config["sources"]["sanguozhi"]
+        # SGZ1 added complete-machine and witness metadata; protect every
+        # registered route without freezing the obsolete pre-SGZ1 dictionary.
+        for key, expected in {
+            "primary": "shishuoSources/sanguozhi",
+            "primary_witness": "sanguozhi-kanripo-wyg",
+            "primary_coverage": "魏書 1-30",
+            "complete_machine": "sources/downloads/sanguozhi/wikisource",
+            "complete_machine_witness": "sanguozhi-wikisource",
+            "secondary": "sources/downloads/sanguozhi/song-edition",
+            "visual_reference_local": "sources/downloads/sanguozhi/song-edition",
+            "visual_reference": "external:sanguozhi-wuyingdian",
+        }.items():
+            with self.subTest(work="sanguozhi", key=key):
+                self.assertEqual(sanguozhi[key], expected)
 
 
 if __name__ == "__main__":

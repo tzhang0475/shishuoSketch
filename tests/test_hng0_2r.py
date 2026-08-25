@@ -11,6 +11,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 
 import build_hng0_2 as hng02  # noqa: E402
+from tests.support import skip_if_portable_payload_missing  # noqa: E402
 
 
 class HNG02RTests(unittest.TestCase):
@@ -89,6 +90,11 @@ class HNG02RTests(unittest.TestCase):
             self.assertEqual(hashlib.sha256((ROOT / rel).read_bytes()).hexdigest(), expected)
 
     def test_hng02r_rebuild_is_byte_identical(self):
+        skip_if_portable_payload_missing(
+            self,
+            ROOT,
+            "sources/downloads/jinshu/wikisource-punctuated/text/volume-001.wikitext",
+        )
         output_paths = sorted((ROOT / "data/generated/hng0-2r").glob("*.json")) + [ROOT / "data/annotation/hng0-2r-review.json"]
         before = {str(path.relative_to(ROOT)): hashlib.sha256(path.read_bytes()).hexdigest() for path in output_paths}
         result = subprocess.run([sys.executable, "scripts/build_hng0_2r.py", "--quiet"], cwd=ROOT, capture_output=True, text=True)

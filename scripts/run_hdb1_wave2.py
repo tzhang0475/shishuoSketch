@@ -32,6 +32,7 @@ from hdb1_common import (  # noqa: E402
     choose_targets,
     file_hash,
     load_frozen_selection as load_w1_selection,
+    load_frozen_previous_hng2_exclusion,
     load_mentions,
     load_participant_map,
     load_people_catalog,
@@ -57,7 +58,10 @@ def build_selection() -> dict[str, Any]:
     production_ids = {str(row["id"]) for row in production_rows}
     w1_selection = load_w1_selection()
     w1_ids = {str(row["story_id"]) for row in w1_selection.get("stories", [])}
-    prior = frozen.collect_previous_hng2_exclusion()
+    # W2 is a historical continuation of the frozen HDB1 selection contract;
+    # use the same captured exclusion manifest as W1 so later HNG2 files do
+    # not change a byte-stability rebuild.
+    prior = load_frozen_previous_hng2_exclusion()
     prior_ids = {str(value) for value in prior.get("story_ids", [])}
     remaining = production_ids - prior_ids - w1_ids
     if prior_ids & w1_ids:
