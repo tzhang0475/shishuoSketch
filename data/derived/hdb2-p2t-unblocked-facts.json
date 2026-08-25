@@ -1,0 +1,108 @@
+{
+  "candidate_only": true,
+  "canonical_write_back": false,
+  "records": [
+    {
+      "candidate_id": "hdb1-relation-7e423ce034174f0833bde47b",
+      "candidate_only": true,
+      "canonical_write_back": false,
+      "endpoint_after": {
+        "object_person_id": "person-011",
+        "subject_person_id": "person-019"
+      },
+      "endpoint_before": {
+        "object_person_id": null,
+        "subject_person_id": "person-019"
+      },
+      "identity_support": [
+        {
+          "identity_observation_id": "hdb1-identity-a6c18dcf4eb613f8507938b1",
+          "occurrence_decision": {
+            "candidate_key": "c0",
+            "candidate_only": true,
+            "canonical_write_back": false,
+            "cascade_reason": "multiple_plausible_candidates",
+            "cascade_stage": "llm_contextual",
+            "compositional_referent": null,
+            "hard_constraint_rejections": [],
+            "llm_called": true,
+            "model_decision": {
+              "against": [
+                {
+                  "candidate_key": "c1",
+                  "reason_type": "context_mismatch"
+                }
+              ],
+              "candidate_key": "c0",
+              "confidence": "high",
+              "decision": "candidate",
+              "reason_code": "explicit_identity",
+              "support": [
+                {
+                  "evidence_ids": [
+                    "ev-594997a5c747e1318cc3"
+                  ],
+                  "support_type": "title_context"
+                },
+                {
+                  "evidence_ids": [
+                    "ev-594997a5c747e1318cc3"
+                  ],
+                  "support_type": "ruler_context"
+                },
+                {
+                  "evidence_ids": [
+                    "ev-594997a5c747e1318cc3"
+                  ],
+                  "support_type": "temporal_context"
+                }
+              ]
+            },
+            "occurrence_id": "hdb2-occ-f824b8c202ae1ab11a1c",
+            "resolved_person_id": "person-011",
+            "sequence": 34,
+            "status": "contextually_resolved",
+            "story_id": "05-fangzheng-033",
+            "support_families": [
+              "ruler_context",
+              "temporal_context",
+              "title_context"
+            ],
+            "target_surface": "王大將軍"
+          }
+        }
+      ],
+      "original_observation": {
+        "candidate_id": "hdb1-relation-7e423ce034174f0833bde47b",
+        "candidate_only": true,
+        "canonical_write_back": false,
+        "confidence": "high",
+        "evidence_ref": "hng2c1-shishuo-05-fangzheng-033-main",
+        "exact_span": "周伯仁往見之",
+        "graph_candidate": false,
+        "novelty": "unresolved_endpoint",
+        "object_entity_key": "e1",
+        "object_person_id": null,
+        "object_provisional_person_id": null,
+        "object_ref": "unresolved:hdb1-identity-a6c18dcf4eb613f8507938b1",
+        "relation_class": "interaction",
+        "relation_id": "r0",
+        "relation_observation_kind": "explicit_person_interaction",
+        "relation_surface": "往見",
+        "run_id": "20260825T-HDB1-W2-01",
+        "semantic_level": "documented_interaction",
+        "source_hash": "00410770c9874e68a95bee9313c9a86f6d43172b4f628ee3cf01da1e0790280a",
+        "story_id": "05-fangzheng-033",
+        "subject_entity_key": "e0",
+        "subject_person_id": "person-019",
+        "subject_provisional_person_id": null,
+        "subject_ref": "person:person-019",
+        "unit_id": "hdb1-target-05-fangzheng-033-p1",
+        "wave_id": "HDB1-W2"
+      },
+      "original_wave": "HDB1-W2",
+      "status": "newly_unblocked_candidate_fact"
+    }
+  ],
+  "schema": "hdb2-p2t-unblocked-facts-v1"
+}

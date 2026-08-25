@@ -1,0 +1,1922 @@
+{
+  "candidate_only": true,
+  "canonical_write_back": false,
+  "records": [
+    {
+      "llm_called": false,
+      "occurrence_id": "hdb2-occ-4035eddce98cdafd491d",
+      "sequence": 1
+    },
+    {
+      "llm_called": false,
+      "occurrence_id": "hdb2-occ-0e5c9c9d423d6e1f0c4f",
+      "sequence": 2
+    },
+    {
+      "llm_called": false,
+      "occurrence_id": "hdb2-occ-2d02729b7ce75bbd321f",
+      "sequence": 3
+    },
+    {
+      "llm_called": false,
+      "occurrence_id": "hdb2-occ-bb016fa22766fce8d069",
+      "sequence": 4
+    },
+    {
+      "llm_called": true,
+      "occurrence_id": "hdb2-occ-7040b7062b178ff6385a",
+      "request": {
+        "endpoint": "https://api.deepseek.com/beta/chat/completions",
+        "max_tokens": 900,
+        "messages": [
+          {
+            "content": "只根据 supplied occurrence context、evidence_items 和 candidates 判断这一个历史文字 occurrence 的指代。不得使用外部知识补写，不得创建或猜测人物 ID，不得把同表面其他 occurrence 的结论当作本次证据。候选之外只能 unresolved。X兒、X子、X女等结构性亲属表达不是其 base Person；帝/明帝/武帝必须结合本段语境。每个 support 只能引用 supplied evidence_id。",
+            "role": "system"
+          },
+          {
+            "content": "{\"candidates\": [{\"activity_context\": [{\"end_year_ce\": 317, \"event_id\": \"event-yongjia-upheaval\", \"review_status\": \"candidate\", \"start_year_ce\": 307}, {\"end_year_ce\": 329, \"event_id\": \"event-su-jun-rebellion\", \"review_status\": \"candidate\", \"start_year_ce\": 328}], \"aliases\": [\"庾亮\", \"元規\", \"庾亮\", \"庾元規\", \"庾公\", \"庾謂曰君\"], \"candidate_key\": \"c0\", \"courtesy_names\": [\"元規\", \"庾元規\", \"庾公\", \"庾謂曰君\"], \"evidence\": [], \"name\": \"庾亮\", \"office_context\": [], \"social_context\": [{\"relation_class\": \"kinship\", \"relation_surface\": \"兒\", \"story_id\": \"17-shangshi-008\"}, {\"relation_class\": \"interaction\", \"relation_surface\": \"善\", \"story_id\": \"23-rendan-026\"}, {\"relation_class\": \"interaction\", \"relation_surface\": \"大喚\", \"story_id\": \"23-rendan-026\"}, {\"relation_class\": \"interaction\", \"relation_surface\": \"贖\", \"story_id\": \"23-rendan-026\"}, {\"relation_class\": \"other\", \"relation_surface\": \"之亂\", \"story_id\": \"29-jianshe-008\"}, {\"relation_class\": \"interaction\", \"relation_surface\": \"南奔見\", \"story_id\": \"29-jianshe-008\"}, {\"relation_class\": \"interaction\", \"relation_surface\": \"何如\", \"story_id\": \"09-pinzao-017\"}, {\"relation_class\": \"interaction\", \"relation_surface\": \"語\", \"story_id\": \"26-qingdi-002\"}], \"titles\": [\"庾公\"]}, {\"activity_context\": [{\"end_year_ce\": 317, \"event_id\": \"event-yongjia-upheaval\", \"review_status\": \"candidate\", \"start_year_ce\": 307}, {\"end_year_ce\": 324, \"event_id\": \"event-wang-dun-rebellion\", \"review_status\": \"candidate\", \"start_year_ce\": 322}, {\"end_year_ce\": 324, \"event_id\": \"event-wang-dun-rebellion\", \"review_status\": \"candidate\", \"start_year_ce\": 322}, {\"end_year_ce\": 317, \"event_id\": \"event-yongjia-upheaval\", \"review_status\": \"candidate\", \"start_year_ce\": 307}], \"aliases\": [\"謝鯤\", \"幼輿\", \"謝幼輿\", \"謝鯤\"], \"candidate_key\": \"c1\", \"courtesy_names\": [\"幼輿\", \"謝幼輿\"], \"evidence\": [], \"name\": \"謝鯤\", \"office_context\": [], \"social_context\": [{\"relation_class\": \"interaction\", \"relation_surface\": \"謂\", \"story_id\": \"25-paidiao-015\"}, {\"relation_class\": \"interaction\", \"relation_surface\": \"荅\", \"story_id\": \"25-paidiao-015\"}, {\"relation_class\": \"institutional\", \"relation_surface\": \"爲\", \"story_id\": \"10-guizhen-012\"}, {\"relation_class\": \"interaction\", \"relation_surface\": \"諭\", \"story_id\": \"10-guizhen-012\"}, {\"relation_class\": \"interaction\", \"relation_surface\": \"謂\", \"story_id\": \"10-guizhen-012\"}, {\"relation_class\": \"institutional\", \"relation_surface\": \"爲\", \"story_id\": \"08-shangyu-051\"}, {\"relation_class\": \"interaction\", \"relation_surface\": \"謂\", \"story_id\": \"08-shangyu-051\"}, {\"relation_class\": \"interaction\", \"relation_surface\": \"問\", \"story_id\": \"09-pinzao-017\"}, {\"relation_class\": \"interaction\", \"relation_surface\": \"何如\", \"story_id\": \"09-pinzao-017\"}], \"titles\": []}], \"evidence_items\": [{\"evidence_id\": \"ev-80a5fb95fdabf858e0f4\", \"source_layer\": \"main_text\", \"source_ref\": \"hdb2-shishuo-main-09-pinzao-017\", \"source_work\": \"世說正文\", \"text\": \"明帝問謝鯤君自謂何如庾亮荅曰端委廟堂使百\\n僚凖則臣不如亮一丘一壑自謂過之\"}], \"occurrence\": {\"annotation_context\": [], \"known_people_in_context\": [{\"key\": \"p0\", \"name\": \"謝鯤\", \"relation\": \"問\"}, {\"key\": \"p1\", \"name\": \"庾亮\", \"relation\": \"same_story_identity_observation\"}], \"story_id\": \"09-pinzao-017\", \"story_text\": \"明帝問謝鯤君自謂何如庾亮荅曰端委廟堂使百\\n僚凖則臣不如亮一丘一壑自謂過之\", \"surface\": \"明帝\", \"temporal_context\": [{\"end_year_ce\": 326, \"event_ids\": [], \"evidence_ids\": [\"h0a-evidence-619c63e5ddbb46ade4b6\"], \"phase_id\": \"phase-5\", \"precision\": \"reign_bounded\", \"reign_id\": null, \"ruler_context_id\": \"h0a-ruler-context-99f376b4d6f693729b7d\", \"start_year_ce\": 323}, {\"evidence_record_id\": \"h0a-evidence-619c63e5ddbb46ade4b6\", \"evidence_type\": \"reign_reference\", \"normalized_candidate\": {\"polity\": \"晉\", \"ruler_context_id\": \"h0a-ruler-context-99f376b4d6f693729b7d\", \"ruler_name\": \"肅宗明皇帝\", \"surface\": \"明帝\"}, \"raw_surface\": \"明帝\", \"relation_to_story\": \"direct_story_time\"}], \"type\": \"ruler_reference\"}, \"task\": \"occurrence identity disambiguation\"}",
+            "role": "user"
+          }
+        ],
+        "model": "deepseek-v4-flash",
+        "temperature": 0,
+        "thinking": {
+          "type": "disabled"
+        },
+        "tool_choice": {
+          "function": {
+            "name": "submit_hdb2_occurrence_identity_decision"
+          },
+          "type": "function"
+        },
+        "tools": [
+          {
+            "function": {
+              "description": "比较系统提供的候选人物并判断当前单一历史 occurrence；不得创建人物 ID。",
+              "name": "submit_hdb2_occurrence_identity_decision",
+              "parameters": {
+                "additionalProperties": false,
+                "properties": {
+                  "against": {
+                    "description": "只列 supplied candidate 中被当前上下文反对的候选。",
+                    "items": {
+                      "additionalProperties": false,
+                      "properties": {
+                        "candidate_key": {
+                          "description": "被反驳的 supplied candidate_key。",
+                          "type": "string"
+                        },
+                        "reason_type": {
+                          "description": "原文语境与该候选不合的受控理由。",
+                          "enum": [
+                            "context_mismatch",
+                            "identity_conflict",
+                            "kinship_conflict",
+                            "office_conflict",
+                            "temporal_conflict"
+                          ],
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "candidate_key",
+                        "reason_type"
+                      ],
+                      "type": "object"
+                    },
+                    "maxItems": 6,
+                    "type": "array"
+                  },
+                  "candidate_key": {
+                    "description": "只能复制 supplied candidate_key；非 candidate decision 使用 null。",
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "confidence": {
+                    "description": "对 supplied text 是否支持该判断的信心，不是 canonical truth。",
+                    "enum": [
+                      "high",
+                      "low",
+                      "medium"
+                    ],
+                    "type": "string"
+                  },
+                  "decision": {
+                    "description": "对这一个 occurrence 的候选判断；允许 unresolved。",
+                    "enum": [
+                      "candidate",
+                      "compositional_reference",
+                      "not_person",
+                      "unresolved"
+                    ],
+                    "type": "string"
+                  },
+                  "reason_code": {
+                    "description": "简短受控判断理由。",
+                    "enum": [
+                      "candidate_conflict",
+                      "compositional_kinship",
+                      "explicit_identity",
+                      "insufficient_context",
+                      "multi_context_support",
+                      "not_person",
+                      "single_context_support"
+                    ],
+                    "type": "string"
+                  },
+                  "support": {
+                    "description": "只列直接支持当前 occurrence 判断的 evidence family。",
+                    "items": {
+                      "additionalProperties": false,
+                      "properties": {
+                        "evidence_ids": {
+                          "description": "直接支持判断的 supplied evidence_id。不得创建新证据编号。",
+                          "items": {
+                            "type": "string"
+                          },
+                          "maxItems": 6,
+                          "minItems": 1,
+                          "type": "array"
+                        },
+                        "support_type": {
+                          "description": "支持当前 occurrence 候选判断的证据家族。只能引用 supplied evidence。",
+                          "enum": [
+                            "annotation_context",
+                            "explicit_name",
+                            "kinship_context",
+                            "office_context",
+                            "ruler_context",
+                            "social_context",
+                            "temporal_context",
+                            "title_context"
+                          ],
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "support_type",
+                        "evidence_ids"
+                      ],
+                      "type": "object"
+                    },
+                    "maxItems": 6,
+                    "type": "array"
+                  }
+                },
+                "required": [
+                  "decision",
+                  "candidate_key",
+                  "confidence",
+                  "support",
+                  "against",
+                  "reason_code"
+                ],
+                "type": "object"
+              },
+              "strict": true
+            },
+            "type": "function"
+          }
+        ]
+      },
+      "sequence": 5
+    },
+    {
+      "llm_called": false,
+      "occurrence_id": "hdb2-occ-e58e4e3438c69a7b9c7d",
+      "sequence": 6
+    },
+    {
+      "llm_called": false,
+      "occurrence_id": "hdb2-occ-759726d923ebafefa7a1",
+      "sequence": 7
+    },
+    {
+      "llm_called": false,
+      "occurrence_id": "hdb2-occ-4541478551dbf7404c2a",
+      "sequence": 8
+    },
+    {
+      "llm_called": false,
+      "occurrence_id": "hdb2-occ-6af7a36e85e90b295a61",
+      "sequence": 9
+    },
+    {
+      "llm_called": false,
+      "occurrence_id": "hdb2-occ-46c736fe780fb9cb5567",
+      "sequence": 10
+    },
+    {
+      "llm_called": false,
+      "occurrence_id": "hdb2-occ-0716da549b132ab653d2",
+      "sequence": 11
+    },
+    {
+      "llm_called": false,
+      "occurrence_id": "hdb2-occ-04e8287a54fcb04868a0",
+      "sequence": 12
+    },
+    {
+      "llm_called": false,
+      "occurrence_id": "hdb2-occ-6f33510c96efd527157a",
+      "sequence": 13
+    },
+    {
+      "llm_called": false,
+      "occurrence_id": "hdb2-occ-ae33181bf65e55bc7c2d",
+      "sequence": 14
+    },
+    {
+      "llm_called": true,
+      "occurrence_id": "hdb2-occ-cdd233033e152d8a2249",
+      "request": {
+        "endpoint": "https://api.deepseek.com/beta/chat/completions",
+        "max_tokens": 900,
+        "messages": [
+          {
+            "content": "只根据 supplied occurrence context、evidence_items 和 candidates 判断这一个历史文字 occurrence 的指代。不得使用外部知识补写，不得创建或猜测人物 ID，不得把同表面其他 occurrence 的结论当作本次证据。候选之外只能 unresolved。X兒、X子、X女等结构性亲属表达不是其 base Person；帝/明帝/武帝必须结合本段语境。每个 support 只能引用 supplied evidence_id。",
+            "role": "system"
+          },
+          {
+            "content": "{\"candidates\": [{\"activity_context\": [{\"end_year_ce\": 317, \"event_id\": \"event-yongjia-upheaval\", \"review_status\": \"candidate\", \"start_year_ce\": 307}], \"aliases\": [\"劉琨\", \"劉琨\", \"劉越石\", \"越石\"], \"candidate_key\": \"c0\", \"courtesy_names\": [\"劉越石\", \"越石\"], \"evidence\": [], \"name\": \"劉琨\", \"office_context\": [], \"social_context\": [{\"relation_class\": \"institutional\", \"relation_surface\": \"為\", \"story_id\": \"27-jiajue-009\"}, {\"relation_class\": \"institutional\", \"relation_surface\": \"假守\", \"story_id\": \"27-jiajue-009\"}, {\"relation_class\": \"institutional\", \"relation_surface\": \"爲\", \"story_id\": \"02-yanyu-036\"}, {\"relation_class\": \"institutional\", \"relation_surface\": \"使\", \"story_id\": \"02-yanyu-036\"}, {\"relation_class\": \"institutional\", \"relation_surface\": \"奉使\", \"story_id\": \"02-yanyu-036\"}, {\"relation_class\": \"kinship\", \"relation_surface\": \"父\", \"story_id\": \"02-yanyu-035\"}, {\"relation_class\": \"interaction\", \"relation_surface\": \"稱\", \"story_id\": \"08-shangyu-043\"}, {\"relation_class\": \"interaction\", \"relation_surface\": \"與\", \"story_id\": \"08-shangyu-043\"}, {\"relation_class\": \"interaction\", \"relation_surface\": \"與\", \"story_id\": \"08-shangyu-043\"}], \"titles\": []}, {\"activity_context\": [{\"end_year_ce\": 324, \"event_id\": \"event-wang-dun-rebellion\", \"review_status\": \"candidate\", \"start_year_ce\": 322}, {\"end_year_ce\": 324, \"event_id\": \"event-wang-dun-rebellion\", \"review_status\": \"candidate\", \"start_year_ce\": 322}, {\"end_year_ce\": 317, \"event_id\": \"event-yongjia-upheaval\", \"review_status\": \"candidate\", \"start_year_ce\": 307}, {\"end_year_ce\": 324, \"event_id\": \"event-wang-dun-rebellion\", \"review_status\": \"candidate\", \"start_year_ce\": 322}], \"aliases\": [\"王敦\", \"王大將軍\", \"王敦\", \"王敦聞君\", \"王處仲\", \"處仲\"], \"candidate_key\": \"c1\", \"courtesy_names\": [\"王大將軍\", \"王敦聞君\", \"王處仲\", \"處仲\"], \"evidence\": [], \"name\": \"王敦\", \"office_context\": [], \"social_context\": [{\"relation_class\": \"kinship\", \"relation_surface\": \"護其兄\", \"story_id\": \"05-fangzheng-028\"}, {\"relation_class\": \"interaction\", \"relation_surface\": \"稱\", \"story_id\": \"05-fangzheng-028\"}, {\"relation_class\": \"other\", \"relation_surface\": \"方\", \"story_id\": \"09-pinzao-006\"}, {\"relation_class\": \"institutional\", \"relation_surface\": \"為\", \"story_id\": \"02-yanyu-042\"}, {\"relation_class\": \"interaction\", \"relation_surface\": \"見\", \"story_id\": \"07-shijian-006\"}, {\"relation_class\": \"interaction\", \"relation_surface\": \"曰\", \"story_id\": \"05-fangzheng-031\"}, {\"relation_class\": \"interaction\", \"relation_surface\": \"歎\", \"story_id\": \"08-shangyu-043\"}, {\"relation_class\": \"institutional\", \"relation_surface\": \"爲\", \"story_id\": \"08-shangyu-051\"}, {\"relation_class\": \"interaction\", \"relation_surface\": \"謂\", \"story_id\": \"08-shangyu-051\"}, {\"relation_class\": \"marriage\", \"relation_surface\": \"尚\", \"story_id\": \"34-pilou-001\"}, {\"relation_class\": \"marriage\", \"relation_surface\": \"尚\", \"story_id\": \"34-pilou-001\"}], \"titles\": [\"王大將軍\"]}], \"evidence_items\": [{\"evidence_id\": \"ev-25df1f161bb5c18af7dd\", \"source_layer\": \"main_text\", \"source_ref\": \"hdb2-shishuo-main-08-shangyu-043\", \"source_work\": \"世說正文\", \"text\": \"劉琨稱祖車騎爲朗詣曰少爲王敦所歎\"}], \"occurrence\": {\"annotation_context\": [], \"known_people_in_context\": [{\"key\": \"p0\", \"name\": \"王敦\", \"relation\": \"歎\"}, {\"key\": \"p1\", \"name\": \"劉琨\", \"relation\": \"same_story_identity_observation\"}], \"story_id\": \"08-shangyu-043\", \"story_text\": \"劉琨稱祖車騎爲朗詣曰少爲王敦所歎\", \"surface\": \"祖車騎\", \"temporal_context\": [{\"end_year_ce\": null, \"event_ids\": [], \"evidence_ids\": [], \"phase_id\": null, \"precision\": \"unknown\", \"reign_id\": null, \"ruler_context_id\": null, \"start_year_ce\": null}], \"type\": \"title_reference\"}, \"task\": \"occurrence identity disambiguation\"}",
+            "role": "user"
+          }
+        ],
+        "model": "deepseek-v4-flash",
+        "temperature": 0,
+        "thinking": {
+          "type": "disabled"
+        },
+        "tool_choice": {
+          "function": {
+            "name": "submit_hdb2_occurrence_identity_decision"
+          },
+          "type": "function"
+        },
+        "tools": [
+          {
+            "function": {
+              "description": "比较系统提供的候选人物并判断当前单一历史 occurrence；不得创建人物 ID。",
+              "name": "submit_hdb2_occurrence_identity_decision",
+              "parameters": {
+                "additionalProperties": false,
+                "properties": {
+                  "against": {
+                    "description": "只列 supplied candidate 中被当前上下文反对的候选。",
+                    "items": {
+                      "additionalProperties": false,
+                      "properties": {
+                        "candidate_key": {
+                          "description": "被反驳的 supplied candidate_key。",
+                          "type": "string"
+                        },
+                        "reason_type": {
+                          "description": "原文语境与该候选不合的受控理由。",
+                          "enum": [
+                            "context_mismatch",
+                            "identity_conflict",
+                            "kinship_conflict",
+                            "office_conflict",
+                            "temporal_conflict"
+                          ],
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "candidate_key",
+                        "reason_type"
+                      ],
+                      "type": "object"
+                    },
+                    "maxItems": 6,
+                    "type": "array"
+                  },
+                  "candidate_key": {
+                    "description": "只能复制 supplied candidate_key；非 candidate decision 使用 null。",
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "confidence": {
+                    "description": "对 supplied text 是否支持该判断的信心，不是 canonical truth。",
+                    "enum": [
+                      "high",
+                      "low",
+                      "medium"
+                    ],
+                    "type": "string"
+                  },
+                  "decision": {
+                    "description": "对这一个 occurrence 的候选判断；允许 unresolved。",
+                    "enum": [
+                      "candidate",
+                      "compositional_reference",
+                      "not_person",
+                      "unresolved"
+                    ],
+                    "type": "string"
+                  },
+                  "reason_code": {
+                    "description": "简短受控判断理由。",
+                    "enum": [
+                      "candidate_conflict",
+                      "compositional_kinship",
+                      "explicit_identity",
+                      "insufficient_context",
+                      "multi_context_support",
+                      "not_person",
+                      "single_context_support"
+                    ],
+                    "type": "string"
+                  },
+                  "support": {
+                    "description": "只列直接支持当前 occurrence 判断的 evidence family。",
+                    "items": {
+                      "additionalProperties": false,
+                      "properties": {
+                        "evidence_ids": {
+                          "description": "直接支持判断的 supplied evidence_id。不得创建新证据编号。",
+                          "items": {
+                            "type": "string"
+                          },
+                          "maxItems": 6,
+                          "minItems": 1,
+                          "type": "array"
+                        },
+                        "support_type": {
+                          "description": "支持当前 occurrence 候选判断的证据家族。只能引用 supplied evidence。",
+                          "enum": [
+                            "annotation_context",
+                            "explicit_name",
+                            "kinship_context",
+                            "office_context",
+                            "ruler_context",
+                            "social_context",
+                            "temporal_context",
+                            "title_context"
+                          ],
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "support_type",
+                        "evidence_ids"
+                      ],
+                      "type": "object"
+                    },
+                    "maxItems": 6,
+                    "type": "array"
+                  }
+                },
+                "required": [
+                  "decision",
+                  "candidate_key",
+                  "confidence",
+                  "support",
+                  "against",
+                  "reason_code"
+                ],
+                "type": "object"
+              },
+              "strict": true
+            },
+            "type": "function"
+          }
+        ]
+      },
+      "sequence": 15
+    },
+    {
+      "llm_called": false,
+      "occurrence_id": "hdb2-occ-6fc07c2ab7a9cdbfda26",
+      "sequence": 16
+    },
+    {
+      "llm_called": false,
+      "occurrence_id": "hdb2-occ-b17089b4ce70c3834acc",
+      "sequence": 17
+    },
+    {
+      "llm_called": true,
+      "occurrence_id": "hdb2-occ-37adb6ada94b5f214aea",
+      "request": {
+        "endpoint": "https://api.deepseek.com/beta/chat/completions",
+        "max_tokens": 900,
+        "messages": [
+          {
+            "content": "只根据 supplied occurrence context、evidence_items 和 candidates 判断这一个历史文字 occurrence 的指代。不得使用外部知识补写，不得创建或猜测人物 ID，不得把同表面其他 occurrence 的结论当作本次证据。候选之外只能 unresolved。X兒、X子、X女等结构性亲属表达不是其 base Person；帝/明帝/武帝必须结合本段语境。每个 support 只能引用 supplied evidence_id。",
+            "role": "system"
+          },
+          {
+            "content": "{\"candidates\": [{\"activity_context\": [{\"end_year_ce\": 226, \"ruler_context_id\": \"h0a-ruler-context-d092a569e9017fb3ca72\", \"start_year_ce\": 220}], \"aliases\": [], \"candidate_key\": \"c0\", \"courtesy_names\": [], \"evidence\": [], \"name\": \"世祖文皇帝\", \"office_context\": [], \"social_context\": [], \"titles\": []}, {\"activity_context\": [{\"end_year_ce\": 289, \"ruler_context_id\": \"h0a-ruler-context-cf3db82aef544b1c7cc1\", \"start_year_ce\": 265}], \"aliases\": [], \"candidate_key\": \"c1\", \"courtesy_names\": [], \"evidence\": [], \"name\": \"世祖武皇帝\", \"office_context\": [], \"social_context\": [], \"titles\": []}, {\"activity_context\": [{\"end_year_ce\": 260, \"ruler_context_id\": \"h0a-ruler-context-c48eedcbe7c51743bcfb\", \"start_year_ce\": 256}], \"aliases\": [], \"candidate_key\": \"c2\", \"courtesy_names\": [], \"evidence\": [], \"name\": \"丙辰帝\", \"office_context\": [], \"social_context\": [], \"titles\": []}, {\"activity_context\": [{\"end_year_ce\": 322, \"ruler_context_id\": \"h0a-ruler-context-eda2e8b7fb1eca551eda\", \"start_year_ce\": 317}], \"aliases\": [], \"candidate_key\": \"c3\", \"courtesy_names\": [], \"evidence\": [], \"name\": \"中宗元皇帝\", \"office_context\": [], \"social_context\": [], \"titles\": []}, {\"activity_context\": [{\"end_year_ce\": 264, \"ruler_context_id\": \"h0a-ruler-context-9df230062553f20a90f1\", \"start_year_ce\": 260}], \"aliases\": [], \"candidate_key\": \"c4\", \"courtesy_names\": [], \"evidence\": [], \"name\": \"元皇帝\", \"office_context\": [], \"social_context\": [], \"titles\": []}, {\"activity_context\": [{\"end_year_ce\": 372, \"ruler_context_id\": \"h0a-ruler-context-ceae7d572ecfb598be2e\", \"start_year_ce\": 371}], \"aliases\": [], \"candidate_key\": \"c5\", \"courtesy_names\": [], \"evidence\": [], \"name\": \"太宗簡文皇帝\", \"office_context\": [], \"social_context\": [], \"titles\": []}, {\"activity_context\": [{\"end_year_ce\": 324, \"event_id\": \"event-wang-dun-rebellion\", \"review_status\": \"candidate\", \"start_year_ce\": 322}], \"aliases\": [\"王導\", \"丞相\", \"王丞相\", \"王公\", \"王導\", \"王茂弘\", \"茂弘\"], \"candidate_key\": \"c6\", \"courtesy_names\": [\"丞相\", \"王丞相\", \"王公\", \"王茂弘\", \"茂弘\"], \"evidence\": [], \"name\": \"王導\", \"office_context\": [], \"social_context\": [{\"relation_class\": \"institutional\", \"relation_surface\": \"辟為府掾\", \"story_id\": \"18-qiyi-004\"}, {\"relation_class\": \"interaction\", \"relation_surface\": \"得牋命\", \"story_id\": \"18-qiyi-004\"}, {\"relation_class\": \"interaction\", \"relation_surface\": \"笑曰\", \"story_id\": \"18-qiyi-004\"}, {\"relation_class\": \"interaction\", \"relation_surface\": \"俱見\", \"story_id\": \"33-youhui-007\"}, {\"relation_class\": \"interaction\", \"relation_surface\": \"與帝有舊\", \"story_id\": \"10-guizhen-011\"}, {\"relation_class\": \"interaction\", \"relation_surface\": \"諌\", \"story_id\": \"10-guizhen-011\"}, {\"relation_class\": \"interaction\", \"relation_surface\": \"諌\", \"story_id\": \"10-guizhen-011\"}], \"titles\": [\"王公\"]}], \"evidence_items\": [{\"evidence_id\": \"ev-5b05dc84d6fa745a7d0b\", \"source_layer\": \"main_text\", \"source_ref\": \"hdb2-shishuo-main-10-guizhen-011\", \"source_work\": \"世說正文\", \"text\": \"元帝過江猶好酒王茂弘與帝有舊常流涕諌帝許\\n之命酌酒一酣從是遂斷\"}, {\"evidence_id\": \"ev-e0ce016e9f7ca94cd9fe\", \"source_layer\": \"liu_annotation\", \"source_ref\": \"hdb2-shishuo-liu-10-guizhen-011-annotation-002\", \"source_work\": \"劉注\", \"text\": \"(遂不復飲克己復禮官修其方而中興之業隆焉/江王導深以諌帝乃令左右進觴飲而覆之自是)\"}], \"occurrence\": {\"annotation_context\": [null], \"known_people_in_context\": [{\"key\": \"p0\", \"name\": \"王導\", \"relation\": \"與帝有舊\"}], \"story_id\": \"10-guizhen-011\", \"story_text\": \"元帝過江猶好酒王茂弘與帝有舊常流涕諌帝許\\n之命酌酒一酣從是遂斷\", \"surface\": \"帝\", \"temporal_context\": [{\"end_year_ce\": null, \"event_ids\": [], \"evidence_ids\": [\"h0a-evidence-8002e59ea2a283bfaef1\"], \"phase_id\": null, \"precision\": \"unknown\", \"reign_id\": null, \"ruler_context_id\": null, \"start_year_ce\": null}, {\"evidence_record_id\": \"h0a-evidence-8002e59ea2a283bfaef1\", \"evidence_type\": \"migration_or_crossing_anchor\", \"normalized_candidate\": {\"surface\": \"過江\"}, \"raw_surface\": \"過江\", \"relation_to_story\": \"direct_story_time\"}], \"type\": \"ruler_reference\"}, \"task\": \"occurrence identity disambiguation\"}",
+            "role": "user"
+          }
+        ],
+        "model": "deepseek-v4-flash",
+        "temperature": 0,
+        "thinking": {
+          "type": "disabled"
+        },
+        "tool_choice": {
+          "function": {
+            "name": "submit_hdb2_occurrence_identity_decision"
+          },
+          "type": "function"
+        },
+        "tools": [
+          {
+            "function": {
+              "description": "比较系统提供的候选人物并判断当前单一历史 occurrence；不得创建人物 ID。",
+              "name": "submit_hdb2_occurrence_identity_decision",
+              "parameters": {
+                "additionalProperties": false,
+                "properties": {
+                  "against": {
+                    "description": "只列 supplied candidate 中被当前上下文反对的候选。",
+                    "items": {
+                      "additionalProperties": false,
+                      "properties": {
+                        "candidate_key": {
+                          "description": "被反驳的 supplied candidate_key。",
+                          "type": "string"
+                        },
+                        "reason_type": {
+                          "description": "原文语境与该候选不合的受控理由。",
+                          "enum": [
+                            "context_mismatch",
+                            "identity_conflict",
+                            "kinship_conflict",
+                            "office_conflict",
+                            "temporal_conflict"
+                          ],
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "candidate_key",
+                        "reason_type"
+                      ],
+                      "type": "object"
+                    },
+                    "maxItems": 6,
+                    "type": "array"
+                  },
+                  "candidate_key": {
+                    "description": "只能复制 supplied candidate_key；非 candidate decision 使用 null。",
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "confidence": {
+                    "description": "对 supplied text 是否支持该判断的信心，不是 canonical truth。",
+                    "enum": [
+                      "high",
+                      "low",
+                      "medium"
+                    ],
+                    "type": "string"
+                  },
+                  "decision": {
+                    "description": "对这一个 occurrence 的候选判断；允许 unresolved。",
+                    "enum": [
+                      "candidate",
+                      "compositional_reference",
+                      "not_person",
+                      "unresolved"
+                    ],
+                    "type": "string"
+                  },
+                  "reason_code": {
+                    "description": "简短受控判断理由。",
+                    "enum": [
+                      "candidate_conflict",
+                      "compositional_kinship",
+                      "explicit_identity",
+                      "insufficient_context",
+                      "multi_context_support",
+                      "not_person",
+                      "single_context_support"
+                    ],
+                    "type": "string"
+                  },
+                  "support": {
+                    "description": "只列直接支持当前 occurrence 判断的 evidence family。",
+                    "items": {
+                      "additionalProperties": false,
+                      "properties": {
+                        "evidence_ids": {
+                          "description": "直接支持判断的 supplied evidence_id。不得创建新证据编号。",
+                          "items": {
+                            "type": "string"
+                          },
+                          "maxItems": 6,
+                          "minItems": 1,
+                          "type": "array"
+                        },
+                        "support_type": {
+                          "description": "支持当前 occurrence 候选判断的证据家族。只能引用 supplied evidence。",
+                          "enum": [
+                            "annotation_context",
+                            "explicit_name",
+                            "kinship_context",
+                            "office_context",
+                            "ruler_context",
+                            "social_context",
+                            "temporal_context",
+                            "title_context"
+                          ],
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "support_type",
+                        "evidence_ids"
+                      ],
+                      "type": "object"
+                    },
+                    "maxItems": 6,
+                    "type": "array"
+                  }
+                },
+                "required": [
+                  "decision",
+                  "candidate_key",
+                  "confidence",
+                  "support",
+                  "against",
+                  "reason_code"
+                ],
+                "type": "object"
+              },
+              "strict": true
+            },
+            "type": "function"
+          }
+        ]
+      },
+      "sequence": 18
+    },
+    {
+      "llm_called": false,
+      "occurrence_id": "hdb2-occ-3c226c10dcec4661a115",
+      "sequence": 19
+    },
+    {
+      "llm_called": true,
+      "occurrence_id": "hdb2-occ-af4509dd29de66599524",
+      "request": {
+        "endpoint": "https://api.deepseek.com/beta/chat/completions",
+        "max_tokens": 900,
+        "messages": [
+          {
+            "content": "只根据 supplied occurrence context、evidence_items 和 candidates 判断这一个历史文字 occurrence 的指代。不得使用外部知识补写，不得创建或猜测人物 ID，不得把同表面其他 occurrence 的结论当作本次证据。候选之外只能 unresolved。X兒、X子、X女等结构性亲属表达不是其 base Person；帝/明帝/武帝必须结合本段语境。每个 support 只能引用 supplied evidence_id。",
+            "role": "system"
+          },
+          {
+            "content": "{\"candidates\": [{\"activity_context\": [], \"aliases\": [\"殷浩\", \"殷侯\", \"殷浩\", \"深源\"], \"candidate_key\": \"c0\", \"courtesy_names\": [\"殷侯\", \"深源\"], \"evidence\": [], \"name\": \"殷浩\", \"office_context\": [], \"social_context\": [{\"relation_class\": \"kinship\", \"relation_surface\": \"之妹\", \"story_id\": \"01-dexing-047\"}], \"titles\": []}, {\"activity_context\": [], \"aliases\": [\"韓伯\", \"康伯\", \"韓伯\", \"韓康伯\"], \"candidate_key\": \"c1\", \"courtesy_names\": [\"康伯\", \"韓康伯\"], \"evidence\": [], \"name\": \"韓伯\", \"office_context\": [], \"social_context\": [{\"relation_class\": \"institutional\", \"relation_surface\": \"時為\", \"story_id\": \"01-dexing-047\"}, {\"relation_class\": \"institutional\", \"relation_surface\": \"後果為\", \"story_id\": \"01-dexing-047\"}], \"titles\": []}], \"evidence_items\": [{\"evidence_id\": \"ev-774502185819ccfa319c\", \"source_layer\": \"main_text\", \"source_ref\": \"hdb2-shishuo-main-01-dexing-047\", \"source_work\": \"世說正文\", \"text\": \"吳道助附子兄弟居在丹陽郡後遭母童夫人艱\\n\\n朝夕哭臨及思至賓客弔省號踊哀絶路人為之\\n落淚韓康伯時為丹陽尹母殷在郡每聞二吳之哭\\n輙為悽惻語康伯曰汝若為選官當好料理此人康\\n\\n伯亦甚相知韓後果為吏部尚書大吳不免哀制小\\n吳遂大貴達\"}, {\"evidence_id\": \"ev-8fe8aafbe82215dbb9cd\", \"source_layer\": \"liu_annotation\", \"source_ref\": \"hdb2-shishuo-liu-01-dexing-047-annotation-005\", \"source_work\": \"劉注\", \"text\": \"(哭康伯母輙輟事流涕悲不自勝終其䘮如此謂康/居康伯母揚州刺史殷浩之妹聰明婦人也隱之毎)\"}], \"occurrence\": {\"annotation_context\": [null], \"known_people_in_context\": [{\"key\": \"p0\", \"name\": \"殷浩\", \"relation\": \"之妹\"}, {\"key\": \"p1\", \"name\": \"韓伯\", \"relation\": \"same_story_identity_observation\"}], \"story_id\": \"01-dexing-047\", \"story_text\": \"吳道助附子兄弟居在丹陽郡後遭母童夫人艱\\n\\n朝夕哭臨及思至賓客弔省號踊哀絶路人為之\\n落淚韓康伯時為丹陽尹母殷在郡每聞二吳之哭\\n輙為悽惻語康伯曰汝若為選官當好料理此人康\\n\\n伯亦甚相知韓後果為吏部尚書大吳不免哀制小\\n吳遂大貴達\", \"surface\": \"康伯母\", \"temporal_context\": [{\"end_year_ce\": null, \"event_ids\": [], \"evidence_ids\": [], \"phase_id\": null, \"precision\": \"unknown\", \"reign_id\": null, \"ruler_context_id\": null, \"start_year_ce\": null}], \"type\": \"unclear\"}, \"task\": \"occurrence identity disambiguation\"}",
+            "role": "user"
+          }
+        ],
+        "model": "deepseek-v4-flash",
+        "temperature": 0,
+        "thinking": {
+          "type": "disabled"
+        },
+        "tool_choice": {
+          "function": {
+            "name": "submit_hdb2_occurrence_identity_decision"
+          },
+          "type": "function"
+        },
+        "tools": [
+          {
+            "function": {
+              "description": "比较系统提供的候选人物并判断当前单一历史 occurrence；不得创建人物 ID。",
+              "name": "submit_hdb2_occurrence_identity_decision",
+              "parameters": {
+                "additionalProperties": false,
+                "properties": {
+                  "against": {
+                    "description": "只列 supplied candidate 中被当前上下文反对的候选。",
+                    "items": {
+                      "additionalProperties": false,
+                      "properties": {
+                        "candidate_key": {
+                          "description": "被反驳的 supplied candidate_key。",
+                          "type": "string"
+                        },
+                        "reason_type": {
+                          "description": "原文语境与该候选不合的受控理由。",
+                          "enum": [
+                            "context_mismatch",
+                            "identity_conflict",
+                            "kinship_conflict",
+                            "office_conflict",
+                            "temporal_conflict"
+                          ],
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "candidate_key",
+                        "reason_type"
+                      ],
+                      "type": "object"
+                    },
+                    "maxItems": 6,
+                    "type": "array"
+                  },
+                  "candidate_key": {
+                    "description": "只能复制 supplied candidate_key；非 candidate decision 使用 null。",
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "confidence": {
+                    "description": "对 supplied text 是否支持该判断的信心，不是 canonical truth。",
+                    "enum": [
+                      "high",
+                      "low",
+                      "medium"
+                    ],
+                    "type": "string"
+                  },
+                  "decision": {
+                    "description": "对这一个 occurrence 的候选判断；允许 unresolved。",
+                    "enum": [
+                      "candidate",
+                      "compositional_reference",
+                      "not_person",
+                      "unresolved"
+                    ],
+                    "type": "string"
+                  },
+                  "reason_code": {
+                    "description": "简短受控判断理由。",
+                    "enum": [
+                      "candidate_conflict",
+                      "compositional_kinship",
+                      "explicit_identity",
+                      "insufficient_context",
+                      "multi_context_support",
+                      "not_person",
+                      "single_context_support"
+                    ],
+                    "type": "string"
+                  },
+                  "support": {
+                    "description": "只列直接支持当前 occurrence 判断的 evidence family。",
+                    "items": {
+                      "additionalProperties": false,
+                      "properties": {
+                        "evidence_ids": {
+                          "description": "直接支持判断的 supplied evidence_id。不得创建新证据编号。",
+                          "items": {
+                            "type": "string"
+                          },
+                          "maxItems": 6,
+                          "minItems": 1,
+                          "type": "array"
+                        },
+                        "support_type": {
+                          "description": "支持当前 occurrence 候选判断的证据家族。只能引用 supplied evidence。",
+                          "enum": [
+                            "annotation_context",
+                            "explicit_name",
+                            "kinship_context",
+                            "office_context",
+                            "ruler_context",
+                            "social_context",
+                            "temporal_context",
+                            "title_context"
+                          ],
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "support_type",
+                        "evidence_ids"
+                      ],
+                      "type": "object"
+                    },
+                    "maxItems": 6,
+                    "type": "array"
+                  }
+                },
+                "required": [
+                  "decision",
+                  "candidate_key",
+                  "confidence",
+                  "support",
+                  "against",
+                  "reason_code"
+                ],
+                "type": "object"
+              },
+              "strict": true
+            },
+            "type": "function"
+          }
+        ]
+      },
+      "sequence": 20
+    },
+    {
+      "llm_called": false,
+      "occurrence_id": "hdb2-occ-e92d533e9004c1f6ee25",
+      "sequence": 21
+    },
+    {
+      "llm_called": false,
+      "occurrence_id": "hdb2-occ-b68c326cf611845bf219",
+      "sequence": 22
+    },
+    {
+      "llm_called": false,
+      "occurrence_id": "hdb2-occ-52432afcd6237d223198",
+      "sequence": 23
+    },
+    {
+      "llm_called": false,
+      "occurrence_id": "hdb2-occ-fbc94f366d97b914e206",
+      "sequence": 24
+    },
+    {
+      "llm_called": false,
+      "occurrence_id": "hdb2-occ-5a335f552be1e9046f31",
+      "sequence": 25
+    },
+    {
+      "llm_called": false,
+      "occurrence_id": "hdb2-occ-ad7a3b90b7903d7d8b2d",
+      "sequence": 26
+    },
+    {
+      "llm_called": false,
+      "occurrence_id": "hdb2-occ-4c7a912935a04e0910fc",
+      "sequence": 27
+    },
+    {
+      "llm_called": true,
+      "occurrence_id": "hdb2-occ-0e988a36affe73dcce01",
+      "request": {
+        "endpoint": "https://api.deepseek.com/beta/chat/completions",
+        "max_tokens": 900,
+        "messages": [
+          {
+            "content": "只根据 supplied occurrence context、evidence_items 和 candidates 判断这一个历史文字 occurrence 的指代。不得使用外部知识补写，不得创建或猜测人物 ID，不得把同表面其他 occurrence 的结论当作本次证据。候选之外只能 unresolved。X兒、X子、X女等结构性亲属表达不是其 base Person；帝/明帝/武帝必须结合本段语境。每个 support 只能引用 supplied evidence_id。",
+            "role": "system"
+          },
+          {
+            "content": "{\"candidates\": [{\"activity_context\": [{\"end_year_ce\": 317, \"event_id\": \"event-yongjia-upheaval\", \"review_status\": \"candidate\", \"start_year_ce\": 307}], \"aliases\": [\"劉琨\", \"劉琨\", \"劉越石\", \"越石\"], \"candidate_key\": \"c0\", \"courtesy_names\": [\"劉越石\", \"越石\"], \"evidence\": [], \"name\": \"劉琨\", \"office_context\": [], \"social_context\": [{\"relation_class\": \"institutional\", \"relation_surface\": \"為\", \"story_id\": \"27-jiajue-009\"}, {\"relation_class\": \"institutional\", \"relation_surface\": \"假守\", \"story_id\": \"27-jiajue-009\"}, {\"relation_class\": \"institutional\", \"relation_surface\": \"爲\", \"story_id\": \"02-yanyu-036\"}, {\"relation_class\": \"institutional\", \"relation_surface\": \"使\", \"story_id\": \"02-yanyu-036\"}, {\"relation_class\": \"institutional\", \"relation_surface\": \"奉使\", \"story_id\": \"02-yanyu-036\"}, {\"relation_class\": \"kinship\", \"relation_surface\": \"父\", \"story_id\": \"02-yanyu-035\"}, {\"relation_class\": \"interaction\", \"relation_surface\": \"稱\", \"story_id\": \"08-shangyu-043\"}, {\"relation_class\": \"interaction\", \"relation_surface\": \"與\", \"story_id\": \"08-shangyu-043\"}, {\"relation_class\": \"interaction\", \"relation_surface\": \"與\", \"story_id\": \"08-shangyu-043\"}], \"titles\": []}, {\"activity_context\": [{\"end_year_ce\": 317, \"event_id\": \"event-yongjia-upheaval\", \"review_status\": \"candidate\", \"start_year_ce\": 307}, {\"end_year_ce\": 324, \"event_id\": \"event-wang-dun-rebellion\", \"review_status\": \"candidate\", \"start_year_ce\": 322}, {\"end_year_ce\": 324, \"event_id\": \"event-wang-dun-rebellion\", \"review_status\": \"candidate\", \"start_year_ce\": 322}], \"aliases\": [\"温嶠\", \"太真\", \"温公\", \"温太真\", \"温嶠\"], \"candidate_key\": \"c1\", \"courtesy_names\": [\"太真\", \"温公\", \"温太真\"], \"evidence\": [\"ev-5071e83f4f51e521b9ab\"], \"name\": \"温嶠\", \"office_context\": [], \"social_context\": [{\"relation_class\": \"institutional\", \"relation_surface\": \"初爲\", \"story_id\": \"02-yanyu-036\"}, {\"relation_class\": \"interaction\", \"relation_surface\": \"見\", \"story_id\": \"02-yanyu-036\"}, {\"relation_class\": \"institutional\", \"relation_surface\": \"為\", \"story_id\": \"11-jiewu-005\"}, {\"relation_class\": \"interaction\", \"relation_surface\": \"下謝\", \"story_id\": \"11-jiewu-005\"}, {\"relation_class\": \"interaction\", \"relation_surface\": \"不容得謝\", \"story_id\": \"11-jiewu-005\"}, {\"relation_class\": \"interaction\", \"relation_surface\": \"善\", \"story_id\": \"23-rendan-026\"}, {\"relation_class\": \"interaction\", \"relation_surface\": \"大喚\", \"story_id\": \"23-rendan-026\"}, {\"relation_class\": \"interaction\", \"relation_surface\": \"贖\", \"story_id\": \"23-rendan-026\"}], \"titles\": [\"温公\"]}], \"evidence_items\": [{\"evidence_id\": \"ev-5071e83f4f51e521b9ab\", \"source_layer\": \"main_text\", \"source_ref\": \"hdb2-shishuo-main-02-yanyu-035\", \"source_work\": \"世說正文\", \"text\": \"劉琨雖隔閡寇戎志存本朝\\n\\n\\n謂温嶠曰班彪識劉氏之復興馬\\n援知漢光之可輔\\n\\n今晉祚雖衰天\\n命未改吾欲立功於河北使卿延譽於江南子其行\\n乎温曰嶠雖不敏才非昔人明公以桓文之姿建匡\\n立之功豈敢辭命\"}, {\"evidence_id\": \"ev-d9fde15f2da5536499cf\", \"source_layer\": \"liu_annotation\", \"source_ref\": \"hdb2-shishuo-liu-02-yanyu-035-annotation-002\", \"source_work\": \"劉注\", \"text\": \"(尚書右丞迎大駕於長安以有殊勲封廣武侯年三/國之才父璠光禄大夫琨少稱儁朗累遷司徒長史)\"}], \"occurrence\": {\"annotation_context\": [null], \"known_people_in_context\": [{\"key\": \"p0\", \"name\": \"劉琨\", \"relation\": \"父\"}, {\"key\": \"p1\", \"name\": \"温嶠\", \"relation\": \"same_story_identity_observation\"}], \"story_id\": \"02-yanyu-035\", \"story_text\": \"劉琨雖隔閡寇戎志存本朝\\n\\n\\n謂温嶠曰班彪識劉氏之復興馬\\n援知漢光之可輔\\n\\n今晉祚雖衰天\\n命未改吾欲立功於河北使卿延譽於江南子其行\\n乎温曰嶠雖不敏才非昔人明公以桓文之姿建匡\\n立之功豈敢辭命\", \"surface\": \"父璠\", \"temporal_context\": [{\"end_year_ce\": null, \"event_ids\": [], \"evidence_ids\": [], \"phase_id\": null, \"precision\": \"unknown\", \"reign_id\": null, \"ruler_context_id\": null, \"start_year_ce\": null}], \"type\": \"unclear\"}, \"task\": \"occurrence identity disambiguation\"}",
+            "role": "user"
+          }
+        ],
+        "model": "deepseek-v4-flash",
+        "temperature": 0,
+        "thinking": {
+          "type": "disabled"
+        },
+        "tool_choice": {
+          "function": {
+            "name": "submit_hdb2_occurrence_identity_decision"
+          },
+          "type": "function"
+        },
+        "tools": [
+          {
+            "function": {
+              "description": "比较系统提供的候选人物并判断当前单一历史 occurrence；不得创建人物 ID。",
+              "name": "submit_hdb2_occurrence_identity_decision",
+              "parameters": {
+                "additionalProperties": false,
+                "properties": {
+                  "against": {
+                    "description": "只列 supplied candidate 中被当前上下文反对的候选。",
+                    "items": {
+                      "additionalProperties": false,
+                      "properties": {
+                        "candidate_key": {
+                          "description": "被反驳的 supplied candidate_key。",
+                          "type": "string"
+                        },
+                        "reason_type": {
+                          "description": "原文语境与该候选不合的受控理由。",
+                          "enum": [
+                            "context_mismatch",
+                            "identity_conflict",
+                            "kinship_conflict",
+                            "office_conflict",
+                            "temporal_conflict"
+                          ],
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "candidate_key",
+                        "reason_type"
+                      ],
+                      "type": "object"
+                    },
+                    "maxItems": 6,
+                    "type": "array"
+                  },
+                  "candidate_key": {
+                    "description": "只能复制 supplied candidate_key；非 candidate decision 使用 null。",
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "confidence": {
+                    "description": "对 supplied text 是否支持该判断的信心，不是 canonical truth。",
+                    "enum": [
+                      "high",
+                      "low",
+                      "medium"
+                    ],
+                    "type": "string"
+                  },
+                  "decision": {
+                    "description": "对这一个 occurrence 的候选判断；允许 unresolved。",
+                    "enum": [
+                      "candidate",
+                      "compositional_reference",
+                      "not_person",
+                      "unresolved"
+                    ],
+                    "type": "string"
+                  },
+                  "reason_code": {
+                    "description": "简短受控判断理由。",
+                    "enum": [
+                      "candidate_conflict",
+                      "compositional_kinship",
+                      "explicit_identity",
+                      "insufficient_context",
+                      "multi_context_support",
+                      "not_person",
+                      "single_context_support"
+                    ],
+                    "type": "string"
+                  },
+                  "support": {
+                    "description": "只列直接支持当前 occurrence 判断的 evidence family。",
+                    "items": {
+                      "additionalProperties": false,
+                      "properties": {
+                        "evidence_ids": {
+                          "description": "直接支持判断的 supplied evidence_id。不得创建新证据编号。",
+                          "items": {
+                            "type": "string"
+                          },
+                          "maxItems": 6,
+                          "minItems": 1,
+                          "type": "array"
+                        },
+                        "support_type": {
+                          "description": "支持当前 occurrence 候选判断的证据家族。只能引用 supplied evidence。",
+                          "enum": [
+                            "annotation_context",
+                            "explicit_name",
+                            "kinship_context",
+                            "office_context",
+                            "ruler_context",
+                            "social_context",
+                            "temporal_context",
+                            "title_context"
+                          ],
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "support_type",
+                        "evidence_ids"
+                      ],
+                      "type": "object"
+                    },
+                    "maxItems": 6,
+                    "type": "array"
+                  }
+                },
+                "required": [
+                  "decision",
+                  "candidate_key",
+                  "confidence",
+                  "support",
+                  "against",
+                  "reason_code"
+                ],
+                "type": "object"
+              },
+              "strict": true
+            },
+            "type": "function"
+          }
+        ]
+      },
+      "sequence": 28
+    },
+    {
+      "llm_called": false,
+      "occurrence_id": "hdb2-occ-e04ac7b112455dab3202",
+      "sequence": 29
+    },
+    {
+      "llm_called": true,
+      "occurrence_id": "hdb2-occ-e7ac6c368546e3dd1c6a",
+      "request": {
+        "endpoint": "https://api.deepseek.com/beta/chat/completions",
+        "max_tokens": 900,
+        "messages": [
+          {
+            "content": "只根据 supplied occurrence context、evidence_items 和 candidates 判断这一个历史文字 occurrence 的指代。不得使用外部知识补写，不得创建或猜测人物 ID，不得把同表面其他 occurrence 的结论当作本次证据。候选之外只能 unresolved。X兒、X子、X女等结构性亲属表达不是其 base Person；帝/明帝/武帝必须结合本段语境。每个 support 只能引用 supplied evidence_id。",
+            "role": "system"
+          },
+          {
+            "content": "{\"candidates\": [{\"activity_context\": [], \"aliases\": [\"王羲之\", \"右軍\", \"王公\", \"王右軍\", \"王羲之\", \"王逸少\", \"逸少\"], \"candidate_key\": \"c0\", \"courtesy_names\": [\"右軍\", \"王公\", \"王右軍\", \"王逸少\", \"逸少\"], \"evidence\": [], \"name\": \"王羲之\", \"office_context\": [], \"social_context\": [{\"relation_class\": \"interaction\", \"relation_surface\": \"在坐\", \"story_id\": \"02-yanyu-069\"}, {\"relation_class\": \"interaction\", \"relation_surface\": \"語\", \"story_id\": \"08-shangyu-077\"}, {\"relation_class\": \"institutional\", \"relation_surface\": \"作\", \"story_id\": \"04-wenxue-036\"}, {\"relation_class\": \"interaction\", \"relation_surface\": \"謂\", \"story_id\": \"04-wenxue-036\"}, {\"relation_class\": \"interaction\", \"relation_surface\": \"語\", \"story_id\": \"04-wenxue-036\"}, {\"relation_class\": \"kinship\", \"relation_surface\": \"逸少之子\", \"story_id\": \"19-xianyuan-026\"}], \"titles\": [\"王公\"]}, {\"activity_context\": [], \"aliases\": [\"謝安\", \"太傅\", \"安石\", \"謝公\", \"謝太傅\", \"謝安\", \"謝安石\"], \"candidate_key\": \"c1\", \"courtesy_names\": [\"太傅\", \"安石\", \"謝公\", \"謝太傅\", \"謝安石\"], \"evidence\": [], \"name\": \"謝安\", \"office_context\": [], \"social_context\": [{\"relation_class\": \"interaction\", \"relation_surface\": \"曰\", \"story_id\": \"07-shijian-021\"}, {\"relation_class\": \"interaction\", \"relation_surface\": \"泊\", \"story_id\": \"05-fangzheng-053\"}, {\"relation_class\": \"interaction\", \"relation_surface\": \"見\", \"story_id\": \"04-wenxue-087\"}, {\"relation_class\": \"interaction\", \"relation_surface\": \"請\", \"story_id\": \"04-wenxue-024\"}, {\"relation_class\": \"interaction\", \"relation_surface\": \"戲曰\", \"story_id\": \"25-paidiao-026\"}, {\"relation_class\": \"interaction\", \"relation_surface\": \"共推\", \"story_id\": \"08-shangyu-077\"}, {\"relation_class\": \"interaction\", \"relation_surface\": \"欲誅\", \"story_id\": \"06-yaliang-029\"}, {\"relation_class\": \"interaction\", \"relation_surface\": \"謂\", \"story_id\": \"06-yaliang-029\"}, {\"relation_class\": \"interaction\", \"relation_surface\": \"憚\", \"story_id\": \"06-yaliang-029\"}, {\"relation_class\": \"other\", \"relation_surface\": \"所建\", \"story_id\": \"06-yaliang-029\"}, {\"relation_class\": \"interaction\", \"relation_surface\": \"呼\", \"story_id\": \"06-yaliang-027\"}, {\"relation_class\": \"interaction\", \"relation_surface\": \"見\", \"story_id\": \"25-paidiao-038\"}], \"titles\": [\"謝公\"]}], \"evidence_items\": [{\"evidence_id\": \"ev-7215e8d65a694db30ed8\", \"source_layer\": \"main_text\", \"source_ref\": \"hdb2-shishuo-main-08-shangyu-077\", \"source_work\": \"世說正文\", \"text\": \"王右軍語劉尹故當共推安石劉尹曰若安石東山\\n志立當與天下共推之\"}], \"occurrence\": {\"annotation_context\": [], \"known_people_in_context\": [{\"key\": \"p0\", \"name\": \"謝安\", \"relation\": \"共推\"}, {\"key\": \"p1\", \"name\": \"王羲之\", \"relation\": \"語\"}], \"story_id\": \"08-shangyu-077\", \"story_text\": \"王右軍語劉尹故當共推安石劉尹曰若安石東山\\n志立當與天下共推之\", \"surface\": \"劉尹\", \"temporal_context\": [{\"end_year_ce\": null, \"event_ids\": [], \"evidence_ids\": [], \"phase_id\": null, \"precision\": \"unknown\", \"reign_id\": null, \"ruler_context_id\": null, \"start_year_ce\": null}], \"type\": \"title_reference\"}, \"task\": \"occurrence identity disambiguation\"}",
+            "role": "user"
+          }
+        ],
+        "model": "deepseek-v4-flash",
+        "temperature": 0,
+        "thinking": {
+          "type": "disabled"
+        },
+        "tool_choice": {
+          "function": {
+            "name": "submit_hdb2_occurrence_identity_decision"
+          },
+          "type": "function"
+        },
+        "tools": [
+          {
+            "function": {
+              "description": "比较系统提供的候选人物并判断当前单一历史 occurrence；不得创建人物 ID。",
+              "name": "submit_hdb2_occurrence_identity_decision",
+              "parameters": {
+                "additionalProperties": false,
+                "properties": {
+                  "against": {
+                    "description": "只列 supplied candidate 中被当前上下文反对的候选。",
+                    "items": {
+                      "additionalProperties": false,
+                      "properties": {
+                        "candidate_key": {
+                          "description": "被反驳的 supplied candidate_key。",
+                          "type": "string"
+                        },
+                        "reason_type": {
+                          "description": "原文语境与该候选不合的受控理由。",
+                          "enum": [
+                            "context_mismatch",
+                            "identity_conflict",
+                            "kinship_conflict",
+                            "office_conflict",
+                            "temporal_conflict"
+                          ],
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "candidate_key",
+                        "reason_type"
+                      ],
+                      "type": "object"
+                    },
+                    "maxItems": 6,
+                    "type": "array"
+                  },
+                  "candidate_key": {
+                    "description": "只能复制 supplied candidate_key；非 candidate decision 使用 null。",
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "confidence": {
+                    "description": "对 supplied text 是否支持该判断的信心，不是 canonical truth。",
+                    "enum": [
+                      "high",
+                      "low",
+                      "medium"
+                    ],
+                    "type": "string"
+                  },
+                  "decision": {
+                    "description": "对这一个 occurrence 的候选判断；允许 unresolved。",
+                    "enum": [
+                      "candidate",
+                      "compositional_reference",
+                      "not_person",
+                      "unresolved"
+                    ],
+                    "type": "string"
+                  },
+                  "reason_code": {
+                    "description": "简短受控判断理由。",
+                    "enum": [
+                      "candidate_conflict",
+                      "compositional_kinship",
+                      "explicit_identity",
+                      "insufficient_context",
+                      "multi_context_support",
+                      "not_person",
+                      "single_context_support"
+                    ],
+                    "type": "string"
+                  },
+                  "support": {
+                    "description": "只列直接支持当前 occurrence 判断的 evidence family。",
+                    "items": {
+                      "additionalProperties": false,
+                      "properties": {
+                        "evidence_ids": {
+                          "description": "直接支持判断的 supplied evidence_id。不得创建新证据编号。",
+                          "items": {
+                            "type": "string"
+                          },
+                          "maxItems": 6,
+                          "minItems": 1,
+                          "type": "array"
+                        },
+                        "support_type": {
+                          "description": "支持当前 occurrence 候选判断的证据家族。只能引用 supplied evidence。",
+                          "enum": [
+                            "annotation_context",
+                            "explicit_name",
+                            "kinship_context",
+                            "office_context",
+                            "ruler_context",
+                            "social_context",
+                            "temporal_context",
+                            "title_context"
+                          ],
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "support_type",
+                        "evidence_ids"
+                      ],
+                      "type": "object"
+                    },
+                    "maxItems": 6,
+                    "type": "array"
+                  }
+                },
+                "required": [
+                  "decision",
+                  "candidate_key",
+                  "confidence",
+                  "support",
+                  "against",
+                  "reason_code"
+                ],
+                "type": "object"
+              },
+              "strict": true
+            },
+            "type": "function"
+          }
+        ]
+      },
+      "sequence": 30
+    },
+    {
+      "llm_called": true,
+      "occurrence_id": "hdb2-occ-99b0e48572a365a51cd5",
+      "request": {
+        "endpoint": "https://api.deepseek.com/beta/chat/completions",
+        "max_tokens": 900,
+        "messages": [
+          {
+            "content": "只根据 supplied occurrence context、evidence_items 和 candidates 判断这一个历史文字 occurrence 的指代。不得使用外部知识补写，不得创建或猜测人物 ID，不得把同表面其他 occurrence 的结论当作本次证据。候选之外只能 unresolved。X兒、X子、X女等结构性亲属表达不是其 base Person；帝/明帝/武帝必须结合本段语境。每个 support 只能引用 supplied evidence_id。",
+            "role": "system"
+          },
+          {
+            "content": "{\"candidates\": [{\"activity_context\": [], \"aliases\": [\"羊祜\", \"叔子\", \"羊公\", \"羊叔子\", \"羊祜\"], \"candidate_key\": \"c0\", \"courtesy_names\": [\"叔子\", \"羊公\", \"羊叔子\"], \"evidence\": [], \"name\": \"羊祜\", \"office_context\": [], \"social_context\": [{\"relation_class\": \"institutional\", \"relation_surface\": \"尚書\", \"story_id\": \"07-shijian-005\"}, {\"relation_class\": \"institutional\", \"relation_surface\": \"僕射\", \"story_id\": \"07-shijian-005\"}, {\"relation_class\": \"kinship\", \"relation_surface\": \"所繼從舅\", \"story_id\": \"07-shijian-005\"}, {\"relation_class\": \"interaction\", \"relation_surface\": \"見\", \"story_id\": \"07-shijian-005\"}, {\"relation_class\": \"interaction\", \"relation_surface\": \"以軍法欲斬\", \"story_id\": \"07-shijian-005\"}, {\"relation_class\": \"interaction\", \"relation_surface\": \"曰\", \"story_id\": \"07-shijian-005\"}, {\"relation_class\": \"interaction\", \"relation_surface\": \"共咨\", \"story_id\": \"03-zhengshi-006\"}, {\"relation_class\": \"interaction\", \"relation_surface\": \"共\", \"story_id\": \"03-zhengshi-006\"}], \"titles\": [\"羊公\"]}, {\"activity_context\": [], \"aliases\": [\"賈充\", \"公閭\", \"賈充\", \"賈充大將軍\", \"賈公閭\"], \"candidate_key\": \"c1\", \"courtesy_names\": [\"公閭\", \"賈充大將軍\", \"賈公閭\"], \"evidence\": [], \"name\": \"賈充\", \"office_context\": [], \"social_context\": [{\"relation_class\": \"interaction\", \"relation_surface\": \"共\", \"story_id\": \"03-zhengshi-006\"}, {\"relation_class\": \"interaction\", \"relation_surface\": \"共咨\", \"story_id\": \"03-zhengshi-006\"}, {\"relation_class\": \"institutional\", \"relation_surface\": \"起家為\", \"story_id\": \"03-zhengshi-006\"}, {\"relation_class\": \"marriage\", \"relation_surface\": \"後妻\", \"story_id\": \"35-huoni-003\"}], \"titles\": [\"公閭\", \"賈充大將軍\", \"賈公閭\"]}], \"evidence_items\": [{\"evidence_id\": \"ev-17b0a96ca8fccb976645\", \"source_layer\": \"main_text\", \"source_ref\": \"hdb2-shishuo-main-03-zhengshi-006\", \"source_work\": \"世說正文\", \"text\": \"賈充初定律令\\n\\n與羊祜共咨太傅鄭冲\\n冲曰臯陶\\n\\n嚴明之㫖非僕闇懦所探羊曰上意欲令小加弘潤\\n冲乃粗下意\"}], \"occurrence\": {\"annotation_context\": [], \"known_people_in_context\": [{\"key\": \"p0\", \"name\": \"羊祜\", \"relation\": \"共咨\"}, {\"key\": \"p1\", \"name\": \"賈充\", \"relation\": \"same_story_identity_observation\"}], \"story_id\": \"03-zhengshi-006\", \"story_text\": \"賈充初定律令\\n\\n與羊祜共咨太傅鄭冲\\n冲曰臯陶\\n\\n嚴明之㫖非僕闇懦所探羊曰上意欲令小加弘潤\\n冲乃粗下意\", \"surface\": \"太傅鄭冲\", \"temporal_context\": [{\"end_year_ce\": null, \"event_ids\": [], \"evidence_ids\": [\"h0a-evidence-f7749b3f52fbfcc4f42c\", \"h0a-evidence-fc24cd3c8fe84c8af86c\"], \"phase_id\": \"phase-1\", \"precision\": \"phase_only\", \"reign_id\": null, \"ruler_context_id\": null, \"start_year_ce\": null}, {\"evidence_record_id\": \"h0a-evidence-fc24cd3c8fe84c8af86c\", \"evidence_type\": \"death_or_accession_anchor\", \"normalized_candidate\": {\"surface\": \"薨\"}, \"raw_surface\": \"薨\", \"relation_to_story\": \"later_outcome\"}, {\"evidence_record_id\": \"h0a-evidence-f7749b3f52fbfcc4f42c\", \"evidence_type\": \"phase_only_context\", \"normalized_candidate\": {\"label_zh\": \"漢末餘緒／魏初\", \"phase_id\": \"phase-1\"}, \"raw_surface\": \"\", \"relation_to_story\": \"direct_story_time\"}], \"type\": \"title_reference\"}, \"task\": \"occurrence identity disambiguation\"}",
+            "role": "user"
+          }
+        ],
+        "model": "deepseek-v4-flash",
+        "temperature": 0,
+        "thinking": {
+          "type": "disabled"
+        },
+        "tool_choice": {
+          "function": {
+            "name": "submit_hdb2_occurrence_identity_decision"
+          },
+          "type": "function"
+        },
+        "tools": [
+          {
+            "function": {
+              "description": "比较系统提供的候选人物并判断当前单一历史 occurrence；不得创建人物 ID。",
+              "name": "submit_hdb2_occurrence_identity_decision",
+              "parameters": {
+                "additionalProperties": false,
+                "properties": {
+                  "against": {
+                    "description": "只列 supplied candidate 中被当前上下文反对的候选。",
+                    "items": {
+                      "additionalProperties": false,
+                      "properties": {
+                        "candidate_key": {
+                          "description": "被反驳的 supplied candidate_key。",
+                          "type": "string"
+                        },
+                        "reason_type": {
+                          "description": "原文语境与该候选不合的受控理由。",
+                          "enum": [
+                            "context_mismatch",
+                            "identity_conflict",
+                            "kinship_conflict",
+                            "office_conflict",
+                            "temporal_conflict"
+                          ],
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "candidate_key",
+                        "reason_type"
+                      ],
+                      "type": "object"
+                    },
+                    "maxItems": 6,
+                    "type": "array"
+                  },
+                  "candidate_key": {
+                    "description": "只能复制 supplied candidate_key；非 candidate decision 使用 null。",
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "confidence": {
+                    "description": "对 supplied text 是否支持该判断的信心，不是 canonical truth。",
+                    "enum": [
+                      "high",
+                      "low",
+                      "medium"
+                    ],
+                    "type": "string"
+                  },
+                  "decision": {
+                    "description": "对这一个 occurrence 的候选判断；允许 unresolved。",
+                    "enum": [
+                      "candidate",
+                      "compositional_reference",
+                      "not_person",
+                      "unresolved"
+                    ],
+                    "type": "string"
+                  },
+                  "reason_code": {
+                    "description": "简短受控判断理由。",
+                    "enum": [
+                      "candidate_conflict",
+                      "compositional_kinship",
+                      "explicit_identity",
+                      "insufficient_context",
+                      "multi_context_support",
+                      "not_person",
+                      "single_context_support"
+                    ],
+                    "type": "string"
+                  },
+                  "support": {
+                    "description": "只列直接支持当前 occurrence 判断的 evidence family。",
+                    "items": {
+                      "additionalProperties": false,
+                      "properties": {
+                        "evidence_ids": {
+                          "description": "直接支持判断的 supplied evidence_id。不得创建新证据编号。",
+                          "items": {
+                            "type": "string"
+                          },
+                          "maxItems": 6,
+                          "minItems": 1,
+                          "type": "array"
+                        },
+                        "support_type": {
+                          "description": "支持当前 occurrence 候选判断的证据家族。只能引用 supplied evidence。",
+                          "enum": [
+                            "annotation_context",
+                            "explicit_name",
+                            "kinship_context",
+                            "office_context",
+                            "ruler_context",
+                            "social_context",
+                            "temporal_context",
+                            "title_context"
+                          ],
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "support_type",
+                        "evidence_ids"
+                      ],
+                      "type": "object"
+                    },
+                    "maxItems": 6,
+                    "type": "array"
+                  }
+                },
+                "required": [
+                  "decision",
+                  "candidate_key",
+                  "confidence",
+                  "support",
+                  "against",
+                  "reason_code"
+                ],
+                "type": "object"
+              },
+              "strict": true
+            },
+            "type": "function"
+          }
+        ]
+      },
+      "sequence": 31
+    },
+    {
+      "llm_called": false,
+      "occurrence_id": "hdb2-occ-4510d46916de1e86aa00",
+      "sequence": 32
+    },
+    {
+      "llm_called": true,
+      "occurrence_id": "hdb2-occ-83eb4a3a958da1f221df",
+      "request": {
+        "endpoint": "https://api.deepseek.com/beta/chat/completions",
+        "max_tokens": 900,
+        "messages": [
+          {
+            "content": "只根据 supplied occurrence context、evidence_items 和 candidates 判断这一个历史文字 occurrence 的指代。不得使用外部知识补写，不得创建或猜测人物 ID，不得把同表面其他 occurrence 的结论当作本次证据。候选之外只能 unresolved。X兒、X子、X女等结构性亲属表达不是其 base Person；帝/明帝/武帝必须结合本段语境。每个 support 只能引用 supplied evidence_id。",
+            "role": "system"
+          },
+          {
+            "content": "{\"candidates\": [{\"activity_context\": [{\"end_year_ce\": 324, \"event_id\": \"event-wang-dun-rebellion\", \"review_status\": \"candidate\", \"start_year_ce\": 322}], \"aliases\": [\"王導\", \"丞相\", \"王丞相\", \"王公\", \"王導\", \"王茂弘\", \"茂弘\"], \"candidate_key\": \"c0\", \"courtesy_names\": [\"丞相\", \"王丞相\", \"王公\", \"王茂弘\", \"茂弘\"], \"evidence\": [], \"name\": \"王導\", \"office_context\": [], \"social_context\": [{\"relation_class\": \"institutional\", \"relation_surface\": \"辟為府掾\", \"story_id\": \"18-qiyi-004\"}, {\"relation_class\": \"interaction\", \"relation_surface\": \"得牋命\", \"story_id\": \"18-qiyi-004\"}, {\"relation_class\": \"interaction\", \"relation_surface\": \"笑曰\", \"story_id\": \"18-qiyi-004\"}, {\"relation_class\": \"interaction\", \"relation_surface\": \"俱見\", \"story_id\": \"33-youhui-007\"}, {\"relation_class\": \"interaction\", \"relation_surface\": \"與帝有舊\", \"story_id\": \"10-guizhen-011\"}, {\"relation_class\": \"interaction\", \"relation_surface\": \"諌\", \"story_id\": \"10-guizhen-011\"}, {\"relation_class\": \"interaction\", \"relation_surface\": \"諌\", \"story_id\": \"10-guizhen-011\"}], \"titles\": [\"王公\"]}, {\"activity_context\": [{\"end_year_ce\": 324, \"event_id\": \"event-wang-dun-rebellion\", \"review_status\": \"candidate\", \"start_year_ce\": 322}, {\"end_year_ce\": 324, \"event_id\": \"event-wang-dun-rebellion\", \"review_status\": \"candidate\", \"start_year_ce\": 322}, {\"end_year_ce\": 317, \"event_id\": \"event-yongjia-upheaval\", \"review_status\": \"candidate\", \"start_year_ce\": 307}, {\"end_year_ce\": 324, \"event_id\": \"event-wang-dun-rebellion\", \"review_status\": \"candidate\", \"start_year_ce\": 322}], \"aliases\": [\"王敦\", \"王大將軍\", \"王敦\", \"王敦聞君\", \"王處仲\", \"處仲\"], \"candidate_key\": \"c1\", \"courtesy_names\": [\"王大將軍\", \"王敦聞君\", \"王處仲\", \"處仲\"], \"evidence\": [\"ev-94c789ae984e3ce85293\", \"ev-6041bf0da0b23e4c0d15\"], \"name\": \"王敦\", \"office_context\": [], \"social_context\": [{\"relation_class\": \"kinship\", \"relation_surface\": \"護其兄\", \"story_id\": \"05-fangzheng-028\"}, {\"relation_class\": \"interaction\", \"relation_surface\": \"稱\", \"story_id\": \"05-fangzheng-028\"}, {\"relation_class\": \"other\", \"relation_surface\": \"方\", \"story_id\": \"09-pinzao-006\"}, {\"relation_class\": \"institutional\", \"relation_surface\": \"為\", \"story_id\": \"02-yanyu-042\"}, {\"relation_class\": \"interaction\", \"relation_surface\": \"見\", \"story_id\": \"07-shijian-006\"}, {\"relation_class\": \"interaction\", \"relation_surface\": \"曰\", \"story_id\": \"05-fangzheng-031\"}, {\"relation_class\": \"interaction\", \"relation_surface\": \"歎\", \"story_id\": \"08-shangyu-043\"}, {\"relation_class\": \"institutional\", \"relation_surface\": \"爲\", \"story_id\": \"08-shangyu-051\"}, {\"relation_class\": \"interaction\", \"relation_surface\": \"謂\", \"story_id\": \"08-shangyu-051\"}, {\"relation_class\": \"marriage\", \"relation_surface\": \"尚\", \"story_id\": \"34-pilou-001\"}, {\"relation_class\": \"marriage\", \"relation_surface\": \"尚\", \"story_id\": \"34-pilou-001\"}], \"titles\": [\"王大將軍\"]}], \"evidence_items\": [{\"evidence_id\": \"ev-94c789ae984e3ce85293\", \"source_layer\": \"main_text\", \"source_ref\": \"hdb2-shishuo-main-02-yanyu-037\", \"source_work\": \"世說正文\", \"text\": \"王敦兄含爲光禄勲\\n\\n敦既逆謀屯據南州含委職奔姑孰\\n王丞\\n相詣闕謝司\\n徒丞相揚州官僚問訊倉卒不知何辭顧司空時為\\n揚州别駕援翰曰王光禄逺避流言明公蒙塵路次\\n羣下不寧不審尊體起居何如\"}, {\"evidence_id\": \"ev-6041bf0da0b23e4c0d15\", \"source_layer\": \"liu_annotation\", \"source_ref\": \"hdb2-shishuo-liu-02-yanyu-037-annotation-004\", \"source_work\": \"劉注\", \"text\": \"(巳舉兵討之故含南奔武昌朝廷始警備也/王導恊贊中興敦有方面之功敦以劉隗為間)\"}, {\"evidence_id\": \"ev-feaa927b78a2270fb3f9\", \"source_layer\": \"liu_annotation\", \"source_ref\": \"hdb2-shishuo-liu-02-yanyu-037-annotation-005\", \"source_work\": \"劉注\", \"text\": \"(子弟二十餘人旦旦到公車泥首謝罪/中興書曰導從兄敦舉兵討劉隗導率)\"}], \"occurrence\": {\"annotation_context\": [null, null], \"known_people_in_context\": [], \"story_id\": \"02-yanyu-037\", \"story_text\": \"王敦兄含爲光禄勲\\n\\n敦既逆謀屯據南州含委職奔姑孰\\n王丞\\n相詣闕謝司\\n徒丞相揚州官僚問訊倉卒不知何辭顧司空時為\\n揚州别駕援翰曰王光禄逺避流言明公蒙塵路次\\n羣下不寧不審尊體起居何如\", \"surface\": \"導\", \"temporal_context\": [{\"end_year_ce\": null, \"event_ids\": [], \"evidence_ids\": [], \"phase_id\": null, \"precision\": \"unknown\", \"reign_id\": null, \"ruler_context_id\": null, \"start_year_ce\": null}], \"type\": \"abbreviated_person_name\"}, \"task\": \"occurrence identity disambiguation\"}",
+            "role": "user"
+          }
+        ],
+        "model": "deepseek-v4-flash",
+        "temperature": 0,
+        "thinking": {
+          "type": "disabled"
+        },
+        "tool_choice": {
+          "function": {
+            "name": "submit_hdb2_occurrence_identity_decision"
+          },
+          "type": "function"
+        },
+        "tools": [
+          {
+            "function": {
+              "description": "比较系统提供的候选人物并判断当前单一历史 occurrence；不得创建人物 ID。",
+              "name": "submit_hdb2_occurrence_identity_decision",
+              "parameters": {
+                "additionalProperties": false,
+                "properties": {
+                  "against": {
+                    "description": "只列 supplied candidate 中被当前上下文反对的候选。",
+                    "items": {
+                      "additionalProperties": false,
+                      "properties": {
+                        "candidate_key": {
+                          "description": "被反驳的 supplied candidate_key。",
+                          "type": "string"
+                        },
+                        "reason_type": {
+                          "description": "原文语境与该候选不合的受控理由。",
+                          "enum": [
+                            "context_mismatch",
+                            "identity_conflict",
+                            "kinship_conflict",
+                            "office_conflict",
+                            "temporal_conflict"
+                          ],
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "candidate_key",
+                        "reason_type"
+                      ],
+                      "type": "object"
+                    },
+                    "maxItems": 6,
+                    "type": "array"
+                  },
+                  "candidate_key": {
+                    "description": "只能复制 supplied candidate_key；非 candidate decision 使用 null。",
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "confidence": {
+                    "description": "对 supplied text 是否支持该判断的信心，不是 canonical truth。",
+                    "enum": [
+                      "high",
+                      "low",
+                      "medium"
+                    ],
+                    "type": "string"
+                  },
+                  "decision": {
+                    "description": "对这一个 occurrence 的候选判断；允许 unresolved。",
+                    "enum": [
+                      "candidate",
+                      "compositional_reference",
+                      "not_person",
+                      "unresolved"
+                    ],
+                    "type": "string"
+                  },
+                  "reason_code": {
+                    "description": "简短受控判断理由。",
+                    "enum": [
+                      "candidate_conflict",
+                      "compositional_kinship",
+                      "explicit_identity",
+                      "insufficient_context",
+                      "multi_context_support",
+                      "not_person",
+                      "single_context_support"
+                    ],
+                    "type": "string"
+                  },
+                  "support": {
+                    "description": "只列直接支持当前 occurrence 判断的 evidence family。",
+                    "items": {
+                      "additionalProperties": false,
+                      "properties": {
+                        "evidence_ids": {
+                          "description": "直接支持判断的 supplied evidence_id。不得创建新证据编号。",
+                          "items": {
+                            "type": "string"
+                          },
+                          "maxItems": 6,
+                          "minItems": 1,
+                          "type": "array"
+                        },
+                        "support_type": {
+                          "description": "支持当前 occurrence 候选判断的证据家族。只能引用 supplied evidence。",
+                          "enum": [
+                            "annotation_context",
+                            "explicit_name",
+                            "kinship_context",
+                            "office_context",
+                            "ruler_context",
+                            "social_context",
+                            "temporal_context",
+                            "title_context"
+                          ],
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "support_type",
+                        "evidence_ids"
+                      ],
+                      "type": "object"
+                    },
+                    "maxItems": 6,
+                    "type": "array"
+                  }
+                },
+                "required": [
+                  "decision",
+                  "candidate_key",
+                  "confidence",
+                  "support",
+                  "against",
+                  "reason_code"
+                ],
+                "type": "object"
+              },
+              "strict": true
+            },
+            "type": "function"
+          }
+        ]
+      },
+      "sequence": 33
+    },
+    {
+      "llm_called": true,
+      "occurrence_id": "hdb2-occ-f824b8c202ae1ab11a1c",
+      "request": {
+        "endpoint": "https://api.deepseek.com/beta/chat/completions",
+        "max_tokens": 900,
+        "messages": [
+          {
+            "content": "只根据 supplied occurrence context、evidence_items 和 candidates 判断这一个历史文字 occurrence 的指代。不得使用外部知识补写，不得创建或猜测人物 ID，不得把同表面其他 occurrence 的结论当作本次证据。候选之外只能 unresolved。X兒、X子、X女等结构性亲属表达不是其 base Person；帝/明帝/武帝必须结合本段语境。每个 support 只能引用 supplied evidence_id。",
+            "role": "system"
+          },
+          {
+            "content": "{\"candidates\": [{\"activity_context\": [{\"end_year_ce\": 324, \"event_id\": \"event-wang-dun-rebellion\", \"review_status\": \"candidate\", \"start_year_ce\": 322}, {\"end_year_ce\": 324, \"event_id\": \"event-wang-dun-rebellion\", \"review_status\": \"candidate\", \"start_year_ce\": 322}, {\"end_year_ce\": 317, \"event_id\": \"event-yongjia-upheaval\", \"review_status\": \"candidate\", \"start_year_ce\": 307}, {\"end_year_ce\": 324, \"event_id\": \"event-wang-dun-rebellion\", \"review_status\": \"candidate\", \"start_year_ce\": 322}], \"aliases\": [\"王敦\", \"王大將軍\", \"王敦\", \"王敦聞君\", \"王處仲\", \"處仲\"], \"candidate_key\": \"c0\", \"courtesy_names\": [\"王大將軍\", \"王敦聞君\", \"王處仲\", \"處仲\"], \"evidence\": [], \"name\": \"王敦\", \"office_context\": [], \"social_context\": [{\"relation_class\": \"kinship\", \"relation_surface\": \"護其兄\", \"story_id\": \"05-fangzheng-028\"}, {\"relation_class\": \"interaction\", \"relation_surface\": \"稱\", \"story_id\": \"05-fangzheng-028\"}, {\"relation_class\": \"other\", \"relation_surface\": \"方\", \"story_id\": \"09-pinzao-006\"}, {\"relation_class\": \"institutional\", \"relation_surface\": \"為\", \"story_id\": \"02-yanyu-042\"}, {\"relation_class\": \"interaction\", \"relation_surface\": \"見\", \"story_id\": \"07-shijian-006\"}, {\"relation_class\": \"interaction\", \"relation_surface\": \"曰\", \"story_id\": \"05-fangzheng-031\"}, {\"relation_class\": \"interaction\", \"relation_surface\": \"歎\", \"story_id\": \"08-shangyu-043\"}, {\"relation_class\": \"institutional\", \"relation_surface\": \"爲\", \"story_id\": \"08-shangyu-051\"}, {\"relation_class\": \"interaction\", \"relation_surface\": \"謂\", \"story_id\": \"08-shangyu-051\"}, {\"relation_class\": \"marriage\", \"relation_surface\": \"尚\", \"story_id\": \"34-pilou-001\"}, {\"relation_class\": \"marriage\", \"relation_surface\": \"尚\", \"story_id\": \"34-pilou-001\"}], \"titles\": [\"王大將軍\"]}, {\"activity_context\": [], \"aliases\": [\"王隱\", \"王丞相\", \"王大將軍\", \"王庾諸公\", \"王隐\", \"王隱\", \"處叔\"], \"candidate_key\": \"c1\", \"courtesy_names\": [\"王丞相\", \"王大將軍\", \"王庾諸公\", \"王隐\", \"處叔\"], \"evidence\": [], \"name\": \"王隱\", \"office_context\": [], \"social_context\": [], \"titles\": [\"王大將軍\", \"王庾諸公\"]}, {\"activity_context\": [{\"end_year_ce\": 324, \"event_id\": \"event-wang-dun-rebellion\", \"review_status\": \"candidate\", \"start_year_ce\": 322}, {\"end_year_ce\": 324, \"event_id\": \"event-wang-dun-rebellion\", \"review_status\": \"candidate\", \"start_year_ce\": 322}], \"aliases\": [\"周顗\", \"伯仁\", \"周伯仁\", \"周侯\", \"周顗\"], \"candidate_key\": \"c2\", \"courtesy_names\": [\"伯仁\", \"周伯仁\", \"周侯\"], \"evidence\": [], \"name\": \"周顗\", \"office_context\": [], \"social_context\": [{\"relation_class\": \"interaction\", \"relation_surface\": \"謂\", \"story_id\": \"25-paidiao-015\"}, {\"relation_class\": \"interaction\", \"relation_surface\": \"荅\", \"story_id\": \"25-paidiao-015\"}, {\"relation_class\": \"institutional\", \"relation_surface\": \"爲\", \"story_id\": \"05-fangzheng-027\"}, {\"relation_class\": \"kinship\", \"relation_surface\": \"兄弟\", \"story_id\": \"19-xianyuan-018\"}, {\"relation_class\": \"interaction\", \"relation_surface\": \"曰\", \"story_id\": \"05-fangzheng-031\"}, {\"relation_class\": \"interaction\", \"relation_surface\": \"往見\", \"story_id\": \"05-fangzheng-033\"}, {\"relation_class\": \"institutional\", \"relation_surface\": \"爲\", \"story_id\": \"05-fangzheng-030\"}, {\"relation_class\": \"interaction\", \"relation_surface\": \"問\", \"story_id\": \"09-pinzao-022\"}, {\"relation_class\": \"interaction\", \"relation_surface\": \"問\", \"story_id\": \"09-pinzao-019\"}, {\"relation_class\": \"interaction\", \"relation_surface\": \"語\", \"story_id\": \"26-qingdi-002\"}, {\"relation_class\": \"interaction\", \"relation_surface\": \"曰\", \"story_id\": \"26-qingdi-002\"}], \"titles\": []}], \"evidence_items\": [{\"evidence_id\": \"ev-594997a5c747e1318cc3\", \"source_layer\": \"main_text\", \"source_ref\": \"hdb2-shishuo-main-05-fangzheng-033\", \"source_work\": \"世說正文\", \"text\": \"王大將軍既反至石頭周伯仁往見之謂周曰卿何\\n以相負對曰公戎車犯正下官忝率六軍而王師不\\n振以此負公\"}], \"occurrence\": {\"annotation_context\": [], \"known_people_in_context\": [{\"key\": \"p0\", \"name\": \"周顗\", \"relation\": \"往見\"}], \"story_id\": \"05-fangzheng-033\", \"story_text\": \"王大將軍既反至石頭周伯仁往見之謂周曰卿何\\n以相負對曰公戎車犯正下官忝率六軍而王師不\\n振以此負公\", \"surface\": \"王大將軍\", \"temporal_context\": [{\"end_year_ce\": 324, \"event_ids\": [\"event-wang-dun-rebellion\"], \"evidence_ids\": [\"h0a-evidence-e62c0bff1672b6dfcc6a\"], \"phase_id\": \"phase-5\", \"precision\": \"event_bounded\", \"reign_id\": null, \"ruler_context_id\": null, \"start_year_ce\": 322}, {\"evidence_record_id\": \"h0a-evidence-e62c0bff1672b6dfcc6a\", \"evidence_type\": \"historical_event_reference\", \"normalized_candidate\": {\"event_id\": \"event-wang-dun-rebellion\", \"event_name\": \"王敦之亂\"}, \"raw_surface\": \"王敦既下\", \"relation_to_story\": \"event_context\"}], \"type\": \"title_reference\"}, \"task\": \"occurrence identity disambiguation\"}",
+            "role": "user"
+          }
+        ],
+        "model": "deepseek-v4-flash",
+        "temperature": 0,
+        "thinking": {
+          "type": "disabled"
+        },
+        "tool_choice": {
+          "function": {
+            "name": "submit_hdb2_occurrence_identity_decision"
+          },
+          "type": "function"
+        },
+        "tools": [
+          {
+            "function": {
+              "description": "比较系统提供的候选人物并判断当前单一历史 occurrence；不得创建人物 ID。",
+              "name": "submit_hdb2_occurrence_identity_decision",
+              "parameters": {
+                "additionalProperties": false,
+                "properties": {
+                  "against": {
+                    "description": "只列 supplied candidate 中被当前上下文反对的候选。",
+                    "items": {
+                      "additionalProperties": false,
+                      "properties": {
+                        "candidate_key": {
+                          "description": "被反驳的 supplied candidate_key。",
+                          "type": "string"
+                        },
+                        "reason_type": {
+                          "description": "原文语境与该候选不合的受控理由。",
+                          "enum": [
+                            "context_mismatch",
+                            "identity_conflict",
+                            "kinship_conflict",
+                            "office_conflict",
+                            "temporal_conflict"
+                          ],
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "candidate_key",
+                        "reason_type"
+                      ],
+                      "type": "object"
+                    },
+                    "maxItems": 6,
+                    "type": "array"
+                  },
+                  "candidate_key": {
+                    "description": "只能复制 supplied candidate_key；非 candidate decision 使用 null。",
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "confidence": {
+                    "description": "对 supplied text 是否支持该判断的信心，不是 canonical truth。",
+                    "enum": [
+                      "high",
+                      "low",
+                      "medium"
+                    ],
+                    "type": "string"
+                  },
+                  "decision": {
+                    "description": "对这一个 occurrence 的候选判断；允许 unresolved。",
+                    "enum": [
+                      "candidate",
+                      "compositional_reference",
+                      "not_person",
+                      "unresolved"
+                    ],
+                    "type": "string"
+                  },
+                  "reason_code": {
+                    "description": "简短受控判断理由。",
+                    "enum": [
+                      "candidate_conflict",
+                      "compositional_kinship",
+                      "explicit_identity",
+                      "insufficient_context",
+                      "multi_context_support",
+                      "not_person",
+                      "single_context_support"
+                    ],
+                    "type": "string"
+                  },
+                  "support": {
+                    "description": "只列直接支持当前 occurrence 判断的 evidence family。",
+                    "items": {
+                      "additionalProperties": false,
+                      "properties": {
+                        "evidence_ids": {
+                          "description": "直接支持判断的 supplied evidence_id。不得创建新证据编号。",
+                          "items": {
+                            "type": "string"
+                          },
+                          "maxItems": 6,
+                          "minItems": 1,
+                          "type": "array"
+                        },
+                        "support_type": {
+                          "description": "支持当前 occurrence 候选判断的证据家族。只能引用 supplied evidence。",
+                          "enum": [
+                            "annotation_context",
+                            "explicit_name",
+                            "kinship_context",
+                            "office_context",
+                            "ruler_context",
+                            "social_context",
+                            "temporal_context",
+                            "title_context"
+                          ],
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "support_type",
+                        "evidence_ids"
+                      ],
+                      "type": "object"
+                    },
+                    "maxItems": 6,
+                    "type": "array"
+                  }
+                },
+                "required": [
+                  "decision",
+                  "candidate_key",
+                  "confidence",
+                  "support",
+                  "against",
+                  "reason_code"
+                ],
+                "type": "object"
+              },
+              "strict": true
+            },
+            "type": "function"
+          }
+        ]
+      },
+      "sequence": 34
+    },
+    {
+      "llm_called": false,
+      "occurrence_id": "hdb2-occ-ef8e2ac869f7e8889078",
+      "sequence": 35
+    },
+    {
+      "llm_called": true,
+      "occurrence_id": "hdb2-occ-94b47e99ea25b3d53d6c",
+      "request": {
+        "endpoint": "https://api.deepseek.com/beta/chat/completions",
+        "max_tokens": 900,
+        "messages": [
+          {
+            "content": "只根据 supplied occurrence context、evidence_items 和 candidates 判断这一个历史文字 occurrence 的指代。不得使用外部知识补写，不得创建或猜测人物 ID，不得把同表面其他 occurrence 的结论当作本次证据。候选之外只能 unresolved。X兒、X子、X女等结构性亲属表达不是其 base Person；帝/明帝/武帝必须结合本段语境。每个 support 只能引用 supplied evidence_id。",
+            "role": "system"
+          },
+          {
+            "content": "{\"candidates\": [{\"activity_context\": [], \"aliases\": [], \"candidate_key\": \"c0\", \"courtesy_names\": [], \"evidence\": [], \"name\": \"夷甫\", \"office_context\": [], \"social_context\": [], \"titles\": []}, {\"activity_context\": [], \"aliases\": [\"山濤\", \"山公\", \"山巨源\", \"山濤\", \"巨源\"], \"candidate_key\": \"c1\", \"courtesy_names\": [\"山公\", \"山巨源\", \"巨源\"], \"evidence\": [], \"name\": \"山濤\", \"office_context\": [], \"social_context\": [{\"relation_class\": \"interaction\", \"relation_surface\": \"奇之\", \"story_id\": \"07-shijian-005\"}, {\"relation_class\": \"institutional\", \"relation_surface\": \"尚書\", \"story_id\": \"07-shijian-005\"}, {\"relation_class\": \"interaction\", \"relation_surface\": \"餉\", \"story_id\": \"02-yanyu-078\"}, {\"relation_class\": \"institutional\", \"relation_surface\": \"任\", \"story_id\": \"02-yanyu-078\"}], \"titles\": [\"山公\"]}, {\"activity_context\": [], \"aliases\": [\"王戎\", \"濬沖\", \"王戎\", \"王戎為尚書\", \"王濬沖\"], \"candidate_key\": \"c2\", \"courtesy_names\": [\"濬沖\", \"王戎為尚書\", \"王濬沖\"], \"evidence\": [], \"name\": \"王戎\", \"office_context\": [], \"social_context\": [{\"relation_class\": \"interaction\", \"relation_surface\": \"以軍法欲斬\", \"story_id\": \"07-shijian-005\"}, {\"relation_class\": \"interaction\", \"relation_surface\": \"詣\", \"story_id\": \"24-jianao-002\"}, {\"relation_class\": \"interaction\", \"relation_surface\": \"詣\", \"story_id\": \"24-jianao-002\"}, {\"relation_class\": \"institutional\", \"relation_surface\": \"為\", \"story_id\": \"17-shangshi-002\"}, {\"relation_class\": \"interaction\", \"relation_surface\": \"共酣飲\", \"story_id\": \"17-shangshi-002\"}, {\"relation_class\": \"interaction\", \"relation_surface\": \"共酣飲\", \"story_id\": \"17-shangshi-002\"}, {\"relation_class\": \"other\", \"relation_surface\": \"夭\", \"story_id\": \"17-shangshi-002\"}, {\"relation_class\": \"interaction\", \"relation_surface\": \"目\", \"story_id\": \"08-shangyu-013\"}, {\"relation_class\": \"interaction\", \"relation_surface\": \"詣\", \"story_id\": \"08-shangyu-006\"}, {\"relation_class\": \"interaction\", \"relation_surface\": \"異之\", \"story_id\": \"08-shangyu-006\"}], \"titles\": [\"王戎為尚書\"]}, {\"activity_context\": [], \"aliases\": [\"羊祜\", \"叔子\", \"羊公\", \"羊叔子\", \"羊祜\"], \"candidate_key\": \"c3\", \"courtesy_names\": [\"叔子\", \"羊公\", \"羊叔子\"], \"evidence\": [], \"name\": \"羊祜\", \"office_context\": [], \"social_context\": [{\"relation_class\": \"institutional\", \"relation_surface\": \"尚書\", \"story_id\": \"07-shijian-005\"}, {\"relation_class\": \"institutional\", \"relation_surface\": \"僕射\", \"story_id\": \"07-shijian-005\"}, {\"relation_class\": \"kinship\", \"relation_surface\": \"所繼從舅\", \"story_id\": \"07-shijian-005\"}, {\"relation_class\": \"interaction\", \"relation_surface\": \"見\", \"story_id\": \"07-shijian-005\"}, {\"relation_class\": \"interaction\", \"relation_surface\": \"以軍法欲斬\", \"story_id\": \"07-shijian-005\"}, {\"relation_class\": \"interaction\", \"relation_surface\": \"曰\", \"story_id\": \"07-shijian-005\"}, {\"relation_class\": \"interaction\", \"relation_surface\": \"共咨\", \"story_id\": \"03-zhengshi-006\"}, {\"relation_class\": \"interaction\", \"relation_surface\": \"共\", \"story_id\": \"03-zhengshi-006\"}], \"titles\": [\"羊公\"]}], \"evidence_items\": [{\"evidence_id\": \"ev-a38edc8814df2019c346\", \"source_layer\": \"main_text\", \"source_ref\": \"hdb2-shishuo-main-07-shijian-005\", \"source_work\": \"世說正文\", \"text\": \"王夷甫父乂爲平北將軍有公事使行人論不得時\\n夷甫在京師命駕見僕射羊祜尚書山濤夷甫時總\\n角姿才秀異叙致既快事加有理濤甚奇之既退看\\n\\n之不輟乃嘆曰生兒不當如王夷甫邪羊祜曰亂天\\n下者必此子也\"}, {\"evidence_id\": \"ev-c23b2e9258ced7dbae75\", \"source_layer\": \"liu_annotation\", \"source_ref\": \"hdb2-shishuo-liu-07-shijian-005-annotation-001\", \"source_work\": \"劉注\", \"text\": \"(夷甫年十七見所繼從舅羊祜申陳/晉陽秋曰夷甫父乂有簡書將免官)\"}, {\"evidence_id\": \"ev-06c8dd1dc042fef5a60e\", \"source_layer\": \"liu_annotation\", \"source_ref\": \"hdb2-shishuo-liu-07-shijian-005-annotation-002\", \"source_work\": \"劉注\", \"text\": \"(客曰此人必將以盛名處當世大位然敗俗傷化者/事狀辭甚俊偉祜不然之夷甫拂衣而起祜顧謂賔)\"}], \"occurrence\": {\"annotation_context\": [null, null], \"known_people_in_context\": [{\"key\": \"p0\", \"name\": \"羊祜\", \"relation\": \"見\"}, {\"key\": \"p1\", \"name\": \"山濤\", \"relation\": \"same_story_identity_observation\"}, {\"key\": \"p2\", \"name\": \"王戎\", \"relation\": \"same_story_identity_observation\"}], \"story_id\": \"07-shijian-005\", \"story_text\": \"王夷甫父乂爲平北將軍有公事使行人論不得時\\n夷甫在京師命駕見僕射羊祜尚書山濤夷甫時總\\n角姿才秀異叙致既快事加有理濤甚奇之既退看\\n\\n之不輟乃嘆曰生兒不當如王夷甫邪羊祜曰亂天\\n下者必此子也\", \"surface\": \"夷甫\", \"temporal_context\": [{\"end_year_ce\": null, \"event_ids\": [], \"evidence_ids\": [\"h0a-evidence-b6d15082a61fc89ea6a8\"], \"phase_id\": \"phase-1\", \"precision\": \"phase_only\", \"reign_id\": null, \"ruler_context_id\": null, \"start_year_ce\": null}, {\"evidence_record_id\": \"h0a-evidence-b6d15082a61fc89ea6a8\", \"evidence_type\": \"phase_only_context\", \"normalized_candidate\": {\"label_zh\": \"漢末餘緒／魏初\", \"phase_id\": \"phase-1\"}, \"raw_surface\": \"\", \"relation_to_story\": \"direct_story_time\"}], \"type\": \"courtesy_name_reference\"}, \"task\": \"occurrence identity disambiguation\"}",
+            "role": "user"
+          }
+        ],
+        "model": "deepseek-v4-flash",
+        "temperature": 0,
+        "thinking": {
+          "type": "disabled"
+        },
+        "tool_choice": {
+          "function": {
+            "name": "submit_hdb2_occurrence_identity_decision"
+          },
+          "type": "function"
+        },
+        "tools": [
+          {
+            "function": {
+              "description": "比较系统提供的候选人物并判断当前单一历史 occurrence；不得创建人物 ID。",
+              "name": "submit_hdb2_occurrence_identity_decision",
+              "parameters": {
+                "additionalProperties": false,
+                "properties": {
+                  "against": {
+                    "description": "只列 supplied candidate 中被当前上下文反对的候选。",
+                    "items": {
+                      "additionalProperties": false,
+                      "properties": {
+                        "candidate_key": {
+                          "description": "被反驳的 supplied candidate_key。",
+                          "type": "string"
+                        },
+                        "reason_type": {
+                          "description": "原文语境与该候选不合的受控理由。",
+                          "enum": [
+                            "context_mismatch",
+                            "identity_conflict",
+                            "kinship_conflict",
+                            "office_conflict",
+                            "temporal_conflict"
+                          ],
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "candidate_key",
+                        "reason_type"
+                      ],
+                      "type": "object"
+                    },
+                    "maxItems": 6,
+                    "type": "array"
+                  },
+                  "candidate_key": {
+                    "description": "只能复制 supplied candidate_key；非 candidate decision 使用 null。",
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "confidence": {
+                    "description": "对 supplied text 是否支持该判断的信心，不是 canonical truth。",
+                    "enum": [
+                      "high",
+                      "low",
+                      "medium"
+                    ],
+                    "type": "string"
+                  },
+                  "decision": {
+                    "description": "对这一个 occurrence 的候选判断；允许 unresolved。",
+                    "enum": [
+                      "candidate",
+                      "compositional_reference",
+                      "not_person",
+                      "unresolved"
+                    ],
+                    "type": "string"
+                  },
+                  "reason_code": {
+                    "description": "简短受控判断理由。",
+                    "enum": [
+                      "candidate_conflict",
+                      "compositional_kinship",
+                      "explicit_identity",
+                      "insufficient_context",
+                      "multi_context_support",
+                      "not_person",
+                      "single_context_support"
+                    ],
+                    "type": "string"
+                  },
+                  "support": {
+                    "description": "只列直接支持当前 occurrence 判断的 evidence family。",
+                    "items": {
+                      "additionalProperties": false,
+                      "properties": {
+                        "evidence_ids": {
+                          "description": "直接支持判断的 supplied evidence_id。不得创建新证据编号。",
+                          "items": {
+                            "type": "string"
+                          },
+                          "maxItems": 6,
+                          "minItems": 1,
+                          "type": "array"
+                        },
+                        "support_type": {
+                          "description": "支持当前 occurrence 候选判断的证据家族。只能引用 supplied evidence。",
+                          "enum": [
+                            "annotation_context",
+                            "explicit_name",
+                            "kinship_context",
+                            "office_context",
+                            "ruler_context",
+                            "social_context",
+                            "temporal_context",
+                            "title_context"
+                          ],
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "support_type",
+                        "evidence_ids"
+                      ],
+                      "type": "object"
+                    },
+                    "maxItems": 6,
+                    "type": "array"
+                  }
+                },
+                "required": [
+                  "decision",
+                  "candidate_key",
+                  "confidence",
+                  "support",
+                  "against",
+                  "reason_code"
+                ],
+                "type": "object"
+              },
+              "strict": true
+            },
+            "type": "function"
+          }
+        ]
+      },
+      "sequence": 36
+    },
+    {
+      "llm_called": false,
+      "occurrence_id": "hdb2-occ-9cf3a14e60a4a461b486",
+      "sequence": 37
+    },
+    {
+      "llm_called": false,
+      "occurrence_id": "hdb2-occ-f52df4f91171af5956fd",
+      "sequence": 38
+    },
+    {
+      "llm_called": true,
+      "occurrence_id": "hdb2-occ-78d5b3e57152c40916c4",
+      "request": {
+        "endpoint": "https://api.deepseek.com/beta/chat/completions",
+        "max_tokens": 900,
+        "messages": [
+          {
+            "content": "只根据 supplied occurrence context、evidence_items 和 candidates 判断这一个历史文字 occurrence 的指代。不得使用外部知识补写，不得创建或猜测人物 ID，不得把同表面其他 occurrence 的结论当作本次证据。候选之外只能 unresolved。X兒、X子、X女等结构性亲属表达不是其 base Person；帝/明帝/武帝必须结合本段语境。每个 support 只能引用 supplied evidence_id。",
+            "role": "system"
+          },
+          {
+            "content": "{\"candidates\": [{\"activity_context\": [], \"aliases\": [\"謝道韞\", \"王凝之妻謝氏\", \"謝道韞\", \"道韞\"], \"candidate_key\": \"c0\", \"courtesy_names\": [\"王凝之妻謝氏\", \"道韞\"], \"evidence\": [], \"name\": \"謝道韞\", \"office_context\": [], \"social_context\": [], \"titles\": []}, {\"activity_context\": [], \"aliases\": [\"謝安\", \"太傅\", \"安石\", \"謝公\", \"謝太傅\", \"謝安\", \"謝安石\"], \"candidate_key\": \"c1\", \"courtesy_names\": [\"太傅\", \"安石\", \"謝公\", \"謝太傅\", \"謝安石\"], \"evidence\": [], \"name\": \"謝安\", \"office_context\": [], \"social_context\": [{\"relation_class\": \"interaction\", \"relation_surface\": \"曰\", \"story_id\": \"07-shijian-021\"}, {\"relation_class\": \"interaction\", \"relation_surface\": \"泊\", \"story_id\": \"05-fangzheng-053\"}, {\"relation_class\": \"interaction\", \"relation_surface\": \"見\", \"story_id\": \"04-wenxue-087\"}, {\"relation_class\": \"interaction\", \"relation_surface\": \"請\", \"story_id\": \"04-wenxue-024\"}, {\"relation_class\": \"interaction\", \"relation_surface\": \"戲曰\", \"story_id\": \"25-paidiao-026\"}, {\"relation_class\": \"interaction\", \"relation_surface\": \"共推\", \"story_id\": \"08-shangyu-077\"}, {\"relation_class\": \"interaction\", \"relation_surface\": \"欲誅\", \"story_id\": \"06-yaliang-029\"}, {\"relation_class\": \"interaction\", \"relation_surface\": \"謂\", \"story_id\": \"06-yaliang-029\"}, {\"relation_class\": \"interaction\", \"relation_surface\": \"憚\", \"story_id\": \"06-yaliang-029\"}, {\"relation_class\": \"other\", \"relation_surface\": \"所建\", \"story_id\": \"06-yaliang-029\"}, {\"relation_class\": \"interaction\", \"relation_surface\": \"呼\", \"story_id\": \"06-yaliang-027\"}, {\"relation_class\": \"interaction\", \"relation_surface\": \"見\", \"story_id\": \"25-paidiao-038\"}], \"titles\": [\"謝公\"]}], \"evidence_items\": [{\"evidence_id\": \"ev-a10a94eb7eb2b078c21e\", \"source_layer\": \"main_text\", \"source_ref\": \"hdb2-shishuo-main-25-paidiao-026\", \"source_work\": \"世說正文\", \"text\": \"謝公在東山朝命屢降而不動後出為桓宣武司馬\\n將發新亭朝士咸出瞻送髙靈時為中丞亦徃相祖\\n先時多少飲酒因倚如醉戲曰卿屢違朝㫖髙卧東\\n山諸人毎相與言安石不肻出將如蒼生何今亦蒼\\n生將如卿何謝笑而不荅\"}, {\"evidence_id\": \"ev-905e6d4049613b0bb20b\", \"source_layer\": \"liu_annotation\", \"source_ref\": \"hdb2-shishuo-liu-25-paidiao-026-annotation-001\", \"source_work\": \"劉注\", \"text\": \"(問王凝之妻謝氏曰太傅/髙靈已見婦人集載桓玄)\"}], \"occurrence\": {\"annotation_context\": [null], \"known_people_in_context\": [{\"key\": \"p0\", \"name\": \"謝安\", \"relation\": \"same_story_identity_observation\"}], \"story_id\": \"25-paidiao-026\", \"story_text\": \"謝公在東山朝命屢降而不動後出為桓宣武司馬\\n將發新亭朝士咸出瞻送髙靈時為中丞亦徃相祖\\n先時多少飲酒因倚如醉戲曰卿屢違朝㫖髙卧東\\n山諸人毎相與言安石不肻出將如蒼生何今亦蒼\\n生將如卿何謝笑而不荅\", \"surface\": \"謝氏\", \"temporal_context\": [{\"end_year_ce\": null, \"event_ids\": [], \"evidence_ids\": [], \"phase_id\": null, \"precision\": \"unknown\", \"reign_id\": null, \"ruler_context_id\": null, \"start_year_ce\": null}], \"type\": \"abbreviated_person_name\"}, \"task\": \"occurrence identity disambiguation\"}",
+            "role": "user"
+          }
+        ],
+        "model": "deepseek-v4-flash",
+        "temperature": 0,
+        "thinking": {
+          "type": "disabled"
+        },
+        "tool_choice": {
+          "function": {
+            "name": "submit_hdb2_occurrence_identity_decision"
+          },
+          "type": "function"
+        },
+        "tools": [
+          {
+            "function": {
+              "description": "比较系统提供的候选人物并判断当前单一历史 occurrence；不得创建人物 ID。",
+              "name": "submit_hdb2_occurrence_identity_decision",
+              "parameters": {
+                "additionalProperties": false,
+                "properties": {
+                  "against": {
+                    "description": "只列 supplied candidate 中被当前上下文反对的候选。",
+                    "items": {
+                      "additionalProperties": false,
+                      "properties": {
+                        "candidate_key": {
+                          "description": "被反驳的 supplied candidate_key。",
+                          "type": "string"
+                        },
+                        "reason_type": {
+                          "description": "原文语境与该候选不合的受控理由。",
+                          "enum": [
+                            "context_mismatch",
+                            "identity_conflict",
+                            "kinship_conflict",
+                            "office_conflict",
+                            "temporal_conflict"
+                          ],
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "candidate_key",
+                        "reason_type"
+                      ],
+                      "type": "object"
+                    },
+                    "maxItems": 6,
+                    "type": "array"
+                  },
+                  "candidate_key": {
+                    "description": "只能复制 supplied candidate_key；非 candidate decision 使用 null。",
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "confidence": {
+                    "description": "对 supplied text 是否支持该判断的信心，不是 canonical truth。",
+                    "enum": [
+                      "high",
+                      "low",
+                      "medium"
+                    ],
+                    "type": "string"
+                  },
+                  "decision": {
+                    "description": "对这一个 occurrence 的候选判断；允许 unresolved。",
+                    "enum": [
+                      "candidate",
+                      "compositional_reference",
+                      "not_person",
+                      "unresolved"
+                    ],
+                    "type": "string"
+                  },
+                  "reason_code": {
+                    "description": "简短受控判断理由。",
+                    "enum": [
+                      "candidate_conflict",
+                      "compositional_kinship",
+                      "explicit_identity",
+                      "insufficient_context",
+                      "multi_context_support",
+                      "not_person",
+                      "single_context_support"
+                    ],
+                    "type": "string"
+                  },
+                  "support": {
+                    "description": "只列直接支持当前 occurrence 判断的 evidence family。",
+                    "items": {
+                      "additionalProperties": false,
+                      "properties": {
+                        "evidence_ids": {
+                          "description": "直接支持判断的 supplied evidence_id。不得创建新证据编号。",
+                          "items": {
+                            "type": "string"
+                          },
+                          "maxItems": 6,
+                          "minItems": 1,
+                          "type": "array"
+                        },
+                        "support_type": {
+                          "description": "支持当前 occurrence 候选判断的证据家族。只能引用 supplied evidence。",
+                          "enum": [
+                            "annotation_context",
+                            "explicit_name",
+                            "kinship_context",
+                            "office_context",
+                            "ruler_context",
+                            "social_context",
+                            "temporal_context",
+                            "title_context"
+                          ],
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "support_type",
+                        "evidence_ids"
+                      ],
+                      "type": "object"
+                    },
+                    "maxItems": 6,
+                    "type": "array"
+                  }
+                },
+                "required": [
+                  "decision",
+                  "candidate_key",
+                  "confidence",
+                  "support",
+                  "against",
+                  "reason_code"
+                ],
+                "type": "object"
+              },
+              "strict": true
+            },
+            "type": "function"
+          }
+        ]
+      },
+      "sequence": 39
+    },
+    {
+      "llm_called": false,
+      "occurrence_id": "hdb2-occ-a61c8571121fd37b1ccd",
+      "sequence": 40
+    }
+  ]
+}
