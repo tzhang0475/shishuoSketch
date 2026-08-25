@@ -39,6 +39,7 @@ C2_RUN = ROOT / "data/generated/hng2-evidence-atom-validation/live/20260825T-HNG
 MODEL = "deepseek-v4-flash"
 RUN_VERSION = "hng2-c3-final-closeout-v1"
 PROMPT_VERSION = "hng2-c3-visible-anchor-v1"
+VISIBLE_ANCHOR_SCANNER_SCOPE = "H0A historical registry + explicit date patterns"
 
 # Existing frozen Stories only.  The categories are evaluation strata, not
 # model hints and are never included in the semantic prompt.
@@ -399,6 +400,45 @@ def _h0a_visible_rows(story_id: str, windows: Sequence[Mapping[str, Any]]) -> li
     return [row for row in h0a_evidence_by_story().get(story_id, []) if str(row.get("raw_surface") or "") and str(row.get("raw_surface")) in combined]
 
 
+def _scope_covers_surface(row: Mapping[str, Any], hints: Sequence[Mapping[str, Any]]) -> bool:
+    raw = str(row.get("raw_surface") or "")
+    ref = str(row.get("source_ref") or row.get("evidence_ref") or "")
+    return any(
+        str(hint.get("evidence_ref") or "") == ref
+        and (str(hint.get("surface") or "") in raw or raw in str(hint.get("surface") or ""))
+        for hint in hints
+    )
+
+
+def _surface_in_declared_scanner_scope(surface: str) -> bool:
+    """Return whether a literal is covered by the scanner's declared scope.
+
+    This is deliberately lexical.  It does not ask whether T1 mentioned the
+    surface, so a model omission cannot be misreported as scanner recall loss.
+    The scope is exactly the H0A registry plus the explicit date patterns used
+    by ``scan_visible_temporal_anchors``.
+    """
+
+    surface = str(surface or "")
+    if not surface:
+        return False
+    registry = algorithm.visible_temporal_anchor_registry()
+    if surface in registry or any(registered and registered in surface for registered in registry):
+        return True
+    era_names = [
+        value for value, row in registry.items()
+        if "reign_name" in row.get("registry_kinds", [])
+    ]
+    era_alternation = "|".join(re.escape(value) for value in sorted(era_names, key=lambda value: (-len(value), value)))
+    year_number = r"(?:元|[一二三四五六七八九十百千〇零兩两0-9]+)年"
+    explicit_date = re.compile(
+        (rf"(?:{era_alternation}){year_number}|" if era_alternation else "")
+        + year_number
+        + r"|(?:歲|岁)在[甲乙丙丁戊己庚辛壬癸][子丑寅卯辰巳午未申酉戌亥]"
+    )
+    return bool(explicit_date.search(surface))
+
+
 def temporal_metrics(results: Sequence[Mapping[str, Any]], preflight_record: Mapping[str, Any]) -> dict[str, Any]:
     transports = [transport for row in results for transport in ((row.get("temporal_read") or {}).get("transport") or {}, (row.get("temporal_fill") or {}).get("transport") or {})]
     hints = [hint for row in results for hint in row.get("visible_temporal_surfaces", [])]
@@ -411,14 +451,37 @@ def temporal_metrics(results: Sequence[Mapping[str, Any]], preflight_record: Map
 
     recall_misses: list[dict[str, Any]] = []
     no_evidence: list[str] = []
+    h0a_outside_scope: list[dict[str, Any]] = []
+    t1_outside_scope: list[dict[str, Any]] = []
     for row in results:
         story_id = str(row.get("story_id"))
         atoms = ((row.get("temporal_read") or {}).get("validation") or {}).get("valid_atoms", [])
         visible_h0a = _h0a_visible_rows(story_id, row.get("evidence_windows", []))
+        hints_for_story = row.get("visible_temporal_surfaces", [])
         for evidence in visible_h0a:
             surface = str(evidence.get("raw_surface") or "")
-            if not any(surface in str(atom.get("exact_span") or "") or str(atom.get("temporal_surface") or "") in surface for atom in atoms):
+            evidence_ref = next(
+                (str(window.get("ref")) for window in row.get("evidence_windows", [])
+                 if str(window.get("evidence_text") or "").find(surface) >= 0),
+                "",
+            )
+            scoped_evidence = {**dict(evidence), "source_ref": evidence_ref}
+            in_declared_scope = _surface_in_declared_scanner_scope(surface)
+            if not in_declared_scope:
+                h0a_outside_scope.append(
+                    {"story_id": story_id, "evidence_record_id": evidence.get("evidence_record_id"), "raw_surface": surface, "source_ref": evidence_ref}
+                )
+            elif not _scope_covers_surface(scoped_evidence, hints_for_story):
                 recall_misses.append({"story_id": story_id, "surface": surface, "evidence_id": evidence.get("evidence_record_id")})
+        scoped_refs = {str(hint.get("evidence_ref") or "") for hint in hints_for_story}
+        for atom in atoms:
+            atom_surface = str(atom.get("temporal_surface") or "")
+            atom_ref = str(atom.get("evidence_ref") or "")
+            if atom_ref not in scoped_refs or not any(
+                atom_surface and atom_surface in str(hint.get("surface") or "")
+                for hint in hints_for_story if str(hint.get("evidence_ref") or "") == atom_ref
+            ):
+                t1_outside_scope.append({"story_id": story_id, "atom_id": atom.get("atom_id"), "temporal_surface": atom_surface, "evidence_ref": atom_ref})
         if not visible_h0a and not row.get("visible_temporal_surfaces"):
             no_evidence.append(story_id)
 
@@ -453,6 +516,11 @@ def temporal_metrics(results: Sequence[Mapping[str, Any]], preflight_record: Map
             }
         )
     false_promotions = [row for row in h0a_conflicts if row["assertion"].get("scene_constraint_candidate")]
+    # Conflict reporting follows the actual conservative projection gate:
+    # only an assertion still eligible for scene projection can affect scene
+    # time.  A model role label alone is not sufficient.
+    scene_conflicts = [row for row in h0a_conflicts if row["assertion"].get("scene_constraint_candidate")]
+    non_scene_conflicts = [row for row in h0a_conflicts if not row["assertion"].get("scene_constraint_candidate")]
     by_story = {str(row.get("story_id")): row for row in results}
     def story_items(story_id: str) -> list[dict[str, Any]]:
         return list((by_story.get(story_id, {}).get("normalization") or {}).get("temporal_assertions", []))
@@ -479,6 +547,12 @@ def temporal_metrics(results: Sequence[Mapping[str, Any]], preflight_record: Map
         "provider_or_parse_failures": sum(row.get("classification") in {"provider_request_failure", "response_parse_failure"} for row in transports),
         "visible_temporal_surfaces_detected": len(hints),
         "visible_surfaces_considered_by_t1": considered,
+        "visible_anchor_scanner_scope": VISIBLE_ANCHOR_SCANNER_SCOPE,
+        "scanner_visible_surfaces": len(hints),
+        "scanner_visible_surfaces_considered_by_t1": considered,
+        "scanner_visible_recall_misses": recall_misses,
+        "h0a_evidence_outside_scanner_scope": h0a_outside_scope,
+        "t1_temporal_atoms_outside_scanner_scope": t1_outside_scope,
         "valid_t1_atoms": len(valid_atoms),
         "grounding_rejects": len(rejected_atoms),
         "grounding_rejection_reasons": dict(sorted(collections.Counter(str(row.get("reason")) for row in rejected_atoms).items())),
@@ -486,6 +560,8 @@ def temporal_metrics(results: Sequence[Mapping[str, Any]], preflight_record: Map
         "rejected_t2_assertions": len(rejected_assertions),
         "h0a_compatible": sum((item.get("h0a") or {}).get("status") == "compatible" for item in normalized),
         "h0a_conflicting": sum((item.get("h0a") or {}).get("status") == "conflict" for item in normalized),
+        "h0a_scene_affecting_conflicts": len(scene_conflicts),
+        "h0a_non_scene_role_disagreements": len(non_scene_conflicts),
         "h0a_conflict_explanations": conflict_explanations,
         "later_outcome_correctly_excluded": sum(item.get("temporal_role") == "later_outcome" and not item.get("scene_constraint_candidate") for item in normalized),
         "quoted_or_background_correctly_excluded": sum(item.get("temporal_role") in {"quoted_precedent", "background_context"} and not item.get("scene_constraint_candidate") for item in normalized),

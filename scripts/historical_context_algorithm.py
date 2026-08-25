@@ -633,6 +633,7 @@ def _source_grounded_identity_expansions(
         "evidence_ref": ref,
         "exact_span": exact_span,
         "hard_conflict": False,
+        "identity_resolution_basis": "contextual_name_projection",
     }
     return {**dict(validation), "valid_entities": entities, "valid_relations": relations}, [derivation]
 
@@ -822,6 +823,25 @@ def _normalization_status(
     return "unresolved"
 
 
+def _identity_resolution_basis(
+    *,
+    result: Mapping[str, Any],
+    status: str,
+    contextual_projection: bool = False,
+) -> str:
+    """Classify identity provenance without changing the identity decision."""
+
+    if contextual_projection:
+        return "contextual_name_projection"
+    if status == "resolved_new_candidate":
+        return "new_candidate"
+    if status in {"unresolved", "ambiguous", "not_person", "not_single_person"}:
+        return "unresolved"
+    if _text(result.get("resolution_method")) == "identity_name_assertion":
+        return "evidence_identity_assertion"
+    return "catalogue_exact_match"
+
+
 def normalize_card(
     validation: Mapping[str, Any],
     *,
@@ -943,12 +963,21 @@ def normalize_card(
             "context_signals": result.get("context_signals", []),
             "resolver_result": dict(result),
         }
+        row["identity_resolution_basis"] = _identity_resolution_basis(
+            result=result,
+            status=status,
+        )
         entity_results.append(row)
         by_key[_text(entity.get("entity_key"))] = row
 
     # Identity-name relations are textual normalization evidence.  If one
     # entity already resolved uniquely, Python may propagate that identity to
     # the other local entity; the model still never supplies a Person ID.
+    contextual_projection_targets = {
+        _text(row.get("target_entity_key"))
+        for row in identity_expansions
+        if _text(row.get("target_entity_key"))
+    }
     for relation in validation.get("valid_relations", []):
         if _text(relation.get("relation_class")) != "identity_name":
             continue
@@ -964,6 +993,7 @@ def normalize_card(
         if _text(target_row.get("entity_kind")) not in PERSON_LIKE_ENTITY_KINDS:
             continue
         pid = _text(source_row.get("resolved_person_id"))
+        contextual_projection = _text(target_row.get("entity_key")) in contextual_projection_targets
         target_row.update(
             {
                 "identity_status": "resolved_existing",
@@ -983,6 +1013,11 @@ def normalize_card(
                     "evidence_ref": relation.get("evidence_ref"),
                     "exact_span": relation.get("exact_span"),
                 },
+                "identity_resolution_basis": _identity_resolution_basis(
+                    result={"resolution_method": "identity_name_assertion"},
+                    status="resolved_existing",
+                    contextual_projection=contextual_projection,
+                ),
             }
         )
 
@@ -1194,6 +1229,15 @@ TEMPORAL_ROLES = {
     "scene_time", "background_context", "later_outcome",
     "quoted_precedent", "relative_person_time", "office_context",
     "uncertain",
+}
+
+# Reporting provenance only; this enum never changes a resolver decision.
+IDENTITY_RESOLUTION_BASES = {
+    "catalogue_exact_match",
+    "evidence_identity_assertion",
+    "contextual_name_projection",
+    "new_candidate",
+    "unresolved",
 }
 
 # HNG2-C.2 changes only the READ wire contract.  FILL remains the C.1 card.
@@ -2086,6 +2130,7 @@ __all__ = [
     "TEMPORAL_FILL_FUNCTION",
     "PERSON_ATOM_FUNCTION",
     "TEMPORAL_ATOM_FUNCTION",
+    "IDENTITY_RESOLUTION_BASES",
     "STRICT_ENDPOINT",
     "RELATION_CLASSES",
     "TEMPORAL_TYPES",
