@@ -619,6 +619,42 @@ body { overflow-x: hidden; }
 .irr0-evidence { margin-top: .35rem; border-left: 2px solid #d8c7ba; padding: .35rem .65rem; background: rgba(248, 242, 235, .38); color: #59433a; }
 .irr0-evidence summary { cursor: pointer; color: #765244; font-size: .75rem; }
 .irr0-evidence blockquote { margin: .45rem 0; color: #59433a; font-size: .82rem; line-height: 1.7; white-space: pre-wrap; }
+.hdb2-review-page { max-width: 1240px; }
+.hdb2-filter-row { display: flex; flex-wrap: wrap; align-items: center; gap: .65rem 1rem; }
+.hdb2-filter-row label { display: inline-flex; align-items: center; gap: .35rem; color: #765244; font-size: .76rem; }
+.hdb2-filter-row select { border: 1px solid #d8c7ba; background: #fff; color: #59433a; font: inherit; font-size: .75rem; padding: .25rem .35rem; }
+.hdb2-review-grid { display: grid; grid-template-columns: minmax(12rem, 18rem) minmax(0, 1fr); gap: 1.25rem; margin-top: 1.25rem; align-items: start; }
+.hdb2-review-queue { display: grid; gap: .35rem; position: sticky; top: .8rem; max-height: calc(100vh - 1.6rem); overflow: auto; }
+.hdb2-review-queue button { display: grid; gap: .2rem; border: 1px solid #e3d9cd; background: rgba(255, 253, 249, .7); color: #59433a; cursor: pointer; font: inherit; font-size: .75rem; padding: .55rem .6rem; text-align: left; }
+.hdb2-review-queue button:hover, .hdb2-review-queue button:focus-visible { border-color: #a9785f; }
+.hdb2-review-queue button.active { border-color: #765244; background: #765244; color: #fffdf9; }
+.hdb2-review-queue small { color: #9a8b7d; line-height: 1.45; }
+.hdb2-review-queue button.active small { color: #ead9cd; }
+.hdb2-review-detail { min-width: 0; }
+.hdb2-review-detail h2 { margin: .2rem 0 0; color: #4b271e; font-size: 1.2rem; font-weight: 500; }
+.hdb2-story-context, .hdb2-proposal, .hdb2-candidate-section, .hdb2-facts, .hdb2-human-actions { margin-top: 1.1rem; border-top: 1px solid #e3d9cd; padding-top: .75rem; }
+.hdb2-story-context .irr0-story-text { margin-top: .45rem; font-size: 1rem; }
+.hdb2-annotation-context { margin-top: .7rem; }
+.hdb2-annotation-context blockquote { margin: .35rem 0 0; border-left: 2px solid #d8c7ba; padding-left: .65rem; color: #806f62; font-size: .8rem; line-height: 1.6; white-space: pre-wrap; }
+.hdb2-proposal-name { margin: .35rem 0 .1rem; color: #4b271e; font-family: "Noto Serif CJK SC", "Songti SC", serif; font-size: 1.2rem; }
+.hdb2-support, .hdb2-exact-spans { color: #765244; font-size: .76rem; line-height: 1.55; }
+.hdb2-compositional-warning { margin-top: 1rem; border: 1px solid #c9aa8e; background: rgba(249, 239, 225, .52); padding: .65rem .75rem; color: #59433a; font-size: .82rem; }
+.hdb2-compositional-warning p { margin: .2rem 0; line-height: 1.6; }
+.hdb2-compositional-warning pre { max-height: 14rem; overflow: auto; white-space: pre-wrap; color: #765244; font-size: .7rem; }
+.hdb2-candidate-list { display: flex; flex-wrap: wrap; gap: .45rem; margin-top: .45rem; }
+.hdb2-candidate-list button { display: grid; gap: .18rem; border: 1px solid #d8c7ba; background: transparent; color: #59433a; cursor: pointer; font: inherit; padding: .45rem .6rem; text-align: left; }
+.hdb2-candidate-list button:hover, .hdb2-candidate-list button:focus-visible, .hdb2-candidate-list button.active { border-color: #765244; background: #765244; color: #fffdf9; }
+.hdb2-candidate-list small { color: #9a8b7d; font-size: .66rem; }
+.hdb2-candidate-list button.active small { color: #ead9cd; }
+.hdb2-evidence-stack { display: grid; gap: .4rem; margin-top: .45rem; }
+.hdb2-evidence-stack .irr0-evidence { margin-top: 0; }
+.hdb2-facts { display: grid; gap: .5rem; }
+.hdb2-fact-group { display: grid; gap: .3rem; }
+.hdb2-fact { display: grid; grid-template-columns: minmax(7rem, 1fr) auto; gap: .2rem .65rem; border-left: 2px solid #d8c7ba; background: rgba(248, 242, 235, .38); padding: .35rem .55rem; color: #59433a; font-size: .76rem; }
+.hdb2-fact small { grid-column: 1 / -1; color: #9a8b7d; }
+.hdb2-fact blockquote { grid-column: 1 / -1; margin: .1rem 0 0; color: #806f62; font-size: .72rem; white-space: pre-wrap; }
+.hdb2-human-actions { padding-bottom: 1rem; }
+.hdb2-human-actions button:disabled { cursor: not-allowed; opacity: .55; }
 .irr0-rounds { display: grid; gap: 1.2rem; }
 .irr0-round { border-bottom: 1px solid #e3d9cd; padding: .8rem 0 1rem; }
 .irr0-round:last-child { border-bottom: 0; }
@@ -738,6 +774,9 @@ body { overflow-x: hidden; }
 
 @media (max-width: 699px) {
   .irr0-summary-grid { grid-template-columns: 1fr; }
+  .hdb2-review-grid { grid-template-columns: 1fr; }
+  .hdb2-review-queue { position: static; max-height: 14rem; }
+  .hdb2-review-queue button { min-height: 2.8rem; }
   .irr0-story-text { font-size: 1.05rem; }
   .irr0-condition-panel.gold { padding-inline: .65rem; }
   .irr0-span-before-after { grid-template-columns: 1fr; }

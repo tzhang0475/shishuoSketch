@@ -12,6 +12,7 @@ DIST_DIR = ROOT / "dist"
 ROUTE_SHELLS = (
     Path("index/index.html"),
     Path("review/irr0/index.html"),
+    Path("review/hdb2/index.html"),
 )
 
 

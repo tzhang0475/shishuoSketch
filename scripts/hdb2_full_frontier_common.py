@@ -525,3 +525,40 @@ def candidate_from_atom(case: dict[str, Any], atom: Mapping[str, Any], catalog: 
 
 def source_work_counts(rows: Sequence[Mapping[str, Any]]) -> dict[str, int]:
     return dict(collections.Counter(str(x.get("source_work") or "unknown") for x in rows))
+
+
+def compact_rescue_search_result(row: Mapping[str, Any]) -> dict[str, Any]:
+    """Remove passage bodies from the persisted rescue search trace.
+
+    Retrieval and ranking are unchanged.  The selected passage bodies remain
+    in ``rescue-selected-passages.json``; the search trace keeps only enough
+    hit metadata to audit counts, ranking, and source coverage.
+    """
+    hits = list(row.get("hits") or [])
+    selected = list(row.get("selected_passages") or [])
+    selected_refs = [str(item.get("ref")) for item in selected if item.get("ref")]
+    selected_set = set(selected_refs)
+    unselected: list[dict[str, Any]] = []
+    for rank, hit in enumerate(hits, start=1):
+        ref = str(hit.get("ref") or "")
+        if ref in selected_set:
+            continue
+        query = hit.get("query") if isinstance(hit.get("query"), Mapping) else {}
+        unselected.append({
+            "ref": ref,
+            "source_work": hit.get("source_work"),
+            "source_layer": hit.get("source_layer"),
+            "rank": rank,
+            "score": hit.get("score"),
+            "matched_terms": [str(query.get("term"))] if query.get("term") else [],
+        })
+    return {
+        "occurrence_id": row.get("occurrence_id"),
+        "queries": list(row.get("queries") or []),
+        "total_hit_count": len(hits),
+        "hits_by_source": source_work_counts(hits),
+        "selected_refs": selected_refs,
+        "selected_count": len(selected_refs),
+        "unselected_hits": unselected,
+        "reasons": list(row.get("reasons") or []),
+    }

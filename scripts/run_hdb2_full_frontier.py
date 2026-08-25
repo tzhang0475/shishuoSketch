@@ -346,7 +346,7 @@ def run(args: argparse.Namespace) -> Path:
             rescue_info["attempted"] = True
             search = p1.search_case(_rescue_case(case), units, catalog, used_refs={str(x.get("source_ref")) for x in case.get("evidence_items", [])}, max_passages=4, max_chars=2000)
             search_row = {"occurrence_id": case.get("occurrence_id"), "reasons": reasons, **search}
-            rescue_search.append(search_row)
+            rescue_search.append(common.compact_rescue_search_result(search_row))
             selected = list(search.get("selected_passages", []))
             if selected:
                 rescue_sequence += 1

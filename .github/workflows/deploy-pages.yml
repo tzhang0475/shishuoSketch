@@ -80,6 +80,7 @@ jobs:
           test -f dist/index.html
           test -f dist/index/index.html
           test -f dist/review/irr0/index.html
+          test -f dist/review/hdb2/index.html
           test ! -e dist/data/wp1-site.json
           if find dist -type f \( -path '*content*' -o -path '*sources*' -o -path '*shishuoSources*' -o -path '*research*' \) -print -quit | grep -q .; then
             echo "Research/source payload detected in Pages artifact"

@@ -26,6 +26,7 @@ class FrontendRouteMaterializationTests(unittest.TestCase):
             self.assertEqual(set(first_bytes.values()), {content})
             self.assertEqual((dist / "index/index.html").read_bytes(), content)
             self.assertEqual((dist / "review/irr0/index.html").read_bytes(), content)
+            self.assertEqual((dist / "review/hdb2/index.html").read_bytes(), content)
 
     def test_route_materialization_requires_root_shell(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
@@ -40,6 +41,7 @@ class FrontendRouteMaterializationTests(unittest.TestCase):
         self.assertIn("python3 scripts/materialize_frontend_routes.py", package["scripts"]["build:site"])
         self.assertIn("test -f dist/index/index.html", workflow)
         self.assertIn("test -f dist/review/irr0/index.html", workflow)
+        self.assertIn("test -f dist/review/hdb2/index.html", workflow)
 
 
 if __name__ == "__main__":

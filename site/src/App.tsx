@@ -73,6 +73,7 @@ import {
   type Hng02TemporalItem,
 } from "./hng02";
 import { IRRReviewPage } from "./IRRReviewPage";
+import { HDB2ReviewPage } from "./HDB2ReviewPage";
 import type {
   Evidence,
   EraCard,
@@ -125,6 +126,13 @@ function isIRRReviewLocation(): boolean {
   const base = import.meta.env.BASE_URL.replace(/\/+$/u, "");
   const path = window.location.pathname.replace(/\/+$/u, "");
   return path === `${base}/review/irr0`;
+}
+
+function isHDB2ReviewLocation(): boolean {
+  if (typeof window === "undefined") return false;
+  const base = import.meta.env.BASE_URL.replace(/\/+$/u, "");
+  const path = window.location.pathname.replace(/\/+$/u, "");
+  return path === `${base}/review/hdb2`;
 }
 
 function readingValue(pair: ReadingPair | undefined, mode: ReadingMode, fallback: string): string {
@@ -3460,8 +3468,8 @@ function ReadingPage({
           <a className="index-link" href={`${import.meta.env.BASE_URL}index`} target="_blank" rel="noreferrer">
             人物 / 篇目
           </a>
-          <a className="index-link" href={`${import.meta.env.BASE_URL}review/irr0`}>
-            IRR 重读实验
+          <a className="index-link" href={`${import.meta.env.BASE_URL}review/hdb2`}>
+            HDB2 人物审阅
           </a>
           <span className="prototype-badge">SC1 Preview</span>
         </div>
@@ -3540,7 +3548,7 @@ function App() {
   useEffect(() => {
     if (initialized.current) return;
     initialized.current = true;
-    if (isIRRReviewLocation()) return;
+    if (isIRRReviewLocation() || isHDB2ReviewLocation()) return;
     try {
       const loaded = loadSiteBundle();
       const storyId = initialStoryId(loaded);
@@ -3569,6 +3577,9 @@ function App() {
 
   if (isIRRReviewLocation()) {
     return <IRRReviewPage />;
+  }
+  if (isHDB2ReviewLocation()) {
+    return <HDB2ReviewPage />;
   }
 
   function focusPerson(personId: string, route?: PersonMentionRoute) {
