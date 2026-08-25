@@ -48,6 +48,15 @@ TEMPORAL_TYPES = {
     "other",
 }
 CONFIDENCE_LEVELS = {"high", "medium", "low"}
+PERSON_LIKE_ENTITY_KINDS = {
+    "named_person",
+    "abbreviated_name",
+    "courtesy_name",
+    "person_title",
+    "person_office_title",
+    "kinship_reference",
+    "pronoun_reference",
+}
 LOCAL_ENTITY = re.compile(r"^e[0-9]+$")
 LOCAL_RELATION = re.compile(r"^r[0-9]+$")
 LOCAL_TEMPORAL = re.compile(r"^t[0-9]+$")
@@ -718,18 +727,32 @@ def normalize_card(
         return candidate_key
 
     for entity in validation.get("valid_entities", []):
-        result = resolver.resolve_identity(
-            surface=_text(entity.get("surface")),
-            seed=seed,
-            context=context,
-            evidence=evidence_rows,
-            catalog=catalog,
-            index=index,
-            contextual_registry=registry,
-            evidence_refs=[_text(entity.get("evidence_ref"))],
-        )
+        entity_kind = _text(entity.get("entity_kind"))
+        person_like = entity_kind in PERSON_LIKE_ENTITY_KINDS
+        if person_like:
+            result = resolver.resolve_identity(
+                surface=_text(entity.get("surface")),
+                seed=seed,
+                context=context,
+                evidence=evidence_rows,
+                catalog=catalog,
+                index=index,
+                contextual_registry=registry,
+                evidence_refs=[_text(entity.get("evidence_ref"))],
+            )
+        else:
+            result = {
+                "surface": _text(entity.get("surface")),
+                "resolution_status": "not_applicable",
+                "resolution_method": "entity_kind_type_gate",
+                "resolved_person_id": None,
+                "resolved_label": None,
+                "confidence": "unknown",
+                "candidate_set": [],
+                "context_signals": ["non_person_like_entity_kind"],
+            }
         frozen_match = None
-        if not result.get("resolved_person_id"):
+        if person_like and not result.get("resolved_person_id"):
             frozen_match = _case_candidate_match(_text(entity.get("surface")), case)
             if frozen_match:
                 result = {
@@ -766,6 +789,7 @@ def normalize_card(
             "evidence_ref": entity.get("evidence_ref"),
             "exact_span": entity.get("exact_span"),
             "identity_status": status,
+            "person_resolution": result.get("resolution_status"),
             "resolved_person_id": pid,
             "candidate_key": candidate_key,
             "resolution_method": result.get("resolution_method"),
@@ -792,6 +816,8 @@ def normalize_card(
             continue
         source_row = resolved[0]
         target_row = object_row if source_row is subject else subject
+        if _text(target_row.get("entity_kind")) not in PERSON_LIKE_ENTITY_KINDS:
+            continue
         pid = _text(source_row.get("resolved_person_id"))
         target_row.update(
             {
@@ -816,6 +842,7 @@ def normalize_card(
         )
 
     relations: list[dict[str, Any]] = []
+    rejected_normalized_relations: list[dict[str, Any]] = []
     known_evidence = known_evidence or {}
     for relation in validation.get("valid_relations", []):
         subject = by_key.get(_text(relation.get("subject_entity_key")))
@@ -823,6 +850,23 @@ def normalize_card(
         if not subject or not object_row:
             continue
         relation_class = _text(relation.get("relation_class"))
+        subject_person_id = subject.get("resolved_person_id")
+        object_person_id = object_row.get("resolved_person_id")
+        if (
+            relation_class != "identity_name"
+            and subject_person_id
+            and subject_person_id == object_person_id
+        ):
+            rejected_normalized_relations.append(
+                {
+                    "reason": "collapsed_self_relation",
+                    "relation": dict(relation),
+                    "normalized_subject_person_id": subject_person_id,
+                    "normalized_object_person_id": object_person_id,
+                    "canonical_write_back": False,
+                }
+            )
+            continue
         semantic_level = "hard_relation" if relation_class in {"kinship", "marriage", "identity_name"} else "documented_interaction"
         ref = _text(relation.get("evidence_ref"))
         matching = ref in known_evidence
@@ -870,6 +914,7 @@ def normalize_card(
     return {
         "entities": entity_results,
         "relations": relations,
+        "rejected_normalized_relations": rejected_normalized_relations,
         "temporal_assertions": temporal,
         "candidates": candidates,
         "candidate_projection_only": True,
@@ -1004,6 +1049,107 @@ TEMPORAL_ROLES = {
     "quoted_precedent", "relative_person_time", "office_context",
     "uncertain",
 }
+
+# HNG2-C.2 changes only the READ wire contract.  FILL remains the C.1 card.
+PERSON_ATOM_FUNCTION = "submit_person_evidence_atoms"
+TEMPORAL_ATOM_FUNCTION = "submit_temporal_evidence_atoms"
+
+PERSON_ATOM_SYSTEM = (
+    "只从输入 evidence_text 逐字发现与当前人物 target 直接相关、或解析 target 必需的证据原子。"
+    "subject_surface、predicate_surface、object_surface 只要非空，都必须逐字出现在同一 exact_span；"
+    "exact_span 必须逐字来自所引 evidence_ref。保留父、弟、妻、辟、拜、除、字、號等史料原词，"
+    "不得改写为现代语义标签。atom_kind 可以解释分类；共现不是关系；最多六条。"
+)
+TEMPORAL_ATOM_SYSTEM = (
+    "只从输入 evidence_text 逐字发现与当前 Story 时间理解有关的证据原子，不推断场景年代。"
+    "temporal_surface 与 reference_surface 只要非空，都必须逐字出现在同一 exact_span；"
+    "exact_span 必须逐字来自所引 evidence_ref。只用 role_hint 区分场景、背景、后事、引典、人物相对时间或官职语境；"
+    "后事和引典不得倒推场景时间；最多五条。"
+)
+PERSON_ATOM_FILL_SYSTEM = (
+    "重新阅读给定原文；Python 已验证的 EvidenceAtoms 只是定位原文的指针，不得把 atom_kind 当成既定事实。"
+    "只把原文直接支持、与当前 target 有关的信息填入既有 Person Card，不发现无关事实，不创建数据库 ID。"
+    "保留关系原词；共现不是关系。最多五个实体、五条关系。"
+)
+TEMPORAL_ATOM_FILL_SYSTEM = (
+    "重新阅读给定 Story 原文；Python 已验证的 TemporalEvidenceAtoms 只是原文指针，不得把 role_hint 当成既定事实。"
+    "填入既有 Temporal Card，并区分 scene_time、later_outcome、background_context 与 quoted_precedent；"
+    "不修改 H0A。最多四条。"
+)
+
+
+def _person_atom_schema() -> dict[str, Any]:
+    return _object(
+        {
+            "atom_id": _string("本次回答内部的局部证据原子编号 p0、p1……。"),
+            "atom_kind": _enum(
+                PERSON_OBSERVATION_KINDS,
+                "证据原子的宽类别；这是解释标签，不要求出现在原文中。other 可保留现有分类未覆盖的明示信息。",
+            ),
+            "subject_surface": _string("主体的史料原词；非空时必须逐字包含在 exact_span 中。"),
+            "predicate_surface": _string("关系或身份谓词的史料原词；不得用现代释义改写，非空时必须逐字包含在 exact_span 中。"),
+            "object_surface": _string("客体的史料原词；没有明确客体时为空，非空时必须逐字包含在 exact_span 中。"),
+            "evidence_ref": _string("必须逐字复制 source_passages 中已有 ref。"),
+            "exact_span": _string("包含各非空 surface 的最短连续原文，必须逐字存在于对应 evidence_text。"),
+            "certainty": _enum(OBSERVATION_CERTAINTY, "原文表达该证据原子的明确程度。"),
+        },
+        "Person READ EvidenceAtom。它只保存文本证据，不作数据库身份或关系决定。",
+    )
+
+
+def _temporal_atom_schema() -> dict[str, Any]:
+    return _object(
+        {
+            "atom_id": _string("本次回答内部的局部时间证据原子编号 t0、t1……。"),
+            "temporal_surface": _string("史料中的时间原词；非空时必须逐字包含在 exact_span 中。"),
+            "reference_surface": _string("时间所绑定的人物、事件或动作原词；非空时必须逐字包含在 exact_span 中。"),
+            "role_hint": _enum(TEMPORAL_ROLES, "该原文相对当前 Story 场景的作用提示；不等于 Python 的最终时间判断。"),
+            "evidence_ref": _string("必须逐字复制 source_passages 中已有 ref。"),
+            "exact_span": _string("包含各非空 surface 的最短连续原文，必须逐字存在于对应 evidence_text。"),
+            "certainty": _enum(OBSERVATION_CERTAINTY, "原文表达该时间证据原子的明确程度。"),
+        },
+        "Temporal READ EvidenceAtom。它只保存文本证据和角色提示，不推断 Story 场景年代。",
+    )
+
+
+def evidence_atom_function_definition(lane: str) -> dict[str, Any]:
+    """Return the C.2 READ schema or the unchanged C.1 FILL schema."""
+
+    if lane == "person_read":
+        name = PERSON_ATOM_FUNCTION
+        parameters = _object(
+            {"atoms": _array(_person_atom_schema(), "最多六条 target 相关的逐字证据原子。")},
+            "Person READ EvidenceAtom 输出。",
+        )
+    elif lane == "temporal_read":
+        name = TEMPORAL_ATOM_FUNCTION
+        parameters = _object(
+            {"atoms": _array(_temporal_atom_schema(), "最多五条 Story 时间相关的逐字证据原子。")},
+            "Temporal READ EvidenceAtom 输出。",
+        )
+    elif lane in {"person_fill", "temporal_fill"}:
+        return read_fill_function_definition(lane)
+    else:
+        raise ValueError(f"unknown evidence-atom lane: {lane}")
+    return {
+        "type": "function",
+        "function": {
+            "name": name,
+            "description": parameters["description"],
+            "strict": True,
+            "parameters": parameters,
+        },
+    }
+
+
+def evidence_atom_tool_choice(lane: str) -> dict[str, Any]:
+    name = {
+        "person_read": PERSON_ATOM_FUNCTION,
+        "person_fill": PERSON_FILL_FUNCTION,
+        "temporal_read": TEMPORAL_ATOM_FUNCTION,
+        "temporal_fill": TEMPORAL_FILL_FUNCTION,
+    }[lane]
+    return {"type": "function", "function": {"name": name}}
 
 
 def _person_observation_schema() -> dict[str, Any]:
@@ -1397,6 +1543,133 @@ def validate_temporal_fill(payload: Any, windows: Sequence[Mapping[str, Any]]) -
     return {"valid": not top_errors, "usable": bool(valid) or (not top_errors and not rows), "top_errors": top_errors, "valid_temporal_assertions": valid, "rejected_temporal_assertions": rejected}
 
 
+def validate_person_atoms(payload: Any, windows: Sequence[Mapping[str, Any]]) -> dict[str, Any]:
+    """Ground C.2 Person atoms against exactly the displayed evidence_text."""
+
+    texts = evidence_text_map(windows)
+    rows = payload.get("atoms") if isinstance(payload, Mapping) else None
+    top_errors = [] if isinstance(rows, list) else ["atoms_not_array"]
+    rows = rows if isinstance(rows, list) else []
+    valid: list[dict[str, Any]] = []
+    rejected: list[dict[str, Any]] = []
+    seen: set[str] = set()
+    fields = {
+        "atom_id", "atom_kind", "subject_surface", "predicate_surface",
+        "object_surface", "evidence_ref", "exact_span", "certainty",
+    }
+    for index, item in enumerate(rows):
+        reason = ""
+        if not isinstance(item, Mapping) or set(item) != fields:
+            reason = "field_set_mismatch"
+        else:
+            atom_id = _text(item.get("atom_id"))
+            ref = _text(item.get("evidence_ref"))
+            span = str(item.get("exact_span") or "")
+            subject = str(item.get("subject_surface") or "")
+            predicate = str(item.get("predicate_surface") or "")
+            obj = str(item.get("object_surface") or "")
+            if not re.fullmatch(r"p[0-9]+", atom_id) or atom_id in seen:
+                reason = "invalid_or_duplicate_atom_id"
+            elif item.get("atom_kind") not in PERSON_OBSERVATION_KINDS or item.get("certainty") not in OBSERVATION_CERTAINTY:
+                reason = "invalid_enum"
+            elif not span or ref not in texts or span not in texts[ref]:
+                reason = "exact_span_missing"
+            elif subject and subject not in span:
+                reason = "subject_not_in_span"
+            elif predicate and predicate not in span:
+                reason = "predicate_not_in_span"
+            elif obj and obj not in span:
+                reason = "object_not_in_span"
+            if not reason:
+                seen.add(atom_id)
+        if reason:
+            rejected.append(_reject(index, reason, item))
+        elif len(valid) < 6:
+            valid.append(dict(item))
+        else:
+            rejected.append(_reject(index, "max_atoms_exceeded", item))
+    return {
+        "valid": not top_errors,
+        "usable": bool(valid) or (not top_errors and not rows),
+        "top_errors": top_errors,
+        "valid_atoms": valid,
+        "rejected_atoms": rejected,
+    }
+
+
+def validate_temporal_atoms(payload: Any, windows: Sequence[Mapping[str, Any]]) -> dict[str, Any]:
+    """Ground C.2 Temporal atoms against exactly the displayed evidence_text."""
+
+    texts = evidence_text_map(windows)
+    rows = payload.get("atoms") if isinstance(payload, Mapping) else None
+    top_errors = [] if isinstance(rows, list) else ["atoms_not_array"]
+    rows = rows if isinstance(rows, list) else []
+    valid: list[dict[str, Any]] = []
+    rejected: list[dict[str, Any]] = []
+    seen: set[str] = set()
+    fields = {
+        "atom_id", "temporal_surface", "reference_surface", "role_hint",
+        "evidence_ref", "exact_span", "certainty",
+    }
+    for index, item in enumerate(rows):
+        reason = ""
+        if not isinstance(item, Mapping) or set(item) != fields:
+            reason = "field_set_mismatch"
+        else:
+            atom_id = _text(item.get("atom_id"))
+            ref = _text(item.get("evidence_ref"))
+            span = str(item.get("exact_span") or "")
+            surface = str(item.get("temporal_surface") or "")
+            reference = str(item.get("reference_surface") or "")
+            if not re.fullmatch(r"t[0-9]+", atom_id) or atom_id in seen:
+                reason = "invalid_or_duplicate_atom_id"
+            elif item.get("role_hint") not in TEMPORAL_ROLES or item.get("certainty") not in OBSERVATION_CERTAINTY:
+                reason = "invalid_enum"
+            elif not span or ref not in texts or span not in texts[ref]:
+                reason = "exact_span_missing"
+            elif surface and surface not in span:
+                reason = "temporal_surface_not_in_span"
+            elif reference and reference not in span:
+                reason = "reference_surface_not_in_span"
+            if not reason:
+                seen.add(atom_id)
+        if reason:
+            rejected.append(_reject(index, reason, item))
+        elif len(valid) < 5:
+            valid.append(dict(item))
+        else:
+            rejected.append(_reject(index, "max_atoms_exceeded", item))
+    return {
+        "valid": not top_errors,
+        "usable": bool(valid) or (not top_errors and not rows),
+        "top_errors": top_errors,
+        "valid_atoms": valid,
+        "rejected_atoms": rejected,
+    }
+
+
+def person_atom_fill_prompt(target: Mapping[str, Any], grounded: Mapping[str, Any], windows: Sequence[Mapping[str, Any]]) -> dict[str, Any]:
+    atoms = list(grounded.get("valid_atoms", []))
+    refs = {_text(row.get("evidence_ref")) for row in atoms}
+    selected = [dict(row) for row in windows if _text(row.get("ref")) in refs]
+    return {
+        "target": dict(target),
+        "validated_evidence_atoms": atoms,
+        "source_passages": _model_windows(selected),
+    }
+
+
+def temporal_atom_fill_prompt(story: Mapping[str, Any], grounded: Mapping[str, Any], windows: Sequence[Mapping[str, Any]]) -> dict[str, Any]:
+    atoms = list(grounded.get("valid_atoms", []))
+    refs = {_text(row.get("evidence_ref")) for row in atoms}
+    selected = [dict(row) for row in windows if _text(row.get("ref")) in refs]
+    return {
+        "story": dict(story),
+        "validated_temporal_evidence_atoms": atoms,
+        "source_passages": _model_windows(selected),
+    }
+
+
 def person_fill_prompt(target: Mapping[str, Any], grounded: Mapping[str, Any], windows: Sequence[Mapping[str, Any]]) -> dict[str, Any]:
     refs = {_text(row.get("evidence_ref")) for row in grounded.get("valid_observations", [])}
     selected = [dict(row) for row in windows if _text(row.get("ref")) in refs] or [dict(row) for row in windows]
@@ -1529,6 +1802,8 @@ __all__ = [
     "PERSON_FILL_FUNCTION",
     "TEMPORAL_READ_FUNCTION",
     "TEMPORAL_FILL_FUNCTION",
+    "PERSON_ATOM_FUNCTION",
+    "TEMPORAL_ATOM_FUNCTION",
     "STRICT_ENDPOINT",
     "RELATION_CLASSES",
     "TEMPORAL_TYPES",
@@ -1537,6 +1812,10 @@ __all__ = [
     "PERSON_FILL_SYSTEM",
     "TEMPORAL_READ_SYSTEM",
     "TEMPORAL_FILL_SYSTEM",
+    "PERSON_ATOM_SYSTEM",
+    "TEMPORAL_ATOM_SYSTEM",
+    "PERSON_ATOM_FILL_SYSTEM",
+    "TEMPORAL_ATOM_FILL_SYSTEM",
     "card_parameters_schema",
     "function_definition",
     "tool_choice",
@@ -1550,6 +1829,8 @@ __all__ = [
     "json_hash",
     "read_fill_function_definition",
     "read_fill_tool_choice",
+    "evidence_atom_function_definition",
+    "evidence_atom_tool_choice",
     "model_visible_evidence_text",
     "prepare_evidence_window",
     "evidence_text_map",
@@ -1557,9 +1838,13 @@ __all__ = [
     "person_fill_prompt",
     "temporal_read_prompt",
     "temporal_fill_prompt",
+    "person_atom_fill_prompt",
+    "temporal_atom_fill_prompt",
     "validate_person_read",
     "validate_person_fill",
     "validate_temporal_read",
+    "validate_person_atoms",
+    "validate_temporal_atoms",
     "validate_temporal_fill",
     "normalize_person_fill",
     "normalize_story_temporal",
