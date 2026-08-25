@@ -143,6 +143,52 @@ class NormalizationGateTests(unittest.TestCase):
         self.assertEqual(result["rejected_normalized_relations"][0]["reason"], "collapsed_self_relation")
         self.assertEqual(result["rejected_normalized_relations"][0]["relation"]["relation_id"], "r0")
 
+    def test_unique_visible_full_name_propagates_identity_to_abbreviation(self) -> None:
+        windows = [algorithm.prepare_evidence_window({"ref": "r", "text": "眾拒王廙，廙遂行", "evidence_text": "眾拒王廙，廙遂行"})]
+        case = {
+            "observation": {"surface": "廙"},
+            "candidates": [{"candidate_key": "c0", "person_id": "person-053", "canonical_name": "王廙", "known_forms": ["王廙", "世將"]}],
+            "constraint_checks": [],
+            "seed": {},
+        }
+        validation = {
+            "valid_entities": [{"entity_key": "e0", "surface": "廙", "entity_kind": "abbreviated_name", "reference_form": "abbreviated", "evidence_refs": ["r"]}],
+            "valid_relations": [],
+        }
+        result = algorithm.normalize_person_fill(validation, case=case, windows=windows)
+        target = next(row for row in result["entities"] if row["surface"] == "廙")
+        self.assertEqual(target["resolved_person_id"], "person-053")
+        self.assertEqual(target["resolution_method"], "identity_name_assertion")
+        self.assertEqual(result["source_grounded_identity_expansions"][0]["full_name_surface"], "王廙")
+
+    def test_nonidentity_edges_and_hard_conflicts_do_not_propagate(self) -> None:
+        base_case = {
+            "observation": {"surface": "廙"},
+            "candidates": [{"candidate_key": "c0", "person_id": "person-053", "canonical_name": "王廙", "known_forms": ["王廙"]}],
+            "constraint_checks": [],
+            "seed": {},
+        }
+        for relation_class in ("interaction", "kinship", "institutional"):
+            windows = [algorithm.prepare_evidence_window({"ref": "r", "text": "廙與甲", "evidence_text": "廙與甲"})]
+            validation = {
+                "valid_entities": [
+                    {"entity_key": "e0", "surface": "廙", "entity_kind": "abbreviated_name", "reference_form": "abbreviated", "evidence_refs": ["r"]},
+                    {"entity_key": "e1", "surface": "甲", "entity_kind": "named_person", "reference_form": "full_name", "evidence_refs": ["r"]},
+                ],
+                "valid_relations": [{"relation_id": "r0", "subject_entity_key": "e0", "object_entity_key": "e1", "relation_surface": "與", "relation_class": relation_class, "evidence_ref": "r", "exact_span": "廙與甲", "confidence": "high"}],
+            }
+            result = algorithm.normalize_person_fill(validation, case=base_case, windows=windows)
+            target = next(row for row in result["entities"] if row["surface"] == "廙")
+            self.assertIsNone(target["resolved_person_id"])
+            self.assertEqual(result["source_grounded_identity_expansions"], [])
+
+        conflict_case = {**base_case, "constraint_checks": [{"candidate_key": "c0", "constraint_type": "temporal", "status": "conflict"}]}
+        windows = [algorithm.prepare_evidence_window({"ref": "r", "text": "王廙，廙遂行", "evidence_text": "王廙，廙遂行"})]
+        validation = {"valid_entities": [{"entity_key": "e0", "surface": "廙", "entity_kind": "abbreviated_name", "reference_form": "abbreviated", "evidence_refs": ["r"]}], "valid_relations": []}
+        result = algorithm.normalize_person_fill(validation, case=conflict_case, windows=windows)
+        self.assertEqual(result["source_grounded_identity_expansions"], [])
+        self.assertIsNone(result["entities"][0]["resolved_person_id"])
+
 
 class EvidenceAtomRunnerTests(unittest.TestCase):
     def test_selection_is_exact_c1_set_and_44_calls(self) -> None:

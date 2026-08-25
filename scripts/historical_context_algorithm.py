@@ -497,6 +497,146 @@ def _case_candidate_match(
     return None
 
 
+def _case_candidate_has_hard_conflict(case: Mapping[str, Any], candidate: Mapping[str, Any]) -> bool:
+    candidate_key = _text(candidate.get("candidate_key"))
+    person_id = _text(candidate.get("person_id"))
+    for check in case.get("constraint_checks") or []:
+        if not isinstance(check, Mapping) or check.get("status") != "conflict":
+            continue
+        check_key = _text(check.get("candidate_key"))
+        check_person = _text(check.get("person_id"))
+        if (candidate_key and check_key == candidate_key) or (person_id and check_person == person_id):
+            return True
+    return False
+
+
+def _source_grounded_identity_expansions(
+    validation: Mapping[str, Any],
+    *,
+    case: Mapping[str, Any],
+    evidence_rows: Mapping[str, Mapping[str, Any]],
+) -> tuple[dict[str, Any], list[dict[str, Any]]]:
+    """Recover a full existing name that literally contains the target form.
+
+    This is a textual identity projection, not relation inference.  It is
+    allowed only when one frozen existing-Person candidate has a full form
+    visibly present in the supplied source and the current target is its
+    unique suffix.  The derived identity_name assertion remains provenance
+    traceable and is blocked by Python hard conflicts.
+    """
+
+    entities = [dict(row) for row in validation.get("valid_entities", [])]
+    relations = [dict(row) for row in validation.get("valid_relations", [])]
+    target_surface = _text((case.get("observation") or {}).get("surface"))
+    target_rows = [
+        row for row in entities
+        if _text(row.get("surface")) == target_surface
+        and _text(row.get("entity_kind")) in PERSON_LIKE_ENTITY_KINDS
+    ]
+    if not target_surface or len(target_rows) != 1:
+        return {**dict(validation), "valid_entities": entities, "valid_relations": relations}, []
+
+    candidates = case.get("candidates") or []
+    if isinstance(candidates, Mapping):
+        candidates = list(candidates.values())
+    matches: list[tuple[dict[str, Any], str, str, str]] = []
+    folded_target = _matching_form(target_surface)
+    for candidate in candidates:
+        if not isinstance(candidate, Mapping) or not _text(candidate.get("person_id")):
+            continue
+        if _case_candidate_has_hard_conflict(case, candidate):
+            continue
+        forms = candidate.get("known_forms") or []
+        if isinstance(forms, str):
+            forms = [forms]
+        forms = [str(candidate.get("canonical_name") or ""), *[str(value) for value in forms if _text(value)]]
+        for form in sorted(set(forms), key=lambda value: (-len(_matching_form(value)), value)):
+            folded_form = _matching_form(form)
+            if not form or folded_form == folded_target or not folded_form.endswith(folded_target):
+                continue
+            occurrences: list[tuple[str, str, str]] = []
+            for evidence_ref, evidence_row in evidence_rows.items():
+                text = _source_text(evidence_row)
+                full_positions = [match.start() for match in re.finditer(re.escape(form), text)]
+                target_positions = [match.start() for match in re.finditer(re.escape(target_surface), text)]
+                for full_start in full_positions:
+                    full_end = full_start + len(form)
+                    # A suffix inside the full name is not independent
+                    # source-local coreference.  Require a second literal
+                    # target occurrence in the same short context.
+                    separate = [
+                        position for position in target_positions
+                        if position < full_start or position >= full_end
+                    ]
+                    if not separate:
+                        continue
+                    target_start = min(separate, key=lambda position: (abs(position - full_start), position))
+                    span_start = min(full_start, target_start)
+                    span_end = max(full_end, target_start + len(target_surface))
+                    if span_end - span_start > 300:
+                        continue
+                    occurrences.append((_text(evidence_ref), text[span_start:span_end], text))
+            if occurrences:
+                ref, exact_span, _ = occurrences[0]
+                matches.append((dict(candidate), form, ref, exact_span))
+                break
+    unique_people = {_text(candidate.get("person_id")) for candidate, _, _, _ in matches}
+    if len(unique_people) != 1:
+        return {**dict(validation), "valid_entities": entities, "valid_relations": relations}, []
+
+    candidate, full_form, ref, exact_span = matches[0]
+    target = target_rows[0]
+    full_entity = next((row for row in entities if _matching_form(_text(row.get("surface"))) == _matching_form(full_form)), None)
+    if full_entity is None:
+        used_keys = {_text(row.get("entity_key")) for row in entities}
+        index = 0
+        while f"e{index}" in used_keys:
+            index += 1
+        full_entity = {
+            "entity_key": f"e{index}",
+            "surface": full_form,
+            "entity_kind": "named_person",
+            "reference_form": "full_name",
+            "evidence_ref": ref,
+            "exact_span": exact_span,
+        }
+        entities.append(full_entity)
+    if any(
+        _text(row.get("relation_class")) == "identity_name"
+        and {_text(row.get("subject_entity_key")), _text(row.get("object_entity_key"))}
+        == {_text(target.get("entity_key")), _text(full_entity.get("entity_key"))}
+        for row in relations
+    ):
+        return {**dict(validation), "valid_entities": entities, "valid_relations": relations}, []
+
+    relation_id = "python-identity-name-expansion-0"
+    relation = {
+        "relation_id": relation_id,
+        "subject_entity_key": target.get("entity_key"),
+        "object_entity_key": full_entity.get("entity_key"),
+        "relation_surface": full_form,
+        "relation_class": "identity_name",
+        "evidence_ref": ref,
+        "exact_span": exact_span,
+        "confidence": "high",
+    }
+    relations.append(relation)
+    derivation = {
+        "assertion_id": relation_id,
+        "derivation": "target_suffix_within_unique_existing_candidate_form",
+        "target_entity_key": target.get("entity_key"),
+        "full_name_entity_key": full_entity.get("entity_key"),
+        "target_surface": target_surface,
+        "full_name_surface": full_form,
+        "candidate_key": candidate.get("candidate_key"),
+        "person_id": candidate.get("person_id"),
+        "evidence_ref": ref,
+        "exact_span": exact_span,
+        "hard_conflict": False,
+    }
+    return {**dict(validation), "valid_entities": entities, "valid_relations": relations}, [derivation]
+
+
 def _anchor_positions(raw: str, anchors: Sequence[str]) -> list[tuple[int, int, str]]:
     positions: list[tuple[int, int, str]] = []
     for anchor in sorted({_text(x) for x in anchors if _text(x)}, key=lambda x: (-len(x), x)):
@@ -700,6 +840,11 @@ def normalize_card(
         for row in bundle.get("passages", [])
         if isinstance(row, Mapping) and row.get("ref")
     }
+    validation, identity_expansions = _source_grounded_identity_expansions(
+        validation,
+        case=case,
+        evidence_rows=evidence_rows,
+    )
     context = "\n".join(_source_text(row) for row in evidence_rows.values())
     registry = _contextual_registry(catalog)
     seed = _entity_seed(case)
@@ -915,6 +1060,7 @@ def normalize_card(
         "entities": entity_results,
         "relations": relations,
         "rejected_normalized_relations": rejected_normalized_relations,
+        "source_grounded_identity_expansions": identity_expansions,
         "temporal_assertions": temporal,
         "candidates": candidates,
         "candidate_projection_only": True,
@@ -1075,6 +1221,12 @@ TEMPORAL_ATOM_FILL_SYSTEM = (
     "重新阅读给定 Story 原文；Python 已验证的 TemporalEvidenceAtoms 只是原文指针，不得把 role_hint 当成既定事实。"
     "填入既有 Temporal Card，并区分 scene_time、later_outcome、background_context 与 quoted_precedent；"
     "不修改 H0A。最多四条。"
+)
+TEMPORAL_ANCHOR_ATOM_SYSTEM = (
+    TEMPORAL_ATOM_SYSTEM
+    + "输入还包含 Python 机械检出的 visible_temporal_surfaces；它们只是逐字 recall hints，不是历史结论。"
+    "必须结合上下文判断其是否构成有意义的时间证据，并区分 scene_time、background_context、later_outcome、"
+    "quoted_precedent、relative_person_time、office_context 或 uncertain；不必输出无关 hint。"
 )
 
 
@@ -1670,6 +1822,114 @@ def temporal_atom_fill_prompt(story: Mapping[str, Any], grounded: Mapping[str, A
     }
 
 
+def _original_surface(value: Any) -> str:
+    if isinstance(value, Mapping):
+        return _text(value.get("original") or value.get("traditional") or value.get("name"))
+    return _text(value)
+
+
+def visible_temporal_anchor_registry() -> dict[str, dict[str, Any]]:
+    """Build a lexical-only anchor registry from frozen H0A data."""
+
+    result: dict[str, dict[str, Any]] = {}
+
+    def add(surface: str, kind: str, source: str) -> None:
+        surface = _text(surface)
+        if len(surface) < 2:
+            return
+        row = result.setdefault(surface, {"surface": surface, "registry_kinds": [], "registry_sources": []})
+        if kind not in row["registry_kinds"]:
+            row["registry_kinds"].append(kind)
+        if source not in row["registry_sources"]:
+            row["registry_sources"].append(source)
+
+    rulers_path = ROOT / "data/annotation/ruler-identities-e0.json"
+    if rulers_path.is_file():
+        for row in json.loads(rulers_path.read_text(encoding="utf-8")).get("records", []):
+            add(_original_surface(row.get("canonical_title")), "ruler_title", "ruler-identities-e0")
+            for alias in row.get("aliases", []):
+                add(_original_surface(alias), "ruler_title", "ruler-identities-e0")
+
+    evidence_path = ROOT / "data/annotation/story-temporal-evidence-h0a.json"
+    if evidence_path.is_file():
+        for row in json.loads(evidence_path.read_text(encoding="utf-8")).get("records", []):
+            candidate = row.get("normalized_candidate") if isinstance(row.get("normalized_candidate"), Mapping) else {}
+            era_name = _text(candidate.get("era_name"))
+            if era_name:
+                add(era_name, "reign_name", "story-temporal-evidence-h0a")
+
+    events_path = ROOT / "data/annotation/historical-events-h0a.json"
+    if events_path.is_file():
+        for row in json.loads(events_path.read_text(encoding="utf-8")).get("records", []):
+            names = [_text(row.get("canonical_name")), *[_text(value) for value in row.get("aliases", [])]]
+            for name in names:
+                add(name, "historical_event", "historical-events-h0a")
+            canonical = _text(row.get("canonical_name"))
+            stem = re.split(r"之[亂难難]", canonical, maxsplit=1)[0]
+            if stem and stem != canonical:
+                add(stem, "historical_event_actor", "historical-events-h0a")
+
+    return {key: result[key] for key in sorted(result, key=lambda value: (-len(value), value))}
+
+
+def scan_visible_temporal_anchors(windows: Sequence[Mapping[str, Any]]) -> list[dict[str, Any]]:
+    """Report literal temporal-looking surfaces without assigning semantics."""
+
+    registry = visible_temporal_anchor_registry()
+    rows: list[dict[str, Any]] = []
+    seen: set[tuple[str, str, int]] = set()
+    era_names = [surface for surface, row in registry.items() if "reign_name" in row.get("registry_kinds", [])]
+    era_alternation = "|".join(re.escape(value) for value in sorted(era_names, key=lambda value: (-len(value), value)))
+    year_number = r"(?:元|[一二三四五六七八九十百千〇零兩两0-9]+)年"
+    explicit_date = re.compile(
+        (rf"(?:{era_alternation}){year_number}|" if era_alternation else "")
+        + year_number
+        + r"|(?:歲|岁)在[甲乙丙丁戊己庚辛壬癸][子丑寅卯辰巳午未申酉戌亥]"
+    )
+    for window in windows:
+        ref = _text(window.get("ref"))
+        text = str(window.get("evidence_text") or "")
+        for surface, registry_row in registry.items():
+            start = 0
+            while True:
+                position = text.find(surface, start)
+                if position < 0:
+                    break
+                key = (ref, surface, position)
+                if key not in seen:
+                    seen.add(key)
+                    rows.append(
+                        {
+                            "surface": surface,
+                            "evidence_ref": ref,
+                            "exact_occurrence": surface,
+                            "char_start": position,
+                            "char_end_exclusive": position + len(surface),
+                            "lexical_source": "historical_registry",
+                            "registry_kinds": registry_row["registry_kinds"],
+                        }
+                    )
+                start = position + len(surface)
+        for match in explicit_date.finditer(text):
+            surface = match.group(0)
+            key = (ref, surface, match.start())
+            if key in seen:
+                continue
+            seen.add(key)
+            rows.append(
+                {
+                    "surface": surface,
+                    "evidence_ref": ref,
+                    "exact_occurrence": surface,
+                    "char_start": match.start(),
+                    "char_end_exclusive": match.end(),
+                    "lexical_source": "explicit_date_pattern",
+                    "registry_kinds": ["explicit_date_pattern"],
+                }
+            )
+    return sorted(rows, key=lambda row: (_text(row.get("evidence_ref")), int(row.get("char_start") or 0), -len(_text(row.get("surface"))), _text(row.get("surface"))))
+
+
 def person_fill_prompt(target: Mapping[str, Any], grounded: Mapping[str, Any], windows: Sequence[Mapping[str, Any]]) -> dict[str, Any]:
     refs = {_text(row.get("evidence_ref")) for row in grounded.get("valid_observations", [])}
     selected = [dict(row) for row in windows if _text(row.get("ref")) in refs] or [dict(row) for row in windows]
@@ -1693,8 +1953,15 @@ def person_read_prompt(target: Mapping[str, Any], windows: Sequence[Mapping[str,
     return {"target": dict(target), "source_passages": _model_windows(windows)}
 
 
-def temporal_read_prompt(story: Mapping[str, Any], windows: Sequence[Mapping[str, Any]]) -> dict[str, Any]:
-    return {"story": dict(story), "source_passages": _model_windows(windows)}
+def temporal_read_prompt(
+    story: Mapping[str, Any],
+    windows: Sequence[Mapping[str, Any]],
+    visible_temporal_surfaces: Sequence[Mapping[str, Any]] | None = None,
+) -> dict[str, Any]:
+    payload = {"story": dict(story), "source_passages": _model_windows(windows)}
+    if visible_temporal_surfaces is not None:
+        payload["visible_temporal_surfaces"] = [dict(row) for row in visible_temporal_surfaces]
+    return payload
 
 
 def normalize_person_fill(
@@ -1755,13 +2022,25 @@ def story_temporal_h0a_compatibility(item: Mapping[str, Any], story_id: str) -> 
     evidence = json.loads(evidence_path.read_text(encoding="utf-8")).get("records", [])
     anchors = json.loads(anchor_path.read_text(encoding="utf-8")).get("records", [])
     span = _text(item.get("exact_span")); surface = _text(item.get("temporal_surface")); role = _text(item.get("temporal_role"))
+    evidence_ref = _text(item.get("evidence_ref"))
+    ref_section = "main_text" if evidence_ref.endswith("-main") else ("liu_annotation" if "-liu-" in evidence_ref else "")
+    annotation_match = re.search(r"-liu-(annotation-[0-9]+)$", evidence_ref)
+    ref_annotation = annotation_match.group(1) if annotation_match else None
     matches = []
     for row in evidence:
         if not isinstance(row, Mapping) or row.get("story_id") != story_id:
             continue
         raw = _text(row.get("raw_surface"))
         if raw and (raw in span or surface in raw or raw in surface):
-            matches.append(row)
+            source_span = row.get("source_span") if isinstance(row.get("source_span"), Mapping) else {}
+            source_section = _text(source_span.get("section"))
+            source_annotation = _text(source_span.get("annotation_id")) or None
+            source_match = bool(
+                ref_section
+                and source_section == ref_section
+                and (ref_section != "liu_annotation" or ref_annotation == source_annotation)
+            )
+            matches.append((dict(row), source_match, len(raw)))
     role_map = {
         "direct_story_time": {"scene_time"},
         "later_outcome": {"later_outcome"},
@@ -1770,7 +2049,10 @@ def story_temporal_h0a_compatibility(item: Mapping[str, Any], story_id: str) -> 
         "person_activity_context": {"relative_person_time", "later_outcome", "office_context", "uncertain"},
         "event_context": {"scene_time", "background_context", "uncertain"},
     }
-    for row in matches:
+    # Prefer the exact Story layer/annotation and the longest matching H0A
+    # surface.  A shorter era-name substring in another annotation must not
+    # override an exact era-year expression in the current passage.
+    for row, _, _ in sorted(matches, key=lambda value: (-int(value[1]), -value[2], _text(value[0].get("evidence_record_id")))):
         expected = role_map.get(_text(row.get("relation_to_story")), {"uncertain"})
         if role not in expected and role != "uncertain":
             return {
@@ -1816,6 +2098,7 @@ __all__ = [
     "TEMPORAL_ATOM_SYSTEM",
     "PERSON_ATOM_FILL_SYSTEM",
     "TEMPORAL_ATOM_FILL_SYSTEM",
+    "TEMPORAL_ANCHOR_ATOM_SYSTEM",
     "card_parameters_schema",
     "function_definition",
     "tool_choice",
@@ -1840,6 +2123,8 @@ __all__ = [
     "temporal_fill_prompt",
     "person_atom_fill_prompt",
     "temporal_atom_fill_prompt",
+    "visible_temporal_anchor_registry",
+    "scan_visible_temporal_anchors",
     "validate_person_read",
     "validate_person_fill",
     "validate_temporal_read",

@@ -1,0 +1,139 @@
+{
+  "all_lanes_frozen": true,
+  "candidate_projection_only": true,
+  "canonical_write_back": false,
+  "deepseek": {
+    "preflight_calls": 1,
+    "preflight_tokens": {
+      "completion_tokens": 1,
+      "prompt_tokens": 8,
+      "total_tokens": 9
+    },
+    "semantic_calls": 20,
+    "semantic_tokens": {
+      "completion_tokens": 6550,
+      "prompt_tokens": 27712,
+      "total_tokens": 34262
+    },
+    "total_calls": 21,
+    "total_tokens_including_preflight": 34271
+  },
+  "frozen_algorithm": {
+    "person": "SELECT -> READ EVIDENCE ATOMS -> GROUND -> FILL -> RESOLVE/NORMALIZE -> CANDIDATE DB",
+    "temporal": "SELECT -> VISIBLE ANCHOR SCAN -> READ TEMPORAL ATOMS -> GROUND -> FILL -> H0A NORMALIZATION -> CANDIDATE DB"
+  },
+  "person": {
+    "api_calls": 0,
+    "lane_frozen": true,
+    "metrics": {
+      "ambiguous": 0,
+      "collapsed_nonidentity_self_relations": 0,
+      "identity_propagations": 1,
+      "nonperson_person_id_anomalies": 0,
+      "relation_validation_failures": 0,
+      "resolved_existing": 8,
+      "resolved_new_candidate": 2,
+      "unresolved": 3
+    },
+    "regression_checks": {
+      "chen_qian_candidate_only": true,
+      "collapsed_nonidentity_self_relations_zero": true,
+      "heldout_unchanged": true,
+      "nonperson_person_id_zero": true,
+      "shan_tao_unchanged": true,
+      "xuan_unresolved": true,
+      "yi_resolves_person_053": true,
+      "yu_taiwei_unchanged": true,
+      "yu_unresolved": true
+    }
+  },
+  "run_id": "20260825T-HNG2-C3-01",
+  "stage": "hng2-c3-final-algorithm-closeout",
+  "temporal": {
+    "lane_frozen": true,
+    "metrics": {
+      "canonical_write_back": false,
+      "false_temporal_promotions": [],
+      "grounding_rejection_reasons": {
+        "reference_surface_not_in_span": 3
+      },
+      "grounding_rejects": 3,
+      "h0a_compatible": 10,
+      "h0a_conflict_explanations": [
+        {
+          "explainable_non_scene_role_disagreement": true,
+          "explanation_kind": "conservative_non_scene_exclusion",
+          "h0a_relation_to_story": "direct_story_time",
+          "model_role": "later_outcome",
+          "scene_projection_blocked": true,
+          "story_id": "17-shangshi-006",
+          "temporal_surface": "咸和中"
+        },
+        {
+          "explainable_non_scene_role_disagreement": true,
+          "explanation_kind": "both_non_scene",
+          "h0a_relation_to_story": "earlier_background",
+          "model_role": "later_outcome",
+          "scene_projection_blocked": true,
+          "story_id": "17-shangshi-006",
+          "temporal_surface": "咸和中"
+        },
+        {
+          "explainable_non_scene_role_disagreement": true,
+          "explanation_kind": "both_non_scene",
+          "h0a_relation_to_story": "later_outcome",
+          "model_role": "background_context",
+          "scene_projection_blocked": true,
+          "story_id": "06-yaliang-017",
+          "temporal_surface": "咸和"
+        }
+      ],
+      "h0a_conflicting": 3,
+      "later_outcome_correctly_excluded": 6,
+      "maximum_latency_seconds": 2.954,
+      "median_latency_seconds": 2.231,
+      "no_temporal_evidence_available": [
+        "01-dexing-014"
+      ],
+      "parsed_calls": 20,
+      "preflight": {
+        "elapsed_seconds": 0.534,
+        "end_time": "2026-08-25T04:20:03Z",
+        "model": "deepseek-v4-flash",
+        "response_model": "deepseek-v4-flash",
+        "start_time": "2026-08-25T04:20:02Z",
+        "status": "reachable",
+        "usage": {
+          "completion_tokens": 1,
+          "prompt_tokens": 8,
+          "total_tokens": 9
+        }
+      },
+      "provider_or_parse_failures": 0,
+      "quoted_or_background_correctly_excluded": 10,
+      "regression_checks": {
+        "dexing_017_h0a_compatible": true,
+        "dexing_017_wudi_considered": true,
+        "dexing_017_wudi_detected": true,
+        "wenxue_022_zhengshi_quoted_precedent": true,
+        "yaliang_017_later_outcome_excluded": true
+      },
+      "rejected_t2_assertions": 2,
+      "response_truncated": 0,
+      "semantic_calls": 20,
+      "story_count": 10,
+      "temporal_evidence_missed": [],
+      "temporal_lane_frozen": true,
+      "token_usage": {
+        "completion_tokens": 6550,
+        "prompt_tokens": 27712,
+        "total_tokens": 34262
+      },
+      "valid_t1_atoms": 30,
+      "valid_t2_assertions": 28,
+      "visible_anchor_recall_misses": [],
+      "visible_surfaces_considered_by_t1": 20,
+      "visible_temporal_surfaces_detected": 22
+    }
+  }
+}
