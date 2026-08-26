@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"candidate_evaluations\": [{\"candidate_key\": \"c0\", \"family_assessments\": [{\"family\": \"confirmed_story_profile\", \"state\": \"contradiction\", \"evidence_ids\": [\"ev3\"]}, {\"family\": \"era_chronology\", \"state\": \"neutral\", \"evidence_ids\": []}, {\"family\": \"known_participants\", \"state\": \"contradiction\", \"evidence_ids\": [\"ev2\"]}, {\"family\": \"office_title_compatibility\", \"state\": \"neutral\", \"evidence_ids\": []}, {\"family\": \"person_relations_network\", \"state\": \"neutral\", \"evidence_ids\": []}, {\"family\": \"relevant_source_evidence\", \"state\": \"contradiction\", \"evidence_ids\": [\"ev0\"]}, {\"family\": \"story_local_context\", \"state\": \"contradiction\", \"evidence_ids\": [\"ev0\"]}], \"cross_story_consistency\": \"contradiction\", \"hard_conflict\": true}], \"leading_candidate_key\": null, \"note\": \"The occurrence surface is '步兵' (title reference), and the story context identifies 步兵 as the person who says '仲容已預之' to 阮渾. The candidate c0 is 石苞 (courtesy name 仲容). However, the story text (ev0) shows that 步兵 is the speaker addressing 阮渾, saying that 仲容 (i.e., 石苞/阮咸) has already done it. The known participant p0 is 石苞 with relation '曰' (speaker), but the surface being evaluated is '步兵' — the title holder who speaks. The candidate profile (ev3) lists 石苞 with aliases 咸/籍/阮渾 and courtesy name 仲容, but 仲容 is the person being referenced (the one who '已預之'), not the speaker 步兵. The speaker 步兵 is a different person (阮籍, who held the title 步兵校尉). The candidate c0 (石苞/仲容) is the object of the statement, not the title-holder 步兵. This creates a hard conflict: the candidate's identity (仲容) is the referent of the statement, not the surface '步兵' being evaluated. The known participant ev2 lists 石苞 as the speaker ('曰'), but the surface '步兵' is the title of the speaker, and 石苞's courtesy name is 仲容, not 步兵. Thus c0 does not match the surface '步兵'.\"}]}",
+              "name": "submit_hdb2_grounded_identity_evaluation"
+            },
+            "id": "call_00_5aqFHpOeSyxdOuTOFZNU7236",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787755921,
+  "id": "53aa01b8-2281-4138-b4cb-15775d28f704",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 582,
+    "prompt_cache_hit_tokens": 896,
+    "prompt_cache_miss_tokens": 1187,
+    "prompt_tokens": 2083,
+    "prompt_tokens_details": {
+      "cached_tokens": 896
+    },
+    "total_tokens": 2665
+  }
+}

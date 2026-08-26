@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"candidate_evaluations\": [{\"candidate_key\": \"c0\", \"family_assessments\": [{\"family\": \"confirmed_story_profile\", \"state\": \"support\", \"evidence_ids\": [\"ev2\"]}, {\"family\": \"era_chronology\", \"state\": \"neutral\", \"evidence_ids\": []}, {\"family\": \"known_participants\", \"state\": \"neutral\", \"evidence_ids\": []}, {\"family\": \"office_title_compatibility\", \"state\": \"neutral\", \"evidence_ids\": []}, {\"family\": \"person_relations_network\", \"state\": \"support\", \"evidence_ids\": [\"ev2\"]}, {\"family\": \"relevant_source_evidence\", \"state\": \"neutral\", \"evidence_ids\": []}, {\"family\": \"story_local_context\", \"state\": \"neutral\", \"evidence_ids\": []}], \"cross_story_consistency\": \"compatible\", \"hard_conflict\": false}, {\"candidate_key\": \"c1\", \"family_assessments\": [{\"family\": \"confirmed_story_profile\", \"state\": \"support\", \"evidence_ids\": [\"ev3\"]}, {\"family\": \"era_chronology\", \"state\": \"neutral\", \"evidence_ids\": []}, {\"family\": \"known_participants\", \"state\": \"neutral\", \"evidence_ids\": []}, {\"family\": \"office_title_compatibility\", \"state\": \"neutral\", \"evidence_ids\": []}, {\"family\": \"person_relations_network\", \"state\": \"support\", \"evidence_ids\": [\"ev3\"]}, {\"family\": \"relevant_source_evidence\", \"state\": \"neutral\", \"evidence_ids\": []}, {\"family\": \"story_local_context\", \"state\": \"neutral\", \"evidence_ids\": []}], \"cross_story_consistency\": \"compatible\", \"hard_conflict\": false}], \"leading_candidate_key\": null, \"note\": \"本次 occurrence 的 surface 是「太傅鄭冲」，即被咨詢的對象太傅鄭冲。兩個候選 c0（羊祜）和 c1（賈充）都是故事 03-zhengshi-006 中的參與者（羊祜與賈充共咨太傅鄭冲），但兩者都不是「太傅鄭冲」本人。occurrence 的語義類型是 title_reference，指涉的是鄭冲（太傅），而非羊祜或賈充。兩個候選的 profile 都與故事 03-zhengshi-006 相關（c0 有「共」互動，c1 也有「共」互動），但均無證據表明他們是「太傅鄭冲」。因此沒有候選能匹配此 occurrence 所指人物，leading candidate 為 null。\"}]}",
+              "name": "submit_hdb2_grounded_identity_evaluation"
+            },
+            "id": "call_00_sy8Q05L5ECbCm327ypBR4015",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787755942,
+  "id": "2382f631-d70c-4942-8184-d37d789de849",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 620,
+    "prompt_cache_hit_tokens": 2816,
+    "prompt_cache_miss_tokens": 71,
+    "prompt_tokens": 2887,
+    "prompt_tokens_details": {
+      "cached_tokens": 2816
+    },
+    "total_tokens": 3507
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"candidate_evaluations\": [{\"candidate_key\": \"c0\", \"family_assessments\": [{\"family\": \"confirmed_story_profile\", \"state\": \"neutral\", \"evidence_ids\": [\"ev3\"]}, {\"family\": \"era_chronology\", \"state\": \"neutral\", \"evidence_ids\": []}, {\"family\": \"known_participants\", \"state\": \"neutral\", \"evidence_ids\": [\"ev2\"]}, {\"family\": \"office_title_compatibility\", \"state\": \"neutral\", \"evidence_ids\": []}, {\"family\": \"person_relations_network\", \"state\": \"neutral\", \"evidence_ids\": []}, {\"family\": \"relevant_source_evidence\", \"state\": \"contradiction\", \"evidence_ids\": [\"ev0\"]}, {\"family\": \"story_local_context\", \"state\": \"contradiction\", \"evidence_ids\": [\"ev0\"]}], \"cross_story_consistency\": \"contradiction\", \"hard_conflict\": true}, {\"candidate_key\": \"c1\", \"family_assessments\": [{\"family\": \"confirmed_story_profile\", \"state\": \"neutral\", \"evidence_ids\": [\"ev4\"]}, {\"family\": \"era_chronology\", \"state\": \"neutral\", \"evidence_ids\": []}, {\"family\": \"known_participants\", \"state\": \"neutral\", \"evidence_ids\": [\"ev2\"]}, {\"family\": \"office_title_compatibility\", \"state\": \"neutral\", \"evidence_ids\": []}, {\"family\": \"person_relations_network\", \"state\": \"neutral\", \"evidence_ids\": []}, {\"family\": \"relevant_source_evidence\", \"state\": \"strong_support\", \"evidence_ids\": [\"ev0\"]}, {\"family\": \"story_local_context\", \"state\": \"strong_support\", \"evidence_ids\": [\"ev0\"]}], \"cross_story_consistency\": \"supports_profile\", \"hard_conflict\": false}, {\"candidate_key\": \"c2\", \"family_assessments\": [{\"family\": \"confirmed_story_profile\", \"state\": \"neutral\", \"evidence_ids\": [\"ev5\"]}, {\"family\": \"era_chronology\", \"state\": \"neutral\", \"evidence_ids\": []}, {\"family\": \"known_participants\", \"state\": \"neutral\", \"evidence_ids\": [\"ev2\"]}, {\"family\": \"office_title_compatibility\", \"state\": \"neutral\", \"evidence_ids\": []}, {\"family\": \"person_relations_network\", \"state\": \"neutral\", \"evidence_ids\": []}, {\"family\": \"relevant_source_evidence\", \"state\": \"contradiction\", \"evidence_ids\": [\"ev0\"]}, {\"family\": \"story_local_context\", \"state\": \"contradiction\", \"evidence_ids\": [\"ev0\"]}], \"cross_story_consistency\": \"contradiction\", \"hard_conflict\": true}], \"leading_candidate_key\": \"c1\", \"note\": \"本次 occurrence 的 surface 是\\\"王含\\\"。ev0 正文明确记载\\\"王含作廬江郡貪濁狼籍，王敦護其兄\\\"，即王含是王敦之兄，是廬江郡太守。c1 候选名即\\\"王含\\\"，与 surface 完全匹配，且 ev0 直接支持。c0（何充）在文中是\\\"敦主簿\\\"，是另一人物；c2（王敦）在文中是\\\"護其兄\\\"者，即王含之弟，均非本 occurrence 所指。c1 无 confirmed_story_ids 但 ev0 直接匹配 surface，构成 strong_support。\"}",
+              "name": "submit_hdb2_grounded_identity_evaluation"
+            },
+            "id": "call_00_pmZOT9nWTWRhOxQ577Hu7996",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787755814,
+  "id": "80ad29ea-8499-49a1-b859-2f37dcdda0dc",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 831,
+    "prompt_cache_hit_tokens": 3712,
+    "prompt_cache_miss_tokens": 40,
+    "prompt_tokens": 3752,
+    "prompt_tokens_details": {
+      "cached_tokens": 3712
+    },
+    "total_tokens": 4583
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"candidate_evaluations\": [{\"candidate_key\": \"c0\", \"family_assessments\": [{\"family\": \"confirmed_story_profile\", \"state\": \"neutral\", \"evidence_ids\": [\"ev3\"]}, {\"family\": \"era_chronology\", \"state\": \"neutral\", \"evidence_ids\": []}, {\"family\": \"known_participants\", \"state\": \"neutral\", \"evidence_ids\": []}, {\"family\": \"office_title_compatibility\", \"state\": \"neutral\", \"evidence_ids\": []}, {\"family\": \"person_relations_network\", \"state\": \"neutral\", \"evidence_ids\": []}, {\"family\": \"relevant_source_evidence\", \"state\": \"neutral\", \"evidence_ids\": []}, {\"family\": \"story_local_context\", \"state\": \"neutral\", \"evidence_ids\": []}], \"cross_story_consistency\": \"compatible\", \"hard_conflict\": false}, {\"candidate_key\": \"c1\", \"family_assessments\": [{\"family\": \"confirmed_story_profile\", \"state\": \"neutral\", \"evidence_ids\": [\"ev4\"]}, {\"family\": \"era_chronology\", \"state\": \"neutral\", \"evidence_ids\": []}, {\"family\": \"known_participants\", \"state\": \"neutral\", \"evidence_ids\": []}, {\"family\": \"office_title_compatibility\", \"state\": \"neutral\", \"evidence_ids\": []}, {\"family\": \"person_relations_network\", \"state\": \"neutral\", \"evidence_ids\": []}, {\"family\": \"relevant_source_evidence\", \"state\": \"neutral\", \"evidence_ids\": []}, {\"family\": \"story_local_context\", \"state\": \"neutral\", \"evidence_ids\": []}], \"cross_story_consistency\": \"compatible\", \"hard_conflict\": false}, {\"candidate_key\": \"c2\", \"family_assessments\": [{\"family\": \"confirmed_story_profile\", \"state\": \"support\", \"evidence_ids\": [\"ev5\"]}, {\"family\": \"era_chronology\", \"state\": \"neutral\", \"evidence_ids\": []}, {\"family\": \"known_participants\", \"state\": \"neutral\", \"evidence_ids\": []}, {\"family\": \"office_title_compatibility\", \"state\": \"neutral\", \"evidence_ids\": []}, {\"family\": \"person_relations_network\", \"state\": \"neutral\", \"evidence_ids\": []}, {\"family\": \"relevant_source_evidence\", \"state\": \"support\", \"evidence_ids\": [\"ev0\"]}, {\"family\": \"story_local_context\", \"state\": \"support\", \"evidence_ids\": [\"ev0\"]}], \"cross_story_consistency\": \"supports_profile\", \"hard_conflict\": false}], \"leading_candidate_key\": \"c2\", \"note\": \"本次 occurrence 的 surface 是\\\"諸葛道明\\\"，故事 17-shangshi-008 正文明确提到\\\"諸葛道明女為庾兒婦\\\"，即諸葛道明是庾亮兒媳之父。c2 的 canonical_name 正是\\\"諸葛道明\\\"，且其 profile 无已确认 story（ev5 为空 profile），与本次 occurrence 完全吻合。c0（庾亮）和 c1（蘇峻）在故事中作为已知参与者出现（ev2），但 occurrence 的 surface 是\\\"諸葛道明\\\"，并非庾亮或蘇峻本人。c0 的 confirmed_story_ids 包含 17-shangshi-008，说明庾亮在该故事中出现，但 occurrence 指代的是諸葛道明而非庾亮。c2 是唯一与 surface 直接匹配的候选。\"}",
+              "name": "submit_hdb2_grounded_identity_evaluation"
+            },
+            "id": "call_00_4DoadzVcofZS7wMEYDI32936",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787755930,
+  "id": "9ee9600e-0009-40a0-84c1-ccd11e8ade81",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 838,
+    "prompt_cache_hit_tokens": 896,
+    "prompt_cache_miss_tokens": 2162,
+    "prompt_tokens": 3058,
+    "prompt_tokens_details": {
+      "cached_tokens": 896
+    },
+    "total_tokens": 3896
+  }
+}

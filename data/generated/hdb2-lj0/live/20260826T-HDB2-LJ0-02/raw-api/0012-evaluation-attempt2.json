@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"candidate_evaluations\": [{\"candidate_key\": \"c0\", \"family_assessments\": [{\"family\": \"confirmed_story_profile\", \"state\": \"strong_support\", \"evidence_ids\": [\"ev7\"]}, {\"family\": \"era_chronology\", \"state\": \"neutral\", \"evidence_ids\": []}, {\"family\": \"known_participants\", \"state\": \"strong_support\", \"evidence_ids\": [\"ev6\"]}, {\"family\": \"office_title_compatibility\", \"state\": \"strong_support\", \"evidence_ids\": [\"ev0\", \"ev3\"]}, {\"family\": \"person_relations_network\", \"state\": \"support\", \"evidence_ids\": [\"ev0\", \"ev3\"]}, {\"family\": \"relevant_source_evidence\", \"state\": \"strong_support\", \"evidence_ids\": [\"ev0\", \"ev3\", \"ev4\"]}, {\"family\": \"story_local_context\", \"state\": \"strong_support\", \"evidence_ids\": [\"ev0\", \"ev4\"]}], \"cross_story_consistency\": \"supports_profile\", \"hard_conflict\": false}, {\"candidate_key\": \"c1\", \"family_assessments\": [{\"family\": \"confirmed_story_profile\", \"state\": \"support\", \"evidence_ids\": [\"ev8\"]}, {\"family\": \"era_chronology\", \"state\": \"neutral\", \"evidence_ids\": []}, {\"family\": \"known_participants\", \"state\": \"support\", \"evidence_ids\": [\"ev6\"]}, {\"family\": \"office_title_compatibility\", \"state\": \"neutral\", \"evidence_ids\": []}, {\"family\": \"person_relations_network\", \"state\": \"support\", \"evidence_ids\": [\"ev0\"]}, {\"family\": \"relevant_source_evidence\", \"state\": \"support\", \"evidence_ids\": [\"ev0\", \"ev4\"]}, {\"family\": \"story_local_context\", \"state\": \"support\", \"evidence_ids\": [\"ev0\", \"ev4\"]}], \"cross_story_consistency\": \"compatible\", \"hard_conflict\": false}], \"leading_candidate_key\": \"c0\", \"note\": \"本次 occurrence 的 surface 是「丹陽尹」，即 office_reference。c0（劉惔）的 profile 明確載有 title「丹陽尹」（ev7），且 ev3 晉書列傳明確記載「劉惔字真長…累遷丹陽尹」，與 story 中「劉真長為丹陽尹」完全吻合。c1（王羲之）在 story 中僅以「王逸少在坐」出現，是旁觀者而非丹陽尹，其 title 為「王右軍」而非丹陽尹。ev0/ev4 正文明確「劉真長為丹陽尹」，c0 的 aliases 含「劉真長」「真長」，與正文一致。c1 雖在坐（ev0），但非 office 所指。故 c0 為 leading candidate。\"}}",
+              "name": "submit_hdb2_grounded_identity_evaluation"
+            },
+            "id": "call_00_YRv2RPz3oG0G2RMgpd0x5935",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787755859,
+  "id": "bb6d4121-a264-4b24-8894-b98ac167acb5",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 690,
+    "prompt_cache_hit_tokens": 4608,
+    "prompt_cache_miss_tokens": 128,
+    "prompt_tokens": 4736,
+    "prompt_tokens_details": {
+      "cached_tokens": 4608
+    },
+    "total_tokens": 5426
+  }
+}

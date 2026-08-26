@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"candidate_evaluations\": [{\"candidate_key\": \"c0\", \"family_assessments\": [{\"family\": \"confirmed_story_profile\", \"state\": \"neutral\", \"evidence_ids\": [\"ev3\"]}, {\"family\": \"era_chronology\", \"state\": \"neutral\", \"evidence_ids\": []}, {\"family\": \"known_participants\", \"state\": \"neutral\", \"evidence_ids\": [\"ev2\"]}, {\"family\": \"office_title_compatibility\", \"state\": \"neutral\", \"evidence_ids\": []}, {\"family\": \"person_relations_network\", \"state\": \"neutral\", \"evidence_ids\": []}, {\"family\": \"relevant_source_evidence\", \"state\": \"neutral\", \"evidence_ids\": []}, {\"family\": \"story_local_context\", \"state\": \"neutral\", \"evidence_ids\": []}], \"cross_story_consistency\": \"compatible\", \"hard_conflict\": false}, {\"candidate_key\": \"c1\", \"family_assessments\": [{\"family\": \"confirmed_story_profile\", \"state\": \"strong_support\", \"evidence_ids\": [\"ev4\"]}, {\"family\": \"era_chronology\", \"state\": \"neutral\", \"evidence_ids\": []}, {\"family\": \"known_participants\", \"state\": \"support\", \"evidence_ids\": [\"ev2\"]}, {\"family\": \"office_title_compatibility\", \"state\": \"neutral\", \"evidence_ids\": []}, {\"family\": \"person_relations_network\", \"state\": \"neutral\", \"evidence_ids\": []}, {\"family\": \"relevant_source_evidence\", \"state\": \"strong_support\", \"evidence_ids\": [\"ev0\"]}, {\"family\": \"story_local_context\", \"state\": \"strong_support\", \"evidence_ids\": [\"ev0\"]}], \"cross_story_consistency\": \"supports_profile\", \"hard_conflict\": false}, {\"candidate_key\": \"c2\", \"family_assessments\": [{\"family\": \"confirmed_story_profile\", \"state\": \"neutral\", \"evidence_ids\": [\"ev5\"]}, {\"family\": \"era_chronology\", \"state\": \"neutral\", \"evidence_ids\": []}, {\"family\": \"known_participants\", \"state\": \"neutral\", \"evidence_ids\": [\"ev2\"]}, {\"family\": \"office_title_compatibility\", \"state\": \"neutral\", \"evidence_ids\": []}, {\"family\": \"person_relations_network\", \"state\": \"neutral\", \"evidence_ids\": []}, {\"family\": \"relevant_source_evidence\", \"state\": \"neutral\", \"evidence_ids\": []}, {\"family\": \"story_local_context\", \"state\": \"neutral\", \"evidence_ids\": []}], \"cross_story_consistency\": \"compatible\", \"hard_conflict\": false}, {\"candidate_key\": \"c3\", \"family_assessments\": [{\"family\": \"confirmed_story_profile\", \"state\": \"neutral\", \"evidence_ids\": [\"ev6\"]}, {\"family\": \"era_chronology\", \"state\": \"neutral\", \"evidence_ids\": []}, {\"family\": \"known_participants\", \"state\": \"neutral\", \"evidence_ids\": [\"ev2\"]}, {\"family\": \"office_title_compatibility\", \"state\": \"neutral\", \"evidence_ids\": []}, {\"family\": \"person_relations_network\", \"state\": \"neutral\", \"evidence_ids\": []}, {\"family\": \"relevant_source_evidence\", \"state\": \"neutral\", \"evidence_ids\": []}, {\"family\": \"story_local_context\", \"state\": \"neutral\", \"evidence_ids\": []}], \"cross_story_consistency\": \"compatible\", \"hard_conflict\": false}], \"leading_candidate_key\": \"c1\", \"note\": \"本次 occurrence 的 surface 是\\\"王夷甫\\\"，故事正文（ev0）明确以\\\"王夷甫\\\"为主角，描述其父爲平北將軍、夷甫在京師見僕射羊祜和尚書山濤。c1 的 canonical_name 正是\\\"王夷甫\\\"，且其 profile（ev4）虽无 confirmed stories，但名字与正文 surface 完全一致。c0（山濤）、c2（王戎）、c3（羊祜）在正文中都是被\\\"王夷甫\\\"所見/所論的其他人，不是 surface\\\"王夷甫\\\"所指。c1 的 relevant_source_evidence 和 story_local_context 均获 strong_support，leading candidate 为 c1。\"}",
+              "name": "submit_hdb2_grounded_identity_evaluation"
+            },
+            "id": "call_00_NZNJr62W1esWzAm6p9OB0409",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787755819,
+  "id": "3cf2ad6c-a344-4567-a81d-1a8e89cd9020",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 1014,
+    "prompt_cache_hit_tokens": 896,
+    "prompt_cache_miss_tokens": 3495,
+    "prompt_tokens": 4391,
+    "prompt_tokens_details": {
+      "cached_tokens": 896
+    },
+    "total_tokens": 5405
+  }
+}

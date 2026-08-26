@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"candidate_evaluations\": [{\"candidate_key\": \"c0\", \"family_assessments\": [{\"family\": \"confirmed_story_profile\", \"state\": \"neutral\", \"evidence_ids\": [\"ev3\"]}, {\"family\": \"era_chronology\", \"state\": \"neutral\", \"evidence_ids\": []}, {\"family\": \"known_participants\", \"state\": \"neutral\", \"evidence_ids\": [\"ev2\"]}, {\"family\": \"office_title_compatibility\", \"state\": \"neutral\", \"evidence_ids\": []}, {\"family\": \"person_relations_network\", \"state\": \"neutral\", \"evidence_ids\": []}, {\"family\": \"relevant_source_evidence\", \"state\": \"neutral\", \"evidence_ids\": [\"ev0\"]}, {\"family\": \"story_local_context\", \"state\": \"neutral\", \"evidence_ids\": [\"ev0\"]}], \"cross_story_consistency\": \"compatible\", \"hard_conflict\": false}, {\"candidate_key\": \"c1\", \"family_assessments\": [{\"family\": \"confirmed_story_profile\", \"state\": \"neutral\", \"evidence_ids\": [\"ev4\"]}, {\"family\": \"era_chronology\", \"state\": \"neutral\", \"evidence_ids\": []}, {\"family\": \"known_participants\", \"state\": \"neutral\", \"evidence_ids\": [\"ev2\"]}, {\"family\": \"office_title_compatibility\", \"state\": \"neutral\", \"evidence_ids\": []}, {\"family\": \"person_relations_network\", \"state\": \"neutral\", \"evidence_ids\": []}, {\"family\": \"relevant_source_evidence\", \"state\": \"neutral\", \"evidence_ids\": [\"ev0\"]}, {\"family\": \"story_local_context\", \"state\": \"neutral\", \"evidence_ids\": [\"ev0\"]}], \"cross_story_consistency\": \"compatible\", \"hard_conflict\": false}, {\"candidate_key\": \"c2\", \"family_assessments\": [{\"family\": \"confirmed_story_profile\", \"state\": \"neutral\", \"evidence_ids\": [\"ev5\"]}, {\"family\": \"era_chronology\", \"state\": \"neutral\", \"evidence_ids\": []}, {\"family\": \"known_participants\", \"state\": \"neutral\", \"evidence_ids\": []}, {\"family\": \"office_title_compatibility\", \"state\": \"neutral\", \"evidence_ids\": []}, {\"family\": \"person_relations_network\", \"state\": \"neutral\", \"evidence_ids\": []}, {\"family\": \"relevant_source_evidence\", \"state\": \"neutral\", \"evidence_ids\": [\"ev0\"]}, {\"family\": \"story_local_context\", \"state\": \"neutral\", \"evidence_ids\": [\"ev0\"]}], \"cross_story_consistency\": \"compatible\", \"hard_conflict\": false}], \"leading_candidate_key\": \"c2\", \"note\": \"本次 occurrence 的 surface 是「謝夫人」，即王凝之之妻謝氏。c2 的 canonical_name 正是「謝夫人」，與 surface 直接對應。c0（王凝之）和 c1（王羲之）都是故事中的其他人物（王凝之為謝夫人之夫，王羲之為其公公/逸少），並非被指稱的「謝夫人」本人。ev0 主文中「王凝之謝夫人」明確指稱謝夫人為王凝之之妻，與 c2 名稱吻合。c2 無 confirmed stories，但這不構成矛盾，僅為證據不足。c0/c1 與 surface「謝夫人」無直接對應，但也不構成硬衝突，故為 neutral。綜合判斷 c2 為最優候選。\"}}",
+              "name": "submit_hdb2_grounded_identity_evaluation"
+            },
+            "id": "call_00_BsWrVYR4a9XcewlsJYDw3872",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787755958,
+  "id": "677f5161-d88f-44fa-bc82-777894e80408",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 825,
+    "prompt_cache_hit_tokens": 2944,
+    "prompt_cache_miss_tokens": 39,
+    "prompt_tokens": 2983,
+    "prompt_tokens_details": {
+      "cached_tokens": 2944
+    },
+    "total_tokens": 3808
+  }
+}

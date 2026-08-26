@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"candidate_evaluations\": [{\"candidate_key\": \"c0\", \"family_assessments\": [{\"family\": \"confirmed_story_profile\", \"state\": \"support\", \"evidence_ids\": [\"ev3\"]}, {\"family\": \"era_chronology\", \"state\": \"neutral\", \"evidence_ids\": []}, {\"family\": \"known_participants\", \"state\": \"neutral\", \"evidence_ids\": []}, {\"family\": \"office_title_compatibility\", \"state\": \"support\", \"evidence_ids\": [\"ev0\"]}, {\"family\": \"person_relations_network\", \"state\": \"neutral\", \"evidence_ids\": []}, {\"family\": \"relevant_source_evidence\", \"state\": \"support\", \"evidence_ids\": [\"ev0\"]}, {\"family\": \"story_local_context\", \"state\": \"neutral\", \"evidence_ids\": [\"ev1\"]}], \"cross_story_consistency\": \"supports_profile\", \"hard_conflict\": false}], \"leading_candidate_key\": \"c0\", \"note\": \"本次 occurrence 的 surface 是\\\"王\\\"，指代\\\"王長史\\\"（王胡之），而非候選 c0（劉惔/劉尹）。候選 c0 是故事中的\\\"劉尹\\\"（真長），是與\\\"王\\\"互動的另一人物。候選 c0 的 profile 確認其為 02-yanyu-054 的 confirmed story，且 ev0 中\\\"劉尹\\\"即真長（劉惔），與候選 profile 的 title\\\"丹陽尹\\\"及別名\\\"真長\\\"相符。但本次 occurrence 的 surface\\\"王\\\"指的是王長史（王胡之），並非候選 c0。候選 c0 在故事中出現但非本次指稱對象。由於僅有 c0 一個候選且其與故事相關，但 surface\\\"王\\\"與 c0 的別名/稱號不匹配，判斷為兼容但非直接對應。\"}",
+              "name": "submit_hdb2_grounded_identity_evaluation"
+            },
+            "id": "call_00_V2sJRDtk8SIXaXFnvQrD6866",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787755971,
+  "id": "5c8efc59-fbc5-4208-8f52-7dcddae30cf6",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 483,
+    "prompt_cache_hit_tokens": 896,
+    "prompt_cache_miss_tokens": 1271,
+    "prompt_tokens": 2167,
+    "prompt_tokens_details": {
+      "cached_tokens": 896
+    },
+    "total_tokens": 2650
+  }
+}

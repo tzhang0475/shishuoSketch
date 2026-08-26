@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"candidate_evaluations\": [{\"candidate_key\": \"c0\", \"family_assessments\": [{\"family\": \"confirmed_story_profile\", \"state\": \"support\", \"evidence_ids\": [\"ev2\"]}, {\"family\": \"era_chronology\", \"state\": \"neutral\", \"evidence_ids\": []}, {\"family\": \"known_participants\", \"state\": \"neutral\", \"evidence_ids\": []}, {\"family\": \"office_title_compatibility\", \"state\": \"neutral\", \"evidence_ids\": []}, {\"family\": \"person_relations_network\", \"state\": \"neutral\", \"evidence_ids\": []}, {\"family\": \"relevant_source_evidence\", \"state\": \"support\", \"evidence_ids\": [\"ev0\"]}, {\"family\": \"story_local_context\", \"state\": \"neutral\", \"evidence_ids\": []}], \"cross_story_consistency\": \"supports_profile\", \"hard_conflict\": false}], \"leading_candidate_key\": \"c0\", \"note\": \"本次 occurrence 的 surface 是「晉武帝」，而候选 c0 是山濤。山濤的 confirmed story 02-yanyu-078 正是本条故事（晉武帝每餉山濤恒少），因此 c0 的 profile 直接对应本条故事。但 occurrence 标注的 surface 是「晉武帝」而非「山濤」，这属于故事中的人物引用。c0 的 confirmed_story_ids 包含 02-yanyu-078，说明该候选与故事直接关联。ev0 主文明确提到「晉武帝每餉山濤」，山濤是故事中的被餉对象。由于 c0 是唯一候选且其 profile 明确关联本条故事，判断为支持。不过需注意 surface 是晉武帝而非山濤，身份匹配存在一定张力，但无硬冲突。\"}]}",
+              "name": "submit_hdb2_grounded_identity_evaluation"
+            },
+            "id": "call_00_euABwjWMPiKdRRKVUTEU2377",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787755851,
+  "id": "9bf13153-7120-4435-977a-10370e7cc3ae",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 434,
+    "prompt_cache_hit_tokens": 1920,
+    "prompt_cache_miss_tokens": 17,
+    "prompt_tokens": 1937,
+    "prompt_tokens_details": {
+      "cached_tokens": 1920
+    },
+    "total_tokens": 2371
+  }
+}

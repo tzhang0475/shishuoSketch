@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"candidate_evaluations\": [{\"candidate_key\": \"c0\", \"family_assessments\": [{\"family\": \"confirmed_story_profile\", \"state\": \"neutral\", \"evidence_ids\": [\"ev3\"]}, {\"family\": \"era_chronology\", \"state\": \"neutral\", \"evidence_ids\": []}, {\"family\": \"known_participants\", \"state\": \"neutral\", \"evidence_ids\": [\"ev2\"]}, {\"family\": \"office_title_compatibility\", \"state\": \"neutral\", \"evidence_ids\": []}, {\"family\": \"person_relations_network\", \"state\": \"neutral\", \"evidence_ids\": []}, {\"family\": \"relevant_source_evidence\", \"state\": \"contradiction\", \"evidence_ids\": [\"ev0\"]}, {\"family\": \"story_local_context\", \"state\": \"contradiction\", \"evidence_ids\": [\"ev0\"]}], \"cross_story_consistency\": \"contradiction\", \"hard_conflict\": true}, {\"candidate_key\": \"c1\", \"family_assessments\": [{\"family\": \"confirmed_story_profile\", \"state\": \"neutral\", \"evidence_ids\": [\"ev4\"]}, {\"family\": \"era_chronology\", \"state\": \"neutral\", \"evidence_ids\": []}, {\"family\": \"known_participants\", \"state\": \"neutral\", \"evidence_ids\": [\"ev2\"]}, {\"family\": \"office_title_compatibility\", \"state\": \"neutral\", \"evidence_ids\": []}, {\"family\": \"person_relations_network\", \"state\": \"neutral\", \"evidence_ids\": []}, {\"family\": \"relevant_source_evidence\", \"state\": \"strong_support\", \"evidence_ids\": [\"ev0\"]}, {\"family\": \"story_local_context\", \"state\": \"strong_support\", \"evidence_ids\": [\"ev0\"]}], \"cross_story_consistency\": \"compatible\", \"hard_conflict\": false}, {\"candidate_key\": \"c2\", \"family_assessments\": [{\"family\": \"confirmed_story_profile\", \"state\": \"neutral\", \"evidence_ids\": [\"ev5\"]}, {\"family\": \"era_chronology\", \"state\": \"neutral\", \"evidence_ids\": []}, {\"family\": \"known_participants\", \"state\": \"neutral\", \"evidence_ids\": [\"ev2\"]}, {\"family\": \"office_title_compatibility\", \"state\": \"neutral\", \"evidence_ids\": []}, {\"family\": \"person_relations_network\", \"state\": \"neutral\", \"evidence_ids\": []}, {\"family\": \"relevant_source_evidence\", \"state\": \"contradiction\", \"evidence_ids\": [\"ev0\"]}, {\"family\": \"story_local_context\", \"state\": \"contradiction\", \"evidence_ids\": [\"ev0\"]}], \"cross_story_consistency\": \"contradiction\", \"hard_conflict\": true}], \"leading_candidate_key\": \"c1\", \"note\": \"本次 occurrence 的 surface 是「王含」。故事中王含是廬江郡守，王敦護其兄，何充爲敦主簿。c1（王含）直接匹配 surface 名，且故事中王含是王敦之兄，與 c2（王敦）的「護其兄」關係矛盾——王敦是護兄者而非被護者。c0（何充）在故事中是主簿角色，非被稱呼者。c1 無 confirmed stories 但 surface 名完全匹配，且無任何矛盾證據。c2 的 profile 中「護其兄」表明王敦是護兄者，與本次 occurrence 中王含被護的角色衝突。c0 的 profile 顯示何充是敦主簿，與本次被指稱的王含角色衝突。\"}]}",
+              "name": "submit_hdb2_grounded_identity_evaluation"
+            },
+            "id": "call_00_yRgF8zICbMEI5fHnoBGr0003",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787755809,
+  "id": "5995817a-bff5-4f15-aef0-a8368da68a91",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 847,
+    "prompt_cache_hit_tokens": 896,
+    "prompt_cache_miss_tokens": 2856,
+    "prompt_tokens": 3752,
+    "prompt_tokens_details": {
+      "cached_tokens": 896
+    },
+    "total_tokens": 4599
+  }
+}

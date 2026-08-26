@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"candidate_evaluations\": [{\"candidate_key\": \"c0\", \"family_assessments\": [{\"family\": \"confirmed_story_profile\", \"state\": \"support\", \"evidence_ids\": [\"ev2\"]}, {\"family\": \"era_chronology\", \"state\": \"neutral\", \"evidence_ids\": []}, {\"family\": \"known_participants\", \"state\": \"neutral\", \"evidence_ids\": []}, {\"family\": \"office_title_compatibility\", \"state\": \"neutral\", \"evidence_ids\": []}, {\"family\": \"person_relations_network\", \"state\": \"support\", \"evidence_ids\": [\"ev2\"]}, {\"family\": \"relevant_source_evidence\", \"state\": \"support\", \"evidence_ids\": [\"ev0\"]}, {\"family\": \"story_local_context\", \"state\": \"support\", \"evidence_ids\": [\"ev0\"]}], \"cross_story_consistency\": \"supports_profile\", \"hard_conflict\": false}, {\"candidate_key\": \"c1\", \"family_assessments\": [{\"family\": \"confirmed_story_profile\", \"state\": \"support\", \"evidence_ids\": [\"ev3\"]}, {\"family\": \"era_chronology\", \"state\": \"neutral\", \"evidence_ids\": []}, {\"family\": \"known_participants\", \"state\": \"neutral\", \"evidence_ids\": []}, {\"family\": \"office_title_compatibility\", \"state\": \"neutral\", \"evidence_ids\": []}, {\"family\": \"person_relations_network\", \"state\": \"support\", \"evidence_ids\": [\"ev3\"]}, {\"family\": \"relevant_source_evidence\", \"state\": \"support\", \"evidence_ids\": [\"ev0\"]}, {\"family\": \"story_local_context\", \"state\": \"support\", \"evidence_ids\": [\"ev0\"]}], \"cross_story_consistency\": \"supports_profile\", \"hard_conflict\": false}], \"leading_candidate_key\": null, \"note\": \"本次 occurrence 的 surface 是「太傅鄭冲」，即被咨詢的對象太傅鄭冲本人。兩個候選 c0（羊祜）和 c1（賈充）都是故事 03-zhengshi-006 中的參與者（羊祜與賈充共咨太傅鄭冲），但該 occurrence 指涉的是「太傅鄭冲」這個人物，而非羊祜或賈充。兩個候選均為故事中的其他參與者，並非被指涉的「太傅鄭冲」。supplied evidence 中沒有提供鄭冲本人的候選檔案，因此無法將此 occurrence 匹配到任一候選。兩個候選都與故事相關（support），但都不是該 occurrence 所指的人物，故 leading_candidate 為 null。\"}]}",
+              "name": "submit_hdb2_grounded_identity_evaluation"
+            },
+            "id": "call_00_a1x6VNnAe7DDITk0vKY37289",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787755938,
+  "id": "5dc4dc1a-8b7f-48d4-a8a3-88b7ae0d986c",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 624,
+    "prompt_cache_hit_tokens": 896,
+    "prompt_cache_miss_tokens": 1991,
+    "prompt_tokens": 2887,
+    "prompt_tokens_details": {
+      "cached_tokens": 896
+    },
+    "total_tokens": 3511
+  }
+}

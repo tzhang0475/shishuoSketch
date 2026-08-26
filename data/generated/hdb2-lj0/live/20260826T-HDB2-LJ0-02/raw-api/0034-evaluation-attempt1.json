@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"candidate_evaluations\": [{\"candidate_key\": \"c0\", \"family_assessments\": [{\"family\": \"confirmed_story_profile\", \"state\": \"support\", \"evidence_ids\": [\"ev7\"]}, {\"family\": \"era_chronology\", \"state\": \"neutral\", \"evidence_ids\": []}, {\"family\": \"known_participants\", \"state\": \"support\", \"evidence_ids\": [\"ev6\"]}, {\"family\": \"office_title_compatibility\", \"state\": \"neutral\", \"evidence_ids\": []}, {\"family\": \"person_relations_network\", \"state\": \"support\", \"evidence_ids\": [\"ev6\"]}, {\"family\": \"relevant_source_evidence\", \"state\": \"support\", \"evidence_ids\": [\"ev0\", \"ev2\"]}, {\"family\": \"story_local_context\", \"state\": \"neutral\", \"evidence_ids\": []}], \"cross_story_consistency\": \"supports_profile\", \"hard_conflict\": false}, {\"candidate_key\": \"c1\", \"family_assessments\": [{\"family\": \"confirmed_story_profile\", \"state\": \"support\", \"evidence_ids\": [\"ev8\"]}, {\"family\": \"era_chronology\", \"state\": \"neutral\", \"evidence_ids\": []}, {\"family\": \"known_participants\", \"state\": \"support\", \"evidence_ids\": [\"ev6\"]}, {\"family\": \"office_title_compatibility\", \"state\": \"neutral\", \"evidence_ids\": []}, {\"family\": \"person_relations_network\", \"state\": \"support\", \"evidence_ids\": [\"ev6\"]}, {\"family\": \"relevant_source_evidence\", \"state\": \"support\", \"evidence_ids\": [\"ev0\", \"ev2\"]}, {\"family\": \"story_local_context\", \"state\": \"neutral\", \"evidence_ids\": []}], \"cross_story_consistency\": \"supports_profile\", \"hard_conflict\": false}], \"leading_candidate_key\": null, \"note\": \"本次 occurrence 的 surface 是「太傅鄭冲」，但两个候选 c0（羊祜）和 c1（賈充）都是故事 03-zhengshi-006 中的参与者，而非被指称的「太傅鄭冲」本人。occurrence 的 semantic_type 为 title_reference，指称对象是鄭冲（太傅），但郑冲不在 supplied 候选之中。两个候选都是故事中的其他参与者，与「太傅鄭冲」这一指称不匹配。虽然 ev0 和 ev2 确认了贾充与羊祜共同参与定律令并与郑冲共咨，但候选本身并非被指称人物。因此无法从 supplied 候选中选出 leading candidate。\"}]}",
+              "name": "submit_hdb2_grounded_identity_evaluation"
+            },
+            "id": "call_00_0Z1e6Gb11T3fm1BldYR41677",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787755988,
+  "id": "9864abd7-22d1-47f9-ba21-47a9e5133662",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 619,
+    "prompt_cache_hit_tokens": 896,
+    "prompt_cache_miss_tokens": 4354,
+    "prompt_tokens": 5250,
+    "prompt_tokens_details": {
+      "cached_tokens": 896
+    },
+    "total_tokens": 5869
+  }
+}

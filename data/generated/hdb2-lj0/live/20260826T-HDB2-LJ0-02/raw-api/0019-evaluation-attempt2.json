@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"candidate_evaluations\": [{\"candidate_key\": \"c0\", \"family_assessments\": [{\"family\": \"confirmed_story_profile\", \"state\": \"strong_support\", \"evidence_ids\": [\"ev7\"]}, {\"family\": \"era_chronology\", \"state\": \"neutral\", \"evidence_ids\": []}, {\"family\": \"known_participants\", \"state\": \"strong_support\", \"evidence_ids\": [\"ev6\"]}, {\"family\": \"office_title_compatibility\", \"state\": \"strong_support\", \"evidence_ids\": [\"ev0\", \"ev7\"]}, {\"family\": \"person_relations_network\", \"state\": \"support\", \"evidence_ids\": [\"ev0\", \"ev6\"]}, {\"family\": \"relevant_source_evidence\", \"state\": \"strong_support\", \"evidence_ids\": [\"ev0\"]}, {\"family\": \"story_local_context\", \"state\": \"strong_support\", \"evidence_ids\": [\"ev0\"]}], \"cross_story_consistency\": \"supports_profile\", \"hard_conflict\": false}, {\"candidate_key\": \"c1\", \"family_assessments\": [{\"family\": \"confirmed_story_profile\", \"state\": \"support\", \"evidence_ids\": [\"ev8\"]}, {\"family\": \"era_chronology\", \"state\": \"neutral\", \"evidence_ids\": []}, {\"family\": \"known_participants\", \"state\": \"strong_support\", \"evidence_ids\": [\"ev6\"]}, {\"family\": \"office_title_compatibility\", \"state\": \"support\", \"evidence_ids\": [\"ev0\", \"ev8\"]}, {\"family\": \"person_relations_network\", \"state\": \"support\", \"evidence_ids\": [\"ev0\", \"ev6\"]}, {\"family\": \"relevant_source_evidence\", \"state\": \"support\", \"evidence_ids\": [\"ev0\"]}, {\"family\": \"story_local_context\", \"state\": \"support\", \"evidence_ids\": [\"ev0\"]}], \"cross_story_consistency\": \"supports_profile\", \"hard_conflict\": false}, {\"candidate_key\": \"c2\", \"family_assessments\": [{\"family\": \"confirmed_story_profile\", \"state\": \"neutral\", \"evidence_ids\": []}, {\"family\": \"era_chronology\", \"state\": \"neutral\", \"evidence_ids\": []}, {\"family\": \"known_participants\", \"state\": \"neutral\", \"evidence_ids\": []}, {\"family\": \"office_title_compatibility\", \"state\": \"neutral\", \"evidence_ids\": []}, {\"family\": \"person_relations_network\", \"state\": \"neutral\", \"evidence_ids\": []}, {\"family\": \"relevant_source_evidence\", \"state\": \"neutral\", \"evidence_ids\": []}, {\"family\": \"story_local_context\", \"state\": \"neutral\", \"evidence_ids\": []}], \"cross_story_consistency\": \"compatible\", \"hard_conflict\": false}], \"leading_candidate_key\": \"c0\", \"note\": \"本次 occurrence 的 surface 是「敦主簿」，即「王敦的主簿」。故事中何充爲敦主簿，何充（c0）是擔任主簿之人，王敦（c1）是主簿的擁有者/上司。occurrence 的 known_participants 中 p0=何充 relation=爲（institutional），p1=王敦 relation=same_story_identity_observation。surface「敦主簿」指稱的是職位本身，其擁有者是王敦，但擔任者是何充。c0（何充）的 profile 明確記載「何充爲敦主簿」，與 story 完全吻合，且 ev0 正文直接支持。c1（王敦）是主簿的上司/擁有者，也與故事相關但非擔任者。c2（阮裕）無任何證據支持，且 ev4 顯示阮裕是王敦的主簿（另一故事），但本 occurrence 明確是「何充爲敦主簿」，故 c2 不匹配。leading 為 c0（何充）。\"}}",
+              "name": "submit_hdb2_grounded_identity_evaluation"
+            },
+            "id": "call_00_N6Qbmx0EJjR5gz9T4SBq9087",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787755900,
+  "id": "e5e7b7bc-d4df-48ba-a561-c0b05c05f9ca",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 915,
+    "prompt_cache_hit_tokens": 5760,
+    "prompt_cache_miss_tokens": 62,
+    "prompt_tokens": 5822,
+    "prompt_tokens_details": {
+      "cached_tokens": 5760
+    },
+    "total_tokens": 6737
+  }
+}

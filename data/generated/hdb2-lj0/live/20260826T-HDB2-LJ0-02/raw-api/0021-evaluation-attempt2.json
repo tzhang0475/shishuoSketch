@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"candidate_evaluations\": [{\"candidate_key\": \"c0\", \"family_assessments\": [{\"family\": \"confirmed_story_profile\", \"state\": \"contradiction\", \"evidence_ids\": [\"ev3\"]}, {\"family\": \"era_chronology\", \"state\": \"neutral\", \"evidence_ids\": []}, {\"family\": \"known_participants\", \"state\": \"contradiction\", \"evidence_ids\": [\"ev2\"]}, {\"family\": \"office_title_compatibility\", \"state\": \"neutral\", \"evidence_ids\": []}, {\"family\": \"person_relations_network\", \"state\": \"neutral\", \"evidence_ids\": []}, {\"family\": \"relevant_source_evidence\", \"state\": \"contradiction\", \"evidence_ids\": [\"ev0\"]}, {\"family\": \"story_local_context\", \"state\": \"contradiction\", \"evidence_ids\": [\"ev0\"]}], \"cross_story_consistency\": \"contradiction\", \"hard_conflict\": true}], \"leading_candidate_key\": null, \"note\": \"The occurrence surface is '步兵' (title reference), referring to 阮籍 (who held the title 步兵校尉). The candidate c0 is 石苞 with courtesy name 仲容. The story text (ev0) explicitly says 步兵 says '仲容已預之' — meaning 步兵 (阮籍) addresses 仲容 (阮咸). So the occurrence '步兵' refers to 阮籍, not 石苞. The candidate profile (ev3) lists aliases 咸/籍/阮渾 and courtesy 仲容, which are 阮氏 family members, not 石苞. The known participant 石苞 (ev2) is the speaker '曰' in the story, but the occurrence being evaluated is '步兵' which is the speaker of the quoted line, not 石苞. The candidate c0 (石苞) contradicts the occurrence '步兵' which refers to 阮籍. Hard conflict: the surface '步兵' is a title for 阮籍, and c0 is 石苞 with no such title.\"}]}",
+              "name": "submit_hdb2_grounded_identity_evaluation"
+            },
+            "id": "call_00_yDV6EnnodgoMaIcild540734",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787755926,
+  "id": "c9b881bd-b763-420d-9bfc-9d0698555137",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 489,
+    "prompt_cache_hit_tokens": 2048,
+    "prompt_cache_miss_tokens": 35,
+    "prompt_tokens": 2083,
+    "prompt_tokens_details": {
+      "cached_tokens": 2048
+    },
+    "total_tokens": 2572
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"candidate_evaluations\": [{\"candidate_key\": \"c0\", \"family_assessments\": [{\"family\": \"confirmed_story_profile\", \"state\": \"support\", \"evidence_ids\": [\"ev6\"]}, {\"family\": \"era_chronology\", \"state\": \"neutral\", \"evidence_ids\": []}, {\"family\": \"known_participants\", \"state\": \"support\", \"evidence_ids\": [\"ev5\"]}, {\"family\": \"office_title_compatibility\", \"state\": \"neutral\", \"evidence_ids\": []}, {\"family\": \"person_relations_network\", \"state\": \"support\", \"evidence_ids\": [\"ev5\"]}, {\"family\": \"relevant_source_evidence\", \"state\": \"support\", \"evidence_ids\": [\"ev0\"]}, {\"family\": \"story_local_context\", \"state\": \"support\", \"evidence_ids\": [\"ev0\"]}], \"cross_story_consistency\": \"supports_profile\", \"hard_conflict\": false}, {\"candidate_key\": \"c1\", \"family_assessments\": [{\"family\": \"confirmed_story_profile\", \"state\": \"support\", \"evidence_ids\": [\"ev7\"]}, {\"family\": \"era_chronology\", \"state\": \"neutral\", \"evidence_ids\": []}, {\"family\": \"known_participants\", \"state\": \"support\", \"evidence_ids\": [\"ev5\"]}, {\"family\": \"office_title_compatibility\", \"state\": \"neutral\", \"evidence_ids\": []}, {\"family\": \"person_relations_network\", \"state\": \"support\", \"evidence_ids\": [\"ev5\"]}, {\"family\": \"relevant_source_evidence\", \"state\": \"support\", \"evidence_ids\": [\"ev0\"]}, {\"family\": \"story_local_context\", \"state\": \"support\", \"evidence_ids\": [\"ev0\"]}], \"cross_story_consistency\": \"supports_profile\", \"hard_conflict\": false}], \"leading_candidate_key\": \"c1\", \"note\": \"本次 occurrence 的 surface 是\\\"長史\\\"，即謝鯤的官職。故事 08-shangyu-051 正文明確記載\\\"于時謝鯤爲長史，敦謂鯤曰\\\"，因此該 title_reference \\\"長史\\\" 指稱的是謝鯤（c1）。c0（王敦）在故事中是\\\"大將軍\\\"身份，非\\\"長史\\\"。c1 的 confirmed_story_ids 包含 08-shangyu-051，且 known_participants（ev5）明確列出謝鯤\\\"爲\\\"長史。c0 雖也出現在同一故事中，但作為大將軍而非長史，故 leading 為 c1。\"}",
+              "name": "submit_hdb2_grounded_identity_evaluation"
+            },
+            "id": "call_00_B8FgyPxno2vNMyc56aGq8738",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787755964,
+  "id": "87939a09-faf4-465d-9a48-e0a014083d77",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 635,
+    "prompt_cache_hit_tokens": 896,
+    "prompt_cache_miss_tokens": 5658,
+    "prompt_tokens": 6554,
+    "prompt_tokens_details": {
+      "cached_tokens": 896
+    },
+    "total_tokens": 7189
+  }
+}

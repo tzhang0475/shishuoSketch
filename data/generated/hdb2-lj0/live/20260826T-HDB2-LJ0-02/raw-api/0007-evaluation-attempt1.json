@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"candidate_evaluations\": [{\"candidate_key\": \"c0\", \"family_assessments\": [{\"family\": \"confirmed_story_profile\", \"state\": \"neutral\", \"evidence_ids\": [\"ev3\"]}, {\"family\": \"era_chronology\", \"state\": \"neutral\", \"evidence_ids\": [\"ev2\"]}, {\"family\": \"known_participants\", \"state\": \"neutral\", \"evidence_ids\": []}, {\"family\": \"office_title_compatibility\", \"state\": \"neutral\", \"evidence_ids\": []}, {\"family\": \"person_relations_network\", \"state\": \"neutral\", \"evidence_ids\": []}, {\"family\": \"relevant_source_evidence\", \"state\": \"neutral\", \"evidence_ids\": []}, {\"family\": \"story_local_context\", \"state\": \"contradiction\", \"evidence_ids\": [\"ev1\"]}], \"cross_story_consistency\": \"compatible\", \"hard_conflict\": false}, {\"candidate_key\": \"c1\", \"family_assessments\": [{\"family\": \"confirmed_story_profile\", \"state\": \"support\", \"evidence_ids\": [\"ev4\"]}, {\"family\": \"era_chronology\", \"state\": \"neutral\", \"evidence_ids\": [\"ev2\"]}, {\"family\": \"known_participants\", \"state\": \"neutral\", \"evidence_ids\": []}, {\"family\": \"office_title_compatibility\", \"state\": \"support\", \"evidence_ids\": [\"ev0\"]}, {\"family\": \"person_relations_network\", \"state\": \"neutral\", \"evidence_ids\": []}, {\"family\": \"relevant_source_evidence\", \"state\": \"support\", \"evidence_ids\": [\"ev0\"]}, {\"family\": \"story_local_context\", \"state\": \"support\", \"evidence_ids\": [\"ev1\"]}], \"cross_story_consistency\": \"supports_profile\", \"hard_conflict\": false}], \"leading_candidate_key\": \"c1\", \"note\": \"本次 occurrence 的 surface 是「康伯母」，即韓康伯（韓伯）之母。ev0 正文明確記載「韓康伯時為丹陽尹，母殷在郡」，與 c1（韓伯，字康伯，title 丹陽尹/吏部尚書）完全吻合。ev1 劉注進一步說明「康伯母…殷浩之妹」，即康伯母是殷浩之妹，這與 c0（殷浩）構成矛盾——殷浩是康伯母之兄，而非康伯母本人。c0 的 profile 雖也關聯本 story，但作為「康伯母」的指稱對象不成立。c1 的 titles（丹陽尹、吏部尚書）與正文中韓康伯的官職完全對應，strong support。\"}",
+              "name": "submit_hdb2_grounded_identity_evaluation"
+            },
+            "id": "call_00_ewDpgHoUdC42LcN7RhkM9140",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787755829,
+  "id": "b08a0ce5-89ee-4357-a859-9d1c69e0a3ef",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 659,
+    "prompt_cache_hit_tokens": 896,
+    "prompt_cache_miss_tokens": 1205,
+    "prompt_tokens": 2101,
+    "prompt_tokens_details": {
+      "cached_tokens": 896
+    },
+    "total_tokens": 2760
+  }
+}
