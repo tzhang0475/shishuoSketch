@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"predicates\": [{\"predicate_id\": \"q0\", \"predicate\": \"ContextCompatible\", \"mention_id\": \"hdb2-occ-3f1d8443374e4c1ef015\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 1.0, \"evidence_ids\": [\"ev0\", \"ev2\", \"ev3\"]}, {\"predicate_id\": \"q1\", \"predicate\": \"CrossStoryCompatible\", \"mention_id\": \"hdb2-occ-3f1d8443374e4c1ef015\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 1.0, \"evidence_ids\": [\"ev3\"]}, {\"predicate_id\": \"q2\", \"predicate\": \"Coreference\", \"mention_id\": \"hdb2-occ-3f1d8443374e4c1ef015\", \"other_mention_id\": \"hdb2-occ-10623d57bd7dac1f24b2\", \"candidate_key\": null, \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q3\", \"predicate\": \"Coreference\", \"mention_id\": \"hdb2-occ-3f1d8443374e4c1ef015\", \"other_mention_id\": \"hdb2-occ-5e5351b612e1eeff8226\", \"candidate_key\": null, \"value\": 0.5, \"evidence_ids\": []}], \"note\": \"q0: 王長史 (title_reference) 与 candidate c0 (劉惔) 在同一故事 02-yanyu-054 中作为参与者出现，刘尹/真长即劉惔，上下文兼容。q1: candidate c0 的 confirmed stories 与当前故事上下文一致，跨故事兼容。q2: 王長史 vs 劉尹 是不同人物（王 vs 劉），不指同一人，但证据不足以完全否定，neutral 0.5。q3: 王長史 vs 王 可能指同一人（王長史即王），但缺乏直接证据确认，neutral 0.5。\"}",
+              "name": "submit_hdb2_psl_predicates"
+            },
+            "id": "call_00_KQbe6TjkkYYOUxndYsJu5261",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787762670,
+  "id": "4de8d991-e324-45c6-a4ce-a83de91733ef",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 544,
+    "prompt_cache_hit_tokens": 1536,
+    "prompt_cache_miss_tokens": 2637,
+    "prompt_tokens": 4173,
+    "prompt_tokens_details": {
+      "cached_tokens": 1536
+    },
+    "total_tokens": 4717
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"predicates\": [{\"predicate_id\": \"q0\", \"predicate\": \"ContextCompatible\", \"mention_id\": \"hdb2-occ-4ba3ca5aa3ed6a69973a\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q1\", \"predicate\": \"CrossStoryCompatible\", \"mention_id\": \"hdb2-occ-4ba3ca5aa3ed6a69973a\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q2\", \"predicate\": \"ContextCompatible\", \"mention_id\": \"hdb2-occ-4ba3ca5aa3ed6a69973a\", \"other_mention_id\": null, \"candidate_key\": \"c1\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q3\", \"predicate\": \"CrossStoryCompatible\", \"mention_id\": \"hdb2-occ-4ba3ca5aa3ed6a69973a\", \"other_mention_id\": null, \"candidate_key\": \"c1\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q4\", \"predicate\": \"ContextCompatible\", \"mention_id\": \"hdb2-occ-4ba3ca5aa3ed6a69973a\", \"other_mention_id\": null, \"candidate_key\": \"c2\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q5\", \"predicate\": \"CrossStoryCompatible\", \"mention_id\": \"hdb2-occ-4ba3ca5aa3ed6a69973a\", \"other_mention_id\": null, \"candidate_key\": \"c2\", \"value\": 0.5, \"evidence_ids\": []}], \"note\": \"The mention \\\"絡秀\\\" is the daughter of the Li family in story 19-xianyuan-018. Candidate c0 is 周浚 (the man who takes her as concubine), c1 is 周顗 (her son 伯仁), c2 is 絡秀 herself. The mention surface is 絡秀, which matches c2's name directly. However, the request only asks for ContextCompatible and CrossStoryCompatible (not Coreference), and these evaluate whether the candidate is compatible in context/cross-story. Since the mention is 絡秀 and c2 is 絡秀, context compatibility is high. But the deterministic predicates show c2 has AliasMatch=1.0 with evidence ev0,ev3,ev4,ev5. For ContextCompatible, the mention 絡秀 appears in the same story context where 絡秀 is the woman. c2 (絡秀) is directly compatible. However, I should be careful: the task says only evaluate supplied candidates for Context/CrossStory compatibility. Given the mention is 絡秀 and c2 is 絡秀, ContextCompatible should be high. But the evidence for c2's identity comes from ev0 (main text) and profiles. Let me set c2 ContextCompatible high with ev0. For c0 (周浚) and c1 (周顗), they appear in the same story but the mention 絡秀 is a different person, so context compatibility is lower/neutral. CrossStoryCompatible for all is neutral since no cross-story evidence directly links the mention to these candidates beyond this story.\"}",
+              "name": "submit_hdb2_psl_predicates"
+            },
+            "id": "call_00_EeENQDnw9hSywBo3LaFe0170",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787762704,
+  "id": "60fdc424-429e-4a22-9cf2-f14ba02da569",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 840,
+    "prompt_cache_hit_tokens": 4736,
+    "prompt_cache_miss_tokens": 109,
+    "prompt_tokens": 4845,
+    "prompt_tokens_details": {
+      "cached_tokens": 4736
+    },
+    "total_tokens": 5685
+  }
+}

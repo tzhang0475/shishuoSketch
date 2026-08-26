@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"predicates\": [{\"predicate_id\": \"q0\", \"predicate\": \"ContextCompatible\", \"mention_id\": \"hdb2-occ-08f1a686b68dd0951704\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q1\", \"predicate\": \"CrossStoryCompatible\", \"mention_id\": \"hdb2-occ-08f1a686b68dd0951704\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q2\", \"predicate\": \"ContextCompatible\", \"mention_id\": \"hdb2-occ-08f1a686b68dd0951704\", \"other_mention_id\": null, \"candidate_key\": \"c1\", \"value\": 1.0, \"evidence_ids\": [\"ev0\", \"context:context:07-shijian-005:35:e7f0eb43\"]}, {\"predicate_id\": \"q3\", \"predicate\": \"CrossStoryCompatible\", \"mention_id\": \"hdb2-occ-08f1a686b68dd0951704\", \"other_mention_id\": null, \"candidate_key\": \"c1\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q4\", \"predicate\": \"ContextCompatible\", \"mention_id\": \"hdb2-occ-08f1a686b68dd0951704\", \"other_mention_id\": null, \"candidate_key\": \"c2\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q5\", \"predicate\": \"CrossStoryCompatible\", \"mention_id\": \"hdb2-occ-08f1a686b68dd0951704\", \"other_mention_id\": null, \"candidate_key\": \"c2\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q6\", \"predicate\": \"ContextCompatible\", \"mention_id\": \"hdb2-occ-08f1a686b68dd0951704\", \"other_mention_id\": null, \"candidate_key\": \"c3\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q7\", \"predicate\": \"CrossStoryCompatible\", \"mention_id\": \"hdb2-occ-08f1a686b68dd0951704\", \"other_mention_id\": null, \"candidate_key\": \"c3\", \"value\": 0.5, \"evidence_ids\": []}], \"note\": \"The mention surface is 王夷甫, which directly matches candidate c1 (王夷甫) in the story context where 王夷甫 appears as the main subject. For c1 ContextCompatible is high (1.0) since the mention surface exactly matches the candidate name and the story context directly describes 王夷甫. For other candidates (c0 山濤, c2 王戎, c3 羊祜), they appear in the same story but the mention 王夷甫 does not refer to them, so ContextCompatible is neutral (0.5). CrossStoryCompatible is neutral (0.5) for all candidates due to insufficient cross-story evidence.\"}",
+              "name": "submit_hdb2_psl_predicates"
+            },
+            "id": "call_00_VFYjetfLkThYZCHOECRW7057",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787762147,
+  "id": "2e3218e6-b3f3-42dd-9bbd-db1458b6d439",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 803,
+    "prompt_cache_hit_tokens": 768,
+    "prompt_cache_miss_tokens": 4945,
+    "prompt_tokens": 5713,
+    "prompt_tokens_details": {
+      "cached_tokens": 768
+    },
+    "total_tokens": 6516
+  }
+}

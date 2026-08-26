@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"predicates\": [{\"predicate_id\": \"q0\", \"predicate\": \"ContextCompatible\", \"mention_id\": \"hdb2-occ-10623d57bd7dac1f24b2\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 1.0, \"evidence_ids\": [\"ev0\", \"ev2\", \"ev3\"]}, {\"predicate_id\": \"q1\", \"predicate\": \"CrossStoryCompatible\", \"mention_id\": \"hdb2-occ-10623d57bd7dac1f24b2\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 1.0, \"evidence_ids\": [\"ev3\"]}, {\"predicate_id\": \"q2\", \"predicate\": \"Coreference\", \"mention_id\": \"hdb2-occ-10623d57bd7dac1f24b2\", \"other_mention_id\": \"hdb2-occ-3f1d8443374e4c1ef015\", \"candidate_key\": null, \"value\": 0.0, \"evidence_ids\": [\"ev0\"]}, {\"predicate_id\": \"q3\", \"predicate\": \"Coreference\", \"mention_id\": \"hdb2-occ-10623d57bd7dac1f24b2\", \"other_mention_id\": \"hdb2-occ-5e5351b612e1eeff8226\", \"candidate_key\": null, \"value\": 0.0, \"evidence_ids\": [\"ev0\"]}], \"note\": \"The mention \\\"劉尹\\\" (Liu Yin, i.e., 劉惔 as 丹陽尹) refers to 劉惔. ContextCompatible: the story 02-yanyu-054 is in the candidate's confirmed stories, and the mention's title 劉尹 matches candidate's title 丹陽尹. CrossStoryCompatible: candidate c0 has confirmed stories across multiple works consistent with this occurrence. Coreference q2: \\\"劉尹\\\" (劉惔) and \\\"王長史\\\" (王胡之) are distinct people in the same story. Coreference q3: \\\"劉尹\\\" and \\\"王\\\" (王胡之) are distinct people.\"}",
+              "name": "submit_hdb2_psl_predicates"
+            },
+            "id": "call_00_x4f6LBfXKfqg9Bq3qcAO1711",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787762677,
+  "id": "7ce1570c-df1d-4a8d-a340-cab9d7226edf",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 548,
+    "prompt_cache_hit_tokens": 4096,
+    "prompt_cache_miss_tokens": 78,
+    "prompt_tokens": 4174,
+    "prompt_tokens_details": {
+      "cached_tokens": 4096
+    },
+    "total_tokens": 4722
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"predicates\": [{\"predicate_id\": \"q0\", \"predicate\": \"ContextCompatible\", \"mention_id\": \"hdb2-occ-26b5362fd97cab370857\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q1\", \"predicate\": \"CrossStoryCompatible\", \"mention_id\": \"hdb2-occ-26b5362fd97cab370857\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q2\", \"predicate\": \"ContextCompatible\", \"mention_id\": \"hdb2-occ-26b5362fd97cab370857\", \"other_mention_id\": null, \"candidate_key\": \"c1\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q3\", \"predicate\": \"CrossStoryCompatible\", \"mention_id\": \"hdb2-occ-26b5362fd97cab370857\", \"other_mention_id\": null, \"candidate_key\": \"c1\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q4\", \"predicate\": \"Coreference\", \"mention_id\": \"hdb2-occ-26b5362fd97cab370857\", \"other_mention_id\": \"hdb2-occ-99b0e48572a365a51cd5\", \"candidate_key\": null, \"value\": 1.0, \"evidence_ids\": [\"context:context:03-zhengshi-006:0:b1fd5a8c\", \"context:context:03-zhengshi-006:8:e7f0eb43\"]}], \"note\": \"The mention \\\"太傅鄭冲\\\" refers to 鄭冲 (Zheng Chong), the Grand Tutor. Neither candidate c0 (羊祜) nor c1 (賈充) is 鄭冲, so ContextCompatible and CrossStoryCompatible are neutral (0.5) for both candidates. The two mentions \\\"太傅鄭冲\\\" (hdb2-occ-26b5362fd97cab370857 and hdb2-occ-99b0e48572a365a51cd5) both refer to the same person 鄭冲 in the same story, so Coreference is 1.0.\"}",
+              "name": "submit_hdb2_psl_predicates"
+            },
+            "id": "call_00_UUCJoCrSOGCk3m6aUJRb8738",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787762222,
+  "id": "2475daf0-4328-4d7a-b05d-ad2d360b0dc5",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 596,
+    "prompt_cache_hit_tokens": 768,
+    "prompt_cache_miss_tokens": 6432,
+    "prompt_tokens": 7200,
+    "prompt_tokens_details": {
+      "cached_tokens": 768
+    },
+    "total_tokens": 7796
+  }
+}

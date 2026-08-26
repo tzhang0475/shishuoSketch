@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"predicates\": [{\"predicate_id\": \"q0\", \"predicate\": \"ContextCompatible\", \"mention_id\": \"hdb2-occ-0716da549b132ab653d2\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q1\", \"predicate\": \"CrossStoryCompatible\", \"mention_id\": \"hdb2-occ-0716da549b132ab653d2\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 0.5, \"evidence_ids\": []}], \"note\": \"The mention surface is 晉武帝 (Emperor Wu of Jin), while candidate c0 is 山濤 (Shan Tao). The mention refers to the emperor, not to Shan Tao. The candidate's confirmed stories (02-yanyu-078, 07-shijian-005) involve Shan Tao, but the supplied mention here is 晉武帝, a different person. No evidence directly links this mention to candidate c0. ContextCompatible and CrossStoryCompatible are neutral (0.5) with no supporting evidence.\"}",
+              "name": "submit_hdb2_psl_predicates"
+            },
+            "id": "call_00_ojeokmT1BIa0Lne4u2wT0414",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787762161,
+  "id": "e4090e5b-7a9d-416f-9cb8-a2f03c47777e",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 310,
+    "prompt_cache_hit_tokens": 768,
+    "prompt_cache_miss_tokens": 1605,
+    "prompt_tokens": 2373,
+    "prompt_tokens_details": {
+      "cached_tokens": 768
+    },
+    "total_tokens": 2683
+  }
+}

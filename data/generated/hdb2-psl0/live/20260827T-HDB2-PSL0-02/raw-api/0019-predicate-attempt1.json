@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"predicates\": [{\"predicate_id\": \"q0\", \"predicate\": \"ContextCompatible\", \"mention_id\": \"hdb2-occ-bea65ad7fb6fa7883608\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q1\", \"predicate\": \"CrossStoryCompatible\", \"mention_id\": \"hdb2-occ-bea65ad7fb6fa7883608\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q2\", \"predicate\": \"ContextCompatible\", \"mention_id\": \"hdb2-occ-bea65ad7fb6fa7883608\", \"other_mention_id\": null, \"candidate_key\": \"c1\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q3\", \"predicate\": \"CrossStoryCompatible\", \"mention_id\": \"hdb2-occ-bea65ad7fb6fa7883608\", \"other_mention_id\": null, \"candidate_key\": \"c1\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q4\", \"predicate\": \"ContextCompatible\", \"mention_id\": \"hdb2-occ-bea65ad7fb6fa7883608\", \"other_mention_id\": null, \"candidate_key\": \"c2\", \"value\": 1.0, \"evidence_ids\": [\"ev0\", \"ev3\", \"ev5\"]}, {\"predicate_id\": \"q5\", \"predicate\": \"CrossStoryCompatible\", \"mention_id\": \"hdb2-occ-bea65ad7fb6fa7883608\", \"other_mention_id\": null, \"candidate_key\": \"c2\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q6\", \"predicate\": \"Coreference\", \"mention_id\": \"hdb2-occ-87c104b7665456797ebf\", \"other_mention_id\": \"hdb2-occ-bea65ad7fb6fa7883608\", \"candidate_key\": null, \"value\": 0.5, \"evidence_ids\": []}], \"note\": \"The mention \\\"謝夫人\\\" refers to the wife of 王凝之 in story 19-xianyuan-026. Candidate c2 (謝夫人) matches the surface directly in context (ev0 shows 王凝之謝夫人既徃王氏). Candidates c0 (王凝之) and c1 (王羲之) are male figures in the same story but not the referent of 謝夫人, so ContextCompatible is neutral. Coreference between 太傅 and 謝夫人 is not supported (太傅 is 謝安, the uncle, not the wife).\"}",
+              "name": "submit_hdb2_psl_predicates"
+            },
+            "id": "call_00_O5np1XWuVqhlfmwmMXr91361",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787762207,
+  "id": "2637f982-c695-4f98-a125-97691b5e201c",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 704,
+    "prompt_cache_hit_tokens": 768,
+    "prompt_cache_miss_tokens": 4609,
+    "prompt_tokens": 5377,
+    "prompt_tokens_details": {
+      "cached_tokens": 768
+    },
+    "total_tokens": 6081
+  }
+}

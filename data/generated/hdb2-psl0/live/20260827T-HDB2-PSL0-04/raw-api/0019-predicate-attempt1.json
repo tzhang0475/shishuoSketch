@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"predicates\": [{\"predicate_id\": \"q0\", \"predicate\": \"ContextCompatible\", \"mention_id\": \"hdb2-occ-bea65ad7fb6fa7883608\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 1.0, \"evidence_ids\": [\"ev0\", \"ev3\"]}, {\"predicate_id\": \"q1\", \"predicate\": \"CrossStoryCompatible\", \"mention_id\": \"hdb2-occ-bea65ad7fb6fa7883608\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 1.0, \"evidence_ids\": [\"ev0\", \"ev3\"]}, {\"predicate_id\": \"q2\", \"predicate\": \"ContextCompatible\", \"mention_id\": \"hdb2-occ-bea65ad7fb6fa7883608\", \"other_mention_id\": null, \"candidate_key\": \"c1\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q3\", \"predicate\": \"CrossStoryCompatible\", \"mention_id\": \"hdb2-occ-bea65ad7fb6fa7883608\", \"other_mention_id\": null, \"candidate_key\": \"c1\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q4\", \"predicate\": \"ContextCompatible\", \"mention_id\": \"hdb2-occ-bea65ad7fb6fa7883608\", \"other_mention_id\": null, \"candidate_key\": \"c2\", \"value\": 1.0, \"evidence_ids\": [\"ev0\", \"ev5\"]}, {\"predicate_id\": \"q5\", \"predicate\": \"CrossStoryCompatible\", \"mention_id\": \"hdb2-occ-bea65ad7fb6fa7883608\", \"other_mention_id\": null, \"candidate_key\": \"c2\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q6\", \"predicate\": \"Coreference\", \"mention_id\": \"hdb2-occ-bea65ad7fb6fa7883608\", \"other_mention_id\": \"hdb2-occ-87c104b7665456797ebf\", \"candidate_key\": null, \"value\": 0.5, \"evidence_ids\": []}], \"note\": \"The mention \\\"謝夫人\\\" refers to the wife of 王凝之 (candidate c0). The story explicitly states \\\"王凝之謝夫人既徃王氏\\\" and \\\"王郎，逸少之子\\\", confirming she is 王凝之's wife. c0 (王凝之) is context-compatible since the story directly involves her husband. c2 (謝夫人) is also context-compatible as the surface matches her own name. c1 (王羲之) is her father-in-law, not directly the referent. Coreference with 太傅 (related mention) is neutral since 太傅 refers to 謝安, not 謝夫人.\"}",
+              "name": "submit_hdb2_psl_predicates"
+            },
+            "id": "call_00_LRVGQ6sNYv0mORuwLK6j3118",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787762710,
+  "id": "106f7dda-1d5a-44ad-9de2-0b8585c45be6",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 731,
+    "prompt_cache_hit_tokens": 768,
+    "prompt_cache_miss_tokens": 4609,
+    "prompt_tokens": 5377,
+    "prompt_tokens_details": {
+      "cached_tokens": 768
+    },
+    "total_tokens": 6108
+  }
+}

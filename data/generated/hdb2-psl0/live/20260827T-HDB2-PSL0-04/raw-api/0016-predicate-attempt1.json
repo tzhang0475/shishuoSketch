@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"predicates\": [{\"predicate_id\": \"q0\", \"predicate\": \"ContextCompatible\", \"mention_id\": \"hdb2-occ-e67fb82c817745c3e806\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 1.0, \"evidence_ids\": [\"ev0\", \"ev3\", \"context:context:17-shangshi-008:0:6e839490\"]}, {\"predicate_id\": \"q1\", \"predicate\": \"CrossStoryCompatible\", \"mention_id\": \"hdb2-occ-e67fb82c817745c3e806\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 1.0, \"evidence_ids\": [\"ev0\", \"ev3\"]}, {\"predicate_id\": \"q2\", \"predicate\": \"ContextCompatible\", \"mention_id\": \"hdb2-occ-e67fb82c817745c3e806\", \"other_mention_id\": null, \"candidate_key\": \"c1\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q3\", \"predicate\": \"CrossStoryCompatible\", \"mention_id\": \"hdb2-occ-e67fb82c817745c3e806\", \"other_mention_id\": null, \"candidate_key\": \"c1\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q4\", \"predicate\": \"ContextCompatible\", \"mention_id\": \"hdb2-occ-e67fb82c817745c3e806\", \"other_mention_id\": null, \"candidate_key\": \"c2\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q5\", \"predicate\": \"CrossStoryCompatible\", \"mention_id\": \"hdb2-occ-e67fb82c817745c3e806\", \"other_mention_id\": null, \"candidate_key\": \"c2\", \"value\": 0.5, \"evidence_ids\": []}], \"note\": \"The mention \\\"諸葛道明\\\" appears in story 17-shangshi-008 as the father of the woman married to 庾亮's son. Candidate c0 is 諸葛道明 (canonical 庾亮 per profile, but the mention surface matches 諸葛道明 directly). The story context clearly identifies 諸葛道明 as the person whose daughter married 庾亮's son, matching c0's profile (ev0, ev3). Candidates c1 (庾亮) and c2 (蘇峻) are mentioned in the same story but the mention \\\"諸葛道明\\\" does not refer to them; no direct contextual or cross-story evidence links the mention to c1 or c2, so those are neutral.\"}",
+              "name": "submit_hdb2_psl_predicates"
+            },
+            "id": "call_00_wMfbSZdb7ft4NkrYe0Eg4211",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787762695,
+  "id": "14fe9cba-7392-4903-a60b-20d49e14f840",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 678,
+    "prompt_cache_hit_tokens": 3968,
+    "prompt_cache_miss_tokens": 81,
+    "prompt_tokens": 4049,
+    "prompt_tokens_details": {
+      "cached_tokens": 3968
+    },
+    "total_tokens": 4727
+  }
+}

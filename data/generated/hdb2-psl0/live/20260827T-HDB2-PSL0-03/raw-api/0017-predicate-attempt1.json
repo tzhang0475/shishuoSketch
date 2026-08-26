@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"predicates\": [{\"predicate_id\": \"q0\", \"predicate\": \"ContextCompatible\", \"mention_id\": \"hdb2-occ-99b0e48572a365a51cd5\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q1\", \"predicate\": \"CrossStoryCompatible\", \"mention_id\": \"hdb2-occ-99b0e48572a365a51cd5\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q2\", \"predicate\": \"ContextCompatible\", \"mention_id\": \"hdb2-occ-99b0e48572a365a51cd5\", \"other_mention_id\": null, \"candidate_key\": \"c1\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q3\", \"predicate\": \"CrossStoryCompatible\", \"mention_id\": \"hdb2-occ-99b0e48572a365a51cd5\", \"other_mention_id\": null, \"candidate_key\": \"c1\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q4\", \"predicate\": \"Coreference\", \"mention_id\": \"hdb2-occ-26b5362fd97cab370857\", \"other_mention_id\": \"hdb2-occ-99b0e48572a365a51cd5\", \"candidate_key\": null, \"value\": 1.0, \"evidence_ids\": [\"context:context:03-zhengshi-006:0:b1fd5a8c\", \"context:context:03-zhengshi-006:8:e7f0eb43\"]}], \"note\": \"The mention \\\"太傅鄭冲\\\" refers to 鄭冲 (太傅). Candidate c0 is 羊祜 and c1 is 賈充, neither of whom is 鄭冲, so Context/CrossStory compatibility is neutral (0.5) with no supporting evidence. The two mentions \\\"太傅鄭冲\\\" (hdb2-occ-26b5362fd97cab370857 and hdb2-occ-99b0e48572a365a51cd5) both refer to the same person 鄭冲 in the same story context, so Coreference is 1.0.\"}",
+              "name": "submit_hdb2_psl_predicates"
+            },
+            "id": "call_00_pnWVPgqGxeXLEbkykAAG8473",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787762510,
+  "id": "0cfaaa4c-9c42-44eb-80cb-e7829dd6faa8",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 605,
+    "prompt_cache_hit_tokens": 5888,
+    "prompt_cache_miss_tokens": 14,
+    "prompt_tokens": 5902,
+    "prompt_tokens_details": {
+      "cached_tokens": 5888
+    },
+    "total_tokens": 6507
+  }
+}

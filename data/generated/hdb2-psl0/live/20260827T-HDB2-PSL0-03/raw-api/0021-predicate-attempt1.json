@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"predicates\": [{\"predicate_id\": \"q0\", \"predicate\": \"ContextCompatible\", \"mention_id\": \"hdb2-occ-5e5351b612e1eeff8226\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q1\", \"predicate\": \"CrossStoryCompatible\", \"mention_id\": \"hdb2-occ-5e5351b612e1eeff8226\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q2\", \"predicate\": \"Coreference\", \"mention_id\": \"hdb2-occ-10623d57bd7dac1f24b2\", \"other_mention_id\": \"hdb2-occ-5e5351b612e1eeff8226\", \"candidate_key\": null, \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q3\", \"predicate\": \"Coreference\", \"mention_id\": \"hdb2-occ-3f1d8443374e4c1ef015\", \"other_mention_id\": \"hdb2-occ-5e5351b612e1eeff8226\", \"candidate_key\": null, \"value\": 0.5, \"evidence_ids\": []}], \"note\": \"The mention \\\"王\\\" (surface) in story 02-yanyu-054 refers to 王長史 (王胡之), not to candidate 劉惔. The candidate c0 (劉惔) is 劉尹/真長 in this story. The mention \\\"王\\\" is a different person (王長史), so Coreference with 劉尹 and 王長史 mentions is not supported. ContextCompatible and CrossStoryCompatible are neutral given insufficient direct evidence linking the \\\"王\\\" mention to candidate c0.\"}",
+              "name": "submit_hdb2_psl_predicates"
+            },
+            "id": "call_00_ntAuPAwennRdvFB7lx9B5986",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787762527,
+  "id": "5c851ca4-de75-47a6-ad9a-a67e9a6c007b",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 495,
+    "prompt_cache_hit_tokens": 4224,
+    "prompt_cache_miss_tokens": 5,
+    "prompt_tokens": 4229,
+    "prompt_tokens_details": {
+      "cached_tokens": 4224
+    },
+    "total_tokens": 4724
+  }
+}

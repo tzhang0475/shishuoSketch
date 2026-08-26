@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"predicates\": [{\"predicate_id\": \"q0\", \"predicate\": \"ContextCompatible\", \"mention_id\": \"hdb2-occ-af4509dd29de66599524\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q1\", \"predicate\": \"CrossStoryCompatible\", \"mention_id\": \"hdb2-occ-af4509dd29de66599524\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q2\", \"predicate\": \"ContextCompatible\", \"mention_id\": \"hdb2-occ-af4509dd29de66599524\", \"other_mention_id\": null, \"candidate_key\": \"c1\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q3\", \"predicate\": \"CrossStoryCompatible\", \"mention_id\": \"hdb2-occ-af4509dd29de66599524\", \"other_mention_id\": null, \"candidate_key\": \"c1\", \"value\": 0.5, \"evidence_ids\": []}], \"note\": \"The mention \\\"康伯母\\\" refers to the mother of 韓康伯 (c0). The annotation (ev1) states that 康伯母 is the sister of 殷浩 (c1). The mention is a kinship reference to 韓伯's mother, not directly to either candidate. For ContextCompatible: the mention is about 韓康伯's mother, which is contextually related to c0 (韓伯) since the mother is his kin, but the mention itself is not the candidate. For c1 (殷浩), the mother is his sister per ev1, so there is contextual relation but the mention is not directly about 殷浩. CrossStoryCompatible: c0 has confirmed stories 01-dexing-047 and 02-yanyu-079; c1 has 01-dexing-047 and 03-zhengshi-022. The mention is in 01-dexing-047 which both candidates share, but the mention itself is a kinship reference to the mother, not directly establishing cross-story compatibility for either candidate beyond the shared story. Given the mention is a kinship reference (not the candidate themselves), I assign neutral 0.5 for all four predicates as the evidence is indirect.\"}",
+              "name": "submit_hdb2_psl_predicates"
+            },
+            "id": "call_00_bY3t5cqxyNCZjRd7rHYO6549",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787762648,
+  "id": "d702c228-4be8-47fa-b8c8-32363c0eae56",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 595,
+    "prompt_cache_hit_tokens": 2560,
+    "prompt_cache_miss_tokens": 73,
+    "prompt_tokens": 2633,
+    "prompt_tokens_details": {
+      "cached_tokens": 2560
+    },
+    "total_tokens": 3228
+  }
+}

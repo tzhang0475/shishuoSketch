@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"predicates\": [{\"predicate_id\": \"q0\", \"predicate\": \"ContextCompatible\", \"mention_id\": \"hdb2-occ-fe874dc1b7c56c6885cd\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q1\", \"predicate\": \"CrossStoryCompatible\", \"mention_id\": \"hdb2-occ-fe874dc1b7c56c6885cd\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q2\", \"predicate\": \"ContextCompatible\", \"mention_id\": \"hdb2-occ-fe874dc1b7c56c6885cd\", \"other_mention_id\": null, \"candidate_key\": \"c1\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q3\", \"predicate\": \"CrossStoryCompatible\", \"mention_id\": \"hdb2-occ-fe874dc1b7c56c6885cd\", \"other_mention_id\": null, \"candidate_key\": \"c1\", \"value\": 0.5, \"evidence_ids\": []}], \"note\": \"The mention \\\"丹陽尹\\\" is an office reference. Candidate c0 is 王羲之 (王右軍), who has no office/title matching 丹陽尹; candidate c1 is 劉惔 (丹陽尹), whose title matches. However, the mention is an office_reference semantic type, not a person mention, so ContextCompatible/CrossStoryCompatible for both candidates are evaluated as neutral (0.5) given the supplied evidence does not directly establish a person identity for this office reference in the requested predicate forms.\"}",
+              "name": "submit_hdb2_psl_predicates"
+            },
+            "id": "call_00_LTRf25qRyf90pXyk0Y5r4099",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787762473,
+  "id": "8f11bd2d-b833-4081-a944-44afc9a56f88",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 461,
+    "prompt_cache_hit_tokens": 768,
+    "prompt_cache_miss_tokens": 4478,
+    "prompt_tokens": 5246,
+    "prompt_tokens_details": {
+      "cached_tokens": 768
+    },
+    "total_tokens": 5707
+  }
+}

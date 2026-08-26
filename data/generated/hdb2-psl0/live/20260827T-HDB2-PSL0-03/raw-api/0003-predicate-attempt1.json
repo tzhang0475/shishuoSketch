@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"predicates\": [{\"predicate_id\": \"q0\", \"predicate\": \"ContextCompatible\", \"mention_id\": \"hdb2-occ-477a7b39c49e61f5cae6\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q1\", \"predicate\": \"CrossStoryCompatible\", \"mention_id\": \"hdb2-occ-477a7b39c49e61f5cae6\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q2\", \"predicate\": \"ContextCompatible\", \"mention_id\": \"hdb2-occ-477a7b39c49e61f5cae6\", \"other_mention_id\": null, \"candidate_key\": \"c1\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q3\", \"predicate\": \"CrossStoryCompatible\", \"mention_id\": \"hdb2-occ-477a7b39c49e61f5cae6\", \"other_mention_id\": null, \"candidate_key\": \"c1\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q4\", \"predicate\": \"ContextCompatible\", \"mention_id\": \"hdb2-occ-477a7b39c49e61f5cae6\", \"other_mention_id\": null, \"candidate_key\": \"c2\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q5\", \"predicate\": \"CrossStoryCompatible\", \"mention_id\": \"hdb2-occ-477a7b39c49e61f5cae6\", \"other_mention_id\": null, \"candidate_key\": \"c2\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q6\", \"predicate\": \"Coreference\", \"mention_id\": \"hdb2-occ-477a7b39c49e61f5cae6\", \"other_mention_id\": \"hdb2-occ-cbc20e7e9f10401ce0f8\", \"candidate_key\": null, \"value\": 0.5, \"evidence_ids\": []}], \"note\": \"The mention \\\"王含\\\" is the person being discussed in story 05-fangzheng-028. The related mention \\\"敦主簿\\\" is a title reference to 王敦's clerk (何充), not to 王含. The candidates c0 (王含), c1 (王敦), c2 (何充) are all present in the story. The mention \\\"王含\\\" refers to 王含 himself. For ContextCompatible, the mention is in the same story context as all candidates. For CrossStoryCompatible, evidence is limited. For Coreference between \\\"王含\\\" and \\\"敦主簿\\\", these are different entities (王含 vs 王敦's clerk position), so neutral.\"}",
+              "name": "submit_hdb2_psl_predicates"
+            },
+            "id": "call_00_o0YgNiHKJOUo0f8V7xSG4584",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787762450,
+  "id": "986ad29f-25bb-421e-ab6d-8bf371313b1b",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 751,
+    "prompt_cache_hit_tokens": 768,
+    "prompt_cache_miss_tokens": 6323,
+    "prompt_tokens": 7091,
+    "prompt_tokens_details": {
+      "cached_tokens": 768
+    },
+    "total_tokens": 7842
+  }
+}

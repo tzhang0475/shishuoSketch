@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"predicates\": [{\"predicate_id\": \"q0\", \"predicate\": \"ContextCompatible\", \"mention_id\": \"hdb2-occ-af4509dd29de66599524\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q1\", \"predicate\": \"CrossStoryCompatible\", \"mention_id\": \"hdb2-occ-af4509dd29de66599524\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q2\", \"predicate\": \"ContextCompatible\", \"mention_id\": \"hdb2-occ-af4509dd29de66599524\", \"other_mention_id\": null, \"candidate_key\": \"c1\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q3\", \"predicate\": \"CrossStoryCompatible\", \"mention_id\": \"hdb2-occ-af4509dd29de66599524\", \"other_mention_id\": null, \"candidate_key\": \"c1\", \"value\": 0.5, \"evidence_ids\": []}], \"note\": \"The mention \\\"康伯母\\\" refers to 韓康伯's mother (殷氏). The candidates are c0 (韓伯/韓康伯) and c1 (殷浩). The mention is a kinship reference to 韓康伯's mother, not directly to either candidate person. For c0 (韓伯), the mention refers to his mother, so context compatibility is indirect/neutral. For c1 (殷浩), the annotation (ev1) states 殷浩 is the brother of 韓康伯's mother, so there is a kinship link but the mention itself is not about 殷浩 directly. Both ContextCompatible and CrossStoryCompatible are evaluated as neutral (0.5) since the mention is a kinship reference to a third party (the mother), not directly identifying either candidate.\"}",
+              "name": "submit_hdb2_psl_predicates"
+            },
+            "id": "call_00_cuBpadBHf0Kq92Antj2M0266",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787762460,
+  "id": "a5a3b0c3-dbb3-465b-8cb2-45482e90bae9",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 507,
+    "prompt_cache_hit_tokens": 768,
+    "prompt_cache_miss_tokens": 1865,
+    "prompt_tokens": 2633,
+    "prompt_tokens_details": {
+      "cached_tokens": 768
+    },
+    "total_tokens": 3140
+  }
+}

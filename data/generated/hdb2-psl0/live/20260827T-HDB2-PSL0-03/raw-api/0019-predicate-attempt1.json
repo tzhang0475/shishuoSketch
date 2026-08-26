@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"predicates\": [{\"predicate_id\": \"q0\", \"predicate\": \"ContextCompatible\", \"mention_id\": \"hdb2-occ-bea65ad7fb6fa7883608\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 1.0, \"evidence_ids\": [\"ev0\", \"ev3\"]}, {\"predicate_id\": \"q1\", \"predicate\": \"CrossStoryCompatible\", \"mention_id\": \"hdb2-occ-bea65ad7fb6fa7883608\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 1.0, \"evidence_ids\": [\"ev0\", \"ev3\"]}, {\"predicate_id\": \"q2\", \"predicate\": \"ContextCompatible\", \"mention_id\": \"hdb2-occ-bea65ad7fb6fa7883608\", \"other_mention_id\": null, \"candidate_key\": \"c1\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q3\", \"predicate\": \"CrossStoryCompatible\", \"mention_id\": \"hdb2-occ-bea65ad7fb6fa7883608\", \"other_mention_id\": null, \"candidate_key\": \"c1\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q4\", \"predicate\": \"ContextCompatible\", \"mention_id\": \"hdb2-occ-bea65ad7fb6fa7883608\", \"other_mention_id\": null, \"candidate_key\": \"c2\", \"value\": 1.0, \"evidence_ids\": [\"ev0\", \"ev5\"]}, {\"predicate_id\": \"q5\", \"predicate\": \"CrossStoryCompatible\", \"mention_id\": \"hdb2-occ-bea65ad7fb6fa7883608\", \"other_mention_id\": null, \"candidate_key\": \"c2\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q6\", \"predicate\": \"Coreference\", \"mention_id\": \"hdb2-occ-87c104b7665456797ebf\", \"other_mention_id\": \"hdb2-occ-bea65ad7fb6fa7883608\", \"candidate_key\": null, \"value\": 0.5, \"evidence_ids\": []}], \"note\": \"謝夫人 (mention) is the wife of 王凝之 (c0) per ev0/ev3, so ContextCompatible and CrossStoryCompatible for c0 are high. c2 is 謝夫人 herself (the mention surface matches c2 name), so ContextCompatible high. c1 (王羲之) is the father-in-law context, not the mention itself, so neutral. Coreference between 太傅 and 謝夫人 is not supported by evidence, neutral.\"}",
+              "name": "submit_hdb2_psl_predicates"
+            },
+            "id": "call_00_IXWZruhUFj6OmlzDhYnx0586",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787762519,
+  "id": "c7d0d8f4-55a9-497e-8df2-4c9aa9e3af8a",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 693,
+    "prompt_cache_hit_tokens": 768,
+    "prompt_cache_miss_tokens": 4609,
+    "prompt_tokens": 5377,
+    "prompt_tokens_details": {
+      "cached_tokens": 768
+    },
+    "total_tokens": 6070
+  }
+}

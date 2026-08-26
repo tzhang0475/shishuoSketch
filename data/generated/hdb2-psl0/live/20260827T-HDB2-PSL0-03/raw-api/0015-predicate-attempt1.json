@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"predicates\": [{\"predicate_id\": \"q0\", \"predicate\": \"ContextCompatible\", \"mention_id\": \"hdb2-occ-c2c742cffc0195f860b6\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q1\", \"predicate\": \"CrossStoryCompatible\", \"mention_id\": \"hdb2-occ-c2c742cffc0195f860b6\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 0.5, \"evidence_ids\": []}], \"note\": \"The mention \\\"步兵\\\" (title reference) is being evaluated against candidate c0 (石苞). The candidate profile shows aliases 咸/籍/阮渾 and courtesy name 仲容, which do not match the mention surface \\\"步兵\\\". The story context mentions 阮渾 and 步兵 (likely 阮籍, the \\\"步兵校尉\\\"). The candidate c0's confirmed story is 23-rendan-013, and ev2 shows 石苞 as a known participant in this story. However, the mention \\\"步兵\\\" is a title reference that does not clearly align with candidate 石苞's identity. ContextCompatible: no strong contextual evidence links the title \\\"步兵\\\" to candidate 石苞; neutral. CrossStoryCompatible: no cross-story evidence supplied to evaluate compatibility; neutral.\"}",
+              "name": "submit_hdb2_psl_predicates"
+            },
+            "id": "call_00_sTquu3LR5mTxTCUlQg0p6327",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787762503,
+  "id": "4943fd20-ea11-49ea-80fd-7ff480dd8aaf",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 369,
+    "prompt_cache_hit_tokens": 2304,
+    "prompt_cache_miss_tokens": 1,
+    "prompt_tokens": 2305,
+    "prompt_tokens_details": {
+      "cached_tokens": 2304
+    },
+    "total_tokens": 2674
+  }
+}

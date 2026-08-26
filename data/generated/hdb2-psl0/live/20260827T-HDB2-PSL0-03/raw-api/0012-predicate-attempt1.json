@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"predicates\": [{\"predicate_id\": \"q0\", \"predicate\": \"ContextCompatible\", \"mention_id\": \"hdb2-occ-10623d57bd7dac1f24b2\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 1.0, \"evidence_ids\": [\"ev0\", \"ev2\", \"ev3\"]}, {\"predicate_id\": \"q1\", \"predicate\": \"CrossStoryCompatible\", \"mention_id\": \"hdb2-occ-10623d57bd7dac1f24b2\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 1.0, \"evidence_ids\": [\"ev3\"]}, {\"predicate_id\": \"q2\", \"predicate\": \"Coreference\", \"mention_id\": \"hdb2-occ-10623d57bd7dac1f24b2\", \"other_mention_id\": \"hdb2-occ-3f1d8443374e4c1ef015\", \"candidate_key\": null, \"value\": 0.0, \"evidence_ids\": [\"ev0\"]}, {\"predicate_id\": \"q3\", \"predicate\": \"Coreference\", \"mention_id\": \"hdb2-occ-10623d57bd7dac1f24b2\", \"other_mention_id\": \"hdb2-occ-5e5351b612e1eeff8226\", \"candidate_key\": null, \"value\": 0.0, \"evidence_ids\": [\"ev0\"]}], \"note\": \"The mention \\\"劉尹\\\" (Liu Yin, i.e., 劉惔 as 丹陽尹) refers to 劉惔. ContextCompatible: the story context (02-yanyu-054) matches candidate c0's confirmed story and title 丹陽尹. CrossStoryCompatible: c0 is confirmed across multiple stories. Coreference q2: \\\"劉尹\\\" vs \\\"王長史\\\" are different people (Liu vs Wang). Coreference q3: \\\"劉尹\\\" vs \\\"王\\\" are different people (Liu vs Wang).\"}",
+              "name": "submit_hdb2_psl_predicates"
+            },
+            "id": "call_00_SwC7eNg4v3X2YlQPqscE8735",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787762488,
+  "id": "d709a15d-f435-4fc6-af08-b4cd7f0638eb",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 523,
+    "prompt_cache_hit_tokens": 4096,
+    "prompt_cache_miss_tokens": 78,
+    "prompt_tokens": 4174,
+    "prompt_tokens_details": {
+      "cached_tokens": 4096
+    },
+    "total_tokens": 4697
+  }
+}

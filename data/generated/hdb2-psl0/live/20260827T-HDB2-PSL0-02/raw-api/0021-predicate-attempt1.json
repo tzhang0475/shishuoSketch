@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"predicates\": [{\"predicate_id\": \"q0\", \"predicate\": \"ContextCompatible\", \"mention_id\": \"hdb2-occ-5e5351b612e1eeff8226\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q1\", \"predicate\": \"CrossStoryCompatible\", \"mention_id\": \"hdb2-occ-5e5351b612e1eeff8226\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q2\", \"predicate\": \"Coreference\", \"mention_id\": \"hdb2-occ-10623d57bd7dac1f24b2\", \"other_mention_id\": \"hdb2-occ-5e5351b612e1eeff8226\", \"candidate_key\": null, \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q3\", \"predicate\": \"Coreference\", \"mention_id\": \"hdb2-occ-3f1d8443374e4c1ef015\", \"other_mention_id\": \"hdb2-occ-5e5351b612e1eeff8226\", \"candidate_key\": null, \"value\": 0.5, \"evidence_ids\": []}], \"note\": \"The mention \\\"王\\\" (surface) in story 02-yanyu-054 refers to 王長史 (王胡之), not to candidate 劉惔. The candidate c0 is 劉惔 (劉尹/真長). The mention \\\"王\\\" is a different person (王長史), so Coreference with 劉尹 (hdb2-occ-10623d57bd7dac1f24b2) and 王長史 (hdb2-occ-3f1d8443374e4c1ef015) is not supported. ContextCompatible and CrossStoryCompatible for candidate c0 are neutral given insufficient direct evidence linking the \\\"王\\\" mention to 劉惔.\"}",
+              "name": "submit_hdb2_psl_predicates"
+            },
+            "id": "call_00_ZBuXLUSz4MQ8VjxW1iFd1245",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787762214,
+  "id": "d5b7433f-a52d-4af4-b104-ea6e88be8ad8",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 537,
+    "prompt_cache_hit_tokens": 1024,
+    "prompt_cache_miss_tokens": 3205,
+    "prompt_tokens": 4229,
+    "prompt_tokens_details": {
+      "cached_tokens": 1024
+    },
+    "total_tokens": 4766
+  }
+}

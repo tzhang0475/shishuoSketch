@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"predicates\": [{\"predicate_id\": \"q0\", \"predicate\": \"ContextCompatible\", \"mention_id\": \"hdb2-occ-fe874dc1b7c56c6885cd\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q1\", \"predicate\": \"CrossStoryCompatible\", \"mention_id\": \"hdb2-occ-fe874dc1b7c56c6885cd\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q2\", \"predicate\": \"ContextCompatible\", \"mention_id\": \"hdb2-occ-fe874dc1b7c56c6885cd\", \"other_mention_id\": null, \"candidate_key\": \"c1\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q3\", \"predicate\": \"CrossStoryCompatible\", \"mention_id\": \"hdb2-occ-fe874dc1b7c56c6885cd\", \"other_mention_id\": null, \"candidate_key\": \"c1\", \"value\": 0.5, \"evidence_ids\": []}], \"note\": \"The mention \\\"丹陽尹\\\" is an office reference. Candidate c0 is 王羲之 (王右軍), who has no office/title matching 丹陽尹; candidate c1 is 劉惔 (丹陽尹), whose title matches. However, the mention is an office_reference semantic type, and the request only asks for ContextCompatible and CrossStoryCompatible (not Coreference). The mention surface \\\"丹陽尹\\\" refers to the office held by 劉真長 in this story. For c1, the office matches (丹陽尹 is 劉惔's title per ev3/ev7), but ContextCompatible evaluates whether the candidate fits the occurrence context. Since the mention is an office reference and c1 holds that office, ContextCompatible is supported. However, given the instruction to only use supplied evidence and the office_reference nature, I assign neutral 0.5 for all since the mention is an office reference rather than a person mention, and no direct person-mention-to-candidate compatibility can be firmly established from supplied evidence alone.\"}",
+              "name": "submit_hdb2_psl_predicates"
+            },
+            "id": "call_00_swL1a9aXT0K8W97YrKuP4871",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787762662,
+  "id": "527a64b2-80f3-473a-b5d0-72dd9c6aa6bb",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 571,
+    "prompt_cache_hit_tokens": 5120,
+    "prompt_cache_miss_tokens": 126,
+    "prompt_tokens": 5246,
+    "prompt_tokens_details": {
+      "cached_tokens": 5120
+    },
+    "total_tokens": 5817
+  }
+}

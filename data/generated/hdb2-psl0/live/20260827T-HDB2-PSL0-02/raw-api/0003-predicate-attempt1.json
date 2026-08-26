@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"predicates\": [{\"predicate_id\": \"q0\", \"predicate\": \"ContextCompatible\", \"mention_id\": \"hdb2-occ-477a7b39c49e61f5cae6\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 1.0, \"evidence_ids\": [\"ev0\", \"ev3\"]}, {\"predicate_id\": \"q1\", \"predicate\": \"CrossStoryCompatible\", \"mention_id\": \"hdb2-occ-477a7b39c49e61f5cae6\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 1.0, \"evidence_ids\": [\"ev3\"]}, {\"predicate_id\": \"q2\", \"predicate\": \"ContextCompatible\", \"mention_id\": \"hdb2-occ-477a7b39c49e61f5cae6\", \"other_mention_id\": null, \"candidate_key\": \"c1\", \"value\": 1.0, \"evidence_ids\": [\"ev0\", \"ev4\"]}, {\"predicate_id\": \"q3\", \"predicate\": \"CrossStoryCompatible\", \"mention_id\": \"hdb2-occ-477a7b39c49e61f5cae6\", \"other_mention_id\": null, \"candidate_key\": \"c1\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q4\", \"predicate\": \"ContextCompatible\", \"mention_id\": \"hdb2-occ-477a7b39c49e61f5cae6\", \"other_mention_id\": null, \"candidate_key\": \"c2\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q5\", \"predicate\": \"CrossStoryCompatible\", \"mention_id\": \"hdb2-occ-477a7b39c49e61f5cae6\", \"other_mention_id\": null, \"candidate_key\": \"c2\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q6\", \"predicate\": \"Coreference\", \"mention_id\": \"hdb2-occ-477a7b39c49e61f5cae6\", \"other_mention_id\": \"hdb2-occ-cbc20e7e9f10401ce0f8\", \"candidate_key\": null, \"value\": 0.5, \"evidence_ids\": []}], \"note\": \"The mention \\\"王含\\\" is the subject of the story. Candidate c0 (何充) is the person who is 王敦's 主簿 in the same story, not 王含. Candidate c1 (王含) matches the mention surface directly and is the person described in the story context. Candidate c2 (王敦) is 王含's brother in the story. The related mention \\\"敦主簿\\\" is a title reference to 王敦's 主簿 (何充), not coreferent with 王含.\"}",
+              "name": "submit_hdb2_psl_predicates"
+            },
+            "id": "call_00_O0ZyL2iOL8DjYpPNu3J17814",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787762142,
+  "id": "7ea21b80-acef-4124-83b4-eed04ee3c831",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 733,
+    "prompt_cache_hit_tokens": 768,
+    "prompt_cache_miss_tokens": 6323,
+    "prompt_tokens": 7091,
+    "prompt_tokens_details": {
+      "cached_tokens": 768
+    },
+    "total_tokens": 7824
+  }
+}

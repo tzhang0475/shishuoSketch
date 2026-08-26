@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"predicates\": [{\"predicate_id\": \"q0\", \"predicate\": \"ContextCompatible\", \"mention_id\": \"hdb2-occ-cbc20e7e9f10401ce0f8\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 1.0, \"evidence_ids\": [\"ev0\", \"ev6\", \"ev7\"]}, {\"predicate_id\": \"q1\", \"predicate\": \"CrossStoryCompatible\", \"mention_id\": \"hdb2-occ-cbc20e7e9f10401ce0f8\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 1.0, \"evidence_ids\": [\"ev0\", \"ev7\"]}, {\"predicate_id\": \"q2\", \"predicate\": \"ContextCompatible\", \"mention_id\": \"hdb2-occ-cbc20e7e9f10401ce0f8\", \"other_mention_id\": null, \"candidate_key\": \"c1\", \"value\": 1.0, \"evidence_ids\": [\"ev0\", \"ev6\", \"ev8\"]}, {\"predicate_id\": \"q3\", \"predicate\": \"CrossStoryCompatible\", \"mention_id\": \"hdb2-occ-cbc20e7e9f10401ce0f8\", \"other_mention_id\": null, \"candidate_key\": \"c1\", \"value\": 1.0, \"evidence_ids\": [\"ev0\", \"ev8\"]}, {\"predicate_id\": \"q4\", \"predicate\": \"ContextCompatible\", \"mention_id\": \"hdb2-occ-cbc20e7e9f10401ce0f8\", \"other_mention_id\": null, \"candidate_key\": \"c2\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q5\", \"predicate\": \"CrossStoryCompatible\", \"mention_id\": \"hdb2-occ-cbc20e7e9f10401ce0f8\", \"other_mention_id\": null, \"candidate_key\": \"c2\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q6\", \"predicate\": \"Coreference\", \"mention_id\": \"hdb2-occ-477a7b39c49e61f5cae6\", \"other_mention_id\": \"hdb2-occ-cbc20e7e9f10401ce0f8\", \"candidate_key\": null, \"value\": 0.0, \"evidence_ids\": [\"ev0\", \"related:hdb2-occ-477a7b39c49e61f5cae6:ev0\"]}], \"note\": \"The mention \\\"敦主簿\\\" refers to 何充 (c0) as 王敦's 主簿 in story 05-fangzheng-028. c0 (何充) is context-compatible: the story explicitly states \\\"何充爲敦主簿\\\" (ev0), and the candidate profile confirms this office (ev7). c1 (王敦) is context-compatible as the employer/patron in the same story (ev0, ev8). c2 (阮裕) has no supporting evidence in this story context, so neutral. Coreference between 王含 (hdb2-occ-477a7b39c49e61f5cae6) and 敦主簿 (the mention) is false: 王含 is 王敦's brother, not the 主簿; the 主簿 is 何充 (ev0).\"}",
+              "name": "submit_hdb2_psl_predicates"
+            },
+            "id": "call_00_8NSo46u4ehP9qiQmGdst9278",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787762181,
+  "id": "fda3557b-3aa3-4a4a-913a-c1923eea830b",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 848,
+    "prompt_cache_hit_tokens": 768,
+    "prompt_cache_miss_tokens": 7100,
+    "prompt_tokens": 7868,
+    "prompt_tokens_details": {
+      "cached_tokens": 768
+    },
+    "total_tokens": 8716
+  }
+}

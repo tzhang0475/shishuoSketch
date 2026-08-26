@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"predicates\": [{\"predicate_id\": \"q0\", \"predicate\": \"ContextCompatible\", \"mention_id\": \"hdb2-occ-b44a7c8636d8042ad010\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q1\", \"predicate\": \"CrossStoryCompatible\", \"mention_id\": \"hdb2-occ-b44a7c8636d8042ad010\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q2\", \"predicate\": \"ContextCompatible\", \"mention_id\": \"hdb2-occ-b44a7c8636d8042ad010\", \"other_mention_id\": null, \"candidate_key\": \"c1\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q3\", \"predicate\": \"CrossStoryCompatible\", \"mention_id\": \"hdb2-occ-b44a7c8636d8042ad010\", \"other_mention_id\": null, \"candidate_key\": \"c1\", \"value\": 0.5, \"evidence_ids\": []}], \"note\": \"The mention \\\"長史\\\" is a title reference in story 08-shangyu-051. The story context shows 謝鯤 was 長史 under 王敦 (大將軍). Candidate c0 is 王敦 (大將軍), and c1 is 謝鯤. The mention \\\"長史\\\" refers to the office held by 謝鯤, not directly to either candidate as a person reference. Since the mention is a title reference and does not directly identify either candidate as the referent, ContextCompatible and CrossStoryCompatible are neutral (0.5) for both candidates without strong supporting evidence.\"}",
+              "name": "submit_hdb2_psl_predicates"
+            },
+            "id": "call_00_DmBucxifPWVPL25EYqk43454",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787762211,
+  "id": "66272e5a-df51-4eeb-9c2a-31f6487191d8",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 477,
+    "prompt_cache_hit_tokens": 768,
+    "prompt_cache_miss_tokens": 6487,
+    "prompt_tokens": 7255,
+    "prompt_tokens_details": {
+      "cached_tokens": 768
+    },
+    "total_tokens": 7732
+  }
+}

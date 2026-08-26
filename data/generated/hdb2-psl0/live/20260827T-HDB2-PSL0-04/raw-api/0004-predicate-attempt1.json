@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"predicates\": [{\"predicate_id\": \"q0\", \"predicate\": \"ContextCompatible\", \"mention_id\": \"hdb2-occ-08f1a686b68dd0951704\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q1\", \"predicate\": \"CrossStoryCompatible\", \"mention_id\": \"hdb2-occ-08f1a686b68dd0951704\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q2\", \"predicate\": \"ContextCompatible\", \"mention_id\": \"hdb2-occ-08f1a686b68dd0951704\", \"other_mention_id\": null, \"candidate_key\": \"c1\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q3\", \"predicate\": \"CrossStoryCompatible\", \"mention_id\": \"hdb2-occ-08f1a686b68dd0951704\", \"other_mention_id\": null, \"candidate_key\": \"c1\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q4\", \"predicate\": \"ContextCompatible\", \"mention_id\": \"hdb2-occ-08f1a686b68dd0951704\", \"other_mention_id\": null, \"candidate_key\": \"c2\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q5\", \"predicate\": \"CrossStoryCompatible\", \"mention_id\": \"hdb2-occ-08f1a686b68dd0951704\", \"other_mention_id\": null, \"candidate_key\": \"c2\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q6\", \"predicate\": \"ContextCompatible\", \"mention_id\": \"hdb2-occ-08f1a686b68dd0951704\", \"other_mention_id\": null, \"candidate_key\": \"c3\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q7\", \"predicate\": \"CrossStoryCompatible\", \"mention_id\": \"hdb2-occ-08f1a686b68dd0951704\", \"other_mention_id\": null, \"candidate_key\": \"c3\", \"value\": 0.5, \"evidence_ids\": []}], \"note\": \"The mention \\\"王夷甫\\\" appears in story 07-shijian-005 as the protagonist. The candidates are 王夷甫(c0), 王戎(c1), 羊祜(c2), 山濤(c3). The mention surface is \\\"王夷甫\\\" which directly matches candidate c0's name. However, the request only asks for ContextCompatible and CrossStoryCompatible predicates (no Coreference). Since the task is candidate-only evaluation and I should not make final identity judgments, and the supplied evidence does not clearly establish context compatibility or cross-story compatibility for these candidates beyond what's already in deterministic predicates, I provide neutral 0.5 values for all requested predicates. The mention is clearly 王夷甫 himself in the story, but without explicit context-compatibility evidence for each candidate, neutral is appropriate.\"}",
+              "name": "submit_hdb2_psl_predicates"
+            },
+            "id": "call_00_Y0q2ejyXONiJ2ax1TZO54685",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787762643,
+  "id": "2757d1af-4c43-4e80-a4de-d79fadc012e3",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 809,
+    "prompt_cache_hit_tokens": 5632,
+    "prompt_cache_miss_tokens": 81,
+    "prompt_tokens": 5713,
+    "prompt_tokens_details": {
+      "cached_tokens": 5632
+    },
+    "total_tokens": 6522
+  }
+}

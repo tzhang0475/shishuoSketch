@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"predicates\": [{\"predicate_id\": \"q0\", \"predicate\": \"ContextCompatible\", \"mention_id\": \"hdb2-occ-99b0e48572a365a51cd5\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q1\", \"predicate\": \"CrossStoryCompatible\", \"mention_id\": \"hdb2-occ-99b0e48572a365a51cd5\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q2\", \"predicate\": \"ContextCompatible\", \"mention_id\": \"hdb2-occ-99b0e48572a365a51cd5\", \"other_mention_id\": null, \"candidate_key\": \"c1\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q3\", \"predicate\": \"CrossStoryCompatible\", \"mention_id\": \"hdb2-occ-99b0e48572a365a51cd5\", \"other_mention_id\": null, \"candidate_key\": \"c1\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q4\", \"predicate\": \"Coreference\", \"mention_id\": \"hdb2-occ-99b0e48572a365a51cd5\", \"other_mention_id\": \"hdb2-occ-26b5362fd97cab370857\", \"candidate_key\": null, \"value\": 1.0, \"evidence_ids\": [\"context:context:03-zhengshi-006:0:b1fd5a8c\", \"context:context:03-zhengshi-006:8:e7f0eb43\"]}], \"note\": \"The mention \\\"太傅鄭冲\\\" refers to 鄭冲 (太傅). The related mention \\\"太傅鄭冲\\\" is the same title_reference in the same story context, so Coreference is high. Neither candidate c0 (羊祜) nor c1 (賈充) matches 鄭冲; the story context involves 賈充 and 羊祜 consulting 太傅鄭冲, but the mention itself is 鄭冲, not either candidate. Context/CrossStory for both candidates are neutral (0.5) since the mention is a different person from both candidates.\"}",
+              "name": "submit_hdb2_psl_predicates"
+            },
+            "id": "call_00_daW9y78qLL5NexaAl6Wq6565",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787762700,
+  "id": "09452ce0-0eda-4044-958c-e18662b97aa3",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 599,
+    "prompt_cache_hit_tokens": 1408,
+    "prompt_cache_miss_tokens": 4494,
+    "prompt_tokens": 5902,
+    "prompt_tokens_details": {
+      "cached_tokens": 1408
+    },
+    "total_tokens": 6501
+  }
+}

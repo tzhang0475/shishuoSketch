@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"predicates\": [{\"predicate_id\": \"q0\", \"predicate\": \"ContextCompatible\", \"mention_id\": \"hdb2-occ-3f1d8443374e4c1ef015\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 1.0, \"evidence_ids\": [\"ev0\", \"ev2\", \"ev3\"]}, {\"predicate_id\": \"q1\", \"predicate\": \"CrossStoryCompatible\", \"mention_id\": \"hdb2-occ-3f1d8443374e4c1ef015\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 1.0, \"evidence_ids\": [\"ev3\"]}, {\"predicate_id\": \"q2\", \"predicate\": \"Coreference\", \"mention_id\": \"hdb2-occ-10623d57bd7dac1f24b2\", \"other_mention_id\": \"hdb2-occ-3f1d8443374e4c1ef015\", \"candidate_key\": null, \"value\": 0.0, \"evidence_ids\": [\"ev0\", \"related:hdb2-occ-10623d57bd7dac1f24b2:ev0\"]}, {\"predicate_id\": \"q3\", \"predicate\": \"Coreference\", \"mention_id\": \"hdb2-occ-3f1d8443374e4c1ef015\", \"other_mention_id\": \"hdb2-occ-5e5351b612e1eeff8226\", \"candidate_key\": null, \"value\": 0.0, \"evidence_ids\": [\"ev0\", \"related:hdb2-occ-5e5351b612e1eeff8226:ev0\"]}], \"note\": \"q0: 王長史 (劉惔) 在故事02-yanyu-054中出現，與候選人c0 (劉惔) 的confirmed story profile一致，時間相容。q1: 候選人c0跨故事相容，confirmed_story_ids包含本故事。q2: 劉尹與王長史是同一故事中兩個不同人物（劉尹=劉惔，王長史=王胡之），非同一人。q3: 王長史與王（簡稱）在故事中為同一人（王胡之），但候選人c0是劉惔，故王長史≠劉惔。\"}",
+              "name": "submit_hdb2_psl_predicates"
+            },
+            "id": "call_00_Tnfu1E98y53t3uXNkvxy1461",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787762480,
+  "id": "d1193563-13b9-4551-8cdc-af392b137514",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 602,
+    "prompt_cache_hit_tokens": 4096,
+    "prompt_cache_miss_tokens": 77,
+    "prompt_tokens": 4173,
+    "prompt_tokens_details": {
+      "cached_tokens": 4096
+    },
+    "total_tokens": 4775
+  }
+}

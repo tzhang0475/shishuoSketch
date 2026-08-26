@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"predicates\": [{\"predicate_id\": \"q0\", \"predicate\": \"ContextCompatible\", \"mention_id\": \"hdb2-occ-2d62af5441fa974bfed1\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q1\", \"predicate\": \"CrossStoryCompatible\", \"mention_id\": \"hdb2-occ-2d62af5441fa974bfed1\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q2\", \"predicate\": \"ContextCompatible\", \"mention_id\": \"hdb2-occ-2d62af5441fa974bfed1\", \"other_mention_id\": null, \"candidate_key\": \"c1\", \"value\": 1.0, \"evidence_ids\": [\"ev0\", \"ev1\"]}, {\"predicate_id\": \"q3\", \"predicate\": \"CrossStoryCompatible\", \"mention_id\": \"hdb2-occ-2d62af5441fa974bfed1\", \"other_mention_id\": null, \"candidate_key\": \"c1\", \"value\": 0.5, \"evidence_ids\": []}], \"note\": \"The mention \\\"武帝\\\" in story 19-xianyuan-013 refers to 晉武帝 (Sima Yan), who matches candidate c1 (世祖武皇帝, with registry forms including 晉武帝/武帝). The story context about 賈充 and his wives aligns with the 武帝 reign. Candidate c0 (烈宗孝武皇帝) is a different ruler (東晉孝武帝) with no contextual match, so ContextCompatible is neutral. CrossStoryCompatible is neutral for both since no cross-story evidence is supplied.\"}",
+              "name": "submit_hdb2_psl_predicates"
+            },
+            "id": "call_00_pQA8FBp4J5qVTrSAHHO64341",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787762674,
+  "id": "550785a9-f590-492a-beff-a6ea58d21906",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 465,
+    "prompt_cache_hit_tokens": 2688,
+    "prompt_cache_miss_tokens": 77,
+    "prompt_tokens": 2765,
+    "prompt_tokens_details": {
+      "cached_tokens": 2688
+    },
+    "total_tokens": 3230
+  }
+}

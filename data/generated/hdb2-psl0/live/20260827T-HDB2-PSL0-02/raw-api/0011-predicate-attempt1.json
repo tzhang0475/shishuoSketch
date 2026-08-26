@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"predicates\": [{\"predicate_id\": \"q0\", \"predicate\": \"ContextCompatible\", \"mention_id\": \"hdb2-occ-2d62af5441fa974bfed1\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 1.0, \"evidence_ids\": [\"ev0\", \"ev1\"]}, {\"predicate_id\": \"q1\", \"predicate\": \"CrossStoryCompatible\", \"mention_id\": \"hdb2-occ-2d62af5441fa974bfed1\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 1.0, \"evidence_ids\": [\"ev0\", \"ev2\"]}, {\"predicate_id\": \"q2\", \"predicate\": \"ContextCompatible\", \"mention_id\": \"hdb2-occ-2d62af5441fa974bfed1\", \"other_mention_id\": null, \"candidate_key\": \"c1\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q3\", \"predicate\": \"CrossStoryCompatible\", \"mention_id\": \"hdb2-occ-2d62af5441fa974bfed1\", \"other_mention_id\": null, \"candidate_key\": \"c1\", \"value\": 0.5, \"evidence_ids\": []}], \"note\": \"The mention \\\"武帝\\\" in the story context refers to 晉武帝 (司馬炎), matching candidate c0 (世祖武皇帝) via alias match (ev0, ev2). The story is about 賈充 and his wives, set in the 正始/曹魏後期 phase (ev1), which is temporally compatible with c0. Candidate c1 (烈宗孝武皇帝, 東晉孝武帝) has no alias match or contextual support, so ContextCompatible and CrossStoryCompatible are neutral (0.5).\"}",
+              "name": "submit_hdb2_psl_predicates"
+            },
+            "id": "call_00_JJUKfomQ0OcGqjPPLgXx6004",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787762174,
+  "id": "d58a4d7a-111d-4c23-aa16-44518e76f1a7",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 478,
+    "prompt_cache_hit_tokens": 768,
+    "prompt_cache_miss_tokens": 1997,
+    "prompt_tokens": 2765,
+    "prompt_tokens_details": {
+      "cached_tokens": 768
+    },
+    "total_tokens": 3243
+  }
+}

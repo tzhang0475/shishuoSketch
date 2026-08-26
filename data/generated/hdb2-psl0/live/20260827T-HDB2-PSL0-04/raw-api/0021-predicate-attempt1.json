@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"predicates\": [{\"predicate_id\": \"q0\", \"predicate\": \"ContextCompatible\", \"mention_id\": \"hdb2-occ-5e5351b612e1eeff8226\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q1\", \"predicate\": \"CrossStoryCompatible\", \"mention_id\": \"hdb2-occ-5e5351b612e1eeff8226\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q2\", \"predicate\": \"Coreference\", \"mention_id\": \"hdb2-occ-5e5351b612e1eeff8226\", \"other_mention_id\": \"hdb2-occ-10623d57bd7dac1f24b2\", \"candidate_key\": null, \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q3\", \"predicate\": \"Coreference\", \"mention_id\": \"hdb2-occ-5e5351b612e1eeff8226\", \"other_mention_id\": \"hdb2-occ-3f1d8443374e4c1ef015\", \"candidate_key\": null, \"value\": 0.5, \"evidence_ids\": []}], \"note\": \"The mention \\\"王\\\" (surface) is an abbreviated person name in story 02-yanyu-054. The candidate c0 is 劉惔 (劉尹/真長), who appears in the same story as 王長史 and 劉尹. The mention \\\"王\\\" refers to 王長史 (Wang Changshi), not to 劉惔. Coreference with 劉尹 (hdb2-occ-10623d57bd7dac1f24b2) is unlikely since 王 ≠ 劉尹. Coreference with 王長史 (hdb2-occ-3f1d8443374e4c1ef015) is plausible since both refer to 王 in the same story, but the candidate c0 is 劉惔, not 王. ContextCompatible and CrossStoryCompatible evaluate whether the mention fits candidate c0 (劉惔); the mention \\\"王\\\" is a different person, so neutral/insufficient evidence.\"}",
+              "name": "submit_hdb2_psl_predicates"
+            },
+            "id": "call_00_fWkI3cffyiy11ogyQ0VC2570",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787762719,
+  "id": "3343f3bf-ddf1-4ca5-8735-092eac77c740",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 592,
+    "prompt_cache_hit_tokens": 1152,
+    "prompt_cache_miss_tokens": 3077,
+    "prompt_tokens": 4229,
+    "prompt_tokens_details": {
+      "cached_tokens": 1152
+    },
+    "total_tokens": 4821
+  }
+}
