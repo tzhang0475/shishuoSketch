@@ -6,8 +6,18 @@ the existing `/review/hdb2` projection.
 
 ## Frozen procedure
 
-The current 73-item projection is fingerprinted in
-`data/generated/hdb2-xe0/baseline.json`.  A deterministic scan of the 1,130
+The current 73-item HDB2-F semantic frontier is frozen in
+`data/generated/hdb2-xe0/baseline.json` (schema
+`hdb2-xe0-baseline-v2`) from
+`data/annotation/hdb2-f-review-queue.json`.  The reviewer-facing
+`site/public/generated/review/hdb2/` projection is validated for exact
+occurrence coverage, but its questions, labels, and explanation fields are
+not part of the semantic fingerprint.  The v1 baseline accidentally froze
+that physical UI representation; the explicit v2 migration preserves the
+legacy selection compatibility hash without making presentation changes
+historical frontier changes.
+
+A deterministic scan of the 1,130
 registered Shishuo Stories excludes the 143 current production Stories and
 selects 24 outside-scope Stories using frontier term matches, structural
 impact, office/kinship/name markers, and a stable tie-break hash.  The frozen

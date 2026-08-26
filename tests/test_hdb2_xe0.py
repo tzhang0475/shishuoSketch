@@ -18,12 +18,44 @@ class HDB2XE0Tests(unittest.TestCase):
         cls.baseline = xe0.freeze_baseline()
         cls.selection = xe0.build_selection()
 
-    def test_baseline_is_the_frozen_73_item_projection(self) -> None:
+    def test_baseline_is_the_frozen_73_item_semantic_frontier(self) -> None:
+        self.assertEqual(self.baseline["schema"], xe0.SEMANTIC_BASELINE_SCHEMA)
         self.assertEqual(self.baseline["baseline_review_items"], 73)
-        self.assertEqual(sum(self.baseline["fingerprint"]["counts_by_type"].values()), 73)
+        semantic = self.baseline["semantic_fingerprint"]
+        self.assertEqual(semantic["record_count"], 73)
+        self.assertEqual(sum(semantic["counts_by_status"].values()), 73)
+        self.assertEqual(sum(semantic["counts_by_priority"].values()), 73)
+        self.assertEqual(semantic, xe0.semantic_frontier_fingerprint())
+        self.assertEqual(self.baseline["baseline_hash"], xe0.baseline_contract_hash(self.baseline))
         self.assertTrue(self.baseline["frozen_before_live"])
         self.assertTrue(self.baseline["candidate_only"])
         self.assertFalse(self.baseline["canonical_write_back"])
+
+    def test_review_projection_covers_exactly_the_frozen_frontier(self) -> None:
+        self.assertEqual(xe0.validate_review_projection(), [])
+        frontier = {str(row["occurrence_id"]) for row in xe0._semantic_frontier_rows()}
+        _, items = xe0._baseline_items()
+        projected = {str(row["occurrence_id"]) for row in items}
+        self.assertEqual(projected, frontier)
+        self.assertEqual(len({str(row["review_id"]) for row in items}), 73)
+
+    def test_reviewer_facing_enrichment_does_not_change_semantic_fingerprint(self) -> None:
+        queue = xe0.read_json(xe0.BASELINE_QUEUE_PATH, {})
+        records = [dict(row) for row in queue["records"]]
+        before = xe0.semantic_frontier_fingerprint(records)
+        records[0]["ui_note"] = "presentation-only enrichment"
+        self.assertEqual(before, xe0.semantic_frontier_fingerprint(records))
+
+    def test_semantic_frontier_fields_change_the_fingerprint(self) -> None:
+        rows = xe0._semantic_frontier_rows()
+        for field in ("occurrence_id", "story_id", "surface", "status"):
+            changed = [dict(row) for row in rows]
+            changed[0][field] = f"changed-{field}"
+            self.assertNotEqual(
+                xe0.semantic_frontier_fingerprint(rows),
+                xe0.semantic_frontier_fingerprint(changed),
+                field,
+            )
 
     def test_selection_is_deterministic_and_outside_production(self) -> None:
         story_ids = [str(row["story_id"]) for row in self.selection["stories"]]
@@ -34,6 +66,7 @@ class HDB2XE0Tests(unittest.TestCase):
             self.selection["selection_hash"],
             xe0.stable_hash({key: value for key, value in self.selection.items() if key != "selection_hash"}),
         )
+        self.assertEqual(self.selection["baseline_hash"], self.baseline["selection_baseline_hash"])
         rebuilt = xe0.build_selection()
         self.assertEqual(rebuilt, self.selection)
 
@@ -63,7 +96,7 @@ class HDB2XE0Tests(unittest.TestCase):
     def test_no_protected_hdb2_f_hash_drift(self) -> None:
         manifest = json.loads((xe0.XE0_ROOT / "live/20260826T-HDB2-XE0-02/manifest.json").read_text(encoding="utf-8"))
         self.assertEqual(manifest["protected_hashes_before"], manifest["protected_hashes_after"])
-        self.assertEqual(manifest["protected_hashes_after"], xe0._protected_hashes())
+        self.assertTrue(xe0.protected_hashes_match_manifest(manifest["protected_hashes_after"]))
 
 
 if __name__ == "__main__":

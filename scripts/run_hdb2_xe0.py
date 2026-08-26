@@ -49,6 +49,7 @@ BASELINE_PATH = XE0_ROOT / "baseline.json"
 SELECTION_PATH = ROOT / "data/annotation/hdb2-xe0-story-selection.json"
 REVIEW_ROOT = XE0_ROOT / "review"
 SITE_REVIEW_ROOT = ROOT / "site/public/generated/review/hdb2-xe0"
+FROZEN_XE0_PROJECTION_PATH = XE0_ROOT / "live/20260826T-HDB2-XE0-02/review-projection.json"
 PRODUCTION_SITE = ROOT / "data/derived/sc1-site.json"
 CORPUS_PATH = ROOT / "data/derived/ds2-1a-shishuo-search-corpus.json"
 BASELINE_REVIEW_ROOT = ROOT / "site/public/generated/review/hdb2"
@@ -56,6 +57,20 @@ BASELINE_QUEUE_PATH = ROOT / "data/annotation/hdb2-f-review-queue.json"
 CATALOG = hng02.person_catalog()
 MODEL = "deepseek-v4-flash"
 RUN_VERSION = "hdb2-xe0-v1"
+SEMANTIC_BASELINE_SCHEMA = "hdb2-xe0-baseline-v2"
+LEGACY_BASELINE_SCHEMA = "hdb2-xe0-baseline-v1"
+SEMANTIC_FRONTIER_FIELDS = (
+    "occurrence_id",
+    "identity_observation_id",
+    "story_id",
+    "surface",
+    "status",
+    "priority",
+    "reason",
+    "blocked_relation_count",
+    "candidate_only",
+    "canonical_write_back",
+)
 PROMPT_VERSION = "HNG2-C.3/HNG2-V1-frozen"
 SCANNER_SCOPE = "H0A historical registry + explicit date patterns"
 TARGET_LIMIT_PER_STORY = 2
@@ -112,46 +127,285 @@ def _baseline_items() -> tuple[dict[str, Any], list[dict[str, Any]]]:
     return index, items
 
 
-def _baseline_fingerprint(index: Mapping[str, Any], items: Sequence[Mapping[str, Any]]) -> dict[str, Any]:
-    item_hashes = [
-        {"review_id": row.get("review_id"), "sha256": stable_hash(row)}
-        for row in sorted(items, key=lambda x: str(x.get("review_id")))
+def _frozen_xe0_baseline_items() -> tuple[dict[str, Any], list[dict[str, Any]]]:
+    """Load the pilot's historical baseline item records for offline replay.
+
+    These records are not the semantic XE0 baseline; they are the immutable
+    v1 compatibility view needed to replay the already-completed pilot's
+    audit.  New `/review/hdb2` presentation fields must not rewrite an old
+    XE0 result during validation.
+    """
+    baseline = read_json(BASELINE_PATH, {}) or {}
+    expected_ids = {str(value) for value in baseline.get("review_ids", [])}
+    document = read_json(FROZEN_XE0_PROJECTION_PATH, {}) or {}
+    if not expected_ids or not isinstance(document, Mapping):
+        return _baseline_items()
+    items = [
+        dict(item)
+        for item in document.get("items", [])
+        if isinstance(item, Mapping) and str(item.get("review_id") or "") in expected_ids
     ]
+    if len(items) != len(expected_ids):
+        # A resolved old item is intentionally absent from the committed XE0
+        # post-run projection.  Recover only that compatibility record from
+        # the current projection and the immutable old audit's type counts;
+        # this does not feed the current UI back into the old remaining set.
+        present_ids = {str(item.get("review_id") or "") for item in items}
+        missing_ids = expected_ids - present_ids
+        _, current_items = _baseline_items()
+        current_by_id = {str(item.get("review_id")): dict(item) for item in current_items}
+        old_audit = read_json(FROZEN_XE0_PROJECTION_PATH.parent / "audit.json", {}) or {}
+        resolved_ids = {str(row.get("review_id")) for row in old_audit.get("resolved_items", [])}
+        resolved_types = [
+            str(review_type)
+            for review_type, counts in sorted((old_audit.get("by_type") or {}).items())
+            if int((counts or {}).get("old_review_items_resolved") or 0) > 0
+        ]
+        if missing_ids != resolved_ids or len(resolved_types) != len(missing_ids):
+            raise RuntimeError("hdb2_xe0_frozen_baseline_items_missing")
+        for review_id, review_type in zip(sorted(missing_ids), resolved_types):
+            item = current_by_id.get(review_id)
+            if item is None:
+                raise RuntimeError("hdb2_xe0_frozen_baseline_item_recovery_failed")
+            item["review_type"] = review_type
+            items.append(item)
+    items.sort(key=lambda row: str(row.get("review_id")))
+    return dict(document.get("index") or {}), items
+
+
+def _semantic_frontier_rows(records: Sequence[Mapping[str, Any]] | None = None) -> list[dict[str, Any]]:
+    """Return the versioned HDB2-F review population, excluding UI fields.
+
+    HDB2-XE0 v1 accidentally treated the physical reviewer projection as the
+    historical baseline.  The queue is the semantic source of truth: only
+    these ten fields define whether an occurrence belongs to the frozen
+    frontier.  Extra fields in a copied record (including UI notes) are
+    intentionally ignored.
+    """
+    document: Mapping[str, Any] = {}
+    if records is None:
+        document = read_json(BASELINE_QUEUE_PATH, {}) or {}
+        records = document.get("records", []) if isinstance(document, Mapping) else []
+        if document.get("candidate_only") is not True:
+            raise RuntimeError("hdb2_xe0_queue_candidate_only_required")
+        if document.get("canonical_write_back") is not False:
+            raise RuntimeError("hdb2_xe0_queue_canonical_write_back_forbidden")
+    rows: list[dict[str, Any]] = []
+    for index, record in enumerate(records or []):
+        if not isinstance(record, Mapping):
+            raise RuntimeError(f"hdb2_xe0_invalid_queue_record:{index}")
+        missing = [field for field in SEMANTIC_FRONTIER_FIELDS if field not in record]
+        if missing:
+            raise RuntimeError(f"hdb2_xe0_queue_missing_fields:{index}:{','.join(missing)}")
+        rows.append({field: record.get(field) for field in SEMANTIC_FRONTIER_FIELDS})
+    rows.sort(key=lambda row: (str(row.get("occurrence_id")), str(row.get("identity_observation_id"))))
+    return rows
+
+
+def semantic_frontier_fingerprint(records: Sequence[Mapping[str, Any]] | None = None) -> dict[str, Any]:
+    """Build the stable semantic fingerprint used by the XE0 baseline.
+
+    This function deliberately normalizes away reviewer-facing presentation
+    fields.  It is public so focused regression tests can prove that harmless
+    UI enrichment does not alter the HDB2-F semantic frontier.
+    """
+    rows = _semantic_frontier_rows(records)
+    payload = {
+        "record_count": len(rows),
+        "records": rows,
+        "counts_by_status": dict(sorted(collections.Counter(str(row.get("status")) for row in rows).items())),
+        "counts_by_priority": dict(sorted(collections.Counter(str(row.get("priority")) for row in rows).items())),
+        "candidate_only": all(row.get("candidate_only") is True for row in rows),
+        # This is the safety flag itself: false means no queue record permits
+        # canonical write-back.  It is not the inverse of a validation check.
+        "canonical_write_back": any(row.get("canonical_write_back") is True for row in rows),
+    }
+    payload["semantic_hash"] = stable_hash(payload)
+    return payload
+
+
+def validate_review_projection(
+    frontier_rows: Sequence[Mapping[str, Any]] | None = None,
+    index: Mapping[str, Any] | None = None,
+    items: Sequence[Mapping[str, Any]] | None = None,
+) -> list[str]:
+    """Validate UI coverage without fingerprinting UI representation.
+
+    The reviewer projection must continue to cover exactly the frozen
+    occurrences, but its questions, labels, explanation fields, and other
+    presentation metadata may evolve independently.
+    """
+    expected_rows = list(frontier_rows) if frontier_rows is not None else _semantic_frontier_rows()
+    if index is None or items is None:
+        index, items = _baseline_items()
+    index_rows = list(index.get("items", [])) if isinstance(index, Mapping) else []
+    errors: list[str] = []
+    if index.get("candidate_only") is not True:
+        errors.append("review_projection_index_candidate_only")
+    if index.get("canonical_write_back") is not False:
+        errors.append("review_projection_index_canonical_write_back")
+    if int(index.get("item_count") or 0) != len(index_rows):
+        errors.append("review_projection_index_count_mismatch")
+    if len(items) != len(index_rows):
+        errors.append("review_projection_item_files_missing")
+    review_ids = [str(row.get("review_id") or "") for row in index_rows]
+    if any(not review_id for review_id in review_ids):
+        errors.append("review_projection_missing_review_id")
+    if len(review_ids) != len(set(review_ids)):
+        errors.append("review_projection_duplicate_review_id")
+    item_by_review_id = {str(row.get("review_id")): row for row in items if row.get("review_id")}
+    occurrence_ids: list[str] = []
+    expected_by_occurrence = {str(row.get("occurrence_id")): row for row in expected_rows}
+    for index_row in index_rows:
+        review_id = str(index_row.get("review_id") or "")
+        item = item_by_review_id.get(review_id)
+        if item is None:
+            errors.append(f"review_projection_missing_item:{review_id}")
+            continue
+        if str(item.get("review_id") or "") != review_id:
+            errors.append(f"review_projection_item_id_mismatch:{review_id}")
+        occurrence_id = str(item.get("occurrence_id") or "")
+        if not occurrence_id:
+            errors.append(f"review_projection_missing_occurrence:{review_id}")
+        occurrence_ids.append(occurrence_id)
+        expected = expected_by_occurrence.get(occurrence_id)
+        if expected is None:
+            errors.append(f"review_projection_unexpected_occurrence:{occurrence_id}")
+        elif str(item.get("identity_observation_id") or "") != str(expected.get("identity_observation_id") or ""):
+            errors.append(f"review_projection_identity_observation_mismatch:{occurrence_id}")
+        state = item.get("current_state") if isinstance(item.get("current_state"), Mapping) else {}
+        if state.get("candidate_only") is not True:
+            errors.append(f"review_projection_candidate_only:{occurrence_id}")
+        if state.get("canonical_write_back") is not False:
+            errors.append(f"review_projection_canonical_write_back:{occurrence_id}")
+    expected_occurrences = set(expected_by_occurrence)
+    actual_occurrences = set(occurrence_ids)
+    if len(occurrence_ids) != len(actual_occurrences):
+        errors.append("review_projection_duplicate_occurrence")
+    if actual_occurrences != expected_occurrences:
+        errors.append("review_projection_frontier_set_mismatch")
+    return sorted(set(errors))
+
+
+def _baseline_hash_payload(baseline: Mapping[str, Any]) -> dict[str, Any]:
+    """Fields defining the v2 semantic contract, excluding compatibility data."""
     return {
-        "index_hash": stable_hash(index),
-        "item_hashes": item_hashes,
-        "items_hash": stable_hash(item_hashes),
-        "item_count": len(items),
-        "counts_by_type": dict(sorted(collections.Counter(str(x.get("review_type")) for x in items).items())),
-        "counts_by_priority": dict(sorted(collections.Counter(str(x.get("priority")) for x in items).items())),
+        "schema": baseline.get("schema"),
+        "run_version": baseline.get("run_version"),
+        "semantic_source": baseline.get("semantic_source"),
+        "queue_source": baseline.get("queue_source"),
+        "frozen_before_live": baseline.get("frozen_before_live"),
+        "candidate_only": baseline.get("candidate_only"),
+        "canonical_write_back": baseline.get("canonical_write_back"),
+        "baseline_review_items": baseline.get("baseline_review_items"),
+        "semantic_fingerprint": baseline.get("semantic_fingerprint"),
     }
 
 
-def freeze_baseline() -> dict[str, Any]:
-    index, items = _baseline_items()
-    fingerprint = _baseline_fingerprint(index, items)
-    if fingerprint["item_count"] != 73:
-        raise RuntimeError(f"hdb2_xe0_expected_73_review_items:{fingerprint['item_count']}")
-    core = {
-        "schema": "hdb2-xe0-baseline-v1",
+def baseline_contract_hash(baseline: Mapping[str, Any]) -> str:
+    return stable_hash(_baseline_hash_payload(baseline))
+
+
+def _new_semantic_baseline(
+    semantic: Mapping[str, Any],
+    items: Sequence[Mapping[str, Any]],
+    *,
+    legacy: Mapping[str, Any] | None = None,
+) -> dict[str, Any]:
+    baseline: dict[str, Any] = {
+        "schema": SEMANTIC_BASELINE_SCHEMA,
         "run_version": RUN_VERSION,
-        "source": "site/public/generated/review/hdb2/index.json",
+        "semantic_source": str(BASELINE_QUEUE_PATH.relative_to(ROOT)),
         "queue_source": str(BASELINE_QUEUE_PATH.relative_to(ROOT)),
+        "review_projection_source": "site/public/generated/review/hdb2/index.json",
         "frozen_before_live": True,
         "candidate_only": True,
         "canonical_write_back": False,
-        "baseline_review_items": fingerprint["item_count"],
-        "fingerprint": fingerprint,
-        "review_ids": sorted(str(x.get("review_id")) for x in items),
+        "baseline_review_items": int(semantic.get("record_count") or 0),
+        "semantic_fingerprint": dict(semantic),
+        "review_ids": sorted(str(x.get("review_id")) for x in items if x.get("review_id")),
+        "review_projection_contract": {
+            "coverage_key": "occurrence_id",
+            "review_id_required": True,
+            "presentation_fields_excluded": True,
+        },
     }
-    core["baseline_hash"] = stable_hash(core)
-    if BASELINE_PATH.is_file():
-        existing = read_json(BASELINE_PATH, {}) or {}
-        if existing != core:
-            raise RuntimeError("hdb2_xe0_baseline_changed")
+    if legacy is not None:
+        legacy_hash = str(legacy.get("baseline_hash") or "")
+        baseline["selection_baseline_hash"] = legacy_hash
+        baseline["legacy_baseline_hash"] = legacy_hash
+        baseline["migration"] = {
+            "from_schema": LEGACY_BASELINE_SCHEMA,
+            "semantic_frontier_verified": True,
+            "verified_commits": [
+                "f96b5814c23fac7e9b73905ccf6267c5bfe6a340",
+                "afca6bad5c5fed39d24eb3527df0573e25c8ed31",
+            ],
+            "legacy_projection_fingerprint": legacy.get("fingerprint"),
+            "legacy_baseline_hash": legacy_hash,
+            "reason": "v1 froze reviewer-facing projection; v2 freezes HDB2-F queue semantics",
+        }
+    baseline["baseline_hash"] = baseline_contract_hash(baseline)
+    if "selection_baseline_hash" not in baseline:
+        baseline["selection_baseline_hash"] = baseline["baseline_hash"]
+    return baseline
+
+
+def migrate_legacy_baseline() -> dict[str, Any]:
+    """Perform the explicit one-time v1 → v2 migration.
+
+    Runtime validation never consults Git history.  The migration records the
+    already completed cross-revision verification as metadata, while the
+    resulting CI contract depends only on the committed v2 baseline and the
+    current semantic queue.
+    """
+    existing = read_json(BASELINE_PATH, {}) or {}
+    if existing.get("schema") == SEMANTIC_BASELINE_SCHEMA:
+        freeze_baseline()
         return existing
-    write_json(BASELINE_PATH, core)
-    return core
+    if existing.get("schema") != LEGACY_BASELINE_SCHEMA:
+        raise RuntimeError("hdb2_xe0_legacy_baseline_missing_or_unknown")
+    _, items = _baseline_items()
+    semantic = semantic_frontier_fingerprint()
+    if int(existing.get("baseline_review_items") or 0) != int(semantic.get("record_count") or 0):
+        raise RuntimeError("hdb2_xe0_legacy_semantic_count_changed")
+    errors = validate_review_projection(_semantic_frontier_rows(), *_baseline_items())
+    if errors:
+        raise RuntimeError("hdb2_xe0_review_projection_invalid:" + ",".join(errors))
+    if set(str(x) for x in existing.get("review_ids", [])) != {str(x.get("review_id")) for x in items}:
+        raise RuntimeError("hdb2_xe0_legacy_review_population_changed")
+    migrated = _new_semantic_baseline(semantic, items, legacy=existing)
+    write_json(BASELINE_PATH, migrated)
+    return migrated
+
+
+def freeze_baseline() -> dict[str, Any]:
+    semantic = semantic_frontier_fingerprint()
+    if semantic["record_count"] != 73:
+        raise RuntimeError(f"hdb2_xe0_expected_73_review_items:{semantic['record_count']}")
+    _, items = _baseline_items()
+    errors = validate_review_projection(_semantic_frontier_rows(), *_baseline_items())
+    if errors:
+        raise RuntimeError("hdb2_xe0_review_projection_invalid:" + ",".join(errors))
+    if not BASELINE_PATH.is_file():
+        baseline = _new_semantic_baseline(semantic, items)
+        write_json(BASELINE_PATH, baseline)
+        return baseline
+    existing = read_json(BASELINE_PATH, {}) or {}
+    if existing.get("schema") == LEGACY_BASELINE_SCHEMA:
+        raise RuntimeError("hdb2_xe0_baseline_migration_required")
+    if existing.get("schema") != SEMANTIC_BASELINE_SCHEMA:
+        raise RuntimeError("hdb2_xe0_baseline_schema_unknown")
+    expected = _new_semantic_baseline(semantic, items)
+    if existing.get("semantic_fingerprint") != expected.get("semantic_fingerprint"):
+        raise RuntimeError("hdb2_xe0_semantic_frontier_changed")
+    if existing.get("baseline_review_items") != expected.get("baseline_review_items"):
+        raise RuntimeError("hdb2_xe0_semantic_frontier_count_changed")
+    if existing.get("candidate_only") is not True or existing.get("canonical_write_back") is not False:
+        raise RuntimeError("hdb2_xe0_baseline_safety_flags_changed")
+    if existing.get("baseline_hash") != baseline_contract_hash(existing):
+        raise RuntimeError("hdb2_xe0_baseline_integrity_changed")
+    return existing
 
 
 def _corpus_rows() -> list[dict[str, Any]]:
@@ -321,8 +575,52 @@ def _target_plan(selection_rows: Sequence[Mapping[str, Any]], items_by_id: Mappi
     return plan
 
 
+def _validate_frozen_selection(selection: Mapping[str, Any], baseline: Mapping[str, Any]) -> list[str]:
+    """Validate the committed XE0 selection without re-reading UI metadata.
+
+    XE0's 24-Story pilot is itself a frozen research selection.  Once it
+    exists, rebuilding it means validating its content/hash and source scope,
+    not re-ranking against a later reviewer projection whose labels and
+    candidate display fields may have evolved.
+    """
+    errors: list[str] = []
+    if selection.get("selection_hash") != stable_hash({key: value for key, value in selection.items() if key != "selection_hash"}):
+        errors.append("selection_hash_invalid")
+    if selection.get("baseline_hash") != baseline.get("selection_baseline_hash", baseline.get("baseline_hash")):
+        errors.append("selection_baseline_contract_mismatch")
+    if selection.get("frozen_before_live") is not True:
+        errors.append("selection_not_frozen")
+    if selection.get("candidate_only") is not True or selection.get("canonical_write_back") is not False:
+        errors.append("selection_safety_flags")
+    stories = list(selection.get("stories", []))
+    story_ids = [str(row.get("story_id") or "") for row in stories]
+    if len(story_ids) != int(selection.get("selected_story_count") or 0):
+        errors.append("selection_story_count_mismatch")
+    if len(story_ids) != len(set(story_ids)):
+        errors.append("selection_duplicate_story")
+    if set(story_ids) & _production_story_ids():
+        errors.append("selection_story_in_production_scope")
+    corpus_ids = {str(row.get("story_id")) for row in _corpus_rows() if row.get("story_id")}
+    if not set(story_ids) <= corpus_ids:
+        errors.append("selection_story_missing_from_corpus")
+    target_plan = list(selection.get("target_plan", []))
+    if int(selection.get("target_count") or 0) != len(target_plan):
+        errors.append("selection_target_count_mismatch")
+    if any(str(row.get("story_id")) not in set(story_ids) for row in target_plan):
+        errors.append("selection_target_outside_story_set")
+    if any(row.get("candidate_only") is False or row.get("canonical_write_back") is True for row in target_plan):
+        errors.append("selection_target_safety_flags")
+    return sorted(set(errors))
+
+
 def build_selection() -> dict[str, Any]:
     baseline = freeze_baseline()
+    if SELECTION_PATH.is_file():
+        existing = read_json(SELECTION_PATH, {}) or {}
+        errors = _validate_frozen_selection(existing, baseline)
+        if errors:
+            raise RuntimeError("hdb2_xe0_selection_invalid:" + ",".join(errors))
+        return existing
     index, baseline_items = _baseline_items()
     items_by_id = {str(row.get("review_id")): row for row in baseline_items}
     production = _production_story_ids()
@@ -359,7 +657,12 @@ def build_selection() -> dict[str, Any]:
         "frozen_before_live": True,
         "candidate_only": True,
         "canonical_write_back": False,
-        "baseline_hash": baseline.get("baseline_hash"),
+        # Preserve the historical XE0 selection input hash across the explicit
+        # v1→v2 baseline migration.  The selection is still guarded by the
+        # semantic queue check in freeze_baseline(); this compatibility value
+        # only prevents a schema-only migration from rewriting the frozen
+        # Story selection.
+        "baseline_hash": baseline.get("selection_baseline_hash", baseline.get("baseline_hash")),
         "baseline_review_items": baseline.get("baseline_review_items"),
         "production_story_count": len(production),
         "corpus_story_count": len(_corpus_rows()),
@@ -637,7 +940,7 @@ def _new_review_item(result: Mapping[str, Any], entity: Mapping[str, Any], relat
 
 
 def build_audit(selection: Mapping[str, Any], person_results: Sequence[Mapping[str, Any]], temporal_results: Sequence[Mapping[str, Any]], baseline: Mapping[str, Any]) -> tuple[dict[str, Any], dict[str, Any]]:
-    _, baseline_items = _baseline_items()
+    _, baseline_items = _frozen_xe0_baseline_items()
     by_id = {str(row.get("review_id")): row for row in baseline_items}
     resolutions: dict[str, list[dict[str, Any]]] = collections.defaultdict(list)
     new_items: dict[str, dict[str, Any]] = {}
@@ -773,6 +1076,12 @@ def build_metrics(selection: Mapping[str, Any], person_results: Sequence[Mapping
 
 
 def _protected_hashes() -> dict[str, str]:
+    """Hash HDB2-F semantic/candidate artifacts, not the review UI.
+
+    The reviewer projection is validated separately by occurrence coverage.
+    Keeping it out of this snapshot lets the workbench evolve without making
+    an already-completed XE0 live run look like a historical HDB2-F change.
+    """
     paths = [
         ROOT / "data/annotation/hdb2-f-occurrence-decisions.json",
         ROOT / "data/derived/hdb2-f-relation-projection.json",
@@ -780,9 +1089,22 @@ def _protected_hashes() -> dict[str, str]:
         ROOT / "data/derived/hdb2-f-marriage-projection.json",
         ROOT / "data/derived/hdb2-f-office-projection.json",
         ROOT / "data/derived/hdb2-f-person-knowledge.json",
-        ROOT / "site/public/generated/review/hdb2/index.json",
     ]
     return {str(path.relative_to(ROOT)): file_hash(path) for path in paths if path.is_file()}
+
+
+def protected_hashes_match_manifest(snapshot: Mapping[str, Any]) -> bool:
+    """Accept old manifests' extra review-index hash, but require all
+    semantic HDB2-F hashes to match exactly.
+
+    The extra key is tolerated only for the pre-v2 XE0 run artifact.  New
+    runs contain the semantic set returned by ``_protected_hashes``.
+    """
+    current = _protected_hashes()
+    allowed_extra = {"site/public/generated/review/hdb2/index.json"}
+    if not set(snapshot).issubset(set(current) | allowed_extra):
+        return False
+    return all(snapshot.get(path) == digest for path, digest in current.items())
 
 
 def prepare() -> dict[str, Any]:
@@ -845,7 +1167,10 @@ def rebuild(run_id: str) -> Path:
     run_dir = XE0_ROOT / "live" / run_id
     if not run_dir.is_dir():
         raise RuntimeError(f"hdb2_xe0_missing_run:{run_id}")
-    prepared = prepare()
+    # Offline replay must not rewrite the historical prepare report.  Read
+    # the already-frozen contracts directly and rebuild only the derived
+    # audit/projection files from immutable live results.
+    prepared = {"baseline": freeze_baseline(), "selection": build_selection()}
     manifest = read_json(run_dir / "manifest.json", {}) or {}
     if manifest.get("frozen_selection_hash") != prepared["selection"].get("selection_hash"):
         raise RuntimeError("hdb2_xe0_selection_hash_mismatch")
@@ -864,11 +1189,15 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     mode = parser.add_mutually_exclusive_group()
     mode.add_argument("--prepare", action="store_true", help="freeze baseline and selection without API calls")
+    mode.add_argument("--migrate-baseline", action="store_true", help="explicitly migrate the committed v1 baseline to the semantic v2 contract")
     mode.add_argument("--live", action="store_true", help="run frozen semantic calls")
     mode.add_argument("--rebuild", action="store_true", help="rebuild audit/projection from an existing run")
     parser.add_argument("--run-id", default=None)
     parser.add_argument("--offline-fixture", action="store_true", help="exercise the pipeline without API calls")
     args = parser.parse_args()
+    if args.migrate_baseline:
+        print(json.dumps(migrate_legacy_baseline(), ensure_ascii=False, indent=2, sort_keys=True))
+        return 0
     if args.live:
         run_id = args.run_id or dt.datetime.now(dt.timezone.utc).strftime("%Y%m%dT%H%M%SZ") + "-HDB2-XE0"
         print(run_live(run_id, offline=args.offline_fixture))

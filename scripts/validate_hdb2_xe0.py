@@ -43,8 +43,13 @@ def _errors_for_run(run_id: str) -> list[str]:
         errors.append(f"story_count_out_of_range:{len(story_ids)}")
     if selection.get("selection_hash") != xe0.stable_hash({key: value for key, value in selection.items() if key != "selection_hash"}):
         errors.append("selection_hash_invalid")
-    if baseline.get("baseline_hash") != xe0.stable_hash({key: value for key, value in baseline.items() if key != "baseline_hash"}):
+    if baseline.get("schema") != xe0.SEMANTIC_BASELINE_SCHEMA:
+        errors.append("baseline_schema_not_semantic_v2")
+    if baseline.get("semantic_fingerprint") != xe0.semantic_frontier_fingerprint():
+        errors.append("semantic_frontier_fingerprint_mismatch")
+    if baseline.get("baseline_hash") != xe0.baseline_contract_hash(baseline):
         errors.append("baseline_hash_invalid")
+    errors.extend(f"baseline_review_projection:{error}" for error in xe0.validate_review_projection())
 
     run_dir = xe0.XE0_ROOT / "live" / run_id
     if not run_dir.is_dir():
@@ -55,13 +60,15 @@ def _errors_for_run(run_id: str) -> list[str]:
     projection = read(run_dir / "review-projection.json", {}) or {}
     if manifest.get("frozen_selection_hash") != selection.get("selection_hash"):
         errors.append("live_selection_hash_mismatch")
-    if manifest.get("baseline_hash") != baseline.get("baseline_hash"):
+    manifest_baseline_hash = manifest.get("baseline_hash")
+    legacy_hash = baseline.get("legacy_baseline_hash")
+    if manifest_baseline_hash != baseline.get("baseline_hash") and manifest_baseline_hash != legacy_hash:
         errors.append("live_baseline_hash_mismatch")
     if manifest.get("candidate_only") is not True or manifest.get("canonical_write_back") is not False:
         errors.append("live_manifest_safety_flags")
     if manifest.get("protected_hashes_before") != manifest.get("protected_hashes_after"):
         errors.append("protected_hashes_changed_during_live_run")
-    if xe0._protected_hashes() != manifest.get("protected_hashes_after"):
+    if not xe0.protected_hashes_match_manifest(manifest.get("protected_hashes_after", {})):
         errors.append("protected_hashes_changed_after_live_run")
 
     baseline_ids = set(baseline.get("review_ids", []))
@@ -103,7 +110,7 @@ def _errors_for_run(run_id: str) -> list[str]:
                 errors.append(f"unsafe_normalization:{name}:{row.get('story_id')}")
     # An old item may be closed only through the explicit compatibility gate,
     # never by normalized surface equality.
-    baseline_items = {str(row.get("review_id")): row for row in xe0._baseline_items()[1]}
+    baseline_items = {str(row.get("review_id")): row for row in xe0._frozen_xe0_baseline_items()[1]}
     for resolved in audit.get("resolved_items", []):
         old = baseline_items.get(str(resolved.get("review_id")), {})
         for evidence in resolved.get("evidence", []):
@@ -111,8 +118,6 @@ def _errors_for_run(run_id: str) -> list[str]:
                 errors.append(f"incompatible_old_resolution:{resolved.get('review_id')}")
     if not (ROOT / "site/public/generated/review/hdb2/index.json").is_file():
         errors.append("baseline_review_projection_missing")
-    if xe0.stable_hash(read(ROOT / "site/public/generated/review/hdb2/index.json", {}) or {}) != baseline.get("fingerprint", {}).get("index_hash"):
-        errors.append("baseline_review_projection_drift")
     return sorted(set(errors))
 
 
