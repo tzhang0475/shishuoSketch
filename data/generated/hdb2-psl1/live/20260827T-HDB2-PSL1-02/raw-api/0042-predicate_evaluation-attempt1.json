@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"predicates\": [{\"predicate_id\": \"q0\", \"predicate\": \"IdentityContextSupport\", \"mention_id\": \"hdb2-occ-16eef2abecc28f71a0d1\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 1.0, \"evidence_ids\": [\"ev0\", \"ev2\", \"ev3\", \"ev4\"]}, {\"predicate_id\": \"q1\", \"predicate\": \"CrossStoryIdentitySupport\", \"mention_id\": \"hdb2-occ-16eef2abecc28f71a0d1\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q2\", \"predicate\": \"IdentityContradiction\", \"mention_id\": \"hdb2-occ-16eef2abecc28f71a0d1\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 0.0, \"evidence_ids\": []}, {\"predicate_id\": \"q3\", \"predicate\": \"IdentityContextSupport\", \"mention_id\": \"hdb2-occ-16eef2abecc28f71a0d1\", \"other_mention_id\": null, \"candidate_key\": \"c1\", \"value\": 0.0, \"evidence_ids\": [\"ev0\"]}, {\"predicate_id\": \"q4\", \"predicate\": \"CrossStoryIdentitySupport\", \"mention_id\": \"hdb2-occ-16eef2abecc28f71a0d1\", \"other_mention_id\": null, \"candidate_key\": \"c1\", \"value\": 0.0, \"evidence_ids\": [\"ev0\"]}, {\"predicate_id\": \"q5\", \"predicate\": \"IdentityContradiction\", \"mention_id\": \"hdb2-occ-16eef2abecc28f71a0d1\", \"other_mention_id\": null, \"candidate_key\": \"c1\", \"value\": 1.0, \"evidence_ids\": [\"ev0\"]}, {\"predicate_id\": \"q6\", \"predicate\": \"IdentityContextSupport\", \"mention_id\": \"hdb2-occ-16eef2abecc28f71a0d1\", \"other_mention_id\": null, \"candidate_key\": \"c2\", \"value\": 0.0, \"evidence_ids\": [\"ev0\"]}, {\"predicate_id\": \"q7\", \"predicate\": \"CrossStoryIdentitySupport\", \"mention_id\": \"hdb2-occ-16eef2abecc28f71a0d1\", \"other_mention_id\": null, \"candidate_key\": \"c2\", \"value\": 0.0, \"evidence_ids\": [\"ev0\"]}, {\"predicate_id\": \"q8\", \"predicate\": \"IdentityContradiction\", \"mention_id\": \"hdb2-occ-16eef2abecc28f71a0d1\", \"other_mention_id\": null, \"candidate_key\": \"c2\", \"value\": 1.0, \"evidence_ids\": [\"ev0\"]}, {\"predicate_id\": \"q9\", \"predicate\": \"IdentityContextSupport\", \"mention_id\": \"hdb2-occ-16eef2abecc28f71a0d1\", \"other_mention_id\": null, \"candidate_key\": \"c3\", \"value\": 0.0, \"evidence_ids\": [\"ev0\"]}, {\"predicate_id\": \"q10\", \"predicate\": \"CrossStoryIdentitySupport\", \"mention_id\": \"hdb2-occ-16eef2abecc28f71a0d1\", \"other_mention_id\": null, \"candidate_key\": \"c3\", \"value\": 0.0, \"evidence_ids\": [\"ev0\"]}, {\"predicate_id\": \"q11\", \"predicate\": \"IdentityContradiction\", \"mention_id\": \"hdb2-occ-16eef2abecc28f71a0d1\", \"other_mention_id\": null, \"candidate_key\": \"c3\", \"value\": 1.0, \"evidence_ids\": [\"ev0\"]}], \"note\": \"The mention surface is \\\"王坦之\\\" in story 06-yaliang-029. The story text explicitly names 謝安 and 王坦之 as two distinct people being targeted by 桓公 (桓溫). Candidate c0 is 王坦之 (canonical name matches the surface directly, and ev0/ev2/ev3/ev4 support this identification). Candidate c1 is 謝安, who is a separate person in the same story (ev0 explicitly distinguishes 謝安 from 王坦之), so IdentityContextSupport=0, CrossStoryIdentitySupport=0, IdentityContradiction=1. Candidate c2 is 桓溫 (桓公), who is the antagonist in the story, distinct from 王坦之 (ev0), so contradiction=1. Candidate c3 is 孫晷, whose profile aliases include 文度/王䖍之/藍田 but the surface 王坦之 is not 孫晷; the story explicitly names 王坦之 as a distinct person from 謝安, and 孫晷 is not 王坦之, so contradiction=1.\"}",
+              "name": "submit_hdb2_psl1_predicates"
+            },
+            "id": "call_00_gMObSnlTR1X0JmAFzVYg9203",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787766936,
+  "id": "6cce65f0-4dbc-4b63-b272-4692ca14c161",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 1237,
+    "prompt_cache_hit_tokens": 768,
+    "prompt_cache_miss_tokens": 6956,
+    "prompt_tokens": 7724,
+    "prompt_tokens_details": {
+      "cached_tokens": 768
+    },
+    "total_tokens": 8961
+  }
+}

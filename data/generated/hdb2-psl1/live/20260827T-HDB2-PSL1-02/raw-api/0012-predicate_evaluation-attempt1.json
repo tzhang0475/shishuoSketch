@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"predicates\": [{\"predicate_id\": \"q0\", \"predicate\": \"IdentityContextSupport\", \"mention_id\": \"hdb2-occ-10623d57bd7dac1f24b2\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 1.0, \"evidence_ids\": [\"ev0\", \"ev2\"]}, {\"predicate_id\": \"q1\", \"predicate\": \"CrossStoryIdentitySupport\", \"mention_id\": \"hdb2-occ-10623d57bd7dac1f24b2\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q2\", \"predicate\": \"IdentityContradiction\", \"mention_id\": \"hdb2-occ-10623d57bd7dac1f24b2\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 0.0, \"evidence_ids\": []}, {\"predicate_id\": \"q3\", \"predicate\": \"Coreference\", \"mention_id\": \"hdb2-occ-10623d57bd7dac1f24b2\", \"other_mention_id\": \"hdb2-occ-3f1d8443374e4c1ef015\", \"candidate_key\": null, \"value\": 0.0, \"evidence_ids\": [\"ev0\"]}, {\"predicate_id\": \"q4\", \"predicate\": \"Coreference\", \"mention_id\": \"hdb2-occ-10623d57bd7dac1f24b2\", \"other_mention_id\": \"hdb2-occ-5e5351b612e1eeff8226\", \"candidate_key\": null, \"value\": 0.0, \"evidence_ids\": [\"ev0\"]}], \"note\": \"q0: The mention \\\"劉尹\\\" (Liu Yin, i.e., 劉惔 as 丹陽尹) appears in story 02-yanyu-054 where the text explicitly names 真長 (courtesy name of 劉惔) in the same passage, and the candidate profile c0 confirms 劉惔 with alias 真長 and title 丹陽尹. The supplied text directly links 劉尹 to 真長, providing specific identity support. q1: No cross-story identity link is supplied in the evidence; same-story context alone is not cross-story support. q2: No evidence contradicts the assignment. q3: 王長史 (Wang Changshi) is a distinct person from 劉尹; the text names them separately as two people going together (同詣). q4: 王 (Wang) in the text refers to 王長史, distinct from 劉尹; the text distinguishes them as separate speakers.\"}",
+              "name": "submit_hdb2_psl1_predicates"
+            },
+            "id": "call_00_qb6zv5nnHLHigAPjNGHC9079",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787766795,
+  "id": "4ea6f7e4-a83f-47bb-a604-49d9d8355e21",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 677,
+    "prompt_cache_hit_tokens": 768,
+    "prompt_cache_miss_tokens": 3639,
+    "prompt_tokens": 4407,
+    "prompt_tokens_details": {
+      "cached_tokens": 768
+    },
+    "total_tokens": 5084
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"predicates\": [{\"predicate_id\": \"q0\", \"predicate\": \"IdentityContextSupport\", \"mention_id\": \"hdb2-occ-5e5351b612e1eeff8226\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q1\", \"predicate\": \"CrossStoryIdentitySupport\", \"mention_id\": \"hdb2-occ-5e5351b612e1eeff8226\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q2\", \"predicate\": \"IdentityContradiction\", \"mention_id\": \"hdb2-occ-5e5351b612e1eeff8226\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 0.5, \"evidence_ids\": []}], \"note\": \"The mention surface is \\\"王\\\" (Wang), referring to 王長史 (Wang Changshi) in the story. The candidate c0 is 劉惔 (Liu Tan), whose aliases include 劉, 劉真長, 真長, etc. The mention \\\"王\\\" refers to Wang, not Liu. There is no specific evidence linking the mention \\\"王\\\" to candidate c0 (劉惔). The story context shows 王長史 and 劉尹 as distinct people. No direct identity link between the mention and candidate c0 is supported by supplied evidence. All three predicates return neutral 0.5 with no direct evidence.\"}",
+              "name": "submit_hdb2_psl1_predicates"
+            },
+            "id": "call_00_K8NvYuTJ7k1Mmkfh7yTq3322",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787766843,
+  "id": "51caab1b-3dc2-46ef-8346-e146069e571b",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 415,
+    "prompt_cache_hit_tokens": 768,
+    "prompt_cache_miss_tokens": 3486,
+    "prompt_tokens": 4254,
+    "prompt_tokens_details": {
+      "cached_tokens": 768
+    },
+    "total_tokens": 4669
+  }
+}

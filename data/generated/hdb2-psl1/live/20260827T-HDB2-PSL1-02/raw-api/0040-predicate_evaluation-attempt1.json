@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"predicates\": [{\"predicate_id\": \"q0\", \"predicate\": \"IdentityContextSupport\", \"mention_id\": \"hdb2-occ-52432afcd6237d223198\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q1\", \"predicate\": \"CrossStoryIdentitySupport\", \"mention_id\": \"hdb2-occ-52432afcd6237d223198\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q2\", \"predicate\": \"IdentityContradiction\", \"mention_id\": \"hdb2-occ-52432afcd6237d223198\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 0.5, \"evidence_ids\": []}], \"note\": \"The mention \\\"户曹叅軍\\\" is a title/office reference within story 02-yanyu-042. The candidate c0 is 王敦. The mention refers to 摯瞻's office (he served as 大將軍户曹叅軍), not to 王敦 himself. The story context shows 摯瞻 was the one who held the office of 户曹叅軍 under 大將軍 (王敦). The mention is a title_reference to the office held by 摯瞻, not an identity reference to 王敦. There is no direct evidence linking this mention to candidate c0 as an identity. The annotation (ev1) mentions 王敦 as the 大將軍 under whom 摯瞻 served, but the mention itself refers to the office, not to 王敦. No specific identity link between this mention and c0 is supported by supplied evidence. No contradiction is supplied either. All neutral at 0.5.\"}",
+              "name": "submit_hdb2_psl1_predicates"
+            },
+            "id": "call_00_7IK1VO2MKo6lWwYa1pS93551",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787766925,
+  "id": "64b88eb8-67dc-4783-986a-2244b3a8e01a",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 475,
+    "prompt_cache_hit_tokens": 1408,
+    "prompt_cache_miss_tokens": 2135,
+    "prompt_tokens": 3543,
+    "prompt_tokens_details": {
+      "cached_tokens": 1408
+    },
+    "total_tokens": 4018
+  }
+}

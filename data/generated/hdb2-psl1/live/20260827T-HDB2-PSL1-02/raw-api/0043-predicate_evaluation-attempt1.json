@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"predicates\": [{\"predicate_id\": \"q0\", \"predicate\": \"IdentityContextSupport\", \"mention_id\": \"hdb2-occ-49948bea5ae487e073b6\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 1.0, \"evidence_ids\": [\"ev0\", \"ev1\", \"ev2\"]}, {\"predicate_id\": \"q1\", \"predicate\": \"CrossStoryIdentitySupport\", \"mention_id\": \"hdb2-occ-49948bea5ae487e073b6\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q2\", \"predicate\": \"IdentityContradiction\", \"mention_id\": \"hdb2-occ-49948bea5ae487e073b6\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 0.0, \"evidence_ids\": []}], \"note\": \"The mention \\\"虎賁中郎將\\\" is a title reference. The story text (ev0) explicitly quotes 潘岳《秋興賦敘》saying \\\"余兼虎賁中郎將寓直散騎之省\\\", and the Liu annotations (ev1, ev2) directly connect this title to 潘岳 (岳/毛). This provides specific identity link between the mention and candidate c0 (潘岳). No contradiction evidence. CrossStoryIdentitySupport is neutral since no cross-story identity link is supplied beyond the same story.\"}",
+              "name": "submit_hdb2_psl1_predicates"
+            },
+            "id": "call_00_m8EKpjNTqmeNdDz9vxPR9565",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787766942,
+  "id": "6504f118-91ac-4fec-9271-14d36f58f111",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 402,
+    "prompt_cache_hit_tokens": 768,
+    "prompt_cache_miss_tokens": 1942,
+    "prompt_tokens": 2710,
+    "prompt_tokens_details": {
+      "cached_tokens": 768
+    },
+    "total_tokens": 3112
+  }
+}

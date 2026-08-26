@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"predicates\": [{\"predicate_id\": \"q0\", \"predicate\": \"IdentityContextSupport\", \"mention_id\": \"hdb2-occ-26b5362fd97cab370857\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q1\", \"predicate\": \"CrossStoryIdentitySupport\", \"mention_id\": \"hdb2-occ-26b5362fd97cab370857\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q2\", \"predicate\": \"IdentityContradiction\", \"mention_id\": \"hdb2-occ-26b5362fd97cab370857\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q3\", \"predicate\": \"IdentityContextSupport\", \"mention_id\": \"hdb2-occ-26b5362fd97cab370857\", \"other_mention_id\": null, \"candidate_key\": \"c1\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q4\", \"predicate\": \"CrossStoryIdentitySupport\", \"mention_id\": \"hdb2-occ-26b5362fd97cab370857\", \"other_mention_id\": null, \"candidate_key\": \"c1\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q5\", \"predicate\": \"IdentityContradiction\", \"mention_id\": \"hdb2-occ-26b5362fd97cab370857\", \"other_mention_id\": null, \"candidate_key\": \"c1\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q6\", \"predicate\": \"Coreference\", \"mention_id\": \"hdb2-occ-26b5362fd97cab370857\", \"other_mention_id\": \"hdb2-occ-99b0e48572a365a51cd5\", \"candidate_key\": null, \"value\": 1.0, \"evidence_ids\": [\"ev0\", \"context:context:03-zhengshi-006:0:b1fd5a8c\", \"context:context:03-zhengshi-006:8:e7f0eb43\"]}], \"note\": \"The mention \\\"太傅鄭冲\\\" refers to Zheng Chong (太傅). Candidates c0 (羊祜) and c1 (賈充) are both mentioned in the same story 03-zhengshi-006 as interacting with Zheng Chong, but neither candidate is Zheng Chong himself. The mention is a title_reference to 太傅鄭冲, not to 羊祜 or 賈充. There is no evidence linking the mention to either candidate. The two mentions of 太傅鄭冲 (hdb2-occ-26b5362fd97cab370857 and hdb2-occ-99b0e48572a365a51cd5) both refer to the same person Zheng Chong in the same story, so Coreference=1.0. No identity support or contradiction for either candidate since the mention is about Zheng Chong, not about 羊祜 or 賈充.\"}",
+              "name": "submit_hdb2_psl1_predicates"
+            },
+            "id": "call_00_2WDfVviUUxiTEtUHMLB04000",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787766852,
+  "id": "1e04bf27-fbc0-437b-9443-2f540538032d",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 800,
+    "prompt_cache_hit_tokens": 768,
+    "prompt_cache_miss_tokens": 6617,
+    "prompt_tokens": 7385,
+    "prompt_tokens_details": {
+      "cached_tokens": 768
+    },
+    "total_tokens": 8185
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"predicates\": [{\"predicate_id\": \"q0\", \"predicate\": \"IdentityContextSupport\", \"mention_id\": \"hdb2-occ-e67fb82c817745c3e806\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 1.0, \"evidence_ids\": [\"ev0\", \"ev3\", \"ev4\", \"ev5\"]}, {\"predicate_id\": \"q1\", \"predicate\": \"CrossStoryIdentitySupport\", \"mention_id\": \"hdb2-occ-e67fb82c817745c3e806\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q2\", \"predicate\": \"IdentityContradiction\", \"mention_id\": \"hdb2-occ-e67fb82c817745c3e806\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 0.0, \"evidence_ids\": []}, {\"predicate_id\": \"q3\", \"predicate\": \"IdentityContextSupport\", \"mention_id\": \"hdb2-occ-e67fb82c817745c3e806\", \"other_mention_id\": null, \"candidate_key\": \"c1\", \"value\": 0.0, \"evidence_ids\": [\"ev0\", \"ev3\"]}, {\"predicate_id\": \"q4\", \"predicate\": \"CrossStoryIdentitySupport\", \"mention_id\": \"hdb2-occ-e67fb82c817745c3e806\", \"other_mention_id\": null, \"candidate_key\": \"c1\", \"value\": 0.0, \"evidence_ids\": [\"ev0\", \"ev3\"]}, {\"predicate_id\": \"q5\", \"predicate\": \"IdentityContradiction\", \"mention_id\": \"hdb2-occ-e67fb82c817745c3e806\", \"other_mention_id\": null, \"candidate_key\": \"c1\", \"value\": 1.0, \"evidence_ids\": [\"ev0\", \"ev3\"]}, {\"predicate_id\": \"q6\", \"predicate\": \"IdentityContextSupport\", \"mention_id\": \"hdb2-occ-e67fb82c817745c3e806\", \"other_mention_id\": null, \"candidate_key\": \"c2\", \"value\": 0.0, \"evidence_ids\": [\"ev0\", \"ev4\"]}, {\"predicate_id\": \"q7\", \"predicate\": \"CrossStoryIdentitySupport\", \"mention_id\": \"hdb2-occ-e67fb82c817745c3e806\", \"other_mention_id\": null, \"candidate_key\": \"c2\", \"value\": 0.0, \"evidence_ids\": [\"ev0\", \"ev4\"]}, {\"predicate_id\": \"q8\", \"predicate\": \"IdentityContradiction\", \"mention_id\": \"hdb2-occ-e67fb82c817745c3e806\", \"other_mention_id\": null, \"candidate_key\": \"c2\", \"value\": 1.0, \"evidence_ids\": [\"ev0\", \"ev4\"]}], \"note\": \"The mention \\\"諸葛道明\\\" in story 17-shangshi-008 refers to the person whose daughter married 庾亮's son. Candidate c0 is 諸葛道明 (canonical name matches the surface directly, ev0/ev3/ev4/ev5 confirm). Candidate c1 is 庾亮 — the text explicitly distinguishes 諸葛道明 from 亮 (庾亮), so c1 is contradicted. Candidate c2 is 蘇峻 — the text mentions 蘇峻 as the one whose rebellion killed 庾亮's son, distinct from 諸葛道明, so c2 is contradicted. No cross-story identity support beyond the local context for c0; c1 and c2 are explicitly different persons in the same story.\"}",
+              "name": "submit_hdb2_psl1_predicates"
+            },
+            "id": "call_00_wEbTS906xd3NPyYzxgpz6069",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787766816,
+  "id": "9cfc468c-e7ea-47aa-8785-cbafd32823a5",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 926,
+    "prompt_cache_hit_tokens": 768,
+    "prompt_cache_miss_tokens": 3469,
+    "prompt_tokens": 4237,
+    "prompt_tokens_details": {
+      "cached_tokens": 768
+    },
+    "total_tokens": 5163
+  }
+}

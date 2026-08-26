@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"predicates\": [{\"predicate_id\": \"q0\", \"predicate\": \"IdentityContextSupport\", \"mention_id\": \"hdb2-occ-83d97c98b79b2239f24f\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q1\", \"predicate\": \"CrossStoryIdentitySupport\", \"mention_id\": \"hdb2-occ-83d97c98b79b2239f24f\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q2\", \"predicate\": \"IdentityContradiction\", \"mention_id\": \"hdb2-occ-83d97c98b79b2239f24f\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 0.5, \"evidence_ids\": []}], \"note\": \"The mention is \\\"吏部尚書\\\" (office reference) in story 05-fangzheng-027. The candidate c0 is 周顗. The story text mentions 周伯仁 (courtesy name of 周顗) as 吏部尚書, and ev2 confirms 周顗 as the known participant for this office in this story. However, the mention itself is an office reference (吏部尚書), not a direct name/alias mention of 周顗. The office reference does not by itself provide a specific identity link to the candidate beyond the story context. IdentityContextSupport requires specific identity link from the supplied occurrence context; the office title alone doesn't directly identify the person as 周顗 without external knowledge. CrossStoryIdentitySupport requires evidence linking this mention to the candidate across stories; no such cross-story evidence is supplied. IdentityContradiction: no supplied evidence contradicts the assignment. All neutral at 0.5.\"}",
+              "name": "submit_hdb2_psl1_predicates"
+            },
+            "id": "call_00_EPlQenray6QEBEMfnFZS4855",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787766917,
+  "id": "c1636140-894b-49df-8090-8fb3d9cad597",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 485,
+    "prompt_cache_hit_tokens": 768,
+    "prompt_cache_miss_tokens": 1897,
+    "prompt_tokens": 2665,
+    "prompt_tokens_details": {
+      "cached_tokens": 768
+    },
+    "total_tokens": 3150
+  }
+}

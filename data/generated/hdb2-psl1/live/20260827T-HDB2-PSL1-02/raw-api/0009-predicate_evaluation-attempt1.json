@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"predicates\": [{\"predicate_id\": \"q0\", \"predicate\": \"IdentityContextSupport\", \"mention_id\": \"hdb2-occ-b68c326cf611845bf219\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q1\", \"predicate\": \"CrossStoryIdentitySupport\", \"mention_id\": \"hdb2-occ-b68c326cf611845bf219\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q2\", \"predicate\": \"IdentityContradiction\", \"mention_id\": \"hdb2-occ-b68c326cf611845bf219\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q3\", \"predicate\": \"IdentityContextSupport\", \"mention_id\": \"hdb2-occ-b68c326cf611845bf219\", \"other_mention_id\": null, \"candidate_key\": \"c1\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q4\", \"predicate\": \"CrossStoryIdentitySupport\", \"mention_id\": \"hdb2-occ-b68c326cf611845bf219\", \"other_mention_id\": null, \"candidate_key\": \"c1\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q5\", \"predicate\": \"IdentityContradiction\", \"mention_id\": \"hdb2-occ-b68c326cf611845bf219\", \"other_mention_id\": null, \"candidate_key\": \"c1\", \"value\": 0.5, \"evidence_ids\": []}], \"note\": \"The mention \\\"武帝\\\" refers to a ruler in the story. Candidate c0 is \\\"烈宗孝武皇帝\\\" and c1 is \\\"世祖武皇帝\\\". The deterministic predicates show c1 has AliasMatch=1.0 (ev0, ev2, ev3) while c0 has AliasMatch=0.5. However, for the requested identity predicates (IdentityContextSupport, CrossStoryIdentitySupport, IdentityContradiction), there is no supplied evidence that specifically links the mention to either candidate beyond the alias match and time compatibility. The story text mentions 武帝 speaking with 和嶠 about 王武子, and the \\\"尺布斗粟\\\" allusion. No supplied evidence directly supports or contradicts the identity assignment to either candidate in terms of context support or cross-story support. Per instructions, time compatibility and same-story are not identity support. All identity predicates remain neutral at 0.5.\"}",
+              "name": "submit_hdb2_psl1_predicates"
+            },
+            "id": "call_00_M6DwFNo7HXm2GganJ9Wl7388",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787766781,
+  "id": "e792d3d5-97fc-4ffe-a1f1-ea08aa102c08",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 665,
+    "prompt_cache_hit_tokens": 768,
+    "prompt_cache_miss_tokens": 2586,
+    "prompt_tokens": 3354,
+    "prompt_tokens_details": {
+      "cached_tokens": 768
+    },
+    "total_tokens": 4019
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"predicates\": [{\"predicate_id\": \"q0\", \"predicate\": \"IdentityContextSupport\", \"mention_id\": \"hdb2-occ-08f1a686b68dd0951704\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q1\", \"predicate\": \"CrossStoryIdentitySupport\", \"mention_id\": \"hdb2-occ-08f1a686b68dd0951704\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q2\", \"predicate\": \"IdentityContradiction\", \"mention_id\": \"hdb2-occ-08f1a686b68dd0951704\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q3\", \"predicate\": \"IdentityContextSupport\", \"mention_id\": \"hdb2-occ-08f1a686b68dd0951704\", \"other_mention_id\": null, \"candidate_key\": \"c1\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q4\", \"predicate\": \"CrossStoryIdentitySupport\", \"mention_id\": \"hdb2-occ-08f1a686b68dd0951704\", \"other_mention_id\": null, \"candidate_key\": \"c1\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q5\", \"predicate\": \"IdentityContradiction\", \"mention_id\": \"hdb2-occ-08f1a686b68dd0951704\", \"other_mention_id\": null, \"candidate_key\": \"c1\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q6\", \"predicate\": \"IdentityContextSupport\", \"mention_id\": \"hdb2-occ-08f1a686b68dd0951704\", \"other_mention_id\": null, \"candidate_key\": \"c2\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q7\", \"predicate\": \"CrossStoryIdentitySupport\", \"mention_id\": \"hdb2-occ-08f1a686b68dd0951704\", \"other_mention_id\": null, \"candidate_key\": \"c2\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q8\", \"predicate\": \"IdentityContradiction\", \"mention_id\": \"hdb2-occ-08f1a686b68dd0951704\", \"other_mention_id\": null, \"candidate_key\": \"c2\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q9\", \"predicate\": \"IdentityContextSupport\", \"mention_id\": \"hdb2-occ-08f1a686b68dd0951704\", \"other_mention_id\": null, \"candidate_key\": \"c3\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q10\", \"predicate\": \"CrossStoryIdentitySupport\", \"mention_id\": \"hdb2-occ-08f1a686b68dd0951704\", \"other_mention_id\": null, \"candidate_key\": \"c3\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q11\", \"predicate\": \"IdentityContradiction\", \"mention_id\": \"hdb2-occ-08f1a686b68dd0951704\", \"other_mention_id\": null, \"candidate_key\": \"c3\", \"value\": 0.5, \"evidence_ids\": []}], \"note\": \"The mention \\\"王夷甫\\\" appears in story 07-shijian-005. The story text explicitly names 王夷甫 as the protagonist. Candidate c0 is 王夷甫 (canonical name), and ev0/ev3/ev4/ev5 show AliasMatch=1.0 for c0. However, the request predicates are IdentityContextSupport, CrossStoryIdentitySupport, and IdentityContradiction. The mention itself IS 王夷甫, and c0 is the candidate for 王夷甫. The story context directly supports that the mention refers to 王夷甫 (the person named in the text). However, per the constraints, IdentityContextSupport requires specific identity link from supplied evidence. The main text ev0 explicitly names 王夷甫 as the person in this story, and c0's profile (ev3) confirms 王夷甫 as canonical name with confirmed story 07-shijian-005. This is direct identity support. But wait - c0's profile (ev3) shows canonical_name 山濤 with aliases 山公, while c0's name field says 王夷甫. There's a mismatch in the supplied data. The deterministic predicates show c0 has AliasMatch=1.0 with evidence ev0,ev3,ev4,ev5. Given the mention surface is 王夷甫 and c0 is named 王夷甫, and the story text explicitly features 王夷甫, IdentityContextSupport should be positive. However, I need to be careful: the candidate profiles seem mislabeled. ev3 is profile:c0 showing canonical_name 山濤, ev4 is profile:c1 showing canonical_name 王夷甫, ev5 is profile:c2 showing canonical_name 王戎, ev6 is profile:c3 showing canonical_name 羊祜. But the candidates list c0 as 王夷甫, c1 as 王戎, c2 as 羊祜, c3 as 山濤. The deterministic predicates show c0 AliasMatch=1.0 citing ev0,ev3,ev4,ev5. This is confusing. Given the mention is 王夷甫 and the story explicitly names 王夷甫 as the subject, and c0 is the candidate named 王夷甫, IdentityContextSupport for c0 should be positive based on ev0 (main text explicitly naming 王夷甫). But the constraints say cooccurrence is not identity, and identity support requires specific identity link. The main text ev0 explicitly names 王夷甫 as the person in this story, which is a direct identity link. So q0 (IdentityContextSupport for c0) should be 1.0 with evidence ev0. For other candidates, there's no specific identity link in the supplied evidence connecting the mention 王夷甫 to them, so neutral 0.5. No contradictions found in supplied evidence.\"}",
+              "name": "submit_hdb2_psl1_predicates"
+            },
+            "id": "call_00_8b0bHf5FYqyRNJaD2Uht4032",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787766751,
+  "id": "ddcd93e1-1aa9-485d-8bfa-d6d458177566",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 1536,
+    "prompt_cache_hit_tokens": 768,
+    "prompt_cache_miss_tokens": 5176,
+    "prompt_tokens": 5944,
+    "prompt_tokens_details": {
+      "cached_tokens": 768
+    },
+    "total_tokens": 7480
+  }
+}

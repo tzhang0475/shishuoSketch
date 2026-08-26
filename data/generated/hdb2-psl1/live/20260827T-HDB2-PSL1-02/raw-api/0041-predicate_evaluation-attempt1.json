@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"predicates\": [{\"predicate_id\": \"q0\", \"predicate\": \"IdentityContextSupport\", \"mention_id\": \"hdb2-occ-ea201c1c8c46b95a7944\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 1.0, \"evidence_ids\": [\"ev0\", \"ev10\"]}, {\"predicate_id\": \"q1\", \"predicate\": \"CrossStoryIdentitySupport\", \"mention_id\": \"hdb2-occ-ea201c1c8c46b95a7944\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 1.0, \"evidence_ids\": [\"ev0\", \"ev10\"]}, {\"predicate_id\": \"q2\", \"predicate\": \"IdentityContradiction\", \"mention_id\": \"hdb2-occ-ea201c1c8c46b95a7944\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 0.0, \"evidence_ids\": []}, {\"predicate_id\": \"q3\", \"predicate\": \"IdentityContextSupport\", \"mention_id\": \"hdb2-occ-ea201c1c8c46b95a7944\", \"other_mention_id\": null, \"candidate_key\": \"c1\", \"value\": 0.0, \"evidence_ids\": [\"ev0\"]}, {\"predicate_id\": \"q4\", \"predicate\": \"CrossStoryIdentitySupport\", \"mention_id\": \"hdb2-occ-ea201c1c8c46b95a7944\", \"other_mention_id\": null, \"candidate_key\": \"c1\", \"value\": 0.0, \"evidence_ids\": [\"ev0\"]}, {\"predicate_id\": \"q5\", \"predicate\": \"IdentityContradiction\", \"mention_id\": \"hdb2-occ-ea201c1c8c46b95a7944\", \"other_mention_id\": null, \"candidate_key\": \"c1\", \"value\": 0.0, \"evidence_ids\": []}, {\"predicate_id\": \"q6\", \"predicate\": \"IdentityContextSupport\", \"mention_id\": \"hdb2-occ-ea201c1c8c46b95a7944\", \"other_mention_id\": null, \"candidate_key\": \"c2\", \"value\": 0.0, \"evidence_ids\": [\"ev0\"]}, {\"predicate_id\": \"q7\", \"predicate\": \"CrossStoryIdentitySupport\", \"mention_id\": \"hdb2-occ-ea201c1c8c46b95a7944\", \"other_mention_id\": null, \"candidate_key\": \"c2\", \"value\": 0.0, \"evidence_ids\": [\"ev0\"]}, {\"predicate_id\": \"q8\", \"predicate\": \"IdentityContradiction\", \"mention_id\": \"hdb2-occ-ea201c1c8c46b95a7944\", \"other_mention_id\": null, \"candidate_key\": \"c2\", \"value\": 0.0, \"evidence_ids\": []}, {\"predicate_id\": \"q9\", \"predicate\": \"IdentityContextSupport\", \"mention_id\": \"hdb2-occ-ea201c1c8c46b95a7944\", \"other_mention_id\": null, \"candidate_key\": \"c3\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q10\", \"predicate\": \"CrossStoryIdentitySupport\", \"mention_id\": \"hdb2-occ-ea201c1c8c46b95a7944\", \"other_mention_id\": null, \"candidate_key\": \"c3\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q11\", \"predicate\": \"IdentityContradiction\", \"mention_id\": \"hdb2-occ-ea201c1c8c46b95a7944\", \"other_mention_id\": null, \"candidate_key\": \"c3\", \"value\": 0.0, \"evidence_ids\": []}], \"note\": \"The mention \\\"丞相\\\" (Chancellor) in story 02-yanyu-036 refers to 王導 (c0). The main text (ev0) explicitly says 温嶠 \\\"旣詣王丞相\\\" and \\\"丞相亦與之對泣\\\", and c0's profile (ev10) lists titles 丞相/王丞相/王公. This is a direct identity link in the same story context, so IdentityContextSupport=1.0 and CrossStoryIdentitySupport=1.0 (c0's confirmed story 02-yanyu-036 matches). c1 (温嶠) and c2 (劉琨) are the other participants in the story but the mention \\\"丞相\\\" clearly refers to 王導, not them, so support=0.0. c3 (王隱) has no evidence linking it to this mention, so neutral 0.5. No contradictions found for any candidate.\"}",
+              "name": "submit_hdb2_psl1_predicates"
+            },
+            "id": "call_00_k7pwVRDud3gmy77e9ibF1077",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787766929,
+  "id": "af65b19c-56d0-490d-ae86-efadeb5919e4",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 1176,
+    "prompt_cache_hit_tokens": 768,
+    "prompt_cache_miss_tokens": 9087,
+    "prompt_tokens": 9855,
+    "prompt_tokens_details": {
+      "cached_tokens": 768
+    },
+    "total_tokens": 11031
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"predicates\": [{\"predicate_id\": \"q0\", \"predicate\": \"IdentityContextSupport\", \"mention_id\": \"hdb2-occ-3f1d8443374e4c1ef015\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q1\", \"predicate\": \"CrossStoryIdentitySupport\", \"mention_id\": \"hdb2-occ-3f1d8443374e4c1ef015\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q2\", \"predicate\": \"IdentityContradiction\", \"mention_id\": \"hdb2-occ-3f1d8443374e4c1ef015\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q3\", \"predicate\": \"Coreference\", \"mention_id\": \"hdb2-occ-3f1d8443374e4c1ef015\", \"other_mention_id\": \"hdb2-occ-5e5351b612e1eeff8226\", \"candidate_key\": null, \"value\": 0.5, \"evidence_ids\": []}], \"note\": \"The mention \\\"王長史\\\" (hdb2-occ-3f1d8443374e4c1ef015) refers to 王長史 (Wang Changshi). The candidate c0 is 劉惔 (Liu Tan), whose title is 丹陽尹 (referred to as 劉尹 in the text). The mention \\\"王長史\\\" is a title reference to a Wang (王) person, not to 劉惔. The related mention \\\"王\\\" (hdb2-occ-5e5351b612e1eeff8226) is an abbreviated name for the same Wang person. There is no specific identity link between the mention \\\"王長史\\\" and candidate c0 (劉惔). The text explicitly distinguishes 王長史 from 劉尹 (劉惔) as separate people. No direct evidence supports identity between the mention and candidate c0, and no contradiction evidence is supplied either. For coreference between \\\"王長史\\\" and \\\"王\\\", both refer to the same Wang person in the story, but the supplied evidence does not explicitly link them as coreferent beyond co-occurrence in the same story, which is not identity support per constraints. All values set to neutral 0.5 due to insufficient direct evidence.\"}",
+              "name": "submit_hdb2_psl1_predicates"
+            },
+            "id": "call_00_hQtN9fZScg04sMzjnVhe3032",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787766786,
+  "id": "367e4c10-8f32-419c-ac4a-8ffc40c3e1aa",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 639,
+    "prompt_cache_hit_tokens": 768,
+    "prompt_cache_miss_tokens": 3563,
+    "prompt_tokens": 4331,
+    "prompt_tokens_details": {
+      "cached_tokens": 768
+    },
+    "total_tokens": 4970
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"predicates\": [{\"predicate_id\": \"q0\", \"predicate\": \"IdentityContextSupport\", \"mention_id\": \"hdb2-occ-6f33510c96efd527157a\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 1.0, \"evidence_ids\": [\"ev0\", \"ev1\"]}, {\"predicate_id\": \"q1\", \"predicate\": \"CrossStoryIdentitySupport\", \"mention_id\": \"hdb2-occ-6f33510c96efd527157a\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 1.0, \"evidence_ids\": [\"ev3\"]}, {\"predicate_id\": \"q2\", \"predicate\": \"IdentityContradiction\", \"mention_id\": \"hdb2-occ-6f33510c96efd527157a\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 0.0, \"evidence_ids\": []}], \"note\": \"The mention \\\"主\\\" (princess) in story 34-pilou-001 refers to the princess whom 王敦 married. ev0 (main text) states \\\"王敦初尚主\\\" (Wang Dun first married the princess). ev1 (Liu annotation) explicitly states \\\"(陽公主字修褘/敦尚武帝女舞)\\\" linking 陽公主 (courtesy name 修褘) as the 武帝女 whom 敦 married. This directly supports the mention \\\"主\\\" pointing to candidate c0's context (王敦's wife, 陽公主, whose courtesy name 修褘 appears in c0's aliases/courtesy_names). ev3 confirms c0's profile includes 34-pilou-001 in confirmed_story_ids and includes 陽公主/修褘 in aliases/courtesy_names, providing cross-story support. No evidence contradicts this assignment.\"}",
+              "name": "submit_hdb2_psl1_predicates"
+            },
+            "id": "call_00_Q1S3NCgw8mrWr2BxrxF27926",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787766906,
+  "id": "0920e302-39a7-4fb5-94d1-639418a97ec4",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 475,
+    "prompt_cache_hit_tokens": 1408,
+    "prompt_cache_miss_tokens": 1901,
+    "prompt_tokens": 3309,
+    "prompt_tokens_details": {
+      "cached_tokens": 1408
+    },
+    "total_tokens": 3784
+  }
+}

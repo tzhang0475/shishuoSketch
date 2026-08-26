@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"predicates\": [{\"predicate_id\": \"q0\", \"predicate\": \"IdentityContextSupport\", \"mention_id\": \"hdb2-occ-b44a7c8636d8042ad010\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q1\", \"predicate\": \"CrossStoryIdentitySupport\", \"mention_id\": \"hdb2-occ-b44a7c8636d8042ad010\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q2\", \"predicate\": \"IdentityContradiction\", \"mention_id\": \"hdb2-occ-b44a7c8636d8042ad010\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q3\", \"predicate\": \"IdentityContextSupport\", \"mention_id\": \"hdb2-occ-b44a7c8636d8042ad010\", \"other_mention_id\": null, \"candidate_key\": \"c1\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q4\", \"predicate\": \"CrossStoryIdentitySupport\", \"mention_id\": \"hdb2-occ-b44a7c8636d8042ad010\", \"other_mention_id\": null, \"candidate_key\": \"c1\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q5\", \"predicate\": \"IdentityContradiction\", \"mention_id\": \"hdb2-occ-b44a7c8636d8042ad010\", \"other_mention_id\": null, \"candidate_key\": \"c1\", \"value\": 0.5, \"evidence_ids\": []}], \"note\": \"The mention \\\"長史\\\" is a title_reference in story 08-shangyu-051. The story text says \\\"于時謝鯤爲長史\\\" — the mention refers to the office held by 謝鯤 (c1). The story explicitly names 謝鯤 as the 長史, so the mention directly refers to c1 (謝鯤). However, the request predicates are IdentityContextSupport/CrossStoryIdentitySupport/IdentityContradiction. For c1, the story text directly states 謝鯤爲長史, providing specific identity link support. But per instructions, IdentityContextSupport and CrossStoryIdentitySupport should only be positive when the original text specifically supports the mention pointing to that candidate. The story explicitly says 謝鯤爲長史, which is a direct identity link for c1. However, the mention itself is \\\"長史\\\" (a title), and the story context directly identifies who holds that title. For c0 (王敦), the mention \\\"長史\\\" does not refer to 王敦 — 王敦 is 大將軍, not 長史. So c0 has no support. For c1, the story explicitly states 謝鯤爲長史, providing direct identity support. I should set q3 (IdentityContextSupport for c1) to 1.0 with evidence ev0/context. But the instructions say cooccurrence is not identity, and identity support requires specific identity link. The story text \\\"于時謝鯤爲長史\\\" is a specific identity link between the mention \\\"長史\\\" and 謝鯤. So q3 should be 1.0. For c0, the mention \\\"長史\\\" does not refer to 王敦, so no support — but also no contradiction since 王敦 is present in the story as 大將軍. Actually the mention \\\"長史\\\" is not 王敦's title, so IdentityContradiction for c0 could be considered — but the mention doesn't claim to be 王敦 either. I'll keep neutral for c0. For c1, IdentityContextSupport = 1.0 with ev0. CrossStoryIdentitySupport for c1: the mention is within the same story, so cross-story support is not applicable — neutral. IdentityContradiction for c1: no contradiction — neutral.\"}",
+              "name": "submit_hdb2_psl1_predicates"
+            },
+            "id": "call_00_66iK5m3X04d77ueFSVJO3904",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787766837,
+  "id": "c534147e-18c9-4906-9412-5bd137ee8abd",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 983,
+    "prompt_cache_hit_tokens": 768,
+    "prompt_cache_miss_tokens": 6638,
+    "prompt_tokens": 7406,
+    "prompt_tokens_details": {
+      "cached_tokens": 768
+    },
+    "total_tokens": 8389
+  }
+}

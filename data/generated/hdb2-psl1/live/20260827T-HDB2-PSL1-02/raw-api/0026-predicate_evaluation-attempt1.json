@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"predicates\": [{\"predicate_id\": \"q0\", \"predicate\": \"IdentityContextSupport\", \"mention_id\": \"hdb2-occ-fd4a446679a1979f1e68\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q1\", \"predicate\": \"CrossStoryIdentitySupport\", \"mention_id\": \"hdb2-occ-fd4a446679a1979f1e68\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q2\", \"predicate\": \"IdentityContradiction\", \"mention_id\": \"hdb2-occ-fd4a446679a1979f1e68\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q3\", \"predicate\": \"IdentityContextSupport\", \"mention_id\": \"hdb2-occ-fd4a446679a1979f1e68\", \"other_mention_id\": null, \"candidate_key\": \"c1\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q4\", \"predicate\": \"CrossStoryIdentitySupport\", \"mention_id\": \"hdb2-occ-fd4a446679a1979f1e68\", \"other_mention_id\": null, \"candidate_key\": \"c1\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q5\", \"predicate\": \"IdentityContradiction\", \"mention_id\": \"hdb2-occ-fd4a446679a1979f1e68\", \"other_mention_id\": null, \"candidate_key\": \"c1\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q6\", \"predicate\": \"IdentityContextSupport\", \"mention_id\": \"hdb2-occ-fd4a446679a1979f1e68\", \"other_mention_id\": null, \"candidate_key\": \"c2\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q7\", \"predicate\": \"CrossStoryIdentitySupport\", \"mention_id\": \"hdb2-occ-fd4a446679a1979f1e68\", \"other_mention_id\": null, \"candidate_key\": \"c2\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q8\", \"predicate\": \"IdentityContradiction\", \"mention_id\": \"hdb2-occ-fd4a446679a1979f1e68\", \"other_mention_id\": null, \"candidate_key\": \"c2\", \"value\": 0.5, \"evidence_ids\": []}], \"note\": \"The mention \\\"許玄度\\\" appears in story 02-yanyu-069. Candidate c0 is 許玄度 (empty profile, no confirmed stories). The mention surface matches c0's name directly (AliasMatch=1.0 per deterministic predicates). However, IdentityContextSupport and CrossStoryIdentitySupport require specific identity links from supplied evidence. The main text (ev0) shows 許玄度 as a participant in this story, and c0's profile (ev5) has no confirmed stories or aliases beyond the name itself. The deterministic AliasMatch=1.0 for c0 indicates the mention name matches the candidate's catalogue form, but the request predicates here are IdentityContextSupport/CrossStoryIdentitySupport/IdentityContradiction, not AliasMatch. There is no supplied evidence that specifically links this mention to c0's identity beyond the name match itself (which is captured by AliasMatch, not by these predicates). For c1 (王羲之) and c2 (劉惔), the mention 許玄度 does not match these candidates, and there is no evidence supporting or contradicting identity. All values are neutral 0.5 with no direct evidence.\"}",
+              "name": "submit_hdb2_psl1_predicates"
+            },
+            "id": "call_00_0n0GJLuVIJ2jFzzzZcVd9330",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787766863,
+  "id": "386c2583-5fb6-4c5a-bf7a-304df7fa69f3",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 969,
+    "prompt_cache_hit_tokens": 768,
+    "prompt_cache_miss_tokens": 3279,
+    "prompt_tokens": 4047,
+    "prompt_tokens_details": {
+      "cached_tokens": 768
+    },
+    "total_tokens": 5016
+  }
+}

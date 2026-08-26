@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"predicates\": [{\"predicate_id\": \"q0\", \"predicate\": \"IdentityContextSupport\", \"mention_id\": \"hdb2-occ-d4f8d9950882733e14f8\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 1.0, \"evidence_ids\": [\"ev0\", \"ev2\"]}, {\"predicate_id\": \"q1\", \"predicate\": \"CrossStoryIdentitySupport\", \"mention_id\": \"hdb2-occ-d4f8d9950882733e14f8\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q2\", \"predicate\": \"IdentityContradiction\", \"mention_id\": \"hdb2-occ-d4f8d9950882733e14f8\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 0.0, \"evidence_ids\": []}], \"note\": \"The mention \\\"謝豫章\\\" appears in story 02-yanyu-046 where the annotation context explicitly identifies 謝尚 (字仁祖) as the person. The annotation context \\\"(人鯤之子也齠齔喪兄哀慟/晉陽秋曰謝尚字仁祖陳郡)\\\" directly links the mention context to 謝尚. ev2 confirms same-story identity observation for 謝尚 in this story. The story text itself features 謝仁祖 (謝尚) as the protagonist, and the mention \\\"謝豫章\\\" refers to 謝尚's father 謝鯤 (謝豫章), but the annotation context ties the surrounding passage to 謝尚. Given the annotation explicitly names 謝尚 and the candidate profile confirms this story, IdentityContextSupport is positive. CrossStoryIdentitySupport is neutral (0.5) since no cross-story evidence is supplied. IdentityContradiction is 0 since no evidence contradicts the assignment.\"}",
+              "name": "submit_hdb2_psl1_predicates"
+            },
+            "id": "call_00_TkF3RQlk46PUFqnCyiVM7834",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787766859,
+  "id": "9657def2-b6f5-4f09-a2bc-d4654c920ddb",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 487,
+    "prompt_cache_hit_tokens": 768,
+    "prompt_cache_miss_tokens": 1515,
+    "prompt_tokens": 2283,
+    "prompt_tokens_details": {
+      "cached_tokens": 768
+    },
+    "total_tokens": 2770
+  }
+}

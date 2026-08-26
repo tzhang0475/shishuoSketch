@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"predicates\": [{\"predicate_id\": \"q0\", \"predicate\": \"IdentityContextSupport\", \"mention_id\": \"hdb2-occ-2d62af5441fa974bfed1\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q1\", \"predicate\": \"CrossStoryIdentitySupport\", \"mention_id\": \"hdb2-occ-2d62af5441fa974bfed1\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q2\", \"predicate\": \"IdentityContradiction\", \"mention_id\": \"hdb2-occ-2d62af5441fa974bfed1\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q3\", \"predicate\": \"IdentityContextSupport\", \"mention_id\": \"hdb2-occ-2d62af5441fa974bfed1\", \"other_mention_id\": null, \"candidate_key\": \"c1\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q4\", \"predicate\": \"CrossStoryIdentitySupport\", \"mention_id\": \"hdb2-occ-2d62af5441fa974bfed1\", \"other_mention_id\": null, \"candidate_key\": \"c1\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q5\", \"predicate\": \"IdentityContradiction\", \"mention_id\": \"hdb2-occ-2d62af5441fa974bfed1\", \"other_mention_id\": null, \"candidate_key\": \"c1\", \"value\": 0.5, \"evidence_ids\": []}], \"note\": \"The mention \\\"武帝\\\" in story 19-xianyuan-013 refers to Emperor Wu of Jin (晉武帝). Candidate c0 is \\\"烈宗孝武皇帝\\\" (Emperor Xiaowu of Jin, a later ruler) and c1 is \\\"世祖武皇帝\\\" (Emperor Wu of Jin). The story context mentions 賈充, 李豐, 郭配 — figures from the Wei/Jin transition era. The temporal context is phase-2 (正始與曹魏後期). However, the supplied evidence does not provide a specific identity link between the mention and either candidate beyond general temporal compatibility. The deterministic predicates show AliasMatch=1.0 for c1 (世祖武皇帝) based on ev0/ev2/ev3, but the request predicates here are IdentityContextSupport, CrossStoryIdentitySupport, and IdentityContradiction — none of which have direct supplied evidence establishing a specific identity link. Per constraints, time compatibility and same-story co-occurrence are not identity support. No evidence directly supports or contradicts the identity assignment for either candidate, so all values are neutral 0.5.\"}",
+              "name": "submit_hdb2_psl1_predicates"
+            },
+            "id": "call_00_waQ8SeXvnUX9xthLumxu3287",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787766790,
+  "id": "265f4f51-65c5-4cf2-bd67-99825d5c7523",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 728,
+    "prompt_cache_hit_tokens": 768,
+    "prompt_cache_miss_tokens": 2127,
+    "prompt_tokens": 2895,
+    "prompt_tokens_details": {
+      "cached_tokens": 768
+    },
+    "total_tokens": 3623
+  }
+}

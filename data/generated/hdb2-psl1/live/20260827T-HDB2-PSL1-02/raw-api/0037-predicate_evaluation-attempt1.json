@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"predicates\": [{\"predicate_id\": \"q0\", \"predicate\": \"IdentityContextSupport\", \"mention_id\": \"hdb2-occ-d0d6b190f63f6b1fdc76\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q1\", \"predicate\": \"CrossStoryIdentitySupport\", \"mention_id\": \"hdb2-occ-d0d6b190f63f6b1fdc76\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q2\", \"predicate\": \"IdentityContradiction\", \"mention_id\": \"hdb2-occ-d0d6b190f63f6b1fdc76\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 0.5, \"evidence_ids\": []}], \"note\": \"The mention surface is \\\"車騎\\\" (office reference) in story 02-yanyu-078. The candidate c0 is 山濤 (山公). The story text mentions 山濤 as the person being given gifts by 晉武帝, and 車騎 (謝車騎/謝玄) is a different person who answers the question. The mention \\\"車騎\\\" refers to 謝玄 (謝車騎), not 山濤. However, the supplied evidence does not provide a specific identity link between the mention \\\"車騎\\\" and candidate 山濤. The known participants evidence (ev3) lists 山濤 as a participant in story 02-yanyu-078, but the mention itself is \\\"車騎\\\" which is a different person in the same story. There is no direct evidence linking the mention \\\"車騎\\\" to candidate 山濤. IdentityContextSupport and CrossStoryIdentitySupport are neutral (0.5) because no specific identity link is supplied. IdentityContradiction is also neutral (0.5) because while the story context suggests 車騎 is 謝玄 not 山濤, the supplied evidence does not explicitly contradict the assignment to candidate c0 in a way that directly references the mention-candidate pairing.\"}",
+              "name": "submit_hdb2_psl1_predicates"
+            },
+            "id": "call_00_Bo9v6WbO8en4Iy18hGxj1995",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787766913,
+  "id": "4a701fcf-4507-4239-be3e-f12ca4443d7d",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 545,
+    "prompt_cache_hit_tokens": 768,
+    "prompt_cache_miss_tokens": 2067,
+    "prompt_tokens": 2835,
+    "prompt_tokens_details": {
+      "cached_tokens": 768
+    },
+    "total_tokens": 3380
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"predicates\": [{\"predicate_id\": \"q0\", \"predicate\": \"IdentityContextSupport\", \"mention_id\": \"hdb2-occ-8a085c340358c89dc606\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q1\", \"predicate\": \"CrossStoryIdentitySupport\", \"mention_id\": \"hdb2-occ-8a085c340358c89dc606\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q2\", \"predicate\": \"IdentityContradiction\", \"mention_id\": \"hdb2-occ-8a085c340358c89dc606\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 0.5, \"evidence_ids\": []}], \"note\": \"The mention is \\\"㑹稽\\\" (a place/office title reference) in story 04-wenxue-036. The candidate c0 is 王羲之 (王逸少). The story text explicitly names 王逸少 as the person in this story, and ev2 confirms 王羲之 as a known participant in this story. However, the mention itself is \\\"㑹稽\\\" which is a place/office reference, not a direct person mention. The story context does show 王逸少 (candidate's alias) is the subject, and ev2 lists 王羲之 as participant. But the mention \\\"㑹稽\\\" refers to the office/place, not directly to the person. There is no specific identity link in the supplied evidence tying the mention \\\"㑹稽\\\" to candidate c0 as a person reference. The story does feature 王逸少 prominently, and ev2 confirms 王羲之 is a participant, but the mention is a title/place reference. Given the constraints that cooccurrence and same-story are not identity support, and no specific identity link is supplied for this mention, I return neutral 0.5 for all three predicates. No contradiction evidence is supplied.\"}",
+              "name": "submit_hdb2_psl1_predicates"
+            },
+            "id": "call_00_kEkDlnLepip1EINyHbJP6509",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787766909,
+  "id": "3b7aad31-15f0-4f84-aa2c-201acd8a72c6",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 530,
+    "prompt_cache_hit_tokens": 1024,
+    "prompt_cache_miss_tokens": 1545,
+    "prompt_tokens": 2569,
+    "prompt_tokens_details": {
+      "cached_tokens": 1024
+    },
+    "total_tokens": 3099
+  }
+}

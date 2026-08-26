@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"predicates\": [{\"predicate_id\": \"q0\", \"predicate\": \"IdentityContextSupport\", \"mention_id\": \"hdb2-occ-b2643e129cda61e253d8\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 1.0, \"evidence_ids\": [\"ev0\", \"ev2\", \"context:context:05-fangzheng-030:0:237a9f07\"]}, {\"predicate_id\": \"q1\", \"predicate\": \"CrossStoryIdentitySupport\", \"mention_id\": \"hdb2-occ-b2643e129cda61e253d8\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q2\", \"predicate\": \"IdentityContradiction\", \"mention_id\": \"hdb2-occ-b2643e129cda61e253d8\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 0.0, \"evidence_ids\": []}], \"note\": \"The mention is \\\"僕射\\\" (office reference) in story 05-fangzheng-030. The story text (ev0, context) explicitly states \\\"周伯仁爲僕射\\\" — the person holding the office of 僕射 is 周伯仁, which is a courtesy name of candidate c0 (周顗). ev2 confirms the known participant 周顗 with relation \\\"爲\\\" in this story. This provides direct contextual identity support linking the office mention to candidate c0. No cross-story identity evidence is supplied beyond this story. No contradiction evidence is present.\"}",
+              "name": "submit_hdb2_psl1_predicates"
+            },
+            "id": "call_00_at75EJjrnAcwuRnS3J6J5971",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787766856,
+  "id": "07cada5a-b2f3-401f-b984-0d5087221bd8",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 427,
+    "prompt_cache_hit_tokens": 768,
+    "prompt_cache_miss_tokens": 2041,
+    "prompt_tokens": 2809,
+    "prompt_tokens_details": {
+      "cached_tokens": 768
+    },
+    "total_tokens": 3236
+  }
+}

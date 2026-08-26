@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"predicates\": [{\"predicate_id\": \"q0\", \"predicate\": \"IdentityContextSupport\", \"mention_id\": \"hdb2-occ-0716da549b132ab653d2\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q1\", \"predicate\": \"CrossStoryIdentitySupport\", \"mention_id\": \"hdb2-occ-0716da549b132ab653d2\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q2\", \"predicate\": \"IdentityContradiction\", \"mention_id\": \"hdb2-occ-0716da549b132ab653d2\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 0.5, \"evidence_ids\": []}], \"note\": \"The mention \\\"晉武帝\\\" (Emperor Wu of Jin) appears in the story context. The candidate c0 is profiled as 山濤 (Shan Tao) based on ev2. The mention surface \\\"晉武帝\\\" refers to the Jin emperor, not to 山濤. However, the supplied evidence does not explicitly link the mention to candidate c0, nor does it explicitly contradict the assignment. The deterministic predicates show AliasMatch=1.0 (ev0, ev2) and TimeCompatible=1.0 (ev1), but these are not identity support per the constraints. No supplied evidence specifically supports or contradicts the identity of the mention \\\"晉武帝\\\" pointing to candidate c0 (山濤). Therefore all three predicates are neutral at 0.5.\"}",
+              "name": "submit_hdb2_psl1_predicates"
+            },
+            "id": "call_00_IbVbFGah6tRUqDcbaizr3730",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787766771,
+  "id": "7e5219ed-a958-48ad-8a4c-991510b007a8",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 434,
+    "prompt_cache_hit_tokens": 768,
+    "prompt_cache_miss_tokens": 1590,
+    "prompt_tokens": 2358,
+    "prompt_tokens_details": {
+      "cached_tokens": 768
+    },
+    "total_tokens": 2792
+  }
+}
