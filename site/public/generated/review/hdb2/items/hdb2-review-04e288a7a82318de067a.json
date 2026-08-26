@@ -80,6 +80,7 @@
       "candidate_key": "c0",
       "display_name": "絡秀",
       "person_id": null,
+      "rank": 1,
       "semantic_type": "person",
       "source": "hdb1_new_candidate"
     },
@@ -87,6 +88,7 @@
       "candidate_key": "c1",
       "display_name": "周浚",
       "person_id": "person-067",
+      "rank": 2,
       "semantic_type": "person",
       "source": "local_story_neighbor"
     },
@@ -94,10 +96,12 @@
       "candidate_key": "c2",
       "display_name": "周顗",
       "person_id": "person-019",
+      "rank": 3,
       "semantic_type": "person",
       "source": "local_story_neighbor"
     }
   ],
+  "compositional_context": null,
   "current_state": {
     "candidate_only": true,
     "candidate_set": [
@@ -110,12 +114,71 @@
     "compositional_referent": null,
     "hard_constraint_rejections": [],
     "identity_resolution_basis": "new_candidate",
-    "original_hdb1_status": null,
+    "original_hdb1_status": "resolved_new_candidate",
     "rescue_attempted": false,
     "rescue_useful": false,
     "status": "resolved_new_candidate"
   },
+  "decision_options": [
+    {
+      "description": "确认这是一个独立人物候选。",
+      "key": "confirm_new_person",
+      "label": "确认新人物"
+    },
+    {
+      "description": "从下方候选中选择已有 Person。",
+      "key": "choose_existing_person",
+      "label": "这是已有的人物"
+    },
+    {
+      "description": "保留人物判断，但暂不确定身份。",
+      "key": "keep_unresolved",
+      "label": "确实是人物，但无法确定"
+    },
+    {
+      "description": "表达不是独立人物，或当前解析方向错误。",
+      "key": "not_person",
+      "label": "不是独立人物 / 系统判断有误"
+    },
+    {
+      "description": "标记来源、范围或解释需要复核。",
+      "key": "evidence_problem",
+      "label": "证据有问题"
+    }
+  ],
   "identity_observation_id": "hdb1-identity-916e3ea049c816862900ebfe",
+  "materialization_impact": {
+    "affected_fact_ids": {
+      "Kinship": [
+        "hdb1-relation-36ca623071f9641212c80273"
+      ],
+      "Marriage": [],
+      "OfficeTenures": [],
+      "PersonStory": [],
+      "Relations": [
+        "hdb1-relation-6727dc34f3f3641e86a361de",
+        "hdb1-relation-7143ca47e173add63744943a",
+        "hdb1-relation-36ca623071f9641212c80273"
+      ]
+    },
+    "summary": [
+      {
+        "count": 1,
+        "kind": "Person",
+        "label": "+ 1 Person"
+      },
+      {
+        "count": 3,
+        "kind": "Relations",
+        "label": "+ 3 Relations"
+      },
+      {
+        "count": 1,
+        "kind": "Kinship",
+        "label": "+ 1 Kinship"
+      }
+    ]
+  },
   "occurrence_id": "hdb2-occ-4ba3ca5aa3ed6a69973a",
   "occurrence_type": "abbreviated_person_name",
   "priority": "P1",
@@ -130,8 +193,9 @@
   },
   "relevant_annotation_context": [],
   "review_id": "hdb2-review-04e288a7a82318de067a",
+  "review_question": "《賢媛第十九》018 中的「絡秀」是否应作为一个新的独立人物加入人物数据库？",
   "review_type": "candidate_person",
-  "schema": "hdb2-review-item-v1",
+  "schema": "hdb2-review-item-v2",
   "selected_evidence": [
     {
       "evidence_ref": "hdb2-shishuo-main-19-xianyuan-018",
@@ -150,5 +214,7 @@
   "support_families": [
     "explicit_name"
   ],
-  "target_surface": "絡秀"
+  "system_summary": "系统认为这是一个具体人物，但无法可靠匹配当前已有 Person。",
+  "target_surface": "絡秀",
+  "why_review_needed": "现有人物目录没有可安全匹配的 Person；你的判断将决定是否保留为候选人物，或退回身份/人物类型复核。"
 }

@@ -80,6 +80,7 @@
       "candidate_key": "c0",
       "display_name": "王含",
       "person_id": null,
+      "rank": 1,
       "semantic_type": "person",
       "source": "hdb1_new_candidate"
     },
@@ -87,6 +88,7 @@
       "candidate_key": "c1",
       "display_name": "何充",
       "person_id": "person-025",
+      "rank": 2,
       "semantic_type": "person",
       "source": "local_story_neighbor"
     },
@@ -94,10 +96,12 @@
       "candidate_key": "c2",
       "display_name": "王敦",
       "person_id": "person-011",
+      "rank": 3,
       "semantic_type": "person",
       "source": "local_story_neighbor"
     }
   ],
+  "compositional_context": null,
   "current_state": {
     "candidate_only": true,
     "candidate_set": [
@@ -110,12 +114,79 @@
     "compositional_referent": null,
     "hard_constraint_rejections": [],
     "identity_resolution_basis": "new_candidate",
-    "original_hdb1_status": null,
+    "original_hdb1_status": "resolved_new_candidate",
     "rescue_attempted": false,
     "rescue_useful": false,
     "status": "resolved_new_candidate"
   },
+  "decision_options": [
+    {
+      "description": "确认这是一个独立人物候选。",
+      "key": "confirm_new_person",
+      "label": "确认新人物"
+    },
+    {
+      "description": "从下方候选中选择已有 Person。",
+      "key": "choose_existing_person",
+      "label": "这是已有的人物"
+    },
+    {
+      "description": "保留人物判断，但暂不确定身份。",
+      "key": "keep_unresolved",
+      "label": "确实是人物，但无法确定"
+    },
+    {
+      "description": "表达不是独立人物，或当前解析方向错误。",
+      "key": "not_person",
+      "label": "不是独立人物 / 系统判断有误"
+    },
+    {
+      "description": "标记来源、范围或解释需要复核。",
+      "key": "evidence_problem",
+      "label": "证据有问题"
+    }
+  ],
   "identity_observation_id": "hdb1-identity-22ad5ff121c27076d1bdc264",
+  "materialization_impact": {
+    "affected_fact_ids": {
+      "Kinship": [
+        "hdb1-relation-9fc00f468b81077327011faf"
+      ],
+      "Marriage": [],
+      "OfficeTenures": [
+        "hdb1-relation-7c6198710378e5616919ab7e"
+      ],
+      "PersonStory": [],
+      "Relations": [
+        "hdb1-relation-9fc00f468b81077327011faf",
+        "hdb1-relation-8e69d1cc5ca91f8d9832de33",
+        "hdb1-relation-28fde3d239ce4312451f9b00",
+        "hdb1-relation-7c6198710378e5616919ab7e"
+      ]
+    },
+    "summary": [
+      {
+        "count": 1,
+        "kind": "Person",
+        "label": "+ 1 Person"
+      },
+      {
+        "count": 4,
+        "kind": "Relations",
+        "label": "+ 4 Relations"
+      },
+      {
+        "count": 1,
+        "kind": "Kinship",
+        "label": "+ 1 Kinship"
+      },
+      {
+        "count": 1,
+        "kind": "OfficeTenures",
+        "label": "+ 1 OfficeTenures"
+      }
+    ]
+  },
   "occurrence_id": "hdb2-occ-477a7b39c49e61f5cae6",
   "occurrence_type": "abbreviated_person_name",
   "priority": "P1",
@@ -130,8 +201,9 @@
   },
   "relevant_annotation_context": [],
   "review_id": "hdb2-review-e2c95bc4e4a92caa7758",
+  "review_question": "《方正第五》028 中的「王含」是否应作为一个新的独立人物加入人物数据库？",
   "review_type": "candidate_person",
-  "schema": "hdb2-review-item-v1",
+  "schema": "hdb2-review-item-v2",
   "selected_evidence": [
     {
       "evidence_ref": "hdb2-shishuo-main-05-fangzheng-028",
@@ -151,5 +223,7 @@
     "explicit_name",
     "kinship_context"
   ],
-  "target_surface": "王含"
+  "system_summary": "系统认为这是一个具体人物，但无法可靠匹配当前已有 Person。",
+  "target_surface": "王含",
+  "why_review_needed": "现有人物目录没有可安全匹配的 Person；你的判断将决定是否保留为候选人物，或退回身份/人物类型复核。"
 }

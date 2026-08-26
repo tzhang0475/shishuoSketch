@@ -30,7 +30,52 @@
       }
     ]
   },
-  "candidate_people": [],
+  "candidate_people": [
+    {
+      "candidate_key": "c0",
+      "display_name": "劉琨",
+      "person_id": "person-021",
+      "rank": 1,
+      "semantic_type": "person",
+      "source": "local_story_neighbor"
+    },
+    {
+      "candidate_key": "c1",
+      "display_name": "温嶠",
+      "person_id": "person-013",
+      "rank": 2,
+      "semantic_type": "person",
+      "source": "local_story_neighbor"
+    }
+  ],
+  "compositional_context": {
+    "base_person": {
+      "label": "璠",
+      "person_id": null,
+      "surface": "璠"
+    },
+    "referent_candidates": [
+      {
+        "candidate_key": "c0",
+        "display_name": "劉琨",
+        "person_id": "person-021",
+        "rank": 1,
+        "semantic_type": "person",
+        "source": "local_story_neighbor"
+      },
+      {
+        "candidate_key": "c1",
+        "display_name": "温嶠",
+        "person_id": "person-013",
+        "rank": 2,
+        "semantic_type": "person",
+        "source": "local_story_neighbor"
+      }
+    ],
+    "relation_label": "父親",
+    "relation_surface": "父",
+    "relation_type": "father"
+  },
   "current_state": {
     "candidate_only": true,
     "candidate_set": [],
@@ -41,12 +86,59 @@
       "candidate_key_must_be_null_outside_candidate"
     ],
     "identity_resolution_basis": "unresolved",
-    "original_hdb1_status": null,
+    "original_hdb1_status": "unresolved",
     "rescue_attempted": false,
     "rescue_useful": false,
     "status": "unresolved"
   },
+  "decision_options": [
+    {
+      "description": "从参照对象候选中选择，或补充可核验对象。",
+      "key": "choose_referent",
+      "label": "确认具体亲属对象"
+    },
+    {
+      "description": "保留结构关系，暂不确定具体人物。",
+      "key": "keep_unresolved",
+      "label": "暂无法确定对象"
+    },
+    {
+      "description": "确认它只表达结构关系，不能形成单一 Person。",
+      "key": "not_single_person",
+      "label": "不是单一人物表达"
+    },
+    {
+      "description": "标记亲属结构或引文需要复核。",
+      "key": "evidence_problem",
+      "label": "证据有问题"
+    }
+  ],
   "identity_observation_id": "hdb1-identity-c16390723adc40b049e1c99c",
+  "materialization_impact": {
+    "affected_fact_ids": {
+      "Kinship": [
+        "hdb1-relation-8b61d06c31879034e46c2cb3"
+      ],
+      "Marriage": [],
+      "OfficeTenures": [],
+      "PersonStory": [],
+      "Relations": [
+        "hdb1-relation-8b61d06c31879034e46c2cb3"
+      ]
+    },
+    "summary": [
+      {
+        "count": 1,
+        "kind": "Relations",
+        "label": "+ 1 Relations"
+      },
+      {
+        "count": 1,
+        "kind": "Kinship",
+        "label": "+ 1 Kinship"
+      }
+    ]
+  },
   "occurrence_id": "hdb2-occ-0e988a36affe73dcce01",
   "occurrence_type": "kinship_reference",
   "priority": "P1",
@@ -63,18 +155,31 @@
     "(尚書右丞迎大駕於長安以有殊勲封廣武侯年三/國之才父璠光禄大夫琨少稱儁朗累遷司徒長史)"
   ],
   "review_id": "hdb2-review-e3c34a268db4dac7b8e8",
+  "review_question": "这里的「父璠」具体指璠的哪一位亲属（关系：父親）？",
   "review_type": "compositional_kinship",
-  "schema": "hdb2-review-item-v1",
+  "schema": "hdb2-review-item-v2",
   "selected_evidence": [
     {
-      "evidence_ref": "story:02-yanyu-035",
+      "evidence_ref": "hdb2-shishuo-main-02-yanyu-035",
       "exact_spans": [],
-      "excerpt": "劉琨雖隔閡寇戎，志存本朝，謂温嶠曰：“班彪識劉氏之復興，馬援知漢光之可輔。今晉祚雖衰，天命未改。吾欲立功於河北，使卿延譽於江南，子其行乎？”温曰：“嶠雖不敏，才非昔人，明公以桓、文之姿，建匡立之功，豈敢辭命！”",
+      "excerpt": "劉琨雖隔閡寇戎志存本朝\n\n\n謂温嶠曰班彪識劉氏之復興馬\n援知漢光之可輔\n\n今晉祚雖衰天\n命未改吾欲立功於河北使卿延譽於江南子其行\n乎温曰嶠雖不敏才非昔人明公以桓文之姿建匡\n立之功豈敢辭命",
       "locator": {
+        "chapter": "言語第二",
         "story_id": "02-yanyu-035"
       },
       "source_layer": "main_text",
       "source_work": "世說正文"
+    },
+    {
+      "evidence_ref": "hdb2-shishuo-liu-02-yanyu-035-annotation-002",
+      "exact_spans": [],
+      "excerpt": "(尚書右丞迎大駕於長安以有殊勲封廣武侯年三/國之才父璠光禄大夫琨少稱儁朗累遷司徒長史)",
+      "locator": {
+        "annotation_id": "annotation-002",
+        "story_id": "02-yanyu-035"
+      },
+      "source_layer": "liu_annotation",
+      "source_work": "劉注"
     }
   ],
   "story_context": "劉琨雖隔閡寇戎，志存本朝，謂温嶠曰：“班彪識劉氏之復興，馬援知漢光之可輔。今晉祚雖衰，天命未改。吾欲立功於河北，使卿延譽於江南，子其行乎？”温曰：“嶠雖不敏，才非昔人，明公以桓、文之姿，建匡立之功，豈敢辭命！”",
@@ -82,5 +187,7 @@
   "support_families": [
     "annotation_context"
   ],
-  "target_surface": "父璠"
+  "system_summary": "系统将这个表达视为结构性亲属指称，而不是普通人物别名。",
+  "target_surface": "父璠",
+  "why_review_needed": "需要确认亲属关系所指的独立对象；该表达不能直接折叠为基准人物本身。"
 }

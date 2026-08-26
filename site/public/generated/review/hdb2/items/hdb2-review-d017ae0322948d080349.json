@@ -45,10 +45,12 @@
       "candidate_key": "c0",
       "display_name": "王導",
       "person_id": "person-003",
+      "rank": 1,
       "semantic_type": "person",
       "source": "local_story_neighbor"
     }
   ],
+  "compositional_context": null,
   "current_state": {
     "candidate_only": true,
     "candidate_set": [
@@ -59,12 +61,54 @@
     "compositional_referent": null,
     "hard_constraint_rejections": [],
     "identity_resolution_basis": "unresolved",
-    "original_hdb1_status": null,
+    "original_hdb1_status": "unresolved",
     "rescue_attempted": false,
     "rescue_useful": false,
     "status": "office_reference"
   },
+  "decision_options": [
+    {
+      "description": "从排名候选中确认官职/称号持有人。",
+      "key": "choose_existing_person",
+      "label": "选择已有的人物"
+    },
+    {
+      "description": "保留官职/称号表达，暂不绑定人物。",
+      "key": "keep_unresolved",
+      "label": "暂无法确定"
+    },
+    {
+      "description": "确认当前表达没有足够的人物指代。",
+      "key": "not_person",
+      "label": "不是人物指称"
+    },
+    {
+      "description": "标记时间、职官或引文需要复核。",
+      "key": "evidence_problem",
+      "label": "证据有问题"
+    }
+  ],
   "identity_observation_id": "hdb1-identity-1edddec420b9a7dba5050a46",
+  "materialization_impact": {
+    "affected_fact_ids": {
+      "Kinship": [],
+      "Marriage": [],
+      "OfficeTenures": [],
+      "PersonStory": [],
+      "Relations": [
+        "hdb1-relation-565e7ba93eb0d3ee5b420819",
+        "hdb1-relation-70ad6d36e6c260ac59ccc7bd",
+        "hdb1-relation-c990e633d277482578d9b188"
+      ]
+    },
+    "summary": [
+      {
+        "count": 3,
+        "kind": "Relations",
+        "label": "+ 3 Relations"
+      }
+    ]
+  },
   "occurrence_id": "hdb2-occ-0b1f0e9918edf0c234f2",
   "occurrence_type": "title_reference",
   "priority": "P1",
@@ -81,8 +125,9 @@
     "(者是也髙貴鄉公之事已見上/宣王創業誅曹爽任蔣濟之㳅)"
   ],
   "review_id": "hdb2-review-d017ae0322948d080349",
+  "review_question": "这里的「宣王」具体指哪位人物？",
   "review_type": "office_or_title_holder",
-  "schema": "hdb2-review-item-v1",
+  "schema": "hdb2-review-item-v2",
   "selected_evidence": [
     {
       "evidence_ref": "hdb2-shishuo-main-33-youhui-007",
@@ -110,5 +155,7 @@
   "story_context": "王導、温嶠俱見明帝，帝問温前世所以得天下之由。温未荅，頃，王曰：“温嶠年少未諳，臣爲陛下陳之。”王廼具叙宣王創業之始，誅夷名族，寵樹同已，及文王之末高貴鄉公事。明帝聞之，覆面箸牀曰：“若如公言，胙安得長！”",
   "story_id": "33-youhui-007",
   "support_families": [],
-  "target_surface": "宣王"
+  "system_summary": "系统识别出官职、称号或帝王称谓，但承载该表达的人物仍需确认。",
+  "target_surface": "宣王",
+  "why_review_needed": "官职/称号可能对应多位人物；需要结合当前给出的时间、任职、别名和社会证据，避免把角色表达直接当作 Person。"
 }

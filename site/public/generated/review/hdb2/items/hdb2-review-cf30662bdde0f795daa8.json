@@ -47,7 +47,25 @@
       }
     ]
   },
-  "candidate_people": [],
+  "candidate_people": [
+    {
+      "candidate_key": "c0",
+      "display_name": "文王",
+      "person_id": null,
+      "rank": 1,
+      "semantic_type": "person",
+      "source": "hdb2_p1_new_candidate_evidence"
+    },
+    {
+      "candidate_key": "c1",
+      "display_name": "王導",
+      "person_id": "person-003",
+      "rank": 2,
+      "semantic_type": "person",
+      "source": "local_story_neighbor"
+    }
+  ],
+  "compositional_context": null,
   "current_state": {
     "candidate_only": true,
     "candidate_set": [],
@@ -56,14 +74,61 @@
     "compositional_referent": null,
     "hard_constraint_rejections": [],
     "identity_resolution_basis": "unresolved",
-    "original_hdb1_status": null,
+    "original_hdb1_status": "unresolved",
     "rescue_attempted": false,
     "rescue_useful": false,
     "status": "contextually_resolved"
   },
+  "decision_options": [
+    {
+      "description": "从候选中选择最符合当前出现位置的 Person。",
+      "key": "choose_existing_person",
+      "label": "这是已有的人物"
+    },
+    {
+      "description": "保留人物判断，暂不绑定身份。",
+      "key": "keep_unresolved",
+      "label": "确实是人物，但无法确定"
+    },
+    {
+      "description": "确认当前表达不应作为单一人物处理。",
+      "key": "not_person",
+      "label": "不是独立人物 / 系统判断有误"
+    },
+    {
+      "description": "标记引文或候选证据需要复核。",
+      "key": "evidence_problem",
+      "label": "证据有问题"
+    }
+  ],
   "identity_observation_id": "hdb1-identity-627939ef48d6e9f813a4f55e",
+  "materialization_impact": {
+    "affected_fact_ids": {
+      "Kinship": [],
+      "Marriage": [],
+      "OfficeTenures": [],
+      "PersonStory": [],
+      "Relations": [
+        "hdb1-relation-565e7ba93eb0d3ee5b420819",
+        "hdb1-relation-70ad6d36e6c260ac59ccc7bd",
+        "hdb1-relation-c990e633d277482578d9b188"
+      ]
+    },
+    "summary": [
+      {
+        "count": 1,
+        "kind": "PersonStory",
+        "label": "+ 1 PersonStory"
+      },
+      {
+        "count": 3,
+        "kind": "Relations",
+        "label": "+ 3 Relations"
+      }
+    ]
+  },
   "occurrence_id": "hdb2-occ-dc314f56d381d63cb6f8",
-  "occurrence_type": "abbreviated_name",
+  "occurrence_type": "abbreviated_person_name",
   "priority": "P1",
   "priority_score": 850,
   "proposed_identity": {
@@ -78,18 +143,31 @@
     "(者是也髙貴鄉公之事已見上/宣王創業誅曹爽任蔣濟之㳅)"
   ],
   "review_id": "hdb2-review-cf30662bdde0f795daa8",
+  "review_question": "这里的「王」具体指哪位人物？",
   "review_type": "identity",
-  "schema": "hdb2-review-item-v1",
+  "schema": "hdb2-review-item-v2",
   "selected_evidence": [
     {
-      "evidence_ref": "story:33-youhui-007",
+      "evidence_ref": "hdb2-shishuo-main-33-youhui-007",
       "exact_spans": [],
-      "excerpt": "王導、温嶠俱見明帝，帝問温前世所以得天下之由。温未荅，頃，王曰：“温嶠年少未諳，臣爲陛下陳之。”王廼具叙宣王創業之始，誅夷名族，寵樹同已，及文王之末高貴鄉公事。明帝聞之，覆面箸牀曰：“若如公言，胙安得長！”",
+      "excerpt": "王導温嶠俱見明帝帝問温前世所以得天下之由\n温未荅頃王曰温嶠年少未諳臣爲陛下陳之王廼\n具叙宣王創業之始誅夷名族寵樹同已及文王之\n\n末高貴鄉公事明帝\n聞之覆面箸牀曰若如公言胙安得長",
       "locator": {
+        "chapter": "尤悔第三十三",
         "story_id": "33-youhui-007"
       },
       "source_layer": "main_text",
       "source_work": "世說正文"
+    },
+    {
+      "evidence_ref": "hdb2-shishuo-liu-33-youhui-007-annotation-001",
+      "exact_spans": [],
+      "excerpt": "(者是也髙貴鄉公之事已見上/宣王創業誅曹爽任蔣濟之㳅)",
+      "locator": {
+        "annotation_id": "annotation-001",
+        "story_id": "33-youhui-007"
+      },
+      "source_layer": "liu_annotation",
+      "source_work": "劉注"
     }
   ],
   "story_context": "王導、温嶠俱見明帝，帝問温前世所以得天下之由。温未荅，頃，王曰：“温嶠年少未諳，臣爲陛下陳之。”王廼具叙宣王創業之始，誅夷名族，寵樹同已，及文王之末高貴鄉公事。明帝聞之，覆面箸牀曰：“若如公言，胙安得長！”",
@@ -98,5 +176,7 @@
     "annotation_context",
     "social_context"
   ],
-  "target_surface": "王"
+  "system_summary": "系统保留了当前文本中的候选人物和来源证据，但身份尚未达到可自动确认的门槛。",
+  "target_surface": "王",
+  "why_review_needed": "当前候选之间仍有歧义，或直接身份证据不足；需要人工选择已有 Person、保留未解析，或指出人物类型/证据问题。"
 }

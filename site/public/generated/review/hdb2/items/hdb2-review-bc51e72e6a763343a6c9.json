@@ -35,10 +35,12 @@
       "candidate_key": "c0",
       "display_name": "沈充",
       "person_id": "person-057",
+      "rank": 1,
       "semantic_type": "person",
       "source": "local_story_neighbor"
     }
   ],
+  "compositional_context": null,
   "current_state": {
     "candidate_only": true,
     "candidate_set": [
@@ -49,12 +51,59 @@
     "compositional_referent": null,
     "hard_constraint_rejections": [],
     "identity_resolution_basis": "unresolved",
-    "original_hdb1_status": null,
+    "original_hdb1_status": "unresolved",
     "rescue_attempted": false,
     "rescue_useful": false,
     "status": "office_reference"
   },
+  "decision_options": [
+    {
+      "description": "从排名候选中确认官职/称号持有人。",
+      "key": "choose_existing_person",
+      "label": "选择已有的人物"
+    },
+    {
+      "description": "保留官职/称号表达，暂不绑定人物。",
+      "key": "keep_unresolved",
+      "label": "暂无法确定"
+    },
+    {
+      "description": "确认当前表达没有足够的人物指代。",
+      "key": "not_person",
+      "label": "不是人物指称"
+    },
+    {
+      "description": "标记时间、职官或引文需要复核。",
+      "key": "evidence_problem",
+      "label": "证据有问题"
+    }
+  ],
   "identity_observation_id": "hdb1-identity-478491e7375373d308f9a167",
+  "materialization_impact": {
+    "affected_fact_ids": {
+      "Kinship": [],
+      "Marriage": [],
+      "OfficeTenures": [
+        "hdb1-relation-c692c769e420fe809974aed4"
+      ],
+      "PersonStory": [],
+      "Relations": [
+        "hdb1-relation-c692c769e420fe809974aed4"
+      ]
+    },
+    "summary": [
+      {
+        "count": 1,
+        "kind": "Relations",
+        "label": "+ 1 Relations"
+      },
+      {
+        "count": 1,
+        "kind": "OfficeTenures",
+        "label": "+ 1 OfficeTenures"
+      }
+    ]
+  },
   "occurrence_id": "hdb2-occ-0a363d95ef43334b7f6b",
   "occurrence_type": "office_reference",
   "priority": "P2",
@@ -71,8 +120,9 @@
     "(諂事王敦敦克京邑以充爲車騎將/晉陽秋曰充字士居吳興人少好兵)"
   ],
   "review_id": "hdb2-review-bc51e72e6a763343a6c9",
+  "review_question": "这里的「車騎」具体指哪位人物？",
   "review_type": "office_or_title_holder",
-  "schema": "hdb2-review-item-v1",
+  "schema": "hdb2-review-item-v2",
   "selected_evidence": [
     {
       "evidence_ref": "hdb2-shishuo-main-10-guizhen-016",
@@ -100,5 +150,7 @@
   "story_context": "蘇峻東征沈充，請吏部郎陸邁與俱。將至吳，密勑左右，令入閶門放火以示威。陸知其意，謂峻曰：“吳治平未久，必將有亂。若爲亂階，請從我家始。”峻遂止。",
   "story_id": "10-guizhen-016",
   "support_families": [],
-  "target_surface": "車騎"
+  "system_summary": "系统识别出官职、称号或帝王称谓，但承载该表达的人物仍需确认。",
+  "target_surface": "車騎",
+  "why_review_needed": "官职/称号可能对应多位人物；需要结合当前给出的时间、任职、别名和社会证据，避免把角色表达直接当作 Person。"
 }

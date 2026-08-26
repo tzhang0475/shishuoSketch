@@ -51,7 +51,65 @@
       }
     ]
   },
-  "candidate_people": [],
+  "candidate_people": [
+    {
+      "candidate_key": "c0",
+      "display_name": "世祖文皇帝",
+      "person_id": null,
+      "rank": 1,
+      "semantic_type": "ruler_title",
+      "source": "h0a_ruler_registry"
+    },
+    {
+      "candidate_key": "c1",
+      "display_name": "世祖武皇帝",
+      "person_id": null,
+      "rank": 2,
+      "semantic_type": "ruler_title",
+      "source": "h0a_ruler_registry"
+    },
+    {
+      "candidate_key": "c2",
+      "display_name": "丙辰帝",
+      "person_id": null,
+      "rank": 3,
+      "semantic_type": "ruler_title",
+      "source": "h0a_ruler_registry"
+    },
+    {
+      "candidate_key": "c3",
+      "display_name": "中宗元皇帝",
+      "person_id": null,
+      "rank": 4,
+      "semantic_type": "ruler_title",
+      "source": "h0a_ruler_registry"
+    },
+    {
+      "candidate_key": "c4",
+      "display_name": "元皇帝",
+      "person_id": null,
+      "rank": 5,
+      "semantic_type": "ruler_title",
+      "source": "h0a_ruler_registry"
+    },
+    {
+      "candidate_key": "c5",
+      "display_name": "太宗簡文皇帝",
+      "person_id": null,
+      "rank": 6,
+      "semantic_type": "ruler_title",
+      "source": "h0a_ruler_registry"
+    },
+    {
+      "candidate_key": "c6",
+      "display_name": "和嶠",
+      "person_id": "person-035",
+      "rank": 7,
+      "semantic_type": "person",
+      "source": "local_story_neighbor"
+    }
+  ],
+  "compositional_context": null,
   "current_state": {
     "candidate_only": true,
     "candidate_set": [],
@@ -60,21 +118,64 @@
     "compositional_referent": null,
     "hard_constraint_rejections": [],
     "identity_resolution_basis": "new_candidate",
-    "original_hdb1_status": null,
+    "original_hdb1_status": "unresolved",
     "rescue_attempted": false,
     "rescue_useful": false,
     "status": "contextually_resolved"
   },
+  "decision_options": [
+    {
+      "description": "从排名候选中确认官职/称号持有人。",
+      "key": "choose_existing_person",
+      "label": "选择已有的人物"
+    },
+    {
+      "description": "保留官职/称号表达，暂不绑定人物。",
+      "key": "keep_unresolved",
+      "label": "暂无法确定"
+    },
+    {
+      "description": "确认当前表达没有足够的人物指代。",
+      "key": "not_person",
+      "label": "不是人物指称"
+    },
+    {
+      "description": "标记时间、职官或引文需要复核。",
+      "key": "evidence_problem",
+      "label": "证据有问题"
+    }
+  ],
   "identity_observation_id": "hdb1-identity-229ae0f235e39e37c396e85d",
+  "materialization_impact": {
+    "affected_fact_ids": {
+      "Kinship": [],
+      "Marriage": [],
+      "OfficeTenures": [],
+      "PersonStory": [],
+      "Relations": [
+        "hdb1-relation-376c51a577ac1bb2dd51b2aa",
+        "hdb1-relation-9f1149a8ae9e23f2e7dbae84",
+        "hdb1-relation-9b25702117355b2fc51f7b78",
+        "hdb1-relation-bde93ff08f7dd0d8db0e606b"
+      ]
+    },
+    "summary": [
+      {
+        "count": 4,
+        "kind": "Relations",
+        "label": "+ 4 Relations"
+      }
+    ]
+  },
   "occurrence_id": "hdb2-occ-a30f0cf792ac660440ec",
-  "occurrence_type": "person_office_title",
+  "occurrence_type": "ruler_reference",
   "priority": "P1",
   "priority_score": 850,
   "proposed_identity": {
     "basis": "new_candidate",
     "candidate_key": "c1",
     "candidate_person_id": "hdb2-candidate-person-817de008d9b3699b",
-    "label": null,
+    "label": "世祖文皇帝",
     "person_id": null,
     "status": "contextually_resolved"
   },
@@ -82,18 +183,31 @@
     "(之於蜀不食而死民作歌曰一尺布尚可縫一/漢書曰淮南厲王長高祖少子也有罪文帝徙)"
   ],
   "review_id": "hdb2-review-4bc8537b23cfc5d478e2",
-  "review_type": "identity",
-  "schema": "hdb2-review-item-v1",
+  "review_question": "这里的「帝」具体指哪位人物？",
+  "review_type": "office_or_title_holder",
+  "schema": "hdb2-review-item-v2",
   "selected_evidence": [
     {
-      "evidence_ref": "story:05-fangzheng-011",
+      "evidence_ref": "hdb2-shishuo-main-05-fangzheng-011",
       "exact_spans": [],
-      "excerpt": "武帝語和嶠曰：“我欲先痛罵王武子，然後爵之。”嶠曰：“武子儁爽，恐不可屈。”帝遂召武子，苦責之，因曰：“知愧不？”武子曰：“‘尺布斗粟’之謠，常爲陛下耻之！它人能令踈親，臣不能使親踈，以此愧陛下。”",
+      "excerpt": "武帝語和嶠曰我欲先痛罵王武子然後爵之嶠曰\n武子儁爽恐不可屈帝遂召武子苦責之因曰知愧\n不\n\n武子曰尺布斗粟之謠常爲陛下\n耻之\n\n它人能令踈親臣不能使親踈以此愧陛下",
       "locator": {
+        "chapter": "方正第五",
         "story_id": "05-fangzheng-011"
       },
       "source_layer": "main_text",
       "source_work": "世說正文"
+    },
+    {
+      "evidence_ref": "hdb2-shishuo-liu-05-fangzheng-011-annotation-004",
+      "exact_spans": [],
+      "excerpt": "(之於蜀不食而死民作歌曰一尺布尚可縫一/漢書曰淮南厲王長高祖少子也有罪文帝徙)",
+      "locator": {
+        "annotation_id": "annotation-004",
+        "story_id": "05-fangzheng-011"
+      },
+      "source_layer": "liu_annotation",
+      "source_work": "劉注"
     }
   ],
   "story_context": "武帝語和嶠曰：“我欲先痛罵王武子，然後爵之。”嶠曰：“武子儁爽，恐不可屈。”帝遂召武子，苦責之，因曰：“知愧不？”武子曰：“‘尺布斗粟’之謠，常爲陛下耻之！它人能令踈親，臣不能使親踈，以此愧陛下。”",
@@ -102,5 +216,7 @@
     "ruler_context",
     "social_context"
   ],
-  "target_surface": "帝"
+  "system_summary": "系统识别出官职、称号或帝王称谓，但承载该表达的人物仍需确认。",
+  "target_surface": "帝",
+  "why_review_needed": "官职/称号可能对应多位人物；需要结合当前给出的时间、任职、别名和社会证据，避免把角色表达直接当作 Person。"
 }

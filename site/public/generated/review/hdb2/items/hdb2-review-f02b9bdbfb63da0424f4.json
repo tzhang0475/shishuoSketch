@@ -34,6 +34,7 @@
       "candidate_key": "c0",
       "display_name": "劉眞長",
       "person_id": null,
+      "rank": 1,
       "semantic_type": "person",
       "source": "hdb1_new_candidate"
     },
@@ -41,6 +42,7 @@
       "candidate_key": "c1",
       "display_name": "王濛",
       "person_id": "person-014",
+      "rank": 2,
       "semantic_type": "person",
       "source": "local_story_neighbor"
     },
@@ -48,10 +50,12 @@
       "candidate_key": "c2",
       "display_name": "謝尚",
       "person_id": "person-018",
+      "rank": 3,
       "semantic_type": "person",
       "source": "local_story_neighbor"
     }
   ],
+  "compositional_context": null,
   "current_state": {
     "candidate_only": true,
     "candidate_set": [
@@ -64,12 +68,63 @@
     "compositional_referent": null,
     "hard_constraint_rejections": [],
     "identity_resolution_basis": "new_candidate",
-    "original_hdb1_status": null,
+    "original_hdb1_status": "resolved_new_candidate",
     "rescue_attempted": false,
     "rescue_useful": false,
     "status": "resolved_new_candidate"
   },
+  "decision_options": [
+    {
+      "description": "确认这是一个独立人物候选。",
+      "key": "confirm_new_person",
+      "label": "确认新人物"
+    },
+    {
+      "description": "从下方候选中选择已有 Person。",
+      "key": "choose_existing_person",
+      "label": "这是已有的人物"
+    },
+    {
+      "description": "保留人物判断，但暂不确定身份。",
+      "key": "keep_unresolved",
+      "label": "确实是人物，但无法确定"
+    },
+    {
+      "description": "表达不是独立人物，或当前解析方向错误。",
+      "key": "not_person",
+      "label": "不是独立人物 / 系统判断有误"
+    },
+    {
+      "description": "标记来源、范围或解释需要复核。",
+      "key": "evidence_problem",
+      "label": "证据有问题"
+    }
+  ],
   "identity_observation_id": "hdb1-identity-741e79b03bd449eea2258080",
+  "materialization_impact": {
+    "affected_fact_ids": {
+      "Kinship": [],
+      "Marriage": [],
+      "OfficeTenures": [],
+      "PersonStory": [],
+      "Relations": [
+        "hdb1-relation-61acb3c4e4b5174adaae97de",
+        "hdb1-relation-20d262928cb0113b90f17c36"
+      ]
+    },
+    "summary": [
+      {
+        "count": 1,
+        "kind": "Person",
+        "label": "+ 1 Person"
+      },
+      {
+        "count": 2,
+        "kind": "Relations",
+        "label": "+ 2 Relations"
+      }
+    ]
+  },
   "occurrence_id": "hdb2-occ-65235f47edce3d0047c5",
   "occurrence_type": "abbreviated_person_name",
   "priority": "P1",
@@ -84,8 +139,9 @@
   },
   "relevant_annotation_context": [],
   "review_id": "hdb2-review-f02b9bdbfb63da0424f4",
+  "review_question": "《識鑒第七》018 中的「劉眞長」是否应作为一个新的独立人物加入人物数据库？",
   "review_type": "candidate_person",
-  "schema": "hdb2-review-item-v1",
+  "schema": "hdb2-review-item-v2",
   "selected_evidence": [
     {
       "evidence_ref": "hdb2-shishuo-main-07-shijian-018",
@@ -104,5 +160,7 @@
   "support_families": [
     "explicit_name"
   ],
-  "target_surface": "劉眞長"
+  "system_summary": "系统认为这是一个具体人物，但无法可靠匹配当前已有 Person。",
+  "target_surface": "劉眞長",
+  "why_review_needed": "现有人物目录没有可安全匹配的 Person；你的判断将决定是否保留为候选人物，或退回身份/人物类型复核。"
 }

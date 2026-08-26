@@ -23,6 +23,7 @@
       "candidate_key": "c0",
       "display_name": "吳郡吳人",
       "person_id": null,
+      "rank": 1,
       "semantic_type": "person",
       "source": "rescue_evidence_identity"
     },
@@ -30,10 +31,12 @@
       "candidate_key": "c1",
       "display_name": "顧衆",
       "person_id": null,
+      "rank": 2,
       "semantic_type": "person",
       "source": "rescue_evidence_identity"
     }
   ],
+  "compositional_context": null,
   "current_state": {
     "candidate_only": true,
     "candidate_set": [
@@ -47,12 +50,52 @@
       "candidate_key_must_be_null_outside_candidate"
     ],
     "identity_resolution_basis": "unresolved",
-    "original_hdb1_status": null,
+    "original_hdb1_status": "unresolved",
     "rescue_attempted": true,
     "rescue_useful": true,
     "status": "unresolved"
   },
+  "decision_options": [
+    {
+      "description": "从候选中选择最符合当前出现位置的 Person。",
+      "key": "choose_existing_person",
+      "label": "这是已有的人物"
+    },
+    {
+      "description": "保留人物判断，暂不绑定身份。",
+      "key": "keep_unresolved",
+      "label": "确实是人物，但无法确定"
+    },
+    {
+      "description": "确认当前表达不应作为单一人物处理。",
+      "key": "not_person",
+      "label": "不是独立人物 / 系统判断有误"
+    },
+    {
+      "description": "标记引文或候选证据需要复核。",
+      "key": "evidence_problem",
+      "label": "证据有问题"
+    }
+  ],
   "identity_observation_id": "hdb1-identity-ab5773e6f7d77d2626d24e5c",
+  "materialization_impact": {
+    "affected_fact_ids": {
+      "Kinship": [],
+      "Marriage": [],
+      "OfficeTenures": [],
+      "PersonStory": [],
+      "Relations": [
+        "hdb1-relation-5f0d5543d799e7e65fa4b046"
+      ]
+    },
+    "summary": [
+      {
+        "count": 1,
+        "kind": "Relations",
+        "label": "+ 1 Relations"
+      }
+    ]
+  },
   "occurrence_id": "hdb2-occ-dc1dffd07ce8e76a4991",
   "occurrence_type": "abbreviated_person_name",
   "priority": "P3",
@@ -69,8 +112,9 @@
     "(伊神色無忤既吹一弄乃放笛云臣於筝乃不如笛/將軍桓伊善音樂孝武飲燕謝安侍坐帝命伊吹笛)"
   ],
   "review_id": "hdb2-review-88feb36cad35bea66629",
+  "review_question": "这里的「桓」具体指哪位人物？",
   "review_type": "identity",
-  "schema": "hdb2-review-item-v1",
+  "schema": "hdb2-review-item-v2",
   "selected_evidence": [
     {
       "evidence_ref": "hdb2-shishuo-main-23-rendan-049",
@@ -149,5 +193,7 @@
   "story_context": "王子猷出都，尚在渚下。舊聞桓子野善吹笛，而不相識。遇桓於岸上過，王在船中，客有識之者云：“是桓子野。”王便令人與相聞，云：“聞君善吹笛，試為我一奏。”桓時已貴顯，素聞王名，即便回下車，踞胡牀，為作三調。弄畢，便上車去。客主不交一言。",
   "story_id": "23-rendan-049",
   "support_families": [],
-  "target_surface": "桓"
+  "system_summary": "系统保留了当前文本中的候选人物和来源证据，但身份尚未达到可自动确认的门槛。",
+  "target_surface": "桓",
+  "why_review_needed": "当前候选之间仍有歧义，或直接身份证据不足；需要人工选择已有 Person、保留未解析，或指出人物类型/证据问题。"
 }

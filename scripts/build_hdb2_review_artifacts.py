@@ -10,6 +10,7 @@ from __future__ import annotations
 import argparse
 import collections
 import json
+import re
 import subprocess
 from pathlib import Path
 from typing import Any, Mapping, Sequence
@@ -153,13 +154,34 @@ def _candidate_label(person_id: str | None, candidates: Sequence[Mapping[str, An
     return None
 
 
+def _effective_occurrence_type(case: Mapping[str, Any], row: Mapping[str, Any], decision: Mapping[str, Any]) -> str:
+    """Prefer the frozen occurrence ontology over an older ``unclear`` label."""
+    value = str(case.get("occurrence_type") or decision.get("occurrence_type") or "").strip()
+    if value and value not in {"unclear", "unknown"}:
+        return value
+    entity_kind = str(row.get("entity_kind") or "").strip()
+    return {
+        "kinship_reference": "kinship_reference",
+        "structural_kinship_expression": "kinship_compositional_reference",
+        "person_title": "title_reference",
+        "person_office_title": "office_reference",
+        "ruler_reference": "ruler_reference",
+        "not_person": "generic_or_non_person_reference",
+    }.get(entity_kind, value or "unclear")
+
+
 def _review_type(status: str, occurrence_type: str, affected: Mapping[str, Sequence[Mapping[str, Any]]]) -> str:
     if status == "resolved_new_candidate":
         return "candidate_person"
-    if occurrence_type == "compositional_kinship" or affected.get("kinship") or affected.get("marriage"):
+    if occurrence_type in {"kinship_reference", "kinship_compositional_reference", "structural_kinship_expression", "compositional_kinship"}:
         return "compositional_kinship"
-    if occurrence_type in {"title_reference", "office_reference", "ruler_reference"} or affected.get("office"):
+    if occurrence_type in {"person_title", "person_office_title", "title_reference", "office_reference", "ruler_reference"} or affected.get("office"):
         return "office_or_title_holder"
+    # Older HDB2 rows without an occurrence type can still be structural
+    # review items. Do not infer this from every kinship/marriage impact: a
+    # named person involved in a fact still needs an identity question.
+    if occurrence_type in {"unclear", "unknown"} and (affected.get("kinship") or affected.get("marriage")):
+        return "compositional_kinship"
     return "identity"
 
 
@@ -257,11 +279,222 @@ def _evidence_items(case: Mapping[str, Any], story: Mapping[str, Any], decision:
     return output
 
 
+_KINSHIP_COMPONENTS: dict[str, tuple[str, str]] = {
+    "兒": ("child", "子弟"),
+    "子": ("child", "子女"),
+    "女": ("daughter", "女兒"),
+    "兄": ("older_sibling", "兄長"),
+    "弟": ("younger_sibling", "弟弟"),
+    "父": ("father", "父親"),
+    "母": ("mother", "母親"),
+    "妻": ("spouse", "妻"),
+    "婿": ("son_in_law", "女婿"),
+}
+
+
+def _catalogue_surface_match(surface: str, catalog: Mapping[str, Mapping[str, Any]]) -> dict[str, Any] | None:
+    surface = str(surface or "")
+    if not surface:
+        return None
+    for person_id, person in catalog.items():
+        labels = [
+            person.get("canonical_name"),
+            *(person.get("forms") or []),
+            *(person.get("canonical_forms") or []),
+            *(person.get("courtesy_forms") or []),
+            *(person.get("alias_forms") or []),
+            *(person.get("office_titles") or []),
+        ]
+        if surface in {str(label) for label in labels if label}:
+            return {
+                "surface": surface,
+                "label": str(person.get("canonical_name") or surface),
+                "person_id": str(person_id),
+            }
+    return {"surface": surface, "label": surface, "person_id": None}
+
+
+def _structural_context(
+    target_surface: str,
+    occurrence_type: str,
+    decision: Mapping[str, Any],
+    candidates: Sequence[Mapping[str, Any]],
+    candidate_people: Sequence[Mapping[str, Any]],
+    catalog: Mapping[str, Mapping[str, Any]],
+) -> dict[str, Any] | None:
+    """Build a reviewer-facing kinship referent description from frozen data.
+
+    This is presentation metadata only. It never changes the identity
+    decision or treats a compositional expression as its base Person.
+    """
+    raw = decision.get("compositional_referent")
+    raw = raw if isinstance(raw, Mapping) else {}
+    structural = occurrence_type in {"kinship_reference", "kinship_compositional_reference", "structural_kinship_expression"}
+    if not structural and not raw:
+        return None
+
+    surface = str(target_surface or "")
+    base_surface = str(raw.get("base_surface") or raw.get("base_person_surface") or raw.get("base_person") or "")
+    relation_type = str(raw.get("relation_type") or raw.get("relation") or "")
+    relation_surface = str(raw.get("relation_surface") or "")
+    relation_label = str(raw.get("relation_label") or "")
+
+    if not base_surface:
+        for marker, (kind, label) in _KINSHIP_COMPONENTS.items():
+            if surface.endswith(marker) and len(surface) > len(marker):
+                base_surface = surface[:-len(marker)]
+                relation_type = relation_type or kind
+                relation_surface = relation_surface or marker
+                relation_label = relation_label or label
+                break
+            if surface.startswith(marker) and len(surface) > len(marker):
+                base_surface = surface[len(marker):]
+                relation_type = relation_type or kind
+                relation_surface = relation_surface or marker
+                relation_label = relation_label or label
+                break
+
+    if relation_type and not relation_label:
+        relation_label = next((label for kind, label in _KINSHIP_COMPONENTS.values() if kind == relation_type), relation_type)
+    base = _catalogue_surface_match(base_surface, catalog) if base_surface else None
+    base_ids = {str(base.get("person_id"))} if base and base.get("person_id") else set()
+    base_labels = {str(base.get("label")), str(base.get("surface"))} if base else set()
+
+    referents: list[dict[str, Any]] = []
+    for candidate in candidate_people:
+        if str(candidate.get("person_id") or "") in base_ids or str(candidate.get("display_name") or "") in base_labels:
+            continue
+        referents.append(dict(candidate))
+
+    # Preserve any explicit referent set from the frozen decision when it is
+    # available, but never manufacture a candidate from the base Person.
+    explicit = raw.get("referent_candidates") or raw.get("referent_candidate_set")
+    if isinstance(explicit, list) and explicit:
+        referents = [dict(x) for x in explicit if isinstance(x, Mapping)]
+
+    return {
+        "base_person": base,
+        "relation_type": relation_type or None,
+        "relation_label": relation_label or None,
+        "relation_surface": relation_surface or None,
+        "referent_candidates": referents,
+    }
+
+
+def _story_label(story_id: str, story: Mapping[str, Any]) -> str:
+    title = str(story.get("title") or story_id or "故事")
+    match = re.search(r"-(\d+)$", str(story_id or ""))
+    ordinal = match.group(1) if match else ""
+    return f"《{title}》{ordinal}" if ordinal else f"《{title}》"
+
+
+def _question_type(review_type: str, occurrence_type: str, structural: Mapping[str, Any] | None) -> str:
+    if structural:
+        return "compositional_kinship"
+    if review_type == "compositional_kinship" and occurrence_type in {"title_reference", "office_reference", "ruler_reference", "person_title", "person_office_title"}:
+        return "office_or_title_holder"
+    return review_type
+
+
+def _review_guidance(
+    review_type: str,
+    occurrence_type: str,
+    target_surface: str,
+    story_id: str,
+    story: Mapping[str, Any],
+    proposed_label: str | None,
+    candidate_people: Sequence[Mapping[str, Any]],
+    structural: Mapping[str, Any] | None,
+) -> dict[str, Any]:
+    question_type = _question_type(review_type, occurrence_type, structural)
+    surface = target_surface or "该表达"
+    story_label = _story_label(story_id, story)
+    if question_type == "candidate_person":
+        question = f"{story_label} 中的「{surface}」是否应作为一个新的独立人物加入人物数据库？"
+        summary = "系统认为这是一个具体人物，但无法可靠匹配当前已有 Person。"
+        why = "现有人物目录没有可安全匹配的 Person；你的判断将决定是否保留为候选人物，或退回身份/人物类型复核。"
+        options = [
+            {"key": "confirm_new_person", "label": "确认新人物", "description": "确认这是一个独立人物候选。"},
+            {"key": "choose_existing_person", "label": "这是已有的人物", "description": "从下方候选中选择已有 Person。"},
+            {"key": "keep_unresolved", "label": "确实是人物，但无法确定", "description": "保留人物判断，但暂不确定身份。"},
+            {"key": "not_person", "label": "不是独立人物 / 系统判断有误", "description": "表达不是独立人物，或当前解析方向错误。"},
+            {"key": "evidence_problem", "label": "证据有问题", "description": "标记来源、范围或解释需要复核。"},
+        ]
+    elif question_type == "compositional_kinship":
+        base = structural.get("base_person") if structural else None
+        base_label = str((base or {}).get("surface") or (base or {}).get("label") or "基准人物")
+        relation_label = str((structural or {}).get("relation_label") or (structural or {}).get("relation_type") or "亲属")
+        question_relation = relation_label if relation_label not in {"母親", "父親", "妻", "女婿"} else f"亲属（关系：{relation_label}）"
+        question = f"这里的「{surface}」具体指{base_label}的哪一位{question_relation}？"
+        summary = "系统将这个表达视为结构性亲属指称，而不是普通人物别名。"
+        why = "需要确认亲属关系所指的独立对象；该表达不能直接折叠为基准人物本身。"
+        options = [
+            {"key": "choose_referent", "label": "确认具体亲属对象", "description": "从参照对象候选中选择，或补充可核验对象。"},
+            {"key": "keep_unresolved", "label": "暂无法确定对象", "description": "保留结构关系，暂不确定具体人物。"},
+            {"key": "not_single_person", "label": "不是单一人物表达", "description": "确认它只表达结构关系，不能形成单一 Person。"},
+            {"key": "evidence_problem", "label": "证据有问题", "description": "标记亲属结构或引文需要复核。"},
+        ]
+    elif question_type == "office_or_title_holder":
+        question = f"这里的「{surface}」具体指哪位人物？"
+        summary = "系统识别出官职、称号或帝王称谓，但承载该表达的人物仍需确认。"
+        why = "官职/称号可能对应多位人物；需要结合当前给出的时间、任职、别名和社会证据，避免把角色表达直接当作 Person。"
+        options = [
+            {"key": "choose_existing_person", "label": "选择已有的人物", "description": "从排名候选中确认官职/称号持有人。"},
+            {"key": "keep_unresolved", "label": "暂无法确定", "description": "保留官职/称号表达，暂不绑定人物。"},
+            {"key": "not_person", "label": "不是人物指称", "description": "确认当前表达没有足够的人物指代。"},
+            {"key": "evidence_problem", "label": "证据有问题", "description": "标记时间、职官或引文需要复核。"},
+        ]
+    else:
+        question = f"这里的「{surface}」具体指哪位人物？"
+        summary = "系统保留了当前文本中的候选人物和来源证据，但身份尚未达到可自动确认的门槛。"
+        why = "当前候选之间仍有歧义，或直接身份证据不足；需要人工选择已有 Person、保留未解析，或指出人物类型/证据问题。"
+        options = [
+            {"key": "choose_existing_person", "label": "这是已有的人物", "description": "从候选中选择最符合当前出现位置的 Person。"},
+            {"key": "keep_unresolved", "label": "确实是人物，但无法确定", "description": "保留人物判断，暂不绑定身份。"},
+            {"key": "not_person", "label": "不是独立人物 / 系统判断有误", "description": "确认当前表达不应作为单一人物处理。"},
+            {"key": "evidence_problem", "label": "证据有问题", "description": "标记引文或候选证据需要复核。"},
+        ]
+    return {
+        "review_question": question,
+        "system_summary": summary,
+        "why_review_needed": why,
+        "decision_options": options,
+        "question_type": question_type,
+    }
+
+
+def _materialization_impact(review_type: str, status: str, affected: Mapping[str, Sequence[Mapping[str, Any]]]) -> dict[str, Any]:
+    """Summarize only existing projected facts; never estimate new impact."""
+    def usable(rows: Sequence[Mapping[str, Any]]) -> list[dict[str, Any]]:
+        return [row for row in rows if str(row.get("state") or "") not in {"rejected_self_relation", "conflict", "rejected"}]
+
+    impact_rows = {
+        "PersonStory": usable(affected.get("person_story", [])),
+        "Relations": usable(affected.get("relations", [])),
+        "Kinship": usable(affected.get("kinship", [])),
+        "Marriage": usable(affected.get("marriage", [])),
+        "OfficeTenures": usable(affected.get("office", [])),
+    }
+    summary: list[dict[str, Any]] = []
+    if review_type == "candidate_person" and status == "resolved_new_candidate":
+        summary.append({"kind": "Person", "count": 1, "label": "+ 1 Person"})
+    for kind, rows in impact_rows.items():
+        if rows:
+            summary.append({"kind": kind, "count": len(rows), "label": f"+ {len(rows)} {kind}"})
+    return {
+        "summary": summary,
+        "affected_fact_ids": {
+            kind: [row.get("candidate_id") for row in rows if row.get("candidate_id")]
+            for kind, rows in impact_rows.items()
+        },
+    }
+
+
 def _build_item(row: Mapping[str, Any], case: Mapping[str, Any], decision: Mapping[str, Any], story: Mapping[str, Any], catalog: Mapping[str, Mapping[str, Any]], projections: Mapping[str, Sequence[Mapping[str, Any]]], atom_rows: Sequence[Mapping[str, Any]]) -> dict[str, Any]:
     affected = _affected_facts(case, row, projections)
     support = list(decision.get("support_families") or [])
     status = str(decision.get("status") or row.get("status") or "unresolved")
-    occurrence_type = str(case.get("occurrence_type") or decision.get("occurrence_type") or "unclear")
+    occurrence_type = _effective_occurrence_type(case, row, decision)
     review_type = _review_type(status, occurrence_type, affected)
     priority, priority_score = _priority(status, affected, support)
     review_id = f"hdb2-review-{common.stable_hash({'occurrence_id': row.get('occurrence_id')})[:20]}"
@@ -276,6 +509,7 @@ def _build_item(row: Mapping[str, Any], case: Mapping[str, Any], decision: Mappi
             continue
         seen_candidates.add(key)
         candidate_people.append({
+            "rank": len(candidate_people) + 1,
             "candidate_key": candidate.get("candidate_key"),
             "display_name": name,
             "person_id": pid,
@@ -293,12 +527,32 @@ def _build_item(row: Mapping[str, Any], case: Mapping[str, Any], decision: Mappi
         annotation_context = _annotation_texts(story, [str(row.get("surface") or ""), str(row.get("exact_span") or ""), proposed_label or ""])
     context = _story_text(story) or str(case.get("local_story_context") or "")
     compositional = decision.get("compositional_referent") if isinstance(decision.get("compositional_referent"), Mapping) else None
+    structural = _structural_context(str(row.get("surface") or case.get("target_surface") or ""), occurrence_type, decision, candidates, candidate_people, catalog)
+    guidance = _review_guidance(
+        review_type,
+        occurrence_type,
+        str(row.get("surface") or case.get("target_surface") or ""),
+        str(row.get("story_id") or case.get("story_id") or ""),
+        story,
+        proposed_label,
+        candidate_people,
+        structural,
+    )
     return {
-        "schema": "hdb2-review-item-v1",
+        "schema": "hdb2-review-item-v2",
         "review_id": review_id,
         "priority": priority,
         "priority_score": priority_score,
         "review_type": review_type,
+        "review_question": guidance["review_question"],
+        "system_summary": guidance["system_summary"],
+        "why_review_needed": guidance["why_review_needed"],
+        "decision_options": guidance["decision_options"],
+        "materialization_impact": _materialization_impact(review_type, status, {
+            **affected,
+            "person_story": [{"story_id": row.get("story_id"), "occurrence_id": row.get("occurrence_id"), "status": status, "person_id": resolved_pid}] if resolved_pid else [],
+        }),
+        "compositional_context": structural,
         "occurrence_id": row.get("occurrence_id"),
         "identity_observation_id": row.get("identity_observation_id"),
         "story_id": row.get("story_id"),
@@ -343,17 +597,31 @@ def build_review_projection(run_id: str = DEFAULT_RUN_ID) -> dict[str, Any]:
     queue = list(queue_doc.get("records", []))
     full_decisions = {str(x.get("occurrence_id")): dict(x) for x in (read(ROOT / "data/annotation/hdb2-f-occurrence-decisions.json", {}) or {}).get("records", [])}
     live_decisions = {str(x.get("occurrence_id")): dict(x) for x in (read(run_dir / "python-decisions.json", {}) or {}).get("records", [])}
-    contexts = {str(x.get("occurrence_id")): dict(x) for x in (read(run_dir / "occurrence-contexts.json", {}) or {}).get("cases", [])}
+    contexts: dict[str, dict[str, Any]] = {}
+    # Prefer the HDB2-F live context, then reuse frozen P2T/P1.1 dossiers for
+    # occurrences whose earlier decision was intentionally carried forward.
+    context_sources = [
+        read(run_dir / "occurrence-contexts.json", {}) or {},
+        read(ROOT / "data/derived/hdb2-p2t-occurrence-cases.json", {}) or {},
+        read(ROOT / "data/derived/hdb2-p1-1-occurrence-cases.json", {}) or {},
+    ]
+    for document in context_sources:
+        rows = document.get("cases") or document.get("records") or []
+        for value in rows:
+            if isinstance(value, Mapping) and value.get("occurrence_id") is not None:
+                contexts.setdefault(str(value["occurrence_id"]), dict(value))
     atoms = list((read(run_dir / "rescue-evidence-atoms.json", {}) or {}).get("records", []))
     site = read(ROOT / "data/derived/sc1-site.json", {}) or {}
     stories = {str(x.get("id")): dict(x) for x in site.get("stories", [])}
     identity = {str(x.get("identity_observation_id")): dict(x) for x in (read(ROOT / "data/derived/hdb1-cross-wave-candidate-historical-db.json", {}) or {}).get("identity_observations", [])}
+    ledger = {str(x.get("occurrence_id")): dict(x) for x in (read(ROOT / "data/derived/hdb2-f-occurrence-ledger.json", {}) or {}).get("occurrences", [])}
     catalog = common.hng02.person_catalog()
     projections = _fact_projection_maps()
     items: list[dict[str, Any]] = []
     for queue_row in queue:
         occurrence = str(queue_row.get("occurrence_id"))
         base = identity.get(str(queue_row.get("identity_observation_id")), {})
+        ledger_row = ledger.get(occurrence, {})
         case = contexts.get(occurrence, {})
         story = stories.get(str(queue_row.get("story_id")), {"id": queue_row.get("story_id"), "text": "", "annotations": []})
         if not case:
@@ -375,13 +643,13 @@ def build_review_projection(run_id: str = DEFAULT_RUN_ID) -> dict[str, Any]:
             "resolved_person_id": base.get("resolved_person_id"),
             "identity_resolution_basis": base.get("identity_resolution_basis"),
         }
-        row = {**base, **queue_row, "surface": queue_row.get("surface") or base.get("surface")}
+        row = {**ledger_row, **base, **queue_row, "surface": queue_row.get("surface") or base.get("surface") or ledger_row.get("surface")}
         items.append(_build_item(row, case, decision, story, catalog, projections, atoms))
     items.sort(key=lambda x: (-int(x.get("priority_score") or 0), str(x.get("story_id")), str(x.get("target_surface")), str(x.get("review_id"))))
     counts_type = collections.Counter(str(x.get("review_type")) for x in items)
     counts_priority = collections.Counter(str(x.get("priority")) for x in items)
     index = {
-        "schema": "hdb2-review-index-v1",
+        "schema": "hdb2-review-index-v2",
         "run_id": run_id,
         "candidate_only": True,
         "canonical_write_back": False,
@@ -396,6 +664,7 @@ def build_review_projection(run_id: str = DEFAULT_RUN_ID) -> dict[str, Any]:
             "target_surface": item["target_surface"],
             "status": item["proposed_identity"]["status"],
             "proposed_label": item["proposed_identity"].get("label"),
+            "review_question": item["review_question"],
             "item_path": f"items/{item['review_id']}.json",
         } for item in items],
     }

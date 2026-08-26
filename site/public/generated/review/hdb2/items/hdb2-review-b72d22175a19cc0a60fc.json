@@ -35,10 +35,12 @@
       "candidate_key": "c0",
       "display_name": "周顗",
       "person_id": "person-019",
+      "rank": 1,
       "semantic_type": "person",
       "source": "local_story_neighbor"
     }
   ],
+  "compositional_context": null,
   "current_state": {
     "candidate_only": true,
     "candidate_set": [
@@ -49,12 +51,59 @@
     "compositional_referent": null,
     "hard_constraint_rejections": [],
     "identity_resolution_basis": "unresolved",
-    "original_hdb1_status": null,
+    "original_hdb1_status": "unresolved",
     "rescue_attempted": false,
     "rescue_useful": false,
     "status": "office_reference"
   },
+  "decision_options": [
+    {
+      "description": "从排名候选中确认官职/称号持有人。",
+      "key": "choose_existing_person",
+      "label": "选择已有的人物"
+    },
+    {
+      "description": "保留官职/称号表达，暂不绑定人物。",
+      "key": "keep_unresolved",
+      "label": "暂无法确定"
+    },
+    {
+      "description": "确认当前表达没有足够的人物指代。",
+      "key": "not_person",
+      "label": "不是人物指称"
+    },
+    {
+      "description": "标记时间、职官或引文需要复核。",
+      "key": "evidence_problem",
+      "label": "证据有问题"
+    }
+  ],
   "identity_observation_id": "hdb1-identity-100a0a2c3543977caff78035",
+  "materialization_impact": {
+    "affected_fact_ids": {
+      "Kinship": [],
+      "Marriage": [],
+      "OfficeTenures": [
+        "hdb1-relation-0d70c1591bf21ab9deb716f9"
+      ],
+      "PersonStory": [],
+      "Relations": [
+        "hdb1-relation-0d70c1591bf21ab9deb716f9"
+      ]
+    },
+    "summary": [
+      {
+        "count": 1,
+        "kind": "Relations",
+        "label": "+ 1 Relations"
+      },
+      {
+        "count": 1,
+        "kind": "OfficeTenures",
+        "label": "+ 1 OfficeTenures"
+      }
+    ]
+  },
   "occurrence_id": "hdb2-occ-b2643e129cda61e253d8",
   "occurrence_type": "office_reference",
   "priority": "P2",
@@ -69,8 +118,9 @@
   },
   "relevant_annotation_context": [],
   "review_id": "hdb2-review-b72d22175a19cc0a60fc",
+  "review_question": "这里的「僕射」具体指哪位人物？",
   "review_type": "office_or_title_holder",
-  "schema": "hdb2-review-item-v1",
+  "schema": "hdb2-review-item-v2",
   "selected_evidence": [
     {
       "evidence_ref": "hdb2-shishuo-main-05-fangzheng-030",
@@ -87,5 +137,7 @@
   "story_context": "明帝在西堂會諸公飲酒，未大醉，帝問：“今名臣共集，何如堯、舜時？”周伯仁爲僕射，因厲聲曰：“今雖同人主，復那得等於聖治！”帝大怒，還内，作手詔滿一黄𥿄，遂付廷尉令收，因欲殺之。後數日，詔出周，羣臣往省之。周曰：“近知當不死，罪不足至此。”",
   "story_id": "05-fangzheng-030",
   "support_families": [],
-  "target_surface": "僕射"
+  "system_summary": "系统识别出官职、称号或帝王称谓，但承载该表达的人物仍需确认。",
+  "target_surface": "僕射",
+  "why_review_needed": "官职/称号可能对应多位人物；需要结合当前给出的时间、任职、别名和社会证据，避免把角色表达直接当作 Person。"
 }

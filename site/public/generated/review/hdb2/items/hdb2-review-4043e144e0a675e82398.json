@@ -18,7 +18,17 @@
       }
     ]
   },
-  "candidate_people": [],
+  "candidate_people": [
+    {
+      "candidate_key": "c0",
+      "display_name": "和嶠",
+      "person_id": "person-035",
+      "rank": 1,
+      "semantic_type": "person",
+      "source": "local_story_neighbor"
+    }
+  ],
+  "compositional_context": null,
   "current_state": {
     "candidate_only": true,
     "candidate_set": [],
@@ -29,14 +39,54 @@
       "candidate_key_must_be_null_outside_candidate"
     ],
     "identity_resolution_basis": "unresolved",
-    "original_hdb1_status": null,
+    "original_hdb1_status": "unresolved",
     "rescue_attempted": false,
     "rescue_useful": false,
     "status": "unresolved"
   },
+  "decision_options": [
+    {
+      "description": "从排名候选中确认官职/称号持有人。",
+      "key": "choose_existing_person",
+      "label": "选择已有的人物"
+    },
+    {
+      "description": "保留官职/称号表达，暂不绑定人物。",
+      "key": "keep_unresolved",
+      "label": "暂无法确定"
+    },
+    {
+      "description": "确认当前表达没有足够的人物指代。",
+      "key": "not_person",
+      "label": "不是人物指称"
+    },
+    {
+      "description": "标记时间、职官或引文需要复核。",
+      "key": "evidence_problem",
+      "label": "证据有问题"
+    }
+  ],
   "identity_observation_id": "hdb1-identity-49ecc4ea02127f584f757100",
+  "materialization_impact": {
+    "affected_fact_ids": {
+      "Kinship": [],
+      "Marriage": [],
+      "OfficeTenures": [],
+      "PersonStory": [],
+      "Relations": [
+        "hdb1-relation-ee2d271b439656d918c5f98e"
+      ]
+    },
+    "summary": [
+      {
+        "count": 1,
+        "kind": "Relations",
+        "label": "+ 1 Relations"
+      }
+    ]
+  },
   "occurrence_id": "hdb2-occ-09542125b03e888049b1",
-  "occurrence_type": "person_office_title",
+  "occurrence_type": "ruler_reference",
   "priority": "P2",
   "priority_score": 600,
   "proposed_identity": {
@@ -49,14 +99,16 @@
   },
   "relevant_annotation_context": [],
   "review_id": "hdb2-review-4043e144e0a675e82398",
-  "review_type": "identity",
-  "schema": "hdb2-review-item-v1",
+  "review_question": "这里的「武帝」具体指哪位人物？",
+  "review_type": "office_or_title_holder",
+  "schema": "hdb2-review-item-v2",
   "selected_evidence": [
     {
-      "evidence_ref": "story:05-fangzheng-009",
+      "evidence_ref": "hdb2-shishuo-main-05-fangzheng-009",
       "exact_spans": [],
-      "excerpt": "和嶠爲武帝所親重，語嶠曰：“東官頃似更成進，卿試往看。”還問何如，荅云：“皇太子聖質如初。”",
+      "excerpt": "和嶠爲武帝所親重語嶠曰東官頃似更成進卿試\n往看還問何如荅云皇太子聖質如初",
       "locator": {
+        "chapter": "方正第五",
         "story_id": "05-fangzheng-009"
       },
       "source_layer": "main_text",
@@ -68,5 +120,7 @@
   "support_families": [
     "ruler_context"
   ],
-  "target_surface": "武帝"
+  "system_summary": "系统识别出官职、称号或帝王称谓，但承载该表达的人物仍需确认。",
+  "target_surface": "武帝",
+  "why_review_needed": "官职/称号可能对应多位人物；需要结合当前给出的时间、任职、别名和社会证据，避免把角色表达直接当作 Person。"
 }

@@ -29,7 +29,25 @@
       }
     ]
   },
-  "candidate_people": [],
+  "candidate_people": [
+    {
+      "candidate_key": "c0",
+      "display_name": "周顗",
+      "person_id": "person-019",
+      "rank": 1,
+      "semantic_type": "person",
+      "source": "local_story_neighbor"
+    },
+    {
+      "candidate_key": "c1",
+      "display_name": "郗鑒",
+      "person_id": "person-002",
+      "rank": 2,
+      "semantic_type": "person",
+      "source": "local_story_neighbor"
+    }
+  ],
+  "compositional_context": null,
   "current_state": {
     "candidate_only": true,
     "candidate_set": [],
@@ -40,14 +58,55 @@
       "candidate_key_must_be_null_outside_candidate"
     ],
     "identity_resolution_basis": "unresolved",
-    "original_hdb1_status": null,
+    "original_hdb1_status": "unresolved",
     "rescue_attempted": false,
     "rescue_useful": false,
     "status": "unresolved"
   },
+  "decision_options": [
+    {
+      "description": "从排名候选中确认官职/称号持有人。",
+      "key": "choose_existing_person",
+      "label": "选择已有的人物"
+    },
+    {
+      "description": "保留官职/称号表达，暂不绑定人物。",
+      "key": "keep_unresolved",
+      "label": "暂无法确定"
+    },
+    {
+      "description": "确认当前表达没有足够的人物指代。",
+      "key": "not_person",
+      "label": "不是人物指称"
+    },
+    {
+      "description": "标记时间、职官或引文需要复核。",
+      "key": "evidence_problem",
+      "label": "证据有问题"
+    }
+  ],
   "identity_observation_id": "hdb1-identity-e995990f4086799e8c50b15d",
+  "materialization_impact": {
+    "affected_fact_ids": {
+      "Kinship": [],
+      "Marriage": [],
+      "OfficeTenures": [],
+      "PersonStory": [],
+      "Relations": [
+        "hdb1-relation-9ecb51db91a54dac10111585",
+        "hdb1-relation-ae058baab8bd7747f71101da"
+      ]
+    },
+    "summary": [
+      {
+        "count": 2,
+        "kind": "Relations",
+        "label": "+ 2 Relations"
+      }
+    ]
+  },
   "occurrence_id": "hdb2-occ-73744b1c57782a28048a",
-  "occurrence_type": "person_office_title",
+  "occurrence_type": "ruler_reference",
   "priority": "P1",
   "priority_score": 850,
   "proposed_identity": {
@@ -62,18 +121,31 @@
     "(即位世説此言妄矣/按顗死彌年明帝乃)"
   ],
   "review_id": "hdb2-review-ea4dd98b163cde756e47",
-  "review_type": "identity",
-  "schema": "hdb2-review-item-v1",
+  "review_question": "这里的「明帝」具体指哪位人物？",
+  "review_type": "office_or_title_holder",
+  "schema": "hdb2-review-item-v2",
   "selected_evidence": [
     {
-      "evidence_ref": "story:09-pinzao-019",
+      "evidence_ref": "hdb2-shishuo-main-09-pinzao-019",
       "exact_spans": [],
-      "excerpt": "明帝問周侯：“論者以卿比郗鑒，云何？”周曰：“陛下不須牽顗比。”",
+      "excerpt": "明帝問周侯論者以卿比郗鑒云何周曰陛下不須\n牽顗比",
       "locator": {
+        "chapter": "品藻第九",
         "story_id": "09-pinzao-019"
       },
       "source_layer": "main_text",
       "source_work": "世說正文"
+    },
+    {
+      "evidence_ref": "hdb2-shishuo-liu-09-pinzao-019-annotation-001",
+      "exact_spans": [],
+      "excerpt": "(即位世説此言妄矣/按顗死彌年明帝乃)",
+      "locator": {
+        "annotation_id": "annotation-001",
+        "story_id": "09-pinzao-019"
+      },
+      "source_layer": "liu_annotation",
+      "source_work": "劉注"
     }
   ],
   "story_context": "明帝問周侯：“論者以卿比郗鑒，云何？”周曰：“陛下不須牽顗比。”",
@@ -81,5 +153,7 @@
   "support_families": [
     "ruler_context"
   ],
-  "target_surface": "明帝"
+  "system_summary": "系统识别出官职、称号或帝王称谓，但承载该表达的人物仍需确认。",
+  "target_surface": "明帝",
+  "why_review_needed": "官职/称号可能对应多位人物；需要结合当前给出的时间、任职、别名和社会证据，避免把角色表达直接当作 Person。"
 }

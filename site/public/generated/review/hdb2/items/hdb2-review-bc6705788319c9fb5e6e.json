@@ -56,6 +56,7 @@
       "candidate_key": "c0",
       "display_name": "羊祜",
       "person_id": "person-038",
+      "rank": 1,
       "semantic_type": "person",
       "source": "local_story_neighbor"
     },
@@ -63,10 +64,12 @@
       "candidate_key": "c1",
       "display_name": "賈充",
       "person_id": "person-041",
+      "rank": 2,
       "semantic_type": "person",
       "source": "local_story_neighbor"
     }
   ],
+  "compositional_context": null,
   "current_state": {
     "candidate_only": true,
     "candidate_set": [
@@ -80,12 +83,55 @@
       "candidate_key_must_be_null_outside_candidate"
     ],
     "identity_resolution_basis": "unresolved",
-    "original_hdb1_status": null,
+    "original_hdb1_status": "unresolved",
     "rescue_attempted": true,
     "rescue_useful": false,
     "status": "unresolved"
   },
+  "decision_options": [
+    {
+      "description": "从排名候选中确认官职/称号持有人。",
+      "key": "choose_existing_person",
+      "label": "选择已有的人物"
+    },
+    {
+      "description": "保留官职/称号表达，暂不绑定人物。",
+      "key": "keep_unresolved",
+      "label": "暂无法确定"
+    },
+    {
+      "description": "确认当前表达没有足够的人物指代。",
+      "key": "not_person",
+      "label": "不是人物指称"
+    },
+    {
+      "description": "标记时间、职官或引文需要复核。",
+      "key": "evidence_problem",
+      "label": "证据有问题"
+    }
+  ],
   "identity_observation_id": "hdb1-identity-0d7d8f98bbb31f9fc25d27fa",
+  "materialization_impact": {
+    "affected_fact_ids": {
+      "Kinship": [],
+      "Marriage": [],
+      "OfficeTenures": [],
+      "PersonStory": [],
+      "Relations": [
+        "hdb1-relation-7531208a91098fda8cb22e4c",
+        "hdb1-relation-3a57ddfb2d37abee00b78708",
+        "hdb1-relation-8a459e07f689bc5b6a2b9e38",
+        "hdb1-relation-933213a737961843eed2f61b"
+      ]
+    },
+    "summary": [
+      {
+        "count": 4,
+        "kind": "Relations",
+        "label": "+ 4 Relations"
+      }
+    ]
+  },
   "occurrence_id": "hdb2-occ-26b5362fd97cab370857",
   "occurrence_type": "title_reference",
   "priority": "P1",
@@ -100,8 +146,9 @@
   },
   "relevant_annotation_context": [],
   "review_id": "hdb2-review-bc6705788319c9fb5e6e",
+  "review_question": "这里的「太傅鄭冲」具体指哪位人物？",
   "review_type": "office_or_title_holder",
-  "schema": "hdb2-review-item-v1",
+  "schema": "hdb2-review-item-v2",
   "selected_evidence": [
     {
       "evidence_ref": "hdb2-shishuo-main-03-zhengshi-006",
@@ -165,5 +212,7 @@
   "story_context": "賈充初定律令，與羊祜共咨太傅鄭冲。冲曰：“臯陶嚴明之㫖，非僕闇懦所探。”羊曰：“上意欲令小加弘潤。”冲乃粗下意。",
   "story_id": "03-zhengshi-006",
   "support_families": [],
-  "target_surface": "太傅鄭冲"
+  "system_summary": "系统识别出官职、称号或帝王称谓，但承载该表达的人物仍需确认。",
+  "target_surface": "太傅鄭冲",
+  "why_review_needed": "官职/称号可能对应多位人物；需要结合当前给出的时间、任职、别名和社会证据，避免把角色表达直接当作 Person。"
 }

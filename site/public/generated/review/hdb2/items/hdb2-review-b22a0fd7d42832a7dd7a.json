@@ -57,10 +57,12 @@
       "candidate_key": "c0",
       "display_name": "潘岳",
       "person_id": "person-048",
+      "rank": 1,
       "semantic_type": "person",
       "source": "local_story_neighbor"
     }
   ],
+  "compositional_context": null,
   "current_state": {
     "candidate_only": true,
     "candidate_set": [
@@ -71,12 +73,61 @@
     "compositional_referent": null,
     "hard_constraint_rejections": [],
     "identity_resolution_basis": "unresolved",
-    "original_hdb1_status": null,
+    "original_hdb1_status": "unresolved",
     "rescue_attempted": false,
     "rescue_useful": false,
     "status": "office_reference"
   },
+  "decision_options": [
+    {
+      "description": "从排名候选中确认官职/称号持有人。",
+      "key": "choose_existing_person",
+      "label": "选择已有的人物"
+    },
+    {
+      "description": "保留官职/称号表达，暂不绑定人物。",
+      "key": "keep_unresolved",
+      "label": "暂无法确定"
+    },
+    {
+      "description": "确认当前表达没有足够的人物指代。",
+      "key": "not_person",
+      "label": "不是人物指称"
+    },
+    {
+      "description": "标记时间、职官或引文需要复核。",
+      "key": "evidence_problem",
+      "label": "证据有问题"
+    }
+  ],
   "identity_observation_id": "hdb1-identity-33f1e9b7e7dacb382e0dfaa0",
+  "materialization_impact": {
+    "affected_fact_ids": {
+      "Kinship": [],
+      "Marriage": [],
+      "OfficeTenures": [
+        "hdb1-relation-b4ae5cff6fee624e01bb9452",
+        "hdb1-relation-789db253d76a03654bd9f1b4"
+      ],
+      "PersonStory": [],
+      "Relations": [
+        "hdb1-relation-b4ae5cff6fee624e01bb9452",
+        "hdb1-relation-789db253d76a03654bd9f1b4"
+      ]
+    },
+    "summary": [
+      {
+        "count": 2,
+        "kind": "Relations",
+        "label": "+ 2 Relations"
+      },
+      {
+        "count": 2,
+        "kind": "OfficeTenures",
+        "label": "+ 2 OfficeTenures"
+      }
+    ]
+  },
   "occurrence_id": "hdb2-occ-49948bea5ae487e073b6",
   "occurrence_type": "title_reference",
   "priority": "P1",
@@ -94,8 +145,9 @@
     "(虎賁中郎將寓直于散騎之省以此言之是應直也/莫能定叅軍劉簡之對曰昔潘岳秋興賦叙云余兼)"
   ],
   "review_id": "hdb2-review-b22a0fd7d42832a7dd7a",
+  "review_question": "这里的「虎賁中郎將」具体指哪位人物？",
   "review_type": "office_or_title_holder",
-  "schema": "hdb2-review-item-v1",
+  "schema": "hdb2-review-item-v2",
   "selected_evidence": [
     {
       "evidence_ref": "hdb2-shishuo-main-02-yanyu-107",
@@ -134,5 +186,7 @@
   "story_context": "桓玄既簒位，將改置直舘，問左右：“虎賁中郎省應在何處？”有人荅曰：“無省。”當時殊忤㫖。問：“何以知無？”荅曰：“潘岳《秋興賦敘》曰：‘余兼虎賁中郎將，寓直散騎之省。’”玄咨嗟稱善。",
   "story_id": "02-yanyu-107",
   "support_families": [],
-  "target_surface": "虎賁中郎將"
+  "system_summary": "系统识别出官职、称号或帝王称谓，但承载该表达的人物仍需确认。",
+  "target_surface": "虎賁中郎將",
+  "why_review_needed": "官职/称号可能对应多位人物；需要结合当前给出的时间、任职、别名和社会证据，避免把角色表达直接当作 Person。"
 }

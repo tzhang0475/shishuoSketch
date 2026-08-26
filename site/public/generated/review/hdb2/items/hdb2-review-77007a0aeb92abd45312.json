@@ -52,7 +52,25 @@
       }
     ]
   },
-  "candidate_people": [],
+  "candidate_people": [
+    {
+      "candidate_key": "c0",
+      "display_name": "王敦",
+      "person_id": "person-011",
+      "rank": 1,
+      "semantic_type": "person",
+      "source": "catalogue_suffix"
+    },
+    {
+      "candidate_key": "c1",
+      "display_name": "謝鯤",
+      "person_id": "person-023",
+      "rank": 2,
+      "semantic_type": "person",
+      "source": "local_story_neighbor"
+    }
+  ],
+  "compositional_context": null,
   "current_state": {
     "candidate_only": true,
     "candidate_set": [],
@@ -63,14 +81,63 @@
       "evidence_reference_invalid"
     ],
     "identity_resolution_basis": "unresolved",
-    "original_hdb1_status": null,
+    "original_hdb1_status": "unresolved",
     "rescue_attempted": false,
     "rescue_useful": false,
     "status": "unresolved"
   },
+  "decision_options": [
+    {
+      "description": "从排名候选中确认官职/称号持有人。",
+      "key": "choose_existing_person",
+      "label": "选择已有的人物"
+    },
+    {
+      "description": "保留官职/称号表达，暂不绑定人物。",
+      "key": "keep_unresolved",
+      "label": "暂无法确定"
+    },
+    {
+      "description": "确认当前表达没有足够的人物指代。",
+      "key": "not_person",
+      "label": "不是人物指称"
+    },
+    {
+      "description": "标记时间、职官或引文需要复核。",
+      "key": "evidence_problem",
+      "label": "证据有问题"
+    }
+  ],
   "identity_observation_id": "hdb1-identity-cd93b10f76798ce290f676a9",
+  "materialization_impact": {
+    "affected_fact_ids": {
+      "Kinship": [],
+      "Marriage": [],
+      "OfficeTenures": [
+        "hdb1-relation-4028cf4739c4a5865708d330"
+      ],
+      "PersonStory": [],
+      "Relations": [
+        "hdb1-relation-4028cf4739c4a5865708d330",
+        "hdb1-relation-0ee67bde6a5d6a6165f77ba9",
+        "hdb1-relation-0ad5d13671dbed366580483d"
+      ]
+    },
+    "summary": [
+      {
+        "count": 3,
+        "kind": "Relations",
+        "label": "+ 3 Relations"
+      },
+      {
+        "count": 1,
+        "kind": "OfficeTenures",
+        "label": "+ 1 OfficeTenures"
+      }
+    ]
+  },
   "occurrence_id": "hdb2-occ-70eb2b7fb9c72b7b3cf3",
-  "occurrence_type": "named_person",
+  "occurrence_type": "abbreviated_person_name",
   "priority": "P1",
   "priority_score": 850,
   "proposed_identity": {
@@ -87,18 +154,42 @@
     "(不虞之慮公若入朝鯤請侍從敦曰正復殺君等數/曰鯤近日入覲主上側席遲得見公宫省穆然必無)"
   ],
   "review_id": "hdb2-review-77007a0aeb92abd45312",
+  "review_question": "这里的「敦」具体指哪位人物？",
   "review_type": "office_or_title_holder",
-  "schema": "hdb2-review-item-v1",
+  "schema": "hdb2-review-item-v2",
   "selected_evidence": [
     {
-      "evidence_ref": "story:10-guizhen-012",
+      "evidence_ref": "hdb2-shishuo-main-10-guizhen-012",
       "exact_spans": [],
-      "excerpt": "謝鯤爲豫章太守，從大將軍下至石頭。敦謂鯤曰：“余不得復爲盛德之事矣。”鯤曰：“何爲其然？但使自今巳後，日亡日去耳！”敦又稱疾不朝，鯤諭敦曰：“近者，明公之舉雖欲大存社稷，然四海之内，實懷未逹。若能朝天子，使羣臣釋然，萬物之心於是乃服。仗民望以從衆懷，盡沖退以奉主上，如斯，則勲侔一匡，名垂千載。”時人以爲名言。",
+      "excerpt": "謝鯤爲豫章太守從大將軍下至石頭敦謂鯤曰余\n不得復爲盛德之事矣鯤曰何爲其然但使自今巳\n後日亡日去耳敦又稱疾不朝鯤\n諭敦曰近者明公之舉雖欲大存社稷然四海之内\n\n實懷未逹若能朝天子使羣臣釋然萬物之心於是\n乃服仗民望以從衆懷盡沖退以奉主上如斯則勲\n侔一匡名垂千載時人以爲名言",
       "locator": {
+        "chapter": "規箴第十",
         "story_id": "10-guizhen-012"
       },
       "source_layer": "main_text",
       "source_work": "世說正文"
+    },
+    {
+      "evidence_ref": "hdb2-shishuo-liu-10-guizhen-012-annotation-002",
+      "exact_spans": [],
+      "excerpt": "(章太守王敦將肆/晉陽秋曰鯤爲豫)",
+      "locator": {
+        "annotation_id": "annotation-002",
+        "story_id": "10-guizhen-012"
+      },
+      "source_layer": "liu_annotation",
+      "source_work": "劉注"
+    },
+    {
+      "evidence_ref": "hdb2-shishuo-liu-10-guizhen-012-annotation-003",
+      "exact_spans": [],
+      "excerpt": "(不就朝覲鯤懼天下私議也敦曰君能保無變乎對/逆以鯤有時望逼與俱行既克京邑將旋武昌鯤曰)",
+      "locator": {
+        "annotation_id": "annotation-003",
+        "story_id": "10-guizhen-012"
+      },
+      "source_layer": "liu_annotation",
+      "source_work": "劉注"
     }
   ],
   "story_context": "謝鯤爲豫章太守，從大將軍下至石頭。敦謂鯤曰：“余不得復爲盛德之事矣。”鯤曰：“何爲其然？但使自今巳後，日亡日去耳！”敦又稱疾不朝，鯤諭敦曰：“近者，明公之舉雖欲大存社稷，然四海之内，實懷未逹。若能朝天子，使羣臣釋然，萬物之心於是乃服。仗民望以從衆懷，盡沖退以奉主上，如斯，則勲侔一匡，名垂千載。”時人以爲名言。",
@@ -108,5 +199,7 @@
     "ruler_context",
     "temporal_context"
   ],
-  "target_surface": "敦"
+  "system_summary": "系统识别出官职、称号或帝王称谓，但承载该表达的人物仍需确认。",
+  "target_surface": "敦",
+  "why_review_needed": "官职/称号可能对应多位人物；需要结合当前给出的时间、任职、别名和社会证据，避免把角色表达直接当作 Person。"
 }

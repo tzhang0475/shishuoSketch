@@ -87,6 +87,7 @@
     ]
   },
   "candidate_people": [],
+  "compositional_context": null,
   "current_state": {
     "candidate_only": true,
     "candidate_set": [],
@@ -95,14 +96,71 @@
     "compositional_referent": null,
     "hard_constraint_rejections": [],
     "identity_resolution_basis": "unresolved",
-    "original_hdb1_status": null,
+    "original_hdb1_status": "unresolved",
     "rescue_attempted": false,
     "rescue_useful": false,
     "status": "unresolved"
   },
+  "decision_options": [
+    {
+      "description": "从排名候选中确认官职/称号持有人。",
+      "key": "choose_existing_person",
+      "label": "选择已有的人物"
+    },
+    {
+      "description": "保留官职/称号表达，暂不绑定人物。",
+      "key": "keep_unresolved",
+      "label": "暂无法确定"
+    },
+    {
+      "description": "确认当前表达没有足够的人物指代。",
+      "key": "not_person",
+      "label": "不是人物指称"
+    },
+    {
+      "description": "标记时间、职官或引文需要复核。",
+      "key": "evidence_problem",
+      "label": "证据有问题"
+    }
+  ],
   "identity_observation_id": "hdb1-identity-02e59210759088f40ee65ef5",
+  "materialization_impact": {
+    "affected_fact_ids": {
+      "Kinship": [],
+      "Marriage": [
+        "hdb1-relation-d54b46dfdf5c0e7c5a0a1196",
+        "hdb1-relation-21c374be5feb6fcc9b3dd3a8"
+      ],
+      "OfficeTenures": [
+        "hdb1-relation-6631268343ef447c5bb5782f"
+      ],
+      "PersonStory": [],
+      "Relations": [
+        "hdb1-relation-d54b46dfdf5c0e7c5a0a1196",
+        "hdb1-relation-21c374be5feb6fcc9b3dd3a8",
+        "hdb1-relation-6631268343ef447c5bb5782f"
+      ]
+    },
+    "summary": [
+      {
+        "count": 3,
+        "kind": "Relations",
+        "label": "+ 3 Relations"
+      },
+      {
+        "count": 2,
+        "kind": "Marriage",
+        "label": "+ 2 Marriage"
+      },
+      {
+        "count": 1,
+        "kind": "OfficeTenures",
+        "label": "+ 1 OfficeTenures"
+      }
+    ]
+  },
   "occurrence_id": "hdb2-occ-2d62af5441fa974bfed1",
-  "occurrence_type": "person_office_title",
+  "occurrence_type": "ruler_reference",
   "priority": "P1",
   "priority_score": 950,
   "proposed_identity": {
@@ -115,14 +173,16 @@
   },
   "relevant_annotation_context": [],
   "review_id": "hdb2-review-9e19d459c22af285b8a2",
-  "review_type": "compositional_kinship",
-  "schema": "hdb2-review-item-v1",
+  "review_question": "这里的「武帝」具体指哪位人物？",
+  "review_type": "office_or_title_holder",
+  "schema": "hdb2-review-item-v2",
   "selected_evidence": [
     {
-      "evidence_ref": "story:19-xianyuan-013",
+      "evidence_ref": "hdb2-shishuo-main-19-xianyuan-013",
       "exact_spans": [],
-      "excerpt": "賈充前婦是李豐女。豐被誅，離婚徙邉。後遇赦得還，充先已取郭配女。武帝特聽置左右夫人。李氏别住外，不肯還充舍。郭氏語充，欲就省李，充曰：“彼剛介有才氣，卿徃不如不去。”郭氏於是盛威儀，多將侍婢。既至，入户，李氏起迎，郭不覺腳自屈，因跪再拜。既反，語充，充曰：“語卿道何物？”",
+      "excerpt": "賈充前婦是李豐女豐被誅離婚徙邉\n後遇赦得還充先已取郭配女\n武帝特聽置左右夫人李氏别住外不肯還\n充舍\n郭氏語充\n欲就省李充曰彼剛介有才氣卿徃不如不去\n郭氏於是盛威儀多將侍婢既至入户李\n氏起迎郭不覺腳自屈因跪再拜既反語充充曰語\n\n卿道何物",
       "locator": {
+        "chapter": "賢媛第十九",
         "story_id": "19-xianyuan-013"
       },
       "source_layer": "main_text",
@@ -134,5 +194,7 @@
   "support_families": [
     "ruler_context"
   ],
-  "target_surface": "武帝"
+  "system_summary": "系统识别出官职、称号或帝王称谓，但承载该表达的人物仍需确认。",
+  "target_surface": "武帝",
+  "why_review_needed": "官职/称号可能对应多位人物；需要结合当前给出的时间、任职、别名和社会证据，避免把角色表达直接当作 Person。"
 }

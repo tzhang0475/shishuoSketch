@@ -31,6 +31,7 @@
     ]
   },
   "candidate_people": [],
+  "compositional_context": null,
   "current_state": {
     "candidate_only": true,
     "candidate_set": [],
@@ -39,14 +40,61 @@
     "compositional_referent": null,
     "hard_constraint_rejections": [],
     "identity_resolution_basis": "unresolved",
-    "original_hdb1_status": null,
+    "original_hdb1_status": "unresolved",
     "rescue_attempted": false,
     "rescue_useful": false,
     "status": "unresolved"
   },
+  "decision_options": [
+    {
+      "description": "从候选中选择最符合当前出现位置的 Person。",
+      "key": "choose_existing_person",
+      "label": "这是已有的人物"
+    },
+    {
+      "description": "保留人物判断，暂不绑定身份。",
+      "key": "keep_unresolved",
+      "label": "确实是人物，但无法确定"
+    },
+    {
+      "description": "确认当前表达不应作为单一人物处理。",
+      "key": "not_person",
+      "label": "不是独立人物 / 系统判断有误"
+    },
+    {
+      "description": "标记引文或候选证据需要复核。",
+      "key": "evidence_problem",
+      "label": "证据有问题"
+    }
+  ],
   "identity_observation_id": "hdb1-identity-0e2cf43e42cb5bb5b1027234",
+  "materialization_impact": {
+    "affected_fact_ids": {
+      "Kinship": [
+        "hdb1-relation-d4e67dd5ed30d9ed7df8f3b6"
+      ],
+      "Marriage": [],
+      "OfficeTenures": [],
+      "PersonStory": [],
+      "Relations": [
+        "hdb1-relation-d4e67dd5ed30d9ed7df8f3b6"
+      ]
+    },
+    "summary": [
+      {
+        "count": 1,
+        "kind": "Relations",
+        "label": "+ 1 Relations"
+      },
+      {
+        "count": 1,
+        "kind": "Kinship",
+        "label": "+ 1 Kinship"
+      }
+    ]
+  },
   "occurrence_id": "hdb2-occ-2d02729b7ce75bbd321f",
-  "occurrence_type": "named_person",
+  "occurrence_type": "abbreviated_person_name",
   "priority": "P1",
   "priority_score": 900,
   "proposed_identity": {
@@ -61,22 +109,37 @@
     "(氏譜曰奉弟聘字弘/安南謝奉也巳見謝)"
   ],
   "review_id": "hdb2-review-39e5abcd8866a2aec5cf",
-  "review_type": "compositional_kinship",
-  "schema": "hdb2-review-item-v1",
+  "review_question": "这里的「聘」具体指哪位人物？",
+  "review_type": "identity",
+  "schema": "hdb2-review-item-v2",
   "selected_evidence": [
     {
-      "evidence_ref": "story:09-pinzao-040",
+      "evidence_ref": "hdb2-shishuo-main-09-pinzao-040",
       "exact_spans": [],
-      "excerpt": "簡文云：“謝安南清令不如其弟，學義不及孔巖，居然自勝。”",
+      "excerpt": "簡文云謝安南清令不如其弟\n學義不及孔巖\n居然自勝",
       "locator": {
+        "chapter": "品藻第九",
         "story_id": "09-pinzao-040"
       },
       "source_layer": "main_text",
       "source_work": "世說正文"
+    },
+    {
+      "evidence_ref": "hdb2-shishuo-liu-09-pinzao-040-annotation-001",
+      "exact_spans": [],
+      "excerpt": "(氏譜曰奉弟聘字弘/安南謝奉也巳見謝)",
+      "locator": {
+        "annotation_id": "annotation-001",
+        "story_id": "09-pinzao-040"
+      },
+      "source_layer": "liu_annotation",
+      "source_work": "劉注"
     }
   ],
   "story_context": "簡文云：“謝安南清令不如其弟，學義不及孔巖，居然自勝。”",
   "story_id": "09-pinzao-040",
   "support_families": [],
-  "target_surface": "聘"
+  "system_summary": "系统保留了当前文本中的候选人物和来源证据，但身份尚未达到可自动确认的门槛。",
+  "target_surface": "聘",
+  "why_review_needed": "当前候选之间仍有歧义，或直接身份证据不足；需要人工选择已有 Person、保留未解析，或指出人物类型/证据问题。"
 }

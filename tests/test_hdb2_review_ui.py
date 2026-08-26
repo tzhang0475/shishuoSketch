@@ -55,9 +55,70 @@ class HDB2ReviewProjectionTests(unittest.TestCase):
                 "story_context", "candidate_people", "selected_evidence", "affected_facts",
                 "current_state",
             })
+            self.assertTrue(item["review_question"])
+            self.assertTrue(item["system_summary"])
+            self.assertTrue(item["why_review_needed"])
+            self.assertGreater(len(item["decision_options"]), 0)
+            self.assertIn("summary", item["materialization_impact"])
             self.assertTrue(forbidden.isdisjoint(set(walk_keys(item))))
             self.assertTrue(item["current_state"]["candidate_only"])
             self.assertFalse(item["current_state"]["canonical_write_back"])
+
+    def test_each_review_type_asks_the_relevant_question(self):
+        index = load(REVIEW_ROOT / "index.json")
+        examples = {}
+        for entry in index["items"]:
+            examples.setdefault(entry["review_type"], load(REVIEW_ROOT / entry["item_path"]))
+        self.assertIn("candidate_person", examples)
+        self.assertIn("identity", examples)
+        self.assertIn("compositional_kinship", examples)
+        self.assertIn("office_or_title_holder", examples)
+        self.assertIn("新的独立人物", examples["candidate_person"]["review_question"])
+        self.assertIn("具体指哪位人物", examples["identity"]["review_question"])
+        self.assertIn("具体指哪位人物", examples["office_or_title_holder"]["review_question"])
+
+        compositional = [
+            load(REVIEW_ROOT / entry["item_path"])
+            for entry in index["items"]
+            if entry["review_type"] == "compositional_kinship"
+        ]
+        self.assertTrue(compositional)
+        for item in compositional:
+            context = item["compositional_context"]
+            self.assertIsNotNone(context)
+            self.assertIn("base_person", context)
+            self.assertIn("relation_type", context)
+            self.assertIn("referent_candidates", context)
+            self.assertIn("基准人物本身", item["why_review_needed"])
+            self.assertNotIn("是否等于", item["review_question"])
+
+    def test_materialization_impact_only_summarizes_projected_facts(self):
+        index = load(REVIEW_ROOT / "index.json")
+        for entry in index["items"]:
+            item = load(REVIEW_ROOT / entry["item_path"])
+            impact = item["materialization_impact"]
+            summary = {row["kind"]: row["count"] for row in impact["summary"]}
+            affected = item["affected_facts"]
+            expected = {
+                "PersonStory": len(affected["person_story"]),
+                "Relations": sum(row.get("state") not in {"rejected_self_relation", "conflict", "rejected"} for row in affected["relations"]),
+                "Kinship": sum(row.get("state") not in {"rejected_self_relation", "conflict", "rejected"} for row in affected["kinship"]),
+                "Marriage": sum(row.get("state") not in {"rejected_self_relation", "conflict", "rejected"} for row in affected["marriage"]),
+                "OfficeTenures": sum(row.get("state") not in {"rejected_self_relation", "conflict", "rejected"} for row in affected["office"]),
+            }
+            for kind, count in expected.items():
+                self.assertEqual(summary.get(kind, 0), count)
+
+    def test_review_page_is_question_first(self):
+        page = (ROOT / "site/src/HDB2ReviewPage.tsx").read_text(encoding="utf-8")
+        self.assertIn("需要你的判断", page)
+        self.assertIn("review_question", page)
+        self.assertIn("system_summary", page)
+        self.assertIn("why_review_needed", page)
+        self.assertIn("materialization_impact", page)
+        self.assertIn("基准人物", page)
+        self.assertIn("关系类型", page)
+        self.assertIn("指代对象候选", page)
 
     def test_compact_rescue_trace_keeps_selection_refs(self):
         for run_id in ("20260826T-HDB2-F-02", "20260826T-HDB2-F-03"):

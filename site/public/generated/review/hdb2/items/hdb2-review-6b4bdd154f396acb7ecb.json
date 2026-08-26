@@ -29,7 +29,17 @@
       }
     ]
   },
-  "candidate_people": [],
+  "candidate_people": [
+    {
+      "candidate_key": "c0",
+      "display_name": "謝安",
+      "person_id": "person-006",
+      "rank": 1,
+      "semantic_type": "person",
+      "source": "local_story_neighbor"
+    }
+  ],
+  "compositional_context": null,
   "current_state": {
     "candidate_only": true,
     "candidate_set": [],
@@ -38,34 +48,77 @@
     "compositional_referent": null,
     "hard_constraint_rejections": [],
     "identity_resolution_basis": "unresolved",
-    "original_hdb1_status": null,
+    "original_hdb1_status": "unresolved",
     "rescue_attempted": false,
     "rescue_useful": false,
     "status": "office_reference"
   },
+  "decision_options": [
+    {
+      "description": "从排名候选中确认官职/称号持有人。",
+      "key": "choose_existing_person",
+      "label": "选择已有的人物"
+    },
+    {
+      "description": "保留官职/称号表达，暂不绑定人物。",
+      "key": "keep_unresolved",
+      "label": "暂无法确定"
+    },
+    {
+      "description": "确认当前表达没有足够的人物指代。",
+      "key": "not_person",
+      "label": "不是人物指称"
+    },
+    {
+      "description": "标记时间、职官或引文需要复核。",
+      "key": "evidence_problem",
+      "label": "证据有问题"
+    }
+  ],
   "identity_observation_id": "hdb1-identity-cf4756b61ea2793734c50d5b",
+  "materialization_impact": {
+    "affected_fact_ids": {
+      "Kinship": [],
+      "Marriage": [],
+      "OfficeTenures": [],
+      "PersonStory": [],
+      "Relations": [
+        "hdb1-relation-5c1f46551b9671b4d10fb105",
+        "hdb1-relation-402a93dbce5c5faf86b63cb3"
+      ]
+    },
+    "summary": [
+      {
+        "count": 2,
+        "kind": "Relations",
+        "label": "+ 2 Relations"
+      }
+    ]
+  },
   "occurrence_id": "hdb2-occ-b17089b4ce70c3834acc",
-  "occurrence_type": "person_office_title",
+  "occurrence_type": "title_reference",
   "priority": "P1",
   "priority_score": 850,
   "proposed_identity": {
     "basis": "unresolved",
     "candidate_key": "c0",
     "candidate_person_id": null,
-    "label": null,
+    "label": "謝安",
     "person_id": null,
     "status": "office_reference"
   },
   "relevant_annotation_context": [],
   "review_id": "hdb2-review-6b4bdd154f396acb7ecb",
-  "review_type": "identity",
-  "schema": "hdb2-review-item-v1",
+  "review_question": "这里的「劉尹」具体指哪位人物？",
+  "review_type": "office_or_title_holder",
+  "schema": "hdb2-review-item-v2",
   "selected_evidence": [
     {
-      "evidence_ref": "story:05-fangzheng-053",
+      "evidence_ref": "hdb2-shishuo-main-05-fangzheng-053",
       "exact_spans": [],
-      "excerpt": "阮光禄赴山陵，至都，不往殷、劉許，過事便還。諸人相與追之，既亦知時流必當逐巳，乃遄疾而去，至方山不相及。劉尹時爲㑹稽，乃嘆曰：“我入，當泊安石渚下耳，不敢復近思曠傍，伊便能捉杖打人，不易。”",
+      "excerpt": "阮光禄赴山陵至都不往殷劉許過事便還諸\n人相與追之既亦知時流必當逐巳乃遄疾而去至\n\n方山不相及劉尹時爲㑹稽\n乃嘆曰我入當泊安石渚下耳不敢復近思曠傍伊\n便能捉杖打人不易",
       "locator": {
+        "chapter": "方正第五",
         "story_id": "05-fangzheng-053"
       },
       "source_layer": "main_text",
@@ -75,5 +128,7 @@
   "story_context": "阮光禄赴山陵，至都，不往殷、劉許，過事便還。諸人相與追之，既亦知時流必當逐巳，乃遄疾而去，至方山不相及。劉尹時爲㑹稽，乃嘆曰：“我入，當泊安石渚下耳，不敢復近思曠傍，伊便能捉杖打人，不易。”",
   "story_id": "05-fangzheng-053",
   "support_families": [],
-  "target_surface": "劉尹"
+  "system_summary": "系统识别出官职、称号或帝王称谓，但承载该表达的人物仍需确认。",
+  "target_surface": "劉尹",
+  "why_review_needed": "官职/称号可能对应多位人物；需要结合当前给出的时间、任职、别名和社会证据，避免把角色表达直接当作 Person。"
 }

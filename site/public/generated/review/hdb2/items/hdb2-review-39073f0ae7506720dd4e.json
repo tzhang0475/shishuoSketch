@@ -51,7 +51,17 @@
       }
     ]
   },
-  "candidate_people": [],
+  "candidate_people": [
+    {
+      "candidate_key": "c0",
+      "display_name": "劉惔",
+      "person_id": "person-009",
+      "rank": 1,
+      "semantic_type": "person",
+      "source": "local_story_neighbor"
+    }
+  ],
+  "compositional_context": null,
   "current_state": {
     "candidate_only": true,
     "candidate_set": [],
@@ -62,14 +72,56 @@
       "candidate_key_must_be_null_outside_candidate"
     ],
     "identity_resolution_basis": "unresolved",
-    "original_hdb1_status": null,
+    "original_hdb1_status": "unresolved",
     "rescue_attempted": false,
     "rescue_useful": false,
     "status": "unresolved"
   },
+  "decision_options": [
+    {
+      "description": "从候选中选择最符合当前出现位置的 Person。",
+      "key": "choose_existing_person",
+      "label": "这是已有的人物"
+    },
+    {
+      "description": "保留人物判断，暂不绑定身份。",
+      "key": "keep_unresolved",
+      "label": "确实是人物，但无法确定"
+    },
+    {
+      "description": "确认当前表达不应作为单一人物处理。",
+      "key": "not_person",
+      "label": "不是独立人物 / 系统判断有误"
+    },
+    {
+      "description": "标记引文或候选证据需要复核。",
+      "key": "evidence_problem",
+      "label": "证据有问题"
+    }
+  ],
   "identity_observation_id": "hdb1-identity-767f15fc80bec3860ccc8e94",
+  "materialization_impact": {
+    "affected_fact_ids": {
+      "Kinship": [],
+      "Marriage": [],
+      "OfficeTenures": [],
+      "PersonStory": [],
+      "Relations": [
+        "hdb1-relation-988707ab6e4ba59a6b713b95",
+        "hdb1-relation-57e1fd86873e4311cbc1e2ae",
+        "hdb1-relation-03fe29eb0a5a48d0c129f367"
+      ]
+    },
+    "summary": [
+      {
+        "count": 3,
+        "kind": "Relations",
+        "label": "+ 3 Relations"
+      }
+    ]
+  },
   "occurrence_id": "hdb2-occ-5e5351b612e1eeff8226",
-  "occurrence_type": "named_person",
+  "occurrence_type": "abbreviated_person_name",
   "priority": "P1",
   "priority_score": 850,
   "proposed_identity": {
@@ -84,18 +136,31 @@
     "(國之周公也足下宜以大政付之裒長史王胡之亦/裒自丹徒入朝吏部尚書劉遐勸裒曰㑹稽王令德)"
   ],
   "review_id": "hdb2-review-39073f0ae7506720dd4e",
+  "review_question": "这里的「王」具体指哪位人物？",
   "review_type": "identity",
-  "schema": "hdb2-review-item-v1",
+  "schema": "hdb2-review-item-v2",
   "selected_evidence": [
     {
-      "evidence_ref": "story:02-yanyu-054",
+      "evidence_ref": "hdb2-shishuo-main-02-yanyu-054",
       "exact_spans": [],
-      "excerpt": "何驃騎亡後，徵禇公入。既至石頭，王長史、劉尹同詣禇。禇曰：“真長何以處我？”真長顧王曰：“此子能言。”禇因視王，王曰：“國自有周公。”",
+      "excerpt": "何驃騎亡後徵禇公入既至石頭王長史劉尹\n同詣禇禇曰真長何以處我真長顧王曰此子能言\n禇因視王王曰國自有周公",
       "locator": {
+        "chapter": "言語第二",
         "story_id": "02-yanyu-054"
       },
       "source_layer": "main_text",
       "source_work": "世說正文"
+    },
+    {
+      "evidence_ref": "hdb2-shishuo-liu-02-yanyu-054-annotation-003",
+      "exact_spans": [],
+      "excerpt": "(國之周公也足下宜以大政付之裒長史王胡之亦/裒自丹徒入朝吏部尚書劉遐勸裒曰㑹稽王令德)",
+      "locator": {
+        "annotation_id": "annotation-003",
+        "story_id": "02-yanyu-054"
+      },
+      "source_layer": "liu_annotation",
+      "source_work": "劉注"
     }
   ],
   "story_context": "何驃騎亡後，徵禇公入。既至石頭，王長史、劉尹同詣禇。禇曰：“真長何以處我？”真長顧王曰：“此子能言。”禇因視王，王曰：“國自有周公。”",
@@ -103,5 +168,7 @@
   "support_families": [
     "annotation_context"
   ],
-  "target_surface": "王"
+  "system_summary": "系统保留了当前文本中的候选人物和来源证据，但身份尚未达到可自动确认的门槛。",
+  "target_surface": "王",
+  "why_review_needed": "当前候选之间仍有歧义，或直接身份证据不足；需要人工选择已有 Person、保留未解析，或指出人物类型/证据问题。"
 }

@@ -79,6 +79,7 @@
       "candidate_key": "c0",
       "display_name": "王敦",
       "person_id": "person-011",
+      "rank": 1,
       "semantic_type": "person",
       "source": "local_story_neighbor"
     },
@@ -86,10 +87,12 @@
       "candidate_key": "c1",
       "display_name": "謝鯤",
       "person_id": "person-023",
+      "rank": 2,
       "semantic_type": "person",
       "source": "local_story_neighbor"
     }
   ],
+  "compositional_context": null,
   "current_state": {
     "candidate_only": true,
     "candidate_set": [
@@ -103,12 +106,61 @@
       "candidate_key_must_be_null_outside_candidate"
     ],
     "identity_resolution_basis": "unresolved",
-    "original_hdb1_status": null,
+    "original_hdb1_status": "unresolved",
     "rescue_attempted": true,
     "rescue_useful": true,
     "status": "unresolved"
   },
+  "decision_options": [
+    {
+      "description": "从排名候选中确认官职/称号持有人。",
+      "key": "choose_existing_person",
+      "label": "选择已有的人物"
+    },
+    {
+      "description": "保留官职/称号表达，暂不绑定人物。",
+      "key": "keep_unresolved",
+      "label": "暂无法确定"
+    },
+    {
+      "description": "确认当前表达没有足够的人物指代。",
+      "key": "not_person",
+      "label": "不是人物指称"
+    },
+    {
+      "description": "标记时间、职官或引文需要复核。",
+      "key": "evidence_problem",
+      "label": "证据有问题"
+    }
+  ],
   "identity_observation_id": "hdb1-identity-91aa9918d92ffeaf9dcb064a",
+  "materialization_impact": {
+    "affected_fact_ids": {
+      "Kinship": [],
+      "Marriage": [],
+      "OfficeTenures": [
+        "hdb1-relation-33847ae7060ebb60a2c0c56d"
+      ],
+      "PersonStory": [],
+      "Relations": [
+        "hdb1-relation-33847ae7060ebb60a2c0c56d",
+        "hdb1-relation-b116fa026d8514ed7a109999",
+        "hdb1-relation-18e81cac924c8d728c77819c"
+      ]
+    },
+    "summary": [
+      {
+        "count": 3,
+        "kind": "Relations",
+        "label": "+ 3 Relations"
+      },
+      {
+        "count": 1,
+        "kind": "OfficeTenures",
+        "label": "+ 1 OfficeTenures"
+      }
+    ]
+  },
   "occurrence_id": "hdb2-occ-b44a7c8636d8042ad010",
   "occurrence_type": "title_reference",
   "priority": "P1",
@@ -123,8 +175,9 @@
   },
   "relevant_annotation_context": [],
   "review_id": "hdb2-review-d7c934cd0edeb9234c93",
+  "review_question": "这里的「長史」具体指哪位人物？",
   "review_type": "office_or_title_holder",
-  "schema": "hdb2-review-item-v1",
+  "schema": "hdb2-review-item-v2",
   "selected_evidence": [
     {
       "evidence_ref": "hdb2-shishuo-main-08-shangyu-051",
@@ -179,5 +232,7 @@
   "story_context": "王敦爲大將軍，鎭豫章。衛玠避亂，從洛投敦，相見欣然，談話彌日。于時謝鯤爲長史，敦謂鯤曰：“不意永嘉之中，復聞正始之音。阿平若在，當復絶倒。”",
   "story_id": "08-shangyu-051",
   "support_families": [],
-  "target_surface": "長史"
+  "system_summary": "系统识别出官职、称号或帝王称谓，但承载该表达的人物仍需确认。",
+  "target_surface": "長史",
+  "why_review_needed": "官职/称号可能对应多位人物；需要结合当前给出的时间、任职、别名和社会证据，避免把角色表达直接当作 Person。"
 }

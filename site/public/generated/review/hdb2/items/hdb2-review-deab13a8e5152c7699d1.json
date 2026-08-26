@@ -57,10 +57,12 @@
       "candidate_key": "c0",
       "display_name": "王羲之",
       "person_id": "person-001",
+      "rank": 1,
       "semantic_type": "person",
       "source": "local_story_neighbor"
     }
   ],
+  "compositional_context": null,
   "current_state": {
     "candidate_only": true,
     "candidate_set": [
@@ -71,12 +73,59 @@
     "compositional_referent": null,
     "hard_constraint_rejections": [],
     "identity_resolution_basis": "unresolved",
-    "original_hdb1_status": null,
+    "original_hdb1_status": "unresolved",
     "rescue_attempted": false,
     "rescue_useful": false,
     "status": "office_reference"
   },
+  "decision_options": [
+    {
+      "description": "从排名候选中确认官职/称号持有人。",
+      "key": "choose_existing_person",
+      "label": "选择已有的人物"
+    },
+    {
+      "description": "保留官职/称号表达，暂不绑定人物。",
+      "key": "keep_unresolved",
+      "label": "暂无法确定"
+    },
+    {
+      "description": "确认当前表达没有足够的人物指代。",
+      "key": "not_person",
+      "label": "不是人物指称"
+    },
+    {
+      "description": "标记时间、职官或引文需要复核。",
+      "key": "evidence_problem",
+      "label": "证据有问题"
+    }
+  ],
   "identity_observation_id": "hdb1-identity-8c9862202d5e3f112391a644",
+  "materialization_impact": {
+    "affected_fact_ids": {
+      "Kinship": [],
+      "Marriage": [],
+      "OfficeTenures": [
+        "hdb1-relation-d6a7d4374498a927a6ed6195"
+      ],
+      "PersonStory": [],
+      "Relations": [
+        "hdb1-relation-d6a7d4374498a927a6ed6195"
+      ]
+    },
+    "summary": [
+      {
+        "count": 1,
+        "kind": "Relations",
+        "label": "+ 1 Relations"
+      },
+      {
+        "count": 1,
+        "kind": "OfficeTenures",
+        "label": "+ 1 OfficeTenures"
+      }
+    ]
+  },
   "occurrence_id": "hdb2-occ-8a085c340358c89dc606",
   "occurrence_type": "title_reference",
   "priority": "P1",
@@ -91,8 +140,9 @@
   },
   "relevant_annotation_context": [],
   "review_id": "hdb2-review-deab13a8e5152c7699d1",
+  "review_question": "这里的「㑹稽」具体指哪位人物？",
   "review_type": "office_or_title_holder",
-  "schema": "hdb2-review-item-v1",
+  "schema": "hdb2-review-item-v2",
   "selected_evidence": [
     {
       "evidence_ref": "hdb2-shishuo-main-04-wenxue-036",
@@ -109,5 +159,7 @@
   "story_context": "王逸少作㑹稽，初至，支道林在焉。孫興公謂王曰：“支道林㧞新領異，胷懷所及乃自佳，卿欲見不？”王本自有一徃雋氣，殊自輕之。後孫與支共載徃王許，王都領域，不與交言。須臾支退。後正值王當行，車已在門。支語王曰：“君未可去，貧道與君小語。”因論《莊子·逍遥逰》。支作數千言，才藻新竒，花爛映發。王遂披襟解帶，留連不能已。",
   "story_id": "04-wenxue-036",
   "support_families": [],
-  "target_surface": "㑹稽"
+  "system_summary": "系统识别出官职、称号或帝王称谓，但承载该表达的人物仍需确认。",
+  "target_surface": "㑹稽",
+  "why_review_needed": "官职/称号可能对应多位人物；需要结合当前给出的时间、任职、别名和社会证据，避免把角色表达直接当作 Person。"
 }

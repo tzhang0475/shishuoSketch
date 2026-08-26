@@ -36,7 +36,33 @@
       }
     ]
   },
-  "candidate_people": [],
+  "candidate_people": [
+    {
+      "candidate_key": "c0",
+      "display_name": "王敦",
+      "person_id": "person-011",
+      "rank": 1,
+      "semantic_type": "person",
+      "source": "catalogue_suffix"
+    },
+    {
+      "candidate_key": "c1",
+      "display_name": "王隱",
+      "person_id": "person-054",
+      "rank": 2,
+      "semantic_type": "person",
+      "source": "catalogue_suffix"
+    },
+    {
+      "candidate_key": "c2",
+      "display_name": "周顗",
+      "person_id": "person-019",
+      "rank": 3,
+      "semantic_type": "person",
+      "source": "local_story_neighbor"
+    }
+  ],
+  "compositional_context": null,
   "current_state": {
     "candidate_only": true,
     "candidate_set": [],
@@ -45,14 +71,60 @@
     "compositional_referent": null,
     "hard_constraint_rejections": [],
     "identity_resolution_basis": "unresolved",
-    "original_hdb1_status": null,
+    "original_hdb1_status": "unresolved",
     "rescue_attempted": false,
     "rescue_useful": false,
     "status": "contextually_resolved"
   },
+  "decision_options": [
+    {
+      "description": "从排名候选中确认官职/称号持有人。",
+      "key": "choose_existing_person",
+      "label": "选择已有的人物"
+    },
+    {
+      "description": "保留官职/称号表达，暂不绑定人物。",
+      "key": "keep_unresolved",
+      "label": "暂无法确定"
+    },
+    {
+      "description": "确认当前表达没有足够的人物指代。",
+      "key": "not_person",
+      "label": "不是人物指称"
+    },
+    {
+      "description": "标记时间、职官或引文需要复核。",
+      "key": "evidence_problem",
+      "label": "证据有问题"
+    }
+  ],
   "identity_observation_id": "hdb1-identity-a6c18dcf4eb613f8507938b1",
+  "materialization_impact": {
+    "affected_fact_ids": {
+      "Kinship": [],
+      "Marriage": [],
+      "OfficeTenures": [],
+      "PersonStory": [],
+      "Relations": [
+        "hdb1-relation-7e423ce034174f0833bde47b",
+        "hdb1-relation-3df8c4bf883e6898206e3899"
+      ]
+    },
+    "summary": [
+      {
+        "count": 1,
+        "kind": "PersonStory",
+        "label": "+ 1 PersonStory"
+      },
+      {
+        "count": 2,
+        "kind": "Relations",
+        "label": "+ 2 Relations"
+      }
+    ]
+  },
   "occurrence_id": "hdb2-occ-f824b8c202ae1ab11a1c",
-  "occurrence_type": "person_office_title",
+  "occurrence_type": "title_reference",
   "priority": "P1",
   "priority_score": 850,
   "proposed_identity": {
@@ -67,14 +139,16 @@
     "(郝嘏及左右文武勸顗避難顗曰吾備/晉陽秋曰王敦既下六軍敗績顗長史)"
   ],
   "review_id": "hdb2-review-f6cb4516483d54e94f0c",
-  "review_type": "identity",
-  "schema": "hdb2-review-item-v1",
+  "review_question": "这里的「王大將軍」具体指哪位人物？",
+  "review_type": "office_or_title_holder",
+  "schema": "hdb2-review-item-v2",
   "selected_evidence": [
     {
-      "evidence_ref": "story:05-fangzheng-033",
+      "evidence_ref": "hdb2-shishuo-main-05-fangzheng-033",
       "exact_spans": [],
-      "excerpt": "王大將軍既反，至石頭，周伯仁往見之。謂周曰：“卿何以相負？”對曰：“公戎車犯正，下官忝率六軍，而王師不振，以此負公。”",
+      "excerpt": "王大將軍既反至石頭周伯仁往見之謂周曰卿何\n以相負對曰公戎車犯正下官忝率六軍而王師不\n振以此負公",
       "locator": {
+        "chapter": "方正第五",
         "story_id": "05-fangzheng-033"
       },
       "source_layer": "main_text",
@@ -88,5 +162,7 @@
     "temporal_context",
     "title_context"
   ],
-  "target_surface": "王大將軍"
+  "system_summary": "系统识别出官职、称号或帝王称谓，但承载该表达的人物仍需确认。",
+  "target_surface": "王大將軍",
+  "why_review_needed": "官职/称号可能对应多位人物；需要结合当前给出的时间、任职、别名和社会证据，避免把角色表达直接当作 Person。"
 }

@@ -30,6 +30,7 @@
       "candidate_key": "c0",
       "display_name": "王導",
       "person_id": "person-003",
+      "rank": 1,
       "semantic_type": "person",
       "source": "catalogue_suffix"
     },
@@ -37,6 +38,7 @@
       "candidate_key": "c1",
       "display_name": "王隱",
       "person_id": "person-054",
+      "rank": 2,
       "semantic_type": "person",
       "source": "catalogue_suffix"
     },
@@ -44,6 +46,7 @@
       "candidate_key": "c2",
       "display_name": "劉琨",
       "person_id": "person-021",
+      "rank": 3,
       "semantic_type": "person",
       "source": "local_story_neighbor"
     },
@@ -51,10 +54,12 @@
       "candidate_key": "c3",
       "display_name": "温嶠",
       "person_id": "person-013",
+      "rank": 4,
       "semantic_type": "person",
       "source": "local_story_neighbor"
     }
   ],
+  "compositional_context": null,
   "current_state": {
     "candidate_only": true,
     "candidate_set": [
@@ -68,12 +73,57 @@
     "compositional_referent": null,
     "hard_constraint_rejections": [],
     "identity_resolution_basis": "contextual_name_projection",
-    "original_hdb1_status": null,
+    "original_hdb1_status": "unresolved",
     "rescue_attempted": true,
     "rescue_useful": true,
     "status": "contextually_resolved"
   },
+  "decision_options": [
+    {
+      "description": "从排名候选中确认官职/称号持有人。",
+      "key": "choose_existing_person",
+      "label": "选择已有的人物"
+    },
+    {
+      "description": "保留官职/称号表达，暂不绑定人物。",
+      "key": "keep_unresolved",
+      "label": "暂无法确定"
+    },
+    {
+      "description": "确认当前表达没有足够的人物指代。",
+      "key": "not_person",
+      "label": "不是人物指称"
+    },
+    {
+      "description": "标记时间、职官或引文需要复核。",
+      "key": "evidence_problem",
+      "label": "证据有问题"
+    }
+  ],
   "identity_observation_id": "hdb1-identity-1d83047f6a2c89d608fe18ce",
+  "materialization_impact": {
+    "affected_fact_ids": {
+      "Kinship": [],
+      "Marriage": [],
+      "OfficeTenures": [],
+      "PersonStory": [],
+      "Relations": [
+        "hdb1-relation-77caaadb103659922f058ee9"
+      ]
+    },
+    "summary": [
+      {
+        "count": 1,
+        "kind": "PersonStory",
+        "label": "+ 1 PersonStory"
+      },
+      {
+        "count": 1,
+        "kind": "Relations",
+        "label": "+ 1 Relations"
+      }
+    ]
+  },
   "occurrence_id": "hdb2-occ-ea201c1c8c46b95a7944",
   "occurrence_type": "title_reference",
   "priority": "P2",
@@ -90,8 +140,9 @@
     "(相付託温公旣見丞相便游樂不住曰旣見管仲天/下不可以無主聞者莫不踴躍植髮穿冠王丞相㴱)"
   ],
   "review_id": "hdb2-review-ad1f4b9498e7ae65b798",
+  "review_question": "这里的「丞相」具体指哪位人物？",
   "review_type": "office_or_title_holder",
-  "schema": "hdb2-review-item-v1",
+  "schema": "hdb2-review-item-v2",
   "selected_evidence": [
     {
       "evidence_ref": "hdb2-shishuo-main-02-yanyu-036",
@@ -179,5 +230,7 @@
     "annotation_context",
     "title_context"
   ],
-  "target_surface": "丞相"
+  "system_summary": "系统识别出官职、称号或帝王称谓，但承载该表达的人物仍需确认。",
+  "target_surface": "丞相",
+  "why_review_needed": "官职/称号可能对应多位人物；需要结合当前给出的时间、任职、别名和社会证据，避免把角色表达直接当作 Person。"
 }

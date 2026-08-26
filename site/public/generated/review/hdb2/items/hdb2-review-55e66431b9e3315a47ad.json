@@ -30,7 +30,17 @@
       }
     ]
   },
-  "candidate_people": [],
+  "candidate_people": [
+    {
+      "candidate_key": "c0",
+      "display_name": "王敦",
+      "person_id": "person-011",
+      "rank": 1,
+      "semantic_type": "person",
+      "source": "local_story_neighbor"
+    }
+  ],
+  "compositional_context": null,
   "current_state": {
     "candidate_only": true,
     "candidate_set": [],
@@ -39,21 +49,68 @@
     "compositional_referent": null,
     "hard_constraint_rejections": [],
     "identity_resolution_basis": "unresolved",
-    "original_hdb1_status": null,
+    "original_hdb1_status": "unresolved",
     "rescue_attempted": false,
     "rescue_useful": false,
     "status": "office_reference"
   },
+  "decision_options": [
+    {
+      "description": "从排名候选中确认官职/称号持有人。",
+      "key": "choose_existing_person",
+      "label": "选择已有的人物"
+    },
+    {
+      "description": "保留官职/称号表达，暂不绑定人物。",
+      "key": "keep_unresolved",
+      "label": "暂无法确定"
+    },
+    {
+      "description": "确认当前表达没有足够的人物指代。",
+      "key": "not_person",
+      "label": "不是人物指称"
+    },
+    {
+      "description": "标记时间、职官或引文需要复核。",
+      "key": "evidence_problem",
+      "label": "证据有问题"
+    }
+  ],
   "identity_observation_id": "hdb1-identity-bb29db68863dac1c62dd03a0",
+  "materialization_impact": {
+    "affected_fact_ids": {
+      "Kinship": [],
+      "Marriage": [
+        "hdb1-relation-442bd3c566cf256896d55991"
+      ],
+      "OfficeTenures": [],
+      "PersonStory": [],
+      "Relations": [
+        "hdb1-relation-442bd3c566cf256896d55991"
+      ]
+    },
+    "summary": [
+      {
+        "count": 1,
+        "kind": "Relations",
+        "label": "+ 1 Relations"
+      },
+      {
+        "count": 1,
+        "kind": "Marriage",
+        "label": "+ 1 Marriage"
+      }
+    ]
+  },
   "occurrence_id": "hdb2-occ-6f33510c96efd527157a",
-  "occurrence_type": "person_office_title",
+  "occurrence_type": "title_reference",
   "priority": "P1",
   "priority_score": 950,
   "proposed_identity": {
     "basis": "unresolved",
     "candidate_key": "c0",
     "candidate_person_id": null,
-    "label": null,
+    "label": "王敦",
     "person_id": null,
     "status": "office_reference"
   },
@@ -61,22 +118,37 @@
     "(陽公主字修褘/敦尚武帝女舞)"
   ],
   "review_id": "hdb2-review-55e66431b9e3315a47ad",
-  "review_type": "compositional_kinship",
-  "schema": "hdb2-review-item-v1",
+  "review_question": "这里的「主」具体指哪位人物？",
+  "review_type": "office_or_title_holder",
+  "schema": "hdb2-review-item-v2",
   "selected_evidence": [
     {
-      "evidence_ref": "story:34-pilou-001",
+      "evidence_ref": "hdb2-shishuo-main-34-pilou-001",
       "exact_spans": [],
-      "excerpt": "王敦初尚主，如厠，見漆箱盛乾棗，本以塞鼻，王謂廁上亦下果，食遂至盡。既還，婢擎金澡盤盛水，瑠璃盌盛澡豆，因倒箸水中而飲之，謂是乾飯。羣婢莫不掩口而笑之。",
+      "excerpt": "王敦初尚主如厠見漆箱盛乾棗本\n以塞鼻王謂廁上亦下果食遂至盡既還婢擎金澡\n盤盛水瑠璃盌盛澡豆因倒箸水中而飲之謂是乾\n飯羣婢莫不掩口而笑之",
       "locator": {
+        "chapter": "紕漏第三十四",
         "story_id": "34-pilou-001"
       },
       "source_layer": "main_text",
       "source_work": "世說正文"
+    },
+    {
+      "evidence_ref": "hdb2-shishuo-liu-34-pilou-001-annotation-001",
+      "exact_spans": [],
+      "excerpt": "(陽公主字修褘/敦尚武帝女舞)",
+      "locator": {
+        "annotation_id": "annotation-001",
+        "story_id": "34-pilou-001"
+      },
+      "source_layer": "liu_annotation",
+      "source_work": "劉注"
     }
   ],
   "story_context": "王敦初尚主，如厠，見漆箱盛乾棗，本以塞鼻，王謂廁上亦下果，食遂至盡。既還，婢擎金澡盤盛水，瑠璃盌盛澡豆，因倒箸水中而飲之，謂是乾飯。羣婢莫不掩口而笑之。",
   "story_id": "34-pilou-001",
   "support_families": [],
-  "target_surface": "主"
+  "system_summary": "系统识别出官职、称号或帝王称谓，但承载该表达的人物仍需确认。",
+  "target_surface": "主",
+  "why_review_needed": "官职/称号可能对应多位人物；需要结合当前给出的时间、任职、别名和社会证据，避免把角色表达直接当作 Person。"
 }

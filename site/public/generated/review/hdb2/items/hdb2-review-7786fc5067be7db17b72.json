@@ -29,7 +29,25 @@
       }
     ]
   },
-  "candidate_people": [],
+  "candidate_people": [
+    {
+      "candidate_key": "c0",
+      "display_name": "王羲之",
+      "person_id": "person-001",
+      "rank": 1,
+      "semantic_type": "person",
+      "source": "local_story_neighbor"
+    },
+    {
+      "candidate_key": "c1",
+      "display_name": "謝安",
+      "person_id": "person-006",
+      "rank": 2,
+      "semantic_type": "person",
+      "source": "local_story_neighbor"
+    }
+  ],
+  "compositional_context": null,
   "current_state": {
     "candidate_only": true,
     "candidate_set": [],
@@ -40,14 +58,55 @@
       "candidate_key_must_be_null_outside_candidate"
     ],
     "identity_resolution_basis": "unresolved",
-    "original_hdb1_status": null,
+    "original_hdb1_status": "unresolved",
     "rescue_attempted": false,
     "rescue_useful": false,
     "status": "unresolved"
   },
+  "decision_options": [
+    {
+      "description": "从排名候选中确认官职/称号持有人。",
+      "key": "choose_existing_person",
+      "label": "选择已有的人物"
+    },
+    {
+      "description": "保留官职/称号表达，暂不绑定人物。",
+      "key": "keep_unresolved",
+      "label": "暂无法确定"
+    },
+    {
+      "description": "确认当前表达没有足够的人物指代。",
+      "key": "not_person",
+      "label": "不是人物指称"
+    },
+    {
+      "description": "标记时间、职官或引文需要复核。",
+      "key": "evidence_problem",
+      "label": "证据有问题"
+    }
+  ],
   "identity_observation_id": "hdb1-identity-294394c431dd1c47b3e77cee",
+  "materialization_impact": {
+    "affected_fact_ids": {
+      "Kinship": [],
+      "Marriage": [],
+      "OfficeTenures": [],
+      "PersonStory": [],
+      "Relations": [
+        "hdb1-relation-b855f10065b6fe4345a4d65b",
+        "hdb1-relation-049f20af7b554d09922ffeef"
+      ]
+    },
+    "summary": [
+      {
+        "count": 2,
+        "kind": "Relations",
+        "label": "+ 2 Relations"
+      }
+    ]
+  },
   "occurrence_id": "hdb2-occ-e7ac6c368546e3dd1c6a",
-  "occurrence_type": "person_office_title",
+  "occurrence_type": "title_reference",
   "priority": "P1",
   "priority_score": 850,
   "proposed_identity": {
@@ -60,14 +119,16 @@
   },
   "relevant_annotation_context": [],
   "review_id": "hdb2-review-7786fc5067be7db17b72",
-  "review_type": "identity",
-  "schema": "hdb2-review-item-v1",
+  "review_question": "这里的「劉尹」具体指哪位人物？",
+  "review_type": "office_or_title_holder",
+  "schema": "hdb2-review-item-v2",
   "selected_evidence": [
     {
-      "evidence_ref": "story:08-shangyu-077",
+      "evidence_ref": "hdb2-shishuo-main-08-shangyu-077",
       "exact_spans": [],
-      "excerpt": "王右軍語劉尹：“故當共推安石。”劉尹曰：“若安石東山志立，當與天下共推之。”",
+      "excerpt": "王右軍語劉尹故當共推安石劉尹曰若安石東山\n志立當與天下共推之",
       "locator": {
+        "chapter": "賞譽第八",
         "story_id": "08-shangyu-077"
       },
       "source_layer": "main_text",
@@ -79,5 +140,7 @@
   "support_families": [
     "annotation_context"
   ],
-  "target_surface": "劉尹"
+  "system_summary": "系统识别出官职、称号或帝王称谓，但承载该表达的人物仍需确认。",
+  "target_surface": "劉尹",
+  "why_review_needed": "官职/称号可能对应多位人物；需要结合当前给出的时间、任职、别名和社会证据，避免把角色表达直接当作 Person。"
 }

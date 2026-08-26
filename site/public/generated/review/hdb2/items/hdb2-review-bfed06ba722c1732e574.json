@@ -29,7 +29,17 @@
       }
     ]
   },
-  "candidate_people": [],
+  "candidate_people": [
+    {
+      "candidate_key": "c0",
+      "display_name": "謝安",
+      "person_id": "person-006",
+      "rank": 1,
+      "semantic_type": "person",
+      "source": "local_story_neighbor"
+    }
+  ],
+  "compositional_context": null,
   "current_state": {
     "candidate_only": true,
     "candidate_set": [],
@@ -38,34 +48,77 @@
     "compositional_referent": null,
     "hard_constraint_rejections": [],
     "identity_resolution_basis": "unresolved",
-    "original_hdb1_status": null,
+    "original_hdb1_status": "unresolved",
     "rescue_attempted": false,
     "rescue_useful": false,
     "status": "office_reference"
   },
+  "decision_options": [
+    {
+      "description": "从排名候选中确认官职/称号持有人。",
+      "key": "choose_existing_person",
+      "label": "选择已有的人物"
+    },
+    {
+      "description": "保留官职/称号表达，暂不绑定人物。",
+      "key": "keep_unresolved",
+      "label": "暂无法确定"
+    },
+    {
+      "description": "确认当前表达没有足够的人物指代。",
+      "key": "not_person",
+      "label": "不是人物指称"
+    },
+    {
+      "description": "标记时间、职官或引文需要复核。",
+      "key": "evidence_problem",
+      "label": "证据有问题"
+    }
+  ],
   "identity_observation_id": "hdb1-identity-b1a25405c6232d1f8d9c3466",
+  "materialization_impact": {
+    "affected_fact_ids": {
+      "Kinship": [],
+      "Marriage": [],
+      "OfficeTenures": [],
+      "PersonStory": [],
+      "Relations": [
+        "hdb1-relation-698a02c46e1df6686868c31a",
+        "hdb1-relation-b0f36b0aeb2a991ea9d12a79"
+      ]
+    },
+    "summary": [
+      {
+        "count": 2,
+        "kind": "Relations",
+        "label": "+ 2 Relations"
+      }
+    ]
+  },
   "occurrence_id": "hdb2-occ-46c736fe780fb9cb5567",
-  "occurrence_type": "person_office_title",
+  "occurrence_type": "title_reference",
   "priority": "P1",
   "priority_score": 850,
   "proposed_identity": {
     "basis": "unresolved",
     "candidate_key": "c0",
     "candidate_person_id": null,
-    "label": null,
+    "label": "謝安",
     "person_id": null,
     "status": "office_reference"
   },
   "relevant_annotation_context": [],
   "review_id": "hdb2-review-bfed06ba722c1732e574",
-  "review_type": "identity",
-  "schema": "hdb2-review-item-v1",
+  "review_question": "这里的「阮光禄」具体指哪位人物？",
+  "review_type": "office_or_title_holder",
+  "schema": "hdb2-review-item-v2",
   "selected_evidence": [
     {
-      "evidence_ref": "story:04-wenxue-024",
+      "evidence_ref": "hdb2-shishuo-main-04-wenxue-024",
       "exact_spans": [],
-      "excerpt": "謝安年少時，請阮光禄道《白馬論》，為論以示謝，于時謝不即解阮語，重相咨盡。阮乃歎曰：“非但能言人不可得，正索解人亦不可得！”",
+      "excerpt": "謝安年少時請阮光禄道白馬論\n為論以示謝于時\n謝不即解阮語重相咨盡阮乃歎曰非但能言人不\n\n可得正索解人亦不可得",
       "locator": {
+        "chapter": "文學第四",
         "story_id": "04-wenxue-024"
       },
       "source_layer": "main_text",
@@ -75,5 +128,7 @@
   "story_context": "謝安年少時，請阮光禄道《白馬論》，為論以示謝，于時謝不即解阮語，重相咨盡。阮乃歎曰：“非但能言人不可得，正索解人亦不可得！”",
   "story_id": "04-wenxue-024",
   "support_families": [],
-  "target_surface": "阮光禄"
+  "system_summary": "系统识别出官职、称号或帝王称谓，但承载该表达的人物仍需确认。",
+  "target_surface": "阮光禄",
+  "why_review_needed": "官职/称号可能对应多位人物；需要结合当前给出的时间、任职、别名和社会证据，避免把角色表达直接当作 Person。"
 }

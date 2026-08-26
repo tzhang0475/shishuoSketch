@@ -91,6 +91,7 @@
       "candidate_key": "c0",
       "display_name": "諸葛道明",
       "person_id": null,
+      "rank": 1,
       "semantic_type": "person",
       "source": "hdb1_new_candidate"
     },
@@ -98,6 +99,7 @@
       "candidate_key": "c1",
       "display_name": "庾亮",
       "person_id": "person-010",
+      "rank": 2,
       "semantic_type": "person",
       "source": "local_story_neighbor"
     },
@@ -105,10 +107,12 @@
       "candidate_key": "c2",
       "display_name": "蘇峻",
       "person_id": "person-017",
+      "rank": 3,
       "semantic_type": "person",
       "source": "local_story_neighbor"
     }
   ],
+  "compositional_context": null,
   "current_state": {
     "candidate_only": true,
     "candidate_set": [
@@ -121,12 +125,80 @@
     "compositional_referent": null,
     "hard_constraint_rejections": [],
     "identity_resolution_basis": "new_candidate",
-    "original_hdb1_status": null,
+    "original_hdb1_status": "resolved_new_candidate",
     "rescue_attempted": false,
     "rescue_useful": false,
     "status": "resolved_new_candidate"
   },
+  "decision_options": [
+    {
+      "description": "确认这是一个独立人物候选。",
+      "key": "confirm_new_person",
+      "label": "确认新人物"
+    },
+    {
+      "description": "从下方候选中选择已有 Person。",
+      "key": "choose_existing_person",
+      "label": "这是已有的人物"
+    },
+    {
+      "description": "保留人物判断，但暂不确定身份。",
+      "key": "keep_unresolved",
+      "label": "确实是人物，但无法确定"
+    },
+    {
+      "description": "表达不是独立人物，或当前解析方向错误。",
+      "key": "not_person",
+      "label": "不是独立人物 / 系统判断有误"
+    },
+    {
+      "description": "标记来源、范围或解释需要复核。",
+      "key": "evidence_problem",
+      "label": "证据有问题"
+    }
+  ],
   "identity_observation_id": "hdb1-identity-0e305a2c3ea18042a7290268",
+  "materialization_impact": {
+    "affected_fact_ids": {
+      "Kinship": [
+        "hdb1-relation-dff8f162e369fd9fd7ebb637",
+        "hdb1-relation-a061731efa0f7b6e36610b3a"
+      ],
+      "Marriage": [
+        "hdb1-relation-5ccef350bc8ead56a724adc6"
+      ],
+      "OfficeTenures": [],
+      "PersonStory": [],
+      "Relations": [
+        "hdb1-relation-61417a67bb7fbd779b376967",
+        "hdb1-relation-dff8f162e369fd9fd7ebb637",
+        "hdb1-relation-a061731efa0f7b6e36610b3a",
+        "hdb1-relation-5ccef350bc8ead56a724adc6"
+      ]
+    },
+    "summary": [
+      {
+        "count": 1,
+        "kind": "Person",
+        "label": "+ 1 Person"
+      },
+      {
+        "count": 4,
+        "kind": "Relations",
+        "label": "+ 4 Relations"
+      },
+      {
+        "count": 2,
+        "kind": "Kinship",
+        "label": "+ 2 Kinship"
+      },
+      {
+        "count": 1,
+        "kind": "Marriage",
+        "label": "+ 1 Marriage"
+      }
+    ]
+  },
   "occurrence_id": "hdb2-occ-e67fb82c817745c3e806",
   "occurrence_type": "abbreviated_person_name",
   "priority": "P1",
@@ -141,8 +213,9 @@
   },
   "relevant_annotation_context": [],
   "review_id": "hdb2-review-043305e039897b8f31eb",
+  "review_question": "《傷逝第十七》008 中的「諸葛道明」是否应作为一个新的独立人物加入人物数据库？",
   "review_type": "candidate_person",
-  "schema": "hdb2-review-item-v1",
+  "schema": "hdb2-review-item-v2",
   "selected_evidence": [
     {
       "evidence_ref": "hdb2-shishuo-main-17-shangshi-008",
@@ -161,5 +234,7 @@
   "support_families": [
     "explicit_name"
   ],
-  "target_surface": "諸葛道明"
+  "system_summary": "系统认为这是一个具体人物，但无法可靠匹配当前已有 Person。",
+  "target_surface": "諸葛道明",
+  "why_review_needed": "现有人物目录没有可安全匹配的 Person；你的判断将决定是否保留为候选人物，或退回身份/人物类型复核。"
 }

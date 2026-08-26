@@ -18,7 +18,65 @@
       }
     ]
   },
-  "candidate_people": [],
+  "candidate_people": [
+    {
+      "candidate_key": "c0",
+      "display_name": "世祖文皇帝",
+      "person_id": null,
+      "rank": 1,
+      "semantic_type": "ruler_title",
+      "source": "h0a_ruler_registry"
+    },
+    {
+      "candidate_key": "c1",
+      "display_name": "世祖武皇帝",
+      "person_id": null,
+      "rank": 2,
+      "semantic_type": "ruler_title",
+      "source": "h0a_ruler_registry"
+    },
+    {
+      "candidate_key": "c2",
+      "display_name": "丙辰帝",
+      "person_id": null,
+      "rank": 3,
+      "semantic_type": "ruler_title",
+      "source": "h0a_ruler_registry"
+    },
+    {
+      "candidate_key": "c3",
+      "display_name": "中宗元皇帝",
+      "person_id": null,
+      "rank": 4,
+      "semantic_type": "ruler_title",
+      "source": "h0a_ruler_registry"
+    },
+    {
+      "candidate_key": "c4",
+      "display_name": "元皇帝",
+      "person_id": null,
+      "rank": 5,
+      "semantic_type": "ruler_title",
+      "source": "h0a_ruler_registry"
+    },
+    {
+      "candidate_key": "c5",
+      "display_name": "太宗簡文皇帝",
+      "person_id": null,
+      "rank": 6,
+      "semantic_type": "ruler_title",
+      "source": "h0a_ruler_registry"
+    },
+    {
+      "candidate_key": "c6",
+      "display_name": "蘇峻",
+      "person_id": "person-017",
+      "rank": 7,
+      "semantic_type": "person",
+      "source": "local_story_neighbor"
+    }
+  ],
+  "compositional_context": null,
   "current_state": {
     "candidate_only": true,
     "candidate_set": [],
@@ -29,21 +87,61 @@
       "ruler_reference_candidate_type_conflict"
     ],
     "identity_resolution_basis": "unresolved",
-    "original_hdb1_status": null,
+    "original_hdb1_status": "unresolved",
     "rescue_attempted": false,
     "rescue_useful": false,
     "status": "unresolved"
   },
+  "decision_options": [
+    {
+      "description": "从排名候选中确认官职/称号持有人。",
+      "key": "choose_existing_person",
+      "label": "选择已有的人物"
+    },
+    {
+      "description": "保留官职/称号表达，暂不绑定人物。",
+      "key": "keep_unresolved",
+      "label": "暂无法确定"
+    },
+    {
+      "description": "确认当前表达没有足够的人物指代。",
+      "key": "not_person",
+      "label": "不是人物指称"
+    },
+    {
+      "description": "标记时间、职官或引文需要复核。",
+      "key": "evidence_problem",
+      "label": "证据有问题"
+    }
+  ],
   "identity_observation_id": "hdb1-identity-53b3813c976ef1fe18967668",
+  "materialization_impact": {
+    "affected_fact_ids": {
+      "Kinship": [],
+      "Marriage": [],
+      "OfficeTenures": [],
+      "PersonStory": [],
+      "Relations": [
+        "hdb1-relation-b927c222c1a06c527e7802f3"
+      ]
+    },
+    "summary": [
+      {
+        "count": 1,
+        "kind": "Relations",
+        "label": "+ 1 Relations"
+      }
+    ]
+  },
   "occurrence_id": "hdb2-occ-0d3d3239b7e65ceb7e17",
-  "occurrence_type": "person_office_title",
+  "occurrence_type": "ruler_reference",
   "priority": "P2",
   "priority_score": 600,
   "proposed_identity": {
     "basis": "unresolved",
     "candidate_key": null,
     "candidate_person_id": null,
-    "label": null,
+    "label": "世祖文皇帝",
     "person_id": null,
     "status": "unresolved"
   },
@@ -52,18 +150,42 @@
     "(起兵衛帝室亮不聽下制曰妄起兵者誅故峻得作/興書曰初庾亮欲徵蘇峻卞壼不許温嶠及三吳欲)"
   ],
   "review_id": "hdb2-review-8541c1523dc0a36617f7",
-  "review_type": "identity",
-  "schema": "hdb2-review-item-v1",
+  "review_question": "这里的「帝」具体指哪位人物？",
+  "review_type": "office_or_title_holder",
+  "schema": "hdb2-review-item-v2",
   "selected_evidence": [
     {
-      "evidence_ref": "story:14-rongzhi-023",
+      "evidence_ref": "hdb2-shishuo-main-14-rongzhi-023",
       "exact_spans": [],
-      "excerpt": "石頭事故，朝廷傾覆。温忠武與庾文康投陶公求救，陶公云：“肅祖顧命不見及，且蘇峻作亂，釁由諸庾，誅其兄弟，不足以謝天下。”于時庾在温船後聞之，憂怖無計。别日，温勸庾見陶，庾猶豫未能徃。温曰：“溪狗我所悉，卿但見之，必無憂也！”庾風姿神貌，陶一見便改觀，談宴竟日，愛重頓至。",
+      "excerpt": "石頭事故朝廷傾覆\n\n温忠武與庾文康投陶公求救陶公云肅祖顧命不\n見及且蘇峻作亂釁由諸庾誅其兄弟不足以謝天\n下\n\n\n于時庾在温船後聞之憂怖無計别日温勸庾\n見陶庾猶豫未能徃温曰溪狗我所悉卿但見之必\n無憂也庾風姿神貌陶一見便改觀談宴竟日愛重\n頓至",
       "locator": {
+        "chapter": "容止第十四",
         "story_id": "14-rongzhi-023"
       },
       "source_layer": "main_text",
       "source_work": "世說正文"
+    },
+    {
+      "evidence_ref": "hdb2-shishuo-liu-14-rongzhi-023-annotation-002",
+      "exact_spans": [],
+      "excerpt": "(出山側大馬死小馬餓後峻遷帝於石頭御膳不具/人守衛靈鬼志謡徴曰明帝末有謡歌側側力放馬)",
+      "locator": {
+        "annotation_id": "annotation-002",
+        "story_id": "14-rongzhi-023"
+      },
+      "source_layer": "liu_annotation",
+      "source_work": "劉注"
+    },
+    {
+      "evidence_ref": "hdb2-shishuo-liu-14-rongzhi-023-annotation-004",
+      "exact_spans": [],
+      "excerpt": "(起兵衛帝室亮不聽下制曰妄起兵者誅故峻得作/興書曰初庾亮欲徵蘇峻卞壼不許温嶠及三吳欲)",
+      "locator": {
+        "annotation_id": "annotation-004",
+        "story_id": "14-rongzhi-023"
+      },
+      "source_layer": "liu_annotation",
+      "source_work": "劉注"
     }
   ],
   "story_context": "石頭事故，朝廷傾覆。温忠武與庾文康投陶公求救，陶公云：“肅祖顧命不見及，且蘇峻作亂，釁由諸庾，誅其兄弟，不足以謝天下。”于時庾在温船後聞之，憂怖無計。别日，温勸庾見陶，庾猶豫未能徃。温曰：“溪狗我所悉，卿但見之，必無憂也！”庾風姿神貌，陶一見便改觀，談宴竟日，愛重頓至。",
@@ -72,5 +194,7 @@
     "annotation_context",
     "social_context"
   ],
-  "target_surface": "帝"
+  "system_summary": "系统识别出官职、称号或帝王称谓，但承载该表达的人物仍需确认。",
+  "target_surface": "帝",
+  "why_review_needed": "官职/称号可能对应多位人物；需要结合当前给出的时间、任职、别名和社会证据，避免把角色表达直接当作 Person。"
 }

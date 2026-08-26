@@ -24,11 +24,29 @@ export interface HDB2ReviewIndex {
 }
 
 export interface HDB2CandidatePerson {
+  rank?: number;
   candidate_key: string | null;
   display_name: string;
   person_id: string | null;
   semantic_type?: string | null;
   source?: string | null;
+}
+
+export interface HDB2DecisionOption {
+  key: string;
+  label: string;
+  description: string;
+}
+
+export interface HDB2MaterializationImpactEntry {
+  kind: string;
+  count: number;
+  label: string;
+}
+
+export interface HDB2MaterializationImpact {
+  summary: HDB2MaterializationImpactEntry[];
+  affected_fact_ids: Record<string, string[]>;
 }
 
 export interface HDB2EvidenceItem {
@@ -58,6 +76,22 @@ export interface HDB2ReviewItem {
   priority: HDB2ReviewPriority;
   priority_score: number;
   review_type: HDB2ReviewType;
+  review_question: string;
+  system_summary: string;
+  why_review_needed: string;
+  decision_options: HDB2DecisionOption[];
+  materialization_impact: HDB2MaterializationImpact;
+  compositional_context: {
+    base_person: {
+      surface: string;
+      label: string;
+      person_id: string | null;
+    } | null;
+    relation_type: string | null;
+    relation_label: string | null;
+    relation_surface: string | null;
+    referent_candidates: HDB2CandidatePerson[];
+  } | null;
   occurrence_id: string;
   identity_observation_id: string;
   story_id: string;

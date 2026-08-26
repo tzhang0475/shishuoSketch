@@ -40,7 +40,17 @@
       }
     ]
   },
-  "candidate_people": [],
+  "candidate_people": [
+    {
+      "candidate_key": "c0",
+      "display_name": "王導",
+      "person_id": "person-003",
+      "rank": 1,
+      "semantic_type": "person",
+      "source": "local_story_neighbor"
+    }
+  ],
+  "compositional_context": null,
   "current_state": {
     "candidate_only": true,
     "candidate_set": [],
@@ -49,34 +59,78 @@
     "compositional_referent": null,
     "hard_constraint_rejections": [],
     "identity_resolution_basis": "unresolved",
-    "original_hdb1_status": null,
+    "original_hdb1_status": "unresolved",
     "rescue_attempted": false,
     "rescue_useful": false,
     "status": "ruler_reference"
   },
+  "decision_options": [
+    {
+      "description": "从排名候选中确认官职/称号持有人。",
+      "key": "choose_existing_person",
+      "label": "选择已有的人物"
+    },
+    {
+      "description": "保留官职/称号表达，暂不绑定人物。",
+      "key": "keep_unresolved",
+      "label": "暂无法确定"
+    },
+    {
+      "description": "确认当前表达没有足够的人物指代。",
+      "key": "not_person",
+      "label": "不是人物指称"
+    },
+    {
+      "description": "标记时间、职官或引文需要复核。",
+      "key": "evidence_problem",
+      "label": "证据有问题"
+    }
+  ],
   "identity_observation_id": "hdb1-identity-dc1c770aef6282a9186d99ca",
+  "materialization_impact": {
+    "affected_fact_ids": {
+      "Kinship": [],
+      "Marriage": [],
+      "OfficeTenures": [],
+      "PersonStory": [],
+      "Relations": [
+        "hdb1-relation-565e7ba93eb0d3ee5b420819",
+        "hdb1-relation-70ad6d36e6c260ac59ccc7bd",
+        "hdb1-relation-c990e633d277482578d9b188"
+      ]
+    },
+    "summary": [
+      {
+        "count": 3,
+        "kind": "Relations",
+        "label": "+ 3 Relations"
+      }
+    ]
+  },
   "occurrence_id": "hdb2-occ-e58e4e3438c69a7b9c7d",
-  "occurrence_type": "person_office_title",
+  "occurrence_type": "ruler_reference",
   "priority": "P1",
   "priority_score": 850,
   "proposed_identity": {
     "basis": "unresolved",
     "candidate_key": "c0",
     "candidate_person_id": null,
-    "label": null,
+    "label": "王導",
     "person_id": null,
     "status": "ruler_reference"
   },
   "relevant_annotation_context": [],
   "review_id": "hdb2-review-5d0cf1865b4eae8b3fe7",
-  "review_type": "identity",
-  "schema": "hdb2-review-item-v1",
+  "review_question": "这里的「明帝」具体指哪位人物？",
+  "review_type": "office_or_title_holder",
+  "schema": "hdb2-review-item-v2",
   "selected_evidence": [
     {
-      "evidence_ref": "story:33-youhui-007",
+      "evidence_ref": "hdb2-shishuo-main-33-youhui-007",
       "exact_spans": [],
-      "excerpt": "王導、温嶠俱見明帝，帝問温前世所以得天下之由。温未荅，頃，王曰：“温嶠年少未諳，臣爲陛下陳之。”王廼具叙宣王創業之始，誅夷名族，寵樹同已，及文王之末高貴鄉公事。明帝聞之，覆面箸牀曰：“若如公言，胙安得長！”",
+      "excerpt": "王導温嶠俱見明帝帝問温前世所以得天下之由\n温未荅頃王曰温嶠年少未諳臣爲陛下陳之王廼\n具叙宣王創業之始誅夷名族寵樹同已及文王之\n\n末高貴鄉公事明帝\n聞之覆面箸牀曰若如公言胙安得長",
       "locator": {
+        "chapter": "尤悔第三十三",
         "story_id": "33-youhui-007"
       },
       "source_layer": "main_text",
@@ -86,5 +140,7 @@
   "story_context": "王導、温嶠俱見明帝，帝問温前世所以得天下之由。温未荅，頃，王曰：“温嶠年少未諳，臣爲陛下陳之。”王廼具叙宣王創業之始，誅夷名族，寵樹同已，及文王之末高貴鄉公事。明帝聞之，覆面箸牀曰：“若如公言，胙安得長！”",
   "story_id": "33-youhui-007",
   "support_families": [],
-  "target_surface": "明帝"
+  "system_summary": "系统识别出官职、称号或帝王称谓，但承载该表达的人物仍需确认。",
+  "target_surface": "明帝",
+  "why_review_needed": "官职/称号可能对应多位人物；需要结合当前给出的时间、任职、别名和社会证据，避免把角色表达直接当作 Person。"
 }

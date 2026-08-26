@@ -19,6 +19,7 @@
     ]
   },
   "candidate_people": [],
+  "compositional_context": null,
   "current_state": {
     "candidate_only": true,
     "candidate_set": [],
@@ -27,14 +28,54 @@
     "compositional_referent": null,
     "hard_constraint_rejections": [],
     "identity_resolution_basis": "unresolved",
-    "original_hdb1_status": null,
+    "original_hdb1_status": "unresolved",
     "rescue_attempted": false,
     "rescue_useful": false,
     "status": "unresolved"
   },
+  "decision_options": [
+    {
+      "description": "从候选中选择最符合当前出现位置的 Person。",
+      "key": "choose_existing_person",
+      "label": "这是已有的人物"
+    },
+    {
+      "description": "保留人物判断，暂不绑定身份。",
+      "key": "keep_unresolved",
+      "label": "确实是人物，但无法确定"
+    },
+    {
+      "description": "确认当前表达不应作为单一人物处理。",
+      "key": "not_person",
+      "label": "不是独立人物 / 系统判断有误"
+    },
+    {
+      "description": "标记引文或候选证据需要复核。",
+      "key": "evidence_problem",
+      "label": "证据有问题"
+    }
+  ],
   "identity_observation_id": "hdb1-identity-d1729ccf678d0aa3925262a5",
+  "materialization_impact": {
+    "affected_fact_ids": {
+      "Kinship": [],
+      "Marriage": [],
+      "OfficeTenures": [],
+      "PersonStory": [],
+      "Relations": [
+        "hdb1-relation-5f0d5543d799e7e65fa4b046"
+      ]
+    },
+    "summary": [
+      {
+        "count": 1,
+        "kind": "Relations",
+        "label": "+ 1 Relations"
+      }
+    ]
+  },
   "occurrence_id": "hdb2-occ-7486c20972a35d3db40d",
-  "occurrence_type": "abbreviated_name",
+  "occurrence_type": "abbreviated_person_name",
   "priority": "P2",
   "priority_score": 600,
   "proposed_identity": {
@@ -47,14 +88,16 @@
   },
   "relevant_annotation_context": [],
   "review_id": "hdb2-review-eda6365f717ab9a70114",
+  "review_question": "这里的「王」具体指哪位人物？",
   "review_type": "identity",
-  "schema": "hdb2-review-item-v1",
+  "schema": "hdb2-review-item-v2",
   "selected_evidence": [
     {
-      "evidence_ref": "story:23-rendan-049",
+      "evidence_ref": "hdb2-shishuo-main-23-rendan-049",
       "exact_spans": [],
-      "excerpt": "王子猷出都，尚在渚下。舊聞桓子野善吹笛，而不相識。遇桓於岸上過，王在船中，客有識之者云：“是桓子野。”王便令人與相聞，云：“聞君善吹笛，試為我一奏。”桓時已貴顯，素聞王名，即便回下車，踞胡牀，為作三調。弄畢，便上車去。客主不交一言。",
+      "excerpt": "王子猷出都尚在渚下舊聞桓子野善吹笛\n\n\n而不相識遇桓於岸上過王在船中客有\n識之者云是桓子野王便令人與相聞云聞君善吹\n笛試為我一奏桓時已貴顯素聞王名即便回下車\n踞胡牀為作三調弄畢便上車去客主不交一言",
       "locator": {
+        "chapter": "任誕第二十三",
         "story_id": "23-rendan-049"
       },
       "source_layer": "main_text",
@@ -66,5 +109,7 @@
   "support_families": [
     "annotation_context"
   ],
-  "target_surface": "王"
+  "system_summary": "系统保留了当前文本中的候选人物和来源证据，但身份尚未达到可自动确认的门槛。",
+  "target_surface": "王",
+  "why_review_needed": "当前候选之间仍有歧义，或直接身份证据不足；需要人工选择已有 Person、保留未解析，或指出人物类型/证据问题。"
 }

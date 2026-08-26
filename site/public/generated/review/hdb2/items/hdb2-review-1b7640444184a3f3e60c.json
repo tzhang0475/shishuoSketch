@@ -76,6 +76,7 @@
     ]
   },
   "candidate_people": [],
+  "compositional_context": null,
   "current_state": {
     "candidate_only": true,
     "candidate_set": [],
@@ -84,14 +85,69 @@
     "compositional_referent": null,
     "hard_constraint_rejections": [],
     "identity_resolution_basis": "unresolved",
-    "original_hdb1_status": null,
+    "original_hdb1_status": "unresolved",
     "rescue_attempted": false,
     "rescue_useful": false,
     "status": "unresolved"
   },
+  "decision_options": [
+    {
+      "description": "从排名候选中确认官职/称号持有人。",
+      "key": "choose_existing_person",
+      "label": "选择已有的人物"
+    },
+    {
+      "description": "保留官职/称号表达，暂不绑定人物。",
+      "key": "keep_unresolved",
+      "label": "暂无法确定"
+    },
+    {
+      "description": "确认当前表达没有足够的人物指代。",
+      "key": "not_person",
+      "label": "不是人物指称"
+    },
+    {
+      "description": "标记时间、职官或引文需要复核。",
+      "key": "evidence_problem",
+      "label": "证据有问题"
+    }
+  ],
   "identity_observation_id": "hdb1-identity-f253183f67073d56f593b850",
+  "materialization_impact": {
+    "affected_fact_ids": {
+      "Kinship": [
+        "hdb1-relation-9de5b652022f89dee313bf14"
+      ],
+      "Marriage": [],
+      "OfficeTenures": [
+        "hdb1-relation-105c661c4bb5b32fac4ec3b7"
+      ],
+      "PersonStory": [],
+      "Relations": [
+        "hdb1-relation-9de5b652022f89dee313bf14",
+        "hdb1-relation-105c661c4bb5b32fac4ec3b7"
+      ]
+    },
+    "summary": [
+      {
+        "count": 2,
+        "kind": "Relations",
+        "label": "+ 2 Relations"
+      },
+      {
+        "count": 1,
+        "kind": "Kinship",
+        "label": "+ 1 Kinship"
+      },
+      {
+        "count": 1,
+        "kind": "OfficeTenures",
+        "label": "+ 1 OfficeTenures"
+      }
+    ]
+  },
   "occurrence_id": "hdb2-occ-0e5c9c9d423d6e1f0c4f",
-  "occurrence_type": "named_person",
+  "occurrence_type": "abbreviated_person_name",
   "priority": "P1",
   "priority_score": 900,
   "proposed_identity": {
@@ -106,22 +162,37 @@
     "(榮少朗俊機警風穎標徹歴廷尉正曾在省與同僚/遂氏焉世為呉著姓大父雍吳丞相父穆宜都太守)"
   ],
   "review_id": "hdb2-review-1b7640444184a3f3e60c",
-  "review_type": "compositional_kinship",
-  "schema": "hdb2-review-item-v1",
+  "review_question": "这里的「雍」具体指哪位人物？",
+  "review_type": "office_or_title_holder",
+  "schema": "hdb2-review-item-v2",
   "selected_evidence": [
     {
-      "evidence_ref": "story:01-dexing-025",
+      "evidence_ref": "hdb2-shishuo-main-01-dexing-025",
       "exact_spans": [],
-      "excerpt": "顧榮在洛陽，嘗應人請，覺行炙人有欲炙之色，因輟己施焉。同坐嗤之，榮曰：“豈有終日執之，而不知其味者乎？”後遭亂渡江，每經危急，常有一人左右己，問其所以，乃受炙人也。",
+      "excerpt": "顧榮在洛陽嘗應人請覺行炙人有欲炙之色因輟\n己施焉同坐嗤之榮曰豈有終日執之而不知其味\n\n者乎後遭亂渡江每經危急常有一人左右己問其\n所以乃受炙人也",
       "locator": {
+        "chapter": "德行第一",
         "story_id": "01-dexing-025"
       },
       "source_layer": "main_text",
       "source_work": "世說正文"
+    },
+    {
+      "evidence_ref": "hdb2-shishuo-liu-01-dexing-025-annotation-002",
+      "exact_spans": [],
+      "excerpt": "(榮少朗俊機警風穎標徹歴廷尉正曾在省與同僚/遂氏焉世為呉著姓大父雍吳丞相父穆宜都太守)",
+      "locator": {
+        "annotation_id": "annotation-002",
+        "story_id": "01-dexing-025"
+      },
+      "source_layer": "liu_annotation",
+      "source_work": "劉注"
     }
   ],
   "story_context": "顧榮在洛陽，嘗應人請，覺行炙人有欲炙之色，因輟己施焉。同坐嗤之，榮曰：“豈有終日執之，而不知其味者乎？”後遭亂渡江，每經危急，常有一人左右己，問其所以，乃受炙人也。",
   "story_id": "01-dexing-025",
   "support_families": [],
-  "target_surface": "雍"
+  "system_summary": "系统识别出官职、称号或帝王称谓，但承载该表达的人物仍需确认。",
+  "target_surface": "雍",
+  "why_review_needed": "官职/称号可能对应多位人物；需要结合当前给出的时间、任职、别名和社会证据，避免把角色表达直接当作 Person。"
 }

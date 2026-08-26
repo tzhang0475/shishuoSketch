@@ -58,6 +58,7 @@
       "candidate_key": "c0",
       "display_name": "王導",
       "person_id": "person-003",
+      "rank": 1,
       "semantic_type": "person",
       "source": "prior_contextual_occurrence"
     },
@@ -65,6 +66,7 @@
       "candidate_key": "c1",
       "display_name": "王敦",
       "person_id": "person-011",
+      "rank": 2,
       "semantic_type": "person",
       "source": "prior_contextual_occurrence"
     },
@@ -72,10 +74,12 @@
       "candidate_key": "c2",
       "display_name": "王廙",
       "person_id": "person-053",
+      "rank": 3,
       "semantic_type": "person",
       "source": "rescue_evidence_identity"
     }
   ],
+  "compositional_context": null,
   "current_state": {
     "candidate_only": true,
     "candidate_set": [
@@ -90,12 +94,59 @@
       "candidate_key_must_be_null_outside_candidate"
     ],
     "identity_resolution_basis": "unresolved",
-    "original_hdb1_status": null,
+    "original_hdb1_status": "unresolved",
     "rescue_attempted": true,
     "rescue_useful": true,
     "status": "unresolved"
   },
+  "decision_options": [
+    {
+      "description": "从排名候选中确认官职/称号持有人。",
+      "key": "choose_existing_person",
+      "label": "选择已有的人物"
+    },
+    {
+      "description": "保留官职/称号表达，暂不绑定人物。",
+      "key": "keep_unresolved",
+      "label": "暂无法确定"
+    },
+    {
+      "description": "确认当前表达没有足够的人物指代。",
+      "key": "not_person",
+      "label": "不是人物指称"
+    },
+    {
+      "description": "标记时间、职官或引文需要复核。",
+      "key": "evidence_problem",
+      "label": "证据有问题"
+    }
+  ],
   "identity_observation_id": "hdb1-identity-3e75a47b5214e12cc71700ff",
+  "materialization_impact": {
+    "affected_fact_ids": {
+      "Kinship": [],
+      "Marriage": [],
+      "OfficeTenures": [
+        "hdb1-relation-103a765934f6b52ee1978daf"
+      ],
+      "PersonStory": [],
+      "Relations": [
+        "hdb1-relation-103a765934f6b52ee1978daf"
+      ]
+    },
+    "summary": [
+      {
+        "count": 1,
+        "kind": "Relations",
+        "label": "+ 1 Relations"
+      },
+      {
+        "count": 1,
+        "kind": "OfficeTenures",
+        "label": "+ 1 OfficeTenures"
+      }
+    ]
+  },
   "occurrence_id": "hdb2-occ-d256197bac00193ef374",
   "occurrence_type": "title_reference",
   "priority": "P1",
@@ -112,8 +163,9 @@
     "(人累遷徐州刺史光禄勲與弟/含别傳曰含字處弘琅邪臨沂)"
   ],
   "review_id": "hdb2-review-d126c60a95432582de50",
-  "review_type": "compositional_kinship",
-  "schema": "hdb2-review-item-v1",
+  "review_question": "这里的「光禄勲」具体指哪位人物？",
+  "review_type": "office_or_title_holder",
+  "schema": "hdb2-review-item-v2",
   "selected_evidence": [
     {
       "evidence_ref": "hdb2-shishuo-main-02-yanyu-037",
@@ -197,5 +249,7 @@
   "story_context": "王敦兄含爲光禄勲。敦既逆謀，屯據南州，含委職奔姑孰。王丞相詣闕謝。司徒、丞相、揚州官僚問訊，倉卒不知何辭。顧司空時為揚州别駕，援翰曰：“王光禄逺避流言，明公蒙塵路次，羣下不寧，不審尊體起居何如？”",
   "story_id": "02-yanyu-037",
   "support_families": [],
-  "target_surface": "光禄勲"
+  "system_summary": "系统识别出官职、称号或帝王称谓，但承载该表达的人物仍需确认。",
+  "target_surface": "光禄勲",
+  "why_review_needed": "官职/称号可能对应多位人物；需要结合当前给出的时间、任职、别名和社会证据，避免把角色表达直接当作 Person。"
 }

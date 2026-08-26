@@ -31,6 +31,7 @@
     ]
   },
   "candidate_people": [],
+  "compositional_context": null,
   "current_state": {
     "candidate_only": true,
     "candidate_set": [],
@@ -39,14 +40,61 @@
     "compositional_referent": null,
     "hard_constraint_rejections": [],
     "identity_resolution_basis": "unresolved",
-    "original_hdb1_status": null,
+    "original_hdb1_status": "unresolved",
     "rescue_attempted": false,
     "rescue_useful": false,
     "status": "unresolved"
   },
+  "decision_options": [
+    {
+      "description": "从候选中选择最符合当前出现位置的 Person。",
+      "key": "choose_existing_person",
+      "label": "这是已有的人物"
+    },
+    {
+      "description": "保留人物判断，暂不绑定身份。",
+      "key": "keep_unresolved",
+      "label": "确实是人物，但无法确定"
+    },
+    {
+      "description": "确认当前表达不应作为单一人物处理。",
+      "key": "not_person",
+      "label": "不是独立人物 / 系统判断有误"
+    },
+    {
+      "description": "标记引文或候选证据需要复核。",
+      "key": "evidence_problem",
+      "label": "证据有问题"
+    }
+  ],
   "identity_observation_id": "hdb1-identity-a3875fc3d2b972d26e056de8",
+  "materialization_impact": {
+    "affected_fact_ids": {
+      "Kinship": [
+        "hdb1-relation-0d89d5edac5133a0896bb83a"
+      ],
+      "Marriage": [],
+      "OfficeTenures": [],
+      "PersonStory": [],
+      "Relations": [
+        "hdb1-relation-0d89d5edac5133a0896bb83a"
+      ]
+    },
+    "summary": [
+      {
+        "count": 1,
+        "kind": "Relations",
+        "label": "+ 1 Relations"
+      },
+      {
+        "count": 1,
+        "kind": "Kinship",
+        "label": "+ 1 Kinship"
+      }
+    ]
+  },
   "occurrence_id": "hdb2-occ-3c226c10dcec4661a115",
-  "occurrence_type": "named_person",
+  "occurrence_type": "abbreviated_person_name",
   "priority": "P1",
   "priority_score": 900,
   "proposed_identity": {
@@ -61,22 +109,37 @@
     "(歷安南將軍廣州剌史吏部尚書/祖端散騎常侍父鳯丞相主簿奉)"
   ],
   "review_id": "hdb2-review-1d2718d98167de304ac1",
-  "review_type": "compositional_kinship",
-  "schema": "hdb2-review-item-v1",
+  "review_question": "这里的「鳯」具体指哪位人物？",
+  "review_type": "identity",
+  "schema": "hdb2-review-item-v2",
   "selected_evidence": [
     {
-      "evidence_ref": "story:06-yaliang-033",
+      "evidence_ref": "hdb2-shishuo-main-06-yaliang-033",
       "exact_spans": [],
-      "excerpt": "謝安南免吏部尚書，還東，謝太傅赴桓公司馬，出西相遇破岡。既當逺别，遂停三日共語。太傅欲慰其失官，安南輒引以它端。雖信宿中塗，竟不言及此事。太傅深恨在心未盡，謂同舟曰：“謝奉故是竒士。”",
+      "excerpt": "謝安南免吏部尚書還東\n謝太傅赴桓公司\n馬出西相遇破岡既當逺别遂停三日共語太傅欲\n\n慰其失官安南輒引以它端雖信宿中塗竟不言及\n此事太傅深恨在心未盡謂同舟曰謝奉故是竒士",
       "locator": {
+        "chapter": "雅量第六",
         "story_id": "06-yaliang-033"
       },
       "source_layer": "main_text",
       "source_work": "世說正文"
+    },
+    {
+      "evidence_ref": "hdb2-shishuo-liu-06-yaliang-033-annotation-002",
+      "exact_spans": [],
+      "excerpt": "(歷安南將軍廣州剌史吏部尚書/祖端散騎常侍父鳯丞相主簿奉)",
+      "locator": {
+        "annotation_id": "annotation-002",
+        "story_id": "06-yaliang-033"
+      },
+      "source_layer": "liu_annotation",
+      "source_work": "劉注"
     }
   ],
   "story_context": "謝安南免吏部尚書，還東，謝太傅赴桓公司馬，出西相遇破岡。既當逺别，遂停三日共語。太傅欲慰其失官，安南輒引以它端。雖信宿中塗，竟不言及此事。太傅深恨在心未盡，謂同舟曰：“謝奉故是竒士。”",
   "story_id": "06-yaliang-033",
   "support_families": [],
-  "target_surface": "鳯"
+  "system_summary": "系统保留了当前文本中的候选人物和来源证据，但身份尚未达到可自动确认的门槛。",
+  "target_surface": "鳯",
+  "why_review_needed": "当前候选之间仍有歧义，或直接身份证据不足；需要人工选择已有 Person、保留未解析，或指出人物类型/证据问题。"
 }

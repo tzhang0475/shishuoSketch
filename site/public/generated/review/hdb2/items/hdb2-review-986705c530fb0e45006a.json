@@ -2,7 +2,19 @@
   "affected_facts": {
     "kinship": [],
     "marriage": [],
-    "office": [],
+    "office": [
+      {
+        "before_state": "single_endpoint_resolved",
+        "candidate_id": "hdb1-relation-599d9f96155d91d67664de61",
+        "evidence_ref": "hng2c1-shishuo-02-yanyu-078-liu-annotation-004",
+        "exact_span": "武帝任山公",
+        "newly_unblocked_candidate_fact": false,
+        "primary_blocker": "office_holder_unresolved",
+        "relation_class": "institutional",
+        "relation_surface": "任",
+        "state": "semantic_reference_blocked"
+      }
+    ],
     "person_story": [],
     "relations": [
       {
@@ -37,10 +49,31 @@
         "relation_class": "interaction",
         "relation_surface": "荅",
         "state": "semantic_reference_blocked"
+      },
+      {
+        "before_state": "single_endpoint_resolved",
+        "candidate_id": "hdb1-relation-599d9f96155d91d67664de61",
+        "evidence_ref": "hng2c1-shishuo-02-yanyu-078-liu-annotation-004",
+        "exact_span": "武帝任山公",
+        "newly_unblocked_candidate_fact": false,
+        "primary_blocker": "office_holder_unresolved",
+        "relation_class": "institutional",
+        "relation_surface": "任",
+        "state": "semantic_reference_blocked"
       }
     ]
   },
-  "candidate_people": [],
+  "candidate_people": [
+    {
+      "candidate_key": "c0",
+      "display_name": "山濤",
+      "person_id": "person-043",
+      "rank": 1,
+      "semantic_type": "person",
+      "source": "local_story_neighbor"
+    }
+  ],
+  "compositional_context": null,
   "current_state": {
     "candidate_only": true,
     "candidate_set": [],
@@ -49,34 +82,86 @@
     "compositional_referent": null,
     "hard_constraint_rejections": [],
     "identity_resolution_basis": "unresolved",
-    "original_hdb1_status": null,
+    "original_hdb1_status": "unresolved",
     "rescue_attempted": false,
     "rescue_useful": false,
     "status": "office_reference"
   },
+  "decision_options": [
+    {
+      "description": "从排名候选中确认官职/称号持有人。",
+      "key": "choose_existing_person",
+      "label": "选择已有的人物"
+    },
+    {
+      "description": "保留官职/称号表达，暂不绑定人物。",
+      "key": "keep_unresolved",
+      "label": "暂无法确定"
+    },
+    {
+      "description": "确认当前表达没有足够的人物指代。",
+      "key": "not_person",
+      "label": "不是人物指称"
+    },
+    {
+      "description": "标记时间、职官或引文需要复核。",
+      "key": "evidence_problem",
+      "label": "证据有问题"
+    }
+  ],
   "identity_observation_id": "hdb1-identity-3b32c48004077326b8dabe5e",
+  "materialization_impact": {
+    "affected_fact_ids": {
+      "Kinship": [],
+      "Marriage": [],
+      "OfficeTenures": [
+        "hdb1-relation-599d9f96155d91d67664de61"
+      ],
+      "PersonStory": [],
+      "Relations": [
+        "hdb1-relation-69d03f254ca99bd2b1094786",
+        "hdb1-relation-26f55e5edab610349a40e9e5",
+        "hdb1-relation-c66e37cf56f285a6b09f065e",
+        "hdb1-relation-599d9f96155d91d67664de61"
+      ]
+    },
+    "summary": [
+      {
+        "count": 4,
+        "kind": "Relations",
+        "label": "+ 4 Relations"
+      },
+      {
+        "count": 1,
+        "kind": "OfficeTenures",
+        "label": "+ 1 OfficeTenures"
+      }
+    ]
+  },
   "occurrence_id": "hdb2-occ-0716da549b132ab653d2",
-  "occurrence_type": "person_office_title",
+  "occurrence_type": "title_reference",
   "priority": "P1",
   "priority_score": 850,
   "proposed_identity": {
     "basis": "unresolved",
     "candidate_key": "c0",
     "candidate_person_id": null,
-    "label": null,
+    "label": "山濤",
     "person_id": null,
     "status": "office_reference"
   },
   "relevant_annotation_context": [],
   "review_id": "hdb2-review-986705c530fb0e45006a",
-  "review_type": "identity",
-  "schema": "hdb2-review-item-v1",
+  "review_question": "这里的「晉武帝」具体指哪位人物？",
+  "review_type": "office_or_title_holder",
+  "schema": "hdb2-review-item-v2",
   "selected_evidence": [
     {
-      "evidence_ref": "story:02-yanyu-078",
+      "evidence_ref": "hdb2-shishuo-main-02-yanyu-078",
       "exact_spans": [],
-      "excerpt": "晉武帝每餉山濤恒少。謝太傅以問子弟，車騎荅曰：“當由欲者不多，而使與者忘少。”",
+      "excerpt": "晉武帝每餉山濤恒少謝太傅以問子弟車騎\n荅曰當由欲者不多而使與者忘少",
       "locator": {
+        "chapter": "言語第二",
         "story_id": "02-yanyu-078"
       },
       "source_layer": "main_text",
@@ -86,5 +171,7 @@
   "story_context": "晉武帝每餉山濤恒少。謝太傅以問子弟，車騎荅曰：“當由欲者不多，而使與者忘少。”",
   "story_id": "02-yanyu-078",
   "support_families": [],
-  "target_surface": "晉武帝"
+  "system_summary": "系统识别出官职、称号或帝王称谓，但承载该表达的人物仍需确认。",
+  "target_surface": "晉武帝",
+  "why_review_needed": "官职/称号可能对应多位人物；需要结合当前给出的时间、任职、别名和社会证据，避免把角色表达直接当作 Person。"
 }

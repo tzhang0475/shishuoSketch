@@ -26,10 +26,79 @@
         "relation_class": "interaction",
         "relation_surface": "諌",
         "state": "existing_plus_candidate"
+      },
+      {
+        "before_state": "single_endpoint_resolved",
+        "candidate_id": "hdb1-relation-ecf318b77f147663815922b3",
+        "evidence_ref": "hng2c1-shishuo-10-guizhen-011-liu-annotation-002",
+        "exact_span": "江王導深以諌帝",
+        "newly_unblocked_candidate_fact": true,
+        "primary_blocker": null,
+        "relation_class": "interaction",
+        "relation_surface": "諌",
+        "state": "existing_plus_candidate"
       }
     ]
   },
-  "candidate_people": [],
+  "candidate_people": [
+    {
+      "candidate_key": "c0",
+      "display_name": "世祖文皇帝",
+      "person_id": null,
+      "rank": 1,
+      "semantic_type": "ruler_title",
+      "source": "h0a_ruler_registry"
+    },
+    {
+      "candidate_key": "c1",
+      "display_name": "世祖武皇帝",
+      "person_id": null,
+      "rank": 2,
+      "semantic_type": "ruler_title",
+      "source": "h0a_ruler_registry"
+    },
+    {
+      "candidate_key": "c2",
+      "display_name": "丙辰帝",
+      "person_id": null,
+      "rank": 3,
+      "semantic_type": "ruler_title",
+      "source": "h0a_ruler_registry"
+    },
+    {
+      "candidate_key": "c3",
+      "display_name": "中宗元皇帝",
+      "person_id": null,
+      "rank": 4,
+      "semantic_type": "ruler_title",
+      "source": "h0a_ruler_registry"
+    },
+    {
+      "candidate_key": "c4",
+      "display_name": "元皇帝",
+      "person_id": null,
+      "rank": 5,
+      "semantic_type": "ruler_title",
+      "source": "h0a_ruler_registry"
+    },
+    {
+      "candidate_key": "c5",
+      "display_name": "太宗簡文皇帝",
+      "person_id": null,
+      "rank": 6,
+      "semantic_type": "ruler_title",
+      "source": "h0a_ruler_registry"
+    },
+    {
+      "candidate_key": "c6",
+      "display_name": "王導",
+      "person_id": "person-003",
+      "rank": 7,
+      "semantic_type": "person",
+      "source": "local_story_neighbor"
+    }
+  ],
+  "compositional_context": null,
   "current_state": {
     "candidate_only": true,
     "candidate_set": [],
@@ -38,21 +107,63 @@
     "compositional_referent": null,
     "hard_constraint_rejections": [],
     "identity_resolution_basis": "new_candidate",
-    "original_hdb1_status": null,
+    "original_hdb1_status": "unresolved",
     "rescue_attempted": false,
     "rescue_useful": false,
     "status": "contextually_resolved"
   },
+  "decision_options": [
+    {
+      "description": "从排名候选中确认官职/称号持有人。",
+      "key": "choose_existing_person",
+      "label": "选择已有的人物"
+    },
+    {
+      "description": "保留官职/称号表达，暂不绑定人物。",
+      "key": "keep_unresolved",
+      "label": "暂无法确定"
+    },
+    {
+      "description": "确认当前表达没有足够的人物指代。",
+      "key": "not_person",
+      "label": "不是人物指称"
+    },
+    {
+      "description": "标记时间、职官或引文需要复核。",
+      "key": "evidence_problem",
+      "label": "证据有问题"
+    }
+  ],
   "identity_observation_id": "hdb1-identity-fd27c2b4e07b87ed1addca65",
+  "materialization_impact": {
+    "affected_fact_ids": {
+      "Kinship": [],
+      "Marriage": [],
+      "OfficeTenures": [],
+      "PersonStory": [],
+      "Relations": [
+        "hdb1-relation-0f72300f6406d4abbc4f86cd",
+        "hdb1-relation-606b7518804ad4d7f8d6f60d",
+        "hdb1-relation-ecf318b77f147663815922b3"
+      ]
+    },
+    "summary": [
+      {
+        "count": 3,
+        "kind": "Relations",
+        "label": "+ 3 Relations"
+      }
+    ]
+  },
   "occurrence_id": "hdb2-occ-37adb6ada94b5f214aea",
-  "occurrence_type": "person_office_title",
+  "occurrence_type": "ruler_reference",
   "priority": "P1",
   "priority_score": 850,
   "proposed_identity": {
     "basis": "new_candidate",
     "candidate_key": "c3",
     "candidate_person_id": "hdb2-candidate-person-85904e134292da69",
-    "label": null,
+    "label": "世祖文皇帝",
     "person_id": null,
     "status": "contextually_resolved"
   },
@@ -60,18 +171,31 @@
     "(遂不復飲克己復禮官修其方而中興之業隆焉/江王導深以諌帝乃令左右進觴飲而覆之自是)"
   ],
   "review_id": "hdb2-review-985a0b7b5d87f6d88738",
-  "review_type": "identity",
-  "schema": "hdb2-review-item-v1",
+  "review_question": "这里的「帝」具体指哪位人物？",
+  "review_type": "office_or_title_holder",
+  "schema": "hdb2-review-item-v2",
   "selected_evidence": [
     {
-      "evidence_ref": "story:10-guizhen-011",
+      "evidence_ref": "hdb2-shishuo-main-10-guizhen-011",
       "exact_spans": [],
-      "excerpt": "元帝過江猶好酒，王茂弘與帝有舊，常流涕諌。帝許之，命酌酒一酣，從是遂斷。",
+      "excerpt": "元帝過江猶好酒王茂弘與帝有舊常流涕諌帝許\n之命酌酒一酣從是遂斷",
       "locator": {
+        "chapter": "規箴第十",
         "story_id": "10-guizhen-011"
       },
       "source_layer": "main_text",
       "source_work": "世說正文"
+    },
+    {
+      "evidence_ref": "hdb2-shishuo-liu-10-guizhen-011-annotation-002",
+      "exact_spans": [],
+      "excerpt": "(遂不復飲克己復禮官修其方而中興之業隆焉/江王導深以諌帝乃令左右進觴飲而覆之自是)",
+      "locator": {
+        "annotation_id": "annotation-002",
+        "story_id": "10-guizhen-011"
+      },
+      "source_layer": "liu_annotation",
+      "source_work": "劉注"
     }
   ],
   "story_context": "元帝過江猶好酒，王茂弘與帝有舊，常流涕諌。帝許之，命酌酒一酣，從是遂斷。",
@@ -80,5 +204,7 @@
     "ruler_context",
     "social_context"
   ],
-  "target_surface": "帝"
+  "system_summary": "系统识别出官职、称号或帝王称谓，但承载该表达的人物仍需确认。",
+  "target_surface": "帝",
+  "why_review_needed": "官职/称号可能对应多位人物；需要结合当前给出的时间、任职、别名和社会证据，避免把角色表达直接当作 Person。"
 }
