@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"predicates\": [{\"predicate_id\": \"q0\", \"predicate\": \"IdentityContextSupport\", \"mention_id\": \"hdb2-occ-b7a013a69f60ff3c1062\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q1\", \"predicate\": \"CrossStoryIdentitySupport\", \"mention_id\": \"hdb2-occ-b7a013a69f60ff3c1062\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q2\", \"predicate\": \"IdentityContradiction\", \"mention_id\": \"hdb2-occ-b7a013a69f60ff3c1062\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q3\", \"predicate\": \"IdentityContextSupport\", \"mention_id\": \"hdb2-occ-b7a013a69f60ff3c1062\", \"other_mention_id\": null, \"candidate_key\": \"c1\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q4\", \"predicate\": \"CrossStoryIdentitySupport\", \"mention_id\": \"hdb2-occ-b7a013a69f60ff3c1062\", \"other_mention_id\": null, \"candidate_key\": \"c1\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q5\", \"predicate\": \"IdentityContradiction\", \"mention_id\": \"hdb2-occ-b7a013a69f60ff3c1062\", \"other_mention_id\": null, \"candidate_key\": \"c1\", \"value\": 0.5, \"evidence_ids\": []}], \"note\": \"The mention 劉令言 appears in story 09-pinzao-008. Candidate c0 is 劉令言 (no confirmed stories, no profile info beyond the name itself). Candidate c1 is 樂廣 with alias 劉令言 and confirmed story 09-pinzao-008. The evidence (ev0) shows 劉令言 as the speaker in the story, and ev2 shows 樂廣 as a known participant in the same story. However, the mention itself is 劉令言, and the story text distinguishes 劉令言 from 樂彦輔 (樂廣's courtesy name) — 劉令言 says \\\"樂彦輔我所敬\\\", referring to 樂廣 as a separate person. This suggests the mention 劉令言 is NOT 樂廣. However, the supplied evidence does not provide a specific identity link for either candidate beyond the alias match (ev0) and time compatibility (ev1), which per constraints are not identity support. No direct evidence supports or contradicts identity for either candidate in a specific way, so all values are neutral 0.5.\"}",
+              "name": "submit_hdb2_psl1_predicates"
+            },
+            "id": "call_00_OUyAl8ivrynKREHCaVex5743",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787848304,
+  "id": "08b9736a-a554-4e8a-815b-3db0a4772736",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 731,
+    "prompt_cache_hit_tokens": 768,
+    "prompt_cache_miss_tokens": 2734,
+    "prompt_tokens": 3502,
+    "prompt_tokens_details": {
+      "cached_tokens": 768
+    },
+    "total_tokens": 4233
+  }
+}
