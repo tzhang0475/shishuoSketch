@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"predicates\": [{\"predicate_id\": \"q0\", \"predicate\": \"IdentityContextSupport\", \"mention_id\": \"hdb2-occ-2fa565ac93cf02964512\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 1.0, \"evidence_ids\": [\"ev0\", \"ev4\"]}, {\"predicate_id\": \"q1\", \"predicate\": \"CrossStoryIdentitySupport\", \"mention_id\": \"hdb2-occ-2fa565ac93cf02964512\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q2\", \"predicate\": \"IdentityContradiction\", \"mention_id\": \"hdb2-occ-2fa565ac93cf02964512\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 0.0, \"evidence_ids\": []}, {\"predicate_id\": \"q3\", \"predicate\": \"IdentityContextSupport\", \"mention_id\": \"hdb2-occ-2fa565ac93cf02964512\", \"other_mention_id\": null, \"candidate_key\": \"c1\", \"value\": 0.0, \"evidence_ids\": [\"ev0\", \"ev3\"]}, {\"predicate_id\": \"q4\", \"predicate\": \"CrossStoryIdentitySupport\", \"mention_id\": \"hdb2-occ-2fa565ac93cf02964512\", \"other_mention_id\": null, \"candidate_key\": \"c1\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q5\", \"predicate\": \"IdentityContradiction\", \"mention_id\": \"hdb2-occ-2fa565ac93cf02964512\", \"other_mention_id\": null, \"candidate_key\": \"c1\", \"value\": 0.0, \"evidence_ids\": []}], \"note\": \"The mention \\\"謝太傅\\\" (surname 謝 + title 太傅) directly matches candidate c0 (謝安), whose titles include \\\"謝太傅\\\" and \\\"太傅\\\". The story text explicitly names 謝太傅 as the person asking his younger relatives about 山濤's gifts. Candidate c1 (山濤) is the object of the story (the one being given gifts), not the referent of 謝太傅. The story explicitly distinguishes 謝太傅 from 山濤, so c1 is contradicted as the referent of this mention. CrossStoryIdentitySupport is neutral (0.5) for both since no cross-story identity link is supplied beyond the same-story context.\"}",
+              "name": "submit_hdb2_psl1_predicates"
+            },
+            "id": "call_00_V3fMw0RIO2fpnuw1ZmAm4960",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787834386,
+  "id": "f61e9aea-baa6-4b9c-8cd9-d4d488f2341f",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 644,
+    "prompt_cache_hit_tokens": 1152,
+    "prompt_cache_miss_tokens": 3321,
+    "prompt_tokens": 4473,
+    "prompt_tokens_details": {
+      "cached_tokens": 1152
+    },
+    "total_tokens": 5117
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"predicates\": [{\"predicate_id\": \"q0\", \"predicate\": \"IdentityContextSupport\", \"mention_id\": \"hdb2-occ-0795eae205c40e66dc60\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q1\", \"predicate\": \"CrossStoryIdentitySupport\", \"mention_id\": \"hdb2-occ-0795eae205c40e66dc60\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q2\", \"predicate\": \"IdentityContradiction\", \"mention_id\": \"hdb2-occ-0795eae205c40e66dc60\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q3\", \"predicate\": \"IdentityContextSupport\", \"mention_id\": \"hdb2-occ-0795eae205c40e66dc60\", \"other_mention_id\": null, \"candidate_key\": \"c1\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q4\", \"predicate\": \"CrossStoryIdentitySupport\", \"mention_id\": \"hdb2-occ-0795eae205c40e66dc60\", \"other_mention_id\": null, \"candidate_key\": \"c1\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q5\", \"predicate\": \"IdentityContradiction\", \"mention_id\": \"hdb2-occ-0795eae205c40e66dc60\", \"other_mention_id\": null, \"candidate_key\": \"c1\", \"value\": 0.5, \"evidence_ids\": []}], \"note\": \"The mention is an office reference \\\"司空\\\" (office of Minister of Works) in story 08-shangyu-043. The reference structure identifies the anchor person as 王敦 and the office holder as 王敦 (holder=王敦). The surface \\\"司空\\\" is an office title. Candidate c0 is 王敦, candidate c1 is 劉琨. The main text says \\\"劉琨稱祖車騎爲朗詣曰少爲王敦所歎\\\" — 劉琨 is the subject praising 祖逖, and 王敦 is mentioned as someone who sighed about 祖逖. The office \\\"司空\\\" is not directly linked to either candidate in the supplied evidence for this specific mention. The liu annotation mentions \\\"與司空劉琨\\\" which links 司空 to 劉琨 (c1), but this is in the annotation context about 祖逖, not directly about the mention's office reference. The reference structure says holder=王敦, but the office \\\"司空\\\" is a title associated with 劉琨 (c1 has title 司空). However, the reference structure explicitly assigns holder=王敦 for this office reference. Since the supplied evidence does not provide a specific identity link for the office \\\"司空\\\" to either candidate in a way that clearly supports identity, and the reference structure's holder assignment conflicts with the title association, I return neutral 0.5 for all predicates. The cooccurrence of 王敦 and 劉琨 in the same story is not identity support per constraints. No direct evidence specifically links the \\\"司空\\\" office mention to either candidate's identity.\"}",
+              "name": "submit_hdb2_psl1_predicates"
+            },
+            "id": "call_00_xlblDIgwtYgdZWBCQcxK9745",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787834380,
+  "id": "6998ac2a-1e96-473c-a4e3-41ebb8575db7",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 836,
+    "prompt_cache_hit_tokens": 2048,
+    "prompt_cache_miss_tokens": 3213,
+    "prompt_tokens": 5261,
+    "prompt_tokens_details": {
+      "cached_tokens": 2048
+    },
+    "total_tokens": 6097
+  }
+}
