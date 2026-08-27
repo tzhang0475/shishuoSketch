@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"predicates\": [{\"predicate_id\": \"q0\", \"predicate\": \"IdentityContextSupport\", \"mention_id\": \"hdb2-occ-e10d5596b4ac857b191b\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q1\", \"predicate\": \"CrossStoryIdentitySupport\", \"mention_id\": \"hdb2-occ-e10d5596b4ac857b191b\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q2\", \"predicate\": \"IdentityContradiction\", \"mention_id\": \"hdb2-occ-e10d5596b4ac857b191b\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 0.5, \"evidence_ids\": []}], \"note\": \"The mention is an office_reference \\\"司空\\\" (office/title referent), not a direct person mention. The candidate c0 is 張華. Evidence ev0 and ev1 show 張華 as 司空 in the story context, and ev3 confirms 張華 held 司空 office in this story. However, the mention is an office reference (司空), not a direct mention of 張華 by name. The reference_head is \\\"司空\\\" which is an office, not a person name. There is no specific identity link between the office reference \\\"司空\\\" and the candidate 張華 beyond the general office-holder relationship. IdentityContextSupport requires specific identity link in the supplied context; the office reference does not directly name 張華. CrossStoryIdentitySupport requires specific cross-story identity evidence; none supplied beyond general office compatibility. No evidence contradicts the assignment either. All neutral at 0.5.\"}",
+              "name": "submit_hdb2_psl1_predicates"
+            },
+            "id": "call_00_iqjxyfGq1K5IRDVCeL8l6185",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787809639,
+  "id": "409bbe21-f267-4eb0-b04c-714c01af599a",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 464,
+    "prompt_cache_hit_tokens": 768,
+    "prompt_cache_miss_tokens": 1962,
+    "prompt_tokens": 2730,
+    "prompt_tokens_details": {
+      "cached_tokens": 768
+    },
+    "total_tokens": 3194
+  }
+}

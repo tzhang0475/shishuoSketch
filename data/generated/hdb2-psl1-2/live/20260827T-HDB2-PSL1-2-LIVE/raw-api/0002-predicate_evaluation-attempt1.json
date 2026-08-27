@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"predicates\": [{\"predicate_id\": \"q0\", \"predicate\": \"IdentityContextSupport\", \"mention_id\": \"hdb2-occ-e129e0c78094ceb79916\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q1\", \"predicate\": \"CrossStoryIdentitySupport\", \"mention_id\": \"hdb2-occ-e129e0c78094ceb79916\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q2\", \"predicate\": \"IdentityContradiction\", \"mention_id\": \"hdb2-occ-e129e0c78094ceb79916\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 0.5, \"evidence_ids\": []}], \"note\": \"The mention surface is \\\"阮光禄\\\" (title reference), while candidate c0 is 謝安 (aliases include 安, 安石, 謝, 謝安石, 髙靈). The reference head \\\"阮光禄\\\" does not match any candidate alias form. The story text mentions \\\"安石\\\" and \\\"思曠\\\" (謝安's courtesy names) but the mention itself is 阮光禄, a different person (阮裕). No supplied evidence directly links this mention to candidate c0. TimeCompatible is 1.0 but that alone is not identity support per constraints. All identity predicates remain neutral at 0.5 with no direct evidence.\"}",
+              "name": "submit_hdb2_psl1_predicates"
+            },
+            "id": "call_00_73mX20ECO203Kjm7A7iL3058",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787809628,
+  "id": "d08eba02-69ab-49ce-a6e0-19d5d19cdf7d",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 417,
+    "prompt_cache_hit_tokens": 1280,
+    "prompt_cache_miss_tokens": 1663,
+    "prompt_tokens": 2943,
+    "prompt_tokens_details": {
+      "cached_tokens": 1280
+    },
+    "total_tokens": 3360
+  }
+}
