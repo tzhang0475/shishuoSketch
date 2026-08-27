@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"predicates\": [{\"predicate_id\": \"q0\", \"predicate\": \"IdentityContextSupport\", \"mention_id\": \"hdb2-occ-850bea112c3664ee35d0\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q1\", \"predicate\": \"CrossStoryIdentitySupport\", \"mention_id\": \"hdb2-occ-850bea112c3664ee35d0\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q2\", \"predicate\": \"IdentityContradiction\", \"mention_id\": \"hdb2-occ-850bea112c3664ee35d0\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q3\", \"predicate\": \"IdentityContextSupport\", \"mention_id\": \"hdb2-occ-850bea112c3664ee35d0\", \"other_mention_id\": null, \"candidate_key\": \"c1\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q4\", \"predicate\": \"CrossStoryIdentitySupport\", \"mention_id\": \"hdb2-occ-850bea112c3664ee35d0\", \"other_mention_id\": null, \"candidate_key\": \"c1\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q5\", \"predicate\": \"IdentityContradiction\", \"mention_id\": \"hdb2-occ-850bea112c3664ee35d0\", \"other_mention_id\": null, \"candidate_key\": \"c1\", \"value\": 0.5, \"evidence_ids\": []}], \"note\": \"The mention \\\"石勒\\\" appears in the Liu annotation (ev1) as the person who captured 鄧攸 during the 永嘉 era. Candidate c0 is 石勒 himself — the mention surface matches the candidate name exactly, but this is a historical figure mentioned in the annotation as the captor of 鄧攸, not the protagonist of the story. The story is about 鄧攸 (c1). The mention \\\"石勒\\\" in the annotation refers to the historical figure 石勒 who captured 鄧攸. For c0 (石勒), the mention surface matches the candidate name exactly (AliasMatch=1.0 from ev1), and the temporal context is compatible (ev2), but there is no specific identity link beyond the name match in the annotation context — the annotation says 攸為石勒所獲, meaning 鄧攸 was captured by 石勒, which is a direct reference to the historical 石勒. However, IdentityContextSupport requires specific identity link from supplied evidence; the annotation directly names 石勒 as the captor, which does support that this mention refers to the historical figure 石勒 (c0). But per constraints, time/same-story are not identity support, and cooccurrence is not identity. The annotation ev1 directly names 石勒 as the person who captured 鄧攸 — this is a direct reference to the historical figure. However, since c0 has no confirmed stories and the mention is in an annotation about 鄧攸's capture, the evidence supports that the mention refers to 石勒 the historical figure. Yet the instruction says IdentityContextSupport should be positive only when the original text specifically supports the mention pointing to that candidate. The annotation ev1 explicitly names 石勒 as the captor, which is a direct identity link. I'll set q0 to 1.0 with ev1. For c1 (鄧攸), the mention \\\"石勒\\\" does not refer to 鄧攸 — the annotation clearly distinguishes 石勒 as the captor and 鄧攸 as the captive. So q3 (IdentityContextSupport for c1) should be low/contradicted. Actually the mention \\\"石勒\\\" in the annotation refers to the captor, not to 鄧攸. So for c1, this is a contradiction — the mention is 石勒, not 鄧攸. But IdentityContradiction requires supplied evidence explicitly opposing the assignment. The annotation clearly shows 石勒 ≠ 鄧攸 (they are distinct persons in the same sentence). So q5 (IdentityContradiction for c1) should be 1.0 with ev1. For c0, the mention \\\"石勒\\\" directly matches the candidate name in the annotation, so IdentityContextSupport=1.0 with ev1. CrossStoryIdentitySupport for both: no cross-story evidence supplied, so 0.5 neutral.\"}",
+              "name": "submit_hdb2_psl1_predicates"
+            },
+            "id": "call_00_tSMTWpQB8TFUBGCwzLvS8909",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787848291,
+  "id": "1d2a67dd-0203-42ce-b887-13976b1e4fc5",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 1089,
+    "prompt_cache_hit_tokens": 768,
+    "prompt_cache_miss_tokens": 2994,
+    "prompt_tokens": 3762,
+    "prompt_tokens_details": {
+      "cached_tokens": 768
+    },
+    "total_tokens": 4851
+  }
+}

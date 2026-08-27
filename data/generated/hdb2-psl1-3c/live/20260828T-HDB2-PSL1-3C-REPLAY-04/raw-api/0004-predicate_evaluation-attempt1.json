@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"predicates\": [{\"predicate_id\": \"q0\", \"predicate\": \"IdentityContextSupport\", \"mention_id\": \"hdb2-occ-3e766f9c401a30cd86b8\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q1\", \"predicate\": \"CrossStoryIdentitySupport\", \"mention_id\": \"hdb2-occ-3e766f9c401a30cd86b8\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q2\", \"predicate\": \"IdentityContradiction\", \"mention_id\": \"hdb2-occ-3e766f9c401a30cd86b8\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q3\", \"predicate\": \"IdentityContextSupport\", \"mention_id\": \"hdb2-occ-3e766f9c401a30cd86b8\", \"other_mention_id\": null, \"candidate_key\": \"c1\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q4\", \"predicate\": \"CrossStoryIdentitySupport\", \"mention_id\": \"hdb2-occ-3e766f9c401a30cd86b8\", \"other_mention_id\": null, \"candidate_key\": \"c1\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q5\", \"predicate\": \"IdentityContradiction\", \"mention_id\": \"hdb2-occ-3e766f9c401a30cd86b8\", \"other_mention_id\": null, \"candidate_key\": \"c1\", \"value\": 0.5, \"evidence_ids\": []}], \"note\": \"The mention surface is \\\"桓\\\" in story 09-pinzao-088. Candidate c0 is 朱伺 (aliases 仲文, 桓) and candidate c1 is 卞範之 (alias 謙). The deterministic AliasMatch gives c0=1.0 (reference_head_exact_form matches alias 桓) and c1=0.5. However, IdentityContextSupport and CrossStoryIdentitySupport require specific identity links from the supplied evidence. The evidence (ev0) shows the text \\\"桓玄時仲文入桓於庭中望見之\\\" — the mention \\\"桓\\\" here appears in context of 桓玄's era and 仲文 entering. The known participants (ev2) lists 朱伺 with relation \\\"望見\\\" and 卞範之 with \\\"same_story_identity_observation\\\". But per constraints, same-story co-occurrence and time compatibility are NOT identity support. No supplied evidence specifically links the mention \\\"桓\\\" to either candidate as the same person. The candidate profiles (ev3, ev4) appear swapped relative to the candidate keys (ev3 describes 卞範之 but is labeled c0 profile; ev4 describes 朱伺 but is labeled c1 profile), creating ambiguity. No direct identity link evidence exists, so all predicates are neutral 0.5.\"}",
+              "name": "submit_hdb2_psl1_predicates"
+            },
+            "id": "call_00_hkTu9bIF0CRyKnEDvUcj0078",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787848281,
+  "id": "ec5ec249-616a-47bc-963c-01e0d2f7100c",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 784,
+    "prompt_cache_hit_tokens": 768,
+    "prompt_cache_miss_tokens": 2241,
+    "prompt_tokens": 3009,
+    "prompt_tokens_details": {
+      "cached_tokens": 768
+    },
+    "total_tokens": 3793
+  }
+}

@@ -24,6 +24,24 @@ import hdb2_psl1_3_common as psl1_3  # noqa: E402
 from run_hdb2_psl1 import protected_hashes  # noqa: E402
 
 
+# PSL1.3C intentionally rebuilds the candidate-only HDB2-F profile
+# projections.  They are not semantic PSL1.3B inputs; keep the historical B
+# validator strict for every canonical/reviewed/frozen artifact while treating
+# only these two repaired projections as a versioned derived boundary.
+_REBUILT_CANDIDATE_PROFILES = {
+    "data/derived/hdb2-f-person-knowledge.json",
+    "data/derived/hdb2-f-candidate-person-knowledge.json",
+}
+
+
+def _frozen_b_hashes(value: Mapping[str, Any] | None) -> dict[str, str]:
+    return {
+        str(path): str(digest)
+        for path, digest in (value or {}).items()
+        if str(path) not in _REBUILT_CANDIDATE_PROFILES
+    }
+
+
 def _load(path: Path, default: Any = None) -> Any:
     return layer.read_json(path, default)
 
@@ -73,11 +91,11 @@ def _validate_run(run_dir: Path, errors: list[str]) -> dict[str, Any]:
     _validate_selection(selection, errors)
     if manifest.get("candidate_only") is not True or manifest.get("canonical_write_back") is not False:
         errors.append("manifest_safety_flags_invalid")
-    before = manifest.get("protected_hashes_before")
-    after = manifest.get("protected_hashes_after")
+    before = _frozen_b_hashes(manifest.get("protected_hashes_before"))
+    after = _frozen_b_hashes(manifest.get("protected_hashes_after"))
     if before != after:
         errors.append("protected_hashes_changed")
-    if after != protected_hashes():
+    if after != _frozen_b_hashes(protected_hashes()):
         errors.append("protected_hashes_do_not_match_current")
 
     packets = _validate_packets(run_dir, errors)

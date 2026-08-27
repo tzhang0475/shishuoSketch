@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"predicates\": [{\"predicate_id\": \"q0\", \"predicate\": \"IdentityContextSupport\", \"mention_id\": \"hdb2-occ-2d8a98a32f5aa3a9d56b\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q1\", \"predicate\": \"CrossStoryIdentitySupport\", \"mention_id\": \"hdb2-occ-2d8a98a32f5aa3a9d56b\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q2\", \"predicate\": \"IdentityContradiction\", \"mention_id\": \"hdb2-occ-2d8a98a32f5aa3a9d56b\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q3\", \"predicate\": \"IdentityContextSupport\", \"mention_id\": \"hdb2-occ-2d8a98a32f5aa3a9d56b\", \"other_mention_id\": null, \"candidate_key\": \"c1\", \"value\": 1.0, \"evidence_ids\": [\"ev1\", \"ev2\"]}, {\"predicate_id\": \"q4\", \"predicate\": \"CrossStoryIdentitySupport\", \"mention_id\": \"hdb2-occ-2d8a98a32f5aa3a9d56b\", \"other_mention_id\": null, \"candidate_key\": \"c1\", \"value\": 1.0, \"evidence_ids\": [\"ev1\", \"ev2\", \"ev4\"]}, {\"predicate_id\": \"q5\", \"predicate\": \"IdentityContradiction\", \"mention_id\": \"hdb2-occ-2d8a98a32f5aa3a9d56b\", \"other_mention_id\": null, \"candidate_key\": \"c1\", \"value\": 0.0, \"evidence_ids\": [\"ev1\", \"ev2\"]}], \"note\": \"The mention \\\"士龍\\\" in story 08-shangyu-020. Candidate c1 (陸機) has courtesy name 士龍 confirmed by ev1 (annotation: 士龍吳大司馬抗之第五子機同母之弟) and ev2 (陸士龍當今之顔淵), and ev4 confirms 陸機 as known participant in this story. Candidate c0 (士龍) has no profile evidence linking it to this specific mention beyond the alias match; no specific identity link in supplied evidence. No contradiction evidence for c1; the annotations positively identify 士龍 as 陸雲 (brother of 陸機), supporting c1's identity context. Cross-story support for c1 via confirmed_story_ids and ev4 same-story observation.\"}",
+              "name": "submit_hdb2_psl1_predicates"
+            },
+            "id": "call_00_hMXJaNUyazNuSj8dSfKX9640",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787848286,
+  "id": "10a3c09d-51d9-4623-8489-6329e1e9c35a",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 711,
+    "prompt_cache_hit_tokens": 768,
+    "prompt_cache_miss_tokens": 2668,
+    "prompt_tokens": 3436,
+    "prompt_tokens_details": {
+      "cached_tokens": 768
+    },
+    "total_tokens": 4147
+  }
+}

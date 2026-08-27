@@ -67,7 +67,16 @@ def _prior_story_ids() -> set[str]:
             path_text = str(path).lower()
             if "psl" not in path_text:
                 continue
-            if "hdb2-psl1-3b" in path_text or "hdb2_psl1_3b" in path_text:
+            # Later PSL1.3C validation is a replay of this frozen B sample;
+            # its isolated namespace must not be mistaken for an additional
+            # prior Story experiment when the historical B selector is
+            # rebuilt.
+            if any(token in path_text for token in (
+                "hdb2-psl1-3b",
+                "hdb2_psl1_3b",
+                "hdb2-psl1-3c",
+                "hdb2_psl1_3c",
+            )):
                 continue
             try:
                 result.update(STORY_ID_RE.findall(path.read_text(encoding="utf-8", errors="ignore")))

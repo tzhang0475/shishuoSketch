@@ -5,8 +5,10 @@ from __future__ import annotations
 
 import collections
 import json
+import re
 import sys
 import statistics
+from functools import lru_cache
 from pathlib import Path
 from typing import Any, Mapping, Sequence
 
@@ -21,6 +23,289 @@ import hdb2_occurrence_common as occ  # noqa: E402
 
 ENDPOINT_COMPLETE = {"both_existing_resolved", "existing_plus_candidate", "both_candidate_resolved"}
 RELATION_CLASSES = {"kinship", "marriage", "institutional"}
+PROFILE_FORM_STATUSES = {
+    "direct_existing",
+    "explicit_resolved",
+    "contextually_resolved",
+    "resolved_new_candidate",
+}
+PROFILE_FORM_TYPES = {"alias", "courtesy_name", "title", "observed_surface"}
+
+
+@lru_cache(maxsize=256)
+def _shishuo_story_context(story_id: str) -> str:
+    """Return already-registered story context for profile provenance checks.
+
+    This is a read-only integrity guard.  It does not retrieve new evidence
+    and it never changes a HDB2 decision.  The HDB1 identity row remains the
+    authoritative input; the context is used only to reject an apparent
+    catalogue match when the cited sentence explicitly names another bearer.
+    """
+    path = ROOT / "data/mentions/shishuo.json"
+    document = common.read_json(path, {}) or {}
+    contexts = {
+        str(row.get("context") or "")
+        for row in document.get("mentions", []) or []
+        if str(row.get("source_id") or "") == story_id and row.get("context")
+    }
+    return "\n".join(sorted(contexts, key=lambda value: (-len(value), value)))
+
+
+def _catalog_forms(person: Mapping[str, Any]) -> set[str]:
+    values: list[Any] = [person.get("canonical_name")]
+    values.extend(person.get("forms", []) or [])
+    values.extend(person.get("alias_forms", []) or [])
+    values.extend(person.get("canonical_forms", []) or [])
+    values.extend(person.get("courtesy_forms", []) or [])
+    values.extend(person.get("office_titles", []) or [])
+    return {str(value) for value in values if value}
+
+
+def _identity_subjects(context: str, surface: str) -> set[str]:
+    """Find explicit X字Y/諱Y/號Y statements bearing the supplied surface."""
+    if not context or not surface:
+        return set()
+    escaped = re.escape(surface)
+    result: set[str] = set()
+    # Only inspect the subject side (X字Y).  Looking at the suffix side of
+    # ``X字Y`` would make a target X appear to be identified by Y and, for a
+    # short surface such as 謙, could mistake 敬祖 for the target's bearer.
+    # ``名`` is intentionally excluded here: in prose such as 名王丞相 it is
+    # often an ordinary noun/verb rather than the name marker in a biography.
+    pattern = rf"(?P<prefix>[\u3400-\u9fff]{{1,8}})[，,、\s]*[字諱號号][：:，,、\s]*{escaped}"
+    for match in re.finditer(pattern, context):
+        raw = str(match.group("prefix") or "")
+        # Strip common citation prose before the final source-local name.  We
+        # do not fuzzy-normalize the source; this is only a lexical context
+        # boundary used by the profile integrity guard.
+        cut = max(raw.rfind(marker) for marker in ("曰", "云", "謂", "稱") if marker in raw) if any(marker in raw for marker in ("曰", "云", "謂", "稱")) else -1
+        subject = raw[cut + 1:] if cut >= 0 else raw
+        if subject.endswith("小"):
+            subject = subject[:-1]
+        if subject:
+            result.add(subject)
+    result.discard(surface)
+    return result
+
+
+def _expanded_forms_in_context(context: str, surface: str, catalog: Mapping[str, Mapping[str, Any]]) -> set[str]:
+    """Return known longer person forms which contain a short surface.
+
+    This prevents a short catalogue courtesy name from being copied from a
+    sentence such as 殷仲文 into an unrelated profile.  It is deliberately
+    limited to forms already present in the canonical catalogue.
+    """
+    if not context or not surface or len(surface) > 2:
+        return set()
+    result: set[str] = set()
+    for person in catalog.values():
+        for form in _catalog_forms(person):
+            if len(form) <= len(surface) or not form.endswith(surface):
+                continue
+            if form in context:
+                result.add(form)
+        # A source can explicitly name a person with a surname plus a
+        # courtesy form that is not yet in the catalogue.  Only use a
+        # registered surname as the lexical guard; arbitrary preceding CJK
+        # characters would reject valid comparison/quotation contexts.
+        surname = str(person.get("surname") or "")
+        if surname and f"{surname}{surface}" in context:
+            result.add(f"{surname}{surface}")
+    return result
+
+
+def _source_longer_forms(context: str, surface: str) -> set[str]:
+    """Return short-form bearers explicitly visible in the source context.
+
+    This is deliberately a lexical guard, not an identity resolver.  A short
+    form such as 謙 can occur inside 桓謙, while a form such as 羲之 may also be
+    introduced by an explicit ``小字羲之`` statement.  The caller compares
+    these source forms with the candidate's registered forms and keeps the
+    evidence fail-closed when the bearer is different or unknown.
+    """
+    if not context or not surface or len(surface) > 3:
+        return set()
+    result: set[str] = set()
+    escaped = re.escape(surface)
+    for match in re.finditer(escaped, context):
+        start, end = match.span()
+        # Keep only a compact CJK prefix.  It captures surname-plus-short
+        # name/courtesy forms without treating arbitrary prose as a person.
+        for width in range(1, min(4, start) + 1):
+            prefix = context[start - width:start]
+            if not all("\u3400" <= char <= "\u9fff" for char in prefix):
+                continue
+            following = context[end:end + 2]
+            # A lexical person form is normally closed by punctuation or a
+            # source grammar boundary.  ``小字`` is included for constructions
+            # such as 逸少羲之小字羲之.
+            if not following or following[0] in "，,。！？；：:、（）()[]【】/\\ \n\t比與和如曰時时入於于為爲小":
+                result.add(prefix + surface)
+    return result
+
+
+def _explicit_small_name_marker(context: str, surface: str) -> bool:
+    """Recognize the explicit ``小字X`` form without guessing its bearer."""
+    if not context or not surface:
+        return False
+    return bool(re.search(rf"小字\s*{re.escape(surface)}", context))
+
+
+def _profile_form_is_source_supported(
+    decision: Mapping[str, Any],
+    source_row: Mapping[str, Any] | None,
+    catalog: Mapping[str, Mapping[str, Any]],
+) -> bool:
+    """Gate profile forms on an exact occurrence identity decision.
+
+    A HDB2 status alone is not sufficient: older HDB2 projection logic could
+    turn an unresolved HDB1 observation into ``explicit_resolved`` merely
+    because a surface happened to be present in a catalogue profile.  For an
+    existing Person, require the original HDB1 row to be the same resolved
+    Person, or require an explicitly identity-bearing HDB2/contextual path.
+    """
+    status = str(decision.get("status") or "")
+    target = str(decision.get("resolved_person_id") or decision.get("candidate_person_id") or "")
+    if not target or status not in PROFILE_FORM_STATUSES:
+        return False
+    source_status = str((source_row or {}).get("identity_status") or "")
+    source_person = str((source_row or {}).get("resolved_person_id") or "")
+    source_basis = str((source_row or {}).get("identity_resolution_basis") or "")
+    decision_basis = str(decision.get("identity_resolution_basis") or "")
+    basis = decision_basis or source_basis
+    surface = str(decision.get("surface") or "")
+    evidence_ref = str(decision.get("evidence_ref") or "")
+    exact_span = str(decision.get("exact_span") or (source_row or {}).get("exact_span") or "")
+    if not surface or not evidence_ref or not decision.get("occurrence_id") or not decision.get("identity_observation_id"):
+        return False
+    if source_row:
+        source_ref = str(source_row.get("evidence_ref") or "")
+        source_span = str(source_row.get("exact_span") or "")
+        if source_ref and source_ref != evidence_ref:
+            return False
+        if source_span and surface not in source_span:
+            return False
+    if exact_span and surface not in exact_span:
+        return False
+    context = _shishuo_story_context(str(decision.get("story_id") or ""))
+
+    def source_mentions_surface() -> bool:
+        # ``evidence_ref``/``exact_span`` remain provenance fields on the
+        # resulting form.  This additional check prevents a resolver result
+        # from becoming profile evidence when its surface was never visible
+        # in the already-registered Story/annotation context.
+        return bool(
+            (exact_span and surface in exact_span)
+            or (source_row and surface in str(source_row.get("exact_span") or ""))
+            or (context and surface in context)
+        )
+
+    def catalogue_exact_form() -> bool:
+        return bool(surface and surface in _catalog_forms(catalog.get(target, {})))
+
+    if target.startswith("person-"):
+        if source_status == "resolved_existing" and source_person == target:
+            supported = True
+        elif status == "direct_existing":
+            # Direct HDB2 replay records normally arrive from an HDB1 direct
+            # row above.  If a legacy row is absent, accept only a source-
+            # grounded direct basis; never infer a form from an empty status.
+            supported = basis in {"catalogue_exact_match", "evidence_identity_assertion"} and source_mentions_surface()
+        elif status == "explicit_resolved":
+            # Explicit source identity assertions are stronger than a
+            # catalogue lookup and may legitimately support a short form such
+            # as 羲之.  A catalogue-only match still needs an exact registered
+            # catalogue form and visible local bearer.
+            supported = (
+                basis == "evidence_identity_assertion"
+                and source_mentions_surface()
+            ) or (
+                basis == "catalogue_exact_match"
+                and catalogue_exact_form()
+                and source_mentions_surface()
+            )
+        elif status == "contextually_resolved":
+            support = set(str(value) for value in decision.get("support_families", []) or [])
+            supported = bool(
+                decision.get("direct_identity_support")
+                or basis == "evidence_identity_assertion"
+                or support & {"explicit_name", "annotation_context"}
+            ) and source_mentions_surface()
+        else:
+            # Do not let a HDB2 catalogue lookup upgrade an unresolved/new HDB1
+            # observation into profile identity evidence.
+            return False
+
+        if not supported:
+            return False
+
+        # Short/courtesy forms require a local bearer check even when the
+        # upstream row calls the result direct.  An explicit name marker (for
+        # example 小字羲之) is source evidence in its own right; otherwise a
+        # longer source form such as 桓謙 must belong to this same profile.
+        if surface and context and len(surface) <= 3:
+            target_forms = _catalog_forms(catalog.get(target, {}))
+            identity_subjects = _identity_subjects(context, surface)
+            explicit_small_name = _explicit_small_name_marker(context, surface)
+            target_form_keys = {occ.matching(form) for form in target_forms if form}
+            identity_subject_matches = any(
+                occ.matching(subject) in target_form_keys
+                or any(
+                    len(occ.matching(subject)) >= 1
+                    and occ.matching(form).endswith(occ.matching(subject))
+                    for form in target_forms
+                    if form
+                )
+                for subject in identity_subjects
+                if subject
+            )
+            if identity_subjects and not identity_subject_matches and not explicit_small_name:
+                return False
+            longer_forms = _expanded_forms_in_context(context, surface, catalog)
+            if longer_forms and not any(form in target_forms for form in longer_forms) and not identity_subject_matches:
+                if not explicit_small_name:
+                    return False
+            if len(surface) <= 2:
+                source_longer_forms = _source_longer_forms(context, surface)
+                if source_longer_forms and not any(
+                    any(occ.matching(form) == occ.matching(target_form) for target_form in target_forms)
+                    for form in source_longer_forms
+                ) and not identity_subject_matches and not explicit_small_name:
+                    return False
+        return True
+    # Candidate profiles may retain a directly observed named candidate, but
+    # still never inherit unresolved/cross-participant surfaces.
+    return status == "resolved_new_candidate" and source_status in {"resolved_new_candidate", "resolved_existing"} and source_mentions_surface()
+
+
+def _profile_identity_basis(
+    decision: Mapping[str, Any],
+    source_row: Mapping[str, Any] | None,
+) -> str:
+    """Return an auditable basis, never an empty/implicit provenance label."""
+    basis = str(decision.get("identity_resolution_basis") or (source_row or {}).get("identity_resolution_basis") or "")
+    if basis in {"catalogue_exact_match", "evidence_identity_assertion", "contextual_name_projection", "new_candidate", "unresolved"}:
+        return basis
+    status = str(decision.get("status") or "")
+    if status == "resolved_new_candidate":
+        return "new_candidate"
+    if status == "contextually_resolved":
+        return "contextual_name_projection"
+    if status in {"direct_existing", "explicit_resolved"}:
+        return "catalogue_exact_match"
+    return "unresolved"
+
+
+def _profile_form_type(decision: Mapping[str, Any], source_row: Mapping[str, Any] | None) -> str:
+    occurrence_type = str(decision.get("occurrence_type") or "")
+    reference_form = str((source_row or {}).get("reference_form") or "")
+    if occurrence_type in {"courtesy_name_reference", "courtesy"} or reference_form in {"courtesy", "courtesy_name"}:
+        return "courtesy_name"
+    if occurrence_type in {"title_reference", "office_reference", "ruler_reference"} or reference_form in {"office_title", "title", "ruler_title"}:
+        return "title"
+    if str(decision.get("surface") or "") == str(decision.get("candidate_label") or ""):
+        return "observed_surface"
+    return "alias"
 
 
 def _prior_case_maps() -> tuple[dict[str, dict[str, Any]], dict[str, dict[str, Any]], dict[str, dict[str, Any]]]:
@@ -400,7 +685,7 @@ def build_knowledge(decisions: Sequence[Mapping[str, Any]], relation_rows: Seque
         return {
             "person_id": pid,
             "canonical_name": name,
-            "identity": {"observed_surfaces": [], "aliases": [], "courtesy_names": [], "titles": [], "occurrence_ids": [], "identity_evidence": []},
+            "identity": {"observed_surfaces": [], "aliases": [], "courtesy_names": [], "titles": [], "occurrence_ids": [], "identity_evidence": [], "form_provenance": []},
             "story_presence": {"story_ids": [], "roles": [], "main_text_occurrences": [], "annotation_occurrences": []},
             "family": {"kinship_candidates": [], "marriage_candidates": []},
             "offices": {"office_candidates": []},
@@ -421,14 +706,33 @@ def build_knowledge(decisions: Sequence[Mapping[str, Any]], relation_rows: Seque
             item = by_pid.setdefault(target, empty(target, str(catalog.get(target, {}).get("canonical_name") or target)))
         else:
             item = candidate_by_id.setdefault(target, empty(target, str(decision.get("candidate_label") or decision.get("surface") or target)))
+        source_row = identity_rows.get(str(decision.get("identity_observation_id")))
+        if not _profile_form_is_source_supported(decision, source_row, catalog):
+            # Identity decisions can still be retained by the occurrence and
+            # relation projections.  They are not profile-form evidence until
+            # the exact occurrence itself supports this Person.
+            continue
         surface = str(decision.get("surface") or "")
+        form_type = _profile_form_type(decision, source_row)
+        identity_basis = _profile_identity_basis(decision, source_row)
+        provenance = {
+            "surface": surface,
+            "form_type": form_type,
+            "person_id": target,
+            "occurrence_id": decision.get("occurrence_id"),
+            "identity_observation_id": decision.get("identity_observation_id"),
+            "evidence_ref": decision.get("evidence_ref"),
+            "identity_status": decision.get("status"),
+            "identity_basis": identity_basis,
+        }
+        item["identity"]["form_provenance"].append(provenance)
         item["identity"]["observed_surfaces"].append(surface)
         item["identity"]["occurrence_ids"].append(decision.get("occurrence_id"))
-        item["identity"]["identity_evidence"].append({"observation_id": decision.get("identity_observation_id"), "evidence_ref": decision.get("evidence_ref"), "exact_span": decision.get("exact_span"), "basis": decision.get("identity_resolution_basis"), "status": decision.get("status")})
+        item["identity"]["identity_evidence"].append({"observation_id": decision.get("identity_observation_id"), "evidence_ref": decision.get("evidence_ref"), "exact_span": decision.get("exact_span"), "basis": identity_basis, "status": decision.get("status")})
         typ = types.get(str(decision.get("identity_observation_id")), "unclear")
-        if typ in {"courtesy_name_reference", "courtesy"}:
+        if form_type == "courtesy_name":
             item["identity"]["courtesy_names"].append(surface)
-        elif typ in {"title_reference", "office_reference", "ruler_reference"}:
+        elif form_type == "title":
             item["identity"]["titles"].append(surface)
         elif surface and surface != item.get("canonical_name"):
             item["identity"]["aliases"].append(surface)

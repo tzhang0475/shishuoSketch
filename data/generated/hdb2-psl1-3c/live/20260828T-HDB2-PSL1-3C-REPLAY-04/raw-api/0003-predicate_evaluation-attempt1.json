@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"predicates\": [{\"predicate_id\": \"q0\", \"predicate\": \"IdentityContextSupport\", \"mention_id\": \"hdb2-occ-112d445decb94b37b438\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q1\", \"predicate\": \"CrossStoryIdentitySupport\", \"mention_id\": \"hdb2-occ-112d445decb94b37b438\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q2\", \"predicate\": \"IdentityContradiction\", \"mention_id\": \"hdb2-occ-112d445decb94b37b438\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q3\", \"predicate\": \"IdentityContextSupport\", \"mention_id\": \"hdb2-occ-112d445decb94b37b438\", \"other_mention_id\": null, \"candidate_key\": \"c1\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q4\", \"predicate\": \"CrossStoryIdentitySupport\", \"mention_id\": \"hdb2-occ-112d445decb94b37b438\", \"other_mention_id\": null, \"candidate_key\": \"c1\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q5\", \"predicate\": \"IdentityContradiction\", \"mention_id\": \"hdb2-occ-112d445decb94b37b438\", \"other_mention_id\": null, \"candidate_key\": \"c1\", \"value\": 0.5, \"evidence_ids\": []}], \"note\": \"The mention \\\"殷荆州\\\" appears in story 06-yaliang-041. Candidate c0 is \\\"殷荆州\\\" (no confirmed stories, no profile details). Candidate c1 is \\\"王恭\\\" with aliases including \\\"殷荆州\\\" and confirmed stories including 06-yaliang-041. The story text mentions both 殷荆州 and 王恭 as distinct participants (王恭 is addressed separately in the text). The mention surface \\\"殷荆州\\\" matches c0's name exactly (AliasMatch=1.0) and c1's alias list also includes \\\"殷荆州\\\" (AliasMatch=1.0). However, the story text treats 殷荆州 and 王恭 as separate people interacting with each other, so the mention \\\"殷荆州\\\" cannot be the same as 王恭 (c1) in this story context. For c0, there is no specific identity link evidence beyond the name match and temporal compatibility; no direct evidence supports or contradicts identity. For c1, the story text explicitly distinguishes 殷荆州 from 王恭, which could be seen as context support against identity, but the supplied evidence does not explicitly state they are different people in a way that constitutes IdentityContradiction. Given the constraints (cooccurrence is not identity, time/same-story are not identity support), all predicates remain neutral at 0.5 with no direct evidence.\"}",
+              "name": "submit_hdb2_psl1_predicates"
+            },
+            "id": "call_00_j6MjcrN0cFeZjpxyT6bB3168",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787848275,
+  "id": "32278771-6603-42ba-8831-2b9619c95b58",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 774,
+    "prompt_cache_hit_tokens": 768,
+    "prompt_cache_miss_tokens": 2649,
+    "prompt_tokens": 3417,
+    "prompt_tokens_details": {
+      "cached_tokens": 768
+    },
+    "total_tokens": 4191
+  }
+}

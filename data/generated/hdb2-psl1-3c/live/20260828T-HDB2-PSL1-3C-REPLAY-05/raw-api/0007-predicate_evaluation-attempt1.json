@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"predicates\": [{\"predicate_id\": \"q0\", \"predicate\": \"IdentityContextSupport\", \"mention_id\": \"hdb2-occ-fb723490703592e4ffec\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q1\", \"predicate\": \"CrossStoryIdentitySupport\", \"mention_id\": \"hdb2-occ-fb723490703592e4ffec\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q2\", \"predicate\": \"IdentityContradiction\", \"mention_id\": \"hdb2-occ-fb723490703592e4ffec\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 0.5, \"evidence_ids\": []}], \"note\": \"The mention 潁 refers to 王導's second brother (潁, courtesy name 茂英), who did not cross the river. The candidate c0 is 鄧攸 (鄧伯道). The text compares 潁 to 鄧伯道 (時論以潁比鄧伯道), which is a comparison, not identity. The alias list for c0 includes 潁, but the evidence shows 潁 is a separate person (王丞相二弟), not 鄧攸. However, the supplied evidence does not provide a specific identity link between the mention 潁 and candidate 鄧攸; the comparison \\\"比\\\" indicates they are distinct people being compared. The deterministic AliasMatch gave 1.0 based on reference_head_exact_form (潁 appears in c0's aliases), but the actual text context shows 潁 is 王導's brother, distinct from 鄧攸. Since the supplied evidence does not explicitly contradict the assignment (no direct evidence that 潁 is NOT 鄧攸 beyond the comparison context), and there is no positive identity link, all three predicates are neutral at 0.5. The comparison \\\"比\\\" in the text suggests distinctness but is not a direct contradiction of identity per the supplied evidence.\"}",
+              "name": "submit_hdb2_psl1_predicates"
+            },
+            "id": "call_00_SGkc4DobmrS5uROUalHF8640",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787848299,
+  "id": "4d2f11b6-9d98-4c53-8cf5-9078ca8298bd",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 535,
+    "prompt_cache_hit_tokens": 768,
+    "prompt_cache_miss_tokens": 1893,
+    "prompt_tokens": 2661,
+    "prompt_tokens_details": {
+      "cached_tokens": 768
+    },
+    "total_tokens": 3196
+  }
+}
