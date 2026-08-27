@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"predicates\": [{\"predicate_id\": \"q0\", \"predicate\": \"IdentityContextSupport\", \"mention_id\": \"hdb2-occ-e58e4e3438c69a7b9c7d\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 1.0, \"evidence_ids\": [\"ev0\", \"ev1\"]}, {\"predicate_id\": \"q1\", \"predicate\": \"CrossStoryIdentitySupport\", \"mention_id\": \"hdb2-occ-e58e4e3438c69a7b9c7d\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q2\", \"predicate\": \"IdentityContradiction\", \"mention_id\": \"hdb2-occ-e58e4e3438c69a7b9c7d\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 0.0, \"evidence_ids\": []}], \"note\": \"The mention \\\"明帝\\\" in story 33-youhui-007 refers to the Jin emperor. The candidate c0 is 晉明帝 (肅宗明皇帝). ev0 shows the text where 明帝 is addressed as 陛下 and is the emperor being questioned about the founding of the dynasty. ev1 provides the h0a context confirming the ruler_context_id for 肅宗明皇帝 matches the story's temporal anchor (323-326 CE), and the surface \\\"明帝\\\" is normalized to 肅宗明皇帝. This is direct identity support from the supplied context. CrossStoryIdentitySupport is neutral (0.5) since no cross-story evidence is supplied linking this mention to c0 beyond the current story. No contradiction evidence is supplied.\"}",
+              "name": "submit_hdb2_psl1_predicates"
+            },
+            "id": "call_00_9F4ifl0VqthU75F5Q9WL3054",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787799562,
+  "id": "1734dea3-a2a0-45c9-b201-ccf174bf981c",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 450,
+    "prompt_cache_hit_tokens": 768,
+    "prompt_cache_miss_tokens": 3963,
+    "prompt_tokens": 4731,
+    "prompt_tokens_details": {
+      "cached_tokens": 768
+    },
+    "total_tokens": 5181
+  }
+}

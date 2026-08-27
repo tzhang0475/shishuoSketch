@@ -1,0 +1,130 @@
+{
+  "candidate_only": true,
+  "canonical_write_back": false,
+  "development_replayed_without_api": true,
+  "hdb2_decisions_modified": false,
+  "payload_validation_clean": false,
+  "payload_validation_note": "Rejected provider payloads are retained as diagnostics and never mutate identity state.",
+  "protected_hashes_unchanged": true,
+  "required_development_outcomes": {
+    "all_required_pass": true,
+    "known_supported_cases": [
+      {
+        "available": true,
+        "expected_candidate": "劉惔",
+        "state": "stable_entity_resolved",
+        "story_id": "02-yanyu-069",
+        "surface": "丹陽尹"
+      },
+      {
+        "available": true,
+        "expected_candidate": "劉惔",
+        "state": "stable_entity_resolved",
+        "story_id": "02-yanyu-054",
+        "surface": "劉尹"
+      },
+      {
+        "available": true,
+        "expected_candidate": "謝安",
+        "state": "stable_entity_resolved",
+        "story_id": "19-xianyuan-026",
+        "surface": "太傅"
+      },
+      {
+        "available": true,
+        "expected_candidate": "周顗",
+        "state": "stable_entity_resolved",
+        "story_id": "05-fangzheng-030",
+        "surface": "僕射"
+      },
+      {
+        "available": true,
+        "expected_candidate": "謝鯤",
+        "state": "stable_entity_resolved",
+        "story_id": "10-guizhen-012",
+        "surface": "豫章太守"
+      },
+      {
+        "available": true,
+        "expected_candidate": "謝安",
+        "state": "stable_entity_resolved",
+        "story_id": "25-paidiao-038",
+        "surface": "侍中"
+      },
+      {
+        "available": true,
+        "expected_candidate": "王導",
+        "state": "stable_entity_resolved",
+        "story_id": "02-yanyu-036",
+        "surface": "丞相"
+      },
+      {
+        "available": true,
+        "expected_candidate": "潘岳",
+        "state": "stable_entity_resolved",
+        "story_id": "02-yanyu-107",
+        "surface": "虎賁中郎將"
+      }
+    ],
+    "known_supported_pass": true,
+    "主→王敦_disappears": {
+      "final_candidate": null,
+      "final_state": "genuinely_unresolved",
+      "pass": true,
+      "role_vetoes": {
+        "c0": [
+          "ActorObjectMismatch",
+          "ExplicitDistinct"
+        ]
+      },
+      "story_id": "34-pilou-001",
+      "surface": "主",
+      "wrong_candidate": "王敦"
+    },
+    "敦主簿→王敦_disappears": {
+      "final_candidate": "何充",
+      "final_state": "stable_entity_resolved",
+      "pass": true,
+      "role_vetoes": {
+        "c1": [
+          "PossessorVsHolderMismatch",
+          "RoleMismatch"
+        ]
+      },
+      "story_id": "05-fangzheng-028",
+      "surface": "敦主簿",
+      "wrong_candidate": "王敦"
+    },
+    "謝豫章→謝尚_disappears": {
+      "final_candidate": "謝鯤",
+      "final_state": "review_required",
+      "pass": true,
+      "role_vetoes": {
+        "c0": [
+          "ExplicitDistinct"
+        ]
+      },
+      "story_id": "02-yanyu-046",
+      "surface": "謝豫章",
+      "wrong_candidate": "謝尚"
+    }
+  },
+  "safety_metrics": {
+    "actor_object_rejections": 1,
+    "candidate_only": true,
+    "canonical_write_back": false,
+    "explicit_distinct_rejections": 4,
+    "invalid_candidate_key_payloads": 4,
+    "invalid_candidate_keys": 0,
+    "invalid_evidence_reference_payloads": 0,
+    "invalid_evidence_references": 0,
+    "possessor_holder_rejections": 1,
+    "reference_structure_vetoes": 13,
+    "reviewer_rejected_stable_cases": 15,
+    "role_mismatch_rejections": 1
+  },
+  "schema": "hdb2-psl1-1-validation-summary-v1",
+  "selection_hash": "ccc4741e0ee2c54f47f23c723004761db5a23c52f71b003a6b0daa487d927a33",
+  "valid": true,
+  "validation_failures": 2
+}

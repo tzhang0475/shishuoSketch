@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"predicates\": [{\"predicate_id\": \"q0\", \"predicate\": \"IdentityContextSupport\", \"mention_id\": \"hdb2-occ-70eb2b7fb9c72b7b3cf3\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 1.0, \"evidence_ids\": [\"ev0\", \"ev1\", \"ev2\", \"context:context:10-guizhen-012:0:875e9ae1\"]}, {\"predicate_id\": \"q1\", \"predicate\": \"CrossStoryIdentitySupport\", \"mention_id\": \"hdb2-occ-70eb2b7fb9c72b7b3cf3\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 1.0, \"evidence_ids\": [\"ev0\", \"ev1\", \"ev2\", \"ev4\"]}, {\"predicate_id\": \"q2\", \"predicate\": \"IdentityContradiction\", \"mention_id\": \"hdb2-occ-70eb2b7fb9c72b7b3cf3\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 0.0, \"evidence_ids\": []}, {\"predicate_id\": \"q3\", \"predicate\": \"IdentityContextSupport\", \"mention_id\": \"hdb2-occ-70eb2b7fb9c72b7b3cf3\", \"other_mention_id\": null, \"candidate_key\": \"c1\", \"value\": 0.0, \"evidence_ids\": [\"ev0\", \"context:context:10-guizhen-012:0:875e9ae1\"]}, {\"predicate_id\": \"q4\", \"predicate\": \"CrossStoryIdentitySupport\", \"mention_id\": \"hdb2-occ-70eb2b7fb9c72b7b3cf3\", \"other_mention_id\": null, \"candidate_key\": \"c1\", \"value\": 0.0, \"evidence_ids\": [\"ev0\", \"context:context:10-guizhen-012:0:875e9ae1\"]}, {\"predicate_id\": \"q5\", \"predicate\": \"IdentityContradiction\", \"mention_id\": \"hdb2-occ-70eb2b7fb9c72b7b3cf3\", \"other_mention_id\": null, \"candidate_key\": \"c1\", \"value\": 0.0, \"evidence_ids\": []}], \"note\": \"The mention \\\"敦\\\" in story 10-guizhen-012 refers to 王敦 (c0). The story text explicitly shows 敦 interacting with 謝鯤 (c1), where 敦 is the 大將軍 (王敦's title) who led troops to 石頭 during the 王敦之亂. The Liu annotations (ev1, ev2) explicitly mention \\\"王敦將肆\\\" and \\\"敦曰\\\" in the context of 王敦's rebellion. The mention \\\"敦\\\" is the abbreviated form of 王敦 (c0), and c1 (謝鯤) is a distinct person who appears in the same story as the interlocutor, not the referent of \\\"敦\\\". IdentityContextSupport for c0 is positive because the story context directly identifies 敦 as 大將軍/王敦. CrossStoryIdentitySupport for c0 is positive because c0's confirmed profile (ev4) includes 大將軍 title and the 王敦之亂 event matches. For c1, the mention \\\"敦\\\" is not 謝鯤 — the story explicitly distinguishes 敦 from 鯤 as separate interlocutors, so IdentityContextSupport and CrossStoryIdentitySupport are 0. No contradiction evidence for either.\"}",
+              "name": "submit_hdb2_psl1_predicates"
+            },
+            "id": "call_00_Mr2067A2nILhLw86vt8n9032",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787799547,
+  "id": "170daf7d-7e24-4b27-b811-f4af356962f3",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 869,
+    "prompt_cache_hit_tokens": 1408,
+    "prompt_cache_miss_tokens": 3619,
+    "prompt_tokens": 5027,
+    "prompt_tokens_details": {
+      "cached_tokens": 1408
+    },
+    "total_tokens": 5896
+  }
+}

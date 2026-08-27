@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"predicates\": [{\"predicate_id\": \"q0\", \"predicate\": \"IdentityContextSupport\", \"mention_id\": \"hdb2-occ-dc314f56d381d63cb6f8\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q1\", \"predicate\": \"CrossStoryIdentitySupport\", \"mention_id\": \"hdb2-occ-dc314f56d381d63cb6f8\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q2\", \"predicate\": \"IdentityContradiction\", \"mention_id\": \"hdb2-occ-dc314f56d381d63cb6f8\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q3\", \"predicate\": \"IdentityContextSupport\", \"mention_id\": \"hdb2-occ-dc314f56d381d63cb6f8\", \"other_mention_id\": null, \"candidate_key\": \"c1\", \"value\": 1.0, \"evidence_ids\": [\"ev0\", \"ev1\", \"context:context:33-youhui-007:0:a2c97223\"]}, {\"predicate_id\": \"q4\", \"predicate\": \"CrossStoryIdentitySupport\", \"mention_id\": \"hdb2-occ-dc314f56d381d63cb6f8\", \"other_mention_id\": null, \"candidate_key\": \"c1\", \"value\": 1.0, \"evidence_ids\": [\"ev0\", \"ev4\"]}, {\"predicate_id\": \"q5\", \"predicate\": \"IdentityContradiction\", \"mention_id\": \"hdb2-occ-dc314f56d381d63cb6f8\", \"other_mention_id\": null, \"candidate_key\": \"c1\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q6\", \"predicate\": \"Coreference\", \"mention_id\": \"hdb2-occ-dc314f56d381d63cb6f8\", \"other_mention_id\": \"hdb2-occ-e58e4e3438c69a7b9c7d\", \"candidate_key\": null, \"value\": 0.5, \"evidence_ids\": []}], \"note\": \"The mention \\\"王\\\" in story 33-youhui-007 refers to 王導 (c1). The main text (ev0) shows 王導 speaking to 明帝, and the mention \\\"王\\\" is the same person who narrates. c1 (王導) has confirmed story 33-youhui-007 (ev4) and the known participant evidence confirms 王導 in this story. c0 (文王) is a different historical figure (the 文王 mentioned in the text is 司馬昭, part of the narrative about 宣王/文王, not the speaker). The Coreference between \\\"王\\\" and \\\"明帝\\\" (hdb2-occ-e58e4e3438c69a7b9c7d) is not supported—明帝 is the emperor being addressed, distinct from 王導. No contradiction evidence for either candidate.\"}",
+              "name": "submit_hdb2_psl1_predicates"
+            },
+            "id": "call_00_km5QMiWql8Af56cyuDC96109",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787799557,
+  "id": "38133fab-4289-4ac8-890d-1ca5d6d46a10",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 811,
+    "prompt_cache_hit_tokens": 768,
+    "prompt_cache_miss_tokens": 5235,
+    "prompt_tokens": 6003,
+    "prompt_tokens_details": {
+      "cached_tokens": 768
+    },
+    "total_tokens": 6814
+  }
+}

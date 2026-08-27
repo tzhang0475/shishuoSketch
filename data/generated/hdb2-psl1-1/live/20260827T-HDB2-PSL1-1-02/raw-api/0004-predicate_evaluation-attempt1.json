@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"predicates\": [{\"predicate_id\": \"q0\", \"predicate\": \"IdentityContextSupport\", \"mention_id\": \"hdb2-occ-b17089b4ce70c3834acc\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q1\", \"predicate\": \"CrossStoryIdentitySupport\", \"mention_id\": \"hdb2-occ-b17089b4ce70c3834acc\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q2\", \"predicate\": \"IdentityContradiction\", \"mention_id\": \"hdb2-occ-b17089b4ce70c3834acc\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 0.5, \"evidence_ids\": []}], \"note\": \"The mention \\\"劉尹\\\" is an office/title reference (劉尹 = 劉惔, the 丹陽尹). The candidate c0 is 謝安 (安石). The surface \\\"劉尹\\\" does not match 謝安's aliases or titles. The story mentions 安石 (謝安) and 思曠 (謝安's courtesy name) but the mention itself is 劉尹, referring to a different person (劉惔). No supplied evidence directly links the mention 劉尹 to candidate 謝安. AliasMatch is 0.5 (reference_head_not_candidate_form). No specific identity link evidence supports the mention pointing to c0, and no evidence contradicts it either. All predicates remain neutral at 0.5.\"}",
+              "name": "submit_hdb2_psl1_predicates"
+            },
+            "id": "call_00_jVpjqx30iZ0xYmjDylIm4655",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787799538,
+  "id": "52ecaa10-249e-4825-9503-66cf4c3d4a16",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 434,
+    "prompt_cache_hit_tokens": 768,
+    "prompt_cache_miss_tokens": 2080,
+    "prompt_tokens": 2848,
+    "prompt_tokens_details": {
+      "cached_tokens": 768
+    },
+    "total_tokens": 3282
+  }
+}

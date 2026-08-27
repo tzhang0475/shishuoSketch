@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"predicates\": [{\"predicate_id\": \"q0\", \"predicate\": \"IdentityContextSupport\", \"mention_id\": \"hdb2-occ-9e834735b1308fff1749\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q1\", \"predicate\": \"CrossStoryIdentitySupport\", \"mention_id\": \"hdb2-occ-9e834735b1308fff1749\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q2\", \"predicate\": \"IdentityContradiction\", \"mention_id\": \"hdb2-occ-9e834735b1308fff1749\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 0.5, \"evidence_ids\": []}], \"note\": \"The mention \\\"孔廷尉\\\" (Office of Tingwei) refers to 孔坦 (Kong Tan), as the text explicitly states \\\"孔坦疎賤\\\" identifying the person as 孔坦. The candidate c0 is 蘇峻 (Su Jun), whose aliases include 孔坦, 峻, 蘇子高. However, the mention is an office reference (孔廷尉 = Kong the Tingwei), and the text clearly identifies the person as 孔坦, not 蘇峻. The candidate's alias list oddly includes 孔坦, but the mention surface \\\"孔廷尉\\\" is an office title reference to 孔坦, and the story context (蘇子高事平 = after Su Jun's rebellion was pacified) mentions 蘇子高 (蘇峻) only as the event backdrop. There is no specific identity link between the mention (孔坦) and candidate 蘇峻. The deterministic AliasMatch is 0.5 (reference_head_not_candidate_form). TimeCompatible is 1.0 but that alone is not identity support per constraints. No direct evidence links the mention to candidate c0, and no evidence contradicts the assignment either. All three predicates remain neutral at 0.5.\"}",
+              "name": "submit_hdb2_psl1_predicates"
+            },
+            "id": "call_00_yK1EgHc94nd5ha3uzUNZ4030",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787799534,
+  "id": "f87acc7e-0094-4532-aef3-3acfa498ac04",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 531,
+    "prompt_cache_hit_tokens": 768,
+    "prompt_cache_miss_tokens": 2088,
+    "prompt_tokens": 2856,
+    "prompt_tokens_details": {
+      "cached_tokens": 768
+    },
+    "total_tokens": 3387
+  }
+}

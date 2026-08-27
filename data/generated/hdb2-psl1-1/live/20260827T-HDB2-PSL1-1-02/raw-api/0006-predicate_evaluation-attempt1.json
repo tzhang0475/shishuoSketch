@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"predicates\": [{\"predicate_id\": \"q0\", \"predicate\": \"IdentityContextSupport\", \"mention_id\": \"hdb2-occ-7040b7062b178ff6385a\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 1.0, \"evidence_ids\": [\"ev0\", \"ev1\"]}, {\"predicate_id\": \"q1\", \"predicate\": \"CrossStoryIdentitySupport\", \"mention_id\": \"hdb2-occ-7040b7062b178ff6385a\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q2\", \"predicate\": \"IdentityContradiction\", \"mention_id\": \"hdb2-occ-7040b7062b178ff6385a\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 0.0, \"evidence_ids\": []}], \"note\": \"The mention \\\"明帝\\\" in the story context directly matches the candidate 晉明帝 (肅宗明皇帝). ev0 shows the surface form 明帝 in the main text, and ev1 provides the reign reference evidence explicitly normalizing \\\"明帝\\\" to 肅宗明皇帝 (晉明帝) with direct_story_time relation. This is specific identity link support from supplied evidence. No cross-story evidence supplied beyond this story. No contradiction evidence supplied.\"}",
+              "name": "submit_hdb2_psl1_predicates"
+            },
+            "id": "call_00_XMFMvgTtcxnZInnkpXLG4347",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787799545,
+  "id": "eb49f92a-cf1b-4acf-bc18-991578ce22a6",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 379,
+    "prompt_cache_hit_tokens": 768,
+    "prompt_cache_miss_tokens": 1614,
+    "prompt_tokens": 2382,
+    "prompt_tokens_details": {
+      "cached_tokens": 768
+    },
+    "total_tokens": 2761
+  }
+}

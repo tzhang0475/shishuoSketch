@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"predicates\": [{\"predicate_id\": \"q0\", \"predicate\": \"IdentityContextSupport\", \"mention_id\": \"hdb2-occ-0b1f0e9918edf0c234f2\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q1\", \"predicate\": \"CrossStoryIdentitySupport\", \"mention_id\": \"hdb2-occ-0b1f0e9918edf0c234f2\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q2\", \"predicate\": \"IdentityContradiction\", \"mention_id\": \"hdb2-occ-0b1f0e9918edf0c234f2\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q3\", \"predicate\": \"Coreference\", \"mention_id\": \"hdb2-occ-0b1f0e9918edf0c234f2\", \"other_mention_id\": \"hdb2-occ-dc314f56d381d63cb6f8\", \"candidate_key\": null, \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q4\", \"predicate\": \"Coreference\", \"mention_id\": \"hdb2-occ-0b1f0e9918edf0c234f2\", \"other_mention_id\": \"hdb2-occ-e58e4e3438c69a7b9c7d\", \"candidate_key\": null, \"value\": 0.5, \"evidence_ids\": []}], \"note\": \"The mention \\\"宣王\\\" is a title reference to Sima Yi (宣王), the founder of the Jin dynasty's ruling house. The candidate c0 is 王導 (Wang Dao), a Jin dynasty chancellor. The mention \\\"宣王\\\" refers to Sima Yi, not Wang Dao. There is no direct evidence linking the mention \\\"宣王\\\" to candidate c0 (王導). The main text mentions 王導 as a speaker, but \\\"宣王\\\" is a distinct historical figure referenced within the narrative. No evidence supports identity between 宣王 and 王導, and no evidence contradicts it either (they are simply different people in the narrative context). For Coreference with \\\"王\\\" (hdb2-occ-dc314f56d381d63cb6f8), that mention refers to 王導 in the text, not to 宣王. For Coreference with \\\"明帝\\\" (hdb2-occ-e58e4e3438c69a7b9c7d), that is the emperor, distinct from 宣王. All values are neutral (0.5) due to lack of direct identity-supporting or contradicting evidence.\"}",
+              "name": "submit_hdb2_psl1_predicates"
+            },
+            "id": "call_00_UgilxqGgPwpxu30wYS8l0230",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787799553,
+  "id": "48987766-93c6-4c95-9c98-cde83d044de6",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 719,
+    "prompt_cache_hit_tokens": 1152,
+    "prompt_cache_miss_tokens": 4660,
+    "prompt_tokens": 5812,
+    "prompt_tokens_details": {
+      "cached_tokens": 1152
+    },
+    "total_tokens": 6531
+  }
+}
