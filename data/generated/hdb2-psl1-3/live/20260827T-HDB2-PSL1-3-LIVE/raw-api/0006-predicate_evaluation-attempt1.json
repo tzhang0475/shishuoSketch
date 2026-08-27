@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"predicates\": [{\"predicate_id\": \"q0\", \"predicate\": \"IdentityContextSupport\", \"mention_id\": \"hdb2-occ-2fa565ac93cf02964512\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 1.0, \"evidence_ids\": [\"ev0\", \"ev4\"]}, {\"predicate_id\": \"q1\", \"predicate\": \"CrossStoryIdentitySupport\", \"mention_id\": \"hdb2-occ-2fa565ac93cf02964512\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q2\", \"predicate\": \"IdentityContradiction\", \"mention_id\": \"hdb2-occ-2fa565ac93cf02964512\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 0.0, \"evidence_ids\": []}, {\"predicate_id\": \"q3\", \"predicate\": \"IdentityContextSupport\", \"mention_id\": \"hdb2-occ-2fa565ac93cf02964512\", \"other_mention_id\": null, \"candidate_key\": \"c1\", \"value\": 0.0, \"evidence_ids\": [\"ev0\", \"ev3\"]}, {\"predicate_id\": \"q4\", \"predicate\": \"CrossStoryIdentitySupport\", \"mention_id\": \"hdb2-occ-2fa565ac93cf02964512\", \"other_mention_id\": null, \"candidate_key\": \"c1\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q5\", \"predicate\": \"IdentityContradiction\", \"mention_id\": \"hdb2-occ-2fa565ac93cf02964512\", \"other_mention_id\": null, \"candidate_key\": \"c1\", \"value\": 0.0, \"evidence_ids\": []}], \"note\": \"The mention \\\"謝太傅\\\" (Xie Taifu) refers to 謝安 (c0), who holds the title 太傅/謝太傅. Candidate c0 (謝安) has titles including 謝太傅, directly matching the mention surface. Candidate c1 (山濤) is a different person mentioned in the same story (山濤 appears in the text), but the mention \\\"謝太傅\\\" specifically refers to 謝安, not 山濤. The story text explicitly distinguishes 山濤 from 謝太傅 as separate individuals. No cross-story identity support beyond the same story context. No contradiction evidence for either candidate.\"}",
+              "name": "submit_hdb2_psl1_predicates"
+            },
+            "id": "call_00_vKMTi5TWD8RzMCMBoiEe2994",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787822614,
+  "id": "45316bb6-aaf8-4d9c-92d6-389e2bef9c9c",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 632,
+    "prompt_cache_hit_tokens": 768,
+    "prompt_cache_miss_tokens": 3527,
+    "prompt_tokens": 4295,
+    "prompt_tokens_details": {
+      "cached_tokens": 768
+    },
+    "total_tokens": 4927
+  }
+}

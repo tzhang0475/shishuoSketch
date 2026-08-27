@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"predicates\": [{\"predicate_id\": \"q0\", \"predicate\": \"IdentityContextSupport\", \"mention_id\": \"hdb2-occ-3d15aadc571649d383b5\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q1\", \"predicate\": \"CrossStoryIdentitySupport\", \"mention_id\": \"hdb2-occ-3d15aadc571649d383b5\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q2\", \"predicate\": \"IdentityContradiction\", \"mention_id\": \"hdb2-occ-3d15aadc571649d383b5\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q3\", \"predicate\": \"IdentityContextSupport\", \"mention_id\": \"hdb2-occ-3d15aadc571649d383b5\", \"other_mention_id\": null, \"candidate_key\": \"c1\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q4\", \"predicate\": \"CrossStoryIdentitySupport\", \"mention_id\": \"hdb2-occ-3d15aadc571649d383b5\", \"other_mention_id\": null, \"candidate_key\": \"c1\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q5\", \"predicate\": \"IdentityContradiction\", \"mention_id\": \"hdb2-occ-3d15aadc571649d383b5\", \"other_mention_id\": null, \"candidate_key\": \"c1\", \"value\": 0.5, \"evidence_ids\": []}], \"note\": \"The mention \\\"家兄\\\" is a kinship compositional reference where the anchor is \\\"家\\\" (the speaker's family). The reference head is \\\"家\\\" and the referent is the speaker's elder brother. The candidates are 王敦 (c0) and 何充 (c1). The text says \\\"王敦護其兄...家兄在郡定佳\\\" — 王敦 is speaking about his elder brother 王含. The mention \\\"家兄\\\" refers to 王含 (the elder brother of 王敦), not to 王敦 himself or 何充. Neither candidate is the referent of \\\"家兄\\\". Since the mention is a kinship reference to a different person (王含), there is no direct identity link to either candidate. No specific evidence directly supports or contradicts identity with either candidate for this kinship referent mention. All values are neutral 0.5.\"}",
+              "name": "submit_hdb2_psl1_predicates"
+            },
+            "id": "call_00_1JmKbe7DrHBEWJ2p4qNv4842",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787822623,
+  "id": "52b111eb-7b15-467d-81c4-28ee7b2f89b0",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 686,
+    "prompt_cache_hit_tokens": 1408,
+    "prompt_cache_miss_tokens": 3241,
+    "prompt_tokens": 4649,
+    "prompt_tokens_details": {
+      "cached_tokens": 1408
+    },
+    "total_tokens": 5335
+  }
+}

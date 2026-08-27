@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"predicates\": [{\"predicate_id\": \"q0\", \"predicate\": \"IdentityContextSupport\", \"mention_id\": \"hdb2-occ-c5733d52a665dd653a6b\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q1\", \"predicate\": \"CrossStoryIdentitySupport\", \"mention_id\": \"hdb2-occ-c5733d52a665dd653a6b\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q2\", \"predicate\": \"IdentityContradiction\", \"mention_id\": \"hdb2-occ-c5733d52a665dd653a6b\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q3\", \"predicate\": \"IdentityContextSupport\", \"mention_id\": \"hdb2-occ-c5733d52a665dd653a6b\", \"other_mention_id\": null, \"candidate_key\": \"c1\", \"value\": 1.0, \"evidence_ids\": [\"ev0\", \"ev2\", \"ev5\"]}, {\"predicate_id\": \"q4\", \"predicate\": \"CrossStoryIdentitySupport\", \"mention_id\": \"hdb2-occ-c5733d52a665dd653a6b\", \"other_mention_id\": null, \"candidate_key\": \"c1\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q5\", \"predicate\": \"IdentityContradiction\", \"mention_id\": \"hdb2-occ-c5733d52a665dd653a6b\", \"other_mention_id\": null, \"candidate_key\": \"c1\", \"value\": 0.0, \"evidence_ids\": [\"ev0\", \"ev5\"]}, {\"predicate_id\": \"q6\", \"predicate\": \"IdentityContextSupport\", \"mention_id\": \"hdb2-occ-c5733d52a665dd653a6b\", \"other_mention_id\": null, \"candidate_key\": \"c2\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q7\", \"predicate\": \"CrossStoryIdentitySupport\", \"mention_id\": \"hdb2-occ-c5733d52a665dd653a6b\", \"other_mention_id\": null, \"candidate_key\": \"c2\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q8\", \"predicate\": \"IdentityContradiction\", \"mention_id\": \"hdb2-occ-c5733d52a665dd653a6b\", \"other_mention_id\": null, \"candidate_key\": \"c2\", \"value\": 0.5, \"evidence_ids\": []}], \"note\": \"The mention is an office_reference \\\"僕射\\\" (Palace Attendant). The text explicitly states \\\"僕射羊祜\\\" — the office 僕射 is directly attached to 羊祜 (candidate c1). This is a specific identity link in the supplied main text (ev0). Candidate c1 (羊祜) has title 僕射 (ev5), matching the office reference. IdentityContextSupport=1.0 for c1 with ev0/ev2/ev5. IdentityContradiction=0.0 for c1 since the office directly names 羊祜, not contradicting. For c0 (王戎) and c2 (山濤), there is no specific evidence linking the 僕射 office to them; the text shows 山濤 as 尚書, not 僕射. No direct identity support or contradiction for c0/c2, so neutral 0.5. CrossStoryIdentitySupport is neutral for all since no cross-story specific identity link is supplied.\"}",
+              "name": "submit_hdb2_psl1_predicates"
+            },
+            "id": "call_00_Ceh5sWLJhIWJ1gleWfkI3689",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787822595,
+  "id": "7116a959-9b36-4859-af7d-031e4d7f926c",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 942,
+    "prompt_cache_hit_tokens": 768,
+    "prompt_cache_miss_tokens": 4843,
+    "prompt_tokens": 5611,
+    "prompt_tokens_details": {
+      "cached_tokens": 768
+    },
+    "total_tokens": 6553
+  }
+}

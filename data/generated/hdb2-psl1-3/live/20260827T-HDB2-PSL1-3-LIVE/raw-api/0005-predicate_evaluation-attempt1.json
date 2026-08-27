@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"predicates\": [{\"predicate_id\": \"q0\", \"predicate\": \"IdentityContextSupport\", \"mention_id\": \"hdb2-occ-0795eae205c40e66dc60\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q1\", \"predicate\": \"CrossStoryIdentitySupport\", \"mention_id\": \"hdb2-occ-0795eae205c40e66dc60\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q2\", \"predicate\": \"IdentityContradiction\", \"mention_id\": \"hdb2-occ-0795eae205c40e66dc60\", \"other_mention_id\": null, \"candidate_key\": \"c0\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q3\", \"predicate\": \"IdentityContextSupport\", \"mention_id\": \"hdb2-occ-0795eae205c40e66dc60\", \"other_mention_id\": null, \"candidate_key\": \"c1\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q4\", \"predicate\": \"CrossStoryIdentitySupport\", \"mention_id\": \"hdb2-occ-0795eae205c40e66dc60\", \"other_mention_id\": null, \"candidate_key\": \"c1\", \"value\": 0.5, \"evidence_ids\": []}, {\"predicate_id\": \"q5\", \"predicate\": \"IdentityContradiction\", \"mention_id\": \"hdb2-occ-0795eae205c40e66dc60\", \"other_mention_id\": null, \"candidate_key\": \"c1\", \"value\": 0.5, \"evidence_ids\": []}], \"note\": \"The mention is an office_reference \\\"司空\\\" (office/title referent), not a person mention. The reference_head is \\\"司空\\\" which is a title. For c0 (王敦), the title \\\"司空\\\" does not match 王敦's titles (大將軍, 敦主簿, 王大將軍), and there is no specific identity link in the supplied evidence connecting this office reference to 王敦. For c1 (劉琨), the title \\\"司空\\\" matches 劉琨's title (司空), and ev1 (Liu annotation) mentions \\\"與司空劉琨\\\" linking 司空 to 劉琨. However, the mention is an office_reference (not a person mention), and the reference_structure indicates syntactic_role is \\\"office_or_title_referent\\\". The office reference \\\"司空\\\" in the story context \\\"劉琨稱祖車騎爲朗詣曰少爲王敦所歎\\\" — the 司空 title appears in the Liu annotation ev1 \\\"與司空劉琨\\\" which directly links 司空 to 劉琨. This provides specific identity support for c1. However, since the mention itself is an office_reference (not a person mention), and the task requires identity support for the mention pointing to the candidate, the office title \\\"司空\\\" matching 劉琨's title via ev1 provides IdentityContextSupport for c1. For c0, no such support exists. I'll set c1 IdentityContextSupport to 1.0 based on ev1, and c0 to 0.5 (neutral, no direct evidence). CrossStoryIdentitySupport requires specific identity link across stories; the office reference doesn't provide cross-story identity support beyond the same story context. IdentityContradiction: no evidence contradicts either candidate.\"}",
+              "name": "submit_hdb2_psl1_predicates"
+            },
+            "id": "call_00_BsuJ7kqxGnyDp7E6yYLU7555",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787822609,
+  "id": "3ed723c4-4a8f-497a-a868-93f1877bdd11",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 865,
+    "prompt_cache_hit_tokens": 1920,
+    "prompt_cache_miss_tokens": 3164,
+    "prompt_tokens": 5084,
+    "prompt_tokens_details": {
+      "cached_tokens": 1920
+    },
+    "total_tokens": 5949
+  }
+}
