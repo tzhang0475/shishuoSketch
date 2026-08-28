@@ -63,6 +63,7 @@ class HDB2ReviewProjectionTests(unittest.TestCase):
             self.assertTrue(forbidden.isdisjoint(set(walk_keys(item))))
             self.assertTrue(item["current_state"]["candidate_only"])
             self.assertFalse(item["current_state"]["canonical_write_back"])
+            self.assertIn("reference_structure", item)
 
     def test_each_review_type_asks_the_relevant_question(self):
         index = load(REVIEW_ROOT / "index.json")
@@ -91,6 +92,24 @@ class HDB2ReviewProjectionTests(unittest.TestCase):
             self.assertIn("referent_candidates", context)
             self.assertIn("基准人物本身", item["why_review_needed"])
             self.assertNotIn("是否等于", item["review_question"])
+
+    def test_structural_items_do_not_present_anchor_or_patron_as_proposal(self):
+        index = load(REVIEW_ROOT / "index.json")
+        structural_types = {"compositional_kinship", "office_or_title_holder"}
+        checked = 0
+        for entry in index["items"]:
+            item = load(REVIEW_ROOT / entry["item_path"])
+            if item["review_type"] not in structural_types:
+                continue
+            reference = item.get("reference_structure") or {}
+            if reference.get("surface_structure") not in {"compositional_kinship", "office_holder_reference", "ruler_reference"}:
+                continue
+            proposal = item["proposed_identity"]
+            self.assertIsNone(proposal.get("label"))
+            self.assertIsNone(proposal.get("person_id"))
+            self.assertIsNone(proposal.get("candidate_key"))
+            checked += 1
+        self.assertGreater(checked, 0)
 
     def test_materialization_impact_only_summarizes_projected_facts(self):
         index = load(REVIEW_ROOT / "index.json")

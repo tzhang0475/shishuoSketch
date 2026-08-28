@@ -59,6 +59,12 @@ MODEL = "deepseek-v4-flash"
 RUN_VERSION = "hdb2-xe0-v1"
 SEMANTIC_BASELINE_SCHEMA = "hdb2-xe0-baseline-v2"
 LEGACY_BASELINE_SCHEMA = "hdb2-xe0-baseline-v1"
+PROTECTED_HASH_SCHEMA = "hdb2-xe0-protected-hashes-v2"
+AUTHORIZED_DERIVED_PROJECTION_VERSION = "hdb2-f-profile-integrity-v2"
+AUTHORIZED_DERIVED_PROJECTION_PATHS = (
+    "data/derived/hdb2-f-person-knowledge.json",
+    "data/derived/hdb2-f-candidate-person-knowledge.json",
+)
 SEMANTIC_FRONTIER_FIELDS = (
     "occurrence_id",
     "identity_observation_id",
@@ -1076,11 +1082,15 @@ def build_metrics(selection: Mapping[str, Any], person_results: Sequence[Mapping
 
 
 def _protected_hashes() -> dict[str, str]:
-    """Hash HDB2-F semantic/candidate artifacts, not the review UI.
+    """Hash HDB2-F immutable semantic artifacts, not presentation or profiles.
 
     The reviewer projection is validated separately by occurrence coverage.
     Keeping it out of this snapshot lets the workbench evolve without making
     an already-completed XE0 live run look like a historical HDB2-F change.
+    The two candidate-only Person profile projections are intentionally
+    versioned separately: PSL1.3C introduced a provenance-gated rebuild, so
+    their hashes must be recorded as an explicit derived-projection baseline
+    rather than treated as immutable historical truth.
     """
     paths = [
         ROOT / "data/annotation/hdb2-f-occurrence-decisions.json",
@@ -1088,23 +1098,80 @@ def _protected_hashes() -> dict[str, str]:
         ROOT / "data/derived/hdb2-f-kinship-projection.json",
         ROOT / "data/derived/hdb2-f-marriage-projection.json",
         ROOT / "data/derived/hdb2-f-office-projection.json",
-        ROOT / "data/derived/hdb2-f-person-knowledge.json",
     ]
     return {str(path.relative_to(ROOT)): file_hash(path) for path in paths if path.is_file()}
 
 
-def protected_hashes_match_manifest(snapshot: Mapping[str, Any]) -> bool:
-    """Accept old manifests' extra review-index hash, but require all
-    semantic HDB2-F hashes to match exactly.
+def _authorized_derived_projection_hashes() -> dict[str, str]:
+    """Return the current explicitly versioned candidate-profile hashes."""
+    return {
+        path: file_hash(ROOT / path)
+        for path in AUTHORIZED_DERIVED_PROJECTION_PATHS
+        if (ROOT / path).is_file()
+    }
 
-    The extra key is tolerated only for the pre-v2 XE0 run artifact.  New
-    runs contain the semantic set returned by ``_protected_hashes``.
+
+def authorized_derived_projection_matches_manifest(manifest: Mapping[str, Any]) -> bool:
+    """Validate the intentional derived-profile transition independently.
+
+    A profile rebuild is allowed only when the run records the known
+    projection version and the exact current hashes.  This preserves drift
+    detection: a future unrecorded profile change still fails validation.
+    """
+    if not isinstance(manifest, Mapping):
+        return False
+    if manifest.get("authorized_derived_projection_version") != AUTHORIZED_DERIVED_PROJECTION_VERSION:
+        return False
+    snapshot = manifest.get("authorized_derived_projection_hashes")
+    if not isinstance(snapshot, Mapping):
+        return False
+    current = _authorized_derived_projection_hashes()
+    return dict(snapshot) == current
+
+
+def protected_hashes_match_manifest(snapshot: Mapping[str, Any]) -> bool:
+    """Require immutable HDB2-F hashes while accepting legacy extra keys.
+
+    Older XE0 manifests also stored the reviewer index and one derived profile
+    hash.  Those keys are explicitly tolerated for read compatibility; the
+    current validator checks the derived-profile transition through
+    ``authorized_derived_projection_matches_manifest`` instead of silently
+    treating it as immutable.
     """
     current = _protected_hashes()
-    allowed_extra = {"site/public/generated/review/hdb2/index.json"}
+    allowed_extra = {
+        "site/public/generated/review/hdb2/index.json",
+        *AUTHORIZED_DERIVED_PROJECTION_PATHS,
+    }
     if not set(snapshot).issubset(set(current) | allowed_extra):
         return False
     return all(snapshot.get(path) == digest for path, digest in current.items())
+
+
+def migrate_protected_hash_manifest(path: Path) -> dict[str, Any]:
+    """Record the explicit v2 immutable/derived hash boundary for one run.
+
+    This is a one-time artifact migration.  It refuses to rewrite a manifest
+    whose immutable HDB2-F hashes already drifted; only the intentionally
+    versioned profile keys and the obsolete review-index key are removed from
+    the immutable snapshot.
+    """
+    manifest = read_json(path, {}) or {}
+    if not protected_hashes_match_manifest(manifest.get("protected_hashes_after", {})):
+        raise RuntimeError("hdb2_xe0_immutable_hash_migration_refused")
+    immutable = _protected_hashes()
+    derived = _authorized_derived_projection_hashes()
+    manifest["protected_hash_schema"] = PROTECTED_HASH_SCHEMA
+    manifest["protected_hashes_before"] = immutable
+    manifest["protected_hashes_after"] = immutable
+    manifest["authorized_derived_projection_version"] = AUTHORIZED_DERIVED_PROJECTION_VERSION
+    manifest["authorized_derived_projection_hashes"] = derived
+    manifest["authorized_derived_projection_reason"] = (
+        "PSL1.3C provenance-gated candidate-only profile rebuild; immutable "
+        "HDB2-F semantic inputs remain protected."
+    )
+    write_json(path, manifest)
+    return manifest
 
 
 def prepare() -> dict[str, Any]:
@@ -1124,6 +1191,7 @@ def run_live(run_id: str, *, offline: bool = False) -> Path:
     raw_dir = run_dir / "raw-api"
     raw_dir.mkdir(parents=True, exist_ok=False)
     before = _protected_hashes()
+    derived_before = _authorized_derived_projection_hashes()
     person_results: list[dict[str, Any]] = []
     temporal_results: list[dict[str, Any]] = []
     sequence = 1
@@ -1136,10 +1204,14 @@ def run_live(run_id: str, *, offline: bool = False) -> Path:
     audit, projection = build_audit(selection, person_results, temporal_results, prepared["baseline"])
     metrics = build_metrics(selection, person_results, temporal_results, audit)
     after = _protected_hashes()
+    derived_after = _authorized_derived_projection_hashes()
     if before != after:
         raise RuntimeError("hdb2_xe0_protected_hdb2_artifact_changed")
+    if derived_before != derived_after:
+        raise RuntimeError("hdb2_xe0_authorized_derived_projection_changed_during_run")
     write_json(run_dir / "manifest.json", {
         "schema": "hdb2-xe0-live-manifest-v1",
+        "protected_hash_schema": PROTECTED_HASH_SCHEMA,
         "run_id": run_id,
         "run_version": RUN_VERSION,
         "algorithm_version": PROMPT_VERSION,
@@ -1151,6 +1223,9 @@ def run_live(run_id: str, *, offline: bool = False) -> Path:
         "offline_fixture": offline,
         "protected_hashes_before": before,
         "protected_hashes_after": after,
+        "authorized_derived_projection_version": AUTHORIZED_DERIVED_PROJECTION_VERSION,
+        "authorized_derived_projection_hashes": derived_after,
+        "authorized_derived_projection_reason": "PSL1.3C provenance-gated candidate-only profile rebuild; immutable HDB2-F semantic inputs remain protected.",
         "sequence_count": sequence - 1,
         "created_at": utc_now(),
     })
@@ -1190,6 +1265,7 @@ def main() -> int:
     mode = parser.add_mutually_exclusive_group()
     mode.add_argument("--prepare", action="store_true", help="freeze baseline and selection without API calls")
     mode.add_argument("--migrate-baseline", action="store_true", help="explicitly migrate the committed v1 baseline to the semantic v2 contract")
+    mode.add_argument("--migrate-protected-hashes", action="store_true", help="record the explicit immutable/derived hash boundary in an existing live manifest")
     mode.add_argument("--live", action="store_true", help="run frozen semantic calls")
     mode.add_argument("--rebuild", action="store_true", help="rebuild audit/projection from an existing run")
     parser.add_argument("--run-id", default=None)
@@ -1197,6 +1273,12 @@ def main() -> int:
     args = parser.parse_args()
     if args.migrate_baseline:
         print(json.dumps(migrate_legacy_baseline(), ensure_ascii=False, indent=2, sort_keys=True))
+        return 0
+    if args.migrate_protected_hashes:
+        if not args.run_id:
+            raise SystemExit("--migrate-protected-hashes requires --run-id")
+        path = XE0_ROOT / "live" / args.run_id / "manifest.json"
+        print(json.dumps(migrate_protected_hash_manifest(path), ensure_ascii=False, indent=2, sort_keys=True))
         return 0
     if args.live:
         run_id = args.run_id or dt.datetime.now(dt.timezone.utc).strftime("%Y%m%dT%H%M%SZ") + "-HDB2-XE0"

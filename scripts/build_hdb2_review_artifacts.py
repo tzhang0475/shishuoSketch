@@ -381,6 +381,132 @@ def _structural_context(
     }
 
 
+_STRUCTURAL_OCCURRENCE_TYPES = {
+    "kinship_reference",
+    "kinship_compositional_reference",
+    "structural_kinship_expression",
+    "compositional_kinship",
+    "title_reference",
+    "person_title",
+    "person_office_title",
+    "office_reference",
+    "ruler_reference",
+}
+_STRUCTURAL_STATUSES = {
+    "compositional_reference",
+    "ruler_reference",
+    "office_reference",
+    "structural_reference",
+    "not_person",
+}
+
+
+def _clean_candidate_key(value: Any) -> str | None:
+    text = str(value or "").strip()
+    return text if text and text not in {"null", "undefined"} else None
+
+
+def _structural_endpoint(value: Any) -> dict[str, Any] | str | None:
+    """Keep a role endpoint separate from the identity proposal.
+
+    The review projection may expose an already supplied structural endpoint,
+    but it must never derive one from a nearby candidate or from a patron/
+    anchor field.  A string is retained as a human-readable surface only.
+    """
+    if isinstance(value, Mapping):
+        output: dict[str, Any] = {}
+        for key in ("surface", "label", "person_id", "candidate_key"):
+            if key not in value:
+                continue
+            item = value.get(key)
+            if key == "candidate_key":
+                item = _clean_candidate_key(item)
+            elif key in {"person_id", "surface", "label"}:
+                item = str(item).strip() if item is not None else None
+                if item in {"", "null", "undefined"}:
+                    item = None
+            if item is not None:
+                output[key] = item
+        return output or None
+    if value is None:
+        return None
+    text = str(value).strip()
+    return text if text and text not in {"null", "undefined"} else None
+
+
+def _reference_structure(
+    case: Mapping[str, Any],
+    decision: Mapping[str, Any],
+    occurrence_type: str,
+    structural: Mapping[str, Any] | None,
+) -> dict[str, Any] | None:
+    """Expose role-separated structure without inventing a referent.
+
+    HDB2-F decisions predate this reviewer-facing field, so prefer explicit
+    structure when present and otherwise publish only the conservative
+    semantic category already present in the frozen case.  In particular,
+    the anchor, patron, or office context is not promoted to ``referent``.
+    """
+    raw: Mapping[str, Any] | None = None
+    for value in (
+        decision.get("reference_structure"),
+        case.get("reference_structure"),
+        decision.get("semantic_structure"),
+        case.get("semantic_structure"),
+    ):
+        if isinstance(value, Mapping):
+            raw = value
+            break
+    is_structural = occurrence_type in _STRUCTURAL_OCCURRENCE_TYPES or str(decision.get("status") or "") in _STRUCTURAL_STATUSES
+    if not is_structural and raw is None:
+        return None
+
+    if raw is not None:
+        output = {
+            "reference_type": raw.get("reference_type"),
+            "surface_structure": raw.get("surface_structure") or raw.get("structure"),
+            "referent_type": raw.get("referent_type"),
+            "anchor_person": _structural_endpoint(raw.get("anchor_person") or raw.get("anchor")),
+            "holder": _structural_endpoint(raw.get("holder") or raw.get("office_holder")),
+            "patron_or_possessor": _structural_endpoint(raw.get("patron_or_possessor") or raw.get("patron") or raw.get("possessor")),
+            "referent_candidate": _structural_endpoint(raw.get("referent_candidate") or raw.get("referent")),
+        }
+        return {key: value for key, value in output.items() if value is not None}
+
+    if structural:
+        # The existing compositional context is an explicitly separate role
+        # object.  Reuse only its base endpoint; never make it the proposal.
+        return {
+            "reference_type": "kinship",
+            "surface_structure": "compositional_kinship",
+            "referent_type": "person",
+            "anchor_person": _structural_endpoint(structural.get("base_person")),
+            "holder": None,
+            "patron_or_possessor": None,
+            "referent_candidate": None,
+        }
+
+    if occurrence_type == "ruler_reference" or str(decision.get("status") or "") == "ruler_reference":
+        return {
+            "reference_type": "ruler_title",
+            "surface_structure": "ruler_reference",
+            "referent_type": "ruler",
+            "anchor_person": None,
+            "holder": None,
+            "patron_or_possessor": None,
+            "referent_candidate": None,
+        }
+    return {
+        "reference_type": "office_or_title",
+        "surface_structure": "office_holder_reference",
+        "referent_type": "person",
+        "anchor_person": None,
+        "holder": None,
+        "patron_or_possessor": None,
+        "referent_candidate": None,
+    }
+
+
 def _story_label(story_id: str, story: Mapping[str, Any]) -> str:
     title = str(story.get("title") or story_id or "故事")
     match = re.search(r"-(\d+)$", str(story_id or ""))
@@ -510,24 +636,35 @@ def _build_item(row: Mapping[str, Any], case: Mapping[str, Any], decision: Mappi
         seen_candidates.add(key)
         candidate_people.append({
             "rank": len(candidate_people) + 1,
-            "candidate_key": candidate.get("candidate_key"),
+            "candidate_key": _clean_candidate_key(candidate.get("candidate_key")),
             "display_name": name,
             "person_id": pid,
             "semantic_type": candidate.get("semantic_type"),
             "source": candidate.get("source"),
         })
-    resolved_pid = str(decision.get("resolved_person_id") or "") or None
-    proposed_label = _candidate_label(resolved_pid, candidates, catalog)
-    if not proposed_label and decision.get("new_candidate_label"):
-        proposed_label = str(decision.get("new_candidate_label"))
-    if not proposed_label and decision.get("candidate_key"):
-        proposed_label = next((x["display_name"] for x in candidate_people if x.get("candidate_key") == decision.get("candidate_key")), None)
     annotation_context = [str(x) for x in case.get("annotation_context", []) if isinstance(x, str) and x]
-    if not annotation_context:
-        annotation_context = _annotation_texts(story, [str(row.get("surface") or ""), str(row.get("exact_span") or ""), proposed_label or ""])
     context = _story_text(story) or str(case.get("local_story_context") or "")
     compositional = decision.get("compositional_referent") if isinstance(decision.get("compositional_referent"), Mapping) else None
     structural = _structural_context(str(row.get("surface") or case.get("target_surface") or ""), occurrence_type, decision, candidates, candidate_people, catalog)
+    reference_structure = _reference_structure(case, decision, occurrence_type, structural)
+    structural_only = occurrence_type in _STRUCTURAL_OCCURRENCE_TYPES or status in _STRUCTURAL_STATUSES
+    resolved_pid = str(decision.get("resolved_person_id") or "") or None
+    proposal_candidate_key = _clean_candidate_key(decision.get("candidate_key"))
+    proposed_label = _candidate_label(resolved_pid, candidates, catalog)
+    if not proposed_label and decision.get("new_candidate_label"):
+        proposed_label = str(decision.get("new_candidate_label"))
+    if not proposed_label and proposal_candidate_key:
+        proposed_label = next((x["display_name"] for x in candidate_people if x.get("candidate_key") == proposal_candidate_key), None)
+    if not annotation_context:
+        annotation_context = _annotation_texts(story, [str(row.get("surface") or ""), str(row.get("exact_span") or ""), proposed_label or ""])
+    # Structural records expose their roles and candidate list for review, but
+    # do not present an anchor/patron/office-context neighbor as an accepted
+    # Person.  Only a later explicit referent field could safely supply such a
+    # proposal; the frozen HDB2-F records do not contain one.
+    if structural_only:
+        resolved_pid = None
+        proposed_label = None
+        proposal_candidate_key = None
     guidance = _review_guidance(
         review_type,
         occurrence_type,
@@ -553,6 +690,7 @@ def _build_item(row: Mapping[str, Any], case: Mapping[str, Any], decision: Mappi
             "person_story": [{"story_id": row.get("story_id"), "occurrence_id": row.get("occurrence_id"), "status": status, "person_id": resolved_pid}] if resolved_pid else [],
         }),
         "compositional_context": structural,
+        "reference_structure": reference_structure,
         "occurrence_id": row.get("occurrence_id"),
         "identity_observation_id": row.get("identity_observation_id"),
         "story_id": row.get("story_id"),
@@ -565,9 +703,11 @@ def _build_item(row: Mapping[str, Any], case: Mapping[str, Any], decision: Mappi
             "label": proposed_label,
             "person_id": resolved_pid,
             "candidate_person_id": decision.get("candidate_person_id") or decision.get("new_candidate_id"),
-            "candidate_key": decision.get("candidate_key"),
+            "candidate_key": proposal_candidate_key,
             "basis": decision.get("identity_resolution_basis") or row.get("identity_resolution_basis"),
         },
+        "reviewer_verdict": decision.get("reviewer_verdict"),
+        "reviewer_rejected_top_candidate": bool(decision.get("reviewer_rejected_top_candidate") or decision.get("reviewer_verdict") == "reject_top_candidate"),
         "candidate_people": candidate_people,
         "selected_evidence": _evidence_items(case, story, decision, atom_rows),
         "support_families": support,

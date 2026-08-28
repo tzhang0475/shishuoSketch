@@ -245,9 +245,9 @@ def _profile_form_is_source_supported(
         # longer source form such as 桓謙 must belong to this same profile.
         if surface and context and len(surface) <= 3:
             target_forms = _catalog_forms(catalog.get(target, {}))
-            identity_subjects = _identity_subjects(context, surface)
             explicit_small_name = _explicit_small_name_marker(context, surface)
             target_form_keys = {occ.matching(form) for form in target_forms if form}
+            identity_subjects = _identity_subjects(context, surface)
             identity_subject_matches = any(
                 occ.matching(subject) in target_form_keys
                 or any(
@@ -276,6 +276,80 @@ def _profile_form_is_source_supported(
     # Candidate profiles may retain a directly observed named candidate, but
     # still never inherit unresolved/cross-participant surfaces.
     return status == "resolved_new_candidate" and source_status in {"resolved_new_candidate", "resolved_existing"} and source_mentions_surface()
+
+
+def profile_form_support_reasons(
+    decision: Mapping[str, Any],
+    source_row: Mapping[str, Any] | None,
+    catalog: Mapping[str, Mapping[str, Any]],
+) -> list[str]:
+    """Explain why an identity claim can or cannot become profile evidence.
+
+    The boolean gate above remains the authority used by projection.  This
+    companion is intentionally diagnostic so an upstream direct/catalogue
+    claim rejected by source-local context is visible instead of disappearing
+    as an unexplained missing alias.
+    """
+    reasons: list[str] = []
+    status = str(decision.get("status") or "")
+    target = str(decision.get("resolved_person_id") or decision.get("candidate_person_id") or "")
+    surface = str(decision.get("surface") or "")
+    evidence_ref = str(decision.get("evidence_ref") or "")
+    exact_span = str(decision.get("exact_span") or (source_row or {}).get("exact_span") or "")
+    if not target:
+        reasons.append("target_missing")
+    if status not in PROFILE_FORM_STATUSES:
+        reasons.append("identity_status_not_profile_eligible")
+    if not surface:
+        reasons.append("surface_missing")
+    if not evidence_ref:
+        reasons.append("evidence_ref_missing")
+    if not decision.get("occurrence_id") or not decision.get("identity_observation_id"):
+        reasons.append("identity_provenance_coordinate_missing")
+    if source_row:
+        source_ref = str(source_row.get("evidence_ref") or "")
+        source_span = str(source_row.get("exact_span") or "")
+        if source_ref and source_ref != evidence_ref:
+            reasons.append("evidence_ref_mismatch")
+        if source_span and surface and surface not in source_span:
+            reasons.append("surface_not_in_source_span")
+    if exact_span and surface and surface not in exact_span:
+        reasons.append("surface_not_in_exact_span")
+
+    context = _shishuo_story_context(str(decision.get("story_id") or ""))
+    if target.startswith("person-") and context and surface and len(surface) <= 3:
+        target_forms = _catalog_forms(catalog.get(target, {}))
+        # Keep the catalogue-aware branches from the live gate in the audit;
+        # the source-only branch below is the important upstream contamination
+        # diagnostic for a claim such as 仲文@09-pinzao-088.
+        explicit_small_name = _explicit_small_name_marker(context, surface)
+        identity_subjects = _identity_subjects(context, surface)
+        target_form_keys = {occ.matching(form) for form in target_forms if form}
+        identity_subject_matches = any(
+            occ.matching(subject) in target_form_keys
+            or any(
+                len(occ.matching(subject)) >= 1
+                and occ.matching(form).endswith(occ.matching(subject))
+                for form in target_forms
+                if form
+            )
+            for subject in identity_subjects
+            if subject
+        )
+        if identity_subjects and not identity_subject_matches and not explicit_small_name:
+            reasons.append("source_local_identity_bearer_conflict")
+        longer_forms = _expanded_forms_in_context(context, surface, catalog)
+        if longer_forms and not any(form in target_forms for form in longer_forms) and not identity_subject_matches and not explicit_small_name:
+            reasons.append("source_local_registered_full_form_conflict")
+        source_longer_forms = _source_longer_forms(context, surface)
+        if source_longer_forms and not any(
+            any(occ.matching(form) == occ.matching(target_form) for target_form in target_forms)
+            for form in source_longer_forms
+        ) and not identity_subject_matches and not explicit_small_name:
+            reasons.append("source_local_full_form_conflict")
+    if not _profile_form_is_source_supported(decision, source_row, catalog):
+        reasons.append("profile_identity_support_gate")
+    return sorted(set(reasons))
 
 
 def _profile_identity_basis(

@@ -58,6 +58,23 @@ export interface HDB2EvidenceItem {
   excerpt: string;
 }
 
+export interface HDB2StructuralEndpoint {
+  surface?: string | null;
+  label?: string | null;
+  person_id?: string | null;
+  candidate_key?: string | null;
+}
+
+export interface HDB2ReferenceStructure {
+  reference_type?: string | null;
+  surface_structure?: string | null;
+  referent_type?: string | null;
+  anchor_person?: HDB2StructuralEndpoint | string | null;
+  holder?: HDB2StructuralEndpoint | string | null;
+  patron_or_possessor?: HDB2StructuralEndpoint | string | null;
+  referent_candidate?: HDB2StructuralEndpoint | string | null;
+}
+
 export interface HDB2AffectedFact {
   candidate_id?: string;
   relation_surface?: string;
@@ -99,6 +116,7 @@ export interface HDB2ReviewItem {
   occurrence_type: string;
   story_context: string;
   relevant_annotation_context: string[];
+  reference_structure: HDB2ReferenceStructure | null;
   proposed_identity: {
     status: string;
     label: string | null;
@@ -107,6 +125,8 @@ export interface HDB2ReviewItem {
     candidate_key: string | null;
     basis: string | null;
   };
+  reviewer_verdict?: string | null;
+  reviewer_rejected_top_candidate?: boolean;
   candidate_people: HDB2CandidatePerson[];
   selected_evidence: HDB2EvidenceItem[];
   support_families: string[];

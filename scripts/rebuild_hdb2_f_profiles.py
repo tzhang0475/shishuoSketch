@@ -29,6 +29,7 @@ RUN_DIR = ROOT / "data/generated/hdb2-f/live/20260826T-HDB2-F-03"
 EXISTING_PROFILE = common.DERIVED / "hdb2-f-person-knowledge.json"
 CANDIDATE_PROFILE = common.DERIVED / "hdb2-f-candidate-person-knowledge.json"
 AUDIT_PATH = common.DERIVED / "hdb2-f-profile-integrity-audit.json"
+IDENTITY_CLAIM_AUDIT_PATH = common.DERIVED / "hdb2-f-identity-claim-integrity-audit.json"
 PROFILE_FORM_TYPES = {"alias", "courtesy_name", "title", "observed_surface"}
 
 
@@ -55,6 +56,117 @@ def _profile_forms(profile: Mapping[str, Any]) -> list[tuple[str, str, str]]:
 def _provenance_rows(profile: Mapping[str, Any]) -> list[dict[str, Any]]:
     rows = (profile.get("identity") or {}).get("form_provenance", []) or []
     return [dict(row) for row in rows if isinstance(row, Mapping)]
+
+
+def _hdb1_identity_claim(row: Mapping[str, Any]) -> dict[str, Any] | None:
+    """Convert one HDB1 resolved row into an auditable claim envelope."""
+    source_status = str(row.get("identity_status") or "")
+    if source_status not in {"resolved_existing", "resolved_new_candidate"}:
+        return None
+    target = str(row.get("resolved_person_id") or row.get("provisional_person_id") or "")
+    if not target or not row.get("surface") or not row.get("evidence_ref"):
+        return None
+    return {
+        "claim_source": "hdb1_identity_observation",
+        "occurrence_id": row.get("occurrence_id") or common.occurrence_id(row),
+        "identity_observation_id": row.get("identity_observation_id"),
+        "story_id": row.get("story_id"),
+        "surface": row.get("surface"),
+        "exact_span": row.get("exact_span"),
+        "evidence_ref": row.get("evidence_ref"),
+        "entity_kind": row.get("entity_kind"),
+        "reference_form": row.get("reference_form"),
+        "identity_status": "direct_existing" if source_status == "resolved_existing" else "resolved_new_candidate",
+        "source_identity_status": source_status,
+        "target_person_id": target,
+        "identity_basis": row.get("identity_resolution_basis"),
+    }
+
+
+def _audit_identity_claims(
+    identity: Sequence[Mapping[str, Any]],
+    existing: Sequence[Mapping[str, Any]],
+    candidates: Sequence[Mapping[str, Any]],
+    catalog: Mapping[str, Mapping[str, Any]],
+) -> dict[str, Any]:
+    """Audit source-level identity claims before profile projection.
+
+    The HDB1 artifacts remain frozen.  This report makes a source-local
+    catalogue collision visible (for example 仲文 embedded in 殷仲文) while
+    leaving the original observation untouched and keeping only supported
+    claims in the rebuilt candidate-only profiles.
+    """
+    claims: list[dict[str, Any]] = []
+    for row in identity:
+        claim = _hdb1_identity_claim(row)
+        if claim is not None:
+            claims.append(claim)
+    claims.sort(key=lambda row: (str(row.get("occurrence_id")), str(row.get("identity_observation_id"))))
+
+    provenance: list[dict[str, Any]] = [
+        row
+        for profile in [*existing, *candidates]
+        for row in _provenance_rows(profile)
+    ]
+    retained_keys = {
+        (
+            str(row.get("occurrence_id") or ""),
+            str(row.get("surface") or ""),
+            str(row.get("person_id") or ""),
+        )
+        for row in provenance
+    }
+    audited: list[dict[str, Any]] = []
+    invalid: list[dict[str, Any]] = []
+    retained: list[dict[str, Any]] = []
+    for claim in claims:
+        decision = {
+            "status": claim.get("identity_status"),
+            "resolved_person_id": claim.get("target_person_id") if str(claim.get("target_person_id", "")).startswith("person-") else None,
+            "candidate_person_id": claim.get("target_person_id") if not str(claim.get("target_person_id", "")).startswith("person-") else None,
+            "surface": claim.get("surface"),
+            "evidence_ref": claim.get("evidence_ref"),
+            "exact_span": claim.get("exact_span"),
+            "occurrence_id": claim.get("occurrence_id"),
+            "identity_observation_id": claim.get("identity_observation_id"),
+            "story_id": claim.get("story_id"),
+            "identity_resolution_basis": claim.get("identity_basis"),
+        }
+        reasons = projection.profile_form_support_reasons(decision, claim, catalog)
+        key = (
+            str(claim.get("occurrence_id") or ""),
+            str(claim.get("surface") or ""),
+            str(claim.get("target_person_id") or ""),
+        )
+        context = projection._shishuo_story_context(str(claim.get("story_id") or ""))
+        item = {
+            **claim,
+            "source_local_context": context,
+            "source_claim_supported": not reasons,
+            "profile_form_retained": key in retained_keys,
+            "rejection_reasons": reasons,
+        }
+        audited.append(item)
+        if reasons:
+            invalid.append(item)
+        elif key in retained_keys:
+            retained.append(item)
+
+    return {
+        "schema": "hdb2-f-identity-claim-integrity-audit-v1",
+        "claim_count": len(audited),
+        "audited_identity_claims": audited,
+        "invalid_source_identity_claims": invalid,
+        "retained_source_identity_claims": retained,
+        "removed_profile_forms": [],
+        "retained_profile_forms": sorted(provenance, key=lambda row: (
+            str(row.get("person_id")),
+            str(row.get("surface")),
+            str(row.get("occurrence_id")),
+        )),
+        "candidate_only": True,
+        "canonical_write_back": False,
+    }
 
 
 def _known_contamination(profile: Mapping[str, Any]) -> list[dict[str, Any]]:
@@ -227,6 +339,9 @@ def rebuild(run_dir: Path = RUN_DIR, *, write: bool = True) -> dict[str, Any]:
     old_existing = common.read_json(EXISTING_PROFILE, {}) or {}
     old_candidates = common.read_json(CANDIDATE_PROFILE, {}) or {}
     audit = _audit_profiles(old_existing, old_candidates, existing, candidates, decisions)
+    claim_audit = _audit_identity_claims(identity, existing, candidates, hng02.person_catalog())
+    claim_audit["removed_profile_forms"] = list(audit.get("profile_forms_removed") or [])
+    audit["identity_claim_audit_path"] = str(IDENTITY_CLAIM_AUDIT_PATH.relative_to(ROOT))
     if write:
         # Keep the one-time remediation summary visible on idempotent rebuilds.
         # After the first repaired write the current files are, correctly, no
@@ -242,6 +357,7 @@ def rebuild(run_dir: Path = RUN_DIR, *, write: bool = True) -> dict[str, Any]:
         common.write_json(EXISTING_PROFILE, existing_document)
         common.write_json(CANDIDATE_PROFILE, candidate_document)
         common.write_json(AUDIT_PATH, audit)
+        common.write_json(IDENTITY_CLAIM_AUDIT_PATH, claim_audit)
     return audit
 
 

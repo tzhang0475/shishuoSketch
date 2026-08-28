@@ -7,6 +7,7 @@ import {
   type HDB2ReviewIndexItem,
   type HDB2ReviewItem,
   type HDB2AffectedFact,
+  type HDB2ReferenceStructure,
 } from "./hdb2Review";
 
 const STORAGE_KEY = "shishuoSketch.hdb2-human-review";
@@ -34,6 +35,8 @@ function typeLabel(value: string): string {
 
 function statusLabel(value: string): string {
   return {
+    stable_entity_resolved: "稳定人物解析（候选结果）",
+    local_candidate_resolved: "本地候选解析（尚非 canonical）",
     direct_existing: "已由 HDB1 直接解析",
     explicit_resolved: "明确证据解析",
     contextually_resolved: "语境解析",
@@ -42,9 +45,36 @@ function statusLabel(value: string): string {
     compositional_reference: "结构性亲属表达",
     ruler_reference: "帝王称谓表达",
     office_reference: "官职表达",
+    structural_reference: "结构性指称（未绑定人物）",
+    genuinely_unresolved: "确实未解析",
+    not_person: "非独立人物指称",
     unresolved: "未解析",
     conflict: "冲突",
   }[value] ?? value;
+}
+
+function safeDisplay(value: unknown, fallback: string): string {
+  if (typeof value !== "string" && typeof value !== "number") return fallback;
+  const text = String(value).trim();
+  return text && text !== "null" && text !== "undefined" ? text : fallback;
+}
+
+function safeOptional(value: unknown): string | null {
+  const text = safeDisplay(value, "");
+  return text ? text : null;
+}
+
+function storyHref(storyId: string): string {
+  const base = import.meta.env.BASE_URL.endsWith("/")
+    ? import.meta.env.BASE_URL
+    : `${import.meta.env.BASE_URL}/`;
+  return `${base}#story=${encodeURIComponent(storyId)}`;
+}
+
+function structuralEndpointLabel(value: HDB2ReferenceStructure["anchor_person"]): string {
+  if (typeof value === "string") return safeDisplay(value, "未确定");
+  if (!value || typeof value !== "object") return "未确定";
+  return safeDisplay(value.label ?? value.surface, "未确定");
 }
 
 function prettyFactState(value: string | undefined): string {
@@ -73,11 +103,11 @@ function exportDecisions(decisions: Record<string, HDB2HumanDecision>): void {
 function EvidencePanel({ item }: { item: HDB2ReviewItem }) {
   return (
     <div className="hdb2-evidence-stack">
-      {item.selected_evidence.map((evidence) => (
-        <details className="irr0-evidence" key={evidence.evidence_ref} open={evidence.exact_spans.length > 0}>
-          <summary>{evidence.source_work ?? "史料"} · {evidence.source_layer ?? ""} · {evidence.evidence_ref}</summary>
-          <blockquote>{evidence.excerpt}</blockquote>
-          {evidence.exact_spans.length > 0 && <p className="hdb2-exact-spans">直接证据：{evidence.exact_spans.join("；")}</p>}
+      {item.selected_evidence.map((evidence, index) => (
+        <details className="irr0-evidence" key={`${safeDisplay(evidence.evidence_ref, "evidence")}-${index}`} open={evidence.exact_spans.length > 0}>
+          <summary>{safeDisplay(evidence.source_work, "史料")} · {safeDisplay(evidence.source_layer, "")} · {safeDisplay(evidence.evidence_ref, "未标识证据")}</summary>
+          <blockquote>{safeDisplay(evidence.excerpt, "暂无证据摘录")}</blockquote>
+          {evidence.exact_spans.length > 0 && <p className="hdb2-exact-spans">直接证据：{evidence.exact_spans.map((span) => safeDisplay(span, "未提供")).join("；")}</p>}
         </details>
       ))}
     </div>
@@ -102,7 +132,7 @@ function JudgmentPrompt({ item }: { item: HDB2ReviewItem }) {
       <div className="hdb2-decision-options">
         <p className="irr0-label">可作的判断</p>
         <ul>
-          {item.decision_options.map((option) => <li key={option.key}><strong>{option.label}</strong><span>{option.description}</span></li>)}
+          {item.decision_options.map((option, index) => <li key={`${safeDisplay(option.key, "option")}-${index}`}><strong>{safeDisplay(option.label, "未命名判断")}</strong><span>{safeDisplay(option.description, "")}</span></li>)}
         </ul>
       </div>
     </section>
@@ -115,7 +145,7 @@ function MaterializationImpact({ item }: { item: HDB2ReviewItem }) {
       <p className="irr0-label">如果接受此判断，可能解锁</p>
       {item.materialization_impact.summary.length === 0
         ? <p className="irr0-muted">当前没有可量化的解锁项。</p>
-        : <ul>{item.materialization_impact.summary.map((entry) => <li key={entry.kind}><strong>{entry.label}</strong></li>)}</ul>}
+        : <ul>{item.materialization_impact.summary.map((entry, index) => <li key={`${safeDisplay(entry.kind, "impact")}-${index}`}><strong>{safeDisplay(entry.label, "未说明解锁项")}</strong></li>)}</ul>}
     </section>
   );
 }
@@ -127,12 +157,33 @@ function FactGroup({ label, facts }: { label: string; facts: HDB2AffectedFact[] 
       <p className="irr0-sublabel">{label}</p>
       {facts.map((fact, index) => (
         <article className="hdb2-fact" key={`${String(fact.candidate_id ?? index)}-${index}`}>
-          <strong>{String(fact.relation_surface ?? fact.relation_class ?? "历史事实候选")}</strong>
+          <strong>{safeDisplay(fact.relation_surface ?? fact.relation_class, "历史事实候选")}</strong>
           <span>{prettyFactState(typeof fact.state === "string" ? fact.state : undefined)}</span>
-          {fact.primary_blocker && <small>阻塞：{String(fact.primary_blocker)}</small>}
-          {fact.exact_span && <blockquote>{String(fact.exact_span)}</blockquote>}
+          {fact.primary_blocker && <small>阻塞：{safeDisplay(fact.primary_blocker, "未说明")}</small>}
+          {fact.exact_span && <blockquote>{safeDisplay(fact.exact_span, "未提供引文")}</blockquote>}
         </article>
       ))}
+    </section>
+  );
+}
+
+function StructuralReferencePanel({ structure }: { structure: HDB2ReferenceStructure | null }) {
+  if (!structure) return null;
+  const rows = [
+    ["语义结构", safeDisplay(structure.surface_structure, "未确定")],
+    ["指代类型", safeDisplay(structure.referent_type, "未确定")],
+    ["基准人物", structuralEndpointLabel(structure.anchor_person)],
+    ["官职持有人", structuralEndpointLabel(structure.holder)],
+    ["主事者 / 所属者", structuralEndpointLabel(structure.patron_or_possessor)],
+    ["实际指代对象", structuralEndpointLabel(structure.referent_candidate)],
+  ].filter(([, value]) => value !== "未确定" || structure.surface_structure || structure.referent_type) as Array<[string, string]>;
+  if (rows.length === 0) return null;
+  return (
+    <section className="hdb2-structural-reference">
+      <p className="irr0-label">引用结构（各角色分开，不等同于最终人物）</p>
+      <dl className="hdb2-structural-details">
+        {rows.map(([label, value]) => <div key={label}><dt>{label}</dt><dd>{value}</dd></div>)}
+      </dl>
     </section>
   );
 }
@@ -149,13 +200,17 @@ function HDB2ReviewDetail({
   const proposed = item.proposed_identity;
   const compositional = item.current_state.compositional_referent;
   const affected = item.affected_facts;
+  const structural = item.reference_structure ?? null;
+  const reviewerRejected = item.reviewer_rejected_top_candidate === true || item.reviewer_verdict === "reject_top_candidate";
+  const proposedLabel = safeOptional(proposed.label);
+  const canAcceptProposed = !reviewerRejected && Boolean(proposedLabel) && Boolean(safeOptional(proposed.candidate_key));
   return (
     <article className="hdb2-review-detail">
       <header className="irr0-condition-heading">
         <div>
           <p className="irr0-label">{typeLabel(item.review_type)} · {item.priority}</p>
-          <h2>{item.target_surface}</h2>
-          <p className="irr0-muted">{item.story_id} · {item.occurrence_id}</p>
+          <h2>{safeDisplay(item.target_surface, "未标记表达")}</h2>
+          <p className="irr0-muted"><a className="hdb2-story-link" href={storyHref(item.story_id)}>{safeDisplay(item.story_id, "未标记故事")}</a> · {safeDisplay(item.occurrence_id, "未标记出现")}</p>
         </div>
         <span className="irr0-provider-badge">{statusLabel(item.current_state.status)}</span>
       </header>
@@ -173,11 +228,14 @@ function HDB2ReviewDetail({
         )}
       </section>
 
+      <StructuralReferencePanel structure={structural} />
+
       <section className="hdb2-proposal">
         <p className="irr0-label">当前建议</p>
-        <p className="hdb2-proposal-name">{proposed.label ?? "未提出单一人物"}</p>
-        <p className="irr0-muted">{statusLabel(proposed.status)} · {proposed.basis ?? "无"}</p>
+        <p className="hdb2-proposal-name">{proposedLabel ?? "暂无安全的单一人物建议"}</p>
+        <p className="irr0-muted">{statusLabel(proposed.status)} · {safeDisplay(proposed.basis, "无")}</p>
         {item.support_families.length > 0 && <p className="hdb2-support">支持族：{item.support_families.join("、")}</p>}
+        {reviewerRejected && <p className="hdb2-reviewer-rejection">审核器已拒绝当前首选候选；本页不会将其视为已接受。</p>}
       </section>
 
       {item.review_type === "compositional_kinship" && (
@@ -186,9 +244,9 @@ function HDB2ReviewDetail({
           <p>此表达不是自动等同于其中的基础人物。</p>
           {item.compositional_context ? (
             <dl className="hdb2-compositional-details">
-              <div><dt>基准人物</dt><dd>{item.compositional_context.base_person?.label ?? "未确定"}{item.compositional_context.base_person?.surface && item.compositional_context.base_person.surface !== item.compositional_context.base_person.label ? `（${item.compositional_context.base_person.surface}）` : ""}</dd></div>
-              <div><dt>关系类型</dt><dd>{item.compositional_context.relation_label ?? item.compositional_context.relation_type ?? "未确定"}{item.compositional_context.relation_surface ? `（${item.compositional_context.relation_surface}）` : ""}</dd></div>
-              <div><dt>指代对象候选</dt><dd>{item.compositional_context.referent_candidates.length > 0 ? item.compositional_context.referent_candidates.map((candidate) => candidate.display_name).join("、") : "暂无安全候选"}</dd></div>
+              <div><dt>基准人物</dt><dd>{safeDisplay(item.compositional_context.base_person?.label ?? item.compositional_context.base_person?.surface, "未确定")}{item.compositional_context.base_person?.surface && item.compositional_context.base_person.surface !== item.compositional_context.base_person.label ? `（${safeDisplay(item.compositional_context.base_person.surface, "未提供")}）` : ""}</dd></div>
+              <div><dt>关系类型</dt><dd>{safeDisplay(item.compositional_context.relation_label ?? item.compositional_context.relation_type, "未确定")}{item.compositional_context.relation_surface ? `（${safeDisplay(item.compositional_context.relation_surface, "未提供")}）` : ""}</dd></div>
+              <div><dt>指代对象候选</dt><dd>{item.compositional_context.referent_candidates.length > 0 ? item.compositional_context.referent_candidates.map((candidate) => safeDisplay(candidate.display_name, "未命名候选")).join("、") : "暂无安全候选"}</dd></div>
             </dl>
           ) : compositional ? <pre>{JSON.stringify(compositional, null, 2)}</pre> : <p className="irr0-muted">请确认其结构性亲属关系及可能的独立指代。</p>}
         </section>
@@ -199,9 +257,9 @@ function HDB2ReviewDetail({
         {item.candidate_people.length === 0
           ? <p className="irr0-muted">没有安全候选；可保留未解析或提出新人物候选。</p>
           : <div className="hdb2-candidate-list">{item.candidate_people.map((candidate, index) => (
-            <button type="button" key={`${candidate.candidate_key ?? "candidate"}-${candidate.display_name}`} className={decision?.candidate_key === candidate.candidate_key ? "active" : ""} onClick={() => onAction("choose_candidate", candidate.candidate_key)}>
-              <strong>#{candidate.rank ?? index + 1} {candidate.display_name}</strong>
-              <small>{candidate.person_id ?? "候选人物"}{candidate.source ? ` · ${candidate.source}` : ""}</small>
+            <button type="button" key={`${safeDisplay(candidate.candidate_key, "candidate")}-${index}`} className={decision?.candidate_key === candidate.candidate_key ? "active" : ""} onClick={() => onAction("choose_candidate", safeOptional(candidate.candidate_key))}>
+              <strong>#{candidate.rank ?? index + 1} {safeDisplay(candidate.display_name, "未命名候选")}</strong>
+              <small>{candidate.person_id ? `已有 Person · ${safeDisplay(candidate.person_id, "未标识")}` : "候选人物（尚非 canonical）"}{candidate.source ? ` · ${safeDisplay(candidate.source, "")}` : ""}</small>
             </button>
           ))}</div>}
       </section>
@@ -217,7 +275,7 @@ function HDB2ReviewDetail({
         <FactGroup label="亲属" facts={affected.kinship} />
         <FactGroup label="婚姻" facts={affected.marriage} />
         <FactGroup label="官职" facts={affected.office} />
-        {affected.person_story.length > 0 && <p className="irr0-muted">本故事人物链接：{affected.person_story.map((entry) => String(entry.person_id ?? "待定")).join("、")}</p>}
+        {affected.person_story.length > 0 && <p className="irr0-muted">本故事人物链接：{affected.person_story.map((entry, index) => `${safeDisplay(entry.person_id, "待定")}（${index + 1}）`).join("、")}</p>}
       </section>
 
       <MaterializationImpact item={item} />
@@ -225,7 +283,7 @@ function HDB2ReviewDetail({
       <section className="hdb2-human-actions" aria-label="人工判断">
         <p className="irr0-label">人工判断（仅保存本地审阅，不写入 canonical）</p>
         <div className="irr0-review-choice-list">
-          <button type="button" className={decision?.action === "accept_proposed" ? "active" : ""} onClick={() => onAction("accept_proposed", proposed.candidate_key)}>接受当前建议</button>
+          <button type="button" disabled={!canAcceptProposed} className={decision?.action === "accept_proposed" ? "active" : ""} onClick={() => onAction("accept_proposed", safeOptional(proposed.candidate_key))}>{reviewerRejected ? "当前建议已被拒绝" : "接受当前建议"}</button>
           <button type="button" className={decision?.action === "new_person_candidate" ? "active" : ""} onClick={() => onAction("new_person_candidate", null)}>新人物候选</button>
           <button type="button" className={decision?.action === "keep_unresolved" ? "active" : ""} onClick={() => onAction("keep_unresolved", null)}>保持未解析</button>
           <button type="button" className={decision?.action === "evidence_problem" ? "active" : ""} onClick={() => onAction("evidence_problem", null)}>证据 / 问题标记</button>

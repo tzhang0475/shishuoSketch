@@ -70,6 +70,8 @@ def _errors_for_run(run_id: str) -> list[str]:
         errors.append("protected_hashes_changed_during_live_run")
     if not xe0.protected_hashes_match_manifest(manifest.get("protected_hashes_after", {})):
         errors.append("protected_hashes_changed_after_live_run")
+    if not xe0.authorized_derived_projection_matches_manifest(manifest):
+        errors.append("authorized_derived_projection_baseline_invalid")
 
     baseline_ids = set(baseline.get("review_ids", []))
     resolved_ids = {str(row.get("review_id")) for row in audit.get("resolved_items", [])}

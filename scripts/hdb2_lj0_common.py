@@ -27,6 +27,7 @@ ROOT = Path(__file__).resolve().parents[1]
 ANNOTATION = ROOT / "data/annotation"
 DERIVED = ROOT / "data/derived"
 REVIEW_ROOT = ROOT / "site/public/generated/review/hdb2"
+FROZEN_SELECTION_PATH = ANNOTATION / "hdb2-lj0-selection.json"
 MODEL = "deepseek-v4-flash"
 STRICT_ENDPOINT = "https://api.deepseek.com/beta/chat/completions"
 RUN_VERSION = "hdb2-lj0-v1"
@@ -228,7 +229,12 @@ def _selection_row(item: Mapping[str, Any]) -> dict[str, Any]:
     }
 
 
-def build_selection(items: Sequence[Mapping[str, Any]], *, limit: int = 24) -> dict[str, Any]:
+def build_selection(
+    items: Sequence[Mapping[str, Any]],
+    *,
+    limit: int = 24,
+    frozen_path: Path | None = FROZEN_SELECTION_PATH,
+) -> dict[str, Any]:
     if not 20 <= limit <= 30:
         raise ValueError("lj0_selection_limit_out_of_range")
     ordered = sorted(
@@ -285,11 +291,25 @@ def build_selection(items: Sequence[Mapping[str, Any]], *, limit: int = 24) -> d
         "selection_hash": None,
     }
     result["selection_hash"] = stable_hash({key: value for key, value in result.items() if key != "selection_hash"})
+
+    # LJ0 predates the question-first HDB2 review projection.  Its historical
+    # selection contract is the selected occurrence rows, not the review
+    # index's presentation metadata (labels, questions, and UI fields).  Keep
+    # the frozen representation when that semantic contract is unchanged so
+    # a reviewer-facing rebuild cannot masquerade as a new LJ0 sample.  Any
+    # change to the selected rows or other selection metadata still reaches
+    # ``freeze_selection`` and fails closed.
+    if frozen_path is not None and frozen_path.is_file():
+        frozen = read_json(frozen_path, {}) or {}
+        comparable = {key: value for key, value in result.items() if key not in {"source_inputs", "selection_hash"}}
+        frozen_comparable = {key: value for key, value in frozen.items() if key not in {"source_inputs", "selection_hash"}}
+        if comparable == frozen_comparable:
+            return frozen
     return result
 
 
 def freeze_selection(path: Path, items: Sequence[Mapping[str, Any]], *, limit: int = 24) -> dict[str, Any]:
-    proposed = build_selection(items, limit=limit)
+    proposed = build_selection(items, limit=limit, frozen_path=path)
     if path.is_file():
         existing = read_json(path, {}) or {}
         if existing != proposed:

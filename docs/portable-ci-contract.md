@@ -12,6 +12,13 @@ Portable CI validates committed canonical data, provenance metadata, derived
 artifacts, deterministic builders, frontend projections, typechecking, the
 production build, and published-artifact scope.
 
+Live-provider experiments are not part of the normal Pages/portable command.
+They are explicitly opt-in; when run in an environment without network
+access, their preflight records the transport classification and the
+offline/replay validator remains the CI path.  A reachable provider's schema
+or transport failure is still reported and is never converted into a
+successful semantic result.
+
 Tests that rebuild artifacts from ignored raw source payloads may skip only
 when all three conditions hold:
 

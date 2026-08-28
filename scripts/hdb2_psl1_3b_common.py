@@ -76,6 +76,8 @@ def _prior_story_ids() -> set[str]:
                 "hdb2_psl1_3b",
                 "hdb2-psl1-3c",
                 "hdb2_psl1_3c",
+                "hdb2-psl1-3d",
+                "hdb2_psl1_3d",
             )):
                 continue
             try:

@@ -97,6 +97,26 @@ class HDB2XE0Tests(unittest.TestCase):
         manifest = json.loads((xe0.XE0_ROOT / "live/20260826T-HDB2-XE0-02/manifest.json").read_text(encoding="utf-8"))
         self.assertEqual(manifest["protected_hashes_before"], manifest["protected_hashes_after"])
         self.assertTrue(xe0.protected_hashes_match_manifest(manifest["protected_hashes_after"]))
+        self.assertTrue(xe0.authorized_derived_projection_matches_manifest(manifest))
+
+    def test_canonical_drift_is_distinct_from_authorized_derived_profile_transition(self) -> None:
+        manifest = json.loads((xe0.XE0_ROOT / "live/20260826T-HDB2-XE0-02/manifest.json").read_text(encoding="utf-8"))
+        derived = dict(manifest["authorized_derived_projection_hashes"])
+        derived["data/derived/hdb2-f-person-knowledge.json"] = "authorized-transition-recorded-hash"
+
+        # A derived projection is not part of the immutable HDB2-F snapshot;
+        # its intentional rebuild is validated through an explicit versioned
+        # baseline instead.
+        immutable = dict(manifest["protected_hashes_after"])
+        self.assertTrue(xe0.protected_hashes_match_manifest(immutable))
+        self.assertFalse(xe0.protected_hashes_match_manifest({**immutable, "data/people.json": "canonical-drift"}))
+
+        transitioned = dict(manifest)
+        transitioned["authorized_derived_projection_hashes"] = xe0._authorized_derived_projection_hashes()
+        self.assertTrue(xe0.authorized_derived_projection_matches_manifest(transitioned))
+        transitioned["authorized_derived_projection_version"] = "unrecorded-profile-version"
+        self.assertFalse(xe0.authorized_derived_projection_matches_manifest(transitioned))
+        self.assertNotEqual(derived, xe0._authorized_derived_projection_hashes())
 
 
 if __name__ == "__main__":
