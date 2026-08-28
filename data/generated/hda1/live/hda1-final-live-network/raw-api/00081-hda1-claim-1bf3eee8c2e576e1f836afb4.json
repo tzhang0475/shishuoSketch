@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"verdict\": \"support\", \"supporting_evidence_ids\": [\"ev-0be9ee919c1855526627\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"local_coreference\", \"courtesy_name_assertion\"], \"suggested_identity_surface\": \"庾亮\", \"explanation\": \"The evidence text contains both \\\"庾元規\\\" and \\\"亮\\\" in the same passage. The passage reads: \\\"明帝問周伯仁卿自謂何如庾元規對曰蕭條方外亮不如臣從容廊廟臣不如亮\\\" — here \\\"庾元規\\\" is mentioned and then \\\"亮\\\" appears twice in the response. Since 庾亮's courtesy name (字) is 元規, and the text uses \\\"亮\\\" as the given name in the same sentence referring to the same person being compared, the local coreference between \\\"庾元規\\\" and \\\"亮\\\" establishes that 庾元規 refers to 庾亮. The courtesy name assertion (元規 being 庾亮's courtesy name) combined with the local coreference in the same passage supports the identity claim.\"}",
+              "name": "submit_identity_audit_verdict"
+            },
+            "id": "call_00_LceIMQnaEFD623OE5CRH7922",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787897257,
+  "id": "9cf4ea0c-95a1-4291-b5e2-5764196f3315",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 346,
+    "prompt_cache_hit_tokens": 512,
+    "prompt_cache_miss_tokens": 415,
+    "prompt_tokens": 927,
+    "prompt_tokens_details": {
+      "cached_tokens": 512
+    },
+    "total_tokens": 1273
+  }
+}
