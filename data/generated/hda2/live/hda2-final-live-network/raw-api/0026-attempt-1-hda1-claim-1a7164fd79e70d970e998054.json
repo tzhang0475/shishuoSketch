@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"verdict\": \"propose_alternative\", \"alternative_surface\": \"王蒙\", \"supporting_evidence_ids\": [\"hda2-ev-2d7e2b34b647bfc2af38\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"different_named_person\", \"explicit_identity\"], \"explanation\": \"The evidence passage states: \\\"(將軍伊少有才蓺又善聲律加以標悟省率爲王蒙/小字也續晉陽秋曰伊字叔夏譙國銍人父景護軍)\\\". The passage explicitly identifies 王蒙 as the 小字 (childhood name) of 伊 (i.e., 桓伊, whose courtesy name is 叔夏). The claimed person is 王濛, but the evidence clearly indicates that the surface 王蒙 refers to a different person — it is the childhood name of 桓伊, not the person 王濛. The candidate alternative surface 王蒙 is proposed as the correct referent for this occurrence, since the text explicitly states 王蒙 is the 小字 of 伊 (桓伊).\"}",
+              "name": "submit_hda2_remediation_verdict"
+            },
+            "id": "call_00_VZeomM1Cxz8gL90LgoQs8420",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787945685,
+  "id": "2f31f17e-4279-445e-b79d-ede543fd44cc",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 339,
+    "prompt_cache_hit_tokens": 512,
+    "prompt_cache_miss_tokens": 558,
+    "prompt_tokens": 1070,
+    "prompt_tokens_details": {
+      "cached_tokens": 512
+    },
+    "total_tokens": 1409
+  }
+}

@@ -1,0 +1,3190 @@
+{
+  "adaptive_policy": {
+    "channel_targets": {
+      "coverage_peripheral": 4,
+      "coverage_underrepresented": 3,
+      "exploitation_relation_rich": 6,
+      "exploitation_underrepresented": 6,
+      "random_control": 5
+    },
+    "coverage_fraction": 0.291667,
+    "exploitation_fraction": 0.5,
+    "random_control_fraction": 0.208333,
+    "wave_a_snapshot": {
+      "after": {
+        "candidate_person_count": 33,
+        "connected_components": 26,
+        "existing_person_count": 75,
+        "graph_edges": 1016,
+        "graph_nodes": 387,
+        "identity_occurrence_count": 445,
+        "isolated_orphan_nodes": 5,
+        "kinship_fact_or_candidate_count": 30,
+        "largest_component_size": 342,
+        "marriage_fact_or_candidate_count": 10,
+        "office_fact_count": 38,
+        "person_story_count": 350,
+        "social_relation_edge_count": 258,
+        "story_count": 163,
+        "unresolved_identity_count": 42
+      },
+      "channel_yield": {
+        "graph_guided_frontier_rich": {
+          "existing_person_links": 0,
+          "new_person_candidates": 4,
+          "relation_candidates": 4,
+          "review_items": 4,
+          "story_count": 4
+        },
+        "new_person_rich": {
+          "existing_person_links": 0,
+          "new_person_candidates": 4,
+          "relation_candidates": 6,
+          "review_items": 4,
+          "story_count": 4
+        },
+        "peripheral_low_connectivity": {
+          "existing_person_links": 0,
+          "new_person_candidates": 3,
+          "relation_candidates": 3,
+          "review_items": 3,
+          "story_count": 3
+        },
+        "random_control": {
+          "existing_person_links": 0,
+          "new_person_candidates": 2,
+          "relation_candidates": 1,
+          "review_items": 2,
+          "story_count": 2
+        },
+        "relation_rich": {
+          "existing_person_links": 0,
+          "new_person_candidates": 4,
+          "relation_candidates": 6,
+          "review_items": 4,
+          "story_count": 4
+        },
+        "underrepresented_chapter": {
+          "existing_person_links": 0,
+          "new_person_candidates": 3,
+          "relation_candidates": 7,
+          "review_items": 3,
+          "story_count": 3
+        }
+      },
+      "metrics_file_hash": "0793bb4ef49a54b11556a97e01fd3833a1efe32f09a80b0279219ac5647eb6f9",
+      "metrics_path": "data/derived/hge1-wave-a-metrics.json",
+      "selection_file_hash": "a64a17f5fb3372038d8e130ea35a915e7e17ece50360f61fb5749bd2dd4110ae",
+      "selection_hash": "28570631b7888ca703a1d45dffe5c5c43a6cb1424ff8bde32a7927427e20e0e3",
+      "selection_path": "data/annotation/hge1-wave-a-selection.json"
+    }
+  },
+  "algorithm_version": "HNG2-C.3/HDB2-P2T-frozen-frontier-v1",
+  "candidate_only": true,
+  "canonical_write_back": false,
+  "frozen_before_live": true,
+  "model": "deepseek-v4-flash",
+  "overlap_with_prior": [],
+  "overlap_with_production": [],
+  "prior_story_count": 1084,
+  "prior_story_evidence": [
+    {
+      "path": "data/annotation/hdb1-identity-candidates.json",
+      "sha256": "c5012a7b1caed59f39bcb836ec362707300cf809d6928dfd7b65f6d6611503f0",
+      "story_count": 47,
+      "story_ids": [
+        "01-dexing-012",
+        "01-dexing-026",
+        "01-dexing-028",
+        "02-yanyu-036",
+        "02-yanyu-042",
+        "02-yanyu-047",
+        "02-yanyu-069",
+        "03-zhengshi-006",
+        "03-zhengshi-022",
+        "04-wenxue-069",
+        "05-fangzheng-023",
+        "05-fangzheng-027",
+        "05-fangzheng-028",
+        "05-fangzheng-037",
+        "05-fangzheng-041",
+        "05-fangzheng-051",
+        "05-fangzheng-053",
+        "05-fangzheng-058",
+        "07-shijian-005",
+        "07-shijian-006",
+        "07-shijian-019",
+        "07-shijian-021",
+        "08-shangyu-019",
+        "08-shangyu-022",
+        "08-shangyu-054",
+        "08-shangyu-079",
+        "09-pinzao-006",
+        "09-pinzao-008",
+        "09-pinzao-018",
+        "09-pinzao-025",
+        "09-pinzao-032",
+        "09-pinzao-036",
+        "09-pinzao-040",
+        "09-pinzao-063",
+        "11-jiewu-005",
+        "18-qiyi-004",
+        "19-xianyuan-018",
+        "23-rendan-001",
+        "23-rendan-013",
+        "23-rendan-028",
+        "23-rendan-038",
+        "24-jianao-003",
+        "25-paidiao-015",
+        "25-paidiao-060",
+        "27-jiajue-009",
+        "29-jianshe-001",
+        "36-chouxi-003"
+      ]
+    },
+    {
+      "path": "data/annotation/hdb1-rejected-items.json",
+      "sha256": "60e33602c870a0976c9f8a84cbfbe85393355c576811f4e365b7c769f3071894",
+      "story_count": 1,
+      "story_ids": [
+        "05-fangzheng-012"
+      ]
+    },
+    {
+      "path": "data/annotation/hdb1-wave1-selection.json",
+      "sha256": "036cdaee2e3e646ba7a3477943be25f08be67e398515d2b28ab44545a3aa2be3",
+      "story_count": 54,
+      "story_ids": [
+        "01-dexing-014",
+        "01-dexing-017",
+        "01-dexing-038",
+        "01-dexing-040",
+        "01-dexing-045",
+        "02-yanyu-008",
+        "02-yanyu-011",
+        "02-yanyu-052",
+        "02-yanyu-053",
+        "02-yanyu-070",
+        "02-yanyu-072",
+        "02-yanyu-083",
+        "03-zhengshi-005",
+        "03-zhengshi-011",
+        "04-wenxue-017",
+        "04-wenxue-022",
+        "04-wenxue-092",
+        "04-wenxue-094",
+        "04-wenxue-097",
+        "05-fangzheng-025",
+        "05-fangzheng-032",
+        "05-fangzheng-034",
+        "06-yaliang-017",
+        "06-yaliang-023",
+        "07-shijian-016",
+        "08-shangyu-004",
+        "08-shangyu-005",
+        "08-shangyu-035",
+        "09-pinzao-014",
+        "09-pinzao-038",
+        "09-pinzao-055",
+        "10-guizhen-021",
+        "14-rongzhi-005",
+        "14-rongzhi-024",
+        "17-shangshi-006",
+        "18-qiyi-009",
+        "18-qiyi-010",
+        "19-xianyuan-010",
+        "19-xianyuan-014",
+        "20-shujie-005",
+        "22-chongli-002",
+        "22-chongli-005",
+        "23-rendan-002",
+        "23-rendan-012",
+        "25-paidiao-007",
+        "25-paidiao-009",
+        "25-paidiao-021",
+        "25-paidiao-035",
+        "26-qingdi-008",
+        "27-jiajue-004",
+        "27-jiajue-008",
+        "29-jianshe-004",
+        "31-fenjuan-006",
+        "33-youhui-012"
+      ]
+    },
+    {
+      "path": "data/annotation/hdb1-wave2-identity-candidates.json",
+      "sha256": "55a6d190594df4d30b0c29d478a31cf9ec33c5df047fe1cfc6a1a9ea2eda8a08",
+      "story_count": 72,
+      "story_ids": [
+        "01-dexing-015",
+        "01-dexing-016",
+        "01-dexing-023",
+        "01-dexing-025",
+        "01-dexing-047",
+        "02-yanyu-030",
+        "02-yanyu-035",
+        "02-yanyu-037",
+        "02-yanyu-046",
+        "02-yanyu-054",
+        "02-yanyu-066",
+        "02-yanyu-071",
+        "02-yanyu-078",
+        "02-yanyu-079",
+        "02-yanyu-086",
+        "02-yanyu-101",
+        "02-yanyu-107",
+        "04-wenxue-024",
+        "04-wenxue-036",
+        "04-wenxue-087",
+        "05-fangzheng-009",
+        "05-fangzheng-011",
+        "05-fangzheng-018",
+        "05-fangzheng-030",
+        "05-fangzheng-031",
+        "05-fangzheng-033",
+        "05-fangzheng-055",
+        "06-yaliang-019",
+        "06-yaliang-027",
+        "06-yaliang-029",
+        "06-yaliang-033",
+        "06-yaliang-041",
+        "07-shijian-018",
+        "08-shangyu-006",
+        "08-shangyu-013",
+        "08-shangyu-020",
+        "08-shangyu-034",
+        "08-shangyu-043",
+        "08-shangyu-051",
+        "08-shangyu-067",
+        "08-shangyu-073",
+        "08-shangyu-077",
+        "09-pinzao-017",
+        "09-pinzao-019",
+        "09-pinzao-022",
+        "09-pinzao-026",
+        "09-pinzao-030",
+        "09-pinzao-045",
+        "09-pinzao-088",
+        "10-guizhen-011",
+        "10-guizhen-012",
+        "10-guizhen-016",
+        "14-rongzhi-023",
+        "17-shangshi-002",
+        "17-shangshi-008",
+        "19-xianyuan-013",
+        "19-xianyuan-026",
+        "19-xianyuan-032",
+        "23-rendan-026",
+        "23-rendan-033",
+        "23-rendan-049",
+        "24-jianao-001",
+        "24-jianao-002",
+        "25-paidiao-026",
+        "25-paidiao-038",
+        "26-qingdi-002",
+        "27-jiajue-006",
+        "27-jiajue-012",
+        "29-jianshe-008",
+        "33-youhui-007",
+        "34-pilou-001",
+        "35-huoni-003"
+      ]
+    },
+    {
+      "path": "data/annotation/hdb1-wave2-rejected-items.json",
+      "sha256": "d3e059275e0f0c34f4d24b12a7de8c2aa03ec642a20ea40e83860b81ce1b42bc",
+      "story_count": 1,
+      "story_ids": [
+        "23-rendan-037"
+      ]
+    },
+    {
+      "path": "data/annotation/hdb2-psl1-3b-selection.json",
+      "sha256": "afb4654fb0a2197d705133fac570fb2004b22fc7c0464948bc52034f0ae5d671",
+      "story_count": 11,
+      "story_ids": [
+        "02-yanyu-018",
+        "02-yanyu-073",
+        "02-yanyu-090",
+        "05-fangzheng-039",
+        "06-yaliang-010",
+        "08-shangyu-011",
+        "08-shangyu-055",
+        "08-shangyu-130",
+        "13-haoshuang-006",
+        "16-qixian-001",
+        "25-paidiao-008"
+      ]
+    },
+    {
+      "path": "data/annotation/hdb2-xe0-story-selection.json",
+      "sha256": "5aace8e3c3727fd506a02b1dab1cf0b56d9a1649ba5af5c87b3b8cb7ecf6fcb6",
+      "story_count": 17,
+      "story_ids": [
+        "01-dexing-033",
+        "01-dexing-034",
+        "02-yanyu-025",
+        "02-yanyu-062",
+        "03-zhengshi-013",
+        "04-wenxue-020",
+        "04-wenxue-090",
+        "07-shijian-015",
+        "07-shijian-027",
+        "08-shangyu-046",
+        "08-shangyu-058",
+        "08-shangyu-139",
+        "09-pinzao-057",
+        "09-pinzao-087",
+        "19-xianyuan-009",
+        "26-qingdi-013",
+        "33-youhui-006"
+      ]
+    },
+    {
+      "path": "data/annotation/story-expansion-wave-3.json",
+      "sha256": "41caaa834d3f5758162bf9c194ba6b9cb4b3c45b153f9fb0f6463044884541ec",
+      "story_count": 1,
+      "story_ids": [
+        "18-qiyi-002"
+      ]
+    },
+    {
+      "path": "data/generated/hdb2-f/live/20260826T-HDB2-F-02/debug/rescue-search-traces/hdb2-occ-0795eae205c40e66dc60.json",
+      "sha256": "e5d1360d3ead723a6b5a77fddb2ce6fe7a8d7abcd52192278b63822f29b0bbc2",
+      "story_count": 104,
+      "story_ids": [
+        "01-dexing-006",
+        "01-dexing-007",
+        "01-dexing-018",
+        "01-dexing-024",
+        "01-dexing-027",
+        "01-dexing-030",
+        "02-yanyu-007",
+        "02-yanyu-021",
+        "02-yanyu-023",
+        "02-yanyu-026",
+        "02-yanyu-033",
+        "02-yanyu-038",
+        "02-yanyu-059",
+        "02-yanyu-081",
+        "02-yanyu-105",
+        "03-zhengshi-003",
+        "03-zhengshi-012",
+        "03-zhengshi-018",
+        "03-zhengshi-023",
+        "03-zhengshi-026",
+        "04-wenxue-013",
+        "04-wenxue-015",
+        "04-wenxue-018",
+        "04-wenxue-019",
+        "04-wenxue-064",
+        "04-wenxue-067",
+        "04-wenxue-068",
+        "04-wenxue-076",
+        "04-wenxue-084",
+        "04-wenxue-085",
+        "05-fangzheng-001",
+        "05-fangzheng-002",
+        "05-fangzheng-003",
+        "05-fangzheng-004",
+        "05-fangzheng-008",
+        "05-fangzheng-014",
+        "05-fangzheng-026",
+        "05-fangzheng-040",
+        "05-fangzheng-043",
+        "06-yaliang-016",
+        "06-yaliang-026",
+        "07-shijian-009",
+        "07-shijian-011",
+        "07-shijian-013",
+        "08-shangyu-001",
+        "08-shangyu-007",
+        "08-shangyu-028",
+        "08-shangyu-038",
+        "08-shangyu-047",
+        "08-shangyu-049",
+        "08-shangyu-050",
+        "08-shangyu-063",
+        "08-shangyu-072",
+        "08-shangyu-088",
+        "09-pinzao-004",
+        "09-pinzao-005",
+        "09-pinzao-011",
+        "09-pinzao-012",
+        "09-pinzao-015",
+        "09-pinzao-021",
+        "09-pinzao-029",
+        "10-guizhen-013",
+        "10-guizhen-014",
+        "10-guizhen-017",
+        "10-guizhen-023",
+        "11-jiewu-006",
+        "12-suhui-002",
+        "12-suhui-004",
+        "13-haoshuang-001",
+        "13-haoshuang-002",
+        "13-haoshuang-003",
+        "13-haoshuang-004",
+        "13-haoshuang-008",
+        "13-haoshuang-010",
+        "14-rongzhi-017",
+        "14-rongzhi-027",
+        "16-qixian-003",
+        "17-shangshi-015",
+        "19-xianyuan-015",
+        "19-xianyuan-016",
+        "19-xianyuan-020",
+        "19-xianyuan-022",
+        "19-xianyuan-025",
+        "20-shujie-008",
+        "23-rendan-022",
+        "23-rendan-031",
+        "23-rendan-043",
+        "24-jianao-006",
+        "25-paidiao-013",
+        "25-paidiao-044",
+        "25-paidiao-051",
+        "25-paidiao-061",
+        "26-qingdi-005",
+        "26-qingdi-026",
+        "30-taichi-001",
+        "30-taichi-002",
+        "30-taichi-005",
+        "30-taichi-010",
+        "32-chanxian-001",
+        "33-youhui-004",
+        "33-youhui-005",
+        "33-youhui-008",
+        "33-youhui-009",
+        "34-pilou-002"
+      ]
+    },
+    {
+      "path": "data/generated/hdb2-f/live/20260826T-HDB2-F-02/debug/rescue-search-traces/hdb2-occ-0abb35ab741fbf5cbbbb.json",
+      "sha256": "d8b34da5b08591868a776883d7f5768f6a9d2e6f94b9376020efada94162cf0f",
+      "story_count": 23,
+      "story_ids": [
+        "01-dexing-035",
+        "01-dexing-042",
+        "01-dexing-044",
+        "02-yanyu-031",
+        "02-yanyu-055",
+        "02-yanyu-102",
+        "04-wenxue-099",
+        "05-fangzheng-057",
+        "06-yaliang-020",
+        "08-shangyu-015",
+        "08-shangyu-064",
+        "08-shangyu-111",
+        "16-qixian-006",
+        "22-chongli-006",
+        "23-rendan-021",
+        "23-rendan-027",
+        "23-rendan-029",
+        "25-paidiao-042",
+        "27-jiajue-003",
+        "31-fenjuan-004",
+        "31-fenjuan-007",
+        "32-chanxian-004",
+        "36-chouxi-004"
+      ]
+    },
+    {
+      "path": "data/generated/hdb2-f/live/20260826T-HDB2-F-02/debug/rescue-search-traces/hdb2-occ-0db7176a3476298aed72.json",
+      "sha256": "1f63f1b26966b78658b9b65ea50ade4f385f6341538620b01242946769ea16af",
+      "story_count": 23,
+      "story_ids": [
+        "02-yanyu-032",
+        "02-yanyu-043",
+        "04-wenxue-071",
+        "04-wenxue-077",
+        "08-shangyu-003",
+        "08-shangyu-036",
+        "08-shangyu-065",
+        "08-shangyu-096",
+        "08-shangyu-102",
+        "09-pinzao-046",
+        "09-pinzao-080",
+        "14-rongzhi-020",
+        "19-xianyuan-005",
+        "19-xianyuan-021",
+        "21-qiaoyi-012",
+        "23-rendan-025",
+        "23-rendan-034",
+        "25-paidiao-017",
+        "25-paidiao-037",
+        "26-qingdi-011",
+        "27-jiajue-007",
+        "28-chumian-006",
+        "35-huoni-005"
+      ]
+    },
+    {
+      "path": "data/generated/hdb2-f/live/20260826T-HDB2-F-02/debug/rescue-search-traces/hdb2-occ-16eef2abecc28f71a0d1.json",
+      "sha256": "fad374b1f2aba5183de47ddc9d836a7c7f92b5c25a7ec4d350afa38b5e60a18b",
+      "story_count": 199,
+      "story_ids": [
+        "01-dexing-001",
+        "01-dexing-036",
+        "01-dexing-037",
+        "01-dexing-043",
+        "02-yanyu-028",
+        "02-yanyu-045",
+        "02-yanyu-048",
+        "02-yanyu-056",
+        "02-yanyu-058",
+        "02-yanyu-064",
+        "02-yanyu-065",
+        "02-yanyu-075",
+        "02-yanyu-077",
+        "02-yanyu-085",
+        "02-yanyu-092",
+        "02-yanyu-094",
+        "02-yanyu-095",
+        "02-yanyu-098",
+        "02-yanyu-100",
+        "03-zhengshi-004",
+        "03-zhengshi-014",
+        "03-zhengshi-016",
+        "03-zhengshi-019",
+        "03-zhengshi-020",
+        "04-wenxue-023",
+        "04-wenxue-035",
+        "04-wenxue-039",
+        "04-wenxue-046",
+        "04-wenxue-048",
+        "04-wenxue-052",
+        "04-wenxue-055",
+        "04-wenxue-056",
+        "04-wenxue-058",
+        "04-wenxue-074",
+        "04-wenxue-079",
+        "04-wenxue-080",
+        "04-wenxue-082",
+        "04-wenxue-095",
+        "04-wenxue-096",
+        "04-wenxue-098",
+        "05-fangzheng-006",
+        "05-fangzheng-019",
+        "05-fangzheng-046",
+        "05-fangzheng-047",
+        "05-fangzheng-050",
+        "05-fangzheng-052",
+        "05-fangzheng-054",
+        "05-fangzheng-056",
+        "05-fangzheng-059",
+        "05-fangzheng-060",
+        "05-fangzheng-061",
+        "05-fangzheng-062",
+        "05-fangzheng-065",
+        "05-fangzheng-066",
+        "06-yaliang-011",
+        "06-yaliang-025",
+        "06-yaliang-028",
+        "06-yaliang-030",
+        "06-yaliang-031",
+        "06-yaliang-034",
+        "06-yaliang-035",
+        "06-yaliang-037",
+        "06-yaliang-039",
+        "07-shijian-003",
+        "07-shijian-020",
+        "07-shijian-022",
+        "07-shijian-024",
+        "07-shijian-028",
+        "08-shangyu-026",
+        "08-shangyu-033",
+        "08-shangyu-048",
+        "08-shangyu-075",
+        "08-shangyu-076",
+        "08-shangyu-078",
+        "08-shangyu-094",
+        "08-shangyu-097",
+        "08-shangyu-099",
+        "08-shangyu-101",
+        "08-shangyu-103",
+        "08-shangyu-105",
+        "08-shangyu-114",
+        "08-shangyu-116",
+        "08-shangyu-117",
+        "08-shangyu-125",
+        "08-shangyu-126",
+        "08-shangyu-128",
+        "08-shangyu-129",
+        "08-shangyu-131",
+        "08-shangyu-132",
+        "08-shangyu-133",
+        "08-shangyu-140",
+        "08-shangyu-141",
+        "08-shangyu-143",
+        "08-shangyu-146",
+        "08-shangyu-147",
+        "08-shangyu-148",
+        "08-shangyu-149",
+        "08-shangyu-152",
+        "08-shangyu-154",
+        "09-pinzao-009",
+        "09-pinzao-013",
+        "09-pinzao-035",
+        "09-pinzao-037",
+        "09-pinzao-041",
+        "09-pinzao-052",
+        "09-pinzao-059",
+        "09-pinzao-062",
+        "09-pinzao-064",
+        "09-pinzao-067",
+        "09-pinzao-069",
+        "09-pinzao-070",
+        "09-pinzao-071",
+        "09-pinzao-072",
+        "09-pinzao-073",
+        "09-pinzao-074",
+        "09-pinzao-075",
+        "09-pinzao-076",
+        "09-pinzao-077",
+        "09-pinzao-078",
+        "09-pinzao-079",
+        "09-pinzao-082",
+        "09-pinzao-083",
+        "09-pinzao-084",
+        "09-pinzao-085",
+        "09-pinzao-086",
+        "10-guizhen-009",
+        "10-guizhen-019",
+        "10-guizhen-026",
+        "10-guizhen-027",
+        "11-jiewu-007",
+        "12-suhui-006",
+        "12-suhui-007",
+        "13-haoshuang-007",
+        "13-haoshuang-009",
+        "13-haoshuang-012",
+        "14-rongzhi-025",
+        "14-rongzhi-028",
+        "14-rongzhi-032",
+        "14-rongzhi-034",
+        "14-rongzhi-036",
+        "14-rongzhi-037",
+        "17-shangshi-012",
+        "18-qiyi-008",
+        "18-qiyi-012",
+        "19-xianyuan-012",
+        "19-xianyuan-017",
+        "19-xianyuan-023",
+        "19-xianyuan-024",
+        "20-shujie-009",
+        "21-qiaoyi-003",
+        "21-qiaoyi-004",
+        "21-qiaoyi-007",
+        "23-rendan-040",
+        "23-rendan-041",
+        "23-rendan-042",
+        "23-rendan-044",
+        "24-jianao-008",
+        "24-jianao-012",
+        "24-jianao-013",
+        "24-jianao-014",
+        "24-jianao-015",
+        "25-paidiao-001",
+        "25-paidiao-027",
+        "25-paidiao-032",
+        "25-paidiao-039",
+        "25-paidiao-041",
+        "25-paidiao-043",
+        "25-paidiao-045",
+        "25-paidiao-046",
+        "25-paidiao-052",
+        "25-paidiao-055",
+        "25-paidiao-058",
+        "26-qingdi-004",
+        "26-qingdi-007",
+        "26-qingdi-009",
+        "26-qingdi-012",
+        "26-qingdi-016",
+        "26-qingdi-017",
+        "26-qingdi-021",
+        "26-qingdi-023",
+        "26-qingdi-024",
+        "26-qingdi-027",
+        "26-qingdi-029",
+        "27-jiajue-011",
+        "27-jiajue-013",
+        "27-jiajue-014",
+        "28-chumian-002",
+        "28-chumian-004",
+        "28-chumian-005",
+        "28-chumian-007",
+        "28-chumian-008",
+        "32-chanxian-003",
+        "33-youhui-013",
+        "33-youhui-014",
+        "33-youhui-016",
+        "33-youhui-017",
+        "34-pilou-005",
+        "35-huoni-004",
+        "36-chouxi-007"
+      ]
+    },
+    {
+      "path": "data/generated/hdb2-f/live/20260826T-HDB2-F-02/debug/rescue-search-traces/hdb2-occ-19161480125c7b8583ab.json",
+      "sha256": "fea798a32e52eccb788fbff82715712d46f8df04623670f4d900c3a644fee785",
+      "story_count": 33,
+      "story_ids": [
+        "01-dexing-031",
+        "02-yanyu-040",
+        "02-yanyu-051",
+        "02-yanyu-057",
+        "02-yanyu-074",
+        "02-yanyu-080",
+        "02-yanyu-097",
+        "03-zhengshi-007",
+        "04-wenxue-006",
+        "04-wenxue-027",
+        "04-wenxue-028",
+        "04-wenxue-031",
+        "04-wenxue-043",
+        "04-wenxue-047",
+        "04-wenxue-051",
+        "06-yaliang-015",
+        "07-shijian-023",
+        "08-shangyu-090",
+        "08-shangyu-145",
+        "09-pinzao-034",
+        "09-pinzao-039",
+        "09-pinzao-066",
+        "09-pinzao-081",
+        "12-suhui-005",
+        "16-qixian-004",
+        "18-qiyi-014",
+        "19-xianyuan-027",
+        "19-xianyuan-031",
+        "20-shujie-011",
+        "25-paidiao-034",
+        "25-paidiao-053",
+        "26-qingdi-028",
+        "28-chumian-003"
+      ]
+    },
+    {
+      "path": "data/generated/hdb2-f/live/20260826T-HDB2-F-02/debug/rescue-search-traces/hdb2-occ-26b5362fd97cab370857.json",
+      "sha256": "4c68642d87509ae6c39efb0a93d862562e35c22b2da9f118f824bb33dfb4c4c8",
+      "story_count": 11,
+      "story_ids": [
+        "02-yanyu-005",
+        "06-yaliang-013",
+        "08-shangyu-009",
+        "09-pinzao-051",
+        "10-guizhen-007",
+        "10-guizhen-008",
+        "19-xianyuan-011",
+        "20-shujie-003",
+        "23-rendan-016",
+        "25-paidiao-047",
+        "26-qingdi-006"
+      ]
+    },
+    {
+      "path": "data/generated/hdb2-f/live/20260826T-HDB2-F-02/debug/rescue-search-traces/hdb2-occ-348317b58eba6f0222c4.json",
+      "sha256": "71fae8002a1fee37a4b43a2c3565c76be0f1697954d2ca1e4f2a3c458923c545",
+      "story_count": 5,
+      "story_ids": [
+        "04-wenxue-088",
+        "08-shangyu-124",
+        "08-shangyu-134",
+        "23-rendan-032",
+        "26-qingdi-010"
+      ]
+    },
+    {
+      "path": "data/generated/hdb2-f/live/20260826T-HDB2-F-02/debug/rescue-search-traces/hdb2-occ-3f1624d73c62fc04b1f0.json",
+      "sha256": "2108b7bd481bffeef28745499b1a6f75bf5ffc3940bd5db9cbfa55ba27b0ae0a",
+      "story_count": 15,
+      "story_ids": [
+        "02-yanyu-022",
+        "02-yanyu-039",
+        "05-fangzheng-029",
+        "06-yaliang-021",
+        "06-yaliang-022",
+        "07-shijian-014",
+        "08-shangyu-029",
+        "08-shangyu-056",
+        "09-pinzao-016",
+        "14-rongzhi-021",
+        "18-qiyi-007",
+        "21-qiaoyi-010",
+        "25-paidiao-014",
+        "25-paidiao-018",
+        "30-taichi-012"
+      ]
+    },
+    {
+      "path": "data/generated/hdb2-f/live/20260826T-HDB2-F-02/debug/rescue-search-traces/hdb2-occ-4d44bedcf91d52bdca15.json",
+      "sha256": "d35657cde0bad88415ff4a9da85328d8a03f60642481c0f2406f815c2900882a",
+      "story_count": 17,
+      "story_ids": [
+        "02-yanyu-015",
+        "03-zhengshi-008",
+        "04-wenxue-021",
+        "04-wenxue-032",
+        "04-wenxue-091",
+        "05-fangzheng-010",
+        "06-yaliang-002",
+        "08-shangyu-008",
+        "09-pinzao-031",
+        "09-pinzao-044",
+        "17-shangshi-011",
+        "18-qiyi-001",
+        "18-qiyi-003",
+        "19-xianyuan-006",
+        "19-xianyuan-008",
+        "21-qiaoyi-014",
+        "24-jianao-004"
+      ]
+    },
+    {
+      "path": "data/generated/hdb2-f/live/20260826T-HDB2-F-02/debug/rescue-search-traces/hdb2-occ-5b73a01de44fe5940d12.json",
+      "sha256": "8d86e0773f7b534b3f8d2ae924ec8b136bd9c4078f1fa08ccbd720e0a0ab20bd",
+      "story_count": 24,
+      "story_ids": [
+        "01-dexing-019",
+        "01-dexing-032",
+        "01-dexing-046",
+        "02-yanyu-013",
+        "02-yanyu-019",
+        "02-yanyu-082",
+        "02-yanyu-106",
+        "02-yanyu-108",
+        "03-zhengshi-017",
+        "03-zhengshi-024",
+        "04-wenxue-004",
+        "04-wenxue-012",
+        "04-wenxue-101",
+        "05-fangzheng-016",
+        "05-fangzheng-017",
+        "06-yaliang-006",
+        "06-yaliang-007",
+        "08-shangyu-017",
+        "14-rongzhi-002",
+        "23-rendan-019",
+        "25-paidiao-063",
+        "34-pilou-007",
+        "36-chouxi-001",
+        "36-chouxi-008"
+      ]
+    },
+    {
+      "path": "data/generated/hdb2-f/live/20260826T-HDB2-F-02/debug/rescue-search-traces/hdb2-occ-6022753dc2325201f7d7.json",
+      "sha256": "b9cf99cbc72d71ea8434f18eddedec3742786f652c5658b32557a06d1f4ad35a",
+      "story_count": 46,
+      "story_ids": [
+        "01-dexing-029",
+        "02-yanyu-014",
+        "02-yanyu-034",
+        "03-zhengshi-015",
+        "05-fangzheng-005",
+        "05-fangzheng-024",
+        "05-fangzheng-036",
+        "05-fangzheng-038",
+        "05-fangzheng-042",
+        "05-fangzheng-045",
+        "06-yaliang-001",
+        "06-yaliang-008",
+        "06-yaliang-014",
+        "08-shangyu-037",
+        "08-shangyu-040",
+        "08-shangyu-057",
+        "08-shangyu-059",
+        "08-shangyu-060",
+        "08-shangyu-061",
+        "08-shangyu-062",
+        "08-shangyu-091",
+        "09-pinzao-020",
+        "09-pinzao-023",
+        "09-pinzao-028",
+        "09-pinzao-033",
+        "09-pinzao-043",
+        "09-pinzao-047",
+        "10-guizhen-005",
+        "10-guizhen-015",
+        "11-jiewu-001",
+        "14-rongzhi-008",
+        "14-rongzhi-015",
+        "14-rongzhi-016",
+        "16-qixian-002",
+        "17-shangshi-001",
+        "22-chongli-001",
+        "23-rendan-024",
+        "24-jianao-007",
+        "25-paidiao-010",
+        "25-paidiao-012",
+        "25-paidiao-016",
+        "26-qingdi-030",
+        "29-jianshe-007",
+        "34-pilou-004",
+        "35-huoni-007",
+        "36-chouxi-006"
+      ]
+    },
+    {
+      "path": "data/generated/hdb2-f/live/20260826T-HDB2-F-02/debug/rescue-search-traces/hdb2-occ-6a2bf40cd80dae619b4c.json",
+      "sha256": "13e21df1ae89e2fd584d8fb06e8f3cd4f3c01ad14c7638044acc8400f3e2a6f3",
+      "story_count": 7,
+      "story_ids": [
+        "02-yanyu-010",
+        "02-yanyu-029",
+        "09-pinzao-002",
+        "10-guizhen-001",
+        "10-guizhen-002",
+        "19-xianyuan-007",
+        "33-youhui-001"
+      ]
+    },
+    {
+      "path": "data/generated/hdb2-f/live/20260826T-HDB2-F-02/debug/rescue-search-traces/hdb2-occ-6cefe1b71a6870503cc7.json",
+      "sha256": "92b8397be7e2d0f64bb583d012ea005f3c638012f38956671ea293ae04f7625e",
+      "story_count": 3,
+      "story_ids": [
+        "09-pinzao-027",
+        "17-shangshi-009",
+        "25-paidiao-022"
+      ]
+    },
+    {
+      "path": "data/generated/hdb2-f/live/20260826T-HDB2-F-02/debug/rescue-search-traces/hdb2-occ-737a42cb933f4c548139.json",
+      "sha256": "387805bc174d6243783b73cdc2af77dc3d6e02d6994b8586456ec77d57be9e30",
+      "story_count": 4,
+      "story_ids": [
+        "02-yanyu-016",
+        "04-wenxue-104",
+        "10-guizhen-018",
+        "10-guizhen-024"
+      ]
+    },
+    {
+      "path": "data/generated/hdb2-f/live/20260826T-HDB2-F-02/debug/rescue-search-traces/hdb2-occ-7895bc7e90dc1bc5f740.json",
+      "sha256": "906a6d23a931cff829f04eb476549bb3ac2231c38bb63cd5fcaf88d21f58f815",
+      "story_count": 2,
+      "story_ids": [
+        "08-shangyu-085",
+        "08-shangyu-112"
+      ]
+    },
+    {
+      "path": "data/generated/hdb2-f/live/20260826T-HDB2-F-02/debug/rescue-search-traces/hdb2-occ-87c104b7665456797ebf.json",
+      "sha256": "2abfd5448f64dd875e91b7abd221f6beec8784eddb3a5ef848370a4abb51fd7b",
+      "story_count": 21,
+      "story_ids": [
+        "01-dexing-039",
+        "02-yanyu-067",
+        "04-wenxue-045",
+        "08-shangyu-080",
+        "08-shangyu-092",
+        "08-shangyu-100",
+        "08-shangyu-108",
+        "08-shangyu-120",
+        "09-pinzao-003",
+        "09-pinzao-024",
+        "10-guizhen-020",
+        "14-rongzhi-026",
+        "14-rongzhi-030",
+        "18-qiyi-006",
+        "20-shujie-010",
+        "25-paidiao-054",
+        "26-qingdi-019",
+        "26-qingdi-020",
+        "29-jianshe-009",
+        "31-fenjuan-002",
+        "36-chouxi-005"
+      ]
+    },
+    {
+      "path": "data/generated/hdb2-f/live/20260826T-HDB2-F-02/debug/rescue-search-traces/hdb2-occ-8cb36f8210a815991a0e.json",
+      "sha256": "70da8fb3efc1bc88608ba59615c49cd50d7b822e7366120679dd208dc5d1cb7f",
+      "story_count": 29,
+      "story_ids": [
+        "01-dexing-020",
+        "01-dexing-021",
+        "02-yanyu-020",
+        "02-yanyu-024",
+        "04-wenxue-049",
+        "06-yaliang-004",
+        "06-yaliang-005",
+        "07-shijian-001",
+        "07-shijian-025",
+        "08-shangyu-010",
+        "08-shangyu-016",
+        "08-shangyu-023",
+        "08-shangyu-024",
+        "13-haoshuang-013",
+        "14-rongzhi-006",
+        "14-rongzhi-011",
+        "17-shangshi-004",
+        "23-rendan-005",
+        "23-rendan-007",
+        "23-rendan-009",
+        "23-rendan-010",
+        "23-rendan-011",
+        "23-rendan-014",
+        "23-rendan-051",
+        "24-jianao-005",
+        "25-paidiao-004",
+        "29-jianshe-002",
+        "29-jianshe-003",
+        "29-jianshe-005"
+      ]
+    },
+    {
+      "path": "data/generated/hdb2-f/live/20260826T-HDB2-F-02/debug/rescue-search-traces/hdb2-occ-8f17bd951dd3d8b6fc23.json",
+      "sha256": "baf7d72278552ba5f6963a4e5dae68b24dfd7239e4e9e0fe9e414d2e1ff1a1a1",
+      "story_count": 12,
+      "story_ids": [
+        "04-wenxue-073",
+        "08-shangyu-027",
+        "08-shangyu-089",
+        "08-shangyu-104",
+        "09-pinzao-042",
+        "09-pinzao-050",
+        "19-xianyuan-019",
+        "23-rendan-008",
+        "23-rendan-023",
+        "25-paidiao-006",
+        "33-youhui-003",
+        "34-pilou-003"
+      ]
+    },
+    {
+      "path": "data/generated/hdb2-f/live/20260826T-HDB2-F-02/debug/rescue-search-traces/hdb2-occ-9399e0f7aeaf9885428d.json",
+      "sha256": "13f838f687dcbe3313113f1fb6a3320a32111baa051306b9e91ad2ea0f5ae636",
+      "story_count": 188,
+      "story_ids": [
+        "01-dexing-003",
+        "01-dexing-009",
+        "01-dexing-013",
+        "01-dexing-022",
+        "01-dexing-041",
+        "02-yanyu-001",
+        "02-yanyu-006",
+        "02-yanyu-009",
+        "02-yanyu-012",
+        "02-yanyu-017",
+        "02-yanyu-041",
+        "02-yanyu-044",
+        "02-yanyu-050",
+        "02-yanyu-061",
+        "02-yanyu-068",
+        "02-yanyu-084",
+        "02-yanyu-091",
+        "02-yanyu-093",
+        "02-yanyu-099",
+        "03-zhengshi-009",
+        "03-zhengshi-010",
+        "03-zhengshi-021",
+        "03-zhengshi-025",
+        "04-wenxue-001",
+        "04-wenxue-005",
+        "04-wenxue-007",
+        "04-wenxue-008",
+        "04-wenxue-010",
+        "04-wenxue-011",
+        "04-wenxue-014",
+        "04-wenxue-026",
+        "04-wenxue-033",
+        "04-wenxue-038",
+        "04-wenxue-040",
+        "04-wenxue-042",
+        "04-wenxue-053",
+        "04-wenxue-057",
+        "04-wenxue-061",
+        "04-wenxue-062",
+        "04-wenxue-066",
+        "04-wenxue-072",
+        "04-wenxue-075",
+        "04-wenxue-083",
+        "04-wenxue-102",
+        "05-fangzheng-015",
+        "05-fangzheng-020",
+        "05-fangzheng-035",
+        "05-fangzheng-049",
+        "05-fangzheng-063",
+        "05-fangzheng-064",
+        "06-yaliang-009",
+        "06-yaliang-012",
+        "06-yaliang-018",
+        "06-yaliang-036",
+        "06-yaliang-038",
+        "06-yaliang-040",
+        "06-yaliang-042",
+        "07-shijian-002",
+        "07-shijian-004",
+        "07-shijian-007",
+        "07-shijian-008",
+        "07-shijian-010",
+        "07-shijian-012",
+        "07-shijian-017",
+        "07-shijian-026",
+        "08-shangyu-014",
+        "08-shangyu-021",
+        "08-shangyu-025",
+        "08-shangyu-031",
+        "08-shangyu-032",
+        "08-shangyu-039",
+        "08-shangyu-041",
+        "08-shangyu-045",
+        "08-shangyu-052",
+        "08-shangyu-053",
+        "08-shangyu-074",
+        "08-shangyu-081",
+        "08-shangyu-082",
+        "08-shangyu-083",
+        "08-shangyu-084",
+        "08-shangyu-086",
+        "08-shangyu-087",
+        "08-shangyu-098",
+        "08-shangyu-106",
+        "08-shangyu-109",
+        "08-shangyu-110",
+        "08-shangyu-115",
+        "08-shangyu-121",
+        "08-shangyu-122",
+        "08-shangyu-123",
+        "08-shangyu-127",
+        "08-shangyu-136",
+        "08-shangyu-137",
+        "08-shangyu-150",
+        "08-shangyu-153",
+        "08-shangyu-155",
+        "08-shangyu-156",
+        "09-pinzao-001",
+        "09-pinzao-007",
+        "09-pinzao-010",
+        "09-pinzao-048",
+        "09-pinzao-053",
+        "09-pinzao-060",
+        "09-pinzao-068",
+        "10-guizhen-004",
+        "10-guizhen-006",
+        "10-guizhen-010",
+        "10-guizhen-022",
+        "13-haoshuang-011",
+        "14-rongzhi-001",
+        "14-rongzhi-004",
+        "14-rongzhi-009",
+        "14-rongzhi-010",
+        "14-rongzhi-014",
+        "14-rongzhi-029",
+        "14-rongzhi-031",
+        "14-rongzhi-033",
+        "14-rongzhi-035",
+        "14-rongzhi-039",
+        "15-zixin-001",
+        "15-zixin-002",
+        "17-shangshi-003",
+        "17-shangshi-007",
+        "17-shangshi-010",
+        "17-shangshi-013",
+        "17-shangshi-014",
+        "17-shangshi-016",
+        "17-shangshi-017",
+        "19-xianyuan-001",
+        "19-xianyuan-002",
+        "19-xianyuan-004",
+        "19-xianyuan-028",
+        "19-xianyuan-030",
+        "20-shujie-002",
+        "20-shujie-004",
+        "20-shujie-007",
+        "21-qiaoyi-001",
+        "22-chongli-003",
+        "23-rendan-003",
+        "23-rendan-015",
+        "23-rendan-035",
+        "23-rendan-039",
+        "23-rendan-046",
+        "23-rendan-047",
+        "23-rendan-048",
+        "23-rendan-050",
+        "23-rendan-052",
+        "23-rendan-053",
+        "23-rendan-054",
+        "24-jianao-010",
+        "24-jianao-011",
+        "24-jianao-016",
+        "24-jianao-017",
+        "25-paidiao-003",
+        "25-paidiao-024",
+        "25-paidiao-029",
+        "25-paidiao-033",
+        "25-paidiao-040",
+        "25-paidiao-057",
+        "25-paidiao-062",
+        "25-paidiao-065",
+        "26-qingdi-001",
+        "26-qingdi-014",
+        "26-qingdi-015",
+        "26-qingdi-022",
+        "26-qingdi-025",
+        "26-qingdi-031",
+        "26-qingdi-032",
+        "27-jiajue-001",
+        "27-jiajue-010",
+        "28-chumian-001",
+        "29-jianshe-006",
+        "30-taichi-003",
+        "30-taichi-004",
+        "30-taichi-006",
+        "30-taichi-007",
+        "30-taichi-008",
+        "30-taichi-009",
+        "30-taichi-011",
+        "31-fenjuan-003",
+        "31-fenjuan-005",
+        "32-chanxian-002",
+        "33-youhui-002",
+        "33-youhui-011",
+        "34-pilou-008",
+        "35-huoni-001",
+        "35-huoni-006",
+        "36-chouxi-002"
+      ]
+    },
+    {
+      "path": "data/generated/hdb2-f/live/20260826T-HDB2-F-02/debug/rescue-search-traces/hdb2-occ-9435d19796faaacf3914.json",
+      "sha256": "8f3eb53ea268248ef85d32a004df9feb979efe0c4393e44a5e3a936b7f0e4e50",
+      "story_count": 26,
+      "story_ids": [
+        "01-dexing-002",
+        "02-yanyu-003",
+        "02-yanyu-049",
+        "03-zhengshi-002",
+        "04-wenxue-025",
+        "04-wenxue-029",
+        "04-wenxue-060",
+        "04-wenxue-065",
+        "04-wenxue-078",
+        "05-fangzheng-048",
+        "08-shangyu-042",
+        "08-shangyu-068",
+        "08-shangyu-107",
+        "10-guizhen-025",
+        "14-rongzhi-038",
+        "17-shangshi-005",
+        "18-qiyi-011",
+        "18-qiyi-015",
+        "19-xianyuan-029",
+        "20-shujie-001",
+        "23-rendan-045",
+        "25-paidiao-002",
+        "25-paidiao-056",
+        "26-qingdi-003",
+        "33-youhui-010",
+        "33-youhui-015"
+      ]
+    },
+    {
+      "path": "data/generated/hdb2-f/live/20260826T-HDB2-F-02/debug/rescue-search-traces/hdb2-occ-b44a7c8636d8042ad010.json",
+      "sha256": "80c1420bbe7011f2df4384ea9e765017dbaa3d5d0d465fd4656ef8d119bb03e5",
+      "story_count": 1,
+      "story_ids": [
+        "25-paidiao-064"
+      ]
+    },
+    {
+      "path": "data/generated/hdb2-f/live/20260826T-HDB2-F-02/debug/rescue-search-traces/hdb2-occ-c5733d52a665dd653a6b.json",
+      "sha256": "c1973c25808e230ffd7326abd0c0c4fd87e40e3a45ed1e996f73ca793f3fd5a3",
+      "story_count": 2,
+      "story_ids": [
+        "08-shangyu-012",
+        "08-shangyu-018"
+      ]
+    },
+    {
+      "path": "data/generated/hdb2-f/live/20260826T-HDB2-F-02/debug/rescue-search-traces/hdb2-occ-dc1dffd07ce8e76a4991.json",
+      "sha256": "424aef7438908443e67c09ca40ddb2cc525052b430c8e473ff429461be6878e5",
+      "story_count": 13,
+      "story_ids": [
+        "02-yanyu-103",
+        "02-yanyu-104",
+        "04-wenxue-100",
+        "04-wenxue-103",
+        "05-fangzheng-044",
+        "08-shangyu-066",
+        "08-shangyu-119",
+        "12-suhui-003",
+        "17-shangshi-018",
+        "17-shangshi-019",
+        "26-qingdi-033",
+        "28-chumian-009",
+        "31-fenjuan-008"
+      ]
+    },
+    {
+      "path": "data/generated/hdb2-f/live/20260826T-HDB2-F-02/debug/rescue-search-traces/hdb2-occ-e126c4b282dfcfef5187.json",
+      "sha256": "b34157854b371159ef40f047a9dddf27b755f37c0d4cfbcd0a59addb707385d6",
+      "story_count": 5,
+      "story_ids": [
+        "02-yanyu-088",
+        "04-wenxue-002",
+        "04-wenxue-009",
+        "04-wenxue-093",
+        "18-qiyi-017"
+      ]
+    },
+    {
+      "path": "data/generated/hdb2-f/live/20260826T-HDB2-F-02/debug/rescue-search-traces/hdb2-occ-e93d2f48fd5ac71d42df.json",
+      "sha256": "7d78d4990b49f73ae13c94e1f1aa51d9a20413c5485c8a0f5935de9926f5149e",
+      "story_count": 4,
+      "story_ids": [
+        "08-shangyu-138",
+        "08-shangyu-144",
+        "22-chongli-004",
+        "25-paidiao-019"
+      ]
+    },
+    {
+      "path": "data/generated/hdb2-p1/live/20260825T-HDB2-P1-02/case-results.json",
+      "sha256": "d9e1bba6d1c7f1fe302f9e0cba474850d027ac58fc2308e505885f65cc426971",
+      "story_count": 32,
+      "story_ids": [
+        "01-dexing-010",
+        "01-dexing-011",
+        "02-yanyu-089",
+        "02-yanyu-096",
+        "04-wenxue-041",
+        "04-wenxue-063",
+        "04-wenxue-086",
+        "05-fangzheng-013",
+        "06-yaliang-003",
+        "06-yaliang-032",
+        "08-shangyu-044",
+        "08-shangyu-095",
+        "08-shangyu-118",
+        "08-shangyu-135",
+        "09-pinzao-056",
+        "09-pinzao-058",
+        "09-pinzao-061",
+        "11-jiewu-004",
+        "13-haoshuang-005",
+        "14-rongzhi-003",
+        "18-qiyi-005",
+        "18-qiyi-013",
+        "19-xianyuan-003",
+        "20-shujie-006",
+        "21-qiaoyi-002",
+        "23-rendan-004",
+        "23-rendan-036",
+        "25-paidiao-005",
+        "25-paidiao-011",
+        "25-paidiao-023",
+        "25-paidiao-025",
+        "25-paidiao-036"
+      ]
+    },
+    {
+      "path": "data/generated/hdb2-p1/live/20260825T-HDB2-P1-03/case-results.json",
+      "sha256": "e430f20c3a78923544a71fcaebfda0de8076e6e0eda8be07d4b3c4ebd7a95765",
+      "story_count": 7,
+      "story_ids": [
+        "04-wenxue-016",
+        "04-wenxue-037",
+        "06-yaliang-024",
+        "08-shangyu-030",
+        "14-rongzhi-007",
+        "14-rongzhi-013",
+        "23-rendan-020"
+      ]
+    },
+    {
+      "path": "data/generated/hng0/hng0-candidates.json",
+      "sha256": "778bb7ae453bf7f9e96ecc19a56da5249b237a85f1ec5a4312a07ee91602bb30",
+      "story_count": 3,
+      "story_ids": [
+        "04-wenxue-070",
+        "23-rendan-006",
+        "23-rendan-030"
+      ]
+    },
+    {
+      "path": "data/generated/hng2/contextual-identity-registry.json",
+      "sha256": "c53938739396e0b482dca6c4fdce6607703f8ecfd188ec89a23cf16040e3df9d",
+      "story_count": 1,
+      "story_ids": [
+        "14-rongzhi-022"
+      ]
+    }
+  ],
+  "prior_story_hash": "d659abb57eacc58ce22843d9a5f4fc2f4fccff7389455eae4d88e1be70e4dc46",
+  "production_scope_story_count": 143,
+  "records": [
+    {
+      "baseline_participant_count": 0,
+      "chapter_heading": "文學第四",
+      "chapter_id": "04-wenxue",
+      "graph_connectivity_class": "peripheral",
+      "known_participants_before": [],
+      "parent_strategy": "coverage",
+      "production_visible": false,
+      "selection_basis": {
+        "chapter_story_count": 104,
+        "known_person_count": 0,
+        "relation_marker_count": 3,
+        "temporal_marker_count": 0,
+        "unknown_name_signal": 20,
+        "unresolved_surface_count": 0
+      },
+      "selection_channel": "coverage_peripheral",
+      "selection_key": "4561435f73eec73da38f7975a55dfdd2735e6888251fd3787d343a3defe3cbdc",
+      "source_hash": "77377c70be12380fe507084f52d7924298ccef7607b8c005eb87ee84f735a37c",
+      "source_refs": [
+        "hge1-wb-shishuo-main-04-wenxue-030",
+        "hge1-wb-shishuo-liu-04-wenxue-030-annotation-001",
+        "hge1-wb-shishuo-liu-04-wenxue-030-annotation-002",
+        "hge1-wb-shishuo-liu-04-wenxue-030-annotation-003"
+      ],
+      "story_id": "04-wenxue-030",
+      "wave_a_evidence": {
+        "selection_policy": "exploitation of highest Wave A relation/underrepresented yields plus coverage and deterministic controls",
+        "source_channel_yield": {
+          "graph_guided_frontier_rich": {
+            "existing_person_links": 0,
+            "new_person_candidates": 4,
+            "relation_candidates": 4,
+            "review_items": 4,
+            "story_count": 4
+          },
+          "new_person_rich": {
+            "existing_person_links": 0,
+            "new_person_candidates": 4,
+            "relation_candidates": 6,
+            "review_items": 4,
+            "story_count": 4
+          },
+          "peripheral_low_connectivity": {
+            "existing_person_links": 0,
+            "new_person_candidates": 3,
+            "relation_candidates": 3,
+            "review_items": 3,
+            "story_count": 3
+          },
+          "random_control": {
+            "existing_person_links": 0,
+            "new_person_candidates": 2,
+            "relation_candidates": 1,
+            "review_items": 2,
+            "story_count": 2
+          },
+          "relation_rich": {
+            "existing_person_links": 0,
+            "new_person_candidates": 4,
+            "relation_candidates": 6,
+            "review_items": 4,
+            "story_count": 4
+          },
+          "underrepresented_chapter": {
+            "existing_person_links": 0,
+            "new_person_candidates": 3,
+            "relation_candidates": 7,
+            "review_items": 3,
+            "story_count": 3
+          }
+        }
+      }
+    },
+    {
+      "baseline_participant_count": 0,
+      "chapter_heading": "容止第十四",
+      "chapter_id": "14-rongzhi",
+      "graph_connectivity_class": "peripheral",
+      "known_participants_before": [],
+      "parent_strategy": "coverage",
+      "production_visible": false,
+      "selection_basis": {
+        "chapter_story_count": 39,
+        "known_person_count": 0,
+        "relation_marker_count": 3,
+        "temporal_marker_count": 0,
+        "unknown_name_signal": 9,
+        "unresolved_surface_count": 0
+      },
+      "selection_channel": "coverage_peripheral",
+      "selection_key": "529ea2d856af41ffe85656e2a976439d3e5676ecdb86a006ba9d5b2438c3bf2e",
+      "source_hash": "9f7f1bd7a19466244379d3f18dff4a2cf70698ac35ad009da6b2e832fa289bba",
+      "source_refs": [
+        "hge1-wb-shishuo-main-14-rongzhi-012"
+      ],
+      "story_id": "14-rongzhi-012",
+      "wave_a_evidence": {
+        "selection_policy": "exploitation of highest Wave A relation/underrepresented yields plus coverage and deterministic controls",
+        "source_channel_yield": {
+          "graph_guided_frontier_rich": {
+            "existing_person_links": 0,
+            "new_person_candidates": 4,
+            "relation_candidates": 4,
+            "review_items": 4,
+            "story_count": 4
+          },
+          "new_person_rich": {
+            "existing_person_links": 0,
+            "new_person_candidates": 4,
+            "relation_candidates": 6,
+            "review_items": 4,
+            "story_count": 4
+          },
+          "peripheral_low_connectivity": {
+            "existing_person_links": 0,
+            "new_person_candidates": 3,
+            "relation_candidates": 3,
+            "review_items": 3,
+            "story_count": 3
+          },
+          "random_control": {
+            "existing_person_links": 0,
+            "new_person_candidates": 2,
+            "relation_candidates": 1,
+            "review_items": 2,
+            "story_count": 2
+          },
+          "relation_rich": {
+            "existing_person_links": 0,
+            "new_person_candidates": 4,
+            "relation_candidates": 6,
+            "review_items": 4,
+            "story_count": 4
+          },
+          "underrepresented_chapter": {
+            "existing_person_links": 0,
+            "new_person_candidates": 3,
+            "relation_candidates": 7,
+            "review_items": 3,
+            "story_count": 3
+          }
+        }
+      }
+    },
+    {
+      "baseline_participant_count": 0,
+      "chapter_heading": "言語第二",
+      "chapter_id": "02-yanyu",
+      "graph_connectivity_class": "peripheral",
+      "known_participants_before": [],
+      "parent_strategy": "coverage",
+      "production_visible": false,
+      "selection_basis": {
+        "chapter_story_count": 108,
+        "known_person_count": 0,
+        "relation_marker_count": 0,
+        "temporal_marker_count": 2,
+        "unknown_name_signal": 20,
+        "unresolved_surface_count": 0
+      },
+      "selection_channel": "coverage_peripheral",
+      "selection_key": "63f001bfe7b56be971e58fbee7899ad45b8a787b0419f393901f601a93a67c8e",
+      "source_hash": "fe23094ed92cf555d6f0c87e3903938b4069d65e1dbeb20407e34f5c09983914",
+      "source_refs": [
+        "hge1-wb-shishuo-main-02-yanyu-063",
+        "hge1-wb-shishuo-liu-02-yanyu-063-annotation-001",
+        "hge1-wb-shishuo-liu-02-yanyu-063-annotation-002"
+      ],
+      "story_id": "02-yanyu-063",
+      "wave_a_evidence": {
+        "selection_policy": "exploitation of highest Wave A relation/underrepresented yields plus coverage and deterministic controls",
+        "source_channel_yield": {
+          "graph_guided_frontier_rich": {
+            "existing_person_links": 0,
+            "new_person_candidates": 4,
+            "relation_candidates": 4,
+            "review_items": 4,
+            "story_count": 4
+          },
+          "new_person_rich": {
+            "existing_person_links": 0,
+            "new_person_candidates": 4,
+            "relation_candidates": 6,
+            "review_items": 4,
+            "story_count": 4
+          },
+          "peripheral_low_connectivity": {
+            "existing_person_links": 0,
+            "new_person_candidates": 3,
+            "relation_candidates": 3,
+            "review_items": 3,
+            "story_count": 3
+          },
+          "random_control": {
+            "existing_person_links": 0,
+            "new_person_candidates": 2,
+            "relation_candidates": 1,
+            "review_items": 2,
+            "story_count": 2
+          },
+          "relation_rich": {
+            "existing_person_links": 0,
+            "new_person_candidates": 4,
+            "relation_candidates": 6,
+            "review_items": 4,
+            "story_count": 4
+          },
+          "underrepresented_chapter": {
+            "existing_person_links": 0,
+            "new_person_candidates": 3,
+            "relation_candidates": 7,
+            "review_items": 3,
+            "story_count": 3
+          }
+        }
+      }
+    },
+    {
+      "baseline_participant_count": 0,
+      "chapter_heading": "政事第三",
+      "chapter_id": "03-zhengshi",
+      "graph_connectivity_class": "peripheral",
+      "known_participants_before": [],
+      "parent_strategy": "coverage",
+      "production_visible": false,
+      "selection_basis": {
+        "chapter_story_count": 26,
+        "known_person_count": 0,
+        "relation_marker_count": 2,
+        "temporal_marker_count": 0,
+        "unknown_name_signal": 16,
+        "unresolved_surface_count": 0
+      },
+      "selection_channel": "coverage_peripheral",
+      "selection_key": "e5635f4fb64e86513c671ce146c74112740d1363674a69a0240e17b351e7f8df",
+      "source_hash": "89c956b4308deea7ef95c58ce56e5d87c7d744ddab62e946bca9e92cde3fcb4e",
+      "source_refs": [
+        "hge1-wb-shishuo-main-03-zhengshi-001",
+        "hge1-wb-shishuo-liu-03-zhengshi-001-annotation-001",
+        "hge1-wb-shishuo-liu-03-zhengshi-001-annotation-002"
+      ],
+      "story_id": "03-zhengshi-001",
+      "wave_a_evidence": {
+        "selection_policy": "exploitation of highest Wave A relation/underrepresented yields plus coverage and deterministic controls",
+        "source_channel_yield": {
+          "graph_guided_frontier_rich": {
+            "existing_person_links": 0,
+            "new_person_candidates": 4,
+            "relation_candidates": 4,
+            "review_items": 4,
+            "story_count": 4
+          },
+          "new_person_rich": {
+            "existing_person_links": 0,
+            "new_person_candidates": 4,
+            "relation_candidates": 6,
+            "review_items": 4,
+            "story_count": 4
+          },
+          "peripheral_low_connectivity": {
+            "existing_person_links": 0,
+            "new_person_candidates": 3,
+            "relation_candidates": 3,
+            "review_items": 3,
+            "story_count": 3
+          },
+          "random_control": {
+            "existing_person_links": 0,
+            "new_person_candidates": 2,
+            "relation_candidates": 1,
+            "review_items": 2,
+            "story_count": 2
+          },
+          "relation_rich": {
+            "existing_person_links": 0,
+            "new_person_candidates": 4,
+            "relation_candidates": 6,
+            "review_items": 4,
+            "story_count": 4
+          },
+          "underrepresented_chapter": {
+            "existing_person_links": 0,
+            "new_person_candidates": 3,
+            "relation_candidates": 7,
+            "review_items": 3,
+            "story_count": 3
+          }
+        }
+      }
+    },
+    {
+      "baseline_participant_count": 0,
+      "chapter_heading": "巧蓺第二十一",
+      "chapter_id": "21-qiaoyi",
+      "graph_connectivity_class": "peripheral",
+      "known_participants_before": [],
+      "parent_strategy": "coverage",
+      "production_visible": false,
+      "selection_basis": {
+        "chapter_story_count": 14,
+        "known_person_count": 0,
+        "relation_marker_count": 0,
+        "temporal_marker_count": 0,
+        "unknown_name_signal": 11,
+        "unresolved_surface_count": 0
+      },
+      "selection_channel": "coverage_underrepresented",
+      "selection_key": "05905f551067100d54c6e5aa6d133a7205a201074b47ad3f065b8b18c4d3fcae",
+      "source_hash": "3133e880d5c71ea974a27a600b619e9267fddfb4ddaa4ebba314a441674b1b18",
+      "source_refs": [
+        "hge1-wb-shishuo-main-21-qiaoyi-005",
+        "hge1-wb-shishuo-liu-21-qiaoyi-005-annotation-001"
+      ],
+      "story_id": "21-qiaoyi-005",
+      "wave_a_evidence": {
+        "selection_policy": "exploitation of highest Wave A relation/underrepresented yields plus coverage and deterministic controls",
+        "source_channel_yield": {
+          "graph_guided_frontier_rich": {
+            "existing_person_links": 0,
+            "new_person_candidates": 4,
+            "relation_candidates": 4,
+            "review_items": 4,
+            "story_count": 4
+          },
+          "new_person_rich": {
+            "existing_person_links": 0,
+            "new_person_candidates": 4,
+            "relation_candidates": 6,
+            "review_items": 4,
+            "story_count": 4
+          },
+          "peripheral_low_connectivity": {
+            "existing_person_links": 0,
+            "new_person_candidates": 3,
+            "relation_candidates": 3,
+            "review_items": 3,
+            "story_count": 3
+          },
+          "random_control": {
+            "existing_person_links": 0,
+            "new_person_candidates": 2,
+            "relation_candidates": 1,
+            "review_items": 2,
+            "story_count": 2
+          },
+          "relation_rich": {
+            "existing_person_links": 0,
+            "new_person_candidates": 4,
+            "relation_candidates": 6,
+            "review_items": 4,
+            "story_count": 4
+          },
+          "underrepresented_chapter": {
+            "existing_person_links": 0,
+            "new_person_candidates": 3,
+            "relation_candidates": 7,
+            "review_items": 3,
+            "story_count": 3
+          }
+        }
+      }
+    },
+    {
+      "baseline_participant_count": 0,
+      "chapter_heading": "假譎第二十七",
+      "chapter_id": "27-jiajue",
+      "graph_connectivity_class": "peripheral",
+      "known_participants_before": [],
+      "parent_strategy": "coverage",
+      "production_visible": false,
+      "selection_basis": {
+        "chapter_story_count": 14,
+        "known_person_count": 0,
+        "relation_marker_count": 1,
+        "temporal_marker_count": 0,
+        "unknown_name_signal": 10,
+        "unresolved_surface_count": 0
+      },
+      "selection_channel": "coverage_underrepresented",
+      "selection_key": "5e534ca2c01320dc13fb61474f56e8c69449739e106f664fbdc6528a93c1c6dc",
+      "source_hash": "2d2cb40711ebad3c41d647b4f16115c4300d9a420f4d4a9f111dddcf47649c1b",
+      "source_refs": [
+        "hge1-wb-shishuo-main-27-jiajue-002"
+      ],
+      "story_id": "27-jiajue-002",
+      "wave_a_evidence": {
+        "selection_policy": "exploitation of highest Wave A relation/underrepresented yields plus coverage and deterministic controls",
+        "source_channel_yield": {
+          "graph_guided_frontier_rich": {
+            "existing_person_links": 0,
+            "new_person_candidates": 4,
+            "relation_candidates": 4,
+            "review_items": 4,
+            "story_count": 4
+          },
+          "new_person_rich": {
+            "existing_person_links": 0,
+            "new_person_candidates": 4,
+            "relation_candidates": 6,
+            "review_items": 4,
+            "story_count": 4
+          },
+          "peripheral_low_connectivity": {
+            "existing_person_links": 0,
+            "new_person_candidates": 3,
+            "relation_candidates": 3,
+            "review_items": 3,
+            "story_count": 3
+          },
+          "random_control": {
+            "existing_person_links": 0,
+            "new_person_candidates": 2,
+            "relation_candidates": 1,
+            "review_items": 2,
+            "story_count": 2
+          },
+          "relation_rich": {
+            "existing_person_links": 0,
+            "new_person_candidates": 4,
+            "relation_candidates": 6,
+            "review_items": 4,
+            "story_count": 4
+          },
+          "underrepresented_chapter": {
+            "existing_person_links": 0,
+            "new_person_candidates": 3,
+            "relation_candidates": 7,
+            "review_items": 3,
+            "story_count": 3
+          }
+        }
+      }
+    },
+    {
+      "baseline_participant_count": 0,
+      "chapter_heading": "巧蓺第二十一",
+      "chapter_id": "21-qiaoyi",
+      "graph_connectivity_class": "peripheral",
+      "known_participants_before": [],
+      "parent_strategy": "coverage",
+      "production_visible": false,
+      "selection_basis": {
+        "chapter_story_count": 14,
+        "known_person_count": 0,
+        "relation_marker_count": 2,
+        "temporal_marker_count": 0,
+        "unknown_name_signal": 15,
+        "unresolved_surface_count": 0
+      },
+      "selection_channel": "coverage_underrepresented",
+      "selection_key": "88f3dc3cf063238104b2328942833f260a3b3c6c90cefac694776cbac6da6f2c",
+      "source_hash": "7eb1d62dcb8bd754d306a8b2fbd344483a4fae4385479837e8e4225dc76821ab",
+      "source_refs": [
+        "hge1-wb-shishuo-main-21-qiaoyi-009",
+        "hge1-wb-shishuo-liu-21-qiaoyi-009-annotation-001"
+      ],
+      "story_id": "21-qiaoyi-009",
+      "wave_a_evidence": {
+        "selection_policy": "exploitation of highest Wave A relation/underrepresented yields plus coverage and deterministic controls",
+        "source_channel_yield": {
+          "graph_guided_frontier_rich": {
+            "existing_person_links": 0,
+            "new_person_candidates": 4,
+            "relation_candidates": 4,
+            "review_items": 4,
+            "story_count": 4
+          },
+          "new_person_rich": {
+            "existing_person_links": 0,
+            "new_person_candidates": 4,
+            "relation_candidates": 6,
+            "review_items": 4,
+            "story_count": 4
+          },
+          "peripheral_low_connectivity": {
+            "existing_person_links": 0,
+            "new_person_candidates": 3,
+            "relation_candidates": 3,
+            "review_items": 3,
+            "story_count": 3
+          },
+          "random_control": {
+            "existing_person_links": 0,
+            "new_person_candidates": 2,
+            "relation_candidates": 1,
+            "review_items": 2,
+            "story_count": 2
+          },
+          "relation_rich": {
+            "existing_person_links": 0,
+            "new_person_candidates": 4,
+            "relation_candidates": 6,
+            "review_items": 4,
+            "story_count": 4
+          },
+          "underrepresented_chapter": {
+            "existing_person_links": 0,
+            "new_person_candidates": 3,
+            "relation_candidates": 7,
+            "review_items": 3,
+            "story_count": 3
+          }
+        }
+      }
+    },
+    {
+      "baseline_participant_count": 0,
+      "chapter_heading": "賞譽第八",
+      "chapter_id": "08-shangyu",
+      "graph_connectivity_class": "peripheral",
+      "known_participants_before": [],
+      "parent_strategy": "exploitation",
+      "production_visible": false,
+      "selection_basis": {
+        "chapter_story_count": 156,
+        "known_person_count": 0,
+        "relation_marker_count": 5,
+        "temporal_marker_count": 4,
+        "unknown_name_signal": 13,
+        "unresolved_surface_count": 0
+      },
+      "selection_channel": "exploitation_relation_rich",
+      "selection_key": "28fdda4af4e44c9853b5bb1a55bdd83fa227ec8bb738a1cb706074979f4998a0",
+      "source_hash": "2748995f2845871d1958c1d99307905e9a5027671782fe631c58efa8a7c4aeb5",
+      "source_refs": [
+        "hge1-wb-shishuo-main-08-shangyu-069",
+        "hge1-wb-shishuo-liu-08-shangyu-069-annotation-001",
+        "hge1-wb-shishuo-liu-08-shangyu-069-annotation-002"
+      ],
+      "story_id": "08-shangyu-069",
+      "wave_a_evidence": {
+        "selection_policy": "exploitation of highest Wave A relation/underrepresented yields plus coverage and deterministic controls",
+        "source_channel_yield": {
+          "graph_guided_frontier_rich": {
+            "existing_person_links": 0,
+            "new_person_candidates": 4,
+            "relation_candidates": 4,
+            "review_items": 4,
+            "story_count": 4
+          },
+          "new_person_rich": {
+            "existing_person_links": 0,
+            "new_person_candidates": 4,
+            "relation_candidates": 6,
+            "review_items": 4,
+            "story_count": 4
+          },
+          "peripheral_low_connectivity": {
+            "existing_person_links": 0,
+            "new_person_candidates": 3,
+            "relation_candidates": 3,
+            "review_items": 3,
+            "story_count": 3
+          },
+          "random_control": {
+            "existing_person_links": 0,
+            "new_person_candidates": 2,
+            "relation_candidates": 1,
+            "review_items": 2,
+            "story_count": 2
+          },
+          "relation_rich": {
+            "existing_person_links": 0,
+            "new_person_candidates": 4,
+            "relation_candidates": 6,
+            "review_items": 4,
+            "story_count": 4
+          },
+          "underrepresented_chapter": {
+            "existing_person_links": 0,
+            "new_person_candidates": 3,
+            "relation_candidates": 7,
+            "review_items": 3,
+            "story_count": 3
+          }
+        }
+      }
+    },
+    {
+      "baseline_participant_count": 0,
+      "chapter_heading": "品藻第九",
+      "chapter_id": "09-pinzao",
+      "graph_connectivity_class": "peripheral",
+      "known_participants_before": [],
+      "parent_strategy": "exploitation",
+      "production_visible": false,
+      "selection_basis": {
+        "chapter_story_count": 88,
+        "known_person_count": 0,
+        "relation_marker_count": 4,
+        "temporal_marker_count": 2,
+        "unknown_name_signal": 20,
+        "unresolved_surface_count": 0
+      },
+      "selection_channel": "exploitation_relation_rich",
+      "selection_key": "46b709b32e2482a641f529f5088b502c3ae160fc2b5fe5757a9fd2834bda349c",
+      "source_hash": "613d4b311086e602e7cb76a624d032120081061c20e4af2a28a6de713c547244",
+      "source_refs": [
+        "hge1-wb-shishuo-main-09-pinzao-049",
+        "hge1-wb-shishuo-liu-09-pinzao-049-annotation-001",
+        "hge1-wb-shishuo-liu-09-pinzao-049-annotation-002",
+        "hge1-wb-shishuo-liu-09-pinzao-049-annotation-003"
+      ],
+      "story_id": "09-pinzao-049",
+      "wave_a_evidence": {
+        "selection_policy": "exploitation of highest Wave A relation/underrepresented yields plus coverage and deterministic controls",
+        "source_channel_yield": {
+          "graph_guided_frontier_rich": {
+            "existing_person_links": 0,
+            "new_person_candidates": 4,
+            "relation_candidates": 4,
+            "review_items": 4,
+            "story_count": 4
+          },
+          "new_person_rich": {
+            "existing_person_links": 0,
+            "new_person_candidates": 4,
+            "relation_candidates": 6,
+            "review_items": 4,
+            "story_count": 4
+          },
+          "peripheral_low_connectivity": {
+            "existing_person_links": 0,
+            "new_person_candidates": 3,
+            "relation_candidates": 3,
+            "review_items": 3,
+            "story_count": 3
+          },
+          "random_control": {
+            "existing_person_links": 0,
+            "new_person_candidates": 2,
+            "relation_candidates": 1,
+            "review_items": 2,
+            "story_count": 2
+          },
+          "relation_rich": {
+            "existing_person_links": 0,
+            "new_person_candidates": 4,
+            "relation_candidates": 6,
+            "review_items": 4,
+            "story_count": 4
+          },
+          "underrepresented_chapter": {
+            "existing_person_links": 0,
+            "new_person_candidates": 3,
+            "relation_candidates": 7,
+            "review_items": 3,
+            "story_count": 3
+          }
+        }
+      }
+    },
+    {
+      "baseline_participant_count": 0,
+      "chapter_heading": "排調第二十五",
+      "chapter_id": "25-paidiao",
+      "graph_connectivity_class": "peripheral",
+      "known_participants_before": [],
+      "parent_strategy": "exploitation",
+      "production_visible": false,
+      "selection_basis": {
+        "chapter_story_count": 65,
+        "known_person_count": 0,
+        "relation_marker_count": 6,
+        "temporal_marker_count": 1,
+        "unknown_name_signal": 20,
+        "unresolved_surface_count": 0
+      },
+      "selection_channel": "exploitation_relation_rich",
+      "selection_key": "4f39eec21355a37a28964bd8bb829b160fc3152a52a613f7a52d3ddf096045c9",
+      "source_hash": "f281e30225333a2e18fcaf3008e66e519f1c096184786764804c7a63a312c39b",
+      "source_refs": [
+        "hge1-wb-shishuo-main-25-paidiao-048",
+        "hge1-wb-shishuo-liu-25-paidiao-048-annotation-001",
+        "hge1-wb-shishuo-liu-25-paidiao-048-annotation-002",
+        "hge1-wb-shishuo-liu-25-paidiao-048-annotation-003"
+      ],
+      "story_id": "25-paidiao-048",
+      "wave_a_evidence": {
+        "selection_policy": "exploitation of highest Wave A relation/underrepresented yields plus coverage and deterministic controls",
+        "source_channel_yield": {
+          "graph_guided_frontier_rich": {
+            "existing_person_links": 0,
+            "new_person_candidates": 4,
+            "relation_candidates": 4,
+            "review_items": 4,
+            "story_count": 4
+          },
+          "new_person_rich": {
+            "existing_person_links": 0,
+            "new_person_candidates": 4,
+            "relation_candidates": 6,
+            "review_items": 4,
+            "story_count": 4
+          },
+          "peripheral_low_connectivity": {
+            "existing_person_links": 0,
+            "new_person_candidates": 3,
+            "relation_candidates": 3,
+            "review_items": 3,
+            "story_count": 3
+          },
+          "random_control": {
+            "existing_person_links": 0,
+            "new_person_candidates": 2,
+            "relation_candidates": 1,
+            "review_items": 2,
+            "story_count": 2
+          },
+          "relation_rich": {
+            "existing_person_links": 0,
+            "new_person_candidates": 4,
+            "relation_candidates": 6,
+            "review_items": 4,
+            "story_count": 4
+          },
+          "underrepresented_chapter": {
+            "existing_person_links": 0,
+            "new_person_candidates": 3,
+            "relation_candidates": 7,
+            "review_items": 3,
+            "story_count": 3
+          }
+        }
+      }
+    },
+    {
+      "baseline_participant_count": 0,
+      "chapter_heading": "任誕第二十三",
+      "chapter_id": "23-rendan",
+      "graph_connectivity_class": "peripheral",
+      "known_participants_before": [],
+      "parent_strategy": "exploitation",
+      "production_visible": false,
+      "selection_basis": {
+        "chapter_story_count": 54,
+        "known_person_count": 0,
+        "relation_marker_count": 7,
+        "temporal_marker_count": 0,
+        "unknown_name_signal": 20,
+        "unresolved_surface_count": 0
+      },
+      "selection_channel": "exploitation_relation_rich",
+      "selection_key": "7f63fbee2aa7922b3e05a2bb63523ac542e3ae71c15a67e77eebd27a6c7e0ddb",
+      "source_hash": "6fd3694ae9d37bc7509e8773c5e6f7d3aed1fb00f9e2f5dbc7447edcf327a176",
+      "source_refs": [
+        "hge1-wb-shishuo-main-23-rendan-017",
+        "hge1-wb-shishuo-liu-23-rendan-017-annotation-001"
+      ],
+      "story_id": "23-rendan-017",
+      "wave_a_evidence": {
+        "selection_policy": "exploitation of highest Wave A relation/underrepresented yields plus coverage and deterministic controls",
+        "source_channel_yield": {
+          "graph_guided_frontier_rich": {
+            "existing_person_links": 0,
+            "new_person_candidates": 4,
+            "relation_candidates": 4,
+            "review_items": 4,
+            "story_count": 4
+          },
+          "new_person_rich": {
+            "existing_person_links": 0,
+            "new_person_candidates": 4,
+            "relation_candidates": 6,
+            "review_items": 4,
+            "story_count": 4
+          },
+          "peripheral_low_connectivity": {
+            "existing_person_links": 0,
+            "new_person_candidates": 3,
+            "relation_candidates": 3,
+            "review_items": 3,
+            "story_count": 3
+          },
+          "random_control": {
+            "existing_person_links": 0,
+            "new_person_candidates": 2,
+            "relation_candidates": 1,
+            "review_items": 2,
+            "story_count": 2
+          },
+          "relation_rich": {
+            "existing_person_links": 0,
+            "new_person_candidates": 4,
+            "relation_candidates": 6,
+            "review_items": 4,
+            "story_count": 4
+          },
+          "underrepresented_chapter": {
+            "existing_person_links": 0,
+            "new_person_candidates": 3,
+            "relation_candidates": 7,
+            "review_items": 3,
+            "story_count": 3
+          }
+        }
+      }
+    },
+    {
+      "baseline_participant_count": 0,
+      "chapter_heading": "德行第一",
+      "chapter_id": "01-dexing",
+      "graph_connectivity_class": "peripheral",
+      "known_participants_before": [],
+      "parent_strategy": "exploitation",
+      "production_visible": false,
+      "selection_basis": {
+        "chapter_story_count": 47,
+        "known_person_count": 0,
+        "relation_marker_count": 4,
+        "temporal_marker_count": 0,
+        "unknown_name_signal": 20,
+        "unresolved_surface_count": 0
+      },
+      "selection_channel": "exploitation_relation_rich",
+      "selection_key": "b9234260e6d8c8124d4ca9fb0d36acb30a2c668860ab5d8c8e6e326bef4f3764",
+      "source_hash": "b072248f3d88b928523973ee0a6f8144a9c5f0b49fa12a6210859edc1554f3b6",
+      "source_refs": [
+        "hge1-wb-shishuo-main-01-dexing-004",
+        "hge1-wb-shishuo-liu-01-dexing-004-annotation-001",
+        "hge1-wb-shishuo-liu-01-dexing-004-annotation-002",
+        "hge1-wb-shishuo-liu-01-dexing-004-annotation-003"
+      ],
+      "story_id": "01-dexing-004",
+      "wave_a_evidence": {
+        "selection_policy": "exploitation of highest Wave A relation/underrepresented yields plus coverage and deterministic controls",
+        "source_channel_yield": {
+          "graph_guided_frontier_rich": {
+            "existing_person_links": 0,
+            "new_person_candidates": 4,
+            "relation_candidates": 4,
+            "review_items": 4,
+            "story_count": 4
+          },
+          "new_person_rich": {
+            "existing_person_links": 0,
+            "new_person_candidates": 4,
+            "relation_candidates": 6,
+            "review_items": 4,
+            "story_count": 4
+          },
+          "peripheral_low_connectivity": {
+            "existing_person_links": 0,
+            "new_person_candidates": 3,
+            "relation_candidates": 3,
+            "review_items": 3,
+            "story_count": 3
+          },
+          "random_control": {
+            "existing_person_links": 0,
+            "new_person_candidates": 2,
+            "relation_candidates": 1,
+            "review_items": 2,
+            "story_count": 2
+          },
+          "relation_rich": {
+            "existing_person_links": 0,
+            "new_person_candidates": 4,
+            "relation_candidates": 6,
+            "review_items": 4,
+            "story_count": 4
+          },
+          "underrepresented_chapter": {
+            "existing_person_links": 0,
+            "new_person_candidates": 3,
+            "relation_candidates": 7,
+            "review_items": 3,
+            "story_count": 3
+          }
+        }
+      }
+    },
+    {
+      "baseline_participant_count": 0,
+      "chapter_heading": "言語第二",
+      "chapter_id": "02-yanyu",
+      "graph_connectivity_class": "peripheral",
+      "known_participants_before": [],
+      "parent_strategy": "exploitation",
+      "production_visible": false,
+      "selection_basis": {
+        "chapter_story_count": 108,
+        "known_person_count": 0,
+        "relation_marker_count": 8,
+        "temporal_marker_count": 2,
+        "unknown_name_signal": 16,
+        "unresolved_surface_count": 0
+      },
+      "selection_channel": "exploitation_relation_rich",
+      "selection_key": "e67a95cec1334e1156ac76fba7026325f7cf9a6dc84000019ec1c9ad86e1aca8",
+      "source_hash": "120c7e9d5cb2872986d33826bb2daa5532e269bdcd4bc487628580c0000bc6e9",
+      "source_refs": [
+        "hge1-wb-shishuo-main-02-yanyu-060",
+        "hge1-wb-shishuo-liu-02-yanyu-060-annotation-001",
+        "hge1-wb-shishuo-liu-02-yanyu-060-annotation-002"
+      ],
+      "story_id": "02-yanyu-060",
+      "wave_a_evidence": {
+        "selection_policy": "exploitation of highest Wave A relation/underrepresented yields plus coverage and deterministic controls",
+        "source_channel_yield": {
+          "graph_guided_frontier_rich": {
+            "existing_person_links": 0,
+            "new_person_candidates": 4,
+            "relation_candidates": 4,
+            "review_items": 4,
+            "story_count": 4
+          },
+          "new_person_rich": {
+            "existing_person_links": 0,
+            "new_person_candidates": 4,
+            "relation_candidates": 6,
+            "review_items": 4,
+            "story_count": 4
+          },
+          "peripheral_low_connectivity": {
+            "existing_person_links": 0,
+            "new_person_candidates": 3,
+            "relation_candidates": 3,
+            "review_items": 3,
+            "story_count": 3
+          },
+          "random_control": {
+            "existing_person_links": 0,
+            "new_person_candidates": 2,
+            "relation_candidates": 1,
+            "review_items": 2,
+            "story_count": 2
+          },
+          "relation_rich": {
+            "existing_person_links": 0,
+            "new_person_candidates": 4,
+            "relation_candidates": 6,
+            "review_items": 4,
+            "story_count": 4
+          },
+          "underrepresented_chapter": {
+            "existing_person_links": 0,
+            "new_person_candidates": 3,
+            "relation_candidates": 7,
+            "review_items": 3,
+            "story_count": 3
+          }
+        }
+      }
+    },
+    {
+      "baseline_participant_count": 0,
+      "chapter_heading": "巧蓺第二十一",
+      "chapter_id": "21-qiaoyi",
+      "graph_connectivity_class": "peripheral",
+      "known_participants_before": [],
+      "parent_strategy": "exploitation",
+      "production_visible": false,
+      "selection_basis": {
+        "chapter_story_count": 14,
+        "known_person_count": 0,
+        "relation_marker_count": 2,
+        "temporal_marker_count": 0,
+        "unknown_name_signal": 19,
+        "unresolved_surface_count": 0
+      },
+      "selection_channel": "exploitation_underrepresented",
+      "selection_key": "0d3854086d5d24eb6cf9c2d072738b2fd406ab4887dd5248e043cd499e7fbdc2",
+      "source_hash": "c147e71a15db3f1bfb32567935d766ba57bf5859d36f9c2196b487177e1e173c",
+      "source_refs": [
+        "hge1-wb-shishuo-main-21-qiaoyi-011",
+        "hge1-wb-shishuo-liu-21-qiaoyi-011-annotation-001",
+        "hge1-wb-shishuo-liu-21-qiaoyi-011-annotation-002",
+        "hge1-wb-shishuo-liu-21-qiaoyi-011-annotation-003"
+      ],
+      "story_id": "21-qiaoyi-011",
+      "wave_a_evidence": {
+        "selection_policy": "exploitation of highest Wave A relation/underrepresented yields plus coverage and deterministic controls",
+        "source_channel_yield": {
+          "graph_guided_frontier_rich": {
+            "existing_person_links": 0,
+            "new_person_candidates": 4,
+            "relation_candidates": 4,
+            "review_items": 4,
+            "story_count": 4
+          },
+          "new_person_rich": {
+            "existing_person_links": 0,
+            "new_person_candidates": 4,
+            "relation_candidates": 6,
+            "review_items": 4,
+            "story_count": 4
+          },
+          "peripheral_low_connectivity": {
+            "existing_person_links": 0,
+            "new_person_candidates": 3,
+            "relation_candidates": 3,
+            "review_items": 3,
+            "story_count": 3
+          },
+          "random_control": {
+            "existing_person_links": 0,
+            "new_person_candidates": 2,
+            "relation_candidates": 1,
+            "review_items": 2,
+            "story_count": 2
+          },
+          "relation_rich": {
+            "existing_person_links": 0,
+            "new_person_candidates": 4,
+            "relation_candidates": 6,
+            "review_items": 4,
+            "story_count": 4
+          },
+          "underrepresented_chapter": {
+            "existing_person_links": 0,
+            "new_person_candidates": 3,
+            "relation_candidates": 7,
+            "review_items": 3,
+            "story_count": 3
+          }
+        }
+      }
+    },
+    {
+      "baseline_participant_count": 0,
+      "chapter_heading": "棲逸第十八",
+      "chapter_id": "18-qiyi",
+      "graph_connectivity_class": "peripheral",
+      "known_participants_before": [],
+      "parent_strategy": "exploitation",
+      "production_visible": false,
+      "selection_basis": {
+        "chapter_story_count": 17,
+        "known_person_count": 0,
+        "relation_marker_count": 0,
+        "temporal_marker_count": 0,
+        "unknown_name_signal": 7,
+        "unresolved_surface_count": 0
+      },
+      "selection_channel": "exploitation_underrepresented",
+      "selection_key": "1a19e0b2a492a094969e1958aa42979a95c24a4dd1c040f7ce36ef9c1341c126",
+      "source_hash": "d09942f64d283b3c409dc5951b31c88c8eda726777b704af7a985b68f1f8b475",
+      "source_refs": [
+        "hge1-wb-shishuo-main-18-qiyi-016"
+      ],
+      "story_id": "18-qiyi-016",
+      "wave_a_evidence": {
+        "selection_policy": "exploitation of highest Wave A relation/underrepresented yields plus coverage and deterministic controls",
+        "source_channel_yield": {
+          "graph_guided_frontier_rich": {
+            "existing_person_links": 0,
+            "new_person_candidates": 4,
+            "relation_candidates": 4,
+            "review_items": 4,
+            "story_count": 4
+          },
+          "new_person_rich": {
+            "existing_person_links": 0,
+            "new_person_candidates": 4,
+            "relation_candidates": 6,
+            "review_items": 4,
+            "story_count": 4
+          },
+          "peripheral_low_connectivity": {
+            "existing_person_links": 0,
+            "new_person_candidates": 3,
+            "relation_candidates": 3,
+            "review_items": 3,
+            "story_count": 3
+          },
+          "random_control": {
+            "existing_person_links": 0,
+            "new_person_candidates": 2,
+            "relation_candidates": 1,
+            "review_items": 2,
+            "story_count": 2
+          },
+          "relation_rich": {
+            "existing_person_links": 0,
+            "new_person_candidates": 4,
+            "relation_candidates": 6,
+            "review_items": 4,
+            "story_count": 4
+          },
+          "underrepresented_chapter": {
+            "existing_person_links": 0,
+            "new_person_candidates": 3,
+            "relation_candidates": 7,
+            "review_items": 3,
+            "story_count": 3
+          }
+        }
+      }
+    },
+    {
+      "baseline_participant_count": 0,
+      "chapter_heading": "忿狷第三十一",
+      "chapter_id": "31-fenjuan",
+      "graph_connectivity_class": "peripheral",
+      "known_participants_before": [],
+      "parent_strategy": "exploitation",
+      "production_visible": false,
+      "selection_basis": {
+        "chapter_story_count": 8,
+        "known_person_count": 0,
+        "relation_marker_count": 0,
+        "temporal_marker_count": 0,
+        "unknown_name_signal": 12,
+        "unresolved_surface_count": 0
+      },
+      "selection_channel": "exploitation_underrepresented",
+      "selection_key": "47c2413f51ae85d45d07b410d76811f1f46f9c0f320696c388ce3f9fd74af9a4",
+      "source_hash": "dc748b2b4948fb4ae294851bb31478068095f1b7201019b9df999c8de86a459f",
+      "source_refs": [
+        "hge1-wb-shishuo-main-31-fenjuan-001"
+      ],
+      "story_id": "31-fenjuan-001",
+      "wave_a_evidence": {
+        "selection_policy": "exploitation of highest Wave A relation/underrepresented yields plus coverage and deterministic controls",
+        "source_channel_yield": {
+          "graph_guided_frontier_rich": {
+            "existing_person_links": 0,
+            "new_person_candidates": 4,
+            "relation_candidates": 4,
+            "review_items": 4,
+            "story_count": 4
+          },
+          "new_person_rich": {
+            "existing_person_links": 0,
+            "new_person_candidates": 4,
+            "relation_candidates": 6,
+            "review_items": 4,
+            "story_count": 4
+          },
+          "peripheral_low_connectivity": {
+            "existing_person_links": 0,
+            "new_person_candidates": 3,
+            "relation_candidates": 3,
+            "review_items": 3,
+            "story_count": 3
+          },
+          "random_control": {
+            "existing_person_links": 0,
+            "new_person_candidates": 2,
+            "relation_candidates": 1,
+            "review_items": 2,
+            "story_count": 2
+          },
+          "relation_rich": {
+            "existing_person_links": 0,
+            "new_person_candidates": 4,
+            "relation_candidates": 6,
+            "review_items": 4,
+            "story_count": 4
+          },
+          "underrepresented_chapter": {
+            "existing_person_links": 0,
+            "new_person_candidates": 3,
+            "relation_candidates": 7,
+            "review_items": 3,
+            "story_count": 3
+          }
+        }
+      }
+    },
+    {
+      "baseline_participant_count": 0,
+      "chapter_heading": "簡傲第二十四",
+      "chapter_id": "24-jianao",
+      "graph_connectivity_class": "peripheral",
+      "known_participants_before": [],
+      "parent_strategy": "exploitation",
+      "production_visible": false,
+      "selection_basis": {
+        "chapter_story_count": 17,
+        "known_person_count": 0,
+        "relation_marker_count": 1,
+        "temporal_marker_count": 0,
+        "unknown_name_signal": 7,
+        "unresolved_surface_count": 0
+      },
+      "selection_channel": "exploitation_underrepresented",
+      "selection_key": "6e404f15b1e66f35a40517a3cc5d7fda235485c819cf4f8bec8e3507215f03c2",
+      "source_hash": "c31e4a0cbc88d06ebbb2df57996a9e5c56dbae588251028847f6dbeec6281adf",
+      "source_refs": [
+        "hge1-wb-shishuo-main-24-jianao-009"
+      ],
+      "story_id": "24-jianao-009",
+      "wave_a_evidence": {
+        "selection_policy": "exploitation of highest Wave A relation/underrepresented yields plus coverage and deterministic controls",
+        "source_channel_yield": {
+          "graph_guided_frontier_rich": {
+            "existing_person_links": 0,
+            "new_person_candidates": 4,
+            "relation_candidates": 4,
+            "review_items": 4,
+            "story_count": 4
+          },
+          "new_person_rich": {
+            "existing_person_links": 0,
+            "new_person_candidates": 4,
+            "relation_candidates": 6,
+            "review_items": 4,
+            "story_count": 4
+          },
+          "peripheral_low_connectivity": {
+            "existing_person_links": 0,
+            "new_person_candidates": 3,
+            "relation_candidates": 3,
+            "review_items": 3,
+            "story_count": 3
+          },
+          "random_control": {
+            "existing_person_links": 0,
+            "new_person_candidates": 2,
+            "relation_candidates": 1,
+            "review_items": 2,
+            "story_count": 2
+          },
+          "relation_rich": {
+            "existing_person_links": 0,
+            "new_person_candidates": 4,
+            "relation_candidates": 6,
+            "review_items": 4,
+            "story_count": 4
+          },
+          "underrepresented_chapter": {
+            "existing_person_links": 0,
+            "new_person_candidates": 3,
+            "relation_candidates": 7,
+            "review_items": 3,
+            "story_count": 3
+          }
+        }
+      }
+    },
+    {
+      "baseline_participant_count": 0,
+      "chapter_heading": "假譎第二十七",
+      "chapter_id": "27-jiajue",
+      "graph_connectivity_class": "peripheral",
+      "known_participants_before": [],
+      "parent_strategy": "exploitation",
+      "production_visible": false,
+      "selection_basis": {
+        "chapter_story_count": 14,
+        "known_person_count": 0,
+        "relation_marker_count": 0,
+        "temporal_marker_count": 1,
+        "unknown_name_signal": 17,
+        "unresolved_surface_count": 0
+      },
+      "selection_channel": "exploitation_underrepresented",
+      "selection_key": "8e176b31732b2e4307ec4b203028c1662cacea83df79e4ceeaadde343b96c5f2",
+      "source_hash": "93403023a1261a94c38f07e728c35142fd343a67fb1a17372204c0a802b63624",
+      "source_refs": [
+        "hge1-wb-shishuo-main-27-jiajue-005",
+        "hge1-wb-shishuo-liu-27-jiajue-005-annotation-001",
+        "hge1-wb-shishuo-liu-27-jiajue-005-annotation-002"
+      ],
+      "story_id": "27-jiajue-005",
+      "wave_a_evidence": {
+        "selection_policy": "exploitation of highest Wave A relation/underrepresented yields plus coverage and deterministic controls",
+        "source_channel_yield": {
+          "graph_guided_frontier_rich": {
+            "existing_person_links": 0,
+            "new_person_candidates": 4,
+            "relation_candidates": 4,
+            "review_items": 4,
+            "story_count": 4
+          },
+          "new_person_rich": {
+            "existing_person_links": 0,
+            "new_person_candidates": 4,
+            "relation_candidates": 6,
+            "review_items": 4,
+            "story_count": 4
+          },
+          "peripheral_low_connectivity": {
+            "existing_person_links": 0,
+            "new_person_candidates": 3,
+            "relation_candidates": 3,
+            "review_items": 3,
+            "story_count": 3
+          },
+          "random_control": {
+            "existing_person_links": 0,
+            "new_person_candidates": 2,
+            "relation_candidates": 1,
+            "review_items": 2,
+            "story_count": 2
+          },
+          "relation_rich": {
+            "existing_person_links": 0,
+            "new_person_candidates": 4,
+            "relation_candidates": 6,
+            "review_items": 4,
+            "story_count": 4
+          },
+          "underrepresented_chapter": {
+            "existing_person_links": 0,
+            "new_person_candidates": 3,
+            "relation_candidates": 7,
+            "review_items": 3,
+            "story_count": 3
+          }
+        }
+      }
+    },
+    {
+      "baseline_participant_count": 0,
+      "chapter_heading": "捷悟第十一",
+      "chapter_id": "11-jiewu",
+      "graph_connectivity_class": "peripheral",
+      "known_participants_before": [],
+      "parent_strategy": "exploitation",
+      "production_visible": false,
+      "selection_basis": {
+        "chapter_story_count": 7,
+        "known_person_count": 0,
+        "relation_marker_count": 0,
+        "temporal_marker_count": 0,
+        "unknown_name_signal": 11,
+        "unresolved_surface_count": 0
+      },
+      "selection_channel": "exploitation_underrepresented",
+      "selection_key": "bf7382362e685665c2798577e9a5c72ad744b3600dd4000896c9d9ebdb714f6b",
+      "source_hash": "b9c4a2e1603f82be347eab04af1443fbf553d08825510267778b41568ca6d70a",
+      "source_refs": [
+        "hge1-wb-shishuo-main-11-jiewu-002"
+      ],
+      "story_id": "11-jiewu-002",
+      "wave_a_evidence": {
+        "selection_policy": "exploitation of highest Wave A relation/underrepresented yields plus coverage and deterministic controls",
+        "source_channel_yield": {
+          "graph_guided_frontier_rich": {
+            "existing_person_links": 0,
+            "new_person_candidates": 4,
+            "relation_candidates": 4,
+            "review_items": 4,
+            "story_count": 4
+          },
+          "new_person_rich": {
+            "existing_person_links": 0,
+            "new_person_candidates": 4,
+            "relation_candidates": 6,
+            "review_items": 4,
+            "story_count": 4
+          },
+          "peripheral_low_connectivity": {
+            "existing_person_links": 0,
+            "new_person_candidates": 3,
+            "relation_candidates": 3,
+            "review_items": 3,
+            "story_count": 3
+          },
+          "random_control": {
+            "existing_person_links": 0,
+            "new_person_candidates": 2,
+            "relation_candidates": 1,
+            "review_items": 2,
+            "story_count": 2
+          },
+          "relation_rich": {
+            "existing_person_links": 0,
+            "new_person_candidates": 4,
+            "relation_candidates": 6,
+            "review_items": 4,
+            "story_count": 4
+          },
+          "underrepresented_chapter": {
+            "existing_person_links": 0,
+            "new_person_candidates": 3,
+            "relation_candidates": 7,
+            "review_items": 3,
+            "story_count": 3
+          }
+        }
+      }
+    },
+    {
+      "baseline_participant_count": 0,
+      "chapter_heading": "排調第二十五",
+      "chapter_id": "25-paidiao",
+      "graph_connectivity_class": "peripheral",
+      "known_participants_before": [],
+      "parent_strategy": "random_control",
+      "production_visible": false,
+      "selection_basis": {
+        "chapter_story_count": 65,
+        "known_person_count": 0,
+        "relation_marker_count": 3,
+        "temporal_marker_count": 1,
+        "unknown_name_signal": 18,
+        "unresolved_surface_count": 0
+      },
+      "selection_channel": "random_control",
+      "selection_key": "487d99ea708eade57d6cbd425deb6701a4b0140ede210495b6553504c953665a",
+      "source_hash": "2ae5cc850fc7206dd4c0e8bfe3e1725c3d58d2cc3a045f0bd62bfd3d079f3983",
+      "source_refs": [
+        "hge1-wb-shishuo-main-25-paidiao-028",
+        "hge1-wb-shishuo-liu-25-paidiao-028-annotation-001",
+        "hge1-wb-shishuo-liu-25-paidiao-028-annotation-002"
+      ],
+      "story_id": "25-paidiao-028",
+      "wave_a_evidence": {
+        "selection_policy": "exploitation of highest Wave A relation/underrepresented yields plus coverage and deterministic controls",
+        "source_channel_yield": {
+          "graph_guided_frontier_rich": {
+            "existing_person_links": 0,
+            "new_person_candidates": 4,
+            "relation_candidates": 4,
+            "review_items": 4,
+            "story_count": 4
+          },
+          "new_person_rich": {
+            "existing_person_links": 0,
+            "new_person_candidates": 4,
+            "relation_candidates": 6,
+            "review_items": 4,
+            "story_count": 4
+          },
+          "peripheral_low_connectivity": {
+            "existing_person_links": 0,
+            "new_person_candidates": 3,
+            "relation_candidates": 3,
+            "review_items": 3,
+            "story_count": 3
+          },
+          "random_control": {
+            "existing_person_links": 0,
+            "new_person_candidates": 2,
+            "relation_candidates": 1,
+            "review_items": 2,
+            "story_count": 2
+          },
+          "relation_rich": {
+            "existing_person_links": 0,
+            "new_person_candidates": 4,
+            "relation_candidates": 6,
+            "review_items": 4,
+            "story_count": 4
+          },
+          "underrepresented_chapter": {
+            "existing_person_links": 0,
+            "new_person_candidates": 3,
+            "relation_candidates": 7,
+            "review_items": 3,
+            "story_count": 3
+          }
+        }
+      }
+    },
+    {
+      "baseline_participant_count": 0,
+      "chapter_heading": "文學第四",
+      "chapter_id": "04-wenxue",
+      "graph_connectivity_class": "peripheral",
+      "known_participants_before": [],
+      "parent_strategy": "random_control",
+      "production_visible": false,
+      "selection_basis": {
+        "chapter_story_count": 104,
+        "known_person_count": 0,
+        "relation_marker_count": 0,
+        "temporal_marker_count": 1,
+        "unknown_name_signal": 15,
+        "unresolved_surface_count": 0
+      },
+      "selection_channel": "random_control",
+      "selection_key": "69f448f53b70ae5402df4f3c8d2fed0df71c4c5c1b803761d59a1512e22eb878",
+      "source_hash": "c82fdd1c26652056e17096988f514f6cc17b5aa2aa97c1e32542ef9aa9431754",
+      "source_refs": [
+        "hge1-wb-shishuo-main-04-wenxue-034",
+        "hge1-wb-shishuo-liu-04-wenxue-034-annotation-001",
+        "hge1-wb-shishuo-liu-04-wenxue-034-annotation-002"
+      ],
+      "story_id": "04-wenxue-034",
+      "wave_a_evidence": {
+        "selection_policy": "exploitation of highest Wave A relation/underrepresented yields plus coverage and deterministic controls",
+        "source_channel_yield": {
+          "graph_guided_frontier_rich": {
+            "existing_person_links": 0,
+            "new_person_candidates": 4,
+            "relation_candidates": 4,
+            "review_items": 4,
+            "story_count": 4
+          },
+          "new_person_rich": {
+            "existing_person_links": 0,
+            "new_person_candidates": 4,
+            "relation_candidates": 6,
+            "review_items": 4,
+            "story_count": 4
+          },
+          "peripheral_low_connectivity": {
+            "existing_person_links": 0,
+            "new_person_candidates": 3,
+            "relation_candidates": 3,
+            "review_items": 3,
+            "story_count": 3
+          },
+          "random_control": {
+            "existing_person_links": 0,
+            "new_person_candidates": 2,
+            "relation_candidates": 1,
+            "review_items": 2,
+            "story_count": 2
+          },
+          "relation_rich": {
+            "existing_person_links": 0,
+            "new_person_candidates": 4,
+            "relation_candidates": 6,
+            "review_items": 4,
+            "story_count": 4
+          },
+          "underrepresented_chapter": {
+            "existing_person_links": 0,
+            "new_person_candidates": 3,
+            "relation_candidates": 7,
+            "review_items": 3,
+            "story_count": 3
+          }
+        }
+      }
+    },
+    {
+      "baseline_participant_count": 0,
+      "chapter_heading": "文學第四",
+      "chapter_id": "04-wenxue",
+      "graph_connectivity_class": "peripheral",
+      "known_participants_before": [],
+      "parent_strategy": "random_control",
+      "production_visible": false,
+      "selection_basis": {
+        "chapter_story_count": 104,
+        "known_person_count": 0,
+        "relation_marker_count": 1,
+        "temporal_marker_count": 0,
+        "unknown_name_signal": 16,
+        "unresolved_surface_count": 0
+      },
+      "selection_channel": "random_control",
+      "selection_key": "ac898dca13d58c4f6e4acf60a29ed5d2d4488a93a0aa65e7ea6957c936c3a43a",
+      "source_hash": "5aa1c04560ffca0a75588e17aa7d605c66e2c9d6daadc62f23639368e363723a",
+      "source_refs": [
+        "hge1-wb-shishuo-main-04-wenxue-044",
+        "hge1-wb-shishuo-liu-04-wenxue-044-annotation-001",
+        "hge1-wb-shishuo-liu-04-wenxue-044-annotation-002"
+      ],
+      "story_id": "04-wenxue-044",
+      "wave_a_evidence": {
+        "selection_policy": "exploitation of highest Wave A relation/underrepresented yields plus coverage and deterministic controls",
+        "source_channel_yield": {
+          "graph_guided_frontier_rich": {
+            "existing_person_links": 0,
+            "new_person_candidates": 4,
+            "relation_candidates": 4,
+            "review_items": 4,
+            "story_count": 4
+          },
+          "new_person_rich": {
+            "existing_person_links": 0,
+            "new_person_candidates": 4,
+            "relation_candidates": 6,
+            "review_items": 4,
+            "story_count": 4
+          },
+          "peripheral_low_connectivity": {
+            "existing_person_links": 0,
+            "new_person_candidates": 3,
+            "relation_candidates": 3,
+            "review_items": 3,
+            "story_count": 3
+          },
+          "random_control": {
+            "existing_person_links": 0,
+            "new_person_candidates": 2,
+            "relation_candidates": 1,
+            "review_items": 2,
+            "story_count": 2
+          },
+          "relation_rich": {
+            "existing_person_links": 0,
+            "new_person_candidates": 4,
+            "relation_candidates": 6,
+            "review_items": 4,
+            "story_count": 4
+          },
+          "underrepresented_chapter": {
+            "existing_person_links": 0,
+            "new_person_candidates": 3,
+            "relation_candidates": 7,
+            "review_items": 3,
+            "story_count": 3
+          }
+        }
+      }
+    },
+    {
+      "baseline_participant_count": 0,
+      "chapter_heading": "言語第二",
+      "chapter_id": "02-yanyu",
+      "graph_connectivity_class": "peripheral",
+      "known_participants_before": [],
+      "parent_strategy": "random_control",
+      "production_visible": false,
+      "selection_basis": {
+        "chapter_story_count": 108,
+        "known_person_count": 0,
+        "relation_marker_count": 4,
+        "temporal_marker_count": 0,
+        "unknown_name_signal": 10,
+        "unresolved_surface_count": 0
+      },
+      "selection_channel": "random_control",
+      "selection_key": "ad3e98e0355423398c0407b4d442b1b354f5d8521bd21dbaf1781ef29035061b",
+      "source_hash": "7d478f9d8f2d0d767644ea70f6b902b3fb50f324e0af772d590bf1cc2c914217",
+      "source_refs": [
+        "hge1-wb-shishuo-main-02-yanyu-004"
+      ],
+      "story_id": "02-yanyu-004",
+      "wave_a_evidence": {
+        "selection_policy": "exploitation of highest Wave A relation/underrepresented yields plus coverage and deterministic controls",
+        "source_channel_yield": {
+          "graph_guided_frontier_rich": {
+            "existing_person_links": 0,
+            "new_person_candidates": 4,
+            "relation_candidates": 4,
+            "review_items": 4,
+            "story_count": 4
+          },
+          "new_person_rich": {
+            "existing_person_links": 0,
+            "new_person_candidates": 4,
+            "relation_candidates": 6,
+            "review_items": 4,
+            "story_count": 4
+          },
+          "peripheral_low_connectivity": {
+            "existing_person_links": 0,
+            "new_person_candidates": 3,
+            "relation_candidates": 3,
+            "review_items": 3,
+            "story_count": 3
+          },
+          "random_control": {
+            "existing_person_links": 0,
+            "new_person_candidates": 2,
+            "relation_candidates": 1,
+            "review_items": 2,
+            "story_count": 2
+          },
+          "relation_rich": {
+            "existing_person_links": 0,
+            "new_person_candidates": 4,
+            "relation_candidates": 6,
+            "review_items": 4,
+            "story_count": 4
+          },
+          "underrepresented_chapter": {
+            "existing_person_links": 0,
+            "new_person_candidates": 3,
+            "relation_candidates": 7,
+            "review_items": 3,
+            "story_count": 3
+          }
+        }
+      }
+    },
+    {
+      "baseline_participant_count": 0,
+      "chapter_heading": "排調第二十五",
+      "chapter_id": "25-paidiao",
+      "graph_connectivity_class": "peripheral",
+      "known_participants_before": [],
+      "parent_strategy": "random_control",
+      "production_visible": false,
+      "selection_basis": {
+        "chapter_story_count": 65,
+        "known_person_count": 0,
+        "relation_marker_count": 2,
+        "temporal_marker_count": 0,
+        "unknown_name_signal": 11,
+        "unresolved_surface_count": 0
+      },
+      "selection_channel": "random_control",
+      "selection_key": "f3587f52f430f739aa2381368956946f0877f3b8617b6f0ead08e7211474692b",
+      "source_hash": "065b46965f0a91661e3dd965685f403634cb4cea41b197a711e132928df41ca2",
+      "source_refs": [
+        "hge1-wb-shishuo-main-25-paidiao-050"
+      ],
+      "story_id": "25-paidiao-050",
+      "wave_a_evidence": {
+        "selection_policy": "exploitation of highest Wave A relation/underrepresented yields plus coverage and deterministic controls",
+        "source_channel_yield": {
+          "graph_guided_frontier_rich": {
+            "existing_person_links": 0,
+            "new_person_candidates": 4,
+            "relation_candidates": 4,
+            "review_items": 4,
+            "story_count": 4
+          },
+          "new_person_rich": {
+            "existing_person_links": 0,
+            "new_person_candidates": 4,
+            "relation_candidates": 6,
+            "review_items": 4,
+            "story_count": 4
+          },
+          "peripheral_low_connectivity": {
+            "existing_person_links": 0,
+            "new_person_candidates": 3,
+            "relation_candidates": 3,
+            "review_items": 3,
+            "story_count": 3
+          },
+          "random_control": {
+            "existing_person_links": 0,
+            "new_person_candidates": 2,
+            "relation_candidates": 1,
+            "review_items": 2,
+            "story_count": 2
+          },
+          "relation_rich": {
+            "existing_person_links": 0,
+            "new_person_candidates": 4,
+            "relation_candidates": 6,
+            "review_items": 4,
+            "story_count": 4
+          },
+          "underrepresented_chapter": {
+            "existing_person_links": 0,
+            "new_person_candidates": 3,
+            "relation_candidates": 7,
+            "review_items": 3,
+            "story_count": 3
+          }
+        }
+      }
+    }
+  ],
+  "run_version": "hge1-wave-b-v1",
+  "schema": "hge1-wave-b-selection-v1",
+  "selection_hash": "20587d8fd6a458de4ea8a35be7518b77ea9bba64debea2b42856f508422c0b7b",
+  "selection_method": "deterministic adaptive HGE1-WA channel yield ranking; no Wave B model output used",
+  "story_count": 24,
+  "story_ids": [
+    "04-wenxue-030",
+    "14-rongzhi-012",
+    "02-yanyu-063",
+    "03-zhengshi-001",
+    "21-qiaoyi-005",
+    "27-jiajue-002",
+    "21-qiaoyi-009",
+    "08-shangyu-069",
+    "09-pinzao-049",
+    "25-paidiao-048",
+    "23-rendan-017",
+    "01-dexing-004",
+    "02-yanyu-060",
+    "21-qiaoyi-011",
+    "18-qiyi-016",
+    "31-fenjuan-001",
+    "24-jianao-009",
+    "27-jiajue-005",
+    "11-jiewu-002",
+    "25-paidiao-028",
+    "04-wenxue-034",
+    "04-wenxue-044",
+    "02-yanyu-004",
+    "25-paidiao-050"
+  ],
+  "temperature": 0,
+  "wave_id": "HGE1-WB"
+}

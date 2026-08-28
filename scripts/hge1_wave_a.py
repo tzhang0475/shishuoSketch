@@ -611,15 +611,16 @@ def _safe_error(exc: Exception) -> dict[str, Any]:
     return {"exception_class": type(exc).__name__, "exception_message": message, "http_status": getattr(exc, "http_status", None)}
 
 
-def semantic_call(lane: str, unit_id: str, prompt: Mapping[str, Any], raw_dir: Path, sequence: int) -> tuple[dict[str, Any], Mapping[str, Any] | None]:
+def semantic_call(lane: str, unit_id: str, prompt: Mapping[str, Any], raw_dir: Path, sequence: int, *, attempt: int = 1) -> tuple[dict[str, Any], Mapping[str, Any] | None]:
     expected = {"person_read": algorithm.PERSON_ATOM_FUNCTION, "person_fill": algorithm.PERSON_FILL_FUNCTION, "temporal_read": algorithm.TEMPORAL_ATOM_FUNCTION, "temporal_fill": algorithm.TEMPORAL_FILL_FUNCTION}[lane]
     systems = {"person_read": algorithm.PERSON_ATOM_SYSTEM, "person_fill": algorithm.PERSON_ATOM_FILL_SYSTEM, "temporal_read": algorithm.TEMPORAL_ATOM_SYSTEM, "temporal_fill": algorithm.TEMPORAL_ATOM_FILL_SYSTEM}
     budgets = {"person_read": 900, "person_fill": 900, "temporal_read": 750, "temporal_fill": 750}
     started = time.monotonic()
-    record: dict[str, Any] = {"sequence": sequence, "lane": lane, "unit_id": unit_id, "model": MODEL, "prompt_version": PROMPT_VERSION, "input_hash": stable_hash(prompt), "start_time": utc_now()}
+    record: dict[str, Any] = {"sequence": sequence, "attempt": attempt, "lane": lane, "unit_id": unit_id, "model": MODEL, "prompt_version": PROMPT_VERSION, "input_hash": stable_hash(prompt), "start_time": utc_now()}
     try:
         response = call_deepseek([{"role": "system", "content": systems[lane]}, {"role": "user", "content": json.dumps(prompt, ensure_ascii=False, sort_keys=True)}], model=MODEL, temperature=0, thinking={"type": "disabled"}, max_tokens=budgets[lane], timeout=180, endpoint=algorithm.STRICT_ENDPOINT, tools=[algorithm.evidence_atom_function_definition(lane)], tool_choice=algorithm.evidence_atom_tool_choice(lane))
-        raw_path = raw_dir / f"{sequence:04d}-{lane}-{re.sub(r'[^A-Za-z0-9_.-]+', '-', unit_id)}.json"
+        basename = f"{sequence:04d}-{lane}-{re.sub(r'[^A-Za-z0-9_.-]+', '-', unit_id)}"
+        raw_path = raw_dir / f"{basename}.json" if attempt == 1 else raw_dir / f"{basename}-retry-{attempt}.json"
         if raw_path.exists():
             raise RuntimeError("immutable_raw_response_exists")
         write_json(raw_path, response)

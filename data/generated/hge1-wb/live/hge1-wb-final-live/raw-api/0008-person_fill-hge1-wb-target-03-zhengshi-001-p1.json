@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"entities\": [{\"entity_key\": \"e0\", \"surface\": \"陳仲弓\", \"entity_kind\": \"named_person\", \"reference_form\": \"full_name\", \"evidence_refs\": [\"hge1-shishuo-main-03-zhengshi-001\"]}, {\"entity_key\": \"e1\", \"surface\": \"太丘長\", \"entity_kind\": \"person_office_title\", \"reference_form\": \"office_title_only\", \"evidence_refs\": [\"hge1-shishuo-main-03-zhengshi-001\"]}, {\"entity_key\": \"e2\", \"surface\": \"吏\", \"entity_kind\": \"generic_role\", \"reference_form\": \"anonymous\", \"evidence_refs\": [\"hge1-shishuo-main-03-zhengshi-001\"]}, {\"entity_key\": \"e3\", \"surface\": \"母\", \"entity_kind\": \"kinship_reference\", \"reference_form\": \"implicit\", \"evidence_refs\": [\"hge1-shishuo-main-03-zhengshi-001\"]}], \"relations\": [{\"relation_id\": \"r0\", \"subject_entity_key\": \"e0\", \"object_entity_key\": \"e1\", \"relation_surface\": \"為\", \"relation_class\": \"institutional\", \"evidence_ref\": \"hge1-shishuo-main-03-zhengshi-001\", \"exact_span\": \"陳仲弓為太丘長\", \"confidence\": \"high\"}, {\"relation_id\": \"r1\", \"subject_entity_key\": \"e2\", \"object_entity_key\": \"e3\", \"relation_surface\": \"詐稱母病\", \"relation_class\": \"interaction\", \"evidence_ref\": \"hge1-shishuo-main-03-zhengshi-001\", \"exact_span\": \"吏有詐稱母病求假\", \"confidence\": \"high\"}]}",
+              "name": "submit_person_card"
+            },
+            "id": "call_00_jnzOiAC8nTbPXEJsF2wU1164",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787945990,
+  "id": "74c56818-f921-4ec3-9382-ff1a0722a773",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 450,
+    "prompt_cache_hit_tokens": 1024,
+    "prompt_cache_miss_tokens": 515,
+    "prompt_tokens": 1539,
+    "prompt_tokens_details": {
+      "cached_tokens": 1024
+    },
+    "total_tokens": 1989
+  }
+}
