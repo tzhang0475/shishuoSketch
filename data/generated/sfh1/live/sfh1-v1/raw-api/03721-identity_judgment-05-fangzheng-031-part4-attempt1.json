@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"judgments\": [{\"mention_id\": \"sfh1-mention-e696e9c7f7004434e2c7672a\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-05-fangzheng-031-liu-annotation-003\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"name_match\", \"contextual_role_match\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [\"王澄\"], \"explanation\": \"The mention 王澄 is the full name of Wang Cheng, and the candidate c0 is exactly this person. The annotation text identifies 王澄 as the one who '恃其宿名猶陵侮敦' (relied on his old reputation and insulted 敦/王敦), matching the historical Wang Cheng (王澄), courtesy name 平子.\"}, {\"mention_id\": \"sfh1-mention-f83473da13937463538e6705\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-05-fangzheng-031-liu-annotation-003\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"courtesy_name_match\", \"contextual_role_match\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [\"王澄\"], \"explanation\": \"The mention 平子 is the courtesy name of Wang Cheng (王澄). The annotation text '王澄爲荆州羣賊並起乃奔豫章而恃其宿名猶陵侮敦' explicitly identifies 平子 as 王澄, and the candidate c0 is 王澄. The coreference_with list confirms 平子 refers to the same person as 王澄.\"}, {\"mention_id\": \"sfh1-mention-fef02b0f011ff2d0886bbd2a\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-05-fangzheng-031-main\", \"sfh1-candidate-evidence-757322bc3bdb64e81b6f\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"courtesy_name_match\", \"contextual_role_match\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [\"周顗\", \"伯仁\"], \"explanation\": \"The mention 伯仁 is the courtesy name of Zhou Yi (周顗). The candidate c0 is 周顗, matched via the alias registry for the courtesy name 伯仁. In the main text, 伯仁 speaks about the situation with 王大將軍 (王敦), which is consistent with Zhou Yi's historical role. The alias registry evidence confirms 伯仁 = 周顗.\"}]}",
+              "name": "submit_sfh1_identity_judgments"
+            },
+            "id": "call_00_pHRK66XVWZjaxpcp8b5i0091",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787998991,
+  "id": "9928cb7a-b50d-4d32-a176-984ac003d66c",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 730,
+    "prompt_cache_hit_tokens": 640,
+    "prompt_cache_miss_tokens": 2035,
+    "prompt_tokens": 2675,
+    "prompt_tokens_details": {
+      "cached_tokens": 640
+    },
+    "total_tokens": 3405
+  }
+}

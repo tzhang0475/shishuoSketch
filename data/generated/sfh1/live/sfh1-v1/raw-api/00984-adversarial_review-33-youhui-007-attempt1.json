@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"reviews\": [{\"mention_id\": \"sfh1-mention-1975301a4ef8e8757ebbbd45\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-33-youhui-007-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"canonical_name_match\", \"contextual_role_match\"], \"explanation\": \"The mention surface is 王導, and the candidate is 王導 (Wang Dao). The source text explicitly names 王導 as present before Emperor Ming and recounting the founding of the Wei dynasty. The canonical name matches exactly, and the contextual role (a minister recounting historical events to Emperor Ming) is consistent with Wang Dao's historical role. No contradicting evidence exists.\"}, {\"mention_id\": \"sfh1-mention-35705da84c77d0a554766a6a\", \"candidate_key\": \"c1\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-33-youhui-007-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"surname_reference\", \"contextual_role_match\"], \"explanation\": \"The mention surface is 温, which is the surname of 温嶠 (Wen Qiao). The source text says 温嶠年少未諳 (Wen Qiao is young and not yet experienced), and then later 温未荅 (Wen did not answer). The surname 温 is used as a shorthand reference to 温嶠, who is explicitly named in the same passage. The candidate evidence (sfh1-candidate-evidence-153d6fa671b7e140e1f4) shows the profile asserts this identity. The contextual role matches: Wen Qiao is present before Emperor Ming alongside Wang Dao. The hard veto from c0 (explicit_identity_contradiction) is noted but the candidate c1 is distinct from c0, so this veto does not apply to this mention's resolution.\"}, {\"mention_id\": \"sfh1-mention-ffea343aaa713b2dc3847ee6\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-33-youhui-007-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"canonical_name_match\", \"contextual_role_match\"], \"explanation\": \"The mention surface is 温嶠, and the candidate is 温嶠 (Wen Qiao). The source text explicitly names 温嶠 as being present before Emperor Ming alongside Wang Dao. The canonical name matches exactly, and the contextual role (a young minister present at the imperial audience) is consistent with Wen Qiao's historical role. No contradicting evidence exists.\"}]}",
+              "name": "submit_sfh1_adversarial_reviews"
+            },
+            "id": "call_00_tm9mcnHe3VbHxAQFFqKW4101",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787981857,
+  "id": "41200dc8-7f43-485b-89b2-5517248f3721",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 659,
+    "prompt_cache_hit_tokens": 512,
+    "prompt_cache_miss_tokens": 826,
+    "prompt_tokens": 1338,
+    "prompt_tokens_details": {
+      "cached_tokens": 512
+    },
+    "total_tokens": 1997
+  }
+}

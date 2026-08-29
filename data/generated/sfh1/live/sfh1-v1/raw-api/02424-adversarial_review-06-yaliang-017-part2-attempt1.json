@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"reviews\": [{\"mention_id\": \"sfh1-mention-2951ea15e3bce8351c479a07\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-06-yaliang-017-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"office_title_match\", \"canonical_name_match\"], \"explanation\": \"The mention 庾太尉 is an office title reference. The main text explicitly states '庾太尉風儀偉長...時人皆以爲假亮' where 亮 is used as the personal name of the same person, confirming 庾太尉 = 庾亮. The text also later uses 元規 (庾亮's courtesy name) in the same passage. The candidate evidence sfh1-candidate-evidence-3921bf4152ad188bbdf0 directly matches 庾太尉 to 庾亮, and the main text confirms this identification through the use of 亮 and 元規 for the same individual.\"}, {\"mention_id\": \"sfh1-mention-4a71519c8ad611db3997a2ea\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-06-yaliang-017-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"alias_match\", \"coreference\"], \"explanation\": \"The mention 君侯 is an honorific used by the child to address 温太真. The main text reads '温太真嘗隱幔怛之此兒神色恬然乃徐跪曰君侯何以爲此' — the child addresses 温太真 as 君侯. The candidate evidence sfh1-candidate-evidence-b525dc41479c3aedf857 shows 温太真 as the matched surface for 温嶠. The coreference between 君侯 and 温太真 is directly supported by the main text context where the child responds to 温太真.\"}, {\"mention_id\": \"sfh1-mention-a8ada92566662e629c170d81\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-06-yaliang-017-main\", \"sfh1-ev-06-yaliang-017-liu-annotation-001\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"canonical_name_match\", \"genealogical_context\"], \"explanation\": \"The mention 元規 is 庾亮's courtesy name. The main text states '或云見阿恭知元規非假' where 元規 refers to 庾亮 (the father of 阿恭/庾會). The Liu annotation sfh1-ev-06-yaliang-017-liu-annotation-001 confirms the genealogical context: 尉亮長子 refers to 庾亮's eldest son 庾會. The main text also uses 亮 as the personal name for the same person (庾太尉...時人皆以爲假亮), confirming 元規 = 亮 = 庾太尉 = 庾亮. The candidate evidence sfh1-candidate-evidence-8281d16e4502b7cbd129 shows 元規 as 庾亮's courtesy name in the alias registry.\"}]}",
+              "name": "submit_sfh1_adversarial_reviews"
+            },
+            "id": "call_00_a31lZDTMOqHedHV7Btbe6281",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787993846,
+  "id": "15bda03e-009d-421a-9323-d4d5cce0c80d",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 795,
+    "prompt_cache_hit_tokens": 512,
+    "prompt_cache_miss_tokens": 1854,
+    "prompt_tokens": 2366,
+    "prompt_tokens_details": {
+      "cached_tokens": 512
+    },
+    "total_tokens": 3161
+  }
+}

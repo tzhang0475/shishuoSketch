@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"judgments\": [{\"mention_id\": \"sfh1-mention-8ad2be1e7304c4d5b1cc408e\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"plausible\", \"supporting_evidence_ids\": [\"sfh1-ev-25-paidiao-050-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"surface_match\"]}, {\"candidate_key\": \"c1\", \"verdict\": \"plausible\", \"supporting_evidence_ids\": [\"sfh1-ev-25-paidiao-050-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"surface_match\"]}], \"preferred_candidate_key\": null, \"resolution\": \"candidate_ambiguous\", \"alternative_search_surfaces\": [\"郄嘉賓\", \"郗嘉賓\", \"郗超\"], \"explanation\": \"The mention 郄嘉賓 refers to a person receiving a letter from 范啓. Both candidates c0 and c1 are prior-candidate entries for the same surface 郄嘉賓 from different candidate databases (wave-a and wave-b). The source text only shows the surface 郄嘉賓 (also written 郗 in the reply) without biographical details that would distinguish between the two candidate records. Both candidates match the surface form, but there is no evidence in the supplied text to determine whether c0 and c1 represent the same historical person or distinct database entries for the same referent. The two candidates appear to be duplicate records of the same person from different retrieval waves, but without additional distinguishing evidence, the judgment is ambiguous between them.\"}]}",
+              "name": "submit_sfh1_identity_judgments"
+            },
+            "id": "call_00_pwdfG6S0uA8R4RKn0YsU0234",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787981721,
+  "id": "08dea6ee-684e-4a2e-9077-c43b0428c9d3",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 398,
+    "prompt_cache_hit_tokens": 640,
+    "prompt_cache_miss_tokens": 646,
+    "prompt_tokens": 1286,
+    "prompt_tokens_details": {
+      "cached_tokens": 640
+    },
+    "total_tokens": 1684
+  }
+}

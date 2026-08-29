@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"reviews\": [{\"mention_id\": \"sfh1-mention-a5ad94ff25fad8e4ca4ed8fb\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-301e5899fc38481f910c\", \"sfh1-ev-02-yanyu-083-liu-annotation-003\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"coreference_chain\", \"personal_name_matches\"], \"explanation\": \"The mention 宏 is the abbreviated personal name of 袁宏. The candidate evidence from aliases.json explicitly states 袁宏字彦伯, and the Liu annotation (sfh1-ev-02-yanyu-083-liu-annotation-003) confirms 袁宏字彦伯陳郡人魏郎中令煥六世孫也. The coreference chain links 宏 to 袁宏 and 彦伯 consistently. No contradicting evidence found.\"}, {\"mention_id\": \"sfh1-mention-c2f9ffd1a377ef0f9b9f0574\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-1df3b6b5c8e7ffda6737\", \"sfh1-ev-02-yanyu-083-liu-annotation-004\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"coreference_chain\", \"personal_name_matches\"], \"explanation\": \"The mention 安 is the abbreviated personal name of 謝安. The candidate evidence from hng2c1-shishuo-08-shangyu-077-liu-annotation-001 provides 安 as the surface form, and the Liu annotation (sfh1-ev-02-yanyu-083-liu-annotation-004) mentions 太傅謝安賞宏機捷辯速, confirming 謝安's presence in this story context. The coreference chain links 安 to 太傅謝安. No contradicting evidence found.\"}, {\"mention_id\": \"sfh1-mention-c5ade7152a921280a0edd174\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-d66683bbb5ed62fd1cb9\", \"sfh1-ev-02-yanyu-083-liu-annotation-003\", \"sfh1-ev-02-yanyu-083-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"coreference_chain\", \"surname_plus_courtesy_name_matches\"], \"explanation\": \"The mention 袁彦伯 is the surname plus courtesy name of 袁宏. The main text (sfh1-ev-02-yanyu-083-main) opens with 袁彦伯為謝安南司馬, and the Liu annotation (sfh1-ev-02-yanyu-083-liu-annotation-003) confirms 袁宏字彦伯. The alias registry evidence also confirms 袁彦伯 refers to 袁宏. The coreference chain consistently links 袁彦伯 to 袁宏, 宏, and 彦伯. No contradicting evidence found.\"}, {\"mention_id\": \"sfh1-mention-fd5ab9408ba9ba08a7145e26\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-1748ab20935f98096269\", \"sfh1-ev-02-yanyu-083-liu-annotation-003\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"canonical_name_match\", \"coreference_chain\"], \"explanation\": \"The mention 袁宏 is the canonical full name of the person. The people.json evidence provides 袁宏 as the canonical name, and the Liu annotation (sfh1-ev-02-yanyu-083-liu-annotation-003) confirms 袁宏字彦伯陳郡人魏郎中令煥六世孫也. The coreference chain links this mention to 宏, 彦伯, and 袁彦伯 consistently. No contradicting evidence found.\"}]}",
+              "name": "submit_sfh1_adversarial_reviews"
+            },
+            "id": "call_00_nBWpEPmjj60d5oUzXdXS8808",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787997512,
+  "id": "a548b86b-11b3-4ce2-b544-a97b9a2a4f9c",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 981,
+    "prompt_cache_hit_tokens": 512,
+    "prompt_cache_miss_tokens": 2602,
+    "prompt_tokens": 3114,
+    "prompt_tokens_details": {
+      "cached_tokens": 512
+    },
+    "total_tokens": 4095
+  }
+}

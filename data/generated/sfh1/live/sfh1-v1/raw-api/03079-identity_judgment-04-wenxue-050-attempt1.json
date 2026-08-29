@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"judgments\": [{\"mention_id\": \"sfh1-mention-1ec892dc32b21f753a857f7b\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-ea6fb0c223b30846047e\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"office_title_matches_person\", \"historical_referent\"]}, {\"candidate_key\": \"c1\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-6c21a503da04d0b776b1\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"office_title_matches_person\", \"historical_referent\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [\"殷浩\", \"浩\"], \"explanation\": \"殷中軍 refers to Yin Hao (殷浩), who held the military office title 中軍. Both candidate databases (wave-a and wave-b) contain 殷中軍 as a prior candidate person. The main text describes 殷中軍 being dismissed (被廢) in Dongyang, which matches the historical record of Yin Hao's dismissal. The Liu annotation confirms this by referring to 浩黜廢 (Hao's dismissal). Both candidates refer to the same historical person Yin Hao. c0 is preferred as the wave-a candidate.\"}, {\"mention_id\": \"sfh1-mention-875b12954dd8eb4bd0e09ff5\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-54d788b6b9202a7b474f\", \"sfh1-ev-04-wenxue-050-liu-annotation-001\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"abbreviated_name_matches_person\", \"coreference_with_main_text\"]}, {\"candidate_key\": \"c1\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-13b0ea530cd4ab492952\", \"sfh1-ev-04-wenxue-050-liu-annotation-001\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"abbreviated_name_matches_person\", \"coreference_with_main_text\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [\"殷浩\", \"殷中軍\"], \"explanation\": \"浩 in the Liu annotation is an abbreviated reference to Yin Hao (殷浩), who is the same person as 殷中軍 in the main text. The annotation (浩黜廢) explicitly refers to Hao's dismissal, which matches the main text's account of 殷中軍 being dismissed (被廢). The semantic record confirms coreference with sfh1-mention-1ec892dc32b21f753a857f7b (殷中軍). Both candidates refer to Yin Hao. c0 is preferred as the wave-a candidate.\"}]}",
+              "name": "submit_sfh1_identity_judgments"
+            },
+            "id": "call_00_MgSj5psNFxpmtYNcHIYs1120",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787997648,
+  "id": "d5622b8b-ec44-41a4-b469-5904be64aea2",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 761,
+    "prompt_cache_hit_tokens": 640,
+    "prompt_cache_miss_tokens": 1594,
+    "prompt_tokens": 2234,
+    "prompt_tokens_details": {
+      "cached_tokens": 640
+    },
+    "total_tokens": 2995
+  }
+}

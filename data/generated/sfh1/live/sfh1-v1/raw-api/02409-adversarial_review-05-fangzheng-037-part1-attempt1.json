@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"reviews\": [{\"mention_id\": \"sfh1-mention-0073d32dfd0ad4514ee6c7c3\", \"candidate_key\": \"c0\", \"verdict\": \"reject\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-05-fangzheng-037-liu-annotation-004\"], \"reason_types\": [\"reference_semantics_uncertain\", \"insufficient_evidence\"], \"explanation\": \"The mention surface is 王隱, which appears in annotation-004 as '按王隱晉書蘇峻事' — this is a citation to Wang Yin's Jin Shu (a historical text), not a reference to a person named 王隱 in the narrative. The candidate evidence from people.json lists 王隱 as a canonical person, but the annotation context shows this is a bibliographic citation (referring to the book 晉書 by 王隱), not a mention of the person 王隱 as an actor in the story. The reference semantics are marked 'uncertain' with no valid semantic record. The supporting evidence sfh1-ev-05-fangzheng-037-liu-annotation-004 actually contains the mention itself, and the context '按王隱晉書蘇峻事' indicates a source citation, not a person reference. This is a false positive resolution — the surface 王隱 here refers to the author of a cited work, not to the person 王隱 as a historical figure being discussed. Reject.\"}, {\"mention_id\": \"sfh1-mention-35576ea21c749384ae533344\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-ddb5a471361a8edc70d2\", \"sfh1-ev-05-fangzheng-037-liu-annotation-004\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"canonical_name_match\", \"contextual_role\"], \"explanation\": \"The surface 蘇峻 appears in annotation-004 as '按王隱晉書蘇峻事' — this is a citation to Wang Yin's Jin Shu about Su Jun's affairs. While the mention is within a bibliographic citation context, the name 蘇峻 unambiguously refers to the historical figure Su Jun. The canonical name match is exact, and the annotation explicitly discusses Su Jun's rebellion (蘇峻事). The candidate evidence from people.json confirms 蘇峻 as a canonical person. The contextual role is consistent — the annotation is about Su Jun's affairs. Accept.\"}, {\"mention_id\": \"sfh1-mention-543ad26e5a4b18ae642074bd\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-b349650a55a0fe64b20f\", \"sfh1-ev-05-fangzheng-037-liu-annotation-002\", \"sfh1-ev-05-fangzheng-037-liu-annotation-001\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"canonical_name_match\", \"coreference_chain\", \"contextual_role\"], \"explanation\": \"The surface 峻 (single character) in annotation-002 refers to Su Jun. The annotation-001 explicitly states '高山峻也碩峻弟也' identifying 峻 as Su Jun and 碩 as his younger brother. Annotation-002 continues '峻碩猶據石頭潰' describing Su Jun and his brother still holding Stone City. The coreference chain links this mention to sfh1-mention-35576ea21c749384ae533344 (蘇峻) and others. The distinct_from mention sfh1-mention-aa2241c61bbc24ff463603d2 is appropriately excluded. The evidence strongly supports identity with Su Jun. Accept.\"}, {\"mention_id\": \"sfh1-mention-66fea82b6b0fc0eae09545d9\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-1d8af79f08bda31abe22\", \"sfh1-ev-05-fangzheng-037-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"alias_registry_match\", \"contextual_role\"], \"explanation\": \"The surface 蘇子高 is matched to 蘇峻 via the alias registry (surname + courtesy name). The main text begins '蘇子高事平' (Su Zigao's affair settled), which is the opening of the story about Su Jun's rebellion being pacified. The alias registry evidence confirms 蘇子高 as an alias for 蘇峻. The contextual role is consistent — the story is about the aftermath of Su Jun's rebellion. The alias match is specific and the context strongly supports the identification. Accept.\"}]}",
+              "name": "submit_sfh1_adversarial_reviews"
+            },
+            "id": "call_00_NnVZ2iX6i9I4SccXh1oe6171",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787993636,
+  "id": "5b346818-df27-4d9b-8d4d-8f0b593376f7",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 1115,
+    "prompt_cache_hit_tokens": 640,
+    "prompt_cache_miss_tokens": 1825,
+    "prompt_tokens": 2465,
+    "prompt_tokens_details": {
+      "cached_tokens": 640
+    },
+    "total_tokens": 3580
+  }
+}

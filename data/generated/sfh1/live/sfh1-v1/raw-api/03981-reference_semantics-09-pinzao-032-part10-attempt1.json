@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"records\": [{\"mention_id\": \"sfh1-mention-5c43f8aa67f11f960973d6e2\", \"semantic_type\": \"compositional_kinship\", \"referent_role\": \"father of the son (子) mentioned in the same sentence; in context, refers to 桓温's father or generically the father whose enterprise the son inherits\", \"anchor_mentions\": [\"sfh1-mention-b487d4edfbc3186422955118\"], \"holder_mentions\": [], \"patron_or_possessor_mentions\": [], \"coreference_with\": [], \"distinct_from\": [\"sfh1-mention-8c4733ee778c0e1e0f522522\"], \"semantic_relations\": [{\"type\": \"kinship\", \"subject_mention_id\": \"sfh1-mention-b487d4edfbc3186422955118\", \"object_mention_id\": \"sfh1-mention-5c43f8aa67f11f960973d6e2\", \"predicate_surface\": \"子繼父業\", \"evidence_id\": \"sfh1-ev-09-pinzao-032-main\"}], \"confidence\": \"high\", \"explanation\": \"In the phrase 使子繼父業 (let the son succeed to the father's enterprise), 父 is the father of 子. The kinship relation is explicitly stated via 子繼父業. The 父 here is distinct from 弟 (the younger brother) mentioned next in 弟承家祀.\"}, {\"mention_id\": \"sfh1-mention-8c4733ee778c0e1e0f522522\", \"semantic_type\": \"compositional_kinship\", \"referent_role\": \"younger brother; in context, the younger brother who inherits the family sacrifices (弟承家祀)\", \"anchor_mentions\": [], \"holder_mentions\": [], \"patron_or_possessor_mentions\": [], \"coreference_with\": [], \"distinct_from\": [\"sfh1-mention-5c43f8aa67f11f960973d6e2\", \"sfh1-mention-b487d4edfbc3186422955118\"], \"semantic_relations\": [{\"type\": \"kinship\", \"subject_mention_id\": \"sfh1-mention-8c4733ee778c0e1e0f522522\", \"object_mention_id\": \"sfh1-mention-b487d4edfbc3186422955118\", \"predicate_surface\": \"弟承家祀\", \"evidence_id\": \"sfh1-ev-09-pinzao-032-main\"}], \"confidence\": \"high\", \"explanation\": \"In the phrase 弟承家祀 (the younger brother inherits the family sacrifices), 弟 is the younger brother. The kinship relation is expressed via 弟承家祀. The 弟 is distinct from 父 (father) in the parallel clause 子繼父業. The 弟 is the younger brother of the 子 (son) mentioned in the preceding clause, both being sons of the 父.\"}]}",
+              "name": "submit_sfh1_reference_semantics"
+            },
+            "id": "call_00_3SGEVQIuczTvVfEhxUlj1005",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787999341,
+  "id": "f28d43ea-0266-4b92-88f5-e88ee925eb75",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 723,
+    "prompt_cache_hit_tokens": 1664,
+    "prompt_cache_miss_tokens": 2974,
+    "prompt_tokens": 4638,
+    "prompt_tokens_details": {
+      "cached_tokens": 1664
+    },
+    "total_tokens": 5361
+  }
+}

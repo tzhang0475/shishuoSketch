@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"records\": [{\"mention_id\": \"sfh1-mention-a809a92ffb5879967bdd1395\", \"semantic_type\": \"abbreviated_person_reference\", \"referent_role\": \"person referred to by personal name 業\", \"anchor_mentions\": [], \"holder_mentions\": [], \"patron_or_possessor_mentions\": [], \"coreference_with\": [], \"distinct_from\": [], \"semantic_relations\": [], \"confidence\": \"low\", \"explanation\": \"The mention 業 appears in annotation 005 which is a fragment (業) with no surrounding context in the provided evidence. It is a personal name but its referent cannot be determined from the available context.\"}, {\"mention_id\": \"sfh1-mention-f03f25553f8ba8f6f22cace0\", \"semantic_type\": \"office_holder_reference\", \"referent_role\": \"温嶠 (Wen Qiao), referred to by his office title 温公\", \"anchor_mentions\": [], \"holder_mentions\": [], \"patron_or_possessor_mentions\": [], \"coreference_with\": [\"sfh1-mention-b111c0c535e68cbda0013acd\"], \"distinct_from\": [\"sfh1-mention-63d4d19b4fa744332ded8025\", \"sfh1-mention-cfce79a74e25089e5e4e6fe8\"], \"semantic_relations\": [{\"type\": \"kinship\", \"subject_mention_id\": \"sfh1-mention-f03f25553f8ba8f6f22cace0\", \"object_mention_id\": \"sfh1-mention-63d4d19b4fa744332ded8025\", \"predicate_surface\": \"䘮婦從姑\", \"evidence_id\": \"sfh1-ev-27-jiajue-009-main\"}, {\"type\": \"social\", \"subject_mention_id\": \"sfh1-mention-f03f25553f8ba8f6f22cace0\", \"object_mention_id\": \"sfh1-mention-cfce79a74e25089e5e4e6fe8\", \"predicate_surface\": \"從姑劉氏\", \"evidence_id\": \"sfh1-ev-27-jiajue-009-main\"}], \"confidence\": \"high\", \"explanation\": \"温公 is the office-title reference to 温嶠 (Wen Qiao). The main text describes him as having lost his wife and having a paternal aunt (從姑) surnamed 劉. The name 嶠 appears later in the text (mention b111c0c535e68cbda0013acd) referring to the same person. The 姑 (paternal aunt) is distinct from 温公.\"}, {\"mention_id\": \"sfh1-mention-63d4d19b4fa744332ded8025\", \"semantic_type\": \"compositional_kinship\", \"referent_role\": \"温嶠's paternal aunt (從姑), the wife's aunt\", \"anchor_mentions\": [\"sfh1-mention-f03f25553f8ba8f6f22cace0\"], \"holder_mentions\": [], \"patron_or_possessor_mentions\": [], \"coreference_with\": [\"sfh1-mention-cfce79a74e25089e5e4e6fe8\"], \"distinct_from\": [\"sfh1-mention-f03f25553f8ba8f6f22cace0\"], \"semantic_relations\": [{\"type\": \"kinship\", \"subject_mention_id\": \"sfh1-mention-f03f25553f8ba8f6f22cace0\", \"object_mention_id\": \"sfh1-mention-63d4d19b4fa744332ded8025\", \"predicate_surface\": \"䘮婦從姑\", \"evidence_id\": \"sfh1-ev-27-jiajue-009-main\"}], \"confidence\": \"high\", \"explanation\": \"姑 here refers to 温嶠's paternal aunt (從姑), the aunt of his wife. The text says 温公䘮婦從姑劉氏, meaning Wen Gong's wife's paternal aunt, surnamed Liu. This 姑 is the same person as 劉氏 (mention cfce79a74e25089e5e4e6fe8) in the main text. The annotation 002 confirms that 劉氏 refers to the 姑 (谷口云劉氏政謂其姑).\"}, {\"mention_id\": \"sfh1-mention-cfce79a74e25089e5e4e6fe8\", \"semantic_type\": \"descriptive_person_reference\", \"referent_role\": \"the paternal aunt surnamed Liu (劉氏)\", \"anchor_mentions\": [], \"holder_mentions\": [], \"patron_or_possessor_mentions\": [], \"coreference_with\": [\"sfh1-mention-63d4d19b4fa744332ded8025\"], \"distinct_from\": [\"sfh1-mention-f03f25553f8ba8f6f22cace0\"], \"semantic_relations\": [{\"type\": \"kinship\", \"subject_mention_id\": \"sfh1-mention-f03f25553f8ba8f6f22cace0\", \"object_mention_id\": \"sfh1-mention-cfce79a74e25089e5e4e6fe8\", \"predicate_surface\": \"䘮婦從姑劉氏\", \"evidence_id\": \"sfh1-ev-27-jiajue-009-main\"}], \"confidence\": \"high\", \"explanation\": \"劉氏 in the main text refers to the paternal aunt (姑) of 温嶠's wife, surnamed Liu. The annotation 002 explicitly states 谷口云劉氏政謂其姑, confirming that 劉氏 refers to the 姑. This is the same person as mention 63d4d19b4fa744332ded8025 (姑).\"}]}",
+              "name": "submit_sfh1_reference_semantics"
+            },
+            "id": "call_00_XRXaQjMbFG5PCMY2XPZh9187",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787999696,
+  "id": "d4818dfe-8c24-47a3-9673-518c5dfd1edd",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 1384,
+    "prompt_cache_hit_tokens": 1408,
+    "prompt_cache_miss_tokens": 2406,
+    "prompt_tokens": 3814,
+    "prompt_tokens_details": {
+      "cached_tokens": 1408
+    },
+    "total_tokens": 5198
+  }
+}

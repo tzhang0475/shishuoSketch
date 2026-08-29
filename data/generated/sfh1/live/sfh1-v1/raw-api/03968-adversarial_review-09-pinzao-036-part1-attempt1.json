@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"reviews\": [{\"mention_id\": \"sfh1-mention-04f345c4a321b1eec1fa565d\", \"candidate_key\": \"c0\", \"verdict\": \"review_required\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-760f46da53e3212b8f0e\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"alias_registry_match\", \"courtesy_name_matches_known_person\"], \"explanation\": \"The alias registry evidence identifies 王仲祖 as a courtesy-name reference to 王濛. However, the main text (sfh1-ev-09-pinzao-036-main) mentions 王仲祖 in a character appraisal context alongside other figures like 劉眞長, 桓温, 謝仁祖, etc. The alias evidence text is a separate anecdote about 王仲祖 not understanding barbarian speech, which is not directly connected to the main text context. While the courtesy name 仲祖 is indeed associated with 王濛, the supporting evidence does not explicitly confirm that the 王仲祖 in this specific mention refers to 王濛. The reference semantics are marked as 'uncertain' with no semantic record. The alias registry match provides a plausible identification but the evidence is indirect — it shows the alias exists for 王濛 but does not confirm this particular occurrence. This warrants review rather than outright acceptance.\"}, {\"mention_id\": \"sfh1-mention-c509696913c0ede3e812bb20\", \"candidate_key\": \"c0\", \"verdict\": \"review_required\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-a3ef150dc160e75b394e\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"alias_match\", \"historical_referent\"], \"explanation\": \"The alias evidence identifies 謝仁祖 as a courtesy-name reference to 謝尚. The main text (sfh1-ev-09-pinzao-036-main) mentions 謝仁祖 in a character appraisal list alongside 王仲祖, 桓温, 阮思曠, 袁羊, 殷洪逺. The alias evidence text is a separate anecdote about 蔡司徒 and 謝仁祖 discussing crabs, which does not directly connect to the main text context. While 謝尚's courtesy name is indeed 仁祖, the supporting evidence does not specifically confirm that this particular mention of 謝仁祖 in the appraisal context refers to 謝尚. The reference semantics are marked 'uncertain' with no semantic record. The identification is plausible but the evidence is indirect — it establishes the alias exists but does not confirm this specific occurrence. This warrants review.\"}, {\"mention_id\": \"sfh1-mention-f5e0a9c29724015da57adab1\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-37fcc14f2e23a5bb0c87\", \"sfh1-ev-09-pinzao-036-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"historical_context\", \"name_match\"], \"explanation\": \"The surface form 桓温 matches the candidate name 桓溫 directly (orthographic variant with 温/溫). The main text (sfh1-ev-09-pinzao-036-main) places 桓温 in a character appraisal context alongside other well-known Eastern Jin figures (孫興公, 劉眞長, 王仲祖, 謝仁祖, 阮思曠, 袁羊, 殷洪逺), all of whom are historical figures of that era. 桓溫 (Huan Wen) is a prominent Eastern Jin general and statesman, and the alias evidence text mentioning 桓温 in the context of 王珣 and 大司馬掾 is consistent with the historical 桓溫. The name match is direct and the historical context strongly supports this identification.\"}]}",
+              "name": "submit_sfh1_adversarial_reviews"
+            },
+            "id": "call_00_GJKSb6Yavt1nSmwnWygt5124",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787999324,
+  "id": "34194361-8a75-4e21-84ff-4947a254044e",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 920,
+    "prompt_cache_hit_tokens": 512,
+    "prompt_cache_miss_tokens": 1337,
+    "prompt_tokens": 1849,
+    "prompt_tokens_details": {
+      "cached_tokens": 512
+    },
+    "total_tokens": 2769
+  }
+}

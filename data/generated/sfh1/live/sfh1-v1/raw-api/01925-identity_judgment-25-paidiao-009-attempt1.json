@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"judgments\": [{\"mention_id\": \"sfh1-mention-7580e88e2ed1a485d2175f15\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-25-paidiao-009-liu-annotation-002\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"name_match\", \"contextual_role\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [\"張茂先\", \"張公\"], \"explanation\": \"The mention 張華 refers to Zhang Hua (張華), courtesy name 茂先. The Liu annotation (sfh1-ev-25-paidiao-009-liu-annotation-002) explicitly states '隱與陸雲在張華坐語' confirming Zhang Hua as the host at whose seat the conversation took place. The candidate c0 is 張華 from people.json, matching the surface form directly.\"}, {\"mention_id\": \"sfh1-mention-bf9c5ea37a729cb1af1f5e15\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-25-paidiao-009-main\", \"sfh1-ev-25-paidiao-009-liu-annotation-002\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"name_match\", \"contextual_role\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [\"張華\", \"張公\"], \"explanation\": \"The mention 張茂先 is the surname + courtesy name form of Zhang Hua (張華). The main text (sfh1-ev-25-paidiao-009-main) mentions 張茂先 as the host, and the Liu annotation (sfh1-ev-25-paidiao-009-liu-annotation-002) refers to the same person as 張華. The candidate c0 is 張華 from aliases.json matched via surname_plus_courtesy_name, correctly identifying the same historical person.\"}]}",
+              "name": "submit_sfh1_identity_judgments"
+            },
+            "id": "call_00_dqia7D3LaoG61xigQCuv2767",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787990521,
+  "id": "64ec3bd0-0709-4340-a067-9eb0069ba09a",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 534,
+    "prompt_cache_hit_tokens": 640,
+    "prompt_cache_miss_tokens": 1171,
+    "prompt_tokens": 1811,
+    "prompt_tokens_details": {
+      "cached_tokens": 640
+    },
+    "total_tokens": 2345
+  }
+}

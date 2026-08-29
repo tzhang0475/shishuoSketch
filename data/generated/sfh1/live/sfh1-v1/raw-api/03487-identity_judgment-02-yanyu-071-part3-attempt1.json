@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"judgments\": [{\"mention_id\": \"sfh1-mention-b0743f6fd7554e11ff7b5de1\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-1d13c42824e19533524e\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"office_title_matches_person\", \"alias_registry_confirms\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [\"謝安\", \"安石\"], \"explanation\": \"謝太傅 is the office title (太傅) of Xie An (謝安). The alias registry confirms 謝太傅 as a reference to 謝安. The main text describes him as the head of the household gathering, consistent with Xie An.\"}, {\"mention_id\": \"sfh1-mention-b970fdc47cd865f20b9673cc\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-02-yanyu-071-liu-annotation-002\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"courtesy_name_matches_person\", \"annotation_identifies_person\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [\"謝朗\", \"朗\"], \"explanation\": \"長度 is the courtesy name of Xie Lang (謝朗). The Liu annotation (sfh1-ev-02-yanyu-071-liu-annotation-002) explicitly states 朗字長度, confirming that 長度 refers to 謝朗. The local candidate 長度 is correctly identified as this person.\"}, {\"mention_id\": \"sfh1-mention-befe722c6fcb4060cef3b4bb\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-candidate-evidence-12f41f05ef4c3906bce6\", \"sfh1-ev-02-yanyu-071-liu-annotation-003\"], \"reason_types\": [\"name_mismatch\", \"different_person_identified\"]}, {\"candidate_key\": \"c1\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-eb054c8c5b1c4a98e683\", \"sfh1-ev-02-yanyu-071-liu-annotation-003\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"name_match\", \"office_title_matches_person\"]}], \"preferred_candidate_key\": \"c1\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [\"王羲之\", \"羲之\", \"逸少\"], \"explanation\": \"右將軍羲之 refers to Wang Xizhi (王羲之), who held the office of 右將軍. The annotation (sfh1-ev-02-yanyu-071-liu-annotation-003) shows 叔平右將軍羲之, where 羲之 is the personal name. Candidate c0 (王凝之) is contradicted because 凝之 is Wang Ningzhi, the son, not the person holding 右將軍 office. Candidate c1 (王羲之) is supported.\"}, {\"mention_id\": \"sfh1-mention-c8ec87c2c02a503061afe1e8\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-02-yanyu-071-main\", \"sfh1-ev-02-yanyu-071-liu-annotation-001\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"nickname_matches_person\", \"annotation_confirms_identity\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [\"謝朗\", \"朗\", \"長度\"], \"explanation\": \"胡兒 is the nickname of Xie Lang (謝朗). The Liu annotation (sfh1-ev-02-yanyu-071-liu-annotation-001) states 胡兒謝朗, confirming that 胡兒 refers to 謝朗. The local candidate 胡兒 is correctly identified.\"}]}",
+              "name": "submit_sfh1_identity_judgments"
+            },
+            "id": "call_00_XB7uS51s16CTeEet92VQ1685",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787998652,
+  "id": "7c664b70-1b66-4af3-b9e8-4b36412e7fe6",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 1065,
+    "prompt_cache_hit_tokens": 640,
+    "prompt_cache_miss_tokens": 2763,
+    "prompt_tokens": 3403,
+    "prompt_tokens_details": {
+      "cached_tokens": 640
+    },
+    "total_tokens": 4468
+  }
+}

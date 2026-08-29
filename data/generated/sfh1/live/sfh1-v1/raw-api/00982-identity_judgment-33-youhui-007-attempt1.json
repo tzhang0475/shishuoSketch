@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"judgments\": [{\"mention_id\": \"sfh1-mention-1975301a4ef8e8757ebbbd45\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-33-youhui-007-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"canonical_name_match\", \"contextual_role_match\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [], \"explanation\": \"王導 appears at the start of the passage as a person meeting with 明帝 alongside 温嶠. The candidate 王導 (Wang Dao) matches the canonical name and the historical context of the Eastern Jin period.\"}, {\"mention_id\": \"sfh1-mention-35705da84c77d0a554766a6a\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-33-youhui-007-main\"], \"reason_types\": [\"contextual_role_mismatch\"]}, {\"candidate_key\": \"c1\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-33-youhui-007-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"contextual_role_match\", \"surname_reference\"]}], \"preferred_candidate_key\": \"c1\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [], \"explanation\": \"The surname 温 in this passage refers to 温嶠, who is explicitly named earlier in the passage (温嶠年少未諳). The candidate 温嶠 (Wen Qiao) matches. 桓溫 is a different person from a later period and does not fit this context.\"}, {\"mention_id\": \"sfh1-mention-3fb680af707c8d2e37918ab2\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-33-youhui-007-main\"], \"reason_types\": [\"contextual_role_mismatch\"]}], \"preferred_candidate_key\": null, \"resolution\": \"candidate_missing\", \"alternative_search_surfaces\": [\"王導\"], \"explanation\": \"The surname 王 in this passage refers to 王導, who is explicitly named at the start of the passage (王導温嶠俱見明帝). The only supplied candidate is 王恭, which is a different person. The correct referent 王導 is not among the supplied candidates.\"}, {\"mention_id\": \"sfh1-mention-ffea343aaa713b2dc3847ee6\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-33-youhui-007-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"canonical_name_match\", \"contextual_role_match\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [], \"explanation\": \"温嶠 is explicitly named in the passage as a person who appears before 明帝 alongside 王導. The candidate 温嶠 matches the canonical name and the historical context.\"}]}",
+              "name": "submit_sfh1_identity_judgments"
+            },
+            "id": "call_00_gZgFbsG8MfqIVzXgXLoB8227",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787981851,
+  "id": "e70e5c25-b91d-4be4-b227-a3ff65826d05",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 842,
+    "prompt_cache_hit_tokens": 640,
+    "prompt_cache_miss_tokens": 1264,
+    "prompt_tokens": 1904,
+    "prompt_tokens_details": {
+      "cached_tokens": 640
+    },
+    "total_tokens": 2746
+  }
+}

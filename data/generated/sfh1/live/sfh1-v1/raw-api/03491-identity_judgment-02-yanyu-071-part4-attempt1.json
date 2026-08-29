@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"judgments\": [{\"mention_id\": \"sfh1-mention-c8f9427f6d95ffa5e2547345\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-1a56b5addee9f86a9f4d\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"name_match\", \"historical_identity\"]}, {\"candidate_key\": \"c1\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-candidate-evidence-ce926feea883616b47c7\"], \"reason_types\": [\"different_person\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [\"王羲之\", \"右軍\", \"逸少\"], \"explanation\": \"The mention 羲之 is the personal name of Wang Xizhi (王羲之). Candidate c0 is Wang Xizhi, matching the surface form directly. Candidate c1 is Wang Ningzhi (王凝之), whose courtesy name is 叔平; the alias evidence shows 叔平 is the courtesy name of 凝之, not 羲之. The annotation text (叔平右將軍羲之) juxtaposes 叔平 (Ningzhi's courtesy name) with 羲之 (Xizhi's name), and the mention 羲之 clearly refers to Wang Xizhi, the father of Wang Ningzhi. The reference_semantics confirms 羲之 is the father of 凝之.\"}, {\"mention_id\": \"sfh1-mention-df27023a16a46c5f85bdc21e\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-02-yanyu-071-liu-annotation-002\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"name_match\", \"historical_identity\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [\"謝朗\", \"長度\", \"胡兒\"], \"explanation\": \"The mention 朗 is the personal name of Xie Lang (謝朗). The annotation (sfh1-ev-02-yanyu-071-liu-annotation-002) states 朗字長度, identifying 朗 as the person with courtesy name 長度, and the reference_semantics confirms 朗 corefers with 謝朗 (full name) and 長度 (courtesy name). Candidate c0 is the local candidate for 朗, directly grounded in the source text.\"}, {\"mention_id\": \"sfh1-mention-e1443c5249b3918a97a56b45\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-02-yanyu-071-liu-annotation-002\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"name_match\", \"historical_identity\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [\"謝據\", \"次兄據\"], \"explanation\": \"The mention 據 is the personal name of Xie Ju (謝據), the second elder brother of Xie An and father of Xie Lang. The annotation (sfh1-ev-02-yanyu-071-liu-annotation-002) states 安次兄據之長子, confirming 據 is Xie Ju. Candidate c0 is the local candidate for 據, directly grounded in the source text.\"}, {\"mention_id\": \"sfh1-mention-f4184a3b24737c7fcbc18e60\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-02-yanyu-071-liu-annotation-001\", \"sfh1-ev-02-yanyu-071-liu-annotation-002\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"name_match\", \"historical_identity\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [\"謝朗\", \"朗\", \"長度\", \"胡兒\"], \"explanation\": \"The mention 謝朗 is the full name of Xie Lang. The annotation (sfh1-ev-02-yanyu-071-liu-annotation-001) identifies 胡兒 as 謝朗, and annotation 002 states 朗字長度, confirming the identity. Candidate c0 is the local candidate for 謝朗, directly grounded in the source text.\"}]}",
+              "name": "submit_sfh1_identity_judgments"
+            },
+            "id": "call_00_YeFnrApvyrHYUnRTF8766662",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787998658,
+  "id": "f99665ce-5d18-43a9-8334-263a12323aad",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 1136,
+    "prompt_cache_hit_tokens": 640,
+    "prompt_cache_miss_tokens": 2556,
+    "prompt_tokens": 3196,
+    "prompt_tokens_details": {
+      "cached_tokens": 640
+    },
+    "total_tokens": 4332
+  }
+}

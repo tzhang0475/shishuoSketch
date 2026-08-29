@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"judgments\": [{\"mention_id\": \"sfh1-mention-a9a177530d0ab6785a11b8ff\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-18-qiyi-004-liu-annotation-001\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"explicit_identification\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [\"李廞\", \"廞\"], \"explanation\": \"The annotation explicitly states '廞字宗子', identifying 宗子 as the courtesy name of 廞 (Li Xin). The candidate c0 is 宗子, which matches this identification directly.\"}, {\"mention_id\": \"sfh1-mention-f4a0223397cb1f9808c9d126\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-18-qiyi-004-main\", \"sfh1-ev-18-qiyi-004-liu-annotation-001\", \"sfh1-ev-18-qiyi-004-liu-annotation-002\", \"sfh1-ev-18-qiyi-004-liu-annotation-003\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"explicit_identification\", \"name_match\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [\"廞\", \"李廞\"], \"explanation\": \"The main text names 李廞 as the subject, and the annotations consistently refer to 廞 as the same person throughout. The candidate c0 is 李廞, matching the main subject directly.\"}, {\"mention_id\": \"sfh1-mention-ffd9f15fc362d66df92d4fb2\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-27e9836c4df48e11ec20\", \"sfh1-ev-18-qiyi-004-liu-annotation-001\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"explicit_identification\", \"name_match\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [\"李重\", \"茂曽\"], \"explanation\": \"The candidate c0 is 李重, whose courtesy name is 茂曽. The main text says 李廞 is 茂曽's fifth son, and the annotation mentions '父重平陽太守' (father 重, 平陽太守), confirming that 茂曽 = 李重 is the father of 廞. The alias registry identifies 茂曽 as the courtesy name of 李重.\"}]}",
+              "name": "submit_sfh1_identity_judgments"
+            },
+            "id": "call_00_41ZkBsPVWSVfD4CbpghJ9938",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787999453,
+  "id": "c411c295-26fd-425e-80dc-87bdde33352e",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 723,
+    "prompt_cache_hit_tokens": 640,
+    "prompt_cache_miss_tokens": 2082,
+    "prompt_tokens": 2722,
+    "prompt_tokens_details": {
+      "cached_tokens": 640
+    },
+    "total_tokens": 3445
+  }
+}

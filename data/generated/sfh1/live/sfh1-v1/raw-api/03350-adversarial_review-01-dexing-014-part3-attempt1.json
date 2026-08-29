@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"reviews\": [{\"mention_id\": \"sfh1-mention-e49632a541e90413f8de26e2\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-abd511ada54950bf50da\", \"sfh1-ev-01-dexing-014-liu-annotation-006\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"canonical_name_match\", \"contextual_consistency\"], \"explanation\": \"The mention '祥' appears in the Liu annotation text (sfh1-ev-01-dexing-014-liu-annotation-006) which describes the stepmother's plum tree and Wang Xiang's role in watching over it. The annotation explicitly discusses 祥 in the context of the same story about the plum tree and the stepmother, matching the canonical person 王祥. The annotation text '祥後母庭中有李始結子使祥晝視鳥雀' directly references 祥 as the protagonist of the same narrative. The candidate evidence from people.json confirms 王祥 as the canonical name. The identity resolution is well-supported by the supplied evidence.\"}, {\"mention_id\": \"sfh1-mention-ff73ef4d86b3e237614ab6af\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-75cb929c04e65c3dbea5\", \"sfh1-ev-01-dexing-014-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"canonical_name_match\", \"contextual_consistency\"], \"explanation\": \"The mention '祥' appears in the main text (sfh1-ev-01-dexing-014-main) which opens with '王祥事後母朱夫人甚謹' and then uses the abbreviated form '祥' throughout ('祥抱樹而泣', '祥嘗在别牀眠', '祥私起', '祥跪前請死'). The main text explicitly establishes 王祥 as the subject at the start, and all subsequent uses of '祥' clearly refer to the same person. The candidate evidence from people.json confirms 王祥 as the canonical name. The identity resolution is well-supported by the supplied evidence.\"}]}",
+              "name": "submit_sfh1_adversarial_reviews"
+            },
+            "id": "call_00_XjP1uwO1JdHAqH20BfrQ8388",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787998456,
+  "id": "c832e90d-5d30-40c2-b076-657b30e93a67",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 552,
+    "prompt_cache_hit_tokens": 512,
+    "prompt_cache_miss_tokens": 1706,
+    "prompt_tokens": 2218,
+    "prompt_tokens_details": {
+      "cached_tokens": 512
+    },
+    "total_tokens": 2770
+  }
+}

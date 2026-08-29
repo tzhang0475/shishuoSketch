@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"reviews\": [{\"mention_id\": \"sfh1-mention-2c692e6ba4a03838c0788d7c\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-06-yaliang-027-main\", \"sfh1-candidate-evidence-316d8e1f022ca2a40809\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"full_name_match\", \"contextual_reference\"], \"explanation\": \"The mention surface is 謝安, which exactly matches the candidate name 謝安. The main text explicitly names 謝安 as one of the two people summoned by 桓宣武 (桓溫). The candidate evidence from data/people.json confirms 謝安 as a canonical person. The main text context ('呼謝安王坦之入') directly identifies this individual. No contradicting evidence exists.\"}, {\"mention_id\": \"sfh1-mention-31e840cb73398b66e41e5d2a\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-06-yaliang-027-main\", \"sfh1-ev-06-yaliang-027-liu-annotation-002\", \"sfh1-candidate-evidence-449e32ca44d6dfbec920\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"contextual_reference\", \"alias_match\"], \"explanation\": \"The mention surface is 温, which appears in the Liu annotation text '結温亦深相器重' referring to 桓溫. The main text repeatedly refers to 桓宣武 (桓溫's posthumous title), and the annotation explicitly discusses 温 (桓溫) in the context of 郗超's relationship with him. The candidate evidence from the profile asserts identity with 桓溫. The hard veto on c1 (explicit_identity_contradiction) further supports that this is 桓溫 and not another 温. The context is consistent: the annotation discusses 郗超's deep trust with 桓溫, matching the main text's narrative about 桓宣武 and 郗超.\"}, {\"mention_id\": \"sfh1-mention-dbc2e81c4ab369462c4e0cdd\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-06-yaliang-027-main\", \"sfh1-candidate-evidence-4b7d0eb781fb987099ce\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"alias_match\", \"contextual_reference\"], \"explanation\": \"The mention surface is 桓宣武, which is 桓溫's posthumous title (宣武). The candidate evidence from data/aliases.json explicitly maps 桓宣武 to 桓溫, and the alias registry text shows 桓宣武 and 桓公 used interchangeably in the same passage. The main text uses 桓宣武 as the primary referent throughout, and the narrative about 桓宣武 consulting 郗超 about eliminating court officials is consistent with 桓溫's historical role. No contradicting evidence exists.\"}]}",
+              "name": "submit_sfh1_adversarial_reviews"
+            },
+            "id": "call_00_nyqNFD0WfdbSIgJjAL7c7667",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787989281,
+  "id": "5aa36e0b-d0d2-48ec-8a82-d9f659e3a23a",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 757,
+    "prompt_cache_hit_tokens": 512,
+    "prompt_cache_miss_tokens": 1337,
+    "prompt_tokens": 1849,
+    "prompt_tokens_details": {
+      "cached_tokens": 512
+    },
+    "total_tokens": 2606
+  }
+}

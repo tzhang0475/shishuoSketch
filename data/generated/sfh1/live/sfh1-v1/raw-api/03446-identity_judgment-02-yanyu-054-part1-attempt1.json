@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"judgments\": [{\"mention_id\": \"sfh1-mention-1048ebcfd9e056013825801f\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-02-yanyu-054-liu-annotation-003\"], \"reason_types\": [\"wrong_person\"]}, {\"candidate_key\": \"c1\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-02-yanyu-054-liu-annotation-003\"], \"reason_types\": [\"wrong_person\"]}], \"preferred_candidate_key\": null, \"resolution\": \"candidate_missing\", \"alternative_search_surfaces\": [\"王胡之\", \"王長史\"], \"explanation\": \"The mention 此子 refers to 王長史 (Wang Huzhi / 王胡之), as confirmed by the Liu annotation (sfh1-ev-02-yanyu-054-liu-annotation-003) which mentions '裒長史王胡之'. The supplied candidates are 王濛 (c0) and 王恭 (c1), neither of whom is 王胡之. The correct referent 王胡之 is missing from the candidate set.\"}, {\"mention_id\": \"sfh1-mention-33fbcd040bb09ec71f978cc5\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-02-yanyu-054-liu-annotation-001\", \"sfh1-ev-02-yanyu-054-liu-annotation-002\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"office_title_match\", \"annotation_identification\"]}, {\"candidate_key\": \"c1\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-02-yanyu-054-liu-annotation-001\", \"sfh1-ev-02-yanyu-054-liu-annotation-002\"], \"reason_types\": [\"wrong_person\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [], \"explanation\": \"何驃騎 refers to 何充 by his office title 驃騎. The Liu annotation (sfh1-ev-02-yanyu-054-liu-annotation-001) explicitly identifies this as 何充, and annotation-002 uses 充 as the personal name. Candidate c0 (何充) is the correct referent. Candidate c1 (沈充) is a different person.\"}, {\"mention_id\": \"sfh1-mention-490780f4feba8e174d40cc0b\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-02-yanyu-054-liu-annotation-003\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"office_title_match\", \"annotation_identification\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [], \"explanation\": \"劉尹 refers to 劉遐, who held the office of 吏部尚書 (尹). The Liu annotation (sfh1-ev-02-yanyu-054-liu-annotation-003) explicitly mentions '吏部尚書劉遐'. Candidate c0 (劉遐) is the correct referent.\"}, {\"mention_id\": \"sfh1-mention-58390512f81d3f4941078f55\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-02-yanyu-054-liu-annotation-003\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"courtesy_name_match\", \"coreference\"]}, {\"candidate_key\": \"c1\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-02-yanyu-054-liu-annotation-003\"], \"reason_types\": [\"wrong_person\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [], \"explanation\": \"真長 is the courtesy name of 劉惔 (Liu Tan). However, in this story, 真長 is used as the courtesy name for 劉尹/劉遐 (the 吏部尚書). The Liu annotation (sfh1-ev-02-yanyu-054-liu-annotation-003) identifies 吏部尚書劉遐 as the person being addressed. Candidate c0 (劉惔) matches the courtesy name 真長, and the annotation confirms this person is 劉遐. Candidate c1 (劉遐) is the same person but the courtesy name 真長 belongs to 劉惔. Given the annotation identifies 吏部尚書劉遐 as the referent, and 真長 is 劉惔's courtesy name, the identification of 真長 with 劉遐 (via 劉惔) is supported. Candidate c0 (劉惔) is the correct referent.\"}]}",
+              "name": "submit_sfh1_identity_judgments"
+            },
+            "id": "call_00_CjCJ01W92TtpGiA1HnSp4931",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787998588,
+  "id": "c5b12f84-ff52-4e4e-bfd1-9ee037ce296a",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 1267,
+    "prompt_cache_hit_tokens": 640,
+    "prompt_cache_miss_tokens": 2820,
+    "prompt_tokens": 3460,
+    "prompt_tokens_details": {
+      "cached_tokens": 640
+    },
+    "total_tokens": 4727
+  }
+}

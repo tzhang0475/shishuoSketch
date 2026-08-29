@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"reviews\": [{\"mention_id\": \"sfh1-mention-b5194892caac02fbbc4c3247\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-f42baa6f1b07e55932e9\", \"sfh1-ev-05-fangzheng-028-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"canonical_name_match\", \"contextual_role_match\"], \"explanation\": \"The mention is the full name 王敦 appearing in the main text. The source text explicitly states '王敦護其兄' (Wang Dun protects his elder brother), and the candidate evidence from data/people.json confirms 王敦 as a canonical person. The contextual role of protecting 王含 and being the employer of 何充 (who serves as his 主簿) is consistent with the historical Wang Dun. The full name match is direct and unambiguous.\"}, {\"mention_id\": \"sfh1-mention-c8cef22532b19c9727256e71\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-33fad5c11379ad7679b5\", \"sfh1-ev-05-fangzheng-028-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"coreference_with_full_name\", \"surname_abbreviation_match\"], \"explanation\": \"The mention '敦' is a surname abbreviation appearing in the main text. The text states '何充爲敦主簿' (He Chong was Dun's clerk), and the full name 王敦 appears earlier in the same passage as '王敦護其兄'. The abbreviation '敦' clearly refers back to the previously mentioned 王敦. The candidate evidence from hng2c1-shishuo-05-fangzheng-028-main confirms this abbreviation usage. This is a standard surname-only reference within the same narrative context.\"}, {\"mention_id\": \"sfh1-mention-f06954a6d5d894bec35c7224\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-b8ab70c8ed61d5c7734f\", \"sfh1-ev-05-fangzheng-028-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"canonical_name_match\", \"contextual_role_match\"], \"explanation\": \"The mention is the full name 何充 appearing in the main text. The text states '何充爲敦主簿' (He Chong was Wang Dun's clerk), and the candidate evidence from data/people.json confirms 何充 as a canonical person. The contextual role of serving as Wang Dun's 主簿 is consistent with the historical He Chong. The full name match is direct and unambiguous. The hard veto on c1 (explicit identity contradiction) is appropriate since 何充 is clearly distinct from 王敦 and 王含.\"}]}",
+              "name": "submit_sfh1_adversarial_reviews"
+            },
+            "id": "call_00_wS0z7SJukuUx0YWKsKfA7155",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787998969,
+  "id": "d92c28bf-a16d-4002-8dd0-8944b9d7b0f8",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 719,
+    "prompt_cache_hit_tokens": 512,
+    "prompt_cache_miss_tokens": 1939,
+    "prompt_tokens": 2451,
+    "prompt_tokens_details": {
+      "cached_tokens": 512
+    },
+    "total_tokens": 3170
+  }
+}

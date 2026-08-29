@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"judgments\": [{\"mention_id\": \"sfh1-mention-0e6ebd58f1761229455c6ba2\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-02-yanyu-035-main\"], \"reason_types\": [\"wrong_person\"]}, {\"candidate_key\": \"c1\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-02-yanyu-035-main\", \"sfh1-ev-02-yanyu-035-liu-annotation-007\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"name_match\", \"contextual_role\"]}], \"preferred_candidate_key\": \"c1\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [], \"explanation\": \"The mention '温' is the surname of 温嶠 (Wen Qiao). The main text shows 温嶠 replying to 劉琨, and the annotation 007 identifies 嶠字太真 (Wen Qiao). Candidate c1 (温嶠) is the correct referent. Candidate c0 (桓溫) is a different person with the same surname 温.\"}, {\"mention_id\": \"sfh1-mention-1130d56550ef762df5cbab20\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-02-yanyu-035-liu-annotation-007\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"office_holder_match\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [], \"explanation\": \"The office title 司空 (Sikong/Minister of Works) refers to the office held by 劉琨 (Liu Kun). The annotation text '少標俊清徹英穎顯名為司空劉' indicates the person surnamed 劉 held the office of 司空. Candidate c0 (劉琨) is the correct referent.\"}, {\"mention_id\": \"sfh1-mention-1b477f647557e951f5f7e327\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-02-yanyu-035-liu-annotation-007\", \"sfh1-ev-02-yanyu-035-liu-annotation-008\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"name_match\", \"contextual_role\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [], \"explanation\": \"The surname 劉 in the annotation refers to 劉琨 (Liu Kun), who held the office of 司空. The annotation context discusses 温嶠 being the 左司馬 of 劉琨. Candidate c0 (劉琨) is the correct referent.\"}, {\"mention_id\": \"sfh1-mention-1f3edb7195aa98194d127fe9\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-02-yanyu-035-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"contextual_role\", \"coreference\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [], \"explanation\": \"The first-person pronoun 吾 is used by 劉琨 (Liu Kun) in his speech to 温嶠. The main text begins with 劉琨 and the speech '吾欲立功於河北' is Liu Kun speaking. Candidate c0 (劉琨) is the correct referent.\"}]}",
+              "name": "submit_sfh1_identity_judgments"
+            },
+            "id": "call_00_kjvL8P3NUctCc0LfBya69255",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787998526,
+  "id": "eb3bf338-fbaf-44d6-82ec-14ac72764324",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 948,
+    "prompt_cache_hit_tokens": 640,
+    "prompt_cache_miss_tokens": 2831,
+    "prompt_tokens": 3471,
+    "prompt_tokens_details": {
+      "cached_tokens": 640
+    },
+    "total_tokens": 4419
+  }
+}

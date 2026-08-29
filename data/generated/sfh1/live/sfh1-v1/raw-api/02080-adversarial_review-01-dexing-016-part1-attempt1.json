@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"reviews\": [{\"mention_id\": \"sfh1-mention-371ae022f23d79ea3e86369e\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-01-dexing-016-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"canonical_name_match\", \"contextual_role\"], \"explanation\": \"The main text states '王戎云與嵇康居二十年' — 王戎 is explicitly named as the speaker who lived with 嵇康 for twenty years. The canonical name 王戎 directly matches the person record. The reference semantics confirm he is distinct from 嵇康. The evidence directly supports identity.\"}, {\"mention_id\": \"sfh1-mention-3cf8601d33c46ec8eb6c0486\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-01-dexing-016-liu-annotation-004\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"alias_match\", \"contextual_role\"], \"explanation\": \"The Liu annotation (sfh1-ev-01-dexing-016-liu-annotation-004) mentions '王濬沖在襄城面數百未嘗見其疾聲朱顔' — 王濬沖 is the courtesy name (字) of 王戎. The alias registry maps 王濬沖 to 王戎. The annotation context parallels the main text's claim about 王戎 not seeing 嵇康's喜怒之色, supporting the identification. The alias match is well-documented.\"}, {\"mention_id\": \"sfh1-mention-767d0563b0da950d26eed563\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-01-dexing-016-liu-annotation-004\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"alias_match\", \"coreference\"], \"explanation\": \"濬沖 is the courtesy name of 王戎, and the alias registry confirms this mapping. The reference semantics explicitly state coreference with 王戎 (sfh1-mention-371ae022f23d79ea3e86369e) and 王濬沖 (sfh1-mention-3cf8601d33c46ec8eb6c0486), and distinctness from 嵇康. The annotation evidence supports the courtesy-name-to-person identification.\"}, {\"mention_id\": \"sfh1-mention-83d7afa987c737415280506c\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-01-dexing-016-liu-annotation-003\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"canonical_name_match\"], \"explanation\": \"The Liu annotation (sfh1-ev-01-dexing-016-liu-annotation-003) contains '虞預晉書曰' — 虞預 is explicitly named as the author of a 晉書 cited in the annotation. The canonical name 虞預 directly matches the person record. The evidence directly supports identity.\"}]}",
+              "name": "submit_sfh1_adversarial_reviews"
+            },
+            "id": "call_00_ZQqD5yQOF7bHDRkPeofk7404",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787991898,
+  "id": "dfc552cf-d175-4201-bac8-6dd31cc23ebb",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 768,
+    "prompt_cache_hit_tokens": 512,
+    "prompt_cache_miss_tokens": 1863,
+    "prompt_tokens": 2375,
+    "prompt_tokens_details": {
+      "cached_tokens": 512
+    },
+    "total_tokens": 3143
+  }
+}

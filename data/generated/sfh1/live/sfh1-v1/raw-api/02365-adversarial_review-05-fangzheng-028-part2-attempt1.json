@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"reviews\": [{\"mention_id\": \"sfh1-mention-a44011a7035e5b8459097aa3\", \"candidate_key\": \"c1\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-05-fangzheng-028-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"office_title\", \"contextual_role\"], \"explanation\": \"The mention '主簿' refers to the office title held by He Chong (何充). The main text states '何充爲敦主簿' (He Chong was Wang Dun's clerk), and the office title '主簿' in context clearly refers to He Chong himself. The candidate evidence sfh1-candidate-evidence-05756231ee97af2f008e provides the canonical name 何充, and the main text explicitly names He Chong as the holder of this office. The reference semantics correctly identifies this as an office_holder_reference with He Chong as the referent.\"}, {\"mention_id\": \"sfh1-mention-b5194892caac02fbbc4c3247\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-05-fangzheng-028-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"full_name_match\", \"contextual_role\"], \"explanation\": \"The mention '王敦' is a full name match for the candidate 王敦 (Wang Dun). The main text explicitly states '王敦護其兄' and '何充爲敦主簿', clearly identifying Wang Dun as the person under whom He Chong served. The candidate evidence sfh1-candidate-evidence-f42baa6f1b07e55932e9 provides the canonical name 王敦. The full name match in the source text directly supports this identity resolution.\"}, {\"mention_id\": \"sfh1-mention-c8cef22532b19c9727256e71\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-05-fangzheng-028-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"surname_abbreviation\", \"contextual_role\"], \"explanation\": \"The mention '敦' is a surname abbreviation for 王敦 (Wang Dun). The main text states '何充爲敦主簿' and later '敦黙然', where '敦' clearly refers to Wang Dun who was just named in the preceding text. The candidate evidence sfh1-candidate-evidence-33fad5c11379ad7679b5 provides the identity assertion linking '敦' to 王敦. The context unambiguously identifies this abbreviation as referring to Wang Dun.\"}, {\"mention_id\": \"sfh1-mention-db885dece667c0c47e13d743\", \"candidate_key\": \"c1\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-05-fangzheng-028-main\", \"sfh1-ev-05-fangzheng-028-liu-annotation-002\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"office_title\", \"personal_name_match\"], \"explanation\": \"The mention '主簿充' combines the office title 主簿 with the personal name 充, referring to He Chong in his capacity as registrar. The main text establishes '何充爲敦主簿' (He Chong was Wang Dun's clerk), and the Liu annotation explicitly states '主簿充知敦有異志' (Registrar Chong knew Dun had different intentions), confirming this refers to He Chong. The candidate evidence sfh1-candidate-evidence-feef2d99436b84180fd4 provides the canonical name 何充. Both the main text and the annotation support this identification.\"}]}",
+              "name": "submit_sfh1_adversarial_reviews"
+            },
+            "id": "call_00_9qnBeYJv2ng8w0rIAvHW0944",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787993149,
+  "id": "10cb6e33-f745-4ad8-ba2c-2d471301ae9d",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 890,
+    "prompt_cache_hit_tokens": 512,
+    "prompt_cache_miss_tokens": 1907,
+    "prompt_tokens": 2419,
+    "prompt_tokens_details": {
+      "cached_tokens": 512
+    },
+    "total_tokens": 3309
+  }
+}

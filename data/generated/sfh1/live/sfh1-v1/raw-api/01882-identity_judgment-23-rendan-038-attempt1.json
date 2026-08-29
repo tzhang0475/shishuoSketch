@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"judgments\": [{\"mention_id\": \"sfh1-mention-4204d744c54bfb06c4bd0959\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-23-rendan-038-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"name_match\", \"contextual_fit\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [\"王述\", \"王坦之\"], \"explanation\": \"王文度 is a full name reference in the text. The candidate c0 is a local person form matching 王文度 exactly. Wang Wendu (王文度) is the courtesy name of Wang Tanzhi (王坦之), a well-known historical figure. The candidate matches the surface form directly and is the person being asked about by 劉遺民.\"}, {\"mention_id\": \"sfh1-mention-44dde9f22171ff91ca36c799\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-23-rendan-038-main\", \"sfh1-candidate-evidence-b600fe3ba94f876e2fea\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"name_match\", \"contextual_fit\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [], \"explanation\": \"謝安 is a full name reference in the text. The candidate c0 is an existing person 謝安 (Xie An), a famous historical figure. The surface form matches exactly and the context (being asked about by 劉遺民 alongside 王文度) fits the historical Xie An.\"}, {\"mention_id\": \"sfh1-mention-bf88617c03b4825eb5b5a9df\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-23-rendan-038-main\", \"sfh1-candidate-evidence-8ca9888fab8e655c1364\"], \"reason_types\": [\"office_title_mismatch\", \"contextual_mismatch\"]}], \"preferred_candidate_key\": null, \"resolution\": \"candidate_missing\", \"alternative_search_surfaces\": [\"張玄\"], \"explanation\": \"The mention 侍中 is an office title held by 張玄 (Zhang Xuan), not 謝安. The candidate c0 projects 謝安 as the referent of 侍中, but the text clearly states 張玄為侍中, meaning Zhang Xuan held the office of 侍中. The candidate is incorrect. The likely referent is 張玄, who is not among the supplied candidates.\"}]}",
+              "name": "submit_sfh1_identity_judgments"
+            },
+            "id": "call_00_M4xnhhzYVWGZxHzzZk5W5410",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787990398,
+  "id": "3122883e-45e7-4d7b-bf93-60959844ee83",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 710,
+    "prompt_cache_hit_tokens": 640,
+    "prompt_cache_miss_tokens": 1630,
+    "prompt_tokens": 2270,
+    "prompt_tokens_details": {
+      "cached_tokens": 640
+    },
+    "total_tokens": 2980
+  }
+}

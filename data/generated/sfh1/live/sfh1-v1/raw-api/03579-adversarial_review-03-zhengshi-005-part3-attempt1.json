@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"reviews\": [{\"mention_id\": \"sfh1-mention-cba2e034b059fddbc54c2b07\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-03-zhengshi-005-liu-annotation-007\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"canonical_name_match\", \"historical_identity\", \"explicit_distinctness\"], \"explanation\": \"The mention 王隱 appears in annotation 007 as the author of 王隱晉書, a historical work. The candidate evidence from data/people.json identifies 王隱 as a person. The annotation explicitly cites '王隱晉書曰' which attributes the quoted text to 王隱's 晉書. The reference semantics correctly notes distinctness from 山濤 and 潘岳 who are subjects of the account. The evidence specifically supports the identity of 王隱 as the author of the cited work.\"}, {\"mention_id\": \"sfh1-mention-e504d900a232d6b0f4a4d150\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-03-zhengshi-005-liu-annotation-001\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"canonical_name_match\", \"historical_identity\"], \"explanation\": \"The mention 虞預 appears in annotation 001 as '虞預晉書', indicating 虞預 is the author of a 晉書. The candidate evidence from data/people.json identifies 虞預 as a person. The annotation explicitly cites '虞預晉書' as a source, which directly references 虞預 as the author. Although the semantic record returned low confidence, the annotation text itself provides direct evidence of 虞預 as the author of the cited work, supporting the identity resolution.\"}, {\"mention_id\": \"sfh1-mention-e7e1154ff76bcf872209a739\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-03-zhengshi-005-liu-annotation-001\", \"sfh1-ev-03-zhengshi-005-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"canonical_name_match\", \"historical_identity\"], \"explanation\": \"The mention 山濤 appears in annotation 001 as '山濤字' (山濤's courtesy name), and the main text begins with '山公以器重朝望' referring to 山公 (山濤). The candidate evidence from data/people.json identifies 山濤 as a person. The annotation explicitly discusses 山濤's biography (字巨源, 河内懐人, etc.), and the main text's '山公' is a standard honorific for 山濤. The evidence specifically supports the identity of 山濤 as the person referenced.\"}]}",
+              "name": "submit_sfh1_adversarial_reviews"
+            },
+            "id": "call_00_XFqbBV2w2kOMtgwLSENy4762",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787998775,
+  "id": "61da4cd7-4859-4999-ae1f-265833f2be34",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 691,
+    "prompt_cache_hit_tokens": 512,
+    "prompt_cache_miss_tokens": 1756,
+    "prompt_tokens": 2268,
+    "prompt_tokens_details": {
+      "cached_tokens": 512
+    },
+    "total_tokens": 2959
+  }
+}

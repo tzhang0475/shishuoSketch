@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"judgments\": [{\"mention_id\": \"sfh1-mention-58390512f81d3f4941078f55\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-1ebd8daaf688942e8e35\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"alias_registry\", \"contextual_role\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [\"劉惔\", \"劉真長\"], \"explanation\": \"真長 is the courtesy name of 劉惔 (Liu Tan). The candidate evidence from aliases.json confirms this identification. In the main text, 劉尹 (Liu the Yin) and 真長 are used, and 真長 is the courtesy name of Liu Tan who held the office of 丹陽尹.\"}, {\"mention_id\": \"sfh1-mention-86c1268f348fb2ec1761202a\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-a0b068a3e7503e118399\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"canonical_name_match\", \"contextual_role\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [], \"explanation\": \"劉遐 is the full name of Liu Xia, the 吏部尚書 who urged 裒 in the annotation. The candidate from people.json matches the canonical name directly, and the annotation text mentions 吏部尚書劉遐勸裒, confirming this identification.\"}, {\"mention_id\": \"sfh1-mention-a474145e388c8c345f331d5f\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-candidate-evidence-9e53fe4d7ac92013ecb5\"], \"reason_types\": [\"wrong_person_identity\"]}], \"preferred_candidate_key\": null, \"resolution\": \"candidate_missing\", \"alternative_search_surfaces\": [\"王胡之\", \"王長史\"], \"explanation\": \"The mention 王長史 in the main text refers to 王胡之 (Wang Huzhi), who held the office of 長史. The annotation explicitly states '裒長史王胡之'. However, the supplied candidate c0 is 王濛 (Wang Meng), which is a different person. The candidate evidence from hng2c1-shishuo-02-yanyu-066 identifies 王長史 as 王濛 in a different story context, but in this story (02-yanyu-054), the 王長史 is 王胡之. The correct referent is missing from the candidate set.\"}, {\"mention_id\": \"sfh1-mention-ed62f5e748f376201352e71b\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-candidate-evidence-7120891c36613cb1beb2\"], \"reason_types\": [\"wrong_person_identity\"]}], \"preferred_candidate_key\": null, \"resolution\": \"candidate_missing\", \"alternative_search_surfaces\": [\"王胡之\"], \"explanation\": \"The mention 王 alone in the main text refers to 王胡之 (Wang Huzhi), the 長史 mentioned earlier in the same passage. The supplied candidate c0 is 王恭 (Wang Gong), which is a different person. The candidate evidence from hng2c1-shishuo-06-yaliang-041 identifies 王 as 王恭 in a different story context, but in this story the 王 refers to 王胡之. The correct referent is missing from the candidate set.\"}, {\"mention_id\": \"sfh1-mention-f330b8c8536b4a4f6fd8119f\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-84340dccb1d1b5c8dadc\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"canonical_name_match\", \"contextual_role\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [], \"explanation\": \"何充 is the full name of He Chong, identified in the annotation as the person referred to by 何驃騎. The candidate from people.json matches the canonical name directly, and the annotation (别見/何充) confirms this identification.\"}, {\"mention_id\": \"sfh1-mention-f6ea278c9776b0f2b8492f07\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-candidate-evidence-4b4930db4f6239ba8384\"], \"reason_types\": [\"wrong_person_identity\"]}], \"preferred_candidate_key\": null, \"resolution\": \"candidate_missing\", \"alternative_search_surfaces\": [\"何充\"], \"explanation\": \"The mention 充 in the annotation refers to 何充 (He Chong), as the annotation text '充之卒議者' is about He Chong's death. The supplied candidate c0 is 沈充 (Shen Chong), which is a different person. The candidate evidence from hng2c1-shishuo-10-guizhen-016 identifies 充 as 沈充 in a different story context, but in this annotation the 充 refers to 何充. The correct referent is missing from the candidate set.\"}]}",
+              "name": "submit_sfh1_identity_judgments"
+            },
+            "id": "call_00_zhEKfGv52SSzLAQUaFwu5528",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787997370,
+  "id": "e3de747e-4282-432b-8b65-d34540548ff4",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 1424,
+    "prompt_cache_hit_tokens": 640,
+    "prompt_cache_miss_tokens": 2478,
+    "prompt_tokens": 3118,
+    "prompt_tokens_details": {
+      "cached_tokens": 640
+    },
+    "total_tokens": 4542
+  }
+}

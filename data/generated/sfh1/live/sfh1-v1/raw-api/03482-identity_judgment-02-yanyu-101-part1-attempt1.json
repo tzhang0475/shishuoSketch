@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"judgments\": [{\"mention_id\": \"sfh1-mention-00e80ecb9d198cde09e4b27e\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-47feba537004b7e19bcf\", \"sfh1-ev-02-yanyu-101-liu-annotation-002\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"office_title_matches_person\", \"contextual_alignment\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [\"王彪之\"], \"explanation\": \"The mention 僕射 (office title for the Vice Director of the Department of State Affairs) appears in the Liu annotation where 王彪之 is described as 僕射. The candidate 羊祜 is the only supplied candidate, but the annotation text '以示僕射王彪之' clearly identifies the 僕射 as 王彪之. However, the candidate provided is 羊祜, not 王彪之. The evidence shows the office title refers to 王彪之, not 羊祜. Since the supplied candidate 羊祜 does not match the historical referent 王彪之, this is candidate_missing.\"}, {\"mention_id\": \"sfh1-mention-2d7d705be9c3fc9bccd0967e\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-4a32627cf8c82c8816f0\", \"sfh1-ev-02-yanyu-101-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"name_match\", \"contextual_alignment\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [\"桓温\"], \"explanation\": \"The mention 桓温 in the main text refers to Huan Wen, the Jin dynasty general. The candidate 桓溫 is the same person. The main text asks '桓温來欲作賊如何' referring to Huan Wen. The candidate matches.\"}, {\"mention_id\": \"sfh1-mention-2db5f9c996e5aff32bf8c78d\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-4247daeeb0ab6c788495\", \"sfh1-ev-02-yanyu-101-liu-annotation-001\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"surname_reference_match\", \"contextual_alignment\"]}, {\"candidate_key\": \"c1\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-candidate-evidence-bb8b96c871246b903b1d\"], \"reason_types\": [\"wrong_person\", \"contextual_mismatch\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [\"桓温\"], \"explanation\": \"The surname reference 温 in the Jin Andi Ji annotation refers to Huan Wen (桓温), who was at 姑孰. The annotation '晉安帝紀曰温在姑孰諷' clearly refers to Huan Wen. Candidate c0 (桓溫) is correct. Candidate c1 (温嶠) is a different person from a different context and contradicts the evidence.\"}, {\"mention_id\": \"sfh1-mention-538b9a3e07995b11593eefdf\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-02-yanyu-101-liu-annotation-004\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"name_match\", \"contextual_alignment\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [\"謝景重\"], \"explanation\": \"The mention 謝重 in the Tan Daoluan annotation refers to Xie Zhong, who is the same person as 謝景重 in the main text (景重 being his courtesy name). The candidate 謝重 matches directly.\"}]}",
+              "name": "submit_sfh1_identity_judgments"
+            },
+            "id": "call_00_4r4vl1SzC5yRIAkwu1sN3015",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787998646,
+  "id": "213ff969-8c28-4864-bf0d-4d26e41230f3",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 1064,
+    "prompt_cache_hit_tokens": 640,
+    "prompt_cache_miss_tokens": 2268,
+    "prompt_tokens": 2908,
+    "prompt_tokens_details": {
+      "cached_tokens": 640
+    },
+    "total_tokens": 3972
+  }
+}

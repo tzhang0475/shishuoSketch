@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"judgments\": [{\"mention_id\": \"sfh1-mention-1456ea28d2dfd170ca3bf3d2\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-01-dexing-004-liu-annotation-001\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"direct_name_match\", \"role_match\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [\"薛瑩\"], \"explanation\": \"薛瑩 is named in the annotation as the author of 後漢書 (Later Han History). The candidate c0 matches this surface form exactly and is the author of the cited work, consistent with the mention's referent_role of 'author_of_cited_work'.\"}, {\"mention_id\": \"sfh1-mention-38cc00dfdb0d77b3a5d8c063\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-01-dexing-004-liu-annotation-001\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"courtesy_name_to_full_name\", \"coreference_chain\"]}, {\"candidate_key\": \"c1\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-01-dexing-004-liu-annotation-001\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"courtesy_name_to_full_name\", \"coreference_chain\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_ambiguous\", \"alternative_search_surfaces\": [\"李膺\", \"李元禮\"], \"explanation\": \"元禮 is the courtesy name of 李膺 as stated in the annotation '李膺字元禮'. Both candidates c0 and c1 are prior-candidate entries for 李元禮 (Li Yuanli), which is the same person as 李膺. Both candidates represent the same historical person from different candidate databases (wave-a and wave-b), so they are equivalent. The mention is supported by either candidate, but since both refer to the same person, the resolution is ambiguous between the two database entries.\"}, {\"mention_id\": \"sfh1-mention-4cee01d2986e16096682003c\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-01-dexing-004-main\", \"sfh1-ev-01-dexing-004-liu-annotation-001\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"direct_name_match\", \"coreference_chain\"]}, {\"candidate_key\": \"c1\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-01-dexing-004-main\", \"sfh1-ev-01-dexing-004-liu-annotation-001\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"direct_name_match\", \"coreference_chain\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_ambiguous\", \"alternative_search_surfaces\": [\"李膺\", \"李元禮\"], \"explanation\": \"李元禮 is the subject of the main text and is identified in the annotation as 李膺 (courtesy name 元禮). Both candidates c0 and c1 are prior-candidate entries for 李元禮 from different candidate databases (wave-a and wave-b), representing the same historical person. Both are supported, but since they are duplicate database entries for the same person, the resolution is ambiguous between them.\"}]}",
+              "name": "submit_sfh1_identity_judgments"
+            },
+            "id": "call_00_ZH8coMY4JYKcdIa1Mq705978",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787982084,
+  "id": "8b58e393-4fb3-4651-ba9a-3e2cd685dff5",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 894,
+    "prompt_cache_hit_tokens": 640,
+    "prompt_cache_miss_tokens": 1931,
+    "prompt_tokens": 2571,
+    "prompt_tokens_details": {
+      "cached_tokens": 640
+    },
+    "total_tokens": 3465
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"judgments\": [{\"mention_id\": \"sfh1-mention-8f864c41e3b5b4f765c8b81c\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-0f17eb7c24bd74c9f61b\", \"sfh1-ev-06-yaliang-023-main\", \"sfh1-ev-06-yaliang-023-liu-annotation-002\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"name_match\", \"contextual_role\", \"coreference\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [\"庾亮\", \"庾太尉\"], \"explanation\": \"The mention 亮 in the Liu annotation refers to 庾亮 (Yu Liang), who is referred to as 庾太尉 in the main text. The main text describes 庾太尉 fleeing by boat after defeat against 蘇峻, and the annotation states 亮於陳㰎三弟奔温嶠, where 亮 is the abbreviated personal name of 庾太尉/庾亮. The candidate c0 is 庾亮 matched via 庾太尉, which is the same person. The annotation's 亮 is clearly the abbreviated form of 庾亮.\"}, {\"mention_id\": \"sfh1-mention-b3221da9f7192b5be06fc6dc\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-8ce642bf3cf124381115\", \"sfh1-ev-06-yaliang-023-liu-annotation-002\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"name_match\", \"contextual_role\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [\"温嶠\", \"溫嶠\"], \"explanation\": \"The mention 温嶠 in the Liu annotation is a full personal name referring to Wen Qiao, the person to whom 亮 and his three brothers fled. The candidate c0 is 温嶠 matched via canonical name, which is the same person. The annotation states 亮於陳㰎三弟奔温嶠, clearly identifying 温嶠 as the destination of the flight.\"}]}",
+              "name": "submit_sfh1_identity_judgments"
+            },
+            "id": "call_00_za9xPRv6qclk8HsWFCjM1802",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787999054,
+  "id": "fa4fbe70-f9b5-4863-95a4-0f6773074e98",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 609,
+    "prompt_cache_hit_tokens": 640,
+    "prompt_cache_miss_tokens": 1301,
+    "prompt_tokens": 1941,
+    "prompt_tokens_details": {
+      "cached_tokens": 640
+    },
+    "total_tokens": 2550
+  }
+}

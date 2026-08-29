@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"judgments\": [{\"mention_id\": \"sfh1-mention-e1a4f772f0ce6e45b98407ec\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-02-yanyu-035-main\"], \"reason_types\": [\"wrong_person\"]}, {\"candidate_key\": \"c1\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-02-yanyu-035-main\", \"sfh1-ev-02-yanyu-035-liu-annotation-007\", \"sfh1-ev-02-yanyu-035-liu-annotation-008\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"coreference\", \"contextual_role\"]}], \"preferred_candidate_key\": \"c1\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [], \"explanation\": \"The pronoun 卿 is used by Liu Kun (劉琨) addressing Wen Qiao (温嶠). The main text shows 劉琨 speaking to 温嶠, and the annotation confirms 嶠字太真 (Wen Qiao). Candidate c1 (温嶠) is the correct referent. Candidate c0 (桓溫) is a different person and contradicts the context.\"}, {\"mention_id\": \"sfh1-mention-efda9581890c025a303f4df4\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-02-yanyu-035-main\", \"sfh1-ev-02-yanyu-035-liu-annotation-004\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"direct_name_match\", \"contextual_role\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [], \"explanation\": \"班彪 is a direct full-name reference to the historical figure Ban Biao, cited by Liu Kun as an exemplar. The annotation (漢書叙傳曰彪字叔皮) confirms this is the historical Ban Biao. The local candidate c0 matches correctly.\"}, {\"mention_id\": \"sfh1-mention-f8e72d8b6030775afcdb2eaa\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-02-yanyu-035-liu-annotation-001\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"alias_match\", \"courtesy_name\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [], \"explanation\": \"越石 is the courtesy name (字) of 劉琨 (Liu Kun). The annotation explicitly states '琨字越石' (王隱晉書曰琨字越石). Candidate c0 (劉琨) is the correct referent.\"}]}",
+              "name": "submit_sfh1_identity_judgments"
+            },
+            "id": "call_00_oOlEUXNzyj7WfCY66SWS8908",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787998559,
+  "id": "bc4f86d6-d84a-4a35-b096-6e43094c438c",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 752,
+    "prompt_cache_hit_tokens": 640,
+    "prompt_cache_miss_tokens": 2347,
+    "prompt_tokens": 2987,
+    "prompt_tokens_details": {
+      "cached_tokens": 640
+    },
+    "total_tokens": 3739
+  }
+}

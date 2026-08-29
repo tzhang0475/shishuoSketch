@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"reviews\": [{\"mention_id\": \"sfh1-mention-0e6ebd58f1761229455c6ba2\", \"candidate_key\": \"c1\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-02-yanyu-035-main\", \"sfh1-ev-02-yanyu-035-liu-annotation-007\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"name_match\", \"contextual_role\"], \"explanation\": \"The mention '温' appears in the main text '温曰嶠雖不敏...' where 温 is the abbreviated surname of 温嶠, who is explicitly named in the preceding sentence '謂温嶠曰'. The annotation sfh1-ev-02-yanyu-035-liu-annotation-007 explicitly identifies 嶠 as 温嶠 (字太真太原祁人). The main text directly names 温嶠, and the subsequent '温曰' clearly refers to the same person speaking. The candidate evidence sfh1-candidate-evidence-0b635f2811ef5262e0b1 shows the surface '温' matching the surname of 温嶠. This is a straightforward abbreviated surname reference to the already-named person.\"}, {\"mention_id\": \"sfh1-mention-1130d56550ef762df5cbab20\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-02-yanyu-035-liu-annotation-007\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"office_holder_match\", \"contextual_role\"], \"explanation\": \"The mention '司空' is an office title. The annotation sfh1-ev-02-yanyu-035-liu-annotation-007 states '少標俊清徹英穎顯名為司空劉', which explicitly identifies the person surnamed 劉 as holding the office of 司空. In the context of this story, 劉琨 is the 司空, and the annotation is about 温嶠 being the 左司馬 of 劉琨. The candidate evidence sfh1-candidate-evidence-fd52ea7d572e98433822 shows '司空' from the annotation text. The office title 司空 refers to the office held by 劉琨. The holder mention sfh1-mention-1b477f647557e951f5f7e327 (劉) is correctly linked. This is a valid office-holder reference to 劉琨.\"}, {\"mention_id\": \"sfh1-mention-1b477f647557e951f5f7e327\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-02-yanyu-035-liu-annotation-007\", \"sfh1-ev-02-yanyu-035-liu-annotation-008\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"name_match\", \"contextual_role\"], \"explanation\": \"The mention '劉' appears in annotation sfh1-ev-02-yanyu-035-liu-annotation-007 as '為司空劉', referring to the person surnamed 劉 who held the office of 司空. In this story context, 劉琨 is the 司空, and annotation sfh1-ev-02-yanyu-035-liu-annotation-008 confirms '琨左司馬' describing 温嶠 as 劉琨's 左司馬. The surname 劉 in the annotation clearly refers to 劉琨. The candidate evidence sfh1-candidate-evidence-9d8a0b7ae35c077b8fc8 shows '司空' from the same annotation, and the annotation text explicitly links 司空 with 劉. This is a valid surname reference to 劉琨.\"}, {\"mention_id\": \"sfh1-mention-1f3edb7195aa98194d127fe9\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-02-yanyu-035-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"contextual_role\", \"coreference\"], \"explanation\": \"The mention '吾' is the first-person pronoun used by 劉琨 in his speech to 温嶠. The main text states '劉琨雖隔閡寇戎志存本朝...謂温嶠曰...吾欲立功於河北使卿延譽於江南'. The speaker is clearly 劉琨, who addresses 温嶠 as 卿. The pronoun 吾 corefers with 劉琨 and is distinct from 卿 (the addressee 温嶠). The candidate evidence sfh1-candidate-evidence-56c4ed13dd1ec022e783 shows the canonical name 劉琨. This is a straightforward first-person pronoun reference to the speaker 劉琨.\"}]}",
+              "name": "submit_sfh1_adversarial_reviews"
+            },
+            "id": "call_00_nHsnPd46qbZ28RUYoyCI9136",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787998564,
+  "id": "dd8f6dd0-1629-4477-8369-a7ea019dbb55",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 1145,
+    "prompt_cache_hit_tokens": 512,
+    "prompt_cache_miss_tokens": 2594,
+    "prompt_tokens": 3106,
+    "prompt_tokens_details": {
+      "cached_tokens": 512
+    },
+    "total_tokens": 4251
+  }
+}

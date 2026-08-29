@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"records\": [{\"mention_id\": \"sfh1-mention-e3bf700eda52e71fa7393eaa\", \"semantic_type\": \"abbreviated_person_reference\", \"referent_role\": \"person referred to by single-character name 脩\", \"anchor_mentions\": [], \"holder_mentions\": [], \"patron_or_possessor_mentions\": [], \"coreference_with\": [\"sfh1-mention-823e180ccf85159f9df04ff5\"], \"distinct_from\": [], \"semantic_relations\": [{\"type\": \"co_presence\", \"subject_mention_id\": \"sfh1-mention-e3bf700eda52e71fa7393eaa\", \"object_mention_id\": \"sfh1-mention-823e180ccf85159f9df04ff5\", \"predicate_surface\": \"脩 refers to the same person as 阮宣子\", \"evidence_id\": \"sfh1-ev-23-rendan-018-liu-annotation-001\"}], \"confidence\": \"high\", \"explanation\": \"脩 is the single-character personal name appearing in the Liu annotation (名士傳曰), referring to the same person as 阮宣子 in the main text. The annotation glosses the main text's protagonist, so 脩 corefers with 阮宣子.\"}, {\"mention_id\": \"sfh1-mention-823e180ccf85159f9df04ff5\", \"semantic_type\": \"direct_person_form\", \"referent_role\": \"person named 阮宣子 (Ruan Xuanzi)\", \"anchor_mentions\": [], \"holder_mentions\": [], \"patron_or_possessor_mentions\": [], \"coreference_with\": [\"sfh1-mention-e3bf700eda52e71fa7393eaa\"], \"distinct_from\": [], \"semantic_relations\": [{\"type\": \"co_presence\", \"subject_mention_id\": \"sfh1-mention-823e180ccf85159f9df04ff5\", \"object_mention_id\": \"sfh1-mention-e3bf700eda52e71fa7393eaa\", \"predicate_surface\": \"阮宣子 is the same person as 脩\", \"evidence_id\": \"sfh1-ev-23-rendan-018-main\"}], \"confidence\": \"high\", \"explanation\": \"阮宣子 is the full name form in the main text. The Liu annotation's 脩 (from 名士傳) refers to the same individual, establishing coreference between the two mentions.\"}]}",
+              "name": "submit_sfh1_reference_semantics"
+            },
+            "id": "call_00_TwpgkPeunJWre5OVvPfq6083",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787990319,
+  "id": "1fd7e422-9739-408b-8119-9335ca39bf36",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 605,
+    "prompt_cache_hit_tokens": 896,
+    "prompt_cache_miss_tokens": 356,
+    "prompt_tokens": 1252,
+    "prompt_tokens_details": {
+      "cached_tokens": 896
+    },
+    "total_tokens": 1857
+  }
+}

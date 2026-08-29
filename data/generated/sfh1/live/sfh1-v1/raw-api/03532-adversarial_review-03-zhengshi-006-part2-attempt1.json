@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"reviews\": [\n  {\n    \"mention_id\": \"sfh1-mention-cf064e608d8b81479cc22d2c\",\n    \"candidate_key\": \"c0\",\n    \"verdict\": \"accept\",\n    \"supporting_evidence_ids\": [\"sfh1-ev-03-zhengshi-006-liu-annotation-001\"],\n    \"contradicting_evidence_ids\": [],\n    \"reason_types\": [\"courtesy_name_match\", \"explicit_identity_statement\"],\n    \"explanation\": \"The annotation explicitly states '充字公閭', directly establishing that 公閭 is the courtesy name of 充 (Jia Chong). The candidate evidence from aliases.json also confirms this. The annotation text '魏豫州刺史充起家為尚書遷廷尉/晉諸公賛曰充字公閭㐮陵人父逵' provides explicit identity linkage between 公閭 and 充. This is a direct, explicit identity statement, not merely a compatibility inference.\"\n  },\n  {\n    \"mention_id\": \"sfh1-mention-de01f02f43f56bbd23a88c00\",\n    \"candidate_key\": \"c0\",\n    \"verdict\": \"accept\",\n    \"supporting_evidence_ids\": [\"sfh1-ev-03-zhengshi-006-liu-annotation-001\"],\n    \"contradicting_evidence_ids\": [],\n    \"reason_types\": [\"office_title_match\", \"explicit_identity_statement\"],\n    \"explanation\": \"The annotation '魏豫州刺史充起家為尚書遷廷尉' explicitly states that 充 held the office of 魏豫州刺史. The mention '魏豫州刺史' refers to the office holder, and the annotation directly identifies that office holder as 充 (Jia Chong). The annotation also states '充字公閭', linking this office-holder reference to the same person as 公閭 and 充. This is supported by explicit textual evidence.\"\n  },\n  {\n    \"mention_id\": \"sfh1-mention-e2150f0316f39d124820ca43\",\n    \"candidate_key\": \"c0\",\n    \"verdict\": \"accept\",\n    \"supporting_evidence_ids\": [\"sfh1-ev-03-zhengshi-006-main\"],\n    \"contradicting_evidence_ids\": [],\n    \"reason_types\": [\"dialogue_context\", \"surname_abbreviation\"],\n    \"explanation\": \"The main text states '賈充初定律令與羊祜共咨太傅鄭冲'. The mention '羊' appears in the dialogue where '羊曰上意欲令小加弘潤'. Given that 羊祜 is explicitly named in the main text as one of the two people consulting 鄭冲, and the surname 羊 uniquely identifies 羊祜 in this context, the resolution of '羊' to 羊祜 is well-supported. The dialogue context makes this unambiguous.\"\n  },\n  {\n    \"mention_id\": \"sfh1-mention-e330b928f195f521d127af0d\",\n    \"candidate_key\": \"c1\",\n    \"verdict\": \"accept\",\n    \"supporting_evidence_ids\": [\"sfh1-ev-03-zhengshi-006-liu-annotation-001\"],\n    \"contradicting_evidence_ids\": [],\n    \"reason_types\": [\"courtesy_name_match\", \"explicit_identity_statement\", \"office_holder\"],\n    \"explanation\": \"The annotation explicitly states '充字公閭' and '魏豫州刺史充', directly identifying 充 as Jia Chong (賈充). The main text begins with '賈充初定律令', establishing the full name. The annotation '晉諸公賛曰充字公閭㐮陵人父逵' provides explicit identity linkage. The mention '充' is the personal name abbreviation of 賈充, and the annotation directly confirms this identification.\"\n  }\n]}",
+              "name": "submit_sfh1_adversarial_reviews"
+            },
+            "id": "call_00_lYKS6QYujZZsd2EoSJ8z5938",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787998712,
+  "id": "85516b8c-2680-4fc9-a36b-30ec116024a7",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 893,
+    "prompt_cache_hit_tokens": 512,
+    "prompt_cache_miss_tokens": 2487,
+    "prompt_tokens": 2999,
+    "prompt_tokens_details": {
+      "cached_tokens": 512
+    },
+    "total_tokens": 3892
+  }
+}

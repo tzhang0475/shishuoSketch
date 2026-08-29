@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"judgments\": [{\"mention_id\": \"sfh1-mention-b8ffaf21ac7dca43aa2eba6a\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-05-fangzheng-025-liu-annotation-001\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"courtesy_name_matches_person\", \"explicit_identity_assertion\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [\"諸葛恢\", \"恢\"], \"explanation\": \"The annotation text '恢别傳曰恢字道明琅' explicitly states that 恢's courtesy name is 道明. The candidate 道明 is the courtesy name of 諸葛恢, and the mention refers to this person.\"}, {\"mention_id\": \"sfh1-mention-b977128c6add887c63f9bab3\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-05-fangzheng-025-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"explicit_name_match\", \"main_subject_identity\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [\"恢\", \"道明\"], \"explanation\": \"The mention surface 諸葛恢 directly matches the candidate name 諸葛恢, who is the main subject of the story about his daughters' marriages.\"}, {\"mention_id\": \"sfh1-mention-c1776c73bad5efeaccfb1aa9\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"insufficient\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [], \"reason_types\": [\"office_title_ambiguous\"]}], \"preferred_candidate_key\": null, \"resolution\": \"insufficient_evidence\", \"alternative_search_surfaces\": [\"謝裒\", \"謝石\"], \"explanation\": \"The mention is the office title 吏部尚書 from annotation 009. The annotation text '吏部尚書吳國內史' appears in the context of 謝裒's biography (謝氏譜). The candidate provided is 韓伯, but the office title 吏部尚書 in this annotation context refers to 謝裒, not 韓伯. The supplied candidate does not match the historical referent. However, the evidence is fragmentary and the identity is uncertain.\"}, {\"mention_id\": \"sfh1-mention-cfcd94fb696d27f60c35dd00\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"insufficient\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [], \"reason_types\": [\"office_title_ambiguous\"]}], \"preferred_candidate_key\": null, \"resolution\": \"insufficient_evidence\", \"alternative_search_surfaces\": [\"謝石\", \"謝裒\"], \"explanation\": \"The mention is the office title 尚書令 from annotation 011. The annotation text '尚書令聚歛無厭取譏當世' appears in the context of 謝石's biography (中興書曰石字石奴歷). The candidate provided is 王戎, but the 尚書令 in this annotation refers to 謝石, not 王戎. The supplied candidate does not match the historical referent. However, the evidence is fragmentary and the identity is uncertain.\"}]}",
+              "name": "submit_sfh1_identity_judgments"
+            },
+            "id": "call_00_emEyGFH2wSVZ79TSeCVL0361",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787999083,
+  "id": "d15f7a85-ef19-40b9-b55c-19a2fb68c6de",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 863,
+    "prompt_cache_hit_tokens": 640,
+    "prompt_cache_miss_tokens": 2885,
+    "prompt_tokens": 3525,
+    "prompt_tokens_details": {
+      "cached_tokens": 640
+    },
+    "total_tokens": 4388
+  }
+}

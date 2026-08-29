@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"records\": [{\"mention_id\": \"sfh1-mention-d1f5de9a692b833fe91390f6\", \"semantic_type\": \"office_holder_reference\", \"referent_role\": \"office holder\", \"anchor_mentions\": [], \"holder_mentions\": [\"sfh1-mention-0755e0bff85da4f5159300e1\"], \"patron_or_possessor_mentions\": [], \"coreference_with\": [\"sfh1-mention-0755e0bff85da4f5159300e1\"], \"distinct_from\": [], \"semantic_relations\": [{\"type\": \"office\", \"subject_mention_id\": \"sfh1-mention-0755e0bff85da4f5159300e1\", \"object_mention_id\": \"sfh1-mention-d1f5de9a692b833fe91390f6\", \"predicate_surface\": \"郎中拜\", \"evidence_id\": \"sfh1-ev-01-dexing-016-liu-annotation-005\"}], \"confidence\": \"high\", \"explanation\": \"郎中 is an office title. The annotation text '郎中拜中散大夫' indicates 康 (Ji Kang) held the office of 郎中. The office title refers to the holder 康 (sfh1-mention-0755e0bff85da4f5159300e1), who is the subject of the annotation.\"}, {\"mention_id\": \"sfh1-mention-ab0be2463f0d5c58c828330e\", \"semantic_type\": \"office_holder_reference\", \"referent_role\": \"office holder\", \"anchor_mentions\": [], \"holder_mentions\": [\"sfh1-mention-0755e0bff85da4f5159300e1\"], \"patron_or_possessor_mentions\": [], \"coreference_with\": [\"sfh1-mention-0755e0bff85da4f5159300e1\"], \"distinct_from\": [], \"semantic_relations\": [{\"type\": \"office\", \"subject_mention_id\": \"sfh1-mention-0755e0bff85da4f5159300e1\", \"object_mention_id\": \"sfh1-mention-ab0be2463f0d5c58c828330e\", \"predicate_surface\": \"拜中散大夫\", \"evidence_id\": \"sfh1-ev-01-dexing-016-liu-annotation-005\"}], \"confidence\": \"high\", \"explanation\": \"中散大夫 is an office title. The annotation '郎中拜中散大夫' indicates 康 (Ji Kang) was promoted to the office of 中散大夫. The office title refers to the holder 康 (sfh1-mention-0755e0bff85da4f5159300e1).\"}, {\"mention_id\": \"sfh1-mention-0ef6e36b1aaa315b5e7ec2e5\", \"semantic_type\": \"ruler_reference\", \"referent_role\": \"ruler/royal person\", \"anchor_mentions\": [], \"holder_mentions\": [], \"patron_or_possessor_mentions\": [], \"coreference_with\": [], \"distinct_from\": [\"sfh1-mention-0755e0bff85da4f5159300e1\", \"sfh1-mention-c16a1fdfc0efbb7007e9b76d\"], \"semantic_relations\": [{\"type\": \"marriage\", \"subject_mention_id\": \"sfh1-mention-0ef6e36b1aaa315b5e7ec2e5\", \"object_mention_id\": \"sfh1-mention-c16a1fdfc0efbb7007e9b76d\", \"predicate_surface\": \"魏長樂亭主壻\", \"evidence_id\": \"sfh1-ev-01-dexing-016-liu-annotation-005\"}], \"confidence\": \"high\", \"explanation\": \"魏長樂亭主 refers to the Princess of Changle (a Wei royal title). The annotation '魏長樂亭主壻' indicates that 康 (Ji Kang) was the son-in-law (壻) of the 魏長樂亭主. This is a ruler/royal title reference. The 壻 (son-in-law) is distinct from the 亭主 (the princess).\"}, {\"mention_id\": \"sfh1-mention-c16a1fdfc0efbb7007e9b76d\", \"semantic_type\": \"compositional_kinship\", \"referent_role\": \"son-in-law\", \"anchor_mentions\": [\"sfh1-mention-0ef6e36b1aaa315b5e7ec2e5\"], \"holder_mentions\": [\"sfh1-mention-0755e0bff85da4f5159300e1\"], \"patron_or_possessor_mentions\": [], \"coreference_with\": [\"sfh1-mention-0755e0bff85da4f5159300e1\"], \"distinct_from\": [\"sfh1-mention-0ef6e36b1aaa315b5e7ec2e5\"], \"semantic_relations\": [{\"type\": \"marriage\", \"subject_mention_id\": \"sfh1-mention-0755e0bff85da4f5159300e1\", \"object_mention_id\": \"sfh1-mention-0ef6e36b1aaa315b5e7ec2e5\", \"predicate_surface\": \"魏長樂亭主壻\", \"evidence_id\": \"sfh1-ev-01-dexing-016-liu-annotation-005\"}], \"confidence\": \"high\", \"explanation\": \"壻 means 'son-in-law'. In the annotation '魏長樂亭主壻', this refers to 康 (Ji Kang) being the son-in-law of the 魏長樂亭主. The kinship term 壻 is compositional: it describes the relationship between 康 (the son-in-law) and the 魏長樂亭主 (the princess). The holder of the kinship role is 康 (sfh1-mention-0755e0bff85da4f5159300e1), and the anchor is the 魏長樂亭主 (sfh1-mention-0ef6e36b1aaa315b5e7ec2e5).\"}]}",
+              "name": "submit_sfh1_reference_semantics"
+            },
+            "id": "call_00_j4MgmIkVDVHsYhimGfXI6745",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787998370,
+  "id": "942dd1f2-bd83-4532-bbae-a19d19761e3e",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 1467,
+    "prompt_cache_hit_tokens": 1280,
+    "prompt_cache_miss_tokens": 1572,
+    "prompt_tokens": 2852,
+    "prompt_tokens_details": {
+      "cached_tokens": 1280
+    },
+    "total_tokens": 4319
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"judgments\": [{\"mention_id\": \"sfh1-mention-b887e5e6f1403d27f3068d48\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-27-jiajue-012-main\", \"sfh1-candidate-evidence-3f032e2d8b581064c841\"], \"reason_types\": [\"name_mismatch\", \"historical_identity_mismatch\"]}], \"preferred_candidate_key\": null, \"resolution\": \"candidate_missing\", \"alternative_search_surfaces\": [\"王文度\", \"王述\", \"王坦之\"], \"explanation\": \"The mention 文度 refers to 王文度 (Wang Wendu), the elder brother of 阿智 (王䖍之) and son of 藍田 (王述). The supplied candidate c0 is named 孫晷 (Sun Gui), which is a completely different historical person. The candidate evidence text (from aliases.json) actually describes 王文度's story about 桓温 seeking marriage, confirming the referent is 王文度, not 孫晷. The candidate's name 孫晷 contradicts the historical identity of 王文度. The correct referent (王文度, i.e., 王坦之) is not among the supplied candidates.\"}]}",
+              "name": "submit_sfh1_identity_judgments"
+            },
+            "id": "call_00_k0If2JpXju3ILYv13dH76653",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787990735,
+  "id": "6fb1f240-0d31-4204-a38e-2d4b49ef18c6",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 357,
+    "prompt_cache_hit_tokens": 640,
+    "prompt_cache_miss_tokens": 976,
+    "prompt_tokens": 1616,
+    "prompt_tokens_details": {
+      "cached_tokens": 640
+    },
+    "total_tokens": 1973
+  }
+}

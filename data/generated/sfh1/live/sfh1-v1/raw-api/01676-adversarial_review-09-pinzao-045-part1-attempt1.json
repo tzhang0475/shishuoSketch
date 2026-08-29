@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"reviews\": [{\"mention_id\": \"sfh1-mention-61cce276d7226fa19db15542\", \"candidate_key\": \"c0\", \"verdict\": \"reject\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-candidate-evidence-89d1b5ef994e62aa6f7e\"], \"reason_types\": [\"insufficient_evidence\", \"contextual_mismatch\"], \"explanation\": \"The proposed resolution maps the surface '安石' to 謝安 based solely on an alias registry entry from data/aliases.json. However, the source evidence (sfh1-ev-09-pinzao-045-main) shows 桓公 asking 孔西陽 about '安石' in comparison to 仲文. The alias evidence text mentions 謝安 (字安石) but is from a different context (文字志 about 謝安 being 奕弟). The reference semantics explicitly state 'No valid semantic record was returned; fail closed' with confidence 'low'. The alias registry evidence does not specifically tie the mention in this story to 謝安 — the story context involves 孔西陽 (孔巖) being asked about 安石, and the candidate evidence does not establish that this particular '安石' refers to 謝安. The evidence is merely compatible with the alias, not specific to this mention. This is a risky resolution where the alias registry provides a possible name match but the contextual evidence does not confirm identity.\"}, {\"mention_id\": \"sfh1-mention-65152767d73f61a0d5ee03ce\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-f53bd081092b07848f63\", \"sfh1-ev-09-pinzao-045-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"alias_registry\", \"contextual_fit\"], \"explanation\": \"The surface '桓公' is resolved to 桓溫. The alias evidence (sfh1-candidate-evidence-f53bd081092b07848f63) shows '桓公' used as a contextual title for 桓溫 in the famous passage about willows ('木猶如此人何以堪'), which is a well-known anecdote about 桓溫. In the source evidence (sfh1-ev-09-pinzao-045-main), 桓公 is the one asking the question about 安石, which is consistent with 桓溫's role as a prominent figure in the 世說新語. The alias registry provides a specific contextual title match for 桓溫, and the story context is consistent with 桓溫 being the speaker. While the reference semantics indicate low confidence due to fail-closed behavior, the alias evidence specifically ties '桓公' to 桓溫 in a well-attested usage pattern.\"}]}",
+              "name": "submit_sfh1_adversarial_reviews"
+            },
+            "id": "call_00_aLbiE3LtV8VpzmswakLM0169",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787989863,
+  "id": "a612250d-1c6f-4f31-a8bd-b3d43a703e0a",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 673,
+    "prompt_cache_hit_tokens": 512,
+    "prompt_cache_miss_tokens": 858,
+    "prompt_tokens": 1370,
+    "prompt_tokens_details": {
+      "cached_tokens": 512
+    },
+    "total_tokens": 2043
+  }
+}

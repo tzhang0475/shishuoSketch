@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"judgments\": [{\"mention_id\": \"sfh1-mention-71959f2373c815e9e65c62f2\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-02-yanyu-035-main\", \"sfh1-ev-02-yanyu-035-liu-annotation-007\", \"sfh1-ev-02-yanyu-035-liu-annotation-008\"], \"reason_types\": [\"wrong_person\"]}, {\"candidate_key\": \"c1\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-02-yanyu-035-main\", \"sfh1-ev-02-yanyu-035-liu-annotation-007\", \"sfh1-ev-02-yanyu-035-liu-annotation-008\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"name_match\", \"contextual_role_match\"]}], \"preferred_candidate_key\": \"c1\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [\"温嶠\", \"太真\"], \"explanation\": \"The mention 嶠 is the personal name of 温嶠 (Wen Qiao). The main text shows 温嶠 being addressed by 劉琨, and the annotation (liu-annotation-007) states 嶠字太真太原祁人, and annotation-008 describes 嶠 as 琨左司馬 who was sent as envoy. Candidate c1 is 温嶠, matching this person. Candidate c0 is 桓溫 (Huan Wen), a different historical figure, contradicted by the context.\"}, {\"mention_id\": \"sfh1-mention-7ee62375c8ba38e8b723ad82\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-02-yanyu-035-liu-annotation-005\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"name_match\", \"contextual_role_match\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [\"公孫述\"], \"explanation\": \"The mention 公孫述 refers to Gongsun Shu, a warlord of the Xin/Han transition period. The annotation (liu-annotation-005) explicitly states 從公孫述隗囂游, confirming this is the historical Gongsun Shu. Candidate c0 is 公孫述, matching exactly.\"}, {\"mention_id\": \"sfh1-mention-a03d618565b8383ea43febd5\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-02-yanyu-035-main\", \"sfh1-ev-02-yanyu-035-liu-annotation-007\", \"sfh1-ev-02-yanyu-035-liu-annotation-008\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"name_match\", \"contextual_role_match\"]}, {\"candidate_key\": \"c1\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-02-yanyu-035-main\"], \"reason_types\": [\"wrong_person\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [\"温嶠\", \"太真\"], \"explanation\": \"The mention 温嶠 is the full name of Wen Qiao, the addressee of Liu Kun's speech. The main text shows 劉琨 addressing 温嶠, and the annotations (liu-annotation-007, 008) describe 嶠 as 琨左司馬 who was sent as envoy. Candidate c0 is 温嶠, matching exactly. Candidate c1 is 桓溫 (Huan Wen), a different person.\"}, {\"mention_id\": \"sfh1-mention-a9498b7b566ea2b55de05b78\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-02-yanyu-035-main\", \"sfh1-ev-02-yanyu-035-liu-annotation-009\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"contextual_role_match\", \"honorific_reference\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [\"劉琨\", \"越石\"], \"explanation\": \"The mention 明公 is an honorific used by Wen Qiao to address Liu Kun. The main text shows 温 saying 明公以桓文之姿建匡立之功, and the annotation (liu-annotation-009) states 明公有桓文之志, confirming 明公 refers to Liu Kun. Candidate c0 is 劉琨 (Liu Kun), matching this referent.\"}]}",
+              "name": "submit_sfh1_identity_judgments"
+            },
+            "id": "call_00_5NUjS3LIXIonBMgznb4Y0300",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787998546,
+  "id": "4a27e8a8-6fae-404e-a485-8f41573b57e8",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 1222,
+    "prompt_cache_hit_tokens": 640,
+    "prompt_cache_miss_tokens": 3134,
+    "prompt_tokens": 3774,
+    "prompt_tokens_details": {
+      "cached_tokens": 640
+    },
+    "total_tokens": 4996
+  }
+}

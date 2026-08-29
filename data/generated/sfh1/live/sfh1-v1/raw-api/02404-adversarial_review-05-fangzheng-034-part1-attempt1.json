@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"reviews\": [{\"mention_id\": \"sfh1-mention-14781a7673e50f18f45c5aed\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-d52c69e4c4bdff5f74e8\", \"sfh1-ev-05-fangzheng-034-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"canonical_name_match\", \"historical_context\"], \"explanation\": \"The surface form 蘇峻 appears in the main text as the subject of the biography. The candidate evidence from people.json confirms 蘇峻 as a canonical person. The main text opens with 蘇峻既至石頭百僚奔散, directly naming him. The reference semantics returned 'uncertain' with no semantic record, but the direct canonical name match in the main text is sufficient. No contradicting evidence exists.\"}, {\"mention_id\": \"sfh1-mention-848565bc5726e9dd10429f11\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-0f03f013451bfef1f67d\", \"sfh1-ev-05-fangzheng-034-liu-annotation-004\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"coreference_chain\", \"first_person_pronoun\"], \"explanation\": \"The surface form 我 is the first-person pronoun in 峻's quoted speech within the annotation text: 我寧山頭望廷尉不能廷尉望山頭乃作亂. The annotation explicitly attributes this speech to 峻 (蘇峻), and the coreference chain links this mention to other 蘇峻 mentions including sfh1-mention-14781a7673e50f18f45c5aed. The first-person pronoun in direct quotation of 峻's speech unambiguously refers to 蘇峻 himself.\"}, {\"mention_id\": \"sfh1-mention-8ec1f287685e5cedf5649782\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-438fa2d4aa427fe94d70\", \"sfh1-ev-05-fangzheng-034-liu-annotation-001\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"author_of_cited_work\", \"canonical_name_match\"], \"explanation\": \"The surface form 王隱 appears in the annotation as the author of 王隱晉書, cited in the annotation text: 王隱晉書曰峻字子高. The candidate evidence from people.json confirms 王隱 as a canonical person. The reference semantics explicitly notes that 王隱 is distinct from 峻 (蘇峻), and the annotation structure clearly identifies 王隱 as the author of the cited work, not as the subject of the biography. The canonical name match plus the author-of-cited-work role provides sufficient support.\"}, {\"mention_id\": \"sfh1-mention-ef0f523b0b862a3d77aa66c7\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-4f1dcb42b99997c1c3ca\", \"sfh1-ev-05-fangzheng-034-liu-annotation-001\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"coreference_chain\", \"courtesy_name_match\"], \"explanation\": \"The surface form 子高 is the courtesy name of 蘇峻, as explicitly stated in the annotation: 王隱晉書曰峻字子高. The alias registry evidence confirms 子高 as a courtesy name for 蘇峻. The coreference chain links this mention to other 蘇峻 mentions. The annotation text directly establishes the courtesy-name relationship, and the alias registry provides the canonical mapping. No contradicting evidence exists.\"}]}",
+              "name": "submit_sfh1_adversarial_reviews"
+            },
+            "id": "call_00_voxXr3SK5t0c4zGPw9vs6967",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787993573,
+  "id": "5381cb23-fae2-4903-b341-9dbdb9e5d747",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 936,
+    "prompt_cache_hit_tokens": 640,
+    "prompt_cache_miss_tokens": 2210,
+    "prompt_tokens": 2850,
+    "prompt_tokens_details": {
+      "cached_tokens": 640
+    },
+    "total_tokens": 3786
+  }
+}

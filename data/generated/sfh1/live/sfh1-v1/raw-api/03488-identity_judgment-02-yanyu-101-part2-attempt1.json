@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"judgments\": [{\"mention_id\": \"sfh1-mention-66e320a86b211cb73faf2a6d\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-02-yanyu-101-liu-annotation-002\"], \"reason_types\": [\"identity_mismatch\"]}], \"preferred_candidate_key\": null, \"resolution\": \"candidate_missing\", \"alternative_search_surfaces\": [\"王彪之\"], \"explanation\": \"The mention is 王彪之, the Vice Director (僕射) who reacts with anger in annotation-002. The supplied candidate c0 is 羊祜 (matched surface 僕射), which is a different historical person. 羊祜 was a Jin dynasty official, not 王彪之. The correct referent 王彪之 is not among the supplied candidates.\"}, {\"mention_id\": \"sfh1-mention-71e6bcf2470ac6fe36723828\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-02-yanyu-101-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"title_honorific_match\", \"contextual_identity\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [], \"explanation\": \"The mention 宣武公 is the posthumous honorific title of 桓溫 (Huan Wen). The candidate c0 is 桓溫 with matched surface 宣武公. In the main text, 宣武公 is referenced in the context of 桓温's deeds (黜昏暗登聖明功超伊霍), which matches Huan Wen's historical identity. The candidate is correctly identified as the referent.\"}, {\"mention_id\": \"sfh1-mention-7373b5029594f0e6deb2f048\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-02-yanyu-101-liu-annotation-001\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"canonical_name_match\", \"contextual_identity\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [], \"explanation\": \"The mention is 謝安, and the candidate c0 is 謝安 with canonical name match. In annotation-001, 謝安 is mentioned as the one who directs the 吏部 regarding the 九錫 request, which matches the historical Xie An. The candidate is correctly identified.\"}, {\"mention_id\": \"sfh1-mention-e053a2eae1a6bdc6dd6ea02c\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-02-yanyu-101-liu-annotation-002\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"canonical_name_match\", \"contextual_identity\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [], \"explanation\": \"The mention is 袁宏, and the candidate c0 is 袁宏 with canonical name match. In annotation-002, 袁宏 is mentioned as the one who drafted the document (具其草), which matches the historical Yuan Hong. The candidate is correctly identified.\"}]}",
+              "name": "submit_sfh1_identity_judgments"
+            },
+            "id": "call_00_n6zORTQm7Vgt2JMi1Kf49337",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787998653,
+  "id": "40884e4d-33c8-4252-91d8-05e2cffb8905",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 880,
+    "prompt_cache_hit_tokens": 640,
+    "prompt_cache_miss_tokens": 2155,
+    "prompt_tokens": 2795,
+    "prompt_tokens_details": {
+      "cached_tokens": 640
+    },
+    "total_tokens": 3675
+  }
+}

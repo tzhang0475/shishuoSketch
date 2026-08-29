@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"reviews\": [{\"mention_id\": \"sfh1-mention-b65b7221c1859ca756e74abe\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-05-fangzheng-025-main\", \"sfh1-ev-05-fangzheng-025-liu-annotation-007\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"name_match\", \"contextual_role_match\"], \"explanation\": \"The mention 鄧攸 is a full personal name in the main text ('恢兒娶鄧攸女'). The Liu annotation sfh1-ev-05-fangzheng-025-liu-annotation-007 explicitly states '娶河南鄧攸女' (married the daughter of 鄧攸 of Henan), confirming the identity of this 鄧攸. The annotation directly corroborates the main text reference. The candidate evidence sfh1-candidate-evidence-26e2faa20471a55b5df7 provides the canonical name 鄧攸. The identity is supported by direct textual evidence linking the mention to the person 鄧攸.\"}, {\"mention_id\": \"sfh1-mention-f1dfc49b366d9eeacf4ee2f9\", \"candidate_key\": \"c0\", \"verdict\": \"reject\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-05-fangzheng-025-main\", \"sfh1-ev-05-fangzheng-025-liu-annotation-009\", \"sfh1-ev-05-fangzheng-025-liu-annotation-010\"], \"reason_types\": [\"office_title\", \"surname_match\"], \"explanation\": \"The mention 謝尚書 is an office-holder reference (尚書) with surname 謝. The main text itself clarifies the referent: '我不能復與謝裒兒㛰' — the person is 謝裒, not 謝尚. The candidate proposes resolution to 謝尚, but the text explicitly names the person as 謝裒. The Liu annotation sfh1-ev-05-fangzheng-025-liu-annotation-009 states '裒歷侍中吏部尚書' (裒 served as 侍中 and 吏部尚書), confirming that 謝裒 held the office of 尚書. Annotation sfh1-ev-05-fangzheng-025-liu-annotation-010 further confirms '謝氏譜曰裒子石娶恢小女'. The office title 尚書 refers to 謝裒, not 謝尚. The candidate evidence sfh1-candidate-evidence-ec16c30d274014612c0a matches the surface 謝尚書 to 謝尚, but the surrounding text and annotations unambiguously identify this 謝尚書 as 謝裒. This is a misattribution based on surname+office matching without checking the specific person named in context.\"}]}",
+              "name": "submit_sfh1_adversarial_reviews"
+            },
+            "id": "call_00_JhKgtPXT7bSwK7abjWUL8003",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787999113,
+  "id": "bcaab310-298e-4d8b-b9ff-f5d4f5374a43",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 694,
+    "prompt_cache_hit_tokens": 512,
+    "prompt_cache_miss_tokens": 1920,
+    "prompt_tokens": 2432,
+    "prompt_tokens_details": {
+      "cached_tokens": 512
+    },
+    "total_tokens": 3126
+  }
+}

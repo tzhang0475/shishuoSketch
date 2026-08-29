@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"reviews\": [{\"mention_id\": \"sfh1-mention-65124b120e824c24150eda05\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-0afe933dc24ad3e894e8\", \"sfh1-ev-06-yaliang-019-liu-annotation-001\", \"sfh1-ev-06-yaliang-019-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"courtesy_name_match\", \"contextual_identity\", \"explicit_identity_statement\"], \"explanation\": \"The surface '逸少' is matched to 王羲之 via the alias registry (courtesy name). The Liu annotation explicitly states '逸少羲之小字羲之' (王氏譜), directly identifying 逸少 as 羲之. The main text context — 郗太傅 seeking a son-in-law from the 王 family, with the bare-chested youth on the eastern bed — matches the well-known story of 王羲之. The candidate evidence from aliases.json also confirms '王羲之字逸少'. The evidence specifically supports the identity resolution.\"}, {\"mention_id\": \"sfh1-mention-79a6e6672d78c23ef1f4696d\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-06c3541f537f7b71946c\", \"sfh1-ev-06-yaliang-019-liu-annotation-001\", \"sfh1-ev-06-yaliang-019-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"canonical_name_match\", \"contextual_identity\", \"explicit_identity_statement\"], \"explanation\": \"The surface '郗鑒' is a canonical name match. The Liu annotation explicitly states '妻太傅郗鑒女名璿字子房', confirming that 郗太傅 in the main text is 郗鑒. The main text refers to '郗太傅' and '郗公', and the annotation directly identifies this person as 郗鑒. The candidate evidence from people.json confirms 郗鑒 as a canonical person. The evidence specifically supports the identity.\"}, {\"mention_id\": \"sfh1-mention-92c9d6bfe6f5902e31d8479b\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-3980194066ab3de841e8\", \"sfh1-ev-06-yaliang-019-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"office_title_match\", \"contextual_identity\"], \"explanation\": \"The surface '王丞相' is matched to 王導 via the alias registry (office title). The main text describes 郗太傅 sending a messenger to the 王 family to seek a son-in-law, and the story is the famous account of 王導's nephews being considered. The candidate evidence from aliases.json shows '王丞相' used in a context where 王導 is the referent (the 周鎮 story). The hard veto c1 (explicit_identity_contradiction) is noted but no contradicting evidence is supplied in the proposal. The contextual identity — 郗鑒 seeking a son-in-law from 王導's family — is consistent with the historical record. The office title '丞相' uniquely identifies 王導 in this context.\"}]}",
+              "name": "submit_sfh1_adversarial_reviews"
+            },
+            "id": "call_00_qx6ULqgiviMj7UCDCcln0492",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787980999,
+  "id": "0b77362c-f997-4b28-8d04-d1f10c5bef6a",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 839,
+    "prompt_cache_hit_tokens": 512,
+    "prompt_cache_miss_tokens": 1008,
+    "prompt_tokens": 1520,
+    "prompt_tokens_details": {
+      "cached_tokens": 512
+    },
+    "total_tokens": 2359
+  }
+}

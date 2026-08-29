@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"reviews\": [{\"mention_id\": \"sfh1-mention-9090a652172e11941330a7c1\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-391cab87aa2696630afa\", \"sfh1-ev-08-shangyu-067-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"alias_registry_match\", \"surface_form_match\"], \"explanation\": \"何次道 is the surname (何) plus courtesy name (次道) of 何充 (He Chong). The alias registry evidence explicitly maps 何次道 to 何充. The main text mentions 何次道 sending easterners, which is consistent with He Chong's historical role. The reference semantics explicitly distinguishes this mention from Jia Ning and the easterners, and there is no contradicting evidence. The alias registry match plus surface form match provide sufficient support for identity.\"}, {\"mention_id\": \"sfh1-mention-b1d7f7a080a0aabbcf0edb80\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-2ebbc2be1c5d4a5c11a5\", \"sfh1-ev-08-shangyu-067-liu-annotation-002\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"canonical_name_match\", \"surface_form_match\"], \"explanation\": \"蘇峻 is the exact canonical name of Su Jun, the rebel leader. The Liu annotation (sfh1-ev-08-shangyu-067-liu-annotation-002) explicitly mentions 蘇峻 in the context of Jia Ning fleeing to join him, which matches the historical Su Jun. The canonical name match is exact and the annotation context confirms the identity. No contradicting evidence exists.\"}, {\"mention_id\": \"sfh1-mention-f1d7eb812494bba6c0a65b51\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-2ed8ca067b2e8cb9c431\", \"sfh1-ev-08-shangyu-067-liu-annotation-002\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"coreference\", \"surface_form_match\"], \"explanation\": \"峻 is the abbreviated personal name of 蘇峻 (Su Jun). The Liu annotation (sfh1-ev-08-shangyu-067-liu-annotation-002) contains both the full form 蘇峻 and the abbreviated form 峻 in the same annotation, establishing coreference. The annotation states 峻甚暱之以爲謀主, where 峻 clearly refers to Su Jun. The coreference with the full-name mention sfh1-mention-b1d7f7a080a0aabbcf0edb80 is explicitly established in the reference semantics. No contradicting evidence exists.\"}]}",
+              "name": "submit_sfh1_adversarial_reviews"
+            },
+            "id": "call_00_OERJu1KEcvBIJ7hJoPUg8176",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787989653,
+  "id": "d6a157dd-ab57-4a99-9bd1-4be2cc6b57cc",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 706,
+    "prompt_cache_hit_tokens": 512,
+    "prompt_cache_miss_tokens": 1558,
+    "prompt_tokens": 2070,
+    "prompt_tokens_details": {
+      "cached_tokens": 512
+    },
+    "total_tokens": 2776
+  }
+}

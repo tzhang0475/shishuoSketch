@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"judgments\": [{\"mention_id\": \"sfh1-mention-6b334e25aad8aa68df435bf8\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-05-fangzheng-025-liu-annotation-004\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"courtesy_name_identity\", \"genealogical_annotation\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [\"羊楷\"], \"explanation\": \"道茂 is explicitly identified as the courtesy name of 羊楷 in annotation 004 (羊氏譜曰羊楷字道茂). The candidate 道茂 is the same person as 羊楷.\"}, {\"mention_id\": \"sfh1-mention-7c8fd7eccef2196fbebc2d97\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-05-fangzheng-025-liu-annotation-001\"], \"reason_types\": [\"office_title_mismatch\", \"wrong_person\"]}], \"preferred_candidate_key\": null, \"resolution\": \"candidate_missing\", \"alternative_search_surfaces\": [\"誕\", \"諸葛誕\"], \"explanation\": \"The office title 司空 is held by 誕 (the grandfather of 恢), not by 劉琨. The candidate 劉琨 is incorrect. The correct referent is 誕 (諸葛誕), who is not among the supplied candidates.\"}, {\"mention_id\": \"sfh1-mention-876647d5bb709f336b0c21c8\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-05-fangzheng-025-liu-annotation-011\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"courtesy_name_identity\", \"genealogical_annotation\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [\"謝石\", \"石\"], \"explanation\": \"石奴 is identified as the courtesy name of 謝石 in annotation 011 (石字石奴). The candidate 石奴 correctly refers to 謝石.\"}, {\"mention_id\": \"sfh1-mention-8ae7a4a864be7de8d341bf7c\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-05-fangzheng-025-liu-annotation-009\"], \"reason_types\": [\"office_title_mismatch\", \"wrong_person\"]}], \"preferred_candidate_key\": null, \"resolution\": \"candidate_missing\", \"alternative_search_surfaces\": [\"裒\", \"謝裒\"], \"explanation\": \"The office title 侍中 is held by 裒 (謝裒) according to annotation 009 (裒歷侍中). The candidate 謝安 is incorrect. The correct referent is 謝裒, who is not among the supplied candidates.\"}]}",
+              "name": "submit_sfh1_identity_judgments"
+            },
+            "id": "call_00_FH9BoNFA47sUEcFEx4bb9304",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787999073,
+  "id": "2aab8bef-b098-4077-9a4b-5a1260bc9a56",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 818,
+    "prompt_cache_hit_tokens": 640,
+    "prompt_cache_miss_tokens": 2673,
+    "prompt_tokens": 3313,
+    "prompt_tokens_details": {
+      "cached_tokens": 640
+    },
+    "total_tokens": 4131
+  }
+}

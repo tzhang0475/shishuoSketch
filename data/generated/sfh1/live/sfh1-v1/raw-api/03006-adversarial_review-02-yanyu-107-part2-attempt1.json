@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"reviews\": [{\"mention_id\": \"sfh1-mention-9b4b18e397b101fbddd935cb\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-02-yanyu-107-liu-annotation-001\", \"sfh1-ev-02-yanyu-107-liu-annotation-005\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"author_of_quoted_work\", \"personal_name_match\"], \"explanation\": \"The mention '岳' appears in the Liu annotation (sfh1-ev-02-yanyu-107-liu-annotation-001) within the context of 潘岳's 秋興賦. The annotation text explicitly discusses 潘岳's 秋興賦敘, and the character 岳 is the personal name of 潘岳. The main text (sfh1-ev-02-yanyu-107-main) quotes '潘岳秋興賦敘曰', and the Liu annotation (sfh1-ev-02-yanyu-107-liu-annotation-005) also explicitly names '潘岳秋興賦叙'. The evidence specifically supports that 岳 refers to 潘岳 as the author of the quoted work. The coreference with the full-name mention (sfh1-mention-c0880e4d4084f6dcbaaa0838) is consistent. No contradicting evidence exists.\"}, {\"mention_id\": \"sfh1-mention-c0880e4d4084f6dcbaaa0838\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-02-yanyu-107-liu-annotation-005\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"author_of_quoted_work\", \"canonical_name_match\"], \"explanation\": \"The mention '潘岳' appears in the main text (sfh1-ev-02-yanyu-107-main) as '潘岳秋興賦敘曰', explicitly naming 潘岳 as the author of the 秋興賦. The Liu annotation (sfh1-ev-02-yanyu-107-liu-annotation-005) also explicitly references '潘岳秋興賦叙'. The canonical name match with the candidate 潘岳 is directly supported by the source evidence. The reference semantics record returned 'uncertain' with no valid semantic record, but the source text itself provides explicit evidence of the identity. No contradicting evidence exists.\"}]}",
+              "name": "submit_sfh1_adversarial_reviews"
+            },
+            "id": "call_00_KDMHfTNru6q8a7vxiISV6953",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787997520,
+  "id": "5d76a1c9-55cd-4046-835c-3e1cccbb7c36",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 593,
+    "prompt_cache_hit_tokens": 512,
+    "prompt_cache_miss_tokens": 1298,
+    "prompt_tokens": 1810,
+    "prompt_tokens_details": {
+      "cached_tokens": 512
+    },
+    "total_tokens": 2403
+  }
+}

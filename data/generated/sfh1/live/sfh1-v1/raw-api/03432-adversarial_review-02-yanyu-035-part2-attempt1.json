@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"reviews\": [{\"mention_id\": \"sfh1-mention-2734199330d71f4424e692f2\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-02-yanyu-035-liu-annotation-009\", \"sfh1-ev-02-yanyu-035-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"contextual_identity\", \"honorific_address\"], \"explanation\": \"The surface form 明公 is an honorific address meaning 'illustrious lord'. In the main text, 劉琨 (Liu Kun) is the speaker addressing 温嶠, and the phrase '明公以桓文之姿建匡立之功' is spoken by 温嶠 in response to 劉琨. Annotation-009 explicitly states '明公有桓文之志', confirming that 明公 refers to 劉琨. The honorific is used by 温嶠 to address 劉琨, and the annotation corroborates this identity. The reference semantics returned 'uncertain' with no valid semantic record, but the annotation evidence directly supports the identification of 明公 as 劉琨.\"}, {\"mention_id\": \"sfh1-mention-284b6d75323dddda9f7b19a9\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-02-yanyu-035-liu-annotation-001\", \"sfh1-ev-02-yanyu-035-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"canonical_name\", \"explicit_name_match\"], \"explanation\": \"The surface form 劉琨 is the explicit full name of Liu Kun, appearing in the main text as the speaker. Annotation-001 provides biographical details: '琨字越石' and identifies him as from 中山魏昌. The main text shows 劉琨 addressing 温嶠, and annotation-008 confirms '琨左司馬' referring to 温嶠 as 琨's subordinate. The explicit name match is unambiguous. The coreference chain and distinctness from 温嶠 and 桓文 are consistent with the text.\"}, {\"mention_id\": \"sfh1-mention-3775599b60a161df76126065\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-02-yanyu-035-liu-annotation-007\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"alias_registry\", \"courtesy_name_match\"], \"explanation\": \"The surface form 太真 is the courtesy name (字) of 温嶠. Annotation-007 explicitly states '嶠字太真太原祁人', confirming that 太真 = 温嶠. The alias registry evidence also matches. The hard veto against c1 (explicit identity contradiction) is consistent with the text where 温嶠 is distinct from 劉琨. The courtesy name match is directly supported by the annotation.\"}, {\"mention_id\": \"sfh1-mention-3ed61a0def41d5d3a9f61260\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-7f1dc879f6b599e86dfb\", \"sfh1-ev-02-yanyu-035-liu-annotation-007\", \"sfh1-ev-02-yanyu-035-liu-annotation-008\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"alias_registry_match\", \"annotation_identity_assertion\"], \"explanation\": \"The surface form 嶠 refers to 温嶠. Annotation-007 establishes '嶠字太真太原祁人', and annotation-008 states '琨左司馬是時二都傾覆天下大亂琨聞元皇受命...使嶠奉使嶠喟然對曰', confirming that 嶠 is 温嶠 who serves as 劉琨's 左司馬 and is sent as envoy. The main text shows 温嶠 responding to 劉琨's call. The alias registry evidence and annotation identity assertions together firmly establish this identification.\"}]}",
+              "name": "submit_sfh1_adversarial_reviews"
+            },
+            "id": "call_00_sfGJuSELVj4lApHz7xTI8626",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787998572,
+  "id": "dde6599c-d432-4824-be96-847e653b76e5",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 1004,
+    "prompt_cache_hit_tokens": 512,
+    "prompt_cache_miss_tokens": 2891,
+    "prompt_tokens": 3403,
+    "prompt_tokens_details": {
+      "cached_tokens": 512
+    },
+    "total_tokens": 4407
+  }
+}

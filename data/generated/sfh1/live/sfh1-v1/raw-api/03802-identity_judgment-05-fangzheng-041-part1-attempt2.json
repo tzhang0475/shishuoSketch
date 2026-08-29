@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"judgments\": [{\"mention_id\": \"sfh1-mention-0fda15a3982bc278cd0b06c5\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-05-fangzheng-041-liu-annotation-003\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"name_match\", \"historical_role_match\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [\"司馬岳\", \"康帝\"], \"explanation\": \"The mention 岳 refers to Emperor Kang (康帝), whose personal name is 司馬岳. Annotation 003 states 帝諱岳字世同, confirming that 岳 is the personal name of the emperor. The candidate 潘岳 (Pan Yue) is a different historical figure. However, the supplied candidate c0 is 潘岳, which does not match. Wait — the candidate evidence text is just '岳' and the name is 潘岳. The annotation 003 clearly identifies 岳 as the emperor's personal name (帝諱岳), not 潘岳. The candidate 潘岳 is a Jin dynasty poet, not the emperor. This is a mismatch. The likely referent is Emperor Kang (司馬岳), who is not among the supplied candidates. So candidate_missing.\"}, {\"mention_id\": \"sfh1-mention-33cc021b40047c1f8e3c8a90\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-05-fangzheng-041-liu-annotation-002\", \"sfh1-ev-05-fangzheng-041-liu-annotation-001\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"name_match\", \"familial_relation_match\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [\"庾亮\", \"太尉亮\"], \"explanation\": \"The mention 亮 refers to 庾亮 (Yu Liang). Annotation 002 states 兄亮, identifying him as the elder brother of 庾冰. Annotation 001 mentions 太尉亮. The candidate 亮 is the local person form matching 庾亮. Supported.\"}, {\"mention_id\": \"sfh1-mention-3745d2120f2e3de3b84a090a\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-05-fangzheng-041-liu-annotation-001\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"name_match\", \"title_match\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [\"庾亮\", \"太尉亮\"], \"explanation\": \"The mention 亮 appears within 太尉亮 in annotation 001. This refers to 庾亮, the Grand Commandant (太尉). The candidate 亮 matches this person. Supported.\"}, {\"mention_id\": \"sfh1-mention-3d8596e44b5d083bb22906e8\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-05-fangzheng-041-liu-annotation-002\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"courtesy_name_match\", \"historical_role_match\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [\"庾冰\", \"季堅\"], \"explanation\": \"The mention 平仲 is the courtesy name of 庾冰 (Yu Bing). Annotation 002 states 平仲累遷車騎將軍江州剌史, and annotation 001 states 庾冰字季. The candidate 平仲 matches this person. Supported.\"}]}",
+              "name": "submit_sfh1_identity_judgments"
+            },
+            "id": "call_00_yCIJdEFmuwtxMaqytPyo3212",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787999100,
+  "id": "56d0e3ec-7e7b-4fa2-b144-a210bd9e3795",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 978,
+    "prompt_cache_hit_tokens": 3072,
+    "prompt_cache_miss_tokens": 86,
+    "prompt_tokens": 3158,
+    "prompt_tokens_details": {
+      "cached_tokens": 3072
+    },
+    "total_tokens": 4136
+  }
+}

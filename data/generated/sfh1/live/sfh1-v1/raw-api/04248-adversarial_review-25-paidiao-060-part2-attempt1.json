@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"reviews\": [{\"mention_id\": \"sfh1-mention-c01d696174a149a350d5876c\", \"candidate_key\": \"c0\", \"verdict\": \"reject\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-candidate-evidence-7c35f0331a041e9ff99e\"], \"reason_types\": [\"insufficient_evidence\", \"surface_ambiguity\"], \"explanation\": \"The proposed resolution assigns the single character 王 to the person 王恭, but the supplied evidence (sfh1-candidate-evidence-7c35f0331a041e9ff99e) contains only the character 王 with no context establishing that this refers to 王恭. The reference semantics explicitly state this is an abbreviated reference to 王珣 (sfh1-mention-61a8e1c4bb940c374dd007af), not a separate individual. The candidate name is 王恭, but the evidence text is just '王' — a bare surname character that cannot specifically identify 王恭 over any other Wang-surnamed person. The identity assessment claims 'name_match' and 'role_match' but the evidence does not support either. This is a surname-only fragment that is coreferent with 王珣, not with 王恭. The candidate resolution to 王恭 is unsupported by the supplied evidence.\"}, {\"mention_id\": \"sfh1-mention-ed268fd887ab0ed7000bd444\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-25-paidiao-060-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"name_match\", \"historical_figure\", \"contextual_consistency\"], \"explanation\": \"The mention 王敦 appears in the main text (sfh1-ev-25-paidiao-060-main) as a full name reference. The text reads '王敦桓温磊砢之流' — Wang Dun and Huan Wen are named together as examples of unsuitable son-in-law types. The candidate is 王敦 (Wang Dun), a well-attested historical figure of the Eastern Jin period. The full name match is exact, the historical figure identification is consistent with the context (Emperor Xiaowu discussing potential sons-in-law), and the reference semantics correctly identify this as a direct person form distinct from 王珣 and 桓温. The evidence specifically supports this identity.\"}]}",
+              "name": "submit_sfh1_adversarial_reviews"
+            },
+            "id": "call_00_exRCjm5pKMGfULuYhU8h2639",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787999716,
+  "id": "db657d8f-c055-4918-9d9b-43ca1023f84c",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 583,
+    "prompt_cache_hit_tokens": 512,
+    "prompt_cache_miss_tokens": 1249,
+    "prompt_tokens": 1761,
+    "prompt_tokens_details": {
+      "cached_tokens": 512
+    },
+    "total_tokens": 2344
+  }
+}

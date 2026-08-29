@@ -1,0 +1,73 @@
+{
+  "candidate_only": true,
+  "canonical_write_back": false,
+  "records": [
+    {
+      "classification": "remove_from_core_path",
+      "heuristic": "_target_rows",
+      "location": "scripts/hge1_wave_a.py",
+      "reason": "Old target quota/selection is replaced by blind L1 mention reading."
+    },
+    {
+      "classification": "retain_as_retrieval_hint",
+      "heuristic": "_fallback_surface_hits",
+      "location": "scripts/hge1_wave_a.py",
+      "reason": "May rank windows but cannot assert a Person."
+    },
+    {
+      "classification": "deprecated",
+      "heuristic": "_trim_target_surface",
+      "location": "scripts/hge1_wave_a.py",
+      "reason": "String trimming caused compound-clause Person boundaries."
+    },
+    {
+      "classification": "compatibility_only",
+      "heuristic": "PERSON_SURFACE_SUFFIXES",
+      "location": "scripts/hge1_wave_a.py",
+      "reason": "Legacy selection signal only; suffixes have no semantic authority."
+    },
+    {
+      "classification": "compatibility_only",
+      "heuristic": "PERSON_SURFACE_TAILS",
+      "location": "scripts/hge1_wave_a.py",
+      "reason": "Legacy window hint only."
+    },
+    {
+      "classification": "retain_as_retrieval_hint",
+      "heuristic": "GENERIC_NAME_TOKENS",
+      "location": "scripts/hge1_wave_a.py",
+      "reason": "Useful for ranking but not entity typing."
+    },
+    {
+      "classification": "remove_from_core_path",
+      "heuristic": "_preceding_anchor",
+      "location": "scripts/hdb2_psl1_3a_common.py",
+      "reason": "L3 supplies grounded anchor/holder/patron semantics."
+    },
+    {
+      "classification": "compatibility_only",
+      "heuristic": "office-holder regexes",
+      "location": "scripts/hdb2_psl1_3b_common.py",
+      "reason": "Explicit regex remains a diagnostic; L3 owns arbitrary office semantics."
+    },
+    {
+      "classification": "deprecated",
+      "heuristic": "kinship suffix rules",
+      "location": "scripts/hdb2_occurrence_common.py",
+      "reason": "Suffix alone cannot distinguish kinship from lexicalized names."
+    },
+    {
+      "classification": "deprecated",
+      "heuristic": "single-character special cases",
+      "location": "scripts/hdb2_psl1_3c_common.py",
+      "reason": "L1/L3 read local semantics; Python only retrieves candidates."
+    },
+    {
+      "classification": "retain_as_hard_deterministic_rule",
+      "heuristic": "exact source grounding",
+      "location": "scripts/semantic_first/mention_validation.py",
+      "reason": "Exact evidence membership is deterministic database safety."
+    }
+  ],
+  "schema": "sfh1-python-semantic-heuristic-audit-v1"
+}

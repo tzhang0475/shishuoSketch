@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"judgments\": [{\"mention_id\": \"sfh1-mention-2164efbf9d8a34b1f5dd2159\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-06-yaliang-027-main\"], \"reason_types\": [\"wrong_person\"]}, {\"candidate_key\": \"c1\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-06-yaliang-027-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"surname_reference\", \"coreference\"]}, {\"candidate_key\": \"c2\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-06-yaliang-027-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"surname_reference\", \"coreference\"]}], \"preferred_candidate_key\": \"c1\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [\"王坦之\"], \"explanation\": \"The surname 王 in the main text refers to 王坦之 (Wang Tanzhi), who was just introduced by full name earlier in the same passage. The candidate c0 (王恭) is a different person. Both c1 and c2 are the same person 王坦之 from prior candidate knowledge; c1 is preferred.\"}, {\"mention_id\": \"sfh1-mention-2c692e6ba4a03838c0788d7c\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-06-yaliang-027-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"full_name_match\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [], \"explanation\": \"謝安 is called into the room by Huan Xuanwu in the main text. The candidate 謝安 matches the full name directly.\"}, {\"mention_id\": \"sfh1-mention-31e840cb73398b66e41e5d2a\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-06-yaliang-027-liu-annotation-002\", \"sfh1-ev-06-yaliang-027-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"contextual_reference\"]}, {\"candidate_key\": \"c1\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-06-yaliang-027-liu-annotation-002\"], \"reason_types\": [\"wrong_person\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [\"桓温\", \"桓宣武\"], \"explanation\": \"The annotation mentions 温 in the context of 郗超's relationship with 桓温 (Huan Xuanwu), who is the main figure in this passage. The annotation text '超謂温雄武' refers to Xi Chao speaking about Huan Wen. Candidate c1 (温嶠) is a different person.\"}, {\"mention_id\": \"sfh1-mention-dbc2e81c4ab369462c4e0cdd\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-06-yaliang-027-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"alias_match\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [\"桓温\"], \"explanation\": \"桓宣武 is the posthumous title of 桓温 (Huan Wen), who is the main actor in this passage. The alias registry confirms this identification.\"}, {\"mention_id\": \"sfh1-mention-e5f3dd23f82daceb9e66635d\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-06-yaliang-027-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"full_name_match\"]}, {\"candidate_key\": \"c1\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-06-yaliang-027-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"full_name_match\"]}, {\"candidate_key\": \"c2\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-06-yaliang-027-main\"], \"reason_types\": [\"wrong_person\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [], \"explanation\": \"王坦之 is called into the room by Huan Xuanwu in the main text. Candidates c0 and c1 both refer to 王坦之 from prior candidate knowledge; c2 (王恭) is a different person.\"}]}",
+              "name": "submit_sfh1_identity_judgments"
+            },
+            "id": "call_00_1hiVNS7Jym6WnyJVhPV67582",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787989273,
+  "id": "b0fe569a-65c1-451e-a679-22d6b564e8eb",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 1269,
+    "prompt_cache_hit_tokens": 640,
+    "prompt_cache_miss_tokens": 3019,
+    "prompt_tokens": 3659,
+    "prompt_tokens_details": {
+      "cached_tokens": 640
+    },
+    "total_tokens": 4928
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"reviews\": [{\"mention_id\": \"sfh1-mention-a800061cb3c8c4ea1a602c34\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-08-shangyu-073-liu-annotation-001\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"name_match\", \"contextual_alignment\"], \"explanation\": \"The mention 王濛 appears in the Liu annotation text: '王濛每稱其思理淹通'. The candidate evidence (sfh1-candidate-evidence-abf278077a3a70180e83) provides the canonical name 王濛 from data/people.json. The annotation directly names 王濛 as the person who praises Liu Hui's intellectual depth, matching the mention's referent role as 'person who praises Liu Hui'. The name match is exact and the contextual role aligns with the annotation text. No contradicting evidence exists.\"}, {\"mention_id\": \"sfh1-mention-b1f263958351134109bf861a\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-08-shangyu-073-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"name_match\", \"contextual_alignment\"], \"explanation\": \"The mention 桓温 appears in the main text: '庾稺恭與桓温書'. The candidate evidence (sfh1-candidate-evidence-1605b48df5a67a6f8941) provides the alias registry entry showing 桓温 as an orthographic variant of 桓溫. The main text explicitly names 桓温 as the recipient of Yu Yigong's letter, matching the mention's referent role. The name match is exact and the contextual role is unambiguous. No contradicting evidence exists.\"}, {\"mention_id\": \"sfh1-mention-e7efc6a6bb0675e6e59589bb\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-08-shangyu-073-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"coreference_resolution\", \"contextual_alignment\"], \"explanation\": \"The mention 君 is a second-person pronoun in the main text: '推此與君同濟艱不者也'. The reference semantics indicate it corefers with 桓温 (sfh1-mention-b1f263958351134109bf861a), who is the addressee of the letter from Yu Yigong. The main text establishes 桓温 as the letter recipient, and 君 as the second-person pronoun addressing him is a natural anaphoric reference. The coreference chain is internally consistent within the same source text. No contradicting evidence exists.\"}]}",
+              "name": "submit_sfh1_adversarial_reviews"
+            },
+            "id": "call_00_vUDyKLqnlDuH28Nd4w6v1663",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787981202,
+  "id": "13421000-de3b-4751-bbc1-6880eabdacf5",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 674,
+    "prompt_cache_hit_tokens": 512,
+    "prompt_cache_miss_tokens": 1486,
+    "prompt_tokens": 1998,
+    "prompt_tokens_details": {
+      "cached_tokens": 512
+    },
+    "total_tokens": 2672
+  }
+}

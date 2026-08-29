@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"judgments\": [{\"mention_id\": \"sfh1-mention-d7c0e0449b0db1217fd2fb48\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-19-xianyuan-032-liu-annotation-005\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"name_match\", \"role_match\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [\"郭珍\"], \"explanation\": \"The mention 珍 is the abbreviated personal name of 郭珍, a soldier (軍人郭) who killed 桓亮. The annotation-005 text '軍人郭...珍斬之' directly identifies 珍 as the personal name of the soldier 郭. The candidate c0 is a local candidate person named 珍, matching this referent.\"}, {\"mention_id\": \"sfh1-mention-eb76fb99d79e2eb1fd4faf8d\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-candidate-evidence-1a57c536563ef45aa461\"], \"reason_types\": [\"name_mismatch\"]}], \"preferred_candidate_key\": null, \"resolution\": \"candidate_missing\", \"alternative_search_surfaces\": [\"桓亮\", \"桓景真\"], \"explanation\": \"The mention 亮 is the abbreviated personal name of 桓亮 (Huan Liang), courtesy name 景真, grandson of 桓温. The supplied candidate c0 is an existing_person named 趙至 with matched surface 桓景真, which is a name mismatch — 桓景真 is the courtesy name of 桓亮, not 趙至. The candidate does not correspond to 桓亮. The likely referent 桓亮 is missing from the candidate set.\"}, {\"mention_id\": \"sfh1-mention-ebe39986d5275f82b8778eee\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-19-xianyuan-032-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"name_match\", \"role_match\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [\"卞鞠\"], \"explanation\": \"The mention 鞠 is the abbreviated form of 卞鞠, who is the 外孫 (maternal grandson) of 韓康伯母殷. The main text states '卞鞠是其外孫', and the candidate c0 is a local candidate person named 鞠, matching this referent.\"}, {\"mention_id\": \"sfh1-mention-fee339bfb7c76ffee2e1cf68\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-candidate-evidence-29020eab9501b7b900d0\"], \"reason_types\": [\"name_mismatch\"]}], \"preferred_candidate_key\": null, \"resolution\": \"candidate_missing\", \"alternative_search_surfaces\": [\"桓亮\", \"桓景真\"], \"explanation\": \"The mention 孫 refers to 桓亮 as grandson of 大司馬温 (桓温). The annotation-003 text '大司馬温之孫父濟給事...桓亮字景真' identifies the referent as 桓亮. The supplied candidate c0 is an existing_person named 趙至 with matched surface 桓亮, which is a name mismatch — the referent is 桓亮, not 趙至. The likely referent 桓亮 is missing from the candidate set.\"}]}",
+              "name": "submit_sfh1_identity_judgments"
+            },
+            "id": "call_00_Fpa4wsgimFTo4y7aPxYt4588",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787999546,
+  "id": "0c8188a6-ebb6-4ffb-9f29-7531a9640df4",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 939,
+    "prompt_cache_hit_tokens": 640,
+    "prompt_cache_miss_tokens": 2675,
+    "prompt_tokens": 3315,
+    "prompt_tokens_details": {
+      "cached_tokens": 640
+    },
+    "total_tokens": 4254
+  }
+}

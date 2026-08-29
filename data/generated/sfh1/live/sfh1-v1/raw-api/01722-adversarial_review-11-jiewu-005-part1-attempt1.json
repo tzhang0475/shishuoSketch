@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"reviews\": [{\"mention_id\": \"sfh1-mention-1ce6ce48bcf83b42fe008de5\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-42f21ee77ee768b7f1fd\", \"sfh1-ev-11-jiewu-005-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"canonical_name_match\", \"contextual_role_match\"], \"explanation\": \"The mention 王敦 appears in the main text as the person leading troops toward the bridge (王敦引軍垂至大桁). The candidate evidence from people.json provides 王敦 as a canonical person. The main text context clearly identifies this as Wang Dun leading an army, consistent with the historical Wang Dun. The reference semantics are uncertain (fail closed), but the surface form is an exact canonical name match and the contextual role (military leader opposing the emperor) is consistent with the known historical figure. No contradicting evidence exists.\"}, {\"mention_id\": \"sfh1-mention-4d47d4cd1fddd60c6d5a683e\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-480a63af13819be8133e\", \"sfh1-ev-11-jiewu-005-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"canonical_name_match\", \"contextual_role_match\"], \"explanation\": \"The mention 温嶠 appears in the main text as the person who is 丹陽尹 (Danyang Yin) and who fails to apologize to the emperor. The candidate evidence from people.json provides 温嶠 as a canonical person. The main text explicitly states 温嶠為丹陽尹, and the reference semantics confirm this is Wen Qiao, coreferent with 嶠 (sfh1-mention-73ff72481cbbf4034ca2180d) and distinct from 王敦, 明帝, and 王導. The exact canonical name match plus the explicit role designation in the text provides strong support.\"}, {\"mention_id\": \"sfh1-mention-73ff72481cbbf4034ca2180d\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-18b65262a590efd96c41\", \"sfh1-ev-11-jiewu-005-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"coreference_with_full_name\", \"personal_name_match\"], \"explanation\": \"The mention 嶠 is the abbreviated personal name form of 温嶠. The main text shows 嶠至不謝 but求酒炙, and the reference semantics explicitly state this is coreferent with the full name 温嶠 (sfh1-mention-4d47d4cd1fddd60c6d5a683e). The candidate evidence from people.json provides 温嶠 as the canonical person. The abbreviated form 嶠 is the personal name of Wen Qiao, and the coreference with the full-name mention in the same passage is well-supported by the text.\"}, {\"mention_id\": \"sfh1-mention-8f0a59a35bb41ff965912fdc\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-8c9fb88e7dcdbabdc78c\", \"sfh1-ev-11-jiewu-005-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"canonical_name_match\", \"contextual_role_match\"], \"explanation\": \"The mention 王導 appears in the main text as the minister who apologizes to the emperor on behalf of 温嶠 (王導須吏至徒跣下地謝曰...). The candidate evidence from people.json provides 王導 as a canonical person. The reference semantics confirm this is Wang Dao, distinct from 温嶠, 王敦, and 明帝. The exact canonical name match and the contextual role (a high-ranking minister who can intercede with the emperor) are consistent with the historical Wang Dao. No contradicting evidence exists.\"}]}",
+              "name": "submit_sfh1_adversarial_reviews"
+            },
+            "id": "call_00_a2jHQMIwQtAOmiCLUw7m9441",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787989985,
+  "id": "3d1cca1e-d4ce-45ce-963e-41806d6bb705",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 1005,
+    "prompt_cache_hit_tokens": 512,
+    "prompt_cache_miss_tokens": 2090,
+    "prompt_tokens": 2602,
+    "prompt_tokens_details": {
+      "cached_tokens": 512
+    },
+    "total_tokens": 3607
+  }
+}

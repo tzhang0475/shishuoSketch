@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"reviews\": [{\"mention_id\": \"sfh1-mention-77384f21d7e0d63998129785\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-f5adb18ae5c471536a0c\", \"sfh1-ev-08-shangyu-019-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"canonical_name_match\", \"contextual_role_match\"], \"explanation\": \"The mention 張華 in the main text refers to Zhang Hua, who speaks to 陸平原 (Lu Ji). The candidate evidence from people.json provides the canonical name 張華. The main text context shows 張華 addressing 陸平原, consistent with the historical Zhang Hua who was a contemporary of Lu Ji. The Liu annotation (sfh1-ev-08-shangyu-019-liu-annotation-003) also references 司空張華, confirming the same person. The coreference with sfh1-mention-ba962bc2a9b09324e76188e0 (also 張華) is consistent. No contradicting evidence found.\"}, {\"mention_id\": \"sfh1-mention-8682cf28eb95e74ae9afe63f\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-85de7f97f747028ca6d5\", \"sfh1-ev-08-shangyu-019-liu-annotation-004\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"alias_registry_match\", \"contextual_role_match\"], \"explanation\": \"The mention 彦先 is the courtesy name of 顧榮 (Gu Rong). The candidate evidence from aliases.json explicitly identifies 顧榮 as having the courtesy name 彦先, citing the 晉書 passage about 顧榮. The Liu annotation (sfh1-ev-08-shangyu-019-liu-annotation-004) contains '彦先鳳鳴於朝陽', which parallels the main text's '顧彦先鳳鳴朝陽', confirming that 彦先 in this context refers to 顧榮. The alias registry match is direct and specific.\"}, {\"mention_id\": \"sfh1-mention-9909ed6fcf07443f31fab8a4\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-25288e9dba02bb2caf4d\", \"sfh1-ev-08-shangyu-019-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"alias_registry_match\", \"contextual_role_match\"], \"explanation\": \"The mention 顧彦先 in the main text is the surname plus courtesy name of 顧榮 (Gu Rong). The candidate evidence from aliases.json contains the exact phrase '顧彦先鳳鳴朝陽' from the same passage, directly matching the main text context. The alias registry entry confirms 顧彦先 as a form of 顧榮's name. The main text itself (sfh1-ev-08-shangyu-019-main) contains '顧彦先鳳鳴朝陽', and the Liu annotation (sfh1-ev-08-shangyu-019-liu-annotation-004) parallels this with '彦先鳳鳴於朝陽', confirming the identification.\"}, {\"mention_id\": \"sfh1-mention-ba962bc2a9b09324e76188e0\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-91a6491381e498d2e8ba\", \"sfh1-ev-08-shangyu-019-liu-annotation-003\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"canonical_name_match\", \"contextual_role_match\"], \"explanation\": \"The mention 張華 in the Liu annotation refers to 司空張華 (Sikong Zhang Hua). The candidate evidence from people.json provides the canonical name 張華. The Liu annotation (sfh1-ev-08-shangyu-019-liu-annotation-003) explicitly states '司空張華與陶書', identifying this 張華 as the Sikong (Minister of Works), which is the well-known historical Zhang Hua. This is the same Zhang Hua who appears in the main text speaking to 陸平原. The coreference with sfh1-mention-77384f21d7e0d63998129785 is consistent. No contradicting evidence found.\"}]}",
+              "name": "submit_sfh1_adversarial_reviews"
+            },
+            "id": "call_00_kTPq5GJgBp4dF9OBsOAI7729",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787994351,
+  "id": "708e0fc3-bb93-40eb-8671-9319d97004f2",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 1064,
+    "prompt_cache_hit_tokens": 640,
+    "prompt_cache_miss_tokens": 2051,
+    "prompt_tokens": 2691,
+    "prompt_tokens_details": {
+      "cached_tokens": 640
+    },
+    "total_tokens": 3755
+  }
+}

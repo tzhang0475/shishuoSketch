@@ -1,0 +1,596 @@
+{
+  "candidate_only": true,
+  "candidate_sets": {
+    "candidate_only": true,
+    "canonical_write_back": false,
+    "records": [
+      {
+        "candidate_only": true,
+        "candidates": [
+          {
+            "candidate_key": "c0",
+            "candidate_person_id": "hge1-candidate-person-a770b821b51e00f17f5a",
+            "display_name": "殷中軍",
+            "entity_type": "prior_candidate_person",
+            "evidence": [
+              {
+                "evidence_id": "sfh1-candidate-evidence-71124c45268e39b37256",
+                "source_ref": "data/derived/hge1-wave-a-candidate-db.json",
+                "text": "殷中軍"
+              }
+            ],
+            "matched_surface": "殷中軍",
+            "retrieval_basis": "prior_candidate:hge1-wave-a-candidate-db.json"
+          },
+          {
+            "candidate_key": "c1",
+            "candidate_person_id": "hge1-candidate-person-d2d6fb8967a769bb3b68",
+            "display_name": "殷中軍",
+            "entity_type": "prior_candidate_person",
+            "evidence": [
+              {
+                "evidence_id": "sfh1-candidate-evidence-bbfd817644b0a5e514c8",
+                "source_ref": "data/derived/hge1-wave-b-candidate-db.json",
+                "text": "殷中軍"
+              }
+            ],
+            "matched_surface": "殷中軍",
+            "retrieval_basis": "prior_candidate:hge1-wave-b-candidate-db.json"
+          }
+        ],
+        "canonical_write_back": false,
+        "mention_id": "sfh1-mention-72f120463761b4ba927b43d2",
+        "retrieval_status": "candidates_found",
+        "semantic_type": "office_holder_reference",
+        "story_id": "04-wenxue-034",
+        "surface": "殷中軍"
+      },
+      {
+        "candidate_only": true,
+        "candidates": [],
+        "canonical_write_back": false,
+        "mention_id": "sfh1-mention-dce2a4e1ae915259577157ce",
+        "retrieval_status": "candidate_missing",
+        "semantic_type": "ruler_reference",
+        "story_id": "04-wenxue-034",
+        "surface": "神農"
+      }
+    ],
+    "story_id": "04-wenxue-034"
+  },
+  "canonical_write_back": false,
+  "collective": {
+    "candidate_only": true,
+    "canonical_write_back": false,
+    "coreference_conflicts": [],
+    "decisions": [],
+    "graph": {
+      "cases": [
+        {
+          "candidates": [
+            {
+              "candidate_key": "c0",
+              "candidate_node_id": "hge1-candidate-person-a770b821b51e00f17f5a",
+              "entity_type": "prior_candidate_person",
+              "name": "殷中軍"
+            },
+            {
+              "candidate_key": "c1",
+              "candidate_node_id": "hge1-candidate-person-d2d6fb8967a769bb3b68",
+              "entity_type": "prior_candidate_person",
+              "name": "殷中軍"
+            }
+          ],
+          "deterministic_predicates": [
+            {
+              "candidate_key": "c0",
+              "evidence_ids": [
+                "sfh1-candidate-evidence-71124c45268e39b37256"
+              ],
+              "predicate": "AliasMatch",
+              "reason": "prior_candidate:hge1-wave-a-candidate-db.json",
+              "value": 1.0
+            },
+            {
+              "candidate_key": "c1",
+              "evidence_ids": [
+                "sfh1-candidate-evidence-bbfd817644b0a5e514c8"
+              ],
+              "predicate": "AliasMatch",
+              "reason": "prior_candidate:hge1-wave-b-candidate-db.json",
+              "value": 1.0
+            }
+          ],
+          "mention_id": "sfh1-mention-72f120463761b4ba927b43d2",
+          "psl1_hard_vetoes": {},
+          "surface": "殷中軍"
+        },
+        {
+          "candidates": [],
+          "deterministic_predicates": [],
+          "mention_id": "sfh1-mention-dce2a4e1ae915259577157ce",
+          "psl1_hard_vetoes": {},
+          "surface": "神農"
+        }
+      ],
+      "distinct_pairs": [
+        {
+          "evidence_ids": [],
+          "left_mention_id": "sfh1-mention-72f120463761b4ba927b43d2",
+          "reason": "validated L3 explicit distinctness",
+          "right_mention_id": "sfh1-mention-dce2a4e1ae915259577157ce"
+        }
+      ],
+      "known_relation_paths": [],
+      "same_story_pairs": []
+    },
+    "predicates": [
+      {
+        "candidate_key": "c0",
+        "evidence_ids": [
+          "sfh1-candidate-evidence-71124c45268e39b37256"
+        ],
+        "mention_id": "sfh1-mention-72f120463761b4ba927b43d2",
+        "predicate": "IdentityContextSupport",
+        "reason": "SFH1 grounded identity assessment",
+        "value": 1.0
+      },
+      {
+        "candidate_key": "c1",
+        "evidence_ids": [
+          "sfh1-candidate-evidence-bbfd817644b0a5e514c8"
+        ],
+        "mention_id": "sfh1-mention-72f120463761b4ba927b43d2",
+        "predicate": "IdentityContextSupport",
+        "reason": "SFH1 grounded identity assessment",
+        "value": 1.0
+      }
+    ],
+    "story_id": "04-wenxue-034",
+    "weights_source": "scripts/hdb2_psl1_common.py:frozen",
+    "weights_tuned": false
+  },
+  "constrained": {
+    "candidate_only": true,
+    "canonical_write_back": false,
+    "coreference_pairs": [],
+    "distinct_pairs": [
+      {
+        "left_mention_id": "sfh1-mention-72f120463761b4ba927b43d2",
+        "right_mention_id": "sfh1-mention-dce2a4e1ae915259577157ce"
+      }
+    ],
+    "records": [
+      {
+        "candidate_only": true,
+        "candidates": [
+          {
+            "candidate_key": "c0",
+            "candidate_person_id": "hge1-candidate-person-a770b821b51e00f17f5a",
+            "display_name": "殷中軍",
+            "entity_type": "prior_candidate_person",
+            "evidence": [
+              {
+                "evidence_id": "sfh1-candidate-evidence-71124c45268e39b37256",
+                "source_ref": "data/derived/hge1-wave-a-candidate-db.json",
+                "text": "殷中軍"
+              }
+            ],
+            "matched_surface": "殷中軍",
+            "retrieval_basis": "prior_candidate:hge1-wave-a-candidate-db.json"
+          },
+          {
+            "candidate_key": "c1",
+            "candidate_person_id": "hge1-candidate-person-d2d6fb8967a769bb3b68",
+            "display_name": "殷中軍",
+            "entity_type": "prior_candidate_person",
+            "evidence": [
+              {
+                "evidence_id": "sfh1-candidate-evidence-bbfd817644b0a5e514c8",
+                "source_ref": "data/derived/hge1-wave-b-candidate-db.json",
+                "text": "殷中軍"
+              }
+            ],
+            "matched_surface": "殷中軍",
+            "retrieval_basis": "prior_candidate:hge1-wave-b-candidate-db.json"
+          }
+        ],
+        "canonical_write_back": false,
+        "constraint_errors": [],
+        "entity_kind": "person",
+        "hard_vetoes": {},
+        "judgment": {
+          "alternative_search_surfaces": [
+            "殷浩",
+            "殷淵源",
+            "浩"
+          ],
+          "candidate_assessments": [
+            {
+              "candidate_key": "c0",
+              "contradicting_evidence_ids": [],
+              "reason_types": [
+                "office_title_reference",
+                "surface_match"
+              ],
+              "supporting_evidence_ids": [
+                "sfh1-candidate-evidence-71124c45268e39b37256"
+              ],
+              "verdict": "support"
+            },
+            {
+              "candidate_key": "c1",
+              "contradicting_evidence_ids": [],
+              "reason_types": [
+                "office_title_reference",
+                "surface_match"
+              ],
+              "supporting_evidence_ids": [
+                "sfh1-candidate-evidence-bbfd817644b0a5e514c8"
+              ],
+              "verdict": "support"
+            }
+          ],
+          "candidate_only": true,
+          "canonical_write_back": false,
+          "explanation": "殷中軍 refers to Yin Hao (殷浩) by his office title 中軍 (General of the Central Army). Both candidates c0 and c1 are prior-candidate entries for 殷中軍 from the same candidate database (different waves), both matching the surface form exactly. The mention is an office-title reference to Yin Hao, and both supplied candidates represent the same historical person. c0 is preferred as it comes from wave-a candidate database.",
+          "mention_id": "sfh1-mention-72f120463761b4ba927b43d2",
+          "preferred_candidate_key": "c0",
+          "resolution": "candidate_supported"
+        },
+        "mention_id": "sfh1-mention-72f120463761b4ba927b43d2",
+        "preferred_candidate_key": "c0",
+        "reference_form": "office_title",
+        "semantic_confidence": "high",
+        "semantic_type": "office_holder_reference",
+        "story_id": "04-wenxue-034",
+        "surface": "殷中軍"
+      },
+      {
+        "candidate_only": true,
+        "candidates": [],
+        "canonical_write_back": false,
+        "constraint_errors": [],
+        "entity_kind": "person",
+        "hard_vetoes": {},
+        "judgment": null,
+        "mention_id": "sfh1-mention-dce2a4e1ae915259577157ce",
+        "preferred_candidate_key": null,
+        "reference_form": "personal_name",
+        "semantic_confidence": "high",
+        "semantic_type": "ruler_reference",
+        "story_id": "04-wenxue-034",
+        "surface": "神農"
+      }
+    ],
+    "story_id": "04-wenxue-034"
+  },
+  "final": {
+    "candidate_only": true,
+    "canonical_write_back": false,
+    "records": [
+      {
+        "candidate_display_name": "殷中軍",
+        "candidate_only": true,
+        "candidate_person_id": "hge1-candidate-person-a770b821b51e00f17f5a",
+        "canonical_write_back": false,
+        "decision_id": "sfh1-decision-12ab9ea9be2568b0b379729d",
+        "entity_kind": "person",
+        "evidence_ids": [
+          "sfh1-ev-04-wenxue-034-main"
+        ],
+        "failure_stage": null,
+        "final_state": "local_candidate_resolved",
+        "mention_id": "sfh1-mention-72f120463761b4ba927b43d2",
+        "person_id": null,
+        "preferred_candidate_key": "c0",
+        "psl": null,
+        "reference_form": "office_title",
+        "review": null,
+        "semantic_type": "office_holder_reference",
+        "story_id": "04-wenxue-034",
+        "surface": "殷中軍"
+      },
+      {
+        "candidate_display_name": null,
+        "candidate_only": true,
+        "candidate_person_id": null,
+        "canonical_write_back": false,
+        "decision_id": "sfh1-decision-5aaecebf091a789123dd65fe",
+        "entity_kind": "person",
+        "evidence_ids": [
+          "sfh1-ev-04-wenxue-034-liu-annotation-001"
+        ],
+        "failure_stage": "candidate_recall_failure",
+        "final_state": "genuinely_unresolved",
+        "mention_id": "sfh1-mention-dce2a4e1ae915259577157ce",
+        "person_id": null,
+        "preferred_candidate_key": null,
+        "psl": null,
+        "reference_form": "personal_name",
+        "review": null,
+        "semantic_type": "ruler_reference",
+        "story_id": "04-wenxue-034",
+        "surface": "神農"
+      }
+    ],
+    "story_id": "04-wenxue-034"
+  },
+  "identity_judgments": {
+    "judgments": [
+      {
+        "alternative_search_surfaces": [
+          "殷浩",
+          "殷淵源",
+          "浩"
+        ],
+        "candidate_assessments": [
+          {
+            "candidate_key": "c0",
+            "contradicting_evidence_ids": [],
+            "reason_types": [
+              "office_title_reference",
+              "surface_match"
+            ],
+            "supporting_evidence_ids": [
+              "sfh1-candidate-evidence-71124c45268e39b37256"
+            ],
+            "verdict": "support"
+          },
+          {
+            "candidate_key": "c1",
+            "contradicting_evidence_ids": [],
+            "reason_types": [
+              "office_title_reference",
+              "surface_match"
+            ],
+            "supporting_evidence_ids": [
+              "sfh1-candidate-evidence-bbfd817644b0a5e514c8"
+            ],
+            "verdict": "support"
+          }
+        ],
+        "candidate_only": true,
+        "canonical_write_back": false,
+        "explanation": "殷中軍 refers to Yin Hao (殷浩) by his office title 中軍 (General of the Central Army). Both candidates c0 and c1 are prior-candidate entries for 殷中軍 from the same candidate database (different waves), both matching the surface form exactly. The mention is an office-title reference to Yin Hao, and both supplied candidates represent the same historical person. c0 is preferred as it comes from wave-a candidate database.",
+        "mention_id": "sfh1-mention-72f120463761b4ba927b43d2",
+        "preferred_candidate_key": "c0",
+        "resolution": "candidate_supported"
+      }
+    ],
+    "provider_failure": false,
+    "rejected": [],
+    "story_id": "04-wenxue-034"
+  },
+  "mention_result": {
+    "mentions": [
+      {
+        "confidence": "high",
+        "entity_kind": "person",
+        "local_explanation": "殷中軍 refers to a person (殷浩) by his office title 中軍. This is a person reference.",
+        "mention_id_local": "m1",
+        "reference_form": "office_title",
+        "source_end": null,
+        "source_evidence_id": "sfh1-ev-04-wenxue-034-main",
+        "source_start": null,
+        "surface": "殷中軍"
+      },
+      {
+        "confidence": "high",
+        "entity_kind": "person",
+        "local_explanation": "神農 (Shennong) is a legendary figure referenced in the annotation, cited as the author of 神農書.",
+        "mention_id_local": "m2",
+        "reference_form": "personal_name",
+        "source_end": null,
+        "source_evidence_id": "sfh1-ev-04-wenxue-034-liu-annotation-001",
+        "source_start": null,
+        "surface": "神農"
+      }
+    ]
+  },
+  "packet_hash": "d46a55b5d2e834a7d179c8b32fb879689e4f65d518d1775b9f930e6334f15cce",
+  "reference_semantics": {
+    "provider_failure": false,
+    "records": [
+      {
+        "anchor_mentions": [],
+        "candidate_only": true,
+        "canonical_write_back": false,
+        "confidence": "high",
+        "coreference_with": [],
+        "distinct_from": [
+          "sfh1-mention-dce2a4e1ae915259577157ce"
+        ],
+        "explanation": "殷中軍 refers to Yin Hao (殷浩) by his office title 中軍 (General of the Central Army). This is an office holder reference. He is distinct from 神農 who appears in the annotation text.",
+        "holder_mentions": [],
+        "mention_id": "sfh1-mention-72f120463761b4ba927b43d2",
+        "patron_or_possessor_mentions": [],
+        "referent_role": "person holding the office of 中軍 (General of the Central Army)",
+        "semantic_type": "office_holder_reference"
+      },
+      {
+        "anchor_mentions": [],
+        "candidate_only": true,
+        "canonical_write_back": false,
+        "confidence": "high",
+        "coreference_with": [],
+        "distinct_from": [
+          "sfh1-mention-72f120463761b4ba927b43d2"
+        ],
+        "explanation": "神農 (Shennong) is a legendary sage-ruler in Chinese mythology, referenced in the Liu Xiaobiao annotation citing the 神農書 (Shennong's book). This is a ruler reference to the mythical emperor. It is distinct from 殷中軍 who appears in the main text.",
+        "holder_mentions": [],
+        "mention_id": "sfh1-mention-dce2a4e1ae915259577157ce",
+        "patron_or_possessor_mentions": [],
+        "referent_role": "legendary sage-ruler / cultural hero",
+        "semantic_type": "ruler_reference"
+      }
+    ],
+    "rejected": [],
+    "relations": [],
+    "story_id": "04-wenxue-034"
+  },
+  "reviews": {
+    "missing_required_reviews": [],
+    "provider_failure": false,
+    "rejected": [],
+    "required_mentions": [],
+    "reviews": [],
+    "story_id": "04-wenxue-034"
+  },
+  "story_id": "04-wenxue-034",
+  "temporal": {
+    "assertions": [
+      {
+        "candidate_only": true,
+        "canonical_write_back": false,
+        "confidence": "high",
+        "evidence_id": "sfh1-ev-04-wenxue-034-main",
+        "exact_span": "殷中軍雖思慮通長",
+        "interpretation": "Describes Yin Zhongjun's general intellectual capacity as a standing trait, providing background context for the scene.",
+        "scene_projection_eligible": false,
+        "semantic_role": "background_context",
+        "story_id": "04-wenxue-034",
+        "surface": "殷中軍雖思慮通長",
+        "temporal_id": "sfh1-temporal-c9a0d7062f92953c07c8e6"
+      },
+      {
+        "candidate_only": true,
+        "canonical_write_back": false,
+        "confidence": "high",
+        "evidence_id": "sfh1-ev-04-wenxue-034-main",
+        "exact_span": "然於才性偏精",
+        "interpretation": "Notes Yin Zhongjun's particular expertise in the discourse on talent and nature (才性), a standing characteristic preceding the scene.",
+        "scene_projection_eligible": false,
+        "semantic_role": "background_context",
+        "story_id": "04-wenxue-034",
+        "surface": "然於才性偏精",
+        "temporal_id": "sfh1-temporal-733594bd013bc3252744dd"
+      },
+      {
+        "candidate_only": true,
+        "canonical_write_back": false,
+        "confidence": "high",
+        "evidence_id": "sfh1-ev-04-wenxue-034-main",
+        "exact_span": "忽言及四本",
+        "interpretation": "The scene event: Yin Zhongjun suddenly brought up the 'Four Roots' (四本) topic, marking the moment of the discussion.",
+        "scene_projection_eligible": true,
+        "semantic_role": "scene_time",
+        "story_id": "04-wenxue-034",
+        "surface": "忽言及四本",
+        "temporal_id": "sfh1-temporal-2c991a1b7f80b77559a092"
+      },
+      {
+        "candidate_only": true,
+        "canonical_write_back": false,
+        "confidence": "medium",
+        "evidence_id": "sfh1-ev-04-wenxue-034-liu-annotation-001",
+        "exact_span": "湯池百歩帶甲百萬",
+        "interpretation": "Liu Xiaobiao's annotation quotes a source describing a boiling-water moat of a hundred paces and a million armored soldiers, providing a classical precedent for the metaphor of impregnability.",
+        "scene_projection_eligible": false,
+        "semantic_role": "quoted_precedent",
+        "story_id": "04-wenxue-034",
+        "surface": "湯池百歩帶甲百萬",
+        "temporal_id": "sfh1-temporal-e3a67e84a51d4d2be6d544"
+      },
+      {
+        "candidate_only": true,
+        "canonical_write_back": false,
+        "confidence": "medium",
+        "evidence_id": "sfh1-ev-04-wenxue-034-liu-annotation-001",
+        "exact_span": "神農書曰夫有石城七仭",
+        "interpretation": "Liu's annotation cites the Shennong Shu, which speaks of a stone city seven ren tall, serving as a classical textual precedent for the defensive-impenetrability imagery.",
+        "scene_projection_eligible": false,
+        "semantic_role": "quoted_precedent",
+        "story_id": "04-wenxue-034",
+        "surface": "神農書曰夫有石城七仭",
+        "temporal_id": "sfh1-temporal-aec4a32d91861d6038b708"
+      },
+      {
+        "candidate_only": true,
+        "canonical_write_back": false,
+        "confidence": "medium",
+        "evidence_id": "sfh1-ev-04-wenxue-034-liu-annotation-002",
+        "exact_span": "自固也",
+        "interpretation": "Continuation of the quoted precedent, stating that such defenses are self-securing, reinforcing the metaphor of unassailability.",
+        "scene_projection_eligible": false,
+        "semantic_role": "quoted_precedent",
+        "story_id": "04-wenxue-034",
+        "surface": "自固也",
+        "temporal_id": "sfh1-temporal-a57189b591f907528cde62"
+      },
+      {
+        "candidate_only": true,
+        "canonical_write_back": false,
+        "confidence": "low",
+        "evidence_id": "sfh1-ev-04-wenxue-034-liu-annotation-002",
+        "exact_span": "粟者不能",
+        "interpretation": "Fragment of the annotation noting that those who hoard grain cannot [do something], part of the quoted classical context.",
+        "scene_projection_eligible": false,
+        "semantic_role": "quoted_precedent",
+        "story_id": "04-wenxue-034",
+        "surface": "粟者不能",
+        "temporal_id": "sfh1-temporal-0c67239b346d00fcd17dd6"
+      }
+    ],
+    "provider_failure": false,
+    "rejected": [
+      {
+        "assertion": {
+          "confidence": "high",
+          "evidence_id": "sfh1-ev-04-wenxue-034-main",
+          "exact_span": "便苦湯池鐡城無可攻之勢",
+          "interpretation": "Immediately following the topic being raised, Yin found it as impenetrable as a moat of boiling water and iron-walled city, with no way to attack it — describing the immediate difficulty in the scene.",
+          "semantic_role": "scene_time",
+          "surface": "便苦湯池鐡城無可攻之勢",
+          "temporal_id_local": "t4"
+        },
+        "errors": [
+          "exact_span_not_in_source"
+        ],
+        "index": 3
+      }
+    ],
+    "story_id": "04-wenxue-034"
+  },
+  "validated_mentions": {
+    "counts_by_entity_kind": {
+      "person": 2
+    },
+    "overlaps": [],
+    "provider_failure": false,
+    "rejected_mentions": [],
+    "story_id": "04-wenxue-034",
+    "valid_mentions": [
+      {
+        "candidate_only": true,
+        "canonical_write_back": false,
+        "confidence": "high",
+        "entity_kind": "person",
+        "local_explanation": "神農 (Shennong) is a legendary figure referenced in the annotation, cited as the author of 神農書.",
+        "mention_id": "sfh1-mention-dce2a4e1ae915259577157ce",
+        "mention_id_local": "m2",
+        "reference_form": "personal_name",
+        "source_end": 14,
+        "source_evidence_id": "sfh1-ev-04-wenxue-034-liu-annotation-001",
+        "source_start": 12,
+        "story_id": "04-wenxue-034",
+        "surface": "神農"
+      },
+      {
+        "candidate_only": true,
+        "canonical_write_back": false,
+        "confidence": "high",
+        "entity_kind": "person",
+        "local_explanation": "殷中軍 refers to a person (殷浩) by his office title 中軍. This is a person reference.",
+        "mention_id": "sfh1-mention-72f120463761b4ba927b43d2",
+        "mention_id_local": "m1",
+        "reference_form": "office_title",
+        "source_end": 3,
+        "source_evidence_id": "sfh1-ev-04-wenxue-034-main",
+        "source_start": 0,
+        "story_id": "04-wenxue-034",
+        "surface": "殷中軍"
+      }
+    ]
+  }
+}

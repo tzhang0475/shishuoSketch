@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"reviews\": [{\"mention_id\": \"sfh1-mention-d58ee567571c41172eb595fc\", \"candidate_key\": \"c0\", \"verdict\": \"review_required\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-97f8f788fdabd509a74d\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"insufficient_evidence\", \"ambiguous_context\"], \"explanation\": \"The mention surface is 祖約, and the candidate evidence is a canonical name match from data/people.json. The supporting evidence includes sfh1-ev-14-rongzhi-023-liu-annotation-003 which mentions 祖約 in the context of the 遺詔 (imperial edict) discussion. However, the reference_semantics explicitly states 'No valid semantic record was returned; fail closed' with confidence 'low' and semantic_type 'uncertain'. The annotation text mentions 祖約 alongside 陶侃 in the context of the 肅祖遺詔, which is historically consistent with the historical figure 祖約 (Zu Yue), a Jin dynasty official. However, the evidence is only a name mention in an annotation fragment; there is no explicit identity-establishing detail beyond the name itself. The annotation fragment is broken mid-sentence and the context is partial. While the name 祖約 is distinctive and the historical context (蘇峻之亂, 遺詔) aligns with the known historical figure, the evidence provided does not contain sufficient biographical or relational detail to definitively confirm this is the canonical 祖約 from people.json rather than another person with the same name. Given the low confidence and fail-closed semantic record, this requires review.\"}, {\"mention_id\": \"sfh1-mention-e1604e6ab822695b4dd84da7\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-e1fa69eb5ef9c0a5be9e\", \"sfh1-ev-14-rongzhi-023-liu-annotation-004\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"canonical_name_match\", \"contextual_role_match\"], \"explanation\": \"The mention surface is 庾亮, matching the canonical name exactly. The supporting evidence includes sfh1-ev-14-rongzhi-023-liu-annotation-004 which discusses 庾亮 in the context of 蘇峻's rebellion, specifically mentioning 庾亮 wanting to summon 蘇峻 and 卞壼 not permitting it, and 温嶠 and 三吳 wanting to raise troops to protect the emperor. This is historically consistent with the well-documented role of 庾亮 (Yu Liang) as a key figure in the 蘇峻之亂. The main text (sfh1-ev-14-rongzhi-023-main) also extensively discusses 庾文康 (庾亮's courtesy name) in the same narrative about the 石頭 incident and 蘇峻's rebellion, providing strong contextual corroboration. The name 庾亮 is distinctive and the historical context unambiguously points to the canonical figure.\"}, {\"mention_id\": \"sfh1-mention-f6bcb5bbc721381884efd94c\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-a57a2f36c906df9ff0e6\", \"sfh1-ev-14-rongzhi-023-liu-annotation-003\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"canonical_name_match\", \"historical_context\"], \"explanation\": \"The mention surface is 庾亮, matching the canonical name exactly. The supporting evidence sfh1-ev-14-rongzhi-023-liu-annotation-003 mentions 庾亮 in the context of the 肅祖遺詔 (Emperor Ming's edict) where 庾亮 and 王導 were appointed to assist the young emperor. This is historically accurate for the canonical 庾亮, who was indeed one of the regents appointed by Emperor Ming of Jin. The main text (sfh1-ev-14-rongzhi-023-main) also extensively discusses 庾文康 (庾亮) in the same narrative about the 石頭 incident and 蘇峻's rebellion, providing strong contextual corroboration. The name is distinctive and the historical context is unambiguous.\"}]}",
+              "name": "submit_sfh1_adversarial_reviews"
+            },
+            "id": "call_00_TkkRylWemnzXiw9mozxY0657",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787999495,
+  "id": "2c041e51-742b-4c75-8979-e51bf07a933b",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 1020,
+    "prompt_cache_hit_tokens": 512,
+    "prompt_cache_miss_tokens": 1481,
+    "prompt_tokens": 1993,
+    "prompt_tokens_details": {
+      "cached_tokens": 512
+    },
+    "total_tokens": 3013
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"judgments\": [{\"mention_id\": \"sfh1-mention-b887e5e6f1403d27f3068d48\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-27-jiajue-012-main\", \"sfh1-candidate-evidence-3f032e2d8b581064c841\"], \"reason_types\": [\"name_mismatch\", \"historical_identity_mismatch\"]}], \"preferred_candidate_key\": null, \"resolution\": \"candidate_missing\", \"alternative_search_surfaces\": [\"王文度\", \"王述\", \"王懷祖\"], \"explanation\": \"The mention '文度' in this story refers to 王文度 (王述's courtesy name), who is the father of 阿智 (王䖍之). The supplied candidate c0 is matched to '孫晷' via an alias registry entry for '文度', but the story context clearly identifies 文度 as 王文度 (王述), the person whose son 阿智 marries 孫綽's daughter. The candidate evidence text itself (from aliases.json) describes 王文度 as 桓公's 長史 and mentions 藍田 (王述's father 王藍田), confirming this is 王文度/王述, not 孫晷. The candidate is a different historical person entirely.\"}]}",
+              "name": "submit_sfh1_identity_judgments"
+            },
+            "id": "call_00_ea1M5QB3kGqNaTJrFpoA1594",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787981809,
+  "id": "b21f2805-01fb-41fe-ba6e-a76cba021205",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 370,
+    "prompt_cache_hit_tokens": 640,
+    "prompt_cache_miss_tokens": 679,
+    "prompt_tokens": 1319,
+    "prompt_tokens_details": {
+      "cached_tokens": 640
+    },
+    "total_tokens": 1689
+  }
+}

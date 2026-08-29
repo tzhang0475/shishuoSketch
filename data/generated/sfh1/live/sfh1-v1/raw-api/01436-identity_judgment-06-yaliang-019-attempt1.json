@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"judgments\": [{\"mention_id\": \"sfh1-mention-65124b120e824c24150eda05\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-06-yaliang-019-main\", \"sfh1-ev-06-yaliang-019-liu-annotation-001\", \"sfh1-candidate-evidence-0afe933dc24ad3e894e8\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"courtesy_name_match\", \"contextual_identification\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [], \"explanation\": \"逸少 is the courtesy name of 王羲之. The main text says '訪之乃是逸少' (they inquired and it was 逸少), and the Liu annotation confirms '逸少羲之小字羲之' and '王氏譜曰逸少羲之'. The candidate 王羲之 matches this courtesy name.\"}, {\"mention_id\": \"sfh1-mention-79a6e6672d78c23ef1f4696d\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-06-yaliang-019-liu-annotation-001\", \"sfh1-candidate-evidence-06c3541f537f7b71946c\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"canonical_name_match\", \"contextual_identification\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [], \"explanation\": \"The Liu annotation states '妻太傅郗鑒女' (the wife is the daughter of Grand Tutor 郗鑒). The mention surface 郗鑒 directly matches the candidate 郗鑒's canonical name.\"}, {\"mention_id\": \"sfh1-mention-92c9d6bfe6f5902e31d8479b\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-06-yaliang-019-main\", \"sfh1-candidate-evidence-3980194066ab3de841e8\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"office_title_match\", \"contextual_identification\"]}, {\"candidate_key\": \"c1\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-06-yaliang-019-main\"], \"reason_types\": [\"contextual_mismatch\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [], \"explanation\": \"王丞相 in this story refers to 王導. The story is about 郗太傅 (郗鑒) sending a messenger to 王丞相 to seek a son-in-law, and the son-in-law turns out to be 王羲之 (逸少), who is 王導's nephew. The candidate c0 (王導) is the correct referent. Candidate c1 (王隱) is a different person who also held the office of 丞相 but is not the referent in this context.\"}, {\"mention_id\": \"sfh1-mention-f9b506a278d1a52e2af72e12\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-06-yaliang-019-main\", \"sfh1-ev-06-yaliang-019-liu-annotation-001\", \"sfh1-candidate-evidence-17a5bfe75a0d663e200b\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"honorific_match\", \"contextual_identification\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [], \"explanation\": \"郗公 is an honorific reference to 郗太傅 (郗鑒). The main text says '郗公云正此好' where 郗公 refers to the same person as 郗太傅 at the start of the story. The Liu annotation confirms the Grand Tutor is 郗鑒. The candidate 郗鑒 matches.\"}]}",
+              "name": "submit_sfh1_identity_judgments"
+            },
+            "id": "call_00_8Q7mOuMwOuAhukhMmL806063",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787989218,
+  "id": "57aa558c-ff8d-4121-8a21-f549007830c3",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 1076,
+    "prompt_cache_hit_tokens": 640,
+    "prompt_cache_miss_tokens": 2056,
+    "prompt_tokens": 2696,
+    "prompt_tokens_details": {
+      "cached_tokens": 640
+    },
+    "total_tokens": 3772
+  }
+}

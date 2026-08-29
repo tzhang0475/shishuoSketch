@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"reviews\": [{\"mention_id\": \"sfh1-mention-93c7ce0872df67b8e987d7ac\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-161cd374dddc2584388b\", \"sfh1-ev-10-guizhen-012-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"canonical_name_match\", \"contextual_role_match\"], \"explanation\": \"The mention 謝鯤 appears as the full name in the main text '謝鯤爲豫章太守從大將軍下至石頭'. The candidate evidence from data/people.json confirms 謝鯤 as a canonical person. The main text explicitly names 謝鯤 as 豫章太守 following 大將軍, matching the candidate's identity. No contradicting evidence exists.\"}, {\"mention_id\": \"sfh1-mention-b0db3dd2889c273819991fb6\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-c291072f5de252489d76\", \"sfh1-ev-10-guizhen-012-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"anaphoric_reference\", \"personal_name_match\"], \"explanation\": \"The mention 鯤 is the personal name of 謝鯤, appearing in the same sentence as the full name 謝鯤 ('謝鯤爲豫章太守...敦謂鯤曰'). The main text clearly uses 鯤 as a short form referring back to 謝鯤. The candidate evidence from the source text confirms this anaphoric usage. No ambiguity or competing referent is present.\"}, {\"mention_id\": \"sfh1-mention-bb45f11d3cd3dd866198d3a8\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-a9a8d6af9b43a77bae95\", \"sfh1-ev-10-guizhen-012-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"contextual_role_match\", \"office_title_match\"], \"explanation\": \"The mention 豫章太守 refers to the office holder. The main text explicitly states '謝鯤爲豫章太守', directly linking the office title to 謝鯤. The candidate evidence from data/people.json confirms 謝鯤 as the person. The office title is unambiguously attributed to 謝鯤 in the source text.\"}, {\"mention_id\": \"sfh1-mention-d7b9b94d9285bd7339ef1bec\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-486ca48b55c6bba8dcf7\", \"sfh1-ev-10-guizhen-012-main\", \"sfh1-ev-10-guizhen-012-liu-annotation-004\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"anaphoric_reference\", \"contextual_role\", \"name_match\"], \"explanation\": \"The mention 君 is the second-person pronoun used by Wang Dun (敦) addressing Xie Kun (鯤) in the dialogue. The main text shows 敦 speaking to 鯤, and the Liu annotation (sfh1-ev-10-guizhen-012-liu-annotation-004) confirms the dialogue context where 敦 addresses 鯤 with 君. The candidate evidence from the source text supports this reading. The pronoun unambiguously refers to 謝鯤 as the addressee.\"}]}",
+              "name": "submit_sfh1_adversarial_reviews"
+            },
+            "id": "call_00_uo4hMyX7riAOZo9MB8cM2597",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787999410,
+  "id": "34c800ba-e9c5-4507-b39c-c06d9b787955",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 874,
+    "prompt_cache_hit_tokens": 512,
+    "prompt_cache_miss_tokens": 2554,
+    "prompt_tokens": 3066,
+    "prompt_tokens_details": {
+      "cached_tokens": 512
+    },
+    "total_tokens": 3940
+  }
+}

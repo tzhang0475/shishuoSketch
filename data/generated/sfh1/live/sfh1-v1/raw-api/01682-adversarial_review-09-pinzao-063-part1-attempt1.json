@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"reviews\": [{\"mention_id\": \"sfh1-mention-5bb2371849b54e407a64c88f\", \"candidate_key\": \"c0\", \"verdict\": \"reject\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-9c077e89a94f0cdf8011\"], \"contradicting_evidence_ids\": [\"sfh1-ev-09-pinzao-063-main\"], \"reason_types\": [\"alias_registry_match\", \"contextual_fit\"], \"explanation\": \"The proposed resolution identifies the surface form 康伯 as 韓伯 (韓康伯) based solely on an alias registry entry that maps 康伯 to 韓伯's courtesy name. However, the supporting evidence (sfh1-candidate-evidence-9c077e89a94f0cdf8011) is a fragment from a 說林 annotation quoting 范啓, and it is not clear that this fragment pertains to the same 康伯 in the main text. The main text (sfh1-ev-09-pinzao-063-main) is from 品藻 (Pinzao) chapter, where 庾道季 (庾龢) is speaking about people he admires. The Liu annotation (sfh1-ev-09-pinzao-063-liu-annotation-001) only glosses 庾道季 as 庾龢, providing no confirmation that 康伯 here refers to 韓康伯. The alias registry match is a generic courtesy-name mapping and does not specifically confirm that this particular occurrence of 康伯 in this passage refers to 韓伯. There could be other individuals with 康伯 as a courtesy name, or the reference could be to a different person entirely. The reference semantics explicitly state 'candidate_only' with 'low' confidence and 'uncertain' semantic type, and no anchor mentions or coreference chains support the identification. The evidence supplied does not specifically support identity between this mention and 韓伯; it only shows that 康伯 is a courtesy name that could belong to 韓伯. This is insufficient for a positive identification.\"}]}",
+              "name": "submit_sfh1_adversarial_reviews"
+            },
+            "id": "call_00_1QBtTaN9GHo5FnbKVGpk5069",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787989874,
+  "id": "306e8324-6ea2-41fd-a9a5-d9e53ea1abaf",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 502,
+    "prompt_cache_hit_tokens": 512,
+    "prompt_cache_miss_tokens": 496,
+    "prompt_tokens": 1008,
+    "prompt_tokens_details": {
+      "cached_tokens": 512
+    },
+    "total_tokens": 1510
+  }
+}

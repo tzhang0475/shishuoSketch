@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"judgments\": [{\"mention_id\": \"sfh1-mention-be9178ccbe73816c83e380a5\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-01-dexing-017-liu-annotation-002\"], \"reason_types\": [\"wrong_person\"]}, {\"candidate_key\": \"c1\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-01-dexing-017-liu-annotation-002\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"title_office_holder\", \"name_alias_match\"]}], \"preferred_candidate_key\": \"c1\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [\"王戎\", \"濬沖\"], \"explanation\": \"安豐侯 is the enfeoffment title of Wang Rong (王戎). The annotation states '封安豐侯' (enfeoffed as Marquis of Anfeng). Candidate c1 is 王戎 (courtesy name 濬沖), who is the holder of this title. Candidate c0 is 王恭, which is a different person and contradicts the title holder.\"}, {\"mention_id\": \"sfh1-mention-c0dbf758e6878d9f8ca3feb5\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-01-dexing-017-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"canonical_name_match\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [], \"explanation\": \"王戎 appears as the full name at the start of the main text. Candidate c0 is the existing person 王戎 (Wang Rong), matching the canonical name directly. The main text describes 王戎 as one of two people mourning their parents, consistent with the historical Wang Rong.\"}, {\"mention_id\": \"sfh1-mention-dd3d533af12d8fd09da9a156\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-01-dexing-017-liu-annotation-001\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"canonical_name_match\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [], \"explanation\": \"裴楷 appears in the annotation as the full name of Pei Kai, recommended by 鍾㑹. Candidate c0 is the local candidate person 裴楷, matching the name directly in the annotation text.\"}]}",
+              "name": "submit_sfh1_identity_judgments"
+            },
+            "id": "call_00_6jiiu3UvUM0452WstzRM3117",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787998436,
+  "id": "a77ec619-5a47-4b37-bfd7-8ee8476237d5",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 701,
+    "prompt_cache_hit_tokens": 640,
+    "prompt_cache_miss_tokens": 2519,
+    "prompt_tokens": 3159,
+    "prompt_tokens_details": {
+      "cached_tokens": 640
+    },
+    "total_tokens": 3860
+  }
+}

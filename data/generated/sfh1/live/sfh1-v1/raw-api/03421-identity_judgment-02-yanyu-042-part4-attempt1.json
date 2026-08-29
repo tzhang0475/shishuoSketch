@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"judgments\": [{\"mention_id\": \"sfh1-mention-81b91cb4ff9e972f6ff797ea\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-02-yanyu-042-main\", \"sfh1-ev-02-yanyu-042-liu-annotation-002\", \"sfh1-ev-02-yanyu-042-liu-annotation-003\", \"sfh1-ev-02-yanyu-042-liu-annotation-004\", \"sfh1-ev-02-yanyu-042-liu-annotation-006\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"canonical_name_match\", \"contextual_role_match\", \"historical_figure\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [\"王敦\", \"敦\"], \"explanation\": \"王敦 is the well-known Jin dynasty general and warlord. The main text describes 摯瞻 addressing 王敦, and the annotations repeatedly refer to 敦 (Wang Dun) as the 大將軍 (General-in-Chief) whom 瞻 served under as 户曹叅軍. The candidate c0 is the existing person 王敦, matching the historical figure referenced in the text.\"}, {\"mention_id\": \"sfh1-mention-99e17ebf799a7e9f21c252f0\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-02-yanyu-042-liu-annotation-005\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"contextual_role_match\", \"local_anaphoric_reference\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [\"摯瞻\", \"瞻\"], \"explanation\": \"亮 in annotation-005 (亮有氣節故以此) refers to 瞻 (摯瞻), who is described as having 氣節 (moral integrity). The candidate c0 is the local person 亮, which is the single-character form used in the annotation to refer to 摯瞻. The semantic record confirms this is a local anaphoric reference to Zhi Zhan.\"}, {\"mention_id\": \"sfh1-mention-b65b323a42428a69d359c630\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-02-yanyu-042-liu-annotation-005\", \"sfh1-ev-02-yanyu-042-liu-annotation-001\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"canonical_name_match\", \"contextual_role_match\", \"local_anaphoric_reference\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [\"摯瞻\", \"瞻景游\"], \"explanation\": \"瞻 in annotation-005 (摯氏世本曰瞻髙亮有氣節故以此) refers to 摯瞻, whose personal name is 瞻. Annotation-001 identifies 瞻 as 摯瞻 (字景游, 京兆長安人). The candidate c0 is the local person 瞻, matching the historical referent 摯瞻.\"}, {\"mention_id\": \"sfh1-mention-cc9ab0bdbbf7c28accadaada\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-02-yanyu-042-liu-annotation-006\", \"sfh1-ev-02-yanyu-042-liu-annotation-008\"], \"reason_types\": [\"name_mismatch\", \"historical_identity_mismatch\"]}], \"preferred_candidate_key\": null, \"resolution\": \"candidate_missing\", \"alternative_search_surfaces\": [\"甘茂\", \"秦相茂\", \"茂\"], \"explanation\": \"茂 in annotation-008 (賜以甘茂田宅) refers to 甘茂 (Gan Mao), the Qin chancellor and grandfather of 甘羅. The supplied candidate c0 is 張華 (Zhang Hua), which is a completely different historical figure. The candidate set lacks the correct referent 甘茂. The semantic record confirms 茂 corefers with 秦相茂 (sfh1-mention-f71cb69bb29aad8b2ec92c74), the grandfather of Gan Luo, not Zhang Hua.\"}]}",
+              "name": "submit_sfh1_identity_judgments"
+            },
+            "id": "call_00_TjD1TH4iLtHrKeBZeHZx7871",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787998555,
+  "id": "252e3ae0-9f04-47d4-84c8-0e3213d1f0f7",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 1111,
+    "prompt_cache_hit_tokens": 640,
+    "prompt_cache_miss_tokens": 2779,
+    "prompt_tokens": 3419,
+    "prompt_tokens_details": {
+      "cached_tokens": 640
+    },
+    "total_tokens": 4530
+  }
+}

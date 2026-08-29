@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"judgments\": [{\"mention_id\": \"sfh1-mention-6c238b1f9e12475fd79e41eb\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-f32988dcba4054e01192\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"office_title_matches\", \"contextual_fit\"]}, {\"candidate_key\": \"c1\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-candidate-evidence-f5493d06f78dac22bfe1\"], \"reason_types\": [\"wrong_person\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [\"王導\"], \"explanation\": \"王丞相 (Chancellor Wang) in the main text refers to Wang Dao (王導). The candidate c0 matches 王丞相 to 王導 via the office title alias registry, and the context of the story (Wang Dao commenting on Xie Renzu and He Cidao) fits Wang Dao's historical role. Candidate c1 maps 王丞相 to 王隱, which is incorrect for this context.\"}, {\"mention_id\": \"sfh1-mention-74f759396e47158ab0bba44e\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-e19e3ec5f315893362bf\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"contextual_title\", \"coreference_with_main_text\"]}, {\"candidate_key\": \"c1\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-candidate-evidence-f6df03e8ee181219a9e5\"], \"reason_types\": [\"wrong_person\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [\"王導\"], \"explanation\": \"王公 in the Liu annotation refers to Wang Dao (王導), the same person as 王丞相 in the main text. The annotation states 王公重何充 (Wang Gong valued He Chong), which is consistent with Wang Dao. Candidate c0 correctly maps 王公 to 王導. Candidate c1 maps to 王隱 which is incorrect.\"}, {\"mention_id\": \"sfh1-mention-a7826ec6d6e4fe6b82b25283\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-d818c27b5029abcbf8ce\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"surname_plus_courtesy_name\", \"coreference_with_main_text\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [\"謝尚\", \"謝仁祖\"], \"explanation\": \"謝 in the Liu annotation refers to Xie Renzu (謝仁祖), i.e., Xie Shang (謝尚). The annotation compares He with Xie, and the coreference with 謝仁祖 in the main text confirms this. Candidate c0 correctly maps 謝仁祖 to 謝尚.\"}, {\"mention_id\": \"sfh1-mention-bec095cd655a7024a824403f\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-992aca9fba053704fa05\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"canonical_name_match\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [\"何次道\"], \"explanation\": \"何充 is a full name reference to He Chong. The candidate c0 matches the canonical name 何充 from people.json. The annotation mentions 王公重何充 (Wang Gong valued He Chong), and this is the same He Chong as 何次道 in the main text.\"}, {\"mention_id\": \"sfh1-mention-cbc546f748e8709552136ba8\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-4fc4ef15af25f7290ad9\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"surname_plus_courtesy_name\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [\"謝尚\"], \"explanation\": \"謝仁祖 is a full name reference to Xie Renzu (Xie Shang). The candidate c0 correctly maps 謝仁祖 to 謝尚 via the alias registry. This is the same person referenced as 謝 in the Liu annotation.\"}, {\"mention_id\": \"sfh1-mention-dc060b56e574e52e1dc3d8d5\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-9bc8a193581e32796eaa\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"surname_plus_courtesy_name\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [\"何充\"], \"explanation\": \"何次道 is a full name reference to He Cidao (He Chong). The candidate c0 correctly maps 何次道 to 何充 via the alias registry. This is the same person as 何充 in the Liu annotation.\"}]}",
+              "name": "submit_sfh1_identity_judgments"
+            },
+            "id": "call_00_MK2inMp7zZQdUWntaG0V9495",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787981286,
+  "id": "d9657e85-ab42-439f-9deb-a5e7d263c4ba",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 1410,
+    "prompt_cache_hit_tokens": 640,
+    "prompt_cache_miss_tokens": 3161,
+    "prompt_tokens": 3801,
+    "prompt_tokens_details": {
+      "cached_tokens": 640
+    },
+    "total_tokens": 5211
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"reviews\": [{\"mention_id\": \"sfh1-mention-2164efbf9d8a34b1f5dd2159\", \"candidate_key\": \"c0\", \"verdict\": \"reject\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-06-yaliang-027-main\"], \"reason_types\": [\"contextual_identity\"], \"explanation\": \"The mention surface is simply '王' (Wang), and the candidate is 王恭 (Wang Gong). The candidate evidence is a single character '王' from a source that is not the main text of this story. The main text mentions 王坦之 (Wang Tanzhi), not 王恭. The surface '王' in the main text context refers to 王坦之, as the text says '呼謝安王坦之入' and later '王直擲還'. There is no evidence that this mention refers to 王恭. The supporting evidence cited (sfh1-ev-06-yaliang-027-main) actually shows 王坦之 in context, not 王恭. The candidate evidence is just the single character '王' which is insufficient to establish identity with 王恭.\"}, {\"mention_id\": \"sfh1-mention-2c692e6ba4a03838c0788d7c\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-06-yaliang-027-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"canonical_name_match\"], \"explanation\": \"The mention surface is '謝安' and the candidate is 謝安. The main text explicitly mentions '謝安' in the story: '呼謝安王坦之入'. The canonical name matches exactly, and the context (桓宣武 discussing court affairs with 郗超, calling in 謝安 and 王坦之) is consistent with the historical 謝安. The candidate evidence from data/people.json confirms 謝安 as a canonical person. This is a straightforward canonical name match.\"}, {\"mention_id\": \"sfh1-mention-31e840cb73398b66e41e5d2a\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-06-yaliang-027-main\", \"sfh1-ev-06-yaliang-027-liu-annotation-002\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"contextual_identity\"], \"explanation\": \"The mention surface is '温' and the candidate is 桓溫. The main text mentions '宣武' (桓溫's posthumous title) multiple times, and the Liu annotation (sfh1-ev-06-yaliang-027-liu-annotation-002) explicitly discusses 温 (桓溫) in the context of 郗超's relationship with him: '結温亦深相器重故潜謀密計莫不預焉'. The annotation directly references 温 in connection with the story's events. The candidate evidence from the Liu annotation source also matches. The hard veto on c1 (explicit_identity_contradiction) further supports that c0 is the correct resolution.\"}, {\"mention_id\": \"sfh1-mention-dbc2e81c4ab369462c4e0cdd\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-06-yaliang-027-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"alias_registry_match\"], \"explanation\": \"The mention surface is '桓宣武' and the candidate is 桓溫. The main text opens with '桓宣武與郗超議芟夷朝臣' and uses '宣武' throughout. 桓宣武 is the well-known posthumous title (posthumous name) of 桓溫. The alias registry evidence confirms this mapping. The main text context is fully consistent with 桓溫's historical role in the Eastern Jin court. This is a solid alias registry match.\"}]}",
+              "name": "submit_sfh1_adversarial_reviews"
+            },
+            "id": "call_00_PtPB7NQb6DD5qC1Mc9bI2429",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787981046,
+  "id": "a2d44b25-f9ac-413a-8d9f-c3f2e1ae4ba0",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 953,
+    "prompt_cache_hit_tokens": 512,
+    "prompt_cache_miss_tokens": 1202,
+    "prompt_tokens": 1714,
+    "prompt_tokens_details": {
+      "cached_tokens": 512
+    },
+    "total_tokens": 2667
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"reviews\": [{\"mention_id\": \"sfh1-mention-e087f02bc8d168d6aaf7ba63\", \"candidate_key\": \"c0\", \"verdict\": \"reject\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-08-shangyu-022-main\"], \"reason_types\": [\"reference_semantics\", \"explicit_distinctness\", \"candidate_evidence_insufficient\"], \"explanation\": \"The proposed resolution identifies 真長 as 劉惔 (Liu Dan/Tan), but the supplied evidence does not support this. The candidate evidence (sfh1-candidate-evidence-946e8113ec5f86a53912) is from data/aliases.json and merely shows that 真長 is a courtesy name used in a different passage (于寳向劉真長叙其搜神記), which is unrelated to the current mention. The main text (sfh1-ev-08-shangyu-022-main) states '宏真長祖也' — meaning 宏 is 真長's ancestor. The text identifies 宏 as one of the three 嘏 brothers (劉粹字純嘏, 宏字終嘏, 漠字沖嘏), who are 王安豐's nephews and sons-in-law. The Liu annotation (sfh1-ev-08-shangyu-022-liu-annotation-003) explicitly notes '宏漠非王氏甥' (宏 and 漠 are not Wang's nephews), and the annotation (sfh1-ev-08-shangyu-022-liu-annotation-001) identifies 宏 as 沛國人 who served as 祕書. The 劉惔 (Liu Zhenchang) of the 于寳 anecdote is a different person from the 真長 whose ancestor is 宏 in this passage. The candidate evidence does not establish that the 真長 in this mention is 劉惔; it only shows that 真長 is a courtesy name that could refer to 劉惔 in a different context. The reference semantics explicitly state this is the object of a kinship relation (宏真長祖也), and the candidate evidence provides no genealogical or biographical link connecting this 真長 to 劉惔. The mention is explicitly distinct from another mention (sfh1-mention-37bf994b07359b5fa79f4860), and the candidate evidence is merely an alias-registry match without substantive identity support for this specific context.\"}]}",
+              "name": "submit_sfh1_adversarial_reviews"
+            },
+            "id": "call_00_4Aw9SRViy31TG7f9xjgQ0470",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787989567,
+  "id": "cb590da9-b067-4847-8fef-20b8e1a67d94",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 581,
+    "prompt_cache_hit_tokens": 512,
+    "prompt_cache_miss_tokens": 1036,
+    "prompt_tokens": 1548,
+    "prompt_tokens_details": {
+      "cached_tokens": 512
+    },
+    "total_tokens": 2129
+  }
+}

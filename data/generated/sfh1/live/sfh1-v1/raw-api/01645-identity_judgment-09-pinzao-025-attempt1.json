@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"judgments\": [{\"mention_id\": \"sfh1-mention-1c73bf153ddad053c9bda36b\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-09-pinzao-025-main\"], \"reason_types\": [\"wrong_person\"]}, {\"candidate_key\": \"c1\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-09-pinzao-025-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"name_match\", \"contextual_match\"]}], \"preferred_candidate_key\": \"c1\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [], \"explanation\": \"The mention 温 is the surname abbreviation for 温太真, who is identified as 温嶠 (Wen Qiao). The text says 温常失色 referring to the same person as 温太真 in the preceding clause. Candidate c1 (温嶠) matches this person. Candidate c0 (桓溫) is a different person with the same surname character 温 but is not the referent here.\"}, {\"mention_id\": \"sfh1-mention-31d7953d6de25c3b152bc0e8\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-09-pinzao-025-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"name_match\", \"contextual_match\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [], \"explanation\": \"The mention 温太真 refers to Wen Tai-zhen, whose full name is 温嶠 (Wen Qiao). The alias registry maps 温太真 to 温嶠. The text discusses 温太真 as a person of the second rank among those who crossed the river, and the Liu annotation confirms the 温 surname lineage. Candidate c0 (温嶠) is the correct referent.\"}]}",
+              "name": "submit_sfh1_identity_judgments"
+            },
+            "id": "call_00_LaL6EF9s37lRvw4U8Xw24250",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787989787,
+  "id": "ab0c94a9-d509-4aae-8da7-f65deb46a30b",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 543,
+    "prompt_cache_hit_tokens": 640,
+    "prompt_cache_miss_tokens": 1197,
+    "prompt_tokens": 1837,
+    "prompt_tokens_details": {
+      "cached_tokens": 640
+    },
+    "total_tokens": 2380
+  }
+}

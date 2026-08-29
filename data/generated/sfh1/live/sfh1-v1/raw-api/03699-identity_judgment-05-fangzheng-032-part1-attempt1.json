@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"judgments\": [{\"mention_id\": \"sfh1-mention-22176d8b97c5f778c8da5d98\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-05-fangzheng-032-main\", \"sfh1-ev-05-fangzheng-032-liu-annotation-001\", \"sfh1-ev-05-fangzheng-032-liu-annotation-002\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"name_match\", \"contextual_role_match\", \"coreference_chain\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [\"王敦\"], \"explanation\": \"敦 in the Liu annotation '敦欲廢明' refers to 王敦 (Wang Dun), the general who wanted to depose Emperor Ming. The main text describes 王敦 wanting to depose the Crown Prince, and the annotation confirms this. The candidate 王敦 matches perfectly.\"}, {\"mention_id\": \"sfh1-mention-246e3c7ed1765e8b9f477ba0\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-05-fangzheng-032-main\"], \"reason_types\": [\"wrong_person\"]}, {\"candidate_key\": \"c1\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-05-fangzheng-032-main\", \"sfh1-ev-05-fangzheng-032-liu-annotation-002\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"contextual_role_match\", \"coreference_chain\"]}], \"preferred_candidate_key\": \"c1\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [\"温嶠\", \"温太真\"], \"explanation\": \"小人 is 温嶠's humble self-reference in his reply to 王敦. The main text shows 温 replying to 王敦's question about the Crown Prince, saying '小人無以測君子'. The annotation mentions 嶠 (温嶠) in '事嶠既正言'. Candidate c1 (温嶠) is correct; c0 (桓溫) is a different person.\"}, {\"mention_id\": \"sfh1-mention-44286cbe578954d4fddb27d2\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-05-fangzheng-032-main\", \"sfh1-ev-05-fangzheng-032-liu-annotation-001\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"name_match\", \"contextual_role_match\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [\"王敦\"], \"explanation\": \"敦 in the Liu annotation '敦欲廢明' refers to 王敦 (Wang Dun), the general who wanted to depose Emperor Ming. The main text describes 王敦's intent to depose the Crown Prince, and the annotation confirms this identification.\"}, {\"mention_id\": \"sfh1-mention-96a6e2c5f6528379ff0d17df\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-05-fangzheng-032-main\", \"sfh1-ev-05-fangzheng-032-liu-annotation-002\"], \"reason_types\": [\"wrong_person\"]}, {\"candidate_key\": \"c1\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-05-fangzheng-032-main\", \"sfh1-ev-05-fangzheng-032-liu-annotation-002\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"contextual_role_match\", \"office_title_match\", \"coreference_chain\"]}], \"preferred_candidate_key\": \"c1\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [\"温嶠\", \"温太真\"], \"explanation\": \"温司馬 refers to 温嶠 (Wen Qiao) who held the office of 司馬 under 王敦. The main text states '後爲吾司馬' (later became my Sima), and the annotation says '温司馬昔在東宫'. The office holder is 温嶠, not 桓溫. Candidate c1 (温嶠) is correct.\"}]}",
+              "name": "submit_sfh1_identity_judgments"
+            },
+            "id": "call_00_qztDPQCEc8me9ZREoOkt1020",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787998964,
+  "id": "47ce00c1-4a32-450c-b257-4fb327032ffc",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 1140,
+    "prompt_cache_hit_tokens": 896,
+    "prompt_cache_miss_tokens": 2363,
+    "prompt_tokens": 3259,
+    "prompt_tokens_details": {
+      "cached_tokens": 896
+    },
+    "total_tokens": 4399
+  }
+}

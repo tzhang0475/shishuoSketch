@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"reviews\": [{\"mention_id\": \"sfh1-mention-b7fa0cfe3a9adede2203cacf\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-07-shijian-005-main\", \"sfh1-ev-07-shijian-005-liu-annotation-001\", \"sfh1-ev-07-shijian-005-liu-annotation-002\", \"sfh1-ev-07-shijian-005-liu-annotation-003\", \"sfh1-ev-07-shijian-005-liu-annotation-004\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"contextual_role_match\", \"office_title_match\", \"explicit_name_match\"], \"explanation\": \"The mention surface is 僕射 (Puye, an office title), and the main text explicitly states 僕射羊祜 (Puye Yang Hu), directly linking the office title to the person 羊祜. The candidate is 羊祜, and the main text names him explicitly in the same clause. Multiple Liu annotations also reference 羊祜 (e.g., 見所繼從舅羊祜, 祜不然之, 祜顧謂賔, 羊祜以軍法欲斬王戎, 稱羊公之有德), consistently identifying the same person. The office title 僕射 matches Yang Hu's known role. The evidence specifically supports the identity of the 僕射 mentioned as being 羊祜.\"}, {\"mention_id\": \"sfh1-mention-bf46645b087fd5a596d41f32\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-07-shijian-005-main\", \"sfh1-ev-07-shijian-005-liu-annotation-001\", \"sfh1-ev-07-shijian-005-liu-annotation-002\", \"sfh1-ev-07-shijian-005-liu-annotation-003\", \"sfh1-ev-07-shijian-005-liu-annotation-004\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"canonical_name_match\", \"contextual_role_match\", \"explicit_name_match\"], \"explanation\": \"The mention surface is 羊祜, which is the exact canonical name of the candidate. The main text explicitly names 羊祜 as the person who says 亂天下者必此子也. Multiple Liu annotations consistently reference 羊祜 (or 祜) in the same narrative context, including 見所繼從舅羊祜, 祜不然之, 祜顧謂賔, 羊祜以軍法欲斬王戎, and 稱羊公之有德. The candidate evidence from people.json provides the canonical name. The evidence specifically supports the identity of this 羊祜 as the historical figure Yang Hu.\"}]}",
+              "name": "submit_sfh1_adversarial_reviews"
+            },
+            "id": "call_00_pV7qmt27mf7ecxY45E5T4702",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787989406,
+  "id": "dbe5cce2-faed-45dc-802e-b5d389530214",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 696,
+    "prompt_cache_hit_tokens": 512,
+    "prompt_cache_miss_tokens": 1042,
+    "prompt_tokens": 1554,
+    "prompt_tokens_details": {
+      "cached_tokens": 512
+    },
+    "total_tokens": 2250
+  }
+}

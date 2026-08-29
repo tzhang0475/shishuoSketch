@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"reviews\": [{\"mention_id\": \"sfh1-mention-2a75be2b7a53dae4149782db\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-02-yanyu-071-liu-annotation-004\", \"sfh1-ev-02-yanyu-071-liu-annotation-005\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"abbreviated_name_match\", \"identity_assertion\"], \"explanation\": \"The mention 恩 is the abbreviated single-character form of 孫恩. Annotation 004 explicitly states '孫恩之攻㑹稽' (Sun En attacked Kuaiji), and annotation 005 continues '遂為恩所害' (was harmed by En), where 恩 clearly refers back to 孫恩. The abbreviation is contextually unambiguous within the annotation text, and the supporting evidence directly ties the abbreviated form to the full name.\"}, {\"mention_id\": \"sfh1-mention-361bf0c661dee73e0852fa40\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-02-yanyu-071-liu-annotation-003\", \"sfh1-ev-02-yanyu-071-liu-annotation-004\", \"sfh1-ev-02-yanyu-071-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"full_name_match\", \"identity_assertion\"], \"explanation\": \"The mention 王凝之 appears in the main text as '左將軍王凝之妻也' (wife of General Wang Ningzhi). Annotation 003 provides the courtesy name 叔平 and identifies him via 王氏譜, and annotation 004 explicitly names 凝之 as the person attacked by 孫恩. The full name match is exact and the main text directly names him as the husband of Xie Daoyun. The low confidence in the semantic record is a system artifact, not evidence against identity.\"}, {\"mention_id\": \"sfh1-mention-605ad466113df03ab247735b\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-02-yanyu-071-liu-annotation-003\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"contextual_identity\", \"name_match\"], \"explanation\": \"The mention 叔平 is the courtesy name (字) of 王凝之. Annotation 003 reads '(叔平右將軍羲之/王氏譜曰凝之字)' which explicitly states that 凝之's courtesy name is 叔平 and identifies him as the son of 羲之 (Wang Xizhi) holding the rank of 右將軍. The alias registry evidence directly links 叔平 to 王凝之. The courtesy name is used in the annotation to identify the same person named in the main text.\"}, {\"mention_id\": \"sfh1-mention-75995b41e5a4653426e76629\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-02-yanyu-071-liu-annotation-004\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"contextual_identity\", \"name_match\"], \"explanation\": \"The mention 孫恩 is a full personal name appearing in annotation 004: '孫恩之攻㑹稽' (Sun En attacked Kuaiji). This is the rebel leader Sun En who attacked Kuaiji and harmed Wang Ningzhi, as confirmed by the continuation in annotation 005. The full name match is exact and the contextual evidence directly supports this identification.\"}]}",
+              "name": "submit_sfh1_adversarial_reviews"
+            },
+            "id": "call_00_9AWHVyvzaat4JAnqGWSV8473",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787998668,
+  "id": "578eae03-6893-4745-b980-a67c55a1d527",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 871,
+    "prompt_cache_hit_tokens": 512,
+    "prompt_cache_miss_tokens": 2014,
+    "prompt_tokens": 2526,
+    "prompt_tokens_details": {
+      "cached_tokens": 512
+    },
+    "total_tokens": 3397
+  }
+}

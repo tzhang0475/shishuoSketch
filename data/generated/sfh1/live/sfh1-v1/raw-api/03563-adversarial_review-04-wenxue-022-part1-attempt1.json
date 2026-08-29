@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"reviews\": [{\"mention_id\": \"sfh1-mention-025a13788701a864d35a1923\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-04-wenxue-022-liu-annotation-001\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"annotation_explicit_identification\", \"canonical_name_match\"], \"explanation\": \"The mention surface is 亮, an abbreviated personal name. The Liu annotation (sfh1-ev-04-wenxue-022-liu-annotation-001) explicitly states 浩為亮司馬, identifying 亮 as 庾亮. The candidate evidence from people.json provides the canonical name 庾亮. The annotation explicitly identifies 亮 as 庾亮, and the candidate evidence directly matches the canonical name. This is a direct annotation-based identification, not merely model inference.\"}, {\"mention_id\": \"sfh1-mention-1225942eb0481a88a7ce237b\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-04-wenxue-022-liu-annotation-001\", \"sfh1-ev-04-wenxue-022-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"alias_registry_match\", \"annotation_explicit_identification\"], \"explanation\": \"The mention surface is 庾公, an honorific reference. The main text states 殷中軍為庾公長史, and the Liu annotation (sfh1-ev-04-wenxue-022-liu-annotation-001) explicitly identifies 亮 as 庾亮 in the context of 浩為亮司馬. The candidate evidence from aliases.json provides the contextual title 庾公 for 庾亮. The annotation explicitly links the 庾公 in the main text to 庾亮 through the 浩/亮 relationship. The alias registry match plus the explicit annotation identification together support this resolution.\"}, {\"mention_id\": \"sfh1-mention-25bd5eee73fe9b52c7dae731\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-94f74cd892747c1a89e1\", \"sfh1-ev-04-wenxue-022-liu-annotation-004\", \"sfh1-ev-04-wenxue-022-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"canonical_name_match\", \"historical_identity\"], \"explanation\": \"The mention surface is 王導, the full canonical name. The candidate evidence from people.json directly provides the canonical name 王導. The main text mentions 王丞相 (Wang Dao as Chancellor), and the Liu annotation (sfh1-ev-04-wenxue-022-liu-annotation-004) explicitly states 爲王導所辟, confirming 王導 as the person who recruited 王濛 and 王述. The canonical name match is direct and the annotation provides explicit identification. No contradicting evidence exists.\"}, {\"mention_id\": \"sfh1-mention-40a774c2a824a15cec29e6dd\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-04-wenxue-022-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"alias_registry_match\", \"contextual_identification\"], \"explanation\": \"The mention surface is 桓宣武, a posthumous title. The candidate evidence from aliases.json provides 桓宣武 as a posthumous title for 桓溫. The main text (sfh1-ev-04-wenxue-022-main) mentions 桓宣武 in the context of 桓公語人曰, and the surrounding narrative about 殷王清言 fits the historical context of 桓溫. While the reference_semantics indicates low confidence and no valid semantic record, the alias registry match for the posthumous title 桓宣武 → 桓溫 is well-established historically. The main text provides contextual support. However, I note the reference_semantics shows 'fail closed' with no semantic record — but the alias registry match itself is the primary basis for identification, and 桓宣武 is a uniquely identifying posthumous title for 桓溫 in this period. Accepting on the strength of the alias registry match and historical uniqueness.\"}]}",
+              "name": "submit_sfh1_adversarial_reviews"
+            },
+            "id": "call_00_tcpzpIfUob1m6YSzsYpj4662",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787998754,
+  "id": "484dd93a-a091-415b-b2af-efae84f5d43d",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 1047,
+    "prompt_cache_hit_tokens": 512,
+    "prompt_cache_miss_tokens": 2367,
+    "prompt_tokens": 2879,
+    "prompt_tokens_details": {
+      "cached_tokens": 512
+    },
+    "total_tokens": 3926
+  }
+}

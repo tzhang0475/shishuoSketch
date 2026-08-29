@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"reviews\": [{\"mention_id\": \"sfh1-mention-bf46645b087fd5a596d41f32\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-07-shijian-005-main\", \"sfh1-ev-07-shijian-005-liu-annotation-001\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"canonical_name_match\", \"contextual_role_match\"], \"explanation\": \"The mention surface is 羊祜, which exactly matches the candidate's canonical name. The main text explicitly names 羊祜 as 僕射 (Palace Attendant) in the context of Wang Yifu's visit, and the Liu annotation further identifies 羊祜 as the 從舅 (maternal uncle) of Wang Yifu, confirming this is the historical figure Yang Hu. The candidate evidence (sfh1-candidate-evidence-913d928243b27dc29fb1) provides the canonical name record. The main text and annotation both reference the same person in consistent roles (僕射, 從舅), and there is no contradicting evidence suggesting a different Yang Hu. While the reference semantics returned 'uncertain' with fail-closed behavior, the explicit textual evidence naming 羊祜 in a historically consistent role (serving as 僕射 during the Jin period, contemporary with 山濤 and 王衍) specifically supports this identity resolution.\"}]}",
+              "name": "submit_sfh1_adversarial_reviews"
+            },
+            "id": "call_00_fJLccSdePrxpqkhdpv0f2319",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787999167,
+  "id": "3f149a28-14e3-4949-a461-319af255e597",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 361,
+    "prompt_cache_hit_tokens": 512,
+    "prompt_cache_miss_tokens": 760,
+    "prompt_tokens": 1272,
+    "prompt_tokens_details": {
+      "cached_tokens": 512
+    },
+    "total_tokens": 1633
+  }
+}

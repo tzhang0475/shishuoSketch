@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"reviews\": [{\"mention_id\": \"sfh1-mention-d6824c55407b5e480bd07921\", \"candidate_key\": \"c0\", \"verdict\": \"review_required\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-cccc2a4551f18cce4b52\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"alias_match\", \"narrative_role\"], \"explanation\": \"The proposed resolution identifies 仲祖 as 王濛 based on the courtesy-name alias registry. The source text pairs 劉真長 (Liu Zhenchang, i.e., Liu Tan) with 王仲祖 (Wang Zhongzu) in a narrative where they are traveling together. The courtesy name 仲祖 is indeed the courtesy name of 王濛 (Wang Meng), a well-known Eastern Jin figure who frequently appears alongside Liu Tan in Shishuo Xinyu anecdotes. The narrative role is consistent: both are prominent figures of the same period, and the pairing with 劉真長 is a common pairing in the text. However, the reference_semantics assessment explicitly states 'No valid semantic record was returned; fail closed' and marks confidence as 'low' with semantic_type 'uncertain'. The supporting evidence is only the alias match plus narrative role compatibility. While the alias match is strong (仲祖 is the courtesy name of 王濛), the evidence provided does not contain any biographical details, contextual identifiers, or other distinguishing information that would specifically confirm this particular 仲祖 is 王濛 rather than another person bearing the same courtesy name. The evidence text only shows the two men traveling and declining food from a commoner — nothing uniquely identifies 王濛 beyond the courtesy name itself. Given the explicit 'fail closed' instruction in the reference semantics and the low confidence, this should be flagged for review rather than accepted outright, though the alias match is suggestive.\"}]}",
+              "name": "submit_sfh1_adversarial_reviews"
+            },
+            "id": "call_00_OBLbEDlraAXwjalX6wmS0911",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787989156,
+  "id": "eb4dc56b-a604-4d38-81cc-e1171f686a20",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 447,
+    "prompt_cache_hit_tokens": 512,
+    "prompt_cache_miss_tokens": 601,
+    "prompt_tokens": 1113,
+    "prompt_tokens_details": {
+      "cached_tokens": 512
+    },
+    "total_tokens": 1560
+  }
+}

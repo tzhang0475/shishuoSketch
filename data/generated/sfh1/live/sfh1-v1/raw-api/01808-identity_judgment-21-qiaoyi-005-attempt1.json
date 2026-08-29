@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"judgments\": [{\"mention_id\": \"sfh1-mention-0bfecbe2402e82f0be93af68\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"insufficient\", \"supporting_evidence_ids\": [\"sfh1-ev-21-qiaoyi-005-liu-annotation-001\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"insufficient_evidence_for_identity\"]}], \"preferred_candidate_key\": null, \"resolution\": \"insufficient_evidence\", \"alternative_search_surfaces\": [\"羊忱\"], \"explanation\": \"The mention 忱 refers to a person named 忱 mentioned in the Liu annotation as skilled in cursive script (草書). The annotation cites 文字志 saying '忱性能草書'. The candidate c0 is the surface form 忱 itself, which is just the name as it appears. The annotation context suggests this is likely 羊忱 (a member of the 羊 family), but the supplied candidate c0 provides no additional biographical evidence to confirm the historical identity. The text itself does not provide enough information to definitively identify which historical person named 忱 this refers to beyond the name itself. The candidate is the name surface itself, not an independently identified historical referent, so there is insufficient evidence to confirm or deny the historical identity.\"}]}",
+              "name": "submit_sfh1_identity_judgments"
+            },
+            "id": "call_00_NPLujjLPqpWkb75D36r65674",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787990208,
+  "id": "b97991f9-cfc2-42bd-9eb4-1f76557b468a",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 332,
+    "prompt_cache_hit_tokens": 640,
+    "prompt_cache_miss_tokens": 656,
+    "prompt_tokens": 1296,
+    "prompt_tokens_details": {
+      "cached_tokens": 640
+    },
+    "total_tokens": 1628
+  }
+}

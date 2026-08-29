@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"reviews\": [{\"mention_id\": \"sfh1-mention-2e2c106b06236d1bb518ae71\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-310d528b0895f99bd6a4\", \"sfh1-ev-05-fangzheng-023-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"courtesy_name_match\", \"contextual_role_match\"], \"explanation\": \"The surface form 茂弘 is Wang Dao's courtesy name (字), as explicitly stated in the alias registry evidence: '王導字茂弘'. In the main text, 周侯 says '我常自言勝茂弘今始知不如也', where 茂弘 is used in direct speech referring to Wang Dao (丞相), who is the other person present in the scene. The courtesy name match is explicit and the contextual role (the person Zhou Hou compares himself to, who is the Chancellor) confirms identity.\"}, {\"mention_id\": \"sfh1-mention-d046a27061fefeb68ac108a5\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-05-fangzheng-023-liu-annotation-006\", \"sfh1-ev-05-fangzheng-023-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"canonical_name_match\", \"historical_role_match\"], \"explanation\": \"The surface form 王導 is the canonical name of the person. The Liu annotation (sfh1-ev-05-fangzheng-023-liu-annotation-006) explicitly quotes 王導 speaking about the succession question ('王導曰立子以德不以年'), which matches the role of 丞相 in the main text who argues before the emperor. The canonical name match is direct and unambiguous.\"}, {\"mention_id\": \"sfh1-mention-fc650c3f76b62db8366fd28d\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-f63949b73fde6bc4c4c0\", \"sfh1-ev-05-fangzheng-023-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"alias_registry_match\", \"historical_role_match\"], \"explanation\": \"The surface form 周侯 refers to Zhou Yi (周顗), who held the title of Marquis (侯). The alias registry evidence shows 周侯 used in context. In the main text, 周侯 and 丞相 are explicitly distinguished as two separate people entering together ('先喚周侯丞相入'), and 周侯 is the one who laments '我常自言勝茂弘', confirming he is distinct from Wang Dao. The reference semantics also explicitly state distinctness from 丞相 (sfh1-mention-fe0500aaca15da642026ebcb). The alias registry match for 周侯 → 周顗 is supported by the historical context of the story.\"}, {\"mention_id\": \"sfh1-mention-fe0500aaca15da642026ebcb\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-87743cc49af41aa9cd42\", \"sfh1-ev-05-fangzheng-023-main\", \"sfh1-ev-05-fangzheng-023-liu-annotation-006\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"office_title_match\", \"historical_identity\"], \"explanation\": \"The surface form 丞相 refers to Wang Dao (王導), who held the office of Chancellor. The alias registry evidence explicitly connects 丞相 to 王導. The Liu annotation (sfh1-ev-05-fangzheng-023-liu-annotation-006) shows 王導 giving advice on the succession, matching the role of 丞相 in the main text who confronts the emperor ('不審陛下何以見臣'). The reference semantics explicitly state coreference with 王導 (sfh1-mention-d046a27061fefeb68ac108a5) and distinctness from 周侯. The office title match combined with the historical role in the narrative confirms identity.\"}]}",
+              "name": "submit_sfh1_adversarial_reviews"
+            },
+            "id": "call_00_pI2OWlgeO782tlpkRZ5S5243",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787998939,
+  "id": "06d30988-cf43-4bee-9513-3bd57d33f201",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 1000,
+    "prompt_cache_hit_tokens": 640,
+    "prompt_cache_miss_tokens": 2191,
+    "prompt_tokens": 2831,
+    "prompt_tokens_details": {
+      "cached_tokens": 640
+    },
+    "total_tokens": 3831
+  }
+}

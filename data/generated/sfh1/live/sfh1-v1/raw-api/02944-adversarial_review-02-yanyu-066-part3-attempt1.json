@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"reviews\": [{\"mention_id\": \"sfh1-mention-e3bfe53f18afab582943b23f\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-6bedd56a81de968838d8\", \"sfh1-ev-02-yanyu-066-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"alias_registry\", \"annotation_identity\"], \"explanation\": \"The mention surface 劉真長 is matched to the candidate 劉惔 via the alias registry entry (surname 劉 + courtesy name 真長). The alias registry evidence explicitly identifies 劉真長 as 劉惔 (弘). The main text of story 02-yanyu-066 features 王長史 (王濛) and 劉真長 together, and the Liu Xiaobiao annotations in the same story reference 真長 and 仲祖 (王濛's courtesy name), consistent with the well-known pairing of 王濛 and 劉惔 in Shishuo Xinyu. The alias registry provides direct evidence that 劉真長 is the courtesy name of 劉惔. No contradicting evidence is present. While the reference semantics returned 'uncertain' (fail closed), the alias registry evidence specifically supports the identity resolution, and the annotation layer corroborates the context. Accept.\"}]}",
+              "name": "submit_sfh1_adversarial_reviews"
+            },
+            "id": "call_00_aBIIzJVFgnloxdZiFKZF0846",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787997410,
+  "id": "04bb4508-7c98-4a49-b402-d9d8106ae4f2",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 350,
+    "prompt_cache_hit_tokens": 512,
+    "prompt_cache_miss_tokens": 770,
+    "prompt_tokens": 1282,
+    "prompt_tokens_details": {
+      "cached_tokens": 512
+    },
+    "total_tokens": 1632
+  }
+}

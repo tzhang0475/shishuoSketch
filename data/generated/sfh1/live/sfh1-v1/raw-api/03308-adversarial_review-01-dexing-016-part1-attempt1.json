@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"reviews\": [{\"mention_id\": \"sfh1-mention-0755e0bff85da4f5159300e1\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-ef781a7d6adebf93a11e\", \"sfh1-ev-01-dexing-016-liu-annotation-003\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"contextual_identification\", \"personal_name_matches\"], \"explanation\": \"The mention '康' appears in the 虞預晉書 annotation text '銍有嵇山家於其側因氏焉康'. The candidate evidence from aliases.json explicitly identifies 嵇康 with courtesy name 叔夜, and the annotation context is about the Ji family surname origin, with 康 being Ji Kang's personal name. The surrounding annotation text (annotation-002 and annotation-003) discusses Ji Kang's biography. The reference semantics correctly identifies this as Ji Kang and distinguishes it from 虞預 who is the author of the quoted text. The evidence specifically supports this identity.\"}, {\"mention_id\": \"sfh1-mention-22782d11406203ab994367b9\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-7b7be02f542a8972321d\", \"sfh1-ev-01-dexing-016-liu-annotation-002\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"contextual_identification\", \"personal_name_matches\"], \"explanation\": \"The mention '康' in '康字叔夜' is directly followed by the courtesy name 叔夜, which matches the alias registry entry for 嵇康 (courtesy name 叔夜). The annotation text '康字叔夜譙國銍人' explicitly gives Ji Kang's personal name and courtesy name together. The candidate evidence from aliases.json confirms 嵇康字叔夜. This is a direct personal-name-plus-courtesy-name identification with specific supporting evidence.\"}, {\"mention_id\": \"sfh1-mention-2f27101fa8a9464057f0456a\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-b48fdc732d59717b4c8a\", \"sfh1-ev-01-dexing-016-liu-annotation-002\", \"sfh1-ev-01-dexing-016-liu-annotation-005\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"contextual_identification\", \"full_name_matches\"], \"explanation\": \"The mention '康字叔夜' is a full reference combining personal name 康 with courtesy name 叔夜, which directly matches the alias registry entry for 嵇康 (字叔夜). The annotation text in annotation-002 confirms '康字叔夜譙國銍人', and annotation-005 provides additional biographical details (郎中拜中散大夫, 魏長樂亭主壻) consistent with Ji Kang's known biography. The evidence specifically supports this identification.\"}, {\"mention_id\": \"sfh1-mention-3cf8601d33c46ec8eb6c0486\", \"candidate_key\": \"c0\", \"verdict\": \"reject\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-01-dexing-016-liu-annotation-004\"], \"reason_types\": [\"insufficient_evidence\", \"reference_semantics_uncertain\"], \"explanation\": \"The mention '王濬沖' is proposed to resolve to 王戎 (candidate c0). However, the reference_semantics for this mention explicitly states 'No valid semantic record was returned; fail closed' with semantic_type 'uncertain' and confidence 'low'. The candidate evidence cited (sfh1-candidate-evidence-7a30992945511fa1e988) is from aliases.json and matches '王濬沖' to 王戎 via surname_plus_courtesy_name. While 王濬沖 is indeed Wang Rong's courtesy name, the supplied evidence does not specifically connect this particular mention in the annotation to 王戎. The annotation text (annotation-004) mentions 王濬沖 in the context of 文章叙録 discussing Ji Kang, but the identity resolution lacks specific supporting evidence for this particular mention instance. The reference semantics itself fails closed, indicating the system could not confirm this resolution. Without specific evidence tying this mention to 王戎, the resolution should be rejected or flagged for review.\"}]}",
+              "name": "submit_sfh1_adversarial_reviews"
+            },
+            "id": "call_00_l0JMUWcolj2zRQ5WTg9i5653",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787998404,
+  "id": "96b765da-a29a-4155-9bd6-72183d357799",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 1076,
+    "prompt_cache_hit_tokens": 512,
+    "prompt_cache_miss_tokens": 2952,
+    "prompt_tokens": 3464,
+    "prompt_tokens_details": {
+      "cached_tokens": 512
+    },
+    "total_tokens": 4540
+  }
+}

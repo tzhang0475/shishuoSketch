@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"reviews\": [{\"mention_id\": \"sfh1-mention-95a91d7d34778cd1f35de0ca\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-03-zhengshi-022-liu-annotation-001\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"coreference_with_anchor\", \"descriptive_reference_matches_canonical_person\"], \"explanation\": \"The annotation text '浩字淵源陳郡長平人' directly states that 浩 (Yin Hao) was a person from 陳郡長平. The surface '陳郡長平人' is a descriptive reference to the same person 浩, who is the anchor. The evidence specifically ties the native place to 浩, so the identity resolution is directly supported by the supplied evidence.\"}, {\"mention_id\": \"sfh1-mention-a324fdddd9a4632bf308783d\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-03-zhengshi-022-liu-annotation-002\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"coreference_with_anchor\", \"office_title_holder_matches_canonical_person\"], \"explanation\": \"The annotation text '仕至揚州刺史中軍將軍' states that 浩 (Yin Hao) rose to the offices of 揚州刺史 and 中軍將軍. The surface '中軍將軍' is an office title whose holder is explicitly identified as 浩 in the annotation. The evidence directly supports that the office holder is Yin Hao. The distinct_from mentions (庾亮 and his brother) are correctly distinguished.\"}, {\"mention_id\": \"sfh1-mention-a8b1ca4ab367293836c9a599\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-03-zhengshi-022-liu-annotation-002\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"canonical_name_match\"], \"explanation\": \"The surface '庾亮' is a direct full personal name matching the canonical person 庾亮. The annotation text '建元初庾亮兄' mentions 庾亮 in the context of his brother, but the name itself directly refers to Yu Liang. The evidence supports this identification, and the distinct_from relationships with Yin Hao and Yu Liang's brother are correctly noted.\"}]}",
+              "name": "submit_sfh1_adversarial_reviews"
+            },
+            "id": "call_00_2kAsmCe7L3VdecKuF99q3845",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787998700,
+  "id": "e435c946-0df7-4534-b943-45db4c8f518d",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 600,
+    "prompt_cache_hit_tokens": 512,
+    "prompt_cache_miss_tokens": 1680,
+    "prompt_tokens": 2192,
+    "prompt_tokens_details": {
+      "cached_tokens": 512
+    },
+    "total_tokens": 2792
+  }
+}

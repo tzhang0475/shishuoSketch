@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"reviews\": [{\"mention_id\": \"sfh1-mention-65124b120e824c24150eda05\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-0afe933dc24ad3e894e8\", \"sfh1-ev-06-yaliang-019-liu-annotation-001\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"courtesy_name_match\", \"annotation_corroboration\"], \"explanation\": \"The mention surface is 逸少, which is the courtesy name of 王羲之. The candidate evidence from aliases.json explicitly states 王羲之字逸少, and the Liu annotation confirms 逸少羲之小字羲之, directly linking 逸少 to 王羲之. The main text also says 訪之乃是逸少, identifying the person on the eastern bed as 逸少. The annotation corroborates this identity. No contradicting evidence exists.\"}, {\"mention_id\": \"sfh1-mention-79a6e6672d78c23ef1f4696d\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-06c3541f537f7b71946c\", \"sfh1-ev-06-yaliang-019-liu-annotation-001\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"canonical_name_match\", \"annotation_corroboration\"], \"explanation\": \"The mention surface is 郗鑒, the full canonical name. The candidate evidence from people.json provides the canonical entry for 郗鑒. The Liu annotation states 妻太傅郗鑒, explicitly identifying the Grand Tutor as 郗鑒. The main text refers to 郗太傅 and 郗公, and the annotation confirms these refer to 郗鑒. Direct canonical name match with annotation corroboration.\"}, {\"mention_id\": \"sfh1-mention-cd3cc88413553fcb33cc59dc\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-06c3541f537f7b71946c\", \"sfh1-ev-06-yaliang-019-liu-annotation-001\", \"sfh1-ev-06-yaliang-019-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"canonical_name_match\", \"contextual_role\", \"office_title_identification\"], \"explanation\": \"The mention surface is 郗 (surname abbreviation). The main text uses 郗 as shorthand for 郗太傅, who sends a messenger to Wang the Chancellor. The Liu annotation explicitly identifies 太傅郗鑒, confirming the surname 郗 refers to 郗鑒. The contextual role (father of the bride, Grand Tutor) matches the canonical 郗鑒. The coreference chain links this mention to the full-name mention 郗鑒.\"}, {\"mention_id\": \"sfh1-mention-dfd6e413daea4befb10378c3\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-06c3541f537f7b71946c\", \"sfh1-ev-06-yaliang-019-liu-annotation-001\", \"sfh1-ev-06-yaliang-019-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"canonical_name_match\", \"contextual_role\", \"office_title_identification\"], \"explanation\": \"The mention surface is 郗太傅, an office-holder reference. The Liu annotation explicitly states 妻太傅郗鑒, directly identifying the Grand Tutor (太傅) as 郗鑒. The main text describes 郗太傅 sending a messenger to seek a son-in-law, and the annotation confirms this is 郗鑒. The office title 太傅 combined with the surname 郗 uniquely identifies 郗鑒 in this context.\"}]}",
+              "name": "submit_sfh1_adversarial_reviews"
+            },
+            "id": "call_00_i9oxvbpIxEMZneXuPFoP3441",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787999065,
+  "id": "531317f2-8216-4064-88e0-eb4480e7f0f0",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 969,
+    "prompt_cache_hit_tokens": 640,
+    "prompt_cache_miss_tokens": 2014,
+    "prompt_tokens": 2654,
+    "prompt_tokens_details": {
+      "cached_tokens": 640
+    },
+    "total_tokens": 3623
+  }
+}

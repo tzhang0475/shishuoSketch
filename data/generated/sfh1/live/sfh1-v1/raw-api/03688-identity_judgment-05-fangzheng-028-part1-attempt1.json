@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"judgments\": [{\"mention_id\": \"sfh1-mention-2f0b1265dd1c82b06a9d4e28\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-05-fangzheng-028-main\", \"sfh1-ev-05-fangzheng-028-liu-annotation-002\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"name_match\", \"contextual_identity\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [\"王敦\"], \"explanation\": \"敦 is a surname abbreviation for 王敦. The main text mentions 王敦護其兄 and later 敦黙然, and the annotation-002 explicitly states 敦 (王敦) had different intentions. The candidate 王敦 matches this referent.\"}, {\"mention_id\": \"sfh1-mention-32f252018a97845d3e927ef5\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-05-fangzheng-028-main\", \"sfh1-ev-05-fangzheng-028-liu-annotation-001\", \"sfh1-ev-05-fangzheng-028-liu-annotation-002\"], \"reason_types\": [\"name_mismatch\", \"contextual_identity\"]}], \"preferred_candidate_key\": null, \"resolution\": \"candidate_missing\", \"alternative_search_surfaces\": [\"何充\"], \"explanation\": \"The mention 充 in the annotation refers to 何充 (He Chong), who served as 王敦's 主簿. The supplied candidate is 沈充 (Shen Chong), a different person. The text clearly identifies 充 as 何充 (充爲敦主簿, 充知敦有異志). The correct referent 何充 is not among the supplied candidates.\"}, {\"mention_id\": \"sfh1-mention-47e623920838bdf94441c797\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-05-fangzheng-028-main\", \"sfh1-ev-05-fangzheng-028-liu-annotation-002\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"contextual_identity\", \"kinship_match\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [\"王含\"], \"explanation\": \"其兄 refers to 王敦's elder brother 王含. The main text says 王含作廬江郡...王敦護其兄, and the annotation-002 mentions 敦稱含有惠政, confirming 含 (王含) is the elder brother. The candidate 王含 matches.\"}, {\"mention_id\": \"sfh1-mention-5dab34f8157979045699a929\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-05-fangzheng-028-main\", \"sfh1-ev-05-fangzheng-028-liu-annotation-001\", \"sfh1-ev-05-fangzheng-028-liu-annotation-002\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"name_match\", \"contextual_identity\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [\"王敦\"], \"explanation\": \"王敦 is mentioned by full name in the annotation. The main text and annotations consistently refer to 王敦 as the person whose brother 王含 was protected and who had 何充 as his 主簿. The candidate 王敦 matches.\"}]}",
+              "name": "submit_sfh1_identity_judgments"
+            },
+            "id": "call_00_hizVHDWhKjCmQRwsN8lL1067",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787998946,
+  "id": "f17bac3e-8efb-4ddb-8115-96d75110a3d2",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 958,
+    "prompt_cache_hit_tokens": 896,
+    "prompt_cache_miss_tokens": 1835,
+    "prompt_tokens": 2731,
+    "prompt_tokens_details": {
+      "cached_tokens": 896
+    },
+    "total_tokens": 3689
+  }
+}

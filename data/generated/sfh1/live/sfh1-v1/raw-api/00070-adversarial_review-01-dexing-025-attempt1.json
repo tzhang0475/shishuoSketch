@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"reviews\": [{\"mention_id\": \"sfh1-mention-3d0e675a778b981f70234c95\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-210f94571ca7ad024a3c\", \"sfh1-ev-01-dexing-025-liu-annotation-001\", \"sfh1-ev-01-dexing-025-liu-annotation-002\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"courtesy_name_match\", \"biographical_details_match\"], \"explanation\": \"The mention surface '彦先' is the courtesy name of 顧榮. The candidate evidence from the 晉書 (sfh1-candidate-evidence-210f94571ca7ad024a3c) explicitly states '榮字彦先' (Rong, courtesy name Yanxian), confirming the courtesy name match. The Liu annotation evidence (sfh1-ev-01-dexing-025-liu-annotation-001) also states '榮字彦先吳郡人', and annotation 002 provides matching biographical details: grandfather 雍 was 吳丞相, father 穆 was 宜都太守, and he served as 廷尉正 — all consistent with the 晉書 biography. The main text story about 顧榮 in 洛陽 giving meat to a roaster matches the biographical context. The evidence specifically supports the identity of 顧榮 with courtesy name 彦先.\"}, {\"mention_id\": \"sfh1-mention-5cf87c128d67fa4539624174\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-c31058c15a4272e1688a\", \"sfh1-ev-01-dexing-025-main\", \"sfh1-ev-01-dexing-025-liu-annotation-001\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"canonical_name_match\", \"story_subject_match\"], \"explanation\": \"The mention surface '顧榮' exactly matches the canonical name in the candidate evidence (sfh1-candidate-evidence-c31058c15a4272e1688a). The main text (sfh1-ev-01-dexing-025-main) tells the story of 顧榮 in 洛陽 who gave meat to a roaster, and the Liu annotation (sfh1-ev-01-dexing-025-liu-annotation-001) confirms this is the same 顧榮 with courtesy name 彦先 from 吳郡. The story subject in the main text is explicitly named 顧榮, and the candidate is 顧榮. The evidence directly supports the identity resolution.\"}]}",
+              "name": "submit_sfh1_adversarial_reviews"
+            },
+            "id": "call_00_12FVboyij1VwF6fRQdTv8267",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787980785,
+  "id": "f573fd5e-6693-48cf-aee9-5485f95c69cb",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 651,
+    "prompt_cache_hit_tokens": 512,
+    "prompt_cache_miss_tokens": 1047,
+    "prompt_tokens": 1559,
+    "prompt_tokens_details": {
+      "cached_tokens": 512
+    },
+    "total_tokens": 2210
+  }
+}

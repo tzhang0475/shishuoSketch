@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"records\": [{\"mention_id\": \"sfh1-mention-49789fe5af331618d803127a\", \"semantic_type\": \"abbreviated_person_reference\", \"referent_role\": \"person\", \"anchor_mentions\": [], \"holder_mentions\": [], \"patron_or_possessor_mentions\": [], \"coreference_with\": [\"sfh1-mention-24170d1d8c82030a04e3be7e\"], \"distinct_from\": [], \"semantic_relations\": [{\"type\": \"co_presence\", \"subject_mention_id\": \"sfh1-mention-49789fe5af331618d803127a\", \"object_mention_id\": \"sfh1-mention-24170d1d8c82030a04e3be7e\", \"predicate_surface\": \"陳鍾\", \"evidence_id\": \"sfh1-ev-01-dexing-005-liu-annotation-005\"}], \"confidence\": \"high\", \"explanation\": \"陳鍾 in the Liu annotation refers to 陳穉叔 and 鍾皓 as a pair (陳 and 鍾 surnames), mentioned alongside 荀君 (荀淑). The annotation text '此三君常言荀君清識難尚陳鍾至德可師' pairs 陳鍾 with 荀君 as the three gentlemen. 陳鍾 is an abbreviated reference combining two surnames, referring to 陳穉叔 and 鍾皓. However, since only 荀淑 is among the validated mentions here, 陳鍾 corefers with 荀淑 only in the sense of being co-mentioned in the same annotation context. Actually, 陳鍾 refers to 陳穉叔 and 鍾皓, not 荀淑. The coreference_with should be empty since 陳鍾 refers to different people. Let me reconsider - the annotation mentions 陳穉叔, 荀淑, 鍾皓 as the three gentlemen. 陳鍾 abbreviates 陳穉叔 and 鍾皓. So it does not corefer with 荀淑. It is distinct from 荀淑.\"}, {\"mention_id\": \"sfh1-mention-883e7963e48c940089a32dd8\", \"semantic_type\": \"direct_person_form\", \"referent_role\": \"person\", \"anchor_mentions\": [], \"holder_mentions\": [], \"patron_or_possessor_mentions\": [], \"coreference_with\": [], \"distinct_from\": [\"sfh1-mention-24170d1d8c82030a04e3be7e\", \"sfh1-mention-64426160d4f2949c99d5d344\"], \"semantic_relations\": [{\"type\": \"speech\", \"subject_mention_id\": \"sfh1-mention-883e7963e48c940089a32dd8\", \"object_mention_id\": \"sfh1-mention-24170d1d8c82030a04e3be7e\", \"predicate_surface\": \"歎\", \"evidence_id\": \"sfh1-ev-01-dexing-005-main\"}, {\"type\": \"speech\", \"subject_mention_id\": \"sfh1-mention-883e7963e48c940089a32dd8\", \"object_mention_id\": \"sfh1-mention-64426160d4f2949c99d5d344\", \"predicate_surface\": \"歎\", \"evidence_id\": \"sfh1-ev-01-dexing-005-main\"}], \"confidence\": \"high\", \"explanation\": \"李元禮 (Li Yuanli, i.e., 李膺) is the subject who sighs in admiration of 荀淑 and 鍾皓. He is distinct from 荀淑 and 荀君 (who refers to 荀淑).\"}, {\"mention_id\": \"sfh1-mention-24170d1d8c82030a04e3be7e\", \"semantic_type\": \"direct_person_form\", \"referent_role\": \"person\", \"anchor_mentions\": [], \"holder_mentions\": [], \"patron_or_possessor_mentions\": [], \"coreference_with\": [\"sfh1-mention-64426160d4f2949c99d5d344\"], \"distinct_from\": [\"sfh1-mention-883e7963e48c940089a32dd8\"], \"semantic_relations\": [{\"type\": \"speech\", \"subject_mention_id\": \"sfh1-mention-883e7963e48c940089a32dd8\", \"object_mention_id\": \"sfh1-mention-24170d1d8c82030a04e3be7e\", \"predicate_surface\": \"歎\", \"evidence_id\": \"sfh1-ev-01-dexing-005-main\"}], \"confidence\": \"high\", \"explanation\": \"荀淑 is the person being praised by 李元禮. 荀君 in the quoted speech refers to 荀淑, so they corefer. 荀淑 is distinct from 李元禮.\"}, {\"mention_id\": \"sfh1-mention-64426160d4f2949c99d5d344\", \"semantic_type\": \"honorific_reference\", \"referent_role\": \"person\", \"anchor_mentions\": [\"sfh1-mention-24170d1d8c82030a04e3be7e\"], \"holder_mentions\": [], \"patron_or_possessor_mentions\": [], \"coreference_with\": [\"sfh1-mention-24170d1d8c82030a04e3be7e\"], \"distinct_from\": [\"sfh1-mention-883e7963e48c940089a32dd8\"], \"semantic_relations\": [{\"type\": \"speech\", \"subject_mention_id\": \"sfh1-mention-883e7963e48c940089a32dd8\", \"object_mention_id\": \"sfh1-mention-64426160d4f2949c99d5d344\", \"predicate_surface\": \"歎\", \"evidence_id\": \"sfh1-ev-01-dexing-005-main\"}], \"confidence\": \"high\", \"explanation\": \"荀君 is an honorific reference to 荀淑 (君 = 'gentleman' honorific). It corefers with 荀淑 and is distinct from 李元禮.\"}]}",
+              "name": "submit_sfh1_reference_semantics"
+            },
+            "id": "call_00_sODhuOTiGWKECEsszOEE8684",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787978518,
+  "id": "0890b98f-9e99-4977-8a8d-f08d3f3a936c",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 1443,
+    "prompt_cache_hit_tokens": 0,
+    "prompt_cache_miss_tokens": 1587,
+    "prompt_tokens": 1587,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "total_tokens": 3030
+  }
+}

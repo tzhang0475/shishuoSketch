@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"reviews\": [{\"mention_id\": \"sfh1-mention-275b0bdecb9b90ae334e0aa4\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-10-guizhen-011-liu-annotation-002\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"name_match\", \"role_match\"], \"explanation\": \"The mention 王導 in the Liu annotation is explicitly named as 王導, and the annotation text states '江王導深以諌帝' — Wang Dao admonished the emperor, matching the role described in the main text where 王茂弘 (Wang Dao's courtesy name) admonished the emperor. The candidate evidence from people.json confirms 王導 is a canonical name. The role match (admonishing the emperor) and the explicit name 王導 in the annotation directly support identity with the canonical person 王導.\"}, {\"mention_id\": \"sfh1-mention-f38cbba745fa42ff3d31095a\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-10-guizhen-011-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"alias_match\", \"role_match\"], \"explanation\": \"The mention 王茂弘 appears in the main text: '元帝過江猶好酒王茂弘與帝有舊常流涕諌帝'. The alias registry evidence (sfh1-candidate-evidence-600302eb3387166f9b53) shows 王茂弘 is a courtesy name for 王導. The role match is strong: 王茂弘 admonished (諌) the emperor, and the Liu annotation (sfh1-ev-10-guizhen-011-liu-annotation-002) explicitly names 王導 as the one who admonished the emperor ('江王導深以諌帝'). The alias match plus the corroborating role match across the main text and annotation support identity with 王導.\"}]}",
+              "name": "submit_sfh1_adversarial_reviews"
+            },
+            "id": "call_00_red5A03Ab5N4DAa0RkCA4510",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787999333,
+  "id": "5a3c1794-f187-4dde-bc33-2b6ac8585f99",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 500,
+    "prompt_cache_hit_tokens": 640,
+    "prompt_cache_miss_tokens": 936,
+    "prompt_tokens": 1576,
+    "prompt_tokens_details": {
+      "cached_tokens": 640
+    },
+    "total_tokens": 2076
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"reviews\": [{\"mention_id\": \"sfh1-mention-06466248cd150e1a362f1cea\", \"candidate_key\": \"c0\", \"verdict\": \"reject\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-06-yaliang-033-main\"], \"reason_types\": [\"reference_semantics\", \"contextual_evidence\"], \"explanation\": \"The proposed resolution maps '桓公' to 桓溫 based solely on an alias registry entry from a different source (aliases.json). However, the actual source evidence for this story (sfh1-ev-06-yaliang-033-main) contains '桓公' in the context '謝太傅赴桓公司馬出西相遇破岡'. The story is about 謝安南 (謝奉) and 謝太傅 (謝安). The '桓公' here appears in the compound '桓公司馬' — likely referring to a Sima (military officer) under 桓公, not 桓溫 himself as the referent of the mention. The alias registry evidence (sfh1-candidate-evidence-8a8f25a9f4f373639d61) is from a completely different passage about 桓溫's northern expedition and weeping over willow trees — it does not establish that this particular '桓公' mention in story 06-yaliang-033 refers to 桓溫. The reference semantics explicitly state 'No valid semantic record was returned; fail closed' with confidence 'low'. The alias registry match is merely a surface-form match for the title '桓公', not evidence that this specific mention denotes 桓溫. Without evidence specifically linking this mention to 桓溫, the resolution must be rejected.\"}, {\"mention_id\": \"sfh1-mention-c4502f99167ac57a60ea5b0d\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-06-yaliang-033-main\", \"sfh1-candidate-evidence-32da068eb14777549427\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"alias_registry\", \"contextual_evidence\", \"office_title\"], \"explanation\": \"The mention '謝太傅' is resolved to 謝安. The source evidence (sfh1-ev-06-yaliang-033-main) contains '謝太傅赴桓公司馬出西相遇破岡' and later '太傅欲慰其失官' and '太傅深恨在心未盡'. The story consistently uses '謝太傅' and '太傅' to refer to the same person throughout. The alias registry evidence (sfh1-candidate-evidence-32da068eb14777549427) shows '謝太傅' used as an office title for 謝安 in another passage ('謝太傅絶重褚公常稱禇季野雖不言而四時之氣亦備'), which is a well-known anecdote about 謝安. The office title '太傅' (Grand Tutor) is the standard title for 謝安 in the Shishuo Xinyu. The story context — 謝安南 (謝奉) returning east after being dismissed, and 謝太傅 meeting him — is consistent with 謝安's known interactions. The candidate evidence specifically supports the identity of '謝太傅' as 謝安 through the office title alias registry, and the source text uses the same title consistently for the same individual throughout the passage.\"}]}",
+              "name": "submit_sfh1_adversarial_reviews"
+            },
+            "id": "call_00_WcBjv1Pzzfr34VBw5la58291",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787989309,
+  "id": "8357c81f-5205-4f70-abb0-9133f8cef189",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 803,
+    "prompt_cache_hit_tokens": 512,
+    "prompt_cache_miss_tokens": 943,
+    "prompt_tokens": 1455,
+    "prompt_tokens_details": {
+      "cached_tokens": 512
+    },
+    "total_tokens": 2258
+  }
+}

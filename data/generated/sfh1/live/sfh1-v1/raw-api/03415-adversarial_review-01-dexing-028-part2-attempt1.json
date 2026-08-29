@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"reviews\": [{\"mention_id\": \"sfh1-mention-3af758992e9419faa62ca325\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-cb897e5c186514564d47\", \"sfh1-ev-01-dexing-028-liu-annotation-006\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"historical_referent\", \"personal_name_match\"], \"explanation\": \"The mention surface is 攸, which is the personal name of 鄧攸 (Deng You). The annotation text in sfh1-ev-01-dexing-028-liu-annotation-006 explicitly describes the protagonist abandoning his own child to save his nephew (棄己兒抱遺民), which matches the main text story about 鄧攸. The alias evidence (sfh1-candidate-evidence-cb897e5c186514564d47) confirms 伯道 as the courtesy name of 鄧攸, and the annotation context clearly refers to the same person. The identity is well-supported by the supplied evidence.\"}, {\"mention_id\": \"sfh1-mention-b28d103042fbd0b540943fa7\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-01-dexing-028-liu-annotation-006\", \"sfh1-ev-01-dexing-028-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"canonical_name_match\", \"coreference\", \"speaker_role\"], \"explanation\": \"The mention surface is 吾 (first-person pronoun) spoken by 攸 in the annotation text '吾後猶當有兒婦'. The annotation sfh1-ev-01-dexing-028-liu-annotation-006 contains this speech within the narrative about 鄧攸 abandoning his child. The speaker is clearly 鄧攸 himself, coreferent with the preceding 攸 mention in the same annotation. The main text confirms the story is about 鄧攸. The identity resolution is well-supported.\"}, {\"mention_id\": \"sfh1-mention-b2f166f14092d2cdd695cdf7\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-01-dexing-028-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"canonical_name_match\", \"subject_role\"], \"explanation\": \"The mention surface is 鄧攸, the full canonical name. The main text (sfh1-ev-01-dexing-028-main) begins with '鄧攸始避難於道中棄己子全弟子', making 鄧攸 the clear subject of the story. The canonical name match is direct and unambiguous. Although the reference semantics record returned 'uncertain' with no valid semantic record, the surface form itself is the full name of the person, and the main text directly names him as the protagonist. The evidence specifically supports this identity.\"}, {\"mention_id\": \"sfh1-mention-b9f23c8d613cccf86bf686a1\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-84e2a85ee40ffe627fe0\", \"sfh1-ev-01-dexing-028-liu-annotation-003\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"alias_registry_match\", \"coreference\", \"personal_name_match\"], \"explanation\": \"The mention surface is 攸, the personal name of 鄧攸. The alias evidence (sfh1-candidate-evidence-84e2a85ee40ffe627fe0) confirms 伯道 as the courtesy name of 鄧攸. The annotation sfh1-ev-01-dexing-028-liu-annotation-003 describes the Hu person falsely accusing 攸 ('胡誣攸'), which is part of the same narrative about 鄧攸's encounter with 石勒. The identity is well-supported by the supplied evidence.\"}]}",
+              "name": "submit_sfh1_adversarial_reviews"
+            },
+            "id": "call_00_fEYXY5Ee8YYiotvGAok76090",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787998548,
+  "id": "bc4a8092-fe9f-482b-b06e-a818c82fb40f",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 954,
+    "prompt_cache_hit_tokens": 512,
+    "prompt_cache_miss_tokens": 2917,
+    "prompt_tokens": 3429,
+    "prompt_tokens_details": {
+      "cached_tokens": 512
+    },
+    "total_tokens": 4383
+  }
+}

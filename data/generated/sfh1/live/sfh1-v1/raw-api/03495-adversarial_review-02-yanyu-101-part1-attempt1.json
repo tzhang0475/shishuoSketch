@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"reviews\": [\n  {\n    \"mention_id\": \"sfh1-mention-00e80ecb9d198cde09e4b27e\",\n    \"candidate_key\": \"c0\",\n    \"verdict\": \"reject\",\n    \"supporting_evidence_ids\": [],\n    \"contradicting_evidence_ids\": [\"sfh1-candidate-evidence-47feba537004b7e19bcf\"],\n    \"reason_types\": [\"insufficient_evidence\", \"reference_semantics_uncertain\"],\n    \"explanation\": \"The mention surface is 僕射 (a title meaning 'Chief of the Secretariat'), and the candidate is 羊祜 (Yang Hu). The only supplied evidence is the bare title 僕射 with no name or contextual anchor connecting it to 羊祜. The reference semantics explicitly report 'No valid semantic record was returned; fail closed' with semantic_type 'uncertain'. The supporting evidence sfh1-ev-02-yanyu-101-liu-annotation-002 mentions 僕射王彪之 (Wang Biaozi), not 羊祜. There is no evidence that this 僕射 refers to 羊祜; in fact the annotation context points to 王彪之 as the 僕射. The title alone is insufficient to establish identity with 羊祜.\"\n  },\n  {\n    \"mention_id\": \"sfh1-mention-2d7d705be9c3fc9bccd0967e\",\n    \"candidate_key\": \"c0\",\n    \"verdict\": \"accept\",\n    \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-4a32627cf8c82c8816f0\", \"sfh1-ev-02-yanyu-101-main\"],\n    \"contradicting_evidence_ids\": [],\n    \"reason_types\": [\"name_match\", \"contextual_alignment\"],\n    \"explanation\": \"The surface 桓温 appears in the main text of yanyu-101: '桓温來欲作賊如何'. The main text clearly refers to 桓温 (Huan Wen) as the person being discussed. The alias registry evidence provides the orthographic variant 桓温 for 桓溫. The main text context (桓玄 asking about 桓温, and later 宣武公 referring to the same person) confirms this is Huan Wen. The name match is exact and the contextual alignment is strong.\"\n  },\n  {\n    \"mention_id\": \"sfh1-mention-2db5f9c996e5aff32bf8c78d\",\n    \"candidate_key\": \"c0\",\n    \"verdict\": \"accept\",\n    \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-4247daeeb0ab6c788495\", \"sfh1-ev-02-yanyu-101-liu-annotation-001\"],\n    \"contradicting_evidence_ids\": [],\n    \"reason_types\": [\"surname_reference_match\", \"contextual_alignment\", \"coreference_chain\"],\n    \"explanation\": \"The surface 温 is a surname-only reference. The Liu annotation states '晉安帝紀曰温在姑孰諷', where 温 refers to 桓温 (Huan Wen) who was at 姑孰. The reference semantics confirm coreference with 桓温 in the main text and with 宣武公. The annotation evidence directly identifies 温 as 桓温 in context. The hard veto on c1 (explicit_identity_contradiction) further supports that this is not a different person. The evidence specifically supports the identity.\"\n  },\n  {\n    \"mention_id\": \"sfh1-mention-71e6bcf2470ac6fe36723828\",\n    \"candidate_key\": \"c0\",\n    \"verdict\": \"accept\",\n    \"supporting_evidence_ids\": [\"sfh1-ev-02-yanyu-101-main\"],\n    \"contradicting_evidence_ids\": [],\n    \"reason_types\": [\"title_honorific_match\", \"contextual_alignment\"],\n    \"explanation\": \"The surface 宣武公 is the posthumous honorific title of 桓温 (Huan Wen). In the main text, 謝景重 says '故宣武公黜昏暗登聖明功超伊霍', referring to 桓温's deeds. The main text context clearly establishes that 宣武公 refers to the same person as 桓温 mentioned earlier in the passage ('桓温來欲作賊如何'). The reference semantics for the related mention sfh1-mention-2db5f9c996e5aff32bf8c78d explicitly confirm that 宣武公 corefers with 桓温. The title 宣武公 is a well-established posthumous title for Huan Wen, and the contextual alignment within the same passage is strong.\"\n  }\n]}",
+              "name": "submit_sfh1_adversarial_reviews"
+            },
+            "id": "call_00_n1wYauSguIa0t4KSRcCd2749",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787998662,
+  "id": "de8754b0-9b4c-46db-aa6d-c0aafc02ba4e",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 1086,
+    "prompt_cache_hit_tokens": 512,
+    "prompt_cache_miss_tokens": 1960,
+    "prompt_tokens": 2472,
+    "prompt_tokens_details": {
+      "cached_tokens": 512
+    },
+    "total_tokens": 3558
+  }
+}

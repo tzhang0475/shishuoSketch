@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"judgments\": [{\"mention_id\": \"sfh1-mention-2734199330d71f4424e692f2\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-02-yanyu-035-main\", \"sfh1-ev-02-yanyu-035-liu-annotation-009\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"honorific_address\", \"contextual_identity\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [], \"explanation\": \"The mention '明公' is an honorific used by Wen Qiao (温嶠) addressing Liu Kun (劉琨). The main text shows Wen Qiao saying '明公以桓文之姿建匡立之功' in response to Liu Kun's speech. The annotation sfh1-ev-02-yanyu-035-liu-annotation-009 confirms '明公有桓文之志' in the same context of Wen Qiao addressing Liu Kun. The candidate c0 is 劉琨, which matches the referent.\"}, {\"mention_id\": \"sfh1-mention-284b6d75323dddda9f7b19a9\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-02-yanyu-035-main\", \"sfh1-ev-02-yanyu-035-liu-annotation-001\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"explicit_name_match\", \"canonical_name\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [], \"explanation\": \"The mention surface is '劉琨', the full name of Liu Kun, who is the main subject of the passage. The candidate c0 is the existing person 劉琨 from data/people.json. The main text opens with 劉琨 as the subject, and the annotation confirms his identity. This is a direct match.\"}, {\"mention_id\": \"sfh1-mention-36a712cdadb10341c2c1be9e\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-02-yanyu-035-liu-annotation-003\"], \"reason_types\": [\"distinct_person\", \"different_historical_identity\"]}], \"preferred_candidate_key\": null, \"resolution\": \"candidate_missing\", \"alternative_search_surfaces\": [\"段日磾\", \"段匹磾\"], \"explanation\": \"The mention '段日磾' refers to Duan Ridi (段日磾), the person who harmed Liu Kun, as stated in annotation sfh1-ev-02-yanyu-035-liu-annotation-003: '史為段日磾所害'. The only supplied candidate c0 is 劉琨 (Liu Kun), who is the victim, not the perpetrator. The candidate set lacks the correct referent (Duan Ridi), so the resolution is candidate_missing.\"}, {\"mention_id\": \"sfh1-mention-3775599b60a161df76126065\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-02-yanyu-035-liu-annotation-007\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"courtesy_name_match\", \"alias_registry\"]}, {\"candidate_key\": \"c1\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-02-yanyu-035-liu-annotation-007\"], \"reason_types\": [\"different_person\", \"wrong_identity\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [], \"explanation\": \"The mention '太真' is the courtesy name (字) of 温嶠 (Wen Jiao). Annotation sfh1-ev-02-yanyu-035-liu-annotation-007 states '嶠字太真太原祁人', confirming that 太真 is Wen Jiao's courtesy name. Candidate c0 is 温嶠 (Wen Jiao), which matches. Candidate c1 is 桓溫 (Huan Wen), a different person; the surface '温' in the candidate evidence is from a different context and does not refer to this mention. The correct referent is Wen Jiao (c0).\"}]}",
+              "name": "submit_sfh1_identity_judgments"
+            },
+            "id": "call_00_fkUoRMNMtXQwItiUS7g99825",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787998532,
+  "id": "895b6db3-837e-49c6-8e39-6453efba0268",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 1123,
+    "prompt_cache_hit_tokens": 640,
+    "prompt_cache_miss_tokens": 2850,
+    "prompt_tokens": 3490,
+    "prompt_tokens_details": {
+      "cached_tokens": 640
+    },
+    "total_tokens": 4613
+  }
+}

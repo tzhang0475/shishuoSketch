@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"judgments\": [{\"mention_id\": \"sfh1-mention-88b3e2eab733514a643cd500\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-23-rendan-049-liu-annotation-002\", \"sfh1-candidate-evidence-aab4db1db8c98a091fae\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"canonical_name_match\", \"contextual_role_match\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [], \"explanation\": \"謝安 appears in the Liu annotation (sfh1-ev-23-rendan-049-liu-annotation-002) in the context of 孝武飲燕謝安侍坐, which matches the historical figure 謝安. The candidate c0 is the canonical 謝安 person, and the annotation context confirms this is the same historical figure.\"}, {\"mention_id\": \"sfh1-mention-a0dbee282bb72873ff2bef2f\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-23-rendan-049-main\"], \"reason_types\": [\"surname_mismatch\", \"contextual_identity_mismatch\"]}], \"preferred_candidate_key\": null, \"resolution\": \"candidate_missing\", \"alternative_search_surfaces\": [\"王子猷\", \"王徽之\"], \"explanation\": \"The mention 王 in the main text refers to 王子猷 (王徽之), as the text says 王在船中 and earlier establishes 王子猷出都. The candidate c0 is 王恭, which is a different person. The surname 王 alone is ambiguous, but the context clearly identifies this as 王子猷/王徽之, not 王恭. The supplied candidate set lacks the correct referent.\"}]}",
+              "name": "submit_sfh1_identity_judgments"
+            },
+            "id": "call_00_FpEI12y4yKK3DYAynCCi8467",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787981667,
+  "id": "03085269-3f85-4e24-bafc-7cdb4181df6a",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 510,
+    "prompt_cache_hit_tokens": 640,
+    "prompt_cache_miss_tokens": 902,
+    "prompt_tokens": 1542,
+    "prompt_tokens_details": {
+      "cached_tokens": 640
+    },
+    "total_tokens": 2052
+  }
+}

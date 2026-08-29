@@ -1,0 +1,614 @@
+{
+  "candidate_only": true,
+  "candidate_sets": {
+    "candidate_only": true,
+    "canonical_write_back": false,
+    "records": [
+      {
+        "candidate_only": true,
+        "candidates": [
+          {
+            "candidate_key": "c0",
+            "candidate_person_id": "sfh1-local-person-392ddcc2b9fc5a04c477fd",
+            "display_name": "符堅",
+            "entity_type": "local_candidate_person",
+            "evidence": [
+              {
+                "evidence_id": "sfh1-ev-16-qixian-005-main",
+                "source_ref": "sfh1-ev-16-qixian-005-main",
+                "text": "符堅"
+              }
+            ],
+            "matched_surface": "符堅",
+            "retrieval_basis": "source-grounded_local_person_form"
+          }
+        ],
+        "canonical_write_back": false,
+        "mention_id": "sfh1-mention-0555c9e75847d433d8883307",
+        "retrieval_status": "candidates_found",
+        "semantic_type": "direct_person_form",
+        "story_id": "16-qixian-005",
+        "surface": "符堅"
+      },
+      {
+        "candidate_only": true,
+        "candidates": [
+          {
+            "candidate_key": "c0",
+            "candidate_person_id": "hge1-candidate-person-f9bf91738aa8bcc609e1",
+            "display_name": "郄嘉賓",
+            "entity_type": "prior_candidate_person",
+            "evidence": [
+              {
+                "evidence_id": "sfh1-candidate-evidence-83a71a84e882de79edb8",
+                "source_ref": "data/derived/hge1-wave-a-candidate-db.json",
+                "text": "郄嘉賓"
+              }
+            ],
+            "matched_surface": "郄嘉賓",
+            "retrieval_basis": "prior_candidate:hge1-wave-a-candidate-db.json"
+          },
+          {
+            "candidate_key": "c1",
+            "candidate_person_id": "hge1-candidate-person-7991ae8ce1130faa87ea",
+            "display_name": "郄嘉賓",
+            "entity_type": "prior_candidate_person",
+            "evidence": [
+              {
+                "evidence_id": "sfh1-candidate-evidence-9b706c4a914274a5f19f",
+                "source_ref": "data/derived/hge1-wave-b-candidate-db.json",
+                "text": "郄嘉賓"
+              }
+            ],
+            "matched_surface": "郄嘉賓",
+            "retrieval_basis": "prior_candidate:hge1-wave-b-candidate-db.json"
+          }
+        ],
+        "canonical_write_back": false,
+        "mention_id": "sfh1-mention-66c5ce7fa23ff0b11da3e73c",
+        "retrieval_status": "candidates_found",
+        "semantic_type": "direct_person_form",
+        "story_id": "16-qixian-005",
+        "surface": "郄嘉賓"
+      }
+    ],
+    "story_id": "16-qixian-005"
+  },
+  "canonical_write_back": false,
+  "collective": {
+    "candidate_only": true,
+    "canonical_write_back": false,
+    "coreference_conflicts": [],
+    "decisions": [],
+    "graph": {
+      "cases": [
+        {
+          "candidates": [
+            {
+              "candidate_key": "c0",
+              "candidate_node_id": "sfh1-local-person-392ddcc2b9fc5a04c477fd",
+              "entity_type": "local_candidate_person",
+              "name": "符堅"
+            }
+          ],
+          "deterministic_predicates": [
+            {
+              "candidate_key": "c0",
+              "evidence_ids": [
+                "sfh1-ev-16-qixian-005-main"
+              ],
+              "predicate": "AliasMatch",
+              "reason": "source-grounded_local_person_form",
+              "value": 1.0
+            }
+          ],
+          "mention_id": "sfh1-mention-0555c9e75847d433d8883307",
+          "psl1_hard_vetoes": {},
+          "surface": "符堅"
+        },
+        {
+          "candidates": [
+            {
+              "candidate_key": "c0",
+              "candidate_node_id": "hge1-candidate-person-f9bf91738aa8bcc609e1",
+              "entity_type": "prior_candidate_person",
+              "name": "郄嘉賓"
+            },
+            {
+              "candidate_key": "c1",
+              "candidate_node_id": "hge1-candidate-person-7991ae8ce1130faa87ea",
+              "entity_type": "prior_candidate_person",
+              "name": "郄嘉賓"
+            }
+          ],
+          "deterministic_predicates": [
+            {
+              "candidate_key": "c0",
+              "evidence_ids": [
+                "sfh1-candidate-evidence-83a71a84e882de79edb8"
+              ],
+              "predicate": "AliasMatch",
+              "reason": "prior_candidate:hge1-wave-a-candidate-db.json",
+              "value": 1.0
+            },
+            {
+              "candidate_key": "c1",
+              "evidence_ids": [
+                "sfh1-candidate-evidence-9b706c4a914274a5f19f"
+              ],
+              "predicate": "AliasMatch",
+              "reason": "prior_candidate:hge1-wave-b-candidate-db.json",
+              "value": 1.0
+            }
+          ],
+          "mention_id": "sfh1-mention-66c5ce7fa23ff0b11da3e73c",
+          "psl1_hard_vetoes": {},
+          "surface": "郄嘉賓"
+        }
+      ],
+      "distinct_pairs": [
+        {
+          "evidence_ids": [],
+          "left_mention_id": "sfh1-mention-0555c9e75847d433d8883307",
+          "reason": "validated L3 explicit distinctness",
+          "right_mention_id": "sfh1-mention-66c5ce7fa23ff0b11da3e73c"
+        }
+      ],
+      "known_relation_paths": [],
+      "same_story_pairs": []
+    },
+    "predicates": [
+      {
+        "candidate_key": "c0",
+        "evidence_ids": [
+          "sfh1-ev-16-qixian-005-main"
+        ],
+        "mention_id": "sfh1-mention-0555c9e75847d433d8883307",
+        "predicate": "IdentityContextSupport",
+        "reason": "SFH1 grounded identity assessment",
+        "value": 1.0
+      },
+      {
+        "candidate_key": "c0",
+        "evidence_ids": [
+          "sfh1-candidate-evidence-83a71a84e882de79edb8"
+        ],
+        "mention_id": "sfh1-mention-66c5ce7fa23ff0b11da3e73c",
+        "predicate": "IdentityContextSupport",
+        "reason": "SFH1 grounded identity assessment",
+        "value": 1.0
+      },
+      {
+        "candidate_key": "c1",
+        "evidence_ids": [
+          "sfh1-candidate-evidence-9b706c4a914274a5f19f"
+        ],
+        "mention_id": "sfh1-mention-66c5ce7fa23ff0b11da3e73c",
+        "predicate": "IdentityContextSupport",
+        "reason": "SFH1 grounded identity assessment",
+        "value": 1.0
+      }
+    ],
+    "story_id": "16-qixian-005",
+    "weights_source": "scripts/hdb2_psl1_common.py:frozen",
+    "weights_tuned": false
+  },
+  "constrained": {
+    "candidate_only": true,
+    "canonical_write_back": false,
+    "coreference_pairs": [],
+    "distinct_pairs": [
+      {
+        "left_mention_id": "sfh1-mention-0555c9e75847d433d8883307",
+        "right_mention_id": "sfh1-mention-66c5ce7fa23ff0b11da3e73c"
+      }
+    ],
+    "records": [
+      {
+        "candidate_only": true,
+        "candidates": [
+          {
+            "candidate_key": "c0",
+            "candidate_person_id": "sfh1-local-person-392ddcc2b9fc5a04c477fd",
+            "display_name": "符堅",
+            "entity_type": "local_candidate_person",
+            "evidence": [
+              {
+                "evidence_id": "sfh1-ev-16-qixian-005-main",
+                "source_ref": "sfh1-ev-16-qixian-005-main",
+                "text": "符堅"
+              }
+            ],
+            "matched_surface": "符堅",
+            "retrieval_basis": "source-grounded_local_person_form"
+          }
+        ],
+        "canonical_write_back": false,
+        "constraint_errors": [],
+        "entity_kind": "person",
+        "hard_vetoes": {},
+        "judgment": {
+          "alternative_search_surfaces": [
+            "苻堅"
+          ],
+          "candidate_assessments": [
+            {
+              "candidate_key": "c0",
+              "contradicting_evidence_ids": [],
+              "reason_types": [
+                "direct_name_match",
+                "source_grounded"
+              ],
+              "supporting_evidence_ids": [
+                "sfh1-ev-16-qixian-005-main"
+              ],
+              "verdict": "support"
+            }
+          ],
+          "candidate_only": true,
+          "canonical_write_back": false,
+          "explanation": "符堅 is a direct full-name reference in the text. The candidate c0 is source-grounded from the same evidence text with the matched surface 符堅, matching the mention exactly. This is a direct name match.",
+          "mention_id": "sfh1-mention-0555c9e75847d433d8883307",
+          "preferred_candidate_key": "c0",
+          "resolution": "candidate_supported"
+        },
+        "mention_id": "sfh1-mention-0555c9e75847d433d8883307",
+        "preferred_candidate_key": "c0",
+        "reference_form": "full_name",
+        "semantic_confidence": "high",
+        "semantic_type": "direct_person_form",
+        "story_id": "16-qixian-005",
+        "surface": "符堅"
+      },
+      {
+        "candidate_only": true,
+        "candidates": [
+          {
+            "candidate_key": "c0",
+            "candidate_person_id": "hge1-candidate-person-f9bf91738aa8bcc609e1",
+            "display_name": "郄嘉賓",
+            "entity_type": "prior_candidate_person",
+            "evidence": [
+              {
+                "evidence_id": "sfh1-candidate-evidence-83a71a84e882de79edb8",
+                "source_ref": "data/derived/hge1-wave-a-candidate-db.json",
+                "text": "郄嘉賓"
+              }
+            ],
+            "matched_surface": "郄嘉賓",
+            "retrieval_basis": "prior_candidate:hge1-wave-a-candidate-db.json"
+          },
+          {
+            "candidate_key": "c1",
+            "candidate_person_id": "hge1-candidate-person-7991ae8ce1130faa87ea",
+            "display_name": "郄嘉賓",
+            "entity_type": "prior_candidate_person",
+            "evidence": [
+              {
+                "evidence_id": "sfh1-candidate-evidence-9b706c4a914274a5f19f",
+                "source_ref": "data/derived/hge1-wave-b-candidate-db.json",
+                "text": "郄嘉賓"
+              }
+            ],
+            "matched_surface": "郄嘉賓",
+            "retrieval_basis": "prior_candidate:hge1-wave-b-candidate-db.json"
+          }
+        ],
+        "canonical_write_back": false,
+        "constraint_errors": [],
+        "entity_kind": "person",
+        "hard_vetoes": {},
+        "judgment": {
+          "alternative_search_surfaces": [
+            "郗嘉賓",
+            "郗超"
+          ],
+          "candidate_assessments": [
+            {
+              "candidate_key": "c0",
+              "contradicting_evidence_ids": [],
+              "reason_types": [
+                "direct_name_match"
+              ],
+              "supporting_evidence_ids": [
+                "sfh1-candidate-evidence-83a71a84e882de79edb8"
+              ],
+              "verdict": "support"
+            },
+            {
+              "candidate_key": "c1",
+              "contradicting_evidence_ids": [],
+              "reason_types": [
+                "direct_name_match"
+              ],
+              "supporting_evidence_ids": [
+                "sfh1-candidate-evidence-9b706c4a914274a5f19f"
+              ],
+              "verdict": "support"
+            }
+          ],
+          "candidate_only": true,
+          "canonical_write_back": false,
+          "explanation": "郄嘉賓 is a direct full-name reference in the text. Both candidates c0 and c1 are prior candidates with the matched surface 郄嘉賓, matching the mention exactly. Both are the same person (郄嘉賓, also known as 郗超). c0 is preferred as it comes from the earlier wave.",
+          "mention_id": "sfh1-mention-66c5ce7fa23ff0b11da3e73c",
+          "preferred_candidate_key": "c0",
+          "resolution": "candidate_supported"
+        },
+        "mention_id": "sfh1-mention-66c5ce7fa23ff0b11da3e73c",
+        "preferred_candidate_key": "c0",
+        "reference_form": "full_name",
+        "semantic_confidence": "high",
+        "semantic_type": "direct_person_form",
+        "story_id": "16-qixian-005",
+        "surface": "郄嘉賓"
+      }
+    ],
+    "story_id": "16-qixian-005"
+  },
+  "final": {
+    "candidate_only": true,
+    "canonical_write_back": false,
+    "records": [
+      {
+        "candidate_display_name": "符堅",
+        "candidate_only": true,
+        "candidate_person_id": "sfh1-local-person-392ddcc2b9fc5a04c477fd",
+        "canonical_write_back": false,
+        "decision_id": "sfh1-decision-a907cf021c4e1739ecb8fad2",
+        "entity_kind": "person",
+        "evidence_ids": [
+          "sfh1-ev-16-qixian-005-main"
+        ],
+        "failure_stage": null,
+        "final_state": "local_candidate_resolved",
+        "mention_id": "sfh1-mention-0555c9e75847d433d8883307",
+        "person_id": null,
+        "preferred_candidate_key": "c0",
+        "psl": null,
+        "reference_form": "full_name",
+        "review": null,
+        "semantic_type": "direct_person_form",
+        "story_id": "16-qixian-005",
+        "surface": "符堅"
+      },
+      {
+        "candidate_display_name": "郄嘉賓",
+        "candidate_only": true,
+        "candidate_person_id": "hge1-candidate-person-f9bf91738aa8bcc609e1",
+        "canonical_write_back": false,
+        "decision_id": "sfh1-decision-d791a4b1b356ee19e5fa6407",
+        "entity_kind": "person",
+        "evidence_ids": [
+          "sfh1-ev-16-qixian-005-main"
+        ],
+        "failure_stage": null,
+        "final_state": "local_candidate_resolved",
+        "mention_id": "sfh1-mention-66c5ce7fa23ff0b11da3e73c",
+        "person_id": null,
+        "preferred_candidate_key": "c0",
+        "psl": null,
+        "reference_form": "full_name",
+        "review": null,
+        "semantic_type": "direct_person_form",
+        "story_id": "16-qixian-005",
+        "surface": "郄嘉賓"
+      }
+    ],
+    "story_id": "16-qixian-005"
+  },
+  "identity_judgments": {
+    "judgments": [
+      {
+        "alternative_search_surfaces": [
+          "苻堅"
+        ],
+        "candidate_assessments": [
+          {
+            "candidate_key": "c0",
+            "contradicting_evidence_ids": [],
+            "reason_types": [
+              "direct_name_match",
+              "source_grounded"
+            ],
+            "supporting_evidence_ids": [
+              "sfh1-ev-16-qixian-005-main"
+            ],
+            "verdict": "support"
+          }
+        ],
+        "candidate_only": true,
+        "canonical_write_back": false,
+        "explanation": "符堅 is a direct full-name reference in the text. The candidate c0 is source-grounded from the same evidence text with the matched surface 符堅, matching the mention exactly. This is a direct name match.",
+        "mention_id": "sfh1-mention-0555c9e75847d433d8883307",
+        "preferred_candidate_key": "c0",
+        "resolution": "candidate_supported"
+      },
+      {
+        "alternative_search_surfaces": [
+          "郗嘉賓",
+          "郗超"
+        ],
+        "candidate_assessments": [
+          {
+            "candidate_key": "c0",
+            "contradicting_evidence_ids": [],
+            "reason_types": [
+              "direct_name_match"
+            ],
+            "supporting_evidence_ids": [
+              "sfh1-candidate-evidence-83a71a84e882de79edb8"
+            ],
+            "verdict": "support"
+          },
+          {
+            "candidate_key": "c1",
+            "contradicting_evidence_ids": [],
+            "reason_types": [
+              "direct_name_match"
+            ],
+            "supporting_evidence_ids": [
+              "sfh1-candidate-evidence-9b706c4a914274a5f19f"
+            ],
+            "verdict": "support"
+          }
+        ],
+        "candidate_only": true,
+        "canonical_write_back": false,
+        "explanation": "郄嘉賓 is a direct full-name reference in the text. Both candidates c0 and c1 are prior candidates with the matched surface 郄嘉賓, matching the mention exactly. Both are the same person (郄嘉賓, also known as 郗超). c0 is preferred as it comes from the earlier wave.",
+        "mention_id": "sfh1-mention-66c5ce7fa23ff0b11da3e73c",
+        "preferred_candidate_key": "c0",
+        "resolution": "candidate_supported"
+      }
+    ],
+    "provider_failure": false,
+    "rejected": [],
+    "story_id": "16-qixian-005"
+  },
+  "mention_result": {
+    "mentions": [
+      {
+        "confidence": "high",
+        "entity_kind": "person",
+        "local_explanation": "郄嘉賓 is a person's name (郄 is the surname, 嘉賓 the given name/courtesy name).",
+        "mention_id_local": "m1",
+        "reference_form": "full_name",
+        "source_end": null,
+        "source_evidence_id": "sfh1-ev-16-qixian-005-main",
+        "source_start": null,
+        "surface": "郄嘉賓"
+      },
+      {
+        "confidence": "high",
+        "entity_kind": "person",
+        "local_explanation": "符堅 is a person's name (符 surname, 堅 given name).",
+        "mention_id_local": "m2",
+        "reference_form": "full_name",
+        "source_end": null,
+        "source_evidence_id": "sfh1-ev-16-qixian-005-main",
+        "source_start": null,
+        "surface": "符堅"
+      }
+    ]
+  },
+  "packet_hash": "618556055996cf32462d83b2d9b70ffe617ccdbbe181363453623196b8b8ea40",
+  "reference_semantics": {
+    "provider_failure": false,
+    "records": [
+      {
+        "anchor_mentions": [],
+        "candidate_only": true,
+        "canonical_write_back": false,
+        "confidence": "high",
+        "coreference_with": [],
+        "distinct_from": [
+          "sfh1-mention-66c5ce7fa23ff0b11da3e73c"
+        ],
+        "explanation": "符堅 is a full-name direct person reference. He is the object of comparison in the phrase 以已比符堅, where 郄嘉賓 compares himself to 符堅. The two are distinct persons.",
+        "holder_mentions": [],
+        "mention_id": "sfh1-mention-0555c9e75847d433d8883307",
+        "patron_or_possessor_mentions": [],
+        "referent_role": "object of comparison",
+        "semantic_type": "direct_person_form"
+      },
+      {
+        "anchor_mentions": [],
+        "candidate_only": true,
+        "canonical_write_back": false,
+        "confidence": "high",
+        "coreference_with": [],
+        "distinct_from": [
+          "sfh1-mention-0555c9e75847d433d8883307"
+        ],
+        "explanation": "郄嘉賓 is a full-name direct person reference. The text states he compared himself (以已比) to 符堅, establishing a comparison relation between the two distinct persons. The two are clearly distinct individuals.",
+        "holder_mentions": [],
+        "mention_id": "sfh1-mention-66c5ce7fa23ff0b11da3e73c",
+        "patron_or_possessor_mentions": [],
+        "referent_role": "subject who compares himself",
+        "semantic_type": "direct_person_form"
+      }
+    ],
+    "rejected": [],
+    "relations": [
+      {
+        "candidate_only": true,
+        "canonical_write_back": false,
+        "evidence_id": "sfh1-ev-16-qixian-005-main",
+        "object_mention_id": "sfh1-mention-0555c9e75847d433d8883307",
+        "predicate_surface": "以已比",
+        "relation_type": "comparison",
+        "subject_mention_id": "sfh1-mention-66c5ce7fa23ff0b11da3e73c"
+      }
+    ],
+    "story_id": "16-qixian-005"
+  },
+  "reviews": {
+    "missing_required_reviews": [],
+    "provider_failure": false,
+    "rejected": [],
+    "required_mentions": [],
+    "reviews": [],
+    "story_id": "16-qixian-005"
+  },
+  "story_id": "16-qixian-005",
+  "temporal": {
+    "assertions": [
+      {
+        "candidate_only": true,
+        "canonical_write_back": false,
+        "confidence": "high",
+        "evidence_id": "sfh1-ev-16-qixian-005-main",
+        "exact_span": "郄嘉賓得人以已比符堅大喜",
+        "interpretation": "The scene describes the moment when Xi Jiabin (郄嘉賓) learns that someone compared him to Fu Jian (符堅) and is greatly pleased. The temporal frame is the event of receiving this comparison and reacting with joy.",
+        "scene_projection_eligible": true,
+        "semantic_role": "scene_time",
+        "story_id": "16-qixian-005",
+        "surface": "郄嘉賓得人以已比符堅大喜",
+        "temporal_id": "sfh1-temporal-14d0875155597e4907385a"
+      }
+    ],
+    "provider_failure": false,
+    "rejected": [],
+    "story_id": "16-qixian-005"
+  },
+  "validated_mentions": {
+    "counts_by_entity_kind": {
+      "person": 2
+    },
+    "overlaps": [],
+    "provider_failure": false,
+    "rejected_mentions": [],
+    "story_id": "16-qixian-005",
+    "valid_mentions": [
+      {
+        "candidate_only": true,
+        "canonical_write_back": false,
+        "confidence": "high",
+        "entity_kind": "person",
+        "local_explanation": "郄嘉賓 is a person's name (郄 is the surname, 嘉賓 the given name/courtesy name).",
+        "mention_id": "sfh1-mention-66c5ce7fa23ff0b11da3e73c",
+        "mention_id_local": "m1",
+        "reference_form": "full_name",
+        "source_end": 3,
+        "source_evidence_id": "sfh1-ev-16-qixian-005-main",
+        "source_start": 0,
+        "story_id": "16-qixian-005",
+        "surface": "郄嘉賓"
+      },
+      {
+        "candidate_only": true,
+        "canonical_write_back": false,
+        "confidence": "high",
+        "entity_kind": "person",
+        "local_explanation": "符堅 is a person's name (符 surname, 堅 given name).",
+        "mention_id": "sfh1-mention-0555c9e75847d433d8883307",
+        "mention_id_local": "m2",
+        "reference_form": "full_name",
+        "source_end": 10,
+        "source_evidence_id": "sfh1-ev-16-qixian-005-main",
+        "source_start": 8,
+        "story_id": "16-qixian-005",
+        "surface": "符堅"
+      }
+    ]
+  }
+}

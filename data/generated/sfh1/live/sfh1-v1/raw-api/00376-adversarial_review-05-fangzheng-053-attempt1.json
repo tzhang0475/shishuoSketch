@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"reviews\": [{\"mention_id\": \"sfh1-mention-d40205ade1dc43815502585d\", \"candidate_key\": \"c0\", \"verdict\": \"reject\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-05-fangzheng-053-main\"], \"reason_types\": [\"reference_semantics\", \"contextual_mismatch\"], \"explanation\": \"The proposed resolution identifies the surface '安石' as 謝安 (Xie An) based on a courtesy-name alias match from aliases.json. However, the main text evidence (sfh1-ev-05-fangzheng-053-main) shows this passage is from 方正 (Fangzheng) chapter 53, where 劉尹 (Liu Tan, 劉惔) says '我入當泊安石渚下耳'. The context is about 阮光祿 (Ruan Guanglu, i.e., 阮裕) traveling to the capital and people chasing after him. Liu Tan's remark about '安石渚' (Anshi islet/landing) refers to a place name — '安石渚' is a location, not a reference to the person 謝安. The surface '安石' here appears as part of the place name '安石渚', not as a reference to Xie An's courtesy name. The candidate evidence from aliases.json merely establishes that 安石 is a courtesy name for 謝安 in general, but does not establish that this particular occurrence refers to him. The reference semantics in this passage point to a geographic location, not a person. Therefore, the identity resolution should be rejected.\"}]}",
+              "name": "submit_sfh1_adversarial_reviews"
+            },
+            "id": "call_00_EjU23Tsi0okdaTpSgJe02513",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787980982,
+  "id": "dcdbb3f5-82db-46bc-b98f-d08646b587da",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 399,
+    "prompt_cache_hit_tokens": 512,
+    "prompt_cache_miss_tokens": 518,
+    "prompt_tokens": 1030,
+    "prompt_tokens_details": {
+      "cached_tokens": 512
+    },
+    "total_tokens": 1429
+  }
+}

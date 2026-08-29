@@ -1,0 +1,553 @@
+{
+  "candidate_only": true,
+  "candidate_sets": {
+    "candidate_only": true,
+    "canonical_write_back": false,
+    "records": [
+      {
+        "candidate_only": true,
+        "candidates": [
+          {
+            "candidate_key": "c0",
+            "candidate_person_id": "sfh1-local-person-094a035ebf4acd2089847b",
+            "display_name": "忱",
+            "entity_type": "local_candidate_person",
+            "evidence": [
+              {
+                "evidence_id": "sfh1-ev-21-qiaoyi-005-liu-annotation-001",
+                "source_ref": "sfh1-ev-21-qiaoyi-005-liu-annotation-001",
+                "text": "忱"
+              }
+            ],
+            "matched_surface": "忱",
+            "retrieval_basis": "source-grounded_local_person_form"
+          }
+        ],
+        "canonical_write_back": false,
+        "mention_id": "sfh1-mention-0bfecbe2402e82f0be93af68",
+        "retrieval_status": "candidates_found",
+        "semantic_type": "abbreviated_person_reference",
+        "story_id": "21-qiaoyi-005",
+        "surface": "忱"
+      },
+      {
+        "candidate_only": true,
+        "candidates": [],
+        "canonical_write_back": false,
+        "mention_id": "sfh1-mention-0d230c8665b2ba9a5baaf6f6",
+        "retrieval_status": "candidate_missing",
+        "semantic_type": "uncertain",
+        "story_id": "21-qiaoyi-005",
+        "surface": "羊長和"
+      },
+      {
+        "candidates": [],
+        "mention_id": "sfh1-mention-5e37016eb31edb18f0c5eb9b",
+        "retrieval_status": "non_person_or_collective"
+      }
+    ],
+    "story_id": "21-qiaoyi-005"
+  },
+  "canonical_write_back": false,
+  "collective": {
+    "candidate_only": true,
+    "canonical_write_back": false,
+    "coreference_conflicts": [],
+    "decisions": [],
+    "graph": {
+      "cases": [
+        {
+          "candidates": [
+            {
+              "candidate_key": "c0",
+              "candidate_node_id": "sfh1-local-person-094a035ebf4acd2089847b",
+              "entity_type": "local_candidate_person",
+              "name": "忱"
+            }
+          ],
+          "deterministic_predicates": [
+            {
+              "candidate_key": "c0",
+              "evidence_ids": [
+                "sfh1-ev-21-qiaoyi-005-liu-annotation-001"
+              ],
+              "predicate": "AliasMatch",
+              "reason": "source-grounded_local_person_form",
+              "value": 1.0
+            }
+          ],
+          "mention_id": "sfh1-mention-0bfecbe2402e82f0be93af68",
+          "psl1_hard_vetoes": {},
+          "surface": "忱"
+        },
+        {
+          "candidates": [],
+          "deterministic_predicates": [],
+          "mention_id": "sfh1-mention-0d230c8665b2ba9a5baaf6f6",
+          "psl1_hard_vetoes": {},
+          "surface": "羊長和"
+        },
+        {
+          "candidates": [],
+          "deterministic_predicates": [],
+          "mention_id": "sfh1-mention-5e37016eb31edb18f0c5eb9b",
+          "psl1_hard_vetoes": {},
+          "surface": "諸羊"
+        }
+      ],
+      "distinct_pairs": [
+        {
+          "evidence_ids": [],
+          "left_mention_id": "sfh1-mention-0bfecbe2402e82f0be93af68",
+          "reason": "validated L3 explicit distinctness",
+          "right_mention_id": "sfh1-mention-0d230c8665b2ba9a5baaf6f6"
+        }
+      ],
+      "known_relation_paths": [],
+      "same_story_pairs": []
+    },
+    "predicates": [],
+    "story_id": "21-qiaoyi-005",
+    "weights_source": "scripts/hdb2_psl1_common.py:frozen",
+    "weights_tuned": false
+  },
+  "constrained": {
+    "candidate_only": true,
+    "canonical_write_back": false,
+    "coreference_pairs": [],
+    "distinct_pairs": [
+      {
+        "left_mention_id": "sfh1-mention-0bfecbe2402e82f0be93af68",
+        "right_mention_id": "sfh1-mention-0d230c8665b2ba9a5baaf6f6"
+      }
+    ],
+    "records": [
+      {
+        "candidate_only": true,
+        "candidates": [
+          {
+            "candidate_key": "c0",
+            "candidate_person_id": "sfh1-local-person-094a035ebf4acd2089847b",
+            "display_name": "忱",
+            "entity_type": "local_candidate_person",
+            "evidence": [
+              {
+                "evidence_id": "sfh1-ev-21-qiaoyi-005-liu-annotation-001",
+                "source_ref": "sfh1-ev-21-qiaoyi-005-liu-annotation-001",
+                "text": "忱"
+              }
+            ],
+            "matched_surface": "忱",
+            "retrieval_basis": "source-grounded_local_person_form"
+          }
+        ],
+        "canonical_write_back": false,
+        "constraint_errors": [],
+        "entity_kind": "person",
+        "hard_vetoes": {},
+        "judgment": {
+          "alternative_search_surfaces": [
+            "羊忱"
+          ],
+          "candidate_assessments": [
+            {
+              "candidate_key": "c0",
+              "contradicting_evidence_ids": [],
+              "reason_types": [
+                "insufficient_evidence_for_identity"
+              ],
+              "supporting_evidence_ids": [
+                "sfh1-ev-21-qiaoyi-005-liu-annotation-001"
+              ],
+              "verdict": "insufficient"
+            }
+          ],
+          "candidate_only": true,
+          "canonical_write_back": false,
+          "explanation": "The mention 忱 refers to a person named 忱 mentioned in the Liu annotation as skilled in cursive script (草書). The annotation cites 文字志 saying '忱性能草書'. The candidate c0 is the surface form 忱 itself, which is just the name as it appears. The annotation context suggests this is likely 羊忱 (a member of the 羊 family), but the supplied candidate c0 provides no additional biographical evidence to confirm the historical identity. The text itself does not provide enough information to definitively identify which historical person named 忱 this refers to beyond the name itself. The candidate is the name surface itself, not an independently identified historical referent, so there is insufficient evidence to confirm or deny the historical identity.",
+          "mention_id": "sfh1-mention-0bfecbe2402e82f0be93af68",
+          "preferred_candidate_key": null,
+          "resolution": "insufficient_evidence"
+        },
+        "mention_id": "sfh1-mention-0bfecbe2402e82f0be93af68",
+        "preferred_candidate_key": null,
+        "reference_form": "personal_name",
+        "semantic_confidence": "medium",
+        "semantic_type": "abbreviated_person_reference",
+        "story_id": "21-qiaoyi-005",
+        "surface": "忱"
+      },
+      {
+        "candidate_only": true,
+        "candidates": [],
+        "canonical_write_back": false,
+        "constraint_errors": [],
+        "entity_kind": "person",
+        "hard_vetoes": {},
+        "judgment": null,
+        "mention_id": "sfh1-mention-0d230c8665b2ba9a5baaf6f6",
+        "preferred_candidate_key": null,
+        "reference_form": "full_name",
+        "semantic_confidence": "low",
+        "semantic_type": "uncertain",
+        "story_id": "21-qiaoyi-005",
+        "surface": "羊長和"
+      },
+      {
+        "candidate_only": true,
+        "candidates": [],
+        "canonical_write_back": false,
+        "constraint_errors": [],
+        "entity_kind": "collective_person_reference",
+        "hard_vetoes": {},
+        "judgment": null,
+        "mention_id": "sfh1-mention-5e37016eb31edb18f0c5eb9b",
+        "preferred_candidate_key": null,
+        "reference_form": "surname_reference",
+        "semantic_confidence": "low",
+        "semantic_type": "uncertain",
+        "story_id": "21-qiaoyi-005",
+        "surface": "諸羊"
+      }
+    ],
+    "story_id": "21-qiaoyi-005"
+  },
+  "final": {
+    "candidate_only": true,
+    "canonical_write_back": false,
+    "records": [
+      {
+        "candidate_display_name": null,
+        "candidate_only": true,
+        "candidate_person_id": null,
+        "canonical_write_back": false,
+        "decision_id": "sfh1-decision-12ff4f51634755eecceb4d66",
+        "entity_kind": "person",
+        "evidence_ids": [
+          "sfh1-ev-21-qiaoyi-005-liu-annotation-001"
+        ],
+        "failure_stage": "identity_evidence_insufficient",
+        "final_state": "genuinely_unresolved",
+        "mention_id": "sfh1-mention-0bfecbe2402e82f0be93af68",
+        "person_id": null,
+        "preferred_candidate_key": null,
+        "psl": null,
+        "reference_form": "personal_name",
+        "review": null,
+        "semantic_type": "abbreviated_person_reference",
+        "story_id": "21-qiaoyi-005",
+        "surface": "忱"
+      },
+      {
+        "candidate_display_name": null,
+        "candidate_only": true,
+        "candidate_person_id": null,
+        "canonical_write_back": false,
+        "decision_id": "sfh1-decision-0591da3325ad297188c602f7",
+        "entity_kind": "person",
+        "evidence_ids": [
+          "sfh1-ev-21-qiaoyi-005-main"
+        ],
+        "failure_stage": "reference_semantics_uncertain",
+        "final_state": "review_required",
+        "mention_id": "sfh1-mention-0d230c8665b2ba9a5baaf6f6",
+        "person_id": null,
+        "preferred_candidate_key": null,
+        "psl": null,
+        "reference_form": "full_name",
+        "review": null,
+        "semantic_type": "uncertain",
+        "story_id": "21-qiaoyi-005",
+        "surface": "羊長和"
+      },
+      {
+        "candidate_display_name": null,
+        "candidate_only": true,
+        "candidate_person_id": null,
+        "canonical_write_back": false,
+        "decision_id": "sfh1-decision-3d05d98168a2567d7ae1d839",
+        "entity_kind": "collective_person_reference",
+        "evidence_ids": [
+          "sfh1-ev-21-qiaoyi-005-main"
+        ],
+        "failure_stage": null,
+        "final_state": "structural_reference",
+        "mention_id": "sfh1-mention-5e37016eb31edb18f0c5eb9b",
+        "person_id": null,
+        "preferred_candidate_key": null,
+        "psl": null,
+        "reference_form": "surname_reference",
+        "review": null,
+        "semantic_type": "uncertain",
+        "story_id": "21-qiaoyi-005",
+        "surface": "諸羊"
+      }
+    ],
+    "story_id": "21-qiaoyi-005"
+  },
+  "identity_judgments": {
+    "judgments": [
+      {
+        "alternative_search_surfaces": [
+          "羊忱"
+        ],
+        "candidate_assessments": [
+          {
+            "candidate_key": "c0",
+            "contradicting_evidence_ids": [],
+            "reason_types": [
+              "insufficient_evidence_for_identity"
+            ],
+            "supporting_evidence_ids": [
+              "sfh1-ev-21-qiaoyi-005-liu-annotation-001"
+            ],
+            "verdict": "insufficient"
+          }
+        ],
+        "candidate_only": true,
+        "canonical_write_back": false,
+        "explanation": "The mention 忱 refers to a person named 忱 mentioned in the Liu annotation as skilled in cursive script (草書). The annotation cites 文字志 saying '忱性能草書'. The candidate c0 is the surface form 忱 itself, which is just the name as it appears. The annotation context suggests this is likely 羊忱 (a member of the 羊 family), but the supplied candidate c0 provides no additional biographical evidence to confirm the historical identity. The text itself does not provide enough information to definitively identify which historical person named 忱 this refers to beyond the name itself. The candidate is the name surface itself, not an independently identified historical referent, so there is insufficient evidence to confirm or deny the historical identity.",
+        "mention_id": "sfh1-mention-0bfecbe2402e82f0be93af68",
+        "preferred_candidate_key": null,
+        "resolution": "insufficient_evidence"
+      }
+    ],
+    "provider_failure": false,
+    "rejected": [],
+    "story_id": "21-qiaoyi-005"
+  },
+  "mention_result": {
+    "mentions": [
+      {
+        "confidence": "high",
+        "entity_kind": "person",
+        "local_explanation": "羊長和 is the subject of the passage, a person known for learning, calligraphy, archery, and go.",
+        "mention_id_local": "m1",
+        "reference_form": "full_name",
+        "source_end": null,
+        "source_evidence_id": "sfh1-ev-21-qiaoyi-005-main",
+        "source_start": null,
+        "surface": "羊長和"
+      },
+      {
+        "confidence": "high",
+        "entity_kind": "collective_person_reference",
+        "local_explanation": "諸羊 refers collectively to the Yang family members/descendants.",
+        "mention_id_local": "m2",
+        "reference_form": "surname_reference",
+        "source_end": null,
+        "source_evidence_id": "sfh1-ev-21-qiaoyi-005-main",
+        "source_start": null,
+        "surface": "諸羊"
+      },
+      {
+        "confidence": "medium",
+        "entity_kind": "person",
+        "local_explanation": "忱 is a personal name mentioned in the annotation, noted for cursive calligraphy ability.",
+        "mention_id_local": "m3",
+        "reference_form": "personal_name",
+        "source_end": null,
+        "source_evidence_id": "sfh1-ev-21-qiaoyi-005-liu-annotation-001",
+        "source_start": null,
+        "surface": "忱"
+      }
+    ]
+  },
+  "packet_hash": "3839550b6dea0acc5392fce3692aedb1c9ab9da725300a24ec1773854a5d340e",
+  "reference_semantics": {
+    "provider_failure": false,
+    "records": [
+      {
+        "anchor_mentions": [],
+        "candidate_only": true,
+        "canonical_write_back": false,
+        "confidence": "medium",
+        "coreference_with": [],
+        "distinct_from": [
+          "sfh1-mention-0d230c8665b2ba9a5baaf6f6"
+        ],
+        "explanation": "忱 is a single-character personal name in the Liu annotation, referring to a person named 忱 (likely 羊忱, a member of the 羊 family). It is distinct from 羊長和 since it appears in a separate annotation layer and refers to a different individual.",
+        "holder_mentions": [],
+        "mention_id": "sfh1-mention-0bfecbe2402e82f0be93af68",
+        "patron_or_possessor_mentions": [],
+        "referent_role": "person named 忱, mentioned in Liu annotation as skilled in cursive script",
+        "semantic_type": "abbreviated_person_reference"
+      },
+      {
+        "anchor_mentions": [],
+        "candidate_only": true,
+        "canonical_write_back": false,
+        "confidence": "low",
+        "coreference_with": [],
+        "distinct_from": [],
+        "explanation": "No valid semantic record was returned; fail closed.",
+        "holder_mentions": [],
+        "mention_id": "sfh1-mention-0d230c8665b2ba9a5baaf6f6",
+        "patron_or_possessor_mentions": [],
+        "referent_role": "",
+        "semantic_type": "uncertain"
+      },
+      {
+        "anchor_mentions": [],
+        "candidate_only": true,
+        "canonical_write_back": false,
+        "confidence": "low",
+        "coreference_with": [],
+        "distinct_from": [],
+        "explanation": "No valid semantic record was returned; fail closed.",
+        "holder_mentions": [],
+        "mention_id": "sfh1-mention-5e37016eb31edb18f0c5eb9b",
+        "patron_or_possessor_mentions": [],
+        "referent_role": "",
+        "semantic_type": "uncertain"
+      }
+    ],
+    "rejected": [
+      {
+        "errors": [
+          "relation_0_predicate_not_grounded"
+        ],
+        "index": 1,
+        "mention_id": "sfh1-mention-0d230c8665b2ba9a5baaf6f6"
+      },
+      {
+        "errors": [
+          "invalid_semantic_type",
+          "relation_0_predicate_not_grounded"
+        ],
+        "index": 2,
+        "mention_id": "sfh1-mention-5e37016eb31edb18f0c5eb9b"
+      }
+    ],
+    "relations": [],
+    "story_id": "21-qiaoyi-005"
+  },
+  "reviews": {
+    "missing_required_reviews": [],
+    "provider_failure": false,
+    "rejected": [],
+    "required_mentions": [],
+    "reviews": [],
+    "story_id": "21-qiaoyi-005"
+  },
+  "story_id": "21-qiaoyi-005",
+  "temporal": {
+    "assertions": [
+      {
+        "candidate_only": true,
+        "canonical_write_back": false,
+        "confidence": "high",
+        "evidence_id": "sfh1-ev-21-qiaoyi-005-main",
+        "exact_span": "諸羊後多知書而射奕餘蓺莫逮",
+        "interpretation": "Later generations of the Yang family mostly knew calligraphy but none matched him in archery, go, and other arts — a later outcome relative to Yang Changhe's own time.",
+        "scene_projection_eligible": false,
+        "semantic_role": "later_outcome",
+        "story_id": "21-qiaoyi-005",
+        "surface": "諸羊後多知書而射奕餘蓺莫逮",
+        "temporal_id": "sfh1-temporal-eecaa6bfe86be4ed094bdf"
+      },
+      {
+        "candidate_only": true,
+        "canonical_write_back": false,
+        "confidence": "medium",
+        "evidence_id": "sfh1-ev-21-qiaoyi-005-liu-annotation-001",
+        "exact_span": "亦善行隷有稱於一時",
+        "interpretation": "Annotation notes he was also skilled in running and clerical script, and was renowned for a time — background context about his reputation.",
+        "scene_projection_eligible": false,
+        "semantic_role": "background_context",
+        "story_id": "21-qiaoyi-005",
+        "surface": "亦善行隷有稱於一時",
+        "temporal_id": "sfh1-temporal-0b6cc7a5155105c6402507"
+      },
+      {
+        "candidate_only": true,
+        "canonical_write_back": false,
+        "confidence": "medium",
+        "evidence_id": "sfh1-ev-21-qiaoyi-005-liu-annotation-001",
+        "exact_span": "忱性能草書",
+        "interpretation": "Textual record (文字志) notes that Chen (忱) was naturally skilled in cursive script — background context about a related person's ability.",
+        "scene_projection_eligible": false,
+        "semantic_role": "background_context",
+        "story_id": "21-qiaoyi-005",
+        "surface": "忱性能草書",
+        "temporal_id": "sfh1-temporal-057055d4c21a39d919a512"
+      }
+    ],
+    "provider_failure": false,
+    "rejected": [
+      {
+        "assertion": {
+          "confidence": "high",
+          "evidence_id": "sfh1-ev-21-qiaoyi-005-main",
+          "exact_span": "羊長和博學工書能騎射善圍棊",
+          "interpretation": "Describes Yang Changhe's abilities (erudition, calligraphy, archery, go) as his contemporaneous attributes at the time of description.",
+          "semantic_role": "scene_time",
+          "surface": "羊長和博學工書能騎射善圍棊",
+          "temporal_id_local": "t1"
+        },
+        "errors": [
+          "exact_span_not_in_source"
+        ],
+        "index": 0
+      }
+    ],
+    "story_id": "21-qiaoyi-005"
+  },
+  "validated_mentions": {
+    "counts_by_entity_kind": {
+      "collective_person_reference": 1,
+      "person": 2
+    },
+    "overlaps": [],
+    "provider_failure": false,
+    "rejected_mentions": [],
+    "story_id": "21-qiaoyi-005",
+    "valid_mentions": [
+      {
+        "candidate_only": true,
+        "canonical_write_back": false,
+        "confidence": "medium",
+        "entity_kind": "person",
+        "local_explanation": "忱 is a personal name mentioned in the annotation, noted for cursive calligraphy ability.",
+        "mention_id": "sfh1-mention-0bfecbe2402e82f0be93af68",
+        "mention_id_local": "m3",
+        "reference_form": "personal_name",
+        "source_end": 16,
+        "source_evidence_id": "sfh1-ev-21-qiaoyi-005-liu-annotation-001",
+        "source_start": 15,
+        "story_id": "21-qiaoyi-005",
+        "surface": "忱"
+      },
+      {
+        "candidate_only": true,
+        "canonical_write_back": false,
+        "confidence": "high",
+        "entity_kind": "person",
+        "local_explanation": "羊長和 is the subject of the passage, a person known for learning, calligraphy, archery, and go.",
+        "mention_id": "sfh1-mention-0d230c8665b2ba9a5baaf6f6",
+        "mention_id_local": "m1",
+        "reference_form": "full_name",
+        "source_end": 3,
+        "source_evidence_id": "sfh1-ev-21-qiaoyi-005-main",
+        "source_start": 0,
+        "story_id": "21-qiaoyi-005",
+        "surface": "羊長和"
+      },
+      {
+        "candidate_only": true,
+        "canonical_write_back": false,
+        "confidence": "high",
+        "entity_kind": "collective_person_reference",
+        "local_explanation": "諸羊 refers collectively to the Yang family members/descendants.",
+        "mention_id": "sfh1-mention-5e37016eb31edb18f0c5eb9b",
+        "mention_id_local": "m2",
+        "reference_form": "surname_reference",
+        "source_end": 16,
+        "source_evidence_id": "sfh1-ev-21-qiaoyi-005-main",
+        "source_start": 14,
+        "story_id": "21-qiaoyi-005",
+        "surface": "諸羊"
+      }
+    ]
+  }
+}

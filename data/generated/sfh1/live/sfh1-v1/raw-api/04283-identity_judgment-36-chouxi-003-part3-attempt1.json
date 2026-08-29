@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"judgments\": [{\"mention_id\": \"sfh1-mention-5d765cab2458f727c28f1ebb\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-36-chouxi-003-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"canonical_name_match\", \"historical_identity\"]}, {\"candidate_key\": \"c1\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-36-chouxi-003-main\"], \"reason_types\": [\"different_person\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [], \"explanation\": \"王敦 is the full personal name of Wang Dun, the 大將軍 who killed 司馬愍王. Candidate c0 matches the canonical name 王敦 directly. Candidate c1 (王隱) is a different person matched via the alias 王大將軍, which is incorrect here since 王大將軍 refers to 王敦 in this text.\"}, {\"mention_id\": \"sfh1-mention-66983486085852de3576c20d\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-36-chouxi-003-liu-annotation-007\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"profile_identity_assertion\", \"historical_identity\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [], \"explanation\": \"廙 is the personal name of 王廙 (Wang Yi). The annotation 王廙别傳 states 廙字世將祖覽父正, confirming the identity. Candidate c0 is 王廙, matching this mention.\"}, {\"mention_id\": \"sfh1-mention-6ef31de56008de295f9f2729\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-36-chouxi-003-liu-annotation-001\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"courtesy_name_match\", \"historical_identity\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [], \"explanation\": \"元敬 is the courtesy name of 司馬丞 (Sima Cheng), as stated in the annotation '司馬丞字元敬' (sfh1-ev-36-chouxi-003-liu-annotation-001). Candidate c0 is the local person 元敬, matching this mention.\"}, {\"mention_id\": \"sfh1-mention-8b258bc05308d256d105956e\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-36-chouxi-003-liu-annotation-007\", \"sfh1-ev-36-chouxi-003-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"courtesy_name_match\", \"historical_identity\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [], \"explanation\": \"世將 is the courtesy name of 王廙 (Wang Yi). The annotation 王廙别傳 states 廙字世將 (sfh1-ev-36-chouxi-003-liu-annotation-007), and the main text says 王敦假手世將 to kill 司馬愍王, consistent with 王廙 being the one who carried out the killing. Candidate c0 is 王廙, matching this mention.\"}]}",
+              "name": "submit_sfh1_identity_judgments"
+            },
+            "id": "call_00_KHltLvWaWNvKXFQyIsju6816",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787999852,
+  "id": "b90cdc92-004f-46cb-9398-ee589480540e",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 943,
+    "prompt_cache_hit_tokens": 640,
+    "prompt_cache_miss_tokens": 3161,
+    "prompt_tokens": 3801,
+    "prompt_tokens_details": {
+      "cached_tokens": 640
+    },
+    "total_tokens": 4744
+  }
+}

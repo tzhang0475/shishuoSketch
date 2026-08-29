@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"judgments\": [{\"mention_id\": \"sfh1-mention-6af66df778cac508ba3c5652\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-10-guizhen-012-main\"], \"reason_types\": [\"wrong_referent\"]}], \"preferred_candidate_key\": null, \"resolution\": \"candidate_missing\", \"alternative_search_surfaces\": [\"王敦\", \"敦\"], \"explanation\": \"The mention '明公' is an honorific used by 鯤 (謝鯤) to address 敦 (王敦). The supplied candidate c0 is 劉琨, which is not the referent. The likely referent is 王敦 (Wang Dun), who is not among the supplied candidates.\"}, {\"mention_id\": \"sfh1-mention-93c7ce0872df67b8e987d7ac\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-10-guizhen-012-main\", \"sfh1-candidate-evidence-161cd374dddc2584388b\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"canonical_name_match\", \"contextual_role_match\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [], \"explanation\": \"謝鯤 is the full name of the protagonist, and the candidate c0 is 謝鯤 with canonical name match from people.json. The text confirms 謝鯤爲豫章太守, matching the candidate's identity.\"}, {\"mention_id\": \"sfh1-mention-b0db3dd2889c273819991fb6\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-10-guizhen-012-main\", \"sfh1-candidate-evidence-c291072f5de252489d76\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"personal_name_match\", \"anaphoric_reference\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [], \"explanation\": \"鯤 is the personal name of 謝鯤, used anaphorically after the full name 謝鯤 appears in the same passage. The candidate c0 is 謝鯤, matching this referent.\"}, {\"mention_id\": \"sfh1-mention-bb45f11d3cd3dd866198d3a8\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-10-guizhen-012-main\", \"sfh1-candidate-evidence-a9a8d6af9b43a77bae95\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"office_title_match\", \"contextual_role_match\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [], \"explanation\": \"豫章太守 is the office title held by 謝鯤, as stated in '謝鯤爲豫章太守'. The candidate c0 is 謝鯤, who is the office holder.\"}]}",
+              "name": "submit_sfh1_identity_judgments"
+            },
+            "id": "call_00_nWr2pdEcooNVQFTdso616688",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787999387,
+  "id": "3bab97b3-642f-4639-9ac9-79f65c7c0acc",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 838,
+    "prompt_cache_hit_tokens": 640,
+    "prompt_cache_miss_tokens": 2424,
+    "prompt_tokens": 3064,
+    "prompt_tokens_details": {
+      "cached_tokens": 640
+    },
+    "total_tokens": 3902
+  }
+}

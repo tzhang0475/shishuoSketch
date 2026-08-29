@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"reviews\": [{\"mention_id\": \"sfh1-mention-b998fc4f17a16638f28b6189\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-10-guizhen-016-main\", \"sfh1-ev-10-guizhen-016-liu-annotation-001\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"canonical_name_match\", \"explicit_distinctness\", \"reference_semantics\"], \"explanation\": \"The main text explicitly names 沈充 as the target of 蘇峻's eastern campaign (蘇峻東征沈充). The Liu annotation (sfh1-ev-10-guizhen-016-liu-annotation-001) explicitly identifies 充 as 沈充 with courtesy name 士居 from 吳興, matching the candidate's canonical name 沈充. The surface form 沈充 is a full canonical name match. The reference semantics correctly identify this as the historical figure 沈充, distinct from 蘇峻 and 陸邁. The evidence directly supports the identity resolution.\"}, {\"mention_id\": \"sfh1-mention-c981f764f1b4b989305505f8\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-10-guizhen-016-liu-annotation-001\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"canonical_name_match\", \"reference_semantics\"], \"explanation\": \"The surface form 王敦 is a full canonical name match for the historical figure Wang Dun. The Liu annotation (sfh1-ev-10-guizhen-016-liu-annotation-001) explicitly states 充諂事王敦, establishing the relationship between 沈充 and 王敦. The annotation also mentions 敦死 and 明帝伐王敦 in annotation-002, further confirming this is the historical Wang Dun. The evidence directly supports the identity resolution to the canonical person 王敦.\"}, {\"mention_id\": \"sfh1-mention-d6d6feec33a136e9c1806a88\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-10-guizhen-016-liu-annotation-001\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"alias_registry_courtesy_name\", \"reference_semantics\"], \"explanation\": \"The Liu annotation (sfh1-ev-10-guizhen-016-liu-annotation-001) explicitly states 晉陽秋曰充字士居吳興人, directly identifying 士居 as the courtesy name (字) of 充, who is 沈充. The alias registry entry for 士居 as courtesy name of 沈充 is directly supported by this annotation. The coreference chain linking 士居 to 充 and 沈充 is explicitly established by the annotation text itself. This is a direct, unambiguous identification.\"}, {\"mention_id\": \"sfh1-mention-eb799262e0a99684eb921537\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-10-guizhen-016-main\", \"sfh1-ev-10-guizhen-016-liu-annotation-004\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"canonical_name_match\", \"coreference_chain\", \"reference_semantics\"], \"explanation\": \"The main text (sfh1-ev-10-guizhen-016-main) opens with 蘇峻東征沈充, establishing 蘇峻 as the subject. The surface form 峻 in the Liu annotation (sfh1-ev-10-guizhen-016-liu-annotation-004) appears in the context of 陸碑 describing 陸邁's biography, where 峻 is mentioned as a separate person from 邁. The annotation text 識清敏風檢澄峻累遷振威 contains 峻 as part of the biographical description of 陸邁's contemporaries. The coreference chain linking 峻 to 蘇峻 is supported by the main text where 峻 is used as the abbreviated form of 蘇峻 throughout the narrative (峻遂止). The reference semantics correctly identify this as 蘇峻, distinct from 陸邁.\"}]}",
+              "name": "submit_sfh1_adversarial_reviews"
+            },
+            "id": "call_00_iT9P667vGUS3yHDod2PN6593",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787989949,
+  "id": "8e19e154-398a-4e57-9ec3-ad5c041e2ae1",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 1005,
+    "prompt_cache_hit_tokens": 512,
+    "prompt_cache_miss_tokens": 2188,
+    "prompt_tokens": 2700,
+    "prompt_tokens_details": {
+      "cached_tokens": 512
+    },
+    "total_tokens": 3705
+  }
+}

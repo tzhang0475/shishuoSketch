@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"judgments\": [{\"mention_id\": \"sfh1-mention-7c550916a9a7750b612aa88d\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-10-guizhen-003-liu-annotation-001\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"name_match\", \"contextual_match\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [\"宰予\"], \"explanation\": \"宰我 is the well-known disciple of Confucius (Zai Wo / 宰予), mentioned in the Analects passage about the three-year mourning period quoted in the Liu annotation. The candidate c0 matches this person directly.\"}, {\"mention_id\": \"sfh1-mention-a039bf24329cf808079f47e8\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"insufficient\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-2526bc38b4182cd9b2cb\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"name_match\"]}, {\"candidate_key\": \"c1\", \"verdict\": \"insufficient\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-d477d480d06bf57ef788\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"name_match\"]}], \"preferred_candidate_key\": null, \"resolution\": \"candidate_ambiguous\", \"alternative_search_surfaces\": [\"陳紀\", \"陳元方\"], \"explanation\": \"陳元方 (Chen Yuanfang) is the subject of the main text passage. Both candidates c0 and c1 are prior candidates named 陳元方 from the candidate database, but there is no distinguishing evidence to determine which prior candidate record corresponds to this historical person. The two candidate keys appear to be duplicate entries for the same name with no differentiating evidence.\"}]}",
+              "name": "submit_sfh1_identity_judgments"
+            },
+            "id": "call_00_B1FXRTeu1X8daHlkc3kA4833",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787981359,
+  "id": "48e4c373-682a-4a2f-bdda-25c41643572c",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 500,
+    "prompt_cache_hit_tokens": 640,
+    "prompt_cache_miss_tokens": 1256,
+    "prompt_tokens": 1896,
+    "prompt_tokens_details": {
+      "cached_tokens": 640
+    },
+    "total_tokens": 2396
+  }
+}

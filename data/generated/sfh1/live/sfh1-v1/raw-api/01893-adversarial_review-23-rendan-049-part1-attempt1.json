@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"reviews\": [{\"mention_id\": \"sfh1-mention-88b3e2eab733514a643cd500\", \"candidate_key\": \"c0\", \"verdict\": \"reject\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-23-rendan-049-liu-annotation-002\"], \"reason_types\": [\"reference_semantics_mismatch\", \"insufficient_evidence\"], \"explanation\": \"The proposed resolution maps the surface 謝安 to the canonical person 謝安, but the only supporting evidence cited is sfh1-ev-23-rendan-049-liu-annotation-002, which mentions 謝安 in the context of a Liu Xiaobiao annotation about 桓伊 playing the flute at a banquet where 謝安 was seated with Emperor Xiaowu. However, the main text (sfh1-ev-23-rendan-049-main) is about 王子猷 (Wang Ziyou) and 桓子野 (Huan Ziye) — it does not mention 謝安 at all. The annotation is a tangential historical note about a different occasion. The reference_semantics for this mention explicitly states 'No valid semantic record was returned; fail closed' with semantic_type 'uncertain' and confidence 'low'. The candidate evidence (sfh1-candidate-evidence-aab4db1db8c98a091fae) merely provides the canonical name 謝安 without any contextual linkage to this specific story. There is no evidence that the surface 謝安 in this annotation refers to the same person as the canonical 謝安 in a way that is specifically supported — the annotation does reference the historical figure 謝安, but the identity assessment relies on name match and contextual role match alone, which is insufficient per the adversarial review standard. The mention is candidate_only with no coreference or anchor support, and the semantic type is uncertain. This should be rejected or at minimum flagged for review given the lack of specific identity-supporting evidence.\"}]}",
+              "name": "submit_sfh1_adversarial_reviews"
+            },
+            "id": "call_00_XXcLCfDfyAAuOfcHaWMI8536",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787990429,
+  "id": "5680f3a4-2bd7-4a3d-a300-b97174e98ef4",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 469,
+    "prompt_cache_hit_tokens": 512,
+    "prompt_cache_miss_tokens": 712,
+    "prompt_tokens": 1224,
+    "prompt_tokens_details": {
+      "cached_tokens": 512
+    },
+    "total_tokens": 1693
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"reviews\": [\n  {\n    \"mention_id\": \"sfh1-mention-2a4367d5fb0879c99e2731e9\",\n    \"candidate_key\": \"c0\",\n    \"verdict\": \"accept\",\n    \"supporting_evidence_ids\": [\"sfh1-ev-24-jianao-002-liu-annotation-002\"],\n    \"contradicting_evidence_ids\": [],\n    \"reason_types\": [\"name_match\", \"contextual_role_match\"],\n    \"explanation\": \"The mention surface is 阮籍, and the candidate is 阮籍 (canonical name match). The supporting evidence sfh1-ev-24-jianao-002-liu-annotation-002 explicitly mentions 阮籍 in the context of 王戎 visiting and drinking with him, which matches the main text where 王戎 visits 阮籍. The name is exact and the contextual role (the person 王戎 visits to drink) is consistent. No contradicting evidence.\"\n  },\n  {\n    \"mention_id\": \"sfh1-mention-3c172261fa098ae07a2609e3\",\n    \"candidate_key\": \"c0\",\n    \"verdict\": \"accept\",\n    \"supporting_evidence_ids\": [\"sfh1-ev-24-jianao-002-main\"],\n    \"contradicting_evidence_ids\": [],\n    \"reason_types\": [\"name_match\", \"contextual_role_match\"],\n    \"explanation\": \"The mention surface is 阮籍, and the candidate is 阮籍 (canonical name match). The main text sfh1-ev-24-jianao-002-main explicitly states 王戎弱冠詣阮籍, directly naming 阮籍 as the person 王戎 visits. The name is exact and the contextual role is unambiguous. No contradicting evidence.\"\n  },\n  {\n    \"mention_id\": \"sfh1-mention-72fd3351c3d612169850ddf2\",\n    \"candidate_key\": \"c0\",\n    \"verdict\": \"accept\",\n    \"supporting_evidence_ids\": [\"sfh1-ev-24-jianao-002-liu-annotation-003\"],\n    \"contradicting_evidence_ids\": [],\n    \"reason_types\": [\"alias_match\", \"contextual_role_match\"],\n    \"explanation\": \"The mention surface is 濬沖, which is the courtesy name of 王戎. The candidate is 王戎. The supporting evidence sfh1-ev-24-jianao-002-liu-annotation-003 contains 濬沖 in the context of the same story about 王戎 visiting 阮籍 and drinking, and the annotation text explicitly connects 濬沖 to the narrative about 戎 (王戎). The alias registry identifies 濬沖 as 王戎's courtesy name. The contextual role matches the main text where 王戎 is the protagonist. No contradicting evidence.\"\n  },\n  {\n    \"mention_id\": \"sfh1-mention-8e8e8b3d8b30af8066511629\",\n    \"candidate_key\": \"c0\",\n    \"verdict\": \"accept\",\n    \"supporting_evidence_ids\": [\"sfh1-ev-24-jianao-002-liu-annotation-002\"],\n    \"contradicting_evidence_ids\": [],\n    \"reason_types\": [\"alias_match\", \"contextual_role_match\"],\n    \"explanation\": \"The mention surface is 濬沖, which is the courtesy name of 王戎. The candidate is 王戎. The supporting evidence sfh1-ev-24-jianao-002-liu-annotation-002 contains 濬沖 in the context of the same story, and the annotation text explicitly discusses 戎 (王戎) visiting 阮籍 and drinking. The alias registry identifies 濬沖 as 王戎's courtesy name. The contextual role matches the main text narrative. No contradicting evidence.\"\n  }\n]}",
+              "name": "submit_sfh1_adversarial_reviews"
+            },
+            "id": "call_00_TVRO4d8NptzzDG8BcSik0332",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787990578,
+  "id": "67a165a1-a43e-4ef8-9e45-7b07f9b2739e",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 885,
+    "prompt_cache_hit_tokens": 512,
+    "prompt_cache_miss_tokens": 1863,
+    "prompt_tokens": 2375,
+    "prompt_tokens_details": {
+      "cached_tokens": 512
+    },
+    "total_tokens": 3260
+  }
+}

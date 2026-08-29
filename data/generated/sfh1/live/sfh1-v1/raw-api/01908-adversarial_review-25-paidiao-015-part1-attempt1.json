@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"reviews\": [{\"mention_id\": \"sfh1-mention-19b9115e7b9a534351ffd25e\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-08cc6b0acc2df73dd0a6\", \"sfh1-ev-25-paidiao-015-liu-annotation-001\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"alias_registry_match\", \"annotation_identity_assertion\"], \"explanation\": \"The surface 周侯 is a contextual title for Zhou Yi (周顗). The Liu annotation (sfh1-ev-25-paidiao-015-liu-annotation-001) explicitly glosses 顗 in this story, and the alias registry evidence (sfh1-candidate-evidence-08cc6b0acc2df73dd0a6) shows 周侯 being used in a context where the person is identified as 周顗. The annotation connects the 顗 reference to the 周侯 discussion in the main text, providing specific identity support. While the reference_semantics reports low confidence due to no valid semantic record, the annotation evidence directly ties the surface to Zhou Yi.\"}, {\"mention_id\": \"sfh1-mention-3d2dca8e9199a9e979811441\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-06b805e420b2c558ee3a\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"alias_registry_match\"], \"explanation\": \"The surface 謝幼輿 is a surname-plus-courtesy-name form for Xie Kun (謝鯤). The alias registry evidence (sfh1-candidate-evidence-06b805e420b2c558ee3a) shows 謝幼輿 used in this exact story context, where Xie Kun addresses Zhou Yi. The courtesy name 幼輿 is well-attested for Xie Kun, and the surname 謝 matches. The evidence specifically supports this identity resolution. No contradicting evidence is present.\"}, {\"mention_id\": \"sfh1-mention-8ba0099c01f2b05135478b23\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-2b18cf43eac61238ba8b\", \"sfh1-ev-25-paidiao-015-liu-annotation-001\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"annotation_identity_assertion\", \"profile_identity_assertion\"], \"explanation\": \"The single-character surface 顗 is explicitly glossed by the Liu annotation (sfh1-ev-25-paidiao-015-liu-annotation-001) as referring to Zhou Yi (周顗). The profile evidence (sfh1-candidate-evidence-2b18cf43eac61238ba8b) also asserts this identity. The annotation directly identifies 顗 as the referent of the preceding discussion about 周侯, and the coreference with mention sfh1-mention-19b9115e7b9a534351ffd25e (周侯 = 周顗) is consistent. The distinctness from 謝幼輿 (Xie Kun) is also correctly noted. This is a high-confidence resolution with direct annotation support.\"}]}",
+              "name": "submit_sfh1_adversarial_reviews"
+            },
+            "id": "call_00_fkx2xDQ2FR68sybh2U5y5710",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787990468,
+  "id": "5dd6b2b3-116e-4f1e-affc-90c39bbb8b69",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 808,
+    "prompt_cache_hit_tokens": 512,
+    "prompt_cache_miss_tokens": 1402,
+    "prompt_tokens": 1914,
+    "prompt_tokens_details": {
+      "cached_tokens": 512
+    },
+    "total_tokens": 2722
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"judgments\": [{\"mention_id\": \"sfh1-mention-808494a9b645cc2de35dc27a\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-01-dexing-017-liu-annotation-006\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"direct_name_match\", \"office_title_match\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [\"杜府君\"], \"explanation\": \"杜恕 is directly named in the annotation as 陽平太守, and the same person is referred to as 杜府君 in annotation 007. The candidate c0 matches the surface 杜恕 exactly and is the historical referent.\"}, {\"mention_id\": \"sfh1-mention-857a65ea6ff6234f35dc5bae\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-01-dexing-017-liu-annotation-001\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"direct_name_match\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [\"王戎\", \"戎\"], \"explanation\": \"王戎 is directly named in the main text and in the Liu annotation (annotation 001 mentions 王戎). The candidate c0 matches the surface 王戎 exactly and is the historical referent.\"}, {\"mention_id\": \"sfh1-mention-871c8f2cabfa08eb6070bf13\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-01-dexing-017-main\"], \"reason_types\": [\"name_mismatch\"]}, {\"candidate_key\": \"c1\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-01-dexing-017-main\", \"sfh1-ev-01-dexing-017-liu-annotation-001\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"personal_name_match\", \"anaphoric_reference\"]}], \"preferred_candidate_key\": \"c1\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [\"王戎\"], \"explanation\": \"戎 is the personal name of 王戎, appearing immediately after the full name 王戎 in the main text ('王戎死孝陛下不應憂嶠而應憂戎'). Candidate c1 (王戎) matches this anaphoric reference. Candidate c0 (王恭) is contradicted as the surface 戎 refers to 王戎, not 王恭.\"}, {\"mention_id\": \"sfh1-mention-a22f57f864da657b3ebe5d3e\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-01-dexing-017-liu-annotation-005\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"direct_name_match\", \"courtesy_name_match\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [\"劉仲雄\"], \"explanation\": \"劉毅 is directly named in the annotation with his courtesy name 仲雄 (王隱晉書曰劉毅字仲雄). The candidate c0 matches the surface 劉毅 exactly and is the historical referent.\"}]}",
+              "name": "submit_sfh1_identity_judgments"
+            },
+            "id": "call_00_rFjzpwq1Ng9PVxeYegGu6302",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787998431,
+  "id": "de316fbd-089e-4d63-ad5c-b755e72307b6",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 890,
+    "prompt_cache_hit_tokens": 640,
+    "prompt_cache_miss_tokens": 2790,
+    "prompt_tokens": 3430,
+    "prompt_tokens_details": {
+      "cached_tokens": 640
+    },
+    "total_tokens": 4320
+  }
+}

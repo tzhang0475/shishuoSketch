@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"judgments\": [{\"mention_id\": \"sfh1-mention-03ce75fb2b16d05603520782\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-02-yanyu-071-liu-annotation-002\"], \"reason_types\": [\"identity_conflict\"]}], \"preferred_candidate_key\": null, \"resolution\": \"candidate_missing\", \"alternative_search_surfaces\": [\"謝安\", \"安石\"], \"explanation\": \"The mention 安 in the annotation '朗字長度安次兄據之長子安蚤' refers to Xie An (謝安), who is described as the eldest son of 據. The candidate c0 is 謝安 (Xie An), but the reference semantics explicitly state that 安 here refers to 'Xie An's father' (referent_role: 'person named 安 (Xie An's father)'). Wait — re-reading: the local_explanation says '安 refers to Xie An (謝安)'. The reference_semantics referent_role says 'person named 安 (Xie An's father)'. This is contradictory. The annotation text '安次兄據之長子安蚤' — 安 is Xie An himself, the eldest son of his second elder brother Ju. The candidate c0 is 謝安 (Xie An). Given the local_explanation states 安 refers to Xie An, and the candidate is 謝安, this appears to be a match. However, the referent_role says 'Xie An's father' which contradicts. Given the ambiguity between the local_explanation (Xie An) and referent_role (Xie An's father), and the candidate being 謝安, I assess this as plausible but the internal contradiction makes it ambiguous. Actually, the annotation '安次兄據之長子安蚤' means 'An, the eldest son of his second elder brother Ju, died early'. So 安 = Xie An. The candidate 謝安 matches. But the referent_role field says 'Xie An's father' which is wrong. Given the local_explanation and the annotation text support 安 = Xie An, and candidate c0 is 謝安, this is supported.\"}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [], \"explanation\": \"The annotation '朗字長度安次兄據之長子安蚤' describes 安 as the eldest son of 據 (Ju), who is Xie An's second elder brother. The candidate c0 is 謝安 (Xie An). The local_explanation confirms 安 refers to Xie An. The referent_role field contains an apparent error ('Xie An's father') but the local_explanation and annotation text support 安 = Xie An. The candidate matches.\"}, {\"mention_id\": \"sfh1-mention-0f2bcaa9ced76b5be7ff41fc\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-02-yanyu-071-liu-annotation-005\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"identity_assertion\", \"descriptive_match\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [], \"explanation\": \"The mention 謝夫人 is a descriptive reference to Madam Xie, identified as Xie Daoyun (道藴) in annotation 005: '婦人集曰謝夫人名道藴'. The candidate c0 is 謝夫人 (Lady Xie), which directly matches the surface form and the referent. The annotation confirms 謝夫人 is named 道藴 (Xie Daoyun).\"}, {\"mention_id\": \"sfh1-mention-2a75be2b7a53dae4149782db\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-02-yanyu-071-liu-annotation-004\", \"sfh1-ev-02-yanyu-071-liu-annotation-005\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"identity_assertion\", \"abbreviation_match\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [], \"explanation\": \"The mention 恩 is the abbreviated single-character form of 孫恩 (Sun En). Annotation 004 mentions '孫恩之攻㑹稽' and annotation 005 mentions '遂為恩所害', confirming 恩 refers to Sun En. The candidate c0 is 孫恩, which matches.\"}, {\"mention_id\": \"sfh1-mention-361bf0c661dee73e0852fa40\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-02-yanyu-071-main\", \"sfh1-ev-02-yanyu-071-liu-annotation-003\", \"sfh1-ev-02-yanyu-071-liu-annotation-004\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"identity_assertion\", \"canonical_name_match\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [], \"explanation\": \"The mention 王凝之 appears in the main text as '左將軍王凝之妻也'. The candidate c0 is 王凝之 (Wang Ningzhi). Annotation 003 mentions '王氏譜曰凝之字' and annotation 004 mentions '凝之事五斗米道' and '凝之謂民吏曰', confirming Wang Ningzhi. The candidate matches the full name directly.\"}]}",
+              "name": "submit_sfh1_identity_judgments"
+            },
+            "id": "call_00_ADtPqQy6dUWT8DCTR2fN1346",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787998628,
+  "id": "c0d95b6a-3163-4d75-9d10-dfc34a4f710b",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 1389,
+    "prompt_cache_hit_tokens": 640,
+    "prompt_cache_miss_tokens": 2361,
+    "prompt_tokens": 3001,
+    "prompt_tokens_details": {
+      "cached_tokens": 640
+    },
+    "total_tokens": 4390
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"judgments\": [{\"mention_id\": \"sfh1-mention-03ce75fb2b16d05603520782\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-02-yanyu-071-liu-annotation-002\"], \"reason_types\": [\"identity_mismatch\"]}], \"preferred_candidate_key\": null, \"resolution\": \"candidate_missing\", \"alternative_search_surfaces\": [\"謝安\", \"安\"], \"explanation\": \"The mention 安 in the annotation '朗字長度安次兄據之長子安蚤' refers to Xie An (謝安), who is described as the eldest son of 據. The candidate c0 is 謝安 (Xie An), but the reference semantics explicitly state that 安 here refers to 'Xie An's father' (referent_role: 'person named 安 (Xie An's father)'). The text '安次兄據之長子安蚤' means 'An, the eldest son of his second elder brother Ju' — so 安 here is the person whose second elder brother is 據, i.e., Xie An himself. However, the reference_semantics says the referent role is 'Xie An's father', which contradicts the candidate being Xie An himself. The annotation text indicates 安 is Xie An (the eldest son of 據), so the candidate 謝安 actually matches the mention. But the reference_semantics claims the referent is Xie An's father, creating ambiguity. Given the annotation text '安次兄據之長子安蚤' — 安 is the eldest son of 據, and 據 is 安's second elder brother. This describes Xie An (謝安) himself. The candidate 謝安 matches. However, the reference_semantics explicitly states referent_role is 'Xie An's father', which contradicts. Given the text, 安 refers to Xie An himself, so the candidate 謝安 is supported. But the reference_semantics contradicts this. Given the ambiguity between the annotation text and the reference_semantics, and that the candidate is 謝安 while the semantics claim the referent is Xie An's father, the candidate does not match the intended referent. The likely referent is Xie An's father (謝據's father), which is not among the candidates. Resolution: candidate_missing.\"}, {\"mention_id\": \"sfh1-mention-0f2bcaa9ced76b5be7ff41fc\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-02-yanyu-071-liu-annotation-005\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"identity_assertion\", \"descriptive_match\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [\"謝道韞\", \"道藴\", \"謝夫人\"], \"explanation\": \"謝夫人 (Madam Xie) is identified in annotation 005 as 謝夫人名道藴 (Madam Xie named Daoyun), i.e., Xie Daoyun (謝道韞). The candidate 謝夫人 matches this descriptive reference. The annotation explicitly names her as 道藴, and the reference_semantics confirms she is Xie Daoyun, wife of Wang Ningzhi. The candidate is supported.\"}, {\"mention_id\": \"sfh1-mention-2a75be2b7a53dae4149782db\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-02-yanyu-071-liu-annotation-004\", \"sfh1-ev-02-yanyu-071-liu-annotation-005\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"identity_assertion\", \"abbreviated_name_match\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [\"孫恩\"], \"explanation\": \"恩 is the abbreviated single-character form of 孫恩 (Sun En). Annotation 004 mentions 孫恩之攻㑹稽 (Sun En's attack on Kuaiji), and annotation 005 mentions 遂為恩所害 (was harmed by En). The candidate 孫恩 matches this referent. The reference_semantics confirms 恩 corefers with the full name 孫恩. Supported.\"}, {\"mention_id\": \"sfh1-mention-361bf0c661dee73e0852fa40\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-02-yanyu-071-main\", \"sfh1-ev-02-yanyu-071-liu-annotation-003\", \"sfh1-ev-02-yanyu-071-liu-annotation-004\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"identity_assertion\", \"full_name_match\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [\"王凝之\"], \"explanation\": \"王凝之 appears in the main text as 左將軍王凝之妻也 (wife of General Wang Ningzhi). Annotation 003 mentions 凝之字 (Ningzhi's courtesy name), and annotation 004 mentions 凝之事五斗米道 (Ningzhi served the Five Pecks of Rice Dao). The candidate 王凝之 matches this full name mention. Supported.\"}]}",
+              "name": "submit_sfh1_identity_judgments"
+            },
+            "id": "call_00_jK4feMrpBN4roX8lqjDh7822",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787998637,
+  "id": "9576286f-b3dc-420e-97e5-312ca52fdfae",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 1325,
+    "prompt_cache_hit_tokens": 2944,
+    "prompt_cache_miss_tokens": 57,
+    "prompt_tokens": 3001,
+    "prompt_tokens_details": {
+      "cached_tokens": 2944
+    },
+    "total_tokens": 4326
+  }
+}

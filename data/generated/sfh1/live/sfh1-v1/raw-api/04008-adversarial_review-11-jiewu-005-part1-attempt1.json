@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"reviews\": [{\"mention_id\": \"sfh1-mention-1ce6ce48bcf83b42fe008de5\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-11-jiewu-005-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"canonical_name_match\", \"historical_role_match\"], \"explanation\": \"The mention surface is 王敦, which exactly matches the canonical name of the candidate. The main text explicitly states '王敦引軍垂至大桁' (Wang Dun led his army approaching the great bridge), which is consistent with the historical Wang Dun's role as a rebel general threatening the capital. The Liu annotation also references 敦 (Wang Dun) approaching while 嶠 burned the bridge. The candidate evidence from people.json provides the canonical name 王敦. The identity is directly supported by the source text naming this person explicitly.\"}, {\"mention_id\": \"sfh1-mention-4d47d4cd1fddd60c6d5a683e\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-11-jiewu-005-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"canonical_name_match\", \"historical_role_match\"], \"explanation\": \"The mention surface is 温嶠, exactly matching the canonical name. The main text states '温嶠為丹陽尹' (Wen Qiao was Governor of Danyang), and the narrative describes him being summoned, failing to apologize, and later apologizing. This is consistent with the historical Wen Qiao. The candidate evidence from people.json provides the canonical name 温嶠. The full name appears explicitly in the source text, directly supporting identity.\"}, {\"mention_id\": \"sfh1-mention-6779d27484f1814c5334bb31\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-11-jiewu-005-liu-annotation-002\", \"sfh1-ev-11-jiewu-005-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"abbreviated_name_match\", \"coreference_with_supported_mention\"], \"explanation\": \"The mention surface is 嶠, the abbreviated personal name for 温嶠. The Liu annotation (sfh1-ev-11-jiewu-005-liu-annotation-002) explicitly refers to 嶠 in the context of burning the bridge, and the main text establishes 温嶠 as the person in this narrative. The annotation text '帝自勸嶠入' and '嶠燒朱雀橋' clearly refer to the same Wen Qiao. The coreference with the full-name mention (sfh1-mention-4d47d4cd1fddd60c6d5a683e) is well-supported by the source evidence.\"}, {\"mention_id\": \"sfh1-mention-73ff72481cbbf4034ca2180d\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-11-jiewu-005-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"abbreviated_name_match\", \"coreference_with_supported_mention\"], \"explanation\": \"The mention surface is 嶠, the abbreviated personal name for 温嶠. The main text states '嶠至不謝但求酒炙' (Qiao arrived without apologizing, only asked for wine and meat) and later '嶠於是下謝' (Qiao then apologized). This directly continues the narrative about 温嶠 established earlier in the same text. The coreference with the full-name mention (sfh1-mention-4d47d4cd1fddd60c6d5a683e) is directly supported by the main text evidence.\"}]}",
+              "name": "submit_sfh1_adversarial_reviews"
+            },
+            "id": "call_00_huU5Om2P2tWq3wQ612nJ5737",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787999380,
+  "id": "c2a79b5b-f268-4c43-b4e9-b3a7c408d90d",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 919,
+    "prompt_cache_hit_tokens": 640,
+    "prompt_cache_miss_tokens": 1946,
+    "prompt_tokens": 2586,
+    "prompt_tokens_details": {
+      "cached_tokens": 640
+    },
+    "total_tokens": 3505
+  }
+}

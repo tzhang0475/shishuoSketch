@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"reviews\": [{\"mention_id\": \"sfh1-mention-b826bcd9140198f184d9bb5b\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-a9b4df1655afe4468f9a\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"alias_match\"], \"explanation\": \"The surface 王大將軍 is matched to 王敦 via alias registry. The main text says 王大將軍既反至石頭, and 王敦 is the historical figure who rebelled and reached 石頭 (Stone City). The candidate evidence explicitly identifies 王大將軍 as 王敦. The reference semantics are uncertain (fail closed), but the alias match plus the historical context of 王敦's rebellion reaching 石頭 supports this identification. No contradicting evidence is present.\"}, {\"mention_id\": \"sfh1-mention-bf85c833c0556160983824e4\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-13980d1c0354c05980b7\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"coreference_chain\"], \"explanation\": \"The surface 長史 is resolved to 周顗. The Liu annotation states '顗長史', indicating that 顗 held the office of 長史. The reference semantics explicitly state that 長史 refers to 顗 in his official capacity, with coreference to mention sfh1-mention-5636544aeae711dcce94a9e4 (顗). The candidate evidence directly asserts this identity. The annotation text '顗長史' confirms that 顗 was the 長史, so the office title refers to 周顗.\"}, {\"mention_id\": \"sfh1-mention-cd6e756a482c398e8d7bf861\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-7e49d5e91837cbb6b5a5\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"canonical_name_match\"], \"explanation\": \"The surface 周 is resolved to 周顗. In the main text, 王大將軍 speaks to 周 saying '卿何以相負', and the preceding clause says 周伯仁往見之. The surname 周 is an abbreviated reference to 周伯仁 (周顗). The candidate evidence directly asserts this identity. The reference semantics explicitly note that 周 is a surname abbreviation for 周顗, and the text context confirms this: 周伯仁 is the person who went to see 王大將軍, and then 王大將軍 addresses 周. The distinct_from mention sfh1-mention-b826bcd9140198f184d9bb5b (王大將軍/王敦) is correctly identified as a different person.\"}]}",
+              "name": "submit_sfh1_adversarial_reviews"
+            },
+            "id": "call_00_QNqRm7bUjyr4W50fjNUZ9577",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787993501,
+  "id": "22ab5d06-f1dd-42f5-940e-71fb85864991",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 712,
+    "prompt_cache_hit_tokens": 512,
+    "prompt_cache_miss_tokens": 1566,
+    "prompt_tokens": 2078,
+    "prompt_tokens_details": {
+      "cached_tokens": 512
+    },
+    "total_tokens": 2790
+  }
+}

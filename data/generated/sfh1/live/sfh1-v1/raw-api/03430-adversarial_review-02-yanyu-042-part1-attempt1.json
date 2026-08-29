@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"reviews\": [{\"mention_id\": \"sfh1-mention-2dfef6d011d366e0a8b7271f\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-ff3ffb0fe70ba27d8c4c\", \"sfh1-ev-02-yanyu-042-liu-annotation-003\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"contextual_role\", \"historical_referent\", \"name_match\"], \"explanation\": \"The mention '敦' appears in annotation-003 where 敦 speaks ('敦曰') in dialogue with 瞻. The context of the Liu annotation clearly identifies this as 王敦 (Wang Dun), the historical figure who was 瞻's superior and later rebelled. The annotation-003 text shows 敦 responding to 瞻's advice about the robe, consistent with the main text where 王敦 speaks to 瞻. The evidence specifically supports this identity.\"}, {\"mention_id\": \"sfh1-mention-4297e037fd7f55a1719cb947\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-02-yanyu-042-liu-annotation-006\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"contextual_consistency\", \"name_match\"], \"explanation\": \"The mention '敦' in annotation-006 appears in '荅敦後知敦有異志' — 瞻 answered 敦, then 敦 had rebellious intentions. This is the same 王敦 who appears throughout the story. The annotation explicitly describes 敦's rebellious intentions, matching the historical Wang Dun who rebelled. The evidence specifically supports this identity resolution.\"}, {\"mention_id\": \"sfh1-mention-7408abe295c06600ad8175e5\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-43443501b1ec322cf06d\", \"sfh1-ev-02-yanyu-042-liu-annotation-004\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"coreference_chain\", \"name_match\"], \"explanation\": \"The mention '敦' in annotation-004 appears in '敦反乃左遷隨郡内史' — Wang Dun rebelled and demoted 瞻. This is a local anaphoric reference to the same 王敦 who appears throughout the story. The annotation explicitly describes 敦's rebellion, which is the historical Wang Dun's rebellion. The evidence specifically supports this identity.\"}, {\"mention_id\": \"sfh1-mention-81b91cb4ff9e972f6ff797ea\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-02-yanyu-042-main\", \"sfh1-ev-02-yanyu-042-liu-annotation-002\", \"sfh1-ev-02-yanyu-042-liu-annotation-003\", \"sfh1-ev-02-yanyu-042-liu-annotation-004\", \"sfh1-ev-02-yanyu-042-liu-annotation-006\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"canonical_name_match\", \"contextual_role_match\", \"historical_figure\"], \"explanation\": \"The mention '王敦' appears in the main text where 摯瞻 visits 王敦, and 王敦 speaks to 瞻. The full name 王敦 in the main text directly matches the canonical name of the historical figure Wang Dun. The surrounding context — 瞻 serving as 户曹参军 under 敦, 敦's later rebellion — all align with the historical Wang Dun. The evidence specifically supports this identity.\"}]}",
+              "name": "submit_sfh1_adversarial_reviews"
+            },
+            "id": "call_00_nki0cJIwgC8tdyIAR1P78783",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787998566,
+  "id": "bc36928a-3b10-48cd-a09e-d7ab23b7fbd3",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 901,
+    "prompt_cache_hit_tokens": 512,
+    "prompt_cache_miss_tokens": 2598,
+    "prompt_tokens": 3110,
+    "prompt_tokens_details": {
+      "cached_tokens": 512
+    },
+    "total_tokens": 4011
+  }
+}

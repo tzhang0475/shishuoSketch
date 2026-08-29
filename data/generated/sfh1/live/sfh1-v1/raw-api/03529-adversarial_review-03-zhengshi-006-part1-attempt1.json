@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"reviews\": [{\"mention_id\": \"sfh1-mention-47b10fbe422af0bf654974a3\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-03-zhengshi-006-main\", \"sfh1-ev-03-zhengshi-006-liu-annotation-001\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"canonical_name_match\", \"historical_context\"], \"explanation\": \"The mention surface is 賈充, and the main text explicitly names 賈充 as the person who 初定律令 and consulted 太傅鄭冲. The Liu annotation (sfh1-ev-03-zhengshi-006-liu-annotation-001) provides biographical details about 充 (字公閭, 襄陵人, 父逵), confirming this is the historical Jia Chong. The candidate evidence from people.json also matches the canonical name 賈充. The identity is directly supported by the source text naming the person explicitly.\"}, {\"mention_id\": \"sfh1-mention-62cc4c0154dece472544fa90\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-03-zhengshi-006-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"canonical_name_match\", \"historical_context\"], \"explanation\": \"The mention surface is 羊祜, and the main text explicitly states 賈充與羊祜共咨太傅鄭冲. The candidate evidence from people.json matches the canonical name 羊祜. The reference semantics confirm this is the person named 羊祜 who consulted 太傅鄭冲 alongside 賈充. The surname reference 羊 (e2150f03) later in the text refers to him. This is a direct, explicit naming in the source text.\"}, {\"mention_id\": \"sfh1-mention-68ff82d57a2716ad8821e350\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-03-zhengshi-006-liu-annotation-006\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"canonical_name_match\", \"historical_context\"], \"explanation\": \"The mention surface is 賈充, and the Liu annotation (sfh1-ev-03-zhengshi-006-liu-annotation-006) explicitly names 荀朂賈充裴秀 as those who 分定禮儀律令 and consulted 鄭冲. This is a direct explicit naming of 賈充 in the annotation text. The candidate evidence from people.json matches the canonical name. The historical context of Jia Chong being involved in legal code formulation under the Jin dynasty is well-attested.\"}, {\"mention_id\": \"sfh1-mention-be864be1c32a2e94d6b8a6ec\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-03-zhengshi-006-liu-annotation-003\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"office_title_match\", \"historical_context\"], \"explanation\": \"The mention surface is 太宰, which is the posthumous office title granted to Jia Chong (薨贈太宰) as stated in the Liu annotation (sfh1-ev-03-zhengshi-006-liu-annotation-003). The annotation context is about 充 (Jia Chong), and the text 薨贈太宰 directly follows the biographical details about 充 in the annotation sequence. The reference semantics confirm this refers to Jia Chong, coreferent with other 充/賈充 mentions in the annotation context. The office title 太宰 as a posthumous grant to Jia Chong is historically accurate.\"}]}",
+              "name": "submit_sfh1_adversarial_reviews"
+            },
+            "id": "call_00_e1Wteq8h30jVxAaFDQit6010",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787998705,
+  "id": "97d2ab45-0589-4c61-a935-fef41d64e653",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 895,
+    "prompt_cache_hit_tokens": 512,
+    "prompt_cache_miss_tokens": 1997,
+    "prompt_tokens": 2509,
+    "prompt_tokens_details": {
+      "cached_tokens": 512
+    },
+    "total_tokens": 3404
+  }
+}

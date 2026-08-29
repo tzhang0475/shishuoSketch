@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"reviews\": [{\"mention_id\": \"sfh1-mention-00c0242280924c8f4ba501a3\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-5762ff56c45eca9eeb43\", \"sfh1-ev-06-yaliang-017-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"canonical_name_match\", \"contextual_identity\"], \"explanation\": \"The mention surface 蘇峻 appears in the main text: '蘇峻時遇害' (Su Jun was killed at that time). The candidate evidence from data/people.json identifies 蘇峻 as a person. The main text context describes 庾亮's son being killed during the Su Jun rebellion, which is historically consistent with 蘇峻 being the rebel leader. The canonical name match is exact and the contextual reference to the Su Jun rebellion (蘇峻之亂) supports this identification.\"}, {\"mention_id\": \"sfh1-mention-017e0ee57a10f47df8adbea2\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-2fda6b1c7926990013d9\", \"sfh1-ev-06-yaliang-017-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"courtesy_name_matches_person\", \"contextual_identity\"], \"explanation\": \"The mention surface 温太真 is a courtesy-name reference. The candidate evidence from data/aliases.json shows 温太真 used in a Shishuo Xinyu passage referring to 温嶠. In the main text, 温太真 appears in the context of testing 庾亮's son ('温太真嘗隱幔怛之'), which is consistent with 温嶠's known role in Shishuo Xinyu anecdotes involving 庾亮's family. The courtesy name 太真 is well-attested as belonging to 温嶠.\"}, {\"mention_id\": \"sfh1-mention-07da671d6ead66a66eef2fb0\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-d21b97b9cf2f93f364a8\", \"sfh1-ev-06-yaliang-017-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"courtesy_name_matches_person\", \"contextual_identity\"], \"explanation\": \"The mention surface 元規 appears in the main text at the end: '或云見阿恭知元規非假' (some say seeing A-gong one knows 元規 was not feigning). The candidate evidence from data/aliases.json shows 元規 used as a courtesy name for 庾亮 in a Shishuo Xinyu passage. The main text is about 庾亮 (庾太尉) and his son, so 元規 as 庾亮's courtesy name fits perfectly in context. The annotation also confirms 阿恭 is 庾會, 庾亮's son.\"}, {\"mention_id\": \"sfh1-mention-2951ea15e3bce8351c479a07\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-06-yaliang-017-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"office_title_matches_person\", \"contextual_identity\"], \"explanation\": \"The mention surface 庾太尉 appears at the start of the main text: '庾太尉風儀偉長不輕舉止'. The candidate evidence from hng2c1-shishuo-29-jianshe-008-main also uses 庾太尉. The office title 太尉 (Grand Commandant) is historically associated with 庾亮, who held this rank. The main text is about 庾亮's demeanor and his son, and the annotation references 庾氏譜 confirming the family context. The contextual identity is clear: the entire passage concerns 庾亮 and his family.\"}]}",
+              "name": "submit_sfh1_adversarial_reviews"
+            },
+            "id": "call_00_vBgT3msjtf5AjQasZngf8394",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787980995,
+  "id": "3811d3c4-aaf0-4366-8d57-8b4154e1ac50",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 990,
+    "prompt_cache_hit_tokens": 512,
+    "prompt_cache_miss_tokens": 1224,
+    "prompt_tokens": 1736,
+    "prompt_tokens_details": {
+      "cached_tokens": 512
+    },
+    "total_tokens": 2726
+  }
+}

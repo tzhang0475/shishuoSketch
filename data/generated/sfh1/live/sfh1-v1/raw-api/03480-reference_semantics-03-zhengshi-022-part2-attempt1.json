@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"records\": [{\"mention_id\": \"sfh1-mention-268f17e7a48be4ee731fbd66\", \"semantic_type\": \"direct_person_form\", \"referent_role\": \"person named 浩 with courtesy name 淵源\", \"anchor_mentions\": [], \"holder_mentions\": [], \"patron_or_possessor_mentions\": [], \"coreference_with\": [\"sfh1-mention-917cc374aa16704e9b7af5df\", \"sfh1-mention-ff7ccccb6e288808922ffcfb\", \"sfh1-mention-5668c978401c385c8a790c48\"], \"distinct_from\": [\"sfh1-mention-baf1a70f0a281a8dc4056054\", \"sfh1-mention-a2f58466a733ad82e8de5e0b\", \"sfh1-mention-25158e0f9fa72d36a3baa30b\"], \"semantic_relations\": [{\"type\": \"kinship\", \"subject_mention_id\": \"sfh1-mention-268f17e7a48be4ee731fbd66\", \"object_mention_id\": \"sfh1-mention-baf1a70f0a281a8dc4056054\", \"predicate_surface\": \"父羡\", \"evidence_id\": \"sfh1-ev-03-zhengshi-022-liu-annotation-001\"}, {\"type\": \"kinship\", \"subject_mention_id\": \"sfh1-mention-268f17e7a48be4ee731fbd66\", \"object_mention_id\": \"sfh1-mention-a2f58466a733ad82e8de5e0b\", \"predicate_surface\": \"祖\", \"evidence_id\": \"sfh1-ev-03-zhengshi-022-liu-annotation-001\"}], \"confidence\": \"high\", \"explanation\": \"浩字淵源 is the full name plus courtesy name of 殷浩 (浩). It corefers with the other 浩 mentions and 殷浩 in the main text. The annotation states his father is 羡 (濮陽相, 光禄勲) and mentions 祖 (grandfather).\"}, {\"mention_id\": \"sfh1-mention-95a91d7d34778cd1f35de0ca\", \"semantic_type\": \"descriptive_person_reference\", \"referent_role\": \"person from 陳郡長平 (i.e., 殷浩)\", \"anchor_mentions\": [\"sfh1-mention-268f17e7a48be4ee731fbd66\"], \"holder_mentions\": [], \"patron_or_possessor_mentions\": [], \"coreference_with\": [\"sfh1-mention-268f17e7a48be4ee731fbd66\", \"sfh1-mention-917cc374aa16704e9b7af5df\", \"sfh1-mention-ff7ccccb6e288808922ffcfb\", \"sfh1-mention-5668c978401c385c8a790c48\"], \"distinct_from\": [], \"semantic_relations\": [], \"confidence\": \"high\", \"explanation\": \"陳郡長平人 describes the native place of 浩 (殷浩), following directly after 浩字淵源 in the annotation. It is a descriptive reference to the same person.\"}, {\"mention_id\": \"sfh1-mention-a2f58466a733ad82e8de5e0b\", \"semantic_type\": \"compositional_kinship\", \"referent_role\": \"grandfather of 殷浩\", \"anchor_mentions\": [\"sfh1-mention-268f17e7a48be4ee731fbd66\"], \"holder_mentions\": [], \"patron_or_possessor_mentions\": [], \"coreference_with\": [], \"distinct_from\": [\"sfh1-mention-268f17e7a48be4ee731fbd66\", \"sfh1-mention-baf1a70f0a281a8dc4056054\"], \"semantic_relations\": [{\"type\": \"kinship\", \"subject_mention_id\": \"sfh1-mention-a2f58466a733ad82e8de5e0b\", \"object_mention_id\": \"sfh1-mention-268f17e7a48be4ee731fbd66\", \"predicate_surface\": \"祖\", \"evidence_id\": \"sfh1-ev-03-zhengshi-022-liu-annotation-001\"}], \"confidence\": \"high\", \"explanation\": \"祖 refers to the grandfather of 浩 (殷浩). The annotation lists 祖 after 父羡, indicating the grandfather of the person being described. The grandfather is distinct from 浩 and from 浩's father 羡.\"}, {\"mention_id\": \"sfh1-mention-25158e0f9fa72d36a3baa30b\", \"semantic_type\": \"compositional_kinship\", \"referent_role\": \"younger brother 何充\", \"anchor_mentions\": [\"sfh1-mention-268f17e7a48be4ee731fbd66\"], \"holder_mentions\": [], \"patron_or_possessor_mentions\": [], \"coreference_with\": [], \"distinct_from\": [\"sfh1-mention-268f17e7a48be4ee731fbd66\", \"sfh1-mention-a8b1ca4ab367293836c9a599\"], \"semantic_relations\": [{\"type\": \"kinship\", \"subject_mention_id\": \"sfh1-mention-25158e0f9fa72d36a3baa30b\", \"object_mention_id\": \"sfh1-mention-268f17e7a48be4ee731fbd66\", \"predicate_surface\": \"弟\", \"evidence_id\": \"sfh1-ev-03-zhengshi-022-liu-annotation-002\"}], \"confidence\": \"medium\", \"explanation\": \"弟何充 refers to 何充 as the younger brother (弟) of someone in the context. The annotation mentions 弟何充等相尋薨 in the context of 庾亮兄, suggesting a family relationship chain. The 弟 here likely refers to 何充 being the younger brother of 庾亮 (given the following 庾亮兄 in the same annotation), though the anchor is uncertain. The kinship relation is anchored to the person whose brother is being described.\"}]}",
+              "name": "submit_sfh1_reference_semantics"
+            },
+            "id": "call_00_KVJ81iJNKAweGkmfrmQn3898",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787998641,
+  "id": "24b543ad-246a-41e5-b76c-fbaad91c48af",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 1485,
+    "prompt_cache_hit_tokens": 1152,
+    "prompt_cache_miss_tokens": 1719,
+    "prompt_tokens": 2871,
+    "prompt_tokens_details": {
+      "cached_tokens": 1152
+    },
+    "total_tokens": 4356
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"reviews\": [{\"mention_id\": \"sfh1-mention-0073d32dfd0ad4514ee6c7c3\", \"candidate_key\": \"c0\", \"verdict\": \"reject\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-05-fangzheng-037-liu-annotation-004\"], \"reason_types\": [\"reference_semantics_uncertain\", \"contextual_reference\"], \"explanation\": \"The mention 王隱 appears only in the Liu annotation (sfh1-ev-05-fangzheng-037-liu-annotation-004) as part of the phrase '按王隱晉書蘇峻事' — this is a citation to Wang Yin's Jin Shu (a historical source), not a reference to the person 王隱 as an actor in this story. The candidate evidence (sfh1-candidate-evidence-3c7b30eb1df49cf5f516) is just the canonical name from people.json with no contextual support. The mention is a bibliographic citation, not a person reference. The reference semantics record explicitly states 'No valid semantic record was returned; fail closed' with confidence 'low' and semantic_type 'uncertain'. There is no evidence that this mention refers to the historical person 王隱 as a participant in the narrative.\"}, {\"mention_id\": \"sfh1-mention-35576ea21c749384ae533344\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-ddb5a471361a8edc70d2\", \"sfh1-ev-05-fangzheng-037-liu-annotation-004\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"canonical_name_match\", \"contextual_reference\"], \"explanation\": \"The mention 蘇峻 appears in the Liu annotation (sfh1-ev-05-fangzheng-037-liu-annotation-004) in the phrase '按王隱晉書蘇峻事', which explicitly references 蘇峻 in the context of this story about 蘇子高 (蘇峻's courtesy name). The main text (sfh1-ev-05-fangzheng-037-main) discusses 蘇子高事平 (the pacification of Su Zigao's rebellion), and the annotation explicitly connects this to 蘇峻. The canonical name match is supported by the contextual reference in the annotation. While the reference semantics are marked uncertain, the annotation explicitly names 蘇峻 in direct connection to the story's subject.\"}, {\"mention_id\": \"sfh1-mention-66fea82b6b0fc0eae09545d9\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-1d8af79f08bda31abe22\", \"sfh1-ev-05-fangzheng-037-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"alias_registry_match\", \"contextual_reference\"], \"explanation\": \"The mention 蘇子高 appears in the main text (sfh1-ev-05-fangzheng-037-main) as the opening phrase '蘇子高事平', referring to the pacification of Su Zigao's rebellion. The alias registry (sfh1-candidate-evidence-1d8af79f08bda31abe22) maps 蘇子高 to 蘇峻 (surname 蘇 + courtesy name 子高). The Liu annotation (sfh1-ev-05-fangzheng-037-liu-annotation-004) explicitly confirms '按王隱晉書蘇峻事', connecting the story to 蘇峻. The alias match is well-supported by the contextual evidence in both the main text and the annotation.\"}, {\"mention_id\": \"sfh1-mention-f1aa41d3929d6de3df698cf6\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-2c8b1718162d2a00d98a\", \"sfh1-ev-05-fangzheng-037-liu-annotation-004\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"canonical_name_match\", \"contextual_reference\"], \"explanation\": \"The mention 陶侃 appears in the Liu annotation (sfh1-ev-05-fangzheng-037-liu-annotation-004) in the phrase '平陶侃欲將坦上用', which explicitly names 陶侃 as an actor in this story. The canonical name match (sfh1-candidate-evidence-2c8b1718162d2a00d98a) is supported by the contextual reference in the annotation where 陶侃 is mentioned in connection with the events described. The annotation places 陶侃 in the narrative context of the story about 蘇峻's rebellion and 孔坦's appointment.\"}]}",
+              "name": "submit_sfh1_adversarial_reviews"
+            },
+            "id": "call_00_WWBzLwBisgB5Q0IHhwNH8011",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787989137,
+  "id": "c18d49a9-c2da-448a-8842-9727ec22c489",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 1138,
+    "prompt_cache_hit_tokens": 512,
+    "prompt_cache_miss_tokens": 1838,
+    "prompt_tokens": 2350,
+    "prompt_tokens_details": {
+      "cached_tokens": 512
+    },
+    "total_tokens": 3488
+  }
+}

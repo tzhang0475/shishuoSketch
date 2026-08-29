@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"reviews\": [{\"mention_id\": \"sfh1-mention-3869f168f34d4496301102ce\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-bafba77633a7051dc24a\", \"sfh1-ev-05-fangzheng-058-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"contextual_identification\", \"title_reference\"], \"explanation\": \"The mention '桓公' in the main text refers to 桓溫. The main text (sfh1-ev-05-fangzheng-058-main) describes 王文度 as 桓公's 長史, and later explicitly names '桓温' in the same passage ('畏桓温靣兵'). The candidate evidence from aliases.json (sfh1-candidate-evidence-bafba77633a7051dc24a) shows '桓公' used as a contextual title for 桓溫 in the famous 金城 willow passage. The main text's explicit use of '桓温' for the same person in the same narrative confirms the identification.\"}, {\"mention_id\": \"sfh1-mention-ae9039f7fb9d0e806605747d\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-3bffb466e75e99257c5e\", \"sfh1-ev-05-fangzheng-058-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"explicit_name_match\"], \"explanation\": \"The surface '桓温' is an orthographic variant of 桓溫 (simplified/traditional character difference). The main text (sfh1-ev-05-fangzheng-058-main) explicitly uses '桓温' in the narrative about 王文度 and the marriage arrangement, and the candidate evidence from aliases.json confirms this orthographic variant mapping. The context of the main text—桓公 as 長史's master, arranging marriage for his daughter—is consistent with 桓溫's historical identity.\"}, {\"mention_id\": \"sfh1-mention-ffbd0b3e70d7e41a3e00981f\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-c87687ddaea7304d0278\", \"sfh1-ev-05-fangzheng-058-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"explicit_name_match\"], \"explanation\": \"The surface '桓温' is an orthographic variant of 桓溫. The main text (sfh1-ev-05-fangzheng-058-main) explicitly names '桓温' in the narrative about 王文度 and the marriage arrangement, and the candidate evidence from aliases.json confirms this orthographic variant mapping. The Liu annotation (sfh1-ev-05-fangzheng-058-liu-annotation-002) further confirms 桓溫's daughter marrying 王坦之's son 王愷, matching the main text's account.\"}]}",
+              "name": "submit_sfh1_adversarial_reviews"
+            },
+            "id": "call_00_AfDBmw22Y7SMBr4ZS5b95896",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787980994,
+  "id": "106f11c5-9c08-4a30-af91-be330f2a279b",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 746,
+    "prompt_cache_hit_tokens": 512,
+    "prompt_cache_miss_tokens": 1039,
+    "prompt_tokens": 1551,
+    "prompt_tokens_details": {
+      "cached_tokens": 512
+    },
+    "total_tokens": 2297
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"reviews\": [{\"mention_id\": \"sfh1-mention-0e523845238ca0878d1dcdd6\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-346a017c88498ebca0a8\", \"sfh1-ev-17-shangshi-002-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"alias_registry_match\", \"office_holder_relation\"], \"explanation\": \"王濬沖 is explicitly identified as the courtesy name form of 王戎 in the alias registry. The main text states 王濬沖為尚書令, and the office-holder relation is directly asserted. The alias registry match provides the surname-plus-courtesy-name mapping, and the text itself confirms the person holding the office. No contradicting evidence exists. The distinct_from mentions (阮嗣宗 and 尚書令) are correctly separated — 阮嗣宗 is a different person (阮籍), and 尚書令 is an office title, not a person.\"}, {\"mention_id\": \"sfh1-mention-44eea1d9dba6da4cfe0a8493\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-ff86f3426ae8dfdb0d3d\", \"sfh1-ev-17-shangshi-002-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"office_holder_relation\", \"profile_identity_assertion\"], \"explanation\": \"尚書令 is the office title held by 王濬沖, who is identified as 王戎. The main text explicitly states 王濬沖為尚書令, establishing the office-holder relation. The candidate evidence for this mention is the office title itself, and the profile identity assertion links the office to 王戎. The anchor mention sfh1-mention-0e523845238ca0878d1dcdd6 (王濬沖) is correctly identified as the holder. No contradicting evidence.\"}, {\"mention_id\": \"sfh1-mention-c139d4f2fab943e600f9f668\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-4938d92c9376e39b0aa1\", \"sfh1-ev-17-shangshi-002-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"alias_registry_match\", \"contextual_identity\"], \"explanation\": \"阮嗣宗 is identified in the alias registry as the courtesy name of 阮籍. The main text mentions 阮嗣宗 in the context of the 竹林之遊 (Seven Sages of the Bamboo Grove), which is consistent with 阮籍's identity. The alias registry match provides the surname-plus-courtesy-name mapping. The reference semantics note low confidence due to no valid semantic record, but the alias registry evidence and contextual identity from the main text (mentioning 嵇叔夜 and 竹林之遊) support the identification. No contradicting evidence.\"}]}",
+              "name": "submit_sfh1_adversarial_reviews"
+            },
+            "id": "call_00_mslOK7dR71SSOLmH0H3c5582",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787981474,
+  "id": "dbededb1-fe87-427a-b0b3-7aeffd82c8e6",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 750,
+    "prompt_cache_hit_tokens": 512,
+    "prompt_cache_miss_tokens": 1615,
+    "prompt_tokens": 2127,
+    "prompt_tokens_details": {
+      "cached_tokens": 512
+    },
+    "total_tokens": 2877
+  }
+}

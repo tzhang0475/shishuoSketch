@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"judgments\": [{\"mention_id\": \"sfh1-mention-92b6d9d479dc43462a9ada9e\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-06-yaliang-029-liu-annotation-004\", \"sfh1-ev-06-yaliang-029-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"name_match\", \"contextual_role\", \"coreference\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [], \"explanation\": \"安 in the Liu annotation 004 refers to Xie An (謝安). The annotation quotes 宋明帝文章志 saying 安能作洛下書生詠, which matches the main text where 謝神意不變...方作洛生詠. The candidate c0 is 謝安, and the evidence supports this identification.\"}, {\"mention_id\": \"sfh1-mention-a5360e9c886160d53bb33c93\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-06-yaliang-029-liu-annotation-005\", \"sfh1-ev-06-yaliang-029-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"name_match\", \"contextual_role\"]}, {\"candidate_key\": \"c1\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-06-yaliang-029-liu-annotation-005\", \"sfh1-ev-06-yaliang-029-main\"], \"reason_types\": [\"name_match\", \"contextual_role\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [], \"explanation\": \"桓温 in annotation 005 is Huan Wen (桓溫), the general who set up the ambush at Xinting. The main text describes 桓公伏甲設饌...欲誅謝安王坦之, and annotation 005 says 桓温止新亭大陳兵衛呼安及坦之欲於坐害. Candidate c0 is 桓溫 which matches. Candidate c1 is 温嶠, a different person, contradicted by the context.\"}, {\"mention_id\": \"sfh1-mention-ae76f453ee01cce920c96761\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-06-yaliang-029-liu-annotation-002\", \"sfh1-ev-06-yaliang-029-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"name_match\", \"contextual_role\"]}, {\"candidate_key\": \"c1\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-06-yaliang-029-liu-annotation-002\", \"sfh1-ev-06-yaliang-029-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"name_match\", \"contextual_role\"]}, {\"candidate_key\": \"c2\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-06-yaliang-029-liu-annotation-002\", \"sfh1-ev-06-yaliang-029-main\"], \"reason_types\": [\"name_match\", \"contextual_role\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [], \"explanation\": \"王坦之 in annotation 002 is Wang Tanzhi (王坦之). Both c0 and c1 are prior candidates for 王坦之 (likely duplicates of the same person). Candidate c2 is 王恭, a different person. The main text mentions 謝安王坦之 as targets of Huan Wen's plot, and annotation 002 says 謝安王坦之所建也. Both c0 and c1 represent 王坦之 correctly.\"}, {\"mention_id\": \"sfh1-mention-b7d08359002996a8ab9937c9\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-06-yaliang-029-main\", \"sfh1-ev-06-yaliang-029-liu-annotation-005\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"name_match\", \"contextual_role\"]}, {\"candidate_key\": \"c1\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-06-yaliang-029-main\", \"sfh1-ev-06-yaliang-029-liu-annotation-005\"], \"reason_types\": [\"name_match\", \"contextual_role\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [], \"explanation\": \"桓公 in the main text refers to Huan Wen (桓溫). The main text describes 桓公伏甲設饌...欲誅謝安王坦之, and annotation 005 confirms 桓温止新亭大陳兵衛呼安及坦之欲於坐害. Candidate c0 is 桓溫 which matches. Candidate c1 is 温嶠, a different person, contradicted by the context.\"}]}",
+              "name": "submit_sfh1_identity_judgments"
+            },
+            "id": "call_00_ni0ymveAt7kcofSkNCxl6238",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787999174,
+  "id": "28fd86a3-5082-4cbc-afd9-83668bbc6dff",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 1328,
+    "prompt_cache_hit_tokens": 640,
+    "prompt_cache_miss_tokens": 3379,
+    "prompt_tokens": 4019,
+    "prompt_tokens_details": {
+      "cached_tokens": 640
+    },
+    "total_tokens": 5347
+  }
+}

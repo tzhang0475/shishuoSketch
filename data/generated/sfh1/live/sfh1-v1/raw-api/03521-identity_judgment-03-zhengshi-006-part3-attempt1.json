@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"judgments\": [{\"mention_id\": \"sfh1-mention-e2150f0316f39d124820ca43\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-03-zhengshi-006-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"surname_abbreviation\", \"dialogue_context\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [\"羊祜\"], \"explanation\": \"The surface 羊 in the main text is a surname abbreviation for 羊祜, who is explicitly named in the same sentence as 與羊祜共咨太傅鄭冲. The candidate c0 is 羊祜, matching the historical referent.\"}, {\"mention_id\": \"sfh1-mention-e330b928f195f521d127af0d\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-03-zhengshi-006-liu-annotation-001\"], \"reason_types\": [\"wrong_person\", \"name_mismatch\"]}, {\"candidate_key\": \"c1\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-03-zhengshi-006-liu-annotation-001\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"personal_name_abbreviation\", \"courtesy_name_match\", \"office_holder\"]}], \"preferred_candidate_key\": \"c1\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [\"賈充\", \"公閭\"], \"explanation\": \"The annotation states 充字公閭, identifying 充 as Jia Chong (賈充) whose courtesy name is 公閭. Candidate c0 is 沈充 (Shen Chong), a different person. Candidate c1 is 賈充, matching the historical referent. The annotation also mentions 魏豫州刺史充, and the alias evidence for 公閭 (Jia Chong's courtesy name) confirms this.\"}, {\"mention_id\": \"sfh1-mention-e60338c250723870ebc5967d\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-03-zhengshi-006-liu-annotation-002\"], \"reason_types\": [\"wrong_person\", \"name_mismatch\"]}, {\"candidate_key\": \"c1\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-03-zhengshi-006-liu-annotation-002\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"personal_name_abbreviation\", \"coreference_chain\"]}], \"preferred_candidate_key\": \"c1\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [\"賈充\"], \"explanation\": \"This 充 in annotation 002 refers to Jia Chong, who is coreferent with the earlier 充 mention (m11) and the full name 賈充. The annotation discusses 充's role in 定科令 with 裴楷, consistent with Jia Chong. Candidate c0 (沈充) is a different person.\"}, {\"mention_id\": \"sfh1-mention-f74e13a10e45be121cbe6750\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-03-zhengshi-006-liu-annotation-001\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"kinship_relation\", \"personal_name\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [\"賈逵\"], \"explanation\": \"The annotation states 父逵, identifying 逵 as Jia Chong's father. The candidate c0 is a local candidate person named 逵, which matches the historical referent Jia Kui (賈逵), father of Jia Chong. The supplied candidate is the only one and matches.\"}]}",
+              "name": "submit_sfh1_identity_judgments"
+            },
+            "id": "call_00_tLYJcjD4X96RQEIf2cpN8539",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787998695,
+  "id": "42a0486a-13d2-49b4-bc11-95f44666dccb",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 1025,
+    "prompt_cache_hit_tokens": 640,
+    "prompt_cache_miss_tokens": 2653,
+    "prompt_tokens": 3293,
+    "prompt_tokens_details": {
+      "cached_tokens": 640
+    },
+    "total_tokens": 4318
+  }
+}

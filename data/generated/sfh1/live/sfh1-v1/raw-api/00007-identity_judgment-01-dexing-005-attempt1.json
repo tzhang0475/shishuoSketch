@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"judgments\": [{\"mention_id\": \"sfh1-mention-24170d1d8c82030a04e3be7e\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-01-dexing-005-main\", \"sfh1-ev-01-dexing-005-liu-annotation-001\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"name_match\", \"historical_referent\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [\"荀君\", \"荀季和\"], \"explanation\": \"荀淑 is directly named in the main text as the person praised by 李元禮. The Liu annotation (sfh1-ev-01-dexing-005-liu-annotation-001) identifies 荀淑 as 字季和, confirming this is the historical Xun Shu. The candidate c0 matches the surface 荀淑 exactly and is the historical referent.\"}, {\"mention_id\": \"sfh1-mention-883e7963e48c940089a32dd8\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-01-dexing-005-main\", \"sfh1-ev-01-dexing-005-liu-annotation-004\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"name_match\", \"historical_referent\"]}, {\"candidate_key\": \"c1\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-01-dexing-005-main\", \"sfh1-ev-01-dexing-005-liu-annotation-004\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"name_match\", \"historical_referent\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_ambiguous\", \"alternative_search_surfaces\": [\"李膺\"], \"explanation\": \"李元禮 is the name used in the main text. The Liu annotation (sfh1-ev-01-dexing-005-liu-annotation-004) explicitly identifies 李元禮 as 李膺 (少府李膺). Both candidates c0 and c1 refer to the same historical person 李元禮/李膺, drawn from different candidate databases (wave-a and wave-b). They are duplicate candidates for the same referent, making the choice between them ambiguous, though both are supported as the historical referent.\"}]}",
+              "name": "submit_sfh1_identity_judgments"
+            },
+            "id": "call_00_ubijVbXoH766uaFEnl0L4521",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787978527,
+  "id": "311e8223-ed0d-4edd-947b-35e82967288d",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 625,
+    "prompt_cache_hit_tokens": 0,
+    "prompt_cache_miss_tokens": 2074,
+    "prompt_tokens": 2074,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "total_tokens": 2699
+  }
+}

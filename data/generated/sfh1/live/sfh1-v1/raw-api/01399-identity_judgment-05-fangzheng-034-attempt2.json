@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"judgments\": [{\"mention_id\": \"sfh1-mention-14781a7673e50f18f45c5aed\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-05-fangzheng-034-main\", \"sfh1-ev-05-fangzheng-034-liu-annotation-001\", \"sfh1-candidate-evidence-d52c69e4c4bdff5f74e8\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"canonical_name_match\", \"historical_context\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [], \"explanation\": \"蘇峻 is the subject of the story, arriving at Stone City (石頭). The Liu annotation identifies 蘇峻 with courtesy name 子高, and the candidate 蘇峻 matches the canonical name directly. The historical 蘇峻 was a Jin dynasty rebel who indeed marched on the capital, consistent with the story context.\"}, {\"mention_id\": \"sfh1-mention-2e666ebb55445317d6680641\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"insufficient\", \"supporting_evidence_ids\": [\"sfh1-ev-05-fangzheng-034-liu-annotation-002\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"surname_only_reference\"]}], \"preferred_candidate_key\": null, \"resolution\": \"insufficient_evidence\", \"alternative_search_surfaces\": [\"王敦\", \"王導\", \"王恭\"], \"explanation\": \"The mention is a bare surname 王 in the Liu annotation context '討王'. The candidate is 王恭, but the annotation text mentions '討王' which could refer to various Wang-surnamed figures. The evidence does not clearly establish that this 王 refers to 王恭 specifically. The annotation fragment is too incomplete to determine which Wang person is meant.\"}, {\"mention_id\": \"sfh1-mention-8ec1f287685e5cedf5649782\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-05-fangzheng-034-liu-annotation-001\", \"sfh1-candidate-evidence-438fa2d4aa427fe94d70\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"canonical_name_match\", \"author_of_cited_work\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [], \"explanation\": \"王隱 is mentioned in the Liu annotation as the author of 晉書 (王隱晉書曰). The candidate 王隱 matches the canonical name directly and is the well-known Jin dynasty historian who authored the 晉書. The annotation explicitly cites 王隱晉書, confirming this is the historian 王隱.\"}, {\"mention_id\": \"sfh1-mention-ef0f523b0b862a3d77aa66c7\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-05-fangzheng-034-liu-annotation-001\", \"sfh1-candidate-evidence-4f1dcb42b99997c1c3ca\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"courtesy_name_match\", \"biographical_alias\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [], \"explanation\": \"子高 is identified in the Liu annotation as the courtesy name of 蘇峻 (峻字子高). The candidate 蘇峻 has 子高 as a registered alias courtesy name. The annotation explicitly states 峻字子高, confirming that 子高 refers to 蘇峻.\"}]}",
+              "name": "submit_sfh1_identity_judgments"
+            },
+            "id": "call_00_j1DrmCUPa7LnFrAOVycN4564",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787989110,
+  "id": "9bae58ae-7e3c-48ba-a7a0-23fb1f7ae22c",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 957,
+    "prompt_cache_hit_tokens": 640,
+    "prompt_cache_miss_tokens": 2003,
+    "prompt_tokens": 2643,
+    "prompt_tokens_details": {
+      "cached_tokens": 640
+    },
+    "total_tokens": 3600
+  }
+}

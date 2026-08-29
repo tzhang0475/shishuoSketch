@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"judgments\": [{\"mention_id\": \"sfh1-mention-31d7953d6de25c3b152bc0e8\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-eecfeb7bbfab44ef3c52\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"name_match\", \"contextual_fit\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [], \"explanation\": \"The mention 温太真 is a full name (surname 温 + courtesy name 太真), which matches 温嶠 (Wen Tai-zhen). The candidate c0 is 温嶠, retrieved via alias registry matching surname plus courtesy name. The text passage discusses 温太真 as a person of the second rank among those who crossed the Yangtze, which is consistent with 温嶠's historical identity.\"}, {\"mention_id\": \"sfh1-mention-1c73bf153ddad053c9bda36b\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-candidate-evidence-e0ce5e230ae5fbc13c2c\"], \"reason_types\": [\"name_confusion\"]}, {\"candidate_key\": \"c1\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-e6b6d0fb104c7c2b374c\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"coreference\", \"contextual_fit\"]}], \"preferred_candidate_key\": \"c1\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [], \"explanation\": \"The mention 温 in the phrase 温常失色 refers back to 温太真 (温嶠) mentioned earlier in the same passage. The candidate c1 is 温嶠, which is the correct referent. Candidate c0 is 桓溫, a different person whose surname is also 温 but who is not the subject of this passage. The local explanation confirms 温 refers to 温太真 by surname.\"}]}",
+              "name": "submit_sfh1_identity_judgments"
+            },
+            "id": "call_00_fBgspZpUGqnrOjjHlVX43451",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787981280,
+  "id": "eb02dfcf-326b-4467-b3fb-d0b107b700f4",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 573,
+    "prompt_cache_hit_tokens": 640,
+    "prompt_cache_miss_tokens": 1080,
+    "prompt_tokens": 1720,
+    "prompt_tokens_details": {
+      "cached_tokens": 640
+    },
+    "total_tokens": 2293
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"reviews\": [{\"mention_id\": \"sfh1-mention-8c00c60eb293a0a55e955f42\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-08-shangyu-043-liu-annotation-001\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"name_match\", \"contextual_identity\"], \"explanation\": \"The mention 虞預 appears in the Liu annotation (sfh1-ev-08-shangyu-043-liu-annotation-001) as part of '虞預晉書', which is a citation of Yu Yu's Jin Shu (Book of Jin by Yu Yu). The candidate evidence sfh1-candidate-evidence-8d224ce68c51d2571f46 confirms 虞預 as a person in the people.json. The surface form exactly matches the canonical name. The annotation context clearly identifies 虞預 as the author of the cited work 晉書, which is consistent with the historical figure Yu Yu. No contradicting evidence exists.\"}, {\"mention_id\": \"sfh1-mention-c0e728626ae02fa226c50180\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-08-shangyu-043-liu-annotation-007\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"contextual_identity\", \"name_match\", \"local_anaphoric_reference\"], \"explanation\": \"The mention 吾 is the first-person pronoun in the letter attributed to 劉琨 within annotation sfh1-ev-08-shangyu-043-liu-annotation-007: '劉琨與親舊書曰吾枕戈待旦...'. The anchor mention sfh1-mention-5723aa55d1305655b0ff63b0 refers to 劉琨 in the same annotation, and the pronoun 吾 unambiguously refers to the letter's author, Liu Kun. The reference semantics explicitly identifies this as a local anaphoric reference to Liu Kun. The candidate evidence sfh1-candidate-evidence-d5c8af3b9546dfa15857 confirms 劉琨 exists in people.json. The distinct_from mentions (祖生/Zu Ti) are correctly identified as different persons. This is a well-supported resolution.\"}, {\"mention_id\": \"sfh1-mention-cd77fc84151ea2803a4271e3\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-b875f3ac1e4aa89886c5\", \"sfh1-ev-08-shangyu-043-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"canonical_name_match\", \"contextual_identity\"], \"explanation\": \"The mention 王敦 appears in the main text (sfh1-ev-08-shangyu-043-main): '少爲王敦所歎'. The surface form exactly matches the canonical name 王敦 in the candidate evidence sfh1-candidate-evidence-b875f3ac1e4aa89886c5. The context clearly identifies Wang Dun as the person who praised (所歎) Zu Ti. The reference semantics correctly distinguishes 王敦 from 劉琨, 祖車騎, and 朗. The candidate evidence directly supports this identity resolution. No contradicting evidence is present.\"}]}",
+              "name": "submit_sfh1_adversarial_reviews"
+            },
+            "id": "call_00_DmqhpVOyVawIqPU7ELyJ8082",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787999266,
+  "id": "4501677b-58f3-4183-b70d-52b9c3ee466f",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 805,
+    "prompt_cache_hit_tokens": 512,
+    "prompt_cache_miss_tokens": 1952,
+    "prompt_tokens": 2464,
+    "prompt_tokens_details": {
+      "cached_tokens": 512
+    },
+    "total_tokens": 3269
+  }
+}

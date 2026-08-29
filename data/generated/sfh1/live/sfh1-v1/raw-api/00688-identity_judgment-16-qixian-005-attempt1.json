@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"judgments\": [{\"mention_id\": \"sfh1-mention-0555c9e75847d433d8883307\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-16-qixian-005-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"direct_name_match\", \"historical_referent\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [\"苻堅\"], \"explanation\": \"符堅 is a direct full-name reference in the text. The candidate c0 matches this surface exactly. 符堅 (Fu Jian) is a well-known historical figure, the ruler of Former Qin. The text '郄嘉賓得人以已比符堅大喜' describes 郄嘉賓 being delighted that someone compared him to 符堅. The candidate c0 with matched surface 符堅 is the correct historical referent.\"}, {\"mention_id\": \"sfh1-mention-66c5ce7fa23ff0b11da3e73c\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-83a71a84e882de79edb8\", \"sfh1-candidate-evidence-9b706c4a914274a5f19f\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"direct_name_match\", \"historical_referent\"]}, {\"candidate_key\": \"c1\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-83a71a84e882de79edb8\", \"sfh1-candidate-evidence-9b706c4a914274a5f19f\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"direct_name_match\", \"historical_referent\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_ambiguous\", \"alternative_search_surfaces\": [], \"explanation\": \"郄嘉賓 is a direct full-name reference in the text. Both candidates c0 and c1 refer to the same person 郄嘉賓 from the prior candidate databases (wave-a and wave-b). Both candidates have identical names and matched surfaces, representing the same historical person. Since both candidates denote the same referent, the mention is supported but the choice between c0 and c1 is ambiguous as they are duplicate entries for the same person.\"}]}",
+              "name": "submit_sfh1_identity_judgments"
+            },
+            "id": "call_00_q94uSWWVqQul6PTcbWts7152",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787981435,
+  "id": "e4df81c9-7623-4cb6-a700-1898aa6a0837",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 620,
+    "prompt_cache_hit_tokens": 640,
+    "prompt_cache_miss_tokens": 1092,
+    "prompt_tokens": 1732,
+    "prompt_tokens_details": {
+      "cached_tokens": 640
+    },
+    "total_tokens": 2352
+  }
+}

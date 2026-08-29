@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"judgments\": [{\"mention_id\": \"sfh1-mention-06c6bfd5864511a3b3156558\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-23-rendan-049-liu-annotation-003\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"name_match\", \"contextual_role_match\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [\"桓伊\", \"桓子野\"], \"explanation\": \"The mention 伊 refers to 桓伊 (Huan Yi), the flute player. The candidate c0 is the local person form 伊 from the annotation. The annotation text mentions 桓伊善音樂 and 帝命伊吹笛, and the mention 伊 in annotation 003 refers to the same 桓伊. The candidate matches the historical referent.\"}, {\"mention_id\": \"sfh1-mention-88b3e2eab733514a643cd500\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-23-rendan-049-liu-annotation-002\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"name_match\", \"contextual_role_match\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [\"謝安\"], \"explanation\": \"The mention 謝安 appears in annotation 002: 孝武飲燕謝安侍坐. The candidate c0 is the existing person 謝安 from people.json. The name matches exactly and the context (謝安侍坐 during 孝武's banquet) is consistent with the historical 謝安.\"}, {\"mention_id\": \"sfh1-mention-a0dbee282bb72873ff2bef2f\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-23-rendan-049-main\"], \"reason_types\": [\"identity_mismatch\"]}], \"preferred_candidate_key\": null, \"resolution\": \"candidate_missing\", \"alternative_search_surfaces\": [\"王子猷\", \"王徽之\"], \"explanation\": \"The mention 王 in the main text (王在船中) refers to 王子猷 (Wang Ziyou / 王徽之), as stated in the local explanation and reference semantics. However, the supplied candidate c0 is 王恭 (Wang Gong), which is a different person. The candidate does not match the historical referent. The likely referent 王子猷 is not among the supplied candidates, so this is candidate_missing.\"}]}",
+              "name": "submit_sfh1_identity_judgments"
+            },
+            "id": "call_00_5FNiLDbZ7UFKFR5Tr3Kb3365",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787990423,
+  "id": "8faf72d4-5b8d-4ac5-92ed-4ad9d96ed3fb",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 690,
+    "prompt_cache_hit_tokens": 640,
+    "prompt_cache_miss_tokens": 1677,
+    "prompt_tokens": 2317,
+    "prompt_tokens_details": {
+      "cached_tokens": 640
+    },
+    "total_tokens": 3007
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"reviews\": [{\"mention_id\": \"sfh1-mention-86ef5c1479f3fac08445c2ec\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-04-wenxue-036-liu-annotation-002\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"direct_name_match\", \"historical_referent\"], \"explanation\": \"The mention 向秀 is a direct full-name reference to the Wei-Jin philosopher Xiang Xiu. The Liu annotation (sfh1-ev-04-wenxue-036-liu-annotation-002) explicitly compares 支遁 to 向秀, noting both admired Zhuangzi and Laozi. The annotation text '遁比向秀雅尚莊老二子異時風尚玄同也' directly names 向秀 as the historical referent. The evidence specifically supports this identity resolution.\"}, {\"mention_id\": \"sfh1-mention-a18a6c17a3e1a1308e79caf3\", \"candidate_key\": \"c1\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-04-wenxue-036-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"coreference_with_full_name\", \"surname_abbreviation_matches_full_name\"], \"explanation\": \"The surface 王 is the surname abbreviation of 王逸少 (Wang Xizhi). In the main text (sfh1-ev-04-wenxue-036-main), the full name 王逸少 appears at the start, and subsequent occurrences of 王 refer to the same person. The text '孫興公謂王曰' and '王本自有一徃雋氣' clearly show 王 referring to 王逸少. The evidence specifically supports this identity.\"}, {\"mention_id\": \"sfh1-mention-b033489fa36a23d8caa998f6\", \"candidate_key\": \"c1\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-04-wenxue-036-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"coreference_with_full_name\", \"pronoun_reference\"], \"explanation\": \"The surface 君 is the second-person pronoun used by 支道林 when addressing 王逸少. In the main text (sfh1-ev-04-wenxue-036-main), the passage '支語王曰君未可去貧道與君小語' shows 支道林 addressing 王 (who is 王逸少) as 君. The pronoun reference is clearly anchored to 王逸少 through the preceding context. The evidence specifically supports this identity.\"}, {\"mention_id\": \"sfh1-mention-be865665d8adc5bd5d9e4145\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-04-wenxue-036-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"courtesy_name_alias\", \"direct_name_match\"], \"explanation\": \"The surface 王逸少 is the courtesy name of Wang Xizhi (王羲之). The main text (sfh1-ev-04-wenxue-036-main) opens with '王逸少作㑹稽' and the entire narrative revolves around this person. The courtesy name 逸少 is a well-established alias for 王羲之. The evidence specifically supports this identity resolution.\"}]}",
+              "name": "submit_sfh1_adversarial_reviews"
+            },
+            "id": "call_00_Z56Nf88H0xT7JhadY0yx4922",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787997684,
+  "id": "c337c989-aba7-4b9b-a6b3-887defd52e09",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 835,
+    "prompt_cache_hit_tokens": 512,
+    "prompt_cache_miss_tokens": 2284,
+    "prompt_tokens": 2796,
+    "prompt_tokens_details": {
+      "cached_tokens": 512
+    },
+    "total_tokens": 3631
+  }
+}

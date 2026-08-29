@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"reviews\": [{\"mention_id\": \"sfh1-mention-d40205ade1dc43815502585d\", \"candidate_key\": \"c0\", \"verdict\": \"reject\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-05-fangzheng-053-main\"], \"reason_types\": [\"reference_semantics\", \"candidate_evidence_insufficient\"], \"explanation\": \"The proposed resolution identifies the surface '安石' as 謝安 based solely on an alias registry entry (sfh1-candidate-evidence-80cc131067455e965f7b) that records 謝安's courtesy name as 安石. However, the source evidence in the main text (sfh1-ev-05-fangzheng-053-main) shows the mention '安石渚' in the context of 阮光禄 (阮裕) fleeing from 殷、劉、許. The phrase '安石渚' refers to a place name (a shoal/landing named after 謝安), not to the person 謝安 himself. The mention is a toponymic reference, not a direct reference to the person. The candidate evidence only establishes that 安石 is 謝安's courtesy name in general, but does not specifically support that this particular occurrence of '安石' in the text refers to the person 謝安. The reference semantics returned 'uncertain' with no valid semantic record, and the system itself flagged low confidence. The identity resolution is not supported by the supplied evidence for this specific mention.\"}]}",
+              "name": "submit_sfh1_adversarial_reviews"
+            },
+            "id": "call_00_Ly5db6qiAyPLvi2SYWWH3207",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787989158,
+  "id": "07cbc8b7-bfe3-44b2-96f3-9c2b8935b578",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 379,
+    "prompt_cache_hit_tokens": 512,
+    "prompt_cache_miss_tokens": 616,
+    "prompt_tokens": 1128,
+    "prompt_tokens_details": {
+      "cached_tokens": 512
+    },
+    "total_tokens": 1507
+  }
+}

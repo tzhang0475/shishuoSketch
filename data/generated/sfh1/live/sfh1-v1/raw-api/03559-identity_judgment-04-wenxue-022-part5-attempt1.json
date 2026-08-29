@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"judgments\": [{\"mention_id\": \"sfh1-mention-c81f21da77de075755753482\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-04-wenxue-022-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"office_title_matches_person\", \"contextual_anaphoric_reference\"]}, {\"candidate_key\": \"c1\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-04-wenxue-022-main\"], \"reason_types\": [\"wrong_person_for_office_title_in_context\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [\"王導\", \"茂弘\"], \"explanation\": \"The mention 丞相 in the main text refers to 王丞相, who is 王導. The context clearly identifies the 丞相 as the one hosting the gathering with 殷中軍, which matches 王導. Candidate c1 (王隱) is not the referent here; the office title 丞相 in this story refers to 王導.\"}, {\"mention_id\": \"sfh1-mention-c865e7236e623c0e706495e6\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-17d55674d0ed29c3a8c6\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"courtesy_name_matches_person\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [\"謝尚\", \"謝鎮西\"], \"explanation\": \"仁祖 is the courtesy name of 謝尚, as confirmed by the alias registry evidence. The mention in the text (仁祖亦不寂寞) refers to 謝尚, who is also referred to as 謝鎮西 in the same passage.\"}, {\"mention_id\": \"sfh1-mention-efe2f6c7ebfec40a13d67e88\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-04-wenxue-022-liu-annotation-002\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"full_name_matches_person\", \"source_annotation_identifies_person\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [\"王述\", \"懷祖\", \"藍田\"], \"explanation\": \"王述 is the full name of the person identified in the Liu annotation. The annotation explicitly states 王述别傳曰述, confirming that 王述 is the person being described. The candidate c0 is a local candidate person matching this full name.\"}, {\"mention_id\": \"sfh1-mention-fd8bd62b974703bca32f1a41\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-04-wenxue-022-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"contextual_anaphoric_reference\", \"office_title_matches_person\"]}, {\"candidate_key\": \"c1\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-04-wenxue-022-main\"], \"reason_types\": [\"wrong_person_for_office_title_in_context\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [\"王導\", \"王丞相\"], \"explanation\": \"The pronoun 我 in 彼我 refers to the speaker's side in the reciprocal exchange between 殷 and 丞相. The 丞相 here is 王導 (c0), as established by the context of the story. The 我 refers to 王導's perspective. Candidate c1 (王隱) is not the referent.\"}]}",
+              "name": "submit_sfh1_identity_judgments"
+            },
+            "id": "call_00_7pkcKaELKEgFuWHqKYkn5933",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787998748,
+  "id": "9ba9da14-9828-4fcf-af1c-6cbea3f4be97",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 1019,
+    "prompt_cache_hit_tokens": 640,
+    "prompt_cache_miss_tokens": 2856,
+    "prompt_tokens": 3496,
+    "prompt_tokens_details": {
+      "cached_tokens": 640
+    },
+    "total_tokens": 4515
+  }
+}

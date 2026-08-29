@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"reviews\": [{\"mention_id\": \"sfh1-mention-d8d426b22a9041ff399ea71e\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-01-dexing-026-liu-annotation-002\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"canonical_name_match\", \"explicit_distinctness\"], \"explanation\": \"The mention 温嶠 is a full personal name appearing in the Liu annotation text '温嶠薦' (Wen Qiao recommended). The candidate evidence sfh1-candidate-evidence-31c90da011e67f25671d provides the canonical name 温嶠 from data/people.json. The supporting evidence sfh1-ev-01-dexing-026-liu-annotation-002 contains the exact surface form 温嶠 in the annotation, directly matching the canonical name. The reference semantics indicate this is a direct person form referring to Wen Qiao as the person who recommended 操. The annotation text explicitly names 温嶠 as the recommender, providing specific identity-bearing content. The candidate is explicitly marked as distinct from the anchor mention sfh1-mention-94435f7599f0bfb8a65f3f1e (which refers to 操), and there is no evidence suggesting conflation. The full name form 温嶠 with the surname 温 and given name 嶠 is unambiguous for the historical figure Wen Qiao. No contradicting evidence exists. The evidence specifically supports the identity of this mention as Wen Qiao.\"}]}",
+              "name": "submit_sfh1_adversarial_reviews"
+            },
+            "id": "call_00_QVLNUCrqmxtcTF16K8pt3152",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787998482,
+  "id": "8b100280-d3e4-40f0-8e6a-0f934755fa71",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 392,
+    "prompt_cache_hit_tokens": 640,
+    "prompt_cache_miss_tokens": 947,
+    "prompt_tokens": 1587,
+    "prompt_tokens_details": {
+      "cached_tokens": 640
+    },
+    "total_tokens": 1979
+  }
+}

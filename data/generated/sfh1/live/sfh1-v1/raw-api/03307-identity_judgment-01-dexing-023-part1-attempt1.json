@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"judgments\": [{\"mention_id\": \"sfh1-mention-06d31fb780880cc8c967a9e7\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-01-dexing-023-liu-annotation-002\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"direct_name_match\", \"historical_person_identification\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [\"王澄\", \"王平子\"], \"explanation\": \"王澄 in annotation-002 is the same person as 王澄字平子 in annotation-001 and 王平子 in the main text. The candidate c0 is the local person form 王澄, which directly matches the mention surface. This is the historical figure Wang Cheng (王澄), courtesy name 平子, a Jin dynasty official.\"}, {\"mention_id\": \"sfh1-mention-09dbbe7d516ccc88df517b0e\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-01-dexing-023-liu-annotation-001\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"courtesy_name_identification\", \"explicit_annotation_coreference\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [\"王澄\", \"王平子\"], \"explanation\": \"字平子 is the courtesy name of 王澄, explicitly stated in annotation-001 as '王澄字平子'. The candidate c0 (王澄) is the same person whose courtesy name is 平子. The annotation directly establishes this coreference.\"}, {\"mention_id\": \"sfh1-mention-6b5e3f1ad9652577b308a43d\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-01-dexing-023-liu-annotation-001\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"direct_name_match\", \"explicit_annotation_coreference\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [\"王澄\", \"王平子\"], \"explanation\": \"王澄 in annotation-001 is the full name of the person whose courtesy name is 平子, as stated in '王澄字平子'. The candidate c0 directly matches the mention surface 王澄. This is the historical figure Wang Cheng.\"}, {\"mention_id\": \"sfh1-mention-73ec8d8474bc3b64f70f60a7\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-01-dexing-023-liu-annotation-003\"], \"reason_types\": [\"different_historical_person\"]}], \"preferred_candidate_key\": null, \"resolution\": \"candidate_missing\", \"alternative_search_surfaces\": [\"阮籍\", \"阮嗣宗\"], \"explanation\": \"The mention 籍 refers to 阮籍 (Ruan Ji), the Wei dynasty figure mentioned in annotation-003 as '魏末阮籍嗜酒荒放'. The supplied candidate c0 is 王澄 (Wang Cheng), a different historical person. The candidate set lacks the correct referent 阮籍, so the resolution is candidate_missing.\"}]}",
+              "name": "submit_sfh1_identity_judgments"
+            },
+            "id": "call_00_bKNNwZTuhAwIFHaJ0KA15280",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787998402,
+  "id": "31cb6408-4e29-4221-b1ae-bb68181e5361",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 884,
+    "prompt_cache_hit_tokens": 640,
+    "prompt_cache_miss_tokens": 2443,
+    "prompt_tokens": 3083,
+    "prompt_tokens_details": {
+      "cached_tokens": 640
+    },
+    "total_tokens": 3967
+  }
+}

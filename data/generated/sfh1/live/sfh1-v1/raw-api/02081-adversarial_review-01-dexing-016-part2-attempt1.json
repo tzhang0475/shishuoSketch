@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"reviews\": [{\"mention_id\": \"sfh1-mention-ab0be2463f0d5c58c828330e\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-01-dexing-016-liu-annotation-005\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"office_holder_reference\", \"contextual_role\"], \"explanation\": \"The mention '中散大夫' is an office title. The annotation (sfh1-ev-01-dexing-016-liu-annotation-005) states '郎中拜中散大夫' — that 康 (嵇康) was promoted from 郎中 to 中散大夫. The main text (sfh1-ev-01-dexing-016-main) explicitly names 嵇康 as the person being discussed. The annotation evidence specifically ties this office to 嵇康, and the office-holder reference semantics correctly identify 嵇康 as the holder. The supporting evidence directly supports the identity resolution.\"}, {\"mention_id\": \"sfh1-mention-bd4a1ecf1b7301eb0de9ba27\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-01-dexing-016-liu-annotation-002\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"alias_match\"], \"explanation\": \"The mention '叔夜' is the courtesy name of 嵇康. The annotation (sfh1-ev-01-dexing-016-liu-annotation-002) explicitly states '康字叔夜' — that 康's courtesy name is 叔夜. The candidate evidence from aliases.json also confirms this. The alias match is directly supported by the supplied annotation evidence.\"}, {\"mention_id\": \"sfh1-mention-c2f07463626a725cd69246d5\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-01-dexing-016-liu-annotation-002\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"canonical_name_match\"], \"explanation\": \"The mention '王隱' refers to the historian 王隱, author of 晉書. The annotation (sfh1-ev-01-dexing-016-liu-annotation-002) explicitly cites '王隱晉書曰' — attributing a statement to 王隱's 晉書. The canonical name match is directly supported by the annotation evidence which names 王隱 as the source of the quoted text.\"}, {\"mention_id\": \"sfh1-mention-d1f5de9a692b833fe91390f6\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-01-dexing-016-liu-annotation-005\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"office_holder_reference\", \"contextual_role\"], \"explanation\": \"The mention '郎中' is an office title. The annotation (sfh1-ev-01-dexing-016-liu-annotation-005) states '郎中拜中散大夫' — that 康 (嵇康) held the office of 郎中 and was then promoted to 中散大夫. The main text (sfh1-ev-01-dexing-016-main) explicitly names 嵇康 as the subject. The annotation evidence specifically ties this office to 嵇康, and the office-holder reference semantics correctly identify 嵇康 as the holder.\"}]}",
+              "name": "submit_sfh1_adversarial_reviews"
+            },
+            "id": "call_00_htA7zrMVp8nekMudS1sU8247",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787991903,
+  "id": "c3532e9a-bb76-4838-b238-aa2cc771de6b",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 849,
+    "prompt_cache_hit_tokens": 512,
+    "prompt_cache_miss_tokens": 1931,
+    "prompt_tokens": 2443,
+    "prompt_tokens_details": {
+      "cached_tokens": 512
+    },
+    "total_tokens": 3292
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"judgments\": [{\"mention_id\": \"sfh1-mention-8c14f468e4b369f3825b0007\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-09-pinzao-088-liu-annotation-001\"], \"reason_types\": [\"courtesy_name_mismatch\"]}], \"preferred_candidate_key\": null, \"resolution\": \"candidate_missing\", \"alternative_search_surfaces\": [\"桓謙\", \"謙\"], \"explanation\": \"The mention surface 敬祖 appears in the Liu annotation which explicitly states '謙字敬祖沖第三子' — i.e., 桓謙's courtesy name is 敬祖. The supplied candidate c0 is 卞範之, whose courtesy name is also 敬祖 per the alias registry, but the annotation context clearly identifies 敬祖 as referring to 桓謙 (son of 桓沖), not 卞範之. The main text discusses 桓謙 being compared to 殷仲文. The candidate 卞範之 is a different person with the same courtesy name, so it contradicts the historical referent here. The likely referent 桓謙 is not among the supplied candidates.\"}]}",
+              "name": "submit_sfh1_identity_judgments"
+            },
+            "id": "call_00_3zvHeiOzGXRGfpoeDqW55834",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787981374,
+  "id": "f392c7b9-2ed8-4356-ab09-8957f94e1090",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 331,
+    "prompt_cache_hit_tokens": 640,
+    "prompt_cache_miss_tokens": 632,
+    "prompt_tokens": 1272,
+    "prompt_tokens_details": {
+      "cached_tokens": 640
+    },
+    "total_tokens": 1603
+  }
+}

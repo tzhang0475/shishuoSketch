@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"reviews\": [{\"mention_id\": \"sfh1-mention-d27367c843ea458654380997\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-ef07baca02a916e7caee\", \"sfh1-ev-09-pinzao-017-liu-annotation-002\", \"sfh1-ev-09-pinzao-017-liu-annotation-004\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"personal_name_match\", \"contextual_role_match\"], \"explanation\": \"The mention 鯤 is the personal name of 謝鯤. The main text explicitly states 明帝問謝鯤, and the annotation sfh1-ev-09-pinzao-017-liu-annotation-002 confirms 鯤 is the person being asked by 太子. The annotation sfh1-ev-09-pinzao-017-liu-annotation-004 also references 鯤 in the context of 謝鯤's biography (幼輿 is 謝鯤's courtesy name). The evidence directly supports the identity resolution.\"}, {\"mention_id\": \"sfh1-mention-e14e674ba851aa1f7f90992f\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-426008629f07a8d9e703\", \"sfh1-ev-09-pinzao-017-liu-annotation-004\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"canonical_name_match\", \"contextual_role_match\"], \"explanation\": \"The mention 庾亮 in the main text refers to 庾亮, the person 謝鯤 is compared to. The annotation sfh1-ev-09-pinzao-017-liu-annotation-004 explicitly states 時以庾亮方焉, confirming this is the historical figure 庾亮. The canonical name match from data/people.json directly supports this resolution. No contradicting evidence exists.\"}]}",
+              "name": "submit_sfh1_adversarial_reviews"
+            },
+            "id": "call_00_2ptLugPuzlGo7aHR5NnU8116",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787999319,
+  "id": "327c10a7-f53d-485f-881d-0d9a172a2f25",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 509,
+    "prompt_cache_hit_tokens": 512,
+    "prompt_cache_miss_tokens": 1521,
+    "prompt_tokens": 2033,
+    "prompt_tokens_details": {
+      "cached_tokens": 512
+    },
+    "total_tokens": 2542
+  }
+}

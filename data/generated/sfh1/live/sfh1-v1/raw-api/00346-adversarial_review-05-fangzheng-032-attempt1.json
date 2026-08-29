@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"reviews\": [{\"mention_id\": \"sfh1-mention-22176d8b97c5f778c8da5d98\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-05-fangzheng-032-main\", \"sfh1-ev-05-fangzheng-032-liu-annotation-002\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"contextual_role\", \"name_match\"], \"explanation\": \"The mention '敦' appears in the main text of story 05-fangzheng-032, where 王敦 (Wang Dun) is the central figure attempting to depose the Crown Prince. The text explicitly names 王敦 at the start ('王敦既下住船石頭'), and the character 敦 throughout refers to him. The Liu annotation also references 敦's actions. The candidate evidence from the same source text confirms this identity.\"}, {\"mention_id\": \"sfh1-mention-44286cbe578954d4fddb27d2\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-05-fangzheng-032-main\", \"sfh1-ev-05-fangzheng-032-liu-annotation-001\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"contextual_role\", \"name_match\"], \"explanation\": \"The mention '敦' in the main text of 05-fangzheng-032 refers to 王敦, who is explicitly named at the start of the passage. The Liu annotation (sfh1-ev-05-fangzheng-032-liu-annotation-001) explicitly mentions '敦欲廢明' (Dun wanted to depose Emperor Ming), confirming this is 王敦. The context of the entire passage is about 王敦's plot against the Crown Prince.\"}, {\"mention_id\": \"sfh1-mention-ba2e87da4a4d8a4d779839fe\", \"candidate_key\": \"c1\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-05-fangzheng-032-main\", \"sfh1-ev-05-fangzheng-032-liu-annotation-002\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"contextual_role\", \"name_match\"], \"explanation\": \"The mention '温' refers to 温嶠 (Wen Qiao), who is called '温太真' in the main text and described as having been 東宫率 and later 王敦's 司馬. The Liu annotation (sfh1-ev-05-fangzheng-032-liu-annotation-002) explicitly mentions '嶠既正言敦忿而愧焉' and '温司馬昔在東宫', confirming this is 温嶠. The hard veto against c0 (王敦) is correct since 温嶠 and 王敦 are distinct persons.\"}, {\"mention_id\": \"sfh1-mention-e52e8be9e3679d331b379fa5\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-05-fangzheng-032-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"contextual_role\", \"name_match\"], \"explanation\": \"The mention '王敦' is the explicit full name appearing at the start of the main text of 05-fangzheng-032. The passage is entirely about 王敦's attempt to depose the Crown Prince, and the full name directly identifies the person. The candidate evidence from people.json confirms the canonical name match.\"}]}",
+              "name": "submit_sfh1_adversarial_reviews"
+            },
+            "id": "call_00_B907pWy5WVNbRMxIvBEh6092",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787980937,
+  "id": "3f227e3e-0e86-43ba-960c-8a92bf752764",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 869,
+    "prompt_cache_hit_tokens": 512,
+    "prompt_cache_miss_tokens": 1192,
+    "prompt_tokens": 1704,
+    "prompt_tokens_details": {
+      "cached_tokens": 512
+    },
+    "total_tokens": 2573
+  }
+}

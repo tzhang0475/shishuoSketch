@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"reviews\": [{\"mention_id\": \"sfh1-mention-006fceb689505b99bc3a1354\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-74909d0e49b42e71e4e3\", \"sfh1-ev-08-shangyu-006-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"alias_registry\", \"contextual_identity\"], \"explanation\": \"The surface form 王濬沖 is resolved to 王戎 via the alias registry (surname + courtesy name). The main text of this story explicitly pairs 王濬沖 with 裴叔則 (Pei Kai), and the Liu annotation identifies 鍾會異之/戎爲兒童, confirming that 王濬沖 is indeed 王戎. The candidate evidence from aliases.json provides the courtesy-name mapping 濬沖 → 王戎, and the main text context (王濬沖裴叔則二人緫角詣鍾士季) matches the well-known anecdote about young Wang Rong and Pei Kai visiting Zhong Hui. The supporting evidence specifically supports the identity.\"}, {\"mention_id\": \"sfh1-mention-8f506ceaa54c5f9ac524bef2\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-61cd84829e589c73826b\", \"sfh1-ev-08-shangyu-006-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"canonical_name_match\", \"contextual_identity\"], \"explanation\": \"The surface form 王戎 is a direct canonical name match to the candidate 王戎. The main text context confirms this is the same person as 王濬沖 in the same story (王濬沖裴叔則二人緫角詣鍾士季...王戎簡要), and the Liu annotation 戎爲兒童 explicitly identifies 王戎. The canonical name match plus contextual corroboration from the main text and annotation specifically support this identity.\"}]}",
+              "name": "submit_sfh1_adversarial_reviews"
+            },
+            "id": "call_00_U4cswGZvu9JcYeVNIDiD5669",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787981112,
+  "id": "59ecd0b4-5197-4d86-94ff-eba8fcf17e81",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 519,
+    "prompt_cache_hit_tokens": 512,
+    "prompt_cache_miss_tokens": 750,
+    "prompt_tokens": 1262,
+    "prompt_tokens_details": {
+      "cached_tokens": 512
+    },
+    "total_tokens": 1781
+  }
+}

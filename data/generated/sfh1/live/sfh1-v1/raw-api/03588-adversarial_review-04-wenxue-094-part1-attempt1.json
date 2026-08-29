@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"reviews\": [{\"mention_id\": \"sfh1-mention-20fd5f6a210419457b0ebcbc\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-cc50df109ba9e6b23d16\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"historical_referent\", \"name_match\"], \"explanation\": \"The surface 樂彦輔 is the courtesy name of 樂廣 (Yue Guang), a well-attested historical figure of the Western Jin period. The evidence text lists him among famous scholars (名士) alongside 王夷甫 (王衍), 張茂先 (張華), 周弘武, and 杜方叔, all of whom are contemporaneous Western Jin figures. 樂廣's courtesy name was 彦輔, and this matches the alias registry. The mention appears in the Liu annotation listing 中朝名士, consistent with 樂廣's historical identity. No contradicting evidence is present.\"}, {\"mention_id\": \"sfh1-mention-2ec76bc5331fcf28f13c3296\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-16ce2347ef909faae94f\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"historical_referent\", \"name_match\"], \"explanation\": \"The surface 向子期 is the courtesy name of 向秀 (Xiang Xiu), one of the Seven Worthies of the Bamboo Grove (竹林七賢). The evidence text explicitly lists him among the 竹林名士 group alongside 山巨源, 劉伯倫, 阮仲容, 王濬仲, etc. The reference semantics correctly identifies him as distinct from other named persons in the same list. The alias registry match of courtesy name to historical person is well-supported.\"}, {\"mention_id\": \"sfh1-mention-3c4ed75c3c07cac88e456f26\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-dc260b9038e97d598b39\", \"sfh1-ev-04-wenxue-094-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"historical_referent\", \"name_match\", \"coreference\"], \"explanation\": \"The surface 彦伯 is the courtesy name of 袁宏 (Yuan Hong). The candidate evidence from aliases.json explicitly states '袁宏字彦伯' and provides biographical details matching the historical Yuan Hong. The main text sfh1-ev-04-wenxue-094-main opens with '袁彦伯作名士傳成', confirming that 彦伯 refers to the author of the 名士傳, which is 袁宏. The coreference with the full-name mention is well-supported.\"}, {\"mention_id\": \"sfh1-mention-8aa5c18333f44d20ac781dcf\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-04-wenxue-094-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"contextual_title_match\", \"coreference\"], \"explanation\": \"The surface 公 is the honorific within 謝公, referring to 謝安 (Xie An). The main text sfh1-ev-04-wenxue-094-main states '見謝公公笑曰', where 謝公 is the full reference and the second 公 is the honorific pronoun referring back to the same person. The reference semantics correctly identifies this as coreference with the 謝公 mention. The identity assessment cites sfh1-ev-04-wenxue-094-main as supporting evidence, which is the correct source. 謝公 as a contextual title for 謝安 is well-attested in Shishuo Xinyu.\"}]}",
+              "name": "submit_sfh1_adversarial_reviews"
+            },
+            "id": "call_00_kRdhrrb1NyyBOmgkyCEZ5954",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787998783,
+  "id": "7764127e-5b8d-438b-8136-333645ed10a5",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 936,
+    "prompt_cache_hit_tokens": 512,
+    "prompt_cache_miss_tokens": 2098,
+    "prompt_tokens": 2610,
+    "prompt_tokens_details": {
+      "cached_tokens": 512
+    },
+    "total_tokens": 3546
+  }
+}

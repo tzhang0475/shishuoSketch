@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"reviews\": [{\"mention_id\": \"sfh1-mention-8733ddfdebe89064c2ccb1ed\", \"candidate_key\": \"c0\", \"verdict\": \"reject\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-07-shijian-018-main\"], \"reason_types\": [\"contextual_role\", \"name_match\"], \"explanation\": \"The proposed resolution maps the surface 王仲祖 to 王濛 based on the alias registry entry (surname + courtesy name). However, the supplied evidence for the candidate (sfh1-candidate-evidence-ff7fa0bd7804ed74baa1) is from aliases.json and merely shows 王仲祖 being used as a name in a different context — it does not establish that this specific mention in story 07-shijian-018 refers to 王濛. The main text evidence (sfh1-ev-07-shijian-018-main) places 王仲祖 alongside 謝仁祖 and 劉眞長 visiting 殷揚州's tomb, discussing 淵源 (殷浩). While 王濛 (字仲祖) is a known historical figure, the candidate evidence does not specifically tie this mention to that person. The reference semantics explicitly state 'No valid semantic record was returned; fail closed' with semantic_type 'uncertain' and confidence 'low'. The alias registry match alone is insufficient to confirm identity for this specific mention; the candidate evidence is from a different source context and does not confirm this particular occurrence refers to 王濛. Compatibility and model confidence are insufficient per the review criteria.\"}, {\"mention_id\": \"sfh1-mention-c1b7f4a1e3ca1ea55c1726ca\", \"candidate_key\": \"c0\", \"verdict\": \"reject\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-07-shijian-018-main\"], \"reason_types\": [\"contextual_role\", \"name_match\"], \"explanation\": \"The proposed resolution maps the surface 謝仁祖 to 謝尚 based on the alias registry entry (surname + courtesy name). However, the supplied candidate evidence (sfh1-candidate-evidence-f343f51fd9d960d38dd9) is from aliases.json and shows 謝仁祖 in a different narrative context (the 蔡司徒 彭蜞 story) — it does not establish that this specific mention in story 07-shijian-018 refers to 謝尚. The main text evidence (sfh1-ev-07-shijian-018-main) places 謝仁祖 alongside 王仲祖 and 劉眞長 visiting 殷揚州's tomb. While 謝尚 (字仁祖) is a known historical figure, the candidate evidence does not specifically tie this mention to that person. The reference semantics explicitly state 'No valid semantic record was returned; fail closed' with semantic_type 'uncertain' and confidence 'low'. The alias registry match alone is insufficient to confirm identity for this specific mention; the candidate evidence is from a different source context and does not confirm this particular occurrence refers to 謝尚. Compatibility and model confidence are insufficient per the review criteria.\"}]}",
+              "name": "submit_sfh1_adversarial_reviews"
+            },
+            "id": "call_00_0Khf69hO8DYvi5xbOULE3193",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787989380,
+  "id": "6f04b591-46ff-4551-a6cf-3694330fb66f",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 742,
+    "prompt_cache_hit_tokens": 512,
+    "prompt_cache_miss_tokens": 896,
+    "prompt_tokens": 1408,
+    "prompt_tokens_details": {
+      "cached_tokens": 512
+    },
+    "total_tokens": 2150
+  }
+}

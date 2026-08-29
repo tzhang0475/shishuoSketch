@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"judgments\": [{\"mention_id\": \"sfh1-mention-19b9115e7b9a534351ffd25e\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-08cc6b0acc2df73dd0a6\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"alias_registry_match\", \"contextual_role\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [\"周顗\", \"周伯仁\"], \"explanation\": \"周侯 is the addressee in the passage, addressed by 謝幼輿. The candidate evidence from aliases.json identifies 周侯 as 周顗 (Zhou Yi), a well-known figure of the Eastern Jin period. The Liu annotation also references 顗, confirming the identity of the person being discussed. The candidate c0 (周顗) is supported.\"}, {\"mention_id\": \"sfh1-mention-3d2dca8e9199a9e979811441\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-06b805e420b2c558ee3a\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"alias_registry_match\", \"full_name_match\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [\"謝鯤\", \"謝幼輿\"], \"explanation\": \"謝幼輿 is the speaker in the passage, and the candidate evidence from aliases.json identifies 謝幼輿 as 謝鯤 (Xie Kun). The surface form 謝幼輿 is a surname plus courtesy name, matching the candidate's name 謝鯤. The candidate c0 is supported.\"}, {\"mention_id\": \"sfh1-mention-8ba0099c01f2b05135478b23\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-2b18cf43eac61238ba8b\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"personal_name_match\", \"annotation_context\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [\"周顗\", \"顗\"], \"explanation\": \"The surface 顗 is the personal name of 周顗 (Zhou Yi), as confirmed by the candidate evidence from the Liu annotation which explicitly identifies 顗 as the person referenced. The annotation (媟瀆故/謂顗好) discusses 顗 in the context of the main text about 周侯, confirming the identity. Candidate c0 (周顗) is supported.\"}]}",
+              "name": "submit_sfh1_identity_judgments"
+            },
+            "id": "call_00_9t0B6BceSkFN1EAERkNf4465",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787981694,
+  "id": "7f1e0ad5-c1ae-4589-a211-0795f0eaaa28",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 724,
+    "prompt_cache_hit_tokens": 640,
+    "prompt_cache_miss_tokens": 1457,
+    "prompt_tokens": 2097,
+    "prompt_tokens_details": {
+      "cached_tokens": 640
+    },
+    "total_tokens": 2821
+  }
+}

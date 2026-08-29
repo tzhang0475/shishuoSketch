@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"reviews\": [{\"mention_id\": \"sfh1-mention-0f6c9bef89d0f2dd151408d9\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-06-yaliang-027-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"contextual_role_match\", \"surname_matches_full_name\"], \"explanation\": \"The surface form 謝 is an abbreviated surname reference. The main text explicitly mentions 謝安 in the same passage (呼謝安王坦之入), and the mention 謝 appears in the same narrative context referring to the same person. The full name 謝安 appears in the same source text, providing direct evidence for the identity resolution. The candidate evidence from people.json confirms 謝安 as a canonical person. The reference semantics indicate coreference with the full-name mention 謝安, and the contextual role (being summoned by 桓宣武) matches.\"}, {\"mention_id\": \"sfh1-mention-2c692e6ba4a03838c0788d7c\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-06-yaliang-027-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"full_name_match\", \"contextual_role_match\"], \"explanation\": \"The surface form 謝安 is a direct full-name reference. The main text explicitly names 謝安 as one of the people summoned by 桓宣武. The candidate evidence from people.json confirms 謝安 as a canonical person. The full name match is exact and the contextual role is consistent with the historical 謝安 being a Jin dynasty official. No contradicting evidence exists.\"}, {\"mention_id\": \"sfh1-mention-31e840cb73398b66e41e5d2a\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-06-yaliang-027-liu-annotation-002\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"personal_name_match\", \"contextual_role_match\"], \"explanation\": \"The surface form 温 is an abbreviated personal name reference. The Liu annotation (sfh1-ev-06-yaliang-027-liu-annotation-002) explicitly mentions 温 in the context of 超 (郗超), stating 温亦深相器重. The annotation text connects 温 to the same narrative about 桓宣武 and 郗超 from the main text. The candidate evidence from the Liu annotation source identifies 温 as 桓溫. The hard veto on c1 (explicit identity contradiction) is noted but does not contradict the c0 resolution. The personal name 温 matches 桓溫's given name, and the contextual role in the annotation aligns with the main text's 桓宣武.\"}, {\"mention_id\": \"sfh1-mention-dbc2e81c4ab369462c4e0cdd\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-06-yaliang-027-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"posthumous_title_alias\", \"contextual_identity\"], \"explanation\": \"The surface form 桓宣武 is a posthumous title reference. The main text (sfh1-ev-06-yaliang-027-main) uses 桓宣武 as the primary referent throughout the passage, and the candidate evidence from aliases.json explicitly maps 桓宣武 to 桓溫. The posthumous title 宣武 is a well-established alias for 桓溫. The contextual role in the main text (discussing court matters with 郗超, summoning 謝安 and 王坦之) is consistent with 桓溫's historical role. The reference semantics note 'fail closed' with low confidence, but the alias registry evidence and the main text context provide sufficient support for the identity resolution.\"}]}",
+              "name": "submit_sfh1_adversarial_reviews"
+            },
+            "id": "call_00_IYswTi6T9m2mlY27MpAL1341",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787999096,
+  "id": "c41f8142-c759-423b-8cbb-286c0b393ad2",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 935,
+    "prompt_cache_hit_tokens": 512,
+    "prompt_cache_miss_tokens": 2076,
+    "prompt_tokens": 2588,
+    "prompt_tokens_details": {
+      "cached_tokens": 512
+    },
+    "total_tokens": 3523
+  }
+}

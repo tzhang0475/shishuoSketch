@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"reviews\": [{\"mention_id\": \"sfh1-mention-77384f21d7e0d63998129785\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-f5adb18ae5c471536a0c\", \"sfh1-ev-08-shangyu-019-main\", \"sfh1-ev-08-shangyu-019-liu-annotation-003\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"canonical_name_match\", \"contextual_fit\"], \"explanation\": \"The mention surface is 張華, and the candidate evidence from people.json provides 張華 as a canonical name. The main text has 張華 speaking to 陸平原 about 褚陶, and the Liu annotation (sfh1-ev-08-shangyu-019-liu-annotation-003) explicitly mentions 司空張華 writing to 褚陶, confirming this is the same historical figure 張華. The context is consistent — 張華 was a prominent Jin dynasty official who interacted with figures like 陸機 (陸平原) and 顧榮 (顧彦先).\"}, {\"mention_id\": \"sfh1-mention-8682cf28eb95e74ae9afe63f\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-85de7f97f747028ca6d5\", \"sfh1-ev-08-shangyu-019-main\", \"sfh1-ev-08-shangyu-019-liu-annotation-004\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"alias_registry_match\", \"contextual_fit\"], \"explanation\": \"The mention surface is 彦先, which is the courtesy name of 顧榮. The candidate evidence from aliases.json (sfh1-candidate-evidence-85de7f97f747028ca6d5) contains a passage from 晉書 establishing 顧榮's courtesy name as 彦先. The main text has 顧彦先 mentioned alongside 陸平原 in the context of praising 褚陶, and the Liu annotation (sfh1-ev-08-shangyu-019-liu-annotation-004) explicitly references 彦先鳳鳴於朝陽, confirming the identification. The context is consistent with 顧榮 being a contemporary of 張華 and 陸機.\"}, {\"mention_id\": \"sfh1-mention-9909ed6fcf07443f31fab8a4\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-25288e9dba02bb2caf4d\", \"sfh1-ev-08-shangyu-019-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"alias_registry_match\", \"contextual_fit\"], \"explanation\": \"The mention surface is 顧彦先, which combines the surname 顧 with the courtesy name 彦先, matching 顧榮. The candidate evidence from aliases.json (sfh1-candidate-evidence-25288e9dba02bb2caf4d) contains the exact same passage as the main text, explicitly using 顧彦先 in the context of 張華 speaking to 陸平原. The main text itself uses 顧彦先 in this context, and the identification with 顧榮 is well-supported by the alias registry evidence showing 顧榮's courtesy name is 彦先.\"}, {\"mention_id\": \"sfh1-mention-ba962bc2a9b09324e76188e0\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-91a6491381e498d2e8ba\", \"sfh1-ev-08-shangyu-019-liu-annotation-003\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"canonical_name_match\", \"contextual_fit\"], \"explanation\": \"The mention surface is 張華, and the candidate evidence from people.json provides 張華 as a canonical name. The Liu annotation (sfh1-ev-08-shangyu-019-liu-annotation-003) explicitly mentions 司空張華 writing to 褚陶, which is consistent with the main text where 張華 praises 褚陶. The identification is straightforward — the surface form exactly matches the canonical name, and the historical context (張華 as a Jin dynasty official interacting with 陸機 and 顧榮) is consistent.\"}]}",
+              "name": "submit_sfh1_adversarial_reviews"
+            },
+            "id": "call_00_Q1aM4SaKAVVTYYzRFk290035",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787981125,
+  "id": "d0c73eec-d8e4-46ac-8f9c-096e91462ca0",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 1063,
+    "prompt_cache_hit_tokens": 512,
+    "prompt_cache_miss_tokens": 1512,
+    "prompt_tokens": 2024,
+    "prompt_tokens_details": {
+      "cached_tokens": 512
+    },
+    "total_tokens": 3087
+  }
+}

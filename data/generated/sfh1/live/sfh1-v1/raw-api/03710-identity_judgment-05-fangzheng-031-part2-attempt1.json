@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"judgments\": [{\"mention_id\": \"sfh1-mention-6115e6ec8ac6484b8d76ae9f\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-7b96506c26d0097d89c1\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"office_title_match\", \"historical_context\"]}, {\"candidate_key\": \"c1\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-candidate-evidence-4d0992a6f50a73513e4c\"], \"reason_types\": [\"wrong_person\", \"office_title_misattribution\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [\"王敦\", \"處仲\"], \"explanation\": \"王大將軍 in the main text refers to Wang Dun (王敦), the Grand General who rebelled. The candidate c0 (王敦) matches the historical context of the rebellion against the court. Candidate c1 (王隱) is a different person who was also called 王大將軍 in a different context (the 楊朗 story), but the main text here describes the rebellion where 伯仁 (周顗) speaks about 處仲 (Wang Dun's courtesy name), confirming c0.\"}, {\"mention_id\": \"sfh1-mention-a436b69a38f097071061d57b\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-3102418a67b89c9676f0\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"personal_name_match\", \"historical_context\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [\"周顗\", \"伯仁\"], \"explanation\": \"顗 is the personal name of Zhou Yi (周顗), also known as 伯仁. The Liu annotation context discusses 王敦討劉隗時温太真...與顗相見, which matches Zhou Yi's historical role. The candidate c0 correctly identifies 顗 as 周顗.\"}, {\"mention_id\": \"sfh1-mention-a9a69ab2f7122ea9cec427f2\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-7501b0825bd31024b2ce\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"surname_plus_courtesy_name_match\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [\"温嶠\", \"温太真\"], \"explanation\": \"温太真 is the surname plus courtesy name of Wen Qiao (温嶠). The candidate c0 correctly identifies this person. The annotation context places 温太真 in the scene with 顗 during 王敦's campaign against 劉隗, consistent with Wen Qiao's historical role.\"}, {\"mention_id\": \"sfh1-mention-b7e1475108456ecb0e8b3114\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-05-fangzheng-031-liu-annotation-005\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"courtesy_name_match\", \"historical_context\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [\"王澄\", \"王平子\"], \"explanation\": \"平子 is the courtesy name of Wang Cheng (王澄). The annotation context describes 大將軍 (王敦) borrowing 平子's jade pillow and later killing him, which matches the historical account of Wang Dun killing Wang Cheng. The candidate c0 correctly identifies 平子 as Wang Cheng.\"}]}",
+              "name": "submit_sfh1_identity_judgments"
+            },
+            "id": "call_00_ePuN0fZN3jCVnFUEevGc9877",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787998978,
+  "id": "7452483a-f97b-45c4-91b0-9a5f8b9c6bf9",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 1002,
+    "prompt_cache_hit_tokens": 640,
+    "prompt_cache_miss_tokens": 2668,
+    "prompt_tokens": 3308,
+    "prompt_tokens_details": {
+      "cached_tokens": 640
+    },
+    "total_tokens": 4310
+  }
+}

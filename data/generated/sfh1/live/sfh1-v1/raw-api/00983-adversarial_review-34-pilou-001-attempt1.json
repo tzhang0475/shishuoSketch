@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"reviews\": [{\"mention_id\": \"sfh1-mention-033d5fb38761246e11c32f70\", \"candidate_key\": \"c0\", \"verdict\": \"reject\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-34-pilou-001-main\"], \"reason_types\": [\"surname_reference\", \"insufficient_evidence\"], \"explanation\": \"The mention surface is simply '王' (Wang), and the only candidate evidence is a single character '王' from the source text. The story is about 王敦 (Wang Dun), and the character 王 in the main text '王謂廁上亦下果食' refers to 王敦 as the subject of the passage. However, the proposed resolution assigns this mention to 王恭 (Wang Gong), which is a different person entirely. The supporting evidence cited (sfh1-candidate-evidence-5ac1030740e200b43118) only shows the character '王' with no indication it refers to 王恭. The main text clearly concerns 王敦 (as confirmed by the annotation mentioning 敦 and the story context about 王敦初尚主). There is no evidence that this '王' refers to 王恭. The surname alone is insufficient to establish identity with 王恭, and the passage context points to 王敦 instead.\"}, {\"mention_id\": \"sfh1-mention-c85cc0ec826997e0bd30fb6c\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-8df55da7edf53d2a89f7\", \"sfh1-ev-34-pilou-001-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"canonical_name_match\", \"subject_of_passage\"], \"explanation\": \"The mention surface is '王敦' and the candidate is 王敦 (Wang Dun). The canonical name matches exactly. The main text '王敦初尚主' explicitly names 王敦 as the subject of the passage. The candidate evidence from people.json confirms 王敦 as a canonical person. The annotation further confirms this is about 王敦 (敦尚武帝女). This is a direct canonical name match with the passage subject.\"}, {\"mention_id\": \"sfh1-mention-eb27d78c1848aa1bbfadc62d\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-60b559a5c93e820f92e3\", \"sfh1-ev-34-pilou-001-liu-annotation-001\", \"sfh1-ev-34-pilou-001-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"annotation_identity\", \"personal_name_reference\", \"subject_of_passage\"], \"explanation\": \"The mention surface is '敦' (Dun), and the candidate is 王敦 (Wang Dun). The Liu annotation explicitly states '(陽公主字修褘/敦尚武帝女舞)' which directly identifies 敦 as the person who married the emperor's daughter, matching the main text's '王敦初尚主'. The annotation confirms that 敦 refers to 王敦. The main text establishes 王敦 as the subject throughout. The personal name '敦' is used as a direct reference to 王敦, and the annotation provides explicit identity confirmation.\"}]}",
+              "name": "submit_sfh1_adversarial_reviews"
+            },
+            "id": "call_00_V8dScjDKyJgqsc4AiMbO3279",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787981853,
+  "id": "3d92ccd8-e7e4-4ffa-b450-da48d56cce4a",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 811,
+    "prompt_cache_hit_tokens": 512,
+    "prompt_cache_miss_tokens": 869,
+    "prompt_tokens": 1381,
+    "prompt_tokens_details": {
+      "cached_tokens": 512
+    },
+    "total_tokens": 2192
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"reviews\": [{\"mention_id\": \"sfh1-mention-55d2856f0c58ce2c33d3cd13\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-1bbf91b73ba5e296a977\", \"sfh1-ev-35-huoni-003-liu-annotation-001\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"alias_registry\", \"annotation_coreference\"], \"explanation\": \"The surface 賈公閭 matches the alias registry entry for 賈充 (surname 賈 + courtesy name 公閭). The Liu annotation explicitly states 充字公閭, confirming that 公閭 is the courtesy name of 充 (Jia Chong). The main text describes 賈公閭後妻郭氏, and the annotation confirms 充 is Jia Chong. The evidence directly supports the identity resolution.\"}, {\"mention_id\": \"sfh1-mention-786ad8f25aca7f1c3c9e041d\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-b1fa0a1895435ef54d69\", \"sfh1-ev-35-huoni-003-liu-annotation-001\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"alias_registry\", \"annotation_coreference\"], \"explanation\": \"The surface 公閭 is the courtesy name of 充 (Jia Chong), as explicitly confirmed by the Liu annotation 充字公閭. The alias registry entry maps 公閭 to 賈充. The annotation evidence directly supports this identity resolution. The hard veto against c1 (explicit_identity_contradiction) is consistent with the annotation that 充 is distinct from his father 逵.\"}, {\"mention_id\": \"sfh1-mention-7a00710077ea642a2ec1b117\", \"candidate_key\": \"c1\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-d505fbb524b1e2411a75\", \"sfh1-ev-35-huoni-003-liu-annotation-001\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"alias_registry\", \"annotation_coreference\"], \"explanation\": \"The surface 充 refers to Jia Chong (賈充), whose courtesy name is 公閭. The Liu annotation 充字公閭 explicitly confirms this identity. The alias registry entry for 賈公閭 maps to 賈充. The annotation also notes 充父逵, distinguishing 充 from his father 逵, which is consistent with the hard veto against c0. The evidence directly supports the identity resolution.\"}]}",
+              "name": "submit_sfh1_adversarial_reviews"
+            },
+            "id": "call_00_h5347lWrZoeN8a2bsEa05614",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787990888,
+  "id": "f7fa6b13-85ec-4477-ab1b-082d40012749",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 674,
+    "prompt_cache_hit_tokens": 512,
+    "prompt_cache_miss_tokens": 1976,
+    "prompt_tokens": 2488,
+    "prompt_tokens_details": {
+      "cached_tokens": 512
+    },
+    "total_tokens": 3162
+  }
+}

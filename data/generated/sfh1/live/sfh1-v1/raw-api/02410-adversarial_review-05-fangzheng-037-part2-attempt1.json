@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"reviews\": [{\"mention_id\": \"sfh1-mention-b4f21faf6f7a19e5a960ed98\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-f5c3b41a8c398a9d135e\", \"sfh1-ev-05-fangzheng-037-liu-annotation-001\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"canonical_name_match\", \"coreference_chain\"], \"explanation\": \"The mention surface is 峻, the single-character personal name of 蘇峻 (Su Jun). The Liu annotation explicitly states '石自破高山峻也' identifying 石 as 峻, and the main text's '蘇子高事平' refers to Su Jun (蘇峻, courtesy name 子高). The annotation also links 碩 as 峻's younger brother. The candidate evidence from people.json provides the canonical entry 蘇峻. The annotation evidence directly supports the identification of 峻 as 蘇峻.\"}, {\"mention_id\": \"sfh1-mention-f1aa41d3929d6de3df698cf6\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-2c8b1718162d2a00d98a\", \"sfh1-ev-05-fangzheng-037-liu-annotation-004\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"canonical_name_match\", \"contextual_role\"], \"explanation\": \"The mention surface is 陶侃, the full canonical name of Tao Kan. The candidate evidence from people.json provides the canonical entry 陶侃. The Liu annotation '平陶侃欲將坦上用' explicitly mentions 陶侃 in the context of the Su Jun rebellion being pacified, which matches the historical role of Tao Kan as the general who suppressed Su Jun's rebellion. The full-name surface match combined with the annotation's explicit mention of 陶侃 in the correct historical context supports the identification.\"}, {\"mention_id\": \"sfh1-mention-f4fedc50956d4ae7701517ef\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-eeff30a0c32cdbbe50ab\", \"sfh1-ev-05-fangzheng-037-liu-annotation-001\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"canonical_name_match\", \"coreference_chain\"], \"explanation\": \"The mention surface is 石, which the Liu annotation explicitly identifies as referring to 峻 (蘇峻) via '石自破高山峻也'. The annotation also states '碩峻弟也' linking 碩 as 峻's younger brother, and '峻碩猶據石頭潰' confirms 峻 and 碩 were holding 石頭 (Stone City), explaining the 石 abbreviation. The candidate evidence from people.json provides the canonical entry 蘇峻. The annotation directly supports the identification of 石 as 蘇峻.\"}]}",
+              "name": "submit_sfh1_adversarial_reviews"
+            },
+            "id": "call_00_FG8wFJkVKKUWukvvbrwQ3842",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787993644,
+  "id": "d04de609-b381-40f8-a58b-35cc145c95a0",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 738,
+    "prompt_cache_hit_tokens": 512,
+    "prompt_cache_miss_tokens": 1725,
+    "prompt_tokens": 2237,
+    "prompt_tokens_details": {
+      "cached_tokens": 512
+    },
+    "total_tokens": 2975
+  }
+}

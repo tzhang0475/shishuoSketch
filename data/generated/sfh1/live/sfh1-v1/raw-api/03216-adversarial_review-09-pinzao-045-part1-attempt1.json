@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"reviews\": [{\"mention_id\": \"sfh1-mention-61cce276d7226fa19db15542\", \"candidate_key\": \"c0\", \"verdict\": \"reject\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-candidate-evidence-89d1b5ef994e62aa6f7e\"], \"reason_types\": [\"reference_semantics\", \"evidence_quality\"], \"explanation\": \"The proposed resolution maps the surface '安石' to 謝安 based solely on an alias registry entry for his courtesy name. However, the supplied evidence text (sfh1-candidate-evidence-89d1b5ef994e62aa6f7e) is a fragment from a 文字志 entry about 謝安, not from the actual story context. The story (sfh1-ev-09-pinzao-045-main) has 桓公 asking 孔西陽 about '安石' — this is a question about a person's character, and the context is a 品藻 (grading) discussion. The alias registry evidence merely establishes that 安石 is a courtesy name for 謝安 in general, but does not specifically tie the mention in this story to 謝安. The reference semantics explicitly state 'No valid semantic record was returned; fail closed' with 'confidence: low' and 'semantic_type: uncertain'. The candidate evidence is a generic alias lookup, not story-specific evidence confirming that this particular '安石' refers to 謝安. While 謝安 is a plausible candidate for the courtesy name 安石, the supplied evidence does not specifically support identity in this context — it only shows the alias exists in a registry. This is insufficient for acceptance under adversarial review standards.\"}, {\"mention_id\": \"sfh1-mention-65152767d73f61a0d5ee03ce\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-f53bd081092b07848f63\", \"sfh1-ev-09-pinzao-045-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"alias_registry\", \"contextual_title\", \"reference_semantics\"], \"explanation\": \"The surface '桓公' is resolved to 桓溫. The candidate evidence (sfh1-candidate-evidence-f53bd081092b07848f63) shows the alias registry entry for 桓公 as a contextual title for 桓溫, with a well-known passage about 桓公北征 (桓溫's northern expedition) — this is a canonical identification of 桓公 as 桓溫. In the story text (sfh1-ev-09-pinzao-045-main), 桓公 asks 孔西陽 about 安石's character. The context of a 品藻 discussion in the 世說新語 where 桓公 appears as a questioner is consistent with 桓溫, who is the standard referent for 桓公 in this text. The alias registry evidence specifically supports the contextual title mapping, and the story context does not contradict this identification. While the reference semantics report low confidence due to no semantic record, the alias registry evidence for 桓公→桓溫 is well-established and the story context (桓公 as an interlocutor in a 品藻 passage) is fully compatible. The evidence specifically supports the identity.\"}]}",
+              "name": "submit_sfh1_adversarial_reviews"
+            },
+            "id": "call_00_KW0qnu7LUAVKockgH9ey2679",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787997991,
+  "id": "64368157-03ee-434f-9271-6518e7bad7f2",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 782,
+    "prompt_cache_hit_tokens": 640,
+    "prompt_cache_miss_tokens": 729,
+    "prompt_tokens": 1369,
+    "prompt_tokens_details": {
+      "cached_tokens": 640
+    },
+    "total_tokens": 2151
+  }
+}

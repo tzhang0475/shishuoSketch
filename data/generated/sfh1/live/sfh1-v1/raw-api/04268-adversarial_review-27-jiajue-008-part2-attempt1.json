@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"reviews\": [{\"mention_id\": \"sfh1-mention-9a50e14395832b4693307741\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-2e67f027fe84a9a429d5\", \"sfh1-ev-27-jiajue-008-liu-annotation-002\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"canonical_name_match\", \"direct_name_match\"], \"explanation\": \"The mention surface is 蘇峻, which exactly matches the canonical name of the candidate. The Liu annotation (sfh1-ev-27-jiajue-008-liu-annotation-002) explicitly discusses 蘇峻 as a rebel figure (豺狼) in the context of the Su Jun rebellion, consistent with the historical Su Jun. The main text (sfh1-ev-27-jiajue-008-main) also references 蘇峻之難 (the Su Jun disaster), confirming this is the historical rebel general Su Jun. The direct name match plus contextual corroboration from the annotation text supports the identity resolution.\"}, {\"mention_id\": \"sfh1-mention-a07c0ea2cba63ce86d37e968\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-27-jiajue-008-liu-annotation-003\", \"sfh1-ev-27-jiajue-008-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"contextual_identification\", \"coreference\", \"speaker_role\"], \"explanation\": \"The mention surface is 我 (first-person pronoun). The main text (sfh1-ev-27-jiajue-008-main) shows 温公勸庾詣陶曰...我為卿保之 — the speaker saying 'I will guarantee it for you' is 温公, who is identified as 温嶠. The Liu annotation (sfh1-ev-27-jiajue-008-liu-annotation-003) explicitly names 平南温嶠 in the same narrative context. The speaker role and coreference chain to 温公/温嶠 are clearly established by the supplied evidence.\"}, {\"mention_id\": \"sfh1-mention-a38f46fbe32f5c5c218ef70a\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-27-jiajue-008-liu-annotation-004\", \"sfh1-ev-27-jiajue-008-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"contextual_identification\", \"coreference\", \"name_matching\"], \"explanation\": \"The mention surface is 亮 (surname-only reference). The main text (sfh1-ev-27-jiajue-008-main) shows 庾元規 (Yu Yuan-gui, i.e., 庾亮) being addressed, and the narrative concerns 庾公/庾亮 throughout. The Liu annotation (sfh1-ev-27-jiajue-008-liu-annotation-004) states 時亮敗績, referring to 庾亮's defeat, which matches the main text context where 庾 suffered defeat. The surname-only form 亮 is a standard abbreviated reference to 庾亮, and the contextual identification is strongly supported by the supplied evidence.\"}, {\"mention_id\": \"sfh1-mention-b4b8ce4a5e9119dee29c330d\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-27-jiajue-008-liu-annotation-002\", \"sfh1-ev-27-jiajue-008-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"contextual_identification\", \"name_matching\"], \"explanation\": \"The mention surface is 蘇峻, exactly matching the canonical name of the candidate. The main text (sfh1-ev-27-jiajue-008-main) opens with 陶公自上流來赴蘇峻之難, referring to the Su Jun rebellion. The Liu annotation (sfh1-ev-27-jiajue-008-liu-annotation-002) explicitly discusses 蘇峻 as the rebel figure. Although the semantic record for this mention returned 'uncertain' (fail closed), the supplied evidence directly names 蘇峻 in the same historical context, and the exact name match with the candidate's canonical name provides sufficient support for identity.\"}]}",
+              "name": "submit_sfh1_adversarial_reviews"
+            },
+            "id": "call_00_qC4peou9OAULf9FdUVZQ4550",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787999743,
+  "id": "00e2d50b-8b22-4e25-8073-053dec42a8b6",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 1067,
+    "prompt_cache_hit_tokens": 512,
+    "prompt_cache_miss_tokens": 2480,
+    "prompt_tokens": 2992,
+    "prompt_tokens_details": {
+      "cached_tokens": 512
+    },
+    "total_tokens": 4059
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"reviews\": [{\"mention_id\": \"sfh1-mention-c64cb76c32b40f61329d84d1\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-608bffd3a852970a4b92\", \"sfh1-ev-27-jiajue-009-liu-annotation-001\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"personal_name_matches\", \"contextual_identification\"], \"explanation\": \"The mention surface is 嶠, which is the personal name of 温嶠. The main text (sfh1-ev-27-jiajue-009-main) explicitly uses 嶠 in the phrase '如嶠比' and '不減嶠' referring to the protagonist 温公. The Liu annotation (sfh1-ev-27-jiajue-009-liu-annotation-001) explicitly states '按温氏譜嶠初取髙平李暅女中取琅邪王詡女後取廬江何䆳女', confirming that 嶠 in the annotation refers to 温嶠. The alias registry evidence provides the contextual title 温公 for 温嶠. The identity is directly supported by the personal name 嶠 matching 温嶠's given name, and the annotation explicitly ties this 嶠 to 温氏譜 (Wen family genealogy). No contradicting evidence exists.\"}, {\"mention_id\": \"sfh1-mention-d680da204dde882e551877c4\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-27-jiajue-009-liu-annotation-003\", \"sfh1-ev-27-jiajue-009-main\", \"sfh1-ev-27-jiajue-009-liu-annotation-004\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"contextual_identification\", \"title_office_reference\"], \"explanation\": \"The mention surface is 劉 (surname-only). The main text states '公為劉越石長史' — 温公 served as 長史 under 劉越石, and 劉越石 is the courtesy name of 劉琨. The Liu annotation 003 reads '嶠為劉...' referring to the same relationship. Annotation 004 explicitly mentions '琨假守左司馬都督上前鋒諸軍事討劉聦', confirming 琨 (劉琨) is the person being discussed. The surname 劉 in this context refers to 劉琨, as the main text establishes 温公's service under 劉越石 (=劉琨). The candidate evidence (sfh1-candidate-evidence-d3d2943f51ca337e10fc) shows the surface 琨 from the annotation, directly matching 劉琨's personal name. This is a surname-only reference to 劉琨, and the contextual evidence from both the main text and annotations supports this identification.\"}, {\"mention_id\": \"sfh1-mention-f03f25553f8ba8f6f22cace0\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-1d3448186f9b2ee8e5df\", \"sfh1-ev-27-jiajue-009-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"alias_registry_match\", \"contextual_identification\", \"title_office_reference\"], \"explanation\": \"The mention surface is 温公, which is the office-title reference to 温嶠. The alias registry evidence (sfh1-candidate-evidence-1d3448186f9b2ee8e5df) explicitly maps 温公 to 温嶠. The main text (sfh1-ev-27-jiajue-009-main) describes 温公 as the protagonist who lost his wife and sought a new marriage, and later the text uses 嶠 to refer to the same person ('如嶠比', '不減嶠'), confirming 温公 = 嶠 = 温嶠. The main text also states '公為劉越石長史', which is consistent with 温嶠's historical role. The reference semantics correctly identify this as an office_holder_reference. No contradicting evidence exists.\"}]}",
+              "name": "submit_sfh1_adversarial_reviews"
+            },
+            "id": "call_00_Ut5McGqtPwEe4ZVqEX7d8724",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787999755,
+  "id": "91735185-eb6f-4902-a9b8-750b3ad0e12c",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 1029,
+    "prompt_cache_hit_tokens": 512,
+    "prompt_cache_miss_tokens": 2249,
+    "prompt_tokens": 2761,
+    "prompt_tokens_details": {
+      "cached_tokens": 512
+    },
+    "total_tokens": 3790
+  }
+}

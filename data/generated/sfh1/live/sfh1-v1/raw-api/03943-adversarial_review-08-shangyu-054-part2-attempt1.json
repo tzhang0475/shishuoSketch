@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"reviews\": [{\"mention_id\": \"sfh1-mention-452dcaa3f14e351a07a735b1\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-08-shangyu-054-liu-annotation-006\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"coreference\", \"office_title_match\"], \"explanation\": \"The mention 丞相 is resolved to 王導. The supporting evidence sfh1-ev-08-shangyu-054-liu-annotation-006 contains '王丞相云' in the main text and the annotation text '丞相聞之曰王茂弘' where 王茂弘 is 王導's courtesy name. The annotation explicitly links 丞相 to 王茂弘 (王導). The candidate evidence sfh1-candidate-evidence-af30922a34f0f6b3d91b also confirms 王導's identity with 丞相. The coreference chain is well-supported by the annotation text.\"}, {\"mention_id\": \"sfh1-mention-556b263dfc9e96250bd60260\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-89adb16f46670713e879\", \"sfh1-ev-08-shangyu-054-liu-annotation-003\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"name_match\", \"contextual_identity\"], \"explanation\": \"The mention 壼 is resolved to 卞壼. The candidate evidence sfh1-candidate-evidence-89adb16f46670713e879 contains '壼' as a matched surface, and the annotation sfh1-ev-08-shangyu-054-liu-annotation-003 contains '卞壼别傳曰壼字望之' which explicitly identifies 壼 as 卞壼. The annotation text directly states 壼's courtesy name is 望之 and identifies him as 卞壼. The name match is direct and the annotation provides explicit identity assertion.\"}, {\"mention_id\": \"sfh1-mention-5dcda51fcf2462b5feb46783\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-c4ff99d3fc8c20aa27a6\", \"sfh1-ev-08-shangyu-054-liu-annotation-004\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"name_match\", \"contextual_identity\"], \"explanation\": \"The mention 蘇峻 is resolved to 蘇峻. The candidate evidence sfh1-candidate-evidence-c4ff99d3fc8c20aa27a6 from data/people.json provides the canonical name 蘇峻, and the annotation sfh1-ev-08-shangyu-054-liu-annotation-004 contains '蘇峻作亂' which directly names 蘇峻 as the rebel leader. The name match is exact and the contextual evidence confirms this is the historical 蘇峻 who led the rebellion during the 咸和 era.\"}, {\"mention_id\": \"sfh1-mention-7280e4f5d1677afd5228afc7\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-e275332835b61b1d94fa\", \"sfh1-ev-08-shangyu-054-liu-annotation-007\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"alias_match\", \"contextual_identity\"], \"explanation\": \"The mention 卞望之 is resolved to 卞壼. The candidate evidence sfh1-candidate-evidence-e275332835b61b1d94fa contains '卞望之' as a matched surface from the alias registry, and the annotation sfh1-ev-08-shangyu-054-liu-annotation-007 contains '若卞望之之巖巖' which directly uses 卞望之 as a name. The annotation sfh1-ev-08-shangyu-054-liu-annotation-003 explicitly states '壼字望之' (卞壼's courtesy name is 望之), confirming that 卞望之 is the courtesy name of 卞壼. The alias match is directly supported by the annotation's explicit statement of the courtesy name relationship.\"}]}",
+              "name": "submit_sfh1_adversarial_reviews"
+            },
+            "id": "call_00_2arfeWcJB3QfwI5C86rM8411",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787999294,
+  "id": "4c867264-7782-4896-b312-0156ab868fbd",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 1036,
+    "prompt_cache_hit_tokens": 512,
+    "prompt_cache_miss_tokens": 2170,
+    "prompt_tokens": 2682,
+    "prompt_tokens_details": {
+      "cached_tokens": 512
+    },
+    "total_tokens": 3718
+  }
+}

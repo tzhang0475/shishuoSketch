@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"judgments\": [{\"mention_id\": \"sfh1-mention-2164efbf9d8a34b1f5dd2159\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-06-yaliang-027-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"contextual_identity\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [], \"explanation\": \"The mention '王' refers to 王坦之 by surname. In the main text, 謝安 and 王坦之 are called in together, and then '王直擲還' — 王 throws the document back. The candidate c0 is 王恭, but the local explanation says 王 refers to 王坦之. However, the candidate provided is 王恭, not 王坦之. The mention surface '王' in context refers to 王坦之 (who was called in with 謝安), not 王恭. The candidate c0 is 王恭, which does not match the historical referent 王坦之. This is a candidate_missing situation.\"}, {\"mention_id\": \"sfh1-mention-2c692e6ba4a03838c0788d7c\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-06-yaliang-027-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"canonical_name_match\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [], \"explanation\": \"謝安 is explicitly named in the main text as being called into the room. The candidate c0 is 謝安 with canonical name match. This is a clear support.\"}, {\"mention_id\": \"sfh1-mention-31e840cb73398b66e41e5d2a\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-06-yaliang-027-liu-annotation-002\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"contextual_identity\"]}, {\"candidate_key\": \"c1\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-06-yaliang-027-liu-annotation-002\"], \"reason_types\": [\"contextual_identity\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [], \"explanation\": \"The annotation mentions '温' in the context of 郗超's relationship with 桓温 (桓宣武). The annotation text '超謂温雄武當樂推之運' refers to 郗超 speaking about 温 (桓温). The candidate c0 is 桓溫, which matches. Candidate c1 is 温嶠, which does not fit this context.\"}, {\"mention_id\": \"sfh1-mention-dbc2e81c4ab369462c4e0cdd\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-06-yaliang-027-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"alias_registry_match\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [], \"explanation\": \"桓宣武 is the posthumous title of 桓溫. The main text begins with 桓宣武, and the candidate c0 is 桓溫 matched via alias registry. This is a clear support.\"}, {\"mention_id\": \"sfh1-mention-e5f3dd23f82daceb9e66635d\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-06-yaliang-027-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"canonical_name_match\"]}, {\"candidate_key\": \"c1\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-06-yaliang-027-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"canonical_name_match\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_ambiguous\", \"alternative_search_surfaces\": [], \"explanation\": \"王坦之 is explicitly named in the main text as being called into the room. Both candidates c0 and c1 are 王坦之 from the same prior candidate source. They appear to be duplicate candidates for the same person. Both support the mention.\"}]}",
+              "name": "submit_sfh1_identity_judgments"
+            },
+            "id": "call_00_5gp8YzAvR1QwSE34okod9498",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787981039,
+  "id": "ae985f86-c987-42dd-8e91-cf35902839bf",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 1177,
+    "prompt_cache_hit_tokens": 2432,
+    "prompt_cache_miss_tokens": 47,
+    "prompt_tokens": 2479,
+    "prompt_tokens_details": {
+      "cached_tokens": 2432
+    },
+    "total_tokens": 3656
+  }
+}

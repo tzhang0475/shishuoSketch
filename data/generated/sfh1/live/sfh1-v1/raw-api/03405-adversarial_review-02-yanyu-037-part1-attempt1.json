@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"reviews\": [{\"mention_id\": \"sfh1-mention-02ba493b066ce3ad38cd1114\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-b66ed06f2c0ecbdb24db\", \"sfh1-ev-02-yanyu-037-liu-annotation-004\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"canonical_name_match\", \"contextual_role_match\"], \"explanation\": \"The mention surface is 劉隗, the exact canonical name for Liu Wei. The annotation text explicitly states 敦以劉隗為間 (Dun used Liu Wei as a wedge), confirming this is the historical figure Liu Wei. The candidate evidence from people.json provides the canonical name. No contradicting evidence exists.\"}, {\"mention_id\": \"sfh1-mention-0f2c3ea4040411cdee133f96\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-94ced38f7af2fc572d59\", \"sfh1-ev-02-yanyu-037-liu-annotation-005\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"canonical_name_match\", \"contextual_role_match\"], \"explanation\": \"The mention surface is 劉隗, the exact canonical name for Liu Wei. Annotation-005 states 導從兄敦舉兵討劉隗 (Dao's elder cousin Dun raised troops to attack Liu Wei), confirming this refers to the same historical figure Liu Wei who is the target of Wang Dun's campaign. The candidate evidence from people.json provides the canonical name. No contradicting evidence.\"}, {\"mention_id\": \"sfh1-mention-1091da9b673cc8168e56765b\", \"candidate_key\": \"c1\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-fea01b51810ad074c8d8\", \"sfh1-ev-02-yanyu-037-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"contextual_role_match\", \"office_title_match\"], \"explanation\": \"The mention surface is 明公, an honorific. The main text says 王丞相詣闕謝 (Wang the Chancellor went to the palace to apologize), and the letter writer addresses this person as 明公. The alias evidence from aliases.json identifies 丞相 as an office title for 王導 (Wang Dao), and the main text confirms the 丞相 is the person being addressed. The context of the 王敦 rebellion and the 丞相 going to apologize aligns with Wang Dao's historical role. The hard veto against c0 (王導 vs 劉隗) is correct since 明公 clearly refers to the 丞相, not Liu Wei.\"}, {\"mention_id\": \"sfh1-mention-129f1e5865effe25a6fa0deb\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-02-yanyu-037-liu-annotation-004\", \"sfh1-ev-02-yanyu-037-liu-annotation-005\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"contextual_identity\", \"name_match\"], \"explanation\": \"The mention surface is 導, the abbreviated personal name for 王導 (Wang Dao). Annotation-005 states 導從兄敦舉兵討劉隗導率子弟二十餘人 (Dao's elder cousin Dun raised troops... Dao led over twenty sons and younger brothers), confirming 導 refers to Wang Dao. The candidate evidence from people.json provides the canonical name 王導. The reference semantics correctly identify this as distinct from 劉隗 and 敦 (王敦). No contradicting evidence.\"}]}",
+              "name": "submit_sfh1_adversarial_reviews"
+            },
+            "id": "call_00_wjrC1KWXTvVBKsie41W39047",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787998538,
+  "id": "c07f456c-594a-421a-81ba-2ae83f9953d9",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 909,
+    "prompt_cache_hit_tokens": 512,
+    "prompt_cache_miss_tokens": 2335,
+    "prompt_tokens": 2847,
+    "prompt_tokens_details": {
+      "cached_tokens": 512
+    },
+    "total_tokens": 3756
+  }
+}

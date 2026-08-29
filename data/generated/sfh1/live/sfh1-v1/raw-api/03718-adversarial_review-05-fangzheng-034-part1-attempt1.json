@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"reviews\": [{\"mention_id\": \"sfh1-mention-14781a7673e50f18f45c5aed\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-05-fangzheng-034-main\", \"sfh1-ev-05-fangzheng-034-liu-annotation-003\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"canonical_name_match\", \"historical_context\"], \"explanation\": \"The mention surface is 蘇峻, the full canonical name. The main text explicitly states 蘇峻既至石頭, and the Liu annotation (annotation-003) repeatedly refers to 峻 in the context of the same rebel general. The candidate evidence from people.json provides the canonical name 蘇峻. The main text and annotation context unambiguously identify this as Su Jun, the rebel general. No contradicting evidence exists.\"}, {\"mention_id\": \"sfh1-mention-5099b7e36790b10c005c7853\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-05-fangzheng-034-liu-annotation-003\", \"sfh1-ev-05-fangzheng-034-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"abbreviated_name_match\", \"coreference_with_main_text\"], \"explanation\": \"The surface 峻 is an abbreviated personal name. Annotation-003 states 詔書徵峻峻 and 峻外營將表白鼓自鳴峻, clearly referring to the same 蘇峻 from the main text. The coreference chain links this mention to sfh1-mention-14781a7673e50f18f45c5aed (蘇峻) and sfh1-mention-cea76d9cf914ae6575ea132d (峻 with courtesy name 子高). The annotation context about the rebel general matches the main text's 蘇峻. No distinctness or contradicting evidence is present.\"}, {\"mention_id\": \"sfh1-mention-8ec1f287685e5cedf5649782\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-05-fangzheng-034-liu-annotation-001\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"author_of_cited_work\", \"canonical_name_match\"], \"explanation\": \"The surface 王隱 is the full name of the author of 王隱晉書, cited in annotation-001. The candidate evidence from people.json provides the canonical name 王隱. The reference semantics explicitly mark this as distinct from 蘇峻 mentions and from the 王 surname reference in annotation-002. The annotation text 王隱晉書曰 clearly identifies 王隱 as the author of the cited work. No contradicting evidence exists.\"}, {\"mention_id\": \"sfh1-mention-cea76d9cf914ae6575ea132d\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-754d73eeff01f27628e0\", \"sfh1-ev-05-fangzheng-034-liu-annotation-001\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"historical_identity\", \"name_alias_match\"], \"explanation\": \"The surface 峻 is an abbreviated personal name for 蘇峻. Annotation-001 states 峻字子高, and the alias registry evidence (sfh1-candidate-evidence-754d73eeff01f27628e0) confirms 蘇峻's courtesy name is 子高, providing a direct biographical link. The coreference chain connects this mention to the main text's 蘇峻 (sfh1-mention-14781a7673e50f18f45c5aed). The reference semantics explicitly distinguish this from 王隱 and the 王 surname reference. The alias evidence directly supports the identity resolution.\"}]}",
+              "name": "submit_sfh1_adversarial_reviews"
+            },
+            "id": "call_00_Nt4QV0qLuqxfdWHv4lpR7302",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787998987,
+  "id": "e3a05834-c874-448f-98d1-200c08fe24b3",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 945,
+    "prompt_cache_hit_tokens": 640,
+    "prompt_cache_miss_tokens": 2145,
+    "prompt_tokens": 2785,
+    "prompt_tokens_details": {
+      "cached_tokens": 640
+    },
+    "total_tokens": 3730
+  }
+}

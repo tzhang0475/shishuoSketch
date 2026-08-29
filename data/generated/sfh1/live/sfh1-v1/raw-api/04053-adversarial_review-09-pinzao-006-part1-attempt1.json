@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"reviews\": [{\"mention_id\": \"sfh1-mention-1ebd229fbcb7f6ea60696b01\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-09-pinzao-006-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"name_match\", \"contextual_fit\"], \"explanation\": \"The mention 王導 appears in the main text in the phrase '裴遐方王導', pairing 裴遐 with 王導 in the 八裴方八王 comparison. The candidate evidence from data/people.json identifies 王導 as a canonical person. The surface form exactly matches the canonical name. The reference semantics explicitly states this 王導 is distinct from other Wangs mentioned (王敦, 王戎, 王玄, 王綏, 王澄), which is consistent with the comparison structure where each Pei is paired with a distinct Wang. The main text evidence directly supports this identification.\"}, {\"mention_id\": \"sfh1-mention-59e2b40b1a9db6d865048749\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-09-pinzao-006-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"name_match\", \"contextual_identity\"], \"explanation\": \"The mention 王敦 appears in the main text in the phrase '裴瓉方王敦', pairing 裴瓉 with 王敦 in the 八裴方八王 comparison. The candidate evidence from data/people.json identifies 王敦 as a canonical person. The surface form exactly matches the canonical name. While the reference semantics returned 'uncertain' with low confidence, the main text evidence directly shows 王敦 in the comparison structure, and the surface name match is exact. The identity assessment cites contextual identity and name match as supporting reasons.\"}, {\"mention_id\": \"sfh1-mention-7ce622920f2e40bb874ab388\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-24ce21db7731f1557c85\", \"sfh1-ev-09-pinzao-006-liu-annotation-008\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"annotation_identity_assertion\", \"office_title_reference\"], \"explanation\": \"The mention 台輔 is an office title (chief minister position). The candidate evidence from the Liu annotation source identifies 顗 (荀顗) as the person holding this office. The annotation text '轉太尉爲台輔' in sfh1-ev-09-pinzao-006-liu-annotation-008 describes 荀顗's career progression to this position. The reference semantics anchors this office title to 顗 (sfh1-mention-ebab8d6ee4c07ce10e70a279), and the candidate evidence explicitly asserts this identity. The annotation identity assertion directly supports the resolution.\"}, {\"mention_id\": \"sfh1-mention-91ba59d5add392f01f356fe8\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-09-pinzao-006-main\", \"sfh1-ev-09-pinzao-006-liu-annotation-007\", \"sfh1-ev-09-pinzao-006-liu-annotation-008\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"name_match\", \"contextual_role\"], \"explanation\": \"The mention 荀顗 appears in the main text in the phrase '荀顗方陳泰', pairing 荀顗 with 陳泰 in the 五荀方五陳 comparison. The candidate evidence from data/people.json identifies 荀顗 as a canonical person. The surface form exactly matches the canonical name. The Liu annotations (sfh1-ev-09-pinzao-006-liu-annotation-007 and -008) discuss 顗 (荀顗), his biography, and his career including '轉太尉爲台輔', providing corroborating context. The main text directly names 荀顗 in the comparison structure, and the annotations confirm this person's identity.\"}]}",
+              "name": "submit_sfh1_adversarial_reviews"
+            },
+            "id": "call_00_JIg3vbucTOG9DsWEjIex5950",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787999441,
+  "id": "2af91a9f-2513-43a7-bebf-e01aaf50ad47",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 1007,
+    "prompt_cache_hit_tokens": 512,
+    "prompt_cache_miss_tokens": 2496,
+    "prompt_tokens": 3008,
+    "prompt_tokens_details": {
+      "cached_tokens": 512
+    },
+    "total_tokens": 4015
+  }
+}

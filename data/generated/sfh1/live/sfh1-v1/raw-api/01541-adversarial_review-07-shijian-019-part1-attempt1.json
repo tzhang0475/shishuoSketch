@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"reviews\": [\n  {\n    \"mention_id\": \"sfh1-mention-192ce6595ef5b6038d2d7f84\",\n    \"candidate_key\": \"c0\",\n    \"verdict\": \"reject\",\n    \"supporting_evidence_ids\": [],\n    \"contradicting_evidence_ids\": [\"sfh1-candidate-evidence-24a32519fc444626b9b9\"],\n    \"reason_types\": [\"contextual_mismatch\", \"source_context_mismatch\"],\n    \"explanation\": \"The proposed resolution maps '陶公' to 陶侃 based on an alias registry entry from data/aliases.json that describes a scene where 陶公 comes from upstream to deal with 蘇峻之難 and interacts with 庾公 and 温公. However, the actual story (07-shijian-019) is about 庾翼's death and succession to the Jingzhou post, with 何充 and 桓温 being discussed. The alias evidence text is from a completely different narrative context (蘇峻之難, involving 庾亮 and 温嶠) and does not appear in the source evidence for this story. The mention '陶公' in the story context appears in the Liu annotation (sfh1-ev-07-shijian-019-liu-annotation-003) where 何充 says '陶公重勲' referring to 陶侃's meritorious service — but the supplied evidence is from a different passage entirely and does not establish that this specific mention refers to 陶侃. The evidence text does not match the story's context and cannot support this specific mention resolution.\"\n  },\n  {\n    \"mention_id\": \"sfh1-mention-4499b3c902a51cf16e5d377a\",\n    \"candidate_key\": \"c0\",\n    \"verdict\": \"accept\",\n    \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-42067cfd81bf7447aa61\", \"sfh1-ev-07-shijian-019-liu-annotation-003\"],\n    \"contradicting_evidence_ids\": [],\n    \"reason_types\": [\"canonical_name_match\", \"contextual_identity\"],\n    \"explanation\": \"The mention '何充' is resolved to 何充. The canonical name evidence from data/people.json directly matches the surface form. Additionally, in the story's Liu annotation (sfh1-ev-07-shijian-019-liu-annotation-003), 何充 is explicitly mentioned in the context of discussing who should succeed 庾翼 as Jingzhou governor, saying '陶公重勲' — this is consistent with the historical 何充 who was involved in such succession discussions. The canonical name match combined with the contextual appearance in the story's annotations supports this resolution.\"\n  },\n  {\n    \"mention_id\": \"sfh1-mention-604899f1c21a3290e9043ad5\",\n    \"candidate_key\": \"c0\",\n    \"verdict\": \"accept\",\n    \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-82ed6589157afc937d6b\", \"sfh1-ev-07-shijian-019-main\", \"sfh1-ev-07-shijian-019-liu-annotation-005\", \"sfh1-ev-07-shijian-019-liu-annotation-006\"],\n    \"contradicting_evidence_ids\": [],\n    \"reason_types\": [\"orthographic_variant_match\", \"contextual_identity\"],\n    \"explanation\": \"The mention '桓温' is resolved to 桓溫. The surface form '桓温' is an orthographic variant of the canonical name '桓溫' (温/溫 variant). The story's main text explicitly discusses using 桓温 to succeed in the western campaign ('共議用桓温'), and the Liu annotations repeatedly reference 桓温 in this exact context (sfh1-ev-07-shijian-019-liu-annotation-005: '議者欲以授桓温', sfh1-ev-07-shijian-019-liu-annotation-006: '温去必能定西楚'). The alias evidence also confirms 桓温 as an orthographic variant. The contextual identity is strongly supported by the story's own text.\"\n  },\n  {\n    \"mention_id\": \"sfh1-mention-aa8fe2a18845eaa0344a8be2\",\n    \"candidate_key\": \"c0\",\n    \"verdict\": \"accept\",\n    \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-0976c88dad6af8cf8755\", \"sfh1-ev-07-shijian-019-main\", \"sfh1-ev-07-shijian-019-liu-annotation-005\", \"sfh1-ev-07-shijian-019-liu-annotation-006\"],\n    \"contradicting_evidence_ids\": [],\n    \"reason_types\": [\"orthographic_variant_match\", \"contextual_identity\"],\n    \"explanation\": \"The mention '桓温' is resolved to 桓溫. Same as the other 桓温 mention in this story — the surface form is an orthographic variant of 桓溫, and the story's main text and Liu annotations consistently reference 桓温 in the context of the Jingzhou succession discussion. The alias evidence confirms the orthographic variant relationship. Contextual identity is strongly supported.\"\n  }\n]}",
+              "name": "submit_sfh1_adversarial_reviews"
+            },
+            "id": "call_00_f38Se04iCWCGH3OHHqFs2011",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787989507,
+  "id": "e1fe40f0-7d52-440f-a5a5-0b5071752d27",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 1217,
+    "prompt_cache_hit_tokens": 512,
+    "prompt_cache_miss_tokens": 1941,
+    "prompt_tokens": 2453,
+    "prompt_tokens_details": {
+      "cached_tokens": 512
+    },
+    "total_tokens": 3670
+  }
+}

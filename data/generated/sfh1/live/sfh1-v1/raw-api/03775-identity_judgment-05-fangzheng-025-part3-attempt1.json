@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"judgments\": [{\"mention_id\": \"sfh1-mention-4351bac296138f41f9b748b8\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-05-fangzheng-025-liu-annotation-005\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"office_holder_identity\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [], \"explanation\": \"The mention 侍中 is an office title. The annotation (sfh1-ev-05-fangzheng-025-liu-annotation-005) reads 父忱侍中, indicating that 羊忱 held the office of 侍中. The candidate 謝安 is the supplied candidate, but the office holder is 羊忱. However, the candidate c0 is 謝安, which does not match the office holder 羊忱. Wait — the candidate evidence says the matched surface is 侍中 and the name is 謝安. This is a mismatch. The office holder per the annotation is 羊忱, not 謝安. The candidate 謝安 is not the referent. The correct referent (羊忱) is not among the supplied candidates. So this should be candidate_missing.\"}, {\"mention_id\": \"sfh1-mention-4b6cc35c7f55d3ca6297ece3\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-05-fangzheng-025-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"direct_name_match\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [], \"explanation\": \"The mention 蘇峻 is a full personal name referring to the historical rebel Su Jun. The candidate c0 is 蘇峻, matching the surface directly. The main text (sfh1-ev-05-fangzheng-025-main) states 亮子被蘇峻害, confirming 蘇峻 as the person who harmed 庾亮's son. This is a direct name match.\"}, {\"mention_id\": \"sfh1-mention-559909619a7430501a70beff\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-05-fangzheng-025-liu-annotation-007\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"courtesy_name_identity\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [], \"explanation\": \"The mention 峻文 is the courtesy name of 衡, son of 諸葛恢, per 諸葛氏譜 in annotation 007 (sfh1-ev-05-fangzheng-025-liu-annotation-007): 恢子衡字峻文. The candidate c0 is 峻文, a local candidate person matching this courtesy name. The evidence directly supports this identification.\"}, {\"mention_id\": \"sfh1-mention-654ad433c8e6816a2ad8c432\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-05-fangzheng-025-main\"], \"reason_types\": [\"wrong_person\"]}, {\"candidate_key\": \"c1\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-05-fangzheng-025-main\", \"sfh1-candidate-evidence-fd29b026a45552588f43\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"office_title_identity\", \"alias_registry_match\"]}], \"preferred_candidate_key\": \"c1\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [], \"explanation\": \"The mention 王 is the surname component of the office title 王右軍 (Wang Youjun). The reference semantics indicate it corefers with 王右軍 (sfh1-mention-14117adf1f4e9d1b4130779b), which is Wang Xizhi (王羲之). Candidate c1 is 王羲之, matching via the alias registry for 王右軍. Candidate c0 is 王恭, which is a different person and contradicts the identification. The main text (sfh1-ev-05-fangzheng-025-main) shows 王右軍 in context, and the alias evidence (sfh1-candidate-evidence-fd29b026a45552588f43) confirms 王右軍 = 王羲之.\"}]}",
+              "name": "submit_sfh1_identity_judgments"
+            },
+            "id": "call_00_1kQpZzei5GMqNFeJztlj3235",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787999065,
+  "id": "a71a554e-dee9-4739-ae1c-4a5192aa15c3",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 1153,
+    "prompt_cache_hit_tokens": 640,
+    "prompt_cache_miss_tokens": 2851,
+    "prompt_tokens": 3491,
+    "prompt_tokens_details": {
+      "cached_tokens": 640
+    },
+    "total_tokens": 4644
+  }
+}

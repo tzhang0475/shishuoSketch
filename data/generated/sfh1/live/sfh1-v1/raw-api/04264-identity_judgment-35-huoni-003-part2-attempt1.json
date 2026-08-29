@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"judgments\": [{\"mention_id\": \"sfh1-mention-7a00710077ea642a2ec1b117\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-candidate-evidence-43ea6b6e192ce74b333c\"], \"reason_types\": [\"wrong_person\"]}], \"preferred_candidate_key\": null, \"resolution\": \"candidate_missing\", \"alternative_search_surfaces\": [\"賈充\", \"賈公閭\"], \"explanation\": \"The mention 充 in the annotation refers to Jia Chong (賈充), as the local explanation states. The supplied candidate is 沈充 (Shen Chong), a different person. The correct referent Jia Chong is not among the supplied candidates.\"}, {\"mention_id\": \"sfh1-mention-c1a9d3567d328373ac66adf9\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-candidate-evidence-71d807b44924070e7bc4\"], \"reason_types\": [\"wrong_person\"]}], \"preferred_candidate_key\": null, \"resolution\": \"candidate_missing\", \"alternative_search_surfaces\": [\"賈充\", \"賈公閭\"], \"explanation\": \"The mention 充 in the main text refers to Jia Chong (賈充), the husband of 郭氏 and father of 賈后. The supplied candidate is 沈充 (Shen Chong), a different person. The correct referent Jia Chong is not among the supplied candidates.\"}, {\"mention_id\": \"sfh1-mention-ec5f30bf81a4f6e20fd1d21f\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-35-huoni-003-liu-annotation-004\", \"sfh1-ev-35-huoni-003-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"name_match\", \"contextual_identity\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [], \"explanation\": \"郭氏 in annotation-004 refers to the wife of Jia Chong, mother of Jia Hou. The candidate 郭氏 is a local person form matching this referent. The annotation explicitly states '郭氏即賈后母也' and the main text identifies her as 賈公閭後妻郭氏.\"}]}",
+              "name": "submit_sfh1_identity_judgments"
+            },
+            "id": "call_00_ErY25IOzrk7Gc0PB3vrs2286",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787999737,
+  "id": "872cabff-fea5-4e58-bbe2-b8abd942be12",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 651,
+    "prompt_cache_hit_tokens": 640,
+    "prompt_cache_miss_tokens": 1746,
+    "prompt_tokens": 2386,
+    "prompt_tokens_details": {
+      "cached_tokens": 640
+    },
+    "total_tokens": 3037
+  }
+}

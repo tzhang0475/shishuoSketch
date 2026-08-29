@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"reviews\": [{\"mention_id\": \"sfh1-mention-65124b120e824c24150eda05\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-0afe933dc24ad3e894e8\", \"sfh1-ev-06-yaliang-019-liu-annotation-001\", \"sfh1-ev-06-yaliang-019-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"courtesy_name_match\", \"contextual_identification\"], \"explanation\": \"The surface 逸少 is identified as 王羲之's courtesy name via the alias registry evidence (sfh1-candidate-evidence-0afe933dc24ad3e894e8), which states 王羲之字逸少. The Liu annotation (sfh1-ev-06-yaliang-019-liu-annotation-001) confirms 逸少羲之小字羲之, and the main text (sfh1-ev-06-yaliang-019-main) explicitly says 訪之乃是逸少, identifying the young man on the eastern bed as 逸少. The annotation also connects this to 郗鑒's daughter marrying 羲之. The evidence specifically supports the identity resolution.\"}, {\"mention_id\": \"sfh1-mention-79a6e6672d78c23ef1f4696d\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-06c3541f537f7b71946c\", \"sfh1-ev-06-yaliang-019-liu-annotation-001\", \"sfh1-ev-06-yaliang-019-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"canonical_name_match\", \"contextual_identification\"], \"explanation\": \"The surface 郗鑒 matches the canonical name in people.json (sfh1-candidate-evidence-06c3541f537f7b71946c). The main text (sfh1-ev-06-yaliang-019-main) opens with 郗太傅在京口, and the Liu annotation (sfh1-ev-06-yaliang-019-liu-annotation-001) explicitly states 妻太傅郗鑒女, confirming 郗太傅 = 郗鑒. The mention of 郗鑒 in the text refers to the same person as 郗太傅 in the story. Evidence specifically supports the identity.\"}, {\"mention_id\": \"sfh1-mention-92c9d6bfe6f5902e31d8479b\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-3980194066ab3de841e8\", \"sfh1-ev-06-yaliang-019-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"office_title_match\", \"contextual_identification\"], \"explanation\": \"The surface 王丞相 is resolved to 王導 via the alias registry (sfh1-candidate-evidence-3980194066ab3de841e8), which maps 王丞相 to 王導. In the main text (sfh1-ev-06-yaliang-019-main), 王丞相 is the person to whom 郗太傅 sends a letter seeking a son-in-law, and the story context (the Wang family sons being considered) is consistent with 王導 being the head of the Wang clan. The hard veto c1 (explicit_identity_contradiction) is noted but no contradicting evidence is supplied. The alias registry evidence specifically supports the identification.\"}, {\"mention_id\": \"sfh1-mention-f9b506a278d1a52e2af72e12\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-17a5bfe75a0d663e200b\", \"sfh1-ev-06-yaliang-019-liu-annotation-001\", \"sfh1-ev-06-yaliang-019-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"honorific_match\", \"contextual_identification\"], \"explanation\": \"The surface 郗公 is an honorific reference to 郗太傅. The main text (sfh1-ev-06-yaliang-019-main) shows 門生歸白郗曰...郗公云正此好, where 郗公 is clearly the same person as 郗太傅 who sent the 門生. The Liu annotation (sfh1-ev-06-yaliang-019-liu-annotation-001) confirms 郗太傅 = 郗鑒. The candidate evidence (sfh1-candidate-evidence-17a5bfe75a0d663e200b) provides the canonical name 郗鑒. The coreference chain with other 郗鑒 mentions is consistent. Evidence specifically supports the identity.\"}]}",
+              "name": "submit_sfh1_adversarial_reviews"
+            },
+            "id": "call_00_tf9MwIFlSoFhQ5CDSuD87047",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787989225,
+  "id": "4484642d-c81d-40c7-bb1f-a1b8ab7d8571",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 1177,
+    "prompt_cache_hit_tokens": 512,
+    "prompt_cache_miss_tokens": 1831,
+    "prompt_tokens": 2343,
+    "prompt_tokens_details": {
+      "cached_tokens": 512
+    },
+    "total_tokens": 3520
+  }
+}

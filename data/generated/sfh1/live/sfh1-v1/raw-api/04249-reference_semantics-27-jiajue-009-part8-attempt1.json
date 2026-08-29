@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"records\": [{\"mention_id\": \"sfh1-mention-98dfa01c8fb786d64c3ea5e6\", \"semantic_type\": \"office_holder_reference\", \"referent_role\": \"office holder (長史 under 温公/嶠)\", \"anchor_mentions\": [], \"holder_mentions\": [\"sfh1-mention-b111c0c535e68cbda0013acd\"], \"patron_or_possessor_mentions\": [], \"coreference_with\": [], \"distinct_from\": [\"sfh1-mention-291c937710e36394fdf0f29c\"], \"semantic_relations\": [{\"type\": \"office\", \"subject_mention_id\": \"sfh1-mention-98dfa01c8fb786d64c3ea5e6\", \"object_mention_id\": \"sfh1-mention-b111c0c535e68cbda0013acd\", \"predicate_surface\": \"公為劉越石長史\", \"evidence_id\": \"sfh1-ev-27-jiajue-009-main\"}, {\"type\": \"co_presence\", \"subject_mention_id\": \"sfh1-mention-98dfa01c8fb786d64c3ea5e6\", \"object_mention_id\": \"sfh1-mention-291c937710e36394fdf0f29c\", \"predicate_surface\": \"北征劉聦\", \"evidence_id\": \"sfh1-ev-27-jiajue-009-main\"}], \"confidence\": \"high\", \"explanation\": \"劉越石 is the person for whom 温公 (嶠) served as 長史. The text states '公為劉越石長史北征劉聦所得'. 劉越石 is the office patron/employer, distinct from 劉聦 who is the enemy being campaigned against.\"}, {\"mention_id\": \"sfh1-mention-291c937710e36394fdf0f29c\", \"semantic_type\": \"ruler_reference\", \"referent_role\": \"ruler/enemy leader (劉聦, ruler of the 屠各/匈奴)\", \"anchor_mentions\": [], \"holder_mentions\": [], \"patron_or_possessor_mentions\": [], \"coreference_with\": [\"sfh1-mention-3df10759e8c0e7cd8658ec4e\", \"sfh1-mention-69a276a559c69aef0f66872a\"], \"distinct_from\": [\"sfh1-mention-98dfa01c8fb786d64c3ea5e6\"], \"semantic_relations\": [{\"type\": \"co_presence\", \"subject_mention_id\": \"sfh1-mention-291c937710e36394fdf0f29c\", \"object_mention_id\": \"sfh1-mention-98dfa01c8fb786d64c3ea5e6\", \"predicate_surface\": \"北征劉聦\", \"evidence_id\": \"sfh1-ev-27-jiajue-009-main\"}, {\"type\": \"office\", \"subject_mention_id\": \"sfh1-mention-291c937710e36394fdf0f29c\", \"object_mention_id\": \"sfh1-mention-38cb2c340c7ae7385900e828\", \"predicate_surface\": \"琨假守左司馬都督上前鋒諸軍事討劉聦\", \"evidence_id\": \"sfh1-ev-27-jiajue-009-liu-annotation-004\"}], \"confidence\": \"high\", \"explanation\": \"劉聦 is the ruler of the 屠各 people (匈奴), the target of the northern campaign. He is distinct from 劉越石. The annotation identifies 聦 as 劉聦 (same person), and notes 琨 (劉琨) campaigned against him. The annotation also identifies 聦 as 載, courtesy name 玄明, son of 淵.\"}]}",
+              "name": "submit_sfh1_reference_semantics"
+            },
+            "id": "call_00_GC0aPAm6SQbDOV17xnbO3061",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787999718,
+  "id": "13f21106-1a43-4259-8f88-f3a0e5836e6b",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 935,
+    "prompt_cache_hit_tokens": 1408,
+    "prompt_cache_miss_tokens": 2365,
+    "prompt_tokens": 3773,
+    "prompt_tokens_details": {
+      "cached_tokens": 1408
+    },
+    "total_tokens": 4708
+  }
+}

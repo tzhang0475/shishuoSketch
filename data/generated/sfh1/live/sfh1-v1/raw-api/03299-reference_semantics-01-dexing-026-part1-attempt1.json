@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"records\": [{\"mention_id\": \"sfh1-mention-b667685d5ed1fc646e580d3c\", \"semantic_type\": \"surname_reference\", \"referent_role\": \"author of the cited work\", \"anchor_mentions\": [], \"holder_mentions\": [], \"patron_or_possessor_mentions\": [], \"coreference_with\": [], \"distinct_from\": [], \"semantic_relations\": [], \"confidence\": \"high\", \"explanation\": \"祖 in the Liu annotation '(書曰祖/王隱晉)' refers to the surname of the author of the book being cited, i.e., 祖 (likely 祖台之 or similar). It is a surname reference to the author of the cited work.\"}, {\"mention_id\": \"sfh1-mention-9d4d48d9a3a1acefb265bc97\", \"semantic_type\": \"direct_person_form\", \"referent_role\": \"author of cited work\", \"anchor_mentions\": [], \"holder_mentions\": [], \"patron_or_possessor_mentions\": [], \"coreference_with\": [], \"distinct_from\": [\"sfh1-mention-b667685d5ed1fc646e580d3c\"], \"semantic_relations\": [{\"type\": \"co_presence\", \"subject_mention_id\": \"sfh1-mention-b667685d5ed1fc646e580d3c\", \"object_mention_id\": \"sfh1-mention-9d4d48d9a3a1acefb265bc97\", \"predicate_surface\": \"書曰祖/王隱晉\", \"evidence_id\": \"sfh1-ev-01-dexing-026-liu-annotation-001\"}], \"confidence\": \"high\", \"explanation\": \"王隱晉 is a full name reference to 王隱 (Wang Yin), the Jin dynasty historian. The annotation cites his work. This is distinct from 祖 who is the author of the other cited work.\"}, {\"mention_id\": \"sfh1-mention-94435f7599f0bfb8a65f3f1e\", \"semantic_type\": \"personal_name\", \"referent_role\": \"person named 操, likely 祖操\", \"anchor_mentions\": [], \"holder_mentions\": [], \"patron_or_possessor_mentions\": [], \"coreference_with\": [], \"distinct_from\": [], \"semantic_relations\": [], \"confidence\": \"medium\", \"explanation\": \"操 is a personal name in the annotation '(操能清言歴太子中庶子廷尉卿避地江南温嶠薦...)'. This refers to a person named 操 (likely 祖操), who is described as being recommended by 温嶠. The name appears in the Liu annotation context.\"}, {\"mention_id\": \"sfh1-mention-d8d426b22a9041ff399ea71e\", \"semantic_type\": \"direct_person_form\", \"referent_role\": \"person who recommended 操\", \"anchor_mentions\": [\"sfh1-mention-94435f7599f0bfb8a65f3f1e\"], \"holder_mentions\": [], \"patron_or_possessor_mentions\": [], \"coreference_with\": [], \"distinct_from\": [\"sfh1-mention-94435f7599f0bfb8a65f3f1e\"], \"semantic_relations\": [{\"type\": \"social\", \"subject_mention_id\": \"sfh1-mention-d8d426b22a9041ff399ea71e\", \"object_mention_id\": \"sfh1-mention-94435f7599f0bfb8a65f3f1e\", \"predicate_surface\": \"温嶠薦\", \"evidence_id\": \"sfh1-ev-01-dexing-026-liu-annotation-002\"}], \"confidence\": \"high\", \"explanation\": \"温嶠 is a full name reference to Wen Qiao, who recommended 操 (the person named 操). The relation is that 温嶠 recommended 操, as stated in the annotation text '温嶠薦'.\"}]}",
+              "name": "submit_sfh1_reference_semantics"
+            },
+            "id": "call_00_144NA6fEX0JumbjjpA5t2665",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787998392,
+  "id": "86cb8103-5e6f-447d-999e-c5fb0af806a8",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 951,
+    "prompt_cache_hit_tokens": 1536,
+    "prompt_cache_miss_tokens": 2813,
+    "prompt_tokens": 4349,
+    "prompt_tokens_details": {
+      "cached_tokens": 1536
+    },
+    "total_tokens": 5300
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"reviews\": [{\"mention_id\": \"sfh1-mention-ccf2b1c6ee6c7d146d8109af\", \"candidate_key\": \"c0\", \"verdict\": \"review_required\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-4d427d68b4e70ee879fc\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"insufficient_evidence\", \"ambiguous_surface\"], \"explanation\": \"The mention surface is simply '敦', a single character. The candidate is 王敦. The supporting evidence cited is 'sfh1-candidate-evidence-4d427d68b4e70ee879fc' which contains only the character '敦' from the source text, and 'sfh1-ev-11-jiewu-005-liu-annotation-002' which is a Liu Xiaobiao annotation discussing textual variants about 敦 burning the bridge. While the main text (sfh1-ev-11-jiewu-005-main) does begin with '王敦引軍垂至大桁', the mention '敦' appears in the annotation text, not clearly in the main narrative. The reference semantics returned 'uncertain' with no valid semantic record. The single-character surface '敦' could potentially refer to 王敦 given the context of the story, but the evidence is thin — the annotation text mentions 敦 in the context of 敦將至嶠燒朱雀橋, which does align with 王敦's actions. However, the identity assessment relies on contextual role match and personal name match with very limited direct evidence. Given the low confidence and the fact that the annotation is a textual-critical note rather than a clear narrative reference, this needs further review to confirm the identity is specifically 王敦 and not another person with 敦 in their name.\"}, {\"mention_id\": \"sfh1-mention-eec5cb5a6f9c58905f9b01e9\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-238c8d6b616fb6ffc9dc\", \"sfh1-ev-11-jiewu-005-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"office_title_match\", \"coreference_with_full_name\"], \"explanation\": \"The mention '丹陽尹' is an office title. The main text (sfh1-ev-11-jiewu-005-main) explicitly states '温嶠為丹陽尹', directly establishing that 温嶠 held the office of Danyang Yin. The reference semantics confirm this with high confidence, identifying the holder as sfh1-mention-4d47d4cd1fddd60c6d5a683e (温嶠). The candidate evidence sfh1-candidate-evidence-238c8d6b616fb6ffc9dc contains '丹陽尹' from the main text, and the full name 温嶠 appears in the same passage. The office title uniquely identifies the holder in this context. The hard veto on c1 (explicit identity contradiction) is consistent with the evidence. This resolution is well-supported by the supplied evidence.\"}]}",
+              "name": "submit_sfh1_adversarial_reviews"
+            },
+            "id": "call_00_YcSelx7d1UJ0oVvU1VtY6754",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787989993,
+  "id": "227dcea2-bf3f-4927-a8cb-d545fada75c0",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 740,
+    "prompt_cache_hit_tokens": 512,
+    "prompt_cache_miss_tokens": 1167,
+    "prompt_tokens": 1679,
+    "prompt_tokens_details": {
+      "cached_tokens": 512
+    },
+    "total_tokens": 2419
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"judgments\": [{\"mention_id\": \"sfh1-mention-23c64c2c38c432077964a568\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-39fc4b915a097ef1bd8c\", \"sfh1-ev-04-wenxue-022-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"office_title_matches\", \"historical_identity\"]}, {\"candidate_key\": \"c1\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-2bcbba7fd50a3b8ea4da\", \"sfh1-ev-04-wenxue-022-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"office_title_matches\", \"historical_identity\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [\"殷浩\"], \"explanation\": \"殷中軍 refers to 殷浩 by his office title 中軍. Both candidates c0 and c1 are prior-candidate entries for 殷中軍 from different waves of the candidate database, both referring to the same historical person 殷浩. The main text confirms 殷中軍 served under 庾公 (庾亮), and the Liu annotation confirms this is 浩 (殷浩). Both candidates represent the same referent.\"}, {\"mention_id\": \"sfh1-mention-25bd5eee73fe9b52c7dae731\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-94f74cd892747c1a89e1\", \"sfh1-ev-04-wenxue-022-main\", \"sfh1-ev-04-wenxue-022-liu-annotation-004\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"canonical_name_match\", \"historical_identity\"]}, {\"candidate_key\": \"c1\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-candidate-evidence-941cc28613754d6de8cd\"], \"reason_types\": [\"wrong_person\", \"name_mismatch\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [\"王丞相\", \"丞相\"], \"explanation\": \"王導 is the full name of Wang Dao, the Chancellor. Candidate c0 is the canonical existing person 王導 from people.json, which is the correct referent. Candidate c1 is 王隱 retrieved via the alias registry for the office title 王丞相, but the mention here is the explicit full name 王導, not the office title. The main text and Liu annotation-004 confirm 王導 recruited 王濛 and 王述. Candidate c1 (王隱) is a different person and contradicts.\"}, {\"mention_id\": \"sfh1-mention-3511f97fe232e4df507600b9\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-04-wenxue-022-liu-annotation-004\", \"sfh1-ev-04-wenxue-022-liu-annotation-002\", \"sfh1-ev-04-wenxue-022-liu-annotation-003\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"direct_name_match\", \"historical_identity\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [\"王懷祖\", \"藍田侯\"], \"explanation\": \"王述 is the full name of the person in Liu annotation-004. The local candidate c0 is the source-grounded person form 王述. The annotations confirm this is 王述 (courtesy name 懷祖), who was recruited by 王導 along with 王濛. This matches the historical Wang Shu.\"}, {\"mention_id\": \"sfh1-mention-35ceb2fd8ed71a9883b2271c\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-f3bef93ac7c4d3be9858\", \"sfh1-ev-04-wenxue-022-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"surname_reference\", \"coreference\"]}, {\"candidate_key\": \"c1\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-9c77a7482859f2cb3fcc\", \"sfh1-ev-04-wenxue-022-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"surname_reference\", \"coreference\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [\"殷浩\"], \"explanation\": \"殷 is the surname reference for 殷浩, coreferent with 殷中軍 in the main text. Both candidates c0 and c1 are prior-candidate entries for 殷中軍 (i.e., 殷浩) from different waves of the candidate database. The main text uses 殷 as an abbreviated reference to the same person as 殷中軍 at the start of the story. Both candidates represent the same historical referent 殷浩.\"}]}",
+              "name": "submit_sfh1_identity_judgments"
+            },
+            "id": "call_00_gGlymZRz494J9LxJ5qxX3025",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787998728,
+  "id": "19e29822-6407-4c57-a694-1b0c2a0be975",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 1334,
+    "prompt_cache_hit_tokens": 640,
+    "prompt_cache_miss_tokens": 2779,
+    "prompt_tokens": 3419,
+    "prompt_tokens_details": {
+      "cached_tokens": 640
+    },
+    "total_tokens": 4753
+  }
+}

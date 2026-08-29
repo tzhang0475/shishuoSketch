@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"reviews\": [{\"mention_id\": \"sfh1-mention-dd9d78dec063831c70713fa7\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-14-rongzhi-024-liu-annotation-001\", \"sfh1-candidate-evidence-deb743b4cd18ac245b3d\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"canonical_name_match\", \"contextual_role_match\"], \"explanation\": \"The mention '公' in the Liu annotation refers to 庾亮, as the annotation explicitly cites 孫綽's 庾亮碑文 (stele inscription for 庾亮) and the text '公雅好所託常在' uses the honorific '公' for 庾亮. The candidate evidence directly names 庾亮, and the annotation context confirms this is the same person referenced in the main text where 庾太尉 (庾亮) is the subject. The supporting evidence specifically ties the honorific '公' to 庾亮 through the stele inscription reference.\"}, {\"mention_id\": \"sfh1-mention-f9f15dbb9bcac51ded365bbe\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-14-rongzhi-024-main\", \"sfh1-candidate-evidence-b828e276099918d255c5\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"contextual_role_match\", \"office_title_match\"], \"explanation\": \"The surface form '庾太尉' is an office-title reference to 庾亮, who held the title of 太尉. The main text (sfh1-ev-14-rongzhi-024-main) describes 庾太尉 in 武昌, and the same text later refers to him as 庾公 and mentions 元規 (庾亮's courtesy name), confirming the identity. The candidate evidence '庾太尉' matches the surface form exactly, and the office title 太尉 is specifically associated with 庾亮 in this historical context. The main text's internal references (庾公, 元規) corroborate that 庾太尉 = 庾亮.\"}]}",
+              "name": "submit_sfh1_adversarial_reviews"
+            },
+            "id": "call_00_U2JQNfud8vMMwkeZMLc92651",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787990077,
+  "id": "907cb608-34dc-4b57-86ad-ceef84a7d19c",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 556,
+    "prompt_cache_hit_tokens": 512,
+    "prompt_cache_miss_tokens": 1138,
+    "prompt_tokens": 1650,
+    "prompt_tokens_details": {
+      "cached_tokens": 512
+    },
+    "total_tokens": 2206
+  }
+}

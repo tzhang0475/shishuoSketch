@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"judgments\": [{\"mention_id\": \"sfh1-mention-fe2d1cb93892a40a67ecb80c\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-34-pilou-006-main\", \"sfh1-candidate-evidence-79b95606da6c9c6f485e\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"explicit_name_match\", \"historical_context\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [], \"explanation\": \"The mention 殷仲堪 is the full name of the person, and the candidate c0 is 殷仲堪 from the prior candidate database. The story is about 殷仲堪 whose father was ill, matching the historical figure 殷仲堪 (Yin Zhongkan), a Jin dynasty official. The Liu annotation confirms 仲堪's lineage and identity.\"}, {\"mention_id\": \"sfh1-mention-e221a46cf241b1742dcf656c\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-34-pilou-006-main\", \"sfh1-candidate-evidence-404487eb9aa79149dd46\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"abbreviated_name_match\", \"coreference\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [], \"explanation\": \"仲堪 is the abbreviated personal name of 殷仲堪, used in the emperor's question. It corefers with the full name 殷仲堪 (m1) in the same story, and the candidate c0 is 殷仲堪. The Liu annotation confirms 仲堪's identity.\"}, {\"mention_id\": \"sfh1-mention-5f2fc8d8667198223b34da0a\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-34-pilou-006-main\", \"sfh1-candidate-evidence-27bd00dbca403ef1f9e7\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"coreference\", \"self_reference\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [], \"explanation\": \"臣 is the first-person pronoun used by 殷仲堪 when addressing the emperor (孝武). It corefers with 殷仲堪 (m1) and 仲堪 (m5) in the same story. The candidate c0 is 殷仲堪, and the self-reference 臣 clearly refers to him.\"}]}",
+              "name": "submit_sfh1_identity_judgments"
+            },
+            "id": "call_00_PkCQFVM468rbLSngU25d3044",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787990866,
+  "id": "e7189d91-aaef-4577-9a3b-e1a43e862332",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 701,
+    "prompt_cache_hit_tokens": 640,
+    "prompt_cache_miss_tokens": 1661,
+    "prompt_tokens": 2301,
+    "prompt_tokens_details": {
+      "cached_tokens": 640
+    },
+    "total_tokens": 3002
+  }
+}

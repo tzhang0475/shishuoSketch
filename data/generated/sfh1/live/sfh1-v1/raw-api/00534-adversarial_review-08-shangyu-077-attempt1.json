@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"reviews\": [{\"mention_id\": \"sfh1-mention-7122031b6250e1d678b45347\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-73363a6dc68c4297545e\", \"sfh1-ev-08-shangyu-077-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"alias_registry\", \"contextual_consistency\"], \"explanation\": \"The mention 安石 appears in the main text: '王右軍語劉尹故當共推安石'. The candidate evidence from aliases.json explicitly identifies 安石 as the courtesy name of 謝安 (字安石). The main text context shows 王右軍 and 劉尹 discussing 安石, and the Liu annotation (sfh1-ev-08-shangyu-077-liu-annotation-001) references 謝安's retirement in 會稽, consistent with the historical 謝安. The alias registry directly maps 安石 → 謝安, and the contextual evidence supports this identification. No contradicting evidence exists.\"}, {\"mention_id\": \"sfh1-mention-e17a437fcf2744ce4581491f\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-045a448ba00b19b804b0\", \"sfh1-ev-08-shangyu-077-liu-annotation-001\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"evidence_identity_assertion\", \"contextual_consistency\"], \"explanation\": \"The mention 安 appears in the Liu annotation text '(上虞縣優遊山林六七年間/續晉陽秋曰初安家於會稽)'. The candidate evidence sfh1-candidate-evidence-045a448ba00b19b804b0 is an identity assertion from the profile evidence linking 安 to 謝安. The annotation context discusses 謝安's retirement in 會稽/上虞, which matches the historical record of 謝安. The main text also discusses 安石 (謝安's courtesy name), providing contextual consistency. No contradicting evidence exists.\"}, {\"mention_id\": \"sfh1-mention-e466d6397f1f9e7dce8e81d6\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-1b02a06925d1910f29e1\", \"sfh1-ev-08-shangyu-077-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"alias_registry\", \"office_title\"], \"explanation\": \"The mention 王右軍 is an office title reference. The candidate evidence from aliases.json explicitly identifies 王右軍 as referring to 王羲之, who held the office of 右軍將軍. The main text shows 王右軍 speaking to 劉尹 about 安石 (謝安), which is consistent with the historical context where 王羲之 and 謝安 were contemporaries. The reference semantics correctly identifies this as an office_holder_reference and explicitly distinguishes this mention from 安石 (謝安). No contradicting evidence exists.\"}]}",
+              "name": "submit_sfh1_adversarial_reviews"
+            },
+            "id": "call_00_AYKejPFjr4Lm9AedNoVL9123",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787981213,
+  "id": "ce22665b-5db6-47bb-85d9-780b5f833772",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 775,
+    "prompt_cache_hit_tokens": 512,
+    "prompt_cache_miss_tokens": 1336,
+    "prompt_tokens": 1848,
+    "prompt_tokens_details": {
+      "cached_tokens": 512
+    },
+    "total_tokens": 2623
+  }
+}

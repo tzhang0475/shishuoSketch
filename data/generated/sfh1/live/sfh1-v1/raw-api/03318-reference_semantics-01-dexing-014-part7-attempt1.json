@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"records\": [{\"mention_id\": \"sfh1-mention-868420ae4ac53e5494b26473\", \"semantic_type\": \"direct_person_form\", \"referent_role\": \"subject\", \"anchor_mentions\": [], \"holder_mentions\": [], \"patron_or_possessor_mentions\": [], \"coreference_with\": [\"sfh1-mention-ff73ef4d86b3e237614ab6af\"], \"distinct_from\": [\"sfh1-mention-bcae01b76e978ffa0a88780f\"], \"semantic_relations\": [{\"type\": \"kinship\", \"subject_mention_id\": \"sfh1-mention-868420ae4ac53e5494b26473\", \"object_mention_id\": \"sfh1-mention-bcae01b76e978ffa0a88780f\", \"predicate_surface\": \"事後母\", \"evidence_id\": \"sfh1-ev-01-dexing-014-main\"}], \"confidence\": \"high\", \"explanation\": \"王祥 is the full name of the protagonist Wang Xiang, appearing at the start of the main text. He is the subject who serves his stepmother. He is distinct from his stepmother 朱夫人.\"}, {\"mention_id\": \"sfh1-mention-ff73ef4d86b3e237614ab6af\", \"semantic_type\": \"abbreviated_person_reference\", \"referent_role\": \"subject\", \"anchor_mentions\": [\"sfh1-mention-868420ae4ac53e5494b26473\"], \"holder_mentions\": [], \"patron_or_possessor_mentions\": [], \"coreference_with\": [\"sfh1-mention-868420ae4ac53e5494b26473\"], \"distinct_from\": [\"sfh1-mention-bcae01b76e978ffa0a88780f\"], \"semantic_relations\": [], \"confidence\": \"high\", \"explanation\": \"祥 is the abbreviated personal name form of 王祥, referring to the same person. It appears in the main text as a shortened reference to the protagonist.\"}, {\"mention_id\": \"sfh1-mention-bcae01b76e978ffa0a88780f\", \"semantic_type\": \"compositional_kinship\", \"referent_role\": \"stepmother\", \"anchor_mentions\": [\"sfh1-mention-868420ae4ac53e5494b26473\"], \"holder_mentions\": [], \"patron_or_possessor_mentions\": [], \"coreference_with\": [\"sfh1-mention-27c3fd956d174f2018ec186b\"], \"distinct_from\": [\"sfh1-mention-868420ae4ac53e5494b26473\", \"sfh1-mention-ff73ef4d86b3e237614ab6af\"], \"semantic_relations\": [{\"type\": \"kinship\", \"subject_mention_id\": \"sfh1-mention-868420ae4ac53e5494b26473\", \"object_mention_id\": \"sfh1-mention-bcae01b76e978ffa0a88780f\", \"predicate_surface\": \"事後母\", \"evidence_id\": \"sfh1-ev-01-dexing-014-main\"}], \"confidence\": \"high\", \"explanation\": \"後母朱夫人 is a compositional kinship reference identifying Wang Xiang's stepmother, Lady Zhu. The 後母 indicates stepmother relationship to 王祥. She is distinct from Wang Xiang and corefers with the later 母 mention in the same text.\"}, {\"mention_id\": \"sfh1-mention-27c3fd956d174f2018ec186b\", \"semantic_type\": \"local_anaphoric_reference\", \"referent_role\": \"stepmother\", \"anchor_mentions\": [\"sfh1-mention-bcae01b76e978ffa0a88780f\"], \"holder_mentions\": [], \"patron_or_possessor_mentions\": [], \"coreference_with\": [\"sfh1-mention-bcae01b76e978ffa0a88780f\"], \"distinct_from\": [\"sfh1-mention-868420ae4ac53e5494b26473\", \"sfh1-mention-ff73ef4d86b3e237614ab6af\"], \"semantic_relations\": [], \"confidence\": \"high\", \"explanation\": \"母 in the main text is a local anaphoric reference to the previously introduced 後母朱夫人 (stepmother Lady Zhu). It refers back to the same person established earlier in the narrative.\"}]}",
+              "name": "submit_sfh1_reference_semantics"
+            },
+            "id": "call_00_Om2PBigamtgKDvAYNdm66897",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787998417,
+  "id": "af51b341-214d-4a3a-a22f-1ba53fedc6e9",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 1065,
+    "prompt_cache_hit_tokens": 3712,
+    "prompt_cache_miss_tokens": 113,
+    "prompt_tokens": 3825,
+    "prompt_tokens_details": {
+      "cached_tokens": 3712
+    },
+    "total_tokens": 4890
+  }
+}

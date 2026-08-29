@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"judgments\": [{\"mention_id\": \"sfh1-mention-27e1231e45464b1443791c81\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-candidate-evidence-a03760d8d52f38935412\"], \"reason_types\": [\"wrong_person\"]}], \"preferred_candidate_key\": null, \"resolution\": \"candidate_missing\", \"alternative_search_surfaces\": [\"阮咸\"], \"explanation\": \"The mention 仲容 is the courtesy name of 阮咸 (Ruan Xian), one of the Seven Worthies of the Bamboo Grove. The supplied candidate c0 is 石苞 (Shi Bao), whose courtesy name is also 仲容, but in this context the text is about 阮渾 (Ruan Hun) whose father is 阮籍 (Ruan Ji), and 仲容 refers to 阮咸, 阮籍's nephew. The candidate 石苞 is a different person with the same courtesy name. The correct referent 阮咸 is not among the supplied candidates.\"}, {\"mention_id\": \"sfh1-mention-89cb2b7e4aab45504bd6c536\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-736284c319cd149ef9d0\", \"sfh1-ev-23-rendan-013-liu-annotation-003\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"name_match\", \"context_match\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [], \"explanation\": \"The mention 樂廣 in the Liu annotation refers to 樂廣 (Yue Guang), a Jin dynasty figure. The candidate c0 is 樂廣 with canonical name match, and the annotation context about 名教中自有樂地 matches the historical 樂廣 who made this famous remark. The candidate is correctly identified.\"}]}",
+              "name": "submit_sfh1_identity_judgments"
+            },
+            "id": "call_00_VyFmz9zDwCZ19l3WNbmf5136",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787981628,
+  "id": "0878742c-a0f3-4dc9-af4b-69a026438284",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 525,
+    "prompt_cache_hit_tokens": 640,
+    "prompt_cache_miss_tokens": 891,
+    "prompt_tokens": 1531,
+    "prompt_tokens_details": {
+      "cached_tokens": 640
+    },
+    "total_tokens": 2056
+  }
+}

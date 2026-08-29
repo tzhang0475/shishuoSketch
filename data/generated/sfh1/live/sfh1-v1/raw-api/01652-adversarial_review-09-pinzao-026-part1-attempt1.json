@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"reviews\": [{\"mention_id\": \"sfh1-mention-6c238b1f9e12475fd79e41eb\", \"candidate_key\": \"c0\", \"verdict\": \"reject\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-candidate-evidence-f32988dcba4054e01192\"], \"reason_types\": [\"office_title_alias\", \"explicit_identity_contradiction\"], \"explanation\": \"The proposed resolution maps '王丞相' to 王導 based on an alias registry entry for the office title '丞相'. However, the supplied evidence text (sfh1-candidate-evidence-f32988dcba4054e01192) is from a completely different story about 周鎮 and 王導 visiting him — it does not appear in the source evidence for this mention (sfh1-mention-6c238b1f9e12475fd79e41eb), which is from story 09-pinzao-026 about 王丞相 commenting on 謝仁祖 and 何次道. The candidate evidence is not from the same context as the mention. The reference semantics explicitly state 'No valid semantic record was returned; fail closed' with confidence 'low'. The office title '丞相' could refer to multiple individuals who held that office. The supplied evidence does not specifically support that the 王丞相 in this story is 王導. This is a risky resolution that should be rejected.\"}, {\"mention_id\": \"sfh1-mention-74f759396e47158ab0bba44e\", \"candidate_key\": \"c0\", \"verdict\": \"reject\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-candidate-evidence-e19e3ec5f315893362bf\"], \"reason_types\": [\"contextual_title_alias\", \"explicit_identity_contradiction\"], \"explanation\": \"The proposed resolution maps '王公' to 王導 based on a contextual title alias. However, the supplied candidate evidence (sfh1-candidate-evidence-e19e3ec5f315893362bf) is from a different text fragment mentioning '僕射王公' — this does not appear in the source evidence for this mention (sfh1-mention-74f759396e47158ab0bba44e), which is from story 09-pinzao-026. The reference semantics explicitly state 'No valid semantic record was returned; fail closed' with confidence 'low'. The title '王公' is generic and could refer to many individuals surnamed 王. The candidate evidence does not specifically support that the 王公 in this story is 王導. This is a risky resolution that should be rejected.\"}, {\"mention_id\": \"sfh1-mention-bec095cd655a7024a824403f\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-992aca9fba053704fa05\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"canonical_name_match\"], \"explanation\": \"The mention surface is '何充' and the candidate is 何充 with a canonical name match from data/people.json. The source evidence for this story (sfh1-ev-09-pinzao-026-main) mentions '何次道' which is the courtesy name of 何充. The candidate evidence provides the canonical name 何充 from the people registry. The canonical name match is direct and specific. While the reference semantics indicate low confidence due to no semantic record, the canonical name match on the exact surface '何充' provides sufficient specific support for identity.\"}, {\"mention_id\": \"sfh1-mention-cbc546f748e8709552136ba8\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-4fc4ef15af25f7290ad9\", \"sfh1-ev-09-pinzao-026-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"surname_plus_courtesy_name_alias\"], \"explanation\": \"The mention surface is '謝仁祖' and the candidate is 謝尚. The candidate evidence (sfh1-candidate-evidence-4fc4ef15af25f7290ad9) shows '謝仁祖' used as a surname-plus-courtesy-name alias for 謝尚 in the alias registry. Additionally, the main text of this very story (sfh1-ev-09-pinzao-026-main) contains '謝仁祖' in the same context, and the Liu annotation (sfh1-ev-09-pinzao-026-liu-annotation-001) references '王公重何充' which is consistent with the story's content about 王丞相 and 何次道. The alias registry entry specifically maps 謝仁祖 to 謝尚, and the surface matches exactly. This provides specific supporting evidence for the identity resolution.\"}]}",
+              "name": "submit_sfh1_adversarial_reviews"
+            },
+            "id": "call_00_bu94vAeYXq8Mu21Njeqc8569",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787989800,
+  "id": "86163890-81c3-4728-a89a-f71a50e4a492",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 1146,
+    "prompt_cache_hit_tokens": 512,
+    "prompt_cache_miss_tokens": 1562,
+    "prompt_tokens": 2074,
+    "prompt_tokens_details": {
+      "cached_tokens": 512
+    },
+    "total_tokens": 3220
+  }
+}

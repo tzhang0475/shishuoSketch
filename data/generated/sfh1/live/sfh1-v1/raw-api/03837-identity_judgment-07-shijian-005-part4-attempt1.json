@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"judgments\": [{\"mention_id\": \"sfh1-mention-bf46645b087fd5a596d41f32\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-07-shijian-005-main\", \"sfh1-ev-07-shijian-005-liu-annotation-001\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"canonical_name_match\", \"contextual_role_match\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [], \"explanation\": \"羊祜 is explicitly named in the main text as 僕射羊祜 (imperial attendant Yang Hu), and the candidate c0 is the historical person 羊祜. The main text and Liu annotations both refer to 羊祜 consistently as the same person.\"}, {\"mention_id\": \"sfh1-mention-da157db28bf4111a292508e3\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-07-shijian-005-main\", \"sfh1-ev-07-shijian-005-liu-annotation-002\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"abbreviated_name_match\", \"coreference_chain\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [\"王夷甫\"], \"explanation\": \"夷甫 is the abbreviated personal name of 王夷甫 (Wang Yifu). The main text opens with 王夷甫 and later uses 夷甫 as a shortened reference. The candidate c0 is the prior candidate person 夷甫, which matches this historical referent.\"}, {\"mention_id\": \"sfh1-mention-ed81c5a1019a63ceb950360d\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-07-shijian-005-liu-annotation-002\", \"sfh1-ev-07-shijian-005-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"abbreviated_name_match\", \"coreference_chain\"]}, {\"candidate_key\": \"c1\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-07-shijian-005-main\", \"sfh1-ev-07-shijian-005-liu-annotation-002\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"canonical_name_match\", \"coreference_chain\"]}], \"preferred_candidate_key\": \"c1\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [], \"explanation\": \"The mention 夷甫 in annotation-002 refers to 王夷甫 (Wang Yifu). Both candidates c0 (夷甫) and c1 (王夷甫) refer to the same historical person. The coreference chain links this mention to other 夷甫/王夷甫 mentions. c1 with the full name 王夷甫 is the preferred candidate as it provides the full canonical name.\"}]}",
+              "name": "submit_sfh1_identity_judgments"
+            },
+            "id": "call_00_4vwMQZy5OAYklWqLWLwB7339",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787999149,
+  "id": "18521e92-d36c-41e2-ae44-c83d07f08d30",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 785,
+    "prompt_cache_hit_tokens": 640,
+    "prompt_cache_miss_tokens": 1757,
+    "prompt_tokens": 2397,
+    "prompt_tokens_details": {
+      "cached_tokens": 640
+    },
+    "total_tokens": 3182
+  }
+}

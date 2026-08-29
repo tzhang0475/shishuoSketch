@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"judgments\": [{\"mention_id\": \"sfh1-mention-93c96aac092f24967673c6f4\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-a82e0b38621e3a459969\", \"sfh1-ev-01-dexing-014-liu-annotation-009\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"canonical_name_match\", \"contextual_consistency\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [], \"explanation\": \"王祥 in annotation-009 refers to Wang Xiang, the protagonist of the story. The candidate c0 is the existing person 王祥, matching the canonical name directly. The annotation text '海沂之康寔賴王祥邦國不空别駕之功累遷太保' describes Wang Xiang's contributions and promotion, consistent with the historical Wang Xiang.\"}, {\"mention_id\": \"sfh1-mention-e49632a541e90413f8de26e2\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-abd511ada54950bf50da\", \"sfh1-ev-01-dexing-014-liu-annotation-006\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"canonical_name_match\", \"contextual_consistency\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [], \"explanation\": \"祥 in annotation-006 is the personal name form of 王祥 (Wang Xiang). The candidate c0 is the existing person 王祥. The annotation text about the stepmother's plum tree and 祥 watching birds matches the story of Wang Xiang. This is the same person as the protagonist.\"}, {\"mention_id\": \"sfh1-mention-f5aa807ef8bc17a038e6a9ec\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-01-dexing-014-liu-annotation-002\"], \"reason_types\": [\"different_person\"]}], \"preferred_candidate_key\": null, \"resolution\": \"candidate_missing\", \"alternative_search_surfaces\": [\"王融\", \"Wang Rong\"], \"explanation\": \"融 refers to Wang Rong (王融), the father of Wang Xiang and Wang Lan, not to Wang Xiang himself. The candidate c0 is 王祥 (Wang Xiang), which is a different person. The annotation-002 text '融娶髙平薛氏生祥繼室以廬江朱氏生覽' clearly identifies 融 as the father who married Xue and Zhu, bearing Xiang and Lan respectively. The supplied candidate set lacks the correct referent (Wang Rong).\"}, {\"mention_id\": \"sfh1-mention-ff73ef4d86b3e237614ab6af\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-75cb929c04e65c3dbea5\", \"sfh1-ev-01-dexing-014-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"canonical_name_match\", \"contextual_consistency\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [], \"explanation\": \"祥 in the main text is the abbreviated personal name form of 王祥 (Wang Xiang), the protagonist. The candidate c0 is the existing person 王祥. The main text describes 祥 serving his stepmother diligently, which matches the historical Wang Xiang's story. This is the same person.\"}]}",
+              "name": "submit_sfh1_identity_judgments"
+            },
+            "id": "call_00_QRme4gJLJ3z5r7WdU8Rd5746",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787998435,
+  "id": "203d0c80-c927-4912-b411-9d3de7fa261f",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 957,
+    "prompt_cache_hit_tokens": 640,
+    "prompt_cache_miss_tokens": 3043,
+    "prompt_tokens": 3683,
+    "prompt_tokens_details": {
+      "cached_tokens": 640
+    },
+    "total_tokens": 4640
+  }
+}

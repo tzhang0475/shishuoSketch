@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"reviews\": [{\"mention_id\": \"sfh1-mention-bc7886587c4e3b8cb8e59dd8\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-cf249594693eb97f311a\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"alias_registry_match\", \"historical_identity\"], \"explanation\": \"The mention 劉伯倫 appears in the Liu annotation listing the 竹林名士. The alias registry maps 劉伯倫 to 劉伶 (courtesy name 伯倫). The evidence text explicitly lists 劉伯倫 among the 竹林名士, and 劉伶 is historically documented as one of the Seven Worthies of the Bamboo Grove. The surface form matches the courtesy name pattern (surname + courtesy name), and the historical identity is well-attested. The reference semantics also explicitly distinguishes this mention from other named persons in the same list, which is consistent with the identity resolution.\"}, {\"mention_id\": \"sfh1-mention-d8e68c29e8d167ddd373802b\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-91cfed4c46e463a0bd52\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"alias_registry_match\", \"historical_identity\"], \"explanation\": \"The mention 阮嗣宗 appears in the main text where 晉文王 praises 阮嗣宗 for being extremely cautious. The alias registry maps 阮嗣宗 to 阮籍 (courtesy name 嗣宗). The evidence text directly names 阮嗣宗 in a narrative context, and 阮籍 is historically well-attested as a figure known for his cautious speech under the Jin regime. The surface form matches the courtesy name pattern. While the reference semantics returned 'uncertain' with low confidence, the alias registry match and historical identity are independently supported by the supplied evidence text, which specifically names 阮嗣宗 in a context consistent with 阮籍's known biography.\"}]}",
+              "name": "submit_sfh1_adversarial_reviews"
+            },
+            "id": "call_00_WVQgD6HR6YsO0rlVIUTy0282",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787998798,
+  "id": "4cf5244e-f1f5-4f43-bab4-37ce62af3fc8",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 510,
+    "prompt_cache_hit_tokens": 512,
+    "prompt_cache_miss_tokens": 1091,
+    "prompt_tokens": 1603,
+    "prompt_tokens_details": {
+      "cached_tokens": 512
+    },
+    "total_tokens": 2113
+  }
+}

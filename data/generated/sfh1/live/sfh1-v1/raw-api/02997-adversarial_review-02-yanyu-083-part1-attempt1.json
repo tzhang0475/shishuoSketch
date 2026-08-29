@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"reviews\": [{\"mention_id\": \"sfh1-mention-0fed2b1a36eef54977d4b102\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-8e197dc37d6953d581a7\", \"sfh1-ev-02-yanyu-083-liu-annotation-001\", \"sfh1-ev-02-yanyu-083-liu-annotation-004\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"office_title_matches\", \"coreference_chain\"], \"explanation\": \"The mention 謝安南 refers to Xie An by his office title 安南 (governor of Annan). The Liu annotation sfh1-ev-02-yanyu-083-liu-annotation-001 explicitly glosses 安南謝, confirming the office-title reference to Xie An. The candidate evidence sfh1-candidate-evidence-8e197dc37d6953d581a7 provides the character 安 as the personal name, and annotation-004 mentions 太傅謝安, establishing the same person. The coreference with 太傅謝安 (sfh1-mention-4b630b610b8e638e280d1770) and 安 (sfh1-mention-c2f9ffd1a377ef0f9b9f0574) is consistent. The distinctness from 宏 (Yuan Hong) is correctly noted since Yuan Hong is the 司馬 serving under Xie An.\"}, {\"mention_id\": \"sfh1-mention-3856ef89038c7ad3cf8fe2c7\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-2e7cc56f262c1cb91ce1\", \"sfh1-ev-02-yanyu-083-liu-annotation-003\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"personal_name_matches\", \"coreference_chain\"], \"explanation\": \"The mention 宏 is the personal name of 袁宏. The candidate evidence sfh1-candidate-evidence-2e7cc56f262c1cb91ce1 from aliases.json provides the full biography of 袁宏 (字彦伯), confirming 宏 as his personal name. The Liu annotation sfh1-ev-02-yanyu-083-liu-annotation-003 states 袁宏字彦伯 and provides his lineage (祖猷侍中父朂臨汝令), matching the alias registry entry. The coreference chain with 彦伯, 袁彦伯, and 袁宏 is well-supported. The distinctness from 謝安 mentions is correct since 宏 is the 司馬 serving under 謝安南.\"}, {\"mention_id\": \"sfh1-mention-4b630b610b8e638e280d1770\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-a1f4fc57f6204d001637\", \"sfh1-ev-02-yanyu-083-liu-annotation-004\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"full_name_matches\", \"office_title_matches\"], \"explanation\": \"The mention 太傅謝安 is the full name with office title for Xie An. The candidate evidence sfh1-candidate-evidence-a1f4fc57f6204d001637 provides the character 安 as the personal name. The Liu annotation sfh1-ev-02-yanyu-083-liu-annotation-004 explicitly mentions 太傅謝安 in the context of 袁宏's career, confirming this is the same Xie An who is the 太傅. The coreference with 安 (sfh1-mention-c2f9ffd1a377ef0f9b9f0574) and 謝安南 (sfh1-mention-0fed2b1a36eef54977d4b102) is consistent. The distinctness from 宏 is correctly noted.\"}, {\"mention_id\": \"sfh1-mention-525c5e59ce3b798a611562bb\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-f0470267ea55d8d523fa\", \"sfh1-ev-02-yanyu-083-liu-annotation-003\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"courtesy_name_matches\", \"coreference_chain\"], \"explanation\": \"The mention 彦伯 is the courtesy name (字) of 袁宏. The candidate evidence sfh1-candidate-evidence-f0470267ea55d8d523fa from aliases.json explicitly states 袁宏字彦伯. The Liu annotation sfh1-ev-02-yanyu-083-liu-annotation-003 also confirms 袁宏字彦伯. The coreference chain with 宏, 袁宏, and 袁彦伯 is well-supported by the annotation evidence. This is the same Yuan Hong who serves as 安南司馬 in the main text.\"}]}",
+              "name": "submit_sfh1_adversarial_reviews"
+            },
+            "id": "call_00_uLInJ4L9UaAvIdwz2wIu4654",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787997505,
+  "id": "926a8ad3-b98d-43b1-bcce-3b294eaece1a",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 1208,
+    "prompt_cache_hit_tokens": 512,
+    "prompt_cache_miss_tokens": 2610,
+    "prompt_tokens": 3122,
+    "prompt_tokens_details": {
+      "cached_tokens": 512
+    },
+    "total_tokens": 4330
+  }
+}

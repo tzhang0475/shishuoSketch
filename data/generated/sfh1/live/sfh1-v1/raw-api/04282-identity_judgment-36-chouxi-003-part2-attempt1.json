@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"judgments\": [{\"mention_id\": \"sfh1-mention-4d08a1b07c21e75ef28cf60a\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-36-chouxi-003-main\", \"sfh1-ev-36-chouxi-003-liu-annotation-002\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"name_match\", \"contextual_role\"]}, {\"candidate_key\": \"c1\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-36-chouxi-003-main\"], \"reason_types\": [\"different_person\"]}, {\"candidate_key\": \"c2\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-36-chouxi-003-main\"], \"reason_types\": [\"different_person\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [\"王敦\"], \"explanation\": \"The mention 敦 is the abbreviated personal name of 王敦 (Wang Dun). The main text explicitly states 王敦昔肆酷汝父, and annotation 002 discusses 敦將謀逆 and 敦's actions. Candidate c0 is 王敦, which matches. Candidates c1 (王隱) and c2 (王恭) are different people and are contradicted by the context.\"}, {\"mention_id\": \"sfh1-mention-4e11dc37b42d168ebbc5fe43\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-36-chouxi-003-liu-annotation-007\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"name_match\", \"contextual_role\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [], \"explanation\": \"The mention 王導 appears in annotation 007: 王廙别傳曰廙字世將祖覽父正廙髙朗豪率王導. This refers to 王導 (Wang Dao), matching candidate c0 exactly by canonical name.\"}, {\"mention_id\": \"sfh1-mention-53deb550f693b330337c1bb6\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-36-chouxi-003-liu-annotation-005\"], \"reason_types\": [\"different_person\"]}], \"preferred_candidate_key\": null, \"resolution\": \"candidate_missing\", \"alternative_search_surfaces\": [\"司馬無忌\", \"無忌\"], \"explanation\": \"The mention 無忌 in annotation 005 refers to Sima Wuji (司馬無忌), the son of Sima Cheng (司馬丞). The annotation reads 無忌别傳曰無忌字公壽丞子也. The supplied candidate c0 is 氾騰, which is a different person entirely. The likely referent (司馬無忌) is not among the supplied candidates.\"}, {\"mention_id\": \"sfh1-mention-564c8a15502801be884ed913\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-36-chouxi-003-liu-annotation-004\", \"sfh1-ev-36-chouxi-003-liu-annotation-001\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"contextual_role\", \"name_match\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [\"司馬丞\"], \"explanation\": \"The mention 丞 in annotation 004 refers to Sima Cheng (司馬丞), the person attacked by 魏乂 who died in the carriage. Annotation 001 identifies 司馬丞字元敬譙王遜子, and annotation 004 describes 義敦遣從母弟魏乂攻丞王廙使賊迎之薨於車. Candidate c0 is the local person 丞, which matches this referent.\"}]}",
+              "name": "submit_sfh1_identity_judgments"
+            },
+            "id": "call_00_VKcKgQ3SSX0y9VC3dyyS3506",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787999845,
+  "id": "0540add0-07df-43df-bb55-dadfd2b47575",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 1062,
+    "prompt_cache_hit_tokens": 640,
+    "prompt_cache_miss_tokens": 2916,
+    "prompt_tokens": 3556,
+    "prompt_tokens_details": {
+      "cached_tokens": 640
+    },
+    "total_tokens": 4618
+  }
+}

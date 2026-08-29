@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"reviews\": [{\"mention_id\": \"sfh1-mention-02e6cdab38b0b85624522265\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-e711ed7f1c2ad04fdfc3\", \"sfh1-ev-08-shangyu-043-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"canonical_name_match\", \"contextual_role_match\"], \"explanation\": \"The main text explicitly names 劉琨 as the speaker who praises 祖車騎 (祖逖). The candidate evidence from people.json provides the canonical name 劉琨. The annotation evidence sfh1-ev-08-shangyu-043-liu-annotation-002 also references 劉琨 in the context of 祖逖's biography, and annotation-007 explicitly quotes 劉琨's letter ('吾枕戈待旦...常恐祖生先吾箸鞭耳'), which is a well-known historical statement by 劉琨 about 祖逖. The contextual role match is strong: the main text's 劉琨 is the same person referenced in the annotations about 祖逖. No contradicting evidence exists.\"}, {\"mention_id\": \"sfh1-mention-268d2a8343b069b80edca7d9\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-eb24a5937fa63f962a27\", \"sfh1-ev-08-shangyu-043-liu-annotation-002\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"personal_name_match\", \"contextual_role_match\"], \"explanation\": \"The surface form 琨 is a personal-name abbreviation of 劉琨. The annotation text sfh1-ev-08-shangyu-043-liu-annotation-002 explicitly states '與司空劉琨俱以雄豪著名...與琨同辟司', where 琨 is used as a shorthand for 劉琨 in the same annotation. The candidate evidence from the profile asserts identity with 劉琨. The context is about 祖逖's biography, and the annotation explicitly pairs 琨 with 劉琨. No contradicting evidence.\"}, {\"mention_id\": \"sfh1-mention-5723aa55d1305655b0ff63b0\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-f9a273bf00f9095df48c\", \"sfh1-ev-08-shangyu-043-liu-annotation-007\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"canonical_name_match\", \"contextual_role_match\"], \"explanation\": \"The surface form 劉琨 appears in annotation-007: '劉琨與親舊書曰吾枕戈待旦志梟逆虜常恐祖生先吾箸鞭耳'. This is the well-known historical letter from 劉琨 to his friends about 祖逖. The candidate evidence from people.json provides the canonical name 劉琨. The context is clearly about the historical figure 劉琨 (276-318), the Western Jin general and poet. No contradicting evidence.\"}, {\"mention_id\": \"sfh1-mention-8c00c60eb293a0a55e955f42\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-8d224ce68c51d2571f46\", \"sfh1-ev-08-shangyu-043-liu-annotation-001\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"canonical_name_match\", \"contextual_role_match\"], \"explanation\": \"The surface form 虞預 appears in annotation-001: '虞預晉書', which is a citation to 虞預's 晉書 (a historical work). 虞預 (Yu Yu) was a Jin dynasty historian who wrote a 晉書. The candidate evidence from people.json provides the canonical name 虞預. The annotation cites 虞預's 晉書 as a source for 祖逖's biography, which is historically accurate. No contradicting evidence.\"}]}",
+              "name": "submit_sfh1_adversarial_reviews"
+            },
+            "id": "call_00_cXSbSQVye6mCfu5293sr8150",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787989629,
+  "id": "cf5074ea-eb56-41c7-be8b-238d5a69a74f",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 1016,
+    "prompt_cache_hit_tokens": 512,
+    "prompt_cache_miss_tokens": 1962,
+    "prompt_tokens": 2474,
+    "prompt_tokens_details": {
+      "cached_tokens": 512
+    },
+    "total_tokens": 3490
+  }
+}

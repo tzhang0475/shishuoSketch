@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"judgments\": [{\"mention_id\": \"sfh1-mention-1a119963e592f765c7ab52d3\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-19-xianyuan-032-liu-annotation-003\"], \"reason_types\": [\"name_mismatch\", \"identity_assertion_contradiction\"]}], \"preferred_candidate_key\": null, \"resolution\": \"candidate_missing\", \"alternative_search_surfaces\": [\"桓亮\", \"桓景真\"], \"explanation\": \"The mention 桓景真 refers to 桓亮, courtesy name 景真, as confirmed by the Liu annotation (續晉陽秋曰桓亮字景真). The supplied candidate c0 is 趙至, which is a different person entirely. The correct referent (桓亮) is not among the supplied candidates.\"}, {\"mention_id\": \"sfh1-mention-2675431ffe4b34d74ef858bf\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-19-xianyuan-032-liu-annotation-001\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"alias_match\", \"contextual_identity\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [], \"explanation\": \"韓康伯 is 韓伯 (courtesy name 康伯), as confirmed by the Liu annotation mentioning 康伯 in the context of 韓氏譜. The candidate c0 (韓伯) matches the mention 韓康伯 via surname plus courtesy name.\"}, {\"mention_id\": \"sfh1-mention-3f31b1ca7eb6e09c3ab07fe2\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-19-xianyuan-032-liu-annotation-001\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"alias_match\", \"contextual_identity\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [], \"explanation\": \"康伯 is the courtesy name of 韓伯 (韓康伯). The Liu annotation mentions 康伯 in the context of 韓氏譜, confirming this identification. The candidate c0 (韓伯) matches.\"}, {\"mention_id\": \"sfh1-mention-63754e7ea5051d8e6b40ffa9\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-19-xianyuan-032-liu-annotation-003\"], \"reason_types\": [\"name_mismatch\", \"identity_assertion_contradiction\"]}], \"preferred_candidate_key\": null, \"resolution\": \"candidate_missing\", \"alternative_search_surfaces\": [\"桓亮\"], \"explanation\": \"The mention 桓亮 refers to 桓亮 himself (courtesy name 景真), as confirmed by the Liu annotation (續晉陽秋曰桓亮字景真). The supplied candidate c0 is 趙至, which is a different person. The correct referent (桓亮) is not among the supplied candidates.\"}]}",
+              "name": "submit_sfh1_identity_judgments"
+            },
+            "id": "call_00_MxqxOsyfZczsnQeLvUef7151",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787981545,
+  "id": "ffdb116a-7847-4391-bb9b-70ddaa8ac524",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 852,
+    "prompt_cache_hit_tokens": 640,
+    "prompt_cache_miss_tokens": 1457,
+    "prompt_tokens": 2097,
+    "prompt_tokens_details": {
+      "cached_tokens": 640
+    },
+    "total_tokens": 2949
+  }
+}

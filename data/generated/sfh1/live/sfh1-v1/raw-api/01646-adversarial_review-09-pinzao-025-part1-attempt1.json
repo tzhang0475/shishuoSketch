@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"reviews\": [{\"mention_id\": \"sfh1-mention-1c73bf153ddad053c9bda36b\", \"candidate_key\": \"c1\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-09-pinzao-025-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"contextual_match\", \"name_match\"], \"explanation\": \"The mention '温' is an abbreviated surname reference. The source text reads '世論温太真是過江第二流之高者時名輩共説人物第一將盡之間温常失色' — the full name 温太真 appears earlier in the same sentence, and the subsequent '温' clearly refers back to the same person (Wen Tai-zhen). The reference semantics explicitly states coreference with the full-name mention sfh1-mention-31d7953d6de25c3b152bc0e8. The candidate evidence sfh1-candidate-evidence-e6b6d0fb104c7c2b374c confirms the surname abbreviation. This is a straightforward intra-sentence coreference resolution supported by the supplied source text.\"}, {\"mention_id\": \"sfh1-mention-31d7953d6de25c3b152bc0e8\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-09-pinzao-025-main\", \"sfh1-candidate-evidence-eecfeb7bbfab44ef3c52\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"contextual_match\", \"name_match\"], \"explanation\": \"The mention '温太真' is the full name (surname + courtesy name) appearing in the source text '世論温太真是過江第二流之高者'. The candidate evidence from aliases.json confirms 温太真 as an alias for 温嶠. The Liu annotations provide genealogical context about the 温 clan (太原祁縣, 温氏譜序), consistent with 温嶠's identity. The name match is direct and the contextual match (過江第二流之高者, a well-known characterization of 温嶠 in Shishuo Xinyu) supports the resolution. While the reference_semantics record returned 'uncertain' (fail closed), the supplied evidence directly supports the identity.\"}]}",
+              "name": "submit_sfh1_adversarial_reviews"
+            },
+            "id": "call_00_AennuvM2AvBZkQHNBc3K2808",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787989792,
+  "id": "c52356da-4eb8-451e-9fd9-36ca9554f9c9",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 562,
+    "prompt_cache_hit_tokens": 512,
+    "prompt_cache_miss_tokens": 986,
+    "prompt_tokens": 1498,
+    "prompt_tokens_details": {
+      "cached_tokens": 512
+    },
+    "total_tokens": 2060
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"reviews\": [{\"mention_id\": \"sfh1-mention-0f8093249b4e956158723841\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-b260de5f5cc680689353\", \"sfh1-ev-29-jianshe-008-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"historical_context\", \"honorific_title_match\"], \"explanation\": \"陶公 is an honorific title for 陶侃 (Tao Kan). The main text explicitly names 陶士衡 (陶侃's courtesy name) in the candidate evidence, and the historical context of 蘇峻之亂 with 庾亮 fleeing south matches the well-documented encounter between 陶侃 and 庾亮. The evidence directly supports this identification.\"}, {\"mention_id\": \"sfh1-mention-6cffbbaf716330f9920fcf20\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-21715d4c3391c472f969\", \"sfh1-ev-29-jianshe-008-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"coreference\", \"surname_match\"], \"explanation\": \"The surname-only reference 陶 corefers with 陶公 in the same passage, and the candidate evidence explicitly names 陶士衡 (陶侃). The main text shows 陶 as the same person who received 庾太尉, consistent with 陶侃. Evidence directly supports the identity.\"}, {\"mention_id\": \"sfh1-mention-ed4a527afd9078a5254b6a7a\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-c2e26c93e088c935a298\", \"sfh1-ev-29-jianshe-008-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"historical_context\", \"office_title_match\"], \"explanation\": \"庾太尉 is the office title (太尉) for 庾亮. The main text describes 庾太尉 fleeing south during 蘇峻之亂, which matches the historical record of 庾亮 fleeing to 陶侃. The candidate evidence explicitly matches 庾太尉 to 庾亮. Evidence directly supports the identification.\"}]}",
+              "name": "submit_sfh1_adversarial_reviews"
+            },
+            "id": "call_00_KT7zp5HIJezfbn6irR376314",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787990758,
+  "id": "05c8da82-32d7-4729-a859-d571621b0001",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 593,
+    "prompt_cache_hit_tokens": 512,
+    "prompt_cache_miss_tokens": 1651,
+    "prompt_tokens": 2163,
+    "prompt_tokens_details": {
+      "cached_tokens": 512
+    },
+    "total_tokens": 2756
+  }
+}

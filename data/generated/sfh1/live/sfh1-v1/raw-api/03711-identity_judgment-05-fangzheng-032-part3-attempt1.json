@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"judgments\": [{\"mention_id\": \"sfh1-mention-ba2e87da4a4d8a4d779839fe\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-05-fangzheng-032-main\"], \"reason_types\": [\"wrong_person\"]}, {\"candidate_key\": \"c1\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-05-fangzheng-032-main\", \"sfh1-ev-05-fangzheng-032-liu-annotation-002\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"contextual_identity\", \"name_match\"]}], \"preferred_candidate_key\": \"c1\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [\"温太真\", \"温嶠\"], \"explanation\": \"The mention '温' is a surname reference to 温太真 (温嶠). The main text says '温太真所説' and then refers to him as '温' throughout. The Liu annotation (sfh1-ev-05-fangzheng-032-liu-annotation-002) explicitly mentions '嶠' (温嶠) in connection with this story. Candidate c0 is 桓溫, who is not the person in this passage. Candidate c1 is 温嶠, who matches the context: he was 東宫率 (Crown Prince's attendant) and later 王敦's 司馬, exactly as described in the text.\"}, {\"mention_id\": \"sfh1-mention-e52e8be9e3679d331b379fa5\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-05-fangzheng-032-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"name_match\", \"contextual_identity\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [], \"explanation\": \"The mention '王敦' is the full name of Wang Dun, the central figure in this passage who plots to depose Emperor Ming. The candidate c0 is 王敦, matching the canonical name and the historical context of the story.\"}]}",
+              "name": "submit_sfh1_identity_judgments"
+            },
+            "id": "call_00_e9cZCNbJH95BnTQNiMx53878",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787998978,
+  "id": "7f98c14f-fbbf-4b73-bfef-b520d7c38848",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 590,
+    "prompt_cache_hit_tokens": 640,
+    "prompt_cache_miss_tokens": 1330,
+    "prompt_tokens": 1970,
+    "prompt_tokens_details": {
+      "cached_tokens": 640
+    },
+    "total_tokens": 2560
+  }
+}

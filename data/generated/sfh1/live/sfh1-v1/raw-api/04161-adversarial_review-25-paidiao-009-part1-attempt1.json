@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"reviews\": [{\"mention_id\": \"sfh1-mention-6e3a2fc79b33d5861fb28e82\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-25-paidiao-009-main\", \"sfh1-ev-25-paidiao-009-liu-annotation-002\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"coreference\", \"name_match\"], \"explanation\": \"The mention 張 (surname-only reference) appears in the main text as '張乃撫掌大笑'. The main text establishes 張茂先 as the host in whose presence 荀鳴鶴 and 陸士龍 converse. The Liu annotation 002 explicitly states '隱與陸雲在張華坐語', confirming that 張華 is the host. The surname 張 in the main text refers to 張茂先/張華, and the annotation confirms this identity. The coreference chain across 張茂先, 張華, and 張公 is well-supported by the supplied evidence.\"}, {\"mention_id\": \"sfh1-mention-7580e88e2ed1a485d2175f15\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-25-paidiao-009-liu-annotation-002\", \"sfh1-ev-25-paidiao-009-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"coreference\", \"name_match\"], \"explanation\": \"The mention 張華 appears in Liu annotation 002: '隱與陸雲在張華坐語'. The main text describes the same scene with 張茂先 as the host. The full name 張華 directly matches the canonical name of the candidate. The annotation context confirms this is the same Zhang Hua who hosted the conversation between 荀隱 and 陸雲.\"}, {\"mention_id\": \"sfh1-mention-bf9c5ea37a729cb1af1f5e15\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-605432a7e8bfffe8b209\", \"sfh1-ev-25-paidiao-009-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"historical_referent\", \"name_match\"], \"explanation\": \"The mention 張茂先 appears in the main text as the host in whose presence 荀鳴鶴 and 陸士龍 converse. The alias evidence (sfh1-candidate-evidence-605432a7e8bfffe8b209) shows 張茂先 as an alias for 張華 in the Shishuo Xinyu corpus. The main text and Liu annotation 002 both confirm that the person hosting the conversation is 張華. The alias registry maps 張茂先 (surname + courtesy name) to 張華, and the annotation explicitly names 張華 in the same scene.\"}, {\"mention_id\": \"sfh1-mention-e87ecec6aa0a4895c521a43e\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-07b8600140bf70aa4a48\", \"sfh1-ev-25-paidiao-009-liu-annotation-003\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"historical_referent\", \"name_match\"], \"explanation\": \"The mention 張公 appears in Liu annotation 003: '美麗張公稱善'. The annotation context places 張公 in the same narrative as 張華, who is explicitly named in annotation 002 as the host. The honorific 公 attached to the surname 張 refers to the same person as 張華/張茂先. The candidate evidence (sfh1-candidate-evidence-07b8600140bf70aa4a48) provides the canonical name 張華, and the annotation context confirms this identification.\"}]}",
+              "name": "submit_sfh1_adversarial_reviews"
+            },
+            "id": "call_00_Kjqa5IYAj2nKl3awnA7X8586",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787999602,
+  "id": "062c43ef-fb37-4590-8dee-adccdd826385",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 941,
+    "prompt_cache_hit_tokens": 512,
+    "prompt_cache_miss_tokens": 2182,
+    "prompt_tokens": 2694,
+    "prompt_tokens_details": {
+      "cached_tokens": 512
+    },
+    "total_tokens": 3635
+  }
+}

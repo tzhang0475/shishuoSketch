@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"records\": [{\"mention_id\": \"sfh1-mention-b888bd26038d7d977c8b41c8\", \"semantic_type\": \"abbreviated_person_reference\", \"referent_role\": \"person being described (袁山松)\", \"anchor_mentions\": [\"sfh1-mention-c604c6988d4cda1ee1c27a2f\"], \"holder_mentions\": [], \"patron_or_possessor_mentions\": [], \"coreference_with\": [\"sfh1-mention-c604c6988d4cda1ee1c27a2f\", \"sfh1-mention-4d2d9e20daedfbdcd3eca0a2\"], \"distinct_from\": [\"sfh1-mention-5bfb8e22f0632d9f2b03431b\", \"sfh1-mention-494332a2e9849a33ec4de623\", \"sfh1-mention-dfa8cc601ea4c5a08e3e41d0\"], \"semantic_relations\": [{\"type\": \"kinship\", \"subject_mention_id\": \"sfh1-mention-b888bd26038d7d977c8b41c8\", \"object_mention_id\": \"sfh1-mention-92b8a6e021108c32856c0c86\", \"predicate_surface\": \"祖\", \"evidence_id\": \"sfh1-ev-25-paidiao-060-liu-annotation-002\"}, {\"type\": \"kinship\", \"subject_mention_id\": \"sfh1-mention-b888bd26038d7d977c8b41c8\", \"object_mention_id\": \"sfh1-mention-600f770ebffdc6ff3f702b53\", \"predicate_surface\": \"父\", \"evidence_id\": \"sfh1-ev-25-paidiao-060-liu-annotation-002\"}], \"confidence\": \"high\", \"explanation\": \"松 is an abbreviated form of 山松 (袁山松), referring to the same person. The annotation describes his lineage: grandfather 喬, father 方平. The kinship relations are explicit in the text.\"}, {\"mention_id\": \"sfh1-mention-7969467965416f3530f46fa6\", \"semantic_type\": \"descriptive_person_reference\", \"referent_role\": \"person being described (袁山松's origin)\", \"anchor_mentions\": [\"sfh1-mention-b888bd26038d7d977c8b41c8\"], \"holder_mentions\": [], \"patron_or_possessor_mentions\": [], \"coreference_with\": [\"sfh1-mention-b888bd26038d7d977c8b41c8\", \"sfh1-mention-c604c6988d4cda1ee1c27a2f\", \"sfh1-mention-4d2d9e20daedfbdcd3eca0a2\"], \"distinct_from\": [], \"semantic_relations\": [], \"confidence\": \"high\", \"explanation\": \"陳郡人 is a descriptive reference indicating the native place (陳郡) of the person being described, which is 袁山松. It describes the same person as 松/山松.\"}, {\"mention_id\": \"sfh1-mention-92b8a6e021108c32856c0c86\", \"semantic_type\": \"compositional_kinship\", \"referent_role\": \"grandfather of 袁山松 (named 喬)\", \"anchor_mentions\": [\"sfh1-mention-b888bd26038d7d977c8b41c8\"], \"holder_mentions\": [], \"patron_or_possessor_mentions\": [], \"coreference_with\": [], \"distinct_from\": [\"sfh1-mention-b888bd26038d7d977c8b41c8\", \"sfh1-mention-600f770ebffdc6ff3f702b53\", \"sfh1-mention-c604c6988d4cda1ee1c27a2f\"], \"semantic_relations\": [{\"type\": \"kinship\", \"subject_mention_id\": \"sfh1-mention-92b8a6e021108c32856c0c86\", \"object_mention_id\": \"sfh1-mention-b888bd26038d7d977c8b41c8\", \"predicate_surface\": \"祖\", \"evidence_id\": \"sfh1-ev-25-paidiao-060-liu-annotation-002\"}, {\"type\": \"office\", \"subject_mention_id\": \"sfh1-mention-92b8a6e021108c32856c0c86\", \"object_mention_id\": \"sfh1-mention-c984516ffacb700063169b62\", \"predicate_surface\": \"益州刺史\", \"evidence_id\": \"sfh1-ev-25-paidiao-060-liu-annotation-002\"}], \"confidence\": \"high\", \"explanation\": \"祖喬 is a kinship reference meaning 'grandfather 喬'. The grandfather 喬 held the office of 益州刺史. The office relation is explicit in the text.\"}, {\"mention_id\": \"sfh1-mention-c984516ffacb700063169b62\", \"semantic_type\": \"office_holder_reference\", \"referent_role\": \"office title (益州刺史) held by 祖喬\", \"anchor_mentions\": [\"sfh1-mention-92b8a6e021108c32856c0c86\"], \"holder_mentions\": [\"sfh1-mention-92b8a6e021108c32856c0c86\"], \"patron_or_possessor_mentions\": [], \"coreference_with\": [], \"distinct_from\": [\"sfh1-mention-2553890a58f17d941fd25672\"], \"semantic_relations\": [{\"type\": \"office\", \"subject_mention_id\": \"sfh1-mention-92b8a6e021108c32856c0c86\", \"object_mention_id\": \"sfh1-mention-c984516ffacb700063169b62\", \"predicate_surface\": \"益州刺史\", \"evidence_id\": \"sfh1-ev-25-paidiao-060-liu-annotation-002\"}], \"confidence\": \"high\", \"explanation\": \"益州刺史 is an office title. The holder is 祖喬 (the grandfather of 袁山松). This is distinct from 義興太守 which is held by 父方平.\"}]}",
+              "name": "submit_sfh1_reference_semantics"
+            },
+            "id": "call_00_a4RPTQwTrKF7e2CpQHXw0486",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787999621,
+  "id": "7c8fc725-5ce5-43c8-a7b5-bcebf0d1f60e",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 1489,
+    "prompt_cache_hit_tokens": 1152,
+    "prompt_cache_miss_tokens": 2290,
+    "prompt_tokens": 3442,
+    "prompt_tokens_details": {
+      "cached_tokens": 1152
+    },
+    "total_tokens": 4931
+  }
+}

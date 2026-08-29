@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"reviews\": [{\"mention_id\": \"sfh1-mention-421eab79387ba81c19295137\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-10-guizhen-016-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"canonical_name_match\", \"coreference_chain\"], \"explanation\": \"The mention 峻 appears in the main text as the personal name of 蘇峻. The story title is 蘇峻東征沈充, and the text 陸知其意謂峻曰 clearly refers to 蘇峻, who is the subject of the story. The candidate evidence from data/people.json confirms 蘇峻 as a canonical person. The coreference chain links this mention to the full-name mention 蘇峻 at the start of the story. The reference semantics explicitly state this is a local anaphoric reference to 蘇峻. No contradicting evidence exists.\"}, {\"mention_id\": \"sfh1-mention-5422b5a144185d95c4814be8\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-10-guizhen-016-liu-annotation-001\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"canonical_name_match\", \"coreference_chain\"], \"explanation\": \"The mention 敦 appears in the Liu annotation as 敦克京邑 (Dun conquered the capital). The annotation text 諂事王敦敦克京邑 clearly establishes that 敦 is the abbreviated personal name of 王敦, since the full name 王敦 appears immediately before the abbreviated form. The candidate evidence from the annotation source confirms this identity. The reference semantics indicate coreference with the full-name mention. No contradicting evidence exists.\"}, {\"mention_id\": \"sfh1-mention-55c56dbf283c27105affb0ea\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-10-guizhen-016-liu-annotation-001\", \"sfh1-ev-10-guizhen-016-liu-annotation-002\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"canonical_name_match\", \"coreference_chain\"], \"explanation\": \"The mention 充 appears in the Liu annotation. The annotation text 諂事王敦敦克京邑以充爲車騎將 explicitly identifies 充 as the person who flatters Wang Dun and is made chariot general, and the annotation also states 充字士居吳興人 (充, courtesy name Shiju, from Wuxing), which is the biographical identification of 沈充. The annotation 充率衆就王舍 further confirms this is 沈充. The candidate evidence from the annotation source directly supports this identity. The reference semantics indicate this is an abbreviated personal name of 沈充. No contradicting evidence exists.\"}, {\"mention_id\": \"sfh1-mention-6e4dd29f2a4c20ea3c737749\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-10-guizhen-016-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"canonical_name_match\"], \"explanation\": \"The mention 蘇峻 appears as the full name in the story title 蘇峻東征沈充. The main text clearly concerns 蘇峻's eastern campaign against 沈充. The candidate evidence from data/people.json confirms 蘇峻 as a canonical person. While the reference semantics record is marked as uncertain (fail closed), the surface form 蘇峻 is the exact canonical name and the story title unambiguously identifies this person. The main text evidence directly supports this identity resolution.\"}]}",
+              "name": "submit_sfh1_adversarial_reviews"
+            },
+            "id": "call_00_O6eiNK7GGzyktSRqhecd2512",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787989942,
+  "id": "34d7749b-ee91-423d-b055-457a7434e3db",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 894,
+    "prompt_cache_hit_tokens": 512,
+    "prompt_cache_miss_tokens": 2112,
+    "prompt_tokens": 2624,
+    "prompt_tokens_details": {
+      "cached_tokens": 512
+    },
+    "total_tokens": 3518
+  }
+}

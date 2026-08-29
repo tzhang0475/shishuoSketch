@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"judgments\": [{\"mention_id\": \"sfh1-mention-e79fbbc26d8f1d22777561e1\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-03-zhengshi-005-liu-annotation-009\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"courtesy_name_matches_person\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [\"潘尼\", \"尼\"], \"explanation\": \"The annotation (文士傳) states 尼字正叔, meaning 正叔 is the courtesy name of 潘尼. The candidate c0 is 正叔, which directly matches the mention's reference form as the courtesy name of Pan Ni. The evidence sfh1-ev-03-zhengshi-005-liu-annotation-009 explicitly identifies 正叔 as the courtesy name of 尼 (Pan Ni).\"}, {\"mention_id\": \"sfh1-mention-e7e1154ff76bcf872209a739\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-03-zhengshi-005-liu-annotation-001\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"canonical_name_match\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [\"山公\", \"巨源\"], \"explanation\": \"The mention surface is 山濤, and the candidate c0 is the existing person 山濤 from people.json. The annotation sfh1-ev-03-zhengshi-005-liu-annotation-001 confirms 山濤 (字巨源). The main text refers to him as 山公. The candidate matches the mention directly by canonical name.\"}]}",
+              "name": "submit_sfh1_identity_judgments"
+            },
+            "id": "call_00_mep1O2O4eI0QPSnlJuLs4327",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787998757,
+  "id": "adf4c72e-fe7b-4ca6-a286-4adce2cfbc1a",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 484,
+    "prompt_cache_hit_tokens": 640,
+    "prompt_cache_miss_tokens": 1607,
+    "prompt_tokens": 2247,
+    "prompt_tokens_details": {
+      "cached_tokens": 640
+    },
+    "total_tokens": 2731
+  }
+}

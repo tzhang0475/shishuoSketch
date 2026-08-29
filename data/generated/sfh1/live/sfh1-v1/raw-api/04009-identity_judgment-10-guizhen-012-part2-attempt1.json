@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"judgments\": [{\"mention_id\": \"sfh1-mention-24fe68ed8f0fa61f58e25052\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-10-guizhen-012-liu-annotation-003\", \"sfh1-ev-10-guizhen-012-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"name_match\", \"contextual_role\", \"coreference\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [], \"explanation\": \"敦 in the Liu annotation refers to 王敦 (Wang Dun), the general who speaks to 鯤 (Xie Kun). The annotation text '敦曰君能保無變乎' shows 敦 addressing 鯤, matching the main text where 敦 is the same person as 大將軍 (Wang Dun). The candidate 王敦 is the correct historical referent.\"}, {\"mention_id\": \"sfh1-mention-2eb011fab4d5db32a97cffd4\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-10-guizhen-012-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"name_match\", \"contextual_role\", \"coreference\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [], \"explanation\": \"敦 in the main text is the personal name of 王敦, who holds the office of 大將軍. The text '從大將軍下至石頭敦謂鯤曰' clearly shows 敦 is the same person as 大將軍, and he speaks to 鯤 (謝鯤). The candidate 王敦 is the correct referent.\"}, {\"mention_id\": \"sfh1-mention-340e3ed363acdf7042475404\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-10-guizhen-012-liu-annotation-002\", \"sfh1-ev-10-guizhen-012-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"name_match\", \"contextual_role\"]}, {\"candidate_key\": \"c1\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-10-guizhen-012-main\"], \"reason_types\": [\"name_mismatch\", \"contextual_role\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [], \"explanation\": \"王敦 is the full name of Wang Dun, the general (大將軍) in the main text. The Liu annotation '章太守王敦將肆' confirms 王敦 is the person referred to. Candidate c1 (劉琨) is incorrect — 明公 in the main text refers to Wang Dun himself, not Liu Kun, and the name 王敦 clearly matches the historical figure Wang Dun.\"}, {\"mention_id\": \"sfh1-mention-3ae063e315e7f3c51b115d39\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-10-guizhen-012-liu-annotation-001\", \"sfh1-ev-10-guizhen-012-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"name_match\", \"contextual_role\", \"coreference\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [], \"explanation\": \"鯤 in the Liu annotation refers to 謝鯤 (Xie Kun), the subject of the story. The annotation '鯤别傳曰鯤之諷' and the main text '謝鯤爲豫章太守' confirm this. The candidate 謝鯤 is the correct historical referent.\"}]}",
+              "name": "submit_sfh1_identity_judgments"
+            },
+            "id": "call_00_53JGY1A4qV1vcokr8Yda3968",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787999381,
+  "id": "f33b5bd7-09e2-4993-9170-35b809c1fdca",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 1000,
+    "prompt_cache_hit_tokens": 640,
+    "prompt_cache_miss_tokens": 2830,
+    "prompt_tokens": 3470,
+    "prompt_tokens_details": {
+      "cached_tokens": 640
+    },
+    "total_tokens": 4470
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"reviews\": [{\"mention_id\": \"sfh1-mention-b4f21faf6f7a19e5a960ed98\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-05-fangzheng-037-liu-annotation-001\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"abbreviated_name_resolution\", \"coreference_chain\"], \"explanation\": \"The mention '峻' is the personal name of Su Jun (蘇峻). The Liu annotation sfh1-ev-05-fangzheng-037-liu-annotation-001 explicitly states '石自破高山峻也', identifying 石 as 峻, and also mentions 碩 as 峻弟 (younger brother of 峻). The candidate evidence from people.json provides the canonical name 蘇峻. The annotation directly supports the identification of 峻 as Su Jun.\"}, {\"mention_id\": \"sfh1-mention-f1aa41d3929d6de3df698cf6\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-05-fangzheng-037-liu-annotation-004\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"canonical_name_match\", \"role_consistency\"], \"explanation\": \"The mention '陶侃' is a full canonical name matching the candidate 陶侃 from people.json. The Liu annotation sfh1-ev-05-fangzheng-037-liu-annotation-004 states '平陶侃欲將坦上用', which directly references Tao Kan in the context of the Su Jun rebellion narrative, consistent with the historical figure Tao Kan. The full-name match and contextual role consistency support this resolution.\"}, {\"mention_id\": \"sfh1-mention-f4fedc50956d4ae7701517ef\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-05-fangzheng-037-liu-annotation-001\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"abbreviated_name_resolution\", \"coreference_chain\"], \"explanation\": \"The mention '石' is identified as an abbreviated reference to 蘇峻 (Su Jun). The Liu annotation sfh1-ev-05-fangzheng-037-liu-annotation-001 explicitly states '石自破高山峻也', explaining that 石 refers to 峻 (Su Jun). The annotation also links 碩 as 峻弟, further confirming the identity chain. The candidate evidence from people.json provides the canonical name 蘇峻. The annotation directly supports this identification.\"}]}",
+              "name": "submit_sfh1_adversarial_reviews"
+            },
+            "id": "call_00_RIBKEwDiBiYADrFVK6HE2939",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787997836,
+  "id": "3b15be6c-6efb-4ee5-8701-9599f60651c8",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 637,
+    "prompt_cache_hit_tokens": 512,
+    "prompt_cache_miss_tokens": 1739,
+    "prompt_tokens": 2251,
+    "prompt_tokens_details": {
+      "cached_tokens": 512
+    },
+    "total_tokens": 2888
+  }
+}

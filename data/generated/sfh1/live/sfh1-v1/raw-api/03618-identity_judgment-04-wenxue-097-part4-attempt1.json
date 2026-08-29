@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"judgments\": [{\"mention_id\": \"sfh1-mention-5e46f973b890447d7812e0de\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-04-wenxue-097-main\", \"sfh1-candidate-evidence-7121f75b390dddcee12d\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"name_match\", \"contextual_role_match\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [], \"explanation\": \"君 is a second-person pronoun used by 胡奴 (陶侃's son) addressing 袁宏, who wrote the 東征賦. The main text clearly shows 胡奴 addressing the author of the 東征賦, which is 袁宏. The candidate 袁宏 matches.\"}, {\"mention_id\": \"sfh1-mention-5ee972ebf7b9e7783edad25d\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"insufficient\", \"supporting_evidence_ids\": [\"sfh1-ev-04-wenxue-097-liu-annotation-001\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"abbreviated_reference\", \"ambiguous_identity\"]}], \"preferred_candidate_key\": null, \"resolution\": \"insufficient_evidence\", \"alternative_search_surfaces\": [\"范汪\", \"范宣\", \"范甯\"], \"explanation\": \"範 in the annotation '(範别見/胡奴陶)' is a surname-only reference. The annotation indicates this person is seen elsewhere (别見), but the text does not provide enough information to determine which specific 範 (Fan) person this refers to. The candidate 袁宏 does not match since 範 is a different surname.\"}, {\"mention_id\": \"sfh1-mention-60f9d5ff179ecbdd321e88fc\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-04-wenxue-097-liu-annotation-003\", \"sfh1-candidate-evidence-24523ab9aa56b81067a0\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"name_match\", \"contextual_role_match\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [], \"explanation\": \"宏 is the personal name of 袁宏 (Yuan Hong). The annotation 003 discusses 宏 in the context of the 東征賦 and interactions with 温 (桓温), consistent with 袁宏's role as the author of the 東征賦. The candidate 袁宏 matches.\"}, {\"mention_id\": \"sfh1-mention-6378b3c12f932e03e7db9037\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-04-wenxue-097-liu-annotation-005\"], \"reason_types\": [\"kinship_reference_mismatch\", \"wrong_person\"]}, {\"candidate_key\": \"c1\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-04-wenxue-097-liu-annotation-005\"], \"reason_types\": [\"kinship_reference_mismatch\", \"wrong_person\"]}], \"preferred_candidate_key\": null, \"resolution\": \"candidate_missing\", \"alternative_search_surfaces\": [\"桓彝\", \"桓宣城\"], \"explanation\": \"家君 is a kinship term meaning 'my father', used by 温 (桓温) to refer to his own father 桓彝 (also referred to as 桓宣城 in the text). The candidates provided are 桓溫 (c0) and 温嶠 (c1), but 家君 refers to 桓温's father, not to 桓温 himself or 温嶠. The likely referent is 桓彝, who is not among the supplied candidates.\"}]}",
+              "name": "submit_sfh1_identity_judgments"
+            },
+            "id": "call_00_UaXVEkoKEkbX2uTxJ8eL7867",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787998837,
+  "id": "ccfa7575-76fe-4443-8922-180044fe4868",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 1024,
+    "prompt_cache_hit_tokens": 640,
+    "prompt_cache_miss_tokens": 2886,
+    "prompt_tokens": 3526,
+    "prompt_tokens_details": {
+      "cached_tokens": 640
+    },
+    "total_tokens": 4550
+  }
+}

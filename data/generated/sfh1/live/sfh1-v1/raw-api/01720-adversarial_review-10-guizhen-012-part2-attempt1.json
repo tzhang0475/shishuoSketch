@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"reviews\": [{\"mention_id\": \"sfh1-mention-2eb011fab4d5db32a97cffd4\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-10-guizhen-012-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"contextual_role\", \"name_match\"], \"explanation\": \"The mention surface is '敦' (single character), which appears in the main text: '敦謂鯤曰' and '敦又稱疾不朝'. The context clearly identifies 敦 as 王敦 (the Grand General / 大將軍) who is traveling with 謝鯤 to 石頭. The main text explicitly pairs 敦 with 鯤 (謝鯤), and the narrative about the rebellion and court affairs matches the historical 王敦. The candidate evidence 'sfh1-candidate-evidence-60cad6f05089136898f1' shows the character 敦 from the source. The supporting evidence sfh1-ev-10-guizhen-012-main provides the full context where 敦 is the person being addressed by 鯤 and who '又稱疾不朝' — consistent with 王敦's historical role. The Liu annotations (sfh1-ev-10-guizhen-012-liu-annotation-002, -003, -004) also reference 王敦 and 鯤 together. Accept.\"}, {\"mention_id\": \"sfh1-mention-340e3ed363acdf7042475404\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-10-guizhen-012-main\", \"sfh1-ev-10-guizhen-012-liu-annotation-002\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"contextual_role\", \"name_match\"], \"explanation\": \"The mention surface is '王敦' (full name). The main text context describes 敦 as the 大將軍 (Grand General) who travels with 謝鯤 to 石頭, and the Liu annotation sfh1-ev-10-guizhen-012-liu-annotation-002 explicitly reads '章太守王敦將肆' — directly naming 王敦. The narrative of the rebellion, the refusal to attend court, and the dialogue with 鯤 all match the historical 王敦. The candidate evidence from data/people.json provides the canonical name. Accept.\"}, {\"mention_id\": \"sfh1-mention-3ae063e315e7f3c51b115d39\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-10-guizhen-012-main\", \"sfh1-ev-10-guizhen-012-liu-annotation-001\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"contextual_role\", \"name_match\"], \"explanation\": \"The mention surface is '鯤' (single character), which appears in the main text as '謝鯤爲豫章太守' and throughout the dialogue. The main text explicitly identifies this person as 謝鯤, the 豫章太守 (Governor of Yuzhang). The Liu annotation sfh1-ev-10-guizhen-012-liu-annotation-001 references '鯤别傳' (Biography of Kun), confirming this is 謝鯤. The narrative about advising 敦 (王敦) matches 謝鯤's historical role. The candidate evidence shows the character 鯤 from the source. Accept.\"}, {\"mention_id\": \"sfh1-mention-93c7ce0872df67b8e987d7ac\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-10-guizhen-012-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"contextual_role\", \"name_match\"], \"explanation\": \"The mention surface is '謝鯤' (full name). The main text opens with '謝鯤爲豫章太守' and the entire narrative concerns this person's dialogue with 敦 (王敦). The Liu annotations (sfh1-ev-10-guizhen-012-liu-annotation-001, -002, -003) all reference 鯤 in connection with 王敦, confirming the identity. The candidate evidence from data/people.json provides the canonical name. Accept.\"}]}",
+              "name": "submit_sfh1_adversarial_reviews"
+            },
+            "id": "call_00_cLLdbBvzWSEZjeCQsA429026",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787989980,
+  "id": "fb8a383c-d3d2-4108-8a02-0a1111dc42a2",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 1027,
+    "prompt_cache_hit_tokens": 512,
+    "prompt_cache_miss_tokens": 1732,
+    "prompt_tokens": 2244,
+    "prompt_tokens_details": {
+      "cached_tokens": 512
+    },
+    "total_tokens": 3271
+  }
+}

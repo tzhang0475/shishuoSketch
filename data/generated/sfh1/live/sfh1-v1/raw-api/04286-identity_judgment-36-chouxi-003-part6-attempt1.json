@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"judgments\": [{\"mention_id\": \"sfh1-mention-ebdd031c3d43b15f65f1914f\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-36-chouxi-003-liu-annotation-007\", \"sfh1-ev-36-chouxi-003-liu-annotation-008\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"name_match\", \"contextual_identity\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [], \"explanation\": \"廙 is the personal name of 王廙 (Wang Yi), courtesy name 世將. The Liu annotation 007 states '廙字世將' (Yi, courtesy name Shijiang), and annotation 008 discusses 廙 in the context of 庾亮 and 王導 at 石頭, matching the main text where 世將 carries the prince. The candidate 王廙 matches this historical figure.\"}, {\"mention_id\": \"sfh1-mention-edf3b433e562badd91d123a3\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-36-chouxi-003-main\", \"sfh1-ev-36-chouxi-003-liu-annotation-001\", \"sfh1-ev-36-chouxi-003-liu-annotation-002\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"office_title_match\", \"contextual_identity\"]}, {\"candidate_key\": \"c1\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-36-chouxi-003-main\"], \"reason_types\": [\"contextual_identity\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [], \"explanation\": \"王大將軍 in the main text refers to Wang Dun (王敦), who seized Sima Cheng and ordered 世將 (Wang Yi) to kill him. The main text explicitly says '王敦昔肆酷汝父假手世將' confirming Wang Dun as the 大將軍. The Liu annotations also reference 王敦 in this context. Candidate c1 (王隱) is contradicted because the context clearly identifies Wang Dun, not Wang Yin.\"}, {\"mention_id\": \"sfh1-mention-fa2201f7b6f6566238a2360b\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-36-chouxi-003-main\"], \"reason_types\": [\"contextual_identity\"]}], \"preferred_candidate_key\": null, \"resolution\": \"candidate_missing\", \"alternative_search_surfaces\": [\"司馬愍王\", \"司馬丞\", \"愍王\"], \"explanation\": \"The mention 王 here is the ruler title within the compound 司馬愍王, referring to Sima Cheng (司馬丞), the prince being seized. The supplied candidate c0 is 王恭 (Wang Gong), which is incorrect. The actual referent is 司馬愍王/司馬丞 (Sima Cheng), who is not among the supplied candidates. The reference_semantics confirms this is part of 司馬愍王 and distinct from 王大將軍.\"}, {\"mention_id\": \"sfh1-mention-fe8280d5432bc7b769756ec7\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-36-chouxi-003-liu-annotation-001\", \"sfh1-ev-36-chouxi-003-liu-annotation-002\", \"sfh1-ev-36-chouxi-003-liu-annotation-003\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"name_match\", \"contextual_identity\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [], \"explanation\": \"丞 refers to Sima Cheng (司馬丞), the local candidate person. The Liu annotation 001 identifies 司馬丞字元敬 as 譙王遜子, and annotation 003 discusses 丞 sighing about dying for the ruler's cause, matching the context. The reference_semantics confirms this is 司馬丞, distinct from 敦 (Wang Dun) and 魏乂.\"}]}",
+              "name": "submit_sfh1_identity_judgments"
+            },
+            "id": "call_00_dBSc21ZtMwNzy2yJZut15577",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787999872,
+  "id": "2090da69-b62b-45b0-ae9e-4dd47782524a",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 1117,
+    "prompt_cache_hit_tokens": 640,
+    "prompt_cache_miss_tokens": 3018,
+    "prompt_tokens": 3658,
+    "prompt_tokens_details": {
+      "cached_tokens": 640
+    },
+    "total_tokens": 4775
+  }
+}

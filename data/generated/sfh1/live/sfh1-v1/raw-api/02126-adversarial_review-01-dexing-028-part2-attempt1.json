@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"reviews\": [{\"mention_id\": \"sfh1-mention-876d3c21557ced61c6a0d545\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-35da9294e2a377d4a4d2\", \"sfh1-ev-01-dexing-028-liu-annotation-002\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"surname_reference\", \"courtesy_name_alias\"], \"explanation\": \"The mention surface is '鄧' (surname only). The annotation text '性清慎平簡鄧' continues the description of 攸 (鄧攸), and the candidate evidence from aliases.json explicitly identifies 伯道 as the courtesy name of 王安期 in a passage that also references 鄧伯道 (鄧攸's courtesy name). The surname 鄧 in the annotation directly continues the biographical description of 攸, who is 鄧攸. The evidence specifically supports that this surname reference points to 鄧攸.\"}, {\"mention_id\": \"sfh1-mention-b2f166f14092d2cdd695cdf7\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-18c88a644d9f3d44a33e\", \"sfh1-ev-01-dexing-028-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"canonical_name_match\", \"full_name_reference\"], \"explanation\": \"The mention surface is '鄧攸' (full name). The candidate evidence from people.json provides the canonical entry for 鄧攸. The main text begins '鄧攸始避難於道中棄己子全弟子' which directly names 鄧攸 as the subject of this story. The full name match is unambiguous and the evidence specifically supports this identity.\"}, {\"mention_id\": \"sfh1-mention-b9f23c8d613cccf86bf686a1\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-788749104fd348636975\", \"sfh1-ev-01-dexing-028-main\", \"sfh1-ev-01-dexing-028-liu-annotation-002\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"canonical_name_match\", \"personal_name_reference\"], \"explanation\": \"The mention surface is '攸' (personal name). The candidate evidence from people.json provides the canonical entry for 鄧攸. The main text '鄧攸始避難...' establishes 攸 as the subject, and the annotation '性清慎平簡鄧' continues describing 攸. The personal name 攸 is used throughout the text to refer to 鄧攸. The evidence specifically supports this identity resolution.\"}]}",
+              "name": "submit_sfh1_adversarial_reviews"
+            },
+            "id": "call_00_bul0Jd3EImi53rtAxkgO5554",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787992464,
+  "id": "769f868f-c763-4779-ab74-4049529381d0",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 687,
+    "prompt_cache_hit_tokens": 512,
+    "prompt_cache_miss_tokens": 2097,
+    "prompt_tokens": 2609,
+    "prompt_tokens_details": {
+      "cached_tokens": 512
+    },
+    "total_tokens": 3296
+  }
+}

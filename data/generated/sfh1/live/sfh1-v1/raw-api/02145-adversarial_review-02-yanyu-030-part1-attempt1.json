@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"reviews\": [{\"mention_id\": \"sfh1-mention-07749e33f44c762ce1cf71c7\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-58c2e76280fb93e7342b\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"alias_registry\", \"contextual_title\"], \"explanation\": \"庾公 is a standard honorific reference to 庾亮 (Yu Liang). The main text '庾公造周伯仁' clearly identifies 庾公 as the visitor to 周伯仁. The alias registry evidence supports 庾公 as a contextual title for 庾亮. The reference semantics correctly identify this as an honorific reference to 庾亮, and the distinctness from 周伯仁 (the 君 in the dialogue) is correctly established. No contradicting evidence exists.\"}, {\"mention_id\": \"sfh1-mention-3d140b63200e9711fb2f47a4\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-b2ed5b3040886ee3a924\", \"sfh1-ev-02-yanyu-030-liu-annotation-003\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"alias_registry\", \"coreference\"], \"explanation\": \"The mention '我' in the Liu annotation '我邦族矣' refers to the speaker discussing their own clan. The annotation context is about 周伯仁 (周顗), and the annotation text '今復見周伯仁伯仁將祛舊風清...我邦族矣' indicates the speaker is 周伯仁 himself saying 'my clan/family'. The coreference with sfh1-mention-4efc94680d9a7251287c4084 (周伯仁) is supported by the annotation context. The evidence from the alias registry and the Liu annotation support this identification.\"}, {\"mention_id\": \"sfh1-mention-4efc94680d9a7251287c4084\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-cdaa343ffaab7acc6386\", \"sfh1-ev-02-yanyu-030-liu-annotation-003\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"alias_registry\", \"surname_plus_courtesy_name\"], \"explanation\": \"周伯仁 is the courtesy name form for 周顗 (Zhou Yi). The Liu annotation explicitly states '周顗字伯仁' (sfh1-ev-02-yanyu-030-liu-annotation-001), confirming the identity. The alias registry evidence and the annotation both support this resolution. The distinctness from 王敦 is correctly noted since the annotation states 周伯仁 was harmed by 王敦.\"}, {\"mention_id\": \"sfh1-mention-856a3ee73fc58a8f87aa9e67\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-b1ff1c9c85d7a82d0a2e\", \"sfh1-ev-02-yanyu-030-liu-annotation-003\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"canonical_name\"], \"explanation\": \"王敦 is referenced by his canonical name in the Liu annotation '爲王敦所害'. The people.json evidence confirms 王敦 as a canonical person entry. The annotation explicitly states that 周伯仁 was harmed by 王敦, confirming 王敦 as a distinct person from 周伯仁. The canonical name match is direct and unambiguous.\"}]}",
+              "name": "submit_sfh1_adversarial_reviews"
+            },
+            "id": "call_00_fh5IAO3eIJqPNtaRPSaY6185",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787992664,
+  "id": "97f63f8d-bf76-46ea-8798-a36c98acc12f",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 907,
+    "prompt_cache_hit_tokens": 512,
+    "prompt_cache_miss_tokens": 2269,
+    "prompt_tokens": 2781,
+    "prompt_tokens_details": {
+      "cached_tokens": 512
+    },
+    "total_tokens": 3688
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"reviews\": [{\"mention_id\": \"sfh1-mention-3e0d0853707cff9ca00f9606\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-c105883e259c17ed7228\", \"sfh1-ev-09-pinzao-014-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"alias_registry_match\", \"contextual_consistency\"], \"explanation\": \"The surface form 周伯仁 is matched to 周顗 via the alias registry (surname + courtesy name 伯仁). The main text explicitly uses 周伯仁 and 周顗 interchangeably in the same passage (明帝問周伯仁...周曰...郗曰周顗比臣), confirming they refer to the same person. The candidate evidence from aliases.json provides the courtesy-name mapping. The main text evidence confirms contextual identity.\"}, {\"mention_id\": \"sfh1-mention-71faa0cb603ea148018f8be8\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-7de0499dc9fc4058d5ee\", \"sfh1-ev-09-pinzao-014-main\", \"sfh1-ev-09-pinzao-014-liu-annotation-001\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"alias_registry_match\", \"coreference_chain\", \"contextual_consistency\"], \"explanation\": \"伯仁 is the courtesy name of 周顗 per the alias registry. The Liu annotation (sfh1-ev-09-pinzao-014-liu-annotation-001) explicitly says '曰伯仁清', referring to 伯仁 in the context of the main text where 周伯仁/周顗 appear. The main text confirms 周伯仁 and 周顗 are the same person, and the annotation's use of 伯仁 corefers with these mentions. The distinct_from mention sfh1-mention-0e7cb1f7685b94ff74130f16 is not contradicted by any supplied evidence.\"}, {\"mention_id\": \"sfh1-mention-9b354514a2210479c7b28e8b\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-fba523f0754eaa63061a\", \"sfh1-ev-09-pinzao-014-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"canonical_name_match\", \"contextual_consistency\"], \"explanation\": \"The surface form 郗鑒 exactly matches the canonical name in people.json. The main text explicitly names 郗鑒 as the person being compared with 周顗 (明帝問周伯仁卿自謂何如郗鑒...復問郗郗曰周顗比臣有國士門風). The canonical name match is direct and unambiguous.\"}, {\"mention_id\": \"sfh1-mention-bb281a7fd596d2b43f2ce07f\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-5164cc6031695823b881\", \"sfh1-ev-09-pinzao-014-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"alias_registry_match\", \"coreference_chain\", \"contextual_consistency\"], \"explanation\": \"The surface form 周伯仁 is matched to 周顗 via the alias registry. The main text shows 周伯仁 and 周顗 referring to the same person in the same passage. The coreference chain links this mention to sfh1-mention-3e0d0853707cff9ca00f9606 (周伯仁) and sfh1-mention-ee8a51d9b6e719fdc0981064 (周顗), all confirmed by the main text. The distinct_from mentions (郗鑒, etc.) are consistent with the narrative.\"}]}",
+              "name": "submit_sfh1_adversarial_reviews"
+            },
+            "id": "call_00_oLxyissuJluZT6x9QHfL5255",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787989717,
+  "id": "7b85a271-0fd7-48a3-9cf4-1f33b953b520",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 989,
+    "prompt_cache_hit_tokens": 512,
+    "prompt_cache_miss_tokens": 1889,
+    "prompt_tokens": 2401,
+    "prompt_tokens_details": {
+      "cached_tokens": 512
+    },
+    "total_tokens": 3390
+  }
+}

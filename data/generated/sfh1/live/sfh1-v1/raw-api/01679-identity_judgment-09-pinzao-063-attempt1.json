@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"judgments\": [{\"mention_id\": \"sfh1-mention-5bb2371849b54e407a64c88f\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-9c077e89a94f0cdf8011\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"alias_registry_match\", \"contextual_fit\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [\"韓伯\", \"韓康伯\"], \"explanation\": \"The mention 康伯 refers to 韓康伯 (韓伯), whose courtesy name is 康伯. The alias registry evidence confirms this match. In the context of 庾道季's comparison, 康伯 is the well-known figure 韓伯, and the candidate c0 (韓伯) matches this historical person.\"}, {\"mention_id\": \"sfh1-mention-8c4dd2dce67987b657849bbb\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-candidate-evidence-7760b95cdec1cccf7c61\"], \"reason_types\": [\"alias_mismatch\", \"wrong_person\"]}], \"preferred_candidate_key\": null, \"resolution\": \"candidate_missing\", \"alternative_search_surfaces\": [\"王坦之\", \"王文度\"], \"explanation\": \"The mention 文度 in this context refers to 王文度 (王坦之), whose courtesy name is 文度. The supplied candidate c0 is 孫晷, which is a different person. The alias registry evidence provided actually shows 文度 as the courtesy name used for 王坦之 in the story about 桓温 seeking a marriage alliance, not for 孫晷. The candidate set lacks the correct referent 王坦之.\"}]}",
+              "name": "submit_sfh1_identity_judgments"
+            },
+            "id": "call_00_OCfuNHXGavKp3PbQsnOO5245",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787989869,
+  "id": "d92a4da4-8828-44db-976f-f7e2bd93d866",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 505,
+    "prompt_cache_hit_tokens": 640,
+    "prompt_cache_miss_tokens": 992,
+    "prompt_tokens": 1632,
+    "prompt_tokens_details": {
+      "cached_tokens": 640
+    },
+    "total_tokens": 2137
+  }
+}

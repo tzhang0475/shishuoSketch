@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"judgments\": [{\"mention_id\": \"sfh1-mention-43853d24cd7818203c354ed0\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-04-wenxue-024-liu-annotation-001\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"name_match\", \"contextual_role_match\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [\"公孫龍\", \"公孫龍子\"], \"explanation\": \"孫龍 in the Liu annotation refers to Gongsun Long (公孫龍), the Warring States philosopher known for the 'White Horse is not a horse' argument. The candidate 孫龍 matches the surface form directly and the annotation context (白馬非馬) confirms this is the historical Gongsun Long.\"}, {\"mention_id\": \"sfh1-mention-68304f56138890eb9225853f\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"insufficient\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [], \"reason_types\": [\"insufficient_context\"]}], \"preferred_candidate_key\": null, \"resolution\": \"insufficient_evidence\", \"alternative_search_surfaces\": [\"裕\", \"中興書\"], \"explanation\": \"The single character 裕 appears in the Zhongxing shu citation within the Liu annotation. The full identity of this person is unclear from the surviving text; the candidate 裕 is just the surface form itself with no additional identifying information to confirm a specific historical referent.\"}, {\"mention_id\": \"sfh1-mention-c5ff93b29660537b3ba8d153\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-80188b5193aba7e58f56\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"name_match\", \"contextual_role_match\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [\"謝安石\", \"安石\"], \"explanation\": \"謝安 is the well-known Eastern Jin statesman Xie An. The main text describes him as young (年少時) inviting Ruan Guanglu to discuss the White Horse theory, which matches the historical Xie An. The candidate 謝安 matches the surface form exactly.\"}, {\"mention_id\": \"sfh1-mention-e14d0952d0860cad183224f0\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-715af087bf3fe856bf76\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"name_match\", \"coreference_chain\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [\"謝安\", \"謝安石\"], \"explanation\": \"謝 is a surname-only reference to Xie An (謝安), coreferring with the full-name mention sfh1-mention-c5ff93b29660537b3ba8d153. The candidate 謝安 is the correct historical referent.\"}]}",
+              "name": "submit_sfh1_identity_judgments"
+            },
+            "id": "call_00_GtKHwRpsLo7fMAYHXiIe5269",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787997571,
+  "id": "7ee5a354-cee8-4ab4-a11f-73eca35d0cf2",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 819,
+    "prompt_cache_hit_tokens": 640,
+    "prompt_cache_miss_tokens": 1988,
+    "prompt_tokens": 2628,
+    "prompt_tokens_details": {
+      "cached_tokens": 640
+    },
+    "total_tokens": 3447
+  }
+}

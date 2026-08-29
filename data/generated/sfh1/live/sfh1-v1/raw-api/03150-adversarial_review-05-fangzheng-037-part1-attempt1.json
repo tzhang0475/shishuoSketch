@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"reviews\": [{\"mention_id\": \"sfh1-mention-0073d32dfd0ad4514ee6c7c3\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-05-fangzheng-037-liu-annotation-004\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"canonical_name_match\", \"role_consistency\"], \"explanation\": \"The mention 王隱 appears in annotation-004 as '按王隱晉書蘇峻事', explicitly citing Wang Yin's Jin Shu. The surface form matches the canonical name exactly, and the role as historian/author of Jin Shu is consistent with the annotation context. The distinctness from Su Jun and Kong Tan is correctly noted. No contradicting evidence exists.\"}, {\"mention_id\": \"sfh1-mention-35576ea21c749384ae533344\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-05-fangzheng-037-liu-annotation-004\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"canonical_name_match\", \"role_consistency\"], \"explanation\": \"The mention 蘇峻 appears in annotation-004 as part of '按王隱晉書蘇峻事', referring to the Su Jun affair. The surface form matches the canonical name exactly. The coreference chain linking 蘇峻 to 蘇子高 (main text) and 峻 (annotations) is consistent with the historical figure Su Jun, the rebel leader. The annotation-001 explicitly identifies 峻 as 蘇峻's brother 碩's sibling context, and annotation-002 continues the narrative about 峻 and 碩 holding Stone City. No contradicting evidence.\"}, {\"mention_id\": \"sfh1-mention-543ad26e5a4b18ae642074bd\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-05-fangzheng-037-liu-annotation-002\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"abbreviated_name_resolution\", \"coreference_chain\"], \"explanation\": \"The mention 峻 in annotation-002 ('峻碩猶據石頭潰') refers to Su Jun via abbreviated name. Annotation-001 establishes 峻 as 蘇峻 (the rebel leader) and 碩 as his brother. The coreference chain linking this mention to the full-name mention 蘇峻 (sfh1-mention-35576ea21c749384ae533344) is well-supported by the annotation context. The distinctness from 碩 (sfh1-mention-aa2241c61bbc24ff463603d2) is correctly noted since 碩 is Su Jun's brother. No contradicting evidence.\"}, {\"mention_id\": \"sfh1-mention-66fea82b6b0fc0eae09545d9\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-05-fangzheng-037-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"alias_registry_match\", \"role_consistency\"], \"explanation\": \"The mention 蘇子高 appears in the main text ('蘇子高事平'). The alias registry maps 蘇子高 (surname + courtesy name) to 蘇峻. The main text describes the aftermath of Su Jun's rebellion ('事平' = affair settled), which is consistent with the historical Su Jun. The annotation-004 explicitly references '蘇峻事' in the same story, confirming the identity. While the reference_semantics reports low confidence due to a failed semantic record, the alias registry match plus the strong contextual evidence from the annotations supports the resolution. No contradicting evidence.\"}]}",
+              "name": "submit_sfh1_adversarial_reviews"
+            },
+            "id": "call_00_ygng8M4OGA00BP62d9Na5285",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787997829,
+  "id": "147b9159-662d-49ad-894f-297d7546f3b9",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 892,
+    "prompt_cache_hit_tokens": 640,
+    "prompt_cache_miss_tokens": 2002,
+    "prompt_tokens": 2642,
+    "prompt_tokens_details": {
+      "cached_tokens": 640
+    },
+    "total_tokens": 3534
+  }
+}

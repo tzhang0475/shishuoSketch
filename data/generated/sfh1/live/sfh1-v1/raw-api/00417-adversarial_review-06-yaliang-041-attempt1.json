@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"reviews\": [{\"mention_id\": \"sfh1-mention-0abab159afdb9747d031369b\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-06-yaliang-041-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"contextual_fit\", \"name_match\"], \"explanation\": \"The mention surface is '王' in the main text '語王恭適見新文甚可觀'. The candidate is 王恭. The main text explicitly names 王恭, and the surface '王' is a partial reference to 王恭 in context. The supporting evidence sfh1-ev-06-yaliang-041-main contains '語王恭' which directly establishes the identity. The candidate evidence sfh1-candidate-evidence-eb68e61a1acc743a9bde shows the surface '王' from the same source. This is a contextual abbreviation of the full name 王恭 appearing in the same passage.\"}, {\"mention_id\": \"sfh1-mention-2f7a33017662eebc65a3b2d6\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-06-yaliang-041-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"contextual_fit\", \"name_match\"], \"explanation\": \"The mention surface is '王恭' and the candidate is 王恭. The main text sfh1-ev-06-yaliang-041-main contains '語王恭' and '王讀殷笑之' and '王看竟', all referring to 王恭. The full name 王恭 appears explicitly in the text. The candidate evidence from data/people.json confirms 王恭 as a canonical person. This is a direct name match with contextual support.\"}, {\"mention_id\": \"sfh1-mention-4114e089cccab964fcdb17a0\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-06-yaliang-041-liu-annotation-001\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"alias_match\", \"contextual_fit\"], \"explanation\": \"The mention surface is '廣微' and the candidate is 束晳. The Liu annotation sfh1-ev-06-yaliang-041-liu-annotation-001 states '(字廣微陽平/文士傳曰晳)', which explicitly identifies 廣微 as the courtesy name (字) of 束晳. The candidate evidence from data/aliases.json also confirms 束晳's courtesy name is 廣微. The annotation directly connects the surface '廣微' to 束晳, and the main text mentions 束晳 in the same passage, providing strong contextual fit.\"}, {\"mention_id\": \"sfh1-mention-65067708471e189572b28686\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-06-yaliang-041-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"contextual_fit\", \"name_match\"], \"explanation\": \"The mention surface is '束晳' and the candidate is 束晳. The main text sfh1-ev-06-yaliang-041-main contains '是束晳慢戲之流', directly naming 束晳. The candidate evidence from data/people.json confirms 束晳 as a canonical person. This is a direct full-name match with clear contextual support in the main text.\"}]}",
+              "name": "submit_sfh1_adversarial_reviews"
+            },
+            "id": "call_00_NZgUouyJEmCsJmskynBX6216",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787981044,
+  "id": "608aa466-7115-4050-9b49-7f0551148ead",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 863,
+    "prompt_cache_hit_tokens": 512,
+    "prompt_cache_miss_tokens": 1306,
+    "prompt_tokens": 1818,
+    "prompt_tokens_details": {
+      "cached_tokens": 512
+    },
+    "total_tokens": 2681
+  }
+}

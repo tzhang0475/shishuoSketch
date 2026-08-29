@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"reviews\": [{\"mention_id\": \"sfh1-mention-08e430a342d78cb7fd17db0e\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-23-rendan-026-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"canonical_name_match\", \"contextual_role_match\"], \"explanation\": \"The mention '卿' is the second-person pronoun used by 温太真 when calling out to 庾亮: '大喚亮曰卿可贖我'. The text explicitly names 亮 (庾亮) as the addressee, and '卿' directly refers to that same person. The main text evidence supports this identity resolution.\"}, {\"mention_id\": \"sfh1-mention-42b1f3fc0d7f9f1d807529a4\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-23-rendan-026-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"canonical_name_match\", \"contextual_role_match\"], \"explanation\": \"The mention '庾亮' is the full canonical name of Yu Liang, appearing directly in the main text: '與庾亮善'. The candidate evidence from people.json confirms 庾亮 as a canonical person entry. The main text directly names this person, providing specific evidence for identity.\"}, {\"mention_id\": \"sfh1-mention-4b1a72a79e05810b708e2ce5\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-647776391891ea5c858f\", \"sfh1-ev-23-rendan-026-liu-annotation-001\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"alias_registry_match\", \"contextual_role_match\"], \"explanation\": \"The mention '嶠' is the given name of 温太真 (Wen Qiao). The Liu annotation '中興書曰嶠有儁朗' explicitly uses 嶠 to refer to the same person as 温太真 in the main text. The alias registry evidence confirms 温太真 as an alias for 温嶠. The annotation provides direct textual evidence linking 嶠 to 温太真.\"}, {\"mention_id\": \"sfh1-mention-5de24e5a1fae9f151d78d282\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-23-rendan-026-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"canonical_name_match\", \"contextual_role_match\"], \"explanation\": \"The mention '庾' is a surname-only reference to 庾亮, used in the phrase '庾即送直' (Yu immediately sent the payment). This directly follows the earlier mention of 庾亮 in the same passage, and the context makes clear it refers to the same person who was just named in full. The main text provides direct evidence for this identity.\"}]}",
+              "name": "submit_sfh1_adversarial_reviews"
+            },
+            "id": "call_00_seShWWJY4ynTLty7hkWb7729",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787990338,
+  "id": "c7e90f32-739f-4666-b987-b0be74356751",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 759,
+    "prompt_cache_hit_tokens": 512,
+    "prompt_cache_miss_tokens": 1980,
+    "prompt_tokens": 2492,
+    "prompt_tokens_details": {
+      "cached_tokens": 512
+    },
+    "total_tokens": 3251
+  }
+}

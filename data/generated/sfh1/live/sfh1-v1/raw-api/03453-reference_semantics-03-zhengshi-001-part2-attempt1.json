@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"records\": [{\"mention_id\": \"sfh1-mention-2355b0d312212c8f217e3809\", \"semantic_type\": \"office_holder_reference\", \"referent_role\": \"office_holder\", \"anchor_mentions\": [\"sfh1-mention-da5b5728f0f4aa53bd42cf21\"], \"holder_mentions\": [\"sfh1-mention-da5b5728f0f4aa53bd42cf21\"], \"patron_or_possessor_mentions\": [], \"coreference_with\": [\"sfh1-mention-da5b5728f0f4aa53bd42cf21\"], \"distinct_from\": [\"sfh1-mention-11629c47b6fbc57da01fb9c1\", \"sfh1-mention-d61e5b822d98d7d72a6bb199\", \"sfh1-mention-ef11a2deb70bc747a0d512ac\"], \"semantic_relations\": [{\"type\": \"office\", \"subject_mention_id\": \"sfh1-mention-da5b5728f0f4aa53bd42cf21\", \"object_mention_id\": \"sfh1-mention-2355b0d312212c8f217e3809\", \"predicate_surface\": \"為\", \"evidence_id\": \"sfh1-ev-03-zhengshi-001-main\"}], \"confidence\": \"high\", \"explanation\": \"太丘長 is the office title that 陳仲弓 holds. The text states 陳仲弓為太丘長, so 太丘長 is the office held by 陳仲弓 (sfh1-mention-da5b5728f0f4aa53bd42cf21).\"}, {\"mention_id\": \"sfh1-mention-11629c47b6fbc57da01fb9c1\", \"semantic_type\": \"descriptive_person_reference\", \"referent_role\": \"collective_official\", \"anchor_mentions\": [], \"holder_mentions\": [], \"patron_or_possessor_mentions\": [], \"coreference_with\": [], \"distinct_from\": [\"sfh1-mention-2355b0d312212c8f217e3809\", \"sfh1-mention-d61e5b822d98d7d72a6bb199\", \"sfh1-mention-ef11a2deb70bc747a0d512ac\"], \"semantic_relations\": [{\"type\": \"co_presence\", \"subject_mention_id\": \"sfh1-mention-11629c47b6fbc57da01fb9c1\", \"object_mention_id\": \"sfh1-mention-2355b0d312212c8f217e3809\", \"predicate_surface\": \"吏有詐稱母病求假\", \"evidence_id\": \"sfh1-ev-03-zhengshi-001-main\"}], \"confidence\": \"high\", \"explanation\": \"吏 is a collective descriptive reference to officials/subordinates in the context. It refers to the clerk(s) who falsely claimed their mother was ill. This is distinct from 陳仲弓 (the magistrate) and from 主簿 (the registrar).\"}, {\"mention_id\": \"sfh1-mention-d61e5b822d98d7d72a6bb199\", \"semantic_type\": \"compositional_kinship\", \"referent_role\": \"mother\", \"anchor_mentions\": [\"sfh1-mention-11629c47b6fbc57da01fb9c1\"], \"holder_mentions\": [], \"patron_or_possessor_mentions\": [\"sfh1-mention-11629c47b6fbc57da01fb9c1\"], \"coreference_with\": [], \"distinct_from\": [\"sfh1-mention-2355b0d312212c8f217e3809\", \"sfh1-mention-11629c47b6fbc57da01fb9c1\", \"sfh1-mention-ef11a2deb70bc747a0d512ac\"], \"semantic_relations\": [{\"type\": \"kinship\", \"subject_mention_id\": \"sfh1-mention-11629c47b6fbc57da01fb9c1\", \"object_mention_id\": \"sfh1-mention-d61e5b822d98d7d72a6bb199\", \"predicate_surface\": \"母\", \"evidence_id\": \"sfh1-ev-03-zhengshi-001-main\"}], \"confidence\": \"high\", \"explanation\": \"母 refers to the mother of the 吏 (the clerk who falsely claimed illness). The text says 吏有詐稱母病, meaning the clerk falsely claimed his mother was ill. The mother is possessed by/related to the clerk.\"}, {\"mention_id\": \"sfh1-mention-ef11a2deb70bc747a0d512ac\", \"semantic_type\": \"office_holder_reference\", \"referent_role\": \"office_holder\", \"anchor_mentions\": [], \"holder_mentions\": [], \"patron_or_possessor_mentions\": [], \"coreference_with\": [], \"distinct_from\": [\"sfh1-mention-2355b0d312212c8f217e3809\", \"sfh1-mention-11629c47b6fbc57da01fb9c1\", \"sfh1-mention-d61e5b822d98d7d72a6bb199\"], \"semantic_relations\": [{\"type\": \"speech\", \"subject_mention_id\": \"sfh1-mention-ef11a2deb70bc747a0d512ac\", \"object_mention_id\": \"sfh1-mention-2355b0d312212c8f217e3809\", \"predicate_surface\": \"請付獄考衆姦\", \"evidence_id\": \"sfh1-ev-03-zhengshi-001-main\"}], \"confidence\": \"high\", \"explanation\": \"主簿 is an office title referring to the registrar who petitions 陳仲弓 to put the clerk in prison for interrogation. The 主簿 is a distinct person from 陳仲弓, the 吏, and the 母. The 主簿 makes a request (請) to the magistrate.\"}]}",
+              "name": "submit_sfh1_reference_semantics"
+            },
+            "id": "call_00_bm506tpUkdH9TUbon83c5999",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787998598,
+  "id": "c52e0a31-e4b6-4471-b6c7-75b3cc9ca140",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 1433,
+    "prompt_cache_hit_tokens": 896,
+    "prompt_cache_miss_tokens": 916,
+    "prompt_tokens": 1812,
+    "prompt_tokens_details": {
+      "cached_tokens": 896
+    },
+    "total_tokens": 3245
+  }
+}

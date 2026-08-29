@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"judgments\": [{\"mention_id\": \"sfh1-mention-dbd08c8f0be0f923fac43031\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-05-fangzheng-009-liu-annotation-005\", \"sfh1-ev-05-fangzheng-009-liu-annotation-007\"], \"reason_types\": [\"wrong_person\"]}, {\"candidate_key\": \"c1\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-05-fangzheng-009-liu-annotation-005\", \"sfh1-ev-05-fangzheng-009-liu-annotation-007\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"name_match\", \"contextual_role_match\"]}], \"preferred_candidate_key\": \"c1\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [\"荀顗\", \"荀侍中\"], \"explanation\": \"The mention 顗 refers to 荀顗 (Xun Yi). The annotation-005 mentions 荀侍中 (Xun Shizhong) alongside 顗, and annotation-007 explicitly names 荀顗 by full name. Candidate c1 (荀顗) matches this referent. Candidate c0 (周顗) is a different person and is contradicted by the context.\"}, {\"mention_id\": \"sfh1-mention-f8b67a0326d248e3487e6056\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-05-fangzheng-009-main\", \"sfh1-ev-05-fangzheng-009-liu-annotation-003\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"name_match\", \"contextual_role_match\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [\"嶠\", \"長輿\"], \"explanation\": \"The mention 和嶠 is the main subject of the story, a court official (侍中) during the Western Jin. Candidate c0 (和嶠) matches this referent directly by full name. The annotation-003 confirms 侍中和嶠. The abbreviated 嶠 mentions and courtesy name 長輿 (annotation-001) all corefer with this person.\"}]}",
+              "name": "submit_sfh1_identity_judgments"
+            },
+            "id": "call_00_Y3zy0044hegVSOj5TbgT2511",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787998898,
+  "id": "89157f9a-db36-4051-899e-eb28fa9aa4e3",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 617,
+    "prompt_cache_hit_tokens": 640,
+    "prompt_cache_miss_tokens": 1935,
+    "prompt_tokens": 2575,
+    "prompt_tokens_details": {
+      "cached_tokens": 640
+    },
+    "total_tokens": 3192
+  }
+}

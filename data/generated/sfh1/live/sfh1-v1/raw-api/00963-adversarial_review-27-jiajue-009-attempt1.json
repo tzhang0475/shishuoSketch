@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"reviews\": [{\"mention_id\": \"sfh1-mention-0603640401dc0ab427cd4ff7\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-27-jiajue-009-liu-annotation-003\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"canonical_name_match\", \"historical_identity\"], \"explanation\": \"The mention surface is 王隱, and the candidate is 王隱. The supporting evidence sfh1-ev-27-jiajue-009-liu-annotation-003 contains the text '王隱晉書曰建' which explicitly names 王隱 as the author of the 晉書 being cited in the annotation. This directly supports the identity of the mentioned 王隱 as the historical figure 王隱. The annotation context (Liu Xiaobiao's commentary citing 王隱晉書) is consistent with the well-known Jin dynasty historian 王隱 who authored a 晉書. The evidence specifically names the person and connects them to the annotation context.\"}, {\"mention_id\": \"sfh1-mention-38cb2c340c7ae7385900e828\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-27-jiajue-009-liu-annotation-004\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"historical_identity\", \"profile_evidence_identity_assertion\"], \"explanation\": \"The mention surface is 琨, and the candidate is 劉琨. The supporting evidence sfh1-ev-27-jiajue-009-liu-annotation-004 contains '琨假守左司馬都督上前鋒諸軍事討劉聦' which explicitly names 琨 in the context of military action against 劉聦. This matches the main text where 劉越石 (courtesy name of 劉琨) is described as 長史北征劉聦. The annotation directly references 琨 in the same historical context (campaign against 劉聦), and the candidate evidence sfh1-candidate-evidence-a4914db531625d9d08e8 identifies 琨 as 劉琨. The identity is specifically supported by the annotation text naming 琨 in the same campaign context.\"}, {\"mention_id\": \"sfh1-mention-98dfa01c8fb786d64c3ea5e6\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-27-jiajue-009-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"alias_registry_match\", \"historical_identity\"], \"explanation\": \"The mention surface is 劉越石, and the candidate is 劉琨. 劉越石 is the courtesy name (字) of 劉琨, a well-established historical fact. The main text sfh1-ev-27-jiajue-009-main states '是公為劉越石長史北征劉聦所得', which places 劉越石 in the context of the campaign against 劉聦. The candidate evidence sfh1-candidate-evidence-753e6775bc751849ce48 from the alias registry explicitly identifies 劉越石 as 劉琨. The annotation sfh1-ev-27-jiajue-009-liu-annotation-004 also confirms 琨's role in the campaign against 劉聦, cross-referencing the same historical event. The alias registry match plus the corroborating historical context in the main text and annotation specifically support this identity.\"}, {\"mention_id\": \"sfh1-mention-f03f25553f8ba8f6f22cace0\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-27-jiajue-009-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"contextual_title_match\", \"historical_identity\"], \"explanation\": \"The mention surface is 温公, and the candidate is 温嶠. The main text sfh1-ev-27-jiajue-009-main begins with '温公䘮婦' and throughout refers to the protagonist as 公, with the story being about 温嶠's marriage arrangement. The text explicitly states '但如嶠比云何' and '身名宦盡不減嶠', directly naming 嶠 as the person referred to as 温公. The candidate evidence sfh1-candidate-evidence-1d3448186f9b2ee8e5df from the alias registry identifies 温公 as 温嶠 in the context of 劉司空 (劉琨). The main text also mentions 劉越石 (劉琨), connecting 温公 to 温嶠 who served under 劉琨. The contextual title 温公 (respectful title for 温嶠) is specifically supported by the main text's direct naming of 嶠.\"}]}",
+              "name": "submit_sfh1_adversarial_reviews"
+            },
+            "id": "call_00_rzSNLdr1logySfBfDoa92326",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787981820,
+  "id": "a6ab2850-312d-43b8-8643-9af44b7944f3",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 1168,
+    "prompt_cache_hit_tokens": 512,
+    "prompt_cache_miss_tokens": 1500,
+    "prompt_tokens": 2012,
+    "prompt_tokens_details": {
+      "cached_tokens": 512
+    },
+    "total_tokens": 3180
+  }
+}

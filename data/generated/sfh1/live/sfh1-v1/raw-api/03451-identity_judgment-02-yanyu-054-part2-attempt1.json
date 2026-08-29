@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"judgments\": [{\"mention_id\": \"sfh1-mention-86c1268f348fb2ec1761202a\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-02-yanyu-054-liu-annotation-003\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"name_match\", \"contextual_role_match\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [], \"explanation\": \"The annotation mentions 吏部尚書劉遐 who urged 裒, matching the candidate 劉遐. The surface 劉遐 is the full name of this person.\"}, {\"mention_id\": \"sfh1-mention-a474145e388c8c345f331d5f\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-02-yanyu-054-liu-annotation-003\"], \"reason_types\": [\"identity_mismatch\"]}], \"preferred_candidate_key\": null, \"resolution\": \"candidate_missing\", \"alternative_search_surfaces\": [\"王胡之\"], \"explanation\": \"The annotation explicitly states 裒長史王胡之, indicating that 王長史 refers to 王胡之 (Wang Huzhi), not 王濛 (Wang Meng). The supplied candidate c0 is 王濛, which contradicts the evidence. The correct referent 王胡之 is not among the supplied candidates.\"}, {\"mention_id\": \"sfh1-mention-ed62f5e748f376201352e71b\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-02-yanyu-054-liu-annotation-003\"], \"reason_types\": [\"identity_mismatch\"]}, {\"candidate_key\": \"c1\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-02-yanyu-054-liu-annotation-003\"], \"reason_types\": [\"identity_mismatch\"]}], \"preferred_candidate_key\": null, \"resolution\": \"candidate_missing\", \"alternative_search_surfaces\": [\"王胡之\"], \"explanation\": \"The 王 in the main text refers to 王長史, who is identified in the annotation as 王胡之 (裒長史王胡之). Neither candidate c0 (王恭) nor c1 (王濛) matches 王胡之. The correct referent is missing from the supplied candidates.\"}, {\"mention_id\": \"sfh1-mention-f330b8c8536b4a4f6fd8119f\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-02-yanyu-054-liu-annotation-001\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"name_match\", \"annotation_cross_reference\"]}, {\"candidate_key\": \"c1\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-02-yanyu-054-liu-annotation-001\"], \"reason_types\": [\"identity_mismatch\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [], \"explanation\": \"The annotation (别見/何充) cross-references 何充, and the surface 何充 is the full name of He Chong. Candidate c0 (何充) is the correct referent. Candidate c1 (沈充) is a different person with the same character 充 in the name.\"}]}",
+              "name": "submit_sfh1_identity_judgments"
+            },
+            "id": "call_00_9lhEHzzKCB28rEwFBXt71567",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787998595,
+  "id": "04f12cf4-ad51-45b5-92b4-f199883cced4",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 955,
+    "prompt_cache_hit_tokens": 640,
+    "prompt_cache_miss_tokens": 2285,
+    "prompt_tokens": 2925,
+    "prompt_tokens_details": {
+      "cached_tokens": 640
+    },
+    "total_tokens": 3880
+  }
+}

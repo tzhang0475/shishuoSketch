@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"judgments\": [{\"mention_id\": \"sfh1-mention-e1b4c99d78ad11c0ed75553f\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-06-yaliang-029-main\", \"sfh1-ev-06-yaliang-029-liu-annotation-001\", \"sfh1-ev-06-yaliang-029-liu-annotation-005\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"contextual_identity\", \"annotation_identity\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [], \"explanation\": \"The mention 安 in the main text refers to 謝安 (Xie An). The main text explicitly names 謝安 and 王坦之 as the two people Huan Wen intended to kill. The Liu annotation (annotation-001) explicitly glosses 安 as 謝安. The candidate c0 is 謝安, matching the historical referent.\"}, {\"mention_id\": \"sfh1-mention-f645a6da4bed18dda8c204df\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-06-yaliang-029-main\", \"sfh1-ev-06-yaliang-029-liu-annotation-001\", \"sfh1-ev-06-yaliang-029-liu-annotation-005\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"contextual_identity\", \"annotation_identity\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [], \"explanation\": \"The mention 安 refers to 謝安 (Xie An). The main text names 謝安 as one of the two people Huan Wen sought to kill, and the Liu annotation (annotation-001) glosses 安 as 謝安. The candidate c0 is 謝安, matching the historical referent.\"}, {\"mention_id\": \"sfh1-mention-fe1f2adb3881526b188ebcaa\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-06-yaliang-029-liu-annotation-006\", \"sfh1-ev-06-yaliang-029-main\"], \"reason_types\": [\"contextual_identity\"]}], \"preferred_candidate_key\": null, \"resolution\": \"candidate_missing\", \"alternative_search_surfaces\": [\"桓温\", \"桓公\"], \"explanation\": \"The mention 明公 is an honorific address used by Xie An to address Huan Wen (桓温). The Liu annotation-006 records Xie An addressing Huan Wen as 明公. The candidate c0 is 劉琨 (Liu Kun), which is incorrect. The historical referent is 桓温 (Huan Wen), who is not among the supplied candidates. Therefore the candidate is missing.\"}]}",
+              "name": "submit_sfh1_identity_judgments"
+            },
+            "id": "call_00_L7l00Oyq5dZbd4CwHpUk9778",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787999189,
+  "id": "9ff2449c-3604-4aaf-8c07-7b8c132b8697",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 761,
+    "prompt_cache_hit_tokens": 640,
+    "prompt_cache_miss_tokens": 1717,
+    "prompt_tokens": 2357,
+    "prompt_tokens_details": {
+      "cached_tokens": 640
+    },
+    "total_tokens": 3118
+  }
+}

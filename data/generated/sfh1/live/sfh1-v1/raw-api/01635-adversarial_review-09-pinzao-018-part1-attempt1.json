@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"reviews\": [{\"mention_id\": \"sfh1-mention-371ba606e0cf1a5c47baef28\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-aaa7d78d29174bcb7755\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"office_title_alias_match\"], \"explanation\": \"The mention 王丞相 (Chancellor Wang) is resolved to 王導. The supplied evidence from aliases.json describes a passage where 王丞相 visits 周鎮, and the text explicitly states 王曰胡威之清何以過此即啓用為吳興郡 — this is consistent with 王導's role as Chancellor. The reference semantics indicate this is an office-holder reference (Chancellor Wang), and the alias registry matches the office title 丞相 to 王導. The evidence specifically supports the identity of 王丞相 as 王導. No contradicting evidence is supplied. The distinctness from the mention of 二弟 (the two younger brothers) is consistent with 王導 being the elder brother, which aligns with historical records.\"}, {\"mention_id\": \"sfh1-mention-a03cf9b55016268f8bf01cae\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-82fe4f6ed41e5b752f51\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"alias_registry_match\"], \"explanation\": \"The mention 鄧伯道 is resolved to 鄧攸. The supplied evidence from aliases.json shows the text 王丞相二弟不過江曰潁曰敝時論以潁比鄧伯道, where 鄧伯道 is used as a comparison target for 潁. The alias registry matches 鄧伯道 (surname + courtesy name) to 鄧攸. The reference semantics confirm this is a direct person form referring to 鄧伯道 as a distinct individual, not one of the Wang brothers. The evidence specifically supports the identity of 鄧伯道 as 鄧攸, and the distinctness constraints from the other mentions (the Wang brothers) are consistent with historical records where 鄧攸 (鄧伯道) was a well-known figure of the period.\"}]}",
+              "name": "submit_sfh1_adversarial_reviews"
+            },
+            "id": "call_00_Txvf3dZrvNLExfOEBZP84412",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787989770,
+  "id": "390a2489-3674-4c66-bfd1-86f4076492e5",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 557,
+    "prompt_cache_hit_tokens": 512,
+    "prompt_cache_miss_tokens": 1116,
+    "prompt_tokens": 1628,
+    "prompt_tokens_details": {
+      "cached_tokens": 512
+    },
+    "total_tokens": 2185
+  }
+}

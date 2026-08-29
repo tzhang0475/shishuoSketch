@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"reviews\": [{\"mention_id\": \"sfh1-mention-c068ac67e091fc77b4ad798b\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-4227f01874c6a6200bdf\", \"sfh1-ev-33-youhui-007-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"contextual_role_match\", \"coreference_chain\"], \"explanation\": \"The mention '臣' (I, your servant) is a humble self-reference by Wang Dao (王導) speaking before Emperor Ming. The source text shows 王導 and 温嶠 both appear before 明帝, and after 温 fails to answer, 王 (Wang Dao) says '臣爲陛下陳之' — 'I will explain it for Your Majesty.' The pronoun 臣 directly refers to the speaker, who is explicitly identified as 王導 in the preceding context. The reference semantics correctly identifies this as a local anaphoric reference to Wang Dao. The supporting evidence from the main text confirms the contextual role match.\"}, {\"mention_id\": \"sfh1-mention-ffea343aaa713b2dc3847ee6\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-e43089d95eb2a7066136\", \"sfh1-ev-33-youhui-007-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"canonical_name_match\", \"contextual_role_match\"], \"explanation\": \"The mention '温嶠' is the full name of Wen Qiao, appearing directly in the source text '王導温嶠俱見明帝'. The candidate evidence from people.json provides the canonical entry for 温嶠. The source text explicitly names 温嶠 as one of the two officials who appear before Emperor Ming. The reference semantics correctly identifies this as a direct person form with the full name matching the canonical candidate. No contradicting evidence exists.\"}]}",
+              "name": "submit_sfh1_adversarial_reviews"
+            },
+            "id": "call_00_4rHPH24FabmMwDhiSYeS1806",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787990840,
+  "id": "10ee20b9-c97e-4c50-a1a6-b6b0bb057861",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 499,
+    "prompt_cache_hit_tokens": 512,
+    "prompt_cache_miss_tokens": 1130,
+    "prompt_tokens": 1642,
+    "prompt_tokens_details": {
+      "cached_tokens": 512
+    },
+    "total_tokens": 2141
+  }
+}

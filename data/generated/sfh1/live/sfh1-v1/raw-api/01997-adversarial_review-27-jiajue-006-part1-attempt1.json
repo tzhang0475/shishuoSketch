@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"reviews\": [{\"mention_id\": \"sfh1-mention-011791e88e6bb1da81bdcc21\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-393ba3da68c05e2c6290\", \"sfh1-ev-27-jiajue-006-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"historical_context\", \"office_title_matches_known_person\"], \"explanation\": \"The mention 王大將軍 (Grand General Wang) is resolved to 王敦. The main text explicitly states '王敦舉兵圖逆' in the same story, confirming that 王大將軍 refers to 王敦. The candidate evidence from aliases.json provides the alias mapping 王大將軍 → 王敦, and the main text corroborates this identity by naming 王敦 directly in the narrative about the same rebellion. The historical context of 王敦's rebellion against the Jin court matches the story's account of 王大將軍 rebelling and being pursued by 晉明帝.\"}, {\"mention_id\": \"sfh1-mention-4fe01ab64684b1fb4fe0dd13\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-ce8f6be95b0c4d210517\", \"sfh1-ev-27-jiajue-006-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"coreference_with_main_text\", \"personal_name_matches\"], \"explanation\": \"The mention 敦 in the Liu annotation is resolved to 王敦. The main text explicitly names 王敦 multiple times ('王敦舉兵圖逆', '行敦營', '敦卧心動'), and the annotation's use of 敦 is a direct reference to the same person. The coreference chain includes 王大將軍 and 王敦 mentions in the main text, and the annotation context (discussing the emperor's visit to 姑孰 where 敦 was) aligns with the main narrative.\"}, {\"mention_id\": \"sfh1-mention-a8fe63c319327eeccfdf7b5c\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-9525f87ea1597351d314\", \"sfh1-ev-27-jiajue-006-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"historical_context\", \"personal_name_matches\"], \"explanation\": \"The mention 敦 in the main text ('行敦營匝而出', '敦卧心動') clearly refers to 王敦, who is explicitly named earlier in the same passage ('王敦舉兵圖逆'). The single-character name 敦 is the personal name of 王敦, and the narrative context (the emperor inspecting 敦's military camp) matches the historical account of 王敦's rebellion. The candidate evidence from the profile confirms this identity assertion.\"}, {\"mention_id\": \"sfh1-mention-aebc7871226781688d728474\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-905d9d9e9172b036d7ed\", \"sfh1-ev-27-jiajue-006-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"full_name_match\", \"historical_context\"], \"explanation\": \"The mention 王敦 is a full-name match for the candidate person 王敦. The main text explicitly names 王敦 as the rebel leader ('王敦舉兵圖逆猜害忠良'), and the historical context of 王敦's rebellion against the Eastern Jin court is well-documented. The candidate evidence from people.json confirms this canonical identity. No contradicting evidence exists.\"}]}",
+              "name": "submit_sfh1_adversarial_reviews"
+            },
+            "id": "call_00_Hk7zMfVwPznWqOLE5jR25268",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787990720,
+  "id": "2d00a9e5-1bba-4018-983d-3d095638909b",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 908,
+    "prompt_cache_hit_tokens": 512,
+    "prompt_cache_miss_tokens": 1807,
+    "prompt_tokens": 2319,
+    "prompt_tokens_details": {
+      "cached_tokens": 512
+    },
+    "total_tokens": 3227
+  }
+}

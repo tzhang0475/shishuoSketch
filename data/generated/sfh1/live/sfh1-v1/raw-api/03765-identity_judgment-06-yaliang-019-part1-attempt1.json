@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"judgments\": [{\"mention_id\": \"sfh1-mention-270e4131ed9b8ef978ef7d8d\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-06-yaliang-019-main\"], \"reason_types\": [\"role_mismatch\"]}, {\"candidate_key\": \"c1\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-06-yaliang-019-main\"], \"reason_types\": [\"role_mismatch\"]}], \"preferred_candidate_key\": null, \"resolution\": \"candidate_missing\", \"alternative_search_surfaces\": [\"郗信\", \"門生\"], \"explanation\": \"The mention '君' is a second-person pronoun used by 王丞相 (the speaker) addressing the messenger (郗信/門生). The reference_semantics confirms it refers to the addressee, the messenger, not to 王丞相 himself. Neither candidate c0 (王導) nor c1 (王隱) is the messenger. The likely referent is the messenger/門生, who is not among the supplied candidates.\"}, {\"mention_id\": \"sfh1-mention-65124b120e824c24150eda05\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-0afe933dc24ad3e894e8\", \"sfh1-ev-06-yaliang-019-liu-annotation-001\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"courtesy_name_match\", \"annotation_corroboration\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [], \"explanation\": \"逸少 is the courtesy name of 王羲之. The Liu annotation explicitly states '逸少羲之小字羲之', confirming that 逸少 refers to 王羲之. The candidate c0 is 王羲之, matching the courtesy name.\"}, {\"mention_id\": \"sfh1-mention-79a6e6672d78c23ef1f4696d\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-06c3541f537f7b71946c\", \"sfh1-ev-06-yaliang-019-liu-annotation-001\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"canonical_name_match\", \"annotation_corroboration\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [], \"explanation\": \"郗鑒 is the full name of the Grand Tutor (太傅) mentioned in the Liu annotation. The annotation '妻太傅郗鑒女' confirms 郗鑒 is the Grand Tutor. Candidate c0 is 郗鑒, matching the canonical name.\"}, {\"mention_id\": \"sfh1-mention-92c9d6bfe6f5902e31d8479b\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-ac9866c9db6ded1ae0cd\", \"sfh1-ev-06-yaliang-019-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"office_title_match\", \"historical_context\"]}, {\"candidate_key\": \"c1\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-06-yaliang-019-main\"], \"reason_types\": [\"historical_context\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [], \"explanation\": \"王丞相 in this story refers to 王導, the Chancellor. The story is about 郗太傅 (郗鑒) sending a messenger to 王丞相 to seek a son-in-law, and the son-in-law turns out to be 王羲之 (逸少). This is the famous '東床快婿' story. 王導 was the Chancellor during this period and was the uncle of 王羲之. Candidate c0 (王導) is the correct referent. Candidate c1 (王隱) is a different person who also held the title 王丞相 in a different context (the 郭璞 divination story), not relevant here.\"}]}",
+              "name": "submit_sfh1_identity_judgments"
+            },
+            "id": "call_00_tN0wn4HeKUzyuJdWVaUc0805",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787999054,
+  "id": "e548ead6-634d-43b2-8b37-418e0dc679a1",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 1120,
+    "prompt_cache_hit_tokens": 640,
+    "prompt_cache_miss_tokens": 2470,
+    "prompt_tokens": 3110,
+    "prompt_tokens_details": {
+      "cached_tokens": 640
+    },
+    "total_tokens": 4230
+  }
+}

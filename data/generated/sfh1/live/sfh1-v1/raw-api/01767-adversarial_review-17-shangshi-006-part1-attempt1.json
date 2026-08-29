@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"reviews\": [{\"mention_id\": \"sfh1-mention-087b0f5b112c27b3c563f6e5\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-17-shangshi-006-liu-annotation-002\", \"sfh1-candidate-evidence-e407ae9f787e52874d65\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"coreference_with_full_name_mention\", \"courtesy_name_matches\"], \"explanation\": \"The mention 謝㓜輿 appears in the Liu annotation (sfh1-ev-17-shangshi-006-liu-annotation-002) in the context of mourning 玠 (衛玠). The annotation text '薨謝㓜輿發哀於武昌感慟不自勝' describes the same mourning event as the main text where 謝鯤 (sfh1-mention-67cb62600ca4b31ebbdd66c3) weeps over 衛洗馬's death. 謝㓜輿 is the well-attested courtesy name of 謝鯤. The candidate evidence from people.json confirms 謝鯤 as a canonical person. The coreference with the full-name mention 謝鯤 in the same story, combined with the courtesy-name match, provides specific identity support.\"}, {\"mention_id\": \"sfh1-mention-67cb62600ca4b31ebbdd66c3\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-17-shangshi-006-main\", \"sfh1-candidate-evidence-082757229b0953bfadb2\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"direct_name_match\"], \"explanation\": \"The mention 謝鯤 in the main text (sfh1-ev-17-shangshi-006-main) is a direct full-name match to the canonical person 謝鯤 from people.json (sfh1-candidate-evidence-082757229b0953bfadb2). The main text describes 謝鯤 mourning 衛洗馬's death, which is consistent with the historical 謝鯤. The candidate evidence directly supports this identity resolution through exact name matching. No contradicting evidence exists.\"}]}",
+              "name": "submit_sfh1_adversarial_reviews"
+            },
+            "id": "call_00_QCjKJ46DRKxT6QlZJz6Q9660",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787990090,
+  "id": "8674d30e-eafe-4f7f-89b5-5722d407c84b",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 562,
+    "prompt_cache_hit_tokens": 512,
+    "prompt_cache_miss_tokens": 1309,
+    "prompt_tokens": 1821,
+    "prompt_tokens_details": {
+      "cached_tokens": 512
+    },
+    "total_tokens": 2383
+  }
+}

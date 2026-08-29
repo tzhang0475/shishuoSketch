@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"judgments\": [{\"mention_id\": \"sfh1-mention-2164efbf9d8a34b1f5dd2159\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-06-yaliang-027-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"contextual_role\", \"surname_reference\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [], \"explanation\": \"The mention '王' refers to 王坦之 by surname. In the main text, 謝安 and 王坦之 are called into the room, and then '王直擲還' — 王 (Wang) threw the document back. The candidate c0 is 王恭, but the context clearly identifies this 王 as 王坦之, who was called in along with 謝安. However, the supplied candidate is 王恭, not 王坦之. The candidate c0 (王恭) does not match the historical referent 王坦之. The local explanation itself says 王 refers to 王坦之. The candidate supplied is 王恭, which is a different person. This is candidate_missing since the likely referent 王坦之 is not among the supplied candidates.\"}], \"resolution\": \"candidate_missing\", \"alternative_search_surfaces\": [\"王坦之\"], \"explanation\": \"The mention '王' in the main text refers to 王坦之 by surname (he was called in along with 謝安 and threw the document back). The only supplied candidate is 王恭, which is a different person. The likely referent 王坦之 is not among the supplied candidates.\"}, {\"mention_id\": \"sfh1-mention-2c692e6ba4a03838c0788d7c\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-06-yaliang-027-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"canonical_name_match\", \"contextual_role\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [], \"explanation\": \"The mention '謝安' is a full name reference to 謝安, who is called into the room along with 王坦之. The candidate c0 is 謝安 with canonical name match. This is clearly the same person.\"}, {\"mention_id\": \"sfh1-mention-31e840cb73398b66e41e5d2a\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-06-yaliang-027-liu-annotation-002\", \"sfh1-ev-06-yaliang-027-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"contextual_role\", \"annotation_context\"]}, {\"candidate_key\": \"c1\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-06-yaliang-027-liu-annotation-002\"], \"reason_types\": [\"contextual_role\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [], \"explanation\": \"The annotation mentions '温' in the context of 郗超's relationship with 桓温 (桓宣武). The annotation text '超謂温雄武當樂推之運' refers to 郗超 speaking about 温 (桓温). The main text is about 桓宣武 (桓温). Candidate c0 is 桓溫, which matches. Candidate c1 is 温嶠, a different person who does not fit this context.\"}, {\"mention_id\": \"sfh1-mention-dbc2e81c4ab369462c4e0cdd\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-06-yaliang-027-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"alias_registry_match\", \"contextual_role\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [], \"explanation\": \"The mention '桓宣武' is the posthumous title of 桓温. The candidate c0 is 桓溫 retrieved via alias_registry:posthumous_title. The main text clearly features 桓宣武 as the central figure. This is the same person.\"}, {\"mention_id\": \"sfh1-mention-e5f3dd23f82daceb9e66635d\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-06-yaliang-027-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"canonical_name_match\", \"contextual_role\"]}, {\"candidate_key\": \"c1\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-06-yaliang-027-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"canonical_name_match\", \"contextual_role\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [], \"explanation\": \"The mention '王坦之' is a full name reference. Both candidates c0 and c1 are 王坦之 from the same prior_candidate source. The main text clearly identifies 王坦之 as being called into the room along with 謝安. Both candidates refer to the same person 王坦之.\"}]}",
+              "name": "submit_sfh1_identity_judgments"
+            },
+            "id": "call_00_9zEDWRMvnlkmxkWYlIsR8751",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787981031,
+  "id": "37e154c5-d8a5-457f-af64-fc51a2402740",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 1389,
+    "prompt_cache_hit_tokens": 640,
+    "prompt_cache_miss_tokens": 1839,
+    "prompt_tokens": 2479,
+    "prompt_tokens_details": {
+      "cached_tokens": 640
+    },
+    "total_tokens": 3868
+  }
+}

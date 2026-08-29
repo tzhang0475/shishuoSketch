@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"reviews\": [{\"mention_id\": \"sfh1-mention-329c96f25b2d62f40e24f8df\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-a76884cae7782d74ebf4\", \"sfh1-ev-27-jiajue-008-liu-annotation-003\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"canonical_name_match\", \"source_grounded\"], \"explanation\": \"The mention 温嶠 appears in the Liu annotation (sfh1-ev-27-jiajue-008-liu-annotation-003) as 平南温嶠 who sends a 叅軍 upon hearing of the rebellion. The candidate evidence from people.json provides the canonical name 温嶠. The annotation explicitly names 温嶠 with the title 平南, and the main text's 温公 (sfh1-mention-85cf555406104fdc819bb08b) is the same person who advises 庾亮. The identity is directly supported by the source text naming 温嶠 explicitly.\"}, {\"mention_id\": \"sfh1-mention-48f6e6dea46242e03c8a95d5\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-9d97c0842aeaa662a7e7\", \"sfh1-ev-27-jiajue-008-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"alias_registry_match\", \"contextual_title\"], \"explanation\": \"The mention 庾公 in the main text (sfh1-ev-27-jiajue-008-main) refers to 庾亮, who is the subject of the story about being pursued by 陶侃. The Liu annotation (sfh1-ev-27-jiajue-008-liu-annotation-001) explicitly states 令庾亮以元舅輔政, confirming 庾公 = 庾亮. The alias evidence from aliases.json provides 庾公 as a contextual title for 庾亮. The main text context — 陶公欲誅庾公, 温公勸庾詣陶, 庾元規何縁拜陶士衡 — all consistently identify 庾公 as 庾亮 (庾元規).\"}, {\"mention_id\": \"sfh1-mention-85cf555406104fdc819bb08b\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-b0f637594c34101a7d4b\", \"sfh1-ev-27-jiajue-008-main\", \"sfh1-ev-27-jiajue-008-liu-annotation-003\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"contextual_title_match\", \"historical_identity\"], \"explanation\": \"The mention 温公 in the main text (sfh1-ev-27-jiajue-008-main) refers to the person who advises 庾亮 to go see 陶侃. The Liu annotation (sfh1-ev-27-jiajue-008-liu-annotation-003) explicitly names 平南温嶠 as the one who sends a 叅軍 upon hearing of the rebellion — this is the same person as 温公 in the main text. The alias evidence from aliases.json provides 温公 as a contextual title for 温嶠. The story context (温公勸庾詣陶) aligns with 温嶠's historical role as mediator between 庾亮 and 陶侃.\"}, {\"mention_id\": \"sfh1-mention-8ec365ea1677dd8286ddc157\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-6304e0d317c0a5fa2c0c\", \"sfh1-ev-27-jiajue-008-main\", \"sfh1-ev-27-jiajue-008-liu-annotation-004\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"canonical_name_match\", \"direct_name_match\"], \"explanation\": \"The mention 陶侃 is the canonical name directly matching the candidate. The main text (sfh1-ev-27-jiajue-008-main) refers to 陶公 who comes from upstream to punish 庾公, and the Liu annotation (sfh1-ev-27-jiajue-008-liu-annotation-004) explicitly names 征西陶侃 as the one pushed to be盟主. The main text also has 陶士衡 (陶侃's courtesy name) confirming the identity. The candidate evidence from people.json provides the canonical name 陶侃. This is a direct name match with strong source grounding.\"}]}",
+              "name": "submit_sfh1_adversarial_reviews"
+            },
+            "id": "call_00_LObppmGSW7LtPtnqKv3x2660",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787999735,
+  "id": "287bc2eb-7bb9-48cd-8a7a-7b4813cda4a9",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 1159,
+    "prompt_cache_hit_tokens": 640,
+    "prompt_cache_miss_tokens": 2110,
+    "prompt_tokens": 2750,
+    "prompt_tokens_details": {
+      "cached_tokens": 640
+    },
+    "total_tokens": 3909
+  }
+}

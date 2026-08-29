@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"reviews\": [{\"mention_id\": \"sfh1-mention-1c73bf153ddad053c9bda36b\", \"candidate_key\": \"c1\", \"verdict\": \"reject\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-09-pinzao-025-main\"], \"reason_types\": [\"explicit_identity_contradiction\", \"insufficient_evidence\"], \"explanation\": \"The proposed resolution maps the surface '温' to 温嶠 (Wen Qiao) based on a single-character evidence fragment '温' from source hng2c1-shishuo-09-pinzao-025-main. However, the main text of the story (sfh1-ev-09-pinzao-025-main) explicitly refers to '温太真' (Wen Taizhen), which is the courtesy name of 温嶠. The single character '温' in the main text is part of the phrase '温常失色' where 温 refers back to 温太真 — this is the same person as candidate c0's target. The candidate c1 evidence is a fragmentary single character that does not independently establish identity; it is merely a surname token that is coreferential with the fuller name '温太真' in the same passage. Moreover, the reference semantics for this mention returned 'candidate_only: true' with 'confidence: low' and no valid semantic record, meaning the system failed closed. The evidence provided (a single character '温') is insufficient to specifically support identity with 温嶠 as a distinct candidate from c0, and the hard veto from c0 (explicit_identity_contradiction) indicates these two candidates are in conflict. Since the main text explicitly names the person as 温太真, and c1's evidence is only the surname character, this resolution should be rejected in favor of the fuller-name resolution.\"}, {\"mention_id\": \"sfh1-mention-31d7953d6de25c3b152bc0e8\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-eecfeb7bbfab44ef3c52\", \"sfh1-ev-09-pinzao-025-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"name_match\", \"contextual_fit\"], \"explanation\": \"The surface '温太真' is the courtesy name of 温嶠 (Wen Qiao). The main text (sfh1-ev-09-pinzao-025-main) explicitly states '世論温太真是過江第二流之高者' — directly naming the person as 温太真. The alias registry evidence (sfh1-candidate-evidence-eecfeb7bbfab44ef3c52) confirms '温太真' as an alias for 温嶠 via surname plus courtesy name. The Liu annotations (sfh1-ev-09-pinzao-025-liu-annotation-001 and -002) provide genealogical context about the 温 clan from 太原祁縣, consistent with 温嶠's known background. The evidence specifically supports identity: the full courtesy name '温太真' is a well-attested reference to 温嶠 in the Shishuo Xinyu corpus. This resolution is supported by direct name match and contextual fit within the passage.\"}]}",
+              "name": "submit_sfh1_adversarial_reviews"
+            },
+            "id": "call_00_OYGAWemTaCMI0KPQMZD06907",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787981283,
+  "id": "de48e1b3-bb1f-43f6-9643-add57bf7a9ba",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 785,
+    "prompt_cache_hit_tokens": 512,
+    "prompt_cache_miss_tokens": 886,
+    "prompt_tokens": 1398,
+    "prompt_tokens_details": {
+      "cached_tokens": 512
+    },
+    "total_tokens": 2183
+  }
+}

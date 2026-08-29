@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"judgments\": [{\"mention_id\": \"sfh1-mention-0d2a2d14256e0cfeb7ea704a\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-ad2af77f8133f36a416e\", \"sfh1-ev-29-jianshe-001-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"canonical_name_match\", \"main_subject\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [], \"explanation\": \"和嶠 is the main subject of the story, explicitly named in the opening line. The candidate 和嶠 from people.json matches the canonical name exactly and is the historical referent.\"}, {\"mention_id\": \"sfh1-mention-5cfa9b9d733407457c44e8ca\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-ad2af77f8133f36a416e\", \"sfh1-ev-29-jianshe-001-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"coreference\", \"canonical_name_match\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [], \"explanation\": \"君 is a second-person honorific pronoun used by 王武子 when addressing 和嶠. The coreference chain links this mention to 和嶠 (sfh1-mention-0d2a2d14256e0cfeb7ea704a) and 和公 (sfh1-mention-0e78ebb30f7ea9bfd3a446d0), all referring to the same person. The candidate 和嶠 is the correct historical referent.\"}]}",
+              "name": "submit_sfh1_identity_judgments"
+            },
+            "id": "call_00_vIXaIYaSkJuLH5W4wfUn4712",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787990760,
+  "id": "d4d5fca7-edd8-43b5-9f13-ae0996d2d6e2",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 498,
+    "prompt_cache_hit_tokens": 640,
+    "prompt_cache_miss_tokens": 1265,
+    "prompt_tokens": 1905,
+    "prompt_tokens_details": {
+      "cached_tokens": 640
+    },
+    "total_tokens": 2403
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"reviews\": [{\"mention_id\": \"sfh1-mention-3c17939d2bde0ccbbd49e5a9\", \"candidate_key\": \"c1\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-08-shangyu-051-liu-annotation-002\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"coreference\", \"name_match\"], \"explanation\": \"The mention surface is '王', which is the surname component of 王敦. The supporting evidence sfh1-ev-08-shangyu-051-liu-annotation-002 contains '見王敦敦與之談論' which explicitly names 王敦. The mention is coreferenced with other mentions of 王敦 in the same story. The annotation text explicitly references 王敦, and the surname 王 is used as an abbreviated reference to the same person. The evidence specifically supports identity with 王敦.\"}, {\"mention_id\": \"sfh1-mention-53dcd59464b38035fe420373\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-08-shangyu-051-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"biographical_match\", \"name_match\"], \"explanation\": \"The mention surface is '王敦' (full name) and the main text sfh1-ev-08-shangyu-051-main opens with '王敦爲大將軍鎭豫章', explicitly naming 王敦. The candidate is 王敦 from data/people.json. The main text directly names 王敦 as the person who is 大將軍 and 鎭豫章, matching the biographical profile. The evidence specifically supports identity.\"}, {\"mention_id\": \"sfh1-mention-569476aadd97ae1a21282345\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-08-shangyu-051-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"coreference\", \"name_match\"], \"explanation\": \"The mention surface is '敦', the personal name of 王敦. The main text sfh1-ev-08-shangyu-051-main contains '敦謂鯤曰' where 敦 clearly refers to 王敦 who was just named at the start of the passage. The coreference with sfh1-mention-53dcd59464b38035fe420373 (王敦) is explicitly stated in the reference semantics. The evidence specifically supports identity with 王敦.\"}, {\"mention_id\": \"sfh1-mention-5ac6effd14376a0138a98925\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-08-shangyu-051-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"biographical_match\", \"name_match\"], \"explanation\": \"The mention surface is '謝鯤' (full name) and the main text sfh1-ev-08-shangyu-051-main contains '于時謝鯤爲長史', explicitly naming 謝鯤 as serving as 長史 under 王敦. The candidate is 謝鯤 from data/people.json. The main text directly names 謝鯤 in the context of the story, matching the biographical profile. The evidence specifically supports identity.\"}]}",
+              "name": "submit_sfh1_adversarial_reviews"
+            },
+            "id": "call_00_H9Ibewry4LACSbA0YzCD4630",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787989614,
+  "id": "3c113c6c-48da-4970-884c-fa4242545864",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 810,
+    "prompt_cache_hit_tokens": 512,
+    "prompt_cache_miss_tokens": 1860,
+    "prompt_tokens": 2372,
+    "prompt_tokens_details": {
+      "cached_tokens": 512
+    },
+    "total_tokens": 3182
+  }
+}

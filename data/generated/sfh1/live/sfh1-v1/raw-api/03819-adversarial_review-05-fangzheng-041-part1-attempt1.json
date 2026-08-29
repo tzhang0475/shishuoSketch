@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"reviews\": [{\"mention_id\": \"sfh1-mention-0fda15a3982bc278cd0b06c5\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-05-fangzheng-041-liu-annotation-003\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"historical_role_match\", \"name_match\"], \"explanation\": \"The mention surface is 岳, and the candidate is 潘岳. The supporting evidence sfh1-ev-05-fangzheng-041-liu-annotation-003 states '帝諱岳字世同' (the emperor's given name is 岳, courtesy name 世同), identifying 岳 as the personal name of the emperor (康帝). The annotation explicitly identifies 岳 as the emperor's name, and the candidate 潘岳 matches this historical figure. The reference semantics indicate low confidence and no anchor mentions, but the annotation text directly provides the name 岳 as the emperor's taboo name, which is the historical figure 潘岳 (Emperor Kang of Jin). The evidence specifically supports the identity.\"}, {\"mention_id\": \"sfh1-mention-3fd6eaa9e476c0f100815356\", \"candidate_key\": \"c1\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-05-fangzheng-041-liu-annotation-004\", \"sfh1-ev-05-fangzheng-041-liu-annotation-005\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"contextual_role_match\", \"name_match\"], \"explanation\": \"The mention surface is 充, and the candidate is 何充. The reference semantics explicitly state that 充 is the abbreviated personal name for 何充 (何次道). The supporting evidence sfh1-ev-05-fangzheng-041-liu-annotation-004 mentions '何充謂宜奉皇子' (He Chong advocated supporting the prince), and annotation-005 mentions '充不自安求處外任' (Chong was uneasy and sought an external post). The main text also uses 何次道 and 何 to refer to the same person. The evidence specifically supports the identity of 充 as 何充.\"}, {\"mention_id\": \"sfh1-mention-69514add69ee04ab406370ee\", \"candidate_key\": \"c1\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-05-fangzheng-041-liu-annotation-005\", \"sfh1-ev-05-fangzheng-041-liu-annotation-006\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"contextual_role_match\", \"coreference\"], \"explanation\": \"The mention surface is 臣 (first-person pronoun 'I'), and the candidate is 何充. The reference semantics explain that 臣 in annotation 006 is the first-person pronoun used by the speaker (何充) who says '臣無與焉' (I had no part in it). The main text shows 何 answering the emperor, saying '此是庾冰之功非臣之力' (this is Yu Bing's achievement, not my effort). The annotation-006 text '臣無與焉' directly quotes 何充's speech. The coreference chain links this mention to sfh1-mention-3fd6eaa9e476c0f100815356 (充 = 何充). The evidence specifically supports the identity.\"}, {\"mention_id\": \"sfh1-mention-6f8c8db364c827f23659e4e7\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-05-fangzheng-041-liu-annotation-004\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"contextual_role_match\", \"name_match\"], \"explanation\": \"The mention surface is 何充, and the candidate is 何充. This is a direct full-name match. The supporting evidence sfh1-ev-05-fangzheng-041-liu-annotation-004 states '何充謂宜奉皇子' (He Chong advocated supporting the prince), which matches the main text context where 何充 advocates for the young prince in the succession debate. The name match is exact and the contextual role matches the annotation evidence. The hard veto on c1 (explicit_identity_contradiction) is noted but the candidate c0 is 何充 itself, so this is a direct match.\"}]}",
+              "name": "submit_sfh1_adversarial_reviews"
+            },
+            "id": "call_00_pWcT7AziNomJgyEXXy517728",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787999123,
+  "id": "4b554c0d-5f4d-4d29-a252-b5c2d90676ef",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 1048,
+    "prompt_cache_hit_tokens": 512,
+    "prompt_cache_miss_tokens": 2581,
+    "prompt_tokens": 3093,
+    "prompt_tokens_details": {
+      "cached_tokens": 512
+    },
+    "total_tokens": 4141
+  }
+}

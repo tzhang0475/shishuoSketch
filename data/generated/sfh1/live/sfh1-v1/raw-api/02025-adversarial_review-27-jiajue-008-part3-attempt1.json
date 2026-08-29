@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"reviews\": [\n  {\n    \"mention_id\": \"sfh1-mention-e6e64f6f6cbd614ef4e0c17a\",\n    \"candidate_key\": \"c0\",\n    \"verdict\": \"accept\",\n    \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-5ce98994f4070dc10b7c\"],\n    \"contradicting_evidence_ids\": [],\n    \"reason_types\": [\"canonical_name_match\"],\n    \"explanation\": \"The mention surface is 王導, which exactly matches the canonical name 王導 in people.json. The source text (sfh1-ev-27-jiajue-008-liu-annotation-002) also mentions 王導 in the context of the same Su Jun rebellion narrative, consistent with the historical figure Wang Dao. The canonical name match is direct and unambiguous.\"\n  },\n  {\n    \"mention_id\": \"sfh1-mention-fd34e78e69ffce93d1cd53cf\",\n    \"candidate_key\": \"c0\",\n    \"verdict\": \"accept\",\n    \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-e722703aa51200461f0d\"],\n    \"contradicting_evidence_ids\": [],\n    \"reason_types\": [\"honorific_title_alias\"],\n    \"explanation\": \"The mention surface is 陶公 (Lord Tao), and the candidate is 陶侃. The source text (sfh1-ev-27-jiajue-008-main) describes 陶公 coming from upstream to respond to Su Jun's rebellion, and the Liu annotation (sfh1-ev-27-jiajue-008-liu-annotation-004) explicitly states '推征西陶侃為盟主' in the same narrative context. Additionally, the text has 陶 saying '庾元規何縁拜陶士衡' — 陶士衡 is Tao Kan's courtesy name, confirming the identity. The contextual title 陶公 is consistently used for Tao Kan in this passage.\"\n  },\n  {\n    \"mention_id\": \"sfh1-mention-ff2c59d649cb9a7f627b0281\",\n    \"candidate_key\": \"c0\",\n    \"verdict\": \"accept\",\n    \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-ce132e3fa4c077c75300\"],\n    \"contradicting_evidence_ids\": [],\n    \"reason_types\": [\"canonical_name_match\"],\n    \"explanation\": \"The mention surface is 庾亮, which exactly matches the canonical name 庾亮 in people.json. The source text (sfh1-ev-27-jiajue-008-main) describes 庾's interactions with 陶公 in the Su Jun rebellion context, and the Liu annotation (sfh1-ev-27-jiajue-008-liu-annotation-001) explicitly states '令庾亮以元舅輔政', confirming this is the historical figure Yu Liang. The canonical name match is direct and unambiguous.\"\n  }\n]}",
+              "name": "submit_sfh1_adversarial_reviews"
+            },
+            "id": "call_00_nFSXbcDScHFsHIOovJie2401",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787990789,
+  "id": "0c9054b7-66dd-4a6b-85e5-a9528fbb941a",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 706,
+    "prompt_cache_hit_tokens": 512,
+    "prompt_cache_miss_tokens": 1527,
+    "prompt_tokens": 2039,
+    "prompt_tokens_details": {
+      "cached_tokens": 512
+    },
+    "total_tokens": 2745
+  }
+}

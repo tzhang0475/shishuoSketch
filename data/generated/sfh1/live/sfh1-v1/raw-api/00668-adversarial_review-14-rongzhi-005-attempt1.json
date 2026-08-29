@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"reviews\": [{\"mention_id\": \"sfh1-mention-51f94f9078312d8f82e6be4c\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-5837cb60f00ed06ffeb4\", \"sfh1-ev-14-rongzhi-005-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"canonical_name_match\", \"subject_of_passage\"], \"explanation\": \"The mention surface is exactly '嵇康' (Ji Kang), and the main text passage is explicitly about 嵇康, describing his physical appearance. The candidate evidence from data/people.json confirms 嵇康 as a canonical person. The main text directly names 嵇康 as the subject. No contradicting evidence exists.\"}, {\"mention_id\": \"sfh1-mention-a3cfdfcd92e55126bdae9ed6\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-7c0faeacadbe07ae49f2\", \"sfh1-ev-14-rongzhi-005-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"alias_registry_match\", \"contextual_title\"], \"explanation\": \"The surface '山公' is a contextual title for 山濤 (Shan Tao). The alias evidence from data/aliases.json shows '山公舉阮咸爲吏部郎' where 山公 clearly refers to 山濤. In the main text, 山公 is quoted saying '嵇叔夜之為人也...' which is consistent with 山濤's known role as a commentator on 嵇康. The contextual title match is supported by the alias registry.\"}, {\"mention_id\": \"sfh1-mention-c228ee033fecb8b89bce6959\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-164cc89303043c984fe3\", \"sfh1-ev-14-rongzhi-005-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"alias_registry_match\", \"style_name\"], \"explanation\": \"The surface '嵇叔夜' is 嵇康's courtesy name (style name). The alias evidence from data/aliases.json explicitly lists '嵇叔夜' as an alias for 嵇康 (alongside 阮嗣宗 and others in the 正始名士 list). In the main text, 山公 says '嵇叔夜之為人也' referring to the same person described at the start of the passage as 嵇康. The style name match is unambiguous.\"}]}",
+              "name": "submit_sfh1_adversarial_reviews"
+            },
+            "id": "call_00_274m6HQtFwb4e1fpOmHx4778",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787981411,
+  "id": "7ace0b77-21fe-42c8-bc38-21b97c9a238f",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 670,
+    "prompt_cache_hit_tokens": 512,
+    "prompt_cache_miss_tokens": 1275,
+    "prompt_tokens": 1787,
+    "prompt_tokens_details": {
+      "cached_tokens": 512
+    },
+    "total_tokens": 2457
+  }
+}

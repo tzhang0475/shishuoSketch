@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"reviews\": [{\"mention_id\": \"sfh1-mention-9090a652172e11941330a7c1\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-391cab87aa2696630afa\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"historical_identity\", \"name_alias\"], \"explanation\": \"The mention '何次道' is matched to 何充 via the alias registry (surname 何 + courtesy name 次道). The supplied evidence from aliases.json explicitly records 何次道 as a name for 何充, and the story context (何次道 visiting 瓦官寺, interacting with 阮思曠) is consistent with the historical figure 何充. The evidence specifically supports the identity resolution.\"}, {\"mention_id\": \"sfh1-mention-b1d7f7a080a0aabbcf0edb80\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-2ebbc2be1c5d4a5c11a5\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"canonical_name_match\"], \"explanation\": \"The mention '蘇峻' is a direct canonical name match to the person 蘇峻. The supplied evidence from people.json explicitly identifies 蘇峻 as a person entry. The story context also references 蘇峻 in the Liu annotations (sfh1-ev-08-shangyu-067-liu-annotation-002 mentions 蘇峻), which is consistent with the historical figure. The canonical name match is specific and unambiguous.\"}]}",
+              "name": "submit_sfh1_adversarial_reviews"
+            },
+            "id": "call_00_xIOI6ItqsdHMxBsTgUTe2126",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787981204,
+  "id": "8cfb108d-f32d-42bc-9549-d050f88cab7a",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 421,
+    "prompt_cache_hit_tokens": 512,
+    "prompt_cache_miss_tokens": 768,
+    "prompt_tokens": 1280,
+    "prompt_tokens_details": {
+      "cached_tokens": 512
+    },
+    "total_tokens": 1701
+  }
+}

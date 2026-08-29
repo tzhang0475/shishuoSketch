@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"reviews\": [{\"mention_id\": \"sfh1-mention-0f6a2c5304702dc9b4dc4fe9\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-02-yanyu-047-main\", \"sfh1-ev-02-yanyu-047-liu-annotation-001\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"contextual_title_matches_historical_person\"], \"explanation\": \"The mention 陶公 appears in the main text as the subject of the story (陶公疾篤). The Liu annotation explicitly glosses 陶公 as 侃 with the courtesy name 士衡 (字士衡其先/陶氏叙曰侃), confirming this refers to 陶侃. The candidate evidence from aliases.json also provides the contextual title match. The annotation evidence directly supports the identity.\"}, {\"mention_id\": \"sfh1-mention-623e076c0237d449814597fe\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-02-yanyu-047-liu-annotation-002\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"canonical_name_match\"], \"explanation\": \"The mention 張華 appears in the Liu annotation (廉入洛司空張華見而謂曰). The candidate evidence from people.json confirms 張華 as a canonical name. The annotation describes 張華 meeting and speaking to 侃, which is consistent with the historical 張華. The reference semantics correctly identifies this as distinct from 侃. The annotation evidence directly supports the identity.\"}, {\"mention_id\": \"sfh1-mention-6730dec7fe7ca0b2b19d0e29\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-02-yanyu-047-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"courtesy_name_matches_historical_person\"], \"explanation\": \"The mention 仁祖 appears in the main text (仁祖聞之曰). The candidate evidence from aliases.json identifies 仁祖 as the courtesy name of 謝尚. In the main text, 仁祖 responds to the court officials' regret about 陶公, which is consistent with 謝尚's historical role. The reference semantics correctly distinguishes 仁祖 from 陶公 and other figures. The main text evidence supports this identification.\"}, {\"mention_id\": \"sfh1-mention-bd928f672108d0506ccffd64\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-02-yanyu-047-liu-annotation-004\", \"sfh1-ev-02-yanyu-047-liu-annotation-005\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"canonical_name_match\"], \"explanation\": \"The mention 王隱 appears in the Liu annotation (按王隱/晉書載侃臨終表). The candidate evidence from people.json confirms 王隱 as a canonical name. The annotation cites 王隱 as the source for the account of 侃's final memorial, which is consistent with the historical 王隱 who compiled the 晉書. The annotation evidence directly supports this identification.\"}]}",
+              "name": "submit_sfh1_adversarial_reviews"
+            },
+            "id": "call_00_hH4XuVP8DDXQQ9UZ1Tfj3264",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787997333,
+  "id": "0dcbd182-7c61-47bc-82f9-1eb6c7dde09c",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 799,
+    "prompt_cache_hit_tokens": 512,
+    "prompt_cache_miss_tokens": 2358,
+    "prompt_tokens": 2870,
+    "prompt_tokens_details": {
+      "cached_tokens": 512
+    },
+    "total_tokens": 3669
+  }
+}

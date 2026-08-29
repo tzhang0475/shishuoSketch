@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"reviews\": [{\"mention_id\": \"sfh1-mention-d8d426b22a9041ff399ea71e\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-31c90da011e67f25671d\", \"sfh1-ev-01-dexing-026-liu-annotation-002\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"name_matches\", \"explicit_distinctness\"], \"explanation\": \"The mention surface is 温嶠, and the candidate evidence sfh1-candidate-evidence-31c90da011e67f25671d provides the canonical name 温嶠 from data/people.json. The Liu annotation (sfh1-ev-01-dexing-026-liu-annotation-002) explicitly mentions 温嶠 recommending 納 (祖納), which directly connects the person 温嶠 to this story's context. The name match is exact and the annotation provides explicit textual evidence of this person's involvement in the narrative. No contradicting evidence exists. The identity resolution is supported by specific textual evidence rather than mere model confidence.\"}]}",
+              "name": "submit_sfh1_adversarial_reviews"
+            },
+            "id": "call_00_TUtrbgI8zBCf1KdjRrJW7114",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787992311,
+  "id": "759efa64-db32-48a2-865c-b8da62f33e22",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 302,
+    "prompt_cache_hit_tokens": 512,
+    "prompt_cache_miss_tokens": 1000,
+    "prompt_tokens": 1512,
+    "prompt_tokens_details": {
+      "cached_tokens": 512
+    },
+    "total_tokens": 1814
+  }
+}

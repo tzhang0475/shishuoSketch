@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"records\": [{\"mention_id\": \"sfh1-mention-fbc8df37d88da686078acf2b\", \"semantic_type\": \"abbreviated_person_reference\", \"referent_role\": \"person referred to by personal name 仲文, abbreviating 殷仲文\", \"anchor_mentions\": [\"sfh1-mention-c9d636f29b21b7ea796108fa\"], \"holder_mentions\": [], \"patron_or_possessor_mentions\": [], \"coreference_with\": [\"sfh1-mention-c9d636f29b21b7ea796108fa\", \"sfh1-mention-b5f4ab56368ca279f05e0ce6\"], \"distinct_from\": [\"sfh1-mention-a5672d9fa1adbc15bf6d3bc4\", \"sfh1-mention-b8c6d2ad93a8336f5e63d924\"], \"semantic_relations\": [{\"type\": \"comparison\", \"subject_mention_id\": \"sfh1-mention-a5672d9fa1adbc15bf6d3bc4\", \"object_mention_id\": \"sfh1-mention-fbc8df37d88da686078acf2b\", \"predicate_surface\": \"以桓謙比殷仲文\", \"evidence_id\": \"sfh1-ev-09-pinzao-088-main\"}, {\"type\": \"co_presence\", \"subject_mention_id\": \"sfh1-mention-fbc8df37d88da686078acf2b\", \"object_mention_id\": \"sfh1-mention-b8c6d2ad93a8336f5e63d924\", \"predicate_surface\": \"仲文入桓於庭中望見之謂同坐曰我家中軍那得及此也\", \"evidence_id\": \"sfh1-ev-09-pinzao-088-main\"}], \"confidence\": \"high\", \"explanation\": \"仲文 is the abbreviated personal name for 殷仲文, coreferring with the full name mention earlier in the text. The comparison 以桓謙比殷仲文 establishes 桓謙 and 殷仲文 as distinct persons being compared. 仲文 is the speaker who says 我家中軍那得及此也, so 我 refers to 仲文.\"}, {\"mention_id\": \"sfh1-mention-b8c6d2ad93a8336f5e63d924\", \"semantic_type\": \"local_anaphoric_reference\", \"referent_role\": \"first-person pronoun 我 referring to the speaker 殷仲文\", \"anchor_mentions\": [\"sfh1-mention-fbc8df37d88da686078acf2b\"], \"holder_mentions\": [], \"patron_or_possessor_mentions\": [], \"coreference_with\": [\"sfh1-mention-fbc8df37d88da686078acf2b\", \"sfh1-mention-c9d636f29b21b7ea796108fa\"], \"distinct_from\": [\"sfh1-mention-a5672d9fa1adbc15bf6d3bc4\"], \"semantic_relations\": [{\"type\": \"speech\", \"subject_mention_id\": \"sfh1-mention-fbc8df37d88da686078acf2b\", \"object_mention_id\": \"sfh1-mention-b8c6d2ad93a8336f5e63d924\", \"predicate_surface\": \"謂同坐曰我家中軍那得及此也\", \"evidence_id\": \"sfh1-ev-09-pinzao-088-main\"}, {\"type\": \"office\", \"subject_mention_id\": \"sfh1-mention-b8c6d2ad93a8336f5e63d924\", \"object_mention_id\": \"sfh1-mention-2b6285a498d35150da7f1cd0\", \"predicate_surface\": \"我家中軍\", \"evidence_id\": \"sfh1-ev-09-pinzao-088-main\"}], \"confidence\": \"high\", \"explanation\": \"我 is the first-person pronoun used by 仲文 (殷仲文) in his speech. It refers to the speaker himself, coreferring with 仲文. The phrase 我家中軍 indicates that 中軍 is the office held by someone in 仲文's family (家), so 我 is the possessor/patron of the 中軍 office holder.\"}, {\"mention_id\": \"sfh1-mention-2b6285a498d35150da7f1cd0\", \"semantic_type\": \"office_holder_reference\", \"referent_role\": \"office title 中軍 (General of the Central Army), held by a member of 仲文's family\", \"anchor_mentions\": [], \"holder_mentions\": [], \"patron_or_possessor_mentions\": [\"sfh1-mention-b8c6d2ad93a8336f5e63d924\"], \"coreference_with\": [], \"distinct_from\": [\"sfh1-mention-fbc8df37d88da686078acf2b\", \"sfh1-mention-a5672d9fa1adbc15bf6d3bc4\"], \"semantic_relations\": [{\"type\": \"office\", \"subject_mention_id\": \"sfh1-mention-b8c6d2ad93a8336f5e63d924\", \"object_mention_id\": \"sfh1-mention-2b6285a498d35150da7f1cd0\", \"predicate_surface\": \"我家中軍\", \"evidence_id\": \"sfh1-ev-09-pinzao-088-main\"}], \"confidence\": \"medium\", \"explanation\": \"中軍 is an office title (General of the Central Army). In the phrase 我家中軍, 仲文 refers to the 中軍 as belonging to his family (家). The office holder is a family member of 仲文, not 仲文 himself. The 我 (仲文) is the possessor/patron of the office holder. The office holder is distinct from 仲文 and from 桓謙.\"}]}",
+              "name": "submit_sfh1_reference_semantics"
+            },
+            "id": "call_00_Or6JMEiGh8NsQ3GHg85P7776",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787989882,
+  "id": "b7057cc4-d7d2-490a-98fc-7f6fc9fb217c",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 1415,
+    "prompt_cache_hit_tokens": 1024,
+    "prompt_cache_miss_tokens": 989,
+    "prompt_tokens": 2013,
+    "prompt_tokens_details": {
+      "cached_tokens": 1024
+    },
+    "total_tokens": 3428
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"reviews\": [{\"mention_id\": \"sfh1-mention-4701a9d8b5587270e47cfeee\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-05-fangzheng-012-liu-annotation-001\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"source_explicit_identification\", \"contextual_role_match\"], \"explanation\": \"The mention 王隱 appears in the Liu annotation as '王隱晉書曰預字' — explicitly identifying 王隱 as the author of the 晉書 being cited. The annotation directly attributes the statement about 預's courtesy name 元凱 to 王隱's 晉書. The candidate evidence (sfh1-candidate-evidence-a4735dd3b5073db174f4) provides the canonical name 王隱. The source explicitly names 王隱 as the author of the cited work, which is a direct identification. The distinctness from Du Yu and other figures is also clear from context.\"}, {\"mention_id\": \"sfh1-mention-75159adcc999289a5f303307\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-05-fangzheng-012-main\", \"sfh1-ev-05-fangzheng-012-liu-annotation-001\", \"sfh1-ev-05-fangzheng-012-liu-annotation-002\", \"sfh1-ev-05-fangzheng-012-liu-annotation-003\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"source_explicit_identification\", \"contextual_identification\", \"name_match\"], \"explanation\": \"The mention 杜預 appears in the main text as the opening subject: '杜預之荆州頓七里橋'. The Liu annotations explicitly identify this figure: annotation 001 states '元凱京兆杜陵人' and '王隱晉書曰預字', annotation 002 gives his biography as 荆州刺史 with lineage from 御史大夫延年, and annotation 003 describes him as 鎮南將軍 who 封當陽侯. These annotations directly identify the 杜預 in the main text as Du Yu, the Jin dynasty general and scholar. The candidate evidence provides the canonical name 杜預. The identity is explicitly supported by the source annotations.\"}, {\"mention_id\": \"sfh1-mention-bbe606b4dcd40f4e0a245694\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-05-fangzheng-012-liu-annotation-001\", \"sfh1-ev-05-fangzheng-012-liu-annotation-002\", \"sfh1-ev-05-fangzheng-012-liu-annotation-003\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"source_explicit_identification\", \"alias_registry_match\", \"biographical_details_match\"], \"explanation\": \"The mention 預 (with courtesy name 元凱) is explicitly identified in the Liu annotation as 杜預. Annotation 001 states '王隱晉書曰預字' (王隱's 晉書 says 預's courtesy name is...), and annotation 002 provides his biography: 荆州刺史, 漢御史大夫延年十一世孫, 祖畿魏太保, 父恕幽州(刺史). These biographical details match the candidate 杜預. The alias registry evidence (sfh1-candidate-evidence-6185ae1f895c1a9ac387) confirms 元凱 as 杜預's courtesy name. The coreference with other mentions of 杜預 in the text is consistent.\"}, {\"mention_id\": \"sfh1-mention-d19a966388e8436e50eb2704\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-04e4204a858ac8ae5b66\", \"sfh1-ev-05-fangzheng-012-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"alias_registry_match\", \"source_context_match\"], \"explanation\": \"The mention 長輿 appears in the main text: '須臾和長輿來問楊右衛何在'. The candidate evidence (sfh1-candidate-evidence-04e4204a858ac8ae5b66) from the alias registry explicitly states '和嶠字長輿' — 和嶠's courtesy name is 長輿. The main text uses the full name '和長輿', which combines the surname 和 with the courtesy name 長輿, directly matching the alias registry entry. The context (a Jin dynasty anecdote about 杜預 and court figures) is consistent with 和嶠 being a Jin official. The alias registry explicitly identifies 長輿 as 和嶠's courtesy name, and the main text's '和長輿' directly combines surname + courtesy name, providing explicit identification.\"}]}",
+              "name": "submit_sfh1_adversarial_reviews"
+            },
+            "id": "call_00_5qZHKUkyUTlR0X4dyrHd6905",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787998897,
+  "id": "664d61bd-a5b0-4963-aa91-092e2ec94dd2",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 1172,
+    "prompt_cache_hit_tokens": 512,
+    "prompt_cache_miss_tokens": 2354,
+    "prompt_tokens": 2866,
+    "prompt_tokens_details": {
+      "cached_tokens": 512
+    },
+    "total_tokens": 4038
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"judgments\": [{\"mention_id\": \"sfh1-mention-5bb2371849b54e407a64c88f\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"plausible\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-9c077e89a94f0cdf8011\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"alias_match\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [\"韓康伯\", \"韓伯\"], \"explanation\": \"The mention 康伯 refers to 韓康伯 (韓伯), whose courtesy name is 康伯. The alias registry evidence confirms this match. The candidate c0 is 韓伯 with matched surface 康伯, which is the correct historical referent.\"}, {\"mention_id\": \"sfh1-mention-6f95a179deb064cee67a261a\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-09-pinzao-063-liu-annotation-001\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"source_annotation_identification\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [\"庾龢\", \"庾道季\"], \"explanation\": \"The Liu annotation explicitly identifies 庾龢 as the person referred to (巳見/庾龢). The candidate c0 is 庾龢, matching the annotation directly. This is the full name form of the speaker 庾道季.\"}, {\"mention_id\": \"sfh1-mention-8c4dd2dce67987b657849bbb\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-candidate-evidence-7760b95cdec1cccf7c61\"], \"reason_types\": [\"wrong_person_identity\"]}], \"preferred_candidate_key\": null, \"resolution\": \"candidate_missing\", \"alternative_search_surfaces\": [\"王述\", \"王坦之\", \"王文度\"], \"explanation\": \"The mention 文度 refers to 王文度 (王坦之), whose courtesy name is 文度. However, the supplied candidate c0 is 孫晷, which is a different person. The alias registry evidence text actually describes 王文度 (王坦之), not 孫晷. The candidate is the wrong person — the correct referent 王坦之 (王文度) is not among the supplied candidates.\"}, {\"mention_id\": \"sfh1-mention-bdb58dbb3ac4499e9b54af71\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-09-pinzao-063-main\", \"sfh1-ev-09-pinzao-063-liu-annotation-001\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"source_annotation_identification\", \"direct_name_match\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [\"庾龢\", \"庾道季\"], \"explanation\": \"The mention 庾道季 is the speaker in the main text. The Liu annotation identifies this person as 庾龢 (courtesy name 道季). The candidate c0 is 庾道季, which directly matches the surface form and is the correct historical referent.\"}]}",
+              "name": "submit_sfh1_identity_judgments"
+            },
+            "id": "call_00_ci2EsJJUl4i9UGtceOeG1675",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787981330,
+  "id": "0a66d6e8-5f47-4fda-b13c-f7fb84731271",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 903,
+    "prompt_cache_hit_tokens": 640,
+    "prompt_cache_miss_tokens": 1945,
+    "prompt_tokens": 2585,
+    "prompt_tokens_details": {
+      "cached_tokens": 640
+    },
+    "total_tokens": 3488
+  }
+}

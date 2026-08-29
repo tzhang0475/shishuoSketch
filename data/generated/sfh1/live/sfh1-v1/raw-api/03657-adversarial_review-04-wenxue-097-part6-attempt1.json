@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"reviews\": [{\"mention_id\": \"sfh1-mention-dee4a7c97874c8196746f8ac\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-30985acaebf64e025d6e\", \"sfh1-ev-04-wenxue-097-main\", \"sfh1-ev-04-wenxue-097-liu-annotation-002\", \"sfh1-ev-04-wenxue-097-liu-annotation-006\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"canonical_name_match\", \"contextual_role_match\", \"explicit_distinctness\"], \"explanation\": \"The mention '宏' in the main text refers to 袁宏, who is explicitly named at the start of the passage ('袁宏始作東征賦'). The main text clearly identifies 宏 as the person answering 温 (桓温). The Liu annotation (sfh1-ev-04-wenxue-097-liu-annotation-002) explicitly states '宏為大司馬記室叅軍' and connects 宏 to 桓温's context. The annotation (sfh1-ev-04-wenxue-097-liu-annotation-006) shows 宏 answering 温's question about the 東征賦. The candidate evidence directly provides the canonical name 袁宏. The reference semantics correctly identifies 宏 as distinct from 温 (桓温). The evidence specifically supports the identity of 宏 as 袁宏 through direct naming in the main text and corroborating annotations.\"}]}",
+              "name": "submit_sfh1_adversarial_reviews"
+            },
+            "id": "call_00_KUkw5FuiQnO7jbK8x79A5620",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787998898,
+  "id": "f53f059d-1c4d-4637-8f5d-50ff1888171f",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 398,
+    "prompt_cache_hit_tokens": 512,
+    "prompt_cache_miss_tokens": 1153,
+    "prompt_tokens": 1665,
+    "prompt_tokens_details": {
+      "cached_tokens": 512
+    },
+    "total_tokens": 2063
+  }
+}

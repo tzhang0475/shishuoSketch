@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"reviews\": [{\"mention_id\":\"sfh1-mention-ed268fd887ab0ed7000bd444\",\"candidate_key\":\"c0\",\"verdict\":\"reject\",\"supporting_evidence_ids\":[],\"contradicting_evidence_ids\":[\"sfh1-ev-25-paidiao-060-main\"],\"reason_types\":[\"reference_semantics\",\"contextual_mismatch\"],\"explanation\":\"The proposed resolution maps the mention 王敦 to the canonical person 王敦 based solely on canonical name matching. However, the source text (sfh1-ev-25-paidiao-060-main) is a passage from the Shishuo Xinyu (世說新語) 'Paidiao' chapter, where 孝武 (Emperor Xiaowu) is discussing potential sons-in-law with 王珣. The text mentions 王敦 and 桓温 as examples of unsuitable candidates ('磊砢之流既不可復得'). This is a historical reference to the Jin dynasty figure 王敦 (Wang Dun, 266-324), the famous general and rebel. While the name matches, the reference semantics returned 'uncertain' with no supporting semantic record, and the candidate evidence (sfh1-candidate-evidence-87d3e8d5c66daaa749ef) merely provides the name '王敦' from a people.json file without any biographical details that would confirm this is the same individual. The mention is a historical allusion in a later text, and without evidence confirming the specific identity (e.g., that this 王敦 is the same person as the one in the candidate record), the resolution cannot be accepted. The evidence provided only establishes name compatibility, not identity. Per the review criteria, compatibility and model confidence are insufficient; specific evidence supporting identity is required.\"}]}",
+              "name": "submit_sfh1_adversarial_reviews"
+            },
+            "id": "call_00_cyJ4JJDOv8UXVAlKqv2K7269",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787990673,
+  "id": "214e0b08-893a-4e23-b6cf-fa452fbfc243",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 417,
+    "prompt_cache_hit_tokens": 512,
+    "prompt_cache_miss_tokens": 632,
+    "prompt_tokens": 1144,
+    "prompt_tokens_details": {
+      "cached_tokens": 512
+    },
+    "total_tokens": 1561
+  }
+}

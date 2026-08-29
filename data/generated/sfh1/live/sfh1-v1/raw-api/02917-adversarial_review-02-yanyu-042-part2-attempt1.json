@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"reviews\": [{\"mention_id\": \"sfh1-mention-cc9ab0bdbbf7c28accadaada\", \"candidate_key\": \"c0\", \"verdict\": \"reject\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-candidate-evidence-0064e4f112ee7e6506fc\"], \"reason_types\": [\"reference_semantics\", \"source_grounded\"], \"explanation\": \"The mention surface is '茂' and the proposed resolution is to 張華 (Zhang Hua). The only candidate evidence is the single character '茂' from liu annotation 006, which reads '史記曰甘羅秦相茂之孫也' — this refers to 甘茂 (Gan Mao), the grandfather of 甘羅 (Gan Luo), not to 張華 (Zhang Hua). The character 茂 here is part of the name 甘茂, a Qin dynasty chancellor, and has no connection to Zhang Hua. The supporting evidence sfh1-ev-02-yanyu-042-liu-annotation-008 reads '(茂田宅/賜以甘)' which continues the same 甘茂 reference. There is no evidence that 茂 refers to 張華. The reference semantics explicitly state 'No valid semantic record was returned; fail closed' with semantic_type 'uncertain' and confidence 'low'. The identity assessment claims 'profile_identity_assertion' but the only candidate evidence is a single character that is clearly part of 甘茂's name in context. This resolution must be rejected.\"}, {\"mention_id\": \"sfh1-mention-d62d5d6100886ad44208e8cf\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-aef096bb1bdd2de4be86\", \"sfh1-ev-02-yanyu-042-liu-annotation-002\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"canonical_name\", \"source_grounded\"], \"explanation\": \"The mention surface is '王敦' and the candidate is 王敦 (Wang Dun). The main text explicitly states '嘗别王敦敦謂瞻曰' — Wang Dun is directly named in the main text. The liu annotation 002 also references '王敦為户曹叅軍'. The canonical name match is exact, the reference semantics confirm this is Wang Dun with high confidence, and the coreference chain is consistent. The distinct_from mention (sfh1-mention-7a3c9c26c8fb4ab957708461) refers to 摯瞻 (Zhi Zhan), who is correctly distinguished from Wang Dun. This resolution is well-supported.\"}]}",
+              "name": "submit_sfh1_adversarial_reviews"
+            },
+            "id": "call_00_G7m4i5lNw2PI3m88zLmd0257",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787997366,
+  "id": "4f15be0a-53ac-46ec-8d50-16f21b796d8e",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 642,
+    "prompt_cache_hit_tokens": 512,
+    "prompt_cache_miss_tokens": 1452,
+    "prompt_tokens": 1964,
+    "prompt_tokens_details": {
+      "cached_tokens": 512
+    },
+    "total_tokens": 2606
+  }
+}

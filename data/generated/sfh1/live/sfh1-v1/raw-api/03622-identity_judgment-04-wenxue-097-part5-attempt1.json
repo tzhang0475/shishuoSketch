@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"judgments\": [{\"mention_id\": \"sfh1-mention-6efba219cdf61e5122b263a0\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-04-wenxue-097-liu-annotation-005\"], \"reason_types\": [\"role_mismatch\"]}, {\"candidate_key\": \"c1\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-04-wenxue-097-liu-annotation-005\"], \"reason_types\": [\"role_mismatch\"]}], \"preferred_candidate_key\": null, \"resolution\": \"candidate_missing\", \"alternative_search_surfaces\": [\"袁宏\", \"宏\"], \"explanation\": \"The mention '君' is the addressee pronoun used by 温 (桓温) addressing 宏 (袁宏). The annotation text '聞君作東征賦多稱先賢何故不及家君' shows 温 addressing 宏. The referent is 袁宏 (Yuan Hong), who is not among the supplied candidates (桓温 and 温嶠).\"}, {\"mention_id\": \"sfh1-mention-77be4d5a2d15c0ae792e408b\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-04-wenxue-097-liu-annotation-003\", \"sfh1-ev-04-wenxue-097-liu-annotation-005\", \"sfh1-ev-04-wenxue-097-liu-annotation-006\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"name_match\", \"contextual_role_match\"]}, {\"candidate_key\": \"c1\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-04-wenxue-097-liu-annotation-003\", \"sfh1-ev-04-wenxue-097-liu-annotation-005\"], \"reason_types\": [\"name_ambiguity_resolved_by_context\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [\"桓温\", \"桓宣城\"], \"explanation\": \"The mention '温' in annotation 003 refers to 桓温 (Huan Wen). The annotation text '滔宻以啓温温甚忿' and '我决不及桓宣城' establishes that 温 is 桓温, whose father is 桓宣城 (桓彝). The context of the 東征賦 and 家君 discussion confirms this is 桓温, not 温嶠.\"}, {\"mention_id\": \"sfh1-mention-79a7b5994b6fb8134552f136\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-04-wenxue-097-main\", \"sfh1-ev-04-wenxue-097-liu-annotation-001\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"contextual_role_match\", \"kinship_relation\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [\"陶侃\", \"陶公\"], \"explanation\": \"The mention '先公' refers to the deceased father of 胡奴, who is 陶侃 (Tao Kan). The main text says '袁宏始作東征賦都不道陶公胡奴誘之狹室中...先公勲業如是', establishing that 胡奴's 先公 is 陶公 (陶侃). The candidate 陶侃 matches this referent.\"}, {\"mention_id\": \"sfh1-mention-83de9f44f48dddb198a5fac5\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-04-wenxue-097-liu-annotation-006\", \"sfh1-ev-04-wenxue-097-liu-annotation-005\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"name_match\", \"contextual_role_match\"]}, {\"candidate_key\": \"c1\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-04-wenxue-097-liu-annotation-006\", \"sfh1-ev-04-wenxue-097-liu-annotation-005\"], \"reason_types\": [\"name_ambiguity_resolved_by_context\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [\"桓温\", \"桓宣城\"], \"explanation\": \"The mention '温' in annotation 006 refers to 桓温. The text '温泫然而' shows 温 being moved to tears after hearing about his father 宣城 (桓彝). The kinship relation with 宣城 as his father and the 東征賦 context confirm this is 桓温, not 温嶠.\"}]}",
+              "name": "submit_sfh1_identity_judgments"
+            },
+            "id": "call_00_EMdxTQNF0ARUYhW8Ib195339",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787998843,
+  "id": "894a2ef8-3bf7-4e50-b1f6-d64c6f323f5d",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 1268,
+    "prompt_cache_hit_tokens": 640,
+    "prompt_cache_miss_tokens": 3167,
+    "prompt_tokens": 3807,
+    "prompt_tokens_details": {
+      "cached_tokens": 640
+    },
+    "total_tokens": 5075
+  }
+}

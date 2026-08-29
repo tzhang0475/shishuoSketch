@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"judgments\": [{\"mention_id\": \"sfh1-mention-8a0f7cf540eab768b3284b42\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-08-shangyu-013-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"canonical_name_match\", \"subject_of_verb\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [], \"explanation\": \"王戎 is the subject of the appraisal sentence '王戎目阮文業...' in the main text. The candidate is the existing person 王戎, matching the canonical name directly. This is a straightforward identification.\"}, {\"mention_id\": \"sfh1-mention-c8006732b67c316ccb13df12\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"insufficient\", \"supporting_evidence_ids\": [\"sfh1-ev-08-shangyu-013-liu-annotation-002\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"office_title_ambiguous\"]}], \"preferred_candidate_key\": null, \"resolution\": \"insufficient_evidence\", \"alternative_search_surfaces\": [\"阮諶\", \"阮武之父\"], \"explanation\": \"The mention '侍中' is an office title appearing in the Liu annotation: '父諶侍中' — meaning 阮諶 (father of 阮武) held the office of 侍中. The candidate supplied is 謝安, which is clearly wrong — 謝安 was not a 侍中 in this context and has no connection to this passage. The actual referent is 阮諶, who is not among the supplied candidates. However, the supplied candidate 謝安 is not merely unsupported but contradicted by the context. Since the likely referent (阮諶) is missing from the candidate set, this should be candidate_missing. But the candidate 謝安 itself has no supporting evidence and is contradicted by the annotation context. Given the supplied candidate is 謝安 and the actual referent is 阮諶, the resolution should be candidate_missing since the likely referent is absent from the supplied set.\"}]}",
+              "name": "submit_sfh1_identity_judgments"
+            },
+            "id": "call_00_tnnMQekAQgi6L8NYwEuB7502",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787981119,
+  "id": "34c32ea4-17b9-4d66-b347-42a84fef6d8b",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 559,
+    "prompt_cache_hit_tokens": 640,
+    "prompt_cache_miss_tokens": 836,
+    "prompt_tokens": 1476,
+    "prompt_tokens_details": {
+      "cached_tokens": 640
+    },
+    "total_tokens": 2035
+  }
+}

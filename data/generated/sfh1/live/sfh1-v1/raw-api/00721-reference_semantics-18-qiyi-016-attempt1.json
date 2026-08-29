@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"records\": [{\"mention_id\": \"sfh1-mention-02e3b623e0e81eae65bb1acf\", \"semantic_type\": \"office_holder_reference\", \"referent_role\": \"office holder\", \"anchor_mentions\": [], \"holder_mentions\": [], \"patron_or_possessor_mentions\": [], \"coreference_with\": [\"sfh1-mention-7627f7be33725e05fc319c86\"], \"distinct_from\": [\"sfh1-mention-f7c18d13f1643dfa6dabd42d\"], \"semantic_relations\": [{\"type\": \"co_presence\", \"subject_mention_id\": \"sfh1-mention-02e3b623e0e81eae65bb1acf\", \"object_mention_id\": \"sfh1-mention-f7c18d13f1643dfa6dabd42d\", \"predicate_surface\": \"時人云\", \"evidence_id\": \"sfh1-ev-18-qiyi-016-main\"}], \"confidence\": \"high\", \"explanation\": \"許掾 is an office title reference (掾 = subordinate official) for the person surnamed 許. It refers to the same person as the surname reference 許 later in the text. The 時人 (people of the time) are a collective distinct from 許掾, and the relation is that 時人 said (云) something about 許.\"}, {\"mention_id\": \"sfh1-mention-7627f7be33725e05fc319c86\", \"semantic_type\": \"abbreviated_person_reference\", \"referent_role\": \"person referred to by surname\", \"anchor_mentions\": [], \"holder_mentions\": [], \"patron_or_possessor_mentions\": [], \"coreference_with\": [\"sfh1-mention-02e3b623e0e81eae65bb1acf\"], \"distinct_from\": [\"sfh1-mention-f7c18d13f1643dfa6dabd42d\"], \"semantic_relations\": [{\"type\": \"co_presence\", \"subject_mention_id\": \"sfh1-mention-7627f7be33725e05fc319c86\", \"object_mention_id\": \"sfh1-mention-f7c18d13f1643dfa6dabd42d\", \"predicate_surface\": \"時人云許\", \"evidence_id\": \"sfh1-ev-18-qiyi-016-main\"}], \"confidence\": \"high\", \"explanation\": \"許 is a surname-only reference to the same person as 許掾. It is the subject of the clause 時人云許非徒有勝情, where 時人 (people of the time) make a statement about 許.\"}, {\"mention_id\": \"sfh1-mention-f7c18d13f1643dfa6dabd42d\", \"semantic_type\": \"descriptive_person_reference\", \"referent_role\": \"collective of people of the time\", \"anchor_mentions\": [], \"holder_mentions\": [], \"patron_or_possessor_mentions\": [], \"coreference_with\": [], \"distinct_from\": [\"sfh1-mention-02e3b623e0e81eae65bb1acf\", \"sfh1-mention-7627f7be33725e05fc319c86\"], \"semantic_relations\": [{\"type\": \"speech\", \"subject_mention_id\": \"sfh1-mention-f7c18d13f1643dfa6dabd42d\", \"object_mention_id\": \"sfh1-mention-7627f7be33725e05fc319c86\", \"predicate_surface\": \"云\", \"evidence_id\": \"sfh1-ev-18-qiyi-016-main\"}], \"confidence\": \"high\", \"explanation\": \"時人 is a descriptive collective reference to 'people of the time' who make a statement (云) about 許. They are distinct from 許掾/許, being the speakers rather than the subject of the speech.\"}]}",
+              "name": "submit_sfh1_reference_semantics"
+            },
+            "id": "call_00_84UteH70IaqFSi5ELgPh3493",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787981488,
+  "id": "1fd5c080-2f5a-4329-ada7-4bd2894ba2ee",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 956,
+    "prompt_cache_hit_tokens": 896,
+    "prompt_cache_miss_tokens": 317,
+    "prompt_tokens": 1213,
+    "prompt_tokens_details": {
+      "cached_tokens": 896
+    },
+    "total_tokens": 2169
+  }
+}

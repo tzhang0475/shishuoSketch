@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"reviews\": [{\"mention_id\": \"sfh1-mention-2103b3bf826f84d92e01a9c5\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-703f81e0a93bc4e95512\", \"sfh1-ev-02-yanyu-066-liu-annotation-001\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"alias_registry\", \"annotation_identity\"], \"explanation\": \"The mention surface is 濛, and the annotation sfh1-ev-02-yanyu-066-liu-annotation-001 explicitly states 濛字仲祖 (Wang Meng's courtesy name is 仲祖). The candidate evidence from aliases.json shows 仲祖 used in context alongside 劉真長, matching the same story. The annotation directly links the personal name 濛 to the courtesy name 仲祖, and the alias registry confirms 仲祖 as a courtesy name for 王濛. The evidence specifically supports the identity resolution.\"}, {\"mention_id\": \"sfh1-mention-3ccd989f9bfb9cba2e654e19\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-ad0eea6282a238cb8d32\", \"sfh1-ev-02-yanyu-066-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"annotation_identity\", \"office_title_identity\"], \"explanation\": \"The mention surface is 王長史 (Wang Changshi), an office title reference. The main text sfh1-ev-02-yanyu-066-main opens with 王長史與劉真長别後相見, and the annotation sfh1-ev-02-yanyu-066-liu-annotation-001 identifies 王長史 as 王濛 (濛字仲祖). The office title 長史 is used to refer to Wang Meng, and the annotation evidence directly supports this identification. The hard veto against c1 (explicit identity contradiction) is consistent with the evidence.\"}, {\"mention_id\": \"sfh1-mention-5c6b4b91cd0e1f30d4e2ccd8\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-162a883f0952a82cef01\", \"sfh1-ev-02-yanyu-066-liu-annotation-001\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"alias_registry\", \"annotation_identity\"], \"explanation\": \"The mention surface is 仲祖, and the annotation sfh1-ev-02-yanyu-066-liu-annotation-001 explicitly states 濛字仲祖, confirming that 仲祖 is the courtesy name of 王濛. The candidate evidence from aliases.json shows 仲祖 used in the same story context (劉真長王仲祖共行...), and the alias registry confirms 仲祖 as a courtesy name for 王濛. The annotation directly supports the identity resolution.\"}, {\"mention_id\": \"sfh1-mention-7b53e388640931c43ae12f5a\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-9133d5f0c58f4547dc96\", \"sfh1-ev-02-yanyu-066-liu-annotation-004\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"alias_registry\", \"annotation_identity\"], \"explanation\": \"The mention surface is 劉, an abbreviated surname reference. The candidate evidence from aliases.json shows 于寳向劉真長叙其神記...劉曰卿可謂鬼之董狐, where 劉 is used as an abbreviation for 劉真長. The annotation sfh1-ev-02-yanyu-066-liu-annotation-004 contains 語林曰仲祖語真長曰, confirming 真長 as the courtesy name of 劉惔. The alias registry confirms 真長 as a courtesy name for 劉惔. The evidence specifically supports this identity resolution.\"}]}",
+              "name": "submit_sfh1_adversarial_reviews"
+            },
+            "id": "call_00_PhFgKryM5AJzFOd6nejD1373",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787997396,
+  "id": "d1ee2854-5a71-4855-a6c9-4f86f41f8456",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 1004,
+    "prompt_cache_hit_tokens": 512,
+    "prompt_cache_miss_tokens": 2249,
+    "prompt_tokens": 2761,
+    "prompt_tokens_details": {
+      "cached_tokens": 512
+    },
+    "total_tokens": 3765
+  }
+}

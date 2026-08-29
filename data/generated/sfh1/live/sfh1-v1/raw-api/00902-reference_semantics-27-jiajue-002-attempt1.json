@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"records\": [{\"mention_id\": \"sfh1-mention-6060f134ea6e3d5bfc25c607\", \"semantic_type\": \"ruler_reference\", \"referent_role\": \"魏武帝曹操 (Cao Cao, Emperor Wu of Wei)\", \"anchor_mentions\": [], \"holder_mentions\": [], \"patron_or_possessor_mentions\": [], \"coreference_with\": [], \"distinct_from\": [\"sfh1-mention-3cbad99820b9918a59db29f0\"], \"semantic_relations\": [{\"type\": \"speech\", \"subject_mention_id\": \"sfh1-mention-6060f134ea6e3d5bfc25c607\", \"object_mention_id\": \"sfh1-mention-3cbad99820b9918a59db29f0\", \"predicate_surface\": \"乃令曰\", \"evidence_id\": \"sfh1-ev-27-jiajue-002-main\"}], \"confidence\": \"high\", \"explanation\": \"魏武 refers to 魏武帝曹操 (Cao Cao), the ruler of Wei. He issues a command (乃令曰) to the soldiers (士卒), establishing a speech relation. He is distinct from the soldiers.\"}, {\"mention_id\": \"sfh1-mention-3cbad99820b9918a59db29f0\", \"semantic_type\": \"descriptive_person_reference\", \"referent_role\": \"士卒 (soldiers/troops under Cao Cao's command)\", \"anchor_mentions\": [], \"holder_mentions\": [], \"patron_or_possessor_mentions\": [\"sfh1-mention-6060f134ea6e3d5bfc25c607\"], \"coreference_with\": [], \"distinct_from\": [\"sfh1-mention-6060f134ea6e3d5bfc25c607\"], \"semantic_relations\": [{\"type\": \"speech\", \"subject_mention_id\": \"sfh1-mention-6060f134ea6e3d5bfc25c607\", \"object_mention_id\": \"sfh1-mention-3cbad99820b9918a59db29f0\", \"predicate_surface\": \"乃令曰\", \"evidence_id\": \"sfh1-ev-27-jiajue-002-main\"}], \"confidence\": \"high\", \"explanation\": \"士卒 is a descriptive collective reference to the soldiers. They are the recipients of Cao Cao's command (令). Cao Cao is their commander/patron. They are distinct from 魏武.\"}]}",
+              "name": "submit_sfh1_reference_semantics"
+            },
+            "id": "call_00_qLQSOAENo0DYxaiGYupt4921",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787981743,
+  "id": "881425b8-677d-4e74-a38c-e7a03dd3078e",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 610,
+    "prompt_cache_hit_tokens": 896,
+    "prompt_cache_miss_tokens": 259,
+    "prompt_tokens": 1155,
+    "prompt_tokens_details": {
+      "cached_tokens": 896
+    },
+    "total_tokens": 1765
+  }
+}

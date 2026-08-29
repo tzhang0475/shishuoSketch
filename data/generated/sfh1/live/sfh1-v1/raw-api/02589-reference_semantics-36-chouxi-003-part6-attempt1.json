@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"records\": [{\"mention_id\": \"sfh1-mention-db50ebd12c750991d303a1ac\", \"semantic_type\": \"descriptive_person_reference\", \"referent_role\": \"collective family/clan group\", \"anchor_mentions\": [], \"holder_mentions\": [], \"patron_or_possessor_mentions\": [], \"coreference_with\": [], \"distinct_from\": [\"sfh1-mention-3938c4541213d65f07876b01\"], \"semantic_relations\": [{\"type\": \"co_presence\", \"subject_mention_id\": \"sfh1-mention-db50ebd12c750991d303a1ac\", \"object_mention_id\": \"sfh1-mention-3938c4541213d65f07876b01\", \"predicate_surface\": \"王氏門彊汝兄弟尚幼\", \"evidence_id\": \"sfh1-ev-36-chouxi-003-main\"}], \"confidence\": \"high\", \"explanation\": \"王氏 refers to the Wang clan (the family of 王敦/王廙). It is a collective surname reference to the Wang family as a powerful clan. The mother says '王氏門彊' (the Wang clan is powerful), contrasting with '汝兄弟' (your brothers, i.e., the 無忌 brothers of the Sima family). This is a descriptive collective reference to the Wang clan, distinct from the Sima brothers.\"}, {\"mention_id\": \"sfh1-mention-3938c4541213d65f07876b01\", \"semantic_type\": \"compositional_kinship\", \"referent_role\": \"collective siblings (the Sima brothers)\", \"anchor_mentions\": [\"sfh1-mention-ac97ff3d04c020711d476dd4\"], \"holder_mentions\": [], \"patron_or_possessor_mentions\": [], \"coreference_with\": [\"sfh1-mention-2227c491e15a94d0de470141\"], \"distinct_from\": [\"sfh1-mention-db50ebd12c750991d303a1ac\"], \"semantic_relations\": [{\"type\": \"co_presence\", \"subject_mention_id\": \"sfh1-mention-3938c4541213d65f07876b01\", \"object_mention_id\": \"sfh1-mention-db50ebd12c750991d303a1ac\", \"predicate_surface\": \"王氏門彊汝兄弟尚幼\", \"evidence_id\": \"sfh1-ev-36-chouxi-003-main\"}, {\"type\": \"kinship\", \"subject_mention_id\": \"sfh1-mention-3938c4541213d65f07876b01\", \"object_mention_id\": \"sfh1-mention-ac97ff3d04c020711d476dd4\", \"predicate_surface\": \"汝兄弟\", \"evidence_id\": \"sfh1-ev-36-chouxi-003-main\"}], \"confidence\": \"high\", \"explanation\": \"汝兄弟 refers to the brothers of 無忌 (the Sima brothers, sons of 司馬丞/愍王). The mother addresses 無忌 and his brothers collectively. This corefers with the earlier 兄弟 mention (sfh1-mention-2227c491e15a94d0de470141) which also refers to the Sima brothers. It is distinct from 王氏 (the Wang clan). The kinship relation is that these are brothers, with 無忌 as one of them.\"}]}",
+              "name": "submit_sfh1_reference_semantics"
+            },
+            "id": "call_00_Kek0s0F9iZ4rgMSSGmFL2490",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787994845,
+  "id": "3639c186-c92d-45e0-8a7b-7e8479589a62",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 818,
+    "prompt_cache_hit_tokens": 1664,
+    "prompt_cache_miss_tokens": 3229,
+    "prompt_tokens": 4893,
+    "prompt_tokens_details": {
+      "cached_tokens": 1664
+    },
+    "total_tokens": 5711
+  }
+}

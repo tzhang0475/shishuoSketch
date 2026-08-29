@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"reviews\": [{\"mention_id\": \"sfh1-mention-e087f02bc8d168d6aaf7ba63\", \"candidate_key\": \"c0\", \"verdict\": \"reject\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-08-shangyu-022-main\"], \"reason_types\": [\"reference_semantics\", \"explicit_distinctness\"], \"explanation\": \"The proposed resolution identifies the surface '真長' as 劉惔 (Liu Dan), based on the alias registry matching '真長' as his courtesy name. However, the main text of story 08-shangyu-022 explicitly states: '宏真長祖也' — meaning 劉宏 (Liu Hong) is the grandfather of 真長. The text also identifies 劉宏 as one of the three 嘏 brothers (劉粹, 劉宏, 劉漠), who are sons of 王安豐's sister and sons-in-law of 王安豐. This establishes that 真長 in this context is the grandson of 劉宏, i.e., a member of the 劉 family lineage described here. The candidate evidence (sfh1-candidate-evidence-946e8113ec5f86a53912) is from aliases.json and shows a different context where 于寳 speaks to 劉真長 about 搜神記 — that is a separate anecdote. The main text of this story provides genealogical context that ties 真長 to the 劉 family of 劉粹/劉宏/劉漠, and while 劉惔 (Liu Dan) is indeed known as 劉真長, the evidence supplied does not specifically confirm that the 真長 mentioned in this story is the same person as 劉惔. The candidate evidence is from a different source context and does not establish identity for this specific mention. The main text's genealogical reference ('宏真長祖也') is the relevant contextual evidence for this mention, and the supplied candidate evidence does not bridge that gap. This requires review to determine whether the 真長 in this story is indeed 劉惔 or another member of the 劉 family.\"}]}",
+              "name": "submit_sfh1_adversarial_reviews"
+            },
+            "id": "call_00_5vWAO7JBlb2LO4TJeZCF5141",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787981146,
+  "id": "1298733c-85b5-4066-a334-28820536a9dc",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 508,
+    "prompt_cache_hit_tokens": 512,
+    "prompt_cache_miss_tokens": 866,
+    "prompt_tokens": 1378,
+    "prompt_tokens_details": {
+      "cached_tokens": 512
+    },
+    "total_tokens": 1886
+  }
+}

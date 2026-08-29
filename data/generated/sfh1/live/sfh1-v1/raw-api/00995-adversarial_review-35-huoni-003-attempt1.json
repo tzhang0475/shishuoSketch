@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"reviews\": [{\"mention_id\": \"sfh1-mention-55d2856f0c58ce2c33d3cd13\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-1bbf91b73ba5e296a977\", \"sfh1-ev-35-huoni-003-liu-annotation-001\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"alias_registry_match\", \"annotation_gloss\"], \"explanation\": \"The surface '賈公閭' matches the alias registry entry for 賈充 (courtesy name 公閭). The Liu annotation explicitly states '充字公閭', directly confirming that 公閭 is the courtesy name of 充. The main text refers to 賈公閭 as the husband of 郭氏, and the annotation gloss confirms this is 賈充. The annotation evidence directly supports the identity resolution.\"}, {\"mention_id\": \"sfh1-mention-786ad8f25aca7f1c3c9e041d\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-b1fa0a1895435ef54d69\", \"sfh1-ev-35-huoni-003-liu-annotation-001\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"alias_registry_match\", \"annotation_gloss\"], \"explanation\": \"The surface '公閭' is the courtesy name of 賈充, as explicitly confirmed by the Liu annotation '充字公閭'. The annotation directly glosses the main text, establishing that the person referred to as 公閭 is 賈充. The alias registry match is corroborated by the annotation gloss.\"}, {\"mention_id\": \"sfh1-mention-7a00710077ea642a2ec1b117\", \"candidate_key\": \"c0\", \"verdict\": \"reject\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-35-huoni-003-liu-annotation-001\"], \"reason_types\": [\"identity_assertion\"], \"explanation\": \"The candidate proposes that the surface '充' refers to 沈充, but the annotation evidence (sfh1-ev-35-huoni-003-liu-annotation-001) explicitly states '充字公閭', identifying this 充 as the person whose courtesy name is 公閭, which is 賈充, not 沈充. The main text context describes 賈公閭's wife 郭氏 and their son, and the annotation confirms this is 賈充. The candidate evidence (sfh1-candidate-evidence-43ea6b6e192ce74b333c) merely contains the character '充' from a different source (hng2c1-shishuo-10-guizhen-016-liu-annotation-001) and does not specifically support identifying this particular mention as 沈充. The annotation gloss directly contradicts the 沈充 identification.\"}, {\"mention_id\": \"sfh1-mention-c1a9d3567d328373ac66adf9\", \"candidate_key\": \"c0\", \"verdict\": \"reject\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-35-huoni-003-liu-annotation-001\"], \"reason_types\": [\"identity_assertion\"], \"explanation\": \"The candidate proposes that the surface '充' refers to 沈充, but the annotation evidence (sfh1-ev-35-huoni-003-liu-annotation-001) explicitly states '充字公閭', identifying this 充 as the person whose courtesy name is 公閭, which is 賈充, not 沈充. The main text context describes 賈公閭's wife 郭氏 and their son, and the annotation confirms this is 賈充. The candidate evidence (sfh1-candidate-evidence-71d807b44924070e7bc4) merely contains the character '充' from a different source and does not specifically support identifying this particular mention as 沈充. The annotation gloss directly contradicts the 沈充 identification.\"}]}",
+              "name": "submit_sfh1_adversarial_reviews"
+            },
+            "id": "call_00_l2J6FUAeazxGHiISBJKf6009",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787981878,
+  "id": "ba01d264-0852-48cb-8a91-9866490ff4f4",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 983,
+    "prompt_cache_hit_tokens": 512,
+    "prompt_cache_miss_tokens": 1518,
+    "prompt_tokens": 2030,
+    "prompt_tokens_details": {
+      "cached_tokens": 512
+    },
+    "total_tokens": 3013
+  }
+}

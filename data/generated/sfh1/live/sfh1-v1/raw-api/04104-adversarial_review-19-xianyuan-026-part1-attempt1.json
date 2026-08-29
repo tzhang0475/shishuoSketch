@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"reviews\": [{\"mention_id\": \"sfh1-mention-26707d7239caa86a2e166b0e\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-6697563ef10d98039bdc\", \"sfh1-ev-19-xianyuan-026-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"courtesy_name_alias\", \"contextual_identification\"], \"explanation\": \"The mention 逸少 is explicitly identified in the candidate evidence as the courtesy name of 王羲之 (王羲之字逸少). The main text states '王郎逸少之子' (Wang Lang is the son of Yishao), and 王凝之 is historically known as the son of 王羲之. The alias registry evidence directly supports the identification of 逸少 as 王羲之's courtesy name. No contradicting evidence exists.\"}, {\"mention_id\": \"sfh1-mention-3a73ebde0d898466a18a7693\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-d6b73845ad1294a1a353\", \"sfh1-ev-19-xianyuan-026-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"contextual_identification\", \"descriptive_reference\"], \"explanation\": \"The mention 王郎 is a descriptive reference. The text explicitly states '王郎逸少之子' (Wang Lang is the son of Yishao/王羲之). 王凝之 is historically the son of 王羲之, and the text opens with '王凝之謝夫人' establishing 王凝之 as the husband of 謝夫人. The narrative context clearly identifies 王郎 as 王凝之. The candidate evidence from people.json confirms 王凝之 as a person. No contradicting evidence.\"}, {\"mention_id\": \"sfh1-mention-a488cb02e03d9abf311a2271\", \"candidate_key\": \"c1\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-8c9043bc46cceea3ebde\", \"sfh1-ev-19-xianyuan-026-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"name_match\", \"contextual_identification\"], \"explanation\": \"The mention 凝之 is an abbreviated form of the personal name 王凝之. The text opens with '王凝之謝夫人既徃王氏' establishing the full name, and later uses 凝之 as the abbreviated reference to the same person. The candidate evidence from people.json confirms 王凝之 as a person. The hard veto against c0 (王凝之 as a different candidate) is appropriate since c0 and c1 both resolve to the same person 王凝之 — this is a duplicate candidate issue, not an identity contradiction. The identification of 凝之 as 王凝之 is sound.\"}, {\"mention_id\": \"sfh1-mention-d709660b47d02180f607d81b\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-e2e77c4c5c4ea3c37d51\", \"sfh1-ev-19-xianyuan-026-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"explicit_identification\", \"name_match\"], \"explanation\": \"The mention 王凝之 is the full canonical name appearing verbatim in the main text. The candidate evidence from people.json confirms 王凝之 as a person. The text explicitly identifies him as the husband of 謝夫人 and the son of 逸少 (王羲之). The hard veto against c1 is a duplicate-candidate artifact (both c0 and c1 resolve to the same person 王凝之), not a genuine identity contradiction. The identification is sound.\"}]}",
+              "name": "submit_sfh1_adversarial_reviews"
+            },
+            "id": "call_00_tj6T52QWGqFxhoVRCxEQ4465",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787999515,
+  "id": "6b92e846-0f97-4a53-a1c2-3054ffe25d32",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 938,
+    "prompt_cache_hit_tokens": 512,
+    "prompt_cache_miss_tokens": 2295,
+    "prompt_tokens": 2807,
+    "prompt_tokens_details": {
+      "cached_tokens": 512
+    },
+    "total_tokens": 3745
+  }
+}

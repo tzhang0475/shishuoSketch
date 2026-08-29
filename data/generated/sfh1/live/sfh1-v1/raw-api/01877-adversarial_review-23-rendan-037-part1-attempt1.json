@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"reviews\": [{\"mention_id\": \"sfh1-mention-a5b2fe9e1dca7642f1dcf1d0\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-f219d98edc98125b5a51\", \"sfh1-ev-23-rendan-037-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"alias_registry_posthumous_title\", \"contextual_corroboration\"], \"explanation\": \"The mention 桓宣武 is matched to 桓溫 via the alias registry for the posthumous title 宣武. The main text has 袁彦道 speaking to 桓宣武, which is consistent with the historical figure 桓溫 (Huan Wen), who held the posthumous title 宣武公. The candidate evidence from aliases.json shows 桓宣武 used in a context involving 簡文 (Emperor Jianwen) and 太宰父子, which is consistent with 桓溫's historical role. The alias registry explicitly maps 桓宣武 to 桓溫. No contradicting evidence is present.\"}, {\"mention_id\": \"sfh1-mention-b53d3932e30210812a341104\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-6e3e50a2b255af523fde\", \"sfh1-ev-23-rendan-037-liu-annotation-002\", \"sfh1-ev-23-rendan-037-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"canonical_name\", \"explicit_annotation_corroboration\"], \"explanation\": \"The mention 殷浩 is a direct canonical name match. The Liu annotation explicitly states 女皇適殷浩, confirming that 殷浩 is the person who married 袁彦道's sister 女皇. The main text says 一適殷淵源, and the reference semantics correctly identifies 殷淵源 as the courtesy name of 殷浩. The annotation provides explicit corroboration that 殷浩 is the correct identity. No contradicting evidence.\"}, {\"mention_id\": \"sfh1-mention-b8772dda3916141a6a89dc14\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-1bf633bf584b2a4af49a\", \"sfh1-ev-23-rendan-037-liu-annotation-002\", \"sfh1-ev-23-rendan-037-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"canonical_name\", \"explicit_annotation_corroboration\"], \"explanation\": \"The mention 謝尚 is a direct canonical name match. The Liu annotation explicitly states 名女正適謝尚, confirming that 謝尚 is the person who married 袁彦道's sister 女正. The main text says 一適謝仁祖, and the reference semantics correctly identifies 謝仁祖 as the courtesy name of 謝尚. The annotation provides explicit corroboration. No contradicting evidence.\"}, {\"mention_id\": \"sfh1-mention-d93e25a7ac962dc98f093f20\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-95867332f87cb9c60b7f\", \"sfh1-ev-23-rendan-037-liu-annotation-002\", \"sfh1-ev-23-rendan-037-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"alias_registry_surname_plus_courtesy_name\", \"explicit_annotation_corroboration\"], \"explanation\": \"The mention 謝仁祖 is matched to 謝尚 via the alias registry for surname plus courtesy name. The candidate evidence from aliases.json shows 謝仁祖 used in a context where 蔡司徒 speaks to him, consistent with 謝尚's identity. Critically, the Liu annotation explicitly states 名女正適謝尚, and the main text says 一適謝仁祖 — these two references are to the same person. The annotation directly links 謝仁祖 (in the main text) to 謝尚. The reference semantics also notes coreference with sfh1-mention-b8772dda3916141a6a89dc14 (謝尚). No contradicting evidence.\"}]}",
+              "name": "submit_sfh1_adversarial_reviews"
+            },
+            "id": "call_00_uIHx8VHNXezP0n8S16pG5128",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787990385,
+  "id": "c0ccebaf-81e2-488c-b572-5fa37190db18",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 1044,
+    "prompt_cache_hit_tokens": 512,
+    "prompt_cache_miss_tokens": 1740,
+    "prompt_tokens": 2252,
+    "prompt_tokens_details": {
+      "cached_tokens": 512
+    },
+    "total_tokens": 3296
+  }
+}

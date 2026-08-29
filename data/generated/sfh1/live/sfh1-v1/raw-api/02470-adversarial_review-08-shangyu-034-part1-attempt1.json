@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"reviews\": [\n  {\n    \"mention_id\": \"sfh1-mention-2c2704ceb628bcd92feb2b07\",\n    \"candidate_key\": \"c0\",\n    \"verdict\": \"accept\",\n    \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-8c556cf473c55c5bf718\", \"sfh1-ev-08-shangyu-034-main\"],\n    \"contradicting_evidence_ids\": [],\n    \"reason_types\": [\"alias_registry_match\", \"name_match\", \"contextual_role_match\"],\n    \"explanation\": \"鄧伯道 is explicitly identified in the main text as one of the three 叅軍 (王趙鄧三叅軍), alongside 王安期 and 趙穆. The alias registry evidence confirms 鄧伯道 is the courtesy name of 鄧攸. The main text directly states '謂安期鄧伯道趙穆也', providing explicit identity resolution. The candidate evidence from the alias registry directly maps 鄧伯道 to 鄧攸. No contradicting evidence exists.\"\n  },\n  {\n    \"mention_id\": \"sfh1-mention-8379a1ecc56d6a9f3457c7af\",\n    \"candidate_key\": \"c0\",\n    \"verdict\": \"accept\",\n    \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-046b6927a141da8e5dcf\", \"sfh1-ev-08-shangyu-034-liu-annotation-002\"],\n    \"contradicting_evidence_ids\": [],\n    \"reason_types\": [\"name_match\", \"contextual_role_match\"],\n    \"explanation\": \"The mention 鄧攸 appears in the Liu annotation (annotation-002) where 太傅越 writes a letter to 穆, 王承, 阮瞻, and 鄧攸. The canonical name evidence from people.json confirms 鄧攸 as a person. The annotation context places 鄧攸 as a 太傅叅軍, consistent with the main text's identification of 鄧伯道 as one of the three 叅軍. The name match is exact and the contextual role (太傅叅軍) aligns with the main text's description. While the semantic record returned low confidence, the name match plus contextual role alignment in the annotation provides sufficient support.\"\n  },\n  {\n    \"mention_id\": \"sfh1-mention-8ad0efbc8991fdbc4de82f96\",\n    \"candidate_key\": \"c0\",\n    \"verdict\": \"accept\",\n    \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-9f60aede3016a0420a69\", \"sfh1-ev-08-shangyu-034-main\"],\n    \"contradicting_evidence_ids\": [],\n    \"reason_types\": [\"name_match\", \"author_role_match\"],\n    \"explanation\": \"袁宏 is explicitly identified in the main text as the author of 名士傳 ('袁宏作名士傳'). The canonical name evidence from people.json confirms 袁宏 as a person. The main text directly attributes the authorship of 名士傳 to 袁宏, and the mention of 袁宏 in the text is in this authorial role. The name match is exact and the role (author of 名士傳) is explicitly stated in the source text. No contradicting evidence exists.\"\n  }\n]}",
+              "name": "submit_sfh1_adversarial_reviews"
+            },
+            "id": "call_00_xnv6HQHRK8cro4qDLSL07446",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787994466,
+  "id": "31278256-f089-473e-be6b-a26e591aa28a",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 776,
+    "prompt_cache_hit_tokens": 640,
+    "prompt_cache_miss_tokens": 1541,
+    "prompt_tokens": 2181,
+    "prompt_tokens_details": {
+      "cached_tokens": 640
+    },
+    "total_tokens": 2957
+  }
+}

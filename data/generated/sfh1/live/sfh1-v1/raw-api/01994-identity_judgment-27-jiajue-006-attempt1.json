@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"judgments\": [{\"mention_id\": \"sfh1-mention-011791e88e6bb1da81bdcc21\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-393ba3da68c05e2c6290\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"office_title_matches_known_person\", \"historical_context\"]}, {\"candidate_key\": \"c1\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-candidate-evidence-e4ab251ff4138943d567\"], \"reason_types\": [\"wrong_person_for_office_title\", \"historical_context\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [\"王敦\"], \"explanation\": \"王大將軍 in the main text refers to Wang Dun (王敦), the rebel general who raised troops at 姑孰. The main text explicitly mentions 王敦舉兵圖逆, and the story is about Emperor Ming inspecting Wang Dun's camp. Candidate c0 (王敦) is the correct referent. Candidate c1 (王隱) is a different person who also held the title 大將軍 but is not the referent here given the historical context of the rebellion.\"}, {\"mention_id\": \"sfh1-mention-11d5ea219f825f2154c5baea\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"insufficient\", \"supporting_evidence_ids\": [\"sfh1-ev-27-jiajue-006-liu-annotation-002\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"place_reference_not_person\"]}], \"preferred_candidate_key\": null, \"resolution\": \"reference_not_person\", \"alternative_search_surfaces\": [], \"explanation\": \"燕 in the annotation refers to the state of Yan, mentioned as the origin of 荀氏 (the emperor's mother's family). It is a place reference, not a person. The annotation text '帝所生母荀氏燕' indicates 荀氏 came from Yan. This is not a person mention.\"}, {\"mention_id\": \"sfh1-mention-4fe01ab64684b1fb4fe0dd13\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-ce8f6be95b0c4d210517\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"personal_name_matches\", \"coreference_with_main_text\"]}, {\"candidate_key\": \"c1\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-candidate-evidence-c4eba2c8080631f8cb28\"], \"reason_types\": [\"wrong_person\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [\"王敦\"], \"explanation\": \"敦 in the Liu annotation refers to Wang Dun (王敦). The annotation discusses the emperor going to 姑孰 while 敦 was sleeping, matching the main text narrative about Wang Dun. The semantic record confirms coreference with 王大將軍 and 王敦 in the main text. Candidate c0 (王敦) is correct; c1 (王隱) is not the referent.\"}, {\"mention_id\": \"sfh1-mention-a8fe63c319327eeccfdf7b5c\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-9525f87ea1597351d314\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"personal_name_matches\", \"historical_context\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [\"王敦\"], \"explanation\": \"敦 in the main text refers to Wang Dun. The text says '行敦營匝而出軍士覺曰此非常人也敦卧心動' — the soldiers recognize the emperor at Wang Dun's camp, and Wang Dun (敦) wakes up. This is clearly Wang Dun in the context of the rebellion narrative.\"}, {\"mention_id\": \"sfh1-mention-aebc7871226781688d728474\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-905d9d9e9172b036d7ed\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"full_name_match\", \"historical_context\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [], \"explanation\": \"王敦 is the full name of Wang Dun, the rebel general. The main text explicitly states '王敦舉兵圖逆猜害忠良', confirming this is Wang Dun. Candidate c0 matches perfectly.\"}, {\"mention_id\": \"sfh1-mention-eed5fb5bbf63270714bde384\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"insufficient\", \"supporting_evidence_ids\": [\"sfh1-ev-27-jiajue-006-liu-annotation-001\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"ambiguous_identity\", \"insufficient_context\"]}], \"preferred_candidate_key\": null, \"resolution\": \"insufficient_evidence\", \"alternative_search_surfaces\": [\"王導\", \"悟\"], \"explanation\": \"悟 appears in the Liu annotation as a speaker: '悟曰營中有黃頭鮮卑奴來何不縳取'. The annotation suggests this is a person speaking, but the identity of 悟 is unclear from the supplied evidence. The semantic record notes it is distinct from 帝 and 敦, and suggests it might be 王導 or another figure, but there is insufficient evidence to determine the historical referent. The supplied candidate c0 (悟 as a local person) is too vague to confirm.\"}]}",
+              "name": "submit_sfh1_identity_judgments"
+            },
+            "id": "call_00_Etke2yTFKrMEZoAtuBw28780",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787990709,
+  "id": "6aa92efd-8e57-4b1d-b4fb-9c0fafe2f6b7",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 1475,
+    "prompt_cache_hit_tokens": 640,
+    "prompt_cache_miss_tokens": 3134,
+    "prompt_tokens": 3774,
+    "prompt_tokens_details": {
+      "cached_tokens": 640
+    },
+    "total_tokens": 5249
+  }
+}

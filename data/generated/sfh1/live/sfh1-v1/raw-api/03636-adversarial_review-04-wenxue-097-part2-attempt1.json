@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"reviews\": [{\"mention_id\": \"sfh1-mention-27d59a08b7c7bae33bef005d\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-04-wenxue-097-liu-annotation-002\", \"sfh1-ev-04-wenxue-097-liu-annotation-003\", \"sfh1-ev-04-wenxue-097-liu-annotation-004\", \"sfh1-ev-04-wenxue-097-liu-annotation-005\", \"sfh1-ev-04-wenxue-097-liu-annotation-006\", \"sfh1-ev-04-wenxue-097-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"personal_name_match\", \"narrative_context\"], \"explanation\": \"The mention surface is 宏, the personal name of 袁宏. The main text explicitly names 袁宏 as the author of the 東征賦, and the annotations repeatedly refer to 宏 in the same narrative context (e.g., '宏為大司馬記室叅軍後', '宏善苦諌之', '宏窘蹙無計'). The candidate evidence from people.json confirms 袁宏 as the canonical name. The coreference chain across annotations 002-006 consistently refers to the same person composing the 東征賦. No contradicting evidence exists.\"}, {\"mention_id\": \"sfh1-mention-32caa6f3deb113d4f2d5dca6\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-04-wenxue-097-liu-annotation-002\", \"sfh1-ev-04-wenxue-097-liu-annotation-003\", \"sfh1-ev-04-wenxue-097-liu-annotation-005\", \"sfh1-ev-04-wenxue-097-liu-annotation-006\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"contextual_office_title\", \"narrative_context\"], \"explanation\": \"The surface 大司馬 is an office title. Annotation 002 states '宏為大司馬記室叅軍後' and annotation 002 also states '時桓温在'. The office of 大司馬 is held by 桓温, who is explicitly named in the same annotation context. The mention is resolved to 桓温 as the office holder. The coreference with sfh1-mention-36b0a402f645ebd1e677f438 (桓温) is consistent. The office title reference is semantically appropriate for 桓温 who held the Grand Marshal position.\"}, {\"mention_id\": \"sfh1-mention-346612cd835ed675bb7ebca8\", \"candidate_key\": \"c0\", \"verdict\": \"review_required\", \"supporting_evidence_ids\": [\"sfh1-ev-04-wenxue-097-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"honorific_title_match\", \"narrative_context\"], \"explanation\": \"The mention surface is 陶公, resolved to 陶侃. The main text says '袁宏始作東征賦都不道陶公' and later '我大道公何以云無因誦曰...長沙之勲為史所讃'. The 長沙 reference in the main text points to 陶侃 who held the title 長沙郡公. However, the reference_semantics for this mention returned 'No valid semantic record was returned; fail closed' with confidence 'low' and no coreference or distinctness information. The candidate evidence from aliases.json provides a different narrative (about 蘇峻之難 and 庾亮) that is not directly from this story's text. While the 長沙之勲 reference in the main text supports 陶侃, the lack of a valid semantic record and the low confidence warrant review. The supporting evidence sfh1-ev-04-wenxue-097-liu-annotation-001 mentions '胡奴陶' which connects 胡奴 to the 陶 family, supporting 陶侃 as the father. However, the semantic record failure means this needs further verification.\"}, {\"mention_id\": \"sfh1-mention-36b0a402f645ebd1e677f438\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-58d923e5a45bf2bb26fa\", \"sfh1-ev-04-wenxue-097-liu-annotation-002\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"name_match\", \"contextual_role_match\"], \"explanation\": \"The mention surface is 桓温, the full name of Huan Wen. Annotation 002 explicitly states '時桓温在' and '宏為大司馬記室叅軍後', establishing 桓温 as the 大司馬. The candidate evidence from aliases.json confirms 桓温 as an orthographic variant of 桓溫. The hard veto against c1 (explicit_identity_contradiction) is noted but no contradicting evidence is present in the supplied materials. The coreference with mentions in annotations 003, 005, and 006 (温) is consistent with the narrative.\"}]}",
+              "name": "submit_sfh1_adversarial_reviews"
+            },
+            "id": "call_00_Z0xMtT3yezHfG58FpmaU1640",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787998869,
+  "id": "415ee320-c894-4652-af3a-32363e9b1338",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 1235,
+    "prompt_cache_hit_tokens": 512,
+    "prompt_cache_miss_tokens": 2703,
+    "prompt_tokens": 3215,
+    "prompt_tokens_details": {
+      "cached_tokens": 512
+    },
+    "total_tokens": 4450
+  }
+}

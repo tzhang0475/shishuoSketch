@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"judgments\": [{\"mention_id\": \"sfh1-mention-fc1c1b26cf279863d814a547\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-08-shangyu-079-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"name_match\", \"contextual_role\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [], \"explanation\": \"桓温 is the subject of the passage, and the candidate 桓溫 (Huan Wen) matches by name and role as the person passing by 王敦's tomb.\"}, {\"mention_id\": \"sfh1-mention-5bf16b8f547593b5fc43d8ac\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-08-shangyu-079-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"name_match\", \"contextual_role\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [], \"explanation\": \"王敦 is the person whose tomb 桓温 passes by in the main text. The candidate 王敦 matches by full name and contextual role.\"}, {\"mention_id\": \"sfh1-mention-411f7cbbe27086169e5523c1\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"insufficient\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [], \"reason_types\": [\"ambiguous_surname\"]}], \"preferred_candidate_key\": null, \"resolution\": \"insufficient_evidence\", \"alternative_search_surfaces\": [\"王恭\", \"王敦\", \"王導\"], \"explanation\": \"The surface '王' appears in the Liu annotation (亮牋曰王/孫綽與庾). The candidate is 王恭, but the annotation context is fragmentary and does not clearly identify which 王 is referenced. The evidence is insufficient to confirm 王恭 as the referent.\"}, {\"mention_id\": \"sfh1-mention-1e5ea6af4312b5165877ff6a\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-08-shangyu-079-liu-annotation-002\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"name_match\", \"contextual_role\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [], \"explanation\": \"The surface '敦' appears in the Liu annotation (敦可人之目), which refers to 王敦. The candidate 王敦 matches this reference. The annotation discusses 敦's reputation ('可人'), consistent with the main text where 桓温 says '可兒可兒' about 王敦's tomb.\"}]}",
+              "name": "submit_sfh1_identity_judgments"
+            },
+            "id": "call_00_piaxaqG1ZygwgAmcJlkk4205",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787989696,
+  "id": "0909a4c5-af78-4ba0-8b12-f48f210146e4",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 757,
+    "prompt_cache_hit_tokens": 640,
+    "prompt_cache_miss_tokens": 1594,
+    "prompt_tokens": 2234,
+    "prompt_tokens_details": {
+      "cached_tokens": 640
+    },
+    "total_tokens": 2991
+  }
+}

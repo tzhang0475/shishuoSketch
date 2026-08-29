@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"records\": [{\"mention_id\": \"sfh1-mention-02e3b623e0e81eae65bb1acf\", \"semantic_type\": \"office_holder_reference\", \"referent_role\": \"office holder (掾, a subordinate official)\", \"anchor_mentions\": [], \"holder_mentions\": [], \"patron_or_possessor_mentions\": [], \"coreference_with\": [\"sfh1-mention-7627f7be33725e05fc319c86\"], \"distinct_from\": [\"sfh1-mention-f7c18d13f1643dfa6dabd42d\"], \"semantic_relations\": [{\"type\": \"co_presence\", \"subject_mention_id\": \"sfh1-mention-02e3b623e0e81eae65bb1acf\", \"object_mention_id\": \"sfh1-mention-f7c18d13f1643dfa6dabd42d\", \"predicate_surface\": \"時人云許\", \"evidence_id\": \"sfh1-ev-18-qiyi-016-main\"}], \"confidence\": \"high\", \"explanation\": \"許掾 is an office-holder reference: 許 is the surname and 掾 is an office title (subordinate clerk/official). The same person is referred to again by the bare surname 許 in the following clause. The 時人 (people of the time) are a distinct collective who comment on 許.\"}, {\"mention_id\": \"sfh1-mention-7627f7be33725e05fc319c86\", \"semantic_type\": \"abbreviated_person_reference\", \"referent_role\": \"the same person as 許掾 (Xu the clerk)\", \"anchor_mentions\": [\"sfh1-mention-02e3b623e0e81eae65bb1acf\"], \"holder_mentions\": [], \"patron_or_possessor_mentions\": [], \"coreference_with\": [\"sfh1-mention-02e3b623e0e81eae65bb1acf\"], \"distinct_from\": [\"sfh1-mention-f7c18d13f1643dfa6dabd42d\"], \"semantic_relations\": [{\"type\": \"co_presence\", \"subject_mention_id\": \"sfh1-mention-7627f7be33725e05fc319c86\", \"object_mention_id\": \"sfh1-mention-f7c18d13f1643dfa6dabd42d\", \"predicate_surface\": \"時人云許\", \"evidence_id\": \"sfh1-ev-18-qiyi-016-main\"}], \"confidence\": \"high\", \"explanation\": \"許 is the bare surname abbreviation referring back to 許掾 introduced at the start of the passage. It is the same person, and is distinct from the collective 時人 who make the remark about him.\"}, {\"mention_id\": \"sfh1-mention-f7c18d13f1643dfa6dabd42d\", \"semantic_type\": \"descriptive_person_reference\", \"referent_role\": \"collective reference to people of the time (contemporaries)\", \"anchor_mentions\": [], \"holder_mentions\": [], \"patron_or_possessor_mentions\": [], \"coreference_with\": [], \"distinct_from\": [\"sfh1-mention-02e3b623e0e81eae65bb1acf\", \"sfh1-mention-7627f7be33725e05fc319c86\"], \"semantic_relations\": [{\"type\": \"co_presence\", \"subject_mention_id\": \"sfh1-mention-f7c18d13f1643dfa6dabd42d\", \"object_mention_id\": \"sfh1-mention-02e3b623e0e81eae65bb1acf\", \"predicate_surface\": \"時人云許\", \"evidence_id\": \"sfh1-ev-18-qiyi-016-main\"}, {\"type\": \"speech\", \"subject_mention_id\": \"sfh1-mention-f7c18d13f1643dfa6dabd42d\", \"object_mention_id\": \"sfh1-mention-7627f7be33725e05fc319c86\", \"predicate_surface\": \"時人云許非徒有勝情實有濟勝之具\", \"evidence_id\": \"sfh1-ev-18-qiyi-016-main\"}], \"confidence\": \"high\", \"explanation\": \"時人 is a descriptive collective reference to 'people of the time' who comment on 許. They are distinct from 許掾/許, being the speakers who remark about him.\"}]}",
+              "name": "submit_sfh1_reference_semantics"
+            },
+            "id": "call_00_AbUmd77blbybAoxVq7og9882",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787990099,
+  "id": "2e8d880c-9bf3-45a2-8c4c-d8d676f65d68",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 1086,
+    "prompt_cache_hit_tokens": 896,
+    "prompt_cache_miss_tokens": 419,
+    "prompt_tokens": 1315,
+    "prompt_tokens_details": {
+      "cached_tokens": 896
+    },
+    "total_tokens": 2401
+  }
+}

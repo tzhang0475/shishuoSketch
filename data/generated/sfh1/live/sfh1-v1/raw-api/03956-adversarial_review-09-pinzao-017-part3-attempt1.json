@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"reviews\": [{\"mention_id\": \"sfh1-mention-804f5fbd9c1bdcafe0b83a77\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-09-pinzao-017-main\", \"sfh1-candidate-evidence-c24f669d98cec515ef9c\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"canonical_name_match\", \"abbreviated_name\", \"coreference\"], \"explanation\": \"The surface form 亮 is the abbreviated personal name of 庾亮. In the main text, 謝鯤 says '臣不如亮' (I am not as good as 亮), and the full name 庾亮 appears earlier in the same sentence ('明帝問謝鯤君自謂何如庾亮'). The context unambiguously identifies 亮 as the abbreviated form of 庾亮, the comparison target. The candidate evidence from data/people.json confirms 庾亮 as a canonical person. No contradicting evidence exists.\"}, {\"mention_id\": \"sfh1-mention-8e5281f6ad902b654d70dc89\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-09-pinzao-017-main\", \"sfh1-candidate-evidence-116fa44dbb24aa614c95\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"second_person_reference\", \"coreference\", \"canonical_name_match\"], \"explanation\": \"The surface form 君 is a second-person pronoun used by 明帝 addressing 謝鯤. In the main text, 明帝 asks '君自謂何如庾亮' (how do you, sir, compare yourself to 庾亮). The 君 here directly addresses 謝鯤, who is named in the same sentence. The Liu annotation (sfh1-ev-09-pinzao-017-liu-annotation-002) also confirms the dialogue context with 鯤 being addressed. The candidate evidence from hng2c1-shishuo-08-shangyu-051-main provides the surface form 鯤 as supporting identity assertion. No contradicting evidence.\"}, {\"mention_id\": \"sfh1-mention-c6508f45b492dcd9749f0529\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-09-pinzao-017-main\", \"sfh1-candidate-evidence-e7a95f52ed5355c86a33\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"canonical_name_match\", \"contextual_role_match\"], \"explanation\": \"The surface form 謝鯤 is the full canonical name of Xie Kun. The main text explicitly names 謝鯤 as the person being asked by 明帝. The candidate evidence from data/people.json confirms 謝鯤 as a canonical person entry. The context is unambiguous — 明帝 asks 謝鯤 how he compares to 庾亮. No contradicting evidence exists.\"}, {\"mention_id\": \"sfh1-mention-cc21fd9bdb688176d0a9ded4\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-09-pinzao-017-main\", \"sfh1-ev-09-pinzao-017-liu-annotation-003\", \"sfh1-candidate-evidence-3408b834a1896ef4957b\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"personal_name_match\", \"contextual_role_match\", \"coreference\"], \"explanation\": \"The surface form 鯤 is the abbreviated personal name of 謝鯤. In the main text, 謝鯤's reply '一丘一壑自謂過之' refers to himself, and the Liu annotation (sfh1-ev-09-pinzao-017-liu-annotation-003) explicitly contains '如亮縱意丘壑自謂過之' with 鯤 as the subject in the surrounding annotation context. The candidate evidence from hng2c1-shishuo-08-shangyu-051-main provides the surface form 鯤 as supporting identity assertion. The context clearly identifies 鯤 as 謝鯤 responding to 明帝's question. No contradicting evidence.\"}]}",
+              "name": "submit_sfh1_adversarial_reviews"
+            },
+            "id": "call_00_JZfLDuCJEmmdUScgwuCl6736",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787999312,
+  "id": "e8117226-ac6b-4cd8-b3bd-92aba053c94c",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 1043,
+    "prompt_cache_hit_tokens": 512,
+    "prompt_cache_miss_tokens": 2572,
+    "prompt_tokens": 3084,
+    "prompt_tokens_details": {
+      "cached_tokens": 512
+    },
+    "total_tokens": 4127
+  }
+}

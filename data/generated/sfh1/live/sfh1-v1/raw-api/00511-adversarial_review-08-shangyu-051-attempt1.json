@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"reviews\": [{\"mention_id\": \"sfh1-mention-53dcd59464b38035fe420373\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-08-shangyu-051-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"contextual_role_match\", \"name_match\"], \"explanation\": \"The main text states '王敦爲大將軍鎭豫章' — Wang Dun is explicitly named as the General who governs Yuzhang. The mention surface '王敦' matches the canonical name exactly, and the context (being the general, receiving Wei Jie) aligns with the historical Wang Dun. The supporting evidence directly names 王敦 in this role.\"}, {\"mention_id\": \"sfh1-mention-569476aadd97ae1a21282345\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-08-shangyu-051-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"contextual_role_match\", \"name_match\"], \"explanation\": \"The surface '敦' is a single-character reference to 王敦, who was just named in the same sentence as '王敦爲大將軍'. The context — 敦 speaking to 謝鯤 about 衛玠 — matches the role of Wang Dun as the general. The Liu annotation sfh1-ev-08-shangyu-051-liu-annotation-002 also explicitly mentions '見王敦敦與之談論', confirming this 敦 refers to 王敦.\"}, {\"mention_id\": \"sfh1-mention-5ac6effd14376a0138a98925\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-08-shangyu-051-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"contextual_role_match\", \"name_match\"], \"explanation\": \"The main text states '謝鯤爲長史' — Xie Kun is explicitly named as the Chief Clerk (長史) under Wang Dun. The surface '謝鯤' matches the canonical name exactly. The context of being Wang Dun's 長史 aligns with the historical Xie Kun who served under Wang Dun.\"}, {\"mention_id\": \"sfh1-mention-84d8993a455eccc3d4083666\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-08-shangyu-051-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"contextual_role_match\", \"name_match\"], \"explanation\": \"The surface '鯤' is a single-character reference to 謝鯤, who was just named in the same passage as '謝鯤爲長史'. The context — 敦謂鯤曰 — shows 敦 speaking to 鯤, which is Wang Dun addressing his Chief Clerk Xie Kun. This is a clear coreference within the same passage.\"}, {\"mention_id\": \"sfh1-mention-b95c7ac993acd80a782d46eb\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-08-shangyu-051-main\", \"sfh1-ev-08-shangyu-051-liu-annotation-002\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"contextual_role_match\", \"name_match\"], \"explanation\": \"The surface '王敦' appears in the Liu annotation text '見王敦敦與之談論彌日信宿敦顧謂僚屬曰'. This directly names 王敦 in the context of discussing with Wei Jie, matching the main text's account. The annotation explicitly identifies this person as 王敦, and the context (discussing with 衛玠) matches the main narrative.\"}, {\"mention_id\": \"sfh1-mention-ce9f7dd8279a284e3ccdf3b2\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-08-shangyu-051-main\", \"sfh1-ev-08-shangyu-051-liu-annotation-002\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"contextual_role_match\", \"name_match\"], \"explanation\": \"The surface '敦' in the Liu annotation '見王敦敦與之談論彌日信宿敦顧謂僚屬曰' refers to 王敦, who is explicitly named immediately before in the same annotation. The context of discussing with Wei Jie and addressing subordinates matches Wang Dun's role as the general. This is unambiguous coreference within the annotation text.\"}]}",
+              "name": "submit_sfh1_adversarial_reviews"
+            },
+            "id": "call_00_9ojhYawyNxVOmBokKuym6428",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787981182,
+  "id": "1a6d07f6-f90f-4a6a-8b26-41109453bea8",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 1107,
+    "prompt_cache_hit_tokens": 512,
+    "prompt_cache_miss_tokens": 1470,
+    "prompt_tokens": 1982,
+    "prompt_tokens_details": {
+      "cached_tokens": 512
+    },
+    "total_tokens": 3089
+  }
+}

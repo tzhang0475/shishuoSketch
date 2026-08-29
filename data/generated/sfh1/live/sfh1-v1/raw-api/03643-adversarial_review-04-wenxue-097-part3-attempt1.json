@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"reviews\": [{\"mention_id\": \"sfh1-mention-4887945cc050d3d67168abfa\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-9a1d7939169f195e2f5f\", \"sfh1-ev-04-wenxue-097-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"contextual_role_match\", \"honorific_reference\"], \"explanation\": \"The mention '公' in the main text refers to 陶公 (陶侃). The main text states '袁宏始作東征賦都不道陶公' and then later '我大道公何以云無', where 公 clearly refers back to 陶公. The candidate evidence from aliases.json confirms 陶公 = 陶侃. The context of 胡奴 (陶侃's son) confronting 袁宏 about not mentioning his father's achievements makes the identity unambiguous. The honorific 公 here is anaphoric to the earlier 陶公 in the same passage.\"}, {\"mention_id\": \"sfh1-mention-5b3157e4835971e63fc3605a\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-9a9be521137ed3f499e4\", \"sfh1-ev-04-wenxue-097-liu-annotation-004\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"contextual_role_match\", \"coreference\"], \"explanation\": \"The mention '公' in annotation 004 refers to 桓温. The annotation text '公命宏同載' shows 公 as the person who ordered 袁宏 to ride together, which is 桓温 in the narrative about the Eastern Expedition Fu. The candidate evidence from hng2c1-shishuo-02-yanyu-101-liu-annotation-001 identifies 温 as 桓溫. The annotation context clearly establishes 桓温 as the Duke (大司馬) who is the subject of the narrative. The hard veto on c1 (explicit identity contradiction) further supports this resolution.\"}, {\"mention_id\": \"sfh1-mention-5e46f973b890447d7812e0de\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-7121f75b390dddcee12d\", \"sfh1-ev-04-wenxue-097-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"contextual_role_match\", \"name_match\"], \"explanation\": \"The mention '君' in the main text is a second-person pronoun used by 胡奴 addressing 袁宏. The text '君作東征賦云何相忽略' shows 胡奴 addressing the person who wrote the 東征賦, which is explicitly identified as 袁宏 at the start of the passage ('袁宏始作東征賦'). The candidate evidence from people.json confirms 袁宏 as the canonical name. This is a straightforward local anaphoric reference.\"}, {\"mention_id\": \"sfh1-mention-60f9d5ff179ecbdd321e88fc\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-24523ab9aa56b81067a0\", \"sfh1-ev-04-wenxue-097-liu-annotation-003\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"contextual_role_match\", \"name_match\"], \"explanation\": \"The mention '宏' in annotation 003 refers to 袁宏. The annotation text discusses 宏's interactions with 滔 (伏滔) and 温 (桓温), all within the context of the Eastern Expedition Fu narrative where 袁宏 is the central figure. The candidate evidence from people.json confirms 袁宏 as the canonical name. The reference semantics correctly notes that 宏 is distinct from 滔 and 温 in the same annotation. This is a direct name match with clear contextual support.\"}]}",
+              "name": "submit_sfh1_adversarial_reviews"
+            },
+            "id": "call_00_hLfYbkS3Xuu3S69YwmHy4317",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787998878,
+  "id": "de83a08b-d6a8-4cc1-837a-6d3d644d36f7",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 972,
+    "prompt_cache_hit_tokens": 512,
+    "prompt_cache_miss_tokens": 2891,
+    "prompt_tokens": 3403,
+    "prompt_tokens_details": {
+      "cached_tokens": 512
+    },
+    "total_tokens": 4375
+  }
+}

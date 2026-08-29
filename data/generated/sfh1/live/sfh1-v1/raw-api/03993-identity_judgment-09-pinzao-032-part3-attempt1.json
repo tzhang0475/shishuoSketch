@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"judgments\": [{\"mention_id\": \"sfh1-mention-b0a27e185050d5619dffa964\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-09-pinzao-032-liu-annotation-002\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"courtesy_name_matches\", \"annotation_explicitly_identifies\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [\"司馬攸\", \"齊王攸\"], \"explanation\": \"The annotation explicitly states '齊王攸字大猷', identifying 大猷 as the courtesy name of Sima You (齊王攸). The candidate 大猷 matches this directly.\"}, {\"mention_id\": \"sfh1-mention-b188748e3012c0c94bb89ba1\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-09-pinzao-032-liu-annotation-008\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"full_name_match\", \"annotation_identifies_person\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [], \"explanation\": \"The annotation-008 text '劉毅聞之故' directly names 劉毅 as the person who heard about the events. The candidate 劉毅 matches the full name exactly.\"}, {\"mention_id\": \"sfh1-mention-b361fca15e12d497f01a5678\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-09-pinzao-032-liu-annotation-006\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"personal_name_match\", \"annotation_context_identifies\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [\"荀朂\"], \"explanation\": \"The annotation-006 text '攸聞朂紞間巳' refers to 朂 as one of the two people (with 馮紞) who slandered Sima You. The annotation-002 context mentions 荀朂 and 馮紞 together, confirming 朂 is the abbreviated personal name of 荀朂 (Xun Xu). The candidate 朂 matches this.\"}]}",
+              "name": "submit_sfh1_identity_judgments"
+            },
+            "id": "call_00_gtHO2J53yYNkpgXj3mqA4239",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787999357,
+  "id": "0d8970ad-b616-46df-aae3-6262836eb1a1",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 640,
+    "prompt_cache_hit_tokens": 640,
+    "prompt_cache_miss_tokens": 2526,
+    "prompt_tokens": 3166,
+    "prompt_tokens_details": {
+      "cached_tokens": 640
+    },
+    "total_tokens": 3806
+  }
+}

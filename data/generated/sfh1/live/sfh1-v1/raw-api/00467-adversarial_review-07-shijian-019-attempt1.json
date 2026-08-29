@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"reviews\": [{\"mention_id\": \"sfh1-mention-192ce6595ef5b6038d2d7f84\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-24a32519fc444626b9b9\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"contextual_identification\", \"honorific_title\"], \"explanation\": \"The mention '陶公' is matched to 陶侃. The evidence text describes 陶公 coming from upstream to deal with 蘇峻之難, and the text explicitly pairs '庾元規' (庾亮) with '陶士衡' (陶侃's courtesy name), confirming the identity. The honorific '公' plus the explicit naming of 陶士衡 in the same passage provides strong contextual identification.\"}, {\"mention_id\": \"sfh1-mention-4499b3c902a51cf16e5d377a\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-42067cfd81bf7447aa61\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"canonical_name_match\"], \"explanation\": \"The surface '何充' exactly matches the canonical name '何充' in the people.json evidence. This is a direct canonical name match with no ambiguity.\"}, {\"mention_id\": \"sfh1-mention-604899f1c21a3290e9043ad5\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-82ed6589157afc937d6b\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"canonical_name_match\", \"orthographic_variant\"], \"explanation\": \"The surface '桓温' is an orthographic variant of '桓溫' (温/溫 are variant forms of the same character). The evidence text mentions 桓温 in the context of 王珣 being recruited as 大司馬掾, which is historically consistent with 桓溫's role. The orthographic variant is well-attested.\"}, {\"mention_id\": \"sfh1-mention-aa8fe2a18845eaa0344a8be2\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-0976c88dad6af8cf8755\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"canonical_name_match\", \"orthographic_variant\"], \"explanation\": \"Same as the other 桓温 mention — the surface '桓温' is an orthographic variant of '桓溫'. The evidence text is identical and consistent with 桓溫's historical identity.\"}, {\"mention_id\": \"sfh1-mention-d9a098c89307001d3de4373b\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-d3cd0cc00d3c488df49f\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"canonical_name_match\", \"orthographic_variant\"], \"explanation\": \"Same as the other 桓温 mentions — the surface '桓温' is an orthographic variant of '桓溫'. The evidence text is identical and consistent with 桓溫's historical identity.\"}, {\"mention_id\": \"sfh1-mention-e88537b92843d6ba5c81ba41\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-0417a1cd0cb035ab3d15\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"contextual_identification\", \"profile_identity_assertion\"], \"explanation\": \"The surface '温' is matched to 桓溫. The evidence text '温' comes from the Liu annotation layer. However, examining the source evidence: sfh1-ev-07-shijian-019-main mentions '桓温' explicitly in the main text ('乃共議用桓温'), and the Liu annotations (sfh1-ev-07-shijian-019-liu-annotation-005, -006) also reference '桓温' in the context of the same discussion about appointing someone to replace 庾翼. The hard veto from c1 (explicit_identity_contradiction) is noted, but the evidence text '温' as a single character is a shorthand reference to 桓温 within the annotation context where 桓温 is explicitly named. The contextual identification is sound.\"}]}",
+              "name": "submit_sfh1_adversarial_reviews"
+            },
+            "id": "call_00_3TpbuHLb1kr2mwhrGwoz9816",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787981119,
+  "id": "eb6e7d94-b550-4677-bc25-e52bd84c36e9",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 1100,
+    "prompt_cache_hit_tokens": 512,
+    "prompt_cache_miss_tokens": 1967,
+    "prompt_tokens": 2479,
+    "prompt_tokens_details": {
+      "cached_tokens": 512
+    },
+    "total_tokens": 3579
+  }
+}

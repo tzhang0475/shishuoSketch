@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"reviews\": [{\"mention_id\": \"sfh1-mention-07d7a10c139b05a3fbee89d2\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-23-rendan-033-liu-annotation-003\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"canonical_name_match\", \"contextual_role_match\"], \"explanation\": \"The mention 劉惔 appears in the Liu annotation (sfh1-ev-23-rendan-033-liu-annotation-003) which explicitly names 王濛劉惔 as the two people who were together at 新亭 discussing whether to invite 謝尚. The main text begins '王劉共在杭南酣宴' where 王劉 refers to 王濛 and 劉惔. The annotation confirms 劉惔 is the person referenced. The candidate evidence from data/people.json provides the canonical name 劉惔. The annotation text directly supports this identification.\"}, {\"mention_id\": \"sfh1-mention-a5b437d4804bed564d418eaf\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-23-rendan-033-liu-annotation-003\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"canonical_name_match\", \"contextual_role_match\"], \"explanation\": \"The mention 王濛 appears in the Liu annotation (sfh1-ev-23-rendan-033-liu-annotation-003) which explicitly names 王濛劉惔 as the two people together at 新亭. The main text begins '王劉共在杭南' where 王 refers to 王濛. The annotation confirms 王濛 is the person referenced. The candidate evidence from data/people.json provides the canonical name 王濛. The annotation text directly supports this identification.\"}, {\"mention_id\": \"sfh1-mention-e82d15430cd350d4d480a272\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-23-rendan-033-liu-annotation-003\", \"sfh1-candidate-evidence-997903cb5668540cefc2\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"alias_match\", \"contextual_role_match\"], \"explanation\": \"The mention 謝仁祖 is a courtesy-name reference to 謝尚. The Liu annotation (sfh1-ev-23-rendan-033-liu-annotation-003) explicitly states '謝仁祖' in the context of 王濛 and 劉惔 discussing inviting 尚 (謝尚). The candidate evidence from data/aliases.json provides a passage where 謝仁祖 is used, and the annotation confirms 謝仁祖 = 尚 = 謝尚. The alias registry identifies 謝仁祖 as the courtesy name of 謝尚. The annotation text directly supports this identification.\"}, {\"mention_id\": \"sfh1-mention-ed4ecc3b21e90efabec0e4ed\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-175ca3c8eb9d7c953f93\", \"sfh1-ev-23-rendan-033-liu-annotation-004\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"alias_match\", \"contextual_role_match\"], \"explanation\": \"The mention 仁祖 is the courtesy name of 謝尚. The Liu annotation (sfh1-ev-23-rendan-033-liu-annotation-004) explicitly states '惔曰仁祖韻中自應來' where 仁祖 refers to 謝尚 (尚). The candidate evidence from data/aliases.json provides a passage using 仁祖 as a courtesy name for 謝尚. The annotation text directly supports this identification, and the alias registry confirms 仁祖 is 謝尚's courtesy name.\"}]}",
+              "name": "submit_sfh1_adversarial_reviews"
+            },
+            "id": "call_00_GgdpKqXEAP5SkFdLm9ki2057",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787981648,
+  "id": "427b168e-96fe-48e7-8d36-6708be721ec3",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 948,
+    "prompt_cache_hit_tokens": 512,
+    "prompt_cache_miss_tokens": 1279,
+    "prompt_tokens": 1791,
+    "prompt_tokens_details": {
+      "cached_tokens": 512
+    },
+    "total_tokens": 2739
+  }
+}

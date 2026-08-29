@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"judgments\": [{\"mention_id\": \"sfh1-mention-ac97ff3d04c020711d476dd4\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-36-chouxi-003-main\", \"sfh1-ev-36-chouxi-003-liu-annotation-005\"], \"reason_types\": [\"identity_mismatch\"]}], \"preferred_candidate_key\": null, \"resolution\": \"candidate_missing\", \"alternative_search_surfaces\": [\"司馬無忌\", \"無忌\"], \"explanation\": \"The mention 無忌 refers to Sima Wuji (司馬無忌), son of Sima Cheng (司馬丞). The annotation 無忌别傳 states 無忌字公壽, and the main text describes 無忌 as the son of 司馬愍王 (Sima Cheng). The supplied candidate c0 is 氾騰, matched via courtesy name 無忌, which is a different person entirely. The correct referent is Sima Wuji, who is not among the supplied candidates.\"}, {\"mention_id\": \"sfh1-mention-b2dafc9e72cbccbcfc05a42f\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-36-chouxi-003-liu-annotation-004\", \"sfh1-ev-36-chouxi-003-liu-annotation-007\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"canonical_name_match\", \"contextual_consistency\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [], \"explanation\": \"The mention 王廙 in the Liu annotation refers to Wang Yi (王廙). The candidate c0 is 王廙 with canonical name match. The annotation 王廙别傳 confirms 廙字世將, and the main text's 世將 refers to the same person. The annotation context (王廙使賊迎) is consistent with Wang Yi being involved in the events described.\"}, {\"mention_id\": \"sfh1-mention-bb46596cba8b121183883e0e\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-36-chouxi-003-main\", \"sfh1-ev-36-chouxi-003-liu-annotation-001\"], \"reason_types\": [\"identity_mismatch\"]}], \"preferred_candidate_key\": null, \"resolution\": \"candidate_missing\", \"alternative_search_surfaces\": [\"司馬丞\", \"司馬承\", \"譙王遜子\"], \"explanation\": \"The mention 司馬愍王 refers to Sima Cheng (司馬丞), posthumously titled 愍王, son of 譙王遜. The supplied candidate c0 is 王恭, matched via the surface 王 from a different source. This is clearly a different person. The correct referent Sima Cheng is not among the supplied candidates.\"}, {\"mention_id\": \"sfh1-mention-c51f0d869fb1b88e737a85c0\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-36-chouxi-003-liu-annotation-007\", \"sfh1-ev-36-chouxi-003-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"courtesy_name_match\", \"contextual_consistency\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [], \"explanation\": \"The mention 世將 is the courtesy name of Wang Yi (王廙). The annotation 王廙别傳 states 廙字世將, confirming the identification. The main text describes 世將 as the one who carried 王 (Sima Cheng) to be killed, and the annotation 王廙使賊迎 confirms Wang Yi's involvement. Candidate c0 is 王廙, correctly identified.\"}]}",
+              "name": "submit_sfh1_identity_judgments"
+            },
+            "id": "call_00_o5PGUDrd2glOfTe4myUk6237",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787999858,
+  "id": "9deeaaf5-3a46-4d2e-b1b3-c3b655d5e921",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 1036,
+    "prompt_cache_hit_tokens": 640,
+    "prompt_cache_miss_tokens": 2868,
+    "prompt_tokens": 3508,
+    "prompt_tokens_details": {
+      "cached_tokens": 640
+    },
+    "total_tokens": 4544
+  }
+}

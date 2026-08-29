@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"judgments\": [{\"mention_id\": \"sfh1-mention-07e369dd1963a59ee0ef412a\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-06-yaliang-029-main\"], \"reason_types\": [\"wrong_person\"]}], \"preferred_candidate_key\": null, \"resolution\": \"candidate_missing\", \"alternative_search_surfaces\": [\"王坦之\", \"王\"], \"explanation\": \"The mention 王 in the main text refers to 王坦之 (Wang Tanzhi), who is one of the two people Huan Wen intends to kill alongside Xie An. The candidate supplied is 王恭 (Wang Gong), which is a different person. The main text clearly pairs 謝安 and 王坦之 as the targets. The candidate 王恭 is not the referent.\"}, {\"mention_id\": \"sfh1-mention-0facb8028ad8a7e39fbfec93\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-06-yaliang-029-liu-annotation-005\"], \"reason_types\": [\"wrong_person\"]}], \"preferred_candidate_key\": null, \"resolution\": \"candidate_missing\", \"alternative_search_surfaces\": [\"王坦之\", \"王\"], \"explanation\": \"The mention 王 in Liu annotation 005 refers to 王坦之 (Wang Tanzhi), who is described as entering in distress, holding his tablet upside down, sweating. The candidate supplied is 王恭 (Wang Gong), a different person. The annotation context clearly concerns Wang Tanzhi, not Wang Gong.\"}, {\"mention_id\": \"sfh1-mention-18d9c00e0bf3a841bdc68263\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-06-yaliang-029-liu-annotation-002\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"name_match\", \"historical_context\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [], \"explanation\": \"The mention 王導 (Wang Dao) in Liu annotation 002 refers to the historical figure Wang Dao, cited alongside Zhuge Liang as a precedent in the imperial edict for Huan Wen. The candidate is 王導 (Wang Dao), matching by full name and historical context.\"}, {\"mention_id\": \"sfh1-mention-2a022f231d000d18f2e43f30\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-06-yaliang-029-liu-annotation-001\", \"sfh1-ev-06-yaliang-029-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"name_match\", \"coreference\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [], \"explanation\": \"The mention 安 in Liu annotation 001 is an abbreviated reference to 謝安 (Xie An), as indicated by the annotation (安/晉). The candidate is 謝安 (Xie An), matching by personal name and the coreference with the full name 謝安 in the main text and annotation 002.\"}]}",
+              "name": "submit_sfh1_identity_judgments"
+            },
+            "id": "call_00_v2uBoad5m0xstcUW4e8h6165",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787999154,
+  "id": "7370dc68-80de-4710-a588-f67bf607ab89",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 869,
+    "prompt_cache_hit_tokens": 1024,
+    "prompt_cache_miss_tokens": 2007,
+    "prompt_tokens": 3031,
+    "prompt_tokens_details": {
+      "cached_tokens": 1024
+    },
+    "total_tokens": 3900
+  }
+}

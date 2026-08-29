@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"reviews\": [{\"mention_id\": \"sfh1-mention-a8b1ca4ab367293836c9a599\", \"candidate_key\": \"c0\", \"verdict\": \"reject\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-03-zhengshi-022-liu-annotation-002\"], \"reason_types\": [\"reference_semantics\", \"contextual_consistency\"], \"explanation\": \"The proposed resolution identifies the surface '庾亮' in the Liu annotation with the candidate person 庾亮 (c0). However, the reference semantics returned 'uncertain' with no valid semantic record, and the identity assessment itself notes low confidence. The only supporting evidence cited is sfh1-ev-03-zhengshi-022-liu-annotation-002, which reads '(弟何充等相尋薨太宗以撫軍輔政徵浩為揚州從/仕至揚州刺史中軍將軍中興書曰建元初庾亮兄)'. This text mentions 庾亮 only in passing as part of a genealogical/chronological note about 殷浩's career — it does not provide any biographical details, attributes, or contextual anchors that specifically identify this 庾亮 as the candidate person. The mention is a bare name occurrence within a fragmentary annotation, with no supporting evidence that this refers to the specific historical figure 庾亮 (the Eastern Jin statesman) versus any other person bearing the same name. The candidate evidence (sfh1-candidate-evidence-6abc27fcd2c5064ddfaf) merely reproduces the surface string '庾亮' from data/people.json and does not independently establish identity. Given the 'uncertain' semantic type, the lack of any distinctness or coreference anchors, and the absence of evidence specifically supporting identity beyond name matching, this resolution should be rejected rather than accepted.\"}]}",
+              "name": "submit_sfh1_adversarial_reviews"
+            },
+            "id": "call_00_FWIGRHn9Q84cmg2VJlNK2494",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787997608,
+  "id": "8032eb85-0c56-4fd3-928c-1fd9705f1abd",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 452,
+    "prompt_cache_hit_tokens": 512,
+    "prompt_cache_miss_tokens": 609,
+    "prompt_tokens": 1121,
+    "prompt_tokens_details": {
+      "cached_tokens": 512
+    },
+    "total_tokens": 1573
+  }
+}

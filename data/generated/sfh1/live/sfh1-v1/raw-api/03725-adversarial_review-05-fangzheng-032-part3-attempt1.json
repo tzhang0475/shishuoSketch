@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"reviews\": [{\"mention_id\": \"sfh1-mention-e52e8be9e3679d331b379fa5\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-05-fangzheng-032-main\", \"sfh1-candidate-evidence-bede77d1d31c118bc522\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"name_match\", \"contextual_identity\"], \"explanation\": \"The mention 王敦 in the main text refers to Wang Dun, the antagonist plotting to depose Emperor Ming. The candidate evidence from data/people.json provides the canonical name 王敦. The main text explicitly describes 王敦's actions (plotting to depose 明帝, questioning 温嶠 about the Crown Prince), which matches the reference semantics describing Wang Dun as the antagonist plotting to depose the Crown Prince. The name match is exact (王敦 = 王敦), and the contextual details in the source text—王敦's intent to depose 明帝, his confrontation with 温嶠, and his role as 温嶠's patron (後爲吾司馬)—all align with the candidate's identity as Wang Dun. The Liu annotations also reference 敦欲廢明, further confirming this identification. No contradicting evidence exists.\"}]}",
+              "name": "submit_sfh1_adversarial_reviews"
+            },
+            "id": "call_00_7HNCYzOh8LOqEua7KJGq5584",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787998996,
+  "id": "58d1abff-9c63-4826-8839-51d31bc715dc",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 337,
+    "prompt_cache_hit_tokens": 512,
+    "prompt_cache_miss_tokens": 824,
+    "prompt_tokens": 1336,
+    "prompt_tokens_details": {
+      "cached_tokens": 512
+    },
+    "total_tokens": 1673
+  }
+}

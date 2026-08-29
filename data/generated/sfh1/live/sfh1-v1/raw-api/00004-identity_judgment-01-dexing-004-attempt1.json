@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"judgments\": [{\"mention_id\": \"sfh1-mention-1456ea28d2dfd170ca3bf3d2\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-01-dexing-004-liu-annotation-001\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"explicit_name_match\", \"role_match\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [\"薛瑩\"], \"explanation\": \"薛瑩 is explicitly named in the annotation as the author of 後漢書 (Book of Later Han). The candidate c0 matches this surface exactly and is the author of the cited historical source. This is a direct, unambiguous identification.\"}, {\"mention_id\": \"sfh1-mention-4cee01d2986e16096682003c\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-01-dexing-004-main\", \"sfh1-ev-01-dexing-004-liu-annotation-001\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"name_match\", \"coreference_chain\"]}, {\"candidate_key\": \"c1\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-01-dexing-004-main\", \"sfh1-ev-01-dexing-004-liu-annotation-001\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"name_match\", \"coreference_chain\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_ambiguous\", \"alternative_search_surfaces\": [\"李膺\", \"元禮\"], \"explanation\": \"李元禮 in the main text is identified in the annotation as 李膺字元禮 (Li Ying, courtesy name Yuanli). Both candidates c0 and c1 are prior-candidate database entries for 李元禮 from different waves (wave-a and wave-b). Both represent the same historical person Li Ying. Since both candidates refer to the same person and there is no distinguishing evidence to prefer one database entry over the other, the resolution is candidate_ambiguous between the two supplied candidates.\"}]}",
+              "name": "submit_sfh1_identity_judgments"
+            },
+            "id": "call_00_FOZXhETNFHLVTGPIfI6N3484",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787978807,
+  "id": "18c6cf73-ea08-49f4-876d-8651b7673663",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 571,
+    "prompt_cache_hit_tokens": 640,
+    "prompt_cache_miss_tokens": 1392,
+    "prompt_tokens": 2032,
+    "prompt_tokens_details": {
+      "cached_tokens": 640
+    },
+    "total_tokens": 2603
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"reviews\": [{\"mention_id\": \"sfh1-mention-e053a2eae1a6bdc6dd6ea02c\", \"candidate_key\": \"c0\", \"verdict\": \"reject\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-02-yanyu-101-liu-annotation-002\"], \"reason_types\": [\"reference_semantics\", \"insufficient_evidence\"], \"explanation\": \"The mention surface is 袁宏, and the candidate evidence is sfh1-candidate-evidence-e5171bfdff7d912d8422 which simply contains the text '袁宏' from data/people.json. The supporting evidence cited includes sfh1-ev-02-yanyu-101-liu-annotation-002, which mentions '郎袁宏具其草以示僕射王彪之' — this does reference 袁宏 in the Liu annotation. However, the reference_semantics explicitly states 'No valid semantic record was returned; fail closed' with confidence 'low' and semantic_type 'uncertain'. The annotation text does mention 袁宏 as the person who drafted the document (具其草), which is consistent with the historical 袁宏 who served under 桓温. But the evidence is thin — the annotation merely names him in passing without establishing identity details. The reference semantics fail closed, and while the name match is direct, the contextual evidence is insufficient to confirm this is the specific canonical 袁宏 from the candidate profile. The annotation context does suggest this is the historical figure 袁宏 who worked with 桓温, but the evidence provided does not explicitly assert identity with the candidate. Given the fail-closed semantics and low confidence, this should be rejected or at minimum require review.\"}, {\"mention_id\": \"sfh1-mention-e36b1bc3000f11bb5c1e930c\", \"candidate_key\": \"c0\", \"verdict\": \"reject\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-02-yanyu-101-liu-annotation-001\"], \"reason_types\": [\"reference_semantics\", \"insufficient_evidence\"], \"explanation\": \"The mention surface is '安' and the candidate is 謝安. The candidate evidence sfh1-candidate-evidence-8b4b98bb9b367fbbd495 contains the text '安' from the Liu annotation. The supporting evidence cited includes sfh1-ev-02-yanyu-101-liu-annotation-001 which reads '(朝廷求九錫謝安使吏部/晉安帝紀曰温在姑孰諷)' — this does mention 謝安 explicitly. However, the mention surface is just '安', a single character that could refer to multiple people. The reference_semantics explicitly states 'No valid semantic record was returned; fail closed' with confidence 'low' and semantic_type 'uncertain'. While the annotation does mention 謝安 in the context of 桓温 seeking 九錫, the connection between the surface '安' and 謝安 is not directly established by the supplied evidence. The annotation text mentions 謝安 by full name, but the mention surface is only '安' — there is no explicit evidence that this '安' refers to 謝安 specifically. The reference semantics fail closed, and the evidence does not specifically support the identity resolution. This should be rejected.\"}]}",
+              "name": "submit_sfh1_adversarial_reviews"
+            },
+            "id": "call_00_IVykahZR2ehRiKzhn8F46006",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787997539,
+  "id": "a0253b4e-2333-435c-9b4e-4f53c79df810",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 776,
+    "prompt_cache_hit_tokens": 512,
+    "prompt_cache_miss_tokens": 1080,
+    "prompt_tokens": 1592,
+    "prompt_tokens_details": {
+      "cached_tokens": 512
+    },
+    "total_tokens": 2368
+  }
+}

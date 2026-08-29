@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"reviews\": [{\"mention_id\": \"sfh1-mention-4e11dc37b42d168ebbc5fe43\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-36-chouxi-003-liu-annotation-007\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"name_match\", \"contextual_role\"], \"explanation\": \"The mention 王導 appears in annotation 007: '王廙别傳曰廙字世將祖覽父正廙髙朗豪率王導'. The candidate evidence is from data/people.json listing 王導 as a canonical person. The annotation explicitly names 王導 in the context of 王廙's biography, and the surface form 王導 exactly matches the canonical name. The supporting evidence sfh1-ev-36-chouxi-003-liu-annotation-007 directly contains the name 王導 in a genealogical/biographical context, supporting identification with the historical Wang Dao. No contradicting evidence is present.\"}, {\"mention_id\": \"sfh1-mention-5d765cab2458f727c28f1ebb\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-36-chouxi-003-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"canonical_name_match\", \"historical_identity\"], \"explanation\": \"The mention 王敦 appears in the main text: '王敦昔肆酷汝父假手世將'. The candidate evidence from data/people.json lists 王敦 as a canonical person. The main text explicitly names 王敦 as the one who killed 汝父 (司馬愍王), and the annotation evidence (sfh1-ev-36-chouxi-003-liu-annotation-004) confirms 王敦's role in the killing of 司馬丞. The surface form exactly matches the canonical name. The reference semantics explicitly state distinctness from 汝父 (the victim), which is consistent with the historical record. No contradicting evidence.\"}, {\"mention_id\": \"sfh1-mention-66983486085852de3576c20d\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-36-chouxi-003-liu-annotation-007\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"historical_identity\", \"profile_identity_assertion\"], \"explanation\": \"The mention 廙 appears in annotation 007: '王廙别傳曰廙字世將祖覽父正'. The candidate evidence from hng2c1-shishuo-36-chouxi-003-liu-annotation-007 identifies 廙 as 王廙. The annotation explicitly states 廙字世將, and the main text mentions 世將 as the person who carried out the killing on behalf of 王敦. The annotation 007 directly establishes that 廙 is 王廙 with courtesy name 世將, and the main text's 世將 is the same person. The reference semantics confirm this identification with high confidence. No contradicting evidence.\"}, {\"mention_id\": \"sfh1-mention-8b258bc05308d256d105956e\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-36-chouxi-003-liu-annotation-007\", \"sfh1-ev-36-chouxi-003-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"courtesy_name_match\", \"historical_identity\"], \"explanation\": \"The mention 世將 appears in the main text: '夜遣世將載王於車而殺之' and '假手世將'. The candidate evidence from data/aliases.json establishes that 世將 is the courtesy name of 王廙. Annotation 007 explicitly states '廙字世將', directly linking the courtesy name 世將 to 王廙. The main text uses 世將 as the agent who carried out the killing for 王敦, and annotation 004 confirms '王廙使賊迎' in the same narrative context. The alias registry evidence confirms 世將 as 王廙's courtesy name. No contradicting evidence.\"}]}",
+              "name": "submit_sfh1_adversarial_reviews"
+            },
+            "id": "call_00_VPynl2KoEeHdKMNpC0Ix2996",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787999885,
+  "id": "819dd346-9b82-4e9f-89f5-4e0a8c742f3d",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 1008,
+    "prompt_cache_hit_tokens": 512,
+    "prompt_cache_miss_tokens": 2590,
+    "prompt_tokens": 3102,
+    "prompt_tokens_details": {
+      "cached_tokens": 512
+    },
+    "total_tokens": 4110
+  }
+}

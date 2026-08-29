@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"judgments\": [{\"mention_id\": \"sfh1-mention-68ccb2d99afd244a7ee34b83\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-18-qiyi-004-liu-annotation-003\", \"sfh1-ev-18-qiyi-004-liu-annotation-004\"], \"reason_types\": [\"identity_conflict\", \"office_title_mismatch\"]}], \"preferred_candidate_key\": null, \"resolution\": \"candidate_missing\", \"alternative_search_surfaces\": [\"式\", \"景則\", \"李式\"], \"explanation\": \"The 兄 (elder brother) mentioned in the main text refers to 李廞's elder brother 式 (courtesy name 景則), who held the office of 侍中. The supplied candidate is 謝安 (Xie An), which is incorrect. The annotation explicitly states 式字景則廞長兄也 and that this brother held the office of 臨海太守侍中. The candidate 謝安 is not the referent; the correct referent (式/景則) is missing from the candidate set.\"}, {\"mention_id\": \"sfh1-mention-6a7465b809d812c588c7ad81\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-18-qiyi-004-liu-annotation-003\", \"sfh1-ev-18-qiyi-004-liu-annotation-004\"], \"reason_types\": [\"identity_conflict\", \"office_title_mismatch\"]}], \"preferred_candidate_key\": null, \"resolution\": \"candidate_missing\", \"alternative_search_surfaces\": [\"式\", \"景則\", \"李式\"], \"explanation\": \"The 侍中 office title in the annotation refers to 式 (廞's elder brother, courtesy name 景則), who held the office of 臨海太守侍中. The supplied candidate 謝安 is not the referent. The correct referent 式/景則 is missing from the candidate set.\"}, {\"mention_id\": \"sfh1-mention-9856c08b61f213d08b6c894c\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-18-qiyi-004-main\", \"sfh1-ev-18-qiyi-004-liu-annotation-003\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"courtesy_name_match\", \"contextual_alignment\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [], \"explanation\": \"茂弘 is the courtesy name of 王導 (Wang Dao). The main text quotes 李廞 saying 茂弘乃復以一爵假人, and the annotation confirms 導復辟之廞曰茂弘乃復以一爵加人, where 導 refers to 王導. The candidate 王導 matches the courtesy name 茂弘 and the context of the 王丞相 (王導) trying to recruit 廞.\"}, {\"mention_id\": \"sfh1-mention-a46a26b2529ef6d3ab6e6cb1\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-18-qiyi-004-liu-annotation-003\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"courtesy_name_match\", \"direct_identification\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [], \"explanation\": \"景則 is the courtesy name of 式, as explicitly stated in the annotation: 式字景則廞長兄也. The candidate 景則 directly matches this courtesy name reference. The annotation confirms 景則 is 廞's eldest brother 式.\"}]}",
+              "name": "submit_sfh1_identity_judgments"
+            },
+            "id": "call_00_IopoCY2PstsjUWTjFQKq7988",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787999446,
+  "id": "53be87f4-565c-4eae-bdfb-72b30cdfad8e",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 1004,
+    "prompt_cache_hit_tokens": 640,
+    "prompt_cache_miss_tokens": 2509,
+    "prompt_tokens": 3149,
+    "prompt_tokens_details": {
+      "cached_tokens": 640
+    },
+    "total_tokens": 4153
+  }
+}

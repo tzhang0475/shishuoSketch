@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"judgments\": [{\"mention_id\": \"sfh1-mention-b90f439fb586c6c5c4969da7\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-06-yaliang-029-main\"], \"reason_types\": [\"wrong_person\"]}], \"preferred_candidate_key\": null, \"resolution\": \"candidate_missing\", \"alternative_search_surfaces\": [\"王坦之\", \"王文度\"], \"explanation\": \"The mention '文度' in the main text refers to 王坦之 (Wang Tanzhi), whose courtesy name is 文度. The supplied candidate c0 is 孫晷 (Sun Gui), which is a different person entirely. The candidate evidence text itself shows 文度 being addressed as 藍田's son and discussing marriage with 桓温, which is consistent with 王坦之 (son of 王述/藍田). The candidate 孫晷 is incorrect. The likely referent 王坦之 is not among the supplied candidates.\"}, {\"mention_id\": \"sfh1-mention-d4e375dbce912fbcbcd48edd\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-afffd7dd3c82c72719ec\", \"sfh1-ev-06-yaliang-029-main\", \"sfh1-ev-06-yaliang-029-liu-annotation-002\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"canonical_name_match\", \"contextual_alignment\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [], \"explanation\": \"The mention 謝安 in the Liu annotation refers to Xie An. The candidate c0 is 謝安 with canonical name match. The main text and annotations consistently describe 謝安 as the person who, along with 王坦之, was targeted by 桓温's trap. This is the historical Xie An.\"}, {\"mention_id\": \"sfh1-mention-d5eea2be21dd45fae716b9e0\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-06-yaliang-029-liu-annotation-002\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"canonical_name_match\", \"contextual_alignment\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [], \"explanation\": \"The mention 諸葛亮 in the Liu annotation refers to Zhuge Liang, cited as a precedent in the imperial edict for how Huan Wen should behave. The candidate c0 is 諸葛亮 with exact name match and source-grounded local person form. This is the historical Zhuge Liang.\"}, {\"mention_id\": \"sfh1-mention-e118639db299fe360838480e\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-44448b491a4176810baf\", \"sfh1-ev-06-yaliang-029-main\", \"sfh1-ev-06-yaliang-029-liu-annotation-002\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"orthographic_variant\", \"contextual_alignment\"]}, {\"candidate_key\": \"c1\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-06-yaliang-029-main\", \"sfh1-ev-06-yaliang-029-liu-annotation-002\"], \"reason_types\": [\"wrong_person\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [], \"explanation\": \"The mention '桓' is the surname abbreviation for 桓公, referring to 桓温 (Huan Wen), the general who set the trap against 謝安 and 王坦之. Candidate c0 is 桓溫 via orthographic variant, which matches. Candidate c1 is 温嶠 (Wen Qiao), a different person entirely — the surname 桓 does not refer to 温嶠. The main text and Liu annotations consistently describe 桓温 as the one who set the ambush.\"}]}",
+              "name": "submit_sfh1_identity_judgments"
+            },
+            "id": "call_00_gZrICw08pF6v5l171ZCR5834",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787999182,
+  "id": "17ec910a-8f65-4a18-8827-0fe16769db34",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 1086,
+    "prompt_cache_hit_tokens": 640,
+    "prompt_cache_miss_tokens": 2853,
+    "prompt_tokens": 3493,
+    "prompt_tokens_details": {
+      "cached_tokens": 640
+    },
+    "total_tokens": 4579
+  }
+}

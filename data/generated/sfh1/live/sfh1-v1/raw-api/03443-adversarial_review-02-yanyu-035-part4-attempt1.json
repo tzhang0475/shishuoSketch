@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"reviews\": [{\"mention_id\": \"sfh1-mention-dd1d8c82c5264a5bea4622c0\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-4f1d6ebc2a09d411080c\", \"sfh1-ev-02-yanyu-035-liu-annotation-001\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"historical_identity\", \"surface_match\"], \"explanation\": \"The mention surface is 琨, which is the given name of 劉琨. The annotation sfh1-ev-02-yanyu-035-liu-annotation-001 explicitly states '琨字越石' (Kun, courtesy name Yueshi), confirming that 琨 refers to 劉琨. The main text sfh1-ev-02-yanyu-035-main opens with 劉琨, and the annotation evidence directly supports the identity. The candidate evidence sfh1-candidate-evidence-4f1d6ebc2a09d411080c provides the surface 琨 from the annotation. This is a direct name match with explicit historical identity support.\"}, {\"mention_id\": \"sfh1-mention-e1a4f772f0ce6e45b98407ec\", \"candidate_key\": \"c1\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-02-yanyu-035-liu-annotation-007\", \"sfh1-ev-02-yanyu-035-liu-annotation-008\", \"sfh1-ev-02-yanyu-035-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"contextual_role\", \"coreference\"], \"explanation\": \"The mention surface is 卿 (a second-person pronoun), used by 劉琨 addressing 温嶠. The main text sfh1-ev-02-yanyu-035-main shows 劉琨 saying '使卿延譽於江南' (have you spread your reputation south of the Yangtze), where 卿 refers to the addressee 温嶠. The annotations sfh1-ev-02-yanyu-035-liu-annotation-007 and -008 explicitly discuss 温嶠 (嶠字太真) and his role as 琨左司馬, confirming that the addressee is 温嶠. The reference semantics indicate coreference with 温嶠 mentions and distinctness from the speaker 吾 (劉琨). The evidence specifically supports the identity of 卿 as 温嶠.\"}, {\"mention_id\": \"sfh1-mention-f8e72d8b6030775afcdb2eaa\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-02-yanyu-035-liu-annotation-001\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"alias_match\", \"courtesy_name\"], \"explanation\": \"The mention surface is 越石, which is the courtesy name (字) of 劉琨. The annotation sfh1-ev-02-yanyu-035-liu-annotation-001 explicitly states '琨字越石', directly establishing that 越石 = 劉琨. The candidate evidence sfh1-candidate-evidence-24e2f69259ccd8d67df8 provides the alias registry entry '劉越石云華彦夏識能不足彊果有餘', further confirming the courtesy name usage. The reference semantics also indicate coreference with 琨 and 劉琨 mentions. The evidence specifically supports the identity resolution.\"}]}",
+              "name": "submit_sfh1_adversarial_reviews"
+            },
+            "id": "call_00_oHW1zeLHxmRldmFpiyLH0676",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787998586,
+  "id": "40f24cdf-6fdc-4ac0-9468-2f4eb80029c7",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 863,
+    "prompt_cache_hit_tokens": 512,
+    "prompt_cache_miss_tokens": 2028,
+    "prompt_tokens": 2540,
+    "prompt_tokens_details": {
+      "cached_tokens": 512
+    },
+    "total_tokens": 3403
+  }
+}

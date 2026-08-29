@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"reviews\": [{\"mention_id\": \"sfh1-mention-01826a96fd7884b7d99cf720\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-05-fangzheng-033-liu-annotation-001\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"canonical_name_match\", \"contextual_fit\"], \"explanation\": \"The mention surface is 王敦, which is the canonical name of the candidate. The main text describes 王大將軍 (General Wang) who rebelled and reached Stone Head, and the Liu annotation explicitly names 王敦 as the person who 'came down' (既下) with the six armies defeated. The annotation directly connects 王敦 to this rebellion context, matching the main text's 王大將軍. The candidate evidence from data/people.json lists 王敦 as a person. The Liu annotation sfh1-ev-05-fangzheng-033-liu-annotation-001 explicitly mentions 王敦 in the context of the rebellion, providing direct identity support.\"}, {\"mention_id\": \"sfh1-mention-5636544aeae711dcce94a9e4\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-05-fangzheng-033-liu-annotation-001\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"personal_name_match\", \"contextual_fit\"], \"explanation\": \"The mention surface is 顗, which is the personal name of 周顗. The Liu annotation sfh1-ev-05-fangzheng-033-liu-annotation-001 explicitly mentions 顗 in the context of this story: '郝嘏及左右文武勸顗避難' — advisors urging 顗 to flee. This directly connects the character 顗 to the person 周顗 in this narrative. The main text describes 周伯仁 going to see 王大將軍, and the annotation confirms 顗 is the person being urged to flee, which is consistent with 周顗's role in this story. The candidate evidence from hng2c1-shishuo-05-fangzheng-031-liu-annotation-001 provides the name 周顗 as the identity for the surface 顗.\"}, {\"mention_id\": \"sfh1-mention-5ea22ad80dd15c7e3d1eb549\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-05-fangzheng-033-liu-annotation-002\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"personal_name_match\", \"contextual_fit\"], \"explanation\": \"The mention surface is 敦, the personal name of 王敦. The Liu annotation sfh1-ev-05-fangzheng-033-liu-annotation-002 explicitly mentions 敦 in the context of this story: '朝士詣敦敦曰近日戰有餘力' — court officials visiting 敦, and 敦 speaking about the recent battle. This directly connects the character 敦 to 王敦 in this narrative. The main text describes 王大將軍 (who is 王敦) receiving visitors after the rebellion, and the annotation confirms 敦 is the person being visited. The candidate evidence from hng2c1-shishuo-05-fangzheng-028-main provides the name 王敦 for the surface 敦.\"}, {\"mention_id\": \"sfh1-mention-b02a2c8c9a845827f8f45a3e\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-05-fangzheng-033-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"courtesy_name_match\", \"contextual_fit\"], \"explanation\": \"The mention surface is 周伯仁, which is the courtesy name of 周顗. The main text sfh1-ev-05-fangzheng-033-main explicitly describes 周伯仁 going to see 王大將軍 after the rebellion, and the Liu annotation sfh1-ev-05-fangzheng-033-liu-annotation-001 confirms this is 顗 (周顗) being urged to flee. The candidate evidence from data/aliases.json provides the alias 周伯仁 for 周顗. The context of the story — 周伯仁 visiting 王大將軍 after the rebellion — matches the historical account of 周顗 confronting 王敦. The identity is well-supported by the main text itself.\"}, {\"mention_id\": \"sfh1-mention-b826bcd9140198f184d9bb5b\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-05-fangzheng-033-main\", \"sfh1-ev-05-fangzheng-033-liu-annotation-001\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"office_title_match\", \"contextual_fit\"], \"explanation\": \"The mention surface is 王大將軍 (General Wang), an office title. The main text sfh1-ev-05-fangzheng-033-main describes 王大將軍 rebelling and reaching Stone Head (石頭), and the Liu annotation sfh1-ev-05-fangzheng-033-liu-annotation-001 explicitly names 王敦 as the person who 'came down' (既下) with the six armies defeated — directly connecting 王大將軍 to 王敦. The candidate evidence from data/aliases.json provides the alias 王大將軍 for 王敦. The hard veto c1 (explicit_identity_contradiction) is noted but no contradicting evidence is supplied in the proposal. The annotation explicitly identifies the rebel general as 王敦, confirming the identity.\"}]}",
+              "name": "submit_sfh1_adversarial_reviews"
+            },
+            "id": "call_00_7PfYuCzXpSEciz6RpTcN1094",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787980927,
+  "id": "ba362fe5-6485-492f-9b52-c4c9b6f19be6",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 1355,
+    "prompt_cache_hit_tokens": 512,
+    "prompt_cache_miss_tokens": 1430,
+    "prompt_tokens": 1942,
+    "prompt_tokens_details": {
+      "cached_tokens": 512
+    },
+    "total_tokens": 3297
+  }
+}

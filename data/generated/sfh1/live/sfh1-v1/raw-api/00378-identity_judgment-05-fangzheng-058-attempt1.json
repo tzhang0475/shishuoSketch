@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"judgments\": [{\"mention_id\": \"sfh1-mention-3869f168f34d4496301102ce\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-bafba77633a7051dc24a\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"title_reference\", \"contextual_identification\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [\"桓温\"], \"explanation\": \"桓公 is the honorific title for 桓温, who is explicitly named elsewhere in the same story (m7). The candidate 桓溫 matches this title reference.\"}, {\"mention_id\": \"sfh1-mention-6122280d8210119ab5228a1c\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-4f1c748cb6508aec20cf\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"explicit_name_match\"]}, {\"candidate_key\": \"c1\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-8f94eb8d68907b1062e6\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"explicit_name_match\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_ambiguous\", \"alternative_search_surfaces\": [], \"explanation\": \"Both c0 and c1 refer to 王坦之, the same person. The annotation explicitly names 王坦之. Both candidates are the same historical person, so the mention is supported but the two candidate keys are duplicates.\"}, {\"mention_id\": \"sfh1-mention-a1e7f6ca13930258f09f6401\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-candidate-evidence-54b65f265afd3b3b35f3\"], \"reason_types\": [\"wrong_person\"]}], \"preferred_candidate_key\": null, \"resolution\": \"candidate_missing\", \"alternative_search_surfaces\": [\"王坦之\"], \"explanation\": \"The annotation '王坦之王' indicates that 王 refers to 王坦之, not 王恭. The supplied candidate 王恭 is the wrong person. The correct referent 王坦之 is not among the supplied candidates.\"}, {\"mention_id\": \"sfh1-mention-a6375feed4702e37ee12cbc6\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-candidate-evidence-bf8ec83fe9d95c4af6a5\"], \"reason_types\": [\"wrong_person\"]}], \"preferred_candidate_key\": null, \"resolution\": \"candidate_missing\", \"alternative_search_surfaces\": [\"王文度之女\", \"王氏\"], \"explanation\": \"The 王 at the start of the main text refers to 王文度's daughter (a person of the Wang family), not 王恭. The supplied candidate 王恭 is incorrect. The correct referent is not among the supplied candidates.\"}, {\"mention_id\": \"sfh1-mention-a929a0bb008e4d07fd9e99c3\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-candidate-evidence-1abadc4abfef99060d49\"], \"reason_types\": [\"wrong_person\"]}], \"preferred_candidate_key\": null, \"resolution\": \"candidate_missing\", \"alternative_search_surfaces\": [\"王文度\", \"王述\"], \"explanation\": \"文度 is the courtesy name of 王文度 (王述), not 孫晷. The supplied candidate 孫晷 is incorrect. The correct referent 王文度/王述 is not among the supplied candidates.\"}, {\"mention_id\": \"sfh1-mention-ae9039f7fb9d0e806605747d\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-3bffb466e75e99257c5e\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"explicit_name_match\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [], \"explanation\": \"桓温 is explicitly named in the annotation, and the candidate 桓溫 matches this name.\"}, {\"mention_id\": \"sfh1-mention-ffbd0b3e70d7e41a3e00981f\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-c87687ddaea7304d0278\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"explicit_name_match\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [], \"explanation\": \"桓温 is explicitly named in the main text, and the candidate 桓溫 matches this name.\"}]}",
+              "name": "submit_sfh1_identity_judgments"
+            },
+            "id": "call_00_omyLOQCm4vV3ZIx40xuE8667",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787980986,
+  "id": "021b92c7-b6be-427b-886d-c01b378b79a4",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 1345,
+    "prompt_cache_hit_tokens": 640,
+    "prompt_cache_miss_tokens": 2321,
+    "prompt_tokens": 2961,
+    "prompt_tokens_details": {
+      "cached_tokens": 640
+    },
+    "total_tokens": 4306
+  }
+}

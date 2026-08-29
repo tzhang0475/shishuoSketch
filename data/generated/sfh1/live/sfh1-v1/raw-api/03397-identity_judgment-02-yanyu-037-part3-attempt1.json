@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"judgments\": [{\"mention_id\": \"sfh1-mention-9bcb7e413c7a5fee3e97dc73\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-02-yanyu-037-main\", \"sfh1-candidate-evidence-33ffe1e52ccf1099105d\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"canonical_name_match\", \"contextual_role_match\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [], \"explanation\": \"王敦 is the full name of Wang Dun, the main figure in the story. The candidate c0 is the existing person 王敦, matching the surface directly. The main text describes 王敦 as the elder brother of 含, consistent with the historical Wang Dun.\"}, {\"mention_id\": \"sfh1-mention-aca07f7a01770236ed5b6499\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-02-yanyu-037-liu-annotation-001\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"courtesy_name_match\", \"annotation_identity_assertion\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [], \"explanation\": \"處弘 is the courtesy name (字) of Wang Han (王含), as explicitly stated in the annotation '含字處弘琅邪臨沂'. The candidate c0 is the local candidate person 處弘, which is the correct referent for this courtesy name mention.\"}, {\"mention_id\": \"sfh1-mention-b93fa346b6ccb37a2dec906e\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-02-yanyu-037-liu-annotation-004\", \"sfh1-candidate-evidence-fa514af638c7aaac8305\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"abbreviated_name_match\", \"contextual_role_match\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [], \"explanation\": \"敦 in annotation-004 is an abbreviated reference to 王敦 (Wang Dun). The candidate c0 is the existing person 王敦, matching the abbreviated surface 敦. The annotation context '敦以劉隗為間' and '敦作逆' are consistent with Wang Dun's historical role.\"}, {\"mention_id\": \"sfh1-mention-c36c0b6416621610feaac377\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-02-yanyu-037-main\"], \"reason_types\": [\"wrong_referent\", \"honorific_target_mismatch\"]}], \"preferred_candidate_key\": null, \"resolution\": \"candidate_missing\", \"alternative_search_surfaces\": [\"王導\", \"明公\"], \"explanation\": \"尊體 is an honorific reference to the addressee's body/health, anchored to 明公 (the ruler, Wang Dao). The supplied candidate c0 is 劉琨 (Liu Kun), which is not the referent of this honorific. The honorific refers to Wang Dao (王導), who is not among the supplied candidates. The candidate set is missing the likely referent.\"}]}",
+              "name": "submit_sfh1_identity_judgments"
+            },
+            "id": "call_00_RkNtxoafALlnkIsmCWYe9596",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787998528,
+  "id": "dafb13c2-a76c-4eb5-be6c-09f43e7e3b61",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 899,
+    "prompt_cache_hit_tokens": 640,
+    "prompt_cache_miss_tokens": 2513,
+    "prompt_tokens": 3153,
+    "prompt_tokens_details": {
+      "cached_tokens": 640
+    },
+    "total_tokens": 4052
+  }
+}

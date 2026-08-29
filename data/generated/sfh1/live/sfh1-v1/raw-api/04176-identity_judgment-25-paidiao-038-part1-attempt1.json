@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"judgments\": [{\"mention_id\": \"sfh1-mention-05426fc0b755792d55944849\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-2504f1cd8e0b39e51d9a\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"courtesy_name_alias\", \"coreference\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [\"謝安\", \"安石\"], \"explanation\": \"The mention 謝 refers to 侍中謝公 (Xie An), whose courtesy name is 安石. The candidate 謝安 matches via the courtesy name alias registry. The narrative context (桓公既廢海西立簡文, 侍中謝公見桓公拜) confirms this is Xie An.\"}, {\"mention_id\": \"sfh1-mention-36f5d8c3f1b01b0e95e86fb0\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-2504f1cd8e0b39e51d9a\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"coreference\", \"courtesy_name_alias\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [\"謝安\", \"安石\"], \"explanation\": \"The pronoun 君 in 君拜於前 refers to Xie An (謝公) himself, who is speaking in his reply to Huan Wen. The candidate 謝安 matches via courtesy name 安石 and coreference with 侍中謝公.\"}, {\"mention_id\": \"sfh1-mention-5688b8b508f9c9767003b068\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-25-paidiao-038-liu-annotation-001\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"courtesy_name_alias\", \"source_annotation\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [\"海西公\", \"司馬奕\", \"奕\"], \"explanation\": \"The annotation states 海西公諱奕字延, so 延 is the courtesy name of 海西公 (Emperor Fei), whose personal name is 奕. The candidate 延 is the local person referenced by this courtesy name.\"}, {\"mention_id\": \"sfh1-mention-c5f3b79d4b67b52e26a894c5\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-25-paidiao-038-liu-annotation-001\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"source_annotation\", \"personal_name\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [\"海西公\", \"司馬奕\", \"奕\"], \"explanation\": \"The annotation states 齡成帝子也, identifying 齡 as the son of Emperor Cheng. The annotation also gives 海西公諱奕字延, and 齡 and 奕 refer to the same person (海西公). The candidate 齡 is the local person referenced.\"}]}",
+              "name": "submit_sfh1_identity_judgments"
+            },
+            "id": "call_00_N71V5tZ8iCsk6JqDlqdv0002",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787999620,
+  "id": "6836b265-220e-4caf-b6c9-e2633c8bddcd",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 879,
+    "prompt_cache_hit_tokens": 640,
+    "prompt_cache_miss_tokens": 2539,
+    "prompt_tokens": 3179,
+    "prompt_tokens_details": {
+      "cached_tokens": 640
+    },
+    "total_tokens": 4058
+  }
+}

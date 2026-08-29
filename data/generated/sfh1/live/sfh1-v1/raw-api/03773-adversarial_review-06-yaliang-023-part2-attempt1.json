@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"reviews\": [{\"mention_id\": \"sfh1-mention-b3221da9f7192b5be06fc6dc\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-8ce642bf3cf124381115\", \"sfh1-ev-06-yaliang-023-liu-annotation-002\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"name_match\", \"contextual_role\"], \"explanation\": \"The mention 温嶠 is a full personal name. The candidate evidence from data/people.json provides the canonical name 温嶠. The Liu annotation (sfh1-ev-06-yaliang-023-liu-annotation-002) explicitly states '亮於陳㰎三弟奔温嶠', confirming that 亮 and his three brothers fled to 温嶠, which matches the reference semantics describing 温嶠 as the destination of their flight. The name match is exact and the contextual role is consistent. No contradicting evidence exists. The distinct_from mentions (亮, the three brothers, 蘇峻) are all different individuals, and there is no ambiguity in this identification.\"}]}",
+              "name": "submit_sfh1_adversarial_reviews"
+            },
+            "id": "call_00_pVFIU3Guu1sHwyQD5YjE6918",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787999064,
+  "id": "3ffc8f3f-25a8-4edb-96de-2b98b29678c3",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 306,
+    "prompt_cache_hit_tokens": 512,
+    "prompt_cache_miss_tokens": 701,
+    "prompt_tokens": 1213,
+    "prompt_tokens_details": {
+      "cached_tokens": 512
+    },
+    "total_tokens": 1519
+  }
+}

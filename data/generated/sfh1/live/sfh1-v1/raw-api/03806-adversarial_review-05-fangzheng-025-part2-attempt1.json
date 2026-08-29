@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"reviews\": [\n  {\n    \"mention_id\": \"sfh1-mention-4351bac296138f41f9b748b8\",\n    \"candidate_key\": \"c0\",\n    \"verdict\": \"reject\",\n    \"supporting_evidence_ids\": [],\n    \"contradicting_evidence_ids\": [\"sfh1-ev-05-fangzheng-025-liu-annotation-005\"],\n    \"reason_types\": [\"office_holder_identity\"],\n    \"explanation\": \"The proposed resolution maps the office title 侍中 to 謝安. However, the annotation evidence (sfh1-ev-05-fangzheng-025-liu-annotation-005) explicitly states '父忱侍中' — that 忱 (羊忱, the father of 羊楷) held the office of 侍中. The reference semantics themselves identify the holder as 羊忱 (sfh1-mention-ddaebb349d04b83dcb78f61e), not 謝安. The candidate evidence (sfh1-candidate-evidence-eb8a5e6a0f93550e1ca6) merely contains the surface '侍中' with no connection to 謝安. There is no evidence that 謝安 held this office in this passage. The office holder is explicitly 羊忱 per the annotation. This is a clear office-holder identity mismatch.\"\n  },\n  {\n    \"mention_id\": \"sfh1-mention-4b6cc35c7f55d3ca6297ece3\",\n    \"candidate_key\": \"c0\",\n    \"verdict\": \"accept\",\n    \"supporting_evidence_ids\": [\"sfh1-ev-05-fangzheng-025-main\"],\n    \"contradicting_evidence_ids\": [],\n    \"reason_types\": [\"direct_name_match\"],\n    \"explanation\": \"The surface 蘇峻 is a full personal name directly matching the canonical name 蘇峻. The main text (sfh1-ev-05-fangzheng-025-main) states '亮子被蘇峻害' — Su Jun harmed 庾亮's son. This is a direct name match with clear contextual role support. The distinctness constraints from other named persons in the passage are consistent. Accept.\"\n  },\n  {\n    \"mention_id\": \"sfh1-mention-654ad433c8e6816a2ad8c432\",\n    \"candidate_key\": \"c1\",\n    \"verdict\": \"accept\",\n    \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-fd29b026a45552588f43\", \"sfh1-ev-05-fangzheng-025-main\"],\n    \"contradicting_evidence_ids\": [],\n    \"reason_types\": [\"alias_registry_match\", \"office_title_identity\"],\n    \"explanation\": \"The surface 王 is the surname component of the office title 王右軍 (Wang Youjun), which is a well-known alias for 王羲之 (Wang Xizhi). The alias registry evidence (sfh1-candidate-evidence-fd29b026a45552588f43) explicitly contains '謝太傅語王右軍曰' confirming the office title usage. The main text (sfh1-ev-05-fangzheng-025-main) also contains '於是王右軍往謝家看'. The reference semantics correctly identify this as an abbreviated reference coreferent with the full 王右軍 mention. The alias registry maps 王右軍 to 王羲之. Accept.\"\n  },\n  {\n    \"mention_id\": \"sfh1-mention-b149afbd0e9f5a6e96c83a01\",\n    \"candidate_key\": \"c0\",\n    \"verdict\": \"accept\",\n    \"supporting_evidence_ids\": [\"sfh1-ev-05-fangzheng-025-liu-annotation-002\", \"sfh1-ev-05-fangzheng-025-main\"],\n    \"contradicting_evidence_ids\": [],\n    \"reason_types\": [\"contextual_role_match\", \"name_match\"],\n    \"explanation\": \"The surface 庾亮 is a full personal name directly matching the canonical name 庾亮. The main text (sfh1-ev-05-fangzheng-025-main) states '諸葛恢大女適太尉庾亮兒' and '亮子被蘇峻害' — 庾亮's son was harmed by Su Jun. The Liu annotation (sfh1-ev-05-fangzheng-025-liu-annotation-002) confirms '庾氏譜曰庾亮子會娶恢女'. The name match is direct and the contextual role (father of the son harmed by Su Jun) is consistent with the historical 庾亮. Accept.\"\n  }\n]}",
+              "name": "submit_sfh1_adversarial_reviews"
+            },
+            "id": "call_00_kDT4GlsaTWAl2sVFQwJz2559",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787999106,
+  "id": "9f96a618-bddb-457e-b691-96e3c29951b8",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 1072,
+    "prompt_cache_hit_tokens": 512,
+    "prompt_cache_miss_tokens": 2475,
+    "prompt_tokens": 2987,
+    "prompt_tokens_details": {
+      "cached_tokens": 512
+    },
+    "total_tokens": 4059
+  }
+}

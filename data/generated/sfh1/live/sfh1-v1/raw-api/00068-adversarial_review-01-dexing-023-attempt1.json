@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"reviews\": [{\"mention_id\": \"sfh1-mention-a112d14ecbd9b184896d5a23\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-01-dexing-023-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"canonical_name_match\", \"contextual_fit\"], \"explanation\": \"The mention 樂廣 appears in the main text of the story, and the candidate evidence from data/people.json provides the canonical name 樂廣. The main text directly names 樂廣 as the person who laughs and says '名教中自有樂地何為乃爾也'. The surface form exactly matches the canonical name, and the context (a person commenting on the unrestrained behavior of 王平子 and 胡母彦國) is consistent with the historical figure 樂廣 being present in this anecdote. The supporting evidence sfh1-ev-01-dexing-023-main directly contains the mention in context, providing specific identity support.\"}, {\"mention_id\": \"sfh1-mention-ffb7babf87e03c21009f9eff\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-01-dexing-023-liu-annotation-002\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"canonical_name_match\", \"contextual_fit\"], \"explanation\": \"The mention 謝鯤 appears in Liu Xiaobiao's annotation (sfh1-ev-01-dexing-023-liu-annotation-002), which lists 謝鯤 among the '貴游子弟' (阮瞻, 王澄, 謝鯤, 胡母輔之) who followed the unrestrained behavior of 阮籍. The candidate evidence from data/people.json provides the canonical name 謝鯤, and the surface form exactly matches. The annotation context explicitly names 謝鯤 as one of the aristocratic youths who emulated 阮籍's libertine ways, which is consistent with the historical figure 謝鯤 (a well-known figure of the period known for such behavior). The supporting evidence directly contains the mention in a context that specifically identifies this individual.\"}]}",
+              "name": "submit_sfh1_adversarial_reviews"
+            },
+            "id": "call_00_WT7XDRdZae53tSrdkeUN4483",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787980782,
+  "id": "454fe1a2-148f-4017-8fb4-9ec3e07d345f",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 541,
+    "prompt_cache_hit_tokens": 512,
+    "prompt_cache_miss_tokens": 733,
+    "prompt_tokens": 1245,
+    "prompt_tokens_details": {
+      "cached_tokens": 512
+    },
+    "total_tokens": 1786
+  }
+}

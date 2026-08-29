@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"reviews\": [{\"mention_id\": \"sfh1-mention-8a0f7cf540eab768b3284b42\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-08-shangyu-013-main\", \"sfh1-candidate-evidence-16f21312d5b8a482a59a\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"contextual_identity\", \"name_match\"], \"explanation\": \"The mention 王戎 appears in the main text as the speaker who evaluates (目) 阮文業. The candidate evidence from data/people.json identifies 王戎 as a canonical person. The main text evidence sfh1-ev-08-shangyu-013-main directly contains the surface form 王戎 in the role of speaker/evaluator, which matches the canonical name. The reference semantics correctly identifies this as a direct person form with the speaker role, and the distinctness from the person being evaluated (阮文業) is properly noted. The name match is exact and the contextual role is consistent with the canonical person 王戎. No contradicting evidence exists.\"}]}",
+              "name": "submit_sfh1_adversarial_reviews"
+            },
+            "id": "call_00_cLTu5xFTABkfRqIhle0D3519",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787989465,
+  "id": "ccec1b34-3ffa-43bd-9174-36655071010d",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 299,
+    "prompt_cache_hit_tokens": 512,
+    "prompt_cache_miss_tokens": 723,
+    "prompt_tokens": 1235,
+    "prompt_tokens_details": {
+      "cached_tokens": 512
+    },
+    "total_tokens": 1534
+  }
+}

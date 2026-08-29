@@ -1,0 +1,162 @@
+{
+  "candidate_only": true,
+  "canonical_write_back": false,
+  "identity": {
+    "candidate_person_count": 542,
+    "existing_persons_recovered": 56,
+    "failure_attribution": {
+      "candidate_recall_failure": 414,
+      "identity_evidence_insufficient": 78,
+      "provider_failure": 15,
+      "reference_semantics_uncertain": 915,
+      "reviewer_rejection": 6
+    },
+    "final_states": {
+      "genuinely_unresolved": 483,
+      "local_candidate_resolved": 597,
+      "non_person": 73,
+      "review_required": 945,
+      "stable_entity_resolved": 599,
+      "structural_reference": 606
+    }
+  },
+  "mentions": {
+    "anonymous_person_references_per_story": 3.234043,
+    "entity_kinds": {
+      "collective_person_reference": 363,
+      "non_person": 73,
+      "person": 2867
+    },
+    "mentions_per_story": 17.569149,
+    "person_mentions": 3230,
+    "person_mentions_per_story": 17.180851,
+    "rejected": 86,
+    "validated": 3303
+  },
+  "model": "deepseek-v4-flash",
+  "old_new": {
+    "counts": {
+      "ambiguous": 2,
+      "boundary_too_long": 7,
+      "exact_correct": 27,
+      "missed_multiple_mentions": 8
+    },
+    "old_boundary_error_rate": 0.340909,
+    "old_non_person_contamination_rate": 0.0,
+    "old_target_count": 44,
+    "old_target_precision": 0.613636
+  },
+  "provider": {
+    "by_stage": {
+      "adversarial_review": {
+        "cache_hits": 110,
+        "calls": 439,
+        "completion_tokens": 358288,
+        "max_latency_seconds": 10.056,
+        "median_latency_seconds": 6.321,
+        "parse_failures": 0,
+        "prompt_tokens": 991777,
+        "provider_failures": 0,
+        "retries": 5,
+        "total_tokens": 1350065,
+        "truncations": 9
+      },
+      "identity_judgment": {
+        "cache_hits": 88,
+        "calls": 686,
+        "completion_tokens": 713968,
+        "max_latency_seconds": 14.765,
+        "median_latency_seconds": 6.123,
+        "parse_failures": 4,
+        "prompt_tokens": 2357728,
+        "provider_failures": 50,
+        "retries": 65,
+        "total_tokens": 3071696,
+        "truncations": 67
+      },
+      "mention_reading": {
+        "cache_hits": 347,
+        "calls": 529,
+        "completion_tokens": 657413,
+        "max_latency_seconds": 37.818,
+        "median_latency_seconds": 0.01,
+        "parse_failures": 10,
+        "prompt_tokens": 305086,
+        "provider_failures": 283,
+        "retries": 182,
+        "total_tokens": 962499,
+        "truncations": 62
+      },
+      "reference_semantics": {
+        "cache_hits": 204,
+        "calls": 1772,
+        "completion_tokens": 3447485,
+        "max_latency_seconds": 19.868,
+        "median_latency_seconds": 11.733,
+        "parse_failures": 1,
+        "prompt_tokens": 5069176,
+        "provider_failures": 243,
+        "retries": 447,
+        "total_tokens": 8516661,
+        "truncations": 602
+      },
+      "temporal_semantics": {
+        "cache_hits": 224,
+        "calls": 661,
+        "completion_tokens": 346975,
+        "max_latency_seconds": 13.007,
+        "median_latency_seconds": 0.019,
+        "parse_failures": 0,
+        "prompt_tokens": 348828,
+        "provider_failures": 299,
+        "retries": 191,
+        "total_tokens": 695803,
+        "truncations": 75
+      }
+    },
+    "cache_hits": 973,
+    "calls": 4087,
+    "completion_tokens": 5524129,
+    "live_incomplete": true,
+    "max_latency_seconds": 37.818,
+    "median_latency_seconds": 7.809,
+    "model": "deepseek-v4-flash",
+    "parse_failures": 15,
+    "pending_stage_story_counts": {
+      "identity_judgments": 0,
+      "reference_semantics": 1,
+      "reviews": 0,
+      "temporal": 0,
+      "validated_mentions": 2
+    },
+    "prompt_tokens": 9072595,
+    "provider_failures": 875,
+    "retries": 890,
+    "total_tokens": 14596724,
+    "truncations": 815
+  },
+  "relations": {
+    "complete_endpoints": 574,
+    "rejected": 40,
+    "validated": 2219
+  },
+  "run_id": "sfh1-v1",
+  "safety": {
+    "candidate_only": true,
+    "canonical_write_back": false,
+    "forbidden_stable_resolutions": 0,
+    "known_boundary_failures": 0,
+    "pending_provider_controls": 0
+  },
+  "schema": "sfh1-metrics-v1",
+  "scope": {
+    "production_story_count": 143,
+    "story_count": 188,
+    "wave_a_story_count": 20,
+    "wave_b_story_count": 24
+  },
+  "temporal": {
+    "provider_failures": 0,
+    "validated": 1295
+  }
+}

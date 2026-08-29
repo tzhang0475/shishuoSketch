@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"reviews\": [{\"mention_id\": \"sfh1-mention-6d4c00f4033c55260260b09d\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-02-yanyu-079-liu-annotation-001\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"direct_name_match\"], \"explanation\": \"The mention 徐廣 appears in the Liu annotation (sfh1-ev-02-yanyu-079-liu-annotation-001) as the author of 晉紀, cited in the phrase '徐廣晉紀曰'. The candidate evidence (sfh1-candidate-evidence-25b2f1fbebcebb6ee686) from people.json provides the canonical person 徐廣. The annotation explicitly names 徐廣 as the author of 晉紀, which directly matches the candidate's identity. The reference semantics indicate this is a direct person form with high confidence, and the distinct_from mentions are other figures in the same annotation context (庾道季, 庾龢, etc.) who are clearly different people. The supporting evidence specifically identifies 徐廣 as the author of 晉紀, which is sufficient to establish identity.\"}, {\"mention_id\": \"sfh1-mention-eeea046fef22b91eb0f0477f\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-02-yanyu-079-liu-annotation-004\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"direct_name_match\"], \"explanation\": \"The mention 杜預 appears in the Liu annotation (sfh1-ev-02-yanyu-079-liu-annotation-004) in the phrase '杜預曰示必死', where 杜預 is cited as a commentator explaining the phrase 濟河焚舟. The candidate evidence (sfh1-candidate-evidence-86afed0b72aadf802100) from people.json provides the canonical person 杜預. The annotation explicitly names 杜預 as the commentator, which directly matches the candidate's identity. The reference semantics indicate this is a direct person form with high confidence, and the distinct_from mention (秦伯) is clearly a different person. The supporting evidence specifically identifies 杜預 as the commentator, which is sufficient to establish identity.\"}]}",
+              "name": "submit_sfh1_adversarial_reviews"
+            },
+            "id": "call_00_PNfTlvqdSZjuyZRSgNBk5120",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787997432,
+  "id": "f5db392a-7212-4278-9d79-96bdcef1c60b",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 568,
+    "prompt_cache_hit_tokens": 512,
+    "prompt_cache_miss_tokens": 1055,
+    "prompt_tokens": 1567,
+    "prompt_tokens_details": {
+      "cached_tokens": 512
+    },
+    "total_tokens": 2135
+  }
+}

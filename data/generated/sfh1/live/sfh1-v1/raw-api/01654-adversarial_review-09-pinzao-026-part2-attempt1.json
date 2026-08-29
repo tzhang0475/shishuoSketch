@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"reviews\": [{\"mention_id\": \"sfh1-mention-dc060b56e574e52e1dc3d8d5\", \"candidate_key\": \"c0\", \"verdict\": \"reject\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-9bc8a193581e32796eaa\"], \"contradicting_evidence_ids\": [\"sfh1-ev-09-pinzao-026-main\", \"sfh1-ev-09-pinzao-026-liu-annotation-001\"], \"reason_types\": [\"reference_semantics_uncertain\", \"candidate_only_mention\", \"insufficient_identity_evidence\"], \"explanation\": \"The proposed resolution identifies 何次道 as 何充 based solely on an alias registry match (surname + courtesy name). However, the reference semantics for this mention are explicitly 'uncertain' with 'candidate_only' status and low confidence — no semantic record was returned and the system failed closed. The candidate evidence (sfh1-candidate-evidence-9bc8a193581e32796eaa) is from a different source (aliases.json) and does not directly connect to this specific mention in the 品藻 chapter. The source evidence for this story (sfh1-ev-09-pinzao-026-main and its Liu annotations) discusses 何次道 in the context of 王丞相's remarks about 謝仁祖, but does not explicitly identify 何次道 as 何充. While the Liu annotation mentions '王公重何充', this is a separate reference and does not establish that the 何次道 in this specific passage is the same person as 何充. The alias match alone is compatible but not sufficient evidence for identity resolution, especially given the explicitly uncertain reference semantics. This should be rejected or flagged for review.\"}]}",
+              "name": "submit_sfh1_adversarial_reviews"
+            },
+            "id": "call_00_coj30TKQ2eF1WnXdg8d41845",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787989809,
+  "id": "5552863a-bfe7-47b7-9ff5-486b36e8bdda",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 437,
+    "prompt_cache_hit_tokens": 512,
+    "prompt_cache_miss_tokens": 612,
+    "prompt_tokens": 1124,
+    "prompt_tokens_details": {
+      "cached_tokens": 512
+    },
+    "total_tokens": 1561
+  }
+}

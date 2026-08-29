@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"records\": [{\"mention_id\": \"sfh1-mention-6a9bf15df7303662dc47c77d\", \"semantic_type\": \"descriptive_person_reference\", \"referent_role\": \"messenger\", \"anchor_mentions\": [\"sfh1-mention-067ee13abbcfbeb30a9dee62\"], \"holder_mentions\": [], \"patron_or_possessor_mentions\": [\"sfh1-mention-dfd6e413daea4befb10378c3\"], \"coreference_with\": [\"sfh1-mention-067ee13abbcfbeb30a9dee62\"], \"distinct_from\": [\"sfh1-mention-92c9d6bfe6f5902e31d8479b\", \"sfh1-mention-dfd6e413daea4befb10378c3\"], \"semantic_relations\": [{\"type\": \"social\", \"subject_mention_id\": \"sfh1-mention-6a9bf15df7303662dc47c77d\", \"object_mention_id\": \"sfh1-mention-dfd6e413daea4befb10378c3\", \"predicate_surface\": \"郗信\", \"evidence_id\": \"sfh1-ev-06-yaliang-019-main\"}], \"confidence\": \"high\", \"explanation\": \"郗信 refers to the messenger (門生) sent by 郗太傅. It is a descriptive reference to the same person as 門生, with 郗太傅 as the patron who sent him.\"}, {\"mention_id\": \"sfh1-mention-270e4131ed9b8ef978ef7d8d\", \"semantic_type\": \"local_anaphoric_reference\", \"referent_role\": \"addressee (王丞相)\", \"anchor_mentions\": [\"sfh1-mention-92c9d6bfe6f5902e31d8479b\"], \"holder_mentions\": [], \"patron_or_possessor_mentions\": [], \"coreference_with\": [\"sfh1-mention-92c9d6bfe6f5902e31d8479b\"], \"distinct_from\": [\"sfh1-mention-6a9bf15df7303662dc47c77d\", \"sfh1-mention-dfd6e413daea4befb10378c3\"], \"semantic_relations\": [{\"type\": \"speech\", \"subject_mention_id\": \"sfh1-mention-92c9d6bfe6f5902e31d8479b\", \"object_mention_id\": \"sfh1-mention-6a9bf15df7303662dc47c77d\", \"predicate_surface\": \"君往東廂任意選之\", \"evidence_id\": \"sfh1-ev-06-yaliang-019-main\"}], \"confidence\": \"high\", \"explanation\": \"君 is the pronoun used by 王丞相 (the speaker) addressing the messenger (郗信/門生). It refers to the addressee, the messenger, not to 王丞相 himself. Wait - re-reading: 丞相語郗信君往東廂任意選之. The 丞相 speaks to 郗信 saying 'you go to the east wing and choose freely'. So 君 refers to the messenger (郗信/門生).\"}, {\"mention_id\": \"sfh1-mention-a40c5bc64134e77ab94b3765\", \"semantic_type\": \"descriptive_person_reference\", \"referent_role\": \"collective of Wang family sons\", \"anchor_mentions\": [], \"holder_mentions\": [], \"patron_or_possessor_mentions\": [\"sfh1-mention-92c9d6bfe6f5902e31d8479b\"], \"coreference_with\": [], \"distinct_from\": [\"sfh1-mention-2d4d8aa5062dfd76d72f02e6\"], \"semantic_relations\": [{\"type\": \"co_presence\", \"subject_mention_id\": \"sfh1-mention-a40c5bc64134e77ab94b3765\", \"object_mention_id\": \"sfh1-mention-2d4d8aa5062dfd76d72f02e6\", \"predicate_surface\": \"王家諸郎...唯有一郎\", \"evidence_id\": \"sfh1-ev-06-yaliang-019-main\"}], \"confidence\": \"high\", \"explanation\": \"王家諸郎 is a collective descriptive reference to the sons of the Wang family (王丞相's family). 一郎 is one member of this group, so they are related but distinct (the one is a subset of the many).\"}, {\"mention_id\": \"sfh1-mention-2d4d8aa5062dfd76d72f02e6\", \"semantic_type\": \"descriptive_person_reference\", \"referent_role\": \"one specific Wang son (逸少/王羲之)\", \"anchor_mentions\": [], \"holder_mentions\": [], \"patron_or_possessor_mentions\": [\"sfh1-mention-92c9d6bfe6f5902e31d8479b\"], \"coreference_with\": [\"sfh1-mention-65124b120e824c24150eda05\", \"sfh1-mention-060e6378708547a2e520cfa1\"], \"distinct_from\": [\"sfh1-mention-a40c5bc64134e77ab94b3765\"], \"semantic_relations\": [{\"type\": \"co_presence\", \"subject_mention_id\": \"sfh1-mention-2d4d8aa5062dfd76d72f02e6\", \"object_mention_id\": \"sfh1-mention-a40c5bc64134e77ab94b3765\", \"predicate_surface\": \"唯有一郎在東牀上坦腹卧\", \"evidence_id\": \"sfh1-ev-06-yaliang-019-main\"}, {\"type\": \"comparison\", \"subject_mention_id\": \"sfh1-mention-2d4d8aa5062dfd76d72f02e6\", \"object_mention_id\": \"sfh1-mention-a40c5bc64134e77ab94b3765\", \"predicate_surface\": \"唯有一郎...如不聞\", \"evidence_id\": \"sfh1-ev-06-yaliang-019-main\"}], \"confidence\": \"high\", \"explanation\": \"一郎 refers to the one specific son who was lying on the east bed, which is later identified as 逸少 (王羲之). It corefers with 逸少 and the annotation's 逸少羲之. It is distinct from the collective 王家諸郎 as it is the singled-out one among them.\"}]}",
+              "name": "submit_sfh1_reference_semantics"
+            },
+            "id": "call_00_JJ9YVl77tG1w4ocmYzCf8491",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787999037,
+  "id": "efd98efb-1c5f-427b-96c9-aa68ac4b48ed",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 1559,
+    "prompt_cache_hit_tokens": 1024,
+    "prompt_cache_miss_tokens": 1260,
+    "prompt_tokens": 2284,
+    "prompt_tokens_details": {
+      "cached_tokens": 1024
+    },
+    "total_tokens": 3843
+  }
+}

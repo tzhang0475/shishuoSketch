@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"reviews\": [{\"mention_id\": \"sfh1-mention-d9a098c89307001d3de4373b\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-d3cd0cc00d3c488df49f\", \"sfh1-ev-07-shijian-019-main\", \"sfh1-ev-07-shijian-019-liu-annotation-005\", \"sfh1-ev-07-shijian-019-liu-annotation-006\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"contextual_identity\", \"orthographic_variant_match\", \"explicit_identity_assertion\"], \"explanation\": \"The main text explicitly states 共議用桓温, and the Liu annotation (sfh1-ev-07-shijian-019-liu-annotation-005) explicitly says 議者欲以授桓温時簡...刺史桓温爲安西將軍荆州刺史, confirming that 桓温 is the person being discussed for the 荆州刺史 appointment. The alias evidence (sfh1-candidate-evidence-d3cd0cc00d3c488df49f) provides biographical context about 桓温 (王掾, 大司馬掾) consistent with the historical figure. The mention is the full-name surface form 桓温 in the main text, and the surrounding discourse (劉尹 saying 使伊去必能克定) confirms this is the person being appointed. No contradicting evidence exists.\"}, {\"mention_id\": \"sfh1-mention-e88537b92843d6ba5c81ba41\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-0417a1cd0cb035ab3d15\", \"sfh1-ev-07-shijian-019-liu-annotation-005\", \"sfh1-ev-07-shijian-019-liu-annotation-006\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"contextual_identity\", \"personal_name_match\", \"explicit_identity_assertion\"], \"explanation\": \"This mention is the single-character surface 温 appearing in the Liu annotation. The annotation text (sfh1-ev-07-shijian-019-liu-annotation-005) reads 議者欲以授桓温時簡...刺史桓温爲安西將軍荆州刺史, and annotation-006 reads 温去必能定西楚, both explicitly referring to 桓温 by the single character 温. The candidate evidence (sfh1-candidate-evidence-0417a1cd0cb035ab3d15) is the annotation text itself containing 温 as a personal-name reference to 桓温. The context of the annotation discussing the appointment to 荆州刺史 matches the main text's 共議用桓温. While the reference_semantics record shows low confidence due to a failed semantic lookup, the annotation text itself provides explicit identity assertion linking 温 to 桓温. No contradicting evidence exists.\"}]}",
+              "name": "submit_sfh1_adversarial_reviews"
+            },
+            "id": "call_00_dZ2s3E5jZCQs6vRkoyeQ3408",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787989515,
+  "id": "e877e14b-c388-4cfb-b74f-e2cf87de90d1",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 721,
+    "prompt_cache_hit_tokens": 512,
+    "prompt_cache_miss_tokens": 1483,
+    "prompt_tokens": 1995,
+    "prompt_tokens_details": {
+      "cached_tokens": 512
+    },
+    "total_tokens": 2716
+  }
+}

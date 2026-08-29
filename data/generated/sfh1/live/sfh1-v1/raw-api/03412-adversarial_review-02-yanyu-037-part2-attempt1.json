@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"reviews\": [{\"mention_id\": \"sfh1-mention-4ac0c0be460e2cb86b95f9ad\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-02-yanyu-037-main\", \"sfh1-ev-02-yanyu-037-liu-annotation-002\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"abbreviated_name_match\", \"contextual_identity\"], \"explanation\": \"The mention '敦' is an abbreviated reference to 王敦 (Wang Dun). The main text opens with '王敦兄含' establishing Wang Dun as the subject, and the annotation-002 explicitly states '敦作逆' (Dun committed rebellion), matching the narrative context. The surface form '敦' is the standard abbreviation of 王敦, and the contextual role as the rebel figure aligns with the main text's narrative. No contradicting evidence exists.\"}, {\"mention_id\": \"sfh1-mention-7f82dcecdf9c9f587fa8ce40\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-02-yanyu-037-liu-annotation-004\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"canonical_name_match\", \"contextual_identity\"], \"explanation\": \"The mention '王導' is a full name reference to Wang Dao. The annotation-004 explicitly states '王導恊贊中興' (Wang Dao assisted the restoration), and annotation-005 states '導從兄敦' (Dao's elder cousin Dun), establishing Wang Dao's identity and his relationship to Wang Dun. The full name form is unambiguous. The reference semantics correctly identifies distinctness from 敦 (Wang Dun) and 劉隗 (Liu Wei).\"}, {\"mention_id\": \"sfh1-mention-9bcb7e413c7a5fee3e97dc73\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-02-yanyu-037-main\", \"sfh1-ev-02-yanyu-037-liu-annotation-004\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"canonical_name_match\", \"contextual_role_match\"], \"explanation\": \"The mention '王敦' is the full name of Wang Dun, the central figure of the story. The main text opens with '王敦兄含' establishing him as the elder brother of 含 (Wang Han). Annotation-004 confirms '敦以劉隗為間' (Dun used Liu Wei as a wedge), and annotation-005 confirms '導從兄敦舉兵討劉隗' (Dao's elder cousin Dun raised troops against Liu Wei). The full name form is unambiguous and the contextual role matches perfectly.\"}, {\"mention_id\": \"sfh1-mention-b93fa346b6ccb37a2dec906e\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-02-yanyu-037-main\", \"sfh1-ev-02-yanyu-037-liu-annotation-004\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"abbreviated_name_match\", \"contextual_role_match\"], \"explanation\": \"The mention '敦' in annotation-004 is an abbreviated reference to 王敦 (Wang Dun). The annotation text '敦以劉隗為間' (Dun used Liu Wei as a wedge) directly parallels the main text's narrative about Wang Dun's rebellion. The full name '王敦' appears in the main text, and the abbreviation '敦' is the standard short form. The reference semantics correctly identifies coreference with the full-name mention and distinctness from 王導 and 劉隗.\"}]}",
+              "name": "submit_sfh1_adversarial_reviews"
+            },
+            "id": "call_00_TpDyzwvrTtwwSHIEFcIT2078",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787998544,
+  "id": "976a5109-ef0a-4d7d-b0c6-44d72ea723d7",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 903,
+    "prompt_cache_hit_tokens": 512,
+    "prompt_cache_miss_tokens": 2208,
+    "prompt_tokens": 2720,
+    "prompt_tokens_details": {
+      "cached_tokens": 512
+    },
+    "total_tokens": 3623
+  }
+}

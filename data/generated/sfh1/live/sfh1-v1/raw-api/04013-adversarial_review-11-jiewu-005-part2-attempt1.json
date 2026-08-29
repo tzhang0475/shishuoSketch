@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"reviews\": [{\"mention_id\": \"sfh1-mention-8893c4c205365f2fefa086c1\", \"candidate_key\": \"c0\", \"verdict\": \"reject\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-11-jiewu-005-main\"], \"reason_types\": [\"insufficient_evidence\", \"ambiguous_surface\"], \"explanation\": \"The mention surface is simply '王' (Wang), a bare surname. The candidate evidence is 'sfh1-candidate-evidence-847eb0ec202b325131e1' which contains only the character '王' from source 'hng2c1-shishuo-06-yaliang-041-main' — a different story entirely. The supporting evidence cited (sfh1-ev-11-jiewu-005-main) does not contain the surface '王' as a standalone reference to 王恭. In the main text of 11-jiewu-005, the only surname-only '王' reference would be ambiguous among 王敦, 王導, and potentially others. There is no evidence in the supplied source that this bare '王' refers to 王恭 specifically. The reference semantics explicitly state 'No valid semantic record was returned; fail closed' with low confidence. This resolution cannot be supported by the supplied evidence.\"}, {\"mention_id\": \"sfh1-mention-8f0a59a35bb41ff965912fdc\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-11-jiewu-005-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"full_name_match\", \"contextual_identity\"], \"explanation\": \"The surface '王導' is a full personal name matching the candidate 王導. In the main text of 11-jiewu-005, 王導 appears explicitly: '王導須吏至徒跣下地謝曰天威在顔遂使温嶠不容得謝'. The context clearly identifies 王導 as the high-ranking official who arrives and apologizes to the emperor, consistent with the historical figure Wang Dao. The reference semantics confirm high confidence, direct person form, and distinctness from 温嶠, 王敦, the clerk, and the emperor. The full name match plus contextual role in the same story provides sufficient evidence for identity.\"}, {\"mention_id\": \"sfh1-mention-ccf2b1c6ee6c7d146d8109af\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-11-jiewu-005-main\", \"sfh1-ev-11-jiewu-005-liu-annotation-002\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"personal_name_abbreviation\", \"contextual_identity\"], \"explanation\": \"The surface '敦' is an abbreviated personal name for 王敦. The Liu annotation (sfh1-ev-11-jiewu-005-liu-annotation-002) explicitly states '敦將至嶠燒朱雀橋以阻其兵', using '敦' as the abbreviated name for 王敦. The main text (sfh1-ev-11-jiewu-005-main) opens with '王敦引軍垂至大桁', establishing 王敦 as the figure whose army approaches. The annotation's '敦' clearly refers to the same person. The reference semantics confirm coreference with the full-name mention and high confidence. The hard veto from c1 (explicit identity contradiction) is not substantiated by any supplied evidence contradicting this identification.\"}, {\"mention_id\": \"sfh1-mention-eec5cb5a6f9c58905f9b01e9\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-11-jiewu-005-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"office_title_holder\", \"contextual_identity\"], \"explanation\": \"The surface '丹陽尹' is the office title of 温嶠. The main text (sfh1-ev-11-jiewu-005-main) explicitly states '温嶠為丹陽尹', directly establishing that 温嶠 holds this office. The mention is an office-holder reference where the office title stands for the person holding it. The reference semantics confirm this with high confidence, identifying 温嶠 as the holder. The hard veto from c1 (explicit identity contradiction) is not supported by any supplied contradicting evidence. The office title holder relationship is explicitly stated in the source text, providing sufficient evidence for identity.\"}]}",
+              "name": "submit_sfh1_adversarial_reviews"
+            },
+            "id": "call_00_P1dMPRwoCH3x4G8UXwXH2930",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787999387,
+  "id": "f5e16b07-25ff-402f-bb2b-39a3e05f3abe",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 1079,
+    "prompt_cache_hit_tokens": 512,
+    "prompt_cache_miss_tokens": 2049,
+    "prompt_tokens": 2561,
+    "prompt_tokens_details": {
+      "cached_tokens": 512
+    },
+    "total_tokens": 3640
+  }
+}

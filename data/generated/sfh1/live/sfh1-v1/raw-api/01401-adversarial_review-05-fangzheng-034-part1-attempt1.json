@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"reviews\": [{\"mention_id\": \"sfh1-mention-14781a7673e50f18f45c5aed\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-d52c69e4c4bdff5f74e8\", \"sfh1-ev-05-fangzheng-034-main\", \"sfh1-ev-05-fangzheng-034-liu-annotation-001\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"canonical_name_match\", \"historical_context\"], \"explanation\": \"The main text opens with 蘇峻既至石頭百僚奔散, and the Liu annotation explicitly identifies 蘇峻 as 峻字子高長廣掖人, matching the candidate's biographical details. The candidate evidence from people.json provides the canonical name 蘇峻. The annotation confirms this is the historical 蘇峻 (Su Jun), the rebel general who reached Stone City. No contradicting evidence exists.\"}, {\"mention_id\": \"sfh1-mention-8ec1f287685e5cedf5649782\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-438fa2d4aa427fe94d70\", \"sfh1-ev-05-fangzheng-034-liu-annotation-001\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"author_of_cited_work\", \"canonical_name_match\"], \"explanation\": \"The Liu annotation cites 王隱晉書 as the source for the biographical note on 蘇峻. The candidate 王隱 is the known author of the 晉書 (Jin Shu). The annotation explicitly attributes the quoted text to 王隱晉書, confirming that 王隱 is the author referenced. The candidate evidence from people.json provides the canonical name 王隱. No contradicting evidence exists.\"}, {\"mention_id\": \"sfh1-mention-ef0f523b0b862a3d77aa66c7\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-4f1dcb42b99997c1c3ca\", \"sfh1-ev-05-fangzheng-034-liu-annotation-001\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"biographical_alias\", \"courtesy_name_match\"], \"explanation\": \"The surface form 子高 is the courtesy name of 蘇峻. The Liu annotation explicitly states 峻字子高, confirming that 子高 is the courtesy name (字) of 蘇峻. The alias registry evidence provides the full biographical entry for 蘇峻 including his courtesy name 子高. The annotation and alias evidence together confirm this identification. No contradicting evidence exists.\"}]}",
+              "name": "submit_sfh1_adversarial_reviews"
+            },
+            "id": "call_00_weeEqzommPYf58BMswPd0465",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787989117,
+  "id": "27e87c67-245d-4b0e-b93e-60d635f15892",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 686,
+    "prompt_cache_hit_tokens": 512,
+    "prompt_cache_miss_tokens": 1606,
+    "prompt_tokens": 2118,
+    "prompt_tokens_details": {
+      "cached_tokens": 512
+    },
+    "total_tokens": 2804
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"judgments\": [{\"mention_id\": \"sfh1-mention-44dde9f22171ff91ca36c799\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-23-rendan-038-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"canonical_name_match\", \"contextual_fit\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [], \"explanation\": \"謝安 is mentioned in the story as a person asked about by 劉遺民. The candidate c0 is the existing person 謝安, matching the canonical name directly. The context of the story (桓車騎, 張玄, 劉遺民 in the Eastern Jin period) is consistent with the historical 謝安.\"}, {\"mention_id\": \"sfh1-mention-bf88617c03b4825eb5b5a9df\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-23-rendan-038-main\"], \"reason_types\": [\"office_title_mismatch\", \"wrong_person\"]}], \"preferred_candidate_key\": null, \"resolution\": \"candidate_missing\", \"alternative_search_surfaces\": [\"張玄\", \"張玄之\"], \"explanation\": \"The mention 侍中 refers to the office title held by 張玄, who is the person being visited by 劉遺民 in this story. The candidate c0 is 謝安, which is a different person. The text clearly states '張玄為侍中' — 張玄 held the office of 侍中. The supplied candidate set lacks 張玄, so the correct referent is missing.\"}]}",
+              "name": "submit_sfh1_identity_judgments"
+            },
+            "id": "call_00_n4ZThk6DLpIH4w8OG1Xi3406",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787981667,
+  "id": "bc327af4-41f3-48c2-b8a2-b4f15637b11b",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 472,
+    "prompt_cache_hit_tokens": 1408,
+    "prompt_cache_miss_tokens": 76,
+    "prompt_tokens": 1484,
+    "prompt_tokens_details": {
+      "cached_tokens": 1408
+    },
+    "total_tokens": 1956
+  }
+}

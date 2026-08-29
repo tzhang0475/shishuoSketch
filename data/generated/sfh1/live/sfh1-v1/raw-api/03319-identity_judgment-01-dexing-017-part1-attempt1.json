@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"judgments\": [{\"mention_id\": \"sfh1-mention-2478f23c2249f9a1e5c222be\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-01-dexing-017-main\"], \"reason_types\": [\"wrong_person\"]}, {\"candidate_key\": \"c1\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-01-dexing-017-main\", \"sfh1-ev-01-dexing-017-liu-annotation-001\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"name_match\", \"contextual_coreference\"]}], \"preferred_candidate_key\": \"c1\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [\"王戎\"], \"explanation\": \"The mention '王' at the start of the main text is the surname of 王戎, as the full name 王戎 appears at the beginning of the story. The main text explicitly pairs 王戎 with 和嶠. Candidate c1 (王戎) is the correct referent. Candidate c0 (王恭) is a different person and contradicts the context.\"}, {\"mention_id\": \"sfh1-mention-2fa1b8aef5a8166c823f7a71\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-01-dexing-017-liu-annotation-001\"], \"reason_types\": [\"wrong_person\"]}, {\"candidate_key\": \"c1\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-01-dexing-017-liu-annotation-001\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"name_match\", \"explicit_identification\"]}], \"preferred_candidate_key\": \"c1\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [\"王戎\"], \"explanation\": \"The mention '戎' in the Liu annotation '戎字濬沖琅邪人太保祥宗族' is the personal name of 王戎. The annotation explicitly identifies 戎 as having courtesy name 濬沖, which is 王戎's courtesy name. Candidate c1 (王戎) is correct. Candidate c0 (王恭) is a different person.\"}, {\"mention_id\": \"sfh1-mention-3b2355cc02324d74354bad39\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-01-dexing-017-liu-annotation-001\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"alias_match\", \"explicit_identification\"]}, {\"candidate_key\": \"c1\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-01-dexing-017-liu-annotation-001\"], \"reason_types\": [\"wrong_person\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [\"王戎\"], \"explanation\": \"The mention '濬沖' is the courtesy name of 王戎, as stated in the annotation '戎字濬沖琅邪人太保祥宗族'. Candidate c0 (王戎) matches via the courtesy name alias 濬沖. Candidate c1 (王恭) is a different person and contradicts.\"}, {\"mention_id\": \"sfh1-mention-3b4478821178f5b92f52b2ba\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-01-dexing-017-liu-annotation-005\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"name_match\", \"explicit_identification\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [\"劉毅\"], \"explanation\": \"The mention '仲雄' is the courtesy name of 劉毅 (Liu Yi), as stated in the annotation '王隱晉書曰劉毅字仲雄東萊掖人'. Candidate c0 (仲雄) is the local candidate person representing Liu Yi. This is correctly supported by the annotation evidence.\"}]}",
+              "name": "submit_sfh1_identity_judgments"
+            },
+            "id": "call_00_F542Irr5QMWOxmRh2jB27431",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787998418,
+  "id": "731ad923-a290-42fe-b1cf-d4cc282de7df",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 1095,
+    "prompt_cache_hit_tokens": 640,
+    "prompt_cache_miss_tokens": 3557,
+    "prompt_tokens": 4197,
+    "prompt_tokens_details": {
+      "cached_tokens": 640
+    },
+    "total_tokens": 5292
+  }
+}

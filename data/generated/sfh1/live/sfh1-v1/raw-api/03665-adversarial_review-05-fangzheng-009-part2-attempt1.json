@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"reviews\": [{\"mention_id\": \"sfh1-mention-9539fbd00666e01ae9ea581a\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-05-fangzheng-009-main\", \"sfh1-ev-05-fangzheng-009-liu-annotation-001\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"canonical_name_match\", \"contextual_role_match\", \"coreference_chain\"], \"explanation\": \"The mention '嶠' is a short-form reference to 和嶠. The main text explicitly introduces 和嶠 at the start of the sentence ('和嶠爲武帝所親重語嶠曰'), establishing that 嶠 refers to 和嶠. The annotation '嶠字長輿' confirms the identity. The reference semantics indicate coreference with the anchor mention f8b67a0326d248e3487e6056 (和嶠). The evidence directly supports this identity resolution.\"}, {\"mention_id\": \"sfh1-mention-a42137dd36b55003568309b0\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-05-fangzheng-009-liu-annotation-008\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"canonical_name_match\", \"contextual_role_match\"], \"explanation\": \"The mention '孫盛' refers to the historian Sun Sheng, author of the 晉陽秋 chronicle. The annotation text '則孫盛爲得也' explicitly names 孫盛 as the source of one of the competing accounts being compared. The candidate evidence from data/people.json provides the canonical entry for 孫盛. The reference semantics correctly identify this as a direct person form with the role of historian_author, distinct from the crown prince, emperor, and 和嶠. The evidence directly supports this identity.\"}, {\"mention_id\": \"sfh1-mention-c3f68235ba434b07c0007fc2\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-05-fangzheng-009-liu-annotation-006\", \"sfh1-ev-05-fangzheng-009-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"canonical_name_match\", \"contextual_role_match\"], \"explanation\": \"The mention '和嶠' appears in the annotation text '遣和嶠荀朂往觀察之' (from 晉陽秋). This is the full name 和嶠, matching the canonical name. The main text also introduces 和嶠 as the central figure. While the reference semantics record returned 'uncertain' with fail-closed semantics, the surface form is the full canonical name 和嶠 and the annotation context clearly refers to the same He Qiao who is the subject of this story. The candidate evidence from data/people.json provides the canonical entry. The evidence directly supports identity.\"}, {\"mention_id\": \"sfh1-mention-c68a61f80799ffc71c5ab09d\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-05-fangzheng-009-liu-annotation-001\", \"sfh1-ev-05-fangzheng-009-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"courtesy_name_match\", \"coreference_chain\"], \"explanation\": \"The mention '長輿' is the courtesy name of 嶠 (He Qiao), as explicitly stated in the annotation '嶠字長輿'. The alias registry evidence from data/aliases.json confirms 長輿 as the courtesy name of 和嶠. The reference semantics establish coreference with multiple mentions of 和嶠 throughout the text, including the anchor mention f8b67a0326d248e3487e6056. The evidence directly supports this identity resolution.\"}]}",
+              "name": "submit_sfh1_adversarial_reviews"
+            },
+            "id": "call_00_oDH13lH5mkAtr32Wb0rq0337",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787998909,
+  "id": "434b5742-2841-4c0f-8608-92feebebd8f2",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 948,
+    "prompt_cache_hit_tokens": 512,
+    "prompt_cache_miss_tokens": 2550,
+    "prompt_tokens": 3062,
+    "prompt_tokens_details": {
+      "cached_tokens": 512
+    },
+    "total_tokens": 4010
+  }
+}

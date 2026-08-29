@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"reviews\": [{\"mention_id\": \"sfh1-mention-192ce6595ef5b6038d2d7f84\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-24a32519fc444626b9b9\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"contextual_role\", \"honorific_title\"], \"explanation\": \"The mention 陶公 appears in annotation-003 (sfh1-ev-07-shijian-019-liu-annotation-003) within the quote from 陶侃別傳, where 何充 says '陶公重勲' (Tao Gong's great merit). The supplied evidence sfh1-candidate-evidence-24a32519fc444626b9b9 shows the full context where 陶公 is addressed as 陶士衡 (Tao Kan's courtesy name), and the text explicitly states '庾元規何縁拜陶士衡' — directly linking 陶公 to 陶士衡 (陶侃). The honorific 公 with the surname 陶, combined with the explicit naming as 陶士衡 in the same passage, specifically supports identification with 陶侃. The distinct_from mentions (何充, 庾亮, and others) are correctly separated.\"}, {\"mention_id\": \"sfh1-mention-4499b3c902a51cf16e5d377a\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-42067cfd81bf7447aa61\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"canonical_name_match\"], \"explanation\": \"The mention 何充 is a direct canonical name match to the person 何充 in people.json (sfh1-candidate-evidence-42067cfd81bf7447aa61). The name appears in annotation-003 (sfh1-ev-07-shijian-019-liu-annotation-003) where 何充 comments on the succession matter, consistent with his historical role as a court official. The exact name match with the canonical person record provides specific identity support. The distinct_from relations to 陶公, 庾亮, and others are appropriate.\"}, {\"mention_id\": \"sfh1-mention-604899f1c21a3290e9043ad5\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-82ed6589157afc937d6b\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"canonical_name_match\", \"orthographic_variant\"], \"explanation\": \"The mention 桓温 (with 温 in simplified form) is an orthographic variant of 桓溫 (with 溫 in traditional form). The evidence sfh1-candidate-evidence-82ed6589157afc937d6b shows 桓温 in the annotation text, and the canonical name is 桓溫. This is a standard orthographic variant (温/溫 are the same character in simplified/traditional forms). The mention appears in annotation-005 context discussing 桓温 as the person being considered for the Jingzhou post, consistent with the main text's 桓温. While the reference_semantics shows low confidence due to 'fail closed' on semantic parsing, the name match itself is sound.\"}, {\"mention_id\": \"sfh1-mention-aa8fe2a18845eaa0344a8be2\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-07-shijian-019-liu-annotation-005\", \"sfh1-ev-07-shijian-019-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"contextual_identity\", \"name_match\"], \"explanation\": \"The mention 桓温 in annotation-005 (sfh1-ev-07-shijian-019-liu-annotation-005) refers to the same person as the 桓温 in the main text (sfh1-ev-07-shijian-019-main), where the court discusses using 桓温 to govern the western region. The annotation text '議者欲以授桓温' directly parallels the main text '共議用桓温'. The coreference with sfh1-mention-604899f1c21a3290e9043ad5 is consistent since both refer to 桓溫. The hard_veto against c1 (explicit_identity_contradiction) indicates a competing candidate was explicitly contradicted, which is appropriate. The evidence specifically supports the identity of 桓温 as the person discussed for the Jingzhou appointment.\"}]}",
+              "name": "submit_sfh1_adversarial_reviews"
+            },
+            "id": "call_00_qbFDI2IuYO3Nw9ONnpWQ3700",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787999172,
+  "id": "27b56c10-36d2-4653-babe-c392d4552e9a",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 1097,
+    "prompt_cache_hit_tokens": 768,
+    "prompt_cache_miss_tokens": 2061,
+    "prompt_tokens": 2829,
+    "prompt_tokens_details": {
+      "cached_tokens": 768
+    },
+    "total_tokens": 3926
+  }
+}

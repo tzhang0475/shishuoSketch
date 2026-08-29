@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"reviews\": [{\"mention_id\": \"sfh1-mention-00c0242280924c8f4ba501a3\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-5762ff56c45eca9eeb43\", \"sfh1-ev-06-yaliang-017-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"canonical_name_match\", \"contextual_consistency\"], \"explanation\": \"The mention surface 蘇峻 matches the canonical name of the candidate. The main text states '蘇峻時遇害' (Su Jun was killed at that time), which is historically accurate — Su Jun was killed during the rebellion. The candidate evidence from data/people.json confirms 蘇峻 as the canonical name. The context of the story (Yuliang's son being killed during the Su Jun rebellion) is consistent with the historical Su Jun. No contradicting evidence found.\"}, {\"mention_id\": \"sfh1-mention-017e0ee57a10f47df8adbea2\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-2fda6b1c7926990013d9\", \"sfh1-ev-06-yaliang-017-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"courtesy_name_matches_person\", \"contextual_consistency\"], \"explanation\": \"The surface 温太真 is the courtesy name of 温嶠 (Wen Qiao). The alias evidence from data/aliases.json explicitly associates 温太真 with 温嶠. In the main text, 温太真 appears in the story about 庾亮's son, where he hides behind a curtain to startle the child — this is consistent with the historical Wen Qiao who was a contemporary of Yu Liang. The candidate evidence directly supports the courtesy-name-to-person mapping. No contradicting evidence.\"}, {\"mention_id\": \"sfh1-mention-07da671d6ead66a66eef2fb0\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-d21b97b9cf2f93f364a8\", \"sfh1-ev-06-yaliang-017-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"courtesy_name_matches_person\", \"contextual_consistency\"], \"explanation\": \"The surface 元規 is the courtesy name of 庾亮 (Yu Liang). The alias evidence from data/aliases.json explicitly associates 元規 with 庾亮. In the main text, the final line '或云見阿恭知元規非假' refers to seeing A-gong (Yu Liang's son) to know that 元規 (Yu Liang) was not faking his demeanor. This is contextually consistent — the story is about Yu Liang and his son. The candidate evidence directly supports the courtesy-name-to-person mapping. No contradicting evidence.\"}, {\"mention_id\": \"sfh1-mention-2951ea15e3bce8351c479a07\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-3921bf4152ad188bbdf0\", \"sfh1-ev-06-yaliang-017-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"office_title_matches_person\", \"contextual_consistency\"], \"explanation\": \"The surface 庾太尉 refers to Yu Liang by his office title (太尉 = Grand Commandant). The candidate evidence from the source text itself confirms this title is used for 庾亮. The main text opens with '庾太尉風儀偉長' describing Yu Liang's dignified bearing, and the entire story concerns Yu Liang and his son. The office title 太尉 is historically associated with Yu Liang. The candidate evidence directly supports the title-to-person mapping. No contradicting evidence.\"}]}",
+              "name": "submit_sfh1_adversarial_reviews"
+            },
+            "id": "call_00_H40K8mP7fwn4g0UXdADy8990",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787989247,
+  "id": "cf8fc9bd-8765-42d6-aa07-e3d7a33fee77",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 957,
+    "prompt_cache_hit_tokens": 512,
+    "prompt_cache_miss_tokens": 1664,
+    "prompt_tokens": 2176,
+    "prompt_tokens_details": {
+      "cached_tokens": 512
+    },
+    "total_tokens": 3133
+  }
+}

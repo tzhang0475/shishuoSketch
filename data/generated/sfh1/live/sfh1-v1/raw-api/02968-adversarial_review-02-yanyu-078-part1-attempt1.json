@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"reviews\": [{\"mention_id\": \"sfh1-mention-0c840c7031cc9c69825a4c7b\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-02-yanyu-078-main\", \"sfh1-candidate-evidence-ab57ee12a9edef85ef74\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"canonical_name_match\", \"contextual_role_match\"], \"explanation\": \"The main text explicitly states '晉武帝每餉山濤' (Emperor Wu of Jin always gave gifts to Shan Tao). The surface form 山濤 is the canonical name of Shan Tao, and the context of receiving gifts from Emperor Wu matches the historical Shan Tao. The candidate evidence directly provides the canonical name 山濤. No contradicting evidence exists. The identity resolution is supported by direct textual evidence.\"}, {\"mention_id\": \"sfh1-mention-2a84feb39deb91c89f9b7a60\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-02-yanyu-078-liu-annotation-001\", \"sfh1-candidate-evidence-f116d0bffae5c6d270a6\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"profile_evidence_identity_assertion\", \"contextual_role_match\"], \"explanation\": \"The Liu annotation (也/安) explicitly glosses the character 安, identifying it as referring to Xie An (謝安). The annotation directly asserts the identity of the abbreviated name 安 as 謝安. The candidate evidence provides the character 安 from the annotation, and the annotation itself serves as an explicit identity assertion. The main text's 謝太傅 (Grand Tutor Xie) is the same person, and the annotation confirms this identification.\"}, {\"mention_id\": \"sfh1-mention-a4bc54f321d662a46a97ce70\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-02-yanyu-078-liu-annotation-004\", \"sfh1-candidate-evidence-eb82be938fa64eeade5c\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"alias_registry_contextual_title\", \"contextual_role_match\"], \"explanation\": \"The Liu annotation (sfh1-ev-02-yanyu-078-liu-annotation-004) mentions '任山公以三事' (appointed Shan Gong to three offices), and the main text identifies 山濤 as the recipient of the emperor's gifts. The honorific 山公 is a well-established reference to Shan Tao (山濤). The annotation context about the emperor appointing him to offices is consistent with Shan Tao's historical role. The candidate evidence from aliases.json provides the contextual title 山公. The coreference with sfh1-mention-0c840c7031cc9c69825a4c7b (山濤) is supported by the shared context of the emperor's relationship with Shan Tao.\"}, {\"mention_id\": \"sfh1-mention-f82d390f5aeca2a7e027848c\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-02-yanyu-078-main\", \"sfh1-candidate-evidence-b511d747a580de4fc38d\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"alias_registry_office_title\", \"contextual_role_match\"], \"explanation\": \"The main text states '謝太傅以問子弟' (Grand Tutor Xie asked his sons and nephews), and the Liu annotation (sfh1-ev-02-yanyu-078-liu-annotation-001) glosses 安 as referring to Xie An. 謝太傅 (Grand Tutor Xie) is the well-established office title for Xie An (謝安). The candidate evidence from aliases.json provides the office title 謝太傅. The annotation confirms that the person referred to is Xie An. The context of asking his 子弟 (sons and younger relatives) is consistent with Xie An's role as the family patriarch. No contradicting evidence exists.\"}]}",
+              "name": "submit_sfh1_adversarial_reviews"
+            },
+            "id": "call_00_9Vuo47BcaeSjCV66etXC1522",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787997450,
+  "id": "6145afed-4e25-490a-a69a-0078be220fd4",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 997,
+    "prompt_cache_hit_tokens": 512,
+    "prompt_cache_miss_tokens": 2206,
+    "prompt_tokens": 2718,
+    "prompt_tokens_details": {
+      "cached_tokens": 512
+    },
+    "total_tokens": 3715
+  }
+}

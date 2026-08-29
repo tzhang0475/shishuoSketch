@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"judgments\": [{\"mention_id\": \"sfh1-mention-36b0a402f645ebd1e677f438\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-04-wenxue-097-liu-annotation-002\", \"sfh1-candidate-evidence-58d923e5a45bf2bb26fa\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"name_match\", \"contextual_role_match\"]}, {\"candidate_key\": \"c1\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-04-wenxue-097-liu-annotation-002\"], \"reason_types\": [\"name_mismatch\", \"contextual_role_mismatch\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [\"桓温\", \"桓宣城\"], \"explanation\": \"The mention 桓温 in the Liu annotation context '時桓温在' refers to Huan Wen, the Grand Marshal. Candidate c0 is 桓溫 (Huan Wen), matching the surface form directly. Candidate c1 is 温嶠, a different person; the context clearly indicates Huan Wen as the Grand Marshal (大司馬) in the Eastern Expedition Fu narrative.\"}, {\"mention_id\": \"sfh1-mention-4887945cc050d3d67168abfa\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-04-wenxue-097-main\", \"sfh1-candidate-evidence-9a1d7939169f195e2f5f\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"contextual_role_match\", \"honorific_reference\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [\"陶侃\", \"陶公\", \"陶士衡\"], \"explanation\": \"The honorific 公 in '我大道公何以云無' refers to 陶公 (陶侃), the deceased father of 胡奴. The main text mentions 陶公 and 先公勲業, and the candidate c0 is 陶侃 (Tao Kan), matching the contextual title 陶公. The candidate evidence from aliases.json confirms 陶公 refers to 陶侃.\"}, {\"mention_id\": \"sfh1-mention-56406bba64a6d67b248babb1\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"insufficient\", \"supporting_evidence_ids\": [\"sfh1-ev-04-wenxue-097-liu-annotation-004\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"ambiguous_reference\"]}], \"preferred_candidate_key\": null, \"resolution\": \"insufficient_evidence\", \"alternative_search_surfaces\": [\"謝安\", \"謝山\", \"山\"], \"explanation\": \"The mention 山 in '山飲酌既歸' is a personal name in the Liu annotation, but the text does not provide enough context to determine which historical person named 山 (Shan) is being referenced. The candidate c0 is a local candidate person named 山, but there is insufficient evidence to confirm the historical identity. The annotation mentions 桓温 going on an outing with companions, but the specific identity of 山 is not established.\"}, {\"mention_id\": \"sfh1-mention-5b3157e4835971e63fc3605a\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-04-wenxue-097-liu-annotation-004\", \"sfh1-candidate-evidence-9a9be521137ed3f499e4\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"contextual_role_match\", \"coreference\"]}, {\"candidate_key\": \"c1\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-04-wenxue-097-liu-annotation-004\"], \"reason_types\": [\"name_mismatch\", \"contextual_role_mismatch\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [\"桓温\", \"桓宣城\", \"大司馬\"], \"explanation\": \"The honorific 公 in '公命宏同載' refers to 桓温 (Huan Wen), the Duke/Grand Marshal who ordered Yuan Hong to ride together. This 公 corefers with the earlier mention of 桓温 in annotation 002 (sfh1-mention-36b0a402f645ebd1e677f438). Candidate c0 is 桓溫, matching the context. Candidate c1 is 温嶠, a different person who does not fit the narrative context.\"}]}",
+              "name": "submit_sfh1_identity_judgments"
+            },
+            "id": "call_00_Jf4jv1MSG9QBlarF7lUr4671",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787998828,
+  "id": "1488d12d-ebb2-4796-9f98-d2207504544a",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 1205,
+    "prompt_cache_hit_tokens": 640,
+    "prompt_cache_miss_tokens": 3059,
+    "prompt_tokens": 3699,
+    "prompt_tokens_details": {
+      "cached_tokens": 640
+    },
+    "total_tokens": 4904
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"reviews\": [{\"mention_id\": \"sfh1-mention-ba2e87da4a4d8a4d779839fe\", \"candidate_key\": \"c1\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-05-fangzheng-032-main\", \"sfh1-ev-05-fangzheng-032-liu-annotation-002\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"contextual_role_match\", \"name_match\"], \"explanation\": \"The mention surface is '温' (a single-character surname), and the candidate is 温嶠 (Wen Qiao). In the main text, the character 温 is described as having been '東宫率' (an officer of the Eastern Palace) and later '吾司馬' (my [Wang Dun's] Sima), and is addressed by 王敦 directly. The Liu Xiaobiao annotation explicitly states '嶠既正言敦忿而愧焉' and '虧温司馬昔在東宫悉其', confirming that the 温 in the main text is 温嶠 (Wen Qiao). The annotation directly ties the name 嶠 to the 温司马 who served in the Eastern Palace, matching the main text's description. The candidate evidence (sfh1-candidate-evidence-934da5cdf8d58bf97222) shows the surface '温' matching the candidate name 温嶠. The contextual role match (serving as Sima under Wang Dun, previously at the Eastern Palace) is specifically corroborated by the annotation. This is sufficient evidence for identity.\"}, {\"mention_id\": \"sfh1-mention-e52e8be9e3679d331b379fa5\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-05-fangzheng-032-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"direct_name_match\", \"contextual_role_match\"], \"explanation\": \"The mention surface is '王敦' and the candidate is 王敦. The main text explicitly names 王敦 multiple times as the central figure who '既下住船石頭欲有廢明帝意', sits among guests, questions 温 about the Crown Prince, and is described as '敦知帝聦明' and '敦便奮其威容'. The direct name match is unambiguous, and the contextual role (the powerful figure attempting to depose Emperor Ming) matches the historical Wang Dun. The candidate evidence (sfh1-candidate-evidence-bede77d1d31c118bc522) confirms the canonical name. No contradicting evidence exists.\"}]}",
+              "name": "submit_sfh1_adversarial_reviews"
+            },
+            "id": "call_00_nE0xdXMCX8vOF40bf1f06449",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787993394,
+  "id": "08d83f57-668a-4084-bbbd-fc2e4a5b5e4c",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 630,
+    "prompt_cache_hit_tokens": 512,
+    "prompt_cache_miss_tokens": 960,
+    "prompt_tokens": 1472,
+    "prompt_tokens_details": {
+      "cached_tokens": 512
+    },
+    "total_tokens": 2102
+  }
+}

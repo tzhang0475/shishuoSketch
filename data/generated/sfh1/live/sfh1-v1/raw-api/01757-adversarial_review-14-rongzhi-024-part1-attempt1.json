@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"reviews\": [{\"mention_id\": \"sfh1-mention-2a49d045ca6d5ba6b6c011b5\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-14-rongzhi-024-main\", \"sfh1-candidate-evidence-41d95f66b71ca243ad4c\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"canonical_name_match\", \"contextual_role_match\"], \"explanation\": \"The main text explicitly names 殷浩 (Yin Hao) as one of the people accompanying 庾太尉 on the tower. The candidate evidence from people.json provides the canonical name 殷浩. The surface form 殷浩 in the main text directly matches the canonical name. The context (a person in 庾亮's entourage at Wuchang) is consistent with Yin Hao's historical role. No contradicting evidence exists.\"}, {\"mention_id\": \"sfh1-mention-54bfc26853a2990a21b5d790\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-14-rongzhi-024-main\", \"sfh1-candidate-evidence-97284a2c4bcaa88c529f\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"contextual_role_match\", \"office_title_match\"], \"explanation\": \"The main text says '後王逸少下與丞相言及此事' — 王逸少 (Wang Xizhi) later goes down and speaks with 丞相 (the Chancellor). The candidate evidence from aliases.json shows 丞相 as an office title for 王導 (Wang Dao), who was the famous Chancellor of the Eastern Jin. The context — Wang Xizhi discussing 庾亮's behavior with the Chancellor — is historically consistent with Wang Dao being the Chancellor at that time. The alias registry explicitly maps 丞相 to 王導. No contradicting evidence.\"}, {\"mention_id\": \"sfh1-mention-66165e27941acf1c2f547377\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-14-rongzhi-024-main\", \"sfh1-candidate-evidence-fdb8372f4a357053ca84\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"contextual_role_match\", \"courtesy_name_match\"], \"explanation\": \"The main text mentions 王逸少, and the candidate evidence from aliases.json explicitly identifies 王逸少 as the courtesy name of 王羲之 (Wang Xizhi). The context — 王逸少 speaking with 丞相 about 庾亮 — is consistent with Wang Xizhi's historical role as a prominent figure in the Eastern Jin court. The alias registry provides direct evidence mapping the courtesy name to the person. No contradicting evidence.\"}, {\"mention_id\": \"sfh1-mention-670a146f4943825adbfb33e0\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-14-rongzhi-024-main\", \"sfh1-candidate-evidence-a4a8cb746db496d06a98\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"contextual_role_match\", \"office_title_match\"], \"explanation\": \"The main text says '右軍荅曰唯丘壑獨存' — 右軍 (Right Army General) responds. The candidate evidence from aliases.json shows 右軍 as a textual shorthand for 王羲之, who held the office of 右軍將軍 (General of the Right Army). The context is a direct continuation of the previous exchange where 王逸少 (Wang Xizhi) was speaking with 丞相, and now 右軍 responds — this is the same person continuing the dialogue. The alias registry explicitly maps 右軍 to 王羲之. No contradicting evidence.\"}]}",
+              "name": "submit_sfh1_adversarial_reviews"
+            },
+            "id": "call_00_8L0XeGB9RNOYoX3bypkg4077",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787990064,
+  "id": "77694541-84aa-4cad-acea-c6315c0f4afd",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 945,
+    "prompt_cache_hit_tokens": 512,
+    "prompt_cache_miss_tokens": 1722,
+    "prompt_tokens": 2234,
+    "prompt_tokens_details": {
+      "cached_tokens": 512
+    },
+    "total_tokens": 3179
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"judgments\": [{\"mention_id\": \"sfh1-mention-b5194892caac02fbbc4c3247\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-f42baa6f1b07e55932e9\", \"sfh1-ev-05-fangzheng-028-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"canonical_name_match\", \"contextual_role_match\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [], \"explanation\": \"王敦 is mentioned as the brother of 王含, a military leader. The candidate 王敦 matches the canonical name and the contextual role as 王含's brother who protects him.\"}, {\"mention_id\": \"sfh1-mention-c8cef22532b19c9727256e71\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-33fad5c11379ad7679b5\", \"sfh1-ev-05-fangzheng-028-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"surname_abbreviation_match\", \"coreference_with_full_name\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [], \"explanation\": \"敦 is the surname abbreviation for 王敦, referring to the same person as the full name 王敦 mentioned in the same text. The candidate 王敦 matches.\"}, {\"mention_id\": \"sfh1-mention-db885dece667c0c47e13d743\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-candidate-evidence-2181c8643c9a4ad61a68\", \"sfh1-ev-05-fangzheng-028-liu-annotation-002\"], \"reason_types\": [\"name_mismatch\", \"different_person\"]}], \"preferred_candidate_key\": null, \"resolution\": \"candidate_missing\", \"alternative_search_surfaces\": [\"何充\"], \"explanation\": \"主簿充 refers to 何充 (He Chong) by office title plus personal name 充. The supplied candidate is 沈充 (Shen Chong), which is a different person. The correct referent 何充 is not among the supplied candidates.\"}, {\"mention_id\": \"sfh1-mention-f06954a6d5d894bec35c7224\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-b8ab70c8ed61d5c7734f\", \"sfh1-ev-05-fangzheng-028-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"canonical_name_match\", \"contextual_role_match\"]}, {\"candidate_key\": \"c1\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-candidate-evidence-5f574b1870c1aa552d82\", \"sfh1-ev-05-fangzheng-028-main\"], \"reason_types\": [\"name_mismatch\", \"different_person\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [], \"explanation\": \"何充 is the full name of He Chong, who serves as Wang Dun's 主簿. Candidate c0 (何充) matches the canonical name and role. Candidate c1 (沈充) is a different person with a different surname.\"}]}",
+              "name": "submit_sfh1_identity_judgments"
+            },
+            "id": "call_00_W0uwo8aRS08xzKsJ3pWE1119",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787998958,
+  "id": "d5992e43-fdb7-4e4a-ae09-ab630cb3dc57",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 944,
+    "prompt_cache_hit_tokens": 640,
+    "prompt_cache_miss_tokens": 2644,
+    "prompt_tokens": 3284,
+    "prompt_tokens_details": {
+      "cached_tokens": 640
+    },
+    "total_tokens": 4228
+  }
+}

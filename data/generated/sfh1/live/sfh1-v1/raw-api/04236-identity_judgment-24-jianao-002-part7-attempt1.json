@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"judgments\": [{\"mention_id\": \"sfh1-mention-fd17c81ea24f430afa5c5505\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-24-jianao-002-main\", \"sfh1-ev-24-jianao-002-liu-annotation-002\", \"sfh1-ev-24-jianao-002-liu-annotation-006\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"name_matching\", \"contextual_consistency\", \"coreference_chain\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [], \"explanation\": \"The mention 戎 in Liu annotation 006 refers to 王戎 (Wang Rong). The main text explicitly names 王戎 as the protagonist visiting 阮籍. The annotation text (sfh1-ev-24-jianao-002-liu-annotation-002) mentions 戎 in the context of visiting 籍 (阮籍) and drinking with 劉昶/劉公榮, matching the main story. The candidate c0 is 王戎 with matched surface 濬沖 (his courtesy name), and the annotation 006 concludes '戎為物論所先皆此類', referring back to Wang Rong's conduct. The coreference chain links this mention to other 戎 mentions in the same story, all referring to Wang Rong.\"}]}",
+              "name": "submit_sfh1_identity_judgments"
+            },
+            "id": "call_00_jgm7sJdh1KX2YUXAomX86749",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787999701,
+  "id": "b6a9a3d3-8c90-4afb-b065-6afe51308d3f",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 378,
+    "prompt_cache_hit_tokens": 640,
+    "prompt_cache_miss_tokens": 1320,
+    "prompt_tokens": 1960,
+    "prompt_tokens_details": {
+      "cached_tokens": 640
+    },
+    "total_tokens": 2338
+  }
+}

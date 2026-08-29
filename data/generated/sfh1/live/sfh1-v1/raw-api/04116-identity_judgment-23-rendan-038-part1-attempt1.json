@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"judgments\": [{\"mention_id\": \"sfh1-mention-4204d744c54bfb06c4bd0959\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-23-rendan-038-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"name_match\", \"historical_referent\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [\"王坦之\"], \"explanation\": \"王文度 is the courtesy name of 王坦之 (Wang Tanzhi), a well-known Eastern Jin official. The candidate c0 is a local person form matching 王文度 directly. The text mentions 王文度 as someone 劉 asks about alongside 謝安, consistent with the historical Wang Tanzhi who was a contemporary of Xie An.\"}, {\"mention_id\": \"sfh1-mention-44dde9f22171ff91ca36c799\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-23-rendan-038-main\", \"sfh1-candidate-evidence-b600fe3ba94f876e2fea\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"name_match\", \"historical_referent\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [], \"explanation\": \"謝安 is the famous Eastern Jin statesman Xie An. The candidate c0 is the existing person 謝安 from people.json, matching the surface form directly. The text mentions 謝安 as someone 劉 asks about, consistent with the historical Xie An.\"}, {\"mention_id\": \"sfh1-mention-bf88617c03b4825eb5b5a9df\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-23-rendan-038-main\"], \"reason_types\": [\"office_holder_mismatch\", \"wrong_referent\"]}], \"preferred_candidate_key\": null, \"resolution\": \"candidate_missing\", \"alternative_search_surfaces\": [\"張玄\"], \"explanation\": \"The mention 侍中 is the office title held by 張玄, as stated in '張玄為侍中'. The candidate c0 is 謝安, which is incorrect — the office holder is 張玄, not 謝安. The supplied candidate set lacks the correct referent 張玄.\"}]}",
+              "name": "submit_sfh1_identity_judgments"
+            },
+            "id": "call_00_LSOrPDddv5F6xlGuKkmd0507",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787999533,
+  "id": "94a1af2e-cfe3-4e89-8f1d-7bcc0472e57f",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 653,
+    "prompt_cache_hit_tokens": 640,
+    "prompt_cache_miss_tokens": 1732,
+    "prompt_tokens": 2372,
+    "prompt_tokens_details": {
+      "cached_tokens": 640
+    },
+    "total_tokens": 3025
+  }
+}

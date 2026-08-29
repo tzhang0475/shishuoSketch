@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"judgments\": [{\"mention_id\": \"sfh1-mention-fc1c1b26cf279863d814a547\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-08-shangyu-079-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"name_match\", \"contextual_role\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [], \"explanation\": \"桓温 is the subject of the passage, and the candidate 桓溫 matches the surface form directly. The main text clearly describes 桓温 passing by 王敦's tomb.\"}, {\"mention_id\": \"sfh1-mention-5bf16b8f547593b5fc43d8ac\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-08-shangyu-079-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"name_match\", \"contextual_role\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [], \"explanation\": \"王敦 in the main text refers to the person whose tomb 桓温 passes by. The candidate 王敦 matches the surface form and the context clearly identifies this person.\"}, {\"mention_id\": \"sfh1-mention-411f7cbbe27086169e5523c1\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"insufficient\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [], \"reason_types\": [\"ambiguous_surname\"]}], \"preferred_candidate_key\": null, \"resolution\": \"insufficient_evidence\", \"alternative_search_surfaces\": [\"王敦\", \"王恭\"], \"explanation\": \"The annotation text '亮牋曰王' only shows the surname 王 without enough context to determine whether it refers to 王恭 or another person named 王. The candidate 王恭 is not clearly supported by the evidence.\"}, {\"mention_id\": \"sfh1-mention-1e5ea6af4312b5165877ff6a\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-08-shangyu-079-liu-annotation-002\", \"sfh1-ev-08-shangyu-079-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"contextual_role\", \"name_match\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [], \"explanation\": \"The annotation '敦可人之目' refers to 敦 as a person, and the main text identifies 王敦 as the person whose tomb 桓温 passes by. The candidate 王敦 matches this referent.\"}]}",
+              "name": "submit_sfh1_identity_judgments"
+            },
+            "id": "call_00_9noHGmve5npenIB3Ru289555",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787981227,
+  "id": "eba2ee63-1800-4c33-8bdd-69985a1925d7",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 737,
+    "prompt_cache_hit_tokens": 640,
+    "prompt_cache_miss_tokens": 1175,
+    "prompt_tokens": 1815,
+    "prompt_tokens_details": {
+      "cached_tokens": 640
+    },
+    "total_tokens": 2552
+  }
+}

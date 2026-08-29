@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"judgments\": [{\"mention_id\": \"sfh1-mention-ac1b0b98a168ab99ed23ad69\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-19-xianyuan-013-liu-annotation-007\"], \"reason_types\": [\"wrong_person\"]}, {\"candidate_key\": \"c1\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-19-xianyuan-013-liu-annotation-007\", \"sfh1-ev-19-xianyuan-013-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"name_match\", \"contextual_identity\"]}], \"preferred_candidate_key\": \"c1\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [], \"explanation\": \"The mention 充 in annotation-007 (充别傳) refers to Jia Chong (賈充), the central figure of this story about his two wives. The main text repeatedly uses 充 for Jia Chong. Candidate c1 (賈充) is the correct referent. Candidate c0 (沈充) is a different person (Shen Chong) and contradicts the context.\"}, {\"mention_id\": \"sfh1-mention-c8e5aba82f77ef8a139355da\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-19-xianyuan-013-liu-annotation-010\"], \"reason_types\": [\"wrong_person\"]}], \"preferred_candidate_key\": null, \"resolution\": \"candidate_missing\", \"alternative_search_surfaces\": [\"賈充\"], \"explanation\": \"The mention 充 in annotation-010 refers to Jia Chong (賈充), the central figure of the story. The annotation discusses 充置左右夫人 (Chong placing left and right wives), which matches Jia Chong's situation with Li and Guo. However, the only supplied candidate is c0 (沈充), which is a different person. The likely referent 賈充 is missing from the candidate set.\"}, {\"mention_id\": \"sfh1-mention-ce4d4564ab66ea8a31df9c41\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-19-xianyuan-013-liu-annotation-004\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"name_match\", \"annotation_identity\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [], \"explanation\": \"The mention 璜 in annotation-004 (璜即廣) refers to the person named 璜, who is identified as 廣 (Jia Chong's father 賈璜, courtesy name 宣君). The candidate c0 is the local person named 璜, which matches this mention directly.\"}, {\"mention_id\": \"sfh1-mention-cf4890d33ff94fa98697a17a\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-19-xianyuan-013-liu-annotation-011\"], \"reason_types\": [\"wrong_person\"]}, {\"candidate_key\": \"c1\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-19-xianyuan-013-liu-annotation-011\", \"sfh1-ev-19-xianyuan-013-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"name_match\", \"contextual_identity\"]}], \"preferred_candidate_key\": \"c1\", \"resolution\": \"candidate_supported\", \"alternative_search_surfaces\": [], \"explanation\": \"The mention 充 in annotation-011 refers to Jia Chong (賈充), the central figure of this story. The annotation discusses 充's relationship with 李槐 and 郭氏, matching the main text narrative about Jia Chong's two wives. Candidate c1 (賈充) is the correct referent. Candidate c0 (沈充) is a different person.\"}]}",
+              "name": "submit_sfh1_identity_judgments"
+            },
+            "id": "call_00_8gHX3rSuh48COHvqwkOo9598",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787999611,
+  "id": "55aa0f17-8378-4936-b56f-29f7ee26f739",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 1041,
+    "prompt_cache_hit_tokens": 640,
+    "prompt_cache_miss_tokens": 3292,
+    "prompt_tokens": 3932,
+    "prompt_tokens_details": {
+      "cached_tokens": 640
+    },
+    "total_tokens": 4973
+  }
+}

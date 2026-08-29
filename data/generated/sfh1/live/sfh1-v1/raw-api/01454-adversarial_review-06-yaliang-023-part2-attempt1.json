@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"reviews\": [{\"mention_id\": \"sfh1-mention-b3221da9f7192b5be06fc6dc\", \"candidate_key\": \"c0\", \"verdict\": \"review_required\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-8ce642bf3cf124381115\", \"sfh1-ev-06-yaliang-023-liu-annotation-002\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"canonical_name_match\", \"contextual_consistency\"], \"explanation\": \"The mention 温嶠 appears in the Liu annotation (sfh1-ev-06-yaliang-023-liu-annotation-002) in the context of 蘇峻's rebellion, where 亮's three brothers fled to 温嶠. The candidate evidence (sfh1-candidate-evidence-8ce642bf3cf124381115) provides the canonical name 温嶠 from people.json. The name match is exact and the historical context (蘇峻之亂, 庾亮's brothers fleeing to 温嶠) is consistent with the well-known figure 温嶠 (Wen Qiao), a Jin dynasty official who was indeed involved in suppressing 蘇峻's rebellion. However, the reference_semantics indicates low confidence and 'uncertain' semantic type, with no anchor mentions or coreference chains to further corroborate identity. The annotation text is fragmentary and the context is indirect (mentioning that 亮's brothers fled to 温嶠), but the historical identification is strongly supported by the canonical name match and the historically accurate contextual reference. Given the exact name match and the historically unambiguous context, this resolution appears sound, though the low semantic confidence warrants flagging for review rather than outright rejection.\"}]}",
+              "name": "submit_sfh1_adversarial_reviews"
+            },
+            "id": "call_00_iPmXfnWHPDUSMaiURdXY3059",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787989262,
+  "id": "a517a110-c1b2-42af-87ce-fd665ecd39cb",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 423,
+    "prompt_cache_hit_tokens": 512,
+    "prompt_cache_miss_tokens": 586,
+    "prompt_tokens": 1098,
+    "prompt_tokens_details": {
+      "cached_tokens": 512
+    },
+    "total_tokens": 1521
+  }
+}

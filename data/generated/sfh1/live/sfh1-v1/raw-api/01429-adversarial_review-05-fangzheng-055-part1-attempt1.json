@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"reviews\": [{\"mention_id\": \"sfh1-mention-1497c6cc0742d0dbe44537cd\", \"candidate_key\": \"c0\", \"verdict\": \"reject\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-05-fangzheng-055-liu-annotation-003\"], \"reason_types\": [\"annotation_reference\", \"candidate_evidence_insufficient\"], \"explanation\": \"The candidate evidence (sfh1-candidate-evidence-d18fba5a850149dce418) is merely the canonical name '劉惔' from data/people.json with retrieval basis 'canonical_name'. The supporting evidence cited is sfh1-ev-05-fangzheng-055-liu-annotation-003, which reads '(州剌史贈右將軍/劉惔所知累遷豫)'. This annotation text is fragmentary and does not clearly establish that the mention '劉惔' in this context refers to the specific person 劉惔 in the candidate registry. The annotation appears to be a biographical note about someone (possibly 桓伊) being known by 劉惔, but the fragment is cut off and the reference semantics are marked 'uncertain' with no valid semantic record. The surface form matches the canonical name, but the annotation evidence does not specifically support that this mention refers to the candidate person. The identity assessment cites 'annotation_reference' and 'canonical_name_match' but the annotation text is too fragmentary to confirm identity. Reject due to insufficient specific evidence supporting identity.\"}, {\"mention_id\": \"sfh1-mention-41913c2fbc0db86807266104\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-05-fangzheng-055-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"contextual_reference\", \"courtesy_name_match\"], \"explanation\": \"The mention '謝安石' is the courtesy name of 謝安. The main text (sfh1-ev-05-fangzheng-055-main) reads '桓公問桓子野謝安石料萬石必敗何以不諫', where 謝安石 appears in a clear narrative context alongside 桓公 (桓溫) and 桓子野 (桓伊), discussing 萬石 (謝萬). The courtesy name 謝安石 is a well-established alias for 謝安, and the historical context of 謝安 advising about 謝萬's military campaign fits the known historical record. The candidate evidence (sfh1-candidate-evidence-a4d7f6b30cbe4b9b33a2) from aliases.json confirms the courtesy name mapping. The contextual reference in the main text specifically supports this identification.\"}, {\"mention_id\": \"sfh1-mention-4551601283d690d8231790e6\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-ev-05-fangzheng-055-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"contextual_title_match\", \"historical_context\"], \"explanation\": \"The mention '桓公' appears in the main text (sfh1-ev-05-fangzheng-055-main) in the context '桓公問桓子野謝安石料萬石必敗何以不諫'. The candidate evidence (sfh1-candidate-evidence-f8d82953478bfbea264f) from aliases.json provides the contextual title '桓公' for 桓溫, and the historical context is consistent: 桓溫 asking 桓伊 about 謝萬's impending defeat is a well-documented historical episode. The presence of 桓子野 (桓伊) in the same passage, who was a subordinate of 桓溫, further supports that '桓公' here refers to 桓溫. The contextual title match combined with the historical narrative context specifically supports this identification.\"}, {\"mention_id\": \"sfh1-mention-57b7746a3be07831cfa06a32\", \"candidate_key\": \"c0\", \"verdict\": \"reject\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-05-fangzheng-055-liu-annotation-002\"], \"reason_types\": [\"annotation_reference\", \"orthographic_variant_ambiguous\"], \"explanation\": \"The mention '王蒙' is proposed to resolve to 王濛 via orthographic variant. The supporting evidence cited is sfh1-ev-05-fangzheng-055-liu-annotation-002, which reads '(將軍伊少有才蓺又善聲律加以標悟省率爲王蒙/小字也續晉陽秋曰伊字叔夏譙國銍人父景護軍)'. This annotation is about 桓伊 (將軍伊), stating that 王蒙 was his 小字 (childhood name). The annotation text is fragmentary and the reference to 王蒙 here is within a biographical annotation about 桓伊, not clearly establishing that this mention of '王蒙' refers to the person 王濛 in the candidate registry. The orthographic variant mapping from 蒙 to 濛 is plausible but the annotation context does not specifically confirm that this mention refers to the candidate person 王濛. The fragmentary nature of the annotation and the ambiguity of the orthographic variant without additional contextual support means the evidence does not specifically support identity. Reject due to insufficient specific evidence.\"}]}",
+              "name": "submit_sfh1_adversarial_reviews"
+            },
+            "id": "call_00_hG8Kx0QACvZlyfVxniiv3769",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787989193,
+  "id": "0a27ddf3-34c1-4808-9268-6de742227a75",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 1262,
+    "prompt_cache_hit_tokens": 512,
+    "prompt_cache_miss_tokens": 1611,
+    "prompt_tokens": 2123,
+    "prompt_tokens_details": {
+      "cached_tokens": 512
+    },
+    "total_tokens": 3385
+  }
+}

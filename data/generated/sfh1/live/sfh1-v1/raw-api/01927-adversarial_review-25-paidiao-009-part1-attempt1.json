@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"reviews\": [{\"mention_id\": \"sfh1-mention-7580e88e2ed1a485d2175f15\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-2e5b1cf9863d079cbf20\", \"sfh1-ev-25-paidiao-009-liu-annotation-002\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"name_match\", \"contextual_role\"], \"explanation\": \"The mention surface is 張華, which exactly matches the candidate's canonical name 張華. The Liu annotation (sfh1-ev-25-paidiao-009-liu-annotation-002) explicitly states '隱與陸雲在張華坐語', confirming that 張華 is the host in this story, consistent with the main text where 張茂先 hosts the gathering. The candidate evidence from people.json provides the canonical name 張華. The annotation directly corroborates that the person hosting is 張華, and the main text's 張茂先 is his courtesy name. This is a direct name match with contextual corroboration.\"}, {\"mention_id\": \"sfh1-mention-bf9c5ea37a729cb1af1f5e15\", \"candidate_key\": \"c0\", \"verdict\": \"accept\", \"supporting_evidence_ids\": [\"sfh1-candidate-evidence-605432a7e8bfffe8b209\", \"sfh1-ev-25-paidiao-009-liu-annotation-002\", \"sfh1-ev-25-paidiao-009-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"name_match\", \"contextual_role\"], \"explanation\": \"The mention surface is 張茂先, which is the courtesy name of 張華. The candidate evidence from aliases.json explicitly provides the alias mapping 張茂先 → 張華, and the text in that evidence shows 張茂先 discussing history (論史漢) in the same 洛水 gathering context. The main text (sfh1-ev-25-paidiao-009-main) shows 張茂先 hosting 荀鳴鶴 and 陸士龍, and the Liu annotation (sfh1-ev-25-paidiao-009-liu-annotation-002) explicitly identifies the host as 張華 ('在張華坐語'). The alias registry evidence directly supports the surname-plus-courtesy-name resolution, and the annotation provides explicit confirmation that 張茂先 in this story is 張華.\"}]}",
+              "name": "submit_sfh1_adversarial_reviews"
+            },
+            "id": "call_00_4bNNZLKdyNpkQf1AVhUD5810",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1787990525,
+  "id": "8fb604f3-44dc-426f-81a5-374d9ca87cd6",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 600,
+    "prompt_cache_hit_tokens": 512,
+    "prompt_cache_miss_tokens": 1050,
+    "prompt_tokens": 1562,
+    "prompt_tokens_details": {
+      "cached_tokens": 512
+    },
+    "total_tokens": 2162
+  }
+}
