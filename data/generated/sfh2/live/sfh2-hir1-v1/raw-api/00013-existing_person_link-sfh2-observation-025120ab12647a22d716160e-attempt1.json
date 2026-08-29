@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"records\": [{\"unit_id\": \"sfh2-observation-025120ab12647a22d716160e\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-08-shangyu-054-liu-annotation-001\"], \"reason_types\": [\"name_mismatch\"]}, {\"candidate_key\": \"c1\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-08-shangyu-054-liu-annotation-001\"], \"reason_types\": [\"name_mismatch\"]}, {\"candidate_key\": \"c2\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-08-shangyu-054-liu-annotation-001\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"exact_name_match\"]}], \"preferred_candidate_key\": \"c2\", \"resolution\": \"existing_person_supported\", \"explanation\": \"The occurrence is the exact span '虞預' in the Liu annotation of story 08-shangyu-054. Candidate c2 is 虞預 (courtesy name 叔寧), a Jin historian known for the 虞預晉書. The annotation text '虞預書曰' directly references 虞預's work (虞預書 = 虞預晉書), matching candidate c2's dossier which contains extensive evidence of 虞預 as the author of 虞預晉書 annotations throughout the Shishuo. Candidates c0 (王導) and c1 (王隱) do not match the name 虞預.\"}]}",
+              "name": "submit_sfh2_existing_person_links"
+            },
+            "id": "call_00_wfS49DkzNwU2LOm13up15475",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1788016008,
+  "id": "1008bd91-94c7-4873-b188-74ac7c3d0ad1",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 428,
+    "prompt_cache_hit_tokens": 1792,
+    "prompt_cache_miss_tokens": 1427,
+    "prompt_tokens": 3219,
+    "prompt_tokens_details": {
+      "cached_tokens": 1792
+    },
+    "total_tokens": 3647
+  }
+}

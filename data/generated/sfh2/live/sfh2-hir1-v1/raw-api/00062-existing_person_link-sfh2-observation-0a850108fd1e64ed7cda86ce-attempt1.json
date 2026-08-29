@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"records\": [{\"unit_id\": \"sfh2-observation-0a850108fd1e64ed7cda86ce\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-08-shangyu-013-liu-annotation-002\"], \"reason_types\": [\"office_mismatch\", \"identity_conflict\"]}], \"preferred_candidate_key\": null, \"resolution\": \"no_existing_match\", \"explanation\": \"The occurrence refers to '河清太守' (Prefect of Heqing), which is an office held by 阮武 (Ruan Wu), as stated in the Liu annotation: '武魏末河清太守'. The candidate c0 is 謝安 (Xie An), a Jin-dynasty figure known as 謝太傅/侍中. There is no identity connection between 阮武 (the holder of the 河清太守 office) and 謝安. The candidate's known offices (侍中, 太傅) do not include 河清太守, and the person referenced is clearly 阮武, not 謝安. This is a contradiction.\"}]}",
+              "name": "submit_sfh2_existing_person_links"
+            },
+            "id": "call_00_Y7TP8EW4FtluMY7Fk6PO0397",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1788016162,
+  "id": "ce4e623c-850c-4479-ab40-027f412e8ac9",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 313,
+    "prompt_cache_hit_tokens": 1664,
+    "prompt_cache_miss_tokens": 530,
+    "prompt_tokens": 2194,
+    "prompt_tokens_details": {
+      "cached_tokens": 1664
+    },
+    "total_tokens": 2507
+  }
+}

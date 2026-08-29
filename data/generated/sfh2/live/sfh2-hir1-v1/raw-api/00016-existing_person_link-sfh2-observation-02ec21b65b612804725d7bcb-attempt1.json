@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"records\": [{\"unit_id\": \"sfh2-observation-02ec21b65b612804725d7bcb\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-08-shangyu-043-liu-annotation-002\"], \"reason_types\": [\"name_mismatch\", \"context_mismatch\"]}, {\"candidate_key\": \"c1\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-08-shangyu-043-liu-annotation-002\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"exact_name_match\", \"title_match\", \"contextual_match\"]}], \"preferred_candidate_key\": \"c1\", \"resolution\": \"existing_person_supported\", \"explanation\": \"The occurrence '司空劉琨' refers to 劉琨 (courtesy name 越石), who held the title 司空. Candidate c1 is 劉琨 with alias 劉越石 and title 司空, matching both the name and office title in the occurrence. Candidate c0 is 王敦, which contradicts the occurrence's explicit name 劉琨. The annotation text '與司空劉琨俱以雄豪著名' confirms this refers to 劉琨 as 司空.\"}]}",
+              "name": "submit_sfh2_existing_person_links"
+            },
+            "id": "call_00_dEyjhBsyXFKA3FakYMWV8363",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1788016018,
+  "id": "7f569d34-5ed0-49ec-8fca-67d844c761e0",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 355,
+    "prompt_cache_hit_tokens": 2304,
+    "prompt_cache_miss_tokens": 2350,
+    "prompt_tokens": 4654,
+    "prompt_tokens_details": {
+      "cached_tokens": 2304
+    },
+    "total_tokens": 5009
+  }
+}

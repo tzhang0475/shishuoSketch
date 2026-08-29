@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"records\": [{\"unit_id\": \"sfh2-observation-06ba2effe1857c13658a06c2\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-19-xianyuan-013-main\", \"sfh1-ev-19-xianyuan-013-liu-annotation-010\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"contextual_identity\", \"name_match\"]}, {\"candidate_key\": \"c1\", \"verdict\": \"insufficient\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [], \"reason_types\": []}, {\"candidate_key\": \"c2\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-19-xianyuan-013-main\"], \"reason_types\": [\"contextual_contradiction\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"existing_person_supported\", \"explanation\": \"The occurrence '充' appears in story 19-xianyuan-013, which is the famous narrative about 賈充 (Jia Chong) and his former wife 李氏 (Li Feng's daughter). The main text repeatedly refers to 賈充 and uses '充' as his personal name. The Liu annotation (sfh1-ev-19-xianyuan-013-liu-annotation-010) explicitly mentions 王隱晉書 and 充 in the context of 賈充's marriage to 郭配's daughter. Candidate c0 (賈充) is strongly supported by the full context. Candidate c2 (沈充) is contradicted because the story context is clearly about 賈充, not 沈充. Candidate c1 (王隱) is the author of a cited work but not the referent of '充'.\"}]}",
+              "name": "submit_sfh2_existing_person_links"
+            },
+            "id": "call_00_iVGbd7y0Y2bhdUNvn86t5456",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1788016087,
+  "id": "c6d5f98b-d8ce-4246-876f-c0ee178812da",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 464,
+    "prompt_cache_hit_tokens": 640,
+    "prompt_cache_miss_tokens": 1552,
+    "prompt_tokens": 2192,
+    "prompt_tokens_details": {
+      "cached_tokens": 640
+    },
+    "total_tokens": 2656
+  }
+}

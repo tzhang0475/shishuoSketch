@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"records\": [{\"unit_id\": \"sfh2-observation-0e214e6145f4a7c0c2fb43cf\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-02-yanyu-046-liu-annotation-003\", \"sfh1-ev-02-yanyu-046-liu-annotation-002\", \"sfh1-ev-02-yanyu-046-main\"], \"reason_types\": [\"identity_conflict\"]}, {\"candidate_key\": \"c1\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-02-yanyu-046-liu-annotation-003\", \"sfh1-ev-02-yanyu-046-liu-annotation-002\", \"sfh1-ev-02-yanyu-046-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"name_match\", \"contextual_match\"]}], \"preferred_candidate_key\": \"c1\", \"resolution\": \"existing_person_supported\", \"explanation\": \"The occurrence '尚' in story 02-yanyu-046 refers to 謝尚 (courtesy name 仁祖). The main text states '謝仁祖年八嵗' and the Liu annotation identifies 謝尚字仁祖, son of 鯤. The annotation also mentions 温嶠 visiting him at his father's funeral, which is consistent with 謝尚. Candidate c1 (謝尚) is supported by name and contextual evidence. Candidate c0 (温嶠) is contradicted because the occurrence '尚' refers to 謝尚, not 温嶠.\"}]}",
+              "name": "submit_sfh2_existing_person_links"
+            },
+            "id": "call_00_4FZFRj5NMpuXI8KJU3aO1384",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1788016228,
+  "id": "a3acee35-bf78-402c-ae43-4c34d87a06eb",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 432,
+    "prompt_cache_hit_tokens": 2432,
+    "prompt_cache_miss_tokens": 1152,
+    "prompt_tokens": 3584,
+    "prompt_tokens_details": {
+      "cached_tokens": 2432
+    },
+    "total_tokens": 4016
+  }
+}

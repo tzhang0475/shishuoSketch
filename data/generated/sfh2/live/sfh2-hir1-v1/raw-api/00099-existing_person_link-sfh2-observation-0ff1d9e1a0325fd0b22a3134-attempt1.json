@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"records\": [{\"unit_id\": \"sfh2-observation-0ff1d9e1a0325fd0b22a3134\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-02-yanyu-035-liu-annotation-004\"], \"reason_types\": [\"identity_mismatch\"]}, {\"candidate_key\": \"c1\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-02-yanyu-035-liu-annotation-004\"], \"reason_types\": [\"identity_mismatch\"]}], \"preferred_candidate_key\": null, \"resolution\": \"no_existing_match\", \"explanation\": \"The occurrence refers to '彪' (Ban Biao 班彪), as explicitly stated in the reference semantics: 'person (班彪), referred to by personal name 彪'. The Liu annotation evidence (sfh1-ev-02-yanyu-035-liu-annotation-004) confirms this is 班彪, a Han dynasty figure mentioned in the text as an example. Neither candidate c0 (温嶠) nor c1 (劉琨) matches 班彪. Both candidates are Jin dynasty figures in the same story, but the occurrence '彪' refers to a different historical person entirely.\"}]}",
+              "name": "submit_sfh2_existing_person_links"
+            },
+            "id": "call_00_67QsxlgemMNpFW4KuLyC8754",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1788016270,
+  "id": "3d5a0bd3-6080-4817-a4ac-00bce651bd2a",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 362,
+    "prompt_cache_hit_tokens": 2432,
+    "prompt_cache_miss_tokens": 2525,
+    "prompt_tokens": 4957,
+    "prompt_tokens_details": {
+      "cached_tokens": 2432
+    },
+    "total_tokens": 5319
+  }
+}

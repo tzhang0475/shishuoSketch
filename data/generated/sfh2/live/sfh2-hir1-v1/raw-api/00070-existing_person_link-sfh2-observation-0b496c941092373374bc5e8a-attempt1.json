@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"records\": [{\"unit_id\": \"sfh2-observation-0b496c941092373374bc5e8a\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-14-rongzhi-023-main\"], \"reason_types\": [\"name_mismatch\", \"role_mismatch\"]}, {\"candidate_key\": \"c1\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-14-rongzhi-023-main\", \"sfh1-ev-14-rongzhi-023-liu-annotation-003\", \"sfh1-ev-14-rongzhi-023-liu-annotation-004\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"name_match\", \"role_match\", \"contextual_evidence\"]}, {\"candidate_key\": \"c2\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-14-rongzhi-023-main\"], \"reason_types\": [\"name_mismatch\", \"role_mismatch\"]}, {\"candidate_key\": \"c3\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-14-rongzhi-023-liu-annotation-004\"], \"reason_types\": [\"name_mismatch\", \"role_mismatch\"]}, {\"candidate_key\": \"c4\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-14-rongzhi-023-main\"], \"reason_types\": [\"name_mismatch\", \"role_mismatch\"]}], \"preferred_candidate_key\": \"c1\", \"resolution\": \"existing_person_supported\", \"explanation\": \"The occurrence '庾文康' refers to 庾亮 (Yu Liang), posthumously titled 文康. The reference_semantics explicitly states the referent role is '庾亮 (Yu Liang), posthumously titled 文康'. Candidate c1 is 庾亮 (courtesy name 元規), whose dossier matches. The source text (sfh1-ev-14-rongzhi-023-main) describes 庾文康 interacting with 陶公 (陶侃), and the Liu annotations confirm 庾亮's role in the 蘇峻 rebellion and as regent alongside 王導. The other candidates (王導, 蘇峻, 卞壼, 陶侃) are distinct persons mentioned in the same story but are not the referent of '庾文康'.\"}]}",
+              "name": "submit_sfh2_existing_person_links"
+            },
+            "id": "call_00_MUFomnWTs0v03jyidGUk0632",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1788016183,
+  "id": "e179dcae-4098-4977-b1da-9da1b84e2b47",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 661,
+    "prompt_cache_hit_tokens": 1792,
+    "prompt_cache_miss_tokens": 2418,
+    "prompt_tokens": 4210,
+    "prompt_tokens_details": {
+      "cached_tokens": 1792
+    },
+    "total_tokens": 4871
+  }
+}

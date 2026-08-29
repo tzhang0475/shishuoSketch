@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"records\": [{\"unit_id\": \"sfh2-observation-0353b1529d9e5452693cd021\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"insufficient\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [], \"reason_types\": [\"no_identity_evidence\"]}, {\"candidate_key\": \"c1\", \"verdict\": \"insufficient\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [], \"reason_types\": [\"no_identity_evidence\"]}], \"preferred_candidate_key\": null, \"resolution\": \"insufficient_evidence\", \"explanation\": \"The occurrence is the surname reference \\\"郗\\\" in story 06-yaliang-027. The text mentions 郗超 (郗 is in the tent/帳内). The candidates are 謝安 (c0) and 桓溫 (c1), both of whom appear in this same story as 謝安 and 桓宣武 respectively. The reference \\\"郗\\\" refers to 郗超, who is neither 謝安 nor 桓溫. Neither candidate matches the referent of this occurrence. There is no identity evidence linking the surname reference \\\"郗\\\" to either candidate.\"}]}",
+              "name": "submit_sfh2_existing_person_links"
+            },
+            "id": "call_00_6vkjgoNYQnn1XqOPj2ct8573",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1788016029,
+  "id": "00761558-ab78-436b-97aa-7e568a982b83",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 322,
+    "prompt_cache_hit_tokens": 640,
+    "prompt_cache_miss_tokens": 2333,
+    "prompt_tokens": 2973,
+    "prompt_tokens_details": {
+      "cached_tokens": 640
+    },
+    "total_tokens": 3295
+  }
+}

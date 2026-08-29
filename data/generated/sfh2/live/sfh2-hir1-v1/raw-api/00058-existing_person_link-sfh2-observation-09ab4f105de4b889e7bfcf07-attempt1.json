@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"records\": [{\"unit_id\": \"sfh2-observation-09ab4f105de4b889e7bfcf07\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-05-fangzheng-009-liu-annotation-007\"], \"reason_types\": [\"distinct_person\"]}, {\"candidate_key\": \"c1\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-05-fangzheng-009-liu-annotation-007\"], \"reason_types\": [\"distinct_person\"]}, {\"candidate_key\": \"c2\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-05-fangzheng-009-liu-annotation-007\"], \"reason_types\": [\"distinct_person\"]}], \"preferred_candidate_key\": null, \"resolution\": \"no_existing_match\", \"explanation\": \"The occurrence refers to 朂 (荀朂), the minister criticized in the annotation. The reference semantics explicitly state the referent role is '荀朂, the minister criticized in the annotation' and the occurrence is distinct from the other mentions. Candidate c0 is 和嶠 (the person who praised the crown prince), candidate c1 is 荀顗, and candidate c2 is 郭奕 (courtesy name 大業). None of these candidates is 荀朂. The surface form 朂 is a personal name form referring to 荀朂, who is not among the supplied candidates. Therefore no existing candidate matches.\"}]}",
+              "name": "submit_sfh2_existing_person_links"
+            },
+            "id": "call_00_qJtxnAL8xVbYJZqww0ez5236",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1788016150,
+  "id": "4e0613d7-1e7e-4dc4-afe6-56355c9dd5cf",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 437,
+    "prompt_cache_hit_tokens": 768,
+    "prompt_cache_miss_tokens": 992,
+    "prompt_tokens": 1760,
+    "prompt_tokens_details": {
+      "cached_tokens": 768
+    },
+    "total_tokens": 2197
+  }
+}

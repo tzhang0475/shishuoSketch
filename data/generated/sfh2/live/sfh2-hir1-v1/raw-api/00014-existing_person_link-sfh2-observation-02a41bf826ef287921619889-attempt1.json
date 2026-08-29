@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"records\": [{\"unit_id\": \"sfh2-observation-02a41bf826ef287921619889\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"insufficient\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [], \"reason_types\": [\"no_identity_evidence\"]}, {\"candidate_key\": \"c1\", \"verdict\": \"insufficient\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [], \"reason_types\": [\"no_identity_evidence\"]}, {\"candidate_key\": \"c2\", \"verdict\": \"insufficient\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [], \"reason_types\": [\"no_identity_evidence\"]}], \"preferred_candidate_key\": null, \"resolution\": \"insufficient_evidence\", \"explanation\": \"The occurrence is the honorific '明公' in story 06-yaliang-029. The source evidence shows this story is about 桓温 (桓公) hosting a banquet with hidden soldiers (桓公伏甲設饌廣延朝士), and the annotation mentions 桓温. The honorific '明公' is used to address a high-ranking person. The candidate c1 (桓温) is the subject of this story, and the annotation text '温笑曰' and '温曰' indicates 桓温 is being addressed. However, the occurrence '明公' appears in the Liu annotation text where 謝安 addresses someone as '明公' - the context shows 謝安 speaking to 桓温. While c1 (桓温) is the most plausible referent given the story context, the semantic_reference_type is 'uncertain' and confidence is 'low'. The honorific '明公' alone does not provide definitive identity evidence linking to any specific candidate without stronger contextual confirmation. Given the low confidence and uncertain semantic type, the evidence is insufficient to definitively resolve the identity.\"}]}",
+              "name": "submit_sfh2_existing_person_links"
+            },
+            "id": "call_00_Cxk5VkIj7rL3Z6bbxqTQ5927",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1788016011,
+  "id": "627efb41-0ea6-4ed4-81aa-880253bb210a",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 471,
+    "prompt_cache_hit_tokens": 1792,
+    "prompt_cache_miss_tokens": 3212,
+    "prompt_tokens": 5004,
+    "prompt_tokens_details": {
+      "cached_tokens": 1792
+    },
+    "total_tokens": 5475
+  }
+}

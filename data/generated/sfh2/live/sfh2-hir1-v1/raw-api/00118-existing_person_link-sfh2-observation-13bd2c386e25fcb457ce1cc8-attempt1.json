@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"records\": [{\"unit_id\": \"sfh2-observation-13bd2c386e25fcb457ce1cc8\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-01-dexing-047-main\"], \"reason_types\": [\"office_conflict\", \"identity_conflict\"]}, {\"candidate_key\": \"c1\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-01-dexing-047-main\", \"sfh1-ev-01-dexing-047-liu-annotation-004\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"name_match\", \"office_match\", \"context_match\"]}], \"preferred_candidate_key\": \"c1\", \"resolution\": \"existing_person_supported\", \"explanation\": \"The occurrence '韓康伯' in story 01-dexing-047 refers to Han Kangbo (韓伯), who is described as 丹陽尹 (Governor of Danyang) and later 吏部尚書 (Minister of Personnel). Candidate c1 (韓伯) has aliases 韓康伯, courtesy name 康伯, and titles 丹陽尹 and 吏部尚書, all matching the occurrence context. Candidate c0 (温嶠) is a different person (Wen Qiao), who also held the title 丹陽尹 but is not named 韓康伯; the occurrence explicitly names 韓康伯, so c0 contradicts. The Liu annotation also references 太常韓康伯, further confirming c1.\"}]}",
+              "name": "submit_sfh2_existing_person_links"
+            },
+            "id": "call_00_PLDZuHauGaa6GTVDOwSZ5817",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1788016322,
+  "id": "381f9844-a2bb-4afe-9b9d-5b34f0c50373",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 413,
+    "prompt_cache_hit_tokens": 2432,
+    "prompt_cache_miss_tokens": 1890,
+    "prompt_tokens": 4322,
+    "prompt_tokens_details": {
+      "cached_tokens": 2432
+    },
+    "total_tokens": 4735
+  }
+}

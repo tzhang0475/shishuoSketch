@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"records\": [{\"unit_id\": \"sfh2-observation-022e80a499818e4f67e4977a\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-36-chouxi-003-liu-annotation-007\"], \"reason_types\": [\"identity_mismatch\"]}, {\"candidate_key\": \"c1\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-36-chouxi-003-liu-annotation-007\"], \"reason_types\": [\"identity_mismatch\"]}, {\"candidate_key\": \"c2\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-36-chouxi-003-liu-annotation-007\"], \"reason_types\": [\"identity_mismatch\"]}, {\"candidate_key\": \"c3\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-36-chouxi-003-liu-annotation-007\", \"sfh1-ev-36-chouxi-003-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"courtesy_name_match\", \"contextual_identity\"]}, {\"candidate_key\": \"c4\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-36-chouxi-003-liu-annotation-007\"], \"reason_types\": [\"identity_mismatch\"]}, {\"candidate_key\": \"c5\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-36-chouxi-003-liu-annotation-007\"], \"reason_types\": [\"identity_mismatch\"]}], \"preferred_candidate_key\": \"c3\", \"resolution\": \"existing_person_supported\", \"explanation\": \"The occurrence '世將' is the courtesy name of 王廙 (c3). The Liu annotation (sfh1-ev-36-chouxi-003-liu-annotation-007) explicitly states '廙字世將' (廙, courtesy name 世將), and the main text describes 世將 as the one who carried out the killing on behalf of 王敦, matching the 王廙 profile which has evidence from the same story (36-chouxi-003) identifying 世將 as 王廙. The other candidates (王導, 庾亮, 王敦, 王隱, 氾騰) do not match this courtesy name.\"}]}",
+              "name": "submit_sfh2_existing_person_links"
+            },
+            "id": "call_00_3ndYiXLCxfluj3nqUuc45930",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1788015997,
+  "id": "f988e28b-80c5-4d1b-b9fa-a18b65520858",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 662,
+    "prompt_cache_hit_tokens": 640,
+    "prompt_cache_miss_tokens": 5534,
+    "prompt_tokens": 6174,
+    "prompt_tokens_details": {
+      "cached_tokens": 640
+    },
+    "total_tokens": 6836
+  }
+}

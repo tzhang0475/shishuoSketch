@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"records\": [{\"unit_id\": \"sfh2-observation-13e31c5c17952fb7ea4c324f\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"insufficient\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [], \"reason_types\": [\"no_identity_evidence\"]}, {\"candidate_key\": \"c1\", \"verdict\": \"insufficient\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [], \"reason_types\": [\"no_identity_evidence\"]}, {\"candidate_key\": \"c2\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-05-fangzheng-055-liu-annotation-002\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"alias_match\", \"contextual_identity\"]}, {\"candidate_key\": \"c3\", \"verdict\": \"insufficient\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [], \"reason_types\": [\"no_identity_evidence\"]}], \"preferred_candidate_key\": \"c2\", \"resolution\": \"existing_person_supported\", \"explanation\": \"The occurrence surface is 王蒙, which appears in the Liu annotation text: '爲王蒙/小字也'. Candidate c2 (王濛) has alias 王蒙 registered as a valid alias (valid_alias_registry evidence 05-fangzheng-055), and the occurrence's source evidence is exactly this annotation. The surface 王蒙 matches the alias of 王濛 (c2). The other candidates (謝安, 桓溫, 王遐) have no identity link to the surface 王蒙 in this context.\"}]}",
+              "name": "submit_sfh2_existing_person_links"
+            },
+            "id": "call_00_gdJbB8tno6THNUg5CZUJ6932",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1788016327,
+  "id": "4f721871-4899-43e2-abe7-14de9cb5b7ec",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 432,
+    "prompt_cache_hit_tokens": 1664,
+    "prompt_cache_miss_tokens": 2499,
+    "prompt_tokens": 4163,
+    "prompt_tokens_details": {
+      "cached_tokens": 1664
+    },
+    "total_tokens": 4595
+  }
+}

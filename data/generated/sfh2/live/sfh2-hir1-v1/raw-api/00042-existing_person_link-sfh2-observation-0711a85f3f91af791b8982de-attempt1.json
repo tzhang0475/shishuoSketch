@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"records\": [{\"unit_id\": \"sfh2-observation-0711a85f3f91af791b8982de\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-14-rongzhi-005-main\"], \"reason_types\": [\"name_mismatch\"]}, {\"candidate_key\": \"c1\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-14-rongzhi-005-main\", \"sfh2-profile-evidence-1c1d35eda40d9aabc5e8\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"name_match\", \"alias_registry_match\"]}], \"preferred_candidate_key\": \"c1\", \"resolution\": \"existing_person_supported\", \"explanation\": \"The occurrence is '嵇叔夜' (style name of 嵇康) in story 14-rongzhi-005. The main text explicitly states '嵇康身長七尺八寸...山公曰嵇叔夜之為人也', where 嵇叔夜 is the style name of 嵇康. Candidate c1 is 嵇康 with courtesy name 叔夜/嵇叔夜, and its supporting evidence includes the same source (hng2c1-shishuo-14-rongzhi-005) via local_context_full_form_hint and validated_profile_provenance. Candidate c0 is 山濤 (山公), who is the speaker in this passage, not the referent of 嵇叔夜. Thus c1 is the correct match.\"}]}",
+              "name": "submit_sfh2_existing_person_links"
+            },
+            "id": "call_00_7lRtbXBvdrOMlr7MlQyF9385",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1788016095,
+  "id": "2eac1414-9442-416d-a69f-31b777af8049",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 423,
+    "prompt_cache_hit_tokens": 640,
+    "prompt_cache_miss_tokens": 1895,
+    "prompt_tokens": 2535,
+    "prompt_tokens_details": {
+      "cached_tokens": 640
+    },
+    "total_tokens": 2958
+  }
+}

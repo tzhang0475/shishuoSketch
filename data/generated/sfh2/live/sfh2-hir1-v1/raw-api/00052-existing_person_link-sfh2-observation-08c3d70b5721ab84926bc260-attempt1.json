@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"records\": [{\"unit_id\": \"sfh2-observation-08c3d70b5721ab84926bc260\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"insufficient\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [], \"reason_types\": [\"no_identity_evidence\"]}, {\"candidate_key\": \"c1\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-14-rongzhi-023-liu-annotation-004\", \"sfh1-ev-14-rongzhi-023-liu-annotation-003\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"exact_name_match\", \"contextual_role_match\"]}, {\"candidate_key\": \"c2\", \"verdict\": \"insufficient\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [], \"reason_types\": [\"no_identity_evidence\"]}, {\"candidate_key\": \"c3\", \"verdict\": \"insufficient\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [], \"reason_types\": [\"no_identity_evidence\"]}, {\"candidate_key\": \"c4\", \"verdict\": \"insufficient\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [], \"reason_types\": [\"no_identity_evidence\"]}, {\"candidate_key\": \"c5\", \"verdict\": \"insufficient\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [], \"reason_types\": [\"no_identity_evidence\"]}, {\"candidate_key\": \"c6\", \"verdict\": \"insufficient\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [], \"reason_types\": [\"no_identity_evidence\"]}, {\"candidate_key\": \"c7\", \"verdict\": \"insufficient\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [], \"reason_types\": [\"no_identity_evidence\"]}], \"preferred_candidate_key\": \"c1\", \"resolution\": \"existing_person_supported\", \"explanation\": \"The occurrence is the exact span '庾亮' in story 14-rongzhi-023. The Liu annotation evidence (sfh1-ev-14-rongzhi-023-liu-annotation-004) explicitly reads '初庾亮欲徵蘇峻卞壼不許温嶠及三吳欲' and (sfh1-ev-14-rongzhi-023-liu-annotation-003) reads '肅祖遺詔庾亮王導輔㓜主'. Candidate c1 is 庾亮 (courtesy name 元規), a well-attested historical figure whose dossier includes exact catalogue matches for '庾亮' and the title '庾太尉'. The context of the 蘇峻 rebellion (蘇峻, 卞壼, 温嶠, 陶侃, 祖約 all appear in the same annotation) matches c1's known neighbors including person-010 (蘇峻) with relation '之亂' in story 29-jianshe-008. The exact name match combined with the coherent historical context (庾亮 as regent alongside 王導, attempting to summon 蘇峻) strongly supports c1. Other candidates are different persons mentioned in the same annotation context but do not match the surface '庾亮'.\"}]}",
+              "name": "submit_sfh2_existing_person_links"
+            },
+            "id": "call_00_PFiTRsymODTBkbvYofig0445",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1788016124,
+  "id": "bf05afe6-04d1-4e11-afb9-ed8096eb1d7b",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 800,
+    "prompt_cache_hit_tokens": 1792,
+    "prompt_cache_miss_tokens": 5409,
+    "prompt_tokens": 7201,
+    "prompt_tokens_details": {
+      "cached_tokens": 1792
+    },
+    "total_tokens": 8001
+  }
+}

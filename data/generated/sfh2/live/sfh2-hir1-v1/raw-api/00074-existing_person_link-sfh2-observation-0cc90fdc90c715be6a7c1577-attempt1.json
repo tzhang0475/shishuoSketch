@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"records\": [{\"unit_id\": \"sfh2-observation-0cc90fdc90c715be6a7c1577\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-01-dexing-016-main\", \"sfh1-ev-01-dexing-016-liu-annotation-004\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"catalogue_exact_match\", \"valid_alias_registry\"]}, {\"candidate_key\": \"c1\", \"verdict\": \"insufficient\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [], \"reason_types\": []}, {\"candidate_key\": \"c2\", \"verdict\": \"insufficient\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [], \"reason_types\": []}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"existing_person_supported\", \"explanation\": \"The occurrence is 王戎 in story 01-dexing-016, where 王戎 says he lived with 嵇康 for twenty years. Candidate c0 is 王戎 (王濬沖), with extensive supporting evidence including catalogue exact matches and valid alias registry entries. The main text '王戎云與嵇康居二十年' directly matches c0's identity. The Liu annotation '王濬沖在襄城面數百未嘗見其疾聲朱顏' further confirms c0 (王濬沖 = 王戎). Candidate c1 (王濬) and c2 (嵇康) are not the referent of this occurrence.\"}]}",
+              "name": "submit_sfh2_existing_person_links"
+            },
+            "id": "call_00_fCVg21Pq6XxomPiKJotH1831",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1788016195,
+  "id": "eb40dee5-ede9-470b-bb46-ebd43bbcd7a0",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 416,
+    "prompt_cache_hit_tokens": 1408,
+    "prompt_cache_miss_tokens": 2115,
+    "prompt_tokens": 3523,
+    "prompt_tokens_details": {
+      "cached_tokens": 1408
+    },
+    "total_tokens": 3939
+  }
+}

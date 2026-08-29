@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"records\": [{\"unit_id\": \"sfh2-observation-0f777a9afc88f98a23444025\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-19-xianyuan-032-liu-annotation-005\"], \"reason_types\": [\"identity_conflict\"]}], \"preferred_candidate_key\": null, \"resolution\": \"no_existing_match\", \"explanation\": \"The occurrence refers to 郭珍 (a military person 軍人郭 who killed 桓亮), as stated in the reference semantics. The candidate c0 is 韓伯 (韓康伯), a person with titles 丹陽尹 and 吏部尚書. The occurrence's referent 郭珍 is explicitly distinct from 韓康伯. The candidate 韓伯/韓康伯 appears in the same story but is not the referent of the span '珍'. The reference semantics explicitly identifies the referent as 郭珍, a military person, which contradicts the candidate identity.\"}]}",
+              "name": "submit_sfh2_existing_person_links"
+            },
+            "id": "call_00_GoqSkwrgE4NIr7NVyxdX3164",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1788016256,
+  "id": "64ac5f4e-d8aa-4371-a60a-716fa056521b",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 289,
+    "prompt_cache_hit_tokens": 896,
+    "prompt_cache_miss_tokens": 674,
+    "prompt_tokens": 1570,
+    "prompt_tokens_details": {
+      "cached_tokens": 896
+    },
+    "total_tokens": 1859
+  }
+}

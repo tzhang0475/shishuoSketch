@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"records\": [{\"unit_id\": \"sfh2-observation-0a278048fe5d44906ed3d649\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-05-fangzheng-028-main\"], \"reason_types\": [\"role_conflict\"]}, {\"candidate_key\": \"c1\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-05-fangzheng-028-main\", \"sfh1-ev-05-fangzheng-028-liu-annotation-002\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"referent_role_match\", \"contextual_identity\"]}, {\"candidate_key\": \"c2\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-05-fangzheng-028-main\"], \"reason_types\": [\"role_conflict\"]}], \"preferred_candidate_key\": \"c1\", \"resolution\": \"existing_person_supported\", \"explanation\": \"The occurrence '充' in story 05-fangzheng-028 refers to 何充 (何次道). The main text states '時何充爲敦主簿在坐正色曰充即廬江人' — the full form 何充 is given, and the abbreviated '充' refers to this same person who is the 主簿 of 王敦. The reference_semantics confirms referent_role is 何充. Candidate c1 (何充, courtesy name 次道) matches this identity. Candidate c0 (王敦) is the 敦 in the text but not the referent of '充'. Candidate c2 (沈充) is a different person whose courtesy name is 士居 and appears in a different story (10-guizhen-016), not this one.\"}]}",
+              "name": "submit_sfh2_existing_person_links"
+            },
+            "id": "call_00_TUkyWA369Ps37RyqZelE6383",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1788016156,
+  "id": "d5593588-9d14-4763-88cd-9909047d7b93",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 480,
+    "prompt_cache_hit_tokens": 2304,
+    "prompt_cache_miss_tokens": 1578,
+    "prompt_tokens": 3882,
+    "prompt_tokens_details": {
+      "cached_tokens": 2304
+    },
+    "total_tokens": 4362
+  }
+}

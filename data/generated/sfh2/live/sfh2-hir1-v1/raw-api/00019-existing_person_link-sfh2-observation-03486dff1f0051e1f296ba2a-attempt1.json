@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"records\": [{\"unit_id\": \"sfh2-observation-03486dff1f0051e1f296ba2a\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-19-xianyuan-032-liu-annotation-004\"], \"reason_types\": [\"different_person\"]}], \"preferred_candidate_key\": null, \"resolution\": \"no_existing_match\", \"explanation\": \"The occurrence refers to 劉毅 (Liu Yi), a person mentioned in the Liu annotation as the one who killed 甄恭, 衡陽前太守韓繪之, and others. The candidate c0 is 韓伯 (Han Bo), courtesy name 康伯, who was 丹陽尹 and 吏部尚書. The occurrence's exact span is 劉毅, which is a different person entirely from 韓伯. The candidate 韓伯 is not the referent of the occurrence 劉毅. There is no identity match between the occurrence (劉毅) and the candidate (韓伯).\"}]}",
+              "name": "submit_sfh2_existing_person_links"
+            },
+            "id": "call_00_1cky7nNIHwESeDW8qX172881",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1788016026,
+  "id": "c38403b9-e6eb-4e73-812f-352effa3439e",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 296,
+    "prompt_cache_hit_tokens": 640,
+    "prompt_cache_miss_tokens": 800,
+    "prompt_tokens": 1440,
+    "prompt_tokens_details": {
+      "cached_tokens": 640
+    },
+    "total_tokens": 1736
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"records\": [{\"unit_id\": \"sfh2-observation-14f60a451ae85d5dac336fa6\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"insufficient\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [], \"reason_types\": [\"no_identity_evidence\"]}, {\"candidate_key\": \"c1\", \"verdict\": \"insufficient\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [], \"reason_types\": [\"no_identity_evidence\"]}], \"preferred_candidate_key\": null, \"resolution\": \"insufficient_evidence\", \"explanation\": \"The occurrence is the surface form 庾道季 (Yu Daoji), which appears in the text 庾道季云思理倫和吾愧康伯志力彊正吾愧文度. The annotation indicates 巳見/庾龢, suggesting this refers to 庾龢 (Yu He), courtesy name 道季. Neither candidate c0 (孫晷, courtesy 文度) nor c1 (韓伯, courtesy 康伯) matches the referent 庾道季/庾龢. The occurrence is a different person entirely. However, since the task only allows judging supplied candidates, and neither candidate corresponds to 庾道季/庾龢, there is no identity evidence linking the occurrence to either candidate. The candidates are mentioned in the same passage (康伯 and 文度 are the people 庾道季 compares himself to), but the occurrence itself is 庾道季, not those persons. Thus insufficient evidence for either candidate.\"}]}",
+              "name": "submit_sfh2_existing_person_links"
+            },
+            "id": "call_00_QPUBgYE8X1tq0SEhLBpX8145",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1788016346,
+  "id": "e2935f2a-620f-4bc7-bf7d-6bf455025fc4",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 410,
+    "prompt_cache_hit_tokens": 640,
+    "prompt_cache_miss_tokens": 927,
+    "prompt_tokens": 1567,
+    "prompt_tokens_details": {
+      "cached_tokens": 640
+    },
+    "total_tokens": 1977
+  }
+}

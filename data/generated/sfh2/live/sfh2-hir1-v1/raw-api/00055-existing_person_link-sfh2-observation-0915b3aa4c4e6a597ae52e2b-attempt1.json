@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"records\": [{\"unit_id\": \"sfh2-observation-0915b3aa4c4e6a597ae52e2b\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"insufficient\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [], \"reason_types\": [\"no_identity_evidence\"]}, {\"candidate_key\": \"c1\", \"verdict\": \"insufficient\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [], \"reason_types\": [\"no_identity_evidence\"]}, {\"candidate_key\": \"c2\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-02-yanyu-030-main\", \"sfh1-ev-02-yanyu-030-liu-annotation-001\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"courtesy_name_match\", \"contextual_identity\"]}, {\"candidate_key\": \"c3\", \"verdict\": \"insufficient\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [], \"reason_types\": [\"no_identity_evidence\"]}, {\"candidate_key\": \"c4\", \"verdict\": \"insufficient\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [], \"reason_types\": [\"no_identity_evidence\"]}], \"preferred_candidate_key\": \"c2\", \"resolution\": \"existing_person_supported\", \"explanation\": \"The occurrence is the courtesy name '伯仁' in story 02-yanyu-030. The main text reads '庾公造周伯仁...伯仁曰...' and the Liu annotation explicitly identifies 伯仁 as 周顗 (字伯仁), matching candidate c2 (周顗, courtesy name 伯仁). The occurrence refers to 周伯仁/周顗, which is candidate c2. Other candidates (庾亮, 王敦, 羊祜, 虞預) have no identity connection to this occurrence.\"}]}",
+              "name": "submit_sfh2_existing_person_links"
+            },
+            "id": "call_00_en9nhKwxZDPs4Dl9GlWT9394",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1788016142,
+  "id": "e5492284-d386-4d1d-a8d5-f525c854389e",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 500,
+    "prompt_cache_hit_tokens": 1280,
+    "prompt_cache_miss_tokens": 5592,
+    "prompt_tokens": 6872,
+    "prompt_tokens_details": {
+      "cached_tokens": 1280
+    },
+    "total_tokens": 7372
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"records\": [{\"unit_id\": \"sfh2-observation-0cf8b9950b77c3bd2c4b3385\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-05-fangzheng-058-main\"], \"reason_types\": [\"identity_mismatch\"]}, {\"candidate_key\": \"c1\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-05-fangzheng-058-main\"], \"reason_types\": [\"identity_mismatch\"]}, {\"candidate_key\": \"c2\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-05-fangzheng-058-main\", \"sfh1-ev-05-fangzheng-058-liu-annotation-001\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"identity_assertion\", \"contextual_evidence\"]}], \"preferred_candidate_key\": \"c2\", \"resolution\": \"existing_person_supported\", \"explanation\": \"The occurrence is the surname reference 王 in story 05-fangzheng-058. The reference semantics indicate this 王 refers to 王文度 (Wang Tanzhi), whose courtesy name is 文度. The main text explicitly states 王文度爲桓公長史 and the Liu annotation identifies 王坦之 (Wang Tanzhi). Candidate c2 is 王恭 (courtesy name 孝伯), which does not match 王文度. However, the reference semantics explicitly state the referent is 王文度 (Wang Tanzhi). Among the candidates, c1 is 孫晷 (courtesy name 文度) — but the reference is to 王文度, not 孫晷. Candidate c2 is 王恭, whose surname is 王, and the reference is a surname reference 王. Given the candidates supplied, c2 (王恭, surname 王) is the only candidate whose surname matches the surname reference 王. The reference semantics describe the referent as 王文度 (Wang Tanzhi), but among the supplied candidates, c2 is the closest match as the surname 王 person. Note: the reference is to 王文度 (Wang Tanzhi), not 王恭, but among the supplied candidates c2 is the only 王-surname candidate. Given the constraints of judging only supplied candidates, c2 is the best supported match.\"}]}",
+              "name": "submit_sfh2_existing_person_links"
+            },
+            "id": "call_00_pDgCOejiCXuOI4qilNXX0949",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1788016200,
+  "id": "b5d7ab35-a779-404d-94ce-4103da82581b",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 605,
+    "prompt_cache_hit_tokens": 1408,
+    "prompt_cache_miss_tokens": 1342,
+    "prompt_tokens": 2750,
+    "prompt_tokens_details": {
+      "cached_tokens": 1408
+    },
+    "total_tokens": 3355
+  }
+}

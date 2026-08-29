@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"records\": [{\"unit_id\": \"sfh2-observation-0d4a0879d6032b9300500d66\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-29-jianshe-008-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"contextual_identity\", \"title_match\"]}, {\"candidate_key\": \"c1\", \"verdict\": \"insufficient\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [], \"reason_types\": []}, {\"candidate_key\": \"c2\", \"verdict\": \"insufficient\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [], \"reason_types\": []}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"existing_person_supported\", \"explanation\": \"The occurrence is the surname reference '庾' in story 29-jianshe-008. The surrounding text reads '蘇峻之亂庾太尉南奔見陶公...庾因留白...庾云...大嘆庾非唯風流兼有治實'. The full form '庾太尉' appears in the same passage, and candidate c0 (庾亮) has the title '庾太尉' and is directly attested in this story (sfh2-profile-evidence-248a06cb406a4f33a0bd / sfh2-profile-evidence-3e466e00541f379fd2b2). The surname reference '庾' clearly refers to 庾太尉 = 庾亮. Candidates c1 (蘇峻) and c2 (陶侃) are other persons in the same narrative but are not the referent of the surname '庾'.\"}]}",
+              "name": "submit_sfh2_existing_person_links"
+            },
+            "id": "call_00_sekKxhYT6iXuHES3sY0H0135",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1788016211,
+  "id": "e3c3a701-976d-41c2-a845-f7c0eec4a4a5",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 450,
+    "prompt_cache_hit_tokens": 1280,
+    "prompt_cache_miss_tokens": 1129,
+    "prompt_tokens": 2409,
+    "prompt_tokens_details": {
+      "cached_tokens": 1280
+    },
+    "total_tokens": 2859
+  }
+}

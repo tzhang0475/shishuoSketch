@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"records\": [{\"unit_id\": \"sfh2-observation-140758f2b0179a7162200437\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-02-yanyu-054-main\"], \"reason_types\": [\"identity_conflict\"]}, {\"candidate_key\": \"c1\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-02-yanyu-054-main\"], \"reason_types\": [\"identity_conflict\"]}], \"preferred_candidate_key\": null, \"resolution\": \"no_existing_match\", \"explanation\": \"The occurrence is the surname reference '禇' referring to 褚裒 (Chu Pou), the person being visited (禇公). The reference semantics explicitly state the referent role is '褚裒 (Chu Pou), same person as 禇公'. Neither candidate c0 (劉惔/劉真長) nor c1 (王濛/王仲祖) matches this person. The text shows 王長史 (王濛) and 劉尹 (劉惔) together visiting 禇公, so the occurrence '禇' refers to a third person distinct from both candidates. Both candidates are contradicted by the identity evidence.\"}]}",
+              "name": "submit_sfh2_existing_person_links"
+            },
+            "id": "call_00_6dZgqCqBwwEJ05bIT7LB4328",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1788016336,
+  "id": "fb16ef50-7e7b-4208-96b5-dbcbd68c894c",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 360,
+    "prompt_cache_hit_tokens": 1024,
+    "prompt_cache_miss_tokens": 1399,
+    "prompt_tokens": 2423,
+    "prompt_tokens_details": {
+      "cached_tokens": 1024
+    },
+    "total_tokens": 2783
+  }
+}

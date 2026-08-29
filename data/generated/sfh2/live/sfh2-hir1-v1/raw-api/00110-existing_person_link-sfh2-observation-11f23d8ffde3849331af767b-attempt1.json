@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"records\": [{\"unit_id\": \"sfh2-observation-11f23d8ffde3849331af767b\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-02-yanyu-078-liu-annotation-005\", \"sfh1-ev-02-yanyu-078-liu-annotation-002\", \"sfh1-ev-02-yanyu-078-liu-annotation-003\"], \"reason_types\": [\"identity_mismatch\"]}], \"preferred_candidate_key\": null, \"resolution\": \"no_existing_match\", \"explanation\": \"The occurrence refers to the person named 玄 (謝玄), who answers in the Liu annotation. The candidate c0 is 山濤 (山公), a completely different person. The reference_semantics explicitly identifies the referent as 'person named 玄 (謝玄) who answers', which contradicts the candidate 山濤. The candidate's supporting evidence is about 山濤 in the main text and annotations, but the occurrence span '玄' refers to 謝玄, not 山濤.\"}]}",
+              "name": "submit_sfh2_existing_person_links"
+            },
+            "id": "call_00_6xWAzhMxsKRQslklIre27324",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1788016300,
+  "id": "ecce2b8d-84e0-41cf-aec5-3a0daebd95ef",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 308,
+    "prompt_cache_hit_tokens": 640,
+    "prompt_cache_miss_tokens": 1278,
+    "prompt_tokens": 1918,
+    "prompt_tokens_details": {
+      "cached_tokens": 640
+    },
+    "total_tokens": 2226
+  }
+}

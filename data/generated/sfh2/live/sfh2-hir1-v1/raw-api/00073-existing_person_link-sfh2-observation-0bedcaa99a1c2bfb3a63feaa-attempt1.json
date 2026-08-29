@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"records\": [{\"unit_id\": \"sfh2-observation-0bedcaa99a1c2bfb3a63feaa\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-01-dexing-023-liu-annotation-001\"], \"reason_types\": [\"office_holder_mismatch\"]}], \"preferred_candidate_key\": null, \"resolution\": \"no_existing_match\", \"explanation\": \"The occurrence refers to the office title 荆州刺史 (Inspector of Jingzhou) held by 王澄 (Wang Cheng), as stated in the Liu annotation: '王澄字平子有達識荆州刺史'. The candidate c0 is 阮籍 (Ruan Ji), who is mentioned in the same story's annotation (sfh1-ev-01-dexing-023-liu-annotation-002) as a historical figure from the Wei dynasty, but he is not the holder of the 荆州刺史 office. The office holder reference points to 王澄, not 阮籍. Therefore, the candidate contradicts the occurrence.\"}]}",
+              "name": "submit_sfh2_existing_person_links"
+            },
+            "id": "call_00_7EVdEd5BVsodqCWu7vfL2217",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1788016192,
+  "id": "dd44d986-6c9d-4eda-a2f1-d78a18da7941",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 303,
+    "prompt_cache_hit_tokens": 640,
+    "prompt_cache_miss_tokens": 1083,
+    "prompt_tokens": 1723,
+    "prompt_tokens_details": {
+      "cached_tokens": 640
+    },
+    "total_tokens": 2026
+  }
+}

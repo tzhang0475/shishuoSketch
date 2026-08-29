@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"records\": [{\"unit_id\": \"sfh2-observation-04814a17d1f28e8530e830d6\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-05-fangzheng-034-main\"], \"reason_types\": [\"identity_conflict\"]}, {\"candidate_key\": \"c1\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-05-fangzheng-034-main\"], \"reason_types\": [\"identity_conflict\"]}, {\"candidate_key\": \"c2\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-05-fangzheng-034-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"exact_name_match\", \"contextual_role_match\"]}], \"preferred_candidate_key\": \"c2\", \"resolution\": \"existing_person_supported\", \"explanation\": \"The occurrence is '侍中鍾雅' (Chamberlain Zhong Ya). Candidate c2 is 鍾雅 (Zhong Ya), whose courtesy name is 彦胄. The main text explicitly names 侍中鍾雅 as the person who remained by the emperor's side during 蘇峻's rebellion. Candidate c0 is 謝安 (Xie An), a different person entirely. Candidate c1 is 蘇峻 (Su Jun), who is the rebel mentioned in the text but not the referent of '侍中鍾雅'. The exact name match and the office title 侍中 align with candidate c2.\"}]}",
+              "name": "submit_sfh2_existing_person_links"
+            },
+            "id": "call_00_Okly7PLhWOLyemdt2m8P5124",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1788016049,
+  "id": "cbe2faa9-7099-443d-948f-9bfdc01c098a",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 421,
+    "prompt_cache_hit_tokens": 1664,
+    "prompt_cache_miss_tokens": 1120,
+    "prompt_tokens": 2784,
+    "prompt_tokens_details": {
+      "cached_tokens": 1664
+    },
+    "total_tokens": 3205
+  }
+}

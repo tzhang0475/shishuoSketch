@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"records\": [{\"unit_id\": \"sfh2-observation-0da23ea755b9a14dfb457549\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-05-fangzheng-011-liu-annotation-002\"], \"reason_types\": [\"different_person\"]}, {\"candidate_key\": \"c1\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-05-fangzheng-011-main\"], \"reason_types\": [\"different_person\"]}], \"preferred_candidate_key\": null, \"resolution\": \"no_existing_match\", \"explanation\": \"The occurrence refers to 王濟 (Wang Ji), who is explicitly named in the source evidence. Candidate c0 is 王戎 (Wang Rong), a different person who appears in the same annotation text but is not the referent. Candidate c1 is 和嶠 (He Qiao), also a different person mentioned in the main text. Neither candidate matches 王濟.\"}]}",
+              "name": "submit_sfh2_existing_person_links"
+            },
+            "id": "call_00_JauvOYdvIMLqSwTDr3li1521",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1788016217,
+  "id": "7f8c855f-eb51-473a-9604-ee19e63034ba",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 306,
+    "prompt_cache_hit_tokens": 1408,
+    "prompt_cache_miss_tokens": 923,
+    "prompt_tokens": 2331,
+    "prompt_tokens_details": {
+      "cached_tokens": 1408
+    },
+    "total_tokens": 2637
+  }
+}

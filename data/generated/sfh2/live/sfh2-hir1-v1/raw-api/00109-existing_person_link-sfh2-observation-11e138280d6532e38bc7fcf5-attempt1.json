@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"records\": [{\"unit_id\": \"sfh2-observation-11e138280d6532e38bc7fcf5\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-02-yanyu-107-main\", \"sfh1-ev-02-yanyu-107-liu-annotation-005\", \"sfh2-profile-evidence-51308babce611c391194\", \"sfh2-profile-evidence-ea4d8154f57fc2aeed2c\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"identity_assertion\", \"catalogue_exact_match\", \"valid_alias_registry\", \"local_context_full_form_hint\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"existing_person_supported\", \"explanation\": \"The occurrence '潘岳' in story 02-yanyu-107 refers to Pan Yue (潘岳), the Western Jin poet. The candidate c0 is the same person: the main text quotes '潘岳秋興賦敘曰余兼虎賁中郎將寓直散騎之省', and the Liu annotation also references '昔潘岳秋興賦叙'. The candidate dossier for c0 includes the same Shishuo Xinyu 02-yanyu-107 source as supporting evidence, with the alias '岳' and courtesy name '安仁' matching the biography in 055-liezhuan-002 (潘岳字安仁). The occurrence is a direct reference to this historical figure, fully supported by the candidate's profile evidence.\"}]}",
+              "name": "submit_sfh2_existing_person_links"
+            },
+            "id": "call_00_xsJXgKaovWnBo06bU00P3539",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1788016296,
+  "id": "c2304964-7a6b-4ada-acf1-c6913e274dbf",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 402,
+    "prompt_cache_hit_tokens": 640,
+    "prompt_cache_miss_tokens": 1542,
+    "prompt_tokens": 2182,
+    "prompt_tokens_details": {
+      "cached_tokens": 640
+    },
+    "total_tokens": 2584
+  }
+}

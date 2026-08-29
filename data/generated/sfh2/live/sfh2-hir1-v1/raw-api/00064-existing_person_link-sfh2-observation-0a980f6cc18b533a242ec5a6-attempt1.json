@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"records\": [{\"unit_id\": \"sfh2-observation-0a980f6cc18b533a242ec5a6\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-01-dexing-047-main\", \"sfh1-ev-01-dexing-047-liu-annotation-005\"], \"reason_types\": [\"identity_conflict\"]}, {\"candidate_key\": \"c1\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-01-dexing-047-main\", \"sfh1-ev-01-dexing-047-liu-annotation-004\", \"sfh1-ev-01-dexing-047-liu-annotation-006\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"name_match\", \"contextual_role_match\", \"kinship_match\"]}, {\"candidate_key\": \"c2\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-01-dexing-047-main\", \"sfh1-ev-01-dexing-047-liu-annotation-005\"], \"reason_types\": [\"identity_conflict\"]}], \"preferred_candidate_key\": \"c1\", \"resolution\": \"existing_person_supported\", \"explanation\": \"The occurrence '康伯' in story 01-dexing-047 refers to 韓康伯 (韓伯), who is described in the main text as '韓康伯時為丹陽尹' and later '韓後果為吏部尚書'. Candidate c1 (韓伯, courtesy name 康伯) matches this exactly: he was 丹陽尹 and 吏部尚書, and his mother was 殷 (from the 殷 family). The Liu annotation mentions '康伯母揚州刺史殷浩之妹' and '太常韓康伯', confirming the identity as 韓康伯. Candidate c0 (温嶠) is a different person (丹陽尹 but different name/identity), and candidate c2 (殷浩) is the maternal uncle referenced in the annotation, not the referent of '康伯'.\"}]}",
+              "name": "submit_sfh2_existing_person_links"
+            },
+            "id": "call_00_K8jKyJmkqbMiEUoB3kKS9895",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1788016167,
+  "id": "1f554641-d039-497c-9348-b5e92263073e",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 547,
+    "prompt_cache_hit_tokens": 640,
+    "prompt_cache_miss_tokens": 4023,
+    "prompt_tokens": 4663,
+    "prompt_tokens_details": {
+      "cached_tokens": 640
+    },
+    "total_tokens": 5210
+  }
+}

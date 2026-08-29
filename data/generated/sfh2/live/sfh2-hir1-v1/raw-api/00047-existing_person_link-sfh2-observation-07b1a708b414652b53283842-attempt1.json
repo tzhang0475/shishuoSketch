@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"records\": [{\"unit_id\": \"sfh2-observation-07b1a708b414652b53283842\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-03-zhengshi-006-liu-annotation-004\"], \"reason_types\": [\"name_mismatch\"]}, {\"candidate_key\": \"c1\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-03-zhengshi-006-liu-annotation-004\"], \"reason_types\": [\"name_mismatch\"]}, {\"candidate_key\": \"c2\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-03-zhengshi-006-liu-annotation-004\"], \"reason_types\": [\"name_mismatch\"]}, {\"candidate_key\": \"c3\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-03-zhengshi-006-liu-annotation-004\"], \"reason_types\": [\"name_mismatch\"]}], \"preferred_candidate_key\": null, \"resolution\": \"no_existing_match\", \"explanation\": \"The occurrence refers to '文和', which is the courtesy name of Zheng Chong (鄭沖), as indicated by the annotation '文和滎陽開封人' and the reference semantics stating 'person (Zheng Chong's courtesy name)'. None of the supplied candidates (郗鑒, 謝安, 賈充, 王隱) correspond to Zheng Chong. The surface form '文和' does not match any alias or courtesy name of the supplied candidates, and the annotation explicitly identifies this person as Zheng Chong, who is not among the candidates.\"}]}",
+              "name": "submit_sfh2_existing_person_links"
+            },
+            "id": "call_00_hMDEPQbNbL25ts4HpXbb6638",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1788016109,
+  "id": "ee92c91d-6702-4acc-9753-06a9c5e1a60e",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 478,
+    "prompt_cache_hit_tokens": 640,
+    "prompt_cache_miss_tokens": 2566,
+    "prompt_tokens": 3206,
+    "prompt_tokens_details": {
+      "cached_tokens": 640
+    },
+    "total_tokens": 3684
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"records\": [{\"unit_id\": \"sfh2-observation-04adec71efb4a7f24cde1814\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-23-rendan-013-main\"], \"reason_types\": [\"semantic_mismatch\"]}], \"preferred_candidate_key\": null, \"resolution\": \"no_existing_match\", \"explanation\": \"The occurrence is the office title '步兵' (infantry), which appears in the text '亦欲作逹步兵曰仲容已預之'. The candidate c0 is 石苞 (Shi Bao) with courtesy name 仲容. The text mentions 仲容 (the courtesy name), but the occurrence being assessed is the office title '步兵', not the person 仲容/石苞. The office title '步兵' refers to the position of 步兵校尉 (Commandant of Infantry), which is associated with 阮籍 (Ruan Ji) in this context, not with 石苞. The candidate 石苞/仲容 does not match the office title '步兵'. This is a semantic mismatch — the occurrence is an office title, not a person reference to 石苞.\"}]}",
+              "name": "submit_sfh2_existing_person_links"
+            },
+            "id": "call_00_Tr3dpWhrQJfroYl1vEYM1526",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1788016052,
+  "id": "52e00395-b71f-4ea8-8329-4d6657d988d1",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 331,
+    "prompt_cache_hit_tokens": 640,
+    "prompt_cache_miss_tokens": 546,
+    "prompt_tokens": 1186,
+    "prompt_tokens_details": {
+      "cached_tokens": 640
+    },
+    "total_tokens": 1517
+  }
+}

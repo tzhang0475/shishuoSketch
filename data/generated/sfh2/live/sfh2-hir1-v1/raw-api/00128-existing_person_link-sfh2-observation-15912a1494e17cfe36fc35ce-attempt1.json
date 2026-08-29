@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"records\": [{\"unit_id\": \"sfh2-observation-15912a1494e17cfe36fc35ce\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-19-xianyuan-032-liu-annotation-004\", \"sfh1-ev-19-xianyuan-032-liu-annotation-003\"], \"reason_types\": [\"identity_mismatch\"]}, {\"candidate_key\": \"c1\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-19-xianyuan-032-liu-annotation-004\", \"sfh1-ev-19-xianyuan-032-liu-annotation-003\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"identity_assertion\", \"courtesy_name_match\", \"kinship_match\"]}], \"preferred_candidate_key\": \"c1\", \"resolution\": \"existing_person_supported\", \"explanation\": \"The occurrence '亮' refers to 桓亮 (Huan Liang), courtesy name 景真, grandson of 桓温 and son of 桓濟, as stated in the reference semantics. Candidate c1 (趙至) has aliases 桓亮 and 桓景真, matching the occurrence's referent. The Liu annotation evidence (sfh1-ev-19-xianyuan-032-liu-annotation-003) explicitly states '桓亮字景真' and identifies him as 大司馬温之孫父濟給事, confirming the identity. Candidate c0 (韓伯/韓康伯) is a different person entirely - the occurrence '亮' is not 韓康伯, and the annotation evidence about 桓亮 contradicts any link to c0.\"}]}",
+              "name": "submit_sfh2_existing_person_links"
+            },
+            "id": "call_00_yzB7KqcyGPJH5fq7lugk6367",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1788016350,
+  "id": "3351b56c-fb42-4326-8adf-f356275a7210",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 445,
+    "prompt_cache_hit_tokens": 896,
+    "prompt_cache_miss_tokens": 1172,
+    "prompt_tokens": 2068,
+    "prompt_tokens_details": {
+      "cached_tokens": 896
+    },
+    "total_tokens": 2513
+  }
+}

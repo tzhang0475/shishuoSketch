@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"records\": [{\"unit_id\": \"sfh2-observation-08dbcaeeea49eee41d5d121a\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-02-yanyu-066-main\"], \"reason_types\": [\"role_mismatch\"]}, {\"candidate_key\": \"c1\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-02-yanyu-066-main\"], \"reason_types\": [\"role_mismatch\"]}, {\"candidate_key\": \"c2\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-02-yanyu-066-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"surface_match\", \"contextual_role_match\"]}], \"preferred_candidate_key\": \"c2\", \"resolution\": \"existing_person_supported\", \"explanation\": \"The occurrence is the single character '王' in story 02-yanyu-066. The main text reads '王長史與劉真長别後相見 王謂劉曰...'. The character '王' here is the surname reference for 王長史 (王濛), who is the speaker addressing 劉真長. Candidate c2 (王恭) has the alias '王' and title '王從事中郎', and its retrieval basis is validated_profile_provenance from hng2c1-shishuo-06-yaliang-041-main where '王' is used as a surname reference. However, the context here is 王長史 (王濛), not 王恭. The surface '王' alone matches c2's matched form, but the actual referent in this story is 王濛 (c1), who is referred to as 王長史. Since the occurrence is a bare surname '王' and the story context identifies the person as 王長史 (王濛), candidate c1 (王濛) is the actual referent. However, the occurrence surface is just '王' which matches c2's matched form '王'. Given the low confidence and uncertain semantic reference, and that the story context clearly identifies the person as 王長史 (王濛), the bare '王' refers to 王濛. But c2's dossier has '王' as a matched form from validated profile provenance. The occurrence '王' in this story refers to 王長史 = 王濛 (c1), not 王恭 (c2). Since c1's matched forms are '仲祖' and '王長史', not the bare '王', and the occurrence is the bare '王', the best match among supplied candidates is c2 by surface form, though the actual referent is 王濛. Given the instruction to judge only supplied candidates, c2 is the surface match for '王'. However, the story context (王長史與劉真長) makes clear the referent is 王濛. The bare '王' is a surname reference to 王長史. Among the candidates, c1 is 王濛 (王長史) but its matched forms don't include bare '王'. c2 is 王恭 with matched form '王'. The occurrence is a surname reference with uncertain semantic type. Given the story context identifies the person as 王長史 (王濛), and c1 is 王濛, but the surface form '王' matches c2. The reference is to 王濛 in context. I'll assess c1 as the actual referent via context, but the surface form matches c2. Given low confidence, I'll mark c1 as plausible (contextual match to 王長史) and c2 as the surface match. Actually, re-reading: the occurrence '王' is the subject of '謂劉曰' - it is 王長史 speaking. So the referent is 王濛 (c1). The bare surname '王' is a shortened reference to 王長史. c1's matched forms are '仲祖' and '王長史', not bare '王'. But the occurrence is bare '王'. Given the story context, the referent is clearly 王濛. I'll mark c1 as support via contextual identification, and c2 as contradict since 王恭 is not in this story. Let me reconsider: the instruction says judge only supplied candidates. The occurrence '王' in this story refers to 王長史 = 王濛. c1 is 王濛. So c1 should be supported. c2 (王恭) is not the referent here. c0 (劉惔) is the other person in the story (劉真長), not the '王'. So c0 contradicts. Final: c1 supported, c0 and c2 contradicted.\"}]}",
+              "name": "submit_sfh2_existing_person_links"
+            },
+            "id": "call_00_pLHi0lKDbsYejPGJD87X9665",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1788016129,
+  "id": "0a56f96f-da5d-41ee-bb3d-0675e864d45b",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 1121,
+    "prompt_cache_hit_tokens": 1024,
+    "prompt_cache_miss_tokens": 1785,
+    "prompt_tokens": 2809,
+    "prompt_tokens_details": {
+      "cached_tokens": 1024
+    },
+    "total_tokens": 3930
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"records\": [{\"unit_id\": \"sfh2-observation-1433447ac7092c5084e554ed\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-01-dexing-025-liu-annotation-002\"], \"reason_types\": [\"office_mismatch\", \"identity_mismatch\"]}, {\"candidate_key\": \"c1\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-01-dexing-025-liu-annotation-002\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"office_holder_match\", \"contextual_kinship_match\"]}], \"preferred_candidate_key\": \"c1\", \"resolution\": \"existing_person_supported\", \"explanation\": \"The occurrence '宜都太守' (office title) refers to the office holder. The Liu annotation (sfh1-ev-01-dexing-025-liu-annotation-002) states '父穆宜都太守' — the father of 顧榮 (Gu Rong) held the office of 宜都太守. This directly links the office holder to 顧榮's father (穆), not to 王導 (c0). Candidate c1 (顧榮) is the person whose family context is described in this annotation, and the office '宜都太守' belongs to his father 穆. The annotation is part of the Liu commentary on the story about 顧榮 in 洛陽. Candidate c0 (王導) has no connection to this office or this annotation. Therefore c1 is supported as the relevant existing person for this occurrence.\"}]}",
+              "name": "submit_sfh2_existing_person_links"
+            },
+            "id": "call_00_Uu1pkP5OmBdI9LGhUv2e8362",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1788016343,
+  "id": "f8d1d3e4-9b0e-4adf-9ddd-26c399fc7ffb",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 423,
+    "prompt_cache_hit_tokens": 1792,
+    "prompt_cache_miss_tokens": 585,
+    "prompt_tokens": 2377,
+    "prompt_tokens_details": {
+      "cached_tokens": 1792
+    },
+    "total_tokens": 2800
+  }
+}

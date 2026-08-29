@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"records\": [{\"unit_id\": \"sfh2-observation-132154b46003a32f1d9f10a4\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-08-shangyu-051-main\"], \"reason_types\": [\"distinct_person\"]}, {\"candidate_key\": \"c1\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-08-shangyu-051-main\"], \"reason_types\": [\"distinct_person\"]}], \"preferred_candidate_key\": null, \"resolution\": \"no_existing_match\", \"explanation\": \"The occurrence refers to 衛玠 (Wei Jie), the person who fled from Luoyang to join 王敦. Neither candidate c0 (王敦) nor c1 (謝鯤) matches 衛玠. The text explicitly distinguishes 衛玠 as the refugee who came to 王敦, while 王敦 is the general he fled to and 謝鯤 is the 長史 who converses with 王敦. The occurrence is a distinct person not represented by either supplied candidate.\"}]}",
+              "name": "submit_sfh2_existing_person_links"
+            },
+            "id": "call_00_bwgNUbJNA1SGYiFLmF0h3204",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1788016317,
+  "id": "0810c33a-1862-41b0-8c82-ee9778458515",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 333,
+    "prompt_cache_hit_tokens": 2304,
+    "prompt_cache_miss_tokens": 1164,
+    "prompt_tokens": 3468,
+    "prompt_tokens_details": {
+      "cached_tokens": 2304
+    },
+    "total_tokens": 3801
+  }
+}

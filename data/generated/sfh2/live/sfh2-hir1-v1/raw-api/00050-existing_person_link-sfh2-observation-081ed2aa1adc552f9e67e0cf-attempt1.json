@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"records\": [{\"unit_id\": \"sfh2-observation-081ed2aa1adc552f9e67e0cf\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-08-shangyu-073-liu-annotation-001\"], \"reason_types\": [\"identity_mismatch\"]}, {\"candidate_key\": \"c1\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-08-shangyu-073-liu-annotation-001\"], \"reason_types\": [\"identity_mismatch\"]}], \"preferred_candidate_key\": null, \"resolution\": \"no_existing_match\", \"explanation\": \"The occurrence refers to '明濟' (Mingji), a courtesy name. The Liu annotation for story 08-shangyu-073 states: '明濟有文武才王濛每稱其思理淹通蕃屏/宋明帝文章志曰劉恢字道生沛國人識局'. This identifies 明濟 as 劉恢 (Liu Hui), courtesy name 道生, from 沛國. Neither candidate c0 (桓溫/Huan Wen) nor c1 (王濛/Wang Meng) matches 劉恢. The annotation mentions 王濛 as someone who praised 明濟, but the referent of 明濟 is 劉恢, not 王濛. Neither candidate corresponds to the person referred to by the courtesy name 明濟.\"}]}",
+              "name": "submit_sfh2_existing_person_links"
+            },
+            "id": "call_00_u19FeXPufLxoIDIDwCaZ1529",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1788016119,
+  "id": "dbf7bb6a-75a0-4aa2-baab-2e7d559f68d3",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 402,
+    "prompt_cache_hit_tokens": 1408,
+    "prompt_cache_miss_tokens": 1224,
+    "prompt_tokens": 2632,
+    "prompt_tokens_details": {
+      "cached_tokens": 1408
+    },
+    "total_tokens": 3034
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"records\": [{\"unit_id\": \"sfh2-observation-09b3e9d49827646d87893ea3\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-27-jiajue-006-main\"], \"reason_types\": [\"semantic_type_mismatch\"]}, {\"candidate_key\": \"c1\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-27-jiajue-006-main\"], \"reason_types\": [\"semantic_type_mismatch\"]}], \"preferred_candidate_key\": null, \"resolution\": \"no_existing_match\", \"explanation\": \"The occurrence is the ruler reference '帝' (the emperor), which in the story 27-jiajue-006 refers to 晉明帝 (Emperor Ming of Jin), who is the subject inspecting 王敦's camp. The candidates c0 (王敦) and c1 (王隱) are both referenced via the form 王大將軍, which refers to 王敦, the rebel general being inspected. The occurrence '帝' is a ruler reference distinct from the general 王敦. Neither candidate matches the emperor referent. The coreference_with mentions and the main text confirm '帝' refers to the emperor (晉明帝), not to 王敦 or 王隱. Thus no existing candidate matches.\"}]}",
+              "name": "submit_sfh2_existing_person_links"
+            },
+            "id": "call_00_jPwTKrCnSefFSXfgCt2i9766",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1788016154,
+  "id": "125286f6-0bc4-460c-ade4-0522164d548f",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 379,
+    "prompt_cache_hit_tokens": 2304,
+    "prompt_cache_miss_tokens": 1035,
+    "prompt_tokens": 3339,
+    "prompt_tokens_details": {
+      "cached_tokens": 2304
+    },
+    "total_tokens": 3718
+  }
+}

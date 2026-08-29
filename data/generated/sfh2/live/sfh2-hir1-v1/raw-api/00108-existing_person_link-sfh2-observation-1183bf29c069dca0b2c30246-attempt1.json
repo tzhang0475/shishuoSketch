@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"records\": [{\"unit_id\": \"sfh2-observation-1183bf29c069dca0b2c30246\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"insufficient\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [], \"reason_types\": [\"semantic_type_uncertain\"]}, {\"candidate_key\": \"c1\", \"verdict\": \"insufficient\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [], \"reason_types\": [\"semantic_type_uncertain\"]}], \"preferred_candidate_key\": null, \"resolution\": \"insufficient_evidence\", \"explanation\": \"The occurrence is the honorific '公' in the phrase '陸曰公未覩不鳴不躍者耳'. The referent of '公' is uncertain. In context, 陸 (陸平原/Lu Ji) is speaking to 張華 (Zhang Hua), addressing him as '公'. However, the semantic reference type is marked as 'uncertain' and the reference semantics indicate low confidence with no anchor mentions. The candidates are 張華 (c0) and 顧榮 (c1). The honorific '公' could plausibly refer to 張華 since 陸 is addressing him in the dialogue, but the evidence is not definitive enough to establish identity with confidence. There is insufficient evidence to firmly link the honorific '公' to either candidate.\"}]}",
+              "name": "submit_sfh2_existing_person_links"
+            },
+            "id": "call_00_ejytfPWdMqLmke3muDPO9309",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1788016293,
+  "id": "3528d4aa-bd4c-4f18-af57-611b0f01ed89",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 360,
+    "prompt_cache_hit_tokens": 640,
+    "prompt_cache_miss_tokens": 850,
+    "prompt_tokens": 1490,
+    "prompt_tokens_details": {
+      "cached_tokens": 640
+    },
+    "total_tokens": 1850
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"records\": [{\"unit_id\": \"sfh2-observation-057f2a279cba82da113d9461\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"insufficient\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [], \"reason_types\": [\"semantic_type_uncertain\"]}, {\"candidate_key\": \"c1\", \"verdict\": \"insufficient\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [], \"reason_types\": [\"semantic_type_uncertain\"]}, {\"candidate_key\": \"c2\", \"verdict\": \"insufficient\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [], \"reason_types\": [\"semantic_type_uncertain\"]}], \"preferred_candidate_key\": null, \"resolution\": \"insufficient_evidence\", \"explanation\": \"The occurrence is the honorific '陛下' (Your Majesty), which is a term of address for the emperor. The semantic reference type is 'uncertain' and the referent role is empty. The candidates are 和嶠 (c0), 荀顗 (c1), and 郭奕 (c2), none of whom is the emperor. The honorific '陛下' refers to the emperor (likely 武帝/世祖 in this context), not to any of the supplied candidates. There is no evidence linking this honorific to any of the three candidates, and the semantic type is uncertain. Therefore, insufficient evidence to link to any candidate.\"}]}",
+              "name": "submit_sfh2_existing_person_links"
+            },
+            "id": "call_00_fQ339AJWQMqATrQyRQdp4405",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1788016061,
+  "id": "4e9ab328-2994-4d56-98b5-fc575ea37001",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 381,
+    "prompt_cache_hit_tokens": 640,
+    "prompt_cache_miss_tokens": 1068,
+    "prompt_tokens": 1708,
+    "prompt_tokens_details": {
+      "cached_tokens": 640
+    },
+    "total_tokens": 2089
+  }
+}

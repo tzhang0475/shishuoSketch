@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"records\": [{\"unit_id\": \"sfh2-observation-0b4443cedb865d7515fba564\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-26-qingdi-002-liu-annotation-001\"], \"reason_types\": [\"different_person\"]}, {\"candidate_key\": \"c1\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-26-qingdi-002-liu-annotation-001\"], \"reason_types\": [\"different_person\"]}], \"preferred_candidate_key\": null, \"resolution\": \"no_existing_match\", \"explanation\": \"The occurrence refers to 樂毅 (Yue Yi), the general of Yan, as confirmed by the Liu annotation (史記曰樂毅中山人賢而為燕). Neither candidate c0 (庾亮/庾元規) nor c1 (周顗/周伯仁) matches this person. The candidates are the speakers in the story (庾元規語周伯仁), not the referent 樂毅. This is a distinct historical figure with no match among the supplied candidates.\"}]}",
+              "name": "submit_sfh2_existing_person_links"
+            },
+            "id": "call_00_vV94OtM3msFCN4410GT98171",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1788016181,
+  "id": "224950ab-8a58-48f1-891b-a7a249fd4e5c",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 336,
+    "prompt_cache_hit_tokens": 1280,
+    "prompt_cache_miss_tokens": 1689,
+    "prompt_tokens": 2969,
+    "prompt_tokens_details": {
+      "cached_tokens": 1280
+    },
+    "total_tokens": 3305
+  }
+}

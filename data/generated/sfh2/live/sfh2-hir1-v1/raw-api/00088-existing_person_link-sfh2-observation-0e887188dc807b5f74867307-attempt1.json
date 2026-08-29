@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"records\": [{\"unit_id\": \"sfh2-observation-0e887188dc807b5f74867307\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-06-yaliang-041-main\"], \"reason_types\": [\"referent_role_mismatch\"]}, {\"candidate_key\": \"c1\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-06-yaliang-041-main\"], \"reason_types\": [\"referent_role_mismatch\"]}], \"preferred_candidate_key\": null, \"resolution\": \"no_existing_match\", \"explanation\": \"The occurrence refers to 殷荆州 (殷仲堪, governor of Jingzhou). Neither candidate c0 (王恭) nor c1 (束晳) matches this referent. The text mentions 殷荆州 as the speaker/actor, while 王恭 and 束晳 are other persons mentioned in the same passage. The reference semantics confirm the referent is 殷仲堪, governor of Jingzhou, which is not among the supplied candidates.\"}]}",
+              "name": "submit_sfh2_existing_person_links"
+            },
+            "id": "call_00_PMuZyHmBcujc3QWDRJID0573",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1788016238,
+  "id": "34dbe5dc-6cec-4e32-9100-03859d6922cf",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 317,
+    "prompt_cache_hit_tokens": 640,
+    "prompt_cache_miss_tokens": 1050,
+    "prompt_tokens": 1690,
+    "prompt_tokens_details": {
+      "cached_tokens": 640
+    },
+    "total_tokens": 2007
+  }
+}

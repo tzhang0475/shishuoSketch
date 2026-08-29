@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"records\": [{\"unit_id\": \"sfh2-observation-07bb36a4f215511809c21e97\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-05-fangzheng-025-main\"], \"reason_types\": [\"identity_conflict\"]}, {\"candidate_key\": \"c1\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-05-fangzheng-025-main\", \"sfh1-ev-05-fangzheng-025-liu-annotation-002\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"name_match\", \"contextual_evidence\"]}, {\"candidate_key\": \"c2\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-05-fangzheng-025-main\"], \"reason_types\": [\"identity_conflict\"]}, {\"candidate_key\": \"c3\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-05-fangzheng-025-main\"], \"reason_types\": [\"identity_conflict\"]}, {\"candidate_key\": \"c4\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-05-fangzheng-025-main\"], \"reason_types\": [\"identity_conflict\"]}, {\"candidate_key\": \"c5\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-05-fangzheng-025-main\"], \"reason_types\": [\"identity_conflict\"]}], \"preferred_candidate_key\": \"c1\", \"resolution\": \"existing_person_supported\", \"explanation\": \"The occurrence '亮' in story 05-fangzheng-025 refers to 庾亮 (c1). The main text states '諸葛恢大女適太尉庾亮兒' (Zhuge Hui's eldest daughter married 太尉庾亮's son), and the Liu annotation confirms '庾亮子會娶恢女'. The surface '亮' matches 庾亮's name, and the context (太尉庾亮, 庾亮兒) clearly identifies this as 庾亮. Candidate c1 (庾亮, courtesy name 元規, title 庾太尉) is the correct match. The other candidates (王羲之, 蘇峻, 謝尚, 王戎, 鄧攸) do not match the context.\"}]}",
+              "name": "submit_sfh2_existing_person_links"
+            },
+            "id": "call_00_QYY1Io9y58gyWtGN0D2c3741",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1788016115,
+  "id": "92e4a7ac-23ec-4844-b5c3-8e2831263f96",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 657,
+    "prompt_cache_hit_tokens": 640,
+    "prompt_cache_miss_tokens": 4298,
+    "prompt_tokens": 4938,
+    "prompt_tokens_details": {
+      "cached_tokens": 640
+    },
+    "total_tokens": 5595
+  }
+}

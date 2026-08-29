@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"records\": [{\"unit_id\": \"sfh2-observation-0abd5a91594aae0b58987d3c\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-08-shangyu-073-liu-annotation-001\"], \"reason_types\": [\"name_mismatch\", \"identity_conflict\"]}, {\"candidate_key\": \"c1\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-08-shangyu-073-liu-annotation-001\"], \"reason_types\": [\"name_mismatch\", \"identity_conflict\"]}], \"preferred_candidate_key\": null, \"resolution\": \"no_existing_match\", \"explanation\": \"The occurrence refers to 劉恢 (Liu Hui), courtesy name 明濟, also known as 劉道生, from 沛國. The Liu annotation explicitly identifies this person as 劉恢字道生. Neither candidate matches: c0 is 桓溫 (Huan Wen) and c1 is 王濛 (Wang Meng). The occurrence's referent 劉恢 is a distinct person not represented among the supplied candidates. The annotation text mentions 王濛 (王濛每稱其思理淹通) but that is a reference within the annotation to a different person, not the referent of the occurrence span 劉恢.\"}]}",
+              "name": "submit_sfh2_existing_person_links"
+            },
+            "id": "call_00_m8s1e7bwCkSfYbAFeAMv6097",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1788016173,
+  "id": "5cc611fb-0f0b-4c01-ae17-a2d86804e648",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 380,
+    "prompt_cache_hit_tokens": 1408,
+    "prompt_cache_miss_tokens": 1281,
+    "prompt_tokens": 2689,
+    "prompt_tokens_details": {
+      "cached_tokens": 1408
+    },
+    "total_tokens": 3069
+  }
+}

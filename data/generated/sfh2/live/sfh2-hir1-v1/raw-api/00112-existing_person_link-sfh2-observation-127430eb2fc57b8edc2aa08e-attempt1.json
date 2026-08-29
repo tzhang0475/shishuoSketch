@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"records\": [{\"unit_id\": \"sfh2-observation-127430eb2fc57b8edc2aa08e\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"insufficient\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [], \"reason_types\": [\"no_identity_evidence\"]}, {\"candidate_key\": \"c1\", \"verdict\": \"insufficient\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [], \"reason_types\": [\"no_identity_evidence\"]}], \"preferred_candidate_key\": null, \"resolution\": \"insufficient_evidence\", \"explanation\": \"The occurrence is the surface form '長沙' with reference_form 'office_title' and semantic_reference_type 'uncertain'. The text mentions '長沙之勲' referring to the achievement/merit of Changsha (likely a place/title reference to Tao Kan's marquisate of Changsha). Candidate c0 is 袁宏 (Yuan Hong), who is the author of the 東征賦 mentioned in the text but is not the referent of '長沙'. Candidate c1 is 陶侃 (Tao Kan), whose title '陶公' appears in the text, and '長沙' could plausibly refer to his title as 長沙郡公 (Duke of Changsha). However, the occurrence is marked as 'uncertain' semantic type with low confidence, and '長沙' as an office_title reference is ambiguous. Neither candidate has direct identity evidence linking them to the surface form '長沙' as an office title. The evidence is insufficient to definitively link this occurrence to either candidate.\"}]}",
+              "name": "submit_sfh2_existing_person_links"
+            },
+            "id": "call_00_RZdDhcAsMYdyebLFwQFS3301",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1788016305,
+  "id": "2ca4990f-8615-4fd3-986f-4fca819a8bac",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 411,
+    "prompt_cache_hit_tokens": 640,
+    "prompt_cache_miss_tokens": 1016,
+    "prompt_tokens": 1656,
+    "prompt_tokens_details": {
+      "cached_tokens": 640
+    },
+    "total_tokens": 2067
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"records\": [{\"unit_id\": \"sfh2-observation-12d1430ed7a3fb15772ec7fe\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-09-pinzao-032-main\"], \"reason_types\": [\"different_person\"]}], \"preferred_candidate_key\": null, \"resolution\": \"no_existing_match\", \"explanation\": \"The occurrence refers to 惠帝 (Emperor Hui), the crown prince established as emperor, who is a Jin dynasty emperor. The candidate c0 is 桓温 (Huan Wen), a Jin dynasty general/official. The occurrence's referent is Emperor Hui (司馬衷), not 桓温. The candidate 桓温 appears in the same story text (09-pinzao-032) as a speaker, but the occurrence span '惠帝' refers to Emperor Hui, a distinct person. There is no identity match between the occurrence and candidate c0.\"}]}",
+              "name": "submit_sfh2_existing_person_links"
+            },
+            "id": "call_00_eqa3EBpZIDrWrnAUH19W9262",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1788016314,
+  "id": "0f27956b-eb51-4a27-a0b2-14df26077be3",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 281,
+    "prompt_cache_hit_tokens": 1408,
+    "prompt_cache_miss_tokens": 706,
+    "prompt_tokens": 2114,
+    "prompt_tokens_details": {
+      "cached_tokens": 1408
+    },
+    "total_tokens": 2395
+  }
+}

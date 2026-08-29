@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"records\": [{\"unit_id\": \"sfh2-observation-0054f4639ff9a8ab6a6b1139\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"insufficient\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [], \"reason_types\": [\"no_identity_evidence\"]}, {\"candidate_key\": \"c1\", \"verdict\": \"insufficient\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [], \"reason_types\": [\"no_identity_evidence\"]}, {\"candidate_key\": \"c2\", \"verdict\": \"insufficient\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [], \"reason_types\": [\"no_identity_evidence\"]}], \"preferred_candidate_key\": null, \"resolution\": \"insufficient_evidence\", \"explanation\": \"The occurrence is the office title '撫軍' (office holder reference). The source evidence mentions 庾亮, 何充, and 殷浩 in the Liu annotation context, but the occurrence '撫軍' refers to the office of 撫軍 general held by someone. The annotation text mentions '太宗以撫軍輔政' — the 撫軍 here refers to 太宗 (Emperor Jianwen / 司馬昱), not any of the three candidates. None of the three candidates (庾亮, 何充, 殷浩) is clearly identified as the holder of the 撫軍 office in this context. The evidence is insufficient to link the occurrence to any candidate.\"}]}",
+              "name": "submit_sfh2_existing_person_links"
+            },
+            "id": "call_00_9ib8T57idHPiHiNyZF4s9397",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1788015976,
+  "id": "1ddd7dbe-0387-476a-86a3-ecdd20bafdb8",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 390,
+    "prompt_cache_hit_tokens": 640,
+    "prompt_cache_miss_tokens": 1966,
+    "prompt_tokens": 2606,
+    "prompt_tokens_details": {
+      "cached_tokens": 640
+    },
+    "total_tokens": 2996
+  }
+}

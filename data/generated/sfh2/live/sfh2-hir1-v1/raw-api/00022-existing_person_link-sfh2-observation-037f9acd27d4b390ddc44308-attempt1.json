@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"records\": [{\"unit_id\": \"sfh2-observation-037f9acd27d4b390ddc44308\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-02-yanyu-066-main\"], \"reason_types\": [\"identity_conflict\"]}, {\"candidate_key\": \"c1\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-02-yanyu-066-main\", \"sfh1-ev-02-yanyu-066-liu-annotation-001\", \"sfh1-ev-02-yanyu-066-liu-annotation-004\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"contextual_identity\", \"name_form_match\"]}, {\"candidate_key\": \"c2\", \"verdict\": \"insufficient\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [], \"reason_types\": [\"insufficient_evidence\"]}], \"preferred_candidate_key\": \"c1\", \"resolution\": \"existing_person_supported\", \"explanation\": \"The occurrence is the surname reference '王' in story 02-yanyu-066. The main text states '王長史與劉真長别後相見' and '王謂劉曰', where 王長史 is identified in the Liu annotation as 王濛 (仲祖, courtesy name), matching candidate c1 (王濛). The annotation evidence sfh1-ev-02-yanyu-066-liu-annotation-001 explicitly identifies 王長史 as 濛字仲祖 from 太原晉陽. Candidate c0 (劉惔) is the other party in this story (劉真長), not the referent of '王'. Candidate c2 (王恭) has no supporting evidence connecting to this story. Therefore the surname reference '王' refers to 王濛 (c1).\"}]}",
+              "name": "submit_sfh2_existing_person_links"
+            },
+            "id": "call_00_q35rrL6G28i6abCJtkFF1967",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1788016035,
+  "id": "c1b6be81-8cfa-4e99-99f3-ea0ee316707c",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 488,
+    "prompt_cache_hit_tokens": 640,
+    "prompt_cache_miss_tokens": 2194,
+    "prompt_tokens": 2834,
+    "prompt_tokens_details": {
+      "cached_tokens": 640
+    },
+    "total_tokens": 3322
+  }
+}

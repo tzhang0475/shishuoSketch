@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"records\": [{\"unit_id\": \"sfh2-observation-066181da2d9217dc64ae60e3\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-08-shangyu-022-main\"], \"reason_types\": [\"identity_conflict\"]}], \"preferred_candidate_key\": null, \"resolution\": \"no_existing_match\", \"explanation\": \"The occurrence refers to '司徒李胤' (Sikong Li Yin), a person mentioned in the Shishuo Xinyu passage as the maternal grandfather of Feng Sun and Xing Qiao. The candidate c0 is 劉惔 (Liu Dan), also known as 劉真長/真長. The occurrence '司徒李胤' is a different person entirely — Li Yin, a Situ (司徒) official — not Liu Dan. The candidate's dossier shows Liu Dan is associated with the name 真長 and appears in story 08-shangyu-022, but the occurrence span '司徒李胤' refers to a distinct individual (Li Yin), not to Liu Dan. There is no identity link between the occurrence and candidate c0.\"}]}",
+              "name": "submit_sfh2_existing_person_links"
+            },
+            "id": "call_00_hNOrMfUKo6Vk6AMsugON7195",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1788016077,
+  "id": "1502435c-bf1f-434e-bd04-6e7cea28b815",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 315,
+    "prompt_cache_hit_tokens": 1024,
+    "prompt_cache_miss_tokens": 597,
+    "prompt_tokens": 1621,
+    "prompt_tokens_details": {
+      "cached_tokens": 1024
+    },
+    "total_tokens": 1936
+  }
+}

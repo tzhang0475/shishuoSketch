@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"records\": [{\"unit_id\": \"sfh2-observation-0ef36d681624ede72fa3bb96\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-10-guizhen-011-main\"], \"reason_types\": [\"different_person_reference\"]}], \"preferred_candidate_key\": null, \"resolution\": \"no_existing_match\", \"explanation\": \"The occurrence refers to 元帝 (Emperor Yuan), a ruler title. The candidate c0 is 王導 (Wang Dao), also known as 王茂弘. In the source text, 王茂弘 is the one who admonishes the emperor (帝), and 元帝 is the emperor himself. The occurrence '元帝' refers to Emperor Yuan (Sima Rui), not to Wang Dao. The candidate c0 (王導/王茂弘) is a distinct person from the emperor being referenced. The surface form '元帝' is a ruler title, not an alias of Wang Dao.\"}]}",
+              "name": "submit_sfh2_existing_person_links"
+            },
+            "id": "call_00_ENTHAJSsckcXKiHmP4E16699",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1788016250,
+  "id": "95c6f73c-1032-4000-89fe-724ce2aec2d6",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 289,
+    "prompt_cache_hit_tokens": 1792,
+    "prompt_cache_miss_tokens": 451,
+    "prompt_tokens": 2243,
+    "prompt_tokens_details": {
+      "cached_tokens": 1792
+    },
+    "total_tokens": 2532
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"records\": [{\"unit_id\": \"sfh2-observation-00068fb3ec09554d4541a6b5\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-24-jianao-002-liu-annotation-003\", \"sfh1-ev-24-jianao-002-liu-annotation-002\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"alias_match\", \"local_context\"]}, {\"candidate_key\": \"c1\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-24-jianao-002-liu-annotation-003\"], \"reason_types\": [\"alias_mismatch\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"existing_person_supported\", \"explanation\": \"The occurrence '濬沖' is the courtesy name of 王戎 (c0). The Liu annotation text explicitly states '濬沖曰勝公榮' and '謂渾濬沖清尚非卿倫也戎嘗詣籍共飲', where 濬沖 is used in direct reference to 王戎 (戎). The main text '王戎弱冠詣阮籍' confirms 王戎 is the subject. Candidate c0 has 濬沖 as a matched form and courtesy name. Candidate c1 (阮籍) is the person being visited, not the referent of 濬沖.\"}]}",
+              "name": "submit_sfh2_existing_person_links"
+            },
+            "id": "call_00_dsLpNJWLLF6H4zUUgTuX4780",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1788015973,
+  "id": "daaa8afa-0d66-4251-88fb-653b24a117f7",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 387,
+    "prompt_cache_hit_tokens": 0,
+    "prompt_cache_miss_tokens": 3217,
+    "prompt_tokens": 3217,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "total_tokens": 3604
+  }
+}

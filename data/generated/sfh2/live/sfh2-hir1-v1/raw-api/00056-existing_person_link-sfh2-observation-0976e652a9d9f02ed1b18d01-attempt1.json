@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"records\": [{\"unit_id\": \"sfh2-observation-0976e652a9d9f02ed1b18d01\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-05-fangzheng-037-liu-annotation-001\"], \"reason_types\": [\"identity_conflict\"]}, {\"candidate_key\": \"c1\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-05-fangzheng-037-liu-annotation-001\"], \"reason_types\": [\"identity_conflict\"]}], \"preferred_candidate_key\": null, \"resolution\": \"no_existing_match\", \"explanation\": \"The occurrence is the single character '碩' (Shuo), which the Liu annotation explicitly identifies as 碩峻弟也 (Shuo, younger brother of 峻). The annotation text '碩峻弟也' clearly states that 碩 is the younger brother of 峻 (Su Jun). Neither candidate c0 (蘇峻/Su Jun) nor c1 (陶侃/Tao Kan) matches this referent. The character 碩 refers to Su Shuo, Su Jun's younger brother, who is not among the supplied candidates. The annotation also mentions 峻 (Su Jun) and 陶侃 separately, but the occurrence itself refers to 碩, a distinct person.\"}]}",
+              "name": "submit_sfh2_existing_person_links"
+            },
+            "id": "call_00_CU1ZN3AKNH78afFvq77V6403",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1788016145,
+  "id": "a15ff86c-aa41-4bc3-b4c7-762eb9bf885c",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 374,
+    "prompt_cache_hit_tokens": 640,
+    "prompt_cache_miss_tokens": 1358,
+    "prompt_tokens": 1998,
+    "prompt_tokens_details": {
+      "cached_tokens": 640
+    },
+    "total_tokens": 2372
+  }
+}

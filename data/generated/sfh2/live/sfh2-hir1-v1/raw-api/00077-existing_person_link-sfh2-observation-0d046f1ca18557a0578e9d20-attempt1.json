@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"records\": [{\"unit_id\": \"sfh2-observation-0d046f1ca18557a0578e9d20\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-09-pinzao-014-main\"], \"reason_types\": [\"semantic_mismatch\"]}, {\"candidate_key\": \"c1\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-09-pinzao-014-main\"], \"reason_types\": [\"semantic_mismatch\"]}], \"preferred_candidate_key\": null, \"resolution\": \"no_existing_match\", \"explanation\": \"The occurrence is the surface form '明帝' (Emperor Ming), a ruler title referring to Emperor Ming of Jin. Neither candidate c0 (郗鑒) nor c1 (周顗) corresponds to this ruler title. The text mentions 明帝 as the questioner, and both 周伯仁/周顗 and 郗鑒 are the subjects being discussed, not the referent of '明帝'. The occurrence refers to Emperor Ming (司馬紹), who is not among the supplied candidates.\"}]}",
+              "name": "submit_sfh2_existing_person_links"
+            },
+            "id": "call_00_Yo7sQNftUxsSILonXoOX4321",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1788016205,
+  "id": "72340b71-df58-4f8f-aa0b-753cac8c7ec5",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 338,
+    "prompt_cache_hit_tokens": 768,
+    "prompt_cache_miss_tokens": 1489,
+    "prompt_tokens": 2257,
+    "prompt_tokens_details": {
+      "cached_tokens": 768
+    },
+    "total_tokens": 2595
+  }
+}

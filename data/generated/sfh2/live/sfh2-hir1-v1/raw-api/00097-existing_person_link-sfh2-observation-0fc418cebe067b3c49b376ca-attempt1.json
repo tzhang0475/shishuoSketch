@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"records\": [{\"unit_id\": \"sfh2-observation-0fc418cebe067b3c49b376ca\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-02-yanyu-101-main\"], \"reason_types\": [\"office_holder_mismatch\"]}, {\"candidate_key\": \"c1\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-02-yanyu-101-main\"], \"reason_types\": [\"office_holder_mismatch\"]}, {\"candidate_key\": \"c2\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-02-yanyu-101-main\"], \"reason_types\": [\"office_holder_mismatch\"]}, {\"candidate_key\": \"c3\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-02-yanyu-101-main\"], \"reason_types\": [\"office_holder_mismatch\"]}], \"preferred_candidate_key\": null, \"resolution\": \"no_existing_match\", \"explanation\": \"The occurrence '太傅' in story 02-yanyu-101 refers to 司馬道子 (Sima Daozi), holder of the office of 太傅 (Grand Tutor), as explicitly stated in the reference semantics. The text describes 桓玄 visiting 司馬太傅 (Sima Daozi), who is drunk and asks about 桓温. None of the supplied candidates (郗鑒, 謝安, 桓溫, 羊祜) is Sima Daozi. 郗鑒 and 謝安 both held the title 太傅 but are different historical persons; 桓溫 is the subject being discussed (桓温來欲作賊), not the 太傅; 羊祜 held 僕射 not 太傅. No supplied candidate matches the referent, so no existing person is supported.\"}]}",
+              "name": "submit_sfh2_existing_person_links"
+            },
+            "id": "call_00_2Mn2aIu6odUmHh9Oilc95915",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1788016263,
+  "id": "5bb9ae00-0226-4631-9cfe-8af5e5d61f82",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 528,
+    "prompt_cache_hit_tokens": 768,
+    "prompt_cache_miss_tokens": 4708,
+    "prompt_tokens": 5476,
+    "prompt_tokens_details": {
+      "cached_tokens": 768
+    },
+    "total_tokens": 6004
+  }
+}

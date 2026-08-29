@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"records\": [{\"unit_id\": \"sfh2-observation-0ec69e22383e03670206d502\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-19-xianyuan-013-liu-annotation-005\"], \"reason_types\": [\"different_person\"]}], \"preferred_candidate_key\": null, \"resolution\": \"no_existing_match\", \"explanation\": \"The occurrence refers to 齊獻王妃 (Consort of the Prince of Qi), i.e., Li Shi (李氏), the former wife of Jia Chong (賈充). The candidate c0 is 賈充 (Jia Chong) himself. The reference semantics explicitly state the referent is the Consort of the Prince of Qi, Li Shi, who is distinct from Jia Chong. The source evidence mentions 齊獻王妃 in the context of Li Shi being released and becoming the Consort of the Prince of Qi, which is a different person from Jia Chong. Therefore, candidate c0 contradicts the occurrence.\"}]}",
+              "name": "submit_sfh2_existing_person_links"
+            },
+            "id": "call_00_mUufaimYvKYXD8CJX7ZJ7856",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1788016244,
+  "id": "b9810db2-b677-45b7-bec1-af4a8eb2cc4e",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 288,
+    "prompt_cache_hit_tokens": 1024,
+    "prompt_cache_miss_tokens": 713,
+    "prompt_tokens": 1737,
+    "prompt_tokens_details": {
+      "cached_tokens": 1024
+    },
+    "total_tokens": 2025
+  }
+}

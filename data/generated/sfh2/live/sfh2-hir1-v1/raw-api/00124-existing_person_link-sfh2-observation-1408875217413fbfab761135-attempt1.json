@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"records\": [{\"unit_id\": \"sfh2-observation-1408875217413fbfab761135\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"insufficient\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-03-zhengshi-005-liu-annotation-010\"], \"reason_types\": [\"no_identity_evidence\"]}], \"preferred_candidate_key\": null, \"resolution\": \"insufficient_evidence\", \"explanation\": \"The occurrence is the character 朂, which appears in the Liu annotation text: '人祖朂尚書左丞父滿平原太守並以文學稱'. This refers to a person named 朂 (Xù), who was the grandfather of someone and served as 尚書左丞. The candidate 嵇康 (Ji Kang) is a famous figure, but there is no evidence linking the person 朂 to 嵇康. The surface form 朂 does not match 嵇康, and the context describes a different individual entirely. There is insufficient evidence to establish identity between the occurrence and candidate c0.\"}]}",
+              "name": "submit_sfh2_existing_person_links"
+            },
+            "id": "call_00_22Kej9D7fdUFnwoxoFAw3748",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1788016338,
+  "id": "d745884d-a7aa-4e39-b505-7affdcda1891",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 297,
+    "prompt_cache_hit_tokens": 640,
+    "prompt_cache_miss_tokens": 967,
+    "prompt_tokens": 1607,
+    "prompt_tokens_details": {
+      "cached_tokens": 640
+    },
+    "total_tokens": 1904
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"records\": [{\"unit_id\": \"sfh2-observation-0aa6601f2c1926471b98d413\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-04-wenxue-097-liu-annotation-006\"], \"reason_types\": [\"referent_role_mismatch\"]}, {\"candidate_key\": \"c1\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-04-wenxue-097-liu-annotation-006\"], \"reason_types\": [\"referent_role_mismatch\"]}], \"preferred_candidate_key\": null, \"resolution\": \"no_existing_match\", \"explanation\": \"The occurrence '宣城' is an office_title reference to 宣城太守, referring to 桓温's father 桓彝 who held the office of 宣城太守. The reference semantics explicitly state the referent is 桓彝 (桓温's father), not 袁宏 (c0) or 伏滔 (c1). Neither candidate is the office holder being referenced. The candidates 袁宏 and 伏滔 appear in the same annotation text but are not the referent of '宣城'. No existing candidate matches the referent.\"}]}",
+              "name": "submit_sfh2_existing_person_links"
+            },
+            "id": "call_00_ahJy3Oi4gyESLM4H2W1I5354",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1788016170,
+  "id": "f9b429d8-e1cf-4b88-8c6f-d7835d2ae5ef",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 351,
+    "prompt_cache_hit_tokens": 640,
+    "prompt_cache_miss_tokens": 917,
+    "prompt_tokens": 1557,
+    "prompt_tokens_details": {
+      "cached_tokens": 640
+    },
+    "total_tokens": 1908
+  }
+}

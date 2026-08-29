@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"records\": [{\"unit_id\": \"sfh2-observation-0baf776dd1a1f548e4b812d9\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-01-dexing-028-liu-annotation-002\", \"sfh1-ev-01-dexing-028-liu-annotation-004\"], \"reason_types\": [\"identity_mismatch\"]}], \"preferred_candidate_key\": null, \"resolution\": \"no_existing_match\", \"explanation\": \"The occurrence refers to 勒 (Shi Le 石勒), the ruler/leader who captured 攸. The candidate c0 is 王隱 (Wang Yin), a Jin dynasty historian. The source evidence clearly identifies the referent as 石勒 (Shi Le), who captured 攸 in the Yongjia period (永嘉中攸為石勒所獲). The candidate 王隱 is a different person entirely — he is the author of the 晉書 (Jin Shu) cited in the annotation, not the person referred to by the abbreviated reference 勒. The surface form 勒 does not match 王隱, and the semantic reference is to Shi Le, not Wang Yin. This is a clear identity mismatch.\"}]}",
+              "name": "submit_sfh2_existing_person_links"
+            },
+            "id": "call_00_UNF916f6nuIjjkM8YRpH2572",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1788016187,
+  "id": "efd52da2-9b6a-4f3e-b46e-7492b9a1200e",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 340,
+    "prompt_cache_hit_tokens": 640,
+    "prompt_cache_miss_tokens": 793,
+    "prompt_tokens": 1433,
+    "prompt_tokens_details": {
+      "cached_tokens": 640
+    },
+    "total_tokens": 1773
+  }
+}

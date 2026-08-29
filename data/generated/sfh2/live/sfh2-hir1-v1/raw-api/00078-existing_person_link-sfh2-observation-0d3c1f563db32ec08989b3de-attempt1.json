@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"records\": [{\"unit_id\": \"sfh2-observation-0d3c1f563db32ec08989b3de\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-07-shijian-006-liu-annotation-001\", \"sfh1-ev-07-shijian-006-liu-annotation-002\", \"sfh1-ev-07-shijian-006-main\"], \"reason_types\": [\"identity_conflict\"]}, {\"candidate_key\": \"c1\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-07-shijian-006-liu-annotation-001\", \"sfh1-ev-07-shijian-006-liu-annotation-002\", \"sfh1-ev-07-shijian-006-main\"], \"reason_types\": [\"identity_conflict\"]}, {\"candidate_key\": \"c2\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-07-shijian-006-liu-annotation-001\", \"sfh1-ev-07-shijian-006-liu-annotation-002\", \"sfh1-ev-07-shijian-006-main\"], \"reason_types\": [\"identity_conflict\"]}], \"preferred_candidate_key\": null, \"resolution\": \"no_existing_match\", \"explanation\": \"The occurrence refers to 淊 (潘淊, courtesy name 陽仲), an abbreviated reference to 潘淊 (Pan Tao). The annotation evidence (sfh1-ev-07-shijian-006-liu-annotation-001) explicitly identifies the referent as 潘淊字陽仲, a 滎陽人, 太常尼從子. None of the three candidates (郗鑒, 謝安, 王敦) match this person. The candidates were retrieved only via the local context hint '太傅'/'王敦' appearing in the annotation, but the actual referent is 潘淊, not any of these candidates. No existing candidate matches.\"}]}",
+              "name": "submit_sfh2_existing_person_links"
+            },
+            "id": "call_00_kFcKggbe9VhbrHlBM9K28968",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1788016207,
+  "id": "740d0a5b-827b-4a27-bf92-d85541a247ff",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 543,
+    "prompt_cache_hit_tokens": 768,
+    "prompt_cache_miss_tokens": 3667,
+    "prompt_tokens": 4435,
+    "prompt_tokens_details": {
+      "cached_tokens": 768
+    },
+    "total_tokens": 4978
+  }
+}

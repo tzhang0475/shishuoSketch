@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"records\": [{\"unit_id\": \"sfh2-observation-03869d4c41b83c81811cfe94\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-09-pinzao-026-main\", \"sfh2-profile-evidence-7d659b56d624f15e9d4c\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"contextual_name_projection\", \"catalogue_exact_match\"]}, {\"candidate_key\": \"c1\", \"verdict\": \"insufficient\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [], \"reason_types\": []}, {\"candidate_key\": \"c2\", \"verdict\": \"insufficient\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [], \"reason_types\": []}, {\"candidate_key\": \"c3\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-09-pinzao-026-main\"], \"reason_types\": [\"name_mismatch\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"existing_person_supported\", \"explanation\": \"The occurrence '王丞相' in story 09-pinzao-026 refers to 王導 (Wang Dao), who is known by the title 王丞相. Candidate c0 (王導) has supporting evidence including the contextual name projection '王公' and catalogue exact matches for 王導/王丞相 across multiple stories, and the profile evidence sfh2-profile-evidence-7d659b56d624f15e9d4c maps '王公' to 王導 in story 09-pinzao-026. The story text mentions 謝仁祖 (c1) and 何次道 (c2) as the people being discussed, not as the referent of 王丞相. Candidate c3 (王隱) is contradicted because 王丞相 is a title of 王導, not 王隱.\"}]}",
+              "name": "submit_sfh2_existing_person_links"
+            },
+            "id": "call_00_B3vJB6m94URwFp9MeNC41095",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1788016039,
+  "id": "dbe92ba9-8b79-418a-870b-7bf887776b8c",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 517,
+    "prompt_cache_hit_tokens": 1792,
+    "prompt_cache_miss_tokens": 2513,
+    "prompt_tokens": 4305,
+    "prompt_tokens_details": {
+      "cached_tokens": 1792
+    },
+    "total_tokens": 4822
+  }
+}

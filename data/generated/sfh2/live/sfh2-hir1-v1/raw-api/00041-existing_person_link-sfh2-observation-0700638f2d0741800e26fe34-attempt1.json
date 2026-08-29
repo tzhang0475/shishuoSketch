@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"records\": [{\"unit_id\": \"sfh2-observation-0700638f2d0741800e26fe34\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-25-paidiao-060-liu-annotation-003\"], \"reason_types\": [\"semantic_type_mismatch\"]}, {\"candidate_key\": \"c1\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-25-paidiao-060-liu-annotation-003\"], \"reason_types\": [\"semantic_type_mismatch\"]}], \"preferred_candidate_key\": null, \"resolution\": \"no_existing_match\", \"explanation\": \"The occurrence is the reference '帝' (the emperor), which semantically refers to Emperor Xiaowu of Jin (孝武). Neither candidate c0 (劉惔/劉真長) nor c1 (孫恩) is an emperor. The reference semantics explicitly identify the referent as Emperor Xiaowu of Jin, a ruler reference. Neither supplied candidate matches this identity.\"}]}",
+              "name": "submit_sfh2_existing_person_links"
+            },
+            "id": "call_00_v9si22z9PUxilRQYChea4517",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1788016092,
+  "id": "daf7118c-c7d1-426b-8f9a-3b549e025a3a",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 311,
+    "prompt_cache_hit_tokens": 1024,
+    "prompt_cache_miss_tokens": 781,
+    "prompt_tokens": 1805,
+    "prompt_tokens_details": {
+      "cached_tokens": 1024
+    },
+    "total_tokens": 2116
+  }
+}

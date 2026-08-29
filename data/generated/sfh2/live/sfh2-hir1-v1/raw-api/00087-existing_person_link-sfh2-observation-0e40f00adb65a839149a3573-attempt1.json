@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"records\": [{\"unit_id\": \"sfh2-observation-0e40f00adb65a839149a3573\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-36-chouxi-003-main\"], \"reason_types\": [\"identity_conflict\"]}, {\"candidate_key\": \"c1\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-36-chouxi-003-main\"], \"reason_types\": [\"identity_conflict\"]}, {\"candidate_key\": \"c2\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-36-chouxi-003-main\"], \"reason_types\": [\"identity_conflict\"]}, {\"candidate_key\": \"c3\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-36-chouxi-003-liu-annotation-005\", \"sfh1-ev-36-chouxi-003-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"name_alias_match\", \"contextual_identity\"]}], \"preferred_candidate_key\": \"c3\", \"resolution\": \"existing_person_supported\", \"explanation\": \"The occurrence '無忌' in story 36-chouxi-003 refers to the son of 司馬丞 (司馬愍王), who was killed by 王敦 via 世將 (王廙). The annotation '無忌别傳曰無忌字公' and the alias registry for 氾騰 (字無忌) match. The main text describes 無忌 as the son of 司馬愍王 who was wronged by 王敦/王廙, and the candidate c3 (氾騰, courtesy name 無忌) is the person referenced. Candidates c0 (王敦), c1 (王廙), c2 (王隱) are the perpetrators/others in the story, not the referent of '無忌'.\"}]}",
+              "name": "submit_sfh2_existing_person_links"
+            },
+            "id": "call_00_a1t6apzX460IqFMBPFda7763",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1788016234,
+  "id": "4e705b58-ba1f-4eca-b361-97c7b40ade78",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 531,
+    "prompt_cache_hit_tokens": 2304,
+    "prompt_cache_miss_tokens": 1723,
+    "prompt_tokens": 4027,
+    "prompt_tokens_details": {
+      "cached_tokens": 2304
+    },
+    "total_tokens": 4558
+  }
+}

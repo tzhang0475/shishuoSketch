@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"records\": [{\"unit_id\": \"sfh2-observation-0a2844aac9106bc1f910bc59\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-02-yanyu-086-main\"], \"reason_types\": [\"name_mismatch\"]}, {\"candidate_key\": \"c1\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-02-yanyu-086-main\", \"sfh1-ev-02-yanyu-086-liu-annotation-001\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"courtesy_name_match\", \"catalogue_exact_match\"]}], \"preferred_candidate_key\": \"c1\", \"resolution\": \"existing_person_supported\", \"explanation\": \"The occurrence is the courtesy name '羊叔子' (Yang Shuzi), which is the courtesy name of 羊祜 (Yang Hu), candidate c1. The main text '王子敬語王孝伯曰羊叔子自復佳耳' refers to 羊叔子, and the Liu annotation '二千石至祜九世以清德稱' confirms the referent is 祜 (Yang Hu). Candidate c0 is 王恭 (Wang Gong), courtesy name 孝伯, which does not match 羊叔子. Therefore c1 (羊祜) is the supported existing person.\"}]}",
+              "name": "submit_sfh2_existing_person_links"
+            },
+            "id": "call_00_jomcHe5JBsp5RrEyaVNS2298",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1788016160,
+  "id": "7f61de56-ef51-432b-93dc-9a5dd95ae6df",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 381,
+    "prompt_cache_hit_tokens": 640,
+    "prompt_cache_miss_tokens": 2220,
+    "prompt_tokens": 2860,
+    "prompt_tokens_details": {
+      "cached_tokens": 640
+    },
+    "total_tokens": 3241
+  }
+}

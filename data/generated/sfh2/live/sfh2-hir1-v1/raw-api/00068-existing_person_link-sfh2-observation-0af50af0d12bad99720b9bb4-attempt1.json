@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"records\": [{\"unit_id\": \"sfh2-observation-0af50af0d12bad99720b9bb4\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-05-fangzheng-012-liu-annotation-005\"], \"reason_types\": [\"different_person\"]}], \"preferred_candidate_key\": null, \"resolution\": \"no_existing_match\", \"explanation\": \"The occurrence refers to 楊駿 (Yang Jun), elder brother of Yang Ji, as stated in the reference semantics. The only candidate supplied is 杜預 (Du Yu), a completely different person. The candidate dossier for c0 is 杜預 with courtesy name 元凱, who is mentioned in the same story but is not the referent of this occurrence. The occurrence's exact span is 楊駿, not 杜預, and the semantic reference type confirms the referent is Yang Jun. Therefore, the candidate contradicts the occurrence.\"}]}",
+              "name": "submit_sfh2_existing_person_links"
+            },
+            "id": "call_00_5D2fT3Nh1AyIpfDjrPue9918",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1788016178,
+  "id": "9419f56e-4643-4f67-a359-6e4cf5b2e400",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 281,
+    "prompt_cache_hit_tokens": 640,
+    "prompt_cache_miss_tokens": 651,
+    "prompt_tokens": 1291,
+    "prompt_tokens_details": {
+      "cached_tokens": 640
+    },
+    "total_tokens": 1572
+  }
+}

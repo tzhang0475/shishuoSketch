@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"records\": [{\"unit_id\": \"sfh2-observation-05512ff236b5c2c90854e81a\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-08-shangyu-054-liu-annotation-006\"], \"reason_types\": [\"referent_role_mismatch\", \"semantic_type_mismatch\"]}, {\"candidate_key\": \"c1\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-08-shangyu-054-liu-annotation-006\"], \"reason_types\": [\"referent_role_mismatch\", \"semantic_type_mismatch\"]}], \"preferred_candidate_key\": null, \"resolution\": \"no_existing_match\", \"explanation\": \"The occurrence refers to '曹夫人' (Lady Cao), an honored woman described as the wife of 王導 (Wang Dao). The reference semantics explicitly state the referent role is 'honored woman (wife of 王導)'. Candidate c0 is 王導 (Wang Dao) himself, a male historical figure, and candidate c1 is 王隱 (Wang Yin). Neither candidate matches the referent, which is a female honorific reference to Lady Cao, the wife of Wang Dao. Both candidates are contradicted by the semantic type and referent role mismatch.\"}]}",
+              "name": "submit_sfh2_existing_person_links"
+            },
+            "id": "call_00_zUi8r7qG28kihsKkEsIx4985",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1788016058,
+  "id": "31da0de8-af54-491c-8dfe-b8dcd8b536bf",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 369,
+    "prompt_cache_hit_tokens": 1792,
+    "prompt_cache_miss_tokens": 880,
+    "prompt_tokens": 2672,
+    "prompt_tokens_details": {
+      "cached_tokens": 1792
+    },
+    "total_tokens": 3041
+  }
+}

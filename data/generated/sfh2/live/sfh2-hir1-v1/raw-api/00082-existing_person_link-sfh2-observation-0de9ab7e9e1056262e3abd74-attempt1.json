@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"records\": [{\"unit_id\": \"sfh2-observation-0de9ab7e9e1056262e3abd74\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-19-xianyuan-013-main\", \"sfh1-ev-19-xianyuan-013-liu-annotation-003\"], \"reason_types\": [\"gender_mismatch\", \"identity_distinct\"]}, {\"candidate_key\": \"c1\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-19-xianyuan-013-main\"], \"reason_types\": [\"identity_distinct\"]}], \"preferred_candidate_key\": null, \"resolution\": \"no_existing_match\", \"explanation\": \"The occurrence '郭氏' refers to Guo Shi (郭氏), the wife of Jia Chong (賈充), as described in the main text where 郭氏 is the second wife of 賈充. Candidate c0 is 賈充 (Jia Chong) himself, a male figure, while 郭氏 is his wife — clearly distinct persons. Candidate c1 is 王隱 (Wang Yin), a historian, unrelated to 郭氏. Neither candidate matches the referent 郭氏. The annotation confirms 郭氏名玉 (Guo Shi, given name Yu), the daughter of 郭配. No existing candidate matches this person.\"}]}",
+              "name": "submit_sfh2_existing_person_links"
+            },
+            "id": "call_00_TSVPBTqzdLLj3UTb90Ku7996",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1788016219,
+  "id": "d59be984-4483-4e71-a25b-728bf95c13bc",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 380,
+    "prompt_cache_hit_tokens": 1024,
+    "prompt_cache_miss_tokens": 884,
+    "prompt_tokens": 1908,
+    "prompt_tokens_details": {
+      "cached_tokens": 1024
+    },
+    "total_tokens": 2288
+  }
+}

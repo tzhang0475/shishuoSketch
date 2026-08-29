@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"records\": [{\"unit_id\": \"sfh2-observation-01dcb7b4f82af425d0108f26\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-19-xianyuan-026-main\"], \"reason_types\": [\"role_mismatch\"]}, {\"candidate_key\": \"c1\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-19-xianyuan-026-main\"], \"reason_types\": [\"role_mismatch\"]}, {\"candidate_key\": \"c2\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-19-xianyuan-026-main\"], \"reason_types\": [\"role_mismatch\"]}, {\"candidate_key\": \"c3\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-19-xianyuan-026-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"office_holder_reference\", \"role_match\"]}], \"preferred_candidate_key\": \"c3\", \"resolution\": \"existing_person_supported\", \"explanation\": \"The occurrence is the office title '太傅' (Grand Tutor) in story 19-xianyuan-026. The reference semantics explicitly identify the referent role as 'Grand Tutor (Xie An)'. In the source text, 太傅慰釋之曰 refers to the person consoling Xie's wife (王凝之謝夫人), who is the daughter of 謝安. Candidate c3 (謝安) is the Grand Tutor (太傅) and matches the office-holder reference. Candidates c0 (王羲之), c1 (郗鑒), and c2 (王凝之) do not hold the Grand Tutor office in this context and are contradicted by the role mismatch.\"}]}",
+              "name": "submit_sfh2_existing_person_links"
+            },
+            "id": "call_00_QmU3sqxFC5hVpr4OMibP7197",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1788015991,
+  "id": "888b7620-3d4f-434f-92bf-7e0880d8d421",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 496,
+    "prompt_cache_hit_tokens": 640,
+    "prompt_cache_miss_tokens": 4382,
+    "prompt_tokens": 5022,
+    "prompt_tokens_details": {
+      "cached_tokens": 640
+    },
+    "total_tokens": 5518
+  }
+}

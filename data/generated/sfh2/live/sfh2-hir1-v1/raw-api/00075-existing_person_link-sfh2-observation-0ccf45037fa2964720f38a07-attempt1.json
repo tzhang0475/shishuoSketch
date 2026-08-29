@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"records\": [{\"unit_id\": \"sfh2-observation-0ccf45037fa2964720f38a07\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-07-shijian-019-main\"], \"reason_types\": [\"name_mismatch\", \"context_mismatch\"]}, {\"candidate_key\": \"c1\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-07-shijian-019-main\", \"sfh1-ev-07-shijian-019-liu-annotation-002\", \"sfh1-ev-07-shijian-019-liu-annotation-005\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"exact_name_match\", \"contextual_consistency\"]}, {\"candidate_key\": \"c2\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-07-shijian-019-main\"], \"reason_types\": [\"name_mismatch\", \"context_mismatch\"]}], \"preferred_candidate_key\": \"c1\", \"resolution\": \"existing_person_supported\", \"explanation\": \"The occurrence is the full name 桓温 in story 07-shijian-019. The main text discusses using 桓温 to go and subjugate 西楚, and the Liu annotations explicitly reference 桓温 as 安西將軍荆州刺史 and mention 桓温徙于豫章. Candidate c1 (桓温, courtesy name 元子) is the well-attested historical figure matching this exact name and context. Candidates c0 (王導) and c2 (陶侃) do not match the name or the context.\"}]}",
+              "name": "submit_sfh2_existing_person_links"
+            },
+            "id": "call_00_HgJlqpJuhlvBQgbd6aLc2218",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1788016198,
+  "id": "58e2d180-ff95-47b4-809d-7d96e90b584e",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 452,
+    "prompt_cache_hit_tokens": 1792,
+    "prompt_cache_miss_tokens": 2593,
+    "prompt_tokens": 4385,
+    "prompt_tokens_details": {
+      "cached_tokens": 1792
+    },
+    "total_tokens": 4837
+  }
+}

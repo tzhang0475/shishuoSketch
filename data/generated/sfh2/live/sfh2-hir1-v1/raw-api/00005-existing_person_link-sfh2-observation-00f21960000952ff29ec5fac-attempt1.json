@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"records\": [{\"unit_id\": \"sfh2-observation-00f21960000952ff29ec5fac\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-01-dexing-047-liu-annotation-002\"], \"reason_types\": [\"identity_conflict\"]}, {\"candidate_key\": \"c1\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-01-dexing-047-liu-annotation-002\"], \"reason_types\": [\"identity_conflict\"]}], \"preferred_candidate_key\": null, \"resolution\": \"no_existing_match\", \"explanation\": \"The occurrence refers to '附子', which is the nickname (小字) of 吳坦之 (吳道助's brother), as explicitly stated in the Liu annotation: '坦之小字附子'. The reference semantics confirm the referent is 'person named 附子 (nickname of 吳坦之)'. Neither candidate c0 (温嶠) nor c1 (韓伯) matches 吳坦之. Both candidates are contradicted by the annotation evidence identifying 附子 as 吳坦之's nickname.\"}]}",
+              "name": "submit_sfh2_existing_person_links"
+            },
+            "id": "call_00_CFOdZLlYrNVX7dwXLlMa4000",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1788015982,
+  "id": "96e0d481-396c-429f-a826-7e0cd5fcf18f",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 335,
+    "prompt_cache_hit_tokens": 640,
+    "prompt_cache_miss_tokens": 3040,
+    "prompt_tokens": 3680,
+    "prompt_tokens_details": {
+      "cached_tokens": 640
+    },
+    "total_tokens": 4015
+  }
+}

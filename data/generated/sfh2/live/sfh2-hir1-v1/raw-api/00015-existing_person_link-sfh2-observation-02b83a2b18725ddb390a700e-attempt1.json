@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"records\": [{\"unit_id\": \"sfh2-observation-02b83a2b18725ddb390a700e\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-02-yanyu-054-main\"], \"reason_types\": [\"surface_form_mismatch\"]}, {\"candidate_key\": \"c1\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-02-yanyu-054-main\", \"hng2c1-shishuo-02-yanyu-066-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"office_title_match\", \"profile_provenance\"]}], \"preferred_candidate_key\": \"c1\", \"resolution\": \"existing_person_supported\", \"explanation\": \"The occurrence is the surface form 王長史 (office title 'Chief Clerk Wang'). Candidate c1 (王濛) has the title 王長史 as a known title, and the profile evidence includes hng2c1-shishuo-02-yanyu-066-main where 王長史 is identified as 王濛. The source text sfh1-ev-02-yanyu-054-main shows 王長史 and 劉尹 (劉真長/劉惔) together, matching the interaction pattern in c1's dossier (王濛 interacting with 劉惔 in stories 02-yanyu-066 and 05-fangzheng-051). Candidate c0 (劉惔) is 劉尹/真長, not 王長史, so it contradicts the surface form.\"}]}",
+              "name": "submit_sfh2_existing_person_links"
+            },
+            "id": "call_00_1OFFEB77Fs09ksizrndg8720",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1788016015,
+  "id": "d2a03932-11ea-41ab-b6c7-11dc15df01d3",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 422,
+    "prompt_cache_hit_tokens": 640,
+    "prompt_cache_miss_tokens": 1694,
+    "prompt_tokens": 2334,
+    "prompt_tokens_details": {
+      "cached_tokens": 640
+    },
+    "total_tokens": 2756
+  }
+}

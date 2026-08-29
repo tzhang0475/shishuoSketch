@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"records\": [{\"unit_id\": \"sfh2-observation-05d5d2b1906dce8ec10a04df\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"insufficient\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [], \"reason_types\": [\"surface_match_only\"]}], \"preferred_candidate_key\": null, \"resolution\": \"insufficient_evidence\", \"explanation\": \"The occurrence is the single character 劉 (surname reference) in story 05-fangzheng-053. The candidate c0 is 謝安 (Xie An), whose aliases include 安, 安石, 謝安, 謝安石. The occurrence 劉 is a surname reference to a person surnamed Liu (likely 劉尹, i.e., Liu Tan), which does not match 謝安's name or aliases. There is no identity evidence linking the occurrence 劉 to 謝安. The surface match is absent, and no supporting evidence connects this occurrence to the candidate. Verdict: insufficient.\"}]}",
+              "name": "submit_sfh2_existing_person_links"
+            },
+            "id": "call_00_apVFJ2lIBp1YPJCSlbdo8706",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1788016069,
+  "id": "f5073cef-ce4d-439d-8596-c5fefd090a37",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 283,
+    "prompt_cache_hit_tokens": 1664,
+    "prompt_cache_miss_tokens": 434,
+    "prompt_tokens": 2098,
+    "prompt_tokens_details": {
+      "cached_tokens": 1664
+    },
+    "total_tokens": 2381
+  }
+}

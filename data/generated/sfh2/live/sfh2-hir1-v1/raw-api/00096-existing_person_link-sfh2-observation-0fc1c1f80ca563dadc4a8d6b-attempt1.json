@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"records\": [{\"unit_id\": \"sfh2-observation-0fc1c1f80ca563dadc4a8d6b\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-08-shangyu-043-liu-annotation-007\"], \"reason_types\": [\"distinct_person\"]}, {\"candidate_key\": \"c1\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-08-shangyu-043-liu-annotation-007\"], \"reason_types\": [\"distinct_person\"]}], \"preferred_candidate_key\": null, \"resolution\": \"no_existing_match\", \"explanation\": \"The occurrence refers to 石勒 (Shi Le), a distinct historical figure. The annotation text mentions '石勒爲逖母墓置守吏' alongside '劉琨與親舊', showing 石勒 is a separate person from both 王敦 (c0) and 劉琨 (c1). Neither candidate matches 石勒.\"}]}",
+              "name": "submit_sfh2_existing_person_links"
+            },
+            "id": "call_00_kzCG951390VbyAJcPCQQ7799",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1788016261,
+  "id": "0f4f7522-d036-4c78-ab7a-0e6082a2eb10",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 311,
+    "prompt_cache_hit_tokens": 2304,
+    "prompt_cache_miss_tokens": 2407,
+    "prompt_tokens": 4711,
+    "prompt_tokens_details": {
+      "cached_tokens": 2304
+    },
+    "total_tokens": 5022
+  }
+}
