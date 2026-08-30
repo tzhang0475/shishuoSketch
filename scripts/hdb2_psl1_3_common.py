@@ -702,8 +702,8 @@ _candidate_info = psl1_2._candidate_info
 
 @lru_cache(maxsize=1)
 def _source_units() -> tuple[dict[str, Any], ...]:
-    """Cache the existing P1 registered-source index for this process only."""
-    return tuple(dict(unit) for unit in p1.build_source_index())
+    """Cache the merged registered/portable source index for this process."""
+    return tuple(dict(unit) for unit in psl1_2.load_grounded_source_units())
 
 
 def _derived_resource_row(

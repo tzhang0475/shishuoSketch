@@ -21,6 +21,7 @@ from typing import Any, Mapping, Sequence
 import build_hng0_2 as hng02
 import hdb2_lj0_common as lj0
 import hdb2_p1_common as p1
+import hdb2_portable_grounded_source as portable_source
 import hdb2_psl1_common as psl1
 import hdb2_psl1_1_common as psl1_1
 import historical_entity_resolver as resolver
@@ -471,6 +472,20 @@ def _source_unit_map(units: Sequence[Mapping[str, Any]]) -> dict[str, Mapping[st
     return {str(unit.get("ref")): unit for unit in units if unit.get("ref")}
 
 
+def load_grounded_source_units() -> list[dict[str, Any]]:
+    """Load registered witnesses plus the portable derived fallback.
+
+    Physical/local units are authoritative when present.  The committed
+    projection has the same original source refs and is selected only for a
+    missing physical unit, so the generic rescue parsers have one code path in
+    full and portable environments.
+    """
+    return portable_source.merge_source_units(
+        p1.build_source_index(),
+        portable_source.load_portable_source_units(),
+    )
+
+
 def _candidate_info(candidate: str, inventory: Mapping[str, Mapping[str, Any]]) -> dict[str, Any]:
     return dict(inventory.get(matching(candidate), {
         "candidate_surface": candidate,
@@ -898,7 +913,7 @@ def build_grounded_resource_index(target_surfaces: Sequence[str]) -> list[dict[s
         inventory.setdefault(key, value)
     for key, value in _ruler_inventory().items():
         inventory.setdefault(key, value)
-    units = p1.build_source_index()
+    units = load_grounded_source_units()
     units_by_ref = _source_unit_map(units)
     resources: list[dict[str, Any]] = _grounded_identity_atom_rows(units_by_ref, set(targets), inventory)
     for unit in units:
