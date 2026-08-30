@@ -11,9 +11,14 @@ registry misses do not erase semantic judgments already made by the LLM.
 """
 
 from .common import MODEL, RUN_VERSION
+from . import common as _common
 from . import candidate_retrieval as _candidate_retrieval
 from .retrieval_policy_v3 import install as _install_retrieval_policy_v3
 
+# New semantic schema gets its own immutable cache namespace.  Old cached L3
+# responses remain valid for the frozen SFH1 artifacts but are never silently
+# reinterpreted as v2 referent-hint payloads.
+_common.PROMPT_VERSIONS.setdefault("reference_semantics_v2", "sfh1-l3-reference-semantics-v4-referent-hints-roles")
 _install_retrieval_policy_v3(_candidate_retrieval)
 
 __all__ = ["MODEL", "RUN_VERSION"]
