@@ -13,18 +13,16 @@ from typing import Any, Mapping
 from identity_resolution_policy import (
     alias_retrieval_scope,
     explicitly_blocked_form_person_pairs,
+    filtered_alias_evidence,
     profile_form_retrieval_scope,
 )
-from manual_semantic_authority import blocked_global_forms, replacement_exact_forms
+from manual_semantic_authority import replacement_exact_forms
 
 
 def install(module: Any) -> None:
     def safe_form_rows() -> tuple[dict[str, dict[str, Any]], dict[str, list[dict[str, Any]]], dict[str, list[dict[str, Any]]]]:
         people = module._person_registry()
         suppressed = module._overlay_suppressed() | {
-            (module.normalize_form(surface), person_id)
-            for surface, person_id in blocked_global_forms()
-        } | {
             (module.normalize_form(surface), person_id)
             for surface, person_id in explicitly_blocked_form_person_pairs()
         }
@@ -64,16 +62,19 @@ def install(module: Any) -> None:
             if scope == "blocked":
                 continue
             target = exact if scope == "exact" else contextual
-            snippets = [module.text(row.get("evidence_snippet")) for row in alias.get("source_evidence", []) or [] if isinstance(row, Mapping) and module.text(row.get("evidence_snippet"))]
-            add(
-                target,
-                alias.get("surface"),
-                resolved[0],
-                f"alias_registry_{scope}:{module.text(alias.get('alias_type')) or 'alias'}",
-                snippets[0] if snippets else alias.get("surface"),
-                "data/aliases.json",
-                module.text(alias.get("alias_type")) or "alias",
-            )
+            sources = filtered_alias_evidence(alias)
+            if not sources:
+                sources = [{}]
+            for source in sources:
+                add(
+                    target,
+                    alias.get("surface"),
+                    resolved[0],
+                    f"alias_registry_{scope}:{module.text(alias.get('alias_type')) or 'alias'}",
+                    source.get("evidence_snippet") or alias.get("surface"),
+                    source.get("source_id") or "data/aliases.json",
+                    module.text(alias.get("alias_type")) or "alias",
+                )
 
         for replacement in replacement_exact_forms():
             person_id = module.text(replacement.get("person_id"))
@@ -81,8 +82,8 @@ def install(module: Any) -> None:
             if person_id in people and surface:
                 add(exact, surface, person_id, "manual_semantic_authority", surface, replacement.get("evidence_ref"), "manual_reviewed_form")
 
-        # Profile forms stay useful as dossiers/contextual hints.  An earlier
-        # occurrence resolution is not a license to create a global alias.
+        # Occurrence/profile forms are dossier evidence by default.  Their
+        # existence must not create a new global alias.
         for person_id, profile in module._profile_index().items():
             identity = profile.get("identity") if isinstance(profile.get("identity"), Mapping) else {}
             for form in identity.get("form_provenance", []) or []:
@@ -120,6 +121,8 @@ def install(module: Any) -> None:
                 if linked_form:
                     matching_forms.append(linked_form)
 
+            # Only validated mention/coreference surfaces are allowed as keys.
+            # No arbitrary local-context substring scan occurs here.
             for form in dict.fromkeys(value for value in matching_forms if value):
                 for scope, index in (("exact", exact_forms), ("contextual", contextual_forms)):
                     for found in index.get(form, []):
