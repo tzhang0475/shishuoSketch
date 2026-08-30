@@ -1,0 +1,138 @@
+{
+  "schema": "sfh2r1-manual-semantic-authority-v1",
+  "review_date": "2026-08-30",
+  "review_method": "GPT-assisted direct reading of registered Shishuo/Jinshu evidence. Python heuristics were not used to decide historical identity.",
+  "authority": "manual_semantic_override",
+  "candidate_only": true,
+  "canonical_write_back": false,
+  "alias_repairs": [
+    {
+      "alias_id": "alias-w3-9f1bc708fc909ce405824de4",
+      "surface": "伯倫",
+      "current_person_id": "person-047",
+      "current_person_name": "劉伶",
+      "action": "downgrade_shared_alias_and_filter_evidence",
+      "corrected_resolution_mode": "contextual",
+      "corrected_status": "shared_or_contextual",
+      "keep_evidence_ids": [
+        "evidence-w3-person-836e3a2915da2a94ba0ba897",
+        "evidence-w3-person-ea7273483165995805d45824",
+        "evidence-w3-person-2a31d49d2a7acf0c0d0e95f3",
+        "evidence-w3-person-c64569859384c914a84dddaf"
+      ],
+      "remove_evidence_ids": [
+        "evidence-w3-person-ba50566714ba7c916e6e18b6"
+      ],
+      "manual_verdict": "劉伶字伯倫有直接證據；但 05-fangzheng-015 注文明言山該字伯倫。伯倫是共享字，不能作劉伶的全局 exact identity key。",
+      "other_referents": [
+        {
+          "display_name": "山該",
+          "surface": "伯倫",
+          "evidence_ids": ["evidence-w3-person-ba50566714ba7c916e6e18b6"]
+        }
+      ]
+    },
+    {
+      "alias_id": "alias-w4-a0ab8bf1bf64e009032c292a",
+      "surface": "王丞相",
+      "current_person_id": "person-054",
+      "current_person_name": "王隱",
+      "action": "suppress_wrong_bearer_alias",
+      "corrected_status": "suppressed_wrong_bearer",
+      "corrected_resolution_mode": "contextual",
+      "remove_all_current_surface_evidence": true,
+      "manual_verdict": "20-shujie-008『王丞相令郭璞試作一卦』中的王丞相是王導，不是史家王隱。此 form 必須從王隱 profile/retrieval 中完全移除。",
+      "replacement": {
+        "display_name": "王導",
+        "person_id": "person-003",
+        "network_role": "narrative_reference",
+        "global_alias_creation": false
+      }
+    },
+    {
+      "alias_id": "alias-w4-c1809e42cafae4ba815946be",
+      "surface": "王大將軍",
+      "current_person_id": "person-054",
+      "current_person_name": "王隱",
+      "action": "suppress_wrong_bearer_alias",
+      "corrected_status": "suppressed_wrong_bearer",
+      "corrected_resolution_mode": "contextual",
+      "remove_all_current_surface_evidence": true,
+      "manual_verdict": "07-shijian-013『王大將軍始下楊朗苦諫不從』所指為王敦語境，絕非王隱。先從王隱 profile/retrieval 完全移除；具體 occurrence 由語義層依故事上下文解決，不以官稱字串全局綁定。",
+      "replacement": {
+        "display_name": "王敦",
+        "network_role": "narrative_reference",
+        "global_alias_creation": false
+      }
+    },
+    {
+      "alias_id": "alias-w4-ef14e8dd614bfb5c6425ce7d",
+      "surface": "王庾諸公",
+      "current_person_id": "person-054",
+      "current_person_name": "王隱",
+      "action": "suppress_person_alias_and_reclassify_collective",
+      "corrected_status": "collective_reference",
+      "corrected_resolution_mode": "contextual",
+      "remove_all_current_surface_evidence": true,
+      "manual_verdict": "05-fangzheng-037『王庾諸公欲用孔廷尉』是王氏、庾氏諸公的集合稱謂，不是一個名為王隱的單一人物。",
+      "replacement": {
+        "entity_kind": "collective_person_reference",
+        "network_role": "collective_reference",
+        "core_story_graph_eligible": false
+      }
+    }
+  ],
+  "reviewed_role_rules": [
+    {
+      "pattern_description": "王隱晉書曰 / 王隱《晉書》曰等明確史書歸屬結構",
+      "historical_person": "王隱",
+      "occurrence_role": "citation_author",
+      "core_story_graph_eligible": false,
+      "manual_policy": "王隱作為史家身份可以保留在 historical/source context，但該 occurrence 不應因出現在劉注中而成為故事人物、社會關係 endpoint 或其他 mention 的 identity candidate。"
+    }
+  ],
+  "global_resolution_policy": {
+    "principle": "valid historical form does not imply globally unique identity key",
+    "direct_exact_form_types": [
+      "personal_name",
+      "surname_plus_courtesy_name",
+      "orthographic_variant"
+    ],
+    "contextual_by_default_form_types": [
+      "courtesy_name",
+      "style_name",
+      "nickname",
+      "office_title",
+      "contextual_title",
+      "honorific",
+      "ruler_title",
+      "surname_reference",
+      "abbreviated_reference",
+      "observed_surface",
+      "alias",
+      "title"
+    ],
+    "single_character_forms": "contextual_only",
+    "shared_or_contextual_aliases": "never_direct_resolve",
+    "context_dependent_aliases": "never_direct_resolve",
+    "profile_observed_surfaces": "never_direct_resolve",
+    "substring_context_scan": "forbidden_for_identity_candidate_generation",
+    "occurrence_resolution_implies_global_alias": false,
+    "observed_count_is_identity_strength": false,
+    "semantic_precedence": [
+      "reviewed_human_decision",
+      "validated_llm_semantic_judgment",
+      "soft_collective_consistency",
+      "deterministic_retrieval_hint"
+    ]
+  },
+  "audit_conclusion": {
+    "new_pollution_classes": [
+      "shared courtesy-name falsely treated as global exact",
+      "office/contextual title assigned to unrelated citation author",
+      "collective title materialized as single Person alias",
+      "local-context substring scan attracting unrelated source authors"
+    ],
+    "strategy": "Repair explicit known pollution and make all unreviewed short/role-bearing forms contextual by construction, rather than attempting to prove global uniqueness with Python."
+  }
+}
