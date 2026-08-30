@@ -6,6 +6,7 @@ import collections
 from pathlib import Path
 from typing import Any, Mapping
 
+from manual_semantic_authority import apply_sfh2_observation
 from .common import (
     INPUT_FILES,
     ROOT,
@@ -126,8 +127,6 @@ def _mention_context(mention: Mapping[str, Any], packet: Mapping[str, Any], evid
                 "source_ref": item.get("source_ref"),
                 "text": value,
             })
-    # Story packets are short by construction.  Still keep a hard cap so a
-    # malformed annotation cannot turn every dossier into a chapter dump.
     selected = selected[:6]
     return {"evidence": selected, "source_evidence_id": source_id}
 
@@ -207,7 +206,7 @@ def build_candidate_observations(documents: Mapping[str, Any] | None = None) -> 
         packet = packets.get(story_id, {})
         source = evidence.get(text(mention.get("source_evidence_id")), {})
         obs_id = f"sfh2-observation-{stable_hash({'mention_id': mention_id, 'story_id': story_id, 'surface': mention.get('surface')})[:24]}"
-        observations.append(flags({
+        observation = flags({
             "observation_id": obs_id,
             "mention_id": mention_id,
             "story_id": story_id,
@@ -256,20 +255,19 @@ def build_candidate_observations(documents: Mapping[str, Any] | None = None) -> 
                 "evidence_ref": mention.get("source_evidence_id"),
                 "source_hash": packet.get("source_sha256"),
             },
-        }))
+        })
+        observations.append(flags(apply_sfh2_observation(observation)))
     observations.sort(key=lambda row: text(row.get("observation_id")))
     candidate_ids = sorted({text(row.get("previous_candidate_person_id")) for row in observations if text(row.get("previous_candidate_person_id"))})
     return flags({
         "schema": "sfh2-candidate-observations-v1",
         "records": observations,
         "observation_count": len(observations),
-        # The historical SFH1 candidate-observation universe is defined by a
-        # prior candidate ID, including structural rows that must not become
-        # entity nodes.  Keep the eligible subset separately.
         "candidate_observation_count": sum(bool(text(row.get("previous_candidate_person_id"))) for row in observations),
         "entity_resolution_candidate_observation_count": sum(row.get("classification") == "candidate_observation" for row in observations),
         "source_candidate_person_id_count": len(candidate_ids),
         "source_candidate_person_ids": candidate_ids,
+        "manual_semantic_authority_applied": True,
         "candidate_only": True,
         "canonical_write_back": False,
     })
