@@ -2,13 +2,45 @@
 
 from __future__ import annotations
 
+import copy
 from typing import Any, Mapping
 
 from .common import StrictStageClient, text
 from .schemas import CONFIDENCES, RELATION_TYPES, SEMANTIC_TYPES, reference_tool
 from .source_packets import evidence_index
 
-SYSTEM = """You interpret reference structure and relations in classical Chinese. Python has already validated mention boundaries; do not alter them or assign canonical Person IDs. For each supplied person-related mention, identify its semantic reference type, holder/anchor/patron roles, local coreference, explicit distinctness, and source-grounded relations. Co-occurrence alone is not identity. Comparison normally indicates distinct participants. Distinguish office holder from patron or possessor. A suffix such as 子 is not automatically kinship; judge the whole expression in context. Every relation predicate must be copied from the cited source evidence. Return only the forced structured function."""
+NETWORK_ROLES = {
+    "narrative_participant",
+    "narrative_reference",
+    "annotation_biographical_person",
+    "citation_author",
+    "historical_exemplum",
+    "genealogy_ancestor",
+    "anonymous_person",
+    "person_attribute",
+    "structural_reference",
+    "uncertain",
+}
+
+SYSTEM = """You interpret reference structure and relations in classical Chinese. Python has already validated mention boundaries; do not alter them or assign canonical Person IDs. For each supplied person-related mention, identify its semantic reference type, holder/anchor/patron roles, local coreference, explicit distinctness, and source-grounded relations. Co-occurrence alone is not identity. Comparison normally indicates distinct participants. Distinguish office holder from patron or possessor. A suffix such as 子 is not automatically kinship; judge the whole expression in context. Every relation predicate must be copied from the cited source evidence.
+
+Semantic authority is yours, not Python's lexical matcher. If the source context makes the historical referent readable, provide a short referent_hint using the historical name/form supported by the text (for example 勒 in 石勒所獲 may yield 石勒). Do not invent a canonical database ID. Leave referent_hint empty when the text does not support one. Also classify the occurrence's network_role: distinguish narrative participants/references from citation authors, historical exempla, genealogy ancestors, anonymous persons, person attributes, and structural references. A real historical person can still be ineligible for the core Story social graph in a citation-author or exemplum occurrence. Return only the forced structured function."""
+
+
+def reference_tool_v2() -> dict[str, Any]:
+    """Extend the frozen SFH1 tool with semantic hints for future live runs.
+
+    Old cached responses remain replayable because validation below treats the
+    new fields as optional when reading historical payloads.
+    """
+    tool = copy.deepcopy(reference_tool())
+    item = tool["function"]["parameters"]["properties"]["records"]["items"]
+    item["properties"]["referent_hint"] = {"type": "string"}
+    item["properties"]["network_role"] = {"type": "string", "enum": sorted(NETWORK_ROLES)}
+    item["required"] = [*item["required"], "referent_hint", "network_role"]
+    tool["function"]["name"] = "submit_sfh1_reference_semantics_v2"
+    tool["function"]["description"] = "Interpret reference structure, historical referent hints, narrative/source roles, and source-grounded relations."
+    return tool
 
 
 def prompt(packet: Mapping[str, Any], ledger: Mapping[str, Any], target_ids: list[str] | None = None) -> dict[str, Any]:
@@ -33,7 +65,7 @@ def prompt(packet: Mapping[str, Any], ledger: Mapping[str, Any], target_ids: lis
             for row in mentions
         ],
         "target_mention_ids": target_ids or [row.get("mention_id") for row in mentions],
-        "target_instruction": "Return records only for target_mention_ids. Other validated mentions remain available for coreference, distinctness, and relation endpoints.",
+        "target_instruction": "Return records only for target_mention_ids. Other validated mentions remain available for coreference, distinctness, relation endpoints, referent interpretation, and role classification.",
     }
 
 
@@ -41,24 +73,21 @@ def read_reference_semantics(client: StrictStageClient, packet: Mapping[str, Any
     person_mentions = [row for row in ledger.get("valid_mentions", []) or [] if row.get("entity_kind") != "non_person"]
     if not person_mentions:
         return {"records": []}
-    tool = reference_tool()
+    tool = reference_tool_v2()
     records: list[Any] = []
     provider_failure = False
     mention_ids = [text(row.get("mention_id")) for row in person_mentions]
-    # Relations make L3 records substantially denser than mention records.
-    # Small deterministic chunks avoid truncation without changing semantic
-    # instructions or discarding the full Story context.
     chunk_size = 4
     for index in range(0, len(mention_ids), chunk_size):
         target_ids = mention_ids[index:index + chunk_size]
         response = client.call(
-            stage="reference_semantics",
+            stage="reference_semantics_v2",
             unit_id=f"{packet.get('story_id')}-part{index // chunk_size + 1}",
             system=SYSTEM,
             payload=prompt(packet, ledger, target_ids),
             function=tool,
             function_name=tool["function"]["name"],
-            max_tokens=3600,
+            max_tokens=3800,
         )
         if not isinstance(response, Mapping) or not isinstance(response.get("records"), list):
             provider_failure = True
@@ -89,6 +118,7 @@ def validate_reference_semantics(packet: Mapping[str, Any], ledger: Mapping[str,
         mention_id = text(raw.get("mention_id"))
         semantic_type = text(raw.get("semantic_type"))
         confidence = text(raw.get("confidence"))
+        network_role = text(raw.get("network_role")) or "uncertain"
         errors: list[str] = []
         if mention_id not in mentions or mention_id in seen_mentions:
             errors.append("unknown_or_duplicate_mention")
@@ -96,6 +126,8 @@ def validate_reference_semantics(packet: Mapping[str, Any], ledger: Mapping[str,
             errors.append("invalid_semantic_type")
         if confidence not in CONFIDENCES:
             errors.append("invalid_confidence")
+        if network_role not in NETWORK_ROLES:
+            errors.append("invalid_network_role")
         link_fields: dict[str, list[str]] = {}
         for field in ("anchor_mentions", "holder_mentions", "patron_or_possessor_mentions", "coreference_with", "distinct_from"):
             value = raw.get(field)
@@ -147,6 +179,8 @@ def validate_reference_semantics(packet: Mapping[str, Any], ledger: Mapping[str,
             "mention_id": mention_id,
             "semantic_type": semantic_type,
             "referent_role": text(raw.get("referent_role")),
+            "referent_hint": text(raw.get("referent_hint")),
+            "network_role": network_role,
             **link_fields,
             "confidence": confidence,
             "explanation": text(raw.get("explanation")),
@@ -165,6 +199,8 @@ def validate_reference_semantics(packet: Mapping[str, Any], ledger: Mapping[str,
             "mention_id": mention_id,
             "semantic_type": "uncertain",
             "referent_role": "",
+            "referent_hint": "",
+            "network_role": "uncertain",
             "anchor_mentions": [], "holder_mentions": [],
             "patron_or_possessor_mentions": [], "coreference_with": [], "distinct_from": [],
             "confidence": "low",
@@ -178,4 +214,5 @@ def validate_reference_semantics(packet: Mapping[str, Any], ledger: Mapping[str,
         "relations": sorted(relations.values(), key=lambda row: (row["evidence_id"], row["subject_mention_id"], row["object_mention_id"], row["relation_type"])),
         "rejected": rejected,
         "provider_failure": bool(payload.get("_provider_failure")) if isinstance(payload, Mapping) else False,
+        "semantic_schema_version": "reference_semantics_v2",
     }
