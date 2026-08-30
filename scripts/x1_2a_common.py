@@ -149,9 +149,10 @@ def protected_hashes_match(expected: Mapping[str, str], actual: Mapping[str, str
             return False
         mismatches.remove("sc1_site")
 
-    # SFH2R's alias repair (and its deterministic ER1 reprojection) is an
-    # explicit semantic transition.  Convert the logical names used by X1's
-    # manifest back to paths before asking the fail-closed transition helper.
+    # SFH2R's alias/profile repair is an explicit semantic transition. Convert
+    # the logical names used by X1's manifest back to paths before asking the
+    # fail-closed transition helper.  The helper accepts only exact snapshots
+    # in the recorded transition chain, never an arbitrary current file.
     try:
         try:
             from scripts import sfh2r_contract

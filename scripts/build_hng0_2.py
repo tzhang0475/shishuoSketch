@@ -162,6 +162,17 @@ def first_surname(name: str) -> str:
 def person_catalog() -> dict[str, dict[str, Any]]:
     people_doc = read_json(ROOT / "data/people.json", {"people": []})
     aliases_doc = read_json(ROOT / "data/aliases.json", {"aliases": []})
+    try:
+        import sfh2r_contract
+        frozen_aliases = sfh2r_contract.pre_repair_alias_document()
+        if isinstance(frozen_aliases, Mapping):
+            # HNG0.2 is a frozen historical projection.  SFH2R's active
+            # identity repair is intentionally not allowed to change its
+            # input semantics; use the exact preserved pre-repair witness
+            # when that explicit transition is present.
+            aliases_doc = frozen_aliases
+    except (ImportError, OSError, ValueError, TypeError):
+        pass
     aliases_by_person: dict[str, list[Mapping[str, Any]]] = collections.defaultdict(list)
     for row in aliases_doc.get("aliases", []):
         if not isinstance(row, Mapping):
@@ -1060,7 +1071,13 @@ def build() -> dict[str, Any]:
     relations, temporal, evidence, unresolved_doc = load_hng_inputs()
     catalog = person_catalog()
     exact_index = forms_index(catalog)
-    profiles = build_search_profiles(ROOT)
+    frozen_aliases = None
+    try:
+        import sfh2r_contract
+        frozen_aliases = sfh2r_contract.pre_repair_alias_document()
+    except (ImportError, OSError, ValueError, TypeError):
+        frozen_aliases = None
+    profiles = build_search_profiles(ROOT, frozen_aliases)
     # Keep the frozen HNG0.1 profile identity fields but use robust canonical
     # catalog forms for resolution.
     for pid, profile in profiles.items():

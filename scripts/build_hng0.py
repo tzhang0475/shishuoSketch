@@ -401,7 +401,14 @@ def make_relation(
     }
 
 
-def build_selection(people: list[Mapping[str, Any]], links: list[Mapping[str, Any]], relations: list[Mapping[str, Any]], sc1: Mapping[str, Any], ds2: Mapping[str, Any]) -> dict[str, Any]:
+def build_selection(
+    people: list[Mapping[str, Any]],
+    links: list[Mapping[str, Any]],
+    relations: list[Mapping[str, Any]],
+    sc1: Mapping[str, Any],
+    ds2: Mapping[str, Any],
+    frozen_selection: Mapping[str, Any] | None = None,
+) -> dict[str, Any]:
     story_degree = Counter(str(row.get("person_id")) for row in links if row.get("person_id"))
     relation_degree: Counter[str] = Counter()
     for row in relations:
@@ -410,6 +417,13 @@ def build_selection(people: list[Mapping[str, Any]], links: list[Mapping[str, An
                 relation_degree[str(row[key])] += 1
     sketch_map = sc1.get("person_sketches", {}) if isinstance(sc1.get("person_sketches"), Mapping) else {}
     ds2_people = ds2.get("people", {}) if isinstance(ds2.get("people"), Mapping) else {}
+    frozen_signals = {
+        str(row.get("person_id")): row.get("signals", {})
+        for row in (frozen_selection or {}).get("people", [])
+        if isinstance(row, Mapping)
+        and row.get("person_id")
+        and isinstance(row.get("signals"), Mapping)
+    }
     scored: list[dict[str, Any]] = []
     for person in people:
         pid = str(person["person_id"])
@@ -417,6 +431,14 @@ def build_selection(people: list[Mapping[str, Any]], links: list[Mapping[str, An
         sketch = sketch_map.get(pid, {}) if isinstance(sketch_map, Mapping) else {}
         alias_count = len(sketch.get("aliases", [])) if isinstance(sketch, Mapping) else 0
         jinshu_count = len((ds2_people.get(pid) or {}).get("historical_biography_entries", [])) if isinstance(ds2_people.get(pid), Mapping) else 0
+        prior_jinshu_count = frozen_signals.get(pid, {}).get("jinshu_entry_count")
+        if isinstance(prior_jinshu_count, int):
+            # HNG0's selection is a frozen historical boundary.  A later
+            # reviewed identity/profile repair may change the active DS2
+            # research surface, but it must not silently change this older
+            # selection's score.  This is an explicit frozen witness, not a
+            # general exemption for rebuilt data.
+            jinshu_count = prior_jinshu_count
         signals = {
             "story_degree": story_degree[pid],
             "relation_degree": relation_degree[pid],
@@ -489,7 +511,15 @@ def build_hng0_data(root: Path = ROOT) -> dict[str, Any]:
         parsed["chapter_heading"] = chapter_headings.get(parsed["chapter_id"], parsed["chapter_id"])
         parsed_stories[story_id] = parsed
     published_story_ids = {str(row.get("id")) for row in sc1.get("stories", []) if row.get("id")}
-    selection = build_selection(people, links, relation_candidates_doc.get("candidates", []), sc1, ds2)
+    frozen_selection = read_json(root / SELECTION_PATH.relative_to(root)) if (root / SELECTION_PATH.relative_to(root)).is_file() else None
+    selection = build_selection(
+        people,
+        links,
+        relation_candidates_doc.get("candidates", []),
+        sc1,
+        ds2,
+        frozen_selection=frozen_selection,
+    )
     seed_ids = {row["person_id"] for row in selection["people"]}
 
     # PersonStory is the only source for the broad story association layer.

@@ -147,12 +147,23 @@ def _metrics(observations: Mapping[str, Any], links: Mapping[str, Any], blocking
     })
 
 
-def run(*, run_id: str = "sfh2-hir1-v1", live: bool = False, max_link_calls: int | None = None, max_pair_calls: int | None = None) -> dict[str, Any]:
-    manifest = freeze_input_manifest()
+def run(*, run_id: str = "sfh2-hir1-v1", live: bool = False, max_link_calls: int | None = None, max_pair_calls: int | None = None, output_root: Path | None = None) -> dict[str, Any]:
+    """Run the candidate-only projection, optionally into an isolated root.
+
+    The default path is unchanged for the established SFH2 projection.  A
+    separate output root is useful for repair/replay closeouts: it prevents a
+    deterministic replay after a derived-input repair from overwriting the
+    prior SFH2 evidence archive.
+    """
+    destination = output_root or OUTPUT_ROOT
+    if not destination.is_absolute():
+        destination = ROOT / destination
+    destination.mkdir(parents=True, exist_ok=True)
+    manifest = freeze_input_manifest(destination / "input-manifest.json")
     documents = load_documents()
     observations = build_candidate_observations(documents)
     link_candidates = build_existing_link_candidates(observations, documents)
-    run_dir = OUTPUT_ROOT / "live" / run_id
+    run_dir = destination / "live" / run_id
     run_dir.mkdir(parents=True, exist_ok=True)
     client = SFH2Client(run_dir, live=live)
     if max_link_calls is None:
@@ -219,5 +230,13 @@ def run(*, run_id: str = "sfh2-hir1-v1", live: bool = False, max_link_calls: int
         "office-projection.json": family_projection(relation_projection, "office"),
     }
     for name, value in outputs.items():
-        write_json(OUTPUT_ROOT / name, value)
-    return {"manifest": manifest, "metrics": metrics, "outputs": sorted(outputs), "run_dir": str(run_dir.relative_to(ROOT))}
+        write_json(destination / name, value)
+    try:
+        run_dir_label = str(run_dir.relative_to(ROOT))
+    except ValueError:
+        # Isolated replay roots are commonly placed under /tmp.  The output
+        # files are already written successfully in that case; do not turn a
+        # valid deterministic replay into a failure merely while formatting
+        # an informational path in the return value.
+        run_dir_label = str(run_dir)
+    return {"manifest": manifest, "metrics": metrics, "outputs": sorted(outputs), "run_dir": run_dir_label}

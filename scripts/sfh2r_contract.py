@@ -2,10 +2,9 @@
 
 SFH2R intentionally changes the active alias/profile projections.  Earlier
 SFH2/HDA2 experiments have frozen snapshots of those *derived* inputs.  This
-module lets their validators recognize exactly one documented transition:
-the pre-repair bytes recorded by the SFH2R manifest to the post-repair bytes
-recorded by that same manifest.  It never accepts an arbitrary current file
-or relaxes canonical protection.
+module lets their validators recognize the documented, chained derived input
+transitions recorded by SFH2R and SFH2R.1.  It never accepts an arbitrary
+current file or relaxes canonical protection.
 """
 
 from __future__ import annotations
@@ -17,6 +16,7 @@ from typing import Any, Mapping
 
 ROOT = Path(__file__).resolve().parents[1]
 TRANSITION_PATH = ROOT / "data/generated/sfh2r/repair-manifest.json"
+TRANSITION_V2_PATH = ROOT / "data/generated/sfh2r1/repair-manifest.json"
 
 ACTIVE_REPAIR_INPUTS = (
     "data/aliases.json",
@@ -55,18 +55,45 @@ def path_hash_is_current_or_authorized(
         return True
     if not transition_is_valid():
         return False
-    before, after = _transition_hashes()
-    return (
-        relative_path in before
-        and relative_path in after
-        and str(frozen_hash) == before[relative_path]
-        and actual == after[relative_path]
-    )
+    # A later repair may be chained on top of an earlier one.  Accept only a
+    # hash that is an exact recorded snapshot on that chain and an actual hash
+    # from a later exact snapshot.  This is deliberately narrower than
+    # accepting the current file: every intermediate byte state still has to
+    # be present in the signed-by-content transition records.
+    transitions = _transition_chain_hashes()
+    snapshots: list[dict[str, str]] = []
+    if transitions:
+        snapshots.append(transitions[0][0])
+        snapshots.extend(after for _, after in transitions)
+    for earlier_index, snapshot in enumerate(snapshots):
+        if snapshot.get(relative_path) != str(frozen_hash):
+            continue
+        for later_snapshot in snapshots[earlier_index + 1 :]:
+            if later_snapshot.get(relative_path) == actual:
+                return True
+    return False
 
 
 def transition_manifest() -> dict[str, Any]:
     value = _read(TRANSITION_PATH, {})
     return dict(value) if isinstance(value, Mapping) else {}
+
+
+def transition_manifests() -> list[dict[str, Any]]:
+    """Return the explicit SFH2R → SFH2R.1 transition chain.
+
+    The second manifest is optional for checkouts containing only SFH2R.  Once
+    present, it must be a chained transition rather than a blanket exemption
+    for arbitrary current derived files.
+    """
+    result: list[dict[str, Any]] = []
+    for path in (TRANSITION_PATH, TRANSITION_V2_PATH):
+        value = _read(path, {})
+        if isinstance(value, Mapping) and value:
+            item = dict(value)
+            item["_path"] = path
+            result.append(item)
+    return result
 
 
 def pre_repair_alias_document() -> dict[str, Any] | None:
@@ -124,15 +151,56 @@ def _transition_hashes() -> tuple[dict[str, str], dict[str, str]]:
     )
 
 
+def _transition_chain_hashes() -> list[tuple[dict[str, str], dict[str, str]]]:
+    """Read all explicitly recorded before/after hash pairs in order."""
+    result: list[tuple[dict[str, str], dict[str, str]]] = []
+    for manifest in transition_manifests():
+        transition = manifest.get("active_input_transition")
+        if not isinstance(transition, Mapping):
+            continue
+        before = transition.get("before_hashes")
+        after = transition.get("after_hashes")
+        if not isinstance(before, Mapping) or not isinstance(after, Mapping):
+            continue
+        result.append((
+            {str(key): str(value) for key, value in before.items() if str(key) and str(value)},
+            {str(key): str(value) for key, value in after.items() if str(key) and str(value)},
+        ))
+    return result
+
+
+def _authority_hash_for_manifest(manifest: Mapping[str, Any]) -> str | None:
+    path = manifest.get("_path")
+    if path == TRANSITION_V2_PATH:
+        return file_hash(ROOT / "data/annotation/sfh2r1-manual-semantic-authority.json")
+    return _authority_hash()
+
+
 def transition_is_valid() -> bool:
-    manifest = transition_manifest()
-    if not manifest or manifest.get("authority_sha256") != _authority_hash():
+    manifests = transition_manifests()
+    if not manifests:
         return False
-    if manifest.get("candidate_only") is not True or manifest.get("canonical_write_back") is not False:
+    transitions = _transition_chain_hashes()
+    if len(transitions) != len(manifests):
         return False
-    before, after = _transition_hashes()
+    previous_after: dict[str, str] | None = None
+    for manifest, (before, after) in zip(manifests, transitions):
+        if manifest.get("authority_sha256") != _authority_hash_for_manifest(manifest):
+            return False
+        if manifest.get("candidate_only") is not True or manifest.get("canonical_write_back") is not False:
+            return False
+        if not before or not after:
+            return False
+        if previous_after is not None:
+            # Each repair must start from the exact bytes produced by its
+            # predecessor.  This is the explicit version/baseline transition,
+            # not a general waiver for regenerated derived artifacts.
+            keys = set(previous_after) | set(before)
+            if any(previous_after.get(key) != before.get(key) for key in keys):
+                return False
+        previous_after = after
     current = current_repair_input_hashes()
-    return bool(before and after and current == after)
+    return bool(previous_after and current == previous_after)
 
 
 def _authority_hash() -> str | None:
@@ -158,21 +226,36 @@ def frozen_hashes_are_current_or_authorized(
         return True
     if not transition_is_valid():
         return False
-    before, after = _transition_hashes()
-    # Callers such as HDA2 carry a narrower snapshot than the full SFH2R
-    # active-input set.  Validate every key they do provide, while the
-    # transition manifest itself validates the complete current set above.
-    if any(key in current_map and current_map[key] != value for key, value in after.items()):
+    chain = _transition_chain_hashes()
+    if not chain:
         return False
-    for key, value in frozen_map.items():
-        if key in before:
-            if value != before[key]:
-                return False
-        elif current_map.get(key) != value:
-            return False
-    # A snapshot cannot omit an active transition key that was present in the
-    # historical input; omission would turn this into a partial hash check.
-    return all(key not in frozen_map or frozen_map[key] == before.get(key) for key in before)
+
+    # The ordered snapshots are: before SFH2R, after SFH2R/before SFH2R.1,
+    # and (when present) after SFH2R.1.  A prior frozen experiment may match
+    # an earlier complete stage, but never an unrecorded mixture.
+    snapshots: list[dict[str, str]] = [chain[0][0]]
+    snapshots.extend(after for _, after in chain)
+    target_index = next(
+        (index for index, snapshot in enumerate(snapshots) if current_map == snapshot),
+        len(snapshots) - 1,
+    )
+
+    active_keys = set(ACTIVE_REPAIR_INPUTS)
+    frozen_active = {key: value for key, value in frozen_map.items() if key in active_keys}
+    frozen_nonactive = {key: value for key, value in frozen_map.items() if key not in active_keys}
+    if any(current_map.get(key) != value for key, value in frozen_nonactive.items()):
+        return False
+    if not frozen_active:
+        return frozen_map == current_map
+
+    # Callers such as HDA2 can carry a narrower snapshot than the full active
+    # input set.  Matching an explicitly recorded earlier stage keeps that
+    # compatibility while still requiring the complete transition chain to be
+    # valid above.
+    return any(
+        all(snapshot.get(key) == value for key, value in frozen_active.items())
+        for snapshot in snapshots[: target_index + 1]
+    )
 
 
 def frozen_snapshot_matches_current_or_authorized(

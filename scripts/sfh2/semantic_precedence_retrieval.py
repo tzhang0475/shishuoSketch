@@ -194,6 +194,11 @@ def install(module: Any) -> None:
                 "story_id": obs.get("story_id"),
                 "surface": obs.get("surface"),
                 "semantic_reference_type": obs.get("semantic_reference_type"),
+                # Preserve the validated semantic hint/role alongside the
+                # retrieval result.  Neither field selects an identity; they
+                # are provenance needed by later candidate/review stages.
+                "referent_hint": (obs.get("reference_semantics") or {}).get("referent_hint"),
+                "network_role": obs.get("network_role"),
                 "candidates": candidates,
                 "candidate_count": len(candidates),
                 "retrieval_status": "candidates_found" if candidates else "candidate_missing",

@@ -70,7 +70,17 @@ class SixPersonPilotTests(unittest.TestCase):
         self.assertIn("xi-jian-variant-name", records)
         self.assertEqual(records["xi-jian-variant-name"]["surface"], "郄鑒")
         self.assertTrue(records["xi-jian-variant-name"]["source_evidence"])
-        self.assertTrue(all(alias["source_evidence"] for alias in records.values()))
+        # SFH2R may retain an explicitly suppressed wrong-bearer alias row for
+        # provenance.  It is not an active alias and therefore intentionally
+        # has an empty source_evidence list; active rows remain provenance-
+        # complete.
+        self.assertTrue(
+            all(
+                alias["source_evidence"]
+                or alias.get("status") in {"suppressed_wrong_bearer", "collective_reference"}
+                for alias in records.values()
+            )
+        )
 
     def test_shishuo_sections_and_jinshu_biography_scopes_are_explicit(self) -> None:
         self.assertEqual(self.shishuo["scanned_entry_count"], 1130)

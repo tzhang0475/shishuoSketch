@@ -53,6 +53,26 @@ def authority_documents() -> list[dict[str, Any]]:
     return [_read(path) for path in (AUTHORITY_V1, AUTHORITY_V2) if path.is_file()]
 
 
+def _reviewed_contextual_pairs() -> set[tuple[str, str]]:
+    """Return explicitly reviewed W4 forms that remain context-dependent.
+
+    The W4 catalogue labels some courtesy forms as orthographic variants for
+    source bookkeeping.  The reviewed safe-alias list is the semantic
+    authority for their retrieval scope; using it here avoids promoting a
+    courtesy form to a global exact key based on its storage label.
+    """
+    result: set[tuple[str, str]] = set()
+    for document in authority_documents():
+        for row in document.get("audited_safe_w4_aliases", []) or []:
+            if not isinstance(row, Mapping):
+                continue
+            surface = normalize_form(row.get("surface"))
+            person_id = _text(row.get("person_id"))
+            if surface and person_id:
+                result.add((surface, person_id))
+    return result
+
+
 def alias_repairs() -> list[dict[str, Any]]:
     return [
         dict(row)
@@ -131,6 +151,8 @@ def alias_retrieval_scope(alias: Mapping[str, Any]) -> str:
     surface = normalize_form(alias.get("surface"))
     if not surface:
         return "blocked"
+    if (surface, _text((alias.get("resolved_person_ids") or alias.get("person_ids") or [""])[0])) in _reviewed_contextual_pairs():
+        return "contextual"
     if action == "replace_corrupt_alias_surface" and normalize_form((alias_repair(alias_id) or {}).get("surface")) == surface:
         # A materialized replacement may already have changed the stored
         # surface.  The old corrupt form is blocked by pair-level protection;

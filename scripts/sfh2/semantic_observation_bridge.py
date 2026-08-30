@@ -4,6 +4,8 @@ from __future__ import annotations
 
 from typing import Any, Mapping
 
+from .graph_role_policy import CORE_GRAPH_INELIGIBLE_ROLES
+
 
 def install(module: Any) -> None:
     original = module.build_candidate_observations
@@ -22,14 +24,18 @@ def install(module: Any) -> None:
             semantic = semantics.get(module.text(row.get("mention_id")), {})
             ref = row.setdefault("reference_semantics", {})
             hint = module.text(semantic.get("referent_hint"))
-            role = module.text(semantic.get("network_role")) or "uncertain"
+            explicit_role = module.text(semantic.get("network_role"))
+            role = explicit_role or "uncertain"
             ref["referent_hint"] = hint
             ref["network_role"] = role
             row["semantic_referent_hint"] = hint
             row["network_role"] = role
-            if role in {"citation_author", "historical_exemplum", "person_attribute"}:
+            if explicit_role in CORE_GRAPH_INELIGIBLE_ROLES:
                 row["core_story_graph_eligible"] = False
             else:
+                # No semantic role is invented for legacy SFH1 observations.
+                # Preserve an existing explicit eligibility value; otherwise
+                # retain the historical default for backwards compatibility.
                 row.setdefault("core_story_graph_eligible", True)
         result["semantic_bridge"] = "sfh1_reference_semantics_v2"
         return result

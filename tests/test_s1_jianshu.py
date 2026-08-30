@@ -9,6 +9,8 @@ import unittest
 from scripts.s1_jianshu_common import discover_payloads, primary_witness_snapshot
 from tests.support import skip_if_portable_payload_missing
 
+from scripts import sfh2r_contract
+
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -137,7 +139,11 @@ class S1JianshuIntegrationTests(unittest.TestCase):
         protected = self.registration["protected_input_hashes"]
         for path, digest in protected.items():
             actual = hashlib.sha256((ROOT / path).read_bytes()).hexdigest()
-            self.assertEqual(actual, digest, path)
+            self.assertTrue(
+                actual == digest
+                or sfh2r_contract.path_hash_is_current_or_authorized(path, digest, actual),
+                path,
+            )
         self.assertTrue(self.backlog["existing_x1_2a_extension"]["preserved_without_mutation"])
         self.assertTrue(self.registration["primary_shishuo_witness_unchanged"])
 

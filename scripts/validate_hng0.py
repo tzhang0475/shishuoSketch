@@ -8,6 +8,11 @@ import json
 from pathlib import Path
 from typing import Any, Mapping
 
+try:
+    import sfh2r_contract
+except ImportError:  # pragma: no cover - direct historical checkout fallback
+    sfh2r_contract = None
+
 
 ROOT = Path(__file__).resolve().parents[1]
 OUTPUT_ROOT = ROOT / "data/generated/hng0"
@@ -193,7 +198,15 @@ def validate() -> dict[str, Any]:
     source_hashes = manifest.get("source_hashes", {})
     for relative, expected in source_hashes.items():
         path = ROOT / relative
-        if not path.is_file() or sha256(path) != expected:
+        if relative == "data/aliases.json" and sfh2r_contract is not None:
+            # SFH2R/SFH2R.1 intentionally repair this derived identity input.
+            # HNG0's historical manifest remains frozen to its pre-repair
+            # alias witness; accept it only through the explicit chained
+            # transition, never as a blanket current-file exemption.
+            valid_hash = sfh2r_contract.path_hash_is_current_or_authorized(relative, str(expected))
+        else:
+            valid_hash = path.is_file() and sha256(path) == expected
+        if not valid_hash:
             fail(f"source hash mismatch: {relative}")
     if metrics.get("evidence_validation_failures") != 0:
         fail("metrics report evidence validation failures")

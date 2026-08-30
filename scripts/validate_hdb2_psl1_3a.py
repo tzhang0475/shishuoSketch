@@ -25,6 +25,25 @@ import hdb2_psl1_common as psl1  # noqa: E402
 from run_hdb2_psl1 import protected_hashes  # noqa: E402
 
 
+# SFH2R/SFH2R.1 intentionally rebuild the candidate-only HDB2-F profile
+# projections.  PSL1.3A predates that explicit derived-input transition, so
+# its validator must keep the semantic/frozen inputs strict while excluding
+# only the two authorized profile projections from the old immutable hash
+# comparison.  The chained transition itself is validated by sfh2r1.
+_REBUILT_CANDIDATE_PROFILES = {
+    "data/derived/hdb2-f-person-knowledge.json",
+    "data/derived/hdb2-f-candidate-person-knowledge.json",
+}
+
+
+def _frozen_a_hashes(value: Mapping[str, Any] | None) -> dict[str, str]:
+    return {
+        str(path): str(digest)
+        for path, digest in (value or {}).items()
+        if str(path) not in _REBUILT_CANDIDATE_PROFILES
+    }
+
+
 def _load(path: Path, default: Any = None) -> Any:
     return layer.read_json(path, default)
 
@@ -67,9 +86,11 @@ def _validate_run(run_dir: Path, errors: list[str]) -> dict[str, Any]:
     _validate_selection(selection, errors)
     if manifest.get("candidate_only") is not True or manifest.get("canonical_write_back") is not False:
         errors.append("manifest_safety_flags_invalid")
-    if manifest.get("protected_hashes_before") != manifest.get("protected_hashes_after"):
+    before_hashes = _frozen_a_hashes(manifest.get("protected_hashes_before"))
+    after_hashes = _frozen_a_hashes(manifest.get("protected_hashes_after"))
+    if before_hashes != after_hashes:
         errors.append("protected_hashes_changed")
-    if manifest.get("protected_hashes_after") != protected_hashes():
+    if after_hashes != _frozen_a_hashes(protected_hashes()):
         errors.append("protected_hashes_do_not_match_current")
     packets = _validate_reference_packets(run_dir, errors)
     graph = _load(run_dir / "graph.json", {}) or {}
@@ -131,8 +152,28 @@ def _validate_run(run_dir: Path, errors: list[str]) -> dict[str, Any]:
         (row for row in structures.values() if row.get("story_id") == "05-fangzheng-028" and row.get("target_surface") == "家兄"),
         None,
     )
-    if household and household.get("surface_structure") == "compositional_kinship" and household.get("anchor_person") != "王敦":
-        errors.append("家兄_anchor_not_grounded")
+    if household and household.get("surface_structure") == "compositional_kinship":
+        # The frozen 1.3A run recorded the source-local abbreviated anchor
+        # ``敦``.  The current semantic regression helper expands that same
+        # grounded local participant to 王敦.  Accept either wire form, but
+        # never accept an ungrounded arbitrary anchor: the saved graph must
+        # contain the corresponding existing Person candidate.
+        anchor = household.get("anchor_person")
+        graph_case = cases.get(str(household.get("mention_id")), {})
+        grounded_names = {
+            str(candidate.get("display_name") or "")
+            for candidate in graph_case.get("candidates", []) or []
+            if isinstance(candidate, Mapping)
+        }
+        grounded_abbreviations = {
+            str(candidate.get("display_name") or "")
+            for candidate in graph_case.get("candidates", []) or []
+            if isinstance(candidate, Mapping)
+            and anchor
+            and anchor in str(candidate.get("profile", {}).get("aliases", []) or [])
+        }
+        if anchor not in grounded_names and not (anchor and grounded_abbreviations):
+            errors.append("家兄_anchor_not_grounded")
     return {
         "run_dir": str(run_dir.relative_to(ROOT)),
         "reference_packets": len(packets),

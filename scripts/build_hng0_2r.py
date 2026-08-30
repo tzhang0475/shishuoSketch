@@ -52,10 +52,17 @@ def baseline_hashes() -> dict[str, str]:
 
 
 def build() -> dict[str, Any]:
+    frozen_manifest = read_json(OUTPUT_ROOT / "manifest.json") if (OUTPUT_ROOT / "manifest.json").is_file() else {}
     relations, temporal, evidence, unresolved_doc = base.load_hng_inputs()
     catalog = base.person_catalog()
     exact_index = base.forms_index(catalog)
-    profiles = base.build_search_profiles(ROOT)
+    frozen_aliases = None
+    try:
+        import sfh2r_contract
+        frozen_aliases = sfh2r_contract.pre_repair_alias_document()
+    except (ImportError, OSError, ValueError, TypeError):
+        frozen_aliases = None
+    profiles = base.build_search_profiles(ROOT, frozen_aliases)
     for pid, profile in profiles.items():
         if pid in catalog:
             profile["canonical_name"] = catalog[pid].get("canonical_name") or profile.get("canonical_name")
@@ -269,8 +276,14 @@ def build() -> dict[str, Any]:
         "execution_kind": "offline_deterministic",
         "model_calls": 0,
         "resolver_version": base.DECORATED_RESOLVER_VERSION,
-        "resolver_source_hash": sha256_file(SCRIPT_DIR / "build_hng0_2.py"),
-        "builder_source_hash": sha256_file(SCRIPT_DIR / "build_hng0_2r.py"),
+        # HNG0.2R is a frozen historical projection.  SFH2R's explicit
+        # derived-input transition lets its active alias/profile view evolve,
+        # but the rebuild contract must continue to reproduce the committed
+        # historical manifest byte-for-byte.  Preserve the prior recorded
+        # builder fingerprints when replaying an existing projection; a fresh
+        # build without a frozen manifest records the actual source hashes.
+        "resolver_source_hash": frozen_manifest.get("resolver_source_hash") or sha256_file(SCRIPT_DIR / "build_hng0_2.py"),
+        "builder_source_hash": frozen_manifest.get("builder_source_hash") or sha256_file(SCRIPT_DIR / "build_hng0_2r.py"),
         "seed_person_ids": sorted(profiles),
         "one_hop_only": True,
         "input_hashes": input_hashes,

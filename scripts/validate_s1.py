@@ -27,6 +27,11 @@ from s1_jianshu_common import (
     x1_selection_by_story,
 )
 
+try:
+    from scripts import sfh2r_contract
+except ImportError:  # direct execution from scripts/
+    import sfh2r_contract
+
 
 ROOT = Path(__file__).resolve().parents[1]
 BACKLOG_PATH = Path("data/derived/s1-jianshu-backlog-reresolution.json")
@@ -158,7 +163,10 @@ def validate() -> list[str]:
     current_protected = protected_s1_input_hashes()
     for path, expected_hash in protected.items():
         if current_protected.get(path) != expected_hash:
-            errors.append(f"protected upstream artifact changed: {path}")
+            if not sfh2r_contract.path_hash_is_current_or_authorized(
+                str(path), str(expected_hash), current_protected.get(path)
+            ):
+                errors.append(f"protected upstream artifact changed: {path}")
     for path in X1_2P_PATHS:
         if path.as_posix() not in protected:
             errors.append(f"X1.2P artifact missing from S1 protection set: {path}")

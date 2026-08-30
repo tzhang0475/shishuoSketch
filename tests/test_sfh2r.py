@@ -93,8 +93,17 @@ class SFH2RTests(unittest.TestCase):
     def test_derived_input_transition_is_explicit_and_fail_closed(self):
         manifest = load("repair-manifest.json")
         transition = manifest["active_input_transition"]
+        # SFH2R.1 is an explicit second derived-input transition.  The first
+        # manifest remains immutable; its after-image is now the second
+        # manifest's before-image, while the chained after-image is current.
+        chain = sfh2r_contract.transition_manifests()
+        self.assertEqual(2, len(chain))
         self.assertEqual(
             transition["after_hashes"],
+            chain[1]["active_input_transition"]["before_hashes"],
+        )
+        self.assertEqual(
+            chain[1]["active_input_transition"]["after_hashes"],
             sfh2r_contract.current_repair_input_hashes(),
         )
         self.assertTrue(

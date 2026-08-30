@@ -134,9 +134,12 @@ def _alias_surface(row: Mapping[str, Any]) -> list[str]:
     return unique_strings(values)
 
 
-def build_people_catalog(root: Path = ROOT) -> dict[str, dict[str, Any]]:
+def build_people_catalog(
+    root: Path = ROOT,
+    aliases_document: Mapping[str, Any] | None = None,
+) -> dict[str, dict[str, Any]]:
     people_doc = read_json(root / PEOPLE_PATH.relative_to(root))
-    aliases_doc = read_json(root / ALIASES_PATH.relative_to(root))
+    aliases_doc = aliases_document if isinstance(aliases_document, Mapping) else read_json(root / ALIASES_PATH.relative_to(root))
     people = {str(row["person_id"]): row for row in people_doc.get("people", []) if isinstance(row, Mapping) and row.get("person_id")}
     aliases_by_person: dict[str, list[Mapping[str, Any]]] = defaultdict(list)
     for row in aliases_doc.get("aliases", []):
@@ -173,10 +176,13 @@ def build_people_catalog(root: Path = ROOT) -> dict[str, dict[str, Any]]:
     return catalog
 
 
-def build_search_profiles(root: Path = ROOT) -> dict[str, dict[str, Any]]:
+def build_search_profiles(
+    root: Path = ROOT,
+    aliases_document: Mapping[str, Any] | None = None,
+) -> dict[str, dict[str, Any]]:
     """Build the frozen 24-seed search profiles, without existing relations."""
 
-    catalog = build_people_catalog(root)
+    catalog = build_people_catalog(root, aliases_document)
     selection = read_json(root / SELECTION_PATH.relative_to(root))
     hng_candidates = read_json(root / HNG0_CANDIDATE_PATH.relative_to(root))
     hng_people = hng_candidates.get("people", {})

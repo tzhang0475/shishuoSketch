@@ -6,7 +6,7 @@ import collections
 from pathlib import Path
 from typing import Any, Mapping
 
-from manual_semantic_authority import apply_sfh2_observation, blocked_global_forms
+from manual_semantic_authority import apply_sfh2_observation, fully_blocked_forms
 import sfh2r_contract
 from .common import (
     INPUT_FILES,
@@ -42,7 +42,7 @@ def _effective_suppress_overlay() -> list[dict[str, Any]]:
         for row in rows
         if text(row.get("action")) == "suppress_claim"
     }
-    for surface, person_id in sorted(blocked_global_forms()):
+    for surface, person_id in sorted(fully_blocked_forms()):
         key = (normalize_form(surface), person_id)
         if key in existing:
             continue

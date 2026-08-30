@@ -1,8 +1,8 @@
 """Deterministic application of reviewed historical-semantic authority.
 
 This module does not infer semantics.  It only reads the manually reviewed
-records in data/annotation/sfh2r-manual-semantic-authority.json and applies
-those explicit decisions to downstream derived pipelines.
+records in the SFH2R authority files and applies those explicit decisions to
+downstream derived pipelines.
 """
 
 from __future__ import annotations
@@ -15,6 +15,7 @@ from typing import Any, Mapping
 
 ROOT = Path(__file__).resolve().parents[1]
 AUTHORITY_PATH = ROOT / "data/annotation/sfh2r-manual-semantic-authority.json"
+AUTHORITY_V2_PATH = ROOT / "data/annotation/sfh2r1-manual-semantic-authority.json"
 VARIANTS = str.maketrans({"爲": "為", "髙": "高", "鳯": "鳳", "臺": "台", "台": "台"})
 
 
@@ -32,9 +33,29 @@ def load_authority() -> dict[str, Any]:
     return json.loads(AUTHORITY_PATH.read_text(encoding="utf-8"))
 
 
-def authority_reference() -> str:
+def load_authority_v2() -> dict[str, Any]:
+    if not AUTHORITY_V2_PATH.is_file():
+        return {}
+    return json.loads(AUTHORITY_V2_PATH.read_text(encoding="utf-8"))
+
+
+def authority_reference(path: Path | None = None) -> str:
     """Return the stable repository reference for the reviewed authority."""
-    return str(AUTHORITY_PATH.relative_to(ROOT))
+    return str((path or AUTHORITY_PATH).relative_to(ROOT))
+
+
+def authority_documents() -> list[tuple[Path, dict[str, Any]]]:
+    """Return reviewed authorities in application order.
+
+    SFH2R.1 is a second, independent manual pass.  Keeping the path beside
+    each document lets materializers preserve which human authority supplied
+    each edit rather than collapsing both passes into one opaque label.
+    """
+    return [
+        (path, document)
+        for path in (AUTHORITY_PATH, AUTHORITY_V2_PATH)
+        if (document := (json.loads(path.read_text(encoding="utf-8")) if path.is_file() else {}))
+    ]
 
 
 def alias_repairs() -> list[dict[str, Any]]:
@@ -51,10 +72,29 @@ def alias_repairs() -> list[dict[str, Any]]:
     ]
 
 
+def second_alias_repairs() -> list[dict[str, Any]]:
+    """Return only the SFH2R.1 records for its isolated materializer."""
+    return [
+        dict(row)
+        for row in load_authority_v2().get("alias_repairs", []) or []
+        if isinstance(row, Mapping)
+    ]
+
+
+def all_alias_repairs() -> list[dict[str, Any]]:
+    """Return both manual passes in deterministic application order."""
+    return [*alias_repairs(), *second_alias_repairs()]
+
+
 def blocked_global_forms() -> set[tuple[str, str]]:
-    """Forms explicitly barred from global exact identity retrieval."""
+    """Forms that must not be used as global exact identity keys.
+
+    A downgraded/shared form is returned here for legacy exact-key callers,
+    but it remains a valid contextual retrieval hint.  Callers that build a
+    broad suppression overlay must use :func:`fully_blocked_forms` instead.
+    """
     blocked: set[tuple[str, str]] = set()
-    for row in alias_repairs():
+    for row in all_alias_repairs():
         if not isinstance(row, Mapping):
             continue
         action = _text(row.get("action"))
@@ -66,10 +106,27 @@ def blocked_global_forms() -> set[tuple[str, str]]:
     return blocked
 
 
+def fully_blocked_forms() -> set[tuple[str, str]]:
+    """Return only reviewed wrong-bearer/corrupt pairs barred at all scopes."""
+    blocked: set[tuple[str, str]] = set()
+    for row in all_alias_repairs():
+        if _text(row.get("action")) not in {
+            "suppress_wrong_bearer_alias",
+            "suppress_person_alias_and_reclassify_collective",
+            "replace_corrupt_alias_surface",
+        }:
+            continue
+        surface = normalize_form(row.get("surface"))
+        person_id = _text(row.get("current_person_id"))
+        if surface and person_id:
+            blocked.add((surface, person_id))
+    return blocked
+
+
 def replacement_exact_forms() -> list[dict[str, str]]:
     """Explicit reviewed replacement forms; currently used for 子玄→郭象."""
     rows: list[dict[str, str]] = []
-    for row in alias_repairs():
+    for row in all_alias_repairs():
         if not isinstance(row, Mapping) or _text(row.get("action")) != "replace_corrupt_alias_surface":
             continue
         surface = _text(row.get("corrected_surface"))
@@ -79,7 +136,9 @@ def replacement_exact_forms() -> list[dict[str, str]]:
                 "surface": surface,
                 "person_id": person_id,
                 "basis": "manual_semantic_authority",
-                "evidence_ref": str(AUTHORITY_PATH.relative_to(ROOT)),
+                "evidence_ref": authority_reference(
+                    AUTHORITY_V2_PATH if row in second_alias_repairs() else AUTHORITY_PATH
+                ),
             })
     return rows
 
@@ -90,6 +149,16 @@ def occurrence_repairs() -> dict[str, dict[str, Any]]:
         for row in load_authority().get("occurrence_repairs", []) or []
         if isinstance(row, Mapping) and _text(row.get("observation_id"))
     }
+
+
+def all_occurrence_repairs() -> dict[str, dict[str, Any]]:
+    """Return occurrence repairs from both passes, with later authority last."""
+    result: dict[str, dict[str, Any]] = {}
+    for _, document in authority_documents():
+        for row in document.get("occurrence_repairs", []) or []:
+            if isinstance(row, Mapping) and _text(row.get("observation_id")):
+                result[_text(row.get("observation_id"))] = dict(row)
+    return result
 
 
 def _source_id_for_evidence(evidence_id: str, aliases: Mapping[str, Any]) -> str:
@@ -105,11 +174,12 @@ def _source_id_for_evidence(evidence_id: str, aliases: Mapping[str, Any]) -> str
         for evidence in alias.get("source_evidence", []) or []:
             if isinstance(evidence, Mapping) and _text(evidence.get("evidence_id")) == evidence_id:
                 return _text(evidence.get("source_id"))
-        repair_trace = alias.get("sfh2r_manual_repair")
-        if isinstance(repair_trace, Mapping):
-            for evidence in repair_trace.get("removed_evidence_provenance", []) or []:
-                if isinstance(evidence, Mapping) and _text(evidence.get("evidence_id")) == evidence_id:
-                    return _text(evidence.get("source_id"))
+        for trace_key in ("sfh2r_manual_repair", "sfh2r1_manual_repair"):
+            repair_trace = alias.get(trace_key)
+            if isinstance(repair_trace, Mapping):
+                for evidence in repair_trace.get("removed_evidence_provenance", []) or []:
+                    if isinstance(evidence, Mapping) and _text(evidence.get("evidence_id")) == evidence_id:
+                        return _text(evidence.get("source_id"))
     return ""
 
 
@@ -155,7 +225,7 @@ def manual_profile_claim_rejection(
     claim_surfaces = _claim_surfaces(decision, source_row)
     claim_story = _text(decision.get("story_id") or (source_row or {}).get("story_id"))
     claim_surface = normalize_form(decision.get("surface"))
-    for repair in alias_repairs():
+    for repair in all_alias_repairs():
         if _text(repair.get("current_person_id")) != target:
             continue
         action = _text(repair.get("action"))
@@ -209,10 +279,12 @@ def manual_profile_claim_rejection(
     return None
 
 
-def apply_alias_repairs(
+def _apply_alias_repairs(
     aliases_document: Mapping[str, Any],
+    repairs: list[Mapping[str, Any]],
+    authority_path: Path,
 ) -> tuple[dict[str, Any], list[dict[str, Any]]]:
-    """Mechanically materialize the reviewed alias repairs.
+    """Mechanically materialize one explicitly reviewed authority set.
 
     The function validates the expected alias id/surface/person coordinates,
     filters only explicitly removed evidence, and preserves the alias id and
@@ -234,7 +306,7 @@ def apply_alias_repairs(
             if isinstance(evidence, Mapping) and _text(evidence.get("evidence_id")):
                 evidence_lookup[_text(evidence.get("evidence_id"))] = dict(evidence)
     audit: list[dict[str, Any]] = []
-    for repair in alias_repairs():
+    for repair in repairs:
         alias_id = _text(repair.get("alias_id"))
         current = by_id.get(alias_id)
         if current is None:
@@ -257,6 +329,10 @@ def apply_alias_repairs(
             if _text(value)
         }
         old_evidence = [dict(value) for value in current.get("source_evidence", []) or [] if isinstance(value, Mapping)]
+        old_evidence_ids = {_text(value.get("evidence_id")) for value in old_evidence if _text(value.get("evidence_id"))}
+        audit_removed_ids = set(remove_ids)
+        if repair.get("remove_all_current_surface_evidence"):
+            audit_removed_ids.update(old_evidence_ids)
         if keep_ids:
             new_evidence = [value for value in old_evidence if _text(value.get("evidence_id")) in keep_ids]
         elif repair.get("remove_all_current_surface_evidence"):
@@ -287,18 +363,28 @@ def apply_alias_repairs(
             if repair.get(key):
                 current[key.removeprefix("corrected_")] = repair.get(key)
         current["observed_count"] = int(repair.get("corrected_observed_support_count") or len(current["source_evidence"]))
-        current["resolved_person_ids"] = list(current.get("resolved_person_ids") or current.get("person_ids") or [])
+        if repair.get("remove_all_current_surface_evidence") or _text(repair.get("action")) in {
+            "suppress_wrong_bearer_alias",
+            "suppress_person_alias_and_reclassify_collective",
+        }:
+            # Preserve the alias row and its audit trace, but remove it from
+            # all active person retrieval keys.  The authority explicitly
+            # says this surface was assigned to another bearer/collective.
+            current["person_ids"] = []
+            current["resolved_person_ids"] = []
+        else:
+            current["resolved_person_ids"] = list(current.get("resolved_person_ids") or current.get("person_ids") or [])
         current["sfh2r_manual_repair"] = {
-            "authority": authority_reference(),
+            "authority": authority_reference(authority_path),
             "alias_id": alias_id,
             "action": repair.get("action"),
             "manual_verdict": repair.get("manual_verdict"),
-            "removed_evidence_ids": sorted(remove_ids),
+            "removed_evidence_ids": sorted(audit_removed_ids),
             "retained_evidence_ids": sorted(_text(row.get("evidence_id")) for row in current["source_evidence"]),
             "removed_evidence_provenance": [
                 value
                 for value in old_evidence
-                if _text(value.get("evidence_id")) in remove_ids
+                if _text(value.get("evidence_id")) in audit_removed_ids
             ],
         }
         audit.append({
@@ -309,10 +395,24 @@ def apply_alias_repairs(
             "before": before,
             "after": json.loads(json.dumps(current, ensure_ascii=False)),
             "manual_authority": repair,
-            "removed_evidence_ids": sorted(remove_ids),
+            "removed_evidence_ids": sorted(audit_removed_ids),
             "retained_evidence_ids": sorted(_text(row.get("evidence_id")) for row in current["source_evidence"]),
         })
     return document, audit
+
+
+def apply_alias_repairs(
+    aliases_document: Mapping[str, Any],
+) -> tuple[dict[str, Any], list[dict[str, Any]]]:
+    """Apply the original SFH2R authority (kept for compatibility)."""
+    return _apply_alias_repairs(aliases_document, alias_repairs(), AUTHORITY_PATH)
+
+
+def apply_sfh2r1_alias_repairs(
+    aliases_document: Mapping[str, Any],
+) -> tuple[dict[str, Any], list[dict[str, Any]]]:
+    """Apply the second reviewed authority after the original SFH2R pass."""
+    return _apply_alias_repairs(aliases_document, second_alias_repairs(), AUTHORITY_V2_PATH)
 
 
 def _manual_candidate_id(display_name: str) -> str:
@@ -323,7 +423,7 @@ def _manual_candidate_id(display_name: str) -> str:
 def apply_sfh2_observation(row: Mapping[str, Any]) -> dict[str, Any]:
     """Apply one explicit occurrence repair to an SFH2 observation, if any."""
     result = dict(row)
-    repair = occurrence_repairs().get(_text(result.get("observation_id")))
+    repair = all_occurrence_repairs().get(_text(result.get("observation_id")))
     if not repair:
         return result
 

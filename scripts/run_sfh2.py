@@ -6,6 +6,7 @@ from __future__ import annotations
 import argparse
 import json
 import sys
+from pathlib import Path
 
 ROOT = __import__("pathlib").Path(__file__).resolve().parents[1]
 if str(ROOT / "scripts") not in sys.path:
@@ -21,10 +22,11 @@ def main() -> int:
     parser.add_argument("--offline", action="store_true", help="explicitly select cached/offline replay (the default)")
     parser.add_argument("--max-link-calls", type=int, default=None)
     parser.add_argument("--max-pair-calls", type=int, default=None)
+    parser.add_argument("--output-root", type=Path, default=None, help="optional isolated derived-output directory")
     args = parser.parse_args()
     if args.live and args.offline:
         parser.error("--live and --offline are mutually exclusive")
-    result = run(run_id=args.run_id, live=args.live, max_link_calls=args.max_link_calls, max_pair_calls=args.max_pair_calls)
+    result = run(run_id=args.run_id, live=args.live, max_link_calls=args.max_link_calls, max_pair_calls=args.max_pair_calls, output_root=args.output_root)
     print(json.dumps({"status": "ok", "run_dir": result["run_dir"], "metrics": result["metrics"]}, ensure_ascii=False, indent=2, sort_keys=True))
     return 0
 
