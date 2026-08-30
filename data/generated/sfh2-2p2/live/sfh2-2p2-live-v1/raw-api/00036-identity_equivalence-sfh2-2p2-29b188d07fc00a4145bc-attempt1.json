@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"reviews\": [{\"mention_id\": \"sfh1-mention-3e0d0853707cff9ca00f9606\", \"target_proposal\": \"周顗\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"relation_to_target\": \"same_person\", \"confidence\": \"high\", \"supporting_evidence_ids\": [\"sfh1-ev-09-pinzao-014-main\", \"sfh1-ev-09-pinzao-014-liu-annotation-001\"], \"contradicting_evidence_ids\": []}, {\"candidate_key\": \"c1\", \"relation_to_target\": \"different_person\", \"confidence\": \"high\", \"supporting_evidence_ids\": [\"sfh1-ev-09-pinzao-014-main\"], \"contradicting_evidence_ids\": []}, {\"candidate_key\": \"c2\", \"relation_to_target\": \"citation_relation\", \"confidence\": \"medium\", \"supporting_evidence_ids\": [\"sfh1-ev-09-pinzao-014-liu-annotation-001\"], \"contradicting_evidence_ids\": []}, {\"candidate_key\": \"c3\", \"relation_to_target\": \"different_person\", \"confidence\": \"high\", \"supporting_evidence_ids\": [\"sfh1-ev-09-pinzao-014-main\"], \"contradicting_evidence_ids\": []}], \"same_person_candidate_key\": \"c0\", \"abstain\": false, \"explanation\": \"The target mention is 周伯仁 (courtesy name of 周顗). Candidate c0 is 周顗, which is the same person — the main text explicitly states 周顗比臣有國士門風, and the Liu annotation identifies 伯仁 as 周顗. Candidate c1 (郗鑒) is a different person mentioned in the same passage as a comparison subject. Candidate c2 (鄧粲) is the author of the cited work 晉紀 in the annotation, not the target person. Candidate c3 (鑒) is a shortened reference to 郗鑒, a different person.\"}]}",
+              "name": "submit_sfh2_2p1_identity_equivalence"
+            },
+            "id": "call_00_hEvfOo2eybMroxJDmohD5172",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1788102296,
+  "id": "60c611a8-a5a7-4448-89f7-5d9de98a4cb2",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 513,
+    "prompt_cache_hit_tokens": 640,
+    "prompt_cache_miss_tokens": 1284,
+    "prompt_tokens": 1924,
+    "prompt_tokens_details": {
+      "cached_tokens": 640
+    },
+    "total_tokens": 2437
+  }
+}

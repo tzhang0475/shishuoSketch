@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"reviews\": [{\"mention_id\": \"sfh1-mention-bf3b743343dab627f8934ab5\", \"target_proposal\": \"鍾會\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"relation_to_target\": \"same_person\", \"confidence\": \"high\", \"supporting_evidence_ids\": [\"sfh1-ev-08-shangyu-006-liu-annotation-002\", \"sfh1-ev-08-shangyu-006-main\"], \"contradicting_evidence_ids\": []}, {\"candidate_key\": \"c1\", \"relation_to_target\": \"different_person\", \"confidence\": \"high\", \"supporting_evidence_ids\": [\"sfh1-ev-08-shangyu-006-main\"], \"contradicting_evidence_ids\": []}, {\"candidate_key\": \"c2\", \"relation_to_target\": \"different_person\", \"confidence\": \"high\", \"supporting_evidence_ids\": [\"sfh1-ev-08-shangyu-006-liu-annotation-002\"], \"contradicting_evidence_ids\": []}, {\"candidate_key\": \"c3\", \"relation_to_target\": \"different_person\", \"confidence\": \"high\", \"supporting_evidence_ids\": [\"sfh1-ev-08-shangyu-006-main\"], \"contradicting_evidence_ids\": []}, {\"candidate_key\": \"c4\", \"relation_to_target\": \"different_person\", \"confidence\": \"high\", \"supporting_evidence_ids\": [\"sfh1-ev-08-shangyu-006-main\"], \"contradicting_evidence_ids\": []}, {\"candidate_key\": \"c5\", \"relation_to_target\": \"same_person\", \"confidence\": \"high\", \"supporting_evidence_ids\": [\"sfh1-ev-08-shangyu-006-liu-annotation-002\", \"sfh1-ev-08-shangyu-006-main\"], \"contradicting_evidence_ids\": []}, {\"candidate_key\": \"c6\", \"relation_to_target\": \"same_person\", \"confidence\": \"high\", \"supporting_evidence_ids\": [\"sfh1-ev-08-shangyu-006-main\"], \"contradicting_evidence_ids\": []}], \"same_person_candidate_key\": \"c0\", \"abstain\": false, \"explanation\": \"The target mention is 鍾士季 (Zhong Shiji), which is the courtesy name of 鍾會 (Zhong Hui). The main text explicitly identifies 鍾士季 as the person being visited, and the Liu annotation confirms 鍾會. Candidate c0 is 鍾會, which is the same person as the target. Candidate c5 is also 鍾會 (same person). Candidate c6 is 鍾士季, which is the exact surface form of the target mention, thus the same person. Candidates c1 (王戎), c2 (戎), c3 (裴叔則), and c4 (裴楷) are different people mentioned in the same passage.\"}]}",
+              "name": "submit_sfh2_2p1_identity_equivalence"
+            },
+            "id": "call_00_deMTo6JkKog5s6prI8LE2426",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1788102282,
+  "id": "9103bc1c-8eee-41bf-a4b9-6f48f9c63cfb",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 699,
+    "prompt_cache_hit_tokens": 640,
+    "prompt_cache_miss_tokens": 1786,
+    "prompt_tokens": 2426,
+    "prompt_tokens_details": {
+      "cached_tokens": 640
+    },
+    "total_tokens": 3125
+  }
+}

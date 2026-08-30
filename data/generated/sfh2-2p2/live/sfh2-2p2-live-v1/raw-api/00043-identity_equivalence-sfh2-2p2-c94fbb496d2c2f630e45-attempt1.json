@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"reviews\": [{\"mention_id\": \"sfh1-mention-0532b89aef1d4241a7dc6a81\", \"target_proposal\": \"劉寶\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"relation_to_target\": \"same_person\", \"confidence\": \"high\", \"supporting_evidence_ids\": [\"sfh1-ev-23-rendan-017-liu-annotation-001\", \"sfh1-ev-23-rendan-017-main\"], \"contradicting_evidence_ids\": []}, {\"candidate_key\": \"c1\", \"relation_to_target\": \"same_person\", \"confidence\": \"high\", \"supporting_evidence_ids\": [\"sfh1-ev-23-rendan-017-liu-annotation-001\"], \"contradicting_evidence_ids\": []}, {\"candidate_key\": \"c2\", \"relation_to_target\": \"same_person\", \"confidence\": \"high\", \"supporting_evidence_ids\": [\"sfh1-ev-23-rendan-017-main\"], \"contradicting_evidence_ids\": []}], \"same_person_candidate_key\": \"c0\", \"abstain\": false, \"explanation\": \"The target mention is 劉道真 in the main text. The liu_annotation explicitly identifies this person as 劉寳 (已見/劉寳), confirming the canonical name. Candidate c0 is 劉寶 (variant of 劉寳), c1 is 劉寳, and c2 is 道真 (the given name used in the text for the same person). All three candidates refer to the same historical person as the target proposal 劉寶.\"}]}",
+              "name": "submit_sfh2_2p1_identity_equivalence"
+            },
+            "id": "call_00_5bUlcX3jPu3mqSEbLTx85880",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1788102323,
+  "id": "1200766d-6a33-4438-9c9f-03c6e31d09bd",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 410,
+    "prompt_cache_hit_tokens": 640,
+    "prompt_cache_miss_tokens": 1233,
+    "prompt_tokens": 1873,
+    "prompt_tokens_details": {
+      "cached_tokens": 640
+    },
+    "total_tokens": 2283
+  }
+}

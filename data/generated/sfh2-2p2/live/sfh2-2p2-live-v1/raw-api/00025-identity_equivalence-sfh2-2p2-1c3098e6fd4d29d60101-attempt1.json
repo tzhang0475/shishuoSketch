@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"reviews\": [{\"mention_id\": \"sfh1-mention-1456ea28d2dfd170ca3bf3d2\", \"target_proposal\": \"薛瑩\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"relation_to_target\": \"same_person\", \"confidence\": \"high\", \"supporting_evidence_ids\": [\"sfh1-ev-01-dexing-004-liu-annotation-001\"], \"contradicting_evidence_ids\": []}, {\"candidate_key\": \"c1\", \"relation_to_target\": \"different_person\", \"confidence\": \"high\", \"supporting_evidence_ids\": [\"sfh1-ev-01-dexing-004-liu-annotation-001\"], \"contradicting_evidence_ids\": []}, {\"candidate_key\": \"c2\", \"relation_to_target\": \"different_person\", \"confidence\": \"high\", \"supporting_evidence_ids\": [\"sfh1-ev-01-dexing-004-main\"], \"contradicting_evidence_ids\": []}, {\"candidate_key\": \"c3\", \"relation_to_target\": \"different_person\", \"confidence\": \"high\", \"supporting_evidence_ids\": [\"sfh1-ev-01-dexing-004-liu-annotation-001\"], \"contradicting_evidence_ids\": []}, {\"candidate_key\": \"c4\", \"relation_to_target\": \"same_person\", \"confidence\": \"high\", \"supporting_evidence_ids\": [\"sfh1-ev-01-dexing-004-liu-annotation-001\"], \"contradicting_evidence_ids\": []}], \"same_person_candidate_key\": \"c0\", \"abstain\": false, \"explanation\": \"The target proposal is 薛瑩, the author of the 後漢書 (Later Han History) cited in the Liu Xiaobiao annotation. Candidate c0 is 薛瑩, which is the same person as the target. Candidate c4 is also 薛瑩 from the prior candidate registry, referring to the same person. Candidates c1 (元禮), c2 (李元禮), and c3 (李膺) all refer to Li Ying (李膺), the subject of the annotation, not to Xue Ying (薛瑩) the citation author. The annotation text '薛瑩後漢書曰李膺字元禮' clearly distinguishes Xue Ying as the author of the cited work from Li Ying who is the person being described.\"}]}",
+              "name": "submit_sfh2_2p1_identity_equivalence"
+            },
+            "id": "call_00_Aza9nkHvSwJes3GmzAt73913",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1788102249,
+  "id": "4592ef52-9659-4b36-889c-8031b29584e2",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 581,
+    "prompt_cache_hit_tokens": 640,
+    "prompt_cache_miss_tokens": 1469,
+    "prompt_tokens": 2109,
+    "prompt_tokens_details": {
+      "cached_tokens": 640
+    },
+    "total_tokens": 2690
+  }
+}

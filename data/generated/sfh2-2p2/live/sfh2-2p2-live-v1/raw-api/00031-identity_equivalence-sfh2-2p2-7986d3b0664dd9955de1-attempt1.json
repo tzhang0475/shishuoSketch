@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"reviews\": [{\"mention_id\": \"sfh1-mention-006bd81e8f5aa138c2b63b2c\", \"target_proposal\": \"法汰\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"relation_to_target\": \"same_person\", \"confidence\": \"high\", \"supporting_evidence_ids\": [\"sfh1-ev-04-wenxue-054-liu-annotation-001\", \"sfh1-ev-04-wenxue-054-liu-annotation-002\", \"sfh1-ev-04-wenxue-054-main\"], \"contradicting_evidence_ids\": []}, {\"candidate_key\": \"c1\", \"relation_to_target\": \"same_person\", \"confidence\": \"high\", \"supporting_evidence_ids\": [\"sfh1-ev-04-wenxue-054-liu-annotation-001\", \"sfh1-ev-04-wenxue-054-liu-annotation-002\"], \"contradicting_evidence_ids\": []}, {\"candidate_key\": \"c2\", \"relation_to_target\": \"same_person\", \"confidence\": \"high\", \"supporting_evidence_ids\": [\"sfh1-ev-04-wenxue-054-main\"], \"contradicting_evidence_ids\": []}], \"same_person_candidate_key\": \"c0\", \"abstain\": false, \"explanation\": \"The target proposal is 法汰 (法汰法師), referenced in the main text as 汰法師. Candidate c0 is the LLM entity proposal for 法汰, directly matching the target. Candidate c1 is the same person 法汰 retrieved from validated local person mentions, with the same annotation evidence identifying 法汰. Candidate c2 is 汰法師, which is the surface form of the target mention itself (汰法師 = 法汰法師), referring to the same person. All three candidates refer to the same historical figure 法汰 (竺法汰), a Buddhist monk mentioned in the Shishuo xinyu entry.\"}]}",
+              "name": "submit_sfh2_2p1_identity_equivalence"
+            },
+            "id": "call_00_hWRwek4kK3Z2dzl7SuiN5392",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1788102274,
+  "id": "c9209758-1bbc-4f0c-9626-35a4959f213c",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 495,
+    "prompt_cache_hit_tokens": 640,
+    "prompt_cache_miss_tokens": 1620,
+    "prompt_tokens": 2260,
+    "prompt_tokens_details": {
+      "cached_tokens": 640
+    },
+    "total_tokens": 2755
+  }
+}
