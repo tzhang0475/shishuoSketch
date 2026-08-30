@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"judgments\": [{\"unit_id\": \"sfh1-mention-e5f55d112d1655f2898a4637\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-02-yanyu-086-main\"], \"reason_types\": [\"surface_mismatch\", \"referent_mismatch\"]}, {\"candidate_key\": \"c1\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-02-yanyu-086-main\"], \"reason_types\": [\"surface_mismatch\", \"referent_mismatch\"]}, {\"candidate_key\": \"c2\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-02-yanyu-086-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"surface_match\", \"contextual_match\"]}], \"preferred_candidate_key\": \"c2\", \"resolution\": \"candidate_supported\", \"explanation\": \"The mention surface is 王子敬, which appears directly in the main text: '王子敬語王孝伯曰...'. Candidate c2 (王子敬) matches this surface exactly and is the person speaking in the passage. Candidates c0 (王恭/王孝伯) and c1 (羊祜/羊叔子) are other persons mentioned in the same passage but are not the referent of the surface 王子敬.\"}]}",
+              "name": "submit_sfh2_2p_identity_judgments"
+            },
+            "id": "call_00_WTqOJVSCyvDpW8xZXuPC9070",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1788087050,
+  "id": "e3910276-2b60-4c74-ba9e-69dadf4f0405",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 391,
+    "prompt_cache_hit_tokens": 640,
+    "prompt_cache_miss_tokens": 648,
+    "prompt_tokens": 1288,
+    "prompt_tokens_details": {
+      "cached_tokens": 640
+    },
+    "total_tokens": 1679
+  }
+}

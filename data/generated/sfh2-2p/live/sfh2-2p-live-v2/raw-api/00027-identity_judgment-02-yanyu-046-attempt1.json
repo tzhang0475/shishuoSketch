@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"judgments\": [{\"unit_id\": \"sfh1-mention-4c01c63d26e317d2d925bf53\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-02-yanyu-046-liu-annotation-003\"], \"reason_types\": [\"name_mismatch\"]}, {\"candidate_key\": \"c1\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-02-yanyu-046-liu-annotation-002\"], \"reason_types\": [\"name_mismatch\"]}, {\"candidate_key\": \"c2\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-02-yanyu-046-liu-annotation-001\", \"sfh1-ev-02-yanyu-046-liu-annotation-002\"], \"reason_types\": [\"name_mismatch\"]}, {\"candidate_key\": \"c3\", \"verdict\": \"insufficient\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [], \"reason_types\": [\"insufficient_evidence\"]}, {\"candidate_key\": \"c4\", \"verdict\": \"insufficient\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [], \"reason_types\": [\"insufficient_evidence\"]}, {\"candidate_key\": \"c5\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-02-yanyu-046-main\"], \"reason_types\": [\"name_mismatch\"]}], \"preferred_candidate_key\": null, \"resolution\": \"insufficient_evidence\", \"explanation\": \"The mention surface is 謝豫章, which refers to Xie Yu-zhang, a title/office designation. The main text mentions 謝仁祖 (Xie Shang, c1) and 謝豫章. The annotation evidence identifies 謝豫章 as referring to 謝鯤 (c2, 謝鯤 was the father of 謝尚 and held the title 豫章太守). However, the annotation evidence for c2 (sfh1-ev-02-yanyu-046-liu-annotation-001 and -002) shows 鯤 as the referent of 謝豫章. But the candidate c2's matched surface is 鯤, not 謝豫章, and the annotation evidence text shows '鯤' which is the name used in annotations. The candidates c3 (尚) and c4 (嶠) are candidate_historical_person types with matched surface 謝豫章 but their evidence text shows '尚' and '嶠' respectively from annotation-003, which is ambiguous. The main text clearly indicates 謝豫章 is the person taking 謝仁祖 (Xie Shang) to see off guests, and 謝仁祖 is 謝尚's courtesy name. The annotation evidence suggests 謝豫章 = 謝鯤 (Xie Kun), who was indeed the father of 謝尚 and served as 豫章太守. However, the candidate c2 (謝鯤) has matched_surface '鯤' not '謝豫章', and the evidence for c2 shows annotation text '鯤' which does not directly match the surface 謝豫章. Given the low confidence and lack of a clear semantic record, and the fact that the annotation evidence does link 謝豫章 to 鯤 (謝鯤), but the candidate matching is imperfect, I judge this as insufficient evidence to definitively support any single candidate.\"}]}",
+              "name": "submit_sfh2_2p_identity_judgments"
+            },
+            "id": "call_00_Vaig03Jc1uDqriig0CqE6103",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1788087031,
+  "id": "cf271276-09ea-40b3-b24c-3ca82788dcae",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 870,
+    "prompt_cache_hit_tokens": 640,
+    "prompt_cache_miss_tokens": 1018,
+    "prompt_tokens": 1658,
+    "prompt_tokens_details": {
+      "cached_tokens": 640
+    },
+    "total_tokens": 2528
+  }
+}

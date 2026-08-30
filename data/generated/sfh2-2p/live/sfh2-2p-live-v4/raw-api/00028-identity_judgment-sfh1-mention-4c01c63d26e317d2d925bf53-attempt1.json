@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"judgments\": [{\"unit_id\": \"sfh1-mention-4c01c63d26e317d2d925bf53\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-02-yanyu-046-liu-annotation-001\", \"sfh1-ev-02-yanyu-046-liu-annotation-002\", \"sfh1-ev-02-yanyu-046-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"office_title_reference\", \"genealogy_relation\", \"explicit_annotation\"]}, {\"candidate_key\": \"c1\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-02-yanyu-046-liu-annotation-003\"], \"reason_types\": [\"different_person_in_annotation\"]}, {\"candidate_key\": \"c2\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-02-yanyu-046-main\", \"sfh1-ev-02-yanyu-046-liu-annotation-002\"], \"reason_types\": [\"distinct_from_mention\", \"genealogy_relation\"]}, {\"candidate_key\": \"c3\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-02-yanyu-046-liu-annotation-003\"], \"reason_types\": [\"different_person_in_annotation\"]}, {\"candidate_key\": \"c4\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-02-yanyu-046-liu-annotation-003\"], \"reason_types\": [\"different_person_in_annotation\"]}, {\"candidate_key\": \"c5\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-02-yanyu-046-main\"], \"reason_types\": [\"different_person_in_text\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"explanation\": \"The mention 謝豫章 refers to Xie Kun (謝鯤), who held the office of Yuzhang (豫章) administrator. The main text states '謝仁祖年八嵗謝豫章將送客' — Xie Renzu (Xie Shang) at age 8, with Xie Yuzhang being his father. The Liu annotation-001 explicitly notes '(别見/鯤子)' identifying the subject as Kun's son, and annotation-002 states '人鯤之子也' (son of Kun). The reference semantics indicate this is an office-holder reference where 豫章 designates Xie Kun, who served as Yuzhang administrator. Candidate c0 (謝鯤) is the correct referent. Candidates c1 (温嶠), c3 (尚), c4 (嶠) appear in annotation-003 as different persons in the narrative about Xie Shang's mourning. Candidate c2 (謝尚) is the son, distinct from the father referenced by 謝豫章. Candidate c5 (顔回) is a different person mentioned in the main text.\"}]}",
+              "name": "submit_sfh2_2p_identity_judgments"
+            },
+            "id": "call_00_UFaou3m8NxWNerIcIzVl1072",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1788088226,
+  "id": "c9420bfe-1284-43a5-9513-ea2f1d664bff",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 794,
+    "prompt_cache_hit_tokens": 640,
+    "prompt_cache_miss_tokens": 2782,
+    "prompt_tokens": 3422,
+    "prompt_tokens_details": {
+      "cached_tokens": 640
+    },
+    "total_tokens": 4216
+  }
+}

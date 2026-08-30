@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"judgments\": [{\"unit_id\": \"sfh1-mention-ddc50731411818b9d0f52a98\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-02-yanyu-036-main\"], \"reason_types\": [\"role_mismatch\", \"semantic_mismatch\"]}, {\"candidate_key\": \"c1\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-02-yanyu-036-main\"], \"reason_types\": [\"role_mismatch\", \"semantic_mismatch\"]}, {\"candidate_key\": \"c2\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-02-yanyu-036-liu-annotation-003\", \"sfh1-ev-02-yanyu-036-liu-annotation-001\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"same_person_reference\", \"role_match\"]}, {\"candidate_key\": \"c3\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-02-yanyu-036-liu-annotation-001\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"same_person_reference\", \"role_match\"]}, {\"candidate_key\": \"c4\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-02-yanyu-036-main\", \"sfh1-ev-02-yanyu-036-liu-annotation-001\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"same_person_reference\", \"role_match\"]}], \"preferred_candidate_key\": \"c4\", \"resolution\": \"candidate_supported\", \"explanation\": \"The mention '齊桓公' refers to Duke Huan of Qi, the ruler whom Guan Zhong (管仲/管夷吾) served. The main text mentions '管夷吾' (Guan Yiwu, i.e., Guan Zhong) in the context of the Jiangdong region having its own Guan Yiwu. The Liu annotation (sfh1-ev-02-yanyu-036-liu-annotation-001) explicitly states '管仲夷吾者潁上人相齊桓公' — Guan Zhong Yiwu served Duke Huan of Qi. The annotation (sfh1-ev-02-yanyu-036-liu-annotation-003) also references '管仲' in connection with the same exemplum. Candidates c2 (管仲), c3 (管仲夷吾), and c4 (管夷吾) all refer to the same historical person Guan Zhong, who served Duke Huan of Qi. The mention '齊桓公' is the ruler, not Guan Zhong himself. However, since the candidates c2, c3, c4 all denote Guan Zhong (the person who served Duke Huan), and the mention refers to Duke Huan of Qi as the ruler whom Guan Zhong served, the candidates are all the same historical person Guan Zhong. The most direct match is c4 (管夷吾) which appears in the main text and is explicitly identified in the annotation as the one who '相齊桓公' (served as minister to Duke Huan of Qi). Candidates c0 (劉琨) and c1 (温嶠) are figures from the main narrative (Wen Jiao served as Liu Kun's envoy), not the historical exemplum referent Duke Huan of Qi. The mention '齊桓公' is the ruler of Qi, and the candidates provided are Guan Zhong (the minister), so the resolution is that the candidate Guan Zhong (管夷吾/管仲) is the person associated with the mention context — the annotation identifies Guan Zhong as serving Duke Huan of Qi. Given the candidates all denote Guan Zhong, and the mention is Duke Huan of Qi, the best-supported candidate is c4 (管夷吾) as it appears directly in the main text and is explicitly linked to 齊桓公 in the annotation.\"}]}",
+              "name": "submit_sfh2_2p_identity_judgments"
+            },
+            "id": "call_00_YufaWSMVINpgfO2gfRln1883",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1788088214,
+  "id": "719f348a-eec6-4dc5-a71f-99a167a450a5",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 953,
+    "prompt_cache_hit_tokens": 640,
+    "prompt_cache_miss_tokens": 1214,
+    "prompt_tokens": 1854,
+    "prompt_tokens_details": {
+      "cached_tokens": 640
+    },
+    "total_tokens": 2807
+  }
+}

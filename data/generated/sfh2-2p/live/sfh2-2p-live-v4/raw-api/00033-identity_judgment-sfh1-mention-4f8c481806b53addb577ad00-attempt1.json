@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"judgments\": [{\"unit_id\": \"sfh1-mention-4f8c481806b53addb577ad00\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-04-wenxue-069-liu-annotation-001\", \"sfh1-ev-04-wenxue-069-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"direct_biographical_identification\", \"courtesy_name_matching\"]}, {\"candidate_key\": \"c1\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"evidence-w3-person-ea7273483165995805d45824\", \"evidence-w3-person-836e3a2915da2a94ba0ba897\", \"evidence-w3-person-c64569859384c914a84dddaf\", \"sfh1-ev-04-wenxue-069-liu-annotation-001\", \"sfh1-ev-04-wenxue-069-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"direct_biographical_identification\", \"courtesy_name_matching\", \"profile_form_match\"]}], \"preferred_candidate_key\": \"c1\", \"resolution\": \"candidate_supported\", \"explanation\": \"The mention '伯倫' refers to Liu Ling (劉伶) via his courtesy name (字伯倫). The annotation text '名士傳曰伶字伯倫沛鄴' explicitly states that 伶 (Liu Ling) has the courtesy name 伯倫, directly linking the surface form to Liu Ling. Both candidates c0 and c1 refer to the same historical person Liu Ling. Candidate c1 is the existing person entity with richer corroborating evidence including the full biographical profile (劉伶字伯倫沛國人也...) and the annotation evidence, making it the preferred candidate. The main text '劉伶著酒徳頌' confirms the referent is Liu Ling.\"}]}",
+              "name": "submit_sfh2_2p_identity_judgments"
+            },
+            "id": "call_00_Co9k0G43AMtNQIE75ba84442",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1788088245,
+  "id": "87eb3df1-44fc-41bb-889d-b6146ff0a0e6",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 485,
+    "prompt_cache_hit_tokens": 640,
+    "prompt_cache_miss_tokens": 1676,
+    "prompt_tokens": 2316,
+    "prompt_tokens_details": {
+      "cached_tokens": 640
+    },
+    "total_tokens": 2801
+  }
+}

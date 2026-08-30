@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"judgments\": [{\"unit_id\": \"sfh1-mention-16b0e1cf7dd4e5a7bba31ca9\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-33-youhui-007-main\"], \"reason_types\": [\"surface_mismatch\", \"role_mismatch\"]}, {\"candidate_key\": \"c1\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-33-youhui-007-main\"], \"reason_types\": [\"surface_mismatch\", \"role_mismatch\"]}, {\"candidate_key\": \"c2\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-33-youhui-007-liu-annotation-001\"], \"reason_types\": [\"surface_mismatch\", \"role_mismatch\"]}, {\"candidate_key\": \"c3\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-33-youhui-007-liu-annotation-001\"], \"reason_types\": [\"surface_mismatch\", \"role_mismatch\"]}], \"preferred_candidate_key\": null, \"resolution\": \"candidate_missing\", \"explanation\": \"The mention '宣王' refers to Sima Yi (司馬懿), the posthumous title '宣王' used for the founder of the Jin dynasty. The main text states '宣王創業之始誅夷名族寵樹同已' (Xuan Wang's founding of the enterprise, executing and exterminating famous clans, favoring and establishing his own). The Liu annotation mentions '宣王創業誅曹爽任蔣濟之流' (Xuan Wang's founding, executing Cao Shuang and employing Jiang Ji and their ilk). None of the supplied candidates (温嶠, 王導, 曹爽, 蔣濟) is the referent of '宣王'. 温嶠 and 王導 are speakers in the story, not the referent. 曹爽 and 蔣濟 are mentioned in the annotation as people affected by 宣王's actions, not as 宣王 himself. The actual referent 司馬懿 is not among the candidates.\"}]}",
+              "name": "submit_sfh2_2p_identity_judgments"
+            },
+            "id": "call_00_x9wbfZqjVqwPmIvK2SG64963",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1788087182,
+  "id": "d9542c10-b77b-4994-9ae8-9155e29af235",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 587,
+    "prompt_cache_hit_tokens": 640,
+    "prompt_cache_miss_tokens": 821,
+    "prompt_tokens": 1461,
+    "prompt_tokens_details": {
+      "cached_tokens": 640
+    },
+    "total_tokens": 2048
+  }
+}

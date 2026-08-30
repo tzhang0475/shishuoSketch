@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"judgments\": [{\"unit_id\": \"sfh1-mention-ddc50731411818b9d0f52a98\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-02-yanyu-036-liu-annotation-001\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"semantic_referent_hint\", \"annotation_grounding\"]}, {\"candidate_key\": \"c1\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-02-yanyu-036-main\"], \"reason_types\": [\"different_person_in_story\"]}, {\"candidate_key\": \"c2\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-02-yanyu-036-main\"], \"reason_types\": [\"different_person_in_story\"]}, {\"candidate_key\": \"c3\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-02-yanyu-036-liu-annotation-001\"], \"reason_types\": [\"different_person_in_annotation\"]}, {\"candidate_key\": \"c4\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-02-yanyu-036-liu-annotation-001\"], \"reason_types\": [\"different_person_in_annotation\"]}, {\"candidate_key\": \"c5\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-02-yanyu-036-main\"], \"reason_types\": [\"different_person_in_story\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"explanation\": \"The mention surface is 齊桓公 (Duke Huan of Qi). The annotation text (sfh1-ev-02-yanyu-036-liu-annotation-001) explicitly states '管仲夷吾者潁上人相齊桓公九合諸侯', where 齊桓公 refers to Duke Huan of Qi, the ruler whom Guan Zhong served. Candidate c0 (齊桓公) directly matches this referent. Candidates c1 (劉琨) and c2 (温嶠) are characters in the main story text but are not the referent of 齊桓公. Candidates c3 (管仲), c4 (管仲夷吾), and c5 (管夷吾) refer to Guan Zhong, who is the minister serving Duke Huan, not Duke Huan himself. The mention 齊桓公 specifically refers to Duke Huan of Qi, so c0 is the supported candidate.\"}]}",
+              "name": "submit_sfh2_2p_identity_judgments"
+            },
+            "id": "call_00_QOLD3kNsJXe9PDx7dMDT8361",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1788087454,
+  "id": "e479c87a-7bb8-44f0-9719-639d40d63745",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 693,
+    "prompt_cache_hit_tokens": 640,
+    "prompt_cache_miss_tokens": 1162,
+    "prompt_tokens": 1802,
+    "prompt_tokens_details": {
+      "cached_tokens": 640
+    },
+    "total_tokens": 2495
+  }
+}

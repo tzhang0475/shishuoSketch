@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"judgments\": [{\"unit_id\": \"sfh1-mention-3a04cb343ab0ab7894f473c4\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"evidence-p3b-wave-1-2d7e5c33cdd9167acbe1f5dc\", \"evidence-p3b-wave-1-f59e4cdd4d2bf2b6878f7d72\", \"hng2c1-shishuo-06-yaliang-027-main\", \"registry:person-008\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"canonical_registry\", \"alias_registry\", \"profile_form\", \"semantic_reference\"]}, {\"candidate_key\": \"c1\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-25-paidiao-026-main\"], \"reason_types\": [\"distinct_person_in_text\"]}, {\"candidate_key\": \"c2\", \"verdict\": \"insufficient\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [], \"reason_types\": [\"no_grounded_evidence\"]}, {\"candidate_key\": \"c3\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-25-paidiao-026-liu-annotation-001\"], \"reason_types\": [\"distinct_person_in_annotation\"]}, {\"candidate_key\": \"c4\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-25-paidiao-026-main\", \"sfh1-ev-25-paidiao-026-liu-annotation-001\"], \"reason_types\": [\"distinct_person_in_text\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"explanation\": \"The surface form 桓宣武 refers to 桓溫 (Huan Wen), whose posthumous name was 宣武. Candidate c0 (桓溫) is supported by canonical registry evidence (registry:person-008), alias registry evidence (hng2c1-shishuo-06-yaliang-027-main), and biographical evidence (evidence-p3b-wave-1-f59e4cdd4d2bf2b6878f7d72) confirming 桓溫's identity and posthumous title 宣武. The main text (sfh1-ev-25-paidiao-026-main) shows 桓宣武 as the person for whom 謝安 served as 司馬, consistent with 桓溫. Candidate c1 (謝安/安石) is the subject of the passage, not the referent. Candidate c3 (桓玄) is 桓溫's son and appears in the annotation as a distinct person. Candidate c4 (髙靈) is a separate person in the text. Candidate c2 (傅先正) has no grounded evidence connecting it to this mention.\"}]}",
+              "name": "submit_sfh2_2p_identity_judgments"
+            },
+            "id": "call_00_9iyFEv3DO9SeIyzbC63s5495",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1788087576,
+  "id": "de09ec42-ffea-4566-bff0-02e2534b0510",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 734,
+    "prompt_cache_hit_tokens": 640,
+    "prompt_cache_miss_tokens": 1424,
+    "prompt_tokens": 2064,
+    "prompt_tokens_details": {
+      "cached_tokens": 640
+    },
+    "total_tokens": 2798
+  }
+}

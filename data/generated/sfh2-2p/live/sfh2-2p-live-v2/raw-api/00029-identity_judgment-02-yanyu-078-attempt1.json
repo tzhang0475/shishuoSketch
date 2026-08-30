@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"judgments\": [{\"unit_id\": \"sfh1-mention-ea89dce660a52e1530e3fbf0\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-02-yanyu-078-main\"], \"reason_types\": [\"role_mismatch\"]}, {\"candidate_key\": \"c1\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-02-yanyu-078-main\"], \"reason_types\": [\"role_mismatch\"]}, {\"candidate_key\": \"c2\", \"verdict\": \"insufficient\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [], \"reason_types\": [\"insufficient_evidence\"]}, {\"candidate_key\": \"c3\", \"verdict\": \"insufficient\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [], \"reason_types\": [\"insufficient_evidence\"]}, {\"candidate_key\": \"c4\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-02-yanyu-078-liu-annotation-003\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"name_alias\", \"title_role_match\"]}], \"preferred_candidate_key\": \"c4\", \"resolution\": \"candidate_supported\", \"explanation\": \"The mention '車騎' refers to 謝車騎 (謝玄). The Liu annotation (sfh1-ev-02-yanyu-078-liu-annotation-003) explicitly glosses '玄字㓜度鎭西/謝車騎家傳曰', identifying 玄 (謝玄) as 謝車騎. Candidate c4 (玄) is supported by this annotation. Candidates c0 (山濤) and c1 (謝安) are contradicted because the main text distinguishes them from 車騎 (山濤 is the recipient of gifts, 謝太傅 asks his sons/子弟, and 車騎 answers). Candidates c2 (㓜度) and c3 (奕) lack sufficient direct evidence tying them to this specific mention.\"}]}]}",
+              "name": "submit_sfh2_2p_identity_judgments"
+            },
+            "id": "call_00_NPNS1bC2iieaqz3Olqpo0249",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1788087042,
+  "id": "0bd016f7-688d-4e7f-96ac-7464023a064a",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 551,
+    "prompt_cache_hit_tokens": 640,
+    "prompt_cache_miss_tokens": 957,
+    "prompt_tokens": 1597,
+    "prompt_tokens_details": {
+      "cached_tokens": 640
+    },
+    "total_tokens": 2148
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"judgments\": [{\"unit_id\": \"sfh1-mention-fd93e7775324b4703447b0ad\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-02-yanyu-036-main\", \"registry:person-003\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"office_title_reference\", \"narrative_participant\", \"canonical_registry_match\"]}, {\"candidate_key\": \"c1\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-02-yanyu-036-main\"], \"reason_types\": [\"different_person_in_story\"]}, {\"candidate_key\": \"c2\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-02-yanyu-036-main\"], \"reason_types\": [\"different_person_in_story\"]}, {\"candidate_key\": \"c3\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-02-yanyu-036-main\", \"sfh1-ev-02-yanyu-036-liu-annotation-003\"], \"reason_types\": [\"historical_anachronism\", \"different_historical_person\"]}, {\"candidate_key\": \"c4\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-02-yanyu-036-main\", \"sfh1-ev-02-yanyu-036-liu-annotation-001\"], \"reason_types\": [\"historical_anachronism\", \"different_historical_person\"]}, {\"candidate_key\": \"c5\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-02-yanyu-036-main\"], \"reason_types\": [\"historical_anachronism\", \"different_historical_person\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"explanation\": \"The mention 王丞相 refers to Wang Dao (王導), the Chancellor of the Eastern Jin court. The main text describes Wen Qiao visiting 王丞相 (Chancellor Wang), and the reference semantics explicitly identify the referent as 王導. Candidate c0 (王導) is the canonical registry match for this office title reference. Candidates c1 (劉琨) and c2 (温嶠) are other narrative participants in the same story but not the referent of 王丞相. Candidates c3 (管仲), c4 (管仲夷吾), and c5 (管夷吾) are historical figures from the Spring and Autumn period referenced in the text as a comparison (Wen Qiao says '江左自有管夷吾'), not the referent of 王丞相.\"}]}",
+              "name": "submit_sfh2_2p_identity_judgments"
+            },
+            "id": "call_00_uPMXF8QJCMOKgTDj9Hgb3029",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1788088221,
+  "id": "e70359cd-fe22-40e9-8f76-d68efd960ff0",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 722,
+    "prompt_cache_hit_tokens": 640,
+    "prompt_cache_miss_tokens": 1539,
+    "prompt_tokens": 2179,
+    "prompt_tokens_details": {
+      "cached_tokens": 640
+    },
+    "total_tokens": 2901
+  }
+}

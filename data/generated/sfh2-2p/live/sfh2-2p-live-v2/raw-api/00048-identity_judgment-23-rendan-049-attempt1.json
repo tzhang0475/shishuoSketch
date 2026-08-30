@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"judgments\": [{\"unit_id\": \"sfh1-mention-16b6b7aac599ed1420a1fdf6\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-23-rendan-049-liu-annotation-002\"], \"reason_types\": [\"different_person\"]}, {\"candidate_key\": \"c1\", \"verdict\": \"insufficient\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [], \"reason_types\": [\"fragmentary_mention\"]}, {\"candidate_key\": \"c2\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-23-rendan-049-main\", \"sfh1-ev-23-rendan-049-liu-annotation-002\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"name_match\", \"contextual_role_match\"]}, {\"candidate_key\": \"c3\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-23-rendan-049-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"name_match\", \"contextual_role_match\"]}, {\"candidate_key\": \"c4\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-23-rendan-049-main\"], \"reason_types\": [\"different_person\"]}], \"preferred_candidate_key\": \"c2\", \"resolution\": \"candidate_supported\", \"explanation\": \"The mention surface '桓' refers to 桓子野 (桓伊), the famous flute player. The main text states 王子猷 heard that 桓子野 was good at playing the flute, and then encountered 桓 (the same person) on the shore. The Liu annotation confirms 桓伊 is the person who plays the flute. Both c2 (桓伊) and c3 (桓子野) refer to the same historical person, but c2 (桓伊) is the canonical name. c0 (謝安) appears in the annotation as a different person present at the banquet, not the referent of '桓'. c4 (王子猷) is the other protagonist in the story, not the referent of '桓'.\"}]}",
+              "name": "submit_sfh2_2p_identity_judgments"
+            },
+            "id": "call_00_xd58jx3di3mWVSCcq6Kk4628",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1788087170,
+  "id": "4eabc2c6-56a1-4546-8d38-b93a7193f525",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 574,
+    "prompt_cache_hit_tokens": 640,
+    "prompt_cache_miss_tokens": 977,
+    "prompt_tokens": 1617,
+    "prompt_tokens_details": {
+      "cached_tokens": 640
+    },
+    "total_tokens": 2191
+  }
+}

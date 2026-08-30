@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"judgments\": [{\"unit_id\": \"sfh1-mention-e811bf3cd95d7cfdc1162c15\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-04-wenxue-024-main\"], \"reason_types\": [\"distinct_person\"]}, {\"candidate_key\": \"c1\", \"verdict\": \"insufficient\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [], \"reason_types\": [\"no_grounded_identity_link\"]}, {\"candidate_key\": \"c2\", \"verdict\": \"insufficient\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [], \"reason_types\": [\"no_grounded_identity_link\"]}], \"preferred_candidate_key\": null, \"resolution\": \"candidate_missing\", \"explanation\": \"The mention 阮光禄 refers to a person surnamed Ruan holding the Guanglu office, who is the interlocutor with 謝安 in the narrative. Candidate c0 (謝安) is a distinct person in the same narrative, not the referent. Candidate c1 (孫龍) appears in the Liu annotation discussing the 'White Horse' paradox (白馬非馬) attributed to Gongsun Long, but there is no evidence linking 孫龍 to the person surnamed Ruan holding Guanglu office. Candidate c2 (裕) appears in the annotation fragment '中興書曰裕' but there is insufficient evidence to connect this to 阮光禄. None of the supplied candidates is supported as the historical referent of 阮光禄.\"}]}",
+              "name": "submit_sfh2_2p_identity_judgments"
+            },
+            "id": "call_00_dVIUfMJmcAW97pOW0KFB2558",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1788088242,
+  "id": "d67b5da5-58e6-44fe-b6a5-3a832b7a3033",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 421,
+    "prompt_cache_hit_tokens": 640,
+    "prompt_cache_miss_tokens": 1000,
+    "prompt_tokens": 1640,
+    "prompt_tokens_details": {
+      "cached_tokens": 640
+    },
+    "total_tokens": 2061
+  }
+}

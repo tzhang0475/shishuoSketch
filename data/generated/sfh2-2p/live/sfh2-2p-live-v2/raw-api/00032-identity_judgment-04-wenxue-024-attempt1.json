@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"judgments\": [{\"unit_id\": \"sfh1-mention-e811bf3cd95d7cfdc1162c15\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-04-wenxue-024-main\"], \"reason_types\": [\"surface_mismatch\", \"referent_mismatch\"]}, {\"candidate_key\": \"c1\", \"verdict\": \"insufficient\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [], \"reason_types\": [\"no_grounding_evidence\"]}, {\"candidate_key\": \"c2\", \"verdict\": \"insufficient\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [], \"reason_types\": [\"no_grounding_evidence\"]}], \"preferred_candidate_key\": null, \"resolution\": \"insufficient_evidence\", \"explanation\": \"The mention '阮光禄' refers to a person with the title '光禄' (Guanglu) and surname '阮' (Ruan). The main text mentions 謝安 (Xie An) as a separate person, so c0 (謝安) contradicts the referent. Candidates c1 (孫龍) and c2 (裕) come from Liu annotations but there is no evidence connecting either to the specific referent '阮光禄' in this passage. The annotation evidence only provides the surface names without establishing that either is the historical referent of this mention. No grounded evidence supports identifying the referent.\"}]}",
+              "name": "submit_sfh2_2p_identity_judgments"
+            },
+            "id": "call_00_EVLzrkq6lTfQ0AU5Ta3m6376",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1788087053,
+  "id": "c5695009-87fa-4e99-8078-ff87da576eea",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 397,
+    "prompt_cache_hit_tokens": 640,
+    "prompt_cache_miss_tokens": 646,
+    "prompt_tokens": 1286,
+    "prompt_tokens_details": {
+      "cached_tokens": 640
+    },
+    "total_tokens": 1683
+  }
+}

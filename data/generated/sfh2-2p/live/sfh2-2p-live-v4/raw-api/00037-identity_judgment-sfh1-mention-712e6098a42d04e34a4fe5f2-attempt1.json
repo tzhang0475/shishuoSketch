@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"judgments\": [{\"unit_id\": \"sfh1-mention-712e6098a42d04e34a4fe5f2\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-05-fangzheng-037-liu-annotation-004\"], \"reason_types\": [\"name_mismatch\", \"role_mismatch\"]}, {\"candidate_key\": \"c1\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-05-fangzheng-037-main\", \"sfh1-ev-05-fangzheng-037-liu-annotation-004\"], \"reason_types\": [\"name_mismatch\", \"role_mismatch\"]}, {\"candidate_key\": \"c2\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-05-fangzheng-037-liu-annotation-004\"], \"reason_types\": [\"name_mismatch\", \"role_mismatch\"]}, {\"candidate_key\": \"c3\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-05-fangzheng-037-liu-annotation-003\", \"sfh1-ev-05-fangzheng-037-liu-annotation-004\", \"sfh1-ev-05-fangzheng-037-liu-annotation-005\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"name_match\", \"office_title_match\", \"coreference\"]}, {\"candidate_key\": \"c4\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-05-fangzheng-037-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"name_match\", \"explicit_identification\"]}, {\"candidate_key\": \"c5\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-05-fangzheng-037-liu-annotation-001\", \"sfh1-ev-05-fangzheng-037-liu-annotation-002\"], \"reason_types\": [\"name_mismatch\", \"role_mismatch\"]}, {\"candidate_key\": \"c6\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-05-fangzheng-037-liu-annotation-001\"], \"reason_types\": [\"name_mismatch\", \"role_mismatch\"]}, {\"candidate_key\": \"c7\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-05-fangzheng-037-liu-annotation-001\", \"sfh1-ev-05-fangzheng-037-liu-annotation-002\"], \"reason_types\": [\"name_mismatch\", \"role_mismatch\"]}], \"preferred_candidate_key\": \"c4\", \"resolution\": \"candidate_supported\", \"explanation\": \"The mention 孔廷尉 refers to 孔坦, who is explicitly named in the main text (sfh1-ev-05-fangzheng-037-main) as 孔坦. The office title 廷尉 combined with surname 孔 identifies the same person. The Liu annotations (sfh1-ev-05-fangzheng-037-liu-annotation-003, -004, -005) also refer to 坦/孔坦 in connection with this passage. Candidate c4 (孔坦) is the correct referent. Candidates c0 (王隱), c1 (蘇峻), c2 (陶侃) are other persons mentioned in the annotations but not the referent of 孔廷尉. Candidates c3 (坦), c5 (峻), c6 (石), c7 (碩) are partial-name candidates; c3 (坦) is a component of 孔坦's name and appears in annotations referring to the same person, but c4 is the full-name candidate explicitly identified in the main text.\"}]}",
+              "name": "submit_sfh2_2p_identity_judgments"
+            },
+            "id": "call_00_GTCl5Wn7ZkHAxgWOLZwe4935",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1788088262,
+  "id": "58c09e96-52f4-4cc1-8a19-136b5a61e707",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 985,
+    "prompt_cache_hit_tokens": 1664,
+    "prompt_cache_miss_tokens": 793,
+    "prompt_tokens": 2457,
+    "prompt_tokens_details": {
+      "cached_tokens": 1664
+    },
+    "total_tokens": 3442
+  }
+}

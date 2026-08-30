@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"judgments\": [{\"unit_id\": \"sfh1-mention-766f317ebe5a94562d3ff949\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"insufficient\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [], \"reason_types\": [\"no_direct_evidence\"]}, {\"candidate_key\": \"c1\", \"verdict\": \"insufficient\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [], \"reason_types\": [\"no_direct_evidence\"]}, {\"candidate_key\": \"c2\", \"verdict\": \"insufficient\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [], \"reason_types\": [\"no_direct_evidence\"]}, {\"candidate_key\": \"c3\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-09-pinzao-018-main\", \"sfh1-ev-09-pinzao-018-liu-annotation-001\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"surface_match\", \"contextual_identity\"]}, {\"candidate_key\": \"c4\", \"verdict\": \"insufficient\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [], \"reason_types\": [\"no_direct_evidence\"]}, {\"candidate_key\": \"c5\", \"verdict\": \"insufficient\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [], \"reason_types\": [\"no_direct_evidence\"]}, {\"candidate_key\": \"c6\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-09-pinzao-018-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"surface_match\", \"contextual_identity\"]}], \"preferred_candidate_key\": \"c3\", \"resolution\": \"candidate_supported\", \"explanation\": \"The mention surface is 潁. The main text states '王丞相二弟不過江曰潁曰敝' listing 潁 as one of the two younger brothers of the Chancellor Wang. The Liu annotation (王氏譜) identifies 潁 as 字茂英, confirming 潁 is a person's name. Candidate c3 (潁) directly matches the surface mention and is the person referred to. Candidate c6 (潁, prior_candidate_person) also matches the surface but c3 is the validated local person mention. Other candidates (鄧攸/鄧伯道, 敝, 温忠武, 茂平, 茂英) are mentioned in the same passage but are not the referent of the surface 潁.\"}]}",
+              "name": "submit_sfh2_2p_identity_judgments"
+            },
+            "id": "call_00_eXY5ud5t3puVy3ieU1100118",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1788087122,
+  "id": "d25787d8-8fcf-4662-955e-ade89feb498f",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 646,
+    "prompt_cache_hit_tokens": 640,
+    "prompt_cache_miss_tokens": 1092,
+    "prompt_tokens": 1732,
+    "prompt_tokens_details": {
+      "cached_tokens": 640
+    },
+    "total_tokens": 2378
+  }
+}

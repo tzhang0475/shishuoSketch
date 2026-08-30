@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"judgments\": [{\"unit_id\": \"sfh1-mention-16b6b7aac599ed1420a1fdf6\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-23-rendan-049-liu-annotation-002\"], \"reason_types\": [\"different_person\"]}, {\"candidate_key\": \"c1\", \"verdict\": \"insufficient\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [], \"reason_types\": [\"abbreviated_reference\"]}, {\"candidate_key\": \"c2\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-23-rendan-049-main\", \"sfh1-ev-23-rendan-049-liu-annotation-002\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"same_person_evidence\", \"full_name_mention\"]}, {\"candidate_key\": \"c3\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-23-rendan-049-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"same_person_evidence\", \"full_name_mention\"]}, {\"candidate_key\": \"c4\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-23-rendan-049-main\"], \"reason_types\": [\"different_person\"]}], \"preferred_candidate_key\": \"c3\", \"resolution\": \"candidate_supported\", \"explanation\": \"The mention 桓 at position 11-12 in the main text refers to 桓子野 (Huan Ziye), the flute player. The main text (sfh1-ev-23-rendan-049-main) introduces 桓子野 earlier and then uses 桓 as an abbreviated surname reference to the same person. The reference semantics confirm this: '遇桓於岸上過' where 桓 refers to the previously named 桓子野. Candidate c3 (桓子野) is directly supported by the main text. Candidate c2 (桓伊) is also the same historical person (桓子野's full name is 桓伊, as confirmed by the Liu annotation which says 將軍桓伊善音樂), so it is also supported. Candidate c0 (謝安) is a different person mentioned in the annotation. Candidate c4 (王子猷) is a different person in the story. Candidate c1 (伊) is an incomplete/abbreviated form with insufficient evidence.\"}]}",
+              "name": "submit_sfh2_2p_identity_judgments"
+            },
+            "id": "call_00_IbPKMoroHiFX4KXjaCoQ3608",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1788087572,
+  "id": "661c8091-01b6-4b01-b8b1-16f41ad92741",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 630,
+    "prompt_cache_hit_tokens": 640,
+    "prompt_cache_miss_tokens": 1177,
+    "prompt_tokens": 1817,
+    "prompt_tokens_details": {
+      "cached_tokens": 640
+    },
+    "total_tokens": 2447
+  }
+}

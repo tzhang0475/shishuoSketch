@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"judgments\": [{\"unit_id\": \"sfh1-mention-8c14f468e4b369f3825b0007\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-09-pinzao-088-liu-annotation-001\"], \"reason_types\": [\"different_person\"]}, {\"candidate_key\": \"c1\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-09-pinzao-088-liu-annotation-001\"], \"reason_types\": [\"different_person\"]}, {\"candidate_key\": \"c2\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-09-pinzao-088-liu-annotation-001\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"courtesy_name_match\", \"biographical_annotation\"]}, {\"candidate_key\": \"c3\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-09-pinzao-088-liu-annotation-001\"], \"reason_types\": [\"different_person\"]}, {\"candidate_key\": \"c4\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-09-pinzao-088-liu-annotation-001\"], \"reason_types\": [\"different_person\"]}, {\"candidate_key\": \"c5\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-09-pinzao-088-liu-annotation-001\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"courtesy_name_match\", \"biographical_annotation\"]}], \"preferred_candidate_key\": \"c2\", \"resolution\": \"candidate_supported\", \"explanation\": \"The Liu annotation (sfh1-ev-09-pinzao-088-liu-annotation-001) states '謙字敬祖沖第三子' (Qian, courtesy name Jingzu, third son of Chong), directly identifying 敬祖 as the courtesy name of 桓謙 (Huan Qian). The main text mentions 桓謙. Candidate c2 (桓謙) is the correct referent. Candidate c5 (謙) is the same person referred to by the shortened name 謙 in the annotation, but c2 is the fuller and preferred form. Candidates c0 (卞範之), c1 (仲文), c3 (殷仲文), and c4 (沖) are different persons.\"}]}",
+              "name": "submit_sfh2_2p_identity_judgments"
+            },
+            "id": "call_00_htC5onYPw1IZwcXOPw591856",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1788087546,
+  "id": "09f8974d-54e6-45bb-9100-f94e3a203bff",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 660,
+    "prompt_cache_hit_tokens": 640,
+    "prompt_cache_miss_tokens": 1381,
+    "prompt_tokens": 2021,
+    "prompt_tokens_details": {
+      "cached_tokens": 640
+    },
+    "total_tokens": 2681
+  }
+}

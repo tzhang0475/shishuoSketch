@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"judgments\": [{\"unit_id\": \"sfh1-mention-ea89dce660a52e1530e3fbf0\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-02-yanyu-078-liu-annotation-003\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"office_title_matches\", \"annotation_gloss\"]}, {\"candidate_key\": \"c1\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-02-yanyu-078-main\"], \"reason_types\": [\"different_person_in_text\"]}, {\"candidate_key\": \"c2\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-02-yanyu-078-liu-annotation-001\"], \"reason_types\": [\"different_person_in_text\"]}, {\"candidate_key\": \"c3\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-02-yanyu-078-liu-annotation-003\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"courtesy_name_matches_annotation\"]}, {\"candidate_key\": \"c4\", \"verdict\": \"insufficient\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [], \"reason_types\": [\"no_evidence_linking_奕_to_車騎\"]}, {\"candidate_key\": \"c5\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-02-yanyu-078-liu-annotation-003\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"annotation_gloss_identifies_玄\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"explanation\": \"The mention 車騎 refers to Xie Xuan (謝玄). The Liu annotation (sfh1-ev-02-yanyu-078-liu-annotation-003) glosses 玄 with courtesy name 㓜度 and office 鎭西, and mentions 謝車騎家傳, confirming that 車騎 refers to Xie Xuan. Candidate c0 (謝玄) is directly supported. Candidates c3 (㓜度, Xie Xuan's courtesy name) and c5 (玄, Xie Xuan's given name) also refer to the same person as evidenced by the annotation. Candidate c1 (山濤) is the subject of the main text's first clause but not the referent of 車騎. Candidate c2 (謝安) is 謝太傅 in the text, distinct from 車騎. Candidate c4 (奕) has no evidence linking it to 車騎.\"}]}",
+              "name": "submit_sfh2_2p_identity_judgments"
+            },
+            "id": "call_00_hWlNXRlBTLl4SA0GBhOe3548",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1788087468,
+  "id": "99617e9d-f711-43c9-8cb2-ef75b9284507",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 685,
+    "prompt_cache_hit_tokens": 640,
+    "prompt_cache_miss_tokens": 1343,
+    "prompt_tokens": 1983,
+    "prompt_tokens_details": {
+      "cached_tokens": 640
+    },
+    "total_tokens": 2668
+  }
+}

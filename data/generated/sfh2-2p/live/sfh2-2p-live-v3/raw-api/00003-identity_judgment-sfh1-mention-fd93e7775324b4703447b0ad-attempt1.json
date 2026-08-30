@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"judgments\": [{\"unit_id\": \"sfh1-mention-fd93e7775324b4703447b0ad\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-02-yanyu-036-main\", \"registry:person-003\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"office_title_reference\", \"canonical_registry_match\", \"coreference\"]}, {\"candidate_key\": \"c1\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-02-yanyu-036-main\"], \"reason_types\": [\"different_person_in_story\"]}, {\"candidate_key\": \"c2\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-02-yanyu-036-main\"], \"reason_types\": [\"different_person_in_story\"]}, {\"candidate_key\": \"c3\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-02-yanyu-036-liu-annotation-003\"], \"reason_types\": [\"historical_analogy_not_referent\"]}, {\"candidate_key\": \"c4\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-02-yanyu-036-liu-annotation-001\"], \"reason_types\": [\"historical_analogy_not_referent\"]}, {\"candidate_key\": \"c5\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-02-yanyu-036-main\"], \"reason_types\": [\"historical_analogy_not_referent\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"explanation\": \"The mention 王丞相 refers to the Chancellor (丞相) of the Eastern Jin court. The main text (sfh1-ev-02-yanyu-036-main) describes 温嶠 going to see 王丞相, and the same person is later referred to simply as 丞相, establishing coreference. The registry entry (registry:person-003) confirms 王導 as the person matching 王丞相. The candidates 劉琨 and 温嶠 are other narrative participants in the same story, not the referent. The candidates 管仲, 管仲夷吾, and 管夷吾 are historical analogies used in the text/annotation to compare 王丞相 to the ancient statesman Guan Zhong, not the actual referent of the mention.\"}]}",
+              "name": "submit_sfh2_2p_identity_judgments"
+            },
+            "id": "call_00_MbaRTt5wskhKtLMd0EYJ5799",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1788087458,
+  "id": "067ede8a-4c2a-4a9d-b2a8-7066cd1291e0",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 670,
+    "prompt_cache_hit_tokens": 640,
+    "prompt_cache_miss_tokens": 1429,
+    "prompt_tokens": 2069,
+    "prompt_tokens_details": {
+      "cached_tokens": 640
+    },
+    "total_tokens": 2739
+  }
+}

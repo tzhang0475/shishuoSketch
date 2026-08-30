@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"judgments\": [{\"unit_id\": \"sfh1-mention-490780f4feba8e174d40cc0b\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-02-yanyu-054-liu-annotation-001\"], \"reason_types\": [\"office_title_mismatch\", \"different_person\"]}, {\"candidate_key\": \"c1\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-02-yanyu-054-main\"], \"reason_types\": [\"office_title_mismatch\", \"different_person\"]}, {\"candidate_key\": \"c2\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-02-yanyu-054-liu-annotation-003\"], \"reason_types\": [\"office_title_mismatch\", \"different_person\"]}, {\"candidate_key\": \"c3\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-02-yanyu-054-liu-annotation-002\"], \"reason_types\": [\"office_title_mismatch\", \"different_person\"]}, {\"candidate_key\": \"c4\", \"verdict\": \"insufficient\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [], \"reason_types\": [\"office_title_mismatch\", \"insufficient_evidence\"]}, {\"candidate_key\": \"c5\", \"verdict\": \"insufficient\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [], \"reason_types\": [\"office_title_mismatch\", \"insufficient_evidence\"]}], \"preferred_candidate_key\": null, \"resolution\": \"insufficient_evidence\", \"explanation\": \"The mention 劉尹 refers to a person identified by surname 劉 plus office title 尹 (governor/administrator). The main text shows 劉尹 visiting 禇 together with 王長史. None of the supplied candidates clearly matches this office-holder reference. 何充 (c0) is 驃騎 (referenced as 何驃騎 in the text), not 劉尹. 劉惔 (c1) is referred to as 真長 in the text, not 劉尹. 劉遐 (c2) is 吏部尚書, a different office. 沈充 (c3) is 充, not 劉尹. 王胡之 (c4) and 裒 (c5) are annotation figures with insufficient evidence connecting them to the 劉尹 office title. The reference semantics note that 劉尹 is distinct from 劉遐. Without a candidate who is specifically identified as holding the 尹 office with surname 劉, no candidate can be supported.\"}]}",
+              "name": "submit_sfh2_2p_identity_judgments"
+            },
+            "id": "call_00_H7fcm7y90ifTDZX1W3Va0892",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1788088230,
+  "id": "e8b45f08-e542-4186-b869-e9d8da2d4b57",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 708,
+    "prompt_cache_hit_tokens": 640,
+    "prompt_cache_miss_tokens": 1323,
+    "prompt_tokens": 1963,
+    "prompt_tokens_details": {
+      "cached_tokens": 640
+    },
+    "total_tokens": 2671
+  }
+}

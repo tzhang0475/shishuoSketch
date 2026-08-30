@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"judgments\": [{\"unit_id\": \"sfh1-mention-fbc8df37d88da686078acf2b\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-09-pinzao-088-liu-annotation-001\"], \"reason_types\": [\"name_mismatch\"]}, {\"candidate_key\": \"c1\", \"verdict\": \"insufficient\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [], \"reason_types\": [\"ambiguous_name\"]}, {\"candidate_key\": \"c2\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-09-pinzao-088-main\"], \"reason_types\": [\"name_mismatch\"]}, {\"candidate_key\": \"c3\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-09-pinzao-088-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"full_name_established\", \"coreference\"]}, {\"candidate_key\": \"c4\", \"verdict\": \"insufficient\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [], \"reason_types\": [\"ambiguous_name\"]}, {\"candidate_key\": \"c5\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-09-pinzao-088-liu-annotation-001\"], \"reason_types\": [\"name_mismatch\"]}], \"preferred_candidate_key\": \"c3\", \"resolution\": \"candidate_supported\", \"explanation\": \"The mention 仲文 refers to 殷仲文. The main text states '舊以桓謙比殷仲文' and then '桓玄時仲文入桓於庭中望見之', where 仲文 is the shortened personal name of 殷仲文, who was already introduced by full name in the same passage. Candidate c3 (殷仲文) is the correct referent. Candidates c0 (卞範之), c2 (桓謙), and c5 (謙) are contradicted by the evidence. Candidates c1 (仲文) and c4 (沖) are insufficiently grounded as distinct historical persons.\"}]}",
+              "name": "submit_sfh2_2p_identity_judgments"
+            },
+            "id": "call_00_XBrnOKTj6pMpgl57B6Yh0749",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1788088319,
+  "id": "2edf4f6c-7f8f-45aa-b345-2ffaa35fe9a7",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 584,
+    "prompt_cache_hit_tokens": 640,
+    "prompt_cache_miss_tokens": 1131,
+    "prompt_tokens": 1771,
+    "prompt_tokens_details": {
+      "cached_tokens": 640
+    },
+    "total_tokens": 2355
+  }
+}

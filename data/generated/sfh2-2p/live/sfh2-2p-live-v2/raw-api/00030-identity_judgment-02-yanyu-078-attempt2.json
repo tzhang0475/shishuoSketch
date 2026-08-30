@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"judgments\": [{\"unit_id\": \"sfh1-mention-ea89dce660a52e1530e3fbf0\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-02-yanyu-078-main\"], \"reason_types\": [\"role_mismatch\", \"string_overlap_only\"]}, {\"candidate_key\": \"c1\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-02-yanyu-078-main\"], \"reason_types\": [\"role_mismatch\", \"string_overlap_only\"]}, {\"candidate_key\": \"c2\", \"verdict\": \"insufficient\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [], \"reason_types\": [\"insufficient_evidence\"]}, {\"candidate_key\": \"c3\", \"verdict\": \"insufficient\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [], \"reason_types\": [\"insufficient_evidence\"]}, {\"candidate_key\": \"c4\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-02-yanyu-078-liu-annotation-003\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"title_match\", \"annotation_identification\"]}], \"preferred_candidate_key\": \"c4\", \"resolution\": \"candidate_supported\", \"explanation\": \"The mention surface is 車騎 (Chariot-and-Horse General). The Liu annotation (sfh1-ev-02-yanyu-078-liu-annotation-003) identifies 玄 (Xie Xuan) with the style 㓜度 and connects him to 謝車騎 (Xie Chariot-and-Horse), i.e., 謝玄 who held the title 車騎將軍. Candidate c4 (玄) is supported by this annotation. Candidates c0 (山濤) and c1 (謝安) appear in the main text but are not the referent of 車騎. Candidates c2 (㓜度) and c3 (奕) lack sufficient direct evidence tying them to the 車騎 mention.\"}]}",
+              "name": "submit_sfh2_2p_identity_judgments"
+            },
+            "id": "call_00_VOB3uriNM8c0G9jFGZD38984",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1788087047,
+  "id": "2295468d-daa9-4e1e-855c-0190b727c0bf",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 557,
+    "prompt_cache_hit_tokens": 1536,
+    "prompt_cache_miss_tokens": 61,
+    "prompt_tokens": 1597,
+    "prompt_tokens_details": {
+      "cached_tokens": 1536
+    },
+    "total_tokens": 2154
+  }
+}

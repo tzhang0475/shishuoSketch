@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"judgments\": [{\"unit_id\": \"sfh1-mention-dc6d574a657dbf20797ca0ce\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-06-yaliang-041-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"office_holder_reference\", \"surname_match\", \"referent_hint\"]}, {\"candidate_key\": \"c1\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-06-yaliang-041-main\"], \"reason_types\": [\"different_person_in_text\"]}, {\"candidate_key\": \"c2\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-06-yaliang-041-main\"], \"reason_types\": [\"different_person_in_text\"]}, {\"candidate_key\": \"c3\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-06-yaliang-041-liu-annotation-002\"], \"reason_types\": [\"different_person_in_annotation\"]}, {\"candidate_key\": \"c4\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-06-yaliang-041-liu-annotation-001\", \"sfh1-ev-06-yaliang-041-liu-annotation-003\"], \"reason_types\": [\"different_person_in_annotation\"]}, {\"candidate_key\": \"c5\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-06-yaliang-041-liu-annotation-002\"], \"reason_types\": [\"different_person_in_annotation\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"explanation\": \"The mention 殷荆州 refers to the Governor of Jingzhou with surname 殷. The main text (sfh1-ev-06-yaliang-041-main) mentions 殷仲堪, and the referent hint is 殷仲堪. The office title 荆州 combined with surname 殷 identifies 殷仲堪. The other candidates (束晳, 王恭, 孟達, 晳, 踈廣) are different persons mentioned in the text or annotations, not the referent of 殷荆州.\"}]}",
+              "name": "submit_sfh2_2p_identity_judgments"
+            },
+            "id": "call_00_X7a84bnPbSbAb7LpFKJa4108",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1788087505,
+  "id": "bfaca81d-e5cb-4d61-9e5b-6902fc21411f",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 629,
+    "prompt_cache_hit_tokens": 640,
+    "prompt_cache_miss_tokens": 1230,
+    "prompt_tokens": 1870,
+    "prompt_tokens_details": {
+      "cached_tokens": 640
+    },
+    "total_tokens": 2499
+  }
+}

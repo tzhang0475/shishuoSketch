@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"judgments\": [{\"unit_id\": \"sfh1-mention-3c86c11ce0a815d781eeb75c\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-01-dexing-028-liu-annotation-002\"], \"reason_types\": [\"different_person\"]}, {\"candidate_key\": \"c1\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-01-dexing-028-liu-annotation-002\", \"sfh1-ev-01-dexing-028-liu-annotation-004\"], \"reason_types\": [\"different_person\"]}, {\"candidate_key\": \"c2\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-01-dexing-028-liu-annotation-002\", \"sfh1-ev-01-dexing-028-liu-annotation-004\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"name_match\", \"narrative_role\"]}, {\"candidate_key\": \"c3\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-01-dexing-028-liu-annotation-007\"], \"reason_types\": [\"different_person\"]}, {\"candidate_key\": \"c4\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-01-dexing-028-liu-annotation-005\", \"sfh1-ev-01-dexing-028-liu-annotation-006\"], \"reason_types\": [\"different_person\"]}], \"preferred_candidate_key\": \"c2\", \"resolution\": \"candidate_supported\", \"explanation\": \"The mention '勒' refers to 石勒. Annotation-002 states '攸為石勒所獲' (攸 was captured by 石勒), establishing 石勒 as the full name. Annotation-004 states '勒知遣之' (勒 learned of it and sent someone), where '勒' is the same person as 石勒. The candidate c2 (石勒) is the correct referent. The other candidates (鄧攸, 攸, 綏, 遺民) are different persons in the narrative.\"}]}",
+              "name": "submit_sfh2_2p_identity_judgments"
+            },
+            "id": "call_00_QvtuAmNWJB0dXaqUb46h9916",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1788088211,
+  "id": "89609f87-00b0-4b41-a82f-63b71bb09687",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 600,
+    "prompt_cache_hit_tokens": 1536,
+    "prompt_cache_miss_tokens": 992,
+    "prompt_tokens": 2528,
+    "prompt_tokens_details": {
+      "cached_tokens": 1536
+    },
+    "total_tokens": 3128
+  }
+}

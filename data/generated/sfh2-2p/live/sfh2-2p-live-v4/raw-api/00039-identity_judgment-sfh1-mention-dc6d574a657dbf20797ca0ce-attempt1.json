@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"judgments\": [{\"unit_id\": \"sfh1-mention-dc6d574a657dbf20797ca0ce\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-06-yaliang-041-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"office_title_reference\", \"surname_match\", \"referent_hint\"]}, {\"candidate_key\": \"c1\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-06-yaliang-041-main\"], \"reason_types\": [\"different_person_in_text\"]}, {\"candidate_key\": \"c2\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-06-yaliang-041-main\"], \"reason_types\": [\"different_person_in_text\"]}, {\"candidate_key\": \"c3\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-06-yaliang-041-liu-annotation-002\"], \"reason_types\": [\"different_person_in_annotation\"]}, {\"candidate_key\": \"c4\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-06-yaliang-041-liu-annotation-001\", \"sfh1-ev-06-yaliang-041-liu-annotation-003\"], \"reason_types\": [\"different_person_in_annotation\"]}, {\"candidate_key\": \"c5\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-06-yaliang-041-liu-annotation-002\"], \"reason_types\": [\"different_person_in_annotation\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"explanation\": \"The mention 殷荆州 refers to the person surnamed 殷 who held the office of governor of Jingzhou (荆州). The main text (sfh1-ev-06-yaliang-041-main) shows 殷 as the actor in the narrative, and the reference semantics identify this as 殷仲堪. Candidate c0 (殷仲堪) matches the referent hint and the office-holder reference. Candidates c1 (束晳), c2 (王恭), c3 (孟達), c4 (晳), and c5 (踈廣) are all different persons mentioned in the text or annotations, not the referent of 殷荆州.\"}]}",
+              "name": "submit_sfh2_2p_identity_judgments"
+            },
+            "id": "call_00_dVU7PGmaqzu9FXv6aKfl2309",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1788088273,
+  "id": "1c823c78-e988-449b-8896-2db3cac902c4",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 655,
+    "prompt_cache_hit_tokens": 640,
+    "prompt_cache_miss_tokens": 1448,
+    "prompt_tokens": 2088,
+    "prompt_tokens_details": {
+      "cached_tokens": 640
+    },
+    "total_tokens": 2743
+  }
+}

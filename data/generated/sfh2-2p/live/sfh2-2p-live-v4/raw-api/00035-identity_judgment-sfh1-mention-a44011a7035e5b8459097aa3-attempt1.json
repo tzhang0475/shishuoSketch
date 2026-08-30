@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"judgments\": [{\"unit_id\": \"sfh1-mention-a44011a7035e5b8459097aa3\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-05-fangzheng-028-main\", \"sfh1-ev-05-fangzheng-028-liu-annotation-002\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"explicit_identification\", \"office_holder_reference\"]}, {\"candidate_key\": \"c1\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-05-fangzheng-028-main\", \"sfh1-ev-05-fangzheng-028-liu-annotation-002\"], \"reason_types\": [\"wrong_person\"]}, {\"candidate_key\": \"c2\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-05-fangzheng-028-main\"], \"reason_types\": [\"patron_not_referent\"]}, {\"candidate_key\": \"c3\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-05-fangzheng-028-main\", \"sfh1-ev-05-fangzheng-028-liu-annotation-002\"], \"reason_types\": [\"wrong_person\"]}, {\"candidate_key\": \"c4\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-05-fangzheng-028-main\"], \"reason_types\": [\"wrong_person\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"explanation\": \"The mention '主簿' (chief clerk) refers to 何充. The main text states '時何充爲敦主簿' (at that time He Chong was Dun's chief clerk), explicitly identifying the 主簿 as 何充. The Liu annotation confirms this with '主簿充知敦有異志' (chief clerk Chong knew Dun had different intentions). The patron is 王敦 (敦), not the referent. 沈充, 王敦, 含有惠政, and 王含 are all different persons and do not match the office-holder reference.\"}]}",
+              "name": "submit_sfh2_2p_identity_judgments"
+            },
+            "id": "call_00_CNMqVELQKBf8C1oMIu345907",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1788088253,
+  "id": "17559290-a19f-4949-9dd4-7f203a4beb0a",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 599,
+    "prompt_cache_hit_tokens": 640,
+    "prompt_cache_miss_tokens": 2695,
+    "prompt_tokens": 3335,
+    "prompt_tokens_details": {
+      "cached_tokens": 640
+    },
+    "total_tokens": 3934
+  }
+}

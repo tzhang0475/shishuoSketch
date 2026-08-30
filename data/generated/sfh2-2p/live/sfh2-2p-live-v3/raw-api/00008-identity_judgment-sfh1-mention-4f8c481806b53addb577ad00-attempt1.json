@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"judgments\": [{\"unit_id\": \"sfh1-mention-4f8c481806b53addb577ad00\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-04-wenxue-069-liu-annotation-001\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"courtesy_name_identity\", \"annotation_biographical_evidence\"]}, {\"candidate_key\": \"c1\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-04-wenxue-069-liu-annotation-001\", \"evidence-w3-person-ea7273483165995805d45824\", \"evidence-w3-person-836e3a2915da2a94ba0ba897\", \"evidence-w3-person-c64569859384c914a84dddaf\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"courtesy_name_identity\", \"biographical_profile_match\", \"annotation_biographical_evidence\"]}], \"preferred_candidate_key\": \"c1\", \"resolution\": \"candidate_supported\", \"explanation\": \"The mention 伯倫 is the courtesy name of 劉伶. The Liu annotation (sfh1-ev-04-wenxue-069-liu-annotation-001) explicitly states '名士傳曰伶字伯倫沛鄴', confirming that 伶 (劉伶) has the courtesy name 伯倫. Candidate c1 (劉伶) is the existing person entity with full biographical evidence confirming 劉伶字伯倫. Candidate c0 (伯倫 as courtesy name of 劉伶) is also a valid referent but is essentially the same person as c1. The preferred candidate is c1 (劉伶), the canonical existing person, since the mention refers to the historical person 劉伶 via his courtesy name.\"}]}",
+              "name": "submit_sfh2_2p_identity_judgments"
+            },
+            "id": "call_00_0bFqojd0oPA73FzDyOi82361",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1788087478,
+  "id": "06b38f1f-7a37-4126-bb21-47f957104715",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 469,
+    "prompt_cache_hit_tokens": 640,
+    "prompt_cache_miss_tokens": 1235,
+    "prompt_tokens": 1875,
+    "prompt_tokens_details": {
+      "cached_tokens": 640
+    },
+    "total_tokens": 2344
+  }
+}

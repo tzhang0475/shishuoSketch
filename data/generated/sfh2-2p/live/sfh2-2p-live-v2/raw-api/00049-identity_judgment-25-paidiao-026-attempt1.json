@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"judgments\": [{\"unit_id\": \"sfh1-mention-3a04cb343ab0ab7894f473c4\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"evidence-p3b-wave-1-2d7e5c33cdd9167acbe1f5dc\", \"hng2c1-shishuo-06-yaliang-027-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"alias_registry\", \"profile_form\"]}, {\"candidate_key\": \"c1\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-25-paidiao-026-main\"], \"reason_types\": [\"distinct_person_in_text\"]}, {\"candidate_key\": \"c2\", \"verdict\": \"insufficient\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [], \"reason_types\": [\"no_grounding\"]}, {\"candidate_key\": \"c3\", \"verdict\": \"insufficient\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [], \"reason_types\": [\"no_grounding\"]}, {\"candidate_key\": \"c4\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-25-paidiao-026-main\"], \"reason_types\": [\"distinct_person_in_text\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"explanation\": \"The mention '桓宣武' refers to 桓溫 (Huan Wen). The main text describes 謝公 (Xie An) serving as 桓宣武's 司馬 (military advisor). Candidate c0 (桓溫) is supported by the alias registry evidence showing 桓宣武 is an established alias for 桓溫. Candidate c1 (謝安) is the subject of the sentence (謝公), not the referent of 桓宣武. Candidate c4 (髙靈) is a separate person mentioned in the text (the 中丞 who makes the joke), not the referent. Candidates c2 (傅先正) and c3 (桓玄) lack sufficient grounding to the mention.\"}]}",
+              "name": "submit_sfh2_2p_identity_judgments"
+            },
+            "id": "call_00_K9E6nBqXQAIpozLPmi5M5420",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1788087174,
+  "id": "a7ab456e-5240-4b23-92fb-816aedc64377",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 565,
+    "prompt_cache_hit_tokens": 640,
+    "prompt_cache_miss_tokens": 1074,
+    "prompt_tokens": 1714,
+    "prompt_tokens_details": {
+      "cached_tokens": 640
+    },
+    "total_tokens": 2279
+  }
+}

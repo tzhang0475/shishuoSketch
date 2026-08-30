@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"judgments\": [{\"unit_id\": \"sfh1-mention-be3a8c3742b329c8951c52bd\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-05-fangzheng-011-main\"], \"reason_types\": [\"different_person\"]}, {\"candidate_key\": \"c1\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-05-fangzheng-011-main\"], \"reason_types\": [\"different_person\"]}, {\"candidate_key\": \"c2\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-05-fangzheng-011-main\"], \"reason_types\": [\"different_person\"]}, {\"candidate_key\": \"c3\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-05-fangzheng-011-liu-annotation-002\", \"sfh1-ev-05-fangzheng-011-liu-annotation-003\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"name_alias\", \"contextual_identification\"]}, {\"candidate_key\": \"c4\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-05-fangzheng-011-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"surface_match\", \"contextual_identification\"]}, {\"candidate_key\": \"c5\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-05-fangzheng-011-liu-annotation-001\", \"sfh1-ev-05-fangzheng-011-liu-annotation-002\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"name_alias\", \"contextual_identification\"]}, {\"candidate_key\": \"c6\", \"verdict\": \"insufficient\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [], \"reason_types\": [\"insufficient_evidence\"]}, {\"candidate_key\": \"c7\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-05-fangzheng-011-liu-annotation-002\"], \"reason_types\": [\"different_person\"]}, {\"candidate_key\": \"c8\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-05-fangzheng-011-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"surface_match\", \"contextual_identification\"]}], \"preferred_candidate_key\": \"c4\", \"resolution\": \"candidate_supported\", \"explanation\": \"The mention '武子' in the main text refers to 王武子 (Wang Wuzi), who is 王濟 (Wang Ji). The main text explicitly names 王武子, and the Liu annotations identify 武子 as 王濟. Candidate c4 (王武子) is the direct surface match in the main text. Candidates c3 (濟) and c5 (王濟) are the same person via the annotation evidence. Candidate c8 (武子) is the prior candidate person matching the surface. Candidates c0 (和嶠), c1 (王戎), c2 (嶠), and c7 (甄德) are different persons mentioned in the text or annotations.\"}]}",
+              "name": "submit_sfh2_2p_identity_judgments"
+            },
+            "id": "call_00_HUCHylf4eoGsRAeyq70C7075",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1788087060,
+  "id": "b94d3e4b-54f1-4c2f-9fa9-d3b2c6f3f36e",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 850,
+    "prompt_cache_hit_tokens": 640,
+    "prompt_cache_miss_tokens": 1334,
+    "prompt_tokens": 1974,
+    "prompt_tokens_details": {
+      "cached_tokens": 640
+    },
+    "total_tokens": 2824
+  }
+}

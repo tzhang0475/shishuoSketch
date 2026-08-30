@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"judgments\": [{\"unit_id\": \"sfh1-mention-490780f4feba8e174d40cc0b\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-02-yanyu-054-main\"], \"reason_types\": [\"name_mismatch\", \"role_mismatch\"]}, {\"candidate_key\": \"c1\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-02-yanyu-054-main\"], \"reason_types\": [\"name_mismatch\", \"role_mismatch\"]}, {\"candidate_key\": \"c2\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-02-yanyu-054-main\"], \"reason_types\": [\"name_mismatch\", \"role_mismatch\"]}, {\"candidate_key\": \"c3\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-02-yanyu-054-main\"], \"reason_types\": [\"name_mismatch\", \"role_mismatch\"]}, {\"candidate_key\": \"c4\", \"verdict\": \"insufficient\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [], \"reason_types\": [\"no_grounded_evidence\"]}, {\"candidate_key\": \"c5\", \"verdict\": \"insufficient\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [], \"reason_types\": [\"no_grounded_evidence\"]}], \"preferred_candidate_key\": null, \"resolution\": \"insufficient_evidence\", \"explanation\": \"The mention surface is 劉尹 (Liu Yin), which is a title/office reference (尹 = governor of Danyang). The main text mentions 劉尹 alongside 王長史 visiting 褚公. The candidates c0-c3 are 何充, 劉惔, 劉遐, 沈充 — none of these names match the surface 劉尹 as a direct name. The candidate c4 (王胡之) and c5 (裒) are candidate historical persons whose evidence is only an annotation reference, not grounded in the main text. 劉尹 is a title referring to the person holding the office of Danyang governor, which historically was 劉惔 (Liu Tan), but the evidence provided does not explicitly ground this identification. Without a valid semantic record and with no direct evidence linking the surface 劉尹 to any specific candidate, the resolution is insufficient evidence.\"}]}",
+              "name": "submit_sfh2_2p_identity_judgments"
+            },
+            "id": "call_00_CPXZz5JZL4AzQwbieaIy2583",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1788087038,
+  "id": "d64cda0f-2ef2-4e50-be13-c2ad7ae1d514",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 652,
+    "prompt_cache_hit_tokens": 640,
+    "prompt_cache_miss_tokens": 921,
+    "prompt_tokens": 1561,
+    "prompt_tokens_details": {
+      "cached_tokens": 640
+    },
+    "total_tokens": 2213
+  }
+}

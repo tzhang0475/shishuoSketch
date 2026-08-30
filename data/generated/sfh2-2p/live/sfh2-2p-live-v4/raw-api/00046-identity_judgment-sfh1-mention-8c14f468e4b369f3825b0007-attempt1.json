@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"judgments\": [{\"unit_id\": \"sfh1-mention-8c14f468e4b369f3825b0007\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-09-pinzao-088-liu-annotation-001\"], \"reason_types\": [\"courtesy_name_mismatch\"]}, {\"candidate_key\": \"c1\", \"verdict\": \"insufficient\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [], \"reason_types\": [\"no_direct_evidence\"]}, {\"candidate_key\": \"c2\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-09-pinzao-088-liu-annotation-001\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"courtesy_name_match\", \"explicit_annotation\"]}, {\"candidate_key\": \"c3\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-09-pinzao-088-main\"], \"reason_types\": [\"distinct_person_in_text\"]}, {\"candidate_key\": \"c4\", \"verdict\": \"insufficient\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [], \"reason_types\": [\"no_direct_evidence\"]}, {\"candidate_key\": \"c5\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-09-pinzao-088-liu-annotation-001\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"courtesy_name_match\", \"explicit_annotation\"]}], \"preferred_candidate_key\": \"c2\", \"resolution\": \"candidate_supported\", \"explanation\": \"The Liu annotation explicitly states '謙字敬祖' (謙's courtesy name is 敬祖), directly identifying the mention 敬祖 as referring to 桓謙. Candidate c2 (桓謙) is supported by this explicit annotation. Candidate c5 (謙) is also supported as the same person referenced by the shortened name 謙 in the annotation. Candidate c0 (卞範之) is contradicted because 卞範之's courtesy name is 敬祖 per the external evidence, but the annotation here explicitly assigns 敬祖 to 謙, not 卞範之. Candidate c3 (殷仲文) is contradicted because the main text distinguishes 桓謙 from 殷仲文 as separate people. Candidates c1 (仲文) and c4 (沖) lack direct evidence linking them to the mention 敬祖.\"}]}",
+              "name": "submit_sfh2_2p_identity_judgments"
+            },
+            "id": "call_00_uU7vtsGnXwP6eiodod7W3852",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1788088315,
+  "id": "a580fad9-dd65-4d5d-bf42-aa56a50f4db0",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 650,
+    "prompt_cache_hit_tokens": 1536,
+    "prompt_cache_miss_tokens": 485,
+    "prompt_tokens": 2021,
+    "prompt_tokens_details": {
+      "cached_tokens": 1536
+    },
+    "total_tokens": 2671
+  }
+}

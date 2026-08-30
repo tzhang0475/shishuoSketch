@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"judgments\": [{\"unit_id\": \"sfh1-mention-e5f55d112d1655f2898a4637\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"sfh1-ev-02-yanyu-086-main\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"direct_name_match\", \"narrative_participant\"]}, {\"candidate_key\": \"c1\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-02-yanyu-086-main\"], \"reason_types\": [\"different_person_in_text\"]}, {\"candidate_key\": \"c2\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-02-yanyu-086-main\"], \"reason_types\": [\"different_person_in_text\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"explanation\": \"The mention surface is 王子敬, which directly matches candidate c0's display name 王子敬. The main text states 王子敬語王孝伯曰... (Wang Zijin said to Wang Xiaobo...), identifying 王子敬 as the speaker/narrative participant. Candidate c1 (王恭/王孝伯) is the addressee, not the referent. Candidate c2 (羊祜/羊叔子) is a third person mentioned in the quoted speech, not the referent of 王子敬.\"}]}",
+              "name": "submit_sfh2_2p_identity_judgments"
+            },
+            "id": "call_00_qgamcFjWGMZk1nFcqrMD0131",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1788087472,
+  "id": "4037b9dd-fb49-46d1-b223-c3a59a4ab604",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 404,
+    "prompt_cache_hit_tokens": 640,
+    "prompt_cache_miss_tokens": 770,
+    "prompt_tokens": 1410,
+    "prompt_tokens_details": {
+      "cached_tokens": 640
+    },
+    "total_tokens": 1814
+  }
+}

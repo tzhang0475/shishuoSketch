@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"judgments\": [{\"unit_id\": \"sfh1-mention-3a04cb343ab0ab7894f473c4\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"verdict\": \"support\", \"supporting_evidence_ids\": [\"evidence-p3b-wave-1-2d7e5c33cdd9167acbe1f5dc\", \"evidence-p3b-wave-1-f59e4cdd4d2bf2b6878f7d72\", \"hng2c1-shishuo-06-yaliang-027-main\", \"registry:person-008\"], \"contradicting_evidence_ids\": [], \"reason_types\": [\"title_office_reference\", \"canonical_registry_match\", \"alias_registry_match\"]}, {\"candidate_key\": \"c1\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-25-paidiao-026-main\"], \"reason_types\": [\"different_person_in_text\"]}, {\"candidate_key\": \"c2\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-25-paidiao-026-liu-annotation-002\"], \"reason_types\": [\"annotation_not_referent\"]}, {\"candidate_key\": \"c3\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-25-paidiao-026-liu-annotation-001\"], \"reason_types\": [\"different_person_in_annotation\"]}, {\"candidate_key\": \"c4\", \"verdict\": \"contradict\", \"supporting_evidence_ids\": [], \"contradicting_evidence_ids\": [\"sfh1-ev-25-paidiao-026-main\"], \"reason_types\": [\"different_person_in_text\"]}], \"preferred_candidate_key\": \"c0\", \"resolution\": \"candidate_supported\", \"explanation\": \"The surface 桓宣武 refers to 桓溫, who held the title/designation 宣武. Candidate c0 (桓溫) is directly supported by the canonical registry evidence (registry:person-008), the biographical entry (evidence-p3b-wave-1-f59e4cdd4d2bf2b6878f7d72) confirming 桓溫's identity, and the main text evidence (evidence-p3b-wave-1-2d7e5c33cdd9167acbe1f5dc) where 桓宣武 is used for 桓溫. The main text (sfh1-ev-25-paidiao-026-main) shows 謝公 serving as 桓宣武's 司馬, consistent with 桓溫. Candidates c1 (謝安/安石) is the 謝公 in the text, not the referent. c2 (傅先正), c3 (桓玄), and c4 (髙靈) appear in annotations or as other persons in the text, not as the referent of 桓宣武.\"}]}",
+              "name": "submit_sfh2_2p_identity_judgments"
+            },
+            "id": "call_00_rLOoYfVUwwvIco9szLuR5066",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1788088346,
+  "id": "ed998aa1-6ebd-42c3-a0e1-c04125aa7b9d",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 726,
+    "prompt_cache_hit_tokens": 768,
+    "prompt_cache_miss_tokens": 1448,
+    "prompt_tokens": 2216,
+    "prompt_tokens_details": {
+      "cached_tokens": 768
+    },
+    "total_tokens": 2942
+  }
+}
