@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"reviews\": [{\"mention_id\": \"潁\", \"target_proposal\": \"王潁 (字茂英)\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"relation_to_target\": \"same_person\", \"confidence\": \"high\", \"supporting_evidence_ids\": [\"sfh1-ev-09-pinzao-018-liu-annotation-001\", \"sfh1-ev-09-pinzao-018-main\"], \"contradicting_evidence_ids\": []}, {\"candidate_key\": \"c1\", \"relation_to_target\": \"related_person\", \"confidence\": \"high\", \"supporting_evidence_ids\": [\"sfh1-ev-09-pinzao-018-main\"], \"contradicting_evidence_ids\": []}, {\"candidate_key\": \"c2\", \"relation_to_target\": \"kinship_relation\", \"confidence\": \"high\", \"supporting_evidence_ids\": [\"sfh1-ev-09-pinzao-018-main\"], \"contradicting_evidence_ids\": []}, {\"candidate_key\": \"c3\", \"relation_to_target\": \"related_person\", \"confidence\": \"high\", \"supporting_evidence_ids\": [\"sfh1-ev-09-pinzao-018-main\"], \"contradicting_evidence_ids\": []}, {\"candidate_key\": \"c4\", \"relation_to_target\": \"same_person\", \"confidence\": \"high\", \"supporting_evidence_ids\": [\"sfh1-ev-09-pinzao-018-liu-annotation-001\", \"sfh1-ev-09-pinzao-018-main\"], \"contradicting_evidence_ids\": []}, {\"candidate_key\": \"c5\", \"relation_to_target\": \"different_person\", \"confidence\": \"medium\", \"supporting_evidence_ids\": [\"sfh1-ev-09-pinzao-018-liu-annotation-002\"], \"contradicting_evidence_ids\": []}, {\"candidate_key\": \"c6\", \"relation_to_target\": \"attribute_of\", \"confidence\": \"high\", \"supporting_evidence_ids\": [\"sfh1-ev-09-pinzao-018-liu-annotation-001\"], \"contradicting_evidence_ids\": []}, {\"candidate_key\": \"c7\", \"relation_to_target\": \"same_person\", \"confidence\": \"high\", \"supporting_evidence_ids\": [\"sfh1-ev-09-pinzao-018-main\"], \"contradicting_evidence_ids\": []}], \"same_person_candidate_key\": \"c0\", \"abstain\": false, \"explanation\": \"The target is 王潁 (字茂英), the younger brother of 王丞相 (王導). The main text mentions 潁 as one of 王丞相's two younger brothers who did not cross the Yangtze. The Liu annotation (王氏譜) states 潁字茂英, confirming the identity. c0 (王潁) is the same person. c4 (潁) is the same surface mention. c7 (潁) is the same prior candidate. c1 (鄧攸/鄧伯道) is the person 潁 is compared to, so related. c2 (敝) is 潁's brother, so kinship. c3 (温忠武) is the person 敝 is compared to, related. c5 (茂平) appears in a different annotation about 堂邑公, a different person. c6 (茂英) is 潁's courtesy name (字), an attribute of the target, not the person himself.\"}]}",
+              "name": "submit_sfh2_2p1_identity_equivalence"
+            },
+            "id": "call_00_1yfn8EHOHYgtmKztqBvE8042",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1788096144,
+  "id": "b8f59836-59c1-4e72-be72-be90f9cf6f70",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 826,
+    "prompt_cache_hit_tokens": 640,
+    "prompt_cache_miss_tokens": 1866,
+    "prompt_tokens": 2506,
+    "prompt_tokens_details": {
+      "cached_tokens": 640
+    },
+    "total_tokens": 3332
+  }
+}

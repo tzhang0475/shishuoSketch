@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"reviews\": [{\"mention_id\": \"02-yanyu-086-王子敬\", \"target_proposal\": \"王獻之\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"relation_to_target\": \"same_person\", \"confidence\": \"high\", \"supporting_evidence_ids\": [\"sfh1-ev-02-yanyu-086-main\"], \"contradicting_evidence_ids\": []}, {\"candidate_key\": \"c1\", \"relation_to_target\": \"different_person\", \"confidence\": \"high\", \"supporting_evidence_ids\": [\"sfh1-ev-02-yanyu-086-main\"], \"contradicting_evidence_ids\": []}, {\"candidate_key\": \"c2\", \"relation_to_target\": \"different_person\", \"confidence\": \"high\", \"supporting_evidence_ids\": [\"sfh1-ev-02-yanyu-086-main\"], \"contradicting_evidence_ids\": []}, {\"candidate_key\": \"c3\", \"relation_to_target\": \"same_person\", \"confidence\": \"high\", \"supporting_evidence_ids\": [\"sfh1-ev-02-yanyu-086-main\"], \"contradicting_evidence_ids\": []}], \"same_person_candidate_key\": \"c0\", \"abstain\": false, \"explanation\": \"The target proposal is 王獻之 (Wang Xianzhi), and the referent surface is 王子敬 (Wang Zijin), which is the courtesy name (字) of 王獻之. Candidate c0 is 王獻之 himself, so it is the same person. Candidate c3 is 王子敬, which is the same person as 王獻之 (same individual referred to by courtesy name). Candidate c1 is 王恭 (Wang Gong), whose courtesy name is 王孝伯 — he is the person being addressed in the text, not the target. Candidate c2 is 羊祜 (Yang Hu), whose courtesy name is 羊叔子 — he is the subject of discussion, not the target.\"}]}",
+              "name": "submit_sfh2_2p1_identity_equivalence"
+            },
+            "id": "call_00_qn2LFG032XHwsEeAeZ8y1646",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1788096953,
+  "id": "f4b29ce1-93ff-465c-b97e-344cffa41be1",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 488,
+    "prompt_cache_hit_tokens": 640,
+    "prompt_cache_miss_tokens": 1483,
+    "prompt_tokens": 2123,
+    "prompt_tokens_details": {
+      "cached_tokens": 640
+    },
+    "total_tokens": 2611
+  }
+}

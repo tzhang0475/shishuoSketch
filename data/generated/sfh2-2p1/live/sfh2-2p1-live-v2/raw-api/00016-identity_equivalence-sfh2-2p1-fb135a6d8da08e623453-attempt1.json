@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"reviews\": [{\"mention_id\": \"04-wenxue-024\", \"target_proposal\": \"阮裕 (阮光禄)\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"relation_to_target\": \"same_person\", \"confidence\": \"high\", \"supporting_evidence_ids\": [\"sfh1-ev-04-wenxue-024-liu-annotation-003\", \"sfh1-ev-04-wenxue-024-main\"], \"contradicting_evidence_ids\": []}, {\"candidate_key\": \"c1\", \"relation_to_target\": \"different_person\", \"confidence\": \"high\", \"supporting_evidence_ids\": [\"sfh1-ev-04-wenxue-024-main\"], \"contradicting_evidence_ids\": []}, {\"candidate_key\": \"c2\", \"relation_to_target\": \"different_person\", \"confidence\": \"high\", \"supporting_evidence_ids\": [\"sfh1-ev-04-wenxue-024-liu-annotation-001\"], \"contradicting_evidence_ids\": []}, {\"candidate_key\": \"c3\", \"relation_to_target\": \"same_person\", \"confidence\": \"high\", \"supporting_evidence_ids\": [\"sfh1-ev-04-wenxue-024-liu-annotation-003\"], \"contradicting_evidence_ids\": []}], \"same_person_candidate_key\": \"c0\", \"abstain\": false, \"explanation\": \"The target is 阮光禄 (阮裕), referenced by his office title 光禄大夫. Candidate c0 is 阮裕, directly matching the target's canonical name. The Liu annotation (sfh1-ev-04-wenxue-024-liu-annotation-003) explicitly identifies 裕 (i.e., 阮裕) in the 中興書. Candidate c3 is the single character 裕 from the same annotation, which is the same person as 阮裕. Candidate c1 is 謝安, who is the interlocutor in the story, not the target. Candidate c2 is 孫龍 (Gongsun Long), referenced in the annotation about the 白馬論, a different person entirely.\"}]}",
+              "name": "submit_sfh2_2p1_identity_equivalence"
+            },
+            "id": "call_00_ZB8cVZJVVmiDzJKIQDRM2450",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1788096134,
+  "id": "4f4531b2-557b-4894-856f-481e03f421ff",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 523,
+    "prompt_cache_hit_tokens": 640,
+    "prompt_cache_miss_tokens": 1366,
+    "prompt_tokens": 2006,
+    "prompt_tokens_details": {
+      "cached_tokens": 640
+    },
+    "total_tokens": 2529
+  }
+}

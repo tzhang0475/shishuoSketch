@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"reviews\": [{\"mention_id\": \"04-wenxue-024\", \"target_proposal\": \"阮裕\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"relation_to_target\": \"same_person\", \"confidence\": \"high\", \"supporting_evidence_ids\": [\"sfh1-ev-04-wenxue-024-liu-annotation-003\", \"sfh1-ev-04-wenxue-024-main\"], \"contradicting_evidence_ids\": []}, {\"candidate_key\": \"c1\", \"relation_to_target\": \"different_person\", \"confidence\": \"high\", \"supporting_evidence_ids\": [\"sfh1-ev-04-wenxue-024-main\"], \"contradicting_evidence_ids\": []}, {\"candidate_key\": \"c2\", \"relation_to_target\": \"different_person\", \"confidence\": \"high\", \"supporting_evidence_ids\": [\"sfh1-ev-04-wenxue-024-liu-annotation-001\"], \"contradicting_evidence_ids\": []}, {\"candidate_key\": \"c3\", \"relation_to_target\": \"same_person\", \"confidence\": \"high\", \"supporting_evidence_ids\": [\"sfh1-ev-04-wenxue-024-liu-annotation-003\"], \"contradicting_evidence_ids\": []}], \"same_person_candidate_key\": \"c0\", \"abstain\": false, \"explanation\": \"The target proposal is 阮裕 (阮光禄). Candidate c0 is 阮裕, which is the same person as the proposed target. Candidate c3 is 裕, which appears in the Liu annotation '中興書曰裕' referring to the same person 阮裕. Candidate c1 is 謝安, who is a different person (the interlocutor in the story). Candidate c2 is 孫龍 (Gongsun Long), who is mentioned in the annotation about the 'white horse' paradox and is a different historical figure.\"}]}",
+              "name": "submit_sfh2_2p1_identity_equivalence"
+            },
+            "id": "call_00_cXf0Spra6kz7AenoWwi87965",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1788096956,
+  "id": "557d8f76-eb46-4e40-83de-322ed2e3baa3",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 479,
+    "prompt_cache_hit_tokens": 640,
+    "prompt_cache_miss_tokens": 1359,
+    "prompt_tokens": 1999,
+    "prompt_tokens_details": {
+      "cached_tokens": 640
+    },
+    "total_tokens": 2478
+  }
+}

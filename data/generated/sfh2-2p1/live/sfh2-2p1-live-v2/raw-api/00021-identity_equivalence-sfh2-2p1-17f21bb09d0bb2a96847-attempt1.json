@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"reviews\": [{\"mention_id\": \"33-youhui-007\", \"target_proposal\": \"司馬懿 (宣王)\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"relation_to_target\": \"same_person\", \"confidence\": \"high\", \"supporting_evidence_ids\": [\"sfh1-ev-33-youhui-007-liu-annotation-001\", \"sfh1-ev-33-youhui-007-main\"], \"contradicting_evidence_ids\": []}, {\"candidate_key\": \"c1\", \"relation_to_target\": \"different_person\", \"confidence\": \"high\", \"supporting_evidence_ids\": [\"sfh1-ev-33-youhui-007-main\"], \"contradicting_evidence_ids\": []}, {\"candidate_key\": \"c2\", \"relation_to_target\": \"different_person\", \"confidence\": \"high\", \"supporting_evidence_ids\": [\"sfh1-ev-33-youhui-007-main\"], \"contradicting_evidence_ids\": []}, {\"candidate_key\": \"c3\", \"relation_to_target\": \"related_person\", \"confidence\": \"medium\", \"supporting_evidence_ids\": [\"sfh1-ev-33-youhui-007-liu-annotation-001\"], \"contradicting_evidence_ids\": []}, {\"candidate_key\": \"c4\", \"relation_to_target\": \"related_person\", \"confidence\": \"medium\", \"supporting_evidence_ids\": [\"sfh1-ev-33-youhui-007-liu-annotation-001\"], \"contradicting_evidence_ids\": []}], \"same_person_candidate_key\": \"c0\", \"abstain\": false, \"explanation\": \"The target is the surface form '宣王' (posthumous title of 司馬懿). Candidate c0 is 司馬懿 himself, who is explicitly identified as 宣王 in the annotation. Candidates c1 (温嶠) and c2 (王導) are different people mentioned in the same passage. Candidates c3 (曹爽) and c4 (蔣濟) are mentioned in the annotation as figures involved in 宣王's (司馬懿's) actions but are distinct persons, not the target.\"}]}",
+              "name": "submit_sfh2_2p1_identity_equivalence"
+            },
+            "id": "call_00_6b0XHuPvDPm5mnoZIvfd4537",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1788096159,
+  "id": "176a8825-6c73-4384-8dca-b9d81c65c7bf",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 524,
+    "prompt_cache_hit_tokens": 640,
+    "prompt_cache_miss_tokens": 1515,
+    "prompt_tokens": 2155,
+    "prompt_tokens_details": {
+      "cached_tokens": 640
+    },
+    "total_tokens": 2679
+  }
+}

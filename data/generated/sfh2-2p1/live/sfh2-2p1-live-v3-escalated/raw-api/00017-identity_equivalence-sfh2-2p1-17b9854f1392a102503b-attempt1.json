@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"reviews\": [{\"mention_id\": \"09-pinzao-018-潁\", \"target_proposal\": \"王潁\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"relation_to_target\": \"same_person\", \"confidence\": \"high\", \"supporting_evidence_ids\": [\"sfh1-ev-09-pinzao-018-liu-annotation-001\", \"sfh1-ev-09-pinzao-018-main\"], \"contradicting_evidence_ids\": []}, {\"candidate_key\": \"c1\", \"relation_to_target\": \"related_person\", \"confidence\": \"high\", \"supporting_evidence_ids\": [\"sfh1-ev-09-pinzao-018-main\"], \"contradicting_evidence_ids\": []}, {\"candidate_key\": \"c2\", \"relation_to_target\": \"kinship_relation\", \"confidence\": \"high\", \"supporting_evidence_ids\": [\"sfh1-ev-09-pinzao-018-main\"], \"contradicting_evidence_ids\": []}, {\"candidate_key\": \"c3\", \"relation_to_target\": \"related_person\", \"confidence\": \"high\", \"supporting_evidence_ids\": [\"sfh1-ev-09-pinzao-018-main\"], \"contradicting_evidence_ids\": []}, {\"candidate_key\": \"c4\", \"relation_to_target\": \"same_person\", \"confidence\": \"high\", \"supporting_evidence_ids\": [\"sfh1-ev-09-pinzao-018-liu-annotation-001\", \"sfh1-ev-09-pinzao-018-main\"], \"contradicting_evidence_ids\": []}, {\"candidate_key\": \"c5\", \"relation_to_target\": \"different_person\", \"confidence\": \"medium\", \"supporting_evidence_ids\": [\"sfh1-ev-09-pinzao-018-liu-annotation-002\"], \"contradicting_evidence_ids\": []}, {\"candidate_key\": \"c6\", \"relation_to_target\": \"same_person\", \"confidence\": \"high\", \"supporting_evidence_ids\": [\"sfh1-ev-09-pinzao-018-liu-annotation-001\"], \"contradicting_evidence_ids\": []}, {\"candidate_key\": \"c7\", \"relation_to_target\": \"same_person\", \"confidence\": \"high\", \"supporting_evidence_ids\": [\"sfh1-ev-09-pinzao-018-main\"], \"contradicting_evidence_ids\": []}], \"same_person_candidate_key\": \"c0\", \"abstain\": false, \"explanation\": \"The target is 潁 (王潁), the younger brother of 王丞相 (王導). The Liu annotation (sfh1-ev-09-pinzao-018-liu-annotation-001) states 王氏譜曰潁字茂英, identifying 潁's courtesy name as 茂英. c0 (王潁) is the same person as the target. c4 (潁) is the same surface form as the target. c6 (茂英) is 潁's courtesy name per the annotation, thus the same person. c7 (潁) is the same prior candidate. c1 (鄧攸/鄧伯道) is the person 潁 is compared to, so related_person. c2 (敝) is 潁's brother, so kinship_relation. c3 (温忠武) is the person 敝 is compared to, so related_person. c5 (茂平) appears in a separate annotation about 堂邑公 and is a different person.\"}]}",
+              "name": "submit_sfh2_2p1_identity_equivalence"
+            },
+            "id": "call_00_K62PZHui7oJxHNDfJs305252",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1788096966,
+  "id": "8bf717dc-a05c-46b4-823f-7bb3d32427dc",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 840,
+    "prompt_cache_hit_tokens": 640,
+    "prompt_cache_miss_tokens": 1854,
+    "prompt_tokens": 2494,
+    "prompt_tokens_details": {
+      "cached_tokens": 640
+    },
+    "total_tokens": 3334
+  }
+}

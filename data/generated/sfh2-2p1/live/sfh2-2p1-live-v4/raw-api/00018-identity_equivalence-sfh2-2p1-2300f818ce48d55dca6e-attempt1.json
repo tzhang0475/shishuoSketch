@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"reviews\": [{\"mention_id\": \"sfh1-mention-3a04cb343ab0ab7894f473c4\", \"target_proposal\": \"桓溫\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"relation_to_target\": \"same_person\", \"confidence\": \"high\", \"supporting_evidence_ids\": [\"sfh1-ev-25-paidiao-026-main\"], \"contradicting_evidence_ids\": []}, {\"candidate_key\": \"c1\", \"relation_to_target\": \"related_person\", \"confidence\": \"high\", \"supporting_evidence_ids\": [\"sfh1-ev-25-paidiao-026-main\"], \"contradicting_evidence_ids\": []}, {\"candidate_key\": \"c2\", \"relation_to_target\": \"different_person\", \"confidence\": \"medium\", \"supporting_evidence_ids\": [\"sfh1-ev-25-paidiao-026-liu-annotation-002\"], \"contradicting_evidence_ids\": []}, {\"candidate_key\": \"c3\", \"relation_to_target\": \"different_person\", \"confidence\": \"medium\", \"supporting_evidence_ids\": [\"sfh1-ev-25-paidiao-026-liu-annotation-001\"], \"contradicting_evidence_ids\": []}, {\"candidate_key\": \"c4\", \"relation_to_target\": \"different_person\", \"confidence\": \"high\", \"supporting_evidence_ids\": [\"sfh1-ev-25-paidiao-026-main\", \"sfh1-ev-25-paidiao-026-liu-annotation-001\"], \"contradicting_evidence_ids\": []}], \"same_person_candidate_key\": \"c0\", \"abstain\": false, \"explanation\": \"The target mention is 桓宣武 (Huan Xuanwu), which is the posthumous/epithet name of 桓溫 (Huan Wen). Candidate c0 is 桓溫, the same person. Candidate c1 is 謝安 (Xie An), who is the subject of the anecdote and served as 桓宣武's 司馬 (military advisor) — a related person but not the same. Candidate c2 (傅先正) appears in the Liu annotation discussing a different philosophical point, not the target. Candidate c3 (桓玄) is 桓溫's son, a different person. Candidate c4 (髙靈) is the 中丞 mentioned in the text who makes the jesting remark — a different person from 桓溫.\"}]}",
+              "name": "submit_sfh2_2p1_identity_equivalence"
+            },
+            "id": "call_00_wAkJVnllaVPx69Adux4Q1849",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1788097189,
+  "id": "403c05d9-7609-42af-8274-be860e85ecdf",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 588,
+    "prompt_cache_hit_tokens": 1664,
+    "prompt_cache_miss_tokens": 674,
+    "prompt_tokens": 2338,
+    "prompt_tokens_details": {
+      "cached_tokens": 1664
+    },
+    "total_tokens": 2926
+  }
+}

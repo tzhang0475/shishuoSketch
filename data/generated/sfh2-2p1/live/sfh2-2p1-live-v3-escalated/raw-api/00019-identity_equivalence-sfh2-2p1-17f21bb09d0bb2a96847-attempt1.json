@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"reviews\": [{\"mention_id\": \"33-youhui-007\", \"target_proposal\": \"司馬懿 (宣王)\", \"candidate_assessments\": [{\"candidate_key\": \"c0\", \"relation_to_target\": \"same_person\", \"confidence\": \"high\", \"supporting_evidence_ids\": [\"sfh1-ev-33-youhui-007-liu-annotation-001\", \"sfh1-ev-33-youhui-007-main\"], \"contradicting_evidence_ids\": []}, {\"candidate_key\": \"c1\", \"relation_to_target\": \"different_person\", \"confidence\": \"high\", \"supporting_evidence_ids\": [\"sfh1-ev-33-youhui-007-main\"], \"contradicting_evidence_ids\": []}, {\"candidate_key\": \"c2\", \"relation_to_target\": \"different_person\", \"confidence\": \"high\", \"supporting_evidence_ids\": [\"sfh1-ev-33-youhui-007-main\"], \"contradicting_evidence_ids\": []}, {\"candidate_key\": \"c3\", \"relation_to_target\": \"related_person\", \"confidence\": \"medium\", \"supporting_evidence_ids\": [\"sfh1-ev-33-youhui-007-liu-annotation-001\"], \"contradicting_evidence_ids\": []}, {\"candidate_key\": \"c4\", \"relation_to_target\": \"related_person\", \"confidence\": \"medium\", \"supporting_evidence_ids\": [\"sfh1-ev-33-youhui-007-liu-annotation-001\"], \"contradicting_evidence_ids\": []}], \"same_person_candidate_key\": \"c0\", \"abstain\": false, \"explanation\": \"The target is 宣王 (Sima Yi). Candidate c0 is 司馬懿, which is the same person as 宣王 — 宣王 is Sima Yi's posthumous title. The Liu annotation explicitly mentions 宣王創業誅曹爽任蔣濟, confirming 宣王 refers to Sima Yi. Candidates c1 (温嶠) and c2 (王導) are different people mentioned in the same passage. Candidates c3 (曹爽) and c4 (蔣濟) are people mentioned in the annotation as figures involved in events during Sima Yi's career — they are related to the narrative but not the same person as the target.\"}]}",
+              "name": "submit_sfh2_2p1_identity_equivalence"
+            },
+            "id": "call_00_t1P1NZxWLvODA42D23cX9540",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1788096974,
+  "id": "376dece5-e291-4150-a24d-3d9471504322",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 555,
+    "prompt_cache_hit_tokens": 640,
+    "prompt_cache_miss_tokens": 1506,
+    "prompt_tokens": 2146,
+    "prompt_tokens_details": {
+      "cached_tokens": 640
+    },
+    "total_tokens": 2701
+  }
+}
