@@ -6,6 +6,7 @@ import collections
 import re
 from typing import Any, Mapping, Sequence
 
+from manual_semantic_authority import blocked_global_forms, replacement_exact_forms
 from .common import ROOT, read_json, stable_hash, text
 
 VARIANTS = str.maketrans({"爲": "為", "髙": "高", "鳯": "鳳", "臺": "台", "台": "台"})
@@ -47,7 +48,13 @@ def _profile_index() -> dict[str, dict[str, Any]]:
 
 def _form_rows() -> tuple[dict[str, dict[str, Any]], dict[str, list[dict[str, Any]]]]:
     people = _person_registry()
-    suppressed = _overlay_suppressed()
+    # HDA2 suppressions and the manually reviewed SFH2R alias decisions have
+    # identical precedence here: neither may be restored by alias/profile
+    # convenience data.  This is deterministic application, not inference.
+    suppressed = _overlay_suppressed() | {
+        (normalize_form(surface), person_id)
+        for surface, person_id in blocked_global_forms()
+    }
     by_form: dict[str, list[dict[str, Any]]] = collections.defaultdict(list)
     for person_id, person in people.items():
         canonical = text(person.get("canonical_name"))
@@ -74,6 +81,20 @@ def _form_rows() -> tuple[dict[str, dict[str, Any]], dict[str, list[dict[str, An
             "basis": f"alias_registry:{text(alias.get('alias_type')) or 'alias'}",
             "evidence": snippets[0] if snippets else surface,
             "evidence_ref": "data/aliases.json",
+        })
+    # Add only replacement forms explicitly stated by the manual authority.
+    # At present this restores 郭象字子玄 while suppressing the corrupt 子少.
+    for replacement in replacement_exact_forms():
+        person_id = text(replacement.get("person_id"))
+        surface = text(replacement.get("surface"))
+        if person_id not in people or not surface:
+            continue
+        by_form[normalize_form(surface)].append({
+            "person_id": person_id,
+            "surface": surface,
+            "basis": text(replacement.get("basis")) or "manual_semantic_authority",
+            "evidence": surface,
+            "evidence_ref": text(replacement.get("evidence_ref")),
         })
     profiles = _profile_index()
     for person_id, profile in profiles.items():
