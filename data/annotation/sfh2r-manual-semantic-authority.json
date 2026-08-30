@@ -1,0 +1,487 @@
+{
+  "schema": "sfh2r-manual-semantic-authority-v1",
+  "review_date": "2026-08-30",
+  "review_method": "GPT-assisted manual historical-semantic review of source evidence; no Python semantic inference was used to decide any repair in this file.",
+  "authority": "manual_semantic_override",
+  "authority_policy": {
+    "precedence": "These records supersede conflicting derived alias/profile/SFH1/SFH2 decisions for future replay, retrieval, clustering, and graph projection.",
+    "old_artifact_policy": "Preserve old artifacts for provenance; do not treat superseded rows as semantic truth.",
+    "python_role": "Python may apply these explicit records deterministically but must not reinterpret, expand, or reverse them by heuristic inference.",
+    "llm_role": "Future LLM semantic judgments may add new evidence but may not silently restore a superseded identity without a new reviewed claim."
+  },
+  "candidate_only": true,
+  "canonical_write_back": false,
+  "alias_repairs": [
+    {
+      "alias_id": "alias-w4-cd1f3ed5fbfb5faa5b794645",
+      "surface": "景真",
+      "current_person_id": "person-070",
+      "current_person_name": "趙至",
+      "action": "downgrade_unique_alias_and_filter_evidence",
+      "corrected_resolution_mode": "contextual",
+      "corrected_status": "shared_or_contextual",
+      "corrected_observed_support_count": 1,
+      "keep_evidence_ids": [
+        "evidence-w4-person-dc9ab3bda7624a30496501fa"
+      ],
+      "remove_evidence_ids": [
+        "evidence-w4-person-dddae934aed546d164027499",
+        "evidence-w4-person-38e366a9aebfcf76472fdb76"
+      ],
+      "manual_verdict": "趙至確實字景真；但桓亮亦字景真。19-xianyuan-032 的兩條《世說》證據明確屬桓亮，不能作為趙至的 alias evidence，也不能讓『景真』成為趙至的全局 exact alias。",
+      "other_referents": [
+        {
+          "display_name": "桓亮",
+          "surface": "景真",
+          "evidence_ids": [
+            "evidence-w4-person-dddae934aed546d164027499",
+            "evidence-w4-person-38e366a9aebfcf76472fdb76"
+          ]
+        }
+      ]
+    },
+    {
+      "alias_id": "alias-w4-268d5ddf0c732480b8d1c16a",
+      "surface": "敬祖",
+      "current_person_id": "person-066",
+      "current_person_name": "卞範之",
+      "action": "downgrade_unique_alias_and_filter_evidence",
+      "corrected_resolution_mode": "contextual",
+      "corrected_status": "shared_or_contextual",
+      "corrected_observed_support_count": 2,
+      "keep_evidence_ids": [
+        "evidence-w4-person-0555d736de7dcbd3e5802a55",
+        "evidence-w4-person-ad777b66580ab77a31adb115"
+      ],
+      "remove_evidence_ids": [
+        "evidence-w4-person-8c5f856cb5dcb7b4c1bfc229"
+      ],
+      "manual_verdict": "卞範之字敬祖有直接證據；但 09-pinzao-088 明言桓謙字敬祖。該表面串為共享字，不能 exact resolve 到卞範之。",
+      "other_referents": [
+        {
+          "display_name": "桓謙",
+          "surface": "敬祖",
+          "evidence_ids": [
+            "evidence-w4-person-8c5f856cb5dcb7b4c1bfc229"
+          ]
+        }
+      ]
+    },
+    {
+      "alias_id": "alias-w4-02a9a04c55a891d8d0092142",
+      "surface": "子少",
+      "current_person_id": "person-063",
+      "current_person_name": "郭象",
+      "action": "replace_corrupt_alias_surface",
+      "corrected_surface": "子玄",
+      "corrected_alias_type": "courtesy_name",
+      "corrected_resolution_mode": "exact",
+      "corrected_status": "resolved",
+      "corrected_observed_support_count": 1,
+      "remove_all_current_surface_evidence": true,
+      "replacement_evidence_ids": [
+        "evidence-w4-person-b7a8d3362e61a0a8556571ba"
+      ],
+      "manual_verdict": "郭象字子玄。『郭象字子少有才理』是『字子玄，少有才理』的文本/分詞污染；其餘多條『子少』命中均是跨詞或普通語句（如貴臣子少有重名、王武子相酬、次子少知名），不得作郭象 alias evidence。",
+      "source_defect": {
+        "evidence_id": "evidence-w4-person-de83f93cc793853accdf0c4e",
+        "current_text_fragment": "郭象字子少有才理",
+        "corrected_reading": "郭象字子玄，少有才理",
+        "status": "do_not_use_for_alias_extraction_until_source_normalization_is_corrected"
+      }
+    },
+    {
+      "alias_id": "alias-w4-50a559efebdd28d7650379e4",
+      "surface": "大業",
+      "current_person_id": "person-062",
+      "current_person_name": "郭奕",
+      "action": "downgrade_lexically_ambiguous_alias_and_filter_evidence",
+      "corrected_resolution_mode": "contextual",
+      "corrected_status": "context_dependent",
+      "corrected_observed_support_count": 1,
+      "keep_evidence_ids": [
+        "evidence-w4-person-62af3841293e8602157eeea4"
+      ],
+      "remove_evidence_ids": [
+        "evidence-w4-person-8543beb2bade0a1d6140f5df",
+        "evidence-w4-person-f905d1ad442e306a8c6c4e02"
+      ],
+      "manual_verdict": "郭奕字大業成立；但『承繼大業』『承大業』中的大業是普通詞，不是郭奕。單獨 surface 大業不可全局 exact。"
+    },
+    {
+      "alias_id": "alias-w4-d68846939019612b7b42b1d1",
+      "surface": "萬年",
+      "current_person_id": "person-065",
+      "current_person_name": "孟嘉",
+      "action": "downgrade_shared_alias_and_filter_evidence",
+      "corrected_resolution_mode": "contextual",
+      "corrected_status": "shared_or_contextual",
+      "corrected_observed_support_count": 3,
+      "keep_evidence_ids": [
+        "evidence-w4-person-d72ffe60353c8ad50bc09860",
+        "evidence-w4-person-35a0d25b9917d6b34185eea7",
+        "evidence-w4-person-b63efc9270ddeb80813865a5"
+      ],
+      "remove_evidence_ids": [
+        "evidence-w4-person-ff4c641ecffcd1c1a0641ea3",
+        "evidence-w4-person-6d483c973c364d7b23254979",
+        "evidence-w4-person-07905b0069b58bd5204b2b14",
+        "evidence-w4-person-304350420e91542b697c5e73"
+      ],
+      "manual_verdict": "孟嘉字萬年成立，孟萬年亦可直接指孟嘉；但齊萬年是另一歷史人物，另有『天下萬年』等非人名用法。單獨萬年必須依上下文解決。",
+      "other_referents": [
+        {
+          "display_name": "齊萬年",
+          "surface": "萬年",
+          "evidence_ids": [
+            "evidence-w4-person-ff4c641ecffcd1c1a0641ea3",
+            "evidence-w4-person-6d483c973c364d7b23254979"
+          ]
+        }
+      ]
+    },
+    {
+      "alias_id": "alias-w4-46fbae7db93b4b494fe86963",
+      "surface": "世將",
+      "current_person_id": "person-053",
+      "current_person_name": "王廙",
+      "action": "downgrade_lexically_ambiguous_alias_and_filter_evidence",
+      "corrected_resolution_mode": "contextual",
+      "corrected_status": "context_dependent",
+      "remove_evidence_ids": [
+        "evidence-w4-person-e9332a05f4924352a65781db"
+      ],
+      "manual_verdict": "王廙字世將成立；但 08-shangyu-004 的『知世將亂』是『知世將亂（知道世道將亂）』，不是王廙。單獨世將不能全局 exact。"
+    },
+    {
+      "alias_id": "alias-w4-8ef7455b033bcceabb7e51c7",
+      "surface": "無忌",
+      "current_person_id": "person-055",
+      "current_person_name": "氾騰",
+      "action": "downgrade_shared_alias_and_filter_evidence",
+      "corrected_resolution_mode": "contextual",
+      "corrected_status": "shared_or_contextual",
+      "corrected_observed_support_count": 1,
+      "keep_evidence_ids": [
+        "evidence-w4-person-a6a2c8d04653746d767e6ce7"
+      ],
+      "remove_evidence_ids": [
+        "evidence-w4-person-e3ea7b45cae7361a486626dd",
+        "evidence-w4-person-ba8657041ff6cdb5efcbb3f3",
+        "evidence-w4-person-7262541b3320413cf08c666b",
+        "evidence-w4-person-c53268e9a3f86ce2be08cf74",
+        "evidence-w4-person-5b42920d2a9d854add092810",
+        "evidence-w4-person-1cc4b90ef8578a820f5f16a0",
+        "evidence-w4-person-63ade30f9b87c57222c40da9",
+        "evidence-w4-person-8b9f1320eb79d0528c8fad5b",
+        "evidence-w4-person-e8f3dc0327f3f54944cdb96a",
+        "evidence-w4-person-07f26c110f178961e191d86f"
+      ],
+      "manual_verdict": "氾騰字無忌有《晉書》直接證據；但《世說》仇隙篇等多個『無忌』明顯是司馬無忌/其他人物，不能反向成為氾騰 alias evidence。"
+    },
+    {
+      "alias_id": "alias-w4-cd0172e08a60131e1d98fe98",
+      "surface": "安國",
+      "current_person_id": "person-059",
+      "current_person_name": "孫盛",
+      "action": "downgrade_shared_alias_and_filter_evidence",
+      "corrected_resolution_mode": "contextual",
+      "corrected_status": "shared_or_contextual",
+      "keep_evidence_ids": [
+        "evidence-w4-person-944fefe7f4f9e2d2a87a406a",
+        "evidence-w4-person-3e40cfc77fc08c907082f7c3",
+        "evidence-w4-person-86a369d6bb21aa934dffac6f",
+        "evidence-w4-person-d490021436b8d9715d532aa5",
+        "evidence-w4-person-a2d233208969d703a3d8d3f3",
+        "evidence-w4-person-a287ca1a7fd4c0caad1f7bd8"
+      ],
+      "remove_evidence_ids": [
+        "evidence-w4-person-da1ef9e0a507fa77b9f45dce",
+        "evidence-w4-person-50d0612b4f4e547d777426bd",
+        "evidence-w4-person-1cf15d2f55179658a11e1b3c",
+        "evidence-w4-person-1e8add570f225ca6ed272097",
+        "evidence-w4-person-ec3acdf145cbba57b0117b76",
+        "evidence-w4-person-8cc77ff1bed3d9235648b735",
+        "evidence-w4-person-271d1ab86280ec6e21785994",
+        "evidence-w4-person-fe2282e7f556a5c7510a4c62",
+        "evidence-w4-person-721ecfadc55b2cfa163373e2",
+        "evidence-w4-person-d24a01da982d1db93b456541",
+        "evidence-w4-person-68bce58c27717ba3fc5e5d6d",
+        "evidence-w4-person-8894151e64933510c32789e3",
+        "evidence-w4-person-5a55f5f9dcae3409c9784fc5",
+        "evidence-w4-person-e04a98bca19e38ce1e48950d",
+        "evidence-w4-person-14bcd402bad528c322312be3",
+        "evidence-w4-person-729bb102637906a29f9d9dcc"
+      ],
+      "manual_verdict": "孫盛字安國成立；但該 surface 同時命中孔安國、李豐字安國、普通短語『安國寧家』以及跨名字邊界『謝安國寳』。這是典型共享/詞法碰撞表面串，禁止全局 exact。",
+      "other_referents": [
+        {
+          "display_name": "孔安國",
+          "surface": "安國"
+        },
+        {
+          "display_name": "李豐",
+          "surface": "安國"
+        }
+      ]
+    },
+    {
+      "alias_id": "alias-w4-2834120fe0201b99e71b1088",
+      "surface": "子相",
+      "current_person_id": "person-068",
+      "current_person_name": "崔遊",
+      "action": "downgrade_lexically_ambiguous_alias_and_filter_evidence",
+      "corrected_resolution_mode": "contextual",
+      "corrected_status": "context_dependent",
+      "corrected_observed_support_count": 1,
+      "keep_evidence_ids": [
+        "evidence-w4-person-c0972a80c4ab8e7ac68320bc"
+      ],
+      "remove_evidence_ids": [
+        "evidence-w4-person-02ba6f29e229f7f345b15e44",
+        "evidence-w4-person-d809bde7f5a9a99fe0809878",
+        "evidence-w4-person-7da2d351c50b3d1eda014695",
+        "evidence-w4-person-a4a5c0bdb2a62c83e61fdda8"
+      ],
+      "manual_verdict": "崔遊字子相成立；其餘命中分別來自『代子相者』『王武子相酬』『兒女子相問』『青鳥子相冢書』等跨詞/句法結構，不是崔遊稱謂。"
+    },
+    {
+      "alias_id": "alias-w4-37e90a77efbfd0f6737ce099",
+      "surface": "令升",
+      "current_person_id": "person-074",
+      "current_person_name": "干寳",
+      "action": "filter_uncertain_evidence_only",
+      "corrected_resolution_mode": "exact",
+      "corrected_status": "resolved",
+      "keep_evidence_ids": [
+        "evidence-w4-person-d3f44f74b3cc77e4483645be",
+        "evidence-w4-person-7e48f1255b234c55820d17ac"
+      ],
+      "remove_evidence_ids": [
+        "evidence-w4-person-4644e6cadbef82ee3eb3fc55"
+      ],
+      "manual_verdict": "干寳字令升有直接《晉書》及《世說》注文證據；04-wenxue-076 作『友人于令升』，在未核清該文本/人名前，不應作干寳 identity evidence。"
+    }
+  ],
+  "occurrence_repairs": [
+    {
+      "observation_id": "sfh2-observation-15912a1494e17cfe36fc35ce",
+      "story_id": "19-xianyuan-032",
+      "surface": "亮",
+      "action": "suppress_existing_person_link_and_replace_with_candidate_historical_entity",
+      "suppress_person_id": "person-070",
+      "replacement_display_name": "桓亮",
+      "replacement_entity_state": "candidate_historical_person",
+      "supporting_evidence_ids": [
+        "sfh1-ev-19-xianyuan-032-liu-annotation-003",
+        "sfh1-ev-19-xianyuan-032-liu-annotation-004"
+      ],
+      "manual_verdict": "注文明言『續晉陽秋曰桓亮字景真』，且桓亮為桓温之孫、桓濟之子。本 occurrence 不能因共享字『景真』連到趙至。"
+    },
+    {
+      "observation_id": "sfh2-observation-8c7d20a52559830123ec7e3d",
+      "story_id": "25-paidiao-038",
+      "surface": "齡",
+      "action": "suppress_person_mention_and_reclassify_as_attribute_fragment",
+      "replacement": {
+        "attribute_type": "courtesy_name",
+        "attribute_value": "延齡",
+        "bearer_display_name": "司馬奕"
+      },
+      "manual_verdict": "語義為『海西公諱奕字延齡』；齡不是獨立人物 mention。此前『奕 ↔ 齡 same_person』是 mention-boundary/屬性切分錯誤。"
+    },
+    {
+      "observation_id": "sfh2-observation-f35d3060607ce7bf220c40ff",
+      "story_id": "02-yanyu-063",
+      "surface": "閔氏",
+      "action": "suppress_person_entity_and_reclassify_as_person_attribute",
+      "replacement": {
+        "attribute_type": "original_surname",
+        "attribute_value": "閔",
+        "bearer_display_name": "支遁"
+      },
+      "supporting_evidence_ids": [
+        "sfh1-ev-02-yanyu-063-liu-annotation-001"
+      ],
+      "manual_verdict": "『本姓閔氏』描述支遁的原姓，不是另一人物。由此產生的 person node/kinship reading 均應失效。"
+    },
+    {
+      "observation_id": "sfh2-observation-abb8d862e68c408452e62f6c",
+      "story_id": "19-xianyuan-032",
+      "surface": "字景真",
+      "action": "suppress_person_mention_and_reclassify_as_attribute_phrase",
+      "replacement": {
+        "attribute_type": "courtesy_name",
+        "attribute_value": "景真",
+        "bearer_display_name": "桓亮"
+      },
+      "supporting_evidence_ids": [
+        "sfh1-ev-19-xianyuan-032-liu-annotation-003"
+      ],
+      "manual_verdict": "『桓亮字景真』中『字景真』是屬性結構，不是獨立 person surface。"
+    },
+    {
+      "observation_id": "sfh2-observation-0baf776dd1a1f548e4b812d9",
+      "story_id": "01-dexing-028",
+      "surface": "勒",
+      "action": "replace_candidate_retrieval_failure_with_grounded_candidate_historical_entity",
+      "replacement_display_name": "石勒",
+      "replacement_entity_state": "candidate_historical_person",
+      "manual_verdict": "上下文明言『永嘉中攸為石勒所獲』。LLM 已正確判斷勒=石勒；王隱只是注文所引史書作者，不能作 referent candidate。"
+    },
+    {
+      "observation_id": "sfh2-observation-3663785844caec2a21a04658",
+      "story_id": "27-jiajue-012",
+      "surface": "興公",
+      "action": "replace_wrong_or_incomplete_existing_candidate_with_grounded_candidate_historical_entity",
+      "reject_existing_person_id": "person-015",
+      "replacement_display_name": "孫綽",
+      "replacement_entity_state": "candidate_historical_person",
+      "manual_verdict": "正文『孫興公有一女』直接支持興公=孫綽。person-015 孫晷不是本 occurrence 的 referent；問題在 existing registry/candidate universe 不完備。"
+    },
+    {
+      "observation_id": "sfh2-observation-56258cfd1fea21b43f10f1ad",
+      "story_id": "02-yanyu-036",
+      "surface": "管夷吾",
+      "action": "retain_personhood_but_reclassify_network_role",
+      "replacement": {
+        "identity_display_name": "管仲",
+        "network_role": "historical_exemplum",
+        "core_story_graph_eligible": false
+      },
+      "manual_verdict": "管夷吾/管仲是注文或論證所引前代人物，不應與魏晉故事參與者無差別計入核心社會網絡。"
+    },
+    {
+      "observation_id": "sfh2-observation-206b3ad6cbb200bf04f3e234",
+      "story_id": "02-yanyu-047",
+      "surface": "管仲",
+      "action": "retain_personhood_but_reclassify_network_role",
+      "replacement": {
+        "identity_display_name": "管仲",
+        "network_role": "historical_exemplum",
+        "core_story_graph_eligible": false
+      },
+      "manual_verdict": "該 occurrence 出自《呂氏春秋》式歷史引例/注文，不是當前《世說》故事社會場景人物。"
+    }
+  ],
+  "role_authority": [
+    {
+      "role": "citation_author",
+      "examples": [
+        "王隱晉書曰",
+        "徐廣晉紀曰"
+      ],
+      "core_story_graph_eligible": false,
+      "manual_policy": "When the source explicitly presents the person only as the author/attribution of a cited historical work, retain the person as source-context metadata but do not count that occurrence as a narrative participant or social-network endpoint. This policy does not erase the historical person from the registry."
+    },
+    {
+      "role": "historical_exemplum",
+      "examples": [
+        "管仲",
+        "管夷吾"
+      ],
+      "core_story_graph_eligible": false,
+      "manual_policy": "Pre-Wei-Jin exempla cited only to explain or compare a Story remain historical context, not core Story-network participants."
+    },
+    {
+      "role": "person_attribute",
+      "examples": [
+        "本姓閔氏",
+        "字景真",
+        "字延齡"
+      ],
+      "core_story_graph_eligible": false,
+      "manual_policy": "A surname/courtesy-name attribute value is not a second Person entity merely because its value is person-like text."
+    }
+  ],
+  "audited_safe_w4_aliases": [
+    {
+      "surface": "景倩",
+      "person_id": "person-051",
+      "person_name": "荀顗",
+      "verdict": "retain"
+    },
+    {
+      "surface": "士少",
+      "person_id": "person-052",
+      "person_name": "祖約",
+      "verdict": "retain"
+    },
+    {
+      "surface": "茂曽",
+      "person_id": "person-056",
+      "person_name": "李重",
+      "verdict": "retain"
+    },
+    {
+      "surface": "士居",
+      "person_id": "person-057",
+      "person_name": "沈充",
+      "verdict": "retain"
+    },
+    {
+      "surface": "彦胄",
+      "person_id": "person-058",
+      "person_name": "鍾雅",
+      "verdict": "retain"
+    },
+    {
+      "surface": "叔寧",
+      "person_id": "person-060",
+      "person_name": "虞預",
+      "verdict": "retain"
+    },
+    {
+      "surface": "彦威",
+      "person_id": "person-061",
+      "person_name": "習鑿齒",
+      "verdict": "retain"
+    },
+    {
+      "surface": "士行",
+      "person_id": "person-064",
+      "person_name": "陶侃",
+      "verdict": "retain"
+    },
+    {
+      "surface": "開林",
+      "person_id": "person-067",
+      "person_name": "周浚",
+      "verdict": "retain"
+    },
+    {
+      "surface": "廣微",
+      "person_id": "person-069",
+      "person_name": "束晳",
+      "verdict": "retain"
+    },
+    {
+      "surface": "正長",
+      "person_id": "person-071",
+      "person_name": "劉遐",
+      "verdict": "retain"
+    },
+    {
+      "surface": "大連",
+      "person_id": "person-072",
+      "person_name": "劉隗",
+      "verdict": "retain"
+    },
+    {
+      "surface": "處黙",
+      "person_id": "person-073",
+      "person_name": "吳隱之",
+      "verdict": "retain"
+    },
+    {
+      "surface": "野民",
+      "person_id": "person-075",
+      "person_name": "徐廣",
+      "verdict": "retain"
+    }
+  ],
+  "known_remaining_review_boundary": {
+    "statement": "This manual authority repairs the high-propagation W4 alias contamination and the concrete SFH2 occurrence failures reviewed in this audit. It does not assert that every unresolved occurrence in all 188 Stories has been manually adjudicated.",
+    "next_validation": "Use a small targeted regression set before any full live rerun. Full 188-Story semantic API rerun is not required merely to apply this authority file."
+  }
+}
