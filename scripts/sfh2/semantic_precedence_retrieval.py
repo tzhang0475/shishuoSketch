@@ -13,6 +13,7 @@ from typing import Any, Mapping
 from identity_resolution_policy import (
     alias_retrieval_scope,
     explicitly_blocked_form_person_pairs,
+    filtered_alias_evidence,
     normalize_form,
     profile_form_retrieval_scope,
 )
@@ -47,13 +48,9 @@ def install(module: Any) -> None:
                 bucket.append(item)
             by_person.setdefault(person_id, {}).setdefault(form_type, set()).add(surface_text)
 
-        # Canonical Person names remain deterministic direct keys.
         for pid, person in people.items():
             add(exact, surface=person.get("canonical_name"), person_id=pid, form_type="canonical_name", basis="canonical_registry")
 
-        # Alias registry is split into direct and contextual retrieval scopes.
-        # A contextual form is still useful to the LLM as a candidate hint,
-        # but it can never produce a deterministic identity resolution.
         for alias in (documents.get("aliases") or {}).get("aliases", []) or []:
             if not isinstance(alias, Mapping):
                 continue
@@ -68,8 +65,8 @@ def install(module: Any) -> None:
             if scope == "blocked":
                 continue
             target = exact if scope == "exact" else contextual
+            sources = filtered_alias_evidence(alias) or [{}]
             for pid in sorted(ids):
-                sources = alias.get("source_evidence", []) or [{}]
                 for source in sources:
                     source = source if isinstance(source, Mapping) else {}
                     add(
@@ -82,9 +79,8 @@ def install(module: Any) -> None:
                         evidence_text=source.get("evidence_snippet"),
                     )
 
-        # Profile provenance is dossier evidence by default.  In particular,
-        # observed_surface/courtesy/title rows do not become global keys merely
-        # because an earlier occurrence was resolved.
+        # Profile provenance remains available for dossiers, but short
+        # occurrence-derived forms are contextual rather than global keys.
         for profile in (documents.get("profiles") or {}).get("records", []) or []:
             if not isinstance(profile, Mapping):
                 continue
@@ -124,6 +120,7 @@ def install(module: Any) -> None:
                 "contextual_forms_require_semantic_judgment": True,
                 "substring_context_scan": False,
                 "occurrence_resolution_implies_global_alias": False,
+                "manual_evidence_filtering": True,
             },
             "candidate_only": True,
             "canonical_write_back": False,
@@ -158,10 +155,8 @@ def install(module: Any) -> None:
                     "basis": row.get("basis"),
                 })
 
-        # Only the occurrence's own surface participates.  We deliberately do
-        # NOT search arbitrary names as substrings of Liu annotations or local
-        # evidence; that was the mechanism that attracted 王隱 to 勒 and
-        # unrelated titles to source-author profiles.
+        # IMPORTANT: only the occurrence's own validated surface is used.
+        # There is deliberately no arbitrary local-context substring scan.
         consume(list((form_index.get("exact_forms") or {}).get(surface, []) or []), "exact")
         consume(list((form_index.get("contextual_forms") or {}).get(surface, []) or []), "contextual")
 
