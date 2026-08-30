@@ -6,7 +6,7 @@ import collections
 from pathlib import Path
 from typing import Any, Mapping
 
-from manual_semantic_authority import apply_sfh2_observation
+from manual_semantic_authority import apply_sfh2_observation, blocked_global_forms
 from .common import (
     INPUT_FILES,
     ROOT,
@@ -27,6 +27,35 @@ def _doc(name: str) -> Any:
     return read_json(SFH1_ROOT / name, {}) or {}
 
 
+def _effective_suppress_overlay() -> list[dict[str, Any]]:
+    """Merge HDA2 suppressions with explicit SFH2R manual suppressions.
+
+    The extra rows are mechanical translations of reviewed authority records.
+    They do not infer identity and are consumed by existing deterministic
+    suppression gates in SFH2 consolidation.
+    """
+    source = read_json(ROOT / "data/generated/hda2/repair-overlay.json", []) or []
+    rows = [dict(row) for row in (source if isinstance(source, list) else source.get("records", []) or []) if isinstance(row, Mapping)]
+    existing = {
+        (normalize_form(row.get("target_surface")), text(row.get("person_id")))
+        for row in rows
+        if text(row.get("action")) == "suppress_claim"
+    }
+    for surface, person_id in sorted(blocked_global_forms()):
+        key = (normalize_form(surface), person_id)
+        if key in existing:
+            continue
+        rows.append({
+            "action": "suppress_claim",
+            "target_surface": surface,
+            "person_id": person_id,
+            "source": "data/annotation/sfh2r-manual-semantic-authority.json",
+            "reason": "manual_semantic_authority",
+        })
+        existing.add(key)
+    return rows
+
+
 def load_documents() -> dict[str, Any]:
     return {
         "packets": _doc("story-packets.json"),
@@ -43,7 +72,7 @@ def load_documents() -> dict[str, Any]:
         "profiles": read_json(ROOT / "data/derived/hdb2-f-person-knowledge.json", {}) or {},
         "candidate_profiles": read_json(ROOT / "data/derived/hdb2-f-candidate-person-knowledge.json", {}) or {},
         "profile_audit": read_json(ROOT / "data/derived/hdb2-f-profile-integrity-audit.json", {}) or {},
-        "hda2_overlay": read_json(ROOT / "data/generated/hda2/repair-overlay.json", []) or [],
+        "hda2_overlay": _effective_suppress_overlay(),
         "growth": read_json(SFH1_ROOT / "hge1-recalibrated-growth-series.json", {}) or {},
     }
 
