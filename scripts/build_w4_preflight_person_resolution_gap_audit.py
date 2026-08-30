@@ -113,7 +113,12 @@ def _target_rows(root: Path) -> tuple[list[Mapping[str, Any]], dict[str, Mapping
 
 def _build_alias_data(root: Path) -> tuple[dict[str, list[dict[str, Any]]], dict[str, dict[str, Any]], list[Mapping[str, Any]]]:
     people, _people_by_id, _candidates_by_id = _target_rows(root)
-    aliases = pr.read_json(root, pr.ALIASES_PATH).get("aliases", [])
+    try:
+        from scripts import sfh2r_contract
+        preserved = sfh2r_contract.pre_repair_alias_document()
+    except (ImportError, OSError, ValueError, TypeError):
+        preserved = None
+    aliases = (preserved or pr.read_json(root, pr.ALIASES_PATH)).get("aliases", [])
     candidate_document = pr.read_json(root, pr.IDENTITY_CANDIDATES_PATH)
     candidates = candidate_document.get("candidates", [])
     candidate_evidence = {

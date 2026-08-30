@@ -49,6 +49,25 @@ MANIFEST_PATH = OUTPUT_ROOT / "hng0-manifest.json"
 REVIEW_PATH = ROOT / "data/annotation/hng0-review.json"
 FRONTEND_PATH = ROOT / "site/src/generated/hng0-site.json"
 
+
+def _frozen_alias_document(root: Path) -> dict[str, Any] | None:
+    """Read the pre-SFH2R alias witness for this frozen HNG0 projection."""
+    try:
+        import sfh2r_contract
+        document = sfh2r_contract.pre_repair_alias_document()
+    except (ImportError, OSError, ValueError, TypeError):
+        document = None
+    return document if isinstance(document, Mapping) else None
+
+
+def _alias_source_hash(root: Path) -> str:
+    try:
+        import sfh2r_contract
+        value = sfh2r_contract.pre_repair_alias_file_hash()
+    except (ImportError, OSError, ValueError, TypeError):
+        value = None
+    return value or sha256_file(root / ALIASES_PATH.relative_to(root))
+
 REVIEW_STATUSES = {"candidate", "accepted", "rejected", "uncertain", "needs_more_evidence"}
 TIME_PRECISIONS = {"exact", "circa", "before", "after", "between", "reign_period", "unknown"}
 RELATION_TYPES = {
@@ -441,7 +460,7 @@ def build_selection(people: list[Mapping[str, Any]], links: list[Mapping[str, An
 
 def build_hng0_data(root: Path = ROOT) -> dict[str, Any]:
     people_doc = read_json(root / PEOPLE_PATH.relative_to(root))
-    aliases_doc = read_json(root / ALIASES_PATH.relative_to(root))
+    aliases_doc = _frozen_alias_document(root) or read_json(root / ALIASES_PATH.relative_to(root))
     sc1 = read_json(root / SC1_PATH.relative_to(root))
     person_story_doc = read_json(root / PERSON_STORY_PATH.relative_to(root))
     corpus = read_json(root / CORPUS_INDEX_PATH.relative_to(root))
@@ -888,7 +907,7 @@ def write_outputs(root: Path = ROOT) -> dict[str, Any]:
             "data/derived/h0c-location-facts.json", "data/derived/h0c-events.json", "data/derived/h0c-event-participations.json",
             "data/derived/h0c-person-activities.json", "data/annotation/story-temporal-anchors-h0a.json", "data/evidence/wp1-evidence.json",
         ],
-        "source_hashes": {relative: sha256_file(root / relative) for relative in [
+        "source_hashes": {relative: (_alias_source_hash(root) if relative == "data/aliases.json" else sha256_file(root / relative)) for relative in [
             "data/people.json", "data/aliases.json", "data/derived/person-story-links.json", "data/shishuo-corpus-index.json",
             "data/derived/sc1-site.json", "data/derived/person-relation-candidates-r3.json", "data/derived/h0b1-social-backbone.json",
             "data/derived/h0c-historical-facts.json", "data/derived/h0c-offices.json", "data/derived/h0c-locations.json",

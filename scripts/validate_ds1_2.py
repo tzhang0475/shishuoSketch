@@ -31,6 +31,10 @@ from ds1_2_common import (  # noqa: E402
     validate_final_result,
 )
 from ds1_common import read_json, sha256_file  # noqa: E402
+try:
+    from scripts import sfh2r_contract  # noqa: E402
+except ImportError:  # direct execution from scripts/
+    import sfh2r_contract  # type: ignore  # noqa: E402
 
 
 FORBIDDEN_PATH_PARTS = (
@@ -165,7 +169,15 @@ def _validate_trace(trace: Mapping[str, Any], registry: Mapping[str, Any]) -> li
     ):
         errors.append("a successful DS1.2 run must contain a non-empty local evidence search")
     recorded_hashes = trace.get("source_hashes")
-    if not isinstance(recorded_hashes, Mapping) or recorded_hashes != source_hashes(ROOT):
+    current_source_hashes = source_hashes(ROOT)
+    source_hashes_ok = (
+        isinstance(recorded_hashes, Mapping)
+        and (
+            dict(recorded_hashes) == current_source_hashes
+            or sfh2r_contract.frozen_hashes_are_current_or_authorized(recorded_hashes, current_source_hashes)
+        )
+    )
+    if not source_hashes_ok:
         errors.append("trace source hashes do not match current registered inputs")
     return errors
 
@@ -243,7 +255,15 @@ def validate(root: Path = ROOT) -> list[str]:
         manifest = read_json(root, MANIFEST_PATH)
         if manifest.get("canonical_write_back") is not False:
             errors.append("manifest must set canonical_write_back=false")
-        if manifest.get("source_hashes") != source_hashes(root):
+        recorded_manifest_hashes = manifest.get("source_hashes")
+        current_manifest_hashes = source_hashes(root)
+        if not (
+            isinstance(recorded_manifest_hashes, Mapping)
+            and (
+                dict(recorded_manifest_hashes) == current_manifest_hashes
+                or sfh2r_contract.frozen_hashes_are_current_or_authorized(recorded_manifest_hashes, current_manifest_hashes)
+            )
+        ):
             errors.append("manifest source hashes do not match current registered inputs")
         expected_protected = manifest.get("protected_hashes", {})
         if expected_protected != protected_hashes(root):

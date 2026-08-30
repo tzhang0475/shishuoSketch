@@ -19,6 +19,7 @@ if str(ROOT / "scripts") not in sys.path:
 import build_hng0_2 as hng02  # noqa: E402
 import hdb2_full_frontier_common as common  # noqa: E402
 import hdb2_occurrence_common as occ  # noqa: E402
+import manual_semantic_authority as sfh2r_authority  # noqa: E402
 
 
 ENDPOINT_COMPLETE = {"both_existing_resolved", "existing_plus_candidate", "both_candidate_resolved"}
@@ -164,6 +165,9 @@ def _profile_form_is_source_supported(
     existing Person, require the original HDB1 row to be the same resolved
     Person, or require an explicitly identity-bearing HDB2/contextual path.
     """
+    manual_rejection = sfh2r_authority.manual_profile_claim_rejection(decision, source_row)
+    if manual_rejection:
+        return False
     status = str(decision.get("status") or "")
     target = str(decision.get("resolved_person_id") or decision.get("candidate_person_id") or "")
     if not target or status not in PROFILE_FORM_STATUSES:
@@ -291,6 +295,9 @@ def profile_form_support_reasons(
     as an unexplained missing alias.
     """
     reasons: list[str] = []
+    manual_rejection = sfh2r_authority.manual_profile_claim_rejection(decision, source_row)
+    if manual_rejection:
+        reasons.append(manual_rejection)
     status = str(decision.get("status") or "")
     target = str(decision.get("resolved_person_id") or decision.get("candidate_person_id") or "")
     surface = str(decision.get("surface") or "")

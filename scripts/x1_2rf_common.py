@@ -19,6 +19,7 @@ try:
     from scripts.x1_2r_common import (
         ROOT,
         canonical_hash,
+        frozen_projection_input_hash,
         load_people_by_id,
         read,
         selected_ids,
@@ -30,6 +31,7 @@ except ModuleNotFoundError:  # direct execution from scripts/
     from x1_2r_common import (
         ROOT,
         canonical_hash,
+        frozen_projection_input_hash,
         load_people_by_id,
         read,
         selected_ids,
@@ -185,7 +187,10 @@ def input_hashes() -> dict[str, str]:
         "x1_2a_facts": X1_2A_FACTS_PATH,
         "people": PEOPLE_PATH,
     }
-    return {name: sha256_file(path) for name, path in sorted(paths.items())}
+    return {
+        name: (frozen_projection_input_hash(path) if name == "s1_registration" else sha256_file(path))
+        for name, path in sorted(paths.items())
+    }
 
 
 def protected_hashes() -> dict[str, str]:

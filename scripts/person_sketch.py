@@ -20,6 +20,11 @@ try:
 except ImportError:  # direct execution
     from person_resolution import load_effective_mentions
 
+try:
+    from . import sfh2r_contract
+except ImportError:  # direct execution
+    import sfh2r_contract
+
 
 PERSON_SKETCH_PATH = Path("data/annotation/person-sketches.json")
 ALIASES_PATH = Path("data/aliases.json")
@@ -272,7 +277,11 @@ def build_person_sketches(
         for item in source.get("records", [])
         if isinstance(item, Mapping) and isinstance(item.get("person_id"), str)
     }
-    aliases = read_json(root, ALIASES_PATH).get("aliases", [])
+    # SC1 is a frozen publication projection.  Keep its deterministic reader
+    # bundle on the pre-repair alias witness; SFH2R's repaired aliases remain
+    # active in HDB2/SFH2R and are not silently back-projected into the UI.
+    alias_document = sfh2r_contract.pre_repair_alias_document()
+    aliases = (alias_document or read_json(root, ALIASES_PATH)).get("aliases", [])
     aliases_by_id = {
         str(item["alias_id"]): item
         for item in aliases

@@ -63,6 +63,26 @@ TOP_LEVEL_STATES = {"accepted", "unresolved", "rejected"}
 # hash.
 FROZEN_X1_2P_SC1_SHA256 = "3b1a1fd0bfbd8bc7c4c4d53bcde4060943d2e8c49da77db87a5bee5cd34a2d2a"
 FROZEN_X1_2P_QUALIFICATION_SHA256 = "97ea5e34592c40413552508d025ccd4801972ee13e146e99b4e6a2f3ec95929f"
+# X1.2P is a frozen punctuation review.  Keep its protected-input bundle
+# stable even when a later SFH2R repair intentionally reprojects an active
+# reader artifact.  The validator still checks that any physical transition
+# is the exact, separately recorded one.
+FROZEN_X1_2P_PROTECTED_HASHES = {
+    "people": "e1f917900035adaaed2c63d34618f357b1e58ff1cf082fce6ba090d1a74695c5",
+    "person_story_links": "18dba45a39c5e4197e24d5837c0b24dfd41e0eee02d7abd75cec2381496dc5e9",
+    "effective_mentions": "b4f65b46c8a49002c04e0f25051de694fb9ce078a4283988f9245991abb2eb37",
+    "sc1_site": FROZEN_X1_2P_SC1_SHA256,
+    "h0c_facts": "3aaed5927053e826331b3ab23c412add253b17fa9ac023e432afda5a11caac0c",
+    "h0c_participant_freeze": "2a02fa0e06b4e5e1d991d00a5aa1b7f3fcf3195ed083ef9441e3ba2bdb36f51b",
+    "h0c_graph": "8409bfdf3376452f0472573bf27033770d86f8db567c0cf446fff886a7dcd4b5",
+    "h0c_protection": "755b9ccc9d9e3ce94509d17a3c7d518732181fbd820e67f15a877bd93896ddb3",
+    "hg0_graph": "d7e4a592d2c0fe5307168707ab1f5f6688e1c88ea0a89f6ca0a055b9bf4a0198",
+    "hg0_ontology": "770ca03c197b0792f8c9e46a86c5c84a8a9039de13c701a51f39eff480ca7ae7",
+    "hg0_protection": "251ebf5a61c8f5de95536d2bb6d2358201c09c73c1e7ef26f11c9c768373d6c7",
+    "ml0_dataset": "c586efbb04a54771d1d180493e95f287bb1f6e1c03df472cb04fbcac48c42132",
+    "ml0_metrics": "4560958c5a0e028d9adcaf1b1f2a0fb3aaaf3a3edf08d2d924985ed65015fde8",
+    "ml0_protection": "92fd4eaf7935303b00815ce6130905422d9c82bd9335e989f2be734a68e7983d",
+}
 CHANNELS = ("graph_guided", "coverage_guided", "stratified_random", "counter_model")
 
 
@@ -127,9 +147,8 @@ def source_hashes() -> dict[str, Any]:
         # frozen X1.2P review result. Keep X1.2P's recorded input hash stable.
         "punctuation_qualification": FROZEN_X1_2P_QUALIFICATION_SHA256,
         "corpus_index": sha256_file(CORPUS_PATH),
-        "protected": protected_hashes(),
+        "protected": dict(FROZEN_X1_2P_PROTECTED_HASHES),
     }
-    hashes["protected"]["sc1_site"] = FROZEN_X1_2P_SC1_SHA256
     return hashes
 
 
@@ -237,8 +256,16 @@ def source_bundle_matches(
         return False
     for key in expected:
         if key == "protected":
-            if not protected_hashes_match(expected.get(key, {}), actual.get(key, {})):
-                return False
+            expected_protected = expected.get(key, {})
+            actual_protected = actual.get(key, {})
+            if not protected_hashes_match(expected_protected, actual_protected):
+                # The summary validator intentionally passes its current
+                # bundle as ``expected`` and the frozen summary as
+                # ``actual``.  The transition check is exact, so accepting
+                # the reverse orientation does not turn this into a loose
+                # hash comparison.
+                if not protected_hashes_match(actual_protected, expected_protected):
+                    return False
         elif expected.get(key) != actual.get(key):
             return False
     return True

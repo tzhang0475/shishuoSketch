@@ -32,10 +32,29 @@ def load_authority() -> dict[str, Any]:
     return json.loads(AUTHORITY_PATH.read_text(encoding="utf-8"))
 
 
+def authority_reference() -> str:
+    """Return the stable repository reference for the reviewed authority."""
+    return str(AUTHORITY_PATH.relative_to(ROOT))
+
+
+def alias_repairs() -> list[dict[str, Any]]:
+    """Return reviewed alias repairs in file order.
+
+    This accessor deliberately returns the authority records verbatim.  The
+    records are reviewed semantic decisions; callers may apply them, but may
+    not infer additional repairs from their surface strings.
+    """
+    return [
+        dict(row)
+        for row in load_authority().get("alias_repairs", []) or []
+        if isinstance(row, Mapping)
+    ]
+
+
 def blocked_global_forms() -> set[tuple[str, str]]:
     """Forms explicitly barred from global exact identity retrieval."""
     blocked: set[tuple[str, str]] = set()
-    for row in load_authority().get("alias_repairs", []) or []:
+    for row in alias_repairs():
         if not isinstance(row, Mapping):
             continue
         action = _text(row.get("action"))
@@ -50,7 +69,7 @@ def blocked_global_forms() -> set[tuple[str, str]]:
 def replacement_exact_forms() -> list[dict[str, str]]:
     """Explicit reviewed replacement forms; currently used for 子玄→郭象."""
     rows: list[dict[str, str]] = []
-    for row in load_authority().get("alias_repairs", []) or []:
+    for row in alias_repairs():
         if not isinstance(row, Mapping) or _text(row.get("action")) != "replace_corrupt_alias_surface":
             continue
         surface = _text(row.get("corrected_surface"))
@@ -71,6 +90,229 @@ def occurrence_repairs() -> dict[str, dict[str, Any]]:
         for row in load_authority().get("occurrence_repairs", []) or []
         if isinstance(row, Mapping) and _text(row.get("observation_id"))
     }
+
+
+def _source_id_for_evidence(evidence_id: str, aliases: Mapping[str, Any]) -> str:
+    """Resolve an authority evidence id to its registered source id.
+
+    Alias evidence is the only source of this mapping here.  No semantic
+    interpretation is performed: this is an exact provenance lookup used to
+    apply a reviewed rejection to the same source witness.
+    """
+    for alias in aliases.get("aliases", []) or []:
+        if not isinstance(alias, Mapping):
+            continue
+        for evidence in alias.get("source_evidence", []) or []:
+            if isinstance(evidence, Mapping) and _text(evidence.get("evidence_id")) == evidence_id:
+                return _text(evidence.get("source_id"))
+        repair_trace = alias.get("sfh2r_manual_repair")
+        if isinstance(repair_trace, Mapping):
+            for evidence in repair_trace.get("removed_evidence_provenance", []) or []:
+                if isinstance(evidence, Mapping) and _text(evidence.get("evidence_id")) == evidence_id:
+                    return _text(evidence.get("source_id"))
+    return ""
+
+
+def _claim_source_ids(source_row: Mapping[str, Any] | None, decision: Mapping[str, Any]) -> set[str]:
+    values: set[str] = set()
+    for item in (source_row or {}, decision):
+        for key in ("story_id", "source_id", "source_ref", "evidence_ref"):
+            value = _text(item.get(key))
+            if value:
+                values.add(value)
+    return values
+
+
+def _claim_surfaces(decision: Mapping[str, Any], source_row: Mapping[str, Any] | None) -> set[str]:
+    values = {_text(decision.get("surface")), _text(decision.get("exact_span"))}
+    if source_row:
+        values.update({_text(source_row.get("surface")), _text(source_row.get("exact_span"))})
+    return {normalize_form(value) for value in values if value}
+
+
+def manual_profile_claim_rejection(
+    decision: Mapping[str, Any],
+    source_row: Mapping[str, Any] | None = None,
+    *,
+    aliases_document: Mapping[str, Any] | None = None,
+) -> str | None:
+    """Return a reviewed rejection reason for one profile identity claim.
+
+    This is an authority application gate, not a semantic classifier.  It
+    only matches the exact person/source/evidence coordinates named by the
+    reviewed alias records.  In particular, a catalogue match cannot restore
+    a form whose cited witness was explicitly assigned to another bearer.
+    """
+    target = _text(decision.get("resolved_person_id") or decision.get("candidate_person_id"))
+    if not target:
+        return None
+    if aliases_document is None:
+        aliases_path = ROOT / "data/aliases.json"
+        aliases = json.loads(aliases_path.read_text(encoding="utf-8")) if aliases_path.is_file() else {}
+    else:
+        aliases = aliases_document
+    claim_sources = _claim_source_ids(source_row, decision)
+    claim_surfaces = _claim_surfaces(decision, source_row)
+    claim_story = _text(decision.get("story_id") or (source_row or {}).get("story_id"))
+    claim_surface = normalize_form(decision.get("surface"))
+    for repair in alias_repairs():
+        if _text(repair.get("current_person_id")) != target:
+            continue
+        action = _text(repair.get("action"))
+        alias_surface = normalize_form(repair.get("surface"))
+        if action == "replace_corrupt_alias_surface" and claim_surface == alias_surface:
+            return f"manual_alias_surface_replaced:{repair.get('alias_id')}"
+        removed_ids = {
+            _text(value)
+            for value in repair.get("remove_evidence_ids", []) or []
+            if _text(value)
+        }
+        if repair.get("remove_all_current_surface_evidence") and claim_surface == alias_surface:
+            return f"manual_alias_surface_removed:{repair.get('alias_id')}"
+        if not removed_ids:
+            continue
+        removed_source_ids = {
+            source_id
+            for evidence_id in removed_ids
+            if (source_id := _source_id_for_evidence(evidence_id, aliases))
+        }
+        if not (removed_source_ids & claim_sources or any(source_id and source_id in claim_story for source_id in removed_source_ids)):
+            continue
+        # Keep both fields from every reviewed other-referent record.  The
+        # authority deliberately uses ``surface`` for the shared form and
+        # ``display_name`` for the bearer (for example 景真 / 桓亮).  Using
+        # ``surface or display_name`` here loses the bearer and lets an
+        # occurrence-level full-name claim bypass the reviewed rejection.
+        other_surfaces = {normalize_form(repair.get("surface"))}
+        for item in repair.get("other_referents", []) or []:
+            if not isinstance(item, Mapping):
+                continue
+            for raw in (item.get("surface"), item.get("display_name")):
+                normalized = normalize_form(raw)
+                if normalized:
+                    other_surfaces.add(normalized)
+        other_surfaces.discard("")
+        # The exact authority records identify both the rejected witness and,
+        # where needed, its reviewed other bearer.  Matching the claim's
+        # cited span against those reviewed forms prevents a longer direct
+        # projection such as 桓亮/桓景真 from bypassing the 景真 repair.
+        if claim_surface in other_surfaces or any(
+            surface and surface in claim_surfaces
+            for surface in other_surfaces
+        ) or any(
+            surface and any(surface in candidate for candidate in claim_surfaces)
+            for surface in other_surfaces
+        ):
+            return f"manual_removed_evidence_bearer_conflict:{repair.get('alias_id')}"
+        if claim_surface == alias_surface:
+            return f"manual_removed_evidence:{repair.get('alias_id')}"
+    return None
+
+
+def apply_alias_repairs(
+    aliases_document: Mapping[str, Any],
+) -> tuple[dict[str, Any], list[dict[str, Any]]]:
+    """Mechanically materialize the reviewed alias repairs.
+
+    The function validates the expected alias id/surface/person coordinates,
+    filters only explicitly removed evidence, and preserves the alias id and
+    all non-target fields.  It never decides whether an unlisted row should
+    be changed.
+    """
+    document = json.loads(json.dumps(aliases_document, ensure_ascii=False))
+    rows = document.get("aliases") if isinstance(document.get("aliases"), list) else []
+    by_id = {
+        _text(row.get("alias_id")): row
+        for row in rows
+        if isinstance(row, Mapping) and _text(row.get("alias_id"))
+    }
+    evidence_lookup: dict[str, dict[str, Any]] = {}
+    for row in rows:
+        if not isinstance(row, Mapping):
+            continue
+        for evidence in row.get("source_evidence", []) or []:
+            if isinstance(evidence, Mapping) and _text(evidence.get("evidence_id")):
+                evidence_lookup[_text(evidence.get("evidence_id"))] = dict(evidence)
+    audit: list[dict[str, Any]] = []
+    for repair in alias_repairs():
+        alias_id = _text(repair.get("alias_id"))
+        current = by_id.get(alias_id)
+        if current is None:
+            raise RuntimeError(f"manual_alias_missing:{alias_id}")
+        expected_surface = _text(repair.get("surface"))
+        expected_person = _text(repair.get("current_person_id"))
+        if _text(current.get("surface")) != expected_surface:
+            raise RuntimeError(f"manual_alias_surface_drift:{alias_id}")
+        if expected_person not in [str(value) for value in current.get("person_ids", []) or []]:
+            raise RuntimeError(f"manual_alias_person_drift:{alias_id}")
+        before = json.loads(json.dumps(current, ensure_ascii=False))
+        remove_ids = {
+            _text(value)
+            for value in repair.get("remove_evidence_ids", []) or []
+            if _text(value)
+        }
+        keep_ids = {
+            _text(value)
+            for value in repair.get("keep_evidence_ids", []) or []
+            if _text(value)
+        }
+        old_evidence = [dict(value) for value in current.get("source_evidence", []) or [] if isinstance(value, Mapping)]
+        if keep_ids:
+            new_evidence = [value for value in old_evidence if _text(value.get("evidence_id")) in keep_ids]
+        elif repair.get("remove_all_current_surface_evidence"):
+            new_evidence = []
+        else:
+            new_evidence = [value for value in old_evidence if _text(value.get("evidence_id")) not in remove_ids]
+        replacement_ids = [
+            _text(value)
+            for value in repair.get("replacement_evidence_ids", []) or []
+            if _text(value)
+        ]
+        if replacement_ids:
+            replacements = []
+            for evidence_id in replacement_ids:
+                evidence = evidence_lookup.get(evidence_id)
+                if evidence is None:
+                    raise RuntimeError(f"manual_replacement_evidence_missing:{evidence_id}")
+                replacement = dict(evidence)
+                replacement["surface"] = repair.get("corrected_surface") or replacement.get("surface")
+                replacements.append(replacement)
+            new_evidence = replacements
+        current["source_evidence"] = sorted(new_evidence, key=lambda row: _text(row.get("evidence_id")))
+        if repair.get("corrected_surface"):
+            current["surface"] = repair.get("corrected_surface")
+        if repair.get("corrected_alias_type"):
+            current["alias_type"] = repair.get("corrected_alias_type")
+        for key in ("corrected_resolution_mode", "corrected_status"):
+            if repair.get(key):
+                current[key.removeprefix("corrected_")] = repair.get(key)
+        current["observed_count"] = int(repair.get("corrected_observed_support_count") or len(current["source_evidence"]))
+        current["resolved_person_ids"] = list(current.get("resolved_person_ids") or current.get("person_ids") or [])
+        current["sfh2r_manual_repair"] = {
+            "authority": authority_reference(),
+            "alias_id": alias_id,
+            "action": repair.get("action"),
+            "manual_verdict": repair.get("manual_verdict"),
+            "removed_evidence_ids": sorted(remove_ids),
+            "retained_evidence_ids": sorted(_text(row.get("evidence_id")) for row in current["source_evidence"]),
+            "removed_evidence_provenance": [
+                value
+                for value in old_evidence
+                if _text(value.get("evidence_id")) in remove_ids
+            ],
+        }
+        audit.append({
+            "alias_id": alias_id,
+            "surface_before": before.get("surface"),
+            "surface_after": current.get("surface"),
+            "person_ids": current.get("person_ids", []),
+            "before": before,
+            "after": json.loads(json.dumps(current, ensure_ascii=False)),
+            "manual_authority": repair,
+            "removed_evidence_ids": sorted(remove_ids),
+            "retained_evidence_ids": sorted(_text(row.get("evidence_id")) for row in current["source_evidence"]),
+        })
+    return document, audit
 
 
 def _manual_candidate_id(display_name: str) -> str:

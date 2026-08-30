@@ -142,7 +142,10 @@ def build_selection() -> dict[str, Any]:
     corpus = corpus_index()
     production = production_story_ids()
     prior = previous_story_snapshot()
-    _, known_forms = wave_a._people_and_forms()
+    # Wave B selection is frozen against the pre-SFH2R Wave A input.  The
+    # active repaired alias registry is consumed downstream, never used to
+    # silently change an earlier Story selection.
+    _, known_forms = wave_a._people_and_forms(pre_repair_aliases=True)
     excluded = production | set(prior["story_ids"])
     features = {
         sid: wave_a.story_features(row, known_forms, list(corpus.values()), [])

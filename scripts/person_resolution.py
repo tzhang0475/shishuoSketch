@@ -62,6 +62,25 @@ PUBLISHED_STATES = {"production_ready", "preview_ready"}
 HUAN_YI_CANDIDATE_ID = "candidate-identity-er1-1-2-193fc44098a05235f63fc215"
 
 
+def _frozen_alias_document(root: Path) -> dict[str, Any] | None:
+    """Use the preserved ER1 input witness for this frozen legacy overlay.
+
+    SFH2R's reviewed alias repair is active for the new HDB2/SFH2R
+    projections.  ER1's effective mention artifact is an older frozen
+    projection and must remain reproducible from the alias bytes it was
+    originally built with; this witness does not feed active retrieval.
+    """
+    try:
+        try:
+            from scripts import sfh2r_contract
+        except ImportError:  # direct execution from scripts/
+            import sfh2r_contract
+        document = sfh2r_contract.pre_repair_alias_document()
+    except (ImportError, OSError, ValueError, TypeError):
+        document = None
+    return dict(document) if isinstance(document, Mapping) else None
+
+
 def read_json(root: Path, relative: Path) -> Any:
     return json.loads((root / relative).read_text(encoding="utf-8"))
 
@@ -2021,7 +2040,8 @@ def _span_audit_document(
 
 def build(root: Path) -> dict[str, Any]:
     people = read_json(root, PEOPLE_PATH).get("people", [])
-    aliases = read_json(root, ALIASES_PATH).get("aliases", [])
+    aliases_document = _frozen_alias_document(root) or read_json(root, ALIASES_PATH)
+    aliases = aliases_document.get("aliases", [])
     mentions = read_json(root, MENTIONS_PATH).get("mentions", [])
     candidate_document = read_json(root, IDENTITY_CANDIDATES_PATH)
     candidates = candidate_document.get("candidates", [])

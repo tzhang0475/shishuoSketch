@@ -135,14 +135,41 @@ def protected_hashes_match(expected: Mapping[str, str], actual: Mapping[str, str
     if set(expected) != set(actual):
         return False
     mismatches = {key for key in expected if expected[key] != actual[key]}
-    if mismatches != {"sc1_site"}:
-        return False
+
+    # The D1.1 display migration remains a valid physical projection bridge.
+    if "sc1_site" in mismatches:
+        try:
+            try:
+                from scripts.validate_d1_1 import validate as validate_d1_1
+            except ImportError:  # direct execution from scripts/
+                from validate_d1_1 import validate as validate_d1_1
+            if validate_d1_1(ROOT):
+                return False
+        except (ImportError, OSError, ValueError, TypeError):
+            return False
+        mismatches.remove("sc1_site")
+
+    # SFH2R's alias repair (and its deterministic ER1 reprojection) is an
+    # explicit semantic transition.  Convert the logical names used by X1's
+    # manifest back to paths before asking the fail-closed transition helper.
     try:
         try:
-            from scripts.validate_d1_1 import validate as validate_d1_1
+            from scripts import sfh2r_contract
         except ImportError:  # direct execution from scripts/
-            from validate_d1_1 import validate as validate_d1_1
-        return not validate_d1_1(ROOT)
+            import sfh2r_contract
+        expected_paths = {
+            str(PROTECTED_INPUTS[key]): expected[key]
+            for key in expected
+            if key in PROTECTED_INPUTS and key != "sc1_site"
+        }
+        actual_paths = {
+            str(PROTECTED_INPUTS[key]): actual[key]
+            for key in actual
+            if key in PROTECTED_INPUTS and key != "sc1_site"
+        }
+        return not mismatches or sfh2r_contract.frozen_hashes_are_current_or_authorized(
+            expected_paths, actual_paths
+        )
     except (ImportError, OSError, ValueError, TypeError):
         return False
 

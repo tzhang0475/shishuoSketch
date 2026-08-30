@@ -30,6 +30,7 @@ if str(SCRIPTS) not in sys.path:
 
 import hda1_identity_audit as hda1  # noqa: E402
 import hng2_schema_controller as controller  # noqa: E402
+import sfh2r_contract  # noqa: E402
 from smoke_deepseek import call_deepseek  # noqa: E402
 
 
@@ -123,6 +124,23 @@ def hda1_inputs() -> dict[str, str]:
         "hdb2_f_identity_claim_integrity": ROOT / "data/derived/hdb2-f-identity-claim-integrity-audit.json",
     }
     return {_relative(path): file_hash(path) for path in paths.values() if path.is_file()}
+
+
+def _frozen_selection_inputs() -> dict[str, str]:
+    """Return the old HDA2 snapshot only across the explicit SFH2R bridge.
+
+    HDA2 is a completed, frozen remediation experiment.  Its selection and
+    packet provenance refer to the pre-SFH2R derived profile projection.  The
+    active projection is now repaired, so a reproducibility rebuild must use
+    the recorded historical input snapshot while still rejecting any drift
+    not covered by the SFH2R transition manifest.
+    """
+    current = hda1_inputs()
+    selection = read_json(SELECTION_PATH, {}) or {}
+    frozen = selection.get("hda1_input_hashes") if isinstance(selection, Mapping) else None
+    if isinstance(frozen, Mapping) and sfh2r_contract.frozen_hashes_are_current_or_authorized(frozen, current):
+        return {str(key): str(value) for key, value in frozen.items()}
+    return current
 
 
 def _load_inputs() -> tuple[list[dict[str, Any]], list[dict[str, Any]], dict[str, dict[str, Any]], dict[str, Any]]:
@@ -245,7 +263,7 @@ def build_selection() -> dict[str, Any]:
         "selected_claim_count": len(selected),
         "available_flagged_claim_count": len(flagged),
         "records": selected,
-        "hda1_input_hashes": hda1_inputs(),
+        "hda1_input_hashes": _frozen_selection_inputs(),
         "selection_method": "deterministic risk-ranked bounded remediation; no HDA2 model output used",
         "max_claims": MAX_REMEDIATION_CLAIMS,
         "frozen_before_live": True,
@@ -787,7 +805,16 @@ def protected_hashes() -> dict[str, str]:
         "data/derived/hdb2-f-identity-summary.json",
         "data/derived/hdb2-f-identity-claim-integrity-audit.json",
     ]
-    return {path: file_hash(ROOT / path) for path in paths if (ROOT / path).is_file()}
+    current = {path: file_hash(ROOT / path) for path in paths if (ROOT / path).is_file()}
+    # Preserve the completed HDA2 protection snapshot across the explicitly
+    # authorized SFH2R derived-profile transition.  Canonical files remain
+    # hashed from the current checkout; only the historical derived profile
+    # value is allowed to use the recorded pre-repair hash.
+    manifest = read_json(OUT / "manifest.json", {}) or {}
+    frozen = manifest.get("protected_hashes_before") if isinstance(manifest, Mapping) else None
+    if isinstance(frozen, Mapping) and sfh2r_contract.frozen_hashes_are_current_or_authorized(frozen, current):
+        return {str(key): str(value) for key, value in frozen.items()}
+    return current
 
 
 def prepare() -> dict[str, Any]:

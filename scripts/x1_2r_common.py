@@ -97,6 +97,27 @@ def sha256_file(path: Path | str) -> str:
     return sha256_path(ROOT / path)
 
 
+def frozen_projection_input_hash(path: Path | str) -> str:
+    """Hash the historical source-registration witness for frozen X1.2R.
+
+    X1.2R predates SFH2R and its bundle metadata is intentionally frozen.
+    The active S1 registration records the repaired alias input, but the
+    X1.2R projection itself did not consume that semantic repair.  Preserve
+    the old registration hash in this one historical metadata field while
+    leaving the active registration truthful.
+    """
+    candidate = Path(path)
+    if candidate == S1_REGISTRATION_PATH or candidate.as_posix() == S1_REGISTRATION_PATH.as_posix():
+        try:
+            from scripts import sfh2r_contract
+        except ImportError:  # direct execution from scripts/
+            import sfh2r_contract  # type: ignore
+        value = sfh2r_contract.pre_repair_registration_file_hash()
+        if value:
+            return value
+    return sha256_file(candidate)
+
+
 def canonical_hash(value: Any) -> str:
     payload = json.dumps(value, ensure_ascii=False, sort_keys=True, separators=(",", ":")).encode("utf-8")
     return hashlib.sha256(payload).hexdigest()

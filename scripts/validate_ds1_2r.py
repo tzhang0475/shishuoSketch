@@ -37,6 +37,10 @@ from ds1_2r_common import (  # noqa: E402
     validate_final_result_r,
 )
 from ds1_common import read_json, sha256_file  # noqa: E402
+try:
+    from scripts import sfh2r_contract  # noqa: E402
+except ImportError:  # direct execution from scripts/
+    import sfh2r_contract  # type: ignore  # noqa: E402
 
 
 FORBIDDEN_PATH_PARTS = ("data/generated", "site/public/generated", "data/annotation", "irr0", "model-output")
@@ -72,7 +76,15 @@ def _validate_trace(trace: Mapping[str, Any], registry: Mapping[str, Any]) -> li
         errors.append("trace source boundary is not the fixed registered corpus")
     if any(_forbidden(str(path)) for path in paths):
         errors.append("forbidden generated/model path appears in trace source boundary")
-    if trace.get("source_hashes") != source_hashes(ROOT):
+    recorded_trace_hashes = trace.get("source_hashes")
+    current_trace_hashes = source_hashes(ROOT)
+    if not (
+        isinstance(recorded_trace_hashes, Mapping)
+        and (
+            dict(recorded_trace_hashes) == current_trace_hashes
+            or sfh2r_contract.frozen_hashes_are_current_or_authorized(recorded_trace_hashes, current_trace_hashes)
+        )
+    ):
         errors.append("trace source hashes do not match current registered inputs")
 
     steps = trace.get("steps", [])
@@ -219,7 +231,15 @@ def validate(root: Path = ROOT) -> list[str]:
     manifest = read_json(root, MANIFEST_PATH)
     if manifest.get("canonical_write_back") is not False:
         errors.append("manifest must set canonical_write_back=false")
-    if manifest.get("source_hashes") != source_hashes(root):
+    recorded_manifest_hashes = manifest.get("source_hashes")
+    current_manifest_hashes = source_hashes(root)
+    if not (
+        isinstance(recorded_manifest_hashes, Mapping)
+        and (
+            dict(recorded_manifest_hashes) == current_manifest_hashes
+            or sfh2r_contract.frozen_hashes_are_current_or_authorized(recorded_manifest_hashes, current_manifest_hashes)
+        )
+    ):
         errors.append("manifest source hashes do not match current sources")
     if manifest.get("protected_hashes") != protected_hashes(root):
         errors.append("protected canonical/Gold/DS1-v0 hashes changed")

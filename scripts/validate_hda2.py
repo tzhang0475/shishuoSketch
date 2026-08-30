@@ -13,6 +13,7 @@ if str(ROOT / "scripts") not in sys.path:
     sys.path.insert(0, str(ROOT / "scripts"))
 
 import hda2_identity_remediation as hda2  # noqa: E402
+import sfh2r_contract  # noqa: E402
 
 
 def validate(run_id: str | None = None) -> dict[str, object]:
@@ -32,7 +33,12 @@ def validate(run_id: str | None = None) -> dict[str, object]:
             errors.append("selection_count_mismatch")
         if len({row.get("claim_id") for row in selection.get("records", []) or []}) != len(selection.get("records", []) or []):
             errors.append("selection_duplicate_claim")
-        if selection.get("hda1_input_hashes") != hda2.hda1_inputs():
+        if (
+            selection.get("hda1_input_hashes") != hda2.hda1_inputs()
+            and not sfh2r_contract.frozen_hashes_are_current_or_authorized(
+                selection.get("hda1_input_hashes"), hda2.hda1_inputs()
+            )
+        ):
             errors.append("hda1_input_snapshot_drift")
     packets = hda2.read_json(hda2.OUT / "remediation-packets.json", {}) or {}
     if packets.get("packet_count") != len(packets.get("packets", []) or []):

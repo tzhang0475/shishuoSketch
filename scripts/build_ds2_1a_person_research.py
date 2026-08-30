@@ -634,6 +634,10 @@ def load_jinshu_source(root: Path, record: Mapping[str, Any]) -> str:
 
 def resolved_aliases(root: Path, person_ids: set[str]) -> dict[str, list[dict[str, Any]]]:
     aliases_by_person: dict[str, list[dict[str, Any]]] = defaultdict(list)
+    # DS2.1A is an active research surface.  It must see the repaired alias
+    # registry so invalid shared/lexical evidence cannot re-enter its search
+    # and biography projections.  Older frozen readers keep their own
+    # explicit witness where required; this active index does not.
     aliases = read_json(root, ALIASES_PATH).get("aliases", [])
     for alias in aliases:
         if not isinstance(alias, Mapping):

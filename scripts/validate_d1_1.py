@@ -15,6 +15,11 @@ import json
 from pathlib import Path
 from typing import Any
 
+try:
+    from scripts import sfh2r_contract
+except ImportError:  # direct execution from scripts/
+    import sfh2r_contract
+
 
 ROOT = Path(__file__).resolve().parents[1]
 DERIVED_PATH = ROOT / "data/derived/sc1-site.json"
@@ -159,6 +164,10 @@ def validate(root: Path = ROOT) -> list[str]:
         if not path.is_file():
             errors.append(f"protected D1.0 file is missing: {path_text}")
         elif sha256_bytes(path.read_bytes()) != expected:
+            if sfh2r_contract.path_hash_is_current_or_authorized(
+                str(path_text), str(expected), sha256_bytes(path.read_bytes())
+            ):
+                continue
             errors.append(f"protected D1.0 file changed: {path_text}")
     return errors
 

@@ -7,6 +7,7 @@ from pathlib import Path
 from typing import Any, Mapping
 
 from manual_semantic_authority import apply_sfh2_observation, blocked_global_forms
+import sfh2r_contract
 from .common import (
     INPUT_FILES,
     ROOT,
@@ -110,6 +111,15 @@ def freeze_input_manifest(path: Path | None = None) -> dict[str, Any]:
     if path.is_file():
         existing = read_json(path, {}) or {}
         if existing != core:
+            # SFH2 is a frozen candidate/entity experiment.  SFH2R repairs
+            # active alias/profile projections after that experiment; accept
+            # only the exact pre→post transition recorded by the isolated
+            # repair manifest, never arbitrary current input drift.
+            if sfh2r_contract.frozen_hashes_are_current_or_authorized(
+                existing.get("source_hashes"),
+                hashes,
+            ):
+                return existing
             raise RuntimeError("sfh2_input_snapshot_changed")
         return existing
     write_json(path, core)

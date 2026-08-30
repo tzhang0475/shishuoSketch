@@ -16,6 +16,11 @@ from typing import Any, Mapping
 from jsonschema import Draft202012Validator
 
 try:
+    from scripts import sfh2r_contract
+except ImportError:  # direct execution from scripts/
+    import sfh2r_contract
+
+try:
     from .build_h0c_historical_context import (
         ALIASES_PATH,
         ANCHORS_PATH,
@@ -188,7 +193,22 @@ def validate() -> list[str]:
         if expected_hash and sha256_file(path) != expected_hash:
             if name == "sc1_site" and d1_1_sc1_compatible:
                 continue
-            if sha256_file(path) != projection_updates.get(name):
+            actual_hash = sha256_file(path)
+            relative_path = path.relative_to(ROOT).as_posix() if path.is_absolute() else path.as_posix()
+            if sfh2r_contract.path_hash_is_current_or_authorized(
+                relative_path, str(expected_hash), actual_hash
+            ):
+                continue
+            # H0C already has a reviewed projection migration (the old H0C
+            # image -> its hotfix image).  When SFH2R subsequently rebuilds
+            # the same derived reader projection, validate the exact second
+            # leg of that chain instead of accepting an arbitrary hash.
+            migrated_hash = projection_updates.get(name)
+            if migrated_hash and sfh2r_contract.path_hash_is_current_or_authorized(
+                relative_path, migrated_hash, actual_hash
+            ):
+                continue
+            if actual_hash != projection_updates.get(name):
                 errors.append(f"protected input hash changed: {name}")
     for name, path in H0B0_INPUTS.items():
         expected_hash = protection.get("frozen_h0b0_hashes", {}).get(name)

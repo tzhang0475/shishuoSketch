@@ -29,6 +29,7 @@ if str(SCRIPTS) not in sys.path:
     sys.path.insert(0, str(SCRIPTS))
 
 import hng2_schema_controller as controller  # noqa: E402
+import sfh2r_contract  # noqa: E402
 from smoke_deepseek import call_deepseek  # noqa: E402
 
 
@@ -684,7 +685,18 @@ def protected_hashes() -> dict[str, str]:
         "data/derived/hdb2-f-occurrence-ledger.json", "data/derived/hdb2-f-occurrence-cases.json",
         "data/derived/hdb2-f-person-knowledge.json", "data/derived/hdb2-f-candidate-person-knowledge.json",
     ]
-    return {name: file_hash(ROOT / name) for name in names if (ROOT / name).is_file()}
+    current = {name: file_hash(ROOT / name) for name in names if (ROOT / name).is_file()}
+    # HDA1/HGE1 are completed snapshots.  SFH2R intentionally repairs the
+    # active derived profile projection after those snapshots were frozen.
+    # Preserve their pre-repair protection value only across the explicit
+    # SFH2R transition; canonical and HNG/HDB evidence hashes still come from
+    # the current checkout and remain fail-closed.
+    baseline_path = ROOT / "data/generated/hge1/baseline.json"
+    baseline = read_json(baseline_path, {}) or {}
+    frozen = baseline.get("protected_hashes") if isinstance(baseline, Mapping) else None
+    if isinstance(frozen, Mapping) and sfh2r_contract.frozen_hashes_are_current_or_authorized(frozen, current):
+        return {str(key): str(value) for key, value in frozen.items()}
+    return current
 
 
 def prepare() -> dict[str, Any]:

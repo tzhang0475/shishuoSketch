@@ -32,6 +32,7 @@ import build_hng0_2 as hng02  # noqa: E402
 import historical_context_algorithm as algorithm  # noqa: E402
 import hng2_schema_controller as controller  # noqa: E402
 import hda1_identity_audit as hda1  # noqa: E402
+import sfh2r_contract  # noqa: E402
 from smoke_deepseek import call_deepseek  # noqa: E402
 
 
@@ -184,7 +185,7 @@ def exclusion_snapshot() -> dict[str, Any]:
     return {"story_ids": sorted(ids), "story_count": len(ids), "evidence": evidence, "hash": stable_hash({"story_ids": sorted(ids), "evidence": evidence})}
 
 
-def _people_and_forms() -> tuple[dict[str, dict[str, Any]], dict[str, set[str]]]:
+def _people_and_forms(*, pre_repair_aliases: bool = False) -> tuple[dict[str, dict[str, Any]], dict[str, set[str]]]:
     people_doc = read_json(ROOT / "data/people.json", {}) or {}
     people = {hda1._text(row.get("person_id")): dict(row) for row in people_doc.get("people", []) or [] if hda1._text(row.get("person_id"))}
     forms: dict[str, set[str]] = collections.defaultdict(set)
@@ -193,6 +194,13 @@ def _people_and_forms() -> tuple[dict[str, dict[str, Any]], dict[str, set[str]]]
         if name:
             forms[name].add(pid)
     aliases = read_json(ROOT / "data/aliases.json", {}) or {}
+    if pre_repair_aliases:
+        preserved = sfh2r_contract.pre_repair_alias_document()
+        if preserved is not None:
+            # HGE1 selection is a frozen pre-SFH2R experiment.  Its ranking
+            # input must remain byte-stable while the repaired alias registry
+            # is used by the active HDB2/SFH2R projections.
+            aliases = preserved
     for alias in aliases.get("aliases", []) or []:
         if not isinstance(alias, Mapping):
             continue
@@ -283,7 +291,7 @@ def build_selection() -> dict[str, Any]:
     corpus = corpus_index()
     production = production_story_ids()
     exclusion = exclusion_snapshot()
-    _, known_forms = _people_and_forms()
+    _, known_forms = _people_and_forms(pre_repair_aliases=True)
     eligible_ids = sorted(set(corpus) - production - set(exclusion["story_ids"]))
     all_corpus_rows = list(corpus.values())
     unresolved_doc = read_json(DERIVED / "hdb1-cross-wave-candidate-historical-db.json", {}) or {}

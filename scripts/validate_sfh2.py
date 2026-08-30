@@ -14,6 +14,7 @@ if str(ROOT / "scripts") not in sys.path:
 
 from sfh2.common import INPUT_FILES, OUTPUT_ROOT, file_hash, normalize_form, read_json, text, stable_hash  # noqa: E402
 from sfh2.inputs import freeze_input_manifest, load_documents  # noqa: E402
+import sfh2r_contract  # noqa: E402
 
 
 def _errors() -> list[str]:
@@ -40,10 +41,17 @@ def _errors() -> list[str]:
         return [f"input_manifest_error:{type(exc).__name__}:{exc}"]
     if manifest != expected_manifest:
         errors.append("input_manifest_drift")
-    for path, expected in (manifest.get("source_hashes") or {}).items():
-        actual_path = ROOT / path
-        if not actual_path.is_file() or file_hash(actual_path) != expected:
-            errors.append(f"sfh1_input_hash_drift:{path}")
+    source_hashes = manifest.get("source_hashes") or {}
+    current_hashes = {
+        path: file_hash(ROOT / path)
+        for path in source_hashes
+        if (ROOT / path).is_file()
+    }
+    if not sfh2r_contract.frozen_hashes_are_current_or_authorized(source_hashes, current_hashes):
+        for path, expected in source_hashes.items():
+            actual_path = ROOT / path
+            if not actual_path.is_file() or file_hash(actual_path) != expected:
+                errors.append(f"sfh1_input_hash_drift:{path}")
     documents = load_documents()
     obs = read_json(OUTPUT_ROOT / "candidate-observations.json", {}) or {}
     links = read_json(OUTPUT_ROOT / "existing-person-link-results.json", {}) or {}
@@ -82,7 +90,11 @@ def _errors() -> list[str]:
                 errors.append(f"relation_endpoint_not_consolidated:{row.get('relation_id')}:{key}")
         if text(row.get("subject_endpoint")) and text(row.get("subject_endpoint")) == text(row.get("object_endpoint")) and text(row.get("relation_type")) != "other":
             errors.append(f"surviving_self_relation:{row.get('relation_id')}")
-    suppressed_rows = documents.get("hda2_overlay") or []
+    # This is a frozen SFH2 experiment.  Validate its suppression boundary
+    # against the HDA2 suppression audit captured by that run, not against the
+    # newer SFH2R effective overlay now used by active candidate retrieval.
+    frozen_suppression = read_json(OUTPUT_ROOT / "hda2-suppression-audit.json", {}) or {}
+    suppressed_rows = frozen_suppression.get("suppressed_claims", []) if isinstance(frozen_suppression, Mapping) else []
     suppressed = {(normalize_form(row.get("target_surface")), text(row.get("person_id"))) for row in (suppressed_rows if isinstance(suppressed_rows, list) else suppressed_rows.get("records", []) or []) if isinstance(row, Mapping) and text(row.get("action")) == "suppress_claim"}
     for row in (read_json(OUTPUT_ROOT / "existing-person-link-candidates.json", {}) or {}).get("records", []) or []:
         surface = normalize_form(row.get("surface"))
