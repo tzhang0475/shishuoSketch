@@ -56,8 +56,8 @@ def test_bare_courtesy_names_are_not_global_exact_keys() -> None:
 def test_full_personal_names_remain_exact() -> None:
     from identity_resolution_policy import alias_retrieval_scope
 
-    assert alias_retrieval_scope(_alias("alias-w4-593586541d5de121294f2755")) == "exact"  # 趙至
-    assert alias_retrieval_scope(_alias("alias-w4-6dd01f34612082f3528287f2")) == "exact"  # 束晳
+    assert alias_retrieval_scope(_alias("alias-w4-7180baa0e76911b435b331d6")) == "exact"  # 孫盛
+    assert alias_retrieval_scope(_alias("alias-w4-cb9fc438ff6a35ac5b80dd86")) == "exact"  # 干寳
 
 
 def test_sfh2_installs_no_substring_candidate_scan_policy() -> None:
