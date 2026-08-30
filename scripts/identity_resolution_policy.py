@@ -1,4 +1,4 @@
-"""Deterministic identity-retrieval policy after the SFH2R manual audit.
+"""Deterministic identity-retrieval policy after the SFH2R manual audits.
 
 This module does NOT interpret historical text.  It enforces a storage and
 retrieval contract derived from manually reviewed failure modes:
@@ -32,6 +32,7 @@ SUPPRESS_ACTIONS = {
     "suppress_wrong_bearer_alias",
     "suppress_person_alias_and_reclassify_collective",
 }
+FULL_BLOCK_ACTIONS = SUPPRESS_ACTIONS | {"replace_corrupt_alias_surface"}
 
 
 def _text(value: Any) -> str:
@@ -61,12 +62,17 @@ def alias_repairs() -> list[dict[str, Any]]:
     ]
 
 
-def explicit_alias_action(alias_id: Any) -> str:
+def alias_repair(alias_id: Any) -> dict[str, Any] | None:
     target = _text(alias_id)
     for row in reversed(alias_repairs()):
         if _text(row.get("alias_id")) == target:
-            return _text(row.get("action"))
-    return ""
+            return row
+    return None
+
+
+def explicit_alias_action(alias_id: Any) -> str:
+    row = alias_repair(alias_id)
+    return _text((row or {}).get("action"))
 
 
 def explicitly_blocked_alias_ids() -> set[str]:
@@ -78,15 +84,39 @@ def explicitly_blocked_alias_ids() -> set[str]:
 
 
 def explicitly_blocked_form_person_pairs() -> set[tuple[str, str]]:
+    """Pairs unusable at any retrieval scope.
+
+    Shared/downgraded forms are deliberately NOT returned here: they remain
+    valid contextual candidate hints.  Only a wrong bearer or replaced corrupt
+    surface is fully blocked.
+    """
     result: set[tuple[str, str]] = set()
     for row in alias_repairs():
         action = _text(row.get("action"))
-        if action.startswith("downgrade_") or action in SUPPRESS_ACTIONS or action == "replace_corrupt_alias_surface":
-            surface = normalize_form(row.get("surface"))
-            person_id = _text(row.get("current_person_id"))
-            if surface and person_id:
-                result.add((surface, person_id))
+        if action not in FULL_BLOCK_ACTIONS:
+            continue
+        surface = normalize_form(row.get("surface"))
+        person_id = _text(row.get("current_person_id"))
+        if surface and person_id:
+            result.add((surface, person_id))
     return result
+
+
+def filtered_alias_evidence(alias: Mapping[str, Any]) -> list[dict[str, Any]]:
+    """Return only evidence allowed by reviewed authority for this alias."""
+    rows = [dict(row) for row in alias.get("source_evidence", []) or [] if isinstance(row, Mapping)]
+    repair = alias_repair(alias.get("alias_id"))
+    if not repair:
+        return rows
+    if _text(repair.get("action")) in SUPPRESS_ACTIONS or repair.get("remove_all_current_surface_evidence"):
+        return []
+    keep_ids = {_text(value) for value in repair.get("keep_evidence_ids", []) or [] if _text(value)}
+    remove_ids = {_text(value) for value in repair.get("remove_evidence_ids", []) or [] if _text(value)}
+    if keep_ids:
+        return [row for row in rows if _text(row.get("evidence_id")) in keep_ids]
+    if remove_ids:
+        return [row for row in rows if _text(row.get("evidence_id")) not in remove_ids]
+    return rows
 
 
 def alias_retrieval_scope(alias: Mapping[str, Any]) -> str:
@@ -95,11 +125,22 @@ def alias_retrieval_scope(alias: Mapping[str, Any]) -> str:
     This is a data-contract decision, not a historical identity judgment.
     """
     alias_id = _text(alias.get("alias_id"))
+    action = explicit_alias_action(alias_id)
     if alias_id in explicitly_blocked_alias_ids():
         return "blocked"
     surface = normalize_form(alias.get("surface"))
     if not surface:
         return "blocked"
+    if action == "replace_corrupt_alias_surface" and normalize_form((alias_repair(alias_id) or {}).get("surface")) == surface:
+        # A materialized replacement may already have changed the stored
+        # surface.  The old corrupt form is blocked by pair-level protection;
+        # the corrected form is handled by reviewed replacement registration.
+        corrected = normalize_form((alias_repair(alias_id) or {}).get("corrected_surface"))
+        if corrected and corrected == surface:
+            return "exact"
+        return "blocked"
+    if action.startswith("downgrade_"):
+        return "contextual"
     if len(surface) <= 1:
         return "contextual"
     mode = _text(alias.get("resolution_mode"))
@@ -115,11 +156,7 @@ def alias_retrieval_scope(alias: Mapping[str, Any]) -> str:
 
 
 def profile_form_retrieval_scope(form: Mapping[str, Any]) -> str:
-    """Profile forms are contextual unless they encode a full-name class.
-
-    observed_surface/courtesy/title provenance remains valuable dossier
-    evidence, but is never a direct global identity key.
-    """
+    """Profile forms are contextual unless they encode a full-name class."""
     surface = normalize_form(form.get("surface"))
     if not surface or len(surface) <= 1:
         return "contextual"
