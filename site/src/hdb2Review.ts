@@ -178,14 +178,28 @@ async function loadJson<T>(relativePath: string): Promise<T> {
 }
 
 export function loadHDB2ReviewIndex(): Promise<HDB2ReviewIndex> {
-  if (!indexPromise) indexPromise = loadJson<HDB2ReviewIndex>("index.json");
+  if (!indexPromise) {
+    indexPromise = loadJson<HDB2ReviewIndex>("index.json").catch((reason: unknown) => {
+      // A transient network or deployment error must not poison the module
+      // cache for the rest of the session.  The page can retry the request
+      // after the failed promise has been discarded.
+      indexPromise = null;
+      throw reason;
+    });
+  }
   return indexPromise;
 }
 
 export function loadHDB2ReviewItem(reviewId: string): Promise<HDB2ReviewItem> {
   const existing = itemPromises.get(reviewId);
   if (existing) return existing;
-  const next = loadJson<HDB2ReviewItem>(`items/${encodeURIComponent(reviewId)}.json`);
+  const next = loadJson<HDB2ReviewItem>(`items/${encodeURIComponent(reviewId)}.json`).catch((reason: unknown) => {
+    // Do not permanently cache a failed item request: the detail pane has a
+    // retry action and should be able to recover when the artifact becomes
+    // available again.
+    itemPromises.delete(reviewId);
+    throw reason;
+  });
   itemPromises.set(reviewId, next);
   return next;
 }

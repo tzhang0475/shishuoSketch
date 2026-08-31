@@ -181,7 +181,7 @@ function mentionPersonDisplayName(
   mode: ReadingMode,
 ): string {
   const person = data.people.find((candidate) => candidate.id === mention.person_id);
-  return person ? personDisplayName(story, data, person, mode) : "";
+  return person ? personDisplayName(story, data, person, mode) : "未解析人物";
 }
 
 function relationDisplayPair(
@@ -208,17 +208,25 @@ function perspectiveNeighborRole(
 
 function personNameById(story: Story, data: SiteBundle, personId: string, mode: ReadingMode): string {
   const person = data.people.find((candidate) => candidate.id === personId);
-  return person ? personDisplayName(story, data, person, mode) : personId;
+  return person ? personDisplayName(story, data, person, mode) : "未解析人物";
 }
 
 function storyById(data: SiteBundle, storyId: string): Story | undefined {
   return data.stories.find((story) => story.id === storyId);
 }
 
-function writeStoryAddress(storyId: string): void {
+type StoryAddressMode = "replace" | "push";
+
+function writeStoryAddress(storyId: string, mode: StoryAddressMode = "replace", pathname?: string): void {
   if (typeof window === "undefined") return;
-  const next = `${window.location.pathname}${window.location.search}#story=${encodeURIComponent(storyId)}`;
-  window.history.replaceState(null, "", next);
+  const nextPathname = pathname ?? window.location.pathname;
+  const nextSearch = pathname === undefined ? window.location.search : "";
+  const next = `${nextPathname}${nextSearch}#story=${encodeURIComponent(storyId)}`;
+  if (mode === "push") {
+    window.history.pushState(null, "", next);
+  } else {
+    window.history.replaceState(null, "", next);
+  }
 }
 
 function initialStoryId(data: SiteBundle): string {
@@ -629,7 +637,7 @@ function StoryHistoricalDepth({
                   <p className="ux1-history-label">在场</p>
                   {value.participant_context.map((row) => (
                     <button type="button" className="ux1-history-link" key={`${row.person_id}-${row.role}`} onClick={() => onFocus(row.person_id, { via_mention_id: "ux1-history", from_story_id: storyId })}>
-                      {readingValue(row.name, readingMode, row.person_id)} · {row.role}
+                      {readingValue(row.name, readingMode, "未解析人物")} · {row.role}
                     </button>
                   ))}
                 </div>
@@ -778,7 +786,7 @@ function EraHistoricalDepth({
           <small>{[value.ruler.reign_start_year, value.ruler.reign_end_year].every((year) => typeof year === "number") ? `${value.ruler.reign_start_year}–${value.ruler.reign_end_year}` : ""}</small>
         </div>
       )}
-      {value.people.length > 0 && <div className="ux1-history-group"><p className="ux1-history-label">人物</p>{value.people.slice(0, 5).map((row: any) => <button type="button" className="ux1-history-link" key={row.person_id} onClick={() => onFocus(row.person_id)}>{readingValue(row.name, readingMode, row.person_id)}</button>)}</div>}
+      {value.people.length > 0 && <div className="ux1-history-group"><p className="ux1-history-label">人物</p>{value.people.slice(0, 5).map((row: any) => <button type="button" className="ux1-history-link" key={row.person_id} onClick={() => onFocus(row.person_id)}>{readingValue(row.name, readingMode, "未解析人物")}</button>)}</div>}
       {value.events.length > 0 && <div className="ux1-history-group"><p className="ux1-history-label">此时</p>{value.events.slice(0, 3).map((row: any) => <p className="ux1-history-value" key={row.event_id}>{readingValue(row.name, readingMode, row.event_id)}</p>)}</div>}
       {value.offices.length > 0 && <div className="ux1-history-group"><p className="ux1-history-label">仕宦</p>{value.offices.slice(0, 3).map((row: any) => <p className="ux1-history-value" key={row.office_id}>{readingValue(row.name, readingMode, row.office_id)}</p>)}</div>}
       {value.locations.length > 0 && <div className="ux1-history-group"><p className="ux1-history-label">所及</p>{value.locations.slice(0, 3).map((row: any) => <p className="ux1-history-value" key={row.location_id}>{readingValue(row.name, readingMode, row.location_id)}</p>)}</div>}
@@ -979,7 +987,7 @@ function InlineReadingSegments({
         }
         const mention = data.mentions.find((candidate) => candidate.id === segment.mention_id);
         const person = data.people.find((candidate) => candidate.id === segment.person_id);
-        const personName = person ? personDisplayName(story, data, person, readingMode) : segment.person_id;
+        const personName = person ? personDisplayName(story, data, person, readingMode) : "未解析人物";
         const active = focusedPersonId === segment.person_id;
         return (
           <InlineEntityMention
@@ -1724,7 +1732,7 @@ function PersonHng0Surface({
             const status = relationStatus(relation);
             return (
               <div className="hng0-graph-row" key={relation.relation_id}>
-                <button type="button" className="hng0-node" onClick={() => onFocus(otherId)}>{otherName ?? HNG0_SITE.person_labels[otherId] ?? otherId}</button>
+                <button type="button" className="hng0-node" onClick={() => onFocus(otherId)}>{otherName ?? HNG0_SITE.person_labels[otherId] ?? "未解析人物"}</button>
                 <button
                   type="button"
                   className={selectedRelationId === relation.relation_id ? "hng0-edge active" : "hng0-edge"}
@@ -1955,7 +1963,7 @@ function PersonHng01Surface({
             </div>
             {selectedRelation && (
               <article className="hng0-detail-card">
-                <div className="hng0-detail-title"><span>{selectedRelation.person_a_name ?? focusedPersonId} — {hng01RelationLabel(selectedRelation)} — {selectedRelation.person_b_name ?? selectedRelation.counterpart_surface}</span><span>{hngStatusLabel(relationStatus(selectedRelation))}</span></div>
+                <div className="hng0-detail-title"><span>{selectedRelation.person_a_name ?? "未解析人物"} — {hng01RelationLabel(selectedRelation)} — {selectedRelation.person_b_name ?? selectedRelation.counterpart_surface}</span><span>{hngStatusLabel(relationStatus(selectedRelation))}</span></div>
                 <p className="hng0-detail-meta">{selectedRelation.claim} · {selectedRelation.certainty} · {selectedRelation.resolution_status}</p>
                 {selectedRelation.temporal_warnings.length > 0 && <p className="hng0-muted">时间警告：{selectedRelation.temporal_warnings.join("；")}</p>}
                 <Hng01ReviewControls status={relationStatus(selectedRelation)} onChange={(status) => setRelationStatus(selectedRelation.relation_id, status)} />
@@ -2170,7 +2178,7 @@ function PersonHng02Surface({
         )}
         {selectedRelation && (
           <article className="hng0-detail-card">
-            <div className="hng0-detail-title"><span>{selectedRelation.person_a_name ?? focusedPersonId} — {hng02RelationLabel(selectedRelation)} — {selectedRelation.person_b_name ?? selectedRelation.provisional_neighbor_label ?? selectedRelation.counterpart_surface}</span><span>{hng02StatusLabel(relationStatus(selectedRelation))}</span></div>
+            <div className="hng0-detail-title"><span>{selectedRelation.person_a_name ?? "未解析人物"} — {hng02RelationLabel(selectedRelation)} — {selectedRelation.person_b_name ?? selectedRelation.provisional_neighbor_label ?? selectedRelation.counterpart_surface}</span><span>{hng02StatusLabel(relationStatus(selectedRelation))}</span></div>
             <p className="hng0-detail-meta">{selectedRelation.claim} · 原始类型：{selectedRelation.original_relation_type} · {selectedRelation.certainty}</p>
             {selectedRelation.normalization_reason && <p className="hng0-muted">规范化：{selectedRelation.normalization_reason}</p>}
             {selectedRelation.temporal_warnings.length > 0 && <p className="hng0-muted">时间警告：{selectedRelation.temporal_warnings.join("；")}</p>}
@@ -2394,6 +2402,7 @@ function PersonExplorerPanel({
   onStorySelect: (storyId: string) => void;
   onClose: () => void;
 }) {
+  const surfaceRef = useExplorerDialog(onClose);
   if (!focusedPersonId) return null;
   return (
     <aside className="person-panel-shell" aria-label="人物探索">
@@ -2401,9 +2410,10 @@ function PersonExplorerPanel({
         type="button"
         className="person-panel-backdrop"
         aria-label="关闭人物探索"
+        tabIndex={-1}
         onClick={onClose}
       />
-      <div className="person-panel-surface" role="dialog" aria-modal="true" aria-labelledby="relation-explorer-heading">
+      <div ref={surfaceRef} className="person-panel-surface" role="dialog" aria-modal="true" aria-labelledby="relation-explorer-heading">
         <div className="person-panel-toolbar">
           <span>人物探索</span>
           <button type="button" className="panel-close-button" onClick={onClose} aria-label="关闭人物探索">
@@ -2429,6 +2439,31 @@ function PersonExplorerPanel({
 
 function eraLabel(mode: ReadingMode, original: string, simplified: string = original): string {
   return mode === "original" ? original : simplified;
+}
+
+function useExplorerDialog(onClose: () => void) {
+  const surfaceRef = useRef<HTMLDivElement>(null);
+  const closeRef = useRef(onClose);
+  closeRef.current = onClose;
+
+  useEffect(() => {
+    const previousFocus = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+    surfaceRef.current?.querySelector<HTMLButtonElement>(".panel-close-button")?.focus();
+
+    function handleKeyDown(event: globalThis.KeyboardEvent): void {
+      if (event.key !== "Escape") return;
+      event.preventDefault();
+      closeRef.current();
+    }
+
+    document.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+      if (previousFocus?.isConnected) previousFocus.focus();
+    };
+  }, []);
+
+  return surfaceRef;
 }
 
 function EraStoryLinks({
@@ -2656,6 +2691,7 @@ function EraExplorerPanel({
   onStorySelect: (storyId: string) => void;
   onClose: () => void;
 }) {
+  const surfaceRef = useExplorerDialog(onClose);
   if (!focusedEraId) return null;
   const card = data.era_cards.find((candidate) => candidate.era_card_id === focusedEraId);
   if (!card) return null;
@@ -2668,8 +2704,8 @@ function EraExplorerPanel({
         : "";
   return (
     <aside className="person-panel-shell era-panel-shell" aria-label={eraLabel(readingMode, "紀元探索", "纪元探索")}>
-      <button type="button" className="person-panel-backdrop" aria-label={eraLabel(readingMode, "關閉紀元探索", "关闭纪元探索")} onClick={onClose} />
-      <div className="person-panel-surface era-panel-surface" role="dialog" aria-modal="true" aria-labelledby="focused-era-heading">
+      <button type="button" className="person-panel-backdrop" aria-label={eraLabel(readingMode, "關閉紀元探索", "关闭纪元探索")} tabIndex={-1} onClick={onClose} />
+      <div ref={surfaceRef} className="person-panel-surface era-panel-surface" role="dialog" aria-modal="true" aria-labelledby="focused-era-heading">
         <div className="person-panel-toolbar">
           <span>{eraLabel(readingMode, "紀元", "纪元")}</span>
           <button type="button" className="panel-close-button" onClick={onClose} aria-label={eraLabel(readingMode, "關閉紀元探索", "关闭纪元探索")}>×</button>
@@ -3560,6 +3596,34 @@ function App() {
     }
   }, []);
 
+  useEffect(() => {
+    if (!data || typeof window === "undefined") return;
+    const loadedData = data;
+
+    function syncFromAddress(): void {
+      if (isIndexLocation()) {
+        setIndexPage(true);
+        setPersonPanelOpen(false);
+        setEraPanelOpen(false);
+        return;
+      }
+      const addressedId = storyIdFromHash(window.location.hash);
+      const addressed = addressedId ? storyById(loadedData, addressedId) : undefined;
+      if (!addressed || addressed.publication_state === "blocked") return;
+      setIndexPage(false);
+      setStack([{ kind: "story", id: addressed.id }]);
+      setPersonPanelOpen(false);
+      setEraPanelOpen(false);
+    }
+
+    window.addEventListener("popstate", syncFromAddress);
+    window.addEventListener("hashchange", syncFromAddress);
+    return () => {
+      window.removeEventListener("popstate", syncFromAddress);
+      window.removeEventListener("hashchange", syncFromAddress);
+    };
+  }, [data]);
+
   const publishedStoryIdSet = useMemo(
     () => (data ? new Set(publishedStoryIds(data)) : undefined),
     [data],
@@ -3620,24 +3684,17 @@ function App() {
     if (visibleStoryId) writeStoryAddress(visibleStoryId);
   }
 
-  function leaveIndex(): void {
-    setIndexPage(false);
-    if (typeof window !== "undefined" && isIndexLocation()) {
-      window.history.replaceState(null, "", import.meta.env.BASE_URL);
-    }
-  }
-
   function focusPersonFromIndex(personId: string): void {
     if (!data?.people.some((person) => person.id === personId)) return;
     const storyId = randomPublishedStoryIdForPerson(data, personId, () => 0)
       ?? currentStoryFromExploration(stack, publishedStoryIdSet)
       ?? publishedStoryIds(data)[0];
     if (!storyId) return;
-    leaveIndex();
+    setIndexPage(false);
     setStack([{ kind: "story", id: storyId }, { kind: "person", id: personId }]);
     setPersonPanelOpen(true);
     setEraPanelOpen(false);
-    writeStoryAddress(storyId);
+    writeStoryAddress(storyId, "push", import.meta.env.BASE_URL);
   }
 
   function focusEra(eraCardId: string) {
@@ -3648,18 +3705,21 @@ function App() {
   }
 
   function selectStory(storyId: string) {
-    if (!data?.stories.some((candidate) => candidate.id === storyId)) return;
+    if (!data?.stories.some((candidate) => candidate.id === storyId && candidate.publication_state !== "blocked")) return;
     const next = appendExploration(stack, { kind: "story", id: storyId });
     setStack(next);
     setPersonPanelOpen(false);
     setEraPanelOpen(false);
-    writeStoryAddress(storyId);
+    writeStoryAddress(storyId, "push");
   }
 
   function selectStoryFromIndex(storyId: string): void {
-    if (!data?.stories.some((storyCandidate) => storyCandidate.id === storyId)) return;
-    leaveIndex();
-    selectStory(storyId);
+    if (!data?.stories.some((storyCandidate) => storyCandidate.id === storyId && storyCandidate.publication_state !== "blocked")) return;
+    setIndexPage(false);
+    setStack([{ kind: "story", id: storyId }]);
+    setPersonPanelOpen(false);
+    setEraPanelOpen(false);
+    writeStoryAddress(storyId, "push", import.meta.env.BASE_URL);
   }
 
   function goBack() {
@@ -3687,7 +3747,7 @@ function App() {
     setStack([{ kind: "story", id: storyId }]);
     setPersonPanelOpen(false);
     setEraPanelOpen(false);
-    writeStoryAddress(storyId);
+    writeStoryAddress(storyId, "push");
   }
 
   function chooseRandomPerson() {
@@ -3707,7 +3767,7 @@ function App() {
     ]);
     setPersonPanelOpen(true);
     setEraPanelOpen(false);
-    writeStoryAddress(storyId);
+    writeStoryAddress(storyId, "push");
   }
 
   if (error) {

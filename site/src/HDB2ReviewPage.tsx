@@ -59,6 +59,12 @@ function safeDisplay(value: unknown, fallback: string): string {
   return text && text !== "null" && text !== "undefined" ? text : fallback;
 }
 
+function safeErrorMessage(reason: unknown): string {
+  return reason instanceof Error
+    ? safeDisplay(reason.message, "审阅资料暂时不可用，请稍后重试。")
+    : safeDisplay(reason, "审阅资料暂时不可用，请稍后重试。");
+}
+
 function safeOptional(value: unknown): string | null {
   const text = safeDisplay(value, "");
   return text ? text : null;
@@ -288,7 +294,7 @@ function HDB2ReviewDetail({
           <button type="button" className={decision?.action === "keep_unresolved" ? "active" : ""} onClick={() => onAction("keep_unresolved", null)}>保持未解析</button>
           <button type="button" className={decision?.action === "evidence_problem" ? "active" : ""} onClick={() => onAction("evidence_problem", null)}>证据 / 问题标记</button>
         </div>
-        {decision && <p className="irr0-muted">已保存：{decision.action}{decision.candidate_key ? ` · ${decision.candidate_key}` : ""}</p>}
+        {decision && <p className="irr0-muted">已保存：{decision.action}</p>}
       </section>
     </article>
   );
@@ -302,13 +308,22 @@ export function HDB2ReviewPage() {
   const [priority, setPriority] = useState<PriorityFilter>("all");
   const [reviewType, setReviewType] = useState<TypeFilter>("all");
   const [error, setError] = useState<string | null>(null);
+  const [itemError, setItemError] = useState<string | null>(null);
+  const [indexReloadKey, setIndexReloadKey] = useState(0);
+  const [itemReloadKey, setItemReloadKey] = useState(0);
 
   useEffect(() => {
+    let active = true;
+    setError(null);
     void loadHDB2ReviewIndex().then((next) => {
+      if (!active) return;
       setIndex(next);
       setSelectedId(next.items[0]?.review_id ?? null);
-    }).catch((reason: unknown) => setError(reason instanceof Error ? reason.message : String(reason)));
-  }, []);
+    }).catch((reason: unknown) => {
+      if (active) setError(safeErrorMessage(reason));
+    });
+    return () => { active = false; };
+  }, [indexReloadKey]);
 
   const visibleItems = useMemo(() => {
     if (!index) return [];
@@ -316,15 +331,25 @@ export function HDB2ReviewPage() {
   }, [index, priority, reviewType]);
 
   useEffect(() => {
-    if (visibleItems.length > 0 && !visibleItems.some((entry) => entry.review_id === selectedId)) setSelectedId(visibleItems[0].review_id);
+    if (visibleItems.length === 0) {
+      if (selectedId !== null) setSelectedId(null);
+      return;
+    }
+    if (!visibleItems.some((entry) => entry.review_id === selectedId)) setSelectedId(visibleItems[0].review_id);
   }, [selectedId, visibleItems]);
 
   useEffect(() => {
+    setItem(null);
+    setItemError(null);
     if (!selectedId) return;
     let active = true;
-    void loadHDB2ReviewItem(selectedId).then((next) => { if (active) setItem(next); }).catch((reason: unknown) => { if (active) setError(reason instanceof Error ? reason.message : String(reason)); });
+    void loadHDB2ReviewItem(selectedId)
+      .then((next) => { if (active) setItem(next); })
+      .catch((reason: unknown) => {
+        if (active) setItemError(safeErrorMessage(reason));
+      });
     return () => { active = false; };
-  }, [selectedId]);
+  }, [selectedId, itemReloadKey]);
 
   function saveAction(action: HDB2HumanDecision["action"], candidateKey: string | null = null): void {
     if (!item) return;
@@ -347,9 +372,10 @@ export function HDB2ReviewPage() {
     setSelectedId(visibleItems[next].review_id);
   }
 
-  if (error) return <main className="page-shell"><section className="error-panel"><p className="brand">世说Sketch</p><h1>HDB2 审阅载入失败</h1><p>{error}</p></section></main>;
+  if (error) return <main className="page-shell"><section className="error-panel"><p className="brand">世说Sketch</p><h1>HDB2 审阅载入失败</h1><p>{error}</p><button type="button" onClick={() => setIndexReloadKey((value) => value + 1)}>重新载入</button></section></main>;
   if (!index) return <main className="page-shell loading-state"><p className="brand">世说Sketch</p><p>正在读取 HDB2 审阅队列……</p></main>;
-  const current = index.items.find((entry) => entry.review_id === selectedId) ?? visibleItems[0];
+  const current = visibleItems.find((entry) => entry.review_id === selectedId) ?? visibleItems[0];
+  const currentItem = current && item?.review_id === current.review_id ? item : null;
   const currentDecision = current ? decisions[current.review_id] : undefined;
 
   return (
@@ -386,7 +412,13 @@ export function HDB2ReviewPage() {
           ))}
         </aside>
         <div className="hdb2-review-main">
-          {item && current ? <HDB2ReviewDetail item={item} decision={currentDecision} onAction={saveAction} /> : <p className="irr0-muted">没有符合当前筛选的审阅项。</p>}
+          {visibleItems.length === 0
+            ? <p className="irr0-muted">没有符合当前筛选的审阅项。</p>
+            : currentItem && current
+              ? <HDB2ReviewDetail item={currentItem} decision={currentDecision} onAction={saveAction} />
+              : itemError
+                ? <section className="hdb2-item-error" aria-live="polite"><p>此审阅项暂时无法载入。</p><p className="irr0-muted">{itemError}</p><button type="button" onClick={() => setItemReloadKey((value) => value + 1)}>重新载入</button></section>
+                : <p className="irr0-muted" aria-live="polite">正在读取审阅项……</p>}
         </div>
       </section>
     </main>
