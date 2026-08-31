@@ -22,12 +22,17 @@ The model is `deepseek-v4-flash`, temperature 0, with thinking disabled. The
 provider probe is a single minimal request. A failed environmental probe stops
 the live phase; it is never converted into a retry storm.
 
-The one required probe was executed before semantic inference and failed with
+The initial probe was executed before semantic inference and failed with
 `Operation not permitted`, classified as an environmental network failure.
-Accordingly, no authoritative live semantic calls were attempted. The frozen
-offline run records this explicitly; its 40 logical Pass-1 cache lookups are
-offline misses, not provider attempts. Both occurrence-level and Story-level
-overlap with the earlier A0/P1/P2 targeted selections are checked and empty.
+During the resumed execution, the API key was present and exactly one fresh
+probe was attempted with the same frozen configuration. It failed with the
+same environmental error, so the authoritative live phase was stopped without
+any Pass 1/2/3 provider calls. The initial record remains unchanged at
+`provider-preflight.json`; the resumed result is preserved separately at
+`provider-preflight-resume.json`. The frozen offline run records this
+explicitly; its 40 logical Pass-1 cache lookups are offline misses, not
+provider attempts. Both occurrence-level and Story-level overlap with the
+earlier A0/P1/P2 targeted selections are checked and empty.
 
 ## Routing and safety
 
@@ -64,7 +69,7 @@ passing. A system-Python replay was also attempted and exposed only the
 pre-existing missing `opencc` dependency; the repository virtual environment
 contains that declared dependency and passed the full suite. Offline A0R-L
 derived outputs were replayed twice with byte-identical hashes for every
-root-level artifact. The final recommendation is
+root-level artifact. The final recommendation remains
 `sfh2_live_semantic_architecture_provider_unavailable`, not a claim about
 semantic accuracy.
 
