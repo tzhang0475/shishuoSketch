@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"decision\": \"select_a\", \"base_record\": \"historian_a\", \"patch_ops\": [], \"reason_summary\": \"Both historians agree the referent is Emperor Yuan of Jin (司馬睿), the founding emperor of the Eastern Jin. The substantive disagreement is narrow: Historian A's canonical_hint is \\\"晉元帝司馬睿\\\" while Historian B's is \\\"司馬睿\\\"; and the relations differ. Historian A's canonical_hint \\\"晉元帝司馬睿\\\" is better supported because it captures both the ruler title (元帝) used in the surface form and the personal name (司馬睿), matching the standard posthumous designation for the Eastern Jin founder. On relations, Historian A links 元帝 to 王茂弘 (related_person, from main text) and to 王導 (same_person, from Liu annotation 002). The Liu annotation 002 explicitly names 王導 admonishing 帝, and 王茂弘 is the courtesy name of 王導, so these are the same person. Historian B instead links 元帝 to 帝 (same_person) within the main text, but the validated local mentions already treat 帝 (mention cc8016114f176363bb5353de) as a separate ruler_title mention in the same sentence; the same_person relation to 帝 is redundant with the mention structure and less informative than Historian A's relation to 王導 via the annotation. Historian A's supporting evidence (annotation 002 + main text) is sufficient and correctly grounded. Historian B's inclusion of annotation 001 (鄧粲晉紀) is tangential and does not strengthen the identification. Historian A is better supported.\", \"supporting_evidence_ids\": [\"sfh1-ev-10-guizhen-011-main\", \"sfh1-ev-10-guizhen-011-liu-annotation-002\"]}",
+              "name": "submit_sfh2_a2_disagreement_adjudication_v1"
+            },
+            "id": "call_00_J0CXswK8ZNtihymmvpKZ4718",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1788188346,
+  "id": "0032f401-0b88-4109-98be-28eb3f6d31ba",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 486,
+    "prompt_cache_hit_tokens": 1920,
+    "prompt_cache_miss_tokens": 2037,
+    "prompt_tokens": 3957,
+    "prompt_tokens_details": {
+      "cached_tokens": 1920
+    },
+    "total_tokens": 4443
+  }
+}

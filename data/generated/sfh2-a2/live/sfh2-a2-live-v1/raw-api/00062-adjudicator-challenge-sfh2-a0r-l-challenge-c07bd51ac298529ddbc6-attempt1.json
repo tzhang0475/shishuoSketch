@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"decision\": \"select_a\", \"base_record\": \"historian_a\", \"patch_ops\": [], \"reason_summary\": \"Both historians agree on the core identification: 宣武 is the posthumous title (ruler title) of 桓溫 (Huan Wen), the Eastern Jin general. The only substantive disagreements are (1) the canonical_hint/surface_form spelling (桓溫 vs 桓温 — a variant character form, not a different identity) and (2) the discourse.antecedent_hint field, where Historian B adds \\\"宣武\\\" as an antecedent hint. The antecedent_hint is not supported by the evidence: 宣武 is the first mention of this person in the main text (簡文 summons 宣武), so there is no antecedent for it. Historian A correctly leaves antecedent_hint empty. The canonical_hint difference (桓溫 vs 桓温) is a trivial orthographic variant of the same person; Historian A's form 桓溫 is the standard traditional character form. Both records otherwise agree on reference_type (ruler_title), occurrence_role (scene_participant), semantic_kind (historical_person), and confidence (high). Historian A is better supported because it does not fabricate an antecedent for a first-mention title.\", \"supporting_evidence_ids\": [\"sfh1-ev-02-yanyu-060-main\"]}",
+              "name": "submit_sfh2_a2_disagreement_adjudication_v1"
+            },
+            "id": "call_00_PJdkP2qI966EjCmGsEGU2020",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1788187449,
+  "id": "ae9ccc69-74af-4b24-b8b3-81e0d7c31ec3",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 377,
+    "prompt_cache_hit_tokens": 1920,
+    "prompt_cache_miss_tokens": 1764,
+    "prompt_tokens": 3684,
+    "prompt_tokens_details": {
+      "cached_tokens": 1920
+    },
+    "total_tokens": 4061
+  }
+}

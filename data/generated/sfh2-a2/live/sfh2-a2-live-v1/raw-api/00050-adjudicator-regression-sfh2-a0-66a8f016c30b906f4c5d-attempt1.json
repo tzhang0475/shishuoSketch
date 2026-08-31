@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"decision\": \"select_b\", \"base_record\": \"historian_b\", \"patch_ops\": [], \"reason_summary\": \"Both historians agree on the core identity: 鍾士季 is the courtesy name of 鍾會 (Zhong Hui), confirmed by the Liu annotation glossing 鍾會異之. The substantive disagreement is limited to the relations field and the discourse.antecedent_hint. Historian B's record is better supported because the main text explicitly contains a subsequent 鍾 (surname reference) that refers to the same person — the text reads \\\"客問鍾曰...鍾曰裴楷清通王戎簡要\\\" — so the same_person relation to the subsequent 鍾 is directly evidenced by the main text (sfh1-ev-08-shangyu-006-main). Historian A omits this relation entirely, providing an incomplete account of the discourse. Historian B's antecedent_hint also correctly captures that the following 鍾 refers to the same person. The multi_candidate_ambiguity flag raised by Python is a formal review flag only; both relations (to 鍾 and to 鍾會) are historically correct and refer to the same individual, so no revision is needed. Historian B's fuller and better-evidenced record is selected.\", \"supporting_evidence_ids\": [\"sfh1-ev-08-shangyu-006-main\", \"sfh1-ev-08-shangyu-006-liu-annotation-002\"]}",
+              "name": "submit_sfh2_a2_disagreement_adjudication_v1"
+            },
+            "id": "call_00_kdZdJCfgC0B3dlerMeop0206",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1788187408,
+  "id": "1dd3cda6-dbb9-44ab-99bf-f51f478147af",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 391,
+    "prompt_cache_hit_tokens": 1920,
+    "prompt_cache_miss_tokens": 2220,
+    "prompt_tokens": 4140,
+    "prompt_tokens_details": {
+      "cached_tokens": 1920
+    },
+    "total_tokens": 4531
+  }
+}

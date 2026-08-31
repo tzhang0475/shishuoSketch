@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"decision\": \"select_a\", \"base_record\": \"historian_a\", \"patch_ops\": [], \"reason_summary\": \"Both historians agree the target '帝' refers to 元帝 (Emperor Yuan of Jin), the subject of the passage. The disagreement is narrow: Historian B sets referent.canonical_hint to 司馬睿 (the personal name) and surface_form to 元帝, and adds a 'related_person' relation to 王茂弘. Historian A sets canonical_hint to 元帝 and surface_form to 帝, with only a same_person relation to 元帝.\\n\\nThe target span is '帝' (a ruler title), not '元帝'. The canonical hint should reflect the referent as identified in the text — 元帝 — which is how the antecedent is expressed in the main text. The surface_form of the referent should match the target span '帝', not '元帝'. Historian B's surface_form '元帝' conflates the antecedent mention with the target mention. The 'related_person' relation to 王茂弘 is not warranted for this target mention: 王茂弘 (王導) is a separate scene participant who advises the emperor, not a relation of the target referent itself. Historian A's record is more precise and better supported by the evidence.\", \"supporting_evidence_ids\": [\"sfh1-ev-10-guizhen-011-main\", \"sfh1-ev-10-guizhen-011-liu-annotation-001\", \"sfh1-ev-10-guizhen-011-liu-annotation-002\"]}",
+              "name": "submit_sfh2_a2_disagreement_adjudication_v1"
+            },
+            "id": "call_00_TEw8XJiPPpDhB90mbSSG3257",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1788188343,
+  "id": "c0beb624-4c79-45ec-8b70-0c7fb755af00",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 428,
+    "prompt_cache_hit_tokens": 1920,
+    "prompt_cache_miss_tokens": 1901,
+    "prompt_tokens": 3821,
+    "prompt_tokens_details": {
+      "cached_tokens": 1920
+    },
+    "total_tokens": 4249
+  }
+}

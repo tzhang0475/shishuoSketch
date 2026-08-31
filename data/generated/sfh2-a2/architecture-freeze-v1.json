@@ -1,0 +1,79 @@
+{
+  "a0r_prompt_hashes": {
+    "primary_historian": "9e222ff627ab465e135245c8b6c55c968dec220a0f88597ca7162701f54543fa"
+  },
+  "a1r_l_architecture_hash": "cd8a8ecead327385b46af238f459e8fc4126b65bd5f54c5e7e51743912212c97",
+  "architecture_hash": "ced2818d4822b86f863b7cef502083fb60d9899428e225cba9962a561ab6037e",
+  "authority_policy": "reviewed human semantics > LLM semantics > soft consistency > deterministic retrieval hints",
+  "baseline_commit": "51a07a9d5fb108c13748b7983d64a81181f86be6",
+  "candidate_only": true,
+  "canonical_write_back": false,
+  "challenge_story_list_hash": "f406448c817bce83d1da21ceb7cfa1c54e32229d9d1b5682cd7c1fab0ee93826",
+  "code_files": {
+    "scripts/sfh2_a2/common.py": "7ae4fd59e8e99d20b749dfc7de854db66e0bfd8f8d481b48de6a6669cc4a7967",
+    "scripts/sfh2_a2/comparison.py": "780c851fa6c51a2cd3ec07edaebaeabc1585bfad69f774a312159fc2e742bb7c",
+    "scripts/sfh2_a2/contracts.py": "5690a898fb70426aedfce53e3e422e440cccfa97ca340d33ad962ba5b623ebd5",
+    "scripts/sfh2_a2/pipeline.py": "35e3809ce5251ff13c4c6383b8ad35f6923bb64d5a614400c59946d49dfa894d",
+    "scripts/sfh2_a2/transport.py": "cf5f4db8b9454cd1f807e1b68c72d5385324e74e73307c26ea09e003663c56b4"
+  },
+  "gold_not_in_provider_packets": true,
+  "historian_a_source": "A1 cached live Primary Historian",
+  "historian_b_is_independent": true,
+  "historian_b_receives_no_historian_a": true,
+  "historian_b_receives_no_python_flags": true,
+  "input_hashes": {
+    "data/aliases.json": "f564a92f7d956e289940e4b7ae448349bd13bb602336441cda02e358a12ec33f",
+    "data/derived/hdb2-f-candidate-person-knowledge.json": "01a217187379a88e640f57b4b35b86a6f416a41d6534e7fc2ab1668a5ed99ba9",
+    "data/derived/hdb2-f-person-knowledge.json": "9bad46606f0268b5603c99e9baac2d7c854ce1d690a2e73cd5a7cbfcfd1764f1",
+    "data/generated/hda2/repair-overlay.json": "a2c8642dc3e0ca3d17ec844ee9a61e8134426d7a6779c658a551af0441668e99",
+    "data/generated/sfh1/candidate-sets.json": "77f9ba2fd87321de6b76909c42925bf90df6939c1b0910efae7e573399cd08b6",
+    "data/generated/sfh1/final-decisions.json": "bbda9a08dea23ec2f495e08f1a20e78f43344bee78955ac8666047b66a17ea3f",
+    "data/generated/sfh1/identity-judgments.json": "943ad9c60e8d961a9ddbd6b3b706d419f07418514fe017042491a54a4a06a0ff",
+    "data/generated/sfh1/reference-semantics.json": "e21d170a4e55a274be8e34fb796bbfe77a129c93c28bdc0fc534a1f94bbe3035",
+    "data/generated/sfh1/relation-assertions.json": "ec44f949018f6efd8abd2c2a861e2d003408d4fc477781319db587c221e1ff8e",
+    "data/generated/sfh1/story-packets.json": "1067403eb205f1cf7d7e5d445a68445ca97d4da324f2f544d90e3aaf2a109077",
+    "data/generated/sfh1/validated-mentions.json": "3a129f050e91224065e4397eb9f6b7dbef5da6795fd29a84a40127e7958ecd40",
+    "data/generated/sfh2-a0r-l/architecture-freeze.json": "d5d37f439df157c9a2207c13ac2a3ff523e75bd53e48b9d8f2b1355e2efdb129",
+    "data/generated/sfh2-a0r-l/cache-index.json": "7421001c606f2b342275e33a1bde1d4e77f66905d908dedad18fd5fd8ebce097",
+    "data/generated/sfh2-a0r-l/challenge-selection-hash.json": "f890dd42ecdb6713f59344c1c236e48a8ff1bf95a4cb152caf76acf1e88e1f5b",
+    "data/generated/sfh2-a0r-l/challenge-selection.json": "dd0d844488c4b98a11f32ad3792846255ad10cdacb357b2f409dc956c6afa9d0",
+    "data/generated/sfh2-a0r-l/live/sfh2-a0r-l-host-live-v1/transport.json": "debe38ddc72f4ff297c07f61fbfae83effa5219e1ce22a686640e03ced170c95",
+    "data/generated/sfh2-a0r-l/regression-selection.json": "68713fcc0d010911800d54d087aaa6814d25984a9e911e05d0e67394cc1f1cac",
+    "data/people.json": "e1f917900035adaaed2c63d34618f357b1e58ff1cf082fce6ba090d1a74695c5"
+  },
+  "model_config": {
+    "adjudicator_model": "deepseek-v4-flash",
+    "endpoint": "https://api.deepseek.com/beta/chat/completions",
+    "function_names": {
+      "adjudicator": "submit_sfh2_a2_disagreement_adjudication_v1",
+      "historian_b": "submit_sfh2_a2_independent_historian_v1"
+    },
+    "historian_b_model": "deepseek-v4-flash",
+    "max_provider_attempts": 70,
+    "prompt_versions": {
+      "adjudicator": "sfh2-a2-disagreement-adjudicator-v1",
+      "historian_b": "sfh2-a2-independent-historian-v1"
+    },
+    "retry_policy": "transient_only_at_most_one_retry; HTTP400_not_retryable",
+    "temperature": 0,
+    "thinking": {
+      "type": "disabled"
+    }
+  },
+  "no_full_188_story_live_run": true,
+  "pilot": "SFH2.2-A2",
+  "prompt_hashes": {
+    "adjudicator": "caa713593dff54b86792dd08269cd35592a37b4c0232c84dd4dbb0951729f898",
+    "historian_b": "17f75f0076f1d35a2ad884494f2102a32389c6bc93c0fe38b6aa3d03d78dd88c"
+  },
+  "schema": "sfh2-a2-architecture-freeze-v1",
+  "schema_hashes": {
+    "adjudicator": "5e0a7f5e205bdf2a087591e892396a4789b271158b74a8f0aed873d38a6b9193",
+    "historian_b": "2a9913a0b5117e868a5db2cd238f10806f976127717cb2d17086a4eb6287344d",
+    "semantic_record": "7510405b7add81456a168de681d2dceb4d06594e828259f5d6d23221a2d2192e"
+  },
+  "selection_hashes": {
+    "challenge": "84195ab411aba4a82af4415ecb863d48fdd2cc0668731485417cd5735dce8f14",
+    "regression": "f31f2994ffea405416554ec040e6a000ffc4c0b8be183137ff65ab8433577d66"
+  }
+}

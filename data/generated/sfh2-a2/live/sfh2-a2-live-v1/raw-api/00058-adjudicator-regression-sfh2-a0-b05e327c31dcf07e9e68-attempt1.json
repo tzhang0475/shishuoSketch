@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"decision\": \"select_a\", \"base_record\": \"historian_a\", \"patch_ops\": [], \"reason_summary\": \"Historian B failed to produce a semantic record (provider_failure_or_unavailable; semantic record is not an object), so only Historian A's hypothesis is available for adjudication. Historian A's record is contract-valid and well-grounded in the supplied evidence. The target mention 嘏 (exact span, source evidence sfh1-ev-35-huoni-002-liu-annotation-003) appears in the Liu annotation text '傅嘏往喭粲', where 傅嘏 is the full name of the person who visits 荀粲 to offer condolences. The single character 嘏 is a personal-name abbreviation of 傅嘏 (Fu Gu). This is corroborated by the validated local mention sfh1-mention-a3d17929bcac44e23f154f8e (surface 傅嘏, full_name) in the same annotation, and by the same_person relation to 傅嘏. The identification as historical_person, scene_participant, personal_name, and referent 傅嘏 is well supported by the evidence.\", \"supporting_evidence_ids\": [\"sfh1-ev-35-huoni-002-liu-annotation-003\"]}",
+              "name": "submit_sfh2_a2_disagreement_adjudication_v1"
+            },
+            "id": "call_00_9QabjUv4DIfdAMD0Y77Z0048",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1788187436,
+  "id": "61fc4bfc-b70d-4ff0-9486-e22c18873326",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 369,
+    "prompt_cache_hit_tokens": 1920,
+    "prompt_cache_miss_tokens": 3124,
+    "prompt_tokens": 5044,
+    "prompt_tokens_details": {
+      "cached_tokens": 1920
+    },
+    "total_tokens": 5413
+  }
+}

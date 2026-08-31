@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"decision\": \"select_a\", \"base_record\": \"historian_a\", \"patch_ops\": [], \"reason_summary\": \"Historian B returned a provider failure (null record), so only Historian A's semantic record is available for adjudication. Historian A's record is well-grounded in the supplied evidence: the main text (sfh1-ev-33-youhui-007-main) has 王導 recounting 宣王's founding of the dynasty (創業之始), and the Liu annotation (sfh1-ev-33-youhui-007-liu-annotation-001) explicitly glosses 宣王's actions as 誅曹爽任蔣濟, confirming the referent is 司馬懿 (Sima Yi). The identification of 宣王 as Sima Yi's posthumous ruler title, the historical_exemplum occurrence role, the speaker (王導) and addressee (明帝) discourse hints, and the kinship relation to 文王 (Sima Zhao) are all consistent with the evidence. The formal flag about multi-candidate relations (文王 and 高貴鄉公) is a review-level note, not a substantive error, since 文王 (Sima Zhao) is indeed Sima Yi's son and 高貴鄉公 is a related later figure in the same narrative. Historian A's record is accepted as the better-supported hypothesis.\", \"supporting_evidence_ids\": [\"sfh1-ev-33-youhui-007-main\", \"sfh1-ev-33-youhui-007-liu-annotation-001\"]}",
+              "name": "submit_sfh2_a2_disagreement_adjudication_v1"
+            },
+            "id": "call_00_p677uZHMsUxEh6Yn5Cvf2030",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1788187432,
+  "id": "af0766d7-625b-45c2-8208-2a524c5542ec",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 416,
+    "prompt_cache_hit_tokens": 1920,
+    "prompt_cache_miss_tokens": 2076,
+    "prompt_tokens": 3996,
+    "prompt_tokens_details": {
+      "cached_tokens": 1920
+    },
+    "total_tokens": 4412
+  }
+}

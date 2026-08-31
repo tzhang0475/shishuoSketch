@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"decision\": \"select_a\", \"base_record\": \"historian_a\", \"patch_ops\": [], \"reason_summary\": \"Both historians agree on the core identity: 王藍田 refers to 王述 (Wang Shu), who inherited the title 藍田侯 (Marquis of Lantian), confirmed by Liu annotations 002, 003, and 004. The substantive disagreement is limited to discourse fields and the referent's surface_form. Historian A's surface_form is \\\"王藍田\\\" — the actual surface text of the mention being annotated (the exact span in the main text is 王藍田). Historian B instead sets the referent surface_form to \\\"王述,\\\" which conflates the canonical identity with the surface form of the mention. The surface_form field should reflect the text as it appears in the source (王藍田), not the resolved canonical name. Additionally, Historian A leaves the discourse fields empty, which is appropriate since the mention is a third-person office-title reference to a scene participant with no addressee, speaker, or antecedent discourse function indicated in the evidence. Historian B's assignment of speaker_hint \\\"narrator\\\" and addressee_hint \\\"reader\\\" is not supported by the evidence and over-specifies the discourse structure. Historian A is therefore better supported by the supplied evidence.\", \"supporting_evidence_ids\": [\"sfh1-ev-04-wenxue-022-main\", \"sfh1-ev-04-wenxue-022-liu-annotation-002\", \"sfh1-ev-04-wenxue-022-liu-annotation-003\", \"sfh1-ev-04-wenxue-022-liu-annotation-004\"]}",
+              "name": "submit_sfh2_a2_disagreement_adjudication_v1"
+            },
+            "id": "call_00_LY52XNEiBmTG2WRPSEq34945",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1788187394,
+  "id": "d1aeb7cd-5f6e-4bb6-ba15-4ff333c5ca54",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 448,
+    "prompt_cache_hit_tokens": 1920,
+    "prompt_cache_miss_tokens": 4134,
+    "prompt_tokens": 6054,
+    "prompt_tokens_details": {
+      "cached_tokens": 1920
+    },
+    "total_tokens": 6502
+  }
+}

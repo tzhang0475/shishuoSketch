@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"decision\": \"select_b\", \"base_record\": \"historian_b\", \"patch_ops\": [], \"reason_summary\": \"Historian A produced no valid semantic record (contract invalid, \\\"semantic record is not an object\\\"), while Historian B produced a valid, well-grounded record. Historian B identifies 阮光禄 as an office-title reference to 阮裕 (Ruan Yu), who held the office of 光禄大夫. This is supported by the Liu annotation (sfh1-ev-04-wenxue-024-liu-annotation-003) which cites 中興書 and gives the personal name 裕, and by the main text (sfh1-ev-04-wenxue-024-main) describing him expounding the 白馬論 to the young 謝安. The reference_type \\\"office_title\\\", semantic_kind \\\"historical_person\\\", and the relation to 謝安 are all consistent with the evidence. Historian B's record is the only valid hypothesis and is well supported.\", \"supporting_evidence_ids\": [\"sfh1-ev-04-wenxue-024-main\", \"sfh1-ev-04-wenxue-024-liu-annotation-003\"]}",
+              "name": "submit_sfh2_a2_disagreement_adjudication_v1"
+            },
+            "id": "call_00_FLqydixRuJw15rf8q6zp4216",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1788187398,
+  "id": "4c1dc07d-6140-426f-93cf-cf6618dc1524",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 343,
+    "prompt_cache_hit_tokens": 1792,
+    "prompt_cache_miss_tokens": 1642,
+    "prompt_tokens": 3434,
+    "prompt_tokens_details": {
+      "cached_tokens": 1792
+    },
+    "total_tokens": 3777
+  }
+}

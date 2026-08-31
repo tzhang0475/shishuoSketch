@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"decision\": \"select_b\", \"base_record\": \"historian_b\", \"patch_ops\": [], \"reason_summary\": \"The target 吾 is a first-person pronoun spoken by 魏武 (Cao Cao) in the main text: \\\"魏武乃曰吾巳得\\\" and \\\"我才不及卿乃覺三十里\\\". Historian B correctly classifies the occurrence_role as speaker_reference (the pronoun is the speaker referring to himself), sets discourse.self_reference_hint to 吾 (the pronoun itself is the self-reference), and supplies a single same_person relation to 魏武. Historian A's occurrence_role of scene_participant is less precise, its self_reference_hint of 魏武 conflates the antecedent with the pronoun's own self-reference, and its additional related_person relation to 楊脩 is unsupported (楊脩 is the addressee, not the referent of 吾). Historian B is better supported by the evidence.\", \"supporting_evidence_ids\": [\"sfh1-ev-11-jiewu-003-main\"]}",
+              "name": "submit_sfh2_a2_disagreement_adjudication_v1"
+            },
+            "id": "call_00_3OG6L8fEWKzF3ynPCb8R4086",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1788187416,
+  "id": "1bf4175b-13b8-4736-9e43-8dfe56deb808",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 315,
+    "prompt_cache_hit_tokens": 1792,
+    "prompt_cache_miss_tokens": 3657,
+    "prompt_tokens": 5449,
+    "prompt_tokens_details": {
+      "cached_tokens": 1792
+    },
+    "total_tokens": 5764
+  }
+}

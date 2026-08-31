@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"record\": {\"mention_id\": \"sfh1-mention-95c98b3b3f964502ef5e978a\", \"surface\": \"某\", \"semantic_kind\": \"historical_person\", \"reference_type\": \"pronoun_reference\", \"referent\": {\"surface_form\": \"簡文\", \"canonical_hint\": \"司馬昱\", \"confidence\": \"high\"}, \"occurrence_role\": \"speaker_reference\", \"discourse\": {\"speaker_hint\": \"簡文\", \"addressee_hint\": \"宣武\", \"antecedent_hint\": \"上\", \"self_reference_hint\": \"某\"}, \"relations\": [{\"target_hint\": \"上\", \"relation\": \"same_person\", \"confidence\": \"high\", \"evidence_ids\": [\"sfh1-ev-02-yanyu-060-main\"]}, {\"target_hint\": \"簡文\", \"relation\": \"same_person\", \"confidence\": \"high\", \"evidence_ids\": [\"sfh1-ev-02-yanyu-060-main\"]}], \"confidence\": \"high\", \"supporting_evidence_ids\": [\"sfh1-ev-02-yanyu-060-main\", \"sfh1-ev-02-yanyu-060-liu-annotation-002\"], \"attribute_type\": \"\", \"attribute_value\": \"\", \"bearer_hint\": \"\", \"abstain\": false, \"explanation\": \"The main text reads: 簡文在暗室中坐召宣武，宣武至，問上何在，簡文曰某在斯。簡文 (Emperor Jianwen, i.e., 司馬昱) is in a dark room and summons 宣武 (Huan Wen). 宣武 asks where '上' (the emperor) is, and 簡文 replies '某在斯' (I am here). The character 某 is a self-referential pronoun used by 簡文 in his reply. The Liu annotation (sfh1-ev-02-yanyu-060-liu-annotation-002) explicitly glosses 某在斯 as a self-reference pattern from the Analects (師冕見), confirming 某 functions as a first-person self-reference. Thus the target 某 refers to 簡文 (司馬昱) himself, who is the speaker.\"}}",
+              "name": "submit_sfh2_a2_independent_historian_v1"
+            },
+            "id": "call_00_Bul8Ot37hW4WO3YEqPRS6906",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1788187313,
+  "id": "835560c4-59b5-4258-b0e3-75bc92ab4c6a",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 534,
+    "prompt_cache_hit_tokens": 1664,
+    "prompt_cache_miss_tokens": 777,
+    "prompt_tokens": 2441,
+    "prompt_tokens_details": {
+      "cached_tokens": 1664
+    },
+    "total_tokens": 2975
+  }
+}

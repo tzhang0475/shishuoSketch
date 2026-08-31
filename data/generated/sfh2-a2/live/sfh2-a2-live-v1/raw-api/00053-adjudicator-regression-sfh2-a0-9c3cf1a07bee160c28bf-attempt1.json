@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"decision\": \"select_a\", \"base_record\": \"historian_a\", \"patch_ops\": [], \"reason_summary\": \"The two records agree on all substantive historical content: the courtesy name 景真 is attributed to 桓亮 (Huan Liang), with high confidence, same referent, same attribute type/value, and same supporting evidence (sfh1-ev-19-xianyuan-032-liu-annotation-003). The only disagreements are in discourse metadata and the relation label.\\n\\nOn the discourse fields: Historian A leaves addressee_hint and speaker_hint empty, while Historian B fills speaker_hint as \\\"Liu Xiaobiao (annotator)\\\" and addressee_hint as \\\"reader.\\\" The annotation text 續晉陽秋曰桓亮字景真 is a quoted citation within Liu Xiaobiao's annotation; the courtesy-name statement is not directly addressed to a reader nor spoken by the annotator in a discourse sense—it is a citation from the 續晉陽秋. Historian A's more conservative empty discourse hints are better supported by the evidence, since the source is a quoted text rather than direct annotation speech.\\n\\nOn the relation: Historian A labels the relation \\\"attribute_of\\\" (the courtesy name is an attribute of 桓亮), which is the correct semantic relation for a courtesy-name attribute reference. Historian B labels it \\\"same_person,\\\" which is incorrect—the courtesy name 景真 is not a separate person being equated with 桓亮; it is an attribute belonging to him. The \\\"attribute_of\\\" relation is better supported by the evidence and the semantic_kind (person_attribute).\", \"supporting_evidence_ids\": [\"sfh1-ev-19-xianyuan-032-liu-annotation-003\"]}",
+              "name": "submit_sfh2_a2_disagreement_adjudication_v1"
+            },
+            "id": "call_00_mPKwgH1mjXwqKZ5DAQol0920",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1788187419,
+  "id": "8aad9a8e-49ad-485b-9158-9c6c1d680522",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 454,
+    "prompt_cache_hit_tokens": 1920,
+    "prompt_cache_miss_tokens": 4444,
+    "prompt_tokens": 6364,
+    "prompt_tokens_details": {
+      "cached_tokens": 1920
+    },
+    "total_tokens": 6818
+  }
+}

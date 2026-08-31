@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"decision\": \"select_b\", \"base_record\": \"historian_b\", \"patch_ops\": [], \"reason_summary\": \"The two records agree on all substantive historical content: both identify 齊桓公 as the ruler title of Duke Huan of Qi, a historical exemplum reference within Liu Xiaobiao's annotation, with the same canonical hint, semantic kind, occurrence role, reference type, and relation to 管仲夷吾. The only disagreement is in the discourse fields (addressee_hint, antecedent_hint, speaker_hint). Historian B provides more complete and accurate discourse annotations: the speaker is correctly identified as Liu Xiaobiao (the annotation author), the antecedent is 管仲夷吾 (Guan Zhong), and the addressee is the reader of the annotation. Historian A's speaker_hint \\\"劉孝標注\\\" conflates the speaker with the annotation itself, and its addressee_hint is empty. Historian B's discourse fields are better supported by the evidence (the annotation text citing the Shiji about Guan Zhong serving Duke Huan of Qi).\", \"supporting_evidence_ids\": [\"sfh1-ev-02-yanyu-036-liu-annotation-001\"]}",
+              "name": "submit_sfh2_a2_disagreement_adjudication_v1"
+            },
+            "id": "call_00_kmjgjSjM3NiG8ywLU9TN4986",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1788187384,
+  "id": "482d62db-cf05-4fe1-8fb9-0b0203b72776",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 341,
+    "prompt_cache_hit_tokens": 1792,
+    "prompt_cache_miss_tokens": 2932,
+    "prompt_tokens": 4724,
+    "prompt_tokens_details": {
+      "cached_tokens": 1792
+    },
+    "total_tokens": 5065
+  }
+}

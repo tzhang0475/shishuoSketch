@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"decision\": \"select_a\", \"base_record\": \"historian_a\", \"patch_ops\": [], \"reason_summary\": \"Both historians agree on the core identification: 嚴仲弼 is the courtesy name (字) of 嚴隱, a historical person from Wu, with high confidence, semantic_kind historical_person, reference_type courtesy_name, and occurrence_role scene_participant. The substantive disagreements are confined to discourse hints and the relations list. Historian A's discourse.addressee_hint \\\"問者（秀才吳舊姓者）\\\" more precisely captures the addressee as the questioner (the 秀才 who asked about Wu's old surnames), whereas Historian B's \\\"秀才吳\\\" conflates the office title with the place. Historian A's antecedent_hint is empty, which is appropriate since 嚴仲弼 is the first mention of this person in the discourse (no antecedent exists); Historian B's antecedent_hint \\\"嚴仲弼\\\" merely repeats the surface form and adds no information. On relations, Historian A includes both the annotation and main text as evidence for the same_person relation to 嚴隱, which is well supported since the main text's description \\\"九臯之鳴鶴空谷之白駒\\\" matches the annotation's identification; Historian B cites only the annotation. Historian A's canonical_hint \\\"嚴隱字仲弼\\\" is slightly more informative than B's \\\"嚴隱\\\" but both are correct. Overall Historian A is better supported on the discourse and relation fields.\", \"supporting_evidence_ids\": [\"sfh1-ev-08-shangyu-020-liu-annotation-005\", \"sfh1-ev-08-shangyu-020-main\"]}",
+              "name": "submit_sfh2_a2_disagreement_adjudication_v1"
+            },
+            "id": "call_00_k8iV9ycTzbWvSQT4cMxE7571",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1788187412,
+  "id": "b5a9d017-7e1a-4bea-8467-4006043bb0b6",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 447,
+    "prompt_cache_hit_tokens": 1920,
+    "prompt_cache_miss_tokens": 4971,
+    "prompt_tokens": 6891,
+    "prompt_tokens_details": {
+      "cached_tokens": 1920
+    },
+    "total_tokens": 7338
+  }
+}

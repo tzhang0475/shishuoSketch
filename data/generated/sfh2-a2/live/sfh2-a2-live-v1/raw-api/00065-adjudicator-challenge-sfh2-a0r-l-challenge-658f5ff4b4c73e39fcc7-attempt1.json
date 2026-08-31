@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"decision\": \"select_a\", \"base_record\": \"historian_a\", \"patch_ops\": [], \"reason_summary\": \"The target '身' appears in the Liu Xiaobiao annotation quoting Deng Can's Jin Ji (鄧粲晉紀曰上身服儉約). The main text establishes 元帝 (Emperor Yuan of Jin) as the subject, and the annotation quotes the emperor's own words about his frugality. The pronoun 身 here is a self-referential pronoun used by the emperor referring to himself, making it a scene_participant (the emperor speaking of himself) rather than a person_attribute. Historian A correctly identifies the referent as 司馬睿 (canonical identity of 元帝) and treats 身 as a self-reference pronoun. Historian B's treatment of 身 as a person_attribute with attribute_value \\\"性素好酒\\\" is problematic: the phrase 性素好酒 appears in a different part of the annotation (annotation-001's parenthetical \\\"(以先時務性素好酒将渡)\\\") and is not what 身 refers to. The target span 身 is the self-referential pronoun in \\\"上身服儉約\\\", which describes the emperor's frugality as a self-reference, not an attribute-bearing construction. Historian A's occurrence_role of scene_participant and referent 司馬睿 is better supported by the evidence.\", \"supporting_evidence_ids\": [\"sfh1-ev-10-guizhen-011-liu-annotation-001\", \"sfh1-ev-10-guizhen-011-main\"]}",
+              "name": "submit_sfh2_a2_disagreement_adjudication_v1"
+            },
+            "id": "call_00_Ql1cYFB2eaenenDnlYre5933",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1788188336,
+  "id": "9409329e-431a-4f8a-a45a-ee5fbe53b786",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 422,
+    "prompt_cache_hit_tokens": 1920,
+    "prompt_cache_miss_tokens": 1887,
+    "prompt_tokens": 3807,
+    "prompt_tokens_details": {
+      "cached_tokens": 1920
+    },
+    "total_tokens": 4229
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"decision\": \"select_b\", \"base_record\": \"historian_b\", \"patch_ops\": [], \"reason_summary\": \"Both historians agree on the core identity: 王師 refers collectively to the Jin imperial/royal army (晉朝官軍) in the context of 蘇峻's rebellion, with semantic_kind \\\"collective\\\" and reference_type \\\"descriptive_reference\\\". The substantive disagreement is limited to occurrence_role (collective_reference vs scene_reference) and discourse fields.\\n\\nHistorian B's occurrence_role of \\\"scene_reference\\\" is better supported. The term 王師 appears in the Liu Xiaobiao annotation quoting 《晉陽秋》 describing the battle scene where 蘇峻's forces crossed the river to 蔣山 and the imperial army was defeated (王師敗績). This is a reference to a participant in the narrated scene (the imperial army as a scene participant), not a self-referential or addressee-oriented collective reference. The validated local mentions list classifies this mention as \\\"collective_person_reference\\\" with reference_form \\\"descriptive_person_reference\\\", which aligns with a scene participant reference.\\n\\nHistorian B also provides a more complete discourse.antecedent_hint explaining the context (王師敗績 — 指晉朝朝廷的官軍在蘇峻之亂中戰敗), and correctly leaves speaker_hint empty since the annotation text is not a direct speech act by a speaker. Historian A's assignment of speaker_hint \\\"晉陽秋\\\" is less appropriate because 晉陽秋 is the cited source work, not a speaker within the discourse. Historian B's higher confidence is also justified given the clear contextual evidence.\", \"supporting_evidence_ids\": [\"sfh1-ev-05-fangzheng-034-liu-annotation-005\", \"sfh1-ev-05-fangzheng-034-liu-annotation-004\"]}",
+              "name": "submit_sfh2_a2_disagreement_adjudication_v1"
+            },
+            "id": "call_00_QJQEa9QVemHGoRtBMKrw3417",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1788187404,
+  "id": "b35e6fec-aa1b-485c-9481-feda0a4ad1bc",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 482,
+    "prompt_cache_hit_tokens": 1920,
+    "prompt_cache_miss_tokens": 2632,
+    "prompt_tokens": 4552,
+    "prompt_tokens_details": {
+      "cached_tokens": 1920
+    },
+    "total_tokens": 5034
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"decision\": \"select_a\", \"base_record\": \"historian_a\", \"patch_ops\": [], \"reason_summary\": \"Both historians agree on the substantive identity: '上' is a ruler title referring to 簡文帝 (司馬昱), the emperor in this scene. The only disagreement is in the canonical_hint and surface_form fields: Historian A uses '簡文帝' while Historian B uses '司馬昱'. The validated local mention sfh1-mention-1663ef91cb1ebbf7819c2c5a identifies the ruler in this scene as '簡文' (surface form), and the evidence text itself uses '簡文' as the ruler title. Historian A's canonical_hint '簡文帝' and surface_form '簡文' align directly with the validated local mention and the source text's own usage. Historian B's '司馬昱' is the personal name of the same person, but the canonical hint should reflect the form used in the source and validated mentions. Historian A is better supported.\", \"supporting_evidence_ids\": [\"sfh1-ev-02-yanyu-060-main\"]}",
+              "name": "submit_sfh2_a2_disagreement_adjudication_v1"
+            },
+            "id": "call_00_RQ9UPI45kJAEdmkSSiZJ6146",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1788187442,
+  "id": "ab34696a-cf7f-4d31-8b80-17f8dbf91088",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 327,
+    "prompt_cache_hit_tokens": 1920,
+    "prompt_cache_miss_tokens": 1758,
+    "prompt_tokens": 3678,
+    "prompt_tokens_details": {
+      "cached_tokens": 1920
+    },
+    "total_tokens": 4005
+  }
+}

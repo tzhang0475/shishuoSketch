@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"decision\": \"select_b\", \"base_record\": \"historian_b\", \"patch_ops\": [], \"reason_summary\": \"The two historians agree on all substantive content: the pronoun 卿 is a second-person pronoun spoken by 温太真 (温嶠) addressing 庾亮, with 庾亮 as the antecedent and referent. The only disagreements are in the occurrence_role field and the relations field. Historian B assigns occurrence_role \\\"addressee_reference,\\\" which is the correct classification: 卿 is a second-person pronoun directly addressing the addressee 庾亮 within the quoted speech \\\"卿可贖我.\\\" The pronoun functions as the addressee of the speech act, not merely as a scene participant. Historian A's \\\"scene_participant\\\" is less precise. Regarding relations: Historian A adds a \\\"same_person\\\" relation linking the pronoun to 庾亮, but this is redundant since the referent.canonical_hint already identifies 庾亮 as the referent; the pronoun is not a separate person entity requiring a same_person relation. Historian B's empty relations array is more appropriate for a pronoun whose identity is already captured in the referent field. Historian B is better supported on both disputed fields.\", \"supporting_evidence_ids\": [\"sfh1-ev-23-rendan-026-main\"]}",
+              "name": "submit_sfh2_a2_disagreement_adjudication_v1"
+            },
+            "id": "call_00_zUAJDOh9TtqJ9JciKWju4263",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1788187426,
+  "id": "30008592-917f-4d8a-80af-e4b80b72c857",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 374,
+    "prompt_cache_hit_tokens": 1920,
+    "prompt_cache_miss_tokens": 1382,
+    "prompt_tokens": 3302,
+    "prompt_tokens_details": {
+      "cached_tokens": 1920
+    },
+    "total_tokens": 3676
+  }
+}

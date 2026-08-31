@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"decision\": \"select_b\", \"base_record\": \"historian_b\", \"patch_ops\": [], \"reason_summary\": \"Both historians agree on the core historical identity: the surname 顧 at the start of the main text refers to 顧愷之 (Gu Kaizhi), the famous painter, with the full name 顧長康 appearing at the same position and the Liu annotation glossing 愷 as his personal name. The substantive disagreement is limited to (1) the discourse.antecedent_hint, (2) discourse.speaker_hint, and (3) the relations field.\\n\\nHistorian B's record is better supported. For the antecedent_hint, Historian B correctly identifies the antecedent as the full-name mention 顧長康 (sfh1-mention-5db99dfc07c09df5bc76055d), which is the validated local mention at the same source position (source_start 0). Historian A's antecedent_hint \\\"顧長康\\\" is textually correct but lacks the structured mention reference that B provides, and B's version aligns with the validated_local_mentions list.\\n\\nFor the speaker_hint, Historian B assigns \\\"narrator,\\\" which is appropriate: the main text is a third-person narrative anecdote (the narrator describes Gu Kaizhi wanting to paint Yin Zhongkan), and the target 顧 is not part of any quoted speech. Historian A leaves speaker_hint empty, which is less informative and does not reflect the narrative context.\\n\\nFor the relations field, Historian A includes two same_person relations (to 顧長康 and to 愷), but the 愷 mention (sfh1-mention-1f5650dc928adcf6ae74390c) is in the Liu annotation layer, not the main text where the target 顧 occurs. Historian B's single same_person relation to 顧長康 (sfh1-ev-21-qiaoyi-011-main) is the more precise and better-scoped relation, since the target 顧 and 顧長康 occupy the same span in the main text. Historian A's second relation to 愷 is redundant and less directly tied to the target's occurrence. Historian B's record is therefore the better-supported hypothesis.\", \"supporting_evidence_ids\": [\"sfh1-ev-21-qiaoyi-011-main\", \"sfh1-ev-21-qiaoyi-011-liu-annotation-001\"]}",
+              "name": "submit_sfh2_a2_disagreement_adjudication_v1"
+            },
+            "id": "call_00_IjJv93At44W5yn6qSsyV5141",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1788188353,
+  "id": "3b3b6921-35d9-4a9d-984c-d39a5ff1d033",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 606,
+    "prompt_cache_hit_tokens": 1920,
+    "prompt_cache_miss_tokens": 1929,
+    "prompt_tokens": 3849,
+    "prompt_tokens_details": {
+      "cached_tokens": 1920
+    },
+    "total_tokens": 4455
+  }
+}

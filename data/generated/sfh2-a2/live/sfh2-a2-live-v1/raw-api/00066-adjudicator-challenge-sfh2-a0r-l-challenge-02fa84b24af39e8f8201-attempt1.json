@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"decision\": \"select_a\", \"base_record\": \"historian_a\", \"patch_ops\": [], \"reason_summary\": \"Both historians agree on the core identity: '帝' in the Liu annotation refers to 元帝 (Emperor Yuan of Jin), with high confidence, same semantic_kind, reference_type (ruler_title), occurrence_role, and discourse hints. The only substantive disagreement is in the relations field: Historian A attaches the 'same_person' relation to 元帝 citing both annotation-002 and main text, and the 'related_person' relation to 王導 citing annotation-002. Historian B attaches 'same_person' to 元帝 citing only main text, and 'related_person' to 王導 citing annotation-002. The target '帝' appears in annotation-002, which is the same evidence where 王導 appears (王導深以諫帝). The main text establishes 元帝 as the emperor who loved wine and was admonished by 王茂弘 (王導). Historian A's evidence attribution is more precise: the 'same_person' relation between the target '帝' and 元帝 is supported by both the main text (which establishes 元帝 as the emperor) and annotation-002 (where the target occurs), whereas Historian B only cites the main text for this relation. Both are substantively equivalent in identity, but Historian A's relation evidence mapping is better supported by the supplied evidence.\", \"supporting_evidence_ids\": [\"sfh1-ev-10-guizhen-011-liu-annotation-002\", \"sfh1-ev-10-guizhen-011-main\"]}",
+              "name": "submit_sfh2_a2_disagreement_adjudication_v1"
+            },
+            "id": "call_00_qwgYNeewsD9Xo24bnsJ13489",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1788188339,
+  "id": "a0b55404-fe3f-41cd-8839-ce4850505657",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 435,
+    "prompt_cache_hit_tokens": 1920,
+    "prompt_cache_miss_tokens": 2068,
+    "prompt_tokens": 3988,
+    "prompt_tokens_details": {
+      "cached_tokens": 1920
+    },
+    "total_tokens": 4423
+  }
+}

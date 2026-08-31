@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"decision\": \"select_a\", \"base_record\": \"historian_a\", \"patch_ops\": [], \"reason_summary\": \"Both historians agree on the core historical identity: 袁府君 refers to 袁山松 (Yuan Shansong), the Wu Commandery governor who fought Sun En at Hudu, referenced by his office title. The only substantive disagreements are (1) the discourse.antecedent_hint and (2) the relations field. Historian A provides the antecedent_hint \\\"袁府君\\\" and includes both evidence IDs (main text + Liu annotation) in the same_person relation to 山松. Historian B leaves antecedent_hint empty and cites only the annotation for the relation. Historian A's version is better supported: the main text itself (sfh1-ev-01-dexing-045-main) contains the antecedent 袁府君 in the same passage, and the identification of 袁府君 with 山松 rests on the juxtaposition of the main text's 袁府君 with the annotation's 山松, so citing both evidence IDs in the relation is more accurate. The antecedent_hint pointing to 袁府君 is also appropriate since the target is the same surface form in the main text. Historian A's record is therefore the better-supported hypothesis.\", \"supporting_evidence_ids\": [\"sfh1-ev-01-dexing-045-main\", \"sfh1-ev-01-dexing-045-liu-annotation-004\"]}",
+              "name": "submit_sfh2_a2_disagreement_adjudication_v1"
+            },
+            "id": "call_00_1A2DjxMOLuy64LobH6ty9962",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1788187381,
+  "id": "aae8d1a5-1897-4846-91c3-9bb6aa0687e7",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 398,
+    "prompt_cache_hit_tokens": 0,
+    "prompt_cache_miss_tokens": 4531,
+    "prompt_tokens": 4531,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "total_tokens": 4929
+  }
+}

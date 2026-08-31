@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"decision\": \"select_a\", \"base_record\": \"historian_a\", \"patch_ops\": [], \"reason_summary\": \"Both historians agree on the core identity: 某 is a self-referential pronoun used by 簡文 (Emperor Jianwen, 司馬昱) replying \\\"某在斯\\\" to 宣武's question about where 上 (the emperor) is. The Liu annotation (sfh1-ev-02-yanyu-060-liu-annotation-002) explicitly glosses 某在斯 as the Analects self-reference pattern, confirming 某 as first-person self-reference. The substantive disagreements are: (1) occurrence_role — Historian A labels it \\\"scene_participant\\\" while Historian B labels it \\\"speaker_reference\\\"; (2) referent.canonical_hint — A uses \\\"簡文帝\\\" while B uses \\\"司馬昱\\\"; (3) relations ordering. On occurrence_role, the target 某 is the pronoun spoken by 簡文 in his reply, so it is the speaker's self-reference; Historian B's \\\"speaker_reference\\\" is more precise than A's generic \\\"scene_participant.\\\" However, on canonical_hint, the surface form in the text is 簡文 (a ruler title), and the validated local mentions use \\\"簡文\\\" as the ruler_title surface; \\\"簡文帝\\\" (A) is the more natural canonical expansion of the surface form 簡文 than the personal name 司馬昱 (B), which is not present in the evidence. The relations in both records are equivalent in content (same_person to 簡文 and 上), differing only in ordering, which is not substantive. Given the near-total agreement on identity and the fact that the canonical_hint \\\"簡文帝\\\" better matches the surface form 簡文 in the supplied evidence, Historian A is selected. The occurrence_role difference is minor and does not overturn the identity determination.\", \"supporting_evidence_ids\": [\"sfh1-ev-02-yanyu-060-main\", \"sfh1-ev-02-yanyu-060-liu-annotation-002\"]}",
+              "name": "submit_sfh2_a2_disagreement_adjudication_v1"
+            },
+            "id": "call_00_txhNFrVv4vEStdEyEfAL5331",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1788187444,
+  "id": "2b6d245b-286f-41c0-bbd6-c25e4f71eb72",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 536,
+    "prompt_cache_hit_tokens": 1920,
+    "prompt_cache_miss_tokens": 2132,
+    "prompt_tokens": 4052,
+    "prompt_tokens_details": {
+      "cached_tokens": 1920
+    },
+    "total_tokens": 4588
+  }
+}

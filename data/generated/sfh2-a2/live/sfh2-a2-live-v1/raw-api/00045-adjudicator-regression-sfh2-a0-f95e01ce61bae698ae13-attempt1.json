@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"decision\": \"select_a\", \"base_record\": \"historian_a\", \"patch_ops\": [], \"reason_summary\": \"Both historians agree on the core facts: 太丘長 is the office title (magistrate of Taiqiu) held by 陳仲弓 (陳寔), functioning as a person attribute. The substantive disagreement is narrow: (1) the canonical_hint for the referent (太丘縣長 vs 太丘長), and (2) the relation type (office_relation vs attribute_of) and supporting evidence.\\n\\nHistorian A's canonical_hint \\\"太丘縣長\\\" is more precise: 太丘長 is the abbreviated form of the office \\\"太丘縣長\\\" (county magistrate of Taiqiu), since 長 in this context is the county magistrate title. Historian A's relation \\\"office_relation\\\" with target 陳仲弓 is also more appropriate than Historian B's \\\"attribute_of,\\\" since the office title is being related to the office-holder through an office relation, and the primary evidence (main text \\\"陳仲弓為太丘長時\\\") directly establishes this. Historian B's inclusion of the Liu annotation (寔/陳) as supporting evidence is less directly relevant to the office relation itself, since that annotation only confirms the person's identity, not the office. Historian A's evidence selection (main text only) is more tightly focused on the office-holding claim.\", \"supporting_evidence_ids\": [\"sfh1-ev-03-zhengshi-001-main\"]}",
+              "name": "submit_sfh2_a2_disagreement_adjudication_v1"
+            },
+            "id": "call_00_Moacp9oLDEQfE6Lj5g9Z1347",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1788187391,
+  "id": "b53bc5e7-9c47-4df2-aec8-e095c122d87c",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 410,
+    "prompt_cache_hit_tokens": 1920,
+    "prompt_cache_miss_tokens": 1712,
+    "prompt_tokens": 3632,
+    "prompt_tokens_details": {
+      "cached_tokens": 1920
+    },
+    "total_tokens": 4042
+  }
+}
