@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"decision\": \"select_pass1\", \"semantic_record\": {\"mention_id\": \"sfh1-mention-16b0e1cf7dd4e5a7bba31ca9\", \"surface\": \"宣王\", \"semantic_kind\": \"historical_person\", \"reference_type\": \"ruler_title\", \"referent\": {\"surface_form\": \"宣王\", \"canonical_hint\": \"司馬懿 (Sima Yi), posthumous title 宣王\", \"confidence\": \"high\"}, \"occurrence_role\": \"historical_exemplum\", \"discourse\": {\"speaker_hint\": \"王導 (Wang Dao)\", \"addressee_hint\": \"明帝 (Emperor Ming of Jin)\", \"antecedent_hint\": \"王導 narrating the founding of the Wei dynasty\", \"self_reference_hint\": \"\"}, \"relations\": [{\"target_hint\": \"文王\", \"relation\": \"kinship_relation\", \"confidence\": \"high\", \"evidence_ids\": [\"sfh1-ev-33-youhui-007-main\"]}, {\"target_hint\": \"高貴鄉公\", \"relation\": \"related_person\", \"confidence\": \"medium\", \"evidence_ids\": [\"sfh1-ev-33-youhui-007-main\"]}, {\"target_hint\": \"曹爽\", \"relation\": \"related_person\", \"confidence\": \"high\", \"evidence_ids\": [\"sfh1-ev-33-youhui-007-liu-annotation-001\"]}, {\"target_hint\": \"蔣濟\", \"relation\": \"related_person\", \"confidence\": \"high\", \"evidence_ids\": [\"sfh1-ev-33-youhui-007-liu-annotation-001\"]}], \"confidence\": \"high\", \"supporting_evidence_ids\": [\"sfh1-ev-33-youhui-007-liu-annotation-001\", \"sfh1-ev-33-youhui-007-main\"], \"attribute_type\": \"\", \"attribute_value\": \"\", \"bearer_hint\": \"\", \"abstain\": false, \"explanation\": \"宣王 is the posthumous ruler title of 司馬懿 (Sima Yi). In the main text, 王導 narrates how 宣王 initiated the founding enterprise (創業之始), exterminating prominent clans and executing 曹爽 (Cao Shuang), as confirmed by the Liu annotation which explicitly glosses 宣王創業誅曹爽任蔣濟. The title 宣王 was conferred posthumously on Sima Yi. The narrative continues with 文王 (Sima Zhao, Sima Yi's son) and the 高貴鄉公 affair, establishing the genealogical/structural chain of the Sima family's rise. The target is an independent historical person referenced by his posthumous ruler title. The multi-candidate flag reflects multiple legitimate relation targets, not ambiguity about the referent itself, which is unambiguous.\"}, \"reason_summary\": \"Both the primary and critical review records are substantively identical and correctly identify 宣王 as the posthumous ruler title of 司馬懿 (Sima Yi). The main text has 王導 narrating 宣王創業之始 (the founding enterprise), and the Liu annotation explicitly glosses 宣王創業誅曹爽任蔣濟, confirming the identification. The multi-candidate flag is a formal artifact of having multiple relation targets (文王, 高貴鄉公, 曹爽, 蔣濟), not an ambiguity about the referent itself. The referent is unambiguous and both records agree. I select the primary record as it is fully supported by the evidence.\", \"supporting_evidence_ids\": [\"sfh1-ev-33-youhui-007-main\", \"sfh1-ev-33-youhui-007-liu-annotation-001\"]}",
+              "name": "submit_sfh2_a0_adjudication"
+            },
+            "id": "call_00_orecCDqvceG3kCxEufZa3773",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1788111573,
+  "id": "c2bdf070-69a5-4e69-b22b-91121377ce91",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 869,
+    "prompt_cache_hit_tokens": 1280,
+    "prompt_cache_miss_tokens": 2578,
+    "prompt_tokens": 3858,
+    "prompt_tokens_details": {
+      "cached_tokens": 1280
+    },
+    "total_tokens": 4727
+  }
+}

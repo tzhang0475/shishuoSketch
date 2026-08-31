@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"decision\": \"select_pass1\", \"semantic_record\": {\"mention_id\": \"sfh1-mention-e811bf3cd95d7cfdc1162c15\", \"surface\": \"阮光禄\", \"semantic_kind\": \"historical_person\", \"reference_type\": \"office_title\", \"referent\": {\"surface_form\": \"阮光禄\", \"canonical_hint\": \"阮裕 (Ruan Yu), styled 思曠, who held the office of 光禄大夫 (Guanglu Daifu)\", \"confidence\": \"high\"}, \"occurrence_role\": \"scene_participant\", \"discourse\": {\"speaker_hint\": \"narrator of the Shishuo Xinyu anecdote\", \"addressee_hint\": \"reader of the anecdote\", \"antecedent_hint\": \"none; first mention in the main text\", \"self_reference_hint\": \"none\"}, \"relations\": [{\"target_hint\": \"謝安\", \"relation\": \"related_person\", \"confidence\": \"high\", \"evidence_ids\": [\"sfh1-ev-04-wenxue-024-main\"]}, {\"target_hint\": \"裕\", \"relation\": \"same_person\", \"confidence\": \"high\", \"evidence_ids\": [\"sfh1-ev-04-wenxue-024-liu-annotation-003\"]}], \"confidence\": \"high\", \"supporting_evidence_ids\": [\"sfh1-ev-04-wenxue-024-liu-annotation-003\", \"sfh1-ev-04-wenxue-024-main\"], \"attribute_type\": \"\", \"attribute_value\": \"\", \"bearer_hint\": \"\", \"abstain\": false, \"explanation\": \"阮光禄 is an office-title reference (光禄大夫) to the historical person 阮裕 (Ruan Yu). The main text describes him presenting the 白馬論 (White Horse Discourse) to the young 謝安. The Liu Xiaobiao annotation (sfh1-ev-04-wenxue-024-liu-annotation-003) cites 中興書 and names 裕, confirming the referent is Ruan Yu. The office title 光禄大夫 is used as a courtesy/descriptive designation for him in the Shishuo Xinyu style. The two relations (related_person to 謝安, same_person to 裕) are distinct and appropriate; the multi-candidate flag reflects two different relation types, not ambiguity about the referent.\"}, \"reason_summary\": \"Both the primary and critical review records are substantively identical in content, referent identification, relations, and supporting evidence. The primary record is fully supported by the source evidence: the main text (sfh1-ev-04-wenxue-024-main) shows 阮光禄 presenting the 白馬論 to 謝安, and the Liu Xiaobiao annotation (sfh1-ev-04-wenxue-024-liu-annotation-003) cites 中興書 naming 裕, confirming the referent as 阮裕 (Ruan Yu). The office title 光禄大夫 is correctly identified as the reference type. The multi-candidate flag is a formal artifact of having two distinct relation types (related_person to 謝安 and same_person to 裕), not evidence of referent ambiguity. The primary record is selected as fully supported.\", \"supporting_evidence_ids\": [\"sfh1-ev-04-wenxue-024-liu-annotation-003\", \"sfh1-ev-04-wenxue-024-main\"]}",
+              "name": "submit_sfh2_a0_adjudication"
+            },
+            "id": "call_00_h8t2si5PglcSzRJyKl9f2581",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1788111534,
+  "id": "15f303b2-3da3-406e-bedf-a6a97102d3c4",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 832,
+    "prompt_cache_hit_tokens": 1280,
+    "prompt_cache_miss_tokens": 1946,
+    "prompt_tokens": 3226,
+    "prompt_tokens_details": {
+      "cached_tokens": 1280
+    },
+    "total_tokens": 4058
+  }
+}

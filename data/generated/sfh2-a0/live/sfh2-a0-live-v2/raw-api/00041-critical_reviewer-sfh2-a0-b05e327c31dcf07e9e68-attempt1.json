@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"decision\": \"revise\", \"revised_semantic_record\": {\"mention_id\": \"sfh1-mention-81824d6cdc4117f976e46cd9\", \"surface\": \"嘏\", \"semantic_kind\": \"historical_person\", \"reference_type\": \"personal_name\", \"referent\": {\"surface_form\": \"嘏\", \"canonical_hint\": \"傅嘏\", \"confidence\": \"high\"}, \"occurrence_role\": \"scene_participant\", \"discourse\": {\"speaker_hint\": \"\", \"addressee_hint\": \"\", \"antecedent_hint\": \"傅嘏\", \"self_reference_hint\": \"\"}, \"relations\": [{\"target_hint\": \"傅嘏\", \"relation\": \"same_person\", \"confidence\": \"high\", \"evidence_ids\": [\"sfh1-ev-35-huoni-002-liu-annotation-003\"]}], \"confidence\": \"high\", \"supporting_evidence_ids\": [\"sfh1-ev-35-huoni-002-liu-annotation-003\"], \"attribute_type\": \"\", \"attribute_value\": \"\", \"bearer_hint\": \"\", \"abstain\": false, \"explanation\": \"The target span 嘏 appears in Liu annotation 003, which reads: 傷嘏問曰婦人才色並茂為難子之聘也遺才存色...傅嘏往喭粲粲不明而神. The single character 嘏 is the personal name of 傅嘏 (Fu Gu), who is explicitly named in full later in the same annotation. The primary semantic record was null (not supplied), so I construct the record from the evidence. The mention is a personal_name reference to the historical person 傅嘏, a scene participant in the anecdote about 荀粲's mourning.\"}, \"reason_summary\": \"The primary semantic record was not supplied (null), and the formal flag indicates evidence grounding failure. I therefore construct the record from the evidence. The target span 嘏 occurs in Liu annotation 003: 傷嘏問曰...傅嘏往喭粲. The single character 嘏 is the personal name of 傅嘏, who is named in full in the same annotation. This is a same-person relation between the abbreviated personal name 嘏 and the full name 傅嘏. The mention is a scene participant (傅嘏 comes to console 粲). Confidence high.\", \"supporting_evidence_ids\": [\"sfh1-ev-35-huoni-002-liu-annotation-003\"]}",
+              "name": "submit_sfh2_a0_critical_review_v2"
+            },
+            "id": "call_00_vGhzvwDelbtHBTZuIhhr3001",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1788114970,
+  "id": "38d53744-ded0-4b23-a382-fa7ca53ea38e",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 623,
+    "prompt_cache_hit_tokens": 0,
+    "prompt_cache_miss_tokens": 4225,
+    "prompt_tokens": 4225,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "total_tokens": 4848
+  }
+}

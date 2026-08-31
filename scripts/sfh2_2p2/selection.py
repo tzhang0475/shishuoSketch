@@ -77,7 +77,11 @@ def prior_exclusions() -> dict[str, Any]:
     generated = ROOT / "data/generated"
     for path in sorted(generated.rglob("selection.json")):
         relative = str(path.relative_to(ROOT))
-        if "sfh2-2p2" in relative:
+        # Isolated later pilots are not historical prior controls for the
+        # already-frozen P2 sample.  In particular, reading A0's generated
+        # copy here would make the old deterministic selection drift merely
+        # because a new experiment was run.
+        if "sfh2-2p2" in relative or "sfh2-a0" in relative:
             continue
         if any(token in relative.lower() for token in ("psl", "lj0", "xe0", "hdb2", "sfh2")):
             _add_prior_doc(path, story_ids=story_ids, mention_ids=mention_ids, pairs=pairs, reasons=reasons)

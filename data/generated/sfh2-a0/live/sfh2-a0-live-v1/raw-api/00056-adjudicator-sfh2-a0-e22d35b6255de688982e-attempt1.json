@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"decision\": \"select_pass1\", \"semantic_record\": {\"mention_id\": \"sfh1-mention-4aa8f1c273fd000f7edd3be4\", \"surface\": \"之\", \"semantic_kind\": \"historical_person\", \"reference_type\": \"pronoun_reference\", \"referent\": {\"surface_form\": \"劉遺民\", \"canonical_hint\": \"劉驎之 (Liu Linzhi)\", \"confidence\": \"high\"}, \"occurrence_role\": \"scene_participant\", \"discourse\": {\"speaker_hint\": \"張玄 (Zhang Xuan)\", \"addressee_hint\": \"劉遺民 (Liu Yimin)\", \"antecedent_hint\": \"一人 / 劉遺民\", \"self_reference_hint\": \"\"}, \"relations\": [{\"target_hint\": \"劉遺民\", \"relation\": \"same_person\", \"confidence\": \"high\", \"evidence_ids\": [\"sfh1-ev-23-rendan-038-liu-annotation-002\", \"sfh1-ev-23-rendan-038-main\"]}, {\"target_hint\": \"劉驎之\", \"relation\": \"same_person\", \"confidence\": \"high\", \"evidence_ids\": [\"sfh1-ev-23-rendan-038-liu-annotation-002\"]}], \"confidence\": \"high\", \"supporting_evidence_ids\": [\"sfh1-ev-23-rendan-038-liu-annotation-002\", \"sfh1-ev-23-rendan-038-main\"], \"attribute_type\": \"\", \"attribute_value\": \"\", \"bearer_hint\": \"\", \"abstain\": false, \"explanation\": \"The pronoun 之 at source position 49-50 is the object of 納之 ('received him') in 張乃維舟而納之. The antecedent is the '一人' who came carrying raw fish and who subsequently identifies himself as 劉遺民 (Liu Yimin). The Liu annotation (sfh1-ev-23-rendan-038-liu-annotation-002) confirms 劉遺民 is 劉驎之 (Liu Linzhi), citing the 中興書. Thus 之 refers to Liu Yimin/Liu Linzhi, the person Zhang Xuan receives aboard his boat. The two relations are to the same person under surface form and canonical name respectively, not competing candidates.\"}, \"reason_summary\": \"Both the primary and critical review records are substantively identical. The pronoun 之 at position 49-50 is the object of 納之 in 張乃維舟而納之, referring to the '一人' who identifies himself as 劉遺民. The Liu annotation (sfh1-ev-23-rendan-038-liu-annotation-002) confirms 劉遺民 is 劉驎之 via the 中興書. The multi_candidate_ambiguity flag is not substantive: the two relations target the same person under surface form and canonical name respectively. The primary record is fully supported by the evidence.\", \"supporting_evidence_ids\": [\"sfh1-ev-23-rendan-038-liu-annotation-002\", \"sfh1-ev-23-rendan-038-main\"]}",
+              "name": "submit_sfh2_a0_adjudication"
+            },
+            "id": "call_00_qUDllIhoDu2cjtZNoNpS3283",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1788111569,
+  "id": "e5381dab-8d88-4d21-9b56-6dcb5f1a9d56",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 751,
+    "prompt_cache_hit_tokens": 1280,
+    "prompt_cache_miss_tokens": 2362,
+    "prompt_tokens": 3642,
+    "prompt_tokens_details": {
+      "cached_tokens": 1280
+    },
+    "total_tokens": 4393
+  }
+}

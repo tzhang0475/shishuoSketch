@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"decision\": \"select_pass1\", \"semantic_record\": {\"mention_id\": \"sfh1-mention-08e430a342d78cb7fd17db0e\", \"surface\": \"卿\", \"semantic_kind\": \"historical_person\", \"reference_type\": \"pronoun_reference\", \"referent\": {\"surface_form\": \"卿\", \"canonical_hint\": \"庾亮\", \"confidence\": \"high\"}, \"occurrence_role\": \"scene_participant\", \"discourse\": {\"speaker_hint\": \"温太真\", \"addressee_hint\": \"庾亮\", \"antecedent_hint\": \"庾亮\", \"self_reference_hint\": \"\"}, \"relations\": [], \"confidence\": \"high\", \"supporting_evidence_ids\": [\"sfh1-ev-23-rendan-026-main\"], \"attribute_type\": \"\", \"attribute_value\": \"\", \"bearer_hint\": \"\", \"abstain\": false, \"explanation\": \"The pronoun 卿 is spoken by 温太真 (Wen Qiao) addressing 庾亮 (Yu Liang). The text states 温太真 '與庾亮善於舫中大喚亮曰卿可贖我' — Wen Qiao calls out to Yu Liang saying 'you can ransom me'. The 卿 refers to 庾亮, the addressee.\"}, \"reason_summary\": \"The target span 卿 is a second-person pronoun in the main text. The context clearly shows 温太真 calling out to 庾亮: '與庾亮善於舫中大喚亮曰卿可贖我'. The 卿 is the addressee, 庾亮. Both prior records are null, so I construct the semantic record directly from the evidence. The pronoun refers to 庾亮 as the addressee of Wen Qiao's speech.\", \"supporting_evidence_ids\": [\"sfh1-ev-23-rendan-026-main\"]}",
+              "name": "submit_sfh2_a0_adjudication"
+            },
+            "id": "call_00_RRz8vHcijwo43snN7j3m8981",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1788111566,
+  "id": "97794df6-fe3a-4213-94e8-6b2074d69a9b",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 493,
+    "prompt_cache_hit_tokens": 0,
+    "prompt_cache_miss_tokens": 1981,
+    "prompt_tokens": 1981,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "total_tokens": 2474
+  }
+}

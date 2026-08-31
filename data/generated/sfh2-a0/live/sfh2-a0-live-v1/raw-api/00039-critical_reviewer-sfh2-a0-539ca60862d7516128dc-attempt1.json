@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"decision\": \"revise\", \"revised_semantic_record\": {\"mention_id\": \"sfh1-mention-08e430a342d78cb7fd17db0e\", \"surface\": \"卿\", \"semantic_kind\": \"historical_person\", \"reference_type\": \"pronoun_reference\", \"referent\": {\"surface_form\": \"卿\", \"canonical_hint\": \"庾亮\", \"confidence\": \"high\"}, \"occurrence_role\": \"addressee_reference\", \"discourse\": {\"speaker_hint\": \"温太真\", \"addressee_hint\": \"庾亮\", \"antecedent_hint\": \"庾亮\", \"self_reference_hint\": \"\"}, \"relations\": [{\"target_hint\": \"庾亮\", \"relation\": \"same_person\", \"confidence\": \"high\", \"evidence_ids\": [\"sfh1-ev-23-rendan-026-main\"]}], \"confidence\": \"high\", \"supporting_evidence_ids\": [\"sfh1-ev-23-rendan-026-main\"], \"attribute_type\": \"\", \"attribute_value\": \"\", \"bearer_hint\": \"\", \"abstain\": false, \"explanation\": \"The primary semantic record was null (no record was supplied for review). The target span '卿' (pronoun 'you') occurs in the main text where 温太真 (Wen Qiao) calls out to 庾亮 (Yu Liang) aboard a boat, saying '卿可贖我' ('you can ransom me'). The pronoun '卿' is the addressee, referring to 庾亮, who is explicitly named earlier in the same sentence ('與庾亮善於舫中大喚亮曰'). The antecedent is unambiguous: 温太真 addresses 庾亮 directly. The Liu Xiaobiao annotation mentioning 嶠 (Qiao) refers to 温太真 himself, not to the target pronoun.\"}, \"reason_summary\": \"The primary semantic record was null, so a full reconstruction was required. The target '卿' is a second-person pronoun spoken by 温太真 (Wen Qiao) addressing 庾亮 (Yu Liang), who is explicitly named in the same sentence ('與庾亮善於舫中大喚亮曰卿可贖我'). The pronoun is an addressee reference to 庾亮 with high confidence. The Liu annotation's 嶠 refers to Wen Qiao (温太真), a different person from the target referent.\", \"supporting_evidence_ids\": [\"sfh1-ev-23-rendan-026-main\", \"sfh1-ev-23-rendan-026-liu-annotation-001\"]}",
+              "name": "submit_sfh2_a0_critical_review"
+            },
+            "id": "call_00_ITSAL7PuZyGjtIIHlj3J2093",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1788111491,
+  "id": "e100f289-b576-4c66-935c-5ca1f708fae3",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 644,
+    "prompt_cache_hit_tokens": 1280,
+    "prompt_cache_miss_tokens": 722,
+    "prompt_tokens": 2002,
+    "prompt_tokens_details": {
+      "cached_tokens": 1280
+    },
+    "total_tokens": 2646
+  }
+}

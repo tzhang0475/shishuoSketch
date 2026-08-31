@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"decision\": \"select_pass1\", \"semantic_record\": {\"mention_id\": \"sfh1-mention-78eb7b172e33ad26fcd396e8\", \"surface\": \"嚴仲弼\", \"semantic_kind\": \"historical_person\", \"reference_type\": \"courtesy_name\", \"referent\": {\"surface_form\": \"嚴仲弼\", \"canonical_hint\": \"嚴隱 (Yan Yin), courtesy name 仲弼\", \"confidence\": \"high\"}, \"occurrence_role\": \"scene_participant\", \"discourse\": {\"speaker_hint\": \"蔡洪 (Cai Hong), the 秀才 answering about Wu's old surnames\", \"addressee_hint\": \"周俊 (Zhou Jun), the 剌史 who asked\", \"antecedent_hint\": \"None; 嚴仲弼 is introduced as one of the Wu worthies being praised\", \"self_reference_hint\": \"None\"}, \"relations\": [{\"target_hint\": \"嚴隱\", \"relation\": \"same_person\", \"confidence\": \"high\", \"evidence_ids\": [\"sfh1-ev-08-shangyu-020-liu-annotation-005\"]}, {\"target_hint\": \"吳府君 (吳展)\", \"relation\": \"related_person\", \"confidence\": \"medium\", \"evidence_ids\": [\"sfh1-ev-08-shangyu-020-main\"]}], \"confidence\": \"high\", \"supporting_evidence_ids\": [\"sfh1-ev-08-shangyu-020-liu-annotation-005\", \"sfh1-ev-08-shangyu-020-main\"], \"attribute_type\": \"\", \"attribute_value\": \"\", \"bearer_hint\": \"\", \"abstain\": false, \"explanation\": \"嚴仲弼 is the courtesy name (字) of 嚴隱 (Yan Yin), a Wu commandery person. The Liu Xiaobiao annotation (sfh1-ev-08-shangyu-020-liu-annotation-005) explicitly identifies 仲弼 as the courtesy name of 嚴隱, a 吳郡人 praised as '理物之至德清選之高望'. In the main text (sfh1-ev-08-shangyu-020-main), 蔡洪 (Cai Hong) lists 嚴仲弼 among the notable men of the old Wu surnames, praising him as '九臯之鳴鶴空谷之白駒'. The mention is a courtesy-name reference to the historical person 嚴隱. The same_person relation to 嚴隱 is directly attested by the annotation; the related_person relation to 吳府君/吳展 reflects both being Wu worthies listed in the same passage. The multi_candidate_ambiguity flag reflects the presence of two relations, but this is not a semantic error—the same_person relation is the core identity.\"}, \"reason_summary\": \"Both the primary and critical review records are substantively identical and both are well-grounded in the evidence. The Liu Xiaobiao annotation (sfh1-ev-08-shangyu-020-liu-annotation-005) explicitly identifies 仲弼 as the courtesy name of 嚴隱, a 吳郡人. The main text (sfh1-ev-08-shangyu-020-main) lists 嚴仲弼 among the Wu worthies praised by 蔡洪. The record correctly identifies the mention as a courtesy-name reference to the historical person 嚴隱. The multi_candidate_ambiguity flag is a formal artifact of having two relations, not a semantic error. I select the primary record, which is fully supported by the evidence.\", \"supporting_evidence_ids\": [\"sfh1-ev-08-shangyu-020-liu-annotation-005\", \"sfh1-ev-08-shangyu-020-main\"]}",
+              "name": "submit_sfh2_a0_adjudication"
+            },
+            "id": "call_00_hCxiBXaCf7Iyy3nHG84i4595",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1788111547,
+  "id": "4542e928-cfd5-4204-b22c-5273181e7ab1",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 877,
+    "prompt_cache_hit_tokens": 1280,
+    "prompt_cache_miss_tokens": 5115,
+    "prompt_tokens": 6395,
+    "prompt_tokens_details": {
+      "cached_tokens": 1280
+    },
+    "total_tokens": 7272
+  }
+}

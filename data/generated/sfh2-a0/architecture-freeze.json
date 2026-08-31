@@ -1,0 +1,49 @@
+{
+  "architecture_hash": "091c66897774722b8569918c7340e02fc19419d0aae4b50348414e52e9b5ee9f",
+  "authority_policy": "reviewed human semantic decision > validated LLM semantic judgment > soft collective consistency > deterministic retrieval hint",
+  "baseline": "d832519b80be089f4c8cff887aa07f3693469fee",
+  "candidate_only": true,
+  "canonical_write_back": false,
+  "code_files": {
+    "scripts/sfh2_a0/common.py": "7303511e93445595f2d215c66b220f26e1777089c8541244d9aa7ebc06578227",
+    "scripts/sfh2_a0/consistency.py": "cdbaf65e1a36654ec33d2dc1972d4ae0a85f8b27def0787a1af3aa78d09e2ad8",
+    "scripts/sfh2_a0/pipeline.py": "e5751c2bf97c9604a8118a5a807a4e22717ce0710fd4e8f22bef83aa940f1fee",
+    "scripts/sfh2_a0/retrieval.py": "aa7f6308552a1fe7b40582443768692a77fb9fe801ba3e6f8835811b8bf0fd67",
+    "scripts/sfh2_a0/schemas.py": "7b120d6f20df3c08d96116d62af1d0cf4ca7d4a39e229f9fad00912c03d8c3bd",
+    "scripts/sfh2_a0/transport.py": "93911b5eaaad6fd354e56459404d76e1cbb3baefc75343ca130667b3f82f2584"
+  },
+  "consistency_engine_contract": "formal_fields_and_graph_only_v1",
+  "model_config": {
+    "endpoint": "https://api.deepseek.com/beta/chat/completions",
+    "function_names": {
+      "adjudicator": "submit_sfh2_a0_adjudication_v2",
+      "critical_reviewer": "submit_sfh2_a0_critical_review_v2",
+      "primary_historian": "submit_sfh2_a0_primary_semantics_v2"
+    },
+    "max_provider_attempts": 60,
+    "model": "deepseek-v4-flash",
+    "prompt_versions": {
+      "adjudicator": "sfh2-a0-adjudicator-v2",
+      "critical_reviewer": "sfh2-a0-critical-reviewer-v2",
+      "primary_historian": "sfh2-a0-primary-historian-v2"
+    },
+    "temperature": 0,
+    "thinking": {
+      "type": "disabled"
+    }
+  },
+  "model_config_hash": "86cb8ceaf95171ef6450b1f89f9a5876a7ee165399283b4ae75252ddd7ad4435",
+  "pilot": "SFH2.2-A0",
+  "prompt_hashes": {
+    "adjudicator": "f7448d22284b786922b5ad590d6adcc16743705844747bdeba7e102500e9bc27",
+    "critical_reviewer": "66d48f2efb08c3a2178a63d40c7f541eac7ea4b15f8b8a2c7beb9f342f27755b",
+    "primary_historian": "26bdeb73dd4d88a8e687e8d499c23a564a3c24d4eeb5b3ea2432c5764ebe7486"
+  },
+  "schema": "sfh2-a0-architecture-freeze-v1",
+  "schema_hashes": {
+    "adjudication": "3c30be06aabb14d24e91218a09366802a80f508f875d62dc81b6d789b776ee8e",
+    "critical_review": "6a00db0fbc5f34497d1432dd00ecfeeab040dde8f917eb33b13d3f8e1523c6eb",
+    "semantic_record": "ae39690c9231fa4c493a38d1a5dbaab016a70c1cb8a06606f5edb770df25e312"
+  },
+  "selection_hash": "b8162d9d470c6359c67a8ed31aa31ef82149c12d92dd9a694b62327fc204bbc3"
+}

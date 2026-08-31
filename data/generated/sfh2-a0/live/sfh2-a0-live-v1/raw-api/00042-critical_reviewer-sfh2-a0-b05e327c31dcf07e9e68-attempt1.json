@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"decision\": \"confirm\", \"revised_semantic_record\": {\"mention_id\": \"sfh1-mention-81824d6cdc4117f976e46cd9\", \"surface\": \"嘏\", \"semantic_kind\": \"historical_person\", \"reference_type\": \"personal_name\", \"referent\": {\"surface_form\": \"嘏\", \"canonical_hint\": \"傅嘏 (Fu Gu)\", \"confidence\": \"high\"}, \"occurrence_role\": \"scene_participant\", \"discourse\": {\"speaker_hint\": \"Liu Xiaobiao's annotation narrator\", \"addressee_hint\": \"reader of the annotation\", \"antecedent_hint\": \"傅嘏 appears in full form later in the same annotation (sfh1-ev-35-huoni-002-liu-annotation-003)\", \"self_reference_hint\": \"\"}, \"relations\": [{\"target_hint\": \"傅嘏\", \"relation\": \"same_person\", \"confidence\": \"high\", \"evidence_ids\": [\"sfh1-ev-35-huoni-002-liu-annotation-003\"]}, {\"target_hint\": \"荀粲\", \"relation\": \"related_person\", \"confidence\": \"high\", \"evidence_ids\": [\"sfh1-ev-35-huoni-002-liu-annotation-003\"]}], \"confidence\": \"high\", \"supporting_evidence_ids\": [\"sfh1-ev-35-huoni-002-liu-annotation-003\"], \"attribute_type\": \"\", \"attribute_value\": \"\", \"bearer_hint\": \"\", \"abstain\": false, \"explanation\": \"The target span '嘏' appears in Liu Xiaobiao's annotation (sfh1-ev-35-huoni-002-liu-annotation-003) in the phrase '傅嘏往喭粲' where 傅嘏 (Fu Gu) is named in full. The single character '嘏' is the personal name of 傅嘏, who visits 荀粲 (Xun Can) to offer condolences after the death of Xun Can's wife. The validated local mention sfh1-mention-a3d17929bcac44e23f154f8e confirms the full form 傅嘏 in the same annotation segment, establishing that '嘏' is the abbreviated personal name of the same historical person. The multi-candidate flag is a structural artifact of having two relations (same_person to 傅嘏 and related_person to 荀粲); both are semantically distinct and correct.\"}, \"reason_summary\": \"The primary record correctly identifies the single character '嘏' as the abbreviated personal name of 傅嘏 (Fu Gu), a historical person who appears in full form in the same annotation segment (sfh1-ev-35-huoni-002-liu-annotation-003: '傅嘏往喭粲'). The validated local mention sfh1-mention-a3d17929bcac44e23f154f8e confirms the full form. The two relations are semantically distinct: same_person to 傅嘏 (the full form of the same individual) and related_person to 荀粲 (the person being visited). The multi_candidate_ambiguity flag is a structural artifact of having two distinct relation targets, not an actual ambiguity about the referent. The record preserves the surface form vs. canonical hint distinction correctly and does not conflate the person with an attribute or collective. Confirm.\", \"supporting_evidence_ids\": [\"sfh1-ev-35-huoni-002-liu-annotation-003\"]}",
+              "name": "submit_sfh2_a0_critical_review"
+            },
+            "id": "call_00_H80dNYRNZCtzZy52m8l20500",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1788111506,
+  "id": "ee0dbe56-dc57-4259-bfc2-b3548c4ef3e5",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 835,
+    "prompt_cache_hit_tokens": 1280,
+    "prompt_cache_miss_tokens": 3177,
+    "prompt_tokens": 4457,
+    "prompt_tokens_details": {
+      "cached_tokens": 1280
+    },
+    "total_tokens": 5292
+  }
+}

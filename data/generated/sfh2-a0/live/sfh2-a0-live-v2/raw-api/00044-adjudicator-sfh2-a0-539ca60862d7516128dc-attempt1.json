@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"decision\": \"select_pass1\", \"semantic_record\": {\"mention_id\": \"sfh1-mention-08e430a342d78cb7fd17db0e\", \"surface\": \"卿\", \"semantic_kind\": \"historical_person\", \"reference_type\": \"pronoun_reference\", \"referent\": {\"surface_form\": \"卿\", \"canonical_hint\": \"庾亮\", \"confidence\": \"high\"}, \"occurrence_role\": \"scene_participant\", \"discourse\": {\"speaker_hint\": \"温太真\", \"addressee_hint\": \"庾亮\", \"antecedent_hint\": \"庾亮\", \"self_reference_hint\": \"\"}, \"relations\": [{\"target_hint\": \"庾亮\", \"relation\": \"same_person\", \"confidence\": \"high\", \"evidence_ids\": [\"sfh1-ev-23-rendan-026-main\"]}, {\"target_hint\": \"温太真\", \"relation\": \"related_person\", \"confidence\": \"high\", \"evidence_ids\": [\"sfh1-ev-23-rendan-026-main\"]}], \"confidence\": \"high\", \"supporting_evidence_ids\": [\"sfh1-ev-23-rendan-026-main\"], \"attribute_type\": \"\", \"attribute_value\": \"\", \"bearer_hint\": \"\", \"abstain\": false, \"explanation\": \"The pronoun 卿 is used by 温太真 addressing 庾亮 directly. The text reads 温太真 '與庾亮善於舫中大喚亮曰卿可贖我' — he calls out to 庾亮 saying 'you can ransom me.' 卿 is the second-person pronoun directed at 庾亮, who is explicitly named as the addressee earlier in the same sentence. The antecedent is 庾亮. 温太真 is the speaker. Both relations are correct: 卿 refers to 庾亮 (same person), while 温太真 is the speaker (related/contextual person). The multi_candidate_ambiguity flag is a structural note only and does not undermine the identification.\"}, \"reason_summary\": \"Both the primary and critical review records are substantively identical and correctly grounded in the evidence. The pronoun 卿 in the source text is clearly the second-person address by 温太真 to 庾亮, who is explicitly named as the addressee in the same sentence (大喚亮曰卿可贖我). The antecedent is 庾亮, and 温太真 is the speaker. The two relations (same_person to 庾亮, related_person to 温太真) are both correct and non-contradictory. The multi_candidate_ambiguity flag is a formal structural note only and does not undermine the identification. Selecting the primary record as it is fully supported by the evidence.\", \"supporting_evidence_ids\": [\"sfh1-ev-23-rendan-026-main\"]}",
+              "name": "submit_sfh2_a0_adjudication_v2"
+            },
+            "id": "call_00_uPcsqXhQhoC3ZT6Yh2Lf9004",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1788114984,
+  "id": "4cb28432-ec2f-4411-849e-fa9d13764375",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 703,
+    "prompt_cache_hit_tokens": 1408,
+    "prompt_cache_miss_tokens": 1596,
+    "prompt_tokens": 3004,
+    "prompt_tokens_details": {
+      "cached_tokens": 1408
+    },
+    "total_tokens": 3707
+  }
+}
