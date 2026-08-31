@@ -1,0 +1,14 @@
+{
+  "candidate_only": true,
+  "canonical_write_back": false,
+  "dialogue_role_contract": "speaker_reference and addressee_reference are generic occurrence-role enum values; no surface-specific normalization",
+  "provider_observation": {
+    "previous_adjudicator_http_400": true,
+    "previous_review_inference_tokens": 0,
+    "previous_reviewer_http_400": true,
+    "primary_successful_calls_reused": 40
+  },
+  "repair": "typed patch_ops anyOf union; reviewed_fields derived by Python; no full semantic record regeneration",
+  "schema_bug": "review and adjudication previously exposed an optional partial patch object with required=[]; DeepSeek strict mode requires every object property to be required and additionalProperties=false",
+  "transport_repair": "HTTP 400 is non-retryable; bounded sanitized provider error details are recorded"
+}

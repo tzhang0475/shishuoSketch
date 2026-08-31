@@ -77,6 +77,9 @@ def call_deepseek(
         failure = RuntimeError(f"DeepSeek API request failed with HTTP {error.code}")
         failure.http_status = error.code  # type: ignore[attr-defined]
         failure.provider_error_body = body  # type: ignore[attr-defined]
+        request_id = error.headers.get("x-request-id") if error.headers else None
+        if request_id:
+            failure.provider_request_id = request_id  # type: ignore[attr-defined]
         raise failure from error
     except urllib.error.URLError as error:
         failure = RuntimeError(f"DeepSeek API request failed: {error.reason}")

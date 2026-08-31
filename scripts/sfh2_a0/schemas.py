@@ -25,7 +25,7 @@ REFERENCE_TYPES = {
 OCCURRENCE_ROLES = {
     "scene_participant", "scene_reference", "annotation_person", "citation_source_person",
     "historical_exemplum", "genealogy_reference", "person_attribute", "collective_reference",
-    "structural", "other",
+    "speaker_reference", "addressee_reference", "structural", "other",
 }
 RELATIONS = {
     "same_person", "different_person", "related_person", "kinship_relation", "office_relation",

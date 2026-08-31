@@ -1,4 +1,4 @@
-"""Bounded, cache-first transport for the isolated A0R live regression."""
+"""Strict A1R review transport with cached-first replay and safe retries."""
 
 from __future__ import annotations
 
@@ -7,10 +7,11 @@ import json
 import os
 import re
 import statistics
-import threading
 import time
 from pathlib import Path
 from typing import Any, Mapping
+
+from sfh2_a0r.contracts import validate_deepseek_strict_schema
 
 from .common import (
     FUNCTION_NAMES,
@@ -39,11 +40,7 @@ def _slug(value: str) -> str:
 
 def _usage(response: Mapping[str, Any]) -> dict[str, int]:
     usage = response.get("usage") if isinstance(response.get("usage"), Mapping) else {}
-    return {
-        "prompt_tokens": int(usage.get("prompt_tokens") or 0),
-        "completion_tokens": int(usage.get("completion_tokens") or 0),
-        "total_tokens": int(usage.get("total_tokens") or 0),
-    }
+    return {"prompt_tokens": int(usage.get("prompt_tokens") or 0), "completion_tokens": int(usage.get("completion_tokens") or 0), "total_tokens": int(usage.get("total_tokens") or 0)}
 
 
 def _finish(response: Mapping[str, Any]) -> str:
@@ -53,9 +50,7 @@ def _finish(response: Mapping[str, Any]) -> str:
     return ""
 
 
-def _sanitized_provider_error(exc: BaseException) -> dict[str, Any]:
-    """Capture bounded provider diagnostics without exposing credentials."""
-
+def _provider_error(exc: BaseException) -> dict[str, Any]:
     body = text(getattr(exc, "provider_error_body", ""))
     secret = os.environ.get("DEEPSEEK_API_KEY")
     if secret:
@@ -73,30 +68,25 @@ def _sanitized_provider_error(exc: BaseException) -> dict[str, Any]:
     if decoded is not None:
         body = json.dumps(scrub(decoded), ensure_ascii=False, sort_keys=True, separators=(",", ":"))
     body = body[:4000]
-    details: dict[str, Any] = {
-        "http_status": getattr(exc, "http_status", None),
-        "provider_error_body": body,
-    }
+    result: dict[str, Any] = {"http_status": getattr(exc, "http_status", None), "provider_error_body": body}
     try:
-        decoded = json.loads(body) if body else None
+        parsed = json.loads(body) if body else None
     except (TypeError, ValueError):
-        decoded = None
-    error = decoded.get("error") if isinstance(decoded, Mapping) else decoded
+        parsed = None
+    error = parsed.get("error") if isinstance(parsed, Mapping) else parsed
     if isinstance(error, Mapping):
         for key in ("code", "message", "type", "param"):
             if error.get(key) is not None:
-                details[f"provider_error_{key}"] = text(error.get(key))[:1000]
+                result[f"provider_error_{key}"] = text(error.get(key))[:1000]
     elif isinstance(error, str) and error:
-        details["provider_error_message"] = error[:1000]
+        result["provider_error_message"] = error[:1000]
     request_id = getattr(exc, "provider_request_id", None)
     if request_id:
-        details["provider_request_id"] = text(request_id)[:300]
-    return details
+        result["provider_request_id"] = text(request_id)[:300]
+    return result
 
 
-def _retryable_provider_failure(exc: BaseException) -> bool:
-    """Retry only transient transport/server failures, never schema 400s."""
-
+def is_retryable(exc: BaseException) -> bool:
     status = getattr(exc, "http_status", None)
     try:
         status = int(status) if status is not None else None
@@ -110,33 +100,40 @@ def _retryable_provider_failure(exc: BaseException) -> bool:
     return any(token in message for token in ("timed out", "timeout", "connection reset", "temporarily unavailable", "network is unreachable"))
 
 
-def summarize_transport_records(records: list[Mapping[str, Any]], *, live: bool) -> dict[str, Any]:
+def extract(response: Mapping[str, Any], function_name: str) -> tuple[Mapping[str, Any] | None, str | None]:
+    import hng2_schema_controller as controller
+
+    payload, _, error = controller.extract_strict_tool_payload(response, expected_function_name=function_name)
+    return payload, error
+
+
+def summarize(records: list[Mapping[str, Any]], *, live: bool) -> dict[str, Any]:
     by_stage: dict[str, dict[str, Any]] = {}
     for stage in PROMPT_VERSIONS:
         rows = [row for row in records if text(row.get("stage")) == stage]
-        usages = [row.get("usage") or {} for row in rows]
         latencies = [float(row.get("elapsed_seconds") or 0) for row in rows if float(row.get("elapsed_seconds") or 0) > 0]
+        usages = [row.get("usage") or {} for row in rows]
         by_stage[stage] = {
-            "calls": len(rows),
+            "records": len(rows),
             "parsed": sum(row.get("classification") == "parsed" for row in rows),
             "cache_hits": sum(row.get("classification") == "cache_hit" for row in rows),
             "offline_cache_misses": sum(row.get("classification") == "offline_cache_miss" for row in rows),
-            "compatibility_replays": sum(row.get("classification") == "legacy_a0_compatibility_replay" for row in rows),
-            "retries": sum(int(row.get("attempt") or 1) > 1 for row in rows),
             "provider_failures": sum(row.get("classification") == "provider_request_failure" for row in rows),
             "invalid_payloads": sum(row.get("classification") == "response_parse_failure" for row in rows),
             "truncations": sum(row.get("classification") == "response_truncated" for row in rows),
+            "http_400_failures": sum(row.get("http_status") == 400 for row in rows),
+            "retries": sum(int(row.get("attempt") or 1) > 1 for row in rows),
             "prompt_tokens": sum(int(item.get("prompt_tokens") or 0) for item in usages),
             "completion_tokens": sum(int(item.get("completion_tokens") or 0) for item in usages),
             "total_tokens": sum(int(item.get("total_tokens") or 0) for item in usages),
             "median_latency_seconds": round(statistics.median(latencies), 3) if latencies else 0,
             "max_latency_seconds": round(max(latencies), 3) if latencies else 0,
         }
-    usages = [row.get("usage") or {} for row in records]
     latencies = [float(row.get("elapsed_seconds") or 0) for row in records if float(row.get("elapsed_seconds") or 0) > 0]
-    non_live = {"cache_hit", "offline_cache_miss", "legacy_a0_compatibility_replay", "provider_attempt_budget_exhausted"}
+    usages = [row.get("usage") or {} for row in records]
+    non_live = {"cache_hit", "offline_cache_miss", "provider_attempt_budget_exhausted"}
     return {
-        "schema": "sfh2-a0r-transport-v1",
+        "schema": "sfh2-a1r-transport-v1",
         "model": MODEL,
         "pilot_version": PILOT_VERSION,
         "prompt_versions": dict(PROMPT_VERSIONS),
@@ -144,10 +141,10 @@ def summarize_transport_records(records: list[Mapping[str, Any]], *, live: bool)
         "parsed_calls": sum(row.get("classification") == "parsed" for row in records),
         "cache_hits": sum(row.get("classification") == "cache_hit" for row in records),
         "offline_cache_misses": sum(row.get("classification") == "offline_cache_miss" for row in records),
-        "compatibility_replays": sum(row.get("classification") == "legacy_a0_compatibility_replay" for row in records),
         "new_live_attempts": sum(row.get("classification") not in non_live for row in records) if live else 0,
         "retries": sum(int(row.get("attempt") or 1) > 1 for row in records),
         "provider_failures": sum(row.get("classification") == "provider_request_failure" for row in records),
+        "http_400_failures": sum(row.get("http_status") == 400 for row in records),
         "invalid_payloads": sum(row.get("classification") == "response_parse_failure" for row in records),
         "truncations": sum(row.get("classification") == "response_truncated" for row in records),
         "prompt_tokens": sum(int(item.get("prompt_tokens") or 0) for item in usages),
@@ -159,137 +156,85 @@ def summarize_transport_records(records: list[Mapping[str, Any]], *, live: bool)
     }
 
 
-class PilotClient:
-    """Use exact cached responses first and enforce the A0R attempt budget."""
+class ReviewClient:
+    """Use only exact cache hits or bounded live review calls."""
 
     def __init__(self, run_dir: Path, *, live: bool) -> None:
         self.run_dir = run_dir
         self.raw_dir = run_dir / "raw-api"
         self.raw_dir.mkdir(parents=True, exist_ok=True)
         self.live = live
-        self.lock = threading.RLock()
         self.cache_path = OUT / "cache-index.json"
         self.cache = read_json(self.cache_path, {}) or {}
         stored = read_json(run_dir / "transport.json", []) or []
         self.records: list[dict[str, Any]] = stored if isinstance(stored, list) else []
         self.sequence = max((int(path.name.split("-", 1)[0]) for path in self.raw_dir.glob("*.json") if path.name.split("-", 1)[0].isdigit()), default=0)
-        self.live_attempts = sum(row.get("classification") not in {"cache_hit", "offline_cache_miss", "legacy_a0_compatibility_replay", "provider_attempt_budget_exhausted"} for row in self.records)
-
-    def _extract(self, response: Mapping[str, Any], function_name: str) -> tuple[Mapping[str, Any] | None, str | None]:
-        import hng2_schema_controller as controller
-        payload, _, error = controller.extract_strict_tool_payload(response, expected_function_name=function_name)
-        return payload, error
-
-    def _record(self, row: Mapping[str, Any]) -> None:
-        with self.lock:
-            self.records.append(dict(row))
+        self.live_attempts = sum(row.get("classification") not in {"cache_hit", "offline_cache_miss", "provider_attempt_budget_exhausted"} for row in self.records)
 
     def call(self, *, stage: str, unit_id: str, system: str, payload: Mapping[str, Any], tool: Mapping[str, Any], max_tokens: int) -> Mapping[str, Any] | None:
         from smoke_deepseek import call_deepseek
 
+        schema_errors = validate_deepseek_strict_schema(tool["function"]["parameters"])
+        if schema_errors:
+            raise ValueError("invalid_deepseek_strict_schema:" + ";".join(schema_errors))
         function_name = FUNCTION_NAMES[stage]
-        packet_hash = stable_hash({
-            "pilot_version": PILOT_VERSION,
-            "stage": stage,
-            "prompt_version": PROMPT_VERSIONS[stage],
-            "model": MODEL,
-            "system": system,
-            "payload": payload,
-            "tool": tool,
-        })
+        packet_hash = stable_hash({"pilot_version": PILOT_VERSION, "stage": stage, "prompt_version": PROMPT_VERSIONS[stage], "model": MODEL, "system": system, "payload": payload, "tool": tool})
         cached = self.cache.get(packet_hash)
         if isinstance(cached, Mapping):
             path = ROOT / text(cached.get("raw_path"))
             if path.is_file():
                 response = read_json(path, {}) or {}
-                extracted, error = self._extract(response, function_name)
+                extracted, error = extract(response, function_name)
                 if extracted is not None and error is None:
-                    self._record({
-                        "stage": stage,
-                        "unit_id": unit_id,
-                        "packet_hash": packet_hash,
-                        "prompt_version": PROMPT_VERSIONS[stage],
-                        "classification": "cache_hit",
-                        "raw_path": str(path.relative_to(ROOT)),
-                        "usage": {},
-                        "elapsed_seconds": 0,
-                    })
+                    # A deterministic rebuild of an already completed live
+                    # run must not append a second accounting row for the
+                    # same packet.  New run directories still receive an
+                    # explicit cache-hit row below.
+                    if any(
+                        text(row.get("packet_hash")) == packet_hash
+                        for row in self.records
+                        if isinstance(row, Mapping)
+                    ):
+                        return extracted
+                    self.records.append({"stage": stage, "unit_id": unit_id, "packet_hash": packet_hash, "prompt_version": PROMPT_VERSIONS[stage], "classification": "cache_hit", "raw_path": str(path.relative_to(ROOT)), "usage": {}, "elapsed_seconds": 0})
                     return extracted
         if not self.live:
-            self._record({
-                "stage": stage,
-                "unit_id": unit_id,
-                "packet_hash": packet_hash,
-                "prompt_version": PROMPT_VERSIONS[stage],
-                "classification": "offline_cache_miss",
-                "usage": {},
-                "elapsed_seconds": 0,
-            })
+            self.records.append({"stage": stage, "unit_id": unit_id, "packet_hash": packet_hash, "prompt_version": PROMPT_VERSIONS[stage], "classification": "offline_cache_miss", "usage": {}, "elapsed_seconds": 0})
             return None
         for attempt in (1, 2):
-            with self.lock:
-                if self.live_attempts >= MAX_PROVIDER_ATTEMPTS:
-                    self._record({
-                        "stage": stage,
-                        "unit_id": unit_id,
-                        "classification": "provider_attempt_budget_exhausted",
-                        "usage": {},
-                        "elapsed_seconds": 0,
-                        "budget": MAX_PROVIDER_ATTEMPTS,
-                    })
-                    return None
-                self.live_attempts += 1
-                self.sequence += 1
-                sequence = self.sequence
+            if self.live_attempts >= MAX_PROVIDER_ATTEMPTS:
+                self.records.append({"stage": stage, "unit_id": unit_id, "packet_hash": packet_hash, "classification": "provider_attempt_budget_exhausted", "usage": {}, "elapsed_seconds": 0, "budget": MAX_PROVIDER_ATTEMPTS})
+                return None
+            self.live_attempts += 1
+            self.sequence += 1
+            sequence = self.sequence
             started = time.monotonic()
-            row: dict[str, Any] = {
-                "sequence": sequence,
-                "attempt": attempt,
-                "stage": stage,
-                "unit_id": unit_id,
-                "packet_hash": packet_hash,
-                "prompt_version": PROMPT_VERSIONS[stage],
-                "model": MODEL,
-                "temperature": 0,
-                "thinking": {"type": "disabled"},
-                "start_time": _now(),
-            }
+            row: dict[str, Any] = {"sequence": sequence, "attempt": attempt, "stage": stage, "unit_id": unit_id, "packet_hash": packet_hash, "prompt_version": PROMPT_VERSIONS[stage], "model": MODEL, "temperature": 0, "thinking": {"type": "disabled"}, "start_time": _now()}
             try:
                 response = call_deepseek(
                     [{"role": "system", "content": system}, {"role": "user", "content": canonical_json(payload)}],
-                    model=MODEL,
-                    temperature=0,
-                    thinking={"type": "disabled"},
-                    max_tokens=max_tokens,
-                    timeout=180,
-                    endpoint=STRICT_ENDPOINT,
-                    tools=[dict(tool)],
+                    model=MODEL, temperature=0, thinking={"type": "disabled"}, max_tokens=max_tokens,
+                    timeout=180, endpoint=STRICT_ENDPOINT, tools=[dict(tool)],
                     tool_choice={"type": "function", "function": {"name": function_name}},
                 )
                 raw_path = self.raw_dir / f"{sequence:05d}-{_slug(stage)}-{_slug(unit_id)}-attempt{attempt}.json"
-                if raw_path.exists():
-                    raise RuntimeError("a0r_raw_response_path_collision")
                 write_json(raw_path, response)
                 finish = _finish(response)
                 row.update({"raw_path": str(raw_path.relative_to(ROOT)), "usage": _usage(response), "finish_reason": finish})
                 if finish == "length":
                     row.update({"classification": "response_truncated", "elapsed_seconds": round(time.monotonic() - started, 3), "end_time": _now()})
-                    self._record(row)
-                    continue
-                extracted, error = self._extract(response, function_name)
+                    self.records.append(row)
+                    if attempt == 1:
+                        continue
+                    return None
+                extracted, error = extract(response, function_name)
                 if extracted is None or error:
                     row.update({"classification": "response_parse_failure", "parse_error": error, "elapsed_seconds": round(time.monotonic() - started, 3), "end_time": _now()})
-                    self._record(row)
-                    continue
+                    self.records.append(row)
+                    return None
                 row.update({"classification": "parsed", "elapsed_seconds": round(time.monotonic() - started, 3), "end_time": _now()})
-                self._record(row)
-                self.cache[packet_hash] = {
-                    "raw_path": str(raw_path.relative_to(ROOT)),
-                    "stage": stage,
-                    "unit_id": unit_id,
-                    "prompt_version": PROMPT_VERSIONS[stage],
-                    "model": MODEL,
-                }
+                self.records.append(row)
+                self.cache[packet_hash] = {"raw_path": str(raw_path.relative_to(ROOT)), "stage": stage, "unit_id": unit_id, "prompt_version": PROMPT_VERSIONS[stage], "model": MODEL}
                 write_json(self.cache_path, self.cache)
                 return extracted
             except Exception as exc:
@@ -297,23 +242,15 @@ class PilotClient:
                 secret = os.environ.get("DEEPSEEK_API_KEY")
                 if secret:
                     message = message.replace(secret, "[REDACTED]")
-                row.update({
-                    "classification": "provider_request_failure",
-                    "exception_class": type(exc).__name__,
-                    "exception_message": message[:1200],
-                    "http_status": getattr(exc, "http_status", None),
-                    **_sanitized_provider_error(exc),
-                    "retryable": _retryable_provider_failure(exc),
-                    "elapsed_seconds": round(time.monotonic() - started, 3),
-                    "end_time": _now(),
-                })
-                self._record(row)
-                if not _retryable_provider_failure(exc):
-                    break
+                error = _provider_error(exc)
+                row.update({"classification": "provider_request_failure", "exception_class": type(exc).__name__, "exception_message": message[:1200], **error, "retryable": is_retryable(exc), "elapsed_seconds": round(time.monotonic() - started, 3), "end_time": _now()})
+                self.records.append(row)
+                if not is_retryable(exc):
+                    return None
         return None
 
     def save(self) -> None:
         write_json(self.run_dir / "transport.json", self.records)
 
     def metrics(self) -> dict[str, Any]:
-        return summarize_transport_records(self.records, live=self.live)
+        return summarize(self.records, live=self.live)

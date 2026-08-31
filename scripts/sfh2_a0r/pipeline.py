@@ -54,9 +54,9 @@ from .transport import PilotClient
 
 PRIMARY_HISTORIAN_SYSTEM = """You are the Primary Historian in the SFH2.2-A0R semantic review pilot. Read the supplied historical evidence packet and make the best evidence-grounded semantic judgment for the target. You own historical interpretation: entity kind, reference type, referent surface, canonical hint, occurrence role, discourse fields, and relations. A historical referent may be absent from the registry. Python will only validate your structured record, report formal consistency, and control candidate-only storage. Do not emit production IDs. Cite only supplied evidence IDs and use concise explanations, never hidden reasoning. Return exactly the required complete semantic record."""
 
-CRITICAL_REVIEWER_SYSTEM = """You are an independent Critical Historical Reviewer. Re-read the original evidence and the Primary Historian record. Python flags are formal challenges only; they do not supply a historical answer. Review the challenged semantic fields against the evidence. Preserve every unchallenged field unless direct evidence independently shows it is wrong; if you revise an unchallenged field, list it explicitly in reviewed_fields. Return confirm, a narrow field-level revise patch, or abstain. Never regenerate or return a complete semantic record. Do not emit production IDs. Cite only supplied evidence IDs and keep explanations concise."""
+CRITICAL_REVIEWER_SYSTEM = """You are an independent Critical Historical Reviewer. Re-read the original evidence and the Primary Historian record. Python flags are formal challenges only; they do not supply a historical answer. Review the challenged semantic fields against the evidence. Preserve every unchallenged field unless direct evidence independently shows it is wrong. Return confirm, a narrow revise decision with typed patch_ops, or abstain. For confirm or abstain return patch_ops as an empty array. Never regenerate or return a complete semantic record. Do not emit production IDs. Cite only supplied evidence IDs and keep explanations concise."""
 
-ADJUDICATOR_SYSTEM = """You are the final historical adjudicator. Re-read the original evidence and compare the Primary Historian record with the effective Critical Reviewer record. Python flags are formal challenges only and do not provide a replacement identity. Select Pass 1 or Pass 2 exactly when one is supported; if revising, return only a narrow field-level patch against pass1 or pass2; or abstain. If selecting Pass 1 or Pass 2, do not restate or regenerate that record: the orchestration layer will reuse it exactly. Do not emit production IDs. Cite only supplied evidence IDs and use concise explanations."""
+ADJUDICATOR_SYSTEM = """You are the final historical adjudicator. Re-read the original evidence and compare the Primary Historian record with the effective Critical Reviewer record. Python flags are formal challenges only and do not provide a replacement identity. Select Pass 1 or Pass 2 exactly when one is supported; if revising, return only a narrow typed patch_ops list against pass1 or pass2; or abstain. For a selection or abstention set base_record to an empty string and patch_ops to an empty array. If selecting Pass 1 or Pass 2, do not restate or regenerate that record: the orchestration layer will reuse it exactly. Do not emit production IDs. Cite only supplied evidence IDs and use concise explanations."""
 
 
 def _authorized_protocol_restart(previous: Mapping[str, Any], current: Mapping[str, Any]) -> bool:
@@ -103,7 +103,7 @@ def primary_payload(packet: Mapping[str, Any]) -> dict[str, Any]:
 
 def critical_payload(packet: Mapping[str, Any], primary_record: Mapping[str, Any] | None, flags: Mapping[str, Any]) -> dict[str, Any]:
     return {
-        "task": "review only the challenged semantic dimensions and return confirm, a narrow patch, or abstain",
+        "task": "review only the challenged semantic dimensions and return confirm, typed patch operations, or abstain",
         **_source_packet(packet),
         "primary_semantic_record": copy.deepcopy(primary_record) if isinstance(primary_record, Mapping) else None,
         "challenged_fields": sorted({text(field) for flag in flags.get("flags", []) or [] if isinstance(flag, Mapping) for field in flag.get("challenged_fields", []) or [] if text(field)}),
@@ -115,12 +115,11 @@ def critical_payload(packet: Mapping[str, Any], primary_record: Mapping[str, Any
 
 def adjudication_payload(packet: Mapping[str, Any], primary_record: Mapping[str, Any] | None, review: Mapping[str, Any] | None, pass2_record: Mapping[str, Any] | None, flags: Mapping[str, Any]) -> dict[str, Any]:
     return {
-        "task": "select pass1/pass2 exactly, patch only declared fields, or abstain",
+        "task": "select pass1/pass2 exactly, apply typed patch operations only when revising, or abstain",
         **_source_packet(packet),
         "primary_semantic_record": copy.deepcopy(primary_record) if isinstance(primary_record, Mapping) else None,
         "critical_review_decision": text((review or {}).get("decision")),
-        "critical_review_reviewed_fields": copy.deepcopy((review or {}).get("reviewed_fields", [])),
-        "critical_review_patch": copy.deepcopy((review or {}).get("patch", {})),
+        "critical_review_patch_ops": copy.deepcopy((review or {}).get("patch_ops", [])),
         "pass2_effective_record": copy.deepcopy(pass2_record) if isinstance(pass2_record, Mapping) else None,
         "python_formal_consistency_flags": copy.deepcopy(flags.get("flags", []) if isinstance(flags, Mapping) else []),
         "python_instruction": "formal flags are challenges only; do not infer a replacement identity from them",
@@ -182,6 +181,7 @@ def _review_from_provider(case: Mapping[str, Any], packet: Mapping[str, Any], pa
         "stage": "pass2",
         "valid": True,
         "decision": review.get("decision"),
+        "patch_ops": copy.deepcopy(review.get("patch_ops", [])),
         "reviewed_fields": review.get("reviewed_fields", []),
         "patch": copy.deepcopy(review.get("patch", {})),
         "reason_summary": review.get("reason_summary"),
@@ -213,6 +213,7 @@ def _adjudication_from_provider(case: Mapping[str, Any], packet: Mapping[str, An
         "valid": True,
         "decision": decision.get("decision"),
         "base_record": decision.get("base_record", ""),
+        "patch_ops": copy.deepcopy(decision.get("patch_ops", [])),
         "reviewed_fields": decision.get("reviewed_fields", []),
         "patch": copy.deepcopy(decision.get("patch", {})),
         "reason_summary": decision.get("reason_summary"),
