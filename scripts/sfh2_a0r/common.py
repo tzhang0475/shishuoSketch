@@ -19,7 +19,12 @@ SELECTION_PATH = ROOT / "data/annotation/sfh2-a0-selection.json"
 GOLD_PATH = ROOT / "data/annotation/sfh2-a0-evaluation-gold.json"
 
 MODEL = "deepseek-v4-flash"
-PILOT_VERSION = "sfh2-a0r-v1"
+# The live provider was unavailable during the first attempt.  A subsequent
+# purely mechanical replay-contract fix (substantive-vs-metadata routing and
+# compatibility-row provenance) is an explicit protocol restart, so it gets a
+# new cache namespace while retaining the frozen prompts and schemas.
+PILOT_VERSION = "sfh2-a0r-v2"
+PROTOCOL_REVISION = "sfh2-a0r-contract-repair-v2"
 SCHEMA_VERSION = "sfh2-a0r-v1"
 STRICT_ENDPOINT = "https://api.deepseek.com/beta/chat/completions"
 PROMPT_VERSIONS = {
@@ -132,6 +137,7 @@ def architecture_freeze(selection_hash: str) -> dict[str, Any]:
     result: dict[str, Any] = {
         "schema": "sfh2-a0r-architecture-freeze-v1",
         "pilot": "SFH2.2-A0R",
+        "protocol_revision": PROTOCOL_REVISION,
         "baseline_a0": "6155ff28a717dcacbd88525dc1e3dc94216b31ef",
         "selection_hash": selection_hash,
         "model_config": {
@@ -163,4 +169,3 @@ def architecture_freeze(selection_hash: str) -> dict[str, Any]:
     result["input_hashes"] = input_hashes()
     result["architecture_hash"] = stable_hash({key: value for key, value in result.items() if key != "architecture_hash"})
     return result
-

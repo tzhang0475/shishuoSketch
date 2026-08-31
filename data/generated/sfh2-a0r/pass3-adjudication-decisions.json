@@ -1,0 +1,65 @@
+{
+  "candidate_only": true,
+  "canonical_write_back": false,
+  "gold_not_sent_to_provider": true,
+  "model": "deepseek-v4-flash",
+  "prompt_version": "sfh2-a0r-adjudicator-selector-patch-v1",
+  "records": [
+    {
+      "base_record": "",
+      "candidate_only": true,
+      "canonical_write_back": false,
+      "case_id": "sfh2-a0-b05e327c31dcf07e9e68",
+      "decision": "select_pass2",
+      "mention_id": "sfh1-mention-81824d6cdc4117f976e46cd9",
+      "patch": {},
+      "reason_summary": "legacy A0 selector compatibility replay",
+      "replay_source": "sfh2-a0-cached-selector-decision",
+      "reviewed_fields": [],
+      "selected_record": {
+        "abstain": false,
+        "attribute_type": "",
+        "attribute_value": "",
+        "bearer_hint": "",
+        "confidence": "high",
+        "discourse": {
+          "addressee_hint": "",
+          "antecedent_hint": "傅嘏",
+          "self_reference_hint": "",
+          "speaker_hint": ""
+        },
+        "explanation": "The target span 嘏 appears in Liu annotation 003, which reads: 傷嘏問曰婦人才色並茂為難子之聘也遺才存色...傅嘏往喭粲粲不明而神. The single character 嘏 is the personal name of 傅嘏 (Fu Gu), who is explicitly named in full later in the same annotation. The primary semantic record was null (not supplied), so I construct the record from the evidence. The mention is a personal_name reference to the historical person 傅嘏, a scene participant in the anecdote about 荀粲's mourning.",
+        "mention_id": "sfh1-mention-81824d6cdc4117f976e46cd9",
+        "occurrence_role": "scene_participant",
+        "reference_type": "personal_name",
+        "referent": {
+          "canonical_hint": "傅嘏",
+          "confidence": "high",
+          "surface_form": "嘏"
+        },
+        "relations": [
+          {
+            "confidence": "high",
+            "evidence_ids": [
+              "sfh1-ev-35-huoni-002-liu-annotation-003"
+            ],
+            "relation": "same_person",
+            "target_hint": "傅嘏"
+          }
+        ],
+        "semantic_kind": "historical_person",
+        "supporting_evidence_ids": [
+          "sfh1-ev-35-huoni-002-liu-annotation-003"
+        ],
+        "surface": "嘏"
+      },
+      "selected_record_source": "pass2_exact_copy",
+      "stage": "pass3",
+      "story_id": "35-huoni-002",
+      "supporting_evidence_ids": [],
+      "surface": "嘏",
+      "valid": true
+    }
+  ],
+  "schema": "sfh2-a0r-pass3-adjudication-decisions-v1"
+}

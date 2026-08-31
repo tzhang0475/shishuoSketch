@@ -1,0 +1,72 @@
+{
+  "architecture_hash": "e5f9192611f922a9369b832cab4d090ba29872827fa995d4bc97aefa69d3af6b",
+  "authority_policy": "reviewed human semantic decision > validated LLM semantic judgment > soft collective consistency > deterministic retrieval hint",
+  "baseline_a0": "6155ff28a717dcacbd88525dc1e3dc94216b31ef",
+  "candidate_only": true,
+  "canonical_write_back": false,
+  "code_files": {
+    "scripts/sfh2_a0r/common.py": "944a126bec3da81d70f37a9a9dad9a47277f4fde20fb9c10d3c5593a893a2598",
+    "scripts/sfh2_a0r/consistency.py": "0d8e349f4e416ec3dcd80f2c410f7a0489de6a2840ae017b282c234a4ad7e736",
+    "scripts/sfh2_a0r/contracts.py": "cac17241aa7e79a10fe5143ebde14a72355388a35c8d1274959bcecf58f614f2",
+    "scripts/sfh2_a0r/pipeline.py": "805eba9cae56056b79fc6926ee5eba7371ebd7c600602359dedc0ca213ba4ab5",
+    "scripts/sfh2_a0r/transport.py": "74c6856803b1dfb9fa4fb14215a6726fbdf514ebc31b2e450468a452b771599f"
+  },
+  "consistency_engine_contract": "formal_fields_graph_and_storage_routing_v2",
+  "input_hashes": {
+    "data/aliases.json": "f564a92f7d956e289940e4b7ae448349bd13bb602336441cda02e358a12ec33f",
+    "data/annotation/sfh2-a0-evaluation-gold.json": "82f36497b632032bc164c09fd5db97e35e20c256fc9654ac0d2c9b4c704b0b93",
+    "data/derived/hdb2-f-candidate-person-knowledge.json": "01a217187379a88e640f57b4b35b86a6f416a41d6534e7fc2ab1668a5ed99ba9",
+    "data/derived/hdb2-f-person-knowledge.json": "9bad46606f0268b5603c99e9baac2d7c854ce1d690a2e73cd5a7cbfcfd1764f1",
+    "data/generated/hda2/repair-overlay.json": "a2c8642dc3e0ca3d17ec844ee9a61e8134426d7a6779c658a551af0441668e99",
+    "data/generated/sfh1/candidate-sets.json": "77f9ba2fd87321de6b76909c42925bf90df6939c1b0910efae7e573399cd08b6",
+    "data/generated/sfh1/final-decisions.json": "bbda9a08dea23ec2f495e08f1a20e78f43344bee78955ac8666047b66a17ea3f",
+    "data/generated/sfh1/identity-judgments.json": "943ad9c60e8d961a9ddbd6b3b706d419f07418514fe017042491a54a4a06a0ff",
+    "data/generated/sfh1/reference-semantics.json": "e21d170a4e55a274be8e34fb796bbfe77a129c93c28bdc0fc534a1f94bbe3035",
+    "data/generated/sfh1/relation-assertions.json": "ec44f949018f6efd8abd2c2a861e2d003408d4fc477781319db587c221e1ff8e",
+    "data/generated/sfh1/story-packets.json": "1067403eb205f1cf7d7e5d445a68445ca97d4da324f2f544d90e3aaf2a109077",
+    "data/generated/sfh1/validated-mentions.json": "3a129f050e91224065e4397eb9f6b7dbef5da6795fd29a84a40127e7958ecd40",
+    "data/generated/sfh2-2p1/selection.json": "bfdf087b34903c0afc12202306750bd9a822c5a69d7f143a091bdc7b67ce48a5",
+    "data/generated/sfh2-2p2/selection.json": "bbdfa785cca645b8d3416b0e97ddb13b79fe6beabe9549914fa34082305b0834",
+    "data/generated/sfh2-a0/case-packets.json": "b355688c33c20baafa34abc55511364d7a33a93915a595926120e2b00e3dbd44",
+    "data/generated/sfh2-a0/evaluation.json": "e52e36f3caf0c31355b33577e795c997a9a30be3af63de2f912b55345d851a10",
+    "data/generated/sfh2-a0/final-decisions.json": "c26bcb1d218d286ce8e288a7621789f6e482a081e7d806851d04382379844332",
+    "data/generated/sfh2-a0/pass1-semantic-results.json": "a6904a3242549e1767350ec47350ccd6c80a9107f55c0b8fc97ebbefb9fdbcb7",
+    "data/generated/sfh2-a0/pass2-review-results.json": "7bc1da3398b4ca6f2bea3188d46588464e80975d05d6f4977f0eab9c44862129",
+    "data/generated/sfh2-a0/pass3-adjudication-results.json": "d9389c26451adee3a9b3eae047a30f8791d7b7989444cec0649be7af3ccd011a",
+    "data/generated/sfh2-a0/selection.json": "e1c189cbf21aac6aa67ce640d80d1e45675c134c3cb2dbcfce3482c9bba62420",
+    "data/people.json": "e1f917900035adaaed2c63d34618f357b1e58ff1cf082fce6ba090d1a74695c5"
+  },
+  "model_config": {
+    "endpoint": "https://api.deepseek.com/beta/chat/completions",
+    "function_names": {
+      "adjudicator": "submit_sfh2_a0r_adjudication_selector_v1",
+      "critical_reviewer": "submit_sfh2_a0r_critical_review_patch_v1",
+      "primary_historian": "submit_sfh2_a0r_primary_semantics_v1"
+    },
+    "max_provider_attempts": 45,
+    "model": "deepseek-v4-flash",
+    "prompt_versions": {
+      "adjudicator": "sfh2-a0r-adjudicator-selector-patch-v1",
+      "critical_reviewer": "sfh2-a0r-critical-reviewer-patch-v1",
+      "primary_historian": "sfh2-a0r-primary-historian-v1"
+    },
+    "temperature": 0,
+    "thinking": {
+      "type": "disabled"
+    }
+  },
+  "pilot": "SFH2.2-A0R",
+  "prompt_hashes": {
+    "adjudicator": "4bd4cc46b276cdb2dbdee960acfc2c4a060efd84b0abb204c8b3538b2e2439db",
+    "critical_reviewer": "54b8870d20b244dc0b6c13a6493481e7a11650f6911eb8e2866dafdbd6252a80",
+    "primary_historian": "9e222ff627ab465e135245c8b6c55c968dec220a0f88597ca7162701f54543fa"
+  },
+  "schema": "sfh2-a0r-architecture-freeze-v1",
+  "schema_hashes": {
+    "adjudication": "b43df2f6092d5500f4449d2a410331b7e2e3c7bf675c8dd37c59ff436705d5d6",
+    "critical_review": "489ab9bf3dfb24059f29c7e49c1c96297cb68596afbea33c9eb0b0baaff472ce",
+    "semantic_record": "114925ab76cf2ef3207b555f872743cf124b5afa90f0d5fc788fe55137b2019f"
+  },
+  "selection_hash": "b8162d9d470c6359c67a8ed31aa31ef82149c12d92dd9a694b62327fc204bbc3",
+  "selection_is_frozen": true
+}
