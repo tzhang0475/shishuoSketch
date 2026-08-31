@@ -111,6 +111,60 @@ def extract(response: Mapping[str, Any], function_name: str) -> tuple[Mapping[st
     return payload, error
 
 
+def raw_provider_summary(raw_dir: Path) -> dict[str, Any]:
+    """Recover accounting from durable provider response witnesses.
+
+    A live process can be interrupted after writing a raw response but before
+    flushing its per-request log.  Raw responses are immutable attempt
+    witnesses, so their usage and parse status are the authoritative live
+    accounting in that case.  This function is deliberately structural: it
+    never interprets the semantic payload.
+    """
+
+    totals = {key: 0 for key in ("prompt_tokens", "completion_tokens", "total_tokens")}
+    by_stage: dict[str, dict[str, int]] = {
+        stage: {
+            "responses": 0,
+            "parsed": 0,
+            "invalid_payloads": 0,
+            "prompt_tokens": 0,
+            "completion_tokens": 0,
+            "total_tokens": 0,
+        }
+        for stage in FUNCTION_NAMES
+    }
+    responses = 0
+    parsed = 0
+    invalid = 0
+    for path in sorted(raw_dir.glob("*.json")):
+        stage = next((candidate for candidate in FUNCTION_NAMES if f"-{_slug(candidate)}-" in path.name), None)
+        if stage is None:
+            continue
+        response = read_json(path, {}) or {}
+        usage = _usage(response)
+        function_name = FUNCTION_NAMES[stage]
+        _, error = extract(response, function_name)
+        stage_summary = by_stage[stage]
+        stage_summary["responses"] += 1
+        for key in totals:
+            totals[key] += usage[key]
+            stage_summary[key] += usage[key]
+        if error:
+            invalid += 1
+            stage_summary["invalid_payloads"] += 1
+        else:
+            parsed += 1
+            stage_summary["parsed"] += 1
+        responses += 1
+    return {
+        "responses": responses,
+        "parsed": parsed,
+        "invalid_payloads": invalid,
+        **totals,
+        "by_stage": by_stage,
+    }
+
+
 def summarize(records: list[Mapping[str, Any]], *, live: bool) -> dict[str, Any]:
     stages = ("historian_b", "adjudicator")
     def parse_failure(row: Mapping[str, Any]) -> bool:
@@ -395,4 +449,20 @@ class A2Client:
             # The raw directory is the complete durable count, including
             # attempts made before an interrupted/resumed process.
             result["new_live_attempts"] = result["raw_provider_attempts_in_run"]
+            raw = raw_provider_summary(self.raw_dir)
+            result["accounting_source"] = "durable_raw_provider_witnesses"
+            result["raw_provider_responses"] = raw["responses"]
+            result["raw_provider_parsed_calls"] = raw["parsed"]
+            result["raw_provider_invalid_payloads"] = raw["invalid_payloads"]
+            result["raw_prompt_tokens"] = raw["prompt_tokens"]
+            result["raw_completion_tokens"] = raw["completion_tokens"]
+            result["raw_total_tokens"] = raw["total_tokens"]
+            result["raw_provider_by_stage"] = raw["by_stage"]
+            # The request log can be incomplete after an interrupted run;
+            # expose the complete durable usage as the primary live totals.
+            for key in ("prompt_tokens", "completion_tokens", "total_tokens"):
+                result[key] = raw[key]
+            for stage, raw_stage in raw["by_stage"].items():
+                for key in ("prompt_tokens", "completion_tokens", "total_tokens"):
+                    result["by_stage"][stage][key] = raw_stage[key]
         return result

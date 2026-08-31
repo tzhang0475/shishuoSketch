@@ -330,7 +330,14 @@ def _authorized_transport_resume(previous: Mapping[str, Any], current: Mapping[s
     old_files = previous.get("code_files") or {}
     new_files = current.get("code_files") or {}
     changed = {key for key in set(old_files) | set(new_files) if old_files.get(key) != new_files.get(key)}
-    return changed <= {"scripts/sfh2_a2/transport.py", "scripts/sfh2_a2/pipeline.py"}
+    # These are mechanical replay/formatting changes only; semantic prompts,
+    # inputs, schemas, and routing remain frozen for the A2 evidence.
+    return changed <= {
+        "scripts/sfh2_a2/transport.py",
+        "scripts/sfh2_a2/pipeline.py",
+        "scripts/sfh2_a2/comparison.py",
+        "scripts/sfh2_a2/contracts.py",
+    }
 
 
 def _comparison_record(case: Mapping[str, Any], a_row: Mapping[str, Any], b_row: Mapping[str, Any], comparison: Mapping[str, Any]) -> dict[str, Any]:

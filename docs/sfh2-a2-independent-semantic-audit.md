@@ -91,9 +91,12 @@ accepted, the final materialized identity count is 2/18 and the number of
 reviewer-damage cases is zero: unresolved contract failures are not counted
 as semantic damage or newly introduced identity errors.
 
-The live transport accounted for 70 durable provider attempts and 33,415
-tokens (29,970 prompt and 3,445 completion), with no retries or request-level
-provider failures.  A resumed process recovered the durable raw witnesses
+The live transport accounted for 70 durable provider attempts and 274,538
+tokens (244,097 prompt and 30,441 completion), with no retries or
+request-level provider failures.  The totals are derived from the durable raw
+provider witnesses because the interrupted first process did not flush all of
+its per-request usage rows; 66 raw responses had parseable tool arguments and
+four were malformed.  A resumed process recovered the durable raw witnesses
 without duplicating provider attempts.  Two offline replays completed with no
 new provider calls and byte-identical deterministic outputs.  The complete
 raw witnesses are under
