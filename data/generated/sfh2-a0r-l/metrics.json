@@ -10,23 +10,27 @@
     "canonical_write_back": false,
     "case_count": 20,
     "final_state_distribution": {
-      "review_required": 20
+      "local_candidate_resolved": 6,
+      "review_required": 9,
+      "stable_entity_resolved": 5
     },
-    "formal_conflicts": 0,
+    "formal_conflicts": 6,
     "low_confidence_cases": 0,
-    "pass1_provider_failures": 20,
-    "pass1_valid": 0,
-    "pass2_attempted": 0,
+    "pass1_provider_failures": 0,
+    "pass1_valid": 17,
+    "pass2_attempted": 6,
     "pass2_valid": 0,
-    "pass3_attempted": 0,
-    "pass3_required": 0,
+    "pass3_attempted": 6,
+    "pass3_required": 6,
     "pass3_valid": 0,
-    "semantic_kind_distribution": {},
+    "semantic_kind_distribution": {
+      "historical_person": 17
+    },
     "story_count": 5
   },
   "collective_person_promotions": 0,
-  "historical_accuracy_status": "live_unavailable",
-  "live_provider_unavailable": true,
+  "historical_accuracy_status": "regression_gold_evaluated_challenge_pending_external_review",
+  "live_provider_unavailable": false,
   "no_full_188_story_live_run": true,
   "pilot": "SFH2.2-A0R-L",
   "production_person_creations": 0,
@@ -35,17 +39,20 @@
     "attempts": 1,
     "candidate_only": true,
     "canonical_write_back": false,
-    "elapsed_seconds": 0.016,
+    "elapsed_seconds": 0.901,
     "endpoint": "https://api.deepseek.com/beta/chat/completions",
-    "exception_class": "RuntimeError",
-    "exception_message": "DeepSeek API request failed: [Errno 1] Operation not permitted",
-    "failure_class": "environmental_network_failure",
-    "live_provider_available": false,
+    "execution_scope": "host-live",
+    "finish_reason": "stop",
+    "historical_preflight_preserved": "data/generated/sfh2-a0r-l/provider-preflight.json",
+    "historical_preflight_sha256": "bef7c6a99d89424aeb3d03c63dec471e7459916daaceb1a5f5eca07fc43ab442",
+    "host_preflight_artifact": "data/generated/sfh2-a0r-l/host-live/provider-preflight.json",
+    "live_provider_available": true,
     "model": "deepseek-v4-flash",
     "pilot": "SFH2.2-A0R-L",
+    "raw_path": "data/generated/sfh2-a0r-l/live/a0r-l-host-live-connectivity-probe/raw-api/00001-connectivity-probe.json",
     "request": "minimal_reply_only_probe",
-    "response_received": false,
-    "run_id": "a0r-l-connectivity-probe",
+    "response_received": true,
+    "run_id": "a0r-l-host-live-connectivity-probe",
     "schema": "sfh2-a0r-l-provider-preflight-v1",
     "stop_live_phase_on_failure": true,
     "temperature": 0,
@@ -53,9 +60,9 @@
       "type": "disabled"
     },
     "usage": {
-      "completion_tokens": 0,
-      "prompt_tokens": 0,
-      "total_tokens": 0
+      "completion_tokens": 1,
+      "prompt_tokens": 8,
+      "total_tokens": 9
     }
   },
   "regression": {
@@ -63,24 +70,182 @@
     "canonical_write_back": false,
     "case_count": 20,
     "final_state_distribution": {
-      "review_required": 20
+      "local_candidate_resolved": 9,
+      "non_person": 1,
+      "review_required": 5,
+      "stable_entity_resolved": 3,
+      "structural_reference": 2
     },
-    "formal_conflicts": 0,
+    "formal_conflicts": 4,
     "low_confidence_cases": 0,
-    "pass1_provider_failures": 20,
-    "pass1_valid": 0,
-    "pass2_attempted": 0,
+    "pass1_provider_failures": 0,
+    "pass1_valid": 19,
+    "pass2_attempted": 4,
     "pass2_valid": 0,
-    "pass3_attempted": 0,
-    "pass3_required": 0,
+    "pass3_attempted": 4,
+    "pass3_required": 4,
     "pass3_valid": 0,
-    "semantic_kind_distribution": {},
+    "semantic_kind_distribution": {
+      "collective": 1,
+      "historical_person": 16,
+      "office": 1,
+      "person_attribute": 1
+    },
     "story_count": 20
   },
   "regression_evaluation": {
+    "candidate_only": true,
+    "canonical_write_back": false,
     "case_count": 20,
-    "historical_identity_accuracy": null,
-    "strict_full_record_accuracy": null
+    "dimension_counts": {
+      "final_dimensions": {
+        "attribute_fields_correct": {
+          "correct": 15,
+          "evaluable": 15
+        },
+        "canonicalization_correct": {
+          "correct": 11,
+          "evaluable": 18
+        },
+        "identity_correct": {
+          "correct": 13,
+          "evaluable": 20
+        },
+        "occurrence_role_correct": {
+          "correct": 4,
+          "evaluable": 11
+        },
+        "referent_surface_correct": {
+          "correct": 7,
+          "evaluable": 20
+        },
+        "semantic_kind_correct": {
+          "correct": 14,
+          "evaluable": 20
+        },
+        "serialization_contract_correct": {
+          "correct": 20,
+          "evaluable": 20
+        }
+      },
+      "pass1_dimensions": {
+        "attribute_fields_correct": {
+          "correct": 19,
+          "evaluable": 19
+        },
+        "canonicalization_correct": {
+          "correct": 15,
+          "evaluable": 18
+        },
+        "identity_correct": {
+          "correct": 17,
+          "evaluable": 20
+        },
+        "occurrence_role_correct": {
+          "correct": 4,
+          "evaluable": 7
+        },
+        "referent_surface_correct": {
+          "correct": 8,
+          "evaluable": 20
+        },
+        "semantic_kind_correct": {
+          "correct": 18,
+          "evaluable": 20
+        },
+        "serialization_contract_correct": {
+          "correct": 19,
+          "evaluable": 20
+        }
+      },
+      "pass2_dimensions": {
+        "attribute_fields_correct": {
+          "correct": 15,
+          "evaluable": 15
+        },
+        "canonicalization_correct": {
+          "correct": 11,
+          "evaluable": 18
+        },
+        "identity_correct": {
+          "correct": 13,
+          "evaluable": 20
+        },
+        "occurrence_role_correct": {
+          "correct": 4,
+          "evaluable": 11
+        },
+        "referent_surface_correct": {
+          "correct": 7,
+          "evaluable": 20
+        },
+        "semantic_kind_correct": {
+          "correct": 14,
+          "evaluable": 20
+        },
+        "serialization_contract_correct": {
+          "correct": 15,
+          "evaluable": 20
+        }
+      },
+      "pass3_dimensions": {
+        "attribute_fields_correct": {
+          "correct": 0,
+          "evaluable": 0
+        },
+        "canonicalization_correct": {
+          "correct": 0,
+          "evaluable": 20
+        },
+        "identity_correct": {
+          "correct": 0,
+          "evaluable": 20
+        },
+        "occurrence_role_correct": {
+          "correct": 0,
+          "evaluable": 20
+        },
+        "referent_surface_correct": {
+          "correct": 0,
+          "evaluable": 20
+        },
+        "semantic_kind_correct": {
+          "correct": 0,
+          "evaluable": 20
+        },
+        "serialization_contract_correct": {
+          "correct": 0,
+          "evaluable": 20
+        }
+      }
+    },
+    "errors_recovered": 0,
+    "final_errors": 14,
+    "final_state_distribution": {
+      "local_candidate_resolved": 9,
+      "non_person": 1,
+      "review_required": 5,
+      "stable_entity_resolved": 3,
+      "structural_reference": 2
+    },
+    "final_strict_full_record_accuracy": 0.3,
+    "final_strict_full_record_correct": 6,
+    "high_confidence_final_false_identities": 2,
+    "historical_identity_accuracy": 0.6111,
+    "historical_identity_correct": 11,
+    "historical_identity_evaluable": 18,
+    "identity_reviewer_damage": 4,
+    "new_errors_introduced": 1,
+    "pass1_errors": 13,
+    "pass1_historical_identity_accuracy": 0.8333,
+    "pass1_historical_identity_correct": 15,
+    "pass1_pass2_semantic_agreement": 15,
+    "pass1_pass2_semantic_agreement_rate": 0.75,
+    "pass1_strict_full_record_accuracy": 0.35,
+    "pass1_strict_full_record_correct": 7,
+    "pass3_abstentions": 0,
+    "pass3_required": 4,
+    "reviewer_damage": 1
   },
   "related_person_promotions": 0,
   "schema": "sfh2-a0r-l-metrics-v1",
@@ -94,14 +259,14 @@
         "cache_hits": 0,
         "completion_tokens": 0,
         "invalid_payloads": 0,
-        "max_latency_seconds": 0,
-        "median_latency_seconds": 0,
+        "max_latency_seconds": 0.689,
+        "median_latency_seconds": 0.255,
         "offline_cache_misses": 0,
         "parsed": 0,
         "prompt_tokens": 0,
-        "provider_failures": 0,
-        "records": 0,
-        "retries": 0,
+        "provider_failures": 20,
+        "records": 20,
+        "retries": 10,
         "total_tokens": 0,
         "truncations": 0
       },
@@ -110,55 +275,55 @@
         "cache_hits": 0,
         "completion_tokens": 0,
         "invalid_payloads": 0,
-        "max_latency_seconds": 0,
-        "median_latency_seconds": 0,
+        "max_latency_seconds": 0.47,
+        "median_latency_seconds": 0.261,
         "offline_cache_misses": 0,
         "parsed": 0,
         "prompt_tokens": 0,
-        "provider_failures": 0,
-        "records": 0,
-        "retries": 0,
+        "provider_failures": 20,
+        "records": 20,
+        "retries": 10,
         "total_tokens": 0,
         "truncations": 0
       },
       "primary_historian": {
         "budget_exhausted": 0,
         "cache_hits": 0,
-        "completion_tokens": 0,
+        "completion_tokens": 15976,
         "invalid_payloads": 0,
-        "max_latency_seconds": 0,
-        "median_latency_seconds": 0,
-        "offline_cache_misses": 40,
-        "parsed": 0,
-        "prompt_tokens": 0,
+        "max_latency_seconds": 4.171,
+        "median_latency_seconds": 3.26,
+        "offline_cache_misses": 0,
+        "parsed": 40,
+        "prompt_tokens": 112079,
         "provider_failures": 0,
         "records": 40,
         "retries": 0,
-        "total_tokens": 0,
+        "total_tokens": 128055,
         "truncations": 0
       }
     },
     "cache_hits": 0,
-    "calls": 40,
-    "completion_tokens": 0,
+    "calls": 80,
+    "completion_tokens": 15976,
     "invalid_payloads": 0,
-    "max_latency_seconds": 0,
-    "median_latency_seconds": 0,
+    "max_latency_seconds": 4.171,
+    "median_latency_seconds": 1.558,
     "model": "deepseek-v4-flash",
-    "new_live_attempts": 0,
-    "offline_cache_misses": 40,
-    "parsed_calls": 0,
+    "new_live_attempts": 80,
+    "offline_cache_misses": 0,
+    "parsed_calls": 40,
     "pilot_version": "sfh2-a0r-l-v1",
-    "prompt_tokens": 0,
+    "prompt_tokens": 112079,
     "prompt_versions": {
       "adjudicator": "sfh2-a0r-adjudicator-selector-patch-v1",
       "critical_reviewer": "sfh2-a0r-critical-reviewer-patch-v1",
       "primary_historian": "sfh2-a0r-primary-historian-v1"
     },
-    "provider_failures": 0,
-    "retries": 0,
+    "provider_failures": 40,
+    "retries": 20,
     "schema": "sfh2-a0r-l-transport-v1",
-    "total_tokens": 0,
+    "total_tokens": 128055,
     "truncations": 0
   },
   "undeclared_patch_mutations": 0
