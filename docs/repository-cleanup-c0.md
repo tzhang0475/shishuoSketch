@@ -132,3 +132,14 @@ four Git-based assertions, and the host Python environment lacks the declared
 skipped. The main worktree was not used for that builder-writing run, so its
 protected inputs stayed unchanged. These limitations are reported rather than
 waived or repaired by C0.
+
+## C1 follow-up status
+
+C1 completed the safe retirement of the generated DS1/DS1.2/DS1.2R/DS2
+research bundle. The C0 inventory remains the before-state; the post-retirement
+inventory is `data/derived/repository-retirement-inventory-c1.json`, and the
+pre-deletion hashes and dependency proof are in
+`data/retired/ds-research-family-c1.json`. The optional site DS1 loader remains
+as a dormant 404-safe compatibility consumer, while the obsolete preview
+producer is no longer part of `build:site`. The separate active DS2.1A
+derived research surface was not part of this retirement.

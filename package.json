@@ -48,9 +48,13 @@
     "validate:frontend-artifact": "python3 scripts/validate_frontend_artifact.py --production",
     "typecheck": "tsc -p site/tsconfig.json --noEmit",
     "dev": "vite --config site/vite.config.ts",
-    "build:site": "python3 scripts/build_hng0.py && python3 scripts/build_hng0_1_frontend.py && python3 scripts/build_ux1_historical_projection.py && python3 scripts/build_nl0_story_sketch.py && python3 scripts/build_ux2_index.py && python3 scripts/build_ds1_preview.py && vite build --config site/vite.config.ts && python3 scripts/materialize_frontend_routes.py",
+    "build:site": "python3 scripts/build_hng0.py && python3 scripts/build_hng0_1_frontend.py && python3 scripts/build_ux1_historical_projection.py && python3 scripts/build_nl0_story_sketch.py && python3 scripts/build_ux2_index.py && vite build --config site/vite.config.ts && python3 scripts/materialize_frontend_routes.py",
     "build": "npm run build:m2-production && npm run validate:person-ids && npm run validate:person-resolution && npm run validate && npm run validate:sc1 && npm run validate:m2-story-expansion && npm run validate:story-scene-contexts && npm run validate:person-relation-candidates-r3 && npm run validate:m2-person-expansion && npm run build:ux1 && npm run build:nl0 && npm run build:ux2 && npm run typecheck && vite build --config site/vite.config.ts && python3 scripts/m2_experience_metrics.py --production-artifact",
-    "test": "python3 -m unittest discover -s tests -p 'test*.py'"
+    "test": "python3 scripts/run_test_suite.py current",
+    "test:current": "python3 scripts/run_test_suite.py current",
+    "test:historical": "python3 scripts/run_test_suite.py historical",
+    "test:source": "python3 scripts/run_test_suite.py source",
+    "test:network": "python3 scripts/run_test_suite.py network"
   },
   "dependencies": {
     "@vitejs/plugin-react": "^4.3.4",

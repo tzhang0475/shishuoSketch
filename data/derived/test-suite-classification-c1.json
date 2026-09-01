@@ -1,0 +1,781 @@
+{
+  "schema": "test-suite-classification-c1-v1",
+  "supersedes": "data/derived/test-suite-classification-c0.json",
+  "generated_at_baseline": "c16aedd5845f172160752091fcef924079d34d2e",
+  "test_count": 150,
+  "classification_counts": {
+    "CURRENT_REQUIRED": 58,
+    "HISTORICAL_REPRODUCIBILITY": 82,
+    "SOURCE_PAYLOAD_OPTIONAL": 8,
+    "LIVE_NETWORK_EXPERIMENT": 2
+  },
+  "policy": {
+    "CURRENT_REQUIRED": "Default suite for current product and protected active pipeline contracts.",
+    "HISTORICAL_REPRODUCIBILITY": "Run when reproducing or auditing a historical stage/frozen artifact.",
+    "SOURCE_PAYLOAD_OPTIONAL": "Run in full environments; portable CI may skip only explicitly gated source-payload assertions.",
+    "LIVE_NETWORK_EXPERIMENT": "Opt-in host/network suite; ordinary portable validation must not invoke the provider."
+  },
+  "retired_test_paths": [
+    "tests/test_ds1.py",
+    "tests/test_ds1_2.py",
+    "tests/test_ds1_2r.py",
+    "tests/test_ds2.py"
+  ],
+  "notes": [
+    "This is the post-C1 suite registry; the C0 registry remains the before-state.",
+    "The four retired DS1/DS1.2/DS1.2R/DS2 test modules are removed.",
+    "tests/test_ds2_1a.py remains because it validates the separate active DS2.1A derived research surface."
+  ],
+  "tests": [
+    {
+      "path": "tests/test_audit_shishuo_boundaries.py",
+      "classification": "CURRENT_REQUIRED",
+      "reason": "Protects a current product, canonical, active pipeline, or current frontend/graph contract."
+    },
+    {
+      "path": "tests/test_bug_005a.py",
+      "classification": "CURRENT_REQUIRED",
+      "reason": "Protects a current product, canonical, active pipeline, or current frontend/graph contract."
+    },
+    {
+      "path": "tests/test_compare_shishuo_witnesses.py",
+      "classification": "HISTORICAL_REPRODUCIBILITY",
+      "reason": "Validates a numbered experiment, frozen output, research pilot, or historical builder contract."
+    },
+    {
+      "path": "tests/test_crl1_reading_layer.py",
+      "classification": "CURRENT_REQUIRED",
+      "reason": "Protects a current product, canonical, active pipeline, or current frontend/graph contract."
+    },
+    {
+      "path": "tests/test_ctext_jianshu.py",
+      "classification": "HISTORICAL_REPRODUCIBILITY",
+      "reason": "Validates a numbered experiment, frozen output, research pilot, or historical builder contract."
+    },
+    {
+      "path": "tests/test_d1_0.py",
+      "classification": "CURRENT_REQUIRED",
+      "reason": "Protects a current product, canonical, active pipeline, or current frontend/graph contract."
+    },
+    {
+      "path": "tests/test_d1_1.py",
+      "classification": "CURRENT_REQUIRED",
+      "reason": "Protects a current product, canonical, active pipeline, or current frontend/graph contract."
+    },
+    {
+      "path": "tests/test_download_witnesses.py",
+      "classification": "HISTORICAL_REPRODUCIBILITY",
+      "reason": "Validates a numbered experiment, frozen output, research pilot, or historical builder contract."
+    },
+    {
+      "path": "tests/test_ds2_1a.py",
+      "classification": "HISTORICAL_REPRODUCIBILITY",
+      "reason": "Validates a numbered experiment, frozen output, research pilot, or historical builder contract."
+    },
+    {
+      "path": "tests/test_e0_era_cards.py",
+      "classification": "CURRENT_REQUIRED",
+      "reason": "Protects a current product, canonical, active pipeline, or current frontend/graph contract."
+    },
+    {
+      "path": "tests/test_er1_1_3_alias_collision.py",
+      "classification": "HISTORICAL_REPRODUCIBILITY",
+      "reason": "Validates a numbered experiment, frozen output, research pilot, or historical builder contract."
+    },
+    {
+      "path": "tests/test_f0_feedback.py",
+      "classification": "CURRENT_REQUIRED",
+      "reason": "Protects a current product, canonical, active pipeline, or current frontend/graph contract."
+    },
+    {
+      "path": "tests/test_h0a.py",
+      "classification": "CURRENT_REQUIRED",
+      "reason": "Protects a current product, canonical, active pipeline, or current frontend/graph contract."
+    },
+    {
+      "path": "tests/test_h0b0.py",
+      "classification": "CURRENT_REQUIRED",
+      "reason": "Protects a current product, canonical, active pipeline, or current frontend/graph contract."
+    },
+    {
+      "path": "tests/test_h0b1.py",
+      "classification": "CURRENT_REQUIRED",
+      "reason": "Protects a current product, canonical, active pipeline, or current frontend/graph contract."
+    },
+    {
+      "path": "tests/test_h0c.py",
+      "classification": "CURRENT_REQUIRED",
+      "reason": "Protects a current product, canonical, active pipeline, or current frontend/graph contract."
+    },
+    {
+      "path": "tests/test_hda1_hge1.py",
+      "classification": "CURRENT_REQUIRED",
+      "reason": "Protects a current product, canonical, active pipeline, or current frontend/graph contract."
+    },
+    {
+      "path": "tests/test_hda2_hge1_wb.py",
+      "classification": "CURRENT_REQUIRED",
+      "reason": "Protects a current product, canonical, active pipeline, or current frontend/graph contract."
+    },
+    {
+      "path": "tests/test_hdb1_wave1.py",
+      "classification": "CURRENT_REQUIRED",
+      "reason": "Protects a current product, canonical, active pipeline, or current frontend/graph contract."
+    },
+    {
+      "path": "tests/test_hdb1_wave2.py",
+      "classification": "CURRENT_REQUIRED",
+      "reason": "Protects a current product, canonical, active pipeline, or current frontend/graph contract."
+    },
+    {
+      "path": "tests/test_hdb2_constraint_fusion.py",
+      "classification": "CURRENT_REQUIRED",
+      "reason": "Protects a current product, canonical, active pipeline, or current frontend/graph contract."
+    },
+    {
+      "path": "tests/test_hdb2_full_frontier.py",
+      "classification": "CURRENT_REQUIRED",
+      "reason": "Protects a current product, canonical, active pipeline, or current frontend/graph contract."
+    },
+    {
+      "path": "tests/test_hdb2_lj0.py",
+      "classification": "HISTORICAL_REPRODUCIBILITY",
+      "reason": "Validates a numbered experiment, frozen output, research pilot, or historical builder contract."
+    },
+    {
+      "path": "tests/test_hdb2_occurrence_disambiguation.py",
+      "classification": "HISTORICAL_REPRODUCIBILITY",
+      "reason": "Validates a numbered experiment, frozen output, research pilot, or historical builder contract."
+    },
+    {
+      "path": "tests/test_hdb2_p2t.py",
+      "classification": "HISTORICAL_REPRODUCIBILITY",
+      "reason": "Validates a numbered experiment, frozen output, research pilot, or historical builder contract."
+    },
+    {
+      "path": "tests/test_hdb2_portable_grounded_source.py",
+      "classification": "HISTORICAL_REPRODUCIBILITY",
+      "reason": "Validates a numbered experiment, frozen output, research pilot, or historical builder contract."
+    },
+    {
+      "path": "tests/test_hdb2_psl0.py",
+      "classification": "HISTORICAL_REPRODUCIBILITY",
+      "reason": "Validates a numbered experiment, frozen output, research pilot, or historical builder contract."
+    },
+    {
+      "path": "tests/test_hdb2_psl1_1.py",
+      "classification": "HISTORICAL_REPRODUCIBILITY",
+      "reason": "Validates a numbered experiment, frozen output, research pilot, or historical builder contract."
+    },
+    {
+      "path": "tests/test_hdb2_psl1_2.py",
+      "classification": "HISTORICAL_REPRODUCIBILITY",
+      "reason": "Validates a numbered experiment, frozen output, research pilot, or historical builder contract."
+    },
+    {
+      "path": "tests/test_hdb2_psl1_3.py",
+      "classification": "HISTORICAL_REPRODUCIBILITY",
+      "reason": "Validates a numbered experiment, frozen output, research pilot, or historical builder contract."
+    },
+    {
+      "path": "tests/test_hdb2_psl1_3a.py",
+      "classification": "HISTORICAL_REPRODUCIBILITY",
+      "reason": "Validates a numbered experiment, frozen output, research pilot, or historical builder contract."
+    },
+    {
+      "path": "tests/test_hdb2_psl1_3b.py",
+      "classification": "HISTORICAL_REPRODUCIBILITY",
+      "reason": "Validates a numbered experiment, frozen output, research pilot, or historical builder contract."
+    },
+    {
+      "path": "tests/test_hdb2_psl1_3c.py",
+      "classification": "HISTORICAL_REPRODUCIBILITY",
+      "reason": "Validates a numbered experiment, frozen output, research pilot, or historical builder contract."
+    },
+    {
+      "path": "tests/test_hdb2_psl1_3d.py",
+      "classification": "HISTORICAL_REPRODUCIBILITY",
+      "reason": "Validates a numbered experiment, frozen output, research pilot, or historical builder contract."
+    },
+    {
+      "path": "tests/test_hdb2_psl1.py",
+      "classification": "HISTORICAL_REPRODUCIBILITY",
+      "reason": "Validates a numbered experiment, frozen output, research pilot, or historical builder contract."
+    },
+    {
+      "path": "tests/test_hdb2_review_ui.py",
+      "classification": "CURRENT_REQUIRED",
+      "reason": "Protects a current product, canonical, active pipeline, or current frontend/graph contract."
+    },
+    {
+      "path": "tests/test_hdb2_xe0.py",
+      "classification": "HISTORICAL_REPRODUCIBILITY",
+      "reason": "Validates a numbered experiment, frozen output, research pilot, or historical builder contract."
+    },
+    {
+      "path": "tests/test_hg0.py",
+      "classification": "HISTORICAL_REPRODUCIBILITY",
+      "reason": "Validates a numbered experiment, frozen output, research pilot, or historical builder contract."
+    },
+    {
+      "path": "tests/test_hg1_1.py",
+      "classification": "HISTORICAL_REPRODUCIBILITY",
+      "reason": "Validates a numbered experiment, frozen output, research pilot, or historical builder contract."
+    },
+    {
+      "path": "tests/test_historical_entity_schema.py",
+      "classification": "HISTORICAL_REPRODUCIBILITY",
+      "reason": "Validates a numbered experiment, frozen output, research pilot, or historical builder contract."
+    },
+    {
+      "path": "tests/test_hng0_1.py",
+      "classification": "CURRENT_REQUIRED",
+      "reason": "Protects a current product, canonical, active pipeline, or current frontend/graph contract."
+    },
+    {
+      "path": "tests/test_hng0_2.py",
+      "classification": "SOURCE_PAYLOAD_OPTIONAL",
+      "reason": "Uses tests.support payload gating for ignored/downloaded source data."
+    },
+    {
+      "path": "tests/test_hng0_2r.py",
+      "classification": "SOURCE_PAYLOAD_OPTIONAL",
+      "reason": "Uses tests.support payload gating for ignored/downloaded source data."
+    },
+    {
+      "path": "tests/test_hng0.py",
+      "classification": "CURRENT_REQUIRED",
+      "reason": "Protects a current product, canonical, active pipeline, or current frontend/graph contract."
+    },
+    {
+      "path": "tests/test_hng1.py",
+      "classification": "CURRENT_REQUIRED",
+      "reason": "Protects a current product, canonical, active pipeline, or current frontend/graph contract."
+    },
+    {
+      "path": "tests/test_hng1r.py",
+      "classification": "CURRENT_REQUIRED",
+      "reason": "Protects a current product, canonical, active pipeline, or current frontend/graph contract."
+    },
+    {
+      "path": "tests/test_hng1r2.py",
+      "classification": "CURRENT_REQUIRED",
+      "reason": "Protects a current product, canonical, active pipeline, or current frontend/graph contract."
+    },
+    {
+      "path": "tests/test_hng2_algorithm_closeout.py",
+      "classification": "HISTORICAL_REPRODUCIBILITY",
+      "reason": "Validates a numbered experiment, frozen output, research pilot, or historical builder contract."
+    },
+    {
+      "path": "tests/test_hng2_consolidation.py",
+      "classification": "HISTORICAL_REPRODUCIBILITY",
+      "reason": "Validates a numbered experiment, frozen output, research pilot, or historical builder contract."
+    },
+    {
+      "path": "tests/test_hng2_evidence_atom_validation.py",
+      "classification": "HISTORICAL_REPRODUCIBILITY",
+      "reason": "Validates a numbered experiment, frozen output, research pilot, or historical builder contract."
+    },
+    {
+      "path": "tests/test_hng2_fresh_validation.py",
+      "classification": "HISTORICAL_REPRODUCIBILITY",
+      "reason": "Validates a numbered experiment, frozen output, research pilot, or historical builder contract."
+    },
+    {
+      "path": "tests/test_hng2_live.py",
+      "classification": "HISTORICAL_REPRODUCIBILITY",
+      "reason": "Validates a numbered experiment, frozen output, research pilot, or historical builder contract."
+    },
+    {
+      "path": "tests/test_hng2_read_fill_validation.py",
+      "classification": "HISTORICAL_REPRODUCIBILITY",
+      "reason": "Validates a numbered experiment, frozen output, research pilot, or historical builder contract."
+    },
+    {
+      "path": "tests/test_hng2_sc2_pilot.py",
+      "classification": "HISTORICAL_REPRODUCIBILITY",
+      "reason": "Validates a numbered experiment, frozen output, research pilot, or historical builder contract."
+    },
+    {
+      "path": "tests/test_hng2_schema_controller_hardening.py",
+      "classification": "HISTORICAL_REPRODUCIBILITY",
+      "reason": "Validates a numbered experiment, frozen output, research pilot, or historical builder contract."
+    },
+    {
+      "path": "tests/test_hng2_schema_controller_small_card.py",
+      "classification": "HISTORICAL_REPRODUCIBILITY",
+      "reason": "Validates a numbered experiment, frozen output, research pilot, or historical builder contract."
+    },
+    {
+      "path": "tests/test_hng2_schema_controller.py",
+      "classification": "HISTORICAL_REPRODUCIBILITY",
+      "reason": "Validates a numbered experiment, frozen output, research pilot, or historical builder contract."
+    },
+    {
+      "path": "tests/test_hng2_schema_live.py",
+      "classification": "HISTORICAL_REPRODUCIBILITY",
+      "reason": "Validates a numbered experiment, frozen output, research pilot, or historical builder contract."
+    },
+    {
+      "path": "tests/test_hng2_schema_strict_function.py",
+      "classification": "HISTORICAL_REPRODUCIBILITY",
+      "reason": "Validates a numbered experiment, frozen output, research pilot, or historical builder contract."
+    },
+    {
+      "path": "tests/test_hng2.py",
+      "classification": "CURRENT_REQUIRED",
+      "reason": "Protects a current product, canonical, active pipeline, or current frontend/graph contract."
+    },
+    {
+      "path": "tests/test_hr0_1.py",
+      "classification": "HISTORICAL_REPRODUCIBILITY",
+      "reason": "Validates a numbered experiment, frozen output, research pilot, or historical builder contract."
+    },
+    {
+      "path": "tests/test_hr0.py",
+      "classification": "HISTORICAL_REPRODUCIBILITY",
+      "reason": "Validates a numbered experiment, frozen output, research pilot, or historical builder contract."
+    },
+    {
+      "path": "tests/test_irr0_2.py",
+      "classification": "HISTORICAL_REPRODUCIBILITY",
+      "reason": "Validates a numbered experiment, frozen output, research pilot, or historical builder contract."
+    },
+    {
+      "path": "tests/test_irr0_3.py",
+      "classification": "HISTORICAL_REPRODUCIBILITY",
+      "reason": "Validates a numbered experiment, frozen output, research pilot, or historical builder contract."
+    },
+    {
+      "path": "tests/test_irr0_4.py",
+      "classification": "HISTORICAL_REPRODUCIBILITY",
+      "reason": "Validates a numbered experiment, frozen output, research pilot, or historical builder contract."
+    },
+    {
+      "path": "tests/test_irr0.py",
+      "classification": "HISTORICAL_REPRODUCIBILITY",
+      "reason": "Validates a numbered experiment, frozen output, research pilot, or historical builder contract."
+    },
+    {
+      "path": "tests/test_jinshu_source_coverage.py",
+      "classification": "HISTORICAL_REPRODUCIBILITY",
+      "reason": "Validates a numbered experiment, frozen output, research pilot, or historical builder contract."
+    },
+    {
+      "path": "tests/test_jinshu_units.py",
+      "classification": "CURRENT_REQUIRED",
+      "reason": "Protects a current product, canonical, active pipeline, or current frontend/graph contract."
+    },
+    {
+      "path": "tests/test_lookup_shishuo_reference.py",
+      "classification": "HISTORICAL_REPRODUCIBILITY",
+      "reason": "Validates a numbered experiment, frozen output, research pilot, or historical builder contract."
+    },
+    {
+      "path": "tests/test_m2_experience_scale_up.py",
+      "classification": "HISTORICAL_REPRODUCIBILITY",
+      "reason": "Validates a numbered experiment, frozen output, research pilot, or historical builder contract."
+    },
+    {
+      "path": "tests/test_materialize_frontend_routes.py",
+      "classification": "CURRENT_REQUIRED",
+      "reason": "Protects a current product, canonical, active pipeline, or current frontend/graph contract."
+    },
+    {
+      "path": "tests/test_materialize_shishuo_entries.py",
+      "classification": "CURRENT_REQUIRED",
+      "reason": "Protects a current product, canonical, active pipeline, or current frontend/graph contract."
+    },
+    {
+      "path": "tests/test_ml0.py",
+      "classification": "HISTORICAL_REPRODUCIBILITY",
+      "reason": "Validates a numbered experiment, frozen output, research pilot, or historical builder contract."
+    },
+    {
+      "path": "tests/test_nl0.py",
+      "classification": "HISTORICAL_REPRODUCIBILITY",
+      "reason": "Validates a numbered experiment, frozen output, research pilot, or historical builder contract."
+    },
+    {
+      "path": "tests/test_nl1.py",
+      "classification": "HISTORICAL_REPRODUCIBILITY",
+      "reason": "Validates a numbered experiment, frozen output, research pilot, or historical builder contract."
+    },
+    {
+      "path": "tests/test_normalize_jinshu_wikisource.py",
+      "classification": "SOURCE_PAYLOAD_OPTIONAL",
+      "reason": "Uses tests.support payload gating for ignored/downloaded source data."
+    },
+    {
+      "path": "tests/test_normalize_kanripo.py",
+      "classification": "SOURCE_PAYLOAD_OPTIONAL",
+      "reason": "Uses tests.support payload gating for ignored/downloaded source data."
+    },
+    {
+      "path": "tests/test_person_expansion_candidates.py",
+      "classification": "HISTORICAL_REPRODUCIBILITY",
+      "reason": "Validates a numbered experiment, frozen output, research pilot, or historical builder contract."
+    },
+    {
+      "path": "tests/test_person_expansion_wave.py",
+      "classification": "HISTORICAL_REPRODUCIBILITY",
+      "reason": "Validates a numbered experiment, frozen output, research pilot, or historical builder contract."
+    },
+    {
+      "path": "tests/test_person_id_canonicalization.py",
+      "classification": "CURRENT_REQUIRED",
+      "reason": "Protects a current product, canonical, active pipeline, or current frontend/graph contract."
+    },
+    {
+      "path": "tests/test_person_identity_candidates.py",
+      "classification": "CURRENT_REQUIRED",
+      "reason": "Protects a current product, canonical, active pipeline, or current frontend/graph contract."
+    },
+    {
+      "path": "tests/test_person_relation_candidates_r3.py",
+      "classification": "CURRENT_REQUIRED",
+      "reason": "Protects a current product, canonical, active pipeline, or current frontend/graph contract."
+    },
+    {
+      "path": "tests/test_person_relation_coverage_r3c.py",
+      "classification": "CURRENT_REQUIRED",
+      "reason": "Protects a current product, canonical, active pipeline, or current frontend/graph contract."
+    },
+    {
+      "path": "tests/test_person_relation_review_r3b.py",
+      "classification": "CURRENT_REQUIRED",
+      "reason": "Protects a current product, canonical, active pipeline, or current frontend/graph contract."
+    },
+    {
+      "path": "tests/test_person_resolution_lexical_collisions.py",
+      "classification": "CURRENT_REQUIRED",
+      "reason": "Protects a current product, canonical, active pipeline, or current frontend/graph contract."
+    },
+    {
+      "path": "tests/test_person_resolution.py",
+      "classification": "CURRENT_REQUIRED",
+      "reason": "Protects a current product, canonical, active pipeline, or current frontend/graph contract."
+    },
+    {
+      "path": "tests/test_person_sketch.py",
+      "classification": "CURRENT_REQUIRED",
+      "reason": "Protects a current product, canonical, active pipeline, or current frontend/graph contract."
+    },
+    {
+      "path": "tests/test_person_story_index.py",
+      "classification": "CURRENT_REQUIRED",
+      "reason": "Protects a current product, canonical, active pipeline, or current frontend/graph contract."
+    },
+    {
+      "path": "tests/test_propose_shishuo_boundaries.py",
+      "classification": "HISTORICAL_REPRODUCIBILITY",
+      "reason": "Validates a numbered experiment, frozen output, research pilot, or historical builder contract."
+    },
+    {
+      "path": "tests/test_r2_0_1_frontend_data.py",
+      "classification": "HISTORICAL_REPRODUCIBILITY",
+      "reason": "Validates a numbered experiment, frozen output, research pilot, or historical builder contract."
+    },
+    {
+      "path": "tests/test_r2_relation_explorer.py",
+      "classification": "HISTORICAL_REPRODUCIBILITY",
+      "reason": "Validates a numbered experiment, frozen output, research pilot, or historical builder contract."
+    },
+    {
+      "path": "tests/test_relation_gold.py",
+      "classification": "CURRENT_REQUIRED",
+      "reason": "Protects a current product, canonical, active pipeline, or current frontend/graph contract."
+    },
+    {
+      "path": "tests/test_render_shishuo_manual_review.py",
+      "classification": "HISTORICAL_REPRODUCIBILITY",
+      "reason": "Validates a numbered experiment, frozen output, research pilot, or historical builder contract."
+    },
+    {
+      "path": "tests/test_repeated_alias_segmentation.py",
+      "classification": "CURRENT_REQUIRED",
+      "reason": "Protects a current product, canonical, active pipeline, or current frontend/graph contract."
+    },
+    {
+      "path": "tests/test_s1_jianshu.py",
+      "classification": "SOURCE_PAYLOAD_OPTIONAL",
+      "reason": "Uses tests.support payload gating for ignored/downloaded source data."
+    },
+    {
+      "path": "tests/test_sc1_1_1_inline_mentions.py",
+      "classification": "CURRENT_REQUIRED",
+      "reason": "Protects a current product, canonical, active pipeline, or current frontend/graph contract."
+    },
+    {
+      "path": "tests/test_sc1_1_2_unified.py",
+      "classification": "CURRENT_REQUIRED",
+      "reason": "Protects a current product, canonical, active pipeline, or current frontend/graph contract."
+    },
+    {
+      "path": "tests/test_sc1_1_frontend_contract.py",
+      "classification": "CURRENT_REQUIRED",
+      "reason": "Protects a current product, canonical, active pipeline, or current frontend/graph contract."
+    },
+    {
+      "path": "tests/test_sc1_story_chain.py",
+      "classification": "CURRENT_REQUIRED",
+      "reason": "Protects a current product, canonical, active pipeline, or current frontend/graph contract."
+    },
+    {
+      "path": "tests/test_segment_shishuo_entries.py",
+      "classification": "HISTORICAL_REPRODUCIBILITY",
+      "reason": "Validates a numbered experiment, frozen output, research pilot, or historical builder contract."
+    },
+    {
+      "path": "tests/test_segment_shishuo.py",
+      "classification": "HISTORICAL_REPRODUCIBILITY",
+      "reason": "Validates a numbered experiment, frozen output, research pilot, or historical builder contract."
+    },
+    {
+      "path": "tests/test_sfh1_semantic_first.py",
+      "classification": "CURRENT_REQUIRED",
+      "reason": "Protects a current product, canonical, active pipeline, or current frontend/graph contract."
+    },
+    {
+      "path": "tests/test_sfh2_2p.py",
+      "classification": "HISTORICAL_REPRODUCIBILITY",
+      "reason": "Validates a numbered experiment, frozen output, research pilot, or historical builder contract."
+    },
+    {
+      "path": "tests/test_sfh2_2p1.py",
+      "classification": "HISTORICAL_REPRODUCIBILITY",
+      "reason": "Validates a numbered experiment, frozen output, research pilot, or historical builder contract."
+    },
+    {
+      "path": "tests/test_sfh2_2p2.py",
+      "classification": "HISTORICAL_REPRODUCIBILITY",
+      "reason": "Validates a numbered experiment, frozen output, research pilot, or historical builder contract."
+    },
+    {
+      "path": "tests/test_sfh2_a0.py",
+      "classification": "HISTORICAL_REPRODUCIBILITY",
+      "reason": "Validates a numbered experiment, frozen output, research pilot, or historical builder contract."
+    },
+    {
+      "path": "tests/test_sfh2_a0r_l.py",
+      "classification": "HISTORICAL_REPRODUCIBILITY",
+      "reason": "Validates a numbered experiment, frozen output, research pilot, or historical builder contract."
+    },
+    {
+      "path": "tests/test_sfh2_a0r.py",
+      "classification": "HISTORICAL_REPRODUCIBILITY",
+      "reason": "Validates a numbered experiment, frozen output, research pilot, or historical builder contract."
+    },
+    {
+      "path": "tests/test_sfh2_a1.py",
+      "classification": "HISTORICAL_REPRODUCIBILITY",
+      "reason": "Validates a numbered experiment, frozen output, research pilot, or historical builder contract."
+    },
+    {
+      "path": "tests/test_sfh2_a1r.py",
+      "classification": "HISTORICAL_REPRODUCIBILITY",
+      "reason": "Validates a numbered experiment, frozen output, research pilot, or historical builder contract."
+    },
+    {
+      "path": "tests/test_sfh2_a2.py",
+      "classification": "HISTORICAL_REPRODUCIBILITY",
+      "reason": "Validates a numbered experiment, frozen output, research pilot, or historical builder contract."
+    },
+    {
+      "path": "tests/test_sfh2_a2r.py",
+      "classification": "HISTORICAL_REPRODUCIBILITY",
+      "reason": "Validates a numbered experiment, frozen output, research pilot, or historical builder contract."
+    },
+    {
+      "path": "tests/test_sfh2.py",
+      "classification": "CURRENT_REQUIRED",
+      "reason": "Protects a current product, canonical, active pipeline, or current frontend/graph contract."
+    },
+    {
+      "path": "tests/test_sfh2r.py",
+      "classification": "CURRENT_REQUIRED",
+      "reason": "Protects a current product, canonical, active pipeline, or current frontend/graph contract."
+    },
+    {
+      "path": "tests/test_sfh2r1_closeout.py",
+      "classification": "CURRENT_REQUIRED",
+      "reason": "Protects a current product, canonical, active pipeline, or current frontend/graph contract."
+    },
+    {
+      "path": "tests/test_sfh2r1_semantic_precedence.py",
+      "classification": "CURRENT_REQUIRED",
+      "reason": "Protects a current product, canonical, active pipeline, or current frontend/graph contract."
+    },
+    {
+      "path": "tests/test_sgz1.py",
+      "classification": "HISTORICAL_REPRODUCIBILITY",
+      "reason": "Validates a numbered experiment, frozen output, research pilot, or historical builder contract."
+    },
+    {
+      "path": "tests/test_shishuo_reference_migration.py",
+      "classification": "HISTORICAL_REPRODUCIBILITY",
+      "reason": "Validates a numbered experiment, frozen output, research pilot, or historical builder contract."
+    },
+    {
+      "path": "tests/test_shishuo_repairs.py",
+      "classification": "HISTORICAL_REPRODUCIBILITY",
+      "reason": "Validates a numbered experiment, frozen output, research pilot, or historical builder contract."
+    },
+    {
+      "path": "tests/test_shishuo_structural_review.py",
+      "classification": "SOURCE_PAYLOAD_OPTIONAL",
+      "reason": "Uses tests.support payload gating for ignored/downloaded source data."
+    },
+    {
+      "path": "tests/test_shishuo_witnesses.py",
+      "classification": "HISTORICAL_REPRODUCIBILITY",
+      "reason": "Validates a numbered experiment, frozen output, research pilot, or historical builder contract."
+    },
+    {
+      "path": "tests/test_six_person_pilot.py",
+      "classification": "SOURCE_PAYLOAD_OPTIONAL",
+      "reason": "Uses tests.support payload gating for ignored/downloaded source data."
+    },
+    {
+      "path": "tests/test_srm0_1.py",
+      "classification": "HISTORICAL_REPRODUCIBILITY",
+      "reason": "Validates a numbered experiment, frozen output, research pilot, or historical builder contract."
+    },
+    {
+      "path": "tests/test_srm0_1r.py",
+      "classification": "HISTORICAL_REPRODUCIBILITY",
+      "reason": "Validates a numbered experiment, frozen output, research pilot, or historical builder contract."
+    },
+    {
+      "path": "tests/test_srm0_2b.py",
+      "classification": "HISTORICAL_REPRODUCIBILITY",
+      "reason": "Validates a numbered experiment, frozen output, research pilot, or historical builder contract."
+    },
+    {
+      "path": "tests/test_srm0_2m.py",
+      "classification": "HISTORICAL_REPRODUCIBILITY",
+      "reason": "Validates a numbered experiment, frozen output, research pilot, or historical builder contract."
+    },
+    {
+      "path": "tests/test_srm0_3a.py",
+      "classification": "HISTORICAL_REPRODUCIBILITY",
+      "reason": "Validates a numbered experiment, frozen output, research pilot, or historical builder contract."
+    },
+    {
+      "path": "tests/test_srm0_3b.py",
+      "classification": "HISTORICAL_REPRODUCIBILITY",
+      "reason": "Validates a numbered experiment, frozen output, research pilot, or historical builder contract."
+    },
+    {
+      "path": "tests/test_srm0_4a.py",
+      "classification": "HISTORICAL_REPRODUCIBILITY",
+      "reason": "Validates a numbered experiment, frozen output, research pilot, or historical builder contract."
+    },
+    {
+      "path": "tests/test_srm0_4b.py",
+      "classification": "LIVE_NETWORK_EXPERIMENT",
+      "reason": "Exercises the SRM live/transport path; network execution is explicitly gated or mocked in normal tests."
+    },
+    {
+      "path": "tests/test_srm0_4c.py",
+      "classification": "LIVE_NETWORK_EXPERIMENT",
+      "reason": "Exercises the SRM live/transport path; network execution is explicitly gated or mocked in normal tests."
+    },
+    {
+      "path": "tests/test_srm0_4d.py",
+      "classification": "HISTORICAL_REPRODUCIBILITY",
+      "reason": "Validates a numbered experiment, frozen output, research pilot, or historical builder contract."
+    },
+    {
+      "path": "tests/test_srm0_5.py",
+      "classification": "HISTORICAL_REPRODUCIBILITY",
+      "reason": "Validates a numbered experiment, frozen output, research pilot, or historical builder contract."
+    },
+    {
+      "path": "tests/test_story_chain_gold.py",
+      "classification": "CURRENT_REQUIRED",
+      "reason": "Protects a current product, canonical, active pipeline, or current frontend/graph contract."
+    },
+    {
+      "path": "tests/test_story_scene_context.py",
+      "classification": "CURRENT_REQUIRED",
+      "reason": "Protects a current product, canonical, active pipeline, or current frontend/graph contract."
+    },
+    {
+      "path": "tests/test_test_suite_runner.py",
+      "classification": "CURRENT_REQUIRED",
+      "reason": "Protects the registry-driven current test execution contract."
+    },
+    {
+      "path": "tests/test_ux1.py",
+      "classification": "CURRENT_REQUIRED",
+      "reason": "Protects a current product, canonical, active pipeline, or current frontend/graph contract."
+    },
+    {
+      "path": "tests/test_ux2.py",
+      "classification": "CURRENT_REQUIRED",
+      "reason": "Protects a current product, canonical, active pipeline, or current frontend/graph contract."
+    },
+    {
+      "path": "tests/test_w3_expansion.py",
+      "classification": "CURRENT_REQUIRED",
+      "reason": "Protects a current product, canonical, active pipeline, or current frontend/graph contract."
+    },
+    {
+      "path": "tests/test_w4_1_reader_consistency.py",
+      "classification": "CURRENT_REQUIRED",
+      "reason": "Protects a current product, canonical, active pipeline, or current frontend/graph contract."
+    },
+    {
+      "path": "tests/test_w4_preflight_person_resolution.py",
+      "classification": "CURRENT_REQUIRED",
+      "reason": "Protects a current product, canonical, active pipeline, or current frontend/graph contract."
+    },
+    {
+      "path": "tests/test_w4.py",
+      "classification": "CURRENT_REQUIRED",
+      "reason": "Protects a current product, canonical, active pipeline, or current frontend/graph contract."
+    },
+    {
+      "path": "tests/test_wp1.py",
+      "classification": "CURRENT_REQUIRED",
+      "reason": "Protects a current product, canonical, active pipeline, or current frontend/graph contract."
+    },
+    {
+      "path": "tests/test_wref1_wikisource_references.py",
+      "classification": "HISTORICAL_REPRODUCIBILITY",
+      "reason": "Validates a numbered experiment, frozen output, research pilot, or historical builder contract."
+    },
+    {
+      "path": "tests/test_x1_1.py",
+      "classification": "HISTORICAL_REPRODUCIBILITY",
+      "reason": "Validates a numbered experiment, frozen output, research pilot, or historical builder contract."
+    },
+    {
+      "path": "tests/test_x1_2a.py",
+      "classification": "HISTORICAL_REPRODUCIBILITY",
+      "reason": "Validates a numbered experiment, frozen output, research pilot, or historical builder contract."
+    },
+    {
+      "path": "tests/test_x1_2p.py",
+      "classification": "HISTORICAL_REPRODUCIBILITY",
+      "reason": "Validates a numbered experiment, frozen output, research pilot, or historical builder contract."
+    },
+    {
+      "path": "tests/test_x1_2r.py",
+      "classification": "SOURCE_PAYLOAD_OPTIONAL",
+      "reason": "Uses tests.support payload gating for ignored/downloaded source data."
+    },
+    {
+      "path": "tests/test_x1_2rf.py",
+      "classification": "HISTORICAL_REPRODUCIBILITY",
+      "reason": "Validates a numbered experiment, frozen output, research pilot, or historical builder contract."
+    },
+    {
+      "path": "tests/test_ztj0.py",
+      "classification": "CURRENT_REQUIRED",
+      "reason": "Protects a current product, canonical, active pipeline, or current frontend/graph contract."
+    }
+  ]
+}

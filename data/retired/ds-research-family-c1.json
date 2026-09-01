@@ -1,0 +1,1197 @@
+{
+  "schema": "ds-research-family-retirement-c1-v1",
+  "retirement_date": "2026-09-01",
+  "retirement_baseline_commit": "c16aedd5845f172160752091fcef924079d34d2e",
+  "retirement_commit": "recorded by the Git commit containing this manifest",
+  "retirement_reason": "Retire the obsolete DS1 → DS1.2 → DS1.2R → DS2 local-evidence research family from the active repository contract after C0 dependency review. Preserve byte-level provenance in Git and keep only the already-existing optional frontend compatibility consumer.",
+  "scope": {
+    "retired_generated_stages": [
+      "DS1",
+      "DS1.2",
+      "DS1.2R",
+      "DS2"
+    ],
+    "active_dependency_exception": "site/src/ds1.ts and its existing App.tsx rendering remain as a dormant optional compatibility consumer. No committed site/public/generated/ds1 preview exists at retirement; the obsolete producer is removed from build:site, so the current build no longer depends on the retired input tree.",
+    "explicitly_not_retired": [
+      "data/derived/ds2-1a-shishuo-search-corpus.json",
+      "data/derived/ds2-1a-person-research-surface.json",
+      "data/derived/ds2-1a-research-association-audit.json",
+      "scripts/build_ds2_1a_person_research.py",
+      "scripts/validate_ds2_1a.py",
+      "scripts/query_person_research.py",
+      "scripts/search_shishuo_research.py"
+    ]
+  },
+  "stages": [
+    {
+      "stage": "DS1",
+      "path": "data/generated/ds1",
+      "status": "RETIRED",
+      "retirement_scope": "generated research input/candidate artifacts",
+      "reason": "No committed public preview is present; the site consumer is retained only as an absent/404-safe compatibility path."
+    },
+    {
+      "stage": "DS1.2",
+      "path": "data/generated/ds1-2",
+      "status": "RETIRED",
+      "retirement_scope": "generated retrieval/trace artifacts",
+      "reason": "Only consumed by retired DS1.2R/DS2 code, tests, schemas, and documentation."
+    },
+    {
+      "stage": "DS1.2R",
+      "path": "data/generated/ds1-2r",
+      "status": "RETIRED",
+      "retirement_scope": "generated deduplicating retrieval/identity artifacts",
+      "reason": "Only consumed by the retired DS family."
+    },
+    {
+      "stage": "DS2",
+      "path": "data/generated/ds2",
+      "status": "RETIRED",
+      "retirement_scope": "seven-Story context pilot artifacts",
+      "reason": "No current production, canonical, graph, retrieval, frontend, or active algorithm consumer."
+    }
+  ],
+  "retired_file_count": 48,
+  "retired_files": [
+    {
+      "path": "data/annotation/ds1-review.json",
+      "sha256": "6b9fcc38381286251484f0219b5c8296ddad20f9a7e52c2d87e22bea6aa30400",
+      "bytes": 304,
+      "stage": "DS1",
+      "kind": "annotation_provenance",
+      "action": "archive_under_new_path",
+      "archived_path": "data/annotation/archive/ds/ds1-review.json"
+    },
+    {
+      "path": "data/annotation/ds2-pilot-review.json",
+      "sha256": "fac192865e3b2476f8f711882f4a824e50a9b9375be220052497e89f1a7e9368",
+      "bytes": 1719,
+      "stage": "DS2",
+      "kind": "annotation_provenance",
+      "action": "archive_under_new_path",
+      "archived_path": "data/annotation/archive/ds/ds2-pilot-review.json"
+    },
+    {
+      "path": "data/generated/ds1/27-jiajue-008-context.json",
+      "sha256": "95990cc49363a5c10b207a139dd182f70024cddb05b6baa3d3f2f23134f32e43",
+      "bytes": 23797,
+      "stage": "DS1",
+      "kind": "generated_artifact",
+      "action": "delete",
+      "archived_path": null
+    },
+    {
+      "path": "data/generated/ds1/27-jiajue-008.json",
+      "sha256": "28105961442274b03d0442f4e7c5b4a173edf6728295dcb8c0810d1a5fa59ffd",
+      "bytes": 9062,
+      "stage": "DS1",
+      "kind": "generated_artifact",
+      "action": "delete",
+      "archived_path": null
+    },
+    {
+      "path": "data/generated/ds1-2/27-jiajue-008-trace.json",
+      "sha256": "412d7f9bf4f04031f38d22c8859ca86d59022441fbac4fe6577034b36d8b13d0",
+      "bytes": 58464,
+      "stage": "DS1.2",
+      "kind": "generated_artifact",
+      "action": "delete",
+      "archived_path": null
+    },
+    {
+      "path": "data/generated/ds1-2/27-jiajue-008.json",
+      "sha256": "82e72353c8383fcb8dca8da07c1cd4aeb9eb4fb1d7bf1e88d58de77ed07933e8",
+      "bytes": 9808,
+      "stage": "DS1.2",
+      "kind": "generated_artifact",
+      "action": "delete",
+      "archived_path": null
+    },
+    {
+      "path": "data/generated/ds1-2/manifest.json",
+      "sha256": "7b49561fb3c2ba7e26ceb99229924b58bb361b814e2af0ca47185d4c142442b5",
+      "bytes": 2495,
+      "stage": "DS1.2",
+      "kind": "generated_artifact",
+      "action": "delete",
+      "archived_path": null
+    },
+    {
+      "path": "data/generated/ds1-2r/27-jiajue-008-trace.json",
+      "sha256": "e3e2b31de8f80839a760f7a20cb6f9b2be944da217c844cf08441e5d1b320871",
+      "bytes": 78438,
+      "stage": "DS1.2R",
+      "kind": "generated_artifact",
+      "action": "delete",
+      "archived_path": null
+    },
+    {
+      "path": "data/generated/ds1-2r/27-jiajue-008.json",
+      "sha256": "7d865ef0784f2cd73a392888028a97e2f3ba525f8119ce2583b14877b81693f4",
+      "bytes": 18954,
+      "stage": "DS1.2R",
+      "kind": "generated_artifact",
+      "action": "delete",
+      "archived_path": null
+    },
+    {
+      "path": "data/generated/ds1-2r/manifest.json",
+      "sha256": "d974e4ac08112bb8fa7b56aa312b2cd1dc0ab6bce0747ff789aa850ea6d63177",
+      "bytes": 2837,
+      "stage": "DS1.2R",
+      "kind": "generated_artifact",
+      "action": "delete",
+      "archived_path": null
+    },
+    {
+      "path": "data/generated/ds2/02-yanyu-035-trace.json",
+      "sha256": "24f89033ef4c0b5591cc7d934fe54a51a5c18f768aa180412106e276d3f4792a",
+      "bytes": 50333,
+      "stage": "DS2",
+      "kind": "generated_artifact",
+      "action": "delete",
+      "archived_path": null
+    },
+    {
+      "path": "data/generated/ds2/02-yanyu-035.json",
+      "sha256": "2d2091cb821cc0652892388828f718695caeda9c62500d8447c632e9dc3acbc3",
+      "bytes": 7720,
+      "stage": "DS2",
+      "kind": "generated_artifact",
+      "action": "delete",
+      "archived_path": null
+    },
+    {
+      "path": "data/generated/ds2/02-yanyu-036-trace.json",
+      "sha256": "52d115713d0673e3f072d519695668d03f5ba065822d5baa094f1ad6e65c90e7",
+      "bytes": 58299,
+      "stage": "DS2",
+      "kind": "generated_artifact",
+      "action": "delete",
+      "archived_path": null
+    },
+    {
+      "path": "data/generated/ds2/02-yanyu-036.json",
+      "sha256": "483cb809e1d99e11a7aff0148a50e1ceb08a7238cfc08d9fe4302029314797af",
+      "bytes": 8169,
+      "stage": "DS2",
+      "kind": "generated_artifact",
+      "action": "delete",
+      "archived_path": null
+    },
+    {
+      "path": "data/generated/ds2/05-fangzheng-032-trace.json",
+      "sha256": "ce38ff3cec6ff933a6f873fce38927460c738622962f85d791087c9b4bb571b1",
+      "bytes": 90587,
+      "stage": "DS2",
+      "kind": "generated_artifact",
+      "action": "delete",
+      "archived_path": null
+    },
+    {
+      "path": "data/generated/ds2/05-fangzheng-032.json",
+      "sha256": "94b92393099eeb0835a7341ebca8e9e311f53dbeea66e1d1f5cea91bdab1a0f8",
+      "bytes": 10051,
+      "stage": "DS2",
+      "kind": "generated_artifact",
+      "action": "delete",
+      "archived_path": null
+    },
+    {
+      "path": "data/generated/ds2/06-yaliang-017-trace.json",
+      "sha256": "ca5aafeab2c20071c8af1a4c6c305545a7052b461114d84d1d198f8cc6a5e1e6",
+      "bytes": 57049,
+      "stage": "DS2",
+      "kind": "generated_artifact",
+      "action": "delete",
+      "archived_path": null
+    },
+    {
+      "path": "data/generated/ds2/06-yaliang-017.json",
+      "sha256": "2c47df79a614db4b5ff29c9e87c3b88a1d371b287226eacc572c259e735ebac9",
+      "bytes": 9828,
+      "stage": "DS2",
+      "kind": "generated_artifact",
+      "action": "delete",
+      "archived_path": null
+    },
+    {
+      "path": "data/generated/ds2/09-pinzao-017-trace.json",
+      "sha256": "559bf29e1e306587556d8f42f6e31eaed1cb1a058a89603151972496a45bc281",
+      "bytes": 49205,
+      "stage": "DS2",
+      "kind": "generated_artifact",
+      "action": "delete",
+      "archived_path": null
+    },
+    {
+      "path": "data/generated/ds2/09-pinzao-017.json",
+      "sha256": "c63ce909d86f509570d504fbd51d650ec0de50e670f60c39ae27b6ff12987e6a",
+      "bytes": 9691,
+      "stage": "DS2",
+      "kind": "generated_artifact",
+      "action": "delete",
+      "archived_path": null
+    },
+    {
+      "path": "data/generated/ds2/19-xianyuan-026-trace.json",
+      "sha256": "3e691fed5c1cf181f429847e0d2e4e76034399ab49e620324ac4983a7fc3e7dd",
+      "bytes": 55994,
+      "stage": "DS2",
+      "kind": "generated_artifact",
+      "action": "delete",
+      "archived_path": null
+    },
+    {
+      "path": "data/generated/ds2/19-xianyuan-026.json",
+      "sha256": "faff59880e0605ae3335d3eb9908e315a2d94450c4dbe838782cb92e689c37ef",
+      "bytes": 8358,
+      "stage": "DS2",
+      "kind": "generated_artifact",
+      "action": "delete",
+      "archived_path": null
+    },
+    {
+      "path": "data/generated/ds2/27-jiajue-008-trace.json",
+      "sha256": "4037b426d8d09f2963917a1093d51f94b5332dab58de27a124283868ac5afb1f",
+      "bytes": 58249,
+      "stage": "DS2",
+      "kind": "generated_artifact",
+      "action": "delete",
+      "archived_path": null
+    },
+    {
+      "path": "data/generated/ds2/27-jiajue-008.json",
+      "sha256": "b016a7d2fe1dff30c6a9db28324c963807eedc06f01e9018b76f1179639c1fbc",
+      "bytes": 8124,
+      "stage": "DS2",
+      "kind": "generated_artifact",
+      "action": "delete",
+      "archived_path": null
+    },
+    {
+      "path": "data/generated/ds2/manifest.json",
+      "sha256": "6094b192b51b5bb1eadbac5c4bec6de9b55bff8b625ffcd4f9f51535ab5065d0",
+      "bytes": 40671,
+      "stage": "DS2",
+      "kind": "generated_artifact",
+      "action": "delete",
+      "archived_path": null
+    },
+    {
+      "path": "data/generated/ds2/pilot-summary.json",
+      "sha256": "e28016e45baf84b9ac6ca3cce6b2c32fe750f2b220b16c834361e032a2dc703c",
+      "bytes": 40613,
+      "stage": "DS2",
+      "kind": "generated_artifact",
+      "action": "delete",
+      "archived_path": null
+    },
+    {
+      "path": "docs/ds1-2-local-evidence-tool-retrieval.md",
+      "sha256": "1da2d8b25c07da5591d02f9d392647e72f4ddb0736ff23a0f0bfbeff4bf28104",
+      "bytes": 2803,
+      "stage": "DS1.2",
+      "kind": "documentation",
+      "action": "archive_under_new_path",
+      "archived_path": "docs/archive/ds/ds1-2-local-evidence-tool-retrieval.md"
+    },
+    {
+      "path": "docs/ds1-single-story-deepseek-context.md",
+      "sha256": "bad81b84ebba2fded732d21a80d24ef2b954e334a6634bd6bca8e57cf29c2b6e",
+      "bytes": 1519,
+      "stage": "DS1",
+      "kind": "documentation",
+      "action": "archive_under_new_path",
+      "archived_path": "docs/archive/ds/ds1-single-story-deepseek-context.md"
+    },
+    {
+      "path": "schema/ds1-2-local-context-candidate.schema.json",
+      "sha256": "2e5e43ae95c8e066593442e2e832716fc42610ac80f0a7eb0cd121b9e722bf66",
+      "bytes": 1994,
+      "stage": "DS1.2",
+      "kind": "schema",
+      "action": "delete",
+      "archived_path": null
+    },
+    {
+      "path": "schema/ds1-2r-local-context-candidate.schema.json",
+      "sha256": "aa89f89a2972265172ce93027fa5d44b8e72c35f89c663104a5c1241327e49f0",
+      "bytes": 4711,
+      "stage": "DS1.2R",
+      "kind": "schema",
+      "action": "delete",
+      "archived_path": null
+    },
+    {
+      "path": "schema/ds1-scene-context.schema.json",
+      "sha256": "5fee99c10ab799e73099be1e5597cb36083f5531e152e1e3cf425649fb7db1e9",
+      "bytes": 1637,
+      "stage": "DS1",
+      "kind": "schema",
+      "action": "delete",
+      "archived_path": null
+    },
+    {
+      "path": "schema/ds2-context-candidate.schema.json",
+      "sha256": "bc07321406ed69e7908843c2c997a81a36b6cde2ec52287d85517287f475e730",
+      "bytes": 1590,
+      "stage": "DS2",
+      "kind": "schema",
+      "action": "delete",
+      "archived_path": null
+    },
+    {
+      "path": "scripts/build_ds1_preview.py",
+      "sha256": "2a7d7aa23c1818a38b943f18d01cce0830849d4397c5114f46ab83bb178459dd",
+      "bytes": 2048,
+      "stage": "DS1",
+      "kind": "script_or_validator",
+      "action": "delete",
+      "archived_path": null
+    },
+    {
+      "path": "scripts/ds1_2_common.py",
+      "sha256": "192b4527ccfa8b02b43bf029facabca62a8f981fe387390f55266db638056a51",
+      "bytes": 39454,
+      "stage": "DS1.2",
+      "kind": "script_or_validator",
+      "action": "delete",
+      "archived_path": null
+    },
+    {
+      "path": "scripts/ds1_2r_common.py",
+      "sha256": "06cb31d1b496cef0c2134b584877eca02b2f20bbe4afcd896fc6d8da3ed4ae2f",
+      "bytes": 20900,
+      "stage": "DS1.2R",
+      "kind": "script_or_validator",
+      "action": "delete",
+      "archived_path": null
+    },
+    {
+      "path": "scripts/ds2_common.py",
+      "sha256": "2795e884729db32558724002d43c3f38f1ed568aed8acf61189faa0d8f11f902",
+      "bytes": 21547,
+      "stage": "DS2",
+      "kind": "script_or_validator",
+      "action": "delete",
+      "archived_path": null
+    },
+    {
+      "path": "scripts/run_ds1.py",
+      "sha256": "9e4357b7878f92bf512bb00bd20a3e72f93e245b265e299c33872a42aa65f3bc",
+      "bytes": 3632,
+      "stage": "DS1",
+      "kind": "script_or_validator",
+      "action": "delete",
+      "archived_path": null
+    },
+    {
+      "path": "scripts/run_ds1_2.py",
+      "sha256": "84f29b1501f98a6dcfe36c945582f9193269b353fde9d57e2e21f96b8c5dd0a6",
+      "bytes": 6945,
+      "stage": "DS1.2",
+      "kind": "script_or_validator",
+      "action": "delete",
+      "archived_path": null
+    },
+    {
+      "path": "scripts/run_ds1_2r.py",
+      "sha256": "40436409dfbcfe67d219f078287fab7470b58035e8e4d60f17607d075c58f1d1",
+      "bytes": 9161,
+      "stage": "DS1.2R",
+      "kind": "script_or_validator",
+      "action": "delete",
+      "archived_path": null
+    },
+    {
+      "path": "scripts/run_ds2.py",
+      "sha256": "32ef1bb298c54b99ad3e1fb5f1ace53b179f2477878a56a4f3eb0b1ab745d216",
+      "bytes": 9695,
+      "stage": "DS1",
+      "kind": "script_or_validator",
+      "action": "delete",
+      "archived_path": null
+    },
+    {
+      "path": "scripts/validate_ds1.py",
+      "sha256": "0b309e18831a5ac9aa1960c071dd3df7187986483bd2c5eeab75b3c251877c0e",
+      "bytes": 7569,
+      "stage": "DS1",
+      "kind": "script_or_validator",
+      "action": "delete",
+      "archived_path": null
+    },
+    {
+      "path": "scripts/validate_ds1_2.py",
+      "sha256": "b004fedf388ebe9846b7f2fe557e12cb574490520dec9d265df9514ad813d1c3",
+      "bytes": 15319,
+      "stage": "DS1.2",
+      "kind": "script_or_validator",
+      "action": "delete",
+      "archived_path": null
+    },
+    {
+      "path": "scripts/validate_ds1_2r.py",
+      "sha256": "f7bf4381d02873f63c505d266ae7b07831d4c3e44fe3a23501c092373294e51d",
+      "bytes": 13439,
+      "stage": "DS1.2R",
+      "kind": "script_or_validator",
+      "action": "delete",
+      "archived_path": null
+    },
+    {
+      "path": "scripts/validate_ds2.py",
+      "sha256": "4d4dc12a6bf776be87085aca5cce7eb6bfadbe95fc0db0fa91d64bb48b87a401",
+      "bytes": 13286,
+      "stage": "DS1",
+      "kind": "script_or_validator",
+      "action": "delete",
+      "archived_path": null
+    },
+    {
+      "path": "tests/test_ds1.py",
+      "sha256": "24b1ea6b34a488486828fb0fdb864ffb8d5e5cddd97e7703341389fc3ebbe0a3",
+      "bytes": 3108,
+      "stage": "DS1",
+      "kind": "test",
+      "action": "delete",
+      "archived_path": null
+    },
+    {
+      "path": "tests/test_ds1_2.py",
+      "sha256": "4292de5384a1d75f8b9fec14f9ba0e2721137b7f910fcda527bbabccd8ddb0ce",
+      "bytes": 7833,
+      "stage": "DS1.2",
+      "kind": "test",
+      "action": "delete",
+      "archived_path": null
+    },
+    {
+      "path": "tests/test_ds1_2r.py",
+      "sha256": "481cb341ffb35ebe338f1cfeda2f86b21c4e6515f74f167f58a0afca32328e20",
+      "bytes": 7982,
+      "stage": "DS1.2R",
+      "kind": "test",
+      "action": "delete",
+      "archived_path": null
+    },
+    {
+      "path": "tests/test_ds2.py",
+      "sha256": "67c17a8faa0f6fdf1e3181af5e3cdb01d55522cbbde39345aef44827b6d438ed",
+      "bytes": 6044,
+      "stage": "DS1",
+      "kind": "test",
+      "action": "delete",
+      "archived_path": null
+    }
+  ],
+  "stage_level_deterministic_hashes": [
+    {
+      "stage": "DS1",
+      "path": "data/generated/ds1",
+      "file_count": 2,
+      "total_bytes": 32859,
+      "deterministic_hash_algorithm": "sha256(sorted repository-relative path + tab + file sha256 + newline)",
+      "deterministic_sha256": "ddbcef7edec1d6bd9180146f95e2b8e0b4c02b89b718bd66f4ec1e0fe66f37aa",
+      "files": [
+        {
+          "path": "data/generated/ds1/27-jiajue-008-context.json",
+          "sha256": "95990cc49363a5c10b207a139dd182f70024cddb05b6baa3d3f2f23134f32e43",
+          "bytes": 23797
+        },
+        {
+          "path": "data/generated/ds1/27-jiajue-008.json",
+          "sha256": "28105961442274b03d0442f4e7c5b4a173edf6728295dcb8c0810d1a5fa59ffd",
+          "bytes": 9062
+        }
+      ]
+    },
+    {
+      "stage": "DS1.2",
+      "path": "data/generated/ds1-2",
+      "file_count": 3,
+      "total_bytes": 70767,
+      "deterministic_hash_algorithm": "sha256(sorted repository-relative path + tab + file sha256 + newline)",
+      "deterministic_sha256": "6ffb8e6e61f447a336e1638488fc8675eb3599f4dbf1418a202427647cd039c7",
+      "files": [
+        {
+          "path": "data/generated/ds1-2/27-jiajue-008-trace.json",
+          "sha256": "412d7f9bf4f04031f38d22c8859ca86d59022441fbac4fe6577034b36d8b13d0",
+          "bytes": 58464
+        },
+        {
+          "path": "data/generated/ds1-2/27-jiajue-008.json",
+          "sha256": "82e72353c8383fcb8dca8da07c1cd4aeb9eb4fb1d7bf1e88d58de77ed07933e8",
+          "bytes": 9808
+        },
+        {
+          "path": "data/generated/ds1-2/manifest.json",
+          "sha256": "7b49561fb3c2ba7e26ceb99229924b58bb361b814e2af0ca47185d4c142442b5",
+          "bytes": 2495
+        }
+      ]
+    },
+    {
+      "stage": "DS1.2R",
+      "path": "data/generated/ds1-2r",
+      "file_count": 3,
+      "total_bytes": 100229,
+      "deterministic_hash_algorithm": "sha256(sorted repository-relative path + tab + file sha256 + newline)",
+      "deterministic_sha256": "7533190534476c3d1dac521cfccd0b215c9e3044fad092bcde0f4643dc0b8a47",
+      "files": [
+        {
+          "path": "data/generated/ds1-2r/27-jiajue-008-trace.json",
+          "sha256": "e3e2b31de8f80839a760f7a20cb6f9b2be944da217c844cf08441e5d1b320871",
+          "bytes": 78438
+        },
+        {
+          "path": "data/generated/ds1-2r/27-jiajue-008.json",
+          "sha256": "7d865ef0784f2cd73a392888028a97e2f3ba525f8119ce2583b14877b81693f4",
+          "bytes": 18954
+        },
+        {
+          "path": "data/generated/ds1-2r/manifest.json",
+          "sha256": "d974e4ac08112bb8fa7b56aa312b2cd1dc0ab6bce0747ff789aa850ea6d63177",
+          "bytes": 2837
+        }
+      ]
+    },
+    {
+      "stage": "DS2",
+      "path": "data/generated/ds2",
+      "file_count": 16,
+      "total_bytes": 562941,
+      "deterministic_hash_algorithm": "sha256(sorted repository-relative path + tab + file sha256 + newline)",
+      "deterministic_sha256": "d905dde9357b77379f8621e7212a4b1051ad261532220df5f3481c25f6f43c9a",
+      "files": [
+        {
+          "path": "data/generated/ds2/02-yanyu-035-trace.json",
+          "sha256": "24f89033ef4c0b5591cc7d934fe54a51a5c18f768aa180412106e276d3f4792a",
+          "bytes": 50333
+        },
+        {
+          "path": "data/generated/ds2/02-yanyu-035.json",
+          "sha256": "2d2091cb821cc0652892388828f718695caeda9c62500d8447c632e9dc3acbc3",
+          "bytes": 7720
+        },
+        {
+          "path": "data/generated/ds2/02-yanyu-036-trace.json",
+          "sha256": "52d115713d0673e3f072d519695668d03f5ba065822d5baa094f1ad6e65c90e7",
+          "bytes": 58299
+        },
+        {
+          "path": "data/generated/ds2/02-yanyu-036.json",
+          "sha256": "483cb809e1d99e11a7aff0148a50e1ceb08a7238cfc08d9fe4302029314797af",
+          "bytes": 8169
+        },
+        {
+          "path": "data/generated/ds2/05-fangzheng-032-trace.json",
+          "sha256": "ce38ff3cec6ff933a6f873fce38927460c738622962f85d791087c9b4bb571b1",
+          "bytes": 90587
+        },
+        {
+          "path": "data/generated/ds2/05-fangzheng-032.json",
+          "sha256": "94b92393099eeb0835a7341ebca8e9e311f53dbeea66e1d1f5cea91bdab1a0f8",
+          "bytes": 10051
+        },
+        {
+          "path": "data/generated/ds2/06-yaliang-017-trace.json",
+          "sha256": "ca5aafeab2c20071c8af1a4c6c305545a7052b461114d84d1d198f8cc6a5e1e6",
+          "bytes": 57049
+        },
+        {
+          "path": "data/generated/ds2/06-yaliang-017.json",
+          "sha256": "2c47df79a614db4b5ff29c9e87c3b88a1d371b287226eacc572c259e735ebac9",
+          "bytes": 9828
+        },
+        {
+          "path": "data/generated/ds2/09-pinzao-017-trace.json",
+          "sha256": "559bf29e1e306587556d8f42f6e31eaed1cb1a058a89603151972496a45bc281",
+          "bytes": 49205
+        },
+        {
+          "path": "data/generated/ds2/09-pinzao-017.json",
+          "sha256": "c63ce909d86f509570d504fbd51d650ec0de50e670f60c39ae27b6ff12987e6a",
+          "bytes": 9691
+        },
+        {
+          "path": "data/generated/ds2/19-xianyuan-026-trace.json",
+          "sha256": "3e691fed5c1cf181f429847e0d2e4e76034399ab49e620324ac4983a7fc3e7dd",
+          "bytes": 55994
+        },
+        {
+          "path": "data/generated/ds2/19-xianyuan-026.json",
+          "sha256": "faff59880e0605ae3335d3eb9908e315a2d94450c4dbe838782cb92e689c37ef",
+          "bytes": 8358
+        },
+        {
+          "path": "data/generated/ds2/27-jiajue-008-trace.json",
+          "sha256": "4037b426d8d09f2963917a1093d51f94b5332dab58de27a124283868ac5afb1f",
+          "bytes": 58249
+        },
+        {
+          "path": "data/generated/ds2/27-jiajue-008.json",
+          "sha256": "b016a7d2fe1dff30c6a9db28324c963807eedc06f01e9018b76f1179639c1fbc",
+          "bytes": 8124
+        },
+        {
+          "path": "data/generated/ds2/manifest.json",
+          "sha256": "6094b192b51b5bb1eadbac5c4bec6de9b55bff8b625ffcd4f9f51535ab5065d0",
+          "bytes": 40671
+        },
+        {
+          "path": "data/generated/ds2/pilot-summary.json",
+          "sha256": "e28016e45baf84b9ac6ca3cce6b2c32fe750f2b220b16c834361e032a2dc703c",
+          "bytes": 40613
+        }
+      ]
+    }
+  ],
+  "commit_provenance": {
+    "family_origin": {
+      "commit": "3325a2d52d02e390dd6cc73569d4704ea656cd61",
+      "date": "2026-08-22",
+      "subject": "Implement DS2 — Context Generalization Pilot."
+    },
+    "later_validator_adjustment": {
+      "commit": "e176342e7bd1f3dd9d04a6733361cee0abb4b719",
+      "date": "2026-08-30",
+      "subject": "SFH2R — Materialize manual identity repairs and harden semantic precedence"
+    },
+    "source_baseline": "c16aedd5845f172160752091fcef924079d34d2e",
+    "per_file_history": {
+      "data/annotation/ds1-review.json": {
+        "first_commit": null,
+        "last_commit": {
+          "commit": "3325a2d52d02e390dd6cc73569d4704ea656cd61",
+          "date": "2026-08-22",
+          "subject": "Implement DS2 — Context Generalization Pilot."
+        }
+      },
+      "data/annotation/ds2-pilot-review.json": {
+        "first_commit": null,
+        "last_commit": {
+          "commit": "3325a2d52d02e390dd6cc73569d4704ea656cd61",
+          "date": "2026-08-22",
+          "subject": "Implement DS2 — Context Generalization Pilot."
+        }
+      },
+      "data/generated/ds1/27-jiajue-008-context.json": {
+        "first_commit": null,
+        "last_commit": {
+          "commit": "3325a2d52d02e390dd6cc73569d4704ea656cd61",
+          "date": "2026-08-22",
+          "subject": "Implement DS2 — Context Generalization Pilot."
+        }
+      },
+      "data/generated/ds1/27-jiajue-008.json": {
+        "first_commit": null,
+        "last_commit": {
+          "commit": "3325a2d52d02e390dd6cc73569d4704ea656cd61",
+          "date": "2026-08-22",
+          "subject": "Implement DS2 — Context Generalization Pilot."
+        }
+      },
+      "data/generated/ds1-2/27-jiajue-008-trace.json": {
+        "first_commit": null,
+        "last_commit": {
+          "commit": "3325a2d52d02e390dd6cc73569d4704ea656cd61",
+          "date": "2026-08-22",
+          "subject": "Implement DS2 — Context Generalization Pilot."
+        }
+      },
+      "data/generated/ds1-2/27-jiajue-008.json": {
+        "first_commit": null,
+        "last_commit": {
+          "commit": "3325a2d52d02e390dd6cc73569d4704ea656cd61",
+          "date": "2026-08-22",
+          "subject": "Implement DS2 — Context Generalization Pilot."
+        }
+      },
+      "data/generated/ds1-2/manifest.json": {
+        "first_commit": null,
+        "last_commit": {
+          "commit": "3325a2d52d02e390dd6cc73569d4704ea656cd61",
+          "date": "2026-08-22",
+          "subject": "Implement DS2 — Context Generalization Pilot."
+        }
+      },
+      "data/generated/ds1-2r/27-jiajue-008-trace.json": {
+        "first_commit": null,
+        "last_commit": {
+          "commit": "3325a2d52d02e390dd6cc73569d4704ea656cd61",
+          "date": "2026-08-22",
+          "subject": "Implement DS2 — Context Generalization Pilot."
+        }
+      },
+      "data/generated/ds1-2r/27-jiajue-008.json": {
+        "first_commit": null,
+        "last_commit": {
+          "commit": "3325a2d52d02e390dd6cc73569d4704ea656cd61",
+          "date": "2026-08-22",
+          "subject": "Implement DS2 — Context Generalization Pilot."
+        }
+      },
+      "data/generated/ds1-2r/manifest.json": {
+        "first_commit": null,
+        "last_commit": {
+          "commit": "3325a2d52d02e390dd6cc73569d4704ea656cd61",
+          "date": "2026-08-22",
+          "subject": "Implement DS2 — Context Generalization Pilot."
+        }
+      },
+      "data/generated/ds2/02-yanyu-035-trace.json": {
+        "first_commit": null,
+        "last_commit": {
+          "commit": "3325a2d52d02e390dd6cc73569d4704ea656cd61",
+          "date": "2026-08-22",
+          "subject": "Implement DS2 — Context Generalization Pilot."
+        }
+      },
+      "data/generated/ds2/02-yanyu-035.json": {
+        "first_commit": null,
+        "last_commit": {
+          "commit": "3325a2d52d02e390dd6cc73569d4704ea656cd61",
+          "date": "2026-08-22",
+          "subject": "Implement DS2 — Context Generalization Pilot."
+        }
+      },
+      "data/generated/ds2/02-yanyu-036-trace.json": {
+        "first_commit": null,
+        "last_commit": {
+          "commit": "3325a2d52d02e390dd6cc73569d4704ea656cd61",
+          "date": "2026-08-22",
+          "subject": "Implement DS2 — Context Generalization Pilot."
+        }
+      },
+      "data/generated/ds2/02-yanyu-036.json": {
+        "first_commit": null,
+        "last_commit": {
+          "commit": "3325a2d52d02e390dd6cc73569d4704ea656cd61",
+          "date": "2026-08-22",
+          "subject": "Implement DS2 — Context Generalization Pilot."
+        }
+      },
+      "data/generated/ds2/05-fangzheng-032-trace.json": {
+        "first_commit": null,
+        "last_commit": {
+          "commit": "3325a2d52d02e390dd6cc73569d4704ea656cd61",
+          "date": "2026-08-22",
+          "subject": "Implement DS2 — Context Generalization Pilot."
+        }
+      },
+      "data/generated/ds2/05-fangzheng-032.json": {
+        "first_commit": null,
+        "last_commit": {
+          "commit": "3325a2d52d02e390dd6cc73569d4704ea656cd61",
+          "date": "2026-08-22",
+          "subject": "Implement DS2 — Context Generalization Pilot."
+        }
+      },
+      "data/generated/ds2/06-yaliang-017-trace.json": {
+        "first_commit": null,
+        "last_commit": {
+          "commit": "3325a2d52d02e390dd6cc73569d4704ea656cd61",
+          "date": "2026-08-22",
+          "subject": "Implement DS2 — Context Generalization Pilot."
+        }
+      },
+      "data/generated/ds2/06-yaliang-017.json": {
+        "first_commit": null,
+        "last_commit": {
+          "commit": "3325a2d52d02e390dd6cc73569d4704ea656cd61",
+          "date": "2026-08-22",
+          "subject": "Implement DS2 — Context Generalization Pilot."
+        }
+      },
+      "data/generated/ds2/09-pinzao-017-trace.json": {
+        "first_commit": null,
+        "last_commit": {
+          "commit": "3325a2d52d02e390dd6cc73569d4704ea656cd61",
+          "date": "2026-08-22",
+          "subject": "Implement DS2 — Context Generalization Pilot."
+        }
+      },
+      "data/generated/ds2/09-pinzao-017.json": {
+        "first_commit": null,
+        "last_commit": {
+          "commit": "3325a2d52d02e390dd6cc73569d4704ea656cd61",
+          "date": "2026-08-22",
+          "subject": "Implement DS2 — Context Generalization Pilot."
+        }
+      },
+      "data/generated/ds2/19-xianyuan-026-trace.json": {
+        "first_commit": null,
+        "last_commit": {
+          "commit": "3325a2d52d02e390dd6cc73569d4704ea656cd61",
+          "date": "2026-08-22",
+          "subject": "Implement DS2 — Context Generalization Pilot."
+        }
+      },
+      "data/generated/ds2/19-xianyuan-026.json": {
+        "first_commit": null,
+        "last_commit": {
+          "commit": "3325a2d52d02e390dd6cc73569d4704ea656cd61",
+          "date": "2026-08-22",
+          "subject": "Implement DS2 — Context Generalization Pilot."
+        }
+      },
+      "data/generated/ds2/27-jiajue-008-trace.json": {
+        "first_commit": null,
+        "last_commit": {
+          "commit": "3325a2d52d02e390dd6cc73569d4704ea656cd61",
+          "date": "2026-08-22",
+          "subject": "Implement DS2 — Context Generalization Pilot."
+        }
+      },
+      "data/generated/ds2/27-jiajue-008.json": {
+        "first_commit": null,
+        "last_commit": {
+          "commit": "3325a2d52d02e390dd6cc73569d4704ea656cd61",
+          "date": "2026-08-22",
+          "subject": "Implement DS2 — Context Generalization Pilot."
+        }
+      },
+      "data/generated/ds2/manifest.json": {
+        "first_commit": null,
+        "last_commit": {
+          "commit": "3325a2d52d02e390dd6cc73569d4704ea656cd61",
+          "date": "2026-08-22",
+          "subject": "Implement DS2 — Context Generalization Pilot."
+        }
+      },
+      "data/generated/ds2/pilot-summary.json": {
+        "first_commit": null,
+        "last_commit": {
+          "commit": "3325a2d52d02e390dd6cc73569d4704ea656cd61",
+          "date": "2026-08-22",
+          "subject": "Implement DS2 — Context Generalization Pilot."
+        }
+      },
+      "docs/ds1-2-local-evidence-tool-retrieval.md": {
+        "first_commit": null,
+        "last_commit": {
+          "commit": "3325a2d52d02e390dd6cc73569d4704ea656cd61",
+          "date": "2026-08-22",
+          "subject": "Implement DS2 — Context Generalization Pilot."
+        }
+      },
+      "docs/ds1-single-story-deepseek-context.md": {
+        "first_commit": null,
+        "last_commit": {
+          "commit": "3325a2d52d02e390dd6cc73569d4704ea656cd61",
+          "date": "2026-08-22",
+          "subject": "Implement DS2 — Context Generalization Pilot."
+        }
+      },
+      "schema/ds1-2-local-context-candidate.schema.json": {
+        "first_commit": null,
+        "last_commit": {
+          "commit": "3325a2d52d02e390dd6cc73569d4704ea656cd61",
+          "date": "2026-08-22",
+          "subject": "Implement DS2 — Context Generalization Pilot."
+        }
+      },
+      "schema/ds1-2r-local-context-candidate.schema.json": {
+        "first_commit": null,
+        "last_commit": {
+          "commit": "3325a2d52d02e390dd6cc73569d4704ea656cd61",
+          "date": "2026-08-22",
+          "subject": "Implement DS2 — Context Generalization Pilot."
+        }
+      },
+      "schema/ds1-scene-context.schema.json": {
+        "first_commit": null,
+        "last_commit": {
+          "commit": "3325a2d52d02e390dd6cc73569d4704ea656cd61",
+          "date": "2026-08-22",
+          "subject": "Implement DS2 — Context Generalization Pilot."
+        }
+      },
+      "schema/ds2-context-candidate.schema.json": {
+        "first_commit": null,
+        "last_commit": {
+          "commit": "3325a2d52d02e390dd6cc73569d4704ea656cd61",
+          "date": "2026-08-22",
+          "subject": "Implement DS2 — Context Generalization Pilot."
+        }
+      },
+      "scripts/build_ds1_preview.py": {
+        "first_commit": null,
+        "last_commit": {
+          "commit": "3325a2d52d02e390dd6cc73569d4704ea656cd61",
+          "date": "2026-08-22",
+          "subject": "Implement DS2 — Context Generalization Pilot."
+        }
+      },
+      "scripts/ds1_2_common.py": {
+        "first_commit": null,
+        "last_commit": {
+          "commit": "3325a2d52d02e390dd6cc73569d4704ea656cd61",
+          "date": "2026-08-22",
+          "subject": "Implement DS2 — Context Generalization Pilot."
+        }
+      },
+      "scripts/ds1_2r_common.py": {
+        "first_commit": null,
+        "last_commit": {
+          "commit": "3325a2d52d02e390dd6cc73569d4704ea656cd61",
+          "date": "2026-08-22",
+          "subject": "Implement DS2 — Context Generalization Pilot."
+        }
+      },
+      "scripts/ds1_common.py": {
+        "first_commit": null,
+        "last_commit": {
+          "commit": "3325a2d52d02e390dd6cc73569d4704ea656cd61",
+          "date": "2026-08-22",
+          "subject": "Implement DS2 — Context Generalization Pilot."
+        }
+      },
+      "scripts/ds2_common.py": {
+        "first_commit": null,
+        "last_commit": {
+          "commit": "3325a2d52d02e390dd6cc73569d4704ea656cd61",
+          "date": "2026-08-22",
+          "subject": "Implement DS2 — Context Generalization Pilot."
+        }
+      },
+      "scripts/run_ds1.py": {
+        "first_commit": null,
+        "last_commit": {
+          "commit": "3325a2d52d02e390dd6cc73569d4704ea656cd61",
+          "date": "2026-08-22",
+          "subject": "Implement DS2 — Context Generalization Pilot."
+        }
+      },
+      "scripts/run_ds1_2.py": {
+        "first_commit": null,
+        "last_commit": {
+          "commit": "3325a2d52d02e390dd6cc73569d4704ea656cd61",
+          "date": "2026-08-22",
+          "subject": "Implement DS2 — Context Generalization Pilot."
+        }
+      },
+      "scripts/run_ds1_2r.py": {
+        "first_commit": null,
+        "last_commit": {
+          "commit": "3325a2d52d02e390dd6cc73569d4704ea656cd61",
+          "date": "2026-08-22",
+          "subject": "Implement DS2 — Context Generalization Pilot."
+        }
+      },
+      "scripts/run_ds2.py": {
+        "first_commit": null,
+        "last_commit": {
+          "commit": "3325a2d52d02e390dd6cc73569d4704ea656cd61",
+          "date": "2026-08-22",
+          "subject": "Implement DS2 — Context Generalization Pilot."
+        }
+      },
+      "scripts/validate_ds1.py": {
+        "first_commit": null,
+        "last_commit": {
+          "commit": "3325a2d52d02e390dd6cc73569d4704ea656cd61",
+          "date": "2026-08-22",
+          "subject": "Implement DS2 — Context Generalization Pilot."
+        }
+      },
+      "scripts/validate_ds1_2.py": {
+        "first_commit": null,
+        "last_commit": {
+          "commit": "e176342e7bd1f3dd9d04a6733361cee0abb4b719",
+          "date": "2026-08-30",
+          "subject": "SFH2R — Materialize manual identity repairs and harden semantic precedence"
+        }
+      },
+      "scripts/validate_ds1_2r.py": {
+        "first_commit": null,
+        "last_commit": {
+          "commit": "e176342e7bd1f3dd9d04a6733361cee0abb4b719",
+          "date": "2026-08-30",
+          "subject": "SFH2R — Materialize manual identity repairs and harden semantic precedence"
+        }
+      },
+      "scripts/validate_ds2.py": {
+        "first_commit": null,
+        "last_commit": {
+          "commit": "3325a2d52d02e390dd6cc73569d4704ea656cd61",
+          "date": "2026-08-22",
+          "subject": "Implement DS2 — Context Generalization Pilot."
+        }
+      },
+      "tests/test_ds1.py": {
+        "first_commit": null,
+        "last_commit": {
+          "commit": "3325a2d52d02e390dd6cc73569d4704ea656cd61",
+          "date": "2026-08-22",
+          "subject": "Implement DS2 — Context Generalization Pilot."
+        }
+      },
+      "tests/test_ds1_2.py": {
+        "first_commit": null,
+        "last_commit": {
+          "commit": "3325a2d52d02e390dd6cc73569d4704ea656cd61",
+          "date": "2026-08-22",
+          "subject": "Implement DS2 — Context Generalization Pilot."
+        }
+      },
+      "tests/test_ds1_2r.py": {
+        "first_commit": null,
+        "last_commit": {
+          "commit": "3325a2d52d02e390dd6cc73569d4704ea656cd61",
+          "date": "2026-08-22",
+          "subject": "Implement DS2 — Context Generalization Pilot."
+        }
+      },
+      "tests/test_ds2.py": {
+        "first_commit": null,
+        "last_commit": {
+          "commit": "3325a2d52d02e390dd6cc73569d4704ea656cd61",
+          "date": "2026-08-22",
+          "subject": "Implement DS2 — Context Generalization Pilot."
+        }
+      }
+    }
+  },
+  "provenance_paths": {
+    "review_annotations_archived": [
+      {
+        "from": "data/annotation/ds1-review.json",
+        "to": "data/annotation/archive/ds/ds1-review.json"
+      },
+      {
+        "from": "data/annotation/ds2-pilot-review.json",
+        "to": "data/annotation/archive/ds/ds2-pilot-review.json"
+      }
+    ],
+    "documentation_archived": [
+      {
+        "from": "docs/ds1-single-story-deepseek-context.md",
+        "to": "docs/archive/ds/ds1-single-story-deepseek-context.md"
+      },
+      {
+        "from": "docs/ds1-2-local-evidence-tool-retrieval.md",
+        "to": "docs/archive/ds/ds1-2-local-evidence-tool-retrieval.md"
+      }
+    ],
+    "validators": [
+      "scripts/validate_ds1.py",
+      "scripts/validate_ds1_2.py",
+      "scripts/validate_ds1_2r.py",
+      "scripts/validate_ds2.py"
+    ],
+    "tests": [
+      "tests/test_ds1.py",
+      "tests/test_ds1_2.py",
+      "tests/test_ds1_2r.py",
+      "tests/test_ds2.py"
+    ],
+    "schemas": [
+      "schema/ds1-scene-context.schema.json",
+      "schema/ds1-2-local-context-candidate.schema.json",
+      "schema/ds1-2r-local-context-candidate.schema.json",
+      "schema/ds2-context-candidate.schema.json"
+    ],
+    "runners_and_common_modules": [
+      "scripts/run_ds1.py",
+      "scripts/run_ds1_2.py",
+      "scripts/run_ds1_2r.py",
+      "scripts/run_ds2.py",
+      "scripts/ds1_2_common.py",
+      "scripts/ds1_2r_common.py",
+      "scripts/ds2_common.py",
+      "scripts/build_ds1_preview.py"
+    ],
+    "retained_shared_modules": [
+      {
+        "path": "scripts/ds1_common.py",
+        "sha256": "079096fba76a42b68e9493f406589439f37a73a512d762e2052af162bf89fba6",
+        "status": "retained_unchanged",
+        "dependency_type": "A: active shared SRM0 helper",
+        "reason": "SRM0.5 freezes this helper contract and active SRM0 runners/validators import its generic filesystem and serialization helpers; deleting or repointing it would mutate protected SRM behavior."
+      }
+    ]
+  },
+  "annotation_classification": [
+    {
+      "path": "data/annotation/ds1-review.json",
+      "classification": "HUMAN_REVIEW_PROVENANCE",
+      "disposition": "archived unchanged under data/annotation/archive/ds/; its decision was pending and it contains no current authority"
+    },
+    {
+      "path": "data/annotation/ds2-pilot-review.json",
+      "classification": "HUMAN_REVIEW_PROVENANCE",
+      "disposition": "archived unchanged under data/annotation/archive/ds/; all review fields were blank"
+    },
+    {
+      "path": "data/generated/ds1/",
+      "classification": "MACHINE_ONLY_EXPERIMENT_STATE",
+      "disposition": "deleted after per-file and deterministic stage hashes were recorded"
+    },
+    {
+      "path": "data/generated/ds1-2/",
+      "classification": "MACHINE_ONLY_EXPERIMENT_STATE",
+      "disposition": "deleted after per-file and deterministic stage hashes were recorded"
+    },
+    {
+      "path": "data/generated/ds1-2r/",
+      "classification": "MACHINE_ONLY_EXPERIMENT_STATE",
+      "disposition": "deleted after per-file and deterministic stage hashes were recorded"
+    },
+    {
+      "path": "data/generated/ds2/",
+      "classification": "MACHINE_ONLY_EXPERIMENT_STATE",
+      "disposition": "deleted after per-file and deterministic stage hashes were recorded"
+    }
+  ],
+  "dependency_proof": {
+    "performed_before_deletion": true,
+    "stage_internal_references": [
+      "DS1 runners/common/validator and test",
+      "DS1.2 runner/common/validator/test/schema",
+      "DS1.2R runner/common/validator/test/schema",
+      "DS2 runner/common/validator/test/schema/review annotation"
+    ],
+    "external_runtime_references_reviewed": [
+      "package.json build:site → scripts/build_ds1_preview.py",
+      "site/src/App.tsx → site/src/ds1.ts → optional generated/ds1/<story>.json",
+      "SRM0 runners/validators → generic ROOT/read_json/sha256/stable_json/write_json imports from ds1_common.py",
+      "active DS2.1A derived research surface → HNG/HDB/HGE/SRM paths"
+    ],
+    "disposition": [
+      "The current DS1 review is pending and no committed public preview exists; removing the obsolete producer from build:site leaves the existing UI loader 404-safe and does not change canonical/frontend data.",
+      "SRM generic helpers remain in scripts/ds1_common.py because SRM0.5 freezes that helper contract; the module is retained unchanged and is not part of the retired code.",
+      "DS2.1A is a separate active derived research surface and is retained unchanged."
+    ],
+    "retired_generated_input_consumers_removed": true,
+    "retained_shared_helper_dependencies_documented": true
+  },
+  "authority": {
+    "semantic_authority": "DS outputs were non-canonical experimental candidates only; ds1-review and ds2-pilot-review are preserved as archival review provenance.",
+    "canonical_production_authority": false,
+    "canonical_facts_written": false,
+    "production_person_authority": false,
+    "historical_results_invalidated": false
+  },
+  "archive_statements": {
+    "git_history_authoritative_byte_archive": true,
+    "git_history_statement": "Git history is the authoritative byte-preserving archive for retired generated outputs, code, schemas, and tests; no large generated copies are created.",
+    "review_provenance_statement": "Blank/pending DS review records are moved unchanged under data/annotation/archive/ds/.",
+    "result_statement": "Retirement removes active repository dependencies and does not invalidate historical experiment results; the recorded hashes and originating commits preserve reproducibility."
+  },
+  "validation_contract": {
+    "protected_scope_unchanged": [
+      "SC1/WP1",
+      "canonical Persons, Relations, Gold",
+      "HNG/HDB/HGE",
+      "SFH reviewed semantic authority",
+      "SRM artifacts",
+      "data/derived/ds2-1a-* active surface"
+    ],
+    "no_hash_refresh": true,
+    "no_sc1_migration": true
+  }
+}

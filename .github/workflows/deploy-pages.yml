@@ -61,7 +61,7 @@ jobs:
         env:
           WP1_PROVENANCE_MODE: portable
           SHISHUO_SKIP_SOURCE_PAYLOAD_TESTS: "1"
-        run: python3 -m unittest discover -s tests -p 'test*.py'
+        run: npm run test:current
 
       - name: Typecheck frontend
         run: npm run typecheck

@@ -12,6 +12,10 @@ Portable CI validates committed canonical data, provenance metadata, derived
 artifacts, deterministic builders, frontend projections, typechecking, the
 production build, and published-artifact scope.
 
+The default test command is the registry-driven `npm run test:current` (also
+available as `npm test`). Historical reproducibility, source-payload, and live
+network contracts are opt-in through their separate suite commands.
+
 Live-provider experiments are not part of the normal Pages/portable command.
 They are explicitly opt-in; when run in an environment without network
 access, their preflight records the transport classification and the
