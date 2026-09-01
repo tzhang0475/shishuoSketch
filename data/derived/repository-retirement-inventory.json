@@ -1,0 +1,1511 @@
+{
+  "schema": "repository-retirement-inventory-c0-v1",
+  "audit_policy": "Static dependency audit performed without deleting generated experiment stages or changing protected artifacts.",
+  "generated_root": "data/generated",
+  "generated_stage_count": 62,
+  "dependency_type_legend": {
+    "A: semantic/runtime": "Active builder, projection, retrieval, or storage path reads the stage.",
+    "B: validation-only": "Validator or test enforces a stage-specific/frozen contract.",
+    "C: provenance/hash-only": "Manifest, input hash, selection hash, or later audit preserves the stage.",
+    "D: documentation-only": "Documentation or archived design material references the stage.",
+    "E: no live reference": "Exact repository-wide live-reference scan found no consumer."
+  },
+  "category_legend": {
+    "ACTIVE_INPUT": "Consumed by an active algorithm or projection.",
+    "CURRENT_BASELINE": "Current protected baseline used by active/upstream validation.",
+    "FROZEN_PROVENANCE": "Historical live/replay experiment retained for reproducibility.",
+    "SELF_CONTAINED_HISTORICAL": "Historical bundle without an active consumer.",
+    "RETIREMENT_CANDIDATE": "Eligible for a separately reviewed future retirement; not deleted by C0.",
+    "UNKNOWN": "Dependency status unresolved."
+  },
+  "audit_scope": [
+    "all top-level directories under data/generated/",
+    "data/raw/ and data/normalized/",
+    "tracked cache/editor paths removed by Phase A",
+    "all tests/test_*.py classified in docs/repository-cleanup-c0.md"
+  ],
+  "records": [
+    {
+      "path": "data/generated/ds1",
+      "category": "RETIREMENT_CANDIDATE",
+      "approx_size_bytes": 32859,
+      "file_count": 2,
+      "referenced_by": [
+        "scripts/ds1_common.py",
+        "scripts/ds1_2_common.py",
+        "tests/test_ds1.py",
+        "docs/ds1-single-story-deepseek-context.md"
+      ],
+      "dependency_types": [
+        "B: validation-only",
+        "D: documentation-only"
+      ],
+      "protected_by": [
+        "data/annotation/ds1-review.json"
+      ],
+      "semantic_authority": "DeepSeek/local-evidence pilot contract; no canonical authority",
+      "retirement_status": "candidate_for_future_bundle_review",
+      "reason": "Historical DS1 prerequisite; no current production, graph, retrieval, frontend, or active algorithm consumer found."
+    },
+    {
+      "path": "data/generated/ds1-2",
+      "category": "RETIREMENT_CANDIDATE",
+      "approx_size_bytes": 70767,
+      "file_count": 3,
+      "referenced_by": [
+        "scripts/ds1_2_common.py",
+        "scripts/ds1_2r_common.py",
+        "tests/test_ds1_2.py",
+        "docs/ds1-2-local-evidence-tool-retrieval.md"
+      ],
+      "dependency_types": [
+        "B: validation-only",
+        "D: documentation-only"
+      ],
+      "protected_by": [
+        "data/generated/ds1-2/manifest.json"
+      ],
+      "semantic_authority": "DeepSeek/local-evidence pilot contract; no canonical authority",
+      "retirement_status": "candidate_for_future_bundle_review",
+      "reason": "Historical retrieval stage retained as DS1.2R provenance; no current production consumer."
+    },
+    {
+      "path": "data/generated/ds1-2r",
+      "category": "RETIREMENT_CANDIDATE",
+      "approx_size_bytes": 100229,
+      "file_count": 3,
+      "referenced_by": [
+        "scripts/ds1_2r_common.py",
+        "scripts/run_ds1_2r.py",
+        "tests/test_ds1_2r.py"
+      ],
+      "dependency_types": [
+        "B: validation-only",
+        "D: documentation-only"
+      ],
+      "protected_by": [
+        "data/generated/ds1-2r/manifest.json",
+        "scripts/validate_ds1_2r.py"
+      ],
+      "semantic_authority": "DeepSeek/local-evidence pilot contract; no canonical authority",
+      "retirement_status": "candidate_for_future_bundle_review",
+      "reason": "Historical deduplicating retrieval stage used by DS2 only."
+    },
+    {
+      "path": "data/generated/ds2",
+      "category": "RETIREMENT_CANDIDATE",
+      "approx_size_bytes": 562941,
+      "file_count": 16,
+      "referenced_by": [
+        "scripts/ds2_common.py",
+        "scripts/validate_ds2.py",
+        "tests/test_ds2.py",
+        "data/annotation/ds2-pilot-review.json"
+      ],
+      "dependency_types": [
+        "B: validation-only",
+        "D: documentation-only"
+      ],
+      "protected_by": [
+        "data/generated/ds2/manifest.json",
+        "data/annotation/ds2-pilot-review.json"
+      ],
+      "semantic_authority": "DeepSeek/local-evidence pilot contract; no canonical authority",
+      "retirement_status": "candidate_for_future_bundle_review",
+      "reason": "Seven-Story context pilot has no current production, canonical, graph, retrieval, or frontend consumer; retire only with DS1.2R as a coherent bundle."
+    },
+    {
+      "path": "data/generated/hda1",
+      "category": "CURRENT_BASELINE",
+      "approx_size_bytes": 6234825,
+      "file_count": 109,
+      "referenced_by": [
+        "scripts/hda1_identity_audit.py",
+        "scripts/hda2_identity_remediation.py",
+        "tests/test_hda1_hge1.py",
+        "docs/hda1-existing-identity-audit.md"
+      ],
+      "dependency_types": [
+        "A: semantic/runtime",
+        "B: validation-only",
+        "C: provenance/hash-only",
+        "D: documentation-only"
+      ],
+      "protected_by": [
+        "scripts/validate_hda1.py",
+        "data/generated/hda1/manifest.json",
+        "data/generated/hda2/manifest.json"
+      ],
+      "semantic_authority": "Reviewed existing-identity audit plus deterministic materialization",
+      "retirement_status": "retain_active",
+      "reason": "HDA2 remediation and downstream identity safeguards use this audit baseline."
+    },
+    {
+      "path": "data/generated/hda2",
+      "category": "ACTIVE_INPUT",
+      "approx_size_bytes": 356269,
+      "file_count": 48,
+      "referenced_by": [
+        "scripts/hda2_identity_remediation.py",
+        "scripts/materialize_sfh2r.py",
+        "scripts/semantic_first/candidate_retrieval.py",
+        "scripts/sfh2/inputs.py",
+        "scripts/validate_sfh2r.py"
+      ],
+      "dependency_types": [
+        "A: semantic/runtime",
+        "B: validation-only",
+        "C: provenance/hash-only"
+      ],
+      "protected_by": [
+        "scripts/validate_hda2.py",
+        "data/generated/hda2/manifest.json",
+        "data/generated/sfh2/input-manifest.json"
+      ],
+      "semantic_authority": "Reviewed HDA2 remediation authority; deterministic hard-safety application",
+      "retirement_status": "retain_active",
+      "reason": "Active suppression/remediation input for SFH1/SFH2 retrieval and SFH2R validation."
+    },
+    {
+      "path": "data/generated/hdb1-wave1",
+      "category": "CURRENT_BASELINE",
+      "approx_size_bytes": 3002002,
+      "file_count": 214,
+      "referenced_by": [
+        "scripts/build_hdb1_candidate_database.py",
+        "scripts/run_hdb1_wave1.py",
+        "scripts/validate_hdb1.py",
+        "data/annotation/hdb1-wave1-selection.json"
+      ],
+      "dependency_types": [
+        "A: semantic/runtime",
+        "B: validation-only",
+        "C: provenance/hash-only"
+      ],
+      "protected_by": [
+        "scripts/validate_hdb1.py",
+        "data/annotation/hdb1-wave1-selection.json",
+        "data/generated/hdb1-wave1/*/manifest.json"
+      ],
+      "semantic_authority": "HNG2/HDB1 validated candidate output under frozen selection",
+      "retirement_status": "retain_active",
+      "reason": "Wave 1 is a frozen candidate input/comparison baseline for Wave 2 and downstream HDB2/HGE validation."
+    },
+    {
+      "path": "data/generated/hdb1-wave2",
+      "category": "CURRENT_BASELINE",
+      "approx_size_bytes": 4290830,
+      "file_count": 308,
+      "referenced_by": [
+        "scripts/build_hdb1_cross_wave_database.py",
+        "scripts/run_hdb1_wave2.py",
+        "scripts/validate_hdb1_wave2.py",
+        "data/annotation/hdb1-wave2-selection.json"
+      ],
+      "dependency_types": [
+        "A: semantic/runtime",
+        "B: validation-only",
+        "C: provenance/hash-only"
+      ],
+      "protected_by": [
+        "scripts/validate_hdb1_wave2.py",
+        "data/annotation/hdb1-wave2-selection.json",
+        "data/generated/hdb1-wave2/*/manifest.json"
+      ],
+      "semantic_authority": "HNG2/HDB1 validated cross-wave candidate output",
+      "retirement_status": "retain_active",
+      "reason": "Wave 2 is a protected downstream input and frozen selection contract."
+    },
+    {
+      "path": "data/generated/hdb2-f",
+      "category": "ACTIVE_INPUT",
+      "approx_size_bytes": 129520471,
+      "file_count": 309,
+      "referenced_by": [
+        "scripts/build_hdb2_review_artifacts.py",
+        "scripts/rebuild_hdb2_f_profiles.py",
+        "scripts/hdb2_full_frontier_common.py",
+        "data/annotation/hge1-wave-a-selection.json",
+        "data/annotation/hge1-wave-b-selection.json"
+      ],
+      "dependency_types": [
+        "A: semantic/runtime",
+        "B: validation-only",
+        "C: provenance/hash-only"
+      ],
+      "protected_by": [
+        "scripts/validate_hdb2_full_frontier.py",
+        "data/generated/hdb2-f/review-build-report.json",
+        "data/generated/hdb2-f/live/*/manifest.json"
+      ],
+      "semantic_authority": "HDB2 frontier/profile output with frozen semantic review",
+      "retirement_status": "retain_active",
+      "reason": "Current full-frontier/profile evidence feeds later HDB2 validation and HGE selections."
+    },
+    {
+      "path": "data/generated/hdb2-lj0",
+      "category": "CURRENT_BASELINE",
+      "approx_size_bytes": 1619589,
+      "file_count": 64,
+      "referenced_by": [
+        "scripts/run_hdb2_lj0.py",
+        "scripts/hdb2_psl0_common.py",
+        "scripts/hdb2_psl1_common.py",
+        "scripts/validate_hdb2_lj0.py"
+      ],
+      "dependency_types": [
+        "A: semantic/runtime",
+        "B: validation-only",
+        "C: provenance/hash-only"
+      ],
+      "protected_by": [
+        "scripts/validate_hdb2_lj0.py",
+        "data/generated/hdb2-lj0/live/*/manifest.json"
+      ],
+      "semantic_authority": "HDB2 grounded evidence retrieval under frozen semantic contracts",
+      "retirement_status": "retain_active",
+      "reason": "Input to PSL0/PSL1 and later rescue stages."
+    },
+    {
+      "path": "data/generated/hdb2-p1",
+      "category": "FROZEN_PROVENANCE",
+      "approx_size_bytes": 185310821,
+      "file_count": 103,
+      "referenced_by": [
+        "scripts/build_hdb2_full_projection.py",
+        "scripts/hdb2_p1_common.py",
+        "scripts/hdb2_full_frontier_common.py"
+      ],
+      "dependency_types": [
+        "A: semantic/runtime",
+        "B: validation-only",
+        "C: provenance/hash-only"
+      ],
+      "protected_by": [
+        "scripts/validate_hdb2_p1.py",
+        "data/generated/hdb2-p1/live/*/manifest.json"
+      ],
+      "semantic_authority": "HDB2 live candidate/constraint-fusion output; frozen LLM evidence",
+      "retirement_status": "retain_for_provenance",
+      "reason": "Referenced by later frontier/rescue builders and fixed live manifests."
+    },
+    {
+      "path": "data/generated/hdb2-p1-1",
+      "category": "FROZEN_PROVENANCE",
+      "approx_size_bytes": 465286,
+      "file_count": 33,
+      "referenced_by": [
+        "scripts/run_hdb2_psl1_1.py",
+        "scripts/hdb2_psl1_2_common.py",
+        "scripts/hdb2_full_frontier_common.py"
+      ],
+      "dependency_types": [
+        "A: semantic/runtime",
+        "B: validation-only",
+        "C: provenance/hash-only"
+      ],
+      "protected_by": [
+        "scripts/validate_hdb2_p1_1.py",
+        "data/generated/hdb2-p1-1/live/*/manifest.json"
+      ],
+      "semantic_authority": "HDB2 occurrence/constraint pilot output with frozen semantic evidence",
+      "retirement_status": "retain_for_provenance",
+      "reason": "Intermediate output consumed by later P2T/PSL rescue validation."
+    },
+    {
+      "path": "data/generated/hdb2-p2t",
+      "category": "FROZEN_PROVENANCE",
+      "approx_size_bytes": 281623,
+      "file_count": 22,
+      "referenced_by": [
+        "scripts/hdb2_p2t_common.py",
+        "scripts/build_hdb2_full_projection.py",
+        "tests/test_hdb2_p2t.py"
+      ],
+      "dependency_types": [
+        "A: semantic/runtime",
+        "B: validation-only",
+        "C: provenance/hash-only"
+      ],
+      "protected_by": [
+        "scripts/validate_hdb2_p2t.py",
+        "data/generated/hdb2-p2t/live/*/manifest.json"
+      ],
+      "semantic_authority": "HDB2 typed constraint-fusion experiment; frozen LLM output",
+      "retirement_status": "retain_for_provenance",
+      "reason": "Intermediate validation output remains in full-projection and test contracts."
+    },
+    {
+      "path": "data/generated/hdb2-psl0",
+      "category": "CURRENT_BASELINE",
+      "approx_size_bytes": 4641907,
+      "file_count": 116,
+      "referenced_by": [
+        "scripts/hdb2_psl1_common.py",
+        "scripts/run_hdb2_psl0.py",
+        "scripts/validate_hdb2_psl0.py",
+        "docs/hdb2-psl0-collective-identity-pilot.md"
+      ],
+      "dependency_types": [
+        "A: semantic/runtime",
+        "B: validation-only",
+        "C: provenance/hash-only",
+        "D: documentation-only"
+      ],
+      "protected_by": [
+        "scripts/validate_hdb2_psl0.py",
+        "data/generated/hdb2-psl0/live/*/manifest.json"
+      ],
+      "semantic_authority": "HDB2 PSL0 semantic candidate output under reviewed safety policy",
+      "retirement_status": "retain_active",
+      "reason": "Active predecessor for PSL1 and its fixed rescue interface."
+    },
+    {
+      "path": "data/generated/hdb2-psl1",
+      "category": "FROZEN_PROVENANCE",
+      "approx_size_bytes": 4421675,
+      "file_count": 101,
+      "referenced_by": [
+        "scripts/hdb2_psl1_1_common.py",
+        "scripts/hdb2_psl1_2_common.py",
+        "scripts/hdb2_psl1_3a_common.py",
+        "scripts/run_hdb2_psl1.py"
+      ],
+      "dependency_types": [
+        "A: semantic/runtime",
+        "B: validation-only",
+        "C: provenance/hash-only",
+        "D: documentation-only"
+      ],
+      "protected_by": [
+        "scripts/validate_hdb2_psl1.py",
+        "data/generated/hdb2-psl1/live/*/manifest.json"
+      ],
+      "semantic_authority": "HDB2 PSL1 output with frozen live evidence",
+      "retirement_status": "retain_for_provenance",
+      "reason": "Referenced by PSL1.1/1.2/1.3 rescue stages."
+    },
+    {
+      "path": "data/generated/hdb2-psl1-1",
+      "category": "FROZEN_PROVENANCE",
+      "approx_size_bytes": 5386061,
+      "file_count": 64,
+      "referenced_by": [
+        "scripts/run_hdb2_psl1_1.py",
+        "scripts/hdb2_psl1_2_common.py"
+      ],
+      "dependency_types": [
+        "A: semantic/runtime",
+        "B: validation-only",
+        "C: provenance/hash-only"
+      ],
+      "protected_by": [
+        "scripts/validate_hdb2_psl1_1.py",
+        "data/generated/hdb2-psl1-1/live/*/manifest.json"
+      ],
+      "semantic_authority": "HDB2 PSL1.1 structural/occurrence review output",
+      "retirement_status": "retain_for_provenance",
+      "reason": "Fixed rescue output consumed by PSL1.2."
+    },
+    {
+      "path": "data/generated/hdb2-psl1-2",
+      "category": "FROZEN_PROVENANCE",
+      "approx_size_bytes": 1608122,
+      "file_count": 66,
+      "referenced_by": [
+        "scripts/run_hdb2_psl1_2.py",
+        "docs/hdb2-psl1-2-candidate-rescue.md"
+      ],
+      "dependency_types": [
+        "A: semantic/runtime",
+        "B: validation-only",
+        "C: provenance/hash-only",
+        "D: documentation-only"
+      ],
+      "protected_by": [
+        "scripts/validate_hdb2_psl1_2.py",
+        "data/generated/hdb2-psl1-2/live/*/manifest.json"
+      ],
+      "semantic_authority": "HDB2 PSL1.2 grounded rescue output",
+      "retirement_status": "retain_for_provenance",
+      "reason": "Fixed input to PSL1.3/profile-integrity work."
+    },
+    {
+      "path": "data/generated/hdb2-psl1-3",
+      "category": "FROZEN_PROVENANCE",
+      "approx_size_bytes": 2355573,
+      "file_count": 84,
+      "referenced_by": [
+        "scripts/run_hdb2_psl1_3.py",
+        "scripts/run_hdb2_psl1_3d.py",
+        "docs/hdb2-psl1-3-rescue-interface.md"
+      ],
+      "dependency_types": [
+        "A: semantic/runtime",
+        "B: validation-only",
+        "C: provenance/hash-only",
+        "D: documentation-only"
+      ],
+      "protected_by": [
+        "scripts/validate_hdb2_psl1_3.py",
+        "data/generated/hdb2-psl1-3/live/*/manifest.json"
+      ],
+      "semantic_authority": "HDB2 PSL1.3 rescue interface",
+      "retirement_status": "retain_for_provenance",
+      "reason": "Parent rescue output for PSL1.3A/B/C/D."
+    },
+    {
+      "path": "data/generated/hdb2-psl1-3a",
+      "category": "FROZEN_PROVENANCE",
+      "approx_size_bytes": 9392324,
+      "file_count": 193,
+      "referenced_by": [
+        "scripts/hdb2_psl1_3a_common.py",
+        "docs/hdb2-psl1-3a-reference-semantic-prejudgment.md"
+      ],
+      "dependency_types": [
+        "A: semantic/runtime",
+        "B: validation-only",
+        "C: provenance/hash-only",
+        "D: documentation-only"
+      ],
+      "protected_by": [
+        "scripts/validate_hdb2_psl1_3a.py",
+        "data/generated/hdb2-psl1-3a/*/manifest.json"
+      ],
+      "semantic_authority": "HDB2 reference-semantic pilot output",
+      "retirement_status": "retain_for_provenance",
+      "reason": "Consumed by conservative reference parsing; preserve frozen LLM judgments."
+    },
+    {
+      "path": "data/generated/hdb2-psl1-3b",
+      "category": "FROZEN_PROVENANCE",
+      "approx_size_bytes": 2594713,
+      "file_count": 114,
+      "referenced_by": [
+        "scripts/hdb2_psl1_3b_common.py",
+        "scripts/hdb2_psl1_3c_common.py",
+        "docs/hdb2-psl1-3b-conservative-reference-parsing.md"
+      ],
+      "dependency_types": [
+        "A: semantic/runtime",
+        "B: validation-only",
+        "C: provenance/hash-only",
+        "D: documentation-only"
+      ],
+      "protected_by": [
+        "scripts/validate_hdb2_psl1_3b.py",
+        "data/generated/hdb2-psl1-3b/*/manifest.json"
+      ],
+      "semantic_authority": "HDB2 conservative reference parsing output",
+      "retirement_status": "retain_for_provenance",
+      "reason": "Referenced by PSL1.3C profile-integrity checks."
+    },
+    {
+      "path": "data/generated/hdb2-psl1-3c",
+      "category": "FROZEN_PROVENANCE",
+      "approx_size_bytes": 7178646,
+      "file_count": 399,
+      "referenced_by": [
+        "scripts/hdb2_psl1_3c_common.py",
+        "scripts/run_hdb2_psl1_3d.py",
+        "docs/hdb2-psl1-3c-profile-integrity.md"
+      ],
+      "dependency_types": [
+        "A: semantic/runtime",
+        "B: validation-only",
+        "C: provenance/hash-only",
+        "D: documentation-only"
+      ],
+      "protected_by": [
+        "scripts/validate_hdb2_psl1_3c.py",
+        "data/generated/hdb2-psl1-3c/*/manifest.json"
+      ],
+      "semantic_authority": "HDB2 profile-integrity output",
+      "retirement_status": "retain_for_provenance",
+      "reason": "Fixed input to PSL1.3D/closeout and later profile audit."
+    },
+    {
+      "path": "data/generated/hdb2-psl1-3d",
+      "category": "FROZEN_PROVENANCE",
+      "approx_size_bytes": 686630,
+      "file_count": 7,
+      "referenced_by": [
+        "scripts/run_hdb2_psl1_3d.py",
+        "scripts/validate_hdb2_psl1_3d.py"
+      ],
+      "dependency_types": [
+        "B: validation-only",
+        "C: provenance/hash-only"
+      ],
+      "protected_by": [
+        "scripts/validate_hdb2_psl1_3d.py",
+        "data/generated/hdb2-psl1-3d/*/manifest.json"
+      ],
+      "semantic_authority": "HDB2 PSL1.3D closeout audit",
+      "retirement_status": "retain_for_provenance",
+      "reason": "Closeout records fixed PSL1.3C/HDB2-F inputs."
+    },
+    {
+      "path": "data/generated/hdb2-xe0",
+      "category": "FROZEN_PROVENANCE",
+      "approx_size_bytes": 5164158,
+      "file_count": 384,
+      "referenced_by": [
+        "scripts/run_hdb2_xe0.py",
+        "scripts/materialize_sfh2r.py",
+        "scripts/validate_sfh2r.py",
+        "docs/hdb2-evidence-directed-story-expansion.md"
+      ],
+      "dependency_types": [
+        "A: semantic/runtime",
+        "B: validation-only",
+        "C: provenance/hash-only",
+        "D: documentation-only"
+      ],
+      "protected_by": [
+        "scripts/validate_hdb2_xe0.py",
+        "scripts/materialize_sfh2r.py",
+        "data/generated/hdb2-xe0/live/*/manifest.json"
+      ],
+      "semantic_authority": "Reviewed evidence-directed expansion; candidate-only semantic output",
+      "retirement_status": "retain_for_provenance",
+      "reason": "SFH2R materialization records this fixed input."
+    },
+    {
+      "path": "data/generated/hge1",
+      "category": "CURRENT_BASELINE",
+      "approx_size_bytes": 1474574,
+      "file_count": 113,
+      "referenced_by": [
+        "scripts/hge1_wave_a.py",
+        "scripts/semantic_first/analysis.py",
+        "scripts/hda1_identity_audit.py",
+        "docs/hge1-wave-a-network-growth.md"
+      ],
+      "dependency_types": [
+        "A: semantic/runtime",
+        "B: validation-only",
+        "C: provenance/hash-only",
+        "D: documentation-only"
+      ],
+      "protected_by": [
+        "scripts/validate_hge1.py",
+        "data/generated/hge1/baseline.json",
+        "data/generated/hge1/network-growth-series.json"
+      ],
+      "semantic_authority": "Validated HGE Wave A growth baseline",
+      "retirement_status": "retain_active",
+      "reason": "HDA1 and SFH1 recalibration consume this baseline."
+    },
+    {
+      "path": "data/generated/hge1-wb",
+      "category": "CURRENT_BASELINE",
+      "approx_size_bytes": 840033,
+      "file_count": 74,
+      "referenced_by": [
+        "scripts/hge1_wave_b.py",
+        "scripts/hda2_identity_remediation.py",
+        "tests/test_hda2_hge1_wb.py"
+      ],
+      "dependency_types": [
+        "A: semantic/runtime",
+        "B: validation-only",
+        "C: provenance/hash-only"
+      ],
+      "protected_by": [
+        "scripts/validate_hge1_wb.py",
+        "data/generated/hge1-wb/live/*/manifest.json"
+      ],
+      "semantic_authority": "Validated HGE Wave B output under HDA2 safeguards",
+      "retirement_status": "retain_active",
+      "reason": "Fixed Wave B output is used by HDA2/HGE validation."
+    },
+    {
+      "path": "data/generated/hng0",
+      "category": "ACTIVE_INPUT",
+      "approx_size_bytes": 4467855,
+      "file_count": 7,
+      "referenced_by": [
+        "scripts/build_hng0.py",
+        "scripts/build_hng0_1_frontend.py",
+        "scripts/build_hng0_2.py",
+        "scripts/validate_hng0.py"
+      ],
+      "dependency_types": [
+        "A: semantic/runtime",
+        "B: validation-only",
+        "C: provenance/hash-only"
+      ],
+      "protected_by": [
+        "scripts/validate_hng0.py",
+        "data/generated/hng0/hng0-manifest.json"
+      ],
+      "semantic_authority": "Deterministic source/graph builder over reviewed source inputs",
+      "retirement_status": "retain_active",
+      "reason": "Root of the active HNG0→HNG1R2→HNG2 chain."
+    },
+    {
+      "path": "data/generated/hng0-1",
+      "category": "ACTIVE_INPUT",
+      "approx_size_bytes": 12909303,
+      "file_count": 58,
+      "referenced_by": [
+        "scripts/hng0_1_common.py",
+        "scripts/build_hng0_1_frontend.py",
+        "scripts/build_hng0_2.py",
+        "scripts/build_hng2.py"
+      ],
+      "dependency_types": [
+        "A: semantic/runtime",
+        "B: validation-only",
+        "C: provenance/hash-only"
+      ],
+      "protected_by": [
+        "scripts/validate_hng0_1.py",
+        "data/generated/hng0-1/manifest.json"
+      ],
+      "semantic_authority": "Validated HNG0.1 evidence-guided growth output",
+      "retirement_status": "retain_active",
+      "reason": "Consumed by HNG0.2 and HNG2."
+    },
+    {
+      "path": "data/generated/hng0-2",
+      "category": "ACTIVE_INPUT",
+      "approx_size_bytes": 3934290,
+      "file_count": 9,
+      "referenced_by": [
+        "scripts/build_hng0_2.py",
+        "scripts/build_hng0_2r.py",
+        "scripts/run_hng1.py",
+        "scripts/validate_hng0_2.py"
+      ],
+      "dependency_types": [
+        "A: semantic/runtime",
+        "B: validation-only",
+        "C: provenance/hash-only"
+      ],
+      "protected_by": [
+        "scripts/validate_hng0_2.py",
+        "data/generated/hng0-2/manifest.json"
+      ],
+      "semantic_authority": "Validated HNG0.2 identity/relation normalization",
+      "retirement_status": "retain_active",
+      "reason": "Input to HNG0.2R/HNG1."
+    },
+    {
+      "path": "data/generated/hng0-2r",
+      "category": "ACTIVE_INPUT",
+      "approx_size_bytes": 3921744,
+      "file_count": 9,
+      "referenced_by": [
+        "scripts/build_hng0_2r.py",
+        "scripts/hng1r_common.py",
+        "scripts/run_hng1.py",
+        "scripts/validate_hng0_2r.py"
+      ],
+      "dependency_types": [
+        "A: semantic/runtime",
+        "B: validation-only",
+        "C: provenance/hash-only"
+      ],
+      "protected_by": [
+        "scripts/validate_hng0_2r.py",
+        "data/generated/hng0-2r/manifest.json"
+      ],
+      "semantic_authority": "Validated decorated-name resolver output",
+      "retirement_status": "retain_active",
+      "reason": "HNG1R consumes this repaired resolver baseline."
+    },
+    {
+      "path": "data/generated/hng1",
+      "category": "ACTIVE_INPUT",
+      "approx_size_bytes": 15908201,
+      "file_count": 48,
+      "referenced_by": [
+        "scripts/build_hng1r.py",
+        "scripts/build_hng1r2.py",
+        "scripts/build_hng2.py",
+        "scripts/run_hng1.py"
+      ],
+      "dependency_types": [
+        "A: semantic/runtime",
+        "B: validation-only",
+        "C: provenance/hash-only",
+        "D: documentation-only"
+      ],
+      "protected_by": [
+        "scripts/validate_hng1.py",
+        "data/generated/hng1/manifest.json"
+      ],
+      "semantic_authority": "Validated HNG1 person/relation output",
+      "retirement_status": "retain_active",
+      "reason": "Input to HNG1R/HNG1R2/HNG2."
+    },
+    {
+      "path": "data/generated/hng1r",
+      "category": "ACTIVE_INPUT",
+      "approx_size_bytes": 8792451,
+      "file_count": 9,
+      "referenced_by": [
+        "scripts/build_hng1r.py",
+        "scripts/build_hng1r2.py",
+        "scripts/build_hng2_schema_replay.py"
+      ],
+      "dependency_types": [
+        "A: semantic/runtime",
+        "B: validation-only",
+        "C: provenance/hash-only"
+      ],
+      "protected_by": [
+        "scripts/validate_hng1r.py",
+        "data/generated/hng1r/manifest.json"
+      ],
+      "semantic_authority": "HNG1R repaired identity output",
+      "retirement_status": "retain_active",
+      "reason": "Input to HNG1R2 and schema/replay."
+    },
+    {
+      "path": "data/generated/hng1r2",
+      "category": "ACTIVE_INPUT",
+      "approx_size_bytes": 9759225,
+      "file_count": 11,
+      "referenced_by": [
+        "scripts/build_hng1r2.py",
+        "scripts/build_hng2.py",
+        "scripts/build_hng2_schema_replay.py",
+        "scripts/validate_hng1r2.py"
+      ],
+      "dependency_types": [
+        "A: semantic/runtime",
+        "B: validation-only",
+        "C: provenance/hash-only"
+      ],
+      "protected_by": [
+        "scripts/validate_hng1r2.py",
+        "data/generated/hng1r2/manifest.json",
+        "data/generated/hng2/manifest.json"
+      ],
+      "semantic_authority": "HNG1R2 validated full identity replay",
+      "retirement_status": "retain_active",
+      "reason": "Explicitly consumed by HNG2 and schema/replay."
+    },
+    {
+      "path": "data/generated/hng2",
+      "category": "CURRENT_BASELINE",
+      "approx_size_bytes": 1730987,
+      "file_count": 20,
+      "referenced_by": [
+        "scripts/build_hng2.py",
+        "scripts/run_hng2.py",
+        "scripts/validate_hng2.py",
+        "data/annotation/hdb1-wave1-selection.json",
+        "data/annotation/hdb1-wave2-selection.json"
+      ],
+      "dependency_types": [
+        "A: semantic/runtime",
+        "B: validation-only",
+        "C: provenance/hash-only",
+        "D: documentation-only"
+      ],
+      "protected_by": [
+        "scripts/validate_hng2.py",
+        "data/generated/hng2/manifest.json"
+      ],
+      "semantic_authority": "Validated HNG2 historical-entity/candidate graph output",
+      "retirement_status": "retain_active",
+      "reason": "Current HNG2 baseline used by HDB1 selection and schema experiments."
+    },
+    {
+      "path": "data/generated/hng2-algorithm-closeout",
+      "category": "FROZEN_PROVENANCE",
+      "approx_size_bytes": 570366,
+      "file_count": 27,
+      "referenced_by": [
+        "scripts/run_hng2_algorithm_closeout.py",
+        "scripts/validate_hng2_algorithm_closeout.py"
+      ],
+      "dependency_types": [
+        "B: validation-only",
+        "C: provenance/hash-only"
+      ],
+      "protected_by": [
+        "scripts/validate_hng2_algorithm_closeout.py",
+        "data/generated/hng2-algorithm-closeout/selection.json"
+      ],
+      "semantic_authority": "Frozen HNG2 algorithm-closeout evidence",
+      "retirement_status": "retain_for_provenance",
+      "reason": "Fixed closeout selection and run evidence."
+    },
+    {
+      "path": "data/generated/hng2-consolidation",
+      "category": "FROZEN_PROVENANCE",
+      "approx_size_bytes": 389111,
+      "file_count": 22,
+      "referenced_by": [
+        "scripts/run_hng2_consolidation.py",
+        "scripts/run_hng2_read_fill_validation.py"
+      ],
+      "dependency_types": [
+        "B: validation-only",
+        "C: provenance/hash-only"
+      ],
+      "protected_by": [
+        "scripts/validate_hng2_consolidation.py",
+        "data/generated/hng2-consolidation/selection.json"
+      ],
+      "semantic_authority": "Frozen HNG2 consolidation experiment",
+      "retirement_status": "retain_for_provenance",
+      "reason": "Historical consolidation run and selection provenance."
+    },
+    {
+      "path": "data/generated/hng2-evidence-atom-validation",
+      "category": "FROZEN_PROVENANCE",
+      "approx_size_bytes": 1001198,
+      "file_count": 69,
+      "referenced_by": [
+        "scripts/run_hng2_evidence_atom_validation.py",
+        "scripts/run_hng2_algorithm_closeout.py",
+        "scripts/validate_hng2_evidence_atom_validation.py"
+      ],
+      "dependency_types": [
+        "B: validation-only",
+        "C: provenance/hash-only"
+      ],
+      "protected_by": [
+        "scripts/validate_hng2_evidence_atom_validation.py",
+        "data/generated/hng2-evidence-atom-validation/selection.json"
+      ],
+      "semantic_authority": "Frozen HNG2 evidence-atom validation",
+      "retirement_status": "retain_for_provenance",
+      "reason": "C1/C2 validation chain references fixed prior evidence."
+    },
+    {
+      "path": "data/generated/hng2-fresh-validation",
+      "category": "FROZEN_PROVENANCE",
+      "approx_size_bytes": 1476272,
+      "file_count": 103,
+      "referenced_by": [
+        "scripts/run_hng2_fresh_validation.py",
+        "scripts/validate_hng2_fresh_validation.py"
+      ],
+      "dependency_types": [
+        "B: validation-only",
+        "C: provenance/hash-only"
+      ],
+      "protected_by": [
+        "scripts/validate_hng2_fresh_validation.py",
+        "data/generated/hng2-fresh-validation/selection.json"
+      ],
+      "semantic_authority": "Frozen HNG2 fresh-validation run",
+      "retirement_status": "retain_for_provenance",
+      "reason": "Fixed freshness/exclusion comparison must remain available."
+    },
+    {
+      "path": "data/generated/hng2-live",
+      "category": "FROZEN_PROVENANCE",
+      "approx_size_bytes": 1403001,
+      "file_count": 43,
+      "referenced_by": [
+        "scripts/run_hng2_live.py",
+        "scripts/build_hng2_schema_replay.py",
+        "scripts/validate_hng2_live.py"
+      ],
+      "dependency_types": [
+        "B: validation-only",
+        "C: provenance/hash-only",
+        "D: documentation-only"
+      ],
+      "protected_by": [
+        "scripts/validate_hng2_live.py",
+        "data/generated/hng2-live/live/*/manifest.json"
+      ],
+      "semantic_authority": "Frozen HNG2 live semantic outputs",
+      "retirement_status": "retain_for_provenance",
+      "reason": "C1/C2/C3 and schema replay reference fixed live runs."
+    },
+    {
+      "path": "data/generated/hng2-read-fill-validation",
+      "category": "FROZEN_PROVENANCE",
+      "approx_size_bytes": 876731,
+      "file_count": 69,
+      "referenced_by": [
+        "scripts/run_hng2_read_fill_validation.py",
+        "scripts/run_hng2_evidence_atom_validation.py"
+      ],
+      "dependency_types": [
+        "B: validation-only",
+        "C: provenance/hash-only"
+      ],
+      "protected_by": [
+        "scripts/validate_hng2_read_fill_validation.py",
+        "data/generated/hng2-read-fill-validation/selection.json"
+      ],
+      "semantic_authority": "Frozen HNG2 read/fill validation",
+      "retirement_status": "retain_for_provenance",
+      "reason": "Later evidence-atom validation consumes this chain."
+    },
+    {
+      "path": "data/generated/hng2-sc2-pilot",
+      "category": "FROZEN_PROVENANCE",
+      "approx_size_bytes": 1517511,
+      "file_count": 31,
+      "referenced_by": [
+        "scripts/run_hng2_sc2_pilot.py",
+        "scripts/validate_hng2_sc2_pilot.py"
+      ],
+      "dependency_types": [
+        "B: validation-only",
+        "C: provenance/hash-only"
+      ],
+      "protected_by": [
+        "scripts/validate_hng2_sc2_pilot.py",
+        "data/generated/hng2-sc2-pilot/selection.json"
+      ],
+      "semantic_authority": "Frozen HNG2 schema-controller pilot",
+      "retirement_status": "retain_for_provenance",
+      "reason": "Pilot/replay manifests reference schema/controller inputs."
+    },
+    {
+      "path": "data/generated/hng2-schema",
+      "category": "CURRENT_BASELINE",
+      "approx_size_bytes": 2820594,
+      "file_count": 12,
+      "referenced_by": [
+        "scripts/build_hng2_schema_replay.py",
+        "scripts/run_hng2_schema_controller.py",
+        "scripts/run_hng2_schema_live.py",
+        "tests/test_historical_entity_schema.py"
+      ],
+      "dependency_types": [
+        "A: semantic/runtime",
+        "B: validation-only",
+        "C: provenance/hash-only",
+        "D: documentation-only"
+      ],
+      "protected_by": [
+        "scripts/validate_hng2_schema.py",
+        "data/generated/hng2-schema/manifest.json"
+      ],
+      "semantic_authority": "HNG2 historical-entity schema contract",
+      "retirement_status": "retain_active",
+      "reason": "Schema baseline consumed by controller/live/replay variants."
+    },
+    {
+      "path": "data/generated/hng2-schema-controller-hardening",
+      "category": "FROZEN_PROVENANCE",
+      "approx_size_bytes": 368857,
+      "file_count": 69,
+      "referenced_by": [
+        "scripts/run_hng2_schema_controller_hardening.py",
+        "scripts/validate_hng2_schema_controller_hardening.py"
+      ],
+      "dependency_types": [
+        "B: validation-only",
+        "C: provenance/hash-only"
+      ],
+      "protected_by": [
+        "scripts/validate_hng2_schema_controller_hardening.py",
+        "data/generated/hng2-schema-controller-hardening/manifest.json"
+      ],
+      "semantic_authority": "Frozen schema-controller hardening output",
+      "retirement_status": "retain_for_provenance",
+      "reason": "Fixed hardening run retained for controller safety provenance."
+    },
+    {
+      "path": "data/generated/hng2-schema-controller-live",
+      "category": "FROZEN_PROVENANCE",
+      "approx_size_bytes": 1665941,
+      "file_count": 65,
+      "referenced_by": [
+        "scripts/run_hng2_schema_controller.py",
+        "scripts/run_hng2_schema_controller_hardening.py",
+        "tests/test_hng2_schema_controller.py"
+      ],
+      "dependency_types": [
+        "B: validation-only",
+        "C: provenance/hash-only"
+      ],
+      "protected_by": [
+        "scripts/validate_hng2_schema_controller.py",
+        "data/generated/hng2-schema-controller-live/manifest.json"
+      ],
+      "semantic_authority": "Frozen structured-card controller live output",
+      "retirement_status": "retain_for_provenance",
+      "reason": "Live controller output is immutable experiment evidence."
+    },
+    {
+      "path": "data/generated/hng2-schema-controller-replay",
+      "category": "FROZEN_PROVENANCE",
+      "approx_size_bytes": 180848,
+      "file_count": 12,
+      "referenced_by": [
+        "scripts/run_hng2_schema_controller.py",
+        "scripts/validate_hng2_schema_controller.py"
+      ],
+      "dependency_types": [
+        "B: validation-only",
+        "C: provenance/hash-only"
+      ],
+      "protected_by": [
+        "scripts/validate_hng2_schema_controller.py",
+        "data/generated/hng2-schema-controller-replay/manifest.json"
+      ],
+      "semantic_authority": "Deterministic replay of frozen controller output",
+      "retirement_status": "retain_for_provenance",
+      "reason": "Replay proves deterministic behavior against fixed live evidence."
+    },
+    {
+      "path": "data/generated/hng2-schema-controller-small-card",
+      "category": "FROZEN_PROVENANCE",
+      "approx_size_bytes": 165070,
+      "file_count": 15,
+      "referenced_by": [
+        "scripts/run_hng2_schema_controller_small_card.py",
+        "scripts/validate_hng2_schema_controller_small_card.py"
+      ],
+      "dependency_types": [
+        "B: validation-only",
+        "C: provenance/hash-only"
+      ],
+      "protected_by": [
+        "scripts/validate_hng2_schema_controller_small_card.py",
+        "data/generated/hng2-schema-controller-small-card/manifest.json"
+      ],
+      "semantic_authority": "Frozen small-card controller experiment",
+      "retirement_status": "retain_for_provenance",
+      "reason": "Referenced by replay/controller validation."
+    },
+    {
+      "path": "data/generated/hng2-schema-controller-strict",
+      "category": "FROZEN_PROVENANCE",
+      "approx_size_bytes": 321363,
+      "file_count": 25,
+      "referenced_by": [
+        "scripts/run_hng2_schema_controller_strict.py",
+        "docs/hng2-schema-strict-function-calling.md"
+      ],
+      "dependency_types": [
+        "B: validation-only",
+        "C: provenance/hash-only",
+        "D: documentation-only"
+      ],
+      "protected_by": [
+        "scripts/validate_hng2_schema_controller_strict.py",
+        "data/generated/hng2-schema-controller-strict/manifest.json"
+      ],
+      "semantic_authority": "Frozen strict-function-call schema experiment",
+      "retirement_status": "retain_for_provenance",
+      "reason": "Strict transport/schema evidence explains provider behavior."
+    },
+    {
+      "path": "data/generated/hng2-schema-live",
+      "category": "FROZEN_PROVENANCE",
+      "approx_size_bytes": 2079274,
+      "file_count": 55,
+      "referenced_by": [
+        "scripts/run_hng2_schema_live.py",
+        "scripts/run_hng2_schema_controller.py"
+      ],
+      "dependency_types": [
+        "B: validation-only",
+        "C: provenance/hash-only",
+        "D: documentation-only"
+      ],
+      "protected_by": [
+        "scripts/validate_hng2_schema_live.py",
+        "data/generated/hng2-schema-live/manifest.json"
+      ],
+      "semantic_authority": "Frozen HNG2 schema live output",
+      "retirement_status": "retain_for_provenance",
+      "reason": "Live schema results feed controller hardening/replay."
+    },
+    {
+      "path": "data/generated/sfh1",
+      "category": "CURRENT_BASELINE",
+      "approx_size_bytes": 71711728,
+      "file_count": 3540,
+      "referenced_by": [
+        "scripts/semantic_first/pipeline.py",
+        "scripts/semantic_first/common.py",
+        "scripts/sfh2/common.py",
+        "scripts/sfh2/inputs.py",
+        "scripts/materialize_sfh2r.py"
+      ],
+      "dependency_types": [
+        "A: semantic/runtime",
+        "B: validation-only",
+        "C: provenance/hash-only",
+        "D: documentation-only"
+      ],
+      "protected_by": [
+        "scripts/validate_sfh1.py",
+        "data/generated/sfh2/input-manifest.json",
+        "data/generated/sfh2r1/offline-replay/input-manifest.json"
+      ],
+      "semantic_authority": "Validated LLM semantic-first output; candidate-only storage",
+      "retirement_status": "retain_active",
+      "reason": "SFH2 reads SFH1 packets, mentions, semantics, and candidate inputs."
+    },
+    {
+      "path": "data/generated/sfh2",
+      "category": "CURRENT_BASELINE",
+      "approx_size_bytes": 71549599,
+      "file_count": 157,
+      "referenced_by": [
+        "scripts/sfh2/common.py",
+        "scripts/sfh2/pipeline.py",
+        "scripts/sfh2/projections.py",
+        "scripts/validate_sfh2.py"
+      ],
+      "dependency_types": [
+        "A: semantic/runtime",
+        "B: validation-only",
+        "C: provenance/hash-only",
+        "D: documentation-only"
+      ],
+      "protected_by": [
+        "scripts/validate_sfh2.py",
+        "data/generated/sfh2/input-manifest.json"
+      ],
+      "semantic_authority": "LLM semantic authority plus deterministic candidate/graph/storage controls",
+      "retirement_status": "retain_active",
+      "reason": "Current SFH2 candidate/graph projection and repair materialization source."
+    },
+    {
+      "path": "data/generated/sfh2-2p",
+      "category": "FROZEN_PROVENANCE",
+      "approx_size_bytes": 2659746,
+      "file_count": 167,
+      "referenced_by": [
+        "scripts/sfh2_2p/common.py",
+        "scripts/sfh2_2p1/common.py",
+        "tests/test_sfh2_2p.py",
+        "docs/sfh2-2p-semantic-identity-resolution-pilot.md"
+      ],
+      "dependency_types": [
+        "B: validation-only",
+        "C: provenance/hash-only",
+        "D: documentation-only"
+      ],
+      "protected_by": [
+        "scripts/validate_sfh2_2p.py",
+        "data/generated/sfh2-2p/selection.json"
+      ],
+      "semantic_authority": "Frozen LLM-first identity pilot; candidate-only",
+      "retirement_status": "retain_for_provenance",
+      "reason": "Later P1/P2 selection logic excludes these pilot cases."
+    },
+    {
+      "path": "data/generated/sfh2-2p1",
+      "category": "FROZEN_PROVENANCE",
+      "approx_size_bytes": 703499,
+      "file_count": 102,
+      "referenced_by": [
+        "scripts/sfh2_2p1/common.py",
+        "scripts/sfh2_2p2/selection.py",
+        "tests/test_sfh2_2p1.py"
+      ],
+      "dependency_types": [
+        "B: validation-only",
+        "C: provenance/hash-only"
+      ],
+      "protected_by": [
+        "scripts/validate_sfh2_2p1.py",
+        "data/generated/sfh2-2p1/selection.json"
+      ],
+      "semantic_authority": "Frozen proposal-first LLM output; candidate-only",
+      "retirement_status": "retain_for_provenance",
+      "reason": "Later blind selection excludes prior P1 cases."
+    },
+    {
+      "path": "data/generated/sfh2-2p2",
+      "category": "FROZEN_PROVENANCE",
+      "approx_size_bytes": 1586475,
+      "file_count": 80,
+      "referenced_by": [
+        "scripts/sfh2_2p2/common.py",
+        "scripts/sfh2_2p2/selection.py",
+        "tests/test_sfh2_2p2.py"
+      ],
+      "dependency_types": [
+        "B: validation-only",
+        "C: provenance/hash-only"
+      ],
+      "protected_by": [
+        "scripts/validate_sfh2_2p2.py",
+        "data/generated/sfh2-2p2/architecture-freeze.json"
+      ],
+      "semantic_authority": "Frozen blind generalization output",
+      "retirement_status": "retain_for_provenance",
+      "reason": "Selection and architecture hashes are immutable evaluation provenance."
+    },
+    {
+      "path": "data/generated/sfh2-a0",
+      "category": "FROZEN_PROVENANCE",
+      "approx_size_bytes": 1168558,
+      "file_count": 133,
+      "referenced_by": [
+        "scripts/sfh2_a0/common.py",
+        "scripts/validate_sfh2_a0.py",
+        "docs/sfh2-a0-llm-semantic-authority-pilot.md"
+      ],
+      "dependency_types": [
+        "B: validation-only",
+        "C: provenance/hash-only",
+        "D: documentation-only"
+      ],
+      "protected_by": [
+        "scripts/validate_sfh2_a0.py",
+        "data/generated/sfh2-a0/architecture-freeze.json"
+      ],
+      "semantic_authority": "Frozen multi-pass LLM semantic experiment",
+      "retirement_status": "retain_for_provenance",
+      "reason": "A0 evidence explains review routing and semantic-authority behavior."
+    },
+    {
+      "path": "data/generated/sfh2-a0r",
+      "category": "FROZEN_PROVENANCE",
+      "approx_size_bytes": 1014905,
+      "file_count": 28,
+      "referenced_by": [
+        "scripts/sfh2_a0r/common.py",
+        "scripts/sfh2_a0r/pipeline.py",
+        "tests/test_sfh2_a0r.py",
+        "docs/sfh2-a0r-selective-semantic-review.md"
+      ],
+      "dependency_types": [
+        "B: validation-only",
+        "C: provenance/hash-only",
+        "D: documentation-only"
+      ],
+      "protected_by": [
+        "scripts/validate_sfh2_a0r.py",
+        "data/generated/sfh2-a0r/architecture-freeze.json"
+      ],
+      "semantic_authority": "Frozen selective semantic review contract",
+      "retirement_status": "retain_for_provenance",
+      "reason": "A0R contract evidence is referenced by later validation."
+    },
+    {
+      "path": "data/generated/sfh2-a0r-l",
+      "category": "FROZEN_PROVENANCE",
+      "approx_size_bytes": 1316238,
+      "file_count": 72,
+      "referenced_by": [
+        "scripts/sfh2_a0r_l/common.py",
+        "scripts/sfh2_a1r/pipeline.py",
+        "tests/test_sfh2_a0r_l.py",
+        "docs/sfh2-a0r-l-live-confirmation-and-story-challenge.md"
+      ],
+      "dependency_types": [
+        "B: validation-only",
+        "C: provenance/hash-only",
+        "D: documentation-only"
+      ],
+      "protected_by": [
+        "scripts/validate_sfh2_a0r_l.py",
+        "data/generated/sfh2-a0r-l/architecture-freeze.json"
+      ],
+      "semantic_authority": "Frozen host-live semantic validation with raw provider outputs",
+      "retirement_status": "retain_for_provenance",
+      "reason": "A1/A1R source run and challenge review provenance."
+    },
+    {
+      "path": "data/generated/sfh2-a1",
+      "category": "FROZEN_PROVENANCE",
+      "approx_size_bytes": 527977,
+      "file_count": 13,
+      "referenced_by": [
+        "scripts/build_sfh2_a1_artifacts.py",
+        "scripts/validate_sfh2_a1.py",
+        "docs/sfh2-a1-host-live-validation.md"
+      ],
+      "dependency_types": [
+        "B: validation-only",
+        "C: provenance/hash-only",
+        "D: documentation-only"
+      ],
+      "protected_by": [
+        "scripts/validate_sfh2_a1.py",
+        "data/generated/sfh2-a1/host-preflight.json"
+      ],
+      "semantic_authority": "Frozen host-live semantic summary",
+      "retirement_status": "retain_for_provenance",
+      "reason": "A1 host preflight/cohort evidence is immutable."
+    },
+    {
+      "path": "data/generated/sfh2-a1r",
+      "category": "FROZEN_PROVENANCE",
+      "approx_size_bytes": 3464328,
+      "file_count": 74,
+      "referenced_by": [
+        "scripts/sfh2_a1r/common.py",
+        "scripts/sfh2_a1r/pipeline.py",
+        "docs/sfh2-a1r-strict-review-transport.md"
+      ],
+      "dependency_types": [
+        "B: validation-only",
+        "C: provenance/hash-only",
+        "D: documentation-only"
+      ],
+      "protected_by": [
+        "scripts/validate_sfh2_a1r.py",
+        "data/generated/sfh2-a1r/root-cause-analysis.json"
+      ],
+      "semantic_authority": "Frozen strict-review transport repair evidence",
+      "retirement_status": "retain_for_provenance",
+      "reason": "Preserves provider errors, cached primary responses, and review results."
+    },
+    {
+      "path": "data/generated/sfh2-a2",
+      "category": "FROZEN_PROVENANCE",
+      "approx_size_bytes": 4062511,
+      "file_count": 145,
+      "referenced_by": [
+        "scripts/sfh2_a2/common.py",
+        "scripts/sfh2_a2/pipeline.py",
+        "docs/sfh2-a2-independent-semantic-audit.md"
+      ],
+      "dependency_types": [
+        "B: validation-only",
+        "C: provenance/hash-only",
+        "D: documentation-only"
+      ],
+      "protected_by": [
+        "scripts/validate_sfh2_a2.py",
+        "data/generated/sfh2-a2/architecture-freeze.json"
+      ],
+      "semantic_authority": "Frozen independent Historian A/B semantic audit",
+      "retirement_status": "retain_for_provenance",
+      "reason": "A2 common-mode/disagreement evidence is immutable."
+    },
+    {
+      "path": "data/generated/sfh2-a2r",
+      "category": "FROZEN_PROVENANCE",
+      "approx_size_bytes": 4151637,
+      "file_count": 123,
+      "referenced_by": [
+        "scripts/sfh2_a2r/common.py",
+        "scripts/sfh2_a2r/pipeline.py",
+        "docs/sfh2-a2r-adjudicator-contract-repair.md"
+      ],
+      "dependency_types": [
+        "B: validation-only",
+        "C: provenance/hash-only",
+        "D: documentation-only"
+      ],
+      "protected_by": [
+        "scripts/validate_sfh2_a2r.py",
+        "data/generated/sfh2-a2r/adjudicator-contract-v2.json"
+      ],
+      "semantic_authority": "Frozen dual-semantic adjudicator contract/results",
+      "retirement_status": "retain_for_provenance",
+      "reason": "A2R contract/results are part of the pilot provenance chain."
+    },
+    {
+      "path": "data/generated/sfh2r",
+      "category": "ACTIVE_INPUT",
+      "approx_size_bytes": 1800527,
+      "file_count": 10,
+      "referenced_by": [
+        "scripts/materialize_sfh2r.py",
+        "scripts/sfh2r_contract.py",
+        "scripts/validate_sfh2r.py",
+        "docs/sfh2r-manual-semantic-repair.md"
+      ],
+      "dependency_types": [
+        "A: semantic/runtime",
+        "B: validation-only",
+        "C: provenance/hash-only",
+        "D: documentation-only"
+      ],
+      "protected_by": [
+        "scripts/validate_sfh2r.py",
+        "data/generated/sfh2r/repair-manifest.json"
+      ],
+      "semantic_authority": "Human-reviewed SFH2R authority materialized deterministically",
+      "retirement_status": "retain_active",
+      "reason": "Manual repairs and provenance are active SFH2 inputs."
+    },
+    {
+      "path": "data/generated/sfh2r1",
+      "category": "ACTIVE_INPUT",
+      "approx_size_bytes": 61102965,
+      "file_count": 32,
+      "referenced_by": [
+        "scripts/materialize_sfh2r1.py",
+        "scripts/sfh2r_contract.py",
+        "scripts/validate_sfh2r1.py",
+        "scripts/sfh2_2p2/selection.py"
+      ],
+      "dependency_types": [
+        "A: semantic/runtime",
+        "B: validation-only",
+        "C: provenance/hash-only",
+        "D: documentation-only"
+      ],
+      "protected_by": [
+        "scripts/validate_sfh2r1.py",
+        "data/generated/sfh2r1/repair-manifest.json"
+      ],
+      "semantic_authority": "Second-pass human-reviewed authority plus deterministic replay",
+      "retirement_status": "retain_active",
+      "reason": "SFH2R.1 repairs and active identity-index audit are protected inputs."
+    },
+    {
+      "path": "data/generated/srm0",
+      "category": "FROZEN_PROVENANCE",
+      "approx_size_bytes": 4741047,
+      "file_count": 662,
+      "referenced_by": [
+        "scripts/build_hng2_schema_replay.py",
+        "scripts/run_srm0_3b.py",
+        "scripts/run_srm0_4a.py",
+        "scripts/run_srm0_5.py"
+      ],
+      "dependency_types": [
+        "A: semantic/runtime",
+        "B: validation-only",
+        "C: provenance/hash-only",
+        "D: documentation-only"
+      ],
+      "protected_by": [
+        "scripts/validate_srm0_4a.py",
+        "scripts/validate_srm0_4c.py",
+        "data/generated/hng2-schema/manifest.json"
+      ],
+      "semantic_authority": "Frozen LLM research-memory outputs; candidate-only replay",
+      "retirement_status": "retain_for_provenance",
+      "reason": "HNG2 schema replay and SRM validators consume fixed SRM evidence."
+    },
+    {
+      "path": "data/raw",
+      "category": "SELF_CONTAINED_HISTORICAL",
+      "approx_size_bytes": 0,
+      "file_count": 0,
+      "referenced_by": [],
+      "dependency_types": [
+        "E: no live reference"
+      ],
+      "protected_by": [],
+      "semantic_authority": "Obsolete Milestone-1 placeholder; no semantic authority",
+      "retirement_status": "removed_in_C0",
+      "reason": "Only .gitkeep existed; repository-wide live reference scan was empty outside the archived planning document."
+    },
+    {
+      "path": "data/normalized",
+      "category": "SELF_CONTAINED_HISTORICAL",
+      "approx_size_bytes": 0,
+      "file_count": 0,
+      "referenced_by": [],
+      "dependency_types": [
+        "E: no live reference"
+      ],
+      "protected_by": [],
+      "semantic_authority": "Obsolete Milestone-1 placeholder; no semantic authority",
+      "retirement_status": "removed_in_C0",
+      "reason": "Only .gitkeep existed; repository-wide live reference scan was empty outside the archived planning document."
+    }
+  ]
+}
