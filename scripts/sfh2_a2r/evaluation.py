@@ -152,7 +152,9 @@ def evaluate_regression(
         }
 
     a_errors = [row for row in identity_rows if row["historian_a"].get("identity_correct") is False]
+    a_noncorrect = [row for row in identity_rows if row["historian_a"].get("identity_correct") is not True]
     error_disagreements = [row for row in a_errors if row["comparison"].get("historical_identity_disagreement") is True or row["comparison"].get("contract_validity_disagreement")]
+    noncorrect_disagreements = [row for row in a_noncorrect if row["comparison"].get("historical_identity_disagreement") is True or row["comparison"].get("contract_validity_disagreement")]
     common_mode = [row for row in identity_rows if is_common_mode_identity_error(row)]
     damage = [
         row for row in identity_rows
@@ -177,6 +179,10 @@ def evaluate_regression(
         "a_identity_errors": len(a_errors),
         "a_identity_errors_with_ab_disagreement": len(error_disagreements),
         "a_error_disagreement_recall": round(len(error_disagreements) / len(a_errors), 4) if a_errors else None,
+        "a_identity_unresolved": sum(row["historian_a"].get("identity_correct") is None for row in identity_rows),
+        "a_identity_noncorrect_cases": len(a_noncorrect),
+        "a_identity_noncorrect_with_ab_disagreement": len(noncorrect_disagreements),
+        "a_noncorrect_disagreement_recall": round(len(noncorrect_disagreements) / len(a_noncorrect), 4) if a_noncorrect else None,
         "common_mode_errors": len(common_mode),
         "adjudicator_damage": len(damage),
         "errors_recovered": sum(row["historian_a"].get("identity_correct") is False and row["final"].get("identity_correct") is True for row in identity_rows),
@@ -187,6 +193,7 @@ def evaluate_regression(
         "adjudication_contract_invalid": sum(row.get("contract_status") == "contract_invalid" for row in adjudications.values()),
         "adjudication_transport_unresolved": sum(row.get("contract_status") == "transport_unresolved" for row in adjudications.values()),
         "final_unresolved_identity_cases": sum(row.get("final_resolution_status") == "unresolved" for row in rows),
+        "noncorrect_outcomes_recovered": sum(row["historian_a"].get("identity_correct") is not True and row["final"].get("identity_correct") is True for row in identity_rows),
         "candidate_only": True,
         "canonical_write_back": False,
     }

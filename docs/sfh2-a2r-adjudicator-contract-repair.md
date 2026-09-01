@@ -70,7 +70,8 @@ For the 18 regression identity cases, the result was:
 | Historian B after allowed recovery | 15/18 (83.33%) |
 | final adjudicated identity | 17/18 (94.44%) |
 | final resolution coverage | 18/18 (100%) |
-| A-error recoveries | 1/2 |
+| A semantic-wrong recoveries | 1/2 |
+| A non-correct outcomes recovered, including one unresolved A record | 2/3 |
 | common-mode errors | 0 |
 | adjudicator damage | 0 |
 

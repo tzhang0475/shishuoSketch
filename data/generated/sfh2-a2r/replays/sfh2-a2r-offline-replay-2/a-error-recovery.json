@@ -1,7 +1,11 @@
 {
   "a_identity_errors": 2,
+  "a_identity_noncorrect_cases": 3,
+  "a_identity_unresolved": 1,
   "candidate_only": true,
   "canonical_write_back": false,
+  "noncorrect_outcomes_recovered": 2,
+  "noncorrect_recovery_rate": 0.6667,
   "records": [
     {
       "a_answer": {
@@ -16,6 +20,8 @@
         "serialization_contract_correct": true
       },
       "a_error_recovered": false,
+      "a_noncorrect_outcome_recovered": false,
+      "a_outcome_kind": "semantic_wrong",
       "adjudication": {
         "candidate_only": true,
         "canonical_write_back": false,
@@ -132,6 +138,133 @@
     },
     {
       "a_answer": {
+        "attribute_fields_correct": null,
+        "canonicalization_correct": null,
+        "discourse_correct": null,
+        "identity_correct": null,
+        "occurrence_role_correct": null,
+        "referent_surface_correct": null,
+        "relation_correct": null,
+        "semantic_kind_correct": null,
+        "serialization_contract_correct": false
+      },
+      "a_error_recovered": false,
+      "a_noncorrect_outcome_recovered": true,
+      "a_outcome_kind": "unresolved",
+      "adjudication": {
+        "candidate_only": true,
+        "canonical_write_back": false,
+        "case_id": "sfh2-a0-4f2248ce73c927f84135",
+        "changed_fields": [],
+        "contract_status": "valid",
+        "decision": "select_b",
+        "errors": [],
+        "mention_id": "sfh1-mention-e811bf3cd95d7cfdc1162c15",
+        "patch_ops": [],
+        "reason_summary": "Historian A produced no semantic record (contract invalid, semantic record null). Historian B produced a valid, well-grounded record. The target span 阮光禄 is correctly identified as an office-title reference (光禄大夫) to 阮裕, supported by the Liu annotation (sfh1-ev-04-wenxue-024-liu-annotation-003) which cites 中興書 and mentions 裕 (Ruan Yu's personal name). The main text (sfh1-ev-04-wenxue-024-main) describes 阮光禄 expounding the 白馬論 to the young 謝安, matching the known anecdote about 阮裕. Historian B's record is historically accurate and fully grounded in the supplied evidence.",
+        "reviewed_fields": [],
+        "selected_record": {
+          "abstain": false,
+          "attribute_type": "",
+          "attribute_value": "",
+          "bearer_hint": "",
+          "confidence": "high",
+          "discourse": {
+            "addressee_hint": "reader",
+            "antecedent_hint": "阮光禄 refers to 阮裕, the person who expounded the 白馬論 to 謝安",
+            "self_reference_hint": "",
+            "speaker_hint": "narrator"
+          },
+          "explanation": "阮光禄 is an office-title reference. 光禄 (Guanglu) refers to the office of 光禄大夫 (Guanglu Daifu). The Liu annotation (sfh1-ev-04-wenxue-024-liu-annotation-003) cites 中興書 and mentions 裕, which is the personal name 阮裕 (Ruan Yu). 阮裕 held the office of 光禄大夫, hence the title 阮光禄. The main text describes him expounding the 白馬論 (White Horse Discourse) to the young 謝安. The referent is 阮裕, a Jin-dynasty figure known for this anecdote.",
+          "mention_id": "sfh1-mention-e811bf3cd95d7cfdc1162c15",
+          "occurrence_role": "scene_participant",
+          "reference_type": "office_title",
+          "referent": {
+            "canonical_hint": "阮裕",
+            "confidence": "high",
+            "surface_form": "阮裕"
+          },
+          "relations": [
+            {
+              "confidence": "high",
+              "evidence_ids": [
+                "sfh1-ev-04-wenxue-024-main"
+              ],
+              "relation": "related_person",
+              "target_hint": "謝安"
+            }
+          ],
+          "semantic_kind": "historical_person",
+          "supporting_evidence_ids": [
+            "sfh1-ev-04-wenxue-024-liu-annotation-003",
+            "sfh1-ev-04-wenxue-024-main"
+          ],
+          "surface": "阮光禄"
+        },
+        "selected_record_source": "historian_b_exact_copy",
+        "stage": "adjudicator",
+        "story_id": "04-wenxue-024",
+        "supporting_evidence_ids": [
+          "sfh1-ev-04-wenxue-024-liu-annotation-003",
+          "sfh1-ev-04-wenxue-024-main"
+        ],
+        "surface": "阮光禄",
+        "transport": {
+          "classification": "cache_hit",
+          "elapsed_seconds": 0,
+          "packet_hash": "656338011ebf0e46b561975ebbb636ff55a237dc3832c73cc7f582d4590a1209",
+          "parse_error": null,
+          "prompt_version": "sfh2-a2r-adjudicator-v2",
+          "raw_path": "data/generated/sfh2-a2r/live/sfh2-a2r-live-v1/raw-api/00012-adjudicator-regression-sfh2-a0-4f2248ce73c927f84135-attempt1.json",
+          "stage": "adjudicator",
+          "unit_id": "regression:sfh2-a0-4f2248ce73c927f84135",
+          "usage": {}
+        },
+        "valid": true
+      },
+      "b_answer": {
+        "attribute_fields_correct": true,
+        "canonicalization_correct": true,
+        "discourse_correct": null,
+        "identity_correct": true,
+        "occurrence_role_correct": null,
+        "referent_surface_correct": false,
+        "relation_correct": null,
+        "semantic_kind_correct": true,
+        "serialization_contract_correct": true
+      },
+      "case_id": "sfh2-a0-4f2248ce73c927f84135",
+      "disagreement": {
+        "a_valid": false,
+        "agreement": false,
+        "b_valid": true,
+        "disagreement_classes": [
+          "contract_validity_disagreement"
+        ],
+        "historical_identity_disagreement": true,
+        "metadata_only_difference": false,
+        "semantic_fields": [
+          "record"
+        ],
+        "substantive_disagreement": true,
+        "substantive_fields": [
+          "record"
+        ]
+      },
+      "final_answer": {
+        "attribute_fields_correct": true,
+        "canonicalization_correct": true,
+        "discourse_correct": null,
+        "identity_correct": true,
+        "occurrence_role_correct": null,
+        "referent_surface_correct": false,
+        "relation_correct": null,
+        "semantic_kind_correct": true,
+        "serialization_contract_correct": true
+      }
+    },
+    {
+      "a_answer": {
         "attribute_fields_correct": true,
         "canonicalization_correct": false,
         "discourse_correct": null,
@@ -143,6 +276,8 @@
         "serialization_contract_correct": true
       },
       "a_error_recovered": true,
+      "a_noncorrect_outcome_recovered": true,
+      "a_outcome_kind": "semantic_wrong",
       "adjudication": {
         "candidate_only": true,
         "canonical_write_back": false,

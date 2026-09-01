@@ -471,17 +471,32 @@ def _a_error_recovery(evaluation: Mapping[str, Any]) -> dict[str, Any]:
     rows = [
         {
             "case_id": row.get("case_id"),
+            "a_outcome_kind": "semantic_wrong" if row.get("historian_a", {}).get("identity_correct") is False else "unresolved",
             "a_answer": row.get("historian_a"),
             "b_answer": row.get("historian_b"),
             "disagreement": row.get("comparison"),
             "adjudication": row.get("adjudication"),
             "final_answer": row.get("final"),
             "a_error_recovered": row.get("historian_a", {}).get("identity_correct") is False and row.get("final", {}).get("identity_correct") is True,
+            "a_noncorrect_outcome_recovered": row.get("historian_a", {}).get("identity_correct") is not True and row.get("final", {}).get("identity_correct") is True,
         }
         for row in evaluation.get("records", []) or []
-        if row.get("historian_a", {}).get("identity_correct") is False
+        if row.get("historian_a", {}).get("identity_correct") is not True
     ]
-    return {"schema": "sfh2-a2r-a-error-recovery-v1", "a_identity_errors": len(rows), "recovered": sum(row["a_error_recovered"] for row in rows), "recovery_rate": round(sum(row["a_error_recovered"] for row in rows) / len(rows), 4) if rows else None, "records": rows, "candidate_only": True, "canonical_write_back": False}
+    semantic_wrong = [row for row in rows if row["a_outcome_kind"] == "semantic_wrong"]
+    return {
+        "schema": "sfh2-a2r-a-error-recovery-v1",
+        "a_identity_errors": len(semantic_wrong),
+        "a_identity_unresolved": sum(row["a_outcome_kind"] == "unresolved" for row in rows),
+        "a_identity_noncorrect_cases": len(rows),
+        "recovered": sum(row["a_error_recovered"] for row in rows),
+        "recovery_rate": round(sum(row["a_error_recovered"] for row in rows) / len(semantic_wrong), 4) if semantic_wrong else None,
+        "noncorrect_outcomes_recovered": sum(row["a_noncorrect_outcome_recovered"] for row in rows),
+        "noncorrect_recovery_rate": round(sum(row["a_noncorrect_outcome_recovered"] for row in rows) / len(rows), 4) if rows else None,
+        "records": rows,
+        "candidate_only": True,
+        "canonical_write_back": False,
+    }
 
 
 def _b_error_protection(evaluation: Mapping[str, Any]) -> dict[str, Any]:
