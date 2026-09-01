@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"decision\": \"select_b\", \"patch_ops\": [], \"reason_summary\": \"The target '吾' is a first-person pronoun spoken by 魏武 (Cao Cao). Historian B correctly identifies the occurrence_role as 'speaker_reference' (the pronoun is the speaker referring to himself), sets discourse.self_reference_hint to '吾' (the actual self-referential pronoun form), and includes only the 'same_person' relation to 魏武. Historian A incorrectly labels the occurrence_role as 'scene_participant', sets self_reference_hint to '魏武' (the antecedent rather than the self-reference form), and adds a spurious 'related_person' relation to 楊脩, who is the addressee (卿), not a relation of the pronoun '吾'. Historian B's record is the accurate semantic hypothesis.\", \"supporting_evidence_ids\": [\"sfh1-ev-11-jiewu-003-main\"]}",
+              "name": "submit_sfh2_a2r_adjudication_v2"
+            },
+            "id": "call_00_Gg0ZfQmH3ii4qtHU6I423192",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1788196299,
+  "id": "c9082f58-b34f-4089-91ad-8c04c09bbc65",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 278,
+    "prompt_cache_hit_tokens": 1920,
+    "prompt_cache_miss_tokens": 3545,
+    "prompt_tokens": 5465,
+    "prompt_tokens_details": {
+      "cached_tokens": 1920
+    },
+    "total_tokens": 5743
+  }
+}

@@ -1,0 +1,501 @@
+{
+  "base_record_property": "absent",
+  "candidate_only": true,
+  "canonical_write_back": false,
+  "decision_rules": {
+    "abstain": {
+      "base": null,
+      "patch_ops": "empty"
+    },
+    "revise_a": {
+      "base": "historian_a",
+      "patch_ops": "nonempty"
+    },
+    "revise_b": {
+      "base": "historian_b",
+      "patch_ops": "nonempty"
+    },
+    "select_a": {
+      "base": "historian_a",
+      "patch_ops": "empty"
+    },
+    "select_b": {
+      "base": "historian_b",
+      "patch_ops": "empty"
+    }
+  },
+  "schema": "sfh2-a2r-adjudicator-contract-v2-record-v1",
+  "tool": {
+    "function": {
+      "description": "Select Historian A or B exactly, apply a narrow typed patch to A or B, or abstain. Never reproduce a selected complete record.",
+      "name": "submit_sfh2_a2r_adjudication_v2",
+      "parameters": {
+        "additionalProperties": false,
+        "properties": {
+          "decision": {
+            "enum": [
+              "abstain",
+              "revise_a",
+              "revise_b",
+              "select_a",
+              "select_b"
+            ],
+            "type": "string"
+          },
+          "patch_ops": {
+            "items": {
+              "anyOf": [
+                {
+                  "additionalProperties": false,
+                  "properties": {
+                    "path": {
+                      "enum": [
+                        "attribute_type"
+                      ],
+                      "type": "string"
+                    },
+                    "value": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "path",
+                    "value"
+                  ],
+                  "type": "object"
+                },
+                {
+                  "additionalProperties": false,
+                  "properties": {
+                    "path": {
+                      "enum": [
+                        "attribute_value"
+                      ],
+                      "type": "string"
+                    },
+                    "value": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "path",
+                    "value"
+                  ],
+                  "type": "object"
+                },
+                {
+                  "additionalProperties": false,
+                  "properties": {
+                    "path": {
+                      "enum": [
+                        "bearer_hint"
+                      ],
+                      "type": "string"
+                    },
+                    "value": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "path",
+                    "value"
+                  ],
+                  "type": "object"
+                },
+                {
+                  "additionalProperties": false,
+                  "properties": {
+                    "path": {
+                      "enum": [
+                        "confidence"
+                      ],
+                      "type": "string"
+                    },
+                    "value": {
+                      "enum": [
+                        "high",
+                        "low",
+                        "medium"
+                      ],
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "path",
+                    "value"
+                  ],
+                  "type": "object"
+                },
+                {
+                  "additionalProperties": false,
+                  "properties": {
+                    "path": {
+                      "enum": [
+                        "discourse.addressee_hint"
+                      ],
+                      "type": "string"
+                    },
+                    "value": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "path",
+                    "value"
+                  ],
+                  "type": "object"
+                },
+                {
+                  "additionalProperties": false,
+                  "properties": {
+                    "path": {
+                      "enum": [
+                        "discourse.antecedent_hint"
+                      ],
+                      "type": "string"
+                    },
+                    "value": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "path",
+                    "value"
+                  ],
+                  "type": "object"
+                },
+                {
+                  "additionalProperties": false,
+                  "properties": {
+                    "path": {
+                      "enum": [
+                        "discourse.self_reference_hint"
+                      ],
+                      "type": "string"
+                    },
+                    "value": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "path",
+                    "value"
+                  ],
+                  "type": "object"
+                },
+                {
+                  "additionalProperties": false,
+                  "properties": {
+                    "path": {
+                      "enum": [
+                        "discourse.speaker_hint"
+                      ],
+                      "type": "string"
+                    },
+                    "value": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "path",
+                    "value"
+                  ],
+                  "type": "object"
+                },
+                {
+                  "additionalProperties": false,
+                  "properties": {
+                    "path": {
+                      "enum": [
+                        "occurrence_role"
+                      ],
+                      "type": "string"
+                    },
+                    "value": {
+                      "enum": [
+                        "addressee_reference",
+                        "annotation_person",
+                        "citation_source_person",
+                        "collective_reference",
+                        "genealogy_reference",
+                        "historical_exemplum",
+                        "other",
+                        "person_attribute",
+                        "scene_participant",
+                        "scene_reference",
+                        "speaker_reference",
+                        "structural"
+                      ],
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "path",
+                    "value"
+                  ],
+                  "type": "object"
+                },
+                {
+                  "additionalProperties": false,
+                  "properties": {
+                    "path": {
+                      "enum": [
+                        "reference_type"
+                      ],
+                      "type": "string"
+                    },
+                    "value": {
+                      "enum": [
+                        "abbreviated_reference",
+                        "addressee_reference",
+                        "attribute_reference",
+                        "citation_reference",
+                        "collective_reference",
+                        "courtesy_name",
+                        "descriptive_reference",
+                        "full_name",
+                        "honorific",
+                        "kinship_reference",
+                        "nickname",
+                        "office_title",
+                        "personal_name",
+                        "pronoun_reference",
+                        "ruler_title",
+                        "speaker_reference",
+                        "structural_reference",
+                        "style_name",
+                        "surname_reference",
+                        "uncertain"
+                      ],
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "path",
+                    "value"
+                  ],
+                  "type": "object"
+                },
+                {
+                  "additionalProperties": false,
+                  "properties": {
+                    "path": {
+                      "enum": [
+                        "referent.canonical_hint"
+                      ],
+                      "type": "string"
+                    },
+                    "value": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "path",
+                    "value"
+                  ],
+                  "type": "object"
+                },
+                {
+                  "additionalProperties": false,
+                  "properties": {
+                    "path": {
+                      "enum": [
+                        "referent.confidence"
+                      ],
+                      "type": "string"
+                    },
+                    "value": {
+                      "enum": [
+                        "high",
+                        "low",
+                        "medium"
+                      ],
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "path",
+                    "value"
+                  ],
+                  "type": "object"
+                },
+                {
+                  "additionalProperties": false,
+                  "properties": {
+                    "path": {
+                      "enum": [
+                        "referent.surface_form"
+                      ],
+                      "type": "string"
+                    },
+                    "value": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "path",
+                    "value"
+                  ],
+                  "type": "object"
+                },
+                {
+                  "additionalProperties": false,
+                  "properties": {
+                    "path": {
+                      "enum": [
+                        "semantic_kind"
+                      ],
+                      "type": "string"
+                    },
+                    "value": {
+                      "enum": [
+                        "collective",
+                        "historical_person",
+                        "office",
+                        "other",
+                        "person_attribute",
+                        "place",
+                        "structural",
+                        "uncertain",
+                        "work"
+                      ],
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "path",
+                    "value"
+                  ],
+                  "type": "object"
+                },
+                {
+                  "additionalProperties": false,
+                  "properties": {
+                    "path": {
+                      "enum": [
+                        "abstain"
+                      ],
+                      "type": "string"
+                    },
+                    "value": {
+                      "type": "boolean"
+                    }
+                  },
+                  "required": [
+                    "path",
+                    "value"
+                  ],
+                  "type": "object"
+                },
+                {
+                  "additionalProperties": false,
+                  "properties": {
+                    "path": {
+                      "enum": [
+                        "supporting_evidence_ids"
+                      ],
+                      "type": "string"
+                    },
+                    "value": {
+                      "items": {
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "path",
+                    "value"
+                  ],
+                  "type": "object"
+                },
+                {
+                  "additionalProperties": false,
+                  "properties": {
+                    "path": {
+                      "enum": [
+                        "relations"
+                      ],
+                      "type": "string"
+                    },
+                    "value": {
+                      "items": {
+                        "additionalProperties": false,
+                        "properties": {
+                          "confidence": {
+                            "enum": [
+                              "high",
+                              "low",
+                              "medium"
+                            ],
+                            "type": "string"
+                          },
+                          "evidence_ids": {
+                            "items": {
+                              "type": "string"
+                            },
+                            "type": "array"
+                          },
+                          "relation": {
+                            "enum": [
+                              "attribute_of",
+                              "citation_relation",
+                              "different_person",
+                              "kinship_relation",
+                              "office_relation",
+                              "other",
+                              "related_person",
+                              "same_person",
+                              "uncertain"
+                            ],
+                            "type": "string"
+                          },
+                          "target_hint": {
+                            "pattern": "^[^A-Za-z0-9()（）\\[\\]【】,，.。:：;；/／\\\\\\n\\r]*$",
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "target_hint",
+                          "relation",
+                          "confidence",
+                          "evidence_ids"
+                        ],
+                        "type": "object"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "path",
+                    "value"
+                  ],
+                  "type": "object"
+                }
+              ]
+            },
+            "type": "array"
+          },
+          "reason_summary": {
+            "type": "string"
+          },
+          "supporting_evidence_ids": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          }
+        },
+        "required": [
+          "decision",
+          "patch_ops",
+          "reason_summary",
+          "supporting_evidence_ids"
+        ],
+        "type": "object"
+      },
+      "strict": true
+    },
+    "type": "function"
+  }
+}

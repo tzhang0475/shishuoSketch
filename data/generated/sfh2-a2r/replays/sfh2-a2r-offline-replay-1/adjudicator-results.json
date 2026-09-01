@@ -1,0 +1,2376 @@
+{
+  "candidate_only": true,
+  "canonical_write_back": false,
+  "records": [
+    {
+      "candidate_only": true,
+      "canonical_write_back": false,
+      "case_id": "sfh2-a0-8e2c75d0b45c0c5aee85",
+      "changed_fields": [],
+      "contract_status": "valid",
+      "decision": "select_b",
+      "errors": [],
+      "mention_id": "sfh1-mention-6a61cce313a1270328ab9620",
+      "patch_ops": [],
+      "reason_summary": "Historian B's record is more accurate. The target span 阮嗣宗 is the courtesy name of 阮籍, confirmed by the Liu annotation (sfh1-ev-01-dexing-015-liu-annotation-001: 阮籍字嗣宗陳留尉氏人阮瑀子). Both historians agree on the core identity (阮籍, courtesy name, historical_person, scene_participant). The substantive disagreements are: (1) discourse.speaker_hint — Historian B correctly identifies 晉文王 as the speaker who praises 阮嗣宗, matching the main text 晉文王稱阮嗣宗至慎; Historian A leaves this empty. (2) relations — Historian B includes the kinship relation to 阮瑀 (his father, confirmed by the annotation) and a related_person relation to 晉文王 (the speaker in the main text). Historian A instead includes a same_person relation to 阮籍, which is redundant since the referent.canonical_hint already identifies 阮籍, and a kinship relation to 阮瑀. Historian B's relation set is more appropriate and better supported by the evidence. Historian B also correctly includes annotation-007 as supporting evidence, which discusses 阮嗣宗's extreme caution (至慎).",
+      "reviewed_fields": [],
+      "selected_record": {
+        "abstain": false,
+        "attribute_type": "",
+        "attribute_value": "",
+        "bearer_hint": "",
+        "confidence": "high",
+        "discourse": {
+          "addressee_hint": "",
+          "antecedent_hint": "",
+          "self_reference_hint": "",
+          "speaker_hint": "晉文王"
+        },
+        "explanation": "The target span 阮嗣宗 is the courtesy name (字) of 阮籍 (Ruan Ji), as explicitly confirmed by the Liu annotation: '阮籍字嗣宗陳留尉氏人阮瑀子' (sfh1-ev-01-dexing-015-liu-annotation-001). The main text describes 晉文王 (Sima Zhao) praising 阮嗣宗 for being extremely cautious in speech. The courtesy name 嗣宗 refers to the historical person 阮籍, a famous Wei-Jin literatus. The kinship relation to 阮瑀 (his father) is also confirmed by the annotation.",
+        "mention_id": "sfh1-mention-6a61cce313a1270328ab9620",
+        "occurrence_role": "scene_participant",
+        "reference_type": "courtesy_name",
+        "referent": {
+          "canonical_hint": "阮籍",
+          "confidence": "high",
+          "surface_form": "阮籍"
+        },
+        "relations": [
+          {
+            "confidence": "high",
+            "evidence_ids": [
+              "sfh1-ev-01-dexing-015-liu-annotation-001"
+            ],
+            "relation": "kinship_relation",
+            "target_hint": "阮瑀"
+          },
+          {
+            "confidence": "high",
+            "evidence_ids": [
+              "sfh1-ev-01-dexing-015-main"
+            ],
+            "relation": "related_person",
+            "target_hint": "晉文王"
+          }
+        ],
+        "semantic_kind": "historical_person",
+        "supporting_evidence_ids": [
+          "sfh1-ev-01-dexing-015-liu-annotation-001",
+          "sfh1-ev-01-dexing-015-liu-annotation-007",
+          "sfh1-ev-01-dexing-015-main"
+        ],
+        "surface": "阮嗣宗"
+      },
+      "selected_record_source": "historian_b_exact_copy",
+      "stage": "adjudicator",
+      "story_id": "01-dexing-015",
+      "supporting_evidence_ids": [
+        "sfh1-ev-01-dexing-015-liu-annotation-001",
+        "sfh1-ev-01-dexing-015-liu-annotation-007",
+        "sfh1-ev-01-dexing-015-main"
+      ],
+      "surface": "阮嗣宗",
+      "transport": {
+        "classification": "cache_hit",
+        "elapsed_seconds": 0,
+        "packet_hash": "ad2b167569713ddf464ca19551410ae9c228d58785a6c22ca51bbfb09b97c7a2",
+        "parse_error": null,
+        "prompt_version": "sfh2-a2r-adjudicator-v2",
+        "raw_path": "data/generated/sfh2-a2r/live/sfh2-a2r-live-v1/raw-api/00006-adjudicator-regression-sfh2-a0-8e2c75d0b45c0c5aee85-attempt1.json",
+        "stage": "adjudicator",
+        "unit_id": "regression:sfh2-a0-8e2c75d0b45c0c5aee85",
+        "usage": {}
+      },
+      "valid": true
+    },
+    {
+      "candidate_only": true,
+      "canonical_write_back": false,
+      "case_id": "sfh2-a0-dda79dfd26a3ff2cac1e",
+      "changed_fields": [],
+      "contract_status": "valid",
+      "decision": "select_a",
+      "errors": [],
+      "mention_id": "sfh1-mention-6fa6c147488e6d625c27dc1b",
+      "patch_ops": [],
+      "reason_summary": "Both historians agree on the core identity (袁府君 = 袁山松, office_title, historical_person, scene_participant, medium confidence). The only substantive disagreements are discourse.antecedent_hint and relations. Historian A sets antecedent_hint to 袁府君 (self-antecedent) and includes a same_person relation to 山松 with evidence from both the main text and the Liu annotation. Historian B omits the antecedent_hint and restricts the relation evidence to only the annotation. The antecedent_hint of 袁府君 is appropriate since the mention is the first reference to this person in the main text and there is no prior antecedent; A's inclusion of the main-text evidence alongside the annotation for the same_person relation to 山松 is also well-grounded, since the main text establishes the 袁府君 who fought at 滬瀆 and the annotation supplies the name 山松. A's record is the more complete and accurate representation.",
+      "reviewed_fields": [],
+      "selected_record": {
+        "abstain": false,
+        "attribute_type": "",
+        "attribute_value": "",
+        "bearer_hint": "",
+        "confidence": "medium",
+        "discourse": {
+          "addressee_hint": "",
+          "antecedent_hint": "袁府君",
+          "self_reference_hint": "",
+          "speaker_hint": ""
+        },
+        "explanation": "袁府君 is an office-title reference (府君 = governor/prefect honorific) to the person surnamed 袁 who led the campaign against 孫恩. The Liu annotation mentions 山松 (袁山松) in connection with this entry, and historically 袁山松 was the 吳郡太守 who fought 孫恩 at 滬瀆. The referent is thus 袁山松, referenced by his office title.",
+        "mention_id": "sfh1-mention-6fa6c147488e6d625c27dc1b",
+        "occurrence_role": "scene_participant",
+        "reference_type": "office_title",
+        "referent": {
+          "canonical_hint": "袁山松",
+          "confidence": "medium",
+          "surface_form": "袁府君"
+        },
+        "relations": [
+          {
+            "confidence": "medium",
+            "evidence_ids": [
+              "sfh1-ev-01-dexing-045-liu-annotation-004",
+              "sfh1-ev-01-dexing-045-main"
+            ],
+            "relation": "same_person",
+            "target_hint": "山松"
+          }
+        ],
+        "semantic_kind": "historical_person",
+        "supporting_evidence_ids": [
+          "sfh1-ev-01-dexing-045-liu-annotation-004",
+          "sfh1-ev-01-dexing-045-main"
+        ],
+        "surface": "袁府君"
+      },
+      "selected_record_source": "historian_a_exact_copy",
+      "stage": "adjudicator",
+      "story_id": "01-dexing-045",
+      "supporting_evidence_ids": [
+        "sfh1-ev-01-dexing-045-liu-annotation-004",
+        "sfh1-ev-01-dexing-045-main"
+      ],
+      "surface": "袁府君",
+      "transport": {
+        "classification": "cache_hit",
+        "elapsed_seconds": 0,
+        "packet_hash": "82362e5be30e936a4dc66794fbb22603db46e5355902d8623c6a78221b3a29ef",
+        "parse_error": null,
+        "prompt_version": "sfh2-a2r-adjudicator-v2",
+        "raw_path": "data/generated/sfh2-a2r/live/sfh2-a2r-live-v1/raw-api/00007-adjudicator-regression-sfh2-a0-dda79dfd26a3ff2cac1e-attempt1.json",
+        "stage": "adjudicator",
+        "unit_id": "regression:sfh2-a0-dda79dfd26a3ff2cac1e",
+        "usage": {}
+      },
+      "valid": true
+    },
+    {
+      "candidate_only": true,
+      "canonical_write_back": false,
+      "case_id": "sfh2-a0-57d1fc3c0492b21ee1f4",
+      "changed_fields": [],
+      "contract_status": "valid",
+      "decision": "select_a",
+      "errors": [],
+      "mention_id": "sfh1-mention-ddc50731411818b9d0f52a98",
+      "patch_ops": [],
+      "reason_summary": "Both Historian A and B agree on all substantive historical fields: semantic_kind (historical_person), reference_type (ruler_title), occurrence_role (historical_exemplum), referent (齊桓公, high confidence), and the relation to 管仲夷吾 (related_person). The only disagreement is in discourse metadata fields (addressee_hint, antecedent_hint, speaker_hint). Historian A's discourse fields are more conservative and appropriate: the speaker is identified as 劉孝標注 (Liu Xiaobiao's annotation), and the antecedent is 管仲夷吾. Historian B's addressee_hint (\"reader of the annotation\") is not supported by the evidence and is an unnecessary inference. The core historical identity is identical between both hypotheses, and Historian A's discourse fields are more tightly grounded in the supplied evidence.",
+      "reviewed_fields": [],
+      "selected_record": {
+        "abstain": false,
+        "attribute_type": "",
+        "attribute_value": "",
+        "bearer_hint": "",
+        "confidence": "high",
+        "discourse": {
+          "addressee_hint": "",
+          "antecedent_hint": "管仲夷吾",
+          "self_reference_hint": "",
+          "speaker_hint": "劉孝標注"
+        },
+        "explanation": "齊桓公 is the ruler title of Duke Huan of Qi, the historical ruler under whom 管仲 (Guan Zhong) served as prime minister. The Liu Xiaobiao annotation cites the Shiji passage about 管仲夷吾 being from 潁上 and serving 齊桓公, making this a historical exemplum reference within the annotation. The referent is the historical Duke Huan of Qi (齊桓公), and the relation to 管仲夷吾 is that of ruler-minister (related_person).",
+        "mention_id": "sfh1-mention-ddc50731411818b9d0f52a98",
+        "occurrence_role": "historical_exemplum",
+        "reference_type": "ruler_title",
+        "referent": {
+          "canonical_hint": "齊桓公",
+          "confidence": "high",
+          "surface_form": "齊桓公"
+        },
+        "relations": [
+          {
+            "confidence": "high",
+            "evidence_ids": [
+              "sfh1-ev-02-yanyu-036-liu-annotation-001"
+            ],
+            "relation": "related_person",
+            "target_hint": "管仲夷吾"
+          }
+        ],
+        "semantic_kind": "historical_person",
+        "supporting_evidence_ids": [
+          "sfh1-ev-02-yanyu-036-liu-annotation-001"
+        ],
+        "surface": "齊桓公"
+      },
+      "selected_record_source": "historian_a_exact_copy",
+      "stage": "adjudicator",
+      "story_id": "02-yanyu-036",
+      "supporting_evidence_ids": [
+        "sfh1-ev-02-yanyu-036-liu-annotation-001"
+      ],
+      "surface": "齊桓公",
+      "transport": {
+        "classification": "cache_hit",
+        "elapsed_seconds": 0,
+        "packet_hash": "371062c104b2eefc152ae90bc7cdf9cfd9b188d8f1a06a1d294e814d2f51d1f3",
+        "parse_error": null,
+        "prompt_version": "sfh2-a2r-adjudicator-v2",
+        "raw_path": "data/generated/sfh2-a2r/live/sfh2-a2r-live-v1/raw-api/00008-adjudicator-regression-sfh2-a0-57d1fc3c0492b21ee1f4-attempt1.json",
+        "stage": "adjudicator",
+        "unit_id": "regression:sfh2-a0-57d1fc3c0492b21ee1f4",
+        "usage": {}
+      },
+      "valid": true
+    },
+    {
+      "candidate_only": true,
+      "canonical_write_back": false,
+      "case_id": "sfh2-a0-61a5efbe5b56d9d6d36a",
+      "changed_fields": [],
+      "contract_status": "valid",
+      "decision": "select_b",
+      "errors": [],
+      "mention_id": "sfh1-mention-e5f55d112d1655f2898a4637",
+      "patch_ops": [],
+      "reason_summary": "The target mention 王子敬 is the speaker in the main text (王子敬語王孝伯曰...). Historian B correctly identifies the occurrence_role as speaker_reference, since 王子敬 is the subject performing the speech act 語 (said to). Historian A labels it scene_participant, which is less precise. Both agree on the identity (王獻之/王献之, courtesy name 子敬), and the canonical_hint difference (王獻之 vs 王献之) is a trivial traditional/simplified character variant, not a substantive disagreement. Historian B also adds a reasonable related_person relation to 王孝伯 (the addressee). The verb 語 clearly marks 王子敬 as the speaker, so B's occurrence_role is correct.",
+      "reviewed_fields": [],
+      "selected_record": {
+        "abstain": false,
+        "attribute_type": "",
+        "attribute_value": "",
+        "bearer_hint": "",
+        "confidence": "high",
+        "discourse": {
+          "addressee_hint": "王孝伯",
+          "antecedent_hint": "",
+          "self_reference_hint": "",
+          "speaker_hint": "王子敬"
+        },
+        "explanation": "王子敬 is the courtesy name (字) of 王献之, a famous Eastern Jin calligrapher and son of 王羲之. In the main text, 王子敬 speaks to 王孝伯 (王恭), commenting on 羊叔子 (羊祜). The surface form 王子敬 is a full-name style reference combining the surname 王 with the courtesy name 子敬. The speaker role is clear from the verb 語 (said to).",
+        "mention_id": "sfh1-mention-e5f55d112d1655f2898a4637",
+        "occurrence_role": "speaker_reference",
+        "reference_type": "full_name",
+        "referent": {
+          "canonical_hint": "王献之",
+          "confidence": "high",
+          "surface_form": "王献之"
+        },
+        "relations": [
+          {
+            "confidence": "high",
+            "evidence_ids": [
+              "sfh1-ev-02-yanyu-086-main"
+            ],
+            "relation": "related_person",
+            "target_hint": "王孝伯"
+          }
+        ],
+        "semantic_kind": "historical_person",
+        "supporting_evidence_ids": [
+          "sfh1-ev-02-yanyu-086-main"
+        ],
+        "surface": "王子敬"
+      },
+      "selected_record_source": "historian_b_exact_copy",
+      "stage": "adjudicator",
+      "story_id": "02-yanyu-086",
+      "supporting_evidence_ids": [
+        "sfh1-ev-02-yanyu-086-main"
+      ],
+      "surface": "王子敬",
+      "transport": {
+        "classification": "cache_hit",
+        "elapsed_seconds": 0,
+        "packet_hash": "fbdb8fdfa32fe70b22cacf24a0032ae6d8be279b4c8a4ecd330444da1052f637",
+        "parse_error": null,
+        "prompt_version": "sfh2-a2r-adjudicator-v2",
+        "raw_path": "data/generated/sfh2-a2r/live/sfh2-a2r-live-v1/raw-api/00009-adjudicator-regression-sfh2-a0-61a5efbe5b56d9d6d36a-attempt1.json",
+        "stage": "adjudicator",
+        "unit_id": "regression:sfh2-a0-61a5efbe5b56d9d6d36a",
+        "usage": {}
+      },
+      "valid": true
+    },
+    {
+      "candidate_only": true,
+      "canonical_write_back": false,
+      "case_id": "sfh2-a0-f95e01ce61bae698ae13",
+      "changed_fields": [],
+      "contract_status": "valid",
+      "decision": "select_a",
+      "errors": [],
+      "mention_id": "sfh1-mention-2355b0d312212c8f217e3809",
+      "patch_ops": [],
+      "reason_summary": "Both historians agree on the core facts: 太丘長 is the office title (magistrate of Taiqiu) held by 陳仲弓 (陳寔), with semantic_kind=office, reference_type=office_title, occurrence_role=person_attribute, attribute_type=office_held, attribute_value=太丘長, bearer_hint=陳仲弓. The only substantive disagreements are (1) the canonical_hint for the referent (A: 太丘縣長 vs B: 太丘長) and (2) the relation type (A: office_relation vs B: attribute_of) and supporting evidence IDs.\n\nHistorian A's canonical_hint \"太丘縣長\" is more precise/descriptive, correctly identifying the office as the magistrate (長) of 太丘 county (縣). Historian B's canonical_hint merely repeats the surface form \"太丘長\" without disambiguating the office. For the relation, A's \"office_relation\" is the more appropriate relation type for linking an office title to its office-holder, whereas B's \"attribute_of\" is more generic. Additionally, A's supporting evidence correctly cites only the main text where the office title actually appears (陳仲弓為太丘長時), while B includes the Liu annotation (寔/陳) which only confirms the person's identity, not the office. A's record is the more accurate and better-supported hypothesis.",
+      "reviewed_fields": [],
+      "selected_record": {
+        "abstain": false,
+        "attribute_type": "office_held",
+        "attribute_value": "太丘長",
+        "bearer_hint": "陳仲弓",
+        "confidence": "high",
+        "discourse": {
+          "addressee_hint": "",
+          "antecedent_hint": "陳仲弓",
+          "self_reference_hint": "",
+          "speaker_hint": ""
+        },
+        "explanation": "太丘長 is the office title of 陳仲弓 (陳寔), who served as the magistrate (長) of 太丘 county. The text opens with 陳仲弓為太丘長時, indicating that 太丘長 is the office held by 陳仲弓. The Liu annotation confirms 陳仲弓 is 陳寔. This is an office_title reference functioning as a person attribute describing the office held by the protagonist.",
+        "mention_id": "sfh1-mention-2355b0d312212c8f217e3809",
+        "occurrence_role": "person_attribute",
+        "reference_type": "office_title",
+        "referent": {
+          "canonical_hint": "太丘縣長",
+          "confidence": "high",
+          "surface_form": "太丘長"
+        },
+        "relations": [
+          {
+            "confidence": "high",
+            "evidence_ids": [
+              "sfh1-ev-03-zhengshi-001-main"
+            ],
+            "relation": "office_relation",
+            "target_hint": "陳仲弓"
+          }
+        ],
+        "semantic_kind": "office",
+        "supporting_evidence_ids": [
+          "sfh1-ev-03-zhengshi-001-main"
+        ],
+        "surface": "太丘長"
+      },
+      "selected_record_source": "historian_a_exact_copy",
+      "stage": "adjudicator",
+      "story_id": "03-zhengshi-001",
+      "supporting_evidence_ids": [
+        "sfh1-ev-03-zhengshi-001-main"
+      ],
+      "surface": "太丘長",
+      "transport": {
+        "classification": "cache_hit",
+        "elapsed_seconds": 0,
+        "packet_hash": "4274c9f0091ed8616fee0175732782becbe43fa9aaca364eb993594acdca9ad4",
+        "parse_error": null,
+        "prompt_version": "sfh2-a2r-adjudicator-v2",
+        "raw_path": "data/generated/sfh2-a2r/live/sfh2-a2r-live-v1/raw-api/00010-adjudicator-regression-sfh2-a0-f95e01ce61bae698ae13-attempt1.json",
+        "stage": "adjudicator",
+        "unit_id": "regression:sfh2-a0-f95e01ce61bae698ae13",
+        "usage": {}
+      },
+      "valid": true
+    },
+    {
+      "candidate_only": true,
+      "canonical_write_back": false,
+      "case_id": "sfh2-a0-d3cc1c86ed9f665a8a7c",
+      "changed_fields": [],
+      "contract_status": "valid",
+      "decision": "select_a",
+      "errors": [],
+      "mention_id": "sfh1-mention-39eb739efaa57533eb6016fa",
+      "patch_ops": [],
+      "reason_summary": "Both historians agree on the core identity: 王藍田 refers to 王述 (Wang Shu), who inherited the title 藍田侯 (Marquis of Lantian), confirmed by Liu annotations 002, 003, and 004. Both agree on semantic_kind (historical_person), reference_type (office_title), occurrence_role (scene_participant), and the same_person relation to 王述. The only substantive disagreements are in discourse fields and referent.surface_form. Historian A leaves discourse fields empty (appropriate for a narrative scene reference where 王藍田 is a third-person title reference to a scene participant, not a speaker/addressee/self-reference), while Historian B fills in addressee_hint=\"reader\" and speaker_hint=\"narrator\" without clear evidence. The surface_form in the referent should reflect the actual surface form 王藍田 (as A has it), not 王述 (as B has it), since the mention surface is 王藍田. Historian A's record is more accurate and conservative on these fields.",
+      "reviewed_fields": [],
+      "selected_record": {
+        "abstain": false,
+        "attribute_type": "",
+        "attribute_value": "",
+        "bearer_hint": "",
+        "confidence": "high",
+        "discourse": {
+          "addressee_hint": "",
+          "antecedent_hint": "",
+          "self_reference_hint": "",
+          "speaker_hint": ""
+        },
+        "explanation": "王藍田 refers to 王述 (Wang Shu), who was enfeoffed as 藍田侯 (Marquis of Lantian). The Liu annotations (sfh1-ev-04-wenxue-022-liu-annotation-002 and -003) identify 王述 with the courtesy name 懷祖 and note he inherited the title 藍田侯. The main text lists 王藍田 among the assembled worthies at 王丞相's gathering, and annotation 004 confirms 王濛 and 王述 were both recruited by 王導. The office title 藍田侯 is used as a reference to 王述.",
+        "mention_id": "sfh1-mention-39eb739efaa57533eb6016fa",
+        "occurrence_role": "scene_participant",
+        "reference_type": "office_title",
+        "referent": {
+          "canonical_hint": "王述",
+          "confidence": "high",
+          "surface_form": "王藍田"
+        },
+        "relations": [
+          {
+            "confidence": "high",
+            "evidence_ids": [
+              "sfh1-ev-04-wenxue-022-liu-annotation-002",
+              "sfh1-ev-04-wenxue-022-liu-annotation-003",
+              "sfh1-ev-04-wenxue-022-liu-annotation-004"
+            ],
+            "relation": "same_person",
+            "target_hint": "王述"
+          }
+        ],
+        "semantic_kind": "historical_person",
+        "supporting_evidence_ids": [
+          "sfh1-ev-04-wenxue-022-liu-annotation-002",
+          "sfh1-ev-04-wenxue-022-liu-annotation-003",
+          "sfh1-ev-04-wenxue-022-liu-annotation-004",
+          "sfh1-ev-04-wenxue-022-main"
+        ],
+        "surface": "王藍田"
+      },
+      "selected_record_source": "historian_a_exact_copy",
+      "stage": "adjudicator",
+      "story_id": "04-wenxue-022",
+      "supporting_evidence_ids": [
+        "sfh1-ev-04-wenxue-022-liu-annotation-002",
+        "sfh1-ev-04-wenxue-022-liu-annotation-003",
+        "sfh1-ev-04-wenxue-022-liu-annotation-004",
+        "sfh1-ev-04-wenxue-022-main"
+      ],
+      "surface": "王藍田",
+      "transport": {
+        "classification": "cache_hit",
+        "elapsed_seconds": 0,
+        "packet_hash": "6f8ce4b74715cc2742da54cb84f23c131653d2a1f1ac99a5bd9cf2ddbe709cd5",
+        "parse_error": null,
+        "prompt_version": "sfh2-a2r-adjudicator-v2",
+        "raw_path": "data/generated/sfh2-a2r/live/sfh2-a2r-live-v1/raw-api/00011-adjudicator-regression-sfh2-a0-d3cc1c86ed9f665a8a7c-attempt1.json",
+        "stage": "adjudicator",
+        "unit_id": "regression:sfh2-a0-d3cc1c86ed9f665a8a7c",
+        "usage": {}
+      },
+      "valid": true
+    },
+    {
+      "candidate_only": true,
+      "canonical_write_back": false,
+      "case_id": "sfh2-a0-4f2248ce73c927f84135",
+      "changed_fields": [],
+      "contract_status": "valid",
+      "decision": "select_b",
+      "errors": [],
+      "mention_id": "sfh1-mention-e811bf3cd95d7cfdc1162c15",
+      "patch_ops": [],
+      "reason_summary": "Historian A produced no semantic record (contract invalid, semantic record null). Historian B produced a valid, well-grounded record. The target span 阮光禄 is correctly identified as an office-title reference (光禄大夫) to 阮裕, supported by the Liu annotation (sfh1-ev-04-wenxue-024-liu-annotation-003) which cites 中興書 and mentions 裕 (Ruan Yu's personal name). The main text (sfh1-ev-04-wenxue-024-main) describes 阮光禄 expounding the 白馬論 to the young 謝安, matching the known anecdote about 阮裕. Historian B's record is historically accurate and fully grounded in the supplied evidence.",
+      "reviewed_fields": [],
+      "selected_record": {
+        "abstain": false,
+        "attribute_type": "",
+        "attribute_value": "",
+        "bearer_hint": "",
+        "confidence": "high",
+        "discourse": {
+          "addressee_hint": "reader",
+          "antecedent_hint": "阮光禄 refers to 阮裕, the person who expounded the 白馬論 to 謝安",
+          "self_reference_hint": "",
+          "speaker_hint": "narrator"
+        },
+        "explanation": "阮光禄 is an office-title reference. 光禄 (Guanglu) refers to the office of 光禄大夫 (Guanglu Daifu). The Liu annotation (sfh1-ev-04-wenxue-024-liu-annotation-003) cites 中興書 and mentions 裕, which is the personal name 阮裕 (Ruan Yu). 阮裕 held the office of 光禄大夫, hence the title 阮光禄. The main text describes him expounding the 白馬論 (White Horse Discourse) to the young 謝安. The referent is 阮裕, a Jin-dynasty figure known for this anecdote.",
+        "mention_id": "sfh1-mention-e811bf3cd95d7cfdc1162c15",
+        "occurrence_role": "scene_participant",
+        "reference_type": "office_title",
+        "referent": {
+          "canonical_hint": "阮裕",
+          "confidence": "high",
+          "surface_form": "阮裕"
+        },
+        "relations": [
+          {
+            "confidence": "high",
+            "evidence_ids": [
+              "sfh1-ev-04-wenxue-024-main"
+            ],
+            "relation": "related_person",
+            "target_hint": "謝安"
+          }
+        ],
+        "semantic_kind": "historical_person",
+        "supporting_evidence_ids": [
+          "sfh1-ev-04-wenxue-024-liu-annotation-003",
+          "sfh1-ev-04-wenxue-024-main"
+        ],
+        "surface": "阮光禄"
+      },
+      "selected_record_source": "historian_b_exact_copy",
+      "stage": "adjudicator",
+      "story_id": "04-wenxue-024",
+      "supporting_evidence_ids": [
+        "sfh1-ev-04-wenxue-024-liu-annotation-003",
+        "sfh1-ev-04-wenxue-024-main"
+      ],
+      "surface": "阮光禄",
+      "transport": {
+        "classification": "cache_hit",
+        "elapsed_seconds": 0,
+        "packet_hash": "656338011ebf0e46b561975ebbb636ff55a237dc3832c73cc7f582d4590a1209",
+        "parse_error": null,
+        "prompt_version": "sfh2-a2r-adjudicator-v2",
+        "raw_path": "data/generated/sfh2-a2r/live/sfh2-a2r-live-v1/raw-api/00012-adjudicator-regression-sfh2-a0-4f2248ce73c927f84135-attempt1.json",
+        "stage": "adjudicator",
+        "unit_id": "regression:sfh2-a0-4f2248ce73c927f84135",
+        "usage": {}
+      },
+      "valid": true
+    },
+    {
+      "candidate_only": true,
+      "canonical_write_back": false,
+      "case_id": "sfh2-a0-689a835b331402ae9189",
+      "changed_fields": [],
+      "contract_status": "valid",
+      "decision": "select_a",
+      "errors": [],
+      "mention_id": "sfh1-mention-138b0f6ee44b290d2149299e",
+      "patch_ops": [],
+      "reason_summary": "Both historians agree on the core historical identity: the target '滔' refers to 伏滔 (Fu Tao), confirmed by the full name '伏滔' appearing later in the same annotation (sfh1-ev-04-wenxue-097-liu-annotation-003, mention bee89791c4f0450644273eee). Both records agree on semantic_kind, reference_type, occurrence_role, referent, relations, and supporting evidence. The only disagreement is in discourse fields: Historian A provides addressee_hint '温' and speaker_hint '宏', while Historian B leaves these empty. The context '滔宻以啓温' (Tao secretly reported to 温) and '宏語衆云' (宏 told the crowd) supports that 温 is the addressee of 滔's report and 宏 is the speaker of the reported speech. Historian A's discourse annotations are more complete and consistent with the evidence.",
+      "reviewed_fields": [],
+      "selected_record": {
+        "abstain": false,
+        "attribute_type": "",
+        "attribute_value": "",
+        "bearer_hint": "",
+        "confidence": "high",
+        "discourse": {
+          "addressee_hint": "温",
+          "antecedent_hint": "伏滔",
+          "self_reference_hint": "",
+          "speaker_hint": "宏"
+        },
+        "explanation": "The target '滔' in annotation-003 is a personal name referring to 伏滔 (Fu Tao), who is explicitly named in full later in the same annotation (sfh1-ev-04-wenxue-097-liu-annotation-003, mention bee89791c4f0450644273eee '伏滔'). The context describes 伏滔 being in 温's (桓温's) office and secretly reporting 宏's words to 温, matching the narrative.",
+        "mention_id": "sfh1-mention-138b0f6ee44b290d2149299e",
+        "occurrence_role": "scene_participant",
+        "reference_type": "personal_name",
+        "referent": {
+          "canonical_hint": "伏滔",
+          "confidence": "high",
+          "surface_form": "伏滔"
+        },
+        "relations": [
+          {
+            "confidence": "high",
+            "evidence_ids": [
+              "sfh1-ev-04-wenxue-097-liu-annotation-003"
+            ],
+            "relation": "same_person",
+            "target_hint": "伏滔"
+          }
+        ],
+        "semantic_kind": "historical_person",
+        "supporting_evidence_ids": [
+          "sfh1-ev-04-wenxue-097-liu-annotation-003"
+        ],
+        "surface": "滔"
+      },
+      "selected_record_source": "historian_a_exact_copy",
+      "stage": "adjudicator",
+      "story_id": "04-wenxue-097",
+      "supporting_evidence_ids": [
+        "sfh1-ev-04-wenxue-097-liu-annotation-003"
+      ],
+      "surface": "滔",
+      "transport": {
+        "classification": "cache_hit",
+        "elapsed_seconds": 0,
+        "packet_hash": "7be7ca53eaf5208add7a38527ef5c3b7d390c987e0a230c705ac4fb4e231fb04",
+        "parse_error": null,
+        "prompt_version": "sfh2-a2r-adjudicator-v2",
+        "raw_path": "data/generated/sfh2-a2r/live/sfh2-a2r-live-v1/raw-api/00013-adjudicator-regression-sfh2-a0-689a835b331402ae9189-attempt1.json",
+        "stage": "adjudicator",
+        "unit_id": "regression:sfh2-a0-689a835b331402ae9189",
+        "usage": {}
+      },
+      "valid": true
+    },
+    {
+      "candidate_only": true,
+      "canonical_write_back": false,
+      "case_id": "sfh2-a0-dc30ea9ee3f5ab37afaf",
+      "changed_fields": [],
+      "contract_status": "valid",
+      "decision": "select_b",
+      "errors": [],
+      "mention_id": "sfh1-mention-f9de8f01ab8571370ea87331",
+      "patch_ops": [],
+      "reason_summary": "Both historians agree on the core identity: 王師 refers to the Jin dynasty imperial/royal army (晉朝官軍), a collective reference, not a specific individual. The substantive disagreement is in occurrence_role and discourse fields. Historian B assigns occurrence_role \"scene_reference\" and provides an antecedent_hint explaining that 王師敗績 refers to the Jin court's official army being defeated in the 蘇峻 rebellion. Historian A assigns \"collective_reference\" and sets speaker_hint to 晉陽秋. The evidence (sfh1-ev-05-fangzheng-034-liu-annotation-005) shows 王師敗績 within the 晉陽秋 quotation describing the imperial forces' defeat. The mention is a descriptive reference to the collective imperial army appearing in the scene of the rebellion narrative; \"scene_reference\" is the more appropriate occurrence_role since 王師 is a participant in the narrated scene rather than a citation/speaker reference. Historian B's antecedent_hint correctly contextualizes the referent, and B's higher confidence is justified given the clear context of 蘇峻之亂. Historian A's speaker_hint of 晉陽秋 is misplaced since 晉陽秋 is the source work being quoted, not the speaker of the mention.",
+      "reviewed_fields": [],
+      "selected_record": {
+        "abstain": false,
+        "attribute_type": "",
+        "attribute_value": "",
+        "bearer_hint": "",
+        "confidence": "high",
+        "discourse": {
+          "addressee_hint": "",
+          "antecedent_hint": "王師敗績 — 指晉朝朝廷的官軍在蘇峻之亂中戰敗",
+          "self_reference_hint": "",
+          "speaker_hint": ""
+        },
+        "explanation": "「王師」出現在劉孝標注引《晉陽秋》的片段「王師敗績」中，指晉朝朝廷（王室）的軍隊。此處語境為蘇峻之亂，蘇峻率衆二萬渡江至蔣山，朝廷官軍戰敗。王師為集體性指稱，指晉朝官軍，非特定個人。",
+        "mention_id": "sfh1-mention-f9de8f01ab8571370ea87331",
+        "occurrence_role": "scene_reference",
+        "reference_type": "descriptive_reference",
+        "referent": {
+          "canonical_hint": "晉朝官軍",
+          "confidence": "high",
+          "surface_form": "王師"
+        },
+        "relations": [],
+        "semantic_kind": "collective",
+        "supporting_evidence_ids": [
+          "sfh1-ev-05-fangzheng-034-liu-annotation-005"
+        ],
+        "surface": "王師"
+      },
+      "selected_record_source": "historian_b_exact_copy",
+      "stage": "adjudicator",
+      "story_id": "05-fangzheng-034",
+      "supporting_evidence_ids": [
+        "sfh1-ev-05-fangzheng-034-liu-annotation-004",
+        "sfh1-ev-05-fangzheng-034-liu-annotation-005"
+      ],
+      "surface": "王師",
+      "transport": {
+        "classification": "cache_hit",
+        "elapsed_seconds": 0,
+        "packet_hash": "e722c8236a58acea2aa618a219f59a6c7a3dc978a3fd6bb3a57fe13adaf47b39",
+        "parse_error": null,
+        "prompt_version": "sfh2-a2r-adjudicator-v2",
+        "raw_path": "data/generated/sfh2-a2r/live/sfh2-a2r-live-v1/raw-api/00014-adjudicator-regression-sfh2-a0-dc30ea9ee3f5ab37afaf-attempt1.json",
+        "stage": "adjudicator",
+        "unit_id": "regression:sfh2-a0-dc30ea9ee3f5ab37afaf",
+        "usage": {}
+      },
+      "valid": true
+    },
+    {
+      "candidate_only": true,
+      "canonical_write_back": false,
+      "case_id": "sfh2-a0-66a8f016c30b906f4c5d",
+      "changed_fields": [],
+      "contract_status": "valid",
+      "decision": "select_b",
+      "errors": [],
+      "mention_id": "sfh1-mention-bf3b743343dab627f8934ab5",
+      "patch_ops": [],
+      "reason_summary": "Both historians agree on the core identity: 鍾士季 is the courtesy name of 鍾會, confirmed by the Liu annotation glossing 鍾會異之. Historian B additionally captures the antecedent relation to the subsequent 鍾 in the main text (鍾曰...), which is a legitimate same-person reference to the same 鍾會. Historian A omits this antecedent relation. The main text clearly shows 鍾士季 being visited, then 客 asks 鍾 (the same person) about the two youths. Historian B's additional relation to 鍾 is well-supported by the main text evidence and does not introduce ambiguity—both relations point to the same person 鍾會. The formal flag on B is a review-level note about multiple relation targets, but both targets are the same historical person, so this is not a substantive error. Historian B's record is more complete and accurate.",
+      "reviewed_fields": [],
+      "selected_record": {
+        "abstain": false,
+        "attribute_type": "",
+        "attribute_value": "",
+        "bearer_hint": "",
+        "confidence": "high",
+        "discourse": {
+          "addressee_hint": "",
+          "antecedent_hint": "鍾士季 is the person whom 王濬沖 and 裴叔則 visit; the following 鍾 refers to the same person",
+          "self_reference_hint": "",
+          "speaker_hint": ""
+        },
+        "explanation": "鍾士季 is the courtesy name (字) of 鍾會 (Zhong Hui), a prominent Wei/Jin figure. The main text describes 王濬沖 (王戎) and 裴叔則 (裴楷) visiting 鍾士季 as youths. The Liu annotation explicitly glosses 鍾會異之, confirming that 鍾士季 refers to 鍾會. The subsequent 鍾 in the main text refers to the same person.",
+        "mention_id": "sfh1-mention-bf3b743343dab627f8934ab5",
+        "occurrence_role": "scene_participant",
+        "reference_type": "courtesy_name",
+        "referent": {
+          "canonical_hint": "鍾會",
+          "confidence": "high",
+          "surface_form": "鍾會"
+        },
+        "relations": [
+          {
+            "confidence": "high",
+            "evidence_ids": [
+              "sfh1-ev-08-shangyu-006-main"
+            ],
+            "relation": "same_person",
+            "target_hint": "鍾"
+          },
+          {
+            "confidence": "high",
+            "evidence_ids": [
+              "sfh1-ev-08-shangyu-006-liu-annotation-002"
+            ],
+            "relation": "same_person",
+            "target_hint": "鍾會"
+          }
+        ],
+        "semantic_kind": "historical_person",
+        "supporting_evidence_ids": [
+          "sfh1-ev-08-shangyu-006-liu-annotation-002",
+          "sfh1-ev-08-shangyu-006-main"
+        ],
+        "surface": "鍾士季"
+      },
+      "selected_record_source": "historian_b_exact_copy",
+      "stage": "adjudicator",
+      "story_id": "08-shangyu-006",
+      "supporting_evidence_ids": [
+        "sfh1-ev-08-shangyu-006-liu-annotation-002",
+        "sfh1-ev-08-shangyu-006-main"
+      ],
+      "surface": "鍾士季",
+      "transport": {
+        "classification": "cache_hit",
+        "elapsed_seconds": 0,
+        "packet_hash": "99214c3fde8352fc5b4b2569e617f1cc74ba4d28047f91b1e796e2f6bb8d1ac1",
+        "parse_error": null,
+        "prompt_version": "sfh2-a2r-adjudicator-v2",
+        "raw_path": "data/generated/sfh2-a2r/live/sfh2-a2r-live-v1/raw-api/00015-adjudicator-regression-sfh2-a0-66a8f016c30b906f4c5d-attempt1.json",
+        "stage": "adjudicator",
+        "unit_id": "regression:sfh2-a0-66a8f016c30b906f4c5d",
+        "usage": {}
+      },
+      "valid": true
+    },
+    {
+      "candidate_only": true,
+      "canonical_write_back": false,
+      "case_id": "sfh2-a0-83cd6e6b409fd3ecc813",
+      "changed_fields": [],
+      "contract_status": "valid",
+      "decision": "select_b",
+      "errors": [],
+      "mention_id": "sfh1-mention-78eb7b172e33ad26fcd396e8",
+      "patch_ops": [],
+      "reason_summary": "Both historians agree on the core identity: 嚴仲弼 is the courtesy name (字) of 嚴隱, a historical person from Wu, with reference_type courtesy_name, semantic_kind historical_person, occurrence_role scene_participant, and speaker 蔡洪. The only substantive disagreements are in discourse.addressee_hint, discourse.antecedent_hint, referent.canonical_hint, and relations.\n\nHistorian B's addressee_hint \"秀才吳\" is more accurate than A's \"問者（秀才吳舊姓者）\". The main text opens \"有問秀才吳舊姓何如\" — the questioner asks about the old surnames of Wu, and the addressee is the 秀才 (蔡洪) from Wu. The addressee is the 秀才, not the questioner. Historian A mislabels the addressee as the questioner, which is incorrect.\n\nHistorian B's antecedent_hint \"嚴仲弼\" correctly identifies the antecedent as the target span itself (the courtesy name being discussed). Historian A leaves antecedent_hint empty.\n\nFor referent.canonical_hint, B uses \"嚴隱\" (the plain name), which matches the validated local mention sfh1-mention-e19933337b24eac91a6f3f4b (嚴隱) and the annotation text \"嚴隱字仲弼\". A's \"嚴隱字仲弼\" redundantly includes the courtesy name in the canonical hint, which is less clean.\n\nFor relations, B's same_person relation targets \"嚴隱\" with evidence from the annotation, which is correct. A's relation adds the main text as evidence and uses target \"嚴隱\" — both are acceptable, but B's is cleaner and consistent with the validated mention.\n\nHistorian B is more accurate on all substantive fields.",
+      "reviewed_fields": [],
+      "selected_record": {
+        "abstain": false,
+        "attribute_type": "",
+        "attribute_value": "",
+        "bearer_hint": "",
+        "confidence": "high",
+        "discourse": {
+          "addressee_hint": "秀才吳",
+          "antecedent_hint": "嚴仲弼",
+          "self_reference_hint": "",
+          "speaker_hint": "蔡洪"
+        },
+        "explanation": "The target span 嚴仲弼 appears in the main text of Shishuo Xinyu entry 08-shangyu-020, where the speaker (蔡洪, the 秀才 from Wu) lists notable men of Wu in response to a question about the old surnames of Wu. The Liu Xiaobiao annotation (sfh1-ev-08-shangyu-020-liu-annotation-005) explicitly identifies 仲弼 as the courtesy name of 嚴隱, a man of Wu commandery, stating '仲弼吳郡人禀氣清純思度淵偉吳朝舉賢良宛陵/郎今歸在家誠理物之至德清選之高望也'. This directly matches the main text's description of 嚴仲弼 as '理物之至德清選之高望'. Thus 嚴仲弼 is the courtesy name (字) of 嚴隱, a historical person from Wu. The validated local mention sfh1-mention-e19933337b24eac91a6f3f4b (嚴隱) confirms this identification.",
+        "mention_id": "sfh1-mention-78eb7b172e33ad26fcd396e8",
+        "occurrence_role": "scene_participant",
+        "reference_type": "courtesy_name",
+        "referent": {
+          "canonical_hint": "嚴隱",
+          "confidence": "high",
+          "surface_form": "嚴隱"
+        },
+        "relations": [
+          {
+            "confidence": "high",
+            "evidence_ids": [
+              "sfh1-ev-08-shangyu-020-liu-annotation-005"
+            ],
+            "relation": "same_person",
+            "target_hint": "嚴隱"
+          }
+        ],
+        "semantic_kind": "historical_person",
+        "supporting_evidence_ids": [
+          "sfh1-ev-08-shangyu-020-liu-annotation-005",
+          "sfh1-ev-08-shangyu-020-main"
+        ],
+        "surface": "嚴仲弼"
+      },
+      "selected_record_source": "historian_b_exact_copy",
+      "stage": "adjudicator",
+      "story_id": "08-shangyu-020",
+      "supporting_evidence_ids": [
+        "sfh1-ev-08-shangyu-020-liu-annotation-005",
+        "sfh1-ev-08-shangyu-020-main"
+      ],
+      "surface": "嚴仲弼",
+      "transport": {
+        "classification": "cache_hit",
+        "elapsed_seconds": 0,
+        "packet_hash": "e1e2653efa89712af0e888a60c60ef518b5f67b59bc9e1b807aee58b70a0e6b9",
+        "parse_error": null,
+        "prompt_version": "sfh2-a2r-adjudicator-v2",
+        "raw_path": "data/generated/sfh2-a2r/live/sfh2-a2r-live-v1/raw-api/00016-adjudicator-regression-sfh2-a0-83cd6e6b409fd3ecc813-attempt1.json",
+        "stage": "adjudicator",
+        "unit_id": "regression:sfh2-a0-83cd6e6b409fd3ecc813",
+        "usage": {}
+      },
+      "valid": true
+    },
+    {
+      "candidate_only": true,
+      "canonical_write_back": false,
+      "case_id": "sfh2-a0-a82c0da64948f9968abf",
+      "changed_fields": [],
+      "contract_status": "valid",
+      "decision": "select_b",
+      "errors": [],
+      "mention_id": "sfh1-mention-a749538993d422118cee091e",
+      "patch_ops": [],
+      "reason_summary": "The target '吾' is a first-person pronoun spoken by 魏武 (Cao Cao). Historian B correctly identifies the occurrence_role as 'speaker_reference' (the pronoun is the speaker referring to himself), sets discourse.self_reference_hint to '吾' (the actual self-referential pronoun form), and includes only the 'same_person' relation to 魏武. Historian A incorrectly labels the occurrence_role as 'scene_participant', sets self_reference_hint to '魏武' (the antecedent rather than the self-reference form), and adds a spurious 'related_person' relation to 楊脩, who is the addressee (卿), not a relation of the pronoun '吾'. Historian B's record is the accurate semantic hypothesis.",
+      "reviewed_fields": [],
+      "selected_record": {
+        "abstain": false,
+        "attribute_type": "",
+        "attribute_value": "",
+        "bearer_hint": "",
+        "confidence": "high",
+        "discourse": {
+          "addressee_hint": "楊脩",
+          "antecedent_hint": "魏武",
+          "self_reference_hint": "吾",
+          "speaker_hint": "魏武"
+        },
+        "explanation": "The target '吾' is a first-person pronoun in the main text. In the passage, 魏武 (Cao Cao) says '吾巳得' (I have got it) and later '我才不及卿乃覺三十里' (my talent is not as good as yours, I realized thirty li later). The pronoun '吾' is used by 魏武 speaking about himself, referring to Cao Cao. The antecedent is 魏武, who is the speaker throughout this passage.",
+        "mention_id": "sfh1-mention-a749538993d422118cee091e",
+        "occurrence_role": "speaker_reference",
+        "reference_type": "pronoun_reference",
+        "referent": {
+          "canonical_hint": "曹操",
+          "confidence": "high",
+          "surface_form": "魏武"
+        },
+        "relations": [
+          {
+            "confidence": "high",
+            "evidence_ids": [
+              "sfh1-ev-11-jiewu-003-main"
+            ],
+            "relation": "same_person",
+            "target_hint": "魏武"
+          }
+        ],
+        "semantic_kind": "historical_person",
+        "supporting_evidence_ids": [
+          "sfh1-ev-11-jiewu-003-main"
+        ],
+        "surface": "吾"
+      },
+      "selected_record_source": "historian_b_exact_copy",
+      "stage": "adjudicator",
+      "story_id": "11-jiewu-003",
+      "supporting_evidence_ids": [
+        "sfh1-ev-11-jiewu-003-main"
+      ],
+      "surface": "吾",
+      "transport": {
+        "classification": "cache_hit",
+        "elapsed_seconds": 0,
+        "packet_hash": "d300e7b202b68e888d7fae4edd9a65df9f7cf242bcb3a404b548cfeaced2b43f",
+        "parse_error": null,
+        "prompt_version": "sfh2-a2r-adjudicator-v2",
+        "raw_path": "data/generated/sfh2-a2r/live/sfh2-a2r-live-v1/raw-api/00017-adjudicator-regression-sfh2-a0-a82c0da64948f9968abf-attempt1.json",
+        "stage": "adjudicator",
+        "unit_id": "regression:sfh2-a0-a82c0da64948f9968abf",
+        "usage": {}
+      },
+      "valid": true
+    },
+    {
+      "candidate_only": true,
+      "canonical_write_back": false,
+      "case_id": "sfh2-a0-9c3cf1a07bee160c28bf",
+      "changed_fields": [],
+      "contract_status": "valid",
+      "decision": "select_a",
+      "errors": [],
+      "mention_id": "sfh1-mention-ede9f37eb144abf47dc9728c",
+      "patch_ops": [],
+      "reason_summary": "Both historians agree on the core semantic content: the span 字景真 is a courtesy-name attribute (attribute_type=courtesy_name, attribute_value=景真) borne by 桓亮 (bearer_hint=桓亮), with high confidence, referent 桓亮, and supporting evidence sfh1-ev-19-xianyuan-032-liu-annotation-003. The only disagreements are in discourse hints and the relation type. Historian A's relation is \"attribute_of\" targeting 桓亮, which is the correct relation for a courtesy-name attribute reference (the courtesy name is an attribute of the person 桓亮). Historian B instead used \"same_person\", which is semantically inappropriate here since the target span is an attribute (courtesy name), not a co-referring person mention. On discourse, Historian A leaves addressee_hint and speaker_hint empty, which is appropriate for an annotation text that is not direct speech; Historian B's \"reader\" addressee and \"Liu Xiaobiao (annotator)\" speaker hints are speculative and not supported by the evidence. Historian A's record is therefore the more accurate one.",
+      "reviewed_fields": [],
+      "selected_record": {
+        "abstain": false,
+        "attribute_type": "courtesy_name",
+        "attribute_value": "景真",
+        "bearer_hint": "桓亮",
+        "confidence": "high",
+        "discourse": {
+          "addressee_hint": "",
+          "antecedent_hint": "桓亮",
+          "self_reference_hint": "",
+          "speaker_hint": ""
+        },
+        "explanation": "The target span 字景真 appears in Liu Xiaobiao's annotation (sfh1-ev-19-xianyuan-032-liu-annotation-003), which reads 續晉陽秋曰桓亮字景真. The courtesy name 景真 is attributed to 桓亮 (Huan Liang), who is identified in the same annotation as the grandson of 大司馬温 (桓温) and son of 濟. The main text also refers to 桓景真 (Huan Jingzhen) as the person who killed 韓繪之. Thus 字景真 is a courtesy-name attribute of 桓亮.",
+        "mention_id": "sfh1-mention-ede9f37eb144abf47dc9728c",
+        "occurrence_role": "person_attribute",
+        "reference_type": "courtesy_name",
+        "referent": {
+          "canonical_hint": "桓亮",
+          "confidence": "high",
+          "surface_form": "桓亮"
+        },
+        "relations": [
+          {
+            "confidence": "high",
+            "evidence_ids": [
+              "sfh1-ev-19-xianyuan-032-liu-annotation-003"
+            ],
+            "relation": "attribute_of",
+            "target_hint": "桓亮"
+          }
+        ],
+        "semantic_kind": "person_attribute",
+        "supporting_evidence_ids": [
+          "sfh1-ev-19-xianyuan-032-liu-annotation-003"
+        ],
+        "surface": "字景真"
+      },
+      "selected_record_source": "historian_a_exact_copy",
+      "stage": "adjudicator",
+      "story_id": "19-xianyuan-032",
+      "supporting_evidence_ids": [
+        "sfh1-ev-19-xianyuan-032-liu-annotation-003"
+      ],
+      "surface": "字景真",
+      "transport": {
+        "classification": "cache_hit",
+        "elapsed_seconds": 0,
+        "packet_hash": "140ac431fddcc1f878470839aef6b61937c7051b6b10211d7468ecce0044635f",
+        "parse_error": null,
+        "prompt_version": "sfh2-a2r-adjudicator-v2",
+        "raw_path": "data/generated/sfh2-a2r/live/sfh2-a2r-live-v1/raw-api/00018-adjudicator-regression-sfh2-a0-9c3cf1a07bee160c28bf-attempt1.json",
+        "stage": "adjudicator",
+        "unit_id": "regression:sfh2-a0-9c3cf1a07bee160c28bf",
+        "usage": {}
+      },
+      "valid": true
+    },
+    {
+      "candidate_only": true,
+      "canonical_write_back": false,
+      "case_id": "sfh2-a0-539ca60862d7516128dc",
+      "changed_fields": [],
+      "contract_status": "valid",
+      "decision": "select_b",
+      "errors": [],
+      "mention_id": "sfh1-mention-08e430a342d78cb7fd17db0e",
+      "patch_ops": [],
+      "reason_summary": "The pronoun 卿 is a second-person pronoun spoken by 温太真 (Wen Qiao) addressing 庾亮. The text states 温太真 '大喚亮曰卿可贖我' — he calls out to 庾亮 saying 'you can ransom me.' The 卿 directly addresses 庾亮, who is the addressee of the speech. Historian B correctly assigns occurrence_role as 'addressee_reference' (the pronoun refers to the addressee of the speech act), whereas Historian A's 'scene_participant' is less precise. Both agree on the referent (庾亮), speaker (温太真), and antecedent. Historian B's relations array is empty, which is appropriate since the pronoun's referent is already captured in the referent field and no separate same_person relation to 庾亮 is needed for a pronoun reference. Historian A's same_person relation to 庾亮 is redundant given the referent field already identifies 庾亮. Historian B's record is more accurate.",
+      "reviewed_fields": [],
+      "selected_record": {
+        "abstain": false,
+        "attribute_type": "",
+        "attribute_value": "",
+        "bearer_hint": "",
+        "confidence": "high",
+        "discourse": {
+          "addressee_hint": "庾亮",
+          "antecedent_hint": "庾亮",
+          "self_reference_hint": "",
+          "speaker_hint": "温太真"
+        },
+        "explanation": "The target 卿 is a second-person pronoun spoken by 温太真 (温嶠) addressing 庾亮. The main text states 温太真 was gambling and lost, and '與庾亮善於舫中大喚亮曰卿可贖我' — he called out to 庾亮 saying 'you can redeem me.' The pronoun 卿 directly addresses 庾亮, who is the addressee of 温太真's speech. The antecedent is clearly 庾亮, mentioned immediately prior in the same sentence.",
+        "mention_id": "sfh1-mention-08e430a342d78cb7fd17db0e",
+        "occurrence_role": "addressee_reference",
+        "reference_type": "pronoun_reference",
+        "referent": {
+          "canonical_hint": "庾亮",
+          "confidence": "high",
+          "surface_form": "庾亮"
+        },
+        "relations": [],
+        "semantic_kind": "historical_person",
+        "supporting_evidence_ids": [
+          "sfh1-ev-23-rendan-026-main"
+        ],
+        "surface": "卿"
+      },
+      "selected_record_source": "historian_b_exact_copy",
+      "stage": "adjudicator",
+      "story_id": "23-rendan-026",
+      "supporting_evidence_ids": [
+        "sfh1-ev-23-rendan-026-main"
+      ],
+      "surface": "卿",
+      "transport": {
+        "classification": "cache_hit",
+        "elapsed_seconds": 0,
+        "packet_hash": "74b21129777f1c922736cfd5c4c97c1c3c81f7e2730790fa7f770deed158c527",
+        "parse_error": null,
+        "prompt_version": "sfh2-a2r-adjudicator-v2",
+        "raw_path": "data/generated/sfh2-a2r/live/sfh2-a2r-live-v1/raw-api/00019-adjudicator-regression-sfh2-a0-539ca60862d7516128dc-attempt1.json",
+        "stage": "adjudicator",
+        "unit_id": "regression:sfh2-a0-539ca60862d7516128dc",
+        "usage": {}
+      },
+      "valid": true
+    },
+    {
+      "candidate_only": true,
+      "canonical_write_back": false,
+      "case_id": "sfh2-a0-e22d35b6255de688982e",
+      "changed_fields": [],
+      "contract_status": "valid",
+      "decision": "select_a",
+      "errors": [],
+      "mention_id": "sfh1-mention-4aa8f1c273fd000f7edd3be4",
+      "patch_ops": [],
+      "reason_summary": "Historian B's semantic record is null due to a provider_response_parse_failure, making it contract-invalid with a hard evidence_grounding_failure flag. Historian A's record is valid, with no contract errors or formal flags. The target pronoun 之 (positions 49-50) refers to the person who came to Zhang Xuan's boat with fish, identified as 劉遺民 (Liu Yimin), whom the Liu annotation (sfh1-ev-23-rendan-038-liu-annotation-002) confirms as 劉驎之 (Liu Linzhi). Historian A's identification is well-grounded in the supplied evidence, correctly setting the antecedent as 一人 and the referent as 劉驎之 with a same_person relation to 劉遺民. Since Historian B provides no usable record, Historian A is the only valid hypothesis and is selected.",
+      "reviewed_fields": [],
+      "selected_record": {
+        "abstain": false,
+        "attribute_type": "",
+        "attribute_value": "",
+        "bearer_hint": "",
+        "confidence": "high",
+        "discourse": {
+          "addressee_hint": "",
+          "antecedent_hint": "一人",
+          "self_reference_hint": "",
+          "speaker_hint": "張玄"
+        },
+        "explanation": "The pronoun 之 at position 49-50 refers to the person who came to Zhang Xuan's boat with fish — the one identified as 劉遺民 (Liu Yimin), who is annotated as 劉驎之 (Liu Linzhi) in the Liu annotation. The antecedent is 一人 (the person) mentioned earlier in the text, and the Liu annotation confirms 劉遺民 = 劉驎之.",
+        "mention_id": "sfh1-mention-4aa8f1c273fd000f7edd3be4",
+        "occurrence_role": "scene_participant",
+        "reference_type": "pronoun_reference",
+        "referent": {
+          "canonical_hint": "劉驎之",
+          "confidence": "high",
+          "surface_form": "劉遺民"
+        },
+        "relations": [
+          {
+            "confidence": "high",
+            "evidence_ids": [
+              "sfh1-ev-23-rendan-038-liu-annotation-002",
+              "sfh1-ev-23-rendan-038-main"
+            ],
+            "relation": "same_person",
+            "target_hint": "劉驎之"
+          }
+        ],
+        "semantic_kind": "historical_person",
+        "supporting_evidence_ids": [
+          "sfh1-ev-23-rendan-038-liu-annotation-002",
+          "sfh1-ev-23-rendan-038-main"
+        ],
+        "surface": "之"
+      },
+      "selected_record_source": "historian_a_exact_copy",
+      "stage": "adjudicator",
+      "story_id": "23-rendan-038",
+      "supporting_evidence_ids": [
+        "sfh1-ev-23-rendan-038-liu-annotation-002",
+        "sfh1-ev-23-rendan-038-main"
+      ],
+      "surface": "之",
+      "transport": {
+        "classification": "cache_hit",
+        "elapsed_seconds": 0,
+        "packet_hash": "42dde7a9e7d497b95a618c3037cdadaea2a954b625fb3404d1f699dbbc6efaf3",
+        "parse_error": null,
+        "prompt_version": "sfh2-a2r-adjudicator-v2",
+        "raw_path": "data/generated/sfh2-a2r/live/sfh2-a2r-live-v1/raw-api/00020-adjudicator-regression-sfh2-a0-e22d35b6255de688982e-attempt1.json",
+        "stage": "adjudicator",
+        "unit_id": "regression:sfh2-a0-e22d35b6255de688982e",
+        "usage": {}
+      },
+      "valid": true
+    },
+    {
+      "candidate_only": true,
+      "canonical_write_back": false,
+      "case_id": "sfh2-a0-72b61e53dc728525f585",
+      "changed_fields": [],
+      "contract_status": "valid",
+      "decision": "select_a",
+      "errors": [],
+      "mention_id": "sfh1-mention-16b0e1cf7dd4e5a7bba31ca9",
+      "patch_ops": [],
+      "reason_summary": "Historian B's semantic record is null due to a provider_response_parse_failure, making it contract-invalid and unusable. Historian A's record is valid and well-grounded: 宣王 is the posthumous ruler title of 司馬懿 (Sima Yi), founder of the Jin dynasty. The main text (sfh1-ev-33-youhui-007-main) has 王導 recounting 宣王's founding of the dynasty (創業之始), and the Liu annotation (sfh1-ev-33-youhui-007-liu-annotation-001) explicitly glosses 宣王's actions as 誅曹爽任蔣濟, confirming the referent is Sima Yi. The discourse fields (speaker 王導, addressee 明帝) are correctly identified. The relations to 文王 (Sima Zhao, kinship) and 高貴鄉公 (related person) are reasonable given the text's narrative. Historian A's record is historically accurate and fully supported by the supplied evidence.",
+      "reviewed_fields": [],
+      "selected_record": {
+        "abstain": false,
+        "attribute_type": "",
+        "attribute_value": "",
+        "bearer_hint": "",
+        "confidence": "high",
+        "discourse": {
+          "addressee_hint": "明帝",
+          "antecedent_hint": "",
+          "self_reference_hint": "",
+          "speaker_hint": "王導"
+        },
+        "explanation": "宣王 is the posthumous title (ruler title) of 司馬懿 (Sima Yi), founder of the Jin dynasty. The main text describes 王導 recounting 宣王's founding of the dynasty (創業之始), and the Liu annotation explicitly glosses 宣王's actions as 誅曹爽任蔣濟, confirming the referent is Sima Yi. The mention is part of Wang Dao's historical narrative to Emperor Ming, functioning as a historical exemplum.",
+        "mention_id": "sfh1-mention-16b0e1cf7dd4e5a7bba31ca9",
+        "occurrence_role": "historical_exemplum",
+        "reference_type": "ruler_title",
+        "referent": {
+          "canonical_hint": "司馬懿",
+          "confidence": "high",
+          "surface_form": "宣王"
+        },
+        "relations": [
+          {
+            "confidence": "high",
+            "evidence_ids": [
+              "sfh1-ev-33-youhui-007-main"
+            ],
+            "relation": "kinship_relation",
+            "target_hint": "文王"
+          },
+          {
+            "confidence": "medium",
+            "evidence_ids": [
+              "sfh1-ev-33-youhui-007-main"
+            ],
+            "relation": "related_person",
+            "target_hint": "高貴鄉公"
+          }
+        ],
+        "semantic_kind": "historical_person",
+        "supporting_evidence_ids": [
+          "sfh1-ev-33-youhui-007-liu-annotation-001",
+          "sfh1-ev-33-youhui-007-main"
+        ],
+        "surface": "宣王"
+      },
+      "selected_record_source": "historian_a_exact_copy",
+      "stage": "adjudicator",
+      "story_id": "33-youhui-007",
+      "supporting_evidence_ids": [
+        "sfh1-ev-33-youhui-007-liu-annotation-001",
+        "sfh1-ev-33-youhui-007-main"
+      ],
+      "surface": "宣王",
+      "transport": {
+        "classification": "cache_hit",
+        "elapsed_seconds": 0,
+        "packet_hash": "db559681572286d4ee096d23b44ccf60662372f91153c585adf36cb0c0206097",
+        "parse_error": null,
+        "prompt_version": "sfh2-a2r-adjudicator-v2",
+        "raw_path": "data/generated/sfh2-a2r/live/sfh2-a2r-live-v1/raw-api/00021-adjudicator-regression-sfh2-a0-72b61e53dc728525f585-attempt1.json",
+        "stage": "adjudicator",
+        "unit_id": "regression:sfh2-a0-72b61e53dc728525f585",
+        "usage": {}
+      },
+      "valid": true
+    },
+    {
+      "candidate_only": true,
+      "canonical_write_back": false,
+      "case_id": "sfh2-a0r-l-challenge-ca38e15c71e9339ddfee",
+      "changed_fields": [],
+      "contract_status": "valid",
+      "decision": "select_a",
+      "errors": [],
+      "mention_id": "sfh1-mention-1663ef91cb1ebbf7819c2c5a",
+      "patch_ops": [],
+      "reason_summary": "Both historians agree 簡文 is the abbreviated ruler title for 簡文帝 (Emperor Jianwen of Jin). The disagreement is in the canonical_hint: Historian A gives 簡文帝 while Historian B gives 司馬昱 (Sima Yu). The surface form in the text is 簡文, which is the abbreviated ruler title. Historian A's canonical_hint of 簡文帝 matches the surface form's abbreviated ruler title directly and is the more conservative, evidence-grounded identification. Historian B's 司馬昱 is the personal name of the same emperor, but the canonical_hint should reflect the ruler title as it appears in the text. Additionally, Historian B's speaker_hint of \"narrator\" is not supported by the evidence—the text is a narrative anecdote, not a direct speech by 簡文. Historian A's empty speaker_hint is more appropriate. The surface_form in Historian B (簡文帝) also does not match the actual surface span (簡文). Historian A is the more accurate record.",
+      "reviewed_fields": [],
+      "selected_record": {
+        "abstain": false,
+        "attribute_type": "",
+        "attribute_value": "",
+        "bearer_hint": "",
+        "confidence": "high",
+        "discourse": {
+          "addressee_hint": "",
+          "antecedent_hint": "",
+          "self_reference_hint": "",
+          "speaker_hint": ""
+        },
+        "explanation": "簡文 is the abbreviated ruler title for 簡文帝 (Emperor Jianwen of Jin), who is the subject of the anecdote sitting in a dark room and summoning 宣武 (桓溫). The validated local mention also classifies this as a ruler_title reference to a person.",
+        "mention_id": "sfh1-mention-1663ef91cb1ebbf7819c2c5a",
+        "occurrence_role": "scene_participant",
+        "reference_type": "ruler_title",
+        "referent": {
+          "canonical_hint": "簡文帝",
+          "confidence": "high",
+          "surface_form": "簡文"
+        },
+        "relations": [],
+        "semantic_kind": "historical_person",
+        "supporting_evidence_ids": [
+          "sfh1-ev-02-yanyu-060-main"
+        ],
+        "surface": "簡文"
+      },
+      "selected_record_source": "historian_a_exact_copy",
+      "stage": "adjudicator",
+      "story_id": "02-yanyu-060",
+      "supporting_evidence_ids": [
+        "sfh1-ev-02-yanyu-060-main"
+      ],
+      "surface": "簡文",
+      "transport": {
+        "classification": "cache_hit",
+        "elapsed_seconds": 0,
+        "packet_hash": "a57d49b1372a63122fa88b42416fba18efc5dbefbd7eefd14dc51c97a5ac5aa0",
+        "parse_error": null,
+        "prompt_version": "sfh2-a2r-adjudicator-v2",
+        "raw_path": "data/generated/sfh2-a2r/live/sfh2-a2r-live-v1/raw-api/00022-adjudicator-challenge-sfh2-a0r-l-challenge-ca38e15c71e9339ddfee-attempt1.json",
+        "stage": "adjudicator",
+        "unit_id": "challenge:sfh2-a0r-l-challenge-ca38e15c71e9339ddfee",
+        "usage": {}
+      },
+      "valid": true
+    },
+    {
+      "candidate_only": true,
+      "canonical_write_back": false,
+      "case_id": "sfh2-a0r-l-challenge-4da0dbd5f09e683bf525",
+      "changed_fields": [],
+      "contract_status": "valid",
+      "decision": "select_a",
+      "errors": [],
+      "mention_id": "sfh1-mention-8735904c09b16a5eacd70ddd",
+      "patch_ops": [],
+      "reason_summary": "Both historians agree on all substantive fields except the referent's canonical_hint and surface_form. Historian A gives canonical_hint \"簡文帝\" and surface_form \"簡文\"; Historian B gives canonical_hint \"司馬昱\" and surface_form \"簡文帝\". The target span is \"上\" (a ruler title), and the validated local mention sfh1-mention-1663ef91cb1ebbf7819c2c5a identifies \"簡文\" as the ruler in this scene. The surface form of the referent should match the actual attested form in the text, which is \"簡文\" (the ruler title used in the main text). Historian A's surface_form \"簡文\" correctly matches the attested textual form, while Historian B's \"簡文帝\" is an expanded form not present in the source. The canonical_hint \"簡文帝\" is the standard canonical name for 司馬昱, so Historian A's record is more faithful to the source evidence.",
+      "reviewed_fields": [],
+      "selected_record": {
+        "abstain": false,
+        "attribute_type": "",
+        "attribute_value": "",
+        "bearer_hint": "",
+        "confidence": "high",
+        "discourse": {
+          "addressee_hint": "簡文",
+          "antecedent_hint": "簡文",
+          "self_reference_hint": "",
+          "speaker_hint": "宣武"
+        },
+        "explanation": "The target '上' is a ruler title referring to the emperor, who in this passage is 簡文 (簡文帝). 宣武 asks '上何在' (where is His Majesty), and 簡文 replies '某在斯' (I am here), confirming that '上' refers to 簡文帝 himself. The validated local mention sfh1-mention-1663ef91cb1ebbf7819c2c5a identifies 簡文 as the ruler in this scene.",
+        "mention_id": "sfh1-mention-8735904c09b16a5eacd70ddd",
+        "occurrence_role": "scene_participant",
+        "reference_type": "ruler_title",
+        "referent": {
+          "canonical_hint": "簡文帝",
+          "confidence": "high",
+          "surface_form": "簡文"
+        },
+        "relations": [
+          {
+            "confidence": "high",
+            "evidence_ids": [
+              "sfh1-ev-02-yanyu-060-main"
+            ],
+            "relation": "same_person",
+            "target_hint": "簡文"
+          }
+        ],
+        "semantic_kind": "historical_person",
+        "supporting_evidence_ids": [
+          "sfh1-ev-02-yanyu-060-main"
+        ],
+        "surface": "上"
+      },
+      "selected_record_source": "historian_a_exact_copy",
+      "stage": "adjudicator",
+      "story_id": "02-yanyu-060",
+      "supporting_evidence_ids": [
+        "sfh1-ev-02-yanyu-060-main"
+      ],
+      "surface": "上",
+      "transport": {
+        "classification": "cache_hit",
+        "elapsed_seconds": 0,
+        "packet_hash": "4c7dfe9ab6644c9afbd16b6696b1fbc1ede46bbadc7ecf7d822d792ed77db14c",
+        "parse_error": null,
+        "prompt_version": "sfh2-a2r-adjudicator-v2",
+        "raw_path": "data/generated/sfh2-a2r/live/sfh2-a2r-live-v1/raw-api/00023-adjudicator-challenge-sfh2-a0r-l-challenge-4da0dbd5f09e683bf525-attempt1.json",
+        "stage": "adjudicator",
+        "unit_id": "challenge:sfh2-a0r-l-challenge-4da0dbd5f09e683bf525",
+        "usage": {}
+      },
+      "valid": true
+    },
+    {
+      "candidate_only": true,
+      "canonical_write_back": false,
+      "case_id": "sfh2-a0r-l-challenge-d6f905cd870a3ab36901",
+      "changed_fields": [],
+      "contract_status": "valid",
+      "decision": "select_b",
+      "errors": [],
+      "mention_id": "sfh1-mention-95c98b3b3f964502ef5e978a",
+      "patch_ops": [],
+      "reason_summary": "Both historians agree on the core identity: 某 is a self-referential first-person pronoun spoken by 簡文 (Emperor Jianwen, 司馬昱) in reply to 宣武's question \"上何在\". The Liu annotation (sfh1-ev-02-yanyu-060-liu-annotation-002) explicitly glosses 某在斯 as the Analects self-reference pattern, confirming 某 = the speaker 簡文. Historian B is more precise on the disputed fields: (1) occurrence_role is correctly \"speaker_reference\" since 某 is the speaker's self-reference, not merely a scene participant; (2) referent.canonical_hint \"司馬昱\" is the proper personal name of Emperor Jianwen, more precise than the title \"簡文帝\"; (3) the relations list is ordered with the primary target 上 first, matching the discourse antecedent. Historian A's occurrence_role \"scene_participant\" and canonical_hint \"簡文帝\" are less precise. Select B.",
+      "reviewed_fields": [],
+      "selected_record": {
+        "abstain": false,
+        "attribute_type": "",
+        "attribute_value": "",
+        "bearer_hint": "",
+        "confidence": "high",
+        "discourse": {
+          "addressee_hint": "宣武",
+          "antecedent_hint": "上",
+          "self_reference_hint": "某",
+          "speaker_hint": "簡文"
+        },
+        "explanation": "The main text reads: 簡文在暗室中坐召宣武，宣武至，問上何在，簡文曰某在斯。簡文 (Emperor Jianwen, i.e., 司馬昱) is in a dark room and summons 宣武 (Huan Wen). 宣武 asks where '上' (the emperor) is, and 簡文 replies '某在斯' (I am here). The character 某 is a self-referential pronoun used by 簡文 in his reply. The Liu annotation (sfh1-ev-02-yanyu-060-liu-annotation-002) explicitly glosses 某在斯 as a self-reference pattern from the Analects (師冕見), confirming 某 functions as a first-person self-reference. Thus the target 某 refers to 簡文 (司馬昱) himself, who is the speaker.",
+        "mention_id": "sfh1-mention-95c98b3b3f964502ef5e978a",
+        "occurrence_role": "speaker_reference",
+        "reference_type": "pronoun_reference",
+        "referent": {
+          "canonical_hint": "司馬昱",
+          "confidence": "high",
+          "surface_form": "簡文"
+        },
+        "relations": [
+          {
+            "confidence": "high",
+            "evidence_ids": [
+              "sfh1-ev-02-yanyu-060-main"
+            ],
+            "relation": "same_person",
+            "target_hint": "上"
+          },
+          {
+            "confidence": "high",
+            "evidence_ids": [
+              "sfh1-ev-02-yanyu-060-main"
+            ],
+            "relation": "same_person",
+            "target_hint": "簡文"
+          }
+        ],
+        "semantic_kind": "historical_person",
+        "supporting_evidence_ids": [
+          "sfh1-ev-02-yanyu-060-liu-annotation-002",
+          "sfh1-ev-02-yanyu-060-main"
+        ],
+        "surface": "某"
+      },
+      "selected_record_source": "historian_b_exact_copy",
+      "stage": "adjudicator",
+      "story_id": "02-yanyu-060",
+      "supporting_evidence_ids": [
+        "sfh1-ev-02-yanyu-060-liu-annotation-002",
+        "sfh1-ev-02-yanyu-060-main"
+      ],
+      "surface": "某",
+      "transport": {
+        "classification": "cache_hit",
+        "elapsed_seconds": 0,
+        "packet_hash": "e0fe409cc41aa9660ac7d29ba53775d335ed7fc8585320ad13dfee7fef49ba4a",
+        "parse_error": null,
+        "prompt_version": "sfh2-a2r-adjudicator-v2",
+        "raw_path": "data/generated/sfh2-a2r/live/sfh2-a2r-live-v1/raw-api/00024-adjudicator-challenge-sfh2-a0r-l-challenge-d6f905cd870a3ab36901-attempt1.json",
+        "stage": "adjudicator",
+        "unit_id": "challenge:sfh2-a0r-l-challenge-d6f905cd870a3ab36901",
+        "usage": {}
+      },
+      "valid": true
+    },
+    {
+      "candidate_only": true,
+      "canonical_write_back": false,
+      "case_id": "sfh2-a0r-l-challenge-c07bd51ac298529ddbc6",
+      "changed_fields": [],
+      "contract_status": "valid",
+      "decision": "select_a",
+      "errors": [],
+      "mention_id": "sfh1-mention-ab67a4ad2c4c7c6e27fa4921",
+      "patch_ops": [],
+      "reason_summary": "Both historians agree 宣武 is the posthumous title (ruler title) of 桓溫 (Huan Wen), the Eastern Jin general. The only substantive disagreements are: (1) referent.canonical_hint/surface_form — A uses 桓溫, B uses 桓温 (variant character 溫 vs 温); (2) discourse.antecedent_hint — A leaves it empty, B sets it to 宣武. The canonical form 桓溫 (with 溫) is the standard orthography for Huan Wen in Shishuo Xinyu scholarship and historical records; 温 is a simplified/variant form. The antecedent_hint is not needed since 宣武 is the surface form itself being referenced (self-referential, not an antecedent). Historian A's record is correct on both disputed fields.",
+      "reviewed_fields": [],
+      "selected_record": {
+        "abstain": false,
+        "attribute_type": "",
+        "attribute_value": "",
+        "bearer_hint": "",
+        "confidence": "high",
+        "discourse": {
+          "addressee_hint": "宣武",
+          "antecedent_hint": "",
+          "self_reference_hint": "",
+          "speaker_hint": "簡文"
+        },
+        "explanation": "宣武 is the posthumous title (ruler title) of 桓溫 (Huan Wen), the famous Eastern Jin general and statesman. In the Shishuo Xinyu, 宣武 is a standard epithet referring to 桓溫. The text describes 簡文 (Emperor Jianwen) summoning 宣武, who arrives and asks where the emperor is. The mention functions as a scene participant in the narrative.",
+        "mention_id": "sfh1-mention-ab67a4ad2c4c7c6e27fa4921",
+        "occurrence_role": "scene_participant",
+        "reference_type": "ruler_title",
+        "referent": {
+          "canonical_hint": "桓溫",
+          "confidence": "high",
+          "surface_form": "宣武"
+        },
+        "relations": [],
+        "semantic_kind": "historical_person",
+        "supporting_evidence_ids": [
+          "sfh1-ev-02-yanyu-060-main"
+        ],
+        "surface": "宣武"
+      },
+      "selected_record_source": "historian_a_exact_copy",
+      "stage": "adjudicator",
+      "story_id": "02-yanyu-060",
+      "supporting_evidence_ids": [
+        "sfh1-ev-02-yanyu-060-main"
+      ],
+      "surface": "宣武",
+      "transport": {
+        "classification": "cache_hit",
+        "elapsed_seconds": 0,
+        "packet_hash": "6f0c509dc46897933cce92224801f24b91d4ea06ba1d431962506f3fefb8ab2b",
+        "parse_error": null,
+        "prompt_version": "sfh2-a2r-adjudicator-v2",
+        "raw_path": "data/generated/sfh2-a2r/live/sfh2-a2r-live-v1/raw-api/00025-adjudicator-challenge-sfh2-a0r-l-challenge-c07bd51ac298529ddbc6-attempt1.json",
+        "stage": "adjudicator",
+        "unit_id": "challenge:sfh2-a0r-l-challenge-c07bd51ac298529ddbc6",
+        "usage": {}
+      },
+      "valid": true
+    },
+    {
+      "candidate_only": true,
+      "canonical_write_back": false,
+      "case_id": "sfh2-a0r-l-challenge-a1f887b7602c151cfbbd",
+      "changed_fields": [],
+      "contract_status": "valid",
+      "decision": "select_b",
+      "errors": [],
+      "mention_id": "sfh1-mention-8c4dd2dce67987b657849bbb",
+      "patch_ops": [],
+      "reason_summary": "Both historians agree 文度 is the courtesy name (字) of 王坦之, an Eastern Jin figure. The disagreement is only in reference_type and referent.surface_form. Historian B correctly identifies 文度 as a courtesy_name (字) rather than a personal_name, since 文度 is the courtesy name of 王坦之, not his personal name. The surface_form in B's referent is 王坦之 (the canonical name), which is more appropriate than A's surface_form of 文度 (which duplicates the mention surface). The evidence (sfh1-ev-09-pinzao-063-main) confirms 文度 is used as a courtesy name in the self-comparison context, and the Liu annotation confirms the speaker 庾龢. Historian B's reference_type of courtesy_name and referent.surface_form of 王坦之 are the correct semantic fields.",
+      "reviewed_fields": [],
+      "selected_record": {
+        "abstain": false,
+        "attribute_type": "",
+        "attribute_value": "",
+        "bearer_hint": "",
+        "confidence": "high",
+        "discourse": {
+          "addressee_hint": "",
+          "antecedent_hint": "",
+          "self_reference_hint": "",
+          "speaker_hint": "庾道季"
+        },
+        "explanation": "The target span 文度 appears in 庾道季's speech where he compares himself to 康伯 (韓伯) and 文度. 文度 is the courtesy name (字) of 王坦之, a well-known Eastern Jin figure frequently paired with 韓康伯 in Shishuo Xinyu. The text states 庾道季 says he is inferior to 康伯 in 思理倫和 and to 文度 in 志力彊正. The Liu annotation confirms the speaker is 庾龢 (庾道季). 文度 as courtesy name of 王坦之 is the standard identification in this context.",
+        "mention_id": "sfh1-mention-8c4dd2dce67987b657849bbb",
+        "occurrence_role": "scene_reference",
+        "reference_type": "courtesy_name",
+        "referent": {
+          "canonical_hint": "王坦之",
+          "confidence": "high",
+          "surface_form": "王坦之"
+        },
+        "relations": [],
+        "semantic_kind": "historical_person",
+        "supporting_evidence_ids": [
+          "sfh1-ev-09-pinzao-063-main"
+        ],
+        "surface": "文度"
+      },
+      "selected_record_source": "historian_b_exact_copy",
+      "stage": "adjudicator",
+      "story_id": "09-pinzao-063",
+      "supporting_evidence_ids": [
+        "sfh1-ev-09-pinzao-063-liu-annotation-001",
+        "sfh1-ev-09-pinzao-063-main"
+      ],
+      "surface": "文度",
+      "transport": {
+        "classification": "cache_hit",
+        "elapsed_seconds": 0,
+        "packet_hash": "ba71f70994013901faff5e2f5a08a1ddbda849064e8c765b624a0a80ba770288",
+        "parse_error": null,
+        "prompt_version": "sfh2-a2r-adjudicator-v2",
+        "raw_path": "data/generated/sfh2-a2r/live/sfh2-a2r-live-v1/raw-api/00026-adjudicator-challenge-sfh2-a0r-l-challenge-a1f887b7602c151cfbbd-attempt1.json",
+        "stage": "adjudicator",
+        "unit_id": "challenge:sfh2-a0r-l-challenge-a1f887b7602c151cfbbd",
+        "usage": {}
+      },
+      "valid": true
+    },
+    {
+      "candidate_only": true,
+      "canonical_write_back": false,
+      "case_id": "sfh2-a0r-l-challenge-085c578513fc50a423b8",
+      "changed_fields": [],
+      "contract_status": "valid",
+      "decision": "select_b",
+      "errors": [],
+      "mention_id": "sfh1-mention-bdb58dbb3ac4499e9b54af71",
+      "patch_ops": [],
+      "reason_summary": "The main text reads \"庾道季云思理倫和吾愧康伯志力彊正吾愧文度自此以還吾皆百之\" — 庾道季 is the speaker who says \"吾愧康伯...吾愧文度...吾皆百之\" (I am ashamed before Kangbo... I am ashamed before Wendo... I surpass them all). The repeated first-person pronoun 吾 clearly indicates that 庾道季 is the speaker making a self-assessment. Historian B correctly identifies the occurrence_role as speaker_reference, sets speaker_hint to 庾道季, and self_reference_hint to 吾. Historian A's scene_participant role and empty discourse hints miss the clear speaker function. Both agree on the referent 庾龢 (confirmed by the Liu Xiaobiao annotation 巳見/庾龢) and the same_person relation. The reference_type difference (courtesy_name vs personal_name) is minor; the surface form 庾道季 is the courtesy name of 庾龢, but the substantive discourse/role identification by Historian B is correct.",
+      "reviewed_fields": [],
+      "selected_record": {
+        "abstain": false,
+        "attribute_type": "",
+        "attribute_value": "",
+        "bearer_hint": "",
+        "confidence": "high",
+        "discourse": {
+          "addressee_hint": "",
+          "antecedent_hint": "",
+          "self_reference_hint": "吾",
+          "speaker_hint": "庾道季"
+        },
+        "explanation": "庾道季 is the speaker in this passage, making a self-assessment comparing himself to 康伯 and 文度. The Liu Xiaobiao annotation explicitly identifies 庾道季 as 庾龢 (already seen), confirming that 庾道季 is the courtesy name (字) of 庾龢. The surface form 庾道季 is a personal name reference using his courtesy name.",
+        "mention_id": "sfh1-mention-bdb58dbb3ac4499e9b54af71",
+        "occurrence_role": "speaker_reference",
+        "reference_type": "personal_name",
+        "referent": {
+          "canonical_hint": "庾龢",
+          "confidence": "high",
+          "surface_form": "庾道季"
+        },
+        "relations": [
+          {
+            "confidence": "high",
+            "evidence_ids": [
+              "sfh1-ev-09-pinzao-063-liu-annotation-001"
+            ],
+            "relation": "same_person",
+            "target_hint": "庾龢"
+          }
+        ],
+        "semantic_kind": "historical_person",
+        "supporting_evidence_ids": [
+          "sfh1-ev-09-pinzao-063-liu-annotation-001",
+          "sfh1-ev-09-pinzao-063-main"
+        ],
+        "surface": "庾道季"
+      },
+      "selected_record_source": "historian_b_exact_copy",
+      "stage": "adjudicator",
+      "story_id": "09-pinzao-063",
+      "supporting_evidence_ids": [
+        "sfh1-ev-09-pinzao-063-liu-annotation-001",
+        "sfh1-ev-09-pinzao-063-main"
+      ],
+      "surface": "庾道季",
+      "transport": {
+        "classification": "cache_hit",
+        "elapsed_seconds": 0,
+        "packet_hash": "1404a5c15eea3db4e2ccdff3bf25bcd785744c0b02e12041cc23d85a2e656c8b",
+        "parse_error": null,
+        "prompt_version": "sfh2-a2r-adjudicator-v2",
+        "raw_path": "data/generated/sfh2-a2r/live/sfh2-a2r-live-v1/raw-api/00027-adjudicator-challenge-sfh2-a0r-l-challenge-085c578513fc50a423b8-attempt1.json",
+        "stage": "adjudicator",
+        "unit_id": "challenge:sfh2-a0r-l-challenge-085c578513fc50a423b8",
+        "usage": {}
+      },
+      "valid": true
+    },
+    {
+      "candidate_only": true,
+      "canonical_write_back": false,
+      "case_id": "sfh2-a0r-l-challenge-658f5ff4b4c73e39fcc7",
+      "changed_fields": [],
+      "contract_status": "valid",
+      "decision": "select_a",
+      "errors": [],
+      "mention_id": "sfh1-mention-5b43c6c928ff32f0bdcf27f2",
+      "patch_ops": [],
+      "reason_summary": "The target '身' appears in the Liu Xiaobiao annotation quoting Deng Can's Jin Ji (鄧粲晉紀曰上身服儉約). The phrase '上身服儉約' means \"the emperor himself practiced frugality.\" The pronoun 身 here is a self-referential pronoun used by the emperor (元帝/司馬睿) referring to himself in the quoted Jin Annals text. Historian A correctly identifies this as a self-reference (pronoun_reference) where 身 refers to the emperor himself, with canonical_hint 司馬睿 and antecedent 元帝. Historian B incorrectly treats this as a person_attribute (occurrence_role: person_attribute) with attribute_value '性素好酒' — but that attribute belongs to a different annotation segment (annotation-002, not the segment containing 身). The target 身 is in annotation-001 (鄧粲晉紀曰上身服儉約), which describes the emperor's frugality as a self-referential statement, not an attribute-bearing construction. Historian A's occurrence_role of scene_participant and pronoun_reference with self-reference is the more accurate reading. The canonical identity is 司馬睿 (Emperor Yuan), which A captures correctly; B's canonical_hint of 元帝 conflates the surface title with the person's name.",
+      "reviewed_fields": [],
+      "selected_record": {
+        "abstain": false,
+        "attribute_type": "",
+        "attribute_value": "",
+        "bearer_hint": "",
+        "confidence": "high",
+        "discourse": {
+          "addressee_hint": "",
+          "antecedent_hint": "元帝",
+          "self_reference_hint": "",
+          "speaker_hint": "鄧粲"
+        },
+        "explanation": "The character 身 in the Liu annotation (鄧粲晉紀曰上身服儉約) is a self-referential pronoun used by the emperor (元帝/司馬睿) in the quoted Jin Annals text, referring to himself. The main text establishes 元帝 as the subject, and the annotation quotes 鄧粲's 晉紀 where the emperor speaks of his own frugality. The pronoun 身 refers to the emperor himself.",
+        "mention_id": "sfh1-mention-5b43c6c928ff32f0bdcf27f2",
+        "occurrence_role": "scene_participant",
+        "reference_type": "pronoun_reference",
+        "referent": {
+          "canonical_hint": "司馬睿",
+          "confidence": "high",
+          "surface_form": "元帝"
+        },
+        "relations": [
+          {
+            "confidence": "high",
+            "evidence_ids": [
+              "sfh1-ev-10-guizhen-011-liu-annotation-001",
+              "sfh1-ev-10-guizhen-011-main"
+            ],
+            "relation": "same_person",
+            "target_hint": "元帝"
+          }
+        ],
+        "semantic_kind": "historical_person",
+        "supporting_evidence_ids": [
+          "sfh1-ev-10-guizhen-011-liu-annotation-001",
+          "sfh1-ev-10-guizhen-011-main"
+        ],
+        "surface": "身"
+      },
+      "selected_record_source": "historian_a_exact_copy",
+      "stage": "adjudicator",
+      "story_id": "10-guizhen-011",
+      "supporting_evidence_ids": [
+        "sfh1-ev-10-guizhen-011-liu-annotation-001",
+        "sfh1-ev-10-guizhen-011-main"
+      ],
+      "surface": "身",
+      "transport": {
+        "classification": "cache_hit",
+        "elapsed_seconds": 0,
+        "packet_hash": "9633e5a45c4e5d71fe8044afd39bdb60690cfc16fa51adcb2515ae69fef9d5f8",
+        "parse_error": null,
+        "prompt_version": "sfh2-a2r-adjudicator-v2",
+        "raw_path": "data/generated/sfh2-a2r/live/sfh2-a2r-live-v1/raw-api/00028-adjudicator-challenge-sfh2-a0r-l-challenge-658f5ff4b4c73e39fcc7-attempt1.json",
+        "stage": "adjudicator",
+        "unit_id": "challenge:sfh2-a0r-l-challenge-658f5ff4b4c73e39fcc7",
+        "usage": {}
+      },
+      "valid": true
+    },
+    {
+      "candidate_only": true,
+      "canonical_write_back": false,
+      "case_id": "sfh2-a0r-l-challenge-02fa84b24af39e8f8201",
+      "changed_fields": [],
+      "contract_status": "valid",
+      "decision": "select_a",
+      "errors": [],
+      "mention_id": "sfh1-mention-7c1312947bb4dfbe3311f264",
+      "patch_ops": [],
+      "reason_summary": "Both Historian A and B agree on all substantive semantic fields: the target '帝' is a ruler_title referring to 元帝 (Emperor Yuan of Jin), semantic_kind historical_person, occurrence_role scene_participant, discourse hints (speaker 王導, addressee 帝, antecedent 元帝), and referent canonical_hint 元帝 with high confidence. The only difference is in the relations array: Historian A assigns the same_person relation to 元帝 with evidence from both annotation-002 and main, and the related_person relation to 王導 with evidence from annotation-002; Historian B assigns same_person to 元帝 with evidence only from main, and related_person to 王導 with evidence from annotation-002. Both relations are substantively identical in content (same_person→元帝, related_person→王導); the only divergence is the evidence_ids attached to the same_person relation. Historian A's assignment of both annotation-002 and main as evidence for the same_person relation is more complete, since the target '帝' appears in annotation-002 and the identification with 元帝 is established by the main text. This is a minor evidence-attribution difference, not a substantive historical disagreement. Historian A's record is selected as the more complete and accurate representation.",
+      "reviewed_fields": [],
+      "selected_record": {
+        "abstain": false,
+        "attribute_type": "",
+        "attribute_value": "",
+        "bearer_hint": "",
+        "confidence": "high",
+        "discourse": {
+          "addressee_hint": "帝",
+          "antecedent_hint": "元帝",
+          "self_reference_hint": "",
+          "speaker_hint": "王導"
+        },
+        "explanation": "The target '帝' in the Liu annotation refers to the emperor (元帝), who is the subject of the anecdote about giving up wine. The main text establishes 元帝 as the emperor who crossed the Yangtze and loved wine; the Liu annotation continues this narrative with 王導 advising the emperor (帝), who then orders wine to be poured and pours it out. The ruler title '帝' refers to 元帝 (Emperor Yuan of Jin).",
+        "mention_id": "sfh1-mention-7c1312947bb4dfbe3311f264",
+        "occurrence_role": "scene_participant",
+        "reference_type": "ruler_title",
+        "referent": {
+          "canonical_hint": "元帝",
+          "confidence": "high",
+          "surface_form": "帝"
+        },
+        "relations": [
+          {
+            "confidence": "high",
+            "evidence_ids": [
+              "sfh1-ev-10-guizhen-011-liu-annotation-002",
+              "sfh1-ev-10-guizhen-011-main"
+            ],
+            "relation": "same_person",
+            "target_hint": "元帝"
+          },
+          {
+            "confidence": "high",
+            "evidence_ids": [
+              "sfh1-ev-10-guizhen-011-liu-annotation-002"
+            ],
+            "relation": "related_person",
+            "target_hint": "王導"
+          }
+        ],
+        "semantic_kind": "historical_person",
+        "supporting_evidence_ids": [
+          "sfh1-ev-10-guizhen-011-liu-annotation-002",
+          "sfh1-ev-10-guizhen-011-main"
+        ],
+        "surface": "帝"
+      },
+      "selected_record_source": "historian_a_exact_copy",
+      "stage": "adjudicator",
+      "story_id": "10-guizhen-011",
+      "supporting_evidence_ids": [
+        "sfh1-ev-10-guizhen-011-liu-annotation-002",
+        "sfh1-ev-10-guizhen-011-main"
+      ],
+      "surface": "帝",
+      "transport": {
+        "classification": "cache_hit",
+        "elapsed_seconds": 0,
+        "packet_hash": "e7ba0a7990ef8672e182191eb8cf97ddeba4b2a27029ca29a88076ae44227c78",
+        "parse_error": null,
+        "prompt_version": "sfh2-a2r-adjudicator-v2",
+        "raw_path": "data/generated/sfh2-a2r/live/sfh2-a2r-live-v1/raw-api/00029-adjudicator-challenge-sfh2-a0r-l-challenge-02fa84b24af39e8f8201-attempt1.json",
+        "stage": "adjudicator",
+        "unit_id": "challenge:sfh2-a0r-l-challenge-02fa84b24af39e8f8201",
+        "usage": {}
+      },
+      "valid": true
+    },
+    {
+      "candidate_only": true,
+      "canonical_write_back": false,
+      "case_id": "sfh2-a0r-l-challenge-89f9145a59affa7c29dd",
+      "changed_fields": [],
+      "contract_status": "valid",
+      "decision": "select_a",
+      "errors": [],
+      "mention_id": "sfh1-mention-cc8016114f176363bb5353de",
+      "patch_ops": [],
+      "reason_summary": "The target '帝' in the main text refers to 元帝 (Emperor Yuan of Jin), who is the subject of the passage. Historian A correctly identifies the referent as 元帝 with canonical_hint 元帝, surface_form 帝, and a single same_person relation to 元帝. Historian B introduces an unnecessary related_person relation to 王茂弘 (王導), which is not a relation of the target '帝' itself but rather a separate character in the scene. Historian B also sets surface_form to 元帝, but the actual surface form of the target span is '帝' (the exact span is 帝, source_start 1, source_end 2). The canonical_hint 司馬睿 is a plausible fuller identification, but the evidence directly names 元帝, and Historian A's canonical_hint 元帝 is more directly supported by the text. Historian A's record is more accurate and parsimonious.",
+      "reviewed_fields": [],
+      "selected_record": {
+        "abstain": false,
+        "attribute_type": "",
+        "attribute_value": "",
+        "bearer_hint": "",
+        "confidence": "high",
+        "discourse": {
+          "addressee_hint": "",
+          "antecedent_hint": "元帝",
+          "self_reference_hint": "",
+          "speaker_hint": ""
+        },
+        "explanation": "The target '帝' in the main text refers to 元帝 (Emperor Yuan of Jin), who is the subject of the story about crossing the Yangtze and loving wine. The preceding mention '元帝' establishes the referent, and '帝' is a ruler title referring to the same person. The Liu annotation confirms this with '帝' referring to the same emperor, and 王導 (王茂弘) advising him.",
+        "mention_id": "sfh1-mention-cc8016114f176363bb5353de",
+        "occurrence_role": "scene_participant",
+        "reference_type": "ruler_title",
+        "referent": {
+          "canonical_hint": "元帝",
+          "confidence": "high",
+          "surface_form": "帝"
+        },
+        "relations": [
+          {
+            "confidence": "high",
+            "evidence_ids": [
+              "sfh1-ev-10-guizhen-011-main"
+            ],
+            "relation": "same_person",
+            "target_hint": "元帝"
+          }
+        ],
+        "semantic_kind": "historical_person",
+        "supporting_evidence_ids": [
+          "sfh1-ev-10-guizhen-011-main"
+        ],
+        "surface": "帝"
+      },
+      "selected_record_source": "historian_a_exact_copy",
+      "stage": "adjudicator",
+      "story_id": "10-guizhen-011",
+      "supporting_evidence_ids": [
+        "sfh1-ev-10-guizhen-011-liu-annotation-001",
+        "sfh1-ev-10-guizhen-011-liu-annotation-002",
+        "sfh1-ev-10-guizhen-011-main"
+      ],
+      "surface": "帝",
+      "transport": {
+        "classification": "cache_hit",
+        "elapsed_seconds": 0,
+        "packet_hash": "485e15b2ec38dec639fca7568a04420d167fba6b04f2beb967508211ea75fe69",
+        "parse_error": null,
+        "prompt_version": "sfh2-a2r-adjudicator-v2",
+        "raw_path": "data/generated/sfh2-a2r/live/sfh2-a2r-live-v1/raw-api/00030-adjudicator-challenge-sfh2-a0r-l-challenge-89f9145a59affa7c29dd-attempt1.json",
+        "stage": "adjudicator",
+        "unit_id": "challenge:sfh2-a0r-l-challenge-89f9145a59affa7c29dd",
+        "usage": {}
+      },
+      "valid": true
+    },
+    {
+      "candidate_only": true,
+      "canonical_write_back": false,
+      "case_id": "sfh2-a0r-l-challenge-e02bee5567f8f9ad36ed",
+      "changed_fields": [],
+      "contract_status": "valid",
+      "decision": "select_a",
+      "errors": [],
+      "mention_id": "sfh1-mention-f76e3acfc72f5c31b635e5e5",
+      "patch_ops": [],
+      "reason_summary": "Both historians agree 元帝 refers to Emperor Yuan of Jin (司馬睿), the founding emperor of the Eastern Jin. The disagreement is narrow: (1) canonical_hint — A uses \"晉元帝司馬睿\" while B uses \"司馬睿\"; both are correct, but A's fuller form is more precise and standard. (2) relations — A's \"same_person\" relation targets 王導 (from the Liu annotation, where 王導 admonishes 帝), while B's \"same_person\" relation targets 帝 (the subsequent 帝 in the main text). The main text's 帝 (mention cc8016114f176363bb5353de) is indeed the same person as 元帝, but that is a separate validated mention; the relation to 王導 (王茂弘) is the more substantive cross-entity relation. A's relation set (related_person to 王茂弘, same_person to 王導) is more informative and better grounded in the annotation evidence. A's supporting evidence correctly cites the main text and the relevant Liu annotation. A is selected.",
+      "reviewed_fields": [],
+      "selected_record": {
+        "abstain": false,
+        "attribute_type": "",
+        "attribute_value": "",
+        "bearer_hint": "",
+        "confidence": "high",
+        "discourse": {
+          "addressee_hint": "",
+          "antecedent_hint": "",
+          "self_reference_hint": "",
+          "speaker_hint": ""
+        },
+        "explanation": "元帝 refers to Emperor Yuan of Jin (司馬睿), the founding emperor of the Eastern Jin dynasty. The main text describes him crossing the Yangtze and loving wine, with 王茂弘 (Wang Dao) advising him. The Liu annotation confirms this with 王導 (Wang Dao) admonishing 帝 (the emperor), establishing the referent as 晉元帝司馬睿.",
+        "mention_id": "sfh1-mention-f76e3acfc72f5c31b635e5e5",
+        "occurrence_role": "scene_participant",
+        "reference_type": "ruler_title",
+        "referent": {
+          "canonical_hint": "晉元帝司馬睿",
+          "confidence": "high",
+          "surface_form": "元帝"
+        },
+        "relations": [
+          {
+            "confidence": "high",
+            "evidence_ids": [
+              "sfh1-ev-10-guizhen-011-main"
+            ],
+            "relation": "related_person",
+            "target_hint": "王茂弘"
+          },
+          {
+            "confidence": "high",
+            "evidence_ids": [
+              "sfh1-ev-10-guizhen-011-liu-annotation-002"
+            ],
+            "relation": "same_person",
+            "target_hint": "王導"
+          }
+        ],
+        "semantic_kind": "historical_person",
+        "supporting_evidence_ids": [
+          "sfh1-ev-10-guizhen-011-liu-annotation-002",
+          "sfh1-ev-10-guizhen-011-main"
+        ],
+        "surface": "元帝"
+      },
+      "selected_record_source": "historian_a_exact_copy",
+      "stage": "adjudicator",
+      "story_id": "10-guizhen-011",
+      "supporting_evidence_ids": [
+        "sfh1-ev-10-guizhen-011-liu-annotation-002",
+        "sfh1-ev-10-guizhen-011-main"
+      ],
+      "surface": "元帝",
+      "transport": {
+        "classification": "cache_hit",
+        "elapsed_seconds": 0,
+        "packet_hash": "276a2430f7fec315dea85022388c00fe6c2df7b0fa8471a16cd25cff13b45487",
+        "parse_error": null,
+        "prompt_version": "sfh2-a2r-adjudicator-v2",
+        "raw_path": "data/generated/sfh2-a2r/live/sfh2-a2r-live-v1/raw-api/00031-adjudicator-challenge-sfh2-a0r-l-challenge-e02bee5567f8f9ad36ed-attempt1.json",
+        "stage": "adjudicator",
+        "unit_id": "challenge:sfh2-a0r-l-challenge-e02bee5567f8f9ad36ed",
+        "usage": {}
+      },
+      "valid": true
+    },
+    {
+      "candidate_only": true,
+      "canonical_write_back": false,
+      "case_id": "sfh2-a0r-l-challenge-403815fa3c873916f991",
+      "changed_fields": [],
+      "contract_status": "valid",
+      "decision": "select_a",
+      "errors": [],
+      "mention_id": "sfh1-mention-009afca0c45e584746b5fb51",
+      "patch_ops": [],
+      "reason_summary": "Both historians agree on all substantive historical identity fields: semantic_kind (historical_person), reference_type (office_title), occurrence_role (scene_participant), referent.canonical_hint (殷仲堪), referent.surface_form (殷仲堪), and confidence (high). The only disagreements are in discourse.antecedent_hint and the ordering of the two relations. Historian A sets antecedent_hint to 殷仲堪, which is correct: the antecedent of the office-title reference 殷荆州 is the person 殷仲堪 (the referent), not the surface form 殷荆州 itself. Historian B sets antecedent_hint to 殷荆州, which conflates the surface form with the antecedent. The relations are identical in content (same_person→仲堪, related_person→顧長康), differing only in array order, which is not substantive. Historian A's record is therefore the more accurate one.",
+      "reviewed_fields": [],
+      "selected_record": {
+        "abstain": false,
+        "attribute_type": "",
+        "attribute_value": "",
+        "bearer_hint": "",
+        "confidence": "high",
+        "discourse": {
+          "addressee_hint": "殷仲堪",
+          "antecedent_hint": "殷仲堪",
+          "self_reference_hint": "",
+          "speaker_hint": "顧長康"
+        },
+        "explanation": "殷荆州 is an office title (荆州刺史) used to refer to 殷仲堪, as confirmed by the Liu annotation identifying 仲堪. The main text shows 顧長康 wanting to paint 殷荆州's portrait, and 殷荆州 responds with 我形惡, establishing him as a scene participant. The annotation '仲堪眇' confirms the referent is 殷仲堪.",
+        "mention_id": "sfh1-mention-009afca0c45e584746b5fb51",
+        "occurrence_role": "scene_participant",
+        "reference_type": "office_title",
+        "referent": {
+          "canonical_hint": "殷仲堪",
+          "confidence": "high",
+          "surface_form": "殷仲堪"
+        },
+        "relations": [
+          {
+            "confidence": "high",
+            "evidence_ids": [
+              "sfh1-ev-21-qiaoyi-011-liu-annotation-002"
+            ],
+            "relation": "same_person",
+            "target_hint": "仲堪"
+          },
+          {
+            "confidence": "high",
+            "evidence_ids": [
+              "sfh1-ev-21-qiaoyi-011-main"
+            ],
+            "relation": "related_person",
+            "target_hint": "顧長康"
+          }
+        ],
+        "semantic_kind": "historical_person",
+        "supporting_evidence_ids": [
+          "sfh1-ev-21-qiaoyi-011-liu-annotation-002",
+          "sfh1-ev-21-qiaoyi-011-main"
+        ],
+        "surface": "殷荆州"
+      },
+      "selected_record_source": "historian_a_exact_copy",
+      "stage": "adjudicator",
+      "story_id": "21-qiaoyi-011",
+      "supporting_evidence_ids": [
+        "sfh1-ev-21-qiaoyi-011-liu-annotation-002",
+        "sfh1-ev-21-qiaoyi-011-main"
+      ],
+      "surface": "殷荆州",
+      "transport": {
+        "classification": "cache_hit",
+        "elapsed_seconds": 0,
+        "packet_hash": "a6c3338a9e4c766fded8e8deb7094634c522dfe3401ff142f0adb6b3562c12e4",
+        "parse_error": null,
+        "prompt_version": "sfh2-a2r-adjudicator-v2",
+        "raw_path": "data/generated/sfh2-a2r/live/sfh2-a2r-live-v1/raw-api/00032-adjudicator-challenge-sfh2-a0r-l-challenge-403815fa3c873916f991-attempt1.json",
+        "stage": "adjudicator",
+        "unit_id": "challenge:sfh2-a0r-l-challenge-403815fa3c873916f991",
+        "usage": {}
+      },
+      "valid": true
+    },
+    {
+      "candidate_only": true,
+      "canonical_write_back": false,
+      "case_id": "sfh2-a0r-l-challenge-f245371d8f0cdf9c8773",
+      "changed_fields": [],
+      "contract_status": "valid",
+      "decision": "select_b",
+      "errors": [],
+      "mention_id": "sfh1-mention-7bf42600cd19ef3230d8b8fb",
+      "patch_ops": [],
+      "reason_summary": "Historian B's record is more accurate. The target 顧 is the surname reference at the start of the main text, immediately followed by 長康 (顧長康), referring to the painter Gu Kaizhi (顧愷之). Both records agree on the core identity (顧愷之, historical_person, surname_reference, scene_participant). The disagreements are: (1) Historian A adds a second same_person relation to 愷 (the Liu annotation gloss), but the annotation glosses 愷 as the personal name within the same person's identity—this is not a separate structured relation target and creates a multi_candidate_ambiguity flag; Historian B correctly keeps only the single same_person relation to 顧長康. (2) Historian B's discourse fields are more complete: speaker_hint \"narrator\" is appropriate since the text is third-person narration, and antecedent_hint correctly identifies the full-name mention 顧長康. Historian A's antecedent_hint \"顧長康\" is also acceptable but lacks the mention reference and omits speaker_hint. Historian B's record is the cleaner, more defensible hypothesis.",
+      "reviewed_fields": [],
+      "selected_record": {
+        "abstain": false,
+        "attribute_type": "",
+        "attribute_value": "",
+        "bearer_hint": "",
+        "confidence": "high",
+        "discourse": {
+          "addressee_hint": "",
+          "antecedent_hint": "顧長康 (sfh1-mention-5db99dfc07c09df5bc76055d)",
+          "self_reference_hint": "",
+          "speaker_hint": "narrator"
+        },
+        "explanation": "The target '顧' is the surname reference at the start of the text, immediately followed by '長康' in the same sentence (顧長康), identifying the famous painter Gu Kaizhi (顧愷之). The Liu annotation confirms '愷' (Kai) as his personal name. The surname 顧 is used as an abbreviated reference to 顧長康/顧愷之, who is the subject of the anecdote about painting Yin Zhongkan (殷荆州).",
+        "mention_id": "sfh1-mention-7bf42600cd19ef3230d8b8fb",
+        "occurrence_role": "scene_participant",
+        "reference_type": "surname_reference",
+        "referent": {
+          "canonical_hint": "顧愷之",
+          "confidence": "high",
+          "surface_form": "顧愷之"
+        },
+        "relations": [
+          {
+            "confidence": "high",
+            "evidence_ids": [
+              "sfh1-ev-21-qiaoyi-011-main"
+            ],
+            "relation": "same_person",
+            "target_hint": "顧長康"
+          }
+        ],
+        "semantic_kind": "historical_person",
+        "supporting_evidence_ids": [
+          "sfh1-ev-21-qiaoyi-011-liu-annotation-001",
+          "sfh1-ev-21-qiaoyi-011-main"
+        ],
+        "surface": "顧"
+      },
+      "selected_record_source": "historian_b_exact_copy",
+      "stage": "adjudicator",
+      "story_id": "21-qiaoyi-011",
+      "supporting_evidence_ids": [
+        "sfh1-ev-21-qiaoyi-011-liu-annotation-001",
+        "sfh1-ev-21-qiaoyi-011-main"
+      ],
+      "surface": "顧",
+      "transport": {
+        "classification": "cache_hit",
+        "elapsed_seconds": 0,
+        "packet_hash": "30e7b980fbeb3febb6f299264f3011dc0f7a77fdf74f85072ded3029233d580b",
+        "parse_error": null,
+        "prompt_version": "sfh2-a2r-adjudicator-v2",
+        "raw_path": "data/generated/sfh2-a2r/live/sfh2-a2r-live-v1/raw-api/00033-adjudicator-challenge-sfh2-a0r-l-challenge-f245371d8f0cdf9c8773-attempt1.json",
+        "stage": "adjudicator",
+        "unit_id": "challenge:sfh2-a0r-l-challenge-f245371d8f0cdf9c8773",
+        "usage": {}
+      },
+      "valid": true
+    },
+    {
+      "candidate_only": true,
+      "canonical_write_back": false,
+      "case_id": "sfh2-a0r-l-challenge-291f5eb01eb17f80c68b",
+      "changed_fields": [],
+      "contract_status": "valid",
+      "decision": "select_a",
+      "errors": [],
+      "mention_id": "sfh1-mention-aea4db203ae94538a025b6cb",
+      "patch_ops": [],
+      "reason_summary": "Both historians agree on all substantive fields except occurrence_role. Historian A labels the pronoun 我 as \"scene_participant\" while Historian B labels it \"speaker_reference\". The pronoun 我 is the first-person self-reference spoken by 殷仲堪 (殷荆州), who is the speaker in the dialogue responding to 顧長康. Since the pronoun is the speaker's own self-reference in direct speech, \"speaker_reference\" (Historian B) is the more accurate occurrence_role. However, the structured disagreement only flags occurrence_role, and both records are otherwise identical. Given the pronoun is self-referential speech by the speaker, Historian B's occurrence_role of \"speaker_reference\" is more precise than A's \"scene_participant\". Selecting A would preserve the less precise role. Revising A's occurrence_role to speaker_reference would align it with B. However, since the task asks to select one record exactly when they agree substantively except for this field, and B's characterization is more accurate for a first-person pronoun in direct speech, I select B.",
+      "reviewed_fields": [],
+      "selected_record": {
+        "abstain": false,
+        "attribute_type": "",
+        "attribute_value": "",
+        "bearer_hint": "",
+        "confidence": "high",
+        "discourse": {
+          "addressee_hint": "顧長康",
+          "antecedent_hint": "殷荆州",
+          "self_reference_hint": "我",
+          "speaker_hint": "殷仲堪"
+        },
+        "explanation": "The pronoun 我 is spoken by 殷仲堪 (referred to as 殷荆州 in the main text). He says '我形惡' (my appearance is ugly), responding to 顧長康's request to paint him. The Liu annotation confirms 仲堪 (殷仲堪) is the person referred to by 殷荆州.",
+        "mention_id": "sfh1-mention-aea4db203ae94538a025b6cb",
+        "occurrence_role": "scene_participant",
+        "reference_type": "pronoun_reference",
+        "referent": {
+          "canonical_hint": "殷仲堪",
+          "confidence": "high",
+          "surface_form": "殷仲堪"
+        },
+        "relations": [
+          {
+            "confidence": "high",
+            "evidence_ids": [
+              "sfh1-ev-21-qiaoyi-011-main"
+            ],
+            "relation": "same_person",
+            "target_hint": "殷荆州"
+          },
+          {
+            "confidence": "high",
+            "evidence_ids": [
+              "sfh1-ev-21-qiaoyi-011-liu-annotation-002"
+            ],
+            "relation": "same_person",
+            "target_hint": "仲堪"
+          }
+        ],
+        "semantic_kind": "historical_person",
+        "supporting_evidence_ids": [
+          "sfh1-ev-21-qiaoyi-011-liu-annotation-002",
+          "sfh1-ev-21-qiaoyi-011-main"
+        ],
+        "surface": "我"
+      },
+      "selected_record_source": "historian_a_exact_copy",
+      "stage": "adjudicator",
+      "story_id": "21-qiaoyi-011",
+      "supporting_evidence_ids": [
+        "sfh1-ev-21-qiaoyi-011-liu-annotation-002",
+        "sfh1-ev-21-qiaoyi-011-main"
+      ],
+      "surface": "我",
+      "transport": {
+        "classification": "cache_hit",
+        "elapsed_seconds": 0,
+        "packet_hash": "6225cc799fd9dbdcdb88325e18137eb87d242fb370d789f6337384f1f18928a0",
+        "parse_error": null,
+        "prompt_version": "sfh2-a2r-adjudicator-v2",
+        "raw_path": "data/generated/sfh2-a2r/live/sfh2-a2r-live-v1/raw-api/00034-adjudicator-challenge-sfh2-a0r-l-challenge-291f5eb01eb17f80c68b-attempt1.json",
+        "stage": "adjudicator",
+        "unit_id": "challenge:sfh2-a0r-l-challenge-291f5eb01eb17f80c68b",
+        "usage": {}
+      },
+      "valid": true
+    },
+    {
+      "candidate_only": true,
+      "canonical_write_back": false,
+      "case_id": "sfh2-a0r-l-challenge-510dea782abc9e9b618f",
+      "changed_fields": [],
+      "contract_status": "valid",
+      "decision": "select_b",
+      "errors": [],
+      "mention_id": "sfh1-mention-19b9115e7b9a534351ffd25e",
+      "patch_ops": [],
+      "reason_summary": "Historian B's record is more accurate. The target span 周侯 is the addressee of 謝幼輿's speech (謝幼輿謂周侯曰), so occurrence_role should be \"addressee_reference\" rather than \"scene_participant\". The discourse antecedent_hint 周侯 is appropriate since the pronoun 卿 later refers back to 周侯. The relations field in B correctly captures both the same_person link to 顗 (confirmed by the Liu annotation gloss) and the related_person link to 謝幼輿 (the speaker in the dialogue). Historian A omits the addressee role and the speaker relation, and its scene_participant classification is less precise given the direct address structure of the sentence.",
+      "reviewed_fields": [],
+      "selected_record": {
+        "abstain": false,
+        "attribute_type": "",
+        "attribute_value": "",
+        "bearer_hint": "",
+        "confidence": "high",
+        "discourse": {
+          "addressee_hint": "周侯",
+          "antecedent_hint": "周侯",
+          "self_reference_hint": "",
+          "speaker_hint": "謝幼輿"
+        },
+        "explanation": "周侯 is an office-title reference to 周顗 (Zhou Yi), the person addressed by 謝幼輿 in this dialogue. The Liu annotation explicitly glosses the passage with 顗, confirming the referent is 周顗. The surface 周侯 uses the surname 周 with the honorific/office title 侯, a common way of referring to 周顗 in Shishuo Xinyu. The annotation's mention of 顗 (sfh1-mention-8ba0099c01f2b05135478b23) confirms identity.",
+        "mention_id": "sfh1-mention-19b9115e7b9a534351ffd25e",
+        "occurrence_role": "addressee_reference",
+        "reference_type": "office_title",
+        "referent": {
+          "canonical_hint": "周顗",
+          "confidence": "high",
+          "surface_form": "周顗"
+        },
+        "relations": [
+          {
+            "confidence": "high",
+            "evidence_ids": [
+              "sfh1-ev-25-paidiao-015-liu-annotation-001"
+            ],
+            "relation": "same_person",
+            "target_hint": "顗"
+          },
+          {
+            "confidence": "high",
+            "evidence_ids": [
+              "sfh1-ev-25-paidiao-015-main"
+            ],
+            "relation": "related_person",
+            "target_hint": "謝幼輿"
+          }
+        ],
+        "semantic_kind": "historical_person",
+        "supporting_evidence_ids": [
+          "sfh1-ev-25-paidiao-015-liu-annotation-001",
+          "sfh1-ev-25-paidiao-015-main"
+        ],
+        "surface": "周侯"
+      },
+      "selected_record_source": "historian_b_exact_copy",
+      "stage": "adjudicator",
+      "story_id": "25-paidiao-015",
+      "supporting_evidence_ids": [
+        "sfh1-ev-25-paidiao-015-liu-annotation-001",
+        "sfh1-ev-25-paidiao-015-main"
+      ],
+      "surface": "周侯",
+      "transport": {
+        "classification": "cache_hit",
+        "elapsed_seconds": 0,
+        "packet_hash": "9c465b978518aa7554398c949a2cd9ce382534aef4126e86360b581dccca48d5",
+        "parse_error": null,
+        "prompt_version": "sfh2-a2r-adjudicator-v2",
+        "raw_path": "data/generated/sfh2-a2r/live/sfh2-a2r-live-v1/raw-api/00035-adjudicator-challenge-sfh2-a0r-l-challenge-510dea782abc9e9b618f-attempt1.json",
+        "stage": "adjudicator",
+        "unit_id": "challenge:sfh2-a0r-l-challenge-510dea782abc9e9b618f",
+        "usage": {}
+      },
+      "valid": true
+    },
+    {
+      "candidate_only": true,
+      "canonical_write_back": false,
+      "case_id": "sfh2-a0r-l-challenge-da872c4c726a2d9b3e85",
+      "changed_fields": [],
+      "contract_status": "valid",
+      "decision": "select_a",
+      "errors": [],
+      "mention_id": "sfh1-mention-275057994b778ebdb11e909c",
+      "patch_ops": [],
+      "reason_summary": "Both Historian A and B agree on all substantive semantic fields: the target '卿' is a second-person pronoun (pronoun_reference, addressee_reference) used by 謝幼輿 addressing 周侯, who is identified as 周顗 via the Liu annotation. The only structured disagreement is discourse.addressee_hint, where A gives '周侯' and B gives '周侯（周顗）'. This is a purely cosmetic difference in hint formatting; both convey the same referent. The canonical_hint, surface_form, relations, semantic_kind, occurrence_role, reference_type, and confidence are identical between the two records. Historian A's addressee_hint '周侯' is the cleaner, more direct form matching the surface text, and the referent identity (周顗) is already fully captured in referent.canonical_hint. No revision is needed.",
+      "reviewed_fields": [],
+      "selected_record": {
+        "abstain": false,
+        "attribute_type": "",
+        "attribute_value": "",
+        "bearer_hint": "",
+        "confidence": "high",
+        "discourse": {
+          "addressee_hint": "周侯",
+          "antecedent_hint": "周侯",
+          "self_reference_hint": "",
+          "speaker_hint": "謝幼輿"
+        },
+        "explanation": "謝幼輿 speaks to 周侯, addressing him with the second-person pronoun 卿. The Liu annotation identifies 顗 (周顗) as the referent of 周侯, confirming that 卿 refers to 周顗.",
+        "mention_id": "sfh1-mention-275057994b778ebdb11e909c",
+        "occurrence_role": "addressee_reference",
+        "reference_type": "pronoun_reference",
+        "referent": {
+          "canonical_hint": "周顗",
+          "confidence": "high",
+          "surface_form": "周顗"
+        },
+        "relations": [
+          {
+            "confidence": "high",
+            "evidence_ids": [
+              "sfh1-ev-25-paidiao-015-main"
+            ],
+            "relation": "same_person",
+            "target_hint": "周侯"
+          },
+          {
+            "confidence": "high",
+            "evidence_ids": [
+              "sfh1-ev-25-paidiao-015-liu-annotation-001"
+            ],
+            "relation": "same_person",
+            "target_hint": "顗"
+          }
+        ],
+        "semantic_kind": "historical_person",
+        "supporting_evidence_ids": [
+          "sfh1-ev-25-paidiao-015-liu-annotation-001",
+          "sfh1-ev-25-paidiao-015-main"
+        ],
+        "surface": "卿"
+      },
+      "selected_record_source": "historian_a_exact_copy",
+      "stage": "adjudicator",
+      "story_id": "25-paidiao-015",
+      "supporting_evidence_ids": [
+        "sfh1-ev-25-paidiao-015-liu-annotation-001",
+        "sfh1-ev-25-paidiao-015-main"
+      ],
+      "surface": "卿",
+      "transport": {
+        "classification": "cache_hit",
+        "elapsed_seconds": 0,
+        "packet_hash": "7a7a8e570e3b73dde0f7bacaf2a3568b3ccbc16a66c247fe07a192db6191ba85",
+        "parse_error": null,
+        "prompt_version": "sfh2-a2r-adjudicator-v2",
+        "raw_path": "data/generated/sfh2-a2r/live/sfh2-a2r-live-v1/raw-api/00036-adjudicator-challenge-sfh2-a0r-l-challenge-da872c4c726a2d9b3e85-attempt1.json",
+        "stage": "adjudicator",
+        "unit_id": "challenge:sfh2-a0r-l-challenge-da872c4c726a2d9b3e85",
+        "usage": {}
+      },
+      "valid": true
+    },
+    {
+      "candidate_only": true,
+      "canonical_write_back": false,
+      "case_id": "sfh2-a0r-l-challenge-d47e242dae08241905e8",
+      "changed_fields": [],
+      "contract_status": "valid",
+      "decision": "select_b",
+      "errors": [],
+      "mention_id": "sfh1-mention-3d2dca8e9199a9e979811441",
+      "patch_ops": [],
+      "reason_summary": "The only substantive disagreement is occurrence_role. The target span 謝幼輿 is the subject of the sentence 謝幼輿謂周侯曰 (\"Xie Youyu said to Zhou Hou\"), making it the speaker of the quoted remark. Historian B correctly assigns occurrence_role \"speaker_reference,\" while Historian A's \"scene_participant\" is less precise. Both agree on the historical identity (謝鯤), reference_type (full_name), discourse fields, and relations. Select B.",
+      "reviewed_fields": [],
+      "selected_record": {
+        "abstain": false,
+        "attribute_type": "",
+        "attribute_value": "",
+        "bearer_hint": "",
+        "confidence": "high",
+        "discourse": {
+          "addressee_hint": "周侯",
+          "antecedent_hint": "",
+          "self_reference_hint": "",
+          "speaker_hint": "謝幼輿"
+        },
+        "explanation": "謝幼輿 is the speaker in this passage, addressing 周侯 (周顗). The Liu annotation mentions 顗 (周顗), confirming the addressee. 謝幼輿 is the courtesy name of 謝鯤, a well-known figure in the Shishuo Xinyu. The surface form 謝幼輿 combines the surname 謝 with the courtesy name 幼輿, functioning as a full-name reference to the historical person 謝鯤.",
+        "mention_id": "sfh1-mention-3d2dca8e9199a9e979811441",
+        "occurrence_role": "speaker_reference",
+        "reference_type": "full_name",
+        "referent": {
+          "canonical_hint": "謝鯤",
+          "confidence": "high",
+          "surface_form": "謝幼輿"
+        },
+        "relations": [
+          {
+            "confidence": "high",
+            "evidence_ids": [
+              "sfh1-ev-25-paidiao-015-main"
+            ],
+            "relation": "related_person",
+            "target_hint": "周侯"
+          }
+        ],
+        "semantic_kind": "historical_person",
+        "supporting_evidence_ids": [
+          "sfh1-ev-25-paidiao-015-liu-annotation-001",
+          "sfh1-ev-25-paidiao-015-main"
+        ],
+        "surface": "謝幼輿"
+      },
+      "selected_record_source": "historian_b_exact_copy",
+      "stage": "adjudicator",
+      "story_id": "25-paidiao-015",
+      "supporting_evidence_ids": [
+        "sfh1-ev-25-paidiao-015-liu-annotation-001",
+        "sfh1-ev-25-paidiao-015-main"
+      ],
+      "surface": "謝幼輿",
+      "transport": {
+        "classification": "cache_hit",
+        "elapsed_seconds": 0,
+        "packet_hash": "f8c0b192feeb06cff3f134ed134f217fd13fcaf314e872bc9d4ddd52fc13796a",
+        "parse_error": null,
+        "prompt_version": "sfh2-a2r-adjudicator-v2",
+        "raw_path": "data/generated/sfh2-a2r/live/sfh2-a2r-live-v1/raw-api/00037-adjudicator-challenge-sfh2-a0r-l-challenge-d47e242dae08241905e8-attempt1.json",
+        "stage": "adjudicator",
+        "unit_id": "challenge:sfh2-a0r-l-challenge-d47e242dae08241905e8",
+        "usage": {}
+      },
+      "valid": true
+    },
+    {
+      "candidate_only": true,
+      "canonical_write_back": false,
+      "case_id": "sfh2-a0r-l-challenge-d3c8fa925020f0c2c62a",
+      "changed_fields": [],
+      "contract_status": "valid",
+      "decision": "select_a",
+      "errors": [],
+      "mention_id": "sfh1-mention-8ba0099c01f2b05135478b23",
+      "patch_ops": [],
+      "reason_summary": "The two hypotheses are substantively identical in all historical content: both identify 顗 as 周顗 (Zhou Yi), the person addressed as 周侯 in the main text, with the same occurrence_role, reference_type, referent, relations, semantic_kind, and supporting evidence. The only disagreement is the discourse.speaker_hint field: Historian A gives \"劉孝標\" (traditional characters) while Historian B gives \"刘孝标注者\" (simplified characters plus a suffix). The annotation is by Liu Xiaobiao (劉孝標), and Historian A's form \"劉孝標\" is the standard traditional-character name matching the source context. This is a metadata-only stylistic difference, not a substantive historical disagreement. Historian A's record is fully valid and accurate.",
+      "reviewed_fields": [],
+      "selected_record": {
+        "abstain": false,
+        "attribute_type": "",
+        "attribute_value": "",
+        "bearer_hint": "",
+        "confidence": "high",
+        "discourse": {
+          "addressee_hint": "",
+          "antecedent_hint": "周侯",
+          "self_reference_hint": "",
+          "speaker_hint": "劉孝標"
+        },
+        "explanation": "The Liu Xiaobiao annotation glosses 顗 as referring to 周顗 (the person addressed as 周侯 in the main text). The annotation text '(媟瀆故/謂顗好)' explains that the preceding content is about 周顗's fondness for something, confirming 顗 is the personal name of 周顗 (Zhou Yi), the person referred to as 周侯 in the main text.",
+        "mention_id": "sfh1-mention-8ba0099c01f2b05135478b23",
+        "occurrence_role": "annotation_person",
+        "reference_type": "personal_name",
+        "referent": {
+          "canonical_hint": "周顗",
+          "confidence": "high",
+          "surface_form": "周顗"
+        },
+        "relations": [
+          {
+            "confidence": "high",
+            "evidence_ids": [
+              "sfh1-ev-25-paidiao-015-liu-annotation-001",
+              "sfh1-ev-25-paidiao-015-main"
+            ],
+            "relation": "same_person",
+            "target_hint": "周侯"
+          }
+        ],
+        "semantic_kind": "historical_person",
+        "supporting_evidence_ids": [
+          "sfh1-ev-25-paidiao-015-liu-annotation-001",
+          "sfh1-ev-25-paidiao-015-main"
+        ],
+        "surface": "顗"
+      },
+      "selected_record_source": "historian_a_exact_copy",
+      "stage": "adjudicator",
+      "story_id": "25-paidiao-015",
+      "supporting_evidence_ids": [
+        "sfh1-ev-25-paidiao-015-liu-annotation-001",
+        "sfh1-ev-25-paidiao-015-main"
+      ],
+      "surface": "顗",
+      "transport": {
+        "classification": "cache_hit",
+        "elapsed_seconds": 0,
+        "packet_hash": "f0010234593ea4711de8fcc3f743f806c25c5e915c30d3045a21339bac7f5aea",
+        "parse_error": null,
+        "prompt_version": "sfh2-a2r-adjudicator-v2",
+        "raw_path": "data/generated/sfh2-a2r/live/sfh2-a2r-live-v1/raw-api/00038-adjudicator-challenge-sfh2-a0r-l-challenge-d3c8fa925020f0c2c62a-attempt1.json",
+        "stage": "adjudicator",
+        "unit_id": "challenge:sfh2-a0r-l-challenge-d3c8fa925020f0c2c62a",
+        "usage": {}
+      },
+      "valid": true
+    }
+  ],
+  "schema": "sfh2-a2r-adjudicator-results-v1"
+}

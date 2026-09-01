@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"decision\": \"select_b\", \"patch_ops\": [], \"reason_summary\": \"The pronoun 卿 is a second-person pronoun spoken by 温太真 (Wen Qiao) addressing 庾亮. The text states 温太真 '大喚亮曰卿可贖我' — he calls out to 庾亮 saying 'you can ransom me.' The 卿 directly addresses 庾亮, who is the addressee of the speech. Historian B correctly assigns occurrence_role as 'addressee_reference' (the pronoun refers to the addressee of the speech act), whereas Historian A's 'scene_participant' is less precise. Both agree on the referent (庾亮), speaker (温太真), and antecedent. Historian B's relations array is empty, which is appropriate since the pronoun's referent is already captured in the referent field and no separate same_person relation to 庾亮 is needed for a pronoun reference. Historian A's same_person relation to 庾亮 is redundant given the referent field already identifies 庾亮. Historian B's record is more accurate.\", \"supporting_evidence_ids\": [\"sfh1-ev-23-rendan-026-main\"]}",
+              "name": "submit_sfh2_a2r_adjudication_v2"
+            },
+            "id": "call_00_Gx8jvFS4gj4BjtwzbR5f3162",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1788196305,
+  "id": "d4013100-bb3b-456c-9fad-de1b3aca0214",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 340,
+    "prompt_cache_hit_tokens": 1920,
+    "prompt_cache_miss_tokens": 1398,
+    "prompt_tokens": 3318,
+    "prompt_tokens_details": {
+      "cached_tokens": 1920
+    },
+    "total_tokens": 3658
+  }
+}

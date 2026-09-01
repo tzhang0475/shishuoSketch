@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"decision\": \"select_b\", \"patch_ops\": [], \"reason_summary\": \"Historian B's record is more accurate. The target span 阮嗣宗 is the courtesy name of 阮籍, confirmed by the Liu annotation (sfh1-ev-01-dexing-015-liu-annotation-001: 阮籍字嗣宗陳留尉氏人阮瑀子). Both historians agree on the core identity (阮籍, courtesy name, historical_person, scene_participant). The substantive disagreements are: (1) discourse.speaker_hint — Historian B correctly identifies 晉文王 as the speaker who praises 阮嗣宗, matching the main text 晉文王稱阮嗣宗至慎; Historian A leaves this empty. (2) relations — Historian B includes the kinship relation to 阮瑀 (his father, confirmed by the annotation) and a related_person relation to 晉文王 (the speaker in the main text). Historian A instead includes a same_person relation to 阮籍, which is redundant since the referent.canonical_hint already identifies 阮籍, and a kinship relation to 阮瑀. Historian B's relation set is more appropriate and better supported by the evidence. Historian B also correctly includes annotation-007 as supporting evidence, which discusses 阮嗣宗's extreme caution (至慎).\", \"supporting_evidence_ids\": [\"sfh1-ev-01-dexing-015-main\", \"sfh1-ev-01-dexing-015-liu-annotation-001\", \"sfh1-ev-01-dexing-015-liu-annotation-007\"]}",
+              "name": "submit_sfh2_a2r_adjudication_v2"
+            },
+            "id": "call_00_T57QQMMnuiyGiX90PEwM0615",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1788196265,
+  "id": "e7db6b0e-2c17-4ffd-a110-615050f35f10",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 428,
+    "prompt_cache_hit_tokens": 0,
+    "prompt_cache_miss_tokens": 5368,
+    "prompt_tokens": 5368,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "total_tokens": 5796
+  }
+}

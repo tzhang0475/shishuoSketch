@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"decision\": \"select_a\", \"patch_ops\": [], \"reason_summary\": \"Both historians agree on the core identity: 王藍田 refers to 王述 (Wang Shu), who inherited the title 藍田侯 (Marquis of Lantian), confirmed by Liu annotations 002, 003, and 004. Both agree on semantic_kind (historical_person), reference_type (office_title), occurrence_role (scene_participant), and the same_person relation to 王述. The only substantive disagreements are in discourse fields and referent.surface_form. Historian A leaves discourse fields empty (appropriate for a narrative scene reference where 王藍田 is a third-person title reference to a scene participant, not a speaker/addressee/self-reference), while Historian B fills in addressee_hint=\\\"reader\\\" and speaker_hint=\\\"narrator\\\" without clear evidence. The surface_form in the referent should reflect the actual surface form 王藍田 (as A has it), not 王述 (as B has it), since the mention surface is 王藍田. Historian A's record is more accurate and conservative on these fields.\", \"supporting_evidence_ids\": [\"sfh1-ev-04-wenxue-022-main\", \"sfh1-ev-04-wenxue-022-liu-annotation-002\", \"sfh1-ev-04-wenxue-022-liu-annotation-003\", \"sfh1-ev-04-wenxue-022-liu-annotation-004\"]}",
+              "name": "submit_sfh2_a2r_adjudication_v2"
+            },
+            "id": "call_00_tPEB36AZPZ3FL9ad9Col7506",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1788196280,
+  "id": "545ccfef-a04f-4b96-92c4-8f48393df822",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 402,
+    "prompt_cache_hit_tokens": 1920,
+    "prompt_cache_miss_tokens": 4150,
+    "prompt_tokens": 6070,
+    "prompt_tokens_details": {
+      "cached_tokens": 1920
+    },
+    "total_tokens": 6472
+  }
+}

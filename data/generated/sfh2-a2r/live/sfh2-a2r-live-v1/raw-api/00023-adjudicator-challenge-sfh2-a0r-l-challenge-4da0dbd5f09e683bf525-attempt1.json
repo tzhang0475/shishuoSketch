@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"decision\": \"select_a\", \"patch_ops\": [], \"reason_summary\": \"Both historians agree on all substantive fields except the referent's canonical_hint and surface_form. Historian A gives canonical_hint \\\"簡文帝\\\" and surface_form \\\"簡文\\\"; Historian B gives canonical_hint \\\"司馬昱\\\" and surface_form \\\"簡文帝\\\". The target span is \\\"上\\\" (a ruler title), and the validated local mention sfh1-mention-1663ef91cb1ebbf7819c2c5a identifies \\\"簡文\\\" as the ruler in this scene. The surface form of the referent should match the actual attested form in the text, which is \\\"簡文\\\" (the ruler title used in the main text). Historian A's surface_form \\\"簡文\\\" correctly matches the attested textual form, while Historian B's \\\"簡文帝\\\" is an expanded form not present in the source. The canonical_hint \\\"簡文帝\\\" is the standard canonical name for 司馬昱, so Historian A's record is more faithful to the source evidence.\", \"supporting_evidence_ids\": [\"sfh1-ev-02-yanyu-060-main\"]}",
+              "name": "submit_sfh2_a2r_adjudication_v2"
+            },
+            "id": "call_00_BuxKn8T4nfIqATfxL4ua7286",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1788196316,
+  "id": "c8ff1568-38e1-4292-ad0c-3bec45e617fb",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 322,
+    "prompt_cache_hit_tokens": 1920,
+    "prompt_cache_miss_tokens": 1774,
+    "prompt_tokens": 3694,
+    "prompt_tokens_details": {
+      "cached_tokens": 1920
+    },
+    "total_tokens": 4016
+  }
+}

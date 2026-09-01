@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"decision\": \"select_a\", \"patch_ops\": [], \"reason_summary\": \"Both Historian A and B agree on all substantive semantic fields: the target '帝' is a ruler_title referring to 元帝 (Emperor Yuan of Jin), semantic_kind historical_person, occurrence_role scene_participant, discourse hints (speaker 王導, addressee 帝, antecedent 元帝), and referent canonical_hint 元帝 with high confidence. The only difference is in the relations array: Historian A assigns the same_person relation to 元帝 with evidence from both annotation-002 and main, and the related_person relation to 王導 with evidence from annotation-002; Historian B assigns same_person to 元帝 with evidence only from main, and related_person to 王導 with evidence from annotation-002. Both relations are substantively identical in content (same_person→元帝, related_person→王導); the only divergence is the evidence_ids attached to the same_person relation. Historian A's assignment of both annotation-002 and main as evidence for the same_person relation is more complete, since the target '帝' appears in annotation-002 and the identification with 元帝 is established by the main text. This is a minor evidence-attribution difference, not a substantive historical disagreement. Historian A's record is selected as the more complete and accurate representation.\", \"supporting_evidence_ids\": [\"sfh1-ev-10-guizhen-011-liu-annotation-002\", \"sfh1-ev-10-guizhen-011-main\"]}",
+              "name": "submit_sfh2_a2r_adjudication_v2"
+            },
+            "id": "call_00_V6N91M1W3LzaDNLvYkXu8649",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1788196333,
+  "id": "a9526376-09bf-4bcb-9574-bab90347d4b6",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 413,
+    "prompt_cache_hit_tokens": 1920,
+    "prompt_cache_miss_tokens": 2084,
+    "prompt_tokens": 4004,
+    "prompt_tokens_details": {
+      "cached_tokens": 1920
+    },
+    "total_tokens": 4417
+  }
+}

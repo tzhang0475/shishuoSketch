@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"decision\": \"select_a\", \"patch_ops\": [], \"reason_summary\": \"Both historians agree on the core semantic content: the span 字景真 is a courtesy-name attribute (attribute_type=courtesy_name, attribute_value=景真) borne by 桓亮 (bearer_hint=桓亮), with high confidence, referent 桓亮, and supporting evidence sfh1-ev-19-xianyuan-032-liu-annotation-003. The only disagreements are in discourse hints and the relation type. Historian A's relation is \\\"attribute_of\\\" targeting 桓亮, which is the correct relation for a courtesy-name attribute reference (the courtesy name is an attribute of the person 桓亮). Historian B instead used \\\"same_person\\\", which is semantically inappropriate here since the target span is an attribute (courtesy name), not a co-referring person mention. On discourse, Historian A leaves addressee_hint and speaker_hint empty, which is appropriate for an annotation text that is not direct speech; Historian B's \\\"reader\\\" addressee and \\\"Liu Xiaobiao (annotator)\\\" speaker hints are speculative and not supported by the evidence. Historian A's record is therefore the more accurate one.\", \"supporting_evidence_ids\": [\"sfh1-ev-19-xianyuan-032-liu-annotation-003\"]}",
+              "name": "submit_sfh2_a2r_adjudication_v2"
+            },
+            "id": "call_00_wwiLRFnXqXY1cYJLzMue0618",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1788196301,
+  "id": "1cc4622e-cab6-4863-808a-b1ce02d82e64",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 361,
+    "prompt_cache_hit_tokens": 1920,
+    "prompt_cache_miss_tokens": 4460,
+    "prompt_tokens": 6380,
+    "prompt_tokens_details": {
+      "cached_tokens": 1920
+    },
+    "total_tokens": 6741
+  }
+}

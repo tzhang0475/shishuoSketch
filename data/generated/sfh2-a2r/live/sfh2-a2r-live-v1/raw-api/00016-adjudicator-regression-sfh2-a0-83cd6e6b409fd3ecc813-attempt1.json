@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"decision\": \"select_b\", \"patch_ops\": [], \"reason_summary\": \"Both historians agree on the core identity: 嚴仲弼 is the courtesy name (字) of 嚴隱, a historical person from Wu, with reference_type courtesy_name, semantic_kind historical_person, occurrence_role scene_participant, and speaker 蔡洪. The only substantive disagreements are in discourse.addressee_hint, discourse.antecedent_hint, referent.canonical_hint, and relations.\\n\\nHistorian B's addressee_hint \\\"秀才吳\\\" is more accurate than A's \\\"問者（秀才吳舊姓者）\\\". The main text opens \\\"有問秀才吳舊姓何如\\\" — the questioner asks about the old surnames of Wu, and the addressee is the 秀才 (蔡洪) from Wu. The addressee is the 秀才, not the questioner. Historian A mislabels the addressee as the questioner, which is incorrect.\\n\\nHistorian B's antecedent_hint \\\"嚴仲弼\\\" correctly identifies the antecedent as the target span itself (the courtesy name being discussed). Historian A leaves antecedent_hint empty.\\n\\nFor referent.canonical_hint, B uses \\\"嚴隱\\\" (the plain name), which matches the validated local mention sfh1-mention-e19933337b24eac91a6f3f4b (嚴隱) and the annotation text \\\"嚴隱字仲弼\\\". A's \\\"嚴隱字仲弼\\\" redundantly includes the courtesy name in the canonical hint, which is less clean.\\n\\nFor relations, B's same_person relation targets \\\"嚴隱\\\" with evidence from the annotation, which is correct. A's relation adds the main text as evidence and uses target \\\"嚴隱\\\" — both are acceptable, but B's is cleaner and consistent with the validated mention.\\n\\nHistorian B is more accurate on all substantive fields.\", \"supporting_evidence_ids\": [\"sfh1-ev-08-shangyu-020-main\", \"sfh1-ev-08-shangyu-020-liu-annotation-005\"]}",
+              "name": "submit_sfh2_a2r_adjudication_v2"
+            },
+            "id": "call_00_8dwK2OhhBz75lop0x1dj5998",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1788196295,
+  "id": "1b7c33b2-2eeb-48e2-ac35-2c2e09f38817",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 517,
+    "prompt_cache_hit_tokens": 1920,
+    "prompt_cache_miss_tokens": 4987,
+    "prompt_tokens": 6907,
+    "prompt_tokens_details": {
+      "cached_tokens": 1920
+    },
+    "total_tokens": 7424
+  }
+}

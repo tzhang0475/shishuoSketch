@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"decision\": \"select_b\", \"patch_ops\": [], \"reason_summary\": \"Historian B's record is more accurate. The target 顧 is the surname reference at the start of the main text, immediately followed by 長康 (顧長康), referring to the painter Gu Kaizhi (顧愷之). Both records agree on the core identity (顧愷之, historical_person, surname_reference, scene_participant). The disagreements are: (1) Historian A adds a second same_person relation to 愷 (the Liu annotation gloss), but the annotation glosses 愷 as the personal name within the same person's identity—this is not a separate structured relation target and creates a multi_candidate_ambiguity flag; Historian B correctly keeps only the single same_person relation to 顧長康. (2) Historian B's discourse fields are more complete: speaker_hint \\\"narrator\\\" is appropriate since the text is third-person narration, and antecedent_hint correctly identifies the full-name mention 顧長康. Historian A's antecedent_hint \\\"顧長康\\\" is also acceptable but lacks the mention reference and omits speaker_hint. Historian B's record is the cleaner, more defensible hypothesis.\", \"supporting_evidence_ids\": [\"sfh1-ev-21-qiaoyi-011-main\", \"sfh1-ev-21-qiaoyi-011-liu-annotation-001\"]}",
+              "name": "submit_sfh2_a2r_adjudication_v2"
+            },
+            "id": "call_00_lfpHWuIzfXgc96RYXNuT0309",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1788196346,
+  "id": "ae2903cf-23d8-46b8-96b0-f1dfa6bb49fe",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 382,
+    "prompt_cache_hit_tokens": 1920,
+    "prompt_cache_miss_tokens": 1945,
+    "prompt_tokens": 3865,
+    "prompt_tokens_details": {
+      "cached_tokens": 1920
+    },
+    "total_tokens": 4247
+  }
+}

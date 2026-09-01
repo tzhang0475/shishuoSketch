@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"decision\": \"select_a\", \"patch_ops\": [], \"reason_summary\": \"Both historians agree 元帝 refers to Emperor Yuan of Jin (司馬睿), the founding emperor of the Eastern Jin. The disagreement is narrow: (1) canonical_hint — A uses \\\"晉元帝司馬睿\\\" while B uses \\\"司馬睿\\\"; both are correct, but A's fuller form is more precise and standard. (2) relations — A's \\\"same_person\\\" relation targets 王導 (from the Liu annotation, where 王導 admonishes 帝), while B's \\\"same_person\\\" relation targets 帝 (the subsequent 帝 in the main text). The main text's 帝 (mention cc8016114f176363bb5353de) is indeed the same person as 元帝, but that is a separate validated mention; the relation to 王導 (王茂弘) is the more substantive cross-entity relation. A's relation set (related_person to 王茂弘, same_person to 王導) is more informative and better grounded in the annotation evidence. A's supporting evidence correctly cites the main text and the relevant Liu annotation. A is selected.\", \"supporting_evidence_ids\": [\"sfh1-ev-10-guizhen-011-main\", \"sfh1-ev-10-guizhen-011-liu-annotation-002\"]}",
+              "name": "submit_sfh2_a2r_adjudication_v2"
+            },
+            "id": "call_00_nbDhJdCo2Ce445EsoNIo6262",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1788196340,
+  "id": "035072a1-e08c-48d6-958c-55659a9936a1",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 367,
+    "prompt_cache_hit_tokens": 1920,
+    "prompt_cache_miss_tokens": 2053,
+    "prompt_tokens": 3973,
+    "prompt_tokens_details": {
+      "cached_tokens": 1920
+    },
+    "total_tokens": 4340
+  }
+}

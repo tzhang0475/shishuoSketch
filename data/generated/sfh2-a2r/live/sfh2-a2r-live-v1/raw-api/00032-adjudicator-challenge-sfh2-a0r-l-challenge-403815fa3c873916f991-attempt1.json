@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"decision\": \"select_a\", \"patch_ops\": [], \"reason_summary\": \"Both historians agree on all substantive historical identity fields: semantic_kind (historical_person), reference_type (office_title), occurrence_role (scene_participant), referent.canonical_hint (殷仲堪), referent.surface_form (殷仲堪), and confidence (high). The only disagreements are in discourse.antecedent_hint and the ordering of the two relations. Historian A sets antecedent_hint to 殷仲堪, which is correct: the antecedent of the office-title reference 殷荆州 is the person 殷仲堪 (the referent), not the surface form 殷荆州 itself. Historian B sets antecedent_hint to 殷荆州, which conflates the surface form with the antecedent. The relations are identical in content (same_person→仲堪, related_person→顧長康), differing only in array order, which is not substantive. Historian A's record is therefore the more accurate one.\", \"supporting_evidence_ids\": [\"sfh1-ev-21-qiaoyi-011-main\", \"sfh1-ev-21-qiaoyi-011-liu-annotation-002\"]}",
+              "name": "submit_sfh2_a2r_adjudication_v2"
+            },
+            "id": "call_00_6PaxG7BgLtOvVdSTcfXM7594",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1788196343,
+  "id": "4fc2f3a2-94ac-4776-bc29-3cf1908c2100",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 329,
+    "prompt_cache_hit_tokens": 1920,
+    "prompt_cache_miss_tokens": 2062,
+    "prompt_tokens": 3982,
+    "prompt_tokens_details": {
+      "cached_tokens": 1920
+    },
+    "total_tokens": 4311
+  }
+}

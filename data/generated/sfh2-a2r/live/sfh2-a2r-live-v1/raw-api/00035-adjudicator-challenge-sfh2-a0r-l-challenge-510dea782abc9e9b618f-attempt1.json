@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "{\"decision\": \"select_b\", \"patch_ops\": [], \"reason_summary\": \"Historian B's record is more accurate. The target span 周侯 is the addressee of 謝幼輿's speech (謝幼輿謂周侯曰), so occurrence_role should be \\\"addressee_reference\\\" rather than \\\"scene_participant\\\". The discourse antecedent_hint 周侯 is appropriate since the pronoun 卿 later refers back to 周侯. The relations field in B correctly captures both the same_person link to 顗 (confirmed by the Liu annotation gloss) and the related_person link to 謝幼輿 (the speaker in the dialogue). Historian A omits the addressee role and the speaker relation, and its scene_participant classification is less precise given the direct address structure of the sentence.\", \"supporting_evidence_ids\": [\"sfh1-ev-25-paidiao-015-main\", \"sfh1-ev-25-paidiao-015-liu-annotation-001\"]}",
+              "name": "submit_sfh2_a2r_adjudication_v2"
+            },
+            "id": "call_00_tevoFHVaav1y7777UklX7011",
+            "index": 0,
+            "type": "function"
+          }
+        ]
+      }
+    }
+  ],
+  "created": 1788196353,
+  "id": "ee9867b1-cde2-4382-94f4-51cf736cd9a0",
+  "model": "deepseek-v4-flash",
+  "object": "chat.completion",
+  "system_fingerprint": "a26a7955944dc5c60445bff77fac9c8e",
+  "usage": {
+    "completion_tokens": 292,
+    "prompt_cache_hit_tokens": 1920,
+    "prompt_cache_miss_tokens": 1507,
+    "prompt_tokens": 3427,
+    "prompt_tokens_details": {
+      "cached_tokens": 1920
+    },
+    "total_tokens": 3719
+  }
+}
