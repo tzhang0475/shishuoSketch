@@ -1,0 +1,660 @@
+{
+  "schema": "wp1-boundary-audit-v1",
+  "baseline_commit": "9f5d7d17dc4c4aaea8610fb52f72ded1323bbcf9",
+  "audit_scope": "WP1 artifact, builder, validation, Pages, frontend, algorithm, and historical-provenance boundary",
+  "audit_mode": "read_only_main_worktree_with_two_disposable_worktrees",
+  "artifact_set_definition": "The WP1 set is the registered sample inputs, the two generated bundle copies, and the milestone manifest. The builder also rewrites two existing R3B side-effect files; both were byte-identical before and after each isolated rebuild.",
+  "artifacts": [
+    {
+      "path": "data/annotation/wp1-eras.json",
+      "sha256": "296a2ed4d4bd430fd5c737d6b7ad69708038cccc99c00f77be8c93d91ced2a82",
+      "size_bytes": 718,
+      "schema_version": 1,
+      "builder": "registered WP1 input; not written by build_wp1_sample.py",
+      "validator": "scripts/validate_wp1.py",
+      "source_inputs": ["reviewed WP1 era input"],
+      "current_consumers": ["scripts/validate_wp1.py"],
+      "historical_consumers": ["Git history and milestone-1 provenance"],
+      "protected_status": "tracked reviewed/provenance input; no exact current hash registry",
+      "committed_bytes_expected_immutable": true,
+      "pages_rebuilds": false
+    },
+    {
+      "path": "data/annotation/wp1-mentions.json",
+      "sha256": "4c0d9a679cd0d77911a0c73bbfdbe8a4627a6beb7009fb2c1baab2887172dd85",
+      "size_bytes": 5775,
+      "schema_version": 1,
+      "builder": "registered WP1 input; not written by build_wp1_sample.py",
+      "validator": "scripts/validate_wp1.py",
+      "source_inputs": ["reviewed WP1 mention input"],
+      "current_consumers": ["scripts/validate_wp1.py"],
+      "historical_consumers": ["Git history and milestone-1 provenance"],
+      "protected_status": "tracked reviewed/provenance input; no exact current hash registry",
+      "committed_bytes_expected_immutable": true,
+      "pages_rebuilds": false
+    },
+    {
+      "path": "data/annotation/wp1-people.json",
+      "sha256": "b60a0262a4ec6aa49eea26e55da04b64100ef495f04252481d9abc2007b623f3",
+      "size_bytes": 3792,
+      "schema_version": 1,
+      "builder": "registered WP1 input; not written by build_wp1_sample.py",
+      "validator": "scripts/validate_wp1.py",
+      "source_inputs": ["reviewed WP1 people input"],
+      "current_consumers": ["scripts/validate_wp1.py"],
+      "historical_consumers": ["Git history and milestone-1 provenance"],
+      "protected_status": "tracked reviewed/provenance input; no exact current hash registry",
+      "committed_bytes_expected_immutable": true,
+      "pages_rebuilds": false
+    },
+    {
+      "path": "data/annotation/wp1-punctuation.json",
+      "sha256": "a4c3f24c9100aa7e0c36e2537710d6ba16f6b6cbc92663ebfc6c06e7ee389471",
+      "size_bytes": 3540499,
+      "schema_version": 1,
+      "builder": "registered WP1 reading input; not written by build_wp1_sample.py",
+      "validator": "scripts/validate_wp1.py",
+      "source_inputs": ["reviewed WP1 punctuation/readings"],
+      "current_consumers": [
+        "scripts/build_shishuo_reading_layer.py",
+        "scripts/build_sc1_frontend_data.py",
+        "scripts/build_story_chain_gold.py",
+        "scripts/build_w3_selection.py",
+        "scripts/build_w4_expansion.py",
+        "scripts/m2_story_expansion.py",
+        "scripts/m2_experience.py",
+        "scripts/x1_1_common.py",
+        "scripts/x1_2a_common.py",
+        "scripts/x1_2p_common.py",
+        "scripts/run_hng2_read_fill_validation.py"
+      ],
+      "historical_consumers": ["WP1 milestone provenance and Git history"],
+      "protected_status": "tracked reviewed input; active algorithm input",
+      "committed_bytes_expected_immutable": true,
+      "pages_rebuilds": false
+    },
+    {
+      "path": "data/annotation/wp1-relations.json",
+      "sha256": "29dfcef616ee149da375a7fa11b9435843538b668875e000ef8c872453efd2fc",
+      "size_bytes": 11151,
+      "schema_version": 1,
+      "builder": "registered WP1 input; not written by build_wp1_sample.py",
+      "validator": "scripts/validate_wp1.py",
+      "source_inputs": ["reviewed WP1 relations"],
+      "current_consumers": [
+        "scripts/build_h0b0_social_backbone.py",
+        "scripts/build_h0b1_social_temporal_backbone.py",
+        "scripts/build_h0c_historical_context.py",
+        "scripts/build_sc1_frontend_data.py",
+        "scripts/build_w3_selection.py",
+        "scripts/build_w4_projections.py",
+        "scripts/person_expansion.py",
+        "scripts/person_relation_candidates_r3.py",
+        "scripts/person_relation_coverage_r3c.py",
+        "scripts/m2_experience_metrics.py"
+      ],
+      "historical_consumers": ["WP1 milestone provenance and Git history"],
+      "protected_status": "tracked reviewed input; active algorithm input",
+      "committed_bytes_expected_immutable": true,
+      "pages_rebuilds": false
+    },
+    {
+      "path": "data/annotation/wp1-stories.json",
+      "sha256": "dfc4959d40570042a955c8718d57c80badcefc6bbcc5a2126723ea481ff97e3b",
+      "size_bytes": 2130,
+      "schema_version": 1,
+      "builder": "registered WP1 input; not written by build_wp1_sample.py",
+      "validator": "scripts/validate_wp1.py",
+      "source_inputs": ["reviewed WP1 story input"],
+      "current_consumers": ["scripts/validate_wp1.py"],
+      "historical_consumers": ["Git history and milestone-1 provenance"],
+      "protected_status": "tracked reviewed/provenance input; no exact current hash registry",
+      "committed_bytes_expected_immutable": true,
+      "pages_rebuilds": false
+    },
+    {
+      "path": "data/evidence/wp1-evidence.json",
+      "sha256": "dc8438a53b6ece41b4b1076cfe9b69919c4def44dca8d2f2c2b8db8a60ba8dc1",
+      "size_bytes": 3542119,
+      "schema_version": 1,
+      "builder": "registered WP1 evidence input; not written by build_wp1_sample.py",
+      "validator": "scripts/validate_wp1.py",
+      "source_inputs": ["registered WP1 evidence"],
+      "current_consumers": [
+        "scripts/build_sc1_frontend_data.py",
+        "scripts/build_h0b0_social_backbone.py",
+        "scripts/build_h0b1_social_temporal_backbone.py",
+        "scripts/build_h0c_historical_context.py",
+        "scripts/build_hng0.py",
+        "scripts/build_person_story_index.py",
+        "scripts/materialize_person_expansion.py",
+        "scripts/x1_1_common.py",
+        "scripts/x1_2a_common.py"
+      ],
+      "historical_consumers": ["WP1 milestone provenance and Git history"],
+      "protected_status": "tracked registered evidence; active algorithm input",
+      "committed_bytes_expected_immutable": true,
+      "pages_rebuilds": false
+    },
+    {
+      "path": "data/sources/wp1-sources.json",
+      "sha256": "69334851f951768647a9f82d0c6fcddbcbf45386393be6d11483a2e1639f3ef3",
+      "size_bytes": 1379,
+      "schema_version": 1,
+      "builder": "registered WP1 source input; not written by build_wp1_sample.py",
+      "validator": "scripts/validate_wp1.py",
+      "source_inputs": ["registered WP1 source records"],
+      "current_consumers": [
+        "scripts/materialize_person_expansion_wave.py",
+        "scripts/build_w3_selection.py",
+        "tests/test_person_expansion_wave.py"
+      ],
+      "historical_consumers": ["WP1 milestone provenance and Git history"],
+      "protected_status": "tracked registered source input; active algorithm input",
+      "committed_bytes_expected_immutable": true,
+      "pages_rebuilds": false
+    },
+    {
+      "path": "data/derived/wp1-site.json",
+      "sha256": "2f7f9de12a46649d8719efb1dffe814a5e7e8c4c67b8452f4c4452dc70dc37b4",
+      "size_bytes": 629433,
+      "schema_version": 1,
+      "builder": "scripts/build_wp1_sample.py",
+      "validator": "scripts/validate_wp1.py; scripts/validate_frontend_artifact.py",
+      "source_inputs": [
+        "content/processed/shishuo/entries/06-yaliang/entry-019.md",
+        "data/people.json",
+        "data/aliases.json",
+        "data/mentions/shishuo.json",
+        "data/annotation/wp1-punctuation.json",
+        "data/evidence/wp1-evidence.json",
+        "data/annotation/wp1-relations.json",
+        "four registered Jinshu source units"
+      ],
+      "current_consumers": [
+        "scripts/build_sc1_frontend_data.py",
+        "scripts/build_person_story_index.py",
+        "scripts/validate_wp1.py",
+        "scripts/validate_sc1_frontend_data.py",
+        "scripts/validate_person_story_index.py",
+        "scripts/validate_person_expansion_wave.py",
+        "scripts/validate_frontend_artifact.py",
+        "tests/test_wp1.py",
+        "tests/test_sc1_story_chain.py",
+        "tests/test_r2_relation_explorer.py",
+        "tests/test_r2_0_1_frontend_data.py",
+        ".github/workflows/deploy-pages.yml"
+      ],
+      "historical_consumers": [
+        "Git tag wp1-baseline",
+        "milestone-1 provenance",
+        "C0/C1 inventory path scope"
+      ],
+      "protected_status": "tracked current sample bundle; included in C1 path protection, but no exact WP1 hash validator",
+      "committed_bytes_expected_immutable": false,
+      "pages_rebuilds": true
+    },
+    {
+      "path": "site/src/generated/wp1-site.json",
+      "sha256": "2f7f9de12a46649d8719efb1dffe814a5e7e8c4c67b8452f4c4452dc70dc37b4",
+      "size_bytes": 629433,
+      "schema_version": 1,
+      "builder": "scripts/build_wp1_sample.py (Vite copy)",
+      "validator": "scripts/validate_wp1.py; scripts/validate_frontend_artifact.py",
+      "source_inputs": ["data/derived/wp1-site.json"],
+      "current_consumers": [
+        "WP1 bundle-pair validation",
+        "legacy/current WP1 fixture tests"
+      ],
+      "historical_consumers": ["Git history and milestone-1 provenance"],
+      "protected_status": "tracked generated mirror; no direct runtime import in site/src/data.ts",
+      "committed_bytes_expected_immutable": false,
+      "pages_rebuilds": true
+    },
+    {
+      "path": "data/manifest/milestone-1.json",
+      "sha256": "4587ad530b880fcd97bfe30b38ace98d30f72162f170b35594ecceb0cf001819",
+      "size_bytes": 1178,
+      "schema_version": 1,
+      "builder": "milestone manifest; not written by build_wp1_sample.py",
+      "validator": "scripts/validate_wp1.py",
+      "source_inputs": ["Milestone 1 scope/provenance"],
+      "current_consumers": ["scripts/validate_wp1.py", "milestone provenance checks"],
+      "historical_consumers": ["Git history and milestone-1 documentation"],
+      "protected_status": "tracked milestone provenance",
+      "committed_bytes_expected_immutable": true,
+      "pages_rebuilds": false
+    }
+  ],
+  "observed_builder_side_effects": [
+    {
+      "path": "data/derived/person-relations-r3b.json",
+      "sha256_before": "856c8bf8577bfb05010cb2e0f01ba8d4fd957bdb56c662e158192686b14bea64",
+      "sha256_after_rebuild_a": "856c8bf8577bfb05010cb2e0f01ba8d4fd957bdb56c662e158192686b14bea64",
+      "sha256_after_rebuild_b": "856c8bf8577bfb05010cb2e0f01ba8d4fd957bdb56c662e158192686b14bea64",
+      "changed": false,
+      "classification": "builder_side_effect_unchanged"
+    },
+    {
+      "path": "docs/person-relation-review-r3b.md",
+      "sha256_before": "5f61d05f5a7e705ada29b9aa403035bce4d8812c001f89b0d989a0e99abc1d3d",
+      "sha256_after_rebuild_a": "5f61d05f5a7e705ada29b9aa403035bce4d8812c001f89b0d989a0e99abc1d3d",
+      "sha256_after_rebuild_b": "5f61d05f5a7e705ada29b9aa403035bce4d8812c001f89b0d989a0e99abc1d3d",
+      "changed": false,
+      "classification": "builder_side_effect_unchanged"
+    }
+  ],
+  "consumers": [
+    {
+      "consumer": "scripts/build_sc1_frontend_data.py",
+      "classification": "CURRENT_ALGORITHM_INPUT",
+      "paths": ["data/derived/wp1-site.json", "data/annotation/wp1-punctuation.json", "data/annotation/wp1-relations.json", "data/evidence/wp1-evidence.json"]
+    },
+    {
+      "consumer": "scripts/build_person_story_index.py",
+      "classification": "CURRENT_ALGORITHM_INPUT",
+      "paths": ["data/derived/wp1-site.json"]
+    },
+    {
+      "consumer": "scripts/validate_wp1.py; scripts/validate_sc1_frontend_data.py; scripts/validate_frontend_artifact.py; scripts/validate_person_story_index.py; scripts/validate_person_expansion_wave.py",
+      "classification": "CURRENT_VALIDATION",
+      "paths": ["data/derived/wp1-site.json", "site/src/generated/wp1-site.json"]
+    },
+    {
+      "consumer": ".github/workflows/deploy-pages.yml; package.json",
+      "classification": "CURRENT_VALIDATION",
+      "paths": ["scripts/build_wp1_sample.py", "data/derived/wp1-site.json", "site/src/generated/wp1-site.json"]
+    },
+    {
+      "consumer": "tests/test_wp1.py; tests/test_sc1_story_chain.py; tests/test_r2_relation_explorer.py; tests/test_r2_0_1_frontend_data.py",
+      "classification": "CURRENT_VALIDATION",
+      "paths": ["data/derived/wp1-site.json", "site/src/generated/wp1-site.json"]
+    },
+    {
+      "consumer": "site/src/data.ts",
+      "classification": "DEAD_REFERENCE",
+      "paths": [],
+      "reason": "No direct WP1 import; runtime loads SC1 current."
+    },
+    {
+      "consumer": "data/derived/large-frozen-payload-audit-c2.json; data/derived/git-object-storage-audit-c2-1.json",
+      "classification": "PROVENANCE_HASH_ONLY",
+      "paths": ["data/derived/wp1-site.json"]
+    },
+    {
+      "consumer": "wp1-baseline tag and Git history",
+      "classification": "HISTORICAL_REPRODUCIBILITY",
+      "paths": ["data/derived/wp1-site.json"]
+    },
+    {
+      "consumer": "docs/frontend-data-interface.md; docs/data-conventions.md; docs/adr/0001-static-first-wp1.md",
+      "classification": "DOCUMENTATION_ONLY",
+      "paths": ["data/derived/wp1-site.json"]
+    }
+  ],
+  "references": [
+    {
+      "consumer": "scripts/build_sc1_frontend_data.py",
+      "path": "data/derived/wp1-site.json",
+      "classification": "CURRENT_ALGORITHM_INPUT",
+      "dependency_type": "semantic/runtime",
+      "reason": "SC1 current reads WP1 as the preserved sample/base projection while extending the current registry."
+    },
+    {
+      "consumer": "site/src/data.ts",
+      "path": "data/derived/wp1-site.json",
+      "classification": "DEAD_REFERENCE",
+      "dependency_type": "no live dependency",
+      "reason": "The production frontend imports site/src/generated/sc1-current-site.json instead; it does not import WP1."
+    },
+    {
+      "consumer": ".github/workflows/deploy-pages.yml",
+      "path": "scripts/build_wp1_sample.py",
+      "classification": "CURRENT_VALIDATION",
+      "dependency_type": "build/validation",
+      "reason": "Pages rebuilds and validates the WP1 pair before building the current SC1/site."
+    },
+    {
+      "consumer": "package.json",
+      "path": "scripts/build_wp1_sample.py",
+      "classification": "CURRENT_VALIDATION",
+      "dependency_type": "build-command",
+      "reason": "build:sample and build:m2-production retain the WP1 sample build command."
+    },
+    {
+      "consumer": "scripts/validate_wp1.py",
+      "path": "data/derived/wp1-site.json",
+      "classification": "CURRENT_VALIDATION",
+      "dependency_type": "validation",
+      "reason": "Validates the current WP1 schema, references, provenance, and pair equality."
+    },
+    {
+      "consumer": "scripts/validate_sc1_frontend_data.py",
+      "path": "data/derived/wp1-site.json",
+      "classification": "CURRENT_VALIDATION",
+      "dependency_type": "validation",
+      "reason": "Checks preservation of WP1 base people/relations/sources/evidence in current SC1."
+    },
+    {
+      "consumer": "scripts/build_person_story_index.py",
+      "path": "data/derived/wp1-site.json",
+      "classification": "CURRENT_ALGORITHM_INPUT",
+      "dependency_type": "semantic/runtime",
+      "reason": "Uses the WP1 bundle as an input to the current person/story projection."
+    },
+    {
+      "consumer": "scripts/validate_frontend_artifact.py",
+      "path": "site/src/generated/wp1-site.json",
+      "classification": "CURRENT_VALIDATION",
+      "dependency_type": "validation",
+      "reason": "Ensures the legacy/research WP1 pair is consistent and absent from published runtime data."
+    },
+    {
+      "consumer": "data/derived/large-frozen-payload-audit-c2.json",
+      "path": "data/derived/wp1-site.json",
+      "classification": "PROVENANCE_HASH_ONLY",
+      "dependency_type": "hash-only provenance",
+      "reason": "Records an observed historical hash; it does not feed a builder or identity decision."
+    },
+    {
+      "consumer": "data/derived/git-object-storage-audit-c2-1.json",
+      "path": "data/derived/wp1-site.json",
+      "classification": "PROVENANCE_HASH_ONLY",
+      "dependency_type": "hash-only provenance",
+      "reason": "Records storage observations and the same historical hash only."
+    },
+    {
+      "consumer": "data/derived/repository-retirement-inventory-c1.json",
+      "path": "data/derived/wp1-site.json",
+      "classification": "PROVENANCE_HASH_ONLY",
+      "dependency_type": "path-only protection scope",
+      "reason": "C1 records a broad protected path scope; it is not an exact current WP1 byte contract."
+    },
+    {
+      "consumer": "docs/frontend-data-interface.md",
+      "path": "data/derived/wp1-site.json",
+      "classification": "DOCUMENTATION_ONLY",
+      "dependency_type": "documentation",
+      "reason": "Describes WP1 as a research-side sample/archive and directs deployed runtime use to SC1 current."
+    },
+    {
+      "consumer": "tests/test_wp1.py; tests/test_sc1_story_chain.py; tests/test_r2_relation_explorer.py; tests/test_r2_0_1_frontend_data.py",
+      "path": "data/derived/wp1-site.json",
+      "classification": "CURRENT_VALIDATION",
+      "dependency_type": "test fixture/contract",
+      "reason": "These tests exercise the current repository's WP1 bundle and its projection interfaces."
+    },
+    {
+      "consumer": "Git tag wp1-baseline",
+      "path": "data/derived/wp1-site.json",
+      "classification": "HISTORICAL_REPRODUCIBILITY",
+      "dependency_type": "Git-history archive",
+      "reason": "The historical milestone bytes are recoverable from tag/history, not from a current exact-hash runtime validator."
+    }
+  ],
+  "historical_dependencies": [
+    {
+      "kind": "git_tag",
+      "reference": "wp1-baseline",
+      "path": "data/derived/wp1-site.json",
+      "dependency_type": "FROZEN_ARTIFACT_DEPENDENCY",
+      "note": "Historical WP1 bytes are recoverable from Git; current code is not required to reproduce every historical version."
+    },
+    {
+      "kind": "provenance_hash",
+      "reference": "data/derived/large-frozen-payload-audit-c2.json",
+      "path": "data/derived/wp1-site.json",
+      "dependency_type": "PROVENANCE_HASH_ONLY",
+      "note": "Observed hash only; no current builder input or semantic authority."
+    },
+    {
+      "kind": "provenance_hash",
+      "reference": "data/derived/git-object-storage-audit-c2-1.json",
+      "path": "data/derived/wp1-site.json",
+      "dependency_type": "PROVENANCE_HASH_ONLY",
+      "note": "Observed hash only; no current builder input or semantic authority."
+    },
+    {
+      "kind": "path_scope",
+      "reference": "data/derived/repository-retirement-inventory-c1.json",
+      "path": "data/derived/wp1-site.json",
+      "dependency_type": "PROVENANCE_HASH_ONLY",
+      "note": "Protected path inventory, not a frozen exact WP1 hash contract."
+    }
+  ],
+  "current_dependencies": [
+    {
+      "path": "data/derived/wp1-site.json",
+      "consumers": ["scripts/build_sc1_frontend_data.py", "scripts/build_person_story_index.py"],
+      "dependency_type": "CURRENT_ALGORITHM_INPUT",
+      "note": "The current algorithms require the WP1 data/bundle input, not necessarily a Pages rebuild step."
+    },
+    {
+      "path": "data/annotation/wp1-punctuation.json",
+      "consumers": ["current reading, story-chain, HNG/HDB, and expansion builders"],
+      "dependency_type": "CURRENT_ALGORITHM_INPUT",
+      "note": "This reviewed input is shared beyond the WP1 sample."
+    },
+    {
+      "path": "data/annotation/wp1-relations.json",
+      "consumers": ["current graph, expansion, and SC1 builders"],
+      "dependency_type": "CURRENT_ALGORITHM_INPUT",
+      "note": "This reviewed input is shared beyond the WP1 sample."
+    },
+    {
+      "path": "data/evidence/wp1-evidence.json",
+      "consumers": ["current SC1, graph, HNG0, person/story, and expansion builders"],
+      "dependency_type": "CURRENT_ALGORITHM_INPUT",
+      "note": "This registered evidence index is active input, not merely a historical fixture."
+    }
+  ],
+  "committed_hashes": {
+    "data/derived/wp1-site.json": "2f7f9de12a46649d8719efb1dffe814a5e7e8c4c67b8452f4c4452dc70dc37b4",
+    "site/src/generated/wp1-site.json": "2f7f9de12a46649d8719efb1dffe814a5e7e8c4c67b8452f4c4452dc70dc37b4",
+    "data/annotation/wp1-eras.json": "296a2ed4d4bd430fd5c737d6b7ad69708038cccc99c00f77be8c93d91ced2a82",
+    "data/annotation/wp1-mentions.json": "4c0d9a679cd0d77911a0c73bbfdbe8a4627a6beb7009fb2c1baab2887172dd85",
+    "data/annotation/wp1-people.json": "b60a0262a4ec6aa49eea26e55da04b64100ef495f04252481d9abc2007b623f3",
+    "data/annotation/wp1-punctuation.json": "a4c3f24c9100aa7e0c36e2537710d6ba16f6b6cbc92663ebfc6c06e7ee389471",
+    "data/annotation/wp1-relations.json": "29dfcef616ee149da375a7fa11b9435843538b668875e000ef8c872453efd2fc",
+    "data/annotation/wp1-stories.json": "dfc4959d40570042a955c8718d57c80badcefc6bbcc5a2126723ea481ff97e3b",
+    "data/evidence/wp1-evidence.json": "dc8438a53b6ece41b4b1076cfe9b69919c4def44dca8d2f2c2b8db8a60ba8dc1",
+    "data/sources/wp1-sources.json": "69334851f951768647a9f82d0c6fcddbcbf45386393be6d11483a2e1639f3ef3",
+    "data/manifest/milestone-1.json": "4587ad530b880fcd97bfe30b38ace98d30f72162f170b35594ecceb0cf001819"
+  },
+  "rebuild_hashes": {
+    "rebuild_a": {
+      "data/derived/wp1-site.json": "0f0133d15cf69cda172b50f4db29e6a045441b4ff488b08acbd9d5f9b7baf6f6",
+      "site/src/generated/wp1-site.json": "0f0133d15cf69cda172b50f4db29e6a045441b4ff488b08acbd9d5f9b7baf6f6"
+    },
+    "rebuild_b": {
+      "data/derived/wp1-site.json": "0f0133d15cf69cda172b50f4db29e6a045441b4ff488b08acbd9d5f9b7baf6f6",
+      "site/src/generated/wp1-site.json": "0f0133d15cf69cda172b50f4db29e6a045441b4ff488b08acbd9d5f9b7baf6f6"
+    }
+  },
+  "rebuild_execution": {
+    "worktrees": "two disposable clones of the baseline commit",
+    "command": "PATH=/tmp/shishuo-sc1m-venv/bin:$PATH python3 scripts/build_wp1_sample.py",
+    "builder_output": "built WP1 sample: 06-yaliang-019; 7 people; 8 mentions",
+    "rebuild_a_equals_rebuild_b": true,
+    "rebuild_a_equals_committed": false,
+    "rebuild_b_equals_committed": false,
+    "changed_files_in_each_rebuild": [
+      "data/derived/wp1-site.json",
+      "site/src/generated/wp1-site.json"
+    ],
+    "other_wp1_inputs_changed": false,
+    "diff_classification": "ORDER_ONLY",
+    "determinism": "DETERMINISTIC"
+  },
+  "semantic_comparison": {
+    "parsed_json_equal": true,
+    "canonical_sorted_json_sha256": "2918d3c84a0cec43210c7b92d74036589d7a8da3f8f3c41ec030fdede34c4abc",
+    "record_counts": {
+      "stories": 1,
+      "people": 7,
+      "mentions": 8,
+      "relations": 7,
+      "eras": 1,
+      "evidence": 394,
+      "sources": 2
+    },
+    "sections_equal": {
+      "schema": true,
+      "generated_from": true,
+      "stories": true,
+      "people": true,
+      "mentions": true,
+      "relations": true,
+      "eras": true,
+      "evidence": true,
+      "sources": true
+    },
+    "added_records": [],
+    "removed_records": [],
+    "changed_records": [],
+    "field_level_differences": [],
+    "identity_changes": [],
+    "alias_changes": [],
+    "story_changes": [],
+    "person_changes": [],
+    "relation_changes": [],
+    "source_registration_changes": [],
+    "ordering_differences": [
+      {
+        "json_path": "stories[0].reading",
+        "committed_key_order": [
+          "entry_id",
+          "status",
+          "punctuation_record_id",
+          "base_canonical_entry_sha256",
+          "conversion",
+          "main_text",
+          "annotations",
+          "labels",
+          "person_display",
+          "mention_display",
+          "source_display",
+          "relation_display",
+          "evidence_display",
+          "display_overrides"
+        ],
+        "rebuilt_key_order": [
+          "entry_id",
+          "status",
+          "punctuation_record_id",
+          "base_canonical_entry_sha256",
+          "conversion",
+          "main_text",
+          "annotations",
+          "mention_display",
+          "display_overrides",
+          "labels",
+          "person_display",
+          "source_display",
+          "relation_display",
+          "evidence_display"
+        ],
+        "classification": "ORDER_ONLY",
+        "applies_to": [
+          "data/derived/wp1-site.json",
+          "site/src/generated/wp1-site.json"
+        ]
+      }
+    ],
+    "semantic_delta_count": 0,
+    "serialization_or_order_only_difference_count": 2,
+    "material_difference_classification": "NON_SEMANTIC_DRIFT"
+  },
+  "history": {
+    "baseline_tag_commit": "26c309f",
+    "artifact_history": [
+      {
+        "commit": "26c309f",
+        "label": "wp1-baseline",
+        "sha256": "ee75a2edf5b3ff9cdcad2147344eb03cb99d2bea2003d0b1869e57586e698561",
+        "size_bytes": 19938
+      },
+      {
+        "commit": "cf2da1e",
+        "sha256": "a451728ddc1d394bd1381d1296826eb200368017e6b7badfb8754391e52ee719",
+        "size_bytes": 21417
+      },
+      {
+        "commit": "923231a",
+        "sha256": "1c2603c890c5621fa49ad52b0ab1969d0dd03451194ce3e7e605881b14de7c8e",
+        "size_bytes": 38806
+      },
+      {
+        "commit": "dd407c6",
+        "sha256": "1b8e19d48e7d3b5ca6c29098fcc4d9e945755278eee2853f1e006fb45b3f1029",
+        "size_bytes": 45183
+      },
+      {
+        "commit": "4ee35d5",
+        "sha256": "2eaaccaa75e8857bbadf1d699c46ee4c1e7e5524d4f59d6bba5c3e203376e904",
+        "size_bytes": 629379
+      },
+      {
+        "commit": "06b5220",
+        "sha256": "2f7f9de12a46649d8719efb1dffe814a5e7e8c4c67b8452f4c4452dc70dc37b4",
+        "size_bytes": 629433
+      }
+    ],
+    "first_behavioral_order_drift_source": {
+      "commit": "3c7dd31d77e0f01abc137f444dcee99a867f867f",
+      "subject": "Implement D1.1 — Runtime Display Map Deduplication",
+      "changed_runtime_file": "scripts/reading_layers.py",
+      "effect": "build_display_reading constructs shared display fields with dict.update, changing insertion order without changing values."
+    },
+    "last_wp1_artifact_change_commit": "06b5220"
+  },
+  "pages_and_runtime": {
+    "frontend_directly_consumes_wp1": false,
+    "frontend_runtime_input": "site/src/generated/sc1-current-site.json",
+    "sc1_current_reads_wp1_at_build_time": true,
+    "current_algorithm_reads_wp1": true,
+    "pages_wp1_rebuild": "unnecessary_as_an_independent_frontend_step_but_present_in_current_pipeline",
+    "pages_reason": "The current SC1 builder needs the WP1 bundle as a base input, but the frontend does not load WP1 directly. Pages currently rebuilds WP1 because the workflow and build:m2-production retain the historical sample build step; removing that step would be a future compatibility cleanup, not a frozen/current semantic migration.",
+    "pages_can_mutate_wp1": true,
+    "pages_mutation_observed": "order-only changes in the two WP1 bundle copies",
+    "current_production_wp1_contract": "indirect build-time input, not a direct published runtime artifact"
+  },
+  "historical_hash_consumers": {
+    "exact_wp1_hash_consumers": [
+      "data/derived/large-frozen-payload-audit-c2.json",
+      "data/derived/git-object-storage-audit-c2-1.json"
+    ],
+    "exact_hash_consumer_count": 2,
+    "implicit_git_history_consumers": ["wp1-baseline tag", "Git history"],
+    "current_builder_exact_hash_dependency": false
+  },
+  "protected_inputs_verified": {
+    "data/derived/sc1-site.json": "cc82c6738fcbf4fc14c12005a459048e71ce329492867d0910562fc6fdfda0d8",
+    "data/derived/sc1-current-site.json": "b916530264285dd7fa1d2e27a7a1dff8cd2ed794dfb3b84985881f8f209d8f6a",
+    "site/src/generated/sc1-site.json": "cc82c6738fcbf4fc14c12005a459048e71ce329492867d0910562fc6fdfda0d8",
+    "site/src/generated/sc1-current-site.json": "b916530264285dd7fa1d2e27a7a1dff8cd2ed794dfb3b84985881f8f209d8f6a"
+  },
+  "validation": {
+    "git_diff_check": "pass",
+    "wp1_validator_portable": "pass",
+    "current_test_contract": "pass; npm run test:current; 557 tests",
+    "sc1_frozen_validator": "pass",
+    "sc1_current_validator_portable": "pass",
+    "c3_growth_guard": "pass_no_new_violations",
+    "main_worktree_builders_run": false,
+    "main_worktree_protected_artifacts_changed": false,
+    "frontend_typecheck_or_build": "not run in main because the repository build path mutates generated artifacts; current frontend/runtime dependency was established by static audit and existing SC1M validation"
+  },
+  "deterministic": true,
+  "committed_equals_current_rebuild": false,
+  "semantic_delta_count": 0,
+  "decision": "NO_MIGRATION_NEEDED",
+  "decision_reason": "WP1's current builder is deterministic and reproduces the committed semantic content exactly. The only byte difference is insertion order in one reading object, caused generically by D1.1 dict construction; there are no added, removed, identity, alias, story, relation, source, or provenance-value changes. WP1 has historical Git provenance, but no active exact-byte WP1 hash contract that conflicts with its current sample/projection role. A frozen/current migration is therefore not justified by this audit.",
+  "recommended_next_step": "No WPM. In a later small contract-cleanup change, either make WP1 serialization order stable or stop Pages from rebuilding the research-side WP1 pair when only SC1_CURRENT is published. Preserve the wp1-baseline tag and Git history; do not update hashes in WP1A.",
+  "limitations": [
+    "The audit does not create a new WP1 current artifact or rewrite WP1 bytes in the main worktree.",
+    "The literal committed bundle hash differs from isolated rebuild hashes because of order-only serialization drift.",
+    "The audit does not prove that every historical external consumer is absent; it proves the repository-wide textual/path consumers found at this baseline.",
+    "The current SC1 builder still has a build-time WP1 dependency, so removing the Pages WP1 step requires a separate compatibility review."
+  ]
+}
