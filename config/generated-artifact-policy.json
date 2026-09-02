@@ -1,0 +1,119 @@
+{
+  "schema": "generated-artifact-lifecycle-policy-v1",
+  "purpose": "Prospective policy for generated artifacts; paths present in the supplied baseline are grandfathered.",
+  "generated_roots": [
+    "data/generated/",
+    "data/derived/",
+    "site/src/generated/",
+    "site/public/generated/"
+  ],
+  "classes": {
+    "GIT_AUTHORITY": {
+      "description": "Canonical data, Gold/reviewed annotation, frozen selections, and human semantic decisions.",
+      "default_storage": "git",
+      "write_policy": "allowed_when_reviewed"
+    },
+    "GIT_COMPACT_RESULT": {
+      "description": "Semantic projections, metrics, compact manifests, and deterministic result summaries.",
+      "default_storage": "git",
+      "write_policy": "allowed"
+    },
+    "EXTERNAL_ARCHIVE_DEFAULT": {
+      "description": "Raw provider/API envelopes, HTTP transport payloads, retry responses, and large immutable request/response dumps.",
+      "default_storage": "external_archive",
+      "write_policy": "git_requires_approved_exception"
+    },
+    "EPHEMERAL_REBUILDABLE": {
+      "description": "Temporary replay state, debug output, and deterministic scratch/intermediate files.",
+      "default_storage": "ephemeral_or_ignored",
+      "write_policy": "do_not_commit"
+    }
+  },
+  "default_git_policy": {
+    "new_paths_only": true,
+    "grandfather_existing_baseline_paths": true,
+    "unclassified_generated_default_class": "GIT_COMPACT_RESULT",
+    "unclassified_generated_is_explicit": false,
+    "raw_provider_payloads_require_approved_exception": true,
+    "external_archive_default_requires_approved_exception": true,
+    "ephemeral_rebuildable_requires_approved_exception": true,
+    "approved_exception_must_include": [
+      "id",
+      "path_or_pattern",
+      "artifact_class",
+      "reason",
+      "review_reference"
+    ]
+  },
+  "thresholds": {
+    "warn_generated_file_bytes": 5242880,
+    "require_explicit_classification_bytes": 20971520
+  },
+  "path_classifications": [
+    {
+      "pattern": "data/generated/**/raw-api/**",
+      "artifact_class": "EXTERNAL_ARCHIVE_DEFAULT",
+      "explicit": true
+    },
+    {
+      "pattern": "data/generated/**/raw_api/**",
+      "artifact_class": "EXTERNAL_ARCHIVE_DEFAULT",
+      "explicit": true
+    },
+    {
+      "pattern": "data/generated/**/provider-response*/**",
+      "artifact_class": "EXTERNAL_ARCHIVE_DEFAULT",
+      "explicit": true
+    },
+    {
+      "pattern": "site/src/generated/**/raw-api/**",
+      "artifact_class": "EXTERNAL_ARCHIVE_DEFAULT",
+      "explicit": true
+    },
+    {
+      "pattern": "site/public/generated/**/raw-api/**",
+      "artifact_class": "EXTERNAL_ARCHIVE_DEFAULT",
+      "explicit": true
+    },
+    {
+      "pattern": "data/generated/**/debug/**",
+      "artifact_class": "EPHEMERAL_REBUILDABLE",
+      "explicit": true
+    },
+    {
+      "pattern": "data/generated/**/scratch/**",
+      "artifact_class": "EPHEMERAL_REBUILDABLE",
+      "explicit": true
+    },
+    {
+      "pattern": "data/generated/**",
+      "artifact_class": "GIT_COMPACT_RESULT",
+      "explicit": false
+    },
+    {
+      "pattern": "data/derived/**",
+      "artifact_class": "GIT_COMPACT_RESULT",
+      "explicit": false
+    },
+    {
+      "pattern": "site/src/generated/**",
+      "artifact_class": "GIT_COMPACT_RESULT",
+      "explicit": false
+    },
+    {
+      "pattern": "site/public/generated/**",
+      "artifact_class": "GIT_COMPACT_RESULT",
+      "explicit": false
+    }
+  ],
+  "allowed_exceptions": [],
+  "required_external_archive_manifest_fields": [
+    "schema",
+    "stage",
+    "run_id",
+    "archive_sha256",
+    "files.path",
+    "files.sha256",
+    "files.size_bytes"
+  ]
+}

@@ -18,6 +18,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -38,6 +40,14 @@ jobs:
 
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
+
+      - name: Audit new generated artifacts
+        run: |
+          BASELINE_REF="${{ github.event.before }}"
+          if [ -z "$BASELINE_REF" ] || [ "$BASELINE_REF" = "0000000000000000000000000000000000000000" ]; then
+            BASELINE_REF="$(git rev-parse HEAD^1)"
+          fi
+          python3 scripts/audit_repository_growth.py --baseline "$BASELINE_REF" --check-new
 
       - name: Rebuild WP1 static data
         run: python3 scripts/build_wp1_sample.py
