@@ -21,7 +21,7 @@ ROOT = Path(__file__).resolve().parents[1]
 class SC111InlineMentionTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls) -> None:
-        cls.bundle = json.loads((ROOT / "data/derived/sc1-site.json").read_text(encoding="utf-8"))
+        cls.bundle = json.loads((ROOT / "data/derived/sc1-current-site.json").read_text(encoding="utf-8"))
         cls.mentions = {item["id"]: item for item in cls.bundle["mentions"]}
         cls.people = {item["id"] for item in cls.bundle["people"]}
         cls.app = (ROOT / "site/src/App.tsx").read_text(encoding="utf-8")

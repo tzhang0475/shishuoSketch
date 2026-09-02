@@ -17,6 +17,7 @@ try:
     from .reading_layers import display_span_for_anchor, normalize_reader_whitespace, strip_display_punctuation
     from .validate_person_sketch import validate_bundle as validate_person_sketch_bundle
     from .validate_wp1 import validate_source_provenance
+    from .sc1_paths import CURRENT_SC1_DERIVED_PATH, CURRENT_SC1_VITE_PATH
     from .story_scene_contexts import DERIVED_PATH as SCENE_DERIVED_PATH, SOURCE_PATH as SCENE_SOURCE_PATH, project as project_scene_contexts, validate_source as validate_scene_source, validate_source_path as validate_scene_source_path
     from .person_resolution import load_effective_mentions
 except ImportError:  # direct execution
@@ -24,13 +25,16 @@ except ImportError:  # direct execution
     from reading_layers import display_span_for_anchor, normalize_reader_whitespace, strip_display_punctuation
     from validate_person_sketch import validate_bundle as validate_person_sketch_bundle
     from validate_wp1 import validate_source_provenance
+    from sc1_paths import CURRENT_SC1_DERIVED_PATH, CURRENT_SC1_VITE_PATH
     from story_scene_contexts import DERIVED_PATH as SCENE_DERIVED_PATH, SOURCE_PATH as SCENE_SOURCE_PATH, project as project_scene_contexts, validate_source as validate_scene_source, validate_source_path as validate_scene_source_path
     from person_resolution import load_effective_mentions
 
 
 ROOT = Path(__file__).resolve().parents[1]
-SC1_PATH = ROOT / "data/derived/sc1-site.json"
-VITE_PATH = ROOT / "site/src/generated/sc1-site.json"
+# This validator checks the current rebuildable production projection.  The
+# historical v1 snapshot has a separate integrity-only validator.
+SC1_PATH = ROOT / CURRENT_SC1_DERIVED_PATH
+VITE_PATH = ROOT / CURRENT_SC1_VITE_PATH
 
 
 def read_json(path: Path) -> Any:

@@ -150,14 +150,19 @@ rows, Story cards, relations, and collapsed evidence in that order.
 
 ## SC1 Story Chain projection
 
-The deployed reader imports `site/src/generated/sc1-site.json` at Vite build
-time. `scripts/build_sc1_frontend_data.py` generates that file and the
-research-side `data/derived/sc1-site.json` together from the SC0 Gold Set,
-canonical entry artifacts, existing reading-layer records, and existing
-PersonStoryLinks plus materialized production Persons/Mentions. They must
-remain byte-identical. The earlier
-`wp1-site.json` artifact remains the WP1 sample/research validation fixture;
-it is not a second runtime data source.
+The deployed reader imports `site/src/generated/sc1-current-site.json` at Vite
+build time. `scripts/build_sc1_frontend_data.py` generates that file and the
+current research-side `data/derived/sc1-current-site.json` together from the
+SC0 Gold Set, canonical entry artifacts, current reading-layer records, and
+current PersonStoryLinks plus materialized production Persons/Mentions. These
+two current views remain byte-identical.
+
+The original `data/derived/sc1-site.json` and
+`site/src/generated/sc1-site.json` are `FROZEN_SC1_V1`, an immutable historical
+experiment snapshot. `scripts/validate_sc1_frozen.py` verifies their recorded
+hash and schema; current builds never regenerate or overwrite them. The
+earlier `wp1-site.json` artifact remains the WP1 sample/research validation
+fixture; it is not a second runtime data source.
 
 SC1 adds an orthogonal `story.publication_state`:
 

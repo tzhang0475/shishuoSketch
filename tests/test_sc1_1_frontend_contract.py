@@ -14,7 +14,7 @@ ROOT = Path(__file__).resolve().parents[1]
 class SC11FrontendContractTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls) -> None:
-        cls.bundle = json.loads((ROOT / "data/derived/sc1-site.json").read_text(encoding="utf-8"))
+        cls.bundle = json.loads((ROOT / "data/derived/sc1-current-site.json").read_text(encoding="utf-8"))
         cls.app = (ROOT / "site/src/App.tsx").read_text(encoding="utf-8")
         cls.explorer = (ROOT / "site/src/relationExplorer.ts").read_text(encoding="utf-8")
         cls.styles = (ROOT / "site/src/styles.css").read_text(encoding="utf-8")
@@ -159,9 +159,9 @@ import {{ pathToFileURL }} from "node:url";
 const require = createRequire(import.meta.url);
 const ts = require({json.dumps(str(typescript_runtime))});
 const source = fs.readFileSync({json.dumps(str(ROOT / "site/src/data.ts"))}, "utf8");
-const bundle = JSON.parse(fs.readFileSync({json.dumps(str(ROOT / "site/src/generated/sc1-site.json"))}, "utf8"));
+const bundle = JSON.parse(fs.readFileSync({json.dumps(str(ROOT / "site/src/generated/sc1-current-site.json"))}, "utf8"));
 const sourceWithBundle = source.replace(
-  'import generatedSiteBundle from "./generated/sc1-site.json";',
+  'import generatedSiteBundle from "./generated/sc1-current-site.json";',
   "const generatedSiteBundle = " + JSON.stringify(bundle) + ";",
 );
 const transpiled = ts.transpileModule(sourceWithBundle, {{
@@ -281,7 +281,7 @@ const transpiled = ts.transpileModule(source, {{
 }});
 fs.writeFileSync({json.dumps(str(compiled))}, transpiled.outputText);
 const {{ eligiblePersonIds, randomEligiblePersonId, randomPublishedStoryIdForPerson }} = await import(pathToFileURL({json.dumps(str(compiled))}).href);
-const data = JSON.parse(fs.readFileSync({json.dumps(str(ROOT / "data/derived/sc1-site.json"))}, "utf8"));
+const data = JSON.parse(fs.readFileSync({json.dumps(str(ROOT / "data/derived/sc1-current-site.json"))}, "utf8"));
 const ids = eligiblePersonIds(data);
 const first = randomEligiblePersonId(data, () => 0);
 const second = randomEligiblePersonId(data, () => 0, first ?? undefined);

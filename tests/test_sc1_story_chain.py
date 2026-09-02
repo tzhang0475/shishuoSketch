@@ -22,7 +22,7 @@ ROOT = Path(__file__).resolve().parents[1]
 class SC1StoryChainTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls) -> None:
-        cls.bundle = json.loads((ROOT / "data/derived/sc1-site.json").read_text(encoding="utf-8"))
+        cls.bundle = json.loads((ROOT / "data/derived/sc1-current-site.json").read_text(encoding="utf-8"))
         cls.gold = json.loads((ROOT / "data/story-chain-gold-set.json").read_text(encoding="utf-8"))
         cls.base = json.loads((ROOT / "data/derived/wp1-site.json").read_text(encoding="utf-8"))
 

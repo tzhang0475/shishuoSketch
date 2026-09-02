@@ -15,12 +15,17 @@ import os
 from pathlib import Path
 from typing import Any
 
+try:
+    from .sc1_paths import CURRENT_SC1_DERIVED_PATH, CURRENT_SC1_VITE_PATH
+except ImportError:  # direct script execution
+    from sc1_paths import CURRENT_SC1_DERIVED_PATH, CURRENT_SC1_VITE_PATH
+
 
 ROOT = Path(__file__).resolve().parents[1]
 DERIVED_PATH = ROOT / "data/derived/wp1-site.json"
 VITE_INPUT_PATH = ROOT / "site/src/generated/wp1-site.json"
-SC1_DERIVED_PATH = ROOT / "data/derived/sc1-site.json"
-SC1_VITE_INPUT_PATH = ROOT / "site/src/generated/sc1-site.json"
+SC1_DERIVED_PATH = ROOT / CURRENT_SC1_DERIVED_PATH
+SC1_VITE_INPUT_PATH = ROOT / CURRENT_SC1_VITE_PATH
 DIST_PATH = ROOT / "dist"
 
 

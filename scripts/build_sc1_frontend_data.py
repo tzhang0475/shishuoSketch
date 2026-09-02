@@ -13,6 +13,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import argparse
 from pathlib import Path
 import re
 from typing import Any, Mapping
@@ -36,6 +37,7 @@ try:
     )
     from .person_sketch import build_person_sketches
     from .person_resolution import load_effective_mentions
+    from .sc1_paths import CURRENT_SC1_DERIVED_PATH, CURRENT_SC1_VITE_PATH, FROZEN_SC1_DERIVED_PATH, FROZEN_SC1_VITE_PATH
     from .story_scene_contexts import DERIVED_PATH as SCENE_DERIVED_PATH, SOURCE_PATH as SCENE_SOURCE_PATH, project as project_scene_contexts, validate_source as validate_scene_source, validate_source_path as validate_scene_source_path
 except ImportError:  # direct execution
     from build_six_person_pilot import (
@@ -50,6 +52,7 @@ except ImportError:  # direct execution
     from reading_layers import build_display_reading, build_shared_display_registry, strip_display_punctuation
     from person_sketch import build_person_sketches
     from person_resolution import load_effective_mentions
+    from sc1_paths import CURRENT_SC1_DERIVED_PATH, CURRENT_SC1_VITE_PATH, FROZEN_SC1_DERIVED_PATH, FROZEN_SC1_VITE_PATH
     from story_scene_contexts import DERIVED_PATH as SCENE_DERIVED_PATH, SOURCE_PATH as SCENE_SOURCE_PATH, project as project_scene_contexts, validate_source as validate_scene_source, validate_source_path as validate_scene_source_path
 
 
@@ -71,9 +74,10 @@ PRODUCTION_RELATIONS_PATH = ROOT / "data/annotation/wp1-relations.json"
 H0A_ANCHORS_PATH = ROOT / "data/annotation/story-temporal-anchors-h0a.json"
 E0_PROJECTION_PATH = ROOT / "data/derived/e0-era-card-projection.json"
 E0_ORIENTATION_PATH = ROOT / "data/derived/e0-story-era-orientations.json"
-DERIVED_PATH = ROOT / "data/derived/sc1-site.json"
-VITE_PATH = ROOT / "site/src/generated/sc1-site.json"
-
+# These are current production targets.  The historical SC1 v1 paths above
+# remain readable inputs for frozen experiments but are never write targets.
+DERIVED_PATH = ROOT / CURRENT_SC1_DERIVED_PATH
+VITE_PATH = ROOT / CURRENT_SC1_VITE_PATH
 DEFAULT_TIME = {
     "status": "unknown",
     "label": None,
@@ -410,9 +414,30 @@ def build_ui_labels(converter: OpenCC) -> dict[str, Any]:
     return {key: pair(value, converter) for key, value in labels.items()}
 
 
-def build(root: Path = ROOT) -> dict[str, Any]:
+def _output_path(root: Path, path: Path) -> Path:
+    output = path if path.is_absolute() else root / path
+    frozen_paths = {
+        root / FROZEN_SC1_DERIVED_PATH,
+        root / FROZEN_SC1_VITE_PATH,
+    }
+    if output.resolve() in {item.resolve() for item in frozen_paths}:
+        raise ValueError(
+            "SC1_CURRENT builder cannot overwrite FROZEN_SC1_V1: "
+            f"{output.relative_to(root)}"
+        )
+    return output
+
+
+def build(
+    root: Path = ROOT,
+    *,
+    derived_path: Path = DERIVED_PATH,
+    vite_path: Path = VITE_PATH,
+) -> dict[str, Any]:
     if root.resolve() != ROOT.resolve():
         raise ValueError("SC1 builder currently requires the repository root")
+    derived_output = _output_path(root, derived_path)
+    vite_output = _output_path(root, vite_path)
     base = read_json(WP1_BUNDLE_PATH)
     production_relations = read_json(PRODUCTION_RELATIONS_PATH).get("records", [])
     gold = read_json(GOLD_PATH)
@@ -998,12 +1023,22 @@ def build(root: Path = ROOT) -> dict[str, Any]:
         },
         "ui": build_ui_labels(converter),
     }
-    write_json(DERIVED_PATH, bundle)
-    write_json(VITE_PATH, bundle)
+    write_json(derived_output, bundle)
+    write_json(vite_output, bundle)
     return bundle
 
 
 def main() -> int:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument(
+        "--target",
+        choices=("current",),
+        default="current",
+        help="Build the deterministic current production projection (the only writable target).",
+    )
+    args = parser.parse_args()
+    if args.target != "current":  # pragma: no cover - argparse constrains this
+        raise ValueError("only the current SC1 projection is rebuildable")
     bundle = build()
     states = {state: 0 for state in ("production_ready", "preview_ready", "blocked")}
     for story in bundle["stories"]:

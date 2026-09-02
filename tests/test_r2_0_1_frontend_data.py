@@ -46,7 +46,8 @@ class R20FrontendDataTests(unittest.TestCase):
     def test_sc1_bundle_is_the_actual_frontend_input(self) -> None:
         self.assertEqual(sc1_generated_errors(ROOT), [])
         source = (ROOT / "site/src/data.ts").read_text(encoding="utf-8")
-        self.assertIn('"./generated/sc1-site.json"', source)
+        self.assertIn('"./generated/sc1-current-site.json"', source)
+        self.assertNotIn('"./generated/sc1-site.json"', source)
 
     def test_frontend_loader_has_no_runtime_bundle_fetch(self) -> None:
         source = (ROOT / "site/src/data.ts").read_text(encoding="utf-8")

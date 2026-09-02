@@ -53,13 +53,16 @@ jobs:
         run: python3 scripts/build_wp1_sample.py
 
       - name: Rebuild SC1 Story Chain static data
-        run: python3 scripts/build_sc1_frontend_data.py
+        run: python3 scripts/build_sc1_frontend_data.py --target current
 
       - name: Validate WP1 data
         run: python3 scripts/validate_wp1.py --mode portable
 
       - name: Validate SC1 frontend data
         run: python3 scripts/validate_sc1_frontend_data.py --mode portable
+
+      - name: Validate frozen SC1 v1 integrity
+        run: python3 scripts/validate_sc1_frozen.py
 
       - name: Validate SGZ0 corpus
         run: python3 scripts/validate_sgz0.py --mode portable

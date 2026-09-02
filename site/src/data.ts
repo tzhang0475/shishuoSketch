@@ -8,7 +8,7 @@ import type {
   SourceDisplay,
   StoryReadingLabels,
 } from "./types";
-import generatedSiteBundle from "./generated/sc1-site.json";
+import generatedSiteBundle from "./generated/sc1-current-site.json";
 
 type RuntimeStoryRecord = Record<string, unknown> & {
   id: string;

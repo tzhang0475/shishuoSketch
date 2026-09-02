@@ -1,0 +1,528 @@
+{
+  "schema": "sc1m-v1-to-current-delta-v1",
+  "classification": "SEMANTIC_CHANGE",
+  "frozen": {
+    "logical_name": "FROZEN_SC1_V1",
+    "path": "data/derived/sc1-site.json",
+    "sha256": "cc82c6738fcbf4fc14c12005a459048e71ce329492867d0910562fc6fdfda0d8",
+    "expected_sha256": "cc82c6738fcbf4fc14c12005a459048e71ce329492867d0910562fc6fdfda0d8",
+    "size_bytes": 6868623
+  },
+  "current": {
+    "logical_name": "SC1_CURRENT",
+    "path": "data/derived/sc1-current-site.json",
+    "sha256": "b916530264285dd7fa1d2e27a7a1dff8cd2ed794dfb3b84985881f8f209d8f6a",
+    "size_bytes": 6867466
+  },
+  "comparison": {
+    "parsed_json_equal": false,
+    "canonical_json_equal": false,
+    "serialization_or_order_only_differences": []
+  },
+  "summary": {
+    "semantic_changed_record_count": 13,
+    "serialization_order_only_difference_count": 0,
+    "added_record_count": 0,
+    "removed_record_count": 0,
+    "changed_record_count": 13,
+    "changed_section_paths": [
+      "display.people",
+      "people"
+    ]
+  },
+  "record_counts": [
+    {
+      "path": "display.evidence",
+      "old_count": 1513,
+      "new_count": 1513
+    },
+    {
+      "path": "display.labels",
+      "old_count": 17,
+      "new_count": 17
+    },
+    {
+      "path": "display.people",
+      "old_count": 75,
+      "new_count": 75
+    },
+    {
+      "path": "display.relations",
+      "old_count": 12,
+      "new_count": 12
+    },
+    {
+      "path": "display.sources",
+      "old_count": 2,
+      "new_count": 2
+    },
+    {
+      "path": "era_cards",
+      "old_count": 11,
+      "new_count": 11
+    },
+    {
+      "path": "eras",
+      "old_count": 1,
+      "new_count": 1
+    },
+    {
+      "path": "evidence",
+      "old_count": 1513,
+      "new_count": 1513
+    },
+    {
+      "path": "historical_events",
+      "old_count": 5,
+      "new_count": 5
+    },
+    {
+      "path": "mentions",
+      "old_count": 557,
+      "new_count": 557
+    },
+    {
+      "path": "people",
+      "old_count": 75,
+      "new_count": 75
+    },
+    {
+      "path": "relations",
+      "old_count": 12,
+      "new_count": 12
+    },
+    {
+      "path": "ruler_identities",
+      "old_count": 3,
+      "new_count": 3
+    },
+    {
+      "path": "ruler_mentions",
+      "old_count": 13,
+      "new_count": 13
+    },
+    {
+      "path": "sources",
+      "old_count": 2,
+      "new_count": 2
+    },
+    {
+      "path": "stories",
+      "old_count": 143,
+      "new_count": 143
+    },
+    {
+      "path": "story_era_orientations",
+      "old_count": 143,
+      "new_count": 143
+    }
+  ],
+  "semantic_differences": [
+    {
+      "path": "display.people",
+      "old_count": 75,
+      "new_count": 75,
+      "added_ids": [],
+      "removed_ids": [],
+      "changed_records": [
+        {
+          "record_key": "person-054",
+          "field_differences": [
+            {
+              "path": "display.people[person-054].aliases",
+              "change": "changed",
+              "old": [
+                {
+                  "surface": {
+                    "original": "王庾諸公",
+                    "simplified": "王庾诸公"
+                  },
+                  "alias_type": "contextual_title"
+                },
+                {
+                  "surface": {
+                    "original": "處叔",
+                    "simplified": "处叔"
+                  },
+                  "alias_type": "courtesy_name"
+                },
+                {
+                  "surface": {
+                    "original": "王丞相",
+                    "simplified": "王丞相"
+                  },
+                  "alias_type": "office_title"
+                },
+                {
+                  "surface": {
+                    "original": "王大將軍",
+                    "simplified": "王大将军"
+                  },
+                  "alias_type": "office_title"
+                },
+                {
+                  "surface": {
+                    "original": "王隐",
+                    "simplified": "王隐"
+                  },
+                  "alias_type": "orthographic_variant"
+                },
+                {
+                  "surface": {
+                    "original": "王隱",
+                    "simplified": "王隐"
+                  },
+                  "alias_type": "personal_name"
+                }
+              ],
+              "new": [
+                {
+                  "surface": {
+                    "original": "處叔",
+                    "simplified": "处叔"
+                  },
+                  "alias_type": "courtesy_name"
+                },
+                {
+                  "surface": {
+                    "original": "王隐",
+                    "simplified": "王隐"
+                  },
+                  "alias_type": "orthographic_variant"
+                },
+                {
+                  "surface": {
+                    "original": "王隱",
+                    "simplified": "王隐"
+                  },
+                  "alias_type": "personal_name"
+                }
+              ]
+            }
+          ],
+          "traceability": [
+            "data/aliases.json",
+            "data/annotation/sfh2r-manual-semantic-authority.json",
+            "data/annotation/sfh2r1-manual-semantic-authority.json"
+          ],
+          "authority_reason": "Current reviewed alias/person materialization changed this projection; the difference is intentionally represented in SC1_CURRENT rather than back-propagated into FROZEN_SC1_V1."
+        },
+        {
+          "record_key": "person-063",
+          "field_differences": [
+            {
+              "path": "display.people[person-063].aliases",
+              "change": "changed",
+              "old": [
+                {
+                  "surface": {
+                    "original": "子少",
+                    "simplified": "子少"
+                  },
+                  "alias_type": "courtesy_name"
+                },
+                {
+                  "surface": {
+                    "original": "郭象",
+                    "simplified": "郭象"
+                  },
+                  "alias_type": "personal_name"
+                }
+              ],
+              "new": [
+                {
+                  "surface": {
+                    "original": "子玄",
+                    "simplified": "子玄"
+                  },
+                  "alias_type": "courtesy_name"
+                },
+                {
+                  "surface": {
+                    "original": "郭象",
+                    "simplified": "郭象"
+                  },
+                  "alias_type": "personal_name"
+                }
+              ]
+            }
+          ],
+          "traceability": [
+            "data/aliases.json",
+            "data/annotation/sfh2r-manual-semantic-authority.json",
+            "data/annotation/sfh2r1-manual-semantic-authority.json"
+          ],
+          "authority_reason": "Current reviewed alias/person materialization changed this projection; the difference is intentionally represented in SC1_CURRENT rather than back-propagated into FROZEN_SC1_V1."
+        }
+      ]
+    },
+    {
+      "path": "people",
+      "old_count": 75,
+      "new_count": 75,
+      "added_ids": [],
+      "removed_ids": [],
+      "changed_records": [
+        {
+          "record_key": "id=person-047",
+          "field_differences": [
+            {
+              "path": "people[id=person-047].aliases[surface=伯倫|alias_type=courtesy_name].resolution_mode",
+              "change": "changed",
+              "old": "exact",
+              "new": "contextual"
+            }
+          ],
+          "traceability": [
+            "data/aliases.json",
+            "data/annotation/sfh2r-manual-semantic-authority.json",
+            "data/annotation/sfh2r1-manual-semantic-authority.json"
+          ],
+          "authority_reason": "Current reviewed alias/person materialization changed this projection; the difference is intentionally represented in SC1_CURRENT rather than back-propagated into FROZEN_SC1_V1."
+        },
+        {
+          "record_key": "id=person-053",
+          "field_differences": [
+            {
+              "path": "people[id=person-053].aliases[surface=世將|alias_type=courtesy_name].resolution_mode",
+              "change": "changed",
+              "old": "exact",
+              "new": "contextual"
+            }
+          ],
+          "traceability": [
+            "data/aliases.json",
+            "data/annotation/sfh2r-manual-semantic-authority.json",
+            "data/annotation/sfh2r1-manual-semantic-authority.json"
+          ],
+          "authority_reason": "Current reviewed alias/person materialization changed this projection; the difference is intentionally represented in SC1_CURRENT rather than back-propagated into FROZEN_SC1_V1."
+        },
+        {
+          "record_key": "id=person-054",
+          "field_differences": [
+            {
+              "path": "people[id=person-054].aliases[surface=王丞相|alias_type=office_title]",
+              "change": "removed",
+              "old": {
+                "surface": "王丞相",
+                "alias_type": "office_title",
+                "resolution_mode": "contextual",
+                "evidence_ids": [],
+                "review_status": "candidate"
+              }
+            },
+            {
+              "path": "people[id=person-054].aliases[surface=王大將軍|alias_type=office_title]",
+              "change": "removed",
+              "old": {
+                "surface": "王大將軍",
+                "alias_type": "office_title",
+                "resolution_mode": "contextual",
+                "evidence_ids": [],
+                "review_status": "candidate"
+              }
+            },
+            {
+              "path": "people[id=person-054].aliases[surface=王庾諸公|alias_type=contextual_title]",
+              "change": "removed",
+              "old": {
+                "surface": "王庾諸公",
+                "alias_type": "contextual_title",
+                "resolution_mode": "contextual",
+                "evidence_ids": [],
+                "review_status": "candidate"
+              }
+            }
+          ],
+          "traceability": [
+            "data/aliases.json",
+            "data/annotation/sfh2r-manual-semantic-authority.json",
+            "data/annotation/sfh2r1-manual-semantic-authority.json"
+          ],
+          "authority_reason": "Current reviewed alias/person materialization changed this projection; the difference is intentionally represented in SC1_CURRENT rather than back-propagated into FROZEN_SC1_V1."
+        },
+        {
+          "record_key": "id=person-055",
+          "field_differences": [
+            {
+              "path": "people[id=person-055].aliases[surface=無忌|alias_type=courtesy_name].resolution_mode",
+              "change": "changed",
+              "old": "exact",
+              "new": "contextual"
+            }
+          ],
+          "traceability": [
+            "data/aliases.json",
+            "data/annotation/sfh2r-manual-semantic-authority.json",
+            "data/annotation/sfh2r1-manual-semantic-authority.json"
+          ],
+          "authority_reason": "Current reviewed alias/person materialization changed this projection; the difference is intentionally represented in SC1_CURRENT rather than back-propagated into FROZEN_SC1_V1."
+        },
+        {
+          "record_key": "id=person-059",
+          "field_differences": [
+            {
+              "path": "people[id=person-059].aliases[surface=安國|alias_type=courtesy_name].resolution_mode",
+              "change": "changed",
+              "old": "exact",
+              "new": "contextual"
+            }
+          ],
+          "traceability": [
+            "data/aliases.json",
+            "data/annotation/sfh2r-manual-semantic-authority.json",
+            "data/annotation/sfh2r1-manual-semantic-authority.json"
+          ],
+          "authority_reason": "Current reviewed alias/person materialization changed this projection; the difference is intentionally represented in SC1_CURRENT rather than back-propagated into FROZEN_SC1_V1."
+        },
+        {
+          "record_key": "id=person-062",
+          "field_differences": [
+            {
+              "path": "people[id=person-062].aliases[surface=大業|alias_type=courtesy_name].resolution_mode",
+              "change": "changed",
+              "old": "exact",
+              "new": "contextual"
+            }
+          ],
+          "traceability": [
+            "data/aliases.json",
+            "data/annotation/sfh2r-manual-semantic-authority.json",
+            "data/annotation/sfh2r1-manual-semantic-authority.json"
+          ],
+          "authority_reason": "Current reviewed alias/person materialization changed this projection; the difference is intentionally represented in SC1_CURRENT rather than back-propagated into FROZEN_SC1_V1."
+        },
+        {
+          "record_key": "id=person-063",
+          "field_differences": [
+            {
+              "path": "people[id=person-063].aliases[surface=子少|alias_type=courtesy_name]",
+              "change": "removed",
+              "old": {
+                "surface": "子少",
+                "alias_type": "courtesy_name",
+                "resolution_mode": "exact",
+                "evidence_ids": [
+                  "evidence-w4-person-7e8d1b8faa73c7a9fee7c189",
+                  "evidence-w4-person-f51d00c8d145e02f2471d335"
+                ],
+                "review_status": "candidate"
+              }
+            },
+            {
+              "path": "people[id=person-063].aliases[surface=子玄|alias_type=courtesy_name]",
+              "change": "added",
+              "new": {
+                "surface": "子玄",
+                "alias_type": "courtesy_name",
+                "resolution_mode": "exact",
+                "evidence_ids": [
+                  "evidence-w4-person-7e8d1b8faa73c7a9fee7c189",
+                  "evidence-w4-person-f51d00c8d145e02f2471d335"
+                ],
+                "review_status": "candidate"
+              }
+            }
+          ],
+          "traceability": [
+            "data/aliases.json",
+            "data/annotation/sfh2r-manual-semantic-authority.json",
+            "data/annotation/sfh2r1-manual-semantic-authority.json"
+          ],
+          "authority_reason": "Current reviewed alias/person materialization changed this projection; the difference is intentionally represented in SC1_CURRENT rather than back-propagated into FROZEN_SC1_V1."
+        },
+        {
+          "record_key": "id=person-065",
+          "field_differences": [
+            {
+              "path": "people[id=person-065].aliases[surface=萬年|alias_type=courtesy_name].resolution_mode",
+              "change": "changed",
+              "old": "exact",
+              "new": "contextual"
+            }
+          ],
+          "traceability": [
+            "data/aliases.json",
+            "data/annotation/sfh2r-manual-semantic-authority.json",
+            "data/annotation/sfh2r1-manual-semantic-authority.json"
+          ],
+          "authority_reason": "Current reviewed alias/person materialization changed this projection; the difference is intentionally represented in SC1_CURRENT rather than back-propagated into FROZEN_SC1_V1."
+        },
+        {
+          "record_key": "id=person-066",
+          "field_differences": [
+            {
+              "path": "people[id=person-066].aliases[surface=敬祖|alias_type=courtesy_name].resolution_mode",
+              "change": "changed",
+              "old": "exact",
+              "new": "contextual"
+            }
+          ],
+          "traceability": [
+            "data/aliases.json",
+            "data/annotation/sfh2r-manual-semantic-authority.json",
+            "data/annotation/sfh2r1-manual-semantic-authority.json"
+          ],
+          "authority_reason": "Current reviewed alias/person materialization changed this projection; the difference is intentionally represented in SC1_CURRENT rather than back-propagated into FROZEN_SC1_V1."
+        },
+        {
+          "record_key": "id=person-068",
+          "field_differences": [
+            {
+              "path": "people[id=person-068].aliases[surface=子相|alias_type=courtesy_name].resolution_mode",
+              "change": "changed",
+              "old": "exact",
+              "new": "contextual"
+            }
+          ],
+          "traceability": [
+            "data/aliases.json",
+            "data/annotation/sfh2r-manual-semantic-authority.json",
+            "data/annotation/sfh2r1-manual-semantic-authority.json"
+          ],
+          "authority_reason": "Current reviewed alias/person materialization changed this projection; the difference is intentionally represented in SC1_CURRENT rather than back-propagated into FROZEN_SC1_V1."
+        },
+        {
+          "record_key": "id=person-070",
+          "field_differences": [
+            {
+              "path": "people[id=person-070].aliases[surface=景真|alias_type=courtesy_name].resolution_mode",
+              "change": "changed",
+              "old": "exact",
+              "new": "contextual"
+            }
+          ],
+          "traceability": [
+            "data/aliases.json",
+            "data/annotation/sfh2r-manual-semantic-authority.json",
+            "data/annotation/sfh2r1-manual-semantic-authority.json"
+          ],
+          "authority_reason": "Current reviewed alias/person materialization changed this projection; the difference is intentionally represented in SC1_CURRENT rather than back-propagated into FROZEN_SC1_V1."
+        }
+      ]
+    }
+  ],
+  "authority_traceability": [
+    {
+      "path": "data/aliases.json",
+      "role": "current reviewed semantic authority input",
+      "reason": "SC1_CURRENT consumes the current effective alias/person projection; the frozen v1 snapshot does not change when these inputs are reviewed."
+    },
+    {
+      "path": "data/annotation/sfh2r-manual-semantic-authority.json",
+      "role": "current reviewed semantic authority input",
+      "reason": "SC1_CURRENT consumes the current effective alias/person projection; the frozen v1 snapshot does not change when these inputs are reviewed."
+    },
+    {
+      "path": "data/annotation/sfh2r1-manual-semantic-authority.json",
+      "role": "current reviewed semantic authority input",
+      "reason": "SC1_CURRENT consumes the current effective alias/person projection; the frozen v1 snapshot does not change when these inputs are reviewed."
+    }
+  ],
+  "unexplained_material_differences": [],
+  "safety": {
+    "frozen_artifact_rewritten": false,
+    "canonical_data_written": false,
+    "current_projection_only": true
+  }
+}

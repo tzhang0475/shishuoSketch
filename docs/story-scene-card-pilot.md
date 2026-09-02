@@ -60,7 +60,10 @@ Person ↔ Person 事实。
 - curated source：`data/annotation/story-scene-contexts.json`
 - schema：`schema/story-scene-context.schema.json`
 - derived projection：`data/derived/story-scene-contexts.json`
-- SC1 bundle：`data/derived/sc1-site.json` / `site/src/generated/sc1-site.json`
+- current SC1 bundle：`data/derived/sc1-current-site.json` /
+  `site/src/generated/sc1-current-site.json`
+- historical SC1 v1 snapshot：`data/derived/sc1-site.json` /
+  `site/src/generated/sc1-site.json`（仅用于冻结实验复现）
 
 ## 验证
 
