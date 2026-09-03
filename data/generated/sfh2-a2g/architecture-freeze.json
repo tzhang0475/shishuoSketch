@@ -1,0 +1,95 @@
+{
+  "a2r_sources": {
+    "final": "data/generated/sfh2-a2r/final-results.json",
+    "historian_a": "data/generated/sfh2-a2r/historian-a-cache-index.json",
+    "historian_b": "data/generated/sfh2-a2r/historian-b-cache-reuse.json"
+  },
+  "baseline_commit": "57af9d9bb4b418b15cc9b5aff7f4b2390d8c7608",
+  "gold_in_provider_prompt": false,
+  "gold_used_for": "post-inference evaluation and ontology audit only",
+  "historical_answer_replacements": 0,
+  "identity_equivalence_inferred_by_python": false,
+  "mode": "offline_evaluation_only",
+  "ontology": {
+    "confidences": [
+      "high",
+      "low",
+      "medium"
+    ],
+    "field_boundary_contract": {
+      "attribute_boundary": "person_attribute carries attribute_type/attribute_value and bearer_hint; it is not an independent Person",
+      "canonical_hint": "referent.canonical_hint is the supported normalized historical referent",
+      "office_boundary": "use office when the referred entity itself is an office; a title that identifies a person remains historical_person",
+      "referent_surface": "referent.surface_form is the target reference form",
+      "target_surface": "record.surface is the exact supplied occurrence surface"
+    },
+    "occurrence_roles": [
+      "addressee_reference",
+      "annotation_person",
+      "citation_source_person",
+      "collective_reference",
+      "genealogy_reference",
+      "historical_exemplum",
+      "other",
+      "person_attribute",
+      "scene_participant",
+      "scene_reference",
+      "speaker_reference",
+      "structural"
+    ],
+    "primary_prompt_file_sha256": "e5751c2bf97c9604a8118a5a807a4e22717ce0710fd4e8f22bef83aa940f1fee",
+    "primary_prompt_source": "scripts/sfh2_a0/pipeline.py",
+    "reference_types": [
+      "abbreviated_reference",
+      "addressee_reference",
+      "attribute_reference",
+      "citation_reference",
+      "collective_reference",
+      "courtesy_name",
+      "descriptive_reference",
+      "full_name",
+      "honorific",
+      "kinship_reference",
+      "nickname",
+      "office_title",
+      "personal_name",
+      "pronoun_reference",
+      "ruler_title",
+      "speaker_reference",
+      "structural_reference",
+      "style_name",
+      "surname_reference",
+      "uncertain"
+    ],
+    "relations": [
+      "attribute_of",
+      "citation_relation",
+      "different_person",
+      "kinship_relation",
+      "office_relation",
+      "other",
+      "related_person",
+      "same_person",
+      "uncertain"
+    ],
+    "schema_file_sha256": "c6e5fc6bbfcb0d705a86f546e67b78d6010ce396a0b6fa79b56e63131bb1e7a6",
+    "schema_source": "scripts/sfh2_a0/schemas.py",
+    "semantic_kinds": [
+      "collective",
+      "historical_person",
+      "office",
+      "other",
+      "person_attribute",
+      "place",
+      "structural",
+      "uncertain",
+      "work"
+    ]
+  },
+  "provider_calls": 0,
+  "schema": "sfh2-a2g-architecture-freeze-v1",
+  "selection_case_count": 20,
+  "selection_hash": "b8162d9d470c6359c67a8ed31aa31ef82149c12d92dd9a694b62327fc204bbc3",
+  "selection_path": "data/annotation/sfh2-a0-selection.json",
+  "stage": "SFH2.2-A2G"
+}
