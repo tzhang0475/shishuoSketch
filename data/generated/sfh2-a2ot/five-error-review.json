@@ -1,0 +1,481 @@
+{
+  "counterfactual_metrics": {
+    "accuracy": 0.8462,
+    "correct": 22,
+    "evaluable": 26,
+    "not_promoted": true,
+    "proposal": "participant",
+    "proposal_case_id": "sfh2-a0r-l-challenge-c07bd51ac298529ddbc6"
+  },
+  "current_metrics": {
+    "accuracy": 0.8077,
+    "correct": 21,
+    "evaluable": 26,
+    "source": "frozen data/generated/sfh2-a2o/evaluation.json"
+  },
+  "gold_mutated": false,
+  "human_review_required_case_ids": [
+    "sfh2-a0r-l-challenge-c07bd51ac298529ddbc6"
+  ],
+  "records": [
+    {
+      "a2o_interpretation": {
+        "case_id": "sfh2-a0-57d1fc3c0492b21ee1f4",
+        "confidence": "high",
+        "narrative_function": "citation_source",
+        "reason_summary": "The target occurrence 齊桓公 appears within Liu Xiaobiao's annotation (liu_annotation layer), specifically in a quotation from the 史記 (Shiji). The annotation text reads \"史記曰管仲夷吾者潁上人相齊桓公九合\" — the 齊桓公 is part of the content quoted from the Shiji as a cited source. The occurrence functions as content within a citation_source, where the Shiji is being quoted to provide historical background about 管仲 (Guan Zhong). The target is not a participant, speaker, addressee, or attribute in the narrative itself; it is part of the cited historical source material.",
+        "supporting_evidence_ids": [
+          "sfh1-ev-02-yanyu-036-liu-annotation-001"
+        ]
+      },
+      "case_id": "sfh2-a0-57d1fc3c0492b21ee1f4",
+      "counterfactual": {
+        "counterfactual_correct": null,
+        "current_correct": false,
+        "proposed_gold_label": null,
+        "proposed_gold_role": null
+      },
+      "current_gold": {
+        "case_id": "sfh2-a0-57d1fc3c0492b21ee1f4",
+        "expected_legacy_occurrence_role": "historical_exemplum",
+        "expected_narrative_function": "historical_exemplum",
+        "expected_provenance_layer": "liu_annotation",
+        "frozen_identity_reference": "齊桓公",
+        "provenance": "human_semantic_review",
+        "review_status": "reviewed",
+        "semantic_basis": "The Liu annotation supplies a historical example about 管仲 serving 齊桓公; the occurrence is an exemplum reference.",
+        "source_evidence_id": "sfh1-ev-02-yanyu-036-liu-annotation-001",
+        "story_id": "02-yanyu-036",
+        "surface": "齊桓公"
+      },
+      "exact_evidence": {
+        "nearby_context": {
+          "context_window": {
+            "end": 39,
+            "start": 1,
+            "text": "諸侯一匡天下語林曰初温奉使勸進晉王大/史記/曰管仲夷吾者潁上人相齊桓公九合)"
+          },
+          "nearby_source_evidence": [
+            {
+              "evidence_id": "sfh1-ev-02-yanyu-036-main",
+              "source_layer": "main_text",
+              "text": "温嶠初爲劉琨使來過江于時江左營建始爾綱紀\n未舉温新至深有諸慮旣詣王丞相陳主上幽越社\n稷焚滅山陵夷毁之酷有黍離之痛温忠慨深烈言\n與泗俱丞相亦與之對泣叙情旣畢便深自陳結丞\n相亦厚相酬納旣出懽然言曰江左自有管夷吾此\n復何憂"
+            },
+            {
+              "evidence_id": "sfh1-ev-02-yanyu-036-liu-annotation-001",
+              "source_layer": "liu_annotation",
+              "text": "(諸侯一匡天下語林曰初温奉使勸進晉王大/史記/曰管仲夷吾者潁上人相齊桓公九合)"
+            },
+            {
+              "evidence_id": "sfh1-ev-02-yanyu-036-liu-annotation-002",
+              "source_layer": "liu_annotation",
+              "text": "(說九服分崩皇室弛絶晉王君臣莫不歔欷及言天/集賓客見之温公始入姿形甚陋合坐盡驚旣坐陳)"
+            },
+            {
+              "evidence_id": "sfh1-ev-02-yanyu-036-liu-annotation-003",
+              "source_layer": "liu_annotation",
+              "text": "(相付託温公旣見丞相便游樂不住曰旣見管仲天/下不可以無主聞者莫不踴躍植髮穿冠王丞相㴱)"
+            },
+            {
+              "evidence_id": "sfh1-ev-02-yanyu-036-liu-annotation-004",
+              "source_layer": "liu_annotation",
+              "text": "(復憂/下事無)"
+            }
+          ],
+          "source_path": "content/processed/shishuo/entries/02-yanyu/entry-036.md",
+          "source_sha256": "89bc10a7b1bdccdea637b240de5587b90f57e8d77c6a4214a61ba79f0483c854"
+        },
+        "target_evidence": {
+          "evidence_id": "sfh1-ev-02-yanyu-036-liu-annotation-001",
+          "source_layer": "liu_annotation",
+          "source_ref": "content/processed/shishuo/entries/02-yanyu/entry-036.md",
+          "text": "(諸侯一匡天下語林曰初温奉使勸進晉王大/史記/曰管仲夷吾者潁上人相齊桓公九合)"
+        },
+        "target_span": {
+          "exact_span": "齊桓公",
+          "matched_source_text": "齊桓公",
+          "offset_convention": "zero_based_end_exclusive",
+          "offsets_valid": true,
+          "source_end": 36,
+          "source_start": 33,
+          "surface": "齊桓公"
+        }
+      },
+      "ontology_audit": {
+        "a2o_mismatch": true,
+        "action": "retain_current_gold",
+        "affected_semantic_dimensions": [
+          "narrative_function",
+          "legacy_occurrence_role"
+        ],
+        "audit_class": "model_source_scope_error",
+        "boundary_conflict": false,
+        "conclusion": "齊桓公 is content inside the historical material quoted from 史記; it does not identify the citation source itself.",
+        "ontology_principle": "citation_source applies to the occurrence that attributes or introduces the source; an entity inside cited content is historical_exemplum when it functions as historical comparison or background.",
+        "review_required": false
+      },
+      "story_id": "02-yanyu-036",
+      "surface": "齊桓公"
+    },
+    {
+      "a2o_interpretation": {
+        "case_id": "sfh2-a0r-l-challenge-c07bd51ac298529ddbc6",
+        "confidence": "high",
+        "narrative_function": "participant",
+        "reason_summary": "The target occurrence \"宣武\" (Huan Wen) appears in the main narrative text of Shishuo Xinyu entry 02-yanyu-060. The text describes 簡文 (Emperor Jianwen) sitting in a dark room and summoning 宣武 (Huan Wen). Huan Wen is an active participant in the narrated scene — he is summoned, arrives, and asks a question. The occurrence functions as a participant in the narrative event, not merely as a reference, speaker, addressee, or other category. The discourse context confirms 宣武 is the addressee of the summoning and the one who asks \"上何在\", making him a central participant in the narrated action.",
+        "supporting_evidence_ids": [
+          "sfh1-ev-02-yanyu-060-main"
+        ]
+      },
+      "case_id": "sfh2-a0r-l-challenge-c07bd51ac298529ddbc6",
+      "counterfactual": {
+        "counterfactual_correct": true,
+        "current_correct": false,
+        "proposed_gold_label": "participant",
+        "proposed_gold_role": "scene_participant"
+      },
+      "current_gold": {
+        "case_id": "sfh2-a0r-l-challenge-c07bd51ac298529ddbc6",
+        "expected_legacy_occurrence_role": "addressee_reference",
+        "expected_narrative_function": "addressee",
+        "expected_provenance_layer": "main_text",
+        "frozen_identity_reference": "桓溫",
+        "provenance": "human_semantic_review",
+        "review_status": "reviewed",
+        "semantic_basis": "The selected occurrence is the object of 召 in the main-text scene, the person summoned by 簡文.",
+        "source_evidence_id": "sfh1-ev-02-yanyu-060-main",
+        "story_id": "02-yanyu-060",
+        "surface": "宣武"
+      },
+      "exact_evidence": {
+        "nearby_context": {
+          "context_window": {
+            "end": 29,
+            "start": 0,
+            "text": "簡文在暗室中坐召宣武宣武至問上何在簡文曰\n某在斯時人以為能"
+          },
+          "nearby_source_evidence": [
+            {
+              "evidence_id": "sfh1-ev-02-yanyu-060-main",
+              "source_layer": "main_text",
+              "text": "簡文在暗室中坐召宣武宣武至問上何在簡文曰\n某在斯時人以為能"
+            },
+            {
+              "evidence_id": "sfh1-ev-02-yanyu-060-liu-annotation-001",
+              "source_layer": "liu_annotation",
+              "text": "(及席子曰席也皆坐子告之曰/論語曰師冕見及階子曰階也)"
+            },
+            {
+              "evidence_id": "sfh1-ev-02-yanyu-060-liu-annotation-002",
+              "source_layer": "liu_annotation",
+              "text": "(歴告坐中人也/某在斯某在斯注)"
+            }
+          ],
+          "source_path": "content/processed/shishuo/entries/02-yanyu/entry-060.md",
+          "source_sha256": "120c7e9d5cb2872986d33826bb2daa5532e269bdcd4bc487628580c0000bc6e9"
+        },
+        "target_evidence": {
+          "evidence_id": "sfh1-ev-02-yanyu-060-main",
+          "source_layer": "main_text",
+          "source_ref": "content/processed/shishuo/entries/02-yanyu/entry-060.md",
+          "text": "簡文在暗室中坐召宣武宣武至問上何在簡文曰\n某在斯時人以為能"
+        },
+        "target_span": {
+          "exact_span": "宣武",
+          "matched_source_text": "宣武",
+          "offset_convention": "zero_based_end_exclusive",
+          "offsets_valid": true,
+          "source_end": 10,
+          "source_start": 8,
+          "surface": "宣武"
+        }
+      },
+      "ontology_audit": {
+        "a2o_mismatch": true,
+        "action": "propose_gold_correction",
+        "affected_semantic_dimensions": [
+          "narrative_function",
+          "legacy_occurrence_role"
+        ],
+        "audit_class": "gold_requires_human_review",
+        "boundary_conflict": true,
+        "conclusion": "The selected occurrence is the object of 召 in the main-text event. Under the clarified occurrence-centric definition, it is not automatically a direct-address occurrence.",
+        "confidence": "high",
+        "ontology_principle": "The grammatical object of a summoning or remonstrance verb is not automatically addressee; addressee requires a direct-address or vocative discourse function.",
+        "proposed_expected_legacy_occurrence_role": "scene_participant",
+        "proposed_expected_narrative_function": "participant",
+        "review_required": true
+      },
+      "story_id": "02-yanyu-060",
+      "surface": "宣武"
+    },
+    {
+      "a2o_interpretation": {
+        "case_id": "sfh2-a0r-l-challenge-02fa84b24af39e8f8201",
+        "confidence": "high",
+        "narrative_function": "addressee",
+        "reason_summary": "The target occurrence \"帝\" appears in the Liu annotation text \"王導深以諌帝乃令左右進觴飲而覆之\" where 王導 (Wang Dao) is the speaker/actor who remonstrates (諌) with the emperor. The discourse context confirms speaker_hint is 王導 and addressee_hint is 帝. The emperor is the recipient of Wang Dao's remonstrance, making this occurrence function as the addressee of the speech/action.",
+        "supporting_evidence_ids": [
+          "sfh1-ev-10-guizhen-011-liu-annotation-002"
+        ]
+      },
+      "case_id": "sfh2-a0r-l-challenge-02fa84b24af39e8f8201",
+      "counterfactual": {
+        "counterfactual_correct": null,
+        "current_correct": false,
+        "proposed_gold_label": null,
+        "proposed_gold_role": null
+      },
+      "current_gold": {
+        "case_id": "sfh2-a0r-l-challenge-02fa84b24af39e8f8201",
+        "expected_legacy_occurrence_role": "annotation_person",
+        "expected_narrative_function": "participant",
+        "expected_provenance_layer": "liu_annotation",
+        "frozen_identity_reference": "元帝",
+        "provenance": "human_semantic_review",
+        "review_status": "reviewed",
+        "semantic_basis": "This 帝 occurrence is in Liu annotation narrative and is a participant in the narrated admonition/order sequence.",
+        "source_evidence_id": "sfh1-ev-10-guizhen-011-liu-annotation-002",
+        "story_id": "10-guizhen-011",
+        "surface": "帝"
+      },
+      "exact_evidence": {
+        "nearby_context": {
+          "context_window": {
+            "end": 41,
+            "start": 0,
+            "text": "(遂不復飲克己復禮官修其方而中興之業隆焉/江王導深以諌帝乃令左右進觴飲而覆之自是)"
+          },
+          "nearby_source_evidence": [
+            {
+              "evidence_id": "sfh1-ev-10-guizhen-011-main",
+              "source_layer": "main_text",
+              "text": "元帝過江猶好酒王茂弘與帝有舊常流涕諌帝許\n之命酌酒一酣從是遂斷"
+            },
+            {
+              "evidence_id": "sfh1-ev-10-guizhen-011-liu-annotation-001",
+              "source_layer": "liu_annotation",
+              "text": "(以先時務性素好酒将渡/鄧粲晉紀曰上身服儉約)"
+            },
+            {
+              "evidence_id": "sfh1-ev-10-guizhen-011-liu-annotation-002",
+              "source_layer": "liu_annotation",
+              "text": "(遂不復飲克己復禮官修其方而中興之業隆焉/江王導深以諌帝乃令左右進觴飲而覆之自是)"
+            }
+          ],
+          "source_path": "content/processed/shishuo/entries/10-guizhen/entry-011.md",
+          "source_sha256": "444f4f5331372675b2cbd7e86e34c508ac7f56b61f960b3a92e481bc8bb1bba6"
+        },
+        "target_evidence": {
+          "evidence_id": "sfh1-ev-10-guizhen-011-liu-annotation-002",
+          "source_layer": "liu_annotation",
+          "source_ref": "content/processed/shishuo/entries/10-guizhen/entry-011.md",
+          "text": "(遂不復飲克己復禮官修其方而中興之業隆焉/江王導深以諌帝乃令左右進觴飲而覆之自是)"
+        },
+        "target_span": {
+          "exact_span": "帝",
+          "matched_source_text": "帝",
+          "offset_convention": "zero_based_end_exclusive",
+          "offsets_valid": true,
+          "source_end": 28,
+          "source_start": 27,
+          "surface": "帝"
+        }
+      },
+      "ontology_audit": {
+        "a2o_mismatch": true,
+        "action": "retain_current_gold",
+        "affected_semantic_dimensions": [
+          "narrative_function",
+          "legacy_occurrence_role"
+        ],
+        "audit_class": "model_discourse_role_error",
+        "boundary_conflict": false,
+        "conclusion": "The Liu annotation occurrence is in the narrated 諫帝 sequence. The communication verb does not by itself make its grammatical object a direct addressee occurrence.",
+        "ontology_principle": "Addressee is reserved for direct address; an object of 諫 remains an event participant or reference unless the target itself performs a direct-address function.",
+        "review_required": false
+      },
+      "story_id": "10-guizhen-011",
+      "surface": "帝"
+    },
+    {
+      "a2o_interpretation": {
+        "case_id": "sfh2-a0r-l-challenge-f245371d8f0cdf9c8773",
+        "confidence": "high",
+        "narrative_function": "participant",
+        "reason_summary": "The target occurrence \"顧\" at position 0 is the surname reference within \"顧長康\" (Gu Kaizhi), who is the main actor/participant in this narrative. The text describes Gu Changkang's actions (好寫起人形, 欲圖殷荆州) and his dialogue with Yin Jingzhou. The target is the first character of the full name 顧長康 that opens the narrative, establishing Gu as the primary participant whose actions and speech drive the story. The antecedent hint confirms 顧長康 is the referent, and the target is part of the participant's name reference in the main narrative text.",
+        "supporting_evidence_ids": [
+          "sfh1-ev-21-qiaoyi-011-main"
+        ]
+      },
+      "case_id": "sfh2-a0r-l-challenge-f245371d8f0cdf9c8773",
+      "counterfactual": {
+        "counterfactual_correct": null,
+        "current_correct": false,
+        "proposed_gold_label": null,
+        "proposed_gold_role": null
+      },
+      "current_gold": {
+        "case_id": "sfh2-a0r-l-challenge-f245371d8f0cdf9c8773",
+        "expected_legacy_occurrence_role": "speaker_reference",
+        "expected_narrative_function": "speaker",
+        "expected_provenance_layer": "main_text",
+        "frozen_identity_reference": "顧愷之",
+        "provenance": "human_semantic_review",
+        "review_status": "reviewed",
+        "semantic_basis": "顧 is the subject of 顧曰 and therefore the speaker of the following main-text utterance.",
+        "source_evidence_id": "sfh1-ev-21-qiaoyi-011-main",
+        "story_id": "21-qiaoyi-011",
+        "surface": "顧"
+      },
+      "exact_evidence": {
+        "nearby_context": {
+          "context_window": {
+            "end": 33,
+            "start": 0,
+            "text": "顧長康好寫起人形欲圖殷荆州殷\n曰我形惡不煩耳顧曰明府正為眼爾但明\n"
+          },
+          "nearby_source_evidence": [
+            {
+              "evidence_id": "sfh1-ev-21-qiaoyi-011-main",
+              "source_layer": "main_text",
+              "text": "顧長康好寫起人形欲圖殷荆州殷\n曰我形惡不煩耳顧曰明府正為眼爾但明\n㸃童子飛白拂其上使如輕雲之蔽日"
+            },
+            {
+              "evidence_id": "sfh1-ev-21-qiaoyi-011-liu-annotation-001",
+              "source_layer": "liu_annotation",
+              "text": "(之圖寫特妙/續晉陽秋曰愷)"
+            },
+            {
+              "evidence_id": "sfh1-ev-21-qiaoyi-011-liu-annotation-002",
+              "source_layer": "liu_annotation",
+              "text": "(目故也/仲堪眇)"
+            },
+            {
+              "evidence_id": "sfh1-ev-21-qiaoyi-011-liu-annotation-003",
+              "source_layer": "liu_annotation",
+              "text": "(作月/日一)"
+            }
+          ],
+          "source_path": "content/processed/shishuo/entries/21-qiaoyi/entry-011.md",
+          "source_sha256": "c147e71a15db3f1bfb32567935d766ba57bf5859d36f9c2196b487177e1e173c"
+        },
+        "target_evidence": {
+          "evidence_id": "sfh1-ev-21-qiaoyi-011-main",
+          "source_layer": "main_text",
+          "source_ref": "content/processed/shishuo/entries/21-qiaoyi/entry-011.md",
+          "text": "顧長康好寫起人形欲圖殷荆州殷\n曰我形惡不煩耳顧曰明府正為眼爾但明\n㸃童子飛白拂其上使如輕雲之蔽日"
+        },
+        "target_span": {
+          "exact_span": "顧",
+          "matched_source_text": "顧",
+          "offset_convention": "zero_based_end_exclusive",
+          "offsets_valid": true,
+          "source_end": 1,
+          "source_start": 0,
+          "surface": "顧"
+        }
+      },
+      "ontology_audit": {
+        "a2o_mismatch": true,
+        "action": "retain_current_gold",
+        "affected_semantic_dimensions": [
+          "narrative_function",
+          "legacy_occurrence_role"
+        ],
+        "audit_class": "model_discourse_role_error",
+        "boundary_conflict": false,
+        "conclusion": "The selected occurrence is the subject of 顧曰 and identifies the speaker of the following main-text utterance.",
+        "ontology_principle": "A target occurrence that identifies the speaker of the current utterance has the specific speaker function rather than generic participant.",
+        "review_required": false
+      },
+      "story_id": "21-qiaoyi-011",
+      "surface": "顧"
+    },
+    {
+      "a2o_interpretation": {
+        "case_id": "sfh2-a0r-l-challenge-d3c8fa925020f0c2c62a",
+        "confidence": "medium",
+        "narrative_function": "person_attribute",
+        "reason_summary": "The target occurrence \"顗\" appears in Liu Xiaobiao's annotation (媟瀆故/謂顗好), which glosses or comments on the person 周顗 mentioned in the main text. The annotation uses the personal name 顗 to refer to the historical person 周顗 in the context of explaining/commenting on his character or behavior (the annotation appears to comment on 周顗's fondness for something). This functions as a person_attribute reference within the annotation, identifying the person whose attribute or characteristic is being discussed.",
+        "supporting_evidence_ids": [
+          "sfh1-ev-25-paidiao-015-liu-annotation-001"
+        ]
+      },
+      "case_id": "sfh2-a0r-l-challenge-d3c8fa925020f0c2c62a",
+      "counterfactual": {
+        "counterfactual_correct": null,
+        "current_correct": false,
+        "proposed_gold_label": null,
+        "proposed_gold_role": null
+      },
+      "current_gold": {
+        "case_id": "sfh2-a0r-l-challenge-d3c8fa925020f0c2c62a",
+        "expected_legacy_occurrence_role": "annotation_person",
+        "expected_narrative_function": "reference",
+        "expected_provenance_layer": "liu_annotation",
+        "frozen_identity_reference": "周顗",
+        "provenance": "human_semantic_review",
+        "review_status": "reviewed",
+        "semantic_basis": "顗 is mentioned in the Liu annotation as a referenced historical person, not as a main-text scene participant.",
+        "source_evidence_id": "sfh1-ev-25-paidiao-015-liu-annotation-001",
+        "story_id": "25-paidiao-015",
+        "surface": "顗"
+      },
+      "exact_evidence": {
+        "nearby_context": {
+          "context_window": {
+            "end": 9,
+            "start": 0,
+            "text": "(媟瀆故/謂顗好)"
+          },
+          "nearby_source_evidence": [
+            {
+              "evidence_id": "sfh1-ev-25-paidiao-015-main",
+              "source_layer": "main_text",
+              "text": "謝幼輿謂周侯曰卿類社樹逺望之峨峨拂青天就\n而視之其根則羣狐所託下聚溷而已荅曰\n枝條拂青天不以爲高羣狐亂其下不以爲濁聚溷\n之穢卿之所保何足自稱"
+            },
+            {
+              "evidence_id": "sfh1-ev-25-paidiao-015-liu-annotation-001",
+              "source_layer": "liu_annotation",
+              "text": "(媟瀆故/謂顗好)"
+            }
+          ],
+          "source_path": "content/processed/shishuo/entries/25-paidiao/entry-015.md",
+          "source_sha256": "85f117f226f09088d312a4af1a2c630ef4ab85259f577ef1f55ba4533daa6e16"
+        },
+        "target_evidence": {
+          "evidence_id": "sfh1-ev-25-paidiao-015-liu-annotation-001",
+          "source_layer": "liu_annotation",
+          "source_ref": "content/processed/shishuo/entries/25-paidiao/entry-015.md",
+          "text": "(媟瀆故/謂顗好)"
+        },
+        "target_span": {
+          "exact_span": "顗",
+          "matched_source_text": "顗",
+          "offset_convention": "zero_based_end_exclusive",
+          "offsets_valid": true,
+          "source_end": 7,
+          "source_start": 6,
+          "surface": "顗"
+        }
+      },
+      "ontology_audit": {
+        "a2o_mismatch": true,
+        "action": "retain_current_gold",
+        "affected_semantic_dimensions": [
+          "narrative_function",
+          "legacy_occurrence_role"
+        ],
+        "audit_class": "model_target_attribute_confusion",
+        "boundary_conflict": false,
+        "conclusion": "The Liu annotation occurrence denotes 顗, while 好媟瀆 predicates a characteristic of that person. The person occurrence itself is not an attribute expression.",
+        "ontology_principle": "person_attribute applies when the target occurrence itself expresses the attribute or value, not merely when a predicate describes its referent.",
+        "review_required": false
+      },
+      "story_id": "25-paidiao-015",
+      "surface": "顗"
+    }
+  ],
+  "schema": "sfh2-a2ot-five-error-review-v1"
+}

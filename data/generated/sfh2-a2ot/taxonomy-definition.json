@@ -1,0 +1,131 @@
+{
+  "authority": "current SFH2.2 occurrence ontology plus offline human taxonomy audit",
+  "definitions": {
+    "addressee": {
+      "caution": "Do not classify the grammatical object of every communication or interaction verb as addressee; an object of summoning or remonstrance is not automatically a direct-address occurrence.",
+      "definition": "The target occurrence itself identifies the directly addressed recipient in the discourse, including vocative or direct-address references.",
+      "specificity": "discourse_function"
+    },
+    "citation_source": {
+      "caution": "An entity merely mentioned inside quoted source content is not thereby the citation source.",
+      "definition": "The target occurrence itself attributes or identifies the source, author, or work from which cited material is introduced.",
+      "specificity": "source_function"
+    },
+    "collective_reference": {
+      "definition": "The target occurrence itself denotes a collective entity.",
+      "specificity": "special_semantic_form"
+    },
+    "genealogy_reference": {
+      "definition": "The target occurrence functions specifically in genealogical or kinship identification.",
+      "specificity": "special_semantic_form"
+    },
+    "historical_exemplum": {
+      "definition": "A historical person or entity invoked as historical comparison, precedent, example, or explanatory background for the current discourse.",
+      "specificity": "source_or_exemplum_function"
+    },
+    "other": {
+      "definition": "Use only when the defined functions genuinely do not apply.",
+      "specificity": "fallback"
+    },
+    "participant": {
+      "definition": "The referent actively participates in the narrated event represented by the target occurrence, when the target itself does not perform a more specific speaker/addressee/source/exemplum/attribute function.",
+      "specificity": "event_function"
+    },
+    "person_attribute": {
+      "definition": "The target occurrence itself expresses an attribute or value of a bearer.",
+      "example": "A style-name statement such as 字景真 expresses an attribute; a person occurrence in a predicate describing that person does not automatically do so.",
+      "specificity": "special_semantic_form"
+    },
+    "reference": {
+      "definition": "The target occurrence refers to or describes an entity without itself marking a more specific event, discourse, source, exemplum, or attribute function.",
+      "specificity": "generic"
+    },
+    "speaker": {
+      "definition": "The target occurrence itself identifies the speaker of the current utterance, or is the speaker's self-reference within that utterance.",
+      "specificity": "discourse_function"
+    },
+    "structural": {
+      "definition": "A structural or non-narrative reference under the existing ontology.",
+      "specificity": "fallback_structural"
+    },
+    "uncertain": {
+      "definition": "Use when the evidence is insufficient to resolve among the defined functions.",
+      "specificity": "fallback"
+    }
+  },
+  "functions": [
+    "participant",
+    "reference",
+    "speaker",
+    "addressee",
+    "collective_reference",
+    "person_attribute",
+    "citation_source",
+    "historical_exemplum",
+    "genealogy_reference",
+    "structural",
+    "other",
+    "uncertain"
+  ],
+  "no_automatic_object_to_addressee_rule": true,
+  "no_surface_specific_logic": true,
+  "notes": [
+    "The target occurrence is the unit of classification.",
+    "Provenance remains a structural source-evidence property and is not inferred by this taxonomy.",
+    "The most occurrence-specific applicable function takes precedence over a generic participant or reference label.",
+    "The precedence ordering guides LLM and human review; it is not a Chinese lexical heuristic or executable identity rule."
+  ],
+  "occurrence_centric": true,
+  "precedence": [
+    {
+      "functions": [
+        "person_attribute",
+        "collective_reference",
+        "genealogy_reference"
+      ],
+      "group": "special_semantic_form",
+      "rank": 1
+    },
+    {
+      "functions": [
+        "citation_source",
+        "historical_exemplum"
+      ],
+      "group": "source_or_exemplum",
+      "rank": 2
+    },
+    {
+      "functions": [
+        "speaker",
+        "addressee"
+      ],
+      "group": "discourse",
+      "rank": 3
+    },
+    {
+      "functions": [
+        "participant"
+      ],
+      "group": "event",
+      "rank": 4
+    },
+    {
+      "functions": [
+        "reference"
+      ],
+      "group": "generic",
+      "rank": 5
+    },
+    {
+      "functions": [
+        "other",
+        "uncertain"
+      ],
+      "group": "fallback",
+      "rank": 6
+    }
+  ],
+  "schema": "sfh2-a2ot-taxonomy-definition-v1",
+  "semantic_guidance_not_runtime_rules": true,
+  "stage": "SFH2.2-A2OT"
+}

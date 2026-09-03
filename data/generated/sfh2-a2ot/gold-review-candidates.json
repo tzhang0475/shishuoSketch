@@ -1,0 +1,70 @@
+{
+  "candidate_count": 1,
+  "candidate_only": true,
+  "canonical_write_back": false,
+  "gold_mutated": false,
+  "records": [
+    {
+      "case_id": "sfh2-a0r-l-challenge-c07bd51ac298529ddbc6",
+      "confidence": "high",
+      "exact_evidence": {
+        "nearby_context": {
+          "context_window": {
+            "end": 29,
+            "start": 0,
+            "text": "簡文在暗室中坐召宣武宣武至問上何在簡文曰\n某在斯時人以為能"
+          },
+          "nearby_source_evidence": [
+            {
+              "evidence_id": "sfh1-ev-02-yanyu-060-main",
+              "source_layer": "main_text",
+              "text": "簡文在暗室中坐召宣武宣武至問上何在簡文曰\n某在斯時人以為能"
+            },
+            {
+              "evidence_id": "sfh1-ev-02-yanyu-060-liu-annotation-001",
+              "source_layer": "liu_annotation",
+              "text": "(及席子曰席也皆坐子告之曰/論語曰師冕見及階子曰階也)"
+            },
+            {
+              "evidence_id": "sfh1-ev-02-yanyu-060-liu-annotation-002",
+              "source_layer": "liu_annotation",
+              "text": "(歴告坐中人也/某在斯某在斯注)"
+            }
+          ],
+          "source_path": "content/processed/shishuo/entries/02-yanyu/entry-060.md",
+          "source_sha256": "120c7e9d5cb2872986d33826bb2daa5532e269bdcd4bc487628580c0000bc6e9"
+        },
+        "target_evidence": {
+          "evidence_id": "sfh1-ev-02-yanyu-060-main",
+          "source_layer": "main_text",
+          "source_ref": "content/processed/shishuo/entries/02-yanyu/entry-060.md",
+          "text": "簡文在暗室中坐召宣武宣武至問上何在簡文曰\n某在斯時人以為能"
+        },
+        "target_span": {
+          "exact_span": "宣武",
+          "matched_source_text": "宣武",
+          "offset_convention": "zero_based_end_exclusive",
+          "offsets_valid": true,
+          "source_end": 10,
+          "source_start": 8,
+          "surface": "宣武"
+        }
+      },
+      "gold_mutation_performed": false,
+      "human_review_required": true,
+      "ontology_principle": "The grammatical object of a summoning or remonstrance verb is not automatically addressee; addressee requires a direct-address or vocative discourse function.",
+      "previous_label": {
+        "legacy_occurrence_role": "addressee_reference",
+        "narrative_function": "addressee"
+      },
+      "proposed_label": {
+        "legacy_occurrence_role": "scene_participant",
+        "narrative_function": "participant"
+      },
+      "semantic_reason": "The selected occurrence is the object of 召 in the main-text event. Under the clarified occurrence-centric definition, it is not automatically a direct-address occurrence.",
+      "story_id": "02-yanyu-060",
+      "surface": "宣武"
+    }
+  ],
+  "schema": "sfh2-a2ot-gold-review-candidates-v1"
+}
