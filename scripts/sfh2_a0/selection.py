@@ -115,7 +115,7 @@ def build_evaluation_gold() -> dict[str, Any]:
         "gu": {"expected_semantic_kind": "historical_person", "expected_referent_surface": "嘏", "expected_canonical_hint": "傅嘏", "expected_role": "annotation_person"},
         "xue-ying": {"expected_semantic_kind": "historical_person", "expected_referent_surface": "薛瑩", "expected_canonical_hint": "薛瑩", "expected_role": "citation_source_person"},
         "yuan-fujun": {"expected_semantic_kind": "historical_person", "expected_referent_surface": "袁府君", "expected_canonical_hint": "袁山松", "allow_abstention": True},
-        "taiqiu-zhang": {"expected_semantic_kind": "historical_person", "expected_referent_surface": "太丘長", "expected_canonical_hint": "陳寔"},
+        "taiqiu-zhang": {"expected_semantic_kind": "office", "expected_referent_surface": "太丘長", "expected_role": "person_attribute", "expected_attribute_type": "office_held", "expected_attribute_value": "太丘長", "expected_bearer": "陳仲弓", "expected_bearer_canonical_hint": "陳寔"},
         "wang-lantian": {"expected_semantic_kind": "historical_person", "expected_referent_surface": "王藍田", "expected_canonical_hint": "王述"},
         "mao-hong": {"expected_semantic_kind": "historical_person", "expected_referent_surface": "茂弘", "expected_canonical_hint": "王導"},
         "kang": {"expected_semantic_kind": "historical_person", "expected_referent_surface": "康", "expected_canonical_hint": "嵇康"},
@@ -125,13 +125,24 @@ def build_evaluation_gold() -> dict[str, Any]:
         "wang-shi": {"expected_semantic_kind": "collective", "expected_referent_surface": "王師", "expected_role": "collective_reference", "must_not_create_person": True},
     }
     result: dict[str, Any] = {
-        "schema": "sfh2-a0-evaluation-gold-v2",
+        "schema": "sfh2-a0-evaluation-gold-v3",
         "pilot": "SFH2.2-A0",
         "evaluation_only": True,
         "not_for_provider": True,
         "records": [],
         "candidate_only": True,
         "canonical_write_back": False,
+    }
+    result["revision"] = {
+        "authority": "human_semantic_review",
+        "authority_record": "data/annotation/sfh2-a2gr-human-semantic-authority.json",
+        "predecessor_stage": "SFH2.2-A2G",
+        "promotion_reason": "Resolve the office-versus-person semantic boundary identified by the offline A2G audit without changing the frozen inference outputs.",
+        "reaffirmed_cases": ["tao", "gu", "wang-shi"],
+        "revision_id": "sfh2-a2gr-v1",
+        "stage": "SFH2.2-A2GR",
+        "substantive_changed_cases": ["taiqiu-zhang"],
+        "previous_sha256": "82f36497b632032bc164c09fd5db97e35e20c256fc9654ac0d2c9b4c704b0b93",
     }
     for spec in CASE_SPECS:
         label = dict(labels[spec["key"]])

@@ -26,6 +26,7 @@ BASELINE_COMMIT = "57af9d9bb4b418b15cc9b5aff7f4b2390d8c7608"
 SELECTION_HASH = "b8162d9d470c6359c67a8ed31aa31ef82149c12d92dd9a694b62327fc204bbc3"
 FROZEN_SC1_SHA256 = "cc82c6738fcbf4fc14c12005a459048e71ce329492867d0910562fc6fdfda0d8"
 CURRENT_SC1_SHA256 = "b916530264285dd7fa1d2e27a7a1dff8cd2ed794dfb3b84985881f8f209d8f6a"
+A2G_ORIGINAL_GOLD_SHA256 = "82f36497b632032bc164c09fd5db97e35e20c256fc9654ac0d2c9b4c704b0b93"
 
 REQUIRED_OUTPUTS = (
     "architecture-freeze.json",
@@ -170,10 +171,26 @@ def validate(*, require_outputs: bool = True) -> dict[str, Any]:
             path = ROOT / relative
             if not path.is_file():
                 errors.append(f"protected_input_missing:{relative}")
+            elif relative == str(GOLD_PATH.relative_to(ROOT)):
+                # A2G is an immutable pre-promotion audit.  Its recorded Gold
+                # hash must remain the predecessor hash, while the active
+                # Gold authority may be promoted by A2GR.  Do not rewrite the
+                # A2G artifact or silently compare it to the new authority.
+                if expected != A2G_ORIGINAL_GOLD_SHA256:
+                    errors.append(f"historical_a2g_gold_witness_changed:{relative}")
             elif file_hash(path) != expected:
                 errors.append(f"protected_input_changed:{relative}")
-    if recorded_hashes and recorded_hashes != _frozen_input_hashes():
-        errors.append("frozen_input_hash_inventory_changed")
+    if recorded_hashes:
+        current_hashes = _frozen_input_hashes()
+        gold_relative = str(GOLD_PATH.relative_to(ROOT))
+        recorded_non_gold = {
+            key: value for key, value in recorded_hashes.items() if key != gold_relative
+        }
+        current_non_gold = {
+            key: value for key, value in current_hashes.items() if key != gold_relative
+        }
+        if recorded_non_gold != current_non_gold:
+            errors.append("frozen_input_hash_inventory_changed")
 
     for relative, expected in {
         "data/derived/sc1-site.json": FROZEN_SC1_SHA256,

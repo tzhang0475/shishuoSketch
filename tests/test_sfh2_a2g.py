@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import hashlib
+import json
 import re
 import sys
 from pathlib import Path
@@ -9,7 +10,7 @@ import unittest
 
 ROOT = Path(__file__).resolve().parents[1]
 SCRIPTS = ROOT / "scripts"
-GOLD_SHA256 = "82f36497b632032bc164c09fd5db97e35e20c256fc9654ac0d2c9b4c704b0b93"
+PREDECESSOR_GOLD_SHA256 = "82f36497b632032bc164c09fd5db97e35e20c256fc9654ac0d2c9b4c704b0b93"
 if str(SCRIPTS) not in sys.path:
     sys.path.insert(0, str(SCRIPTS))
 
@@ -104,10 +105,13 @@ class SFH22A2GAuditTests(unittest.TestCase):
         source = (ROOT / "scripts/run_sfh2_a2g.py").read_text(encoding="utf-8")
         self.assertIsNone(re.search(r"surface\s*==|surface\s+in", source))
 
-    def test_frozen_gold_hash_is_stable(self) -> None:
+    def test_a2g_retains_predecessor_gold_witness_after_reviewed_promotion(self) -> None:
         path = ROOT / "data/annotation/sfh2-a0-evaluation-gold.json"
         digest = hashlib.sha256(path.read_bytes()).hexdigest()
-        self.assertEqual(digest, GOLD_SHA256)
+        self.assertNotEqual(digest, PREDECESSOR_GOLD_SHA256)
+        self.assertEqual("sfh2-a0-evaluation-gold-v3", json.loads(path.read_text(encoding="utf-8"))["schema"])
+        witness = audit.load_json(audit.OUT / "input-hashes.json")
+        self.assertEqual(PREDECESSOR_GOLD_SHA256, witness["files"]["data/annotation/sfh2-a0-evaluation-gold.json"])
 
 
 if __name__ == "__main__":

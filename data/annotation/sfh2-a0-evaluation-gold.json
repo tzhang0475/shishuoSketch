@@ -4,6 +4,23 @@
   "evaluation_only": true,
   "not_for_provider": true,
   "pilot": "SFH2.2-A0",
+  "revision": {
+    "authority": "human_semantic_review",
+    "authority_record": "data/annotation/sfh2-a2gr-human-semantic-authority.json",
+    "predecessor_stage": "SFH2.2-A2G",
+    "promotion_reason": "Resolve the office-versus-person semantic boundary identified by the offline A2G audit without changing the frozen inference outputs.",
+    "reaffirmed_cases": [
+      "tao",
+      "gu",
+      "wang-shi"
+    ],
+    "revision_id": "sfh2-a2gr-v1",
+    "stage": "SFH2.2-A2GR",
+    "substantive_changed_cases": [
+      "taiqiu-zhang"
+    ],
+    "previous_sha256": "82f36497b632032bc164c09fd5db97e35e20c256fc9654ac0d2c9b4c704b0b93"
+  },
   "records": [
     {
       "case_key": "wang-zijing",
@@ -119,9 +136,13 @@
     },
     {
       "case_key": "taiqiu-zhang",
-      "expected_canonical_hint": "陳寔",
+      "expected_attribute_type": "office_held",
+      "expected_attribute_value": "太丘長",
+      "expected_bearer": "陳仲弓",
+      "expected_bearer_canonical_hint": "陳寔",
       "expected_referent_surface": "太丘長",
-      "expected_semantic_kind": "historical_person",
+      "expected_role": "person_attribute",
+      "expected_semantic_kind": "office",
       "story_id": "03-zhengshi-001",
       "surface": "太丘長"
     },
@@ -183,5 +204,5 @@
       "surface": "王師"
     }
   ],
-  "schema": "sfh2-a0-evaluation-gold-v2"
+  "schema": "sfh2-a0-evaluation-gold-v3"
 }
