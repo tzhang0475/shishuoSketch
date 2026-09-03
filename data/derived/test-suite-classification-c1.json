@@ -2,9 +2,9 @@
   "schema": "test-suite-classification-c1-v1",
   "supersedes": "data/derived/test-suite-classification-c0.json",
   "generated_at_baseline": "c16aedd5845f172160752091fcef924079d34d2e",
-  "test_count": 150,
+  "test_count": 151,
   "classification_counts": {
-    "CURRENT_REQUIRED": 58,
+    "CURRENT_REQUIRED": 59,
     "HISTORICAL_REPRODUCIBILITY": 82,
     "SOURCE_PAYLOAD_OPTIONAL": 8,
     "LIVE_NETWORK_EXPERIMENT": 2
@@ -576,6 +576,11 @@
       "path": "tests/test_sfh2_a1r.py",
       "classification": "HISTORICAL_REPRODUCIBILITY",
       "reason": "Validates a numbered experiment, frozen output, research pilot, or historical builder contract."
+    },
+    {
+      "path": "tests/test_sfh2_a2o.py",
+      "classification": "CURRENT_REQUIRED",
+      "reason": "Protects the frozen-identity/occurrence-semantics boundary and candidate-only current pilot contract."
     },
     {
       "path": "tests/test_sfh2_a2.py",
