@@ -1,0 +1,91 @@
+{
+  "active_gold_unchanged": true,
+  "candidate_count": 2,
+  "candidate_only": true,
+  "canonical_write_back": false,
+  "records": [
+    {
+      "case_id": "sfh2-a0r-l-challenge-f245371d8f0cdf9c8773",
+      "confidence": "high",
+      "exact_occurrence_key": {
+        "case_id": "sfh2-a0r-l-challenge-f245371d8f0cdf9c8773",
+        "mention_id": "sfh1-mention-7bf42600cd19ef3230d8b8fb",
+        "source_end": 1,
+        "source_evidence_id": "sfh1-ev-21-qiaoyi-011-main",
+        "source_start": 0,
+        "story_id": "21-qiaoyi-011",
+        "surface": "顧"
+      },
+      "exact_source_context": {
+        "context_window": {
+          "source_end": 48,
+          "source_start": 0,
+          "text": "顧長康好寫起人形欲圖殷荆州殷\n曰我形惡不煩耳顧曰明府正為眼爾但明\n㸃童子飛白拂其上使如輕雲之蔽日"
+        },
+        "matched_target": "顧",
+        "source_evidence_id": "sfh1-ev-21-qiaoyi-011-main",
+        "source_layer": "main_text",
+        "source_ref": "content/processed/shishuo/entries/21-qiaoyi/entry-011.md",
+        "text": "顧長康好寫起人形欲圖殷荆州殷\n曰我形惡不煩耳顧曰明府正為眼爾但明\n㸃童子飛白拂其上使如輕雲之蔽日"
+      },
+      "gold_mutation_performed": false,
+      "human_review_required": true,
+      "ontology_principle": "Evaluation labels must describe the exact pinned occurrence, not another same-surface occurrence in the source evidence.",
+      "previous_gold": {
+        "legacy_occurrence_role": "speaker_reference",
+        "narrative_function": "speaker",
+        "semantic_basis": "顧 is the subject of 顧曰 and therefore the speaker of the following main-text utterance."
+      },
+      "proposed_gold": {
+        "legacy_occurrence_role": "scene_participant",
+        "narrative_function": "participant"
+      },
+      "reason": "The selected opening 顧 is the participant reference in the narrator-framed event; the speaker interpretation belongs to the later 顧曰 occurrence.",
+      "root_cause": "target_gold_alignment_error",
+      "story_id": "21-qiaoyi-011",
+      "surface": "顧"
+    },
+    {
+      "case_id": "sfh2-a0-57d1fc3c0492b21ee1f4",
+      "confidence": "high",
+      "exact_occurrence_key": {
+        "case_id": "sfh2-a0-57d1fc3c0492b21ee1f4",
+        "mention_id": "sfh1-mention-ddc50731411818b9d0f52a98",
+        "source_end": 36,
+        "source_evidence_id": "sfh1-ev-02-yanyu-036-liu-annotation-001",
+        "source_start": 33,
+        "story_id": "02-yanyu-036",
+        "surface": "齊桓公"
+      },
+      "exact_source_context": {
+        "context_window": {
+          "source_end": 39,
+          "source_start": 0,
+          "text": "(諸侯一匡天下語林曰初温奉使勸進晉王大/史記/曰管仲夷吾者潁上人相齊桓公九合)"
+        },
+        "matched_target": "齊桓公",
+        "source_evidence_id": "sfh1-ev-02-yanyu-036-liu-annotation-001",
+        "source_layer": "liu_annotation",
+        "source_ref": "content/processed/shishuo/entries/02-yanyu/entry-036.md",
+        "text": "(諸侯一匡天下語林曰初温奉使勸進晉王大/史記/曰管仲夷吾者潁上人相齊桓公九合)"
+      },
+      "gold_mutation_performed": false,
+      "human_review_required": true,
+      "ontology_principle": "An entity inside cited or explanatory historical content does not inherit historical_exemplum merely from the surrounding exemplum or source layer.",
+      "previous_gold": {
+        "legacy_occurrence_role": "historical_exemplum",
+        "narrative_function": "historical_exemplum",
+        "semantic_basis": "The Liu annotation supplies a historical example about 管仲 serving 齊桓公; the occurrence is an exemplum reference."
+      },
+      "proposed_gold": {
+        "legacy_occurrence_role": "annotation_person",
+        "narrative_function": "reference"
+      },
+      "reason": "齊桓公 is mentioned inside the 史記 material explaining 管仲; the occurrence itself is a reference to that ruler, while the historical exemplum in the main discourse is the invoked 管仲/管夷吾 comparison.",
+      "root_cause": "gold_taxonomy_review_required",
+      "story_id": "02-yanyu-036",
+      "surface": "齊桓公"
+    }
+  ],
+  "schema": "sfh2-a2os-gold-review-candidates-v1"
+}
