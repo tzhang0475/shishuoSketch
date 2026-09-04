@@ -140,10 +140,20 @@ def validate() -> list[str]:
     if validation.get("provider_calls") != 0 or recommendation.get("provider_calls") != 0:
         _error(errors, "provider_calls_not_zero")
 
-    # The A2O inputs must be byte-identical to their frozen baseline.  This
-    # includes the Gold file: A2OT emits review candidates but never promotes
-    # one.
+    # The A2O inputs must be byte-identical to their frozen baseline.  The
+    # active Gold is the one explicit later-stage exception: A2OR may promote
+    # a reviewed A2OT candidate.  The A2OT audit remains immutable and keeps
+    # its predecessor Gold witness, so validate that promotion provenance
+    # rather than treating it as a mutation of the historical audit.
     for path in A2O_PROTECTED_FILES:
+        if path == "data/annotation/sfh2-a2o-evaluation-gold.json":
+            authority_path = ROOT / "data/annotation/sfh2-a2or-human-semantic-authority.json"
+            authority = read_json(authority_path, {}) or {}
+            predecessor = _git_bytes(BASELINE_COMMIT, path)
+            predecessor_hash = __import__("hashlib").sha256(predecessor).hexdigest()
+            if not authority_path.is_file() or authority.get("previous_gold_sha256") != predecessor_hash or authority.get("predecessor_stage") != "SFH2.2-A2OT":
+                _error(errors, "active_gold_promotion_provenance_invalid")
+            continue
         if (ROOT / path).read_bytes() != _git_bytes(BASELINE_COMMIT, path):
             _error(errors, f"a2o_input_changed:{path}")
     for path, expected_hash in PROTECTED_HASHES.items():

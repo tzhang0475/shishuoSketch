@@ -96,9 +96,20 @@ def load_frozen_bundle() -> dict[str, Any]:
     }
     results = _by_case(read_json(A2O_ROOT / "occurrence-results.json", {}))
     evaluation = _by_case(read_json(A2O_ROOT / "evaluation.json", {}))
-    gold = _by_case(read_json(A2O_GOLD_PATH, {}))
     selection = rows(read_json(A2O_ROOT / "selection.json", {}), "cases")
     case_ids = [text(row.get("case_id")) for row in selection]
+    # A2OR may later promote a reviewed revision of the active Gold file.  The
+    # A2OT audit itself remains historical and must therefore read the Gold
+    # witness captured inside its immutable audit artifact when available.
+    # This is provenance selection, not a semantic replacement or a runtime
+    # historical rule.
+    audit_document = read_json(OUT / "gold-taxonomy-audit.json", {}) or {}
+    frozen_gold = {
+        text(row.get("case_id")): row.get("current_gold")
+        for row in rows(audit_document)
+        if text(row.get("case_id")) and isinstance(row.get("current_gold"), Mapping)
+    }
+    gold = frozen_gold if len(frozen_gold) == len(case_ids) else _by_case(read_json(A2O_GOLD_PATH, {}))
     if len(case_ids) != 26 or len(set(case_ids)) != 26:
         raise RuntimeError("sfh2_a2ot_expected_26_frozen_a2o_cases")
     expected = set(case_ids)
