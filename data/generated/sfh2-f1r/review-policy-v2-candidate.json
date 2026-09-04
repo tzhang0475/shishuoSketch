@@ -1,0 +1,28 @@
+{
+  "activated": false,
+  "audit_only": [
+    "resolved_stage_disagreement_only",
+    "policy_defined_stage_disagreement_when_final_identity_is_valid",
+    "boundary_override",
+    "low_confidence"
+  ],
+  "candidate_only": true,
+  "canonical_write_back": false,
+  "counterfactual_mandatory_count": 22,
+  "current_mandatory_count": 25,
+  "mandatory": [
+    "identity_adjudication_unresolved",
+    "terminal_or_degraded_provider_contract",
+    "new_historical_person_entity",
+    "occurrence_function_uncertain",
+    "terminal_boundary_failure",
+    "semantic_output_unresolved",
+    "semantic_audit_candidate",
+    "reason_target_alignment_failure",
+    "unsupported_final_projection",
+    "exact_evidence_integrity_failure"
+  ],
+  "purpose": "Counterfactual reduction of redundant review triggers without weakening semantic authority.",
+  "safety_note": "A resolved identity-stage disagreement is audit-only only when no degraded input, unresolved output, new entity proposal, target drift, or other mandatory condition is present. This proposal does not alter the frozen F-prep policy.",
+  "schema": "sfh2-f1r-review-policy-v2-candidate-v1"
+}

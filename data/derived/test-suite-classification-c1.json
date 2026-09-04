@@ -2,9 +2,9 @@
   "schema": "test-suite-classification-c1-v1",
   "supersedes": "data/derived/test-suite-classification-c0.json",
   "generated_at_baseline": "c16aedd5845f172160752091fcef924079d34d2e",
-  "test_count": 159,
+  "test_count": 160,
   "classification_counts": {
-    "CURRENT_REQUIRED": 67,
+    "CURRENT_REQUIRED": 68,
     "HISTORICAL_REPRODUCIBILITY": 82,
     "SOURCE_PAYLOAD_OPTIONAL": 8,
     "LIVE_NETWORK_EXPERIMENT": 2
@@ -821,6 +821,11 @@
       "path": "tests/test_sfh2_f1.py",
       "classification": "CURRENT_REQUIRED",
       "reason": "Protects the bounded SFH2.2 candidate-wave execution, exact-occurrence, checkpoint, cache, and candidate-only safety contract."
+    },
+    {
+      "path": "tests/test_sfh2_f1r.py",
+      "classification": "CURRENT_REQUIRED",
+      "reason": "Protects the offline SFH2.2-F1R exact-occurrence acceptance audit, transport accounting, review-policy counterfactual, and protected-artifact boundary."
     }
   ]
 }
