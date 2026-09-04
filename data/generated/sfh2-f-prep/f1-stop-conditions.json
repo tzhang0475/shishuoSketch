@@ -1,0 +1,25 @@
+{
+  "abort_immediately": [
+    "canonical_write_count > 0",
+    "production_person_creation_count > 0",
+    "protected_hash_mutation",
+    "gold_leakage",
+    "invalid_exact_occurrence_key",
+    "provenance_derivation_failure",
+    "identity_mutation_outside_declared_identity_stage",
+    "boundary_packet_contains_primary_label",
+    "copy_drift_or_undeclared_mutation > 0"
+  ],
+  "candidate_only": true,
+  "canonical_write_back": false,
+  "no_metric_based_threshold_relaxation": true,
+  "schema": "sfh2-f-prep-f1-stop-conditions-v1",
+  "stop_and_review": [
+    "provider_contract_invalid_rate exceeds pre-frozen F1 threshold",
+    "unexpected_request_hash_collision",
+    "checkpoint_non_idempotence",
+    "provider failure after qualified retry policy",
+    "artifact growth outside C3 policy"
+  ],
+  "thresholds_frozen_before_live_execution": true
+}

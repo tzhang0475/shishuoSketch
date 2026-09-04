@@ -1,0 +1,22 @@
+{
+  "candidate_only": true,
+  "canonical_write_back": false,
+  "failed_unit": {
+    "hide_from_metrics": false,
+    "promotion": "not eligible"
+  },
+  "http_400": {
+    "action": "block unit until contract is repaired",
+    "retry": false
+  },
+  "malformed_semantic_output": {
+    "action": "contract-invalid and review-blocked",
+    "coerce": false
+  },
+  "schema": "sfh2-f-prep-provider-failure-policy-v1",
+  "transient_429_5xx_timeout_connection_reset": {
+    "action": "retry once then review-block",
+    "max_retries": 1
+  },
+  "transport_source": "qualified A1R/A2R transport behavior"
+}

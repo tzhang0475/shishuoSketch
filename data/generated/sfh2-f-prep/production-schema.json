@@ -1,0 +1,44 @@
+{
+  "additionalProperties": false,
+  "candidate_only": true,
+  "canonical_write_back": false,
+  "fields": {
+    "audit": [
+      "pipeline_version",
+      "model_versions",
+      "prompt_hashes",
+      "request_hashes",
+      "provider_witness_hashes",
+      "candidate_only",
+      "canonical_write_back",
+      "review_status"
+    ],
+    "identity": [
+      "frozen identity fields",
+      "identity pipeline version",
+      "identity status"
+    ],
+    "occurrence_key": "exact occurrence key",
+    "occurrence_semantics": [
+      "primary_narrative_function",
+      "primary_confidence",
+      "boundary_validation_status",
+      "boundary_judgment",
+      "boundary_confidence",
+      "final_narrative_function",
+      "projected_legacy_occurrence_role"
+    ],
+    "provenance": [
+      "provenance_layer",
+      "evidence_ids"
+    ]
+  },
+  "required": [
+    "occurrence_key",
+    "provenance",
+    "identity",
+    "occurrence_semantics",
+    "audit"
+  ],
+  "schema": "sfh2-f-prep-production-schema-v1"
+}

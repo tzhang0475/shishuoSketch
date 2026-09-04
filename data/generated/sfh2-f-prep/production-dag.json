@@ -1,0 +1,115 @@
+{
+  "a2ov_excluded": true,
+  "boundary_routing_is_structured_output_only": true,
+  "candidate_only": true,
+  "canonical_write_back": false,
+  "edges": [
+    [
+      "exact_occurrence",
+      "structural_provenance"
+    ],
+    [
+      "structural_provenance",
+      "qualified_identity"
+    ],
+    [
+      "qualified_identity",
+      "frozen_identity_result"
+    ],
+    [
+      "frozen_identity_result",
+      "a2or_primary"
+    ],
+    [
+      "a2or_primary",
+      "a2ovb_boundary",
+      "only when primary structured function is participant/reference"
+    ],
+    [
+      "a2or_primary",
+      "final_narrative_function",
+      "all non-boundary functions"
+    ],
+    [
+      "a2ovb_boundary",
+      "final_narrative_function"
+    ],
+    [
+      "final_narrative_function",
+      "legacy_projection"
+    ],
+    [
+      "legacy_projection",
+      "candidate_record"
+    ],
+    [
+      "candidate_record",
+      "human_review_boundary"
+    ]
+  ],
+  "no_automatic_canonical_write_back": true,
+  "nodes": [
+    {
+      "authority": "SFH1 validated mention ledger",
+      "candidate_only": true,
+      "id": "exact_occurrence",
+      "stage": "validated source"
+    },
+    {
+      "authority": "source_evidence.source_layer",
+      "candidate_only": true,
+      "id": "structural_provenance",
+      "stage": "Python"
+    },
+    {
+      "authority": "frozen identity contract",
+      "candidate_only": true,
+      "id": "qualified_identity",
+      "stage": "SFH2.2-A2R/A2GR"
+    },
+    {
+      "authority": "qualified identity result",
+      "candidate_only": true,
+      "id": "frozen_identity_result",
+      "stage": "SFH2.2-A2GR"
+    },
+    {
+      "authority": "multiclass occurrence historian",
+      "candidate_only": true,
+      "id": "a2or_primary",
+      "stage": "SFH2.2-A2OR"
+    },
+    {
+      "authority": "primary-blind boundary validator",
+      "candidate_only": true,
+      "id": "a2ovb_boundary",
+      "stage": "SFH2.2-A2OVB"
+    },
+    {
+      "authority": "A2OR or A2OVB structured output",
+      "candidate_only": true,
+      "id": "final_narrative_function",
+      "stage": "mechanical finalization"
+    },
+    {
+      "authority": "generic Python projection",
+      "candidate_only": true,
+      "id": "legacy_projection",
+      "stage": "compatibility"
+    },
+    {
+      "authority": "no canonical write-back",
+      "candidate_only": true,
+      "id": "candidate_record",
+      "stage": "candidate semantic layer"
+    },
+    {
+      "authority": "human promotion required",
+      "candidate_only": true,
+      "id": "human_review_boundary",
+      "stage": "review/QA"
+    }
+  ],
+  "old_occurrence_role_is_not_authority": true,
+  "schema": "sfh2-f-prep-production-dag-v1"
+}

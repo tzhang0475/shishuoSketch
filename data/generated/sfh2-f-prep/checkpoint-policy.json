@@ -1,0 +1,26 @@
+{
+  "candidate_only": true,
+  "canonical_write_back": false,
+  "checkpoint_fields": [
+    "unit_id",
+    "request_hash",
+    "status",
+    "attempt",
+    "contract_valid",
+    "output_hash",
+    "provider_witness_hash",
+    "runtime_metadata"
+  ],
+  "different_request_hash_rule": "never silently reuse",
+  "duplicate_semantic_write_rule": "forbidden; candidate output materialization is idempotent",
+  "idempotence": "one stable checkpoint per unit and request hash",
+  "invalid_or_incomplete_rule": "rerun according to failure policy",
+  "raw_provider_storage": "external archive default",
+  "reuse_rule": "valid matching request_hash and all relevant source/config hashes may be reused",
+  "schema": "sfh2-f-prep-checkpoint-policy-v1",
+  "stable_units": [
+    "identity:<occurrence_key>",
+    "occurrence_primary:<occurrence_key>",
+    "boundary:<occurrence_key>"
+  ]
+}

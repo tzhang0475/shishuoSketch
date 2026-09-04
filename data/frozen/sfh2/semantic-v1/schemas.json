@@ -1,0 +1,92 @@
+{
+  "a2or_primary_output": {
+    "identity_replacement_fields_forbidden": true,
+    "semantic_values": [
+      "participant",
+      "reference",
+      "speaker",
+      "addressee",
+      "collective_reference",
+      "person_attribute",
+      "citation_source",
+      "historical_exemplum",
+      "genealogy_reference",
+      "structural",
+      "other",
+      "uncertain"
+    ],
+    "source_contract": "scripts/sfh2_a2or/contracts.py"
+  },
+  "a2ovb_boundary_output": {
+    "primary_label_forbidden_in_packet": true,
+    "semantic_values": [
+      "event_participant",
+      "referential_only",
+      "uncertain"
+    ],
+    "source_contract": "scripts/sfh2_a2ovb/contracts.py"
+  },
+  "candidate_only": true,
+  "candidate_semantic_occurrence": {
+    "additionalProperties": false,
+    "candidate_only": true,
+    "canonical_write_back": false,
+    "fields": {
+      "audit": [
+        "pipeline_version",
+        "model_versions",
+        "prompt_hashes",
+        "request_hashes",
+        "provider_witness_hashes",
+        "candidate_only",
+        "canonical_write_back",
+        "review_status"
+      ],
+      "identity": [
+        "frozen identity fields",
+        "identity pipeline version",
+        "identity status"
+      ],
+      "occurrence_key": "exact occurrence key",
+      "occurrence_semantics": [
+        "primary_narrative_function",
+        "primary_confidence",
+        "boundary_validation_status",
+        "boundary_judgment",
+        "boundary_confidence",
+        "final_narrative_function",
+        "projected_legacy_occurrence_role"
+      ],
+      "provenance": [
+        "provenance_layer",
+        "evidence_ids"
+      ]
+    },
+    "required": [
+      "occurrence_key",
+      "provenance",
+      "identity",
+      "occurrence_semantics",
+      "audit"
+    ]
+  },
+  "canonical_write_back": false,
+  "legacy_projection": {
+    "authority": "compatibility only; never overrides A2OR/A2OVB semantics",
+    "source": "scripts/sfh2_a2o/provenance.py"
+  },
+  "occurrence_key": {
+    "required": [
+      "occurrence_id",
+      "case_id",
+      "mention_id",
+      "story_id",
+      "source_evidence_id",
+      "source_start",
+      "source_end",
+      "surface"
+    ],
+    "surface_only_forbidden": true
+  },
+  "schema": "sfh2-semantic-v1-schemas"
+}
