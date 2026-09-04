@@ -1,0 +1,67 @@
+{
+  "active_gold_evaluation_hash": "177ab3018e6741c3deaf3b5f957bc177df8c4f416ee9a9035bdf6027f7d7e3a7",
+  "architecture_hash": "ec64b592e3d8fd35d2fcac14fa0f3bb5ed4881d725179e91a903d8f996071b78",
+  "baseline_commit": "2fe9c74b5cff32e478c79f17d08d3c51e645bf60",
+  "candidate_only": true,
+  "canonical_write_back": false,
+  "case_count": 26,
+  "challenge_case_count": 20,
+  "code_files": {
+    "scripts/sfh2_a2ov/common.py": "3cb629441d1978e7da492d46e7bcc757f53bc78bd4809e23c2c99cdb6c2eac17",
+    "scripts/sfh2_a2ov/contracts.py": "6206ed3097fc85adfaa3f7e6ffccd9de8628544729fa99e9a8c78204e7a85343",
+    "scripts/sfh2_a2ov/pipeline.py": "8dd42b699092d3b6128e937cb7726c36e9754917d8265e10100d6f9b16f4d120",
+    "scripts/sfh2_a2ov/prompt.py": "02706987468800b8c3f5b732aef138862f12ba31e39fcd94001195b00c41135d",
+    "scripts/sfh2_a2ov/transport.py": "e74e5735b553369d03db320ca10ffab079a13d5ba046ca46206110ccde3976e4"
+  },
+  "frozen_input_hashes": {
+    "data/frozen/sfh2/identity-v1/manifest.json": "f60e4eb84c5af10d644ac09dbcbdfba93cc435660868c3e38486563604dcc95e",
+    "data/generated/sfh2-a2or/case-packets.json": "0db6f6b68ac96e74dce67ed78872afd1b5340408cf53207d3df9b48090fa22f7",
+    "data/generated/sfh2-a2or/occurrence-results.json": "2f052e0745645794ab68d660113b72785652f3eb44c0c6893312322908c3b81c",
+    "data/generated/sfh2-a2or/projected-legacy-roles.json": "07fbc06b7713f1b81bc465fa22df5e99d35ee324abcc4eea03510b321e5dd595",
+    "data/generated/sfh2-a2or/selection-verification.json": "f256e25787371f968e69465bd98934487cb1887ea3547334dc0d090f86df1054",
+    "data/generated/sfh2-a2osp/a2or-post-promotion-evaluation.json": "03a635c099ecb457bba37701874bc03aca78701466e62aa5ad4083d2819861ec",
+    "data/generated/sfh2-a2osp/selection-integrity-invariant.json": "8dca88d340afa090df364a6b8d15b677086354792fc4c63514596bf15cd7970e",
+    "data/generated/sfh2-a2ot/taxonomy-definition.json": "caa32b61338396787e4c6fc944b7765d5549f59a02cc1e55bede9b482041963b"
+  },
+  "gold_not_in_provider_packets": true,
+  "historian_a_new_provider_calls": 0,
+  "identity_is_frozen": true,
+  "model_config": {
+    "endpoint": "https://api.deepseek.com/beta/chat/completions",
+    "expected_provider_calls": 27,
+    "function_name": "submit_sfh2_a2ov_occurrence_review_v1",
+    "model": "deepseek-v4-flash",
+    "prompt_version": "sfh2-a2ov-conservative-occurrence-reviewer-v1",
+    "retry_policy": "transient_only_at_most_one_retry; HTTP400_not_retryable",
+    "temperature": 0,
+    "thinking": {
+      "type": "disabled"
+    }
+  },
+  "no_full_188_story_live_run": true,
+  "primary_source": "A2OR cached live occurrence-results.json",
+  "primary_source_path": "data/generated/sfh2-a2or/occurrence-results.json",
+  "prompt": {
+    "exact_gold_case_names_in_template": false,
+    "gold_not_supplied": true,
+    "identity_frozen": true,
+    "provenance_structural": true,
+    "residual_error_labels_not_supplied": true,
+    "reviewer_is_not_independent_blind_historian": true,
+    "reviewer_is_primary_aware": true,
+    "role": "conservative_primary_aware_occurrence_semantic_reviewer",
+    "taxonomy_source": "data/generated/sfh2-a2ot/taxonomy-definition.json",
+    "version": "sfh2-a2ov-conservative-occurrence-reviewer-v1"
+  },
+  "prompt_hash": "aafcbf87d8cea5ed23fc40a837673690a05f88de0fccf7eca410c12a8e185ac1",
+  "provenance_is_structural": true,
+  "residual_error_labels_not_in_provider_packets": true,
+  "reviewed_role_case_count": 6,
+  "reviewer_is_not_independent_blind_historian": true,
+  "reviewer_is_primary_aware": true,
+  "reviewer_scope": "narrative_function_only",
+  "schema": "sfh2-a2ov-architecture-v1",
+  "schema_hash": "bea461e0c8705fdeebe6c5aef9e4328180acce8eab4d4bd703b8f712078f3fd0",
+  "stage": "SFH2.2-A2OV",
+  "taxonomy_hash": "caa32b61338396787e4c6fc944b7765d5549f59a02cc1e55bede9b482041963b"
+}
