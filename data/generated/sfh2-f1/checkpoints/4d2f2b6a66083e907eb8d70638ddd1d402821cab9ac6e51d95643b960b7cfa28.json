@@ -1,0 +1,614 @@
+{
+  "attempt": 0,
+  "contract_valid": true,
+  "output": {
+    "adjudication": {
+      "candidate_only": true,
+      "canonical_write_back": false,
+      "case_id": "sfh1-mention-a784097a150a921e85a6d19f",
+      "changed_fields": [],
+      "contract_status": "valid",
+      "decision": "select_b",
+      "errors": [],
+      "mention_id": "sfh1-mention-a784097a150a921e85a6d19f",
+      "patch_ops": [],
+      "reason_summary": "The key genealogical question is whether 融 (Rong) is the father of 祖識 (Zushi) or the father of 殷師 (Yin Shi). The annotation text reads: \"子祖識父融並有名師至驃騎咨議生仲堪\". Parsing this: \"子祖識父融並有名\" — the son Zushi and father Rong both had reputations — then \"師至驃騎咨議生仲堪\" — Shi reached the office of 驃騎咨議 and begat Zhongkan. The phrase \"子祖識父融並有名\" pairs 子祖識 (son Zushi) with 父融 (father Rong), indicating that 融 is the father of 祖識. This is the natural parallel reading: 子 (son) modifies 祖識, and 父 (father) modifies 融, listing a father-son pair (融 father of 祖識). Historian B correctly identifies 融 as father of 祖識 (Zushi). Historian A instead reads 融 as father of 殷師 (Yin Shi), which misreads the structure — the sentence \"師至驃騎咨議生仲堪\" introduces 師 separately as the one who held office and begat 仲堪, not as the son of 融. The parallel structure \"子祖識父融\" strongly supports B's reading. B's antecedent_hint \"仲堪父\" is also more appropriate given the surrounding context about 仲堪's father. B's relations (融 father of 祖識, and 融 related to 仲堪 and 殷師 within the lineage) are better grounded in the text structure.",
+      "reviewed_fields": [],
+      "selected_record": {
+        "abstain": false,
+        "attribute_type": "",
+        "attribute_value": "",
+        "bearer_hint": "",
+        "confidence": "high",
+        "discourse": {
+          "addressee_hint": "",
+          "antecedent_hint": "仲堪父",
+          "self_reference_hint": "",
+          "speaker_hint": ""
+        },
+        "explanation": "The target span 父融 in Liu annotation 002 reads '子祖識父融並有名' — meaning 'the son Zushi, [and] father Rong both had reputations.' The kinship term 父 preceding the personal name 融 indicates that 融 (Rong) is the father of 祖識 (Zushi). The annotation context establishes the genealogy of 殷仲堪 (Yin Zhongkan): 殷師 (Yin Shi) held office as 驃騎咨議 and begat 仲堪 (Zhongkan). The phrase '子祖識父融並有名' lists Zushi and Rong as related persons with reputations. Given the genealogy context, 融 (Rong) is the father of 祖識 (Zushi), and both are members of the Yin family lineage connected to 殷仲堪. The surface 父融 is a kinship reference combining the kinship term 父 with the personal name 融, referring to the historical person 殷融 (Yin Rong), father of 殷祖識.",
+        "mention_id": "sfh1-mention-a784097a150a921e85a6d19f",
+        "occurrence_role": "genealogy_reference",
+        "reference_type": "kinship_reference",
+        "referent": {
+          "canonical_hint": "殷融",
+          "confidence": "high",
+          "surface_form": "殷融"
+        },
+        "relations": [
+          {
+            "confidence": "high",
+            "evidence_ids": [
+              "sfh1-ev-34-pilou-006-liu-annotation-002"
+            ],
+            "relation": "kinship_relation",
+            "target_hint": "仲堪"
+          },
+          {
+            "confidence": "high",
+            "evidence_ids": [
+              "sfh1-ev-34-pilou-006-liu-annotation-002"
+            ],
+            "relation": "kinship_relation",
+            "target_hint": "祖識"
+          },
+          {
+            "confidence": "medium",
+            "evidence_ids": [
+              "sfh1-ev-34-pilou-006-liu-annotation-001",
+              "sfh1-ev-34-pilou-006-liu-annotation-002"
+            ],
+            "relation": "kinship_relation",
+            "target_hint": "殷師"
+          }
+        ],
+        "semantic_kind": "historical_person",
+        "supporting_evidence_ids": [
+          "sfh1-ev-34-pilou-006-liu-annotation-002"
+        ],
+        "surface": "父融"
+      },
+      "selected_record_source": "historian_b_exact_copy",
+      "stage": "identity_adjudicator",
+      "story_id": "34-pilou-006",
+      "supporting_evidence_ids": [
+        "sfh1-ev-34-pilou-006-liu-annotation-002"
+      ],
+      "surface": "父融",
+      "transport": {
+        "attempt": 1,
+        "classification": "parsed",
+        "elapsed_seconds": 4.151,
+        "finish_reason": "tool_calls",
+        "model": "deepseek-v4-flash",
+        "parse_error": null,
+        "prompt_version": "sfh2-a2r-adjudicator-v2",
+        "provider_call": true,
+        "provider_witness_hash": "91f4709655f6935707bb46f6e63e303aa9ecaa3adbdc9b0c455436c272909aca",
+        "raw_archive_path": "/tmp/sfh2-f1-raw-b30c380095772f61/sfh2-f1-live-v1/00109-identity_adjudicator-identity_adjudicator-sfh1-mention-a784097a150a921e85a6d19f-attempt1.json",
+        "raw_archive_sha256": "32632a53ac0fd24ebf717eac3ff4f34625a51cd16974bec08122698a3b7489fa",
+        "request_hash": "e15f6ac04d1feda5beccee6dfc57807954d25e74fb97244758bab7e400b7f8f1",
+        "stage": "identity_adjudicator",
+        "temperature": 0,
+        "thinking": {
+          "type": "disabled"
+        },
+        "unit_id": "identity_adjudicator:sfh1-mention-a784097a150a921e85a6d19f",
+        "usage": {
+          "completion_tokens": 476,
+          "prompt_tokens": 4857,
+          "total_tokens": 5333
+        },
+        "valid": true
+      },
+      "valid": true
+    },
+    "candidate_only": true,
+    "candidate_proposal": {
+      "candidate_only": true,
+      "candidate_origin": "llm_semantic_proposal_registry_miss",
+      "candidate_person_id": "sfh2-a0-candidate-person-7e1949512e7bb485e200",
+      "canonical_write_back": false,
+      "display_name": "殷融",
+      "entity_type": "candidate_historical_person",
+      "person_id": "",
+      "proposed_display_name": "殷融",
+      "referent_canonical_hint": "殷融",
+      "source_occurrence_ids": [
+        "sfh1-mention-a784097a150a921e85a6d19f"
+      ],
+      "supporting_evidence_ids": [
+        "sfh1-ev-34-pilou-006-liu-annotation-002"
+      ]
+    },
+    "canonical_write_back": false,
+    "case_id": "sfh1-mention-a784097a150a921e85a6d19f",
+    "comparison": {
+      "a_valid": true,
+      "agreement": false,
+      "b_valid": true,
+      "disagreement_classes": [
+        "discourse_disagreement",
+        "relation_disagreement"
+      ],
+      "historical_identity_disagreement": false,
+      "metadata_only_difference": false,
+      "semantic_fields": [
+        "discourse.antecedent_hint",
+        "relations"
+      ],
+      "substantive_disagreement": true,
+      "substantive_fields": [
+        "discourse.antecedent_hint",
+        "relations"
+      ]
+    },
+    "context": {
+      "frozen_discourse_context": {
+        "addressee_hint": "",
+        "antecedent_hint": "仲堪父",
+        "self_reference_hint": "",
+        "speaker_hint": ""
+      },
+      "frozen_identity": {
+        "abstain": false,
+        "attribute_type": "",
+        "attribute_value": "",
+        "bearer_hint": "",
+        "reference_type": "kinship_reference",
+        "referent": {
+          "canonical_hint": "殷融",
+          "confidence": "high",
+          "surface_form": "殷融"
+        },
+        "semantic_kind": "historical_person"
+      }
+    },
+    "failure": null,
+    "final_consistency": {
+      "candidate_only": true,
+      "canonical_write_back": false,
+      "flags": [
+        {
+          "challenged_fields": [
+            "relations",
+            "referent.canonical_hint"
+          ],
+          "evidence_ids": [
+            "sfh1-ev-34-pilou-006-liu-annotation-001",
+            "sfh1-ev-34-pilou-006-liu-annotation-002"
+          ],
+          "flag_type": "multi_candidate_ambiguity",
+          "formal_reason": "the record supplies more than one structured relation target",
+          "involved": [
+            "relations"
+          ],
+          "severity": "review"
+        }
+      ],
+      "has_diagnostic_flags": false,
+      "has_hard_flags": false,
+      "has_review_flags": true,
+      "review_trigger_score": 2,
+      "schema": "sfh2-a0r-consistency-v2",
+      "stage": "identity_final"
+    },
+    "final_state": "local_candidate_resolved",
+    "historian_independent": {
+      "candidate_only": true,
+      "canonical_write_back": false,
+      "case_id": "sfh1-mention-a784097a150a921e85a6d19f",
+      "consistency": {
+        "candidate_only": true,
+        "canonical_write_back": false,
+        "flags": [
+          {
+            "challenged_fields": [
+              "relations",
+              "referent.canonical_hint"
+            ],
+            "evidence_ids": [
+              "sfh1-ev-34-pilou-006-liu-annotation-001",
+              "sfh1-ev-34-pilou-006-liu-annotation-002"
+            ],
+            "flag_type": "multi_candidate_ambiguity",
+            "formal_reason": "the record supplies more than one structured relation target",
+            "involved": [
+              "relations"
+            ],
+            "severity": "review"
+          }
+        ],
+        "has_diagnostic_flags": false,
+        "has_hard_flags": false,
+        "has_review_flags": true,
+        "review_trigger_score": 2,
+        "schema": "sfh2-a0r-consistency-v2",
+        "stage": "identity_independent"
+      },
+      "contract_status": "valid",
+      "errors": [],
+      "historian": "B",
+      "mention_id": "sfh1-mention-a784097a150a921e85a6d19f",
+      "provisional_realization": {
+        "candidate": {
+          "candidate_only": true,
+          "candidate_origin": "llm_semantic_proposal_registry_miss",
+          "candidate_person_id": "sfh2-a0-candidate-person-7e1949512e7bb485e200",
+          "canonical_write_back": false,
+          "display_name": "殷融",
+          "entity_type": "candidate_historical_person",
+          "person_id": "",
+          "proposed_display_name": "殷融",
+          "referent_canonical_hint": "殷融",
+          "source_occurrence_ids": [
+            "sfh1-mention-a784097a150a921e85a6d19f"
+          ],
+          "supporting_evidence_ids": [
+            "sfh1-ev-34-pilou-006-liu-annotation-002"
+          ]
+        },
+        "candidate_only": true,
+        "canonical_write_back": false,
+        "case_id": "sfh1-mention-a784097a150a921e85a6d19f",
+        "core_graph_eligible": false,
+        "identity_created": true,
+        "mention_id": "sfh1-mention-a784097a150a921e85a6d19f",
+        "occurrence_role": "genealogy_reference",
+        "realization_basis": [
+          "llm_semantic_proposal",
+          "candidate_registry_miss"
+        ],
+        "semantic_kind": "historical_person",
+        "story_id": "34-pilou-006",
+        "surface": "父融"
+      },
+      "record": {
+        "abstain": false,
+        "attribute_type": "",
+        "attribute_value": "",
+        "bearer_hint": "",
+        "confidence": "high",
+        "discourse": {
+          "addressee_hint": "",
+          "antecedent_hint": "仲堪父",
+          "self_reference_hint": "",
+          "speaker_hint": ""
+        },
+        "explanation": "The target span 父融 in Liu annotation 002 reads '子祖識父融並有名' — meaning 'the son Zushi, [and] father Rong both had reputations.' The kinship term 父 preceding the personal name 融 indicates that 融 (Rong) is the father of 祖識 (Zushi). The annotation context establishes the genealogy of 殷仲堪 (Yin Zhongkan): 殷師 (Yin Shi) held office as 驃騎咨議 and begat 仲堪 (Zhongkan). The phrase '子祖識父融並有名' lists Zushi and Rong as related persons with reputations. Given the genealogy context, 融 (Rong) is the father of 祖識 (Zushi), and both are members of the Yin family lineage connected to 殷仲堪. The surface 父融 is a kinship reference combining the kinship term 父 with the personal name 融, referring to the historical person 殷融 (Yin Rong), father of 殷祖識.",
+        "mention_id": "sfh1-mention-a784097a150a921e85a6d19f",
+        "occurrence_role": "genealogy_reference",
+        "reference_type": "kinship_reference",
+        "referent": {
+          "canonical_hint": "殷融",
+          "confidence": "high",
+          "surface_form": "殷融"
+        },
+        "relations": [
+          {
+            "confidence": "high",
+            "evidence_ids": [
+              "sfh1-ev-34-pilou-006-liu-annotation-002"
+            ],
+            "relation": "kinship_relation",
+            "target_hint": "仲堪"
+          },
+          {
+            "confidence": "high",
+            "evidence_ids": [
+              "sfh1-ev-34-pilou-006-liu-annotation-002"
+            ],
+            "relation": "kinship_relation",
+            "target_hint": "祖識"
+          },
+          {
+            "confidence": "medium",
+            "evidence_ids": [
+              "sfh1-ev-34-pilou-006-liu-annotation-001",
+              "sfh1-ev-34-pilou-006-liu-annotation-002"
+            ],
+            "relation": "kinship_relation",
+            "target_hint": "殷師"
+          }
+        ],
+        "semantic_kind": "historical_person",
+        "supporting_evidence_ids": [
+          "sfh1-ev-34-pilou-006-liu-annotation-002"
+        ],
+        "surface": "父融"
+      },
+      "stage": "identity_independent",
+      "story_id": "34-pilou-006",
+      "surface": "父融",
+      "transport": {
+        "attempt": 1,
+        "classification": "parsed",
+        "elapsed_seconds": 4.077,
+        "finish_reason": "tool_calls",
+        "model": "deepseek-v4-flash",
+        "parse_error": null,
+        "prompt_version": "sfh2-a2-independent-historian-v1",
+        "provider_call": true,
+        "provider_witness_hash": "8607fc7c93480ab178585c240beb4bbe55d3740b6e63de35fee43e23446c5114",
+        "raw_archive_path": "/tmp/sfh2-f1-raw-b30c380095772f61/sfh2-f1-live-v1/00108-identity_independent-identity_independent-sfh1-mention-a784097a150a921e85a6d19f-attempt1.json",
+        "raw_archive_sha256": "b52dbe2334a262aafe4b1254e8759adad624f9ee14e456af625afd4b16372934",
+        "request_hash": "7ec02bd1816535b2b6660b2fbc8b8e33fc11ceaa4a621d7e3155ee65b488ff0b",
+        "stage": "identity_independent",
+        "temperature": 0,
+        "thinking": {
+          "type": "disabled"
+        },
+        "unit_id": "identity_independent:sfh1-mention-a784097a150a921e85a6d19f",
+        "usage": {
+          "completion_tokens": 626,
+          "prompt_tokens": 3047,
+          "total_tokens": 3673
+        },
+        "valid": true
+      },
+      "valid": true
+    },
+    "historian_primary": {
+      "candidate_only": true,
+      "canonical_write_back": false,
+      "case_id": "sfh1-mention-a784097a150a921e85a6d19f",
+      "consistency": {
+        "candidate_only": true,
+        "canonical_write_back": false,
+        "flags": [
+          {
+            "challenged_fields": [
+              "relations",
+              "referent.canonical_hint"
+            ],
+            "evidence_ids": [
+              "sfh1-ev-34-pilou-006-liu-annotation-002"
+            ],
+            "flag_type": "multi_candidate_ambiguity",
+            "formal_reason": "the record supplies more than one structured relation target",
+            "involved": [
+              "relations"
+            ],
+            "severity": "review"
+          }
+        ],
+        "has_diagnostic_flags": false,
+        "has_hard_flags": false,
+        "has_review_flags": true,
+        "review_trigger_score": 2,
+        "schema": "sfh2-a0r-consistency-v2",
+        "stage": "identity_primary"
+      },
+      "contract_status": "valid",
+      "errors": [],
+      "mention_id": "sfh1-mention-a784097a150a921e85a6d19f",
+      "provisional_realization": {
+        "candidate": {
+          "candidate_only": true,
+          "candidate_origin": "llm_semantic_proposal_registry_miss",
+          "candidate_person_id": "sfh2-a0-candidate-person-7e1949512e7bb485e200",
+          "canonical_write_back": false,
+          "display_name": "殷融",
+          "entity_type": "candidate_historical_person",
+          "person_id": "",
+          "proposed_display_name": "殷融",
+          "referent_canonical_hint": "殷融",
+          "source_occurrence_ids": [
+            "sfh1-mention-a784097a150a921e85a6d19f"
+          ],
+          "supporting_evidence_ids": [
+            "sfh1-ev-34-pilou-006-liu-annotation-002"
+          ]
+        },
+        "candidate_only": true,
+        "canonical_write_back": false,
+        "case_id": "sfh1-mention-a784097a150a921e85a6d19f",
+        "core_graph_eligible": false,
+        "identity_created": true,
+        "mention_id": "sfh1-mention-a784097a150a921e85a6d19f",
+        "occurrence_role": "genealogy_reference",
+        "realization_basis": [
+          "llm_semantic_proposal",
+          "candidate_registry_miss"
+        ],
+        "semantic_kind": "historical_person",
+        "story_id": "34-pilou-006",
+        "surface": "父融"
+      },
+      "record": {
+        "abstain": false,
+        "attribute_type": "",
+        "attribute_value": "",
+        "bearer_hint": "",
+        "confidence": "high",
+        "discourse": {
+          "addressee_hint": "",
+          "antecedent_hint": "祖識",
+          "self_reference_hint": "",
+          "speaker_hint": ""
+        },
+        "explanation": "The target span '父融' in the Liu annotation reads as '父融' — the character 融 following 父 indicates that 融 is the personal name of the father. The genealogy text states '祖識父融並有名' meaning 'grandfather 識 and father 融 both had reputations', and continues '師至驃騎咨議生仲堪' — 師 (殷師) held office and fathered 仲堪. Thus 融 is the father of 殷師 and grandfather of 仲堪. The kinship reference '父融' identifies 殷融 as the father within the genealogy. The validated local mention sfh1-mention-49a89dc32e114213b77cba88 for '融' confirms this is the personal name 融. The surname is 殷 per the family context (殷氏譜).",
+        "mention_id": "sfh1-mention-a784097a150a921e85a6d19f",
+        "occurrence_role": "genealogy_reference",
+        "reference_type": "kinship_reference",
+        "referent": {
+          "canonical_hint": "殷融",
+          "confidence": "high",
+          "surface_form": "殷融"
+        },
+        "relations": [
+          {
+            "confidence": "high",
+            "evidence_ids": [
+              "sfh1-ev-34-pilou-006-liu-annotation-002"
+            ],
+            "relation": "kinship_relation",
+            "target_hint": "祖識"
+          },
+          {
+            "confidence": "high",
+            "evidence_ids": [
+              "sfh1-ev-34-pilou-006-liu-annotation-002"
+            ],
+            "relation": "kinship_relation",
+            "target_hint": "殷師"
+          },
+          {
+            "confidence": "high",
+            "evidence_ids": [
+              "sfh1-ev-34-pilou-006-liu-annotation-002"
+            ],
+            "relation": "kinship_relation",
+            "target_hint": "仲堪"
+          }
+        ],
+        "semantic_kind": "historical_person",
+        "supporting_evidence_ids": [
+          "sfh1-ev-34-pilou-006-liu-annotation-002"
+        ],
+        "surface": "父融"
+      },
+      "stage": "identity_primary",
+      "story_id": "34-pilou-006",
+      "surface": "父融",
+      "transport": {
+        "attempt": 1,
+        "classification": "parsed",
+        "elapsed_seconds": 4.489,
+        "finish_reason": "tool_calls",
+        "model": "deepseek-v4-flash",
+        "parse_error": null,
+        "prompt_version": "sfh2-a0r-primary-historian-v1",
+        "provider_call": true,
+        "provider_witness_hash": "aa695de86643c2f53efcd86dc76bf273ef85f35415c62bcfbd89c356bcd732af",
+        "raw_archive_path": "/tmp/sfh2-f1-raw-b30c380095772f61/sfh2-f1-live-v1/00107-identity_primary-identity_primary-sfh1-mention-a784097a150a921e85a6d19f-attempt1.json",
+        "raw_archive_sha256": "56e5900e3ecb80160b26a03d6e9e0ab4e6b792f3486e39d8a876e8e41cdb282f",
+        "request_hash": "35a0db5f1603169771e5b8985e81bf36d9448b71e4ba5084867f455714a2f8b8",
+        "stage": "identity_primary",
+        "temperature": 0,
+        "thinking": {
+          "type": "disabled"
+        },
+        "unit_id": "identity_primary:sfh1-mention-a784097a150a921e85a6d19f",
+        "usage": {
+          "completion_tokens": 567,
+          "prompt_tokens": 3015,
+          "total_tokens": 3582
+        },
+        "valid": true
+      },
+      "valid": true
+    },
+    "identity_readiness": "identity_requires_pipeline",
+    "mention_id": "sfh1-mention-a784097a150a921e85a6d19f",
+    "occurrence_id": "sfh1-mention-a784097a150a921e85a6d19f",
+    "realization": {
+      "candidate": {
+        "candidate_only": true,
+        "candidate_origin": "llm_semantic_proposal_registry_miss",
+        "candidate_person_id": "sfh2-a0-candidate-person-7e1949512e7bb485e200",
+        "canonical_write_back": false,
+        "display_name": "殷融",
+        "entity_type": "candidate_historical_person",
+        "person_id": "",
+        "proposed_display_name": "殷融",
+        "referent_canonical_hint": "殷融",
+        "source_occurrence_ids": [
+          "sfh1-mention-a784097a150a921e85a6d19f"
+        ],
+        "supporting_evidence_ids": [
+          "sfh1-ev-34-pilou-006-liu-annotation-002"
+        ]
+      },
+      "candidate_only": true,
+      "canonical_write_back": false,
+      "case_id": "sfh1-mention-a784097a150a921e85a6d19f",
+      "core_graph_eligible": false,
+      "identity_created": true,
+      "mention_id": "sfh1-mention-a784097a150a921e85a6d19f",
+      "occurrence_role": "genealogy_reference",
+      "realization_basis": [
+        "llm_semantic_proposal",
+        "candidate_registry_miss"
+      ],
+      "semantic_kind": "historical_person",
+      "story_id": "34-pilou-006",
+      "surface": "父融"
+    },
+    "request_hashes": {
+      "adjudicator": "e15f6ac04d1feda5beccee6dfc57807954d25e74fb97244758bab7e400b7f8f1",
+      "independent": "7ec02bd1816535b2b6660b2fbc8b8e33fc11ceaa4a621d7e3155ee65b488ff0b",
+      "primary": "35a0db5f1603169771e5b8985e81bf36d9448b71e4ba5084867f455714a2f8b8"
+    },
+    "selected_record": {
+      "abstain": false,
+      "attribute_type": "",
+      "attribute_value": "",
+      "bearer_hint": "",
+      "confidence": "high",
+      "discourse": {
+        "addressee_hint": "",
+        "antecedent_hint": "仲堪父",
+        "self_reference_hint": "",
+        "speaker_hint": ""
+      },
+      "explanation": "The target span 父融 in Liu annotation 002 reads '子祖識父融並有名' — meaning 'the son Zushi, [and] father Rong both had reputations.' The kinship term 父 preceding the personal name 融 indicates that 融 (Rong) is the father of 祖識 (Zushi). The annotation context establishes the genealogy of 殷仲堪 (Yin Zhongkan): 殷師 (Yin Shi) held office as 驃騎咨議 and begat 仲堪 (Zhongkan). The phrase '子祖識父融並有名' lists Zushi and Rong as related persons with reputations. Given the genealogy context, 融 (Rong) is the father of 祖識 (Zushi), and both are members of the Yin family lineage connected to 殷仲堪. The surface 父融 is a kinship reference combining the kinship term 父 with the personal name 融, referring to the historical person 殷融 (Yin Rong), father of 殷祖識.",
+      "mention_id": "sfh1-mention-a784097a150a921e85a6d19f",
+      "occurrence_role": "genealogy_reference",
+      "reference_type": "kinship_reference",
+      "referent": {
+        "canonical_hint": "殷融",
+        "confidence": "high",
+        "surface_form": "殷融"
+      },
+      "relations": [
+        {
+          "confidence": "high",
+          "evidence_ids": [
+            "sfh1-ev-34-pilou-006-liu-annotation-002"
+          ],
+          "relation": "kinship_relation",
+          "target_hint": "仲堪"
+        },
+        {
+          "confidence": "high",
+          "evidence_ids": [
+            "sfh1-ev-34-pilou-006-liu-annotation-002"
+          ],
+          "relation": "kinship_relation",
+          "target_hint": "祖識"
+        },
+        {
+          "confidence": "medium",
+          "evidence_ids": [
+            "sfh1-ev-34-pilou-006-liu-annotation-001",
+            "sfh1-ev-34-pilou-006-liu-annotation-002"
+          ],
+          "relation": "kinship_relation",
+          "target_hint": "殷師"
+        }
+      ],
+      "semantic_kind": "historical_person",
+      "supporting_evidence_ids": [
+        "sfh1-ev-34-pilou-006-liu-annotation-002"
+      ],
+      "surface": "父融"
+    },
+    "selected_record_source": "historian_b_exact_copy",
+    "stage": "identity",
+    "status": "resolved",
+    "story_id": "34-pilou-006",
+    "surface": "父融"
+  },
+  "output_hash": "f7a69f712620ced607ac8a1456aae0db2afe3fa8633e4c35869801083e488a1c",
+  "provider_witness_hash": null,
+  "request_hash": "9bc1ccb5872e78f2c86781f3d9ad55902050a78d1c2e670bd8f835cadc063db7",
+  "runtime_metadata": {
+    "candidate_only": true,
+    "canonical_write_back": false,
+    "recorded_at": "2026-09-04T15:42:47Z"
+  },
+  "schema": "sfh2-f1-checkpoint-v1",
+  "status": "completed",
+  "unit_id": "identity:sfh1-mention-a784097a150a921e85a6d19f"
+}

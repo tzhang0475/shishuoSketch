@@ -1,0 +1,618 @@
+{
+  "attempt": 0,
+  "contract_valid": true,
+  "output": {
+    "adjudication": {
+      "candidate_only": true,
+      "canonical_write_back": false,
+      "case_id": "sfh1-mention-c051c79699ee2334eccc5086",
+      "changed_fields": [],
+      "contract_status": "valid",
+      "decision": "select_a",
+      "errors": [],
+      "mention_id": "sfh1-mention-c051c79699ee2334eccc5086",
+      "patch_ops": [],
+      "reason_summary": "Both historians correctly identify 桓子野 as 桓伊 (courtesy name 子野), a historical person and scene participant/addressee. The core identity is agreed. The differences are: (1) Historian A's canonical_hint is simply \"桓伊\" while B's is \"桓伊字子野\"; (2) A's relations include two same_person relations (桓伊, 子野) while B adds a related_person relation to 桓公; (3) A leaves antecedent_hint empty while B fills it with 桓子野.\n\nOn the canonical_hint: the annotation-001 gloss \"(桓伊/子野)\" and annotation-002 giving 伊字叔夏 (with 續晉陽秋) indicate the courtesy name is actually 叔夏, not 子野 — the annotation-001 pairing 桓伊/子野 is the gloss identifying the referent of the surface form 桓子野. The canonical identity is 桓伊; appending \"字子野\" is questionable since annotation-002 states 伊字叔夏. Historian A's simpler \"桓伊\" is more defensible.\n\nOn relations: A's two same_person relations (桓伊 and 子野) are well supported by annotation-001 which explicitly pairs them. B's additional related_person relation to 桓公 (桓溫) is not clearly warranted — the main text shows 桓公 addressing 桓子野, but there is no evidence of a kinship or other \"related_person\" relationship between 桓溫 and 桓伊; they are distinct persons in a conversational scene, not necessarily related. Adding a related_person relation without evidence is speculative.\n\nOn antecedent_hint: the target 桓子野 is the addressee of 桓公's question, not an antecedent of a pronoun; A's empty antecedent_hint is appropriate. B's filling it with 桓子野 is unnecessary since the mention itself is the full name.\n\nHistorian A's record is therefore more accurate and better grounded in the supplied evidence.",
+      "reviewed_fields": [],
+      "selected_record": {
+        "abstain": false,
+        "attribute_type": "",
+        "attribute_value": "",
+        "bearer_hint": "",
+        "confidence": "high",
+        "discourse": {
+          "addressee_hint": "桓子野",
+          "antecedent_hint": "",
+          "self_reference_hint": "",
+          "speaker_hint": "桓公"
+        },
+        "explanation": "桓子野 is the full name reference combining surname 桓 with courtesy name 子野, referring to 桓伊 (字子野). The Liu annotation explicitly identifies 桓伊/子野, and the annotation further gives 伊字叔夏... but the annotation-001 glosses 桓伊 as 子野, confirming 桓子野 = 桓伊 whose courtesy name is 子野. In the main text, 桓公 (桓溫) asks 桓子野 about 謝安石's prediction that 萬石 would fail. 桓子野 is the addressee of 桓公's question and a scene participant.",
+        "mention_id": "sfh1-mention-c051c79699ee2334eccc5086",
+        "occurrence_role": "scene_participant",
+        "reference_type": "full_name",
+        "referent": {
+          "canonical_hint": "桓伊",
+          "confidence": "high",
+          "surface_form": "桓伊"
+        },
+        "relations": [
+          {
+            "confidence": "high",
+            "evidence_ids": [
+              "sfh1-ev-05-fangzheng-055-liu-annotation-001",
+              "sfh1-ev-05-fangzheng-055-liu-annotation-002"
+            ],
+            "relation": "same_person",
+            "target_hint": "桓伊"
+          },
+          {
+            "confidence": "high",
+            "evidence_ids": [
+              "sfh1-ev-05-fangzheng-055-liu-annotation-001",
+              "sfh1-ev-05-fangzheng-055-main"
+            ],
+            "relation": "same_person",
+            "target_hint": "子野"
+          }
+        ],
+        "semantic_kind": "historical_person",
+        "supporting_evidence_ids": [
+          "sfh1-ev-05-fangzheng-055-liu-annotation-001",
+          "sfh1-ev-05-fangzheng-055-liu-annotation-002",
+          "sfh1-ev-05-fangzheng-055-main"
+        ],
+        "surface": "桓子野"
+      },
+      "selected_record_source": "historian_a_exact_copy",
+      "stage": "identity_adjudicator",
+      "story_id": "05-fangzheng-055",
+      "supporting_evidence_ids": [
+        "sfh1-ev-05-fangzheng-055-liu-annotation-001",
+        "sfh1-ev-05-fangzheng-055-liu-annotation-002",
+        "sfh1-ev-05-fangzheng-055-main"
+      ],
+      "surface": "桓子野",
+      "transport": {
+        "attempt": 1,
+        "classification": "parsed",
+        "elapsed_seconds": 4.856,
+        "finish_reason": "tool_calls",
+        "model": "deepseek-v4-flash",
+        "parse_error": null,
+        "prompt_version": "sfh2-a2r-adjudicator-v2",
+        "provider_call": true,
+        "provider_witness_hash": "39ca6bdbb9ac0c0dc980163b2af71724c51c17866ae04c83e21fdcfcc772d976",
+        "raw_archive_path": "/tmp/sfh2-f1-raw-b30c380095772f61/sfh2-f1-live-v1/00038-identity_adjudicator-identity_adjudicator-sfh1-mention-c051c79699ee2334eccc5086-attempt1.json",
+        "raw_archive_sha256": "542bdb75d290a4dd585bab5295d0c2a2d24914a38f90b15e83420f04248175e7",
+        "request_hash": "c481695a7d325b6965e169126a9297f467040bd665d6c88bd924b128020a2f91",
+        "stage": "identity_adjudicator",
+        "temperature": 0,
+        "thinking": {
+          "type": "disabled"
+        },
+        "unit_id": "identity_adjudicator:sfh1-mention-c051c79699ee2334eccc5086",
+        "usage": {
+          "completion_tokens": 583,
+          "prompt_tokens": 4705,
+          "total_tokens": 5288
+        },
+        "valid": true
+      },
+      "valid": true
+    },
+    "candidate_only": true,
+    "candidate_proposal": {
+      "candidate_only": true,
+      "candidate_origin": "llm_semantic_proposal_registry_miss",
+      "candidate_person_id": "sfh2-a0-candidate-person-096a4840c340494f35a4",
+      "canonical_write_back": false,
+      "display_name": "桓伊",
+      "entity_type": "candidate_historical_person",
+      "person_id": "",
+      "proposed_display_name": "桓伊",
+      "referent_canonical_hint": "桓伊",
+      "source_occurrence_ids": [
+        "sfh1-mention-c051c79699ee2334eccc5086"
+      ],
+      "supporting_evidence_ids": [
+        "sfh1-ev-05-fangzheng-055-liu-annotation-001",
+        "sfh1-ev-05-fangzheng-055-liu-annotation-002",
+        "sfh1-ev-05-fangzheng-055-main"
+      ]
+    },
+    "canonical_write_back": false,
+    "case_id": "sfh1-mention-c051c79699ee2334eccc5086",
+    "comparison": {
+      "a_valid": true,
+      "agreement": false,
+      "b_valid": true,
+      "disagreement_classes": [
+        "discourse_disagreement",
+        "identity_disagreement",
+        "relation_disagreement"
+      ],
+      "historical_identity_disagreement": true,
+      "metadata_only_difference": false,
+      "semantic_fields": [
+        "discourse.antecedent_hint",
+        "referent.canonical_hint",
+        "relations"
+      ],
+      "substantive_disagreement": true,
+      "substantive_fields": [
+        "discourse.antecedent_hint",
+        "referent.canonical_hint",
+        "relations"
+      ]
+    },
+    "context": {
+      "frozen_discourse_context": {
+        "addressee_hint": "桓子野",
+        "antecedent_hint": "",
+        "self_reference_hint": "",
+        "speaker_hint": "桓公"
+      },
+      "frozen_identity": {
+        "abstain": false,
+        "attribute_type": "",
+        "attribute_value": "",
+        "bearer_hint": "",
+        "reference_type": "full_name",
+        "referent": {
+          "canonical_hint": "桓伊",
+          "confidence": "high",
+          "surface_form": "桓伊"
+        },
+        "semantic_kind": "historical_person"
+      }
+    },
+    "failure": null,
+    "final_consistency": {
+      "candidate_only": true,
+      "canonical_write_back": false,
+      "flags": [
+        {
+          "challenged_fields": [
+            "relations",
+            "referent.canonical_hint"
+          ],
+          "evidence_ids": [
+            "sfh1-ev-05-fangzheng-055-liu-annotation-001",
+            "sfh1-ev-05-fangzheng-055-liu-annotation-002",
+            "sfh1-ev-05-fangzheng-055-main"
+          ],
+          "flag_type": "multi_candidate_ambiguity",
+          "formal_reason": "the record supplies more than one structured relation target",
+          "involved": [
+            "relations"
+          ],
+          "severity": "review"
+        }
+      ],
+      "has_diagnostic_flags": false,
+      "has_hard_flags": false,
+      "has_review_flags": true,
+      "review_trigger_score": 2,
+      "schema": "sfh2-a0r-consistency-v2",
+      "stage": "identity_final"
+    },
+    "final_state": "local_candidate_resolved",
+    "historian_independent": {
+      "candidate_only": true,
+      "canonical_write_back": false,
+      "case_id": "sfh1-mention-c051c79699ee2334eccc5086",
+      "consistency": {
+        "candidate_only": true,
+        "canonical_write_back": false,
+        "flags": [
+          {
+            "challenged_fields": [
+              "relations",
+              "referent.canonical_hint"
+            ],
+            "evidence_ids": [
+              "sfh1-ev-05-fangzheng-055-liu-annotation-001",
+              "sfh1-ev-05-fangzheng-055-liu-annotation-002",
+              "sfh1-ev-05-fangzheng-055-main"
+            ],
+            "flag_type": "multi_candidate_ambiguity",
+            "formal_reason": "the record supplies more than one structured relation target",
+            "involved": [
+              "relations"
+            ],
+            "severity": "review"
+          }
+        ],
+        "has_diagnostic_flags": false,
+        "has_hard_flags": false,
+        "has_review_flags": true,
+        "review_trigger_score": 2,
+        "schema": "sfh2-a0r-consistency-v2",
+        "stage": "identity_independent"
+      },
+      "contract_status": "valid",
+      "errors": [],
+      "historian": "B",
+      "mention_id": "sfh1-mention-c051c79699ee2334eccc5086",
+      "provisional_realization": {
+        "candidate": {
+          "candidate_only": true,
+          "candidate_origin": "llm_semantic_proposal_registry_miss",
+          "candidate_person_id": "sfh2-a0-candidate-person-8171f9777bed78d4d5f1",
+          "canonical_write_back": false,
+          "display_name": "桓伊字子野",
+          "entity_type": "candidate_historical_person",
+          "person_id": "",
+          "proposed_display_name": "桓伊字子野",
+          "referent_canonical_hint": "桓伊字子野",
+          "source_occurrence_ids": [
+            "sfh1-mention-c051c79699ee2334eccc5086"
+          ],
+          "supporting_evidence_ids": [
+            "sfh1-ev-05-fangzheng-055-liu-annotation-001",
+            "sfh1-ev-05-fangzheng-055-liu-annotation-002",
+            "sfh1-ev-05-fangzheng-055-main"
+          ]
+        },
+        "candidate_only": true,
+        "canonical_write_back": false,
+        "case_id": "sfh1-mention-c051c79699ee2334eccc5086",
+        "core_graph_eligible": true,
+        "identity_created": true,
+        "mention_id": "sfh1-mention-c051c79699ee2334eccc5086",
+        "occurrence_role": "scene_participant",
+        "realization_basis": [
+          "llm_semantic_proposal",
+          "candidate_registry_miss"
+        ],
+        "semantic_kind": "historical_person",
+        "story_id": "05-fangzheng-055",
+        "surface": "桓子野"
+      },
+      "record": {
+        "abstain": false,
+        "attribute_type": "",
+        "attribute_value": "",
+        "bearer_hint": "",
+        "confidence": "high",
+        "discourse": {
+          "addressee_hint": "桓子野",
+          "antecedent_hint": "桓子野",
+          "self_reference_hint": "",
+          "speaker_hint": "桓公"
+        },
+        "explanation": "桓子野 is the full name form combining surname 桓 with courtesy name 子野. The Liu annotation (sfh1-ev-05-fangzheng-055-liu-annotation-001) explicitly identifies 桓伊/子野, and annotation-002 provides further biographical detail (伊字叔夏, 譙國銍人, 父景護軍, 將軍). The main text shows 桓公 (桓溫) addressing 桓子野, who responds as 子野. The referent is 桓伊, courtesy name 子野 (also given as 叔夏 in the annotation).",
+        "mention_id": "sfh1-mention-c051c79699ee2334eccc5086",
+        "occurrence_role": "scene_participant",
+        "reference_type": "full_name",
+        "referent": {
+          "canonical_hint": "桓伊字子野",
+          "confidence": "high",
+          "surface_form": "桓伊"
+        },
+        "relations": [
+          {
+            "confidence": "medium",
+            "evidence_ids": [
+              "sfh1-ev-05-fangzheng-055-main"
+            ],
+            "relation": "related_person",
+            "target_hint": "桓公"
+          },
+          {
+            "confidence": "high",
+            "evidence_ids": [
+              "sfh1-ev-05-fangzheng-055-liu-annotation-001"
+            ],
+            "relation": "same_person",
+            "target_hint": "桓伊"
+          },
+          {
+            "confidence": "high",
+            "evidence_ids": [
+              "sfh1-ev-05-fangzheng-055-liu-annotation-001"
+            ],
+            "relation": "same_person",
+            "target_hint": "子野"
+          }
+        ],
+        "semantic_kind": "historical_person",
+        "supporting_evidence_ids": [
+          "sfh1-ev-05-fangzheng-055-liu-annotation-001",
+          "sfh1-ev-05-fangzheng-055-liu-annotation-002",
+          "sfh1-ev-05-fangzheng-055-main"
+        ],
+        "surface": "桓子野"
+      },
+      "stage": "identity_independent",
+      "story_id": "05-fangzheng-055",
+      "surface": "桓子野",
+      "transport": {
+        "attempt": 1,
+        "classification": "parsed",
+        "elapsed_seconds": 3.606,
+        "finish_reason": "tool_calls",
+        "model": "deepseek-v4-flash",
+        "parse_error": null,
+        "prompt_version": "sfh2-a2-independent-historian-v1",
+        "provider_call": true,
+        "provider_witness_hash": "0a27b2891d56e5f10f0abf99f424a054a5b60507a88041ec83963012d8f56f57",
+        "raw_archive_path": "/tmp/sfh2-f1-raw-b30c380095772f61/sfh2-f1-live-v1/00037-identity_independent-identity_independent-sfh1-mention-c051c79699ee2334eccc5086-attempt1.json",
+        "raw_archive_sha256": "e5976905394f3a6d2834f20b1a6b7ab8ac21f35f546e3b5ce8e7f4b06980773f",
+        "request_hash": "3bc18236c85542b3083b3220c85689152b81a10f98fb91cede25520ce751d2ea",
+        "stage": "identity_independent",
+        "temperature": 0,
+        "thinking": {
+          "type": "disabled"
+        },
+        "unit_id": "identity_independent:sfh1-mention-c051c79699ee2334eccc5086",
+        "usage": {
+          "completion_tokens": 557,
+          "prompt_tokens": 2919,
+          "total_tokens": 3476
+        },
+        "valid": true
+      },
+      "valid": true
+    },
+    "historian_primary": {
+      "candidate_only": true,
+      "canonical_write_back": false,
+      "case_id": "sfh1-mention-c051c79699ee2334eccc5086",
+      "consistency": {
+        "candidate_only": true,
+        "canonical_write_back": false,
+        "flags": [
+          {
+            "challenged_fields": [
+              "relations",
+              "referent.canonical_hint"
+            ],
+            "evidence_ids": [
+              "sfh1-ev-05-fangzheng-055-liu-annotation-001",
+              "sfh1-ev-05-fangzheng-055-liu-annotation-002",
+              "sfh1-ev-05-fangzheng-055-main"
+            ],
+            "flag_type": "multi_candidate_ambiguity",
+            "formal_reason": "the record supplies more than one structured relation target",
+            "involved": [
+              "relations"
+            ],
+            "severity": "review"
+          }
+        ],
+        "has_diagnostic_flags": false,
+        "has_hard_flags": false,
+        "has_review_flags": true,
+        "review_trigger_score": 2,
+        "schema": "sfh2-a0r-consistency-v2",
+        "stage": "identity_primary"
+      },
+      "contract_status": "valid",
+      "errors": [],
+      "mention_id": "sfh1-mention-c051c79699ee2334eccc5086",
+      "provisional_realization": {
+        "candidate": {
+          "candidate_only": true,
+          "candidate_origin": "llm_semantic_proposal_registry_miss",
+          "candidate_person_id": "sfh2-a0-candidate-person-096a4840c340494f35a4",
+          "canonical_write_back": false,
+          "display_name": "桓伊",
+          "entity_type": "candidate_historical_person",
+          "person_id": "",
+          "proposed_display_name": "桓伊",
+          "referent_canonical_hint": "桓伊",
+          "source_occurrence_ids": [
+            "sfh1-mention-c051c79699ee2334eccc5086"
+          ],
+          "supporting_evidence_ids": [
+            "sfh1-ev-05-fangzheng-055-liu-annotation-001",
+            "sfh1-ev-05-fangzheng-055-liu-annotation-002",
+            "sfh1-ev-05-fangzheng-055-main"
+          ]
+        },
+        "candidate_only": true,
+        "canonical_write_back": false,
+        "case_id": "sfh1-mention-c051c79699ee2334eccc5086",
+        "core_graph_eligible": true,
+        "identity_created": true,
+        "mention_id": "sfh1-mention-c051c79699ee2334eccc5086",
+        "occurrence_role": "scene_participant",
+        "realization_basis": [
+          "llm_semantic_proposal",
+          "candidate_registry_miss"
+        ],
+        "semantic_kind": "historical_person",
+        "story_id": "05-fangzheng-055",
+        "surface": "桓子野"
+      },
+      "record": {
+        "abstain": false,
+        "attribute_type": "",
+        "attribute_value": "",
+        "bearer_hint": "",
+        "confidence": "high",
+        "discourse": {
+          "addressee_hint": "桓子野",
+          "antecedent_hint": "",
+          "self_reference_hint": "",
+          "speaker_hint": "桓公"
+        },
+        "explanation": "桓子野 is the full name reference combining surname 桓 with courtesy name 子野, referring to 桓伊 (字子野). The Liu annotation explicitly identifies 桓伊/子野, and the annotation further gives 伊字叔夏... but the annotation-001 glosses 桓伊 as 子野, confirming 桓子野 = 桓伊 whose courtesy name is 子野. In the main text, 桓公 (桓溫) asks 桓子野 about 謝安石's prediction that 萬石 would fail. 桓子野 is the addressee of 桓公's question and a scene participant.",
+        "mention_id": "sfh1-mention-c051c79699ee2334eccc5086",
+        "occurrence_role": "scene_participant",
+        "reference_type": "full_name",
+        "referent": {
+          "canonical_hint": "桓伊",
+          "confidence": "high",
+          "surface_form": "桓伊"
+        },
+        "relations": [
+          {
+            "confidence": "high",
+            "evidence_ids": [
+              "sfh1-ev-05-fangzheng-055-liu-annotation-001",
+              "sfh1-ev-05-fangzheng-055-liu-annotation-002"
+            ],
+            "relation": "same_person",
+            "target_hint": "桓伊"
+          },
+          {
+            "confidence": "high",
+            "evidence_ids": [
+              "sfh1-ev-05-fangzheng-055-liu-annotation-001",
+              "sfh1-ev-05-fangzheng-055-main"
+            ],
+            "relation": "same_person",
+            "target_hint": "子野"
+          }
+        ],
+        "semantic_kind": "historical_person",
+        "supporting_evidence_ids": [
+          "sfh1-ev-05-fangzheng-055-liu-annotation-001",
+          "sfh1-ev-05-fangzheng-055-liu-annotation-002",
+          "sfh1-ev-05-fangzheng-055-main"
+        ],
+        "surface": "桓子野"
+      },
+      "stage": "identity_primary",
+      "story_id": "05-fangzheng-055",
+      "surface": "桓子野",
+      "transport": {
+        "attempt": 1,
+        "classification": "parsed",
+        "elapsed_seconds": 3.546,
+        "finish_reason": "tool_calls",
+        "model": "deepseek-v4-flash",
+        "parse_error": null,
+        "prompt_version": "sfh2-a0r-primary-historian-v1",
+        "provider_call": true,
+        "provider_witness_hash": "c128b37787c3f80c7adee041ede6ce1d94e872d0f6a8633d37dcff8a1c777dfa",
+        "raw_archive_path": "/tmp/sfh2-f1-raw-b30c380095772f61/sfh2-f1-live-v1/00036-identity_primary-identity_primary-sfh1-mention-c051c79699ee2334eccc5086-attempt1.json",
+        "raw_archive_sha256": "3b15720afaee73486a25adbbd4ada2570407f2b55b5a46061d47575d0c362bd1",
+        "request_hash": "1da7b5053fc7de20c96e63316f244de9bfbbcc0aa70441cf52562e039b13a896",
+        "stage": "identity_primary",
+        "temperature": 0,
+        "thinking": {
+          "type": "disabled"
+        },
+        "unit_id": "identity_primary:sfh1-mention-c051c79699ee2334eccc5086",
+        "usage": {
+          "completion_tokens": 547,
+          "prompt_tokens": 2887,
+          "total_tokens": 3434
+        },
+        "valid": true
+      },
+      "valid": true
+    },
+    "identity_readiness": "identity_requires_pipeline",
+    "mention_id": "sfh1-mention-c051c79699ee2334eccc5086",
+    "occurrence_id": "sfh1-mention-c051c79699ee2334eccc5086",
+    "realization": {
+      "candidate": {
+        "candidate_only": true,
+        "candidate_origin": "llm_semantic_proposal_registry_miss",
+        "candidate_person_id": "sfh2-a0-candidate-person-096a4840c340494f35a4",
+        "canonical_write_back": false,
+        "display_name": "桓伊",
+        "entity_type": "candidate_historical_person",
+        "person_id": "",
+        "proposed_display_name": "桓伊",
+        "referent_canonical_hint": "桓伊",
+        "source_occurrence_ids": [
+          "sfh1-mention-c051c79699ee2334eccc5086"
+        ],
+        "supporting_evidence_ids": [
+          "sfh1-ev-05-fangzheng-055-liu-annotation-001",
+          "sfh1-ev-05-fangzheng-055-liu-annotation-002",
+          "sfh1-ev-05-fangzheng-055-main"
+        ]
+      },
+      "candidate_only": true,
+      "canonical_write_back": false,
+      "case_id": "sfh1-mention-c051c79699ee2334eccc5086",
+      "core_graph_eligible": true,
+      "identity_created": true,
+      "mention_id": "sfh1-mention-c051c79699ee2334eccc5086",
+      "occurrence_role": "scene_participant",
+      "realization_basis": [
+        "llm_semantic_proposal",
+        "candidate_registry_miss"
+      ],
+      "semantic_kind": "historical_person",
+      "story_id": "05-fangzheng-055",
+      "surface": "桓子野"
+    },
+    "request_hashes": {
+      "adjudicator": "c481695a7d325b6965e169126a9297f467040bd665d6c88bd924b128020a2f91",
+      "independent": "3bc18236c85542b3083b3220c85689152b81a10f98fb91cede25520ce751d2ea",
+      "primary": "1da7b5053fc7de20c96e63316f244de9bfbbcc0aa70441cf52562e039b13a896"
+    },
+    "selected_record": {
+      "abstain": false,
+      "attribute_type": "",
+      "attribute_value": "",
+      "bearer_hint": "",
+      "confidence": "high",
+      "discourse": {
+        "addressee_hint": "桓子野",
+        "antecedent_hint": "",
+        "self_reference_hint": "",
+        "speaker_hint": "桓公"
+      },
+      "explanation": "桓子野 is the full name reference combining surname 桓 with courtesy name 子野, referring to 桓伊 (字子野). The Liu annotation explicitly identifies 桓伊/子野, and the annotation further gives 伊字叔夏... but the annotation-001 glosses 桓伊 as 子野, confirming 桓子野 = 桓伊 whose courtesy name is 子野. In the main text, 桓公 (桓溫) asks 桓子野 about 謝安石's prediction that 萬石 would fail. 桓子野 is the addressee of 桓公's question and a scene participant.",
+      "mention_id": "sfh1-mention-c051c79699ee2334eccc5086",
+      "occurrence_role": "scene_participant",
+      "reference_type": "full_name",
+      "referent": {
+        "canonical_hint": "桓伊",
+        "confidence": "high",
+        "surface_form": "桓伊"
+      },
+      "relations": [
+        {
+          "confidence": "high",
+          "evidence_ids": [
+            "sfh1-ev-05-fangzheng-055-liu-annotation-001",
+            "sfh1-ev-05-fangzheng-055-liu-annotation-002"
+          ],
+          "relation": "same_person",
+          "target_hint": "桓伊"
+        },
+        {
+          "confidence": "high",
+          "evidence_ids": [
+            "sfh1-ev-05-fangzheng-055-liu-annotation-001",
+            "sfh1-ev-05-fangzheng-055-main"
+          ],
+          "relation": "same_person",
+          "target_hint": "子野"
+        }
+      ],
+      "semantic_kind": "historical_person",
+      "supporting_evidence_ids": [
+        "sfh1-ev-05-fangzheng-055-liu-annotation-001",
+        "sfh1-ev-05-fangzheng-055-liu-annotation-002",
+        "sfh1-ev-05-fangzheng-055-main"
+      ],
+      "surface": "桓子野"
+    },
+    "selected_record_source": "historian_a_exact_copy",
+    "stage": "identity",
+    "status": "resolved",
+    "story_id": "05-fangzheng-055",
+    "surface": "桓子野"
+  },
+  "output_hash": "2c76c2253132f587829d81b2324e152829ead2f96bbb0ec63ac69cd94f185879",
+  "provider_witness_hash": null,
+  "request_hash": "3c17d3c0e9fa469a7be5baa6e2d87e945987c142193b1eff3709dd57d61a424d",
+  "runtime_metadata": {
+    "candidate_only": true,
+    "canonical_write_back": false,
+    "recorded_at": "2026-09-04T15:42:46Z"
+  },
+  "schema": "sfh2-f1-checkpoint-v1",
+  "status": "completed",
+  "unit_id": "identity:sfh1-mention-c051c79699ee2334eccc5086"
+}

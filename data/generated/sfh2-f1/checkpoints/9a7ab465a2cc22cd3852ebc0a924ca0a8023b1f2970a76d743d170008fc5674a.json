@@ -1,0 +1,165 @@
+{
+  "attempt": 1,
+  "contract_valid": true,
+  "output": {
+    "effective": {
+      "changed_fields": [],
+      "errors": [],
+      "record": {
+        "abstain": false,
+        "attribute_type": "",
+        "attribute_value": "",
+        "bearer_hint": "",
+        "confidence": "high",
+        "discourse": {
+          "addressee_hint": "桓子野",
+          "antecedent_hint": "桓子野",
+          "self_reference_hint": "",
+          "speaker_hint": "桓公"
+        },
+        "explanation": "子野 is the courtesy name (字) of 桓伊 (桓子野), as confirmed by the Liu annotation which glosses 桓伊/子野. In the main text, 桓公 asks 桓子野 (i.e., 桓伊, courtesy name 子野) about 謝安石's prediction that 萬石 would surely be defeated. The target mention 子野 in the main text refers to the same person as 桓子野 mentioned earlier in the same sentence, and the annotation confirms 子野 is the courtesy name of 桓伊.",
+        "mention_id": "sfh1-mention-4212d15b7a219584954587d8",
+        "occurrence_role": "scene_participant",
+        "reference_type": "courtesy_name",
+        "referent": {
+          "canonical_hint": "桓伊",
+          "confidence": "high",
+          "surface_form": "桓伊"
+        },
+        "relations": [
+          {
+            "confidence": "high",
+            "evidence_ids": [
+              "sfh1-ev-05-fangzheng-055-liu-annotation-001",
+              "sfh1-ev-05-fangzheng-055-main"
+            ],
+            "relation": "same_person",
+            "target_hint": "桓子野"
+          },
+          {
+            "confidence": "high",
+            "evidence_ids": [
+              "sfh1-ev-05-fangzheng-055-liu-annotation-001"
+            ],
+            "relation": "same_person",
+            "target_hint": "桓伊"
+          }
+        ],
+        "semantic_kind": "historical_person",
+        "supporting_evidence_ids": [
+          "sfh1-ev-05-fangzheng-055-liu-annotation-001",
+          "sfh1-ev-05-fangzheng-055-main"
+        ],
+        "surface": "子野"
+      },
+      "source": "historian_a_exact_copy",
+      "valid": true
+    },
+    "row": {
+      "candidate_only": true,
+      "canonical_write_back": false,
+      "case_id": "sfh1-mention-4212d15b7a219584954587d8",
+      "changed_fields": [],
+      "contract_status": "valid",
+      "decision": "select_a",
+      "errors": [],
+      "mention_id": "sfh1-mention-4212d15b7a219584954587d8",
+      "patch_ops": [],
+      "reason_summary": "Both Historian A and B correctly identify 子野 as the courtesy name of 桓伊 (桓子野), the person addressed by 桓公 in this scene. The core semantic fields (semantic_kind, reference_type, occurrence_role, referent.canonical_hint=桓伊, discourse hints) agree. The only substantive difference is in the relations array. Historian A supplies two same_person relations (to 桓子野 and to 桓伊). Historian B adds a third relation marking 桓公 as different_person. However, the target mention 子野 is the courtesy name of 桓伊/桓子野, and the relation to 桓公 (the speaker) is not a relation of the target mention itself but rather a scene relationship; adding a different_person relation to 桓公 is not supported by the evidence as a relation of this specific mention and is extraneous. Historian A's two same_person relations correctly capture that 子野 = 桓子野 = 桓伊, consistent with the Liu annotation gloss (桓伊/子野). Historian A's record is therefore the more accurate and appropriately scoped hypothesis.",
+      "reviewed_fields": [],
+      "selected_record": {
+        "abstain": false,
+        "attribute_type": "",
+        "attribute_value": "",
+        "bearer_hint": "",
+        "confidence": "high",
+        "discourse": {
+          "addressee_hint": "桓子野",
+          "antecedent_hint": "桓子野",
+          "self_reference_hint": "",
+          "speaker_hint": "桓公"
+        },
+        "explanation": "子野 is the courtesy name (字) of 桓伊 (桓子野), as confirmed by the Liu annotation which glosses 桓伊/子野. In the main text, 桓公 asks 桓子野 (i.e., 桓伊, courtesy name 子野) about 謝安石's prediction that 萬石 would surely be defeated. The target mention 子野 in the main text refers to the same person as 桓子野 mentioned earlier in the same sentence, and the annotation confirms 子野 is the courtesy name of 桓伊.",
+        "mention_id": "sfh1-mention-4212d15b7a219584954587d8",
+        "occurrence_role": "scene_participant",
+        "reference_type": "courtesy_name",
+        "referent": {
+          "canonical_hint": "桓伊",
+          "confidence": "high",
+          "surface_form": "桓伊"
+        },
+        "relations": [
+          {
+            "confidence": "high",
+            "evidence_ids": [
+              "sfh1-ev-05-fangzheng-055-liu-annotation-001",
+              "sfh1-ev-05-fangzheng-055-main"
+            ],
+            "relation": "same_person",
+            "target_hint": "桓子野"
+          },
+          {
+            "confidence": "high",
+            "evidence_ids": [
+              "sfh1-ev-05-fangzheng-055-liu-annotation-001"
+            ],
+            "relation": "same_person",
+            "target_hint": "桓伊"
+          }
+        ],
+        "semantic_kind": "historical_person",
+        "supporting_evidence_ids": [
+          "sfh1-ev-05-fangzheng-055-liu-annotation-001",
+          "sfh1-ev-05-fangzheng-055-main"
+        ],
+        "surface": "子野"
+      },
+      "selected_record_source": "historian_a_exact_copy",
+      "stage": "identity_adjudicator",
+      "story_id": "05-fangzheng-055",
+      "supporting_evidence_ids": [
+        "sfh1-ev-05-fangzheng-055-liu-annotation-001",
+        "sfh1-ev-05-fangzheng-055-main"
+      ],
+      "surface": "子野",
+      "transport": {
+        "attempt": 1,
+        "classification": "parsed",
+        "elapsed_seconds": 2.957,
+        "finish_reason": "tool_calls",
+        "model": "deepseek-v4-flash",
+        "parse_error": null,
+        "prompt_version": "sfh2-a2r-adjudicator-v2",
+        "provider_call": true,
+        "provider_witness_hash": "85df90edad1ac747cc3600617b034ebb4dfa7b94f17c93ef9dba92a69e1cea45",
+        "raw_archive_path": "/tmp/sfh2-f1-raw-b30c380095772f61/sfh2-f1-live-v1/00022-identity_adjudicator-identity_adjudicator-sfh1-mention-4212d15b7a219584954587d8-attempt1.json",
+        "raw_archive_sha256": "df799d8b7372af6c0a9e90ae551f9458a6973fff47670856b192e57c22ad0bb3",
+        "request_hash": "b8b820044010a6bb92844080c5c5c9cf6c2ba5a0b2caf63614a27440d98ee449",
+        "stage": "identity_adjudicator",
+        "temperature": 0,
+        "thinking": {
+          "type": "disabled"
+        },
+        "unit_id": "identity_adjudicator:sfh1-mention-4212d15b7a219584954587d8",
+        "usage": {
+          "completion_tokens": 379,
+          "prompt_tokens": 4639,
+          "total_tokens": 5018
+        },
+        "valid": true
+      },
+      "valid": true
+    }
+  },
+  "output_hash": "c9157e22831bba4418789aaf07e17b7d211bcfa72af6facde21bb95c465f35ca",
+  "provider_witness_hash": "85df90edad1ac747cc3600617b034ebb4dfa7b94f17c93ef9dba92a69e1cea45",
+  "request_hash": "b8b820044010a6bb92844080c5c5c9cf6c2ba5a0b2caf63614a27440d98ee449",
+  "runtime_metadata": {
+    "candidate_only": true,
+    "canonical_write_back": false,
+    "recorded_at": "2026-09-04T15:07:08Z"
+  },
+  "schema": "sfh2-f1-checkpoint-v1",
+  "status": "completed",
+  "unit_id": "identity_adjudicator:sfh1-mention-4212d15b7a219584954587d8"
+}

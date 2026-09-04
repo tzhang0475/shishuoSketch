@@ -1,0 +1,504 @@
+{
+  "attempt": 0,
+  "contract_valid": true,
+  "output": {
+    "adjudication": {
+      "candidate_only": true,
+      "canonical_write_back": false,
+      "case_id": "sfh1-mention-b4f58ecca05c3c538d559feb",
+      "changed_fields": [],
+      "contract_status": "valid",
+      "decision": "select_a",
+      "errors": [],
+      "mention_id": "sfh1-mention-b4f58ecca05c3c538d559feb",
+      "patch_ops": [],
+      "reason_summary": "Historian B's semantic record is null and its contract is invalid (mention_id_mismatch, evidence_grounding_failure). Historian A's record is contract-valid and correctly identifies the target mention 陸機 (annotation-010) as the historical person Lu Ji (陸機), courtesy name 士衡, brother of 陸雲 (士龍). The annotation context (annotation-007, annotation-010) supports the kinship relation to 陸雲 and the same-person relation to 陸士龍. Historian A's analysis is well-grounded in the supplied evidence.",
+      "reviewed_fields": [],
+      "selected_record": {
+        "abstain": false,
+        "attribute_type": "",
+        "attribute_value": "",
+        "bearer_hint": "",
+        "confidence": "high",
+        "discourse": {
+          "addressee_hint": "",
+          "antecedent_hint": "",
+          "self_reference_hint": "",
+          "speaker_hint": ""
+        },
+        "explanation": "The target mention 陸機 appears in Liu Xiaobiao's annotation (annotation-010) in the phrase 人無陸機兄弟, referring to the historical person Lu Ji (陸機), courtesy name 士衡. The annotation context discusses the sixteen men evaluated by Cai Hong, and notes that no one surpasses the Lu brothers (陸機 and 陸雲). Annotation-007 identifies 陸雲 as 士龍, son of 大司馬抗, and 機 as his elder brother (同母之弟 refers to 雲 being 機's younger brother by the same mother). The main text also mentions 陸士衡 (courtesy name of 陸機). This is a full-name reference to the historical person Lu Ji.",
+        "mention_id": "sfh1-mention-b4f58ecca05c3c538d559feb",
+        "occurrence_role": "annotation_person",
+        "reference_type": "full_name",
+        "referent": {
+          "canonical_hint": "陸機",
+          "confidence": "high",
+          "surface_form": "陸機"
+        },
+        "relations": [
+          {
+            "confidence": "high",
+            "evidence_ids": [
+              "sfh1-ev-08-shangyu-020-liu-annotation-007",
+              "sfh1-ev-08-shangyu-020-liu-annotation-010"
+            ],
+            "relation": "kinship_relation",
+            "target_hint": "陸雲"
+          },
+          {
+            "confidence": "high",
+            "evidence_ids": [
+              "sfh1-ev-08-shangyu-020-liu-annotation-007",
+              "sfh1-ev-08-shangyu-020-liu-annotation-009"
+            ],
+            "relation": "same_person",
+            "target_hint": "陸士龍"
+          }
+        ],
+        "semantic_kind": "historical_person",
+        "supporting_evidence_ids": [
+          "sfh1-ev-08-shangyu-020-liu-annotation-007",
+          "sfh1-ev-08-shangyu-020-liu-annotation-010"
+        ],
+        "surface": "陸機"
+      },
+      "selected_record_source": "historian_a_exact_copy",
+      "stage": "identity_adjudicator",
+      "story_id": "08-shangyu-020",
+      "supporting_evidence_ids": [
+        "sfh1-ev-08-shangyu-020-liu-annotation-007",
+        "sfh1-ev-08-shangyu-020-liu-annotation-010"
+      ],
+      "surface": "陸機",
+      "transport": {
+        "attempt": 1,
+        "classification": "parsed",
+        "elapsed_seconds": 1.978,
+        "finish_reason": "tool_calls",
+        "model": "deepseek-v4-flash",
+        "parse_error": null,
+        "prompt_version": "sfh2-a2r-adjudicator-v2",
+        "provider_call": true,
+        "provider_witness_hash": "d2b20a38330db14d41418b4014053d5785541637861d78cab3511925d972b985",
+        "raw_archive_path": "/tmp/sfh2-f1-raw-b30c380095772f61/sfh2-f1-live-v1/00069-identity_adjudicator-identity_adjudicator-sfh1-mention-b4f58ecca05c3c538d559feb-attempt1.json",
+        "raw_archive_sha256": "e73215aa0e1a116ab5cc065e8d074b35c241bdc1f11371dbfebdc11b889479f9",
+        "request_hash": "8f97959aa13f631420dbb1ec6ed9091eba1b994ec7c97b335736d7e587051837",
+        "stage": "identity_adjudicator",
+        "temperature": 0,
+        "thinking": {
+          "type": "disabled"
+        },
+        "unit_id": "identity_adjudicator:sfh1-mention-b4f58ecca05c3c538d559feb",
+        "usage": {
+          "completion_tokens": 258,
+          "prompt_tokens": 6671,
+          "total_tokens": 6929
+        },
+        "valid": true
+      },
+      "valid": true
+    },
+    "candidate_only": true,
+    "candidate_proposal": {
+      "candidate_only": true,
+      "candidate_origin": "python_registry_lookup_after_llm_semantics",
+      "candidate_person_id": "",
+      "canonical_write_back": false,
+      "display_name": "陸機",
+      "entity_type": "existing_person",
+      "person_id": "person-026",
+      "proposed_display_name": "陸機",
+      "referent_canonical_hint": "陸機"
+    },
+    "canonical_write_back": false,
+    "case_id": "sfh1-mention-b4f58ecca05c3c538d559feb",
+    "comparison": {
+      "a_valid": true,
+      "agreement": false,
+      "b_valid": false,
+      "disagreement_classes": [
+        "contract_validity_disagreement"
+      ],
+      "historical_identity_disagreement": true,
+      "metadata_only_difference": false,
+      "semantic_fields": [
+        "record"
+      ],
+      "substantive_disagreement": true,
+      "substantive_fields": [
+        "record"
+      ]
+    },
+    "context": {
+      "frozen_discourse_context": {
+        "addressee_hint": "",
+        "antecedent_hint": "",
+        "self_reference_hint": "",
+        "speaker_hint": ""
+      },
+      "frozen_identity": {
+        "abstain": false,
+        "attribute_type": "",
+        "attribute_value": "",
+        "bearer_hint": "",
+        "reference_type": "full_name",
+        "referent": {
+          "canonical_hint": "陸機",
+          "confidence": "high",
+          "surface_form": "陸機"
+        },
+        "semantic_kind": "historical_person"
+      }
+    },
+    "failure": null,
+    "final_consistency": {
+      "candidate_only": true,
+      "canonical_write_back": false,
+      "flags": [
+        {
+          "challenged_fields": [
+            "relations",
+            "referent.canonical_hint"
+          ],
+          "evidence_ids": [
+            "sfh1-ev-08-shangyu-020-liu-annotation-007",
+            "sfh1-ev-08-shangyu-020-liu-annotation-009",
+            "sfh1-ev-08-shangyu-020-liu-annotation-010"
+          ],
+          "flag_type": "multi_candidate_ambiguity",
+          "formal_reason": "the record supplies more than one structured relation target",
+          "involved": [
+            "relations"
+          ],
+          "severity": "review"
+        }
+      ],
+      "has_diagnostic_flags": false,
+      "has_hard_flags": false,
+      "has_review_flags": true,
+      "review_trigger_score": 2,
+      "schema": "sfh2-a0r-consistency-v2",
+      "stage": "identity_final"
+    },
+    "final_state": "stable_entity_resolved",
+    "historian_independent": {
+      "candidate_only": true,
+      "canonical_write_back": false,
+      "case_id": "sfh1-mention-b4f58ecca05c3c538d559feb",
+      "consistency": {
+        "candidate_only": true,
+        "canonical_write_back": false,
+        "flags": [
+          {
+            "challenged_fields": [],
+            "evidence_ids": [],
+            "flag_type": "evidence_grounding_failure",
+            "formal_reason": "semantic record is not an object",
+            "involved": [],
+            "severity": "hard"
+          }
+        ],
+        "has_diagnostic_flags": false,
+        "has_hard_flags": true,
+        "has_review_flags": false,
+        "review_trigger_score": 5,
+        "schema": "sfh2-a0r-consistency-v2",
+        "stage": "identity_independent"
+      },
+      "contract_status": "identity_independent_contract_invalid",
+      "effective_record": null,
+      "errors": [
+        "mention_id_mismatch"
+      ],
+      "historian": "B",
+      "mention_id": "sfh1-mention-b4f58ecca05c3c538d559feb",
+      "provisional_realization": {
+        "candidate": null,
+        "candidate_only": true,
+        "canonical_write_back": false,
+        "case_id": "sfh1-mention-b4f58ecca05c3c538d559feb",
+        "core_graph_eligible": false,
+        "identity_created": false,
+        "mention_id": "sfh1-mention-b4f58ecca05c3c538d559feb",
+        "realization_basis": [
+          "no_valid_semantic_record"
+        ],
+        "story_id": "08-shangyu-020",
+        "surface": "陸機"
+      },
+      "record": null,
+      "selected_record": null,
+      "stage": "identity_independent",
+      "story_id": "08-shangyu-020",
+      "surface": "陸機",
+      "transport": {
+        "attempt": 1,
+        "classification": "parsed",
+        "elapsed_seconds": 3.582,
+        "finish_reason": "tool_calls",
+        "model": "deepseek-v4-flash",
+        "parse_error": null,
+        "prompt_version": "sfh2-a2-independent-historian-v1",
+        "provider_call": true,
+        "provider_witness_hash": "d23cd86e62ea04cb9c906f2fd5374e715f6474c0411e634db677d0852837ed06",
+        "raw_archive_path": "/tmp/sfh2-f1-raw-b30c380095772f61/sfh2-f1-live-v1/00068-identity_independent-identity_independent-sfh1-mention-b4f58ecca05c3c538d559feb-attempt1.json",
+        "raw_archive_sha256": "0695f962551543bda4fe23de5b5bbb7659698b95013b2749918302f836c02f10",
+        "request_hash": "5db1595fdb37fd3380c00dc2b99ce7d6d3eb3080ee4c1d4fc07166910b00cb25",
+        "stage": "identity_independent",
+        "temperature": 0,
+        "thinking": {
+          "type": "disabled"
+        },
+        "unit_id": "identity_independent:sfh1-mention-b4f58ecca05c3c538d559feb",
+        "usage": {
+          "completion_tokens": 541,
+          "prompt_tokens": 5428,
+          "total_tokens": 5969
+        },
+        "valid": true
+      },
+      "valid": false
+    },
+    "historian_primary": {
+      "candidate_only": true,
+      "canonical_write_back": false,
+      "case_id": "sfh1-mention-b4f58ecca05c3c538d559feb",
+      "consistency": {
+        "candidate_only": true,
+        "canonical_write_back": false,
+        "flags": [
+          {
+            "challenged_fields": [
+              "relations",
+              "referent.canonical_hint"
+            ],
+            "evidence_ids": [
+              "sfh1-ev-08-shangyu-020-liu-annotation-007",
+              "sfh1-ev-08-shangyu-020-liu-annotation-009",
+              "sfh1-ev-08-shangyu-020-liu-annotation-010"
+            ],
+            "flag_type": "multi_candidate_ambiguity",
+            "formal_reason": "the record supplies more than one structured relation target",
+            "involved": [
+              "relations"
+            ],
+            "severity": "review"
+          }
+        ],
+        "has_diagnostic_flags": false,
+        "has_hard_flags": false,
+        "has_review_flags": true,
+        "review_trigger_score": 2,
+        "schema": "sfh2-a0r-consistency-v2",
+        "stage": "identity_primary"
+      },
+      "contract_status": "valid",
+      "errors": [],
+      "mention_id": "sfh1-mention-b4f58ecca05c3c538d559feb",
+      "provisional_realization": {
+        "candidate": {
+          "candidate_only": true,
+          "candidate_origin": "python_registry_lookup_after_llm_semantics",
+          "candidate_person_id": "",
+          "canonical_write_back": false,
+          "display_name": "陸機",
+          "entity_type": "existing_person",
+          "person_id": "person-026",
+          "proposed_display_name": "陸機",
+          "referent_canonical_hint": "陸機"
+        },
+        "candidate_only": true,
+        "canonical_write_back": false,
+        "case_id": "sfh1-mention-b4f58ecca05c3c538d559feb",
+        "core_graph_eligible": false,
+        "identity_created": true,
+        "mention_id": "sfh1-mention-b4f58ecca05c3c538d559feb",
+        "occurrence_role": "annotation_person",
+        "realization_basis": [
+          "llm_semantic_proposal",
+          "canonical_registry_lookup"
+        ],
+        "semantic_kind": "historical_person",
+        "story_id": "08-shangyu-020",
+        "surface": "陸機"
+      },
+      "record": {
+        "abstain": false,
+        "attribute_type": "",
+        "attribute_value": "",
+        "bearer_hint": "",
+        "confidence": "high",
+        "discourse": {
+          "addressee_hint": "",
+          "antecedent_hint": "",
+          "self_reference_hint": "",
+          "speaker_hint": ""
+        },
+        "explanation": "The target mention 陸機 appears in Liu Xiaobiao's annotation (annotation-010) in the phrase 人無陸機兄弟, referring to the historical person Lu Ji (陸機), courtesy name 士衡. The annotation context discusses the sixteen men evaluated by Cai Hong, and notes that no one surpasses the Lu brothers (陸機 and 陸雲). Annotation-007 identifies 陸雲 as 士龍, son of 大司馬抗, and 機 as his elder brother (同母之弟 refers to 雲 being 機's younger brother by the same mother). The main text also mentions 陸士衡 (courtesy name of 陸機). This is a full-name reference to the historical person Lu Ji.",
+        "mention_id": "sfh1-mention-b4f58ecca05c3c538d559feb",
+        "occurrence_role": "annotation_person",
+        "reference_type": "full_name",
+        "referent": {
+          "canonical_hint": "陸機",
+          "confidence": "high",
+          "surface_form": "陸機"
+        },
+        "relations": [
+          {
+            "confidence": "high",
+            "evidence_ids": [
+              "sfh1-ev-08-shangyu-020-liu-annotation-007",
+              "sfh1-ev-08-shangyu-020-liu-annotation-010"
+            ],
+            "relation": "kinship_relation",
+            "target_hint": "陸雲"
+          },
+          {
+            "confidence": "high",
+            "evidence_ids": [
+              "sfh1-ev-08-shangyu-020-liu-annotation-007",
+              "sfh1-ev-08-shangyu-020-liu-annotation-009"
+            ],
+            "relation": "same_person",
+            "target_hint": "陸士龍"
+          }
+        ],
+        "semantic_kind": "historical_person",
+        "supporting_evidence_ids": [
+          "sfh1-ev-08-shangyu-020-liu-annotation-007",
+          "sfh1-ev-08-shangyu-020-liu-annotation-010"
+        ],
+        "surface": "陸機"
+      },
+      "stage": "identity_primary",
+      "story_id": "08-shangyu-020",
+      "surface": "陸機",
+      "transport": {
+        "attempt": 1,
+        "classification": "parsed",
+        "elapsed_seconds": 3.427,
+        "finish_reason": "tool_calls",
+        "model": "deepseek-v4-flash",
+        "parse_error": null,
+        "prompt_version": "sfh2-a0r-primary-historian-v1",
+        "provider_call": true,
+        "provider_witness_hash": "55f95afc7e36344ae7714397378216a2283c9f49d27a1e9b4c7748453b881ea0",
+        "raw_archive_path": "/tmp/sfh2-f1-raw-b30c380095772f61/sfh2-f1-live-v1/00067-identity_primary-identity_primary-sfh1-mention-b4f58ecca05c3c538d559feb-attempt1.json",
+        "raw_archive_sha256": "101a1adb64204469b5f9d185571562630070219030a0163f6e2eae6141249cbf",
+        "request_hash": "a89d93c970c1bd8dea1f0e60b270c205105687386745dda44d0333b34432154d",
+        "stage": "identity_primary",
+        "temperature": 0,
+        "thinking": {
+          "type": "disabled"
+        },
+        "unit_id": "identity_primary:sfh1-mention-b4f58ecca05c3c538d559feb",
+        "usage": {
+          "completion_tokens": 546,
+          "prompt_tokens": 5396,
+          "total_tokens": 5942
+        },
+        "valid": true
+      },
+      "valid": true
+    },
+    "identity_readiness": "identity_requires_pipeline",
+    "mention_id": "sfh1-mention-b4f58ecca05c3c538d559feb",
+    "occurrence_id": "sfh1-mention-b4f58ecca05c3c538d559feb",
+    "realization": {
+      "candidate": {
+        "candidate_only": true,
+        "candidate_origin": "python_registry_lookup_after_llm_semantics",
+        "candidate_person_id": "",
+        "canonical_write_back": false,
+        "display_name": "陸機",
+        "entity_type": "existing_person",
+        "person_id": "person-026",
+        "proposed_display_name": "陸機",
+        "referent_canonical_hint": "陸機"
+      },
+      "candidate_only": true,
+      "canonical_write_back": false,
+      "case_id": "sfh1-mention-b4f58ecca05c3c538d559feb",
+      "core_graph_eligible": false,
+      "identity_created": true,
+      "mention_id": "sfh1-mention-b4f58ecca05c3c538d559feb",
+      "occurrence_role": "annotation_person",
+      "realization_basis": [
+        "llm_semantic_proposal",
+        "canonical_registry_lookup"
+      ],
+      "semantic_kind": "historical_person",
+      "story_id": "08-shangyu-020",
+      "surface": "陸機"
+    },
+    "request_hashes": {
+      "adjudicator": "8f97959aa13f631420dbb1ec6ed9091eba1b994ec7c97b335736d7e587051837",
+      "independent": "5db1595fdb37fd3380c00dc2b99ce7d6d3eb3080ee4c1d4fc07166910b00cb25",
+      "primary": "a89d93c970c1bd8dea1f0e60b270c205105687386745dda44d0333b34432154d"
+    },
+    "selected_record": {
+      "abstain": false,
+      "attribute_type": "",
+      "attribute_value": "",
+      "bearer_hint": "",
+      "confidence": "high",
+      "discourse": {
+        "addressee_hint": "",
+        "antecedent_hint": "",
+        "self_reference_hint": "",
+        "speaker_hint": ""
+      },
+      "explanation": "The target mention 陸機 appears in Liu Xiaobiao's annotation (annotation-010) in the phrase 人無陸機兄弟, referring to the historical person Lu Ji (陸機), courtesy name 士衡. The annotation context discusses the sixteen men evaluated by Cai Hong, and notes that no one surpasses the Lu brothers (陸機 and 陸雲). Annotation-007 identifies 陸雲 as 士龍, son of 大司馬抗, and 機 as his elder brother (同母之弟 refers to 雲 being 機's younger brother by the same mother). The main text also mentions 陸士衡 (courtesy name of 陸機). This is a full-name reference to the historical person Lu Ji.",
+      "mention_id": "sfh1-mention-b4f58ecca05c3c538d559feb",
+      "occurrence_role": "annotation_person",
+      "reference_type": "full_name",
+      "referent": {
+        "canonical_hint": "陸機",
+        "confidence": "high",
+        "surface_form": "陸機"
+      },
+      "relations": [
+        {
+          "confidence": "high",
+          "evidence_ids": [
+            "sfh1-ev-08-shangyu-020-liu-annotation-007",
+            "sfh1-ev-08-shangyu-020-liu-annotation-010"
+          ],
+          "relation": "kinship_relation",
+          "target_hint": "陸雲"
+        },
+        {
+          "confidence": "high",
+          "evidence_ids": [
+            "sfh1-ev-08-shangyu-020-liu-annotation-007",
+            "sfh1-ev-08-shangyu-020-liu-annotation-009"
+          ],
+          "relation": "same_person",
+          "target_hint": "陸士龍"
+        }
+      ],
+      "semantic_kind": "historical_person",
+      "supporting_evidence_ids": [
+        "sfh1-ev-08-shangyu-020-liu-annotation-007",
+        "sfh1-ev-08-shangyu-020-liu-annotation-010"
+      ],
+      "surface": "陸機"
+    },
+    "selected_record_source": "historian_a_exact_copy",
+    "stage": "identity",
+    "status": "resolved",
+    "story_id": "08-shangyu-020",
+    "surface": "陸機"
+  },
+  "output_hash": "73fd62e4afb289ba01cd678cd3e58a1eeeb860c49cf1af62678896bdcb1295e3",
+  "provider_witness_hash": null,
+  "request_hash": "23d80b07d2f6c9cf19406de0556c25f772bdfae32ffc16bd01a94f0228095f87",
+  "runtime_metadata": {
+    "candidate_only": true,
+    "canonical_write_back": false,
+    "recorded_at": "2026-09-04T15:42:47Z"
+  },
+  "schema": "sfh2-f1-checkpoint-v1",
+  "status": "completed",
+  "unit_id": "identity:sfh1-mention-b4f58ecca05c3c538d559feb"
+}

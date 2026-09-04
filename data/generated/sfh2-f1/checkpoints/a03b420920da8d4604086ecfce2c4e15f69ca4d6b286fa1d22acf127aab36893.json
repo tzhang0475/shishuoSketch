@@ -1,0 +1,477 @@
+{
+  "attempt": 0,
+  "contract_valid": true,
+  "output": {
+    "adjudication": {
+      "candidate_only": true,
+      "canonical_write_back": false,
+      "case_id": "sfh1-mention-60f9d5ff179ecbdd321e88fc",
+      "changed_fields": [],
+      "contract_status": "valid",
+      "decision": "select_a",
+      "errors": [],
+      "mention_id": "sfh1-mention-60f9d5ff179ecbdd321e88fc",
+      "patch_ops": [],
+      "reason_summary": "Both Historian A and B agree on the core historical identity: the mention '宏' in liu-annotation-003 refers to 袁宏 (Yuan Hong), author of the 東征賦, with high confidence, semantic_kind historical_person, reference_type personal_name, occurrence_role scene_participant, and identical referent canonical_hint/surface_form. The only substantive disagreements are (1) the discourse.antecedent_hint and (2) the relations array. Historian A provides a same_person relation linking this mention to 袁宏 with evidence from annotation-002 and the main text, which is well supported: the main text opens '袁宏始作東征賦' and annotation-002 states '宏為大司馬記室叅軍', confirming the same person across these layers. Historian B omits this relation entirely. Historian A's antecedent_hint '袁宏' is also more concise and consistent with the validated local mentions. Since the historical identity is identical and Historian A's additional same_person relation is well-grounded in the supplied evidence, Historian A's record is the more complete and accurate hypothesis.",
+      "reviewed_fields": [],
+      "selected_record": {
+        "abstain": false,
+        "attribute_type": "",
+        "attribute_value": "",
+        "bearer_hint": "",
+        "confidence": "high",
+        "discourse": {
+          "addressee_hint": "",
+          "antecedent_hint": "袁宏",
+          "self_reference_hint": "",
+          "speaker_hint": ""
+        },
+        "explanation": "The target mention '宏' in liu-annotation-003 refers to 袁宏 (Yuan Hong), the author of the 東征賦. The annotation text discusses 宏 as the person who composed the 東征賦 and who was in 桓温's service. The main text opens with 袁宏始作東征賦, establishing 袁宏 as the referent. In annotation-003, 宏 is the subject who '善苦諌之' and who '語衆云我决不及桓宣城', consistent with 袁宏 throughout the narrative. The annotation-002 also mentions 宏 as 大司馬記室叅軍, confirming the same person.",
+        "mention_id": "sfh1-mention-60f9d5ff179ecbdd321e88fc",
+        "occurrence_role": "scene_participant",
+        "reference_type": "personal_name",
+        "referent": {
+          "canonical_hint": "袁宏",
+          "confidence": "high",
+          "surface_form": "袁宏"
+        },
+        "relations": [
+          {
+            "confidence": "high",
+            "evidence_ids": [
+              "sfh1-ev-04-wenxue-097-liu-annotation-002",
+              "sfh1-ev-04-wenxue-097-main"
+            ],
+            "relation": "same_person",
+            "target_hint": "袁宏"
+          }
+        ],
+        "semantic_kind": "historical_person",
+        "supporting_evidence_ids": [
+          "sfh1-ev-04-wenxue-097-liu-annotation-002",
+          "sfh1-ev-04-wenxue-097-liu-annotation-003",
+          "sfh1-ev-04-wenxue-097-main"
+        ],
+        "surface": "宏"
+      },
+      "selected_record_source": "historian_a_exact_copy",
+      "stage": "identity_adjudicator",
+      "story_id": "04-wenxue-097",
+      "supporting_evidence_ids": [
+        "sfh1-ev-04-wenxue-097-liu-annotation-002",
+        "sfh1-ev-04-wenxue-097-liu-annotation-003",
+        "sfh1-ev-04-wenxue-097-main"
+      ],
+      "surface": "宏",
+      "transport": {
+        "attempt": 1,
+        "classification": "parsed",
+        "elapsed_seconds": 2.991,
+        "finish_reason": "tool_calls",
+        "model": "deepseek-v4-flash",
+        "parse_error": null,
+        "prompt_version": "sfh2-a2r-adjudicator-v2",
+        "provider_call": true,
+        "provider_witness_hash": "8c5d2dbe3a547f794596b9fd7b3ec28b8a5512ef5b644a85324b64d78e5e1601",
+        "raw_archive_path": "/tmp/sfh2-f1-raw-b30c380095772f61/sfh2-f1-live-v1/00074-identity_adjudicator-identity_adjudicator-sfh1-mention-60f9d5ff179ecbdd321e88fc-attempt1.json",
+        "raw_archive_sha256": "8bb829fe38ba8de074537aeec72a890a167ec12d1c86bce8313aac004d95aa9e",
+        "request_hash": "e1c2c4282ea90217340a5d9ce6f531bdd7bb696b69a52ea11aef01315926caf2",
+        "stage": "identity_adjudicator",
+        "temperature": 0,
+        "thinking": {
+          "type": "disabled"
+        },
+        "unit_id": "identity_adjudicator:sfh1-mention-60f9d5ff179ecbdd321e88fc",
+        "usage": {
+          "completion_tokens": 396,
+          "prompt_tokens": 6397,
+          "total_tokens": 6793
+        },
+        "valid": true
+      },
+      "valid": true
+    },
+    "candidate_only": true,
+    "candidate_proposal": {
+      "candidate_only": true,
+      "candidate_origin": "python_registry_lookup_after_llm_semantics",
+      "candidate_person_id": "",
+      "canonical_write_back": false,
+      "display_name": "袁宏",
+      "entity_type": "existing_person",
+      "person_id": "person-012",
+      "proposed_display_name": "袁宏",
+      "referent_canonical_hint": "袁宏"
+    },
+    "canonical_write_back": false,
+    "case_id": "sfh1-mention-60f9d5ff179ecbdd321e88fc",
+    "comparison": {
+      "a_valid": true,
+      "agreement": false,
+      "b_valid": true,
+      "disagreement_classes": [
+        "discourse_disagreement",
+        "relation_disagreement"
+      ],
+      "historical_identity_disagreement": false,
+      "metadata_only_difference": false,
+      "semantic_fields": [
+        "discourse.antecedent_hint",
+        "relations"
+      ],
+      "substantive_disagreement": true,
+      "substantive_fields": [
+        "discourse.antecedent_hint",
+        "relations"
+      ]
+    },
+    "context": {
+      "frozen_discourse_context": {
+        "addressee_hint": "",
+        "antecedent_hint": "袁宏",
+        "self_reference_hint": "",
+        "speaker_hint": ""
+      },
+      "frozen_identity": {
+        "abstain": false,
+        "attribute_type": "",
+        "attribute_value": "",
+        "bearer_hint": "",
+        "reference_type": "personal_name",
+        "referent": {
+          "canonical_hint": "袁宏",
+          "confidence": "high",
+          "surface_form": "袁宏"
+        },
+        "semantic_kind": "historical_person"
+      }
+    },
+    "failure": null,
+    "final_consistency": {
+      "candidate_only": true,
+      "canonical_write_back": false,
+      "flags": [],
+      "has_diagnostic_flags": false,
+      "has_hard_flags": false,
+      "has_review_flags": false,
+      "review_trigger_score": 0,
+      "schema": "sfh2-a0r-consistency-v2",
+      "stage": "identity_final"
+    },
+    "final_state": "stable_entity_resolved",
+    "historian_independent": {
+      "candidate_only": true,
+      "canonical_write_back": false,
+      "case_id": "sfh1-mention-60f9d5ff179ecbdd321e88fc",
+      "consistency": {
+        "candidate_only": true,
+        "canonical_write_back": false,
+        "flags": [],
+        "has_diagnostic_flags": false,
+        "has_hard_flags": false,
+        "has_review_flags": false,
+        "review_trigger_score": 0,
+        "schema": "sfh2-a0r-consistency-v2",
+        "stage": "identity_independent"
+      },
+      "contract_status": "valid",
+      "errors": [],
+      "historian": "B",
+      "mention_id": "sfh1-mention-60f9d5ff179ecbdd321e88fc",
+      "provisional_realization": {
+        "candidate": {
+          "candidate_only": true,
+          "candidate_origin": "python_registry_lookup_after_llm_semantics",
+          "candidate_person_id": "",
+          "canonical_write_back": false,
+          "display_name": "袁宏",
+          "entity_type": "existing_person",
+          "person_id": "person-012",
+          "proposed_display_name": "袁宏",
+          "referent_canonical_hint": "袁宏"
+        },
+        "candidate_only": true,
+        "canonical_write_back": false,
+        "case_id": "sfh1-mention-60f9d5ff179ecbdd321e88fc",
+        "core_graph_eligible": true,
+        "identity_created": true,
+        "mention_id": "sfh1-mention-60f9d5ff179ecbdd321e88fc",
+        "occurrence_role": "scene_participant",
+        "realization_basis": [
+          "llm_semantic_proposal",
+          "canonical_registry_lookup"
+        ],
+        "semantic_kind": "historical_person",
+        "story_id": "04-wenxue-097",
+        "surface": "宏"
+      },
+      "record": {
+        "abstain": false,
+        "attribute_type": "",
+        "attribute_value": "",
+        "bearer_hint": "",
+        "confidence": "high",
+        "discourse": {
+          "addressee_hint": "",
+          "antecedent_hint": "袁宏 (the author of 東征賦, previously named in the main text and in annotation 002)",
+          "self_reference_hint": "",
+          "speaker_hint": ""
+        },
+        "explanation": "The target occurrence '宏' appears in Liu annotation 003, which continues the narrative about 袁宏 (Yuan Hong), the author of the 東征賦. The main text opens with '袁宏始作東征賦', and annotation 002 explicitly states '宏為大司馬記室叅軍', identifying 宏 as 袁宏. In annotation 003, the context concerns 宏's interactions with 伏滔 and 桓温 regarding the 東征賦, consistent with the same person. The surface form is a personal name abbreviation of 袁宏.",
+        "mention_id": "sfh1-mention-60f9d5ff179ecbdd321e88fc",
+        "occurrence_role": "scene_participant",
+        "reference_type": "personal_name",
+        "referent": {
+          "canonical_hint": "袁宏",
+          "confidence": "high",
+          "surface_form": "袁宏"
+        },
+        "relations": [],
+        "semantic_kind": "historical_person",
+        "supporting_evidence_ids": [
+          "sfh1-ev-04-wenxue-097-liu-annotation-002",
+          "sfh1-ev-04-wenxue-097-liu-annotation-003",
+          "sfh1-ev-04-wenxue-097-main"
+        ],
+        "surface": "宏"
+      },
+      "stage": "identity_independent",
+      "story_id": "04-wenxue-097",
+      "surface": "宏",
+      "transport": {
+        "attempt": 1,
+        "classification": "parsed",
+        "elapsed_seconds": 2.911,
+        "finish_reason": "tool_calls",
+        "model": "deepseek-v4-flash",
+        "parse_error": null,
+        "prompt_version": "sfh2-a2-independent-historian-v1",
+        "provider_call": true,
+        "provider_witness_hash": "ef1d0cec0e04912d6546e977d2c2d2e1e950668ef811bd920368ea5a8a6dd598",
+        "raw_archive_path": "/tmp/sfh2-f1-raw-b30c380095772f61/sfh2-f1-live-v1/00073-identity_independent-identity_independent-sfh1-mention-60f9d5ff179ecbdd321e88fc-attempt1.json",
+        "raw_archive_sha256": "0e183077ab9f2ef9b218489deb730d0c7067975957709544d07aefbe92968352",
+        "request_hash": "db42196a0759f24675b3aa0524f662657ec3570d3fdf6cef4335066ae95ba25a",
+        "stage": "identity_independent",
+        "temperature": 0,
+        "thinking": {
+          "type": "disabled"
+        },
+        "unit_id": "identity_independent:sfh1-mention-60f9d5ff179ecbdd321e88fc",
+        "usage": {
+          "completion_tokens": 417,
+          "prompt_tokens": 5015,
+          "total_tokens": 5432
+        },
+        "valid": true
+      },
+      "valid": true
+    },
+    "historian_primary": {
+      "candidate_only": true,
+      "canonical_write_back": false,
+      "case_id": "sfh1-mention-60f9d5ff179ecbdd321e88fc",
+      "consistency": {
+        "candidate_only": true,
+        "canonical_write_back": false,
+        "flags": [],
+        "has_diagnostic_flags": false,
+        "has_hard_flags": false,
+        "has_review_flags": false,
+        "review_trigger_score": 0,
+        "schema": "sfh2-a0r-consistency-v2",
+        "stage": "identity_primary"
+      },
+      "contract_status": "valid",
+      "errors": [],
+      "mention_id": "sfh1-mention-60f9d5ff179ecbdd321e88fc",
+      "provisional_realization": {
+        "candidate": {
+          "candidate_only": true,
+          "candidate_origin": "python_registry_lookup_after_llm_semantics",
+          "candidate_person_id": "",
+          "canonical_write_back": false,
+          "display_name": "袁宏",
+          "entity_type": "existing_person",
+          "person_id": "person-012",
+          "proposed_display_name": "袁宏",
+          "referent_canonical_hint": "袁宏"
+        },
+        "candidate_only": true,
+        "canonical_write_back": false,
+        "case_id": "sfh1-mention-60f9d5ff179ecbdd321e88fc",
+        "core_graph_eligible": true,
+        "identity_created": true,
+        "mention_id": "sfh1-mention-60f9d5ff179ecbdd321e88fc",
+        "occurrence_role": "scene_participant",
+        "realization_basis": [
+          "llm_semantic_proposal",
+          "canonical_registry_lookup"
+        ],
+        "semantic_kind": "historical_person",
+        "story_id": "04-wenxue-097",
+        "surface": "宏"
+      },
+      "record": {
+        "abstain": false,
+        "attribute_type": "",
+        "attribute_value": "",
+        "bearer_hint": "",
+        "confidence": "high",
+        "discourse": {
+          "addressee_hint": "",
+          "antecedent_hint": "袁宏",
+          "self_reference_hint": "",
+          "speaker_hint": ""
+        },
+        "explanation": "The target mention '宏' in liu-annotation-003 refers to 袁宏 (Yuan Hong), the author of the 東征賦. The annotation text discusses 宏 as the person who composed the 東征賦 and who was in 桓温's service. The main text opens with 袁宏始作東征賦, establishing 袁宏 as the referent. In annotation-003, 宏 is the subject who '善苦諌之' and who '語衆云我决不及桓宣城', consistent with 袁宏 throughout the narrative. The annotation-002 also mentions 宏 as 大司馬記室叅軍, confirming the same person.",
+        "mention_id": "sfh1-mention-60f9d5ff179ecbdd321e88fc",
+        "occurrence_role": "scene_participant",
+        "reference_type": "personal_name",
+        "referent": {
+          "canonical_hint": "袁宏",
+          "confidence": "high",
+          "surface_form": "袁宏"
+        },
+        "relations": [
+          {
+            "confidence": "high",
+            "evidence_ids": [
+              "sfh1-ev-04-wenxue-097-liu-annotation-002",
+              "sfh1-ev-04-wenxue-097-main"
+            ],
+            "relation": "same_person",
+            "target_hint": "袁宏"
+          }
+        ],
+        "semantic_kind": "historical_person",
+        "supporting_evidence_ids": [
+          "sfh1-ev-04-wenxue-097-liu-annotation-002",
+          "sfh1-ev-04-wenxue-097-liu-annotation-003",
+          "sfh1-ev-04-wenxue-097-main"
+        ],
+        "surface": "宏"
+      },
+      "stage": "identity_primary",
+      "story_id": "04-wenxue-097",
+      "surface": "宏",
+      "transport": {
+        "attempt": 1,
+        "classification": "parsed",
+        "elapsed_seconds": 3.425,
+        "finish_reason": "tool_calls",
+        "model": "deepseek-v4-flash",
+        "parse_error": null,
+        "prompt_version": "sfh2-a0r-primary-historian-v1",
+        "provider_call": true,
+        "provider_witness_hash": "2d2475c97a481e00d10f34c366a9029958b30cc520c5226e24291264d4353dca",
+        "raw_archive_path": "/tmp/sfh2-f1-raw-b30c380095772f61/sfh2-f1-live-v1/00072-identity_primary-identity_primary-sfh1-mention-60f9d5ff179ecbdd321e88fc-attempt1.json",
+        "raw_archive_sha256": "eb1d6ef1678459baefbab1e281ee4deef8580a610294bed4e63e930d42894cd5",
+        "request_hash": "7970bac5f34c59f68c01e9fbc574979855d7288d4ca014352a7614ed21b469b4",
+        "stage": "identity_primary",
+        "temperature": 0,
+        "thinking": {
+          "type": "disabled"
+        },
+        "unit_id": "identity_primary:sfh1-mention-60f9d5ff179ecbdd321e88fc",
+        "usage": {
+          "completion_tokens": 486,
+          "prompt_tokens": 4983,
+          "total_tokens": 5469
+        },
+        "valid": true
+      },
+      "valid": true
+    },
+    "identity_readiness": "identity_requires_pipeline",
+    "mention_id": "sfh1-mention-60f9d5ff179ecbdd321e88fc",
+    "occurrence_id": "sfh1-mention-60f9d5ff179ecbdd321e88fc",
+    "realization": {
+      "candidate": {
+        "candidate_only": true,
+        "candidate_origin": "python_registry_lookup_after_llm_semantics",
+        "candidate_person_id": "",
+        "canonical_write_back": false,
+        "display_name": "袁宏",
+        "entity_type": "existing_person",
+        "person_id": "person-012",
+        "proposed_display_name": "袁宏",
+        "referent_canonical_hint": "袁宏"
+      },
+      "candidate_only": true,
+      "canonical_write_back": false,
+      "case_id": "sfh1-mention-60f9d5ff179ecbdd321e88fc",
+      "core_graph_eligible": true,
+      "identity_created": true,
+      "mention_id": "sfh1-mention-60f9d5ff179ecbdd321e88fc",
+      "occurrence_role": "scene_participant",
+      "realization_basis": [
+        "llm_semantic_proposal",
+        "canonical_registry_lookup"
+      ],
+      "semantic_kind": "historical_person",
+      "story_id": "04-wenxue-097",
+      "surface": "宏"
+    },
+    "request_hashes": {
+      "adjudicator": "e1c2c4282ea90217340a5d9ce6f531bdd7bb696b69a52ea11aef01315926caf2",
+      "independent": "db42196a0759f24675b3aa0524f662657ec3570d3fdf6cef4335066ae95ba25a",
+      "primary": "7970bac5f34c59f68c01e9fbc574979855d7288d4ca014352a7614ed21b469b4"
+    },
+    "selected_record": {
+      "abstain": false,
+      "attribute_type": "",
+      "attribute_value": "",
+      "bearer_hint": "",
+      "confidence": "high",
+      "discourse": {
+        "addressee_hint": "",
+        "antecedent_hint": "袁宏",
+        "self_reference_hint": "",
+        "speaker_hint": ""
+      },
+      "explanation": "The target mention '宏' in liu-annotation-003 refers to 袁宏 (Yuan Hong), the author of the 東征賦. The annotation text discusses 宏 as the person who composed the 東征賦 and who was in 桓温's service. The main text opens with 袁宏始作東征賦, establishing 袁宏 as the referent. In annotation-003, 宏 is the subject who '善苦諌之' and who '語衆云我决不及桓宣城', consistent with 袁宏 throughout the narrative. The annotation-002 also mentions 宏 as 大司馬記室叅軍, confirming the same person.",
+      "mention_id": "sfh1-mention-60f9d5ff179ecbdd321e88fc",
+      "occurrence_role": "scene_participant",
+      "reference_type": "personal_name",
+      "referent": {
+        "canonical_hint": "袁宏",
+        "confidence": "high",
+        "surface_form": "袁宏"
+      },
+      "relations": [
+        {
+          "confidence": "high",
+          "evidence_ids": [
+            "sfh1-ev-04-wenxue-097-liu-annotation-002",
+            "sfh1-ev-04-wenxue-097-main"
+          ],
+          "relation": "same_person",
+          "target_hint": "袁宏"
+        }
+      ],
+      "semantic_kind": "historical_person",
+      "supporting_evidence_ids": [
+        "sfh1-ev-04-wenxue-097-liu-annotation-002",
+        "sfh1-ev-04-wenxue-097-liu-annotation-003",
+        "sfh1-ev-04-wenxue-097-main"
+      ],
+      "surface": "宏"
+    },
+    "selected_record_source": "historian_a_exact_copy",
+    "stage": "identity",
+    "status": "resolved",
+    "story_id": "04-wenxue-097",
+    "surface": "宏"
+  },
+  "output_hash": "c52de1aba9152aa161d6a93881376ad075a7ddac6757fdf251de5243613ef6ee",
+  "provider_witness_hash": null,
+  "request_hash": "0cf93771fb57ca8aafdb258f4e09e3dec54c1a6762cd995b031b58b37268bb06",
+  "runtime_metadata": {
+    "candidate_only": true,
+    "canonical_write_back": false,
+    "recorded_at": "2026-09-04T15:42:47Z"
+  },
+  "schema": "sfh2-f1-checkpoint-v1",
+  "status": "completed",
+  "unit_id": "identity:sfh1-mention-60f9d5ff179ecbdd321e88fc"
+}

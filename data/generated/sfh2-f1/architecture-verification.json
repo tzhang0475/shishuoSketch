@@ -1,0 +1,73 @@
+{
+  "a2or_primary_included": true,
+  "a2ov_excluded": true,
+  "a2ovb_boundary_included": true,
+  "baseline_commit": "b30c380095772f61dcf3109b75535a70007c47ab",
+  "branch": "main",
+  "candidate_only": true,
+  "canonical_write_back": false,
+  "code_hashes": {
+    "scripts/sfh2_a0r/common.py": "e21b361259e3d3ae0d12e8babcc69634477534e21f1a6083da88c186b28c035c",
+    "scripts/sfh2_a0r/contracts.py": "b74cce5b4cc1c6b139d98e40e26e50f4b6fc1c0d3d1db2a37d7c9c4a9393e4fc",
+    "scripts/sfh2_a0r/pipeline.py": "98ba28540d8393f63f6e173cf76867e8bf94a1a68eebbc18069dfebc8dace52f",
+    "scripts/sfh2_a2/common.py": "7ae4fd59e8e99d20b749dfc7de854db66e0bfd8f8d481b48de6a6669cc4a7967",
+    "scripts/sfh2_a2/comparison.py": "543aade86e71442374a706217934aed032cb91fc238baa49c81c40308b17c72c",
+    "scripts/sfh2_a2/contracts.py": "9d97c81101d011a0a6af5194b6b9237988ef6c96de46f4a589bca51643735c92",
+    "scripts/sfh2_a2/pipeline.py": "acc7aeb2179c001a9d5bc2be95dd8936b6cad5232a0bf304e2e76237abe57909",
+    "scripts/sfh2_a2or/common.py": "49b75f4cbadb59c6af4cf23a617d5c60ad2175d04dda3e1e43d1995aed752e16",
+    "scripts/sfh2_a2or/contracts.py": "c980bde6f0703a0c80f848e062d87484653451eeb28c5ec8405fe884e4068e2d",
+    "scripts/sfh2_a2or/prompt.py": "748ac21aabd9dd1eadbe2bb6b75934f3be1abf4666b793150266d351b8fa6232",
+    "scripts/sfh2_a2ovb/common.py": "37207ed7523dc7f1e57f84664e31e0a9975f8656e58da015eb4ca3c6bb2879fc",
+    "scripts/sfh2_a2ovb/contracts.py": "c614914aef7ab784da2dea1c539fd41c250419f19dec058cc47fae02b34cae4d",
+    "scripts/sfh2_a2ovb/prompt.py": "f6239953ed2d079678552d1a55f6629fcacd85b530946e88fb2e2fe72bc3f7f1",
+    "scripts/sfh2_a2r/contracts.py": "f0a2ec42d1543fce0bea259cfa962319b3092a11b4cffc5ebe4d67ea8f23f96c",
+    "scripts/sfh2_a2r/pipeline.py": "601df9fd16ac75cb9a4d100015d191803bd4312dfee0eb48fc151e73146bc31e"
+  },
+  "frozen_policy_hashes": {
+    "cache_reuse": "36f35412d15e5cdc6af31faba8fa6464dfea3ff8b8d4bbf121e249b7e859e464",
+    "checkpoint": "3d960e9a0ceb11f912f7bff940d66dd48e3f19be9cbb4b91aa9971e8763c5a65",
+    "provider_failure": "8cd279981e376d077283b56e6d30151c19e299cd9640062e7c933addfbb64611",
+    "review_routing": "0996e78795459519079ced584bdb38041cf39a48bdeb16bcfe91ee50e1c18443",
+    "stop_conditions": "98920ac1fc9ddd8f7fe999002fc18c2ea335ff65fe2e064e1d948e12a8a069a1",
+    "success_gate": "c9510275fb9ebbb7320c70beddea108b822acd66967e6d2a74ae89d4034de753"
+  },
+  "frozen_policy_paths": [
+    "data/generated/sfh2-f-prep/checkpoint-policy.json",
+    "data/generated/sfh2-f-prep/cache-reuse-plan.json",
+    "data/generated/sfh2-f-prep/provider-failure-policy.json",
+    "data/generated/sfh2-f-prep/review-routing-policy.json",
+    "data/generated/sfh2-f-prep/f1-stop-conditions.json",
+    "data/generated/sfh2-f-prep/f1-success-gate.json"
+  ],
+  "head": "b30c380095772f61dcf3109b75535a70007c47ab",
+  "identity_policy": "qualified dual historian + structured comparison + A2R adjudication on qualified disagreement",
+  "model_config": {
+    "endpoint": "https://api.deepseek.com/beta/chat/completions",
+    "model": "deepseek-v4-flash",
+    "retry_policy": "HTTP400/nonretryable; transient 429/5xx/timeout/connection-reset at most one retry",
+    "temperature": 0,
+    "thinking": {
+      "type": "disabled"
+    }
+  },
+  "occurrence_policy": "A2OR multiclass primary; A2OVB primary-blind boundary validator only for participant/reference",
+  "origin_main": "b30c380095772f61dcf3109b75535a70007c47ab",
+  "prompt_hashes": {
+    "boundary_validator": "84eff0c1bd11b49d20cfae08b2b26c3c70250162b3fae95fe567936a63a164ff",
+    "identity_adjudicator": "ce891ba0240261478cca8b95ee6005403dda4580eca724789fd08470f1531481",
+    "identity_independent": "17f75f0076f1d35a2ad884494f2102a32389c6bc93c0fe38b6aa3d03d78dd88c",
+    "identity_primary": "9e222ff627ab465e135245c8b6c55c968dec220a0f88597ca7162701f54543fa",
+    "occurrence_primary": "bb189843141f6652b93bd02d84757c38839811a19ca3e18cd4b85b2d24b49875"
+  },
+  "schema": "sfh2-f1-architecture-verification-v1",
+  "semantic_architecture_hash": "456f125dee9784e4eaff40796a44b02b2d363d31f597d6dafdc3dc56bf5fef0a",
+  "semantic_architecture_status": "QUALIFIED_ARCHITECTURE_FROZEN",
+  "semantic_freeze_manifest": "data/frozen/sfh2/semantic-v1/manifest.json",
+  "stage": "SFH2.2-F1",
+  "tool_hashes": {
+    "boundary_validator": "6b885303528a6fabefd8a332f3793eb66b6ab32b76d4e686de84ee31a8b97d9b",
+    "identity_adjudicator": "b94f57934cb4162598570a3f1366d10e5ae464385fa330265ce845e91ed30130",
+    "identity_semantic_record": "7510405b7add81456a168de681d2dceb4d06594e828259f5d6d23221a2d2192e",
+    "occurrence_primary": "ee1894776c94bde6ad5f2fc5228143a8591573a45719a940dcbf2ffa16c71492"
+  }
+}

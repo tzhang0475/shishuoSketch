@@ -1,0 +1,126 @@
+{
+  "attempt": 1,
+  "contract_valid": true,
+  "output": {
+    "effective": {
+      "changed_fields": [],
+      "errors": [],
+      "record": {
+        "abstain": false,
+        "attribute_type": "",
+        "attribute_value": "",
+        "bearer_hint": "",
+        "confidence": "high",
+        "discourse": {
+          "addressee_hint": "劉真長",
+          "antecedent_hint": "劉真長",
+          "self_reference_hint": "",
+          "speaker_hint": "王長史"
+        },
+        "explanation": "The target 卿 occurs in the main text at position 17-18, within the sentence 王謂劉曰卿更長進. The speaker is 王長史 (Wang Changshi, i.e., Wang Meng 王濛), who addresses 劉真長 (Liu Zhenchang, i.e., Liu Tan 劉惔). The pronoun 卿 is the second-person address directed by Wang to Liu. The preceding clause 王長史與劉真長别後相見 establishes the two participants, and 王謂劉曰 introduces Wang speaking to Liu, so 卿 refers to Liu Zhenchang (劉惔). The validated local mention sfh1-mention-e3bfe53f18afab582943b23f (劉真長) confirms this identity.",
+        "mention_id": "sfh1-mention-7754db159dd2508a0e0966b1",
+        "occurrence_role": "addressee_reference",
+        "reference_type": "pronoun_reference",
+        "referent": {
+          "canonical_hint": "劉惔",
+          "confidence": "high",
+          "surface_form": "劉真長"
+        },
+        "relations": [],
+        "semantic_kind": "historical_person",
+        "supporting_evidence_ids": [
+          "sfh1-ev-02-yanyu-066-main"
+        ],
+        "surface": "卿"
+      },
+      "source": "historian_b_exact_copy",
+      "valid": true
+    },
+    "row": {
+      "candidate_only": true,
+      "canonical_write_back": false,
+      "case_id": "sfh1-mention-7754db159dd2508a0e0966b1",
+      "changed_fields": [],
+      "contract_status": "valid",
+      "decision": "select_b",
+      "errors": [],
+      "mention_id": "sfh1-mention-7754db159dd2508a0e0966b1",
+      "patch_ops": [],
+      "reason_summary": "The target 卿 is the second-person pronoun in 王謂劉曰卿更長進, spoken by 王長史 (王濛) addressing 劉真長 (劉惔). Both historians agree on the core identity: referent canonical_hint 劉惔, surface_form 劉真長, occurrence_role addressee_reference, reference_type pronoun_reference, semantic_kind historical_person. The disagreement is confined to discourse hints and relations. Historian B's record is cleaner and more accurate: the addressee_hint 劉真長 correctly names the person being addressed (the surface form in the text), and the speaker_hint 王長史 matches the surface form used in the main text. Historian A's addressee_hint 劉惔 uses the canonical name rather than the surface form, and its speaker_hint 王濛 likewise diverges from the surface text. More importantly, Historian A's relations array is problematic: it asserts a 'same_person' relation between the pronoun 卿 and 劉真長, but 卿 is a pronoun referring to the addressee, not a co-referring name token requiring a same_person relation; and the 'related_person' relation to 王濛 is redundant since 王濛 is the speaker, not a separate related person. Historian B correctly leaves relations empty for a pronoun addressee reference. The validated local mention sfh1-mention-e3bfe53f18afab582943b23f (劉真長) confirms the identity. Historian B's record is the more accurate and internally consistent hypothesis.",
+      "reviewed_fields": [],
+      "selected_record": {
+        "abstain": false,
+        "attribute_type": "",
+        "attribute_value": "",
+        "bearer_hint": "",
+        "confidence": "high",
+        "discourse": {
+          "addressee_hint": "劉真長",
+          "antecedent_hint": "劉真長",
+          "self_reference_hint": "",
+          "speaker_hint": "王長史"
+        },
+        "explanation": "The target 卿 occurs in the main text at position 17-18, within the sentence 王謂劉曰卿更長進. The speaker is 王長史 (Wang Changshi, i.e., Wang Meng 王濛), who addresses 劉真長 (Liu Zhenchang, i.e., Liu Tan 劉惔). The pronoun 卿 is the second-person address directed by Wang to Liu. The preceding clause 王長史與劉真長别後相見 establishes the two participants, and 王謂劉曰 introduces Wang speaking to Liu, so 卿 refers to Liu Zhenchang (劉惔). The validated local mention sfh1-mention-e3bfe53f18afab582943b23f (劉真長) confirms this identity.",
+        "mention_id": "sfh1-mention-7754db159dd2508a0e0966b1",
+        "occurrence_role": "addressee_reference",
+        "reference_type": "pronoun_reference",
+        "referent": {
+          "canonical_hint": "劉惔",
+          "confidence": "high",
+          "surface_form": "劉真長"
+        },
+        "relations": [],
+        "semantic_kind": "historical_person",
+        "supporting_evidence_ids": [
+          "sfh1-ev-02-yanyu-066-main"
+        ],
+        "surface": "卿"
+      },
+      "selected_record_source": "historian_b_exact_copy",
+      "stage": "identity_adjudicator",
+      "story_id": "02-yanyu-066",
+      "supporting_evidence_ids": [
+        "sfh1-ev-02-yanyu-066-main"
+      ],
+      "surface": "卿",
+      "transport": {
+        "attempt": 1,
+        "classification": "parsed",
+        "elapsed_seconds": 3.346,
+        "finish_reason": "tool_calls",
+        "model": "deepseek-v4-flash",
+        "parse_error": null,
+        "prompt_version": "sfh2-a2r-adjudicator-v2",
+        "provider_call": true,
+        "provider_witness_hash": "d67c6e6b1417e09435a26bea07b3c37e57a30dac7e98871331841a680d49d258",
+        "raw_archive_path": "/tmp/sfh2-f1-raw-b30c380095772f61/sfh2-f1-live-v1/00051-identity_adjudicator-identity_adjudicator-sfh1-mention-7754db159dd2508a0e0966b1-attempt1.json",
+        "raw_archive_sha256": "7cbdac88e425b0b6f747cf0897ab2c5b8aa53d535971ae8dfd9fb10b8ed689a2",
+        "request_hash": "a7e87109a5241363d64f19f38843078c953d0e04907bb642e921d0694d4f8dd9",
+        "stage": "identity_adjudicator",
+        "temperature": 0,
+        "thinking": {
+          "type": "disabled"
+        },
+        "unit_id": "identity_adjudicator:sfh1-mention-7754db159dd2508a0e0966b1",
+        "usage": {
+          "completion_tokens": 456,
+          "prompt_tokens": 4630,
+          "total_tokens": 5086
+        },
+        "valid": true
+      },
+      "valid": true
+    }
+  },
+  "output_hash": "917451d7eafafbb68766233c09d260252e76c3313fb78932e933294161ae9c72",
+  "provider_witness_hash": "d67c6e6b1417e09435a26bea07b3c37e57a30dac7e98871331841a680d49d258",
+  "request_hash": "a7e87109a5241363d64f19f38843078c953d0e04907bb642e921d0694d4f8dd9",
+  "runtime_metadata": {
+    "candidate_only": true,
+    "canonical_write_back": false,
+    "recorded_at": "2026-09-04T15:10:55Z"
+  },
+  "schema": "sfh2-f1-checkpoint-v1",
+  "status": "completed",
+  "unit_id": "identity_adjudicator:sfh1-mention-7754db159dd2508a0e0966b1"
+}

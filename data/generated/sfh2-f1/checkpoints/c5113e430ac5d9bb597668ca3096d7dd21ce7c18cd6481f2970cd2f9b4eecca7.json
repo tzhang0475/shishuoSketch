@@ -1,0 +1,508 @@
+{
+  "attempt": 0,
+  "contract_valid": true,
+  "output": {
+    "adjudication": {
+      "candidate_only": true,
+      "canonical_write_back": false,
+      "case_id": "sfh1-mention-14aadf84022adda0aa99308b",
+      "changed_fields": [],
+      "contract_status": "valid",
+      "decision": "select_b",
+      "errors": [],
+      "mention_id": "sfh1-mention-14aadf84022adda0aa99308b",
+      "patch_ops": [],
+      "reason_summary": "Historian A produced no valid semantic record (contract error: record_not_object, identity_primary_contract_invalid, hard evidence grounding failure). Historian B produced a valid, well-grounded semantic record. The target span 何曽 (He Zeng) in Liu Xiaobiao's annotation (sfh1-ev-24-jianao-001-liu-annotation-002) is correctly identified as a historical person referenced by full name, appearing as a scene participant. The juxtaposition '王司徒何曽' supports the same_person relation with 王司徒 (office title for He Zeng, who held the Situ office), and the annotation text supports the related_person relation with 朝臣. The multi_candidate_ambiguity flag on B is only a 'review' severity note about supplying more than one structured relation target, which is appropriate given the annotation's content and does not constitute a substantive error. Historian B's record is sound and should be selected.",
+      "reviewed_fields": [],
+      "selected_record": {
+        "abstain": false,
+        "attribute_type": "",
+        "attribute_value": "",
+        "bearer_hint": "",
+        "confidence": "high",
+        "discourse": {
+          "addressee_hint": "",
+          "antecedent_hint": "",
+          "self_reference_hint": "",
+          "speaker_hint": ""
+        },
+        "explanation": "The target 何曽 appears in Liu Xiaobiao's annotation to Shishuo Xinyu 24-jianao-001. The annotation text reads: '盡禮唯王祥長揖不拜/王司徒何曽與朝臣皆' — i.e., '王司徒何曽' where 王司徒 (Minister over the Masses Wang) is an office title applied to 何曽 (He Zeng). The validated local mention sfh1-mention-5deb7a645b33456f741563e7 identifies 王司徒 as an office_title reference, and the juxtaposition '王司徒何曽' makes clear that 王司徒 and 何曽 refer to the same person: He Zeng (何曾), a Jin-dynasty official who held the office of Situ (司徒, Minister over the Masses). The annotation contrasts his behavior with that of Wang Xiang (王祥), who alone performed a long bow without prostration before the Jin Wen Wang (Sima Zhao). He Zeng is thus a historical person, referenced by full name, appearing as a scene participant in the annotation's account of court ceremonial conduct.",
+        "mention_id": "sfh1-mention-14aadf84022adda0aa99308b",
+        "occurrence_role": "scene_participant",
+        "reference_type": "full_name",
+        "referent": {
+          "canonical_hint": "何曾",
+          "confidence": "high",
+          "surface_form": "何曾"
+        },
+        "relations": [
+          {
+            "confidence": "high",
+            "evidence_ids": [
+              "sfh1-ev-24-jianao-001-liu-annotation-002"
+            ],
+            "relation": "same_person",
+            "target_hint": "王司徒"
+          },
+          {
+            "confidence": "medium",
+            "evidence_ids": [
+              "sfh1-ev-24-jianao-001-liu-annotation-002"
+            ],
+            "relation": "related_person",
+            "target_hint": "朝臣"
+          }
+        ],
+        "semantic_kind": "historical_person",
+        "supporting_evidence_ids": [
+          "sfh1-ev-24-jianao-001-liu-annotation-002"
+        ],
+        "surface": "何曽"
+      },
+      "selected_record_source": "historian_b_exact_copy",
+      "stage": "identity_adjudicator",
+      "story_id": "24-jianao-001",
+      "supporting_evidence_ids": [
+        "sfh1-ev-24-jianao-001-liu-annotation-002"
+      ],
+      "surface": "何曽",
+      "transport": {
+        "attempt": 1,
+        "classification": "parsed",
+        "elapsed_seconds": 2.614,
+        "finish_reason": "tool_calls",
+        "model": "deepseek-v4-flash",
+        "parse_error": null,
+        "prompt_version": "sfh2-a2r-adjudicator-v2",
+        "provider_call": true,
+        "provider_witness_hash": "5f5b802ba6e38585bc1197c616d20aa27e0fbb0df17b2bb12b0c565fb171cf8e",
+        "raw_archive_path": "/tmp/sfh2-f1-raw-b30c380095772f61/sfh2-f1-live-v1/00055-identity_adjudicator-identity_adjudicator-sfh1-mention-14aadf84022adda0aa99308b-attempt1.json",
+        "raw_archive_sha256": "ff416bf36ee75b6bd31ecd8b53efa1177d450bb18b8facd22a1b680b621543f4",
+        "request_hash": "578e7172f9a1cf232499fcf20ebc6025d9836098c9548cba89c0f8192187b64e",
+        "stage": "identity_adjudicator",
+        "temperature": 0,
+        "thinking": {
+          "type": "disabled"
+        },
+        "unit_id": "identity_adjudicator:sfh1-mention-14aadf84022adda0aa99308b",
+        "usage": {
+          "completion_tokens": 319,
+          "prompt_tokens": 3536,
+          "total_tokens": 3855
+        },
+        "valid": true
+      },
+      "valid": true
+    },
+    "candidate_only": true,
+    "candidate_proposal": {
+      "candidate_only": true,
+      "candidate_origin": "llm_semantic_proposal_registry_miss",
+      "candidate_person_id": "sfh2-a0-candidate-person-330ba714eb3b19282394",
+      "canonical_write_back": false,
+      "display_name": "何曾",
+      "entity_type": "candidate_historical_person",
+      "person_id": "",
+      "proposed_display_name": "何曾",
+      "referent_canonical_hint": "何曾",
+      "source_occurrence_ids": [
+        "sfh1-mention-14aadf84022adda0aa99308b"
+      ],
+      "supporting_evidence_ids": [
+        "sfh1-ev-24-jianao-001-liu-annotation-002"
+      ]
+    },
+    "canonical_write_back": false,
+    "case_id": "sfh1-mention-14aadf84022adda0aa99308b",
+    "comparison": {
+      "a_valid": false,
+      "agreement": false,
+      "b_valid": true,
+      "disagreement_classes": [
+        "contract_validity_disagreement"
+      ],
+      "historical_identity_disagreement": true,
+      "metadata_only_difference": false,
+      "semantic_fields": [
+        "record"
+      ],
+      "substantive_disagreement": true,
+      "substantive_fields": [
+        "record"
+      ]
+    },
+    "context": {
+      "frozen_discourse_context": {
+        "addressee_hint": "",
+        "antecedent_hint": "",
+        "self_reference_hint": "",
+        "speaker_hint": ""
+      },
+      "frozen_identity": {
+        "abstain": false,
+        "attribute_type": "",
+        "attribute_value": "",
+        "bearer_hint": "",
+        "reference_type": "full_name",
+        "referent": {
+          "canonical_hint": "何曾",
+          "confidence": "high",
+          "surface_form": "何曾"
+        },
+        "semantic_kind": "historical_person"
+      }
+    },
+    "failure": null,
+    "final_consistency": {
+      "candidate_only": true,
+      "canonical_write_back": false,
+      "flags": [
+        {
+          "challenged_fields": [
+            "relations",
+            "referent.canonical_hint"
+          ],
+          "evidence_ids": [
+            "sfh1-ev-24-jianao-001-liu-annotation-002"
+          ],
+          "flag_type": "multi_candidate_ambiguity",
+          "formal_reason": "the record supplies more than one structured relation target",
+          "involved": [
+            "relations"
+          ],
+          "severity": "review"
+        }
+      ],
+      "has_diagnostic_flags": false,
+      "has_hard_flags": false,
+      "has_review_flags": true,
+      "review_trigger_score": 2,
+      "schema": "sfh2-a0r-consistency-v2",
+      "stage": "identity_final"
+    },
+    "final_state": "local_candidate_resolved",
+    "historian_independent": {
+      "candidate_only": true,
+      "canonical_write_back": false,
+      "case_id": "sfh1-mention-14aadf84022adda0aa99308b",
+      "consistency": {
+        "candidate_only": true,
+        "canonical_write_back": false,
+        "flags": [
+          {
+            "challenged_fields": [
+              "relations",
+              "referent.canonical_hint"
+            ],
+            "evidence_ids": [
+              "sfh1-ev-24-jianao-001-liu-annotation-002"
+            ],
+            "flag_type": "multi_candidate_ambiguity",
+            "formal_reason": "the record supplies more than one structured relation target",
+            "involved": [
+              "relations"
+            ],
+            "severity": "review"
+          }
+        ],
+        "has_diagnostic_flags": false,
+        "has_hard_flags": false,
+        "has_review_flags": true,
+        "review_trigger_score": 2,
+        "schema": "sfh2-a0r-consistency-v2",
+        "stage": "identity_independent"
+      },
+      "contract_status": "valid",
+      "errors": [],
+      "historian": "B",
+      "mention_id": "sfh1-mention-14aadf84022adda0aa99308b",
+      "provisional_realization": {
+        "candidate": {
+          "candidate_only": true,
+          "candidate_origin": "llm_semantic_proposal_registry_miss",
+          "candidate_person_id": "sfh2-a0-candidate-person-330ba714eb3b19282394",
+          "canonical_write_back": false,
+          "display_name": "何曾",
+          "entity_type": "candidate_historical_person",
+          "person_id": "",
+          "proposed_display_name": "何曾",
+          "referent_canonical_hint": "何曾",
+          "source_occurrence_ids": [
+            "sfh1-mention-14aadf84022adda0aa99308b"
+          ],
+          "supporting_evidence_ids": [
+            "sfh1-ev-24-jianao-001-liu-annotation-002"
+          ]
+        },
+        "candidate_only": true,
+        "canonical_write_back": false,
+        "case_id": "sfh1-mention-14aadf84022adda0aa99308b",
+        "core_graph_eligible": true,
+        "identity_created": true,
+        "mention_id": "sfh1-mention-14aadf84022adda0aa99308b",
+        "occurrence_role": "scene_participant",
+        "realization_basis": [
+          "llm_semantic_proposal",
+          "candidate_registry_miss"
+        ],
+        "semantic_kind": "historical_person",
+        "story_id": "24-jianao-001",
+        "surface": "何曽"
+      },
+      "record": {
+        "abstain": false,
+        "attribute_type": "",
+        "attribute_value": "",
+        "bearer_hint": "",
+        "confidence": "high",
+        "discourse": {
+          "addressee_hint": "",
+          "antecedent_hint": "",
+          "self_reference_hint": "",
+          "speaker_hint": ""
+        },
+        "explanation": "The target 何曽 appears in Liu Xiaobiao's annotation to Shishuo Xinyu 24-jianao-001. The annotation text reads: '盡禮唯王祥長揖不拜/王司徒何曽與朝臣皆' — i.e., '王司徒何曽' where 王司徒 (Minister over the Masses Wang) is an office title applied to 何曽 (He Zeng). The validated local mention sfh1-mention-5deb7a645b33456f741563e7 identifies 王司徒 as an office_title reference, and the juxtaposition '王司徒何曽' makes clear that 王司徒 and 何曽 refer to the same person: He Zeng (何曾), a Jin-dynasty official who held the office of Situ (司徒, Minister over the Masses). The annotation contrasts his behavior with that of Wang Xiang (王祥), who alone performed a long bow without prostration before the Jin Wen Wang (Sima Zhao). He Zeng is thus a historical person, referenced by full name, appearing as a scene participant in the annotation's account of court ceremonial conduct.",
+        "mention_id": "sfh1-mention-14aadf84022adda0aa99308b",
+        "occurrence_role": "scene_participant",
+        "reference_type": "full_name",
+        "referent": {
+          "canonical_hint": "何曾",
+          "confidence": "high",
+          "surface_form": "何曾"
+        },
+        "relations": [
+          {
+            "confidence": "high",
+            "evidence_ids": [
+              "sfh1-ev-24-jianao-001-liu-annotation-002"
+            ],
+            "relation": "same_person",
+            "target_hint": "王司徒"
+          },
+          {
+            "confidence": "medium",
+            "evidence_ids": [
+              "sfh1-ev-24-jianao-001-liu-annotation-002"
+            ],
+            "relation": "related_person",
+            "target_hint": "朝臣"
+          }
+        ],
+        "semantic_kind": "historical_person",
+        "supporting_evidence_ids": [
+          "sfh1-ev-24-jianao-001-liu-annotation-002"
+        ],
+        "surface": "何曽"
+      },
+      "stage": "identity_independent",
+      "story_id": "24-jianao-001",
+      "surface": "何曽",
+      "transport": {
+        "attempt": 1,
+        "classification": "parsed",
+        "elapsed_seconds": 4.185,
+        "finish_reason": "tool_calls",
+        "model": "deepseek-v4-flash",
+        "parse_error": null,
+        "prompt_version": "sfh2-a2-independent-historian-v1",
+        "provider_call": true,
+        "provider_witness_hash": "c98851cc5c74d57692858b483d9a10fefa01f57dea3c78ca9dcb8beaacf6c86f",
+        "raw_archive_path": "/tmp/sfh2-f1-raw-b30c380095772f61/sfh2-f1-live-v1/00054-identity_independent-identity_independent-sfh1-mention-14aadf84022adda0aa99308b-attempt1.json",
+        "raw_archive_sha256": "c8fa70e5a50f3a6044369144bbe922d995bd1ab2209049105d659379f85d3bbe",
+        "request_hash": "c6381669038517a5ddba2a59fc5a0c8a8612aec00e02363db631bbd69067b803",
+        "stage": "identity_independent",
+        "temperature": 0,
+        "thinking": {
+          "type": "disabled"
+        },
+        "unit_id": "identity_independent:sfh1-mention-14aadf84022adda0aa99308b",
+        "usage": {
+          "completion_tokens": 573,
+          "prompt_tokens": 2300,
+          "total_tokens": 2873
+        },
+        "valid": true
+      },
+      "valid": true
+    },
+    "historian_primary": {
+      "candidate_only": true,
+      "canonical_write_back": false,
+      "case_id": "sfh1-mention-14aadf84022adda0aa99308b",
+      "consistency": {
+        "candidate_only": true,
+        "canonical_write_back": false,
+        "flags": [
+          {
+            "challenged_fields": [],
+            "evidence_ids": [],
+            "flag_type": "evidence_grounding_failure",
+            "formal_reason": "semantic record is not an object",
+            "involved": [],
+            "severity": "hard"
+          }
+        ],
+        "has_diagnostic_flags": false,
+        "has_hard_flags": true,
+        "has_review_flags": false,
+        "review_trigger_score": 5,
+        "schema": "sfh2-a0r-consistency-v2",
+        "stage": "identity_primary"
+      },
+      "contract_status": "identity_primary_contract_invalid",
+      "effective_record": null,
+      "errors": [
+        "record_not_object"
+      ],
+      "mention_id": "sfh1-mention-14aadf84022adda0aa99308b",
+      "provisional_realization": {
+        "candidate": null,
+        "candidate_only": true,
+        "canonical_write_back": false,
+        "case_id": "sfh1-mention-14aadf84022adda0aa99308b",
+        "core_graph_eligible": false,
+        "identity_created": false,
+        "mention_id": "sfh1-mention-14aadf84022adda0aa99308b",
+        "realization_basis": [
+          "no_valid_semantic_record"
+        ],
+        "story_id": "24-jianao-001",
+        "surface": "何曽"
+      },
+      "record": null,
+      "selected_record": null,
+      "stage": "identity_primary",
+      "story_id": "24-jianao-001",
+      "surface": "何曽",
+      "transport": {
+        "attempt": 1,
+        "classification": "parsed",
+        "elapsed_seconds": 3.087,
+        "finish_reason": "tool_calls",
+        "model": "deepseek-v4-flash",
+        "parse_error": null,
+        "prompt_version": "sfh2-a0r-primary-historian-v1",
+        "provider_call": true,
+        "provider_witness_hash": "a4fc8fe9b072ebab484ac406f1fcc94049baefd1c2c3961aa554398fec08cace",
+        "raw_archive_path": "/tmp/sfh2-f1-raw-b30c380095772f61/sfh2-f1-live-v1/00053-identity_primary-identity_primary-sfh1-mention-14aadf84022adda0aa99308b-attempt1.json",
+        "raw_archive_sha256": "ba1557ec264d29f3f1564c9d8fdc3dcfcf18d3cff929d153f4f9a4555cdd8e81",
+        "request_hash": "9826695e2a641e88bd11a45b0fcf267f7d8a0bd139997eaf8ef3e8e5ee7dc05b",
+        "stage": "identity_primary",
+        "temperature": 0,
+        "thinking": {
+          "type": "disabled"
+        },
+        "unit_id": "identity_primary:sfh1-mention-14aadf84022adda0aa99308b",
+        "usage": {
+          "completion_tokens": 386,
+          "prompt_tokens": 2268,
+          "total_tokens": 2654
+        },
+        "valid": true
+      },
+      "valid": false
+    },
+    "identity_readiness": "identity_requires_pipeline",
+    "mention_id": "sfh1-mention-14aadf84022adda0aa99308b",
+    "occurrence_id": "sfh1-mention-14aadf84022adda0aa99308b",
+    "realization": {
+      "candidate": {
+        "candidate_only": true,
+        "candidate_origin": "llm_semantic_proposal_registry_miss",
+        "candidate_person_id": "sfh2-a0-candidate-person-330ba714eb3b19282394",
+        "canonical_write_back": false,
+        "display_name": "何曾",
+        "entity_type": "candidate_historical_person",
+        "person_id": "",
+        "proposed_display_name": "何曾",
+        "referent_canonical_hint": "何曾",
+        "source_occurrence_ids": [
+          "sfh1-mention-14aadf84022adda0aa99308b"
+        ],
+        "supporting_evidence_ids": [
+          "sfh1-ev-24-jianao-001-liu-annotation-002"
+        ]
+      },
+      "candidate_only": true,
+      "canonical_write_back": false,
+      "case_id": "sfh1-mention-14aadf84022adda0aa99308b",
+      "core_graph_eligible": true,
+      "identity_created": true,
+      "mention_id": "sfh1-mention-14aadf84022adda0aa99308b",
+      "occurrence_role": "scene_participant",
+      "realization_basis": [
+        "llm_semantic_proposal",
+        "candidate_registry_miss"
+      ],
+      "semantic_kind": "historical_person",
+      "story_id": "24-jianao-001",
+      "surface": "何曽"
+    },
+    "request_hashes": {
+      "adjudicator": "578e7172f9a1cf232499fcf20ebc6025d9836098c9548cba89c0f8192187b64e",
+      "independent": "c6381669038517a5ddba2a59fc5a0c8a8612aec00e02363db631bbd69067b803",
+      "primary": "9826695e2a641e88bd11a45b0fcf267f7d8a0bd139997eaf8ef3e8e5ee7dc05b"
+    },
+    "selected_record": {
+      "abstain": false,
+      "attribute_type": "",
+      "attribute_value": "",
+      "bearer_hint": "",
+      "confidence": "high",
+      "discourse": {
+        "addressee_hint": "",
+        "antecedent_hint": "",
+        "self_reference_hint": "",
+        "speaker_hint": ""
+      },
+      "explanation": "The target 何曽 appears in Liu Xiaobiao's annotation to Shishuo Xinyu 24-jianao-001. The annotation text reads: '盡禮唯王祥長揖不拜/王司徒何曽與朝臣皆' — i.e., '王司徒何曽' where 王司徒 (Minister over the Masses Wang) is an office title applied to 何曽 (He Zeng). The validated local mention sfh1-mention-5deb7a645b33456f741563e7 identifies 王司徒 as an office_title reference, and the juxtaposition '王司徒何曽' makes clear that 王司徒 and 何曽 refer to the same person: He Zeng (何曾), a Jin-dynasty official who held the office of Situ (司徒, Minister over the Masses). The annotation contrasts his behavior with that of Wang Xiang (王祥), who alone performed a long bow without prostration before the Jin Wen Wang (Sima Zhao). He Zeng is thus a historical person, referenced by full name, appearing as a scene participant in the annotation's account of court ceremonial conduct.",
+      "mention_id": "sfh1-mention-14aadf84022adda0aa99308b",
+      "occurrence_role": "scene_participant",
+      "reference_type": "full_name",
+      "referent": {
+        "canonical_hint": "何曾",
+        "confidence": "high",
+        "surface_form": "何曾"
+      },
+      "relations": [
+        {
+          "confidence": "high",
+          "evidence_ids": [
+            "sfh1-ev-24-jianao-001-liu-annotation-002"
+          ],
+          "relation": "same_person",
+          "target_hint": "王司徒"
+        },
+        {
+          "confidence": "medium",
+          "evidence_ids": [
+            "sfh1-ev-24-jianao-001-liu-annotation-002"
+          ],
+          "relation": "related_person",
+          "target_hint": "朝臣"
+        }
+      ],
+      "semantic_kind": "historical_person",
+      "supporting_evidence_ids": [
+        "sfh1-ev-24-jianao-001-liu-annotation-002"
+      ],
+      "surface": "何曽"
+    },
+    "selected_record_source": "historian_b_exact_copy",
+    "stage": "identity",
+    "status": "resolved",
+    "story_id": "24-jianao-001",
+    "surface": "何曽"
+  },
+  "output_hash": "892d2aa5c600d71a69aeff7e4d9e233491211905d126e05dc081f6993effe5cf",
+  "provider_witness_hash": null,
+  "request_hash": "6b1b0ad0a98f54eb9aa6b34f47bb6e462a0ae464bbc4ac84eed6645f6462fe0a",
+  "runtime_metadata": {
+    "candidate_only": true,
+    "canonical_write_back": false,
+    "recorded_at": "2026-09-04T15:42:46Z"
+  },
+  "schema": "sfh2-f1-checkpoint-v1",
+  "status": "completed",
+  "unit_id": "identity:sfh1-mention-14aadf84022adda0aa99308b"
+}

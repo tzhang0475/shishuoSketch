@@ -1,0 +1,438 @@
+{
+  "attempt": 0,
+  "contract_valid": true,
+  "output": {
+    "adjudication": {
+      "candidate_only": true,
+      "canonical_write_back": false,
+      "case_id": "sfh1-mention-ff73ef4d86b3e237614ab6af",
+      "changed_fields": [],
+      "contract_status": "valid",
+      "decision": "select_a",
+      "errors": [],
+      "mention_id": "sfh1-mention-ff73ef4d86b3e237614ab6af",
+      "patch_ops": [],
+      "reason_summary": "Historian B's semantic record is null and its contract is invalid (identity_independent_contract_invalid) due to a mention_id_mismatch and evidence grounding failure. Historian A provides a valid, well-grounded semantic record identifying the target mention 祥 in the main text as 王祥 (the filial son whose story of serving his stepmother is told in this entry). The main text opens with 王祥事後母朱夫人甚謹, and the target 祥 is the abbreviated personal-name reference continuing that referent. Liu's annotation (sfh1-ev-01-dexing-014-liu-annotation-001) confirms 祥 is 王祥 (琅邪臨沂人, 字休徵). Historian A's identification is historically correct and fully supported by the supplied evidence.",
+      "reviewed_fields": [],
+      "selected_record": {
+        "abstain": false,
+        "attribute_type": "",
+        "attribute_value": "",
+        "bearer_hint": "",
+        "confidence": "high",
+        "discourse": {
+          "addressee_hint": "",
+          "antecedent_hint": "王祥",
+          "self_reference_hint": "",
+          "speaker_hint": ""
+        },
+        "explanation": "The target mention 祥 in the main text refers to 王祥, the filial son whose story of serving his stepmother is told in this entry. The opening of the main text names him as 王祥, and this 祥 is the abbreviated personal-name reference continuing that referent. Liu's annotation confirms 祥 is 王祥 (琅邪臨沂人, 字休徵).",
+        "mention_id": "sfh1-mention-ff73ef4d86b3e237614ab6af",
+        "occurrence_role": "scene_participant",
+        "reference_type": "personal_name",
+        "referent": {
+          "canonical_hint": "王祥",
+          "confidence": "high",
+          "surface_form": "王祥"
+        },
+        "relations": [
+          {
+            "confidence": "high",
+            "evidence_ids": [
+              "sfh1-ev-01-dexing-014-main"
+            ],
+            "relation": "same_person",
+            "target_hint": "王祥"
+          }
+        ],
+        "semantic_kind": "historical_person",
+        "supporting_evidence_ids": [
+          "sfh1-ev-01-dexing-014-liu-annotation-001",
+          "sfh1-ev-01-dexing-014-main"
+        ],
+        "surface": "祥"
+      },
+      "selected_record_source": "historian_a_exact_copy",
+      "stage": "identity_adjudicator",
+      "story_id": "01-dexing-014",
+      "supporting_evidence_ids": [
+        "sfh1-ev-01-dexing-014-liu-annotation-001",
+        "sfh1-ev-01-dexing-014-main"
+      ],
+      "surface": "祥",
+      "transport": {
+        "attempt": 1,
+        "classification": "parsed",
+        "elapsed_seconds": 2.262,
+        "finish_reason": "tool_calls",
+        "model": "deepseek-v4-flash",
+        "parse_error": null,
+        "prompt_version": "sfh2-a2r-adjudicator-v2",
+        "provider_call": true,
+        "provider_witness_hash": "fd8e68068f18406cd8f2569d332eea6e6666579c7fddaf5b0bf94bec2cd1747d",
+        "raw_archive_path": "/tmp/sfh2-f1-raw-b30c380095772f61/sfh2-f1-live-v1/00046-identity_adjudicator-identity_adjudicator-sfh1-mention-ff73ef4d86b3e237614ab6af-attempt1.json",
+        "raw_archive_sha256": "738905d82435a92ba55981f963378f3ed41e0e3e7a5324d5f352b3074a407f31",
+        "request_hash": "420b8c87b6936806d5cc75d9f522a828a50e28ca92d2ccdccfa37913a35ba3bd",
+        "stage": "identity_adjudicator",
+        "temperature": 0,
+        "thinking": {
+          "type": "disabled"
+        },
+        "unit_id": "identity_adjudicator:sfh1-mention-ff73ef4d86b3e237614ab6af",
+        "usage": {
+          "completion_tokens": 301,
+          "prompt_tokens": 5446,
+          "total_tokens": 5747
+        },
+        "valid": true
+      },
+      "valid": true
+    },
+    "candidate_only": true,
+    "candidate_proposal": {
+      "candidate_only": true,
+      "candidate_origin": "python_registry_lookup_after_llm_semantics",
+      "candidate_person_id": "",
+      "canonical_write_back": false,
+      "display_name": "王祥",
+      "entity_type": "existing_person",
+      "person_id": "person-036",
+      "proposed_display_name": "王祥",
+      "referent_canonical_hint": "王祥"
+    },
+    "canonical_write_back": false,
+    "case_id": "sfh1-mention-ff73ef4d86b3e237614ab6af",
+    "comparison": {
+      "a_valid": true,
+      "agreement": false,
+      "b_valid": false,
+      "disagreement_classes": [
+        "contract_validity_disagreement"
+      ],
+      "historical_identity_disagreement": true,
+      "metadata_only_difference": false,
+      "semantic_fields": [
+        "record"
+      ],
+      "substantive_disagreement": true,
+      "substantive_fields": [
+        "record"
+      ]
+    },
+    "context": {
+      "frozen_discourse_context": {
+        "addressee_hint": "",
+        "antecedent_hint": "王祥",
+        "self_reference_hint": "",
+        "speaker_hint": ""
+      },
+      "frozen_identity": {
+        "abstain": false,
+        "attribute_type": "",
+        "attribute_value": "",
+        "bearer_hint": "",
+        "reference_type": "personal_name",
+        "referent": {
+          "canonical_hint": "王祥",
+          "confidence": "high",
+          "surface_form": "王祥"
+        },
+        "semantic_kind": "historical_person"
+      }
+    },
+    "failure": null,
+    "final_consistency": {
+      "candidate_only": true,
+      "canonical_write_back": false,
+      "flags": [],
+      "has_diagnostic_flags": false,
+      "has_hard_flags": false,
+      "has_review_flags": false,
+      "review_trigger_score": 0,
+      "schema": "sfh2-a0r-consistency-v2",
+      "stage": "identity_final"
+    },
+    "final_state": "stable_entity_resolved",
+    "historian_independent": {
+      "candidate_only": true,
+      "canonical_write_back": false,
+      "case_id": "sfh1-mention-ff73ef4d86b3e237614ab6af",
+      "consistency": {
+        "candidate_only": true,
+        "canonical_write_back": false,
+        "flags": [
+          {
+            "challenged_fields": [],
+            "evidence_ids": [],
+            "flag_type": "evidence_grounding_failure",
+            "formal_reason": "semantic record is not an object",
+            "involved": [],
+            "severity": "hard"
+          }
+        ],
+        "has_diagnostic_flags": false,
+        "has_hard_flags": true,
+        "has_review_flags": false,
+        "review_trigger_score": 5,
+        "schema": "sfh2-a0r-consistency-v2",
+        "stage": "identity_independent"
+      },
+      "contract_status": "identity_independent_contract_invalid",
+      "effective_record": null,
+      "errors": [
+        "mention_id_mismatch"
+      ],
+      "historian": "B",
+      "mention_id": "sfh1-mention-ff73ef4d86b3e237614ab6af",
+      "provisional_realization": {
+        "candidate": null,
+        "candidate_only": true,
+        "canonical_write_back": false,
+        "case_id": "sfh1-mention-ff73ef4d86b3e237614ab6af",
+        "core_graph_eligible": false,
+        "identity_created": false,
+        "mention_id": "sfh1-mention-ff73ef4d86b3e237614ab6af",
+        "realization_basis": [
+          "no_valid_semantic_record"
+        ],
+        "story_id": "01-dexing-014",
+        "surface": "祥"
+      },
+      "record": null,
+      "selected_record": null,
+      "stage": "identity_independent",
+      "story_id": "01-dexing-014",
+      "surface": "祥",
+      "transport": {
+        "attempt": 1,
+        "classification": "parsed",
+        "elapsed_seconds": 3.475,
+        "finish_reason": "tool_calls",
+        "model": "deepseek-v4-flash",
+        "parse_error": null,
+        "prompt_version": "sfh2-a2-independent-historian-v1",
+        "provider_call": true,
+        "provider_witness_hash": "9f885468ad3b53c8809e80bb33d7d8663425b936ef0ca25c7ddf90268bfe03b3",
+        "raw_archive_path": "/tmp/sfh2-f1-raw-b30c380095772f61/sfh2-f1-live-v1/00045-identity_independent-identity_independent-sfh1-mention-ff73ef4d86b3e237614ab6af-attempt1.json",
+        "raw_archive_sha256": "7c370f31e893b649fd45dd2843e5541a275d67a77ff8a4c85cd975b33b3fc5d0",
+        "request_hash": "396201fe563eaa4e6be33606d770d49b63837a57576f4da3e7ba9d3bda8fcb6b",
+        "stage": "identity_independent",
+        "temperature": 0,
+        "thinking": {
+          "type": "disabled"
+        },
+        "unit_id": "identity_independent:sfh1-mention-ff73ef4d86b3e237614ab6af",
+        "usage": {
+          "completion_tokens": 458,
+          "prompt_tokens": 4473,
+          "total_tokens": 4931
+        },
+        "valid": true
+      },
+      "valid": false
+    },
+    "historian_primary": {
+      "candidate_only": true,
+      "canonical_write_back": false,
+      "case_id": "sfh1-mention-ff73ef4d86b3e237614ab6af",
+      "consistency": {
+        "candidate_only": true,
+        "canonical_write_back": false,
+        "flags": [],
+        "has_diagnostic_flags": false,
+        "has_hard_flags": false,
+        "has_review_flags": false,
+        "review_trigger_score": 0,
+        "schema": "sfh2-a0r-consistency-v2",
+        "stage": "identity_primary"
+      },
+      "contract_status": "valid",
+      "errors": [],
+      "mention_id": "sfh1-mention-ff73ef4d86b3e237614ab6af",
+      "provisional_realization": {
+        "candidate": {
+          "candidate_only": true,
+          "candidate_origin": "python_registry_lookup_after_llm_semantics",
+          "candidate_person_id": "",
+          "canonical_write_back": false,
+          "display_name": "王祥",
+          "entity_type": "existing_person",
+          "person_id": "person-036",
+          "proposed_display_name": "王祥",
+          "referent_canonical_hint": "王祥"
+        },
+        "candidate_only": true,
+        "canonical_write_back": false,
+        "case_id": "sfh1-mention-ff73ef4d86b3e237614ab6af",
+        "core_graph_eligible": true,
+        "identity_created": true,
+        "mention_id": "sfh1-mention-ff73ef4d86b3e237614ab6af",
+        "occurrence_role": "scene_participant",
+        "realization_basis": [
+          "llm_semantic_proposal",
+          "canonical_registry_lookup"
+        ],
+        "semantic_kind": "historical_person",
+        "story_id": "01-dexing-014",
+        "surface": "祥"
+      },
+      "record": {
+        "abstain": false,
+        "attribute_type": "",
+        "attribute_value": "",
+        "bearer_hint": "",
+        "confidence": "high",
+        "discourse": {
+          "addressee_hint": "",
+          "antecedent_hint": "王祥",
+          "self_reference_hint": "",
+          "speaker_hint": ""
+        },
+        "explanation": "The target mention 祥 in the main text refers to 王祥, the filial son whose story of serving his stepmother is told in this entry. The opening of the main text names him as 王祥, and this 祥 is the abbreviated personal-name reference continuing that referent. Liu's annotation confirms 祥 is 王祥 (琅邪臨沂人, 字休徵).",
+        "mention_id": "sfh1-mention-ff73ef4d86b3e237614ab6af",
+        "occurrence_role": "scene_participant",
+        "reference_type": "personal_name",
+        "referent": {
+          "canonical_hint": "王祥",
+          "confidence": "high",
+          "surface_form": "王祥"
+        },
+        "relations": [
+          {
+            "confidence": "high",
+            "evidence_ids": [
+              "sfh1-ev-01-dexing-014-main"
+            ],
+            "relation": "same_person",
+            "target_hint": "王祥"
+          }
+        ],
+        "semantic_kind": "historical_person",
+        "supporting_evidence_ids": [
+          "sfh1-ev-01-dexing-014-liu-annotation-001",
+          "sfh1-ev-01-dexing-014-main"
+        ],
+        "surface": "祥"
+      },
+      "stage": "identity_primary",
+      "story_id": "01-dexing-014",
+      "surface": "祥",
+      "transport": {
+        "attempt": 1,
+        "classification": "parsed",
+        "elapsed_seconds": 2.564,
+        "finish_reason": "tool_calls",
+        "model": "deepseek-v4-flash",
+        "parse_error": null,
+        "prompt_version": "sfh2-a0r-primary-historian-v1",
+        "provider_call": true,
+        "provider_witness_hash": "1d467000c43e4aeef1e02ec6cafe46c3e2817a2d0090a78fa808c7d3291d1033",
+        "raw_archive_path": "/tmp/sfh2-f1-raw-b30c380095772f61/sfh2-f1-live-v1/00044-identity_primary-identity_primary-sfh1-mention-ff73ef4d86b3e237614ab6af-attempt1.json",
+        "raw_archive_sha256": "67b3de464933e88db3b65c5b1c034a40622e90e5dfc679d049579cb06a7fd4eb",
+        "request_hash": "b7bcdd18419ae0ba6d1314281cf37e58cebcf2f6d37fb1287d6d8bf23181812b",
+        "stage": "identity_primary",
+        "temperature": 0,
+        "thinking": {
+          "type": "disabled"
+        },
+        "unit_id": "identity_primary:sfh1-mention-ff73ef4d86b3e237614ab6af",
+        "usage": {
+          "completion_tokens": 381,
+          "prompt_tokens": 4441,
+          "total_tokens": 4822
+        },
+        "valid": true
+      },
+      "valid": true
+    },
+    "identity_readiness": "identity_requires_pipeline",
+    "mention_id": "sfh1-mention-ff73ef4d86b3e237614ab6af",
+    "occurrence_id": "sfh1-mention-ff73ef4d86b3e237614ab6af",
+    "realization": {
+      "candidate": {
+        "candidate_only": true,
+        "candidate_origin": "python_registry_lookup_after_llm_semantics",
+        "candidate_person_id": "",
+        "canonical_write_back": false,
+        "display_name": "王祥",
+        "entity_type": "existing_person",
+        "person_id": "person-036",
+        "proposed_display_name": "王祥",
+        "referent_canonical_hint": "王祥"
+      },
+      "candidate_only": true,
+      "canonical_write_back": false,
+      "case_id": "sfh1-mention-ff73ef4d86b3e237614ab6af",
+      "core_graph_eligible": true,
+      "identity_created": true,
+      "mention_id": "sfh1-mention-ff73ef4d86b3e237614ab6af",
+      "occurrence_role": "scene_participant",
+      "realization_basis": [
+        "llm_semantic_proposal",
+        "canonical_registry_lookup"
+      ],
+      "semantic_kind": "historical_person",
+      "story_id": "01-dexing-014",
+      "surface": "祥"
+    },
+    "request_hashes": {
+      "adjudicator": "420b8c87b6936806d5cc75d9f522a828a50e28ca92d2ccdccfa37913a35ba3bd",
+      "independent": "396201fe563eaa4e6be33606d770d49b63837a57576f4da3e7ba9d3bda8fcb6b",
+      "primary": "b7bcdd18419ae0ba6d1314281cf37e58cebcf2f6d37fb1287d6d8bf23181812b"
+    },
+    "selected_record": {
+      "abstain": false,
+      "attribute_type": "",
+      "attribute_value": "",
+      "bearer_hint": "",
+      "confidence": "high",
+      "discourse": {
+        "addressee_hint": "",
+        "antecedent_hint": "王祥",
+        "self_reference_hint": "",
+        "speaker_hint": ""
+      },
+      "explanation": "The target mention 祥 in the main text refers to 王祥, the filial son whose story of serving his stepmother is told in this entry. The opening of the main text names him as 王祥, and this 祥 is the abbreviated personal-name reference continuing that referent. Liu's annotation confirms 祥 is 王祥 (琅邪臨沂人, 字休徵).",
+      "mention_id": "sfh1-mention-ff73ef4d86b3e237614ab6af",
+      "occurrence_role": "scene_participant",
+      "reference_type": "personal_name",
+      "referent": {
+        "canonical_hint": "王祥",
+        "confidence": "high",
+        "surface_form": "王祥"
+      },
+      "relations": [
+        {
+          "confidence": "high",
+          "evidence_ids": [
+            "sfh1-ev-01-dexing-014-main"
+          ],
+          "relation": "same_person",
+          "target_hint": "王祥"
+        }
+      ],
+      "semantic_kind": "historical_person",
+      "supporting_evidence_ids": [
+        "sfh1-ev-01-dexing-014-liu-annotation-001",
+        "sfh1-ev-01-dexing-014-main"
+      ],
+      "surface": "祥"
+    },
+    "selected_record_source": "historian_a_exact_copy",
+    "stage": "identity",
+    "status": "resolved",
+    "story_id": "01-dexing-014",
+    "surface": "祥"
+  },
+  "output_hash": "7e4d3c582b4cb267b0e51762c3708b6ac6f112132d99936b0d47440f0fda65af",
+  "provider_witness_hash": null,
+  "request_hash": "2e04149d0eee81575b6b59a86fae1704d93b372fe39d24631f4c7b8eb0648f55",
+  "runtime_metadata": {
+    "candidate_only": true,
+    "canonical_write_back": false,
+    "recorded_at": "2026-09-04T15:42:46Z"
+  },
+  "schema": "sfh2-f1-checkpoint-v1",
+  "status": "completed",
+  "unit_id": "identity:sfh1-mention-ff73ef4d86b3e237614ab6af"
+}

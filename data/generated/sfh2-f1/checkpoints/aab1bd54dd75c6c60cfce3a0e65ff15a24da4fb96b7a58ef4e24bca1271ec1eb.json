@@ -1,0 +1,434 @@
+{
+  "attempt": 0,
+  "contract_valid": true,
+  "output": {
+    "adjudication": {
+      "candidate_only": true,
+      "canonical_write_back": false,
+      "case_id": "sfh1-mention-57b7746a3be07831cfa06a32",
+      "changed_fields": [],
+      "contract_status": "valid",
+      "decision": "select_a",
+      "errors": [],
+      "mention_id": "sfh1-mention-57b7746a3be07831cfa06a32",
+      "patch_ops": [],
+      "reason_summary": "Historian B's semantic record is null and fails the identity-independent contract (record_not_object), with a hard formal flag for evidence grounding failure. Historian A provides a valid, well-grounded semantic record for the mention 王蒙 in Liu Xiaobiao's annotation (sfh1-ev-05-fangzheng-055-liu-annotation-002). The annotation text \"爲王蒙小字也\" identifies Wang Meng as the person who gave Huan Yi his childhood name. Historian A correctly classifies this as a full_name reference to the historical person Wang Meng (Eastern Jin figure), with occurrence_role person_attribute and a related_person relation to 桓伊. The annotation context supports this reading. Since B is contract-invalid and A is valid and substantively sound, select A.",
+      "reviewed_fields": [],
+      "selected_record": {
+        "abstain": false,
+        "attribute_type": "",
+        "attribute_value": "",
+        "bearer_hint": "",
+        "confidence": "high",
+        "discourse": {
+          "addressee_hint": "",
+          "antecedent_hint": "",
+          "self_reference_hint": "",
+          "speaker_hint": ""
+        },
+        "explanation": "The target mention 王蒙 appears in Liu Xiaobiao's annotation to the Shishuo Xinyu entry. The annotation text states that Huan Yi (桓伊) was known by Wang Meng (王蒙) as a young person (小字). The annotation reads: '爲王蒙小字也' — meaning that the nickname was given by Wang Meng. Wang Meng is a historical person, the famous Eastern Jin figure, referenced here in the annotation as the person who gave Huan Yi his childhood name. The mention is a full name reference to the historical person Wang Meng.",
+        "mention_id": "sfh1-mention-57b7746a3be07831cfa06a32",
+        "occurrence_role": "person_attribute",
+        "reference_type": "full_name",
+        "referent": {
+          "canonical_hint": "王蒙",
+          "confidence": "high",
+          "surface_form": "王蒙"
+        },
+        "relations": [
+          {
+            "confidence": "high",
+            "evidence_ids": [
+              "sfh1-ev-05-fangzheng-055-liu-annotation-002"
+            ],
+            "relation": "related_person",
+            "target_hint": "桓伊"
+          }
+        ],
+        "semantic_kind": "historical_person",
+        "supporting_evidence_ids": [
+          "sfh1-ev-05-fangzheng-055-liu-annotation-002"
+        ],
+        "surface": "王蒙"
+      },
+      "selected_record_source": "historian_a_exact_copy",
+      "stage": "identity_adjudicator",
+      "story_id": "05-fangzheng-055",
+      "supporting_evidence_ids": [
+        "sfh1-ev-05-fangzheng-055-liu-annotation-002"
+      ],
+      "surface": "王蒙",
+      "transport": {
+        "attempt": 1,
+        "classification": "parsed",
+        "elapsed_seconds": 2.321,
+        "finish_reason": "tool_calls",
+        "model": "deepseek-v4-flash",
+        "parse_error": null,
+        "prompt_version": "sfh2-a2r-adjudicator-v2",
+        "provider_call": true,
+        "provider_witness_hash": "bce9dc25d316c9a2efa8039e2818f1a38b38ccaef83e7abaad10b4389a3e1b2e",
+        "raw_archive_path": "/tmp/sfh2-f1-raw-b30c380095772f61/sfh2-f1-live-v1/00100-identity_adjudicator-identity_adjudicator-sfh1-mention-57b7746a3be07831cfa06a32-attempt1.json",
+        "raw_archive_sha256": "493d5653c66ce92bc6c4209c07d803cc2a0345ec8d68fe54e5464d29676ddf61",
+        "request_hash": "5402e5a1335e0f24a4869a3fede645d8fd18b583b8519eae381987ab85dfea3a",
+        "stage": "identity_adjudicator",
+        "temperature": 0,
+        "thinking": {
+          "type": "disabled"
+        },
+        "unit_id": "identity_adjudicator:sfh1-mention-57b7746a3be07831cfa06a32",
+        "usage": {
+          "completion_tokens": 284,
+          "prompt_tokens": 3921,
+          "total_tokens": 4205
+        },
+        "valid": true
+      },
+      "valid": true
+    },
+    "candidate_only": true,
+    "candidate_proposal": {
+      "candidate_only": true,
+      "candidate_origin": "python_registry_lookup_after_llm_semantics",
+      "candidate_person_id": "",
+      "canonical_write_back": false,
+      "display_name": "王濛",
+      "entity_type": "existing_person",
+      "person_id": "person-014",
+      "proposed_display_name": "王蒙",
+      "referent_canonical_hint": "王蒙"
+    },
+    "canonical_write_back": false,
+    "case_id": "sfh1-mention-57b7746a3be07831cfa06a32",
+    "comparison": {
+      "a_valid": true,
+      "agreement": false,
+      "b_valid": false,
+      "disagreement_classes": [
+        "contract_validity_disagreement"
+      ],
+      "historical_identity_disagreement": true,
+      "metadata_only_difference": false,
+      "semantic_fields": [
+        "record"
+      ],
+      "substantive_disagreement": true,
+      "substantive_fields": [
+        "record"
+      ]
+    },
+    "context": {
+      "frozen_discourse_context": {
+        "addressee_hint": "",
+        "antecedent_hint": "",
+        "self_reference_hint": "",
+        "speaker_hint": ""
+      },
+      "frozen_identity": {
+        "abstain": false,
+        "attribute_type": "",
+        "attribute_value": "",
+        "bearer_hint": "",
+        "reference_type": "full_name",
+        "referent": {
+          "canonical_hint": "王蒙",
+          "confidence": "high",
+          "surface_form": "王蒙"
+        },
+        "semantic_kind": "historical_person"
+      }
+    },
+    "failure": null,
+    "final_consistency": {
+      "candidate_only": true,
+      "canonical_write_back": false,
+      "flags": [],
+      "has_diagnostic_flags": false,
+      "has_hard_flags": false,
+      "has_review_flags": false,
+      "review_trigger_score": 0,
+      "schema": "sfh2-a0r-consistency-v2",
+      "stage": "identity_final"
+    },
+    "final_state": "stable_entity_resolved",
+    "historian_independent": {
+      "candidate_only": true,
+      "canonical_write_back": false,
+      "case_id": "sfh1-mention-57b7746a3be07831cfa06a32",
+      "consistency": {
+        "candidate_only": true,
+        "canonical_write_back": false,
+        "flags": [
+          {
+            "challenged_fields": [],
+            "evidence_ids": [],
+            "flag_type": "evidence_grounding_failure",
+            "formal_reason": "semantic record is not an object",
+            "involved": [],
+            "severity": "hard"
+          }
+        ],
+        "has_diagnostic_flags": false,
+        "has_hard_flags": true,
+        "has_review_flags": false,
+        "review_trigger_score": 5,
+        "schema": "sfh2-a0r-consistency-v2",
+        "stage": "identity_independent"
+      },
+      "contract_status": "identity_independent_contract_invalid",
+      "effective_record": null,
+      "errors": [
+        "record_not_object"
+      ],
+      "historian": "B",
+      "mention_id": "sfh1-mention-57b7746a3be07831cfa06a32",
+      "provisional_realization": {
+        "candidate": null,
+        "candidate_only": true,
+        "canonical_write_back": false,
+        "case_id": "sfh1-mention-57b7746a3be07831cfa06a32",
+        "core_graph_eligible": false,
+        "identity_created": false,
+        "mention_id": "sfh1-mention-57b7746a3be07831cfa06a32",
+        "realization_basis": [
+          "no_valid_semantic_record"
+        ],
+        "story_id": "05-fangzheng-055",
+        "surface": "王蒙"
+      },
+      "record": null,
+      "selected_record": null,
+      "stage": "identity_independent",
+      "story_id": "05-fangzheng-055",
+      "surface": "王蒙",
+      "transport": {
+        "attempt": 1,
+        "classification": "parsed",
+        "elapsed_seconds": 3.479,
+        "finish_reason": "tool_calls",
+        "model": "deepseek-v4-flash",
+        "parse_error": null,
+        "prompt_version": "sfh2-a2-independent-historian-v1",
+        "provider_call": true,
+        "provider_witness_hash": "5089928d28f6d0ac039c0e2cdeb031062d37c686e3b8c19c62d33dbbc51d1405",
+        "raw_archive_path": "/tmp/sfh2-f1-raw-b30c380095772f61/sfh2-f1-live-v1/00099-identity_independent-identity_independent-sfh1-mention-57b7746a3be07831cfa06a32-attempt1.json",
+        "raw_archive_sha256": "427713d61092b5349531307ac8f9b4e9653234ec1198e302cac79e5b2192e066",
+        "request_hash": "1f5282f5f254ab184fba6a538556fd7694b60674be52b5f6d20f6276006ba3fe",
+        "stage": "identity_independent",
+        "temperature": 0,
+        "thinking": {
+          "type": "disabled"
+        },
+        "unit_id": "identity_independent:sfh1-mention-57b7746a3be07831cfa06a32",
+        "usage": {
+          "completion_tokens": 419,
+          "prompt_tokens": 2922,
+          "total_tokens": 3341
+        },
+        "valid": true
+      },
+      "valid": false
+    },
+    "historian_primary": {
+      "candidate_only": true,
+      "canonical_write_back": false,
+      "case_id": "sfh1-mention-57b7746a3be07831cfa06a32",
+      "consistency": {
+        "candidate_only": true,
+        "canonical_write_back": false,
+        "flags": [],
+        "has_diagnostic_flags": false,
+        "has_hard_flags": false,
+        "has_review_flags": false,
+        "review_trigger_score": 0,
+        "schema": "sfh2-a0r-consistency-v2",
+        "stage": "identity_primary"
+      },
+      "contract_status": "valid",
+      "errors": [],
+      "mention_id": "sfh1-mention-57b7746a3be07831cfa06a32",
+      "provisional_realization": {
+        "candidate": {
+          "candidate_only": true,
+          "candidate_origin": "python_registry_lookup_after_llm_semantics",
+          "candidate_person_id": "",
+          "canonical_write_back": false,
+          "display_name": "王濛",
+          "entity_type": "existing_person",
+          "person_id": "person-014",
+          "proposed_display_name": "王蒙",
+          "referent_canonical_hint": "王蒙"
+        },
+        "candidate_only": true,
+        "canonical_write_back": false,
+        "case_id": "sfh1-mention-57b7746a3be07831cfa06a32",
+        "core_graph_eligible": false,
+        "identity_created": true,
+        "mention_id": "sfh1-mention-57b7746a3be07831cfa06a32",
+        "occurrence_role": "person_attribute",
+        "realization_basis": [
+          "llm_semantic_proposal",
+          "canonical_registry_lookup"
+        ],
+        "semantic_kind": "historical_person",
+        "story_id": "05-fangzheng-055",
+        "surface": "王蒙"
+      },
+      "record": {
+        "abstain": false,
+        "attribute_type": "",
+        "attribute_value": "",
+        "bearer_hint": "",
+        "confidence": "high",
+        "discourse": {
+          "addressee_hint": "",
+          "antecedent_hint": "",
+          "self_reference_hint": "",
+          "speaker_hint": ""
+        },
+        "explanation": "The target mention 王蒙 appears in Liu Xiaobiao's annotation to the Shishuo Xinyu entry. The annotation text states that Huan Yi (桓伊) was known by Wang Meng (王蒙) as a young person (小字). The annotation reads: '爲王蒙小字也' — meaning that the nickname was given by Wang Meng. Wang Meng is a historical person, the famous Eastern Jin figure, referenced here in the annotation as the person who gave Huan Yi his childhood name. The mention is a full name reference to the historical person Wang Meng.",
+        "mention_id": "sfh1-mention-57b7746a3be07831cfa06a32",
+        "occurrence_role": "person_attribute",
+        "reference_type": "full_name",
+        "referent": {
+          "canonical_hint": "王蒙",
+          "confidence": "high",
+          "surface_form": "王蒙"
+        },
+        "relations": [
+          {
+            "confidence": "high",
+            "evidence_ids": [
+              "sfh1-ev-05-fangzheng-055-liu-annotation-002"
+            ],
+            "relation": "related_person",
+            "target_hint": "桓伊"
+          }
+        ],
+        "semantic_kind": "historical_person",
+        "supporting_evidence_ids": [
+          "sfh1-ev-05-fangzheng-055-liu-annotation-002"
+        ],
+        "surface": "王蒙"
+      },
+      "stage": "identity_primary",
+      "story_id": "05-fangzheng-055",
+      "surface": "王蒙",
+      "transport": {
+        "attempt": 1,
+        "classification": "parsed",
+        "elapsed_seconds": 2.997,
+        "finish_reason": "tool_calls",
+        "model": "deepseek-v4-flash",
+        "parse_error": null,
+        "prompt_version": "sfh2-a0r-primary-historian-v1",
+        "provider_call": true,
+        "provider_witness_hash": "8fa70cb96f8c3dd4f5fa963a90ae09aa33f24ebe921e1f9f6671e9df44354b4a",
+        "raw_archive_path": "/tmp/sfh2-f1-raw-b30c380095772f61/sfh2-f1-live-v1/00098-identity_primary-identity_primary-sfh1-mention-57b7746a3be07831cfa06a32-attempt1.json",
+        "raw_archive_sha256": "c57bff32cf7677579b84fe3dbeb1fd0d65cbc4a93b16353dc1e35a81526d6b7f",
+        "request_hash": "d0027bc20ca9ae2fa974e9fa0c70cdb418b39da4d4b57ec4c4c89c99c57d9828",
+        "stage": "identity_primary",
+        "temperature": 0,
+        "thinking": {
+          "type": "disabled"
+        },
+        "unit_id": "identity_primary:sfh1-mention-57b7746a3be07831cfa06a32",
+        "usage": {
+          "completion_tokens": 406,
+          "prompt_tokens": 2890,
+          "total_tokens": 3296
+        },
+        "valid": true
+      },
+      "valid": true
+    },
+    "identity_readiness": "identity_requires_pipeline",
+    "mention_id": "sfh1-mention-57b7746a3be07831cfa06a32",
+    "occurrence_id": "sfh1-mention-57b7746a3be07831cfa06a32",
+    "realization": {
+      "candidate": {
+        "candidate_only": true,
+        "candidate_origin": "python_registry_lookup_after_llm_semantics",
+        "candidate_person_id": "",
+        "canonical_write_back": false,
+        "display_name": "王濛",
+        "entity_type": "existing_person",
+        "person_id": "person-014",
+        "proposed_display_name": "王蒙",
+        "referent_canonical_hint": "王蒙"
+      },
+      "candidate_only": true,
+      "canonical_write_back": false,
+      "case_id": "sfh1-mention-57b7746a3be07831cfa06a32",
+      "core_graph_eligible": false,
+      "identity_created": true,
+      "mention_id": "sfh1-mention-57b7746a3be07831cfa06a32",
+      "occurrence_role": "person_attribute",
+      "realization_basis": [
+        "llm_semantic_proposal",
+        "canonical_registry_lookup"
+      ],
+      "semantic_kind": "historical_person",
+      "story_id": "05-fangzheng-055",
+      "surface": "王蒙"
+    },
+    "request_hashes": {
+      "adjudicator": "5402e5a1335e0f24a4869a3fede645d8fd18b583b8519eae381987ab85dfea3a",
+      "independent": "1f5282f5f254ab184fba6a538556fd7694b60674be52b5f6d20f6276006ba3fe",
+      "primary": "d0027bc20ca9ae2fa974e9fa0c70cdb418b39da4d4b57ec4c4c89c99c57d9828"
+    },
+    "selected_record": {
+      "abstain": false,
+      "attribute_type": "",
+      "attribute_value": "",
+      "bearer_hint": "",
+      "confidence": "high",
+      "discourse": {
+        "addressee_hint": "",
+        "antecedent_hint": "",
+        "self_reference_hint": "",
+        "speaker_hint": ""
+      },
+      "explanation": "The target mention 王蒙 appears in Liu Xiaobiao's annotation to the Shishuo Xinyu entry. The annotation text states that Huan Yi (桓伊) was known by Wang Meng (王蒙) as a young person (小字). The annotation reads: '爲王蒙小字也' — meaning that the nickname was given by Wang Meng. Wang Meng is a historical person, the famous Eastern Jin figure, referenced here in the annotation as the person who gave Huan Yi his childhood name. The mention is a full name reference to the historical person Wang Meng.",
+      "mention_id": "sfh1-mention-57b7746a3be07831cfa06a32",
+      "occurrence_role": "person_attribute",
+      "reference_type": "full_name",
+      "referent": {
+        "canonical_hint": "王蒙",
+        "confidence": "high",
+        "surface_form": "王蒙"
+      },
+      "relations": [
+        {
+          "confidence": "high",
+          "evidence_ids": [
+            "sfh1-ev-05-fangzheng-055-liu-annotation-002"
+          ],
+          "relation": "related_person",
+          "target_hint": "桓伊"
+        }
+      ],
+      "semantic_kind": "historical_person",
+      "supporting_evidence_ids": [
+        "sfh1-ev-05-fangzheng-055-liu-annotation-002"
+      ],
+      "surface": "王蒙"
+    },
+    "selected_record_source": "historian_a_exact_copy",
+    "stage": "identity",
+    "status": "resolved",
+    "story_id": "05-fangzheng-055",
+    "surface": "王蒙"
+  },
+  "output_hash": "ea892bde81dbfe3dd612d664df52327817d49d15079984160746d0851cccdd3f",
+  "provider_witness_hash": null,
+  "request_hash": "c778abf306d272237c1ad10230152a45bac1b33a629a676351d035328bfd5685",
+  "runtime_metadata": {
+    "candidate_only": true,
+    "canonical_write_back": false,
+    "recorded_at": "2026-09-04T15:42:47Z"
+  },
+  "schema": "sfh2-f1-checkpoint-v1",
+  "status": "completed",
+  "unit_id": "identity:sfh1-mention-57b7746a3be07831cfa06a32"
+}

@@ -1,0 +1,472 @@
+{
+  "attempt": 0,
+  "contract_valid": true,
+  "output": {
+    "adjudication": {
+      "candidate_only": true,
+      "canonical_write_back": false,
+      "case_id": "sfh1-mention-7754db159dd2508a0e0966b1",
+      "changed_fields": [],
+      "contract_status": "valid",
+      "decision": "select_b",
+      "errors": [],
+      "mention_id": "sfh1-mention-7754db159dd2508a0e0966b1",
+      "patch_ops": [],
+      "reason_summary": "The target 卿 is the second-person pronoun in 王謂劉曰卿更長進, spoken by 王長史 (王濛) addressing 劉真長 (劉惔). Both historians agree on the core identity: referent canonical_hint 劉惔, surface_form 劉真長, occurrence_role addressee_reference, reference_type pronoun_reference, semantic_kind historical_person. The disagreement is confined to discourse hints and relations. Historian B's record is cleaner and more accurate: the addressee_hint 劉真長 correctly names the person being addressed (the surface form in the text), and the speaker_hint 王長史 matches the surface form used in the main text. Historian A's addressee_hint 劉惔 uses the canonical name rather than the surface form, and its speaker_hint 王濛 likewise diverges from the surface text. More importantly, Historian A's relations array is problematic: it asserts a 'same_person' relation between the pronoun 卿 and 劉真長, but 卿 is a pronoun referring to the addressee, not a co-referring name token requiring a same_person relation; and the 'related_person' relation to 王濛 is redundant since 王濛 is the speaker, not a separate related person. Historian B correctly leaves relations empty for a pronoun addressee reference. The validated local mention sfh1-mention-e3bfe53f18afab582943b23f (劉真長) confirms the identity. Historian B's record is the more accurate and internally consistent hypothesis.",
+      "reviewed_fields": [],
+      "selected_record": {
+        "abstain": false,
+        "attribute_type": "",
+        "attribute_value": "",
+        "bearer_hint": "",
+        "confidence": "high",
+        "discourse": {
+          "addressee_hint": "劉真長",
+          "antecedent_hint": "劉真長",
+          "self_reference_hint": "",
+          "speaker_hint": "王長史"
+        },
+        "explanation": "The target 卿 occurs in the main text at position 17-18, within the sentence 王謂劉曰卿更長進. The speaker is 王長史 (Wang Changshi, i.e., Wang Meng 王濛), who addresses 劉真長 (Liu Zhenchang, i.e., Liu Tan 劉惔). The pronoun 卿 is the second-person address directed by Wang to Liu. The preceding clause 王長史與劉真長别後相見 establishes the two participants, and 王謂劉曰 introduces Wang speaking to Liu, so 卿 refers to Liu Zhenchang (劉惔). The validated local mention sfh1-mention-e3bfe53f18afab582943b23f (劉真長) confirms this identity.",
+        "mention_id": "sfh1-mention-7754db159dd2508a0e0966b1",
+        "occurrence_role": "addressee_reference",
+        "reference_type": "pronoun_reference",
+        "referent": {
+          "canonical_hint": "劉惔",
+          "confidence": "high",
+          "surface_form": "劉真長"
+        },
+        "relations": [],
+        "semantic_kind": "historical_person",
+        "supporting_evidence_ids": [
+          "sfh1-ev-02-yanyu-066-main"
+        ],
+        "surface": "卿"
+      },
+      "selected_record_source": "historian_b_exact_copy",
+      "stage": "identity_adjudicator",
+      "story_id": "02-yanyu-066",
+      "supporting_evidence_ids": [
+        "sfh1-ev-02-yanyu-066-main"
+      ],
+      "surface": "卿",
+      "transport": {
+        "attempt": 1,
+        "classification": "parsed",
+        "elapsed_seconds": 3.346,
+        "finish_reason": "tool_calls",
+        "model": "deepseek-v4-flash",
+        "parse_error": null,
+        "prompt_version": "sfh2-a2r-adjudicator-v2",
+        "provider_call": true,
+        "provider_witness_hash": "d67c6e6b1417e09435a26bea07b3c37e57a30dac7e98871331841a680d49d258",
+        "raw_archive_path": "/tmp/sfh2-f1-raw-b30c380095772f61/sfh2-f1-live-v1/00051-identity_adjudicator-identity_adjudicator-sfh1-mention-7754db159dd2508a0e0966b1-attempt1.json",
+        "raw_archive_sha256": "7cbdac88e425b0b6f747cf0897ab2c5b8aa53d535971ae8dfd9fb10b8ed689a2",
+        "request_hash": "a7e87109a5241363d64f19f38843078c953d0e04907bb642e921d0694d4f8dd9",
+        "stage": "identity_adjudicator",
+        "temperature": 0,
+        "thinking": {
+          "type": "disabled"
+        },
+        "unit_id": "identity_adjudicator:sfh1-mention-7754db159dd2508a0e0966b1",
+        "usage": {
+          "completion_tokens": 456,
+          "prompt_tokens": 4630,
+          "total_tokens": 5086
+        },
+        "valid": true
+      },
+      "valid": true
+    },
+    "candidate_only": true,
+    "candidate_proposal": {
+      "candidate_only": true,
+      "candidate_origin": "python_registry_lookup_after_llm_semantics",
+      "candidate_person_id": "",
+      "canonical_write_back": false,
+      "display_name": "劉惔",
+      "entity_type": "existing_person",
+      "person_id": "person-009",
+      "proposed_display_name": "劉惔",
+      "referent_canonical_hint": "劉惔"
+    },
+    "canonical_write_back": false,
+    "case_id": "sfh1-mention-7754db159dd2508a0e0966b1",
+    "comparison": {
+      "a_valid": true,
+      "agreement": false,
+      "b_valid": true,
+      "disagreement_classes": [
+        "discourse_disagreement",
+        "relation_disagreement"
+      ],
+      "historical_identity_disagreement": false,
+      "metadata_only_difference": false,
+      "semantic_fields": [
+        "discourse.addressee_hint",
+        "discourse.speaker_hint",
+        "relations"
+      ],
+      "substantive_disagreement": true,
+      "substantive_fields": [
+        "discourse.addressee_hint",
+        "discourse.speaker_hint",
+        "relations"
+      ]
+    },
+    "context": {
+      "frozen_discourse_context": {
+        "addressee_hint": "劉真長",
+        "antecedent_hint": "劉真長",
+        "self_reference_hint": "",
+        "speaker_hint": "王長史"
+      },
+      "frozen_identity": {
+        "abstain": false,
+        "attribute_type": "",
+        "attribute_value": "",
+        "bearer_hint": "",
+        "reference_type": "pronoun_reference",
+        "referent": {
+          "canonical_hint": "劉惔",
+          "confidence": "high",
+          "surface_form": "劉真長"
+        },
+        "semantic_kind": "historical_person"
+      }
+    },
+    "failure": null,
+    "final_consistency": {
+      "candidate_only": true,
+      "canonical_write_back": false,
+      "flags": [],
+      "has_diagnostic_flags": false,
+      "has_hard_flags": false,
+      "has_review_flags": false,
+      "review_trigger_score": 0,
+      "schema": "sfh2-a0r-consistency-v2",
+      "stage": "identity_final"
+    },
+    "final_state": "stable_entity_resolved",
+    "historian_independent": {
+      "candidate_only": true,
+      "canonical_write_back": false,
+      "case_id": "sfh1-mention-7754db159dd2508a0e0966b1",
+      "consistency": {
+        "candidate_only": true,
+        "canonical_write_back": false,
+        "flags": [],
+        "has_diagnostic_flags": false,
+        "has_hard_flags": false,
+        "has_review_flags": false,
+        "review_trigger_score": 0,
+        "schema": "sfh2-a0r-consistency-v2",
+        "stage": "identity_independent"
+      },
+      "contract_status": "valid",
+      "errors": [],
+      "historian": "B",
+      "mention_id": "sfh1-mention-7754db159dd2508a0e0966b1",
+      "provisional_realization": {
+        "candidate": {
+          "candidate_only": true,
+          "candidate_origin": "python_registry_lookup_after_llm_semantics",
+          "candidate_person_id": "",
+          "canonical_write_back": false,
+          "display_name": "劉惔",
+          "entity_type": "existing_person",
+          "person_id": "person-009",
+          "proposed_display_name": "劉惔",
+          "referent_canonical_hint": "劉惔"
+        },
+        "candidate_only": true,
+        "canonical_write_back": false,
+        "case_id": "sfh1-mention-7754db159dd2508a0e0966b1",
+        "core_graph_eligible": true,
+        "identity_created": true,
+        "mention_id": "sfh1-mention-7754db159dd2508a0e0966b1",
+        "occurrence_role": "addressee_reference",
+        "realization_basis": [
+          "llm_semantic_proposal",
+          "canonical_registry_lookup"
+        ],
+        "semantic_kind": "historical_person",
+        "story_id": "02-yanyu-066",
+        "surface": "卿"
+      },
+      "record": {
+        "abstain": false,
+        "attribute_type": "",
+        "attribute_value": "",
+        "bearer_hint": "",
+        "confidence": "high",
+        "discourse": {
+          "addressee_hint": "劉真長",
+          "antecedent_hint": "劉真長",
+          "self_reference_hint": "",
+          "speaker_hint": "王長史"
+        },
+        "explanation": "The target 卿 occurs in the main text at position 17-18, within the sentence 王謂劉曰卿更長進. The speaker is 王長史 (Wang Changshi, i.e., Wang Meng 王濛), who addresses 劉真長 (Liu Zhenchang, i.e., Liu Tan 劉惔). The pronoun 卿 is the second-person address directed by Wang to Liu. The preceding clause 王長史與劉真長别後相見 establishes the two participants, and 王謂劉曰 introduces Wang speaking to Liu, so 卿 refers to Liu Zhenchang (劉惔). The validated local mention sfh1-mention-e3bfe53f18afab582943b23f (劉真長) confirms this identity.",
+        "mention_id": "sfh1-mention-7754db159dd2508a0e0966b1",
+        "occurrence_role": "addressee_reference",
+        "reference_type": "pronoun_reference",
+        "referent": {
+          "canonical_hint": "劉惔",
+          "confidence": "high",
+          "surface_form": "劉真長"
+        },
+        "relations": [],
+        "semantic_kind": "historical_person",
+        "supporting_evidence_ids": [
+          "sfh1-ev-02-yanyu-066-main"
+        ],
+        "surface": "卿"
+      },
+      "stage": "identity_independent",
+      "story_id": "02-yanyu-066",
+      "surface": "卿",
+      "transport": {
+        "attempt": 1,
+        "classification": "parsed",
+        "elapsed_seconds": 2.843,
+        "finish_reason": "tool_calls",
+        "model": "deepseek-v4-flash",
+        "parse_error": null,
+        "prompt_version": "sfh2-a2-independent-historian-v1",
+        "provider_call": true,
+        "provider_witness_hash": "116ebf55678e2fd448911180f773f60796907139372068f0bc3cd4c8c267ddeb",
+        "raw_archive_path": "/tmp/sfh2-f1-raw-b30c380095772f61/sfh2-f1-live-v1/00050-identity_independent-identity_independent-sfh1-mention-7754db159dd2508a0e0966b1-attempt1.json",
+        "raw_archive_sha256": "540601b2d69ae2d9ecbf9d3f35fe998b28fbaa688d40f93b1bfba90cb3f57852",
+        "request_hash": "a1e450bd295cc396db3fe68a791fdfbd6ac1948b90c8c0dd7c71d7a2687f1b13",
+        "stage": "identity_independent",
+        "temperature": 0,
+        "thinking": {
+          "type": "disabled"
+        },
+        "unit_id": "identity_independent:sfh1-mention-7754db159dd2508a0e0966b1",
+        "usage": {
+          "completion_tokens": 412,
+          "prompt_tokens": 3219,
+          "total_tokens": 3631
+        },
+        "valid": true
+      },
+      "valid": true
+    },
+    "historian_primary": {
+      "candidate_only": true,
+      "canonical_write_back": false,
+      "case_id": "sfh1-mention-7754db159dd2508a0e0966b1",
+      "consistency": {
+        "candidate_only": true,
+        "canonical_write_back": false,
+        "flags": [
+          {
+            "challenged_fields": [
+              "relations",
+              "referent.canonical_hint"
+            ],
+            "evidence_ids": [
+              "sfh1-ev-02-yanyu-066-main"
+            ],
+            "flag_type": "multi_candidate_ambiguity",
+            "formal_reason": "the record supplies more than one structured relation target",
+            "involved": [
+              "relations"
+            ],
+            "severity": "review"
+          }
+        ],
+        "has_diagnostic_flags": false,
+        "has_hard_flags": false,
+        "has_review_flags": true,
+        "review_trigger_score": 2,
+        "schema": "sfh2-a0r-consistency-v2",
+        "stage": "identity_primary"
+      },
+      "contract_status": "valid",
+      "errors": [],
+      "mention_id": "sfh1-mention-7754db159dd2508a0e0966b1",
+      "provisional_realization": {
+        "candidate": {
+          "candidate_only": true,
+          "candidate_origin": "python_registry_lookup_after_llm_semantics",
+          "candidate_person_id": "",
+          "canonical_write_back": false,
+          "display_name": "劉惔",
+          "entity_type": "existing_person",
+          "person_id": "person-009",
+          "proposed_display_name": "劉惔",
+          "referent_canonical_hint": "劉惔"
+        },
+        "candidate_only": true,
+        "canonical_write_back": false,
+        "case_id": "sfh1-mention-7754db159dd2508a0e0966b1",
+        "core_graph_eligible": true,
+        "identity_created": true,
+        "mention_id": "sfh1-mention-7754db159dd2508a0e0966b1",
+        "occurrence_role": "addressee_reference",
+        "realization_basis": [
+          "llm_semantic_proposal",
+          "canonical_registry_lookup"
+        ],
+        "semantic_kind": "historical_person",
+        "story_id": "02-yanyu-066",
+        "surface": "卿"
+      },
+      "record": {
+        "abstain": false,
+        "attribute_type": "",
+        "attribute_value": "",
+        "bearer_hint": "",
+        "confidence": "high",
+        "discourse": {
+          "addressee_hint": "劉惔",
+          "antecedent_hint": "劉真長",
+          "self_reference_hint": "",
+          "speaker_hint": "王濛"
+        },
+        "explanation": "The target 卿 in the main text is the second-person pronoun used by 王長史 (王濛) addressing 劉真長 (劉惔). In the main text, 王謂劉曰卿更長進 — Wang says to Liu 'you have made further progress.' The addressee is 劉真長, who is the person being addressed with 卿. The antecedent is 劉真長 mentioned earlier in the same sentence. The speaker is 王長史 (王濛).",
+        "mention_id": "sfh1-mention-7754db159dd2508a0e0966b1",
+        "occurrence_role": "addressee_reference",
+        "reference_type": "pronoun_reference",
+        "referent": {
+          "canonical_hint": "劉惔",
+          "confidence": "high",
+          "surface_form": "劉真長"
+        },
+        "relations": [
+          {
+            "confidence": "high",
+            "evidence_ids": [
+              "sfh1-ev-02-yanyu-066-main"
+            ],
+            "relation": "related_person",
+            "target_hint": "王濛"
+          },
+          {
+            "confidence": "high",
+            "evidence_ids": [
+              "sfh1-ev-02-yanyu-066-main"
+            ],
+            "relation": "same_person",
+            "target_hint": "劉真長"
+          }
+        ],
+        "semantic_kind": "historical_person",
+        "supporting_evidence_ids": [
+          "sfh1-ev-02-yanyu-066-main"
+        ],
+        "surface": "卿"
+      },
+      "stage": "identity_primary",
+      "story_id": "02-yanyu-066",
+      "surface": "卿",
+      "transport": {
+        "attempt": 1,
+        "classification": "parsed",
+        "elapsed_seconds": 2.868,
+        "finish_reason": "tool_calls",
+        "model": "deepseek-v4-flash",
+        "parse_error": null,
+        "prompt_version": "sfh2-a0r-primary-historian-v1",
+        "provider_call": true,
+        "provider_witness_hash": "799a3ac0d93c3c5faabeae871fae260912cae3b0b3ffa2768b02b6ba7eefb6e8",
+        "raw_archive_path": "/tmp/sfh2-f1-raw-b30c380095772f61/sfh2-f1-live-v1/00049-identity_primary-identity_primary-sfh1-mention-7754db159dd2508a0e0966b1-attempt1.json",
+        "raw_archive_sha256": "f185772f925b9a9e5a32fa35146aa8c62445b42182ff1cb70da20a4177d17779",
+        "request_hash": "f80b0168afbf5bbd38197cc9c67a0f04d6b63067ea09d06a10ca5e3d4c88c600",
+        "stage": "identity_primary",
+        "temperature": 0,
+        "thinking": {
+          "type": "disabled"
+        },
+        "unit_id": "identity_primary:sfh1-mention-7754db159dd2508a0e0966b1",
+        "usage": {
+          "completion_tokens": 443,
+          "prompt_tokens": 3187,
+          "total_tokens": 3630
+        },
+        "valid": true
+      },
+      "valid": true
+    },
+    "identity_readiness": "identity_requires_pipeline",
+    "mention_id": "sfh1-mention-7754db159dd2508a0e0966b1",
+    "occurrence_id": "sfh1-mention-7754db159dd2508a0e0966b1",
+    "realization": {
+      "candidate": {
+        "candidate_only": true,
+        "candidate_origin": "python_registry_lookup_after_llm_semantics",
+        "candidate_person_id": "",
+        "canonical_write_back": false,
+        "display_name": "劉惔",
+        "entity_type": "existing_person",
+        "person_id": "person-009",
+        "proposed_display_name": "劉惔",
+        "referent_canonical_hint": "劉惔"
+      },
+      "candidate_only": true,
+      "canonical_write_back": false,
+      "case_id": "sfh1-mention-7754db159dd2508a0e0966b1",
+      "core_graph_eligible": true,
+      "identity_created": true,
+      "mention_id": "sfh1-mention-7754db159dd2508a0e0966b1",
+      "occurrence_role": "addressee_reference",
+      "realization_basis": [
+        "llm_semantic_proposal",
+        "canonical_registry_lookup"
+      ],
+      "semantic_kind": "historical_person",
+      "story_id": "02-yanyu-066",
+      "surface": "卿"
+    },
+    "request_hashes": {
+      "adjudicator": "a7e87109a5241363d64f19f38843078c953d0e04907bb642e921d0694d4f8dd9",
+      "independent": "a1e450bd295cc396db3fe68a791fdfbd6ac1948b90c8c0dd7c71d7a2687f1b13",
+      "primary": "f80b0168afbf5bbd38197cc9c67a0f04d6b63067ea09d06a10ca5e3d4c88c600"
+    },
+    "selected_record": {
+      "abstain": false,
+      "attribute_type": "",
+      "attribute_value": "",
+      "bearer_hint": "",
+      "confidence": "high",
+      "discourse": {
+        "addressee_hint": "劉真長",
+        "antecedent_hint": "劉真長",
+        "self_reference_hint": "",
+        "speaker_hint": "王長史"
+      },
+      "explanation": "The target 卿 occurs in the main text at position 17-18, within the sentence 王謂劉曰卿更長進. The speaker is 王長史 (Wang Changshi, i.e., Wang Meng 王濛), who addresses 劉真長 (Liu Zhenchang, i.e., Liu Tan 劉惔). The pronoun 卿 is the second-person address directed by Wang to Liu. The preceding clause 王長史與劉真長别後相見 establishes the two participants, and 王謂劉曰 introduces Wang speaking to Liu, so 卿 refers to Liu Zhenchang (劉惔). The validated local mention sfh1-mention-e3bfe53f18afab582943b23f (劉真長) confirms this identity.",
+      "mention_id": "sfh1-mention-7754db159dd2508a0e0966b1",
+      "occurrence_role": "addressee_reference",
+      "reference_type": "pronoun_reference",
+      "referent": {
+        "canonical_hint": "劉惔",
+        "confidence": "high",
+        "surface_form": "劉真長"
+      },
+      "relations": [],
+      "semantic_kind": "historical_person",
+      "supporting_evidence_ids": [
+        "sfh1-ev-02-yanyu-066-main"
+      ],
+      "surface": "卿"
+    },
+    "selected_record_source": "historian_b_exact_copy",
+    "stage": "identity",
+    "status": "resolved",
+    "story_id": "02-yanyu-066",
+    "surface": "卿"
+  },
+  "output_hash": "80e393a89fdcd4933bb3a32887408b66e64abe2578501e14f4e1a4d21dd23f49",
+  "provider_witness_hash": null,
+  "request_hash": "4b8cc169ce73e8471e3bae6c8d24a5cad3173d740a6848f1ac4889906bbf824b",
+  "runtime_metadata": {
+    "candidate_only": true,
+    "canonical_write_back": false,
+    "recorded_at": "2026-09-04T15:42:46Z"
+  },
+  "schema": "sfh2-f1-checkpoint-v1",
+  "status": "completed",
+  "unit_id": "identity:sfh1-mention-7754db159dd2508a0e0966b1"
+}

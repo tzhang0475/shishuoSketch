@@ -1,0 +1,164 @@
+{
+  "attempt": 1,
+  "contract_valid": true,
+  "output": {
+    "candidate_only": true,
+    "canonical_write_back": false,
+    "case_id": "sfh1-mention-0dddf6803e50a201bbf0e0f5",
+    "consistency": {
+      "candidate_only": true,
+      "canonical_write_back": false,
+      "flags": [
+        {
+          "challenged_fields": [
+            "relations",
+            "referent.canonical_hint"
+          ],
+          "evidence_ids": [
+            "sfh1-ev-10-guizhen-012-liu-annotation-002",
+            "sfh1-ev-10-guizhen-012-main"
+          ],
+          "flag_type": "multi_candidate_ambiguity",
+          "formal_reason": "the record supplies more than one structured relation target",
+          "involved": [
+            "relations"
+          ],
+          "severity": "review"
+        }
+      ],
+      "has_diagnostic_flags": false,
+      "has_hard_flags": false,
+      "has_review_flags": true,
+      "review_trigger_score": 2,
+      "schema": "sfh2-a0r-consistency-v2",
+      "stage": "identity_independent"
+    },
+    "contract_status": "valid",
+    "errors": [],
+    "historian": "B",
+    "mention_id": "sfh1-mention-0dddf6803e50a201bbf0e0f5",
+    "provisional_realization": {
+      "candidate": {
+        "candidate_only": true,
+        "candidate_origin": "python_registry_lookup_after_llm_semantics",
+        "candidate_person_id": "",
+        "canonical_write_back": false,
+        "display_name": "王敦",
+        "entity_type": "existing_person",
+        "person_id": "person-011",
+        "proposed_display_name": "王敦",
+        "referent_canonical_hint": "王敦"
+      },
+      "candidate_only": true,
+      "canonical_write_back": false,
+      "case_id": "sfh1-mention-0dddf6803e50a201bbf0e0f5",
+      "core_graph_eligible": true,
+      "identity_created": true,
+      "mention_id": "sfh1-mention-0dddf6803e50a201bbf0e0f5",
+      "occurrence_role": "scene_participant",
+      "realization_basis": [
+        "llm_semantic_proposal",
+        "canonical_registry_lookup"
+      ],
+      "semantic_kind": "historical_person",
+      "story_id": "10-guizhen-012",
+      "surface": "大將軍"
+    },
+    "record": {
+      "abstain": false,
+      "attribute_type": "",
+      "attribute_value": "",
+      "bearer_hint": "",
+      "confidence": "high",
+      "discourse": {
+        "addressee_hint": "",
+        "antecedent_hint": "大將軍指王敦",
+        "self_reference_hint": "",
+        "speaker_hint": "敘述者"
+      },
+      "explanation": "大將軍 is an office title used in the main text to refer to 王敦 (Wang Dun), who held the title of 大將軍 (Grand General). The main text states 謝鯤爲豫章太守從大將軍下至石頭, and then 敦謂鯤曰, showing that 大將軍 and 敦 refer to the same person. The Liu annotation (sfh1-ev-10-guizhen-012-liu-annotation-002) explicitly mentions 王敦, confirming the identification. The validated local mention sfh1-mention-2eb011fab4d5db32a97cffd4 (敦) in the main text and sfh1-mention-340e3ed363acdf7042475404 (王敦) in the annotation support this.",
+      "mention_id": "sfh1-mention-0dddf6803e50a201bbf0e0f5",
+      "occurrence_role": "scene_participant",
+      "reference_type": "office_title",
+      "referent": {
+        "canonical_hint": "王敦",
+        "confidence": "high",
+        "surface_form": "王敦"
+      },
+      "relations": [
+        {
+          "confidence": "high",
+          "evidence_ids": [
+            "sfh1-ev-10-guizhen-012-liu-annotation-002",
+            "sfh1-ev-10-guizhen-012-main"
+          ],
+          "relation": "same_person",
+          "target_hint": "敦"
+        },
+        {
+          "confidence": "high",
+          "evidence_ids": [
+            "sfh1-ev-10-guizhen-012-liu-annotation-002"
+          ],
+          "relation": "same_person",
+          "target_hint": "王敦"
+        },
+        {
+          "confidence": "high",
+          "evidence_ids": [
+            "sfh1-ev-10-guizhen-012-main"
+          ],
+          "relation": "related_person",
+          "target_hint": "謝鯤"
+        }
+      ],
+      "semantic_kind": "historical_person",
+      "supporting_evidence_ids": [
+        "sfh1-ev-10-guizhen-012-liu-annotation-002",
+        "sfh1-ev-10-guizhen-012-main"
+      ],
+      "surface": "大將軍"
+    },
+    "stage": "identity_independent",
+    "story_id": "10-guizhen-012",
+    "surface": "大將軍",
+    "transport": {
+      "attempt": 1,
+      "classification": "parsed",
+      "elapsed_seconds": 3.592,
+      "finish_reason": "tool_calls",
+      "model": "deepseek-v4-flash",
+      "parse_error": null,
+      "prompt_version": "sfh2-a2-independent-historian-v1",
+      "provider_call": true,
+      "provider_witness_hash": "ac8e347b7736187e7dfdfe2a066cda25dd0a12f6228bd09de23a5ed000b286ab",
+      "raw_archive_path": "/tmp/sfh2-f1-raw-b30c380095772f61/sfh2-f1-live-v1/00094-identity_independent-identity_independent-sfh1-mention-0dddf6803e50a201bbf0e0f5-attempt1.json",
+      "raw_archive_sha256": "f3d49373644116551ca9e77d33f416ea6e866c805e4634a76e4e41c4b6bb4833",
+      "request_hash": "a3184950621a1348d53cce6dd5e58dc170d1d4fce5ad3009ee54a70c4df7cc8f",
+      "stage": "identity_independent",
+      "temperature": 0,
+      "thinking": {
+        "type": "disabled"
+      },
+      "unit_id": "identity_independent:sfh1-mention-0dddf6803e50a201bbf0e0f5",
+      "usage": {
+        "completion_tokens": 583,
+        "prompt_tokens": 3668,
+        "total_tokens": 4251
+      },
+      "valid": true
+    },
+    "valid": true
+  },
+  "output_hash": "f9ff493945189b9e061c61d501b3f1c5efde7b6c5bdaee64a63b155ad4f5a521",
+  "provider_witness_hash": "ac8e347b7736187e7dfdfe2a066cda25dd0a12f6228bd09de23a5ed000b286ab",
+  "request_hash": "a3184950621a1348d53cce6dd5e58dc170d1d4fce5ad3009ee54a70c4df7cc8f",
+  "runtime_metadata": {
+    "candidate_only": true,
+    "canonical_write_back": false,
+    "recorded_at": "2026-09-04T15:13:06Z"
+  },
+  "schema": "sfh2-f1-checkpoint-v1",
+  "status": "completed",
+  "unit_id": "identity_independent:sfh1-mention-0dddf6803e50a201bbf0e0f5"
+}

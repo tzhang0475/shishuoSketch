@@ -1,0 +1,417 @@
+{
+  "attempt": 0,
+  "contract_valid": true,
+  "output": {
+    "adjudication": {
+      "candidate_only": true,
+      "canonical_write_back": false,
+      "case_id": "sfh1-mention-2c6672ce7bffaa6f16181810",
+      "changed_fields": [],
+      "contract_status": "valid",
+      "decision": "select_b",
+      "errors": [],
+      "mention_id": "sfh1-mention-2c6672ce7bffaa6f16181810",
+      "patch_ops": [],
+      "reason_summary": "Historian A returned a provider failure with no semantic record (contract status: provider_failure), while Historian B produced a valid semantic record. The target span \"祖端\" appears in Liu annotation 002 (sfh1-ev-06-yaliang-033-liu-annotation-002), which reads \"祖端散騎常侍父鳯丞相主簿奉\" — i.e., 謝奉's grandfather (祖) was 端, who held the office of 散騎常侍. Historian B correctly identifies the surface \"祖端\" as a kinship reference combining the kinship term 祖 with the personal name 端, referring to 謝端, the grandfather of 謝奉, with a kinship relation to 謝奉. This is consistent with the validated local mentions and the annotation evidence. Historian B's record is sound and should be adopted.",
+      "reviewed_fields": [],
+      "selected_record": {
+        "abstain": false,
+        "attribute_type": "",
+        "attribute_value": "",
+        "bearer_hint": "",
+        "confidence": "high",
+        "discourse": {
+          "addressee_hint": "",
+          "antecedent_hint": "謝奉",
+          "self_reference_hint": "",
+          "speaker_hint": ""
+        },
+        "explanation": "The Liu annotation (sfh1-ev-06-yaliang-033-liu-annotation-002) states '祖端散騎常侍父鳯丞相主簿奉', meaning that 謝奉's grandfather (祖) was 端, who held the office of 散騎常侍. The surface '祖端' is a kinship reference combining the kinship term 祖 (grandfather) with the personal name 端. The referent is 謝端, the grandfather of 謝奉. The annotation provides the genealogical context for 謝奉 (whose full name and courtesy name 弘道 are given in annotation 001).",
+        "mention_id": "sfh1-mention-2c6672ce7bffaa6f16181810",
+        "occurrence_role": "genealogy_reference",
+        "reference_type": "kinship_reference",
+        "referent": {
+          "canonical_hint": "謝端",
+          "confidence": "high",
+          "surface_form": "謝端"
+        },
+        "relations": [
+          {
+            "confidence": "high",
+            "evidence_ids": [
+              "sfh1-ev-06-yaliang-033-liu-annotation-002"
+            ],
+            "relation": "kinship_relation",
+            "target_hint": "謝奉"
+          }
+        ],
+        "semantic_kind": "historical_person",
+        "supporting_evidence_ids": [
+          "sfh1-ev-06-yaliang-033-liu-annotation-002"
+        ],
+        "surface": "祖端"
+      },
+      "selected_record_source": "historian_b_exact_copy",
+      "stage": "identity_adjudicator",
+      "story_id": "06-yaliang-033",
+      "supporting_evidence_ids": [
+        "sfh1-ev-06-yaliang-033-liu-annotation-002"
+      ],
+      "surface": "祖端",
+      "transport": {
+        "attempt": 1,
+        "classification": "parsed",
+        "elapsed_seconds": 2.259,
+        "finish_reason": "tool_calls",
+        "model": "deepseek-v4-flash",
+        "parse_error": null,
+        "prompt_version": "sfh2-a2r-adjudicator-v2",
+        "provider_call": true,
+        "provider_witness_hash": "6a154ecab1d28ee12c1a1eb4775d87c8cc75ac0de04c7b72f4167fe9e41ea591",
+        "raw_archive_path": "/tmp/sfh2-f1-raw-b30c380095772f61/sfh2-f1-live-v1/00042-identity_adjudicator-identity_adjudicator-sfh1-mention-2c6672ce7bffaa6f16181810-attempt1.json",
+        "raw_archive_sha256": "f7a0e657878f8b8a7cd8b4e63be0d5c5732f9604ac9a3a8f7abe6940728d79f7",
+        "request_hash": "565c63746c7ba7a94f35381f171b34e8e02f1d1a677fac70f9684da397fa3435",
+        "stage": "identity_adjudicator",
+        "temperature": 0,
+        "thinking": {
+          "type": "disabled"
+        },
+        "unit_id": "identity_adjudicator:sfh1-mention-2c6672ce7bffaa6f16181810",
+        "usage": {
+          "completion_tokens": 299,
+          "prompt_tokens": 3696,
+          "total_tokens": 3995
+        },
+        "valid": true
+      },
+      "valid": true
+    },
+    "candidate_only": true,
+    "candidate_proposal": {
+      "candidate_only": true,
+      "candidate_origin": "llm_semantic_proposal_registry_miss",
+      "candidate_person_id": "sfh2-a0-candidate-person-5b5b9cf6628ff5a66efa",
+      "canonical_write_back": false,
+      "display_name": "謝端",
+      "entity_type": "candidate_historical_person",
+      "person_id": "",
+      "proposed_display_name": "謝端",
+      "referent_canonical_hint": "謝端",
+      "source_occurrence_ids": [
+        "sfh1-mention-2c6672ce7bffaa6f16181810"
+      ],
+      "supporting_evidence_ids": [
+        "sfh1-ev-06-yaliang-033-liu-annotation-002"
+      ]
+    },
+    "canonical_write_back": false,
+    "case_id": "sfh1-mention-2c6672ce7bffaa6f16181810",
+    "comparison": {
+      "a_valid": false,
+      "agreement": false,
+      "b_valid": true,
+      "disagreement_classes": [
+        "contract_validity_disagreement"
+      ],
+      "historical_identity_disagreement": true,
+      "metadata_only_difference": false,
+      "semantic_fields": [
+        "record"
+      ],
+      "substantive_disagreement": true,
+      "substantive_fields": [
+        "record"
+      ]
+    },
+    "context": {
+      "frozen_discourse_context": {
+        "addressee_hint": "",
+        "antecedent_hint": "謝奉",
+        "self_reference_hint": "",
+        "speaker_hint": ""
+      },
+      "frozen_identity": {
+        "abstain": false,
+        "attribute_type": "",
+        "attribute_value": "",
+        "bearer_hint": "",
+        "reference_type": "kinship_reference",
+        "referent": {
+          "canonical_hint": "謝端",
+          "confidence": "high",
+          "surface_form": "謝端"
+        },
+        "semantic_kind": "historical_person"
+      }
+    },
+    "failure": null,
+    "final_consistency": {
+      "candidate_only": true,
+      "canonical_write_back": false,
+      "flags": [],
+      "has_diagnostic_flags": false,
+      "has_hard_flags": false,
+      "has_review_flags": false,
+      "review_trigger_score": 0,
+      "schema": "sfh2-a0r-consistency-v2",
+      "stage": "identity_final"
+    },
+    "final_state": "local_candidate_resolved",
+    "historian_independent": {
+      "candidate_only": true,
+      "canonical_write_back": false,
+      "case_id": "sfh1-mention-2c6672ce7bffaa6f16181810",
+      "consistency": {
+        "candidate_only": true,
+        "canonical_write_back": false,
+        "flags": [],
+        "has_diagnostic_flags": false,
+        "has_hard_flags": false,
+        "has_review_flags": false,
+        "review_trigger_score": 0,
+        "schema": "sfh2-a0r-consistency-v2",
+        "stage": "identity_independent"
+      },
+      "contract_status": "valid",
+      "errors": [],
+      "historian": "B",
+      "mention_id": "sfh1-mention-2c6672ce7bffaa6f16181810",
+      "provisional_realization": {
+        "candidate": {
+          "candidate_only": true,
+          "candidate_origin": "llm_semantic_proposal_registry_miss",
+          "candidate_person_id": "sfh2-a0-candidate-person-5b5b9cf6628ff5a66efa",
+          "canonical_write_back": false,
+          "display_name": "謝端",
+          "entity_type": "candidate_historical_person",
+          "person_id": "",
+          "proposed_display_name": "謝端",
+          "referent_canonical_hint": "謝端",
+          "source_occurrence_ids": [
+            "sfh1-mention-2c6672ce7bffaa6f16181810"
+          ],
+          "supporting_evidence_ids": [
+            "sfh1-ev-06-yaliang-033-liu-annotation-002"
+          ]
+        },
+        "candidate_only": true,
+        "canonical_write_back": false,
+        "case_id": "sfh1-mention-2c6672ce7bffaa6f16181810",
+        "core_graph_eligible": false,
+        "identity_created": true,
+        "mention_id": "sfh1-mention-2c6672ce7bffaa6f16181810",
+        "occurrence_role": "genealogy_reference",
+        "realization_basis": [
+          "llm_semantic_proposal",
+          "candidate_registry_miss"
+        ],
+        "semantic_kind": "historical_person",
+        "story_id": "06-yaliang-033",
+        "surface": "祖端"
+      },
+      "record": {
+        "abstain": false,
+        "attribute_type": "",
+        "attribute_value": "",
+        "bearer_hint": "",
+        "confidence": "high",
+        "discourse": {
+          "addressee_hint": "",
+          "antecedent_hint": "謝奉",
+          "self_reference_hint": "",
+          "speaker_hint": ""
+        },
+        "explanation": "The Liu annotation (sfh1-ev-06-yaliang-033-liu-annotation-002) states '祖端散騎常侍父鳯丞相主簿奉', meaning that 謝奉's grandfather (祖) was 端, who held the office of 散騎常侍. The surface '祖端' is a kinship reference combining the kinship term 祖 (grandfather) with the personal name 端. The referent is 謝端, the grandfather of 謝奉. The annotation provides the genealogical context for 謝奉 (whose full name and courtesy name 弘道 are given in annotation 001).",
+        "mention_id": "sfh1-mention-2c6672ce7bffaa6f16181810",
+        "occurrence_role": "genealogy_reference",
+        "reference_type": "kinship_reference",
+        "referent": {
+          "canonical_hint": "謝端",
+          "confidence": "high",
+          "surface_form": "謝端"
+        },
+        "relations": [
+          {
+            "confidence": "high",
+            "evidence_ids": [
+              "sfh1-ev-06-yaliang-033-liu-annotation-002"
+            ],
+            "relation": "kinship_relation",
+            "target_hint": "謝奉"
+          }
+        ],
+        "semantic_kind": "historical_person",
+        "supporting_evidence_ids": [
+          "sfh1-ev-06-yaliang-033-liu-annotation-002"
+        ],
+        "surface": "祖端"
+      },
+      "stage": "identity_independent",
+      "story_id": "06-yaliang-033",
+      "surface": "祖端",
+      "transport": {
+        "attempt": 1,
+        "classification": "parsed",
+        "elapsed_seconds": 2.634,
+        "finish_reason": "tool_calls",
+        "model": "deepseek-v4-flash",
+        "parse_error": null,
+        "prompt_version": "sfh2-a2-independent-historian-v1",
+        "provider_call": true,
+        "provider_witness_hash": "8ab5119a449a415aed880002371489f5365b8a06c6bdd60b569214b86f37b33a",
+        "raw_archive_path": "/tmp/sfh2-f1-raw-b30c380095772f61/sfh2-f1-live-v1/00041-identity_independent-identity_independent-sfh1-mention-2c6672ce7bffaa6f16181810-attempt1.json",
+        "raw_archive_sha256": "52fbc318120a180aa9198a4ffc22ea3641024db87dbbba21a79a63e28b4d98c1",
+        "request_hash": "db10ad8ee222b9c3e5244f6f367089f4c70877abd16d7b1be2a8df4b11dd08f1",
+        "stage": "identity_independent",
+        "temperature": 0,
+        "thinking": {
+          "type": "disabled"
+        },
+        "unit_id": "identity_independent:sfh1-mention-2c6672ce7bffaa6f16181810",
+        "usage": {
+          "completion_tokens": 425,
+          "prompt_tokens": 2724,
+          "total_tokens": 3149
+        },
+        "valid": true
+      },
+      "valid": true
+    },
+    "historian_primary": {
+      "candidate_only": true,
+      "canonical_write_back": false,
+      "case_id": "sfh1-mention-2c6672ce7bffaa6f16181810",
+      "contract_status": "provider_failure",
+      "errors": [
+        "provider_failure_or_unavailable"
+      ],
+      "mention_id": "sfh1-mention-2c6672ce7bffaa6f16181810",
+      "occurrence_id": "sfh1-mention-2c6672ce7bffaa6f16181810",
+      "record": null,
+      "stage": "identity_primary",
+      "story_id": "06-yaliang-033",
+      "surface": "祖端",
+      "transport": {
+        "attempt": 1,
+        "classification": "response_parse_failure",
+        "elapsed_seconds": 2.873,
+        "finish_reason": "tool_calls",
+        "model": "deepseek-v4-flash",
+        "parse_error": "function_arguments_invalid_json",
+        "prompt_version": "sfh2-a0r-primary-historian-v1",
+        "provider_call": true,
+        "provider_witness_hash": "3ea67d8ad5ec9e9a12c7ca9e63b0234437525e1cff9658c3e87bc2fe0002ab5d",
+        "raw_archive_path": "/tmp/sfh2-f1-raw-b30c380095772f61/sfh2-f1-live-v1/00040-identity_primary-identity_primary-sfh1-mention-2c6672ce7bffaa6f16181810-attempt1.json",
+        "raw_archive_sha256": "f543c31ea39de4c2a55deaf3b66e61f9391158474d31eff7a922c3cf03f33ab0",
+        "request_hash": "29ee9ad9d045e8ad529180ae653f8b559a33abc72ec44c7eb92c366ed793a0d5",
+        "stage": "identity_primary",
+        "temperature": 0,
+        "thinking": {
+          "type": "disabled"
+        },
+        "unit_id": "identity_primary:sfh1-mention-2c6672ce7bffaa6f16181810",
+        "usage": {
+          "completion_tokens": 416,
+          "prompt_tokens": 2692,
+          "total_tokens": 3108
+        },
+        "valid": false
+      },
+      "valid": false
+    },
+    "identity_readiness": "identity_requires_pipeline",
+    "mention_id": "sfh1-mention-2c6672ce7bffaa6f16181810",
+    "occurrence_id": "sfh1-mention-2c6672ce7bffaa6f16181810",
+    "realization": {
+      "candidate": {
+        "candidate_only": true,
+        "candidate_origin": "llm_semantic_proposal_registry_miss",
+        "candidate_person_id": "sfh2-a0-candidate-person-5b5b9cf6628ff5a66efa",
+        "canonical_write_back": false,
+        "display_name": "謝端",
+        "entity_type": "candidate_historical_person",
+        "person_id": "",
+        "proposed_display_name": "謝端",
+        "referent_canonical_hint": "謝端",
+        "source_occurrence_ids": [
+          "sfh1-mention-2c6672ce7bffaa6f16181810"
+        ],
+        "supporting_evidence_ids": [
+          "sfh1-ev-06-yaliang-033-liu-annotation-002"
+        ]
+      },
+      "candidate_only": true,
+      "canonical_write_back": false,
+      "case_id": "sfh1-mention-2c6672ce7bffaa6f16181810",
+      "core_graph_eligible": false,
+      "identity_created": true,
+      "mention_id": "sfh1-mention-2c6672ce7bffaa6f16181810",
+      "occurrence_role": "genealogy_reference",
+      "realization_basis": [
+        "llm_semantic_proposal",
+        "candidate_registry_miss"
+      ],
+      "semantic_kind": "historical_person",
+      "story_id": "06-yaliang-033",
+      "surface": "祖端"
+    },
+    "request_hashes": {
+      "adjudicator": "565c63746c7ba7a94f35381f171b34e8e02f1d1a677fac70f9684da397fa3435",
+      "independent": "db10ad8ee222b9c3e5244f6f367089f4c70877abd16d7b1be2a8df4b11dd08f1",
+      "primary": "29ee9ad9d045e8ad529180ae653f8b559a33abc72ec44c7eb92c366ed793a0d5"
+    },
+    "selected_record": {
+      "abstain": false,
+      "attribute_type": "",
+      "attribute_value": "",
+      "bearer_hint": "",
+      "confidence": "high",
+      "discourse": {
+        "addressee_hint": "",
+        "antecedent_hint": "謝奉",
+        "self_reference_hint": "",
+        "speaker_hint": ""
+      },
+      "explanation": "The Liu annotation (sfh1-ev-06-yaliang-033-liu-annotation-002) states '祖端散騎常侍父鳯丞相主簿奉', meaning that 謝奉's grandfather (祖) was 端, who held the office of 散騎常侍. The surface '祖端' is a kinship reference combining the kinship term 祖 (grandfather) with the personal name 端. The referent is 謝端, the grandfather of 謝奉. The annotation provides the genealogical context for 謝奉 (whose full name and courtesy name 弘道 are given in annotation 001).",
+      "mention_id": "sfh1-mention-2c6672ce7bffaa6f16181810",
+      "occurrence_role": "genealogy_reference",
+      "reference_type": "kinship_reference",
+      "referent": {
+        "canonical_hint": "謝端",
+        "confidence": "high",
+        "surface_form": "謝端"
+      },
+      "relations": [
+        {
+          "confidence": "high",
+          "evidence_ids": [
+            "sfh1-ev-06-yaliang-033-liu-annotation-002"
+          ],
+          "relation": "kinship_relation",
+          "target_hint": "謝奉"
+        }
+      ],
+      "semantic_kind": "historical_person",
+      "supporting_evidence_ids": [
+        "sfh1-ev-06-yaliang-033-liu-annotation-002"
+      ],
+      "surface": "祖端"
+    },
+    "selected_record_source": "historian_b_exact_copy",
+    "stage": "identity",
+    "status": "resolved",
+    "story_id": "06-yaliang-033",
+    "surface": "祖端"
+  },
+  "output_hash": "a40413d276c7544817b65a379852cbe2fe8044fa9556cf804fad8b4f501ce670",
+  "provider_witness_hash": null,
+  "request_hash": "64c7f676b82d909bd64accc1e78f83f4729acf4aebcd2e73e3ea78afb9e04ccb",
+  "runtime_metadata": {
+    "candidate_only": true,
+    "canonical_write_back": false,
+    "recorded_at": "2026-09-04T15:42:46Z"
+  },
+  "schema": "sfh2-f1-checkpoint-v1",
+  "status": "completed",
+  "unit_id": "identity:sfh1-mention-2c6672ce7bffaa6f16181810"
+}

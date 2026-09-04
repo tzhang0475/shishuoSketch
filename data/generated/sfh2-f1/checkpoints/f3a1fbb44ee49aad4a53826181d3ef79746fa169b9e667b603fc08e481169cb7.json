@@ -1,0 +1,434 @@
+{
+  "attempt": 0,
+  "contract_valid": true,
+  "output": {
+    "adjudication": {
+      "candidate_only": true,
+      "canonical_write_back": false,
+      "case_id": "sfh1-mention-e07789c3e12569ce9624526e",
+      "changed_fields": [],
+      "contract_status": "valid",
+      "decision": "select_b",
+      "errors": [],
+      "mention_id": "sfh1-mention-e07789c3e12569ce9624526e",
+      "patch_ops": [],
+      "reason_summary": "The only substantive disagreement is occurrence_role. The target mention 王敦 occurs in the Liu Xiaobiao annotation (sfh1-ev-36-chouxi-003-liu-annotation-001), not in the main text. Historian A labels it \"scene_participant,\" but the mention is located within the annotation layer quoting 晉陽秋, where Wang Dun is being discussed as a historical figure in the annotation's narrative. Historian B correctly labels it \"annotation_person,\" which is the appropriate occurrence_role for a person referenced within a Liu Xiaobiao annotation. Both agree on the historical identity (Wang Dun, 王敦), reference_type (full_name), and semantic_kind (historical_person). Historian B's occurrence_role is the correct one given the source evidence layer is liu_annotation.",
+      "reviewed_fields": [],
+      "selected_record": {
+        "abstain": false,
+        "attribute_type": "",
+        "attribute_value": "",
+        "bearer_hint": "",
+        "confidence": "high",
+        "discourse": {
+          "addressee_hint": "",
+          "antecedent_hint": "",
+          "self_reference_hint": "",
+          "speaker_hint": ""
+        },
+        "explanation": "The target occurrence 王敦 appears in Liu Xiaobiao's annotation (sfh1-ev-36-chouxi-003-liu-annotation-001), within the phrase '也為中宗相州刺史路過武昌王敦'. This is a reference to Wang Dun (王敦), the famous Eastern Jin general and rebel who killed Sima Cheng (司馬丞), Prince of Qiao. The main text of the entry (sfh1-ev-36-chouxi-003-main) also mentions 王敦 at the same narrative point, where the mother of Wuji states '王敦昔肆酷汝父' (Wang Dun once cruelly killed your father). The annotation context confirms this is the historical figure Wang Dun, the general who rebelled against the Jin court and had Sima Cheng killed. The referent is the historical person Wang Dun (王敦), courtesy name Chuzhong (處仲), the generalissimo (大將軍) of the Jin dynasty.",
+        "mention_id": "sfh1-mention-e07789c3e12569ce9624526e",
+        "occurrence_role": "annotation_person",
+        "reference_type": "full_name",
+        "referent": {
+          "canonical_hint": "王敦",
+          "confidence": "high",
+          "surface_form": "王敦"
+        },
+        "relations": [],
+        "semantic_kind": "historical_person",
+        "supporting_evidence_ids": [
+          "sfh1-ev-36-chouxi-003-liu-annotation-001"
+        ],
+        "surface": "王敦"
+      },
+      "selected_record_source": "historian_b_exact_copy",
+      "stage": "identity_adjudicator",
+      "story_id": "36-chouxi-003",
+      "supporting_evidence_ids": [
+        "sfh1-ev-36-chouxi-003-liu-annotation-001"
+      ],
+      "surface": "王敦",
+      "transport": {
+        "attempt": 1,
+        "classification": "parsed",
+        "elapsed_seconds": 2.425,
+        "finish_reason": "tool_calls",
+        "model": "deepseek-v4-flash",
+        "parse_error": null,
+        "prompt_version": "sfh2-a2r-adjudicator-v2",
+        "provider_call": true,
+        "provider_witness_hash": "b69dbd0b4dfe1be0464e870def94494687999a5db42f34b1c17db950adb12d86",
+        "raw_archive_path": "/tmp/sfh2-f1-raw-b30c380095772f61/sfh2-f1-live-v1/00079-identity_adjudicator-identity_adjudicator-sfh1-mention-e07789c3e12569ce9624526e-attempt1.json",
+        "raw_archive_sha256": "3ca1af59c5a8646db8a5acab56038a577b3f6ae4797cfdf8c8bc63a2d40baa43",
+        "request_hash": "9938e3408426a8932e54a6ca4d18705e711ff3316908c7b16e0bcaa52803e779",
+        "stage": "identity_adjudicator",
+        "temperature": 0,
+        "thinking": {
+          "type": "disabled"
+        },
+        "unit_id": "identity_adjudicator:sfh1-mention-e07789c3e12569ce9624526e",
+        "usage": {
+          "completion_tokens": 288,
+          "prompt_tokens": 6795,
+          "total_tokens": 7083
+        },
+        "valid": true
+      },
+      "valid": true
+    },
+    "candidate_only": true,
+    "candidate_proposal": {
+      "candidate_only": true,
+      "candidate_origin": "python_registry_lookup_after_llm_semantics",
+      "candidate_person_id": "",
+      "canonical_write_back": false,
+      "display_name": "王敦",
+      "entity_type": "existing_person",
+      "person_id": "person-011",
+      "proposed_display_name": "王敦",
+      "referent_canonical_hint": "王敦"
+    },
+    "canonical_write_back": false,
+    "case_id": "sfh1-mention-e07789c3e12569ce9624526e",
+    "comparison": {
+      "a_valid": true,
+      "agreement": false,
+      "b_valid": true,
+      "disagreement_classes": [
+        "occurrence_role_disagreement"
+      ],
+      "historical_identity_disagreement": false,
+      "metadata_only_difference": false,
+      "semantic_fields": [
+        "occurrence_role"
+      ],
+      "substantive_disagreement": true,
+      "substantive_fields": [
+        "occurrence_role"
+      ]
+    },
+    "context": {
+      "frozen_discourse_context": {
+        "addressee_hint": "",
+        "antecedent_hint": "",
+        "self_reference_hint": "",
+        "speaker_hint": ""
+      },
+      "frozen_identity": {
+        "abstain": false,
+        "attribute_type": "",
+        "attribute_value": "",
+        "bearer_hint": "",
+        "reference_type": "full_name",
+        "referent": {
+          "canonical_hint": "王敦",
+          "confidence": "high",
+          "surface_form": "王敦"
+        },
+        "semantic_kind": "historical_person"
+      }
+    },
+    "failure": null,
+    "final_consistency": {
+      "candidate_only": true,
+      "canonical_write_back": false,
+      "flags": [],
+      "has_diagnostic_flags": false,
+      "has_hard_flags": false,
+      "has_review_flags": false,
+      "review_trigger_score": 0,
+      "schema": "sfh2-a0r-consistency-v2",
+      "stage": "identity_final"
+    },
+    "final_state": "stable_entity_resolved",
+    "historian_independent": {
+      "candidate_only": true,
+      "canonical_write_back": false,
+      "case_id": "sfh1-mention-e07789c3e12569ce9624526e",
+      "consistency": {
+        "candidate_only": true,
+        "canonical_write_back": false,
+        "flags": [],
+        "has_diagnostic_flags": false,
+        "has_hard_flags": false,
+        "has_review_flags": false,
+        "review_trigger_score": 0,
+        "schema": "sfh2-a0r-consistency-v2",
+        "stage": "identity_independent"
+      },
+      "contract_status": "valid",
+      "errors": [],
+      "historian": "B",
+      "mention_id": "sfh1-mention-e07789c3e12569ce9624526e",
+      "provisional_realization": {
+        "candidate": {
+          "candidate_only": true,
+          "candidate_origin": "python_registry_lookup_after_llm_semantics",
+          "candidate_person_id": "",
+          "canonical_write_back": false,
+          "display_name": "王敦",
+          "entity_type": "existing_person",
+          "person_id": "person-011",
+          "proposed_display_name": "王敦",
+          "referent_canonical_hint": "王敦"
+        },
+        "candidate_only": true,
+        "canonical_write_back": false,
+        "case_id": "sfh1-mention-e07789c3e12569ce9624526e",
+        "core_graph_eligible": false,
+        "identity_created": true,
+        "mention_id": "sfh1-mention-e07789c3e12569ce9624526e",
+        "occurrence_role": "annotation_person",
+        "realization_basis": [
+          "llm_semantic_proposal",
+          "canonical_registry_lookup"
+        ],
+        "semantic_kind": "historical_person",
+        "story_id": "36-chouxi-003",
+        "surface": "王敦"
+      },
+      "record": {
+        "abstain": false,
+        "attribute_type": "",
+        "attribute_value": "",
+        "bearer_hint": "",
+        "confidence": "high",
+        "discourse": {
+          "addressee_hint": "",
+          "antecedent_hint": "",
+          "self_reference_hint": "",
+          "speaker_hint": ""
+        },
+        "explanation": "The target occurrence 王敦 appears in Liu Xiaobiao's annotation (sfh1-ev-36-chouxi-003-liu-annotation-001), within the phrase '也為中宗相州刺史路過武昌王敦'. This is a reference to Wang Dun (王敦), the famous Eastern Jin general and rebel who killed Sima Cheng (司馬丞), Prince of Qiao. The main text of the entry (sfh1-ev-36-chouxi-003-main) also mentions 王敦 at the same narrative point, where the mother of Wuji states '王敦昔肆酷汝父' (Wang Dun once cruelly killed your father). The annotation context confirms this is the historical figure Wang Dun, the general who rebelled against the Jin court and had Sima Cheng killed. The referent is the historical person Wang Dun (王敦), courtesy name Chuzhong (處仲), the generalissimo (大將軍) of the Jin dynasty.",
+        "mention_id": "sfh1-mention-e07789c3e12569ce9624526e",
+        "occurrence_role": "annotation_person",
+        "reference_type": "full_name",
+        "referent": {
+          "canonical_hint": "王敦",
+          "confidence": "high",
+          "surface_form": "王敦"
+        },
+        "relations": [],
+        "semantic_kind": "historical_person",
+        "supporting_evidence_ids": [
+          "sfh1-ev-36-chouxi-003-liu-annotation-001"
+        ],
+        "surface": "王敦"
+      },
+      "stage": "identity_independent",
+      "story_id": "36-chouxi-003",
+      "surface": "王敦",
+      "transport": {
+        "attempt": 1,
+        "classification": "parsed",
+        "elapsed_seconds": 3.613,
+        "finish_reason": "tool_calls",
+        "model": "deepseek-v4-flash",
+        "parse_error": null,
+        "prompt_version": "sfh2-a2-independent-historian-v1",
+        "provider_call": true,
+        "provider_witness_hash": "9266a3946d315604e28037464d6c7e913f95326fc2611ce4d40175921fa8c1f0",
+        "raw_archive_path": "/tmp/sfh2-f1-raw-b30c380095772f61/sfh2-f1-live-v1/00078-identity_independent-identity_independent-sfh1-mention-e07789c3e12569ce9624526e-attempt1.json",
+        "raw_archive_sha256": "007aeead215a081faa3b8fd6ba9eda45393a8ef8e3e3c374aa40fac19e363eea",
+        "request_hash": "5893cb1a5345c79317278b59cd04e9cfe949ed3fc0b3ec3aa49ec7221baeb97b",
+        "stage": "identity_independent",
+        "temperature": 0,
+        "thinking": {
+          "type": "disabled"
+        },
+        "unit_id": "identity_independent:sfh1-mention-e07789c3e12569ce9624526e",
+        "usage": {
+          "completion_tokens": 435,
+          "prompt_tokens": 5569,
+          "total_tokens": 6004
+        },
+        "valid": true
+      },
+      "valid": true
+    },
+    "historian_primary": {
+      "candidate_only": true,
+      "canonical_write_back": false,
+      "case_id": "sfh1-mention-e07789c3e12569ce9624526e",
+      "consistency": {
+        "candidate_only": true,
+        "canonical_write_back": false,
+        "flags": [],
+        "has_diagnostic_flags": false,
+        "has_hard_flags": false,
+        "has_review_flags": false,
+        "review_trigger_score": 0,
+        "schema": "sfh2-a0r-consistency-v2",
+        "stage": "identity_primary"
+      },
+      "contract_status": "valid",
+      "errors": [],
+      "mention_id": "sfh1-mention-e07789c3e12569ce9624526e",
+      "provisional_realization": {
+        "candidate": {
+          "candidate_only": true,
+          "candidate_origin": "python_registry_lookup_after_llm_semantics",
+          "candidate_person_id": "",
+          "canonical_write_back": false,
+          "display_name": "王敦",
+          "entity_type": "existing_person",
+          "person_id": "person-011",
+          "proposed_display_name": "王敦",
+          "referent_canonical_hint": "王敦"
+        },
+        "candidate_only": true,
+        "canonical_write_back": false,
+        "case_id": "sfh1-mention-e07789c3e12569ce9624526e",
+        "core_graph_eligible": true,
+        "identity_created": true,
+        "mention_id": "sfh1-mention-e07789c3e12569ce9624526e",
+        "occurrence_role": "scene_participant",
+        "realization_basis": [
+          "llm_semantic_proposal",
+          "canonical_registry_lookup"
+        ],
+        "semantic_kind": "historical_person",
+        "story_id": "36-chouxi-003",
+        "surface": "王敦"
+      },
+      "record": {
+        "abstain": false,
+        "attribute_type": "",
+        "attribute_value": "",
+        "bearer_hint": "",
+        "confidence": "high",
+        "discourse": {
+          "addressee_hint": "",
+          "antecedent_hint": "",
+          "self_reference_hint": "",
+          "speaker_hint": ""
+        },
+        "explanation": "王敦 appears in the Liu Xiaobiao annotation quoting 晉陽秋, identifying the historical figure Wang Dun (王敦), the Jin dynasty general who killed Sima Cheng (司馬丞). The annotation context (中宗相州刺史路過武昌王敦) refers to Wang Dun by his full name. This is a straightforward full-name reference to the historical person Wang Dun.",
+        "mention_id": "sfh1-mention-e07789c3e12569ce9624526e",
+        "occurrence_role": "scene_participant",
+        "reference_type": "full_name",
+        "referent": {
+          "canonical_hint": "王敦",
+          "confidence": "high",
+          "surface_form": "王敦"
+        },
+        "relations": [],
+        "semantic_kind": "historical_person",
+        "supporting_evidence_ids": [
+          "sfh1-ev-36-chouxi-003-liu-annotation-001"
+        ],
+        "surface": "王敦"
+      },
+      "stage": "identity_primary",
+      "story_id": "36-chouxi-003",
+      "surface": "王敦",
+      "transport": {
+        "attempt": 1,
+        "classification": "parsed",
+        "elapsed_seconds": 2.65,
+        "finish_reason": "tool_calls",
+        "model": "deepseek-v4-flash",
+        "parse_error": null,
+        "prompt_version": "sfh2-a0r-primary-historian-v1",
+        "provider_call": true,
+        "provider_witness_hash": "8bb071c7c1603c3346736981aa3658cb40362003bb5a2337ba4160bbeab21327",
+        "raw_archive_path": "/tmp/sfh2-f1-raw-b30c380095772f61/sfh2-f1-live-v1/00077-identity_primary-identity_primary-sfh1-mention-e07789c3e12569ce9624526e-attempt1.json",
+        "raw_archive_sha256": "76180ec5c8ecb7fcf96afdd509ec0e4e8af7e47ad3bbe89f94910c54bcdc281f",
+        "request_hash": "db2f1be469db039e599bb13c12cdbcdf46723fa092725b45d034b02c7821f274",
+        "stage": "identity_primary",
+        "temperature": 0,
+        "thinking": {
+          "type": "disabled"
+        },
+        "unit_id": "identity_primary:sfh1-mention-e07789c3e12569ce9624526e",
+        "usage": {
+          "completion_tokens": 314,
+          "prompt_tokens": 5537,
+          "total_tokens": 5851
+        },
+        "valid": true
+      },
+      "valid": true
+    },
+    "identity_readiness": "identity_requires_pipeline",
+    "mention_id": "sfh1-mention-e07789c3e12569ce9624526e",
+    "occurrence_id": "sfh1-mention-e07789c3e12569ce9624526e",
+    "realization": {
+      "candidate": {
+        "candidate_only": true,
+        "candidate_origin": "python_registry_lookup_after_llm_semantics",
+        "candidate_person_id": "",
+        "canonical_write_back": false,
+        "display_name": "王敦",
+        "entity_type": "existing_person",
+        "person_id": "person-011",
+        "proposed_display_name": "王敦",
+        "referent_canonical_hint": "王敦"
+      },
+      "candidate_only": true,
+      "canonical_write_back": false,
+      "case_id": "sfh1-mention-e07789c3e12569ce9624526e",
+      "core_graph_eligible": false,
+      "identity_created": true,
+      "mention_id": "sfh1-mention-e07789c3e12569ce9624526e",
+      "occurrence_role": "annotation_person",
+      "realization_basis": [
+        "llm_semantic_proposal",
+        "canonical_registry_lookup"
+      ],
+      "semantic_kind": "historical_person",
+      "story_id": "36-chouxi-003",
+      "surface": "王敦"
+    },
+    "request_hashes": {
+      "adjudicator": "9938e3408426a8932e54a6ca4d18705e711ff3316908c7b16e0bcaa52803e779",
+      "independent": "5893cb1a5345c79317278b59cd04e9cfe949ed3fc0b3ec3aa49ec7221baeb97b",
+      "primary": "db2f1be469db039e599bb13c12cdbcdf46723fa092725b45d034b02c7821f274"
+    },
+    "selected_record": {
+      "abstain": false,
+      "attribute_type": "",
+      "attribute_value": "",
+      "bearer_hint": "",
+      "confidence": "high",
+      "discourse": {
+        "addressee_hint": "",
+        "antecedent_hint": "",
+        "self_reference_hint": "",
+        "speaker_hint": ""
+      },
+      "explanation": "The target occurrence 王敦 appears in Liu Xiaobiao's annotation (sfh1-ev-36-chouxi-003-liu-annotation-001), within the phrase '也為中宗相州刺史路過武昌王敦'. This is a reference to Wang Dun (王敦), the famous Eastern Jin general and rebel who killed Sima Cheng (司馬丞), Prince of Qiao. The main text of the entry (sfh1-ev-36-chouxi-003-main) also mentions 王敦 at the same narrative point, where the mother of Wuji states '王敦昔肆酷汝父' (Wang Dun once cruelly killed your father). The annotation context confirms this is the historical figure Wang Dun, the general who rebelled against the Jin court and had Sima Cheng killed. The referent is the historical person Wang Dun (王敦), courtesy name Chuzhong (處仲), the generalissimo (大將軍) of the Jin dynasty.",
+      "mention_id": "sfh1-mention-e07789c3e12569ce9624526e",
+      "occurrence_role": "annotation_person",
+      "reference_type": "full_name",
+      "referent": {
+        "canonical_hint": "王敦",
+        "confidence": "high",
+        "surface_form": "王敦"
+      },
+      "relations": [],
+      "semantic_kind": "historical_person",
+      "supporting_evidence_ids": [
+        "sfh1-ev-36-chouxi-003-liu-annotation-001"
+      ],
+      "surface": "王敦"
+    },
+    "selected_record_source": "historian_b_exact_copy",
+    "stage": "identity",
+    "status": "resolved",
+    "story_id": "36-chouxi-003",
+    "surface": "王敦"
+  },
+  "output_hash": "36c38794a92b319515f0ad8e7c34040ee8a6106edce3ab074640ba0872587f28",
+  "provider_witness_hash": null,
+  "request_hash": "8eb0eafebc39b623538afd4207784332c84cae696bcf175dc01343c5fbea5493",
+  "runtime_metadata": {
+    "candidate_only": true,
+    "canonical_write_back": false,
+    "recorded_at": "2026-09-04T15:42:47Z"
+  },
+  "schema": "sfh2-f1-checkpoint-v1",
+  "status": "completed",
+  "unit_id": "identity:sfh1-mention-e07789c3e12569ce9624526e"
+}

@@ -1,0 +1,165 @@
+{
+  "attempt": 1,
+  "contract_valid": true,
+  "output": {
+    "candidate_only": true,
+    "canonical_write_back": false,
+    "case_id": "sfh1-mention-63d90ef457a6a2419f9b1588",
+    "consistency": {
+      "candidate_only": true,
+      "canonical_write_back": false,
+      "flags": [
+        {
+          "challenged_fields": [
+            "relations",
+            "referent.canonical_hint"
+          ],
+          "evidence_ids": [
+            "sfh1-ev-07-shijian-019-liu-annotation-001",
+            "sfh1-ev-07-shijian-019-liu-annotation-002",
+            "sfh1-ev-07-shijian-019-liu-annotation-003"
+          ],
+          "flag_type": "multi_candidate_ambiguity",
+          "formal_reason": "the record supplies more than one structured relation target",
+          "involved": [
+            "relations"
+          ],
+          "severity": "review"
+        }
+      ],
+      "has_diagnostic_flags": false,
+      "has_hard_flags": false,
+      "has_review_flags": true,
+      "review_trigger_score": 2,
+      "schema": "sfh2-a0r-consistency-v2",
+      "stage": "identity_primary"
+    },
+    "contract_status": "valid",
+    "errors": [],
+    "mention_id": "sfh1-mention-63d90ef457a6a2419f9b1588",
+    "provisional_realization": {
+      "candidate": {
+        "candidate_only": true,
+        "candidate_origin": "llm_semantic_proposal_registry_miss",
+        "candidate_person_id": "sfh2-a0-candidate-person-be86131bfd97b9f0f535",
+        "canonical_write_back": false,
+        "display_name": "庾爰之",
+        "entity_type": "candidate_historical_person",
+        "person_id": "",
+        "proposed_display_name": "庾爰之",
+        "referent_canonical_hint": "庾爰之",
+        "source_occurrence_ids": [
+          "sfh1-mention-63d90ef457a6a2419f9b1588"
+        ],
+        "supporting_evidence_ids": [
+          "sfh1-ev-07-shijian-019-liu-annotation-001",
+          "sfh1-ev-07-shijian-019-liu-annotation-002",
+          "sfh1-ev-07-shijian-019-liu-annotation-003"
+        ]
+      },
+      "candidate_only": true,
+      "canonical_write_back": false,
+      "case_id": "sfh1-mention-63d90ef457a6a2419f9b1588",
+      "core_graph_eligible": false,
+      "identity_created": true,
+      "mention_id": "sfh1-mention-63d90ef457a6a2419f9b1588",
+      "occurrence_role": "genealogy_reference",
+      "realization_basis": [
+        "llm_semantic_proposal",
+        "candidate_registry_miss"
+      ],
+      "semantic_kind": "historical_person",
+      "story_id": "07-shijian-019",
+      "surface": "爰"
+    },
+    "record": {
+      "abstain": false,
+      "attribute_type": "",
+      "attribute_value": "",
+      "bearer_hint": "",
+      "confidence": "high",
+      "discourse": {
+        "addressee_hint": "",
+        "antecedent_hint": "爰之",
+        "self_reference_hint": "",
+        "speaker_hint": ""
+      },
+      "explanation": "The target '爰' appears in Liu Xiaobiao's annotation quoting the 陶侃別傳: '庾翼薨表其子爰之代爲荆州'. The character 爰 is a truncated form of 爰之 (庾爰之), the son of 庾翼. The annotation in ev-001 identifies 園客 as 爰之's 小字 (childhood name), and ev-002 confirms 爰之 is 翼's son. The target is a personal name abbreviation referring to 庾爰之.",
+      "mention_id": "sfh1-mention-63d90ef457a6a2419f9b1588",
+      "occurrence_role": "genealogy_reference",
+      "reference_type": "personal_name",
+      "referent": {
+        "canonical_hint": "庾爰之",
+        "confidence": "high",
+        "surface_form": "爰之"
+      },
+      "relations": [
+        {
+          "confidence": "high",
+          "evidence_ids": [
+            "sfh1-ev-07-shijian-019-liu-annotation-002",
+            "sfh1-ev-07-shijian-019-liu-annotation-003"
+          ],
+          "relation": "kinship_relation",
+          "target_hint": "庾翼"
+        },
+        {
+          "confidence": "high",
+          "evidence_ids": [
+            "sfh1-ev-07-shijian-019-liu-annotation-001"
+          ],
+          "relation": "same_person",
+          "target_hint": "園客"
+        }
+      ],
+      "semantic_kind": "historical_person",
+      "supporting_evidence_ids": [
+        "sfh1-ev-07-shijian-019-liu-annotation-001",
+        "sfh1-ev-07-shijian-019-liu-annotation-002",
+        "sfh1-ev-07-shijian-019-liu-annotation-003"
+      ],
+      "surface": "爰"
+    },
+    "stage": "identity_primary",
+    "story_id": "07-shijian-019",
+    "surface": "爰",
+    "transport": {
+      "attempt": 1,
+      "classification": "parsed",
+      "elapsed_seconds": 3.605,
+      "finish_reason": "tool_calls",
+      "model": "deepseek-v4-flash",
+      "parse_error": null,
+      "prompt_version": "sfh2-a0r-primary-historian-v1",
+      "provider_call": true,
+      "provider_witness_hash": "3ba7e82dbd7a663da64e90800b82377cd6495cb53ca8de320c3f2123617be46c",
+      "raw_archive_path": "/tmp/sfh2-f1-raw-b30c380095772f61/sfh2-f1-live-v1/00062-identity_primary-identity_primary-sfh1-mention-63d90ef457a6a2419f9b1588-attempt1.json",
+      "raw_archive_sha256": "107be411f0a883e4ffd1009b10a85933a35c19d383f9f0486b911b744e3e8e7c",
+      "request_hash": "48d4cc396d7d9faa6b2ba84952428989ab93c02a59ea66e3f53dda3ac9d4cd51",
+      "stage": "identity_primary",
+      "temperature": 0,
+      "thinking": {
+        "type": "disabled"
+      },
+      "unit_id": "identity_primary:sfh1-mention-63d90ef457a6a2419f9b1588",
+      "usage": {
+        "completion_tokens": 523,
+        "prompt_tokens": 4218,
+        "total_tokens": 4741
+      },
+      "valid": true
+    },
+    "valid": true
+  },
+  "output_hash": "2dbe217eb055960cc841c4f8273a57a378988d426ed8eb6146d082d662af0f42",
+  "provider_witness_hash": "3ba7e82dbd7a663da64e90800b82377cd6495cb53ca8de320c3f2123617be46c",
+  "request_hash": "48d4cc396d7d9faa6b2ba84952428989ab93c02a59ea66e3f53dda3ac9d4cd51",
+  "runtime_metadata": {
+    "candidate_only": true,
+    "canonical_write_back": false,
+    "recorded_at": "2026-09-04T15:11:25Z"
+  },
+  "schema": "sfh2-f1-checkpoint-v1",
+  "status": "completed",
+  "unit_id": "identity_primary:sfh1-mention-63d90ef457a6a2419f9b1588"
+}

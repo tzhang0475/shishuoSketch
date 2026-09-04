@@ -1,0 +1,149 @@
+{
+  "attempt": 1,
+  "contract_valid": true,
+  "output": {
+    "effective": {
+      "changed_fields": [],
+      "errors": [],
+      "record": {
+        "abstain": false,
+        "attribute_type": "",
+        "attribute_value": "",
+        "bearer_hint": "",
+        "confidence": "high",
+        "discourse": {
+          "addressee_hint": "",
+          "antecedent_hint": "王敦",
+          "self_reference_hint": "",
+          "speaker_hint": ""
+        },
+        "explanation": "The target span 大將軍 in the main text refers to Wang Dun (王敦), who held the title of Grand General (大將軍). The main text states 謝鯤爲豫章太守從大將軍下至石頭, and then 敦謂鯤曰, confirming that 大將軍 refers to 敦 (Wang Dun). The Liu annotation (sfh1-ev-10-guizhen-012-liu-annotation-002) also mentions 王敦, confirming the identification. The office title 大將軍 is used as a reference to Wang Dun himself.",
+        "mention_id": "sfh1-mention-0dddf6803e50a201bbf0e0f5",
+        "occurrence_role": "scene_participant",
+        "reference_type": "office_title",
+        "referent": {
+          "canonical_hint": "王敦",
+          "confidence": "high",
+          "surface_form": "王敦"
+        },
+        "relations": [
+          {
+            "confidence": "high",
+            "evidence_ids": [
+              "sfh1-ev-10-guizhen-012-liu-annotation-002",
+              "sfh1-ev-10-guizhen-012-main"
+            ],
+            "relation": "same_person",
+            "target_hint": "王敦"
+          }
+        ],
+        "semantic_kind": "historical_person",
+        "supporting_evidence_ids": [
+          "sfh1-ev-10-guizhen-012-liu-annotation-002",
+          "sfh1-ev-10-guizhen-012-main"
+        ],
+        "surface": "大將軍"
+      },
+      "source": "historian_a_exact_copy",
+      "valid": true
+    },
+    "row": {
+      "candidate_only": true,
+      "canonical_write_back": false,
+      "case_id": "sfh1-mention-0dddf6803e50a201bbf0e0f5",
+      "changed_fields": [],
+      "contract_status": "valid",
+      "decision": "select_a",
+      "errors": [],
+      "mention_id": "sfh1-mention-0dddf6803e50a201bbf0e0f5",
+      "patch_ops": [],
+      "reason_summary": "Both Historian A and B agree on the core historical identity: 大將軍 refers to 王敦 (Wang Dun), who held the title of Grand General. The main text confirms this: 謝鯤爲豫章太守從大將軍下至石頭, followed by 敦謂鯤曰, showing 大將軍 and 敦 are the same person. The Liu annotation (sfh1-ev-10-guizhen-012-liu-annotation-002) explicitly mentions 王敦. Historian B's additional relations are problematic: it adds a \"related_person\" relation to 謝鯤 (who is the subject accompanying 大將軍, not a relation target of the office-title reference itself), and it splits the same_person relation into two targets (敦 and 王敦) which are the same person, creating redundant/duplicate relation entries. Historian A's single same_person relation to 王敦 is cleaner and historically accurate. The discourse fields in A (antecedent_hint 王敦, no speaker_hint) are appropriate for an office-title reference in narrative text; B's speaker_hint 敘述者 is unnecessary metadata. Historian A's record is the more precise and defensible hypothesis.",
+      "reviewed_fields": [],
+      "selected_record": {
+        "abstain": false,
+        "attribute_type": "",
+        "attribute_value": "",
+        "bearer_hint": "",
+        "confidence": "high",
+        "discourse": {
+          "addressee_hint": "",
+          "antecedent_hint": "王敦",
+          "self_reference_hint": "",
+          "speaker_hint": ""
+        },
+        "explanation": "The target span 大將軍 in the main text refers to Wang Dun (王敦), who held the title of Grand General (大將軍). The main text states 謝鯤爲豫章太守從大將軍下至石頭, and then 敦謂鯤曰, confirming that 大將軍 refers to 敦 (Wang Dun). The Liu annotation (sfh1-ev-10-guizhen-012-liu-annotation-002) also mentions 王敦, confirming the identification. The office title 大將軍 is used as a reference to Wang Dun himself.",
+        "mention_id": "sfh1-mention-0dddf6803e50a201bbf0e0f5",
+        "occurrence_role": "scene_participant",
+        "reference_type": "office_title",
+        "referent": {
+          "canonical_hint": "王敦",
+          "confidence": "high",
+          "surface_form": "王敦"
+        },
+        "relations": [
+          {
+            "confidence": "high",
+            "evidence_ids": [
+              "sfh1-ev-10-guizhen-012-liu-annotation-002",
+              "sfh1-ev-10-guizhen-012-main"
+            ],
+            "relation": "same_person",
+            "target_hint": "王敦"
+          }
+        ],
+        "semantic_kind": "historical_person",
+        "supporting_evidence_ids": [
+          "sfh1-ev-10-guizhen-012-liu-annotation-002",
+          "sfh1-ev-10-guizhen-012-main"
+        ],
+        "surface": "大將軍"
+      },
+      "selected_record_source": "historian_a_exact_copy",
+      "stage": "identity_adjudicator",
+      "story_id": "10-guizhen-012",
+      "supporting_evidence_ids": [
+        "sfh1-ev-10-guizhen-012-liu-annotation-002",
+        "sfh1-ev-10-guizhen-012-main"
+      ],
+      "surface": "大將軍",
+      "transport": {
+        "attempt": 1,
+        "classification": "parsed",
+        "elapsed_seconds": 2.976,
+        "finish_reason": "tool_calls",
+        "model": "deepseek-v4-flash",
+        "parse_error": null,
+        "prompt_version": "sfh2-a2r-adjudicator-v2",
+        "provider_call": true,
+        "provider_witness_hash": "b92335a1beb564ca149f78b4be176c9c2f444bde584a8179daf80ebedb7d143a",
+        "raw_archive_path": "/tmp/sfh2-f1-raw-b30c380095772f61/sfh2-f1-live-v1/00095-identity_adjudicator-identity_adjudicator-sfh1-mention-0dddf6803e50a201bbf0e0f5-attempt1.json",
+        "raw_archive_sha256": "7719893bef4664d16dbd140009f2b75a226f70acdc9454a09388ddeb4351372d",
+        "request_hash": "51635b3d4c0c5e2d0b3e3e462f3a0f1e6bde4b2c96e5b02960df7bee4f0e58c2",
+        "stage": "identity_adjudicator",
+        "temperature": 0,
+        "thinking": {
+          "type": "disabled"
+        },
+        "unit_id": "identity_adjudicator:sfh1-mention-0dddf6803e50a201bbf0e0f5",
+        "usage": {
+          "completion_tokens": 389,
+          "prompt_tokens": 5251,
+          "total_tokens": 5640
+        },
+        "valid": true
+      },
+      "valid": true
+    }
+  },
+  "output_hash": "392efdec2a70c7a8e95b6afde4cf6a7ade0951fde285304848f654061151aba4",
+  "provider_witness_hash": "b92335a1beb564ca149f78b4be176c9c2f444bde584a8179daf80ebedb7d143a",
+  "request_hash": "51635b3d4c0c5e2d0b3e3e462f3a0f1e6bde4b2c96e5b02960df7bee4f0e58c2",
+  "runtime_metadata": {
+    "candidate_only": true,
+    "canonical_write_back": false,
+    "recorded_at": "2026-09-04T15:13:08Z"
+  },
+  "schema": "sfh2-f1-checkpoint-v1",
+  "status": "completed",
+  "unit_id": "identity_adjudicator:sfh1-mention-0dddf6803e50a201bbf0e0f5"
+}

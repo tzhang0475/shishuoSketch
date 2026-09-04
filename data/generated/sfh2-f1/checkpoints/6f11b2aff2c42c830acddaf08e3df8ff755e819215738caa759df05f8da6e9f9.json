@@ -1,0 +1,165 @@
+{
+  "attempt": 1,
+  "contract_valid": true,
+  "output": {
+    "candidate_only": true,
+    "canonical_write_back": false,
+    "case_id": "sfh1-mention-c7948b25743a9dba7d00497e",
+    "consistency": {
+      "candidate_only": true,
+      "canonical_write_back": false,
+      "flags": [
+        {
+          "challenged_fields": [
+            "relations",
+            "referent.canonical_hint"
+          ],
+          "evidence_ids": [
+            "sfh1-ev-05-fangzheng-007-liu-annotation-002",
+            "sfh1-ev-05-fangzheng-007-liu-annotation-004",
+            "sfh1-ev-05-fangzheng-007-liu-annotation-005"
+          ],
+          "flag_type": "multi_candidate_ambiguity",
+          "formal_reason": "the record supplies more than one structured relation target",
+          "involved": [
+            "relations"
+          ],
+          "severity": "review"
+        }
+      ],
+      "has_diagnostic_flags": false,
+      "has_hard_flags": false,
+      "has_review_flags": true,
+      "review_trigger_score": 2,
+      "schema": "sfh2-a0r-consistency-v2",
+      "stage": "identity_primary"
+    },
+    "contract_status": "valid",
+    "errors": [],
+    "mention_id": "sfh1-mention-c7948b25743a9dba7d00497e",
+    "provisional_realization": {
+      "candidate": {
+        "candidate_only": true,
+        "candidate_origin": "llm_semantic_proposal_registry_miss",
+        "candidate_person_id": "sfh2-a0-candidate-person-f2f890987c4c9595d2db",
+        "canonical_write_back": false,
+        "display_name": "陳騫",
+        "entity_type": "candidate_historical_person",
+        "person_id": "",
+        "proposed_display_name": "陳騫",
+        "referent_canonical_hint": "陳騫",
+        "source_occurrence_ids": [
+          "sfh1-mention-c7948b25743a9dba7d00497e"
+        ],
+        "supporting_evidence_ids": [
+          "sfh1-ev-05-fangzheng-007-liu-annotation-002",
+          "sfh1-ev-05-fangzheng-007-liu-annotation-004",
+          "sfh1-ev-05-fangzheng-007-liu-annotation-005"
+        ]
+      },
+      "candidate_only": true,
+      "canonical_write_back": false,
+      "case_id": "sfh1-mention-c7948b25743a9dba7d00497e",
+      "core_graph_eligible": false,
+      "identity_created": true,
+      "mention_id": "sfh1-mention-c7948b25743a9dba7d00497e",
+      "occurrence_role": "genealogy_reference",
+      "realization_basis": [
+        "llm_semantic_proposal",
+        "candidate_registry_miss"
+      ],
+      "semantic_kind": "historical_person",
+      "story_id": "05-fangzheng-007",
+      "surface": "司徒第二子"
+    },
+    "record": {
+      "abstain": false,
+      "attribute_type": "",
+      "attribute_value": "",
+      "bearer_hint": "",
+      "confidence": "high",
+      "discourse": {
+        "addressee_hint": "",
+        "antecedent_hint": "司徒",
+        "self_reference_hint": "",
+        "speaker_hint": "劉孝標注"
+      },
+      "explanation": "The annotation text '休淵司徒第二子無謇諤風' identifies 休淵 (courtesy name of 騫) as the 司徒's second son. The 司徒 here is 陳矯 (father of 陳本 and 陳騫), as established in annotation 002 where 矯 is identified as 司徒 and father of 本. The main text confirms 騫 is 本's younger brother (本弟騫). Annotation 004-005 identifies 騫 with courtesy name 休淵, and annotation 005 states he is the 司徒's second son. Thus '司徒第二子' refers to 陳騫.",
+      "mention_id": "sfh1-mention-c7948b25743a9dba7d00497e",
+      "occurrence_role": "genealogy_reference",
+      "reference_type": "kinship_reference",
+      "referent": {
+        "canonical_hint": "陳騫",
+        "confidence": "high",
+        "surface_form": "騫"
+      },
+      "relations": [
+        {
+          "confidence": "high",
+          "evidence_ids": [
+            "sfh1-ev-05-fangzheng-007-liu-annotation-002",
+            "sfh1-ev-05-fangzheng-007-liu-annotation-005"
+          ],
+          "relation": "kinship_relation",
+          "target_hint": "陳矯"
+        },
+        {
+          "confidence": "high",
+          "evidence_ids": [
+            "sfh1-ev-05-fangzheng-007-liu-annotation-005"
+          ],
+          "relation": "same_person",
+          "target_hint": "休淵"
+        }
+      ],
+      "semantic_kind": "historical_person",
+      "supporting_evidence_ids": [
+        "sfh1-ev-05-fangzheng-007-liu-annotation-002",
+        "sfh1-ev-05-fangzheng-007-liu-annotation-004",
+        "sfh1-ev-05-fangzheng-007-liu-annotation-005"
+      ],
+      "surface": "司徒第二子"
+    },
+    "stage": "identity_primary",
+    "story_id": "05-fangzheng-007",
+    "surface": "司徒第二子",
+    "transport": {
+      "attempt": 1,
+      "classification": "parsed",
+      "elapsed_seconds": 3.676,
+      "finish_reason": "tool_calls",
+      "model": "deepseek-v4-flash",
+      "parse_error": null,
+      "prompt_version": "sfh2-a0r-primary-historian-v1",
+      "provider_call": true,
+      "provider_witness_hash": "a3a565a97341dabfd5fbcb894ce74bb6703bcb04bff2b967c30d726c87b42655",
+      "raw_archive_path": "/tmp/sfh2-f1-raw-b30c380095772f61/sfh2-f1-live-v1/00103-identity_primary-identity_primary-sfh1-mention-c7948b25743a9dba7d00497e-attempt1.json",
+      "raw_archive_sha256": "c6b3dcfddc57ebacfa15b9fbea57b12813f30e4e6801a3d8dbed37d2c07f2553",
+      "request_hash": "bf4106ef786eab3cb8210fb5c3b1564d283e8afd1ab4d67ca3d74edb086ed2d1",
+      "stage": "identity_primary",
+      "temperature": 0,
+      "thinking": {
+        "type": "disabled"
+      },
+      "unit_id": "identity_primary:sfh1-mention-c7948b25743a9dba7d00497e",
+      "usage": {
+        "completion_tokens": 551,
+        "prompt_tokens": 3750,
+        "total_tokens": 4301
+      },
+      "valid": true
+    },
+    "valid": true
+  },
+  "output_hash": "e94c21ebcfc9172b7ac42cd8082f8f537fb6172f86de2089eb9199ace96aac53",
+  "provider_witness_hash": "a3a565a97341dabfd5fbcb894ce74bb6703bcb04bff2b967c30d726c87b42655",
+  "request_hash": "bf4106ef786eab3cb8210fb5c3b1564d283e8afd1ab4d67ca3d74edb086ed2d1",
+  "runtime_metadata": {
+    "candidate_only": true,
+    "canonical_write_back": false,
+    "recorded_at": "2026-09-04T15:13:31Z"
+  },
+  "schema": "sfh2-f1-checkpoint-v1",
+  "status": "completed",
+  "unit_id": "identity_primary:sfh1-mention-c7948b25743a9dba7d00497e"
+}

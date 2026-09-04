@@ -1,0 +1,532 @@
+{
+  "attempt": 0,
+  "contract_valid": true,
+  "output": {
+    "adjudication": {
+      "candidate_only": true,
+      "canonical_write_back": false,
+      "case_id": "sfh1-mention-fb979fe0b42ef4d06939f630",
+      "changed_fields": [],
+      "contract_status": "valid",
+      "decision": "select_a",
+      "errors": [],
+      "mention_id": "sfh1-mention-fb979fe0b42ef4d06939f630",
+      "patch_ops": [],
+      "reason_summary": "Historian B's semantic record is null (contract invalid, \"record_not_object\"), so it cannot be selected or revised. Historian A provides a valid, well-grounded record. The target span \"季方\" appears in Liu Xiaobiao's annotation (sfh1-ev-01-dexing-008-liu-annotation-004) quoting the main text's phrase \"弟季方難為兄\". 季方 is the courtesy name of 陳諶, the younger brother of 陳元方 (陳紀), both sons of 陳寔 (太丘). The annotation at sfh1-ev-01-dexing-008-liu-annotation-003 cites the 陳氏譜 identifying 諶 in the genealogy context. Historian A's identification of 季方 as courtesy-name reference to 陳諶, with kinship relations to 陳元方 and 陳寔, is historically sound and grounded in the supplied evidence. The multi_candidate_ambiguity flag on relations is a review-level note, not a substantive error, since both kinship relations are well supported by the genealogy context.",
+      "reviewed_fields": [],
+      "selected_record": {
+        "abstain": false,
+        "attribute_type": "",
+        "attribute_value": "",
+        "bearer_hint": "",
+        "confidence": "high",
+        "discourse": {
+          "addressee_hint": "",
+          "antecedent_hint": "陳元方",
+          "self_reference_hint": "",
+          "speaker_hint": ""
+        },
+        "explanation": "The target '季方' appears in Liu Xiaobiao's annotation (sfh1-ev-01-dexing-008-liu-annotation-004), which quotes the main text's phrase '弟季方難為兄'. In the main text (sfh1-ev-01-dexing-008-main), 季方 is the courtesy name of 陳諶, the younger brother of 陳元方 (陳紀), both sons of 陳寔 (太丘). The Liu annotation at sfh1-ev-01-dexing-008-liu-annotation-003 cites the 陳氏譜 identifying 諶 as the person whose courtesy name is 季方 (via the genealogy context). This is a courtesy-name reference to the historical person 陳諶.",
+        "mention_id": "sfh1-mention-fb979fe0b42ef4d06939f630",
+        "occurrence_role": "scene_reference",
+        "reference_type": "courtesy_name",
+        "referent": {
+          "canonical_hint": "陳諶",
+          "confidence": "high",
+          "surface_form": "陳諶"
+        },
+        "relations": [
+          {
+            "confidence": "high",
+            "evidence_ids": [
+              "sfh1-ev-01-dexing-008-liu-annotation-004",
+              "sfh1-ev-01-dexing-008-main"
+            ],
+            "relation": "kinship_relation",
+            "target_hint": "陳元方"
+          },
+          {
+            "confidence": "high",
+            "evidence_ids": [
+              "sfh1-ev-01-dexing-008-liu-annotation-003",
+              "sfh1-ev-01-dexing-008-main"
+            ],
+            "relation": "kinship_relation",
+            "target_hint": "陳寔"
+          }
+        ],
+        "semantic_kind": "historical_person",
+        "supporting_evidence_ids": [
+          "sfh1-ev-01-dexing-008-liu-annotation-003",
+          "sfh1-ev-01-dexing-008-liu-annotation-004",
+          "sfh1-ev-01-dexing-008-main"
+        ],
+        "surface": "季方"
+      },
+      "selected_record_source": "historian_a_exact_copy",
+      "stage": "identity_adjudicator",
+      "story_id": "01-dexing-008",
+      "supporting_evidence_ids": [
+        "sfh1-ev-01-dexing-008-liu-annotation-003",
+        "sfh1-ev-01-dexing-008-liu-annotation-004",
+        "sfh1-ev-01-dexing-008-main"
+      ],
+      "surface": "季方",
+      "transport": {
+        "attempt": 1,
+        "classification": "parsed",
+        "elapsed_seconds": 3.007,
+        "finish_reason": "tool_calls",
+        "model": "deepseek-v4-flash",
+        "parse_error": null,
+        "prompt_version": "sfh2-a2r-adjudicator-v2",
+        "provider_call": true,
+        "provider_witness_hash": "f5337eabfa6ea9ea90921cb9a6a4e1e3f18acc30f1ec6588d5aa834cd3b6a977",
+        "raw_archive_path": "/tmp/sfh2-f1-raw-b30c380095772f61/sfh2-f1-live-v1/00006-identity_adjudicator-identity_adjudicator-sfh1-mention-fb979fe0b42ef4d06939f630-attempt1.json",
+        "raw_archive_sha256": "5534e3d31ba7a79baafb2f7099a7a7f3ebbe9606bb63541492d10274fc0d70e3",
+        "request_hash": "a0834d6d73ddccede22416a6c6c1e033545dfe59c89cd5f5c89c4263471e7068",
+        "stage": "identity_adjudicator",
+        "temperature": 0,
+        "thinking": {
+          "type": "disabled"
+        },
+        "unit_id": "identity_adjudicator:sfh1-mention-fb979fe0b42ef4d06939f630",
+        "usage": {
+          "completion_tokens": 384,
+          "prompt_tokens": 4549,
+          "total_tokens": 4933
+        },
+        "valid": true
+      },
+      "valid": true
+    },
+    "candidate_only": true,
+    "candidate_proposal": {
+      "candidate_only": true,
+      "candidate_origin": "llm_semantic_proposal_registry_miss",
+      "candidate_person_id": "sfh2-a0-candidate-person-587ede0dd5b24a81412f",
+      "canonical_write_back": false,
+      "display_name": "陳諶",
+      "entity_type": "candidate_historical_person",
+      "person_id": "",
+      "proposed_display_name": "陳諶",
+      "referent_canonical_hint": "陳諶",
+      "source_occurrence_ids": [
+        "sfh1-mention-fb979fe0b42ef4d06939f630"
+      ],
+      "supporting_evidence_ids": [
+        "sfh1-ev-01-dexing-008-liu-annotation-003",
+        "sfh1-ev-01-dexing-008-liu-annotation-004",
+        "sfh1-ev-01-dexing-008-main"
+      ]
+    },
+    "canonical_write_back": false,
+    "case_id": "sfh1-mention-fb979fe0b42ef4d06939f630",
+    "comparison": {
+      "a_valid": true,
+      "agreement": false,
+      "b_valid": false,
+      "disagreement_classes": [
+        "contract_validity_disagreement"
+      ],
+      "historical_identity_disagreement": true,
+      "metadata_only_difference": false,
+      "semantic_fields": [
+        "record"
+      ],
+      "substantive_disagreement": true,
+      "substantive_fields": [
+        "record"
+      ]
+    },
+    "context": {
+      "frozen_discourse_context": {
+        "addressee_hint": "",
+        "antecedent_hint": "陳元方",
+        "self_reference_hint": "",
+        "speaker_hint": ""
+      },
+      "frozen_identity": {
+        "abstain": false,
+        "attribute_type": "",
+        "attribute_value": "",
+        "bearer_hint": "",
+        "reference_type": "courtesy_name",
+        "referent": {
+          "canonical_hint": "陳諶",
+          "confidence": "high",
+          "surface_form": "陳諶"
+        },
+        "semantic_kind": "historical_person"
+      }
+    },
+    "failure": null,
+    "final_consistency": {
+      "candidate_only": true,
+      "canonical_write_back": false,
+      "flags": [
+        {
+          "challenged_fields": [
+            "relations",
+            "referent.canonical_hint"
+          ],
+          "evidence_ids": [
+            "sfh1-ev-01-dexing-008-liu-annotation-003",
+            "sfh1-ev-01-dexing-008-liu-annotation-004",
+            "sfh1-ev-01-dexing-008-main"
+          ],
+          "flag_type": "multi_candidate_ambiguity",
+          "formal_reason": "the record supplies more than one structured relation target",
+          "involved": [
+            "relations"
+          ],
+          "severity": "review"
+        }
+      ],
+      "has_diagnostic_flags": false,
+      "has_hard_flags": false,
+      "has_review_flags": true,
+      "review_trigger_score": 2,
+      "schema": "sfh2-a0r-consistency-v2",
+      "stage": "identity_final"
+    },
+    "final_state": "local_candidate_resolved",
+    "historian_independent": {
+      "candidate_only": true,
+      "canonical_write_back": false,
+      "case_id": "sfh1-mention-fb979fe0b42ef4d06939f630",
+      "consistency": {
+        "candidate_only": true,
+        "canonical_write_back": false,
+        "flags": [
+          {
+            "challenged_fields": [],
+            "evidence_ids": [],
+            "flag_type": "evidence_grounding_failure",
+            "formal_reason": "semantic record is not an object",
+            "involved": [],
+            "severity": "hard"
+          }
+        ],
+        "has_diagnostic_flags": false,
+        "has_hard_flags": true,
+        "has_review_flags": false,
+        "review_trigger_score": 5,
+        "schema": "sfh2-a0r-consistency-v2",
+        "stage": "identity_independent"
+      },
+      "contract_status": "identity_independent_contract_invalid",
+      "effective_record": null,
+      "errors": [
+        "record_not_object"
+      ],
+      "historian": "B",
+      "mention_id": "sfh1-mention-fb979fe0b42ef4d06939f630",
+      "provisional_realization": {
+        "candidate": null,
+        "candidate_only": true,
+        "canonical_write_back": false,
+        "case_id": "sfh1-mention-fb979fe0b42ef4d06939f630",
+        "core_graph_eligible": false,
+        "identity_created": false,
+        "mention_id": "sfh1-mention-fb979fe0b42ef4d06939f630",
+        "realization_basis": [
+          "no_valid_semantic_record"
+        ],
+        "story_id": "01-dexing-008",
+        "surface": "季方"
+      },
+      "record": null,
+      "selected_record": null,
+      "stage": "identity_independent",
+      "story_id": "01-dexing-008",
+      "surface": "季方",
+      "transport": {
+        "attempt": 1,
+        "classification": "parsed",
+        "elapsed_seconds": 4.147,
+        "finish_reason": "tool_calls",
+        "model": "deepseek-v4-flash",
+        "parse_error": null,
+        "prompt_version": "sfh2-a2-independent-historian-v1",
+        "provider_call": true,
+        "provider_witness_hash": "4c78e1b7a092494588779946d9993a28948a41e3bc9495312e87434c6ff54475",
+        "raw_archive_path": "/tmp/sfh2-f1-raw-b30c380095772f61/sfh2-f1-live-v1/00005-identity_independent-identity_independent-sfh1-mention-fb979fe0b42ef4d06939f630-attempt1.json",
+        "raw_archive_sha256": "9d23e1354f18b62f9dd975cb1b15fffcaa9c622e1d864067a3065d49c03af6d6",
+        "request_hash": "1976d4a10db46835848b3d70c0946eddd419322c92dba93a72b5c399dfc129f3",
+        "stage": "identity_independent",
+        "temperature": 0,
+        "thinking": {
+          "type": "disabled"
+        },
+        "unit_id": "identity_independent:sfh1-mention-fb979fe0b42ef4d06939f630",
+        "usage": {
+          "completion_tokens": 632,
+          "prompt_tokens": 3293,
+          "total_tokens": 3925
+        },
+        "valid": true
+      },
+      "valid": false
+    },
+    "historian_primary": {
+      "candidate_only": true,
+      "canonical_write_back": false,
+      "case_id": "sfh1-mention-fb979fe0b42ef4d06939f630",
+      "consistency": {
+        "candidate_only": true,
+        "canonical_write_back": false,
+        "flags": [
+          {
+            "challenged_fields": [
+              "relations",
+              "referent.canonical_hint"
+            ],
+            "evidence_ids": [
+              "sfh1-ev-01-dexing-008-liu-annotation-003",
+              "sfh1-ev-01-dexing-008-liu-annotation-004",
+              "sfh1-ev-01-dexing-008-main"
+            ],
+            "flag_type": "multi_candidate_ambiguity",
+            "formal_reason": "the record supplies more than one structured relation target",
+            "involved": [
+              "relations"
+            ],
+            "severity": "review"
+          }
+        ],
+        "has_diagnostic_flags": false,
+        "has_hard_flags": false,
+        "has_review_flags": true,
+        "review_trigger_score": 2,
+        "schema": "sfh2-a0r-consistency-v2",
+        "stage": "identity_primary"
+      },
+      "contract_status": "valid",
+      "errors": [],
+      "mention_id": "sfh1-mention-fb979fe0b42ef4d06939f630",
+      "provisional_realization": {
+        "candidate": {
+          "candidate_only": true,
+          "candidate_origin": "llm_semantic_proposal_registry_miss",
+          "candidate_person_id": "sfh2-a0-candidate-person-587ede0dd5b24a81412f",
+          "canonical_write_back": false,
+          "display_name": "陳諶",
+          "entity_type": "candidate_historical_person",
+          "person_id": "",
+          "proposed_display_name": "陳諶",
+          "referent_canonical_hint": "陳諶",
+          "source_occurrence_ids": [
+            "sfh1-mention-fb979fe0b42ef4d06939f630"
+          ],
+          "supporting_evidence_ids": [
+            "sfh1-ev-01-dexing-008-liu-annotation-003",
+            "sfh1-ev-01-dexing-008-liu-annotation-004",
+            "sfh1-ev-01-dexing-008-main"
+          ]
+        },
+        "candidate_only": true,
+        "canonical_write_back": false,
+        "case_id": "sfh1-mention-fb979fe0b42ef4d06939f630",
+        "core_graph_eligible": true,
+        "identity_created": true,
+        "mention_id": "sfh1-mention-fb979fe0b42ef4d06939f630",
+        "occurrence_role": "scene_reference",
+        "realization_basis": [
+          "llm_semantic_proposal",
+          "candidate_registry_miss"
+        ],
+        "semantic_kind": "historical_person",
+        "story_id": "01-dexing-008",
+        "surface": "季方"
+      },
+      "record": {
+        "abstain": false,
+        "attribute_type": "",
+        "attribute_value": "",
+        "bearer_hint": "",
+        "confidence": "high",
+        "discourse": {
+          "addressee_hint": "",
+          "antecedent_hint": "陳元方",
+          "self_reference_hint": "",
+          "speaker_hint": ""
+        },
+        "explanation": "The target '季方' appears in Liu Xiaobiao's annotation (sfh1-ev-01-dexing-008-liu-annotation-004), which quotes the main text's phrase '弟季方難為兄'. In the main text (sfh1-ev-01-dexing-008-main), 季方 is the courtesy name of 陳諶, the younger brother of 陳元方 (陳紀), both sons of 陳寔 (太丘). The Liu annotation at sfh1-ev-01-dexing-008-liu-annotation-003 cites the 陳氏譜 identifying 諶 as the person whose courtesy name is 季方 (via the genealogy context). This is a courtesy-name reference to the historical person 陳諶.",
+        "mention_id": "sfh1-mention-fb979fe0b42ef4d06939f630",
+        "occurrence_role": "scene_reference",
+        "reference_type": "courtesy_name",
+        "referent": {
+          "canonical_hint": "陳諶",
+          "confidence": "high",
+          "surface_form": "陳諶"
+        },
+        "relations": [
+          {
+            "confidence": "high",
+            "evidence_ids": [
+              "sfh1-ev-01-dexing-008-liu-annotation-004",
+              "sfh1-ev-01-dexing-008-main"
+            ],
+            "relation": "kinship_relation",
+            "target_hint": "陳元方"
+          },
+          {
+            "confidence": "high",
+            "evidence_ids": [
+              "sfh1-ev-01-dexing-008-liu-annotation-003",
+              "sfh1-ev-01-dexing-008-main"
+            ],
+            "relation": "kinship_relation",
+            "target_hint": "陳寔"
+          }
+        ],
+        "semantic_kind": "historical_person",
+        "supporting_evidence_ids": [
+          "sfh1-ev-01-dexing-008-liu-annotation-003",
+          "sfh1-ev-01-dexing-008-liu-annotation-004",
+          "sfh1-ev-01-dexing-008-main"
+        ],
+        "surface": "季方"
+      },
+      "stage": "identity_primary",
+      "story_id": "01-dexing-008",
+      "surface": "季方",
+      "transport": {
+        "attempt": 1,
+        "classification": "parsed",
+        "elapsed_seconds": 3.182,
+        "finish_reason": "tool_calls",
+        "model": "deepseek-v4-flash",
+        "parse_error": null,
+        "prompt_version": "sfh2-a0r-primary-historian-v1",
+        "provider_call": true,
+        "provider_witness_hash": "dcb1d58e51a56d8b32273f83962bc8b1b1bc955df52847c0977d93dc5a659ab5",
+        "raw_archive_path": "/tmp/sfh2-f1-raw-b30c380095772f61/sfh2-f1-live-v1/00004-identity_primary-identity_primary-sfh1-mention-fb979fe0b42ef4d06939f630-attempt1.json",
+        "raw_archive_sha256": "8ff2d1f43dc424468d0540c4e15d73e3a8769064240a20fcd54fa525aaacbcb0",
+        "request_hash": "b1bb8da01aa4b517436f21f26f99b92fae636985db316676939aafc844134cbe",
+        "stage": "identity_primary",
+        "temperature": 0,
+        "thinking": {
+          "type": "disabled"
+        },
+        "unit_id": "identity_primary:sfh1-mention-fb979fe0b42ef4d06939f630",
+        "usage": {
+          "completion_tokens": 568,
+          "prompt_tokens": 3261,
+          "total_tokens": 3829
+        },
+        "valid": true
+      },
+      "valid": true
+    },
+    "identity_readiness": "identity_requires_pipeline",
+    "mention_id": "sfh1-mention-fb979fe0b42ef4d06939f630",
+    "occurrence_id": "sfh1-mention-fb979fe0b42ef4d06939f630",
+    "realization": {
+      "candidate": {
+        "candidate_only": true,
+        "candidate_origin": "llm_semantic_proposal_registry_miss",
+        "candidate_person_id": "sfh2-a0-candidate-person-587ede0dd5b24a81412f",
+        "canonical_write_back": false,
+        "display_name": "陳諶",
+        "entity_type": "candidate_historical_person",
+        "person_id": "",
+        "proposed_display_name": "陳諶",
+        "referent_canonical_hint": "陳諶",
+        "source_occurrence_ids": [
+          "sfh1-mention-fb979fe0b42ef4d06939f630"
+        ],
+        "supporting_evidence_ids": [
+          "sfh1-ev-01-dexing-008-liu-annotation-003",
+          "sfh1-ev-01-dexing-008-liu-annotation-004",
+          "sfh1-ev-01-dexing-008-main"
+        ]
+      },
+      "candidate_only": true,
+      "canonical_write_back": false,
+      "case_id": "sfh1-mention-fb979fe0b42ef4d06939f630",
+      "core_graph_eligible": true,
+      "identity_created": true,
+      "mention_id": "sfh1-mention-fb979fe0b42ef4d06939f630",
+      "occurrence_role": "scene_reference",
+      "realization_basis": [
+        "llm_semantic_proposal",
+        "candidate_registry_miss"
+      ],
+      "semantic_kind": "historical_person",
+      "story_id": "01-dexing-008",
+      "surface": "季方"
+    },
+    "request_hashes": {
+      "adjudicator": "a0834d6d73ddccede22416a6c6c1e033545dfe59c89cd5f5c89c4263471e7068",
+      "independent": "1976d4a10db46835848b3d70c0946eddd419322c92dba93a72b5c399dfc129f3",
+      "primary": "b1bb8da01aa4b517436f21f26f99b92fae636985db316676939aafc844134cbe"
+    },
+    "selected_record": {
+      "abstain": false,
+      "attribute_type": "",
+      "attribute_value": "",
+      "bearer_hint": "",
+      "confidence": "high",
+      "discourse": {
+        "addressee_hint": "",
+        "antecedent_hint": "陳元方",
+        "self_reference_hint": "",
+        "speaker_hint": ""
+      },
+      "explanation": "The target '季方' appears in Liu Xiaobiao's annotation (sfh1-ev-01-dexing-008-liu-annotation-004), which quotes the main text's phrase '弟季方難為兄'. In the main text (sfh1-ev-01-dexing-008-main), 季方 is the courtesy name of 陳諶, the younger brother of 陳元方 (陳紀), both sons of 陳寔 (太丘). The Liu annotation at sfh1-ev-01-dexing-008-liu-annotation-003 cites the 陳氏譜 identifying 諶 as the person whose courtesy name is 季方 (via the genealogy context). This is a courtesy-name reference to the historical person 陳諶.",
+      "mention_id": "sfh1-mention-fb979fe0b42ef4d06939f630",
+      "occurrence_role": "scene_reference",
+      "reference_type": "courtesy_name",
+      "referent": {
+        "canonical_hint": "陳諶",
+        "confidence": "high",
+        "surface_form": "陳諶"
+      },
+      "relations": [
+        {
+          "confidence": "high",
+          "evidence_ids": [
+            "sfh1-ev-01-dexing-008-liu-annotation-004",
+            "sfh1-ev-01-dexing-008-main"
+          ],
+          "relation": "kinship_relation",
+          "target_hint": "陳元方"
+        },
+        {
+          "confidence": "high",
+          "evidence_ids": [
+            "sfh1-ev-01-dexing-008-liu-annotation-003",
+            "sfh1-ev-01-dexing-008-main"
+          ],
+          "relation": "kinship_relation",
+          "target_hint": "陳寔"
+        }
+      ],
+      "semantic_kind": "historical_person",
+      "supporting_evidence_ids": [
+        "sfh1-ev-01-dexing-008-liu-annotation-003",
+        "sfh1-ev-01-dexing-008-liu-annotation-004",
+        "sfh1-ev-01-dexing-008-main"
+      ],
+      "surface": "季方"
+    },
+    "selected_record_source": "historian_a_exact_copy",
+    "stage": "identity",
+    "status": "resolved",
+    "story_id": "01-dexing-008",
+    "surface": "季方"
+  },
+  "output_hash": "234bec6c6bf125a9144c81ddc1e2e8e3572978e3e4f64f4c7038fcb61ecb3e40",
+  "provider_witness_hash": null,
+  "request_hash": "60d400526f66e9339208417c16be9d0fa849a2cd4a96b20f9f9915e62128f66c",
+  "runtime_metadata": {
+    "candidate_only": true,
+    "canonical_write_back": false,
+    "recorded_at": "2026-09-04T15:42:46Z"
+  },
+  "schema": "sfh2-f1-checkpoint-v1",
+  "status": "completed",
+  "unit_id": "identity:sfh1-mention-fb979fe0b42ef4d06939f630"
+}

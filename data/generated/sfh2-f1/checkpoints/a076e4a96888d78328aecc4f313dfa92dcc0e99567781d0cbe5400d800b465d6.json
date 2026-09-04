@@ -1,0 +1,482 @@
+{
+  "attempt": 0,
+  "contract_valid": true,
+  "output": {
+    "adjudication": {
+      "candidate_only": true,
+      "canonical_write_back": false,
+      "case_id": "sfh1-mention-55b97afde3e7fb4c074361b8",
+      "changed_fields": [],
+      "contract_status": "valid",
+      "decision": "select_b",
+      "errors": [],
+      "mention_id": "sfh1-mention-55b97afde3e7fb4c074361b8",
+      "patch_ops": [],
+      "reason_summary": "Both historians agree on the core historical identity: '康' in Liu Xiaobiao's annotation refers to 嵇康 (Ji Kang), the subject of the main text entry. The disagreements are limited to (1) reference_type and (2) discourse.speaker_hint. Historian B's reference_type of 'personal_name' is more accurate than Historian A's 'surname_reference': the surface form is simply '康', which functions as an abbreviated personal name (shortened from the full name 嵇康), not a surname reference per se. Historian B also correctly identifies the speaker as 刘孝标 (Liu Xiaobiao), the annotator, since the text is within his annotation quoting the 康别傳. Historian A leaves speaker_hint empty, which is less informative. Historian B's record is therefore more complete and accurate on both disputed fields.",
+      "reviewed_fields": [],
+      "selected_record": {
+        "abstain": false,
+        "attribute_type": "",
+        "attribute_value": "",
+        "bearer_hint": "",
+        "confidence": "high",
+        "discourse": {
+          "addressee_hint": "",
+          "antecedent_hint": "嵇康",
+          "self_reference_hint": "",
+          "speaker_hint": "刘孝标（注者）"
+        },
+        "explanation": "The target occurrence '康' appears within Liu Xiaobiao's annotation (康别傳曰康長七尺), where '康' is an abbreviated personal name referring to 嵇康 (Ji Kang), the subject of the main text entry. The main text opens with '嵇康身長七尺八寸' establishing Ji Kang as the person being described, and the annotation quotes the 康别傳 (Biography of Kang) discussing his height and appearance. The annotation's '康' is a shortened personal-name reference to the same historical figure 嵇康 (courtesy name 叔夜, as seen in '嵇叔夜' in the main text).",
+        "mention_id": "sfh1-mention-55b97afde3e7fb4c074361b8",
+        "occurrence_role": "annotation_person",
+        "reference_type": "personal_name",
+        "referent": {
+          "canonical_hint": "嵇康",
+          "confidence": "high",
+          "surface_form": "嵇康"
+        },
+        "relations": [
+          {
+            "confidence": "high",
+            "evidence_ids": [
+              "sfh1-ev-14-rongzhi-005-liu-annotation-001",
+              "sfh1-ev-14-rongzhi-005-main"
+            ],
+            "relation": "same_person",
+            "target_hint": "嵇康"
+          }
+        ],
+        "semantic_kind": "historical_person",
+        "supporting_evidence_ids": [
+          "sfh1-ev-14-rongzhi-005-liu-annotation-001",
+          "sfh1-ev-14-rongzhi-005-main"
+        ],
+        "surface": "康"
+      },
+      "selected_record_source": "historian_b_exact_copy",
+      "stage": "identity_adjudicator",
+      "story_id": "14-rongzhi-005",
+      "supporting_evidence_ids": [
+        "sfh1-ev-14-rongzhi-005-liu-annotation-001",
+        "sfh1-ev-14-rongzhi-005-main"
+      ],
+      "surface": "康",
+      "transport": {
+        "attempt": 1,
+        "classification": "parsed",
+        "elapsed_seconds": 2.616,
+        "finish_reason": "tool_calls",
+        "model": "deepseek-v4-flash",
+        "parse_error": null,
+        "prompt_version": "sfh2-a2r-adjudicator-v2",
+        "provider_call": true,
+        "provider_witness_hash": "e5028672cb6541bd748f2cab12e3ae5908fd45dcf547df0e5b0e0d9f6071a0de",
+        "raw_archive_path": "/tmp/sfh2-f1-raw-b30c380095772f61/sfh2-f1-live-v1/00090-identity_adjudicator-identity_adjudicator-sfh1-mention-55b97afde3e7fb4c074361b8-attempt1.json",
+        "raw_archive_sha256": "724dba0df97c097122f6404046a2cfb93efc9dc86cd43eb8228eea2d87ecf043",
+        "request_hash": "ede21a54a0b8d177aa3849ea390c6f782dbb29dae702fa93fbf9ac89bc3f29cb",
+        "stage": "identity_adjudicator",
+        "temperature": 0,
+        "thinking": {
+          "type": "disabled"
+        },
+        "unit_id": "identity_adjudicator:sfh1-mention-55b97afde3e7fb4c074361b8",
+        "usage": {
+          "completion_tokens": 319,
+          "prompt_tokens": 3590,
+          "total_tokens": 3909
+        },
+        "valid": true
+      },
+      "valid": true
+    },
+    "candidate_only": true,
+    "candidate_proposal": {
+      "candidate_only": true,
+      "candidate_origin": "python_registry_lookup_after_llm_semantics",
+      "candidate_person_id": "",
+      "canonical_write_back": false,
+      "display_name": "嵇康",
+      "entity_type": "existing_person",
+      "person_id": "person-046",
+      "proposed_display_name": "嵇康",
+      "referent_canonical_hint": "嵇康"
+    },
+    "canonical_write_back": false,
+    "case_id": "sfh1-mention-55b97afde3e7fb4c074361b8",
+    "comparison": {
+      "a_valid": true,
+      "agreement": false,
+      "b_valid": true,
+      "disagreement_classes": [
+        "discourse_disagreement",
+        "reference_type_disagreement"
+      ],
+      "historical_identity_disagreement": false,
+      "metadata_only_difference": false,
+      "semantic_fields": [
+        "discourse.speaker_hint",
+        "reference_type"
+      ],
+      "substantive_disagreement": true,
+      "substantive_fields": [
+        "discourse.speaker_hint",
+        "reference_type"
+      ]
+    },
+    "context": {
+      "frozen_discourse_context": {
+        "addressee_hint": "",
+        "antecedent_hint": "嵇康",
+        "self_reference_hint": "",
+        "speaker_hint": "刘孝标（注者）"
+      },
+      "frozen_identity": {
+        "abstain": false,
+        "attribute_type": "",
+        "attribute_value": "",
+        "bearer_hint": "",
+        "reference_type": "personal_name",
+        "referent": {
+          "canonical_hint": "嵇康",
+          "confidence": "high",
+          "surface_form": "嵇康"
+        },
+        "semantic_kind": "historical_person"
+      }
+    },
+    "failure": null,
+    "final_consistency": {
+      "candidate_only": true,
+      "canonical_write_back": false,
+      "flags": [],
+      "has_diagnostic_flags": false,
+      "has_hard_flags": false,
+      "has_review_flags": false,
+      "review_trigger_score": 0,
+      "schema": "sfh2-a0r-consistency-v2",
+      "stage": "identity_final"
+    },
+    "final_state": "stable_entity_resolved",
+    "historian_independent": {
+      "candidate_only": true,
+      "canonical_write_back": false,
+      "case_id": "sfh1-mention-55b97afde3e7fb4c074361b8",
+      "consistency": {
+        "candidate_only": true,
+        "canonical_write_back": false,
+        "flags": [],
+        "has_diagnostic_flags": false,
+        "has_hard_flags": false,
+        "has_review_flags": false,
+        "review_trigger_score": 0,
+        "schema": "sfh2-a0r-consistency-v2",
+        "stage": "identity_independent"
+      },
+      "contract_status": "valid",
+      "errors": [],
+      "historian": "B",
+      "mention_id": "sfh1-mention-55b97afde3e7fb4c074361b8",
+      "provisional_realization": {
+        "candidate": {
+          "candidate_only": true,
+          "candidate_origin": "python_registry_lookup_after_llm_semantics",
+          "candidate_person_id": "",
+          "canonical_write_back": false,
+          "display_name": "嵇康",
+          "entity_type": "existing_person",
+          "person_id": "person-046",
+          "proposed_display_name": "嵇康",
+          "referent_canonical_hint": "嵇康"
+        },
+        "candidate_only": true,
+        "canonical_write_back": false,
+        "case_id": "sfh1-mention-55b97afde3e7fb4c074361b8",
+        "core_graph_eligible": false,
+        "identity_created": true,
+        "mention_id": "sfh1-mention-55b97afde3e7fb4c074361b8",
+        "occurrence_role": "annotation_person",
+        "realization_basis": [
+          "llm_semantic_proposal",
+          "canonical_registry_lookup"
+        ],
+        "semantic_kind": "historical_person",
+        "story_id": "14-rongzhi-005",
+        "surface": "康"
+      },
+      "record": {
+        "abstain": false,
+        "attribute_type": "",
+        "attribute_value": "",
+        "bearer_hint": "",
+        "confidence": "high",
+        "discourse": {
+          "addressee_hint": "",
+          "antecedent_hint": "嵇康",
+          "self_reference_hint": "",
+          "speaker_hint": "刘孝标（注者）"
+        },
+        "explanation": "The target occurrence '康' appears within Liu Xiaobiao's annotation (康别傳曰康長七尺), where '康' is an abbreviated personal name referring to 嵇康 (Ji Kang), the subject of the main text entry. The main text opens with '嵇康身長七尺八寸' establishing Ji Kang as the person being described, and the annotation quotes the 康别傳 (Biography of Kang) discussing his height and appearance. The annotation's '康' is a shortened personal-name reference to the same historical figure 嵇康 (courtesy name 叔夜, as seen in '嵇叔夜' in the main text).",
+        "mention_id": "sfh1-mention-55b97afde3e7fb4c074361b8",
+        "occurrence_role": "annotation_person",
+        "reference_type": "personal_name",
+        "referent": {
+          "canonical_hint": "嵇康",
+          "confidence": "high",
+          "surface_form": "嵇康"
+        },
+        "relations": [
+          {
+            "confidence": "high",
+            "evidence_ids": [
+              "sfh1-ev-14-rongzhi-005-liu-annotation-001",
+              "sfh1-ev-14-rongzhi-005-main"
+            ],
+            "relation": "same_person",
+            "target_hint": "嵇康"
+          }
+        ],
+        "semantic_kind": "historical_person",
+        "supporting_evidence_ids": [
+          "sfh1-ev-14-rongzhi-005-liu-annotation-001",
+          "sfh1-ev-14-rongzhi-005-main"
+        ],
+        "surface": "康"
+      },
+      "stage": "identity_independent",
+      "story_id": "14-rongzhi-005",
+      "surface": "康",
+      "transport": {
+        "attempt": 1,
+        "classification": "parsed",
+        "elapsed_seconds": 3.346,
+        "finish_reason": "tool_calls",
+        "model": "deepseek-v4-flash",
+        "parse_error": null,
+        "prompt_version": "sfh2-a2-independent-historian-v1",
+        "provider_call": true,
+        "provider_witness_hash": "55d1e4f66a14435deb7326f317096b5707bab0ace8503258f4c64ab845437bf8",
+        "raw_archive_path": "/tmp/sfh2-f1-raw-b30c380095772f61/sfh2-f1-live-v1/00089-identity_independent-identity_independent-sfh1-mention-55b97afde3e7fb4c074361b8-attempt1.json",
+        "raw_archive_sha256": "6537efff24b53ad67f377ec5bc6f1980198992eeb5ca0ab5df586704847b5099",
+        "request_hash": "9216cc1640c5d0b47041355bae2d38bd50b9834202bd0a53eaf21d4bb7e0e2bc",
+        "stage": "identity_independent",
+        "temperature": 0,
+        "thinking": {
+          "type": "disabled"
+        },
+        "unit_id": "identity_independent:sfh1-mention-55b97afde3e7fb4c074361b8",
+        "usage": {
+          "completion_tokens": 473,
+          "prompt_tokens": 2204,
+          "total_tokens": 2677
+        },
+        "valid": true
+      },
+      "valid": true
+    },
+    "historian_primary": {
+      "candidate_only": true,
+      "canonical_write_back": false,
+      "case_id": "sfh1-mention-55b97afde3e7fb4c074361b8",
+      "consistency": {
+        "candidate_only": true,
+        "canonical_write_back": false,
+        "flags": [],
+        "has_diagnostic_flags": false,
+        "has_hard_flags": false,
+        "has_review_flags": false,
+        "review_trigger_score": 0,
+        "schema": "sfh2-a0r-consistency-v2",
+        "stage": "identity_primary"
+      },
+      "contract_status": "valid",
+      "errors": [],
+      "mention_id": "sfh1-mention-55b97afde3e7fb4c074361b8",
+      "provisional_realization": {
+        "candidate": {
+          "candidate_only": true,
+          "candidate_origin": "python_registry_lookup_after_llm_semantics",
+          "candidate_person_id": "",
+          "canonical_write_back": false,
+          "display_name": "嵇康",
+          "entity_type": "existing_person",
+          "person_id": "person-046",
+          "proposed_display_name": "嵇康",
+          "referent_canonical_hint": "嵇康"
+        },
+        "candidate_only": true,
+        "canonical_write_back": false,
+        "case_id": "sfh1-mention-55b97afde3e7fb4c074361b8",
+        "core_graph_eligible": false,
+        "identity_created": true,
+        "mention_id": "sfh1-mention-55b97afde3e7fb4c074361b8",
+        "occurrence_role": "annotation_person",
+        "realization_basis": [
+          "llm_semantic_proposal",
+          "canonical_registry_lookup"
+        ],
+        "semantic_kind": "historical_person",
+        "story_id": "14-rongzhi-005",
+        "surface": "康"
+      },
+      "record": {
+        "abstain": false,
+        "attribute_type": "",
+        "attribute_value": "",
+        "bearer_hint": "",
+        "confidence": "high",
+        "discourse": {
+          "addressee_hint": "",
+          "antecedent_hint": "嵇康",
+          "self_reference_hint": "",
+          "speaker_hint": ""
+        },
+        "explanation": "The target mention '康' appears in Liu Xiaobiao's annotation quoting the 嵇康別傳 (Ji Kang's separate biography), which states '康長七尺八寸'. The surname '康' here refers to 嵇康 (Ji Kang), the same person described in the main text as 嵇康. The annotation uses the surname alone as a shorthand reference to Ji Kang, who is the subject of the entry. The main text establishes 嵇康 as the person under discussion, and the annotation continues referring to him by surname only.",
+        "mention_id": "sfh1-mention-55b97afde3e7fb4c074361b8",
+        "occurrence_role": "annotation_person",
+        "reference_type": "surname_reference",
+        "referent": {
+          "canonical_hint": "嵇康",
+          "confidence": "high",
+          "surface_form": "嵇康"
+        },
+        "relations": [
+          {
+            "confidence": "high",
+            "evidence_ids": [
+              "sfh1-ev-14-rongzhi-005-liu-annotation-001",
+              "sfh1-ev-14-rongzhi-005-main"
+            ],
+            "relation": "same_person",
+            "target_hint": "嵇康"
+          }
+        ],
+        "semantic_kind": "historical_person",
+        "supporting_evidence_ids": [
+          "sfh1-ev-14-rongzhi-005-liu-annotation-001",
+          "sfh1-ev-14-rongzhi-005-main"
+        ],
+        "surface": "康"
+      },
+      "stage": "identity_primary",
+      "story_id": "14-rongzhi-005",
+      "surface": "康",
+      "transport": {
+        "attempt": 1,
+        "classification": "parsed",
+        "elapsed_seconds": 3.245,
+        "finish_reason": "tool_calls",
+        "model": "deepseek-v4-flash",
+        "parse_error": null,
+        "prompt_version": "sfh2-a0r-primary-historian-v1",
+        "provider_call": true,
+        "provider_witness_hash": "cfdec4a69ea5bf09ca95f3578557932ba60287d79f331d7f4e59c951ecfed1f5",
+        "raw_archive_path": "/tmp/sfh2-f1-raw-b30c380095772f61/sfh2-f1-live-v1/00088-identity_primary-identity_primary-sfh1-mention-55b97afde3e7fb4c074361b8-attempt1.json",
+        "raw_archive_sha256": "953cd61c67b4c618afb268a750e6bd5e6f6027628221ea5a3dfd23edaac4c083",
+        "request_hash": "7f1e6d9b3db77437e3dd557afff5d1c8586a0e238071c34ade5504d99fd8a292",
+        "stage": "identity_primary",
+        "temperature": 0,
+        "thinking": {
+          "type": "disabled"
+        },
+        "unit_id": "identity_primary:sfh1-mention-55b97afde3e7fb4c074361b8",
+        "usage": {
+          "completion_tokens": 442,
+          "prompt_tokens": 2172,
+          "total_tokens": 2614
+        },
+        "valid": true
+      },
+      "valid": true
+    },
+    "identity_readiness": "identity_requires_pipeline",
+    "mention_id": "sfh1-mention-55b97afde3e7fb4c074361b8",
+    "occurrence_id": "sfh1-mention-55b97afde3e7fb4c074361b8",
+    "realization": {
+      "candidate": {
+        "candidate_only": true,
+        "candidate_origin": "python_registry_lookup_after_llm_semantics",
+        "candidate_person_id": "",
+        "canonical_write_back": false,
+        "display_name": "嵇康",
+        "entity_type": "existing_person",
+        "person_id": "person-046",
+        "proposed_display_name": "嵇康",
+        "referent_canonical_hint": "嵇康"
+      },
+      "candidate_only": true,
+      "canonical_write_back": false,
+      "case_id": "sfh1-mention-55b97afde3e7fb4c074361b8",
+      "core_graph_eligible": false,
+      "identity_created": true,
+      "mention_id": "sfh1-mention-55b97afde3e7fb4c074361b8",
+      "occurrence_role": "annotation_person",
+      "realization_basis": [
+        "llm_semantic_proposal",
+        "canonical_registry_lookup"
+      ],
+      "semantic_kind": "historical_person",
+      "story_id": "14-rongzhi-005",
+      "surface": "康"
+    },
+    "request_hashes": {
+      "adjudicator": "ede21a54a0b8d177aa3849ea390c6f782dbb29dae702fa93fbf9ac89bc3f29cb",
+      "independent": "9216cc1640c5d0b47041355bae2d38bd50b9834202bd0a53eaf21d4bb7e0e2bc",
+      "primary": "7f1e6d9b3db77437e3dd557afff5d1c8586a0e238071c34ade5504d99fd8a292"
+    },
+    "selected_record": {
+      "abstain": false,
+      "attribute_type": "",
+      "attribute_value": "",
+      "bearer_hint": "",
+      "confidence": "high",
+      "discourse": {
+        "addressee_hint": "",
+        "antecedent_hint": "嵇康",
+        "self_reference_hint": "",
+        "speaker_hint": "刘孝标（注者）"
+      },
+      "explanation": "The target occurrence '康' appears within Liu Xiaobiao's annotation (康别傳曰康長七尺), where '康' is an abbreviated personal name referring to 嵇康 (Ji Kang), the subject of the main text entry. The main text opens with '嵇康身長七尺八寸' establishing Ji Kang as the person being described, and the annotation quotes the 康别傳 (Biography of Kang) discussing his height and appearance. The annotation's '康' is a shortened personal-name reference to the same historical figure 嵇康 (courtesy name 叔夜, as seen in '嵇叔夜' in the main text).",
+      "mention_id": "sfh1-mention-55b97afde3e7fb4c074361b8",
+      "occurrence_role": "annotation_person",
+      "reference_type": "personal_name",
+      "referent": {
+        "canonical_hint": "嵇康",
+        "confidence": "high",
+        "surface_form": "嵇康"
+      },
+      "relations": [
+        {
+          "confidence": "high",
+          "evidence_ids": [
+            "sfh1-ev-14-rongzhi-005-liu-annotation-001",
+            "sfh1-ev-14-rongzhi-005-main"
+          ],
+          "relation": "same_person",
+          "target_hint": "嵇康"
+        }
+      ],
+      "semantic_kind": "historical_person",
+      "supporting_evidence_ids": [
+        "sfh1-ev-14-rongzhi-005-liu-annotation-001",
+        "sfh1-ev-14-rongzhi-005-main"
+      ],
+      "surface": "康"
+    },
+    "selected_record_source": "historian_b_exact_copy",
+    "stage": "identity",
+    "status": "resolved",
+    "story_id": "14-rongzhi-005",
+    "surface": "康"
+  },
+  "output_hash": "95ce88a99a8f8df9182caed84bd8c51189337c6bb079c30213079933a64310ce",
+  "provider_witness_hash": null,
+  "request_hash": "4a2c7049a5bb1c076f149dce7106dc39238099d984fcdf0968b2dde8ba5feedf",
+  "runtime_metadata": {
+    "candidate_only": true,
+    "canonical_write_back": false,
+    "recorded_at": "2026-09-04T15:42:47Z"
+  },
+  "schema": "sfh2-f1-checkpoint-v1",
+  "status": "completed",
+  "unit_id": "identity:sfh1-mention-55b97afde3e7fb4c074361b8"
+}

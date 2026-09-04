@@ -1,0 +1,458 @@
+{
+  "attempt": 0,
+  "contract_valid": true,
+  "output": {
+    "adjudication": {
+      "candidate_only": true,
+      "canonical_write_back": false,
+      "case_id": "sfh1-mention-2d1f96737b7b0ef11588f7e5",
+      "changed_fields": [],
+      "contract_status": "valid",
+      "decision": "select_a",
+      "errors": [],
+      "mention_id": "sfh1-mention-2d1f96737b7b0ef11588f7e5",
+      "patch_ops": [],
+      "reason_summary": "The two hypotheses are substantively identical in all semantic fields except discourse.antecedent_hint. Historian A sets antecedent_hint to 巢父, while Historian B leaves it empty. The target 堯 appears in the Liu Xiaobiao annotation quoting the 逸士傳, which reads \"巢父者堯時隱人\" — 堯 is used as a temporal-historical reference point to date 巢父. The immediately preceding and governing noun in the same clause is 巢父, which serves as the natural antecedent for the mention of 堯 within the annotation discourse. Historian A's antecedent_hint of 巢父 is therefore the more accurate discourse annotation. All other fields agree between the two hypotheses, so selecting A is appropriate.",
+      "reviewed_fields": [],
+      "selected_record": {
+        "abstain": false,
+        "attribute_type": "",
+        "attribute_value": "",
+        "bearer_hint": "",
+        "confidence": "high",
+        "discourse": {
+          "addressee_hint": "",
+          "antecedent_hint": "巢父",
+          "self_reference_hint": "",
+          "speaker_hint": ""
+        },
+        "explanation": "堯 appears in Liu Xiaobiao's annotation quoting the 高逸傳/逸士傳, which describes 巢父 as a recluse of the time of 堯 (堯時隱人). The mention is a ruler title referring to the legendary sage-emperor Yao, used as a historical exemplum to date the figure of 巢父. The annotation context identifies 巢父 as a hermit living in Yao's era.",
+        "mention_id": "sfh1-mention-2d1f96737b7b0ef11588f7e5",
+        "occurrence_role": "historical_exemplum",
+        "reference_type": "ruler_title",
+        "referent": {
+          "canonical_hint": "堯",
+          "confidence": "high",
+          "surface_form": "堯"
+        },
+        "relations": [],
+        "semantic_kind": "historical_person",
+        "supporting_evidence_ids": [
+          "sfh1-ev-25-paidiao-028-liu-annotation-001"
+        ],
+        "surface": "堯"
+      },
+      "selected_record_source": "historian_a_exact_copy",
+      "stage": "identity_adjudicator",
+      "story_id": "25-paidiao-028",
+      "supporting_evidence_ids": [
+        "sfh1-ev-25-paidiao-028-liu-annotation-001"
+      ],
+      "surface": "堯",
+      "transport": {
+        "attempt": 1,
+        "classification": "parsed",
+        "elapsed_seconds": 2.222,
+        "finish_reason": "tool_calls",
+        "model": "deepseek-v4-flash",
+        "parse_error": null,
+        "prompt_version": "sfh2-a2r-adjudicator-v2",
+        "provider_call": true,
+        "provider_witness_hash": "992a6961cba03200ea255b2755f74b21d0a14676664d51e6a6ab298cc76e03ed",
+        "raw_archive_path": "/tmp/sfh2-f1-raw-b30c380095772f61/sfh2-f1-live-v1/00026-identity_adjudicator-identity_adjudicator-sfh1-mention-2d1f96737b7b0ef11588f7e5-attempt1.json",
+        "raw_archive_sha256": "8d2d1782e1ae8656ba5b93555e9594e2decd22df54f672e64c25a0ffe313c2de",
+        "request_hash": "ea3f1cd3b1e466082a212f17960dd7dcb0f0893fe48f833578f06c0aa76f9cf9",
+        "stage": "identity_adjudicator",
+        "temperature": 0,
+        "thinking": {
+          "type": "disabled"
+        },
+        "unit_id": "identity_adjudicator:sfh1-mention-2d1f96737b7b0ef11588f7e5",
+        "usage": {
+          "completion_tokens": 275,
+          "prompt_tokens": 3474,
+          "total_tokens": 3749
+        },
+        "valid": true
+      },
+      "valid": true
+    },
+    "candidate_only": true,
+    "candidate_proposal": {
+      "candidate_only": true,
+      "candidate_origin": "llm_semantic_proposal_registry_miss",
+      "candidate_person_id": "sfh2-a0-candidate-person-73d8d001b4cabecfafb3",
+      "canonical_write_back": false,
+      "display_name": "堯",
+      "entity_type": "candidate_historical_person",
+      "person_id": "",
+      "proposed_display_name": "堯",
+      "referent_canonical_hint": "堯",
+      "source_occurrence_ids": [
+        "sfh1-mention-2d1f96737b7b0ef11588f7e5"
+      ],
+      "supporting_evidence_ids": [
+        "sfh1-ev-25-paidiao-028-liu-annotation-001"
+      ]
+    },
+    "canonical_write_back": false,
+    "case_id": "sfh1-mention-2d1f96737b7b0ef11588f7e5",
+    "comparison": {
+      "a_valid": true,
+      "agreement": false,
+      "b_valid": true,
+      "disagreement_classes": [
+        "discourse_disagreement"
+      ],
+      "historical_identity_disagreement": false,
+      "metadata_only_difference": false,
+      "semantic_fields": [
+        "discourse.antecedent_hint"
+      ],
+      "substantive_disagreement": true,
+      "substantive_fields": [
+        "discourse.antecedent_hint"
+      ]
+    },
+    "context": {
+      "frozen_discourse_context": {
+        "addressee_hint": "",
+        "antecedent_hint": "巢父",
+        "self_reference_hint": "",
+        "speaker_hint": ""
+      },
+      "frozen_identity": {
+        "abstain": false,
+        "attribute_type": "",
+        "attribute_value": "",
+        "bearer_hint": "",
+        "reference_type": "ruler_title",
+        "referent": {
+          "canonical_hint": "堯",
+          "confidence": "high",
+          "surface_form": "堯"
+        },
+        "semantic_kind": "historical_person"
+      }
+    },
+    "failure": null,
+    "final_consistency": {
+      "candidate_only": true,
+      "canonical_write_back": false,
+      "flags": [],
+      "has_diagnostic_flags": false,
+      "has_hard_flags": false,
+      "has_review_flags": false,
+      "review_trigger_score": 0,
+      "schema": "sfh2-a0r-consistency-v2",
+      "stage": "identity_final"
+    },
+    "final_state": "local_candidate_resolved",
+    "historian_independent": {
+      "candidate_only": true,
+      "canonical_write_back": false,
+      "case_id": "sfh1-mention-2d1f96737b7b0ef11588f7e5",
+      "consistency": {
+        "candidate_only": true,
+        "canonical_write_back": false,
+        "flags": [],
+        "has_diagnostic_flags": false,
+        "has_hard_flags": false,
+        "has_review_flags": false,
+        "review_trigger_score": 0,
+        "schema": "sfh2-a0r-consistency-v2",
+        "stage": "identity_independent"
+      },
+      "contract_status": "valid",
+      "errors": [],
+      "historian": "B",
+      "mention_id": "sfh1-mention-2d1f96737b7b0ef11588f7e5",
+      "provisional_realization": {
+        "candidate": {
+          "candidate_only": true,
+          "candidate_origin": "llm_semantic_proposal_registry_miss",
+          "candidate_person_id": "sfh2-a0-candidate-person-73d8d001b4cabecfafb3",
+          "canonical_write_back": false,
+          "display_name": "堯",
+          "entity_type": "candidate_historical_person",
+          "person_id": "",
+          "proposed_display_name": "堯",
+          "referent_canonical_hint": "堯",
+          "source_occurrence_ids": [
+            "sfh1-mention-2d1f96737b7b0ef11588f7e5"
+          ],
+          "supporting_evidence_ids": [
+            "sfh1-ev-25-paidiao-028-liu-annotation-001"
+          ]
+        },
+        "candidate_only": true,
+        "canonical_write_back": false,
+        "case_id": "sfh1-mention-2d1f96737b7b0ef11588f7e5",
+        "core_graph_eligible": false,
+        "identity_created": true,
+        "mention_id": "sfh1-mention-2d1f96737b7b0ef11588f7e5",
+        "occurrence_role": "historical_exemplum",
+        "realization_basis": [
+          "llm_semantic_proposal",
+          "candidate_registry_miss"
+        ],
+        "semantic_kind": "historical_person",
+        "story_id": "25-paidiao-028",
+        "surface": "堯"
+      },
+      "record": {
+        "abstain": false,
+        "attribute_type": "",
+        "attribute_value": "",
+        "bearer_hint": "",
+        "confidence": "high",
+        "discourse": {
+          "addressee_hint": "",
+          "antecedent_hint": "",
+          "self_reference_hint": "",
+          "speaker_hint": ""
+        },
+        "explanation": "The target 堯 appears in Liu Xiaobiao's annotation quoting the 逸士傳 (Yishi zhuan), which states that 巢父 was a recluse of the time of 堯 (堯時隱人). 堯 here refers to the legendary sage-ruler Emperor Yao (堯), the ancient sovereign of Chinese antiquity. The annotation uses 堯 as a temporal-historical reference point to date 巢父, the legendary hermit. The surface form 堯 is the ruler's name/title used as a historical exemplum reference within the annotation text.",
+        "mention_id": "sfh1-mention-2d1f96737b7b0ef11588f7e5",
+        "occurrence_role": "historical_exemplum",
+        "reference_type": "ruler_title",
+        "referent": {
+          "canonical_hint": "堯",
+          "confidence": "high",
+          "surface_form": "堯"
+        },
+        "relations": [],
+        "semantic_kind": "historical_person",
+        "supporting_evidence_ids": [
+          "sfh1-ev-25-paidiao-028-liu-annotation-001"
+        ],
+        "surface": "堯"
+      },
+      "stage": "identity_independent",
+      "story_id": "25-paidiao-028",
+      "surface": "堯",
+      "transport": {
+        "attempt": 1,
+        "classification": "parsed",
+        "elapsed_seconds": 2.568,
+        "finish_reason": "tool_calls",
+        "model": "deepseek-v4-flash",
+        "parse_error": null,
+        "prompt_version": "sfh2-a2-independent-historian-v1",
+        "provider_call": true,
+        "provider_witness_hash": "9929fbe5f6d49f01569bde668fee6e1e6f367871c415e780dac0319d4ba665dc",
+        "raw_archive_path": "/tmp/sfh2-f1-raw-b30c380095772f61/sfh2-f1-live-v1/00025-identity_independent-identity_independent-sfh1-mention-2d1f96737b7b0ef11588f7e5-attempt1.json",
+        "raw_archive_sha256": "6bf6d4897d8efdf31317fd9609fbbe8a14ba115f31c45eca19a9a50745d4ccbf",
+        "request_hash": "4cd8a6f7535268ce75777604dc046254ffabd3e2a6de5103f4806274bf702144",
+        "stage": "identity_independent",
+        "temperature": 0,
+        "thinking": {
+          "type": "disabled"
+        },
+        "unit_id": "identity_independent:sfh1-mention-2d1f96737b7b0ef11588f7e5",
+        "usage": {
+          "completion_tokens": 362,
+          "prompt_tokens": 2294,
+          "total_tokens": 2656
+        },
+        "valid": true
+      },
+      "valid": true
+    },
+    "historian_primary": {
+      "candidate_only": true,
+      "canonical_write_back": false,
+      "case_id": "sfh1-mention-2d1f96737b7b0ef11588f7e5",
+      "consistency": {
+        "candidate_only": true,
+        "canonical_write_back": false,
+        "flags": [],
+        "has_diagnostic_flags": false,
+        "has_hard_flags": false,
+        "has_review_flags": false,
+        "review_trigger_score": 0,
+        "schema": "sfh2-a0r-consistency-v2",
+        "stage": "identity_primary"
+      },
+      "contract_status": "valid",
+      "errors": [],
+      "mention_id": "sfh1-mention-2d1f96737b7b0ef11588f7e5",
+      "provisional_realization": {
+        "candidate": {
+          "candidate_only": true,
+          "candidate_origin": "llm_semantic_proposal_registry_miss",
+          "candidate_person_id": "sfh2-a0-candidate-person-73d8d001b4cabecfafb3",
+          "canonical_write_back": false,
+          "display_name": "堯",
+          "entity_type": "candidate_historical_person",
+          "person_id": "",
+          "proposed_display_name": "堯",
+          "referent_canonical_hint": "堯",
+          "source_occurrence_ids": [
+            "sfh1-mention-2d1f96737b7b0ef11588f7e5"
+          ],
+          "supporting_evidence_ids": [
+            "sfh1-ev-25-paidiao-028-liu-annotation-001"
+          ]
+        },
+        "candidate_only": true,
+        "canonical_write_back": false,
+        "case_id": "sfh1-mention-2d1f96737b7b0ef11588f7e5",
+        "core_graph_eligible": false,
+        "identity_created": true,
+        "mention_id": "sfh1-mention-2d1f96737b7b0ef11588f7e5",
+        "occurrence_role": "historical_exemplum",
+        "realization_basis": [
+          "llm_semantic_proposal",
+          "candidate_registry_miss"
+        ],
+        "semantic_kind": "historical_person",
+        "story_id": "25-paidiao-028",
+        "surface": "堯"
+      },
+      "record": {
+        "abstain": false,
+        "attribute_type": "",
+        "attribute_value": "",
+        "bearer_hint": "",
+        "confidence": "high",
+        "discourse": {
+          "addressee_hint": "",
+          "antecedent_hint": "巢父",
+          "self_reference_hint": "",
+          "speaker_hint": ""
+        },
+        "explanation": "堯 appears in Liu Xiaobiao's annotation quoting the 高逸傳/逸士傳, which describes 巢父 as a recluse of the time of 堯 (堯時隱人). The mention is a ruler title referring to the legendary sage-emperor Yao, used as a historical exemplum to date the figure of 巢父. The annotation context identifies 巢父 as a hermit living in Yao's era.",
+        "mention_id": "sfh1-mention-2d1f96737b7b0ef11588f7e5",
+        "occurrence_role": "historical_exemplum",
+        "reference_type": "ruler_title",
+        "referent": {
+          "canonical_hint": "堯",
+          "confidence": "high",
+          "surface_form": "堯"
+        },
+        "relations": [],
+        "semantic_kind": "historical_person",
+        "supporting_evidence_ids": [
+          "sfh1-ev-25-paidiao-028-liu-annotation-001"
+        ],
+        "surface": "堯"
+      },
+      "stage": "identity_primary",
+      "story_id": "25-paidiao-028",
+      "surface": "堯",
+      "transport": {
+        "attempt": 1,
+        "classification": "parsed",
+        "elapsed_seconds": 2.409,
+        "finish_reason": "tool_calls",
+        "model": "deepseek-v4-flash",
+        "parse_error": null,
+        "prompt_version": "sfh2-a0r-primary-historian-v1",
+        "provider_call": true,
+        "provider_witness_hash": "6848b99c57128c60d2d5168186d7ac86d3ee5040c0620217c859ec404faf8c78",
+        "raw_archive_path": "/tmp/sfh2-f1-raw-b30c380095772f61/sfh2-f1-live-v1/00024-identity_primary-identity_primary-sfh1-mention-2d1f96737b7b0ef11588f7e5-attempt1.json",
+        "raw_archive_sha256": "b54b0cf9bce6367187138d17acf14317984fd137ca027ed7a23cc582f1241b15",
+        "request_hash": "30dd21742b78ca2e17dc4d42aaff6076ff23b5c2aa73b979f2ecc4e6c56616f8",
+        "stage": "identity_primary",
+        "temperature": 0,
+        "thinking": {
+          "type": "disabled"
+        },
+        "unit_id": "identity_primary:sfh1-mention-2d1f96737b7b0ef11588f7e5",
+        "usage": {
+          "completion_tokens": 335,
+          "prompt_tokens": 2262,
+          "total_tokens": 2597
+        },
+        "valid": true
+      },
+      "valid": true
+    },
+    "identity_readiness": "identity_requires_pipeline",
+    "mention_id": "sfh1-mention-2d1f96737b7b0ef11588f7e5",
+    "occurrence_id": "sfh1-mention-2d1f96737b7b0ef11588f7e5",
+    "realization": {
+      "candidate": {
+        "candidate_only": true,
+        "candidate_origin": "llm_semantic_proposal_registry_miss",
+        "candidate_person_id": "sfh2-a0-candidate-person-73d8d001b4cabecfafb3",
+        "canonical_write_back": false,
+        "display_name": "堯",
+        "entity_type": "candidate_historical_person",
+        "person_id": "",
+        "proposed_display_name": "堯",
+        "referent_canonical_hint": "堯",
+        "source_occurrence_ids": [
+          "sfh1-mention-2d1f96737b7b0ef11588f7e5"
+        ],
+        "supporting_evidence_ids": [
+          "sfh1-ev-25-paidiao-028-liu-annotation-001"
+        ]
+      },
+      "candidate_only": true,
+      "canonical_write_back": false,
+      "case_id": "sfh1-mention-2d1f96737b7b0ef11588f7e5",
+      "core_graph_eligible": false,
+      "identity_created": true,
+      "mention_id": "sfh1-mention-2d1f96737b7b0ef11588f7e5",
+      "occurrence_role": "historical_exemplum",
+      "realization_basis": [
+        "llm_semantic_proposal",
+        "candidate_registry_miss"
+      ],
+      "semantic_kind": "historical_person",
+      "story_id": "25-paidiao-028",
+      "surface": "堯"
+    },
+    "request_hashes": {
+      "adjudicator": "ea3f1cd3b1e466082a212f17960dd7dcb0f0893fe48f833578f06c0aa76f9cf9",
+      "independent": "4cd8a6f7535268ce75777604dc046254ffabd3e2a6de5103f4806274bf702144",
+      "primary": "30dd21742b78ca2e17dc4d42aaff6076ff23b5c2aa73b979f2ecc4e6c56616f8"
+    },
+    "selected_record": {
+      "abstain": false,
+      "attribute_type": "",
+      "attribute_value": "",
+      "bearer_hint": "",
+      "confidence": "high",
+      "discourse": {
+        "addressee_hint": "",
+        "antecedent_hint": "巢父",
+        "self_reference_hint": "",
+        "speaker_hint": ""
+      },
+      "explanation": "堯 appears in Liu Xiaobiao's annotation quoting the 高逸傳/逸士傳, which describes 巢父 as a recluse of the time of 堯 (堯時隱人). The mention is a ruler title referring to the legendary sage-emperor Yao, used as a historical exemplum to date the figure of 巢父. The annotation context identifies 巢父 as a hermit living in Yao's era.",
+      "mention_id": "sfh1-mention-2d1f96737b7b0ef11588f7e5",
+      "occurrence_role": "historical_exemplum",
+      "reference_type": "ruler_title",
+      "referent": {
+        "canonical_hint": "堯",
+        "confidence": "high",
+        "surface_form": "堯"
+      },
+      "relations": [],
+      "semantic_kind": "historical_person",
+      "supporting_evidence_ids": [
+        "sfh1-ev-25-paidiao-028-liu-annotation-001"
+      ],
+      "surface": "堯"
+    },
+    "selected_record_source": "historian_a_exact_copy",
+    "stage": "identity",
+    "status": "resolved",
+    "story_id": "25-paidiao-028",
+    "surface": "堯"
+  },
+  "output_hash": "c3e934683f8ac044e81b5c2cce1df804fea808d8552f62db518d2c62565d1a86",
+  "provider_witness_hash": null,
+  "request_hash": "7f05a3eefefc2b823fdcdcdbda00cc2482f40d768c62d9c083df4700ba9e6e3a",
+  "runtime_metadata": {
+    "candidate_only": true,
+    "canonical_write_back": false,
+    "recorded_at": "2026-09-04T15:42:46Z"
+  },
+  "schema": "sfh2-f1-checkpoint-v1",
+  "status": "completed",
+  "unit_id": "identity:sfh1-mention-2d1f96737b7b0ef11588f7e5"
+}

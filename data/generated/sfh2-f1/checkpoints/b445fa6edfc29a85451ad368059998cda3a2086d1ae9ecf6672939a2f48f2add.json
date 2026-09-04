@@ -1,0 +1,432 @@
+{
+  "attempt": 0,
+  "contract_valid": true,
+  "output": {
+    "adjudication": {
+      "candidate_only": true,
+      "canonical_write_back": false,
+      "case_id": "sfh1-mention-e2c43c63a28c758a1c1192f1",
+      "changed_fields": [],
+      "contract_status": "valid",
+      "decision": "select_b",
+      "errors": [],
+      "mention_id": "sfh1-mention-e2c43c63a28c758a1c1192f1",
+      "patch_ops": [],
+      "reason_summary": "The target span 湘州刺史 is an office title in Liu Xiaobiao's annotation identifying 胡母輔之 (字彦國, 泰山奉髙人) and stating his office as 湘州刺史. Both historians agree on the core facts: semantic_kind=office, reference_type=office_title, occurrence_role=person_attribute, bearer=胡母輔之, referent=湘州刺史. The only substantive disagreement is in the attribute fields and the relation type. Historian B provides the more complete and precise treatment: it fills attribute_type=office_held and attribute_value=湘州刺史, and uses relation=attribute_of toward the bearer 胡母輔之. Historian A leaves attribute_type and attribute_value empty and instead uses relation=office_relation. Since the span is an office title functioning as an attribute predicated of the office-holder 胡母輔之, Historian B's attribute_of relation and populated attribute fields are the more accurate semantic representation. The evidence (sfh1-ev-01-dexing-023-liu-annotation-001) directly supports this reading.",
+      "reviewed_fields": [],
+      "selected_record": {
+        "abstain": false,
+        "attribute_type": "office_held",
+        "attribute_value": "湘州刺史",
+        "bearer_hint": "胡母輔之",
+        "confidence": "high",
+        "discourse": {
+          "addressee_hint": "",
+          "antecedent_hint": "胡母輔之",
+          "self_reference_hint": "",
+          "speaker_hint": ""
+        },
+        "explanation": "The target span 湘州刺史 appears in Liu Xiaobiao's annotation to entry 01-dexing-023, within the annotation text '(人名曰胡母輔之字彦國泰山奉髙人湘州刺史...'. The annotation identifies 胡母輔之 (courtesy name 彦國) as a person from 泰山奉髙 and states his office as 湘州刺史. The office title 湘州刺史 is an attribute predicated of 胡母輔之, who is the bearer. The validated local mention sfh1-mention-8a024b8b11f83b5e4c345a0d (胡母輔之) immediately precedes this span in the same annotation sentence, confirming the office-holder relationship.",
+        "mention_id": "sfh1-mention-e2c43c63a28c758a1c1192f1",
+        "occurrence_role": "person_attribute",
+        "reference_type": "office_title",
+        "referent": {
+          "canonical_hint": "湘州刺史",
+          "confidence": "high",
+          "surface_form": "湘州刺史"
+        },
+        "relations": [
+          {
+            "confidence": "high",
+            "evidence_ids": [
+              "sfh1-ev-01-dexing-023-liu-annotation-001"
+            ],
+            "relation": "attribute_of",
+            "target_hint": "胡母輔之"
+          }
+        ],
+        "semantic_kind": "office",
+        "supporting_evidence_ids": [
+          "sfh1-ev-01-dexing-023-liu-annotation-001"
+        ],
+        "surface": "湘州刺史"
+      },
+      "selected_record_source": "historian_b_exact_copy",
+      "stage": "identity_adjudicator",
+      "story_id": "01-dexing-023",
+      "supporting_evidence_ids": [
+        "sfh1-ev-01-dexing-023-liu-annotation-001"
+      ],
+      "surface": "湘州刺史",
+      "transport": {
+        "attempt": 1,
+        "classification": "parsed",
+        "elapsed_seconds": 2.387,
+        "finish_reason": "tool_calls",
+        "model": "deepseek-v4-flash",
+        "parse_error": null,
+        "prompt_version": "sfh2-a2r-adjudicator-v2",
+        "provider_call": true,
+        "provider_witness_hash": "49e68c46ce03643c22bcac2661ed588355aa83d9deba5d394e216ff711348f20",
+        "raw_archive_path": "/tmp/sfh2-f1-raw-b30c380095772f61/sfh2-f1-live-v1/00060-identity_adjudicator-identity_adjudicator-sfh1-mention-e2c43c63a28c758a1c1192f1-attempt1.json",
+        "raw_archive_sha256": "1925a0d36505e298b59cc8ed897eec07bfc8a0b26c00be2cc1ba83952a527bef",
+        "request_hash": "b8af392a7f4ad93b91529975a7c6563f8e58581fab2c862af143fbbccbaa56f3",
+        "stage": "identity_adjudicator",
+        "temperature": 0,
+        "thinking": {
+          "type": "disabled"
+        },
+        "unit_id": "identity_adjudicator:sfh1-mention-e2c43c63a28c758a1c1192f1",
+        "usage": {
+          "completion_tokens": 343,
+          "prompt_tokens": 5685,
+          "total_tokens": 6028
+        },
+        "valid": true
+      },
+      "valid": true
+    },
+    "candidate_only": true,
+    "candidate_proposal": null,
+    "canonical_write_back": false,
+    "case_id": "sfh1-mention-e2c43c63a28c758a1c1192f1",
+    "comparison": {
+      "a_valid": true,
+      "agreement": false,
+      "b_valid": true,
+      "disagreement_classes": [
+        "relation_disagreement",
+        "semantic_field_disagreement"
+      ],
+      "historical_identity_disagreement": false,
+      "metadata_only_difference": false,
+      "semantic_fields": [
+        "attribute_type",
+        "attribute_value",
+        "relations"
+      ],
+      "substantive_disagreement": true,
+      "substantive_fields": [
+        "attribute_type",
+        "attribute_value",
+        "relations"
+      ]
+    },
+    "context": {
+      "frozen_discourse_context": {
+        "addressee_hint": "",
+        "antecedent_hint": "胡母輔之",
+        "self_reference_hint": "",
+        "speaker_hint": ""
+      },
+      "frozen_identity": {
+        "abstain": false,
+        "attribute_type": "office_held",
+        "attribute_value": "湘州刺史",
+        "bearer_hint": "胡母輔之",
+        "reference_type": "office_title",
+        "referent": {
+          "canonical_hint": "湘州刺史",
+          "confidence": "high",
+          "surface_form": "湘州刺史"
+        },
+        "semantic_kind": "office"
+      }
+    },
+    "failure": null,
+    "final_consistency": {
+      "candidate_only": true,
+      "canonical_write_back": false,
+      "flags": [],
+      "has_diagnostic_flags": false,
+      "has_hard_flags": false,
+      "has_review_flags": false,
+      "review_trigger_score": 0,
+      "schema": "sfh2-a0r-consistency-v2",
+      "stage": "identity_final"
+    },
+    "final_state": "non_person",
+    "historian_independent": {
+      "candidate_only": true,
+      "canonical_write_back": false,
+      "case_id": "sfh1-mention-e2c43c63a28c758a1c1192f1",
+      "consistency": {
+        "candidate_only": true,
+        "canonical_write_back": false,
+        "flags": [],
+        "has_diagnostic_flags": false,
+        "has_hard_flags": false,
+        "has_review_flags": false,
+        "review_trigger_score": 0,
+        "schema": "sfh2-a0r-consistency-v2",
+        "stage": "identity_independent"
+      },
+      "contract_status": "valid",
+      "errors": [],
+      "historian": "B",
+      "mention_id": "sfh1-mention-e2c43c63a28c758a1c1192f1",
+      "provisional_realization": {
+        "candidate": null,
+        "candidate_only": true,
+        "canonical_write_back": false,
+        "case_id": "sfh1-mention-e2c43c63a28c758a1c1192f1",
+        "core_graph_eligible": false,
+        "identity_created": false,
+        "mention_id": "sfh1-mention-e2c43c63a28c758a1c1192f1",
+        "occurrence_role": "person_attribute",
+        "realization_basis": [
+          "semantic_kind_does_not_create_person"
+        ],
+        "semantic_kind": "office",
+        "story_id": "01-dexing-023",
+        "surface": "湘州刺史"
+      },
+      "record": {
+        "abstain": false,
+        "attribute_type": "office_held",
+        "attribute_value": "湘州刺史",
+        "bearer_hint": "胡母輔之",
+        "confidence": "high",
+        "discourse": {
+          "addressee_hint": "",
+          "antecedent_hint": "胡母輔之",
+          "self_reference_hint": "",
+          "speaker_hint": ""
+        },
+        "explanation": "The target span 湘州刺史 appears in Liu Xiaobiao's annotation to entry 01-dexing-023, within the annotation text '(人名曰胡母輔之字彦國泰山奉髙人湘州刺史...'. The annotation identifies 胡母輔之 (courtesy name 彦國) as a person from 泰山奉髙 and states his office as 湘州刺史. The office title 湘州刺史 is an attribute predicated of 胡母輔之, who is the bearer. The validated local mention sfh1-mention-8a024b8b11f83b5e4c345a0d (胡母輔之) immediately precedes this span in the same annotation sentence, confirming the office-holder relationship.",
+        "mention_id": "sfh1-mention-e2c43c63a28c758a1c1192f1",
+        "occurrence_role": "person_attribute",
+        "reference_type": "office_title",
+        "referent": {
+          "canonical_hint": "湘州刺史",
+          "confidence": "high",
+          "surface_form": "湘州刺史"
+        },
+        "relations": [
+          {
+            "confidence": "high",
+            "evidence_ids": [
+              "sfh1-ev-01-dexing-023-liu-annotation-001"
+            ],
+            "relation": "attribute_of",
+            "target_hint": "胡母輔之"
+          }
+        ],
+        "semantic_kind": "office",
+        "supporting_evidence_ids": [
+          "sfh1-ev-01-dexing-023-liu-annotation-001"
+        ],
+        "surface": "湘州刺史"
+      },
+      "stage": "identity_independent",
+      "story_id": "01-dexing-023",
+      "surface": "湘州刺史",
+      "transport": {
+        "attempt": 1,
+        "classification": "parsed",
+        "elapsed_seconds": 3.423,
+        "finish_reason": "tool_calls",
+        "model": "deepseek-v4-flash",
+        "parse_error": null,
+        "prompt_version": "sfh2-a2-independent-historian-v1",
+        "provider_call": true,
+        "provider_witness_hash": "99ff0e8251f5b31923061b9d9b7b6267cce03d5cd5dd30bf83c7d9ea931c4684",
+        "raw_archive_path": "/tmp/sfh2-f1-raw-b30c380095772f61/sfh2-f1-live-v1/00059-identity_independent-identity_independent-sfh1-mention-e2c43c63a28c758a1c1192f1-attempt1.json",
+        "raw_archive_sha256": "1dbe9ce7667512859ffe042f77b557716a88e1e38d4324b5d3e3258f7cdda5b9",
+        "request_hash": "61aa2ca36105442b0aa347748079497611f853381701bf365a526d54de4f6297",
+        "stage": "identity_independent",
+        "temperature": 0,
+        "thinking": {
+          "type": "disabled"
+        },
+        "unit_id": "identity_independent:sfh1-mention-e2c43c63a28c758a1c1192f1",
+        "usage": {
+          "completion_tokens": 455,
+          "prompt_tokens": 4384,
+          "total_tokens": 4839
+        },
+        "valid": true
+      },
+      "valid": true
+    },
+    "historian_primary": {
+      "candidate_only": true,
+      "canonical_write_back": false,
+      "case_id": "sfh1-mention-e2c43c63a28c758a1c1192f1",
+      "consistency": {
+        "candidate_only": true,
+        "canonical_write_back": false,
+        "flags": [],
+        "has_diagnostic_flags": false,
+        "has_hard_flags": false,
+        "has_review_flags": false,
+        "review_trigger_score": 0,
+        "schema": "sfh2-a0r-consistency-v2",
+        "stage": "identity_primary"
+      },
+      "contract_status": "valid",
+      "errors": [],
+      "mention_id": "sfh1-mention-e2c43c63a28c758a1c1192f1",
+      "provisional_realization": {
+        "candidate": null,
+        "candidate_only": true,
+        "canonical_write_back": false,
+        "case_id": "sfh1-mention-e2c43c63a28c758a1c1192f1",
+        "core_graph_eligible": false,
+        "identity_created": false,
+        "mention_id": "sfh1-mention-e2c43c63a28c758a1c1192f1",
+        "occurrence_role": "person_attribute",
+        "realization_basis": [
+          "semantic_kind_does_not_create_person"
+        ],
+        "semantic_kind": "office",
+        "story_id": "01-dexing-023",
+        "surface": "湘州刺史"
+      },
+      "record": {
+        "abstain": false,
+        "attribute_type": "",
+        "attribute_value": "",
+        "bearer_hint": "胡母輔之",
+        "confidence": "high",
+        "discourse": {
+          "addressee_hint": "",
+          "antecedent_hint": "胡母輔之",
+          "self_reference_hint": "",
+          "speaker_hint": ""
+        },
+        "explanation": "The target '湘州刺史' is an office title in the Liu Xiaobiao annotation describing 胡母輔之 (courtesy name 彦國). The annotation reads '胡母輔之字彦國泰山奉髙人湘州刺史', indicating that 湘州刺史 is the office held by 胡母輔之. This is an office_title reference functioning as a person attribute describing the office bearer.",
+        "mention_id": "sfh1-mention-e2c43c63a28c758a1c1192f1",
+        "occurrence_role": "person_attribute",
+        "reference_type": "office_title",
+        "referent": {
+          "canonical_hint": "湘州刺史",
+          "confidence": "high",
+          "surface_form": "湘州刺史"
+        },
+        "relations": [
+          {
+            "confidence": "high",
+            "evidence_ids": [
+              "sfh1-ev-01-dexing-023-liu-annotation-001"
+            ],
+            "relation": "office_relation",
+            "target_hint": "胡母輔之"
+          }
+        ],
+        "semantic_kind": "office",
+        "supporting_evidence_ids": [
+          "sfh1-ev-01-dexing-023-liu-annotation-001"
+        ],
+        "surface": "湘州刺史"
+      },
+      "stage": "identity_primary",
+      "story_id": "01-dexing-023",
+      "surface": "湘州刺史",
+      "transport": {
+        "attempt": 1,
+        "classification": "parsed",
+        "elapsed_seconds": 2.748,
+        "finish_reason": "tool_calls",
+        "model": "deepseek-v4-flash",
+        "parse_error": null,
+        "prompt_version": "sfh2-a0r-primary-historian-v1",
+        "provider_call": true,
+        "provider_witness_hash": "023814b7f45c9ab53a12bfef2a0891fe906f5718496637d5c2e6a8f54f44a70d",
+        "raw_archive_path": "/tmp/sfh2-f1-raw-b30c380095772f61/sfh2-f1-live-v1/00058-identity_primary-identity_primary-sfh1-mention-e2c43c63a28c758a1c1192f1-attempt1.json",
+        "raw_archive_sha256": "175ec06f0282b123d9919a184b3460baffa9d25f922a5c64d5f3cc5d5cfbc27a",
+        "request_hash": "e3942fc434cad748179bf2132e826bcbfc701ee2ccbf0550becdded58d61b0db",
+        "stage": "identity_primary",
+        "temperature": 0,
+        "thinking": {
+          "type": "disabled"
+        },
+        "unit_id": "identity_primary:sfh1-mention-e2c43c63a28c758a1c1192f1",
+        "usage": {
+          "completion_tokens": 378,
+          "prompt_tokens": 4352,
+          "total_tokens": 4730
+        },
+        "valid": true
+      },
+      "valid": true
+    },
+    "identity_readiness": "identity_requires_pipeline",
+    "mention_id": "sfh1-mention-e2c43c63a28c758a1c1192f1",
+    "occurrence_id": "sfh1-mention-e2c43c63a28c758a1c1192f1",
+    "realization": {
+      "candidate": null,
+      "candidate_only": true,
+      "canonical_write_back": false,
+      "case_id": "sfh1-mention-e2c43c63a28c758a1c1192f1",
+      "core_graph_eligible": false,
+      "identity_created": false,
+      "mention_id": "sfh1-mention-e2c43c63a28c758a1c1192f1",
+      "occurrence_role": "person_attribute",
+      "realization_basis": [
+        "semantic_kind_does_not_create_person"
+      ],
+      "semantic_kind": "office",
+      "story_id": "01-dexing-023",
+      "surface": "湘州刺史"
+    },
+    "request_hashes": {
+      "adjudicator": "b8af392a7f4ad93b91529975a7c6563f8e58581fab2c862af143fbbccbaa56f3",
+      "independent": "61aa2ca36105442b0aa347748079497611f853381701bf365a526d54de4f6297",
+      "primary": "e3942fc434cad748179bf2132e826bcbfc701ee2ccbf0550becdded58d61b0db"
+    },
+    "selected_record": {
+      "abstain": false,
+      "attribute_type": "office_held",
+      "attribute_value": "湘州刺史",
+      "bearer_hint": "胡母輔之",
+      "confidence": "high",
+      "discourse": {
+        "addressee_hint": "",
+        "antecedent_hint": "胡母輔之",
+        "self_reference_hint": "",
+        "speaker_hint": ""
+      },
+      "explanation": "The target span 湘州刺史 appears in Liu Xiaobiao's annotation to entry 01-dexing-023, within the annotation text '(人名曰胡母輔之字彦國泰山奉髙人湘州刺史...'. The annotation identifies 胡母輔之 (courtesy name 彦國) as a person from 泰山奉髙 and states his office as 湘州刺史. The office title 湘州刺史 is an attribute predicated of 胡母輔之, who is the bearer. The validated local mention sfh1-mention-8a024b8b11f83b5e4c345a0d (胡母輔之) immediately precedes this span in the same annotation sentence, confirming the office-holder relationship.",
+      "mention_id": "sfh1-mention-e2c43c63a28c758a1c1192f1",
+      "occurrence_role": "person_attribute",
+      "reference_type": "office_title",
+      "referent": {
+        "canonical_hint": "湘州刺史",
+        "confidence": "high",
+        "surface_form": "湘州刺史"
+      },
+      "relations": [
+        {
+          "confidence": "high",
+          "evidence_ids": [
+            "sfh1-ev-01-dexing-023-liu-annotation-001"
+          ],
+          "relation": "attribute_of",
+          "target_hint": "胡母輔之"
+        }
+      ],
+      "semantic_kind": "office",
+      "supporting_evidence_ids": [
+        "sfh1-ev-01-dexing-023-liu-annotation-001"
+      ],
+      "surface": "湘州刺史"
+    },
+    "selected_record_source": "historian_b_exact_copy",
+    "stage": "identity",
+    "status": "resolved",
+    "story_id": "01-dexing-023",
+    "surface": "湘州刺史"
+  },
+  "output_hash": "5a0104884adc897fae6d38a43a60fbd7290a8d11b9dd88626a7d25089a2ec5c7",
+  "provider_witness_hash": null,
+  "request_hash": "332914500bc29ee3c85af550b4b07eb0c1c463c4803d554ebc0336eee4a12d8c",
+  "runtime_metadata": {
+    "candidate_only": true,
+    "canonical_write_back": false,
+    "recorded_at": "2026-09-04T15:42:47Z"
+  },
+  "schema": "sfh2-f1-checkpoint-v1",
+  "status": "completed",
+  "unit_id": "identity:sfh1-mention-e2c43c63a28c758a1c1192f1"
+}
