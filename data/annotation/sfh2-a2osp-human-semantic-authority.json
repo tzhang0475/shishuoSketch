@@ -1,0 +1,95 @@
+{
+  "schema": "sfh2-a2osp-human-semantic-authority-v1",
+  "stage": "SFH2.2-A2OSP",
+  "authority": "human_semantic_review",
+  "predecessor_stage": "SFH2.2-A2OS",
+  "review_status": "reviewed",
+  "candidate_only": false,
+  "canonical_write_back": false,
+  "previous_gold_sha256": "498dd1df68c5f99b80651ec1fad58676d0c24e7a6b624c484d89dd6218844f28",
+  "new_gold_sha256": "177ab3018e6741c3deaf3b5f957bc177df8c4f416ee9a9035bdf6027f7d7e3a7",
+  "substantive_gold_mutation_count": 2,
+  "unchanged_gold_record_count": 24,
+  "model_output_used_as_authority": false,
+  "previous_revision": {
+    "stage": "SFH2.2-A2OR",
+    "previous_sha256": "b9076bf6bf82e86f91762d1bb2dd0f761fb7a4593a0d224d18162e931a1c5941",
+    "changed_case_ids": [
+      "sfh2-a0r-l-challenge-c07bd51ac298529ddbc6"
+    ],
+    "substantive_mutation_count": 1,
+    "authority_path": "data/annotation/sfh2-a2or-human-semantic-authority.json"
+  },
+  "records": [
+    {
+      "case_id": "sfh2-a0r-l-challenge-f245371d8f0cdf9c8773",
+      "story_id": "21-qiaoyi-011",
+      "surface": "顧",
+      "decision": "revise_gold",
+      "authority": "human_semantic_review",
+      "predecessor_stage": "SFH2.2-A2OS",
+      "canonical_write_back": false,
+      "root_cause": "target_gold_alignment_error",
+      "exact_occurrence_key": {
+        "case_id": "sfh2-a0r-l-challenge-f245371d8f0cdf9c8773",
+        "story_id": "21-qiaoyi-011",
+        "mention_id": "sfh1-mention-7bf42600cd19ef3230d8b8fb",
+        "source_evidence_id": "sfh1-ev-21-qiaoyi-011-main",
+        "source_start": 0,
+        "source_end": 1,
+        "surface": "顧"
+      },
+      "source_evidence_ids": [
+        "sfh1-ev-21-qiaoyi-011-main"
+      ],
+      "source_context": "顧長康好寫起人形欲圖殷荆州殷曰我形惡不煩耳顧曰明府正為眼爾",
+      "previous_gold": {
+        "expected_narrative_function": "speaker",
+        "expected_legacy_occurrence_role": "speaker_reference",
+        "semantic_basis": "顧 is the subject of 顧曰 and therefore the speaker of the following main-text utterance."
+      },
+      "reviewed_gold": {
+        "expected_narrative_function": "participant",
+        "expected_legacy_occurrence_role": "scene_participant",
+        "semantic_basis": "The pinned opening 顧 inside 顧長康 is the participant reference in the narrator-framed event. The later 顧 in 顧曰 is a different occurrence and is the speaker."
+      },
+      "semantic_basis": "The pinned occurrence is the opening 顧 inside 顧長康 and participates in the narrator-framed event; it is not the later same-surface speaker occurrence in 顧曰.",
+      "review_status": "reviewed"
+    },
+    {
+      "case_id": "sfh2-a0-57d1fc3c0492b21ee1f4",
+      "story_id": "02-yanyu-036",
+      "surface": "齊桓公",
+      "decision": "revise_gold",
+      "authority": "human_semantic_review",
+      "predecessor_stage": "SFH2.2-A2OS",
+      "canonical_write_back": false,
+      "root_cause": "gold_taxonomy_boundary_error",
+      "exact_occurrence_key": {
+        "case_id": "sfh2-a0-57d1fc3c0492b21ee1f4",
+        "story_id": "02-yanyu-036",
+        "mention_id": "sfh1-mention-ddc50731411818b9d0f52a98",
+        "source_evidence_id": "sfh1-ev-02-yanyu-036-liu-annotation-001",
+        "source_start": 33,
+        "source_end": 36,
+        "surface": "齊桓公"
+      },
+      "source_evidence_ids": [
+        "sfh1-ev-02-yanyu-036-liu-annotation-001"
+      ],
+      "source_context": "史記曰管仲夷吾者潁上人相齊桓公九合諸侯一匡天下",
+      "previous_gold": {
+        "expected_narrative_function": "historical_exemplum",
+        "expected_legacy_occurrence_role": "historical_exemplum",
+        "semantic_basis": "The Liu annotation supplies a historical example about 管仲 serving 齊桓公; the occurrence is an exemplum reference."
+      },
+      "reviewed_gold": {
+        "expected_narrative_function": "reference",
+        "expected_legacy_occurrence_role": "annotation_person",
+        "semantic_basis": "齊桓公 is mentioned inside the 史記 material explaining the invoked 管仲/管夷吾 comparison. The occurrence itself is a reference to the ruler, not the historical exemplum function."
+      },
+      "semantic_basis": "The main discourse invokes 管仲/管夷吾 as the historical comparison; 齊桓公 is an entity mentioned inside the explanatory 史記 material and does not inherit the exemplum function.",
+      "review_status": "reviewed"
+    }
+  ]
+}

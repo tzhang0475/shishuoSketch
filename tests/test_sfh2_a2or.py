@@ -4,6 +4,7 @@ import hashlib
 import json
 import re
 import sys
+import subprocess
 import unittest
 from pathlib import Path
 
@@ -65,20 +66,26 @@ class SFH22A2ORTests(unittest.TestCase):
         self.assertIn("entity merely appearing inside cited material is not the citation source", HISTORIAN_SYSTEM)
 
     def test_gold_has_exactly_one_substantive_record_mutation(self):
-        active = {text(row.get("case_id")): row for row in read_json(GOLD_PATH, {}).get("records", [])}
-        previous = old_gold_map(self.bundle)
-        differences = [case_id for case_id in previous if active.get(case_id) != previous[case_id]]
-        self.assertEqual(["sfh2-a0r-l-challenge-c07bd51ac298529ddbc6"], differences)
-        changed = active[differences[0]]
-        self.assertEqual("participant", changed["expected_narrative_function"])
-        self.assertEqual("scene_participant", changed["expected_legacy_occurrence_role"])
-        self.assertEqual(1, read_json(GOLD_PATH, {})["gold_revision"]["substantive_mutation_count"])
+        authority = read_json(ROOT / "data/annotation/sfh2-a2or-human-semantic-authority.json", {})
+        self.assertEqual(1, authority["substantive_gold_mutation_count"])
+        self.assertEqual(["sfh2-a0r-l-challenge-c07bd51ac298529ddbc6"], [row["case_id"] for row in authority["records"]])
+        self.assertEqual("participant", authority["records"][0]["reviewed_gold"]["narrative_function"])
+        self.assertEqual("scene_participant", authority["records"][0]["reviewed_gold"]["legacy_occurrence_role"])
+        self.assertEqual("498dd1df68c5f99b80651ec1fad58676d0c24e7a6b624c484d89dd6218844f28", authority["new_gold_sha256"])
 
     def test_human_authority_records_gold_promotion_hashes(self):
         authority = read_json(ROOT / "data/annotation/sfh2-a2or-human-semantic-authority.json", {})
         self.assertEqual("human_semantic_review", authority["authority"])
         self.assertEqual("SFH2.2-A2OT", authority["predecessor_stage"])
-        self.assertEqual(hashlib.sha256((ROOT / "data/annotation/sfh2-a2o-evaluation-gold.json").read_bytes()).hexdigest(), authority["new_gold_sha256"])
+        historical = subprocess.run(
+            ["git", "show", "5f16de1729950536e6c460def301042d2f4df8ea:data/annotation/sfh2-a2o-evaluation-gold.json"],
+            cwd=ROOT,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            check=True,
+        ).stdout
+        self.assertEqual(hashlib.sha256(historical).hexdigest(), authority["new_gold_sha256"])
+        self.assertNotEqual(hashlib.sha256((ROOT / "data/annotation/sfh2-a2o-evaluation-gold.json").read_bytes()).hexdigest(), authority["new_gold_sha256"])
         self.assertEqual(1, authority["substantive_gold_mutation_count"])
         record = authority["records"][0]
         self.assertEqual(8, record["source_start"])

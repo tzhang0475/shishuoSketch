@@ -130,7 +130,16 @@ def load_bundle() -> dict[str, Any]:
     a2o_evaluation = by_case(read_json(A2O_EVALUATION_PATH, {}) or {})
     a2or_results = by_case(read_json(A2OR_RESULTS_PATH, {}) or {})
     a2or_evaluation = by_case(read_json(A2OR_EVALUATION_PATH, {}) or {})
-    gold = by_case(read_json(GOLD_PATH, {}) or {})
+    # A2OS is a frozen audit. A later Gold promotion must not silently alter
+    # its historical counterfactuals, so prefer the Gold witness captured in
+    # the immutable A2OS alignment artifact.
+    audit_document = read_json(OUT / "gold-alignment-audit.json", {}) or {}
+    frozen_gold = {
+        text(row.get("case_id")): copy.deepcopy(row.get("current_gold"))
+        for row in rows(audit_document)
+        if text(row.get("case_id")) and isinstance(row.get("current_gold"), Mapping)
+    }
+    gold = frozen_gold if len(frozen_gold) == 26 else by_case(read_json(GOLD_PATH, {}) or {})
     mentions_document = read_json(MENTIONS_PATH, {}) or {}
     mention_rows = rows(mentions_document)
     mentions = {
