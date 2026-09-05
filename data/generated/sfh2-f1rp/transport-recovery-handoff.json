@@ -1,0 +1,105 @@
+{
+  "candidate_only": true,
+  "canonical_write_back": false,
+  "future_stage": "SFH2.2-F1RT",
+  "invalid_payload_count": 5,
+  "invalid_payloads": [
+    {
+      "final_identity_resolved": false,
+      "occurrence_id": "sfh1-mention-250c0ae68551d8dab4943ed8",
+      "provider_transport_success": true,
+      "recovery_class": "terminal_identity_block",
+      "request_hash": "ee675ace0bc2ee23af8239f43e0650589997f58f0659e0c55fb4386668321818",
+      "root_cause": "provider_structured_output_drift",
+      "root_cause_confidence": "high",
+      "stage": "identity_primary",
+      "story_id": "34-pilou-006",
+      "surface": "殷公",
+      "transport_classification": "response_parse_failure"
+    },
+    {
+      "final_identity_resolved": false,
+      "occurrence_id": "sfh1-mention-250c0ae68551d8dab4943ed8",
+      "provider_transport_success": true,
+      "recovery_class": "terminal_identity_block",
+      "request_hash": "49c4fae7e1d81e76459e2690f605f7737bdef5844994461f613dc84db36f23fe",
+      "root_cause": "provider_structured_output_drift",
+      "root_cause_confidence": "high",
+      "stage": "identity_independent",
+      "story_id": "34-pilou-006",
+      "surface": "殷公",
+      "transport_classification": "response_parse_failure"
+    },
+    {
+      "final_identity_resolved": true,
+      "occurrence_id": "sfh1-mention-ab9210bb6f88d713e884fe26",
+      "provider_transport_success": true,
+      "recovery_class": "terminal_boundary_failure",
+      "request_hash": "ecb85544d0a17ff0ce49ef19c74c44fbf42975a4b8e2e206cd6debd4f8713032",
+      "root_cause": "truncated_output",
+      "root_cause_confidence": "high",
+      "stage": "boundary_validator",
+      "story_id": "08-shangyu-020",
+      "surface": "剌史",
+      "transport_classification": "response_truncated"
+    },
+    {
+      "final_identity_resolved": false,
+      "occurrence_id": "sfh1-mention-b6fa0b811087b18b0774e8f9",
+      "provider_transport_success": true,
+      "recovery_class": "terminal_identity_block",
+      "request_hash": "595a0b05231e56924260244a3c1609474332ea1b1f26018f3e47c0dcd41044c8",
+      "root_cause": "provider_structured_output_drift",
+      "root_cause_confidence": "high",
+      "stage": "identity_primary",
+      "story_id": "05-fangzheng-058",
+      "surface": "王文度",
+      "transport_classification": "response_parse_failure"
+    },
+    {
+      "final_identity_resolved": true,
+      "occurrence_id": "sfh1-mention-2c6672ce7bffaa6f16181810",
+      "provider_transport_success": true,
+      "recovery_class": "recovered_intermediate_failure",
+      "request_hash": "29ee9ad9d045e8ad529180ae653f8b559a33abc72ec44c7eb92c366ed793a0d5",
+      "root_cause": "provider_structured_output_drift",
+      "root_cause_confidence": "high",
+      "stage": "identity_primary",
+      "story_id": "06-yaliang-033",
+      "surface": "祖端",
+      "transport_classification": "response_parse_failure"
+    }
+  ],
+  "provider_calls": 0,
+  "reason": "F1 had four identity structured-output failures and one truncated boundary response; no recovery replay is performed in F1RP.",
+  "replay_performed": false,
+  "schema": "sfh2-f1rp-transport-recovery-handoff-v1",
+  "source_stage": "SFH2.2-F1R",
+  "terminal_identity_block_count": 3,
+  "terminal_identity_blocks": [
+    {
+      "classification": "terminal_identity_block",
+      "occurrence_id": "sfh1-mention-250c0ae68551d8dab4943ed8",
+      "reason": "The qualified adjudication stage had no valid identity hypothesis to select or revise.",
+      "recovery_possible_from_stored_f1": false,
+      "story_id": "34-pilou-006",
+      "surface": "殷公"
+    },
+    {
+      "classification": "terminal_identity_block",
+      "occurrence_id": "sfh1-mention-b6fa0b811087b18b0774e8f9",
+      "reason": "The qualified adjudication stage had no valid identity hypothesis to select or revise.",
+      "recovery_possible_from_stored_f1": false,
+      "story_id": "05-fangzheng-058",
+      "surface": "王文度"
+    },
+    {
+      "classification": "terminal_identity_block",
+      "occurrence_id": "sfh1-mention-edd76871090fb1cad57dcd9c",
+      "reason": "The qualified adjudication stage had no valid identity hypothesis to select or revise.",
+      "recovery_possible_from_stored_f1": false,
+      "story_id": "01-dexing-028",
+      "surface": "兒"
+    }
+  ]
+}

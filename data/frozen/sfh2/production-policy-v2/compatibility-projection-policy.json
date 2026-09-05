@@ -1,0 +1,146 @@
+{
+  "authoritative_axes": [
+    "provenance_layer",
+    "narrative_function",
+    "entity_kind",
+    "semantic_kind"
+  ],
+  "candidate_only": true,
+  "canonical_write_back": false,
+  "generic_fallback": "other",
+  "historical_projection_mutated": false,
+  "historical_projection_path": "scripts/sfh2_a2o/provenance.py",
+  "no_new_legacy_enum": true,
+  "no_surface_or_lexical_rules": true,
+  "non_person_invariant": "A known non-person target must never emit the person-specific annotation_person role.",
+  "policy_status": "approved",
+  "policy_version": "production-policy-v2",
+  "provider_calls": 0,
+  "reviewed_control": {
+    "entity_kind": "non_person",
+    "legacy_occurrence_role": "other",
+    "narrative_function": "reference",
+    "occurrence_id": "sfh1-mention-7be0675e1cbc7d93e92349be"
+  },
+  "rules": [
+    {
+      "emit": "historical_exemplum",
+      "when": {
+        "narrative_function": "historical_exemplum"
+      }
+    },
+    {
+      "emit": "collective_reference",
+      "when": {
+        "narrative_function": "collective_reference"
+      }
+    },
+    {
+      "emit": "person_attribute",
+      "when": {
+        "narrative_function": "person_attribute"
+      }
+    },
+    {
+      "emit": "genealogy_reference",
+      "when": {
+        "narrative_function": "genealogy_reference"
+      }
+    },
+    {
+      "emit": "citation_source_person",
+      "when": {
+        "entity_kind": "person",
+        "narrative_function": "citation_source"
+      }
+    },
+    {
+      "emit": "speaker_reference",
+      "when": {
+        "entity_kind": "person",
+        "narrative_function": "speaker"
+      }
+    },
+    {
+      "emit": "addressee_reference",
+      "when": {
+        "entity_kind": "person",
+        "narrative_function": "addressee"
+      }
+    },
+    {
+      "emit": "person_attribute",
+      "when": {
+        "narrative_function": "person_attribute",
+        "semantic_kind": "office"
+      }
+    },
+    {
+      "emit": "other",
+      "when": {
+        "narrative_function": "other",
+        "semantic_kind": "office"
+      }
+    },
+    {
+      "emit": "other",
+      "when": {
+        "entity_kind": "non_person",
+        "narrative_function": "reference"
+      }
+    },
+    {
+      "emit": "other",
+      "when": {
+        "entity_kind": "non_person",
+        "narrative_function": "participant"
+      }
+    },
+    {
+      "emit": "annotation_person",
+      "when": {
+        "entity_kind": "person",
+        "narrative_function": "participant",
+        "provenance_layer": "liu_annotation"
+      }
+    },
+    {
+      "emit": "annotation_person",
+      "when": {
+        "entity_kind": "person",
+        "narrative_function": "reference",
+        "provenance_layer": "liu_annotation"
+      }
+    },
+    {
+      "emit": "scene_participant",
+      "when": {
+        "entity_kind": "person",
+        "narrative_function": "participant",
+        "provenance_layer": "main_text"
+      }
+    },
+    {
+      "emit": "scene_reference",
+      "when": {
+        "entity_kind": "person",
+        "narrative_function": "reference",
+        "provenance_layer": "main_text"
+      }
+    },
+    {
+      "emit": "structural",
+      "when": {
+        "narrative_function": "structural"
+      }
+    },
+    {
+      "emit": "other",
+      "when": {
+        "narrative_function": "other_or_uncertain"
+      }
+    }
+  ],
+  "schema": "sfh2-production-compatibility-projection-v2",
+  "source_stage": "SFH2.2-F1RP"
+}
