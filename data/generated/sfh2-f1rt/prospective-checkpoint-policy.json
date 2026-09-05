@@ -1,0 +1,42 @@
+{
+  "candidate_only": true,
+  "canonical_write_back": false,
+  "network_retry_is_separate": true,
+  "recovered_result_fields": [
+    "original_failed_request_hash",
+    "recovery_request_hash",
+    "recovery_reason",
+    "output_hash",
+    "provider_witness_hash",
+    "contract_valid"
+  ],
+  "required_fields": [
+    "unit_id",
+    "request_hash",
+    "status",
+    "attempt",
+    "contract_valid",
+    "output_hash",
+    "provider_witness_hash",
+    "runtime_metadata"
+  ],
+  "resume": {
+    "different_request_hash": "never silently reuse",
+    "duplicate_semantic_write": "forbidden",
+    "matching_valid_request_hash": "reuse"
+  },
+  "schema": "sfh2-f1rt-prospective-checkpoint-policy-v1",
+  "semantic_recovery_replay_limit": 1,
+  "stable_units": [
+    "identity:<occurrence_key>",
+    "occurrence_primary:<occurrence_key>",
+    "boundary:<occurrence_key>"
+  ],
+  "statuses": [
+    "valid",
+    "invalid_terminal",
+    "recovery_eligible",
+    "recovery_succeeded",
+    "recovery_failed"
+  ]
+}

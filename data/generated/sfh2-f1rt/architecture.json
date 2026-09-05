@@ -1,0 +1,105 @@
+{
+  "arms": {
+    "arm_a": {
+      "contract": "historical full semantic record contract",
+      "name": "exact_replay",
+      "recovery_attempt": "exact_replay_1",
+      "semantic_prompt_unchanged": true
+    },
+    "arm_b": {
+      "contract": "sfh2-identity-semantic-body-transport-v2",
+      "name": "semantic_body_transport_v2",
+      "python_owns_envelope": true,
+      "semantic_prompt_unchanged": true
+    }
+  },
+  "baseline_commit": "dbf6cf46db2236096a47f0c960935ea3e255faa4",
+  "boundary_failure_scope": "剌史 is transport-only because F1RP human semantic authority outranks replay output",
+  "candidate_only": true,
+  "canonical_write_back": false,
+  "code_hashes": {
+    "scripts/run_sfh2_f1rt.py": "3d4b389a9cb1c218a70b23d278c31cb2d3d34872191ced580ef0dbe456c8edbd",
+    "scripts/sfh2_a0/schemas.py": "c6e5fc6bbfcb0d705a86f546e67b78d6010ce396a0b6fa79b56e63131bb1e7a6",
+    "scripts/sfh2_a0r/contracts.py": "b74cce5b4cc1c6b139d98e40e26e50f4b6fc1c0d3d1db2a37d7c9c4a9393e4fc",
+    "scripts/sfh2_a0r/pipeline.py": "98ba28540d8393f63f6e173cf76867e8bf94a1a68eebbc18069dfebc8dace52f",
+    "scripts/sfh2_a2/comparison.py": "543aade86e71442374a706217934aed032cb91fc238baa49c81c40308b17c72c",
+    "scripts/sfh2_a2/contracts.py": "9d97c81101d011a0a6af5194b6b9237988ef6c96de46f4a589bca51643735c92",
+    "scripts/sfh2_a2/pipeline.py": "acc7aeb2179c001a9d5bc2be95dd8936b6cad5232a0bf304e2e76237abe57909",
+    "scripts/sfh2_a2ovb/common.py": "37207ed7523dc7f1e57f84664e31e0a9975f8656e58da015eb4ca3c6bb2879fc",
+    "scripts/sfh2_a2ovb/contracts.py": "c614914aef7ab784da2dea1c539fd41c250419f19dec058cc47fae02b34cae4d",
+    "scripts/sfh2_a2ovb/prompt.py": "f6239953ed2d079678552d1a55f6629fcacd85b530946e88fb2e2fe72bc3f7f1",
+    "scripts/sfh2_a2r/contracts.py": "f0a2ec42d1543fce0bea259cfa962319b3092a11b4cffc5ebe4d67ea8f23f96c",
+    "scripts/sfh2_a2r/pipeline.py": "601df9fd16ac75cb9a4d100015d191803bd4312dfee0eb48fc151e73146bc31e",
+    "scripts/sfh2_f1/common.py": "80f3904b6969d36d35fcaff7305b2a47d9b42685c3fd4a16cc0c9b5796482b12",
+    "scripts/sfh2_f1/pipeline.py": "2dbce3b49eb2500a86c0c3b7c05bcd6399b13f7e3f873c3a22f9e3783430bab9",
+    "scripts/sfh2_f1rt/common.py": "6b90ad0c644b213b4901eddd3e9ce8c0c5eae452371a0e11924ed31c9252b2af",
+    "scripts/sfh2_f1rt/transport.py": "028866097c379b829c452250adc71817ab45c4b13eede258eac77dd33431f9d6"
+  },
+  "excluded": [
+    "A2OR occurrence semantics",
+    "A2OVB semantic rerun",
+    "F1/F2 production",
+    "canonical promotion",
+    "Gold/human authority input"
+  ],
+  "frozen_semantic_components": {
+    "endpoint": "https://api.deepseek.com/beta/chat/completions",
+    "identity_adjudication_prompt_version": "sfh2-a2r-adjudicator-v2",
+    "identity_independent_prompt_version": "sfh2-a2-independent-historian-v1",
+    "identity_primary_prompt_version": "sfh2-a0r-primary-historian-v1",
+    "model": "deepseek-v4-flash",
+    "semantic_body_schema_hash": "dcd518dbd62c7c29b17f03919a6da79f190bf864e5ae6711f07a9bd8d74bdace",
+    "semantic_schema_hash": "7510405b7add81456a168de681d2dceb4d06594e828259f5d6d23221a2d2192e",
+    "temperature": 0,
+    "thinking": {
+      "type": "disabled"
+    }
+  },
+  "git_state_at_start": {
+    "branch": "main",
+    "head": "dbf6cf46db2236096a47f0c960935ea3e255faa4",
+    "origin_main": "dbf6cf46db2236096a47f0c960935ea3e255faa4"
+  },
+  "historical_invalid_stage_units": 15,
+  "identity_semantic_fields_unchanged": [
+    "abstain",
+    "attribute_type",
+    "attribute_value",
+    "bearer_hint",
+    "confidence",
+    "discourse",
+    "explanation",
+    "occurrence_role",
+    "reference_type",
+    "referent",
+    "relations",
+    "semantic_kind",
+    "supporting_evidence_ids"
+  ],
+  "purpose": "bounded structured-output recovery qualification; semantic architecture remains frozen",
+  "python_owned_immutable_envelope": [
+    "case_id",
+    "occurrence_id",
+    "mention_id",
+    "story_id",
+    "source_evidence_id",
+    "source_start",
+    "source_end",
+    "surface",
+    "request_hash",
+    "candidate_person_id",
+    "pipeline_id",
+    "stage_id"
+  ],
+  "qualified_identity_reconstruction": "existing A2R comparison/adjudication policy; no identity shortcut",
+  "schema": "sfh2-f1rt-architecture-v1",
+  "source_hashes": {
+    "data/frozen/sfh2/identity-v1/manifest.json": "f60e4eb84c5af10d644ac09dbcbdfba93cc435660868c3e38486563604dcc95e",
+    "data/frozen/sfh2/semantic-v1/manifest.json": "1254088f928817e8f8098a6153e2d3ad5173636b35cd995f261fb7ee69ca29bf",
+    "data/generated/sfh2-f-prep/f1-selection.json": "42b6f400e3c31cbae4b9963793b44c15e18131d3ff7b89b932f8f234c0d23d9a",
+    "data/generated/sfh2-f1/identity-results.json": "d9a8f43abf66681d7d88e76f49fcae33550001ea018492a429e54a8cd4a3c5ff",
+    "data/generated/sfh2-f1r/transport-failure-audit.json": "c82a9d20e7dbf9494296130eab477595899083af6f79be092102e2a198200f7f",
+    "data/generated/sfh2-f1rp/transport-recovery-handoff.json": "2b2f2d47e854ca28968caefbaa84cb82ad801ac73b8fdc6b4edf7512036cc78c"
+  },
+  "stage": "SFH2.2-F1RT"
+}

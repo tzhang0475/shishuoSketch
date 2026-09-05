@@ -1,0 +1,205 @@
+{
+  "by_stage": {
+    "boundary_validator": {
+      "completion_tokens": 311,
+      "max_latency_seconds": 2.555,
+      "median_latency_seconds": 2.555,
+      "network_retries": 0,
+      "parse_or_truncation_failures": 0,
+      "parsed": 1,
+      "prompt_tokens": 5172,
+      "provider_calls": 1,
+      "provider_failures": 0,
+      "records": 1,
+      "total_tokens": 5483
+    },
+    "identity_adjudicator": {
+      "completion_tokens": 1099,
+      "max_latency_seconds": 2.894,
+      "median_latency_seconds": 2.831,
+      "network_retries": 0,
+      "parse_or_truncation_failures": 0,
+      "parsed": 3,
+      "prompt_tokens": 15852,
+      "provider_calls": 3,
+      "provider_failures": 0,
+      "records": 3,
+      "total_tokens": 16951
+    },
+    "identity_independent": {
+      "completion_tokens": 12308,
+      "max_latency_seconds": 3.914,
+      "median_latency_seconds": 3.292,
+      "network_retries": 0,
+      "parse_or_truncation_failures": 0,
+      "parsed": 24,
+      "prompt_tokens": 91664,
+      "provider_calls": 24,
+      "provider_failures": 0,
+      "records": 24,
+      "total_tokens": 103972
+    },
+    "identity_primary": {
+      "completion_tokens": 6808,
+      "max_latency_seconds": 3.116,
+      "median_latency_seconds": 2.704,
+      "network_retries": 0,
+      "parse_or_truncation_failures": 0,
+      "parsed": 16,
+      "prompt_tokens": 53231,
+      "provider_calls": 16,
+      "provider_failures": 0,
+      "records": 16,
+      "total_tokens": 60039
+    },
+    "probe_boundary": {
+      "completion_tokens": 161,
+      "max_latency_seconds": 1.135,
+      "median_latency_seconds": 1.135,
+      "network_retries": 0,
+      "parse_or_truncation_failures": 0,
+      "parsed": 1,
+      "prompt_tokens": 455,
+      "provider_calls": 1,
+      "provider_failures": 0,
+      "records": 1,
+      "total_tokens": 616
+    },
+    "probe_identity_body_v2": {
+      "completion_tokens": 196,
+      "max_latency_seconds": 1.525,
+      "median_latency_seconds": 1.525,
+      "network_retries": 0,
+      "parse_or_truncation_failures": 0,
+      "parsed": 1,
+      "prompt_tokens": 1304,
+      "provider_calls": 1,
+      "provider_failures": 0,
+      "records": 1,
+      "total_tokens": 1500
+    },
+    "probe_identity_full": {
+      "completion_tokens": 211,
+      "max_latency_seconds": 1.468,
+      "median_latency_seconds": 1.468,
+      "network_retries": 0,
+      "parse_or_truncation_failures": 0,
+      "parsed": 1,
+      "prompt_tokens": 1315,
+      "provider_calls": 1,
+      "provider_failures": 0,
+      "records": 1,
+      "total_tokens": 1526
+    }
+  },
+  "candidate_only": true,
+  "canonical_write_back": false,
+  "completion_tokens": 21094,
+  "endpoint": "https://api.deepseek.com/beta/chat/completions",
+  "max_latency_seconds": 3.914,
+  "median_latency_seconds": 3.067,
+  "model": "deepseek-v4-flash",
+  "network_retries": 0,
+  "parse_or_truncation_failures": 0,
+  "probe_records": [
+    {
+      "attempt": 1,
+      "attempt_class": "contract_probe",
+      "classification": "parsed",
+      "elapsed_seconds": 1.468,
+      "endpoint": "https://api.deepseek.com/beta/chat/completions",
+      "finish_reason": "tool_calls",
+      "function_name": "submit_sfh2_a0r_primary_semantics_v1",
+      "model": "deepseek-v4-flash",
+      "network_retry": false,
+      "parse_error": null,
+      "provider_call": true,
+      "provider_witness_hash": "9f19c6b562fa5d379706dbe683e10e8b17aaa85c7ff5c7c1b4ee60f7309d7233",
+      "raw_archive_path": "/tmp/sfh2-f1rt-raw-sfh2-f1rt-live-v2/0001-probe_identity_full-schema-probe-attempt1.json",
+      "raw_archive_sha256": "fd9b5709bd9855e796622555d02ea71a3bdd851965231b6cebc8f0904e6f1341",
+      "request_hash": "b73cbf4be566cefdc7150779099bf3cc32431981cb3c407e4845092c12856a12",
+      "stage": "probe_identity_full",
+      "temperature": 0,
+      "thinking": {
+        "type": "disabled"
+      },
+      "unit_id": "schema-probe",
+      "usage": {
+        "completion_tokens": 211,
+        "prompt_tokens": 1315,
+        "total_tokens": 1526
+      },
+      "valid": true
+    },
+    {
+      "attempt": 1,
+      "attempt_class": "contract_probe",
+      "classification": "parsed",
+      "elapsed_seconds": 1.525,
+      "endpoint": "https://api.deepseek.com/beta/chat/completions",
+      "finish_reason": "tool_calls",
+      "function_name": "submit_sfh2_identity_semantic_body_primary_v2",
+      "model": "deepseek-v4-flash",
+      "network_retry": false,
+      "parse_error": null,
+      "provider_call": true,
+      "provider_witness_hash": "15ca3d49d94cfbc07d6664de5b4a2ed94041d8245277b659e2df567aa3fd8a7a",
+      "raw_archive_path": "/tmp/sfh2-f1rt-raw-sfh2-f1rt-live-v2/0002-probe_identity_body_v2-schema-probe-attempt1.json",
+      "raw_archive_sha256": "4218ae69cf9e5a7e6dd9df88f25e897325ab47887ff8074315bbda4671649fd0",
+      "request_hash": "6cae860443a21d1cc209a292c030197e514e07ec3f7a07978603707627a16fa3",
+      "stage": "probe_identity_body_v2",
+      "temperature": 0,
+      "thinking": {
+        "type": "disabled"
+      },
+      "unit_id": "schema-probe",
+      "usage": {
+        "completion_tokens": 196,
+        "prompt_tokens": 1304,
+        "total_tokens": 1500
+      },
+      "valid": true
+    },
+    {
+      "attempt": 1,
+      "attempt_class": "contract_probe",
+      "classification": "parsed",
+      "elapsed_seconds": 1.135,
+      "endpoint": "https://api.deepseek.com/beta/chat/completions",
+      "finish_reason": "tool_calls",
+      "function_name": "submit_sfh2_a2ovb_boundary_validation_v1",
+      "model": "deepseek-v4-flash",
+      "network_retry": false,
+      "parse_error": null,
+      "provider_call": true,
+      "provider_witness_hash": "31b4fc7f8ef33272541f0d15d5f2a3e493c147578bf3ee16b7d91c45e1f7fa5a",
+      "raw_archive_path": "/tmp/sfh2-f1rt-raw-sfh2-f1rt-live-v2/0003-probe_boundary-schema-probe-attempt1.json",
+      "raw_archive_sha256": "95b0b5d46cc56fc0cae9994c735ab16d62b8ea303630a7e303b37de6ae89915e",
+      "request_hash": "2379ca3b904bba1e6f83b8ec6c017db292fb17573c5aab50449144393b2d1443",
+      "stage": "probe_boundary",
+      "temperature": 0,
+      "thinking": {
+        "type": "disabled"
+      },
+      "unit_id": "schema-probe",
+      "usage": {
+        "completion_tokens": 161,
+        "prompt_tokens": 455,
+        "total_tokens": 616
+      },
+      "valid": true
+    }
+  ],
+  "prompt_tokens": 168993,
+  "provider_attempts": 47,
+  "provider_calls": 47,
+  "provider_failures": 0,
+  "raw_provider_storage": "external_archive_default",
+  "run_id": "sfh2-f1rt-live-v2",
+  "schema": "sfh2-f1rt-provider-accounting-v1",
+  "temperature": 0,
+  "thinking": {
+    "type": "disabled"
+  },
+  "total_tokens": 190087
+}

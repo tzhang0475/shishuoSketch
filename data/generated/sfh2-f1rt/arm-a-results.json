@@ -1,0 +1,1731 @@
+{
+  "by_failure_class": {
+    "immutable_id_mismatch": {
+      "recovery_rate": 0.25,
+      "units": 4,
+      "valid_recoveries": 1
+    },
+    "invalid_json": {
+      "recovery_rate": 1.0,
+      "units": 4,
+      "valid_recoveries": 4
+    },
+    "record_shape_invalid": {
+      "recovery_rate": 0.333333,
+      "units": 6,
+      "valid_recoveries": 2
+    },
+    "truncated_output": {
+      "recovery_rate": 1.0,
+      "units": 1,
+      "valid_recoveries": 1
+    }
+  },
+  "candidate_only": true,
+  "canonical_write_back": false,
+  "logical_replay_count": 15,
+  "records": [
+    {
+      "candidate_only": true,
+      "canonical_write_back": false,
+      "case_id": "sfh1-mention-14aadf84022adda0aa99308b",
+      "consistency": {
+        "candidate_only": true,
+        "canonical_write_back": false,
+        "flags": [],
+        "has_diagnostic_flags": false,
+        "has_hard_flags": false,
+        "has_review_flags": false,
+        "review_trigger_score": 0,
+        "schema": "sfh2-a0r-consistency-v2",
+        "stage": "identity_primary"
+      },
+      "contract_status": "valid",
+      "errors": [],
+      "mention_id": "sfh1-mention-14aadf84022adda0aa99308b",
+      "original_failure_class": "record_shape_invalid",
+      "original_recovery_class": "recovered_intermediate_failure",
+      "original_request_hash": "9826695e2a641e88bd11a45b0fcf267f7d8a0bd139997eaf8ef3e8e5ee7dc05b",
+      "provisional_realization": {
+        "candidate": {
+          "candidate_only": true,
+          "candidate_origin": "llm_semantic_proposal_registry_miss",
+          "candidate_person_id": "sfh2-a0-candidate-person-911a3d0064d47c468f19",
+          "canonical_write_back": false,
+          "display_name": "何曽",
+          "entity_type": "candidate_historical_person",
+          "person_id": "",
+          "proposed_display_name": "何曽",
+          "referent_canonical_hint": "何曽",
+          "source_occurrence_ids": [
+            "sfh1-mention-14aadf84022adda0aa99308b"
+          ],
+          "supporting_evidence_ids": [
+            "sfh1-ev-24-jianao-001-liu-annotation-002"
+          ]
+        },
+        "candidate_only": true,
+        "canonical_write_back": false,
+        "case_id": "sfh1-mention-14aadf84022adda0aa99308b",
+        "core_graph_eligible": false,
+        "identity_created": true,
+        "mention_id": "sfh1-mention-14aadf84022adda0aa99308b",
+        "occurrence_role": "annotation_person",
+        "realization_basis": [
+          "llm_semantic_proposal",
+          "candidate_registry_miss"
+        ],
+        "semantic_kind": "historical_person",
+        "story_id": "24-jianao-001",
+        "surface": "何曽"
+      },
+      "record": {
+        "abstain": false,
+        "attribute_type": "",
+        "attribute_value": "",
+        "bearer_hint": "",
+        "confidence": "high",
+        "discourse": {
+          "addressee_hint": "",
+          "antecedent_hint": "",
+          "self_reference_hint": "",
+          "speaker_hint": ""
+        },
+        "explanation": "何曽 is mentioned in Liu Xiaobiao's annotation to the Shishuo Xinyu entry, in a passage noting that among the court officials (朝臣) who all showed full ritual respect to 晉文王, only 王祥 made a long bow without prostrating. 何曽 (He Zeng) is a historical person, a Jin-dynasty official, referenced by his full name in the annotation text.",
+        "mention_id": "sfh1-mention-14aadf84022adda0aa99308b",
+        "occurrence_role": "annotation_person",
+        "reference_type": "full_name",
+        "referent": {
+          "canonical_hint": "何曽",
+          "confidence": "high",
+          "surface_form": "何曽"
+        },
+        "relations": [],
+        "semantic_kind": "historical_person",
+        "supporting_evidence_ids": [
+          "sfh1-ev-24-jianao-001-liu-annotation-002"
+        ],
+        "surface": "何曽"
+      },
+      "recovery_attempt": "exact_replay_1",
+      "recovery_request_hash": "e384cbad1176f077233865b50e8d2f42a0a3b868832685b2b7e75e47ef80f5dc",
+      "replay_contract_valid": true,
+      "replay_parse_success": true,
+      "replay_semantic_record_available": true,
+      "replay_transport_success": true,
+      "stage": "identity_primary",
+      "story_id": "24-jianao-001",
+      "surface": "何曽",
+      "transport": {
+        "attempt": 1,
+        "attempt_class": "exact_replay_1",
+        "classification": "parsed",
+        "elapsed_seconds": 2.325,
+        "endpoint": "https://api.deepseek.com/beta/chat/completions",
+        "finish_reason": "tool_calls",
+        "function_name": "submit_sfh2_a0r_primary_semantics_v1",
+        "model": "deepseek-v4-flash",
+        "network_retry": false,
+        "parse_error": null,
+        "prompt_version": "sfh2-a0r-primary-historian-v1",
+        "provider_call": true,
+        "provider_witness_hash": "4c6f91a4e308d5eccaa18c39992dedff9ee71eb279c0d75ffd9c54ab0675f0fa",
+        "raw_archive_path": "/tmp/sfh2-f1rt-raw-sfh2-f1rt-live-v2/0004-identity_primary-arm_a-identity_primary-sfh1-mention-14aadf84022adda0aa99308b-attempt1.json",
+        "raw_archive_sha256": "a4f39bd54ae774edf27163f7c0ee40a47bc66d32c66f7c5a4c982bf9722e0845",
+        "request_hash": "e384cbad1176f077233865b50e8d2f42a0a3b868832685b2b7e75e47ef80f5dc",
+        "stage": "identity_primary",
+        "temperature": 0,
+        "thinking": {
+          "type": "disabled"
+        },
+        "unit_id": "arm_a:identity_primary:sfh1-mention-14aadf84022adda0aa99308b",
+        "usage": {
+          "completion_tokens": 328,
+          "prompt_tokens": 2268,
+          "total_tokens": 2596
+        },
+        "valid": true
+      },
+      "valid": true
+    },
+    {
+      "candidate_only": true,
+      "canonical_write_back": false,
+      "case_id": "sfh1-mention-250c0ae68551d8dab4943ed8",
+      "consistency": {
+        "candidate_only": true,
+        "canonical_write_back": false,
+        "flags": [],
+        "has_diagnostic_flags": false,
+        "has_hard_flags": false,
+        "has_review_flags": false,
+        "review_trigger_score": 0,
+        "schema": "sfh2-a0r-consistency-v2",
+        "stage": "identity_independent"
+      },
+      "contract_status": "valid",
+      "errors": [],
+      "historian": "B",
+      "mention_id": "sfh1-mention-250c0ae68551d8dab4943ed8",
+      "original_failure_class": "invalid_json",
+      "original_recovery_class": "terminal_identity_block",
+      "original_request_hash": "49c4fae7e1d81e76459e2690f605f7737bdef5844994461f613dc84db36f23fe",
+      "provisional_realization": {
+        "candidate": {
+          "candidate_only": true,
+          "candidate_origin": "llm_semantic_proposal_registry_miss",
+          "candidate_person_id": "sfh2-a0-candidate-person-8f68eaab60d6bce5356c",
+          "canonical_write_back": false,
+          "display_name": "殷仲堪",
+          "entity_type": "candidate_historical_person",
+          "person_id": "",
+          "proposed_display_name": "殷仲堪",
+          "referent_canonical_hint": "殷仲堪",
+          "source_occurrence_ids": [
+            "sfh1-mention-250c0ae68551d8dab4943ed8"
+          ],
+          "supporting_evidence_ids": [
+            "sfh1-ev-34-pilou-006-main"
+          ]
+        },
+        "candidate_only": true,
+        "canonical_write_back": false,
+        "case_id": "sfh1-mention-250c0ae68551d8dab4943ed8",
+        "core_graph_eligible": true,
+        "identity_created": true,
+        "mention_id": "sfh1-mention-250c0ae68551d8dab4943ed8",
+        "occurrence_role": "scene_reference",
+        "realization_basis": [
+          "llm_semantic_proposal",
+          "candidate_registry_miss"
+        ],
+        "semantic_kind": "historical_person",
+        "story_id": "34-pilou-006",
+        "surface": "殷公"
+      },
+      "record": {
+        "abstain": false,
+        "attribute_type": "",
+        "attribute_value": "",
+        "bearer_hint": "",
+        "confidence": "high",
+        "discourse": {
+          "addressee_hint": "殷仲堪",
+          "antecedent_hint": "殷仲堪",
+          "self_reference_hint": "",
+          "speaker_hint": "孝武"
+        },
+        "explanation": "The target span 殷公 appears in the main text where 孝武 (Emperor Xiaowu) asks 仲堪 whether there is a person surnamed 殷 (殷) with such an illness. The honorific 殷公 refers to 殷仲堪 himself, who is the subject of the anecdote and the one being addressed. The emperor does not know that 仲堪's own father is the afflicted person, and asks 仲堪 about 'a certain Yin' (殷公) who is so ill. The context makes clear 殷公 is an honorific reference to 殷仲堪, the person being spoken to. The Liu annotation confirms 仲堪's identity and family background.",
+        "mention_id": "sfh1-mention-250c0ae68551d8dab4943ed8",
+        "occurrence_role": "scene_reference",
+        "reference_type": "honorific",
+        "referent": {
+          "canonical_hint": "殷仲堪",
+          "confidence": "high",
+          "surface_form": "殷仲堪"
+        },
+        "relations": [],
+        "semantic_kind": "historical_person",
+        "supporting_evidence_ids": [
+          "sfh1-ev-34-pilou-006-main"
+        ],
+        "surface": "殷公"
+      },
+      "recovery_attempt": "exact_replay_1",
+      "recovery_request_hash": "f6ec176bb2bdd729fd7f30a880148d2a3feac5cc8b83c4e53f1430334ed16651",
+      "replay_contract_valid": true,
+      "replay_parse_success": true,
+      "replay_semantic_record_available": true,
+      "replay_transport_success": true,
+      "stage": "identity_independent",
+      "story_id": "34-pilou-006",
+      "surface": "殷公",
+      "transport": {
+        "attempt": 1,
+        "attempt_class": "exact_replay_1",
+        "classification": "parsed",
+        "elapsed_seconds": 2.821,
+        "endpoint": "https://api.deepseek.com/beta/chat/completions",
+        "finish_reason": "tool_calls",
+        "function_name": "submit_sfh2_a2_independent_historian_v1",
+        "model": "deepseek-v4-flash",
+        "network_retry": false,
+        "parse_error": null,
+        "prompt_version": "sfh2-a2-independent-historian-v1",
+        "provider_call": true,
+        "provider_witness_hash": "8a435e999b177fce9091b1c027e12383890ac68be7d7020c9e4337ff80867871",
+        "raw_archive_path": "/tmp/sfh2-f1rt-raw-sfh2-f1rt-live-v2/0005-identity_independent-arm_a-identity_independent-sfh1-mention-250c0ae68551d8dab4943ed8-attempt1.json",
+        "raw_archive_sha256": "5807673fbe97fbfb1eb6b06d1aa3ca2323ebd8b2c9b3a870c33eaed48b30e3ed",
+        "request_hash": "f6ec176bb2bdd729fd7f30a880148d2a3feac5cc8b83c4e53f1430334ed16651",
+        "stage": "identity_independent",
+        "temperature": 0,
+        "thinking": {
+          "type": "disabled"
+        },
+        "unit_id": "arm_a:identity_independent:sfh1-mention-250c0ae68551d8dab4943ed8",
+        "usage": {
+          "completion_tokens": 390,
+          "prompt_tokens": 3042,
+          "total_tokens": 3432
+        },
+        "valid": true
+      },
+      "valid": true
+    },
+    {
+      "candidate_only": true,
+      "canonical_write_back": false,
+      "case_id": "sfh1-mention-250c0ae68551d8dab4943ed8",
+      "consistency": {
+        "candidate_only": true,
+        "canonical_write_back": false,
+        "flags": [],
+        "has_diagnostic_flags": false,
+        "has_hard_flags": false,
+        "has_review_flags": false,
+        "review_trigger_score": 0,
+        "schema": "sfh2-a0r-consistency-v2",
+        "stage": "identity_primary"
+      },
+      "contract_status": "valid",
+      "errors": [],
+      "mention_id": "sfh1-mention-250c0ae68551d8dab4943ed8",
+      "original_failure_class": "invalid_json",
+      "original_recovery_class": "terminal_identity_block",
+      "original_request_hash": "ee675ace0bc2ee23af8239f43e0650589997f58f0659e0c55fb4386668321818",
+      "provisional_realization": {
+        "candidate": {
+          "candidate_only": true,
+          "candidate_origin": "llm_semantic_proposal_registry_miss",
+          "candidate_person_id": "sfh2-a0-candidate-person-8f68eaab60d6bce5356c",
+          "canonical_write_back": false,
+          "display_name": "殷仲堪",
+          "entity_type": "candidate_historical_person",
+          "person_id": "",
+          "proposed_display_name": "殷仲堪",
+          "referent_canonical_hint": "殷仲堪",
+          "source_occurrence_ids": [
+            "sfh1-mention-250c0ae68551d8dab4943ed8"
+          ],
+          "supporting_evidence_ids": [
+            "sfh1-ev-34-pilou-006-main"
+          ]
+        },
+        "candidate_only": true,
+        "canonical_write_back": false,
+        "case_id": "sfh1-mention-250c0ae68551d8dab4943ed8",
+        "core_graph_eligible": true,
+        "identity_created": true,
+        "mention_id": "sfh1-mention-250c0ae68551d8dab4943ed8",
+        "occurrence_role": "scene_reference",
+        "realization_basis": [
+          "llm_semantic_proposal",
+          "candidate_registry_miss"
+        ],
+        "semantic_kind": "historical_person",
+        "story_id": "34-pilou-006",
+        "surface": "殷公"
+      },
+      "record": {
+        "abstain": false,
+        "attribute_type": "",
+        "attribute_value": "",
+        "bearer_hint": "",
+        "confidence": "high",
+        "discourse": {
+          "addressee_hint": "殷仲堪",
+          "antecedent_hint": "殷仲堪",
+          "self_reference_hint": "",
+          "speaker_hint": "孝武"
+        },
+        "explanation": "殷公 is an honorific reference to 殷仲堪. In the main text, 孝武 (Emperor Xiaowu) asks 仲堪 whether there is a 殷 with such an illness, and 仲堪 responds. The honorific 殷公 refers to 殷仲堪 himself, who is the person being addressed in the dialogue. The validated local mention sfh1-mention-250c0ae68551d8dab4943ed8 is tagged as honorific, and the context confirms it refers to 殷仲堪.",
+        "mention_id": "sfh1-mention-250c0ae68551d8dab4943ed8",
+        "occurrence_role": "scene_reference",
+        "reference_type": "honorific",
+        "referent": {
+          "canonical_hint": "殷仲堪",
+          "confidence": "high",
+          "surface_form": "殷仲堪"
+        },
+        "relations": [
+          {
+            "confidence": "high",
+            "evidence_ids": [
+              "sfh1-ev-34-pilou-006-main"
+            ],
+            "relation": "same_person",
+            "target_hint": "殷仲堪"
+          }
+        ],
+        "semantic_kind": "historical_person",
+        "supporting_evidence_ids": [
+          "sfh1-ev-34-pilou-006-main"
+        ],
+        "surface": "殷公"
+      },
+      "recovery_attempt": "exact_replay_1",
+      "recovery_request_hash": "616c8cc31a54b0d148db49b6ba1579f813ab7fbad02785a8f3b7e735a4168c94",
+      "replay_contract_valid": true,
+      "replay_parse_success": true,
+      "replay_semantic_record_available": true,
+      "replay_transport_success": true,
+      "stage": "identity_primary",
+      "story_id": "34-pilou-006",
+      "surface": "殷公",
+      "transport": {
+        "attempt": 1,
+        "attempt_class": "exact_replay_1",
+        "classification": "parsed",
+        "elapsed_seconds": 2.448,
+        "endpoint": "https://api.deepseek.com/beta/chat/completions",
+        "finish_reason": "tool_calls",
+        "function_name": "submit_sfh2_a0r_primary_semantics_v1",
+        "model": "deepseek-v4-flash",
+        "network_retry": false,
+        "parse_error": null,
+        "prompt_version": "sfh2-a0r-primary-historian-v1",
+        "provider_call": true,
+        "provider_witness_hash": "e8f977c350248c5243bce538f87e8744f71bf461c5b5b0a17e48f236f2459ddb",
+        "raw_archive_path": "/tmp/sfh2-f1rt-raw-sfh2-f1rt-live-v2/0006-identity_primary-arm_a-identity_primary-sfh1-mention-250c0ae68551d8dab4943ed8-attempt1.json",
+        "raw_archive_sha256": "9bea09087513dad09b46f0048ab80b9aa4b19bf7e3da7dc04dc0126c65a7c935",
+        "request_hash": "616c8cc31a54b0d148db49b6ba1579f813ab7fbad02785a8f3b7e735a4168c94",
+        "stage": "identity_primary",
+        "temperature": 0,
+        "thinking": {
+          "type": "disabled"
+        },
+        "unit_id": "arm_a:identity_primary:sfh1-mention-250c0ae68551d8dab4943ed8",
+        "usage": {
+          "completion_tokens": 405,
+          "prompt_tokens": 3010,
+          "total_tokens": 3415
+        },
+        "valid": true
+      },
+      "valid": true
+    },
+    {
+      "candidate_only": true,
+      "canonical_write_back": false,
+      "case_id": "sfh1-mention-2c6672ce7bffaa6f16181810",
+      "consistency": {
+        "candidate_only": true,
+        "canonical_write_back": false,
+        "flags": [],
+        "has_diagnostic_flags": false,
+        "has_hard_flags": false,
+        "has_review_flags": false,
+        "review_trigger_score": 0,
+        "schema": "sfh2-a0r-consistency-v2",
+        "stage": "identity_primary"
+      },
+      "contract_status": "valid",
+      "errors": [],
+      "mention_id": "sfh1-mention-2c6672ce7bffaa6f16181810",
+      "original_failure_class": "invalid_json",
+      "original_recovery_class": "recovered_intermediate_failure",
+      "original_request_hash": "29ee9ad9d045e8ad529180ae653f8b559a33abc72ec44c7eb92c366ed793a0d5",
+      "provisional_realization": {
+        "candidate": {
+          "candidate_only": true,
+          "candidate_origin": "llm_semantic_proposal_registry_miss",
+          "candidate_person_id": "sfh2-a0-candidate-person-5b5b9cf6628ff5a66efa",
+          "canonical_write_back": false,
+          "display_name": "謝端",
+          "entity_type": "candidate_historical_person",
+          "person_id": "",
+          "proposed_display_name": "謝端",
+          "referent_canonical_hint": "謝端",
+          "source_occurrence_ids": [
+            "sfh1-mention-2c6672ce7bffaa6f16181810"
+          ],
+          "supporting_evidence_ids": [
+            "sfh1-ev-06-yaliang-033-liu-annotation-002"
+          ]
+        },
+        "candidate_only": true,
+        "canonical_write_back": false,
+        "case_id": "sfh1-mention-2c6672ce7bffaa6f16181810",
+        "core_graph_eligible": false,
+        "identity_created": true,
+        "mention_id": "sfh1-mention-2c6672ce7bffaa6f16181810",
+        "occurrence_role": "genealogy_reference",
+        "realization_basis": [
+          "llm_semantic_proposal",
+          "candidate_registry_miss"
+        ],
+        "semantic_kind": "historical_person",
+        "story_id": "06-yaliang-033",
+        "surface": "祖端"
+      },
+      "record": {
+        "abstain": false,
+        "attribute_type": "",
+        "attribute_value": "",
+        "bearer_hint": "",
+        "confidence": "high",
+        "discourse": {
+          "addressee_hint": "",
+          "antecedent_hint": "謝奉",
+          "self_reference_hint": "",
+          "speaker_hint": ""
+        },
+        "explanation": "The target '祖端' in Liu Xiaobiao's annotation to the Shishuo entry identifies 謝奉's grandfather (祖) as 端. The annotation states 謝奉's genealogy: 祖端散騎常侍, 父鳯丞相主簿. Thus '祖端' is a kinship reference meaning 'grandfather [named] 端', referring to 謝端, the grandfather of 謝奉. The annotation provides the genealogy of 謝奉 (whose courtesy name is 弘道), so this is a genealogy reference within the annotation.",
+        "mention_id": "sfh1-mention-2c6672ce7bffaa6f16181810",
+        "occurrence_role": "genealogy_reference",
+        "reference_type": "kinship_reference",
+        "referent": {
+          "canonical_hint": "謝端",
+          "confidence": "high",
+          "surface_form": "謝端"
+        },
+        "relations": [
+          {
+            "confidence": "high",
+            "evidence_ids": [
+              "sfh1-ev-06-yaliang-033-liu-annotation-002"
+            ],
+            "relation": "kinship_relation",
+            "target_hint": "謝奉"
+          }
+        ],
+        "semantic_kind": "historical_person",
+        "supporting_evidence_ids": [
+          "sfh1-ev-06-yaliang-033-liu-annotation-002"
+        ],
+        "surface": "祖端"
+      },
+      "recovery_attempt": "exact_replay_1",
+      "recovery_request_hash": "790530ef40c60e2d2b57f396ba3c01f06e2f367f0fd1e3c013e4b3886429b64a",
+      "replay_contract_valid": true,
+      "replay_parse_success": true,
+      "replay_semantic_record_available": true,
+      "replay_transport_success": true,
+      "stage": "identity_primary",
+      "story_id": "06-yaliang-033",
+      "surface": "祖端",
+      "transport": {
+        "attempt": 1,
+        "attempt_class": "exact_replay_1",
+        "classification": "parsed",
+        "elapsed_seconds": 2.684,
+        "endpoint": "https://api.deepseek.com/beta/chat/completions",
+        "finish_reason": "tool_calls",
+        "function_name": "submit_sfh2_a0r_primary_semantics_v1",
+        "model": "deepseek-v4-flash",
+        "network_retry": false,
+        "parse_error": null,
+        "prompt_version": "sfh2-a0r-primary-historian-v1",
+        "provider_call": true,
+        "provider_witness_hash": "9345ee8d206edc3461d8209ac1181a52be942c75880b975e5c15694edba4ce8f",
+        "raw_archive_path": "/tmp/sfh2-f1rt-raw-sfh2-f1rt-live-v2/0007-identity_primary-arm_a-identity_primary-sfh1-mention-2c6672ce7bffaa6f16181810-attempt1.json",
+        "raw_archive_sha256": "3408f280af15197ecbd91560f977e9d3fa412a79d74a4ffe320694d0f389adf3",
+        "request_hash": "790530ef40c60e2d2b57f396ba3c01f06e2f367f0fd1e3c013e4b3886429b64a",
+        "stage": "identity_primary",
+        "temperature": 0,
+        "thinking": {
+          "type": "disabled"
+        },
+        "unit_id": "arm_a:identity_primary:sfh1-mention-2c6672ce7bffaa6f16181810",
+        "usage": {
+          "completion_tokens": 409,
+          "prompt_tokens": 2692,
+          "total_tokens": 3101
+        },
+        "valid": true
+      },
+      "valid": true
+    },
+    {
+      "candidate_only": true,
+      "canonical_write_back": false,
+      "case_id": "sfh1-mention-57b7746a3be07831cfa06a32",
+      "consistency": {
+        "candidate_only": true,
+        "canonical_write_back": false,
+        "flags": [
+          {
+            "challenged_fields": [],
+            "evidence_ids": [],
+            "flag_type": "evidence_grounding_failure",
+            "formal_reason": "semantic record is not an object",
+            "involved": [],
+            "severity": "hard"
+          }
+        ],
+        "has_diagnostic_flags": false,
+        "has_hard_flags": true,
+        "has_review_flags": false,
+        "review_trigger_score": 5,
+        "schema": "sfh2-a0r-consistency-v2",
+        "stage": "identity_independent"
+      },
+      "contract_status": "identity_contract_invalid",
+      "effective_record": null,
+      "errors": [
+        "record_not_object"
+      ],
+      "historian": "B",
+      "mention_id": "sfh1-mention-57b7746a3be07831cfa06a32",
+      "original_failure_class": "record_shape_invalid",
+      "original_recovery_class": "recovered_intermediate_failure",
+      "original_request_hash": "1f5282f5f254ab184fba6a538556fd7694b60674be52b5f6d20f6276006ba3fe",
+      "provisional_realization": {
+        "candidate": null,
+        "candidate_only": true,
+        "canonical_write_back": false,
+        "case_id": "sfh1-mention-57b7746a3be07831cfa06a32",
+        "core_graph_eligible": false,
+        "identity_created": false,
+        "mention_id": "sfh1-mention-57b7746a3be07831cfa06a32",
+        "realization_basis": [
+          "no_valid_semantic_record"
+        ],
+        "story_id": "05-fangzheng-055",
+        "surface": "王蒙"
+      },
+      "record": null,
+      "recovery_attempt": "exact_replay_1",
+      "recovery_request_hash": "07d01b484da9c602f52d7703d16ae38c2c262c2b9d6f17cbc37eb1210de0344c",
+      "replay_contract_valid": false,
+      "replay_parse_success": true,
+      "replay_semantic_record_available": false,
+      "replay_transport_success": true,
+      "selected_record": null,
+      "stage": "identity_independent",
+      "story_id": "05-fangzheng-055",
+      "surface": "王蒙",
+      "transport": {
+        "attempt": 1,
+        "attempt_class": "exact_replay_1",
+        "classification": "parsed",
+        "elapsed_seconds": 3.204,
+        "endpoint": "https://api.deepseek.com/beta/chat/completions",
+        "finish_reason": "tool_calls",
+        "function_name": "submit_sfh2_a2_independent_historian_v1",
+        "model": "deepseek-v4-flash",
+        "network_retry": false,
+        "parse_error": null,
+        "prompt_version": "sfh2-a2-independent-historian-v1",
+        "provider_call": true,
+        "provider_witness_hash": "e7da27a5bbfb5c2f98217960c9efd09adbc2fc9a2c31911709a8a0a87b6ce584",
+        "raw_archive_path": "/tmp/sfh2-f1rt-raw-sfh2-f1rt-live-v2/0008-identity_independent-arm_a-identity_independent-sfh1-mention-57b7746a3be07831cfa06a32-attempt1.json",
+        "raw_archive_sha256": "b4c48e1b8221b33817113d7365344e0e209db4bde5541c2d8ea095414653c47b",
+        "request_hash": "07d01b484da9c602f52d7703d16ae38c2c262c2b9d6f17cbc37eb1210de0344c",
+        "stage": "identity_independent",
+        "temperature": 0,
+        "thinking": {
+          "type": "disabled"
+        },
+        "unit_id": "arm_a:identity_independent:sfh1-mention-57b7746a3be07831cfa06a32",
+        "usage": {
+          "completion_tokens": 411,
+          "prompt_tokens": 2922,
+          "total_tokens": 3333
+        },
+        "valid": true
+      },
+      "valid": false
+    },
+    {
+      "boundary_result": {
+        "boundary_judgment": "referential_only",
+        "case_id": "sfh1-mention-ab9210bb6f88d713e884fe26",
+        "confidence": "high",
+        "reason_summary": "The target occurrence \"剌史\" appears in the Liu Xiaobiao annotation text \"年十八剌史周俊...\" where it functions as an office title (刺史) modifying/identifying 周俊 (Zhou Jun). The occurrence is part of a biographical description stating that at age eighteen, [someone] was appointed by 刺史周俊. The office title \"剌史\" here is used referentially to identify Zhou Jun by his office — it does not itself denote an entity participating in a narrated event at this occurrence. The office title is a descriptive label attached to the person Zhou Jun, who is the actual participant in the event of appointing. The title itself merely identifies/qualifies the person rather than being an entity engaged in an event.",
+        "supporting_evidence_ids": [
+          "sfh1-ev-08-shangyu-020-liu-annotation-008"
+        ]
+      },
+      "candidate_only": true,
+      "canonical_write_back": false,
+      "case_id": "sfh1-mention-ab9210bb6f88d713e884fe26",
+      "contract_status": "valid",
+      "errors": [],
+      "occurrence_id": "sfh1-mention-ab9210bb6f88d713e884fe26",
+      "original_failure_class": "truncated_output",
+      "original_recovery_class": "terminal_boundary_failure",
+      "original_request_hash": "ecb85544d0a17ff0ce49ef19c74c44fbf42975a4b8e2e206cd6debd4f8713032",
+      "recovery_attempt": "exact_replay_1",
+      "recovery_request_hash": "ee338b4d92dfd5dfda2384dd9e2f6ab66b7f86a78ae87604e304e13f24ab23dd",
+      "replay_contract_valid": true,
+      "replay_parse_success": true,
+      "replay_semantic_record_available": true,
+      "replay_transport_success": true,
+      "stage": "boundary_validator",
+      "transport": {
+        "attempt": 1,
+        "attempt_class": "exact_replay_1",
+        "classification": "parsed",
+        "elapsed_seconds": 2.555,
+        "endpoint": "https://api.deepseek.com/beta/chat/completions",
+        "finish_reason": "tool_calls",
+        "function_name": "submit_sfh2_a2ovb_boundary_validation_v1",
+        "model": "deepseek-v4-flash",
+        "network_retry": false,
+        "parse_error": null,
+        "prompt_version": "sfh2-a2ovb-blind-boundary-validator-v1",
+        "provider_call": true,
+        "provider_witness_hash": "bd96b4509a2019839da6116f8a7e733c597515cd14a6cfa8fdb84f54d70a1e7e",
+        "raw_archive_path": "/tmp/sfh2-f1rt-raw-sfh2-f1rt-live-v2/0009-boundary_validator-arm_a-boundary_validator-sfh1-mention-ab9210bb6f88d713e884fe26-attempt1.json",
+        "raw_archive_sha256": "bea776f2c5fc8d2ed9341b9a5a975b5071c1f0afdbe9688abfd951e7ba1075ca",
+        "request_hash": "ee338b4d92dfd5dfda2384dd9e2f6ab66b7f86a78ae87604e304e13f24ab23dd",
+        "stage": "boundary_validator",
+        "temperature": 0,
+        "thinking": {
+          "type": "disabled"
+        },
+        "unit_id": "arm_a:boundary_validator:sfh1-mention-ab9210bb6f88d713e884fe26",
+        "usage": {
+          "completion_tokens": 311,
+          "prompt_tokens": 5172,
+          "total_tokens": 5483
+        },
+        "valid": true
+      },
+      "valid": true
+    },
+    {
+      "candidate_only": true,
+      "canonical_write_back": false,
+      "case_id": "sfh1-mention-b4f58ecca05c3c538d559feb",
+      "consistency": {
+        "candidate_only": true,
+        "canonical_write_back": false,
+        "flags": [
+          {
+            "challenged_fields": [
+              "relations",
+              "referent.canonical_hint"
+            ],
+            "evidence_ids": [
+              "sfh1-ev-08-shangyu-020-liu-annotation-010",
+              "sfh1-ev-08-shangyu-020-main"
+            ],
+            "flag_type": "multi_candidate_ambiguity",
+            "formal_reason": "the record supplies more than one structured relation target",
+            "involved": [
+              "relations"
+            ],
+            "severity": "review"
+          }
+        ],
+        "has_diagnostic_flags": false,
+        "has_hard_flags": false,
+        "has_review_flags": true,
+        "review_trigger_score": 2,
+        "schema": "sfh2-a0r-consistency-v2",
+        "stage": "identity_independent"
+      },
+      "contract_status": "valid",
+      "errors": [],
+      "historian": "B",
+      "mention_id": "sfh1-mention-b4f58ecca05c3c538d559feb",
+      "original_failure_class": "immutable_id_mismatch",
+      "original_recovery_class": "recovered_intermediate_failure",
+      "original_request_hash": "5db1595fdb37fd3380c00dc2b99ce7d6d3eb3080ee4c1d4fc07166910b00cb25",
+      "provisional_realization": {
+        "candidate": {
+          "candidate_only": true,
+          "candidate_origin": "python_registry_lookup_after_llm_semantics",
+          "candidate_person_id": "",
+          "canonical_write_back": false,
+          "display_name": "陸機",
+          "entity_type": "existing_person",
+          "person_id": "person-026",
+          "proposed_display_name": "陸機",
+          "referent_canonical_hint": "陸機"
+        },
+        "candidate_only": true,
+        "canonical_write_back": false,
+        "case_id": "sfh1-mention-b4f58ecca05c3c538d559feb",
+        "core_graph_eligible": true,
+        "identity_created": true,
+        "mention_id": "sfh1-mention-b4f58ecca05c3c538d559feb",
+        "occurrence_role": "scene_reference",
+        "realization_basis": [
+          "llm_semantic_proposal",
+          "canonical_registry_lookup"
+        ],
+        "semantic_kind": "historical_person",
+        "story_id": "08-shangyu-020",
+        "surface": "陸機"
+      },
+      "record": {
+        "abstain": false,
+        "attribute_type": "",
+        "attribute_value": "",
+        "bearer_hint": "",
+        "confidence": "high",
+        "discourse": {
+          "addressee_hint": "",
+          "antecedent_hint": "",
+          "self_reference_hint": "",
+          "speaker_hint": "劉孝標 (annotator)"
+        },
+        "explanation": "The target 陸機 appears in Liu Xiaobiao's annotation (sfh1-ev-08-shangyu-020-liu-annotation-010) in the phrase 人無陸機兄弟, referring to the famous Jin-dynasty figure Lu Ji (陸機), courtesy name 士衡. The main text (sfh1-ev-08-shangyu-020-main) lists 陸士衡 among the Wu worthies praised by Cai Hong, and the annotation identifies 陸士龍 (Lu Yun) as 機同母之弟 (Lu Ji's younger brother by the same mother), confirming the identity. The annotation context 人無陸機兄弟又/按蔡所論士十六 indicates the annotator's remark that among the sixteen men Cai Hong discussed, none surpassed the Lu brothers. The referent is Lu Ji (陸機), the Western Jin writer and official, brother of Lu Yun.",
+        "mention_id": "sfh1-mention-b4f58ecca05c3c538d559feb",
+        "occurrence_role": "scene_reference",
+        "reference_type": "full_name",
+        "referent": {
+          "canonical_hint": "陸機",
+          "confidence": "high",
+          "surface_form": "陸機"
+        },
+        "relations": [
+          {
+            "confidence": "high",
+            "evidence_ids": [
+              "sfh1-ev-08-shangyu-020-liu-annotation-010"
+            ],
+            "relation": "kinship_relation",
+            "target_hint": "陸雲"
+          },
+          {
+            "confidence": "high",
+            "evidence_ids": [
+              "sfh1-ev-08-shangyu-020-main"
+            ],
+            "relation": "same_person",
+            "target_hint": "陸士衡"
+          }
+        ],
+        "semantic_kind": "historical_person",
+        "supporting_evidence_ids": [
+          "sfh1-ev-08-shangyu-020-liu-annotation-010"
+        ],
+        "surface": "陸機"
+      },
+      "recovery_attempt": "exact_replay_1",
+      "recovery_request_hash": "fdd67ffa0106f278af0d06cd136efaf1381ec8de8800f9dd08a1c49eb79aa896",
+      "replay_contract_valid": true,
+      "replay_parse_success": true,
+      "replay_semantic_record_available": true,
+      "replay_transport_success": true,
+      "stage": "identity_independent",
+      "story_id": "08-shangyu-020",
+      "surface": "陸機",
+      "transport": {
+        "attempt": 1,
+        "attempt_class": "exact_replay_1",
+        "classification": "parsed",
+        "elapsed_seconds": 3.48,
+        "endpoint": "https://api.deepseek.com/beta/chat/completions",
+        "finish_reason": "tool_calls",
+        "function_name": "submit_sfh2_a2_independent_historian_v1",
+        "model": "deepseek-v4-flash",
+        "network_retry": false,
+        "parse_error": null,
+        "prompt_version": "sfh2-a2-independent-historian-v1",
+        "provider_call": true,
+        "provider_witness_hash": "e5d78a566727d7107e27f79cb16e96954fd79a184dde85cfeea96991f920f87f",
+        "raw_archive_path": "/tmp/sfh2-f1rt-raw-sfh2-f1rt-live-v2/0010-identity_independent-arm_a-identity_independent-sfh1-mention-b4f58ecca05c3c538d559feb-attempt1.json",
+        "raw_archive_sha256": "1d413d55b8efcbb38a0a17535bfaeb15f4d104967397b8381d7847a3686891bb",
+        "request_hash": "fdd67ffa0106f278af0d06cd136efaf1381ec8de8800f9dd08a1c49eb79aa896",
+        "stage": "identity_independent",
+        "temperature": 0,
+        "thinking": {
+          "type": "disabled"
+        },
+        "unit_id": "arm_a:identity_independent:sfh1-mention-b4f58ecca05c3c538d559feb",
+        "usage": {
+          "completion_tokens": 524,
+          "prompt_tokens": 5428,
+          "total_tokens": 5952
+        },
+        "valid": true
+      },
+      "valid": true
+    },
+    {
+      "candidate_only": true,
+      "canonical_write_back": false,
+      "case_id": "sfh1-mention-b6fa0b811087b18b0774e8f9",
+      "consistency": {
+        "candidate_only": true,
+        "canonical_write_back": false,
+        "flags": [
+          {
+            "challenged_fields": [
+              "relations",
+              "referent.canonical_hint"
+            ],
+            "evidence_ids": [
+              "sfh1-ev-05-fangzheng-058-liu-annotation-001",
+              "sfh1-ev-05-fangzheng-058-liu-annotation-002",
+              "sfh1-ev-05-fangzheng-058-main"
+            ],
+            "flag_type": "multi_candidate_ambiguity",
+            "formal_reason": "the record supplies more than one structured relation target",
+            "involved": [
+              "relations"
+            ],
+            "severity": "review"
+          }
+        ],
+        "has_diagnostic_flags": false,
+        "has_hard_flags": false,
+        "has_review_flags": true,
+        "review_trigger_score": 2,
+        "schema": "sfh2-a0r-consistency-v2",
+        "stage": "identity_independent"
+      },
+      "contract_status": "valid",
+      "errors": [],
+      "historian": "B",
+      "mention_id": "sfh1-mention-b6fa0b811087b18b0774e8f9",
+      "original_failure_class": "record_shape_invalid",
+      "original_recovery_class": "terminal_identity_block",
+      "original_request_hash": "7b8c22d6bbd8f336e1afed8305ba58d0379b5e31810575bb1c8409d4aa870877",
+      "provisional_realization": {
+        "candidate": {
+          "candidate_only": true,
+          "candidate_origin": "llm_semantic_proposal_registry_miss",
+          "candidate_person_id": "sfh2-a0-candidate-person-a603110af0b232c67300",
+          "canonical_write_back": false,
+          "display_name": "王坦之",
+          "entity_type": "candidate_historical_person",
+          "person_id": "",
+          "proposed_display_name": "王坦之",
+          "referent_canonical_hint": "王坦之",
+          "source_occurrence_ids": [
+            "sfh1-mention-b6fa0b811087b18b0774e8f9"
+          ],
+          "supporting_evidence_ids": [
+            "sfh1-ev-05-fangzheng-058-liu-annotation-001",
+            "sfh1-ev-05-fangzheng-058-liu-annotation-002",
+            "sfh1-ev-05-fangzheng-058-main"
+          ]
+        },
+        "candidate_only": true,
+        "canonical_write_back": false,
+        "case_id": "sfh1-mention-b6fa0b811087b18b0774e8f9",
+        "core_graph_eligible": true,
+        "identity_created": true,
+        "mention_id": "sfh1-mention-b6fa0b811087b18b0774e8f9",
+        "occurrence_role": "scene_participant",
+        "realization_basis": [
+          "llm_semantic_proposal",
+          "candidate_registry_miss"
+        ],
+        "semantic_kind": "historical_person",
+        "story_id": "05-fangzheng-058",
+        "surface": "王文度"
+      },
+      "record": {
+        "abstain": false,
+        "attribute_type": "",
+        "attribute_value": "",
+        "bearer_hint": "",
+        "confidence": "high",
+        "discourse": {
+          "addressee_hint": "",
+          "antecedent_hint": "",
+          "self_reference_hint": "",
+          "speaker_hint": ""
+        },
+        "explanation": "王文度 is the full name (surname 王 + courtesy name 文度) of 王坦之 (Wang Tanzhi). The Liu annotation explicitly identifies 王文度 as 王坦之 (sfh1-ev-05-fangzheng-058-liu-annotation-001: '述並巳見/王坦之王'), and the main text describes him as serving as 桓公's (桓温's) 長史, with 藍田 (his father 王述) reacting to the marriage proposal. The annotation further states 坦之子愷 married 桓温's second daughter, confirming the family relationships. The target occurrence is the opening reference to the protagonist of the anecdote.",
+        "mention_id": "sfh1-mention-b6fa0b811087b18b0774e8f9",
+        "occurrence_role": "scene_participant",
+        "reference_type": "full_name",
+        "referent": {
+          "canonical_hint": "王坦之",
+          "confidence": "high",
+          "surface_form": "王坦之"
+        },
+        "relations": [
+          {
+            "confidence": "high",
+            "evidence_ids": [
+              "sfh1-ev-05-fangzheng-058-liu-annotation-001"
+            ],
+            "relation": "kinship_relation",
+            "target_hint": "王述"
+          },
+          {
+            "confidence": "high",
+            "evidence_ids": [
+              "sfh1-ev-05-fangzheng-058-main"
+            ],
+            "relation": "related_person",
+            "target_hint": "桓温"
+          },
+          {
+            "confidence": "high",
+            "evidence_ids": [
+              "sfh1-ev-05-fangzheng-058-liu-annotation-002"
+            ],
+            "relation": "kinship_relation",
+            "target_hint": "愷"
+          }
+        ],
+        "semantic_kind": "historical_person",
+        "supporting_evidence_ids": [
+          "sfh1-ev-05-fangzheng-058-liu-annotation-001",
+          "sfh1-ev-05-fangzheng-058-liu-annotation-002",
+          "sfh1-ev-05-fangzheng-058-main"
+        ],
+        "surface": "王文度"
+      },
+      "recovery_attempt": "exact_replay_1",
+      "recovery_request_hash": "00176d2a1ad31fc6e212c2a6144fe9f8ca2e41c24632dd89a1915ae1a7de6940",
+      "replay_contract_valid": true,
+      "replay_parse_success": true,
+      "replay_semantic_record_available": true,
+      "replay_transport_success": true,
+      "stage": "identity_independent",
+      "story_id": "05-fangzheng-058",
+      "surface": "王文度",
+      "transport": {
+        "attempt": 1,
+        "attempt_class": "exact_replay_1",
+        "classification": "parsed",
+        "elapsed_seconds": 3.274,
+        "endpoint": "https://api.deepseek.com/beta/chat/completions",
+        "finish_reason": "tool_calls",
+        "function_name": "submit_sfh2_a2_independent_historian_v1",
+        "model": "deepseek-v4-flash",
+        "network_retry": false,
+        "parse_error": null,
+        "prompt_version": "sfh2-a2-independent-historian-v1",
+        "provider_call": true,
+        "provider_witness_hash": "d65b40621e665e8bdf030fc979889b200af85324b9275f0ad0d22eb6e70f1394",
+        "raw_archive_path": "/tmp/sfh2-f1rt-raw-sfh2-f1rt-live-v2/0011-identity_independent-arm_a-identity_independent-sfh1-mention-b6fa0b811087b18b0774e8f9-attempt1.json",
+        "raw_archive_sha256": "d5fdfea1a4e2969ef504c7dfad8fa091124437f8400b69e17b54eada2f2b6cf1",
+        "request_hash": "00176d2a1ad31fc6e212c2a6144fe9f8ca2e41c24632dd89a1915ae1a7de6940",
+        "stage": "identity_independent",
+        "temperature": 0,
+        "thinking": {
+          "type": "disabled"
+        },
+        "unit_id": "arm_a:identity_independent:sfh1-mention-b6fa0b811087b18b0774e8f9",
+        "usage": {
+          "completion_tokens": 566,
+          "prompt_tokens": 3417,
+          "total_tokens": 3983
+        },
+        "valid": true
+      },
+      "valid": true
+    },
+    {
+      "candidate_only": true,
+      "canonical_write_back": false,
+      "case_id": "sfh1-mention-b6fa0b811087b18b0774e8f9",
+      "consistency": {
+        "candidate_only": true,
+        "canonical_write_back": false,
+        "flags": [
+          {
+            "challenged_fields": [
+              "relations",
+              "referent.canonical_hint"
+            ],
+            "evidence_ids": [
+              "sfh1-ev-05-fangzheng-058-liu-annotation-001",
+              "sfh1-ev-05-fangzheng-058-liu-annotation-002",
+              "sfh1-ev-05-fangzheng-058-main"
+            ],
+            "flag_type": "multi_candidate_ambiguity",
+            "formal_reason": "the record supplies more than one structured relation target",
+            "involved": [
+              "relations"
+            ],
+            "severity": "review"
+          }
+        ],
+        "has_diagnostic_flags": false,
+        "has_hard_flags": false,
+        "has_review_flags": true,
+        "review_trigger_score": 2,
+        "schema": "sfh2-a0r-consistency-v2",
+        "stage": "identity_primary"
+      },
+      "contract_status": "valid",
+      "errors": [],
+      "mention_id": "sfh1-mention-b6fa0b811087b18b0774e8f9",
+      "original_failure_class": "invalid_json",
+      "original_recovery_class": "terminal_identity_block",
+      "original_request_hash": "595a0b05231e56924260244a3c1609474332ea1b1f26018f3e47c0dcd41044c8",
+      "provisional_realization": {
+        "candidate": {
+          "candidate_only": true,
+          "candidate_origin": "llm_semantic_proposal_registry_miss",
+          "candidate_person_id": "sfh2-a0-candidate-person-a603110af0b232c67300",
+          "canonical_write_back": false,
+          "display_name": "王坦之",
+          "entity_type": "candidate_historical_person",
+          "person_id": "",
+          "proposed_display_name": "王坦之",
+          "referent_canonical_hint": "王坦之",
+          "source_occurrence_ids": [
+            "sfh1-mention-b6fa0b811087b18b0774e8f9"
+          ],
+          "supporting_evidence_ids": [
+            "sfh1-ev-05-fangzheng-058-liu-annotation-001",
+            "sfh1-ev-05-fangzheng-058-liu-annotation-002",
+            "sfh1-ev-05-fangzheng-058-main"
+          ]
+        },
+        "candidate_only": true,
+        "canonical_write_back": false,
+        "case_id": "sfh1-mention-b6fa0b811087b18b0774e8f9",
+        "core_graph_eligible": true,
+        "identity_created": true,
+        "mention_id": "sfh1-mention-b6fa0b811087b18b0774e8f9",
+        "occurrence_role": "scene_participant",
+        "realization_basis": [
+          "llm_semantic_proposal",
+          "candidate_registry_miss"
+        ],
+        "semantic_kind": "historical_person",
+        "story_id": "05-fangzheng-058",
+        "surface": "王文度"
+      },
+      "record": {
+        "abstain": false,
+        "attribute_type": "",
+        "attribute_value": "",
+        "bearer_hint": "",
+        "confidence": "high",
+        "discourse": {
+          "addressee_hint": "",
+          "antecedent_hint": "",
+          "self_reference_hint": "",
+          "speaker_hint": ""
+        },
+        "explanation": "王文度 is the full name (surname 王 + courtesy name 文度) of 王坦之, as confirmed by Liu Xiaobiao's annotation (sfh1-ev-05-fangzheng-058-liu-annotation-001) which glosses 述/王坦之. The main text describes him as serving as 長史 under 桓公 (桓温), and his father 藍田 (王述) is referenced. The annotation also confirms 王坦之's son 愷 married 桓温's second daughter.",
+        "mention_id": "sfh1-mention-b6fa0b811087b18b0774e8f9",
+        "occurrence_role": "scene_participant",
+        "reference_type": "full_name",
+        "referent": {
+          "canonical_hint": "王坦之",
+          "confidence": "high",
+          "surface_form": "王文度"
+        },
+        "relations": [
+          {
+            "confidence": "high",
+            "evidence_ids": [
+              "sfh1-ev-05-fangzheng-058-liu-annotation-001",
+              "sfh1-ev-05-fangzheng-058-liu-annotation-002"
+            ],
+            "relation": "same_person",
+            "target_hint": "王坦之"
+          },
+          {
+            "confidence": "high",
+            "evidence_ids": [
+              "sfh1-ev-05-fangzheng-058-main"
+            ],
+            "relation": "kinship_relation",
+            "target_hint": "藍田"
+          },
+          {
+            "confidence": "high",
+            "evidence_ids": [
+              "sfh1-ev-05-fangzheng-058-main"
+            ],
+            "relation": "related_person",
+            "target_hint": "桓温"
+          }
+        ],
+        "semantic_kind": "historical_person",
+        "supporting_evidence_ids": [
+          "sfh1-ev-05-fangzheng-058-liu-annotation-001",
+          "sfh1-ev-05-fangzheng-058-liu-annotation-002",
+          "sfh1-ev-05-fangzheng-058-main"
+        ],
+        "surface": "王文度"
+      },
+      "recovery_attempt": "exact_replay_1",
+      "recovery_request_hash": "70251b5d21e4ae0be7ceeda14a0127ee3d311e86632a3528ac9f06624fde2cab",
+      "replay_contract_valid": true,
+      "replay_parse_success": true,
+      "replay_semantic_record_available": true,
+      "replay_transport_success": true,
+      "stage": "identity_primary",
+      "story_id": "05-fangzheng-058",
+      "surface": "王文度",
+      "transport": {
+        "attempt": 1,
+        "attempt_class": "exact_replay_1",
+        "classification": "parsed",
+        "elapsed_seconds": 3.067,
+        "endpoint": "https://api.deepseek.com/beta/chat/completions",
+        "finish_reason": "tool_calls",
+        "function_name": "submit_sfh2_a0r_primary_semantics_v1",
+        "model": "deepseek-v4-flash",
+        "network_retry": false,
+        "parse_error": null,
+        "prompt_version": "sfh2-a0r-primary-historian-v1",
+        "provider_call": true,
+        "provider_witness_hash": "8e9521e1a6e95ea2e10f954afb1c39dc1d8b452b2c7d24c490e2b656002e8de5",
+        "raw_archive_path": "/tmp/sfh2-f1rt-raw-sfh2-f1rt-live-v2/0012-identity_primary-arm_a-identity_primary-sfh1-mention-b6fa0b811087b18b0774e8f9-attempt1.json",
+        "raw_archive_sha256": "fbce5736aab777492f2bfc469b15995966502ea1b1e9d353c0f2335caf350221",
+        "request_hash": "70251b5d21e4ae0be7ceeda14a0127ee3d311e86632a3528ac9f06624fde2cab",
+        "stage": "identity_primary",
+        "temperature": 0,
+        "thinking": {
+          "type": "disabled"
+        },
+        "unit_id": "arm_a:identity_primary:sfh1-mention-b6fa0b811087b18b0774e8f9",
+        "usage": {
+          "completion_tokens": 550,
+          "prompt_tokens": 3385,
+          "total_tokens": 3935
+        },
+        "valid": true
+      },
+      "valid": true
+    },
+    {
+      "candidate_only": true,
+      "canonical_write_back": false,
+      "case_id": "sfh1-mention-c7948b25743a9dba7d00497e",
+      "consistency": {
+        "candidate_only": true,
+        "canonical_write_back": false,
+        "flags": [
+          {
+            "challenged_fields": [],
+            "evidence_ids": [],
+            "flag_type": "evidence_grounding_failure",
+            "formal_reason": "semantic record is not an object",
+            "involved": [],
+            "severity": "hard"
+          }
+        ],
+        "has_diagnostic_flags": false,
+        "has_hard_flags": true,
+        "has_review_flags": false,
+        "review_trigger_score": 5,
+        "schema": "sfh2-a0r-consistency-v2",
+        "stage": "identity_independent"
+      },
+      "contract_status": "identity_contract_invalid",
+      "effective_record": null,
+      "errors": [
+        "record_not_object"
+      ],
+      "historian": "B",
+      "mention_id": "sfh1-mention-c7948b25743a9dba7d00497e",
+      "original_failure_class": "record_shape_invalid",
+      "original_recovery_class": "recovered_intermediate_failure",
+      "original_request_hash": "e8904300dfcf52e1182e2d92da006eba35861ffab92864ed9b83a231a4e701f2",
+      "provisional_realization": {
+        "candidate": null,
+        "candidate_only": true,
+        "canonical_write_back": false,
+        "case_id": "sfh1-mention-c7948b25743a9dba7d00497e",
+        "core_graph_eligible": false,
+        "identity_created": false,
+        "mention_id": "sfh1-mention-c7948b25743a9dba7d00497e",
+        "realization_basis": [
+          "no_valid_semantic_record"
+        ],
+        "story_id": "05-fangzheng-007",
+        "surface": "司徒第二子"
+      },
+      "record": null,
+      "recovery_attempt": "exact_replay_1",
+      "recovery_request_hash": "18d812934a807b9bb180935a9fc8b5c1b8c4eee84b387044a0e4d493a8c8af3a",
+      "replay_contract_valid": false,
+      "replay_parse_success": true,
+      "replay_semantic_record_available": false,
+      "replay_transport_success": true,
+      "selected_record": null,
+      "stage": "identity_independent",
+      "story_id": "05-fangzheng-007",
+      "surface": "司徒第二子",
+      "transport": {
+        "attempt": 1,
+        "attempt_class": "exact_replay_1",
+        "classification": "parsed",
+        "elapsed_seconds": 3.386,
+        "endpoint": "https://api.deepseek.com/beta/chat/completions",
+        "finish_reason": "tool_calls",
+        "function_name": "submit_sfh2_a2_independent_historian_v1",
+        "model": "deepseek-v4-flash",
+        "network_retry": false,
+        "parse_error": null,
+        "prompt_version": "sfh2-a2-independent-historian-v1",
+        "provider_call": true,
+        "provider_witness_hash": "889dfca47747bfebbbf917563634161180d532fe818ba1f1e32e186aa14eda06",
+        "raw_archive_path": "/tmp/sfh2-f1rt-raw-sfh2-f1rt-live-v2/0013-identity_independent-arm_a-identity_independent-sfh1-mention-c7948b25743a9dba7d00497e-attempt1.json",
+        "raw_archive_sha256": "9b1ec4961ae3f6464c9b397d0502f223217821af9589843f86a1bb2789de8239",
+        "request_hash": "18d812934a807b9bb180935a9fc8b5c1b8c4eee84b387044a0e4d493a8c8af3a",
+        "stage": "identity_independent",
+        "temperature": 0,
+        "thinking": {
+          "type": "disabled"
+        },
+        "unit_id": "arm_a:identity_independent:sfh1-mention-c7948b25743a9dba7d00497e",
+        "usage": {
+          "completion_tokens": 571,
+          "prompt_tokens": 3782,
+          "total_tokens": 4353
+        },
+        "valid": true
+      },
+      "valid": false
+    },
+    {
+      "candidate_only": true,
+      "canonical_write_back": false,
+      "case_id": "sfh1-mention-e8f9268305e71ab3d1724605",
+      "consistency": {
+        "candidate_only": true,
+        "canonical_write_back": false,
+        "flags": [
+          {
+            "challenged_fields": [],
+            "evidence_ids": [],
+            "flag_type": "evidence_grounding_failure",
+            "formal_reason": "semantic record is not an object",
+            "involved": [],
+            "severity": "hard"
+          }
+        ],
+        "has_diagnostic_flags": false,
+        "has_hard_flags": true,
+        "has_review_flags": false,
+        "review_trigger_score": 5,
+        "schema": "sfh2-a0r-consistency-v2",
+        "stage": "identity_independent"
+      },
+      "contract_status": "identity_contract_invalid",
+      "effective_record": null,
+      "errors": [
+        "record_not_object"
+      ],
+      "historian": "B",
+      "mention_id": "sfh1-mention-e8f9268305e71ab3d1724605",
+      "original_failure_class": "record_shape_invalid",
+      "original_recovery_class": "recovered_intermediate_failure",
+      "original_request_hash": "4e073109701cfa1e2f3d12e8d79117bfdd4922d2e21bb61d31401f2f71840ad4",
+      "provisional_realization": {
+        "candidate": null,
+        "candidate_only": true,
+        "canonical_write_back": false,
+        "case_id": "sfh1-mention-e8f9268305e71ab3d1724605",
+        "core_graph_eligible": false,
+        "identity_created": false,
+        "mention_id": "sfh1-mention-e8f9268305e71ab3d1724605",
+        "realization_basis": [
+          "no_valid_semantic_record"
+        ],
+        "story_id": "11-jiewu-003",
+        "surface": "楊"
+      },
+      "record": null,
+      "recovery_attempt": "exact_replay_1",
+      "recovery_request_hash": "ce67886bc289e39c798ac293811def6b037c6c45870ea3a6e118a3cbb94b8467",
+      "replay_contract_valid": false,
+      "replay_parse_success": true,
+      "replay_semantic_record_available": false,
+      "replay_transport_success": true,
+      "selected_record": null,
+      "stage": "identity_independent",
+      "story_id": "11-jiewu-003",
+      "surface": "楊",
+      "transport": {
+        "attempt": 1,
+        "attempt_class": "exact_replay_1",
+        "classification": "parsed",
+        "elapsed_seconds": 3.309,
+        "endpoint": "https://api.deepseek.com/beta/chat/completions",
+        "finish_reason": "tool_calls",
+        "function_name": "submit_sfh2_a2_independent_historian_v1",
+        "model": "deepseek-v4-flash",
+        "network_retry": false,
+        "parse_error": null,
+        "prompt_version": "sfh2-a2-independent-historian-v1",
+        "provider_call": true,
+        "provider_witness_hash": "9531ffa6e9c7858ec997fa4dbfe352fe46ee91f99c85cacdccc5589f7c5195fb",
+        "raw_archive_path": "/tmp/sfh2-f1rt-raw-sfh2-f1rt-live-v2/0014-identity_independent-arm_a-identity_independent-sfh1-mention-e8f9268305e71ab3d1724605-attempt1.json",
+        "raw_archive_sha256": "a7078a8bbc6c3403ea956c62c1871c27023e55af043491f762435528b8cdf8d7",
+        "request_hash": "ce67886bc289e39c798ac293811def6b037c6c45870ea3a6e118a3cbb94b8467",
+        "stage": "identity_independent",
+        "temperature": 0,
+        "thinking": {
+          "type": "disabled"
+        },
+        "unit_id": "arm_a:identity_independent:sfh1-mention-e8f9268305e71ab3d1724605",
+        "usage": {
+          "completion_tokens": 511,
+          "prompt_tokens": 4109,
+          "total_tokens": 4620
+        },
+        "valid": true
+      },
+      "valid": false
+    },
+    {
+      "candidate_only": true,
+      "canonical_write_back": false,
+      "case_id": "sfh1-mention-edd76871090fb1cad57dcd9c",
+      "consistency": {
+        "candidate_only": true,
+        "canonical_write_back": false,
+        "flags": [
+          {
+            "challenged_fields": [],
+            "evidence_ids": [],
+            "flag_type": "evidence_grounding_failure",
+            "formal_reason": "semantic record is not an object",
+            "involved": [],
+            "severity": "hard"
+          }
+        ],
+        "has_diagnostic_flags": false,
+        "has_hard_flags": true,
+        "has_review_flags": false,
+        "review_trigger_score": 5,
+        "schema": "sfh2-a0r-consistency-v2",
+        "stage": "identity_independent"
+      },
+      "contract_status": "identity_contract_invalid",
+      "effective_record": null,
+      "errors": [
+        "mention_id_mismatch"
+      ],
+      "historian": "B",
+      "mention_id": "sfh1-mention-edd76871090fb1cad57dcd9c",
+      "original_failure_class": "immutable_id_mismatch",
+      "original_recovery_class": "terminal_identity_block",
+      "original_request_hash": "141f0dc95cdb112bbe6de40328c95a5b4d7668cbdd672c77aa0ee85db557b0bd",
+      "provisional_realization": {
+        "candidate": null,
+        "candidate_only": true,
+        "canonical_write_back": false,
+        "case_id": "sfh1-mention-edd76871090fb1cad57dcd9c",
+        "core_graph_eligible": false,
+        "identity_created": false,
+        "mention_id": "sfh1-mention-edd76871090fb1cad57dcd9c",
+        "realization_basis": [
+          "no_valid_semantic_record"
+        ],
+        "story_id": "01-dexing-028",
+        "surface": "兒"
+      },
+      "record": null,
+      "recovery_attempt": "exact_replay_1",
+      "recovery_request_hash": "c4f627c4339761e85b74516dc49b57ea5d8a788333e087fb8a20a2b18c3a442c",
+      "replay_contract_valid": false,
+      "replay_parse_success": true,
+      "replay_semantic_record_available": false,
+      "replay_transport_success": true,
+      "selected_record": null,
+      "stage": "identity_independent",
+      "story_id": "01-dexing-028",
+      "surface": "兒",
+      "transport": {
+        "attempt": 1,
+        "attempt_class": "exact_replay_1",
+        "classification": "parsed",
+        "elapsed_seconds": 3.536,
+        "endpoint": "https://api.deepseek.com/beta/chat/completions",
+        "finish_reason": "tool_calls",
+        "function_name": "submit_sfh2_a2_independent_historian_v1",
+        "model": "deepseek-v4-flash",
+        "network_retry": false,
+        "parse_error": null,
+        "prompt_version": "sfh2-a2-independent-historian-v1",
+        "provider_call": true,
+        "provider_witness_hash": "83bad09555f4b06e4ab34048bcecc4a74a3efc3c3a09fffd2532072c1ab3fd42",
+        "raw_archive_path": "/tmp/sfh2-f1rt-raw-sfh2-f1rt-live-v2/0015-identity_independent-arm_a-identity_independent-sfh1-mention-edd76871090fb1cad57dcd9c-attempt1.json",
+        "raw_archive_sha256": "1001e0c388e9dc8d10c554595d70ef1716f09738c09ef3cdebf532b3416a1524",
+        "request_hash": "c4f627c4339761e85b74516dc49b57ea5d8a788333e087fb8a20a2b18c3a442c",
+        "stage": "identity_independent",
+        "temperature": 0,
+        "thinking": {
+          "type": "disabled"
+        },
+        "unit_id": "arm_a:identity_independent:sfh1-mention-edd76871090fb1cad57dcd9c",
+        "usage": {
+          "completion_tokens": 555,
+          "prompt_tokens": 5093,
+          "total_tokens": 5648
+        },
+        "valid": true
+      },
+      "valid": false
+    },
+    {
+      "candidate_only": true,
+      "canonical_write_back": false,
+      "case_id": "sfh1-mention-edd76871090fb1cad57dcd9c",
+      "consistency": {
+        "candidate_only": true,
+        "canonical_write_back": false,
+        "flags": [
+          {
+            "challenged_fields": [],
+            "evidence_ids": [],
+            "flag_type": "evidence_grounding_failure",
+            "formal_reason": "semantic record is not an object",
+            "involved": [],
+            "severity": "hard"
+          }
+        ],
+        "has_diagnostic_flags": false,
+        "has_hard_flags": true,
+        "has_review_flags": false,
+        "review_trigger_score": 5,
+        "schema": "sfh2-a0r-consistency-v2",
+        "stage": "identity_primary"
+      },
+      "contract_status": "identity_contract_invalid",
+      "effective_record": null,
+      "errors": [
+        "mention_id_mismatch"
+      ],
+      "mention_id": "sfh1-mention-edd76871090fb1cad57dcd9c",
+      "original_failure_class": "immutable_id_mismatch",
+      "original_recovery_class": "terminal_identity_block",
+      "original_request_hash": "1a55f623334a92de940ee4959bad91d9429d44a6d909d178acbd22aebf99ec5f",
+      "provisional_realization": {
+        "candidate": null,
+        "candidate_only": true,
+        "canonical_write_back": false,
+        "case_id": "sfh1-mention-edd76871090fb1cad57dcd9c",
+        "core_graph_eligible": false,
+        "identity_created": false,
+        "mention_id": "sfh1-mention-edd76871090fb1cad57dcd9c",
+        "realization_basis": [
+          "no_valid_semantic_record"
+        ],
+        "story_id": "01-dexing-028",
+        "surface": "兒"
+      },
+      "record": null,
+      "recovery_attempt": "exact_replay_1",
+      "recovery_request_hash": "b3c130bdc167e0b7907c89175d5708368047e316daecdc6c50e946dc9f82eadc",
+      "replay_contract_valid": false,
+      "replay_parse_success": true,
+      "replay_semantic_record_available": false,
+      "replay_transport_success": true,
+      "selected_record": null,
+      "stage": "identity_primary",
+      "story_id": "01-dexing-028",
+      "surface": "兒",
+      "transport": {
+        "attempt": 1,
+        "attempt_class": "exact_replay_1",
+        "classification": "parsed",
+        "elapsed_seconds": 3.021,
+        "endpoint": "https://api.deepseek.com/beta/chat/completions",
+        "finish_reason": "tool_calls",
+        "function_name": "submit_sfh2_a0r_primary_semantics_v1",
+        "model": "deepseek-v4-flash",
+        "network_retry": false,
+        "parse_error": null,
+        "prompt_version": "sfh2-a0r-primary-historian-v1",
+        "provider_call": true,
+        "provider_witness_hash": "85f2c438ca4397ead023c5bc28d9ad04415ced3628b39688bbf3548c072b210c",
+        "raw_archive_path": "/tmp/sfh2-f1rt-raw-sfh2-f1rt-live-v2/0016-identity_primary-arm_a-identity_primary-sfh1-mention-edd76871090fb1cad57dcd9c-attempt1.json",
+        "raw_archive_sha256": "312c4584ee126a2f7dfd3d99c04085d792beea8d3a65b68ced250654bedb9bea",
+        "request_hash": "b3c130bdc167e0b7907c89175d5708368047e316daecdc6c50e946dc9f82eadc",
+        "stage": "identity_primary",
+        "temperature": 0,
+        "thinking": {
+          "type": "disabled"
+        },
+        "unit_id": "arm_a:identity_primary:sfh1-mention-edd76871090fb1cad57dcd9c",
+        "usage": {
+          "completion_tokens": 482,
+          "prompt_tokens": 5061,
+          "total_tokens": 5543
+        },
+        "valid": true
+      },
+      "valid": false
+    },
+    {
+      "candidate_only": true,
+      "canonical_write_back": false,
+      "case_id": "sfh1-mention-fb979fe0b42ef4d06939f630",
+      "consistency": {
+        "candidate_only": true,
+        "canonical_write_back": false,
+        "flags": [
+          {
+            "challenged_fields": [],
+            "evidence_ids": [],
+            "flag_type": "evidence_grounding_failure",
+            "formal_reason": "semantic record is not an object",
+            "involved": [],
+            "severity": "hard"
+          }
+        ],
+        "has_diagnostic_flags": false,
+        "has_hard_flags": true,
+        "has_review_flags": false,
+        "review_trigger_score": 5,
+        "schema": "sfh2-a0r-consistency-v2",
+        "stage": "identity_independent"
+      },
+      "contract_status": "identity_contract_invalid",
+      "effective_record": null,
+      "errors": [
+        "mention_id_mismatch"
+      ],
+      "historian": "B",
+      "mention_id": "sfh1-mention-fb979fe0b42ef4d06939f630",
+      "original_failure_class": "record_shape_invalid",
+      "original_recovery_class": "recovered_intermediate_failure",
+      "original_request_hash": "1976d4a10db46835848b3d70c0946eddd419322c92dba93a72b5c399dfc129f3",
+      "provisional_realization": {
+        "candidate": null,
+        "candidate_only": true,
+        "canonical_write_back": false,
+        "case_id": "sfh1-mention-fb979fe0b42ef4d06939f630",
+        "core_graph_eligible": false,
+        "identity_created": false,
+        "mention_id": "sfh1-mention-fb979fe0b42ef4d06939f630",
+        "realization_basis": [
+          "no_valid_semantic_record"
+        ],
+        "story_id": "01-dexing-008",
+        "surface": "季方"
+      },
+      "record": null,
+      "recovery_attempt": "exact_replay_1",
+      "recovery_request_hash": "049f7a103c2873bf0eda4c39dc2506e4ae6eddae4a6829af807926eaef08f605",
+      "replay_contract_valid": false,
+      "replay_parse_success": true,
+      "replay_semantic_record_available": false,
+      "replay_transport_success": true,
+      "selected_record": null,
+      "stage": "identity_independent",
+      "story_id": "01-dexing-008",
+      "surface": "季方",
+      "transport": {
+        "attempt": 1,
+        "attempt_class": "exact_replay_1",
+        "classification": "parsed",
+        "elapsed_seconds": 3.689,
+        "endpoint": "https://api.deepseek.com/beta/chat/completions",
+        "finish_reason": "tool_calls",
+        "function_name": "submit_sfh2_a2_independent_historian_v1",
+        "model": "deepseek-v4-flash",
+        "network_retry": false,
+        "parse_error": null,
+        "prompt_version": "sfh2-a2-independent-historian-v1",
+        "provider_call": true,
+        "provider_witness_hash": "24db98db4218c6607deadfc154269aef66e766fdab9264e0ac77a7d74429cf46",
+        "raw_archive_path": "/tmp/sfh2-f1rt-raw-sfh2-f1rt-live-v2/0017-identity_independent-arm_a-identity_independent-sfh1-mention-fb979fe0b42ef4d06939f630-attempt1.json",
+        "raw_archive_sha256": "19ef339eb2a7992448b16ae8734658259791568fdbe44b4ccdc92e41d03bbcdc",
+        "request_hash": "049f7a103c2873bf0eda4c39dc2506e4ae6eddae4a6829af807926eaef08f605",
+        "stage": "identity_independent",
+        "temperature": 0,
+        "thinking": {
+          "type": "disabled"
+        },
+        "unit_id": "arm_a:identity_independent:sfh1-mention-fb979fe0b42ef4d06939f630",
+        "usage": {
+          "completion_tokens": 594,
+          "prompt_tokens": 3293,
+          "total_tokens": 3887
+        },
+        "valid": true
+      },
+      "valid": false
+    },
+    {
+      "candidate_only": true,
+      "canonical_write_back": false,
+      "case_id": "sfh1-mention-ff73ef4d86b3e237614ab6af",
+      "consistency": {
+        "candidate_only": true,
+        "canonical_write_back": false,
+        "flags": [
+          {
+            "challenged_fields": [],
+            "evidence_ids": [],
+            "flag_type": "evidence_grounding_failure",
+            "formal_reason": "semantic record is not an object",
+            "involved": [],
+            "severity": "hard"
+          }
+        ],
+        "has_diagnostic_flags": false,
+        "has_hard_flags": true,
+        "has_review_flags": false,
+        "review_trigger_score": 5,
+        "schema": "sfh2-a0r-consistency-v2",
+        "stage": "identity_independent"
+      },
+      "contract_status": "identity_contract_invalid",
+      "effective_record": null,
+      "errors": [
+        "mention_id_mismatch"
+      ],
+      "historian": "B",
+      "mention_id": "sfh1-mention-ff73ef4d86b3e237614ab6af",
+      "original_failure_class": "immutable_id_mismatch",
+      "original_recovery_class": "recovered_intermediate_failure",
+      "original_request_hash": "396201fe563eaa4e6be33606d770d49b63837a57576f4da3e7ba9d3bda8fcb6b",
+      "provisional_realization": {
+        "candidate": null,
+        "candidate_only": true,
+        "canonical_write_back": false,
+        "case_id": "sfh1-mention-ff73ef4d86b3e237614ab6af",
+        "core_graph_eligible": false,
+        "identity_created": false,
+        "mention_id": "sfh1-mention-ff73ef4d86b3e237614ab6af",
+        "realization_basis": [
+          "no_valid_semantic_record"
+        ],
+        "story_id": "01-dexing-014",
+        "surface": "祥"
+      },
+      "record": null,
+      "recovery_attempt": "exact_replay_1",
+      "recovery_request_hash": "b9dd909106204eb5d6c8362392f38645e664b3b0bea37dd4a7b3b6d3146a1036",
+      "replay_contract_valid": false,
+      "replay_parse_success": true,
+      "replay_semantic_record_available": false,
+      "replay_transport_success": true,
+      "selected_record": null,
+      "stage": "identity_independent",
+      "story_id": "01-dexing-014",
+      "surface": "祥",
+      "transport": {
+        "attempt": 1,
+        "attempt_class": "exact_replay_1",
+        "classification": "parsed",
+        "elapsed_seconds": 3.171,
+        "endpoint": "https://api.deepseek.com/beta/chat/completions",
+        "finish_reason": "tool_calls",
+        "function_name": "submit_sfh2_a2_independent_historian_v1",
+        "model": "deepseek-v4-flash",
+        "network_retry": false,
+        "parse_error": null,
+        "prompt_version": "sfh2-a2-independent-historian-v1",
+        "provider_call": true,
+        "provider_witness_hash": "8c594d752d48a969ac2d14d8921a9f2c514077853c293813fc68ae05054b140b",
+        "raw_archive_path": "/tmp/sfh2-f1rt-raw-sfh2-f1rt-live-v2/0018-identity_independent-arm_a-identity_independent-sfh1-mention-ff73ef4d86b3e237614ab6af-attempt1.json",
+        "raw_archive_sha256": "be49dc5b0ee4ab22f5a6e5a251d908a8ac340db1380d2d9799ce706edeec0b5f",
+        "request_hash": "b9dd909106204eb5d6c8362392f38645e664b3b0bea37dd4a7b3b6d3146a1036",
+        "stage": "identity_independent",
+        "temperature": 0,
+        "thinking": {
+          "type": "disabled"
+        },
+        "unit_id": "arm_a:identity_independent:sfh1-mention-ff73ef4d86b3e237614ab6af",
+        "usage": {
+          "completion_tokens": 471,
+          "prompt_tokens": 4473,
+          "total_tokens": 4944
+        },
+        "valid": true
+      },
+      "valid": false
+    }
+  ],
+  "recovery_rate": 0.533333,
+  "schema": "sfh2-f1rt-arm-a-results-v1",
+  "valid_contract_count": 8
+}

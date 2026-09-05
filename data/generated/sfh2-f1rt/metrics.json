@@ -1,0 +1,82 @@
+{
+  "accounting": {
+    "completion_tokens": 21094,
+    "max_latency_seconds": 3.914,
+    "median_latency_seconds": 3.067,
+    "network_retries": 0,
+    "probes": 3,
+    "prompt_tokens": 168993,
+    "provider_attempts": 47,
+    "provider_calls": 47,
+    "provider_failures": 0,
+    "total_tokens": 190087
+  },
+  "arm_a": {
+    "by_failure_class": {
+      "immutable_id_mismatch": {
+        "recovery_rate": 0.25,
+        "units": 4,
+        "valid_recoveries": 1
+      },
+      "invalid_json": {
+        "recovery_rate": 1.0,
+        "units": 4,
+        "valid_recoveries": 4
+      },
+      "record_shape_invalid": {
+        "recovery_rate": 0.333333,
+        "units": 6,
+        "valid_recoveries": 2
+      },
+      "truncated_output": {
+        "recovery_rate": 1.0,
+        "units": 1,
+        "valid_recoveries": 1
+      }
+    },
+    "calls": 15,
+    "recovery_rate": 0.533333,
+    "valid_recoveries": 8
+  },
+  "arm_b": {
+    "control_comparison": {
+      "compatible_semantic_match": 8,
+      "exact_semantic_match": 3,
+      "semantic_disagreement": 1
+    },
+    "control_units": 12,
+    "control_valid_bodies": 12,
+    "invalid_identity_units_tested": 14,
+    "invalid_unit_valid_rate": 0.857143,
+    "valid_semantic_bodies": 12
+  },
+  "boundary": {
+    "exact_replay_valid": true,
+    "human_authority_preserved": true
+  },
+  "candidate_only": true,
+  "canonical_write_back": false,
+  "historical": {
+    "f1_invalid_response_payloads": 5,
+    "full_invalid_stage_units": 15,
+    "terminal_identity_block_stage_units": 6,
+    "terminal_identity_blocks": 3
+  },
+  "qualification": {
+    "recommendation": "sfh2_transport_recovery_promising_but_incomplete",
+    "transport_policy_status": "promising_but_incomplete"
+  },
+  "safety": {
+    "canonical_person_creations": 0,
+    "canonical_writes": 0,
+    "protected_hash_mutations": [],
+    "semantic_authority_violations": 0
+  },
+  "schema": "sfh2-f1rt-metrics-v1",
+  "terminal_recovery": {
+    "abstained": 0,
+    "resolved_candidate": 3,
+    "terminal_blocks_after_still_blocked": 0,
+    "terminal_blocks_before": 3
+  }
+}

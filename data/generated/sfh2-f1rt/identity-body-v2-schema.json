@@ -1,0 +1,500 @@
+{
+  "candidate_only": true,
+  "canonical_write_back": false,
+  "contract_version": "sfh2-identity-semantic-body-transport-v2",
+  "full_qualified_schema_hash": "7510405b7add81456a168de681d2dceb4d06594e828259f5d6d23221a2d2192e",
+  "id_attachment_rule": "validate semantic body first; attach exact Python envelope from the already-validated execution unit; provider fields cannot overwrite it",
+  "independent_tool": {
+    "function": {
+      "description": "Return only an independent complete evidence-grounded semantic identity body. Python attaches the immutable occurrence envelope; do not emit routing IDs or production IDs.",
+      "name": "submit_sfh2_identity_semantic_body_independent_v2",
+      "parameters": {
+        "additionalProperties": false,
+        "properties": {
+          "record": {
+            "additionalProperties": false,
+            "properties": {
+              "abstain": {
+                "type": "boolean"
+              },
+              "attribute_type": {
+                "type": "string"
+              },
+              "attribute_value": {
+                "pattern": "^[^A-Za-z0-9()（）\\[\\]【】,，.。:：;；/／\\\\\\n\\r]*$",
+                "type": "string"
+              },
+              "bearer_hint": {
+                "pattern": "^[^A-Za-z0-9()（）\\[\\]【】,，.。:：;；/／\\\\\\n\\r]*$",
+                "type": "string"
+              },
+              "confidence": {
+                "enum": [
+                  "high",
+                  "low",
+                  "medium"
+                ],
+                "type": "string"
+              },
+              "discourse": {
+                "additionalProperties": false,
+                "properties": {
+                  "addressee_hint": {
+                    "type": "string"
+                  },
+                  "antecedent_hint": {
+                    "type": "string"
+                  },
+                  "self_reference_hint": {
+                    "type": "string"
+                  },
+                  "speaker_hint": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "speaker_hint",
+                  "addressee_hint",
+                  "antecedent_hint",
+                  "self_reference_hint"
+                ],
+                "type": "object"
+              },
+              "explanation": {
+                "type": "string"
+              },
+              "occurrence_role": {
+                "enum": [
+                  "addressee_reference",
+                  "annotation_person",
+                  "citation_source_person",
+                  "collective_reference",
+                  "genealogy_reference",
+                  "historical_exemplum",
+                  "other",
+                  "person_attribute",
+                  "scene_participant",
+                  "scene_reference",
+                  "speaker_reference",
+                  "structural"
+                ],
+                "type": "string"
+              },
+              "reference_type": {
+                "enum": [
+                  "abbreviated_reference",
+                  "addressee_reference",
+                  "attribute_reference",
+                  "citation_reference",
+                  "collective_reference",
+                  "courtesy_name",
+                  "descriptive_reference",
+                  "full_name",
+                  "honorific",
+                  "kinship_reference",
+                  "nickname",
+                  "office_title",
+                  "personal_name",
+                  "pronoun_reference",
+                  "ruler_title",
+                  "speaker_reference",
+                  "structural_reference",
+                  "style_name",
+                  "surname_reference",
+                  "uncertain"
+                ],
+                "type": "string"
+              },
+              "referent": {
+                "additionalProperties": false,
+                "properties": {
+                  "canonical_hint": {
+                    "pattern": "^[^A-Za-z0-9()（）\\[\\]【】,，.。:：;；/／\\\\\\n\\r]*$",
+                    "type": "string"
+                  },
+                  "confidence": {
+                    "enum": [
+                      "high",
+                      "low",
+                      "medium"
+                    ],
+                    "type": "string"
+                  },
+                  "surface_form": {
+                    "pattern": "^[^A-Za-z0-9()（）\\[\\]【】,，.。:：;；/／\\\\\\n\\r]*$",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "surface_form",
+                  "canonical_hint",
+                  "confidence"
+                ],
+                "type": "object"
+              },
+              "relations": {
+                "items": {
+                  "additionalProperties": false,
+                  "properties": {
+                    "confidence": {
+                      "enum": [
+                        "high",
+                        "low",
+                        "medium"
+                      ],
+                      "type": "string"
+                    },
+                    "evidence_ids": {
+                      "items": {
+                        "type": "string"
+                      },
+                      "type": "array"
+                    },
+                    "relation": {
+                      "enum": [
+                        "attribute_of",
+                        "citation_relation",
+                        "different_person",
+                        "kinship_relation",
+                        "office_relation",
+                        "other",
+                        "related_person",
+                        "same_person",
+                        "uncertain"
+                      ],
+                      "type": "string"
+                    },
+                    "target_hint": {
+                      "pattern": "^[^A-Za-z0-9()（）\\[\\]【】,，.。:：;；/／\\\\\\n\\r]*$",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "target_hint",
+                    "relation",
+                    "confidence",
+                    "evidence_ids"
+                  ],
+                  "type": "object"
+                },
+                "type": "array"
+              },
+              "semantic_kind": {
+                "enum": [
+                  "collective",
+                  "historical_person",
+                  "office",
+                  "other",
+                  "person_attribute",
+                  "place",
+                  "structural",
+                  "uncertain",
+                  "work"
+                ],
+                "type": "string"
+              },
+              "supporting_evidence_ids": {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              }
+            },
+            "required": [
+              "semantic_kind",
+              "reference_type",
+              "referent",
+              "occurrence_role",
+              "discourse",
+              "relations",
+              "confidence",
+              "supporting_evidence_ids",
+              "attribute_type",
+              "attribute_value",
+              "bearer_hint",
+              "abstain",
+              "explanation"
+            ],
+            "type": "object"
+          }
+        },
+        "required": [
+          "record"
+        ],
+        "type": "object"
+      },
+      "strict": true
+    },
+    "type": "function"
+  },
+  "independent_tool_hash": "0e9181b7e129dfc5154e00e707c2f12ec346cf52584de63743699ac2c2586bc5",
+  "primary_tool": {
+    "function": {
+      "description": "Return only the complete evidence-grounded semantic identity body. Python attaches the immutable occurrence envelope; do not emit routing IDs or production IDs.",
+      "name": "submit_sfh2_identity_semantic_body_primary_v2",
+      "parameters": {
+        "additionalProperties": false,
+        "properties": {
+          "record": {
+            "additionalProperties": false,
+            "properties": {
+              "abstain": {
+                "type": "boolean"
+              },
+              "attribute_type": {
+                "type": "string"
+              },
+              "attribute_value": {
+                "pattern": "^[^A-Za-z0-9()（）\\[\\]【】,，.。:：;；/／\\\\\\n\\r]*$",
+                "type": "string"
+              },
+              "bearer_hint": {
+                "pattern": "^[^A-Za-z0-9()（）\\[\\]【】,，.。:：;；/／\\\\\\n\\r]*$",
+                "type": "string"
+              },
+              "confidence": {
+                "enum": [
+                  "high",
+                  "low",
+                  "medium"
+                ],
+                "type": "string"
+              },
+              "discourse": {
+                "additionalProperties": false,
+                "properties": {
+                  "addressee_hint": {
+                    "type": "string"
+                  },
+                  "antecedent_hint": {
+                    "type": "string"
+                  },
+                  "self_reference_hint": {
+                    "type": "string"
+                  },
+                  "speaker_hint": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "speaker_hint",
+                  "addressee_hint",
+                  "antecedent_hint",
+                  "self_reference_hint"
+                ],
+                "type": "object"
+              },
+              "explanation": {
+                "type": "string"
+              },
+              "occurrence_role": {
+                "enum": [
+                  "addressee_reference",
+                  "annotation_person",
+                  "citation_source_person",
+                  "collective_reference",
+                  "genealogy_reference",
+                  "historical_exemplum",
+                  "other",
+                  "person_attribute",
+                  "scene_participant",
+                  "scene_reference",
+                  "speaker_reference",
+                  "structural"
+                ],
+                "type": "string"
+              },
+              "reference_type": {
+                "enum": [
+                  "abbreviated_reference",
+                  "addressee_reference",
+                  "attribute_reference",
+                  "citation_reference",
+                  "collective_reference",
+                  "courtesy_name",
+                  "descriptive_reference",
+                  "full_name",
+                  "honorific",
+                  "kinship_reference",
+                  "nickname",
+                  "office_title",
+                  "personal_name",
+                  "pronoun_reference",
+                  "ruler_title",
+                  "speaker_reference",
+                  "structural_reference",
+                  "style_name",
+                  "surname_reference",
+                  "uncertain"
+                ],
+                "type": "string"
+              },
+              "referent": {
+                "additionalProperties": false,
+                "properties": {
+                  "canonical_hint": {
+                    "pattern": "^[^A-Za-z0-9()（）\\[\\]【】,，.。:：;；/／\\\\\\n\\r]*$",
+                    "type": "string"
+                  },
+                  "confidence": {
+                    "enum": [
+                      "high",
+                      "low",
+                      "medium"
+                    ],
+                    "type": "string"
+                  },
+                  "surface_form": {
+                    "pattern": "^[^A-Za-z0-9()（）\\[\\]【】,，.。:：;；/／\\\\\\n\\r]*$",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "surface_form",
+                  "canonical_hint",
+                  "confidence"
+                ],
+                "type": "object"
+              },
+              "relations": {
+                "items": {
+                  "additionalProperties": false,
+                  "properties": {
+                    "confidence": {
+                      "enum": [
+                        "high",
+                        "low",
+                        "medium"
+                      ],
+                      "type": "string"
+                    },
+                    "evidence_ids": {
+                      "items": {
+                        "type": "string"
+                      },
+                      "type": "array"
+                    },
+                    "relation": {
+                      "enum": [
+                        "attribute_of",
+                        "citation_relation",
+                        "different_person",
+                        "kinship_relation",
+                        "office_relation",
+                        "other",
+                        "related_person",
+                        "same_person",
+                        "uncertain"
+                      ],
+                      "type": "string"
+                    },
+                    "target_hint": {
+                      "pattern": "^[^A-Za-z0-9()（）\\[\\]【】,，.。:：;；/／\\\\\\n\\r]*$",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "target_hint",
+                    "relation",
+                    "confidence",
+                    "evidence_ids"
+                  ],
+                  "type": "object"
+                },
+                "type": "array"
+              },
+              "semantic_kind": {
+                "enum": [
+                  "collective",
+                  "historical_person",
+                  "office",
+                  "other",
+                  "person_attribute",
+                  "place",
+                  "structural",
+                  "uncertain",
+                  "work"
+                ],
+                "type": "string"
+              },
+              "supporting_evidence_ids": {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              }
+            },
+            "required": [
+              "semantic_kind",
+              "reference_type",
+              "referent",
+              "occurrence_role",
+              "discourse",
+              "relations",
+              "confidence",
+              "supporting_evidence_ids",
+              "attribute_type",
+              "attribute_value",
+              "bearer_hint",
+              "abstain",
+              "explanation"
+            ],
+            "type": "object"
+          }
+        },
+        "required": [
+          "record"
+        ],
+        "type": "object"
+      },
+      "strict": true
+    },
+    "type": "function"
+  },
+  "primary_tool_hash": "dcd518dbd62c7c29b17f03919a6da79f190bf864e5ae6711f07a9bd8d74bdace",
+  "provider_forbidden_fields": [
+    "candidate_person_id",
+    "case_id",
+    "mention_id",
+    "occurrence_id",
+    "pipeline_id",
+    "request_hash",
+    "source_end",
+    "source_evidence_id",
+    "source_start",
+    "stage_id",
+    "story_id",
+    "surface"
+  ],
+  "provider_owned_semantic_fields": [
+    "abstain",
+    "attribute_type",
+    "attribute_value",
+    "bearer_hint",
+    "confidence",
+    "discourse",
+    "explanation",
+    "occurrence_role",
+    "reference_type",
+    "referent",
+    "relations",
+    "semantic_kind",
+    "supporting_evidence_ids"
+  ],
+  "provider_response_shape": "{record: semantic_body}",
+  "python_owned_immutable_envelope_fields": [
+    "case_id",
+    "occurrence_id",
+    "mention_id",
+    "story_id",
+    "source_evidence_id",
+    "source_start",
+    "source_end",
+    "surface",
+    "request_hash",
+    "candidate_person_id",
+    "pipeline_id",
+    "stage_id"
+  ],
+  "schema": "sfh2-identity-semantic-body-transport-v2"
+}
